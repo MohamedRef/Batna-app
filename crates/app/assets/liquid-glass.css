@@ -1,55 +1,128 @@
-/* iOS-inspired Liquid Glass, opt-in from Settings > Look. This is a CSS
-   interpretation (not Apple's native refractive material). Keep study
-   content, answers and long sheets solid and legible. RTL-safe chrome only.
-   Loaded after the common components and sheet styles. */
+/* Liquid Glass is an opt-in appearance, not Apple's native refraction.
+   Make the change visible across the app and inside the full-screen Settings
+   window (which previously hid every changed surface). Never glass the answer
+   choices or their correct/wrong states. Uses theme tokens; RTL-safe. */
 .app[data-appearance="liquid-glass"] {
-  --liquid-rim: color-mix(in srgb, var(--glass-white, white) 24%, var(--line));
-  --liquid-shine: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 46%, transparent);
-  --liquid-shadow: 0 8px 24px rgb(0 0 0 / 0.16);
+  --liquid-rim: color-mix(in srgb, var(--accent) 33%, var(--line));
+  --liquid-glint: inset 0 1px 0 color-mix(in srgb, var(--text) 18%, transparent);
+  --liquid-shadow: 0 8px 24px color-mix(in srgb, var(--text) 10%, transparent);
+  --liquid-soft: color-mix(in srgb, var(--surface) 88%, transparent);
+  --radius-card: 24px;
+  --card-shadow: var(--liquid-glint), var(--liquid-shadow);
   background:
-    radial-gradient(ellipse at 95% 0%,
-      color-mix(in srgb, var(--glass-glow, var(--accent-soft)) 20%, transparent),
-      transparent 52%), var(--bg);
+    radial-gradient(ellipse 80% 45% at 100% 0%,
+      color-mix(in srgb, var(--glass-glow, var(--accent-soft)) 88%, transparent), transparent),
+    radial-gradient(ellipse 75% 50% at 0% 100%,
+      color-mix(in srgb, var(--glass-glow, var(--accent-soft)) 54%, transparent), transparent),
+    var(--bg);
 }
 
-/* A separate controls layer, without putting glass behind learning text. */
-.app[data-appearance="liquid-glass"] .topbar {
-  background: color-mix(in srgb, var(--surface) 97%, var(--glass-white, white));
-  border-block-end: 1px solid var(--liquid-rim);
-  box-shadow: var(--liquid-shine);
+/* Cards and collection surfaces get translucent layered colour and a bright
+   rim, without an expensive blur on every item in a scrolling list. */
+.app[data-appearance="liquid-glass"] :is(
+  .card:not(.hero), .stat-tile, .tap-list, .lectures,
+  .coll:is([data-layout="list"], [data-layout="compact"]),
+  .coll[data-layout="cards"] button.coll-btn
+) {
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--surface) 84%, transparent),
+    color-mix(in srgb, var(--accent) 9%, var(--surface)));
+  border: 1px solid var(--liquid-rim);
+  border-radius: var(--radius-card);
+  box-shadow: var(--liquid-glint), var(--liquid-shadow);
 }
-.app[data-appearance="liquid-glass"] .nav {
-  background: color-mix(in srgb, var(--surface) 97%, var(--glass-white, white));
+.app[data-appearance="liquid-glass"] .card.hero {
+  border-radius: var(--radius-card);
+  box-shadow: var(--liquid-glint), var(--liquid-shadow);
+}
+.app[data-appearance="liquid-glass"] .card :is(.tap-list, .lectures, .choice-list) {
+  /* A grouped list within a card must not create a second glass pane. */
+  background: transparent;
+  box-shadow: none;
+}
+.app[data-appearance="liquid-glass"] :is(.btn-secondary, .btn-tonal, .segmented, .view-seg) {
+  background: linear-gradient(160deg, var(--liquid-soft),
+    color-mix(in srgb, var(--accent-soft) 36%, var(--surface)));
   border-color: var(--liquid-rim);
-  box-shadow: var(--liquid-shine);
+  box-shadow: var(--liquid-glint);
 }
-.app[data-appearance="liquid-glass"] .nav-item[aria-current="page"] .glyph {
+.app[data-appearance="liquid-glass"] :is(.btn-primary, .btn-on-hero) {
   border-radius: var(--radius-pill);
+  box-shadow: var(--liquid-glint), 0 4px 12px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.app[data-appearance="liquid-glass"] .segmented > button[aria-checked="true"] {
   background: var(--accent-soft);
   color: var(--accent-ink);
-}
-.app[data-appearance="liquid-glass"] :is(.topbar .icon-button, .settings-head .icon-button, .bsheet-close) {
-  border-color: var(--liquid-rim);
-  background: color-mix(in srgb, var(--surface) 94%, var(--glass-white, white));
-  box-shadow: var(--liquid-shine);
-}
-.app[data-appearance="liquid-glass"] :is(.more-sheet, .sheet) {
-  background: color-mix(in srgb, var(--surface) 97%, var(--glass-white, white));
-  border-color: var(--liquid-rim);
-  box-shadow: var(--liquid-shine), var(--liquid-shadow);
-}
-.app[data-appearance="liquid-glass"] .bsheet {
-  /* An information sheet contains reading material: never blur its body. */
-  background: var(--sheet);
-  border-color: var(--liquid-rim);
-  box-shadow: var(--liquid-shine), var(--liquid-shadow);
-}
-.app[data-appearance="liquid-glass"] .settings-head {
-  background: color-mix(in srgb, var(--surface) 98%, var(--glass-white, white));
-  box-shadow: var(--liquid-shine);
+  box-shadow: var(--liquid-glint);
 }
 
-/* Preserve the bottom bar's grid, tab order and target heights on phones. */
+/* The settings window is full screen on phones. It must visibly change while
+   picking the appearance, without requiring closing and reopening Settings. */
+.app[data-appearance="liquid-glass"] .settings-window {
+  background:
+    radial-gradient(ellipse 83% 52% at 100% 0%,
+      color-mix(in srgb, var(--glass-glow, var(--accent-soft)) 92%, transparent), transparent),
+    radial-gradient(ellipse 78% 55% at 0% 100%,
+      color-mix(in srgb, var(--glass-glow, var(--accent-soft)) 64%, transparent), transparent),
+    var(--bg);
+}
+.app[data-appearance="liquid-glass"] .settings-head {
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border-block-end: 1px solid var(--liquid-rim);
+  box-shadow: var(--liquid-glint);
+}
+.app[data-appearance="liquid-glass"] .settings-search {
+  background: var(--liquid-soft);
+  border-color: var(--liquid-rim);
+  border-radius: var(--radius-pill);
+}
+.app[data-appearance="liquid-glass"] .settings-pane .choice-list {
+  border-color: var(--liquid-rim);
+  background: linear-gradient(145deg, var(--liquid-soft),
+    color-mix(in srgb, var(--accent) 7%, var(--surface)));
+  box-shadow: var(--liquid-glint);
+}
+@media (min-width: 840px) {
+  .app[data-appearance="liquid-glass"] .settings-pane .choice {
+    background: linear-gradient(145deg, var(--liquid-soft),
+      color-mix(in srgb, var(--accent) 7%, var(--surface)));
+    border-color: var(--liquid-rim);
+    border-radius: 18px;
+    box-shadow: var(--liquid-glint);
+  }
+}
+.app[data-appearance="liquid-glass"] .settings-pane .choice[aria-checked="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+/* Floating chrome: clearly frosted panel, colour-accented border and a
+   luminous current-tab capsule. Keep existing hit areas and keyboard order. */
+.app[data-appearance="liquid-glass"] :is(.topbar, .nav, .more-sheet, .sheet) {
+  background: color-mix(in srgb, var(--surface) 95%, transparent);
+  border-color: var(--liquid-rim);
+  box-shadow: var(--liquid-glint), var(--liquid-shadow);
+}
+.app[data-appearance="liquid-glass"] .nav-item[aria-current="page"] .glyph {
+  inline-size: min(2.65rem, 100%);
+  block-size: 2rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(150deg, var(--accent-soft),
+    color-mix(in srgb, var(--accent-soft) 72%, var(--surface)));
+  color: var(--accent-ink);
+  box-shadow: var(--liquid-glint), 0 2px 8px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.app[data-appearance="liquid-glass"] :is(.topbar .icon-button, .bsheet-close) {
+  border-color: var(--liquid-rim);
+  background: var(--liquid-soft);
+  box-shadow: var(--liquid-glint);
+}
+.app[data-appearance="liquid-glass"] .bsheet {
+  /* Long information sheets remain opaque for reading. */
+  background: var(--sheet);
+  border-color: var(--liquid-rim);
+  box-shadow: var(--liquid-glint), var(--liquid-shadow);
+}
 @media (max-width: 599.98px) {
   .app[data-appearance="liquid-glass"] .nav {
     margin-inline: var(--sp-2);
@@ -57,7 +130,6 @@
     padding: var(--sp-1);
     border: 1px solid var(--liquid-rim);
     border-radius: var(--radius-pill);
-    box-shadow: var(--liquid-shine), var(--liquid-shadow);
   }
   .app[data-appearance="liquid-glass"] .nav-item {
     min-inline-size: 0;
@@ -70,33 +142,40 @@
     white-space: nowrap;
   }
 }
-
-/* Blur only the small floating functional surfaces, never full-height rails,
-   long reading sheets, content cards or large settings windows. */
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   @media (max-width: 599.98px) {
-    .app[data-appearance="liquid-glass"] :is(.nav, .topbar) {
-      background: color-mix(in srgb, var(--surface) 86%, transparent);
-      -webkit-backdrop-filter: blur(14px) saturate(1.2);
-      backdrop-filter: blur(14px) saturate(1.2);
+    .app[data-appearance="liquid-glass"] :is(.nav, .topbar, .settings-head) {
+      background: color-mix(in srgb, var(--surface) 82%, transparent);
+      -webkit-backdrop-filter: blur(15px) saturate(1.22);
+      backdrop-filter: blur(15px) saturate(1.22);
     }
   }
-  .app[data-appearance="liquid-glass"] .more-sheet {
-    background: color-mix(in srgb, var(--surface) 93%, transparent);
-    -webkit-backdrop-filter: blur(12px) saturate(1.15);
-    backdrop-filter: blur(12px) saturate(1.15);
+  .app[data-appearance="liquid-glass"] :is(.more-sheet, .settings-pane > .card) {
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+    backdrop-filter: blur(10px) saturate(1.1);
   }
 }
 
-/* A solid, high-contrast view always beats a decorative material. */
+/* Honour accessibility settings; no transparency and no text-on-glass.
+   True black keeps an entirely black page (via --glass-glow: transparent),
+   while individual controls get a theme-coloured edge so the choice shows. */
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more), (forced-colors: active) {
-  .app[data-appearance="liquid-glass"] { background: var(--bg); }
-  .app[data-appearance="liquid-glass"] :is(.nav, .topbar, .more-sheet, .sheet, .settings-head) {
+  .app[data-appearance="liquid-glass"],
+  .app[data-appearance="liquid-glass"] .settings-window { background: var(--bg); }
+  .app[data-appearance="liquid-glass"] :is(
+    .card:not(.hero), .stat-tile, .tap-list, .lectures,
+    .coll:is([data-layout="list"], [data-layout="compact"]),
+    .coll[data-layout="cards"] button.coll-btn,
+    .nav, .topbar, .settings-head, .settings-pane .choice-list, .settings-search, .more-sheet, .sheet
+  ) {
     background: var(--surface);
     border-color: var(--line);
     box-shadow: none;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
-  .app[data-appearance="liquid-glass"] .bsheet { box-shadow: none; border-color: var(--line); }
+  .app[data-appearance="liquid-glass"] .settings-pane > .card {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }

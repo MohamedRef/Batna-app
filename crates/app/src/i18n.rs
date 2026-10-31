@@ -1213,7 +1213,7 @@ pub mod settings {
         "أسطح ملونة فيها لمعة خفيفة وأزرار مدوّرة. ألوانها من ألوان باطنة، مش من خلفية الموبايل";
     pub const APPEARANCE_LIQUID_GLASS: &str = "Liquid Glass · iOS";
     pub const APPEARANCE_LIQUID_GLASS_SUB: &str =
-        "شريط تنقّل وهيدر بإحساس الزجاج المطفي، مع الحفاظ على وضوح الأسئلة والكروت";
+        "خلفية وكروت زجاجية ناعمة وشريط تنقّل مطفي، مع الحفاظ على وضوح أسئلة المذاكرة";
 
     pub const TEXT_SIZE: &str = "حجم الواجهة";
     pub const TEXT_SMALLER: &str = "أصغر";

@@ -45,12 +45,30 @@ async function run() {
           listVisible: visible(list) || visible(search),
           title: document.querySelector('#settings-title')?.textContent.trim(),
           modal: dialog.getAttribute('aria-modal'),
+          appearance: root.getAttribute('data-appearance'),
+          settingsBackground: getComputedStyle(dialog).backgroundImage,
+          settingsCardBackground: getComputedStyle(pane.querySelector('.card')).backgroundImage,
+          settingsCardShadow: getComputedStyle(pane.querySelector('.card')).boxShadow,
           role: dialog.getAttribute('role'),
           sample: document.querySelector('.text-sample')?.textContent.trim(),
           back: [...dialog.querySelectorAll('[data-back="true"]')].filter(visible).at(-1)?.className,
         };
       });
       assert.equal(layout.direction, item.dir, name);
+      assert.equal(layout.appearance, item.appearance, `${name}: appearance preference`);
+      if (item.appearance === 'liquid-glass') {
+        assert.ok(layout.settingsBackground.includes('radial-gradient'), `${name}: glass must be visible in Settings`);
+        assert.ok(layout.settingsCardBackground.includes('linear-gradient'), `${name}: content cards must gain a glass surface`);
+        assert.notEqual(layout.settingsCardShadow, 'none', `${name}: card rim must be present`);
+        const calmBackground = await page.locator('.settings-pane .card').evaluate(el => {
+          const root = document.querySelector('.app');
+          root.setAttribute('data-appearance', 'calm');
+          const background = getComputedStyle(el).backgroundImage;
+          root.setAttribute('data-appearance', 'liquid-glass');
+          return background;
+        });
+        assert.notEqual(layout.settingsCardBackground, calmBackground, `${name}: appearance change must apply without reload`);
+      }
       assert.equal(layout.role, 'dialog', name);
       assert.equal(layout.modal, 'true', name);
       assert.ok(layout.title && layout.sample, `${name}: production heading and sample`);
@@ -69,7 +87,9 @@ async function run() {
       assert.equal(layout.listVisible, item.width >= 600, `${name}: section index visibility`);
       assert.equal(layout.back.includes('settings-back'), item.width < 600, `${name}: responsive Back target`);
 
-      if (item.size === 'larger' && item.appearance === 'calm') {
+      if ((item.size === 'larger' && item.appearance === 'calm') ||
+          (item.size === 'normal' && item.appearance === 'liquid-glass' &&
+            item.width === 384 && ['paper', 'night', 'black'].includes(item.theme))) {
         await page.screenshot({ path: path.join(output, name + '.png') });
       }
       await page.locator('#opener').focus();

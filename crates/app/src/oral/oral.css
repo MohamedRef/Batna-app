@@ -23,7 +23,7 @@
   border: 0;
   border-radius: var(--radius);
   background: var(--accent);
-  color: var(--surface);
+  color: var(--glass-solid, var(--surface));
   font-size: var(--fs-lg);
   font-weight: 700;
   cursor: pointer;
@@ -102,7 +102,7 @@
 .oral-big .big-hint { font-size: var(--fs-sm); opacity: 0.85; }
 .oral-big.again { background: var(--bad-soft); color: var(--bad); }
 .oral-big.good { background: var(--good-soft); color: var(--good); }
-.oral-big.show { background: var(--accent); color: var(--surface); }
+.oral-big.show { background: var(--accent); color: var(--glass-solid, var(--surface)); }
 .oral-small {
   min-block-size: 96px;
   border: 1px solid var(--line);
@@ -165,7 +165,7 @@
   display: grid;
   place-items: center;
   font-size: 0.8rem;
-  color: var(--surface);
+  color: var(--glass-solid, var(--surface));
 }
 .oral-point[aria-pressed="true"] .oral-tick { background: var(--good); border-color: var(--good); }
 .oral-said[data-enough="yes"] { color: var(--good); font-weight: 600; }

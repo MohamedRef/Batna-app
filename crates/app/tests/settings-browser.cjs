@@ -46,8 +46,9 @@ async function run() {
           title: document.querySelector('#settings-title')?.textContent.trim(),
           modal: dialog.getAttribute('aria-modal'),
           appearance: root.getAttribute('data-appearance'),
-          settingsBackground: getComputedStyle(dialog).backgroundImage,
-          settingsCardBackground: getComputedStyle(pane.querySelector('.card')).backgroundImage,
+          settingsBackground: getComputedStyle(dialog, '::before').backgroundImage,
+          settingsField: getComputedStyle(dialog, '::before').opacity,
+          settingsCardBackground: getComputedStyle(pane.querySelector('.card')).backgroundColor,
           settingsCardShadow: getComputedStyle(pane.querySelector('.card')).boxShadow,
           role: dialog.getAttribute('role'),
           sample: document.querySelector('.text-sample')?.textContent.trim(),
@@ -58,16 +59,26 @@ async function run() {
       assert.equal(layout.appearance, item.appearance, `${name}: appearance preference`);
       if (item.appearance === 'liquid-glass') {
         assert.ok(layout.settingsBackground.includes('radial-gradient'), `${name}: glass must be visible in Settings`);
-        assert.ok(layout.settingsCardBackground.includes('linear-gradient'), `${name}: content cards must gain a glass surface`);
+        const translucent = /^(rgba|color)\(.*(\/|,)\s*0?\.\d+\)$/.test(layout.settingsCardBackground);
+        const trueBlack = item.theme === 'black' || (item.theme === 'system-black' && item.scheme === 'dark');
+        if (trueBlack) {
+          assert.equal(layout.settingsField, '0', `${name}: True black keeps its pixels off`);
+          assert.ok(!translucent, `${name}: True black cards stay opaque, got ${layout.settingsCardBackground}`);
+        } else {
+          assert.equal(layout.settingsField, '1', `${name}: the colour field shows behind Settings`);
+          assert.ok(translucent, `${name}: cards must be translucent glass, got ${layout.settingsCardBackground}`);
+        }
         assert.notEqual(layout.settingsCardShadow, 'none', `${name}: card rim must be present`);
         const calmBackground = await page.locator('.settings-pane .card').first().evaluate(el => {
           const root = document.querySelector('.app');
           root.setAttribute('data-appearance', 'calm');
-          const background = getComputedStyle(el).backgroundImage;
+          const background = getComputedStyle(el).backgroundColor;
           root.setAttribute('data-appearance', 'liquid-glass');
           return background;
         });
-        assert.notEqual(layout.settingsCardBackground, calmBackground, `${name}: appearance change must apply without reload`);
+        if (!trueBlack) {
+          assert.notEqual(layout.settingsCardBackground, calmBackground, `${name}: appearance change must apply without reload`);
+        }
       }
       assert.equal(layout.role, 'dialog', name);
       assert.equal(layout.modal, 'true', name);

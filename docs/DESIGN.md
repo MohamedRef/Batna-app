@@ -65,16 +65,25 @@ on `.app`; only CSS reads it, so switching keeps every screen's state.
   solid surfaces. On True black, `--glass-white` is black so pixels stay
   off. It does not take colours from the wallpaper; don't claim it does.
 - Liquid Glass (`assets/liquid-glass.css`): an **iOS-inspired CSS treatment**, not
-  Apple's native refraction. Visible gradient backdrops, translucent tinted
-  cards and collection tiles, accent rims, a floating nav pill and selected
-  capsule. The full-screen Settings window uses the same appearance so a
-  choice is clearly visible *while Settings is open*, without reloading.
-  The theme's colours drive everything; true-black keeps the page black but
-  gives controls subtle tinted edges. Correct/wrong answers stay solid.
-  Blur is limited to small chrome and the Settings detail card, not every
-  scrolling row. Unsupported WebViews get layered gradients and solid panels;
-  reduced-transparency/high-contrast/forced-colours modes use solid surfaces.
-  No animation, layout-shifting overlay or external assets.
+  Apple's native refraction. It reads as glass because there is something
+  behind it: a fixed colour field from the theme (accent, accent-soft, gold,
+  good) behind the page and Settings (`.app::before`,
+  `.settings-window::before`). On `.app`, `--surface`, `--surface-2`,
+  `--raised` and `--bg` become translucent copies of the solid values kept
+  on `:root` (`--glass-solid`, `--glass-solid-2`, `--glass-solid-raised`,
+  `--glass-solid-bg`), so every card, row, input and button turns to glass
+  with no per-screen CSS. Overlays (sheets, dialogs, menus, onboarding, the
+  figure viewer) and heroes get the solid values back. A bright rim and top
+  glint (`light-dark()`: subtle on dark themes), pill controls and a tinted
+  lens for the selected tab and segment. On phones the bottom bar floats over
+  the page (same grid area as `.content`, which pads for it) so lists scroll
+  under the frosted bar; focus mode is unchanged. Blur only on the bar, the
+  Settings header, sticky bars and sheets, never per card. True black: the
+  theme sets `--glass-field-on: 0` and `--glass-alpha*: 100%`, so pixels
+  stay off. Ink painted in the surface colour must read
+  `var(--glass-solid, var(--surface))` (test
+  `surface_ink_stays_solid_under_liquid_glass`). Reduced transparency, more
+  contrast and forced colours fall back to solid surfaces.
 
 A feature that needs a Glossy variant of its own class writes
 `.app[data-appearance="glossy"] .my-class { … }` in its own stylesheet,

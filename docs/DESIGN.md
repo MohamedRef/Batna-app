@@ -65,15 +65,16 @@ on `.app`; only CSS reads it, so switching keeps every screen's state.
   solid surfaces. On True black, `--glass-white` is black so pixels stay
   off. It does not take colours from the wallpaper; don't claim it does.
 - Liquid Glass (`assets/liquid-glass.css`): an **iOS-inspired CSS treatment**, not
-  Apple's native refractive material. Theme-aware frosted top/bottom chrome,
-  a floating pill navigation bar on compact widths, subtle rims, and small
-  icon controls. Main reading cards, answers, and full-screen Settings stay
-  opaque. Only the compact nav/topbar and the More popover use blur when
-  supported by the WebView; unsupported devices use an almost-solid fill.
-  Reduced-transparency, increased-contrast and forced-colours preferences
-  disable blur and restore solid chrome. The true-black palette keeps its
-  page glow and highlights off using `--glass-white`/`--glass-glow`.
-  No motion or external assets are introduced.
+  Apple's native refraction. Visible gradient backdrops, translucent tinted
+  cards and collection tiles, accent rims, a floating nav pill and selected
+  capsule. The full-screen Settings window uses the same appearance so a
+  choice is clearly visible *while Settings is open*, without reloading.
+  The theme's colours drive everything; true-black keeps the page black but
+  gives controls subtle tinted edges. Correct/wrong answers stay solid.
+  Blur is limited to small chrome and the Settings detail card, not every
+  scrolling row. Unsupported WebViews get layered gradients and solid panels;
+  reduced-transparency/high-contrast/forced-colours modes use solid surfaces.
+  No animation, layout-shifting overlay or external assets.
 
 A feature that needs a Glossy variant of its own class writes
 `.app[data-appearance="glossy"] .my-class { … }` in its own stylesheet,

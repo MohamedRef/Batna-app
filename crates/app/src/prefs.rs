@@ -263,6 +263,9 @@ mod tests {
             "prefers-reduced-transparency: reduce",
             "prefers-contrast: more",
             "forced-colors: active",
+            ".settings-window",
+            ".card:not(.hero)",
+            ".nav-item[aria-current=\"page\"] .glyph",
         ] {
             assert!(css.contains(expected), "Missing {expected}");
         }

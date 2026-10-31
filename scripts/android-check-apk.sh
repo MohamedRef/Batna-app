@@ -7,7 +7,7 @@
 # When a chunk adds a Kotlin class that Rust calls by name, add it to CLASSES.
 set -euo pipefail
 APK="${1:-}"
-CLASSES=(app/batna/Haptics app/batna/OralService app/batna/OralBridge app/batna/ReminderBridge app/batna/ReminderReceiver app/batna/UpdateInstaller app/batna/UpdateInstallReceiver app/batna/Documents app/batna/DocumentActivity app/batna/ShareActivity app/batna/PendingShare app/batna/UpdateNotice app/batna/UpdateCheckJob app/batna/UpdateTapActivity)
+CLASSES=(app/batna/Haptics app/batna/OralService app/batna/OralBridge app/batna/ReminderBridge app/batna/ReminderReceiver app/batna/UpdateInstaller app/batna/UpdateInstallReceiver app/batna/Documents app/batna/DocumentActivity app/batna/ShareActivity app/batna/PendingShare app/batna/UpdateNotice app/batna/UpdateCheckJob app/batna/UpdateTapActivity app/batna/SignInReturnActivity)
 
 # Failures become annotations on GitHub, where job logs are hard to reach.
 fail() {
@@ -44,6 +44,7 @@ if command -v aapt2 >/dev/null; then
   grep -q "app.batna.ReminderReceiver" <<<"$manifest" || fail "The merged manifest lost ReminderReceiver (android/src/main/AndroidManifest.xml)."
   grep -q "app.batna.ShareActivity" <<<"$manifest" || fail "The merged manifest lost ShareActivity (android/src/main/AndroidManifest.xml)."
   grep -q "app.batna.DocumentActivity" <<<"$manifest" || fail "The merged manifest lost DocumentActivity (android/src/main/AndroidManifest.xml)."
+  grep -q "app.batna.SignInReturnActivity" <<<"$manifest" || fail "The merged manifest lost SignInReturnActivity (android/src/main/AndroidManifest.xml)."
   grep -q "app.batna.UpdateCheckJob" <<<"$manifest" || fail "The merged manifest lost UpdateCheckJob (android/src/main/AndroidManifest.xml)."
   echo "Merged manifest: glue permissions present"
 fi

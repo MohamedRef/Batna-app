@@ -34,6 +34,11 @@ pub enum OAuthError {
     Cancelled,
     TimedOut,
     Browser(String),
+    /// The request never got an answer (no network, DNS, a dropped socket).
+    /// Android cuts a backgrounded app off the network, so this is what a
+    /// call made while Chrome is still in front looks like: worth retrying
+    /// once Batna is back.
+    Network(String),
     Failed(String),
 }
 
@@ -43,6 +48,7 @@ impl std::fmt::Display for OAuthError {
             Self::Cancelled => f.write_str("sign-in was cancelled"),
             Self::TimedOut => f.write_str("sign-in timed out"),
             Self::Browser(e) => write!(f, "couldn't open the browser: {e}"),
+            Self::Network(e) => write!(f, "network: {e}"),
             Self::Failed(e) => f.write_str(e),
         }
     }
@@ -86,8 +92,25 @@ pub fn auth_url(client_id: &str, redirect_uri: &str, pkce: &Pkce, state: &str) -
     format!("{AUTH_URL}?{}", form(&params))
 }
 
-/// Opens the browser, waits for Google's redirect and returns an ID token.
-pub async fn google_id_token(client: &GoogleClient) -> Result<String, OAuthError> {
+/// What the browser hands back: everything [`exchange`] needs to turn the
+/// code into an ID token. Google's codes live about ten minutes.
+#[derive(Clone)]
+pub struct Authorization {
+    code: String,
+    verifier: String,
+    redirect_uri: String,
+}
+
+impl std::fmt::Debug for Authorization {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Authorization").field("redirect_uri", &self.redirect_uri).finish_non_exhaustive()
+    }
+}
+
+/// Opens the browser and waits for Google's redirect. No network beyond the
+/// loopback listener, so it works while Batna is in the background; the
+/// caller exchanges the code once the app may use the network again.
+pub async fn google_authorization(client: &GoogleClient) -> Result<Authorization, OAuthError> {
     let listener = TcpListener::bind("127.0.0.1:0").await.map_err(|e| OAuthError::Failed(e.to_string()))?;
     let port = listener.local_addr().map_err(|e| OAuthError::Failed(e.to_string()))?.port();
     let redirect_uri = format!("http://127.0.0.1:{port}");
@@ -99,11 +122,7 @@ pub async fn google_id_token(client: &GoogleClient) -> Result<String, OAuthError
     let code = tokio::time::timeout(WAIT, wait_for_code(&listener, &state))
         .await
         .map_err(|_| OAuthError::TimedOut)??;
-
-    let client = client.clone();
-    tokio::task::spawn_blocking(move || exchange(&client, &code, &pkce.verifier, &redirect_uri))
-        .await
-        .map_err(|e| OAuthError::Failed(e.to_string()))?
+    Ok(Authorization { code, verifier: pkce.verifier, redirect_uri })
 }
 
 async fn wait_for_code(listener: &TcpListener, state: &str) -> Result<String, OAuthError> {
@@ -118,7 +137,8 @@ async fn wait_for_code(listener: &TcpListener, state: &str) -> Result<String, OA
             continue;
         };
         use crate::i18n::cloud::{BROWSER_CANCELLED, BROWSER_DONE};
-        let page = page(if result.is_ok() { BROWSER_DONE } else { BROWSER_CANCELLED });
+        let page =
+            page(if result.is_ok() { BROWSER_DONE } else { BROWSER_CANCELLED }, cfg!(target_os = "android"));
         let response = format!(
             "HTTP/1.1 200 OK\r\ncontent-type: text/html; charset=utf-8\r\ncontent-length: {}\r\nconnection: close\r\n\r\n{page}",
             page.len()
@@ -165,28 +185,26 @@ struct TokenResponse {
     id_token: String,
 }
 
-fn exchange(
-    client: &GoogleClient,
-    code: &str,
-    verifier: &str,
-    redirect_uri: &str,
-) -> Result<String, OAuthError> {
+/// Trades the code for an ID token (blocking). A code is single-use: retry
+/// only on [`OAuthError::Network`], when Google may never have seen it.
+pub fn exchange(client: &GoogleClient, auth: &Authorization) -> Result<String, OAuthError> {
+    let (code, verifier, redirect_uri) = (&auth.code, &auth.verifier, &auth.redirect_uri);
     let agent: ureq::Agent = ureq::Agent::config_builder()
         .http_status_as_error(false)
         .timeout_global(Some(Duration::from_secs(20)))
         .build()
         .into();
     let mut form = vec![
-        ("code", code),
+        ("code", code.as_str()),
         ("client_id", client.client_id.as_str()),
-        ("code_verifier", verifier),
+        ("code_verifier", verifier.as_str()),
         ("grant_type", "authorization_code"),
-        ("redirect_uri", redirect_uri),
+        ("redirect_uri", redirect_uri.as_str()),
     ];
     if let Some(secret) = &client.client_secret {
         form.push(("client_secret", secret));
     }
-    let mut res = agent.post(TOKEN_URL).send_form(form).map_err(|e| OAuthError::Failed(e.to_string()))?;
+    let mut res = agent.post(TOKEN_URL).send_form(form).map_err(|e| OAuthError::Network(e.to_string()))?;
     if !res.status().is_success() {
         let body = res.body_mut().read_to_string().unwrap_or_default();
         return Err(OAuthError::Failed(format!("token exchange {}: {body}", res.status())));
@@ -233,11 +251,27 @@ fn decode(s: &str) -> String {
     String::from_utf8_lossy(&out).into_owned()
 }
 
-/// The page the browser shows once Google sends it back here.
-fn page(body: &str) -> String {
+/// Opens Batna from the browser on Android (`SignInReturnActivity` in
+/// android/src/main/AndroidManifest.xml brings the running app to the front).
+pub const RETURN_URL: &str = "app.batna://signed-in";
+
+/// The page the browser shows once Google sends it back here. On Android it
+/// also tries to bring Batna back by itself and offers a big button for when
+/// Chrome wants a tap first: sign-in finishes only once Batna is in front,
+/// because Android keeps a backgrounded app off the network.
+fn page(body: &str, back_button: bool) -> String {
+    let back = if back_button {
+        format!(
+            r#"<p><a href="{RETURN_URL}" style="display:inline-block;padding:1rem 2rem;border-radius:999px;background:#1f6f5c;color:#fff;text-decoration:none;font-size:1.25rem">{}</a></p>
+<script>setTimeout(function(){{location.href="{RETURN_URL}"}},300)</script>"#,
+            crate::i18n::cloud::BROWSER_BACK
+        )
+    } else {
+        String::new()
+    };
     format!(
-        r#"<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><title>{}</title>
-<body style="font-family:system-ui;text-align:center;padding:3rem">{body}</body></html>"#,
+        r#"<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{}</title>
+<body style="font-family:system-ui;text-align:center;padding:3rem;font-size:1.2rem">{body}{back}</body></html>"#,
         crate::i18n::app::NAME
     )
 }
@@ -272,6 +306,14 @@ mod tests {
         let forged = "GET /?state=evil&code=x HTTP/1.1\r\n";
         assert_eq!(parse_redirect(forged, "s1"), None);
         assert_eq!(parse_redirect("GET /favicon.ico HTTP/1.1\r\n", "s1"), None);
+    }
+
+    #[test]
+    fn android_page_links_back_to_batna() {
+        let p = page("<p>done</p>", true);
+        assert!(p.contains(r#"href="app.batna://signed-in""#));
+        assert!(p.contains("viewport"));
+        assert!(!page("<p>done</p>", false).contains("app.batna://"));
     }
 
     #[test]

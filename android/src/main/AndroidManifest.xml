@@ -40,6 +40,23 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <!-- Google sign-in: the browser page's "back to Batna" link
+             (app.batna://signed-in, SignInReturn.kt). Invisible; it brings
+             Batna to the front, where sign-in finishes. -->
+        <activity
+            android:name="app.batna.SignInReturnActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="app.batna" android:host="signed-in" />
+            </intent-filter>
+        </activity>
         <service
             android:name="app.batna.OralService"
             android:exported="false"

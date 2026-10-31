@@ -92,6 +92,8 @@ pub enum Problem {
     SignInFailed,
     SignedOutRemotely,
     Network,
+    /// Google approved the sign-in; the network half is waiting to retry.
+    SignInWaiting,
     Server,
     Outdated,
     /// The hub turned changes away because this device's clock is ahead.
@@ -109,6 +111,8 @@ pub struct CloudStatus {
     pub pending: u64,
     pub last_sync_ms: Option<u64>,
     pub problem: Option<Problem>,
+    /// Google approved a sign-in that is still reaching the server.
+    pub finishing_sign_in: bool,
 }
 
 impl CloudStatus {
@@ -121,6 +125,7 @@ impl CloudStatus {
             pending: 0,
             last_sync_ms: None,
             problem: None,
+            finishing_sign_in: false,
         }
     }
 }

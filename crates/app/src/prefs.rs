@@ -264,10 +264,47 @@ mod tests {
             "prefers-contrast: more",
             "forced-colors: active",
             ".settings-window",
-            ".card:not(.hero)",
+            "--glass-solid: var(--surface);",
+            "--surface: color-mix(in srgb, var(--glass-solid)",
             ".nav-item[aria-current=\"page\"] .glyph",
         ] {
             assert!(css.contains(expected), "Missing {expected}");
+        }
+    }
+
+    #[test]
+    fn surface_ink_stays_solid_under_liquid_glass() {
+        // Liquid Glass turns --surface translucent (assets/liquid-glass.css).
+        // Text, ticks, fills and strokes painted in the surface colour (light
+        // ink on a coloured fill) read the solid copy instead, or they fade.
+        fn walk(dir: &std::path::Path, out: &mut Vec<std::path::PathBuf>) {
+            for entry in std::fs::read_dir(dir).expect("readable dir") {
+                let path = entry.expect("dir entry").path();
+                if path.is_dir() {
+                    walk(&path, out);
+                } else if path.extension().is_some_and(|e| e == "css" || e == "rs") {
+                    out.push(path);
+                }
+            }
+        }
+        let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+        let mut files = Vec::new();
+        walk(&root.join("assets"), &mut files);
+        walk(&root.join("src"), &mut files);
+        let needle = ["var(--", "surface)"].concat();
+        for path in files {
+            let text = std::fs::read_to_string(&path).expect("readable file");
+            for (i, _) in text.match_indices(&needle) {
+                let before = text[..i].trim_end();
+                let ink = ["color:", "fill:", "stroke:", "solid"]
+                    .iter()
+                    .any(|p| before.ends_with(p) && !before.ends_with("-color:"));
+                assert!(
+                    !ink || before.ends_with("var(--glass-solid,"),
+                    "{}: surface-coloured ink must read var(--glass-solid, var(--surface))",
+                    path.display()
+                );
+            }
         }
     }
 

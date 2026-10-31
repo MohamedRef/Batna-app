@@ -98,8 +98,11 @@ impl Palette {
         }
         // Glossy's highlights mix toward white and its page glows with the
         // accent; on True black both turn to black, so its pixels stay off.
+        // Liquid Glass (assets/liquid-glass.css) hides its colour field and
+        // keeps surfaces opaque there for the same reason.
         out.push_str(if self.is_true_black() {
-            "--glass-white:#000000;--glass-glow:transparent;"
+            "--glass-white:#000000;--glass-glow:transparent;\
+             --glass-field-on:0;--glass-alpha:100%;--glass-alpha-2:100%;--glass-alpha-bg:100%;"
         } else {
             "--glass-white:#ffffff;--glass-glow:var(--accent-soft);"
         });
@@ -416,6 +419,8 @@ mod tests {
         assert_eq!(Theme::Black.css(), format!(":root{{{}}}", BLACK.css()));
         // Glossy's white highlights and glow turn black too.
         assert!(BLACK.css().contains("--glass-white:#000000;--glass-glow:transparent;"));
+        assert!(BLACK.css().contains("--glass-field-on:0;--glass-alpha:100%;"));
+        assert!(!PAPER.css().contains("--glass-field-on"));
         assert!(!PAPER.is_true_black() && PAPER.css().contains("--glass-white:#ffffff;"));
         let auto = Theme::SystemBlack.css();
         assert!(auto.contains("prefers-color-scheme: dark){:root{--bg:#000000;"), "{auto}");

@@ -158,7 +158,7 @@ file fails its checks, won't decode, or carries a stylesheet that reaches
 outside the app (`@import`, a remote `url(…)`, script) is refused and its
 sha256 remembered, so it isn't fetched again; a pack that is opened three
 times in a row without Batna getting past its first screen goes the same way
-and the built-in content comes back (`crates/app/src/update/mod.rs`). The glossary is built into the app, so a glossary change is
+and the last settled, verified content pack is restored if compatible; otherwise the built-in content comes back (`crates/app/src/update/recovery.rs`). The last-good pack is saved only after a calm screen has run on it, never immediately after download. Backup files are content-addressed and the backup pointer is published last so interrupted writes preserve the older backup. The glossary is built into the app, so a glossary change is
 a full build.
 
 ### Keys

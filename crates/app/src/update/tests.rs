@@ -640,3 +640,88 @@ fn a_pack_with_a_stylesheet_that_reaches_out_is_refused() {
     assert!(!u.status().content_waiting);
     assert!(is_rejected(&data.path().join("updates"), &sha256_hex(&pack)));
 }
+
+#[test]
+fn a_crashing_content_update_restores_the_last_settled_pack() {
+    let dir = tempfile::tempdir().unwrap();
+    let dir = dir.path();
+    let app = build("0.1.0", 40, true);
+    let make = |build: u64| {
+        Pack::new(crate::content::Library::get().index.clone(), Vec::new())
+            .with_look(BTreeMap::from([("assets/main.css".to_owned(), format!(".v{build} {{}}"))]))
+            .encode()
+    };
+    let old = make(41);
+    let newest = make(42);
+    let install = |bytes: &[u8], build: u64| {
+        fs::write(dir.join(PACK_FILE), bytes).unwrap();
+        write_json(
+            dir,
+            PACK_INFO,
+            &PackInfo {
+                version: "0.1.0".into(),
+                build,
+                sha256: sha256_hex(bytes),
+                published_at: None,
+                ui_build: Some(40),
+            },
+        )
+        .unwrap();
+    };
+    install(&old, 41);
+    assert!(installed_pack_in(dir, &app).is_some());
+    recovery::save_settled(dir, &app).unwrap();
+    assert!(dir.join("content.good.json").exists());
+    install(&newest, 42);
+    for _ in 0..MAX_PACK_STARTS {
+        assert!(installed_pack_in(dir, &app).is_some());
+    }
+    let recovered = installed_pack_in(dir, &app).expect("last settled pack");
+    assert_eq!(recovered.look.get("assets/main.css").map(String::as_str), Some(".v41 {}"));
+    assert!(is_rejected(dir, &sha256_hex(&newest)));
+    assert_eq!(load_pack_info(dir).unwrap().build, 41);
+    assert_eq!(fs::read(dir.join(PACK_FILE)).unwrap(), old);
+}
+
+#[test]
+fn a_corrupted_or_incompatible_backup_falls_back_to_embedded() {
+    let dir = tempfile::tempdir().unwrap();
+    let path = dir.path();
+    let app = build("0.1.0", 40, true);
+    let old = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    fs::write(path.join(PACK_FILE), &old).unwrap();
+    write_json(
+        path,
+        PACK_INFO,
+        &PackInfo {
+            version: "0.1.0".into(),
+            build: 41,
+            sha256: sha256_hex(&old),
+            published_at: None,
+            ui_build: Some(40),
+        },
+    )
+    .unwrap();
+    fs::write(path.join(PACK_STARTS), "1").unwrap();
+    recovery::save_settled(path, &app).unwrap();
+    fs::write(path.join("content.good.json"), b"bad metadata").unwrap();
+    fs::write(path.join(PACK_FILE), b"bad").unwrap();
+    assert!(installed_pack_in(path, &app).is_none(), "corrupt metadata cannot restore");
+    assert!(!path.join(PACK_FILE).exists());
+
+    // A valid backup for an older app build must not overwrite newer
+    // embedded lessons after an APK upgrade.
+    write_json(
+        path,
+        "content.good.json",
+        &PackInfo {
+            version: "0.1.0".into(),
+            build: 41,
+            sha256: sha256_hex(&old),
+            published_at: None,
+            ui_build: Some(40),
+        },
+    )
+    .unwrap();
+    assert!(recovery::restore_last_good(path, &build("0.1.0", 42, true)).is_none());
+}

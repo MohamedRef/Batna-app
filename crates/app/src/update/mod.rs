@@ -28,6 +28,7 @@
 //! Batna: `BATNA_*` build variables, the content pack (in place of Kabar's
 //! offline packs), and one language.
 
+mod recovery;
 mod service;
 
 mod model;
@@ -322,7 +323,7 @@ fn installed_pack_in(dir: &Path, info: &BuildInfo) -> Option<Pack> {
     let Some(meta) = pack_in_use(dir, info) else {
         let _ = fs::remove_file(dir.join(PACK_FILE));
         let _ = fs::remove_file(dir.join(PACK_INFO));
-        return None;
+        return recovery::restore_last_good(dir, info);
     };
     let drop = |why: &str| {
         report!("content pack {why}; using the built-in one");
@@ -330,7 +331,7 @@ fn installed_pack_in(dir: &Path, info: &BuildInfo) -> Option<Pack> {
         let _ = fs::remove_file(dir.join(PACK_FILE));
         let _ = fs::remove_file(dir.join(PACK_INFO));
         let _ = fs::remove_file(dir.join(PACK_STARTS));
-        None
+        recovery::restore_last_good(dir, info)
     };
     // Opened before without Batna running calmly after it: the pack may be
     // what stops it, so it goes (#344).
@@ -341,7 +342,10 @@ fn installed_pack_in(dir: &Path, info: &BuildInfo) -> Option<Pack> {
     }
     let _ = fs::write(dir.join(PACK_STARTS), (starts + 1).to_string());
     let fits = Version::parse(&meta.version) == Some(info.version) && meta.ui_build == Some(info.build);
-    let bytes = fs::read(dir.join(PACK_FILE)).ok()?;
+    let bytes = match fs::read(dir.join(PACK_FILE)) {
+        Ok(bytes) => bytes,
+        Err(_) => return drop("missing on disk"),
+    };
     if !sha256_hex(&bytes).eq_ignore_ascii_case(&meta.sha256) {
         return drop("changed on disk");
     }
@@ -363,7 +367,11 @@ fn installed_pack_in(dir: &Path, info: &BuildInfo) -> Option<Pack> {
 /// guard starts counting again.
 pub fn pack_settled() {
     if let Some(dir) = crate::prefs::data_dir() {
-        let _ = fs::remove_file(dir.join("updates").join(PACK_STARTS));
+        let dir = dir.join("updates");
+        if let Err(e) = recovery::save_settled(&dir, &BuildInfo::from_env()) {
+            report!("saving last good content pack: {e}");
+        }
+        let _ = fs::remove_file(dir.join(PACK_STARTS));
     }
 }
 

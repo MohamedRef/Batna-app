@@ -138,7 +138,6 @@ pub fn SoundSection() -> Element {
     rsx! {
         crate::ui::Card { class: "",
             h2 { {tx::TITLE} }
-            p { class: "muted small", {tx::BODY} }
             h3 { {tx::SOUNDS} }
             div { class: "segmented", role: "radiogroup", aria_label: tx::SOUNDS,
                 for (on , label) in [(true, tx::ON), (false, tx::OFF)] {
@@ -152,7 +151,6 @@ pub fn SoundSection() -> Element {
                 }
             }
             if now.on {
-                p { class: "muted small", {tx::PICK_HINT} }
                 for (cue , title) in [(Cue::Right, tx::RIGHT), (Cue::SessionEnd, tx::END)] {
                     h3 { key: "{title}", {title} }
                     div { class: "segmented", role: "radiogroup", aria_label: title,
@@ -173,7 +171,6 @@ pub fn SoundSection() -> Element {
             }
             if crate::platform::haptics::available() {
                 h3 { {tx::VIBRATE} }
-                p { class: "muted small", {tx::VIBRATE_BODY} }
                 div { class: "segmented", role: "radiogroup", aria_label: tx::VIBRATE,
                     for (on , label) in [(true, tx::ON), (false, tx::OFF)] {
                         button {

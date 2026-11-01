@@ -269,66 +269,45 @@ pub fn UpdateSheet() -> Element {
 
     // What the timeline shows first, the jump the summary names, and what
     // goes under "Earlier builds".
-    let (title, sub, top, from_label, to_label, earlier): (
-        String,
-        Option<String>,
-        Vec<BuildChanges>,
-        _,
-        _,
-        Vec<BuildChanges>,
-    ) = match m {
-        SheetMode::Offer => {
-            let head = match &s.phase {
-                Phase::Downloading { .. } => tx::DOWNLOADING,
-                Phase::Ready(_) => tx::READY,
-                Phase::Installing(_) => tx::INSTALLING,
-                Phase::NeedsPermission(_) => tx::NEEDS_PERMISSION,
-                Phase::Installed(_) => tx::INSTALLED,
-                _ => tx::AVAILABLE,
-            };
-            let top = offer.as_ref().map(|o| o.changes.clone()).unwrap_or_default();
-            let earlier = current
-                .map(|c| between(&s.history, None, c).into_iter().cloned().collect())
-                .unwrap_or_default();
-            let to = offer.as_ref().map(|o| o.label());
-            (head.to_owned(), None, top, Some(this_label.clone()), to, earlier)
-        }
-        SheetMode::Updated if content_news => (
-            // Not a new version: no jump, the content line says where he is.
-            tx::CONTENT_UPDATED_TITLE.to_owned(),
-            Some(tx::CONTENT_UPDATED_SUB.to_owned()),
-            s.whats_new(),
-            None,
-            None,
-            Vec::new(),
-        ),
-        SheetMode::Updated => {
-            let top = s.whats_new();
-            let from = s.prefs.whats_new_from.as_deref().map(|k| {
-                let (v, b) = k.split_once('+').unwrap_or((k, "0"));
-                label(v, b.parse().unwrap_or(0))
-            });
-            (
-                tx::UPDATED_TITLE.to_owned(),
-                Some(tx::UPDATED_SUB.to_owned()),
-                top,
-                from,
-                Some(this_label.clone()),
+    let (title, top, from_label, to_label, earlier): (String, Vec<BuildChanges>, _, _, Vec<BuildChanges>) =
+        match m {
+            SheetMode::Offer => {
+                let head = match &s.phase {
+                    Phase::Downloading { .. } => tx::DOWNLOADING,
+                    Phase::Ready(_) => tx::READY,
+                    Phase::Installing(_) => tx::INSTALLING,
+                    Phase::NeedsPermission(_) => tx::NEEDS_PERMISSION,
+                    Phase::Installed(_) => tx::INSTALLED,
+                    _ => tx::AVAILABLE,
+                };
+                let top = offer.as_ref().map(|o| o.changes.clone()).unwrap_or_default();
+                let earlier = current
+                    .map(|c| between(&s.history, None, c).into_iter().cloned().collect())
+                    .unwrap_or_default();
+                let to = offer.as_ref().map(|o| o.label());
+                (head.to_owned(), top, Some(this_label.clone()), to, earlier)
+            }
+            SheetMode::Updated if content_news => (
+                // Not a new version: no jump, the content line says where he is.
+                tx::CONTENT_UPDATED_TITLE.to_owned(),
+                s.whats_new(),
+                None,
+                None,
                 Vec::new(),
-            )
-        }
-        SheetMode::History => {
-            let (top, rest) = s.history.split_at(s.history.len().min(HISTORY_FIRST));
-            (
-                tx::HISTORY.to_owned(),
-                Some(tx::HISTORY_SUB.to_owned()),
-                top.to_vec(),
-                None,
-                None,
-                rest.to_vec(),
-            )
-        }
-    };
+            ),
+            SheetMode::Updated => {
+                let top = s.whats_new();
+                let from = s.prefs.whats_new_from.as_deref().map(|k| {
+                    let (v, b) = k.split_once('+').unwrap_or((k, "0"));
+                    label(v, b.parse().unwrap_or(0))
+                });
+                (tx::UPDATED_TITLE.to_owned(), top, from, Some(this_label.clone()), Vec::new())
+            }
+            SheetMode::History => {
+                let (top, rest) = s.history.split_at(s.history.len().min(HISTORY_FIRST));
+                (tx::HISTORY.to_owned(), top.to_vec(), None, None, rest.to_vec())
+            }
+        };
     let earlier: Vec<BuildChanges> =
         earlier.into_iter().filter(|e| !top.iter().any(|t| t.key() == e.key())).collect();
     let progress = match &s.phase {
@@ -404,9 +383,6 @@ pub fn UpdateSheet() -> Element {
             div { class: "us-body",
                 if m != SheetMode::History {
                     p { class: "us-context-title", "{title}" }
-                    if let Some(sub) = sub {
-                        p { class: "us-lead", "{sub}" }
-                    }
                 }
                 if m != SheetMode::History && (from_label.is_some() || !pills.is_empty() || progress.is_some()) {
                     div { class: "us-summary",

@@ -28,7 +28,6 @@ pub fn DataSection() -> Element {
                 None => rsx! { p { class: "muted", {tx::DATA_NOWHERE} } },
             }
             if crate::store::shared().path.is_some() {
-                p { class: "muted small", {tx::DATA_LOCAL} }
             } else {
                 p { class: "small", role: "alert", {crate::i18n::study_settings::STORE_MEMORY} }
             }

@@ -153,7 +153,6 @@ fn Setup() -> Element {
                     class: if available > 0 { "card-action oral-setup" } else { "oral-setup" },
                     onclick: move |_| if available > 0 { start(&store.read()) },
                     h1 { {tx::TITLE} }
-                    p { class: "muted", {tx::INTRO} }
                     p { class: "note small", {tx::HONEST} }
                     if available > 0 {
                         p { class: "muted small", "{tx::AVAILABLE} " {count(available, &QUESTION)} }

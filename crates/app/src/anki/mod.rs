@@ -70,7 +70,6 @@ pub fn AnkiExport() -> Element {
         style { {CSS} }
         crate::ui::Card { class: "anki-export",
             h2 { {tx::TITLE} }
-            p { class: "muted small", {tx::BODY} }
             p { class: "muted small", "{lectures} {tx::LECTURES} · {items} {tx::ITEMS}" }
             button { class: "btn btn-primary", disabled: busy,
                 onclick: {
@@ -82,7 +81,6 @@ pub fn AnkiExport() -> Element {
             match &*state.read() {
                 State::Done { notes, place } => rsx! {
                     p { class: "note result", "{tx::DONE} ({notes} {tx::NOTES}). {tx::SAVED_IN} " bdi { dir: "ltr", "{place}" } }
-                    p { class: "muted small", {tx::REIMPORT} }
                 },
                 State::Failed(e) => rsx! {
                     crate::persistence::WriteFailed {

@@ -25,7 +25,6 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
     rsx! {
         crate::ui::Card { class: "",
             h2 { {tx::MISTAKES_TITLE} }
-            p { class: "muted small", {tx::MISTAKES_NOTE} }
             if groups.is_empty() {
                 p { {tx::MISTAKES_EMPTY} }
             } else {

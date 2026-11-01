@@ -330,7 +330,6 @@ fn Stage(
                 div { class: "ls-try-done",
                     p { class: "ls-kicker", {tx::TRY} }
                     p { {tx::TRY_DONE} }
-                    p { class: "muted small", {tx::TRY_DONE_HINT} }
                 }
             } else if before.is_some() && !fresh() {
                 AnsweredBefore { body: step.body.clone() }
@@ -428,7 +427,6 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
                 button { class: return_class, "data-back": "true", "aria-keyshortcuts": "Escape", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }
             }
             if n_practice > 0 {
-                p { class: "muted small", {tx::PRACTICE_HINT} }
             }
         }
     }

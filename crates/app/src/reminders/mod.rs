@@ -151,7 +151,6 @@ pub fn RemindSection() -> Element {
     rsx! {
         crate::ui::Card {
             h2 { {tx::DAILY} }
-            p { class: "muted small", {tx::DAILY_BODY} }
             div { class: "segmented", role: "radiogroup", aria_label: tx::DAILY,
                 for on in [true, false] {
                     button {
@@ -223,13 +222,11 @@ pub fn RemindSection() -> Element {
                         }
                     }
                 }
-                p { class: "muted small", {tx::RULES} }
             }
         }
         if prefs.on {
             crate::ui::Card {
                 h2 { {tx::HERE} DeviceOnly {} }
-                p { class: "muted small", {tx::HERE_BODY} }
                 div { class: "segmented", role: "radiogroup", aria_label: tx::HERE,
                     for on in [true, false] {
                         button {

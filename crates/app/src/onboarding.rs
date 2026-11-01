@@ -541,7 +541,6 @@ pub fn ReopenCard() -> Element {
     rsx! {
         crate::ui::Card { class: "onboard-reopen",
             h2 { {tx::REOPEN_TITLE} }
-            p { class: "muted small", {tx::REOPEN_BODY} }
             button { class: "btn btn-secondary", onclick: move |_| reopen(), {tx::REOPEN} }
         }
     }

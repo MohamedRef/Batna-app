@@ -151,7 +151,6 @@ pub fn Today() -> Element {
                                 span { class: "row-icon", aria_hidden: "true", {crate::icons::nav(Screen::Bank)} }
                                 span { class: "tap-row-main",
                                     strong { {tx::QUICK_BANK} }
-                                    span { class: "muted small", {tx::QUICK_BANK_SUB} }
                                 }
                                 span { class: "chev", aria_hidden: "true" }
                             }

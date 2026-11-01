@@ -155,7 +155,6 @@ fn Bar(item_id: String) -> Element {
         section { class: "verify", role: "group", aria_label: tx::GROUP,
             p { class: "verify-head",
                 strong { {tx::GROUP} }
-                span { class: "muted small", {tx::HINT} }
             }
             {body}
             if let Some(last) = failed() {
@@ -208,7 +207,6 @@ fn Editor(body: Body, on_save: EventHandler<(Edit, String)>, on_cancel: EventHan
 
     rsx! {
         div { class: "verify-editor",
-            p { class: "muted small", {tx::EDITOR_HINT} }
             for (i, (key, before)) in fields.iter().enumerate() {
                 label { key: "{key}", class: "verify-field",
                     span { {field_label(key)} " " bdi { class: "muted small", "({key})" } }

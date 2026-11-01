@@ -75,7 +75,6 @@ pub fn Calculators() -> Element {
             nav { class: "calc-list", aria_label: tx::PICK,
                 header { class: "page-head calc-head",
                     h1 { {tx::TITLE} }
-                    p { class: "page-sub", {tx::SUBTITLE} }
                 }
                 for area in AREAS {
                     section { key: "{area:?}", class: "calc-group",
@@ -149,7 +148,6 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
         div { class: "calc-form",
             crate::ui::Card { class: "calc-fields",
                 h1 { bdi { {spec.name} } }
-                p { class: "muted small calc-intro", {tx::INTRO} }
                 for field in spec.fields {
                     div {
                         key: "{field.key}",

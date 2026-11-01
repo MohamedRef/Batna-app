@@ -147,7 +147,6 @@ pub fn DeviceSettings(section: Section) -> Element {
         crate::ui::Card { class: "card-action desk-settings",
             onclick: move |_| crate::shortcuts::open_sheet(true),
             h2 { {ktx::TITLE} }
-            p { class: "muted small", {ktx::NOTE} }
             button {
                 class: "desk-keys-button",
                 "⌨ " {ktx::OPEN}

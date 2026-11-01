@@ -641,7 +641,6 @@ fn a_pack_with_a_stylesheet_that_reaches_out_is_refused() {
     assert!(is_rejected(&data.path().join("updates"), &sha256_hex(&pack)));
 }
 
-
 #[test]
 fn a_crashing_content_update_restores_the_last_settled_pack() {
     let dir = tempfile::tempdir().unwrap();
@@ -656,13 +655,18 @@ fn a_crashing_content_update_restores_the_last_settled_pack() {
     let newest = make(42);
     let install = |bytes: &[u8], build: u64| {
         fs::write(dir.join(PACK_FILE), bytes).unwrap();
-        write_json(dir, PACK_INFO, &PackInfo {
-            version: "0.1.0".into(),
-            build,
-            sha256: sha256_hex(bytes),
-            published_at: None,
-            ui_build: Some(40),
-        }).unwrap();
+        write_json(
+            dir,
+            PACK_INFO,
+            &PackInfo {
+                version: "0.1.0".into(),
+                build,
+                sha256: sha256_hex(bytes),
+                published_at: None,
+                ui_build: Some(40),
+            },
+        )
+        .unwrap();
     };
     install(&old, 41);
     assert!(installed_pack_in(dir, &app).is_some());
@@ -686,10 +690,18 @@ fn a_corrupted_or_incompatible_backup_falls_back_to_embedded() {
     let app = build("0.1.0", 40, true);
     let old = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
     fs::write(path.join(PACK_FILE), &old).unwrap();
-    write_json(path, PACK_INFO, &PackInfo {
-        version: "0.1.0".into(), build: 41, sha256: sha256_hex(&old),
-        published_at: None, ui_build: Some(40),
-    }).unwrap();
+    write_json(
+        path,
+        PACK_INFO,
+        &PackInfo {
+            version: "0.1.0".into(),
+            build: 41,
+            sha256: sha256_hex(&old),
+            published_at: None,
+            ui_build: Some(40),
+        },
+    )
+    .unwrap();
     fs::write(path.join(PACK_STARTS), "1").unwrap();
     recovery::save_settled(path, &app).unwrap();
     fs::write(path.join("content.good.json"), b"bad metadata").unwrap();
@@ -699,9 +711,17 @@ fn a_corrupted_or_incompatible_backup_falls_back_to_embedded() {
 
     // A valid backup for an older app build must not overwrite newer
     // embedded lessons after an APK upgrade.
-    write_json(path, "content.good.json", &PackInfo {
-        version: "0.1.0".into(), build: 41, sha256: sha256_hex(&old),
-        published_at: None, ui_build: Some(40),
-    }).unwrap();
+    write_json(
+        path,
+        "content.good.json",
+        &PackInfo {
+            version: "0.1.0".into(),
+            build: 41,
+            sha256: sha256_hex(&old),
+            published_at: None,
+            ui_build: Some(40),
+        },
+    )
+    .unwrap();
     assert!(recovery::restore_last_good(path, &build("0.1.0", 42, true)).is_none());
 }

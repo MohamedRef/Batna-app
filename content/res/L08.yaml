@@ -1,0 +1,799 @@
+schema: batna.content/v1
+lecture: res.L08
+title: Problems on epidemiological studies
+author: Dr. Sahar Khashaba
+book: { chapter: 1, pages: [1, 63] }
+topics:
+  - { id: rates, title: "Morbidity rates: incidence, attack rate and prevalence" }
+  - { id: measures, title: "Measures of association: prevalence, odds ratio, relative risk, attributable risk" }
+  - { id: true-false, title: True or false on measures of association }
+  - { id: designs, title: Name the study design }
+  - { id: bias, title: "Bias, confounding and randomization" }
+items:
+  # ---------------- rates (slides 4-9, 24-26, 53) ----------------
+  - id: res.L08.001
+    kind: card
+    topic: rates
+    front: Define the incidence rate.
+    back: >-
+      The number of persons developing a disease (new cases) in a specific time and locality, divided by the total population
+      at risk, x 1000.
+    src: { page: 4, quote: "The no. of persons developing a disease (new cases) in a specific time &locality" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.002
+    kind: card
+    topic: rates
+    front: What is an attack rate, and when is it used?
+    back: >-
+      An incidence rate used when the period of risk is limited (an outbreak, a delivery, a season) or the risk is restricted
+      to a special age group.
+    src: { page: 5, quote: "limited period of risk restricted to a special age group" }
+    status: unverified
+  - id: res.L08.003
+    kind: table
+    topic: rates
+    title: Point vs period prevalence (both x 1000)
+    columns: [Feature, Point prevalence, Period prevalence]
+    rows:
+      - [Numerator, Current cases (old + new), Existing cases (old + new)]
+      - [Time, At a given point of time, During a given period of time]
+      - [Denominator, Population at that point, Population during the same period]
+    blanks: [[1, 1], [1, 2], [2, 2]]
+    src: { page: 7, quote: "The no. of current cases (old+new) of a specified disease existing at a given point of time" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.004
+    kind: case
+    topic: rates
+    stem: >-
+      On 1 January 2010, 1000 women above 40 were screened for diabetes and 40 were diabetic. During 2010, 20 more women developed
+      diabetes, 5 died and 5 migrated out of the country. (Take the 5 deaths and 5 migrants to be diabetic women.)
+    steps:
+      - question: What is the point prevalence of diabetes on 1 January 2010?
+        options: ["40 per 1000", "20 per 1000", "60 per 1000", "4 per 1000"]
+        answer: 0
+        why: 40 existing cases / 1000 screened x 1000 = 40 per 1000.
+      - question: What is the incidence of diabetes during 2010?
+        options: ["20/960 x 1000 = 20.8 per 1000", "20/1000 x 1000 = 20 per 1000", "60/1000 x 1000 = 60 per 1000", "20/940 x 1000 = 21.3 per 1000"]
+        answer: 0
+        why: Only the 960 women without diabetes on 1 January were at risk, so incidence = 20/960 x 1000 = 20.8 per 1000.
+      - question: What is the point prevalence on 31 December 2010?
+        options: ["50/990 x 1000 = 50.5 per 1000", "60/1000 x 1000 = 60 per 1000", "40/1000 x 1000 = 40 per 1000", "50/1000 x 1000 = 50 per 1000"]
+        answer: 0
+        why: Cases still present = 40 + 20 - 5 died - 5 migrated = 50; population left = 1000 - 10 = 990; 50/990 x 1000 = 50.5 per 1000.
+      - question: What is the period prevalence for 2010?
+        options: ["60/1000 x 1000 = 60 per 1000", "50/990 x 1000 = 50.5 per 1000", "20/960 x 1000 = 20.8 per 1000", "40/1000 x 1000 = 40 per 1000"]
+        answer: 0
+        why: Every case that existed at any time in the year counts, old + new = 40 + 20 = 60, over the population of that period.
+    src: { page: 9, quote: "20 females developed Diabetes, 5 died and 5 migrated out of the country" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.005
+    kind: mcq
+    topic: rates
+    stem: >-
+      A city has 250,000 people. On 1 January, 10,000 have incurable disease X. During the year 1,000 new cases develop and 400 die
+      of the disease; there are 2,500 deaths a year from all causes. The prevalence on 1 January is
+    options: ["400/250,000", "600/250,000", "1,000/250,000", "2,500/250,000", "10,000/250,000"]
+    answer: 4
+    why:
+      - 400 is the deaths from the disease, which belongs in a case-fatality or mortality rate.
+      - 600 is 1,000 new cases minus 400 deaths, a change during the year.
+      - 1,000 new cases are the numerator of the incidence rate.
+      - 2,500 is the deaths from all causes, the crude death rate's numerator.
+      - Point prevalence on 1 January = all cases existing that day, 10,000, over the population.
+    src: { page: 24, quote: "The prevalence of this disease on the first of January is given by" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.006
+    kind: mcq
+    topic: rates
+    stem: >-
+      In 2015 a rural health centre delivered 2000 women, and 100 of them developed puerperal sepsis during the puerperium.
+      Which morbidity rate suits this?
+    options: [Incidence rate, Point prevalence rate, Period prevalence rate, None of the above]
+    answer: 3
+    why:
+      - Close, but the slide's answer is d, because the specific rate is an attack rate.
+      - These are new cases during a short risk period, not existing cases at a point.
+      - Period prevalence counts old and new cases; here all are new.
+      - The risk is limited to the puerperium, so it is an attack rate, 100/2000 = 5%, which is not in the list.
+    src: { page: 25, quote: "developed puerperal sepsis during their puerperium. Calculate a suitable morbidity rate" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.007
+    kind: mcq
+    topic: rates
+    stem: >-
+      "There were no new cases of Ebola virus in the United States from January 1, 1997 through January 1, 1998."
+      Which epidemiologic term does this describe?
+    options: [Incidence, Lifetime expectancy, Lifetime prevalence, Period prevalence, Point prevalence]
+    answer: 0
+    why:
+      - No new cases over a period is an incidence of zero.
+      - Life expectancy is about survival, not cases.
+      - Lifetime prevalence counts everyone who ever had the disease.
+      - Period prevalence includes existing (old) cases too, and the statement only speaks of new ones.
+      - Point prevalence is about one moment, not a year.
+    src: { page: 26, quote: "There were no new cases of Ebola virus in the United States" }
+    status: unverified
+  - id: res.L08.008
+    kind: mcq
+    topic: rates
+    stem: >-
+      In a survey of 10,000 IV drug users, 1,000 have hepatitis C. Over one year, 100 of those infected die and 100 more users
+      acquire hepatitis C. What is the best estimate of the annual incidence?
+    options: ["1,000/10,000", "1,100/10,000", "100/10,000", "100/9,000", "100/9,800"]
+    answer: 3
+    why:
+      - That is the baseline prevalence.
+      - That mixes old and new cases.
+      - The 1,000 already infected cannot get it again, so they are not at risk.
+      - New cases / population at risk = 100 / (10,000 - 1,000) = 100/9,000.
+      - The deaths were among the infected, so they do not change the population at risk.
+    src: { page: 53, quote: "Which of the following is the best estimate of the annual incidence of hepatitis C infection" }
+    status: unverified
+    tags: [high-yield]
+  # ---------------- measures (slides 10-23, 36, 52, 54-56) ----------------
+  - id: res.L08.009
+    kind: enumerate
+    topic: measures
+    prompt: Enumerate the types of epidemiological studies in the lecture's classification.
+    points:
+      - Descriptive observational studies (case study, case series, correlation, cross-sectional survey)
+      - Analytic observational studies (cohort, case-control)
+      - Intervention studies (preventive and curative trials)
+    pass: 3
+    src: { page: 10, quote: "Case study Case Series Study Correlation Study Cross Section Survey" }
+    status: unverified
+  - id: res.L08.010
+    kind: case
+    topic: measures
+    stem: >-
+      A cross-sectional survey of 200 people: 80 smokers, of whom 60 have CHD; 120 non-smokers, of whom 40 have CHD.
+    steps:
+      - question: What is the prevalence of CHD among smokers?
+        options: ["75% (60/80)", "60% (60/100)", "30% (60/200)", "50% (100/200)"]
+        answer: 0
+        why: Prevalence in the exposed = a/(a+b) = 60/80 = 75%.
+      - question: What is the prevalence of CHD among non-smokers, and overall?
+        options: ["33.3% (40/120); overall 50% (100/200)", "40% (40/100); overall 50%", "33.3%; overall 40% (80/200)", "20% (40/200); overall 100%"]
+        answer: 0
+        why: c/(c+d) = 40/120 = 33.3%; overall CHD = (a+c)/total = 100/200 = 50%. (Smoking prevalence would be 80/200 = 40%.)
+      - question: What is the prevalence ratio of CHD, smokers vs non-smokers?
+        options: ["2.25", "6", "1.5", "0.44"]
+        answer: 0
+        why: 75% / 33.3% = 2.25. A cross-sectional study gives prevalence, not incidence, so this is a prevalence ratio.
+    src: { page: 12, quote: "Find out different prevalence rates" }
+    status: unverified
+  - id: res.L08.011
+    kind: card
+    topic: measures
+    front: How is a case-control study tabulated, and how is the odds ratio calculated?
+    back: >-
+      Disease status (cases a+c, controls b+d) in the columns, exposure in the rows: a = exposed cases, b = exposed controls,
+      c = unexposed cases, d = unexposed controls. Odds ratio = (a/c)/(b/d) = ad/bc.
+    src: { page: 15, quote: "Tabulation and Analysis" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.012
+    kind: table
+    topic: measures
+    title: Interpreting the odds ratio and the relative risk
+    columns: [Value, Odds ratio (case-control), Relative risk (cohort)]
+    rows:
+      - [More than 1 (x), Cases are x times more exposed than controls, Exposed are x times more liable to the disease]
+      - ["1", No relationship with the disease, No relationship with the disease]
+      - [Less than 1, Exposure is a protective factor, Exposure is a protective factor]
+    blanks: [[0, 1], [0, 2], [2, 1], [2, 2]]
+    src: { page: 22, quote: "the exposed to the risk factor are more liable to the disease than the non exposed by x times" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.013
+    kind: case
+    topic: measures
+    stem: >-
+      A case-control study of CHD: of 100 cases, 60 smoked; of 100 controls, 20 smoked.
+    steps:
+      - question: What are the exposure rates in cases and in controls?
+        options: ["Cases 60%, controls 20%", "Cases 75%, controls 25%", "Cases 60%, controls 40%", "Cases 30%, controls 10%"]
+        answer: 0
+        why: Exposure rate = exposed / group total. Cases 60/100 = 60%; controls 20/100 = 20%.
+      - question: What is the odds ratio?
+        options: ["6", "3", "2.25", "0.17"]
+        answer: 0
+        why: OR = ad/bc = (60 x 80) / (20 x 40) = 4800/800 = 6.
+      - question: What does it mean?
+        options: ["Cases were 6 times more exposed to smoking than controls", "Smokers have 6 times the incidence of CHD", "6% of CHD is due to smoking", "Smoking protects against CHD"]
+        answer: 0
+        why: OR above 1 means cases are more exposed by x times. Incidence cannot be measured in a case-control study.
+    src: { page: 17, quote: "Find out exposure rate and odds ratio form above data" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.014
+    kind: card
+    topic: measures
+    front: Write the relative risk and the attributable risk percent formulas for a cohort study.
+    back: >-
+      RR = incidence among exposed (Ie) / incidence among non-exposed (I0), with Ie = a/(a+b) and I0 = c/(c+d).
+      Attributable risk = Ie - I0. Attributable risk percent = (Ie - I0) / Ie x 100.
+    src: { page: 21, quote: "Incidence among exposed" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.015
+    kind: case
+    topic: measures
+    stem: >-
+      A cohort of 200 smokers and 200 non-smokers is followed: 20 smokers and 2 non-smokers develop lung cancer.
+    steps:
+      - question: What are the incidences in the exposed (Ie) and non-exposed (I0)?
+        options: ["Ie 100 per 1000, I0 10 per 1000", "Ie 20 per 1000, I0 2 per 1000", "Ie 91 per 1000, I0 9 per 1000", "Ie 10%, I0 10%"]
+        answer: 0
+        why: Ie = 20/200 = 0.1 (100 per 1000); I0 = 2/200 = 0.01 (10 per 1000).
+      - question: What is the relative risk?
+        options: ["10", "9", "0.1", "11"]
+        answer: 0
+        why: RR = Ie / I0 = 0.1 / 0.01 = 10. Smokers are 10 times more liable to lung cancer.
+      - question: What are the attributable risk and the attributable risk percent?
+        options: ["AR 90 per 1000; ARP 90%", "AR 10; ARP 10%", "AR 90 per 1000; ARP 10%", "AR 0.9; ARP 9%"]
+        answer: 0
+        why: AR = 100 - 10 = 90 per 1000. ARP = 90/100 x 100 = 90% of lung cancer in smokers is due to smoking.
+    src: { page: 23, quote: "Smoking Lung cancer Total" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.016
+    kind: case
+    topic: measures
+    stem: >-
+      Village A (tap water) has 1,000 under-fives and village B (unprotected wells) 1,500. Health-worker records for the past
+      four weeks show 50 cases of diarrhoea in A and 100 in B.
+    steps:
+      - question: Which design is this?
+        options: [Retrospective cohort, Cross sectional, Case control, Prospective cohort]
+        answer: 0
+        why: Two exposure groups (well vs tap) and outcomes that already happened, read from past records. That is the slide's key, e.
+      - question: What is the relative risk of diarrhoea in village B compared with A?
+        options: ["1.33", "2", "0.75", "1.5"]
+        answer: 0
+        why: Risk in B = 100/1500 = 6.67%; risk in A = 50/1000 = 5%. RR = 6.67/5 = 1.33. Use the under-five populations, not the whole villages.
+      - question: What is the attributable risk percent?
+        options: ["25%", "33%", "1.67%", "75%"]
+        answer: 0
+        why: ARP = (6.67 - 5) / 6.67 x 100 = 25% of diarrhoea in village B is attributable to the wells.
+    src: { page: 36, quote: "village B had had 100 cases of diarrhea while village A had had 50 cases" }
+    status: unverified
+  - id: res.L08.017
+    kind: mcq
+    topic: measures
+    stem: >-
+      In a 2 x 2 table, exposed people are W (disease positive) and Y (disease negative); unexposed are X (positive) and Z (negative).
+      Which expression is the prevalence of disease?
+    options: ["W/(W + X)", "[W/(W + Y)]/[X/(X + Z)]", "(W/Y)/(X/Z)", "(W/X)/(Y/Z)", "(W + X)/(W + X + Y + Z)"]
+    answer: 4
+    why:
+      - That is the proportion of cases who were exposed.
+      - That is the relative (prevalence) risk ratio.
+      - That is the odds ratio.
+      - That is also the odds ratio written another way.
+      - All with disease over everyone = prevalence.
+    src: { page: 52, quote: "which of the following expressions represents the prevalence of disease" }
+    status: unverified
+  - id: res.L08.018
+    kind: mcq
+    topic: measures
+    stem: >-
+      130 diabetics are followed for 5 years. Of 60 with normal fibrinogen, 20 develop acute coronary syndrome; of 70 with high
+      fibrinogen, 40 develop it. The best estimate of relative risk for high vs normal fibrinogen is
+    options: ["(40/30)/(20/40)", "(40*40)/(20*30)", "(40*70)/(20*60)", "(40/70)/(20/60)", "(40/60)/(30/70)"]
+    answer: 3
+    why:
+      - That is the odds ratio, (a/b)/(c/d).
+      - That is the odds ratio as ad/bc.
+      - That multiplies the wrong cells.
+      - RR = incidence in high (40/70) over incidence in normal (20/60) = 1.71.
+      - That divides by the wrong totals.
+    src: { page: 54, quote: "Which of the following is the best estimate of relative risk in patients with a high baseline plasma fibrinogen level" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.019
+    kind: mcq
+    topic: measures
+    stem: >-
+      Mothers of babies with neural tube defects and mothers of unaffected babies are asked about acetaminophen use in the
+      first trimester. Which measure of association will the investigators most likely report?
+    options: [Prevalence, Median survival, Relative risk, Odds ratio, Hazard ratio]
+    answer: 3
+    why:
+      - Prevalence is a frequency, not an association.
+      - Survival needs follow-up over time.
+      - Relative risk needs incidence, which a case-control study cannot give.
+      - Selecting on the outcome makes it a case-control study, so the measure is the odds ratio.
+      - A hazard ratio comes from survival analysis in cohorts or trials.
+    src: { page: 55, quote: "Which of the following measures of association is most likely to be reported by investigators" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.020
+    kind: mcq
+    topic: measures
+    stem: >-
+      Pancreatic cancer cases: 50 smokers, 40 non-smokers. Controls without pancreatic cancer: 60 smokers, 80 non-smokers.
+      What is the odds ratio that a case is a current smoker compared with a control?
+    options: ["(50/90)/(60/140)", "(50/40)/(60/80)", "(50/110)/(40/120)", "(50/60)/(40/80)", "(90/230)/(140/230)"]
+    answer: 1
+    why:
+      - That compares exposure proportions, not odds.
+      - Odds of smoking in cases (50/40) over odds in controls (60/80) = 1.25/0.75 = 1.67.
+      - That is a risk ratio by exposure, not valid in a case-control study.
+      - That divides across the wrong pairs of cells.
+      - That compares the proportions of cases and controls.
+    src: { page: 56, quote: "What is the odds ratio that a patient diagnosed with pancreatic cancer is a current smoker" }
+    status: unverified
+  # ---------------- true-false (slides 27-32) ----------------
+  - id: res.L08.021
+    kind: card
+    topic: true-false
+    front: "True or false: the odds ratio is an approximation to the attributable risk."
+    back: False. The odds ratio approximates the relative risk (when the disease is rare), not the attributable risk.
+    src: { page: 28, quote: "The odds ratio is an approximation to the attributable risk (F)" }
+    status: unverified
+  - id: res.L08.022
+    kind: card
+    topic: true-false
+    front: "True or false: an odds ratio of one means the exposure has no association with the disease."
+    back: True.
+    src: { page: 28, quote: "The odds ratio of one means that the exposure has no association with the disease (T)" }
+    status: unverified
+  - id: res.L08.023
+    kind: card
+    topic: true-false
+    front: "True or false: the absolute risk (incidence rate) can always be estimated from a case-control study, and so can the exact relative risk."
+    back: >-
+      Both false. A case-control study starts from the disease, so it has no population at risk and cannot give incidence or the exact RR;
+      it gives only the odds ratio.
+    src: { page: 28, quote: "The absolute risk (incidence rate) can always be estimated from a case-control study (F)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.024
+    kind: card
+    topic: true-false
+    front: "True or false: an exposure with a relative risk above one should have an attributable risk greater than zero."
+    back: True. RR above 1 means Ie is greater than I0, so Ie - I0 is above zero.
+    src: { page: 30, quote: "An exposure with a relative risk more than one should have an attributable risk greater than zero" }
+    status: unverified
+  - id: res.L08.025
+    kind: card
+    topic: true-false
+    front: "True or false: statistical evaluation of the role of chance may or may not be needed before interpreting a study finding."
+    back: False. The role of chance must always be evaluated (p value, confidence interval) before interpreting a finding.
+    src: { page: 30, quote: "Statistical evaluation of the role of chance may or may not be needed before the interpretation of the study finding (F)" }
+    status: unverified
+  - id: res.L08.026
+    kind: card
+    topic: true-false
+    front: "True or false: a relative risk below one means the factor under study is a preventive factor."
+    back: True.
+    src: { page: 30, quote: "The relative risk less than one means that the factor under study is a preventive factor (T)" }
+    status: unverified
+  - id: res.L08.027
+    kind: card
+    topic: true-false
+    front: "True or false: an attributable risk of 10 means the exposed have 10 times the risk of the non-exposed."
+    back: False. "10 times" is a relative risk of 10. Attributable risk is a difference (Ie - I0), not a ratio.
+    src: { page: 32, quote: "An attributable risk of 10 means that those exposed have a risk 10 times those who are non-exposed(F)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.028
+    kind: card
+    topic: true-false
+    front: "True or false: case-control studies are easy to do and take a short time; the odds ratio is the only measure of association they give."
+    back: Both true, according to the lecture.
+    src: { page: 32, quote: "The odds ratio is the only measure of association that can be measured from case control studies (T)" }
+    status: unverified
+  # ---------------- designs (slides 33-51) ----------------
+  - id: res.L08.029
+    kind: table
+    topic: designs
+    title: Spot the design from the story
+    columns: [Clue in the question, Design, Measure]
+    rows:
+      - [Starts from people with and without the disease and asks about past exposure, Case-control, Odds ratio]
+      - [Starts from exposed and non-exposed and follows them forward to new cases, Prospective cohort, Relative risk]
+      - [Exposure and outcome both already in old records, Retrospective cohort, Relative risk]
+      - [Exposure and disease measured at the same time, Cross-sectional, Prevalence (ratio)]
+      - [The investigator assigns the exposure by lottery, Randomized clinical trial, "RR, ARR, NNT"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 13, quote: "Case control study Cohort studies: Prospective cohort Retrospective cohort" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.030
+    kind: mcq
+    topic: designs
+    stem: A study of physicians compares the occurrence of lung cancer in smokers with that in non-smokers. The design is
+    options: [Cross sectional, Correlation study, Prospective cohort, Case control, Retrospective cohort]
+    answer: 2
+    why:
+      - Nothing here measures disease and exposure at one moment.
+      - Correlation studies use group-level data, not individuals.
+      - Groups are defined by exposure (smoking) and the occurrence of new cancers is compared, which is the classic doctors' cohort (Doll and Hill).
+      - A case-control study would start from people who already have lung cancer.
+      - Nothing says the data come from past records.
+    src: { page: 33, quote: "Study of physicians comparing the occurrence of lung cancer in smokers to that in non smokers" }
+    status: unverified
+  - id: res.L08.031
+    kind: mcq
+    topic: designs
+    stem: >-
+      Adults who were and were not exposed to neck radiation in childhood are followed up to assess the risk of thyroid cancer.
+      The design is
+    options: [Cross sectional, Case control, Correlation study, Prospective cohort, Retrospective cohort]
+    answer: 3
+    why:
+      - Exposure and disease are not measured at the same time.
+      - It starts from exposure, not from thyroid cancer.
+      - It uses individuals, not group data.
+      - The slide's key is d, because the groups are followed up for new thyroid cancer. Many books call this a retrospective (historical) cohort, because the exposure happened in the past.
+      - Arguable, since the exposure was in childhood, but the slide keys prospective because of the follow-up.
+    src: { page: 34, quote: "Follow up of a population of adults who were exposed and not exposed during childhood to radiation of the neck" }
+    status: unverified
+  - id: res.L08.032
+    kind: mcq
+    topic: designs
+    stem: >-
+      To compare diarrhoea risk in under-fives between village A (tap water) and village B (unprotected wells), health-worker
+      records of the past four weeks are checked. The design is
+    options: [Cross sectional, Case control, Correlation study, Prospective cohort, Retrospective cohort]
+    answer: 4
+    why:
+      - It counts new episodes over four weeks, not existing cases at a moment.
+      - It starts from exposure (water source), not from diarrhoea.
+      - Under-fives are counted individually, not as group averages.
+      - Nobody is followed forward from now.
+      - Exposure groups compared on outcomes that already happened, taken from past records.
+    src: { page: 35, quote: "The records kept by village health workers (VHWs) responsible for the villages in the previous four weeks were checked" }
+    status: unverified
+  - id: res.L08.033
+    kind: case
+    topic: designs
+    stem: >-
+      City residents aged 43-86, free of macular degeneration at baseline, report their lifetime smoking. After 5 years:
+      26 of 368 never-smokers and 79 of 864 ever-smokers developed macular degeneration.
+    steps:
+      - question: Which design is this?
+        options: [Prospective cohort, Case control, Cross sectional, Retrospective cohort]
+        answer: 0
+        why: Disease-free people grouped by exposure and followed forward for new cases (slide key d).
+      - question: What is the relative risk for ever-smokers?
+        options: ["1.29", "3.0", "0.77", "2.25"]
+        answer: 0
+        why: Ie = 79/864 = 9.1%; I0 = 26/368 = 7.1%; RR = 9.1/7.1 = 1.29.
+    src: { page: 37, quote: "After 5 years, participants had an examination to determine the development of macular degeneration" }
+    status: unverified
+  - id: res.L08.034
+    kind: mcq
+    topic: designs
+    stem: >-
+      In Alexandria Main University Hospital, all male patients are interviewed about smoking and have their blood pressure
+      measured to detect hypertension. The design is
+    options: [Cross sectional, Case control, Correlation study, Prospective cohort, Retrospective cohort]
+    answer: 0
+    why:
+      - Exposure (smoking) and outcome (hypertension) are measured at the same visit.
+      - Nobody was chosen because they had hypertension.
+      - Data are individual.
+      - There is no follow-up.
+      - There are no past records.
+    src: { page: 38, quote: "Their blood pressure was measured to detect hypertensive" }
+    status: unverified
+  - id: res.L08.035
+    kind: case
+    topic: designs
+    stem: >-
+      200 healthy textile workers: 100 in job A (known hazardous exposure) and 100 in job B. By time X, 20 in job A and 5 in
+      job B develop respiratory symptoms.
+    steps:
+      - question: Which design is this?
+        options: [Prospective cohort, Cross sectional, Case control, Correlation study]
+        answer: 0
+        why: Healthy people grouped by exposure (job) and followed to time X for new disease (slide key d).
+      - question: What is the relative risk for job A?
+        options: ["4", "15", "0.25", "20"]
+        answer: 0
+        why: 20/100 over 5/100 = 20% / 5% = 4.
+    src: { page: 39, quote: "Out of the 100 workers in job A, 20 developed respiratory symptoms by time X" }
+    status: unverified
+  - id: res.L08.036
+    kind: case
+    topic: designs
+    stem: >-
+      At the pre-placement examination of 200 new employees, 20 of 80 smokers are hypertensive and 6 of the 120 non-smokers are hypertensive.
+    steps:
+      - question: Which design is this?
+        options: [Cross sectional, Prospective cohort, Case control, Retrospective cohort]
+        answer: 0
+        why: One examination measures smoking and blood pressure together (slide key a).
+      - question: What is the prevalence ratio of hypertension, smokers vs non-smokers?
+        options: ["5", "3.3", "0.2", "2.5"]
+        answer: 0
+        why: 20/80 = 25% vs 6/120 = 5%, so 25/5 = 5. It is a prevalence, not an incidence, ratio.
+    src: { page: 40, quote: "During pre-placement examination of 200 new employees" }
+    status: unverified
+  - id: res.L08.037
+    kind: mcq
+    topic: designs
+    stem: >-
+      A study shows neural tube defects in 50% of newborns whose mothers did not receive folic acid in pregnancy, against 10% when
+      mothers had a folic-acid-rich diet. The design is
+    options: [Cross sectional, Case control, Correlation study, Prospective cohort, Retrospective cohort]
+    answer: 3
+    why:
+      - Exposure (folic acid) comes before the outcome (the newborn), so it is not one moment.
+      - The results are given as rates by exposure group, not as exposure among cases.
+      - Data are individual.
+      - Exposure groups with rates of the outcome among them, which is the cohort pattern (slide key d). RR = 50/10 = 5.
+      - Nothing points to old records.
+    src: { page: 41, quote: "the development of neural defects in the newborn whose mothers were not receiving folic acid" }
+    status: unverified
+  - id: res.L08.038
+    kind: mcq
+    topic: designs
+    stem: >-
+      A team follows 1200 HIV-positive patients and a similar group of HIV-negative people at an outpatient clinic for 3 years
+      to find the rate of cerebral toxoplasmosis. The design is
+    options: [Cross sectional, Case control, Correlation study, Prospective cohort, Retrospective cohort]
+    answer: 3
+    why:
+      - There is follow-up over time.
+      - It starts from exposure (HIV), not from toxoplasmosis.
+      - Data are individual.
+      - Exposed and unexposed groups followed forward for new cases.
+      - The follow-up happens now, not in old records.
+    src: { page: 42, quote: "A research team followed 1200 HIV positive patients and a similar group of HIV negative" }
+    status: unverified
+  - id: res.L08.039
+    kind: mcq
+    topic: designs
+    stem: >-
+      Women's smoking is recorded at antenatal visits, and the birth weight of their babies is recorded later. The design is
+    options: [Cross sectional, Case control, Correlation study, Prospective cohort, Retrospective cohort]
+    answer: 3
+    why:
+      - The exposure is recorded before the outcome.
+      - It does not start from low-birth-weight babies.
+      - Data are individual.
+      - Exposure first, then the outcome recorded as it happens.
+      - Data are collected forward, not from old files.
+    src: { page: 43, quote: "The smoking habit of women was determined at the antenatal visits and then subsequently the birth weight was recorded" }
+    status: unverified
+  - id: res.L08.040
+    kind: mcq
+    topic: designs
+    stem: The effect of parental consanguinity on hereditary diseases in the offspring is best studied by
+    options: [Cross sectional, Case control, Correlation study, Prospective cohort, Retrospective cohort]
+    answer: 1
+    why:
+      - Hereditary diseases are rare, so a survey would find too few cases.
+      - Start from children with the hereditary disease and compare parental consanguinity with unaffected children, which suits a rare disease.
+      - Group-level data cannot link one couple to one child.
+      - A cohort would need huge numbers and long follow-up for a rare outcome.
+      - Old records rarely hold both consanguinity and diagnosis reliably.
+    src: { page: 44, quote: "The study of the effect of parental consanguinity on hereditary diseases in the offspring is best studied by" }
+    status: unverified
+  - id: res.L08.041
+    kind: mcq
+    topic: designs
+    stem: >-
+      An investigator selects 100 women with rheumatoid arthritis and 200 women without it treated at the same facility for other
+      musculoskeletal conditions, and reviews them for oral contraceptive use. The design is
+    options: [Cross sectional, Case control, Correlation study, Prospective cohort, Retrospective cohort]
+    answer: 1
+    why:
+      - Selection is by disease status, not a survey of a population.
+      - Cases with RA and controls without it are compared for past exposure (oral contraceptives).
+      - Data are individual.
+      - Nobody is followed forward.
+      - A cohort starts from exposure, not disease.
+    src: { page: 45, quote: "All subjects were reviewed for evidence of oral contraceptive use" }
+    status: unverified
+  - id: res.L08.042
+    kind: mcq
+    topic: designs
+    stem: >-
+      An investigator suspects first-trimester acetaminophen causes neural tube defects; the background risk is 1 in 1,000.
+      Which design is best to test this?
+    options: [Cohort study, Case-control study, Clinical trial, Ecologic study, Cross-sectional study]
+    answer: 1
+    why:
+      - With a risk of 1/1,000, a cohort needs enormous numbers to collect enough cases.
+      - A rare disease is best studied by starting from the cases.
+      - Giving pregnant women a suspected teratogen is unethical.
+      - Ecologic data cannot link one mother to one baby.
+      - A survey would capture too few cases.
+    src: { page: 46, quote: "She estimates the risk of neural tube defect in the general population is 1:1,000" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.043
+    kind: mcq
+    topic: designs
+    stem: >-
+      Hospital officials believe chemical waste from a factory causes acute lymphocytic leukaemia (ALL) in children aged 5-12.
+      In a study to test this, who most likely forms the control group?
+    options:
+      - Children exposed to the waste who do not have ALL
+      - Children not exposed to the waste who do not have ALL
+      - Children from the hospital's outpatient clinic who do not have ALL
+      - Children not exposed to the waste who have ALL
+      - Children who had ALL but were cured
+    answer: 2
+    why:
+      - Controls must be chosen without regard to exposure; picking only exposed children fixes the answer.
+      - Choosing only unexposed children also builds the exposure into the selection.
+      - A rare disease suggests a case-control study, and controls are children without ALL from the same source, with exposure unknown at selection.
+      - These children have the disease, so they are cases.
+      - Cured children had ALL, so they are cases too.
+    src: { page: 47, quote: "which of the following subjects are most likely to comprise the control group" }
+    status: unverified
+  - id: res.L08.044
+    kind: mcq
+    topic: designs
+    stem: >-
+      500 women aged 40-54 at routine check-ups are asked about meat consumption; 20% are vegetarian. Over the next 5 years,
+      5 vegetarians and 43 non-vegetarians develop colorectal cancer. The design is
+    options: [Case series report, Cohort study, Case-control study, Cross-sectional study, Randomized clinical trial]
+    answer: 1
+    why:
+      - A case series has no comparison group.
+      - Groups by exposure (diet), then followed for 5 years for new cancers. Risk is 5/100 = 5% vs 43/400 = 10.75%.
+      - It does not start from people with cancer.
+      - There is follow-up, so it is not one moment.
+      - Nobody was assigned a diet.
+    src: { page: 48, quote: "During the following 5 years, 5 vegetarians and 43 non-vegetarians develop colorectal cancer" }
+    status: unverified
+  - id: res.L08.045
+    kind: mcq
+    topic: designs
+    stem: >-
+      Patients with lung cancer are matched to patients without it, their lifetime smoking is compared, and the odds of smoking
+      in each group are computed. This is a
+    options: [Case-control study, Cohort study, Cross-sectional study, Longitudinal study, Randomized controlled study]
+    answer: 0
+    why:
+      - Selection by disease, past exposure compared, odds ratio reported.
+      - A cohort would start from smokers and non-smokers.
+      - Lifetime exposure history is not a single-moment survey.
+      - Longitudinal implies following people forward.
+      - Nobody is assigned to smoke.
+    src: { page: 49, quote: "A group of patients with lung cancer is matched to a group of patients without lung cancer" }
+    status: unverified
+  - id: res.L08.046
+    kind: mcq
+    topic: designs
+    stem: >-
+      People exposed to an environmental toxin are not treated but are observed over time with a standard set of measures
+      to find the toxin's effects. This design is called
+    options: [Clinical trial, Double-blind, Longitudinal, Prospective cohort, Retrospective cohort]
+    answer: 2
+    why:
+      - Nothing is assigned or treated.
+      - Double-blind is a masking method, not a design.
+      - The slide's key is c. Repeated measures on the same people over time define a longitudinal study.
+      - Defensible, but only one exposed group is described, with no unexposed comparison, so the slide prefers longitudinal.
+      - The observation goes forward, not into past records.
+    src: { page: 50, quote: "they are observed over time on a standard set of measures to ascertain the potential effects of the toxin" }
+    status: unverified
+  - id: res.L08.047
+    kind: mcq
+    topic: designs
+    stem: >-
+      Of 200 HIV patients, 100 are chosen by lottery to get a new tasteless drug in orange juice; the rest get plain juice.
+      Nurses, doctors and patients do not know who gets the drug. CD4 counts are measured at the end. This is a
+    options: [Case-control study, Case report, Cohort study, Cross-sectional study, Double-blind randomized clinical trial]
+    answer: 4
+    why:
+      - Selection is not by outcome.
+      - There are 200 patients and a comparison.
+      - In a cohort the investigator does not assign the exposure.
+      - There is an intervention and follow-up.
+      - Lottery = randomized, identical placebo, and patients plus staff unaware = double-blind.
+    src: { page: 51, quote: "Neither the nurses, doctors, nor the patients know which patients receive the drug" }
+    status: unverified
+  # ---------------- bias (slides 57-62) ----------------
+  - id: res.L08.048
+    kind: mcq
+    topic: bias
+    stem: >-
+      Any systematic error in the design, conduct or analysis of a study that gives a mistaken estimate of an exposure's effect
+      on disease risk is called
+    options: [Confounding, Bias, Interaction, Stratification]
+    answer: 1
+    why:
+      - Confounding is mixing with a third factor; the definition asked for is broader.
+      - A systematic (not random) error from design, conduct or analysis is bias.
+      - Interaction (effect modification) is a real difference in effect between subgroups.
+      - Stratification is an analysis method.
+    src: { page: 57, quote: "Any systematic error in the design, conduct, or analysis of a study" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.049
+    kind: mcq
+    topic: bias
+    stem: The purpose of a double-blind or double-masked study is to
+    options:
+      - Achieve comparability of treated and untreated subjects
+      - Reduce the effects of sampling variation
+      - Avoid observer and subject bias
+      - Avoid observer bias and sampling variation
+    answer: 2
+    why:
+      - Comparability comes from randomization.
+      - Sampling variation falls with a larger sample.
+      - Hiding the treatment from subjects and observers stops both from biasing the results.
+      - Blinding does nothing to sampling variation.
+    src: { page: 58, quote: "Avoid observer and subject bias" }
+    status: unverified
+  - id: res.L08.050
+    kind: mcq
+    topic: bias
+    stem: Randomization of study subjects in a clinical trial is most helpful for controlling
+    options: [Placebo effect, Recall bias, Non-compliance, Effect modification (interaction), Confounding]
+    answer: 4
+    why:
+      - The placebo effect is controlled by a placebo group and blinding.
+      - Recall bias belongs to case-control studies.
+      - Randomization cannot make people take the drug.
+      - Effect modification is a real phenomenon to describe, not remove.
+      - Randomization spreads known and unknown confounders equally between the groups.
+    src: { page: 59, quote: "Randomization of study subjects in a clinical trial is most helpful for controlling" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.051
+    kind: mcq
+    topic: bias
+    stem: >-
+      A case-control study finds alcohol strongly associated with lung cancer (OR = 2.5). When the subjects are split into
+      smokers and non-smokers, there is no association within either group. This is an example of
+    options: [Observer bias, Confounding, Placebo effect, Non-response bias, Recall bias]
+    answer: 1
+    why:
+      - Nothing about how outcomes were assessed.
+      - Smoking is linked to both drinking and lung cancer; once stratified by smoking, the alcohol effect disappears.
+      - There is no treatment.
+      - Nothing about people refusing to take part.
+      - Recall bias would not vanish after stratifying by smoking.
+    src: { page: 60, quote: "Subsequent statistical analysis does not reveal any association between alcohol consumption and lung cancer within either group" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L08.052
+    kind: mcq
+    topic: bias
+    stem: >-
+      Two groups of pathologists read the same 1,000 kidney biopsies. The group that knows the patient's race reports
+      "hypertensive nephropathy" far more often in black patients than the blinded group. Which bias is present?
+    options: [Confounding, Non-response bias, Recall bias, Referral bias, Observer bias]
+    answer: 4
+    why:
+      - The specimens are identical, so no third factor explains it.
+      - Everyone's specimen was read.
+      - Nobody is asked to remember anything.
+      - The same biopsies go to both groups, so referral does not differ.
+      - Knowing the race changed how the observers read the same slides.
+    src: { page: 61, quote: "The first group of pathologists is aware of the race of the patient" }
+    status: unverified
+  - id: res.L08.053
+    kind: mcq
+    topic: bias
+    stem: >-
+      Mothers of children with neural tube defects and age-matched mothers of unaffected children answer a questionnaire about
+      an over-the-counter pain reliever in pregnancy. Use increases the risk even after adjusting for race, medications, family
+      history and folate (OR = 1.3, p = 0.03). Which bias is the major concern?
+    options: [Non-response bias, Recall bias, Observer bias, Confounding, Selection bias]
+    answer: 1
+    why:
+      - Nothing suggests different response rates.
+      - Mothers of affected babies search their memory harder for every pill, so they over-report exposure, the classic case-control bias.
+      - A standard questionnaire limits interviewer bias.
+      - The main confounders were adjusted for.
+      - Controls were age-matched from the same kind of mothers.
+    src: { page: 62, quote: "Which of the following biases is of major concern when interpreting the study results" }
+    status: unverified
+    tags: [high-yield]

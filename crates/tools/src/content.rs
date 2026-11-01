@@ -36,7 +36,16 @@ pub fn run(root: &Path, args: &[String]) -> Res<String> {
         },
         Some("diff") => {
             let base = base_pack(root, args)?;
-            Ok(diff(&base, &crate::ids::pack_at(root)?))
+            // `--head-pack FILE`: a built pack (images embedded, as devices
+            // get it) instead of the working tree's files.
+            let head = match crate::flag(args, "--head-pack") {
+                Some(file) => {
+                    let bytes = std::fs::read(file).map_err(|e| vec![format!("{file}: {e}")])?;
+                    Pack::decode(&bytes).map_err(|e| vec![format!("{file}: {e}")])?
+                }
+                None => crate::ids::pack_at(root)?,
+            };
+            Ok(diff(&base, &head))
         }
         Some("preflight") => preflight(root, crate::flag(args, "--base").unwrap_or("origin/main")),
         _ => Err(vec!["usage: batna-tools content <next-id | new-item | diff | preflight> (docs/AUTHORING.md)".into()]),

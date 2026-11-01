@@ -391,6 +391,13 @@ pub fn verify(dir: &Path, public: &str, carried: &[UpdatePlatform]) -> Res<Updat
         let path = dir.join(&a.file);
         let bytes = io(&path, fs::read(&path))?;
         check_download(a, bytes.len() as u64, &sha256_hex(&bytes)).map_err(|e| format!("{}: {e}", a.file))?;
+        // What a device checks next: a pack devices would refuse is broken.
+        if a.platform == UpdatePlatform::Content {
+            let pack = batna_core::pack::Pack::decode(&bytes).map_err(|e| format!("{}: {e}", a.file))?;
+            if let Some(first) = pack.problems().first() {
+                return Err(format!("{}: devices would refuse it: {first}", a.file));
+            }
+        }
     }
     Ok(m)
 }
@@ -419,6 +426,16 @@ fn civil_from_days(z: i64) -> (i64, u32, u32) {
 mod tests {
     use super::*;
 
+    /// A real (empty) content pack, told apart by `tag`: `verify` decodes
+    /// and checks the content asset like a device.
+    fn sample_pack(tag: &str) -> Vec<u8> {
+        let index: batna_core::content::Index = serde_yaml_ng::from_str(&format!(
+            "schema: batna.content/v1\nlectures:\n  - {{ id: hb.L01, title: {tag}, pages: [1, 2], chunk: 1 }}\n"
+        ))
+        .unwrap();
+        batna_core::pack::Pack::new(index, Vec::new()).encode()
+    }
+
     /// Seed of the test key behind `fixtures/update/` (never a real key).
     const FIXTURE_SEED: [u8; 32] = [0x42; 32];
 
@@ -437,7 +454,7 @@ mod tests {
         let apk = dir.path().join("batna.apk");
         fs::write(&apk, b"not really an apk").unwrap();
         let pack = dir.path().join("batna-content.pack");
-        fs::write(&pack, b"BATNAPK1...").unwrap();
+        fs::write(&pack, sample_pack("first")).unwrap();
         let feed = dir.path().join("feed");
         let m = write_manifest(
             &feed,
@@ -462,6 +479,27 @@ mod tests {
 
         sign(&feed, &secret, &public).unwrap();
         assert_eq!(verify(&feed, &public, &[]).unwrap(), m);
+
+        // A signed feed whose pack devices would refuse fails verification.
+        let mut broken = batna_core::pack::Pack::decode(&sample_pack("x")).unwrap();
+        broken.index.lectures.push(broken.index.lectures[0].clone());
+        let broken_pack = dir.path().join("broken.pack");
+        fs::write(&broken_pack, broken.encode()).unwrap();
+        let broken_feed = dir.path().join("broken-feed");
+        write_manifest(
+            &broken_feed,
+            Channel::Alpha,
+            "1.0.0-alpha.2",
+            0,
+            None,
+            &[(UpdatePlatform::Content, broken_pack)],
+            &[],
+            WhatsNew::default(),
+        )
+        .unwrap();
+        sign(&broken_feed, &secret, &public).unwrap();
+        let err = verify(&broken_feed, &public, &[]).unwrap_err();
+        assert!(err.contains("devices would refuse it") && err.contains("listed twice"), "{err}");
 
         // A swapped file fails verification.
         fs::write(feed.join(&m.assets[1].file), b"something else").unwrap();
@@ -526,7 +564,7 @@ mod tests {
         let dir = tempfile::tempdir().unwrap();
         let (apk, pack) = (dir.path().join("a.apk"), dir.path().join("c.pack"));
         fs::write(&apk, b"a").unwrap();
-        fs::write(&pack, b"one").unwrap();
+        fs::write(&pack, sample_pack("one")).unwrap();
         let feed = |build: &str, out: &str, extra: &[&str]| {
             let mut args = strings(&[
                 "manifest",
@@ -550,7 +588,7 @@ mod tests {
             "carrying needs the previous feed"
         );
 
-        fs::write(&pack, b"two").unwrap();
+        fs::write(&pack, sample_pack("two")).unwrap();
         let second = dir.path().join("second").display().to_string();
         feed("45", &second, &["--previous", &previous, "--carry", "android-arm64"]).unwrap();
         let m: UpdateManifest =

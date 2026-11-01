@@ -29,6 +29,14 @@ fmt:
 validate:
     cargo run -q -p batna-tools -- validate
 
+# Show which changed files can be published without a new APK (base commit or ref)
+content-impact base="HEAD^1":
+    python3 scripts/content_impact.py --base "{{base}}" --head HEAD
+
+# Test content-only classification independently of Rust
+content-impact-test:
+    python3 -m unittest discover -s scripts/tests -p 'test_content_impact.py' -v
+
 # One Anki file with every written lecture: dist/anki/batna.apkg (docs/ANKI.md)
 anki:
     cargo run -q -p batna-tools -- anki

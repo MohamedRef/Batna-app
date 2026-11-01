@@ -28,8 +28,8 @@
 //! Batna: `BATNA_*` build variables, the content pack (in place of Kabar's
 //! offline packs), and one language.
 
-mod service;
 mod recovery;
+mod service;
 
 mod model;
 pub(crate) use model::notes_of;

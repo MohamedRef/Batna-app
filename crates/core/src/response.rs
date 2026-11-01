@@ -91,10 +91,15 @@ pub enum Draft {
     },
     /// A mini case: the checked pick per part (a part without options is
     /// `Some(0)` once shown), the part he is on and its unchecked pick.
+    /// `first` keeps each part's first checked pick: re-solving a part
+    /// ("حاول تاني") changes `picks`, never `first`, so the score stays the
+    /// first attempt's. Empty in drafts saved before it existed.
     Case {
         picks: Vec<Option<usize>>,
         at: usize,
         pick: Option<usize>,
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        first: Vec<Option<usize>>,
     },
     Reveal {
         open: bool,
@@ -188,8 +193,11 @@ impl Draft {
             (Self::Sort { put, .. }, StepBody::Sort { bins, cards, .. }) => {
                 put.len() == cards.len() && put.iter().flatten().all(|b| *b < bins.len())
             }
-            (Self::Case { picks, at, pick }, StepBody::Case { steps, .. }) => {
-                picks.len() == steps.len()
+            (Self::Case { picks, at, pick, first }, StepBody::Case { steps, .. }) => {
+                (first.is_empty()
+                    || first.len() == steps.len()
+                        && first.iter().zip(steps).all(|(p, s)| p.is_none_or(|p| p < s.options.len().max(1))))
+                    && picks.len() == steps.len()
                     && *at < steps.len()
                     && picks.iter().zip(steps).all(|(p, s)| p.is_none_or(|p| p < s.options.len().max(1)))
                     && pick.is_none_or(|p| p < steps[*at].options.len())
@@ -223,8 +231,12 @@ impl Draft {
             {
                 Some(put.iter().zip(cards).all(|(p, c)| *p == Some(c.bin)))
             }
-            (Self::Case { picks, .. }, StepBody::Case { steps, .. }) if picks.iter().all(Option::is_some) => {
-                Some(steps.iter().zip(picks).all(|(s, p)| s.options.is_empty() || *p == s.answer))
+            (Self::Case { picks, first, .. }, StepBody::Case { steps, .. })
+                if picks.iter().all(Option::is_some) =>
+            {
+                // The first checked pick per part is the one that counts.
+                let counted = |i: usize| first.get(i).copied().flatten().or(picks[i]);
+                Some(steps.iter().enumerate().all(|(i, s)| s.options.is_empty() || counted(i) == s.answer))
             }
             (Self::Reveal { open: true }, StepBody::Reveal { .. }) => Some(true),
             _ => None,
@@ -471,7 +483,7 @@ mod tests {
             (2, Draft::Order { placed: vec![0, 1, 2], checked: true }, Some(true)),
             (3, Draft::Match { done: vec![1, 0], misses: 1 }, Some(false)),
             (4, Draft::Sort { put: vec![Some(0), Some(1)], checked: true }, Some(true)),
-            (5, Draft::Case { picks: vec![Some(1), Some(0)], at: 1, pick: None }, Some(false)),
+            (5, Draft::Case { picks: vec![Some(1), Some(0)], at: 1, pick: None, first: vec![] }, Some(false)),
             (6, Draft::Reveal { open: true }, Some(true)),
         ];
         for (k, d, r) in &drafts {
@@ -492,6 +504,28 @@ mod tests {
     }
 
     #[test]
+    fn a_re_solved_case_part_keeps_the_first_pick_for_the_score() {
+        let l = lesson();
+        let body = &l.steps[5].body;
+        // Part 1 first answered wrong (1), then re-solved right (0).
+        let d =
+            Draft::Case { picks: vec![Some(0), Some(0)], at: 1, pick: None, first: vec![Some(1), Some(0)] };
+        assert!(d.fits(body));
+        assert_eq!(d.result(body), Some(false));
+        // First right, re-solved wrong: still right.
+        let d =
+            Draft::Case { picks: vec![Some(1), Some(0)], at: 1, pick: None, first: vec![Some(0), Some(0)] };
+        assert_eq!(d.result(body), Some(true));
+        // Old drafts without `first` still read, and serialize as before.
+        let old: Draft = serde_json::from_str(r#"{"kind":"case","picks":[0,0],"at":1,"pick":null}"#).unwrap();
+        assert_eq!(old.result(body), Some(true));
+        let bad =
+            Draft::Case { picks: vec![Some(0), Some(0)], at: 1, pick: None, first: vec![Some(5), None] };
+        assert!(!bad.fits(body));
+        assert!(!serde_json::to_string(&old).unwrap().contains("first"));
+    }
+
+    #[test]
     fn unchecked_drafts_restore_as_drafts_and_keep_continue_off() {
         let l = lesson();
         let mut a = Attempt::new(l.steps.len(), 1);
@@ -499,7 +533,11 @@ mod tests {
         a.put(2, sig(&l.steps[2].body), Draft::Order { placed: vec![2], checked: false });
         a.put(3, sig(&l.steps[3].body), Draft::Match { done: vec![0], misses: 0 });
         a.put(4, sig(&l.steps[4].body), Draft::Sort { put: vec![Some(1), None], checked: false });
-        a.put(5, sig(&l.steps[5].body), Draft::Case { picks: vec![None, None], at: 0, pick: Some(1) });
+        a.put(
+            5,
+            sig(&l.steps[5].body),
+            Draft::Case { picks: vec![None, None], at: 0, pick: Some(1), first: vec![] },
+        );
         let b = reopen(&l, &a);
         for k in 1..=5 {
             assert_eq!(b.state(&l, k), StepState::Draft, "step {k}");

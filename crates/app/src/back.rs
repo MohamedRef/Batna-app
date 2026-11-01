@@ -12,6 +12,11 @@
 //! On Today with nothing open no entry is kept (one left over from a sheet
 //! closed by tap is popped), so Back leaves Batna as Android users expect.
 // adapted from kabar-app main: crates/app/src/back.rs
+//!
+//! On Android the Back key itself goes to the page first (`BackKey.kt` in
+//! android/, `__batnaNativeBack` in system-back.js), because WebView skips
+//! history entries added without a tap and would then let Android close
+//! Batna from any screen. The history trap stays as a fallback.
 
 use std::cell::{Cell, RefCell};
 use std::rc::Rc;

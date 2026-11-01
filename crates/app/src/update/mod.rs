@@ -351,6 +351,7 @@ fn installed_pack_in(dir: &Path, info: &BuildInfo) -> Option<Pack> {
     }
     match Pack::decode(&bytes) {
         Err(e) => drop(&format!("doesn't open ({e})")),
+        Ok(p) if !p.problems().is_empty() => drop(&format!("isn't sound ({})", p.problems()[0])),
         Ok(mut p) => {
             // The stylesheets style this build's screens only.
             if !fits {

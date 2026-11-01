@@ -725,3 +725,38 @@ fn a_corrupted_or_incompatible_backup_falls_back_to_embedded() {
     .unwrap();
     assert!(recovery::restore_last_good(path, &build("0.1.0", 42, true)).is_none());
 }
+
+#[test]
+fn a_pack_with_broken_ids_or_references_is_refused_and_never_opened() {
+    // Two lectures under the same id: a device must not take it.
+    let index = crate::content::Library::get().index.clone();
+    let lecture =
+        crate::content::Library::get().lectures.values().next().cloned().expect("a written lecture");
+    let pack = Pack::new(index.clone(), vec![lecture.clone(), lecture]).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[9; 32]);
+    let feed = pack_feed(&signer, 42, None, &pack, Vec::new());
+    let url = serve(feed.path().to_path_buf());
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 42, true) };
+    let (u, data) = updater(&url, info.clone());
+    u.check(false);
+    assert!(!u.status().content_waiting);
+    assert_eq!(u.status().content_check, Some(ContentCheck::Failed));
+    let dir = data.path().join("updates");
+    assert!(!dir.join(PACK_FILE).exists());
+    assert!(is_rejected(&dir, &sha256_hex(&pack)), "not fetched again");
+
+    // The same pack already on disk (from an older build without the
+    // check) is dropped at the next start, and the built-in one is used.
+    fs::write(dir.join(PACK_FILE), &pack).unwrap();
+    let meta = PackInfo {
+        version: "0.1.0".into(),
+        build: 42,
+        sha256: sha256_hex(&pack),
+        published_at: None,
+        ui_build: Some(42),
+    };
+    write_json(&dir, PACK_INFO, &meta).unwrap();
+    fs::remove_file(dir.join(PACK_REJECTED)).unwrap();
+    assert!(installed_pack_in(&dir, &info).is_none());
+    assert!(!dir.join(PACK_FILE).exists());
+}

@@ -129,6 +129,16 @@ running build with exactly that number uses them (`crates/app/src/look.rs`);
 any other build takes the lectures and keeps its own look. Strings, icons,
 layout and logic are code and still come with an APK.
 
+**Content impact preflight.** To see whether a change needs a new APK,
+run `just content-impact BASE` (for example, `just content-impact HEAD^1`).
+Pull-request CI writes the same classification and affected paths to the
+GitHub Actions job summary; `just content-impact-test` tests the rules.
+The preview publisher uses `scripts/content_impact.py --check-content-only`
+instead of its own separate path filter. Any unknown path, including
+`content/glossary.yaml` (which is compiled into the app), forces a full
+build. Content-only eligibility never bypasses validation, signing, or feed
+verification. Changing these rules requires adjusting the classifier tests.
+
 **Content-only feeds.** When everything merged since the build on the
 preview feed is under `content/index.yaml`, `content/program.yaml`, a course
 folder such as `content/hb/`, `content/lessons/`,

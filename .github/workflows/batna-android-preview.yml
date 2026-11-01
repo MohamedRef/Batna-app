@@ -149,12 +149,8 @@ jobs:
             || ! git merge-base --is-ancestor "$prev" HEAD; then
             exit 0
           fi
-          changed="$(git diff --name-only "$prev" HEAD)"
-          if [ -z "$changed" ]; then
-            exit 0
-          fi
-          if grep -Ev '^(content/(index\.yaml|program\.yaml|[a-z]+/)|changes/|docs/|[^/]+\.md$|crates/app/.+\.css$)' <<<"$changed"; then
-            echo "Code changed since $prev (above): a full build."
+          if ! python3 scripts/content_impact.py --base "$prev" --head HEAD --check-content-only; then
+            echo "App changes since $prev: a full build."
             exit 0
           fi
           echo "Only content or stylesheets changed since $prev: the feed keeps its APK."

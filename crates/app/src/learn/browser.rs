@@ -67,7 +67,7 @@ fn export_screen_fixtures_learn() {
     // Mixed Arabic and English (2026-11-01): "label: value" bullets, "الـ"
     // before English words, full stops after English, and arrows between
     // terms, plus a figure whose label once ran off its edge.
-    for (lesson, at) in [("hb.L01.lesson2", 5), ("hb.L01.lesson2", 8)] {
+    for (lesson, at) in [("hb.L01.lesson2", 5), ("hb.L01.lesson2", 7), ("hb.L01.lesson2", 8)] {
         let (_, l) = Library::get().lesson(lesson).expect("mixed-text lesson");
         let step = &l.steps[at];
         let case = Case { lesson: lesson.into(), at, view: View::Steps, draft: None };

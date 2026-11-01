@@ -306,6 +306,20 @@ impl CaseRun {
             self.shown = false;
         }
     }
+
+    /// Persist a completed case before leaving its final answer. Failure
+    /// retains the attempt so the learner can explicitly try Finish again.
+    fn next_logged(&mut self, total: usize, store: Option<&StudyStoreHandle>) -> Result<(), String> {
+        if self.step >= total || self.results.len() <= self.step {
+            return Ok(());
+        }
+        if self.step + 1 == total && self.results.len() == total {
+            let right = self.results.iter().filter(|answer| answer.0).count() as u32;
+            record(store, &self.item_id, right, total as u32, self.started)?;
+        }
+        self.next();
+        Ok(())
+    }
 }
 
 static RUN: GlobalSignal<Option<CaseRun>> = Signal::global(|| None);
@@ -331,7 +345,13 @@ pub fn now_ms() -> i64 {
 static EVENTS: Mutex<MemorySink> = Mutex::new(MemorySink { events: Vec::new() });
 
 /// One finished case or calc item as one review event in the store.
-pub fn record(store: Option<&StudyStoreHandle>, item_id: &str, right: u32, total: u32, started_ms: i64) {
+pub fn record(
+    store: Option<&StudyStoreHandle>,
+    item_id: &str,
+    right: u32,
+    total: u32,
+    started_ms: i64,
+) -> Result<(), String> {
     let at_ms = now_ms();
     let event = ReviewEvent {
         item_id: item_id.to_owned(),
@@ -341,11 +361,11 @@ pub fn record(store: Option<&StudyStoreHandle>, item_id: &str, right: u32, total
         took_ms: u32::try_from(at_ms.saturating_sub(started_ms)).unwrap_or(u32::MAX),
     };
     match store {
-        Some(s) => s.0.borrow_mut().record(event),
+        Some(s) => s.0.borrow_mut().record_logged(event).map(|_| ()),
         None => {
-            if let Ok(mut sink) = EVENTS.lock() {
-                sink.record(event);
-            }
+            let mut sink = EVENTS.lock().map_err(|e| e.to_string())?;
+            sink.record(event);
+            Ok(())
         }
     }
 }

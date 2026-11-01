@@ -1,7 +1,8 @@
 //! Android: keeps a lost WebView renderer from crashing Batna, and reports
 //! how recent runs ended (`app.batna.WebViewGuard`, android/). Android
 //! reclaims a backgrounded app's renderer under memory pressure; unhandled,
-//! that kills Batna as a crash ("Batna is crashing frequently"). Nothing
+//! that kills Batna as a crash ("Batna is crashing frequently"). It also
+//! routes the Back key through the page (`app.batna.BackKey`). Nothing
 //! elsewhere.
 
 /// Guards the WebView once it exists and reports earlier runs' endings to
@@ -40,6 +41,14 @@ mod android {
             let loader = env.cast_local::<JClassLoader>(loader)?;
             let class =
                 LoaderContext::Loader(&loader).load_class(env, jni_str!("app.batna.WebViewGuard"), true)?;
+            // Back goes through the page first, never WebView history (BackKey.kt).
+            let back = LoaderContext::Loader(&loader).load_class(env, jni_str!("app.batna.BackKey"), true)?;
+            env.call_static_method(
+                &back,
+                jni_str!("install"),
+                jni_sig!("(Landroid/app/Activity;)V"),
+                &[JValue::Object(activity)],
+            )?;
             let s = env
                 .call_static_method(
                     &class,

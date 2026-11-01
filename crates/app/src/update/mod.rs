@@ -86,6 +86,9 @@ const PACK_REJECTED: &str = "content.rejected";
 /// How many times a pack was opened without Batna running calmly after it
 /// (the crash-loop guard, #344).
 const PACK_STARTS: &str = "content.starts";
+/// Packs that downloaded whole but this app build couldn't take, with the
+/// build that refused them: not fetched again until the app changes.
+const PACK_UNREADABLE: &str = "content.unreadable.json";
 /// Opens in a row that never got a couple of seconds past the first screen
 /// before the pack is dropped.
 const MAX_PACK_STARTS: u8 = 3;
@@ -383,6 +386,45 @@ fn is_rejected(dir: &Path, sha256: &str) -> bool {
 fn reject(dir: &Path, sha256: &str) {
     let _ = fs::create_dir_all(dir);
     let _ = fs::write(dir.join(PACK_REJECTED), sha256);
+}
+
+/// A pack that failed this build's checks. Unlike a rejection (it stopped
+/// Batna starting) it is tied to the app build, so an app update that can
+/// read it tries again. Adapted from kabar-app main:
+/// `crates/app/src/update/content.rs`.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+struct Unreadable {
+    sha256: String,
+    /// `version+build` of the app that refused it.
+    app: String,
+}
+
+fn app_key(info: &BuildInfo) -> String {
+    format!("{}+{}", info.version, info.build)
+}
+
+fn unreadable(dir: &Path) -> Vec<Unreadable> {
+    fs::read(dir.join(PACK_UNREADABLE)).ok().and_then(|b| serde_json::from_slice(&b).ok()).unwrap_or_default()
+}
+
+fn is_unreadable(dir: &Path, info: &BuildInfo, sha256: &str) -> bool {
+    let app = app_key(info);
+    unreadable(dir).iter().any(|u| u.app == app && u.sha256.eq_ignore_ascii_case(sha256))
+}
+
+fn mark_unreadable(dir: &Path, info: &BuildInfo, sha256: &str) {
+    let app = app_key(info);
+    // Entries from earlier app builds no longer apply.
+    let mut list: Vec<_> = unreadable(dir).into_iter().filter(|u| u.app == app).collect();
+    if list.iter().any(|u| u.sha256.eq_ignore_ascii_case(sha256)) {
+        return;
+    }
+    list.push(Unreadable { sha256: sha256.to_ascii_lowercase(), app });
+    let excess = list.len().saturating_sub(16);
+    list.drain(..excess);
+    if let Err(e) = write_json(dir, PACK_UNREADABLE, &list) {
+        report!("unreadable content pack not remembered: {e}");
+    }
 }
 
 fn update_failure(e: UpdateError) -> Failure {

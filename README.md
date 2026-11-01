@@ -15,6 +15,6 @@ The first content is Chapter 1 (Hepato-Biliary Pancreatic Unit) of the Alexandri
 | Study sessions, question bank, cases, oral mode, stats | in progress |
 | Anki export | `batna-tools anki`: one `batna.apkg`, a subdeck per lecture ([docs/ANKI.md](docs/ANKI.md)) |
 
-How to run it: [docs/RUN.md](docs/RUN.md). How to write content: [docs/CONTENT.md](docs/CONTENT.md); the workflow and its checks: [docs/AUTHORING.md](docs/AUTHORING.md).
+How to run it: [docs/RUN.md](docs/RUN.md). How to write content: [docs/CONTENT.md](docs/CONTENT.md); the workflow and its checks: [docs/AUTHORING.md](docs/AUTHORING.md). What old and new apps do with each version number: [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
 
 UI architecture and improvement priorities: [docs/UI-MAINTENANCE.md](docs/UI-MAINTENANCE.md).

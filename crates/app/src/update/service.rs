@@ -321,6 +321,9 @@ impl Updater {
             check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes))
                 .map_err(|e| (true, e.to_string()))?;
             let pack = Pack::decode(&bytes).map_err(|e| (true, e.to_string()))?;
+            if let Some(first) = pack.problems().first() {
+                return Err((true, format!("content problem: {first}")));
+            }
             if let Some(bad) = crate::look::unsafe_sheet(&pack.look) {
                 return Err((true, format!("stylesheet {bad} isn't allowed")));
             }

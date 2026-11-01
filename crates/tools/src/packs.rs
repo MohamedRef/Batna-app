@@ -47,6 +47,11 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     }
     let program = crate::read_yaml(&root.join("content/program.yaml")).map_err(|e| vec![e])?;
     let pack = Pack::new(index, lectures).with_lessons(lessons).with_look(look(root)?).with_program(program);
+    let problems = pack.problems();
+    if !problems.is_empty() {
+        // Devices refuse such a pack; never build one.
+        return Err(problems.into_iter().map(|p| format!("pack: {p}")).collect());
+    }
     let bytes = pack.encode();
     match Pack::decode(&bytes) {
         Ok(back) if back == pack => {}

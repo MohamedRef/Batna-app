@@ -42,6 +42,9 @@ pub(super) fn save_settled(dir: &Path, app: &BuildInfo) -> Result<(), String> {
         return Err("the settled content pack is not intact".into());
     }
     let pack = Pack::decode(&bytes).map_err(|e| e.to_string())?;
+    if let Some(first) = pack.problems().first() {
+        return Err(format!("the settled content pack isn't sound: {first}"));
+    }
     if let Some(bad) = crate::look::unsafe_sheet(&pack.look) {
         return Err(format!("settled stylesheet {bad} isn't allowed"));
     }
@@ -79,6 +82,10 @@ pub(super) fn restore_last_good(dir: &Path, app: &BuildInfo) -> Option<Pack> {
         return None;
     }
     let mut pack = Pack::decode(&bytes).ok()?;
+    if let Some(first) = pack.problems().first() {
+        report!("last good content pack isn't sound ({first}); using built-in content");
+        return None;
+    }
     // Stylesheets are tied to an exact app build; the content itself can
     // remain compatible with a different app build.
     let fits_look = Version::parse(&meta.version) == Some(app.version) && meta.ui_build == Some(app.build);

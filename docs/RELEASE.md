@@ -122,6 +122,18 @@ off. A pack from an older build than the one installed is never taken, and
 the app decodes it with `batna_core::pack` before switching to it, so a pack
 this build can't read is never used.
 
+**Pack integrity.** `Pack::problems` (`crates/core/src/pack.rs`) checks
+what a device must not open: index and lecture schema tags, lecture ids
+listed once and only lectures the index lists, item and lesson ids used
+once and under their own lecture, lesson `practice` and `try` items and
+`topics` that exist in the pack, and the program's own rules. It runs in
+memory with no YAML, so it is cheap: `batna-tools packs build` refuses to
+build a pack with problems, the app refuses (and remembers) a downloaded
+pack with problems, and a pack already on disk or a last-good backup with
+problems is dropped at start in favour of the built-in content. Authoring
+rules that need the YAML (quote length, approvals) stay in `batna-tools
+validate`.
+
 A pack also carries the app's stylesheets (`Pack::look`, every `.css` file
 under `crates/app`), so a change to the look needs no install either. The
 manifest's `ui_build` names the app build they were made with, and only a

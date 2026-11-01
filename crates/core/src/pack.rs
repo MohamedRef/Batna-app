@@ -119,6 +119,114 @@ impl Pack {
         Ok(pack)
     }
 
+    /// Integrity problems a device must not activate: ids that repeat or
+    /// sit under the wrong lecture, lectures and lessons the index doesn't
+    /// list, schema tags this build doesn't read, references from lessons
+    /// to items or topics that aren't there, and the program's own rules.
+    /// Cheap (no I/O, no parsing): the app runs it on every pack it takes
+    /// or opens, and `batna-tools packs build` before anything ships.
+    /// Authoring rules that need the YAML (quote length, approvals) stay
+    /// in `batna-tools validate`. Empty = sound.
+    pub fn problems(&self) -> Vec<String> {
+        use std::collections::{BTreeMap, BTreeSet};
+        let mut out = Vec::new();
+        if self.index.schema != crate::content::SCHEMA {
+            out.push(format!(
+                "index: schema is {:?}, expected {:?}",
+                self.index.schema,
+                crate::content::SCHEMA
+            ));
+        }
+        let mut listed = BTreeSet::new();
+        for e in &self.index.lectures {
+            if !crate::validate::is_lecture_id(&e.id) {
+                out.push(format!("index: lecture id {:?} must look like hb.L01", e.id));
+            }
+            if !listed.insert(e.id.as_str()) {
+                out.push(format!("index: lecture {} is listed twice", e.id));
+            }
+        }
+        let under = |id: &str, lecture: &str| {
+            id.strip_prefix(lecture).is_some_and(|r| r.starts_with('.') && r.len() > 1)
+        };
+        // Items and topics by lecture, for the lessons' references.
+        let mut items: BTreeMap<&str, BTreeSet<&str>> = BTreeMap::new();
+        let mut topics: BTreeMap<&str, BTreeSet<&str>> = BTreeMap::new();
+        let mut all_items = BTreeSet::new();
+        for lec in &self.lectures {
+            let lid = lec.lecture.as_str();
+            if lec.schema != crate::content::SCHEMA {
+                out.push(format!("{lid}: schema is {:?}, expected {:?}", lec.schema, crate::content::SCHEMA));
+            }
+            if !listed.contains(lid) {
+                out.push(format!("{lid}: not listed in the index"));
+            }
+            if items.contains_key(lid) {
+                out.push(format!("{lid}: the lecture appears twice"));
+            }
+            let own = items.entry(lid).or_default();
+            for item in &lec.items {
+                if !under(&item.id, lid) {
+                    out.push(format!("{}: item id isn't under its lecture {lid}", item.id));
+                }
+                if !all_items.insert(item.id.as_str()) {
+                    out.push(format!("{}: item id is used twice", item.id));
+                }
+                own.insert(item.id.as_str());
+            }
+            topics.entry(lid).or_default().extend(lec.topics.iter().map(|t| t.id.as_str()));
+        }
+        let mut lesson_ids = BTreeSet::new();
+        let mut lesson_files = BTreeSet::new();
+        for file in &self.lessons {
+            let lid = file.lecture.as_str();
+            if file.schema != crate::lesson::SCHEMA {
+                out.push(format!(
+                    "{lid} lessons: schema is {:?}, expected {:?}",
+                    file.schema,
+                    crate::lesson::SCHEMA
+                ));
+            }
+            if !listed.contains(lid) {
+                out.push(format!("{lid} lessons: the lecture isn't listed in the index"));
+            }
+            if !lesson_files.insert(lid) {
+                out.push(format!("{lid} lessons: the file appears twice"));
+            }
+            for lesson in &file.lessons {
+                let at = lesson.id.as_str();
+                if !under(at, lid) {
+                    out.push(format!("{at}: lesson id isn't under its lecture {lid}"));
+                }
+                if !lesson_ids.insert(at) {
+                    out.push(format!("{at}: lesson id is used twice"));
+                }
+                // References resolve only when the lecture's items ship too.
+                if let Some(own) = items.get(lid) {
+                    let tried = lesson.steps.iter().flat_map(|s| match &s.body {
+                        crate::lesson::StepBody::Try { items } => items.as_slice(),
+                        _ => &[],
+                    });
+                    for item in lesson.practice.iter().chain(tried) {
+                        if !own.contains(item.as_str()) {
+                            out.push(format!("{at}: item {item} isn't in lecture {lid}"));
+                        }
+                    }
+                    let known = &topics[lid];
+                    for topic in &lesson.topics {
+                        if !known.contains(topic.as_str()) {
+                            out.push(format!("{at}: topic {topic} isn't in lecture {lid}"));
+                        }
+                    }
+                }
+            }
+        }
+        if let Some(program) = &self.program {
+            out.extend(program.problems(&self.index).into_iter().map(|p| format!("program: {p}")));
+        }
+        out
+    }
+
     pub fn item_count(&self) -> usize {
         self.lectures.iter().map(|l| l.items.len()).sum()
     }
@@ -178,6 +286,64 @@ mod tests {
         let back = Pack::decode(&pack.encode()).unwrap();
         assert_eq!(back.program.as_ref(), Some(&program));
         assert_eq!(back.program_or_fallback().courses.len(), 20);
+    }
+
+    #[test]
+    fn a_sound_pack_has_no_problems_and_broken_ids_are_named() {
+        let pack = Pack::new(index(), vec![sample()]);
+        assert_eq!(pack.problems(), Vec::<String>::new());
+
+        // The same lecture twice: every item id repeats.
+        let twice = Pack::new(index(), vec![sample(), sample()]);
+        let p = twice.problems();
+        assert!(p.iter().any(|m| m == "hb.L01: the lecture appears twice"), "{p:?}");
+        assert!(p.iter().any(|m| m.ends_with("item id is used twice")));
+
+        // A lecture the index doesn't list, and an item under the wrong lecture.
+        let mut stray = sample();
+        stray.lecture = "hb.L09".into();
+        let p = Pack::new(index(), vec![stray]).problems();
+        assert!(p.iter().any(|m| m == "hb.L09: not listed in the index"), "{p:?}");
+        assert!(p.iter().any(|m| m.contains("isn't under its lecture hb.L09")), "{p:?}");
+
+        // A newer lecture schema this build doesn't read.
+        let mut future = sample();
+        future.schema = "batna.content/v9".into();
+        assert!(Pack::new(index(), vec![future]).problems().iter().any(|m| m.contains("v9")));
+
+        // A duplicate index entry.
+        let mut doubled = index();
+        doubled.lectures.push(doubled.lectures[0].clone());
+        assert!(Pack::new(doubled, vec![sample()]).problems().iter().any(|m| m.contains("listed twice")));
+    }
+
+    #[test]
+    fn lessons_must_point_at_items_and_topics_that_ship() {
+        let text = include_str!("../../../fixtures/content/sample.yaml");
+        let lecture: Lecture = serde_yaml_ng::from_str(text).unwrap();
+        let first = lecture.items[0].id.clone();
+        let lesson = |practice: &str, id: &str| -> LessonFile {
+            serde_json::from_value(serde_json::json!({
+                "schema": crate::lesson::SCHEMA,
+                "lecture": "hb.L01",
+                "lessons": [{
+                    "id": id, "title": "t", "hook": "h", "minutes": 5, "pages": [1, 2],
+                    "steps": [], "recap": [], "practice": [practice], "status": "unverified"
+                }]
+            }))
+            .unwrap()
+        };
+        let ok =
+            Pack::new(index(), vec![lecture.clone()]).with_lessons(vec![lesson(&first, "hb.L01.lesson1")]);
+        assert_eq!(ok.problems(), Vec::<String>::new());
+        let gone = Pack::new(index(), vec![lecture.clone()])
+            .with_lessons(vec![lesson("hb.L01.999", "hb.L01.lesson1")]);
+        assert!(gone.problems().iter().any(|m| m.contains("item hb.L01.999 isn't in lecture hb.L01")));
+        let twice = Pack::new(index(), vec![lecture])
+            .with_lessons(vec![lesson(&first, "hb.L01.lesson1"), lesson(&first, "hb.L01.lesson1")]);
+        let p = twice.problems();
+        assert!(p.iter().any(|m| m.contains("lesson id is used twice")), "{p:?}");
+        assert!(p.iter().any(|m| m.contains("the file appears twice")), "{p:?}");
     }
 
     #[test]

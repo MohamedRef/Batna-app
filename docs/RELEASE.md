@@ -180,11 +180,15 @@ is between sessions (the calm moments a quiet install waits for). The sheet
 doesn't open by itself for it: a quiet card on Today names the first change
 and opens "What's new" (titled "تحديث محتوى") on a tap. Settings and the
 sheet show the app build and the content apart ("بناء 40 · المحتوى من 45").
-Open screens and the review catalog follow the new pack. A pack whose
-file fails its checks, won't decode, or carries a stylesheet that reaches
-outside the app (`@import`, a remote `url(…)`, script) is refused and its
-sha256 remembered, so it isn't fetched again; a pack that is opened three
-times in a row without Batna getting past its first screen goes the same way
+Open screens and the review catalog follow the new pack. A pack that
+downloads whole but fails its checks, won't decode, or carries a stylesheet
+that reaches outside the app (`@import`, a remote `url(…)`, script) is
+refused and remembered in `content.unreadable.json` with the app build that
+refused it, so it isn't fetched again until the app changes; a cut or
+mismatched download is not remembered and the next check tries again. A
+feed naming the pack in use downloads nothing, and one naming the last good
+pack takes it from disk. A pack that is opened three times in a row without
+Batna getting past its first screen is rejected for good (`content.rejected`)
 and the last settled, verified content pack is restored if compatible; otherwise the built-in content comes back (`crates/app/src/update/recovery.rs`). The last-good pack is saved only after a calm screen has run on it, never immediately after download. Backup files are content-addressed and the backup pointer is published last so interrupted writes preserve the older backup. The glossary is built into the app, so a glossary change is
 a full build.
 

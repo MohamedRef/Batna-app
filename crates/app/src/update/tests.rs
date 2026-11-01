@@ -574,9 +574,10 @@ fn a_content_pack_must_verify_and_decode_before_it_is_kept() {
     assert!(!u.status().content_waiting);
     assert_eq!(u.status().content_check, Some(ContentCheck::Failed));
     assert!(!data.path().join("updates").join(PACK_FILE).exists());
-    // A bad file is remembered, so it isn't fetched again (#344).
-    let rejected = fs::read_to_string(data.path().join("updates").join(PACK_REJECTED)).unwrap();
-    assert_eq!(rejected.len(), 64);
+    // A bad file is remembered for this app build, so it isn't fetched
+    // again (#344) until the app changes.
+    let unreadable = fs::read_to_string(data.path().join("updates").join(PACK_UNREADABLE)).unwrap();
+    assert!(unreadable.contains("0.1.0+42"));
 
     // A real pack that matches the signed manifest is kept for the next start.
     let look = BTreeMap::from([("assets/main.css".to_owned(), ".x {}".to_owned())]);
@@ -635,10 +636,12 @@ fn a_pack_with_a_stylesheet_that_reaches_out_is_refused() {
     let feed = pack_feed(&signer, 42, None, &pack, Vec::new());
     let url = serve(feed.path().to_path_buf());
     let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 42, true) };
-    let (u, data) = updater(&url, info);
+    let (u, data) = updater(&url, info.clone());
     u.check(false);
     assert!(!u.status().content_waiting);
-    assert!(is_rejected(&data.path().join("updates"), &sha256_hex(&pack)));
+    let dir = data.path().join("updates");
+    assert!(is_unreadable(&dir, &info, &sha256_hex(&pack)));
+    assert!(!is_rejected(&dir, &sha256_hex(&pack)), "not a crash: a later app may take it");
 }
 
 #[test]
@@ -743,7 +746,7 @@ fn a_pack_with_broken_ids_or_references_is_refused_and_never_opened() {
     assert_eq!(u.status().content_check, Some(ContentCheck::Failed));
     let dir = data.path().join("updates");
     assert!(!dir.join(PACK_FILE).exists());
-    assert!(is_rejected(&dir, &sha256_hex(&pack)), "not fetched again");
+    assert!(is_unreadable(&dir, &info, &sha256_hex(&pack)), "not fetched again");
 
     // The same pack already on disk (from an older build without the
     // check) is dropped at the next start, and the built-in one is used.
@@ -756,7 +759,6 @@ fn a_pack_with_broken_ids_or_references_is_refused_and_never_opened() {
         ui_build: Some(42),
     };
     write_json(&dir, PACK_INFO, &meta).unwrap();
-    fs::remove_file(dir.join(PACK_REJECTED)).unwrap();
     assert!(installed_pack_in(&dir, &info).is_none());
     assert!(!dir.join(PACK_FILE).exists());
 }
@@ -794,4 +796,110 @@ fn clearing_app_downloads_keeps_the_last_good_content_pack() {
     fs::remove_file(dir.join(PACK_FILE)).unwrap();
     fs::remove_file(dir.join(PACK_INFO)).unwrap();
     assert!(recovery::restore_last_good(&dir, &app).is_some());
+}
+
+fn pack_requests(seen: &Seen) -> usize {
+    seen.lock().unwrap().iter().filter(|(p, _)| p.ends_with(".pack")).count()
+}
+
+#[test]
+fn a_feed_carrying_the_pack_already_here_downloads_nothing() {
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[11; 32]);
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let first = pack_feed(&signer, 45, Some(40), &pack, Vec::new());
+    let (u, data) = updater(&serve(first.path().to_path_buf()), info.clone());
+    u.check(false);
+    assert_eq!(u.status().content_check, Some(ContentCheck::New));
+    assert!(u.apply_content());
+
+    // The next merge changed only the app: same pack, new build.
+    let second = pack_feed(&signer, 46, Some(40), &pack, Vec::new());
+    let (url, seen) = serve_logged(second.path().to_path_buf(), None);
+    let u = updater_in(data.path(), &url, info);
+    u.check(false);
+    assert_eq!(u.status().content_check, Some(ContentCheck::Current), "nothing to reopen for");
+    assert!(!u.status().content_waiting);
+    assert_eq!(pack_requests(&seen), 0, "the pack wasn't downloaded again");
+    let dir = data.path().join("updates");
+    assert_eq!(fs::read(dir.join(PACK_FILE)).unwrap(), pack);
+}
+
+#[test]
+fn a_pack_this_build_cannot_take_is_fetched_once_until_the_app_changes() {
+    let look =
+        BTreeMap::from([("assets/main.css".to_owned(), "@import 'https://x.example/a.css';".to_owned())]);
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).with_look(look).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[12; 32]);
+    let feed = pack_feed(&signer, 45, Some(40), &pack, Vec::new());
+    let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let (u, data) = updater(&url, info.clone());
+    u.check(false);
+    assert_eq!(u.status().content_check, Some(ContentCheck::Failed));
+    u.check(false);
+    assert_eq!(u.status().content_check, Some(ContentCheck::Current));
+    assert_eq!(pack_requests(&seen), 1, "remembered for this app build");
+    // An app update gets its own try.
+    let updated = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 41, true) };
+    let u = updater_in(data.path(), &url, updated);
+    u.check(false);
+    assert_eq!(pack_requests(&seen), 2);
+}
+
+#[test]
+fn a_mismatched_pack_download_is_tried_again() {
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[13; 32]);
+    let feed = pack_feed(&signer, 45, Some(40), &pack, Vec::new());
+    // What arrives isn't what was signed (a cut or swapped download).
+    fs::write(feed.path().join("batna-content.pack"), &pack[..pack.len() / 2]).unwrap();
+    let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let (u, data) = updater(&url, info.clone());
+    u.check(false);
+    u.check(false);
+    assert_eq!(u.status().content_check, Some(ContentCheck::Failed));
+    assert_eq!(pack_requests(&seen), 2, "each check tries the network again");
+    let dir = data.path().join("updates");
+    assert!(!is_rejected(&dir, &sha256_hex(&pack)) && !is_unreadable(&dir, &info, &sha256_hex(&pack)));
+}
+
+#[test]
+fn a_feed_going_back_to_the_last_good_pack_reuses_it() {
+    let make = |build: u64| {
+        Pack::new(crate::content::Library::get().index.clone(), Vec::new())
+            .with_look(BTreeMap::from([("assets/main.css".to_owned(), format!(".v{build} {{}}"))]))
+            .encode()
+    };
+    let (good, later) = (make(41), make(42));
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[14; 32]);
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let data = tempfile::tempdir().unwrap();
+    let dir = data.path().join("updates");
+    fs::create_dir_all(&dir).unwrap();
+    let install = |bytes: &[u8], build: u64| {
+        fs::write(dir.join(PACK_FILE), bytes).unwrap();
+        let meta = PackInfo {
+            version: "0.1.0".into(),
+            build,
+            sha256: sha256_hex(bytes),
+            published_at: None,
+            ui_build: Some(40),
+        };
+        write_json(&dir, PACK_INFO, &meta).unwrap();
+        fs::write(dir.join(PACK_STARTS), "1").unwrap();
+    };
+    install(&good, 41);
+    recovery::save_settled(&dir, &info).unwrap();
+    install(&later, 42);
+
+    let feed = pack_feed(&signer, 43, Some(40), &good, Vec::new());
+    let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
+    let u = updater_in(data.path(), &url, info);
+    u.check(false);
+    assert_eq!(u.status().content_check, Some(ContentCheck::New));
+    assert_eq!(pack_requests(&seen), 0, "taken from the last good copy");
+    assert_eq!(fs::read(dir.join(PACK_FILE)).unwrap(), good);
+    assert_eq!(load_pack_info(&dir).unwrap().build, 43);
 }

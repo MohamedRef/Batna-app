@@ -308,18 +308,26 @@ impl Updater {
             return ContentCheck::Failed;
         }
         // A pack refused before stays refused: what is in use is the newest
-        // there is for this device.
-        if is_rejected(&self.dir, &asset.sha256) {
+        // there is for this device. One this app build couldn't take waits
+        // for an app update.
+        if is_rejected(&self.dir, &asset.sha256) || is_unreadable(&self.dir, &self.info, &asset.sha256) {
             return ContentCheck::Current;
         }
-        // Err((true, _)): the file itself is bad, and is remembered so it
-        // isn't fetched again; Err((false, _)): try again next time.
+        // Err((true, _)): this build can't take the file, and it is
+        // remembered so it isn't fetched again; Err((false, _)): try again
+        // next time (a cut or mismatched download included).
         let result = (|| -> Result<(), (bool, String)> {
-            let url = format!("{}/{}", self.feed_url(), asset.file);
-            let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60))
-                .map_err(|f| (false, format!("{f:?}")))?;
-            check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes))
-                .map_err(|e| (true, e.to_string()))?;
+            let bytes = match self.held(&asset) {
+                Some(bytes) => bytes,
+                None => {
+                    let url = format!("{}/{}", self.feed_url(), asset.file);
+                    let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60))
+                        .map_err(|f| (false, format!("{f:?}")))?;
+                    check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes))
+                        .map_err(|e| (false, e.to_string()))?;
+                    bytes
+                }
+            };
             let pack = Pack::decode(&bytes).map_err(|e| (true, e.to_string()))?;
             if let Some(first) = pack.problems().first() {
                 return Err((true, format!("content problem: {first}")));
@@ -355,12 +363,20 @@ impl Updater {
             }
             Err((bad, e)) => {
                 if bad {
-                    reject(&self.dir, &asset.sha256);
+                    mark_unreadable(&self.dir, &self.info, &asset.sha256);
                 }
                 report!("content pack {} not taken: {e}", asset.file);
                 ContentCheck::Failed
             }
         }
+    }
+
+    /// The feed's pack when this device already keeps exactly those bytes
+    /// as its last good pack (a feed that went back to it). A feed naming
+    /// the pack in use is never fetched at all (`content_update`).
+    fn held(&self, asset: &UpdateAsset) -> Option<Vec<u8>> {
+        let bytes = fs::read(recovery::good_file(&self.dir, &asset.sha256)?).ok()?;
+        check_download(asset, bytes.len() as u64, &sha256_hex(&bytes)).is_ok().then_some(bytes)
     }
 
     /// Keeps a verified feed's history, and lets a pending "What's new" go

@@ -56,8 +56,8 @@ rule names where it lives and the test that holds it.
 - **Integrity.** `Pack::problems` (ids, references, listed files, schema
   tags) runs before a pack is taken, when it is opened, and in
   `batna-tools packs build` and `update verify`. A refused pack is
-  remembered and never fetched again; the device keeps its last good pack
-  (`docs/RELEASE.md`).
+  remembered for the app build that refused it and not fetched again until
+  the app changes; the device keeps its last good pack (`docs/RELEASE.md`).
 - **Stylesheets** apply only on the exact build in `ui_build`; other builds
   use the content with their own look.
 - **Ids.** Lecture, item, topic and lesson ids study records point at are

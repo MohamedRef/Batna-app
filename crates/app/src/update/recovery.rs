@@ -8,7 +8,7 @@ use super::*;
 
 const GOOD_INFO: &str = "content.good.json";
 
-fn good_file(dir: &Path, sha: &str) -> Option<PathBuf> {
+pub(super) fn good_file(dir: &Path, sha: &str) -> Option<PathBuf> {
     if sha.len() != 64 || !sha.bytes().all(|b| b.is_ascii_hexdigit()) {
         return None;
     }

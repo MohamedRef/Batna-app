@@ -3,6 +3,7 @@
 //! Feature chunks (SPLIT.md §7) each own a module directory and register it
 //! with one line in `Screen` / `screen_body` below.
 
+mod abbrdict;
 mod abbrsheet;
 mod anki;
 mod back;

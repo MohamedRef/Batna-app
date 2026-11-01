@@ -108,67 +108,132 @@ fn word_char(c: char) -> bool {
     c.is_alphanumeric() && !('\u{0600}'..='\u{06FF}').contains(&c)
 }
 
-/// Whether `text[start..end]` stands as a whole word: no letter or digit
-/// touches it, except a plural `s` after it (`PPIs` shows `PPI`).
-fn whole_word(text: &str, start: usize, end: usize) -> Option<usize> {
-    let before = text[..start].chars().next_back();
-    if before.is_some_and(word_char) {
-        return None;
-    }
-    let mut rest = text[end..].chars();
-    match rest.next() {
-        Some(c) if word_char(c) => {
-            let plural = c == 's' && !rest.next().is_some_and(word_char);
-            plural.then_some(end + 1)
-        }
-        _ => Some(end),
-    }
+/// Looks abbreviations up fast: every abbreviation spelling (and drug
+/// spellings written like one, `UDCA`) by exact case, plus the `plain:`
+/// words. Build it once with [`Glossary::finder`] and reuse it for many
+/// texts (a course's lessons, the validator).
+pub struct Finder<'a> {
+    spellings: std::collections::HashMap<&'a str, &'a Entry>,
+    plain: std::collections::HashSet<&'a str>,
 }
 
-impl Glossary {
-    /// The abbreviations written in `texts`, each once, in the order they
-    /// first appear: what a lesson step's "اختصارات" chip lists. A longer
-    /// spelling wins over the shorter ones inside it (`HRS-AKI` over `HRS`).
-    /// Drug names count only when written like an abbreviation (`UDCA`).
-    pub fn abbreviations_in<'a, S: AsRef<str>>(&'a self, texts: &[S]) -> Vec<&'a Entry> {
-        let mut found: Vec<(usize, usize, &Entry)> = Vec::new();
-        for (t, text) in texts.iter().enumerate() {
-            let mut spans = self.matches(text.as_ref());
-            spans.sort_by_key(|(start, _, _)| *start);
-            // Text `t` comes after every earlier text.
-            found.extend(spans.into_iter().map(|(start, _, e)| (t, start, e)));
+/// One run of Latin words joined by hyphens (`HRS-AKI`, `anti-HBc`,
+/// `IL-6`), split at the hyphens, with each part's place in the text.
+fn hyphen_runs(text: &str) -> Vec<Vec<(usize, &str)>> {
+    let mut runs: Vec<Vec<(usize, &str)>> = Vec::new();
+    let mut run: Vec<(usize, &str)> = Vec::new();
+    let mut start: Option<usize> = None;
+    let mut last_hyphen = false;
+    for (i, c) in text.char_indices().chain(std::iter::once((text.len(), ' '))) {
+        if word_char(c) {
+            if start.is_none() {
+                if !last_hyphen && !run.is_empty() {
+                    runs.push(std::mem::take(&mut run));
+                }
+                start = Some(i);
+            }
+            last_hyphen = false;
+            continue;
         }
-        found.sort_by_key(|(t, start, _)| (*t, *start));
-        let mut out: Vec<&Entry> = Vec::new();
-        for (_, _, e) in found {
-            if !out.iter().any(|o| std::ptr::eq(*o, e)) {
-                out.push(e);
+        if let Some(s) = start.take() {
+            run.push((s, &text[s..i]));
+        }
+        // A hyphen right after a word may join it to the next one.
+        last_hyphen = c == '-' && !run.is_empty() && text[..i].ends_with(|p: char| word_char(p));
+        if !last_hyphen && !run.is_empty() {
+            runs.push(std::mem::take(&mut run));
+        }
+    }
+    if !run.is_empty() {
+        runs.push(run);
+    }
+    runs
+}
+
+impl<'a> Finder<'a> {
+    /// The entry for a spelling, allowing a plural `s` (`PPIs` → `PPI`).
+    fn get(&self, word: &str) -> Option<&'a Entry> {
+        self.spellings.get(word).copied().or_else(|| {
+            let single = word.strip_suffix('s').filter(|w| !w.is_empty())?;
+            self.spellings.get(single).copied()
+        })
+    }
+
+    /// Where the abbreviations stand in `text`: (start, end, entry), the
+    /// longest hyphen-joined spelling first (`HRS-AKI` over `HRS`).
+    fn matches(&self, text: &str) -> Vec<(usize, usize, &'a Entry)> {
+        let mut out = Vec::new();
+        for run in hyphen_runs(text) {
+            let mut i = 0;
+            while i < run.len() {
+                let found = (i + 1..=run.len()).rev().find_map(|j| {
+                    let (s, last) = (run[i].0, run[j - 1]);
+                    let end = last.0 + last.1.len();
+                    self.get(&text[s..end]).map(|e| (j, s, end, e))
+                });
+                match found {
+                    Some((j, s, end, e)) => {
+                        out.push((s, end, e));
+                        i = j;
+                    }
+                    None => i += 1,
+                }
             }
         }
         out
     }
 
-    /// Where the glossary's abbreviations stand in `text`: (start, end,
-    /// entry), with no two overlapping (the longest wins).
-    fn matches<'a>(&'a self, text: &str) -> Vec<(usize, usize, &'a Entry)> {
-        let mut all: Vec<(usize, usize, &Entry)> = Vec::new();
-        for e in self.entries.iter().filter(|e| e.status != Status::Rejected) {
-            for s in e.spellings().filter(|s| e.kind == Kind::Abbr || looks_like_abbr(s)) {
-                for (start, _) in text.match_indices(s) {
-                    if let Some(end) = whole_word(text, start, start + s.len()) {
-                        all.push((start, end, e));
-                    }
+    /// See [`Glossary::abbreviations_in`].
+    pub fn abbreviations_in<S: AsRef<str>>(&self, texts: &[S]) -> Vec<&'a Entry> {
+        let mut out: Vec<&'a Entry> = Vec::new();
+        for text in texts {
+            for (_, _, e) in self.matches(text.as_ref()) {
+                if !out.iter().any(|o| std::ptr::eq(*o, e)) {
+                    out.push(e);
                 }
             }
         }
-        all.sort_by_key(|(start, end, _)| std::cmp::Reverse(end - start));
-        let mut kept: Vec<(usize, usize, &Entry)> = Vec::new();
-        for m in all {
-            if !kept.iter().any(|k| m.0 < k.1 && k.0 < m.1) {
-                kept.push(m);
+        out
+    }
+
+    /// See [`Glossary::unknown_in`].
+    pub fn unknown_in(&self, text: &str) -> Vec<String> {
+        let kept = self.matches(text);
+        let mut out: Vec<String> = Vec::new();
+        for run in hyphen_runs(text) {
+            for (s, word) in run {
+                let covered = kept.iter().any(|k| k.0 <= s && s + word.len() <= k.1);
+                if looks_like_abbr(word)
+                    && !covered
+                    && !self.plain.contains(word)
+                    && !out.iter().any(|o| o == word)
+                {
+                    out.push(word.to_string());
+                }
             }
         }
-        kept
+        out
+    }
+}
+
+impl Glossary {
+    /// A [`Finder`] over this glossary; rejected entries are left out.
+    pub fn finder(&self) -> Finder<'_> {
+        let mut spellings = std::collections::HashMap::new();
+        for e in self.entries.iter().filter(|e| e.status != Status::Rejected) {
+            for s in e.spellings().filter(|s| e.kind == Kind::Abbr || looks_like_abbr(s)) {
+                spellings.entry(s).or_insert(e);
+            }
+        }
+        Finder { spellings, plain: self.plain.iter().map(String::as_str).collect() }
+    }
+
+    /// The abbreviations written in `texts`, each once, in the order they
+    /// first appear: what a lesson step's "اختصارات" chip lists. A longer
+    /// spelling wins over the shorter ones inside it (`HRS-AKI` over `HRS`).
+    /// Drug names count only when written like an abbreviation (`UDCA`).
+    pub fn abbreviations_in<S: AsRef<str>>(&self, texts: &[S]) -> Vec<&Entry> {
+        self.finder().abbreviations_in(texts)
     }
 
     /// Words in `text` that look like abbreviations (two or more capitals)
@@ -176,25 +241,7 @@ impl Glossary {
     /// check reports them, so every abbreviation a step shows can be
     /// explained.
     pub fn unknown_in(&self, text: &str) -> Vec<String> {
-        let kept = self.matches(text);
-        let mut out = Vec::new();
-        let mut start = None;
-        for (i, c) in text.char_indices().chain(std::iter::once((text.len(), ' '))) {
-            match (word_char(c), start) {
-                (true, None) => start = Some(i),
-                (false, Some(s)) => {
-                    let word = &text[s..i];
-                    let covered = kept.iter().any(|k| k.0 <= s && i <= k.1);
-                    let plain = self.plain.iter().any(|p| p == word);
-                    if looks_like_abbr(word) && !covered && !plain && !out.iter().any(|o| o == word) {
-                        out.push(word.to_string());
-                    }
-                    start = None;
-                }
-                _ => {}
-            }
-        }
-        out
+        self.finder().unknown_in(text)
     }
 }
 

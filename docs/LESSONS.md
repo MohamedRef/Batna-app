@@ -59,7 +59,8 @@ The model to copy is `content/lessons/hb/L01.yaml`.
     the expansion in English, likeliest meaning first, then "also …"), or,
     when the word isn't an abbreviation (emphasis like `NOT`, a Roman
     numeral, a mnemonic's letters, a trial name), add it to `plain:` at the
-    end of the glossary.
+    end of the glossary. The same entries fill the per-course «قاموس
+    الاختصارات» (Lessons screen, More), with the lessons that use each one.
 
 ## File shape
 

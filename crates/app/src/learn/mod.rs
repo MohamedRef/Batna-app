@@ -328,6 +328,9 @@ fn LessonList() -> Element {
                 p { class: "page-sub", span { class: "ls-nowrap", {tx::done_of(done, total)} } }
             }
         }
+        if total > 0 {
+            div { class: "ls-tools", crate::abbrdict::OpenButton {} }
+        }
         if total == 0 && focus::current().is_none() {
             p { class: "note", {tx::NONE_YET} }
         } else if total > 0 {

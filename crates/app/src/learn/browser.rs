@@ -98,7 +98,24 @@ fn export_screen_fixtures_learn() {
             "question": step.body.is_question(),
         }));
     }
+    dictionary(&dir, &mut manifest);
     std::fs::write(dir.join("manifest.json"), serde_json::to_vec_pretty(&manifest).unwrap()).unwrap();
+}
+
+/// The abbreviations dictionary (abbrdict/mod.rs) at the hepatology course:
+/// a page, not a lesson, so the browser job checks only the shared layout
+/// rules for it.
+fn dictionary(dir: &std::path::Path, manifest: &mut Vec<serde_json::Value>) {
+    fn page() -> Element {
+        use_hook(|| *crate::abbrdict::COURSE.write() = Some("hb".into()));
+        rsx! {
+            Shell { screen: Screen::Learn, focus: false, crate::abbrdict::Dictionary {} }
+        }
+    }
+    let mut dom = VirtualDom::new(page);
+    dom.rebuild_in_place();
+    write_page(dir, "abbr-dictionary.html", &dom);
+    manifest.push(serde_json::json!({ "file": "abbr-dictionary.html", "screen": "abbr-dictionary", "phase": "dictionary" }));
 }
 
 /// The sort step part-way through and after Check, on the step with the

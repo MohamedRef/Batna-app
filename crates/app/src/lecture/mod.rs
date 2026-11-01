@@ -139,6 +139,9 @@ pub fn LecturePage(id: String) -> Element {
     if id == crate::courses::MAP {
         return rsx! { crate::courses::Map {} };
     }
+    if id == crate::abbrdict::PAGE {
+        return rsx! { crate::abbrdict::Dictionary {} };
+    }
     let ui = use_context::<Ui>();
     let lib = Library::get();
     let review = use_review();

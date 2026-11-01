@@ -1,0 +1,613 @@
+schema: batna.lesson/v1
+lecture: res.L08
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L08.lesson1
+    title: "مسائل الـ rates: البسط مين والمقام مين؟"
+    hook: "٤٠ عيانة سكر في يناير، ٢٠ جداد، ٥ ماتوا و٥ سافروا. احسب ٤ rates من غير ما تتلخبط."
+    minutes: 8
+    pages: [2, 53]
+    topics: [rates]
+    goals:
+      - "تفرّق بين incidence و attack rate و point و period prevalence"
+      - "تختار البسط والمقام الصح في كل rate"
+      - "تحل مسألة الـ DM خطوة بخطوة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 4
+        quote: "The no. of persons developing a disease (new cases) in a specific time &locality"
+        title: "Incidence: الحالات الجديدة بس"
+        text: |
+          ==Incidence rate== = عدد اللي **جالهم المرض جديد** (new cases) في وقت ومكان معيّنين ÷ **population at risk** × 1000.
+
+          الكلمة المهمة في المقام: **at risk**. اللي عنده المرض أصلًا مش ممكن «يجيله» تاني، فبيطلع من المقام.
+
+          و ==attack rate== نوع من الـ incidence، بنستخدمه لما فترة الخطر **محدودة** (وباء، ولادة) أو الخطر **مقصور على سن معيّن**.
+      - kind: table
+        page: 8
+        quote: "The no. of existing cases(old +new)of a specified disease during a given period of time"
+        title: "Point ضد period prevalence"
+        columns: ["", "Point", "Period"]
+        rows:
+          - ["Numerator", "Old + new at one moment", "Old + new during the period"]
+          - ["Divide by", "Population at that point", "Population during the period"]
+        hide: [[0, 1], [0, 2]]
+      - kind: figure
+        page: 9
+        quote: "20 females developed Diabetes, 5 died and 5 migrated out of the country"
+        title: "مسألة الـ DM على خط الزمن"
+        alt: "Timeline of 2010. On 1 January, 1000 women are screened and 40 are diabetic, leaving 960 at risk. During the year, 20 new diabetics appear, 5 diabetics die and 5 migrate. On 31 December, 50 diabetics remain out of 990 women."
+        caption: "يناير: **40 من 1000**. خلال السنة: **+20 جداد**، و**-5 ماتوا**، و**-5 سافروا**. ديسمبر: **50 من 990**."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R08t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <path d="M20 110H312" class="fg-arrow" marker-end="url(#R08t)"/>
+            <text x="20" y="132" class="t-sm t-mut">1 Jan</text>
+            <text x="310" y="132" text-anchor="end" class="t-sm t-mut">31 Dec</text>
+            <rect x="10" y="20" width="100" height="64" rx="6" class="fg-acc"/>
+            <text x="60" y="42" text-anchor="middle" class="t-sm t-b">40 diabetic</text>
+            <text x="60" y="60" text-anchor="middle" class="t-sm">of 1000</text>
+            <text x="60" y="76" text-anchor="middle" class="t-sm t-mut">960 at risk</text>
+            <rect x="120" y="20" width="90" height="64" rx="6" class="fg-thin"/>
+            <text x="165" y="42" text-anchor="middle" class="t-sm t-good t-b">+20 new</text>
+            <text x="165" y="60" text-anchor="middle" class="t-sm t-bad">-5 died</text>
+            <text x="165" y="76" text-anchor="middle" class="t-sm t-bad">-5 migrated</text>
+            <rect x="220" y="20" width="100" height="64" rx="6" class="fg-good"/>
+            <text x="270" y="42" text-anchor="middle" class="t-sm t-b">50 diabetic</text>
+            <text x="270" y="60" text-anchor="middle" class="t-sm">of 990</text>
+            <rect x="10" y="150" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="85" y="171" text-anchor="middle" class="t-sm">Point prev Jan: 40/1000</text>
+            <rect x="170" y="150" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="245" y="171" text-anchor="middle" class="t-sm">Incidence: 20/960</text>
+            <rect x="10" y="190" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="85" y="211" text-anchor="middle" class="t-sm">Point prev Dec: 50/990</text>
+            <rect x="170" y="190" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="245" y="211" text-anchor="middle" class="t-sm">Period prev: 60/1000</text>
+          </svg>
+      - kind: case
+        page: 9
+        quote: "Point prevalence of DM on the 1st of January 2010"
+        stem: "أول يناير 2010: اتعمل screening لـ 1000 ست فوق الأربعين، و 40 طلعوا عندهم السكر. خلال السنة: 20 جالهم السكر جديد، و 5 ماتوا، و 5 سافروا (اعتبرهم من الستات اللي عندهم سكر)."
+        steps:
+          - question: "Point prevalence on 1 January?"
+            options: ["40 per 1000", "20 per 1000", "60 per 1000"]
+            answer: 0
+            why: "40 حالة موجودة ÷ 1000 × 1000."
+          - question: "Incidence during 2010?"
+            options: ["20/960 x 1000 = 20.8", "20/1000 x 1000 = 20", "60/1000 x 1000 = 60"]
+            answer: 0
+            why: "المقام **960** بس، لأن الـ 40 اللي عندهم سكر مش at risk."
+          - question: "Point prevalence on 31 December?"
+            options: ["50/990 x 1000 = 50.5", "60/1000 x 1000 = 60", "50/1000 x 1000 = 50"]
+            answer: 0
+            why: "الحالات: 40 + 20 - 5 - 5 = 50. والستات: 1000 - 10 = 990."
+          - question: "Period prevalence in 2010?"
+            options: ["60/1000 x 1000 = 60", "50/990 x 1000 = 50.5", "20/960 x 1000 = 20.8"]
+            answer: 0
+            why: "كل حالة كانت موجودة في أي وقت في السنة: القديم + الجديد = 60."
+      - kind: aside
+        tone: trap
+        page: 9
+        quote: "Period prevalence in the year 2010"
+        text: |
+          المسألة مش محلولة على الشريحة، فده حلّنا بافتراض إن اللي ماتوا وسافروا كانوا من الستات اللي عندهم سكر.
+
+          لو الامتحان قال إنهم **مش** diabetic، الحالات في ديسمبر = 60 من 990. اقرا المسألة كويس واكتب افتراضك جنب الحل؛ ده بيجيب الدرجة حتى لو المصحح فهمها بشكل تاني.
+
+          وفي الـ **period prevalence** بعض الكتب بتقسم على **mid-period population**. لو المسألة ادّتك الرقم ده، استخدمه.
+      - kind: check
+        page: 24
+        quote: "The prevalence of this disease on the first of January is given by"
+        question: "City of 250,000; on 1 January 10,000 have incurable disease X; 1,000 new cases and 400 deaths from it during the year. Prevalence on 1 January?"
+        options: ["10,000/250,000", "1,000/250,000", "400/250,000", "600/250,000"]
+        answer: 0
+        why:
+          - "صح: الـ point prevalence = كل الحالات الموجودة يوم 1 يناير."
+          - "دي الحالات الجديدة، بسط الـ incidence."
+          - "دي الوفيات من المرض."
+          - "ده الفرق بين الجداد والوفيات؛ ملوش معنى هنا."
+      - kind: check
+        page: 25
+        quote: "developed puerperal sepsis during their puerperium. Calculate a suitable morbidity rate"
+        question: "2000 deliveries; 100 develop puerperal sepsis. Which morbidity rate suits?"
+        options: ["Incidence rate", "Point prevalence rate", "Period prevalence rate", "None of the above"]
+        answer: 3
+        why:
+          - "قريب، بس إجابة الشريحة d، لأن الاسم الأدق attack rate."
+          - "دي حالات جديدة، مش موجودة في لحظة."
+          - "الـ period prevalence فيها قديم + جديد."
+          - "صح: الخطر محدود بالـ puerperium، فده **attack rate** = 100/2000 = 5%، ومش في الاختيارات."
+      - kind: check
+        page: 53
+        quote: "Which of the following is the best estimate of the annual incidence of hepatitis C infection"
+        question: "10,000 IV drug users, 1,000 already have HCV. In one year 100 infected die and 100 new users get HCV. Annual incidence?"
+        options: ["100/9,000", "100/10,000", "1,100/10,000", "100/9,800"]
+        answer: 0
+        why:
+          - "صح: new cases ÷ at risk = 100 ÷ (10,000 - 1,000)."
+          - "الـ 1,000 المصابين مش at risk، يطلعوا من المقام."
+          - "ده خلط بين القديم والجديد."
+          - "الوفيات كانت من المصابين أصلًا، ملهاش دعوة بالـ at risk."
+      - kind: mnemonic
+        page: 26
+        quote: "There were no new cases of Ebola virus in the United States"
+        word: "NO"
+        parts:
+          - { key: "N", text: "New cases بس = incidence. «مفيش new cases للـ Ebola» = incidence صفر." }
+          - { key: "O", text: "Old + new = prevalence: point لو لحظة، period لو فترة." }
+        hook: "لو السؤال قال **new**، يبقى incidence. لو قال **existing** أو **current**، يبقى prevalence."
+      - kind: try
+        items: [res.L08.003, res.L08.004, res.L08.008]
+    recap:
+      - "Incidence = new cases ÷ population **at risk** (شيل اللي عندهم المرض من المقام)."
+      - "Attack rate = incidence لفترة خطر محدودة، زي الـ puerperium أو وباء."
+      - "Point prevalence = old + new في لحظة. Period prevalence = old + new خلال فترة."
+      - "مسألة الـ DM: 40/1000، 20/960، 50/990، 60/1000."
+    practice: [res.L08.001, res.L08.002, res.L08.003, res.L08.004, res.L08.005, res.L08.006, res.L08.007, res.L08.008]
+  # ------------------------------------------------------------------
+  - id: res.L08.lesson2
+    title: "الـ 2x2 table: prevalence و odds ratio"
+    hook: "نفس الجدول بأربع خانات، بس الحسبة بتتغير حسب الدراسة اتعملت إزاي."
+    minutes: 8
+    pages: [10, 56]
+    topics: [measures]
+    goals:
+      - "تحسب الـ prevalence من cross-sectional"
+      - "تحسب الـ exposure rate والـ odds ratio من case-control"
+      - "تفسّر الـ OR أكبر من 1 أو يساوي 1 أو أقل"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 10
+        quote: "Case study Case Series Study Correlation Study Cross Section Survey"
+        title: "خريطة الدراسات"
+        text: |
+          - **Observational**:
+            - **Descriptive**: case study، case series، correlation، و **cross-section survey**.
+            - **Analytic**: ==cohort== و ==case-control==.
+          - **Intervention**: preventive trials و curative trials.
+
+          وكل دراسة ليها **مقياس**: الـ cross-sectional بيدّي **prevalence**، والـ case-control بيدّي **odds ratio**، والـ cohort بيدّي **relative risk**.
+      - kind: figure
+        page: 15
+        quote: "Disease Status Yes No Exposure"
+        title: "الجدول اللي هتشوفه في كل مسألة"
+        alt: "Two by two table. Rows: exposed and not exposed. Columns: disease yes and disease no. Cells: a is exposed with disease, b is exposed without disease, c is unexposed with disease, d is unexposed without disease. Odds ratio equals a times d over b times c. Relative risk equals a over a plus b, divided by c over c plus d."
+        caption: "**a** و **d** على قطر، و **b** و **c** على القطر التاني. الـ **OR = ad/bc**: ضرب القطرين."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <text x="155" y="20" text-anchor="middle" class="t-sm t-b">Disease +</text>
+            <text x="255" y="20" text-anchor="middle" class="t-sm t-b">Disease -</text>
+            <text x="50" y="62" text-anchor="middle" class="t-sm t-b">Exposed</text>
+            <text x="50" y="132" text-anchor="middle" class="t-sm t-b">Not exposed</text>
+            <rect x="105" y="30" width="100" height="60" rx="6" class="fg-good"/>
+            <text x="155" y="68" text-anchor="middle" class="t-lg t-b">a</text>
+            <rect x="205" y="30" width="100" height="60" rx="6" class="fg-thin"/>
+            <text x="255" y="68" text-anchor="middle" class="t-lg t-b">b</text>
+            <rect x="105" y="100" width="100" height="60" rx="6" class="fg-thin"/>
+            <text x="155" y="138" text-anchor="middle" class="t-lg t-b">c</text>
+            <rect x="205" y="100" width="100" height="60" rx="6" class="fg-good"/>
+            <text x="255" y="138" text-anchor="middle" class="t-lg t-b">d</text>
+            <path d="M140 50L270 145" class="fg-arrow-acc"/>
+            <text x="165" y="192" text-anchor="middle" class="t-sm t-acc t-b">OR = ad / bc</text>
+            <text x="165" y="214" text-anchor="middle" class="t-sm">RR = [a/(a+b)] / [c/(c+d)]</text>
+            <text x="165" y="234" text-anchor="middle" class="t-sm t-mut">Prevalence = (a+c) / total</text>
+          </svg>
+      - kind: case
+        page: 12
+        quote: "Find out different prevalence rates"
+        stem: "Cross-sectional: 200 واحد. 80 smokers منهم 60 عندهم CHD. و 120 non-smokers منهم 40 عندهم CHD."
+        steps:
+          - question: "Prevalence of CHD among smokers?"
+            options: ["75%", "60%", "30%"]
+            answer: 0
+            why: "a/(a+b) = 60/80 = 75%."
+          - question: "Among non-smokers, and overall?"
+            options: ["33.3% and 50%", "40% and 50%", "33.3% and 40%"]
+            answer: 0
+            why: "40/120 = 33.3%. والـ overall = 100/200 = 50%. وانتشار التدخين نفسه = 80/200 = 40%."
+          - question: "Prevalence ratio, smokers vs non-smokers?"
+            options: ["2.25", "6", "1.5"]
+            answer: 0
+            why: "75 ÷ 33.3 = 2.25. ده **prevalence** ratio مش RR، لأن الـ cross-sectional مفيهوش incidence."
+      - kind: explain
+        page: 16
+        quote: "OR = 1, the exposure has no relationship with the disease"
+        title: "تفسير الـ odds ratio"
+        text: |
+          - **OR > 1** (مثلًا x): الـ **cases** اتعرضوا للـ risk factor أكتر من الـ **controls** بـ x مرة.
+          - **OR = 1**: الـ exposure ==no relationship== بالمرض.
+          - **OR < 1**: الـ exposure **protective factor**.
+
+          خلي بالك من الصياغة: في الـ case-control بنقول «الـ cases **more exposed**»، مش «الـ exposed أكتر عرضة»؛ دي جملة الـ RR في الـ cohort.
+      - kind: case
+        page: 17
+        quote: "Find out exposure rate and odds ratio form above data"
+        stem: "Case-control للـ CHD: من 100 case، 60 بيدخنوا. ومن 100 control، 20 بيدخنوا."
+        steps:
+          - question: "Exposure rates?"
+            options: ["Cases 60%, controls 20%", "Cases 75%, controls 25%", "Cases 60%, controls 40%"]
+            answer: 0
+            why: "الـ exposure rate = المعرضين ÷ عدد الجروب. 60/100 و 20/100."
+          - question: "Odds ratio?"
+            options: ["6", "3", "2.25"]
+            answer: 0
+            why: "OR = ad/bc = (60 × 80) / (20 × 40) = 4800/800 = 6. والـ 3 ده غلطة شائعة: 60% ÷ 20%."
+      - kind: check
+        page: 56
+        quote: "What is the odds ratio that a patient diagnosed with pancreatic cancer is a current smoker"
+        question: "Pancreatic cancer cases: 50 smokers, 40 non-smokers. Controls: 60 smokers, 80 non-smokers. Odds ratio?"
+        options: ["(50/40)/(60/80)", "(50/90)/(60/140)", "(50/110)/(40/120)", "(50/60)/(40/80)"]
+        answer: 0
+        why:
+          - "صح: odds التدخين في الـ cases (50/40) ÷ odds في الـ controls (60/80) = 1.25/0.75 = 1.67."
+          - "دي نسب، مش odds."
+          - "دي risk حسب الـ exposure، ومينفعش في case-control."
+          - "قسمة خانات غلط."
+      - kind: aside
+        tone: trap
+        page: 56
+        quote: "Smoking Pancreatic cancer No pancreatic Total"
+        text: |
+          سؤال الـ pancreatic cancer والـ smoking: في الشريحة الأصلية الاختيارات **مطبوعة بالمقلوب**، من اليمين للشمال، فاختيار b شكله غلط.
+
+          اقراه صح: odds التدخين في الـ cases على odds التدخين في الـ controls، والناتج **1.67**، وده اللي عليه الدايرة الحمرا. لو شفت سؤال زيه في الامتحان، احسب بنفسك الأول وبعدين دوّر على الرقم.
+      - kind: check
+        page: 55
+        quote: "Which of the following measures of association is most likely to be reported by investigators"
+        question: "Mothers of babies with and without neural tube defects are asked about first-trimester acetaminophen. Which measure will be reported?"
+        options: ["Odds ratio", "Relative risk", "Prevalence", "Hazard ratio"]
+        answer: 0
+        why:
+          - "صح: الاختيار على أساس المرض = case-control = odds ratio."
+          - "الـ RR محتاج incidence، والـ case-control مايقدرش يدّيها."
+          - "الـ prevalence مش مقياس association."
+          - "الـ hazard ratio من survival analysis."
+      - kind: try
+        items: [res.L08.011, res.L08.013, res.L08.010]
+    recap:
+      - "Cross-sectional = prevalence و prevalence ratio. Case-control = odds ratio. Cohort = relative risk."
+      - "OR = ad/bc. الـ exposure rate = المعرضين ÷ الجروب."
+      - "OR > 1: الـ cases أكتر تعرّض بـ x مرة. = 1: مفيش علاقة. < 1: protective."
+      - "مسألة CHD: OR = 6. مسألة pancreas: OR = 1.67."
+    practice: [res.L08.009, res.L08.010, res.L08.011, res.L08.012, res.L08.013, res.L08.017, res.L08.019, res.L08.020]
+  # ------------------------------------------------------------------
+  - id: res.L08.lesson3
+    title: "RR والـ attributable risk، وصح ولا غلط"
+    hook: "الـ smokers جالهم lung cancer عشر أضعاف. طب كام في المية من سرطانهم سببه التدخين؟"
+    minutes: 8
+    pages: [18, 54]
+    topics: [measures, true-false]
+    goals:
+      - "تحسب الـ RR والـ AR والـ ARP من cohort"
+      - "تفرّق بين الـ ratio والـ difference"
+      - "تحل أسئلة صح وغلط المحاضرة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 21
+        quote: "Incidence among exposed"
+        title: "المعادلات"
+        text: |
+          في الـ cohort بنحسب incidence فعلًا، في الـ exposed (Ie) وفي الـ non-exposed (I0).
+
+          - الـ ==Relative risk==: **قسمة** الـ incidence among exposed على الـ incidence among non-exposed.
+          - الـ **Attributable risk**: **طرح** الاتنين من بعض؛ فرق مش نسبة.
+          - الـ ==Attributable risk percent==: الفرق ده مقسوم على الـ Ie، في 100. يعني نسبة المرض في الـ exposed اللي سببها الـ exposure.
+      - kind: figure
+        page: 23
+        quote: "Smoking Lung cancer Total"
+        title: "Smoking و lung cancer"
+        alt: "Bar chart. Incidence in smokers 100 per 1000; in non-smokers 10 per 1000. The ratio is a relative risk of 10. The difference, 90 per 1000, is the attributable risk, which is 90 percent of the smokers' risk."
+        caption: "**القسمة** = RR = 10. **الطرح** = AR = 90 في الألف. والـ AR ÷ Ie = **ARP = 90%**."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 200H300" class="fg-thin"/>
+            <rect x="70" y="30" width="70" height="170" rx="4" class="fg-bad"/>
+            <text x="105" y="22" text-anchor="middle" class="t-sm t-b">Ie = 100/1000</text>
+            <text x="105" y="220" text-anchor="middle" class="t-sm">Smokers 20/200</text>
+            <rect x="190" y="183" width="70" height="17" rx="4" class="fg-good"/>
+            <text x="225" y="175" text-anchor="middle" class="t-sm t-b">I0 = 10/1000</text>
+            <text x="225" y="220" text-anchor="middle" class="t-sm">Non-smokers 2/200</text>
+            <path d="M150 30H275M275 30V180" class="fg-arrow-acc"/>
+            <text x="282" y="100" class="t-sm t-acc t-b">AR</text>
+            <text x="282" y="116" class="t-sm t-acc">90</text>
+            <text x="165" y="238" text-anchor="middle" class="t-sm t-mut">RR = 100/10 = 10 · ARP = 90/100 = 90%</text>
+          </svg>
+      - kind: case
+        page: 36
+        quote: "village B had had 100 cases of diarrhea while village A had had 50 cases"
+        stem: "قرية A (مية حنفية): 1000 طفل تحت 5 سنين، 50 حالة إسهال (diarrhoea) في 4 أسابيع. قرية B (آبار مكشوفة): 1500 طفل، 100 حالة."
+        steps:
+          - question: "Relative risk, B vs A?"
+            options: ["1.33", "2", "1.5"]
+            answer: 0
+            why: "B = 100/1500 = 6.67%. A = 50/1000 = 5%. RR = 1.33. استخدم عدد الأطفال تحت 5، مش سكان القرية كلها."
+          - question: "Attributable risk percent?"
+            options: ["25%", "33%", "1.67%"]
+            answer: 0
+            why: "(6.67 - 5) ÷ 6.67 × 100 = 25%. ربع إسهال القرية B سببه الآبار."
+      - kind: check
+        page: 54
+        quote: "Which of the following is the best estimate of relative risk in patients with a high baseline plasma fibrinogen level"
+        question: "Diabetics followed 5 years: high fibrinogen 40 of 70 get ACS; normal fibrinogen 20 of 60. Relative risk?"
+        options: ["(40/70)/(20/60)", "(40/30)/(20/40)", "(40*40)/(20*30)", "(40/60)/(30/70)"]
+        answer: 0
+        why:
+          - "صح: incidence في الـ high ÷ incidence في الـ normal = 0.57/0.33 = 1.71."
+          - "ده odds ratio (a/b)/(c/d)."
+          - "ده برضه odds ratio = ad/bc."
+          - "مقامات غلط."
+      - kind: sort
+        page: 28
+        quote: "The odds ratio of one means that the exposure has no association with the disease (T)"
+        prompt: "صح ولا غلط؟"
+        bins: ["True", "False"]
+        cards:
+          - { text: "An odds ratio of one means no association", bin: 0 }
+          - { text: "A relative risk below one means a preventive factor", bin: 0 }
+          - { text: "RR above one means attributable risk above zero", bin: 0 }
+          - { text: "The odds ratio approximates the attributable risk", bin: 1 }
+          - { text: "Incidence can always be estimated from a case-control study", bin: 1 }
+          - { text: "An attributable risk of 10 means 10 times the risk", bin: 1 }
+        why: "الـ OR بيقرّب للـ **relative risk** مش الـ attributable. الـ case-control مفيهوش incidence. والـ «10 أضعاف» دي **RR**؛ الـ AR فرق."
+      - kind: aside
+        tone: exam
+        page: 32
+        quote: "The odds ratio is the only measure of association that can be measured from case control studies (T)"
+        text: |
+          من شرايح صح وغلط، احفظ الجمل دي زي ما هي:
+
+          - الـ **relative risk** مايتحسبش بالظبط من **case control study**: **F**.
+          - الـ role of chance لازم يتقيّم **دايمًا** قبل التفسير: «may or may not» = **F**.
+          - الـ case control studies سهلة وبتاخد وقت قصير: **T**.
+          - الـ **odds ratio** هو المقياس الوحيد من الـ case control: **T**.
+      - kind: mnemonic
+        page: 22
+        quote: "RR = 1, the exposure has no relationship with the disease"
+        word: "RD"
+        parts:
+          - { key: "R", text: "Relative risk = Ratio: قسمة. «كام ضعف؟»" }
+          - { key: "D", text: "Attributable risk = Difference: طرح. «زيادة قد إيه؟»" }
+        hook: "لو السؤال فيه «times» يبقى **R**atio. لو فيه «excess» أو «due to» يبقى **D**ifference."
+      - kind: try
+        items: [res.L08.015, res.L08.014, res.L08.016]
+    recap:
+      - "RR = Ie/I0. AR = Ie - I0. ARP = (Ie - I0)/Ie × 100."
+      - "Smoking و lung cancer: RR 10، AR 90 في الألف، ARP 90%."
+      - "الآبار: RR 1.33، ARP 25%. الـ fibrinogen: RR = (40/70)/(20/60)."
+      - "الـ OR بيقرّب للـ RR. الـ case-control مايدّيش incidence. الـ AR مش «أضعاف»."
+    practice: [res.L08.014, res.L08.015, res.L08.016, res.L08.018, res.L08.021, res.L08.022, res.L08.023, res.L08.024, res.L08.025, res.L08.026, res.L08.027, res.L08.028]
+  # ------------------------------------------------------------------
+  - id: res.L08.lesson4
+    title: "اعرف الـ design من القصة"
+    hook: "١٩ سؤال في المحاضرة بيقولولك «a) cross sectional... e) retrospective cohort». تعال نعمل خطة تحلهم كلهم."
+    minutes: 9
+    pages: [33, 51]
+    topics: [designs]
+    goals:
+      - "تعرف الـ design من نقطة البداية واتجاه الزمن"
+      - "تفرّق بين prospective و retrospective cohort"
+      - "تعرف الإجابات اللي محتاجة تاخد بالك منها"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 33
+        quote: "Solve the Following Problems"
+        title: "٣ أسئلة تحل بيهم أي problem"
+        alt: "Decision flow. First question: did the investigator assign the exposure? Yes, by lottery: randomized clinical trial. No: second question, where did the study start? From the disease, comparing cases and controls: case-control. Exposure and disease at the same time: cross-sectional. From the exposure: third question, are the outcomes in old records or followed from now? Old records: retrospective cohort. From now on: prospective cohort."
+        caption: "**١**: الباحث ادّى الـ exposure؟ **٢**: البداية من المرض ولا من الـ exposure ولا الاتنين مع بعض؟ **٣**: النتايج في سجلات قديمة ولا هنتابع من دلوقتي؟"
+        svg: |
+          <svg viewBox="0 0 330 310" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R08d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="65" y="6" width="200" height="30" rx="6" class="fg-ink"/>
+            <text x="165" y="26" text-anchor="middle" class="t-sm t-b">1. Exposure assigned?</text>
+            <path d="M120 36L60 60" class="fg-arrow" marker-end="url(#R08d)"/>
+            <path d="M210 36L240 60" class="fg-arrow" marker-end="url(#R08d)"/>
+            <rect x="5" y="62" width="110" height="34" rx="6" class="fg-acc"/>
+            <text x="60" y="78" text-anchor="middle" class="t-sm t-b">Yes, lottery</text>
+            <text x="60" y="92" text-anchor="middle" class="t-sm">RCT</text>
+            <rect x="170" y="62" width="150" height="34" rx="6" class="fg-ink"/>
+            <text x="245" y="84" text-anchor="middle" class="t-sm t-b">No: 2. Start from?</text>
+            <path d="M200 96L60 130M245 96L165 130M290 96L275 130" class="fg-arrow" marker-end="url(#R08d)"/>
+            <rect x="5" y="132" width="105" height="44" rx="6" class="fg-good"/>
+            <text x="57" y="150" text-anchor="middle" class="t-sm t-b">Disease</text>
+            <text x="57" y="168" text-anchor="middle" class="t-sm">Case-control</text>
+            <rect x="115" y="132" width="105" height="44" rx="6" class="fg-box"/>
+            <text x="167" y="150" text-anchor="middle" class="t-sm t-b">Both at once</text>
+            <text x="167" y="168" text-anchor="middle" class="t-sm">Cross-sectional</text>
+            <rect x="225" y="132" width="100" height="44" rx="6" class="fg-ink"/>
+            <text x="275" y="150" text-anchor="middle" class="t-sm t-b">Exposure</text>
+            <text x="275" y="168" text-anchor="middle" class="t-sm">3. Outcomes?</text>
+            <path d="M255 176L205 210M295 176L290 210" class="fg-arrow" marker-end="url(#R08d)"/>
+            <rect x="140" y="212" width="105" height="44" rx="6" class="fg-thin"/>
+            <text x="192" y="230" text-anchor="middle" class="t-sm t-b">Old records</text>
+            <text x="192" y="248" text-anchor="middle" class="t-sm">Retro cohort</text>
+            <rect x="250" y="212" width="75" height="44" rx="6" class="fg-good"/>
+            <text x="287" y="230" text-anchor="middle" class="t-sm t-b">From now</text>
+            <text x="287" y="248" text-anchor="middle" class="t-sm">Pro cohort</text>
+            <text x="165" y="290" text-anchor="middle" class="t-sm t-mut">Group data only? Correlation (ecologic)</text>
+          </svg>
+      - kind: sort
+        page: 38
+        quote: "In Alexandria Main University Hospital, all male patients were interviewed"
+        prompt: "صنّف كل قصة من المحاضرة:"
+        bins: ["Cross-sectional", "Case-control", "Prospective cohort", "Retrospective cohort"]
+        cards:
+          - { text: "All male hospital patients asked about smoking and BP measured at the same visit", bin: 0 }
+          - { text: "100 women with RA and 200 without, reviewed for oral contraceptive use", bin: 1 }
+          - { text: "1200 HIV-positive and HIV-negative people followed 3 years for toxoplasmosis", bin: 2 }
+          - { text: "Village health-worker records of the past 4 weeks: diarrhoea by water source", bin: 3 }
+          - { text: "Smoking recorded at antenatal visits, birth weight recorded later", bin: 2 }
+          - { text: "Pre-placement exam: smoking and hypertension among 200 new employees", bin: 0 }
+        why: "نفس الزيارة = **cross-sectional**. البداية من المرض = **case-control**. البداية من الـ exposure ومتابعة لقدّام = **prospective**. البداية من الـ exposure من سجلات قديمة = **retrospective**."
+      - kind: check
+        page: 37
+        quote: "After 5 years, participants had an examination to determine the development of macular degeneration"
+        question: "1232 people free of macular degeneration report lifetime smoking; after 5 years they are examined. Design?"
+        options: ["Prospective cohort", "Retrospective cohort", "Case control", "Cross sectional"]
+        answer: 0
+        why:
+          - "صح: ناس سليمة، اتقسموا على الـ exposure، واتتابعوا 5 سنين. RR = 9.1% ÷ 7.1% = 1.29."
+          - "التدخين اتسأل عنه من الماضي، بس المرض لسه هيتقاس قدّام."
+          - "مابدأناش من ناس عندها المرض."
+          - "فيه متابعة، فمش لحظة واحدة."
+      - kind: aside
+        tone: trap
+        page: 34
+        quote: "Follow up of a population of adults who were exposed and not exposed during childhood"
+        text: |
+          سؤال الـ **neck radiation**: البالغين اتعرّضوا في **الطفولة**، و«follow up» علشان الـ thyroid cancer. **مفتاح الشريحة: d، prospective cohort.**
+
+          كتب كتير بتعتبره **retrospective (historical) cohort** لأن الـ exposure حصل زمان. في امتحان القسم اختار إجابة الشريحة، **prospective**، لأن السؤال قال follow up.
+      - kind: aside
+        tone: trap
+        page: 50
+        quote: "they are observed over time on a standard set of measures to ascertain the potential effects of the toxin"
+        text: |
+          سؤال الـ **environmental toxin**: ناس اتعرضوا وبنتابعهم «over time on a standard set of measures». **مفتاح الشريحة: c، longitudinal.**
+
+          الـ prospective cohort معقول برضه، بس مفيش جروب **unexposed** للمقارنة، والسؤال بيقول «this type of study design is called»، وده الوصف الحرفي لـ **longitudinal**.
+      - kind: check
+        page: 46
+        quote: "She estimates the risk of neural tube defect in the general population is 1:1,000"
+        question: "First-trimester acetaminophen and neural tube defects (risk 1 in 1,000). Best design?"
+        options: ["Case-control study", "Cohort study", "Clinical trial", "Cross-sectional study"]
+        answer: 0
+        why:
+          - "صح: المرض **نادر**، فابدأ من الحالات."
+          - "عشان تلاقي 100 حالة محتاج 100,000 حامل."
+          - "مش أخلاقي تدّي حامل دوا مشكوك إنه teratogen."
+          - "الـ survey هيلاقي حالات قليلة جدًا."
+      - kind: check
+        page: 47
+        quote: "which of the following subjects are most likely to comprise the control group"
+        question: "Chemical waste and childhood ALL: who most likely forms the control group?"
+        options:
+          - "Outpatient children without ALL"
+          - "Exposed children without ALL"
+          - "Unexposed children without ALL"
+          - "Unexposed children with ALL"
+        answer: 0
+        why:
+          - "صح: الـ controls عيال **مالهمش المرض**، من نفس المصدر، ومن غير ما نعرف تعرّضهم وقت الاختيار."
+          - "لو اخترت على أساس الـ exposure هتبوّظ المقارنة."
+          - "نفس المشكلة: اختيار على أساس الـ exposure."
+          - "دول عندهم ALL، يعني cases."
+      - kind: aside
+        tone: tip
+        page: 44
+        quote: "The study of the effect of parental consanguinity on hereditary diseases in the offspring is best studied by"
+        text: |
+          قاعدة سريعة لسؤال «**best studied by**»:
+
+          - المرض **نادر** (hereditary diseases، neural tube defects، ALL): **case control**.
+          - الـ **exposure** نادر (radiation، وظيفة خطرة): **cohort**.
+          - عايز تثبت إن **علاج** شغّال: **RCT**.
+      - kind: try
+        items: [res.L08.029, res.L08.033, res.L08.036]
+    recap:
+      - "الباحث ادّى الـ exposure بقرعة = RCT. البداية من المرض = case-control. الاتنين في نفس الوقت = cross-sectional."
+      - "البداية من الـ exposure: سجلات قديمة = retrospective cohort، متابعة من دلوقتي = prospective cohort."
+      - "مرض نادر = case control. Exposure نادر = cohort."
+      - "انتبه: الـ neck radiation مفتاحه prospective، والـ toxin مفتاحه longitudinal."
+    practice: [res.L08.029, res.L08.030, res.L08.031, res.L08.032, res.L08.033, res.L08.034, res.L08.035, res.L08.036, res.L08.037, res.L08.038, res.L08.039, res.L08.040, res.L08.041, res.L08.042, res.L08.043, res.L08.044, res.L08.045, res.L08.046, res.L08.047]
+  # ------------------------------------------------------------------
+  - id: res.L08.lesson5
+    title: "Bias ولا confounding؟"
+    hook: "الكحول بيعمل lung cancer؟ OR = 2.5... لحد ما قسّمنا الناس smokers و non-smokers والعلاقة اختفت."
+    minutes: 7
+    pages: [57, 62]
+    topics: [bias]
+    goals:
+      - "تعرّف الـ bias كـ systematic error"
+      - "تعرف الـ confounding لما العلاقة تختفي بعد الـ stratification"
+      - "تفرّق بين observer bias و recall bias"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 57
+        quote: "Any systematic error in the design, conduct, or analysis of a study"
+        title: "Bias: غلطة systematic"
+        text: |
+          ==Bias== = أي **systematic error** في الـ design أو الـ conduct أو الـ analysis، بيطلّع تقدير **غلط** لأثر الـ exposure.
+
+          الفرق عن الصدفة (random error): الـ bias **بيزق النتيجة في اتجاه واحد**، وكبر العيّنة **مش** بيعالجه.
+      - kind: figure
+        page: 60
+        quote: "Subsequent statistical analysis does not reveal any association between alcohol consumption and lung cancer within either group"
+        title: "مثلث الـ confounding"
+        alt: "Triangle. Alcohol at the left, lung cancer at the right, smoking at the top. Smoking is linked to alcohol (drinkers smoke more) and causes lung cancer. The apparent arrow from alcohol to lung cancer is dashed: it disappears within smokers and within non-smokers."
+        caption: "التدخين مرتبط بالكحول **و** بيعمل lung cancer. لما بنقسم الناس حسب التدخين (**stratification**)، السهم المتقطع بيختفي."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R08c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="115" y="10" width="100" height="40" rx="8" class="fg-bad"/>
+            <text x="165" y="35" text-anchor="middle" class="t-sm t-b">Smoking</text>
+            <rect x="5" y="160" width="100" height="40" rx="8" class="fg-box"/>
+            <text x="55" y="185" text-anchor="middle" class="t-sm t-b">Alcohol</text>
+            <rect x="225" y="160" width="100" height="40" rx="8" class="fg-box"/>
+            <text x="275" y="185" text-anchor="middle" class="t-sm t-b">Lung cancer</text>
+            <path d="M135 50L70 156" class="fg-arrow"/>
+            <text x="70" y="100" class="t-sm t-mut">linked</text>
+            <path d="M195 50L260 156" class="fg-arrow" marker-end="url(#R08c)"/>
+            <text x="238" y="100" class="t-sm t-mut">causes</text>
+            <path d="M108 180H220" class="fg-dot-acc" marker-end="url(#R08c)"/>
+            <text x="165" y="172" text-anchor="middle" class="t-sm t-acc t-b">OR 2.5?</text>
+            <text x="165" y="222" text-anchor="middle" class="t-sm t-acc">vanishes within each smoking group</text>
+          </svg>
+      - kind: check
+        page: 60
+        quote: "The researchers then divide the study subjects into two groups: smokers and non-smokers"
+        question: "Alcohol and lung cancer: OR 2.5 overall, but no association within smokers or within non-smokers. This is:"
+        options: ["Confounding", "Recall bias", "Observer bias", "Non-response bias"]
+        answer: 0
+        why:
+          - "صح: التدخين **confounder**، مرتبط بالكحول وبيعمل lung cancer. الـ stratification كشفته."
+          - "الـ recall bias مش هيختفي لما نقسم حسب التدخين."
+          - "مفيش حاجة عن طريقة قياس المرض."
+          - "مفيش حاجة عن الناس اللي رفضت تشارك."
+      - kind: check
+        page: 59
+        quote: "Randomization of study subjects in a clinical trial is most helpful for controlling"
+        question: "Randomization in a clinical trial is most helpful for controlling:"
+        options: ["Confounding", "Recall bias", "Non-compliance", "Placebo effect"]
+        answer: 0
+        why:
+          - "صح: القرعة بتوزّع الـ confounders المعروفة والمجهولة بالتساوي."
+          - "الـ recall bias مشكلة case-control."
+          - "القرعة مابتخليش حد ياخد دواه."
+          - "الـ placebo effect بيتحكم فيه placebo group و blinding."
+      - kind: match
+        page: 61
+        quote: "The first group of pathologists is aware of the race of the patient"
+        prompt: "وصّل كل موقف بالـ bias بتاعه:"
+        pairs:
+          - ["Pathologists who know the patient's race read the same biopsy differently", "Observer bias"]
+          - ["Mothers of malformed babies remember every pill they took", "Recall bias"]
+          - ["Smoking explains the alcohol and lung cancer link", "Confounding"]
+          - ["Patients and staff unaware who gets the drug", "Prevents observer and subject bias"]
+        why: "**Observer**: اللي بيقيس عارف حاجة تأثر على حكمه. **Recall**: الـ cases بيفتكروا أكتر. **Confounding**: عامل تالت. والـ **double blind** بيمنع الـ observer والـ subject bias."
+      - kind: aside
+        tone: analogy
+        page: 62
+        quote: "Which of the following biases is of major concern when interpreting the study results"
+        text: |
+          أم ولدت طفل عنده neural tube defect بتقعد تسأل نفسها شهور: «أنا خدت إيه؟ البندول؟ المضاد الحيوي؟» فلما تسألها هتفتكر **كل حباية**.
+
+          والأم اللي طفلها سليم مش هتفتكر إنها خدت بندول مرة في الشهر التالت. ده الـ ==recall bias==، وهو **أكبر مشكلة في الـ case-control**، حتى بعد الـ adjusting للـ confounders، واللي فيها الـ OR كان 1.3 بس. خليه في بالك لما تفسّر الـ study results.
+      - kind: try
+        items: [res.L08.051, res.L08.052, res.L08.053]
+    recap:
+      - "Bias = systematic error. كبر العيّنة مابيعالجوش."
+      - "Confounding: العلاقة بتختفي جوّه كل طبقة بعد الـ stratification."
+      - "Randomization بيتحكم في الـ confounding. Double blind بيمنع observer و subject bias."
+      - "Recall bias = المشكلة الكبيرة في case-control. Observer bias = اللي بيقيس عارف."
+    practice: [res.L08.048, res.L08.049, res.L08.050, res.L08.051, res.L08.052, res.L08.053]

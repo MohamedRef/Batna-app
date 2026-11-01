@@ -27,12 +27,17 @@ pub const REFERENCES: Tool =
     Tool { label: i18n::refs::TITLE, icon: icons::references, open: crate::lecture::open_references };
 pub const COURSES: Tool =
     Tool { label: i18n::courses::TITLE, icon: icons::courses, open: crate::courses::open_map };
+pub const ABBREVIATIONS: Tool = Tool {
+    label: i18n::abbr::DICT_TITLE,
+    icon: icons::abbreviations,
+    open: |ui| crate::abbrdict::open(ui, None),
+};
 pub const ADD_CARD: Tool =
     Tool { label: i18n::refs::ADD_CARD, icon: icons::add_card, open: |_| crate::own::open_new() };
 
 /// The tools the rail and sidebar list under the screens from 600dp (More
 /// holds them on phones).
-pub const TOOLS: [Tool; 4] = [COURSES, REFERENCES, ADD_CARD, CALCULATORS];
+pub const TOOLS: [Tool; 5] = [COURSES, REFERENCES, ABBREVIATIONS, ADD_CARD, CALCULATORS];
 
 /// One row in More.
 #[derive(Clone, Copy)]
@@ -70,6 +75,7 @@ const GROUPS: [(&str, &[Row]); 2] = [
         &[
             Row::Tool(COURSES),
             Row::Tool(REFERENCES),
+            Row::Tool(ABBREVIATIONS),
             Row::Tool(ADD_CARD),
             Row::Screen(Screen::Stats),
             Row::Settings,

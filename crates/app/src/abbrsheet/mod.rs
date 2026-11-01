@@ -59,6 +59,7 @@ pub fn AbbrChip(texts: Vec<String>) -> Element {
 /// The sheet, drawn once by the shell; empty while none is open.
 #[component]
 pub fn AbbrSheet() -> Element {
+    let ui = use_context::<crate::Ui>();
     let Some(terms) = OPEN.read().clone() else {
         return rsx! {};
     };
@@ -84,6 +85,14 @@ pub fn AbbrSheet() -> Element {
             }
             if unverified {
                 p { class: "ab-note muted small", {tx::UNVERIFIED} }
+            }
+            button {
+                class: "btn btn-tonal ab-dict",
+                onclick: move |_| {
+                    let course = crate::learn::OPEN.peek().as_deref().map(|id| batna_core::program::course_of(id).to_string());
+                    crate::abbrdict::open(ui, course);
+                },
+                {tx::DICT_OPEN}
             }
         }
     }

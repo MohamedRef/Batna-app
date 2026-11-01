@@ -197,6 +197,17 @@ jobs:
           BT="$(ls -d "$ANDROID_SDK_ROOT"/build-tools/* | sort -V | tail -1)"
           echo "$BT" >> "$GITHUB_PATH"
 
+      - name: Content pack (built in and on the feed)
+        # Built before the APK so the APK knows the digest of the content it
+        # has built in (BATNA_BUILTIN_CONTENT): a phone that installs it
+        # doesn't download that same content again from this feed. Content
+        # reaches the phone without an install, so the same checks as CI
+        # (schema, sources, approvals) run before the pack is built (#332).
+        run: |
+          cargo run -q -p batna-tools -- validate
+          cargo run -q -p batna-tools -- packs build --out dist/packs
+          echo "BATNA_BUILTIN_CONTENT=$(sha256sum dist/packs/batna-content.pack | cut -d' ' -f1)" >> "$GITHUB_ENV"
+
       - name: Build APK
         if: env.CONTENT_ONLY != 'true'
         working-directory: crates/app
@@ -264,11 +275,6 @@ jobs:
           curl -fsSL --retry 3 -o /tmp/previous-update.json \
             "https://github.com/$GITHUB_REPOSITORY/releases/download/batna-preview/update.json" \
             || rm -f /tmp/previous-update.json
-          # Content reaches the phone without an install now, so the same
-          # checks as CI (schema, sources, approvals) run before the pack
-          # is built (#332).
-          cargo run -q -p batna-tools -- validate
-          cargo run -q -p batna-tools -- packs build --out dist/packs
           # His records point at content ids: the new pack must keep every
           # id of the pack devices have now (docs/CONTENT-IDS.md), and the
           # job summary says what changed for them.

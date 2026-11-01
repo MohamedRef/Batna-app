@@ -2,6 +2,15 @@
 
 use super::*;
 
+/// Whether a feed pack with digest `sha` is exactly the content this app
+/// has built in: CI builds the pack before the APK and bakes its digest in
+/// as `BATNA_BUILTIN_CONTENT`. Only while no downloaded pack is in use, so a
+/// feed going back to this content still replaces a newer one. Adapted from
+/// kabar-app main: `crates/app/src/update/content.rs`.
+pub(super) fn built_in(builtin: Option<&str>, pack_in_use: bool, sha: &str) -> bool {
+    !pack_in_use && builtin.is_some_and(|b| b.trim().eq_ignore_ascii_case(sha))
+}
+
 impl Updater {
     pub(super) fn new(
         dir: PathBuf,
@@ -303,6 +312,15 @@ impl Updater {
                 return ContentCheck::Failed;
             }
         };
+        // Batna runs on its built-in content and the feed's pack is that same
+        // content (the build that made this app): nothing to download.
+        if built_in(
+            option_env!("BATNA_BUILTIN_CONTENT"),
+            pack_in_use(&self.dir, &self.info).is_some(),
+            &asset.sha256,
+        ) {
+            return ContentCheck::Current;
+        }
         if asset.size > MAX_PACK_BYTES {
             report!("content pack: {} bytes is too large", asset.size);
             return ContentCheck::Failed;

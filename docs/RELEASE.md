@@ -188,7 +188,8 @@ refused it, so it isn't fetched again until the app changes; a cut or
 mismatched download is not remembered and the next check tries again. A
 feed naming the pack in use downloads nothing, and one naming the last good
 pack takes it from disk. The preview workflow builds the pack before the APK and bakes its
-digest into the app (`BATNA_BUILTIN_CONTENT`), so a phone that has just
+digest into the app (`BATNA_BUILTIN_CONTENT`; `just apk` and `just bundle-mac` do
+the same through `just content-digest`), so a phone that has just
 installed that APK doesn't download the same content again. A pack that is opened three times in a row without
 Batna getting past its first screen is rejected for good (`content.rejected`)
 and the last settled, verified content pack is restored if compatible; otherwise the built-in content comes back (`crates/app/src/update/recovery.rs`). The last-good pack is saved only after a calm screen has run on it, never immediately after download. Backup files are content-addressed and the backup pointer is published last so interrupted writes preserve the older backup. The glossary is built into the app, so a glossary change is

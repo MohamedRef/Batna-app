@@ -13,7 +13,8 @@ data, no live API and no app launch.
 
 | Screen | States |
 |---|---|
-| Lesson player | The first step of each of the 13 step kinds in book order, opened at that step from a saved attempt (the way the app reopens a lesson), in Steps and in Pages: 26 files |
+| Lesson player | The first step of each of the 13 step kinds in book order, opened at that step from a saved attempt (the way the app reopens a lesson), in Steps and in Pages: 26 files; plus two mixed Arabic and English steps (Liver Cirrhosis, steps 6 and 9: "label: value" bullets, arrows, English full stops), whose screenshots show the reading order: 28 files |
+| Lesson figures | Every drawn SVG figure of every lesson on one page (`export_screen_fixtures_figures`), checked once at 384px |
 | Study | Setup; a running session on the first item of each kind the player shows (card, cloze, enumerate, essay, table, order); a card reopened by Undo; the summary: 9 files |
 
 The store is in memory and the review log is empty, so items are fresh.
@@ -29,7 +30,7 @@ The store is in memory and the review log is empty, so items are fresh.
 | Direction | Arabic RTL |
 
 Each file is loaded once and switched the way the app switches: the prefs
-stylesheet and `data-appearance` on `.app`. 35 files × 40 = 1,400 cases, about
+stylesheet and `data-appearance` on `.app`. 37 files × 40 = 1,480 cases, about
 20 seconds.
 
 ## Assertions
@@ -43,6 +44,7 @@ stylesheet and `data-appearance` on `.app`. 35 files × 40 = 1,400 cases, about
 | Back | A visible `data-back` target for Escape and Android Back while a lesson or a session runs |
 | Lesson | Exactly the saved step is shown, with its kind; the step meter's `progressbar` value; a visible way forward; an unanswered question offers Skip and keeps its gate note screen-reader only |
 | Study | The running item's kind and the session `progressbar` |
+| Figures | Every `<text>` label of every lesson figure stays inside its picture's `viewBox`: one past the edge is cut off on the phone |
 | Errors | Any browser page error fails the job |
 
 Calm, Larger, 384px screenshots in both schemes and `report.json` are

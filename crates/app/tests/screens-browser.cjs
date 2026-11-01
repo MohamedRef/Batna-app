@@ -129,6 +129,37 @@ async function screenChecks(page, item, name) {
   }
 }
 
+// Every lesson figure (learn/browser.rs `export_screen_fixtures_figures`):
+// each label inside its picture. A label past the viewBox edge is cut off on
+// the phone ("first decompensation: insidiou", 2026-11-01). The viewBox is
+// in user units, so one width shows every overflow.
+async function figureChecks(page, fixtures) {
+  await page.setViewportSize({ width: 384, height: 900 });
+  await page.goto(pathToFileURL(path.join(fixtures, 'figures', 'figures.html')).href);
+  await page.evaluate(() => document.fonts.ready);
+  const r = await page.evaluate(() => {
+    const out = [];
+    const figures = [...document.querySelectorAll('.ls-fig-svg')];
+    for (const fig of figures) {
+      const svg = fig.querySelector('svg');
+      const vb = svg.viewBox.baseVal;
+      const m = svg.getScreenCTM();
+      const a = new DOMPoint(vb.x, vb.y).matrixTransform(m);
+      const b = new DOMPoint(vb.x + vb.width, vb.y + vb.height).matrixTransform(m);
+      const [left, right, top, bottom] = [Math.min(a.x, b.x), Math.max(a.x, b.x), Math.min(a.y, b.y), Math.max(a.y, b.y)];
+      for (const t of svg.querySelectorAll('text')) {
+        const box = t.getBoundingClientRect();
+        if (!box.width) continue;
+        const px = Math.max(left - box.left, box.right - right, top - box.top, box.bottom - bottom);
+        if (px > 1) out.push(`${fig.dataset.at}: "${t.textContent.trim().slice(0, 50)}" runs ${Math.round(px)}px past the edge`);
+      }
+    }
+    return { figures: figures.length, out };
+  });
+  assert.deepEqual(r.out, [], 'figure labels cut off at the picture edge');
+  console.log(`Checked the labels of ${r.figures} lesson figures.`);
+}
+
 async function run() {
   const fixtures = path.resolve(process.argv[2]);
   const output = path.resolve(process.argv[3] || path.join(fixtures, 'results'));
@@ -205,6 +236,8 @@ async function run() {
         }
       }
     }
+    current = 'figures';
+    await figureChecks(page, fixtures);
     assert.deepEqual(errors, [], 'browser page errors');
     const stale = [...KNOWN.small, ...KNOWN.overflow, ...KNOWN.noHeading].filter(k => !seen.has(k));
     await fs.writeFile(path.join(output, 'report.json'),

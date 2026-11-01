@@ -903,3 +903,13 @@ fn a_feed_going_back_to_the_last_good_pack_reuses_it() {
     assert_eq!(fs::read(dir.join(PACK_FILE)).unwrap(), good);
     assert_eq!(load_pack_info(&dir).unwrap().build, 43);
 }
+
+#[test]
+fn the_feed_pack_of_the_running_build_is_not_downloaded() {
+    use super::service::built_in;
+    let sha = "ab".repeat(32);
+    assert!(built_in(Some(&sha), false, &sha.to_uppercase()), "the same content");
+    assert!(!built_in(Some(&sha), true, &sha), "a downloaded pack is in use: the feed may roll it back");
+    assert!(!built_in(Some(&"cd".repeat(32)), false, &sha), "other content");
+    assert!(!built_in(None, false, &sha), "a local build doesn't know its digest");
+}

@@ -507,6 +507,10 @@ mod ux_tests {
             assert!(rule(sel).contains("min-block-size: var(--target);"), "{sel}");
         }
         assert!(css.contains(".ls-chiplet { cursor: pointer; min-block-size: var(--target); }"));
+        // Short English terms stay on one line in prose, but must wrap inside
+        // a sort bin or card, or they spill out of it on a phone.
+        assert!(css.contains(".ls-bin-name .ls-nw { white-space: normal; }"));
+        assert!(css.contains(":is(.ls-tile, .ls-chiplet, .ls-chiplet-done) .ls-nw { white-space: normal; }"));
         assert!(css.contains(".ls-undo { min-block-size: var(--target); }"));
         assert!(
             css.contains(

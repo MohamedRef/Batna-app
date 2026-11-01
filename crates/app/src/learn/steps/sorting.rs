@@ -2,8 +2,12 @@
 
 use super::*;
 
-/// Sort cards into bins: tap a card, then its bin. Before Check a placed
-/// card goes back to the pool on a tap; after Check it is read-only.
+/// Long-press (finger) or drag (mouse) a card onto a bin (sortdrag.js).
+const SORT_DRAG_JS: &str = include_str!("../sortdrag.js");
+
+/// Sort cards into bins: drag a card onto its bin, or tap a card, then its
+/// bin. Before Check a placed card goes back to the pool on a tap, or drags
+/// to another bin; after Check it is read-only.
 #[component]
 pub(super) fn Sort(
     prompt: String,
@@ -14,6 +18,9 @@ pub(super) fn Sort(
     on_answer: EventHandler<bool>,
 ) -> Element {
     let n = cards.len();
+    use_hook(|| {
+        document::eval(SORT_DRAG_JS);
+    });
     let order = use_hook(|| shuffled(n, &seed));
     let (saved, save) = use_draft();
     let (put0, checked0) = match saved {
@@ -28,6 +35,9 @@ pub(super) fn Sort(
     let mut held = use_signal(|| None::<usize>);
     let mut checked = use_signal(|| checked0);
     let all_in = put.read().iter().all(Option::is_some);
+    let left = put.read().iter().filter(|b| b.is_none()).count();
+    // English bins read left to right, like the pool above them.
+    let ltr = bins.iter().all(|b| is_latin(b));
     let wrong = put.read().iter().enumerate().filter(|(i, b)| **b != Some(cards[*i].bin)).count();
     let key: Vec<usize> = cards.iter().map(|c| c.bin).collect();
     let mut set = move |c: usize, bin: Option<usize>| {
@@ -58,37 +68,51 @@ pub(super) fn Sort(
             p { class: "ls-kicker", {tx::SORT} }
             div { class: "ls-q", Rich { text: prompt } }
             if !all_in {
-                p { class: "muted small", {tx::SORT_HINT} }
+                div { class: "ls-sort-bar",
+                    p { class: "muted small", role: "status",
+                        {if held().is_some() { tx::SORT_PICKED } else { tx::SORT_HINT }}
+                    }
+                    span { class: "ls-order-count small", {tx::sort_left(left, n)} }
+                }
                 div { class: "ls-pool", dir: "ltr", lang: "en",
                     for &c in order.iter().filter(|c| put.read()[**c].is_none()) {
                         button {
                             key: "c{c}",
                             class: "ls-tile",
-                            draggable: "true",
+                            "data-card": "{c}",
                             "data-state": if held() == Some(c) { "picked" } else { "open" },
                             "aria-pressed": if held() == Some(c) { "true" } else { "false" },
-                            ondragstart: move |_| held.set(Some(c)),
                             onclick: move |_| held.set(if held() == Some(c) { None } else { Some(c) }),
                             Line { text: cards[c].text.clone() }
                         }
                     }
                 }
             }
-            div { class: "ls-bins", style: "--bins: {bins.len()}",
+            div {
+                class: "ls-bins",
+                dir: if ltr { "ltr" } else { "auto" },
+                lang: if ltr { "en" } else { "" },
                 for (b , name) in bins.iter().enumerate() {
+                    {
+                    let count = put.read().iter().filter(|p| **p == Some(b)).count();
+                    rsx! {
                     div {
                         key: "b{b}",
                         class: "ls-bin",
+                        "data-bin": "{b}",
                         "data-armed": if held().is_some() && !checked() { "yes" } else { "no" },
                         // The whole bin takes a held card, not only its title.
                         onclick: move |_| drop_in(b),
-                        ondragover: move |e| e.prevent_default(),
-                        ondrop: move |e| {
-                            e.prevent_default();
-                            drop_in(b);
-                        },
                         button { class: "ls-bin-head", disabled: held().is_none() || checked(), onclick: move |_| drop_in(b),
-                            Line { text: name.clone() }
+                            span { class: "ls-bin-name", Line { text: name.clone() } }
+                            if count > 0 {
+                                span { class: "ls-bin-count", aria_hidden: "true", "{count}" }
+                            }
+                        }
+                        if count == 0 {
+                            p { class: "ls-bin-empty small", dir: "rtl", lang: "ar", aria_hidden: "true",
+                                {if held().is_some() && !checked() { tx::SORT_DROP } else { tx::SORT_EMPTY }}
+                            }
                         }
                         ul { class: "ls-bin-cards",
                             for &c in order.iter().filter(|c| put.read()[**c] == Some(b)) {
@@ -99,6 +123,7 @@ pub(super) fn Sort(
                                     } else {
                                         button {
                                             class: "ls-chiplet",
+                                            "data-card": "{c}",
                                             aria_label: "{tx::REMOVE}: {cards[c].text}",
                                             onclick: move |e| {
                                                 // Back to the pool, without dropping a held card here.
@@ -115,6 +140,8 @@ pub(super) fn Sort(
                                 }
                             }
                         }
+                    }
+                    }
                     }
                 }
             }

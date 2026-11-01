@@ -29,6 +29,22 @@ fmt:
 validate:
     cargo run -q -p batna-tools -- validate
 
+# Authoring (docs/AUTHORING.md): the next free item and lesson ids of a lecture
+content-next-id lecture:
+    cargo run -q -p batna-tools -- content next-id {{lecture}}
+
+# A ready-to-paste item of a kind with the next free id
+content-new-item lecture kind:
+    cargo run -q -p batna-tools -- content new-item {{lecture}} {{kind}}
+
+# What a change adds, edits or removes per lecture
+content-diff base="origin/main":
+    cargo run -q -p batna-tools -- content diff --base {{base}}
+
+# Every check a content change must pass, in one table
+content-preflight base="origin/main":
+    cargo run -q -p batna-tools -- content preflight --base {{base}}
+
 # Show which changed files can be published without a new APK (base commit or ref)
 content-impact base="HEAD^1":
     python3 scripts/content_impact.py --base "{{base}}" --head HEAD

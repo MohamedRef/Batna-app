@@ -531,6 +531,8 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   cursor: pointer;
   touch-action: manipulation;
 }
+.ls-tile, .ls-chiplet, .ls-chiplet-done { overflow-wrap: anywhere; }
+:is(.ls-tile, .ls-chiplet, .ls-chiplet-done) .ls-nw { white-space: normal; }
 .ls-tile:hover:not(:disabled) { border-color: var(--accent); }
 .ls-tile[data-state="picked"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px var(--accent-soft); }
 .ls-tile[data-state="right"], li[data-state="right"] > .ls-tile { border-color: var(--good); background: var(--good-soft); }
@@ -586,37 +588,92 @@ button.ls-slot:hover { border-color: var(--accent); }
 .ls-match-col .ls-tile { overflow-wrap: anywhere; hyphens: auto; }
 .ls-match-col { display: flex; flex-direction: column; gap: var(--sp-2); }
 .ls-match-col .ls-tile { inline-size: 100%; }
-.ls-bins { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: var(--sp-2); }
+/* sort: bins share a row while each keeps ~13rem (two or three on a
+   tablet), and stack as full-width rows on a phone. Flex, not a grid, so
+   an odd bin out stretches instead of leaving an empty cell. */
+.ls-sort-bar { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
+.ls-sort-bar > p { margin: 0; }
+.ls-sort-bar > .ls-order-count { flex: none; white-space: nowrap; }
+.ls-bins { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .ls-bin {
+  flex: 1 1 13rem;
+  min-inline-size: 0;
   border: 2px dashed var(--line);
   border-radius: var(--radius);
-  padding: var(--sp-2);
+  padding: var(--sp-1) var(--sp-2) var(--sp-2);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-2);
-  min-block-size: 6rem;
-  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+  gap: var(--sp-1);
+  min-block-size: 5.5rem;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
 .ls-bin[data-armed="yes"] { border-color: var(--accent); background: var(--accent-soft); cursor: pointer; }
 .ls-bin[data-armed="yes"]:active { transform: var(--press, scale(0.98)); }
 .ls-bin-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  inline-size: 100%;
   border: 0;
   background: none;
+  color: var(--text);
+  font: inherit;
   font-weight: 800;
   padding: var(--sp-1);
   min-block-size: var(--target);
   cursor: pointer;
-  text-align: center;
+  text-align: start;
 }
 .ls-bin-head:disabled { cursor: default; }
-.ls-bin-cards { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-.ls-bin-cards li { display: flex; flex-direction: column; }
+/* A long bin name wraps inside its box instead of spilling out of it. */
+.ls-bin-name { flex: 1; min-inline-size: 0; overflow-wrap: anywhere; }
+.ls-bin-name .ls-nw { white-space: normal; }
+.ls-bin-count {
+  flex: none;
+  min-inline-size: 1.6rem;
+  block-size: 1.6rem;
+  padding-inline: 6px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--line);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.ls-bin[data-armed="yes"] .ls-bin-count { background: var(--accent); color: var(--on-accent); }
+.ls-bin-empty { margin: 0; flex: 1; display: grid; place-items: center; color: var(--muted); padding-block: var(--sp-1); }
+.ls-bin[data-armed="yes"] .ls-bin-empty { color: var(--accent); font-weight: 700; }
+/* Drag and drop (sortdrag.js): the lifted card follows the pointer, its
+   place stays as a faint outline, and the bin under it lights up. */
+.ls-sort :is(.ls-tile, .ls-chiplet) { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.ls-sort [data-dragging="yes"] { opacity: 0.35; }
+.ls-ghost {
+  position: fixed;
+  z-index: 60;
+  margin: 0;
+  pointer-events: none;
+  transform: scale(1.05) rotate(-1.5deg);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 0.35);
+  border-color: var(--accent) !important;
+  background: var(--surface) !important;
+  color: var(--text);
+  box-sizing: border-box;
+  direction: ltr;
+}
+.ls-sort[data-drag="yes"] .ls-bin { border-color: var(--accent); }
+.ls-bin[data-over="yes"] { border-style: solid; border-color: var(--accent); background: var(--accent-soft); transform: scale(1.02); }
+.ls-pool[data-over="yes"] { outline: 2px dashed var(--accent); outline-offset: 4px; border-radius: var(--radius); }
+.ls-bin-cards { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.ls-bin-cards li { display: flex; flex-direction: column; max-inline-size: 100%; }
 .ls-chiplet, .ls-chiplet-done {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--sp-1);
-  inline-size: 100%;
+  max-inline-size: 100%;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);

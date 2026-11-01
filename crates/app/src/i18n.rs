@@ -1607,7 +1607,10 @@ pub mod learn {
     pub const MATCH: &str = "وصّل";
     pub const MATCH_HINT: &str = "اختار من الشمال، وبعدين اللي يناسبه من اليمين.";
     pub const SORT: &str = "صنّف";
-    pub const SORT_HINT: &str = "دوس على كارت، وبعدين على الخانة بتاعته.";
+    pub const SORT_HINT: &str = "اسحب كل كارت لخانته، أو دوس عليه وبعدين على الخانة.";
+    pub const SORT_PICKED: &str = "تمام، دلوقتي دوس على الخانة اللي تناسبه.";
+    pub const SORT_DROP: &str = "حطّه هنا";
+    pub const SORT_EMPTY: &str = "لسه فاضية";
     pub const CASE: &str = "حالة صغيرة";
     pub const CASE_NEXT: &str = "اللي بعده";
     pub const CASE_SHOW: &str = "اكشف";
@@ -1637,6 +1640,10 @@ pub mod learn {
 
     pub fn should_be(n: usize) -> String {
         format!("مكانها رقم {n}")
+    }
+
+    pub fn sort_left(left: usize, n: usize) -> String {
+        format!("فاضل {left} من {n}")
     }
 
     pub fn in_place(right: usize, n: usize) -> String {

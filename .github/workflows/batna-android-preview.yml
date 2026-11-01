@@ -269,6 +269,17 @@ jobs:
           # is built (#332).
           cargo run -q -p batna-tools -- validate
           cargo run -q -p batna-tools -- packs build --out dist/packs
+          # His records point at content ids: the new pack must keep every
+          # id of the pack devices have now (docs/CONTENT-IDS.md), and the
+          # job summary says what changed for them.
+          live="$(jq -r '.assets[] | select(.platform == "content") | .file' /tmp/previous-update.json 2>/dev/null || true)"
+          if [ -n "$live" ] && curl -fsSL --retry 3 -o "/tmp/$live" \
+              "https://github.com/$GITHUB_REPOSITORY/releases/download/batna-preview/$live"; then
+            cargo run -q -p batna-tools -- ids check --base-pack "/tmp/$live"
+            { echo '### Content compared with the live preview feed'
+              cargo run -q -p batna-tools -- content diff --base-pack "/tmp/$live" \
+                --head-pack dist/packs/batna-content.pack; } >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ "${CONTENT_ONLY:-}" = true ]; then
             app=(--carry android-arm64)
             # The carried APK stays on the release, so it isn't in dist/update.

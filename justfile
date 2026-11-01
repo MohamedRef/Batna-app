@@ -45,6 +45,11 @@ content-diff base="origin/main":
 content-preflight base="origin/main":
     cargo run -q -p batna-tools -- content preflight --base {{base}}
 
+# Dry run of a content-only update on a channel: every publishing step,
+# signed with a throwaway key, nothing uploaded (docs/RELEASE.md)
+publish-update-dry-run channel="preview":
+    scripts/update-preflight.sh {{channel}}
+
 # Show which changed files can be published without a new APK (base commit or ref)
 content-impact base="HEAD^1":
     python3 scripts/content_impact.py --base "{{base}}" --head HEAD

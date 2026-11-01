@@ -141,6 +141,21 @@ running build with exactly that number uses them (`crates/app/src/look.rs`);
 any other build takes the lectures and keeps its own look. Strings, icons,
 layout and logic are code and still come with an APK.
 
+**Publishing preflight.** `just publish-update-dry-run [channel]`
+(`scripts/update-preflight.sh`, default `preview`) runs every publishing
+step for a content-only update without uploading anything, on any machine
+and with no secrets: validate the source; build the pack (`Pack::problems`
+and the round-trip); download the channel's live `update.json` and pack,
+run `ids check` against that pack and write the per-lecture diff
+(`dist/preflight/impact.md`); write the manifest carrying the live feed's
+builds (so no APK is made); sign it with a throwaway key; `update verify`
+it like a device (signature, sizes, SHA-256, then the pack checks); and
+print each file's size and digest (`dist/preflight/report.md`). The
+preview workflow runs the same id check against the live preview pack
+before it signs and puts the diff in the job summary. `update verify` now
+also decodes the content pack and runs `Pack::problems`, so a feed devices
+would refuse fails before upload.
+
 **Content impact preflight.** To see whether a change needs a new APK,
 run `just content-impact BASE` (for example, `just content-impact HEAD^1`).
 Pull-request CI writes the same classification and affected paths to the

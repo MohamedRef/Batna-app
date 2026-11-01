@@ -54,6 +54,17 @@ jobs:
         run: cargo run -q -p batna-tools -- validate
       - name: Offline content pack builds and round-trips
         run: cargo run -q -p batna-tools -- packs build --check
+      # His review history, lesson progress and plan point at content ids.
+      # Against the commit before this one (the PR's base; the previous
+      # main on a push), no id may vanish or change meaning unless
+      # content/ids-retired.txt says so (docs/CONTENT-IDS.md).
+      - name: Content ids his records point at
+        run: |
+          status=0
+          cargo run -q -p batna-tools -- ids check --base HEAD^1 > ids.txt 2>&1 || status=$?
+          cat ids.txt
+          { echo '### Content ids'; echo '```'; cat ids.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
       # Every pull request says what Mohamed will notice in
       # changes/<topic>.yaml (docs/RELEASE.md §5, "What's new"): new lines in
       # a new or existing file, or a new file holding [] when there is

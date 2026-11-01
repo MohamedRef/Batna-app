@@ -5,6 +5,7 @@ pub mod calc;
 pub mod content;
 pub mod exam;
 pub mod glossary;
+pub mod ids;
 pub mod layout;
 pub mod lesson;
 pub mod own;

@@ -760,3 +760,38 @@ fn a_pack_with_broken_ids_or_references_is_refused_and_never_opened() {
     assert!(installed_pack_in(&dir, &info).is_none());
     assert!(!dir.join(PACK_FILE).exists());
 }
+
+#[test]
+fn clearing_app_downloads_keeps_the_last_good_content_pack() {
+    let (u, data) = updater("http://127.0.0.1:9", build("0.1.0", 40, true));
+    let dir = data.path().join("updates");
+    fs::create_dir_all(&dir).unwrap();
+    let app = build("0.1.0", 40, true);
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    fs::write(dir.join(PACK_FILE), &pack).unwrap();
+    let meta = PackInfo {
+        version: "0.1.0".into(),
+        build: 41,
+        sha256: sha256_hex(&pack),
+        published_at: None,
+        ui_build: Some(40),
+    };
+    write_json(&dir, PACK_INFO, &meta).unwrap();
+    fs::write(dir.join(PACK_STARTS), "1").unwrap();
+    recovery::save_settled(&dir, &app).unwrap();
+    let good = format!("content.good.{}.pack", meta.sha256);
+    assert!(dir.join(&good).exists());
+    fs::write(dir.join("batna-0.1.0-b39-android-arm64.apk"), b"old app").unwrap();
+
+    // What an "up to date" check, a finished install or a channel switch do.
+    u.clear_downloads(None);
+
+    assert!(!dir.join("batna-0.1.0-b39-android-arm64.apk").exists(), "app downloads go");
+    for kept in [PACK_FILE, PACK_INFO, "content.good.json", good.as_str()] {
+        assert!(dir.join(kept).exists(), "{kept} stays");
+    }
+    // So a crash loop on a later pack still has something to fall back to.
+    fs::remove_file(dir.join(PACK_FILE)).unwrap();
+    fs::remove_file(dir.join(PACK_INFO)).unwrap();
+    assert!(recovery::restore_last_good(&dir, &app).is_some());
+}

@@ -105,6 +105,14 @@ pub mod sheet {
     pub const CLOSE: &str = "اقفل";
 }
 
+/// A lesson step's abbreviations chip and sheet (abbrsheet/mod.rs).
+pub mod abbr {
+    pub const CHIP: &str = "اختصارات";
+    pub const CHIP_HINT: &str = "اعرف معنى الاختصارات اللي في الخطوة دي";
+    pub const TITLE: &str = "الاختصارات في الخطوة دي";
+    pub const UNVERIFIED: &str = "المعاني دي لسه ما اتراجعتش.";
+}
+
 pub mod book {
     pub const TITLE: &str = "صفحة الكتاب";
     pub const NO_LECTURE: &str = "الصفحة دي برّه المحاضرات اللي في باطنة.";

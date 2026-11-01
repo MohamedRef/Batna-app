@@ -324,6 +324,8 @@ fn Stage(
     let mut fresh = use_signal(|| false);
     let (checked, answered_before) = retry;
     let can_retry = checked || (answered_before && !fresh());
+    let texts = use_hook(|| step.shown_text());
+    let has_abbr = use_hook(|| !crate::abbrsheet::entries(&texts).is_empty());
     rsx! {
         crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1,
             if try_done {
@@ -351,9 +353,13 @@ fn Stage(
                     span { aria_hidden: "true", "↻" }
                 }
             }
-            if let Some(page) = step.page {
+            // The page chip, with the step's abbreviations beside it.
+            if step.page.is_some() || has_abbr {
                 footer { class: "ls-src",
-                    crate::hover::BookPage { page, quote: step.quote.clone(), of: seed.clone() }
+                    crate::abbrsheet::AbbrChip { texts: texts.clone() }
+                    if let Some(page) = step.page {
+                        crate::hover::BookPage { page, quote: step.quote.clone(), of: seed.clone() }
+                    }
                 }
             }
         }

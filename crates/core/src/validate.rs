@@ -273,6 +273,17 @@ pub fn glossary(g: &crate::glossary::Glossary, approved: Option<&BTreeSet<String
             bad(&at, "status approved: only Mohamed approves (add the id to content/approved.txt)".into());
         }
     }
+    // `plain:` words are capitals that aren't abbreviations; one that has an
+    // entry would hide nothing and confuse the next reader.
+    let mut plain = BTreeSet::new();
+    for p in &g.plain {
+        if exact.contains(p.as_str()) {
+            bad("glossary.plain", format!("`{p}` has an entry, so it isn't plain"));
+        }
+        if !plain.insert(p.as_str()) {
+            bad("glossary.plain", format!("`{p}` is listed twice"));
+        }
+    }
     out
 }
 

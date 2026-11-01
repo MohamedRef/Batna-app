@@ -3,6 +3,7 @@
 //! Feature chunks (SPLIT.md §7) each own a module directory and register it
 //! with one line in `Screen` / `screen_body` below.
 
+mod abbrsheet;
 mod anki;
 mod back;
 mod bank;
@@ -279,6 +280,7 @@ fn App() -> Element {
             shortcuts::KeysSheet {}
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
+            abbrsheet::AbbrSheet {}
             courses::Picker {}
             own::ShareInbox {}
             onboarding::Onboarding {}

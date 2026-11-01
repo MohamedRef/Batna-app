@@ -6,6 +6,7 @@ use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
 
 use batna_core::content::Lecture;
+use batna_core::glossary::Glossary;
 use batna_core::lesson::{self, LessonContext, LessonFile};
 
 /// Every lesson file, sorted by path: `(path, parsed, raw text)`.
@@ -38,8 +39,42 @@ pub fn load(root: &Path) -> Result<Vec<(PathBuf, LessonFile, String)>, Vec<Strin
     if problems.is_empty() { Ok(out) } else { Err(problems) }
 }
 
+/// Every word a lesson step shows that looks like an abbreviation but has
+/// no entry in `content/glossary.yaml`, so the step's "اختصارات" chip can
+/// explain all of them. A capitalised word that isn't one goes in the
+/// glossary's `plain:` list.
+pub fn unknown_abbreviations(file: &LessonFile, g: &Glossary) -> Vec<String> {
+    let mut out = Vec::new();
+    for l in &file.lessons {
+        for (k, step) in l.steps.iter().enumerate() {
+            let mut unknown: Vec<String> = Vec::new();
+            for t in step.shown_text() {
+                for w in g.unknown_in(&t) {
+                    if !unknown.contains(&w) {
+                        unknown.push(w);
+                    }
+                }
+            }
+            if !unknown.is_empty() {
+                out.push(format!(
+                    "{} step {}: {} not in content/glossary.yaml (add an entry, or list it under plain: if it isn't an abbreviation)",
+                    l.id,
+                    k + 1,
+                    unknown.iter().map(|w| format!("`{w}`")).collect::<Vec<_>>().join(", ")
+                ));
+            }
+        }
+    }
+    out
+}
+
 /// Checks every lesson file. Returns `(files, lessons)` and pushes problems.
-pub fn validate_all(root: &Path, approved: &BTreeSet<String>, problems: &mut Vec<String>) -> (usize, usize) {
+pub fn validate_all(
+    root: &Path,
+    approved: &BTreeSet<String>,
+    glossary: Option<&Glossary>,
+    problems: &mut Vec<String>,
+) -> (usize, usize) {
     let files = match load(root) {
         Ok(f) => f,
         Err(p) => {
@@ -70,6 +105,9 @@ pub fn validate_all(root: &Path, approved: &BTreeSet<String>, problems: &mut Vec
             LessonContext { lecture: &lecture, approved: Some(approved), raw_step_keys: raw_step_keys(text) };
         for p in lesson::validate(file, &cx) {
             problems.push(format!("{at}: {p}"));
+        }
+        if let Some(g) = glossary {
+            problems.extend(unknown_abbreviations(file, g).into_iter().map(|p| format!("{at}: {p}")));
         }
         lessons += file.lessons.len();
     }
@@ -115,7 +153,7 @@ mod tests {
         let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
         let approved = BTreeSet::new();
         let mut problems = Vec::new();
-        validate_all(&root, &approved, &mut problems);
+        validate_all(&root, &approved, None, &mut problems);
         assert!(problems.is_empty(), "{problems:#?}");
     }
 

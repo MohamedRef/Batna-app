@@ -40,6 +40,7 @@ static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
 /// numbers them per lecture, so the sheet stays in `of`'s lecture.
 pub fn open(page: u32, of: &str, quote: Option<String>, held: bool) {
     document::eval("window.__batnaHover && window.__batnaHover.hide();");
+    crate::abbrsheet::close();
     *OPEN.write() = Some((page, scope(Library::get(), of), quote.filter(|q| !q.trim().is_empty()), held));
 }
 

@@ -662,12 +662,16 @@ pub fn use_content_switch(ui: Ui) {
             // Ticks since the pack in use was opened: once Batna has drawn
             // its first screen and run a couple of seconds on it, the
             // crash-loop guard starts counting again (#344).
-            let mut since_open = 0u32;
+            let mut loaded_for = 0u32;
             loop {
                 tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-                since_open += 1;
-                if since_open == 1 {
-                    super::pack_settled();
+                // Count calm time only after the library is genuinely loaded.
+                // Otherwise a slow first render can mark a bad pack as good.
+                if crate::content::Library::is_initialized() {
+                    loaded_for += 1;
+                    if loaded_for == 1 {
+                        super::pack_settled();
+                    }
                 }
                 if super::get().is_none() {
                     continue;
@@ -682,7 +686,7 @@ pub fn use_content_switch(ui: Ui) {
                         r.backend.borrow_mut().library_replaced();
                     }
                     *crate::content::REV.write() += 1;
-                    since_open = 0;
+                    loaded_for = 0;
                 }
             }
         }

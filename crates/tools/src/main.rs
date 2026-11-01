@@ -18,6 +18,7 @@ use batna_core::validate::{self, Context};
 
 mod anki;
 mod changes;
+mod content;
 mod ids;
 mod lessons;
 mod packs;
@@ -54,6 +55,7 @@ fn main() -> ExitCode {
         Some("update") => report(update::run(&root, &args[1..])),
         Some("refs") => report(refs::run(&root, &args[1..])),
         Some("ids") => report(ids::run(&root, &args[1..])),
+        Some("content") => report(content::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -80,7 +82,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 
 fn usage() -> ExitCode {
     eprintln!(
-        "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF>> [--root DIR] (see the top of crates/tools/src/main.rs)"
+        "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)"
     );
     ExitCode::from(2)
 }
@@ -187,6 +189,8 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     }
     // Lessons (docs/LESSONS.md), with every abbreviation in the glossary.
     let (_, lessons) = lessons::validate_all(root, &approved, glossary.as_ref(), &mut problems);
+    // Nothing left from a template (`batna-tools content new-item`).
+    problems.extend(content::unfinished(root));
     // Page references checked against the book (refs.rs).
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {

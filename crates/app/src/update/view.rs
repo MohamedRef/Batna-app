@@ -649,6 +649,12 @@ fn overlay_open() -> bool {
     crate::lecture::is_open() || crate::own::drafting() || *crate::onboarding::OPEN.peek()
 }
 
+/// The startup guard must not certify a pack until the process has opened it.
+/// The first tick after a real load marks two seconds of stable operation.
+fn should_settle_content(loaded: bool, settled_ticks: u32) -> bool {
+    loaded && settled_ticks == 0
+}
+
 /// Switches to a content pack that arrived while Batna is open, once he is
 /// between sessions (the calm moments a quiet install waits for too): the
 /// lectures, lessons and look change under him with no install, and the
@@ -667,7 +673,7 @@ pub fn use_content_switch(ui: Ui) {
                 tokio::time::sleep(std::time::Duration::from_secs(2)).await;
                 // Count calm time only after the library is genuinely loaded.
                 // Otherwise a slow first render can mark a bad pack as good.
-                if crate::content::Library::is_initialized() {
+                if should_settle_content(crate::content::Library::is_initialized(), loaded_for) {
                     loaded_for += 1;
                     if loaded_for == 1 {
                         super::pack_settled();

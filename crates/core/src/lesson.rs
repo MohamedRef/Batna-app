@@ -412,6 +412,7 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
     let chars: Vec<char> = text.chars().collect();
     let strong: Vec<C> = chars.iter().map(|&c| class(c)).collect();
     let mut resolved = strong.clone();
+    let mixed = strong.contains(&C::Arabic);
     // Each run of neutral chars (spaces, digits, signs) between two strong
     // chars: between two Latin words it is Latin ("Child-Pugh class C").
     // Right after a Latin word, the numbers, units and closing brackets that
@@ -434,7 +435,18 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
         for k in run.clone() {
             resolved[k] = C::Arabic;
         }
-        if before == Some(C::Latin) && after == Some(C::Latin) {
+        // In an Arabic line, "label: value" and "cause → effect" are two
+        // terms the line reads in Arabic order ("الـ edge: sharp" reads edge,
+        // then sharp); one isolate would put "sharp" next to "الـ" and
+        // "edge" far off.
+        let separator = || {
+            let t: String = chars[run.clone()].iter().collect();
+            mixed
+                && t.ends_with(' ')
+                && (matches!(t.trim(), ":" | ";")
+                    || t.starts_with(' ') && matches!(t.trim(), "→" | "⇒" | "←"))
+        };
+        if before == Some(C::Latin) && after == Some(C::Latin) && !separator() {
             for k in run {
                 resolved[k] = C::Latin;
             }
@@ -1099,13 +1111,37 @@ mod tests {
         assert_eq!(latin_runs("الـ 25(OH)D واطي"), ["25(OH)D"]);
         assert_eq!(latin_runs("لونه (black أو brown) كده"), ["black", "brown"]);
         assert_eq!(latin_runs("(الـ P في PATCH) كده"), ["P", "PATCH"]);
+        // "label: value" in an Arabic line: two terms in Arabic order.
+        assert_eq!(
+            latin_runs("الـ edge: **sharp**، وممكن يبقى **irregular**"),
+            ["edge", "sharp", "irregular"]
+        );
+        assert_eq!(latin_runs("Hyperfiltration: GFR 120-180، من ضغط"), ["Hyperfiltration", "GFR 120-180"]);
+        assert_eq!(
+            latin_runs("TCMR: I tubulitis; II arteritis كده"),
+            ["TCMR", "I tubulitis", "II arteritis"]
+        );
+        assert_eq!(latin_runs("Bleeding → ceftriaxone 1 g لمدة"), ["Bleeding", "ceftriaxone 1 g"]);
+        assert_eq!(latin_runs("Bleeding → ceftriaxone"), ["Bleeding → ceftriaxone"]);
+        // Not a separator: a ratio, a time, a list.
+        assert_eq!(latin_runs("نسبة 1:2 هنا"), ["1:2"]);
+        assert_eq!(
+            latin_runs("الحجم: **shrunken, enlarged or normal**. تمام"),
+            ["shrunken, enlarged or normal"]
+        );
     }
 
     #[test]
     fn bold_does_not_split_terms() {
         let s = spans("**Genome:** single-stranded **positive-sense RNA**. تمام");
         let latin: Vec<_> = s.iter().filter(|s| s.latin).map(|s| (s.text.as_str(), s.bold)).collect();
-        assert_eq!(latin, [("Genome:", true), (" single-stranded ", false), ("positive-sense RNA", true)]);
+        assert_eq!(latin, [("Genome", true), ("single-stranded ", false), ("positive-sense RNA", true)]);
+        // All English: one phrase, the colon kept inside it.
+        let s = spans("**Genome:** single-stranded RNA");
+        assert_eq!(
+            s.iter().filter(|s| s.latin).map(|s| s.text.as_str()).collect::<String>(),
+            "Genome: single-stranded RNA"
+        );
         let s = spans("حوالي **58 million** عايشين");
         assert_eq!(s.iter().filter(|s| s.latin).map(|s| s.text.as_str()).collect::<Vec<_>>(), ["58 million"]);
     }

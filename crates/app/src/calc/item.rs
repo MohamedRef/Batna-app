@@ -27,19 +27,28 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
     let mut computed = use_signal(|| Computed::Open);
     let mut meaning_open = use_signal(|| false);
     let mut verdict = use_signal(|| None::<bool>);
+    let mut save_failed = use_signal(|| false);
     let mut started = use_signal(crate::case::now_ms);
     let store = use_case_store();
     let finish = use_callback({
         let item_id = item_id.clone();
         let store = store.clone();
         move |right: bool| {
-            verdict.set(Some(right));
+            if verdict.peek().is_some() {
+                return;
+            }
             // Two decisions when he typed a result, one when he used the calculator.
             let (got, total) = match computed() {
                 Computed::Typed(ok) => (u32::from(ok) + u32::from(right), 2),
                 _ => (u32::from(right), 1),
             };
-            record(store.as_ref(), &item_id, got, total, started());
+            match record(store.as_ref(), &item_id, got, total, started()) {
+                Ok(()) => {
+                    verdict.set(Some(right));
+                    save_failed.set(false);
+                }
+                Err(_) => save_failed.set(true),
+            }
         }
     });
 
@@ -69,6 +78,9 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
         style { {super::CSS.text()} }
         article { class: "player calc-item",
             ItemMeta { lecture: lecture.to_owned(), item_id: item.id.clone(), on_back }
+            if save_failed() {
+                p { class: "verdict bad", role: "alert", {cx::SAVE_FAILED} }
+            }
             crate::ui::Card { class: "",
                 bdi { class: "case-stem", "{stem}" }
                 p { class: "case-question", dir: "auto",

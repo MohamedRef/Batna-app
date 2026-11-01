@@ -823,6 +823,7 @@ pub mod oral {
 }
 
 pub mod case {
+    pub const SAVE_FAILED: &str = "ما عرفتش أحفظ الإجابة. إجابتك لسه موجودة؛ جرّب تاني قبل ما تقفل.";
     pub const TAB_CASES: &str = "حالات إكلينيكية";
     pub const TAB_CALC_ITEMS: &str = "تمارين بالأرقام";
     pub const TAB_CALCULATORS: &str = "الحاسبات";

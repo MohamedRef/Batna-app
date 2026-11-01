@@ -1,7 +1,7 @@
 # Shared UI completion: Batna
 
-Updated: 2026-10-30. Current branch: `test/settings-browser-20261030`.
-Previous checkpoint: merged PR #526; subsequent merged UX changes are retained.
+Updated: 2026-11-01. See [UI-PROGRESS.md](UI-PROGRESS.md) for current
+merged checkpoints, verification receipts and remaining work.
 
 ## Item 1: interactive and dynamic cards (2026-10-30)
 
@@ -71,20 +71,20 @@ The remaining facade code owns integration and shared state. Tests live in
 - [x] Added production CSS contract assertions for compact/medium breakpoints, appearance, reduced motion/transparency, RTL/LTR isolation and shared card tokens.
 - [x] Completed the remaining base-card migration, including interactive and dynamic variants, with events, keys, IDs and ARIA preserved.
 - [x] Split the targeted large workflows behind their existing feature APIs (see item 2).
-- [ ] Add rendered browser/WebView responsive, focus and keyboard checks. VirtualDom and CSS-selector assertions are not visual QA.
+- [x] Add computed-layout, focus and keyboard checks for production-rendered Settings; see the browser QA scope and remaining device matrix.
 - [ ] Complete the separate Mac/S24 Ultra/Tab S11 device matrix. Current-item CI status is recorded on its PR.
 
 ## Quality and rollout
 
-Automated gates run strict Rust formatting, Clippy, tests, content validation, Android arm64 compile and Android renderer-loss regression. Check GitHub Actions for the latest commit; an earlier successful check does not certify a subsequent commit.
-
-Native matrix still needed: 384/600/840dp and wide windows, Paper/Night/True black, Calm/Glossy, largest interface size, Egyptian-Arabic RTL/Latin medical snippets, Tab/Escape, screen readers, nested sheets and Android Back. No actual-device test has been claimed.
-
-Batna owns all adapted code. Do not add a dependency on Kabar crates or couple app releases. No medical content, approval, scheduling data or patient information should change in this UI PR.
+The current evidence and remaining device matrix are in [UI-PROGRESS.md](UI-PROGRESS.md).
+Computed Chromium layouts supplement the CSS and VirtualDom contracts. They do
+not replace live application integration, screen-reader or physical WebView QA.
+No physical-device pass is claimed. Independent app sources and release cycles
+remain intact.
 
 ## Next change boundaries
 
-Each numbered item is checked, committed and uploaded separately. The current
-item covers the shared card contract; later workflow, browser, device and write
-feedback work remains explicitly tracked. CI status belongs to the current PR
-head. No merge, release or deployment is implied by uploading a checkpoint.
+Use [UI-PROGRESS.md](UI-PROGRESS.md) as the current status index. Each bounded
+change is checked, committed and uploaded independently. Verification belongs
+to its exact PR head; an uploaded checkpoint does not imply a release or a
+physical-device pass.

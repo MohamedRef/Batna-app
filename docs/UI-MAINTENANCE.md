@@ -97,12 +97,20 @@ their existing visibility; internal helpers use parent-only visibility. Shared
 state stays with the parent, and persistence operations keep their transactions.
 Existing tests live beside the owning facade in a child `tests.rs` module.
 
+## Command write feedback (2026-11-01)
+
+The current command-specific checkpoint is [558](https://github.com/MohamedRef/Batna-app/pull/558); see
+[UI-PROGRESS.md](UI-PROGRESS.md) for the verification index and remaining audit.
+CaseRun::next_logged saves the completed event before advancing, and case::record returns the fallible StudyStore result. The calculator only sets its verdict after a successful write. Failed commands retain their answer and stay manually retryable; completed cases do not record twice.
+These workflows do not enqueue append-only review events in preference recovery.
+
 ## Remaining work, in priority order
 
-1. **Feature-specific write recovery.** Done for reviews, content checks,
-   own-card deletes and exports (see "Save failures: retry in place" below).
-   New domain writes use `persistence::WriteFailed`; never replay append-only
-   events through the preference queue.
+1. **Additional domain write feedback.** Case/calculation completion now
+   preserves the answer until saving succeeds. Study review, content-edit and
+   export flows retain their existing operation-specific results and retries.
+   Continue the lesson-position/mark audit; append-only review events do not
+   belong in the preference queue.
 2. **Smaller workflow modules.** `update/mod.rs`, `learn/steps.rs`,
    `study/mod.rs`, `case/mod.rs` and `store/backend.rs` have large workflow
    units. Extract pure decisions and focused stage components before

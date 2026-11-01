@@ -14,11 +14,11 @@ No real user data, live APIs, app launch, installation or release is involved.
 | Width | 320, 384, 600, 840, 1280 CSS px |
 | Height | 900 CSS px |
 | Theme | Every supported theme; System variants in light and dark OS schemes |
-| Appearance | Calm and Glossy |
+| Appearance | Calm, Glossy and Liquid Glass |
 | Text size | Normal and the largest supported size |
 | Direction | Arabic RTL with the production Latin medical sample |
 
-The matrix runs 160 browser cases. Assertions inspect computed dialog bounds,
+The matrix runs 240 browser cases with the current three appearances. Assertions inspect computed dialog bounds,
 document and pane overflow, the exact production text-size scale (15px compact\nNormal / 16px wider Normal, multiplied by 125% for Larger), the responsive\nsection index and Back target, actual
 focus after Tab/Shift+Tab, the Escape target, inert background and focus restored
 after removal. Browser errors fail the job. Largest-text Calm screenshots and a

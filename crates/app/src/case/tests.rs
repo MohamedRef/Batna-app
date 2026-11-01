@@ -70,10 +70,71 @@ fn a_step_is_selected_then_checked_once() {
 
 #[test]
 fn record_keeps_the_case_as_one_review() {
-    record(None, "hb.L03.050", 2, 3, now_ms() - 1500);
+    record(None, "hb.L03.050", 2, 3, now_ms() - 1500).unwrap();
     let sink = EVENTS.lock().unwrap();
     let e = sink.events.iter().find(|e| e.item_id == "hb.L03.050").unwrap();
     assert_eq!(e.grade, Grade::Hard);
     assert_eq!(e.origin, Origin::Case);
     assert!(e.took_ms >= 1500);
+}
+
+#[test]
+fn failed_finish_keeps_the_answer_and_success_records_once() {
+    use batna_core::review::StudyStore;
+    use std::{
+        cell::{Cell, RefCell},
+        rc::Rc,
+    };
+
+    struct Fallible {
+        blocked: Rc<Cell<bool>>,
+        events: Rc<RefCell<Vec<ReviewEvent>>>,
+    }
+    impl StudyStore for Fallible {
+        fn record(&mut self, _: ReviewEvent) {
+            panic!("the case must use the fallible store API");
+        }
+        fn record_logged(&mut self, event: ReviewEvent) -> Result<Option<String>, String> {
+            if self.blocked.get() {
+                return Err("read only".into());
+            }
+            self.events.borrow_mut().push(event);
+            Ok(Some("logged-case".into()))
+        }
+        fn due(&self, _: i64) -> Vec<String> {
+            Vec::new()
+        }
+        fn is_new(&self, _: &str) -> bool {
+            true
+        }
+        fn is_hidden(&self, _: &str) -> bool {
+            false
+        }
+        fn next_due_ms(&self, _: i64) -> Option<i64> {
+            None
+        }
+    }
+    let blocked = Rc::new(Cell::new(true));
+    let events = Rc::new(RefCell::new(Vec::new()));
+    let store = StudyStoreHandle::new(Fallible { blocked: blocked.clone(), events: events.clone() });
+    let mut run = CaseRun::new("hb.L03.050");
+    run.grade_self(true);
+    run.next_logged(2, Some(&store)).unwrap();
+    assert_eq!(run.step, 1);
+    assert!(events.borrow().is_empty(), "unfinished cases are not reviews");
+    run.select(1);
+    assert!(run.check(Some(1)));
+    let before = run.clone();
+    assert!(run.next_logged(2, Some(&store)).is_err());
+    assert_eq!(run, before, "failed persistence retains the stage, result and selected answer");
+    assert!(events.borrow().is_empty());
+
+    blocked.set(false);
+    run.next_logged(2, Some(&store)).unwrap();
+    assert_eq!(run.step, 2);
+    run.next_logged(2, Some(&store)).unwrap();
+    let events = events.borrow();
+    assert_eq!(events.len(), 1, "repeated Finish cannot append a second review");
+    assert_eq!(events[0].grade, Grade::Good);
+    assert_eq!(events[0].origin, Origin::Case);
 }

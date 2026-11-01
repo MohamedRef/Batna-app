@@ -11,6 +11,7 @@ pub(super) fn scroll_to(id: &str) {
 #[component]
 pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
     let store = use_case_store();
+    let mut save_failed = use_signal(|| None::<String>);
     if RUN.peek().as_ref().is_none_or(|r| r.item_id != item_id) {
         *RUN.write() = Some(CaseRun::new(&item_id));
     }
@@ -45,6 +46,9 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
     rsx! {
         article { class: "player case",
             ItemMeta { lecture: lecture.to_owned(), item_id: item.id.clone(), on_back: leave }
+            if save_failed.read().as_ref().is_some_and(|id| id == &item_id) {
+                p { class: "verdict bad", role: "alert", {tx::SAVE_FAILED} }
+            }
             // Where he is in the case: each step done (✓/✗) opens its place
             // in the data, the current one its question.
             ol { class: "case-stepper", "aria-label": tx::STEPS_LABEL,
@@ -192,12 +196,14 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                         onclick: {
                                             let record_id = record_id.clone();
                                             move |_| {
-                                                let Some(r) = RUN.peek().clone() else { return };
-                                                if r.step + 1 == total && r.results.len() == total {
-                                                    let right = r.results.iter().filter(|x| x.0).count() as u32;
-                                                    record(store.as_ref(), &record_id, right, total as u32, r.started);
+                                                let Some(mut r) = RUN.peek().clone() else { return };
+                                                match r.next_logged(total, store.as_ref()) {
+                                                    Ok(()) => {
+                                                        save_failed.set(None);
+                                                        *RUN.write() = Some(r);
+                                                    }
+                                                    Err(_) => save_failed.set(Some(record_id.clone())),
                                                 }
-                                                edit(&|r| r.next());
                                             }
                                         },
                                         if k + 1 == total { {tx::FINISH} } else { {tx::NEXT} }

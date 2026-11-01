@@ -170,6 +170,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     // The hover glossary (PARITY.md §6.3), when there is one.
     let glossary_path = content.join("glossary.yaml");
     let mut terms = 0;
+    let mut glossary = None;
     if glossary_path.exists() {
         match read_yaml::<batna_core::glossary::Glossary>(&glossary_path) {
             Ok(g) => {
@@ -177,12 +178,13 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
                 for p in validate::glossary(&g, Some(&approved)) {
                     problems.push(format!("content/glossary.yaml: {p}"));
                 }
+                glossary = Some(g);
             }
             Err(e) => problems.push(e),
         }
     }
-    // Lessons (docs/LESSONS.md).
-    let (_, lessons) = lessons::validate_all(root, &approved, &mut problems);
+    // Lessons (docs/LESSONS.md), with every abbreviation in the glossary.
+    let (_, lessons) = lessons::validate_all(root, &approved, glossary.as_ref(), &mut problems);
     // Page references checked against the book (refs.rs).
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {

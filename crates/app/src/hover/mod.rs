@@ -18,8 +18,11 @@ const GLOSSARY_YAML: &str = include_str!("../../../../content/glossary.yaml");
 pub fn glossary() -> &'static Glossary {
     static G: OnceLock<Glossary> = OnceLock::new();
     G.get_or_init(|| {
-        serde_yaml_ng::from_str(GLOSSARY_YAML)
-            .unwrap_or(Glossary { schema: String::new(), entries: Vec::new() })
+        serde_yaml_ng::from_str(GLOSSARY_YAML).unwrap_or(Glossary {
+            schema: String::new(),
+            entries: Vec::new(),
+            plain: Vec::new(),
+        })
     })
 }
 

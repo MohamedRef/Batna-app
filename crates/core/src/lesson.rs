@@ -204,6 +204,98 @@ impl StepBody {
     }
 }
 
+impl Step {
+    /// Every piece of text the step shows, in reading order: prose,
+    /// questions, options, feedback, table cells, and the words drawn in
+    /// an SVG figure. Not ids, file names, credits or the page quote. The
+    /// "اختصارات" chip looks for abbreviations in these.
+    pub fn shown_text(&self) -> Vec<String> {
+        let mut out: Vec<String> = Vec::new();
+        let mut add = |s: &str| {
+            if !s.trim().is_empty() {
+                out.push(s.to_string());
+            }
+        };
+        match &self.body {
+            StepBody::Explain { title, text } => {
+                title.iter().for_each(|t| add(t));
+                add(text);
+            }
+            StepBody::Figure { title, svg, caption, .. } => {
+                title.iter().for_each(|t| add(t));
+                add(&svg_text(svg));
+                add(caption);
+            }
+            StepBody::Reveal { prompt, answer } => {
+                add(prompt);
+                add(answer);
+            }
+            // The mnemonic's word is the letters themselves, not an abbreviation.
+            StepBody::Mnemonic { parts, hook, .. } => {
+                parts.iter().for_each(|p| add(&p.text));
+                hook.iter().for_each(|h| add(h));
+            }
+            StepBody::Aside { text, .. } => add(text),
+            StepBody::Update { text, reference } => {
+                add(text);
+                add(reference);
+            }
+            StepBody::Check { question, options, why, .. } => {
+                add(question);
+                options.iter().chain(why).for_each(|o| add(o));
+            }
+            StepBody::Order { prompt, steps, why } => {
+                add(prompt);
+                steps.iter().chain(why).for_each(|o| add(o));
+            }
+            StepBody::Match { prompt, pairs, why } => {
+                add(prompt);
+                pairs.iter().flatten().chain(why).for_each(|o| add(o));
+            }
+            StepBody::Sort { prompt, bins, cards, why } => {
+                add(prompt);
+                bins.iter().for_each(|b| add(b));
+                cards.iter().for_each(|c| add(&c.text));
+                why.iter().for_each(|w| add(w));
+            }
+            StepBody::Case { stem, steps } => {
+                add(stem);
+                for c in steps {
+                    c.reveal.iter().for_each(|r| add(r));
+                    add(&c.question);
+                    c.options.iter().for_each(|o| add(o));
+                    add(&c.why);
+                }
+            }
+            StepBody::Table { title, columns, rows, .. } => {
+                add(title);
+                columns.iter().chain(rows.iter().flatten()).for_each(|c| add(c));
+            }
+            StepBody::Try { .. } => {}
+        }
+        out
+    }
+}
+
+/// The words an SVG draws: its text with the tags (and their attributes)
+/// taken out, so `fill="var(--ink)"` never reads as words.
+pub fn svg_text(svg: &str) -> String {
+    let mut out = String::with_capacity(svg.len() / 4);
+    let mut in_tag = false;
+    for c in svg.chars() {
+        match c {
+            '<' => in_tag = true,
+            '>' => {
+                in_tag = false;
+                out.push(' ');
+            }
+            c if !in_tag => out.push(c),
+            _ => {}
+        }
+    }
+    out.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
+}
+
 /// Every key a step of each kind may have, shared keys included. Serde
 /// can't reject unknown keys on a flattened enum, so [`validate`] checks.
 pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
@@ -1058,6 +1150,27 @@ pub fn svg_problems(svg: &str) -> Vec<String> {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn shown_text_covers_what_the_step_shows_and_svg_words_only() {
+        let svg = r#"<svg viewBox="0 0 10 10"><text x="1" class="t-sm">HVPG &amp; MELD</text></svg>"#;
+        let step = Step {
+            body: StepBody::Figure {
+                title: Some("Portal pressure".into()),
+                svg: svg.into(),
+                image: None,
+                caption: "TIPS lowers it".into(),
+                alt: "A gauge".into(),
+            },
+            page: Some(3),
+            quote: Some("not shown".into()),
+        };
+        let t = step.shown_text();
+        assert_eq!(t[0], "Portal pressure");
+        assert!(t[1].contains("HVPG & MELD") && !t[1].contains("viewBox") && !t[1].contains("t-sm"), "{t:?}");
+        assert_eq!(t[2], "TIPS lowers it");
+        assert!(!t.iter().any(|x| x.contains("not shown")));
+    }
+
     use super::*;
 
     fn latin_runs(line: &str) -> Vec<String> {

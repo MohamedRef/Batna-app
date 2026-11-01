@@ -14,6 +14,9 @@ struct Case {
     view: View,
     /// A response already on the step (sort: some cards placed, or checked).
     draft: Option<(Draft, Option<bool>)>,
+    /// The step's abbreviations sheet is open.
+    #[props(default)]
+    abbr: bool,
 }
 
 fn root(case: Case) -> Element {
@@ -27,6 +30,11 @@ fn root(case: Case) -> Element {
         crate::store::shared().put_local_setting(&player::pos_key(&case.lesson), &attempt).unwrap();
         *OPEN.write() = Some(case.lesson.clone());
         *VIEW.write() = case.view;
+        if case.abbr {
+            let texts = lesson.steps[case.at].shown_text();
+            let terms = crate::abbrsheet::entries(&texts).iter().map(|e| e.term.clone()).collect();
+            *crate::abbrsheet::OPEN.write() = Some(terms);
+        }
     });
     rsx! {
         Shell { screen: Screen::Learn, focus: true, Learn {} }
@@ -47,7 +55,7 @@ fn export_screen_fixtures_learn() {
                 continue;
             }
             for view in [View::Steps, View::Pages] {
-                let case = Case { lesson: lesson.id.clone(), at, view, draft: None };
+                let case = Case { lesson: lesson.id.clone(), at, view, draft: None, abbr: false };
                 let mut dom = VirtualDom::new_with_props(root, case);
                 dom.rebuild_in_place();
                 let view = if view == View::Pages { "pages" } else { "steps" };
@@ -67,13 +75,21 @@ fn export_screen_fixtures_learn() {
     // Mixed Arabic and English (2026-11-01): "label: value" bullets, "الـ"
     // before English words, full stops after English, and arrows between
     // terms, plus a figure whose label once ran off its edge.
-    for (lesson, at) in [("hb.L01.lesson2", 5), ("hb.L01.lesson2", 7), ("hb.L01.lesson2", 8)] {
+    // The last one has the step's abbreviations sheet open (2026-11-01).
+    let mixed = [
+        ("hb.L01.lesson2", 5, false),
+        ("hb.L01.lesson2", 7, false),
+        ("hb.L01.lesson2", 8, false),
+        ("hb.L01.lesson2", 8, true),
+    ];
+    for (lesson, at, abbr) in mixed {
         let (_, l) = Library::get().lesson(lesson).expect("mixed-text lesson");
         let step = &l.steps[at];
-        let case = Case { lesson: lesson.into(), at, view: View::Steps, draft: None };
+        let case = Case { lesson: lesson.into(), at, view: View::Steps, draft: None, abbr };
         let mut dom = VirtualDom::new_with_props(root, case);
         dom.rebuild_in_place();
-        let file = format!("lesson-mixed-{lesson}-{}-steps.html", at + 1);
+        let open = if abbr { "-abbr" } else { "" };
+        let file = format!("lesson-mixed-{lesson}-{}{open}-steps.html", at + 1);
         write_page(&dir, &file, &dom);
         manifest.push(serde_json::json!({
             "file": file, "screen": "learn", "kind": step.body.kind(), "view": "steps",
@@ -109,7 +125,13 @@ fn sort_states(dir: &std::path::Path, manifest: &mut Vec<serde_json::Value>) {
         ("checked", Draft::Sort { put: done, checked: true }, Some(false)),
     ];
     for (name, draft, answer) in states {
-        let case = Case { lesson: lesson.id.clone(), at, view: View::Steps, draft: Some((draft, answer)) };
+        let case = Case {
+            lesson: lesson.id.clone(),
+            at,
+            view: View::Steps,
+            draft: Some((draft, answer)),
+            abbr: false,
+        };
         let mut dom = VirtualDom::new_with_props(root, case);
         dom.rebuild_in_place();
         let file = format!("lesson-sort-{name}-steps.html");
@@ -150,7 +172,13 @@ fn case_states(dir: &std::path::Path, manifest: &mut Vec<serde_json::Value>) {
         ("done", Draft::Case { picks: all, at: n - 1, pick: None, first }, Some(false)),
     ];
     for (name, draft, answer) in states {
-        let case = Case { lesson: lesson.id.clone(), at, view: View::Steps, draft: Some((draft, answer)) };
+        let case = Case {
+            lesson: lesson.id.clone(),
+            at,
+            view: View::Steps,
+            draft: Some((draft, answer)),
+            abbr: false,
+        };
         let mut dom = VirtualDom::new_with_props(root, case);
         dom.rebuild_in_place();
         let file = format!("lesson-case-{name}-steps.html");

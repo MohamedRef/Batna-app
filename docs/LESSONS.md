@@ -51,6 +51,15 @@ The model to copy is `content/lessons/hb/L01.yaml`.
     `**term**: meaning` rows for definitions. Use `**bold**` for real terms
     only, and mark the 1–3 terms that matter most in the step with
     `==term==` (the marker highlight; the validator allows at most 3).
+12. **Every abbreviation is explained.** A step's «اختصارات» chip (beside
+    its «ص» chip) lists each abbreviation the step shows, text and figure
+    labels alike, with its expansion from `content/glossary.yaml`. So the
+    validator fails on any word with two or more capitals (`HRS-AKI`, `NITs`,
+    `TIF1γ`) that the glossary doesn't explain. Add an entry (`kind: abbr`,
+    the expansion in English, likeliest meaning first, then "also …"), or,
+    when the word isn't an abbreviation (emphasis like `NOT`, a Roman
+    numeral, a mnemonic's letters, a trial name), add it to `plain:` at the
+    end of the glossary.
 
 ## File shape
 
@@ -152,7 +161,7 @@ so nothing is fetched at runtime.
 
 `cargo run -p batna-tools -- validate` checks schema, ids, pages, quotes,
 item links, SVG safety, image files, sizes and licences, key-term counts,
-mnemonic spelling and option counts. Then run the
+mnemonic spelling, option counts and abbreviations (rule 12). Then run the
 app (`just run`, or `BATNA_OPEN_SCREEN=learn`) and play every lesson once.
 
 ## Saved responses

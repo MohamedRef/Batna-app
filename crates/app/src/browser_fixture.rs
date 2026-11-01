@@ -52,6 +52,7 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
             main { class: "content", "data-screen": "{screen:?}",
                 div { class: "content-rev", {children} }
             }
+            crate::abbrsheet::AbbrSheet {}
         }
     }
 }

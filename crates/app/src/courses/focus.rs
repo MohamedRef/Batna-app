@@ -178,7 +178,6 @@ pub fn Picker() -> Element {
             head: rsx! {
                 div {
                     h2 { id: "cf-title", {tx::PICK_TITLE} }
-                    p { class: "muted small", {tx::PICK_SUB} }
                 }
             },
             ul { class: "cf-list", role: "radiogroup", aria_labelledby: "cf-title",

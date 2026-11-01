@@ -219,7 +219,6 @@ pub fn LecturePage(id: String) -> Element {
                                 "data-tone": if c.approved >= c.total && c.total > 0 { "good" } else { "" },
                                 "{tx::CHECKED} " span { class: "num-ltr", "{c.approved}/{c.total}" }
                             }
-                            span { class: "muted", " {tx::CHECKED_NOTE}" }
                         }
                     }
                     p { class: "muted small",
@@ -293,7 +292,6 @@ pub fn LecturePage(id: String) -> Element {
             if let Some(s) = stats.filter(|s| !s.topics.is_empty()) {
                 section { class: "lec-section",
                     h2 { {tx::TOPICS} }
-                    p { class: "muted small", {tx::TOPICS_HINT} }
                     ul { class: "tap-list",
                         for t in s.topics.iter() {
                             {

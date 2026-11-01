@@ -148,7 +148,6 @@ pub fn BookSheet() -> Element {
                 if let Some(q) = &quote {
                     figure { class: "bk-quote",
                         blockquote { lang: "en", dir: "ltr", "“{q}”" }
-                        figcaption { class: "muted small", {tx::QUOTE_NOTE} }
                     }
                 } else if held {
                     p { class: "bk-quote muted", {tx::QUOTE_HELD} }

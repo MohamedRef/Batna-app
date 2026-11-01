@@ -127,7 +127,6 @@ pub fn Stats() -> Element {
         style { {STATS_CSS.text()} }
         header { class: "page-head",
             h1 { {tx::HEAD} }
-            p { class: "page-sub", {tx::HEAD_SUB} }
         }
         div { class: "tabs", role: "tablist", aria_label: tx::TABS_LABEL,
             for (t, label) in tabs {
@@ -201,9 +200,7 @@ fn Progress(data: std::rc::Rc<StudyData>) -> Element {
                 }
             }
         }
-        p { class: "muted small", {tx::RETENTION_HINT} }
         if rows.len() < Library::get().index.lectures.len() {
-            p { class: "muted small", {tx::NOT_WRITTEN} }
         }
     }
 }

@@ -149,7 +149,6 @@ pub fn Result() -> Element {
                 if weak.is_empty() && outcome.total.percent() >= 60 {
                     p { class: "muted small", {tx::ALL_STRONG} }
                 } else if weak.is_empty() {
-                    p { class: "muted small", {tx::START_WITH_WRONG} }
                 } else {
                     div { class: "chips",
                         // A weak topic opens the bank set to practise just it.

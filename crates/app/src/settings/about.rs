@@ -19,7 +19,6 @@ pub fn AboutSection() -> Element {
             p { class: "about-name", {app::NAME} }
             p { class: "muted", {app::TAGLINE} }
             p { {tx::VERSION} " " bdi { dir: "ltr", {env!("CARGO_PKG_VERSION")} } }
-            p { class: "muted small", {tx::PERSONAL} }
         }
         Card {
             h2 { {tx::CONTENT} }

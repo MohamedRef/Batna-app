@@ -157,6 +157,7 @@ pub fn UpdatesSection() -> Element {
         }
     };
     let content_mode = if content_news { SheetMode::Updated } else { SheetMode::History };
+    let has_content_sub = s.as_ref().and_then(Status::content_ahead).is_some();
     let content_sub = match s.as_ref().and_then(Status::content_ahead) {
         Some(c) => {
             let when = s.as_ref().and_then(|s| s.content_at).map(|at| {
@@ -169,7 +170,7 @@ pub fn UpdatesSection() -> Element {
                 {when.unwrap_or_default()}
             }
         }
-        None => rsx! { {tx::CONTENT_BUILT_IN} },
+        None => rsx! {},
     };
     let last_check = s.as_ref().and_then(|s| s.prefs.last_check_ms);
     let feed_down = s.as_ref().is_some_and(|s| {
@@ -214,7 +215,9 @@ pub fn UpdatesSection() -> Element {
                 span { class: "row-icon", aria_hidden: "true", {crate::icons::book()} }
                 span { class: "ur-text",
                     span { class: "ur-title", {tx::ROW_CONTENT} }
-                    span { class: "ur-sub", {content_sub} }
+                    if has_content_sub {
+                        span { class: "ur-sub", {content_sub} }
+                    }
                 }
                 if content_news {
                     span { class: "chip", "data-tone": "good", {tx::BADGE_NEW} }
@@ -234,7 +237,6 @@ pub fn UpdatesSection() -> Element {
                     }}
                 }
             } else if let Some(s) = s.clone() {
-                p { class: "muted small", {tx::CHECK_BOTH_SUB} }
                 // The feed itself out of reach is one line, not two.
                 if feed_down {
                     PhaseView { phase: s.phase.clone(), auto: s.prefs.mode == Mode::Auto, label: false }
@@ -292,7 +294,6 @@ pub fn UpdatesSection() -> Element {
                     label { class: "update-toggle",
                         span { class: "update-toggle-text",
                             span { {tx::NOTIFY} DeviceOnly {} }
-                            span { class: "muted small", {tx::NOTIFY_SUB} }
                         }
                         input {
                             r#type: "checkbox",
@@ -311,7 +312,6 @@ pub fn UpdatesSection() -> Element {
                 h2 { {tx::CHANNEL} DeviceOnly {} }
                 if s.preview {
                     p { span { class: "chip", {tx::PREVIEW} } }
-                    p { class: "muted small", {tx::PREVIEW_SUB} }
                 } else {
                     div { class: "segmented", role: "radiogroup", aria_label: tx::CHANNEL,
                         style: "grid-template-columns: repeat(3, 1fr);",
@@ -326,13 +326,8 @@ pub fn UpdatesSection() -> Element {
                             }
                         }
                     }
-                    p { class: "muted small", {tx::CHANNEL_SUB} }
                 }
             }
-        }
-        crate::ui::Card {
-            p { class: "muted small", {tx::SAFETY} }
-            p { class: "muted small", {tx::CONTENT} }
         }
     }
 }
@@ -447,7 +442,6 @@ fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
                 p { class: "muted small", {tx::INSTALLING_ANDROID} }
             }
             if matches!(phase, Phase::Available(_)) && auto && cfg!(target_os = "android") {
-                p { class: "muted small", {tx::WAITING_WIFI} }
             }
             if matches!(phase, Phase::Installed(_)) {
                 p { class: "muted small", {tx::NEXT_LAUNCH} }

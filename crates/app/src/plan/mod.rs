@@ -206,7 +206,6 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
     rsx! {
         crate::ui::Card { class: "plan-setup",
             h2 { {tx::SETUP_TITLE} }
-            p { class: "muted", {tx::SETUP_BODY} }
             label { class: "field",
                 span { {tx::EXAM_DAY} }
                 input {

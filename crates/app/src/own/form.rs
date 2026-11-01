@@ -264,7 +264,6 @@ fn Sheet(draft: Draft) -> Element {
                             }
                         }
                     }
-                    p { class: "muted small", {tx::PREVIEW_NOTE} }
                 }
             }
             if let Some(p) = problem() {
@@ -342,10 +341,6 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                 if !cards.is_empty() {
                     span { class: "chip", "{cards.len()} {tx::COUNT}" }
                 }
-            }
-            p { class: "muted small", {tx::INTRO} }
-            if cfg!(target_os = "android") {
-                p { class: "muted small", {tx::SHARE_HINT} }
             }
             div { class: "own-actions",
                 button { class: "btn btn-primary", onclick: move |_| open_new(), {tx::NEW} }

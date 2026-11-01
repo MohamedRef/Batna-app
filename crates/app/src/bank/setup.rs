@@ -294,7 +294,6 @@ pub fn Setup() -> Element {
                 header { class: "page-head",
                     crate::courses::CourseChip {}
                     h1 { {tx::TITLE} }
-                    p { class: "page-sub", {tx::LEAD} }
                 }
                 div { class: "segmented bank-modes", role: "radiogroup", "aria-label": tx::MODE_LABEL,
                     for (m, name, hint) in MODES {
@@ -313,7 +312,6 @@ pub fn Setup() -> Element {
                     crate::ui::Card { class: "bank-preset",
                         span { class: "chip", "data-tone": "accent", {tx::MOCK_SCOPE_CHIP} }
                         h2 { class: "bank-scope", {all_lectures()} }
-                        p { class: "muted small", {tx::MOCK_LEAD} }
                         div { class: "bank-count",
                             span { class: "muted small", {tx::COUNT} }
                             div { class: "chips",

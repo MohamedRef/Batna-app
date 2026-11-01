@@ -123,7 +123,6 @@ pub fn References() -> Element {
                 }
                 header { class: "page-head refs-title",
                     h1 { {tx::TITLE} }
-                    p { class: "page-sub", {tx::SUBTITLE} }
                 }
                 button {
                     class: "icon-button refs-add",

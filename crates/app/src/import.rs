@@ -224,7 +224,6 @@ pub fn ImportCard() -> Element {
     rsx! {
         crate::ui::Card { class: "",
             h2 { {tx::IMPORT_TITLE} }
-            p { class: "muted small", {tx::IMPORT_BODY} }
             {body}
         }
     }

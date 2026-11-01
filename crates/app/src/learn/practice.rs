@@ -127,13 +127,11 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
         }
         None => rsx! {
             p { class: "ls-verdict good", {tx::TRY_DONE} }
-            p { class: "muted small", {tx::TRY_DONE_HINT} }
         },
     };
     rsx! {
         div { class: "ls-try",
             p { class: "ls-kicker", {tx::TRY} }
-            p { class: "muted small", {tx::TRY_HINT} }
             {body}
         }
     }

@@ -20,7 +20,6 @@ pub fn StudySection() -> Element {
         style { {super::CSS.text()} }
         crate::ui::Card { class: "",
             h2 { {tx::RETENTION} }
-            p { class: "muted small", {tx::RETENTION_BODY} }
             div { class: "segmented", role: "radiogroup", aria_label: tx::RETENTION,
                 for r in Retention::ALL {
                     button {
@@ -48,7 +47,6 @@ pub fn StudySection() -> Element {
             if let Some(n) = plan_new {
                 p { "{tx::NEW_FROM_PLAN_1} {n} {tx::NEW_FROM_PLAN_2}" }
             } else {
-                p { class: "muted small", {tx::NEW_PER_DAY_BODY} }
                 div { class: "segmented", role: "radiogroup", aria_label: tx::NEW_PER_DAY,
                     for n in NEW_PER_DAY_CHOICES {
                         button {

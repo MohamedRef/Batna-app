@@ -30,7 +30,6 @@ pub(super) fn Setup(
                 div { class: "tab-main tab-sticky st-setup-go",
                     crate::courses::CourseChip {}
                     h1 { {tx::TITLE} }
-                    p { class: "muted", {tx::SETUP_INTRO} }
 
                     h2 { {tx::TIME} }
                     div { class: "segmented", role: "radiogroup", aria_label: tx::TIME,
@@ -110,7 +109,6 @@ pub(super) fn Setup(
                     if let Some(lecture) = single {
                         if !lecture.topics.is_empty() {
                             h2 { {tx::TOPICS} }
-                            p { class: "muted small", {tx::TOPICS_HINT} }
                             div { class: "st-chips",
                                 for t in lecture.topics.iter() {
                                     {

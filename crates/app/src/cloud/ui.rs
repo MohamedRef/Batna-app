@@ -166,7 +166,6 @@ pub fn SyncSection() -> Element {
             } else if signed_in {
                 SignedIn { status: status.clone() }
             } else {
-                p { class: "muted small", {tx::INTRO} }
                 if *cloud.signing_in.read() {
                     p { class: "muted", aria_live: "polite", {tx::SIGNING_IN} }
                 } else if status.finishing_sign_in {

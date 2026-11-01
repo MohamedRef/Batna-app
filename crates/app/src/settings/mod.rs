@@ -214,7 +214,6 @@ pub fn SettingsSheet() -> Element {
                 div { class: "settings-pane", key: "{current.id()}", role: "region", aria_labelledby: "settings-section-title",
                     header { class: "settings-intro",
                         h3 { id: "settings-section-title", {current.title()} }
-                        p { {current.summary()} }
                     }
                     SectionView { section: current }
                 }
@@ -255,7 +254,6 @@ fn SectionList(current: Section) -> Element {
                     aria_label: tx::SEARCH, placeholder: tx::SEARCH,
                     value: "{query}", oninput: move |event| query.set(event.value()),
                 }
-                p { class: "settings-save-hint", {tx::IMMEDIATE} }
             }
             nav { class: "settings-sections", aria_label: tx::SECTIONS,
                 for (title, members) in GROUPS {

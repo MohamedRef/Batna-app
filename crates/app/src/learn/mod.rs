@@ -142,7 +142,6 @@ pub fn ViewSection() -> Element {
     rsx! {
         crate::ui::Card {
             h2 { {tx::VIEW_TITLE} }
-            p { class: "muted small", {tx::VIEW_BODY} }
             div { class: "segmented", role: "radiogroup", aria_label: tx::VIEW_TITLE,
                 for (v , label , hint) in [(View::Steps, tx::VIEW_STEPS, tx::VIEW_STEPS_HINT), (View::Pages, tx::VIEW_PAGES, tx::VIEW_PAGES_HINT)] {
                     button {
@@ -325,9 +324,8 @@ fn LessonList() -> Element {
         header { class: "page-head",
             crate::courses::CourseChip {}
             h1 { {tx::HEAD} }
-            p { class: "page-sub",
-                {tx::HEAD_SUB}
-                if total > 0 { " · " span { class: "ls-nowrap", {tx::done_of(done, total)} } }
+            if total > 0 {
+                p { class: "page-sub", span { class: "ls-nowrap", {tx::done_of(done, total)} } }
             }
         }
         if total == 0 && focus::current().is_none() {

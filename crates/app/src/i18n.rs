@@ -108,7 +108,6 @@ pub mod sheet {
 pub mod book {
     pub const TITLE: &str = "صفحة الكتاب";
     pub const NO_LECTURE: &str = "الصفحة دي برّه المحاضرات اللي في باطنة.";
-    pub const QUOTE_NOTE: &str = "سطر قصير من الصفحة، عشان تتأكد من المصدر.";
     pub const QUOTE_HELD: &str = "سطر الكتاب هيظهر هنا بعد ما تجاوب، عشان مايكشفش الإجابة.";
     pub const MADE: &str = "اللي في باطنة من الصفحة دي:";
     pub const NOTHING_YET: &str = "لسه مفيش كروت أو أسئلة من الصفحة دي.";
@@ -243,7 +242,6 @@ pub mod today {
     pub const ALL_LESSONS: &str = "كل الدروس";
     pub const MORE_HEAD: &str = "حاجات تانية تفيدك";
     pub const QUICK_BANK: &str = "تدريب أسئلة سريع";
-    pub const QUICK_BANK_SUB: &str = "اختار موضوع، وجاوب على قد وقتك";
     pub const CHECKED_ROW: &str = "مراجعة صحة المحتوى";
     pub fn checked_sub(n: usize) -> String {
         format!("راجعت صحة {} لحد دلوقتي", super::count::count(n, &super::count::ITEM))
@@ -256,8 +254,6 @@ pub mod study_settings {
     pub const SECTION: &str = "المراجعة";
     pub const SECTION_SUB: &str = "نسبة التذكّر والجديد كل يوم";
     pub const RETENTION: &str = "نسبة التذكّر المطلوبة";
-    pub const RETENTION_BODY: &str =
-        "قد إيه عايز تكون فاكر السؤال لما ييجي ميعاده. نسبة أعلى يعني مراجعات أكتر.";
     pub const R85: &str = "أخف";
     pub const R90: &str = "متوازن";
     pub const R95: &str = "قبل الامتحان";
@@ -266,7 +262,6 @@ pub mod study_settings {
     pub const DEFAULT_PARAMS_1: &str = "الجدول هيتظبط على مذاكرتك لما توصل";
     pub const DEFAULT_PARAMS_2: &str = "مراجعة. لحد دلوقتي:";
     pub const NEW_PER_DAY: &str = "أسئلة جديدة في اليوم";
-    pub const NEW_PER_DAY_BODY: &str = "الجديد بيزوّد مراجعات الأيام الجاية، فاختار رقم تقدر تكمّل عليه.";
     pub const NEW_FROM_PLAN_1: &str = "عندك ميعاد امتحان، فالخطة هي اللي بتحدد الجديد كل يوم. النهارده:";
     pub const NEW_FROM_PLAN_2: &str = "جديد. تقدر تغيّر أيام المذاكرة وحد المراجعات من تقدّمي ← خطة الامتحان.";
 }
@@ -283,14 +278,11 @@ pub mod study {
         }
     }
     pub const TITLE: &str = "جلسة مذاكرة";
-    pub const SETUP_INTRO: &str =
-        "اختار المحاضرات والوقت. هنبدأ بالمراجعات اللي عليها الدور، وبعدها الجديد موضوع موضوع.";
     pub const EMPTY_LIBRARY: &str = "لسه مفيش محاضرة جاهزة للمذاكرة هنا. أول ما محاضرة تتكتب هتلاقيها في القايمة، ولحد ده ما يحصل تقدر تذاكر من Anki.";
     pub const LECTURES: &str = "المحاضرات";
     pub const PICK_ALL: &str = "اختار الكل";
     pub const CLEAR_ALL: &str = "امسح الاختيار";
     pub const TOPICS: &str = "المواضيع";
-    pub const TOPICS_HINT: &str = "سيبها فاضية عشان تذاكر المحاضرة كلها.";
     pub const TIME: &str = "الوقت";
     pub const NEW: &str = "جديد";
     pub const ABOUT: &str = "حوالي";
@@ -377,7 +369,6 @@ pub mod study {
     pub const SUM_NEW: &str = "جديد";
     pub const SUM_ALL_SOLID: &str = "كله كان ثابت. المراجعة الجاية هتيجي بعد فترة أطول.";
     pub const SUM_BACK_SOON: &str = "هيرجعولك قريب";
-    pub const SUM_BACK_SOON_HINT: &str = "دول عادي يتلخبطوا أول مرة. هيتكرروا لحد ما يثبتوا.";
     pub const NEXT_SESSION: &str = "الجلسة الجاية:";
     pub const NEXT_TOMORROW: &str = "ارجع بكرة لجلسة قصيرة، وهتلاقي المراجعات مستنياك.";
     pub const ANOTHER: &str = "جلسة كمان";
@@ -388,8 +379,6 @@ pub mod study {
 
 pub mod anki {
     pub const TITLE: &str = "ذاكر في Anki";
-    pub const BODY: &str =
-        "زرار واحد بيعمل ملف Anki فيه كل المحاضرات، كل محاضرة في ديك لوحدها، ويفتحه في AnkiDroid علطول.";
     pub const LECTURES: &str = "محاضرة";
     pub const ITEMS: &str = "سؤال وكارت";
     pub const BUTTON: &str = "صدّر لـ Anki";
@@ -397,7 +386,6 @@ pub mod anki {
     pub const DONE: &str = "الملف جاهز";
     pub const NOTES: &str = "كارت";
     pub const SAVED_IN: &str = "اتحفظ في";
-    pub const REIMPORT: &str = "لو استوردته قبل كده، الكروت هتتحدّث مكانها ومراجعاتك هتفضل زي ما هي.";
     pub const FAILED: &str = "معرفتش أكمّل التصدير:";
 }
 
@@ -405,7 +393,6 @@ pub mod bank {
     pub const PRACTISE_TOPIC: &str = "اتمرّن على الموضوع ده";
     pub const OPEN_LECTURE: &str = "افتح المحاضرة";
     pub const TITLE: &str = "بنك الأسئلة";
-    pub const LEAD: &str = "سؤال واحد، وفكرة تثبت. اختار طريقتك وابدأ.";
     pub const MODE_LABEL: &str = "طريقة الحل";
     pub const MODE_TUTOR_NAME: &str = "تدريب بشرح";
     pub const MODE_TUTOR_HINT: &str = "الشرح بعد كل سؤال";
@@ -453,8 +440,6 @@ pub mod bank {
     pub const PRESET_TUTOR: &str = "تختار، وبعدين تصحّح، فيظهر الشرح وصفحة الكتاب، وتعدّي لما تفهم.";
     pub const PRESET_TIMED: &str = "زي الامتحان: الوقت شغّال، تقدر تعلّم على سؤال وترجعله، والشرح كله في الآخر.";
     pub const MOCK_TITLE: &str = "امتحان تجريبي";
-    pub const MOCK_LEAD: &str =
-        "أسئلة متلخبطة من كل المحاضرات اللي خلصت، بالوقت، ودرجتك لكل محاضرة ولكل موضوع.";
     pub const START_MOCK: &str = "ابدأ الامتحان";
     pub const HISTORY: &str = "امتحاناتك اللي فاتت";
     pub const MODE_TIMED: &str = "بالوقت";
@@ -497,7 +482,6 @@ pub mod bank {
     pub const BY_LECTURE: &str = "حسب المحاضرة";
     pub const BY_TOPIC: &str = "حسب الموضوع";
     pub const WEAK: &str = "ابدأ مراجعتك بدول";
-    pub const START_WITH_WRONG: &str = "ابدأ بالأسئلة اللي غلطت فيها تحت، كل واحد معاه شرحه وصفحته.";
     pub const ALL_STRONG: &str = "مفيش موضوع تحت 60٪. شغل حلو.";
     pub const REVIEW: &str = "راجع الأسئلة";
     pub const SHOW_ALL: &str = "الكل";
@@ -551,16 +535,12 @@ pub mod stats {
     pub const NO_DATA: &str = "—";
     pub const TOPICS: &str = "المواضيع";
     pub const UNTAGGED: &str = "من غير موضوع";
-    pub const NOT_WRITTEN: &str = "المحاضرات اللي لسه بتتكتب هتظهر هنا أول ما تنزل.";
-    pub const RETENTION_HINT: &str =
-        "«بتفتكر» = نسبة الأسئلة اللي جاوبتها صح لما رجعتلك بعد يوم أو أكتر، آخر 30 يوم.";
 
     pub const WEAK_TITLE: &str = "أضعف 3 مواضيع دلوقتي";
     pub const WEAK_EMPTY: &str = "لسه بدري نحكم. بعد كام مراجعة هنعرف إيه اللي محتاج شغل زيادة.";
     pub const WEAK_START: &str = "ذاكر دول";
 
     pub const MISTAKES_TITLE: &str = "اللي غلطت فيه آخر 14 يوم";
-    pub const MISTAKES_NOTE: &str = "الغلطة بتختفي من هنا لما تجاوبها صح مرتين.";
     pub const MISTAKES_EMPTY: &str = "مفيش غلطات مفتوحة. كمّل كده.";
     pub const MISTAKES_START: &str = "جلسة من الغلطات";
     pub const MISSED: &str = "غلطت";
@@ -576,7 +556,6 @@ pub mod stats {
 
     // The 2026-10-29 redesign: a period switch with retention, activity and a next step.
     pub const HEAD: &str = "تقدّم له معنى";
-    pub const HEAD_SUB: &str = "شوف اللي اتحسن، واعرف خطوتك الجاية.";
     pub const PERIOD_LABEL: &str = "الفترة";
     pub const WEEK: &str = "الأسبوع ده";
     pub const MONTH: &str = "الشهر ده";
@@ -613,8 +592,6 @@ pub mod plan {
     pub const PROGRESS_HINT: &str = "افتح التقدّم بالتفصيل";
     pub const DAY_HINT: &str = "افتح محاضرة اليوم ده";
     pub const SETUP_TITLE: &str = "امتحانك إمتى؟";
-    pub const SETUP_BODY: &str =
-        "قولّي يوم الامتحان والأيام اللي تقدر تذاكر فيها، وأنا أوزّع المحاضرات عليها بهدوء.";
     pub const EXAM_DAY: &str = "يوم الامتحان";
     pub const DAYS_LABEL: &str = "أيام المذاكرة في الأسبوع";
     pub const CAP_LABEL: &str = "أقصى عدد مراجعات في اليوم";
@@ -761,7 +738,6 @@ pub mod order {
 pub mod oral {
     pub const MISSED_HINT: &str = "راجع السؤال ده في المراجعة";
     pub const TITLE: &str = "امتحان شفوي";
-    pub const INTRO: &str = "التطبيق يسألك بصوت عالي، وانت تجاوب بصوتك. بعد وقت التفكير يقولك الإجابة، وانت تقيّم نفسك. ينفع وانت ماشي.";
     pub const LECTURE: &str = "المحاضرة";
     pub const ALL_LECTURES: &str = "كل المحاضرات الجاهزة";
     pub const SIZE: &str = "عدد الأسئلة";
@@ -822,7 +798,6 @@ pub mod case {
     pub const TAB_CASES: &str = "حالات إكلينيكية";
     pub const TAB_CALC_ITEMS: &str = "تمارين بالأرقام";
     pub const TAB_CALCULATORS: &str = "الحاسبات";
-    pub const INTRO: &str = "كل حالة بتكشف بيانات جديدة خطوة بخطوة، وفي كل خطوة قرار واحد.";
     pub const EMPTY: &str = "لسه مفيش حالات. هتظهر هنا أول ما محاضراتها تتكتب، ولحد ده الحاسبات شغالة.";
     pub const EMPTY_CALC: &str = "لسه مفيش تمارين بالأرقام. هتظهر هنا مع المحاضرات، ولحد ده جرّب الحاسبات.";
     pub const STEPS: &str = "خطوات";
@@ -858,8 +833,6 @@ pub mod case {
 
 pub mod calc {
     pub const TITLE: &str = "الحاسبات";
-    pub const SUBTITLE: &str = "مدخلات واضحة، ونتيجة ليها معنى ومصدر.";
-    pub const INTRO: &str = "اكتب القيم بوحداتها. لو قيمة مش مظبوطة هتتعلّم في مكانها.";
     /// "فاضل 3 خانات"
     pub fn left(n: usize) -> String {
         format!("فاضل {}", super::count::count(n, &super::count::FIELD))
@@ -988,7 +961,6 @@ pub mod keys {
 
 pub mod verify {
     pub const GROUP: &str = "مراجعة صحة المحتوى";
-    pub const HINT: &str = "دي عن صحة المعلومة قدام الكتاب، مش عن تذكّرك، ومش بتغيّر تقييمك.";
     pub const QUESTION: &str = "المحتوى ده مظبوط؟";
     pub const RIGHT: &str = "✓ صح";
     pub const EDIT: &str = "✎ عدّل";
@@ -1003,7 +975,6 @@ pub mod verify {
     pub const WRONG_NOTE: &str = "إيه الغلط؟ (اختياري)";
     pub const WRONG_PLACEHOLDER: &str = "مثلاً: الكتاب صفحة 14 بيقول 7–9 نقط";
     pub const WRONG_CONFIRM: &str = "شيله من المراجعة";
-    pub const EDITOR_HINT: &str = "عدّل اللي محتاج يتعدّل بس. الكتاب هو المرجع.";
     pub const EDIT_NOTE: &str = "ملاحظة للي هيصلّح المحتوى (اختياري)";
     pub const NOTHING_CHANGED: &str = "ما غيّرتش حاجة لسه. عدّل حقل أو اكتب ملاحظة.";
     pub const F_FRONT: &str = "الوش";
@@ -1022,8 +993,6 @@ pub mod verify {
     pub const F_EXPECT: &str = "النتيجة";
     pub const F_INTERPRET: &str = "التفسير";
     pub const EXPORT_TITLE: &str = "صدّر مراجعاتك للمحتوى";
-    pub const EXPORT_BODY: &str =
-        "ملف فيه كل ✓ و✎ و✗ علّمتها. ابعته في المحادثة عشان المحتوى يتصلّح والموافقات تتسجّل.";
     pub const EXPORT_BUTTON: &str = "صدّر الملف";
     pub const EXPORT_SAVED: &str = "اتحفظ في:";
     pub const EXPORT_SHOW: &str = "اعرض النص (تقدر تنسخه)";
@@ -1032,9 +1001,6 @@ pub mod verify {
 
 pub mod own {
     pub const TITLE: &str = "كروتك";
-    pub const INTRO: &str = "كروت إنت كاتبها: من ورقة، من محاضرة، أو نص شيّرته من أي تطبيق. بتتذاكر مع الباقي، ومش محتاجة ✓ / ✎ / ✗ عشان إنت اللي كاتبها، ولها deck لوحدها في Anki.";
-    pub const SHARE_HINT: &str =
-        "على الموبايل والتابلت: حدّد أي نص واختار «Batna»، أو شيّره لـ Batna، وهيبقى مسودة كارت.";
     pub const NEW: &str = "＋ كارت جديد";
     pub const COUNT: &str = "كارت";
     pub const NONE_YET: &str = "لسه مفيش كروت.";
@@ -1069,13 +1035,10 @@ pub mod own {
     pub const FRONT_HINT: &str = "سؤال واحد يختبر فكرة واحدة…";
     pub const BACK_HINT: &str = "الإجابة الأساسية، وبعدها شرح قصير لو محتاج…";
     pub const PREVIEW: &str = "عاين الكارت";
-    pub const PREVIEW_NOTE: &str = "كده هيظهر في المذاكرة: السؤال الأول، والإجابة لما تكشفها.";
 }
 
 pub mod data {
     pub const EXPORT_TITLE: &str = "نسخة احتياطية من كل حاجة";
-    pub const EXPORT_BODY: &str =
-        "ملف واحد فيه مراجعاتك وعلاماتك على المحتوى وإعداداتك. تقدر ترجّعه على أي جهاز من «استرجع نسخة».";
     pub const EXPORT_BUTTON: &str = "احفظ نسخة";
     pub const EXPORT_SAVED_1: &str = "اتحفظت";
     pub const EXPORT_SAVED_2: &str = "حاجة في:";
@@ -1089,8 +1052,6 @@ pub mod data {
     pub const EXPORT_SAVE_CANCELLED: &str = "ما اخترتش مكان، النسخة لسه في فولدر التطبيق.";
     pub const EXPORT_SAVE_FAILED: &str = "ما عرفتش أنقلها، النسخة لسه في فولدر التطبيق.";
     pub const IMPORT_TITLE: &str = "استرجع نسخة";
-    pub const IMPORT_BODY: &str =
-        "بيدمج النسخة مع اللي على الجهاز ده. مفيش حاجة بتتمسح، واللي اتعدّل بعدين هو اللي بيكسب.";
     pub const IMPORT_FOUND: &str = "نسخ لقيتها على الجهاز:";
     pub const IMPORT_PICK: &str = "أو اختار ملف";
     pub const IMPORT_PICK_FIRST: &str = "اختار ملف النسخة";
@@ -1131,7 +1092,6 @@ pub mod cloud {
     pub const SECTION: &str = "المزامنة";
     pub const SECTION_SUB: &str = "حسابك وأجهزتك";
     pub const TITLE: &str = "المزامنة بين أجهزتك";
-    pub const INTRO: &str = "سجّل دخول بجوجل على الموبايل والتابلت والماك، واللي بتذاكره وعلاماتك على المحتوى هيبقوا على التلاتة. مجاني، وعلى سيرفر باطنة لوحده.";
     pub const NOT_CONFIGURED: &str = "المزامنة لسه ما اتفعّلتش في النسخة دي. مذاكرتك محفوظة على الجهاز، وتقدر تنقلها بنسخة احتياطية من «بياناتك».";
     pub const SIGN_IN: &str = "سجّل دخول بجوجل";
     pub const SIGNING_IN: &str = "كمّل تسجيل الدخول في المتصفح، وبعدين ارجع هنا.";
@@ -1184,7 +1144,6 @@ pub mod settings {
     pub const SEARCH: &str = "دوّر في الإعدادات";
     pub const NO_RESULTS: &str = "مفيش قسم مناسب. جرّب كلمة تانية زي الخط أو التذكيرات.";
     pub const CLEAR_SEARCH: &str = "امسح البحث";
-    pub const IMMEDIATE: &str = "الاختيارات بتتطبّق أول ما تغيّرها";
     pub const GROUP_STUDY: &str = "المذاكرة والتذكير";
     pub const GROUP_DEVICE: &str = "الشكل والجهاز";
     pub const GROUP_DATA: &str = "الحساب والبيانات";
@@ -1232,8 +1191,6 @@ pub mod settings {
 
     pub const DATA_FOLDER: &str = "فولدر البيانات";
     pub const DATA_NOWHERE: &str = "مش معروف على الجهاز ده";
-    pub const DATA_LOCAL: &str =
-        "كل اللي بتذاكره متسجل على الجهاز ده. خد منه نسخة احتياطية من فوق، أو زامنه مع أجهزتك من «المزامنة».";
     pub const DATA_GROUP_BACKUP: &str = "احفظ ورجّع";
     pub const DATA_GROUP_EXPORT: &str = "صدّر لبرّه";
     pub const DATA_GROUP_DEVICE: &str = "على الجهاز ده";
@@ -1244,10 +1201,8 @@ pub mod settings {
     pub const SOURCE: &str = "المصدر";
     pub const BOOK: &str =
         "Internal Medicine Postgraduate Lectures, Alexandria Faculty of Medicine (2025), part 1";
-    pub const PERSONAL: &str = "نسخة شخصية، مش منشورة.";
 
     pub const DIAG: &str = "اللي حصل من مشاكل";
-    pub const DIAG_BODY: &str = "لو حاجة اشتغلت غلط، انسخ السطور دي وابعتها. مفيهاش أي حاجة من مذاكرتك.";
     pub const DIAG_EMPTY: &str = "مفيش مشاكل لحد دلوقتي.";
     pub const DIAG_LINES: &str = "سطر";
     pub const DIAG_REFRESH: &str = "حدّث";
@@ -1302,7 +1257,6 @@ pub mod update {
         "افتحها واسترجع النسخة من الإعدادات › بياناتك.",
     ];
     pub const GET_PREVIEW: &str = "نزّل آخر نسخة تجربة";
-    pub const WAITING_WIFI: &str = "هينزّلها لوحده أول ما تبقى على واي فاي.";
     pub const LATER: &str = "بعدين";
     pub const WHATS_NEW: &str = "الجديد";
 
@@ -1310,12 +1264,9 @@ pub mod update {
     pub const GROUP_HAVE: &str = "اللي على جهازك";
     pub const ROW_APP: &str = "التطبيق";
     pub const ROW_CONTENT: &str = "الدروس والأسئلة والشكل";
-    /// The content row when no content-only update is in use.
-    pub const CONTENT_BUILT_IN: &str = "اللي جه مع التطبيق";
     /// Before "من يومين": when the content in use was published.
     pub const CONTENT_PUBLISHED: &str = "اتنشر";
     pub const GROUP_CHECK: &str = "البحث عن تحديث";
-    pub const CHECK_BOTH_SUB: &str = "بيدوّر على نسخة جديدة من التطبيق، وعلى دروس وأسئلة جديدة، مرة واحدة.";
     pub const LAST_CHECK: &str = "آخر مرة دوّرنا";
     /// The Settings list's Updates line.
     pub const SUMMARY_CONTENT_WAITING: &str = "دروس جديدة نزلت وهتفتح لوحدها";
@@ -1337,15 +1288,10 @@ pub mod update {
     pub const MODE_OFF: &str = "لأ";
     pub const MODE_OFF_SUB: &str = "بس لما تدوس \"دوّر على تحديث\".";
     pub const CHANNEL: &str = "القناة";
-    pub const CHANNEL_SUB: &str = "ألفا بتوصل الأول، والثابتة بتوصل آخر حاجة.";
     pub const ALPHA: &str = "ألفا";
     pub const BETA: &str = "بيتا";
     pub const STABLE: &str = "ثابتة";
     pub const PREVIEW: &str = "تجربة";
-    pub const PREVIEW_SUB: &str = "نسخة تجربة من CI: بتتحدّث من نسخ التجربة بس.";
-    pub const SAFETY: &str =
-        "كل تحديث متوقّع بمفتاح باطنة، وكل ملف بيتفحص قبل ما يتثبّت. مذاكرتك بتفضل على الجهاز زي ما هي.";
-    pub const CONTENT: &str = "المحاضرات الجديدة بتيجي مع التحديثات، حتى لو تحديث التطبيق نفسه مقفول.";
     pub const MB: &str = "ميجا";
 
     // The notifications Android shows around an install.
@@ -1369,19 +1315,15 @@ pub mod update {
     pub const NOTICE_CHANNEL: &str = "نسخ باطنة الجديدة";
     pub const NOTICE_CHANNEL_SUB: &str = "نسخة جديدة نزلت، وإيه الجديد فيها";
     pub const NOTIFY: &str = "ابعتلي إشعار أول ما تنزل نسخة جديدة";
-    pub const NOTIFY_SUB: &str = "على أندرويد حتى لو باطنة مقفول (بيبص كل كام ساعة)، ومعاه الجديد في سطرين. مفتاح الإشعارات في الجهاز له الكلمة الأخيرة.";
     pub const NOTICE_MORE: &str = "و{n} حاجات كمان";
 
     // The "what's new" sheet (crates/app/src/update/sheet.rs).
     pub const WHATS_NEW_ASK: &str = "إيه الجديد؟";
     pub const HISTORY: &str = "سجل التغييرات";
-    pub const HISTORY_SUB: &str = "كل نسخة واللي اتغيّر فيها، من الأحدث للأقدم.";
     pub const HISTORY_EMPTY: &str = "لسه مفيش تغييرات متسجّلة. هتظهر هنا مع أول تحديث.";
     pub const UPDATED_TITLE: &str = "باطنة اتحدّثت";
-    pub const UPDATED_SUB: &str = "ده اللي اتغيّر من آخر مرة فتحتها.";
     /// A content-only update: the app itself didn't change (#336).
     pub const CONTENT_UPDATED_TITLE: &str = "تحديث محتوى";
-    pub const CONTENT_UPDATED_SUB: &str = "الدروس والأسئلة اتحدّثت من غير ما تثبّت حاجة. ده اللي اتغيّر.";
     /// The quiet card on Today after a content-only update.
     pub const CONTENT_NOTE: &str = "الدروس اتحدّثت";
     pub const KIND_NEW: &str = "جديد";
@@ -1443,16 +1385,13 @@ pub mod update {
 
 pub mod sound {
     pub const TITLE: &str = "الأصوات والاهتزاز";
-    pub const BODY: &str = "صوت هادي مع الإجابة الصح ونغمة في آخر الجلسة. الإجابة الغلط مالهاش صوت.";
     pub const SOUNDS: &str = "الأصوات";
     pub const ON: &str = "شغّالة";
     pub const OFF: &str = "مقفولة";
     pub const RIGHT: &str = "صوت الإجابة الصح";
     pub const END: &str = "نغمة آخر الجلسة";
-    pub const PICK_HINT: &str = "دوس على أي واحد تسمعه وتختاره.";
     pub const VARIATION: &str = "صوت";
     pub const VIBRATE: &str = "الاهتزاز";
-    pub const VIBRATE_BODY: &str = "لمسة خفيفة مع كل إجابة. بيمشي على إعداد الاهتزاز في الموبايل.";
 }
 
 pub mod remind {
@@ -1467,17 +1406,13 @@ pub mod remind {
     pub const MAC_HINT: &str =
         "على الماك الإشعار بيظهر حتى لو باطنة مقفولة. لو ما ظهرش، اسمح لباطنة من إعدادات النظام › الإشعارات.";
     pub const DAILY: &str = "تذكير المذاكرة اليومي";
-    pub const DAILY_BODY: &str = "إشعار واحد في المعاد اللي تختاره، فيه عدد المراجعات المستنياك.";
     pub const ON: &str = "شغّال";
     pub const OFF: &str = "مقفول";
     pub const TIMES: &str = "المواعيد";
     pub const TIME: &str = "معاد التذكير";
     pub const ADD: &str = "زوّد معاد";
     pub const REMOVE: &str = "شيل";
-    pub const RULES: &str =
-        "بيرن بس في أيام المذاكرة اللي في خطة الامتحان، ولو خلّصت مراجعات النهارده مش هيرن تاني لحد بكرة.";
     pub const HERE: &str = "يرن على الجهاز ده";
-    pub const HERE_BODY: &str = "جهاز واحد بس يرن، عشان الموبايل والتابلت ما يرنّوش مع بعض.";
     pub const BLOCKED: &str = "الإشعارات مقفولة لباطنة، فالتذكير مش هيظهر.";
     pub const ALLOW: &str = "اسمح بالإشعارات";
     pub const OPEN_NOTIFICATIONS: &str = "افتح إعدادات الإشعارات";
@@ -1520,7 +1455,6 @@ pub mod onboard {
     pub const THEME_TITLE: &str = "تحب الألوان إزاي؟";
     pub const THEME_BODY: &str = "«نبطشية» غامق ودافي، للمذاكرة بالليل.";
     pub const REOPEN_TITLE: &str = "أسئلة البداية";
-    pub const REOPEN_BODY: &str = "يوم الامتحان، أيام المذاكرة، طول الجلسة، التذكير والألوان، في مكان واحد.";
     pub const REOPEN: &str = "افتحها تاني";
 
     // The 2026-10-29 redesign: three quick screens, details optional.
@@ -1630,8 +1564,6 @@ pub mod learn {
     pub const PROGRESS_LABEL: &str = "موضعك في الدرس";
     pub const NAV_REQUIRED: &str = "كمّل المطلوب في الخطوة دي أو اختار «عدّي الخطوة دي» عشان تكمل.";
     pub const VIEW_TITLE: &str = "شكل الدرس";
-    pub const VIEW_BODY: &str =
-        "في الاتنين تقدر تسحب الشاشة يمين وشمال علشان تقلب. لو فيه سؤال لسه ما جاوبتوش، الصفحة مش هتتقلب.";
     pub const VIEW_STEPS: &str = "خطوات";
     pub const VIEW_STEPS_HINT: &str = "زرار «كمّل» كبير تحت";
     pub const VIEW_PAGES: &str = "صفحات";
@@ -1685,10 +1617,8 @@ pub mod learn {
     pub const NOT_QUITE: &str = "قريب، بس مش دي.";
 
     pub const TRY: &str = "جرّب بنفسك";
-    pub const TRY_HINT: &str = "دي كروت المحاضرة نفسها. إجابتك هنا بتتحسب مراجعة.";
     pub const TRY_OF: &str = "كارت";
     pub const TRY_DONE: &str = "تمام كده ✓";
-    pub const TRY_DONE_HINT: &str = "الكروت دي هترجعلك في المراجعة في ميعادها.";
 
     pub const DONE_TITLE: &str = "خلّصت الدرس";
     pub const FIRST_TRY: &str = "صح من أول مرة";
@@ -1696,8 +1626,6 @@ pub mod learn {
     pub const PRACTICE: &str = "راجع كروت الدرس";
     pub const NEXT_LESSON: &str = "الدرس الجاي";
     pub const BACK_TO_LIST: &str = "رجوع للدروس";
-    pub const PRACTICE_HINT: &str =
-        "أحسن وقت تراجع الكروت هو دلوقتي، وهي لسه سخنة. وبعدين التطبيق يرجّعهالك قبل ما تنساها.";
 
     pub fn placed_of(k: usize, n: usize) -> String {
         format!("اخترت {k} من {n}")
@@ -1735,7 +1663,6 @@ pub mod learn {
 
     // The 2026-10-29 redesign of the list.
     pub const HEAD: &str = "دروس قصيرة، وفهم أعمق";
-    pub const HEAD_SUB: &str = "افهم فكرة، وبعدها جرّب تسترجعها.";
     pub const SEARCH: &str = "محاضرة، موضوع، أو كلمة…";
     pub const SEARCH_LABEL: &str = "دوّر في الدروس";
     pub const CLEAR_SEARCH: &str = "امسح البحث";
@@ -1819,7 +1746,6 @@ pub mod courses {
     pub const NO_CONTENT: &str = "لسه مفيش محاضرات. هتنزل لما المنهج يوصل.";
     pub const ALL: &str = "كل المقررات";
     pub const PICK_TITLE: &str = "تذاكر إيه دلوقتي؟";
-    pub const PICK_SUB: &str = "الدروس والمراجعة والأسئلة هيتعرضوا للمقرر اللي تختاره بس.";
     pub const MAP_LINK: &str = "خريطة المقررات والساعات";
 
     pub fn chip_label(name: &str) -> String {
@@ -1860,7 +1786,6 @@ pub mod courses {
 
 pub mod refs {
     pub const TITLE: &str = "مراجعك";
-    pub const SUBTITLE: &str = "المحاضرات وصفحات الكتاب وكروتك، في مكان واحد.";
     pub const ADD_CARD: &str = "كارت جديد";
     pub const SEARCH: &str = "دوّر في المحاضرات";
     pub const SEARCH_HINT: &str = "دوّر على محاضرة أو موضوع…";
@@ -1891,9 +1816,7 @@ pub mod lecture {
     pub const MCQS: &str = "سؤال اختيارات في البنك";
     pub const CASES: &str = "حالة";
     pub const TOPICS: &str = "المواضيع";
-    pub const TOPICS_HINT: &str = "اضغط على موضوع تذاكره لوحده.";
     pub const CHECKED: &str = "صحة المحتوى: راجعت";
-    pub const CHECKED_NOTE: &str = "منفصلة عن إنك خلّصت الدروس.";
 }
 
 /// Shared preference write recovery.

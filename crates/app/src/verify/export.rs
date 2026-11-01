@@ -38,7 +38,6 @@ pub fn ExportVerdicts() -> Element {
     rsx! {
         crate::ui::Card { class: "",
             h2 { {tx::EXPORT_TITLE} }
-            p { class: "muted small", {tx::EXPORT_BODY} }
             p { class: "small",
                 "✓ {count(Verdict::Approved)} · ✎ {count(Verdict::Edited)} · ✗ {count(Verdict::Wrong)}"
             }

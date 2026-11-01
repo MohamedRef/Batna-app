@@ -34,7 +34,6 @@ pub(super) fn SummaryView(
                     p { {tx::SUM_ALL_SOLID} }
                 } else {
                     h2 { {tx::SUM_BACK_SOON} }
-                    p { class: "muted small", {tx::SUM_BACK_SOON_HINT} }
                     ul { class: "st-shaky", lang: "en", dir: "ltr",
                         for (id , text) in shaky {
                             li { key: "{id}", "{text}" }

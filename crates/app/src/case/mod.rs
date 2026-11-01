@@ -172,7 +172,6 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
     let lectures: std::collections::HashMap<String, &'static str> =
         items_in_library(kind).into_iter().map(|(l, i)| (i.id.clone(), l)).collect();
     rsx! {
-        if kind == "case" { p { class: "muted", {tx::INTRO} } }
         if groups.iter().all(|(_, v)| v.is_empty()) {
             crate::ui::Card { element: crate::ui::CardElement::Paragraph, class: "muted", {empty} }
         } else {

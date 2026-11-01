@@ -106,7 +106,6 @@ pub fn ExportCard() -> Element {
     rsx! {
         crate::ui::Card {
             h2 { {tx::EXPORT_TITLE} }
-            p { class: "muted small", {tx::EXPORT_BODY} }
             button { class: "btn btn-primary", onclick: move |_| run(), {tx::EXPORT_BUTTON} }
             match outcome() {
                 Some(Ok((path, rows))) => rsx! {

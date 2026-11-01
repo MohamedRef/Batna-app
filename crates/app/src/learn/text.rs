@@ -73,23 +73,24 @@ fn runs(spans: Vec<Span>) -> Element {
         for (i , piece) in pieces.into_iter().enumerate() {
             match piece {
                 Piece::Arabic(g) => rsx! { span { key: "{i}", {styled(g)} } },
-                // A short term ("vitamin A and") stays on one line.
-                Piece::Term(g) => rsx! {
-                    bdi { key: "{i}", dir: "ltr", lang: "en", class: "ls-nw", {styled(g)} }
-                },
-                // A longer one (a book sentence) is its own left-to-right box,
-                // so where it wraps it reads top to bottom instead of its
-                // halves trading places with the Arabic around it. Its "الـ"
-                // and the comma after it stay with the box.
-                Piece::Sentence { article, g } => {
-                    let glued = !article.is_empty();
-                    rsx! {
-                    span { key: "{i}", class: if glued { "ls-en-wrap ls-en-glued" } else { "ls-en-wrap" },
-                        if glued {
-                            span { {styled(article)} }
+                // An English term is its own left-to-right box: a short one
+                // ("vitamin A and") stays on one line, a longer one (a book
+                // sentence) wraps top to bottom instead of its halves trading
+                // places with the Arabic around it. Neither is ever wider than
+                // the line. Its "الـ" stays beside it.
+                Piece::Term { article, g, long } => {
+                    let class = if long { "ls-en" } else { "ls-nw" };
+                    if article.is_empty() {
+                        rsx! {
+                            bdi { key: "{i}", dir: "ltr", lang: "en", class, {styled(g)} }
                         }
-                        bdi { dir: "ltr", lang: "en", class: "ls-en", {styled(g)} }
-                    }
+                    } else {
+                        rsx! {
+                            span { key: "{i}", class: "ls-en-glued",
+                                span { {styled(article)} }
+                                bdi { dir: "ltr", lang: "en", class, {styled(g)} }
+                            }
+                        }
                     }
                 }
             }
@@ -100,11 +101,10 @@ fn runs(spans: Vec<Span>) -> Element {
 /// What a mixed line is drawn from, in reading order.
 enum Piece {
     Arabic(Vec<Span>),
-    Term(Vec<Span>),
-    Sentence { article: Vec<Span>, g: Vec<Span> },
+    Term { article: Vec<Span>, g: Vec<Span>, long: bool },
 }
 
-/// Sorts the groups into pieces: a long English run gets a box with the
+/// Sorts the groups into pieces: each English run gets a box with the
 /// "الـ" before it beside it. A whole sentence takes the punctuation after
 /// it into its box too: it fills its lines, and a comma left outside would
 /// wrap to the start of the next line. A shorter box keeps the punctuation
@@ -130,13 +130,12 @@ fn pieces(mut groups: Vec<(bool, Vec<Span>)>) -> Vec<Piece> {
             out.push(Piece::Arabic(g));
             continue;
         }
-        if !long[k] {
-            out.push(Piece::Term(g));
-            continue;
-        }
-        // The glued article ("بالـ\u{a0}") moves out of the Arabic before.
+        // The glued article ("بالـ\u{a0}") moves out of the Arabic before,
+        // to sit beside a term. A sentence box is as tall as its lines, so
+        // the article stays at the end of the Arabic line before it.
         let mut article = Vec::new();
-        if let Some(Piece::Arabic(prev)) = out.last_mut()
+        if !sentence(&g)
+            && let Some(Piece::Arabic(prev)) = out.last_mut()
             && let Some(last) = prev.last_mut()
             && last.text.ends_with('\u{a0}')
         {
@@ -148,7 +147,7 @@ fn pieces(mut groups: Vec<(bool, Vec<Span>)>) -> Vec<Piece> {
                 prev.pop();
             }
         }
-        out.push(Piece::Sentence { article, g });
+        out.push(Piece::Term { article, g, long: long[k] });
     }
     out
 }

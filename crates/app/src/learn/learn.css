@@ -62,15 +62,15 @@ mark {
   border-radius: 2px;
 }
 .ls-rich bdi { font-size: 0.97em; }
-/* A short English term stays on one line ("vitamin A and"). */
-.ls-nw { white-space: nowrap; }
-/* A longer English run inside Arabic (a book sentence): one LTR box. Split
+/* An English run inside Arabic is one LTR box (learn/text.rs `runs`): split
    over lines as plain inline text, its halves land on opposite sides of the
-   Arabic between them; as a box it wraps like an English paragraph. */
-.ls-en { display: inline-block; max-inline-size: 100%; }
+   Arabic between them. A box takes its one-line width when that fits and
+   wraps like an English paragraph only when it is wider than the line, so a
+   short term ("vitamin A and") stays whole and nothing spills sideways. */
+.ls-nw, .ls-en { display: inline-block; max-inline-size: 100%; }
 /* Its "الـ" stays beside it; the box leaves the article room on the line. */
 .ls-en-glued { white-space: nowrap; }
-.ls-en-glued .ls-en { white-space: normal; max-inline-size: calc(100% - 3em); }
+.ls-en-glued > bdi { white-space: normal; max-inline-size: calc(100% - 3em); }
 
 /* ---------- the list (2026-10-29 redesign) ----------
    A page head, search, the picked lecture (header + lesson rows), then the

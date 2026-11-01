@@ -68,25 +68,93 @@ fn runs(spans: Vec<Span>) -> Element {
         }
     }
     glue_prefixes(&mut groups);
-    space_punctuation(&mut groups);
-    flip_arrows(&mut groups);
+    let pieces = pieces(groups);
     rsx! {
-        for (i , (latin , nw , g)) in groups.into_iter().map(|(l, g)| (l, short(&g), g)).enumerate() {
-            if latin {
-                bdi {
-                    key: "{i}",
-                    dir: "ltr",
-                    lang: "en",
-                    // A short term ("vitamin A and") stays on one line.
-                    class: if nw { "ls-nw" } else { "" },
-                    {styled(g)}
+        for (i , piece) in pieces.into_iter().enumerate() {
+            match piece {
+                Piece::Arabic(g) => rsx! { span { key: "{i}", {styled(g)} } },
+                // A short term ("vitamin A and") stays on one line.
+                Piece::Term(g) => rsx! {
+                    bdi { key: "{i}", dir: "ltr", lang: "en", class: "ls-nw", {styled(g)} }
+                },
+                // A longer one (a book sentence) is its own left-to-right box,
+                // so where it wraps it reads top to bottom instead of its
+                // halves trading places with the Arabic around it. Its "الـ"
+                // and the comma after it stay with the box.
+                Piece::Sentence { article, g } => {
+                    let glued = !article.is_empty();
+                    rsx! {
+                    span { key: "{i}", class: if glued { "ls-en-wrap ls-en-glued" } else { "ls-en-wrap" },
+                        if glued {
+                            span { {styled(article)} }
+                        }
+                        bdi { dir: "ltr", lang: "en", class: "ls-en", {styled(g)} }
+                    }
+                    }
                 }
-            } else {
-                span { key: "{i}", {styled(g)} }
             }
         }
     }
 }
+
+/// What a mixed line is drawn from, in reading order.
+enum Piece {
+    Arabic(Vec<Span>),
+    Term(Vec<Span>),
+    Sentence { article: Vec<Span>, g: Vec<Span> },
+}
+
+/// Sorts the groups into pieces: a long English run gets a box with the
+/// "الـ" before it beside it. A whole sentence takes the punctuation after
+/// it into its box too: it fills its lines, and a comma left outside would
+/// wrap to the start of the next line. A shorter box keeps the punctuation
+/// on its left, where the Arabic sentence puts it.
+fn pieces(mut groups: Vec<(bool, Vec<Span>)>) -> Vec<Piece> {
+    let long: Vec<bool> = groups.iter().map(|(latin, g)| *latin && !short(g)).collect();
+    for k in 0..groups.len() {
+        if !long[k] || !sentence(&groups[k].1) || groups.get(k + 1).is_none_or(|(latin, _)| *latin) {
+            continue;
+        }
+        let first = &mut groups[k + 1].1[0];
+        let n: usize = first.text.chars().take_while(|c| PUNCT.contains(*c)).map(char::len_utf8).sum();
+        if n > 0 {
+            let punct: String = first.text.drain(..n).collect();
+            groups[k].1.push(Span { text: punct, bold: false, key: false, latin: true });
+        }
+    }
+    space_punctuation(&mut groups);
+    flip_arrows(&mut groups);
+    let mut out: Vec<Piece> = Vec::new();
+    for (k, (latin, g)) in groups.into_iter().enumerate() {
+        if !latin {
+            out.push(Piece::Arabic(g));
+            continue;
+        }
+        if !long[k] {
+            out.push(Piece::Term(g));
+            continue;
+        }
+        // The glued article ("بالـ\u{a0}") moves out of the Arabic before.
+        let mut article = Vec::new();
+        if let Some(Piece::Arabic(prev)) = out.last_mut()
+            && let Some(last) = prev.last_mut()
+            && last.text.ends_with('\u{a0}')
+        {
+            let body = &last.text[..last.text.len() - '\u{a0}'.len_utf8()];
+            let at = body.rfind(' ').map_or(0, |i| i + 1);
+            let word = last.text.split_off(at);
+            article.push(Span { text: word, bold: last.bold, key: last.key, latin: false });
+            if last.text.is_empty() {
+                prev.pop();
+            }
+        }
+        out.push(Piece::Sentence { article, g });
+    }
+    out
+}
+
+/// Sentence punctuation that follows an English term in an Arabic line.
+const PUNCT: &str = ".,;!?،؛؟";
 
 fn styled(spans: Vec<Span>) -> Element {
     rsx! {
@@ -104,7 +172,7 @@ fn styled(spans: Vec<Span>) -> Element {
 
 /// In an Arabic line the full stop or comma after an English term belongs
 /// to the Arabic sentence, so it sits on the term's left, right against its
-/// first letter: "shrunken … normal." read ".shrunken". A thin space after
+/// first letter: "shrunken … normal." read ".shrunken". A hair space after
 /// the term sets it apart. A colon stays close, as after an Arabic label.
 fn space_punctuation(groups: &mut [(bool, Vec<Span>)]) {
     for k in 1..groups.len() {
@@ -112,9 +180,9 @@ fn space_punctuation(groups: &mut [(bool, Vec<Span>)]) {
             continue;
         }
         if let Some(first) = groups[k].1.first_mut()
-            && first.text.starts_with(|c: char| ".,;!?،؛؟".contains(c))
+            && first.text.starts_with(|c: char| PUNCT.contains(c))
         {
-            first.text.insert(0, '\u{2009}');
+            first.text.insert(0, '\u{200A}');
         }
     }
 }
@@ -162,11 +230,16 @@ fn glue_prefixes(groups: &mut [(bool, Vec<Span>)]) {
     }
 }
 
-/// Up to three words and 24 letters: kept whole on its line.
+/// Seven words or more: a sentence from the book, not a term.
+fn sentence(g: &[Span]) -> bool {
+    g.iter().map(|s| s.text.split_whitespace().count()).sum::<usize>() >= 7
+}
+
+/// Up to three words and 32 letters: kept whole on its line.
 fn short(g: &[Span]) -> bool {
     let len: usize = g.iter().map(|s| s.text.trim().chars().count()).sum();
     let words: usize = g.iter().map(|s| s.text.split_whitespace().count()).sum();
-    len <= 24 && words <= 3
+    len <= 32 && words <= 3
 }
 
 /// Mostly-English text (an option, a table cell) runs left-to-right.
@@ -191,14 +264,22 @@ mod tests {
         let h = html("- الـ edge: **sharp**، وممكن يبقى **irregular**");
         assert!(h.contains("الـ\u{a0}</span>"), "الـ stays with its word: {h}");
         assert!(h.contains(">edge</span></bdi>"), "label and value are separate terms: {h}");
-        assert!(h.contains("\u{2009}، وممكن"), "the comma is set apart from the term: {h}");
+        assert!(h.contains("\u{200A}، وممكن"), "the comma is set apart from the term: {h}");
         // Arrows between terms point the way the line reads.
         let h = html("الـ compensated → الـ first decompensation (بالراحة أو فجأة) → decompensated.");
         assert!(h.contains('←') && !h.contains('→'), "{h}");
         // An English line keeps its own order, full stop and arrows.
         let h = html("- Bleeding → ceftriaxone, then norfloxacin.");
         assert!(h.contains(r#"<bdi dir="ltr" lang="en">"#) && h.contains("<span>.</span></bdi>"), "{h}");
-        assert!(h.contains('→') && !h.contains('\u{2009}'), "{h}");
+        assert!(h.contains('→') && !h.contains('\u{200A}'), "{h}");
+        // A book sentence inside an Arabic line is one box with its comma;
+        // "الـ" stays beside a longer term's box.
+        let h = html(
+            "**Ascites is due to the accumulation of endogenous vasodilators**، و **PH acts as a localizing factor** بيوجّه",
+        );
+        assert!(h.contains(r#"class="ls-en""#) && h.contains("<span>،</span></bdi>"), "{h}");
+        let h = html("من الـ intravascular compartment pressure للـ تجويف");
+        assert!(h.contains("ls-en-glued") && h.contains("<span>الـ\u{a0}</span>"), "{h}");
         let h = html("Genome: single-stranded RNA.\n\nتمام كده.");
         assert!(h.contains(r#"<p dir="ltr">"#), "an English paragraph runs left to right: {h}");
     }

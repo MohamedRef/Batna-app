@@ -323,7 +323,11 @@ fn Stage(
     let mut round = use_signal(|| 0u32);
     let mut fresh = use_signal(|| false);
     let (checked, answered_before) = retry;
-    let can_retry = checked || (answered_before && !fresh());
+    // A case has its own ↻ under every checked part (mini_case.rs), so the
+    // step-wide one only shows for a record opened with no saved parts.
+    let per_part = matches!(step.body, StepBody::Case { .. });
+    let can_retry =
+        if per_part { before.is_some() && !fresh() } else { checked || (answered_before && !fresh()) };
     let texts = use_hook(|| step.shown_text());
     let has_abbr = use_hook(|| !crate::abbrsheet::entries(&texts).is_empty());
     rsx! {

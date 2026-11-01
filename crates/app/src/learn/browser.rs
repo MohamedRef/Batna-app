@@ -70,14 +70,19 @@ fn export_screen_fixtures_learn() {
         }
     }
     sort_states(&dir, &mut manifest);
+    case_states(&dir, &mut manifest);
     assert_eq!(kinds.len(), 13, "every lesson step kind has a fixture: {kinds:?}");
     // Mixed Arabic and English (2026-11-01): "label: value" bullets, "الـ"
     // before English words, full stops after English, and arrows between
     // terms, plus a figure whose label once ran off its edge.
     // The last one has the step's abbreviations sheet open (2026-11-01).
-    for (lesson, at, abbr) in
-        [("hb.L01.lesson2", 5, false), ("hb.L01.lesson2", 8, false), ("hb.L01.lesson3", 9, true)]
-    {
+    let mixed = [
+        ("hb.L01.lesson2", 5, false),
+        ("hb.L01.lesson2", 7, false),
+        ("hb.L01.lesson2", 8, false),
+        ("hb.L01.lesson3", 9, true),
+    ];
+    for (lesson, at, abbr) in mixed {
         let (_, l) = Library::get().lesson(lesson).expect("mixed-text lesson");
         let step = &l.steps[at];
         let case = Case { lesson: lesson.into(), at, view: View::Steps, draft: None, abbr };
@@ -133,6 +138,53 @@ fn sort_states(dir: &std::path::Path, manifest: &mut Vec<serde_json::Value>) {
         write_page(dir, &file, &dom);
         manifest.push(serde_json::json!({
             "file": file, "screen": "learn", "kind": "sort", "view": "steps",
+            "lesson": lesson.id, "step": at + 1, "steps": lesson.steps.len(),
+            "question": answer.is_none(),
+        }));
+    }
+}
+
+/// A mini case after part 1 (checked wrong, part 2 open with its scenario)
+/// and once every part is checked: each part's ↻, the scenario box and the
+/// explanation card (Mohamed, 2026-11-01).
+fn case_states(dir: &std::path::Path, manifest: &mut Vec<serde_json::Value>) {
+    let (lesson, at, step) = Library::get()
+        .all_lessons()
+        .flat_map(|(_, l)| l.steps.iter().enumerate().map(move |(at, s)| (l, at, s)))
+        .find(|(_, _, s)| match &s.body {
+            StepBody::Case { steps, .. } => {
+                steps.len() > 1 && steps[1].reveal.is_some() && !steps[0].options.is_empty()
+            }
+            _ => false,
+        })
+        .expect("a case with a later scenario");
+    let StepBody::Case { steps, .. } = &step.body else { unreachable!() };
+    let n = steps.len();
+    let wrong = |i: usize| steps[i].answer.map(|a| (a + 1) % steps[i].options.len().max(1));
+    let mut part1 = vec![None; n];
+    part1[0] = wrong(0);
+    let all: Vec<_> =
+        (0..n).map(|i| if steps[i].options.is_empty() { Some(0) } else { steps[i].answer }).collect();
+    let mut first = all.clone();
+    first[0] = wrong(0);
+    let states = [
+        ("part1", Draft::Case { picks: part1.clone(), at: 1, pick: None, first: part1 }, None),
+        ("done", Draft::Case { picks: all, at: n - 1, pick: None, first }, Some(false)),
+    ];
+    for (name, draft, answer) in states {
+        let case = Case {
+            lesson: lesson.id.clone(),
+            at,
+            view: View::Steps,
+            draft: Some((draft, answer)),
+            abbr: false,
+        };
+        let mut dom = VirtualDom::new_with_props(root, case);
+        dom.rebuild_in_place();
+        let file = format!("lesson-case-{name}-steps.html");
+        write_page(dir, &file, &dom);
+        manifest.push(serde_json::json!({
+            "file": file, "screen": "learn", "kind": "case", "view": "steps",
             "lesson": lesson.id, "step": at + 1, "steps": lesson.steps.len(),
             "question": answer.is_none(),
         }));

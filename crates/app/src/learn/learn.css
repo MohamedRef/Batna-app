@@ -64,6 +64,13 @@ mark {
 .ls-rich bdi { font-size: 0.97em; }
 /* A short English term stays on one line ("vitamin A and"). */
 .ls-nw { white-space: nowrap; }
+/* A longer English run inside Arabic (a book sentence): one LTR box. Split
+   over lines as plain inline text, its halves land on opposite sides of the
+   Arabic between them; as a box it wraps like an English paragraph. */
+.ls-en { display: inline-block; max-inline-size: 100%; }
+/* Its "الـ" stays beside it; the box leaves the article room on the line. */
+.ls-en-glued { white-space: nowrap; }
+.ls-en-glued .ls-en { white-space: normal; max-inline-size: calc(100% - 3em); }
 
 /* ---------- the list (2026-10-29 redesign) ----------
    A page head, search, the picked lecture (header + lesson rows), then the
@@ -509,11 +516,13 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-options .answer:disabled:not([data-state]) { opacity: 0.6; }
 .ls-options .answer[data-state="wrong"] { animation: ls-shake 260ms; }
 .ls-why { margin: 0; padding-inline: var(--sp-3); color: var(--muted); }
+/* The explanation after a check: a tinted card, never the left-bar box a
+   case stem or scenario uses (Mohamed, 2026-11-01). */
 .ls-why-box {
   border-radius: var(--radius);
   padding: var(--sp-2) var(--sp-3);
-  background: var(--bg);
-  border-inline-start: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--line-soft, var(--line));
 }
 .ls-why-box .ls-rich { font-size: var(--fs-md); }
 
@@ -689,7 +698,8 @@ button.ls-slot:hover { border-color: var(--accent); }
 .ls-sort > .btn, .ls-order .btn, .ls-case .btn { align-self: start; }
 
 /* mini case */
-.ls-case-stem {
+/* The stem and every later scenario ("Six months later…") share one box. */
+.ls-case-stem, .ls-case-step > .ls-case-reveal {
   background: var(--bg);
   border-radius: var(--radius);
   padding: var(--sp-3);
@@ -697,7 +707,6 @@ button.ls-slot:hover { border-color: var(--accent); }
 }
 .ls-case-step { display: flex; flex-direction: column; gap: var(--sp-2); padding-block-start: var(--sp-2); border-block-start: 1px dashed var(--line); }
 .ls-case-step > p { margin: 0; }
-.ls-case-reveal { color: var(--muted); font-style: italic; }
 
 /* table */
 .ls-table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }

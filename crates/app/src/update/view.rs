@@ -675,9 +675,7 @@ pub fn use_content_switch(ui: Ui) {
                 // Otherwise a slow first render can mark a bad pack as good.
                 if should_settle_content(crate::content::Library::is_initialized(), loaded_for) {
                     loaded_for += 1;
-                    if loaded_for == 1 {
-                        super::pack_settled();
-                    }
+                    super::pack_settled();
                 }
                 if super::get().is_none() {
                     continue;
@@ -777,5 +775,18 @@ mod tests {
         for busy in [Screen::Study, Screen::Bank, Screen::Cases, Screen::Oral] {
             assert!(!calm(busy), "{busy:?}");
         }
+    }
+}
+
+#[cfg(test)]
+mod settle_tests {
+    use super::should_settle_content;
+
+    #[test]
+    fn a_timer_before_library_load_never_settles_the_pack() {
+        assert!(!should_settle_content(false, 0));
+        assert!(!should_settle_content(false, 1));
+        assert!(should_settle_content(true, 0));
+        assert!(!should_settle_content(true, 1));
     }
 }

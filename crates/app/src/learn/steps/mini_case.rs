@@ -21,17 +21,28 @@ pub(super) fn MiniCase(
             .collect::<Vec<_>>()
     });
     let (saved, put) = use_draft();
-    let (picks0, at0, pick0) = match saved {
-        Draft::Case { picks, at, pick } if picks.len() == n && at < n => (picks, at, pick),
-        _ => (vec![None; n], 0, None),
+    let (picks0, at0, pick0, first0) = match saved {
+        Draft::Case { picks, at, pick, first } if picks.len() == n && at < n => {
+            // Drafts from before `first`: what he had checked was his first try.
+            let first = if first.len() == n { first } else { picks.clone() };
+            (picks, at, pick, first)
+        }
+        _ => (vec![None; n], 0, None, vec![None; n]),
     };
     let mut at = use_signal(|| at0);
     // The checked pick per part (a part without options: Some(0) once shown).
     let mut picks = use_signal(|| picks0);
     // The current part's pick, before Check.
     let mut pick = use_signal(|| pick0);
+    // The first checked pick per part: the score. "حاول تاني" never moves it.
+    let mut first = use_signal(|| first0);
     let save = use_callback(move |()| {
-        put.call(Draft::Case { picks: picks.peek().clone(), at: *at.peek(), pick: *pick.peek() })
+        put.call(Draft::Case {
+            picks: picks.peek().clone(),
+            at: *at.peek(),
+            pick: *pick.peek(),
+            first: first.peek().clone(),
+        })
     });
     let answers: Vec<Option<usize>> = steps.iter().map(|s| s.answer).collect();
     let has_options: Vec<bool> = steps.iter().map(|s| !s.options.is_empty()).collect();
@@ -39,13 +50,28 @@ pub(super) fn MiniCase(
     // A part is settled: the whole case is done once the last one is.
     let settle = use_callback(move |(si, p): (usize, usize)| {
         picks.write()[si] = Some(p);
+        if first.peek()[si].is_none() {
+            first.write()[si] = Some(p);
+        }
         pick.set(None);
         save.call(());
         if si + 1 == n {
-            let v = picks.peek().clone();
+            // Scored on first tries; a re-solve after the first result is
+            // ignored by Attempt::answer anyway.
+            let v: Vec<Option<usize>> =
+                first.peek().iter().zip(picks.peek().iter()).map(|(f, p)| f.or(*p)).collect();
             let right = v.iter().zip(&answers).zip(&has_options).all(|((p, a), o)| !*o || *p == *a);
             on_answer.call(right);
         }
+    });
+    // Re-solve one part: practice only, its first pick still counts. The
+    // case goes back to that part; later parts keep their answers and come
+    // back as he goes on.
+    let redo = use_callback(move |si: usize| {
+        picks.write()[si] = None;
+        pick.set(None);
+        at.set(si);
+        save.call(());
     });
     use_check_bar(
         move || pick().is_some(),
@@ -108,6 +134,15 @@ pub(super) fn MiniCase(
                             }
                             if done.is_some() {
                                 div { class: "ls-why-box ls-pop", dir: "ltr", lang: "en", Rich { text: s.why.clone() } }
+                                if !s.options.is_empty() {
+                                    button {
+                                        class: "icon-button ls-retry",
+                                        aria_label: tx::RETRY,
+                                        title: tx::RETRY,
+                                        onclick: move |_| redo.call(si),
+                                        span { aria_hidden: "true", "↻" }
+                                    }
+                                }
                                 if last && si + 1 < n {
                                     button {
                                         class: "btn btn-secondary",

@@ -45,6 +45,11 @@ jobs:
         run: node --test crates/app/tests/system-back.test.cjs
       - name: Production Android Back and Settings keyboard regression tests
         run: node --test crates/app/tests/ui-runtime.test.mjs
+      - name: Content impact classification tests
+        run: python3 -m unittest discover -s scripts/tests -p 'test_content_impact.py' -v
+      - name: Explain update impact
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/content_impact.py --base HEAD^1 --head HEAD >> "$GITHUB_STEP_SUMMARY"
       - name: Content checks (schema, ids, pages, approvals)
         run: cargo run -q -p batna-tools -- validate
       - name: Offline content pack builds and round-trips

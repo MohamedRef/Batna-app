@@ -80,7 +80,7 @@ fn export_screen_fixtures_learn() {
         ("hb.L01.lesson2", 5, false),
         ("hb.L01.lesson2", 7, false),
         ("hb.L01.lesson2", 8, false),
-        ("hb.L01.lesson3", 9, true),
+        ("hb.L01.lesson2", 8, true),
     ];
     for (lesson, at, abbr) in mixed {
         let (_, l) = Library::get().lesson(lesson).expect("mixed-text lesson");

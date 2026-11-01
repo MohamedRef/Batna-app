@@ -649,6 +649,12 @@ fn overlay_open() -> bool {
     crate::lecture::is_open() || crate::own::drafting() || *crate::onboarding::OPEN.peek()
 }
 
+/// The startup guard must not certify a pack until the process has opened it.
+/// The first tick after a real load marks two seconds of stable operation.
+fn should_settle_content(loaded: bool, settled_ticks: u32) -> bool {
+    loaded && settled_ticks == 0
+}
+
 /// Switches to a content pack that arrived while Batna is open, once he is
 /// between sessions (the calm moments a quiet install waits for too): the
 /// lectures, lessons and look change under him with no install, and the
@@ -662,11 +668,13 @@ pub fn use_content_switch(ui: Ui) {
             // Ticks since the pack in use was opened: once Batna has drawn
             // its first screen and run a couple of seconds on it, the
             // crash-loop guard starts counting again (#344).
-            let mut since_open = 0u32;
+            let mut loaded_for = 0u32;
             loop {
                 tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-                since_open += 1;
-                if since_open == 1 {
+                // Count calm time only after the library is genuinely loaded.
+                // Otherwise a slow first render can mark a bad pack as good.
+                if should_settle_content(crate::content::Library::is_initialized(), loaded_for) {
+                    loaded_for += 1;
                     super::pack_settled();
                 }
                 if super::get().is_none() {
@@ -682,7 +690,7 @@ pub fn use_content_switch(ui: Ui) {
                         r.backend.borrow_mut().library_replaced();
                     }
                     *crate::content::REV.write() += 1;
-                    since_open = 0;
+                    loaded_for = 0;
                 }
             }
         }
@@ -767,5 +775,18 @@ mod tests {
         for busy in [Screen::Study, Screen::Bank, Screen::Cases, Screen::Oral] {
             assert!(!calm(busy), "{busy:?}");
         }
+    }
+}
+
+#[cfg(test)]
+mod settle_tests {
+    use super::should_settle_content;
+
+    #[test]
+    fn a_timer_before_library_load_never_settles_the_pack() {
+        assert!(!should_settle_content(false, 0));
+        assert!(!should_settle_content(false, 1));
+        assert!(should_settle_content(true, 0));
+        assert!(!should_settle_content(true, 1));
     }
 }

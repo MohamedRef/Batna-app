@@ -61,6 +61,12 @@ impl Library {
         GENERATION.load(Ordering::SeqCst)
     }
 
+    /// True once the running process has actually opened a library.
+    /// A startup timer alone cannot certify a downloaded pack as working.
+    pub(crate) fn is_initialized() -> bool {
+        LIB.read().unwrap_or_else(|e| e.into_inner()).is_some()
+    }
+
     fn load() -> Library {
         // A newer pack from the update feed wins (checked and decoded
         // there); else the embedded one, which build.rs wrote from types

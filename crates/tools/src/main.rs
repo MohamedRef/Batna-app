@@ -18,6 +18,7 @@ use batna_core::validate::{self, Context};
 
 mod anki;
 mod changes;
+mod ids;
 mod lessons;
 mod packs;
 mod refs;
@@ -52,6 +53,7 @@ fn main() -> ExitCode {
         Some("verdicts") => report(verdicts::run(&root, &args[1..])),
         Some("update") => report(update::run(&root, &args[1..])),
         Some("refs") => report(refs::run(&root, &args[1..])),
+        Some("ids") => report(ids::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -78,7 +80,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 
 fn usage() -> ExitCode {
     eprintln!(
-        "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs> [--root DIR] (see the top of crates/tools/src/main.rs)"
+        "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF>> [--root DIR] (see the top of crates/tools/src/main.rs)"
     );
     ExitCode::from(2)
 }

@@ -635,15 +635,16 @@ impl Updater {
     }
 
     /// Removes every app download except `keep`, and the staged record
-    /// unless kept. Prefs, the changelog and the content pack stay.
+    /// unless kept. Prefs, the changelog and every content file stay: the
+    /// pack in use, its record, the crash-loop guard and the last good pack
+    /// (`recovery`), all named `content.*`.
     pub(super) fn clear_downloads(&self, keep: Option<&str>) {
         let Ok(entries) = fs::read_dir(&self.dir) else { return };
         for e in entries.flatten() {
             let name = e.file_name().to_string_lossy().into_owned();
-            if matches!(
-                name.as_str(),
-                "prefs.json" | changelog::FILE | PACK_FILE | PACK_INFO | PACK_REJECTED | PACK_STARTS
-            ) || Some(name.as_str()) == keep
+            if matches!(name.as_str(), "prefs.json" | changelog::FILE)
+                || name.starts_with("content.")
+                || Some(name.as_str()) == keep
                 || keep.is_some_and(|k| name == format!("{k}.part") || name == format!("{k}.part.json"))
             {
                 continue;

@@ -55,6 +55,33 @@ pub mod count {
         Noun { one: "خانة واحدة", two: "خانتين", few: "خانات", many: "خانة" };
     pub const LESSON: Noun =
         Noun { one: "درس واحد", two: "درسين", few: "دروس", many: "درس" };
+    pub const COURSE: Noun =
+        Noun { one: "مقرر واحد", two: "مقررين", few: "مقررات", many: "مقرر" };
+    pub const CARD: Noun =
+        Noun { one: "كارت واحد", two: "كارتين", few: "كروت", many: "كارت" };
+    pub const STEP: Noun =
+        Noun { one: "خطوة واحدة", two: "خطوتين", few: "خطوات", many: "خطوة" };
+    pub const MISTAKE: Noun =
+        Noun { one: "غلطة واحدة", two: "غلطتين", few: "غلطات", many: "غلطة" };
+    pub const ANSWER: Noun =
+        Noun { one: "إجابة واحدة", two: "إجابتين", few: "إجابات", many: "إجابة" };
+    pub const LINE: Noun =
+        Noun { one: "سطر واحد", two: "سطرين", few: "سطور", many: "سطر" };
+    pub const THING: Noun =
+        Noun { one: "حاجة واحدة", two: "حاجتين", few: "حاجات", many: "حاجة" };
+    pub const CHANGE: Noun =
+        Noun { one: "تغيير واحد", two: "تغييرين", few: "تغييرات", many: "تغيير" };
+    pub const ROW: Noun = Noun { one: "صف واحد", two: "صفين", few: "صفوف", many: "صف" };
+    pub const POINT: Noun =
+        Noun { one: "نقطة واحدة", two: "نقطتين", few: "نقط", many: "نقطة" };
+    pub const STUDY_DAY: Noun =
+        Noun {
+            one: "يوم مذاكرة واحد", two: "يومين مذاكرة", few: "أيام مذاكرة", many: "يوم مذاكرة"
+        };
+    pub const CREDIT_HOUR: Noun =
+        Noun {
+            one: "ساعة معتمدة واحدة", two: "ساعتين معتمدين", few: "ساعات معتمدة", many: "ساعة معتمدة"
+        };
     pub const CALC: Noun =
         Noun { one: "حاسبة واحدة", two: "حاسبتين", few: "حاسبات", many: "حاسبة" };
 
@@ -70,9 +97,80 @@ pub mod count {
         }
     }
 
+    /// A count written elsewhere as text ("7", "7.5"): whole numbers follow
+    /// `count`; a fraction takes the singular ("7.5 ساعة").
+    pub fn count_text(n: &str, noun: &Noun) -> String {
+        match n.parse::<u64>() {
+            Ok(n) => count(n, noun),
+            Err(_) => format!("{n} {}", noun.many),
+        }
+    }
+
+    /// The bare noun for a number shown on its own (a big digit with a
+    /// label beside it): the plural for 2–10, the singular otherwise.
+    pub fn word<N: TryInto<u64>>(n: N, noun: &Noun) -> &'static str {
+        let n: u64 = n.try_into().unwrap_or(0);
+        if (2..=10).contains(&(n % 100)) && n != 0 { noun.few } else { noun.many }
+    }
+
     #[cfg(test)]
     mod tests {
         use super::*;
+
+        #[test]
+        fn text_counts_and_bare_words() {
+            assert_eq!(count_text("7", &HOUR), "7 ساعات");
+            assert_eq!(count_text("1", &HOUR), "ساعة");
+            assert_eq!(count_text("2", &HOUR), "ساعتين");
+            assert_eq!(count_text("12", &HOUR), "12 ساعة");
+            assert_eq!(count_text("7.5", &HOUR), "7.5 ساعة");
+            assert_eq!(word(7, &MINUTE), "دقايق");
+            assert_eq!(word(45, &MINUTE), "دقيقة");
+            assert_eq!(word(1, &MINUTE), "دقيقة");
+            assert_eq!(word(0, &MINUTE), "دقيقة");
+        }
+
+        /// Every noun keeps the digit-free forms for 1 and 2 and the digit
+        /// for the rest, so no line reads "7 ساعة" or "2 أيام".
+        #[test]
+        fn every_noun_agrees() {
+            for noun in [
+                &SECOND,
+                &MINUTE,
+                &HOUR,
+                &DAY,
+                &MONTH,
+                &QUESTION,
+                &LECTURE,
+                &TOPIC,
+                &ITEM,
+                &REVIEW,
+                &NEW_THING,
+                &TIME,
+                &CASE,
+                &FIELD,
+                &LESSON,
+                &COURSE,
+                &CARD,
+                &STEP,
+                &MISTAKE,
+                &ANSWER,
+                &LINE,
+                &THING,
+                &CHANGE,
+                &ROW,
+                &POINT,
+                &STUDY_DAY,
+                &CREDIT_HOUR,
+                &CALC,
+            ] {
+                assert_eq!(count(1, noun), noun.one);
+                assert_eq!(count(2, noun), noun.two);
+                assert_eq!(count(7, noun), format!("7 {}", noun.few));
+                assert_eq!(count(11, noun), format!("11 {}", noun.many));
+                assert_eq!(count(0, noun), format!("0 {}", noun.many));
+            }
+        }
 
         #[test]
         fn egyptian_number_agreement() {
@@ -197,13 +295,11 @@ pub mod today {
         match days {
             1 => "الامتحان بكرة. إنت جاهز أكتر مما فاكر.".to_string(),
             2 => "فاضل يومين على الامتحان".to_string(),
-            n => format!("فاضل {n} يوم على الامتحان"),
+            n => format!("فاضل {} على الامتحان", super::count::count(n, &super::count::DAY)),
         }
     }
     pub const PLAN_TODAY: &str = "خطة النهارده:";
     pub const PLAN_NEW: &str = "جديد";
-    pub const PLAN_REVIEWS: &str = "مراجعة";
-    pub const PLAN_REVIEWS_ONLY: &str = "مراجعة بس";
     pub const ABOUT: &str = "حوالي";
     pub const RING_LABEL: &str = "اللي خلّصته من خطة النهارده";
     pub const NEW_LEFT_1: &str = "فاضل";
@@ -221,7 +317,7 @@ pub mod today {
         let days = if days == 1 {
             "يوم مذاكرة زيادة".to_string()
         } else {
-            format!("{days} أيام مذاكرة زيادة")
+            format!("{} زيادة", super::count::count(days, &super::count::STUDY_DAY))
         };
         format!(
             "الخطة محتاجة {days} في الأسبوع عشان كل الجديد يخلص قبل آخر الأيام. تقدر تعدّلها من تقدّمي ← خطة الامتحان."
@@ -265,7 +361,21 @@ pub mod today {
     pub fn start_session(minutes: u32) -> String {
         format!("ابدأ الجلسة · {}", super::count::count(minutes, &super::count::MINUTE))
     }
-    pub const MINUTES_ALL: &str = "دقايق للكل تقريبًا";
+    /// The label beside the big minutes digit: "دقايق" or "دقيقة" to match it.
+    pub fn minutes_all(n: u32) -> String {
+        format!("{} للكل تقريبًا", super::count::word(n, &super::count::MINUTE))
+    }
+    /// "حوالي 45 دقيقة للكل تقريبًا", read aloud.
+    pub fn minutes_all_label(n: u32) -> String {
+        format!("{} للكل تقريبًا", super::count::count(n, &super::count::MINUTE))
+    }
+    /// "3 جديد + 12 مراجعة" on today's plan line.
+    pub fn plan_line(new: u32, due: usize) -> String {
+        format!("{new} {PLAN_NEW} + {}", super::count::count(due, &super::count::REVIEW))
+    }
+    pub fn plan_reviews_only(due: usize) -> String {
+        format!("{} بس", super::count::count(due, &super::count::REVIEW))
+    }
     pub const MINUTES_HINT: &str = "شوف الحمل في الأيام الجاية";
     pub const OPEN_NEXT_LESSON: &str = "افتح الدرس الجاي";
     pub const CONTINUE_HEAD: &str = "كمّل من مكانك";
@@ -288,9 +398,15 @@ pub mod study_settings {
     pub const R90: &str = "متوازن";
     pub const R95: &str = "قبل الامتحان";
     pub const PERSONAL_1: &str = "الجدول متظبط على مذاكرتك أنت، من";
-    pub const PERSONAL_2: &str = "مراجعة. بيتحدّث كل أسبوع.";
+    /// "الجدول متظبط على مذاكرتك أنت، من 520 مراجعة. …"
+    pub fn personal(n: u32) -> String {
+        format!("{PERSONAL_1} {}. بيتحدّث كل أسبوع.", super::count::count(n, &super::count::REVIEW))
+    }
+    pub fn default_params(need: usize, so_far: usize) -> String {
+        use super::count::{REVIEW, count};
+        format!("{DEFAULT_PARAMS_1} {}. لحد دلوقتي: {so_far}.", count(need, &REVIEW))
+    }
     pub const DEFAULT_PARAMS_1: &str = "الجدول هيتظبط على مذاكرتك لما توصل";
-    pub const DEFAULT_PARAMS_2: &str = "مراجعة. لحد دلوقتي:";
     pub const NEW_PER_DAY: &str = "أسئلة جديدة في اليوم";
     pub const NEW_FROM_PLAN_1: &str = "عندك ميعاد امتحان، فالخطة هي اللي بتحدد الجديد كل يوم. النهارده:";
     pub const NEW_FROM_PLAN_2: &str = "جديد. تقدر تغيّر أيام المذاكرة وحد المراجعات من تقدّمي ← خطة الامتحان.";
@@ -359,8 +475,12 @@ pub mod study {
     pub const CLOZE_WRONG: &str = "الإجابة الصح مكتوبة فوق. هترجعلك تاني قريب.";
 
     pub const ENUM_GOAL_A: &str = "فيه";
-    pub const ENUM_GOAL_B: &str = "نقط، ولو افتكرت";
     pub const ENUM_GOAL_C: &str = "منهم تعدّي.";
+    /// "فيه 8 نقط، ولو افتكرت 5 منهم تعدّي."
+    pub fn enum_goal(total: usize, pass: usize) -> String {
+        let total = super::count::count(total, &super::count::POINT);
+        format!("{ENUM_GOAL_A} {total}، ولو افتكرت {pass} {ENUM_GOAL_C}")
+    }
     pub const ENUM_PLACEHOLDER: &str = "اكتب اللي فاكره، أو قوله لنفسك بصوت عالي (اختياري)";
     pub const SHOW_POINTS: &str = "خلصت، وريني النقط";
     pub const TICK_WHAT_YOU_GOT: &str = "علّم على اللي افتكرته.";
@@ -411,14 +531,20 @@ pub mod study {
 
 pub mod anki {
     pub const TITLE: &str = "ذاكر في Anki";
-    pub const LECTURES: &str = "محاضرة";
-    pub const ITEMS: &str = "سؤال وكارت";
     pub const BUTTON: &str = "صدّر لـ Anki";
     pub const WORKING: &str = "بجهّز الملف…";
     pub const DONE: &str = "الملف جاهز";
-    pub const NOTES: &str = "كارت";
     pub const SAVED_IN: &str = "اتحفظ في";
     pub const FAILED: &str = "معرفتش أكمّل التصدير:";
+    /// "12 محاضرة · 340 سؤال وكارت".
+    pub fn contents(lectures: usize, items: usize) -> String {
+        use super::count::{ITEM, LECTURE, count};
+        format!("{} · {}", count(lectures, &LECTURE), count(items, &ITEM))
+    }
+    /// "الملف جاهز (340 كارت)."
+    pub fn done(notes: usize) -> String {
+        format!("{DONE} ({}).", super::count::count(notes, &super::count::CARD))
+    }
 }
 
 pub mod bank {
@@ -614,7 +740,8 @@ pub mod stats {
     pub const MONTH_START: &str = "من 30 يوم";
     pub const TODAY: &str = "النهارده";
     pub fn day_bar(minutes: u32, answers: u32) -> String {
-        format!("{minutes} دقيقة، {answers} إجابة")
+        use super::count::{ANSWER, MINUTE, count};
+        format!("{}، {}", count(minutes, &MINUTE), count(answers, &ANSWER))
     }
     pub const NEXT_STEP: &str = "خطوة تفيدك دلوقتي";
 }
@@ -650,7 +777,10 @@ pub mod plan {
     ];
 
     pub const EXAM_ON: &str = "الامتحان";
-    pub const DAYS_LEFT: &str = "يوم مذاكرة فاضل";
+    /// "فاضل 40 يوم مذاكرة".
+    pub fn days_left(n: usize) -> String {
+        format!("فاضل {}", super::count::count(n, &super::count::STUDY_DAY))
+    }
     pub const FINAL_FROM: &str = "آخر أيام قبل الامتحان (امتحانات تجريبية ومواضيع ضعيفة، من غير جديد) تبدأ";
 
     pub const TODAY: &str = "النهارده";
@@ -720,7 +850,7 @@ pub mod table {
         if left == 1 {
             "فاضل خانة واحدة: عرفتها ولا لأ؟".to_string()
         } else {
-            format!("فاضل {left} خانات: علّم على كل واحدة عرفتها ولا لأ.")
+            format!("فاضل {}: علّم على كل واحدة عرفتها ولا لأ.", super::count::count(left, &super::count::FIELD))
         }
     }
 
@@ -728,7 +858,7 @@ pub mod table {
         if right == total {
             format!("كل الخانات صح ({total} من {total}). حلو أوي!")
         } else {
-            format!("افتكرت {right} من {total} خانات.")
+            format!("افتكرت {right} من {}.", super::count::count(total, &super::count::FIELD))
         }
     }
 }
@@ -762,7 +892,7 @@ pub mod order {
         if moves == 1 {
             "الترتيب قريب: نقل خطوة واحدة بس بيظبطه.".to_string()
         } else {
-            format!("الترتيب قريب: نقل {moves} خطوات بس بيظبطه.")
+            format!("الترتيب قريب: نقل {} بس بيظبطه.", super::count::count(moves, &super::count::STEP))
         }
     }
 }
@@ -833,8 +963,11 @@ pub mod case {
     pub const TAB_CALCULATORS: &str = "الحاسبات";
     pub const EMPTY: &str = "لسه مفيش حالات. هتظهر هنا أول ما محاضراتها تتكتب، ولحد ده الحاسبات شغالة.";
     pub const EMPTY_CALC: &str = "لسه مفيش تمارين بالأرقام. هتظهر هنا مع المحاضرات، ولحد ده جرّب الحاسبات.";
-    pub const STEPS: &str = "خطوات";
     pub const STEP: &str = "خطوة";
+    /// "5 خطوات", "خطوتين".
+    pub fn steps(n: usize) -> String {
+        super::count::count(n, &super::count::STEP)
+    }
     pub const NEW_DATA: &str = "بيانات جديدة";
     pub const STEPS_LABEL: &str = "خطوات الحالة";
     pub const NOW: &str = "دلوقتي";
@@ -1105,7 +1238,9 @@ pub mod verify {
 pub mod own {
     pub const TITLE: &str = "كروتك";
     pub const NEW: &str = "＋ كارت جديد";
-    pub const COUNT: &str = "كارت";
+    pub fn cards(n: usize) -> String {
+        super::count::count(n, &super::count::CARD)
+    }
     pub const NONE_YET: &str = "لسه مفيش كروت.";
     pub const EDIT: &str = "عدّل";
     pub const DELETE: &str = "امسح";
@@ -1144,7 +1279,23 @@ pub mod data {
     pub const EXPORT_TITLE: &str = "نسخة احتياطية من كل حاجة";
     pub const EXPORT_BUTTON: &str = "احفظ نسخة";
     pub const EXPORT_SAVED_1: &str = "اتحفظت";
-    pub const EXPORT_SAVED_2: &str = "حاجة في:";
+    /// "اتحفظت 1200 حاجة في:".
+    pub fn export_saved(rows: u64) -> String {
+        format!("{EXPORT_SAVED_1} {} في:", super::count::count(rows, &super::count::THING))
+    }
+    /// "ادمج 12 تغيير".
+    pub fn import_apply(n: usize) -> String {
+        format!("{IMPORT_APPLY_1} {}", super::count::count(n, &super::count::CHANGE))
+    }
+    /// "تمام، اتدمج 12 تغيير. الجدول اتحدّث."
+    pub fn import_done(n: usize) -> String {
+        format!("{IMPORT_DONE_1} {}. الجدول اتحدّث.", super::count::count(n, &super::count::CHANGE))
+    }
+    /// "بس فيه 3 صفوف ما اتدمجوش (…)".
+    pub fn import_partial(n: usize) -> String {
+        let rest = IMPORT_PARTIAL_2.trim_start_matches("صف ");
+        format!("{IMPORT_PARTIAL_1} {} {rest}", super::count::count(n, &super::count::ROW))
+    }
     pub const EXPORT_ANDROID_HINT: &str =
         "تلاقيه من تطبيق الملفات أو من الكمبيوتر بالكابل، في Android/data/app.batna/files.";
     pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ النسخة:";
@@ -1172,12 +1323,10 @@ pub mod data {
     pub const IMPORT_NOTHING: &str = "كل اللي في النسخة دي موجود هنا بالفعل.";
     pub const IMPORT_SAFE: &str = "الجديد هيتضاف، والأحدث هيحل محل القديم. مفيش حاجة هتتمسح.";
     pub const IMPORT_APPLY_1: &str = "ادمج";
-    pub const IMPORT_APPLY_2: &str = "تغيير";
     pub const IMPORT_CANCEL: &str = "إلغاء";
     pub const IMPORT_BACK: &str = "رجوع";
     pub const IMPORT_AGAIN: &str = "استرجع نسخة تانية";
     pub const IMPORT_DONE_1: &str = "تمام، اتدمج";
-    pub const IMPORT_DONE_2: &str = "تغيير. الجدول اتحدّث.";
     pub const IMPORT_FAILED: &str = "ما عرفتش أقرا النسخة دي:";
     pub const IMPORT_PARTIAL_1: &str = "بس فيه";
     pub const IMPORT_PARTIAL_2: &str = "صف ما اتدمجوش (ناقصهم بيانات أو من نسخة أحدث من باطنة). الباقي اتحفظ، وتقدر تجرب تاني بعد ما تحدّث التطبيق.";
@@ -1216,6 +1365,15 @@ pub mod cloud {
     pub const OFFLINE: &str = "مش متصل، هيحاول تاني لوحده";
     pub const STOPPED: &str = "واقف";
     pub const PENDING: &str = "تغيير مستني يترفع";
+    /// "3 تغييرات مستنية تترفع".
+    pub fn pending(n: u64) -> String {
+        match n {
+            1 => "تغيير واحد مستني يترفع".to_string(),
+            2 => "تغييرين مستنيين يترفعوا".to_string(),
+            _ if (3..=10).contains(&(n % 100)) => format!("{n} تغييرات مستنية تترفع"),
+            _ => format!("{n} {PENDING}"),
+        }
+    }
     pub const LAST: &str = "آخر مزامنة";
     pub const JUST_NOW: &str = "دلوقتي";
     pub const DEVICES: &str = "أجهزتك";
@@ -1310,7 +1468,9 @@ pub mod settings {
 
     pub const DIAG: &str = "اللي حصل من مشاكل";
     pub const DIAG_EMPTY: &str = "مفيش مشاكل لحد دلوقتي.";
-    pub const DIAG_LINES: &str = "سطر";
+    pub fn diag_lines(n: usize) -> String {
+        super::count::count(n, &super::count::LINE)
+    }
     pub const DIAG_REFRESH: &str = "حدّث";
     pub const DIAG_COPY: &str = "انسخ";
     pub const DIAG_COPIED: &str = "اتنسخ";
@@ -1421,7 +1581,10 @@ pub mod update {
     pub const NOTICE_CHANNEL: &str = "نسخ باطنة الجديدة";
     pub const NOTICE_CHANNEL_SUB: &str = "نسخة جديدة نزلت، وإيه الجديد فيها";
     pub const NOTIFY: &str = "ابعتلي إشعار أول ما تنزل نسخة جديدة";
-    pub const NOTICE_MORE: &str = "و{n} حاجات كمان";
+    /// "وحاجتين كمان", "و5 حاجات كمان".
+    pub fn notice_more(n: usize) -> String {
+        format!("و{} كمان", super::count::count(n, &super::count::THING))
+    }
 
     // The "what's new" sheet (crates/app/src/update/sheet.rs).
     pub const WHATS_NEW_ASK: &str = "إيه الجديد؟";
@@ -1760,7 +1923,10 @@ pub mod learn {
         if n == 1 {
             "وصّلتهم كلهم، بغلطة واحدة في السكة.".into()
         } else {
-            format!("وصّلتهم كلهم، بـ {n} غلطات في السكة.")
+            match super::count::count(n, &super::count::MISTAKE) {
+                m if n == 2 => format!("وصّلتهم كلهم، ب{m} في السكة."),
+                m => format!("وصّلتهم كلهم، بـ {m} في السكة."),
+            }
         }
     }
 
@@ -1864,24 +2030,29 @@ pub mod courses {
     pub fn chip_label(name: &str) -> String {
         format!("المقرر المعروض: {name}. دوس عشان تبدّل")
     }
+    use super::count::{CARD, COURSE, CREDIT_HOUR, HOUR, LECTURE, LESSON, count, count_text};
+
     pub fn all_sub(courses: usize) -> String {
-        format!("{courses} مقررات مع بعض")
+        format!("{} مع بعض", count(courses, &COURSE))
     }
+    /// "3 من 12 درس", "1 من درسين".
     pub fn lessons_done(done: usize, all: usize) -> String {
-        format!("{done} من {all} درس")
+        format!("{done} من {}", count(all, &LESSON))
     }
     pub fn lectures_only(n: usize) -> String {
-        format!("{n} محاضرة، الدروس جاية")
+        format!("{}، الدروس جاية", count(n, &LECTURE))
     }
 
+    /// "42 ساعة معتمدة في 9 مقررات".
     pub fn hours_line(total: &str, courses: usize) -> String {
-        format!("{total} ساعة معتمدة في {courses} مقرر")
+        format!("{} في {}", count_text(total, &CREDIT_HOUR), count(courses, &COURSE))
     }
     pub fn hours_done(h: &str) -> String {
-        format!("{h} ساعة خلصت امتحانها")
+        format!("{} خلصت امتحانها", count_text(h, &HOUR))
     }
+    /// "7 ساعات بتذاكرها الترم ده".
     pub fn hours_now(h: &str) -> String {
-        format!("{h} ساعة بتذاكرها الترم ده")
+        format!("{} بتذاكرها الترم ده", count_text(h, &HOUR))
     }
     pub fn tile_line(short: &str, hours: &str) -> String {
         format!("{short} · {hours} س")
@@ -1890,10 +2061,60 @@ pub mod courses {
         format!("ترم {n}")
     }
     pub fn content_line(written: usize, lectures: usize, items: usize, lessons: usize) -> String {
-        format!("{written} من {lectures} محاضرة مكتوبة · {items} كارت · {lessons} درس")
+        format!(
+            "{} · {} · {}",
+            ready_lectures(written, lectures),
+            count(items, &CARD),
+            count(lessons, &LESSON)
+        )
     }
+    /// "مكتوب 3 من 12 محاضرة".
     pub fn ready_lectures(written: usize, total: usize) -> String {
-        format!("{written} من {total} محاضرة مكتوبة")
+        format!("مكتوب {written} من {}", count(total, &LECTURE))
+    }
+}
+
+#[cfg(test)]
+mod grammar_tests {
+    use super::*;
+
+    /// Mohamed's screenshot read "7 ساعة بتذاكرها" (2026-11-02).
+    #[test]
+    fn course_map_lines_agree() {
+        assert_eq!(courses::hours_now("7"), "7 ساعات بتذاكرها الترم ده");
+        assert_eq!(courses::hours_now("2"), "ساعتين بتذاكرها الترم ده");
+        assert_eq!(courses::hours_now("12"), "12 ساعة بتذاكرها الترم ده");
+        assert_eq!(courses::hours_done("0"), "0 ساعة خلصت امتحانها");
+        assert_eq!(courses::hours_line("42", 9), "42 ساعة معتمدة في 9 مقررات");
+        assert_eq!(courses::hours_line("6", 2), "6 ساعات معتمدة في مقررين");
+        assert_eq!(courses::all_sub(9), "9 مقررات مع بعض");
+        assert_eq!(courses::all_sub(12), "12 مقرر مع بعض");
+        assert_eq!(courses::lessons_done(3, 7), "3 من 7 دروس");
+        assert_eq!(courses::lessons_done(3, 30), "3 من 30 درس");
+        assert_eq!(courses::lectures_only(5), "5 محاضرات، الدروس جاية");
+        assert_eq!(courses::ready_lectures(1, 2), "مكتوب 1 من محاضرتين");
+        assert_eq!(courses::content_line(3, 4, 120, 6), "مكتوب 3 من 4 محاضرات · 120 كارت · 6 دروس");
+    }
+
+    #[test]
+    fn other_counted_lines_agree() {
+        assert_eq!(today::exam_in(5), "فاضل 5 أيام على الامتحان");
+        assert_eq!(today::exam_in(40), "فاضل 40 يوم على الامتحان");
+        assert_eq!(today::plan_line(3, 4), "3 جديد + 4 مراجعات");
+        assert_eq!(stats::day_bar(5, 2), "5 دقايق، إجابتين");
+        assert_eq!(table::mark_each(2), "فاضل خانتين: علّم على كل واحدة عرفتها ولا لأ.");
+        assert_eq!(table::recalled(1, 12), "افتكرت 1 من 12 خانة.");
+        assert_eq!(order::moves_to_fix(2), "الترتيب قريب: نقل خطوتين بس بيظبطه.");
+        assert_eq!(learn::misses(2), "وصّلتهم كلهم، بغلطتين في السكة.");
+        assert_eq!(learn::misses(4), "وصّلتهم كلهم، بـ 4 غلطات في السكة.");
+        assert_eq!(update::notice_more(1), "وحاجة واحدة كمان");
+        assert_eq!(update::notice_more(4), "و4 حاجات كمان");
+        assert_eq!(cloud::pending(2), "تغييرين مستنيين يترفعوا");
+        assert_eq!(cloud::pending(14), "14 تغيير مستني يترفع");
+        assert_eq!(data::import_partial(3).split(" (").next().unwrap(), "بس فيه 3 صفوف ما اتدمجوش");
+        assert_eq!(study::enum_goal(8, 5), "فيه 8 نقط، ولو افتكرت 5 منهم تعدّي.");
+        assert_eq!(plan::days_left(40), "فاضل 40 يوم مذاكرة");
+        assert_eq!(anki::contents(12, 2), "12 محاضرة · سؤالين");
     }
 }
 

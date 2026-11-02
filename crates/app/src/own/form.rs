@@ -339,7 +339,7 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
             div { class: "own-head",
                 h2 { {tx::TITLE} }
                 if !cards.is_empty() {
-                    span { class: "chip", "{cards.len()} {tx::COUNT}" }
+                    span { class: "chip", {tx::cards(cards.len())} }
                 }
             }
             div { class: "own-actions",

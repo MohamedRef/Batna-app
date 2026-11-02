@@ -83,12 +83,12 @@ pub fn line(c: &Change) -> (String, bool) {
 }
 
 /// The first `max` lines, new things first, then "+N".
-pub fn lines_upto(builds: &[BuildChanges], more: &str, max: usize) -> String {
+pub fn lines_upto(builds: &[BuildChanges], more: fn(usize) -> String, max: usize) -> String {
     let mut all: Vec<&Change> = builds.iter().flat_map(|b| b.changes.iter()).collect();
     all.sort_by_key(|c| kind_index(c.kind));
     let mut out: Vec<String> = all.iter().take(max).map(|c| format!("• {}", line(c).0)).collect();
     if all.len() > max {
-        out.push(more.replace("{n}", &(all.len() - max).to_string()));
+        out.push(more(all.len() - max));
     }
     out.join("\n")
 }
@@ -174,7 +174,7 @@ mod tests {
     fn lines_put_new_things_first() {
         use ChangeKind::*;
         let h = [b("0.1.0", 9, &[Fixed, New, Improved, Fixed, New])];
-        assert_eq!(lines_upto(&h, "و{n} كمان", 3), "• تغيير 1\n• تغيير 4\n• تغيير 2\nو2 كمان");
+        assert_eq!(lines_upto(&h, |n| format!("و{n} كمان"), 3), "• تغيير 1\n• تغيير 4\n• تغيير 2\nو2 كمان");
         let latin = Change { kind: Fixed, text: UpdateNotes { en: "Bank".into(), ar_eg: String::new() } };
         assert_eq!(line(&latin), ("Bank".into(), true));
     }

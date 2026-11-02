@@ -209,7 +209,7 @@ fn SignedIn(status: CloudStatus) -> Element {
                 span { class: "chip", "data-tone": if status.sync == SyncState::Live { "good" } else { "accent" }, {state} }
             }
             if status.pending > 0 {
-                span { "{status.pending} {tx::PENDING}" }
+                span { {tx::pending(status.pending)} }
             }
             if let Some(last) = last {
                 span { "{tx::LAST}: {last}" }

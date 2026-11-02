@@ -197,20 +197,27 @@ fn SignedIn(status: CloudStatus) -> Element {
     let email = status.email.clone().unwrap_or_default();
     let last = status.last_sync_ms.map(|ms| ago(ms, now_ms()));
     rsx! {
-        p { "{tx::SIGNED_IN_AS} " bdi { dir: "ltr", "{email}" } }
-        p { class: "muted small", aria_live: "polite",
-            if let Some(state) = state_text(status.sync) {
-                span { class: if status.sync == SyncState::Live { "chip ok" } else { "chip" }, {state} }
-                " "
-            }
-            if status.pending > 0 {
-                {tx::pending(status.pending)} " · "
-            }
-            if let Some(last) = last {
-                "{tx::LAST}: {last}"
+        div { class: "sync-who",
+            span { class: "row-icon", aria_hidden: "true", {crate::icons::section("sync")} }
+            div { class: "row-copy",
+                small { {tx::SIGNED_IN_AS} }
+                bdi { class: "sync-email", dir: "ltr", "{email}" }
             }
         }
-        button { onclick: move |_| cloud.send(Command::SignOut), {tx::SIGN_OUT} }
+        p { class: "sync-state muted small", aria_live: "polite",
+            if let Some(state) = state_text(status.sync) {
+                span { class: "chip", "data-tone": if status.sync == SyncState::Live { "good" } else { "accent" }, {state} }
+            }
+            if status.pending > 0 {
+                span { {tx::pending(status.pending)} }
+            }
+            if let Some(last) = last {
+                span { "{tx::LAST}: {last}" }
+            }
+        }
+        div { class: "sync-actions",
+            button { class: "btn btn-secondary", onclick: move |_| cloud.send(Command::SignOut), {tx::SIGN_OUT} }
+        }
     }
 }
 
@@ -220,24 +227,32 @@ fn DevicesCard() -> Element {
     let devices = cloud.devices.read().clone();
     let now = now_ms();
     rsx! {
-        section { class: "card",
-            h2 { {tx::DEVICES} }
+        section { class: "card sync-devices",
+            div { class: "section-head",
+                h2 { {tx::DEVICES} }
+                button {
+                    class: "btn btn-ghost",
+                    onclick: move |_| cloud.send(Command::LoadDevices),
+                    {crate::icons::refresh()}
+                    {tx::REFRESH}
+                }
+            }
             match devices {
                 None => rsx! { p { class: "muted", {tx::LOADING} } },
                 Some(Err(p)) => rsx! { p { class: "small", {problem_text(p)} } },
                 Some(Ok(list)) => rsx! {
-                    ul { class: "devices",
+                    ul { class: "device-list",
                         for d in list {
-                            li { key: "{d.device_id}", class: if d.revoked { "device revoked" } else { "device" },
-                                span { class: "device-icon", aria_hidden: "true", {platform_icon(d.platform)} }
-                                span { class: "device-main",
-                                    bdi { class: "device-name", dir: "auto", "{d.name}" }
-                                    if d.current {
-                                        " "
-                                        span { class: "chip", {tx::THIS_DEVICE} }
+                            li { key: "{d.device_id}", class: if d.revoked { "device-row revoked" } else { "device-row" },
+                                span { class: "row-icon", aria_hidden: "true", {platform_icon(d.platform, &d.name)} }
+                                div { class: "row-copy",
+                                    span { class: "device-title",
+                                        bdi { class: "device-name", dir: "auto", "{d.name}" }
+                                        if d.current {
+                                            span { class: "chip", "data-tone": "accent", {tx::THIS_DEVICE} }
+                                        }
                                     }
-                                    br {}
-                                    span { class: "muted small",
+                                    small {
                                         if d.revoked {
                                             {tx::DEVICE_OUT}
                                         } else if let Some(ms) = d.last_sync_ms {
@@ -248,12 +263,15 @@ fn DevicesCard() -> Element {
                                     }
                                 }
                                 if !d.current && !d.revoked {
-                                    button {
-                                        onclick: {
-                                            let id = d.device_id.clone();
-                                            move |_| cloud.send(Command::RevokeDevice(id.clone()))
-                                        },
-                                        {tx::SIGN_OUT_DEVICE}
+                                    div { class: "row-end",
+                                        button {
+                                            class: "btn btn-danger device-out",
+                                            onclick: {
+                                                let id = d.device_id.clone();
+                                                move |_| cloud.send(Command::RevokeDevice(id.clone()))
+                                            },
+                                            {tx::SIGN_OUT_DEVICE}
+                                        }
                                     }
                                 }
                             }
@@ -261,14 +279,20 @@ fn DevicesCard() -> Element {
                     }
                 },
             }
-            button { onclick: move |_| cloud.send(Command::LoadDevices), {tx::REFRESH} }
         }
     }
 }
 
-fn platform_icon(p: Platform) -> Element {
+/// Galaxy Tab model numbers start SM-X or SM-T; other Android devices are phones.
+fn is_tablet(name: &str) -> bool {
+    name.starts_with("SM-X") || name.starts_with("SM-T")
+}
+
+fn platform_icon(p: Platform, name: &str) -> Element {
     let d = match p {
-        // phone or tablet
+        Platform::Android if is_tablet(name) => {
+            "M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM11 18h2"
+        }
         Platform::Android => "M8 3h8v18H8zM11 18h2",
         // laptop
         Platform::Macos => "M5 6h14v9H5zM3 18h18",
@@ -294,6 +318,13 @@ mod tests {
     use super::*;
 
     const MIN: u64 = 60_000;
+
+    #[test]
+    fn galaxy_tabs_get_the_tablet_icon() {
+        assert!(is_tablet("SM-X730"));
+        assert!(!is_tablet("SM-S928B"));
+        assert!(!is_tablet("Mohamed’s MacBook Air"));
+    }
 
     #[test]
     fn relative_times_use_egyptian_number_forms() {

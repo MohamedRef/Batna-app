@@ -1,7 +1,14 @@
 //! Batna: one Dioxus codebase for the Mac, the S24 Ultra and the Tab S11.
 //!
+//! The same code is the web app (`web/`, docs/WEB.md): built for wasm32, the
+//! browser stands in for the OS (`platform::web`).
+//!
 //! Feature chunks (SPLIT.md §7) each own a module directory and register it
 //! with one line in `Screen` / `screen_body` below.
+
+// The web build leaves out the Mac/Android-only paths (the sync thread,
+// updates over the air, files), so their helpers go unused there.
+#![cfg_attr(target_arch = "wasm32", allow(dead_code, unused_imports, unused_variables))]
 
 mod abbrdict;
 mod abbrsheet;
@@ -139,7 +146,13 @@ fn main() {
             )
             .launch(App);
     }
-    #[cfg(not(all(feature = "desktop", not(target_os = "android"))))]
+    // The web: the kept database is read before the first screen.
+    #[cfg(target_arch = "wasm32")]
+    wasm_bindgen_futures::spawn_local(async {
+        platform::web::boot().await;
+        dioxus::launch(App);
+    });
+    #[cfg(not(any(all(feature = "desktop", not(target_os = "android")), target_arch = "wasm32")))]
     dioxus::launch(App);
 }
 
@@ -155,6 +168,8 @@ fn App() -> Element {
     use_context_provider(update::sheet::UpdateSheetNav::new);
     store::use_provide_review();
     cloud::use_provide_cloud();
+    #[cfg(target_arch = "wasm32")]
+    platform::web::use_saver();
     reminders::use_local_reminders();
     // Android: a renderer reclaimed in the background ends Batna quietly
     // instead of crashing it; earlier crashes show in the diagnostics.
@@ -170,7 +185,7 @@ fn App() -> Element {
             return;
         }
         loop {
-            tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+            crate::platform::time::sleep(std::time::Duration::from_secs(2)).await;
             let now = platform::system_bars::device_dark();
             if now.is_some() && now != *device_dark.peek() {
                 device_dark.set(now);

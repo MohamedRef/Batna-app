@@ -535,7 +535,14 @@ impl Updater {
         }
     }
 
+    /// The web build never downloads builds (each deploy is the newest).
+    #[cfg(target_arch = "wasm32")]
+    pub(super) fn fetch_some(&self, _url: &str, _offer: &Offer, _part: &Path) -> Result<(), Failure> {
+        Err(Failure::Network)
+    }
+
     /// Appends what `part` still lacks (all of it when it's empty).
+    #[cfg(not(target_arch = "wasm32"))]
     pub(super) fn fetch_some(&self, url: &str, offer: &Offer, part: &Path) -> Result<(), Failure> {
         let size = offer.asset.size;
         let mut have = fs::metadata(part).map_or(0, |m| m.len());

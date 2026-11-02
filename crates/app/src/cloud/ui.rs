@@ -7,7 +7,9 @@ use batna_protocol::cloud::{DeviceSummary, Platform};
 use dioxus::prelude::*;
 use tokio::sync::mpsc::UnboundedSender;
 
-use super::{CloudStatus, Command, Event, Problem, SyncState};
+#[cfg(not(target_arch = "wasm32"))]
+use super::Event;
+use super::{CloudStatus, Command, Problem, SyncState};
 use crate::i18n::cloud as tx;
 
 /// Batna Cloud state for the UI, shared through context.
@@ -38,7 +40,9 @@ pub fn use_provide_cloud() {
         signing_in: Signal::new(false),
         commands: Signal::new(None),
     });
+    #[cfg(not(target_arch = "wasm32"))]
     let review = use_context::<crate::store::Review>();
+    #[cfg(not(target_arch = "wasm32"))]
     use_hook(move || {
         let Some(config) = super::CloudConfig::from_env() else { return };
         // An in-memory store (the data folder couldn't be opened) has nothing to sync.
@@ -141,7 +145,7 @@ pub fn ago(then_ms: u64, now_ms: u64) -> String {
 }
 
 fn now_ms() -> u64 {
-    super::engine::now_ms()
+    crate::store::now_ms() as u64
 }
 
 #[component]
@@ -162,7 +166,9 @@ pub fn SyncSection() -> Element {
         section { class: "card",
             h2 { {tx::TITLE} }
             if !status.configured {
-                p { class: "muted small", {tx::NOT_CONFIGURED} }
+                p { class: "muted small",
+                    if cfg!(target_arch = "wasm32") { {tx::NOT_ON_WEB_YET} } else { {tx::NOT_CONFIGURED} }
+                }
             } else if signed_in {
                 SignedIn { status: status.clone() }
             } else {

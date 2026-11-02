@@ -5,7 +5,8 @@
 
 mod session;
 
-use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
+use std::time::Duration;
+use web_time::{Instant, SystemTime, UNIX_EPOCH};
 
 use std::collections::BTreeSet;
 
@@ -327,7 +328,7 @@ fn Runner() -> Element {
             phase.set(Phase::Answer);
             say(entry.prompt.spoken_answer()).await;
             if auto_continue && live() {
-                tokio::time::sleep(AUTO_WAIT).await;
+                crate::platform::time::sleep(AUTO_WAIT).await;
                 if live() {
                     // Moving on changes the session, and the effect below asks the next one.
                     grade_turn(turn, None);
@@ -372,7 +373,7 @@ fn Runner() -> Element {
     });
     use_future(move || async move {
         loop {
-            tokio::time::sleep(Duration::from_millis(300)).await;
+            crate::platform::time::sleep(Duration::from_millis(300)).await;
             let Some(remote) = background::take() else { continue };
             let revealed = revealed_now();
             let turn = SESSION.peek().as_ref().map_or(0, |s| s.asked);
@@ -587,7 +588,7 @@ async fn countdown(
         phase.set(show(n));
         let mut ran = Duration::ZERO;
         while ran < Duration::from_secs(1) {
-            tokio::time::sleep(TICK).await;
+            crate::platform::time::sleep(TICK).await;
             if !live() {
                 return false;
             }

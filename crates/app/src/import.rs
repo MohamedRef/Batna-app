@@ -38,7 +38,7 @@ const MAX_IMPORT_BYTES: u64 = 50 * 1024 * 1024;
 
 /// Reads, parses and plans a backup file off the UI thread.
 async fn read_plan(path: PathBuf) -> Result<(Value, ImportPlan), String> {
-    tokio::task::spawn_blocking(move || {
+    crate::platform::time::blocking(move || {
         let len = std::fs::metadata(&path).map_err(|e| e.to_string())?.len();
         if len > MAX_IMPORT_BYTES {
             return Err(tx::IMPORT_TOO_BIG.to_string());
@@ -48,8 +48,7 @@ async fn read_plan(path: PathBuf) -> Result<(Value, ImportPlan), String> {
         let plan = store::shared().plan_import(&doc).map_err(|e| e.to_string())?;
         Ok((doc, plan))
     })
-    .await
-    .map_err(|e| e.to_string())?
+    .await?
 }
 
 #[derive(Clone, PartialEq)]

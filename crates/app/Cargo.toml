@@ -14,25 +14,48 @@ path = "src/main.rs"
 batna-anki.workspace = true
 batna-core.workspace = true
 batna-protocol.workspace = true
-dioxus = { version = "0.7.10", features = [] }
+# Dioxus's defaults minus `devtools` (hot reload), which only the native
+# builds take (below): in the web app it would knock on a dx dev server forever.
+dioxus = { version = "0.7.10", default-features = false, features = ["launch", "logger", "lib"] }
 serde_yaml_ng.workspace = true
 serde.workspace = true
 serde_json.workspace = true
-rusqlite = { version = "0.37", features = ["bundled"] }
+rusqlite = { version = "0.41", features = ["bundled", "serialize"] }
 chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+base64 = "0.22"
+futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+sha2 = "0.10"
+# std::time::{Instant, SystemTime} panic in the browser; this is std on native.
+web-time = "1"
+
+# Native builds (Mac, Android): the network, the keychain and real threads.
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+dioxus = { version = "0.7.10", features = ["devtools"] }
 # Oral mode's think timer and speech waits (Dioxus already runs on tokio),
 # and Batna Cloud's sync thread (crates/app/src/cloud).
 tokio = { version = "1", features = ["rt", "net", "time", "sync", "macros", "io-util"] }
 # Batna Cloud client and updates over the air (src/update/: the feed, SHA-256
 # per download): TLS is rustls + ring with webpki roots everywhere, so the
 # Android build needs no Java trust-store glue.
-base64 = "0.22"
-futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
 getrandom = "0.3"
 keyring-core = "1"
-sha2 = "0.10"
 tokio-tungstenite = { version = "0.30", default-features = false, features = ["connect", "rustls-tls-webpki-roots"] }
 ureq = { version = "3", default-features = false, features = ["rustls", "json"] }
+
+# The web build (crates/web, wasm32): the browser stands in for the OS
+# (src/platform/web.rs). SQLite runs in wasm and persists in the browser.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+tokio = { version = "1", features = ["sync", "macros"] }
+chrono = { version = "0.4", default-features = false, features = ["clock", "std", "wasmbind"] }
+getrandom = { version = "0.3", features = ["wasm_js"] }
+getrandom02 = { package = "getrandom", version = "0.2", features = ["js"] }
+gloo-timers = { version = "0.3", features = ["futures"] }
+# SQLite in wasm (through rusqlite) gets the clock and randomness from the browser.
+sqlite-wasm-rs = { version = "0.6", features = ["wasm-bindgen"] }
+js-sys = "0.3"
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+web-sys = { version = "0.3", features = ["console", "Window", "Document", "Element", "HtmlElement", "Location", "Storage", "Navigator", "Request", "RequestInit", "RequestMode", "Response", "Headers", "WebSocket", "MessageEvent", "BinaryType", "SpeechSynthesis", "SpeechSynthesisUtterance", "Blob", "BlobPropertyBag", "Url", "HtmlAnchorElement", "MediaQueryList"] }
 
 # Android TextToSpeech (src/platform/tts_android.rs) and «export to Anki»
 # (src/anki/android.rs) through JNI.
@@ -70,6 +93,8 @@ serde_yaml_ng.workspace = true
 default = ["desktop"]
 desktop = ["dioxus/desktop"]
 mobile = ["dioxus/mobile"]
+# The web app (`just web`, docs/WEB.md).
+web = ["dioxus/web"]
 
 [lints]
 workspace = true

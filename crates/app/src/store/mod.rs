@@ -156,6 +156,33 @@ impl Store {
         Self::init(Connection::open_in_memory()?, None, None)
     }
 
+    /// The web build's store: in memory, starting from the snapshot the
+    /// browser kept (`platform::web`), and migrated like a file would be.
+    #[cfg_attr(not(target_arch = "wasm32"), allow(dead_code))] // web, and tests
+    pub fn from_snapshot(bytes: &[u8]) -> Result<Self> {
+        let mut conn = Connection::open_in_memory()?;
+        if !bytes.is_empty() {
+            conn.deserialize_read_exact(rusqlite::MAIN_DB, bytes, bytes.len(), false)?;
+        }
+        Self::init(conn, None, None)
+    }
+
+    /// The whole database as bytes, with SQLite's change counter, so the web
+    /// build can keep it in the browser only when something changed.
+    #[cfg_attr(not(target_arch = "wasm32"), allow(dead_code))] // web, and tests
+    pub fn snapshot(&self) -> Result<(u64, Vec<u8>)> {
+        let mut conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+        let changes = conn.total_changes();
+        let bytes = conn.serialize(rusqlite::MAIN_DB)?.to_vec();
+        Ok((changes, bytes))
+    }
+
+    /// SQLite's count of rows changed since this connection opened.
+    #[cfg_attr(not(target_arch = "wasm32"), allow(dead_code))]
+    pub fn changes(&self) -> u64 {
+        self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner).total_changes()
+    }
+
     fn init(conn: Connection, path: Option<PathBuf>, marker: Option<&Path>) -> Result<Self> {
         conn.pragma_update(None, "foreign_keys", "ON")?;
         let version: u32 = conn.pragma_query_value(None, "user_version", |r| r.get(0))?;
@@ -468,6 +495,18 @@ fn newest_stamp(conn: &Connection) -> Result<Option<Hlc>> {
 /// The app's store, opened once in the data directory. If that fails the
 /// app still runs on an in-memory store and says so on Today.
 pub fn shared() -> &'static Store {
+    #[cfg(target_arch = "wasm32")]
+    return STORE.get_or_init(|| match Store::from_snapshot(&crate::platform::web::take_snapshot()) {
+        Ok(s) => s,
+        Err(e) => {
+            // A snapshot this build can't read stays in the browser untouched
+            // (`web::saving_allowed`); this session runs in memory.
+            crate::platform::web::stop_saving();
+            let _ = OPEN_ERROR.set(format!("browser storage: {e}"));
+            Store::open_in_memory().expect("an in-memory database always opens")
+        }
+    });
+    #[cfg(not(target_arch = "wasm32"))]
     STORE.get_or_init(|| {
         let opened = paths::data_dir().and_then(|dir| {
             Store::open_marked(&dir.join("batna.db"), paths::install_marker().as_deref())
@@ -560,8 +599,8 @@ pub fn write_error() -> Option<String> {
 pub use paths::export_dir;
 
 pub fn now_ms() -> i64 {
-    std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH)
+    web_time::SystemTime::now()
+        .duration_since(web_time::UNIX_EPOCH)
         .map(|d| d.as_millis() as i64)
         .unwrap_or(0)
 }
@@ -616,7 +655,10 @@ fn new_device_id() -> String {
     use std::hash::{BuildHasher, Hasher};
     let mut h = std::collections::hash_map::RandomState::new().build_hasher();
     h.write_i64(now_ms());
+    // The browser has no process ids (and std's hash keys are fixed there).
+    #[cfg(not(target_arch = "wasm32"))]
     h.write_u32(std::process::id());
+    h.write_u64(getrandom::u64().unwrap_or_default());
     format!("d{:012x}", h.finish() & 0xffff_ffff_ffff)
 }
 
@@ -751,5 +793,25 @@ mod tests {
         let mine = ReviewSettings { retention: Retention::R95, new_per_day: 45, fsrs: None };
         s.put_review_settings(&mine).unwrap();
         assert_eq!(s.review_settings(), mine);
+    }
+}
+
+#[cfg(test)]
+mod snapshot_tests {
+    use super::Store;
+
+    /// The web build keeps the database as bytes: they come back whole,
+    /// with the same device, and an empty snapshot is a fresh store.
+    #[test]
+    fn a_snapshot_round_trips() {
+        let s = Store::open_in_memory().unwrap();
+        s.put_setting("sounds", &serde_json::json!(true)).unwrap();
+        let (changes, bytes) = s.snapshot().unwrap();
+        assert!(changes > 0 && !bytes.is_empty());
+        let back = Store::from_snapshot(&bytes).unwrap();
+        assert_eq!(back.device(), s.device());
+        assert_eq!(back.snapshot().unwrap().1.len(), bytes.len());
+        let fresh = Store::from_snapshot(&[]).unwrap();
+        assert_ne!(fresh.device(), s.device());
     }
 }

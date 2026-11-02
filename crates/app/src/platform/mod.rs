@@ -10,8 +10,11 @@ pub mod install;
 pub mod network;
 pub mod reminders;
 pub mod system_bars;
+pub mod time;
 pub mod tts;
 #[cfg(target_os = "android")]
 pub(crate) mod tts_android;
 pub mod update_notice;
+#[cfg(target_arch = "wasm32")]
+pub mod web;
 pub mod webview_guard;

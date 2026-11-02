@@ -110,7 +110,7 @@ pub fn ExportCard() -> Element {
             match outcome() {
                 Some(Ok((path, rows))) => rsx! {
                     div { role: "status",
-                        p { class: "small", "{tx::EXPORT_SAVED_1} {rows} {tx::EXPORT_SAVED_2}" }
+                        p { class: "small", {tx::export_saved(rows)} }
                         p { class: "small", bdi { dir: "ltr", "{path}" } }
                         if cfg!(target_os = "android") {
                             SaveTo { key: "{attempt}", path }

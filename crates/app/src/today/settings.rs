@@ -37,8 +37,8 @@ pub fn StudySection() -> Element {
             }
             p { class: "muted small",
                 match personal {
-                    Some(n) => rsx! { "{tx::PERSONAL_1} {n} {tx::PERSONAL_2}" },
-                    None => rsx! { "{tx::DEFAULT_PARAMS_1} {MIN_REVIEWS_TO_OPTIMIZE} {tx::DEFAULT_PARAMS_2} {reviews}." },
+                    Some(n) => rsx! { {tx::personal(n)} },
+                    None => rsx! { {tx::default_params(MIN_REVIEWS_TO_OPTIMIZE, reviews)} },
                 }
             }
         }

@@ -201,7 +201,7 @@ pub fn ImportCard() -> Element {
                                     Err(e) => Step::Failed(e.to_string()),
                                 });
                             },
-                            "{tx::IMPORT_APPLY_1} {changes} {tx::IMPORT_APPLY_2}"
+                            {tx::import_apply(changes)}
                         }
                         button { class: "verify-btn plain", onclick: move |_| step.set(Step::Pick), {tx::IMPORT_CANCEL} }
                     }
@@ -209,9 +209,9 @@ pub fn ImportCard() -> Element {
             }
         }
         Step::Done(plan) => rsx! {
-            p { role: "status", "{tx::IMPORT_DONE_1} {plan.changes()} {tx::IMPORT_DONE_2}" }
+            p { role: "status", {tx::import_done(plan.changes())} }
             if plan.failed() > 0 {
-                p { class: "verify-error", role: "alert", "{tx::IMPORT_PARTIAL_1} {plan.failed()} {tx::IMPORT_PARTIAL_2}" }
+                p { class: "verify-error", role: "alert", {tx::import_partial(plan.failed())} }
             }
             button { class: "verify-btn plain", onclick: move |_| step.set(Step::Pick), {tx::IMPORT_AGAIN} }
         },

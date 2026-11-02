@@ -198,7 +198,7 @@ fn SignedIn(status: CloudStatus) -> Element {
                 " "
             }
             if status.pending > 0 {
-                "{status.pending} {tx::PENDING} · "
+                {tx::pending(status.pending)} " · "
             }
             if let Some(last) = last {
                 "{tx::LAST}: {last}"

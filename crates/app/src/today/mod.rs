@@ -100,10 +100,10 @@ pub fn Today() -> Element {
                     button {
                         class: "btn-link td-estimate",
                         title: tx::MINUTES_HINT,
-                        aria_label: "{all_minutes} {tx::MINUTES_ALL}. {tx::MINUTES_HINT}",
+                        aria_label: "{tx::minutes_all_label(all_minutes)}. {tx::MINUTES_HINT}",
                         onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Plan),
                         bdi { class: "num-ltr", "{all_minutes}" }
-                        span { {tx::MINUTES_ALL} }
+                        span { {tx::minutes_all(all_minutes)} }
                         span { class: "chev", aria_hidden: "true" }
                     }
                 }
@@ -345,11 +345,11 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
                         p { class: "plan-target",
                             "{tx::PLAN_TODAY} "
                             if goal > 0 && due > 0 {
-                                "{goal} {tx::PLAN_NEW} + {due} {tx::PLAN_REVIEWS}"
+                                {tx::plan_line(goal, due)}
                             } else if goal > 0 {
                                 "{goal} {tx::PLAN_NEW}"
                             } else {
-                                "{due} {tx::PLAN_REVIEWS_ONLY}"
+                                {tx::plan_reviews_only(due)}
                             }
                             if minutes > 0 {
                                 " ({tx::ABOUT} " {count(minutes, &crate::i18n::count::MINUTE)} ")"

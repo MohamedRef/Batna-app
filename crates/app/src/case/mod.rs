@@ -190,7 +190,7 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
                                     bdi { class: "coll-title case-row-stem", dir: "auto", {first_line(&item)} }
                                     span { class: "coll-sub", dir: "rtl",
                                         match &item.body {
-                                            Body::Case { steps, .. } => rsx! { "{steps.len()} {tx::STEPS}" },
+                                            Body::Case { steps, .. } => rsx! { {tx::steps(steps.len())} },
                                             Body::Calc { calculator, .. } => rsx! { bdi { {batna_core::calc::spec(calculator).map_or("", |s| s.name)} } },
                                             _ => rsx! {},
                                         }

@@ -311,6 +311,28 @@ impl fmt::Debug for CalcSpec {
     }
 }
 
+/// What to do with a result and what else it could be: the next step and
+/// the differential diagnosis for one band. Kept apart from [`Outcome`] so a
+/// calculator without a guide still builds; each module lists its own as
+/// `GUIDES` and [`GUIDE_LISTS`] collects them.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Guide {
+    /// Next steps for this result, most important first.
+    pub next: &'static [&'static str],
+    /// The differential diagnosis (or causes to look for) for this result.
+    pub dd: &'static [&'static str],
+}
+
+// One line per module that has guides, so branches adding them don't touch
+// the same line.
+static GUIDE_LISTS: &[&[(&str, Guide)]] = &[];
+
+/// The next step and differential for a band id (`cam.positive`), if
+/// written.
+pub fn guide(band: &str) -> Option<&'static Guide> {
+    GUIDE_LISTS.iter().flat_map(|l| l.iter()).find(|(b, _)| *b == band).map(|(_, g)| g)
+}
+
 /// Every calculator, in the order the Calculators screen lists them.
 pub fn all() -> &'static [CalcSpec] {
     REGISTRY
@@ -587,6 +609,25 @@ fn show(v: f64, dp: usize) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn guides_name_real_bands_once() {
+        let mut bands: Vec<&str> = GUIDE_LISTS.iter().flat_map(|l| l.iter()).map(|(b, _)| *b).collect();
+        let n = bands.len();
+        bands.sort_unstable();
+        bands.dedup();
+        assert_eq!(bands.len(), n, "a band has two guides");
+        for b in bands {
+            let calc = b.split_once('.').map_or(b, |(c, _)| c);
+            // Band ids start with their calculator's id or a short form of
+            // it (`kings.met`), which BAND_WORDS also uses.
+            let known = all().iter().any(|s| s.id == calc)
+                || BAND_WORDS.iter().any(|(w, _)| w.split_once('.').is_some_and(|(c, _)| c == calc));
+            assert!(known, "guide for unknown band {b}");
+            let g = guide(b).unwrap();
+            assert!(!g.next.is_empty() || !g.dd.is_empty(), "{b}: empty guide");
+        }
+    }
 
     #[test]
     fn registry_ids_are_unique_and_known() {

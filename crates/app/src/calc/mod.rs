@@ -338,6 +338,29 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome, #[props(default = true)] 
             for note in outcome.notes.iter() {
                 bdi { key: "{note}", class: "small calc-note", "{note}" }
             }
+            // What to do next and what else it could be, when written.
+            if let Some(guide) = calc::guide(outcome.band) {
+                if !guide.next.is_empty() {
+                    div { class: "calc-guide calc-next",
+                        h2 { class: "small", {tx::NEXT_STEP} }
+                        ul {
+                            for line in guide.next.iter() {
+                                li { key: "{line}", bdi { "{line}" } }
+                            }
+                        }
+                    }
+                }
+                if !guide.dd.is_empty() {
+                    div { class: "calc-guide calc-dd",
+                        h2 { class: "small", {tx::DD} }
+                        ul {
+                            for line in guide.dd.iter() {
+                                li { key: "{line}", bdi { "{line}" } }
+                            }
+                        }
+                    }
+                }
+            }
             // The book page opens its sheet, like every "ص N" chip.
             p { class: "small muted calc-source",
                 span { {tx::SOURCE} ": " bdi { "{source}" } }

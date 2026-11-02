@@ -1015,6 +1015,10 @@ pub mod calc {
     pub const MEANS: &str = "يعني إيه";
     pub const BREAKDOWN: &str = "التفاصيل";
     pub const SOURCE: &str = "المصدر";
+    /// Over the next steps for a result (`calc::guide`).
+    pub const NEXT_STEP: &str = "الخطوة الجاية";
+    /// Over the differential diagnosis for a result (`calc::guide`).
+    pub const DD: &str = "التشخيص التفريقي";
     pub const RESET: &str = "امسح";
     pub const BACK: &str = "كل الحاسبات";
     pub const AREA_LIVER: &str = "الكبد";

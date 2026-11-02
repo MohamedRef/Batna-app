@@ -24,25 +24,34 @@ mod aki;
 mod albi;
 mod apri;
 mod ascitic;
+mod atlanta;
+mod baveno;
 mod bclc;
 mod bisap;
+mod cha2ds2_vasc;
 mod child_pugh;
 mod clichy;
 mod cockcroft;
+mod ctsi;
 mod diabetes;
 mod fib4;
+mod fli;
 mod gbs;
 mod glasgow;
 mod ipss_mf;
 mod kings;
 mod maddrey;
 mod meld;
+mod milan;
+mod okuda;
+mod page_b;
 mod r_ratio;
 mod ra2010;
 mod ranson;
 mod renal;
 mod research;
 mod saag;
+mod sos;
 
 /// Named inputs for one calculation.
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
@@ -356,16 +365,25 @@ static REGISTRY: &[CalcSpec] = &[
     albi::SPEC,
     fib4::SPEC,
     apri::SPEC,
+    fli::SPEC,
+    baveno::SPEC,
     r_ratio::SPEC,
     maddrey::SPEC,
     glasgow::SPEC,
     saag::SPEC,
     ascitic::SPEC,
+    sos::SPEC,
+    cha2ds2_vasc::SPEC,
     bclc::SPEC,
+    milan::SPEC,
+    okuda::SPEC,
+    page_b::SPEC,
     kings::SPEC,
     clichy::SPEC,
     ranson::SPEC,
     bisap::SPEC,
+    ctsi::SPEC,
+    atlanta::SPEC,
     gbs::SPEC,
     renal::ANION_GAP,
     renal::DELTA_RATIO,
@@ -398,7 +416,7 @@ static REGISTRY: &[CalcSpec] = &[
 
 const UNIT_SUFFIXES: &[&str] = &[
     "_10e9_l", "_per_mm3", "_mm_hg", "_meq_l", "_mmol_l", "_mg_dl", "_g_dl", "_iu_l", "_u_l", "_years",
-    "_points", "_days", "_pct", "_cm", "_kg", "_s", "_l",
+    "_points", "_days", "_pct", "_kpa", "_cm", "_kg", "_s", "_l",
 ];
 
 /// A field key without its unit suffix: `alt_uln_u_l` → `alt_uln`.
@@ -484,12 +502,32 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("bclc.b", &["stage b"]),
     ("bclc.c", &["stage c"]),
     ("bclc.d", &["stage d"]),
+    ("milan.within", &["within"]),
+    ("milan.outside", &["outside"]),
+    ("okuda.1", &["stage i", "stage 1"]),
+    ("okuda.2", &["stage ii", "stage 2"]),
+    ("okuda.3", &["stage iii", "stage 3"]),
+    ("page_b.low", &["low risk", "low"]),
+    ("page_b.mid", &["intermediate"]),
+    ("page_b.high", &["high risk", "high"]),
     ("kings.met", &["met"]),
     ("kings.not_met", &["not met"]),
     ("clichy.met", &["met"]),
     ("clichy.not_met", &["not met"]),
     ("bisap.severe", &["severe", "2 or more"]),
     ("bisap.mild", &["mild", "not severe"]),
+    ("atlanta_2012.mild", &["mild"]),
+    ("atlanta_2012.moderately_severe", &["moderately severe", "moderate"]),
+    ("atlanta_2012.severe", &["severe"]),
+    ("baveno_vi.spare", &["met", "skip", "no endoscopy"]),
+    ("baveno_vi.screen", &["not met", "screen"]),
+    ("fli.low", &["below 30", "ruled out"]),
+    ("fli.mid", &["indeterminate", "intermediate"]),
+    ("fli.high", &["60 or above", "likely"]),
+    ("sos_criteria.met", &["met"]),
+    ("sos_criteria.not_met", &["not met"]),
+    ("cha2ds2_vasc.low", &["low risk", "low"]),
+    ("cha2ds2_vasc.high", &["high risk", "high"]),
     ("anion_gap.high", &["high"]),
     ("anion_gap.normal", &["normal"]),
     ("anion_gap.low", &["low"]),

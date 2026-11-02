@@ -68,6 +68,26 @@ Source: Book Lecture 2, p. 34; Wai 2003; WHO HCV guidelines 2016
 | `ast_uln_u_l` | number, U/L | AST upper limit of normal |
 | `platelets_10e9_l` | number, ×10⁹/L | Platelets |
 
+## `fli`: Fatty liver index (FLI)
+
+Source: Bedogni 2006 (formula and cut-offs; the book names the FLI only, Lecture 6, p. 101)
+
+| input | kind | |
+|---|---|---|
+| `tg_mg_dl` | number, mg/dL | Triglycerides |
+| `bmi` | number, kg/m² | BMI |
+| `waist_cm` | number, cm | Waist circumference |
+| `ggt_u_l` | number, U/L | GGT |
+
+## `baveno_vi`: Baveno VI (skip variceal screening)
+
+Source: Baveno VI 2015; book Lecture 2, p. 35 (EASL 2021)
+
+| input | kind | |
+|---|---|---|
+| `lsm_kpa` | number, kPa | Liver stiffness (TE) |
+| `platelets_10e9_l` | number, ×10⁹/L | Platelets |
+
 ## `r_ratio`: R ratio (DILI pattern)
 
 Source: Book Lecture 8, p. 129; EASL DILI 2019; Kullak-Ublick 2017
@@ -123,6 +143,32 @@ Source: Book Lecture 9, p. 167–168
 | `glucose_mg_dl` | number, mg/dL | Ascitic glucose; optional |
 | `ldh_above_serum` | true / false (default false) | Ascitic LDH above serum LDH |
 
+## `sos_criteria`: Seattle / Baltimore criteria (SOS)
+
+Source: McDonald 1984, Jones 1987, as the book merges them, Lecture 4, p. 81
+
+| input | kind | |
+|---|---|---|
+| `weight_gain` | true / false (default false) | Weight gain |
+| `ascites` | true / false (default false) | Ascites |
+| `tender_hepatomegaly` | true / false (default false) | Tender hepatomegaly |
+| `jaundice` | true / false (default false) | Jaundice |
+| `days_since_transplant` | number, days | Days since the transplant |
+
+## `cha2ds2_vasc`: CHA₂DS₂-VASc
+
+Source: Lip 2010, ESC 2020; book Lecture 4, p. 87 (thrombotic risk for endoscopy, ASGE/ACG 2022)
+
+| input | kind | |
+|---|---|---|
+| `age_years` | number, years | Age |
+| `sex` | `male`, `female` | Sex |
+| `heart_failure` | true / false (default false) | Heart failure |
+| `hypertension` | true / false (default false) | Hypertension |
+| `diabetes` | true / false (default false) | Diabetes |
+| `stroke_tia` | true / false (default false) | Previous stroke, TIA or thromboembolism |
+| `vascular` | true / false (default false) | Vascular disease (MI, PAD, aortic plaque) |
+
 ## `bclc`: BCLC staging
 
 Source: Book Lecture 18, p. 362 and 364–373 (BCLC 2018)
@@ -136,6 +182,39 @@ Source: Book Lecture 18, p. 362 and 364–373 (BCLC 2018)
 | `largest_cm` | number, cm | Largest nodule |
 | `vascular_invasion` | true / false (default false) | Macrovascular invasion |
 | `extrahepatic` | true / false (default false) | Extrahepatic spread |
+
+## `milan`: Milan criteria
+
+Source: Mazzaferro 1996; book Lecture 18, p. 368 (adds PS ≤ 1) and p. 373
+
+| input | kind | |
+|---|---|---|
+| `nodules` | number | Number of lesions |
+| `largest_cm` | number, cm | Largest lesion |
+| `vascular_invasion` | true / false (default false) | Gross vascular invasion |
+| `metastasis` | true / false (default false) | Nodal or distant metastasis |
+| `performance_status` | number | ECOG performance status |
+
+## `okuda`: Okuda stage
+
+Source: Okuda 1985 (the book names it, Lecture 18, p. 361 and 355, without the criteria)
+
+| input | kind | |
+|---|---|---|
+| `tumour_over_half` | true / false (default false) | Tumour > 50% of the liver |
+| `ascites` | true / false (default false) | Ascites |
+| `albumin_g_dl` | number, g/dL | Albumin |
+| `bilirubin_mg_dl` | number, mg/dL | Bilirubin |
+
+## `page_b`: PAGE-B
+
+Source: Papatheodoridis 2016; book Lecture 18, p. 351–352 (platelet points from the paper, see note)
+
+| input | kind | |
+|---|---|---|
+| `age_years` | number, years | Age |
+| `sex` | `male`, `female` | Sex |
+| `platelets_10e9_l` | number, ×10⁹/L | Platelets |
 
 ## `kings_college`: King's College criteria
 
@@ -194,6 +273,24 @@ Source: Wu 2008; book Lecture 15, p. 288
 | `sirs` | true / false (default false) | SIRS (2 or more criteria) |
 | `age_years` | number, years | Age |
 | `pleural_effusion` | true / false (default false) | Pleural effusion |
+
+## `ctsi`: CT severity index (Balthazar)
+
+Source: Balthazar 1990; book Lecture 15, table p. 282 and p. 283
+
+| input | kind | |
+|---|---|---|
+| `ct_grade` | `a`, `b`, `c`, `d`, `e` | Balthazar CT grade |
+| `necrosis` | `none`, `lt30`, `30_50`, `gt50` | Pancreatic necrosis |
+
+## `atlanta_2012`: Revised Atlanta severity (2012)
+
+Source: Banks 2013 (Atlanta 2012); book Lecture 15, table p. 285
+
+| input | kind | |
+|---|---|---|
+| `organ_failure` | `none`, `transient`, `persistent` | Organ failure |
+| `complications` | true / false (default false) | Local or systemic complications |
 
 ## `glasgow_blatchford`: Glasgow-Blatchford score
 

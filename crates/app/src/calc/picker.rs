@@ -112,15 +112,26 @@ fn keywords(id: &str) -> &'static str {
         "albi" => "hepatocellular carcinoma albumin bilirubin",
         "fib4" => "fibrosis non-invasive nafld masld",
         "apri" => "fibrosis non-invasive hepatitis",
+        "fli" => "fatty liver index nafld masld steatosis bedogni",
+        "baveno_vi" => {
+            "varices screening endoscopy fibroscan elastography stiffness cacld portal hypertension"
+        }
         "r_ratio" => "dili drug induced liver injury alt alp",
         "maddrey" => "alcohol steroids prednisolone discriminant",
         "glasgow_ah" => "gahs alcohol steroids",
         "saag" => "ascites serum albumin gradient portal hypertension",
         "ascitic_pmn" => "spontaneous bacterial peritonitis paracentesis neutrophils",
+        "sos_criteria" => "sinusoidal obstruction syndrome veno-occlusive vod bmt hsct seattle baltimore",
+        "cha2ds2_vasc" => "chads atrial fibrillation af stroke anticoagulation bridging endoscopy",
         "bclc" => "hcc barcelona liver cancer",
+        "milan" => "hcc transplant liver cancer",
+        "okuda" => "hcc liver cancer stage",
+        "page_b" => "hcc hbv hepatitis b surveillance screening",
         "kings_college" => "acute liver failure paracetamol acetaminophen transplant kcc",
         "clichy" => "acute liver failure factor v transplant",
         "ranson" | "bisap" => "pancreatitis",
+        "ctsi" => "pancreatitis balthazar ct necrosis",
+        "atlanta_2012" => "pancreatitis organ failure",
         "glasgow_blatchford" => "gbs upper gi bleeding haematemesis melaena نزيف",
         "anion_gap" => "acidosis metabolic acid base",
         "delta_ratio" => "delta gap acidosis acid base",
@@ -502,7 +513,7 @@ mod tests {
         assert!(renal.contains(&"kdigo_aki") && renal.contains(&"anion_gap"), "{renal:?}");
         assert_eq!(ids(&search("كلى", None)), renal);
         // An English word for a calculator named by its author.
-        assert_eq!(ids(&search("pancreatitis", None)), ["ranson", "bisap"]);
+        assert_eq!(ids(&search("pancreatitis", None)), ["ranson", "bisap", "ctsi", "atlanta_2012"]);
         assert!(search("zzz", None).is_empty());
     }
 
@@ -511,7 +522,7 @@ mod tests {
         assert_eq!(ids(&search("ratio", Some(Area::Renal))), ["delta_ratio"]);
         let only = groups("", Some(Area::Pancreas), &["meld"], &["apri"]);
         assert_eq!(only.len(), 1, "no pins or recents under a filter");
-        assert_eq!(only[0].ids, ["ranson", "bisap"]);
+        assert_eq!(only[0].ids, ["ranson", "bisap", "ctsi", "atlanta_2012"]);
     }
 
     #[test]

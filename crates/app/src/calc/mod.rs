@@ -342,20 +342,21 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome, #[props(default = true)] 
             if let Some(guide) = calc::guide(outcome.band) {
                 if !guide.next.is_empty() {
                     div { class: "calc-guide calc-next",
-                        h2 { class: "small", {tx::NEXT_STEP} }
-                        ul {
+                        h2 { class: "calc-result-head", {tx::NEXT_STEP} }
+                        // English medical text: bullets on its own (left) side.
+                        ul { dir: "ltr",
                             for line in guide.next.iter() {
-                                li { key: "{line}", bdi { "{line}" } }
+                                li { key: "{line}", "{line}" }
                             }
                         }
                     }
                 }
                 if !guide.dd.is_empty() {
                     div { class: "calc-guide calc-dd",
-                        h2 { class: "small", {tx::DD} }
-                        ul {
+                        h2 { class: "calc-result-head", {tx::DD} }
+                        ul { dir: "ltr",
                             for line in guide.dd.iter() {
-                                li { key: "{line}", bdi { "{line}" } }
+                                li { key: "{line}", "{line}" }
                             }
                         }
                     }

@@ -296,6 +296,128 @@ Source: Book Geriatrics Lecture 2, p. 30; Lecture 3, p. 42
 | `creatinine_mg_dl` | number, mg/dL | Serum creatinine |
 | `sex` | `male`, `female` | Sex |
 
+## `katz_adl`: Katz ADL index
+
+Source: Book Geriatrics Lecture 7, Katz Index of Independence in ADL (p. 111); Katz et al., JAMA 1963;185:914–9
+
+| input | kind | |
+|---|---|---|
+| `bathing` | `independent`, `dependent` | Bathing |
+| `dressing` | `independent`, `dependent` | Dressing |
+| `toileting` | `independent`, `dependent` | Toileting |
+| `transferring` | `independent`, `dependent` | Transferring |
+| `continence` | `independent`, `dependent` | Continence |
+| `feeding` | `independent`, `dependent` | Feeding |
+
+## `lawton_iadl`: Lawton IADL scale
+
+Source: Book Geriatrics Lecture 7, Lawton-Brody IADL scale (p. 112); Lawton & Brody, Gerontologist 1969;9:179–86, also the source of the domains left out for men (food preparation, housekeeping, laundry)
+
+| input | kind | |
+|---|---|---|
+| `sex` | `female`, `male` | Sex |
+| `telephone` | `own_initiative`, `few_numbers`, `answers_only`, `none` | Ability to use telephone |
+| `shopping` | `all`, `small`, `accompanied`, `unable` | Shopping |
+| `food_preparation` | `independent`, `if_supplied`, `inadequate`, `needs_served` | Food preparation; optional |
+| `housekeeping` | `alone`, `light`, `light_poor`, `needs_help`, `none` | Housekeeping; optional |
+| `laundry` | `all`, `small_items`, `others` | Laundry; optional |
+| `transport` | `independent`, `taxi`, `accompanied`, `assisted`, `none` | Mode of transportation |
+| `medication` | `responsible`, `if_prepared`, `unable` | Responsibility for own medications |
+| `finances` | `independent`, `day_to_day`, `unable` | Ability to handle finances |
+
+## `gds15`: Geriatric Depression Scale (GDS-15)
+
+Source: Book Geriatrics Lecture 7, Geriatric Depression Scale short form (p. 119); Lecture 4 (pp. 79–80); Sheikh & Yesavage, Clin Gerontol 1986;5:165–73
+
+| input | kind | |
+|---|---|---|
+| `satisfied` | `yes`, `no` | 1. Basically satisfied with your life? |
+| `dropped_activities` | `yes`, `no` | 2. Dropped many of your activities and interests? |
+| `life_empty` | `yes`, `no` | 3. Feel that your life is empty? |
+| `bored` | `yes`, `no` | 4. Often get bored? |
+| `good_spirits` | `yes`, `no` | 5. In good spirits most of the time? |
+| `afraid` | `yes`, `no` | 6. Afraid that something bad is going to happen to you? |
+| `happy` | `yes`, `no` | 7. Feel happy most of the time? |
+| `helpless` | `yes`, `no` | 8. Often feel helpless? |
+| `stay_home` | `yes`, `no` | 9. Prefer to stay at home rather than go out and do new things? |
+| `memory` | `yes`, `no` | 10. More problems with memory than most people? |
+| `wonderful_alive` | `yes`, `no` | 11. Think it is wonderful to be alive? |
+| `worthless` | `yes`, `no` | 12. Feel pretty worthless the way you are now? |
+| `full_of_energy` | `yes`, `no` | 13. Feel full of energy? |
+| `hopeless` | `yes`, `no` | 14. Feel that your situation is hopeless? |
+| `others_better_off` | `yes`, `no` | 15. Think that most people are better off than you are? |
+
+## `mna_sf`: MNA screening (short form)
+
+Source: Book Geriatrics Lecture 7, Mini Nutritional Assessment, screening items A–F (p. 124); Rubenstein et al., J Gerontol 2001;56A:M366–72; Kaiser et al., J Nutr Health Aging 2009;13:782–8
+
+| input | kind | |
+|---|---|---|
+| `food_intake` | `severe`, `moderate`, `none` | A. Food intake fall over 3 months (appetite, digestion, chewing, swallowing) |
+| `weight_loss` | `over_3kg`, `unknown`, `1_3kg`, `none` | B. Weight loss over the last 3 months |
+| `mobility` | `bed_chair`, `indoors`, `goes_out` | C. Mobility |
+| `stress` | `yes`, `no` | D. Psychological stress or acute disease in the past 3 months |
+| `neuropsych` | `severe`, `mild_dementia`, `none` | E. Neuropsychological problems |
+| `bmi` | `under_19`, `19_21`, `21_23`, `23_plus` | F. Body mass index (kg/m²) |
+
+## `clinical_frailty`: Clinical Frailty Scale
+
+Source: Book Geriatrics Lecture 7, Frailty assessment, Clinical Frailty Scale (p. 121); Rockwood et al., CMAJ 2005;173:489–95
+
+| input | kind | |
+|---|---|---|
+| `level` | `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9` | The description that fits best |
+
+## `cam`: Confusion Assessment Method (CAM)
+
+Source: Book Geriatrics Lecture 4, Confusion Assessment Method (pp. 70–71); Inouye et al., Ann Intern Med 1990;113:941–8
+
+| input | kind | |
+|---|---|---|
+| `acute_fluctuating` | true / false (default false) | 1. Acute onset and fluctuating course |
+| `inattention` | true / false (default false) | 2. Inattention |
+| `disorganised_thinking` | true / false (default false) | 3. Disorganised thinking |
+| `altered_consciousness` | true / false (default false) | 4. Altered level of consciousness |
+
+## `sarc_f`: SARC-F (sarcopenia screen)
+
+Source: Book Geriatrics Lecture 8, Sarcopenia, SARC-F questionnaire (pp. 133–134); Malmstrom & Morley, J Am Med Dir Assoc 2013;14:531–2 (falls 1–3 = 1 point); next steps from EWGSOP2, Age Ageing 2019;48:16–31
+
+| input | kind | |
+|---|---|---|
+| `strength` | `none`, `some`, `a_lot` | Strength: difficulty lifting and carrying 10 pounds |
+| `walking` | `none`, `some`, `a_lot` | Assistance in walking: difficulty walking across a room |
+| `rise` | `none`, `some`, `a_lot` | Rise from a chair: difficulty transferring from a chair or bed |
+| `stairs` | `none`, `some`, `a_lot` | Climb stairs: difficulty climbing a flight of 10 stairs |
+| `falls` | `none`, `1_3`, `4_plus` | Falls in the past year |
+
+## `mmse`: Mini-Mental State Examination (MMSE)
+
+Source: Book Geriatrics Lecture 4, Mini-Mental State Examination (p. 63); Folstein et al., J Psychiatr Res 1975;12:189–98
+
+| input | kind | |
+|---|---|---|
+| `orientation_time` | number | Orientation: year, season, date, day, month |
+| `orientation_place` | number | Orientation: country, county, town, hospital, floor |
+| `registration` | number | Registration: name 3 objects |
+| `attention` | number | Attention: serial 7s or WORLD backwards |
+| `recall` | number | Recall the 3 objects |
+| `naming` | number | Language: name a pencil and a watch |
+| `repetition` | number | Language: repeat "no ifs, ands, or buts" |
+| `command` | number | Language: 3-stage command |
+| `read_write_copy` | number | Language: read and obey, write a sentence, copy a design |
+
+## `abi`: Ankle-brachial index (ABI)
+
+Source: Book Geriatrics Lecture 1, Subclinical cardiovascular disease (p. 8); Book Diabetes Lecture 5, Ankle brachial pressure index (p. 60); AHA/ACC 2016 PAD guideline (Gerhard-Herman et al., Circulation 2017;135:e726–79) for 0.91–0.99 borderline and above 1.40 non-compressible
+
+| input | kind | |
+|---|---|---|
+| `dp_mm_hg` | number, mm Hg | Ankle systolic: dorsalis pedis |
+| `pt_mm_hg` | number, mm Hg | Ankle systolic: posterior tibial; optional |
+| `brachial_right_mm_hg` | number, mm Hg | Brachial systolic: right arm |
+| `brachial_left_mm_hg` | number, mm Hg | Brachial systolic: left arm; optional |
+
 ## `acr_eular_2010_ra`: ACR/EULAR 2010 RA criteria
 
 Source: Book Rheumatology Lecture 16, p. 246

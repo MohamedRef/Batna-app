@@ -12,7 +12,7 @@
 //! status 2 or more, Ann Arbor stage III–IV and more than one extranodal
 //! site; 0–1 low, 2 low-intermediate, 3 high-intermediate, 4–5 high risk.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num};
 
 const SPREAD: &[(&str, &str)] = &[
     ("single_group", "A single lymph node group"),
@@ -137,6 +137,184 @@ fn ipi(i: &Inputs) -> Result<Outcome, CalcError> {
         ],
     })
 }
+
+/// Next step and differential per stage (Lugano 2014, Cheson).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "ann_arbor.1a",
+        Guide {
+            next: &[
+                "PET-CT to confirm the disease is limited.",
+                "Short chemotherapy with or without involved-site radiotherapy.",
+                "Work out the prognosis: the IPI for aggressive NHL, risk factors for Hodgkin lymphoma.",
+            ],
+            dd: &[
+                "Reactive nodes: local infection, EBV, CMV, toxoplasmosis, HIV.",
+                "TB lymphadenitis, sarcoidosis, SLE.",
+                "Drugs (phenytoin), metastatic carcinoma, CLL.",
+                "An excision biopsy of the node decides, not an FNA.",
+            ],
+        },
+    ),
+    (
+        "ann_arbor.1b",
+        Guide {
+            next: &[
+                "PET-CT to confirm the disease is limited.",
+                "Short chemotherapy with or without involved-site radiotherapy.",
+                "Work out the prognosis: the IPI for aggressive NHL, risk factors for Hodgkin lymphoma.",
+            ],
+            dd: &[
+                "TB, HIV, infectious mononucleosis or CMV, brucellosis.",
+                "Sarcoidosis, SLE, adult-onset Still's disease.",
+                "Metastatic carcinoma.",
+                "An excision biopsy of the node decides, not an FNA.",
+            ],
+        },
+    ),
+    (
+        "ann_arbor.2a",
+        Guide {
+            next: &[
+                "PET-CT to confirm the disease is limited.",
+                "Short chemotherapy with or without involved-site radiotherapy.",
+                "Work out the prognosis: the IPI for aggressive NHL, risk factors for Hodgkin lymphoma.",
+            ],
+            dd: &[
+                "Reactive nodes: local infection, EBV, CMV, toxoplasmosis, HIV.",
+                "TB lymphadenitis, sarcoidosis, SLE.",
+                "Drugs (phenytoin), metastatic carcinoma, CLL.",
+                "An excision biopsy of the node decides, not an FNA.",
+            ],
+        },
+    ),
+    (
+        "ann_arbor.2b",
+        Guide {
+            next: &[
+                "PET-CT to confirm the disease is limited.",
+                "Short chemotherapy with or without involved-site radiotherapy.",
+                "Work out the prognosis: the IPI for aggressive NHL, risk factors for Hodgkin lymphoma.",
+            ],
+            dd: &[
+                "TB, HIV, infectious mononucleosis or CMV, brucellosis.",
+                "Sarcoidosis, SLE, adult-onset Still's disease.",
+                "Metastatic carcinoma.",
+                "An excision biopsy of the node decides, not an FNA.",
+            ],
+        },
+    ),
+    (
+        "ann_arbor.3a",
+        Guide {
+            next: &[
+                "PET-CT staging; in NHL a marrow biopsy if PET doesn't settle it.",
+                "Systemic chemotherapy (R-CHOP for DLBCL, ABVD-based for Hodgkin).",
+                "Work out the IPI (NHL); with a high IPI consider CNS prophylaxis (CNS-IPI).",
+            ],
+            dd: &[
+                "Reactive nodes: local infection, EBV, CMV, toxoplasmosis, HIV.",
+                "TB lymphadenitis, sarcoidosis, SLE.",
+                "Drugs (phenytoin), metastatic carcinoma, CLL.",
+                "An excision biopsy of the node decides, not an FNA.",
+            ],
+        },
+    ),
+    (
+        "ann_arbor.3b",
+        Guide {
+            next: &[
+                "PET-CT staging; in NHL a marrow biopsy if PET doesn't settle it.",
+                "Systemic chemotherapy (R-CHOP for DLBCL, ABVD-based for Hodgkin).",
+                "Work out the IPI (NHL); with a high IPI consider CNS prophylaxis (CNS-IPI).",
+            ],
+            dd: &[
+                "TB, HIV, infectious mononucleosis or CMV, brucellosis.",
+                "Sarcoidosis, SLE, adult-onset Still's disease.",
+                "Metastatic carcinoma.",
+                "An excision biopsy of the node decides, not an FNA.",
+            ],
+        },
+    ),
+    (
+        "ann_arbor.4a",
+        Guide {
+            next: &[
+                "PET-CT staging; in NHL a marrow biopsy if PET doesn't settle it.",
+                "Systemic chemotherapy (R-CHOP for DLBCL, ABVD-based for Hodgkin).",
+                "Work out the IPI (NHL); with a high IPI consider CNS prophylaxis (CNS-IPI).",
+            ],
+            dd: &[
+                "Reactive nodes: local infection, EBV, CMV, toxoplasmosis, HIV.",
+                "TB lymphadenitis, sarcoidosis, SLE.",
+                "Drugs (phenytoin), metastatic carcinoma, CLL.",
+                "An excision biopsy of the node decides, not an FNA.",
+            ],
+        },
+    ),
+    (
+        "ann_arbor.4b",
+        Guide {
+            next: &[
+                "PET-CT staging; in NHL a marrow biopsy if PET doesn't settle it.",
+                "Systemic chemotherapy (R-CHOP for DLBCL, ABVD-based for Hodgkin).",
+                "Work out the IPI (NHL); with a high IPI consider CNS prophylaxis (CNS-IPI).",
+            ],
+            dd: &[
+                "TB, HIV, infectious mononucleosis or CMV, brucellosis.",
+                "Sarcoidosis, SLE, adult-onset Still's disease.",
+                "Metastatic carcinoma.",
+                "An excision biopsy of the node decides, not an FNA.",
+            ],
+        },
+    ),
+    (
+        "ipi_nhl.low",
+        Guide {
+            next: &["Standard R-CHOP; limited stage may need fewer cycles."],
+            dd: &[
+                "The IPI is for aggressive NHL such as DLBCL: follicular lymphoma uses the FLIPI, Hodgkin lymphoma the Hasenclever score, myeloma the ISS.",
+                "Survival figures are pre-rituximab (Shipp 1993); the R-IPI (Sehn 2007) fits R-CHOP patients better.",
+            ],
+        },
+    ),
+    (
+        "ipi_nhl.low_int",
+        Guide {
+            next: &["Standard R-CHOP."],
+            dd: &[
+                "The IPI is for aggressive NHL such as DLBCL: follicular lymphoma uses the FLIPI, Hodgkin lymphoma the Hasenclever score, myeloma the ISS.",
+                "Survival figures are pre-rituximab (Shipp 1993); the R-IPI (Sehn 2007) fits R-CHOP patients better.",
+            ],
+        },
+    ),
+    (
+        "ipi_nhl.high_int",
+        Guide {
+            next: &[
+                "R-CHOP; consider a clinical trial.",
+                "Work out the CNS-IPI; at high risk, CNS imaging and CSF.",
+            ],
+            dd: &[
+                "The IPI is for aggressive NHL such as DLBCL: follicular lymphoma uses the FLIPI, Hodgkin lymphoma the Hasenclever score, myeloma the ISS.",
+                "Survival figures are pre-rituximab (Shipp 1993); the R-IPI (Sehn 2007) fits R-CHOP patients better.",
+            ],
+        },
+    ),
+    (
+        "ipi_nhl.high",
+        Guide {
+            next: &[
+                "R-CHOP or a clinical trial.",
+                "Work out the CNS-IPI; at high risk, CNS imaging, CSF and CNS prophylaxis.",
+            ],
+            dd: &[
+                "The IPI is for aggressive NHL such as DLBCL: follicular lymphoma uses the FLIPI, Hodgkin lymphoma the Hasenclever score, myeloma the ISS.",
+                "Survival figures are pre-rituximab (Shipp 1993); the R-IPI (Sehn 2007) fits R-CHOP patients better.",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

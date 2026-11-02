@@ -10,7 +10,7 @@
 //! maturation time of 1 day for Hct 40% or more, 1.5 for 35–39, 2 for
 //! 25–34, 2.5 for 15–24 and 3 below 15.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "rpi",
@@ -75,6 +75,43 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+/// Next step and differential per band (Hillman & Finch; standard anaemia work-up).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "rpi.low",
+        Guide {
+            next: &[
+                "Sort the anaemia by the MCV: low, normal or high.",
+                "Iron studies (ferritin, transferrin saturation), B12 and folate.",
+                "Renal function, TSH and a blood film.",
+                "Bone marrow biopsy if two or more cell lines are low or the film shows blasts.",
+            ],
+            dd: &[
+                "Microcytic: iron deficiency, thalassaemia trait, anaemia of chronic disease, sideroblastic anaemia.",
+                "Normocytic: anaemia of CKD (low erythropoietin), chronic disease, aplastic anaemia, marrow infiltration, early iron deficiency.",
+                "Macrocytic: B12 or folate deficiency, MDS, liver disease, alcohol, hypothyroidism, drugs (methotrexate, hydroxyurea).",
+            ],
+        },
+    ),
+    (
+        "rpi.adequate",
+        Guide {
+            next: &[
+                "LDH, indirect bilirubin, haptoglobin and a blood film.",
+                "Direct Coombs test if it looks like haemolysis.",
+                "No haemolysis: look for bleeding (GI tract, menses).",
+            ],
+            dd: &[
+                "Immune haemolysis: autoimmune (warm or cold), transfusion reaction, drugs.",
+                "Inherited: hereditary spherocytosis, G6PD deficiency, sickle cell disease, thalassaemia.",
+                "MAHA: TTP, HUS, DIC; also malaria and PNH.",
+                "Recent acute blood loss.",
+                "Recovery after iron, B12 or folate replacement.",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

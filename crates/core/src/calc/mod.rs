@@ -329,7 +329,7 @@ pub struct Guide {
 
 // One line per module that has guides, so branches adding them don't touch
 // the same line.
-static GUIDE_LISTS: &[&[(&str, Guide)]] = &[];
+static GUIDE_LISTS: &[&[(&str, Guide)]] = &[rpi::GUIDES, cll::GUIDES, lymphoma::GUIDES, mpn::GUIDES];
 
 /// The next step and differential for a band id (`cam.positive`), if
 /// written.

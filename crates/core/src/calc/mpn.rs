@@ -7,7 +7,7 @@
 //! Overt PMF: Lecture 9, pp. 145–146. Each needs its major criteria (all
 //! of them, or the first ones plus the minor criterion) as the book prints.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num};
 
 const SEX: &[(&str, &str)] = &[("male", "Male"), ("female", "Female")];
 
@@ -159,6 +159,107 @@ fn pmf(i: &Inputs) -> Result<Outcome, CalcError> {
     ];
     Ok(verdict(met, ("who_pmf.met", "who_pmf.not_met"), "overt primary myelofibrosis", 145, parts, notes))
 }
+
+/// Next step and differential per verdict (Arber 2016; ELN 2018 / Tefferi for management).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "who_pv.met",
+        Guide {
+            next: &[
+                "Phlebotomy to a haematocrit under 45% and low-dose aspirin for everyone.",
+                "Risk: age 60 or more or a previous thrombosis is high risk.",
+                "High risk adds cytoreduction: hydroxyurea, or interferon when young or pregnant.",
+                "Treat cardiovascular risk factors.",
+            ],
+            dd: &[
+                "Secondary erythrocytosis from hypoxia: COPD, sleep apnoea, cyanotic heart disease, high altitude, smoking and CO.",
+                "High oxygen-affinity haemoglobin, EPO receptor mutation (familial) (book p. 163).",
+                "EPO-secreting tumours: renal cell and hepatocellular carcinoma, cerebellar haemangioblastoma, uterine fibroids.",
+                "After renal transplant; testosterone or SGLT2 inhibitors.",
+                "Relative polycythaemia: dehydration, diuretics.",
+            ],
+        },
+    ),
+    (
+        "who_pv.not_met",
+        Guide {
+            next: &[
+                "Erythropoietin level: high or normal points to a secondary cause.",
+                "Oxygen saturation, sleep study, chest and renal or liver imaging.",
+                "JAK2 exon 12 if V617F is negative but EPO is low.",
+            ],
+            dd: &[
+                "Secondary erythrocytosis from hypoxia: COPD, sleep apnoea, cyanotic heart disease, high altitude, smoking and CO.",
+                "High oxygen-affinity haemoglobin, EPO receptor mutation (familial) (book p. 163).",
+                "EPO-secreting tumours: renal cell and hepatocellular carcinoma, cerebellar haemangioblastoma, uterine fibroids.",
+                "After renal transplant; testosterone or SGLT2 inhibitors.",
+                "Relative polycythaemia: dehydration, diuretics.",
+            ],
+        },
+    ),
+    (
+        "who_et.met",
+        Guide {
+            next: &[
+                "Thrombosis risk (revised IPSET: age over 60, previous thrombosis, JAK2).",
+                "Aspirin for most; cytoreduction (hydroxyurea) when high risk.",
+                "Platelets over 1500 × 10⁹/L: check for acquired von Willebrand before aspirin.",
+            ],
+            dd: &[
+                "Reactive thrombocytosis: iron deficiency, infection or inflammation, cancer, bleeding, after splenectomy or surgery.",
+                "CML: always test BCR-ABL1.",
+                "Prefibrotic PMF, PV masked by iron deficiency.",
+                "MDS with del(5q), MDS/MPN with ring sideroblasts and thrombocytosis.",
+            ],
+        },
+    ),
+    (
+        "who_et.not_met",
+        Guide {
+            next: &[
+                "Rule out a reactive cause first: ferritin, CRP, blood film.",
+                "Then BCR-ABL1, JAK2, CALR and MPL, and a marrow biopsy.",
+            ],
+            dd: &[
+                "Reactive thrombocytosis: iron deficiency, infection or inflammation, cancer, bleeding, after splenectomy or surgery.",
+                "CML: always test BCR-ABL1.",
+                "Prefibrotic PMF, PV masked by iron deficiency.",
+                "MDS with del(5q), MDS/MPN with ring sideroblasts and thrombocytosis.",
+            ],
+        },
+    ),
+    (
+        "who_pmf.met",
+        Guide {
+            next: &[
+                "Prognosis: IPSS at diagnosis (in this list), DIPSS later.",
+                "High risk in a fit patient: refer for allogeneic stem cell transplant.",
+                "JAK inhibitor (ruxolitinib) for the spleen and symptoms; treat the anaemia.",
+            ],
+            dd: &[
+                "Reactive marrow fibrosis: infection (TB), autoimmune disease, chronic inflammation (book p. 146).",
+                "Hairy cell leukaemia and other lymphoid neoplasms, metastatic cancer, toxic myelopathy.",
+                "Other myeloid neoplasms: CML, MDS with fibrosis, post-PV or post-ET myelofibrosis, acute megakaryoblastic leukaemia.",
+                "Prefibrotic PMF when fibrosis is grade 0–1.",
+            ],
+        },
+    ),
+    (
+        "who_pmf.not_met",
+        Guide {
+            next: &[
+                "If the marrow is fibrotic, look for another cause before calling it PMF.",
+                "With grade 0–1 fibrosis, check the WHO criteria for prefibrotic PMF.",
+            ],
+            dd: &[
+                "Reactive marrow fibrosis: infection (TB), autoimmune disease, chronic inflammation (book p. 146).",
+                "Hairy cell leukaemia and other lymphoid neoplasms, metastatic cancer, toxic myelopathy.",
+                "Other myeloid neoplasms: CML, MDS with fibrosis, post-PV or post-ET myelofibrosis, acute megakaryoblastic leukaemia.",
+                "Prefibrotic PMF when fibrosis is grade 0–1.",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

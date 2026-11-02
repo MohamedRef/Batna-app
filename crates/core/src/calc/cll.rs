@@ -10,7 +10,7 @@
 //! inguinal nodes, spleen, liver) are the original definition (Binet 1981);
 //! the book's table only says "< 3 lymphatic groups".
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, num};
 
 pub const RAI: CalcSpec = CalcSpec {
     id: "rai_cll",
@@ -119,6 +119,152 @@ fn binet(i: &Inputs) -> Result<Outcome, CalcError> {
         ],
     })
 }
+
+/// Next step and differential per stage (iwCLL 2018, Hallek; book p. 129 for the DD).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "rai_cll.0",
+        Guide {
+            next: &[
+                "Watch and wait: CBC and examination every 3–6 months.",
+                "Treat only active disease (iwCLL 2018): B symptoms, progressive marrow failure, bulky or growing nodes or spleen, lymphocyte doubling under 6 months.",
+                "Vaccinate (pneumococcal, influenza); no live vaccines.",
+            ],
+            dd: &[
+                "Reactive lymphocytosis: pertussis, infectious mononucleosis, TB, toxoplasmosis, autoimmune disease (usually under 15 × 10³/µL and not sustained).",
+                "Monoclonal B lymphocytosis: clonal B cells under 5 × 10⁹/L with no nodes, organomegaly or cytopenias.",
+                "Prolymphocytic leukaemia: massive spleen, more than 55% prolymphocytes.",
+                "Mantle cell lymphoma in the blood: CD5+ but CD23−, cyclin D1 / t(11;14).",
+                "Hairy cell leukaemia, marginal zone lymphoma: flow cytometry tells them apart.",
+            ],
+        },
+    ),
+    (
+        "rai_cll.1",
+        Guide {
+            next: &[
+                "Watch and wait: CBC and examination every 3–6 months.",
+                "Treat only active disease (iwCLL 2018): B symptoms, progressive marrow failure, bulky or growing nodes or spleen, lymphocyte doubling under 6 months.",
+                "Vaccinate (pneumococcal, influenza); no live vaccines.",
+            ],
+            dd: &[
+                "Reactive lymphocytosis: pertussis, infectious mononucleosis, TB, toxoplasmosis, autoimmune disease (usually under 15 × 10³/µL and not sustained).",
+                "Monoclonal B lymphocytosis: clonal B cells under 5 × 10⁹/L with no nodes, organomegaly or cytopenias.",
+                "Prolymphocytic leukaemia: massive spleen, more than 55% prolymphocytes.",
+                "Mantle cell lymphoma in the blood: CD5+ but CD23−, cyclin D1 / t(11;14).",
+                "Hairy cell leukaemia, marginal zone lymphoma: flow cytometry tells them apart.",
+            ],
+        },
+    ),
+    (
+        "rai_cll.2",
+        Guide {
+            next: &[
+                "Watch and wait: CBC and examination every 3–6 months.",
+                "Treat only active disease (iwCLL 2018): B symptoms, progressive marrow failure, bulky or growing nodes or spleen, lymphocyte doubling under 6 months.",
+                "Vaccinate (pneumococcal, influenza); no live vaccines.",
+            ],
+            dd: &[
+                "Reactive lymphocytosis: pertussis, infectious mononucleosis, TB, toxoplasmosis, autoimmune disease (usually under 15 × 10³/µL and not sustained).",
+                "Monoclonal B lymphocytosis: clonal B cells under 5 × 10⁹/L with no nodes, organomegaly or cytopenias.",
+                "Prolymphocytic leukaemia: massive spleen, more than 55% prolymphocytes.",
+                "Mantle cell lymphoma in the blood: CD5+ but CD23−, cyclin D1 / t(11;14).",
+                "Hairy cell leukaemia, marginal zone lymphoma: flow cytometry tells them apart.",
+            ],
+        },
+    ),
+    (
+        "binet_cll.a",
+        Guide {
+            next: &[
+                "Watch and wait: CBC and examination every 3–6 months.",
+                "Treat only active disease (iwCLL 2018): B symptoms, progressive marrow failure, bulky or growing nodes or spleen, lymphocyte doubling under 6 months.",
+                "Vaccinate (pneumococcal, influenza); no live vaccines.",
+            ],
+            dd: &[
+                "Reactive lymphocytosis: pertussis, infectious mononucleosis, TB, toxoplasmosis, autoimmune disease (usually under 15 × 10³/µL and not sustained).",
+                "Monoclonal B lymphocytosis: clonal B cells under 5 × 10⁹/L with no nodes, organomegaly or cytopenias.",
+                "Prolymphocytic leukaemia: massive spleen, more than 55% prolymphocytes.",
+                "Mantle cell lymphoma in the blood: CD5+ but CD23−, cyclin D1 / t(11;14).",
+                "Hairy cell leukaemia, marginal zone lymphoma: flow cytometry tells them apart.",
+            ],
+        },
+    ),
+    (
+        "binet_cll.b",
+        Guide {
+            next: &[
+                "Watch and wait: CBC and examination every 3–6 months.",
+                "Treat only active disease (iwCLL 2018): B symptoms, progressive marrow failure, bulky or growing nodes or spleen, lymphocyte doubling under 6 months.",
+                "Vaccinate (pneumococcal, influenza); no live vaccines.",
+            ],
+            dd: &[
+                "Reactive lymphocytosis: pertussis, infectious mononucleosis, TB, toxoplasmosis, autoimmune disease (usually under 15 × 10³/µL and not sustained).",
+                "Monoclonal B lymphocytosis: clonal B cells under 5 × 10⁹/L with no nodes, organomegaly or cytopenias.",
+                "Prolymphocytic leukaemia: massive spleen, more than 55% prolymphocytes.",
+                "Mantle cell lymphoma in the blood: CD5+ but CD23−, cyclin D1 / t(11;14).",
+                "Hairy cell leukaemia, marginal zone lymphoma: flow cytometry tells them apart.",
+            ],
+        },
+    ),
+    (
+        "rai_cll.3",
+        Guide {
+            next: &[
+                "Marrow failure is an indication to treat (iwCLL 2018).",
+                "First check DAT and reticulocytes: autoimmune cytopenia is treated on its own and doesn't upstage.",
+                "Before treatment: FISH for del(17p), TP53 mutation and IGHV status choose the regimen.",
+            ],
+            dd: &[
+                "For the low Hb or platelets: marrow infiltration (true advanced stage) or autoimmune haemolysis (DAT+, high reticulocytes) or ITP, which do not upstage (iwCLL 2018).",
+                "Also hypersplenism and treatment-related cytopenias.",
+                "Reactive lymphocytosis: pertussis, infectious mononucleosis, TB, toxoplasmosis, autoimmune disease (usually under 15 × 10³/µL and not sustained).",
+                "Monoclonal B lymphocytosis: clonal B cells under 5 × 10⁹/L with no nodes, organomegaly or cytopenias.",
+                "Prolymphocytic leukaemia: massive spleen, more than 55% prolymphocytes.",
+                "Mantle cell lymphoma in the blood: CD5+ but CD23−, cyclin D1 / t(11;14).",
+                "Hairy cell leukaemia, marginal zone lymphoma: flow cytometry tells them apart.",
+            ],
+        },
+    ),
+    (
+        "rai_cll.4",
+        Guide {
+            next: &[
+                "Marrow failure is an indication to treat (iwCLL 2018).",
+                "First check DAT and reticulocytes: autoimmune cytopenia is treated on its own and doesn't upstage.",
+                "Before treatment: FISH for del(17p), TP53 mutation and IGHV status choose the regimen.",
+            ],
+            dd: &[
+                "For the low Hb or platelets: marrow infiltration (true advanced stage) or autoimmune haemolysis (DAT+, high reticulocytes) or ITP, which do not upstage (iwCLL 2018).",
+                "Also hypersplenism and treatment-related cytopenias.",
+                "Reactive lymphocytosis: pertussis, infectious mononucleosis, TB, toxoplasmosis, autoimmune disease (usually under 15 × 10³/µL and not sustained).",
+                "Monoclonal B lymphocytosis: clonal B cells under 5 × 10⁹/L with no nodes, organomegaly or cytopenias.",
+                "Prolymphocytic leukaemia: massive spleen, more than 55% prolymphocytes.",
+                "Mantle cell lymphoma in the blood: CD5+ but CD23−, cyclin D1 / t(11;14).",
+                "Hairy cell leukaemia, marginal zone lymphoma: flow cytometry tells them apart.",
+            ],
+        },
+    ),
+    (
+        "binet_cll.c",
+        Guide {
+            next: &[
+                "Marrow failure is an indication to treat (iwCLL 2018).",
+                "First check DAT and reticulocytes: autoimmune cytopenia is treated on its own and doesn't upstage.",
+                "Before treatment: FISH for del(17p), TP53 mutation and IGHV status choose the regimen.",
+            ],
+            dd: &[
+                "For the low Hb or platelets: marrow infiltration (true advanced stage) or autoimmune haemolysis (DAT+, high reticulocytes) or ITP, which do not upstage (iwCLL 2018).",
+                "Also hypersplenism and treatment-related cytopenias.",
+                "Reactive lymphocytosis: pertussis, infectious mononucleosis, TB, toxoplasmosis, autoimmune disease (usually under 15 × 10³/µL and not sustained).",
+                "Monoclonal B lymphocytosis: clonal B cells under 5 × 10⁹/L with no nodes, organomegaly or cytopenias.",
+                "Prolymphocytic leukaemia: massive spleen, more than 55% prolymphocytes.",
+                "Mantle cell lymphoma in the blood: CD5+ but CD23−, cyclin D1 / t(11;14).",
+                "Hairy cell leukaemia, marginal zone lymphoma: flow cytometry tells them apart.",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

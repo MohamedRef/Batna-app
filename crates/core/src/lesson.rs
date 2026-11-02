@@ -16,7 +16,7 @@ use std::collections::BTreeSet;
 use serde::{Deserialize, Serialize};
 
 use crate::content::{CaseStep, Lecture, Status};
-use crate::validate::{MAX_QUOTE_WORDS, Problem};
+use crate::validate::Problem;
 
 pub const SCHEMA: &str = "batna.lesson/v1";
 
@@ -66,7 +66,8 @@ pub struct Step {
     /// The printed book page this step teaches from.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub page: Option<u32>,
-    /// At most 25 words from that page, for checking.
+    /// The page's own words: as much as proves the step and gives the full
+    /// reference (no length cap, Mohamed 2026-10-29).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub quote: Option<String>,
 }
@@ -886,16 +887,8 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
             {
                 bad(&sat, format!("page {p} is outside the lesson's pages {a}-{b}"));
             }
-            if let Some(q) = &step.quote {
-                if q.split_whitespace().count() > MAX_QUOTE_WORDS {
-                    bad(
-                        &sat,
-                        format!("quote is longer than {MAX_QUOTE_WORDS} words (book text stays out of git)"),
-                    );
-                }
-                if step.page.is_none() {
-                    bad(&sat, "a quote needs its page".into());
-                }
+            if step.quote.is_some() && step.page.is_none() {
+                bad(&sat, "a quote needs its page".into());
             }
             if let StepBody::Figure { image: Some(p), .. } = &step.body
                 && p.book

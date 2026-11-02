@@ -158,7 +158,7 @@ memory with no YAML, so it is cheap: `batna-tools packs build` refuses to
 build a pack with problems, the app refuses (and remembers) a downloaded
 pack with problems, and a pack already on disk or a last-good backup with
 problems is dropped at start in favour of the built-in content. Authoring
-rules that need the YAML (quote length, approvals) stay in `batna-tools
+rules that need the YAML (approvals) stay in `batna-tools
 validate`.
 
 A pack also carries the app's stylesheets (`Pack::look`, every `.css` file

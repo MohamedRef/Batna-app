@@ -184,6 +184,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     step: st.clone(),
                     seed: format!("{}#{}", lesson.id, k),
                     before: before[k],
+                    quote_held: attempt.read().quote_held(&lesson, k),
                     retry: {
                         let st_k = attempt.read().state(&lesson, k);
                         let q = st.body.is_question();
@@ -311,6 +312,8 @@ fn Stage(
     seed: String,
     /// Answered before its response was saved: Some(right) (Try steps: done).
     before: Option<bool>,
+    /// The book quote waits until he has answered (`response::quote_held`).
+    quote_held: bool,
     /// (checked now, answered before): a question he can do again.
     retry: (bool, bool),
     on_retry: EventHandler<()>,
@@ -362,7 +365,13 @@ fn Stage(
                 footer { class: "ls-src",
                     crate::abbrsheet::AbbrChip { texts: texts.clone() }
                     if let Some(page) = step.page {
-                        crate::hover::BookPage { page, quote: step.quote.clone(), of: seed.clone() }
+                        crate::hover::BookPage {
+                            page,
+                            quote: if quote_held { None } else { step.quote.clone() },
+                            held: quote_held && step.quote.is_some(),
+                            of: seed.clone(),
+                            hook: step_hook(&step.body),
+                        }
                     }
                 }
             }
@@ -443,6 +452,17 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
 }
 
 /// Focused navigation regressions: no study records or score changes.
+/// A mnemonic step's تحشيشة and letters, for its page chip's sheet.
+fn step_hook(body: &batna_core::lesson::StepBody) -> Option<crate::pagesheet::Hook> {
+    match body {
+        batna_core::lesson::StepBody::Mnemonic { parts, hook, .. } => Some(crate::pagesheet::Hook {
+            text: hook.clone().unwrap_or_default(),
+            parts: parts.iter().map(|p| (p.key.clone(), p.text.clone())).collect(),
+        }),
+        _ => None,
+    }
+}
+
 #[cfg(test)]
 mod ux_tests {
     use super::*;

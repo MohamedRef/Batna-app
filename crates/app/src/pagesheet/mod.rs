@@ -1,5 +1,5 @@
 //! A book page's sheet. Every "ص N" chip in the app opens it (Mohamed,
-//! 2026-10-28: no dead chips or links): the short quote the chip itself
+//! 2026-10-28: no dead chips or links): the book quote the chip itself
 //! carries, when it has one, the lecture the page is in, what Batna has made from that page,
 //! and two ways on: a session on just that page, or the lecture's page.
 //!
@@ -19,9 +19,18 @@ use crate::{Screen, Ui};
 const CSS: Css = css!("src/pagesheet/pagesheet.css");
 
 /// The open page, where its number counts ([`Scope`]), the quote its chip
-/// carried, and whether a quote is held back until he answers (it would give
-/// the answer away).
-type Open = (u32, Scope, Option<String>, bool);
+/// carried, whether a quote is held back until he answers (it would give
+/// the answer away), and the تحشيشة of the list it cites.
+type Open = (u32, Scope, Option<String>, bool, Option<Hook>);
+
+/// The تحشيشة of the list or table a quote holds, shown under the quote
+/// (Mohamed, 2026-11-02), with its letters as a small table when it has some.
+#[derive(Clone, Debug, Default, PartialEq)]
+pub struct Hook {
+    pub text: String,
+    /// A mnemonic's letters and what each stands for.
+    pub parts: Vec<(String, String)>,
+}
 
 /// Where a cited page number counts. Each course's book numbers its own
 /// pages (Gastroenterology starts again at 1), and a course that cites
@@ -38,10 +47,11 @@ static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
 /// Opens the sheet for page `page` cited by `of` (an item, lesson step or
 /// lecture id; empty for the hepatology book). A course that cites slides
 /// numbers them per lecture, so the sheet stays in `of`'s lecture.
-pub fn open(page: u32, of: &str, quote: Option<String>, held: bool) {
+pub fn open(page: u32, of: &str, quote: Option<String>, held: bool, hook: Option<Hook>) {
     document::eval("window.__batnaHover && window.__batnaHover.hide();");
     crate::abbrsheet::close();
-    *OPEN.write() = Some((page, scope(Library::get(), of), quote.filter(|q| !q.trim().is_empty()), held));
+    *OPEN.write() =
+        Some((page, scope(Library::get(), of), quote.filter(|q| !q.trim().is_empty()), held, hook));
 }
 
 /// Where `of`'s page numbers count; empty `of` is the hepatology book.
@@ -107,7 +117,7 @@ pub fn page_content(lib: &Library, page: u32, scope: &Scope, hidden: impl Fn(&st
 pub fn BookSheet() -> Element {
     let ui = use_context::<Ui>();
     let review = use_review();
-    let Some((page, scope, chip_quote, held)) = OPEN.read().clone() else {
+    let Some((page, scope, chip_quote, held, hook)) = OPEN.read().clone() else {
         return rsx! {};
     };
     let lib = Library::get();
@@ -148,7 +158,10 @@ pub fn BookSheet() -> Element {
             div { class: "bk-body",
                 if let Some(q) = &quote {
                     figure { class: "bk-quote",
-                        blockquote { lang: "en", dir: "ltr", "“{q}”" }
+                        Quote { text: q.clone() }
+                    }
+                    if let Some(h) = hook.filter(|h| !h.text.trim().is_empty()) {
+                        HookCard { hook: h }
                     }
                 } else if held {
                     p { class: "bk-quote muted", {tx::QUOTE_HELD} }
@@ -252,5 +265,125 @@ mod tests {
         assert!(c.playable.iter().all(|id| id.starts_with("res.L02.")));
         // A book page never lands in a slide lecture.
         assert_eq!(page_content(lib, 30, &hb(), |_| false).lecture.as_deref(), Some("hb.L02"));
+    }
+}
+
+/// A book quote laid out as the page has it: a title, paragraphs, and
+/// tables drawn as tables (Mohamed, 2026-11-02: "جدول مش نص تحت بعضه").
+/// A list with groups becomes a two-column table, the group in the first
+/// column beside each of its rows; a titled list without groups, a
+/// one-column table; an untitled one, bullets.
+#[component]
+pub fn Quote(text: String) -> Element {
+    use batna_core::quote::{Block, parse};
+    let blocks = parse(&text);
+    let titled = blocks.iter().any(|b| matches!(b, Block::Title(_)));
+    rsx! {
+        div { class: "bk-q", lang: "en", dir: "ltr",
+            for b in blocks {
+                match b {
+                    Block::Title(t) => rsx! { p { class: "bk-q-title", "{t}" } },
+                    Block::Para(t) => rsx! { p { class: "bk-q-para", "{t}" } },
+                    Block::Grid { head, rows } => rsx! {
+                        div { class: "bk-q-scroll",
+                            table { class: "bk-q-table",
+                                thead { tr { for h in head { th { "{h}" } } } }
+                                tbody {
+                                    for r in rows {
+                                        tr { for c in r { td { "{c}" } } }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    Block::List(rows) if rows.iter().any(|r| r.group) => {
+                        rsx! { GroupTable { rows } }
+                    }
+                    Block::List(rows) if titled => rsx! {
+                        table { class: "bk-q-table",
+                            tbody { for r in rows { tr { td { class: "d{r.depth.min(3)}", "{r.text}" } } } }
+                        }
+                    },
+                    Block::List(rows) => rsx! {
+                        ul { class: "bk-q-list",
+                            for r in rows { li { class: "d{r.depth.min(3)}", "{r.text}" } }
+                        }
+                    },
+                }
+            }
+        }
+    }
+}
+
+/// A group heading and how many rows it spans.
+type GroupCell = Option<(String, usize)>;
+
+/// Group rows of a list as table rows: (group cell, its rows).
+fn grouped(rows: &[batna_core::quote::Row]) -> Vec<(GroupCell, Vec<String>)> {
+    let mut out: Vec<(GroupCell, Vec<String>)> = Vec::new();
+    let mut i = 0;
+    while i < rows.len() {
+        let r = &rows[i];
+        if r.group {
+            let mut kids = Vec::new();
+            let mut j = i + 1;
+            while j < rows.len() && rows[j].depth > r.depth {
+                let pad = "\u{2003}".repeat(rows[j].depth - r.depth - 1);
+                kids.push(format!("{pad}{}", rows[j].text));
+                j += 1;
+            }
+            out.push((Some((r.text.trim_end_matches(':').to_string(), kids.len())), kids));
+            i = j;
+        } else {
+            out.push((None, vec![r.text.clone()]));
+            i += 1;
+        }
+    }
+    out
+}
+
+#[component]
+fn GroupTable(rows: Vec<batna_core::quote::Row>) -> Element {
+    let groups = grouped(&rows);
+    rsx! {
+        table { class: "bk-q-table grouped",
+            tbody {
+                for (g, kids) in groups {
+                    match g {
+                        Some((name, n)) => rsx! {
+                            for (k, kid) in kids.iter().enumerate() {
+                                tr {
+                                    if k == 0 {
+                                        th { scope: "rowgroup", rowspan: "{n}", "{name}" }
+                                    }
+                                    td { "{kid}" }
+                                }
+                            }
+                        },
+                        None => rsx! { tr { td { class: "solo", colspan: "2", "{kids[0]}" } } },
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// The تحشيشة under a quote; a mnemonic's letters in a small table.
+#[component]
+fn HookCard(hook: Hook) -> Element {
+    rsx! {
+        div { class: "bk-hook",
+            p { class: "bk-hook-label", {tx::HOOK} }
+            crate::learn::Rich { text: hook.text.clone(), class: "bk-hook-text ls-rich" }
+            if !hook.parts.is_empty() {
+                table { class: "bk-hook-parts", dir: "ltr", lang: "en",
+                    tbody {
+                        for (key, text) in hook.parts.iter() {
+                            tr { th { "{key}" } td { "{text}" } }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

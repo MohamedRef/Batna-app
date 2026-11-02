@@ -76,12 +76,18 @@ pub fn ItemView(
                         quote: if revealed() { item.src.quote.clone() } else { None },
                         held: !revealed() && item.src.quote.is_some(),
                         of: item.id.clone(),
+                        hook: match &item.body {
+                            batna_core::content::Body::Enumerate { hook: Some(h), .. } => {
+                                Some(crate::pagesheet::Hook { text: h.clone(), parts: Vec::new() })
+                            }
+                            _ => None,
+                        },
                     }
                 }
                 if let Some(q) = item.src.quote.as_ref().filter(|_| revealed()) {
                     details { class: "st-quote",
                         summary { {tx::BOOK_QUOTE} }
-                        q { lang: "en", dir: "ltr", "{q}" }
+                        crate::pagesheet::Quote { text: q.clone() }
                     }
                 }
             }

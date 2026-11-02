@@ -39,7 +39,7 @@ pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
             wide_side: got.is_some(),
             primary: rsx! {
                 p { class: "st-prompt", lang: "en", dir: "ltr", "{prompt}" }
-                p { class: "muted small", "{tx::ENUM_GOAL_A} {total} {tx::ENUM_GOAL_B} {pass} {tx::ENUM_GOAL_C}" }
+                p { class: "muted small", {tx::enum_goal(total, pass)} }
                 if got.is_none() {
                     textarea {
                         class: "st-recall",

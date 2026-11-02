@@ -290,7 +290,7 @@ fn StatusCard(p: Plan, exam: Option<Day>) -> Element {
                 h2 { "{tx::EXAM_ON}: {long_date(exam)}" }
             }
             if p.status != PlanStatus::ExamDone {
-                p { class: "muted", "{p.study_days_left} {tx::DAYS_LEFT}" }
+                p { class: "muted", {tx::days_left(p.study_days_left as usize)} }
             }
             if let Some(from) = p.final_from.filter(|_| p.status != PlanStatus::ExamDone) {
                 p { class: "muted small", "{tx::FINAL_FROM} {long_date(from)}" }

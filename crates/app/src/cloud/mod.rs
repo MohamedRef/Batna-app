@@ -164,10 +164,11 @@ impl CloudStatus {
     }
 }
 
-/// The web app's own Google client id (public, not a secret): set once it
-/// exists (docs/WEB.md); `BATNA_WEB_GOOGLE_CLIENT_ID` overrides it.
+/// The web app's own Google client id ("Batna web", public, not a secret;
+/// docs/WEB.md). `BATNA_WEB_GOOGLE_CLIENT_ID` overrides it.
 #[cfg(target_arch = "wasm32")]
-const WEB_GOOGLE_CLIENT_ID: Option<&str> = None;
+const WEB_GOOGLE_CLIENT_ID: Option<&str> =
+    Some("1001052243528-f6b44kj27r95v7qc49vkslfv7v4oau9l.apps.googleusercontent.com");
 
 pub struct CloudHandle {
     pub commands: UnboundedSender<Command>,

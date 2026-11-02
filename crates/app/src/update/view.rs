@@ -670,7 +670,7 @@ pub fn use_content_switch(ui: Ui) {
             // crash-loop guard starts counting again (#344).
             let mut loaded_for = 0u32;
             loop {
-                tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+                crate::platform::time::sleep(std::time::Duration::from_secs(2)).await;
                 // Count calm time only after the library is genuinely loaded.
                 // Otherwise a slow first render can mark a bad pack as good.
                 if should_settle_content(crate::content::Library::is_initialized(), loaded_for) {

@@ -128,7 +128,7 @@ pub fn RemindSection() -> Element {
     use_future(move || async move {
         if cfg!(target_os = "macos") {
             loop {
-                tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+                crate::platform::time::sleep(std::time::Duration::from_secs(1)).await;
                 let now = native::enabled();
                 if *mac_allowed.peek() != now {
                     mac_allowed.set(now);

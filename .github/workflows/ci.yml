@@ -96,6 +96,22 @@ jobs:
           export CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER="$BIN/aarch64-linux-android28-clang"
           cargo clippy -p batna-app --target aarch64-linux-android --no-default-features --features mobile -- -D warnings
 
+  web:
+    name: Web app compiles (wasm32)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: web
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+      # docs/WEB.md: the same app, built for the browser.
+      - run: cargo clippy -p batna-app --target wasm32-unknown-unknown --no-default-features --features web -- -D warnings
+
   worker:
     name: Batna Cloud Worker compiles (wasm32)
     runs-on: ubuntu-24.04

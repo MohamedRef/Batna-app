@@ -66,6 +66,15 @@ anki:
 run:
     cargo run -p batna-app
 
+# The web app: builds target/web/batna and serves it on http://localhost:8080 (docs/WEB.md)
+web:
+    scripts/web/build.sh --dev
+    python3 -m http.server 8080 --bind 127.0.0.1 --directory target/web/batna
+
+# The web app, optimised, as Cloudflare serves it (docs/WEB.md)
+web-release:
+    scripts/web/build.sh
+
 # Android debug APK on a connected device (needs dx 0.7.10, Android SDK + NDK)
 android:
     cd crates/app && dx serve --platform android --no-default-features --features mobile

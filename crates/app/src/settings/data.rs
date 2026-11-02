@@ -25,9 +25,10 @@ pub fn DataSection() -> Element {
             h2 { {tx::DATA_FOLDER} }
             match folder {
                 Some(f) => rsx! { bdi { class: "path", dir: "ltr", "{f}" } },
+                None if cfg!(target_arch = "wasm32") => rsx! { p { class: "muted", {tx::DATA_IN_BROWSER} } },
                 None => rsx! { p { class: "muted", {tx::DATA_NOWHERE} } },
             }
-            if crate::store::shared().path.is_some() {
+            if crate::store::shared().path.is_some() || (cfg!(target_arch = "wasm32") && crate::store::open_error().is_none()) {
             } else {
                 p { class: "small", role: "alert", {crate::i18n::study_settings::STORE_MEMORY} }
             }

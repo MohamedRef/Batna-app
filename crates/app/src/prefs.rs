@@ -3,6 +3,7 @@
 //! `key=value` file in the app's data folder, written whole on every change.
 // adapted from kabar-app main: crates/app/src/settings/device.rs
 
+#[cfg(not(target_arch = "wasm32"))] // the web keeps prefs in localStorage
 mod storage;
 
 use std::collections::BTreeMap;
@@ -23,6 +24,11 @@ pub fn data_dir() -> Option<PathBuf> {
     // Previews and tests point the whole app at a scratch folder.
     if let Some(dir) = std::env::var_os("BATNA_DATA_DIR") {
         return Some(PathBuf::from(dir));
+    }
+    if cfg!(target_arch = "wasm32") {
+        // The browser has no folders: the database is in IndexedDB and the
+        // device prefs in localStorage (`platform::web`).
+        return None;
     }
     if cfg!(target_os = "android") {
         // The app's private files directory (Context.getFilesDir for the
@@ -164,6 +170,9 @@ impl Default for DevicePrefs {
 
 impl DevicePrefs {
     pub fn load() -> Self {
+        #[cfg(target_arch = "wasm32")]
+        let text = crate::platform::web::read_pref(FILE).unwrap_or_default();
+        #[cfg(not(target_arch = "wasm32"))]
         let text = data_dir().and_then(|d| storage::read(&d).ok()).unwrap_or_default();
         Self::parse(&text)
     }
@@ -172,8 +181,17 @@ impl DevicePrefs {
     pub fn save(&self) {
         let choice = *self;
         crate::persistence::save("device.preferences", move || {
-            let dir = data_dir().ok_or("No device data folder is available")?;
-            storage::write(&dir, &choice.render()).map_err(|e| e.to_string())
+            #[cfg(target_arch = "wasm32")]
+            let result = if crate::platform::web::write_pref(FILE, &choice.render()) {
+                Ok(())
+            } else {
+                Err("The browser refused to keep this choice".to_string())
+            };
+            #[cfg(not(target_arch = "wasm32"))]
+            let result = data_dir()
+                .ok_or_else(|| "No device data folder is available".to_string())
+                .and_then(|dir| storage::write(&dir, &choice.render()).map_err(|e| e.to_string()));
+            result
         });
     }
 

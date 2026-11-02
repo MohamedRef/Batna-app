@@ -506,7 +506,7 @@ pub fn to_apkg(deck: &Deck, now_ms: i64) -> Result<Vec<u8>, String> {
     let s = |e: &dyn std::fmt::Display| e.to_string();
     let now_s = now_ms / 1000;
     let collection = {
-        let db = Connection::open_in_memory().map_err(|e| s(&e))?;
+        let mut db = Connection::open_in_memory().map_err(|e| s(&e))?;
         db.execute_batch(SCHEMA).map_err(|e| s(&e))?;
 
         let first_deck = deck.decks.last().map(|d| d.0).unwrap_or(1);

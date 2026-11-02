@@ -22,7 +22,7 @@ mod item;
 mod planning;
 
 use std::collections::{BTreeSet, HashMap, HashSet};
-use std::time::Instant;
+use web_time::Instant;
 
 use batna_core::content::{Item, Lecture};
 use batna_core::review::{Grade, Origin, ReviewEvent};

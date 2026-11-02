@@ -47,8 +47,8 @@ impl StudyData {
         // Book order, from the index.
         let lectures: Vec<Lecture> =
             lib.index.lectures.iter().filter_map(|e| lib.lectures.get(&e.id).cloned()).collect();
-        let now_ms = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
+        let now_ms = web_time::SystemTime::now()
+            .duration_since(web_time::UNIX_EPOCH)
             .map(|d| d.as_millis() as i64)
             .unwrap_or_default();
         let clock = Clock { now_ms, zone: crate::store::zone(), rollover_hour: ROLLOVER_HOUR };

@@ -39,7 +39,7 @@ fn row_json(
     key: &str,
 ) -> rusqlite::Result<Option<Map<String, Value>>> {
     let mut stmt = conn.prepare(&format!("SELECT * FROM \"{table}\" WHERE \"{key_col}\" = ?1"))?;
-    let columns: Vec<String> = stmt.column_names().into_iter().map(String::from).collect();
+    let columns: Vec<String> = stmt.column_names().map(String::from).collect();
     stmt.query_row([key], |row| {
         let mut obj = Map::new();
         for (i, col) in columns.iter().enumerate() {

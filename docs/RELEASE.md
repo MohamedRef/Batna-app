@@ -112,7 +112,7 @@ public release needs no token and costs nothing.
 
 | Channel | Release tag | Who follows it |
 |---|---|---|
-| Preview | `batna-preview` | CI preview APKs (every push to `main`). Signed with the CI preview key. |
+| Preview | `batna-preview` | Every push to `main`. Signed with the release keys since 2026-11-02, so any build can pick it in Settings › Updates and go back to alpha later. |
 | Alpha | `batna-alpha` | Release builds, from the first alpha on. |
 | Beta / Stable | `batna-beta`, `batna-stable` | Later. A beta also reaches alpha followers; a release reaches everyone. |
 
@@ -274,7 +274,7 @@ or not reachable), with when it last looked. Then two per-device choices:
 | Choice | Options |
 |---|---|
 | How it updates | **لوحده** (automatic, the default): downloads on Wi-Fi only and installs at a calm moment. **قولّي الأول** (tell me first): says so, and downloads and installs on a tap. **لأ** (off): only on "دوّر على تحديث". |
-| Channel | Alpha, beta or stable for release builds. A preview build always follows `batna-preview`. |
+| Channel | Preview, alpha, beta or stable, on any build (a preview build starts on preview, a release build on alpha). Preview brings every merge; on the Mac it brings content only (no Mac preview build). Going back from preview to alpha offers the next alpha version. |
 
 When something is ready, a card above the current screen says so, with the
 first two lines of what's new (below) and "إيه الجديد؟". "بعدين" hides it

@@ -211,6 +211,68 @@ Source: Blatchford 2000; book Gastroenterology Lecture 11, p. 309
 | `hepatic_disease` | true / false (default false) | Hepatic disease |
 | `cardiac_failure` | true / false (default false) | Cardiac failure |
 
+## `shock_index`: Shock index
+
+Source: Book Gastroenterology Lecture 7, p. 227
+
+| input | kind | |
+|---|---|---|
+| `hr_bpm` | number, beats/min | Heart rate |
+| `sbp_mmhg` | number, mmHg | Systolic blood pressure |
+
+## `oakland`: Oakland score (lower GI bleeding)
+
+Source: Oakland 2017; book Gastroenterology Lecture 7, Table 1 (pp. 228–229)
+
+| input | kind | |
+|---|---|---|
+| `age_years` | number, years | Age |
+| `sex` | `male`, `female` | Sex |
+| `previous_lgib` | true / false (default false) | Previous admission with lower GI bleeding |
+| `dre_blood` | true / false (default false) | Blood on digital rectal examination |
+| `hr_bpm` | number, beats/min | Heart rate |
+| `sbp_mmhg` | number, mmHg | Systolic blood pressure |
+| `hb_g_dl` | number, g/dL | Haemoglobin |
+
+## `uc_activity`: UC activity (Truelove and Witts)
+
+Source: Book Gastroenterology Lecture 6, Table 4 (p. 222), titled there "Mayo score"; the grading is Truelove and Witts 1955
+
+| input | kind | |
+|---|---|---|
+| `stools_per_day` | number | Bowel movements a day |
+| `blood` | `small`, `between`, `visible` | Blood in stools |
+| `fever` | true / false (default false) | Temperature above 37.8 °C |
+| `pulse_90` | true / false (default false) | Pulse 90/min or more |
+| `anaemia` | true / false (default false) | Anaemia |
+| `esr_mm_h` | number, mm/h | ESR; optional |
+
+## `kyoto_gastritis`: Kyoto classification score (gastritis)
+
+Source: Toyoshima 2020; book Gastroenterology Lecture 1, Table 2 (p. 16) and p. 21
+
+| input | kind | |
+|---|---|---|
+| `atrophy` | `none`, `mild`, `severe` | Mucosal atrophy (Kimura-Takemoto) |
+| `intestinal_metaplasia` | `none`, `mild`, `severe` | Intestinal metaplasia |
+| `enlarged_folds` | true / false (default false) | Enlarged folds (5 mm or wider) |
+| `nodularity` | true / false (default false) | Nodularity (small nodules in the antrum) |
+| `diffuse_redness` | `none`, `mild`, `severe` | Diffuse redness |
+
+## `rome4_ibs`: Rome IV criteria for IBS
+
+Source: Book Gastroenterology Lecture 3, pp. 125–126 (Rome IV, 2016)
+
+| input | kind | |
+|---|---|---|
+| `pain_weekly` | true / false (default false) | Recurrent abdominal pain, on average 1 day a week or more, in the last 3 months |
+| `onset_6_months` | true / false (default false) | Symptoms began 6 months or more before diagnosis |
+| `defecation` | true / false (default false) | Pain related to defecation |
+| `frequency` | true / false (default false) | Pain with a change in stool frequency |
+| `form` | true / false (default false) | Pain with a change in stool form |
+| `hard_25` | true / false (default false) | Bristol 1–2 in more than 25% of abnormal bowel movements |
+| `loose_25` | true / false (default false) | Bristol 6–7 in more than 25% of abnormal bowel movements |
+
 ## `anion_gap`: Anion gap
 
 Source: Book Nephrology Lecture 1, pp. 5, 9, 14
@@ -326,6 +388,37 @@ Source: Book Diabetology Lecture 15, pp. 189, 192
 | `na_meq_l` | number, mEq/L | Sodium |
 | `glucose_mg_dl` | number, mg/dL | Glucose |
 | `urea_mmol_l` | number, mmol/L | Urea; optional |
+
+## `dka_severity`: DKA severity
+
+Source: Book Diabetology Lecture 15, Table 2 (p. 188), from the ADA 2024 consensus
+
+| input | kind | |
+|---|---|---|
+| `ph` | number | Venous or arterial pH |
+| `hco3_mmol_l` | number, mmol/L | Bicarbonate |
+| `bhb_mmol_l` | number, mmol/L | β-hydroxybutyrate; optional |
+| `urine_ketones` | true / false (default false) | Urine ketones 2+ or more |
+| `glucose_mg_dl` | number, mg/dL | Glucose; optional |
+| `known_diabetes` | true / false (default false) | Known diabetes |
+| `mental` | `alert`, `drowsy`, `stupor` | Mental status |
+
+## `premixed_insulin`: Premixed insulin starting dose
+
+Source: Book Diabetology Lecture 10, p. 128
+
+| input | kind | |
+|---|---|---|
+| `weight_kg` | number, kg | Body weight |
+
+## `bmi`: Body mass index (BMI)
+
+Source: Book Diabetology Lecture 2, pp. 18–22 (ADA); class names WHO
+
+| input | kind | |
+|---|---|---|
+| `weight_kg` | number, kg | Weight |
+| `height_cm` | number, cm | Height |
 
 ## `ipss_mf`: IPSS (primary myelofibrosis)
 

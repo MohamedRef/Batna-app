@@ -1057,12 +1057,17 @@ pub mod calc {
             ("ascitic_pmn", "pmn_per_mm3") => "عدد كرات الدم البيضا الكلي × نسبة النيوتروفيل.",
             ("bisap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
             ("glasgow_blatchford", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("oakland", "hb_g_dl") => "جدول الكتاب بالـ g/L: ‏7 g/dL = 70 g/L.",
+            ("kyoto_gastritis", "diffuse_redness") => {
+                "الكتاب بيدرّجها بشفافية الـ collecting venules في الـ body."
+            }
             ("osmolal_gap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
             ("acr_eular_2010_ra", "large_joints") => "الكتف والكوع والحوض والركبة والكاحل.",
             ("acr_eular_2010_ra", "small_joints") => {
                 "الـ MCP والـ PIP والـ MTP من ٢ لـ ٥ والـ IP بتاع الإبهام والرسغ."
             }
             ("effective_osmolality", "urea_mmol_l") => "للأوزمولاليتي الكلية. اليوريا بالـ mg/dL ÷ 6.",
+            ("dka_severity", "bhb_mmol_l") => "سيبها فاضية لو معاك شريط بول بس، وعلّم الخانة اللي تحت.",
             ("feurea", "urine_urea_mg_dl") => "يوريا أو BUN، بس بنفس وحدة البلازما.",
             ("anion_gap", "albumin_g_dl") => "بيصحح الـ gap لو الألبومين واطي.",
             ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
@@ -1122,6 +1127,11 @@ pub mod calc {
             "ranson" => "شدة التهاب البنكرياس الحاد عند الدخول وبعد 48 ساعة",
             "bisap" => "خطورة التهاب البنكرياس الحاد في أول 24 ساعة",
             "glasgow_blatchford" => "نزيف الجهاز الهضمي العلوي: مين محتاج تدخل ومين يروّح",
+            "shock_index" => "النبض ÷ الضغط: النزيف مستقر ولا لأ",
+            "oakland" => "نزيف الجهاز الهضمي السفلي: مين يروّح بأمان ومين يتحجز",
+            "uc_activity" => "شدة الـ ulcerative colitis: خفيفة ولا متوسطة ولا شديدة",
+            "kyoto_gastritis" => "المنظار بيقول إيه عن الـ H. pylori وخطر سرطان المعدة",
+            "rome4_ibs" => "تشخيص الـ IBS بمعايير Rome IV ونوعه",
             "anion_gap" => "سبب الـ metabolic acidosis: الـ gap عالي ولا طبيعي",
             "delta_ratio" => "فيه اضطراب تاني مع الـ high anion gap acidosis؟",
             "expected_compensation" => "التعويض المتوقّع: الاضطراب لوحده ولا مخلوط؟",
@@ -1133,6 +1143,9 @@ pub mod calc {
             "acr_eular_2010_ra" => "تشخيص الـ rheumatoid arthritis: 6 من 10 أو أكتر",
             "corrected_sodium" => "الصوديوم الحقيقي لما السكر عالي",
             "effective_osmolality" => "أوزمولاليتي الدم لتشخيص الـ HHS",
+            "dka_severity" => "هل هي DKA؟ وشدتها قد إيه ومكان العلاج",
+            "premixed_insulin" => "أول جرعة إنسولين premixed: التلتين الصبح والتلت بالليل",
+            "bmi" => "مؤشر كتلة الجسم وإمتى نفحص أو ندّي دوا أو نفكر في جراحة",
             "ipss_mf" => "التوقّع في الـ primary myelofibrosis",
             "incidence" => "معدل الحالات الجديدة في فترة معيّنة",
             "prevalence" => "نسبة كل الحالات الموجودة في وقت معيّن",

@@ -26,15 +26,20 @@ mod apri;
 mod ascitic;
 mod bclc;
 mod bisap;
+mod bmi;
 mod child_pugh;
 mod clichy;
 mod cockcroft;
 mod diabetes;
+mod dka;
 mod fib4;
 mod gbs;
 mod glasgow;
+mod insulin;
 mod ipss_mf;
 mod kings;
+mod kyoto;
+mod lgib;
 mod maddrey;
 mod meld;
 mod r_ratio;
@@ -42,7 +47,9 @@ mod ra2010;
 mod ranson;
 mod renal;
 mod research;
+mod rome_ibs;
 mod saag;
+mod uc_activity;
 
 /// Named inputs for one calculation.
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
@@ -325,7 +332,15 @@ pub struct Guide {
 
 // One line per module that has guides, so branches adding them don't touch
 // the same line.
-static GUIDE_LISTS: &[&[(&str, Guide)]] = &[];
+static GUIDE_LISTS: &[&[(&str, Guide)]] = &[
+    lgib::GUIDES,
+    uc_activity::GUIDES,
+    kyoto::GUIDES,
+    rome_ibs::GUIDES,
+    dka::GUIDES,
+    insulin::GUIDES,
+    bmi::GUIDES,
+];
 
 /// The next step and differential for a band id (`cam.positive`), if
 /// written.
@@ -367,6 +382,11 @@ static REGISTRY: &[CalcSpec] = &[
     ranson::SPEC,
     bisap::SPEC,
     gbs::SPEC,
+    lgib::SHOCK_INDEX,
+    lgib::OAKLAND,
+    uc_activity::SPEC,
+    kyoto::SPEC,
+    rome_ibs::SPEC,
     renal::ANION_GAP,
     renal::DELTA_RATIO,
     renal::COMPENSATION,
@@ -378,6 +398,9 @@ static REGISTRY: &[CalcSpec] = &[
     ra2010::SPEC,
     diabetes::CORRECTED_NA,
     diabetes::OSMOLALITY,
+    dka::SPEC,
+    insulin::PREMIXED,
+    bmi::SPEC,
     ipss_mf::SPEC,
     research::INCIDENCE,
     research::PREVALENCE,
@@ -511,6 +534,31 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("fena.atn", &["atn", "tubular necrosis"]),
     ("feurea.prerenal", &["prerenal", "pre-renal"]),
     ("feurea.atn", &["atn", "tubular necrosis"]),
+    ("shock_index.unstable", &["unstable"]),
+    ("shock_index.stable", &["stable"]),
+    ("oakland.discharge", &["discharge", "8 or less"]),
+    ("oakland.admit", &["admit", "above 8"]),
+    ("uc_activity.mild", &["mild"]),
+    ("uc_activity.moderate", &["moderate"]),
+    ("uc_activity.severe", &["severe"]),
+    ("kyoto_gastritis.none", &["no h. pylori", "no infection"]),
+    ("kyoto_gastritis.current", &["current infection"]),
+    ("kyoto_gastritis.cancer_risk", &["cancer risk"]),
+    ("rome4_ibs.not_met", &["not met"]),
+    ("rome4_ibs.c", &["ibs-c"]),
+    ("rome4_ibs.d", &["ibs-d"]),
+    ("rome4_ibs.m", &["ibs-m"]),
+    ("rome4_ibs.u", &["ibs-u"]),
+    ("dka_severity.not_met", &["not dka", "not met"]),
+    ("dka_severity.mild", &["mild"]),
+    ("dka_severity.moderate", &["moderate"]),
+    ("dka_severity.severe", &["severe"]),
+    ("bmi.under", &["underweight"]),
+    ("bmi.normal", &["normal"]),
+    ("bmi.overweight", &["overweight"]),
+    ("bmi.class1", &["class i", "class 1"]),
+    ("bmi.class2", &["class ii", "class 2"]),
+    ("bmi.class3", &["class iii", "class 3"]),
 ];
 
 /// The bands of `band`'s calculator that `text` names, longest phrase first.

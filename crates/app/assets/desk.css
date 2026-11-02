@@ -80,6 +80,12 @@
   gap: 2px;
 }
 .peek[hidden] { display: none; }
+/* Book quotes have no length cap (Mohamed, 2026-10-29) and a table quote
+   keeps one row per line. The peek can't scroll, so a long one is cut here;
+   a tap on the chip opens the page sheet with all of it. */
+.peek { max-block-size: calc(100vh - 16px); }
+.peek > span:first-child { white-space: pre-wrap; overflow: hidden; display: -webkit-box;
+  -webkit-box-orient: vertical; -webkit-line-clamp: 14; line-clamp: 14; }
 .peek-note { font-family: var(--font); opacity: 0.75; }
 [data-peek]:not([data-peek=""]) { text-decoration: underline dotted; text-underline-offset: 3px; }
 /* A chip that opens a sheet is plainly a button; and on touch an answered

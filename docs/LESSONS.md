@@ -13,8 +13,9 @@ The model to copy is `content/lessons/hb/L01.yaml`.
 1. **The book is the answer.** Teach only from `/mnt/project-files/medstudy/book/LNN.txt`.
    Every step that teaches a fact gets `page:`: the printed page where that
    fact is (`batna-tools refs` checks it, see docs/CONTENT.md). A `quote:`
-   is required (every page chip shows it), at most 25 words, and must be that
-   page's line holding the fact. Only a figure step showing the book's own
+   is required (every page chip shows it) and must be that page's own words
+   holding the fact. No length cap (Mohamed, 2026-10-29): quote the full
+   passage or table, as text with one row per line, never an image. Only a figure step showing the book's own
    figure may go without one. The book text never goes in git.
 2. **Guideline differences** go in an `update` step with `ref:` naming the
    guideline and year. Never change the book's answer. Unsure → leave it out.

@@ -7,16 +7,17 @@
 //! is shared with Kabar Cloud. See docs/CLOUD.md.
 // adapted from kabar-app main: crates/app/src/cloud/mod.rs
 
-// The engine runs on its own thread with tokio's network stack; the web
-// build syncs through the browser instead (phase 2 of docs/WEB.md).
-#[cfg(not(target_arch = "wasm32"))]
 pub mod api;
-#[cfg(not(target_arch = "wasm32"))]
 pub mod engine;
+// The Mac and Android sign in through a loopback listener; the web app
+// leaves the page for Google and comes back (docs/WEB.md).
 #[cfg(not(target_arch = "wasm32"))]
 pub mod oauth;
-#[cfg(not(target_arch = "wasm32"))]
+#[cfg(target_arch = "wasm32")]
+#[path = "oauth_web.rs"]
+pub mod oauth;
 pub mod session;
+mod socket;
 mod ui;
 
 use std::collections::BTreeSet;
@@ -24,20 +25,21 @@ use std::collections::BTreeSet;
 use std::path::PathBuf;
 
 use batna_protocol::cloud::{DeviceInfo, DeviceSummary, Platform};
-#[cfg(not(target_arch = "wasm32"))]
-use tokio::sync::mpsc::unbounded_channel;
-use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
+use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender, unbounded_channel};
 
 #[cfg(not(target_arch = "wasm32"))]
-use self::oauth::GoogleClient;
+pub use self::oauth::GoogleClient;
 
-/// The Google client the web build would sign in with (phase 2).
+/// The web app's Google client: a "Web application" one, no secret.
 #[cfg(target_arch = "wasm32")]
 #[derive(Clone, Debug)]
 pub struct GoogleClient {
     pub client_id: String,
-    pub client_secret: Option<String>,
 }
+
+/// Batna Cloud, for builds that don't say otherwise (the web app).
+#[cfg(target_arch = "wasm32")]
+const DEFAULT_CLOUD_URL: &str = "https://batna-cloud.hamorefaat85.workers.dev";
 pub use ui::{SyncSection, ago, use_provide_cloud};
 
 /// Where Batna Cloud is and which Google client signs in. Set at build time
@@ -51,10 +53,17 @@ pub struct CloudConfig {
 }
 
 impl CloudConfig {
-    /// The web build doesn't sync yet: Settings › Sync says so.
+    /// The web app: Batna Cloud's URL and the Web Google client come from the
+    /// build (`BATNA_CLOUD_URL`, `BATNA_WEB_GOOGLE_CLIENT_ID`).
     #[cfg(target_arch = "wasm32")]
     pub fn from_env() -> Option<Self> {
-        None
+        let base_url =
+            option_env!("BATNA_CLOUD_URL").filter(|v| !v.trim().is_empty()).unwrap_or(DEFAULT_CLOUD_URL);
+        let google = option_env!("BATNA_WEB_GOOGLE_CLIENT_ID")
+            .filter(|v| !v.trim().is_empty())
+            .or(WEB_GOOGLE_CLIENT_ID)
+            .map(|id| GoogleClient { client_id: id.to_string() });
+        Some(Self { base_url: base_url.to_string(), google })
     }
 
     #[cfg(not(target_arch = "wasm32"))]
@@ -155,6 +164,11 @@ impl CloudStatus {
     }
 }
 
+/// The web app's own Google client id (public, not a secret): set once it
+/// exists (docs/WEB.md); `BATNA_WEB_GOOGLE_CLIENT_ID` overrides it.
+#[cfg(target_arch = "wasm32")]
+const WEB_GOOGLE_CLIENT_ID: Option<&str> = None;
+
 pub struct CloudHandle {
     pub commands: UnboundedSender<Command>,
     pub events: UnboundedReceiver<Event>,
@@ -169,7 +183,9 @@ pub fn start(
     device: DeviceInfo,
     vault: Box<dyn session::SessionVault>,
 ) -> Result<CloudHandle, String> {
-    let store = crate::store::Store::open(&db_path).map_err(|e| e.to_string())?;
+    // Lives as long as the app (the sync thread never ends).
+    let store: &'static crate::store::Store =
+        Box::leak(Box::new(crate::store::Store::open(&db_path).map_err(|e| e.to_string())?));
     let (cmd_tx, cmd_rx) = unbounded_channel();
     let (ev_tx, ev_rx) = unbounded_channel();
     std::thread::Builder::new()
@@ -190,6 +206,19 @@ pub fn start(
     Ok(CloudHandle { commands: cmd_tx, events: ev_rx })
 }
 
+/// The web app: the engine runs on the page's own event loop, on the store
+/// the screens use (the browser has one thread and one database).
+#[cfg(target_arch = "wasm32")]
+pub fn start(config: CloudConfig, device: DeviceInfo) -> CloudHandle {
+    let (cmd_tx, cmd_rx) = unbounded_channel();
+    let (ev_tx, ev_rx) = unbounded_channel();
+    let api = api::Api::new(&config.base_url);
+    let vault = Box::new(session::BrowserVault);
+    let engine = engine::Engine::new(crate::store::shared(), api, config.google, device, vault, ev_tx);
+    wasm_bindgen_futures::spawn_local(engine.run(cmd_rx));
+    CloudHandle { commands: cmd_tx, events: ev_rx }
+}
+
 /// What this device calls itself on the Devices list.
 pub fn device_info(device_id: String) -> DeviceInfo {
     let model = device_model();
@@ -197,10 +226,22 @@ pub fn device_info(device_id: String) -> DeviceInfo {
         (model.clone().unwrap_or_else(|| "Android".into()), Platform::Android)
     } else if cfg!(target_os = "macos") {
         (mac_name().unwrap_or_else(|| "Mac".into()), Platform::Macos)
+    } else if cfg!(target_arch = "wasm32") {
+        (browser_name(), Platform::Web)
     } else {
         ("Batna (dev)".into(), Platform::Other)
     };
     DeviceInfo { device_id, name, model, platform }
+}
+
+#[cfg(target_arch = "wasm32")]
+fn browser_name() -> String {
+    crate::platform::web::browser_name()
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+fn browser_name() -> String {
+    "Browser".into()
 }
 
 fn mac_name() -> Option<String> {

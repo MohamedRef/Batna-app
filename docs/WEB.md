@@ -29,18 +29,43 @@ its Dioxus screens (HTML/CSS, right-to-left) instead of their egui toolkit
 | Restore | File picker / found files | File picker or paste |
 | Read aloud | System voice | The browser's voice (Web Speech) |
 | Updates | Over the air | Each deploy is the newest build; reload to get it |
-| Sync (Batna Cloud) | Live | Not yet: Settings › المزامنة says so. Next phase below |
+| Sync (Batna Cloud) | Live, WebSocket with a Bearer header | Live, the browser's `fetch` and `WebSocket`; see Sync below |
+| Sign-in | Google, desktop client (code + PKCE) | Google by redirect, Web client (ID token); session in `localStorage` |
 | Reminders | System notifications | Not on the web; the phone or Mac rings |
 
 Nothing is dropped: everything else on the Mac and Android also runs in the browser.
 
-## Phase 2: sync from the browser
+## Sync
 
-1. Move `cloud/api.rs` and `cloud/engine.rs` from blocking `ureq` and
-   `tokio-tungstenite` to a small transport trait with a `fetch` / `WebSocket`
-   implementation for wasm (the engine already runs as one async loop).
-2. Google sign-in by redirect (the Web OAuth client), session in IndexedDB.
-3. CORS on the Worker for the web app's origin only.
+The web app syncs through the same Batna Cloud as the Mac and Android, with
+the same engine (`cloud/engine.rs`); only the transport differs.
+
+| Piece | Mac / Android | Web |
+|---|---|---|
+| API calls | `ureq` on a blocking thread | `fetch` (`platform/web.rs`) |
+| Live socket | `tokio-tungstenite`, token in the `authorization` header | Browser `WebSocket` (`cloud/socket.rs`); browsers can't set headers, so the token rides in `?access_token=`, which the hub accepts on `/v1/sync` only |
+| Keep-alive | Protocol ping | An app-level `Ping` message |
+| Google sign-in | `cloud/oauth.rs`: loopback / deep link, code + PKCE | `cloud/oauth_web.rs`: the page goes to Google and comes back with an ID token in the `#` fragment (`response_type=id_token`, checked `state`); the fragment is cleared at once |
+| Session | Keychain / Keystore | `localStorage` (`cloud-session`), like any web app's session |
+| Device kind | `mac`, `android` | `web` (older apps read it as "other") |
+
+Batna Cloud answers the browser only from the origins in `WEB_ORIGINS`
+(`crates/server/wrangler.toml`): CORS headers and preflights go to those and
+nothing else.
+
+### Google Web client (once)
+
+Google sign-in needs a **Web application** OAuth client in the same Google
+Cloud project as the desktop one:
+
+- Authorized JavaScript origin: `https://batna-web.hamorefaat85.workers.dev`
+- Authorized redirect URI: `https://batna-web.hamorefaat85.workers.dev/`
+
+Its client ID is public (it is in every sign-in URL); it has no secret to keep.
+Put it in `WEB_GOOGLE_CLIENT_ID` (`crates/app/src/cloud/mod.rs`) and add it,
+comma-separated, to `GOOGLE_CLIENT_IDS` in `crates/server/wrangler.toml` so the
+hub accepts its ID tokens. Until then the web app's sync page shows sign-in as
+unavailable, and everything else works offline as before.
 
 ## Run it
 

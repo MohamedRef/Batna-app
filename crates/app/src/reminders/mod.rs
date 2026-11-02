@@ -248,7 +248,7 @@ pub fn RemindSection() -> Element {
                     div { class: "row",
                         // macOS asks only once; after a no, only System Settings can change it.
                         if !cfg!(target_os = "macos") {
-                            button { onclick: move |_| native::request_permission(), {tx::ALLOW} }
+                            button { class: "btn btn-primary", onclick: move |_| native::request_permission(), {tx::ALLOW} }
                         }
                         button { class: "btn btn-secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                     }

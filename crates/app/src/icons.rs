@@ -190,6 +190,11 @@ pub fn check() -> Element {
     stroke("M5 12.5l4.5 4.5L19 7.5")
 }
 
+/// A circular arrow: load again.
+pub fn refresh() -> Element {
+    stroke("M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4.5v4h-4")
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

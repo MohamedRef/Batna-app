@@ -57,6 +57,25 @@ export function download(name, mime, bytes) {
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
+export async function http(method, url, bearer, body) {
+  const headers = {};
+  if (bearer) headers["authorization"] = bearer;
+  if (body !== undefined && body !== null) headers["content-type"] = "application/json";
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 20000);
+  try {
+    const res = await fetch(url, { method, headers, body: body ?? undefined, signal: ctl.signal });
+    return [res.status, await res.text()];
+  } finally { clearTimeout(timer); }
+}
+export function browser_name() {
+  const ua = navigator.userAgent;
+  const browser = /Edg\//.test(ua) ? "Edge" : /Firefox\//.test(ua) ? "Firefox"
+    : /Chrome\//.test(ua) ? "Chrome" : /Safari\//.test(ua) ? "Safari" : "Browser";
+  const os = /Android/.test(ua) ? "Android" : /iPhone|iPad/.test(ua) ? "iOS"
+    : /Mac OS X/.test(ua) ? "Mac" : /Windows/.test(ua) ? "Windows" : /Linux/.test(ua) ? "Linux" : "";
+  return os ? `${browser} on ${os}` : browser;
+}
 export function ls_get(key) { try { return localStorage.getItem(key); } catch (_) { return null; } }
 export function ls_set(key, value) {
   try { localStorage.setItem(key, value); return true; } catch (_) { return false; }
@@ -70,6 +89,15 @@ extern "C" {
     fn persist();
     #[wasm_bindgen(js_name = download)]
     fn js_download(name: &str, mime: &str, bytes: &[u8]);
+    #[wasm_bindgen(catch, js_name = http)]
+    async fn js_http(
+        method: &str,
+        url: &str,
+        bearer: Option<String>,
+        body: Option<String>,
+    ) -> Result<JsValue, JsValue>;
+    #[wasm_bindgen(js_name = browser_name)]
+    fn js_browser_name() -> String;
     fn ls_get(key: &str) -> Option<String>;
     fn ls_set(key: &str, value: &str) -> bool;
 }
@@ -91,6 +119,8 @@ thread_local! {
 /// it never overwrites what it couldn't read.
 pub async fn boot() {
     persist();
+    // Google's answer to a sign-in comes back in the address (`cloud::oauth`).
+    crate::cloud::oauth::catch_redirect();
     let tab = format!("{:x}", js_sys::Date::now() as u64 ^ (js_sys::Math::random() * 1e12) as u64);
     ls_set(OWNER_KEY, &tab);
     TAB.with(|t| *t.borrow_mut() = tab);
@@ -170,6 +200,27 @@ pub fn use_saver() {
             save_now().await;
         }
     });
+}
+
+/// One HTTP request (Batna Cloud's API): the status and the body text, or
+/// why it never got an answer.
+pub async fn fetch(
+    method: &str,
+    url: &str,
+    bearer: Option<&str>,
+    body: Option<&str>,
+) -> Result<(u16, String), String> {
+    let pair = js_http(method, url, bearer.map(String::from), body.map(String::from))
+        .await
+        .map_err(|e| e.as_string().unwrap_or_else(|| format!("{e:?}")))?;
+    let pair = js_sys::Array::from(&pair);
+    let status = pair.get(0).as_f64().unwrap_or_default() as u16;
+    Ok((status, pair.get(1).as_string().unwrap_or_default()))
+}
+
+/// "Chrome on Mac": what the Devices list calls this browser.
+pub fn browser_name() -> String {
+    js_browser_name()
 }
 
 /// Hands `bytes` to the browser as a download called `name`.

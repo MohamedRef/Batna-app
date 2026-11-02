@@ -33,6 +33,8 @@ pub struct ApiError {
 pub enum Platform {
     Android,
     Macos,
+    /// The web app in a browser (docs/WEB.md). Older apps read it as `Other`.
+    Web,
     #[serde(other)]
     Other,
 }

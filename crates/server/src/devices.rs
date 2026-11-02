@@ -52,6 +52,7 @@ fn platform_str(p: Platform) -> &'static str {
     match p {
         Platform::Android => "android",
         Platform::Macos => "macos",
+        Platform::Web => "web",
         Platform::Other => "other",
     }
 }

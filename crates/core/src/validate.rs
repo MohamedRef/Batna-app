@@ -140,12 +140,15 @@ fn body_problems(body: &Body) -> Vec<String> {
                 p.push("mcq options repeat".into());
             }
         }
-        Body::Enumerate { prompt, points, pass } => {
+        Body::Enumerate { prompt, points, pass, hook } => {
             if empty(prompt) || points.len() < 2 {
                 p.push("enumerate needs a prompt and at least 2 points".into());
             }
             if *pass == 0 || *pass > points.len() {
                 p.push(format!("enumerate pass {pass} must be 1..={}", points.len()));
+            }
+            if hook.as_deref().is_some_and(empty) {
+                p.push("enumerate hook is empty".into());
             }
         }
         Body::Essay { prompt, outline } => {
@@ -327,6 +330,20 @@ mod tests {
         assert!(has("only Mohamed approves"));
         assert!(has("three digits"));
         assert!(has("no {{cN"));
+    }
+
+    #[test]
+    fn enumerate_hooks_read_and_must_say_something() {
+        let l = lec(&format!(
+            "{HEAD}items:
+  - {{ id: hb.L01.001, kind: enumerate, prompt: p, points: [a, b], pass: 2, hook: 'حكاية', src: {{ page: 3 }}, status: unverified }}
+  - {{ id: hb.L01.002, kind: enumerate, prompt: p, points: [a, b], pass: 2, hook: ' ', src: {{ page: 3 }}, status: unverified }}
+"
+        ));
+        assert!(matches!(&l.items[0].body, Body::Enumerate { hook: Some(h), .. } if h == "حكاية"));
+        let msgs: Vec<String> = lecture(&l, &Context::default()).iter().map(|p| p.to_string()).collect();
+        assert_eq!(msgs.len(), 1, "{msgs:#?}");
+        assert!(msgs[0].contains("hook is empty"));
     }
 
     #[test]

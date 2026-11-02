@@ -6,6 +6,7 @@
 use super::*;
 use crate::Screen;
 use crate::browser_fixture::{Shell, out_dir, write_page};
+use batna_core::content::Body;
 use batna_core::review::StudyStoreHandle;
 
 #[derive(Props, Clone, PartialEq)]
@@ -54,11 +55,21 @@ fn export_screen_fixtures_study() {
             cases.push(("item-card-reopened".to_string(), case));
         }
     }
+    // An enumerate list with its points open and its تحشيشة under them.
+    let hooked = ready_lectures()
+        .into_iter()
+        .flat_map(|l| &l.items)
+        .find(|i| matches!(&i.body, Body::Enumerate { hook: Some(_), .. }))
+        .expect("an enumerate item with a hook");
+    let open = Case { phase: "running", item: Some(hooked.id.clone()), reopened: false };
+    cases.push(("item-enumerate-open".to_string(), open));
     let first = cases[1].1.item.clone();
     cases.push(("summary".to_string(), Case { phase: "summary", item: first, reopened: false }));
     let mut manifest = Vec::new();
     for (state, case) in cases {
         let (phase, item) = (case.phase, case.item.clone());
+        let opened = state == "item-enumerate-open";
+        enumerate::OPEN_FOR_FIXTURE.store(opened, std::sync::atomic::Ordering::Relaxed);
         let mut dom = VirtualDom::new_with_props(root, case);
         dom.rebuild_in_place();
         let file = format!("study-{state}.html");

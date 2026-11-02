@@ -81,7 +81,7 @@ items:
   - id: res.L07.007
     kind: enumerate
     topic: sample-size
-    prompt: Enumerate the five factors that affect the sample size of an RCT.
+    prompt: Enumerate the five factors that affect the sample size of a randomized controlled trial (RCT).
     points:
       - Alpha (type I error)
       - Beta (type II error)
@@ -101,7 +101,7 @@ items:
     rows:
       - [Alpha (accept more type I error), Smaller, Z for alpha falls]
       - [Power, Larger, Z for beta rises]
-      - [MCRD (delta), Smaller, A big difference is easy to see]
+      - [minimal clinically relevant difference (MCRD) (delta), Smaller, A big difference is easy to see]
       - [Variance (SD of the outcome), Larger, More variability hides the difference]
     blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
     src: { page: 8, quote: "Factors affecting sample size of RCT\n| Component | Definition |\n|---|---|\n| Alpha (type I error) | The probability of falsely rejecting H0 and detecting a significant difference when the groups in reality are not different |\n| Beta (type II error) | The probability of falsely accepting H0 and not detecting a statistically significant when a specified difference between the groups in reality exist |\n| Power (1-beta) | The possibility of correctly rejecting H0 and detecting statistically significant difference when it is true |\n| (MCRD) δ | The minimal difference between the groups that the investigator considers clinically relevant |\n| Variance | The variability of the outcome measure as the SD in case of continuous outcome |" }
@@ -144,7 +144,7 @@ items:
     kind: mcq
     topic: sample-size
     stem: >-
-      An RCT comparing two drugs shows a difference between them (p < 0.05), but in reality the two groups do not differ.
+      A randomized controlled trial (RCT) comparing two drugs shows a difference between them (p < 0.05), but in reality the two groups do not differ.
       This is an example of:
     options:
       - Type 1 error (alpha error)
@@ -225,14 +225,14 @@ items:
       - There was no placebo arm, so we cannot say neither works.
       - Power is planned from alpha, beta, delta and variance; it is not 1 - p.
       - The p value is a probability, not the size of the effect.
-      - p = 0.4 is not significant, and without the effect size and its CI we cannot pick a winner.
+      - p = 0.4 is not significant, and without the effect size and its confidence interval (CI) we cannot pick a winner.
     src: { page: 17, quote: "In a well designed clinical trial of treatment of ovarian cancer, remission rate at one year is similar for new drug and usual care, p = 0.4. This means that:\n  a. Both treatment are effective\n  b. Neither treatment is effective\n  c. The statistical power of this study is 60%\n  d. The best estimate of treatment effect is 0.4\n  e. It is not possible to decide which treatment is better based on these information\nAnswer: e" }
     status: unverified
   - id: res.L07.018
     kind: mcq
     topic: sample-size
-    stem: All of the following can be increased to get a smaller sample size in an RCT EXCEPT
-    options: [Alpha error, Power, MCRD (delta), Beta error]
+    stem: All of the following can be increased to get a smaller sample size in a randomized controlled trial (RCT) EXCEPT
+    options: [Alpha error, Power, minimal clinically relevant difference (MCRD) (delta), Beta error]
     answer: 1
     why:
       - Accepting a larger alpha lowers Z-alpha, so fewer subjects are needed.
@@ -246,7 +246,7 @@ items:
     kind: mcq
     topic: sample-size
     stem: >-
-      For your RCT, you want 80% power to detect a reduction of 10 points or more in the treatment group relative to placebo.
+      For your randomized controlled trial (RCT), you want 80% power to detect a reduction of 10 points or more in the treatment group relative to placebo.
       What is the 10 in your sample-size formula?
     options: [Standard deviation, Mean change, Effect size, Standard error, Significance level]
     answer: 2
@@ -330,7 +330,7 @@ items:
   - id: res.L07.026
     kind: card
     topic: conduct
-    front: Why is blinding step 10 of an RCT, and who can be blinded?
+    front: Why is blinding step 10 of a randomized controlled trial (RCT), and who can be blinded?
     back: >-
       Knowing whether a participant is in the treatment or control group can influence behaviour.
       It is overcome by blinding the participants, the observer and/or the data reviewer.
@@ -348,7 +348,7 @@ items:
   - id: res.L07.028
     kind: enumerate
     topic: conduct
-    prompt: "Stopping rules: when may an RCT be stopped early?"
+    prompt: "Stopping rules: when may a randomized controlled trial (RCT) be stopped early?"
     points:
       - Larger than expected benefit
       - Larger than expected harm
@@ -576,7 +576,7 @@ items:
   - id: res.L07.047
     kind: mcq
     topic: concealment
-    stem: Which is NOT an issue with RCTs?
+    stem: Which is NOT an issue with randomized controlled trials (RCTs)?
     options: [Contamination, Losses to follow-up, Recall bias, Bias in assessment of outcome]
     answer: 2
     why:
@@ -639,7 +639,7 @@ items:
   - id: res.L07.052
     kind: enumerate
     topic: effect-measures
-    prompt: Which three measures help you judge the size of the effect of an intervention in an RCT?
+    prompt: Which three measures help you judge the size of the effect of an intervention in a randomized controlled trial (RCT)?
     points:
       - Relative risk reduction (RRR)
       - Absolute risk reduction (ARR)
@@ -668,8 +668,8 @@ items:
     kind: cloze
     topic: effect-measures
     text: >-
-      Mortality is 17% with control and 12% with the intervention. RRR = (17 - 12) / 17 = {{c1::29%}};
-      ARR = 17% - 12% = {{c2::5%}}; NNT = 100 / 5 = {{c3::20}}, so we need to treat 20 people to prevent one death.
+      Mortality is 17% with control and 12% with the intervention. relative risk reduction (RRR) = (17 - 12) / 17 = {{c1::29%}};
+      absolute risk reduction (ARR) = 17% - 12% = {{c2::5%}}; number needed to treat (NNT) = 100 / 5 = {{c3::20}}, so we need to treat 20 people to prevent one death.
     src: { page: 54, quote: "Example: mortality rate control 17%, intervention 12%\n  RRR = 17-12 / 17 = 29%\n  ARR = 17% - 12% = 5%\n  NNT = 1 / 5% = 100 / 5 = 20\nWe need to treat 20 people to prevent one death" }
     status: unverified
     tags: [high-yield]
@@ -678,7 +678,7 @@ items:
     topic: effect-measures
     front: What does the relative risk reduction tell you, and what is its weakness?
     back: >-
-      How much a treatment reduces risk compared with patients not receiving it: RRR = (CER - EER) / CER.
+      How much a treatment reduces risk compared with patients not receiving it: relative risk reduction (RRR) = (CER - experimental event rate (EER)) / CER.
       It does not discriminate between huge absolute treatment effects and trivial ones.
     src: { page: 55, quote: "Relative Risk Reduction (RRR):\n  Is the extent to which a treatment reduces a risk, in comparison with patients not receiving the treatment of interest.\n  However does not discriminate between huge absolute treatment effects and trivial ones.\n  RRR = CER - EER / CER" }
     status: unverified
@@ -687,7 +687,7 @@ items:
     kind: table
     topic: effect-measures
     title: "Same RRR (50%), different baseline risk: why NNT matters"
-    columns: [CER and EER, ARR, NNT]
+    columns: [control event rate (CER) and experimental event rate (EER), absolute risk reduction (ARR), number needed to treat (NNT)]
     rows:
       - [50% and 25%, 25%, "4"]
       - [5% and 2.5%, 2.5%, "40"]
@@ -700,22 +700,22 @@ items:
     kind: case
     topic: effect-measures
     stem: >-
-      Of 100 children who are contacts of TB cases, 10 already have TB. Of the other 90, 45 are given isoniazid and 3 of them develop TB;
+      Of 100 children who are contacts of tuberculosis (TB) cases, 10 already have TB. Of the other 90, 45 are given isoniazid and 3 of them develop TB;
       45 do not take isoniazid and 9 of them develop TB.
     steps:
-      - question: What are the CER and EER?
+      - question: What are the control event rate (CER) and experimental event rate (EER)?
         options: ["CER 20%, EER 6.67%", "CER 6.67%, EER 20%", "CER 9%, EER 3%", "CER 10%, EER 3%"]
         answer: 0
         why: CER = 9/45 = 20% in the untreated contacts; EER = 3/45 = 6.67% in those given isoniazid.
-      - question: What is the ARR?
+      - question: What is the absolute risk reduction (ARR)?
         options: ["13.33%", "6.67%", "0.67", "3.0"]
         answer: 0
         why: ARR = CER - EER = 20% - 6.67% = 13.33%.
-      - question: What is the RRR?
+      - question: What is the relative risk reduction (RRR)?
         options: ["0.67 (67%)", "0.33", "13.33%", "3.0"]
         answer: 0
         why: RRR = 13.33 / 20 = 0.67. Isoniazid removed two thirds of the risk.
-      - question: What is the NNT?
+      - question: What is the number needed to treat (NNT)?
         options: ["7.69, so 8 children", "13", "20", "3"]
         answer: 0
         why: NNT = 1 / 0.1333 = 7.69 (the slide's figure); round up to 8 children treated to prevent one case.
@@ -726,18 +726,18 @@ items:
     kind: case
     topic: effect-measures
     stem: >-
-      In a trial of zidovudine to prevent mother-to-infant HIV transmission, 13 of 180 infants were infected in the zidovudine group
+      In a trial of zidovudine to prevent mother-to-infant human immunodeficiency virus (HIV) transmission, 13 of 180 infants were infected in the zidovudine group
       and 40 of 183 in the placebo group.
     steps:
-      - question: What are the EER and CER?
+      - question: What are the experimental event rate (EER) and control event rate (CER)?
         options: ["EER 0.07, CER 0.22", "EER 0.22, CER 0.07", "EER 0.13, CER 0.40", "EER 0.07, CER 0.15"]
         answer: 0
         why: EER = 13/180 = 0.07 (zidovudine); CER = 40/183 = 0.22 (placebo).
-      - question: What are the RRR and ARR?
+      - question: What are the relative risk reduction (RRR) and absolute risk reduction (ARR)?
         options: ["RRR 68%, ARR 0.15", "RRR 15%, ARR 0.68", "RRR 32%, ARR 0.15", "RRR 68%, ARR 0.29"]
         answer: 0
         why: RRR = (0.22 - 0.07) / 0.22 = 68%; ARR = 0.22 - 0.07 = 0.15.
-      - question: "The slide prints RR = 3.14 and NNT = 100/15 = 6. What should you write?"
+      - question: "The slide prints relative risk (RR) = 3.14 and number needed to treat (NNT) = 100/15 = 6. What should you write?"
         options: ["RR = EER/CER = 0.33; NNT = 6.7, so 7", "RR = 3.14; NNT = 6", "RR = 0.68; NNT = 15", "RR = 3.14; NNT = 7"]
         answer: 0
         why: 3.14 is CER/EER, the inverse. The risk ratio of treated over untreated is 0.07/0.22 = about 0.33 (protective). 100/15 = 6.7, and NNT is always rounded up, so 7.
@@ -752,16 +752,16 @@ items:
     options: [The control event rate, The relative risk reduction, The absolute risk reduction, The number needed to treat]
     answer: 1
     why:
-      - The CER is just the control group's 5%.
-      - "\"In relative terms\" is RRR: (5 - 1) / 5 = 80%."
-      - The ARR is the absolute difference, 4%.
-      - The NNT is 1 / ARR = 25.
+      - The control event rate (CER) is just the control group's 5%.
+      - "\"In relative terms\" is relative risk reduction (RRR): (5 - 1) / 5 = 80%."
+      - The absolute risk reduction (ARR) is the absolute difference, 4%.
+      - The number needed to treat (NNT) is 1 / ARR = 25.
     src: { page: 61, quote: "In a randomized trial, the event rate (or risk) in the treatment group was 1%, compared to 5% to the control group. The measure that best describes by how much in relative terms the event rate was decreased by the treatment is:\n  a. the control event rate\n  b. the relative risk reduction\n  c. the absolute risk reduction\n  d. the number needed to treat\nAnswer: b" }
     status: unverified
   - id: res.L07.060
     kind: mcq
     topic: effect-measures
-    stem: Considering the relative risk reduction (RRR) and baseline risk, which scenario gives the lowest NNT?
+    stem: Considering the relative risk reduction (RRR) and baseline risk, which scenario gives the lowest number needed to treat (NNT)?
     options:
       - A greater RRR and higher baseline risk
       - A lower RRR and lower baseline risk
@@ -770,7 +770,7 @@ items:
       - A greater RRR and lower baseline risk
     answer: 0
     why:
-      - ARR = RRR x baseline risk, so both being high gives the biggest ARR and the smallest NNT.
+      - absolute risk reduction (ARR) = RRR x baseline risk, so both being high gives the biggest ARR and the smallest NNT.
       - Both low gives the smallest ARR and the largest NNT.
       - The lower RRR shrinks the ARR.
       - A lower RRR always raises the NNT for a given baseline risk.
@@ -781,9 +781,9 @@ items:
   - id: res.L07.061
     kind: mcq
     topic: effect-measures
-    stem: In an RCT the control event rate (CER) was 20% and the treatment event rate was 10%. The results are
+    stem: In a randomized controlled trial (RCT) the control event rate (CER) was 20% and the treatment event rate was 10%. The results are
     options:
-      - RR = 2.0, RRR = 10%, ARR 10%, NNT 20
+      - relative risk (RR) = 2.0, relative risk reduction (RRR) = 10%, absolute risk reduction (ARR) 10%, number needed to treat (NNT) 20
       - RR = 0.5, RRR = 50%, ARR 10%, NNT 10
       - RR = 2.0, RRR = 50%, ARR 10%, NNT 10
       - RR = 1.0, RRR = 30%, ARR 20%, NNT 20
@@ -803,15 +803,15 @@ items:
       A trial at a liver unit gives norfloxacin or placebo to cirrhotic patients with ascites. Spontaneous bacterial peritonitis
       develops in 20% on placebo and 8% on norfloxacin within a year. (Teaching numbers, not a real trial.)
     steps:
-      - question: What is the ARR?
+      - question: What is the absolute risk reduction (ARR)?
         options: ["12%", "60%", "8%", "40%"]
         answer: 0
-        why: The absolute risk reduction is ARR = CER - EER = 20% - 8% = 12%.
-      - question: What is the RRR?
+        why: The absolute risk reduction is ARR = control event rate (CER) - experimental event rate (EER) = 20% - 8% = 12%.
+      - question: What is the relative risk reduction (RRR)?
         options: ["60%", "12%", "40%", "2.5"]
         answer: 0
         why: RRR = (20 - 8) / 20 = 60%.
-      - question: What is the NNT, and how do you report it?
+      - question: What is the number needed to treat (NNT), and how do you report it?
         options: ["9 patients for one year", "8.3 patients", "12 patients", "60 patients"]
         answer: 0
         why: NNT = 100 / 12 = 8.3, rounded up to 9, and an NNT always carries its time frame (one year here).
@@ -833,7 +833,7 @@ items:
     topic: chance
     front: How do you read statistical significance from a confidence interval?
     back: >-
-      If the value of no effect (RR = 1, or RRR or risk difference = 0) falls outside the CI, the result is statistically significant.
+      If the value of no effect (RR = 1, or relative risk reduction (RRR) or risk difference = 0) falls outside the confidence interval (CI), the result is statistically significant.
       If the CI includes it, the groups are not significantly different.
     src: { page: 65, quote: "Confidence intervals:\n  show a range within which the true effect of the intervention is likely to be.\n  a confidence interval that includes the value of no effect (e.g. RR=1 or RRR=0) shows that the intervention group is not statistically significantly different from the control." }
     status: unverified
@@ -842,7 +842,7 @@ items:
     kind: table
     topic: chance
     title: Reading relative risks with their 95% CI
-    columns: [RR (95% CI), Significant?, Meaning]
+    columns: [relative risk (RR) (95% confidence interval (CI)), Significant?, Meaning]
     rows:
       - [1.77 (1.22-2.45), "Yes", Increased risk]
       - [1.63 (0.85-2.46), "No", Risk is the same]
@@ -854,7 +854,7 @@ items:
   - id: res.L07.066
     kind: card
     topic: chance
-    front: In the DVT study, how do the CIs 0.12-0.18 and 0.12-1.5 for the relative risk differ?
+    front: In the deep vein thrombosis (DVT) study, how do the confidence intervals (CIs) 0.12-0.18 and 0.12-1.5 for the relative risk differ?
     back: >-
       0.12-0.18 does not include 1, so it is statistically significant (p = 0.001).
       0.12-1.5 includes 1, so it is not statistically significant (p = 0.6).
@@ -874,7 +874,7 @@ items:
     topic: chance
     stem: >-
       A ten-year prospective study of folic acid supplements and Alzheimer's dementia reports a relative risk of 0.77
-      (95% CI 0.59-0.98). Which p value most likely matches this result?
+      (95% confidence interval (CI) 0.59-0.98). Which p value most likely matches this result?
     options: ["0.03", "0.06", "0.07", "0.09", "0.15"]
     answer: 0
     why:
@@ -916,7 +916,7 @@ items:
         answer: 0
         why: Per protocol keeps only those who got surgery, so the 10 early strokes vanish from the numerator and denominator.
       - question: What does each analysis show?
-        options: ["Per protocol RRR 0.45; ITT RRR 0", "Both show RRR 0.45", "Per protocol RRR 0; ITT RRR 0.45", "Both show no effect"]
+        options: ["Per protocol relative risk reduction (RRR) 0.45; intention-to-treat (ITT) RRR 0", "Both show RRR 0.45", "Per protocol RRR 0; ITT RRR 0.45", "Both show no effect"]
         answer: 0
         why: Per protocol 0.11 vs 0.20 gives RRR 0.45; ITT counts everyone, 20/100 vs 20/100, so RRR 0.
       - question: Which one shows the underlying truth?
@@ -939,7 +939,7 @@ items:
     topic: itt
     front: In the cancer-prevention diet example, why does excluding non-compliant people distort the result?
     back: >-
-      Some treated subjects had GI symptoms that were really early signs of cancer, so they stopped the diet.
+      Some treated subjects had gastrointestinal (GI) symptoms that were really early signs of cancer, so they stopped the diet.
       Excluding them removes future cancers from the diet group and makes the diet look more effective than it is.
     src: { page: 75, quote: "Noncompliance, Example: Trial of cancer-prevention diet vs placebo diet.\n  Treatment Group: some subjects had GI symptoms (these were actually precursors of the cancer), they did not comply with the diet\n  If these non compliant people were excluded from the analysis → Greater effect of the cancer-prevention diet" }
     status: unverified
@@ -1008,7 +1008,7 @@ items:
       - It is not optimal for measuring benefit of the intervention
     answer: 2
     why:
-      - ITT ignores compliance.
+      - intention-to-treat (ITT) ignores compliance.
       - It is the best estimate of benefit, not of harm.
       - Analyse as randomized.
       - It is the optimal estimate of benefit.
@@ -1029,7 +1029,7 @@ items:
     points:
       - Competence
       - Stage of research
-      - Research with special populations (women, children, prisoners, HIV, suicidal individuals)
+      - Research with special populations (women, children, prisoners, human immunodeficiency virus (HIV), suicidal individuals)
       - Institutional approval
       - Conflict of interest
     pass: 4
@@ -1074,7 +1074,7 @@ items:
   - id: res.L07.083
     kind: enumerate
     topic: ethics
-    prompt: What is recommended about the registration of RCTs?
+    prompt: What is recommended about the registration of randomized controlled trials (RCTs)?
     points:
       - Register all RCTs at their inception (at ethical or funding approval)
       - Registered information should be accessible to all interested parties
@@ -1088,9 +1088,9 @@ items:
   - id: res.L07.084
     kind: card
     topic: ethics
-    front: What is the ISRCTN registry?
+    front: What is the International Standard Randomised Controlled Trial Number (ISRCTN) registry?
     back: >-
-      International Standard Randomised Controlled Trial Number: a WHO-recognized primary registry that accepts all clinical research
+      International Standard Randomised Controlled Trial Number: a World Health Organization (WHO)-recognized primary registry that accepts all clinical research
       studies involving humans (proposed, ongoing or completed), gives the unique number needed for publication, and is freely searchable.
       Registration should ideally be prospective, before recruitment.
     src: { page: 85, quote: "ISRCTN registry (International Standard Randomised Controlled Trial Number):\n  The ISRCTN registry is a primary clinical trial registry recognized by WHO that accepts all clinical research studies (whether proposed, ongoing or completed), providing content validation and the unique identification number necessary for publication.\n  All study records in the database are freely accessible and searchable.\n  ISRCTN supports transparency in clinical research, helps reduce selective reporting of results and ensures an unbiased and complete evidence base.\n  ISRCTN accepts all studies involving human subjects including studies in healthcare, social care, education, workplace safety and economic development.\n  The registry welcomes submissions in English from any location.\n  Studies should ideally be registered prospectively (before recruitment starts). ISRCTN also accepts studies registered retrospectively once they are underway or after completion." }
@@ -1117,7 +1117,7 @@ items:
   - id: res.L07.086
     kind: enumerate
     topic: appraisal
-    prompt: Enumerate the advantages of RCTs.
+    prompt: Enumerate the advantages of randomized controlled trials (RCTs).
     points:
       - Best evidence for causality
       - Individuals are allocated to intervention or control without prejudice
@@ -1129,7 +1129,7 @@ items:
   - id: res.L07.087
     kind: enumerate
     topic: appraisal
-    prompt: Enumerate the disadvantages of RCTs.
+    prompt: Enumerate the disadvantages of randomized controlled trials (RCTs).
     points:
       - Expensive (time and money)
       - Organisationally difficult
@@ -1145,7 +1145,7 @@ items:
     topic: appraisal
     front: What is the CONSORT statement? (name, first year, aim, developers)
     back: >-
-      Consolidated Standards of Reporting Trials, first published in 1996, to improve the quality of conduct and reporting of RCTs.
+      Consolidated Standards of Reporting Trials, first published in 1996, to improve the quality of conduct and reporting of randomized controlled trials (RCTs).
       Developed by an international group of trialists, statisticians, epidemiologists and biomedical editors.
     src: { page: 87, quote: "CONSORT (Consolidated Standards of Reporting Trials) statement:\n  First published in 1996\n  Aim: improve quality of conduct & reporting of RCTs\n  Developed by: international group of clinical trialists, statisticians, epidemiologists and biomedical editors" }
     status: unverified
@@ -1173,14 +1173,14 @@ items:
   - id: res.L07.091
     kind: card
     topic: appraisal
-    front: How much does a phase III RCT cost, according to the lecture?
+    front: How much does a phase III randomized controlled trial (RCT) cost, according to the lecture?
     back: The mean cost of phase III RCTs funded by the US National Institute of Neurological Disorders and Stroke is US$12 million.
     src: { page: 93, quote: "Costs: The mean cost of Phase III RCTs funded by the National Institute of Neurological Disorders and Stroke is US$12 million" }
     status: unverified
   - id: res.L07.092
     kind: card
     topic: appraisal
-    front: What are the two approaches to quality assessment of RCTs, and which is discouraged?
+    front: What are the two approaches to quality assessment of randomized controlled trials (RCTs), and which is discouraged?
     back: >-
       The checklist approach and the quality-scoring approach. Scores are discouraged because they are complicated and vary with the instrument used.
     src: { page: 94, quote: "Quality assessment of RCTs. Various approaches used:\n  Checklist approach\n  Quality scoring system approach\nQuality scores are complicated and tend to vary depending on the instrument used, so, not encouraged" }
@@ -1254,7 +1254,7 @@ items:
   - id: res.L07.099
     kind: mcq
     topic: practice
-    stem: In an RCT, a planned crossover design
+    stem: In a randomized controlled trial (RCT), a planned crossover design
     options:
       - Requires standardization
       - Must take into account possible residual effects
@@ -1282,7 +1282,7 @@ items:
     stem: Comparing randomized controlled trials with cohort studies, which is generally true?
     options:
       - Both are prospective
-      - RCT results are less likely to be generalisable than cohort results
+      - randomized controlled trial (RCT) results are less likely to be generalisable than cohort results
       - RCT results are less likely to be affected by confounding
       - A, B and C are all true
       - None of the above is true
@@ -1316,7 +1316,7 @@ items:
   - id: res.L07.103
     kind: mcq
     topic: practice
-    stem: The major purpose of random assignment in an RCT is to
+    stem: The major purpose of random assignment in a randomized controlled trial (RCT) is to
     options:
       - Facilitate double blinding
       - Facilitate measurement of outcome variables
@@ -1461,7 +1461,7 @@ items:
       - It uses a single dose determined from the phase I experience.
       - It always treats divergent pathologies in a single trial.
       - It is the first human clinical experience with a new agent.
-      - It always leads to FDA approval of a new drug.
+      - It always leads to Food and Drug Administration (FDA) approval of a new drug.
     answer: 0
     why:
       - This is the slide's answer. Phase I finds a safe dose, which phase II then tests for efficacy.
@@ -1473,7 +1473,7 @@ items:
   - id: res.L07.114
     kind: mcq
     topic: practice
-    stem: Which research method best suits comparing cognitive behavioural therapy with an SSRI in anxiety disorder?
+    stem: Which research method best suits comparing cognitive behavioural therapy with a selective serotonin reuptake inhibitor (SSRI) in anxiety disorder?
     options:
       - Double blind and placebo controlled
       - Randomization and open label

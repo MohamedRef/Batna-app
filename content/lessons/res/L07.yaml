@@ -19,7 +19,7 @@ lessons:
         quote: "Step 5 - Sample Size Calculation:\n  Too small a sample would produce insignificant results and would be a waste of efforts.\n  Every subject in a clinical trial costs tremendous amount of money, so even one additional subject may mean poor financial management."
         title: "Step 5: ليه نحسب الـ sample size؟"
         text: |
-          كمّلنا الـ 12 step بتوع تخطيط الـ RCT. الـ step الخامسة: ==sample size calculation==.
+          كمّلنا الـ 12 step بتوع تخطيط الـ randomized controlled trial (RCT). الـ step الخامسة: ==sample size calculation==.
 
           - عيّنة **صغيرة**: النتيجة تطلع **insignificant** حتى لو الدوا شغّال، يعني مجهود ضايع.
           - عيّنة **كبيرة زيادة**: كل subject في الـ trial بيكلّف فلوس كتير، فحتى subject واحد زيادة يبقى **poor financial management**.
@@ -100,8 +100,8 @@ lessons:
         text: |
           ==Minimal clinically relevant difference== (delta): أقل فرق بين المجموعتين **الباحث شايفه مهم إكلينيكيًا**.
 
-          - outcome **continuous** زي الوزن: ممكن الـ MCRD يبقى **5 kg**.
-          - outcome **binary** زي MI أيوه ولا لأ: ممكن تختار فرق **10%** بين الـ treatment والـ control.
+          - outcome **continuous** زي الوزن: ممكن الـ minimal clinically relevant difference (MCRD) يبقى **5 kg**.
+          - outcome **binary** زي myocardial infarction (MI) أيوه ولا لأ: ممكن تختار فرق **10%** بين الـ treatment والـ control.
 
           وخلي بالك: لو delta **كبيرة أوي**، أدوية مش فعالة هتعدّي كـ non-inferior وتنزل السوق. لو **صغيرة أوي**، أدوية مفيدة هتتهمل.
       - kind: table
@@ -357,7 +357,7 @@ lessons:
         text: |
           الـ ==allocation concealment== بتحمي تسلسل القرعة **قبل** ما العيان يدخل التجربة. طرقها:
 
-          - ظروف متنمّرة ومقفولة ومش شفافة: **SNOSE**
+          - ظروف متنمّرة ومقفولة ومش شفافة: **sequentially numbered, opaque, sealed envelopes (SNOSE)**
           - الصيدلية ماسكة القايمة: **pharmacy-controlled**
           - مركز بعيد يقولك رقم العلبة: **central randomization**
 
@@ -449,7 +449,7 @@ lessons:
         text: |
           **Step 11**: تابع الناس لحد الـ **end point** أو **آخر مدة التجربة، أيهما أقرب**، وامنع الـ ==losses to follow up== لأنها ممكن تعمل bias كبير.
 
-          **إمتى نوقف الـ RCT بدري؟**
+          **إمتى نوقف الـ randomized controlled trial (RCT) بدري؟**
           - **Benefit** أكبر من المتوقع (مش أخلاقي نحرم الـ control منه).
           - **Harm** أكبر من المتوقع.
           - مفيش **important difference** خالص (futility).
@@ -478,7 +478,7 @@ lessons:
     pages: [51, 63]
     topics: [effect-measures]
     goals:
-      - "تحسب CER و EER و RRR و ARR و NNT من 2x2 table"
+      - "تحسب control event rate (CER) و experimental event rate (EER) و relative risk reduction (RRR) و absolute risk reduction (ARR) و number needed to treat (NNT) من 2x2 table"
       - "تفهم ليه الـ RRR لوحده بيخدع"
       - "تحل تمرين الـ INH وتمرين الـ zidovudine وتلاقي غلطة الشريحة"
     status: unverified
@@ -564,7 +564,7 @@ lessons:
       - kind: case
         page: 59
         quote: "| | Got TB | Did not get TB | Total |\n|---|---|---|---|\n| INH | 3 | 42 | 45 |\n| No INH | 9 | 36 | 45 |\n  CER = 9/45 = 20%\n  EER = 3/45 = 6.67%\n  Calculate ARR = 13.33%\n  Calculate RRR = 0.67\n  Calculate NNT = 1 / 13.33 = 7.69"
-        stem: "100 أطفال contacts لعيانين TB. 10 عندهم TB أصلًا. من الـ 90 الباقيين: 45 خدوا isoniazid و 3 منهم جالهم TB، و 45 ماخدوش و 9 منهم جالهم TB."
+        stem: "100 أطفال contacts لعيانين tuberculosis (TB). 10 عندهم TB أصلًا. من الـ 90 الباقيين: 45 خدوا isoniazid و 3 منهم جالهم TB، و 45 ماخدوش و 9 منهم جالهم TB."
         steps:
           - question: "What are CER and EER?"
             options: ["CER 20%, EER 6.67%", "CER 6.67%, EER 20%", "CER 9%, EER 3%", "CER 10%, EER 3%"]
@@ -581,7 +581,7 @@ lessons:
       - kind: case
         page: 60
         quote: "| Outcome | Zidovudine | Placebo | Total |\n|---|---|---|---|\n| Infants HIV infected | 13 | 40 | 53 |\n| Non HIV Infected Infants | 167 | 143 | 11 |\n| Total | 180 | 183 | 363 |\nCompute all possible measures of association. Interpret the obtained results:\n  EER = 13 / 180 = 0.07\n  CER = 40 / 183 = 0.22\n  RR = 3.14\n  RRR = 0.22 - 0.07 / 0.22 = 68%\n  ARR = 0.22 - 0.07 = 0.15\n  NNT = 1 / 15% = 100 / 15 = 6"
-        stem: "Zidovudine للحوامل: 13 من 180 طفل اتعدوا بالـ HIV في جروب الـ zidovudine، و 40 من 183 في الـ placebo."
+        stem: "Zidovudine للحوامل: 13 من 180 طفل اتعدوا بالـ human immunodeficiency virus (HIV) في جروب الـ zidovudine، و 40 من 183 في الـ placebo."
         steps:
           - question: "EER and CER?"
             options: ["EER 0.07, CER 0.22", "EER 0.22, CER 0.07", "EER 0.13, CER 0.40", "EER 0.07, CER 0.15"]
@@ -591,7 +591,7 @@ lessons:
             options: ["RRR 68%, ARR 0.15", "RRR 15%, ARR 0.68", "RRR 32%, ARR 0.15", "RRR 68%, ARR 0.22"]
             answer: 0
             why: "RRR = 0.15 / 0.22 = 68%. ARR = 0.22 - 0.07 = 0.15."
-          - question: "The slide prints RR = 3.14 and NNT = 100/15 = 6. What is right?"
+          - question: "The slide prints relative risk (RR) = 3.14 and NNT = 100/15 = 6. What is right?"
             options: ["RR = 0.33; NNT = 7", "RR = 3.14; NNT = 6", "RR = 0.68; NNT = 15", "RR = 3.14; NNT = 7"]
             answer: 0
             why: "الـ 3.14 هي CER/EER، مقلوبة. الـ RR = EER/CER = 0.07/0.22 = حوالي 0.33، يعني الدوا بيحمي. و 100/15 = 6.7، والـ NNT بيتقرّب لفوق: 7."
@@ -626,7 +626,7 @@ lessons:
     goals:
       - "تقرا الـ significance من الـ confidence interval"
       - "تفرّق بين الـ intention to treat والـ per protocol"
-      - "تعرف ليه الـ ITT أحسن تقدير للـ benefit ومش للـ harm"
+      - "تعرف ليه الـ intention-to-treat (ITT) أحسن تقدير للـ benefit ومش للـ harm"
     status: unverified
     steps:
       - kind: explain
@@ -639,9 +639,9 @@ lessons:
           - ==P-values== (hypothesis testing): اختبار للـ null hypothesis. لو **p < 0.05** يبقى statistically significant.
           - ==Confidence intervals== (estimation): range غالبًا فيه القيمة الحقيقية.
 
-          والعلاقة بينهم: لو قيمة الـ **no effect** **برّه** الـ CI، النتيجة significant.
+          والعلاقة بينهم: لو قيمة الـ **no effect** **برّه** الـ confidence interval (CI)، النتيجة significant.
 
-          وقيمة الـ no effect في الـ RR هي **1**، وفي الـ risk difference هي **صفر**.
+          وقيمة الـ no effect في الـ relative risk (RR) هي **1**، وفي الـ risk difference هي **صفر**.
       - kind: figure
         page: 67
         quote: "| Relative Risk | Confidence Interval | Interpretation |\n|---|---|---|\n| 1.77 | (1.22 – 2.45) | Statistically significant (increased risk) |\n| 1.63 | (0.85 – 2.46) | NOT statistically significant (risk is the same) |\n| 0.78 | (0.56 – 0.94) | Statistically significant (decreased risk) |"
@@ -682,7 +682,7 @@ lessons:
       - kind: check
         page: 66
         quote: "P-values (Hypothesis Testing) in DVT study:\n  Confidence interval of Relative risk = 0.12 - 0.18 (P=0.001)\n  Confidence interval does not include 1: statistically significant\n  If the confidence interval is 0.12 - 1.5 (includes 1) this is not statistically significant (P=0.6)"
-        question: "In the DVT study, the relative risk has a 95% confidence interval of 0.12-1.5. What do you conclude?"
+        question: "In the deep vein thrombosis (DVT) study, the relative risk has a 95% confidence interval of 0.12-1.5. What do you conclude?"
         options:
           - "Not statistically significant, because the interval includes 1"
           - "Significant, because the point estimate is below 1"
@@ -715,7 +715,7 @@ lessons:
             answer: 0
             why: "الـ per protocol بيشيل اللي ماتعملّهمش العملية، فالـ 10 اللي جالهم stroke بدري اختفوا من البسط والمقام."
           - question: "What does each analysis show?"
-            options: ["Per protocol RRR 0.45; ITT RRR 0", "Both RRR 0.45", "Per protocol 0; ITT 0.45", "Both no effect"]
+            options: ["Per protocol relative risk reduction (RRR) 0.45; ITT RRR 0", "Both RRR 0.45", "Per protocol 0; ITT 0.45", "Both no effect"]
             answer: 0
             why: "Per protocol: 0.11 ضد 0.20، RRR 0.45. ITT: 20/100 ضد 20/100، RRR صفر."
           - question: "Which one shows the underlying truth?"
@@ -727,7 +727,7 @@ lessons:
         page: 75
         quote: "Noncompliance, Example: Trial of cancer-prevention diet vs placebo diet.\n  Treatment Group: some subjects had GI symptoms (these were actually precursors of the cancer), they did not comply with the diet\n  If these non compliant people were excluded from the analysis → Greater effect of the cancer-prevention diet"
         text: |
-          مثال الـ diet: تجربة **cancer-prevention diet** ضد placebo diet. ناس في جروب الـ diet جالهم أعراض GI ووقفوا الـ diet، والأعراض دي كانت **أول علامات الـ cancer**.
+          مثال الـ diet: تجربة **cancer-prevention diet** ضد placebo diet. ناس في جروب الـ diet جالهم أعراض gastrointestinal (GI) ووقفوا الـ diet، والأعراض دي كانت **أول علامات الـ cancer**.
 
           لو عملتلهم exclude من الـ analysis لأنهم مش compliant، شلت الـ cancers من جروب الـ diet، فالـ diet هيبان **أقوى من الحقيقة**. زي مدرس يقول «فصلي كله نجح» بعد ما طرد الضعاف قبل الامتحان.
       - kind: check
@@ -784,7 +784,7 @@ lessons:
           والـ ethical issues اللي المحاضرة بتعدّها:
           - **Competence** الباحث.
           - **Stage of research**.
-          - **Special populations**: ستات، أطفال، مساجين، HIV، و suicidal individuals.
+          - **Special populations**: ستات، أطفال، مساجين، human immunodeficiency virus (HIV)، و suicidal individuals.
           - **Institutional approval**.
           - **Conflict of interest**.
       - kind: explain
@@ -866,13 +866,13 @@ lessons:
         title: "Registration: سجّل قبل ما تبدأ"
         text: |
           التوصيات:
-          - كل الـ RCTs تتسجّل ==at their inception==، وقت الـ ethical أو funding approval.
+          - كل الـ randomized controlled trials (RCTs) تتسجّل ==at their inception==، وقت الـ ethical أو funding approval.
           - المعلومات تكون **متاحة لكل المهتمين**.
           - الـ register يكون مطابق لـ **minimum standard**.
           - الـ **prospective registration** جزء من الـ ethical guidelines.
           - الحكومات توفّر الإمكانيات علشان كل الـ RCTs تتسجّل prospectively.
 
-          مثال: **ISRCTN**، registry معترف بيه من **WHO**، بيدّي الرقم اللي محتاجه علشان تنشر، ومفتوح للبحث مجانًا. وده بيقلّل الـ **selective reporting**.
+          مثال: **International Standard Randomised Controlled Trial Number (ISRCTN)**، registry معترف بيه من **World Health Organization (WHO)**، بيدّي الرقم اللي محتاجه علشان تنشر، ومفتوح للبحث مجانًا. وده بيقلّل الـ **selective reporting**.
       - kind: match
         page: 80
         quote: "Ethical issues:\n  Competence\n  Stage of Research\n  Research with special populations such as women, children, prisoners, HIV and suicidal individuals\n  Institutional approval\n  Conflict of interest"
@@ -900,7 +900,7 @@ lessons:
     pages: [86, 100]
     topics: [appraisal, quasi]
     goals:
-      - "تعدّ مزايا وعيوب الـ RCT"
+      - "تعدّ مزايا وعيوب الـ randomized controlled trial (RCT)"
       - "تعرف الـ CONSORT 2010 وترتيب الـ flow diagram"
       - "تفرّق بين الـ checklist والـ quality score وتعرف الـ quasi-experimental"
     status: unverified
@@ -1064,11 +1064,11 @@ lessons:
           - الـ **power increases**.
           - الـ **risk of unbalanced randomization decreases**.
 
-          والغلط: إن الـ CI يوسع، أو إن الـ power يقل.
+          والغلط: إن الـ confidence interval (CI) يوسع، أو إن الـ power يقل.
       - kind: check
         page: 110
         quote: "The major purpose of random assignment in a RCT is to:\n  a. Facilitate double blinding\n  b. Facilitate measurement of outcome variables\n  c. Ensure study groups are comparable on baseline characteristics\n  d. Reduce ascertainment bias."
-        question: "The major purpose of random assignment in an RCT is to:"
+        question: "The major purpose of random assignment in a randomized controlled trial (RCT) is to:"
         options:
           - "Facilitate double blinding"
           - "Facilitate measurement of outcomes"
@@ -1141,7 +1141,7 @@ lessons:
       - kind: check
         page: 121
         quote: "Which of the following research methods is best suited to comparing cognitive behavioural therapy with a selective reuptake inhibitor in anxiety disorder:\n  a. Double blind and placebo controlled\n  b. Randomization and open label\n  c. Randomization and placebo controlled (un blinded)\n  d. Randomization and triple blind"
-        question: "Best method to compare CBT with an SSRI in anxiety disorder?"
+        question: "Best method to compare cognitive behavioural therapy (CBT) with a selective serotonin reuptake inhibitor (SSRI) in anxiety disorder?"
         options:
           - "Double blind and placebo controlled"
           - "Randomization and open label"

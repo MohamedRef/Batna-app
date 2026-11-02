@@ -50,7 +50,7 @@ items:
   - id: res.L02.005
     kind: mcq
     topic: definition
-    stem: A study maps HBV prevalence by country as low (<2%), intermediate (2-8%) and high (>8%) endemicity. Which component of epidemiology does it describe?
+    stem: A study maps hepatitis B virus (HBV) prevalence by country as low (<2%), intermediate (2-8%) and high (>8%) endemicity. Which component of epidemiology does it describe?
     options: [Distribution, Determinants, Frequency only, Intervention]
     answer: 0
     why:
@@ -173,7 +173,7 @@ items:
     options: [Disease registers, Vital records, Notification of infectious diseases, Census]
     answer: 0
     why:
-      - Correct. Registers cover diseases of public health importance (cancer, TB, hepatitis).
+      - Correct. Registers cover diseases of public health importance (cancer, tuberculosis (TB), hepatitis).
       - Vital records are birth and death registration.
       - Notification is for infectious diseases and shows their fluctuation.
       - The census counts the population; it is used to plan services and compute rates.
@@ -274,7 +274,7 @@ items:
     question: What is the attack rate?
     inputs: { cases: 46, at_risk: 75 }
     expect: "61%"
-    interpret: "46/75 × 100 = 61%. Among those at the dinner, the risk of GI illness was 61%. The 29 who stayed well (39%) are not the rate."
+    interpret: "46/75 × 100 = 61%. Among those at the dinner, the risk of gastrointestinal (GI) illness was 61%. The 29 who stayed well (39%) are not the rate."
     src: { page: 29, quote: "Example: Of 75 persons who attended a dinner, 46 subsequently developed a gastrointestinal illness. To calculate the attack rate of GI illness we first define the numerator and denominator:\n  x = Cases of GI illness occurring within the incubation period for GI illness among persons who attended the dinner = 46\n  y = Number of persons at the dinner = 75\nThen, the attack rate for GI illness is 46/75 x 100 = 61%\nIn this example, we could say that among persons who attended the dinner, the probability of developing GI illness was 61%, or the risk of developing GI illness was 61%." }
     status: unverified
     tags: [numbers]
@@ -430,7 +430,7 @@ items:
   - id: res.L02.039
     kind: enumerate
     topic: secondary
-    prompt: Which people do you subtract from the household total to get the SAR denominator, and which two factors does the slide stress?
+    prompt: Which people do you subtract from the household total to get the secondary attack rate (SAR) denominator, and which two factors does the slide stress?
     points: [The primary cases, Immune individuals, Incubation period matters, State of immunity matters]
     pass: 3
     hook: "مقام الـSAR: اطرح 2 من البيت (primary cases والـimmune individuals)، والسلايد بيأكد على 2 (incubation period وstate of immunity). 2 + 2 = 4."
@@ -522,7 +522,7 @@ items:
   - id: res.L02.046
     kind: case
     topic: mortality
-    stem: "A county of 2.5 million has 6000 deaths in a year: 1200 leukemia, 1750 stroke, 250 pneumonia, 250 Hodgkin's disease and 2500 acute MI."
+    stem: "A county of 2.5 million has 6000 deaths in a year: 1200 leukemia, 1750 stroke, 250 pneumonia, 250 Hodgkin's disease and 2500 acute myocardial infarction (MI)."
     steps:
       - question: What is the cause-specific mortality rate for acute MI?
         options: ["1 per 1000", "41.7%", "2.5 per 1000", "0.1 per 1000"]
@@ -542,7 +542,7 @@ items:
     kind: calc
     topic: mortality
     calculator: cfr
-    stem: In a county, 500 people are HIV-positive and 5 die within a year of diagnosis.
+    stem: In a county, 500 people are human immunodeficiency virus (HIV)-positive and 5 die within a year of diagnosis.
     question: What is the case fatality rate?
     inputs: { deaths: 5, cases: 500 }
     expect: "1%"
@@ -558,7 +558,7 @@ items:
     answer: 0
     why:
       - Correct. Of those who get the disease, what share die of it?
-      - The SMR compares observed to expected deaths in a population.
+      - The standardized mortality ratio (SMR) compares observed to expected deaths in a population.
       - Its denominator is the whole population, so it mixes how common and how deadly the disease is.
       - It describes deaths in an age group from all causes.
     src: { page: 61, quote: "Which of the following is a good measure of the severity of an acute disease?\n  (a) Standardized mortality ratio\n  (b) Cause-specific death rate\n  (c) Case fatality rate\n  (d) Age-specific death rate" }
@@ -567,11 +567,11 @@ items:
   - id: res.L02.049
     kind: mcq
     topic: mortality
-    stem: "At the end of 2000 a district had 200,000 people and 800 TB cases. At the end of 2001 the population was 210,000, 200 new cases were detected and 12 cases died. All of the following can be calculated EXCEPT:"
+    stem: "At the end of 2000 a district had 200,000 people and 800 tuberculosis (TB) cases. At the end of 2001 the population was 210,000, 200 new cases were detected and 12 cases died. All of the following can be calculated EXCEPT:"
     options: [Proportional mortality, Prevalence, Incidence, Case fatality]
     answer: 0
     why:
-      - Correct (slide 62, answer c). PMR needs deaths from all causes, which aren't given.
+      - Correct (slide 62, answer c). proportionate mortality rate (PMR) needs deaths from all causes, which aren't given.
       - Existing cases over the population give prevalence.
       - New cases over the population at risk give incidence.
       - TB deaths over TB cases give the case fatality.
@@ -775,7 +775,7 @@ items:
     kind: calc
     topic: mortality
     calculator: pmr
-    stem: "A county of 2.5 million has 6000 deaths in a year: 1200 leukemia, 1750 stroke, 250 pneumonia, 250 Hodgkin's disease and 2500 acute MI."
+    stem: "A county of 2.5 million has 6000 deaths in a year: 1200 leukemia, 1750 stroke, 250 pneumonia, 250 Hodgkin's disease and 2500 acute myocardial infarction (MI)."
     question: What is the proportionate mortality rate for leukemia?
     inputs: { cause_deaths: 1200, all_deaths: 6000 }
     expect: "20%"

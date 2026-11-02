@@ -13,6 +13,7 @@ pub async fn sleep(d: Duration) {
 }
 
 /// `fut`'s output, or `Err(Elapsed)` after `limit`.
+#[cfg_attr(target_os = "android", allow(dead_code))] // Android speaks through JNI
 pub async fn timeout<F: Future>(limit: Duration, fut: F) -> Result<F::Output, Elapsed> {
     #[cfg(not(target_arch = "wasm32"))]
     {
@@ -32,6 +33,7 @@ pub async fn timeout<F: Future>(limit: Duration, fut: F) -> Result<F::Output, El
 
 /// The time limit ran out.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[cfg_attr(target_os = "android", allow(dead_code))]
 pub struct Elapsed;
 
 /// Runs blocking work off the UI thread where there are threads; the web has

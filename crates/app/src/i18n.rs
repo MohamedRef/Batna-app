@@ -55,6 +55,8 @@ pub mod count {
         Noun { one: "خانة واحدة", two: "خانتين", few: "خانات", many: "خانة" };
     pub const LESSON: Noun =
         Noun { one: "درس واحد", two: "درسين", few: "دروس", many: "درس" };
+    pub const CALC: Noun =
+        Noun { one: "حاسبة واحدة", two: "حاسبتين", few: "حاسبات", many: "حاسبة" };
 
     /// Any integer type; a negative number counts as 0.
     pub fn count<N: TryInto<u64>>(n: N, noun: &Noun) -> String {
@@ -936,6 +938,76 @@ pub mod calc {
             ("diagnostic_accuracy", "fn") => "التحليل − والمرض +",
             ("diagnostic_accuracy", "tn") => "التحليل − والمرض −",
             ("sar", "primary_cases") => "بيتشالوا من اللي ممكن يتعدوا.",
+            _ => return None,
+        })
+    }
+
+    // The picker (calc/picker.rs): search, area filter, favourites, recents.
+    pub const SEARCH: &str = "دوّر على حاسبة…";
+    pub const SEARCH_LABEL: &str = "دوّر على حاسبة";
+    pub const ALL_AREAS: &str = "كل الأقسام";
+    pub const AREA_FILTER: &str = "القسم";
+    pub const FAVOURITES: &str = "المفضلة";
+    pub const RECENT: &str = "آخر ما فتحت";
+    pub const RESULTS: &str = "النتايج";
+    pub const NOTHING_FOUND: &str = "مفيش حاسبة بالاسم ده.";
+    pub const CLEAR_SEARCH: &str = "امسح البحث";
+    pub const PIN: &str = "ثبّتها في المفضلة";
+    pub const UNPIN: &str = "شيلها من المفضلة";
+    pub const PINNED: &str = "في المفضلة";
+    /// "44 حاسبة"
+    pub fn count(n: usize) -> String {
+        super::count::count(n, &super::count::CALC)
+    }
+
+    /// One line under a calculator's name: what it is for. Every calculator
+    /// has one (test `every_calculator_has_a_blurb`).
+    pub fn blurb(calc: &str) -> Option<&'static str> {
+        Some(match calc {
+            "child_pugh" => "شدة تليّف الكبد (A وB وC) والتوقّع",
+            "meld" => "خطورة السيروزس خلال 3 شهور وأولوية زرع الكبد",
+            "meld_na" => "الـ MELD ومعاه الصوديوم: أدق في أولوية الزرع",
+            "albi" => "وظيفة الكبد في الـ HCC من الألبومين والبيليروبين",
+            "fib4" => "التليّف من غير بيوبسي: السن والإنزيمات والصفايح",
+            "apri" => "التليّف من غير بيوبسي: الـ AST والصفايح",
+            "r_ratio" => "نوع أذية الكبد من الدوا: خلوي ولا ركودي ولا مختلط",
+            "maddrey" => "شدة الـ alcoholic hepatitis ومين ياخد ستيرويد",
+            "glasgow_ah" => "التوقّع في الـ alcoholic hepatitis وفايدة الستيرويد",
+            "saag" => "سبب الاستسقاء: من الـ portal hypertension ولا لأ",
+            "ascitic_pmn" => "تشخيص الـ SBP من عدد الـ PMN في سائل البطن",
+            "bclc" => "مرحلة الـ HCC والعلاج المناسب ليها",
+            "kings_college" => "مين محتاج زرع كبد في الفشل الكبدي الحاد",
+            "clichy" => "معايير الزرع في الفشل الكبدي الحاد بالـ factor V والوعي",
+            "ranson" => "شدة التهاب البنكرياس الحاد عند الدخول وبعد 48 ساعة",
+            "bisap" => "خطورة التهاب البنكرياس الحاد في أول 24 ساعة",
+            "glasgow_blatchford" => "نزيف الجهاز الهضمي العلوي: مين محتاج تدخل ومين يروّح",
+            "anion_gap" => "سبب الـ metabolic acidosis: الـ gap عالي ولا طبيعي",
+            "delta_ratio" => "فيه اضطراب تاني مع الـ high anion gap acidosis؟",
+            "expected_compensation" => "التعويض المتوقّع: الاضطراب لوحده ولا مخلوط؟",
+            "osmolal_gap" => "فيه مادة سامة زي الميثانول أو الإيثيلين جلايكول؟",
+            "kdigo_aki" => "مرحلة الـ AKI من الكرياتينين وكمية البول",
+            "fena" => "الـ AKI قبل الكلى (prerenal) ولا من الكلى نفسها (ATN)",
+            "feurea" => "زي الـ FENa، بس بينفع والعيان على مدرّات",
+            "cockcroft_gault" => "تصفية الكرياتينين لظبط جرعات الدوا، خصوصًا في المسنين",
+            "acr_eular_2010_ra" => "تشخيص الـ rheumatoid arthritis: 6 من 10 أو أكتر",
+            "corrected_sodium" => "الصوديوم الحقيقي لما السكر عالي",
+            "effective_osmolality" => "أوزمولاليتي الدم لتشخيص الـ HHS",
+            "ipss_mf" => "التوقّع في الـ primary myelofibrosis",
+            "incidence" => "معدل الحالات الجديدة في فترة معيّنة",
+            "prevalence" => "نسبة كل الحالات الموجودة في وقت معيّن",
+            "prevalence_id" => "العلاقة بين الانتشار والحدوث ومدة المرض",
+            "attack_rate" => "نسبة اللي عيّوا في وباء أو تفشّي",
+            "sar" => "نسبة العدوى بين المخالطين بعد أول حالة",
+            "cfr" => "نسبة الوفيات بين المصابين بالمرض",
+            "pmr" => "نسبة الوفيات بسبب معيّن من كل الوفيات",
+            "imr" => "وفيات الأطفال تحت سنة لكل 1000 مولود حي",
+            "nmr" => "وفيات أول 28 يوم لكل 1000 مولود حي",
+            "relative_risk" => "الخطر في المعرّضين قصاد غير المعرّضين (cohort)",
+            "odds_ratio" => "قوة العلاقة في دراسة الـ case-control",
+            "attributable_risk" => "الزيادة في الخطر اللي سببها التعرّض",
+            "nnt" => "تعالج كام واحد عشان واحد يستفيد (أو يتأذى)",
+            "diagnostic_accuracy" => "الحساسية والنوعية والـ PPV والـ NPV من جدول 2×2",
+            "z_score" => "القيمة بعيدة عن المتوسط بكام انحراف معياري",
             _ => return None,
         })
     }

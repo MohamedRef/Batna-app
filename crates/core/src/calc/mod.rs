@@ -313,7 +313,7 @@ impl fmt::Debug for CalcSpec {
 
 /// Every calculator, in the order the Calculators screen lists them.
 pub fn all() -> &'static [CalcSpec] {
-    &REGISTRY
+    REGISTRY
 }
 
 pub fn spec(id: &str) -> Option<&'static CalcSpec> {
@@ -325,7 +325,9 @@ pub fn compute(id: &str, inputs: &Inputs) -> Result<Outcome, CalcError> {
     (spec.compute)(inputs)
 }
 
-static REGISTRY: [CalcSpec; 44] = [
+// A slice, not an array, so adding one doesn't touch a count that every
+// other branch adding one also changes.
+static REGISTRY: &[CalcSpec] = &[
     child_pugh::SPEC,
     meld::MELD,
     meld::MELD_NA,

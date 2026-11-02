@@ -38,9 +38,9 @@ const TAPPABLE: &[&str] = &[
     "bank-scope-tap",
     "case-stepper-step",
     "oral-point",
-    // References rows and calculator chips (redesign 2026-10-29).
+    // References rows (redesign 2026-10-29) and the calculators' star.
     "refs-row",
-    "calc-chip",
+    "calc-pin",
     // Redesign stat tiles (assets/parts.css): each opens what it counts.
     "stat-tile",
     // The 2026-10-29 redesign: Today's session-length chips and plan pill,

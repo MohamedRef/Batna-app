@@ -1,8 +1,11 @@
-//! Calculators: the standalone screen (a tab of Cases), the generic form that
-//! any calculator in `batna_core::calc` renders into, and the result card.
-//! The `calc` study item lives in [`item`].
+//! Calculators: the generic form that any calculator in `batna_core::calc`
+//! renders into, and the result card. The screen that lists them is in
+//! [`picker`]; the `calc` study item lives in [`item`].
 
 pub mod item;
+mod picker;
+
+pub use picker::{Calculators, reload};
 
 use std::collections::BTreeMap;
 
@@ -61,53 +64,6 @@ const AREAS: [Area; 12] = [
     Area::Research,
 ];
 
-/// Every calculator, grouped by area. On phones the list and the open
-/// calculator take turns; from 840dp they sit side by side.
-#[component]
-pub fn Calculators() -> Element {
-    // BATNA_OPEN_CALC=child_pugh opens one at launch (previews, screenshots).
-    let mut open =
-        use_signal(|| std::env::var("BATNA_OPEN_CALC").ok().and_then(|id| calc::spec(&id)).map(|s| s.id));
-    let current = open();
-    rsx! {
-        style { {CSS.text()} }
-        div { class: "calcs", "data-open": if current.is_some() { "yes" } else { "no" },
-            nav { class: "calc-list", aria_label: tx::PICK,
-                header { class: "page-head calc-head",
-                    h1 { {tx::TITLE} }
-                }
-                for area in AREAS {
-                    section { key: "{area:?}", class: "calc-group",
-                        h2 { class: "small muted", {area_label(area)} }
-                        div { class: "calc-chips",
-                            for spec in calc::all().iter().filter(|s| s.area == area) {
-                                button {
-                                    key: "{spec.id}",
-                                    class: "calc-chip",
-                                    "aria-pressed": if current == Some(spec.id) { "true" } else { "false" },
-                                    onclick: move |_| open.set(Some(spec.id)),
-                                    bdi { {spec.name} }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            div { class: "calc-pane",
-                match current.and_then(calc::spec) {
-                    Some(spec) => rsx! {
-                        div { key: "{spec.id}",
-                            button { class: "btn-link calc-back", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), span { aria_hidden: "true", "→ " } {tx::BACK} }
-                            CalcForm { id: spec.id, initial: Inputs::new() }
-                        }
-                    },
-                    None => rsx! { crate::ui::Card { element: crate::ui::CardElement::Paragraph, class: "muted", {tx::PICK} } },
-                }
-            }
-        }
-    }
-}
-
 /// The text a field shows for a value.
 fn field_text(v: Option<&CalcValue>) -> String {
     match v {
@@ -148,6 +104,9 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
         div { class: "calc-form",
             crate::ui::Card { class: "calc-fields",
                 h1 { bdi { {spec.name} } }
+                if let Some(line) = tx::blurb(spec.id) {
+                    p { class: "calc-intro muted", {line} }
+                }
                 for field in spec.fields {
                     div {
                         key: "{field.key}",

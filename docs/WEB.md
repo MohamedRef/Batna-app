@@ -61,11 +61,12 @@ Cloud project as the desktop one:
 - Authorized JavaScript origin: `https://batna-web.hamorefaat85.workers.dev`
 - Authorized redirect URI: `https://batna-web.hamorefaat85.workers.dev/`
 
-Its client ID is public (it is in every sign-in URL); it has no secret to keep.
-Put it in `WEB_GOOGLE_CLIENT_ID` (`crates/app/src/cloud/mod.rs`) and add it,
-comma-separated, to `GOOGLE_CLIENT_IDS` in `crates/server/wrangler.toml` so the
-hub accepts its ID tokens. Until then the web app's sync page shows sign-in as
-unavailable, and everything else works offline as before.
+It exists ("Batna web", created 2026-11-02, same project as Batna Desktop).
+Its client ID is public (it is in every sign-in URL), and the web app keeps no
+secret. It is `WEB_GOOGLE_CLIENT_ID` in `crates/app/src/cloud/mod.rs` and the
+second entry of `GOOGLE_CLIENT_IDS` in `crates/server/wrangler.toml`, so the hub
+accepts its ID tokens. As with the desktop client, only the test users on the
+consent screen can sign in.
 
 ## Run it
 

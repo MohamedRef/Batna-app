@@ -10,7 +10,7 @@
 //! those (with 1 and 2 points the maximum is 18), so this uses 6 and 9 and
 //! says so in a note.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, num};
 
 const SEX: &[(&str, &str)] = &[("male", "Male"), ("female", "Female")];
 
@@ -83,6 +83,44 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "page_b.low",
+        Guide {
+            next: &[
+                "No HCC surveillance needed while there is no cirrhosis; keep HBV treatment going.",
+                "Recalculate if platelets fall or cirrhosis appears; any cirrhosis needs 6-monthly ultrasound.",
+            ],
+            dd: &[
+                "A falling platelet count can be silent cirrhosis or portal hypertension: check elastography.",
+            ],
+        },
+    ),
+    (
+        "page_b.mid",
+        Guide {
+            next: &["HCC surveillance: ultrasound every 6 months, with or without AFP (p. 351)."],
+            dd: &[
+                "A new liver lesion: HCC, regenerative or dysplastic nodule, haemangioma, focal nodular hyperplasia, \
+                 metastasis, cholangiocarcinoma.",
+            ],
+        },
+    ),
+    (
+        "page_b.high",
+        Guide {
+            next: &[
+                "HCC surveillance: ultrasound every 6 months, with or without AFP (p. 351).",
+                "A nodule ≥ 1 cm: multiphase CT or MRI.",
+            ],
+            dd: &[
+                "A new liver lesion: HCC, regenerative or dysplastic nodule, haemangioma, focal nodular hyperplasia, \
+                 metastasis, cholangiocarcinoma.",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

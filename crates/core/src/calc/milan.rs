@@ -5,7 +5,7 @@
 //! nodal or distant metastasis, and performance status ≤ 1 (Mazzaferro et al.,
 //! NEJM 1996, has no performance-status criterion; the book adds it).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "milan",
@@ -65,6 +65,35 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "milan.within",
+        Guide {
+            next: &[
+                "Refer for liver transplantation (MELD exception points for HCC).",
+                "Bridge with TACE, TARE or RFA if the wait is over 3–6 months.",
+                "With preserved liver function and no portal hypertension, resection or ablation first (BCLC 0–A).",
+            ],
+            dd: &[
+                "Make sure the lesions are HCC (arterial enhancement with washout); otherwise intrahepatic \
+                 cholangiocarcinoma, mixed HCC-cholangiocarcinoma, dysplastic nodule.",
+            ],
+        },
+    ),
+    (
+        "milan.outside",
+        Guide {
+            next: &[
+                "Try downstaging (TACE, TARE, ablation) to within Milan with AFP < 1000 ng/mL (OPTN).",
+                "Otherwise treat by BCLC stage.",
+            ],
+            dd: &[
+                "Tumour thrombus vs bland portal vein thrombosis: bland thrombus does not exclude transplant.",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

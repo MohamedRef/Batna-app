@@ -6,7 +6,7 @@
 //! persistent organ failure. Severe: organ failure persisting > 48 h (single
 //! or multiple). The book's organ-failure list is on the same page.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag};
 
 const ORGAN_FAILURE: &[(&str, &str)] =
     &[("none", "None"), ("transient", "Resolves within 48 h"), ("persistent", "Persists over 48 h")];
@@ -69,6 +69,43 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+const DD: &str = "Other causes of severe epigastric pain with a raised amylase: perforated peptic ulcer, mesenteric \
+                  ischaemia, dissecting aortic aneurysm, myocardial infarction, biliary colic or cholecystitis, \
+                  volvulus (p. 283).";
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "atlanta_2012.mild",
+        Guide {
+            next: &[
+                "Fluids and analgesia; oral low-fat solid diet as soon as there is no nausea or pain.",
+                "Gallstones: cholecystectomy in the same admission.",
+            ],
+            dd: &[DD],
+        },
+    ),
+    (
+        "atlanta_2012.moderately_severe",
+        Guide {
+            next: &[
+                "Contrast CT if not improving after 48–72 h, to look for local complications.",
+                "Enteral (nasogastric) feeding if oral is not tolerated.",
+            ],
+            dd: &[DD],
+        },
+    ),
+    (
+        "atlanta_2012.severe",
+        Guide {
+            next: &[
+                "ICU: goal-directed fluids, organ support, enteral feeding.",
+                "No routine antibiotic prophylaxis; treat proven or suspected infection.",
+            ],
+            dd: &[DD],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

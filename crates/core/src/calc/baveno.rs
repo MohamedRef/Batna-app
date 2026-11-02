@@ -7,7 +7,7 @@
 //! alcohol, NAFLD, PBC and PSC. The same page: LSM > 20–25 kPa diagnoses
 //! clinically significant portal hypertension (CSPH).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "baveno_vi",
@@ -57,6 +57,30 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "baveno_vi.spare",
+        Guide {
+            next: &["No screening endoscopy now; repeat elastography and platelets every year."],
+            dd: &[],
+        },
+    ),
+    (
+        "baveno_vi.screen",
+        Guide {
+            next: &[
+                "Screening endoscopy for varices.",
+                "High-risk varices: non-selective beta-blocker (carvedilol) or band ligation.",
+            ],
+            dd: &[
+                "Low platelets in cACLD: hypersplenism, alcohol marrow suppression, ITP (HCV), drugs, folate deficiency.",
+                "High stiffness without fibrosis: hepatic congestion (heart failure), acute hepatitis, biliary \
+                 obstruction, a recent meal, infiltration (amyloid, lymphoma).",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

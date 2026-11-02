@@ -5,7 +5,7 @@
 //! grade plus necrosis (0–10), with morbidity and mortality per band. Page
 //! 283: a CTSI of 3 or more is severe and needs a follow-up CECT at 7–10 days.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice};
 
 const GRADE: &[(&str, &str)] = &[
     ("a", "A: normal pancreas"),
@@ -92,6 +92,48 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+const LOCAL: &str = "Local complications to look for: acute peripancreatic fluid collection, pseudocyst, acute necrotic \
+                     collection, walled-off necrosis, infected necrosis (gas), pseudoaneurysm, splenic or portal vein \
+                     thrombosis.";
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "ctsi.0_1",
+        Guide {
+            next: &["Supportive care: fluids, analgesia, early oral feeding."],
+            dd: &["A normal CT with typical pain: mild interstitial pancreatitis, or another cause of pain."],
+        },
+    ),
+    (
+        "ctsi.2_3",
+        Guide {
+            next: &["Supportive care; a CTSI of 3 or more: repeat contrast CT at 7–10 days (p. 283)."],
+            dd: &[LOCAL],
+        },
+    ),
+    (
+        "ctsi.4_6",
+        Guide {
+            next: &[
+                "Treat as severe: close monitoring, enteral (nasogastric) feeding.",
+                "Repeat contrast CT at 7–10 days, sooner if worsening (p. 283).",
+            ],
+            dd: &[LOCAL],
+        },
+    ),
+    (
+        "ctsi.7_10",
+        Guide {
+            next: &[
+                "ICU-level care; enteral feeding.",
+                "No routine antibiotics; give them for suspected infected necrosis.",
+                "Infected necrosis: step-up drainage, then minimally invasive necrosectomy.",
+            ],
+            dd: &[LOCAL],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

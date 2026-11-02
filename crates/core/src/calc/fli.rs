@@ -7,7 +7,7 @@
 //! − 15.745; FLI = 100 eʸ / (1 + eʸ). < 30 rules out, ≥ 60 rules in fatty
 //! liver.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "fli",
@@ -54,6 +54,24 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+const DD: &str = "Causes of steatosis: MASLD (metabolic), alcohol, HCV genotype 3, drugs (amiodarone, methotrexate, \
+                  steroids, tamoxifen), Wilson disease, hypothyroidism, starvation or parenteral nutrition.";
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    ("fli.low", Guide { next: &["Fatty liver unlikely; look elsewhere if enzymes are raised."], dd: &[] }),
+    ("fli.mid", Guide { next: &["Ultrasound to confirm or exclude steatosis."], dd: &[DD] }),
+    (
+        "fli.high",
+        Guide {
+            next: &[
+                "Confirm with ultrasound, then FIB-4 for fibrosis (elastography if 1.3 or above).",
+                "Weight loss and treat diabetes, lipids and blood pressure.",
+            ],
+            dd: &[DD],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

@@ -7,7 +7,7 @@
 //! the ESC 2020 AF guideline (the ESC 2024 guideline drops the sex point:
 //! CHA₂DS₂-VA).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num};
 
 const SEX: &[(&str, &str)] = &[("male", "Male"), ("female", "Female")];
 
@@ -90,6 +90,36 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: vec![stroke.to_owned()],
     })
 }
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "cha2ds2_vasc.low",
+        Guide {
+            next: &[
+                "High-risk endoscopy: stop warfarin 5 days before (INR < 1.5 on the day), no heparin bridging; \
+                 restart the same evening (p. 89).",
+                "On a DOAC: last dose 3 days before (5 days for dabigatran with CrCl 30–50); restart 2–3 days \
+                 after (p. 89).",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "cha2ds2_vasc.mid",
+        Guide { next: &["Weigh bleeding against clot risk case by case; involve cardiology."], dd: &[] },
+    ),
+    (
+        "cha2ds2_vasc.high",
+        Guide {
+            next: &[
+                "High-risk endoscopy: stop warfarin 5 days before and start LMWH 2 days after stopping; omit LMWH \
+                 on the day, restart warfarin that evening and LMWH until the INR is adequate (p. 89).",
+                "On a DOAC: last dose 3 days before, no bridging; restart 2–3 days after (p. 89).",
+            ],
+            dd: &[],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

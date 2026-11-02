@@ -6,7 +6,7 @@
 //! the liver, ascites, albumin < 3 g/dL, bilirubin > 3 mg/dL; none = stage I,
 //! 1–2 = stage II, 3–4 = stage III.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "okuda",
@@ -52,6 +52,32 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "okuda.1",
+        Guide { next: &["Choose treatment by BCLC stage (the book's staging for therapy)."], dd: &[] },
+    ),
+    (
+        "okuda.2",
+        Guide {
+            next: &["Choose treatment by BCLC stage; check Child-Pugh and performance status."],
+            dd: &[],
+        },
+    ),
+    (
+        "okuda.3",
+        Guide {
+            next: &[
+                "Usually BCLC D: best supportive care.",
+                "Watch for spontaneous rupture: sudden pain and shock (p. 355).",
+            ],
+            dd: &[
+                "Sudden abdominal pain with shock: HCC rupture, variceal bleed, SBP, portal vein thrombosis.",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

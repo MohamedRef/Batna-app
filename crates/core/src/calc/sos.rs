@@ -8,7 +8,7 @@
 //! days; Baltimore (Jones 1987) is bilirubin ≥ 2 mg/dL plus 2 of
 //! hepatomegaly, ascites and weight gain ≥ 5% within 21 days.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "sos_criteria",
@@ -64,6 +64,32 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "sos_criteria.met",
+        Guide {
+            next: &[
+                "Doppler ultrasound: hepatomegaly, ascites, slow or reversed portal flow.",
+                "Fluid and salt balance, diuretics; defibrotide for severe SOS.",
+                "Transjugular biopsy (with pressure gradient) if the diagnosis is unclear.",
+            ],
+            dd: &[
+                "Liver GvHD, sepsis-associated cholestasis, drug-induced liver injury (azoles, TPN), viral hepatitis \
+                 (CMV, HBV reactivation), Budd-Chiari, heart failure or fluid overload, renal failure.",
+            ],
+        },
+    ),
+    (
+        "sos_criteria.not_met",
+        Guide {
+            next: &[
+                "Keep watching weight, liver size and bilirubin daily in the first 3 weeks after the transplant.",
+            ],
+            dd: &["Jaundice alone after BMT: GvHD, sepsis, drugs, haemolysis, viral hepatitis."],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

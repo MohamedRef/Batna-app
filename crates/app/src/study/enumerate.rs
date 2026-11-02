@@ -9,12 +9,24 @@ use dioxus::prelude::*;
 use super::grade::GradeRow;
 use crate::i18n::study as tx;
 
+/// The study browser fixture opens the points, so the تحشيشة box is checked too.
+#[cfg(test)]
+pub(crate) static OPEN_FOR_FIXTURE: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+
+fn opened_for_fixture(_total: usize) -> Option<Vec<bool>> {
+    #[cfg(test)]
+    if OPEN_FOR_FIXTURE.load(std::sync::atomic::Ordering::Relaxed) {
+        return Some(vec![false; _total]);
+    }
+    None
+}
+
 #[component]
 pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
-    let Body::Enumerate { prompt, points, pass } = &item.body else { return rsx! {} };
+    let Body::Enumerate { prompt, points, pass, hook } = &item.body else { return rsx! {} };
     let (total, pass) = (points.len(), *pass);
     let mut typed = use_signal(String::new);
-    let mut ticks = use_signal(|| None::<Vec<bool>>);
+    let mut ticks = use_signal(|| opened_for_fixture(total));
     let pts = points.clone();
     let open = move |_| ticks.set(Some(recalled(&pts, &typed.read())));
 
@@ -78,6 +90,12 @@ pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                     "data-match": if n >= pass { "right" } else { "wrong" },
                     "{n} {tx::OF} {total} · "
                     if n >= pass { {tx::ENUM_PASS} } else { "{tx::ENUM_SHORT_A} {pass - n} {tx::ENUM_SHORT_B}" }
+                }
+                if let Some(h) = hook {
+                    div { class: "st-hook",
+                        p { class: "st-hook-label", span { aria_hidden: "true", "😄 " } {tx::ENUM_HOOK} }
+                        p { "{h}" }
+                    }
                 }
             }),
             footer: got.map(|n| rsx! {

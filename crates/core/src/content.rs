@@ -84,6 +84,10 @@ pub enum Body {
         prompt: String,
         points: Vec<String>,
         pass: usize,
+        /// A تحشيشة: a light Egyptian-Arabic memory hook for the whole list
+        /// (a mnemonic, a story, a joke). Shown once the points are open.
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        hook: Option<String>,
     },
     /// A model outline for a short-essay question.
     Essay {
@@ -143,7 +147,7 @@ pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
         "card" => &["front", "back"],
         "cloze" => &["text", "extra"],
         "mcq" => &["stem", "options", "answer", "why"],
-        "enumerate" => &["prompt", "points", "pass"],
+        "enumerate" => &["prompt", "points", "pass", "hook"],
         "essay" => &["prompt", "outline"],
         "case" => &["stem", "steps"],
         "table" => &["title", "columns", "rows", "blanks"],

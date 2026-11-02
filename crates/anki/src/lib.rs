@@ -268,9 +268,12 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
                 "",
             )]
         }
-        Body::Enumerate { prompt, points, pass } => vec![basic(
+        Body::Enumerate { prompt, points, pass, hook } => vec![basic(
             format!("{}<br><i>({} points; pass at {pass})</i>", esc(prompt), points.len()),
-            list(points),
+            match hook {
+                Some(h) => format!(r#"{}<div dir="rtl">😄 {}</div>"#, list(points), esc(h)),
+                None => list(points),
+            },
             "",
         )],
         Body::Essay { prompt, outline } => {

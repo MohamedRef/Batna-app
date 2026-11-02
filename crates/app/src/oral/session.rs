@@ -42,7 +42,7 @@ impl Prompt {
         }
         let (question, answer, pass, what_else) = match &item.body {
             Body::Card { front, back } => (vec![front.clone()], vec![back.clone()], None, false),
-            Body::Enumerate { prompt, points, pass } => {
+            Body::Enumerate { prompt, points, pass, .. } => {
                 (vec![prompt.clone()], points.clone(), Some((*pass, points.len())), points.len() > 1)
             }
             Body::Essay { prompt, outline } => (vec![prompt.clone()], outline_lines(outline), None, false),

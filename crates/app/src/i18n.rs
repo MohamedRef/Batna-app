@@ -367,6 +367,8 @@ pub mod study {
     pub const ENUM_SHORT_A: &str = "فاضلك";
     pub const ENUM_SHORT_B: &str = "عشان تعدّي.";
     pub const WHAT_I_WROTE: &str = "اللي كتبته";
+    /// The memory hook under an enumerate list once its points are open.
+    pub const ENUM_HOOK: &str = "تحشيشة تحفّظها";
 
     pub const ESSAY_HOW: &str = "اكتب العناوين بس، كل عنوان في سطر، زي ما هتكتبهم في الامتحان.";
     pub const ESSAY_PLACEHOLDER: &str = "Definition\nPathogenesis\nClinical picture\n…";

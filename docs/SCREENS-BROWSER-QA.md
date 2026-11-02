@@ -15,7 +15,7 @@ data, no live API and no app launch.
 |---|---|
 | Lesson player | The first step of each of the 13 step kinds in book order, opened at that step from a saved attempt (the way the app reopens a lesson), in Steps and in Pages: 26 files; plus two mixed Arabic and English steps (Liver Cirrhosis, steps 6 and 9: "label: value" bullets, arrows, English full stops), whose screenshots show the reading order: 28 files |
 | Lesson figures | Every drawn SVG figure of every lesson on one page (`export_screen_fixtures_figures`), checked once at 384px |
-| Study | Setup; a running session on the first item of each kind the player shows (card, cloze, enumerate, essay, table, order); a card reopened by Undo; the summary: 9 files |
+| Study | Setup; a running session on the first item of each kind the player shows (card, cloze, enumerate, essay, table, order); an enumerate list with its points open and its تحشيشة under them; a card reopened by Undo; the summary: 10 files |
 
 The store is in memory and the review log is empty, so items are fresh.
 
@@ -30,7 +30,7 @@ The store is in memory and the review log is empty, so items are fresh.
 | Direction | Arabic RTL |
 
 Each file is loaded once and switched the way the app switches: the prefs
-stylesheet and `data-appearance` on `.app`. 37 files × 40 = 1,480 cases, about
+stylesheet and `data-appearance` on `.app`. 38 files × 40 = 1,520 cases, about
 20 seconds.
 
 ## Assertions

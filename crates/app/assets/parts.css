@@ -203,13 +203,41 @@
 :is(.field, .search) :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
   inline-size: 100%; min-block-size: var(--target); padding: var(--sp-2) var(--sp-3);
   border: 1px solid var(--line); border-radius: var(--radius-control);
-  background: var(--surface); color: var(--text); font: inherit;
+  background-color: var(--surface); color: var(--text); font: inherit;
 }
+/* Room for the select's caret (see "select" below). */
+:is(.field, .search) select:not([multiple]):not([size]) { padding-inline-end: 2.5rem; }
 :is(.field, .search) :is(input, textarea, select):focus-visible { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
 .field[data-invalid="true"] :is(input, textarea, select) { border-color: var(--bad); }
 .search { position: relative; display: flex; align-items: center; }
 .search :is(input:not([type="checkbox"]):not([type="radio"])) { padding-inline-start: 2.5rem; border-radius: var(--radius-pill); background: var(--surface-2); border-color: transparent; }
 .search > svg { position: absolute; inset-inline-start: var(--sp-3); inline-size: 1.25rem; block-size: 1.25rem; color: var(--muted); pointer-events: none; }
+
+/* ---------- select ----------
+   Every one-line select draws its own caret at the inline end, a little in
+   from the edge, instead of the platform arrow that sits on the border
+   and ignores RTL. A rule that styles a select sets background-color,
+   never the background shorthand (it would wipe the caret), and leaves
+   2.5rem of end padding. --caret recolours it. */
+select:not([multiple]):not([size]) {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-inline-end: 2.5rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--caret, var(--muted)) 50%),
+    linear-gradient(135deg, var(--caret, var(--muted)) 50%, transparent 50%);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  /* The app is RTL, so the inline end is the left. */
+  background-position: left 1rem center, left calc(1rem + 5px) center;
+}
+select:not([multiple]):not([size]):dir(ltr) {
+  background-position: right calc(1rem + 5px) center, right 1rem center;
+}
+/* Forced colours drop background images: give the platform arrow back. */
+@media (forced-colors: active) {
+  select:not([multiple]):not([size]) { -webkit-appearance: auto; appearance: auto; background-image: none; }
+}
 
 /* ---------- switch ----------
    input[type="checkbox"][role="switch"], inside a label that names it. */

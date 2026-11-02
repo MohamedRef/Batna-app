@@ -28,6 +28,7 @@ mod bclc;
 mod bisap;
 mod child_pugh;
 mod clichy;
+mod cll;
 mod cockcroft;
 mod diabetes;
 mod fib4;
@@ -35,13 +36,16 @@ mod gbs;
 mod glasgow;
 mod ipss_mf;
 mod kings;
+mod lymphoma;
 mod maddrey;
 mod meld;
+mod mpn;
 mod r_ratio;
 mod ra2010;
 mod ranson;
 mod renal;
 mod research;
+mod rpi;
 mod saag;
 
 /// Named inputs for one calculation.
@@ -357,6 +361,14 @@ static REGISTRY: &[CalcSpec] = &[
     diabetes::CORRECTED_NA,
     diabetes::OSMOLALITY,
     ipss_mf::SPEC,
+    rpi::SPEC,
+    cll::RAI,
+    cll::BINET,
+    lymphoma::ANN_ARBOR,
+    lymphoma::IPI,
+    mpn::PV,
+    mpn::ET,
+    mpn::PMF,
     research::INCIDENCE,
     research::PREVALENCE,
     research::PREVALENCE_ID,
@@ -481,6 +493,34 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("ipss_mf.int1", &["intermediate-1", "intermediate 1", "int-1"]),
     ("ipss_mf.int2", &["intermediate-2", "intermediate 2", "int-2"]),
     ("ipss_mf.high", &["high"]),
+    ("rpi.low", &["below 2", "less than 2", "underproduction", "inadequate"]),
+    ("rpi.adequate", &["2 or more", "adequate"]),
+    ("rai_cll.0", &["stage 0"]),
+    ("rai_cll.1", &["stage i", "stage 1"]),
+    ("rai_cll.2", &["stage ii", "stage 2"]),
+    ("rai_cll.3", &["stage iii", "stage 3"]),
+    ("rai_cll.4", &["stage iv", "stage 4"]),
+    ("binet_cll.a", &["stage a"]),
+    ("binet_cll.b", &["stage b"]),
+    ("binet_cll.c", &["stage c"]),
+    ("ann_arbor.1a", &["stage ia", "stage 1a"]),
+    ("ann_arbor.1b", &["stage ib", "stage 1b"]),
+    ("ann_arbor.2a", &["stage iia", "stage 2a"]),
+    ("ann_arbor.2b", &["stage iib", "stage 2b"]),
+    ("ann_arbor.3a", &["stage iiia", "stage 3a"]),
+    ("ann_arbor.3b", &["stage iiib", "stage 3b"]),
+    ("ann_arbor.4a", &["stage iva", "stage 4a"]),
+    ("ann_arbor.4b", &["stage ivb", "stage 4b"]),
+    ("ipi_nhl.low", &["low risk", "low"]),
+    ("ipi_nhl.low_int", &["low-intermediate", "low intermediate"]),
+    ("ipi_nhl.high_int", &["high-intermediate", "high intermediate"]),
+    ("ipi_nhl.high", &["high risk", "high"]),
+    ("who_pv.met", &["met", "meets"]),
+    ("who_pv.not_met", &["not met"]),
+    ("who_et.met", &["met", "meets"]),
+    ("who_et.not_met", &["not met"]),
+    ("who_pmf.met", &["met", "meets"]),
+    ("who_pmf.not_met", &["not met"]),
     ("kdigo_aki.none", &["no aki"]),
     ("kdigo_aki.1", &["stage 1"]),
     ("kdigo_aki.2", &["stage 2"]),

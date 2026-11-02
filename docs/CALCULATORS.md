@@ -339,6 +339,101 @@ Source: Cervantes 2009; book Hematology Lecture 9, p. 151
 | `blasts_pct` | number, % | Peripheral blasts |
 | `constitutional` | true / false (default false) | Constitutional symptoms |
 
+## `rpi`: Reticulocyte production index (RPI)
+
+Source: Hillman & Finch, Red Cell Manual (formula and maturation times, not printed in the book); book Hematology Lecture 2, p. 14 (RI < 2% / > 2%)
+
+| input | kind | |
+|---|---|---|
+| `retic_pct` | number, % | Reticulocytes |
+| `hct_pct` | number, % | Haematocrit |
+| `rbc_10e12_l` | number, × 10⁶/µL | RBC count; optional |
+
+## `rai_cll`: Rai stage (CLL)
+
+Source: Rai 1975, modified Rai 1987, iwCLL 2018; book Hematology Lecture 8, Table 1, p. 129
+
+| input | kind | |
+|---|---|---|
+| `lymphadenopathy` | true / false (default false) | Lymphadenopathy |
+| `organomegaly` | true / false (default false) | Hepatomegaly or splenomegaly |
+| `hb_g_dl` | number, g/dL | Haemoglobin |
+| `platelets_10e9_l` | number, × 10³/µL | Platelets |
+
+## `binet_cll`: Binet stage (CLL)
+
+Source: Binet 1981, iwCLL 2018; book Hematology Lecture 8, Table 1, p. 129
+
+| input | kind | |
+|---|---|---|
+| `areas` | number, of 5 | Enlarged lymphoid areas |
+| `hb_g_dl` | number, g/dL | Haemoglobin |
+| `platelets_10e9_l` | number, × 10³/µL | Platelets |
+
+## `ann_arbor`: Ann Arbor stage (lymphoma)
+
+Source: Carbone 1971, Lugano 2014; book Hematology Lecture 12, pp. 192–193
+
+| input | kind | |
+|---|---|---|
+| `spread` | `single_group`, `one_side`, `both_sides`, `extralymphatic` | Disease extent |
+| `night_sweats` | true / false (default false) | Night sweats |
+| `fever` | true / false (default false) | Fever |
+| `weight_loss` | true / false (default false) | Weight loss > 10% in 6 months |
+
+## `ipi_nhl`: International Prognostic Index (NHL)
+
+Source: Shipp 1993, NEJM (points and groups, not in the book); book Hematology Lecture 12, p. 193
+
+| input | kind | |
+|---|---|---|
+| `age_years` | number, years | Age |
+| `ldh_high` | true / false (default false) | LDH above normal |
+| `ecog_2_plus` | true / false (default false) | ECOG performance status 2 or more |
+| `stage_3_4` | true / false (default false) | Ann Arbor stage III or IV |
+| `extranodal_2_plus` | true / false (default false) | More than one extranodal site |
+
+## `who_pv`: WHO 2016 criteria: polycythaemia vera
+
+Source: WHO 2016 (Arber 2016); book Hematology Lecture 10, p. 163
+
+| input | kind | |
+|---|---|---|
+| `sex` | `male`, `female` | Sex |
+| `hb_g_dl` | number, g/dL | Haemoglobin |
+| `hct_pct` | number, % | Haematocrit; optional |
+| `rcm_increased` | true / false (default false) | Increased red cell mass |
+| `bm_panmyelosis` | true / false (default false) | Marrow: hypercellular with trilineage growth (panmyelosis) |
+| `jak2` | true / false (default false) | JAK2 V617F or JAK2 exon 12 mutation |
+| `low_epo` | true / false (default false) | Subnormal serum erythropoietin |
+
+## `who_et`: WHO 2016 criteria: essential thrombocythaemia
+
+Source: WHO 2016 (Arber 2016); book Hematology Lecture 9, p. 135
+
+| input | kind | |
+|---|---|---|
+| `platelets_10e9_l` | number, × 10⁹/L | Platelets |
+| `bm_megakaryocytes` | true / false (default false) | Marrow: mainly enlarged, mature, hyperlobulated megakaryocytes |
+| `not_other_myeloid` | true / false (default false) | Not meeting WHO criteria for CML, PV, PMF, MDS or another myeloid neoplasm |
+| `driver_mutation` | true / false (default false) | JAK2, CALR or MPL mutation |
+| `clonal_or_not_reactive` | true / false (default false) | Another clonal marker, or no evidence of reactive thrombocytosis |
+
+## `who_pmf`: WHO 2016 criteria: overt primary myelofibrosis
+
+Source: WHO 2016 (Arber 2016); book Hematology Lecture 9, pp. 145–146
+
+| input | kind | |
+|---|---|---|
+| `bm_megakaryocytes_fibrosis` | true / false (default false) | Marrow: megakaryocytic proliferation and atypia with grade 2–3 fibrosis |
+| `not_other_myeloid` | true / false (default false) | Not meeting WHO criteria for ET, PV, CML, MDS or another myeloid neoplasm |
+| `clonal` | true / false (default false) | JAK2, CALR or MPL mutation, or another clonal marker, or no reactive myelofibrosis |
+| `anaemia` | true / false (default false) | Anaemia not due to another condition |
+| `leukocytosis` | true / false (default false) | Leukocytosis > 11 × 10⁹/L |
+| `splenomegaly` | true / false (default false) | Palpable splenomegaly |
+| `ldh_high` | true / false (default false) | LDH above the upper limit of normal |
+| `leukoerythroblastosis` | true / false (default false) | Leukoerythroblastosis |
+
 ## `incidence`: Incidence rate
 
 Source: Research L02: measures of disease frequency, slide 25

@@ -7,9 +7,7 @@ use batna_protocol::cloud::{DeviceSummary, Platform};
 use dioxus::prelude::*;
 use tokio::sync::mpsc::UnboundedSender;
 
-#[cfg(not(target_arch = "wasm32"))]
-use super::Event;
-use super::{CloudStatus, Command, Problem, SyncState};
+use super::{CloudStatus, Command, Event, Problem, SyncState};
 use crate::i18n::cloud as tx;
 
 /// Batna Cloud state for the UI, shared through context.
@@ -40,20 +38,23 @@ pub fn use_provide_cloud() {
         signing_in: Signal::new(false),
         commands: Signal::new(None),
     });
-    #[cfg(not(target_arch = "wasm32"))]
     let review = use_context::<crate::store::Review>();
-    #[cfg(not(target_arch = "wasm32"))]
     use_hook(move || {
         let Some(config) = super::CloudConfig::from_env() else { return };
-        // An in-memory store (the data folder couldn't be opened) has nothing to sync.
-        let Some(path) = store.path.clone() else { return };
         let device = super::device_info(device_id);
-        let vault = Box::new(super::session::KeyringVault::new());
-        let mut handle = match super::start(config, path, device, vault) {
-            Ok(h) => h,
-            Err(e) => {
-                crate::diag::report!("sync didn't start: {e}");
-                return;
+        #[cfg(target_arch = "wasm32")]
+        let mut handle = super::start(config, device);
+        #[cfg(not(target_arch = "wasm32"))]
+        let mut handle = {
+            // An in-memory store (the data folder couldn't be opened) has nothing to sync.
+            let Some(path) = store.path.clone() else { return };
+            let vault = Box::new(super::session::KeyringVault::new());
+            match super::start(config, path, device, vault) {
+                Ok(h) => h,
+                Err(e) => {
+                    crate::diag::report!("sync didn't start: {e}");
+                    return;
+                }
             }
         };
         let mut commands = cloud.commands;
@@ -166,9 +167,7 @@ pub fn SyncSection() -> Element {
         section { class: "card",
             h2 { {tx::TITLE} }
             if !status.configured {
-                p { class: "muted small",
-                    if cfg!(target_arch = "wasm32") { {tx::NOT_ON_WEB_YET} } else { {tx::NOT_CONFIGURED} }
-                }
+                p { class: "muted small", {tx::NOT_CONFIGURED} }
             } else if signed_in {
                 SignedIn { status: status.clone() }
             } else {
@@ -296,6 +295,7 @@ fn platform_icon(p: Platform, name: &str) -> Element {
         Platform::Android => "M8 3h8v18H8zM11 18h2",
         // laptop
         Platform::Macos => "M5 6h14v9H5zM3 18h18",
+        Platform::Web => "M4 5h16v14H4zM4 9h16M7 7h.01M9.5 7h.01",
         Platform::Other => "M4 5h16v11H4zM9 20h6M12 16v4",
     };
     rsx! {

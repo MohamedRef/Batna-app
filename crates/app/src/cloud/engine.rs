@@ -7,21 +7,18 @@ use std::time::Duration;
 use batna_protocol::client::{Backoff, Effect, Phase, SyncClient};
 use batna_protocol::cloud::{DeviceInfo, DeviceSummary, ErrorCode, GoogleSignIn};
 use batna_protocol::sync::{ClientMsg, MAX_OPS_PER_PUSH, ServerMsg};
-use futures_util::{SinkExt, StreamExt};
-use tokio::net::TcpStream;
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
-use tokio::time::Instant;
-use tokio_tungstenite::tungstenite::Message;
-use tokio_tungstenite::tungstenite::client::IntoClientRequest;
-use tokio_tungstenite::{MaybeTlsStream, WebSocketStream};
+use web_time::Instant;
 
+use super::GoogleClient;
 use super::api::{Api, CloudError};
-use super::oauth::{self, GoogleClient, OAuthError};
+use super::oauth::{self, OAuthError};
 use super::session::{Auth, SessionVault};
+use super::socket::{ConnectError, Frame, Socket};
 use super::{CloudStatus, Command, Event, Problem, SyncState};
 use crate::store::Store;
 
-type Ws = WebSocketStream<MaybeTlsStream<TcpStream>>;
+type Ws = Socket;
 
 /// Keeps NAT mappings and the Cloudflare edge from dropping an idle socket.
 /// Protocol pings are answered by the runtime, so they don't wake the hub.
@@ -48,6 +45,8 @@ struct PendingSignIn {
 }
 
 enum SignInStep {
+    /// The Mac and Android: a code for Google's token endpoint.
+    #[cfg_attr(target_arch = "wasm32", allow(dead_code))]
     Code(oauth::Authorization),
     IdToken(String),
 }
@@ -69,7 +68,7 @@ impl PendingSignIn {
 }
 
 pub struct Engine {
-    store: Store,
+    store: &'static Store,
     api: Api,
     google: Option<GoogleClient>,
     device: DeviceInfo,
@@ -94,7 +93,7 @@ pub struct Engine {
 
 impl Engine {
     pub fn new(
-        store: Store,
+        store: &'static Store,
         api: Api,
         google: Option<GoogleClient>,
         device: DeviceInfo,
@@ -106,6 +105,12 @@ impl Engine {
             Ok(auth) => (Some(auth), None),
             Err(vault) => (None, Some(vault)),
         };
+        // The web: Google came back to the page with an ID token (`oauth`).
+        #[cfg(target_arch = "wasm32")]
+        let pending_sign_in = oauth::take_returned_id_token()
+            .map(|t| PendingSignIn::new(SignInStep::IdToken(t), ID_TOKEN_LIFE));
+        #[cfg(not(target_arch = "wasm32"))]
+        let pending_sign_in = None;
         Self {
             store,
             api,
@@ -122,14 +127,15 @@ impl Engine {
             force_refresh: false,
             problem: None,
             hold_pushes_until: None,
-            pending_sign_in: None,
+            pending_sign_in,
             events,
         }
     }
 
     pub async fn run(mut self, mut commands: UnboundedReceiver<Command>) {
-        let mut ping = tokio::time::interval(PING_EVERY);
-        let mut outbox = tokio::time::interval(OUTBOX_EVERY);
+        // Both ticks only run while a socket is open.
+        let mut next_ping = Instant::now() + PING_EVERY;
+        let mut next_outbox = Instant::now() + OUTBOX_EVERY;
         self.emit_status();
         loop {
             if self.pending_sign_in.as_ref().is_some_and(|p| Instant::now() >= p.retry_at) {
@@ -148,27 +154,39 @@ impl Engine {
             if let Some(p) = &self.pending_sign_in {
                 wait_until = wait_until.min(p.retry_at);
             }
+            if self.ws.is_some() {
+                wait_until = wait_until.min(next_ping).min(next_outbox);
+            }
+            let nap = wait_until.saturating_duration_since(Instant::now());
             tokio::select! {
                 cmd = commands.recv() => match cmd {
                     None | Some(Command::Shutdown) => break,
                     Some(cmd) => self.command(cmd).await,
                 },
                 frame = next_frame(&mut self.ws) => self.frame(frame).await,
-                _ = tokio::time::sleep_until(wait_until) => {}
-                // Both timers only run while a socket is open.
-                _ = outbox.tick(), if self.ws.is_some() => self.pump().await,
-                _ = ping.tick(), if self.ws.is_some() => {
-                    if let Some(ws) = &mut self.ws
-                        && ws.send(Message::Ping(Vec::new().into())).await.is_err()
-                    {
-                        self.drop_socket();
-                    }
+                _ = crate::platform::time::sleep(nap) => {}
+            }
+            let now = Instant::now();
+            if self.ws.is_none() {
+                next_ping = now + PING_EVERY;
+                next_outbox = now + OUTBOX_EVERY;
+            }
+            if self.ws.is_some() && now >= next_outbox {
+                next_outbox = now + OUTBOX_EVERY;
+                self.pump().await;
+            }
+            if now >= next_ping {
+                next_ping = now + PING_EVERY;
+                if let Some(ws) = &mut self.ws
+                    && ws.ping().await.is_err()
+                {
+                    self.drop_socket();
                 }
             }
             self.emit_status();
         }
-        if let Some(mut ws) = self.ws.take() {
-            let _ = ws.close(None).await;
+        if let Some(ws) = self.ws.take() {
+            ws.close().await;
         }
     }
 
@@ -188,22 +206,10 @@ impl Engine {
                 self.problem = None;
                 self.pending_sign_in = None;
                 self.events.send(Event::SigningIn(true)).ok();
-                let authorization = oauth::google_authorization(&google).await;
-                self.events.send(Event::SigningIn(false)).ok();
-                match authorization {
-                    Ok(auth) => {
-                        self.pending_sign_in = Some(PendingSignIn::new(SignInStep::Code(auth), CODE_LIFE));
-                        self.finish_sign_in().await;
-                    }
-                    Err(OAuthError::Cancelled) => self.problem = Some(Problem::SignInCancelled),
-                    Err(e) => {
-                        crate::diag::report!("Google sign-in: {e}");
-                        self.problem = Some(Problem::SignInFailed);
-                    }
-                }
+                self.sign_in_google(google).await;
             }
             Command::SignOut => {
-                let _ = self.authed(|api, access| api.sign_out(access)).await;
+                let _ = self.authed(|api, access| async move { api.sign_out(&access).await }).await;
                 self.sign_out_locally();
             }
             Command::LoadDevices => self.load_devices().await,
@@ -211,7 +217,11 @@ impl Engine {
                 if device == self.device.device_id {
                     return Box::pin(self.command(Command::SignOut)).await;
                 }
-                if let Some(Err(e)) = self.authed(move |api, access| api.revoke(access, &device)).await {
+                let call = move |api: Api, access: String| {
+                    let device = device.clone();
+                    async move { api.revoke(&access, &device).await }
+                };
+                if let Some(Err(e)) = self.authed(call).await {
                     self.cloud_error(&e);
                 }
                 self.load_devices().await;
@@ -228,16 +238,46 @@ impl Engine {
         }
     }
 
+    /// The web leaves the page for Google and comes back with an ID token
+    /// (`Engine::new`); this only returns if it couldn't go.
+    #[cfg(target_arch = "wasm32")]
+    async fn sign_in_google(&mut self, google: GoogleClient) {
+        let error = oauth::go_to_google(&google).await;
+        self.events.send(Event::SigningIn(false)).ok();
+        crate::diag::report!("Google sign-in: {error}");
+        self.problem = Some(Problem::SignInFailed);
+    }
+
+    #[cfg(not(target_arch = "wasm32"))]
+    async fn sign_in_google(&mut self, google: GoogleClient) {
+        let authorization = oauth::google_authorization(&google).await;
+        self.events.send(Event::SigningIn(false)).ok();
+        match authorization {
+            Ok(auth) => {
+                self.pending_sign_in = Some(PendingSignIn::new(SignInStep::Code(auth), CODE_LIFE));
+                self.finish_sign_in().await;
+            }
+            Err(OAuthError::Cancelled) => self.problem = Some(Problem::SignInCancelled),
+            Err(e) => {
+                crate::diag::report!("Google sign-in: {e}");
+                self.problem = Some(Problem::SignInFailed);
+            }
+        }
+    }
+
     /// Runs the network half of a sign-in Google approved: the code
     /// exchange, then Batna Cloud. A network failure keeps it pending and
     /// retries ([`PendingSignIn`]); anything else ends it.
     async fn finish_sign_in(&mut self) {
-        let Some(mut pending) = self.pending_sign_in.take() else { return };
+        let Some(pending) = self.pending_sign_in.take() else { return };
+        #[cfg(not(target_arch = "wasm32"))]
+        let mut pending = pending;
         if Instant::now() >= pending.until {
             crate::diag::report!("Batna Cloud sign-in: gave up waiting for the network");
             self.problem = Some(Problem::SignInFailed);
             return;
         }
+        #[cfg(not(target_arch = "wasm32"))]
         if let SignInStep::Code(auth) = &pending.step {
             let Some(google) = self.google.clone() else {
                 self.problem = Some(Problem::NotConfigured);
@@ -260,8 +300,7 @@ impl Engine {
         }
         let SignInStep::IdToken(id_token) = &pending.step else { return };
         let body = GoogleSignIn { id_token: id_token.clone(), device: self.device.clone() };
-        let api = self.api.clone();
-        match blocking(move || api.sign_in_google(&body)).await {
+        match self.api.sign_in_google(&body).await {
             Ok(session) => {
                 let vault =
                     self.vault.take().unwrap_or_else(|| Box::new(super::session::MemoryVault::default()));
@@ -312,7 +351,9 @@ impl Engine {
     }
 
     async fn load_devices(&mut self) {
-        let Some(result) = self.authed(|api, access| api.devices(access)).await else { return };
+        let Some(result) = self.authed(|api, access| async move { api.devices(&access).await }).await else {
+            return;
+        };
         let devices: Result<Vec<DeviceSummary>, Problem> = match result {
             Ok(list) => Ok(list.devices),
             Err(e) => {
@@ -327,15 +368,14 @@ impl Engine {
     /// this device thinks (its clock runs behind the hub's), so it refreshes
     /// once and retries before anything counts as signed out (#261). `None`
     /// when there is no token (the reason is recorded).
-    async fn authed<T: Send + 'static>(
-        &mut self,
-        call: impl Fn(&Api, &str) -> Result<T, CloudError> + Send + Sync + Clone + 'static,
-    ) -> Option<Result<T, CloudError>> {
+    async fn authed<T, F>(&mut self, call: impl Fn(Api, String) -> F) -> Option<Result<T, CloudError>>
+    where
+        F: std::future::Future<Output = Result<T, CloudError>>,
+    {
         let mut force = false;
         loop {
             let access = self.access(force).await?;
-            let (api, call) = (self.api.clone(), call.clone());
-            match blocking(move || call(&api, &access)).await {
+            match call(self.api.clone(), access).await {
                 Err(CloudError::Api { code: ErrorCode::Unauthorized, .. }) if !force => force = true,
                 result => return Some(result),
             }
@@ -345,12 +385,7 @@ impl Engine {
     /// A fresh access token, or `None` (with the reason recorded).
     async fn access(&mut self, force: bool) -> Option<String> {
         let mut auth = self.auth.take()?;
-        let api = self.api.clone();
-        let (auth, result) = blocking(move || {
-            let r = auth.access_token(&api, now_ms(), force);
-            (auth, r)
-        })
-        .await;
+        let result = auth.access_token(&self.api, now_ms(), force).await;
         self.auth = Some(auth);
         match result {
             Ok(token) => Some(token),
@@ -382,33 +417,22 @@ impl Engine {
             self.schedule_retry();
             return;
         };
-        let mut request = match self.api.sync_url().into_client_request() {
-            Ok(r) => r,
-            Err(e) => {
-                crate::diag::report!("bad sync url: {e}");
-                self.stopped = true;
-                return;
-            }
-        };
-        if let Ok(v) = format!("Bearer {access}").parse() {
-            request.headers_mut().insert("authorization", v);
-        }
-        match tokio_tungstenite::connect_async(request).await {
-            Ok((ws, _)) => {
+        match Socket::connect(&self.api.sync_url(), &access).await {
+            Ok(ws) => {
                 self.ws = Some(ws);
                 self.problem = None;
                 let effects = self.client.on_open();
                 self.run_effects(effects).await;
             }
             Err(e) => {
-                use tokio_tungstenite::tungstenite::Error;
-                if let Error::Http(res) = &e
-                    && res.status().as_u16() == 401
-                {
+                if matches!(e, ConnectError::Unauthorized) {
                     // Expired or revoked: refreshing tells which.
                     self.force_refresh = true;
                 } else {
                     self.problem = Some(Problem::Network);
+                    // A browser can't tell a refused upgrade from a dropped
+                    // line: refresh first, which also tells if it was revoked.
+                    self.force_refresh = cfg!(target_arch = "wasm32");
                 }
                 crate::diag::report!("sync connect: {e}");
                 self.schedule_retry();
@@ -429,24 +453,20 @@ impl Engine {
         }
     }
 
-    async fn frame(&mut self, frame: Option<Result<Message, tokio_tungstenite::tungstenite::Error>>) {
+    async fn frame(&mut self, frame: Frame) {
         let text = match frame {
-            Some(Ok(Message::Text(text))) => text,
-            Some(Ok(Message::Close(close))) => {
+            Frame::Text(text) => text,
+            Frame::Closed(code) => {
                 // 4001: signed out from another device (after `revoked`).
-                if close.as_ref().is_some_and(|c| u16::from(c.code) == 4001) {
+                if code == Some(4001) {
                     self.revoked();
                 }
                 self.drop_socket();
                 return;
             }
-            Some(Ok(_)) => return,
-            Some(Err(e)) => {
+            Frame::Other => return,
+            Frame::Error(e) => {
                 crate::diag::report!("sync socket: {e}");
-                self.drop_socket();
-                return;
-            }
-            None => {
                 self.drop_socket();
                 return;
             }
@@ -508,8 +528,8 @@ impl Engine {
                 }
                 Effect::Reconnect { reason } => {
                     crate::diag::report!("sync reconnects: {reason}");
-                    if let Some(mut ws) = self.ws.take() {
-                        let _ = ws.close(None).await;
+                    if let Some(ws) = self.ws.take() {
+                        ws.close().await;
                     }
                     self.drop_socket();
                 }
@@ -520,8 +540,8 @@ impl Engine {
                         self.problem = Some(Problem::Outdated);
                         self.stopped = true;
                     }
-                    if let Some(mut ws) = self.ws.take() {
-                        let _ = ws.close(None).await;
+                    if let Some(ws) = self.ws.take() {
+                        ws.close().await;
                     }
                     self.client.on_close();
                 }
@@ -554,7 +574,7 @@ impl Engine {
     async fn send(&mut self, msg: &ClientMsg) {
         let Some(ws) = &mut self.ws else { return };
         let text = serde_json::to_string(msg).unwrap_or_default();
-        if let Err(e) = ws.send(Message::Text(text.into())).await {
+        if let Err(e) = ws.send_text(text).await {
             crate::diag::report!("sync send: {e}");
             self.drop_socket();
         }
@@ -590,13 +610,14 @@ impl Engine {
     }
 }
 
-async fn next_frame(ws: &mut Option<Ws>) -> Option<Result<Message, tokio_tungstenite::tungstenite::Error>> {
+async fn next_frame(ws: &mut Option<Ws>) -> Frame {
     match ws {
         Some(ws) => ws.next().await,
         None => std::future::pending().await,
     }
 }
 
+#[cfg(not(target_arch = "wasm32"))]
 async fn blocking<T: Send + 'static>(f: impl FnOnce() -> T + Send + 'static) -> T {
     tokio::task::spawn_blocking(f).await.expect("blocking task panicked")
 }

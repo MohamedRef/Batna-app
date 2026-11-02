@@ -1011,6 +1011,8 @@ pub mod calc {
     pub const YES: &str = "أيوه";
     pub const NO: &str = "لأ";
     pub const RESULT: &str = "النتيجة";
+    /// Over the interpretation under the result bar.
+    pub const MEANS: &str = "يعني إيه";
     pub const BREAKDOWN: &str = "التفاصيل";
     pub const SOURCE: &str = "المصدر";
     pub const RESET: &str = "امسح";

@@ -82,8 +82,12 @@ pub fn trim_num(n: f64) -> String {
     }
 }
 
-/// A form for one calculator with a live result. `initial` pre-fills it
-/// (a `calc` item's inputs); every field stays editable.
+/// A form for one calculator with a live result, laid out like MDCalc's: the
+/// name and what it is for, one row per input (its name, then its options as
+/// buttons, or a number box with the unit inside), and the result in a bar
+/// that stays at the foot of the screen while he fills it in, with what it
+/// means under it. `initial` pre-fills it (a `calc` item's inputs); every
+/// field stays editable.
 #[component]
 pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
     let Some(spec) = calc::spec(id) else { return rsx! {} };
@@ -93,7 +97,7 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
     );
     let result = (spec.compute)(&inputs);
     // The field the engine rejected, marked in place (a missing one is not
-    // an error yet: the waiting card counts what is left).
+    // an error yet: the result bar counts what is left).
     let bad = match &result {
         Err(CalcError::Invalid { field, .. }) => Some(*field),
         _ => None,
@@ -103,34 +107,46 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
         style { {CSS.text()} }
         div { class: "calc-form",
             crate::ui::Card { class: "calc-fields",
-                h1 { bdi { {spec.name} } }
-                if let Some(line) = tx::blurb(spec.id) {
-                    p { class: "calc-intro muted", {line} }
+                header { class: "calc-title",
+                    h1 { bdi { {spec.name} } }
+                    if let Some(line) = tx::blurb(spec.id) {
+                        p { class: "calc-intro muted", {line} }
+                    }
                 }
-                for field in spec.fields {
-                    div {
-                        key: "{field.key}",
-                        class: "field calc-field",
-                        "data-invalid": if bad == Some(field.key) { "true" } else { "false" },
-                        // Name, unit and "optional" as separate pieces, so
-                        // the English name and the Arabic tag never mix.
-                        label { class: "calc-label", r#for: "f-{field.key}",
-                            bdi { {field.label} }
-                            if let FieldKind::Number { unit, .. } = field.kind {
-                                if !unit.is_empty() { bdi { class: "muted small", dir: "ltr", "({unit})" } }
+                div { class: "calc-inputs",
+                    for field in spec.fields {
+                        div {
+                            key: "{field.key}",
+                            class: "field calc-field",
+                            "data-invalid": if bad == Some(field.key) { "true" } else { "false" },
+                            div { class: "calc-field-head",
+                                // Name and "optional" as separate pieces, so the
+                                // English name and the Arabic tag never mix.
+                                if matches!(field.kind, FieldKind::Number { .. }) {
+                                    label { class: "calc-label", id: "l-{field.key}", r#for: "f-{field.key}",
+                                        bdi { {field.label} }
+                                        if field.optional { span { class: "chip", {tx::OPTIONAL} } }
+                                    }
+                                } else {
+                                    span { class: "calc-label", id: "l-{field.key}",
+                                        bdi { {field.label} }
+                                        if field.optional && !matches!(field.kind, FieldKind::Flag) {
+                                            span { class: "chip", {tx::OPTIONAL} }
+                                        }
+                                    }
+                                }
+                                match tx::hint(spec.id, field.key) {
+                                    Some(h) => rsx! { p { class: "field-hint calc-hint", {h} } },
+                                    None if !field.hint.is_empty() => rsx! { bdi { class: "field-hint calc-hint", {field.hint} } },
+                                    None => rsx! {},
+                                }
                             }
-                            if field.optional && !matches!(field.kind, FieldKind::Flag) {
-                                span { class: "chip", {tx::OPTIONAL} }
+                            div { class: "calc-control",
+                                {field_input(field, values, bad == Some(field.key))}
+                                if bad == Some(field.key) {
+                                    p { id: "e-{field.key}", class: "field-error", role: "alert", {tx::INVALID} }
+                                }
                             }
-                        }
-                        {field_input(field, values, bad == Some(field.key))}
-                        if bad == Some(field.key) {
-                            p { id: "e-{field.key}", class: "field-error", role: "alert", {tx::INVALID} }
-                        }
-                        match tx::hint(spec.id, field.key) {
-                            Some(h) => rsx! { p { class: "field-hint calc-hint", {h} } },
-                            None if !field.hint.is_empty() => rsx! { bdi { class: "field-hint", {field.hint} } },
-                            None => rsx! {},
                         }
                     }
                 }
@@ -139,17 +155,23 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                 }
             }
             match result {
-                Ok(o) => rsx! { OutcomeCard { id, outcome: o } },
+                Ok(o) => rsx! {
+                    div { class: "calc-bar-result", "data-state": "ready", "aria-live": "polite",
+                        span { class: "calc-bar-label", {tx::RESULT} }
+                        bdi { class: "calc-display", "{o.display}" }
+                        bdi { class: "calc-bar-band", {o.label} }
+                    }
+                    OutcomeCard { id, outcome: o, headline: false }
+                },
                 Err(e) => {
                     let (what, label) = error_text(spec, &e);
                     rsx! {
-                        crate::ui::Card { class: "calc-wait", "aria-live": "polite",
-                            p { class: "small muted", {tx::RESULT} }
-                            p { {tx::FILL} }
-                            if left > 0 {
-                                p { class: "small calc-left", {tx::left(left)} }
+                        div { class: "calc-bar-result", "data-state": "waiting", "aria-live": "polite",
+                            span { class: "calc-bar-label", {tx::RESULT} }
+                            span { class: "calc-bar-wait",
+                                if left > 0 { {tx::left(left)} } else { {tx::FILL} }
                             }
-                            p { class: "small", "{what}: " bdi { "{label}" } }
+                            span { class: "calc-bar-next", "{what}: " bdi { "{label}" } }
                         }
                     }
                 }
@@ -179,37 +201,45 @@ fn field_input(
     let invalid = if invalid { "true" } else { "false" };
     let current = values.read().get(key).cloned();
     match field.kind {
-        FieldKind::Number { min, max, step, .. } => rsx! {
-            input {
-                id: "f-{key}",
-                r#type: "number",
-                inputmode: "decimal",
-                dir: "ltr",
-                min: "{min}",
-                max: "{max}",
-                step: "{step}",
-                "aria-invalid": invalid,
-                "aria-describedby": "e-{key}",
-                value: field_text(current.as_ref()),
-                oninput: move |e: FormEvent| {
-                    values.write().insert(key.to_owned(), CalcValue::Text(e.value()));
-                },
+        FieldKind::Number { unit, min, max, step } => rsx! {
+            // The unit sits inside the box, at its end, as on MDCalc.
+            div { class: "calc-num", dir: "ltr",
+                input {
+                    id: "f-{key}",
+                    r#type: "number",
+                    inputmode: "decimal",
+                    dir: "ltr",
+                    min: "{min}",
+                    max: "{max}",
+                    step: "{step}",
+                    "aria-invalid": invalid,
+                    "aria-describedby": "e-{key}",
+                    value: field_text(current.as_ref()),
+                    oninput: move |e: FormEvent| {
+                        values.write().insert(key.to_owned(), CalcValue::Text(e.value()));
+                    },
+                }
+                if !unit.is_empty() {
+                    bdi { class: "calc-unit", dir: "ltr", "{unit}" }
+                }
             }
         },
         FieldKind::Flag => {
             let on = matches!(current, Some(CalcValue::Bool(true)))
                 || matches!(&current, Some(CalcValue::Text(s)) if s == "yes" || s == "true");
             rsx! {
-                div { class: "calc-toggle", role: "group",
+                div { class: "calc-options", role: "group", aria_labelledby: "l-{key}",
                     button {
-                        "aria-pressed": if on { "true" } else { "false" },
-                        onclick: move |_| { values.write().insert(key.to_owned(), CalcValue::Bool(true)); },
-                        {tx::YES}
-                    }
-                    button {
+                        class: "calc-opt",
                         "aria-pressed": if on { "false" } else { "true" },
                         onclick: move |_| { values.write().insert(key.to_owned(), CalcValue::Bool(false)); },
                         {tx::NO}
+                    }
+                    button {
+                        class: "calc-opt",
+                        "aria-pressed": if on { "true" } else { "false" },
+                        onclick: move |_| { values.write().insert(key.to_owned(), CalcValue::Bool(true)); },
+                        {tx::YES}
                     }
                 }
             }
@@ -217,20 +247,37 @@ fn field_input(
         FieldKind::Choice(options) => {
             let text = field_text(current.as_ref());
             let known = options.iter().any(|(id, _)| *id == text);
+            // As on MDCalc: a pair (Man / Woman) shares a line; three or more,
+            // or a long label ("< 0.5 mL/kg/h for 6–12 h"), stack one per line.
+            let stack = options.len() > 2 || options.iter().any(|(_, label)| label.chars().count() > 18);
+            let alias = text.clone();
             rsx! {
-                select {
-                    id: "f-{key}",
-                    dir: "ltr",
-                    "aria-invalid": invalid,
-                    "aria-describedby": "e-{key}",
-                    onchange: move |e: FormEvent| {
-                        values.write().insert(key.to_owned(), CalcValue::Text(e.value()));
-                    },
-                    option { value: "", selected: text.is_empty(), "—" }
+                div {
+                    class: "calc-options",
+                    "data-stack": if stack { "true" } else { "false" },
+                    role: "group",
+                    aria_labelledby: "l-{key}",
                     // A content alias ("mild") the list doesn't spell the same way.
-                    if !known && !text.is_empty() { option { value: "{text}", selected: true, "{text}" } }
+                    if !known && !text.is_empty() {
+                        button {
+                            class: "calc-opt",
+                            "aria-pressed": "true",
+                            onclick: move |_| {
+                                values.write().insert(key.to_owned(), CalcValue::Text(alias.clone()));
+                            },
+                            bdi { dir: "ltr", "{text}" }
+                        }
+                    }
                     for (id, label) in options.iter() {
-                        option { key: "{id}", value: *id, selected: text == *id, {*label} }
+                        button {
+                            key: "{id}",
+                            class: "calc-opt",
+                            "aria-pressed": if text == *id { "true" } else { "false" },
+                            onclick: move |_| {
+                                values.write().insert(key.to_owned(), CalcValue::Text((*id).to_owned()));
+                            },
+                            bdi { dir: "ltr", {*label} }
+                        }
                     }
                 }
             }
@@ -250,15 +297,25 @@ fn error_text(spec: &CalcSpec, e: &CalcError) -> (&'static str, String) {
 
 /// The result: the number or stage, its band and meaning, the breakdown,
 /// and where it comes from.
+///
+/// The calculator form shows the number in its own bar (`headline: false`)
+/// and this card under it as the interpretation.
 #[component]
-pub fn OutcomeCard(id: &'static str, outcome: Outcome) -> Element {
+pub fn OutcomeCard(id: &'static str, outcome: Outcome, #[props(default = true)] headline: bool) -> Element {
     let source = calc::spec(id).map_or("", |s| s.source);
+    let explain = if headline { "" } else { " calc-explain" };
     rsx! {
-        crate::ui::Card { class: "calc-result", "aria-live": "polite",
-            p { class: "small muted", {tx::RESULT} }
-            div { class: "calc-headline",
-                bdi { class: "calc-display", "{outcome.display}" }
-                bdi { class: "chip calc-band", "data-tone": "accent", {outcome.label} }
+        crate::ui::Card {
+            class: "calc-result{explain}",
+            "aria-live": if headline { "polite" } else { "off" },
+            if headline {
+                p { class: "small muted", {tx::RESULT} }
+                div { class: "calc-headline",
+                    bdi { class: "calc-display", "{outcome.display}" }
+                    bdi { class: "chip calc-band", "data-tone": "accent", {outcome.label} }
+                }
+            } else {
+                h2 { class: "calc-result-head", {tx::MEANS} }
             }
             bdi { class: "calc-meaning", "{outcome.meaning}" }
             details { class: "calc-parts",

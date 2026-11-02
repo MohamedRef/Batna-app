@@ -241,7 +241,8 @@ pub enum CalcValue {
 pub struct Source {
     /// Printed book page.
     pub page: u32,
-    /// At most 25 words from that page, for checking. Never more.
+    /// The page's own words: as much as proves the fact and gives the full
+    /// reference for further reading (no length cap, Mohamed 2026-10-29).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub quote: Option<String>,
 }

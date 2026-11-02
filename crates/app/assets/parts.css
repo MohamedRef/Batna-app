@@ -372,3 +372,21 @@ button.activity-row:focus-visible { outline-offset: -3px; }
 .save-notice p { flex: 1 1 16rem; margin: 0; overflow-wrap: anywhere; }
 .save-retry { flex: 0 0 auto; }
 .settings-window > .save-notice { margin: var(--sp-3); }
+
+/* A book quote (pagesheet::Quote): the page's own words with no length cap,
+   tables drawn as tables (Mohamed, 2026-11-02). English, so it runs ltr. */
+.bk-q { display: flex; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); text-align: start; }
+.bk-q p { margin: 0; }
+.bk-q-para { font-size: 1.02rem; line-height: 1.6; }
+.bk-q-title { font-weight: 700; }
+.bk-q-scroll { overflow-x: auto; }
+.bk-q-table { border-collapse: collapse; inline-size: 100%; font-size: 0.92rem; line-height: 1.45; }
+.bk-q-table th, .bk-q-table td { border: 1px solid var(--line); padding: 5px 8px; text-align: start; vertical-align: top; }
+.bk-q-table thead th { background: var(--surface-2, var(--soft)); font-weight: 700; }
+.bk-q-table.grouped th { font-weight: 700; inline-size: 34%; background: var(--surface-2, var(--soft)); }
+.bk-q-table td.solo { font-weight: 600; }
+.bk-q-table td.d1 { padding-inline-start: 1.4em; }
+.bk-q-table td.d2, .bk-q-table td.d3 { padding-inline-start: 2.4em; }
+.bk-q-list { margin: 0; padding-inline-start: 1.2em; line-height: 1.55; }
+.bk-q-list li.d1 { margin-inline-start: 1.2em; }
+.bk-q-list li.d2, .bk-q-list li.d3 { margin-inline-start: 2.4em; }

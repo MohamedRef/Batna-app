@@ -116,7 +116,9 @@ pub fn new_item(root: &Path, lecture: &str, kind: &str) -> Res<String> {
     if let Some(src) = value.get_mut("src") {
         src["page"] = lec.book.pages[0].into();
         // Every page chip shows the quote, so it is required (docs/CONTENT.md).
-        src["quote"] = format!("{TEMPLATE_MARK} the page's own words, at most 25").into();
+        src["quote"] =
+            format!("{TEMPLATE_MARK} the page's own words: the full passage or table that holds the fact")
+                .into();
     }
     // Round-trip through the type so the snippet is a valid item.
     let item: Item = serde_json::from_value(value).map_err(|e| vec![format!("template: {e}")])?;

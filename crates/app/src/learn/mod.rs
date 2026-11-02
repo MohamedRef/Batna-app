@@ -12,6 +12,7 @@ mod player;
 mod practice;
 mod steps;
 mod text;
+pub use text::Rich;
 
 use batna_core::lesson::Lesson;
 use dioxus::prelude::*;

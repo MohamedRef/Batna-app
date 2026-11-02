@@ -273,7 +273,28 @@ pub fn state(body: &StepBody, answer: Option<bool>, skipped: bool, draft: Option
     }
 }
 
+/// Whether a step's book quote waits until he has answered: a full quote
+/// is often the very table or list the step asks for (Mohamed, 2026-11-02).
+/// A question or reveal holds it until checked; a table with hidden cells,
+/// until every cell is open.
+pub fn quote_held(body: &StepBody, state: StepState, draft: Option<&Draft>) -> bool {
+    if let StepBody::Table { hide, .. } = body {
+        let open: &[[usize; 2]] = match draft {
+            Some(Draft::Table { open }) => open,
+            _ => &[],
+        };
+        return hide.iter().any(|c| !open.contains(c));
+    }
+    matches!(state, StepState::Open | StepState::Draft | StepState::Skipped)
+}
+
 impl Attempt {
+    /// [`quote_held`] for step `k`.
+    pub fn quote_held(&self, lesson: &Lesson, k: usize) -> bool {
+        let draft = self.drafts.get(k).map(|s| &s.draft);
+        quote_held(&lesson.steps[k].body, self.state(lesson, k), draft)
+    }
+
     pub fn new(n: usize, started_ms: i64) -> Self {
         Self {
             v: VERSION,
@@ -644,5 +665,24 @@ mod tests {
     fn unknown_kinds_from_a_newer_app_load() {
         let s: Saved = serde_json::from_str(r#"{"sig":"x","draft":{"kind":"hotspot","x":1}}"#).unwrap();
         assert_eq!(s.draft, Draft::Unknown);
+    }
+
+    #[test]
+    fn quote_waits_for_the_answer() {
+        assert!(quote_held(&check(), StepState::Open, None));
+        assert!(quote_held(&check(), StepState::Skipped, None));
+        assert!(!quote_held(&check(), StepState::Done, None));
+        assert!(!quote_held(&check(), StepState::AnsweredBefore, None));
+        let table = StepBody::Table {
+            title: "Child-Pugh".into(),
+            columns: vec!["Variable".into(), "1".into()],
+            rows: vec![vec!["Ascites".into(), "Absent".into()]],
+            hide: vec![[0, 1]],
+        };
+        assert!(quote_held(&table, StepState::Plain, None));
+        assert!(!quote_held(&table, StepState::Plain, Some(&Draft::Table { open: vec![[0, 1]] })));
+        let StepBody::Table { title, columns, rows, .. } = table else { unreachable!() };
+        let plain = StepBody::Table { title, columns, rows, hide: vec![] };
+        assert!(!quote_held(&plain, StepState::Plain, None));
     }
 }

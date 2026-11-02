@@ -58,8 +58,10 @@ pub fn Today() -> Element {
                 }
                 // The session length: the start button below uses it, and
                 // it stays his default (the first-run answer).
-                div { class: "td-time", role: "radiogroup", aria_label: tx::TIME_Q, title: tx::TIME_HINT,
-                    span { class: "td-time-q", {tx::TIME_Q} }
+                // The hint sits on the question only: on the whole row the
+                // tooltip covered the lecture list's heading beside it.
+                div { class: "td-time", role: "radiogroup", aria_label: tx::TIME_Q,
+                    span { class: "td-time-q", title: tx::TIME_HINT, {tx::TIME_Q} }
                     for m in crate::onboarding::MINUTE_CHOICES {
                         button {
                             key: "{m}",

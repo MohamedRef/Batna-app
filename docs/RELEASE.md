@@ -5,10 +5,10 @@ Tab S11 and the Mac. A release is a signed APK sideloaded onto both Galaxy
 devices, plus a Batna.app built on the Mac. There are no store listings and no
 paid developer accounts. Everything here costs $0.
 
-**Nothing is released until everything is finished** (Mohamed's rule). The
-first release will be an **alpha**. This page and its `just` recipes are
-prepared ahead, so release day is routine. Until then, the only builds are
-the CI *preview* APKs (§3).
+The first **alpha** (`1.0.0-alpha.1`) was cut on 2026-11-02, when Mohamed
+said go. Releases are built and published by the **Release** workflow
+(`.github/workflows/release.yml`, run by hand; §4). The CI *preview* APKs
+(§3) keep coming on every merge.
 
 Adapted from Kabar's `docs/RELEASE.md` on `main`. Batna has its own keys,
 its own feed and its own package (`app.batna`). It never shares anything
@@ -58,6 +58,33 @@ A preview APK and a release APK carry different keys. Uninstall one before
 installing the other, or keep only the release build.
 
 ## 4. Release day (only once Mohamed says go)
+
+### From CI (the usual way)
+
+1. Once, on the Mac: `scripts/release-secrets.sh`. It makes (or reuses) the
+   update key, the Android release keystore and the "Batna Code Signing"
+   identity exactly as §2 does, and copies them into the repo's Actions
+   secrets with `gh secret set` (`BATNA_UPDATE_SECRET`,
+   `BATNA_ANDROID_KEYSTORE`, `BATNA_ANDROID_KEYSTORE_PASSWORD`,
+   `BATNA_MAC_CERT_P12`, `BATNA_MAC_CERT_PASSWORD`). Commit
+   `crates/app/update-key.pub` the first time. Back up `~/.batna/` and the
+   Keychain items `batna-update`, `batna-android`, `batna-codesign`.
+2. Set `version` in `Cargo.toml` in a PR (with its `changes/` line) and merge it.
+3. Actions › Release › Run workflow. It builds the content pack, the
+   release APK (Linux) and Batna.app (macOS runner), signs them with the
+   keys above, bakes in Batna Cloud and the Google client (sync), and
+   publishes:
+   - `batna-v<version>`: `batna-<version>.apk` and `Batna-<version>-mac.zip`
+     for installing by hand;
+   - the channel feed(s) (`batna-alpha`, …): the signed `update.json`
+     that installed release builds read (§5).
+4. The first time only, install by hand: uninstall any *preview* build
+   (different key), install the APK on both Galaxy devices, and on the Mac
+   move Batna.app to Applications and run
+   `xattr -dr com.apple.quarantine /Applications/Batna.app` once (it is
+   self-signed). Every later release reaches them over the air.
+
+### By hand on the Mac (fallback)
 
 1. Set `version` in `Cargo.toml` (`1.0.0-alpha.1` the first time).
 2. Run `just check`, then `just apk` and `just bundle-mac`.

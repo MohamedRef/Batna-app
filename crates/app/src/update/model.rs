@@ -129,7 +129,7 @@ pub fn notice(s: &Status) -> Option<Notice> {
     let mut whats_new = if offer.changes.is_empty() {
         notes_of(offer)
     } else {
-        changelog::lines_upto(&offer.changes, tx::NOTICE_MORE, 3)
+        changelog::lines_upto(&offer.changes, tx::notice_more, 3)
     };
     if whats_new.chars().count() > 300 {
         whats_new = whats_new.chars().take(299).collect::<String>() + "…";

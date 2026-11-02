@@ -152,6 +152,11 @@ kbd {
    Dashboards (Today, Bank, Cases, Oral, Progress) use up to 80rem; the
    study and reading screens keep the 60rem column of main.css. */
 .tab-cols, .tab-main, .tab-aside { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
+/* A column's cards keep their full height. A sticky column has a max
+   height, and a flex item with overflow (the .hero, a .grouped list) has
+   no min height, so it would shrink and cut its own text and button off
+   instead of letting the column scroll (Today's hero, 2026-11-02). */
+.tab-main > *, .tab-aside > *, .content > .card { flex-shrink: 0; }
 /* Rows take their content's height and cards start at the top: a short
    card beside a tall one never stretches, and a tall one never collapses
    until its heading or button is cut off. */

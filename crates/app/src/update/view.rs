@@ -70,7 +70,7 @@ fn notes(o: &Offer, max: usize) -> String {
     if o.changes.is_empty() {
         super::notes_of(o)
     } else {
-        super::changelog::lines_upto(&o.changes, tx::NOTICE_MORE, max)
+        super::changelog::lines_upto(&o.changes, tx::notice_more, max)
     }
 }
 

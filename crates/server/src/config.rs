@@ -11,6 +11,8 @@ pub struct Config {
     /// Lower-cased emails allowed to sign in (Mohamed's).
     pub allowed_emails: Vec<String>,
     pub token_key: Option<TokenKey>,
+    /// Origins of the web app (docs/WEB.md) whose pages may call the API.
+    pub web_origins: Vec<String>,
 }
 
 #[derive(Debug, thiserror::Error, PartialEq, Eq)]
@@ -41,7 +43,15 @@ impl Config {
                 .map(|v| list(&v).into_iter().map(|e| e.to_lowercase()).collect())
                 .unwrap_or_default(),
             token_key,
+            web_origins: get("WEB_ORIGINS")
+                .map(|v| list(&v).into_iter().map(|o| o.trim_end_matches('/').to_owned()).collect())
+                .unwrap_or_default(),
         })
+    }
+
+    /// The web app's pages get CORS answers; nobody else does.
+    pub fn web_origin_allowed(&self, origin: &str) -> bool {
+        self.web_origins.iter().any(|o| o == origin)
     }
 
     /// Sign-in needs all three.
@@ -66,6 +76,15 @@ mod tests {
     use std::collections::HashMap;
 
     use super::*;
+
+    #[test]
+    fn only_listed_web_origins_are_allowed() {
+        let c = cfg(&[("WEB_ORIGINS", "https://batna-web.x.workers.dev/, http://localhost:8080")]).unwrap();
+        assert!(c.web_origin_allowed("https://batna-web.x.workers.dev"));
+        assert!(c.web_origin_allowed("http://localhost:8080"));
+        assert!(!c.web_origin_allowed("https://evil.example"));
+        assert!(!cfg(&[]).unwrap().web_origin_allowed("https://batna-web.x.workers.dev"));
+    }
 
     fn cfg(pairs: &[(&str, &str)]) -> Result<Config, ConfigError> {
         let map: HashMap<String, String> =

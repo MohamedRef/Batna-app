@@ -1,6 +1,7 @@
 //! The signed-in session. The refresh token lives in the macOS Keychain or
-//! the Android Keystore (through `keyring-core`), never in the database, so
-//! it is never in an export either.
+//! the Android Keystore (through `keyring-core`), and in the web app in the
+//! site's own `localStorage` (`platform::web`); never in the database, so it
+//! is never in an export either.
 // adapted from kabar-app main: crates/app/src/cloud/session.rs
 
 use batna_protocol::cloud::Session;
@@ -15,14 +16,40 @@ pub trait SessionVault: Send {
     fn clear(&self);
 }
 
+/// The browser: the site's own storage, which only this origin can read.
+#[cfg(target_arch = "wasm32")]
+pub struct BrowserVault;
+
+#[cfg(target_arch = "wasm32")]
+impl SessionVault for BrowserVault {
+    fn load(&self) -> Option<Session> {
+        serde_json::from_str(&crate::platform::web::read_pref(BROWSER_KEY)?).ok()
+    }
+
+    fn save(&self, session: &Session) -> bool {
+        crate::platform::web::write_pref(BROWSER_KEY, &serde_json::to_string(session).unwrap_or_default())
+    }
+
+    fn clear(&self) {
+        crate::platform::web::write_pref(BROWSER_KEY, "");
+    }
+}
+
+#[cfg(target_arch = "wasm32")]
+const BROWSER_KEY: &str = "cloud-session";
+
 /// The platform credential store.
+#[cfg(not(target_arch = "wasm32"))]
 pub struct KeyringVault {
     entry: Option<keyring_core::Entry>,
 }
 
+#[cfg(not(target_arch = "wasm32"))]
 const SERVICE: &str = "app.batna.cloud";
+#[cfg(not(target_arch = "wasm32"))]
 const USER: &str = "session";
 
+#[cfg(not(target_arch = "wasm32"))]
 impl KeyringVault {
     pub fn new() -> Self {
         init_default_store();
@@ -33,6 +60,7 @@ impl KeyringVault {
     }
 }
 
+#[cfg(not(target_arch = "wasm32"))]
 impl SessionVault for KeyringVault {
     fn load(&self) -> Option<Session> {
         let json = self.entry.as_ref()?.get_password().ok()?;
@@ -52,6 +80,7 @@ impl SessionVault for KeyringVault {
     }
 }
 
+#[cfg(not(target_arch = "wasm32"))]
 fn init_default_store() {
     static ONCE: std::sync::Once = std::sync::Once::new();
     type Store = keyring_core::Result<std::sync::Arc<keyring_core::CredentialStore>>;
@@ -119,10 +148,10 @@ impl Auth {
     }
 
     /// A valid access token, refreshing (and rotating the refresh token) when
-    /// it is about to expire. Blocking.
-    pub fn access_token(&mut self, api: &Api, now_ms: u64, force: bool) -> Result<String, CloudError> {
+    /// it is about to expire.
+    pub async fn access_token(&mut self, api: &Api, now_ms: u64, force: bool) -> Result<String, CloudError> {
         if force || now_ms + REFRESH_MARGIN_MS >= self.session.access_expires_at_ms {
-            let fresh = api.refresh(&self.session.refresh_token)?;
+            let fresh = api.refresh(&self.session.refresh_token).await?;
             self.session = if self.vault.save(&fresh) {
                 fresh
             } else {

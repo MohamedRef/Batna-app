@@ -1,12 +1,11 @@
-//! Batna Cloud's HTTP API (docs/CLOUD.md §2). Blocking; the engine calls it
-//! from tokio's blocking pool.
+//! Batna Cloud's HTTP API (docs/CLOUD.md §2). Async on every target: on the
+//! Mac and Android a blocking `ureq` call runs on tokio's blocking pool, in
+//! the browser it is a `fetch` (docs/WEB.md).
 // adapted from kabar-app main: crates/app/src/cloud/api.rs (no AI, TTS or usage)
 
-use std::time::Duration;
-
 use batna_protocol::cloud::{ApiError, DeviceList, ErrorCode, GoogleSignIn, RefreshRequest, Session};
+use serde::Serialize;
 use serde::de::DeserializeOwned;
-use ureq::http::Response;
 
 #[derive(Clone, Debug, PartialEq)]
 pub enum CloudError {
@@ -34,6 +33,7 @@ impl CloudError {
 
 #[derive(Clone)]
 pub struct Api {
+    #[cfg(not(target_arch = "wasm32"))]
     agent: ureq::Agent,
     base: String,
 }
@@ -44,13 +44,24 @@ impl std::fmt::Debug for Api {
     }
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Verb {
+    Get,
+    Post,
+    Delete,
+}
+
 impl Api {
     pub fn new(base_url: &str) -> Self {
-        let config = ureq::Agent::config_builder()
-            .http_status_as_error(false)
-            .timeout_global(Some(Duration::from_secs(20)))
-            .build();
-        Self { agent: config.into(), base: base_url.trim_end_matches('/').to_string() }
+        Self {
+            #[cfg(not(target_arch = "wasm32"))]
+            agent: ureq::Agent::config_builder()
+                .http_status_as_error(false)
+                .timeout_global(Some(std::time::Duration::from_secs(20)))
+                .build()
+                .into(),
+            base: base_url.trim_end_matches('/').to_string(),
+        }
     }
 
     /// `wss://…/v1/sync` (or `ws://` for a local server).
@@ -59,60 +70,98 @@ impl Api {
         rest.unwrap_or_else(|| self.base.replacen("http://", "ws://", 1)) + "/v1/sync"
     }
 
-    pub fn sign_in_google(&self, body: &GoogleSignIn) -> Result<Session, CloudError> {
-        let res = self.agent.post(format!("{}/v1/auth/google", self.base)).send_json(body);
-        read(res)
+    pub async fn sign_in_google(&self, body: &GoogleSignIn) -> Result<Session, CloudError> {
+        read(self.call(Verb::Post, "/v1/auth/google", None, Some(json(body)?)).await)
     }
 
-    pub fn refresh(&self, refresh_token: &str) -> Result<Session, CloudError> {
+    pub async fn refresh(&self, refresh_token: &str) -> Result<Session, CloudError> {
         let body = RefreshRequest { refresh_token: refresh_token.into() };
-        read(self.agent.post(format!("{}/v1/auth/refresh", self.base)).send_json(&body))
+        read(self.call(Verb::Post, "/v1/auth/refresh", None, Some(json(&body)?)).await)
     }
 
-    pub fn sign_out(&self, access: &str) -> Result<(), CloudError> {
-        let res =
-            self.agent.post(format!("{}/v1/auth/signout", self.base)).header("authorization", bearer(access));
-        read_empty(res.send_empty())
+    pub async fn sign_out(&self, access: &str) -> Result<(), CloudError> {
+        self.call(Verb::Post, "/v1/auth/signout", Some(access), None).await.map(drop)
     }
 
-    pub fn devices(&self, access: &str) -> Result<DeviceList, CloudError> {
-        read(
-            self.agent
-                .get(format!("{}/v1/devices", self.base))
-                .header("authorization", bearer(access))
-                .call(),
-        )
+    pub async fn devices(&self, access: &str) -> Result<DeviceList, CloudError> {
+        read(self.call(Verb::Get, "/v1/devices", Some(access), None).await)
     }
 
-    pub fn revoke(&self, access: &str, device: &str) -> Result<(), CloudError> {
-        let url = format!("{}/v1/devices/{}", self.base, device);
-        read_empty(self.agent.delete(url).header("authorization", bearer(access)).call())
+    pub async fn revoke(&self, access: &str, device: &str) -> Result<(), CloudError> {
+        self.call(Verb::Delete, &format!("/v1/devices/{device}"), Some(access), None).await.map(drop)
+    }
+
+    /// One request; a 2xx answer's body, or the error it means.
+    async fn call(
+        &self,
+        verb: Verb,
+        path: &str,
+        access: Option<&str>,
+        body: Option<String>,
+    ) -> Result<String, CloudError> {
+        let url = format!("{}{path}", self.base);
+        let bearer = access.map(|a| format!("Bearer {a}"));
+        let (status, text) = self.send(verb, url, bearer, body).await.map_err(CloudError::Network)?;
+        if (200..300).contains(&status) { Ok(text) } else { Err(api_error(status, &text)) }
+    }
+
+    #[cfg(not(target_arch = "wasm32"))]
+    async fn send(
+        &self,
+        verb: Verb,
+        url: String,
+        bearer: Option<String>,
+        body: Option<String>,
+    ) -> Result<(u16, String), String> {
+        let agent = self.agent.clone();
+        crate::platform::time::blocking(move || {
+            let res = match (verb, body) {
+                (Verb::Get, _) => with_auth(agent.get(&url), bearer).call(),
+                (Verb::Delete, _) => with_auth(agent.delete(&url), bearer).call(),
+                (Verb::Post, Some(body)) => with_auth(agent.post(&url), bearer)
+                    .header("content-type", "application/json")
+                    .send(body.as_bytes()),
+                (Verb::Post, None) => with_auth(agent.post(&url), bearer).send_empty(),
+            };
+            let mut res = res.map_err(|e| e.to_string())?;
+            let status = res.status().as_u16();
+            let text = res.body_mut().read_to_string().unwrap_or_default();
+            Ok((status, text))
+        })
+        .await?
+    }
+
+    #[cfg(target_arch = "wasm32")]
+    async fn send(
+        &self,
+        verb: Verb,
+        url: String,
+        bearer: Option<String>,
+        body: Option<String>,
+    ) -> Result<(u16, String), String> {
+        let method = match verb {
+            Verb::Get => "GET",
+            Verb::Post => "POST",
+            Verb::Delete => "DELETE",
+        };
+        crate::platform::web::fetch(method, &url, bearer.as_deref(), body.as_deref()).await
     }
 }
 
-fn bearer(token: &str) -> String {
-    format!("Bearer {token}")
-}
-
-type Res = Result<Response<ureq::Body>, ureq::Error>;
-
-fn read<T: DeserializeOwned>(res: Res) -> Result<T, CloudError> {
-    let mut res = check(res)?;
-    res.body_mut().read_json().map_err(|e| CloudError::Decode(e.to_string()))
-}
-
-fn read_empty(res: Res) -> Result<(), CloudError> {
-    check(res).map(drop)
-}
-
-fn check(res: Res) -> Result<Response<ureq::Body>, CloudError> {
-    let mut res = res.map_err(|e| CloudError::Network(e.to_string()))?;
-    let status = res.status().as_u16();
-    if (200..300).contains(&status) {
-        return Ok(res);
+#[cfg(not(target_arch = "wasm32"))]
+fn with_auth<B>(req: ureq::RequestBuilder<B>, bearer: Option<String>) -> ureq::RequestBuilder<B> {
+    match bearer {
+        Some(b) => req.header("authorization", b),
+        None => req,
     }
-    let text = res.body_mut().read_to_string().unwrap_or_default();
-    Err(api_error(status, &text))
+}
+
+fn json<T: Serialize>(body: &T) -> Result<String, CloudError> {
+    serde_json::to_string(body).map_err(|e| CloudError::Decode(e.to_string()))
+}
+
+fn read<T: DeserializeOwned>(text: Result<String, CloudError>) -> Result<T, CloudError> {
+    serde_json::from_str(&text?).map_err(|e| CloudError::Decode(e.to_string()))
 }
 
 /// Error bodies are [`ApiError`]; anything else (a proxy page, a 502 from

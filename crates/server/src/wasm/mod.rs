@@ -67,8 +67,41 @@ async fn body<T: DeserializeOwned>(req: &mut Request) -> std::result::Result<T, 
 }
 
 fn bearer(req: &Request) -> Option<String> {
-    let h = req.headers().get("authorization").ok().flatten()?;
-    h.strip_prefix("Bearer ").map(|t| t.trim().to_owned())
+    if let Some(h) = req.headers().get("authorization").ok().flatten() {
+        return h.strip_prefix("Bearer ").map(|t| t.trim().to_owned());
+    }
+    // Browsers can't put headers on a WebSocket: the web app's sync socket
+    // brings its access token in the query, and only there (docs/WEB.md).
+    if req.path() != "/v1/sync" {
+        return None;
+    }
+    let url = req.url().ok()?;
+    url.query_pairs().find(|(k, _)| k == "access_token").map(|(_, v)| v.into_owned())
+}
+
+/// The web app's origin, when this request comes from one of its pages.
+fn web_origin(req: &Request, cfg: &Config) -> Option<String> {
+    let origin = req.headers().get("origin").ok().flatten()?;
+    cfg.web_origin_allowed(&origin).then_some(origin)
+}
+
+/// CORS for the web app: its own origin only, never `*`. A WebSocket answer
+/// (101) passes through untouched.
+fn with_cors(res: Response, origin: &str) -> Result<Response> {
+    if res.status_code() == 101 {
+        return Ok(res);
+    }
+    // A Durable Object's response has read-only headers: copy them.
+    let headers = Headers::new();
+    for (k, v) in res.headers().entries() {
+        headers.set(&k, &v)?;
+    }
+    headers.set("access-control-allow-origin", origin)?;
+    headers.set("access-control-allow-headers", "authorization, content-type")?;
+    headers.set("access-control-allow-methods", "GET, POST, DELETE, OPTIONS")?;
+    headers.set("access-control-max-age", "86400")?;
+    headers.set("vary", "origin")?;
+    Ok(res.with_headers(headers))
 }
 
 fn authenticate(req: &Request, key: &TokenKey) -> std::result::Result<AccessClaims, Result<Response>> {
@@ -240,13 +273,24 @@ async fn fetch(req: Request, env: Env, _ctx: Context) -> Result<Response> {
     let cfg = config(&env);
     let path = req.path();
     let method = req.method();
-    let result = route(req, &env, &cfg, method, &path).await;
-    match result {
+    let origin = web_origin(&req, &cfg);
+    if method == Method::Options {
+        // A preflight from the web app; anyone else gets no CORS answer.
+        return match origin {
+            Some(o) => with_cors(Response::empty()?.with_status(204), &o),
+            None => Ok(Response::empty()?.with_status(204)),
+        };
+    }
+    let result = match route(req, &env, &cfg, method, &path).await {
         Ok(r) => Ok(r),
         Err(e) => {
             console_error!("{path}: {e}");
             api_error(ErrorCode::Internal, "something went wrong on Batna Cloud")
         }
+    };
+    match origin {
+        Some(o) => with_cors(result?, &o),
+        None => result,
     }
 }
 

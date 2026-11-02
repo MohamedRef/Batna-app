@@ -20,23 +20,28 @@ use serde::{Deserialize, Serialize};
 
 pub use crate::content::CalcValue;
 
+mod aa_gradient;
 mod aki;
 mod albi;
 mod apri;
 mod ascitic;
 mod bclc;
 mod bisap;
+mod bun_cr;
 mod child_pugh;
+mod ckd;
 mod clichy;
 mod cockcroft;
 mod diabetes;
 mod fib4;
+mod free_water;
 mod gbs;
 mod glasgow;
 mod ipss_mf;
 mod kings;
 mod maddrey;
 mod meld;
+mod plasmic;
 mod r_ratio;
 mod ra2010;
 mod ranson;
@@ -374,6 +379,12 @@ static REGISTRY: &[CalcSpec] = &[
     aki::KDIGO,
     aki::FENA,
     aki::FEUREA,
+    bun_cr::SPEC,
+    ckd::EGFR,
+    ckd::STAGE,
+    aa_gradient::SPEC,
+    free_water::SPEC,
+    plasmic::SPEC,
     cockcroft::SPEC,
     ra2010::SPEC,
     diabetes::CORRECTED_NA,
@@ -511,6 +522,24 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("fena.atn", &["atn", "tubular necrosis"]),
     ("feurea.prerenal", &["prerenal", "pre-renal"]),
     ("feurea.atn", &["atn", "tubular necrosis"]),
+    ("bun_creatinine.prerenal", &["prerenal", "pre-renal"]),
+    ("bun_creatinine.atn", &["atn", "tubular necrosis"]),
+    ("bun_creatinine.indeterminate", &["indeterminate"]),
+    ("ckd_epi_2021.g1", &["g1"]),
+    ("ckd_epi_2021.g2", &["g2"]),
+    ("ckd_epi_2021.g3a", &["g3a"]),
+    ("ckd_epi_2021.g3b", &["g3b"]),
+    ("ckd_epi_2021.g4", &["g4"]),
+    ("ckd_epi_2021.g5", &["g5"]),
+    ("kdigo_ckd.low", &["low risk"]),
+    ("kdigo_ckd.moderate", &["moderately increased"]),
+    ("kdigo_ckd.high", &["high risk"]),
+    ("kdigo_ckd.very_high", &["very high risk", "very high"]),
+    ("aa_gradient.high", &["raised", "high"]),
+    ("aa_gradient.normal", &["normal"]),
+    ("plasmic.high", &["high"]),
+    ("plasmic.intermediate", &["intermediate"]),
+    ("plasmic.low", &["low"]),
 ];
 
 /// The bands of `band`'s calculator that `text` names, longest phrase first.

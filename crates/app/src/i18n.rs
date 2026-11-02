@@ -1056,6 +1056,28 @@ pub mod calc {
             ("acr_eular_2010_ra", "small_joints") => {
                 "الـ MCP والـ PIP والـ MTP من ٢ لـ ٥ والـ IP بتاع الإبهام والرسغ."
             }
+            ("caspar", "inflammatory_disease") => "شرط الدخول: CASPAR بتتطبّق عليه بس.",
+            ("asas_axial_spa", "back_pain_3_months_onset_45") => {
+                "شرط الدخول (ASAS 2009)؛ الكتاب ص295 بيقول بدأ قبل 40–45."
+            }
+            ("asas_axial_spa", "sacroiliitis_imaging") => {
+                "التهاب نشط على الـ MRI، أو أشعة grade 2 في الناحيتين أو 3–4 في ناحية."
+            }
+            ("asas_axial_spa", "ibp") => {
+                "بدأ قبل 45، بالتدريج، أكتر من 3 شهور، بالليل، بيتحسن بالحركة مش بالراحة."
+            }
+            ("asas_peripheral_spa", "preceding_infection") => {
+                "التهاب مجرى البول أو عنق الرحم أو إسهال قبل المفاصل."
+            }
+            ("modified_new_york", "si_grade_right") => "الأشعة: 0 طبيعي، 1 مشكوك، 2 بسيط، 3 متوسط، 4 التحام.",
+            ("sle_acr_1997", "renal") => "بروتين في البول أكتر من 0.5 جم/يوم، أو خلايا أو casts.",
+            ("sle_acr_1997", "neurological") => "تشنجات أو ذهان.",
+            ("sle_acr_1997", "haematological") => "أنيميا انحلالية، أو نقص كرات بيضا أو ليمفاوية أو صفايح.",
+            ("sle_acr_1997", "immunological") => "Anti-dsDNA أو anti-Sm أو anticardiolipin.",
+            ("sle_eular_acr_2019", "ana_1_80") => "شرط الدخول.",
+            ("sle_eular_acr_2019", "antiphospholipid") => {
+                "Anticardiolipin IgG أكتر من 40، أو anti-β2GP1 IgG أكتر من 40، أو lupus anticoagulant."
+            }
             ("effective_osmolality", "urea_mmol_l") => "للأوزمولاليتي الكلية. اليوريا بالـ mg/dL ÷ 6.",
             ("feurea", "urine_urea_mg_dl") => "يوريا أو BUN، بس بنفس وحدة البلازما.",
             ("anion_gap", "albumin_g_dl") => "بيصحح الـ gap لو الألبومين واطي.",
@@ -1125,6 +1147,14 @@ pub mod calc {
             "feurea" => "زي الـ FENa، بس بينفع والعيان على مدرّات",
             "cockcroft_gault" => "تصفية الكرياتينين لظبط جرعات الدوا، خصوصًا في المسنين",
             "acr_eular_2010_ra" => "تشخيص الـ rheumatoid arthritis: 6 من 10 أو أكتر",
+            "caspar" => "تشخيص الـ psoriatic arthritis: 3 نقط أو أكتر",
+            "asas_axial_spa" => "الـ axial SpA بالأشعة أو بالـ HLA-B27، حتى قبل ما تبان في الأشعة",
+            "asas_peripheral_spa" => "الـ SpA في المفاصل الطرفية: arthritis أو enthesitis أو dactylitis",
+            "modified_new_york" => "تشخيص الـ ankylosing spondylitis بالأشعة والكشف",
+            "sle_acr_1997" => "تشخيص الذئبة الحمراء: 4 من 11 أو أكتر",
+            "sle_eular_acr_2019" => "تشخيص الذئبة بالنقط: ANA وبعدين 10 نقط أو أكتر",
+            "gpa_2022" => "تصنيف الـ GPA (Wegener) بالنقط: 5 أو أكتر",
+            "mpa_2022" => "تصنيف الـ microscopic polyangiitis بالنقط: 5 أو أكتر",
             "corrected_sodium" => "الصوديوم الحقيقي لما السكر عالي",
             "effective_osmolality" => "أوزمولاليتي الدم لتشخيص الـ HHS",
             "ipss_mf" => "التوقّع في الـ primary myelofibrosis",

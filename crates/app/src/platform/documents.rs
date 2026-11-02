@@ -59,7 +59,7 @@ pub fn state() -> DocState {
 pub async fn finished() -> DocState {
     loop {
         match state() {
-            DocState::Busy => tokio::time::sleep(POLL).await,
+            DocState::Busy => crate::platform::time::sleep(POLL).await,
             done => return done,
         }
     }

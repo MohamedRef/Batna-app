@@ -64,7 +64,7 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
     let playable: Vec<String> = playable.into_iter().filter(|id| !before.graded.contains(id)).collect();
     let mut at = use_signal(|| 0usize);
     let mut again = use_signal(|| before.again as usize);
-    let mut started = use_signal(std::time::Instant::now);
+    let mut started = use_signal(web_time::Instant::now);
     let mut reported = use_signal(|| false);
     use_effect(move || {
         // Nothing playable, or every card graded before he left mid-step.
@@ -103,7 +103,7 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
                     }
                     t.save.call(());
                 }
-                started.set(std::time::Instant::now());
+                started.set(web_time::Instant::now());
                 let next = at() + 1;
                 at.set(next);
                 if next + n_before == n && !reported() {

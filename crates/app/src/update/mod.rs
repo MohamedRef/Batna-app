@@ -44,10 +44,12 @@ pub mod sheet;
 pub mod view;
 
 use std::fs;
+#[cfg_attr(target_arch = "wasm32", allow(unused_imports))] // the downloads (native only)
 use std::io::{Read as _, Write as _};
 use std::path::{Path, PathBuf};
 use std::sync::{Mutex, OnceLock};
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
+use std::time::Duration;
+use web_time::{SystemTime, UNIX_EPOCH};
 
 use batna_core::pack::Pack;
 use batna_core::update::{
@@ -434,13 +436,15 @@ fn update_failure(e: UpdateError) -> Failure {
     }
 }
 
-/// An HTTP agent; local development feeds skip any proxy in the environment.
 /// The first byte of a partial HTTP response, if it supplies a valid range.
+#[cfg(not(target_arch = "wasm32"))]
 fn range_start<B>(res: &ureq::http::Response<B>) -> Option<u64> {
     let value = res.headers().get("content-range")?.to_str().ok()?;
     value.strip_prefix("bytes ")?.split('-').next()?.trim().parse().ok()
 }
 
+/// An HTTP agent; local development feeds skip any proxy in the environment.
+#[cfg(not(target_arch = "wasm32"))]
 fn agent(url: &str, timeout: Duration) -> ureq::Agent {
     let local = url.starts_with("http://127.0.0.1") || url.starts_with("http://localhost");
     let mut config = ureq::Agent::config_builder().http_status_as_error(false).timeout_global(Some(timeout));
@@ -493,6 +497,7 @@ fn get_small(url: &str) -> Result<Vec<u8>, Failure> {
 }
 
 /// The body, cut one byte past `limit` (so a caller can tell it was longer).
+#[cfg(not(target_arch = "wasm32"))]
 fn get_limited(url: &str, limit: u64, timeout: Duration) -> Result<Vec<u8>, Failure> {
     let mut res = agent(url, timeout).get(url).call().map_err(|_| Failure::Network)?;
     if res.status().as_u16() != 200 {
@@ -501,6 +506,12 @@ fn get_limited(url: &str, limit: u64, timeout: Duration) -> Result<Vec<u8>, Fail
     let mut bytes = Vec::new();
     res.body_mut().as_reader().take(limit + 1).read_to_end(&mut bytes).map_err(|_| Failure::Network)?;
     Ok(bytes)
+}
+
+/// The web build never updates itself: each deploy is the newest build.
+#[cfg(target_arch = "wasm32")]
+fn get_limited(_url: &str, _limit: u64, _timeout: Duration) -> Result<Vec<u8>, Failure> {
+    Err(Failure::Network)
 }
 
 fn load_prefs(dir: &Path) -> Prefs {

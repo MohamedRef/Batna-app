@@ -27,6 +27,13 @@ pub fn ExportVerdicts() -> Element {
         };
         // His local date, not UTC: an export at 1 am must not overwrite yesterday's (#36).
         let date = crate::store::zone().calendar_day(now).iso();
+        #[cfg(target_arch = "wasm32")]
+        let saved = crate::platform::web::download(
+            &format!("batna-verdicts-{date}.yaml"),
+            "application/yaml",
+            yaml.as_bytes(),
+        );
+        #[cfg(not(target_arch = "wasm32"))]
         let saved = export_dir().and_then(|dir| {
             let path = dir.join(format!("batna-verdicts-{date}.yaml"));
             std::fs::write(&path, &yaml).map(|_| path.display().to_string()).map_err(|e| e.to_string())

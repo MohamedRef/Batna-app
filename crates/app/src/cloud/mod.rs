@@ -7,19 +7,37 @@
 //! is shared with Kabar Cloud. See docs/CLOUD.md.
 // adapted from kabar-app main: crates/app/src/cloud/mod.rs
 
+// The engine runs on its own thread with tokio's network stack; the web
+// build syncs through the browser instead (phase 2 of docs/WEB.md).
+#[cfg(not(target_arch = "wasm32"))]
 pub mod api;
+#[cfg(not(target_arch = "wasm32"))]
 pub mod engine;
+#[cfg(not(target_arch = "wasm32"))]
 pub mod oauth;
+#[cfg(not(target_arch = "wasm32"))]
 pub mod session;
 mod ui;
 
 use std::collections::BTreeSet;
+#[cfg(not(target_arch = "wasm32"))]
 use std::path::PathBuf;
 
 use batna_protocol::cloud::{DeviceInfo, DeviceSummary, Platform};
-use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender, unbounded_channel};
+#[cfg(not(target_arch = "wasm32"))]
+use tokio::sync::mpsc::unbounded_channel;
+use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 
+#[cfg(not(target_arch = "wasm32"))]
 use self::oauth::GoogleClient;
+
+/// The Google client the web build would sign in with (phase 2).
+#[cfg(target_arch = "wasm32")]
+#[derive(Clone, Debug)]
+pub struct GoogleClient {
+    pub client_id: String,
+    pub client_secret: Option<String>,
+}
 pub use ui::{SyncSection, ago, use_provide_cloud};
 
 /// Where Batna Cloud is and which Google client signs in. Set at build time
@@ -33,6 +51,13 @@ pub struct CloudConfig {
 }
 
 impl CloudConfig {
+    /// The web build doesn't sync yet: Settings › Sync says so.
+    #[cfg(target_arch = "wasm32")]
+    pub fn from_env() -> Option<Self> {
+        None
+    }
+
+    #[cfg(not(target_arch = "wasm32"))]
     pub fn from_env() -> Option<Self> {
         let var = |name: &str, built: Option<&'static str>| {
             std::env::var(name).ok().or(built.map(String::from)).filter(|v| !v.trim().is_empty())
@@ -137,6 +162,7 @@ pub struct CloudHandle {
 
 /// Starts the engine on its own thread. `db_path` is opened a second time
 /// (SQLite WAL), so the UI's connection never waits on the network.
+#[cfg(not(target_arch = "wasm32"))]
 pub fn start(
     config: CloudConfig,
     db_path: PathBuf,
@@ -211,7 +237,12 @@ pub fn open_url(url: &str) -> Result<(), String> {
     {
         android_open_url(url)
     }
-    #[cfg(not(target_os = "android"))]
+    #[cfg(target_arch = "wasm32")]
+    {
+        let window = web_sys::window().ok_or("no window")?;
+        window.open_with_url_and_target(url, "_blank").map(drop).map_err(|e| format!("{e:?}"))
+    }
+    #[cfg(not(any(target_os = "android", target_arch = "wasm32")))]
     {
         let opener = if cfg!(target_os = "macos") { "open" } else { "xdg-open" };
         std::process::Command::new(opener).arg(url).spawn().map(drop).map_err(|e| format!("{opener}: {e}"))

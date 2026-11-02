@@ -51,6 +51,16 @@ pub fn save(store: &Store, dir: &Path, date: &str, now_ms: i64) -> Result<(PathB
     Ok((path, export.rows))
 }
 
+/// The web: the same export as a browser download; returns its name and rows.
+#[cfg(target_arch = "wasm32")]
+fn download(store: &Store, date: &str, now_ms: i64) -> Result<(String, u64), String> {
+    let export = store.export(env!("CARGO_PKG_VERSION"), now_ms).map_err(|e| e.to_string())?;
+    let mut text = serde_json::to_vec_pretty(&export.document).map_err(|e| e.to_string())?;
+    text.push(b'\n');
+    let name = format!("batna-export-{date}.json");
+    crate::platform::web::download(&name, "application/json", &text).map(|n| (n, export.rows))
+}
+
 /// Android: hands a file the app just wrote to the system "Save to" dialog
 /// (Downloads, Drive …), once on its own, then again on a tap. Key it by
 /// attempt so each new export opens the dialog.
@@ -97,6 +107,9 @@ pub fn ExportCard() -> Element {
     // Each export opens the "Save to" dialog afresh.
     let mut attempt = use_signal(|| 0u32);
     let mut run = move || {
+        #[cfg(target_arch = "wasm32")]
+        let result = download(store::shared(), &local_date(), store::now_ms());
+        #[cfg(not(target_arch = "wasm32"))]
         let result = store::export_dir()
             .and_then(|dir| save(store::shared(), &dir, &local_date(), store::now_ms()))
             .map(|(p, rows)| (p.display().to_string(), rows));

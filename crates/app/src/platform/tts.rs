@@ -72,18 +72,18 @@ pub fn longest(text: &str) -> Duration {
 #[cfg(target_os = "android")]
 async fn wait_android(text: &str) {
     const POLL: Duration = Duration::from_millis(150);
-    let started = std::time::Instant::now();
+    let started = web_time::Instant::now();
     let limit = longest(text) + tts_android::CONNECT_TIMEOUT;
     let mut heard = false;
     // When the engine was up and nothing started within this, it never will.
-    let mut silent_since: Option<std::time::Instant> = None;
+    let mut silent_since: Option<web_time::Instant> = None;
     while started.elapsed() < limit {
-        tokio::time::sleep(POLL).await;
+        crate::platform::time::sleep(POLL).await;
         match tts_android::is_speaking() {
             Ok(true) => heard = true,
             Ok(false) if heard => return,
             Ok(false) if tts_android::idle() => {
-                let since = *silent_since.get_or_insert_with(std::time::Instant::now);
+                let since = *silent_since.get_or_insert_with(web_time::Instant::now);
                 if since.elapsed() > Duration::from_millis(2_500) {
                     return;
                 }
@@ -123,7 +123,7 @@ async fn say_webview(text: &str, rate: f32) -> Result<(), SpeakError> {
         rate = rate,
     );
     let limit = longest(text) + Duration::from_secs(2);
-    let result = tokio::time::timeout(limit, dioxus::document::eval(&js).join::<String>()).await;
+    let result = crate::platform::time::timeout(limit, dioxus::document::eval(&js).join::<String>()).await;
     match result {
         Ok(Ok(r)) if r == "ok" => Ok(()),
         Ok(Ok(r)) if r == "none" => Err(SpeakError::NoEngine),

@@ -337,7 +337,7 @@ pub fn grade_for(right: u32, total: u32) -> Grade {
 }
 
 pub fn now_ms() -> i64 {
-    use std::time::{SystemTime, UNIX_EPOCH};
+    use web_time::{SystemTime, UNIX_EPOCH};
     SystemTime::now().duration_since(UNIX_EPOCH).map_or(0, |d| d.as_millis() as i64)
 }
 

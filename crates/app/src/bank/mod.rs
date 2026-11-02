@@ -9,7 +9,7 @@ mod result;
 mod setup;
 
 use std::sync::atomic::{AtomicBool, Ordering};
-use std::time::{SystemTime, UNIX_EPOCH};
+use web_time::{SystemTime, UNIX_EPOCH};
 
 use batna_core::content::Body;
 use batna_core::content::{Item, Lecture};

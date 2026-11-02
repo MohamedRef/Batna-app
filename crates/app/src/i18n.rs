@@ -1272,6 +1272,7 @@ pub mod cloud {
     pub const SECTION_SUB: &str = "حسابك وأجهزتك";
     pub const TITLE: &str = "المزامنة بين أجهزتك";
     pub const NOT_CONFIGURED: &str = "المزامنة لسه ما اتفعّلتش في النسخة دي. مذاكرتك محفوظة على الجهاز، وتقدر تنقلها بنسخة احتياطية من «بياناتك».";
+    pub const NOT_ON_WEB_YET: &str = "نسخة الويب لسه ما بتزامنش مع Batna Cloud (جاية قريب). مذاكرتك محفوظة في المتصفح ده، وتقدر تنقلها بنسخة احتياطية من «بياناتك».";
     pub const SIGN_IN: &str = "سجّل دخول بجوجل";
     pub const SIGNING_IN: &str = "كمّل تسجيل الدخول في المتصفح، وبعدين ارجع هنا.";
     /// The browser page after Google sends him back (HTML).
@@ -1379,6 +1380,8 @@ pub mod settings {
 
     pub const DATA_FOLDER: &str = "فولدر البيانات";
     pub const DATA_NOWHERE: &str = "مش معروف على الجهاز ده";
+    pub const DATA_IN_BROWSER: &str =
+        "في المتصفح ده (IndexedDB). مسح بيانات الموقع بيمسحها، فخد نسخة احتياطية من فوق من وقت للتاني.";
     pub const DATA_GROUP_BACKUP: &str = "احفظ ورجّع";
     pub const DATA_GROUP_EXPORT: &str = "صدّر لبرّه";
     pub const DATA_GROUP_DEVICE: &str = "على الجهاز ده";

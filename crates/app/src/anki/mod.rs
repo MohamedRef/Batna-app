@@ -159,8 +159,8 @@ fn export_now<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(
         program: Some(&crate::content::Library::get().program),
     };
     let deck = batna_anki::build(&lectures, &opts);
-    let now_ms = std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH)
+    let now_ms = web_time::SystemTime::now()
+        .duration_since(web_time::UNIX_EPOCH)
         .map(|d| d.as_millis() as i64)
         .unwrap_or(0);
     let bytes = batna_anki::to_apkg(&deck, now_ms)?;
@@ -173,7 +173,13 @@ fn save_and_open(bytes: &[u8]) -> Result<String, String> {
     android::save_and_open(FILE_NAME, bytes)
 }
 
-#[cfg(not(target_os = "android"))]
+/// The web: the deck downloads; the browser offers to open it in Anki.
+#[cfg(target_arch = "wasm32")]
+fn save_and_open(bytes: &[u8]) -> Result<String, String> {
+    crate::platform::web::download(FILE_NAME, "application/octet-stream", bytes)
+}
+
+#[cfg(not(any(target_os = "android", target_arch = "wasm32")))]
 fn save_and_open(bytes: &[u8]) -> Result<String, String> {
     let home =
         std::env::var_os("HOME").or_else(|| std::env::var_os("USERPROFILE")).ok_or("no home folder")?;

@@ -297,19 +297,6 @@ pub enum Area {
     Research,
 }
 
-// TEMPORARY shim until the shared `calc::guide` PR lands; drop on rebase.
-/// What to do next and what else to think of, for one result band.
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct Guide {
-    pub next: &'static [&'static str],
-    pub dd: &'static [&'static str],
-}
-
-/// The next step and differential diagnosis for a band, when written.
-pub fn guide(band: &str) -> Option<&'static Guide> {
-    [spa::GUIDES, sle::GUIDES, aav::GUIDES].into_iter().flatten().find(|(b, _)| *b == band).map(|(_, g)| g)
-}
-
 pub struct CalcSpec {
     /// The id used in content (`calculator: child_pugh`).
     pub id: &'static str,
@@ -341,7 +328,7 @@ pub struct Guide {
 
 // One line per module that has guides, so branches adding them don't touch
 // the same line.
-static GUIDE_LISTS: &[&[(&str, Guide)]] = &[];
+static GUIDE_LISTS: &[&[(&str, Guide)]] = &[spa::GUIDES, sle::GUIDES, aav::GUIDES];
 
 /// The next step and differential for a band id (`cam.positive`), if
 /// written.

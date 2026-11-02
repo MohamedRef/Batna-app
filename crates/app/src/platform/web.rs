@@ -34,10 +34,14 @@ export async function idb_get(key) {
   });
 }
 export async function idb_put(key, bytes) {
+  // `bytes` is a view into wasm memory: copy it before anything awaits (memory
+  // may grow and detach it), and so IndexedDB stores only these bytes, not the
+  // whole memory the view sits in.
+  const copy = bytes.slice();
   const db = await open();
   await new Promise((ok, fail) => {
     const tx = db.transaction(STORE, "readwrite");
-    tx.objectStore(STORE).put(bytes, key);
+    tx.objectStore(STORE).put(copy, key);
     tx.oncomplete = () => ok();
     tx.onerror = () => fail(tx.error);
     tx.onabort = () => fail(tx.error);

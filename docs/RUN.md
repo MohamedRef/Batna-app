@@ -25,9 +25,6 @@ Release builds (`just apk`, `just install-android`, `just bundle-mac`), their on
 ## Web (any browser)
 The same app, compiled to WebAssembly (the Crafting Apps way: one Rust codebase for every platform). It is deployed by `.github/workflows/web-deploy.yml` on every merge to `main` that touches the app or the content, at `https://batna-web.hamorefaat85.workers.dev` (open it, then “Add to Home Screen” or “Install app” if you like). Your progress is kept in that browser (IndexedDB), so take a backup (Settings › بياناتك) now and then; sync with Batna Cloud in the browser is the next step. Locally: `cargo install wasm-bindgen-cli@<the version in Cargo.lock> --locked` once, then `just web` and open http://localhost:8080. Details in [WEB.md](WEB.md).
 
-## Web (any browser)
-The same app, compiled to WebAssembly (the Crafting Apps way: one Rust codebase for every platform). It is deployed by `.github/workflows/web-deploy.yml` on every merge to `main` that touches the app or the content, at `https://batna-web.hamorefaat85.workers.dev` (open it, then “Add to Home Screen” or “Install app” if you like). Your progress is kept in that browser (IndexedDB), so take a backup (Settings › بياناتك) now and then; sync with Batna Cloud in the browser is the next step. Locally: `cargo install wasm-bindgen-cli@<the version in Cargo.lock> --locked` once, then `just web` and open http://localhost:8080. Details in [WEB.md](WEB.md).
-
 ## Study in Anki now
 One file, `/mnt/project-files/medstudy/anki/batna.apkg`, holds every written lecture as a subdeck of `Batna`. Open it with AnkiDroid on the phone or tablet, or with Anki on the Mac. Importing a newer `batna.apkg` updates the cards in place and keeps your progress. `just anki` builds it into `dist/anki/`; details in [ANKI.md](ANKI.md).
 

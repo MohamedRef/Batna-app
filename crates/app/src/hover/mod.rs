@@ -1,5 +1,5 @@
 //! Hover peeks with the S Pen or the mouse (PARITY.md §6.3, §6.4): a glossary
-//! word's expansion, a book page's short quote, an MCQ option's `why`. The
+//! word's expansion, a book page's quote, an MCQ option's `why`. The
 //! pointer work is in `assets/hover.js`; this side hands it the glossary and
 //! gives feature screens [`BookPage`].
 
@@ -56,23 +56,24 @@ pub fn BookPage(
     /// hepatology book.
     #[props(default)]
     of: String,
+    /// The تحشيشة of the list the quote holds, shown with it in the sheet.
+    #[props(default)]
+    hook: Option<crate::pagesheet::Hook>,
 ) -> Element {
-    let peek = quote.clone().unwrap_or_default();
+    let peek = quote.as_deref().map(batna_core::quote::plain).unwrap_or_default();
     let slides = crate::content::Library::get().program.slides(&of);
     let label = if slides { crate::i18n::cite::slide(page) } else { crate::i18n::cite::page(page) };
-    let note = if slides { crate::i18n::hover::FROM_SLIDE } else { crate::i18n::hover::FROM_BOOK };
     let hint = if slides { crate::i18n::book::SLIDE_HINT } else { crate::i18n::book::CHIP_HINT };
     rsx! {
         button {
             class: "chip page tap-chip",
             "data-peek": peek,
-            "data-peek-note": note,
             aria_label: "{hint} {page}",
             aria_haspopup: "dialog",
             onclick: move |e| {
                 // Inside a card or row that has its own action, the chip only opens the page.
                 e.stop_propagation();
-                crate::pagesheet::open(page, &of, quote.clone(), held);
+                crate::pagesheet::open(page, &of, quote.clone(), held, hook.clone());
             },
             bdi { {label} }
         }

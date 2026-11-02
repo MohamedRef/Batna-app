@@ -29,8 +29,6 @@ pub struct Context<'a> {
     pub approved: Option<&'a BTreeSet<String>>,
 }
 
-pub const MAX_QUOTE_WORDS: usize = 25;
-
 pub fn lecture(lec: &Lecture, cx: &Context<'_>) -> Vec<Problem> {
     let mut out = Vec::new();
     let mut bad = |at: &str, message: String| out.push(Problem { at: at.to_string(), message });
@@ -78,11 +76,6 @@ pub fn lecture(lec: &Lecture, cx: &Context<'_>) -> Vec<Problem> {
         }
         if item.src.page < first || item.src.page > last {
             bad(at, format!("src.page {} is outside the lecture (pages {first}-{last})", item.src.page));
-        }
-        if let Some(q) = &item.src.quote
-            && q.split_whitespace().count() > MAX_QUOTE_WORDS
-        {
-            bad(at, format!("quote is longer than {MAX_QUOTE_WORDS} words (book text stays out of git)"));
         }
         if item.status == Status::Approved && !cx.approved.is_some_and(|a| a.contains(at)) {
             bad(
@@ -357,10 +350,10 @@ mod tests {
     }
 
     #[test]
-    fn unknown_keys_and_long_quotes_are_flagged() {
+    fn unknown_keys_are_flagged_and_long_quotes_are_not() {
         let l = lec(&format!(
             "{HEAD}items:\n  - {{ id: hb.L01.001, kind: card, front: a, back: b, src: {{ page: 3, quote: '{}' }}, status: unverified }}\n",
-            "word ".repeat(26)
+            "word ".repeat(120)
         ));
         let cx = Context {
             raw_keys: [("hb.L01.001".to_string(), vec!["front".into(), "back".into(), "answer".into()])]
@@ -369,7 +362,8 @@ mod tests {
         };
         let msgs: Vec<String> = lecture(&l, &cx).iter().map(|p| p.to_string()).collect();
         assert!(msgs.iter().any(|m| m.contains("unknown key `answer`")), "{msgs:#?}");
-        assert!(msgs.iter().any(|m| m.contains("longer than 25 words")));
+        // No length cap on quotes (Mohamed, 2026-10-29): a whole table is fine.
+        assert!(!msgs.iter().any(|m| m.contains("quote")), "{msgs:#?}");
     }
 
     #[test]

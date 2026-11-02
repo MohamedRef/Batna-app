@@ -236,7 +236,9 @@ pub mod abbr {
 pub mod book {
     pub const TITLE: &str = "صفحة الكتاب";
     pub const NO_LECTURE: &str = "الصفحة دي برّه المحاضرات اللي في باطنة.";
-    pub const QUOTE_HELD: &str = "سطر الكتاب هيظهر هنا بعد ما تجاوب، عشان مايكشفش الإجابة.";
+    pub const QUOTE_HELD: &str = "كلام الكتاب هيظهر هنا بعد ما تجاوب، عشان مايكشفش الإجابة.";
+    /// Above the تحشيشة shown under a quote.
+    pub const HOOK: &str = "تحشيشة";
     pub const MADE: &str = "اللي في باطنة من الصفحة دي:";
     pub const NOTHING_YET: &str = "لسه مفيش كروت أو أسئلة من الصفحة دي.";
     pub const STUDY: &str = "ذاكر الصفحة دي";
@@ -1015,6 +1017,10 @@ pub mod calc {
     pub const MEANS: &str = "يعني إيه";
     pub const BREAKDOWN: &str = "التفاصيل";
     pub const SOURCE: &str = "المصدر";
+    /// Over the next steps for a result (`calc::guide`).
+    pub const NEXT_STEP: &str = "الخطوة الجاية";
+    /// Over the differential diagnosis for a result (`calc::guide`).
+    pub const DD: &str = "التشخيص التفريقي";
     pub const RESET: &str = "امسح";
     pub const BACK: &str = "كل الحاسبات";
     pub const AREA_LIVER: &str = "الكبد";
@@ -1204,9 +1210,6 @@ pub mod hover {
     pub const MOUSE_NOTE: &str =
         "سيب الماوس ثانية على الكلمة، أو على رقم صفحة الكتاب، أو على اختيار بعد ما تجاوب.";
     pub const UNVERIFIED: &str = "لسه ما اتراجعش";
-    /// Under a book quote shown from the page chip.
-    pub const FROM_BOOK: &str = "من الكتاب بالنص";
-    pub const FROM_SLIDE: &str = "من السلايد بالنص";
     pub const TERMS: &str = "مصطلح في القاموس";
 }
 

@@ -12,6 +12,7 @@ pub mod own;
 pub mod pack;
 pub mod plan;
 pub mod program;
+pub mod quote;
 pub mod response;
 pub mod review;
 pub mod session;

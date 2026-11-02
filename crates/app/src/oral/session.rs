@@ -21,7 +21,7 @@ pub struct Prompt {
     pub topic: Option<String>,
     /// Printed book page, to check the answer against.
     pub page: u32,
-    /// The book's own words (≤25), shown when the page chip is hovered.
+    /// The book's own words, shown when the page chip is hovered.
     pub quote: Option<String>,
     /// What is read aloud and shown, in English. A case has its stem first.
     pub question: Vec<String>,

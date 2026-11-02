@@ -194,6 +194,21 @@ pub fn squash(s: &str) -> String {
     s.chars().filter(|c| c.is_ascii_alphanumeric()).map(|c| c.to_ascii_lowercase()).collect()
 }
 
+/// Drops the "o" sub-bullet marker that starts a line ("    o   Fatigue."),
+/// so a quote spanning several bullets still matches the page text.
+pub fn drop_o_bullets(t: &str) -> String {
+    t.lines()
+        .map(|l| {
+            let s = l.trim_start();
+            match s.strip_prefix('o') {
+                Some(rest) if rest.starts_with(char::is_whitespace) => rest,
+                _ => l,
+            }
+        })
+        .collect::<Vec<_>>()
+        .join("\n")
+}
+
 /// A short stable hash of a quote, so the lock notices any change to it.
 pub fn quote_hash(quote: Option<&str>) -> String {
     match quote.map(squash).filter(|q| !q.is_empty()) {
@@ -548,7 +563,8 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
             None => Path::new(COURSES).join(chapter).join("verdicts"),
         };
         let page_terms: BTreeMap<u32, BTreeSet<String>> = pages.iter().map(|(p, t)| (*p, terms(t))).collect();
-        let squashed: BTreeMap<u32, String> = pages.iter().map(|(p, t)| (*p, squash(t))).collect();
+        let squashed: BTreeMap<u32, String> =
+            pages.iter().map(|(p, t)| (*p, squash(&drop_o_bullets(t)))).collect();
         let mut df: HashMap<String, usize> = HashMap::new();
         for t in page_terms.values() {
             for w in t {
@@ -669,6 +685,13 @@ mod tests {
         assert_eq!(quote_hash(None), "-");
         assert_eq!(quote_hash(Some("A b")), quote_hash(Some("a, B")));
         assert_ne!(quote_hash(Some("zone 1")), quote_hash(Some("zone 3")));
+    }
+
+    #[test]
+    fn o_bullets_do_not_break_a_quote() {
+        let page = "Toxicity:\n    o   Fatigue.\n    o   Fever.\none line";
+        assert!(squash(&drop_o_bullets(page)).contains(&squash("Toxicity:\n  Fatigue.\n  Fever.")));
+        assert!(squash(&drop_o_bullets(page)).contains("oneline"));
     }
 
     #[test]

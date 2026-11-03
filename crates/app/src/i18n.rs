@@ -1103,6 +1103,12 @@ pub mod calc {
             ("diagnostic_accuracy", "fp") => "التحليل + والمرض −",
             ("diagnostic_accuracy", "fn") => "التحليل − والمرض +",
             ("diagnostic_accuracy", "tn") => "التحليل − والمرض −",
+            ("rpi", "rbc_10e12_l") => "بس عشان العدد المطلق للـ reticulocytes.",
+            ("binet_cll", "areas") => {
+                "غدد الرقبة والإبط والأُربية (كل منطقة بواحدة حتى لو الناحيتين)، والطحال، والكبد."
+            }
+            ("ipi_nhl", "ecog_2_plus") => "2 = بيقوم ويتحرك أكتر من نص اليوم بس مش قادر يشتغل.",
+            ("who_pmf", "clonal") => "ماركرز تانية: ASXL1 وEZH2 وTET2 وIDH1/IDH2 وSRSF2 وSF3B1.",
             ("sar", "primary_cases") => "بيتشالوا من اللي ممكن يتعدوا.",
             ("lawton_iadl", "food_preparation" | "housekeeping" | "laundry") => {
                 "للستات بس (من 8)، الراجل بيتحسب من 5."
@@ -1192,6 +1198,14 @@ pub mod calc {
             "corrected_sodium" => "الصوديوم الحقيقي لما السكر عالي",
             "effective_osmolality" => "أوزمولاليتي الدم لتشخيص الـ HHS",
             "ipss_mf" => "التوقّع في الـ primary myelofibrosis",
+            "rpi" => "النخاع بيعوّض الأنيميا ولا لأ: نقص إنتاج ولا تكسير ونزيف",
+            "rai_cll" => "مرحلة الـ CLL (من 0 لـ IV) بالغدد والطحال والهيموجلوبين والصفايح",
+            "binet_cll" => "مرحلة الـ CLL (A وB وC) بعدد المناطق والهيموجلوبين والصفايح",
+            "ann_arbor" => "مرحلة الليمفوما من I لـ IV، وA أو B حسب الأعراض",
+            "ipi_nhl" => "التوقّع في الـ non-Hodgkin lymphoma من 0 لـ 5",
+            "who_pv" => "تشخيص الـ polycythaemia vera بمعايير الـ WHO",
+            "who_et" => "تشخيص الـ essential thrombocythaemia بمعايير الـ WHO",
+            "who_pmf" => "تشخيص الـ primary myelofibrosis بمعايير الـ WHO",
             "incidence" => "معدل الحالات الجديدة في فترة معيّنة",
             "prevalence" => "نسبة كل الحالات الموجودة في وقت معيّن",
             "prevalence_id" => "العلاقة بين الانتشار والحدوث ومدة المرض",

@@ -1060,6 +1060,10 @@ pub mod calc {
                 "صدمة (SBP أقل من 90 أو MAP أقل من 70)، PaO2 أقل من 60 أو جهاز تنفّس، كرياتينين فوق 2 بعد السوايل أو غسيل، نزيف أكتر من 500 مل في اليوم، نبض فوق 90."
             }
             ("glasgow_blatchford", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("oakland", "hb_g_dl") => "جدول الكتاب بالـ g/L: ‏7 g/dL = 70 g/L.",
+            ("kyoto_gastritis", "diffuse_redness") => {
+                "الكتاب بيدرّجها بشفافية الـ collecting venules في الـ body."
+            }
             ("osmolal_gap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
             ("acr_eular_2010_ra", "large_joints") => "الكتف والكوع والحوض والركبة والكاحل.",
             ("acr_eular_2010_ra", "small_joints") => {
@@ -1088,6 +1092,7 @@ pub mod calc {
                 "Anticardiolipin IgG أكتر من 40، أو anti-β2GP1 IgG أكتر من 40، أو lupus anticoagulant."
             }
             ("effective_osmolality", "urea_mmol_l") => "للأوزمولاليتي الكلية. اليوريا بالـ mg/dL ÷ 6.",
+            ("dka_severity", "bhb_mmol_l") => "سيبها فاضية لو معاك شريط بول بس، وعلّم الخانة اللي تحت.",
             ("feurea", "urine_urea_mg_dl") => "يوريا أو BUN، بس بنفس وحدة البلازما.",
             ("anion_gap", "albumin_g_dl") => "بيصحح الـ gap لو الألبومين واطي.",
             ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
@@ -1169,6 +1174,11 @@ pub mod calc {
             "ctsi" => "شدة التهاب البنكرياس من الأشعة المقطعية والـ necrosis",
             "atlanta_2012" => "شدة التهاب البنكرياس من فشل الأعضاء والمضاعفات",
             "glasgow_blatchford" => "نزيف الجهاز الهضمي العلوي: مين محتاج تدخل ومين يروّح",
+            "shock_index" => "النبض ÷ الضغط: النزيف مستقر ولا لأ",
+            "oakland" => "نزيف الجهاز الهضمي السفلي: مين يروّح بأمان ومين يتحجز",
+            "uc_activity" => "شدة الـ ulcerative colitis: خفيفة ولا متوسطة ولا شديدة",
+            "kyoto_gastritis" => "المنظار بيقول إيه عن الـ H. pylori وخطر سرطان المعدة",
+            "rome4_ibs" => "تشخيص الـ IBS بمعايير Rome IV ونوعه",
             "anion_gap" => "سبب الـ metabolic acidosis: الـ gap عالي ولا طبيعي",
             "delta_ratio" => "فيه اضطراب تاني مع الـ high anion gap acidosis؟",
             "expected_compensation" => "التعويض المتوقّع: الاضطراب لوحده ولا مخلوط؟",
@@ -1197,6 +1207,9 @@ pub mod calc {
             "mpa_2022" => "تصنيف الـ microscopic polyangiitis بالنقط: 5 أو أكتر",
             "corrected_sodium" => "الصوديوم الحقيقي لما السكر عالي",
             "effective_osmolality" => "أوزمولاليتي الدم لتشخيص الـ HHS",
+            "dka_severity" => "هل هي DKA؟ وشدتها قد إيه ومكان العلاج",
+            "premixed_insulin" => "أول جرعة إنسولين premixed: التلتين الصبح والتلت بالليل",
+            "bmi" => "مؤشر كتلة الجسم وإمتى نفحص أو ندّي دوا أو نفكر في جراحة",
             "ipss_mf" => "التوقّع في الـ primary myelofibrosis",
             "rpi" => "النخاع بيعوّض الأنيميا ولا لأ: نقص إنتاج ولا تكسير ونزيف",
             "rai_cll" => "مرحلة الـ CLL (من 0 لـ IV) بالغدد والطحال والهيموجلوبين والصفايح",

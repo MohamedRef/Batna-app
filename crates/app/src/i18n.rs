@@ -1647,6 +1647,7 @@ pub mod update {
     pub const BETA: &str = "بيتا";
     pub const STABLE: &str = "ثابتة";
     pub const PREVIEW: &str = "تجربة";
+    pub const PREVIEW_CHANNEL_NOTE: &str = "نسخة التجربة بتنزل مع كل تعديل، فممكن تلاقي فيها حاجة لسه مش مظبوطة. على الماك هيوصلك منها المحتوى بس. ترجع للألفا وقت ما تحب.";
     pub const MB: &str = "ميجا";
 
     // The notifications Android shows around an install.

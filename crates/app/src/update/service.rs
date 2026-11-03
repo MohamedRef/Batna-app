@@ -641,9 +641,9 @@ impl Updater {
         crate::platform::update_notice::schedule(self.background_checks());
     }
 
-    /// Switches release channel and looks again.
+    /// Switches channel (preview, alpha, beta, stable) and looks again.
     pub fn set_channel(&'static self, channel: Channel) {
-        if self.status().preview || channel == Channel::Preview {
+        if self.status().channel == channel {
             return;
         }
         self.update_prefs(|p| p.channel = Some(channel));

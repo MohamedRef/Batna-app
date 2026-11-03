@@ -393,6 +393,128 @@ Source: Book Geriatrics Lecture 2, p. 30; Lecture 3, p. 42
 | `creatinine_mg_dl` | number, mg/dL | Serum creatinine |
 | `sex` | `male`, `female` | Sex |
 
+## `katz_adl`: Katz ADL index
+
+Source: Book Geriatrics Lecture 7, Katz Index of Independence in ADL (p. 111); Katz et al., JAMA 1963;185:914–9
+
+| input | kind | |
+|---|---|---|
+| `bathing` | `independent`, `dependent` | Bathing |
+| `dressing` | `independent`, `dependent` | Dressing |
+| `toileting` | `independent`, `dependent` | Toileting |
+| `transferring` | `independent`, `dependent` | Transferring |
+| `continence` | `independent`, `dependent` | Continence |
+| `feeding` | `independent`, `dependent` | Feeding |
+
+## `lawton_iadl`: Lawton IADL scale
+
+Source: Book Geriatrics Lecture 7, Lawton-Brody IADL scale (p. 112); Lawton & Brody, Gerontologist 1969;9:179–86, also the source of the domains left out for men (food preparation, housekeeping, laundry)
+
+| input | kind | |
+|---|---|---|
+| `sex` | `female`, `male` | Sex |
+| `telephone` | `own_initiative`, `few_numbers`, `answers_only`, `none` | Ability to use telephone |
+| `shopping` | `all`, `small`, `accompanied`, `unable` | Shopping |
+| `food_preparation` | `independent`, `if_supplied`, `inadequate`, `needs_served` | Food preparation; optional |
+| `housekeeping` | `alone`, `light`, `light_poor`, `needs_help`, `none` | Housekeeping; optional |
+| `laundry` | `all`, `small_items`, `others` | Laundry; optional |
+| `transport` | `independent`, `taxi`, `accompanied`, `assisted`, `none` | Mode of transportation |
+| `medication` | `responsible`, `if_prepared`, `unable` | Responsibility for own medications |
+| `finances` | `independent`, `day_to_day`, `unable` | Ability to handle finances |
+
+## `gds15`: Geriatric Depression Scale (GDS-15)
+
+Source: Book Geriatrics Lecture 7, Geriatric Depression Scale short form (p. 119); Lecture 4 (pp. 79–80); Sheikh & Yesavage, Clin Gerontol 1986;5:165–73
+
+| input | kind | |
+|---|---|---|
+| `satisfied` | `yes`, `no` | 1. Basically satisfied with your life? |
+| `dropped_activities` | `yes`, `no` | 2. Dropped many of your activities and interests? |
+| `life_empty` | `yes`, `no` | 3. Feel that your life is empty? |
+| `bored` | `yes`, `no` | 4. Often get bored? |
+| `good_spirits` | `yes`, `no` | 5. In good spirits most of the time? |
+| `afraid` | `yes`, `no` | 6. Afraid that something bad is going to happen to you? |
+| `happy` | `yes`, `no` | 7. Feel happy most of the time? |
+| `helpless` | `yes`, `no` | 8. Often feel helpless? |
+| `stay_home` | `yes`, `no` | 9. Prefer to stay at home rather than go out and do new things? |
+| `memory` | `yes`, `no` | 10. More problems with memory than most people? |
+| `wonderful_alive` | `yes`, `no` | 11. Think it is wonderful to be alive? |
+| `worthless` | `yes`, `no` | 12. Feel pretty worthless the way you are now? |
+| `full_of_energy` | `yes`, `no` | 13. Feel full of energy? |
+| `hopeless` | `yes`, `no` | 14. Feel that your situation is hopeless? |
+| `others_better_off` | `yes`, `no` | 15. Think that most people are better off than you are? |
+
+## `mna_sf`: MNA screening (short form)
+
+Source: Book Geriatrics Lecture 7, Mini Nutritional Assessment, screening items A–F (p. 124); Rubenstein et al., J Gerontol 2001;56A:M366–72; Kaiser et al., J Nutr Health Aging 2009;13:782–8
+
+| input | kind | |
+|---|---|---|
+| `food_intake` | `severe`, `moderate`, `none` | A. Food intake fall over 3 months (appetite, digestion, chewing, swallowing) |
+| `weight_loss` | `over_3kg`, `unknown`, `1_3kg`, `none` | B. Weight loss over the last 3 months |
+| `mobility` | `bed_chair`, `indoors`, `goes_out` | C. Mobility |
+| `stress` | `yes`, `no` | D. Psychological stress or acute disease in the past 3 months |
+| `neuropsych` | `severe`, `mild_dementia`, `none` | E. Neuropsychological problems |
+| `bmi` | `under_19`, `19_21`, `21_23`, `23_plus` | F. Body mass index (kg/m²) |
+
+## `clinical_frailty`: Clinical Frailty Scale
+
+Source: Book Geriatrics Lecture 7, Frailty assessment, Clinical Frailty Scale (p. 121); Rockwood et al., CMAJ 2005;173:489–95
+
+| input | kind | |
+|---|---|---|
+| `level` | `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9` | The description that fits best |
+
+## `cam`: Confusion Assessment Method (CAM)
+
+Source: Book Geriatrics Lecture 4, Confusion Assessment Method (pp. 70–71); Inouye et al., Ann Intern Med 1990;113:941–8
+
+| input | kind | |
+|---|---|---|
+| `acute_fluctuating` | true / false (default false) | 1. Acute onset and fluctuating course |
+| `inattention` | true / false (default false) | 2. Inattention |
+| `disorganised_thinking` | true / false (default false) | 3. Disorganised thinking |
+| `altered_consciousness` | true / false (default false) | 4. Altered level of consciousness |
+
+## `sarc_f`: SARC-F (sarcopenia screen)
+
+Source: Book Geriatrics Lecture 8, Sarcopenia, SARC-F questionnaire (pp. 133–134); Malmstrom & Morley, J Am Med Dir Assoc 2013;14:531–2 (falls 1–3 = 1 point); next steps from EWGSOP2, Age Ageing 2019;48:16–31
+
+| input | kind | |
+|---|---|---|
+| `strength` | `none`, `some`, `a_lot` | Strength: difficulty lifting and carrying 10 pounds |
+| `walking` | `none`, `some`, `a_lot` | Assistance in walking: difficulty walking across a room |
+| `rise` | `none`, `some`, `a_lot` | Rise from a chair: difficulty transferring from a chair or bed |
+| `stairs` | `none`, `some`, `a_lot` | Climb stairs: difficulty climbing a flight of 10 stairs |
+| `falls` | `none`, `1_3`, `4_plus` | Falls in the past year |
+
+## `mmse`: Mini-Mental State Examination (MMSE)
+
+Source: Book Geriatrics Lecture 4, Mini-Mental State Examination (p. 63); Folstein et al., J Psychiatr Res 1975;12:189–98
+
+| input | kind | |
+|---|---|---|
+| `orientation_time` | number | Orientation: year, season, date, day, month |
+| `orientation_place` | number | Orientation: country, county, town, hospital, floor |
+| `registration` | number | Registration: name 3 objects |
+| `attention` | number | Attention: serial 7s or WORLD backwards |
+| `recall` | number | Recall the 3 objects |
+| `naming` | number | Language: name a pencil and a watch |
+| `repetition` | number | Language: repeat "no ifs, ands, or buts" |
+| `command` | number | Language: 3-stage command |
+| `read_write_copy` | number | Language: read and obey, write a sentence, copy a design |
+
+## `abi`: Ankle-brachial index (ABI)
+
+Source: Book Geriatrics Lecture 1, Subclinical cardiovascular disease (p. 8); Book Diabetes Lecture 5, Ankle brachial pressure index (p. 60); AHA/ACC 2016 PAD guideline (Gerhard-Herman et al., Circulation 2017;135:e726–79) for 0.91–0.99 borderline and above 1.40 non-compressible
+
+| input | kind | |
+|---|---|---|
+| `dp_mm_hg` | number, mm Hg | Ankle systolic: dorsalis pedis |
+| `pt_mm_hg` | number, mm Hg | Ankle systolic: posterior tibial; optional |
+| `brachial_right_mm_hg` | number, mm Hg | Brachial systolic: right arm |
+| `brachial_left_mm_hg` | number, mm Hg | Brachial systolic: left arm; optional |
+
 ## `acr_eular_2010_ra`: ACR/EULAR 2010 RA criteria
 
 Source: Book Rheumatology Lecture 16, p. 246
@@ -404,6 +526,135 @@ Source: Book Rheumatology Lecture 16, p. 246
 | `serology` | `negative`, `low`, `high` | RF / ACPA |
 | `synovitis_6_weeks` | true / false (default false) | Synovitis 6 weeks or longer |
 | `abnormal_crp_esr` | true / false (default false) | Abnormal CRP or ESR |
+
+## `caspar`: CASPAR (psoriatic arthritis)
+
+Source: Taylor et al., Arthritis Rheum 2006 (CASPAR); book Rheumatology Lecture 20, p. 334
+
+| input | kind | |
+|---|---|---|
+| `inflammatory_disease` | true / false (default false) | Inflammatory articular disease (joint, spine or entheses) |
+| `psoriasis` | `current`, `past`, `family`, `none` | Psoriasis |
+| `nail_lesions` | true / false (default false) | Nail lesions: onycholysis, pitting, hyperkeratosis |
+| `dactylitis` | true / false (default false) | Dactylitis, present or past (documented by a rheumatologist) |
+| `rf_negative` | true / false (default false) | Rheumatoid factor negative (any method except latex) |
+| `juxta_articular_bone` | true / false (default false) | Juxta-articular new bone formation on X-ray (not osteophytes) |
+
+## `asas_axial_spa`: ASAS axial SpA criteria
+
+Source: Rudwaleit et al., Ann Rheum Dis 2009 (ASAS); book Rheumatology Lecture 17, pp. 287–288 (entry line from the paper)
+
+| input | kind | |
+|---|---|---|
+| `back_pain_3_months_onset_45` | true / false (default false) | Back pain 3 months or longer, starting before age 45 |
+| `sacroiliitis_imaging` | true / false (default false) | Sacroiliitis on imaging |
+| `hla_b27` | true / false (default false) | HLA-B27 positive |
+| `ibp` | true / false (default false) | Inflammatory back pain |
+| `arthritis` | true / false (default false) | Arthritis |
+| `enthesitis` | true / false (default false) | Enthesitis (heel) |
+| `uveitis` | true / false (default false) | Uveitis |
+| `dactylitis` | true / false (default false) | Dactylitis |
+| `psoriasis` | true / false (default false) | Psoriasis |
+| `ibd` | true / false (default false) | Crohn's disease or ulcerative colitis |
+| `nsaid_response` | true / false (default false) | Good response to NSAIDs |
+| `family_history` | true / false (default false) | Family history of SpA |
+| `elevated_crp` | true / false (default false) | Elevated CRP |
+
+## `asas_peripheral_spa`: ASAS peripheral SpA criteria
+
+Source: Rudwaleit et al., Ann Rheum Dis 2011 (ASAS); book Rheumatology Lecture 17, p. 288
+
+| input | kind | |
+|---|---|---|
+| `arthritis` | true / false (default false) | Arthritis |
+| `enthesitis` | true / false (default false) | Enthesitis |
+| `dactylitis` | true / false (default false) | Dactylitis |
+| `psoriasis` | true / false (default false) | Psoriasis |
+| `ibd` | true / false (default false) | Inflammatory bowel disease |
+| `preceding_infection` | true / false (default false) | Preceding infection |
+| `hla_b27` | true / false (default false) | HLA-B27 positive |
+| `uveitis` | true / false (default false) | Uveitis |
+| `sacroiliitis_imaging` | true / false (default false) | Sacroiliitis on imaging (X-ray or MRI) |
+| `ibp_past` | true / false (default false) | Inflammatory back pain in the past |
+| `family_history` | true / false (default false) | Family history of SpA |
+
+## `modified_new_york`: Modified New York criteria (AS)
+
+Source: van der Linden et al., Arthritis Rheum 1984; book Rheumatology Lecture 17, pp. 286–288
+
+| input | kind | |
+|---|---|---|
+| `inflammatory_back_pain` | true / false (default false) | Low back pain and stiffness 3 months or more, better with exercise, not rest |
+| `lumbar_limitation` | true / false (default false) | Limited lumbar motion in sagittal and frontal planes |
+| `chest_expansion` | true / false (default false) | Limited chest expansion (for age and sex) |
+| `si_grade_right` | number | Sacroiliitis grade, right |
+| `si_grade_left` | number | Sacroiliitis grade, left |
+
+## `sle_acr_1997`: SLE 1997 ACR criteria
+
+Source: Hochberg, Arthritis Rheum 1997 (ACR, revising Tan 1982); book Rheumatology Lecture 19, p. 322
+
+| input | kind | |
+|---|---|---|
+| `malar_rash` | true / false (default false) | Malar rash |
+| `discoid_rash` | true / false (default false) | Discoid rash |
+| `photosensitivity` | true / false (default false) | Photosensitivity |
+| `oral_ulcers` | true / false (default false) | Oral ulcers |
+| `arthritis` | true / false (default false) | Arthritis |
+| `serositis` | true / false (default false) | Serositis |
+| `renal` | true / false (default false) | Renal disorder |
+| `neurological` | true / false (default false) | Neurological disorder |
+| `haematological` | true / false (default false) | Haematological disorder |
+| `immunological` | true / false (default false) | Immunological disorder |
+| `ana` | true / false (default false) | ANA positive |
+
+## `sle_eular_acr_2019`: SLE 2019 EULAR/ACR criteria
+
+Source: Aringer et al., Ann Rheum Dis / Arthritis Rheumatol 2019 (EULAR/ACR); book Nephrology Lecture 14, p. 448
+
+| input | kind | |
+|---|---|---|
+| `ana_1_80` | true / false (default false) | ANA 1:80 or more, ever |
+| `fever` | true / false (default false) | Fever |
+| `cutaneous` | `none`, `alopecia`, `oral_ulcers`, `subacute_discoid`, `acute_cutaneous` | Skin and mucosa; optional |
+| `arthritis` | true / false (default false) | Synovitis or tenderness in 2 or more joints |
+| `neurologic` | `none`, `delirium`, `psychosis`, `seizure` | Neurological; optional |
+| `serosal` | `none`, `effusion`, `pericarditis` | Serosal; optional |
+| `haematologic` | `none`, `leukopenia`, `thrombocytopenia`, `haemolysis` | Haematological; optional |
+| `renal` | `none`, `proteinuria`, `class_2_5`, `class_3_4` | Renal; optional |
+| `antiphospholipid` | true / false (default false) | Antiphospholipid antibodies |
+| `complement` | `none`, `c3_or_c4`, `c3_and_c4` | Complement; optional |
+| `specific_antibody` | true / false (default false) | Anti-dsDNA or anti-Sm antibody |
+
+## `gpa_2022`: GPA 2022 ACR/EULAR criteria
+
+Source: Robson et al., Ann Rheum Dis 2022 (ACR/EULAR); book Rheumatology Lecture 8, p. 147
+
+| input | kind | |
+|---|---|---|
+| `nasal` | true / false (default false) | Nasal bloody discharge, ulcers, crusting, congestion, blockage or septal perforation (+3) |
+| `cartilage` | true / false (default false) | Cartilage: ear or nose chondritis, hoarseness, stridor, endobronchial, saddle nose (+2) |
+| `hearing_loss` | true / false (default false) | Conductive or sensorineural hearing loss (+1) |
+| `c_anca_pr3` | true / false (default false) | c-ANCA or anti-PR3 positive (+5) |
+| `lung_nodules` | true / false (default false) | Pulmonary nodules, mass or cavitation on chest imaging (+2) |
+| `granuloma` | true / false (default false) | Granuloma, extravascular granulomatous inflammation or giant cells on biopsy (+2) |
+| `sinus_imaging` | true / false (default false) | Nasal/paranasal sinus inflammation, consolidation or effusion, or mastoiditis on imaging (+1) |
+| `pauci_immune_gn` | true / false (default false) | Pauci-immune glomerulonephritis on biopsy (+1) |
+| `p_anca_mpo` | true / false (default false) | p-ANCA or anti-MPO positive (−1) |
+| `eosinophils` | true / false (default false) | Blood eosinophils ≥ 1 × 10⁹/L (−4) |
+
+## `mpa_2022`: MPA 2022 ACR/EULAR criteria
+
+Source: Suppiah et al., Ann Rheum Dis 2022 (ACR/EULAR); book Rheumatology Lecture 8, p. 147
+
+| input | kind | |
+|---|---|---|
+| `nasal` | true / false (default false) | Nasal bloody discharge, ulcers, crusting, congestion, blockage or septal perforation (−3) |
+| `p_anca_mpo` | true / false (default false) | p-ANCA or anti-MPO positive (+6) |
+| `lung_fibrosis` | true / false (default false) | Fibrosis or interstitial lung disease on chest imaging (+3) |
+| `pauci_immune_gn` | true / false (default false) | Pauci-immune glomerulonephritis on biopsy (+3) |
+| `c_anca_pr3` | true / false (default false) | c-ANCA or anti-PR3 positive (−1) |
+| `eosinophils` | true / false (default false) | Blood eosinophils ≥ 1 × 10⁹/L (−4) |
 
 ## `corrected_sodium`: Corrected sodium (hyperglycaemia)
 

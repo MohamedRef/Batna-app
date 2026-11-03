@@ -430,6 +430,135 @@ Source: Book Rheumatology Lecture 16, p. 246
 | `synovitis_6_weeks` | true / false (default false) | Synovitis 6 weeks or longer |
 | `abnormal_crp_esr` | true / false (default false) | Abnormal CRP or ESR |
 
+## `caspar`: CASPAR (psoriatic arthritis)
+
+Source: Taylor et al., Arthritis Rheum 2006 (CASPAR); book Rheumatology Lecture 20, p. 334
+
+| input | kind | |
+|---|---|---|
+| `inflammatory_disease` | true / false (default false) | Inflammatory articular disease (joint, spine or entheses) |
+| `psoriasis` | `current`, `past`, `family`, `none` | Psoriasis |
+| `nail_lesions` | true / false (default false) | Nail lesions: onycholysis, pitting, hyperkeratosis |
+| `dactylitis` | true / false (default false) | Dactylitis, present or past (documented by a rheumatologist) |
+| `rf_negative` | true / false (default false) | Rheumatoid factor negative (any method except latex) |
+| `juxta_articular_bone` | true / false (default false) | Juxta-articular new bone formation on X-ray (not osteophytes) |
+
+## `asas_axial_spa`: ASAS axial SpA criteria
+
+Source: Rudwaleit et al., Ann Rheum Dis 2009 (ASAS); book Rheumatology Lecture 17, pp. 287–288 (entry line from the paper)
+
+| input | kind | |
+|---|---|---|
+| `back_pain_3_months_onset_45` | true / false (default false) | Back pain 3 months or longer, starting before age 45 |
+| `sacroiliitis_imaging` | true / false (default false) | Sacroiliitis on imaging |
+| `hla_b27` | true / false (default false) | HLA-B27 positive |
+| `ibp` | true / false (default false) | Inflammatory back pain |
+| `arthritis` | true / false (default false) | Arthritis |
+| `enthesitis` | true / false (default false) | Enthesitis (heel) |
+| `uveitis` | true / false (default false) | Uveitis |
+| `dactylitis` | true / false (default false) | Dactylitis |
+| `psoriasis` | true / false (default false) | Psoriasis |
+| `ibd` | true / false (default false) | Crohn's disease or ulcerative colitis |
+| `nsaid_response` | true / false (default false) | Good response to NSAIDs |
+| `family_history` | true / false (default false) | Family history of SpA |
+| `elevated_crp` | true / false (default false) | Elevated CRP |
+
+## `asas_peripheral_spa`: ASAS peripheral SpA criteria
+
+Source: Rudwaleit et al., Ann Rheum Dis 2011 (ASAS); book Rheumatology Lecture 17, p. 288
+
+| input | kind | |
+|---|---|---|
+| `arthritis` | true / false (default false) | Arthritis |
+| `enthesitis` | true / false (default false) | Enthesitis |
+| `dactylitis` | true / false (default false) | Dactylitis |
+| `psoriasis` | true / false (default false) | Psoriasis |
+| `ibd` | true / false (default false) | Inflammatory bowel disease |
+| `preceding_infection` | true / false (default false) | Preceding infection |
+| `hla_b27` | true / false (default false) | HLA-B27 positive |
+| `uveitis` | true / false (default false) | Uveitis |
+| `sacroiliitis_imaging` | true / false (default false) | Sacroiliitis on imaging (X-ray or MRI) |
+| `ibp_past` | true / false (default false) | Inflammatory back pain in the past |
+| `family_history` | true / false (default false) | Family history of SpA |
+
+## `modified_new_york`: Modified New York criteria (AS)
+
+Source: van der Linden et al., Arthritis Rheum 1984; book Rheumatology Lecture 17, pp. 286–288
+
+| input | kind | |
+|---|---|---|
+| `inflammatory_back_pain` | true / false (default false) | Low back pain and stiffness 3 months or more, better with exercise, not rest |
+| `lumbar_limitation` | true / false (default false) | Limited lumbar motion in sagittal and frontal planes |
+| `chest_expansion` | true / false (default false) | Limited chest expansion (for age and sex) |
+| `si_grade_right` | number | Sacroiliitis grade, right |
+| `si_grade_left` | number | Sacroiliitis grade, left |
+
+## `sle_acr_1997`: SLE 1997 ACR criteria
+
+Source: Hochberg, Arthritis Rheum 1997 (ACR, revising Tan 1982); book Rheumatology Lecture 19, p. 322
+
+| input | kind | |
+|---|---|---|
+| `malar_rash` | true / false (default false) | Malar rash |
+| `discoid_rash` | true / false (default false) | Discoid rash |
+| `photosensitivity` | true / false (default false) | Photosensitivity |
+| `oral_ulcers` | true / false (default false) | Oral ulcers |
+| `arthritis` | true / false (default false) | Arthritis |
+| `serositis` | true / false (default false) | Serositis |
+| `renal` | true / false (default false) | Renal disorder |
+| `neurological` | true / false (default false) | Neurological disorder |
+| `haematological` | true / false (default false) | Haematological disorder |
+| `immunological` | true / false (default false) | Immunological disorder |
+| `ana` | true / false (default false) | ANA positive |
+
+## `sle_eular_acr_2019`: SLE 2019 EULAR/ACR criteria
+
+Source: Aringer et al., Ann Rheum Dis / Arthritis Rheumatol 2019 (EULAR/ACR); book Nephrology Lecture 14, p. 448
+
+| input | kind | |
+|---|---|---|
+| `ana_1_80` | true / false (default false) | ANA 1:80 or more, ever |
+| `fever` | true / false (default false) | Fever |
+| `cutaneous` | `none`, `alopecia`, `oral_ulcers`, `subacute_discoid`, `acute_cutaneous` | Skin and mucosa; optional |
+| `arthritis` | true / false (default false) | Synovitis or tenderness in 2 or more joints |
+| `neurologic` | `none`, `delirium`, `psychosis`, `seizure` | Neurological; optional |
+| `serosal` | `none`, `effusion`, `pericarditis` | Serosal; optional |
+| `haematologic` | `none`, `leukopenia`, `thrombocytopenia`, `haemolysis` | Haematological; optional |
+| `renal` | `none`, `proteinuria`, `class_2_5`, `class_3_4` | Renal; optional |
+| `antiphospholipid` | true / false (default false) | Antiphospholipid antibodies |
+| `complement` | `none`, `c3_or_c4`, `c3_and_c4` | Complement; optional |
+| `specific_antibody` | true / false (default false) | Anti-dsDNA or anti-Sm antibody |
+
+## `gpa_2022`: GPA 2022 ACR/EULAR criteria
+
+Source: Robson et al., Ann Rheum Dis 2022 (ACR/EULAR); book Rheumatology Lecture 8, p. 147
+
+| input | kind | |
+|---|---|---|
+| `nasal` | true / false (default false) | Nasal bloody discharge, ulcers, crusting, congestion, blockage or septal perforation (+3) |
+| `cartilage` | true / false (default false) | Cartilage: ear or nose chondritis, hoarseness, stridor, endobronchial, saddle nose (+2) |
+| `hearing_loss` | true / false (default false) | Conductive or sensorineural hearing loss (+1) |
+| `c_anca_pr3` | true / false (default false) | c-ANCA or anti-PR3 positive (+5) |
+| `lung_nodules` | true / false (default false) | Pulmonary nodules, mass or cavitation on chest imaging (+2) |
+| `granuloma` | true / false (default false) | Granuloma, extravascular granulomatous inflammation or giant cells on biopsy (+2) |
+| `sinus_imaging` | true / false (default false) | Nasal/paranasal sinus inflammation, consolidation or effusion, or mastoiditis on imaging (+1) |
+| `pauci_immune_gn` | true / false (default false) | Pauci-immune glomerulonephritis on biopsy (+1) |
+| `p_anca_mpo` | true / false (default false) | p-ANCA or anti-MPO positive (−1) |
+| `eosinophils` | true / false (default false) | Blood eosinophils ≥ 1 × 10⁹/L (−4) |
+
+## `mpa_2022`: MPA 2022 ACR/EULAR criteria
+
+Source: Suppiah et al., Ann Rheum Dis 2022 (ACR/EULAR); book Rheumatology Lecture 8, p. 147
+
+| input | kind | |
+|---|---|---|
+| `nasal` | true / false (default false) | Nasal bloody discharge, ulcers, crusting, congestion, blockage or septal perforation (−3) |
+| `p_anca_mpo` | true / false (default false) | p-ANCA or anti-MPO positive (+6) |
+| `lung_fibrosis` | true / false (default false) | Fibrosis or interstitial lung disease on chest imaging (+3) |
+| `pauci_immune_gn` | true / false (default false) | Pauci-immune glomerulonephritis on biopsy (+3) |
+| `c_anca_pr3` | true / false (default false) | c-ANCA or anti-PR3 positive (−1) |
+| `eosinophils` | true / false (default false) | Blood eosinophils ≥ 1 × 10⁹/L (−4) |
+
 ## `corrected_sodium`: Corrected sodium (hyperglycaemia)
 
 Source: Book Diabetology Lecture 15, p. 189

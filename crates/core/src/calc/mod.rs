@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 
 pub use crate::content::CalcValue;
 
+mod aav;
 mod aki;
 mod albi;
 mod apri;
@@ -44,6 +45,8 @@ mod ranson;
 mod renal;
 mod research;
 mod saag;
+mod sle;
+mod spa;
 
 /// Named inputs for one calculation.
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
@@ -326,7 +329,13 @@ pub struct Guide {
 
 // One line per module that has guides, so branches adding them don't touch
 // the same line.
-static GUIDE_LISTS: &[&[(&str, Guide)]] = &[geri::GUIDES];
+#[rustfmt::skip]
+static GUIDE_LISTS: &[&[(&str, Guide)]] = &[
+    geri::GUIDES,
+    spa::GUIDES,
+    sle::GUIDES,
+    aav::GUIDES,
+];
 
 /// The next step and differential for a band id (`cam.positive`), if
 /// written.
@@ -386,6 +395,14 @@ static REGISTRY: &[CalcSpec] = &[
     geri::MMSE,
     geri::ABI,
     ra2010::SPEC,
+    spa::CASPAR,
+    spa::ASAS_AXIAL,
+    spa::ASAS_PERIPHERAL,
+    spa::MODIFIED_NEW_YORK,
+    sle::SLE_1997,
+    sle::SLE_2019,
+    aav::GPA_2022,
+    aav::MPA_2022,
     diabetes::CORRECTED_NA,
     diabetes::OSMOLALITY,
     ipss_mf::SPEC,
@@ -539,6 +556,23 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("abi.critical", &["critical"]),
     ("acr_eular_2010_ra.definite", &["definite"]),
     ("acr_eular_2010_ra.not_met", &["not met"]),
+    ("caspar.met", &["met", "psoriatic arthritis"]),
+    ("caspar.not_met", &["not met"]),
+    ("asas_axial_spa.imaging", &["imaging arm"]),
+    ("asas_axial_spa.clinical", &["clinical arm", "hla-b27 arm"]),
+    ("asas_axial_spa.not_met", &["not met"]),
+    ("asas_peripheral_spa.met", &["met"]),
+    ("asas_peripheral_spa.not_met", &["not met"]),
+    ("modified_new_york.met", &["met", "definite as", "definite"]),
+    ("modified_new_york.not_met", &["not met"]),
+    ("sle_acr_1997.met", &["met", "4 or more"]),
+    ("sle_acr_1997.not_met", &["not met", "below 4"]),
+    ("sle_eular_acr_2019.met", &["met", "10 or more"]),
+    ("sle_eular_acr_2019.not_met", &["not met"]),
+    ("gpa_2022.met", &["met", "5 or more"]),
+    ("gpa_2022.not_met", &["not met", "below 5"]),
+    ("mpa_2022.met", &["met", "5 or more"]),
+    ("mpa_2022.not_met", &["not met", "below 5"]),
     ("effective_osmolality.hhs", &["hhs", "meets"]),
     ("ipss_mf.low", &["low"]),
     ("ipss_mf.int1", &["intermediate-1", "intermediate 1", "int-1"]),

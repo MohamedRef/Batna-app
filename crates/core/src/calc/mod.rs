@@ -33,6 +33,7 @@ mod cockcroft;
 mod diabetes;
 mod fib4;
 mod gbs;
+mod geri;
 mod glasgow;
 mod ipss_mf;
 mod kings;
@@ -328,7 +329,13 @@ pub struct Guide {
 
 // One line per module that has guides, so branches adding them don't touch
 // the same line.
-static GUIDE_LISTS: &[&[(&str, Guide)]] = &[spa::GUIDES, sle::GUIDES, aav::GUIDES];
+#[rustfmt::skip]
+static GUIDE_LISTS: &[&[(&str, Guide)]] = &[
+    geri::GUIDES,
+    spa::GUIDES,
+    sle::GUIDES,
+    aav::GUIDES,
+];
 
 /// The next step and differential for a band id (`cam.positive`), if
 /// written.
@@ -378,6 +385,15 @@ static REGISTRY: &[CalcSpec] = &[
     aki::FENA,
     aki::FEUREA,
     cockcroft::SPEC,
+    geri::KATZ,
+    geri::LAWTON,
+    geri::GDS,
+    geri::MNA_SF,
+    geri::CFS,
+    geri::CAM,
+    geri::SARC_F,
+    geri::MMSE,
+    geri::ABI,
     ra2010::SPEC,
     spa::CASPAR,
     spa::ASAS_AXIAL,
@@ -507,6 +523,37 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("expected_compensation.appropriate", &["appropriate"]),
     ("osmolal_gap.present", &["gap present"]),
     ("osmolal_gap.normal", &["no gap"]),
+    ("katz_adl.independent", &["independent"]),
+    ("katz_adl.partial", &["partly dependent", "partially dependent"]),
+    ("katz_adl.very_dependent", &["very dependent"]),
+    ("lawton_iadl.independent", &["independent"]),
+    ("lawton_iadl.partial", &["partly dependent", "partially dependent"]),
+    ("lawton_iadl.dependent", &["dependent"]),
+    ("gds15.normal", &["normal", "no depression"]),
+    ("gds15.depression", &["suggests depression", "depression", "depressed"]),
+    ("mna_sf.normal", &["normal"]),
+    ("mna_sf.at_risk", &["at risk"]),
+    ("mna_sf.malnourished", &["malnourished", "malnutrition"]),
+    ("cfs.1", &["very fit"]),
+    ("cfs.2", &["well"]),
+    ("cfs.3", &["managing well"]),
+    ("cfs.4", &["vulnerable"]),
+    ("cfs.5", &["mildly frail"]),
+    ("cfs.6", &["moderately frail"]),
+    ("cfs.7", &["severely frail"]),
+    ("cfs.8", &["very severely frail"]),
+    ("cfs.9", &["terminally ill"]),
+    ("cam.positive", &["positive", "delirium"]),
+    ("cam.negative", &["negative", "no delirium"]),
+    ("sarc_f.positive", &["positive"]),
+    ("sarc_f.negative", &["negative"]),
+    ("mmse.normal", &["normal"]),
+    ("mmse.borderline", &["borderline"]),
+    ("mmse.marked", &["marked"]),
+    ("mmse.severe", &["severe"]),
+    ("abi.normal", &["normal"]),
+    ("abi.pad", &["pad", "peripheral arterial disease"]),
+    ("abi.critical", &["critical"]),
     ("acr_eular_2010_ra.definite", &["definite"]),
     ("acr_eular_2010_ra.not_met", &["not met"]),
     ("caspar.met", &["met", "psoriatic arthritis"]),

@@ -57,6 +57,8 @@ mod store;
 mod study;
 mod synced;
 mod table;
+#[cfg(test)]
+pub(crate) mod test_dom;
 mod today;
 mod ui;
 mod update;

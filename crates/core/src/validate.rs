@@ -277,13 +277,28 @@ pub fn glossary(g: &crate::glossary::Glossary, approved: Option<&BTreeSet<String
     // Abbreviations match exactly and drug names ignore case
     // (`Glossary::find`), so `HBIG` and `HBIg` may both be abbreviations,
     // but a drug name must not collide with anything in any case.
+    // A course's own sense (`course: neph`) may share a spelling with the
+    // general entry and with other courses' senses, never with another sense
+    // in the same course.
     let (mut exact, mut lower, mut drugs) = (BTreeSet::new(), BTreeSet::new(), BTreeSet::new());
+    let mut scoped = BTreeSet::new();
     for e in &g.entries {
         let at = e.id();
         let drug = e.kind == crate::glossary::Kind::Drug;
+        if let Some(c) = &e.course
+            && (c.is_empty() || !c.bytes().all(|b| b.is_ascii_lowercase() || b.is_ascii_digit()))
+        {
+            bad(&at, format!("course `{c}` must be a course id like `neph`"));
+        }
         for s in e.spellings() {
             if s.trim().is_empty() || s.chars().any(char::is_whitespace) {
                 bad(&at, format!("`{s}` must be one word (the pointer picks one word)"));
+            }
+            if let Some(c) = &e.course {
+                if !scoped.insert((c.clone(), s.to_string())) {
+                    bad(&at, format!("`{s}` is listed twice for course {c}"));
+                }
+                continue;
             }
             let low = s.to_lowercase();
             let clash =

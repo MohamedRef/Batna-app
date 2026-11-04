@@ -15,12 +15,19 @@ use crate::look::{Css, css};
 
 const CSS: Css = css!("src/abbrsheet/abbrsheet.css");
 
-/// The terms of the open sheet, in the order the step shows them.
+/// The glossary ids (`Entry::id`) of the open sheet, in the order the step
+/// shows them.
 pub(crate) static OPEN: GlobalSignal<Option<Vec<String>>> = Signal::global(|| None);
 
-/// The abbreviations in a step's texts, from the bundled glossary.
-pub fn entries(texts: &[String]) -> Vec<&'static Entry> {
-    glossary().abbreviations_in(texts)
+/// The abbreviations in a step's texts, from the bundled glossary, as read
+/// in `course` (its own senses win: `ICP` in neph is intracranial pressure).
+pub fn entries(texts: &[String], course: Option<&str>) -> Vec<&'static Entry> {
+    glossary().finder_in(course).abbreviations_in(texts)
+}
+
+/// The ids [`OPEN`] takes for a step's texts.
+pub fn ids(texts: &[String], course: Option<&str>) -> Vec<String> {
+    entries(texts, course).iter().map(|e| e.id()).collect()
 }
 
 pub fn open(terms: Vec<String>) {
@@ -35,8 +42,8 @@ pub fn close() {
 
 /// The chip; nothing when the step has no abbreviation.
 #[component]
-pub fn AbbrChip(texts: Vec<String>) -> Element {
-    let terms: Vec<String> = entries(&texts).iter().map(|e| e.term.clone()).collect();
+pub fn AbbrChip(texts: Vec<String>, course: Option<String>) -> Element {
+    let terms = ids(&texts, course.as_deref());
     if terms.is_empty() {
         return rsx! {};
     }
@@ -64,7 +71,7 @@ pub fn AbbrSheet() -> Element {
         return rsx! {};
     };
     let g = glossary();
-    let shown: Vec<&Entry> = terms.iter().filter_map(|t| g.entries.iter().find(|e| &e.term == t)).collect();
+    let shown: Vec<&Entry> = terms.iter().filter_map(|id| g.entries.iter().find(|e| &e.id() == id)).collect();
     let unverified = shown.iter().any(|e| e.status != Status::Approved);
     rsx! {
         style { {CSS.text()} }
@@ -109,16 +116,19 @@ mod tests {
     #[test]
     fn a_step_lists_its_abbreviations_once_in_reading_order() {
         // SPEC §24-style step: Arabic prose around English terms.
-        let found = entries(&texts(&[
-            "الـ HRS-AKI بيحصل في الـ cirrhosis مع ascites.",
-            "قيس الـ SBP والـ MAP، وراجع الـ HRS-AKI تاني.",
-        ]));
+        let found = entries(
+            &texts(&[
+                "الـ HRS-AKI بيحصل في الـ cirrhosis مع ascites.",
+                "قيس الـ SBP والـ MAP، وراجع الـ HRS-AKI تاني.",
+            ]),
+            Some("hb"),
+        );
         let terms: Vec<&str> = found.iter().map(|e| e.term.as_str()).collect();
         assert_eq!(terms, ["HRS-AKI", "SBP", "MAP"]);
     }
 
     #[test]
     fn plain_text_has_no_chip() {
-        assert!(entries(&texts(&["Ascites is fluid in the peritoneal cavity."])).is_empty());
+        assert!(entries(&texts(&["Ascites is fluid in the peritoneal cavity."]), None).is_empty());
     }
 }

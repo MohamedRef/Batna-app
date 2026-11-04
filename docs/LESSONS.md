@@ -62,6 +62,11 @@ The model to copy is `content/lessons/hb/L01.yaml`.
     numeral, a mnemonic's letters, a trial name), add it to `plain:` at the
     end of the glossary. The same entries fill the per-course «قاموس
     الاختصارات» (Lessons screen, More), with the lessons that use each one.
+    An abbreviation that means something else in one course gets a second
+    entry with `course:` (`{ term: ICP, …, text: "Intracranial pressure",
+    course: neph }`): inside that course its chip, dictionary and hover
+    show that sense; everywhere else the entry without a course does. Its
+    approval id is `glossary.ICP@neph`.
 
 ## File shape
 

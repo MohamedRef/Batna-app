@@ -245,7 +245,7 @@ mod tests {
 
     #[test]
     fn a_tap_writes_the_backup_and_says_where() {
-        use crate::test_dom::TestDom;
+        use crate::tap_dom::TestDom;
         crate::store::use_memory_store();
         let mut t = TestDom::of(|| rsx! { ExportCardIn { dir: ExportDir(scratch) } });
         t.click(tx::EXPORT_BUTTON);

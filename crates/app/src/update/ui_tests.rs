@@ -556,7 +556,7 @@ fn a_notification_tap_with_nothing_offered_opens_the_changelog() {
 }
 
 /// A screen and the sheet over it, as the shell mounts them, to press through.
-fn pressable(which: Which, status: Status) -> crate::test_dom::TestDom {
+fn pressable(which: Which, status: Status) -> crate::tap_dom::TestDom {
     #[derive(Props, Clone, PartialEq)]
     struct P {
         which: u8,
@@ -582,7 +582,7 @@ fn pressable(which: Which, status: Status) -> crate::test_dom::TestDom {
         Which::Note => (2, None),
         Which::Sheet(m) => (3, Some(m)),
     };
-    crate::test_dom::TestDom::new(VirtualDom::new_with_props(app, P { which, open, status }))
+    crate::tap_dom::TestDom::new(VirtualDom::new_with_props(app, P { which, open, status }))
 }
 
 fn sheet_open(page: &str) -> bool {

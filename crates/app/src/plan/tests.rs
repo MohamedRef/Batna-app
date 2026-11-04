@@ -227,7 +227,7 @@ fn Spy() -> Element {
     rsx! {}
 }
 
-fn pressable(settings: PlanSettings, n: usize) -> crate::test_dom::TestDom {
+fn pressable(settings: PlanSettings, n: usize) -> crate::tap_dom::TestDom {
     fn app(case: Case) -> Element {
         use_hook(|| *SETTINGS.write() = case.settings.clone());
         let data = use_hook(|| Rc::new(data(case.n)));
@@ -239,10 +239,10 @@ fn pressable(settings: PlanSettings, n: usize) -> crate::test_dom::TestDom {
         }
     }
     crate::store::use_memory_store();
-    crate::test_dom::TestDom::new(VirtualDom::new_with_props(app, Case { settings, n }))
+    crate::tap_dom::TestDom::new(VirtualDom::new_with_props(app, Case { settings, n }))
 }
 
-fn screen(t: &crate::test_dom::TestDom) -> crate::Screen {
+fn screen(t: &crate::tap_dom::TestDom) -> crate::Screen {
     t.with(|| *SEEN.get().unwrap().screen.peek())
 }
 

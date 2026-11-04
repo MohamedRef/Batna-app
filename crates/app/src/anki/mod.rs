@@ -339,7 +339,7 @@ mod tests {
 
     #[test]
     fn a_tap_builds_the_deck_and_says_where_it_went() {
-        use crate::test_dom::TestDom;
+        use crate::tap_dom::TestDom;
         #[derive(Props, Clone, PartialEq)]
         struct P {
             save: Save,
@@ -359,7 +359,7 @@ mod tests {
 
     #[test]
     fn retry_after_a_failure_exports_again() {
-        use crate::test_dom::TestDom;
+        use crate::tap_dom::TestDom;
         #[derive(Props, Clone, PartialEq)]
         struct P {
             start: State,

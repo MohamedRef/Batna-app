@@ -468,7 +468,7 @@ mod tests {
     fn taps_change_the_times_and_who_rings() {
         let _one_at_a_time = SAVING.lock().unwrap_or_else(|e| e.into_inner());
         use crate::i18n::remind as tx;
-        use crate::test_dom::TestDom;
+        use crate::tap_dom::TestDom;
         crate::store::use_memory_store();
         let mut t = TestDom::new(VirtualDom::new_with_props(root, phone()));
         t.click(tx::ADD);
@@ -497,7 +497,7 @@ mod tests {
     #[test]
     fn the_fix_buttons_do_nothing_harmful_on_a_desktop() {
         use crate::i18n::remind as tx;
-        use crate::test_dom::TestDom;
+        use crate::tap_dom::TestDom;
         crate::store::use_memory_store();
         let case = Case { allowed: Some(false), unrestricted: Some(false), ..phone() };
         let mut t = TestDom::new(VirtualDom::new_with_props(root, case));

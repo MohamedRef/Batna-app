@@ -225,7 +225,7 @@ fn Spy() -> Element {
     rsx! {}
 }
 
-fn pressable(studied_data: bool) -> crate::test_dom::TestDom {
+fn pressable(studied_data: bool) -> crate::tap_dom::TestDom {
     #[derive(Props, Clone, PartialEq)]
     struct P {
         studied: bool,
@@ -242,10 +242,10 @@ fn pressable(studied_data: bool) -> crate::test_dom::TestDom {
         }
     }
     crate::store::use_memory_store();
-    crate::test_dom::TestDom::new(VirtualDom::new_with_props(app, P { studied: studied_data }))
+    crate::tap_dom::TestDom::new(VirtualDom::new_with_props(app, P { studied: studied_data }))
 }
 
-fn moved(t: &crate::test_dom::TestDom) -> crate::Screen {
+fn moved(t: &crate::tap_dom::TestDom) -> crate::Screen {
     t.with(|| {
         let (mut ui, nav) = SEEN.get().unwrap();
         let at = *ui.screen.peek();
@@ -287,7 +287,7 @@ fn the_tabs_switch_on_tap() {
             }
         }
     }
-    let mut t = crate::test_dom::TestDom::of(app);
+    let mut t = crate::tap_dom::TestDom::of(app);
     t.click(&format!(">{}<", tx::TAB_MISTAKES));
     assert!(t.html().contains(tx::MISTAKES_TITLE), "{}", t.html());
     t.click(&format!(">{}<", tx::TAB_PLAN));

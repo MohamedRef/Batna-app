@@ -228,7 +228,8 @@ pub fn tables() -> Vec<Table> {
         Table::new("shock_index", &["shock_index.unstable", "shock_index.stable"])
             .paper("book p. 227: HR 120 / SBP 90 = 1.33, unstable", ins![hr_bpm: 120, sbp_mmhg: 90], "shock_index.unstable")
             .score(1.33, 1e-9)
-            .cut("HR 100 / 101 over SBP 100 (above 1 is unstable)", ins![sbp_mmhg: 100], "hr_bpm", (100.0, "shock_index.stable"), (101.0, "shock_index.unstable")),
+            .cut("HR 100 / 101 over SBP 100 (above 1 is unstable)", ins![sbp_mmhg: 100], "hr_bpm", (100.0, "shock_index.stable"), (101.0, "shock_index.unstable"))
+            .cut("as shown: 201 / 200 = 1.005 shows 1.00, 202 / 200 = 1.01", ins![sbp_mmhg: 200], "hr_bpm", (201.0, "shock_index.stable"), (202.0, "shock_index.unstable")),
         Table::new("oakland", &["oakland.discharge", "oakland.admit"])
             .paper(
                 "Oakland 2017: man 75 (2 + 1), previous LGIB (1), DRE blood (1), HR 95 (2), SBP 110 (4), Hb 100 g/L (13) = 24",

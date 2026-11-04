@@ -347,8 +347,8 @@ mod tap_tests {
                 .unwrap();
             rsx! { OrderItem { item, on_grade: |_| {} } }
         }
-        let mut t = crate::test_dom::TestDom::of(app);
-        let tiles = |t: &crate::test_dom::TestDom| t.html().matches("class=\"or-tile\"").count();
+        let mut t = crate::tap_dom::TestDom::of(app);
+        let tiles = |t: &crate::tap_dom::TestDom| t.html().matches("class=\"or-tile\"").count();
         let n = tiles(&t);
         t.click("class=\"or-tile\"");
         assert_eq!(tiles(&t), n - 1);

@@ -140,7 +140,7 @@ mod tests {
             use_hook(|| *crate::plan::SETTINGS.write() = Default::default());
             rsx! { StudySection {} }
         }
-        let mut t = crate::test_dom::TestDom::of(app);
+        let mut t = crate::tap_dom::TestDom::of(app);
         let before = t.html();
         // The checked ones: the same values, so the shared test store is unchanged.
         t.click_nth("aria-checked=true", 0);

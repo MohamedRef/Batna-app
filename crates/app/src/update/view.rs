@@ -952,7 +952,7 @@ mod watcher_tests {
                 super::super::sheet::UpdateSheet {}
             }
         }
-        let t = crate::test_dom::TestDom::of(app);
+        let t = crate::tap_dom::TestDom::of(app);
         let page = t.html();
         assert!(page.contains(tx::OFF_DEV), "no updater: a development build says so: {page}");
         assert!(!page.contains("role=\"dialog\""), "nothing to tell: {page}");

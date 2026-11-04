@@ -423,7 +423,7 @@ mod tests {
 
     #[test]
     fn pasting_a_backup_previews_it_and_cancel_goes_back() {
-        use crate::test_dom::TestDom;
+        use crate::tap_dom::TestDom;
         fn app() -> Element {
             crate::store::use_provide_review();
             rsx! { ImportFlow { start: Step::Pick } }
@@ -447,7 +447,7 @@ mod tests {
 
     #[test]
     fn after_a_merge_or_a_failure_the_card_starts_over() {
-        use crate::test_dom::TestDom;
+        use crate::tap_dom::TestDom;
         #[derive(Props, Clone, PartialEq)]
         struct P {
             start: Step,

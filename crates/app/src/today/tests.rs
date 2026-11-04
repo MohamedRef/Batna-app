@@ -294,12 +294,12 @@ fn Spy() -> Element {
     rsx! {}
 }
 
-fn screen(t: &crate::test_dom::TestDom) -> Screen {
+fn screen(t: &crate::tap_dom::TestDom) -> Screen {
     t.with(|| *SEEN.get().expect("the spy ran").screen.peek())
 }
 
 /// Back on Today, sheets closed, before the next tap.
-fn home(t: &crate::test_dom::TestDom) {
+fn home(t: &crate::tap_dom::TestDom) {
     t.with(|| {
         let mut ui = SEEN.get().unwrap();
         ui.screen.set(Screen::Today);
@@ -309,7 +309,7 @@ fn home(t: &crate::test_dom::TestDom) {
 
 #[test]
 fn every_row_on_today_opens_what_it_names() {
-    use crate::test_dom::TestDom;
+    use crate::tap_dom::TestDom;
     crate::store::use_memory_store();
     let mut t = TestDom::of(|| {
         use_hook(|| *crate::plan::SETTINGS.write() = PlanSettings::default());
@@ -347,7 +347,7 @@ fn every_row_on_today_opens_what_it_names() {
 
 #[test]
 fn the_plan_hero_buttons_open_the_plan_and_the_bank() {
-    use crate::test_dom::TestDom;
+    use crate::tap_dom::TestDom;
     crate::store::use_memory_store();
     #[derive(Props, Clone, PartialEq)]
     struct P {
@@ -378,7 +378,7 @@ fn the_plan_hero_buttons_open_the_plan_and_the_bank() {
 
 #[test]
 fn with_nothing_ready_the_hero_opens_the_next_lesson() {
-    use crate::test_dom::TestDom;
+    use crate::tap_dom::TestDom;
     crate::store::use_memory_store();
     let mut t = TestDom::of(|| {
         shell(rsx! {
@@ -393,7 +393,7 @@ fn with_nothing_ready_the_hero_opens_the_next_lesson() {
 
 #[test]
 fn due_cases_open_the_cases_and_a_progress_row_its_lecture() {
-    use crate::test_dom::TestDom;
+    use crate::tap_dom::TestDom;
     crate::store::use_memory_store();
     let mut t = TestDom::of(|| {
         let lib = Library::get();

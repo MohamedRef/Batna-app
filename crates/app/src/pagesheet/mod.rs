@@ -519,7 +519,7 @@ mod render_tests {
         rsx! {}
     }
 
-    fn pressable() -> crate::test_dom::TestDom {
+    fn pressable() -> crate::tap_dom::TestDom {
         fn app() -> Element {
             crate::store::use_provide_review();
             use_hook(|| *OPEN.write() = Some((1, Scope::Book("hb".into()), None, false, None)));
@@ -531,7 +531,7 @@ mod render_tests {
             }
         }
         crate::store::use_memory_store();
-        crate::test_dom::TestDom::of(app)
+        crate::tap_dom::TestDom::of(app)
     }
 
     #[test]

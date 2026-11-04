@@ -414,7 +414,7 @@ mod render_tests {
             rsx! { ViewBar { of: TAPPED } }
         }
         crate::store::use_memory_store();
-        let mut t = crate::test_dom::TestDom::of(app);
+        let mut t = crate::tap_dom::TestDom::of(app);
         t.click("class=\"view-sort-btn\"");
         assert!(t.html().contains("role=\"menu\""), "{}", t.html());
         t.click(&format!("aria-label=\"{}\"", tx::CLOSE_MENU));
@@ -441,7 +441,7 @@ mod render_tests {
             }
         }
         crate::store::use_memory_store();
-        let mut t = crate::test_dom::TestDom::of(app);
+        let mut t = crate::tap_dom::TestDom::of(app);
         t.click("class=\"tap tap-plain course-head-btn\"");
         assert!(t.with(crate::lecture::is_open), "{}", t.html());
         t.with(crate::lecture::close_all);

@@ -331,7 +331,7 @@ mod tap_tests {
                 .unwrap();
             rsx! { TableItem { item, on_grade: |_| {} } }
         }
-        let mut t = crate::test_dom::TestDom::of(app);
+        let mut t = crate::tap_dom::TestDom::of(app);
         t.click("class=\"tb-reveal\"");
         assert!(t.html().contains("class=\"tb-answer\""), "{}", t.html());
         t.click(&format!("aria-label=\"{}\"", tx::KNEW_IT));

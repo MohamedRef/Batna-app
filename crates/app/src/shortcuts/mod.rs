@@ -234,7 +234,7 @@ mod tests {
             use_hook(|| open_sheet(true));
             rsx! { KeysSheet {} }
         }
-        let mut t = crate::test_dom::TestDom::of(app);
+        let mut t = crate::tap_dom::TestDom::of(app);
         t.click(&format!("aria-label=\"{}\"", tx::CLOSE));
         assert_eq!(t.html(), "", "✕ closes the list");
         t.with(|| open_sheet(true));

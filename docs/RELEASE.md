@@ -8,7 +8,7 @@ paid developer accounts. Everything here costs $0.
 The first **alpha** (`1.0.0-alpha.1`) was cut on 2026-11-02, when Mohamed
 said go. Releases are built and published by the **Release** workflow
 (`.github/workflows/release.yml`, run by hand; §4). The CI *preview* APKs
-(§3) keep coming on every merge.
+(§3) keep coming every 4 hours (when `main` changed) or by hand.
 
 Adapted from Kabar's `docs/RELEASE.md` on `main`. Batna has its own keys,
 its own feed and its own package (`app.batna`). It never shares anything
@@ -52,7 +52,7 @@ preview workflow refuses to publish a build below the live feed's. Only move to 
 | Signed release APK | `just apk` | `dist/android/batna.apk` (arm64, not debuggable, R8, versionCode from the version) |
 | Install on a device | `just devices`, then `just install-android <serial>` | Installs over the previous Batna signed with the same key |
 | Mac app | `just bundle-mac` | `dist/mac/Batna.app`, signed "Batna Code Signing" once that exists |
-| CI preview APK | Every push to `main` (`.github/workflows/batna-android-preview.yml`) | `batna-preview.apk` on the `batna-preview` prerelease. Signed with a throwaway preview key kept in the Actions cache (never Kabar's, never the release key). A run on Mondays and Thursdays keeps the keys from expiring, and a run fails rather than silently making new keys once previews are out. If it ever says a key is missing, the only way on is Actions › Android preview APK › Run workflow with **new_keys** ticked, then uninstall the old preview once. It updates itself from the same release (§5). |
+| CI preview APK | Every 4 hours when `main` changed, and by hand (`.github/workflows/batna-android-preview.yml`) | `batna-preview.apk` on the `batna-preview` prerelease. Signed with the release keys since 2026-11-02 (§4), so it installs over the alpha and back. It updates itself from the same release (§5). |
 
 A preview APK and a release APK carry different keys. Uninstall one before
 installing the other, or keep only the release build.
@@ -112,7 +112,7 @@ public release needs no token and costs nothing.
 
 | Channel | Release tag | Who follows it |
 |---|---|---|
-| Preview | `batna-preview` | Every push to `main`. Signed with the release keys since 2026-11-02, so any build can pick it in Settings › Updates and go back to alpha later. |
+| Preview | `batna-preview` | `main`, every 4 hours when it changed, or by hand. Signed with the release keys since 2026-11-02, so any build can pick it in Settings › Updates and go back to alpha later. |
 | Alpha | `batna-alpha` | Release builds, from the first alpha on. |
 | Beta / Stable | `batna-beta`, `batna-stable` | Later. A beta also reaches alpha followers; a release reaches everyone. |
 
@@ -274,7 +274,7 @@ or not reachable), with when it last looked. Then two per-device choices:
 | Choice | Options |
 |---|---|
 | How it updates | **لوحده** (automatic, the default): downloads on Wi-Fi only and installs at a calm moment. **قولّي الأول** (tell me first): says so, and downloads and installs on a tap. **لأ** (off): only on "دوّر على تحديث". |
-| Channel | Preview, alpha, beta or stable, on any build (a preview build starts on preview, a release build on alpha). Preview brings every merge; on the Mac it brings content only (no Mac preview build). Going back from preview to alpha offers the next alpha version. |
+| Channel | Preview, alpha, beta or stable, on any build (a preview build starts on preview, a release build on alpha). Preview brings `main` every 4 hours (when it changed); on the Mac it brings content only (no Mac preview build). Going back from preview to alpha offers the next alpha version. |
 
 When something is ready, a card above the current screen says so, with the
 first two lines of what's new (below) and "إيه الجديد؟". "بعدين" hides it

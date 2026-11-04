@@ -316,7 +316,7 @@ mod tests {
         let _one_at_a_time = SAVING.lock().unwrap_or_else(|e| e.into_inner());
         use crate::i18n::sound as tx;
         crate::store::use_memory_store();
-        let mut t = crate::test_dom::TestDom::new(VirtualDom::new_with_props(
+        let mut t = crate::tap_dom::TestDom::new(VirtualDom::new_with_props(
             root,
             Case { prefs: SoundPrefs::default() },
         ));

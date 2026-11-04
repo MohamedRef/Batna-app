@@ -367,7 +367,7 @@ mod tests {
 
     #[test]
     fn chips_search_and_lessons_answer_taps() {
-        use crate::test_dom::TestDom;
+        use crate::tap_dom::TestDom;
         crate::store::use_memory_store();
         fn root() -> Element {
             use_context_provider(crate::settings::SettingsNav::new);

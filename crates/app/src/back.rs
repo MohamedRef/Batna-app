@@ -229,7 +229,7 @@ mod tests {
             use_back(ui, (ui.screen)());
             rsx! { "{(ui.screen)():?}" }
         }
-        let mut t = crate::test_dom::TestDom::of(app);
+        let mut t = crate::tap_dom::TestDom::of(app);
         assert_eq!(t.html(), "Today");
         for to in [Screen::Bank, Screen::Settings, Screen::Today] {
             t.with(|| UI.get().unwrap().screen.set(to));

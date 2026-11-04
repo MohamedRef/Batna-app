@@ -1644,8 +1644,7 @@ pub mod settings {
     pub const CONTENT: &str = "المحتوى";
     pub const LECTURES_WRITTEN: &str = "المحاضرات المكتوبة:";
     pub const SOURCE: &str = "المصدر";
-    pub const BOOK: &str =
-        "Internal Medicine Postgraduate Lectures, Alexandria Faculty of Medicine (2025), part 1";
+    pub const BOOK: &str = "Internal Medicine Postgraduate Lectures, Alexandria Faculty of Medicine (2025), parts 1–5; Basics of Research lecture slides";
 
     pub const DIAG: &str = "اللي حصل من مشاكل";
     pub const DIAG_EMPTY: &str = "مفيش مشاكل لحد دلوقتي.";
@@ -1854,6 +1853,9 @@ pub mod remind {
     pub const CHANNEL_ABOUT: &str = "تذكير هادي بمراجعة اليوم";
     pub const PHONE_ONLY: &str =
         "التذكير بيرن من تطبيق باطنة المتثبّت على الموبايل أو الماك، مش من نسخة التطوير.";
+    /// The web app: a browser tab can't ring when it is closed.
+    pub const WEB_ONLY: &str =
+        "المتصفح مش بيرن بالتذكير. التذكير بيرن من تطبيق باطنة على الموبايل أو الماك، وتظبطه من هناك.";
     pub const MAC_HINT: &str =
         "على الماك الإشعار بيظهر حتى لو باطنة مقفولة. لو ما ظهرش، اسمح لباطنة من إعدادات النظام › الإشعارات.";
     pub const DAILY: &str = "تذكير المذاكرة اليومي";

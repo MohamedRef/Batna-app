@@ -35,6 +35,8 @@ mod bclc;
 mod bisap;
 mod bmi;
 mod bun_cr;
+#[cfg(test)]
+mod cases;
 mod cha2ds2_vasc;
 mod child_pugh;
 mod ckd;
@@ -981,6 +983,12 @@ pub fn reference_markdown() -> String {
 /// Round to `dp` decimal places for display.
 fn show(v: f64, dp: usize) -> String {
     format!("{v:.dp$}")
+}
+
+/// `v` as [`show`] prints it, so the band always agrees with the number on
+/// screen (FLI 59.6 shows "60" and is banded 60 or above).
+fn shown(v: f64, dp: usize) -> f64 {
+    show(v, dp).parse().unwrap_or(v)
 }
 
 #[cfg(test)]

@@ -31,7 +31,7 @@ fn shock_index(i: &Inputs) -> Result<Outcome, CalcError> {
     let hr = i.get_pos("hr_bpm")?;
     let sbp = i.get_pos("sbp_mmhg")?;
     let si = ((hr / sbp) * 100.0).round() / 100.0;
-    let (band, label, meaning) = if hr / sbp > 1.0 {
+    let (band, label, meaning) = if si > 1.0 {
         (
             "shock_index.unstable",
             "Above 1: unstable",

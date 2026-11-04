@@ -9,13 +9,16 @@ use dioxus::prelude::*;
 use super::grade::GradeRow;
 use crate::i18n::study as tx;
 
-/// The study browser fixture opens the points, so the تحشيشة box is checked too.
+// The study browser fixture opens the points, so the تحشيشة box is checked
+// too. Per test thread, so it never opens another test's list.
 #[cfg(test)]
-pub(crate) static OPEN_FOR_FIXTURE: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+thread_local! {
+    pub(crate) static OPEN_FOR_FIXTURE: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+}
 
 fn opened_for_fixture(_total: usize) -> Option<Vec<bool>> {
     #[cfg(test)]
-    if OPEN_FOR_FIXTURE.load(std::sync::atomic::Ordering::Relaxed) {
+    if OPEN_FOR_FIXTURE.get() {
         return Some(vec![false; _total]);
     }
     None

@@ -58,6 +58,8 @@ mod study;
 mod synced;
 mod table;
 #[cfg(test)]
+mod testdom;
+#[cfg(test)]
 mod testing;
 mod today;
 mod ui;

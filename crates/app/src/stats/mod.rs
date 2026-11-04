@@ -400,7 +400,10 @@ pub fn pct(r: Ratio) -> String {
 }
 
 #[cfg(test)]
-mod tests {
+mod tests;
+
+#[cfg(test)]
+mod pct_tests {
     use super::*;
 
     #[test]

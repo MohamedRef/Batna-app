@@ -44,6 +44,12 @@ pub fn open_calculators(mut ui: crate::Ui) {
     ui.screen.set(crate::Screen::Cases);
 }
 
+/// Whether the Cases screen is showing its Calculators tab: the sidebar
+/// then marks the الحاسبات tool, not حالات, as the page on show.
+pub fn calculators_shown(ui: crate::Ui) -> bool {
+    *ui.screen.read() == crate::Screen::Cases && *TAB.read() == Tab::Calculators
+}
+
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 enum Tab {
     Cases,

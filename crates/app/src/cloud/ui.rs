@@ -48,7 +48,13 @@ pub fn use_provide_cloud() {
         let mut handle = {
             // An in-memory store (the data folder couldn't be opened) has nothing to sync.
             let Some(path) = store.path.clone() else { return };
-            let vault = Box::new(super::session::KeyringVault::new());
+            #[cfg(target_os = "macos")]
+            let vault: Box<dyn super::session::SessionVault> = match path.parent() {
+                Some(dir) => Box::new(super::session::FileVault::mac(dir)),
+                None => Box::new(super::session::KeyringVault::new()),
+            };
+            #[cfg(not(target_os = "macos"))]
+            let vault: Box<dyn super::session::SessionVault> = Box::new(super::session::KeyringVault::new());
             match super::start(config, path, device, vault) {
                 Ok(h) => h,
                 Err(e) => {

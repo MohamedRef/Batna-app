@@ -29,7 +29,7 @@ The list lives in `batna_protocol::sync::TABLES`. **A new synced table must be a
 | Sync hub logic (tested natively against SQLite) | `crates/server/src/hub.rs` |
 | Tokens, Google ID-token check | `crates/server/src/tokens.rs`, `src/google.rs` |
 | Wire types, merge rules, client state machine | `crates/protocol/src/{sync,cloud,merge,client}.rs` |
-| App engine (sign-in, keychain, WebSocket, backoff) | `crates/app/src/cloud/` |
+| App engine (sign-in, session vault, WebSocket, backoff) | `crates/app/src/cloud/` |
 | Outbox and remote merge | `crates/app/src/store/sync.rs` (`sync_outbox`, migration 2) |
 | Settings screen | Settings › المزامنة (`crates/app/src/cloud/ui.rs`) |
 
@@ -71,7 +71,7 @@ just cloud-deploy
 curl https://batna-cloud.<your-subdomain>.workers.dev/v1/health
 ```
 
-Deploy the hub from `main` at PR #134 or later. An older hub rejects the `relay` ops that carry a restored backup to the other devices (as `wrong_device`), and the app then drops them for good. Whenever `batna_protocol::sync` changes, redeploy the hub before installing the new app. Refresh tokens rotate on use: an old one keeps working until the device presents its replacement, so a lost response or a failed Keychain/Keystore save never signs a device out, and a token that comes back after its replacement was used signs that device out. A signed-out device can't list or sign out the others, even while its access token lasts.
+Deploy the hub from `main` at PR #134 or later. An older hub rejects the `relay` ops that carry a restored backup to the other devices (as `wrong_device`), and the app then drops them for good. Whenever `batna_protocol::sync` changes, redeploy the hub before installing the new app. Refresh tokens rotate on use: an old one keeps working until the device presents its replacement, so a lost response or a failed session save never signs a device out, and a token that comes back after its replacement was used signs that device out. A signed-out device can't list or sign out the others, even while its access token lasts.
 
 ### 3.4 Connect the app
 1. `cp .env.example .env` and fill in `BATNA_CLOUD_URL` (the URL above) and the Desktop client's id and secret. `.env` is git-ignored; `just` loads it and the app reads it at build time.
@@ -118,4 +118,4 @@ cargo test -p batna-server -p batna-protocol   # hub, tokens, devices and merge 
 - A phone moved with Smart Switch or another copy of the app's data is a new device to the hub. Android backup is off in the manifest, and on Android 12+, where a device-to-device transfer ignores that, the app notices it was copied (a marker in `no_backup/` is missing) and takes a new `device_id` with an empty outbox (`crates/app/src/store/install.rs`). Its reviews are already on the hub, so it simply syncs as a new device. Sign in again on the new phone.
 - Secrets (`TOKEN_SIGNING_KEY`, `ALLOWED_EMAILS`) are Worker secrets, never in git.
 - Free-plan limits (Workers 100,000 requests/day, Durable Objects 100,000 requests/day) are far above one learner's use. The Free plan has no card on file, so Cloudflare pauses at a limit instead of billing.
-- On Linux (development and CI only) the session is kept in memory, so you sign in on every launch. The Mac uses the Keychain and Android the Keystore.
+- On Linux (development and CI only) the session is kept in memory, so you sign in on every launch. Android keeps it in the Keystore. The Mac keeps it in `cloud-session.json` in Batna's data folder, readable by your account only: the self-signed Batna.app has no Apple team ID, so the Keychain trusted only the exact build that saved the session and asked for the login password after every new build, every 15 minutes (each token refresh). The first launch with this change moves a Keychain session over, so the Keychain may ask one last time.

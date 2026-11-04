@@ -278,3 +278,146 @@ fn review_settings_offer_retention_and_new_items_unless_the_plan_sets_them() {
     assert!(page.contains(st::NEW_FROM_PLAN_1) && page.contains(st::NEW_FROM_PLAN_2), "{page}");
     assert_eq!(page.matches("aria-checked=true").count(), 1, "only retention is a choice: {page}");
 }
+
+thread_local! {
+    static SEEN: std::cell::Cell<Option<Ui>> = const { std::cell::Cell::new(None) };
+    static NAV: std::cell::Cell<Option<crate::settings::SettingsNav>> = const { std::cell::Cell::new(None) };
+}
+
+/// Remembers the shell's navigation so a test can see where a tap went.
+#[component]
+fn Spy() -> Element {
+    let ui = use_context::<Ui>();
+    let nav = use_context::<crate::settings::SettingsNav>();
+    SEEN.set(Some(ui));
+    NAV.set(Some(nav));
+    rsx! {}
+}
+
+fn screen(t: &crate::test_dom::TestDom) -> Screen {
+    t.with(|| *SEEN.get().expect("the spy ran").screen.peek())
+}
+
+/// Back on Today, sheets closed, before the next tap.
+fn home(t: &crate::test_dom::TestDom) {
+    t.with(|| {
+        let mut ui = SEEN.get().unwrap();
+        ui.screen.set(Screen::Today);
+        NAV.get().unwrap().close();
+    });
+}
+
+#[test]
+fn every_row_on_today_opens_what_it_names() {
+    use crate::test_dom::TestDom;
+    crate::store::use_memory_store();
+    let mut t = TestDom::of(|| {
+        use_hook(|| *crate::plan::SETTINGS.write() = PlanSettings::default());
+        shell(rsx! {
+            Spy {}
+            Today {}
+        })
+    });
+    // A session length is a choice, not a move.
+    let other = crate::onboarding::MINUTE_CHOICES[0];
+    t.click(&tx::minutes_short(other));
+    assert_eq!(t.with(crate::onboarding::session_minutes), other);
+    assert_eq!(screen(&t), Screen::Today);
+
+    for (button, to) in [
+        (tx::start_session(other), Screen::Study),
+        (format!("{}.", tx::NEW), Screen::Study),
+        (tx::ALL_LESSONS.to_string(), Screen::Learn),
+        (tx::QUICK_BANK.to_string(), Screen::Bank),
+    ] {
+        home(&t);
+        t.click(&button);
+        assert_eq!(screen(&t), to, "{button}");
+    }
+    for button in [tx::CHECKED_ROW, tx::UNVERIFIED_NOTE] {
+        home(&t);
+        t.click(button);
+        assert!(t.with(|| *NAV.get().unwrap().open.peek()), "{button} opens Settings › Data");
+    }
+    home(&t);
+    t.click("class=\"tap tap-row lecture-row\"");
+    assert!(t.with(crate::lecture::is_open), "a lecture row opens its lecture");
+    t.with(crate::lecture::close_all);
+}
+
+#[test]
+fn the_plan_hero_buttons_open_the_plan_and_the_bank() {
+    use crate::test_dom::TestDom;
+    crate::store::use_memory_store();
+    #[derive(Props, Clone, PartialEq)]
+    struct P {
+        t: DailyTarget,
+    }
+    fn app(p: P) -> Element {
+        shell(rsx! {
+            Spy {}
+            Hero { target: Some(p.t.clone()), due: 2, new_today: 0, unseen: 30, due_minutes: 7, due_tomorrow: 9, nothing: false, minutes: 15 }
+        })
+    }
+    let mock = target(Focus::Mock);
+    let days = mock.days_left;
+    let mut t = TestDom::new(VirtualDom::new_with_props(app, P { t: mock }));
+    t.click(tx::OPEN_BANK);
+    assert_eq!(screen(&t), Screen::Bank);
+    home(&t);
+    t.click(&tx::exam_in(days));
+    assert_eq!(screen(&t), Screen::Stats, "the pill opens the plan");
+    home(&t);
+    t.click(&format!("aria-label=\"{}\"", tx::PLAN_HINT));
+    assert_eq!(screen(&t), Screen::Stats, "so does the ring");
+    // The card itself starts today's session.
+    home(&t);
+    t.click("class=\"btn btn-lg btn-on-hero td-go\"");
+    assert_eq!(screen(&t), Screen::Study);
+}
+
+#[test]
+fn with_nothing_ready_the_hero_opens_the_next_lesson() {
+    use crate::test_dom::TestDom;
+    crate::store::use_memory_store();
+    let mut t = TestDom::of(|| {
+        shell(rsx! {
+            Spy {}
+            Hero { target: None, due: 0, new_today: 0, unseen: 0, due_minutes: 0, due_tomorrow: 3, nothing: false, minutes: 15 }
+        })
+    });
+    t.click(tx::OPEN_NEXT_LESSON);
+    assert_ne!(screen(&t), Screen::Today, "a lesson or the Lessons screen");
+    assert_ne!(screen(&t), Screen::Study);
+}
+
+#[test]
+fn due_cases_open_the_cases_and_a_progress_row_its_lecture() {
+    use crate::test_dom::TestDom;
+    crate::store::use_memory_store();
+    let mut t = TestDom::of(|| {
+        let lib = Library::get();
+        let ids: Vec<String> = lib
+            .lectures
+            .values()
+            .flat_map(|l| &l.items)
+            .filter(|i| i.body.kind() == "case")
+            .take(1)
+            .map(|i| i.id.clone())
+            .collect();
+        let id = lib.index.lectures[0].id.clone();
+        let l =
+            LectureProgress { id: id.clone(), title: lib.title(&id).to_string(), seen: 5, total: 20, due: 3 };
+        shell(rsx! {
+            Spy {}
+            DueCases { ids }
+            ul { Progress { lecture: l } }
+        })
+    });
+    t.click(&tx::due_cases(1));
+    assert_eq!(screen(&t), Screen::Cases);
+    home(&t);
+    t.click("class=\"tap tap-row progress-row\"");
+    assert!(t.with(crate::lecture::is_open));
+    t.with(crate::lecture::close_all);
+}

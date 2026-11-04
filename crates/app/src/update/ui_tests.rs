@@ -554,3 +554,110 @@ fn a_notification_tap_with_nothing_offered_opens_the_changelog() {
     dom.rebuild_in_place();
     assert_eq!(dioxus::ssr::render(&dom), "ok");
 }
+
+/// A screen and the sheet over it, as the shell mounts them, to press through.
+fn pressable(which: Which, status: Status) -> crate::test_dom::TestDom {
+    #[derive(Props, Clone, PartialEq)]
+    struct P {
+        which: u8,
+        open: Option<SheetMode>,
+        status: Status,
+    }
+    fn app(p: P) -> Element {
+        let status = use_signal(|| Some(p.status.clone()));
+        use_context_provider(|| UpdateSheetNav(Signal::new(p.open)));
+        rsx! {
+            match p.which {
+                0 => rsx! { UpdatesView { status } },
+                1 => rsx! { BannerView { status } },
+                2 => rsx! { ContentNoteView { status } },
+                _ => rsx! {},
+            }
+            SheetView { status }
+        }
+    }
+    let (which, open) = match which {
+        Which::Section => (0, None),
+        Which::Banner => (1, None),
+        Which::Note => (2, None),
+        Which::Sheet(m) => (3, Some(m)),
+    };
+    crate::test_dom::TestDom::new(VirtualDom::new_with_props(app, P { which, open, status }))
+}
+
+fn sheet_open(page: &str) -> bool {
+    page.contains("role=\"dialog\"")
+}
+
+#[test]
+fn the_changelog_opens_builds_and_older_ones_on_tap_and_closes() {
+    let mut s = status(Phase::UpToDate, Mode::Auto);
+    s.build = 39;
+    s.history = history(10);
+    let mut t = pressable(Which::Sheet(SheetMode::History), s);
+    assert!(!has(&t.html(), "جديد 8"));
+    t.click("0.1.0 (38)");
+    assert!(has(&t.html(), "جديد 8"), "a tap opens a build: {}", t.html());
+    assert_eq!(t.html().matches("aria-expanded=\"true\"").count(), 2);
+    t.click("0.1.0 (38)");
+    assert!(!has(&t.html(), "جديد 8"), "and closes it");
+    t.click(tx::SHOW_OLDER);
+    assert!(has(&t.html(), "0.1.0 (34)"), "four more: {}", t.html());
+    t.click_nth(tx::CLOSE, 1);
+    assert!(!sheet_open(&t.html()), "{}", t.html());
+}
+
+#[test]
+fn a_folded_kind_shows_all_then_less() {
+    let mut s = status(Phase::UpToDate, Mode::Auto);
+    let lines: Vec<Change> = (0..8).map(|i| change(ChangeKind::Fixed, &format!("إصلاح {i}"))).collect();
+    s.history = vec![build_changes(41, lines, false)];
+    let mut t = pressable(Which::Sheet(SheetMode::History), s);
+    t.click(&tx::SHOW_ALL.replace("{n}", "8"));
+    assert!(has(&t.html(), "إصلاح 7") && has(&t.html(), tx::SHOW_LESS), "{}", t.html());
+    t.click(tx::SHOW_LESS);
+    assert!(!has(&t.html(), "إصلاح 7"));
+}
+
+#[test]
+fn settings_rows_open_the_sheet_on_the_right_page() {
+    let o = offer("0.2.0", 0);
+    let mut s = status(Phase::Available(o), Mode::Notify);
+    s.history = history(2);
+    let mut t = pressable(Which::Section, s.clone());
+    assert!(!sheet_open(&t.html()));
+    t.click(tx::WHATS_NEW_ASK);
+    assert!(sheet_open(&t.html()) && has(&t.html(), tx::AVAILABLE), "the offer: {}", t.html());
+    t.click(&format!("aria-label=\"{}\"", tx::CLOSE));
+    assert!(!sheet_open(&t.html()), "{}", t.html());
+    t.click(tx::HISTORY);
+    assert!(sheet_open(&t.html()), "the changelog: {}", t.html());
+
+    // Without an updater (this test build) the buttons are safe no-ops.
+    let mut t = pressable(Which::Section, s);
+    for label in [tx::CHECK_NOW, tx::MODE_OFF, tx::BETA, tx::DOWNLOAD] {
+        t.click(label);
+        assert!(has(&t.html(), label), "{label}");
+    }
+    t.input_event("change", "role=\"switch\"", "false");
+}
+
+#[test]
+fn the_banner_and_the_note_open_the_sheet_or_step_aside() {
+    let o =
+        with_changes(offer("0.2.0", 0), vec![build_changes(50, vec![change(ChangeKind::New, "أول")], false)]);
+    let mut t = pressable(Which::Banner, status(Phase::Ready(o), Mode::Notify));
+    t.click(tx::INSTALL_NOW);
+    t.click(tx::LATER);
+    t.click(tx::WHATS_NEW_ASK);
+    assert!(sheet_open(&t.html()), "{}", t.html());
+
+    let mut s = status(Phase::UpToDate, Mode::Auto);
+    s.content_build = 45;
+    s.history = vec![build_changes(45, vec![change(ChangeKind::New, "محاضرة")], true)];
+    s.prefs.content_from = Some("0.1.0+41".into());
+    let mut t = pressable(Which::Note, s);
+    t.click(tx::CLOSE);
+    t.click(tx::WHATS_NEW_ASK);
+    assert!(sheet_open(&t.html()) && has(&t.html(), tx::CONTENT_UPDATED_TITLE), "{}", t.html());
+}

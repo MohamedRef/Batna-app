@@ -387,3 +387,166 @@ fn HookCard(hook: Hook) -> Element {
         }
     }
 }
+
+#[cfg(test)]
+mod render_tests {
+    use super::*;
+
+    #[derive(Props, Clone, PartialEq)]
+    struct P {
+        open: Option<Open>,
+    }
+
+    fn app(p: P) -> Element {
+        crate::store::use_provide_review();
+        use_hook(|| *OPEN.write() = p.open.clone());
+        rsx! {
+            crate::browser_fixture::Shell { screen: Screen::Study, focus: false, BookSheet {} }
+        }
+    }
+
+    fn render(open: Option<Open>) -> String {
+        crate::store::use_memory_store();
+        let mut dom = VirtualDom::new_with_props(app, P { open });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn a_closed_sheet_draws_nothing() {
+        assert!(!render(None).contains("bk-title"));
+    }
+
+    #[test]
+    fn a_page_says_where_it_is_what_came_from_it_and_how_to_study_it() {
+        let lib = Library::get();
+        let made = page_content(lib, 1, &Scope::Book("hb".into()), |_| false);
+        let page = render(Some((
+            1,
+            Scope::Book("hb".into()),
+            Some("Hepatic fibrosis follows necrosis.".into()),
+            false,
+            None,
+        )));
+        assert!(page.contains(tx::TITLE) && page.contains(&lib.crumb("hb.L01")), "{page}");
+        assert!(page.contains("Hepatic fibrosis follows necrosis."), "the chip's own quote: {page}");
+        assert!(page.contains(tx::MADE) && page.contains(&count(made.playable.len(), &ITEM)), "{page}");
+        assert!(page.contains(&format!("{} ({})", tx::STUDY, made.playable.len())), "{page}");
+        assert!(page.contains(tx::OPEN_LECTURE));
+    }
+
+    #[test]
+    fn a_quote_held_back_until_he_answers_says_so() {
+        let page = render(Some((1, Scope::Book("hb".into()), None, true, None)));
+        assert!(page.contains(tx::QUOTE_HELD), "{page}");
+    }
+
+    #[test]
+    fn a_page_outside_every_lecture_has_nothing_yet() {
+        let page = render(Some((99_999, Scope::Book("hb".into()), None, false, None)));
+        assert!(page.contains(tx::NO_LECTURE) && page.contains(tx::NOTHING_YET), "{page}");
+        assert!(!page.contains(tx::OPEN_LECTURE) && !page.contains(tx::STUDY), "no dead buttons: {page}");
+    }
+
+    #[test]
+    fn a_slide_is_titled_as_a_slide_and_a_hook_shows_under_its_quote() {
+        let hook = Hook { text: "Remember **ABC**".into(), parts: vec![("A".into(), "Alcohol".into())] };
+        let page =
+            render(Some((1, Scope::Slides("res.L02".into()), Some("Wheeze".into()), false, Some(hook))));
+        assert!(page.contains(tx::SLIDE_TITLE) && page.contains(tx::HOOK), "{page}");
+        assert!(page.contains("<th>A</th><td>Alcohol</td>"), "the mnemonic's letters: {page}");
+        // An empty hook is left out.
+        let blank = Hook { text: "  ".into(), parts: vec![] };
+        let page =
+            render(Some((1, Scope::Slides("res.L02".into()), Some("Wheeze".into()), false, Some(blank))));
+        assert!(!page.contains("class=\"bk-hook\""), "{page}");
+    }
+
+    #[test]
+    fn quotes_keep_the_pages_titles_tables_and_lists() {
+        let text = "Table 2: Child-Pugh classification\n| Measure | 1 | 2 |\n|---|---|---|\n| Ascites | Absent | Slight |";
+        let html = dioxus::ssr::render_element(rsx! { Quote { text } });
+        assert!(html.contains("<p class=\"bk-q-title\">Table 2: Child-Pugh classification</p>"), "{html}");
+        assert!(html.contains("<th>Measure</th>") && html.contains("<td>Absent</td>"), "{html}");
+        assert!(!html.contains("---"), "{html}");
+
+        let html =
+            dioxus::ssr::render_element(rsx! { Quote { text: "Alcohol\nViral hepatitis".to_string() } });
+        assert!(
+            html.contains("<ul class=\"bk-q-list\">") && html.contains(">Viral hepatitis</li>"),
+            "{html}"
+        );
+
+        let text = "Table 1: Causes\nMetabolic disease:\n  Hemochromatosis\n  Wilson disease\nDrugs";
+        let html = dioxus::ssr::render_element(rsx! { Quote { text } });
+        assert!(html.contains("rowspan=\"2\"") && html.contains(">Metabolic disease</th>"), "{html}");
+        assert!(
+            html.contains("colspan=\"2\"") && html.contains(">Drugs</td>"),
+            "a row without a group: {html}"
+        );
+
+        let text = "Box 1: Signs\nJaundice\nAscites";
+        let html = dioxus::ssr::render_element(rsx! { Quote { text } });
+        assert!(
+            html.contains("<td class=\"d0\">Jaundice</td>"),
+            "a titled list is a one-column table: {html}"
+        );
+        let html = dioxus::ssr::render_element(rsx! { Quote { text: "One line only.".to_string() } });
+        assert!(html.contains("<p class=\"bk-q-para\">One line only.</p>"), "{html}");
+    }
+
+    #[test]
+    fn nested_rows_indent_under_their_group() {
+        use batna_core::quote::Row;
+        let row = |depth, text: &str, group| Row { depth, text: text.into(), group };
+        let g = grouped(&[
+            row(0, "Viral:", true),
+            row(1, "HBV", false),
+            row(2, "HDV", false),
+            row(0, "Drugs", false),
+        ]);
+        assert_eq!(g[0], (Some(("Viral".into(), 2)), vec!["HBV".to_string(), "\u{2003}HDV".to_string()]));
+        assert_eq!(g[1], (None, vec!["Drugs".to_string()]));
+    }
+
+    thread_local! {
+        static UI: std::cell::Cell<Option<crate::Ui>> = const { std::cell::Cell::new(None) };
+    }
+
+    #[component]
+    fn Spy() -> Element {
+        UI.set(Some(use_context::<crate::Ui>()));
+        rsx! {}
+    }
+
+    fn pressable() -> crate::test_dom::TestDom {
+        fn app() -> Element {
+            crate::store::use_provide_review();
+            use_hook(|| *OPEN.write() = Some((1, Scope::Book("hb".into()), None, false, None)));
+            rsx! {
+                crate::browser_fixture::Shell { screen: Screen::Learn, focus: false,
+                    Spy {}
+                    BookSheet {}
+                }
+            }
+        }
+        crate::store::use_memory_store();
+        crate::test_dom::TestDom::of(app)
+    }
+
+    #[test]
+    fn study_starts_a_session_on_the_page_and_the_lecture_button_opens_it() {
+        let mut t = pressable();
+        t.click(&format!("{} (", tx::STUDY));
+        assert!(t.with(|| OPEN.peek().is_none()), "the sheet closes");
+        assert_eq!(t.with(|| *UI.get().unwrap().screen.peek()), Screen::Study);
+        let start = t.with(|| crate::study::START.peek().clone()).expect("a session");
+        assert_eq!(start.lectures, Some(vec!["hb.L01".to_string()]));
+        assert!(start.items.is_some_and(|i| !i.is_empty()));
+
+        let mut t = pressable();
+        t.click(tx::OPEN_LECTURE);
+        assert!(t.with(|| OPEN.peek().is_none()) && t.with(crate::lecture::is_open));
+        t.with(crate::lecture::close_all);
+    }
+}

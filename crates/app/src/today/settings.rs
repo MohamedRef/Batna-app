@@ -123,4 +123,28 @@ mod tests {
         ReviewChoice::NewPerDay(15).apply(&mut current);
         assert_eq!(current.retention, Retention::R95);
     }
+
+    #[test]
+    fn choices_name_their_setting_and_their_hint() {
+        assert_eq!(ReviewChoice::Retention(Retention::R90).key(), "review.retention");
+        assert_eq!(ReviewChoice::NewPerDay(20).key(), "review.new_per_day");
+        let hints: Vec<_> = [Retention::R85, Retention::R90, Retention::R95].map(retention_hint).to_vec();
+        assert_eq!(hints, [tx::R85, tx::R90, tx::R95]);
+    }
+
+    #[test]
+    fn tapping_the_chosen_values_saves_them_again() {
+        crate::store::use_memory_store();
+        fn app() -> Element {
+            crate::store::use_provide_review();
+            use_hook(|| *crate::plan::SETTINGS.write() = Default::default());
+            rsx! { StudySection {} }
+        }
+        let mut t = crate::test_dom::TestDom::of(app);
+        let before = t.html();
+        // The checked ones: the same values, so the shared test store is unchanged.
+        t.click_nth("aria-checked=true", 0);
+        t.click_nth("aria-checked=true", 1);
+        assert_eq!(t.html(), before, "{before}");
+    }
 }

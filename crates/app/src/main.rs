@@ -57,6 +57,8 @@ mod store;
 mod study;
 mod synced;
 mod table;
+#[cfg(test)]
+mod test_dom;
 mod today;
 mod ui;
 mod update;

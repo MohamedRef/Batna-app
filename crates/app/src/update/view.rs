@@ -642,13 +642,29 @@ pub fn use_update_notice_taps(nav: SettingsNav) {
                 Some(sheet) => sheet.open_offer(),
                 None => nav.show(Some(Section::Updates)),
             }
-            match tap.as_str() {
-                "download" => work(Updater::download),
-                "install" => work(Updater::install),
-                _ => {}
+            match tap_asks(&tap) {
+                Some(Asked::Download) => work(Updater::download),
+                Some(Asked::Install) => work(Updater::install),
+                None => {}
             }
         }
     });
+}
+
+/// What a notification button asked the updater for.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Asked {
+    Download,
+    Install,
+}
+
+/// The notification's button (`open` only opens the sheet).
+fn tap_asks(tap: &str) -> Option<Asked> {
+    match tap {
+        "download" => Some(Asked::Download),
+        "install" => Some(Asked::Install),
+        _ => None,
+    }
 }
 
 /// Whether installing now could cut a study session short: never in the
@@ -668,6 +684,12 @@ fn overlay_open() -> bool {
 /// The first tick after a real load marks two seconds of stable operation.
 fn should_settle_content(loaded: bool, settled_ticks: u32) -> bool {
     loaded && settled_ticks == 0
+}
+
+/// A waiting content pack switches in only between sessions, with nothing
+/// open that the redraw would lose (`overlay` is asked only then).
+fn should_switch(waiting: bool, screen: Screen, overlay: impl FnOnce() -> bool) -> bool {
+    waiting && calm(screen) && !overlay()
 }
 
 /// Switches to a content pack that arrived while Batna is open, once he is
@@ -696,9 +718,7 @@ pub fn use_content_switch(ui: Ui) {
                     continue;
                 }
                 let waiting = status.peek().as_ref().is_some_and(|s| s.content_waiting);
-                if waiting
-                    && calm(*ui.screen.peek())
-                    && !overlay_open()
+                if should_switch(waiting, *ui.screen.peek(), overlay_open)
                     && super::get().is_some_and(|u| u.apply_content())
                 {
                     if let Some(r) = &review {
@@ -732,29 +752,61 @@ pub fn use_android_install(ui: Ui) {
         );
         while let Ok(hidden) = eval.recv::<Option<bool>>().await {
             let Some(s) = status.peek().clone() else { continue };
-            match (&s.phase, hidden) {
-                (Phase::Installing(_), _) => {
+            let now_calm = || calm(*ui.screen.peek()) && !overlay_open();
+            match install_step(&s, hidden, now_calm, install_allowed, install_quietly) {
+                InstallStep::Poll { front } => {
                     #[cfg(target_os = "android")]
                     if let Some(u) = super::get() {
                         // Back in front: a confirmation that arrived in the
                         // background (shown as a notification) opens now.
-                        if hidden == Some(false) {
+                        if front {
                             let _ = crate::platform::install::show_pending_confirm();
                         }
                         u.poll_install();
                     }
+                    #[cfg(not(target_os = "android"))]
+                    let _ = front;
                 }
-                (Phase::NeedsPermission(_), Some(false)) if install_allowed() => work(Updater::install),
-                (Phase::Ready(o), Some(true)) if s.prefs.mode == Mode::Auto => {
-                    let tried = s.prefs.auto_failed.as_deref() == Some(o.key().as_str());
-                    if calm(*ui.screen.peek()) && !overlay_open() && !tried && install_quietly() {
-                        work(Updater::install);
-                    }
-                }
-                _ => {}
+                InstallStep::Install => work(Updater::install),
+                InstallStep::Wait => {}
             }
         }
     });
+}
+
+/// What one tick of the Android install watcher does.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum InstallStep {
+    /// An install is running: follow it (`front`: Batna just came back).
+    Poll {
+        front: bool,
+    },
+    Install,
+    Wait,
+}
+
+/// `hidden`: the page just went to the background (`Some(true)`), came
+/// back (`Some(false)`), or neither (a timer tick). The checks that ask
+/// Android run only when they matter.
+fn install_step(
+    s: &Status,
+    hidden: Option<bool>,
+    calm_now: impl FnOnce() -> bool,
+    allowed: impl FnOnce() -> bool,
+    quiet: impl FnOnce() -> bool,
+) -> InstallStep {
+    match (&s.phase, hidden) {
+        (Phase::Installing(_), _) => InstallStep::Poll { front: hidden == Some(false) },
+        // Back from "Install unknown apps" with the permission granted.
+        (Phase::NeedsPermission(_), Some(false)) if allowed() => InstallStep::Install,
+        // Automatic mode installs a ready update quietly once Batna is in the
+        // background, never mid-session and never twice after a failure.
+        (Phase::Ready(o), Some(true)) if s.prefs.mode == Mode::Auto => {
+            let tried = s.prefs.auto_failed.as_deref() == Some(o.key().as_str());
+            if !tried && calm_now() && quiet() { InstallStep::Install } else { InstallStep::Wait }
+        }
+        _ => InstallStep::Wait,
+    }
 }
 
 fn install_allowed() -> bool {
@@ -803,5 +855,106 @@ mod settle_tests {
         assert!(!should_settle_content(false, 1));
         assert!(should_settle_content(true, 0));
         assert!(!should_settle_content(true, 1));
+    }
+}
+
+#[cfg(test)]
+mod watcher_tests {
+    use super::super::tests::{offer, status};
+    use super::*;
+
+    const YES: fn() -> bool = || true;
+    const NO: fn() -> bool = || false;
+
+    #[test]
+    fn the_install_watcher_follows_installs_and_waits_for_calm() {
+        let o = offer("0.2.0", 50);
+        let installing = status(Phase::Installing(o.clone()), Mode::Notify);
+        assert_eq!(install_step(&installing, Some(false), NO, NO, NO), InstallStep::Poll { front: true });
+        assert_eq!(install_step(&installing, None, NO, NO, NO), InstallStep::Poll { front: false });
+
+        let asked = status(Phase::NeedsPermission(o.clone()), Mode::Notify);
+        assert_eq!(install_step(&asked, Some(false), NO, YES, NO), InstallStep::Install, "allowed meanwhile");
+        assert_eq!(install_step(&asked, Some(false), NO, NO, NO), InstallStep::Wait);
+        assert_eq!(install_step(&asked, Some(true), NO, YES, NO), InstallStep::Wait, "only on coming back");
+
+        let mut ready = status(Phase::Ready(o.clone()), Mode::Auto);
+        assert_eq!(
+            install_step(&ready, Some(true), YES, NO, YES),
+            InstallStep::Install,
+            "quietly, in the background"
+        );
+        assert_eq!(install_step(&ready, Some(true), NO, NO, YES), InstallStep::Wait, "mid-session");
+        assert_eq!(install_step(&ready, Some(true), YES, NO, NO), InstallStep::Wait, "Android would ask");
+        assert_eq!(
+            install_step(&ready, Some(false), YES, NO, YES),
+            InstallStep::Wait,
+            "in front: the banner asks"
+        );
+        ready.prefs.auto_failed = Some(o.key());
+        assert_eq!(
+            install_step(&ready, Some(true), YES, NO, YES),
+            InstallStep::Wait,
+            "never twice after a failure"
+        );
+        let notify = status(Phase::Ready(o), Mode::Notify);
+        assert_eq!(
+            install_step(&notify, Some(true), YES, NO, YES),
+            InstallStep::Wait,
+            "he chose to be asked"
+        );
+        assert_eq!(
+            install_step(&status(Phase::UpToDate, Mode::Auto), None, YES, YES, YES),
+            InstallStep::Wait
+        );
+        // Away from Android nothing may install itself.
+        assert_eq!(
+            install_step(&asked, Some(false), YES, install_allowed, install_quietly),
+            InstallStep::Wait
+        );
+        let ready = status(Phase::Ready(offer("0.3.0", 60)), Mode::Auto);
+        assert_eq!(
+            install_step(&ready, Some(true), YES, install_allowed, install_quietly),
+            InstallStep::Wait
+        );
+    }
+
+    #[test]
+    fn content_switches_between_sessions_and_taps_name_their_step() {
+        assert!(should_switch(true, Screen::Today, || false));
+        assert!(!should_switch(true, Screen::Study, || false), "never mid-session");
+        assert!(!should_switch(true, Screen::Today, || true), "a lecture or a draft is open");
+        assert!(!should_switch(false, Screen::Today, || panic!("not asked without a pack")));
+        assert_eq!(tap_asks("download"), Some(Asked::Download));
+        assert_eq!(tap_asks("install"), Some(Asked::Install));
+        assert_eq!(tap_asks("open"), None);
+    }
+
+    #[test]
+    fn the_shell_hooks_mount_quietly_without_an_updater() {
+        crate::store::use_memory_store();
+        fn app() -> Element {
+            let nav = use_context_provider(crate::settings::SettingsNav::new);
+            use_context_provider(super::super::sheet::UpdateSheetNav::new);
+            let ui = use_context_provider(|| Ui {
+                screen: Signal::new(Screen::Today),
+                prefs: Signal::new(Default::default()),
+                focus: Signal::new(false),
+            });
+            crate::store::use_provide_review();
+            use_update_notice_taps(nav);
+            use_content_switch(ui);
+            use_android_install(ui);
+            rsx! {
+                UpdatesSection {}
+                UpdateBanner {}
+                ContentNote {}
+                super::super::sheet::UpdateSheet {}
+            }
+        }
+        let t = crate::test_dom::TestDom::of(app);
+        let page = t.html();
+        assert!(page.contains(tx::OFF_DEV), "no updater: a development build says so: {page}");
+        assert!(!page.contains("role=\"dialog\""), "nothing to tell: {page}");
     }
 }

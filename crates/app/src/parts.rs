@@ -308,3 +308,142 @@ mod view_tests {
         assert_eq!(v.iter().map(|i| i.0).collect::<String>(), "abcd");
     }
 }
+
+#[cfg(test)]
+mod render_tests {
+    use super::*;
+
+    const LESSONS: Collection = Collection {
+        key: "test.render.lessons",
+        layout: Layout::List,
+        sorts: &[Sort::Left, Sort::Book, Sort::Name],
+        groups: true,
+    };
+    const ONE_ORDER: Collection =
+        Collection { key: "test.render.one", layout: Layout::Cards, sorts: &[Sort::Book], groups: false };
+
+    fn bar(of: Collection, pick: Option<ViewPick>) -> String {
+        #[derive(Props, Clone, PartialEq)]
+        struct P {
+            of: Collection,
+            pick: Option<ViewPick>,
+        }
+        fn app(p: P) -> Element {
+            use_hook(|| {
+                if let Some(v) = p.pick {
+                    PICKS.write().insert(p.of.key, v);
+                }
+            });
+            rsx! { ViewBar { of: p.of } }
+        }
+        crate::store::use_memory_store();
+        let mut dom = VirtualDom::new_with_props(app, P { of, pick });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn the_view_bar_shows_the_order_and_the_three_layouts() {
+        let page = bar(LESSONS, None);
+        assert!(page.contains(tx::SORT_LEFT), "the first order is the default: {page}");
+        for l in Layout::ALL {
+            assert!(page.contains(&format!("aria-label=\"{}\"", l.label())), "{page}");
+        }
+        // The list layout is this screen's default.
+        assert!(page.contains(&format!("aria-checked=\"true\" aria-label=\"{}\"", tx::LIST)), "{page}");
+        assert!(page.contains("aria-expanded=\"false\"") && !page.contains("role=\"menu\""), "{page}");
+
+        let page = bar(LESSONS, Some(ViewPick { layout: Layout::Compact, sort: Sort::Name, grouped: true }));
+        assert!(page.contains(tx::SORT_NAME) && page.contains(tx::GROUPED_SHORT), "{page}");
+        assert!(page.contains(&format!("aria-checked=\"true\" aria-label=\"{}\"", tx::COMPACT)), "{page}");
+
+        // One order and no groups: no order menu at all.
+        let page = bar(ONE_ORDER, None);
+        assert!(!page.contains("view-sort-btn") && page.contains(tx::LAYOUT_TITLE), "{page}");
+    }
+
+    #[test]
+    fn a_choice_holds_for_the_run_and_odd_ones_fall_back() {
+        fn app() -> Element {
+            assert_eq!(ONE_ORDER.pick(), ONE_ORDER.default_pick(), "nothing chosen yet");
+            // A saved order this screen doesn't offer, and groups it can't show.
+            ONE_ORDER.set(ViewPick { layout: Layout::List, sort: Sort::Due, grouped: true });
+            assert_eq!(ONE_ORDER.pick(), ViewPick { layout: Layout::List, sort: Sort::Book, grouped: false });
+            // A second screen keeps its own (not LESSONS: the store is shared by every test).
+            const OTHER: Collection = Collection { key: "test.render.other", ..LESSONS };
+            OTHER.set(ViewPick { layout: Layout::Cards, sort: Sort::Book, grouped: true });
+            assert_eq!(OTHER.pick(), ViewPick { layout: Layout::Cards, sort: Sort::Book, grouped: true });
+            rsx! { "ok" }
+        }
+        crate::store::use_memory_store();
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        assert_eq!(dioxus::ssr::render(&dom), "ok");
+        assert_eq!(Layout::Cards.as_str(), "cards");
+        assert_eq!(Layout::DEFAULT, Layout::List);
+        for s in [Sort::Book, Sort::Left, Sort::Name, Sort::Due] {
+            assert!(!s.label().is_empty());
+        }
+    }
+
+    #[test]
+    fn counts_read_left_to_right_and_course_heads_open_the_map() {
+        let html = dioxus::ssr::render_element(rsx! { Count { done: 3, total: 12 } });
+        assert_eq!(html, "<span class=\"num-ltr\">3 / 12</span>");
+        fn app() -> Element {
+            rsx! {
+                crate::browser_fixture::Shell { screen: crate::Screen::Learn, focus: false,
+                    CourseHead { short: "الكبد".to_string(), title: "Hepatology".to_string() }
+                }
+            }
+        }
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        let page = dioxus::ssr::render(&dom);
+        assert!(
+            page.contains("الكبد") && page.contains("lang=\"en\"") && page.contains(">Hepatology<"),
+            "{page}"
+        );
+        assert!(page.contains(crate::i18n::courses::TITLE));
+    }
+
+    #[test]
+    fn the_menu_changes_the_order_the_groups_and_the_layout() {
+        const TAPPED: Collection = Collection { key: "test.render.tapped", ..LESSONS };
+        fn app() -> Element {
+            rsx! { ViewBar { of: TAPPED } }
+        }
+        crate::store::use_memory_store();
+        let mut t = crate::test_dom::TestDom::of(app);
+        t.click("class=\"view-sort-btn\"");
+        assert!(t.html().contains("role=\"menu\""), "{}", t.html());
+        t.click(&format!("aria-label=\"{}\"", tx::CLOSE_MENU));
+        assert!(!t.html().contains("role=\"menu\""));
+        t.click("class=\"view-sort-btn\"");
+        t.click(&format!(">{}<", tx::SORT_NAME));
+        assert_eq!(t.with(|| TAPPED.pick()).sort, Sort::Name);
+        let grouped = t.with(|| TAPPED.pick()).grouped;
+        t.click("class=\"view-sort-btn\"");
+        t.click(&format!(">{}<", tx::GROUPED));
+        assert_eq!(t.with(|| TAPPED.pick()).grouped, !grouped, "grouping toggles");
+        t.click(&format!("aria-label=\"{}\"", tx::COMPACT));
+        assert_eq!(t.with(|| TAPPED.pick()).layout, Layout::Compact);
+        assert!(!t.html().contains("role=\"menu\""));
+    }
+
+    #[test]
+    fn a_course_head_opens_the_course_map() {
+        fn app() -> Element {
+            rsx! {
+                crate::browser_fixture::Shell { screen: crate::Screen::Learn, focus: false,
+                    CourseHead { short: "الكبد".to_string(), title: "Hepatology".to_string() }
+                }
+            }
+        }
+        crate::store::use_memory_store();
+        let mut t = crate::test_dom::TestDom::of(app);
+        t.click("class=\"tap tap-plain course-head-btn\"");
+        assert!(t.with(crate::lecture::is_open), "{}", t.html());
+        t.with(crate::lecture::close_all);
+    }
+}

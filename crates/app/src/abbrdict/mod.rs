@@ -276,4 +276,126 @@ mod tests {
         assert_eq!(letter("5HT3"), '#');
         assert_eq!(letter("β2GPI"), '#');
     }
+
+    fn page(course: Option<&'static str>) -> String {
+        crate::store::use_memory_store();
+        #[derive(Props, Clone, PartialEq)]
+        struct Case {
+            course: Option<&'static str>,
+        }
+        fn root(c: Case) -> Element {
+            use_context_provider(crate::settings::SettingsNav::new);
+            use_hook(|| *COURSE.write() = c.course.map(str::to_string));
+            rsx! {
+                crate::browser_fixture::Shell { screen: crate::Screen::Learn, focus: false,
+                    Dictionary {}
+                    OpenButton {}
+                }
+            }
+        }
+        let mut dom = VirtualDom::new_with_props(root, Case { course });
+        dom.rebuild_in_place();
+        let html = dioxus::ssr::render(&dom);
+        // The inline stylesheets name the same classes.
+        let mut out = String::new();
+        let mut rest = html.as_str();
+        while let Some(at) = rest.find("<style>") {
+            out.push_str(&rest[..at]);
+            rest = rest[at..].split_once("</style>").map_or("", |(_, r)| r);
+        }
+        out + rest
+    }
+
+    #[test]
+    fn the_page_lists_a_course_a_to_z_with_its_lessons() {
+        let html = page(Some("hb"));
+        let hb = &index()["hb"];
+        assert!(html.contains(tx::DICT_TITLE) && html.contains(&tx::count(hb.len())), "{html}");
+        assert_eq!(html.matches("class=\"abd-item\"").count(), hb.len(), "{html}");
+        assert!(html.contains("<span class=\"abd-term\">SBP</span>"), "{html}");
+        // The chosen course is the pressed chip; every course with terms is offered.
+        assert_eq!(html.matches("aria-pressed=\"true\"").count(), 1, "{html}");
+        assert_eq!(html.matches("class=\"chip tap-chip abd-course\"").count(), courses().len());
+        // Letters come A–Z, with digits and Greek last.
+        let letters: Vec<char> = html
+            .match_indices("<h2 class=\"abd-l\">")
+            .filter_map(|(at, m)| html[at + m.len()..].chars().next())
+            .collect();
+        let mut sorted = letters.clone();
+        sorted.sort_by_key(|l| (*l == '#', *l));
+        assert_eq!(letters, sorted);
+        assert!(html.contains("class=\"abd-lesson tap\""), "each use is a way into its lesson");
+        assert!(html.contains("class=\"chip tap-chip abd-open\""), "the Lessons button");
+    }
+
+    #[test]
+    fn an_unknown_or_missing_course_falls_back_to_the_first() {
+        let first = courses()[0].0;
+        let fallback = page(Some("no-such-course"));
+        let none = page(None);
+        assert_eq!(fallback, none);
+        assert_eq!(none.matches("class=\"abd-item\"").count(), index()[first].len());
+    }
+
+    #[test]
+    fn opening_it_keeps_only_a_known_course() {
+        crate::store::use_memory_store();
+        fn app() -> Element {
+            use_context_provider(crate::settings::SettingsNav::new);
+            let ui = use_context_provider(|| Ui {
+                screen: Signal::new(crate::Screen::Learn),
+                prefs: Signal::new(Default::default()),
+                focus: Signal::new(false),
+            });
+            use_hook(|| {
+                open(ui, Some("hb".into()));
+                assert_eq!(COURSE.peek().as_deref(), Some("hb"));
+                open(ui, Some("no-such-course".into()));
+                assert!(
+                    COURSE.peek().as_ref().is_none_or(|c| index().contains_key(c)),
+                    "{:?}",
+                    COURSE.peek()
+                );
+                assert_ne!(COURSE.peek().as_deref(), Some("no-such-course"));
+            });
+            rsx! { "ok" }
+        }
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        assert_eq!(dioxus::ssr::render(&dom), "ok");
+    }
+
+    #[test]
+    fn chips_search_and_lessons_answer_taps() {
+        use crate::test_dom::TestDom;
+        crate::store::use_memory_store();
+        fn root() -> Element {
+            use_context_provider(crate::settings::SettingsNav::new);
+            use_hook(|| *COURSE.write() = Some("hb".into()));
+            rsx! {
+                crate::browser_fixture::Shell { screen: crate::Screen::Learn, focus: false,
+                    Dictionary {}
+                    OpenButton {}
+                }
+            }
+        }
+        let mut t = TestDom::of(root);
+        let hb = index()["hb"].len();
+        t.input(&format!("placeholder=\"{}\"", tx::DICT_SEARCH), "bacterial peritonitis");
+        let shown = t.html().matches("class=\"abd-item\"").count();
+        assert!(shown >= 1 && shown < hb, "{shown} of {hb}");
+        t.input(&format!("placeholder=\"{}\"", tx::DICT_SEARCH), "zzzz-nothing");
+        assert!(t.html().contains(tx::DICT_NO_MATCH));
+        t.input(&format!("placeholder=\"{}\"", tx::DICT_SEARCH), "");
+        // Another course's chip shows its own list.
+        t.click("aria-pressed=\"false\"");
+        assert_ne!(t.with(|| COURSE.peek().clone()).as_deref(), Some("hb"));
+        // A lesson that uses a term opens it.
+        t.click("class=\"abd-lesson tap\"");
+        assert!(t.with(|| crate::learn::OPEN.peek().is_some()), "{}", t.html());
+        t.click(&format!("aria-label=\"{}\"", crate::i18n::lecture::BACK));
+        t.click("class=\"chip tap-chip abd-open\"");
+        assert!(t.with(crate::lecture::is_open), "the Lessons button opens the dictionary page");
+        t.with(crate::lecture::close_all);
+    }
 }

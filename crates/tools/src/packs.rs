@@ -115,6 +115,59 @@ mod tests {
         );
     }
 
+    use crate::testkit::{self, strings, write};
+
+    #[test]
+    fn build_writes_the_pack_devices_decode() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        write(root, "crates/app/assets/main.css", "body { color: red }\n");
+        write(root, "crates/app/src/learn/learn.css", ".ls { margin: 0 }\n");
+        write(root, "crates/app/src/learn/mod.rs", "// not a stylesheet\n");
+        let report = run(root, &strings(&["build"])).unwrap();
+        let path = root.join("dist/packs/batna-content.pack");
+        assert_eq!(
+            report,
+            format!(
+                "{}: 1 lecture(s), 2 items, 1 lesson(s), 2 stylesheet(s), {:.1} KB packed",
+                path.display(),
+                std::fs::metadata(&path).unwrap().len() as f64 / 1024.0
+            )
+        );
+        let pack = Pack::decode(&std::fs::read(&path).unwrap()).unwrap();
+        assert_eq!(pack.look.keys().collect::<Vec<_>>(), ["assets/main.css", "src/learn/learn.css"]);
+        assert_eq!(pack.lessons[0].lessons[0].id, "hb.L01.lesson1");
+        assert_eq!(pack.program.as_ref().map(|p| p.courses.len()), Some(1));
+        assert!(run(root, &strings(&["pack"])).unwrap_err()[0].starts_with("usage:"));
+    }
+
+    #[test]
+    fn a_pack_devices_would_refuse_is_never_built() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        let twice =
+            format!("{}  - {{ id: hb.L01, title: Again, pages: [1, 22], chunk: 10 }}\n", testkit::INDEX);
+        write(root, "content/index.yaml", &twice);
+        let err = run(root, &strings(&["build", "--check"])).unwrap_err();
+        assert!(
+            err.iter().all(|p| p.starts_with("pack: ")) && err.iter().any(|p| p.contains("listed twice")),
+            "{err:?}"
+        );
+
+        let tree = testkit::tree();
+        let root = tree.path();
+        let lesson = testkit::LESSON.replace(
+            "      - kind: check",
+            "      - kind: figure\n        title: \"صورة\"\n        alt: \"A liver\"\n        caption: \"كبد\"\n        image: { file: hb/missing.webp, credit: x, license: CC0, source: x }\n      - kind: check",
+        );
+        write(root, "content/lessons/hb/L01.yaml", &lesson);
+        let err = run(root, &strings(&["build", "--check"])).unwrap_err();
+        assert!(err[0].contains("hb/missing.webp"), "{err:?}");
+        std::fs::remove_file(root.join("content/program.yaml")).unwrap();
+        write(root, "content/lessons/hb/L01.yaml", testkit::LESSON);
+        assert!(run(root, &strings(&["build", "--check"])).unwrap_err()[0].contains("program.yaml"));
+    }
+
     #[test]
     fn a_broken_lecture_fails_the_check() {
         let dir = tempfile::tempdir().unwrap();

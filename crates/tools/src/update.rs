@@ -62,10 +62,11 @@ const USAGE: &str = "usage: batna-tools update <keygen | manifest | sign DIR | v
 type Res<T> = Result<T, String>;
 
 pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
-    run_inner(root, args).map_err(|e| vec![e])
+    run_inner(root, args, std::env::var(SECRET_ENV).ok()).map_err(|e| vec![e])
 }
 
-fn run_inner(root: &Path, args: &[String]) -> Res<String> {
+/// `secret` is [`SECRET_ENV`]'s value, for `sign`.
+fn run_inner(root: &Path, args: &[String], secret: Option<String>) -> Res<String> {
     let public_key = |args: &[String]| -> Res<String> {
         let path = flag(args, "--public-key").map_or_else(|| root.join(RELEASE_KEY_FILE), PathBuf::from);
         read_text(&path)
@@ -165,7 +166,7 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
         }
         Some("sign") => {
             let dir = args.get(1).filter(|a| !a.starts_with("--")).ok_or(USAGE)?;
-            let secret = std::env::var(SECRET_ENV).map_err(|_| format!("{SECRET_ENV} is not set"))?;
+            let secret = secret.ok_or_else(|| format!("{SECRET_ENV} is not set"))?;
             sign(Path::new(dir), &secret, &public_key(args)?)?;
             Ok(format!("signed {}", Path::new(dir).join(SIGNATURE_FILE).display()))
         }
@@ -616,6 +617,230 @@ mod tests {
         );
     }
 
+    fn cli(root: &Path, args: &[&str], secret: Option<&str>) -> Res<String> {
+        run_inner(root, &strings(args), secret.map(str::to_owned))
+    }
+
+    #[test]
+    fn keygen_sign_and_verify_from_the_command_line() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        let key = root.join("keys/update-key.pub").display().to_string();
+        let secret = cli(root, &["keygen", "--public-out", &key], None).unwrap();
+        assert_eq!(B64.decode(&secret).unwrap().len(), 32, "stdout is only the secret");
+        let first = fs::read_to_string(&key).unwrap();
+        assert!(key_line(&first).is_some());
+        let again = cli(root, &["keygen", "--public-out", &key], None).unwrap_err();
+        assert!(again.contains("already holds a key"), "{again}");
+        let new_secret = cli(root, &["keygen", "--public-out", &key, "--force"], None).unwrap();
+        assert_ne!(new_secret, secret);
+        assert_ne!(fs::read_to_string(&key).unwrap(), first, "--force replaces the key");
+
+        let apk = root.join("a.apk");
+        fs::write(&apk, b"apk").unwrap();
+        let feed = root.join("feed").display().to_string();
+        let asset = format!("android-arm64={}", apk.display());
+        let made = cli(
+            root,
+            &[
+                "manifest",
+                "--channel",
+                "alpha",
+                "--version",
+                "1.0.0-alpha.2",
+                "--asset",
+                &asset,
+                "--out",
+                &feed,
+            ],
+            None,
+        )
+        .unwrap();
+        assert!(
+            made.starts_with("alpha 1.0.0-alpha.2 build 0 → ") && made.ends_with("(1 file(s))"),
+            "{made}"
+        );
+
+        let sign = |secret: Option<&str>| cli(root, &["sign", &feed, "--public-key", &key], secret);
+        assert_eq!(sign(None).unwrap_err(), "BATNA_UPDATE_SECRET is not set");
+        assert!(sign(Some("not base64!")).unwrap_err().contains("isn't a base64 32-byte key"));
+        assert!(sign(Some(&secret)).unwrap_err().contains("doesn't belong to the public key"), "old secret");
+        assert_eq!(sign(Some(&new_secret)).unwrap(), format!("signed {feed}/{SIGNATURE_FILE}"));
+        let empty = root.join("empty").display().to_string();
+        let err = cli(root, &["sign", &empty, "--public-key", &key], Some(&new_secret)).unwrap_err();
+        assert!(err.contains("run `update manifest` first"), "{err}");
+
+        let ok = cli(root, &["verify", &feed, "--public-key", &key], None).unwrap();
+        assert_eq!(ok, "ok: alpha 1.0.0-alpha.2 build 0, 1 file(s) match");
+        let err = cli(root, &["verify", &feed, "--public-key", &key, "--carried", "ios"], None).unwrap_err();
+        assert_eq!(err, "unknown platform \"ios\"");
+        let err =
+            cli(root, &["verify", &feed, "--public-key", &key, "--carried", "content"], None).unwrap_err();
+        assert_eq!(err, "--carried: no content in the feed");
+        assert_eq!(cli(root, &["verify"], None).unwrap_err(), USAGE);
+        // Without --public-key the app's own key file is used: none here.
+        assert!(cli(root, &["verify", &feed], None).unwrap_err().contains(RELEASE_KEY_FILE));
+        assert_eq!(cli(root, &["publish"], None).unwrap_err(), USAGE);
+    }
+
+    #[test]
+    fn manifest_refuses_a_feed_it_cannot_build() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        let (apk, pack) = (root.join("a.apk"), root.join("c.pack"));
+        fs::write(&apk, b"a").unwrap();
+        fs::write(&pack, sample_pack("x")).unwrap();
+        let apk_arg = format!("android-arm64={}", apk.display());
+        let pack_arg = format!("content={}", pack.display());
+        let out = root.join("feed").display().to_string();
+        let manifest = |extra: &[&str]| {
+            let mut args = vec!["manifest", "--channel", "alpha", "--out", &out];
+            args.extend(extra);
+            cli(root, &args, None)
+        };
+        fn with<'a>(more: &[&'a str]) -> Vec<&'a str> {
+            [&["--version", "1.0.0-alpha.1"][..], more].concat()
+        }
+
+        // No --version: the workspace's, from Cargo.toml.
+        assert_eq!(
+            manifest(&["--asset", &apk_arg]).unwrap_err(),
+            format!("{}: No such file or directory (os error 2)", root.join("Cargo.toml").display())
+        );
+        fs::write(root.join("Cargo.toml"), "[workspace]\n").unwrap();
+        assert_eq!(manifest(&["--asset", &apk_arg]).unwrap_err(), "no version in Cargo.toml");
+        fs::write(root.join("Cargo.toml"), "[workspace.package]\nversion = \"1.0.0-alpha.3\"\n").unwrap();
+        assert!(manifest(&["--asset", &apk_arg]).unwrap().starts_with("alpha 1.0.0-alpha.3 build 0"));
+        assert_eq!(cli(root, &["channels"], None).unwrap(), "alpha");
+
+        let err = |extra: &[&str]| manifest(&with(extra)).unwrap_err();
+        assert_eq!(err(&["--asset", &apk_arg, "--build", "x"]), "--build \"x\" isn't a number");
+        assert_eq!(err(&[]), "give at least one --asset PLATFORM=PATH");
+        assert_eq!(err(&["--asset", "a.apk"]), "--asset \"a.apk\": expected PLATFORM=PATH");
+        assert_eq!(err(&["--asset", "ios=a.ipa"]), "unknown platform \"ios\"");
+        assert_eq!(err(&["--asset", &apk_arg, "--carry", "ios"]), "unknown platform \"ios\"");
+        assert_eq!(err(&["--asset", &apk_arg, "--asset", &apk_arg]), "two files for android-arm64");
+        assert!(err(&["--asset", "content=/no/such.pack"]).starts_with("/no/such.pack: "));
+        assert_eq!(cli(root, &["manifest"], None).unwrap_err(), "--channel is required");
+
+        // --previous: same channel, and --carry needs the same version and the platform.
+        let prev_dir = root.join("prev").display().to_string();
+        let prev = format!("{prev_dir}/{MANIFEST_FILE}");
+        cli(
+            root,
+            &[
+                "manifest",
+                "--channel",
+                "alpha",
+                "--version",
+                "1.0.0-alpha.1",
+                "--asset",
+                &apk_arg,
+                "--out",
+                &prev_dir,
+            ],
+            None,
+        )
+        .unwrap();
+        let other = cli(
+            root,
+            &[
+                "manifest",
+                "--channel",
+                "beta",
+                "--version",
+                "1.0.0-beta.1",
+                "--asset",
+                &pack_arg,
+                "--previous",
+                &prev,
+            ],
+            None,
+        )
+        .unwrap_err();
+        assert_eq!(other, "the previous feed is for alpha");
+        assert_eq!(
+            manifest(&[
+                "--version",
+                "1.0.0-alpha.2",
+                "--asset",
+                &pack_arg,
+                "--previous",
+                &prev,
+                "--carry",
+                "android-arm64"
+            ])
+            .unwrap_err(),
+            "--carry: the previous feed is 1.0.0-alpha.1, not 1.0.0-alpha.2"
+        );
+        assert_eq!(
+            err(&["--asset", &pack_arg, "--previous", &prev, "--carry", "macos-arm64"]),
+            "--carry: no macos-arm64 in the previous feed"
+        );
+        assert_eq!(
+            err(&["--asset", &apk_arg, "--previous", &prev, "--carry", "android-arm64"]),
+            "android-arm64 is both carried and given"
+        );
+        fs::write(&prev, "{ not json").unwrap();
+        assert!(
+            err(&["--asset", &apk_arg, "--previous", &prev]).starts_with(&format!("previous feed {prev}: "))
+        );
+        // A missing previous feed is the channel's first.
+        assert!(manifest(&with(&["--asset", &apk_arg, "--previous", "/no/feed.json"])).is_ok());
+    }
+
+    #[test]
+    fn a_feed_built_with_changes_says_whats_new_since_the_last_one() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        let git = |args: &[&str]| crate::testkit::git(root, args);
+        crate::testkit::write(root, "changes/first.yaml", "- kind: new\n  ar_eg: أول حاجة\n");
+        crate::testkit::commit_all(root, "First");
+        let first = git(&["rev-parse", "HEAD"]).trim().to_owned();
+        let apk = root.join("a.apk");
+        fs::write(&apk, b"a").unwrap();
+        let asset = format!("android-arm64={}", apk.display());
+        let feed = |build: &str, out: &str, extra: &[&str]| {
+            let mut args = vec!["manifest", "--channel", "preview", "--version", "0.1.0", "--build", build];
+            args.extend(["--asset", &asset, "--out", out, "--changes"]);
+            args.extend(extra);
+            cli(root, &args, None)
+        };
+        let one = root.join("one").display().to_string();
+        feed("1", &one, &["--commit", &first]).unwrap();
+        let m: UpdateManifest =
+            serde_json::from_str(&read_text(&Path::new(&one).join(MANIFEST_FILE)).unwrap()).unwrap();
+        assert_eq!(
+            (m.notes.ar_eg.as_str(), m.history.len()),
+            ("أول حاجة", 1),
+            "HEAD alone when nothing is known"
+        );
+
+        crate::testkit::write(
+            root,
+            "changes/liver.yaml",
+            "- kind: fixed\n  ar_eg: الصورة بقت أوضح\n  en: The picture is clearer\n",
+        );
+        crate::testkit::commit_all(root, "Fix the picture");
+        let two = root.join("two").display().to_string();
+        let previous = format!("{one}/{MANIFEST_FILE}");
+        feed("2", &two, &["--previous", &previous, "--notes-en", "Given"]).unwrap();
+        let m: UpdateManifest =
+            serde_json::from_str(&read_text(&Path::new(&two).join(MANIFEST_FILE)).unwrap()).unwrap();
+        assert_eq!(m.notes.en, "Given", "given notes win over the changes");
+        assert_eq!(m.history.iter().map(|b| b.build).collect::<Vec<_>>(), [2, 1]);
+        assert_eq!(m.history[0].changes[0].text.ar_eg, "الصورة بقت أوضح");
+        assert!(!m.history[0].content_only);
+
+        // `update changes` checks every file and lists what HEAD added.
+        let out = cli(root, &["changes"], None).unwrap();
+        assert_eq!(out, "2 file(s) in changes/ check out\nFixed\tالصورة بقت أوضح\tThe picture is clearer");
+        let out = cli(root, &["changes", "--gate", &first], None).unwrap();
+        assert!(out.ends_with("Fixed\tالصورة بقت أوضح\tThe picture is clearer"), "{out}");
+        crate::testkit::write(root, "changes/bad.yaml", "- kind: new\n  ar_eg: English\n");
+        assert!(cli(root, &["changes"], None).unwrap_err().contains("bad.yaml"));
+    }
+
     #[test]
     fn channels_follow_the_version() {
         let dir = tempfile::tempdir().unwrap();
@@ -645,22 +870,18 @@ mod tests {
         }
     }
 
-    /// Regenerates the signed fixture the core and app tests read:
-    /// `cargo test -p batna-tools write_update_fixture -- --ignored`.
-    #[test]
-    #[ignore]
-    fn write_update_fixture() {
-        let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/update");
-        fs::create_dir_all(&root).unwrap();
+    fn fixture_dir() -> PathBuf {
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/update")
+    }
+
+    /// The signed fixture the core and app tests read, file by file:
+    /// `test-key.pub`, `update.json`, `update.json.sig`.
+    fn fixture_files() -> [(&'static str, Vec<u8>); 3] {
         let key = SigningKey::from_bytes(&FIXTURE_SEED);
         let public = B64.encode(key.verifying_key().as_bytes());
-        fs::write(
-            root.join("test-key.pub"),
-            format!(
-                "# Test key for fixtures/update only (seed 0x42 × 32). Never trusted by a build.\n{public}\n"
-            ),
-        )
-        .unwrap();
+        let key_file = format!(
+            "# Test key for fixtures/update only (seed 0x42 × 32). Never trusted by a build.\n{public}\n"
+        );
         // The app tests write these bytes as the feed's files (no .apk is tracked).
         let apk = b"fixture apk bytes".to_vec();
         let pack = b"fixture pack bytes".to_vec();
@@ -717,8 +938,37 @@ mod tests {
             ui_build: None,
         };
         let json = serde_json::to_vec_pretty(&m).unwrap();
-        fs::write(root.join(MANIFEST_FILE), &json).unwrap();
-        fs::write(root.join(SIGNATURE_FILE), format!("{}\n", B64.encode(key.sign(&json).to_bytes())))
-            .unwrap();
+        let sig = format!("{}\n", B64.encode(key.sign(&json).to_bytes()));
+        [("test-key.pub", key_file.into_bytes()), (MANIFEST_FILE, json), (SIGNATURE_FILE, sig.into_bytes())]
+    }
+
+    /// Regenerates the fixture after a format change:
+    /// `cargo test -p batna-tools write_update_fixture -- --ignored`.
+    #[test]
+    #[ignore]
+    fn write_update_fixture() {
+        fs::create_dir_all(fixture_dir()).unwrap();
+        for (name, bytes) in fixture_files() {
+            fs::write(fixture_dir().join(name), bytes).unwrap();
+        }
+    }
+
+    /// The committed fixture is what the generator makes (Ed25519 signing is
+    /// deterministic), and it passes the app's own checks.
+    #[test]
+    fn the_committed_fixture_is_current_and_verifies() {
+        for (name, bytes) in fixture_files() {
+            let committed = fs::read(fixture_dir().join(name)).unwrap();
+            assert!(
+                committed == bytes,
+                "fixtures/update/{name} is stale: run write_update_fixture (see above)"
+            );
+        }
+        let public = read_text(&fixture_dir().join("test-key.pub")).unwrap();
+        let key = parse_public_key(&public).unwrap();
+        let json = fs::read(fixture_dir().join(MANIFEST_FILE)).unwrap();
+        let sig = read_text(&fixture_dir().join(SIGNATURE_FILE)).unwrap();
+        let m = verify_manifest(&json, &sig, &key).unwrap();
+        assert_eq!((m.channel, m.build, m.history.len()), (Channel::Preview, 42, 2));
     }
 }

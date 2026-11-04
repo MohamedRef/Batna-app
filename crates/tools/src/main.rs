@@ -23,11 +23,26 @@ mod ids;
 mod lessons;
 mod packs;
 mod refs;
+#[cfg(test)]
+mod testkit;
 mod update;
 mod verdicts;
 
 fn main() -> ExitCode {
     let args: Vec<String> = std::env::args().skip(1).collect();
+    let (code, out, err) = cli(&args);
+    if let Some(out) = out {
+        println!("{out}");
+    }
+    for e in &err {
+        eprintln!("{e}");
+    }
+    code
+}
+
+/// One command line: the exit code, what goes to stdout, and the lines for
+/// stderr.
+fn cli(args: &[String]) -> (ExitCode, Option<String>, Vec<String>) {
     let root = match args.iter().position(|a| a == "--root") {
         Some(i) => match args.get(i + 1) {
             Some(r) => PathBuf::from(r),
@@ -37,16 +52,10 @@ fn main() -> ExitCode {
     };
     match args.first().map(String::as_str) {
         Some("validate") => match validate_all(&root) {
-            Ok(report) => {
-                println!("{report}");
-                ExitCode::SUCCESS
-            }
-            Err(problems) => {
-                for p in &problems {
-                    eprintln!("{p}");
-                }
-                eprintln!("{} problem(s)", problems.len());
-                ExitCode::FAILURE
+            Ok(report) => (ExitCode::SUCCESS, Some(report), Vec::new()),
+            Err(mut problems) => {
+                problems.push(format!("{} problem(s)", problems.len()));
+                (ExitCode::FAILURE, None, problems)
             }
         },
         Some("anki") => report(anki::run(&root, &args[1..])),
@@ -60,18 +69,10 @@ fn main() -> ExitCode {
     }
 }
 
-fn report(result: Result<String, Vec<String>>) -> ExitCode {
+fn report(result: Result<String, Vec<String>>) -> (ExitCode, Option<String>, Vec<String>) {
     match result {
-        Ok(out) => {
-            println!("{out}");
-            ExitCode::SUCCESS
-        }
-        Err(problems) => {
-            for p in &problems {
-                eprintln!("{p}");
-            }
-            ExitCode::FAILURE
-        }
+        Ok(out) => (ExitCode::SUCCESS, Some(out), Vec::new()),
+        Err(problems) => (ExitCode::FAILURE, None, problems),
     }
 }
 
@@ -80,11 +81,9 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
     args.iter().position(|a| a == name).and_then(|i| args.get(i + 1)).map(String::as_str)
 }
 
-fn usage() -> ExitCode {
-    eprintln!(
-        "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)"
-    );
-    ExitCode::from(2)
+fn usage() -> (ExitCode, Option<String>, Vec<String>) {
+    let text = "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)";
+    (ExitCode::from(2), None, vec![text.to_owned()])
 }
 
 /// Checks `content/index.yaml` and every `content/<chapter>/LNN.yaml`.
@@ -288,5 +287,133 @@ mod tests {
         assert!(problems.iter().any(|p| p.contains("L99.yaml: not listed")), "{problems:#?}");
         assert!(problems.iter().any(|p| p.contains("program.yaml")), "{problems:#?}");
         std::fs::remove_dir_all(&dir).unwrap();
+    }
+
+    use crate::testkit::{self, strings, write};
+
+    fn run(args: &[&str]) -> (ExitCode, String, Vec<String>) {
+        let (code, out, err) = cli(&strings(args));
+        (code, out.unwrap_or_default(), err)
+    }
+
+    #[test]
+    fn the_command_line_reports_and_exits_like_ci_expects() {
+        let tree = testkit::tree();
+        let root = tree.path().display().to_string();
+        let (code, out, err) = run(&["validate", "--root", &root]);
+        assert_eq!(
+            (code, out.as_str(), err.len()),
+            (
+                ExitCode::SUCCESS,
+                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms",
+                0
+            )
+        );
+
+        // Each subcommand reaches its module and its answer goes to stdout.
+        let (code, out, _) = run(&["packs", "build", "--check", "--root", &root]);
+        assert_eq!(code, ExitCode::SUCCESS);
+        assert!(out.starts_with("pack OK: 1 lecture(s), 2 items, 1 lesson(s)"), "{out}");
+        let (_, out, _) = run(&["ids", "list", "--root", &root]);
+        assert!(out.lines().any(|l| l == "item hb.L01.002\tkind card"), "{out}");
+        assert!(out.lines().any(|l| l == "lesson hb.L01.lesson1\tlecture hb.L01"), "{out}");
+        let (_, out, _) = run(&["content", "next-id", "hb.L01", "--root", &root]);
+        assert_eq!(out, "next item id: hb.L01.003\nnext lesson id: hb.L01.lesson2");
+        let (_, out, _) = run(&["update", "channels", "--version", "1.0.0-beta.1", "--root", &root]);
+        assert_eq!(out, "alpha\nbeta");
+        let book = testkit::book(tree.path()).display().to_string();
+        let (_, out, _) = run(&["refs", "--root", &root, "--book", &book, "--ocr", "/x", "--checked", "/x"]);
+        assert_eq!(out, "hb.L01: 5 refs, 5 quoted, 0 book figures, 0 checked by hand, 0 to look at");
+        let deck = tree.path().join("deck").display().to_string();
+        let (code, out, _) = run(&["anki", "--merged-only", "--out", &deck, "--root", &root]);
+        assert_eq!(code, ExitCode::SUCCESS);
+        assert!(out.contains("2 notes") && out.contains("hb.L01: 2 notes"), "{out}");
+        let (code, out, err) = run(&["verdicts", "/no/such/export.json", "--root", &root]);
+        assert_eq!((code, out.as_str()), (ExitCode::FAILURE, ""));
+        assert!(err[0].contains("/no/such/export.json"), "{err:?}");
+
+        // A broken tree fails with every problem and their count last.
+        write(
+            tree.path(),
+            "content/hb/L01.yaml",
+            &testkit::LECTURE.replace("pages: [1, 22]", "pages: [1, 20]"),
+        );
+        let (code, _, err) = run(&["validate", "--root", &root]);
+        assert_eq!(code, ExitCode::FAILURE);
+        assert!(err[0].contains("book pages [1, 20] differ from content/index.yaml [1, 22]"), "{err:?}");
+        assert_eq!(err.last().unwrap(), &format!("{} problem(s)", err.len() - 1));
+    }
+
+    #[test]
+    fn a_bad_command_line_prints_the_usage() {
+        for args in [&[][..], &["frobnicate"], &["validate", "--root"]] {
+            let (code, out, err) = run(args);
+            assert_eq!((code, out.as_str()), (ExitCode::from(2), ""), "{args:?}");
+            assert!(err[0].starts_with("usage: batna-tools <validate"), "{args:?}");
+        }
+    }
+
+    #[test]
+    fn validate_names_what_is_wrong_with_a_lecture_file() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        let problems = |change: &dyn Fn(&Path)| {
+            let t = testkit::tree();
+            change(t.path());
+            validate_all(t.path()).unwrap_err()
+        };
+        let has = |p: &[String], s: &str| assert!(p.iter().any(|x| x.contains(s)), "{s}: {p:#?}");
+
+        let p = problems(&|r| write(r, "content/index.yaml", INDEX_V0));
+        has(&p, "content/index.yaml: schema must be batna.content/v1");
+        let p = problems(&|r| {
+            write(r, "content/hb/L01.yaml", &testkit::LECTURE.replace("lecture: hb.L01", "lecture: hb.L02"))
+        });
+        has(&p, "content/hb/L01.yaml: lecture is hb.L02, the file name says hb.L01");
+        let p = problems(&|r| write(r, "content/hb/L01.yaml", "lecture: [\n"));
+        has(&p, "content/hb/L01.yaml: ");
+        let p = problems(&|r| {
+            std::fs::remove_file(r.join("content/hb/L01.yaml")).unwrap();
+            std::fs::create_dir(r.join("content/hb/L01.yaml")).unwrap();
+        });
+        has(&p, "L01.yaml: ");
+        let p =
+            problems(&|r| write(r, "content/glossary.yaml", "schema: batna.glossary/v1\nentries: oops\n"));
+        has(&p, "glossary.yaml: ");
+        let p = problems(&|r| {
+            write(
+                r,
+                "content/glossary.yaml",
+                "schema: batna.glossary/v1\nentries:\n  - { term: HSC, kind: abbr, text: \"\", status: unverified }\n",
+            )
+        });
+        has(&p, "content/glossary.yaml: ");
+
+        // A glossary that knows every abbreviation keeps the tree valid and is counted.
+        write(
+            root,
+            "content/glossary.yaml",
+            "schema: batna.glossary/v1\nentries:\n  - { term: HSC, kind: abbr, text: Hepatic stellate cell, status: unverified }\n",
+        );
+        let ok = validate_all(root).unwrap();
+        assert!(ok.ends_with("1 lessons, 1 glossary terms"), "{ok}");
+    }
+
+    const INDEX_V0: &str = "schema: batna.content/v0\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n";
+
+    #[test]
+    fn approved_ids_and_raw_keys_read_what_the_files_say() {
+        let dir = tempfile::tempdir().unwrap();
+        let f = dir.path().join("approved.txt");
+        std::fs::write(&f, "# header\nhb.L01.001  # card\n\n  hb.L01.002\n").unwrap();
+        assert_eq!(read_approved(&f).into_iter().collect::<Vec<_>>(), ["hb.L01.001", "hb.L01.002"]);
+        assert!(read_approved(&dir.path().join("missing.txt")).is_empty());
+
+        let keys =
+            raw_keys("items:\n  - { id: a, kind: card, fornt: x }\n  - just text\n  - { kind: card }\n");
+        assert_eq!(keys.len(), 1);
+        assert_eq!(keys["a"], ["id", "kind", "fornt"]);
+        assert!(raw_keys("items: [").is_empty());
+        assert!(raw_keys("title: no items\n").is_empty());
     }
 }

@@ -384,6 +384,115 @@ mod tests {
         assert!(p.iter().any(|p| p.message.contains("missing input")), "{p:?}");
     }
 
+    /// The messages for one item written after `HEAD` (topics: none).
+    fn item_problems(item: &str) -> Vec<String> {
+        let l = lec(&format!(
+            "{HEAD}items:\n  - {{ id: hb.L01.001, src: {{ page: 3 }}, status: unverified, {item} }}\n"
+        ));
+        lecture(&l, &Context::default()).into_iter().map(|p| p.message).collect()
+    }
+
+    #[test]
+    fn every_kind_has_its_own_rules() {
+        let cases: &[(&str, &[&str])] = &[
+            ("kind: card, front: ' ', back: b", &["card needs front and back"]),
+            ("kind: cloze, text: '{{c1::a'", &["cloze braces are malformed; use {{c1::answer}}"]),
+            (
+                "kind: cloze, text: '{{c1::a}} {{c2::b}} {{c3::c}} {{c4::d}}'",
+                &["cloze has more than 3 blanks (c1–c3)"],
+            ),
+            (
+                "kind: mcq, stem: ' ', options: [a, b, c, ' a'], answer: 0, why: [w, x, y, z]",
+                &["mcq stem is empty", "mcq options repeat"],
+            ),
+            (
+                "kind: enumerate, prompt: p, points: [a], pass: 0",
+                &["enumerate needs a prompt and at least 2 points", "enumerate pass 0 must be 1..=1"],
+            ),
+            ("kind: essay, prompt: p, outline: []", &["essay needs a prompt and an outline"]),
+            ("kind: case, stem: s, steps: []", &["case needs a stem and at least one step"]),
+            (
+                "kind: case, stem: s, steps: [{ question: q, answer: 0, why: w }, { question: q, options: [a], why: w }, { question: q, options: [a], answer: 1, why: ' ' }]",
+                &[
+                    "case step 1 has an answer but no options",
+                    "case step 2 has options but no answer",
+                    "case step 3 answer is out of range",
+                    "case step 3 needs `why`",
+                ],
+            ),
+            (
+                "kind: table, title: t, columns: [a], rows: [[x, y]], blanks: [[0, 0], [5, 1]]",
+                &[
+                    "table needs at least 2 columns and 1 row",
+                    "table row 1 has 2 cells, expected 1",
+                    "table blank [0, 0] is outside the grid (column 0 is the label)",
+                    "table blank [5, 1] is outside the grid (column 0 is the label)",
+                ],
+            ),
+            ("kind: table, title: t, columns: [a, b], rows: [[x, y]], blanks: []", &["table has no blanks"]),
+            ("kind: order, prompt: p, steps: [a, b]", &["order needs at least 3 steps"]),
+            (
+                "kind: calc, calculator: no_such, stem: s, inputs: {}, expect: x, interpret: i",
+                &["calc needs inputs", "unknown calculator `no_such`"],
+            ),
+            (
+                "kind: card, front: f, back: b, update: { text: ' ', ref: AASLD 2023 }",
+                &["update needs both text and ref"],
+            ),
+        ];
+        for (item, want) in cases {
+            assert_eq!(item_problems(item), *want, "{item}");
+        }
+    }
+
+    #[test]
+    fn lecture_level_rules() {
+        let l = lec(
+            "schema: batna.content/v0\nlecture: HB.1\ntitle: t\nbook: { chapter: 1, pages: [5, 2] }\ntopics:\n  - { id: a, title: A }\n  - { id: a, title: A again }\nitems:\n  - { id: HB.1.001, kind: card, front: f, back: b, topic: z, src: { page: 3 }, status: unverified }\n  - { id: HB.1.002, kind: card, front: f, back: b, src: { page: 3 }, status: unverified }\n",
+        );
+        let msgs: Vec<String> = lecture(&l, &Context::default()).iter().map(|p| p.to_string()).collect();
+        assert_eq!(
+            msgs,
+            [
+                "HB.1: schema is \"batna.content/v0\", expected \"batna.content/v1\"",
+                "HB.1: lecture id must look like hb.L01",
+                "HB.1: book pages 5-2 are not a range",
+                "HB.1: topic ids repeat",
+                "HB.1.001: topic `z` is not in the lecture's topics",
+                "HB.1.001: src.page 3 is outside the lecture (pages 5-2)",
+                "HB.1.002: topic is missing",
+                "HB.1.002: src.page 3 is outside the lecture (pages 5-2)",
+            ]
+        );
+    }
+
+    #[test]
+    fn glossary_text_schema_and_plain_words() {
+        let g: crate::glossary::Glossary = serde_yaml_ng::from_str(&format!(
+            "schema: batna.glossary/v0
+entries:
+  - {{ term: HE, kind: abbr, text: ' ', status: unverified }}
+  - {{ term: SBP, kind: abbr, text: '{}', status: unverified }}
+  - {{ term: Lasix, kind: drug, text: Furosemide, status: unverified }}
+  - {{ term: LASIX, kind: abbr, text: Clash with the drug, status: unverified }}
+plain: [HE, Child, Child]",
+            "word ".repeat(26)
+        ))
+        .unwrap();
+        let msgs: Vec<String> = glossary(&g, None).iter().map(|p| p.message.clone()).collect();
+        assert_eq!(
+            msgs,
+            [
+                "schema is \"batna.glossary/v0\", expected \"batna.glossary/v1\"",
+                "text is empty",
+                "text is 26 words; keep it to 25 or fewer",
+                "`LASIX` is listed twice",
+                "`HE` has an entry, so it isn't plain",
+                "`Child` is listed twice",
+            ]
+        );
+    }
+
     #[test]
     fn lecture_ids() {
         assert!(is_lecture_id("hb.L01"));

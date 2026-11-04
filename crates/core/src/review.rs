@@ -317,6 +317,79 @@ mod tests {
     }
 
     #[test]
+    fn ratings_follow_fsrs_and_evidence_is_bank_or_mock() {
+        assert_eq!(Grade::ALL.map(Grade::rating), [1, 2, 3, 4]);
+        assert_eq!(Grade::parse("perfect"), None);
+        let evidence: Vec<Origin> = Origin::ALL.into_iter().filter(|o| o.is_evidence()).collect();
+        assert_eq!(evidence, [Origin::Bank, Origin::Mock]);
+        assert_eq!(HlcClock::new("tab-s11").device(), "tab-s11");
+        // A stamp older than the clock's own changes nothing.
+        let mut c = HlcClock::new("s24");
+        c.tick(9000);
+        c.observe(&Hlc { wall_ms: 10, counter: 7, device: "tab".into() });
+        assert_eq!((c.tick(9000).wall_ms, c.tick(9000).counter), (9000, 2));
+    }
+
+    #[test]
+    fn only_enumerate_essay_and_case_are_self_rated() {
+        let lec: crate::content::Lecture =
+            serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();
+        let rated: Vec<&str> =
+            lec.items.iter().filter(|i| self_rated(&i.body)).map(|i| i.body.kind()).collect();
+        assert_eq!(rated, ["enumerate", "essay", "case"]);
+    }
+
+    /// A store with only the required methods: the defaults are what the
+    /// study screens get from a store that can't log, undo or forecast.
+    #[derive(Default)]
+    struct Bare {
+        recorded: Vec<ReviewEvent>,
+    }
+
+    impl StudyStore for Bare {
+        fn record(&mut self, event: ReviewEvent) {
+            self.recorded.push(event);
+        }
+        fn due(&self, _now_ms: i64) -> Vec<String> {
+            Vec::new()
+        }
+        fn is_new(&self, _item_id: &str) -> bool {
+            true
+        }
+        fn is_hidden(&self, _item_id: &str) -> bool {
+            false
+        }
+        fn next_due_ms(&self, _now_ms: i64) -> Option<i64> {
+            None
+        }
+    }
+
+    #[test]
+    fn a_bare_store_saves_answers_but_offers_no_undo_or_forecast() {
+        let handle = StudyStoreHandle::new(Bare::default());
+        let event = ReviewEvent {
+            item_id: "hb.L01.001".into(),
+            grade: Grade::Good,
+            origin: Origin::Review,
+            at_ms: 1,
+            took_ms: 2,
+        };
+        let mut store = handle.0.borrow_mut();
+        assert_eq!(store.record_logged(event.clone()), Ok(None), "saved, but nothing to take back");
+        assert!(!store.retract("any"), "Undo is not offered");
+        let lec: crate::content::Lecture =
+            serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();
+        assert_eq!(store.effective(&lec.items[0]), lec.items[0], "no ✎ edits");
+        assert_eq!(store.new_left_today(0), usize::MAX, "no daily cap");
+        assert_eq!(store.intervals("hb.L01.001", 0), None, "no intervals on the buttons");
+        assert!(store.log().is_empty() && store.marks().is_empty() && store.forecast(7, 0).is_empty());
+        drop(store);
+        let mut bare = Bare::default();
+        bare.record_logged(event.clone()).unwrap();
+        assert_eq!(bare.recorded, [event], "record_logged records");
+    }
+
+    #[test]
     fn names_round_trip() {
         for g in Grade::ALL {
             assert_eq!(Grade::parse(g.as_str()), Some(g));

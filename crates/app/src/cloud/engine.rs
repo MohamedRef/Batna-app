@@ -371,6 +371,12 @@ impl Engine {
             self.spare_vault = Some(usual);
             super::session::not_remembered()
         };
+        // Someone else's device keeps none of the study once the session
+        // ends (#679): sign-out, or the next launch, empties the store.
+        let marked = self.store.mark_borrowed(!remember);
+        if let Err(e) = marked {
+            crate::diag::report!("Batna Cloud: marking the device: {e}");
+        }
         match Auth::new(session, vault) {
             Ok(auth) => self.auth = Some(auth),
             Err(vault) => {
@@ -484,6 +490,15 @@ impl Engine {
         self.events.send(Event::Login(LoginStatus::default())).ok();
         // The next sign-in may be another account: read its log from the start.
         let _ = self.store.reset_sync();
+        if self.store.is_borrowed() {
+            match self.store.forget_study() {
+                Ok(()) => {
+                    let all = batna_protocol::sync::TABLES.iter().map(|(t, _)| t.to_string()).collect();
+                    self.events.send(Event::Changed(all)).ok();
+                }
+                Err(e) => crate::diag::report!("Batna Cloud: clearing a borrowed device: {e}"),
+            }
+        }
         self.stopped = false;
         self.events.send(Event::Devices(Ok(Vec::new()))).ok();
     }

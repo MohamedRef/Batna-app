@@ -364,10 +364,10 @@ items:
     topic: conduct
     stem: A randomized, single-masked experimental study is conducted. Which of the following problems is surely avoided?
     options:
-      - Noncompliance
-      - Confounding
+      - "Noncompliance with the assigned treatment"
+      - "Confounding by unknown factors"
       - Biased assessment of the disease outcome
-      - Loss to follow-up
+      - "Loss to follow-up of participants"
     answer: 2
     why:
       - Masking does not make people take their treatment.
@@ -712,11 +712,11 @@ items:
         answer: 0
         why: ARR = CER - EER = 20% - 6.67% = 13.33%.
       - question: What is the relative risk reduction (RRR)?
-        options: ["0.67 (67%)", "0.33", "13.33%", "3.0"]
+        options: ["0.67 (67%)", "0.33 (33%)", "13.33%", "3.0 (300%)"]
         answer: 0
         why: RRR = 13.33 / 20 = 0.67. Isoniazid removed two thirds of the risk.
       - question: What is the number needed to treat (NNT)?
-        options: ["7.5, so 8 children", "13", "20", "3"]
+        options: ["7.5, so 8 children", "13, so 13 children", "20, so 20 children", "3, so 3 children"]
         answer: 0
         why: NNT = 1 / 0.1333 = 7.5; round up to 8 children treated to prevent one case. The slide prints 7.69 (that is 1 / 0.13), but the rounded answer is the same, 8.
     src: { page: 59, quote: "| | Got TB | Did not get TB | Total |\n|---|---|---|---|\n| INH | 3 | 42 | 45 |\n| No INH | 9 | 36 | 45 |\n  CER = 9/45 = 20%\n  EER = 3/45 = 6.67%\n  Calculate ARR = 13.33%\n  Calculate RRR = 0.67\n  Calculate NNT = 1 / 13.33 = 7.69" }
@@ -738,7 +738,7 @@ items:
         answer: 0
         why: RRR = (0.22 - 0.07) / 0.22 = 68%; ARR = 0.22 - 0.07 = 0.15.
       - question: "The slide prints relative risk (RR) = 3.14 and number needed to treat (NNT) = 100/15 = 6. What should you write?"
-        options: ["RR = EER/CER = 0.33; NNT = 6.7, so 7", "RR = 3.14; NNT = 6", "RR = 0.68; NNT = 15", "RR = 3.14; NNT = 7"]
+        options: ["RR = EER/CER = 0.33; NNT = 6.7, so 7", "RR = 3.14; NNT = 6, so 6 people", "RR = 0.68; NNT = 15, so 15", "RR = 3.14; NNT = 6.7, so 7"]
         answer: 0
         why: 3.14 is CER/EER, the inverse. The risk ratio of treated over untreated is 0.07/0.22 = about 0.33 (protective). 100/15 = 6.7, and NNT is always rounded up, so 7.
     src: { page: 60, quote: "| Outcome | Zidovudine | Placebo | Total |\n|---|---|---|---|\n| Infants HIV infected | 13 | 40 | 53 |\n| Non HIV Infected Infants | 167 | 143 | 11 |\n| Total | 180 | 183 | 363 |\nCompute all possible measures of association. Interpret the obtained results:\n  EER = 13 / 180 = 0.07\n  CER = 40 / 183 = 0.22\n  RR = 3.14\n  RRR = 0.22 - 0.07 / 0.22 = 68%\n  ARR = 0.22 - 0.07 = 0.15\n  NNT = 1 / 15% = 100 / 15 = 6" }
@@ -812,7 +812,7 @@ items:
         answer: 0
         why: RRR = (20 - 8) / 20 = 60%.
       - question: What is the number needed to treat (NNT), and how do you report it?
-        options: ["9 patients for one year", "8.3 patients", "12 patients", "60 patients"]
+        options: ["9 patients for one year", "8.3 patients for one year", "12 patients", "60 patients"]
         answer: 0
         why: NNT = 100 / 12 = 8.3, rounded up to 9, and an NNT always carries its time frame (one year here).
     src: { page: 53, quote: "Are the results Clinically Significant?\n| | Outcome Present | Outcome Absent | Totals |\n|---|---|---|---|\n| Experimental group | a | b | a+b |\n| Control group | c | d | c+d |\n| Totals | a+c | b+d | a+b+c+d |\n  Control Event Rate: CER = c / c+d\n  Experimental Event Rate: EER = a / a+b\n  Relative Risk Reduction = CER - EER / CER\n  Absolute Risk Reduction: ARR = CER - EER\n  Number Needed to Treat: NNT = 1 / ARR" }
@@ -1336,9 +1336,9 @@ items:
     topic: practice
     stem: Phase 1 trials are
     options:
-      - Trials that recruit large numbers of subjects
-      - Done for post-marketing surveillance
-      - Multi-centred
+      - Trials that recruit large numbers of subjects to compare treatments
+      - Done after approval for post-marketing surveillance of rare effects
+      - Multi-centred trials of efficacy against the standard treatment
       - Small studies of 20-80 subjects looking at the toxic and pharmacological effects of drugs
     answer: 3
     why:

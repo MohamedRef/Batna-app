@@ -332,7 +332,9 @@ fn screen_body(screen: Screen) -> Element {
 #[component]
 fn NavButton(screen: Screen, class: &'static str) -> Element {
     let mut ui = use_context::<Ui>();
-    let active = *ui.screen.read() == screen;
+    // Calculators live in a Cases tab but have their own tool button,
+    // which is the one marked while they show.
+    let active = *ui.screen.read() == screen && !(screen == Screen::Cases && case::calculators_shown(ui));
     rsx! {
         button {
             class,

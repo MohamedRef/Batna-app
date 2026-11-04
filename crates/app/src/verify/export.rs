@@ -34,10 +34,7 @@ pub fn ExportVerdicts() -> Element {
             yaml.as_bytes(),
         );
         #[cfg(not(target_arch = "wasm32"))]
-        let saved = export_dir().and_then(|dir| {
-            let path = dir.join(format!("batna-verdicts-{date}.yaml"));
-            std::fs::write(&path, &yaml).map(|_| path.display().to_string()).map_err(|e| e.to_string())
-        });
+        let saved = save_in(export_dir(), &date, &yaml);
         attempt += 1;
         result.set(Some(saved.map(|p| (p, yaml))));
     };
@@ -78,5 +75,28 @@ pub fn ExportVerdicts() -> Element {
                 None => rsx! {},
             }
         }
+    }
+}
+
+/// Writes the export into `dir` as `batna-verdicts-<date>.yaml`; the path, or why not.
+#[cfg(not(target_arch = "wasm32"))]
+fn save_in(dir: Result<std::path::PathBuf, String>, date: &str, yaml: &str) -> Result<String, String> {
+    let path = dir?.join(format!("batna-verdicts-{date}.yaml"));
+    std::fs::write(&path, yaml).map(|_| path.display().to_string()).map_err(|e| e.to_string())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_export_lands_in_the_folder_under_todays_name() {
+        let dir = tempfile::tempdir().unwrap();
+        let path = save_in(Ok(dir.path().to_path_buf()), "2026-11-04", "items: []\n").unwrap();
+        assert!(path.ends_with("batna-verdicts-2026-11-04.yaml"));
+        assert_eq!(std::fs::read_to_string(&path).unwrap(), "items: []\n");
+        assert_eq!(save_in(Err("no folder".into()), "d", "x"), Err("no folder".to_string()));
+        let missing = dir.path().join("gone");
+        assert!(save_in(Ok(missing), "d", "x").is_err(), "a folder that isn't there says so");
     }
 }

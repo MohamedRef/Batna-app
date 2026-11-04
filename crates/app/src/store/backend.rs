@@ -108,6 +108,13 @@ impl ReviewBackend {
         b
     }
 
+    /// Test-only: drops `table` from this backend's store, so the next
+    /// write to it fails the way a broken disk would.
+    #[cfg(test)]
+    pub fn break_table(&self, table: &str) {
+        self.store.conn.lock().unwrap().execute(&format!("DROP TABLE {table}"), []).unwrap();
+    }
+
     /// Re-reads everything from the store.
     pub fn reload(&mut self) {
         self.settings = self.store.review_settings();
@@ -389,6 +396,18 @@ pub fn use_provide_review() {
         Review { backend, revision }
     });
     use_context_provider(|| StudyStoreHandle(review.backend.clone() as Rc<RefCell<dyn StudyStore>>));
+}
+
+/// Test-only: a [`Review`] over its own fresh in-memory store, so a test's
+/// answers never leak into another test through the shared store.
+#[cfg(test)]
+pub fn test_review() -> Review {
+    let store: &'static Store =
+        Box::leak(Box::new(Store::open_in_memory().expect("an in-memory database always opens")));
+    let backend = Rc::new(RefCell::new(ReviewBackend::new(store, catalog(Library::get()))));
+    let mut revision = Signal::new(0);
+    backend.borrow_mut().on_change = Some(Box::new(move || *revision.write() += 1));
+    Review { backend, revision }
 }
 
 /// The review state, subscribed: the calling component re-renders after

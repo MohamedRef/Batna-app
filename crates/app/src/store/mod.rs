@@ -27,6 +27,8 @@ use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 
+#[cfg(test)]
+pub use backend::test_review;
 pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
@@ -518,6 +520,10 @@ fn newest_stamp(conn: &Connection) -> Result<Option<Hlc>> {
 /// The app's store, opened once in the data directory. If that fails the
 /// app still runs on an in-memory store and says so on Today.
 pub fn shared() -> &'static Store {
+    #[cfg(test)]
+    if let Some(store) = THREAD_STORE.get() {
+        return store;
+    }
     #[cfg(target_arch = "wasm32")]
     return STORE.get_or_init(|| match Store::from_snapshot(&crate::platform::web::take_snapshot()) {
         Ok(s) => s,
@@ -547,6 +553,21 @@ pub fn shared() -> &'static Store {
 
 static STORE: OnceLock<Store> = OnceLock::new();
 static OPEN_ERROR: OnceLock<String> = OnceLock::new();
+
+#[cfg(test)]
+thread_local! {
+    static THREAD_STORE: std::cell::Cell<Option<&'static Store>> = const { std::cell::Cell::new(None) };
+}
+
+/// Test-only: this test thread gets its own fresh in-memory store as
+/// `shared()`, so settings and papers one test saves never reach another.
+#[cfg(test)]
+pub fn use_thread_store() -> &'static Store {
+    let store: &'static Store =
+        Box::leak(Box::new(Store::open_in_memory().expect("an in-memory database always opens")));
+    THREAD_STORE.set(Some(store));
+    store
+}
 
 /// Test-only: the shared store in memory, for fixtures that render screens
 /// reading it (`browser_fixture`). Call before anything opens the store.
@@ -620,6 +641,8 @@ pub fn write_error() -> Option<String> {
 }
 
 pub use paths::export_dir;
+#[cfg(test)]
+pub use paths::export_to_for_test;
 
 pub fn now_ms() -> i64 {
     web_time::SystemTime::now()

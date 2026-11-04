@@ -14,7 +14,7 @@
 //! standard deficit × 1 / [1 − (Na in fluid / 154)]: half-normal saline is
 //! half free water, so it takes twice the deficit.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num, show};
 
 const SEX: &[(&str, &str)] = &[("male", "Man"), ("female", "Woman")];
 
@@ -70,21 +70,7 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     let volume = deficit / (1.0 - fna / 154.0);
     let volume = (volume * 10.0).round() / 10.0;
     let deficit_r = (deficit * 10.0).round() / 10.0;
-    let mut notes = vec![
-        "Chronic (> 24 h): no faster than 0.5 mmol/L/h or 10 mmol/L/day; half the deficit in the first \
-         12–24 h, the rest over the next 24–48 h (p. 135)."
-            .to_owned(),
-        "Acute (< 24 h): can be corrected at 1 mmol/L/h (p. 134).".to_owned(),
-        "Add ongoing losses, and check Na every 2 hours at first, then every 4 (p. 135).".to_owned(),
-        "Next: urine osmolality. Above 600 mOsm/kg: losses outside the kidney or too little water; \
-         below 300: diabetes insipidus (desmopressin response: central rises, nephrogenic doesn't); \
-         in between: diuretics or an osmotic diuresis (Table 2, p. 133)."
-            .to_owned(),
-        "DD: no access to water (elderly, intubated), GI or skin losses, loop diuretics, osmotic \
-         diuresis (glucose, urea), central or nephrogenic DI (lithium, hypercalcaemia, hypokalaemia), \
-         hypertonic saline, bicarbonate or tube feeds (Table 2, p. 133)."
-            .to_owned(),
-    ];
+    let mut notes = Vec::new();
     if fna > 0.0 {
         notes.push(
             "The book prints the volume as \"deficit × 1+ [1-(Na/154)]\"; the standard \
@@ -107,6 +93,27 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+pub const GUIDES: &[(&str, Guide)] = &[(
+    "free_water_deficit.volume",
+    Guide {
+        next: &[
+            "Chronic (> 24 h): no faster than 0.5 mmol/L/h and no more than 10 mmol/L a day; half the deficit in the first 12–24 h, the rest over the next 24–48 h (p. 135)",
+            "Acute (< 24 h): can be corrected at 1 mmol/L/h (p. 134)",
+            "Hypovolaemic: isotonic saline first until the circulation is restored (p. 134)",
+            "Add ongoing losses; check Na every 2 hours at first, then every 4 (p. 135)",
+            "Urine osmolality: > 600 mOsm/kg means losses outside the kidney or too little water; < 300 means diabetes insipidus (desmopressin: central rises, nephrogenic doesn't) (Table 2, p. 133)",
+        ],
+        dd: &[
+            "No access to water: elderly, immobile, intubated",
+            "GI or skin losses: diarrhoea, vomiting, fever, sweating",
+            "Loop diuretics; osmotic diuresis (glucose, urea, recovering ATN)",
+            "Central DI: head trauma, surgery, tumour, infiltration",
+            "Nephrogenic DI: lithium, demeclocycline, hypercalcaemia, hypokalaemia",
+            "Salt excess: hypertonic saline, sodium bicarbonate, TPN or concentrated tube feeds",
+        ],
+    },
+)];
 
 #[cfg(test)]
 mod tests {

@@ -4,7 +4,7 @@
 //! gas table on p. 14: PAO2 = (713 × FiO2) − (pCO2 × 1.25); A-a gradient =
 //! PAO2 − PaO2, expected (age / 4) + 4; pO2 80–100 normal, < 80 hypoxia.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "aa_gradient",
@@ -39,12 +39,7 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     let gradient = ((alveolar - pao2) * 10.0).round() / 10.0;
     let expected = ((age / 4.0 + 4.0) * 10.0).round() / 10.0;
     let (band, label, meaning) = if gradient > expected {
-        (
-            "aa_gradient.high",
-            "Raised for age",
-            "A raised gradient: the hypoxia comes from the lung itself. Give oxygen and see: V/Q mismatch \
-             corrects with oxygen, a shunt barely does.",
-        )
+        ("aa_gradient.high", "Raised for age", "A raised gradient: the hypoxia comes from the lung itself.")
     } else {
         (
             "aa_gradient.normal",
@@ -53,17 +48,6 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
              pCO2) or a low inspired oxygen.",
         )
     };
-    notes.push(
-        if gradient > expected {
-            "DD: V/Q mismatch (pulmonary embolism, pneumonia, asthma, COPD); shunt (ARDS, pulmonary \
-             oedema, lobar collapse, intracardiac right-to-left shunt); diffusion defect (interstitial \
-             lung disease)."
-        } else {
-            "DD of hypoxia with a normal gradient: hypoventilation (opioids or sedatives, neuromuscular \
-             weakness, chest-wall disease, obesity hypoventilation) or high altitude."
-        }
-        .to_owned(),
-    );
     if fio2 > 0.21 {
         notes.push("The age rule is for room air; on extra oxygen the normal gradient is higher.".to_owned());
     }
@@ -82,6 +66,35 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "aa_gradient.high",
+        Guide {
+            next: &[
+                "Give oxygen and watch the response: V/Q mismatch corrects, a shunt barely does",
+                "Chest X-ray; CT pulmonary angiogram if embolism is likely",
+            ],
+            dd: &[
+                "V/Q mismatch: pulmonary embolism, pneumonia, asthma, COPD",
+                "Shunt: ARDS, pulmonary oedema, lobar collapse, intracardiac right-to-left shunt",
+                "Diffusion defect: interstitial lung disease",
+            ],
+        },
+    ),
+    (
+        "aa_gradient.normal",
+        Guide {
+            next: &[
+                "If PaO2 is low with a high pCO2: treat the hypoventilation (reverse sedatives, ventilatory support)",
+            ],
+            dd: &[
+                "Hypoventilation: opioids or sedatives, neuromuscular weakness, chest-wall disease, obesity hypoventilation",
+                "Low inspired oxygen: high altitude",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

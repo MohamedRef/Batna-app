@@ -3,13 +3,13 @@
 //!
 //! Source: the Nephrology book (Chapter 8, Lecture 14). p. 479: schistocytes
 //! must be present; one point each for platelets < 30,000/µL, haemolysis
-//! (reticulocytes > 2.5%, undetectable haptoglobin or indirect bilirubin
-//! > 2 mg/dL), MCV < 90 fL, INR < 1.5, creatinine < 2.0 mg/dL, no cancer, no
+//! (reticulocytes above 2.5%, undetectable haptoglobin or indirect
+//! bilirubin above 2 mg/dL), MCV < 90 fL, INR < 1.5, creatinine < 2.0 mg/dL, no cancer, no
 //! solid-organ or stem-cell transplant; above 5 high and below 5 low
 //! probability. p. 480: sensitivity 99%, specificity 57%. p. 466 places it
 //! in the TMA work-up. 5 is intermediate (Bendapudi et al., 2017).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "plasmic",
@@ -49,13 +49,9 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     ];
     let score: f64 = parts.iter().map(|p| p.points).sum();
     let (band, label, meaning) = match score as u8 {
-        6.. => (
-            "plasmic.high",
-            "High (6–7)",
-            "High probability of TTP (ADAMTS13 ≤ 10%): send ADAMTS13 and think of plasma exchange.",
-        ),
+        6.. => ("plasmic.high", "High (6–7)", "High probability of TTP (ADAMTS13 ≤ 10%)."),
         5 => ("plasmic.intermediate", "Intermediate (5)", "Intermediate probability of TTP."),
-        _ => ("plasmic.low", "Low (0–4)", "Low probability of TTP: look for another cause of the TMA."),
+        _ => ("plasmic.low", "Low (0–4)", "Low probability of TTP."),
     };
     Ok(Outcome {
         score: Some(score),
@@ -71,6 +67,52 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         ],
     })
 }
+
+const TMA_DD: &[&str] = &[
+    "TTP (ADAMTS13 < 10%)",
+    "STEC-HUS: bloody diarrhoea first",
+    "Complement-mediated (atypical) HUS",
+    "DIC: raised INR, low fibrinogen",
+    "Malignant hypertension; scleroderma renal crisis",
+    "Antiphospholipid syndrome and lupus (p. 466)",
+    "Drugs: calcineurin inhibitors, gemcitabine, quinine",
+    "Pregnancy: HELLP, pre-eclampsia",
+    "Cancer; solid-organ or stem-cell transplant",
+];
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "plasmic.high",
+        Guide {
+            next: &[
+                "Send ADAMTS13 activity before any plasma",
+                "Start plasma exchange and steroids without waiting for the result",
+                "Haematology now; caplacizumab or rituximab per the ISTH 2020 guideline",
+            ],
+            dd: TMA_DD,
+        },
+    ),
+    (
+        "plasmic.intermediate",
+        Guide {
+            next: &[
+                "Send ADAMTS13; decide on plasma exchange by the clinical picture while it comes back",
+                "Haematology opinion",
+            ],
+            dd: TMA_DD,
+        },
+    ),
+    (
+        "plasmic.low",
+        Guide {
+            next: &[
+                "Look for another cause of the TMA (list below); ADAMTS13 is still worth sending",
+                "Stool for STEC; complement studies if no other cause",
+            ],
+            dd: TMA_DD,
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

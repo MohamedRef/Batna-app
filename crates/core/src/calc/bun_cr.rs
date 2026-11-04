@@ -4,7 +4,7 @@
 //! prerenal azotemia and ATN" (p. 109): plasma BUN-creatinine ratio > 20 in
 //! prerenal azotemia, < 15 in ATN. The book gives no word for 15–20.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "bun_creatinine",
@@ -42,11 +42,50 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         meaning: meaning.to_owned(),
         page: Some(109),
         parts: vec![Part::new("BUN", bun), Part::new("÷ creatinine", cr)],
-        notes: vec![
-            "GI bleeding, steroids and a high protein intake raise BUN without prerenal AKI.".to_owned(),
-        ],
+        notes: Vec::new(),
     })
 }
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "bun_creatinine.prerenal",
+        Guide {
+            next: &[
+                "Assess volume and perfusion; give fluid if dry",
+                "Stop NSAIDs; hold ACE inhibitors, ARBs and diuretics",
+                "Confirm with the FENa (< 1%), or the FEurea (< 35%) if on diuretics (p. 109)",
+            ],
+            dd: &[
+                "Volume loss: bleeding, vomiting, diarrhoea, diuretics",
+                "Low effective volume: heart failure, cirrhosis and hepatorenal syndrome, sepsis",
+                "Drugs: NSAIDs, ACE inhibitors, ARBs",
+                "High BUN without a GFR fall: upper GI bleeding, steroids, high protein intake, catabolism, tetracyclines",
+            ],
+        },
+    ),
+    (
+        "bun_creatinine.indeterminate",
+        Guide {
+            next: &["Decide with the FENa, urine sodium, urine osmolality and sediment (p. 109)"],
+            dd: &["Prerenal azotemia", "ATN", "Prerenal on diuretics or with CKD"],
+        },
+    ),
+    (
+        "bun_creatinine.atn",
+        Guide {
+            next: &[
+                "Urine sediment: muddy brown granular casts in ATN (p. 109)",
+                "FENa (> 2% in ATN) and urine sodium (> 40)",
+                "Stop nephrotoxins; check potassium, acidosis and volume for dialysis indications",
+            ],
+            dd: &[
+                "ATN: ischaemic (prolonged prerenal, shock, sepsis) or toxic (aminoglycosides, contrast, rhabdomyolysis)",
+                "Other intrinsic AKI: glomerulonephritis, acute interstitial nephritis",
+                "Low BUN: liver disease, low protein intake, malnutrition",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

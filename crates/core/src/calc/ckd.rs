@@ -15,7 +15,7 @@
 //! number of checks a year. CKD needs a marker of damage or GFR < 60 for
 //! more than 3 months (p. 24).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, num, show};
 
 const SEX: &[(&str, &str)] = &[("male", "Man"), ("female", "Woman")];
 
@@ -58,7 +58,7 @@ fn egfr(i: &Inputs) -> Result<Outcome, CalcError> {
         display: format!("{} mL/min/1.73 m²", show(gfr, 1)),
         band: g.0,
         label: g.1,
-        meaning: format!("{}. {}", g.2, egfr_next(gfr)),
+        meaning: format!("{}. CKD only if it lasts more than 3 months (p. 24).", g.2),
         page: Some(29),
         parts: vec![
             Part::new("Creatinine (mg/dL)", cr),
@@ -66,29 +66,11 @@ fn egfr(i: &Inputs) -> Result<Outcome, CalcError> {
             Part::new(if woman { "Woman (× 1.012)" } else { "Man" }, if woman { 1.012 } else { 1.0 }),
         ],
         notes: vec![
-            "DD of a low eGFR: AKI vs CKD (old results, kidney size); a creatinine raised without a GFR \
-             fall (trimethoprim, cimetidine, creatine, high muscle mass); a falsely high eGFR with low \
-             muscle (amputation, cachexia, cirrhosis): confirm with cystatin C."
-                .to_owned(),
             "Lecture 13 (p. 432) prints the 2009 CKD-EPI equation with a race factor; the 2021 \
              one used here (and in the p. 29 examples) has none."
                 .to_owned(),
         ],
     })
-}
-
-/// The next step for an eGFR (KDIGO 2012 / 2024).
-fn egfr_next(gfr: f64) -> &'static str {
-    if gfr >= 60.0 {
-        "On its own this is not CKD: check the ACR and urine; CKD needs a marker of damage for more \
-         than 3 months (p. 24)."
-    } else if gfr >= 30.0 {
-        "CKD if it lasts more than 3 months (p. 24): check the ACR to stage it (G and A), review drug \
-         doses, and treat BP and proteinuria."
-    } else {
-        "Severely reduced: rule out AKI, refer to nephrology, adjust every renal drug, and start \
-         planning kidney replacement if it is falling (p. 36)."
-    }
 }
 
 /// (band, label, meaning) of a GFR category.
@@ -160,25 +142,16 @@ fn stage(i: &Inputs) -> Result<Outcome, CalcError> {
         0 => (
             "kdigo_ckd.low",
             "Low risk (green)",
-            "Low risk: with no other marker of kidney damage this is not CKD; screen once a year.",
+            "Low risk: with no other marker of kidney damage this is not CKD.",
         ),
-        1 => (
-            "kdigo_ckd.moderate",
-            "Moderately increased risk (yellow)",
-            "Moderately increased risk: treat the cause, control BP, start an ACE inhibitor or ARB if there \
-             is albuminuria, and an SGLT2 inhibitor where indicated.",
-        ),
-        2 => (
-            "kdigo_ckd.high",
-            "High risk (orange)",
-            "High risk of progression and of cardiovascular events: ACE inhibitor or ARB at the highest \
-             tolerated dose, SGLT2 inhibitor, statin; refer if ACR ≥ 300 or eGFR is falling fast.",
-        ),
+        1 => ("kdigo_ckd.moderate", "Moderately increased risk (yellow)", "Moderately increased risk."),
+        2 => {
+            ("kdigo_ckd.high", "High risk (orange)", "High risk of progression and of cardiovascular events.")
+        }
         _ => (
             "kdigo_ckd.very_high",
             "Very high risk (red)",
-            "Very high risk: nephrology care, check for CKD complications (anaemia, mineral bone \
-             disease, acidosis, potassium), and plan kidney replacement as eGFR nears 20.",
+            "Very high risk of kidney failure and of cardiovascular events.",
         ),
     };
     let visits = VISITS[row][col];
@@ -190,14 +163,6 @@ fn stage(i: &Inputs) -> Result<Outcome, CalcError> {
         );
     }
     notes.push("CKD needs the abnormality for more than 3 months (p. 24).".to_owned());
-    if col > 0 {
-        notes.push(
-            "DD of albuminuria: diabetic or hypertensive kidney disease, glomerulonephritis; a transient \
-             rise with exercise, fever, urinary infection, menstruation or haematuria (Table 17, p. 30): \
-             repeat it."
-                .to_owned(),
-        );
-    }
     Ok(Outcome {
         score: None,
         display: format!("{g} {a}"),
@@ -209,6 +174,130 @@ fn stage(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+const LOW_GFR_DD: &[&str] = &[
+    "AKI rather than CKD: compare with old results, look at kidney size",
+    "Creatinine raised without a GFR fall: trimethoprim, cimetidine, creatine supplements, high muscle mass",
+    "eGFR falsely high with low muscle mass (amputation, cachexia, cirrhosis): confirm with cystatin C",
+];
+const CKD_CAUSES: &[&str] = &[
+    "Diabetic kidney disease",
+    "Hypertensive nephrosclerosis",
+    "Glomerulonephritis",
+    "Polycystic kidney disease and other inherited causes",
+    "Obstruction or reflux; drugs (NSAIDs, lithium, calcineurin inhibitors)",
+];
+const ALBUMINURIA_DD: &[&str] = &[
+    "Diabetic or hypertensive kidney disease",
+    "Glomerulonephritis",
+    "A transient rise with exercise, fever, urinary infection, menstruation or haematuria (Table 17, p. 30): repeat it",
+];
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "ckd_epi_2021.g1",
+        Guide {
+            next: &[
+                "Check the ACR and the urine: CKD at this eGFR needs a marker of kidney damage for more than 3 months (p. 24)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "ckd_epi_2021.g2",
+        Guide {
+            next: &[
+                "Check the ACR and the urine: CKD needs a marker of kidney damage for more than 3 months (p. 24)",
+                "Over 65, a mild fall can be age alone: the book's CKD threshold is below 45 over 65 years (p. 29)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "ckd_epi_2021.g3a",
+        Guide {
+            next: &[
+                "Repeat in 3 months to confirm it is chronic (p. 24)",
+                "Check the ACR and stage it with KDIGO (G and A)",
+                "Review drug doses; control BP; ACE inhibitor or ARB and SGLT2 inhibitor where indicated",
+            ],
+            dd: LOW_GFR_DD,
+        },
+    ),
+    (
+        "ckd_epi_2021.g3b",
+        Guide {
+            next: &[
+                "Repeat in 3 months to confirm it is chronic (p. 24)",
+                "Check the ACR and stage it with KDIGO (G and A)",
+                "Look for complications: anaemia, mineral bone disease, acidosis, potassium",
+                "Review every renal drug dose",
+            ],
+            dd: LOW_GFR_DD,
+        },
+    ),
+    (
+        "ckd_epi_2021.g4",
+        Guide {
+            next: &[
+                "Rule out AKI first",
+                "Refer to nephrology (eGFR < 30, p. 36)",
+                "Treat complications; adjust every renal drug",
+                "Below 20: plan access and transplant (p. 36)",
+            ],
+            dd: LOW_GFR_DD,
+        },
+    ),
+    (
+        "ckd_epi_2021.g5",
+        Guide {
+            next: &[
+                "Rule out AKI first",
+                "Nephrology care: dialysis or transplant planning",
+                "Urgent dialysis for refractory hyperkalaemia, acidosis, fluid overload, uraemic pericarditis or encephalopathy",
+            ],
+            dd: LOW_GFR_DD,
+        },
+    ),
+    (
+        "kdigo_ckd.low",
+        Guide { next: &["Screen once a year if at risk (diabetes, hypertension) (p. 32)"], dd: &[] },
+    ),
+    (
+        "kdigo_ckd.moderate",
+        Guide {
+            next: &[
+                "Treat the cause; control BP",
+                "ACE inhibitor or ARB if there is albuminuria; SGLT2 inhibitor where indicated",
+                "Check eGFR and ACR once a year (p. 32)",
+            ],
+            dd: ALBUMINURIA_DD,
+        },
+    ),
+    (
+        "kdigo_ckd.high",
+        Guide {
+            next: &[
+                "ACE inhibitor or ARB at the highest tolerated dose, SGLT2 inhibitor, statin",
+                "Refer if ACR ≥ 300 mg/g or eGFR falls fast (> 20% on a repeat test, p. 32)",
+                "Check eGFR and ACR 2–3 times a year (p. 32)",
+            ],
+            dd: CKD_CAUSES,
+        },
+    ),
+    (
+        "kdigo_ckd.very_high",
+        Guide {
+            next: &[
+                "Nephrology care",
+                "Look for complications: anaemia, mineral bone disease, acidosis, potassium",
+                "Check eGFR and ACR 3–4+ times a year (p. 32)",
+                "eGFR < 20: plan access and transplant (p. 36)",
+            ],
+            dd: CKD_CAUSES,
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

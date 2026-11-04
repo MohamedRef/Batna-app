@@ -170,3 +170,6 @@ mod tests {
         assert_eq!(all.iter().map(|s| s.lectures).sum::<usize>(), lib.index.lectures.len());
     }
 }
+
+#[cfg(test)]
+mod screen_tests;

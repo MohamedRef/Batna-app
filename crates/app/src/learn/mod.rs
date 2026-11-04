@@ -11,6 +11,8 @@ mod browser;
 mod player;
 mod practice;
 mod steps;
+#[cfg(test)]
+pub(crate) mod tests;
 mod text;
 pub use text::Rich;
 

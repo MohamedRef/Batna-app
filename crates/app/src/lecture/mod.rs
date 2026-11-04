@@ -338,3 +338,6 @@ pub fn LecturePage(id: String) -> Element {
         }
     }
 }
+
+#[cfg(test)]
+mod tests;

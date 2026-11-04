@@ -7,6 +7,7 @@
 //            Enter toggles half ↔ full.
 //   body   : scrolled to the top, pulling down drags the sheet too.
 //   Esc    : closes the sheet before anything under it.
+//   outside: a tap outside the sheet closes it (and does nothing else).
 // The size is a fraction of the window height (--sheet-f), remembered for
 // the next sheet. Listeners are delegated from document, installed once.
 if (!window.__batnaSheetInit) {
@@ -216,6 +217,26 @@ if (!window.__batnaSheetInit) {
     e.preventDefault();
     e.stopPropagation();
     close(el);
+  }, true);
+
+  // ---- a tap outside closes it (Mohamed, 2026-11-03) ----
+  // The page under the sheet still scrolls (a scroll is no click), but a
+  // tap anywhere outside closes the sheet and does nothing else, so a tap
+  // meant to dismiss never answers a question or leaves the screen. A tap
+  // on something that opens a sheet or menu (a "ص N" chip, the
+  // abbreviations chip, the course chip) still works: it opens its own
+  // sheet in place of this one. Taps inside another dialog, menu, peek
+  // card or backdrop are theirs. Keyboard and scripted clicks don't count.
+  const PASS = "[aria-haspopup], [role=dialog], [role=menu], [role=tooltip], [class*=backdrop], [class*=scrim]";
+  window.addEventListener("click", (e) => {
+    if (!e.isTrusted || e.detail === 0) return;
+    const t = e.target instanceof Element ? e.target : null;
+    if (!t || t.closest(".bsheet") || t.closest(PASS)) return;
+    const open = sheets().filter((s) => !s.classList.contains("closing"));
+    if (!open.length) return;
+    e.preventDefault();
+    e.stopPropagation();
+    open.forEach(close);
   }, true);
 
   // ---- a sheet opens ----

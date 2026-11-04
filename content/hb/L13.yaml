@@ -435,7 +435,7 @@ items:
   topic: aih-types
   stem: A woman has AIH features with positive AMA. ALP is 3 times normal and the biopsy shows florid duct lesions.
     What is the book's empirical treatment?
-  options: [Prednisone alone, UDCA alone, Prednisone and ursodeoxycholic acid, Azathioprine alone, Liver transplantation]
+  options: ["Prednisone alone", "UDCA alone, no steroid", "Prednisone and ursodeoxycholic acid", "Azathioprine alone", "Liver transplantation"]
   answer: 2
   why: [Prednisone alone is used only when alkaline phosphatase (ALP) is ≤ 2× normal., UDCA alone is not the regimen for autoimmune hepatitis (AIH) + primary biliary cholangitis (PBC); the
       AIH component needs prednisone., 'Correct: AIH + PBC with ALP > 2× normal and/or florid duct lesions gets
@@ -1017,14 +1017,14 @@ items:
     'Avoid certain medicines, such as NSAIDs (aspirin, ibuprofen)']
   pass: 3
   hook: "نصايح PBC «سجاير، أكل، كحول، ومسكنات»: بطّل تدخين، أكل متوازن، بطّل الكحول أو قليل حسب الكبد، وابعد عن أدوية زي NSAIDs (aspirin وibuprofen)."
-  src: { page: 220, quote: "stop smoking eat a balanced diet stop drinking alcohol, or only drink a small amount" }
+  src: { page: 220, quote: "All types of liver disease, including PBC, can be helped by following some general health advice.\nYou should:\n  stop smoking\n  eat a balanced diet\n  stop drinking alcohol, or only drink a small amount, depending on how much liver damage you have\nFollowing this advice could:\n  help prevent PBC getting worse\n  mean all the treatments for PBC are available to you if you need them – for example, a liver transplant" }
   status: unverified
 - id: hb.L13.099
   kind: card
   topic: pbc-treatment
   front: Why does following general health advice matter in PBC?
   back: It may help prevent primary biliary cholangitis (PBC) getting worse, and it keeps all treatments, such as liver transplantation, available.
-  src: { page: 220, quote: "Following this advice could: help prevent PBC getting worse mean all the treatments for PBC are available to you if you need them" }
+  src: { page: 220, quote: "All types of liver disease, including PBC, can be helped by following some general health advice.\nYou should:\n  stop smoking\n  eat a balanced diet\n  stop drinking alcohol, or only drink a small amount, depending on how much liver damage you have\nFollowing this advice could:\n  help prevent PBC getting worse\n  mean all the treatments for PBC are available to you if you need them – for example, a liver transplant" }
   status: unverified
 - id: hb.L13.100
   kind: card
@@ -1139,8 +1139,8 @@ items:
   kind: mcq
   topic: pbc-treatment
   stem: A woman with PBC takes UDCA and is starting colestyramine for itching. How should she time the two drugs?
-  options: [Take them together with breakfast, 'UDCA at least 1 hour before, or 4–6 hours after, colestyramine',
-    UDCA 30 minutes after colestyramine, Stop UDCA while on colestyramine]
+  options: ["Take them together with breakfast every day", 'UDCA at least 1 hour before, or 4–6 hours after, colestyramine',
+    "UDCA 30 minutes after the colestyramine dose", "Stop UDCA while she is on colestyramine"]
   answer: 1
   why: [Taking them together impairs UDCA absorption., 'Correct: UDCA at least 1 hour before or 4–6 hours after
       colestyramine.', 30 minutes after is too soon; the book says 4–6 hours after., UDCA is lifelong and is not
@@ -1527,8 +1527,7 @@ items:
   kind: mcq
   topic: psc-treatment
   stem: A 30-year-old man with PSC develops fever, rigors and jaundice. What is the book's treatment?
-  options: [Oral UDCA 28–30 mg/kg/day, Broad-spectrum IV antibiotic such as ciprofloxacin, High-dose prednisone,
-    Urgent liver transplantation]
+  options: ["Oral UDCA at a high dose of 28–30 mg/kg/day", "Broad-spectrum IV antibiotic such as ciprofloxacin", "High-dose oral prednisone for 4 weeks", "Urgent listing for liver transplantation"]
   answer: 1
   why: [High-dose UDCA is harmful and does not treat infection., 'Correct: bacterial cholangitis is treated with
       a broad-spectrum IV antibiotic (ciprofloxacin).', Immunosuppressants have not shown clear benefit in primary sclerosing cholangitis (PSC).,
@@ -2279,13 +2278,12 @@ items:
     why: UDCA is the main treatment; it delays liver damage, especially if started early, and is taken for life.
   - reveal: UDCA is not working well enough.
     question: What may be added?
-    options: [Obeticholic acid or elafibranor, Prednisone, Metronidazole, Rituximab]
+    options: ["Obeticholic acid or elafibranor", "Prednisone with azathioprine", "Metronidazole for 2 weeks", "Rituximab every 6 months"]
     answer: 0
     why: Obeticholic acid (OCA) or elafibranor may be combined with UDCA when UDCA alone is not enough.
   - reveal: Her itching is severe and colestyramine is started.
     question: How should UDCA be timed?
-    options: ['At least 1 hour before, or 4–6 hours after, colestyramine', Together with colestyramine, 30 minutes
-        after colestyramine, UDCA is stopped]
+    options: ["At least 1 hour before, or 4–6 hours after, colestyramine", "Together with colestyramine, at the same meal", "30 minutes after the colestyramine dose", "UDCA is stopped while she takes colestyramine"]
     answer: 0
     why: Colestyramine affects UDCA absorption.
   - reveal: Years later her disease is advanced and transplantation is discussed.
@@ -2311,7 +2309,7 @@ items:
       with a known cause.
   - reveal: Months later he has fever, rigors and jaundice.
     question: Immediate treatment?
-    options: [Broad-spectrum IV antibiotic (ciprofloxacin), High-dose UDCA, Prednisone, Liver transplantation]
+    options: ["Broad-spectrum IV antibiotic (ciprofloxacin)", "High-dose UDCA (28–30 mg/kg)", "Oral prednisone 40 mg", "Urgent liver transplantation"]
     answer: 0
     why: Bacterial cholangitis is treated with a broad-spectrum IV antibiotic.
   - reveal: ERCP shows a dominant stricture of the common hepatic duct.
@@ -2338,7 +2336,7 @@ items:
     pancreas without peripancreatic inflammation and thickening of the intrapancreatic bile duct wall.
   steps:
   - question: Which serum test best supports IgG4-related disease?
-    options: [Serum IgG4 > 135 mg/dl, AMA, Anti-LKM1, Raised IgM]
+    options: ["Serum IgG4 > 135 mg/dl", "Antimitochondrial antibody", "Anti-LKM1 antibody", "Raised serum IgM"]
     answer: 0
     why: 84% of patients have IgG4 > 135 mg/dl. Antimitochondrial antibody (AMA) is primary biliary cholangitis (PBC), anti-LKM1 is type 2 autoimmune hepatitis (AIH), IgM is PBC.
   - reveal: Serum IgG4 is raised. PET/CT finds a target lesion and a biopsy is taken.

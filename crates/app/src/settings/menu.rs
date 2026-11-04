@@ -109,29 +109,70 @@ pub fn menu_bar() -> Menu {
 pub fn use_menu_events() {
     let ui = use_context::<Ui>();
     let settings = use_context::<SettingsNav>();
-    dioxus::desktop::use_muda_event_handler(move |event| {
-        let id = event.id().0.as_str();
-        let mut screen = ui.screen;
-        match id {
-            SETTINGS => {
+    dioxus::desktop::use_muda_event_handler(move |event| on_menu(event.id().0.as_str(), ui, settings));
+}
+
+/// Settings… opens the sheet's list, Keyboard Shortcuts its sheet, and a Go
+/// item closes both and shows that screen. Other ids (the system's) pass.
+fn on_menu(id: &str, ui: Ui, settings: SettingsNav) {
+    let mut screen = ui.screen;
+    match id {
+        SETTINGS => {
+            crate::shortcuts::open_sheet(false);
+            settings.show(None);
+        }
+        SHORTCUTS => crate::shortcuts::open_sheet(true),
+        _ => {
+            if let Some((_, _, _, s)) = GO.iter().find(|(go, ..)| *go == id) {
                 crate::shortcuts::open_sheet(false);
-                settings.show(None);
-            }
-            SHORTCUTS => crate::shortcuts::open_sheet(true),
-            _ => {
-                if let Some((_, _, _, s)) = GO.iter().find(|(go, ..)| *go == id) {
-                    crate::shortcuts::open_sheet(false);
-                    settings.close();
-                    screen.set(*s);
-                }
+                settings.close();
+                screen.set(*s);
             }
         }
-    });
+    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn menu_items_open_settings_or_go_to_a_screen() {
+        let dom = VirtualDom::new(|| rsx! {});
+        dom.in_scope(ScopeId::ROOT, || {
+            let ui = Ui {
+                screen: Signal::new(Screen::Today),
+                prefs: Signal::new(Default::default()),
+                focus: Signal::new(false),
+            };
+            let nav = SettingsNav::new();
+            nav.show(Some(super::super::Section::Look));
+            on_menu("batna.go.oral", ui, nav);
+            assert_eq!(*ui.screen.peek(), Screen::Oral);
+            assert!(!*nav.open.peek(), "going somewhere closes Settings");
+            on_menu(SETTINGS, ui, nav);
+            assert!(*nav.open.peek());
+            assert_eq!(*nav.section.peek(), None, "the list, not the last section");
+            on_menu("some.system.item", ui, nav);
+            assert_eq!(*ui.screen.peek(), Screen::Oral);
+            assert!(*nav.open.peek());
+            on_menu(SHORTCUTS, ui, nav);
+            on_menu("batna.go.today", ui, nav);
+            assert_eq!(*ui.screen.peek(), Screen::Today);
+        });
+    }
+
+    #[test]
+    fn the_menu_bar_has_batna_edit_go_window_and_help() {
+        let bar = menu_bar();
+        let titles: Vec<String> =
+            bar.items().iter().filter_map(|i| i.as_submenu().map(|s| s.text())).collect();
+        assert_eq!(titles, ["Batna", "Edit", "Go", "Window", "Help"]);
+        let go = bar.items()[2].as_submenu().unwrap().items();
+        assert_eq!(go.len(), GO.len());
+        assert_eq!(go[6].as_menuitem().unwrap().text(), "Progress");
+        assert_eq!(initial().is_some(), cfg!(target_os = "macos"));
+    }
 
     #[test]
     fn go_menu_covers_every_nav_screen_in_order() {

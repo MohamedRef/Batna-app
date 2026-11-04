@@ -199,8 +199,23 @@ mod tests {
         let e = api_error(401, r#"{"code":"device_revoked","message":"signed out"}"#);
         assert!(e.is_signed_out());
         assert!(matches!(e, CloudError::Api { code: ErrorCode::DeviceRevoked, .. }));
+        assert_eq!(e.to_string(), "401 DeviceRevoked: signed out");
         let e = api_error(403, "<html>blocked</html>");
         assert!(matches!(e, CloudError::Api { code: ErrorCode::NotAllowed, .. }));
         assert!(!e.is_signed_out());
+        // A proxy's own pages still get a code from the status.
+        assert!(api_error(401, "nope").is_signed_out());
+        assert!(matches!(api_error(404, ""), CloudError::Api { code: ErrorCode::NotFound, .. }));
+        assert!(matches!(
+            api_error(502, "x"),
+            CloudError::Api { code: ErrorCode::Internal, status: 502, .. }
+        ));
+        assert_eq!(CloudError::Network("dns".into()).to_string(), "network: dns");
+        assert_eq!(CloudError::Decode("eof".into()).to_string(), "unexpected response: eof");
+    }
+
+    #[test]
+    fn the_api_debug_shows_only_the_server() {
+        assert_eq!(format!("{:?}", Api::new("http://h/")), "Api { base: \"http://h\", .. }");
     }
 }

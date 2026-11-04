@@ -1,5 +1,6 @@
 // Local Batna Cloud integration check: fake Google, two devices, auth,
-// refresh, WebSocket sync, and remote sign-out. No real Google calls.
+// refresh, WebSocket sync, and remote sign-out, then the app's own sync engine
+// (crates/app/src/cloud/e2e.rs) on three devices. No real Google calls.
 // Run: node crates/server/tests/e2e.mjs (Node 22+, wrangler 4, worker-build).
 import { spawn } from "node:child_process";
 import { generateKeyPairSync, createSign, randomBytes } from "node:crypto";
@@ -16,18 +17,27 @@ const KEY_PORT = 8790;
 const BASE = `http://127.0.0.1:${PORT}`;
 const CLIENT_ID = "batna-e2e.apps.googleusercontent.com";
 const EMAIL = "learner@example.com";
+// The app's own test (below) signs in to a second, empty account, so the
+// hand-written ops above don't reach its devices.
+const APP_EMAIL = "app@example.com";
 const { privateKey, publicKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
 const jwk = { ...publicKey.export({ format: "jwk" }), kid: "local-key", alg: "RS256", use: "sig" };
 const b64 = (v) => Buffer.from(typeof v === "string" ? v : JSON.stringify(v)).toString("base64url");
-function idToken(email) {
+function idToken(email, sub = "110169484474386276334") {
   const now = Math.floor(Date.now() / 1000);
   const data = `${b64({ alg: "RS256", kid: "local-key" })}.${b64({
-    iss: "https://accounts.google.com", aud: CLIENT_ID, sub: "110169484474386276334",
+    iss: "https://accounts.google.com", aud: CLIENT_ID, sub,
     email, email_verified: true, iat: now, exp: now + 3600,
   })}`;
   return `${data}.${createSign("RSA-SHA256").update(data).sign(privateKey).toString("base64url")}`;
 }
-const jwksServer = createServer((_req, res) => {
+const jwksServer = createServer((req, res) => {
+  // The app's own test (below) asks here for an ID token, as Google would give.
+  if (req.url === "/token") {
+    res.writeHead(200, { "content-type": "text/plain" });
+    res.end(idToken(APP_EMAIL, "220269484474386276335"));
+    return;
+  }
   res.writeHead(200, { "content-type": "application/json", "cache-control": "max-age=60" });
   res.end(JSON.stringify({ keys: [jwk] }));
 });
@@ -35,7 +45,7 @@ await new Promise((resolve) => jwksServer.listen(KEY_PORT, "127.0.0.1", resolve)
 const vars = join(serverDir, ".dev.vars");
 const state = join(serverDir, ".wrangler", "e2e-state");
 writeFileSync(vars, [
-  `ALLOWED_EMAILS=${EMAIL}`,
+  `ALLOWED_EMAILS=${EMAIL},${APP_EMAIL}`,
   `TOKEN_SIGNING_KEY=${randomBytes(32).toString("base64")}`,
   `GOOGLE_CLIENT_IDS=${CLIENT_ID}`,
   `INSECURE_DEV_JWKS_URL=http://127.0.0.1:${KEY_PORT}/certs`, "",
@@ -134,4 +144,21 @@ const blocked = await api("POST", "/v1/auth/refresh", { body: { refresh_token: p
 assert.equal(blocked.status, 401);
 b.ws.close();
 console.log("Batna Cloud e2e: sign-in, refresh, sync, devices and revoke passed");
+
+// The app's real sync engine, three devices, against this Worker.
+// BATNA_E2E_SKIP_APP=1 skips it.
+if (!process.env.BATNA_E2E_SKIP_APP) {
+  // Async, so this process keeps serving the fake Google meanwhile.
+  const app = spawn("cargo", [
+    "test", "-p", "batna-app", "--no-default-features", "--",
+    "--ignored", "--exact", "cloud::e2e::phone_and_tablet_sync_through_the_worker", "--nocapture",
+  ], {
+    cwd: join(serverDir, "..", ".."),
+    stdio: ["ignore", "inherit", "inherit"],
+    env: { ...process.env, BATNA_E2E_URL: BASE, BATNA_E2E_TOKEN_URL: `http://127.0.0.1:${KEY_PORT}/token` },
+  });
+  const code = await new Promise((resolve) => app.on("exit", resolve));
+  assert.equal(code, 0, "the app's end-to-end test failed");
+  console.log("Batna Cloud e2e: the app's sync engine passed");
+}
 process.exit(0);

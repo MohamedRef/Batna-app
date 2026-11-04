@@ -2,7 +2,7 @@
 //! length, the reminders and the colours. Every step can be skipped, and
 //! Settings › Study opens it again.
 
-use batna_core::plan::Day;
+use batna_core::plan::{Day, PlanSettings};
 use batna_core::theme::Theme;
 use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -150,19 +150,24 @@ pub fn Onboarding() -> Element {
     if !OPEN() {
         return rsx! {};
     }
-    rsx! { Questions {} }
+    // BATNA_ONBOARD=3 opens on that screen (previews and screenshots).
+    let start = start_step(std::env::var("BATNA_ONBOARD").ok().as_deref());
+    rsx! { Questions { start, detail: None } }
 }
 
+/// The screen BATNA_ONBOARD names (1 to 3), else the first.
+fn start_step(var: Option<&str>) -> usize {
+    let n = var.and_then(|v| v.parse::<usize>().ok()).unwrap_or(1);
+    n.clamp(1, STEPS.len()) - 1
+}
+
+/// `start` is the quick path's screen; `detail` an optional one opened from
+/// the last screen.
 #[component]
-fn Questions() -> Element {
+fn Questions(start: usize, detail: Option<Step>) -> Element {
     let mut ui = use_context::<Ui>();
-    // BATNA_ONBOARD=3 opens on that screen (previews and screenshots).
-    let mut step = use_signal(|| {
-        let n = std::env::var("BATNA_ONBOARD").ok().and_then(|v| v.parse::<usize>().ok()).unwrap_or(1);
-        n.clamp(1, STEPS.len()) - 1
-    });
-    // An optional detail opened from the last screen.
-    let mut detail = use_signal(|| None::<Step>);
+    let mut step = use_signal(|| start);
+    let mut detail = use_signal(|| detail);
     let plan = crate::plan::SETTINGS.peek().clone();
     let answers = Answers::load();
     let today = crate::store::zone().study_day(now_ms());
@@ -186,60 +191,24 @@ fn Questions() -> Element {
     let current = detail().unwrap_or(STEPS[step()]);
     // Saves one step's answer; false keeps him on it with a gentle note.
     let mut commit = move |s: Step| -> bool {
-        match s {
-            Step::Time => {
-                // The exam day first: a wrong date keeps him here.
-                let text = exam.read().clone();
-                if !text.is_empty() && Some(text.as_str()) != initial.0.exam.map(Day::iso).as_deref() {
-                    let Some(day) = Day::parse(&text).filter(|d| *d > today) else {
-                        error.set(Some(tx::PICK_FUTURE));
-                        return false;
-                    };
-                    if !batna_core::plan::exam_day_ok(today, day) {
-                        error.set(Some(tx::PICK_FAR));
-                        return false;
-                    }
-                    let mut s = crate::plan::SETTINGS.write();
-                    s.exam = Some(day);
-                    crate::plan::save(&s);
-                }
-                if Some(minutes()) != initial.1.minutes && (initial.1.minutes.is_some() || minutes() != 10) {
-                    set_session_minutes(minutes());
-                }
+        let picks = Picks {
+            exam: exam.read().clone(),
+            weekdays: *weekdays.read(),
+            minutes: minutes(),
+            studied: studied.read().clone(),
+            times: times.read().clone(),
+        };
+        match changes(s, &picks, &initial, today) {
+            Ok(c) => {
+                apply(c);
+                error.set(None);
+                true
             }
-            Step::Days => {
-                if !weekdays.read().contains(&true) {
-                    error.set(Some(tx::PICK_A_DAY));
-                    return false;
-                }
-                if *weekdays.read() != initial.0.weekdays {
-                    let mut s = crate::plan::SETTINGS.write();
-                    s.weekdays = *weekdays.read();
-                    crate::plan::save(&s);
-                }
+            Err(note) => {
+                error.set(Some(note));
+                false
             }
-            Step::Studied => {
-                if *studied.read() != initial.1.studied {
-                    let mut a = Answers::load();
-                    a.studied = studied.read().clone();
-                    a.save();
-                }
-            }
-            Step::Reminders => {
-                let t = times.read().clone();
-                if t == initial.2 {
-                    return true;
-                }
-                let on = !t.is_empty();
-                RemindPrefs { on, times: if on { t } else { RemindPrefs::default().times } }.save();
-                if on && crate::reminders::HERE() {
-                    crate::platform::reminders::request_permission();
-                }
-            }
-            Step::Welcome | Step::Ready | Step::Theme => {}
         }
-        error.set(None);
-        true
     };
 
     let body = match current {
@@ -348,15 +317,7 @@ fn Questions() -> Element {
                                     "aria-pressed": if studied.read().contains(&l.id) { "true" } else { "false" },
                                     onclick: {
                                         let id = l.id.clone();
-                                        move |_| {
-                                            let mut s = studied.write();
-                                            match s.iter().position(|x| *x == id) {
-                                                Some(i) => {
-                                                    s.remove(i);
-                                                }
-                                                None => s.push(id.clone()),
-                                            }
-                                        }
+                                        move |_| toggle(&mut studied.write(), &id)
                                     },
                                     span { class: "onboard-check", aria_hidden: "true" }
                                     bdi { class: "onboard-num", "{crate::content::lecture_no(&l.id)}" }
@@ -366,18 +327,8 @@ fn Questions() -> Element {
                                     class: "onboard-upto small",
                                     title: tx::UP_TO_HERE,
                                     onclick: {
-                                        // Up to here in this course; other courses keep their picks.
-                                        let course = batna_core::program::course_of(&l.id).to_string();
-                                        let upto: Vec<String> = ids[..=n]
-                                            .iter()
-                                            .filter(|x| batna_core::program::course_of(x) == course)
-                                            .cloned()
-                                            .collect();
-                                        move |_| {
-                                            let mut s = studied.write();
-                                            s.retain(|x| batna_core::program::course_of(x) != course);
-                                            s.extend(upto.iter().cloned());
-                                        }
+                                        let ids = ids.clone();
+                                        move |_| up_to_here(&mut studied.write(), &ids, n)
                                     },
                                     {tx::UP_TO_HERE}
                                 }
@@ -409,7 +360,7 @@ fn Questions() -> Element {
                 button {
                     class: "btn btn-secondary",
                     onclick: move |_| {
-                        let next = times.read().last().map_or(19 * 60, |t| (t + 120).min(23 * 60));
+                        let next = next_time(&times.read());
                         times.write().push(next);
                     },
                     {tx::ADD_TIME}
@@ -513,6 +464,126 @@ fn Questions() -> Element {
     }
 }
 
+/// Ticks a lecture he studied, or unticks it.
+fn toggle(studied: &mut Vec<String>, id: &str) {
+    match studied.iter().position(|x| x == id) {
+        Some(i) => {
+            studied.remove(i);
+        }
+        None => studied.push(id.to_string()),
+    }
+}
+
+/// "Up to here": every lecture of that course up to `ids[n]`, in order;
+/// other courses keep their picks.
+fn up_to_here(studied: &mut Vec<String>, ids: &[String], n: usize) {
+    let course = batna_core::program::course_of(&ids[n]);
+    studied.retain(|x| batna_core::program::course_of(x) != course);
+    studied.extend(ids[..=n].iter().filter(|x| batna_core::program::course_of(x) == course).cloned());
+}
+
+/// A new reminder: 7 pm, or two hours after the last one, never after 11 pm.
+fn next_time(times: &[u16]) -> u16 {
+    times.last().map_or(19 * 60, |t| (t + 120).min(23 * 60))
+}
+
+/// What he picked on the questions, as they stand.
+struct Picks {
+    exam: String,
+    weekdays: [bool; 7],
+    minutes: u32,
+    studied: Vec<String>,
+    times: Vec<u16>,
+}
+
+/// What the questions showed at first: the plan, his answers, the reminder times.
+type Initial = (PlanSettings, Answers, Vec<u16>);
+
+/// What one step's answer changes. Nothing changes for a step he clicked
+/// through as it was, so a new device that hasn't synced yet can't
+/// overwrite the real settings with its defaults (#32).
+#[derive(Debug, Default, PartialEq)]
+struct Changes {
+    exam: Option<Day>,
+    minutes: Option<u32>,
+    weekdays: Option<[bool; 7]>,
+    studied: Option<Vec<String>>,
+    remind: Option<RemindPrefs>,
+}
+
+/// Checks one step's answer: `Err` is the gentle note that keeps him on it.
+fn changes(step: Step, picks: &Picks, initial: &Initial, today: Day) -> Result<Changes, &'static str> {
+    let mut c = Changes::default();
+    match step {
+        Step::Time => {
+            // The exam day first: a wrong date keeps him here.
+            let text = picks.exam.as_str();
+            if !text.is_empty() && Some(text) != initial.0.exam.map(Day::iso).as_deref() {
+                let day = Day::parse(text).filter(|d| *d > today).ok_or(tx::PICK_FUTURE)?;
+                if !batna_core::plan::exam_day_ok(today, day) {
+                    return Err(tx::PICK_FAR);
+                }
+                c.exam = Some(day);
+            }
+            let m = picks.minutes;
+            if Some(m) != initial.1.minutes && (initial.1.minutes.is_some() || m != 10) {
+                c.minutes = Some(m);
+            }
+        }
+        Step::Days => {
+            if !picks.weekdays.contains(&true) {
+                return Err(tx::PICK_A_DAY);
+            }
+            if picks.weekdays != initial.0.weekdays {
+                c.weekdays = Some(picks.weekdays);
+            }
+        }
+        Step::Studied => {
+            if picks.studied != initial.1.studied {
+                c.studied = Some(picks.studied.clone());
+            }
+        }
+        Step::Reminders => {
+            if picks.times != initial.2 {
+                let on = !picks.times.is_empty();
+                let times = if on { picks.times.clone() } else { RemindPrefs::default().times };
+                c.remind = Some(RemindPrefs { on, times });
+            }
+        }
+        Step::Welcome | Step::Ready | Step::Theme => {}
+    }
+    Ok(c)
+}
+
+/// Saves what [`changes`] decided.
+fn apply(c: Changes) {
+    if c.exam.is_some() || c.weekdays.is_some() {
+        let mut s = crate::plan::SETTINGS.write();
+        if let Some(day) = c.exam {
+            s.exam = Some(day);
+        }
+        if let Some(w) = c.weekdays {
+            s.weekdays = w;
+        }
+        crate::plan::save(&s);
+    }
+    if let Some(m) = c.minutes {
+        set_session_minutes(m);
+    }
+    if let Some(studied) = c.studied {
+        let mut a = Answers::load();
+        a.studied = studied;
+        a.save();
+    }
+    if let Some(r) = c.remind {
+        let on = r.on;
+        r.save();
+        if on && crate::reminders::HERE() {
+            crate::platform::reminders::request_permission();
+        }
+    }
+}
+
 /// The page and accent colours (System themes: the day and night page), as
 /// in Settings › Look.
 fn swatch_style(t: Theme) -> String {
@@ -548,7 +619,354 @@ pub fn ReopenCard() -> Element {
 
 #[cfg(test)]
 mod tests {
+    use std::cell::Cell;
+
     use super::*;
+    use crate::prefs::DevicePrefs;
+
+    thread_local! {
+        static AT: Cell<(usize, Option<Step>)> = const { Cell::new((0, None)) };
+        static UI: Cell<Option<Ui>> = const { Cell::new(None) };
+    }
+
+    fn fixture() -> Element {
+        let (start, detail) = AT.with(Cell::get);
+        let ui = use_context_provider(|| Ui {
+            screen: Signal::new(crate::Screen::Today),
+            prefs: Signal::new(DevicePrefs { theme: Theme::Night, ..DevicePrefs::default() }),
+            focus: Signal::new(false),
+        });
+        UI.with(|u| u.set(Some(ui)));
+        rsx! { Questions { start, detail } }
+    }
+
+    fn dom(start: usize, detail: Option<Step>) -> VirtualDom {
+        crate::store::use_memory_store();
+        AT.with(|a| a.set((start, detail)));
+        let mut dom = VirtualDom::new(fixture);
+        dom.rebuild_in_place();
+        dom
+    }
+
+    fn render(start: usize, detail: Option<Step>) -> String {
+        AT.with(|a| a.set((start, detail)));
+        let mut dom = VirtualDom::new(fixture);
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    fn today() -> Day {
+        Day::parse("2026-11-04").unwrap()
+    }
+
+    fn picks() -> Picks {
+        Picks {
+            exam: String::new(),
+            weekdays: [true; 7],
+            minutes: 10,
+            studied: Vec::new(),
+            times: Vec::new(),
+        }
+    }
+
+    fn initial() -> Initial {
+        (PlanSettings { weekdays: [true; 7], ..PlanSettings::default() }, Answers::default(), Vec::new())
+    }
+
+    #[test]
+    fn clicking_through_unchanged_saves_nothing() {
+        for step in
+            [Step::Welcome, Step::Time, Step::Ready, Step::Days, Step::Studied, Step::Reminders, Step::Theme]
+        {
+            assert_eq!(changes(step, &picks(), &initial(), today()), Ok(Changes::default()), "{step:?}");
+        }
+        // The exam day he already had, shown again, is not a change either.
+        let mut init = initial();
+        init.0.exam = Day::parse("2027-01-10");
+        let p = Picks { exam: "2027-01-10".into(), ..picks() };
+        assert_eq!(changes(Step::Time, &p, &init, today()), Ok(Changes::default()));
+    }
+
+    #[test]
+    fn the_exam_day_must_be_ahead_and_within_three_years() {
+        let at =
+            |exam: &str| changes(Step::Time, &Picks { exam: exam.into(), ..picks() }, &initial(), today());
+        assert_eq!(at("2026-11-04"), Err(tx::PICK_FUTURE), "today is too late");
+        assert_eq!(at("2025-01-01"), Err(tx::PICK_FUTURE));
+        assert_eq!(at("not a date"), Err(tx::PICK_FUTURE));
+        assert_eq!(at("2031-01-01"), Err(tx::PICK_FAR));
+        let ok = at("2027-01-10").unwrap();
+        assert_eq!(ok.exam, Day::parse("2027-01-10"));
+        assert_eq!(ok.minutes, None);
+    }
+
+    #[test]
+    fn session_length_is_saved_only_when_he_changes_it() {
+        let time = |minutes, before| {
+            let mut init = initial();
+            init.1.minutes = before;
+            changes(Step::Time, &Picks { minutes, ..picks() }, &init, today()).unwrap().minutes
+        };
+        assert_eq!(time(10, None), None, "the default, untouched");
+        assert_eq!(time(15, None), Some(15));
+        assert_eq!(time(10, Some(20)), Some(10), "back to ten from an earlier choice");
+        assert_eq!(time(20, Some(20)), None);
+    }
+
+    #[test]
+    fn days_need_at_least_one_and_studied_lectures_are_kept() {
+        let mut p = picks();
+        p.weekdays = [false; 7];
+        assert_eq!(changes(Step::Days, &p, &initial(), today()), Err(tx::PICK_A_DAY));
+        p.weekdays[6] = true;
+        assert_eq!(changes(Step::Days, &p, &initial(), today()).unwrap().weekdays, Some(p.weekdays));
+        let p = Picks { studied: vec!["hb.L01".into(), "hb.L02".into()], ..picks() };
+        let c = changes(Step::Studied, &p, &initial(), today()).unwrap();
+        assert_eq!(c.studied.as_deref(), Some(&["hb.L01".to_string(), "hb.L02".to_string()][..]));
+    }
+
+    #[test]
+    fn reminder_times_turn_reminders_on_and_none_turns_them_off() {
+        let p = Picks { times: vec![19 * 60, 21 * 60], ..picks() };
+        let r = changes(Step::Reminders, &p, &initial(), today()).unwrap().remind.unwrap();
+        assert!(r.on);
+        assert_eq!(r.times, [19 * 60, 21 * 60]);
+        // He removed the time he had: off, keeping the usual times for later.
+        let mut init = initial();
+        init.2 = vec![20 * 60];
+        let r = changes(Step::Reminders, &picks(), &init, today()).unwrap().remind.unwrap();
+        assert!(!r.on);
+        assert_eq!(r.times, RemindPrefs::default().times);
+    }
+
+    #[test]
+    fn lectures_tick_one_by_one_or_up_to_one_in_its_course() {
+        let mut s = vec!["hb.L03".to_string()];
+        toggle(&mut s, "hb.L05");
+        assert_eq!(s, ["hb.L03", "hb.L05"]);
+        toggle(&mut s, "hb.L03");
+        assert_eq!(s, ["hb.L05"]);
+        let ids: Vec<String> =
+            ["hb.L01", "hb.L02", "hb.L03", "geri.L01", "geri.L02"].map(String::from).to_vec();
+        let mut s = vec!["geri.L02".to_string(), "hb.L03".to_string()];
+        up_to_here(&mut s, &ids, 1);
+        assert_eq!(s, ["geri.L02", "hb.L01", "hb.L02"], "hb is replaced, geri kept");
+        up_to_here(&mut s, &ids, 3);
+        assert_eq!(s, ["hb.L01", "hb.L02", "geri.L01"]);
+    }
+
+    #[test]
+    fn a_new_reminder_comes_two_hours_after_the_last_but_not_past_eleven() {
+        assert_eq!(next_time(&[]), 19 * 60);
+        assert_eq!(next_time(&[19 * 60]), 21 * 60);
+        assert_eq!(next_time(&[19 * 60, 22 * 60]), 23 * 60);
+        assert_eq!(next_time(&[23 * 60]), 23 * 60);
+    }
+
+    #[test]
+    fn a_preview_can_open_any_quick_screen() {
+        assert_eq!(start_step(None), 0);
+        assert_eq!(start_step(Some("2")), 1);
+        assert_eq!(start_step(Some("9")), 2);
+        assert_eq!(start_step(Some("0")), 0);
+        assert_eq!(start_step(Some("x")), 0);
+    }
+
+    #[test]
+    fn the_quick_path_reads_well_on_every_screen() {
+        let html = render(0, None);
+        assert!(html.contains(tx::WELCOME_TITLE) && html.contains(tx::LATER), "{html}");
+        assert!(html.contains(&tx::progress(1, 3)) && html.contains(tx::CONTINUE));
+        assert!(!html.contains(&format!(">{}<", tx::BACK)), "no back on the first screen");
+
+        let html = render(1, None);
+        assert!(html.contains(tx::TIME_TITLE) && html.contains(tx::EXAM_OPTIONAL), "{html}");
+        // Four session lengths, the ten-minute default picked.
+        assert_eq!(html.matches("role=\"radio\"").count(), 4);
+        assert!(html.contains("aria-checked=true") || html.contains("aria-checked=\"true\""), "{html}");
+        assert!(html.contains("type=\"date\"") && html.contains("min=\"") && html.contains(tx::BACK));
+
+        let html = render(2, None);
+        assert!(
+            html.contains(tx::READY_TITLE)
+                && html.contains(tx::START_LESSON)
+                && html.contains(tx::START_TODAY)
+        );
+        for row in [tx::DAYS_ROW, tx::STUDIED_ROW, tx::REMIND_ROW, tx::THEME_ROW] {
+            assert!(html.contains(row), "missing {row}");
+        }
+        // His theme, by name; no "later" on the last screen.
+        assert!(html.contains(crate::i18n::settings::THEME_NIGHT));
+        assert!(!html.contains(tx::LATER));
+    }
+
+    #[test]
+    fn each_optional_detail_opens_from_the_last_screen() {
+        let html = render(2, Some(Step::Days));
+        assert!(html.contains(tx::DAYS_TITLE) && html.contains(tx::DETAIL_DONE), "{html}");
+        for day in crate::i18n::plan::WEEKDAYS {
+            assert!(html.contains(day), "missing {day}");
+        }
+
+        let html = render(2, Some(Step::Studied));
+        assert!(html.contains(tx::STUDIED_TITLE) && html.contains(tx::ALL) && html.contains(tx::NONE));
+        let lectures = Library::get().index.lectures.len();
+        assert_eq!(html.matches("class=\"onboard-lecture\"").count(), lectures);
+        assert_eq!(html.matches(tx::UP_TO_HERE).count(), lectures * 2, "a label and a title each");
+        assert!(html.contains("onboard-course"));
+
+        let html = render(2, Some(Step::Reminders));
+        assert!(html.contains(tx::REMIND_TITLE), "{html}");
+        let times = html.matches("type=\"time\"").count();
+        assert_eq!(html.contains(tx::NO_REMINDERS), times == 0);
+        assert_eq!(html.contains(tx::ADD_TIME), times < MAX_TIMES);
+
+        let html = render(2, Some(Step::Theme));
+        assert_eq!(html.matches("class=\"onboard-theme\"").count(), Theme::ALL.len());
+        assert!(html.contains("--sw-a:") && html.contains(crate::i18n::settings::THEME_SHIFT));
+    }
+
+    #[test]
+    fn continue_and_back_walk_the_quick_path() {
+        use crate::testing::{click, html};
+        let mut d = dom(0, None);
+        click(&mut d, tx::CONTINUE);
+        assert!(html(&d).contains(tx::TIME_TITLE));
+        click(&mut d, tx::BACK);
+        assert!(html(&d).contains(tx::WELCOME_TITLE));
+        click(&mut d, tx::CONTINUE);
+        // Twenty minutes, then on: the last screen.
+        click(&mut d, "20");
+        assert!(html(&d).contains("aria-checked=true"), "{}", html(&d));
+        click(&mut d, tx::CONTINUE);
+        let h = html(&d);
+        assert!(h.contains(tx::READY_TITLE) && h.contains(&tx::progress(3, 3)), "{h}");
+        let saved = d.in_runtime(session_minutes);
+        assert_eq!(saved, 20);
+    }
+
+    #[test]
+    fn later_and_both_starts_close_the_questions() {
+        use crate::testing::click;
+        let mut d = dom(0, None);
+        d.in_runtime(reopen);
+        click(&mut d, tx::LATER);
+        assert!(!d.in_runtime(|| OPEN.cloned()));
+
+        let mut d = dom(2, None);
+        let ui = UI.with(Cell::get).unwrap();
+        d.in_runtime(|| ui.screen.clone().set(crate::Screen::Stats));
+        click(&mut d, tx::START_TODAY);
+        assert_eq!(d.in_runtime(|| *ui.screen.peek()), crate::Screen::Today);
+
+        let mut d = dom(2, None);
+        let ui = UI.with(Cell::get).unwrap();
+        d.in_runtime(reopen);
+        click(&mut d, tx::START_LESSON);
+        assert!(!d.in_runtime(|| OPEN.cloned()));
+        assert_ne!(d.in_runtime(|| *ui.screen.peek()), crate::Screen::Today, "a lesson or the lessons list");
+    }
+
+    #[test]
+    fn a_past_exam_day_keeps_him_on_the_step_with_a_note() {
+        use crate::testing::{click, html, type_into};
+        let mut d = dom(1, None);
+        type_into(&mut d, "date", "2020-02-02");
+        click(&mut d, tx::CONTINUE);
+        let h = html(&d);
+        assert!(
+            h.contains(tx::TIME_TITLE) && h.contains(tx::PICK_FUTURE) && h.contains("role=\"alert\""),
+            "{h}"
+        );
+        // Typing again clears the note.
+        type_into(&mut d, "date", "");
+        assert!(!html(&d).contains(tx::PICK_FUTURE));
+    }
+
+    #[test]
+    fn details_open_from_the_last_screen_and_come_back() {
+        use crate::testing::{click, click_nth, html};
+        let mut d = dom(2, None);
+        click(&mut d, tx::DAYS_ROW);
+        assert!(html(&d).contains(tx::DAYS_TITLE));
+        // Untick every day: "done" keeps him here and says why.
+        for _ in 0..7 {
+            let h = html(&d);
+            let Some(day) = crate::i18n::plan::WEEKDAYS
+                .iter()
+                .find(|day| h.contains(&format!("aria-pressed=\"true\">{day}<")))
+            else {
+                break;
+            };
+            click(&mut d, day);
+        }
+        click(&mut d, tx::DETAIL_DONE);
+        assert!(html(&d).contains(tx::PICK_A_DAY), "{}", html(&d));
+        click_nth(&mut d, tx::BACK, 0);
+        assert!(html(&d).contains(tx::READY_TITLE));
+
+        click(&mut d, tx::STUDIED_ROW);
+        click(&mut d, tx::ALL);
+        let lectures = Library::get().index.lectures.len();
+        let ticked =
+            |d: &VirtualDom| html(d).matches("class=\"onboard-lecture\" aria-pressed=\"true\"").count();
+        assert_eq!(ticked(&d), lectures);
+        click(&mut d, tx::NONE);
+        assert_eq!(ticked(&d), 0);
+        // "Up to here" on the third lecture ticks the course's first three.
+        click_nth(&mut d, tx::UP_TO_HERE, 2);
+        assert_eq!(ticked(&d), 3);
+        // Tapping one of them unticks it (a title no other title contains).
+        let lib = Library::get();
+        let shown = lib.by_course(lib.index.lectures.iter().enumerate().collect(), |(_, l)| l.id.as_str());
+        let titles: Vec<&str> = lib.index.lectures.iter().map(|l| l.title.as_str()).collect();
+        let one = shown[0].rows[..3]
+            .iter()
+            .map(|(_, l)| l.title.as_str())
+            .find(|t| titles.iter().filter(|o| o.contains(*t)).count() == 1)
+            .unwrap();
+        click(&mut d, one);
+        assert_eq!(ticked(&d), 2);
+        click(&mut d, tx::BACK);
+
+        click(&mut d, tx::REMIND_ROW);
+        let before = html(&d).matches("type=\"time\"").count();
+        if before < MAX_TIMES {
+            click(&mut d, tx::ADD_TIME);
+            assert_eq!(html(&d).matches("type=\"time\"").count(), before + 1);
+        }
+        click(&mut d, tx::REMOVE);
+        assert_eq!(
+            html(&d).matches("type=\"time\"").count(),
+            before.max(1) - 1 + usize::from(before < MAX_TIMES)
+        );
+        click(&mut d, tx::BACK);
+        assert!(html(&d).contains(tx::READY_TITLE));
+    }
+
+    #[test]
+    fn every_theme_has_a_name_and_two_swatch_colours() {
+        let names: std::collections::BTreeSet<_> = Theme::ALL.iter().map(|t| theme_name(*t)).collect();
+        assert_eq!(names.len(), Theme::ALL.len());
+        for t in Theme::ALL {
+            let style = swatch_style(t);
+            assert!(style.starts_with("--sw-a:#") && style.contains(";--sw-b:#"), "{style}");
+        }
+    }
+
+    #[test]
+    fn settings_can_reopen_the_questions_and_closing_remembers_it() {
+        let dom = VirtualDom::new(|| rsx! {});
+        dom.in_scope(ScopeId::ROOT, || {
+            reopen();
+            assert!(OPEN());
+            let html = dioxus::ssr::render_element(rsx! { ReopenCard {} });
+            assert!(html.contains(tx::REOPEN_TITLE) && html.contains(tx::REOPEN));
+            close();
+            assert!(!OPEN());
+            assert_eq!(shared().local_setting::<bool>(SEEN), Some(true));
+        });
+    }
 
     #[test]
     fn answers_tolerate_missing_fields() {

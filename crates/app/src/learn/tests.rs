@@ -46,7 +46,7 @@ fn kind(k: &'static str) -> impl Fn(&Lesson, usize, &StepBody) -> bool {
 }
 
 fn saved(id: &str) -> Option<Attempt> {
-    crate::store::shared().local_setting(&player::pos_key(id))
+    crate::store::shared().place(&player::pos_key(id))
 }
 
 #[derive(Props, Clone, PartialEq)]
@@ -88,7 +88,7 @@ fn root(o: Open) -> Element {
             if let Some(right) = o.answered {
                 a.answers[o.at] = Some(right);
             }
-            crate::store::shared().put_local_setting(&player::pos_key(id), &a).unwrap();
+            crate::store::shared().put_place(&player::pos_key(id), &a).unwrap();
         }
         *FROM.write() = o.from;
         *OPEN.write() = o.lesson.clone();
@@ -435,7 +435,8 @@ fn a_reveal_opens_its_answer_and_unlocks_continue() {
     assert!(d.find(next).remove(0).disabled());
     d.click(|e| e.tag == "button" && e.text.contains(tx::REVEAL));
     assert!(
-        norm(&d.find(is("ls-answer")).remove(0).text).contains(&norm(answer)[..norm(answer).len().min(20)])
+        norm(&d.find(is("ls-answer")).remove(0).text)
+            .contains(&norm(answer).chars().take(20).collect::<String>())
     );
     assert!(!d.find(next).remove(0).disabled());
     let a = saved(&l.id).unwrap();
@@ -654,7 +655,7 @@ fn list() -> Dom {
 /// Leaves `l` part-way at step `at` on this device.
 fn leave_at(l: &Lesson, at: usize, started_ms: i64) {
     let a = Attempt { at, ..Attempt::new(l.steps.len(), started_ms) };
-    crate::store::shared().put_local_setting(&player::pos_key(&l.id), &a).unwrap();
+    crate::store::shared().put_place(&player::pos_key(&l.id), &a).unwrap();
 }
 
 #[test]

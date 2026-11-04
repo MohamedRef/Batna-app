@@ -8,7 +8,7 @@ use super::*;
 const FIXTURE_APK: &[u8] = b"fixture apk bytes";
 const FIXTURE_PACK: &[u8] = b"fixture pack bytes";
 
-fn offer(version: &str, build: u64) -> Offer {
+pub(super) fn offer(version: &str, build: u64) -> Offer {
     Offer {
         version: version.into(),
         build,
@@ -26,7 +26,7 @@ fn offer(version: &str, build: u64) -> Offer {
     }
 }
 
-fn status(phase: Phase, mode: Mode) -> Status {
+pub(super) fn status(phase: Phase, mode: Mode) -> Status {
     Status {
         off: None,
         phase,
@@ -914,4 +914,205 @@ fn the_feed_pack_of_the_running_build_is_not_downloaded() {
     assert!(!built_in(Some(&sha), true, &sha), "a downloaded pack is in use: the feed may roll it back");
     assert!(!built_in(Some(&"cd".repeat(32)), false, &sha), "other content");
     assert!(!built_in(None, false, &sha), "a local build doesn't know its digest");
+}
+
+#[test]
+fn the_loop_step_waits_for_its_time_and_respects_the_mode() {
+    let feed = fixture_feed();
+    let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
+
+    // "Only when I check": the loop never looks.
+    let (u, _data) = updater(&url, build("0.1.0", 41, true));
+    u.set_mode(Mode::Off);
+    assert!(!u.background_checks(), "Android's job stops too");
+    u.step(Duration::ZERO, false);
+    assert!(seen.lock().unwrap().is_empty(), "nothing fetched");
+    assert_eq!(load_prefs(&u.dir).mode, Mode::Off, "the choice is saved");
+
+    // Tell me first, on mobile data: the offer shows, nothing downloads.
+    u.set_mode(Mode::Notify);
+    assert!(u.background_checks());
+    u.step(Duration::ZERO, true);
+    assert!(matches!(u.status().phase, Phase::Available(_)), "{:?}", u.status().phase);
+    // Not due yet and still "tell me first": the loop leaves it alone.
+    u.step(CHECK_EVERY, false);
+    assert!(matches!(u.status().phase, Phase::Available(_)));
+
+    // Automatic, back on Wi-Fi, not due: the waiting download starts.
+    u.set_mode(Mode::Auto);
+    u.step(CHECK_EVERY, false);
+    assert!(matches!(u.status().phase, Phase::Ready(_)), "{:?}", u.status().phase);
+}
+
+#[test]
+fn a_notice_is_remembered_only_once_it_shows() {
+    let (u, _data) = updater("http://127.0.0.1:9", build("0.1.0", 41, true));
+    u.set_mode(Mode::Notify);
+    u.set_phase(Phase::Available(offer("0.1.0", 42)));
+    assert!(u.send_notice(|_| false).is_none(), "not shown: tried again later");
+    assert_eq!(u.status().prefs.notified, None);
+    let n = u.send_notice(|n| n.action == "download").expect("shown");
+    assert_eq!(u.status().prefs.notified.as_deref(), Some(n.key.as_str()));
+    assert!(u.send_notice(|_| true).is_none(), "never twice");
+    // Marking the same key again changes nothing.
+    u.shown(&n.key);
+    assert_eq!(load_prefs(&u.dir).notified.as_deref(), Some(n.key.as_str()));
+
+    u.set_notify(false);
+    assert!(!load_prefs(&u.dir).notify, "the switch is saved");
+    u.set_phase(Phase::Ready(offer("0.1.0", 42)));
+    assert!(u.send_notice(|_| true).is_none(), "switched off: no notification");
+}
+
+#[test]
+fn later_hides_the_banner_for_that_version_only() {
+    let (u, _data) = updater("http://127.0.0.1:9", build("0.1.0", 41, true));
+    let o = offer("0.1.0", 42);
+    u.set_phase(Phase::Ready(o.clone()));
+    assert!(u.status().banner().is_some());
+    u.dismiss();
+    assert!(u.status().banner().is_none());
+    assert_eq!(load_prefs(&u.dir).dismissed, Some(o.key()));
+    u.set_phase(Phase::Ready(offer("0.1.0", 43)));
+    assert!(u.status().banner().is_some(), "a newer version shows again");
+}
+
+#[test]
+fn the_updater_tells_its_followers_each_change() {
+    let (u, _data) = updater("http://127.0.0.1:9", build("0.1.0", 41, true));
+    let mut rx = u.subscribe();
+    u.set_phase(Phase::Checking);
+    assert!(rx.has_changed().unwrap());
+    assert_eq!(rx.borrow_and_update().phase, Phase::Checking);
+}
+
+#[test]
+fn without_a_local_feed_the_channel_release_is_used() {
+    let data = tempfile::tempdir().unwrap();
+    let u = Updater::new(data.path().join("updates"), build("0.1.0", 41, true), None, None, None);
+    let url = u.feed_url();
+    assert!(url.starts_with(batna_core::update::FEED_BASE), "{url}");
+    assert!(url.ends_with(Channel::Preview.release_tag()), "{url}");
+    assert!(!url.ends_with(MANIFEST_FILE) && !url.ends_with('/'));
+    // No builds for this system: updates say so and never look.
+    assert_eq!(u.status().off, Some(Off::NoPlatform));
+    assert!(!u.background_checks());
+    let u: &'static Updater = Box::leak(Box::new(u));
+    u.check(false);
+    assert_eq!(u.status().phase, Phase::Idle, "nothing fetched");
+}
+
+#[test]
+fn a_feed_out_of_reach_fails_both_halves() {
+    let (u, _data) = updater("http://127.0.0.1:9", build("0.1.0", 41, true));
+    u.check(false);
+    let s = u.status();
+    assert_eq!(s.phase, Phase::Failed { offer: None, why: Failure::Network });
+    assert_eq!(s.content_check, Some(ContentCheck::Failed));
+    assert!(s.prefs.last_check_ms.is_some(), "the try counts as a look");
+    // A failed download goes on with a tap; with no feed it fails again.
+    u.set_phase(Phase::Failed { offer: Some(offer("0.1.0", 42)), why: Failure::Network });
+    u.download();
+    assert!(matches!(u.status().phase, Phase::Failed { offer: Some(_), why: Failure::Network }));
+    // A build with no update key never fetches.
+    let mut info = build("0.1.0", 41, true);
+    info.key = None;
+    let (u, _data) = updater("http://127.0.0.1:9", info);
+    assert_eq!(u.fetch_manifest().unwrap_err(), Failure::Verify("no key".into()));
+}
+
+#[test]
+fn install_checks_the_download_again_and_reports_what_the_system_said() {
+    let feed = fixture_feed();
+    let url = serve(feed.path().to_path_buf());
+    let (u, _data) = updater(&url, build("0.1.0", 41, true));
+    // Nothing ready: a tap does nothing.
+    u.install();
+    assert_eq!(u.status().phase, Phase::Idle);
+
+    u.check(true);
+    let Phase::Ready(o) = u.status().phase else { panic!("{:?}", u.status().phase) };
+    u.install();
+    // This system has no installer: the download stays for a retry.
+    assert_eq!(
+        u.status().phase,
+        Phase::Failed { offer: Some(o.clone()), why: Failure::Install("no installer on this system".into()) }
+    );
+    assert!(u.dir.join(&o.asset.file).exists());
+
+    // Changed on disk since: never installed, and the download goes.
+    fs::write(u.dir.join(&o.asset.file), b"tampered").unwrap();
+    u.install();
+    assert!(
+        matches!(u.status().phase, Phase::Failed { why: Failure::Verify(_), .. }),
+        "{:?}",
+        u.status().phase
+    );
+    assert!(!u.dir.join(&o.asset.file).exists());
+    assert!(!u.dir.join("staged.json").exists());
+}
+
+#[test]
+fn switching_channel_drops_downloads_and_looks_again() {
+    let feed = fixture_feed();
+    let url = serve(feed.path().to_path_buf());
+    let (u, _data) = updater(&url, build("0.1.0", 41, true));
+    u.check(true);
+    let Phase::Ready(o) = u.status().phase else { panic!("{:?}", u.status().phase) };
+    // The same channel: nothing changes.
+    u.set_channel(Channel::Preview);
+    assert!(matches!(u.status().phase, Phase::Ready(_)));
+
+    u.set_mode(Mode::Notify);
+    u.set_channel(Channel::Beta);
+    assert_eq!(u.status().channel, Channel::Beta);
+    assert_eq!(load_prefs(&u.dir).channel, Some(Channel::Beta));
+    assert!(!u.dir.join(&o.asset.file).exists(), "the other channel's download goes");
+    // The new look runs on its own thread.
+    let start = std::time::Instant::now();
+    while matches!(u.status().phase, Phase::Idle | Phase::Checking)
+        && start.elapsed() < Duration::from_secs(10)
+    {
+        std::thread::sleep(Duration::from_millis(20));
+    }
+    // The feed here is the preview's: a beta build never takes it.
+    let Phase::Failed { why: Failure::Verify(why), .. } = u.status().phase else {
+        panic!("{:?}", u.status().phase)
+    };
+    assert!(why.contains("beta"), "{why}");
+}
+
+#[test]
+fn a_part_longer_than_the_build_or_refused_by_the_server_starts_over() {
+    let feed = fixture_feed();
+    let url = serve(feed.path().to_path_buf());
+    let (u, _data) = updater(&url, build("0.1.0", 41, true));
+    u.set_mode(Mode::Notify);
+    u.check(false);
+    let Phase::Available(o) = u.status().phase else { panic!("{:?}", u.status().phase) };
+    let path = u.dir.join(&o.asset.file);
+    let part = part_of(&path);
+    let file_url = format!("{url}/{}", o.asset.file);
+
+    fs::write(&part, vec![b'x'; FIXTURE_APK.len() + 5]).unwrap();
+    u.fetch_some(&file_url, &o, &part).unwrap();
+    assert_eq!(fs::read(&part).unwrap(), FIXTURE_APK, "too long: fetched again whole");
+
+    // Already whole: nothing to fetch.
+    u.fetch_some("http://127.0.0.1:9/none", &o, &part).unwrap();
+
+    // The server can't serve the rest of a short part (416 for a range past
+    // its end never happens here, so a missing file stands in): network.
+    fs::write(&part, &FIXTURE_APK[..3]).unwrap();
+    assert_eq!(u.fetch_some(&format!("{url}/missing.apk"), &o, &part), Err(Failure::Network));
+}
+
+#[test]
+fn only_a_feed_answer_counts_and_a_huge_feed_is_refused() {
+    let dir = tempfile::tempdir().unwrap();
+    fs::write(dir.path().join("big.json"), vec![b' '; (MAX_FEED_BYTES + 10) as usize]).unwrap();
+    let url = serve(dir.path().to_path_buf());
+    assert_eq!(get_small(&format!("{url}/big.json")), Err(Failure::Verify("feed too large".into())));
+    assert_eq!(get_small(&format!("{url}/absent.json")), Err(Failure::Network));
+    assert_eq!(update_failure(UpdateError::TooNew), Failure::TooNew);
 }

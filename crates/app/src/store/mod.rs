@@ -27,6 +27,8 @@ use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 
+#[cfg(test)]
+pub use backend::test_review;
 pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
@@ -385,6 +387,29 @@ impl Store {
         Ok(())
     }
 
+    /// Where Mohamed is in something (a lesson's step and answers, an open
+    /// paper): synced, so another device, or a new one after a password
+    /// sign-in, opens at the same point. One too big for a sync op stays on
+    /// this device instead, and this device's own copy then wins here.
+    pub fn put_place<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
+        let json = serde_json::to_string(value)?;
+        // The op wraps the value in a few dozen bytes of its own.
+        if json.len() + 1024 > batna_protocol::sync::MAX_PAYLOAD_BYTES {
+            return self.put_local_setting(key, value);
+        }
+        self.conn
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner)
+            .execute("DELETE FROM meta WHERE key = ?1", [format!("local.{key}")])?;
+        self.put_setting(key, value)
+    }
+
+    /// Reads what [`Store::put_place`] wrote; also finds a place saved
+    /// before places synced (a local setting).
+    pub fn place<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
+        self.local_setting(key).or_else(|| self.setting(key))
+    }
+
     pub fn review_settings(&self) -> ReviewSettings {
         self.setting(REVIEW_SETTINGS_KEY).unwrap_or_default()
     }
@@ -495,6 +520,10 @@ fn newest_stamp(conn: &Connection) -> Result<Option<Hlc>> {
 /// The app's store, opened once in the data directory. If that fails the
 /// app still runs on an in-memory store and says so on Today.
 pub fn shared() -> &'static Store {
+    #[cfg(test)]
+    if let Some(store) = THREAD_STORE.get() {
+        return store;
+    }
     #[cfg(target_arch = "wasm32")]
     return STORE.get_or_init(|| match Store::from_snapshot(&crate::platform::web::take_snapshot()) {
         Ok(s) => s,
@@ -524,6 +553,21 @@ pub fn shared() -> &'static Store {
 
 static STORE: OnceLock<Store> = OnceLock::new();
 static OPEN_ERROR: OnceLock<String> = OnceLock::new();
+
+#[cfg(test)]
+thread_local! {
+    static THREAD_STORE: std::cell::Cell<Option<&'static Store>> = const { std::cell::Cell::new(None) };
+}
+
+/// Test-only: this test thread gets its own fresh in-memory store as
+/// `shared()`, so settings and papers one test saves never reach another.
+#[cfg(test)]
+pub fn use_thread_store() -> &'static Store {
+    let store: &'static Store =
+        Box::leak(Box::new(Store::open_in_memory().expect("an in-memory database always opens")));
+    THREAD_STORE.set(Some(store));
+    store
+}
 
 /// Test-only: the shared store in memory, for fixtures that render screens
 /// reading it (`browser_fixture`). Call before anything opens the store.
@@ -597,6 +641,8 @@ pub fn write_error() -> Option<String> {
 }
 
 pub use paths::export_dir;
+#[cfg(test)]
+pub use paths::export_to_for_test;
 
 pub fn now_ms() -> i64 {
     web_time::SystemTime::now()
@@ -781,6 +827,24 @@ mod tests {
         s.put_setting("sound", &2u32).unwrap();
         s.put_setting("sound", &3u32).unwrap();
         assert_eq!(s.setting::<u32>("sound"), Some(3));
+        // Saved on every answer, a lesson's place still sends one op.
+        let before = s.outbox_len();
+        for at in 0..5 {
+            s.put_place("lessonpos.y", &at).unwrap();
+        }
+        assert_eq!(s.outbox_len(), before + 1);
+        assert_eq!(s.outbox(100).unwrap().last().unwrap().payload.as_ref().unwrap()["value"], "4");
+        // A place syncs and replaces this device's old local copy.
+        s.put_local_setting("lessonpos.x", &1).unwrap();
+        s.put_place("lessonpos.x", &2).unwrap();
+        assert_eq!(s.place::<i32>("lessonpos.x"), Some(2));
+        assert_eq!(s.setting::<i32>("lessonpos.x"), Some(2), "synced");
+        assert_eq!(s.local_setting::<i32>("lessonpos.x"), None);
+        // One too big for a sync op stays here, and wins here.
+        let big = "x".repeat(batna_protocol::sync::MAX_PAYLOAD_BYTES);
+        s.put_place("lessonpos.x", &big).unwrap();
+        assert_eq!(s.place::<String>("lessonpos.x").as_deref(), Some(big.as_str()));
+        assert_eq!(s.setting::<i32>("lessonpos.x"), Some(2));
         s.put_local_setting("rings", &true).unwrap();
         assert_eq!(s.local_setting::<bool>("rings"), Some(true));
         assert_eq!(s.setting::<bool>("rings"), None);

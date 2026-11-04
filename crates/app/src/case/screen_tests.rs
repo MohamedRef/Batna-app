@@ -72,11 +72,13 @@ fn the_tabs_switch_lists_and_a_row_opens_its_case() {
     d.click(tab(tx::TAB_CASES));
     let stem_start = first_words(stem);
     d.click(|e| {
-        e.has_class("case-row") && first_words(&e.text).starts_with(&stem_start[..stem_start.len().min(20)])
+        e.has_class("case-row")
+            && first_words(&e.text).starts_with(&stem_start.chars().take(20).collect::<String>())
     });
     assert!(shows(&d, "case-stepper"), "{}", d.html());
     assert!(
-        norm(&d.find(is("case-stem")).remove(0).text).starts_with(&stem_start[..stem_start.len().min(20)])
+        norm(&d.find(is("case-stem")).remove(0).text)
+            .starts_with(&stem_start.chars().take(20).collect::<String>())
     );
     // ← back to the list keeps a half-done case.
     d.click_in(is("player-meta"), |e| e.tag == "button");

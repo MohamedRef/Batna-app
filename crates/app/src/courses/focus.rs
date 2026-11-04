@@ -37,6 +37,13 @@ fn known(id: &str) -> bool {
         && lib.index.lectures.iter().any(|e| course_of(&e.id) == id)
 }
 
+/// Test-only: puts `course` in view for this app without saving it, so a
+/// test never changes the course another test starts with.
+#[cfg(test)]
+pub fn show_for_test(course: Option<String>) {
+    *FOCUS.write() = course;
+}
+
 /// Re-reads the focus (a sync or restore changed the store).
 pub fn reload() {
     let fresh = load();

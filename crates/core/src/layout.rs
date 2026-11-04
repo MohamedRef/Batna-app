@@ -40,5 +40,14 @@ mod tests {
         assert_eq!(WidthClass::from_dp(600.0), WidthClass::Medium);
         assert_eq!(WidthClass::from_dp(839.9), WidthClass::Medium);
         assert_eq!(WidthClass::from_dp(1100.0), WidthClass::Expanded);
+        assert_eq!(WidthClass::from_dp(599.9), WidthClass::Compact);
+        assert_eq!(WidthClass::from_dp(840.0), WidthClass::Expanded);
+    }
+
+    /// Each class has its Material name.
+    #[test]
+    fn names_match_the_css() {
+        let names = [412.0, 700.0, 1280.0].map(|w| WidthClass::from_dp(w).as_str());
+        assert_eq!(names, ["compact", "medium", "expanded"]);
     }
 }

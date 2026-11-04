@@ -111,6 +111,40 @@ mod tests {
         assert!(unsafe_sheet(&one("assets/a.css", &"a".repeat(MAX_SHEET_BYTES + 1))).is_some());
     }
 
+    /// A sheet read with a plain `include_str!` would ignore the pack's
+    /// copy, yet `scripts/content_impact.py` ships any `.css` change as
+    /// content-only: the change would reach no device (#656).
+    #[test]
+    fn every_stylesheet_is_built_in_through_css() {
+        fn walk(dir: &std::path::Path, out: &mut Vec<std::path::PathBuf>) {
+            for e in std::fs::read_dir(dir).unwrap().flatten() {
+                let p = e.path();
+                if p.is_dir() {
+                    walk(&p, out);
+                } else {
+                    out.push(p);
+                }
+            }
+        }
+        let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+        let mut files = Vec::new();
+        for d in ["src", "assets"] {
+            walk(&root.join(d), &mut files);
+        }
+        let source: String = files
+            .iter()
+            .filter(|p| p.extension().is_some_and(|x| x == "rs"))
+            .map(|p| std::fs::read_to_string(p).unwrap())
+            .collect();
+        let missing: Vec<String> = files
+            .iter()
+            .filter(|p| p.extension().is_some_and(|x| x == "css"))
+            .map(|p| p.strip_prefix(root).unwrap().to_string_lossy().replace('\\', "/"))
+            .filter(|path| !source.contains(&format!("css!(\"{path}\")")))
+            .collect();
+        assert!(missing.is_empty(), "not built in with css!: {missing:?}");
+    }
+
     #[test]
     fn the_feed_copy_wins_and_goes_away() {
         const MAIN: Css = css!("assets/main.css");

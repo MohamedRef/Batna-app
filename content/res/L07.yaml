@@ -668,7 +668,7 @@ items:
     kind: cloze
     topic: effect-measures
     text: >-
-      Mortality is 17% with control and 12% with the intervention. relative risk reduction (RRR) = (17 - 12) / 17 = {{c1::29%}};
+      Mortality is 17% with control and 12% with the intervention. Relative risk reduction (RRR) = (17 - 12) / 17 = {{c1::29%}};
       absolute risk reduction (ARR) = 17% - 12% = {{c2::5%}}; number needed to treat (NNT) = 100 / 5 = {{c3::20}}, so we need to treat 20 people to prevent one death.
     src: { page: 54, quote: "Example: mortality rate control 17%, intervention 12%\n  RRR = 17-12 / 17 = 29%\n  ARR = 17% - 12% = 5%\n  NNT = 1 / 5% = 100 / 5 = 20\nWe need to treat 20 people to prevent one death" }
     status: unverified
@@ -687,7 +687,7 @@ items:
     kind: table
     topic: effect-measures
     title: "Same RRR (50%), different baseline risk: why NNT matters"
-    columns: [control event rate (CER) and experimental event rate (EER), absolute risk reduction (ARR), number needed to treat (NNT)]
+    columns: [CER and EER, ARR, NNT]
     rows:
       - [50% and 25%, 25%, "4"]
       - [5% and 2.5%, 2.5%, "40"]
@@ -716,9 +716,9 @@ items:
         answer: 0
         why: RRR = 13.33 / 20 = 0.67. Isoniazid removed two thirds of the risk.
       - question: What is the number needed to treat (NNT)?
-        options: ["7.69, so 8 children", "13", "20", "3"]
+        options: ["7.5, so 8 children", "13", "20", "3"]
         answer: 0
-        why: NNT = 1 / 0.1333 = 7.69 (the slide's figure); round up to 8 children treated to prevent one case.
+        why: NNT = 1 / 0.1333 = 7.5; round up to 8 children treated to prevent one case. The slide prints 7.69 (that is 1 / 0.13), but the rounded answer is the same, 8.
     src: { page: 59, quote: "| | Got TB | Did not get TB | Total |\n|---|---|---|---|\n| INH | 3 | 42 | 45 |\n| No INH | 9 | 36 | 45 |\n  CER = 9/45 = 20%\n  EER = 3/45 = 6.67%\n  Calculate ARR = 13.33%\n  Calculate RRR = 0.67\n  Calculate NNT = 1 / 13.33 = 7.69" }
     status: unverified
     tags: [high-yield]
@@ -770,7 +770,7 @@ items:
       - A greater RRR and lower baseline risk
     answer: 0
     why:
-      - absolute risk reduction (ARR) = RRR x baseline risk, so both being high gives the biggest ARR and the smallest NNT.
+      - Absolute risk reduction (ARR) = RRR x baseline risk, so both being high gives the biggest ARR and the smallest NNT.
       - Both low gives the smallest ARR and the largest NNT.
       - The lower RRR shrinks the ARR.
       - A lower RRR always raises the NNT for a given baseline risk.
@@ -783,7 +783,7 @@ items:
     topic: effect-measures
     stem: In a randomized controlled trial (RCT) the control event rate (CER) was 20% and the treatment event rate was 10%. The results are
     options:
-      - relative risk (RR) = 2.0, relative risk reduction (RRR) = 10%, absolute risk reduction (ARR) 10%, number needed to treat (NNT) 20
+      - RR = 2.0, RRR = 10%, ARR 10%, NNT 20
       - RR = 0.5, RRR = 50%, ARR 10%, NNT 10
       - RR = 2.0, RRR = 50%, ARR 10%, NNT 10
       - RR = 1.0, RRR = 30%, ARR 20%, NNT 20
@@ -842,7 +842,7 @@ items:
     kind: table
     topic: chance
     title: Reading relative risks with their 95% CI
-    columns: [relative risk (RR) (95% confidence interval (CI)), Significant?, Meaning]
+    columns: [RR (95% CI), Significant?, Meaning]
     rows:
       - [1.77 (1.22-2.45), "Yes", Increased risk]
       - [1.63 (0.85-2.46), "No", Risk is the same]
@@ -915,8 +915,8 @@ items:
         options: ["10/90 = 0.11", "20/100 = 0.20", "10/100 = 0.10", "20/90 = 0.22"]
         answer: 0
         why: Per protocol keeps only those who got surgery, so the 10 early strokes vanish from the numerator and denominator.
-      - question: What does each analysis show?
-        options: ["Per protocol relative risk reduction (RRR) 0.45; intention-to-treat (ITT) RRR 0", "Both show RRR 0.45", "Per protocol RRR 0; ITT RRR 0.45", "Both show no effect"]
+      - question: What does each analysis show, as relative risk reduction (RRR), per protocol and by intention-to-treat (ITT)?
+        options: ["Per protocol RRR 0.45; ITT RRR 0", "Both show RRR 0.45", "Per protocol RRR 0; ITT RRR 0.45", "Both show no effect"]
         answer: 0
         why: Per protocol 0.11 vs 0.20 gives RRR 0.45; ITT counts everyone, 20/100 vs 20/100, so RRR 0.
       - question: Which one shows the underlying truth?
@@ -994,7 +994,7 @@ items:
       - A homogeneous sample can help internal validity, but that is not the problem being asked about.
       - True in practice, but the slide keys external validity.
       - True in practice, but the slide keys external validity.
-      - "\"All of the above\" is defensible, but the slide's key is a."
+      - "\"All of the above\" is defensible, but the slide keys decreased external validity."
     src: { page: 77, quote: "Excessive exclusion criteria may result in which of the following:\n  a. Decreased external validity\n  b. Increased internal validity\n  c. Problems with recruitment\n  d. Increased costs\n  e. All of the above\nAnswer: a" }
     status: unverified
   - id: res.L07.077
@@ -1008,7 +1008,7 @@ items:
       - It is not optimal for measuring benefit of the intervention
     answer: 2
     why:
-      - intention-to-treat (ITT) ignores compliance.
+      - Intention-to-treat (ITT) ignores compliance.
       - It is the best estimate of benefit, not of harm.
       - Analyse as randomized.
       - It is the optimal estimate of benefit.
@@ -1279,20 +1279,20 @@ items:
   - id: res.L07.101
     kind: mcq
     topic: practice
-    stem: Comparing randomized controlled trials with cohort studies, which is generally true?
+    stem: Comparing randomized controlled trials (RCTs) with cohort studies, which is generally true?
     options:
       - Both are prospective
-      - randomized controlled trial (RCT) results are less likely to be generalisable than cohort results
+      - RCT results are less likely to be generalisable than cohort results
       - RCT results are less likely to be affected by confounding
       - A, B and C are all true
       - None of the above is true
     answer: 2
     why:
       - Cohorts can be retrospective too, so this is not generally true.
-      - The slide's key is c; generalisability depends on the trial.
+      - The slide keys the confounding option; generalisability depends on the trial.
       - Randomization balances known and unknown confounders, which a cohort cannot do.
-      - Only c is keyed true.
-      - c is true.
+      - Only the confounding statement is keyed true.
+      - The confounding statement is true.
     src: { page: 108, quote: "When comparing randomized controlled trials (RCT) to cohort studies, which of the following is generally true?\n  a. Both are prospective\n  b. The results of the RCT are less likely to be generalisable than the results of the cohort study.\n  c. The results of the RCT are less likely to be affected by confounding\n  d. A, B and C are all true\n  e. None of the above statements is true" }
     status: unverified
   - id: res.L07.102
@@ -1400,7 +1400,7 @@ items:
       - Phase IV follows the drug after approval to catch rare and long-term effects.
       - Phases I to III are the pre-approval clinical trials.
       - Animal studies are preclinical.
-      - a is correct.
+      - Post-marketing surveillance is correct.
     src: { page: 115, quote: "Phase IV of clinical trial is:\n  (a) Post marketing surveillance\n  (b) Clinical trial\n  (c) Animal studies\n  (d) None of the above\nAnswer: a" }
     status: unverified
   - id: res.L07.109
@@ -1449,7 +1449,7 @@ items:
       - Blinding prevents measurement bias.
       - Analysis can adjust only for measured confounders, after the fact.
       - Randomization balances known and unknown confounders at the design stage.
-      - c is correct.
+      - Randomization is correct.
     src: { page: 119, quote: "What is the tool for control of confounders in experimental design?\n  (a) Blinding\n  (b) Statistical analysis\n  (c) Randomization\n  (d) None of the above\nAnswer: c" }
     status: unverified
     tags: [high-yield]

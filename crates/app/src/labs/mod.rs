@@ -71,12 +71,36 @@ pub fn LabText(text: String) -> Element {
     if !pieces.iter().any(|p| matches!(p, Piece::Value { .. })) {
         return rsx! { "{text}" };
     }
+    // The comma or full stop right after a value goes before its chip, so a
+    // wrapped line never starts with it.
+    let mut parts: Vec<(&str, Option<(labs::Hit, bool, &str)>)> = Vec::new();
+    let mut carry = "";
+    for p in pieces {
+        match p {
+            Piece::Text(t) => {
+                let t = &t[carry.len()..];
+                carry = "";
+                parts.push((t, None));
+            }
+            Piece::Value { text: v, hit, chip } => {
+                let after = &text[hit.end..];
+                let n: usize = if chip {
+                    after.chars().take_while(|c| ",.;:)".contains(*c)).map(char::len_utf8).sum()
+                } else {
+                    0
+                };
+                carry = &after[..n];
+                parts.push((v, Some((hit, chip, carry))));
+            }
+        }
+    }
     rsx! {
-        for (i , p) in pieces.into_iter().enumerate() {
-            match p {
-                Piece::Text(t) => rsx! { span { key: "{i}", "{t}" } },
-                Piece::Value { text, hit, chip } => rsx! {
-                    span { key: "{i}", class: "lab-v", "data-place": place(hit.place), "{text}" }
+        for (i , (t , v)) in parts.into_iter().enumerate() {
+            match v {
+                None => rsx! { span { key: "{i}", "{t}" } },
+                Some((hit, chip, punct)) => rsx! {
+                    span { key: "{i}", class: "lab-v", "data-place": place(hit.place), "{t}" }
+                    "{punct}"
                     if chip {
                         RangeChip { lab: hit.lab.id, bare: hit.bare, place: hit.place }
                     }
@@ -105,6 +129,9 @@ mod tests {
         // A bare value: the chip names the unit.
         assert!(html("eGFR <30").contains("≥90 mL/min/1.73 m²"));
         assert!(html("fasting glucose 130 mg/dL").contains("fasting 70–100"));
+        let h = html("Hb 5.8, WBC 2.6.");
+        assert!(h.contains(r#">5.8</span>,<span class="lab-n""#), "the comma comes before the chip: {h}");
+        assert!(h.ends_with(".</span>") || h.contains(r#">2.6</span>.<span"#), "{h}");
     }
 
     #[test]

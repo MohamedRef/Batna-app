@@ -46,9 +46,6 @@ const fn sexes(male: (f64, f64), female: (f64, f64)) -> Normal {
 const fn under(high: f64) -> Normal {
     Normal { low: f64::NEG_INFINITY, high, female: None, below: true }
 }
-const fn at_least(low: f64) -> Normal {
-    r(low, f64::INFINITY)
-}
 
 const MMOL: &[&str] = &["mmol/L", "mEq/L", "meq/l"];
 const MG_DL: &[&str] = &["mg/dL"];
@@ -246,7 +243,7 @@ pub static LABS: &[Lab] = &[
         abbr: CREAT,
         words: CREAT_W,
         units: MG_DL,
-        bare: None,
+        bare: Some((0.2, 15.0)),
         normal: n::CREATININE_MG_DL,
         note: "",
         source: NBME,
@@ -304,9 +301,9 @@ pub static LABS: &[Lab] = &[
             "mL/min",
         ],
         bare: Some((1.0, 150.0)),
-        normal: at_least(90.0),
+        normal: n::EGFR,
         note: "",
-        source: "KDIGO 2012 CKD guideline, GFR category G1",
+        source: "KDIGO 2024 CKD guideline, GFR category G1",
     },
     Lab {
         id: "acr",
@@ -314,9 +311,9 @@ pub static LABS: &[Lab] = &[
         words: &["albumin-to-creatinine ratio", "albumin–creatinine ratio", "albumin/creatinine ratio"],
         units: &["mg/g"],
         bare: None,
-        normal: under(30.0),
+        normal: n::ACR_MG_G,
         note: "",
-        source: "KDIGO 2012 CKD guideline, albuminuria category A1",
+        source: "KDIGO 2024 CKD guideline, albuminuria category A1",
     },
     Lab {
         id: "acr_si",
@@ -326,7 +323,7 @@ pub static LABS: &[Lab] = &[
         bare: None,
         normal: under(3.0),
         note: "",
-        source: "KDIGO 2012 CKD guideline, albuminuria category A1",
+        source: "KDIGO 2024 CKD guideline, albuminuria category A1",
     },
     // Sugar and lipids.
     Lab {
@@ -587,7 +584,7 @@ pub static LABS: &[Lab] = &[
         words: &["mean corpuscular volume"],
         units: &["fL", "fl", "µm³", "μm3"],
         bare: Some((50.0, 140.0)),
-        normal: r(80.0, 100.0),
+        normal: n::MCV_FL,
         note: "",
         source: NBME,
     },
@@ -1236,6 +1233,12 @@ mod tests {
         assert!(!one("pH 7.1").bare, "pH has no unit to add");
         assert_eq!(one("INR >1.5").place, Some(Place::High));
         assert_eq!(one("Hb <7").lab.id, "hb");
+        let case = "fatigue, vomiting, Hb 5.8, WBC 2.6 and creatinine 7.3. Anti-dsDNA";
+        let ids: Vec<_> = find(case).iter().map(|h| (h.lab.id, h.place)).collect();
+        assert_eq!(
+            ids,
+            [("hb", Some(Place::Low)), ("wbc_e9", Some(Place::Low)), ("creatinine", Some(Place::High))]
+        );
         // A threshold that isn't all low or all high gets no colour.
         assert_eq!(one("transfuse if Hb >7 g/dL").place, None);
         assert_eq!(one("Hb 7–8 g/dL").place, Some(Place::Low));

@@ -20,6 +20,10 @@ use serde::{Deserialize, Serialize};
 
 pub use crate::content::CalcValue;
 
+/// Adult normal ranges shared by inputs (`.normal_as(normals::SODIUM)`).
+pub mod normals;
+
+mod aa_gradient;
 mod aav;
 mod aki;
 mod albi;
@@ -30,8 +34,10 @@ mod baveno;
 mod bclc;
 mod bisap;
 mod bmi;
+mod bun_cr;
 mod cha2ds2_vasc;
 mod child_pugh;
+mod ckd;
 mod clichy;
 mod cll;
 mod cockcroft;
@@ -40,6 +46,7 @@ mod diabetes;
 mod dka;
 mod fib4;
 mod fli;
+mod free_water;
 mod gbs;
 mod geri;
 mod glasgow;
@@ -55,6 +62,7 @@ mod milan;
 mod mpn;
 mod okuda;
 mod page_b;
+mod plasmic;
 mod r_ratio;
 mod ra2010;
 mod ranson;
@@ -265,6 +273,56 @@ pub struct Field {
     pub kind: FieldKind,
     pub optional: bool,
     pub hint: &'static str,
+    /// The adult normal range of a number input, shown under its box; a
+    /// value outside it colours the box (one colour high, another low).
+    /// The hard limits are `FieldKind::Number`'s `min` and `max`.
+    pub normal: Option<Normal>,
+}
+
+/// A number input's normal (reference) range for adults, ends included.
+/// An open end is `f64::NEG_INFINITY` or `f64::INFINITY` ("up to 2").
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Normal {
+    /// Men's range, or everyone's when `female` is `None`.
+    pub low: f64,
+    pub high: f64,
+    /// Women's range when it differs (haemoglobin, creatinine). The form
+    /// picks it from the calculator's `sex` choice (`male` / `female`).
+    pub female: Option<(f64, f64)>,
+    /// Normal is *below* `high`, which is itself high: triglycerides are
+    /// normal under 150 mg/dL ("< 150"). Only with an open low end.
+    pub below: bool,
+}
+
+/// Where a value sits against its [`Normal`] range.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Place {
+    Low,
+    Normal,
+    High,
+}
+
+impl Normal {
+    /// The range for one sex; with the sex unknown, the span of both, so a
+    /// value only shows as abnormal when it is abnormal for either.
+    pub fn bounds(&self, female: Option<bool>) -> (f64, f64) {
+        match (self.female, female) {
+            (Some(f), Some(true)) => f,
+            (Some((fl, fh)), None) => (self.low.min(fl), self.high.max(fh)),
+            _ => (self.low, self.high),
+        }
+    }
+
+    pub fn place(&self, v: f64, female: Option<bool>) -> Place {
+        let (low, high) = self.bounds(female);
+        if v < low {
+            Place::Low
+        } else if v > high || (self.below && v >= high) {
+            Place::High
+        } else {
+            Place::Normal
+        }
+    }
 }
 
 const fn num(
@@ -275,11 +333,18 @@ const fn num(
     max: f64,
     step: f64,
 ) -> Field {
-    Field { key, label, kind: FieldKind::Number { unit, min, max, step }, optional: false, hint: "" }
+    Field {
+        key,
+        label,
+        kind: FieldKind::Number { unit, min, max, step },
+        optional: false,
+        hint: "",
+        normal: None,
+    }
 }
 
 const fn flag(key: &'static str, label: &'static str) -> Field {
-    Field { key, label, kind: FieldKind::Flag, optional: true, hint: "" }
+    Field { key, label, kind: FieldKind::Flag, optional: true, hint: "", normal: None }
 }
 
 const fn choice(
@@ -287,7 +352,7 @@ const fn choice(
     label: &'static str,
     options: &'static [(&'static str, &'static str)],
 ) -> Field {
-    Field { key, label, kind: FieldKind::Choice(options), optional: false, hint: "" }
+    Field { key, label, kind: FieldKind::Choice(options), optional: false, hint: "", normal: None }
 }
 
 impl Field {
@@ -300,7 +365,59 @@ impl Field {
         self.hint = hint;
         self
     }
+
+    /// The normal range, both ends included: `.normal(3.5, 5.5)`.
+    #[allow(dead_code)]
+    const fn normal(mut self, low: f64, high: f64) -> Self {
+        self.normal = Some(Normal { low, high, female: None, below: false });
+        self
+    }
+
+    /// Normal up to `high`, included: `.normal_up_to(2.0)` for lactate.
+    #[allow(dead_code)]
+    const fn normal_up_to(self, high: f64) -> Self {
+        self.normal(f64::NEG_INFINITY, high)
+    }
+
+    /// Normal under `high`, which is itself high: `.normal_under(150.0)`.
+    #[allow(dead_code)]
+    const fn normal_under(mut self, high: f64) -> Self {
+        self.normal = Some(normals::under(high));
+        self
+    }
+
+    /// Normal from `low` up: `.normal_from(90.0)`.
+    #[allow(dead_code)]
+    const fn normal_from(self, low: f64) -> Self {
+        self.normal(low, f64::INFINITY)
+    }
+
+    /// A shared range from [`normals`]: `.normal_as(normals::ALBUMIN_G_DL)`.
+    const fn normal_as(mut self, normal: Normal) -> Self {
+        self.normal = Some(normal);
+        self
+    }
+
+    /// Different ranges for men and women: `.normal_sex((13.5, 17.5), (12.0, 15.5))`.
+    #[allow(dead_code)]
+    const fn normal_sex(mut self, male: (f64, f64), female: (f64, f64)) -> Self {
+        self.normal = Some(Normal { low: male.0, high: male.1, female: Some(female), below: false });
+        self
+    }
+
+    /// The `[min, max]` a number may take at all: what a body can show, wide
+    /// of the normal range. `None` for flags and choices.
+    pub fn limits(&self) -> Option<(f64, f64)> {
+        match self.kind {
+            FieldKind::Number { min, max, .. } => Some((min, max)),
+            _ => None,
+        }
+    }
 }
+
+/// The reason [`CalcSpec::run`] gives for a number outside its field's
+/// `min`..`max`: a typo or a unit slip (albumin 35 for 3.5 g/dL).
+pub const IMPOSSIBLE: &str = "outside the possible range";
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Area {
@@ -375,6 +492,11 @@ static GUIDE_LISTS: &[&[(&str, Guide)]] = &[
     dka::GUIDES,
     insulin::GUIDES,
     bmi::GUIDES,
+    bun_cr::GUIDES,
+    ckd::GUIDES,
+    aa_gradient::GUIDES,
+    free_water::GUIDES,
+    plasmic::GUIDES,
 ];
 
 /// The next step and differential for a band id (`cam.positive`), if
@@ -394,7 +516,25 @@ pub fn spec(id: &str) -> Option<&'static CalcSpec> {
 
 pub fn compute(id: &str, inputs: &Inputs) -> Result<Outcome, CalcError> {
     let spec = spec(id).ok_or_else(|| CalcError::Unknown(id.to_owned()))?;
-    (spec.compute)(inputs)
+    spec.run(inputs)
+}
+
+impl CalcSpec {
+    /// Computes the result after refusing a number outside its field's
+    /// `min`..`max` ([`IMPOSSIBLE`]), so a slip like serum albumin 12 g/dL
+    /// never reaches a formula. Every caller goes through this, not
+    /// `compute` directly.
+    pub fn run(&self, inputs: &Inputs) -> Result<Outcome, CalcError> {
+        for f in self.fields {
+            if let Some((min, max)) = f.limits()
+                && let Some(v) = inputs.opt_num(f.key)?
+                && !(min..=max).contains(&v)
+            {
+                return Err(CalcError::Invalid { field: f.key, reason: IMPOSSIBLE });
+            }
+        }
+        (self.compute)(inputs)
+    }
 }
 
 // A slice, not an array, so adding one doesn't touch a count that every
@@ -438,6 +578,12 @@ static REGISTRY: &[CalcSpec] = &[
     aki::KDIGO,
     aki::FENA,
     aki::FEUREA,
+    bun_cr::SPEC,
+    ckd::EGFR,
+    ckd::STAGE,
+    aa_gradient::SPEC,
+    free_water::SPEC,
+    plasmic::SPEC,
     cockcroft::SPEC,
     geri::KATZ,
     geri::LAWTON,
@@ -699,31 +845,49 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("fena.atn", &["atn", "tubular necrosis"]),
     ("feurea.prerenal", &["prerenal", "pre-renal"]),
     ("feurea.atn", &["atn", "tubular necrosis"]),
-    ("shock_index.unstable", &["unstable"]),
-    ("shock_index.stable", &["stable"]),
-    ("oakland.discharge", &["discharge", "8 or less"]),
-    ("oakland.admit", &["admit", "above 8"]),
-    ("uc_activity.mild", &["mild"]),
-    ("uc_activity.moderate", &["moderate"]),
-    ("uc_activity.severe", &["severe"]),
-    ("kyoto_gastritis.none", &["no h. pylori", "no infection"]),
-    ("kyoto_gastritis.current", &["current infection"]),
-    ("kyoto_gastritis.cancer_risk", &["cancer risk"]),
-    ("rome4_ibs.not_met", &["not met"]),
-    ("rome4_ibs.c", &["ibs-c"]),
-    ("rome4_ibs.d", &["ibs-d"]),
-    ("rome4_ibs.m", &["ibs-m"]),
-    ("rome4_ibs.u", &["ibs-u"]),
-    ("dka_severity.not_met", &["not dka", "not met"]),
-    ("dka_severity.mild", &["mild"]),
-    ("dka_severity.moderate", &["moderate"]),
-    ("dka_severity.severe", &["severe"]),
-    ("bmi.under", &["underweight"]),
-    ("bmi.normal", &["normal"]),
-    ("bmi.overweight", &["overweight"]),
+    ("aa_gradient.high", &["raised", "high"]),
+    ("aa_gradient.normal", &["normal"]),
     ("bmi.class1", &["class i", "class 1"]),
     ("bmi.class2", &["class ii", "class 2"]),
     ("bmi.class3", &["class iii", "class 3"]),
+    ("bmi.normal", &["normal"]),
+    ("bmi.overweight", &["overweight"]),
+    ("bmi.under", &["underweight"]),
+    ("bun_creatinine.atn", &["atn", "tubular necrosis"]),
+    ("bun_creatinine.indeterminate", &["indeterminate"]),
+    ("bun_creatinine.prerenal", &["prerenal", "pre-renal"]),
+    ("ckd_epi_2021.g1", &["g1"]),
+    ("ckd_epi_2021.g2", &["g2"]),
+    ("ckd_epi_2021.g3a", &["g3a"]),
+    ("ckd_epi_2021.g3b", &["g3b"]),
+    ("ckd_epi_2021.g4", &["g4"]),
+    ("ckd_epi_2021.g5", &["g5"]),
+    ("dka_severity.mild", &["mild"]),
+    ("dka_severity.moderate", &["moderate"]),
+    ("dka_severity.not_met", &["not dka", "not met"]),
+    ("dka_severity.severe", &["severe"]),
+    ("kdigo_ckd.high", &["high risk"]),
+    ("kdigo_ckd.low", &["low risk"]),
+    ("kdigo_ckd.moderate", &["moderately increased"]),
+    ("kdigo_ckd.very_high", &["very high risk", "very high"]),
+    ("kyoto_gastritis.cancer_risk", &["cancer risk"]),
+    ("kyoto_gastritis.current", &["current infection"]),
+    ("kyoto_gastritis.none", &["no h. pylori", "no infection"]),
+    ("oakland.admit", &["admit", "above 8"]),
+    ("oakland.discharge", &["discharge", "8 or less"]),
+    ("plasmic.high", &["high"]),
+    ("plasmic.intermediate", &["intermediate"]),
+    ("plasmic.low", &["low"]),
+    ("rome4_ibs.c", &["ibs-c"]),
+    ("rome4_ibs.d", &["ibs-d"]),
+    ("rome4_ibs.m", &["ibs-m"]),
+    ("rome4_ibs.not_met", &["not met"]),
+    ("rome4_ibs.u", &["ibs-u"]),
+    ("shock_index.stable", &["stable"]),
+    ("shock_index.unstable", &["unstable"]),
+    ("uc_activity.mild", &["mild"]),
+    ("uc_activity.moderate", &["moderate"]),
+    ("uc_activity.severe", &["severe"]),
 ];
 
 /// The bands of `band`'s calculator that `text` names, longest phrase first.
@@ -822,6 +986,71 @@ fn show(v: f64, dp: usize) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn normal_ranges_fit_inside_the_possible_range() {
+        for spec in all() {
+            for f in spec.fields {
+                let Some(n) = f.normal else { continue };
+                let Some((min, max)) = f.limits() else {
+                    panic!("{}.{}: a normal range on a field that is not a number", spec.id, f.key);
+                };
+                for (lo, hi) in [(n.low, n.high)].into_iter().chain(n.female) {
+                    assert!(lo <= hi, "{}.{}: normal range upside down", spec.id, f.key);
+                    assert!(
+                        !n.below || lo.is_infinite(),
+                        "{}.{}: `below` needs an open low end",
+                        spec.id,
+                        f.key
+                    );
+                    assert!(
+                        (lo.is_infinite() || lo >= min) && (hi.is_infinite() || hi <= max),
+                        "{}.{}: normal {lo}–{hi} outside the possible {min}–{max}",
+                        spec.id,
+                        f.key
+                    );
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn where_a_value_sits() {
+        let hb = normals::HB_G_DL;
+        assert_eq!(hb.place(12.5, Some(false)), Place::Low);
+        assert_eq!(hb.place(12.5, Some(true)), Place::Normal);
+        // Sex unknown: abnormal only when abnormal for both.
+        assert_eq!(hb.place(12.5, None), Place::Normal);
+        assert_eq!(hb.place(11.0, None), Place::Low);
+        assert_eq!(hb.place(17.0, Some(true)), Place::High);
+        assert_eq!(normals::LACTATE_MMOL_L.place(2.0, None), Place::Normal);
+        assert_eq!(normals::LACTATE_MMOL_L.place(2.1, None), Place::High);
+        assert_eq!(normals::ALBUMIN_G_DL.place(3.5, None), Place::Normal);
+        // "Below 150": 150 itself is high.
+        assert_eq!(normals::TRIGLYCERIDES_MG_DL.place(149.0, None), Place::Normal);
+        assert_eq!(normals::TRIGLYCERIDES_MG_DL.place(150.0, None), Place::High);
+        let waist = normals::WAIST_CM;
+        assert_eq!(waist.place(85.0, Some(false)), Place::Normal);
+        assert_eq!(waist.place(85.0, Some(true)), Place::High);
+        assert_eq!(waist.place(85.0, None), Place::Normal);
+        assert_eq!(waist.place(94.0, None), Place::High);
+    }
+
+    #[test]
+    fn run_refuses_impossible_numbers() {
+        // Albumin 35 is g/L typed into a g/dL box.
+        let i = Inputs::new()
+            .choice("encephalopathy", "none")
+            .choice("ascites", "absent")
+            .num("bilirubin_mg_dl", 1.0)
+            .num("albumin_g_dl", 35.0)
+            .num("inr", 1.0);
+        assert_eq!(
+            compute("child_pugh", &i),
+            Err(CalcError::Invalid { field: "albumin_g_dl", reason: IMPOSSIBLE })
+        );
+        assert!(compute("child_pugh", &i.num("albumin_g_dl", 3.5)).is_ok());
+    }
 
     #[test]
     fn guides_name_real_bands_once() {

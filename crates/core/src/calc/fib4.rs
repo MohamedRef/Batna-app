@@ -5,7 +5,7 @@
 //! 1.3–3.25 intermediate, > 3.25 high risk of advanced fibrosis. Lecture 2
 //! (EASL 2021) uses < 1.3 to rule out and refers above 1.3 for elastography.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "fib4",
@@ -13,9 +13,9 @@ pub const SPEC: CalcSpec = CalcSpec {
     area: Area::Liver,
     fields: &[
         num("age_years", "Age", "years", 1.0, 110.0, 1.0),
-        num("ast_u_l", "AST", "U/L", 1.0, 10000.0, 1.0),
-        num("alt_u_l", "ALT", "U/L", 1.0, 10000.0, 1.0),
-        num("platelets_10e9_l", "Platelets", "×10⁹/L", 1.0, 1500.0, 1.0),
+        num("ast_u_l", "AST", "U/L", 1.0, 10000.0, 1.0).normal_as(normals::AST_U_L),
+        num("alt_u_l", "ALT", "U/L", 1.0, 10000.0, 1.0).normal_as(normals::ALT_U_L),
+        num("platelets_10e9_l", "Platelets", "×10⁹/L", 1.0, 1500.0, 1.0).normal_as(normals::PLATELETS_10E9_L),
     ],
     source: "Sterling 2006; book Lecture 6, p. 102",
     compute,

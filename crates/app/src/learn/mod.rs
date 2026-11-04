@@ -441,6 +441,8 @@ fn Others(shown: String) -> Element {
                                             span { class: "coll-main",
                                                 bdi { class: "coll-title", dir: "ltr", "{entry.title}" }
                                                 span { class: "coll-sub",
+                                                    BookPages { id: entry.id.clone(), pages: entry.pages }
+                                                    " · "
                                                     {tx::lessons_n(n)}
                                                     " · "
                                                     {tx::done_of(d, n)}
@@ -470,7 +472,11 @@ fn Others(shown: String) -> Element {
                                         }
                                         span { class: "coll-main",
                                             bdi { class: "coll-title", dir: "ltr", "{entry.title}" }
-                                            span { class: "coll-sub", {tx::OPEN_LECTURE} }
+                                            span { class: "coll-sub",
+                                                BookPages { id: entry.id.clone(), pages: entry.pages }
+                                                " · "
+                                                {tx::OPEN_LECTURE}
+                                            }
                                         }
                                         span { class: "coll-end", span { class: "chip", {tx::WRITING} } }
                                         span { class: "chev", aria_hidden: "true" }
@@ -481,6 +487,20 @@ fn Others(shown: String) -> Element {
                     }
                 }
             }
+        }
+    }
+}
+
+/// Where a lecture or lesson sits in its source: "صفحات 1–22" in the
+/// book, or "سلايدز 1–53" for a slide-deck course.
+#[component]
+pub(crate) fn BookPages(id: String, pages: [u32; 2]) -> Element {
+    let label = if Library::get().program.slides(&id) { crate::i18n::lecture::SLIDES } else { tx::PAGES };
+    let [first, last] = pages;
+    rsx! {
+        span { class: "ls-nowrap ls-pages",
+            "{label} "
+            bdi { dir: "ltr", class: "num-ltr", if first == last { "{first}" } else { "{first}–{last}" } }
         }
     }
 }
@@ -538,7 +558,13 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
                 }
             }
             h2 { bdi { dir: "ltr", "{title}" } }
-            p { class: "small ls-lec-sub", {tx::lessons_n(n)} }
+            p { class: "small ls-lec-sub",
+                {tx::lessons_n(n)}
+                if let Some(e) = lib.index.lectures.iter().find(|e| e.id == id) {
+                    " · "
+                    BookPages { id: id.clone(), pages: e.pages }
+                }
+            }
             Meter { done: d, total: n }
             div { class: "ls-lec-caption small",
                 span { {tx::done_of(d, n)} }
@@ -702,7 +728,12 @@ fn LessonRow(n: usize, lesson: Lesson, next: Option<String>) -> Element {
                     match st {
                         State::Done(m) => rsx! {
                             span { class: "ls-state", {tx::STATE_DONE} }
-                            bdi { class: "num-ltr", "{m.right}/{m.asked}" }
+                            // No question answered (all skipped): no "0/0".
+                            if m.asked > 0 {
+                                bdi { class: "num-ltr", "{m.right}/{m.asked}" }
+                            } else {
+                                span { {count(lesson.minutes, &MINUTE)} }
+                            }
                         },
                         State::Current { at } => rsx! {
                             span { class: "ls-state", {tx::STATE_CURRENT} }
@@ -744,15 +775,13 @@ pub fn LessonCard(n: usize, lesson: Lesson) -> Element {
                     span { class: "coll-extra ls-card-meta small",
                         span { class: "ls-nowrap", {count(lesson.minutes, &MINUTE)} }
                         span { class: "ls-nowrap", {count(questions, &QUESTION)} }
-                        span { class: "ls-nowrap",
-                            if Library::get().program.slides(&lesson.id) { "{crate::i18n::lecture::SLIDES} " } else { "{tx::PAGES} " }
-                            bdi { dir: "ltr", "{lesson.pages[0]}–{lesson.pages[1]}" }
-                        }
+                        BookPages { id: lesson.id.clone(), pages: lesson.pages }
                     }
                 }
                 span { class: "coll-end",
                     match m {
-                        Some(m) => rsx! { span { class: "chip ls-done", "✓ {m.right}/{m.asked}" } },
+                        Some(m) if m.asked > 0 => rsx! { span { class: "chip ls-done", "✓ {m.right}/{m.asked}" } },
+                        Some(_) => rsx! { span { class: "chip ls-done", "✓" } },
                         None => rsx! { span { class: "chip", {tx::NEW} } },
                     }
                 }

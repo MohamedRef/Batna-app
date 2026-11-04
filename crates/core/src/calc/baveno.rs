@@ -7,7 +7,7 @@
 //! alcohol, NAFLD, PBC and PSC. The same page: LSM > 20–25 kPa diagnoses
 //! clinically significant portal hypertension (CSPH).
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "baveno_vi",
@@ -15,7 +15,7 @@ pub const SPEC: CalcSpec = CalcSpec {
     area: Area::Liver,
     fields: &[
         num("lsm_kpa", "Liver stiffness (TE)", "kPa", 1.0, 75.0, 0.1),
-        num("platelets_10e9_l", "Platelets", "×10⁹/L", 1.0, 1500.0, 1.0),
+        num("platelets_10e9_l", "Platelets", "×10⁹/L", 1.0, 1500.0, 1.0).normal_as(normals::PLATELETS_10E9_L),
     ],
     source: "Baveno VI 2015; book Lecture 2, p. 35 (EASL 2021)",
     compute,

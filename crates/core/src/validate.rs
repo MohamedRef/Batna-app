@@ -201,7 +201,7 @@ fn body_problems(body: &Body) -> Vec<String> {
                     for key in crate::calc::unknown_inputs(spec, &inputs) {
                         p.push(format!("calc input `{key}` is not used by `{calculator}`"));
                     }
-                    match (spec.compute)(&inputs) {
+                    match spec.run(&inputs) {
                         Err(e) => p.push(format!("calc inputs: {e}")),
                         Ok(o) if !crate::calc::expect_matches(&o, expect) => p.push(format!(
                             "calc expect {expect:?} disagrees with the calculator: {} ({}, band `{}`)",

@@ -10,7 +10,7 @@
 //! inguinal nodes, spleen, liver) are the original definition (Binet 1981);
 //! the book's table only says "< 3 lymphatic groups".
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, normals, num};
 
 pub const RAI: CalcSpec = CalcSpec {
     id: "rai_cll",
@@ -19,8 +19,9 @@ pub const RAI: CalcSpec = CalcSpec {
     fields: &[
         flag("lymphadenopathy", "Lymphadenopathy"),
         flag("organomegaly", "Hepatomegaly or splenomegaly"),
-        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 25.0, 0.1),
-        num("platelets_10e9_l", "Platelets", "× 10³/µL", 1.0, 2000.0, 1.0),
+        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 25.0, 0.1).normal_as(normals::HB_G_DL),
+        num("platelets_10e9_l", "Platelets", "× 10³/µL", 1.0, 2000.0, 1.0)
+            .normal_as(normals::PLATELETS_10E9_L),
     ],
     source: "Rai 1975, modified Rai 1987, iwCLL 2018; book Hematology Lecture 8, Table 1, p. 129",
     compute: rai,
@@ -33,8 +34,9 @@ pub const BINET: CalcSpec = CalcSpec {
     fields: &[
         num("areas", "Enlarged lymphoid areas", "of 5", 0.0, 5.0, 1.0)
             .hint("Cervical, axillary and inguinal nodes (each side counts once), spleen, liver."),
-        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 25.0, 0.1),
-        num("platelets_10e9_l", "Platelets", "× 10³/µL", 1.0, 2000.0, 1.0),
+        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 25.0, 0.1).normal_as(normals::HB_G_DL),
+        num("platelets_10e9_l", "Platelets", "× 10³/µL", 1.0, 2000.0, 1.0)
+            .normal_as(normals::PLATELETS_10E9_L),
     ],
     source: "Binet 1981, iwCLL 2018; book Hematology Lecture 8, Table 1, p. 129",
     compute: binet,

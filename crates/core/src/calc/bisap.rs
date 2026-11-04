@@ -7,14 +7,14 @@
 //! (Lecture 15, p. 288) reads a score of 2 or more as severe acute
 //! pancreatitis; Wu 2008 reported the mortality rise from 3 points.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "bisap",
     name: "BISAP",
     area: Area::Pancreas,
     fields: &[
-        num("bun_mg_dl", "BUN", "mg/dL", 1.0, 300.0, 1.0).hint("Urea ÷ 2.14."),
+        num("bun_mg_dl", "BUN", "mg/dL", 1.0, 300.0, 1.0).normal_as(normals::BUN_MG_DL).hint("Urea ÷ 2.14."),
         flag("impaired_mental_status", "Impaired mental status"),
         flag("sirs", "SIRS (2 or more criteria)"),
         num("age_years", "Age", "years", 0.0, 110.0, 1.0),

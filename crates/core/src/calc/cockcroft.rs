@@ -6,7 +6,7 @@
 //! drug dosing and warns that serum creatinine is not reliable in the
 //! elderly and the result is only an estimate. The book gives no bands.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, normals, num, show};
 
 const SEX: &[(&str, &str)] = &[("male", "Man"), ("female", "Woman")];
 
@@ -17,7 +17,8 @@ pub const SPEC: CalcSpec = CalcSpec {
     fields: &[
         num("age_years", "Age", "years", 18.0, 120.0, 1.0),
         num("weight_kg", "Weight", "kg", 20.0, 300.0, 0.1),
-        num("creatinine_mg_dl", "Serum creatinine", "mg/dL", 0.1, 20.0, 0.01),
+        num("creatinine_mg_dl", "Serum creatinine", "mg/dL", 0.1, 20.0, 0.01)
+            .normal_as(normals::CREATININE_MG_DL),
         choice("sex", "Sex", SEX),
     ],
     source: "Book Geriatrics Lecture 2, p. 30; Lecture 3, p. 42",

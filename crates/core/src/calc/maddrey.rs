@@ -6,16 +6,16 @@
 //! alcohol-associated liver disease guidance). The book (Lecture 12, p. 196)
 //! discusses steroids for moderate to severe disease but gives no DF.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "maddrey",
     name: "Maddrey discriminant function",
     area: Area::Liver,
     fields: &[
-        num("pt_s", "Prothrombin time (patient)", "s", 5.0, 120.0, 0.1),
+        num("pt_s", "Prothrombin time (patient)", "s", 5.0, 120.0, 0.1).normal_as(normals::PT_S),
         num("pt_control_s", "Prothrombin time (control)", "s", 5.0, 30.0, 0.1).hint("Often 12–13 s."),
-        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1),
+        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1).normal_as(normals::BILIRUBIN_MG_DL),
     ],
     source: "Maddrey 1978, Carithers 1989; AASLD 2019",
     compute,

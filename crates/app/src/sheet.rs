@@ -5,7 +5,7 @@
 //! stop, a fling to the next stop, and a drag (or fling) down to close. It
 //! reopens at the size it was left. There is no scrim: the page under it
 //! keeps scrolling, and the sheet floats over it without moving it
-//! (Mohamed, 2026-10-29).
+//! (Mohamed, 2026-10-29). A tap outside it closes it (Mohamed, 2026-11-03).
 //!
 //! Adapted from kabar-app main: crates/app/src/sheet.rs (PR #453). The
 //! gestures live in `assets/sheet.js`, installed once by [`use_gestures`]:
@@ -30,7 +30,8 @@ pub fn use_gestures() {
 }
 
 /// An info sheet around `children`. `head` is the sheet's heading row (the
-/// close button sits at its end); Android Back, Esc and a drag down close it.
+/// close button sits at its end); Android Back, Esc, a drag down and a tap
+/// outside close it.
 #[component]
 pub fn Sheet(label_id: String, on_close: EventHandler, head: Element, children: Element) -> Element {
     rsx! {

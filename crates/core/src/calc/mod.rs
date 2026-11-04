@@ -20,29 +20,53 @@ use serde::{Deserialize, Serialize};
 
 pub use crate::content::CalcValue;
 
+mod aav;
 mod aki;
 mod albi;
 mod apri;
 mod ascitic;
+mod atlanta;
+mod baveno;
 mod bclc;
 mod bisap;
+mod bmi;
+mod cha2ds2_vasc;
 mod child_pugh;
 mod clichy;
+mod cll;
 mod cockcroft;
+mod ctsi;
 mod diabetes;
+mod dka;
 mod fib4;
+mod fli;
 mod gbs;
+mod geri;
 mod glasgow;
+mod insulin;
 mod ipss_mf;
 mod kings;
+mod kyoto;
+mod lgib;
+mod lymphoma;
 mod maddrey;
 mod meld;
+mod milan;
+mod mpn;
+mod okuda;
+mod page_b;
 mod r_ratio;
 mod ra2010;
 mod ranson;
 mod renal;
 mod research;
+mod rome_ibs;
+mod rpi;
 mod saag;
+mod sle;
+mod sos;
+mod spa;
+mod uc_activity;
 
 /// Named inputs for one calculation.
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
@@ -311,6 +335,54 @@ impl fmt::Debug for CalcSpec {
     }
 }
 
+/// What to do with a result and what else it could be: the next step and
+/// the differential diagnosis for one band. Kept apart from [`Outcome`] so a
+/// calculator without a guide still builds; each module lists its own as
+/// `GUIDES` and [`GUIDE_LISTS`] collects them.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Guide {
+    /// Next steps for this result, most important first.
+    pub next: &'static [&'static str],
+    /// The differential diagnosis (or causes to look for) for this result.
+    pub dd: &'static [&'static str],
+}
+
+// One line per module that has guides, so branches adding them don't touch
+// the same line.
+#[rustfmt::skip]
+static GUIDE_LISTS: &[&[(&str, Guide)]] = &[
+    geri::GUIDES,
+    spa::GUIDES,
+    sle::GUIDES,
+    aav::GUIDES,
+    page_b::GUIDES,
+    milan::GUIDES,
+    okuda::GUIDES,
+    ctsi::GUIDES,
+    atlanta::GUIDES,
+    baveno::GUIDES,
+    fli::GUIDES,
+    sos::GUIDES,
+    cha2ds2_vasc::GUIDES,
+    rpi::GUIDES,
+    cll::GUIDES,
+    lymphoma::GUIDES,
+    mpn::GUIDES,
+    lgib::GUIDES,
+    uc_activity::GUIDES,
+    kyoto::GUIDES,
+    rome_ibs::GUIDES,
+    dka::GUIDES,
+    insulin::GUIDES,
+    bmi::GUIDES,
+];
+
+/// The next step and differential for a band id (`cam.positive`), if
+/// written.
+pub fn guide(band: &str) -> Option<&'static Guide> {
+    GUIDE_LISTS.iter().flat_map(|l| l.iter()).find(|(b, _)| *b == band).map(|(_, g)| g)
+}
+
 /// Every calculator, in the order the Calculators screen lists them.
 pub fn all() -> &'static [CalcSpec] {
     REGISTRY
@@ -334,17 +406,31 @@ static REGISTRY: &[CalcSpec] = &[
     albi::SPEC,
     fib4::SPEC,
     apri::SPEC,
+    fli::SPEC,
+    baveno::SPEC,
     r_ratio::SPEC,
     maddrey::SPEC,
     glasgow::SPEC,
     saag::SPEC,
     ascitic::SPEC,
+    sos::SPEC,
+    cha2ds2_vasc::SPEC,
     bclc::SPEC,
+    milan::SPEC,
+    okuda::SPEC,
+    page_b::SPEC,
     kings::SPEC,
     clichy::SPEC,
     ranson::SPEC,
     bisap::SPEC,
+    ctsi::SPEC,
+    atlanta::SPEC,
     gbs::SPEC,
+    lgib::SHOCK_INDEX,
+    lgib::OAKLAND,
+    uc_activity::SPEC,
+    kyoto::SPEC,
+    rome_ibs::SPEC,
     renal::ANION_GAP,
     renal::DELTA_RATIO,
     renal::COMPENSATION,
@@ -353,10 +439,38 @@ static REGISTRY: &[CalcSpec] = &[
     aki::FENA,
     aki::FEUREA,
     cockcroft::SPEC,
+    geri::KATZ,
+    geri::LAWTON,
+    geri::GDS,
+    geri::MNA_SF,
+    geri::CFS,
+    geri::CAM,
+    geri::SARC_F,
+    geri::MMSE,
+    geri::ABI,
     ra2010::SPEC,
+    spa::CASPAR,
+    spa::ASAS_AXIAL,
+    spa::ASAS_PERIPHERAL,
+    spa::MODIFIED_NEW_YORK,
+    sle::SLE_1997,
+    sle::SLE_2019,
+    aav::GPA_2022,
+    aav::MPA_2022,
     diabetes::CORRECTED_NA,
     diabetes::OSMOLALITY,
+    dka::SPEC,
+    insulin::PREMIXED,
+    bmi::SPEC,
     ipss_mf::SPEC,
+    rpi::SPEC,
+    cll::RAI,
+    cll::BINET,
+    lymphoma::ANN_ARBOR,
+    lymphoma::IPI,
+    mpn::PV,
+    mpn::ET,
+    mpn::PMF,
     research::INCIDENCE,
     research::PREVALENCE,
     research::PREVALENCE_ID,
@@ -376,7 +490,7 @@ static REGISTRY: &[CalcSpec] = &[
 
 const UNIT_SUFFIXES: &[&str] = &[
     "_10e9_l", "_per_mm3", "_mm_hg", "_meq_l", "_mmol_l", "_mg_dl", "_g_dl", "_iu_l", "_u_l", "_years",
-    "_points", "_days", "_pct", "_cm", "_kg", "_s", "_l",
+    "_points", "_days", "_pct", "_kpa", "_cm", "_kg", "_s", "_l",
 ];
 
 /// A field key without its unit suffix: `alt_uln_u_l` → `alt_uln`.
@@ -462,25 +576,121 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("bclc.b", &["stage b"]),
     ("bclc.c", &["stage c"]),
     ("bclc.d", &["stage d"]),
+    ("milan.within", &["within"]),
+    ("milan.outside", &["outside"]),
+    ("okuda.1", &["stage i", "stage 1"]),
+    ("okuda.2", &["stage ii", "stage 2"]),
+    ("okuda.3", &["stage iii", "stage 3"]),
+    ("page_b.low", &["low risk", "low"]),
+    ("page_b.mid", &["intermediate"]),
+    ("page_b.high", &["high risk", "high"]),
     ("kings.met", &["met"]),
     ("kings.not_met", &["not met"]),
     ("clichy.met", &["met"]),
     ("clichy.not_met", &["not met"]),
     ("bisap.severe", &["severe", "2 or more"]),
     ("bisap.mild", &["mild", "not severe"]),
+    ("atlanta_2012.mild", &["mild"]),
+    ("atlanta_2012.moderately_severe", &["moderately severe", "moderate"]),
+    ("atlanta_2012.severe", &["severe"]),
+    ("baveno_vi.spare", &["met", "skip", "no endoscopy"]),
+    ("baveno_vi.screen", &["not met", "screen"]),
+    ("fli.low", &["below 30", "ruled out"]),
+    ("fli.mid", &["indeterminate", "intermediate"]),
+    ("fli.high", &["60 or above", "likely"]),
+    ("sos_criteria.met", &["met"]),
+    ("sos_criteria.not_met", &["not met"]),
+    ("cha2ds2_vasc.low", &["low risk", "low"]),
+    ("cha2ds2_vasc.high", &["high risk", "high"]),
     ("anion_gap.high", &["high"]),
     ("anion_gap.normal", &["normal"]),
     ("anion_gap.low", &["low"]),
     ("expected_compensation.appropriate", &["appropriate"]),
     ("osmolal_gap.present", &["gap present"]),
     ("osmolal_gap.normal", &["no gap"]),
+    ("katz_adl.independent", &["independent"]),
+    ("katz_adl.partial", &["partly dependent", "partially dependent"]),
+    ("katz_adl.very_dependent", &["very dependent"]),
+    ("lawton_iadl.independent", &["independent"]),
+    ("lawton_iadl.partial", &["partly dependent", "partially dependent"]),
+    ("lawton_iadl.dependent", &["dependent"]),
+    ("gds15.normal", &["normal", "no depression"]),
+    ("gds15.depression", &["suggests depression", "depression", "depressed"]),
+    ("mna_sf.normal", &["normal"]),
+    ("mna_sf.at_risk", &["at risk"]),
+    ("mna_sf.malnourished", &["malnourished", "malnutrition"]),
+    ("cfs.1", &["very fit"]),
+    ("cfs.2", &["well"]),
+    ("cfs.3", &["managing well"]),
+    ("cfs.4", &["vulnerable"]),
+    ("cfs.5", &["mildly frail"]),
+    ("cfs.6", &["moderately frail"]),
+    ("cfs.7", &["severely frail"]),
+    ("cfs.8", &["very severely frail"]),
+    ("cfs.9", &["terminally ill"]),
+    ("cam.positive", &["positive", "delirium"]),
+    ("cam.negative", &["negative", "no delirium"]),
+    ("sarc_f.positive", &["positive"]),
+    ("sarc_f.negative", &["negative"]),
+    ("mmse.normal", &["normal"]),
+    ("mmse.borderline", &["borderline"]),
+    ("mmse.marked", &["marked"]),
+    ("mmse.severe", &["severe"]),
+    ("abi.normal", &["normal"]),
+    ("abi.pad", &["pad", "peripheral arterial disease"]),
+    ("abi.critical", &["critical"]),
     ("acr_eular_2010_ra.definite", &["definite"]),
     ("acr_eular_2010_ra.not_met", &["not met"]),
+    ("caspar.met", &["met", "psoriatic arthritis"]),
+    ("caspar.not_met", &["not met"]),
+    ("asas_axial_spa.imaging", &["imaging arm"]),
+    ("asas_axial_spa.clinical", &["clinical arm", "hla-b27 arm"]),
+    ("asas_axial_spa.not_met", &["not met"]),
+    ("asas_peripheral_spa.met", &["met"]),
+    ("asas_peripheral_spa.not_met", &["not met"]),
+    ("modified_new_york.met", &["met", "definite as", "definite"]),
+    ("modified_new_york.not_met", &["not met"]),
+    ("sle_acr_1997.met", &["met", "4 or more"]),
+    ("sle_acr_1997.not_met", &["not met", "below 4"]),
+    ("sle_eular_acr_2019.met", &["met", "10 or more"]),
+    ("sle_eular_acr_2019.not_met", &["not met"]),
+    ("gpa_2022.met", &["met", "5 or more"]),
+    ("gpa_2022.not_met", &["not met", "below 5"]),
+    ("mpa_2022.met", &["met", "5 or more"]),
+    ("mpa_2022.not_met", &["not met", "below 5"]),
     ("effective_osmolality.hhs", &["hhs", "meets"]),
     ("ipss_mf.low", &["low"]),
     ("ipss_mf.int1", &["intermediate-1", "intermediate 1", "int-1"]),
     ("ipss_mf.int2", &["intermediate-2", "intermediate 2", "int-2"]),
     ("ipss_mf.high", &["high"]),
+    ("rpi.low", &["below 2", "less than 2", "underproduction", "inadequate"]),
+    ("rpi.adequate", &["2 or more", "adequate"]),
+    ("rai_cll.0", &["stage 0"]),
+    ("rai_cll.1", &["stage i", "stage 1"]),
+    ("rai_cll.2", &["stage ii", "stage 2"]),
+    ("rai_cll.3", &["stage iii", "stage 3"]),
+    ("rai_cll.4", &["stage iv", "stage 4"]),
+    ("binet_cll.a", &["stage a"]),
+    ("binet_cll.b", &["stage b"]),
+    ("binet_cll.c", &["stage c"]),
+    ("ann_arbor.1a", &["stage ia", "stage 1a"]),
+    ("ann_arbor.1b", &["stage ib", "stage 1b"]),
+    ("ann_arbor.2a", &["stage iia", "stage 2a"]),
+    ("ann_arbor.2b", &["stage iib", "stage 2b"]),
+    ("ann_arbor.3a", &["stage iiia", "stage 3a"]),
+    ("ann_arbor.3b", &["stage iiib", "stage 3b"]),
+    ("ann_arbor.4a", &["stage iva", "stage 4a"]),
+    ("ann_arbor.4b", &["stage ivb", "stage 4b"]),
+    ("ipi_nhl.low", &["low risk", "low"]),
+    ("ipi_nhl.low_int", &["low-intermediate", "low intermediate"]),
+    ("ipi_nhl.high_int", &["high-intermediate", "high intermediate"]),
+    ("ipi_nhl.high", &["high risk", "high"]),
+    ("who_pv.met", &["met", "meets"]),
+    ("who_pv.not_met", &["not met"]),
+    ("who_et.met", &["met", "meets"]),
+    ("who_et.not_met", &["not met"]),
+    ("who_pmf.met", &["met", "meets"]),
+    ("who_pmf.not_met", &["not met"]),
     ("kdigo_aki.none", &["no aki"]),
     ("kdigo_aki.1", &["stage 1"]),
     ("kdigo_aki.2", &["stage 2"]),
@@ -489,6 +699,31 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("fena.atn", &["atn", "tubular necrosis"]),
     ("feurea.prerenal", &["prerenal", "pre-renal"]),
     ("feurea.atn", &["atn", "tubular necrosis"]),
+    ("shock_index.unstable", &["unstable"]),
+    ("shock_index.stable", &["stable"]),
+    ("oakland.discharge", &["discharge", "8 or less"]),
+    ("oakland.admit", &["admit", "above 8"]),
+    ("uc_activity.mild", &["mild"]),
+    ("uc_activity.moderate", &["moderate"]),
+    ("uc_activity.severe", &["severe"]),
+    ("kyoto_gastritis.none", &["no h. pylori", "no infection"]),
+    ("kyoto_gastritis.current", &["current infection"]),
+    ("kyoto_gastritis.cancer_risk", &["cancer risk"]),
+    ("rome4_ibs.not_met", &["not met"]),
+    ("rome4_ibs.c", &["ibs-c"]),
+    ("rome4_ibs.d", &["ibs-d"]),
+    ("rome4_ibs.m", &["ibs-m"]),
+    ("rome4_ibs.u", &["ibs-u"]),
+    ("dka_severity.not_met", &["not dka", "not met"]),
+    ("dka_severity.mild", &["mild"]),
+    ("dka_severity.moderate", &["moderate"]),
+    ("dka_severity.severe", &["severe"]),
+    ("bmi.under", &["underweight"]),
+    ("bmi.normal", &["normal"]),
+    ("bmi.overweight", &["overweight"]),
+    ("bmi.class1", &["class i", "class 1"]),
+    ("bmi.class2", &["class ii", "class 2"]),
+    ("bmi.class3", &["class iii", "class 3"]),
 ];
 
 /// The bands of `band`'s calculator that `text` names, longest phrase first.
@@ -587,6 +822,25 @@ fn show(v: f64, dp: usize) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn guides_name_real_bands_once() {
+        let mut bands: Vec<&str> = GUIDE_LISTS.iter().flat_map(|l| l.iter()).map(|(b, _)| *b).collect();
+        let n = bands.len();
+        bands.sort_unstable();
+        bands.dedup();
+        assert_eq!(bands.len(), n, "a band has two guides");
+        for b in bands {
+            let calc = b.split_once('.').map_or(b, |(c, _)| c);
+            // Band ids start with their calculator's id or a short form of
+            // it (`kings.met`), which BAND_WORDS also uses.
+            let known = all().iter().any(|s| s.id == calc)
+                || BAND_WORDS.iter().any(|(w, _)| w.split_once('.').is_some_and(|(c, _)| c == calc));
+            assert!(known, "guide for unknown band {b}");
+            let g = guide(b).unwrap();
+            assert!(!g.next.is_empty() || !g.dd.is_empty(), "{b}: empty guide");
+        }
+    }
 
     #[test]
     fn registry_ids_are_unique_and_known() {

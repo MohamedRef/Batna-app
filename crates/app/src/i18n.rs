@@ -1017,6 +1017,10 @@ pub mod calc {
     pub const MEANS: &str = "يعني إيه";
     pub const BREAKDOWN: &str = "التفاصيل";
     pub const SOURCE: &str = "المصدر";
+    /// Over the next steps for a result (`calc::guide`).
+    pub const NEXT_STEP: &str = "الخطوة الجاية";
+    /// Over the differential diagnosis for a result (`calc::guide`).
+    pub const DD: &str = "التشخيص التفريقي";
     pub const RESET: &str = "امسح";
     pub const BACK: &str = "كل الحاسبات";
     pub const AREA_LIVER: &str = "الكبد";
@@ -1052,13 +1056,43 @@ pub mod calc {
             ("glasgow_ah", "urea_mmol_l") => "اليوريا بالـ mg/dL ÷ 6 = mmol/L.",
             ("ascitic_pmn", "pmn_per_mm3") => "عدد كرات الدم البيضا الكلي × نسبة النيوتروفيل.",
             ("bisap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("atlanta_2012", "organ_failure") => {
+                "صدمة (SBP أقل من 90 أو MAP أقل من 70)، PaO2 أقل من 60 أو جهاز تنفّس، كرياتينين فوق 2 بعد السوايل أو غسيل، نزيف أكتر من 500 مل في اليوم، نبض فوق 90."
+            }
             ("glasgow_blatchford", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("oakland", "hb_g_dl") => "جدول الكتاب بالـ g/L: ‏7 g/dL = 70 g/L.",
+            ("kyoto_gastritis", "diffuse_redness") => {
+                "الكتاب بيدرّجها بشفافية الـ collecting venules في الـ body."
+            }
             ("osmolal_gap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
             ("acr_eular_2010_ra", "large_joints") => "الكتف والكوع والحوض والركبة والكاحل.",
             ("acr_eular_2010_ra", "small_joints") => {
                 "الـ MCP والـ PIP والـ MTP من ٢ لـ ٥ والـ IP بتاع الإبهام والرسغ."
             }
+            ("caspar", "inflammatory_disease") => "شرط الدخول: CASPAR بتتطبّق عليه بس.",
+            ("asas_axial_spa", "back_pain_3_months_onset_45") => {
+                "شرط الدخول (ASAS 2009)؛ الكتاب ص295 بيقول بدأ قبل 40–45."
+            }
+            ("asas_axial_spa", "sacroiliitis_imaging") => {
+                "التهاب نشط على الـ MRI، أو أشعة grade 2 في الناحيتين أو 3–4 في ناحية."
+            }
+            ("asas_axial_spa", "ibp") => {
+                "بدأ قبل 45، بالتدريج، أكتر من 3 شهور، بالليل، بيتحسن بالحركة مش بالراحة."
+            }
+            ("asas_peripheral_spa", "preceding_infection") => {
+                "التهاب مجرى البول أو عنق الرحم أو إسهال قبل المفاصل."
+            }
+            ("modified_new_york", "si_grade_right") => "الأشعة: 0 طبيعي، 1 مشكوك، 2 بسيط، 3 متوسط، 4 التحام.",
+            ("sle_acr_1997", "renal") => "بروتين في البول أكتر من 0.5 جم/يوم، أو خلايا أو casts.",
+            ("sle_acr_1997", "neurological") => "تشنجات أو ذهان.",
+            ("sle_acr_1997", "haematological") => "أنيميا انحلالية، أو نقص كرات بيضا أو ليمفاوية أو صفايح.",
+            ("sle_acr_1997", "immunological") => "Anti-dsDNA أو anti-Sm أو anticardiolipin.",
+            ("sle_eular_acr_2019", "ana_1_80") => "شرط الدخول.",
+            ("sle_eular_acr_2019", "antiphospholipid") => {
+                "Anticardiolipin IgG أكتر من 40، أو anti-β2GP1 IgG أكتر من 40، أو lupus anticoagulant."
+            }
             ("effective_osmolality", "urea_mmol_l") => "للأوزمولاليتي الكلية. اليوريا بالـ mg/dL ÷ 6.",
+            ("dka_severity", "bhb_mmol_l") => "سيبها فاضية لو معاك شريط بول بس، وعلّم الخانة اللي تحت.",
             ("feurea", "urine_urea_mg_dl") => "يوريا أو BUN، بس بنفس وحدة البلازما.",
             ("anion_gap", "albumin_g_dl") => "بيصحح الـ gap لو الألبومين واطي.",
             ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
@@ -1074,7 +1108,20 @@ pub mod calc {
             ("diagnostic_accuracy", "fp") => "التحليل + والمرض −",
             ("diagnostic_accuracy", "fn") => "التحليل − والمرض +",
             ("diagnostic_accuracy", "tn") => "التحليل − والمرض −",
+            ("rpi", "rbc_10e12_l") => "بس عشان العدد المطلق للـ reticulocytes.",
+            ("binet_cll", "areas") => {
+                "غدد الرقبة والإبط والأُربية (كل منطقة بواحدة حتى لو الناحيتين)، والطحال، والكبد."
+            }
+            ("ipi_nhl", "ecog_2_plus") => "2 = بيقوم ويتحرك أكتر من نص اليوم بس مش قادر يشتغل.",
+            ("who_pmf", "clonal") => "ماركرز تانية: ASXL1 وEZH2 وTET2 وIDH1/IDH2 وSRSF2 وSF3B1.",
             ("sar", "primary_cases") => "بيتشالوا من اللي ممكن يتعدوا.",
+            ("lawton_iadl", "food_preparation" | "housekeeping" | "laundry") => {
+                "للستات بس (من 8)، الراجل بيتحسب من 5."
+            }
+            ("clinical_frailty", "level") => "في الخرف، درجة الهشاشة بتمشي مع درجة الخرف.",
+            ("sarc_f", "falls") => "الكتاب كاتب «أقل من 3» = 1. في الأصل من 1 لـ 3 وقعات = 1.",
+            ("abi", "dp_mm_hg") => "ضغط الكاحل بالدوبلر، وبيتاخد الأعلى من الاتنين.",
+            ("abi", "brachial_right_mm_hg") => "بيتاخد الأعلى من الدراعين.",
             _ => return None,
         })
     }
@@ -1107,17 +1154,31 @@ pub mod calc {
             "albi" => "وظيفة الكبد في الـ HCC من الألبومين والبيليروبين",
             "fib4" => "التليّف من غير بيوبسي: السن والإنزيمات والصفايح",
             "apri" => "التليّف من غير بيوبسي: الـ AST والصفايح",
+            "fli" => "الكبد الدهني من الدهون الثلاثية والوزن والوسط والـ GGT",
+            "baveno_vi" => "مين في السيروزس المعوّضة يستغنى عن منظار الدوالي",
             "r_ratio" => "نوع أذية الكبد من الدوا: خلوي ولا ركودي ولا مختلط",
             "maddrey" => "شدة الـ alcoholic hepatitis ومين ياخد ستيرويد",
             "glasgow_ah" => "التوقّع في الـ alcoholic hepatitis وفايدة الستيرويد",
             "saag" => "سبب الاستسقاء: من الـ portal hypertension ولا لأ",
             "ascitic_pmn" => "تشخيص الـ SBP من عدد الـ PMN في سائل البطن",
+            "sos_criteria" => "تشخيص الـ SOS (VOD) بعد زرع النخاع",
+            "cha2ds2_vasc" => "خطر الجلطات في الـ AF: وقف المسيّل قبل المنظار والـ bridging",
             "bclc" => "مرحلة الـ HCC والعلاج المناسب ليها",
+            "milan" => "الـ HCC ينفع معاه زرع كبد ولا لأ",
+            "okuda" => "مرحلة الـ HCC من حجم الورم ووظيفة الكبد",
+            "page_b" => "خطر الـ HCC في فيروس B: مين يتعمله مسح",
             "kings_college" => "مين محتاج زرع كبد في الفشل الكبدي الحاد",
             "clichy" => "معايير الزرع في الفشل الكبدي الحاد بالـ factor V والوعي",
             "ranson" => "شدة التهاب البنكرياس الحاد عند الدخول وبعد 48 ساعة",
             "bisap" => "خطورة التهاب البنكرياس الحاد في أول 24 ساعة",
+            "ctsi" => "شدة التهاب البنكرياس من الأشعة المقطعية والـ necrosis",
+            "atlanta_2012" => "شدة التهاب البنكرياس من فشل الأعضاء والمضاعفات",
             "glasgow_blatchford" => "نزيف الجهاز الهضمي العلوي: مين محتاج تدخل ومين يروّح",
+            "shock_index" => "النبض ÷ الضغط: النزيف مستقر ولا لأ",
+            "oakland" => "نزيف الجهاز الهضمي السفلي: مين يروّح بأمان ومين يتحجز",
+            "uc_activity" => "شدة الـ ulcerative colitis: خفيفة ولا متوسطة ولا شديدة",
+            "kyoto_gastritis" => "المنظار بيقول إيه عن الـ H. pylori وخطر سرطان المعدة",
+            "rome4_ibs" => "تشخيص الـ IBS بمعايير Rome IV ونوعه",
             "anion_gap" => "سبب الـ metabolic acidosis: الـ gap عالي ولا طبيعي",
             "delta_ratio" => "فيه اضطراب تاني مع الـ high anion gap acidosis؟",
             "expected_compensation" => "التعويض المتوقّع: الاضطراب لوحده ولا مخلوط؟",
@@ -1126,10 +1187,38 @@ pub mod calc {
             "fena" => "الـ AKI قبل الكلى (prerenal) ولا من الكلى نفسها (ATN)",
             "feurea" => "زي الـ FENa، بس بينفع والعيان على مدرّات",
             "cockcroft_gault" => "تصفية الكرياتينين لظبط جرعات الدوا، خصوصًا في المسنين",
+            "katz_adl" => "الأنشطة اليومية الأساسية: مستقل ولا محتاج مساعدة؟",
+            "lawton_iadl" => "الأنشطة الأعلى زي الفلوس والأدوية والمواصلات",
+            "gds15" => "فحص اكتئاب المسنين: 15 سؤال أيوه ولا لأ",
+            "mna_sf" => "فحص سوء التغذية في المسنين من 14 نقطة",
+            "clinical_frailty" => "درجة الهشاشة من 1 لـ 9 بوصف الكتاب",
+            "cam" => "تشخيص الـ delirium بأربع علامات",
+            "sarc_f" => "فحص ضعف وضمور العضلات (sarcopenia)",
+            "mmse" => "فحص الذاكرة والإدراك من 30 درجة",
+            "abi" => "ضغط الكاحل على ضغط الدراع: فيه PAD؟",
             "acr_eular_2010_ra" => "تشخيص الـ rheumatoid arthritis: 6 من 10 أو أكتر",
+            "caspar" => "تشخيص الـ psoriatic arthritis: 3 نقط أو أكتر",
+            "asas_axial_spa" => "الـ axial SpA بالأشعة أو بالـ HLA-B27، حتى قبل ما تبان في الأشعة",
+            "asas_peripheral_spa" => "الـ SpA في المفاصل الطرفية: arthritis أو enthesitis أو dactylitis",
+            "modified_new_york" => "تشخيص الـ ankylosing spondylitis بالأشعة والكشف",
+            "sle_acr_1997" => "تشخيص الذئبة الحمراء: 4 من 11 أو أكتر",
+            "sle_eular_acr_2019" => "تشخيص الذئبة بالنقط: ANA وبعدين 10 نقط أو أكتر",
+            "gpa_2022" => "تصنيف الـ GPA (Wegener) بالنقط: 5 أو أكتر",
+            "mpa_2022" => "تصنيف الـ microscopic polyangiitis بالنقط: 5 أو أكتر",
             "corrected_sodium" => "الصوديوم الحقيقي لما السكر عالي",
             "effective_osmolality" => "أوزمولاليتي الدم لتشخيص الـ HHS",
+            "dka_severity" => "هل هي DKA؟ وشدتها قد إيه ومكان العلاج",
+            "premixed_insulin" => "أول جرعة إنسولين premixed: التلتين الصبح والتلت بالليل",
+            "bmi" => "مؤشر كتلة الجسم وإمتى نفحص أو ندّي دوا أو نفكر في جراحة",
             "ipss_mf" => "التوقّع في الـ primary myelofibrosis",
+            "rpi" => "النخاع بيعوّض الأنيميا ولا لأ: نقص إنتاج ولا تكسير ونزيف",
+            "rai_cll" => "مرحلة الـ CLL (من 0 لـ IV) بالغدد والطحال والهيموجلوبين والصفايح",
+            "binet_cll" => "مرحلة الـ CLL (A وB وC) بعدد المناطق والهيموجلوبين والصفايح",
+            "ann_arbor" => "مرحلة الليمفوما من I لـ IV، وA أو B حسب الأعراض",
+            "ipi_nhl" => "التوقّع في الـ non-Hodgkin lymphoma من 0 لـ 5",
+            "who_pv" => "تشخيص الـ polycythaemia vera بمعايير الـ WHO",
+            "who_et" => "تشخيص الـ essential thrombocythaemia بمعايير الـ WHO",
+            "who_pmf" => "تشخيص الـ primary myelofibrosis بمعايير الـ WHO",
             "incidence" => "معدل الحالات الجديدة في فترة معيّنة",
             "prevalence" => "نسبة كل الحالات الموجودة في وقت معيّن",
             "prevalence_id" => "العلاقة بين الانتشار والحدوث ومدة المرض",
@@ -1558,6 +1647,7 @@ pub mod update {
     pub const BETA: &str = "بيتا";
     pub const STABLE: &str = "ثابتة";
     pub const PREVIEW: &str = "تجربة";
+    pub const PREVIEW_CHANNEL_NOTE: &str = "نسخة التجربة بتنزل مع كل تعديل، فممكن تلاقي فيها حاجة لسه مش مظبوطة. على الماك هيوصلك منها المحتوى بس. ترجع للألفا وقت ما تحب.";
     pub const MB: &str = "ميجا";
 
     // The notifications Android shows around an install.

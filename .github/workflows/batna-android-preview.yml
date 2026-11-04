@@ -6,28 +6,20 @@ name: Android preview APK
 # .github/workflows/android-preview.yml; it also folds in chunk 20's
 # android-apk.yml (scripts/android-check-apk.sh runs on every build).
 #
-# Signed with a throwaway *preview* key generated in CI: never committed, never
-# Kabar's, never the release key in ~/.batna. The key is kept in the Actions
-# cache so previews install over each other. GitHub drops a cache entry that
-# nobody reads for 7 days, so a twice-weekly scheduled run reads both keys
-# (`keep-keys`) and fails loudly if one is gone. Once a preview is published,
-# a missing key is never silently replaced: a new key means installed previews
-# can't update and need an uninstall (losing data not yet synced), so the run
-# fails until someone starts it by hand with "new_keys" ticked.
+# Since the first alpha (Mohamed, 2026-11-02) pushes to main are signed with
+# the *release* keys (repo secrets from scripts/release-secrets.sh): the APK
+# with the release keystore and the feed with the release update key. So a
+# release build can follow the preview channel when he picks it in
+# Settings › Updates, and a preview build can go back to alpha, without
+# reinstalling. Builds before this used a CI-cached preview key and need one
+# reinstall.
 #
-# The cache holds 10 GB per repository and drops the least recently used
-# entries past that: on 2026-10-28 PR build caches pushed the signing key out
-# and run 112 made a new one, so previews before it needed a reinstall. Build
-# caches are now saved from main only (every workflow's rust-cache save-if).
-#
-# Pull-request runs never touch the cached keys: they sign with one-off keys
+# Pull-request runs never see the secrets: they sign with one-off keys
 # (enough to prove the APK builds, signs and passes the checks) and get a
-# read-only token. Only pushes to main and manual runs restore the keys, and
-# only the separate `publish` job can write.
+# read-only token. Only the separate `publish` job can write.
 #
-# Self-updates: the APK is built for the `preview` channel with the public half
-# of a second CI key (Ed25519, also in the Actions cache), and the release
-# carries a signed update.json naming the APK and the content pack, so an
+# Self-updates: the APK is built for the `preview` channel (its default; the
+# learner can switch to alpha in Settings), and the release carries a signed update.json naming the APK and the content pack, so an
 # installed preview updates itself (and its lectures) after every merge.
 
 on:
@@ -46,14 +38,6 @@ on:
       - scripts/android-check-apk.sh
       - scripts/android-release-apk.sh
   workflow_dispatch:
-    inputs:
-      new_keys:
-        description: "Make new preview keys if the cached ones are gone (installed previews then need an uninstall)"
-        type: boolean
-        default: false
-  # Keeps the cached keys from expiring during quiet weeks.
-  schedule:
-    - cron: "23 3 * * 1,4"
 
 # A pull request's newer push cancels its older run. On main, runs queue
 # instead, so a run is never cancelled halfway through publishing (which would
@@ -66,28 +50,8 @@ permissions:
   contents: read
 
 jobs:
-  keep-keys:
-    name: Keep the preview keys cached
-    if: github.event_name == 'schedule'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    steps:
-      # Restoring an entry marks it used, which resets its 7-day expiry.
-      - uses: actions/cache/restore@v4
-        with:
-          path: ~/.batna-preview-update
-          key: batna-preview-update-key-v1
-          fail-on-cache-miss: true
-      - uses: actions/cache/restore@v4
-        with:
-          path: ~/.batna-preview
-          key: batna-preview-key-v1
-          fail-on-cache-miss: true
-      - run: test -s ~/.batna-preview-update/secret && test -s ~/.batna-preview/preview.jks
-
   apk:
     name: Build preview APK
-    if: github.event_name != 'schedule'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
@@ -106,31 +70,6 @@ jobs:
         with:
           key: batna-android-preview
           save-if: ${{ github.ref == 'refs/heads/main' }}
-      # The update key comes first: its public half is built into the app.
-      - name: Restore preview update key
-        if: env.KEEP_KEY == 'true'
-        id: update-key
-        uses: actions/cache/restore@v4
-        with:
-          path: ~/.batna-preview-update
-          key: batna-preview-update-key-v1
-      - name: Restore preview signing key
-        if: env.KEEP_KEY == 'true'
-        id: key
-        uses: actions/cache/restore@v4
-        with:
-          path: ~/.batna-preview
-          key: batna-preview-key-v1
-      - name: Never replace a published preview's key silently
-        if: env.KEEP_KEY == 'true' && (steps.update-key.outputs.cache-hit != 'true' || steps.key.outputs.cache-hit != 'true')
-        env:
-          NEW_KEYS: ${{ github.event_name == 'workflow_dispatch' && inputs.new_keys }}
-        run: |
-          if [ "$NEW_KEYS" != "true" ] && curl -fsSL -o /dev/null \
-            "https://github.com/$GITHUB_REPOSITORY/releases/download/batna-preview/update.json"; then
-            echo "::error::A preview key is missing from the Actions cache, and previews are already published. New keys would stop installed previews from updating. Run this workflow by hand with new_keys ticked to accept that (docs/RELEASE.md §3)."
-            exit 1
-          fi
       # Content-only: when everything merged since the build on the feed is
       # lectures (any course), the program, lessons, changes/ notes, docs or stylesheets, the feed keeps
       # that APK and only the content pack (which carries the stylesheets,
@@ -138,7 +77,7 @@ jobs:
       # background with nothing to install. Any other file, a new version or
       # a new key means a full build.
       - name: Content-only update?
-        if: env.KEEP_KEY == 'true' && steps.update-key.outputs.cache-hit == 'true' && steps.key.outputs.cache-hit == 'true'
+        if: env.KEEP_KEY == 'true'
         run: |
           curl -fsSL --retry 3 -o /tmp/live-update.json \
             "https://github.com/$GITHUB_REPOSITORY/releases/download/batna-preview/update.json" || exit 0
@@ -167,19 +106,22 @@ jobs:
         if: env.CONTENT_ONLY != 'true'
         run: cargo binstall -y --force dioxus-cli@0.7.10
 
-      - name: Create preview update key
-        if: steps.update-key.outputs.cache-hit != 'true'
+      # The update key comes first: its public half is built into the app.
+      # Pushes use the release key; pull requests a one-off key.
+      - name: Update key
+        env:
+          SECRET: ${{ env.KEEP_KEY == 'true' && secrets.BATNA_UPDATE_SECRET || '' }}
         run: |
           mkdir -p ~/.batna-preview-update
-          cargo run -q -p batna-tools -- update keygen --public-out ~/.batna-preview-update/key.pub \
-            > ~/.batna-preview-update/secret
+          if [ "$KEEP_KEY" = true ]; then
+            [ -n "$SECRET" ] || { echo "::error::secret BATNA_UPDATE_SECRET is missing (scripts/release-secrets.sh)"; exit 1; }
+            cp crates/app/update-key.pub ~/.batna-preview-update/key.pub
+            printf %s "$SECRET" > ~/.batna-preview-update/secret
+          else
+            cargo run -q -p batna-tools -- update keygen --public-out ~/.batna-preview-update/key.pub \
+              > ~/.batna-preview-update/secret
+          fi
           chmod 600 ~/.batna-preview-update/secret
-      - name: Save preview update key
-        if: env.KEEP_KEY == 'true' && steps.update-key.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: ~/.batna-preview-update
-          key: batna-preview-update-key-v1
       - name: Preview build identity
         run: |
           {
@@ -236,28 +178,33 @@ jobs:
         if: env.CONTENT_ONLY != 'true'
         run: scripts/android-check-apk.sh dist/android/release/batna-unsigned.apk
 
-      - name: Create preview signing key
-        if: steps.key.outputs.cache-hit != 'true'
+      - name: Signing key
+        if: env.CONTENT_ONLY != 'true'
+        env:
+          KEYSTORE_B64: ${{ env.KEEP_KEY == 'true' && secrets.BATNA_ANDROID_KEYSTORE || '' }}
+          KEYSTORE_PASS: ${{ env.KEEP_KEY == 'true' && secrets.BATNA_ANDROID_KEYSTORE_PASSWORD || '' }}
         run: |
           mkdir -p ~/.batna-preview
-          openssl rand -hex 24 > ~/.batna-preview/pass
-          keytool -genkeypair -keystore ~/.batna-preview/preview.jks -alias preview \
-            -keyalg RSA -keysize 4096 -validity 3650 -dname "CN=Batna preview" \
-            -storepass "$(cat ~/.batna-preview/pass)" -keypass "$(cat ~/.batna-preview/pass)"
-      - name: Save preview signing key
-        if: env.KEEP_KEY == 'true' && steps.key.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: ~/.batna-preview
-          key: batna-preview-key-v1
-
+          if [ "$KEEP_KEY" = true ]; then
+            [ -n "$KEYSTORE_B64" ] || { echo "::error::secret BATNA_ANDROID_KEYSTORE is missing (scripts/release-secrets.sh)"; exit 1; }
+            printf %s "$KEYSTORE_B64" | base64 -d > ~/.batna-preview/preview.jks
+            printf %s "$KEYSTORE_PASS" > ~/.batna-preview/pass
+            echo batna > ~/.batna-preview/alias
+          else
+            openssl rand -hex 24 > ~/.batna-preview/pass
+            keytool -genkeypair -keystore ~/.batna-preview/preview.jks -alias preview \
+              -keyalg RSA -keysize 4096 -validity 3650 -dname "CN=Batna PR check" \
+              -storepass "$(cat ~/.batna-preview/pass)" -keypass "$(cat ~/.batna-preview/pass)"
+            echo preview > ~/.batna-preview/alias
+          fi
+          chmod 600 ~/.batna-preview/*
       - name: Sign
         if: env.CONTENT_ONLY != 'true'
         run: |
           IN=dist/android/release/batna-unsigned.apk
           PASS="$(cat ~/.batna-preview/pass)"
           zipalign -f -p 4 "$IN" /tmp/aligned.apk
-          apksigner sign --ks ~/.batna-preview/preview.jks --ks-key-alias preview \
+          apksigner sign --ks ~/.batna-preview/preview.jks --ks-key-alias "$(cat ~/.batna-preview/alias)" \
             --ks-pass "pass:$PASS" --key-pass "pass:$PASS" --out dist/android/batna-preview.apk /tmp/aligned.apk
           apksigner verify --print-certs dist/android/batna-preview.apk
           # The S24 Ultra and Tab S11 are arm64; dx defaults to the emulator ABI.
@@ -361,7 +308,7 @@ jobs:
               exit 1
             fi
           fi
-          NOTES="Preview build of ${GITHUB_SHA::7}, signed with a CI preview key (not the release key). Install: download batna-preview.apk on the phone or tablet and allow installs from your browser. Not a release: the first release will be an alpha."
+          NOTES="Preview build of ${GITHUB_SHA::7}, signed with the release key, so it installs over the alpha and back. Install: download batna-preview.apk on the phone or tablet and allow installs from your browser. Releases are the batna-v* alphas."
           # The release stays in place and only its tag and files change, so
           # the download link and the update feed never 404.
           if gh release view "$TAG" >/dev/null 2>&1; then

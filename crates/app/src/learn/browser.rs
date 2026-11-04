@@ -32,7 +32,8 @@ fn root(case: Case) -> Element {
         *VIEW.write() = case.view;
         if case.abbr {
             let texts = lesson.steps[case.at].shown_text();
-            let terms = crate::abbrsheet::entries(&texts).iter().map(|e| e.term.clone()).collect();
+            let course = batna_core::program::course_of(&case.lesson);
+            let terms = crate::abbrsheet::ids(&texts, Some(course));
             *crate::abbrsheet::OPEN.write() = Some(terms);
         }
     });

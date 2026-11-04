@@ -33,6 +33,13 @@ pub struct Entry {
     /// The expansion, short enough to read at a glance.
     pub text: String,
     pub status: Status,
+    /// The course this sense belongs to (`neph`), for an abbreviation that
+    /// means something else elsewhere: `ICP` is intracranial pressure in
+    /// neph and intrahepatic cholestasis of pregnancy in hb. Inside that
+    /// course it wins over the entry without a course; elsewhere it doesn't
+    /// show. `None`: every course.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub course: Option<String>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -45,7 +52,16 @@ pub enum Kind {
 impl Entry {
     /// The id used in `content/approved.txt`: `glossary.SAAG`.
     pub fn id(&self) -> String {
-        format!("glossary.{}", self.term)
+        match &self.course {
+            Some(c) => format!("glossary.{}@{c}", self.term),
+            None => format!("glossary.{}", self.term),
+        }
+    }
+
+    /// Whether this sense is the one to show in `course` (`None`: no course
+    /// in view, where only the senses for every course show).
+    pub fn applies_in(&self, course: Option<&str>) -> bool {
+        self.course.is_none() || self.course.as_deref() == course
     }
 
     /// The term and its aliases.
@@ -59,18 +75,25 @@ impl Glossary {
     /// exactly (`HE` is not `he`); drug names ignore case, so a drug at the
     /// start of a sentence still matches.
     pub fn find(&self, word: &str) -> Option<&Entry> {
+        self.find_in(word, None)
+    }
+
+    /// [`Self::find`] as read inside `course`: that course's own sense of a
+    /// word wins over the general one.
+    pub fn find_in(&self, word: &str, course: Option<&str>) -> Option<&Entry> {
         let word = word.trim_matches(|c: char| !c.is_alphanumeric());
         if word.is_empty() {
             return None;
         }
-        self.entries
-            .iter()
-            .filter(|e| e.status != Status::Rejected)
+        let live = || self.entries.iter().filter(|e| e.status != Status::Rejected);
+        live()
+            .filter(|e| course.is_some() && e.course.as_deref() == course)
             .find(|e| e.spellings().any(|s| s == word))
+            .or_else(|| live().filter(|e| e.course.is_none()).find(|e| e.spellings().any(|s| s == word)))
             .or_else(|| {
                 self.entries
                     .iter()
-                    .filter(|e| e.status != Status::Rejected && e.kind == Kind::Drug)
+                    .filter(|e| e.status != Status::Rejected && e.kind == Kind::Drug && e.applies_in(course))
                     .find(|e| e.spellings().any(|s| s.eq_ignore_ascii_case(word)))
             })
     }
@@ -78,13 +101,23 @@ impl Glossary {
 
 impl Glossary {
     /// The table the app's hover script looks words up in, as JSON:
-    /// `{"exact": {spelling: [text, approved]}, "lower": {drug: [...]}}`.
+    /// `{"exact": {spelling: [text, approved]}, "lower": {drug: [...]},
+    /// "courses": {course: {spelling: [...]}}}`; a word inside an element
+    /// with `data-course` looks in its course's table first.
     /// Same rules as [`Glossary::find`]; rejected entries are left out.
     pub fn peek_table(&self) -> serde_json::Value {
         let mut exact = serde_json::Map::new();
         let mut lower = serde_json::Map::new();
+        let mut courses = serde_json::Map::new();
         for e in self.entries.iter().filter(|e| e.status != Status::Rejected) {
             let v = serde_json::json!([e.text, e.status == Status::Approved]);
+            if let Some(c) = &e.course {
+                let table = courses.entry(c.clone()).or_insert_with(|| serde_json::json!({}));
+                for s in e.spellings() {
+                    table[s] = v.clone();
+                }
+                continue;
+            }
             for s in e.spellings() {
                 exact.entry(s.to_string()).or_insert_with(|| v.clone());
                 if e.kind == Kind::Drug {
@@ -92,7 +125,7 @@ impl Glossary {
                 }
             }
         }
-        serde_json::json!({ "exact": exact, "lower": lower })
+        serde_json::json!({ "exact": exact, "lower": lower, "courses": courses })
     }
 }
 
@@ -219,8 +252,17 @@ impl<'a> Finder<'a> {
 impl Glossary {
     /// A [`Finder`] over this glossary; rejected entries are left out.
     pub fn finder(&self) -> Finder<'_> {
+        self.finder_in(None)
+    }
+
+    /// A [`Finder`] as read inside `course`: that course's own senses win
+    /// over the general ones, and other courses' senses are left out.
+    pub fn finder_in(&self, course: Option<&str>) -> Finder<'_> {
         let mut spellings = std::collections::HashMap::new();
-        for e in self.entries.iter().filter(|e| e.status != Status::Rejected) {
+        let live = self.entries.iter().filter(|e| e.status != Status::Rejected && e.applies_in(course));
+        // The course's own senses first, so they win the spelling.
+        let (own, general): (Vec<&Entry>, Vec<&Entry>) = live.partition(|e| e.course.is_some());
+        for e in own.into_iter().chain(general) {
             for s in e.spellings().filter(|s| e.kind == Kind::Abbr || looks_like_abbr(s)) {
                 spellings.entry(s).or_insert(e);
             }
@@ -329,5 +371,51 @@ plain: [NOT]",
         let g = lesson_glossary();
         assert_eq!(g.unknown_in("Do NOT stop the PPI in ACLF or HRS-AKI; FIB-4 is low."), ["ACLF", "FIB"]);
         assert!(g.unknown_in("Child-Pugh and mmHg are fine, وSLE too.").is_empty());
+    }
+
+    #[test]
+    fn a_course_reads_its_own_sense_and_others_keep_the_general_one() {
+        let g: Glossary = serde_yaml_ng::from_str(
+            "schema: batna.glossary/v1
+entries:
+  - { term: ICP, kind: abbr, text: Intrahepatic cholestasis of pregnancy, status: unverified }
+  - { term: ICP, kind: abbr, text: Intracranial pressure, status: unverified, course: neph }
+  - { term: SBP, kind: abbr, text: Systolic blood pressure, status: unverified, course: neph }",
+        )
+        .unwrap();
+        let text = |course| {
+            g.finder_in(course)
+                .abbreviations_in(&["ICP and SBP"])
+                .iter()
+                .map(|e| e.text.as_str())
+                .collect::<Vec<_>>()
+        };
+        assert_eq!(text(Some("neph")), ["Intracranial pressure", "Systolic blood pressure"]);
+        assert_eq!(text(Some("hb")), ["Intrahepatic cholestasis of pregnancy"], "neph's SBP stays in neph");
+        assert_eq!(text(None), ["Intrahepatic cholestasis of pregnancy"]);
+        assert_eq!(g.find_in("ICP", Some("neph")).unwrap().text, "Intracranial pressure");
+        assert_eq!(g.find("ICP").unwrap().text, "Intrahepatic cholestasis of pregnancy");
+        assert_eq!(g.entries[1].id(), "glossary.ICP@neph");
+        assert_eq!(g.entries[0].id(), "glossary.ICP", "approvals of general entries keep their ids");
+        let t = g.peek_table();
+        assert_eq!(t["exact"]["ICP"][0], "Intrahepatic cholestasis of pregnancy");
+        assert_eq!(t["courses"]["neph"]["ICP"][0], "Intracranial pressure");
+        assert!(t["exact"].get("SBP").is_none());
+        assert!(crate::validate::glossary(&g, None).is_empty(), "{:?}", crate::validate::glossary(&g, None));
+    }
+
+    #[test]
+    fn a_sense_listed_twice_for_one_course_is_a_problem() {
+        let g: Glossary = serde_yaml_ng::from_str(
+            "schema: batna.glossary/v1
+entries:
+  - { term: ICP, kind: abbr, text: Intracranial pressure, status: unverified, course: neph }
+  - { term: ICP, kind: abbr, text: Something else, status: unverified, course: neph }
+  - { term: XX, kind: abbr, text: Bad course, status: unverified, course: Neph }",
+        )
+        .unwrap();
+        let p: Vec<String> = crate::validate::glossary(&g, None).into_iter().map(|p| p.message).collect();
+        assert!(p.iter().any(|m| m.contains("listed twice for course neph")), "{p:?}");
+        assert!(p.iter().any(|m| m.contains("must be a course id")), "{p:?}");
     }
 }

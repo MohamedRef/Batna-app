@@ -333,9 +333,10 @@ fn Stage(
     let can_retry =
         if per_part { before.is_some() && !fresh() } else { checked || (answered_before && !fresh()) };
     let texts = use_hook(|| step.shown_text());
-    let has_abbr = use_hook(|| !crate::abbrsheet::entries(&texts).is_empty());
+    let course = batna_core::program::course_of(&seed).to_string();
+    let has_abbr = use_hook(|| !crate::abbrsheet::entries(&texts, Some(&course)).is_empty());
     rsx! {
-        crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1,
+        crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1, "data-course": "{course}",
             if try_done {
                 div { class: "ls-try-done",
                     p { class: "ls-kicker", {tx::TRY} }
@@ -364,7 +365,7 @@ fn Stage(
             // The page chip, with the step's abbreviations beside it.
             if step.page.is_some() || has_abbr {
                 footer { class: "ls-src",
-                    crate::abbrsheet::AbbrChip { texts: texts.clone() }
+                    crate::abbrsheet::AbbrChip { texts: texts.clone(), course: Some(course.clone()) }
                     if let Some(page) = step.page {
                         crate::hover::BookPage {
                             page,

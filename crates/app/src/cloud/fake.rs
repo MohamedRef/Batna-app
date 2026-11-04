@@ -12,8 +12,8 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex, MutexGuard};
 
 use batna_protocol::cloud::{
-    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest, Session,
-    SetPassword, normalize_username, valid_username,
+    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest,
+    RemovePassword, Session, SetPassword, normalize_username, valid_username,
 };
 use batna_protocol::sync::{ServerMsg, SyncErrorCode};
 use batna_server::devices::{Devices, RefreshError};
@@ -263,7 +263,12 @@ fn sign_in_password(s: &mut State, body: &str) -> Reply {
     };
     let now = s.now();
     match Login::new(login_db(s, &username)).unwrap().check(&key, now).unwrap() {
-        Checked::Ok { account_id, email } => ok(&session(s, account_id, &email, req.device)),
+        Checked::Ok { account_id, email } => {
+            let device = req.device.device_id.clone();
+            let session = session(s, account_id, &email, req.device);
+            Devices::open(&s.db).set_by_password(&device, true).unwrap();
+            ok(&session)
+        }
         Checked::Wrong => error(ErrorCode::WrongPassword, "username or password is wrong"),
         Checked::Locked { retry_after_ms } => (
             429,
@@ -278,9 +283,30 @@ fn sign_in_password(s: &mut State, body: &str) -> Reply {
 }
 
 /// Like the Worker's `manage_login`, for the one account.
-fn manage_login(s: &mut State, method: &str, account: &str, body: &str) -> Reply {
+fn manage_login(s: &mut State, method: &str, account: &str, device: &str, body: &str) -> Reply {
     let now = s.now();
     let old = AccountLogin::open(&s.db).username().unwrap();
+    let needs_current = pw::needs_current(Devices::open(&s.db).by_password(device).unwrap(), old.as_deref());
+    if needs_current && method != "GET" {
+        let current = serde_json::from_str::<RemovePassword>(body).ok().and_then(|r| r.current_key);
+        let key = current.as_deref().and_then(pw::parse_key);
+        let old_name = old.clone().unwrap_or_default();
+        match key.map(|k| Login::new(login_db(s, &old_name)).unwrap().check(&k, now).unwrap()) {
+            Some(Checked::Ok { account_id, .. }) if account_id == account => {}
+            Some(Checked::Locked { retry_after_ms }) => {
+                return (
+                    429,
+                    serde_json::to_string(&ApiError {
+                        code: ErrorCode::TooManyTries,
+                        message: "too many wrong passwords for this username".into(),
+                        retry_after_ms: Some(retry_after_ms),
+                    })
+                    .unwrap(),
+                );
+            }
+            _ => return error(ErrorCode::WrongPassword, "the current password is wrong"),
+        }
+    }
     let username = match method {
         "GET" => old,
         "POST" => {
@@ -310,7 +336,7 @@ fn manage_login(s: &mut State, method: &str, account: &str, body: &str) -> Reply
         }
     };
     AccountLogin::open(&s.db).set_username(username.as_deref()).unwrap();
-    ok(&PasswordLogin { username })
+    ok(&PasswordLogin { username, needs_current })
 }
 
 fn session(
@@ -322,6 +348,7 @@ fn session(
     let refresh = tokens::new_refresh(&account, &device.device_id, tokens::random_bytes().unwrap());
     let now = s.now();
     let expires = Devices::open(&s.db).register(&device, email, &refresh.hash, now).unwrap();
+    Devices::open(&s.db).set_by_password(&device.device_id, false).unwrap();
     let (access_token, access_expires_at_ms) = tokens::issue_access(&s.key, &account, &device.device_id, now);
     Session {
         account_id: account,
@@ -536,7 +563,7 @@ fn route(s: &mut State, method: &str, path: &str, headers: &[(String, String)], 
                     (200, String::new())
                 }
                 (m @ ("GET" | "POST" | "DELETE"), "/v1/login") if active => {
-                    manage_login(s, m, &claims.sub, body)
+                    manage_login(s, m, &claims.sub, &claims.dev, body)
                 }
                 ("GET", "/v1/devices") => error(ErrorCode::DeviceRevoked, "this device was signed out"),
                 _ => error(ErrorCode::NotFound, "not found"),

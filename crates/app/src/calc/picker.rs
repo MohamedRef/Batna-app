@@ -145,6 +145,12 @@ fn keywords(id: &str) -> &'static str {
         "kdigo_aki" => "acute kidney injury creatinine urine output",
         "fena" => "fractional excretion sodium prerenal atn aki",
         "feurea" => "fractional excretion urea diuretics aki",
+        "bun_creatinine" => "urea ratio prerenal atn aki azotemia",
+        "ckd_epi_2021" => "egfr gfr chronic kidney disease creatinine ckd",
+        "kdigo_ckd" => "ckd chronic kidney disease albuminuria acr heat map g3a",
+        "aa_gradient" => "alveolar arterial oxygen hypoxia abg pao2",
+        "free_water_deficit" => "hypernatremia hypernatraemia sodium water deficit fluid",
+        "plasmic" => "ttp thrombotic microangiopathy adamts13 tma schistocytes",
         "cockcroft_gault" => "crcl gfr renal dose elderly creatinine clearance",
         "katz_adl" => "adl activities daily living function elderly katz",
         "lawton_iadl" => "iadl instrumental activities daily living function elderly",
@@ -551,7 +557,8 @@ mod tests {
 
     #[test]
     fn the_area_filter_narrows_search_and_list() {
-        assert_eq!(ids(&search("ratio", Some(Area::Renal))), ["delta_ratio"]);
+        let renal = ids(&search("ratio", Some(Area::Renal)));
+        assert!(renal.contains(&"delta_ratio") && !renal.contains(&"odds_ratio"), "{renal:?}");
         let only = groups("", Some(Area::Pancreas), &["meld"], &["apri"]);
         assert_eq!(only.len(), 1, "no pins or recents under a filter");
         assert_eq!(only[0].ids, ["ranson", "bisap", "ctsi", "atlanta_2012"]);

@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 
 pub use crate::content::CalcValue;
 
+mod aa_gradient;
 mod aav;
 mod aki;
 mod albi;
@@ -30,8 +31,10 @@ mod baveno;
 mod bclc;
 mod bisap;
 mod bmi;
+mod bun_cr;
 mod cha2ds2_vasc;
 mod child_pugh;
+mod ckd;
 mod clichy;
 mod cll;
 mod cockcroft;
@@ -40,6 +43,7 @@ mod diabetes;
 mod dka;
 mod fib4;
 mod fli;
+mod free_water;
 mod gbs;
 mod geri;
 mod glasgow;
@@ -55,6 +59,7 @@ mod milan;
 mod mpn;
 mod okuda;
 mod page_b;
+mod plasmic;
 mod r_ratio;
 mod ra2010;
 mod ranson;
@@ -375,6 +380,11 @@ static GUIDE_LISTS: &[&[(&str, Guide)]] = &[
     dka::GUIDES,
     insulin::GUIDES,
     bmi::GUIDES,
+    bun_cr::GUIDES,
+    ckd::GUIDES,
+    aa_gradient::GUIDES,
+    free_water::GUIDES,
+    plasmic::GUIDES,
 ];
 
 /// The next step and differential for a band id (`cam.positive`), if
@@ -438,6 +448,12 @@ static REGISTRY: &[CalcSpec] = &[
     aki::KDIGO,
     aki::FENA,
     aki::FEUREA,
+    bun_cr::SPEC,
+    ckd::EGFR,
+    ckd::STAGE,
+    aa_gradient::SPEC,
+    free_water::SPEC,
+    plasmic::SPEC,
     cockcroft::SPEC,
     geri::KATZ,
     geri::LAWTON,
@@ -699,31 +715,49 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("fena.atn", &["atn", "tubular necrosis"]),
     ("feurea.prerenal", &["prerenal", "pre-renal"]),
     ("feurea.atn", &["atn", "tubular necrosis"]),
-    ("shock_index.unstable", &["unstable"]),
-    ("shock_index.stable", &["stable"]),
-    ("oakland.discharge", &["discharge", "8 or less"]),
-    ("oakland.admit", &["admit", "above 8"]),
-    ("uc_activity.mild", &["mild"]),
-    ("uc_activity.moderate", &["moderate"]),
-    ("uc_activity.severe", &["severe"]),
-    ("kyoto_gastritis.none", &["no h. pylori", "no infection"]),
-    ("kyoto_gastritis.current", &["current infection"]),
-    ("kyoto_gastritis.cancer_risk", &["cancer risk"]),
-    ("rome4_ibs.not_met", &["not met"]),
-    ("rome4_ibs.c", &["ibs-c"]),
-    ("rome4_ibs.d", &["ibs-d"]),
-    ("rome4_ibs.m", &["ibs-m"]),
-    ("rome4_ibs.u", &["ibs-u"]),
-    ("dka_severity.not_met", &["not dka", "not met"]),
-    ("dka_severity.mild", &["mild"]),
-    ("dka_severity.moderate", &["moderate"]),
-    ("dka_severity.severe", &["severe"]),
-    ("bmi.under", &["underweight"]),
-    ("bmi.normal", &["normal"]),
-    ("bmi.overweight", &["overweight"]),
+    ("aa_gradient.high", &["raised", "high"]),
+    ("aa_gradient.normal", &["normal"]),
     ("bmi.class1", &["class i", "class 1"]),
     ("bmi.class2", &["class ii", "class 2"]),
     ("bmi.class3", &["class iii", "class 3"]),
+    ("bmi.normal", &["normal"]),
+    ("bmi.overweight", &["overweight"]),
+    ("bmi.under", &["underweight"]),
+    ("bun_creatinine.atn", &["atn", "tubular necrosis"]),
+    ("bun_creatinine.indeterminate", &["indeterminate"]),
+    ("bun_creatinine.prerenal", &["prerenal", "pre-renal"]),
+    ("ckd_epi_2021.g1", &["g1"]),
+    ("ckd_epi_2021.g2", &["g2"]),
+    ("ckd_epi_2021.g3a", &["g3a"]),
+    ("ckd_epi_2021.g3b", &["g3b"]),
+    ("ckd_epi_2021.g4", &["g4"]),
+    ("ckd_epi_2021.g5", &["g5"]),
+    ("dka_severity.mild", &["mild"]),
+    ("dka_severity.moderate", &["moderate"]),
+    ("dka_severity.not_met", &["not dka", "not met"]),
+    ("dka_severity.severe", &["severe"]),
+    ("kdigo_ckd.high", &["high risk"]),
+    ("kdigo_ckd.low", &["low risk"]),
+    ("kdigo_ckd.moderate", &["moderately increased"]),
+    ("kdigo_ckd.very_high", &["very high risk", "very high"]),
+    ("kyoto_gastritis.cancer_risk", &["cancer risk"]),
+    ("kyoto_gastritis.current", &["current infection"]),
+    ("kyoto_gastritis.none", &["no h. pylori", "no infection"]),
+    ("oakland.admit", &["admit", "above 8"]),
+    ("oakland.discharge", &["discharge", "8 or less"]),
+    ("plasmic.high", &["high"]),
+    ("plasmic.intermediate", &["intermediate"]),
+    ("plasmic.low", &["low"]),
+    ("rome4_ibs.c", &["ibs-c"]),
+    ("rome4_ibs.d", &["ibs-d"]),
+    ("rome4_ibs.m", &["ibs-m"]),
+    ("rome4_ibs.not_met", &["not met"]),
+    ("rome4_ibs.u", &["ibs-u"]),
+    ("shock_index.stable", &["stable"]),
+    ("shock_index.unstable", &["unstable"]),
+    ("uc_activity.mild", &["mild"]),
+    ("uc_activity.moderate", &["moderate"]),
+    ("uc_activity.severe", &["severe"]),
 ];
 
 /// The bands of `band`'s calculator that `text` names, longest phrase first.

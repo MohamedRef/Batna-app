@@ -35,15 +35,26 @@ pub fn click(dom: &mut VirtualDom, label: &str) {
 }
 
 /// Types `value` into the field whose text, label attributes or input type
-/// contain `label` (its `oninput` or `onchange`).
+/// contain `label` (its `oninput` or `onchange`). A checkbox takes "true".
 pub fn type_into(dom: &mut VirtualDom, label: &str, value: &str) {
-    let data = || PlatformEventData::new(Box::new(SerializedFormData::new(value.into(), Vec::new())));
+    type_nth(dom, label, 0, value);
+}
+
+/// Like [`type_into`], into the `n`th (from 0) such field.
+pub fn type_nth(dom: &mut VirtualDom, label: &str, n: usize, value: &str) {
+    let data = PlatformEventData::new(Box::new(SerializedFormData::new(value.into(), Vec::new())));
     let found = listeners(dom);
     let event = ["input", "change"]
         .into_iter()
-        .find(|e| found.iter().any(|f| f.event == *e && f.label.contains(label)))
-        .unwrap_or_else(|| panic!("no field {label:?}"));
-    fire(dom, event, label, 0, Rc::new(data()));
+        .find(|e| found.iter().filter(|f| f.event == *e && f.label.contains(label)).nth(n).is_some())
+        .unwrap_or_else(|| panic!("no field #{n} {label:?}"));
+    fire(dom, event, label, n, Rc::new(data));
+}
+
+/// Submits the form whose text contains `label`, as Enter or its submit button would.
+pub fn submit(dom: &mut VirtualDom, label: &str) {
+    let data = PlatformEventData::new(Box::new(SerializedFormData::new(String::new(), Vec::new())));
+    fire(dom, "submit", label, 0, Rc::new(data));
 }
 
 fn fire(dom: &mut VirtualDom, event: &'static str, label: &str, n: usize, data: Rc<dyn Any>) {

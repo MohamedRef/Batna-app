@@ -306,6 +306,23 @@ pub fn collect(root: &Path, chapter: &str, num: &str) -> Result<Vec<Ref>, String
         let quote = src.get("quote").and_then(Value::as_str).map(String::from);
         out.push(Ref { id: id.into(), page, quote, text: text_of(item), book_figure: false });
     }
+    // Calculators' quotes on this lecture's pages (`content/calc-quotes.yaml`):
+    // the quote is all they say, with the calculator's name.
+    let quotes = root.join("content/calc-quotes.yaml");
+    if quotes.exists() {
+        let q: batna_core::content::CalcQuotes = crate::read_yaml(&quotes)?;
+        let lecture = format!("{chapter}.{num}");
+        for c in q.quotes.iter().filter(|c| c.lecture == lecture) {
+            let name = batna_core::calc::spec(&c.calculator).map_or("", |s| s.name);
+            out.push(Ref {
+                id: batna_core::content::calc_quote_ref(&c.calculator, c.page),
+                page: c.page,
+                quote: Some(c.quote.clone()),
+                text: format!("{name}\n{}", c.quote),
+                book_figure: false,
+            });
+        }
+    }
     let lessons = root.join("content/lessons").join(chapter).join(format!("{num}.yaml"));
     if lessons.exists() {
         let doc: Value = crate::read_yaml(&lessons)?;
@@ -528,7 +545,8 @@ fn scores(
     pages
         .iter()
         .map(|(p, t)| {
-            let got: f64 = weights.iter().filter(|(w, _)| t.contains(w)).map(|(_, w)| w).sum();
+            // A fold from +0.0: an empty f64 `sum` is -0.0, printed "-0%".
+            let got = weights.iter().filter(|(w, _)| t.contains(w)).fold(0.0, |a, (_, w)| a + w);
             (*p, if total > 0.0 { got / total } else { 0.0 })
         })
         .collect()
@@ -803,6 +821,218 @@ mod tests {
         assert_eq!(lock["hb.L01.001"].basis, "quote");
         assert_eq!(lock["hb.L01.002"].basis, "quote");
         assert!(check_locks(root, &["hb.L01".into()]).is_empty());
+    }
+
+    use crate::testkit::{self, write};
+
+    fn has(problems: &[String], s: &str) {
+        assert!(problems.iter().any(|p| p.contains(s)), "{s}: {problems:#?}");
+    }
+
+    #[test]
+    fn the_lock_names_every_reference_that_needs_a_new_look() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        let l01 = vec!["hb.L01".to_string()];
+        assert!(check_locks(root, &l01).is_empty());
+
+        // A lesson figure from the book needs no quote; other steps do.
+        let figure = "      - kind: figure\n        page: 1\n        title: \"شكل\"\n        alt: \"A liver\"\n        caption: \"كبد\"\n        image: { file: hb/x.webp, book: true }\n";
+        let lesson = testkit::LESSON.replace("    recap:", &format!("{figure}    recap:"));
+        write(root, "content/lessons/hb/L01.yaml", &lesson);
+        let p = check_locks(root, &l01);
+        assert_eq!(
+            p,
+            [
+                "content/book-refs/L01.tsv: hb.L01.lesson1#4 (p1) was never checked; check it against the book again: batna-tools refs --lecture hb.L01 --write"
+            ]
+        );
+        let unquoted = testkit::LESSON.replacen(
+            "        quote: \"diffuse process with fibrosis and regenerative nodule formation\"\n",
+            "",
+            1,
+        );
+        write(root, "content/lessons/hb/L01.yaml", &unquoted);
+        let p = check_locks(root, &l01);
+        has(&p, "hb.L01.lesson1#1's quote changed");
+        has(&p, "hb.L01.lesson1#1 has no quote");
+
+        // A quote about something else, and a row whose reference is gone.
+        write(root, "content/lessons/hb/L01.yaml", testkit::LESSON);
+        let lecture = testkit::LECTURE.replace(
+            "quote: \"The hepatic stellate cells, the major fibrogenic cells in the liver\"",
+            "quote: \"Portal hypertension raises splenic pressure\"",
+        );
+        write(root, "content/hb/L01.yaml", &lecture[..lecture.len()]);
+        has(&check_locks(root, &l01), "hb.L01.002's quote shares no term with what it says");
+        write(
+            root,
+            "content/hb/L01.yaml",
+            &testkit::LECTURE[..testkit::LECTURE.find("  - id: hb.L01.002").unwrap()],
+        );
+        has(&check_locks(root, &l01), "content/book-refs/L01.tsv: hb.L01.002 is no longer in the content");
+
+        // Broken files: the lock and the lecture.
+        write(root, "content/hb/L01.yaml", "items: [");
+        has(&check_locks(root, &l01), "content/hb/L01.yaml");
+        write(root, "content/hb/L01.yaml", testkit::LECTURE);
+        let lock = root.join(LOCKS).join("L01.tsv");
+        let good = std::fs::read_to_string(&lock).unwrap();
+        let first = good.lines().find(|l| !l.starts_with('#')).unwrap();
+        std::fs::write(&lock, format!("{good}{first}\n")).unwrap();
+        has(&check_locks(root, &l01), "L01.tsv:8: hb.L01.001 is listed twice");
+        std::fs::write(&lock, format!("{good}\nhb.L01.009\tp1\n")).unwrap();
+        has(&check_locks(root, &l01), "L01.tsv:9: expected ref, page, quote hash, basis");
+
+        // A lock left behind by a lecture that has no content.
+        write(root, "content/book-refs/L02.tsv", "# empty\n");
+        assert_eq!(
+            check_locks(root, &["hb.L02".into()]),
+            ["content/book-refs/L02.tsv: lock exists but lecture content is missing"]
+        );
+        assert!(
+            check_locks(root, &["hb.L03".into()]).is_empty(),
+            "an unwritten lecture has nothing to check"
+        );
+    }
+
+    /// A course of its own (so no shared folder is read), two pages.
+    fn two_pages(root: &Path, items: &str) -> Vec<String> {
+        write(
+            root,
+            "content/index.yaml",
+            "schema: batna.content/v1\nlectures:\n  - { id: zz.L01, title: One, pages: [1, 2], chunk: 1 }\n  - { id: zz.L02, title: Not yet, pages: [3, 4], chunk: 1 }\n",
+        );
+        write(root, "content/zz/L01.yaml", &format!("items:\n{items}"));
+        write(
+            root,
+            "slides/L01.txt",
+            "=== slide 1 ===\nAscites is graded by volume.\n=== slide 2 ===\nSpontaneous bacterial peritonitis: neutrophils above 250 per mm3 in ascitic fluid; start cefotaxime.\n",
+        );
+        ["--book", &root.join("slides").display().to_string(), "--lecture", "zz.L01"]
+            .iter()
+            .map(|s| s.to_string())
+            .collect()
+    }
+
+    const SBP: &str = "  - id: zz.L01.001\n    kind: card\n    front: Which neutrophil count in ascitic fluid means spontaneous bacterial peritonitis, and what do you start?\n    back: Above 250 per mm3; cefotaxime.\n";
+
+    #[test]
+    fn a_page_that_misses_the_fact_needs_a_person_to_check_it() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        // Quoted from slide 1, but the fact is on slide 2.
+        let mut args = two_pages(
+            root,
+            &format!("{SBP}    src: {{ page: 1, quote: \"Ascites is graded by volume\" }}\n"),
+        );
+        let p = run(root, &args).unwrap_err();
+        has(&p, "zz.L01: zz.L01.001: p1 carries 0% of its terms, p2 ");
+        assert_eq!(
+            p.last().unwrap(),
+            "zz.L01: 1 refs, 0 quoted, 0 book figures, 0 checked by hand, 1 to look at"
+        );
+
+        // A person read the page and says it holds the fact.
+        let checked = root.join("checked");
+        write(
+            &checked,
+            "L01.tsv",
+            "# ref\tpage\tok\treason\nzz.L01.001\t1\tok\tthe slide's title says it\nzz.L01.001\tx\tok\tno page\n",
+        );
+        args.extend(["--checked".into(), checked.display().to_string(), "--write".into()]);
+        assert_eq!(
+            run(root, &args).unwrap(),
+            "zz.L01: 1 refs, 0 quoted, 0 book figures, 1 checked by hand, 0 to look at"
+        );
+        let lock = read_lock(&root.join("content/book-refs/zz/L01.tsv")).unwrap();
+        assert_eq!(
+            (lock["zz.L01.001"].basis.as_str(), lock["zz.L01.001"].note.as_str()),
+            ("checked", "the slide's title says it")
+        );
+        // The lock remembers it; the verdict file can go.
+        std::fs::remove_file(checked.join("L01.tsv")).unwrap();
+        assert!(run(root, &args).is_ok());
+
+        // A page the slides don't have.
+        two_pages(root, &format!("{SBP}    src: {{ page: 7, quote: \"x\" }}\n"));
+        has(&run(root, &args).unwrap_err(), "zz.L01.001: p7 is not in L01's book text");
+        assert!(
+            run(root, &["--book".into(), "/no/book".into()]).unwrap_err()[0]
+                .starts_with("/no/book/L01.txt: ")
+        );
+    }
+
+    #[test]
+    fn a_quote_read_off_the_image_counts_only_while_it_is_the_same() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        let quote = "SBP: PMN above 250 per mm3";
+        let mut args = two_pages(root, &format!("{SBP}    src: {{ page: 2, quote: \"{quote}\" }}\n"));
+        has(&run(root, &args).unwrap_err(), "zz.L01.001: quote is not on p2 (not in the lecture)");
+        let checked = root.join("checked");
+        write(
+            &checked,
+            "L01.tsv",
+            &format!("zz.L01.001\t2\tquote-ok\t{quote}\nzz.L01.001\tx\tquote-ok\tbad page\n# comment\n"),
+        );
+        args.extend(["--checked".into(), checked.display().to_string(), "--write".into()]);
+        run(root, &args).unwrap();
+        assert_eq!(
+            read_lock(&root.join("content/book-refs/zz/L01.tsv")).unwrap()["zz.L01.001"].basis,
+            "image"
+        );
+        two_pages(root, &format!("{SBP}    src: {{ page: 2, quote: \"SBP: PMN above 500 per mm3\" }}\n"));
+        has(&run(root, &args).unwrap_err(), "quote is not on p2");
+    }
+
+    #[test]
+    fn ocr_text_joins_its_page() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        write(root, "book/L01.txt", "=== book page 1 ===\n(figure)\n=== book page 2 ===\nother\n");
+        write(root, "ocr/1.txt", "Figure 1: stellate cells in the space of Disse");
+        let pages = book_pages(&root.join("book"), &[root.join("ocr"), root.join("none")], "L01").unwrap();
+        assert!(pages[&1].contains("(figure)\n\nFigure 1: stellate cells"), "{:?}", pages[&1]);
+        assert_eq!(pages[&2], "other\n");
+    }
+
+    #[test]
+    fn references_skip_items_without_a_page() {
+        let dir = tempfile::tempdir().unwrap();
+        let root = dir.path();
+        write(
+            root,
+            "content/hb/L05.yaml",
+            "items:\n  - { id: hb.L05.001, src: { page: 0 } }\n  - { id: hb.L05.002 }\n  - { src: { page: 3 } }\n  - { id: hb.L05.003, src: { page: 4 } }\n",
+        );
+        write(
+            root,
+            "content/lessons/hb/L05.yaml",
+            "lessons:\n  - id: hb.L05.lesson1\n    steps:\n      - { kind: explain, text: no page }\n      - { kind: figure, page: 4, image: { book: true } }\n",
+        );
+        let refs = collect(root, "hb", "L05").unwrap();
+        let ids: Vec<(&str, u32, bool)> =
+            refs.iter().map(|r| (r.id.as_str(), r.page, r.book_figure)).collect();
+        assert_eq!(ids, [("hb.L05.003", 4, false), ("hb.L05.lesson1#2", 4, true)]);
+        write(root, "content/lessons/hb/L05.yaml", "lessons: [");
+        assert!(collect(root, "hb", "L05").is_err());
+    }
+
+    #[test]
+    fn a_page_without_the_terms_scores_zero_not_minus_zero() {
+        let pages: BTreeMap<u32, BTreeSet<String>> =
+            [(1, terms("Ascites is graded by volume")), (2, terms("neutrophils above 250 cefotaxime"))]
+                .into();
+        let mut df = HashMap::new();
+        for t in pages.values() {
+            for w in t {
+                *df.entry(w.clone()).or_default() += 1;
+            }
+        }
+        let sc = scores("neutrophils above 250: start cefotaxime", &pages, &df);
+        assert_eq!(format!("{:.0}%", sc[&1] * 100.0), "0%");
+        assert_eq!(format!("{:.0}%", sc[&2] * 100.0), "100%");
     }
 
     #[test]

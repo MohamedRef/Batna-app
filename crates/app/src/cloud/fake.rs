@@ -8,12 +8,17 @@
 //! every `cargo test`, and can turn the network off, close sockets and set
 //! the server's clock to test what a phone on a train sees.
 
+use std::collections::HashMap;
 use std::sync::{Arc, Mutex, MutexGuard};
 
-use batna_protocol::cloud::{ApiError, DeviceList, ErrorCode, GoogleSignIn, RefreshRequest, Session};
+use batna_protocol::cloud::{
+    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest, Session,
+    SetPassword, normalize_username, valid_username,
+};
 use batna_protocol::sync::{ServerMsg, SyncErrorCode};
 use batna_server::devices::{Devices, RefreshError};
 use batna_server::hub::{Conn, Hub};
+use batna_server::login::{self as pw, AccountLogin, Checked, Login};
 use batna_server::sql::{Row, Sql, SqlError, Value};
 use batna_server::tokens::{self, TokenKey};
 use futures_util::{SinkExt, StreamExt};
@@ -57,6 +62,8 @@ enum Out {
 
 struct State {
     db: MemDb,
+    /// Each username's own store (the Worker's `LOGIN` Durable Objects).
+    logins: HashMap<String, MemDb>,
     key: TokenKey,
     sockets: Vec<Socket>,
     next_conn: u64,
@@ -90,6 +97,7 @@ impl FakeCloud {
         batna_server::account::open(&db, |w| panic!("{w}")).unwrap();
         let state = Arc::new(Mutex::new(State {
             db,
+            logins: HashMap::new(),
             key: TokenKey::from_seed([7; 32]),
             sockets: Vec::new(),
             next_conn: 0,
@@ -213,6 +221,14 @@ impl FakeCloud {
     }
 
     /// The hub's current payload of a row.
+    /// Another account already holds `username`.
+    pub fn take_username(&self, username: &str) {
+        let mut s = self.lock();
+        let now = s.now();
+        let db = login_db(&mut s, username);
+        assert!(Login::new(db).unwrap().set("someone-else", "someone@example.com", "00", "x", now).unwrap());
+    }
+
     pub fn payload(&self, table: &str, row_id: &str) -> Option<serde_json::Value> {
         let s = self.lock();
         Hub::open(&s.db).current_payload(table, row_id).unwrap()
@@ -223,16 +239,91 @@ fn account_id() -> String {
     tokens::account_id_for_google_sub(EMAIL)
 }
 
+fn login_db<'a>(s: &'a mut State, username: &str) -> &'a MemDb {
+    s.logins
+        .entry(username.to_owned())
+        .or_insert_with(|| MemDb(rusqlite::Connection::open_in_memory().unwrap()))
+}
+
 fn sign_in(s: &mut State, email: &str, device: batna_protocol::cloud::DeviceInfo) -> Result<Session, Reply> {
     if email != EMAIL {
         return Err(error(ErrorCode::NotAllowed, "this Google account is not on Batna's allowlist"));
     }
-    let account = account_id();
+    Ok(session(s, account_id(), email, device))
+}
+
+/// Like the Worker's `sign_in_password`.
+fn sign_in_password(s: &mut State, body: &str) -> Reply {
+    let Ok(req) = serde_json::from_str::<PasswordSignIn>(body) else {
+        return error(ErrorCode::InvalidRequest, "bad body");
+    };
+    let username = normalize_username(&req.username);
+    let Some(key) = pw::parse_key(&req.password_key).filter(|_| valid_username(&username)) else {
+        return error(ErrorCode::WrongPassword, "username or password is wrong");
+    };
+    let now = s.now();
+    match Login::new(login_db(s, &username)).unwrap().check(&key, now).unwrap() {
+        Checked::Ok { account_id, email } => ok(&session(s, account_id, &email, req.device)),
+        Checked::Wrong => error(ErrorCode::WrongPassword, "username or password is wrong"),
+        Checked::Locked { retry_after_ms } => (
+            429,
+            serde_json::to_string(&ApiError {
+                code: ErrorCode::TooManyTries,
+                message: "too many wrong passwords for this username".into(),
+                retry_after_ms: Some(retry_after_ms),
+            })
+            .unwrap(),
+        ),
+    }
+}
+
+/// Like the Worker's `manage_login`, for the one account.
+fn manage_login(s: &mut State, method: &str, account: &str, body: &str) -> Reply {
+    let now = s.now();
+    let old = AccountLogin::open(&s.db).username().unwrap();
+    let username = match method {
+        "GET" => old,
+        "POST" => {
+            let Ok(set) = serde_json::from_str::<SetPassword>(body) else {
+                return error(ErrorCode::InvalidRequest, "bad body");
+            };
+            let username = normalize_username(&set.username);
+            let Some(key) = pw::parse_key(&set.password_key).filter(|_| valid_username(&username)) else {
+                return error(ErrorCode::InvalidRequest, "bad username or key");
+            };
+            let salt = "5a17";
+            let verifier = pw::verifier(salt, &key);
+            if !Login::new(login_db(s, &username)).unwrap().set(account, EMAIL, salt, &verifier, now).unwrap()
+            {
+                return error(ErrorCode::UsernameTaken, "another account has this username");
+            }
+            if let Some(old) = old.filter(|o| *o != username) {
+                Login::new(login_db(s, &old)).unwrap().clear(account).unwrap();
+            }
+            Some(username)
+        }
+        _ => {
+            if let Some(old) = &old {
+                Login::new(login_db(s, old)).unwrap().clear(account).unwrap();
+            }
+            None
+        }
+    };
+    AccountLogin::open(&s.db).set_username(username.as_deref()).unwrap();
+    ok(&PasswordLogin { username })
+}
+
+fn session(
+    s: &mut State,
+    account: String,
+    email: &str,
+    device: batna_protocol::cloud::DeviceInfo,
+) -> Session {
     let refresh = tokens::new_refresh(&account, &device.device_id, tokens::random_bytes().unwrap());
     let now = s.now();
     let expires = Devices::open(&s.db).register(&device, email, &refresh.hash, now).unwrap();
     let (access_token, access_expires_at_ms) = tokens::issue_access(&s.key, &account, &device.device_id, now);
-    Ok(Session {
+    Session {
         account_id: account,
         device_id: device.device_id,
         email: Some(email.into()),
@@ -240,7 +331,7 @@ fn sign_in(s: &mut State, email: &str, device: batna_protocol::cloud::DeviceInfo
         access_expires_at_ms,
         refresh_token: refresh.token,
         refresh_expires_at_ms: expires,
-    })
+    }
 }
 
 type Reply = (u16, String);
@@ -251,9 +342,15 @@ fn error(code: ErrorCode, message: &str) -> Reply {
         ErrorCode::Unauthorized | ErrorCode::DeviceRevoked => 401,
         ErrorCode::NotAllowed => 403,
         ErrorCode::NotFound => 404,
+        ErrorCode::WrongPassword => 401,
+        ErrorCode::TooManyTries => 429,
+        ErrorCode::UsernameTaken => 409,
         ErrorCode::Internal | ErrorCode::Other => 500,
     };
-    (status, serde_json::to_string(&ApiError { code, message: message.into() }).unwrap())
+    (
+        status,
+        serde_json::to_string(&ApiError { code, message: message.into(), retry_after_ms: None }).unwrap(),
+    )
 }
 
 fn ok(body: &impl serde::Serialize) -> Reply {
@@ -374,6 +471,7 @@ fn route(s: &mut State, method: &str, path: &str, headers: &[(String, String)], 
                 Err(reply) => reply,
             }
         }
+        ("POST", "/v1/auth/password") => sign_in_password(s, body),
         ("POST", "/v1/auth/refresh") => {
             s.refreshes += 1;
             let Ok(req) = serde_json::from_str::<RefreshRequest>(body) else {
@@ -436,6 +534,9 @@ fn route(s: &mut State, method: &str, path: &str, headers: &[(String, String)], 
                     devices.revoke(&claims.dev, now).unwrap();
                     close_device(s, &claims.dev);
                     (200, String::new())
+                }
+                (m @ ("GET" | "POST" | "DELETE"), "/v1/login") if active => {
+                    manage_login(s, m, &claims.sub, body)
                 }
                 ("GET", "/v1/devices") => error(ErrorCode::DeviceRevoked, "this device was signed out"),
                 _ => error(ErrorCode::NotFound, "not found"),

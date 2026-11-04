@@ -548,6 +548,9 @@ fn LibraryList() -> Element {
 }
 
 #[cfg(test)]
+mod tests;
+
+#[cfg(test)]
 mod hierarchy_tests {
     #[test]
     fn daily_study_and_continuation_come_before_secondary_shortcuts() {

@@ -89,6 +89,9 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         ("ascitic.no_sbp", "No SBP (PMN < 250/mm³)", "SBP is not diagnosed.")
     };
 
+    // The PMN cut-off is on p. 167; the variants and secondary peritonitis
+    // are defined on p. 168.
+    let page = if matches!(band, "ascitic.sbp" | "ascitic.no_sbp") { 167 } else { 168 };
     let mut parts = vec![Part::met("PMN ≥ 250/mm³", neutrocytic)];
     parts.extend(secondary);
     Ok(Outcome {
@@ -97,7 +100,7 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         band,
         label,
         meaning: meaning.to_owned(),
-        page: Some(167),
+        page: Some(page),
         parts,
         notes: Vec::new(),
     })
@@ -118,6 +121,8 @@ mod tests {
         assert_eq!(run(600.0, "negative").band, "ascitic.sbp_culture_negative");
         assert_eq!(run(120.0, "monomicrobial").band, "ascitic.bacterascites");
         assert_eq!(run(249.0, "negative").band, "ascitic.no_sbp");
+        assert_eq!(run(250.0, "pending").page, Some(167));
+        assert_eq!(run(120.0, "monomicrobial").page, Some(168));
     }
 
     #[test]

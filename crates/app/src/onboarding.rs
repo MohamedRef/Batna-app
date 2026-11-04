@@ -166,6 +166,7 @@ fn start_step(var: Option<&str>) -> usize {
 #[component]
 fn Questions(start: usize, detail: Option<Step>) -> Element {
     let mut ui = use_context::<Ui>();
+    let settings = use_context::<crate::settings::SettingsNav>();
     let mut step = use_signal(|| start);
     let mut detail = use_signal(|| detail);
     let plan = crate::plan::SETTINGS.peek().clone();
@@ -217,6 +218,17 @@ fn Questions(start: usize, detail: Option<Step>) -> Element {
             h1 { {tx::WELCOME_TITLE} }
             p { class: "muted", {tx::WELCOME_BODY} }
             p { class: "note", {tx::WELCOME_NOTE} }
+            // A new device of his: sign in and his plan and lessons sync
+            // down instead of being asked again (Settings › Sync).
+            p {
+                button { class: "btn btn-secondary",
+                    onclick: move |_| {
+                        close();
+                        settings.show(Some(crate::settings::Section::Sync));
+                    },
+                    {tx::HAVE_ACCOUNT}
+                }
+            }
         },
         Step::Time => rsx! {
             h1 { {tx::TIME_TITLE} }
@@ -627,6 +639,7 @@ mod tests {
     thread_local! {
         static AT: Cell<(usize, Option<Step>)> = const { Cell::new((0, None)) };
         static UI: Cell<Option<Ui>> = const { Cell::new(None) };
+        static NAV: Cell<Option<crate::settings::SettingsNav>> = const { Cell::new(None) };
     }
 
     fn fixture() -> Element {
@@ -637,6 +650,8 @@ mod tests {
             focus: Signal::new(false),
         });
         UI.with(|u| u.set(Some(ui)));
+        let nav = use_context_provider(crate::settings::SettingsNav::new);
+        NAV.with(|n| n.set(Some(nav)));
         rsx! { Questions { start, detail } }
     }
 
@@ -865,6 +880,17 @@ mod tests {
         click(&mut d, tx::START_LESSON);
         assert!(!d.in_runtime(|| OPEN.cloned()));
         assert_ne!(d.in_runtime(|| *ui.screen.peek()), crate::Screen::Today, "a lesson or the lessons list");
+    }
+
+    #[test]
+    fn a_new_device_of_his_goes_to_sync_instead_of_the_questions() {
+        let mut d = dom(0, None);
+        d.in_runtime(reopen);
+        crate::testing::click(&mut d, tx::HAVE_ACCOUNT);
+        assert!(!d.in_runtime(|| OPEN.cloned()));
+        let nav = NAV.with(Cell::get).unwrap();
+        assert!(d.in_runtime(|| *nav.open.peek()));
+        assert_eq!(d.in_runtime(|| *nav.section.peek()), Some(crate::settings::Section::Sync));
     }
 
     #[test]

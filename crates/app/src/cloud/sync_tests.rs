@@ -12,7 +12,7 @@ use tokio::sync::mpsc::error::TryRecvError;
 use super::fake::{self, FakeCloud};
 use super::oauth::{Endpoints, GoogleClient};
 use super::session::{MemoryVault, SessionVault};
-use super::{CloudConfig, CloudHandle, CloudStatus, Command, Event, Problem, SyncState};
+use super::{CloudConfig, CloudHandle, CloudStatus, Command, Event, LoginStatus, Problem, SyncState};
 use crate::store::Store;
 
 const WAIT: Duration = Duration::from_secs(20);
@@ -148,6 +148,34 @@ impl Device {
             Event::Devices(d) => Some(d.clone()),
             _ => None,
         })
+    }
+}
+
+impl Device {
+    /// Waits for what Settings would show about the username and password.
+    fn login(&mut self, what: &str, f: impl Fn(&LoginStatus) -> bool) -> LoginStatus {
+        self.wait(what, |e| match e {
+            Event::Login(l) if f(l) => Some(l.clone()),
+            _ => None,
+        })
+    }
+
+    /// Sets the account's username and password and waits for Batna Cloud's yes.
+    fn set_login(&mut self, username: &str, password: &str) -> LoginStatus {
+        self.send(Command::SetLogin { username: username.into(), password: password.into() });
+        self.login("saved", |l| l.saved)
+    }
+
+    /// Signs in with a username and password and waits until it's answered.
+    fn sign_in_password(&mut self, username: &str, password: &str, remember: bool) {
+        let command =
+            Command::SignInPassword { username: username.into(), password: password.into(), remember };
+        self.send(command);
+        self.wait("password checked", |e| matches!(e, Event::SigningIn(false)).then_some(()));
+    }
+
+    fn logged_out(cloud: &FakeCloud, name: &str) -> Self {
+        Self::new(cloud, name, None, |_, _| None)
     }
 }
 
@@ -674,4 +702,127 @@ fn a_refresh_the_vault_cannot_keep_goes_on_with_the_saved_refresh_token() {
     // The hub still takes it, so this device never gets signed out by it.
     runtime.block_on(auth.access_token(&api, now, true)).unwrap();
     assert_eq!(cloud.refreshes(), 2);
+}
+
+const PASSWORD: &str = "correct horse battery";
+
+#[test]
+fn a_password_set_on_the_phone_signs_in_a_borrowed_computer() {
+    let cloud = FakeCloud::start();
+    let mut phone = Device::signed_in(&cloud, "Galaxy S24 Ultra");
+    phone.wait_live();
+    phone.send(Command::LoadLogin);
+    let none = phone.login("no username yet", |l| l.username.is_some());
+    assert_eq!(none.username, Some(None));
+    assert!(!none.saved, "reading is not saving");
+
+    phone.send(Command::SetLogin { username: " Mo.Refaat ".into(), password: PASSWORD.into() });
+    let busy = phone.login("saving", |l| l.saving);
+    assert!(!busy.saved && busy.problem.is_none());
+    let saved = phone.login("saved", |l| l.saved);
+    assert_eq!(saved.username, Some(Some("mo.refaat".into())), "stored as typed, tidied");
+    assert!(!saved.saving);
+    phone.store.append_review(answer("hb.L01.003")).unwrap();
+    phone.send(Command::Kick);
+    phone.wait_status("sent", |s| s.pending == 0 && s.last_sync_ms.is_some());
+
+    // Someone else's computer: no Google, and nothing kept after it closes.
+    let mut pc = Device::logged_out(&cloud, "Library PC");
+    pc.wait_status("signed out", |s| s.sync == SyncState::SignedOut);
+    pc.sign_in_password("MO.REFAAT", PASSWORD, false);
+    let live = pc.wait_live();
+    assert!(live.temporary, "Settings says it ends with the app");
+    assert_eq!(live.email.as_deref(), Some(fake::EMAIL));
+    eventually("the phone's answer", || pc.store.reviews().unwrap().len() == 1);
+    assert!(pc.vault.load().is_none(), "the session stays out of the device's own vault");
+
+    // After sign-out the device's own vault is back: a remembered sign-in keeps its session.
+    pc.send(Command::SignOut);
+    let out = pc.wait_status("signed out again", |s| s.sync == SyncState::SignedOut);
+    assert!(!out.temporary);
+    pc.login("forgotten", |l| *l == LoginStatus::default());
+    pc.sign_in_password("mo.refaat", PASSWORD, true);
+    assert!(!pc.wait_live().temporary);
+    assert!(pc.vault.load().is_some(), "remembered");
+}
+
+#[test]
+fn wrong_passwords_say_so_then_wait_a_minute() {
+    let cloud = FakeCloud::start();
+    let mut phone = Device::signed_in(&cloud, "Galaxy S24 Ultra");
+    phone.wait_live();
+    phone.set_login("mo.refaat", PASSWORD);
+
+    let mut pc = Device::logged_out(&cloud, "Library PC");
+    pc.sign_in_password("mo.refaat", "correct horse batterY", true);
+    pc.wait_status("wrong", |s| s.problem == Some(Problem::WrongPassword));
+    // A name nobody has gets the same answer, so names can't be guessed.
+    pc.sign_in_password("nobody.here", PASSWORD, true);
+    pc.sign_in_password("x", PASSWORD, true);
+    // Five wrong ones for this name lock it.
+    for _ in 0..4 {
+        pc.sign_in_password("mo.refaat", "wrong again, sorry", true);
+    }
+    let locked = pc.wait_status("locked", |s| matches!(s.problem, Some(Problem::Locked(_))));
+    assert_eq!(locked.problem, Some(Problem::Locked(1)), "a minute, said in whole minutes");
+    assert_eq!(locked.sync, SyncState::SignedOut);
+    pc.sign_in_password("mo.refaat", PASSWORD, true);
+    assert!(pc.vault.load().is_none(), "even the right password waits");
+
+    // A new password from the phone lifts the lock.
+    phone.set_login("mo.refaat", "a brand new password");
+    pc.sign_in_password("mo.refaat", "a brand new password", true);
+    pc.wait_live();
+}
+
+#[test]
+fn a_new_login_is_checked_and_a_taken_name_refused() {
+    let cloud = FakeCloud::start();
+    let mut phone = Device::signed_in(&cloud, "Galaxy S24 Ultra");
+    phone.wait_live();
+    let problem = |phone: &mut Device, username: &str, password: &str| {
+        phone.send(Command::SetLogin { username: username.into(), password: password.into() });
+        phone.login("refused", |l| l.problem.is_some()).problem.unwrap()
+    };
+    assert_eq!(problem(&mut phone, "mo", PASSWORD), Problem::BadUsername);
+    assert_eq!(problem(&mut phone, "mo.refaat", "short"), Problem::ShortPassword);
+    cloud.take_username("dr.mo");
+    assert_eq!(problem(&mut phone, "dr.mo", PASSWORD), Problem::UsernameTaken);
+
+    phone.set_login("mo.refaat", PASSWORD);
+    let renamed = phone.set_login("mo.refaat.md", PASSWORD);
+    assert_eq!(renamed.username, Some(Some("mo.refaat.md".into())));
+    let mut pc = Device::logged_out(&cloud, "Library PC");
+    pc.sign_in_password("mo.refaat", PASSWORD, true);
+    pc.wait_status("the old name is free", |s| s.problem == Some(Problem::WrongPassword));
+
+    phone.send(Command::RemoveLogin);
+    phone.login("removing", |l| l.saving);
+    let removed = phone.login("removed", |l| l.saved);
+    assert_eq!(removed.username, Some(None));
+    pc.sign_in_password("mo.refaat.md", PASSWORD, true);
+    pc.wait_status("no password any more", |s| s.problem == Some(Problem::WrongPassword));
+}
+
+#[test]
+fn login_problems_reach_settings() {
+    let cloud = FakeCloud::start();
+    let mut pc = Device::logged_out(&cloud, "Library PC");
+    pc.wait_status("signed out", |s| s.sync == SyncState::SignedOut);
+    pc.send(Command::LoadLogin);
+    assert_eq!(pc.login("no account", |l| l.problem.is_some()).problem, Some(Problem::Network));
+
+    cloud.set_offline(true);
+    pc.sign_in_password("mo.refaat", PASSWORD, true);
+    pc.wait_status("no network", |s| s.problem == Some(Problem::Network));
+    cloud.set_offline(false);
+
+    let mut phone = Device::signed_in(&cloud, "Galaxy S24 Ultra");
+    phone.wait_live();
+    cloud.fail_next(1);
+    phone.send(Command::LoadLogin);
+    assert_eq!(phone.login("server", |l| l.problem.is_some()).problem, Some(Problem::Server));
+    phone.send(Command::LoadLogin);
+    let l = phone.login("answered", |l| l.username.is_some());
+    assert_eq!(l.problem, None, "the next answer clears it");
 }

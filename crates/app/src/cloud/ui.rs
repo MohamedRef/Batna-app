@@ -7,7 +7,7 @@ use batna_protocol::cloud::{DeviceSummary, Platform};
 use dioxus::prelude::*;
 use tokio::sync::mpsc::UnboundedSender;
 
-use super::{CloudStatus, Command, Event, Problem, SyncState};
+use super::{CloudStatus, Command, Event, LoginStatus, Problem, SyncState};
 use crate::i18n::cloud as tx;
 
 /// Batna Cloud state for the UI, shared through context.
@@ -16,6 +16,7 @@ pub struct Cloud {
     pub status: Signal<CloudStatus>,
     pub devices: Signal<Option<Result<Vec<DeviceSummary>, Problem>>>,
     pub signing_in: Signal<bool>,
+    pub login: Signal<LoginStatus>,
     commands: Signal<Option<UnboundedSender<Command>>>,
 }
 
@@ -36,6 +37,7 @@ pub fn use_provide_cloud() {
         status: Signal::new(CloudStatus::not_configured(device_id.clone())),
         devices: Signal::new(None),
         signing_in: Signal::new(false),
+        login: Signal::new(LoginStatus::default()),
         commands: Signal::new(None),
     });
     let review = use_context::<crate::store::Review>();
@@ -108,6 +110,7 @@ pub fn use_unconfigured_cloud() {
         status: Signal::new(CloudStatus::not_configured("test-device".into())),
         devices: Signal::new(None),
         signing_in: Signal::new(false),
+        login: Signal::new(LoginStatus::default()),
         commands: Signal::new(None),
     });
 }
@@ -115,7 +118,8 @@ pub fn use_unconfigured_cloud() {
 /// Shows one engine event. True when another device changed stored data,
 /// so the screens should read it again.
 fn mirror(event: Event, cloud: Cloud) -> bool {
-    let (mut status, mut devices, mut signing_in) = (cloud.status, cloud.devices, cloud.signing_in);
+    let (mut status, mut devices, mut signing_in, mut login) =
+        (cloud.status, cloud.devices, cloud.signing_in, cloud.login);
     match event {
         Event::Status(s) => {
             if *status.peek() != s {
@@ -124,6 +128,7 @@ fn mirror(event: Event, cloud: Cloud) -> bool {
         }
         Event::Devices(d) => devices.set(Some(d)),
         Event::SigningIn(on) => signing_in.set(on),
+        Event::Login(l) => login.set(l),
         Event::Changed(_) => return true,
     }
     false
@@ -141,6 +146,20 @@ fn problem_text(p: Problem) -> &'static str {
         Problem::Server => tx::P_SERVER,
         Problem::Outdated => tx::P_OUTDATED,
         Problem::ClockOff => tx::P_CLOCK,
+        Problem::WrongPassword => tx::P_WRONG_PASSWORD,
+        Problem::Locked(_) => tx::P_LOCKED,
+        Problem::UsernameTaken => tx::P_TAKEN,
+        Problem::BadUsername => tx::P_BAD_USERNAME,
+        Problem::ShortPassword => tx::P_SHORT_PASSWORD,
+        Problem::Mismatch => tx::P_MISMATCH,
+    }
+}
+
+/// The sentence for a problem, with the wait when the username is locked.
+fn problem_line(p: Problem) -> String {
+    match p {
+        Problem::Locked(minutes) => tx::locked(minutes),
+        p => problem_text(p).to_string(),
     }
 }
 
@@ -206,11 +225,202 @@ pub fn SyncSection() -> Element {
                 }
             }
             if let Some(p) = status.problem {
-                p { class: "small", role: "status", {problem_text(p)} }
+                p { class: "small", role: "status", {problem_line(p)} }
             }
         }
+        if status.configured && !signed_in {
+            PasswordSignIn {}
+        }
         if signed_in {
+            LoginCard {}
             DevicesCard {}
+        }
+    }
+}
+
+/// Signed out: username + password, for a device without Google.
+#[component]
+fn PasswordSignIn() -> Element {
+    let cloud = use_context::<Cloud>();
+    let mut username = use_signal(String::new);
+    let mut password = use_signal(String::new);
+    let mut theirs = use_signal(|| false);
+    let busy = *cloud.signing_in.read();
+    let ready = !username.read().trim().is_empty() && !password.read().is_empty();
+    let mut submit = move || {
+        if !ready || busy {
+            return;
+        }
+        cloud.send(Command::SignInPassword {
+            username: username.peek().clone(),
+            password: password.peek().clone(),
+            remember: !*theirs.peek(),
+        });
+        password.set(String::new());
+    };
+    rsx! {
+        section { class: "card pw-card",
+            h2 { {tx::PW_TITLE} }
+            p { class: "muted small", {tx::PW_INTRO} }
+            form { class: "pw-form",
+                onsubmit: move |e| {
+                    e.prevent_default();
+                    submit();
+                },
+                label { class: "field",
+                    span { {tx::USERNAME} }
+                    input {
+                        r#type: "text", name: "username", dir: "ltr", lang: "en",
+                        autocomplete: "username", autocapitalize: "none", spellcheck: "false",
+                        value: "{username}",
+                        oninput: move |e| username.set(e.value()),
+                    }
+                }
+                label { class: "field",
+                    span { {tx::PASSWORD} }
+                    input {
+                        r#type: "password", name: "password", dir: "ltr",
+                        autocomplete: "current-password",
+                        value: "{password}",
+                        oninput: move |e| password.set(e.value()),
+                    }
+                }
+                label { class: "pw-theirs",
+                    input {
+                        r#type: "checkbox",
+                        checked: theirs(),
+                        onchange: move |e: FormEvent| theirs.set(e.checked()),
+                    }
+                    span {
+                        {tx::NOT_MINE}
+                        small { class: "muted", {tx::NOT_MINE_HINT} }
+                    }
+                }
+                div { class: "sync-actions",
+                    button { class: "btn btn-primary", r#type: "submit", disabled: !ready || busy,
+                        if busy { {tx::PW_CHECKING} } else { {tx::PW_SIGN_IN} }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// Signed in: the username and password this account can sign in with
+/// elsewhere, set or changed here.
+#[component]
+fn LoginCard() -> Element {
+    let cloud = use_context::<Cloud>();
+    let login = cloud.login.read().clone();
+    let state = use_memo(move || cloud.status.read().sync);
+    use_effect(move || {
+        if matches!(state(), SyncState::Live | SyncState::CatchingUp) && cloud.login.peek().username.is_none()
+        {
+            cloud.send(Command::LoadLogin);
+        }
+    });
+    let current = login.username.clone().flatten();
+    let mut username = use_signal(String::new);
+    let mut password = use_signal(String::new);
+    let mut again = use_signal(String::new);
+    let mut mismatch = use_signal(|| false);
+    // The form starts from the username the account has.
+    let known = current.clone();
+    use_effect(use_reactive!(|known| {
+        if let Some(k) = known
+            && username.peek().is_empty()
+        {
+            username.set(k);
+        }
+    }));
+    let mut editing = use_signal(|| false);
+    let open = editing() || (login.username == Some(None));
+    let saved = login.saved;
+    use_effect(use_reactive!(|saved| {
+        if saved {
+            password.set(String::new());
+            again.set(String::new());
+            editing.set(false);
+        }
+    }));
+    let ready = !username.read().trim().is_empty() && !password.read().is_empty() && !again.read().is_empty();
+    let problem = if mismatch() { Some(Problem::Mismatch) } else { login.problem };
+    rsx! {
+        section { class: "card pw-card",
+            h2 { {tx::PW_TITLE} }
+            match &login.username {
+                None => rsx! { p { class: "muted", {tx::LOADING} } },
+                Some(Some(name)) => rsx! {
+                    div { class: "sync-who",
+                        span { class: "row-icon", aria_hidden: "true", {crate::icons::section("sync")} }
+                        div { class: "row-copy",
+                            small { {tx::PW_YOURS} }
+                            bdi { class: "sync-email", dir: "ltr", "{name}" }
+                        }
+                    }
+                    if saved {
+                        p { class: "small", role: "status", {tx::PW_SAVED} }
+                    }
+                    p { class: "muted small", {tx::PW_HOW} }
+                },
+                Some(None) => rsx! { p { class: "muted small", {tx::PW_NONE} } },
+            }
+            if open {
+                form { class: "pw-form",
+                    onsubmit: move |e| {
+                        e.prevent_default();
+                        if *password.peek() != *again.peek() {
+                            mismatch.set(true);
+                            return;
+                        }
+                        mismatch.set(false);
+                        cloud.send(Command::SetLogin { username: username.peek().clone(), password: password.peek().clone() });
+                    },
+                    label { class: "field",
+                        span { {tx::USERNAME} }
+                        input {
+                            r#type: "text", name: "username", dir: "ltr", lang: "en",
+                            autocomplete: "username", autocapitalize: "none", spellcheck: "false",
+                            value: "{username}",
+                            oninput: move |e| username.set(e.value()),
+                        }
+                        span { class: "field-hint", {tx::USERNAME_HINT} }
+                    }
+                    label { class: "field",
+                        span { {tx::NEW_PASSWORD} }
+                        input {
+                            r#type: "password", name: "new-password", dir: "ltr", autocomplete: "new-password",
+                            value: "{password}",
+                            oninput: move |e| { password.set(e.value()); mismatch.set(false); },
+                        }
+                        span { class: "field-hint", {tx::PASSWORD_HINT} }
+                    }
+                    label { class: "field",
+                        span { {tx::PASSWORD_AGAIN} }
+                        input {
+                            r#type: "password", name: "new-password-again", dir: "ltr", autocomplete: "new-password",
+                            value: "{again}",
+                            oninput: move |e| { again.set(e.value()); mismatch.set(false); },
+                        }
+                    }
+                    div { class: "sync-actions",
+                        if current.is_some() {
+                            button { class: "btn btn-ghost", r#type: "button", onclick: move |_| editing.set(false), {tx::CANCEL} }
+                        }
+                        button { class: "btn btn-primary", r#type: "submit", disabled: !ready || login.saving,
+                            if login.saving { {tx::PW_SAVING} } else { {tx::PW_SAVE} }
+                        }
+                    }
+                }
+            } else if current.is_some() {
+                div { class: "sync-actions",
+                    button { class: "btn btn-danger", disabled: login.saving, onclick: move |_| cloud.send(Command::RemoveLogin), {tx::PW_REMOVE} }
+                    button { class: "btn btn-secondary", onclick: move |_| editing.set(true), {tx::PW_CHANGE} }
+                }
+            }
+            if let Some(p) = problem {
+                p { class: "small", role: "status", {problem_line(p)} }
+            }
         }
     }
 }
@@ -227,6 +437,9 @@ fn SignedIn(status: CloudStatus) -> Element {
                 small { {tx::SIGNED_IN_AS} }
                 bdi { class: "sync-email", dir: "ltr", "{email}" }
             }
+        }
+        if status.temporary {
+            p { class: "small pw-temporary", role: "note", {tx::TEMPORARY} }
         }
         p { class: "sync-state muted small", aria_live: "polite",
             if let Some(state) = state_text(status.sync) {
@@ -263,7 +476,7 @@ fn DevicesCard() -> Element {
             }
             match devices {
                 None => rsx! { p { class: "muted", {tx::LOADING} } },
-                Some(Err(p)) => rsx! { p { class: "small", {problem_text(p)} } },
+                Some(Err(p)) => rsx! { p { class: "small", {problem_line(p)} } },
                 Some(Ok(list)) => rsx! {
                     ul { class: "device-list",
                         for d in list {
@@ -352,19 +565,25 @@ mod tests {
         status: CloudStatus,
         devices: Option<Result<Vec<DeviceSummary>, Problem>>,
         signing_in: bool,
+        login: LoginStatus,
         sent: Option<UnboundedSender<Command>>,
     }
 
-    thread_local! { static CASE: RefCell<Option<Case>> = const { RefCell::new(None) }; }
+    thread_local! {
+        static CASE: RefCell<Option<Case>> = const { RefCell::new(None) };
+        static CLOUD: RefCell<Option<Cloud>> = const { RefCell::new(None) };
+    }
 
     fn fixture() -> Element {
         let case = CASE.with(|c| c.borrow_mut().take()).unwrap();
-        use_context_provider(|| Cloud {
+        let cloud = use_context_provider(|| Cloud {
             status: Signal::new(case.status),
             devices: Signal::new(case.devices),
             signing_in: Signal::new(case.signing_in),
+            login: Signal::new(case.login),
             commands: Signal::new(case.sent),
         });
+        CLOUD.with(|c| *c.borrow_mut() = Some(cloud));
         rsx! { SyncSection {} }
     }
 
@@ -378,6 +597,7 @@ mod tests {
             last_sync_ms: None,
             problem: None,
             finishing_sign_in: false,
+            temporary: false,
         }
     }
 
@@ -395,7 +615,10 @@ mod tests {
         signing_in: bool,
     ) -> (String, Vec<Command>) {
         let (tx, mut rx): (_, UnboundedReceiver<Command>) = unbounded_channel();
-        CASE.with(|c| *c.borrow_mut() = Some(Case { status, devices, signing_in, sent: Some(tx) }));
+        CASE.with(|c| {
+            *c.borrow_mut() =
+                Some(Case { status, devices, signing_in, login: LoginStatus::default(), sent: Some(tx) })
+        });
         let mut dom = VirtualDom::new(fixture);
         dom.rebuild_in_place();
         // Let effects run once.
@@ -461,6 +684,7 @@ mod tests {
                 status: Signal::new(CloudStatus::not_configured("p".into())),
                 devices: Signal::new(None),
                 signing_in: Signal::new(false),
+                login: Signal::new(LoginStatus::default()),
                 commands: Signal::new(None),
             };
             assert!(!mirror(Event::SigningIn(true), cloud));
@@ -482,16 +706,133 @@ mod tests {
         devices: Option<Result<Vec<DeviceSummary>, Problem>>,
         label: &str,
     ) -> Vec<String> {
-        let (tx, mut rx): (_, UnboundedReceiver<Command>) = unbounded_channel();
-        CASE.with(|c| *c.borrow_mut() = Some(Case { status, devices, signing_in: false, sent: Some(tx) }));
-        let mut dom = VirtualDom::new(fixture);
-        dom.rebuild_in_place();
-        crate::testing::click(&mut dom, label);
-        let mut sent = Vec::new();
-        while let Ok(c) = rx.try_recv() {
-            sent.push(format!("{c:?}"));
+        let mut screen = Screen::new(status, devices, LoginStatus::default());
+        crate::testing::click(&mut screen.dom, label);
+        screen.sent()
+    }
+
+    /// Settings › Sync, live, to type into and press.
+    struct Screen {
+        dom: VirtualDom,
+        rx: UnboundedReceiver<Command>,
+    }
+
+    impl Screen {
+        fn new(
+            status: CloudStatus,
+            devices: Option<Result<Vec<DeviceSummary>, Problem>>,
+            login: LoginStatus,
+        ) -> Self {
+            let (tx, rx) = unbounded_channel();
+            CASE.with(|c| {
+                *c.borrow_mut() = Some(Case { status, devices, signing_in: false, login, sent: Some(tx) })
+            });
+            let mut dom = VirtualDom::new(fixture);
+            dom.rebuild_in_place();
+            Self { dom, rx }
         }
-        sent
+
+        fn html(&self) -> String {
+            crate::testing::html(&self.dom)
+        }
+
+        /// What it asked the engine since last time.
+        fn sent(&mut self) -> Vec<String> {
+            let mut sent = Vec::new();
+            while let Ok(c) = self.rx.try_recv() {
+                sent.push(format!("{c:?}"));
+            }
+            sent
+        }
+
+        /// The engine's answer about the username arrives.
+        fn answer(&mut self, login: LoginStatus) {
+            let mut signal = CLOUD.with(|c| *c.borrow()).unwrap().login;
+            self.dom.in_runtime(|| signal.set(login));
+            self.settle();
+        }
+
+        /// Lets effects run.
+        fn settle(&mut self) {
+            let runtime = tokio::runtime::Builder::new_current_thread().enable_all().build().unwrap();
+            runtime.block_on(async {
+                let _ = tokio::time::timeout(std::time::Duration::from_millis(20), self.dom.wait_for_work())
+                    .await;
+            });
+            self.dom.render_immediate(&mut dioxus::core::NoOpMutations);
+        }
+    }
+
+    fn login(username: Option<&str>) -> LoginStatus {
+        LoginStatus { username: Some(username.map(Into::into)), ..LoginStatus::default() }
+    }
+
+    #[test]
+    fn a_session_on_someone_elses_device_says_it_ends_with_the_app() {
+        let (html, _) = render(CloudStatus { temporary: true, ..status(SyncState::Live) }, None);
+        assert!(html.contains(tx::TEMPORARY), "{html}");
+        let (html, _) = render(status(SyncState::Live), None);
+        assert!(!html.contains(tx::TEMPORARY));
+    }
+
+    #[test]
+    fn a_device_without_google_signs_in_with_a_username_and_password() {
+        let mut screen = Screen::new(status(SyncState::SignedOut), None, LoginStatus::default());
+        let html = screen.html();
+        assert!(html.contains(tx::PW_TITLE) && html.contains(tx::NOT_MINE), "{html}");
+        // Nothing to send until both are filled in.
+        crate::testing::submit(&mut screen.dom, tx::PW_SIGN_IN);
+        assert!(screen.sent().is_empty());
+        crate::testing::type_into(&mut screen.dom, "text", "Mo.Refaat");
+        crate::testing::type_into(&mut screen.dom, "password", "correct horse battery");
+        crate::testing::type_into(&mut screen.dom, "checkbox", "true");
+        crate::testing::submit(&mut screen.dom, tx::PW_SIGN_IN);
+        assert_eq!(screen.sent(), ["SignInPassword { username: \"Mo.Refaat\", remember: false }"]);
+        assert!(!screen.html().contains("correct horse"), "the password field empties");
+
+        let (html, _) = render_with(status(SyncState::SignedOut), None, true);
+        assert!(html.contains(tx::PW_CHECKING), "{html}");
+    }
+
+    #[test]
+    fn signed_in_he_sets_changes_and_removes_his_password() {
+        let live = status(SyncState::Live);
+        let mut screen = Screen::new(live.clone(), None, LoginStatus::default());
+        screen.settle();
+        assert!(screen.sent().contains(&"LoadLogin".to_string()), "it asks once it's live");
+        assert!(screen.html().contains(tx::LOADING));
+
+        // No username yet: the form is open.
+        screen.answer(login(None));
+        assert!(screen.html().contains(tx::PW_NONE));
+        crate::testing::type_into(&mut screen.dom, "text", "mo.refaat");
+        crate::testing::type_nth(&mut screen.dom, "password", 0, "correct horse battery");
+        crate::testing::type_nth(&mut screen.dom, "password", 1, "correct horse batterY");
+        crate::testing::submit(&mut screen.dom, tx::PW_SAVE);
+        assert!(screen.sent().is_empty(), "the two passwords differ");
+        assert!(screen.html().contains(&problem_line(Problem::Mismatch)));
+        crate::testing::type_nth(&mut screen.dom, "password", 1, "correct horse battery");
+        assert!(!screen.html().contains(&problem_line(Problem::Mismatch)), "typing again clears it");
+        crate::testing::submit(&mut screen.dom, tx::PW_SAVE);
+        assert_eq!(screen.sent(), ["SetLogin { username: \"mo.refaat\" }"], "the password stays out of logs");
+
+        screen.answer(LoginStatus { saving: true, ..login(None) });
+        assert!(screen.html().contains(tx::PW_SAVING));
+        screen.answer(LoginStatus { saved: true, ..login(Some("mo.refaat")) });
+        let html = screen.html();
+        assert!(html.contains(tx::PW_SAVED) && html.contains("mo.refaat"), "{html}");
+        assert!(!html.contains(tx::PW_SAVE) && html.contains(tx::PW_CHANGE), "the form closes");
+
+        // Change opens the form with his username; Cancel closes it.
+        crate::testing::click(&mut screen.dom, tx::PW_CHANGE);
+        assert!(screen.html().contains(tx::PW_SAVE) && screen.html().contains(r#"value="mo.refaat""#));
+        crate::testing::click(&mut screen.dom, tx::CANCEL);
+        assert!(!screen.html().contains(tx::PW_SAVE));
+        crate::testing::click(&mut screen.dom, tx::PW_REMOVE);
+        assert_eq!(screen.sent(), ["RemoveLogin"]);
+
+        screen.answer(LoginStatus { problem: Some(Problem::Locked(3)), ..login(Some("mo.refaat")) });
+        assert!(screen.html().contains(&tx::locked(3)));
     }
 
     #[test]
@@ -575,7 +916,8 @@ mod tests {
             assert!(html.contains(d), "missing icon {d}");
         }
         let (html, _) = render(status(SyncState::Offline), Some(Err(Problem::Network)));
-        assert!(html.contains(tx::P_NETWORK) && !html.contains(tx::LOADING));
+        assert!(html.contains(tx::P_NETWORK));
+        assert_eq!(html.matches(tx::LOADING).count(), 1, "only the username card still waits");
     }
 
     #[test]

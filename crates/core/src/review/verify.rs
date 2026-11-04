@@ -325,6 +325,99 @@ mod tests {
     }
 
     #[test]
+    fn verdict_names_round_trip() {
+        for v in [Verdict::Approved, Verdict::Edited, Verdict::Wrong] {
+            assert_eq!(Verdict::parse(v.as_str()), Some(v));
+        }
+        assert_eq!(Verdict::parse("maybe"), None);
+    }
+
+    /// Every field the ✎ editor offers, changed: the edit lands on exactly
+    /// that field, and `diff` stores only it.
+    #[test]
+    fn every_offered_field_can_be_edited_and_only_changes_are_stored() {
+        for item in sample().items {
+            let fields = editable_fields(&item.body);
+            assert!(!fields.is_empty(), "{}", item.body.kind());
+            assert!(diff(&item.body, &fields).is_empty(), "{}: nothing changed", item.body.kind());
+            for (key, value) in &fields {
+                let changed = match value {
+                    FieldValue::Text(t) => FieldValue::Text(format!("{t} (edited)")),
+                    FieldValue::List(l) => FieldValue::List(l.iter().map(|x| format!("{x}!")).collect()),
+                    FieldValue::Index(i) => FieldValue::Index(i + 1),
+                };
+                let edit = diff(&item.body, &[(*key, changed.clone())]);
+                assert_eq!(
+                    edit,
+                    Edit::from([(key.to_string(), changed.clone())]),
+                    "{}.{key}",
+                    item.body.kind()
+                );
+                let after = editable_fields(&apply_edit(&item.body, &edit));
+                let got = after.iter().find(|(k, _)| k == key).map(|(_, v)| v.clone());
+                assert_eq!(got, Some(changed), "{}.{key} applied", item.body.kind());
+                // The other fields stay as written.
+                let others = |f: &[(&'static str, FieldValue)]| {
+                    f.iter().filter(|(k, _)| k != key).cloned().collect::<Vec<_>>()
+                };
+                assert_eq!(others(&after), others(&fields), "{}.{key}", item.body.kind());
+            }
+        }
+    }
+
+    #[test]
+    fn blank_optional_text_clears_and_wrong_shapes_are_ignored() {
+        let cloze = item("cloze");
+        let cleared = apply_edit(&cloze.body, &Edit::from([("extra".into(), FieldValue::Text("  ".into()))]));
+        assert!(matches!(cleared, Body::Cloze { extra: None, .. }));
+        let calc = item("calc");
+        let asked =
+            apply_edit(&calc.body, &Edit::from([("question".into(), FieldValue::Text("Class?".into()))]));
+        assert!(matches!(asked, Body::Calc { question: Some(q), .. } if q == "Class?"));
+        // A list for a text field, or a field the kind lacks: ignored.
+        let card = item("card");
+        let odd = Edit::from([
+            ("front".into(), FieldValue::List(vec!["x".into()])),
+            ("stem".into(), FieldValue::Text("no stem on a card".into())),
+        ]);
+        assert_eq!(apply_edit(&card.body, &odd), card.body);
+        // An enumerate cut below its pass mark stays passable.
+        let e = item("enumerate");
+        let one =
+            apply_edit(&e.body, &Edit::from([("points".into(), FieldValue::List(vec!["Only one".into()]))]));
+        assert!(matches!(one, Body::Enumerate { pass: 1, .. }), "{one:?}");
+    }
+
+    #[test]
+    fn the_editor_explains_why_an_edit_cannot_be_saved() {
+        let problem = |kind: &str, key: &str, v: FieldValue| {
+            edit_problem(&item(kind).body, &Edit::from([(key.to_string(), v)]))
+        };
+        let text = |s: &str| FieldValue::Text(s.into());
+        let list = |l: &[&str]| FieldValue::List(l.iter().map(|s| s.to_string()).collect());
+        assert_eq!(problem("card", "back", text(" ")), Some("الوش والضهر لازم يكون فيهم كلام."));
+        assert_eq!(problem("card", "back", text("ok")), None);
+        assert_eq!(
+            problem("cloze", "text", text("no blanks")),
+            Some("الفراغات لازم تكون بالشكل ده: {{c1::الإجابة}}")
+        );
+        assert_eq!(problem("cloze", "text", text("{{c1::Fibrosis}} and nodules")), None);
+        assert_eq!(
+            problem("mcq", "options", list(&["a", " ", "c", "d", "e"])),
+            Some("كل اختيار في سطر، ومفيش سطر فاضي.")
+        );
+        assert_eq!(problem("mcq", "options", list(&["a", "b"])), Some("لازم سطر شرح لكل اختيار."));
+        assert_eq!(
+            problem("mcq", "answer", FieldValue::Index(9)),
+            Some("رقم الإجابة الصح أكبر من عدد الاختيارات.")
+        );
+        assert_eq!(problem("mcq", "answer", FieldValue::Index(0)), None);
+        assert_eq!(problem("enumerate", "points", list(&["a", ""])), Some("كل نقطة في سطر، ومفيش سطر فاضي."));
+        assert_eq!(problem("order", "steps", list(&[])), Some("كل نقطة في سطر، ومفيش سطر فاضي."));
+        assert_eq!(problem("essay", "prompt", text("")), None, "free text the note explains");
+    }
+
+    #[test]
     fn unjudged_items_ask_and_verdicts_settle_or_hide() {
         let card = item("card");
         assert_eq!(check(&card, None), Check::Ask);

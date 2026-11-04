@@ -174,6 +174,31 @@ pub fn Planner(data: Rc<StudyData>) -> Element {
     }
 }
 
+/// The settings after "Save" on the setup card: an exam day after today and
+/// within reach, at least one study day, and the review cap kept in bounds.
+/// `Err` holds the line that says what to fix.
+fn edited(
+    old: &PlanSettings,
+    today: Day,
+    date: &str,
+    weekdays: [bool; 7],
+    cap: u32,
+) -> Result<PlanSettings, &'static str> {
+    let exam = Day::parse(date).filter(|d| *d > today).ok_or(tx::PICK_DAY)?;
+    if !plan::exam_day_ok(today, exam) {
+        return Err(tx::PICK_DAY_FAR);
+    }
+    if !weekdays.contains(&true) {
+        return Err(tx::PICK_WEEKDAY);
+    }
+    Ok(PlanSettings {
+        exam: Some(exam),
+        weekdays,
+        review_cap: cap.clamp(30, plan::MAX_REVIEW_CAP),
+        ..old.clone()
+    })
+}
+
 #[component]
 fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Element {
     let mut date = use_signal(|| settings.exam.map(Day::iso).unwrap_or_default());
@@ -184,24 +209,15 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
     let min = today.plus(1).iso();
     let max = today.plus(plan::MAX_DAYS_AHEAD).iso();
     let save = move |_| {
-        let Some(exam) = Day::parse(&date.read()).filter(|d| *d > today) else {
-            error.set(Some(tx::PICK_DAY));
-            return;
-        };
-        if !plan::exam_day_ok(today, exam) {
-            error.set(Some(tx::PICK_DAY_FAR));
-            return;
-        }
-        if !weekdays.read().contains(&true) {
-            error.set(Some(tx::PICK_WEEKDAY));
-            return;
-        }
         let mut s = SETTINGS.write();
-        s.exam = Some(exam);
-        s.weekdays = *weekdays.read();
-        s.review_cap = (*cap.read()).clamp(30, plan::MAX_REVIEW_CAP);
-        save(&s);
-        on_done.call(());
+        match edited(&s, today, &date.read(), *weekdays.read(), *cap.read()) {
+            Ok(fresh) => {
+                *s = fresh;
+                save(&s);
+                on_done.call(());
+            }
+            Err(msg) => error.set(Some(msg)),
+        }
     };
     rsx! {
         crate::ui::Card { class: "plan-setup",
@@ -582,7 +598,10 @@ fn short_date(d: Day) -> String {
 }
 
 #[cfg(test)]
-mod tests {
+mod tests;
+
+#[cfg(test)]
+mod date_tests {
     use super::*;
 
     #[test]

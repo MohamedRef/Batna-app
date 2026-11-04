@@ -87,9 +87,12 @@ fn main() {
     let pack = out.join("content.pack");
     std::fs::write(&pack, Pack::new(index, lectures).with_lessons(lessons).with_program(program).encode())
         .unwrap();
-    std::fs::write(
-        out.join("embedded.rs"),
-        format!("pub const PACK: &[u8] = include_bytes!({:?});\n", pack.display().to_string()),
-    )
-    .unwrap();
+    // The web app fetches the pack as its own file (scripts/web/build.sh copies
+    // it next to the wasm), so a content change doesn't re-send the code.
+    let embedded = if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() == Ok("wasm32") {
+        "pub const PACK: &[u8] = &[];\n".to_string()
+    } else {
+        format!("pub const PACK: &[u8] = include_bytes!({:?});\n", pack.display().to_string())
+    };
+    std::fs::write(out.join("embedded.rs"), embedded).unwrap();
 }

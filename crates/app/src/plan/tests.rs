@@ -216,3 +216,92 @@ fn days_list_their_lectures_and_reviews() {
     }
     assert_ne!(focus_label(Focus::Mock), focus_label(Focus::WeakTopics));
 }
+
+thread_local! {
+    static SEEN: std::cell::Cell<Option<crate::Ui>> = const { std::cell::Cell::new(None) };
+}
+
+#[component]
+fn Spy() -> Element {
+    SEEN.set(Some(use_context::<crate::Ui>()));
+    rsx! {}
+}
+
+fn pressable(settings: PlanSettings, n: usize) -> crate::tap_dom::TestDom {
+    fn app(case: Case) -> Element {
+        use_hook(|| *SETTINGS.write() = case.settings.clone());
+        let data = use_hook(|| Rc::new(data(case.n)));
+        rsx! {
+            crate::browser_fixture::Shell { screen: crate::Screen::Stats, focus: false,
+                Spy {}
+                Planner { data }
+            }
+        }
+    }
+    crate::store::use_memory_store();
+    crate::tap_dom::TestDom::new(VirtualDom::new_with_props(app, Case { settings, n }))
+}
+
+fn screen(t: &crate::tap_dom::TestDom) -> crate::Screen {
+    t.with(|| *SEEN.get().unwrap().screen.peek())
+}
+
+#[test]
+fn the_setup_card_saves_a_plan_or_says_what_is_missing() {
+    let mut t = pressable(PlanSettings::default(), 3);
+    t.click(tx::SAVE);
+    assert!(t.html().contains(tx::PICK_DAY) && t.html().contains("role=\"alert\""), "{}", t.html());
+    let day = today().plus(40).iso();
+    t.input("type=\"date\"", &day);
+    assert!(!t.html().contains("role=\"alert\""), "typing clears the error");
+    // Every weekday off: at least one is needed.
+    for name in tx::WEEKDAYS {
+        if t.html().contains(&format!("aria-pressed=\"true\">{name}")) {
+            t.click(name);
+        }
+    }
+    assert_eq!(t.html().matches("aria-pressed=\"true\"").count(), 0, "{}", t.html());
+    t.click(tx::SAVE);
+    assert!(t.html().contains(tx::PICK_WEEKDAY), "{}", t.html());
+    t.click(tx::WEEKDAYS[0]);
+    t.input("type=\"number\"", "not a number");
+    t.input("type=\"number\"", "150");
+    t.click(tx::SAVE);
+    let saved = t.with(|| SETTINGS.peek().clone());
+    assert_eq!(saved.exam, Some(today().plus(40)));
+    assert_eq!(saved.review_cap, 150);
+    assert_eq!(saved.weekdays.iter().filter(|d| **d).count(), 1);
+    assert!(t.html().contains(tx::EDIT), "the plan replaces the setup: {}", t.html());
+
+    // Edit opens the setup with Cancel; Cancel goes back unchanged.
+    t.click(tx::EDIT);
+    assert!(t.html().contains(tx::CANCEL) && t.html().contains(&format!("value=\"{day}\"")), "{}", t.html());
+    t.click(tx::CANCEL);
+    assert!(t.html().contains(tx::EDIT));
+    // What was saved comes back after a sync.
+    t.with(|| {
+        *SETTINGS.write() = PlanSettings::default();
+        reload();
+        assert_eq!(*SETTINGS.peek(), saved);
+        // Leave the shared test store as other tests expect it.
+        save(&PlanSettings::default());
+    });
+}
+
+#[test]
+fn the_plans_buttons_start_a_session_or_open_what_they_show() {
+    let mut t = pressable(exam_in(60), 3);
+    t.click(tx::REVIEWS);
+    assert_eq!(screen(&t), crate::Screen::Study, "today's reviews");
+    assert!(t.with(|| crate::study::START.peek().as_ref().is_some_and(|s| s.lectures.is_none())));
+    t.with(|| SEEN.get().unwrap().screen.set(crate::Screen::Stats));
+    if t.html().contains(&format!("<span class=\"big-label\">{}", tx::NEW_ITEMS)) {
+        t.click(&format!("<span class=\"big-label\">{}", tx::NEW_ITEMS));
+        assert!(t.with(|| crate::study::START.peek().as_ref().is_some_and(|s| s.lectures.is_some())));
+    }
+    t.click(tx::PROGRESS_HINT);
+    assert_eq!(screen(&t), crate::Screen::Stats);
+    t.click(tx::DAY_HINT);
+    assert!(t.with(crate::lecture::is_open), "a day opens its first lecture");
+    t.with(crate::lecture::close_all);
+}

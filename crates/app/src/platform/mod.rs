@@ -18,3 +18,6 @@ pub mod update_notice;
 #[cfg(target_arch = "wasm32")]
 pub mod web;
 pub mod webview_guard;
+
+#[cfg(all(test, not(target_os = "android"), not(target_os = "macos")))]
+mod desktop_tests;

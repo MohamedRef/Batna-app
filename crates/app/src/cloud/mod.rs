@@ -21,6 +21,13 @@ pub mod session;
 mod socket;
 mod ui;
 
+#[cfg(test)]
+mod e2e;
+#[cfg(test)]
+mod fake;
+#[cfg(test)]
+mod sync_tests;
+
 use std::collections::BTreeSet;
 #[cfg(not(target_arch = "wasm32"))]
 use std::path::PathBuf;
@@ -41,6 +48,8 @@ pub struct GoogleClient {
 /// Batna Cloud, for builds that don't say otherwise (the web app).
 #[cfg(target_arch = "wasm32")]
 const DEFAULT_CLOUD_URL: &str = "https://batna-cloud.hamorefaat85.workers.dev";
+#[cfg(test)]
+pub use ui::use_unconfigured_cloud;
 pub use ui::{SyncSection, ago, use_provide_cloud};
 
 /// Where Batna Cloud is and which Google client signs in. Set at build time
@@ -69,15 +78,27 @@ impl CloudConfig {
 
     #[cfg(not(target_arch = "wasm32"))]
     pub fn from_env() -> Option<Self> {
-        let var = |name: &str, built: Option<&'static str>| {
-            std::env::var(name).ok().or(built.map(String::from)).filter(|v| !v.trim().is_empty())
+        let built = |name: &str| match name {
+            "BATNA_CLOUD_URL" => option_env!("BATNA_CLOUD_URL"),
+            "BATNA_GOOGLE_CLIENT_ID" => option_env!("BATNA_GOOGLE_CLIENT_ID"),
+            "BATNA_GOOGLE_CLIENT_SECRET" => option_env!("BATNA_GOOGLE_CLIENT_SECRET"),
+            _ => None,
         };
-        let base_url = var("BATNA_CLOUD_URL", option_env!("BATNA_CLOUD_URL"))?;
-        let google = var("BATNA_GOOGLE_CLIENT_ID", option_env!("BATNA_GOOGLE_CLIENT_ID")).map(|client_id| {
-            GoogleClient {
-                client_id,
-                client_secret: var("BATNA_GOOGLE_CLIENT_SECRET", option_env!("BATNA_GOOGLE_CLIENT_SECRET")),
-            }
+        Self::from_vars(|name| std::env::var(name).ok(), built)
+    }
+
+    /// A run-time variable wins over the build's; blank means unset.
+    #[cfg(not(target_arch = "wasm32"))]
+    fn from_vars(
+        run: impl Fn(&str) -> Option<String>,
+        built: impl Fn(&str) -> Option<&'static str>,
+    ) -> Option<Self> {
+        let var = |name: &str| run(name).or(built(name).map(String::from)).filter(|v| !v.trim().is_empty());
+        let base_url = var("BATNA_CLOUD_URL")?;
+        let google = var("BATNA_GOOGLE_CLIENT_ID").map(|client_id| GoogleClient {
+            client_id,
+            client_secret: var("BATNA_GOOGLE_CLIENT_SECRET"),
+            endpoints: Default::default(),
         });
         Some(Self { base_url, google })
     }
@@ -395,4 +416,52 @@ fn android_open_url(url: &str) -> Result<(), String> {
         )?;
         Ok(())
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_cloud_comes_from_the_build_unless_the_run_says_otherwise() {
+        let built = |name: &str| match name {
+            "BATNA_CLOUD_URL" => Some("https://batna-cloud.example.workers.dev"),
+            "BATNA_GOOGLE_CLIENT_ID" => Some("desk.apps.googleusercontent.com"),
+            _ => None,
+        };
+        let c = CloudConfig::from_vars(|_| None, built).unwrap();
+        assert_eq!(c.base_url, "https://batna-cloud.example.workers.dev");
+        let g = c.google.unwrap();
+        assert_eq!(g.client_id, "desk.apps.googleusercontent.com");
+        assert_eq!(g.client_secret, None);
+        assert!(g.endpoints.auth.starts_with("https://accounts.google.com/"));
+
+        // A local server for development, and a blank client id means no Google.
+        let run = |name: &str| match name {
+            "BATNA_CLOUD_URL" => Some("http://127.0.0.1:8787".to_string()),
+            "BATNA_GOOGLE_CLIENT_ID" => Some("  ".to_string()),
+            _ => None,
+        };
+        let c = CloudConfig::from_vars(run, built).unwrap();
+        assert_eq!(c.base_url, "http://127.0.0.1:8787");
+        assert!(c.google.is_none());
+
+        // No URL anywhere: this build has no Batna Cloud.
+        assert!(CloudConfig::from_vars(|_| None, |_| None).is_none());
+    }
+
+    #[test]
+    fn only_a_mac_reads_its_computer_name() {
+        // scutil exists only on macOS; elsewhere the name falls back.
+        assert_eq!(mac_name().is_some(), cfg!(target_os = "macos"));
+        assert_eq!(browser_name(), "Browser");
+    }
+
+    #[test]
+    fn a_new_device_starts_signed_out_and_unconfigured() {
+        let s = CloudStatus::not_configured("dev-9".into());
+        assert!(!s.configured);
+        assert_eq!((s.sync, s.pending, s.problem), (SyncState::SignedOut, 0, None));
+        assert_eq!(s.device_id, "dev-9");
+    }
 }

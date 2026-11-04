@@ -10,7 +10,7 @@
 //! any 3 of INR > 3.5, bilirubin > 17.5 mg/dL, jaundice-to-encephalopathy >
 //! 7 days, age < 10 or > 40 years, indeterminate or drug-induced cause.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, normals, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, normals, num};
 
 const CAUSE: &[(&str, &str)] = &[
     ("acetaminophen", "Acetaminophen (paracetamol)"),
@@ -111,6 +111,35 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+/// Next steps and differential, shared with the Clichy criteria (book
+/// Lecture 10, pp. 178–187).
+pub const GUIDES: &[(&str, Guide)] = &[
+    ("kings.met", Guide { next: LIST_NOW, dd: ALF_DD }),
+    ("kings.not_met", Guide { next: REASSESS, dd: ALF_DD }),
+];
+
+pub(super) const LIST_NOW: &[&str] = &[
+    "Transfer to a transplant centre and list for emergent liver transplantation (pp. 183, 187)",
+    "Intensive care: from encephalopathy stage 3, intubation and ICP monitoring; hypertonic saline to sodium 145–155 (p. 179)",
+    "Dextrose to keep glucose 100–200 mg/dL; norepinephrine if needed; blood cultures and a low threshold for antibiotics (pp. 178, 180)",
+    "N-acetylcysteine for paracetamol (up to 72 h) and in early encephalopathy of any cause; it lengthens the PT by itself (pp. 180–181)",
+    "By cause: a nucleoside analogue for hepatitis B, acyclovir for herpes simplex, plasmapheresis with penicillamine for Wilson disease (p. 181)",
+];
+
+pub(super) const REASSESS: &[&str] = &[
+    "Reassess every day: falling transaminases with rising bilirubin and INR and a shrinking liver are poor signs (p. 186)",
+    "Any encephalopathy: intensive care review and a call to a transplant centre (p. 184)",
+    "A subacute course or an unknown cause does badly without transplant: discuss early (p. 184)",
+    "MELD above 32 also predicts poor transplant-free survival (p. 186)",
+    "Treat the cause: N-acetylcysteine for paracetamol (up to 72 h), antivirals for hepatitis B or herpes simplex (pp. 180–181)",
+];
+
+pub(super) const ALF_DD: &[&str] = &[
+    "Secondary liver failure, where emergent transplant is not a treatment: ischaemic hepatitis; lymphoma, infiltration or haemophagocytic syndrome; malaria, leptospirosis or rickettsia; extensive liver resection (p. 185)",
+    "Severe alcoholic hepatitis: chronic disease with an acute picture, also not for emergent transplant (p. 185)",
+    "Chronic disease that may still qualify: Wilson disease, autoimmune hepatitis, Budd-Chiari, hepatitis B reactivation (p. 185)",
+];
 
 #[cfg(test)]
 mod tests {

@@ -6,6 +6,7 @@ pub mod content;
 pub mod exam;
 pub mod glossary;
 pub mod ids;
+pub mod labs;
 pub mod layout;
 pub mod lesson;
 pub mod own;

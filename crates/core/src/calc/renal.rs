@@ -14,7 +14,7 @@
 //! = 2 × Na + glucose/18 + BUN/2.8 (mg/dL); a gap above 10 mOsm is an
 //! osmolal gap (p. 20).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, normals, num, show};
 
 const NA: super::Field = num("na_meq_l", "Sodium", "mEq/L", 90.0, 200.0, 1.0).normal_as(normals::SODIUM);
 const CL: super::Field = num("cl_meq_l", "Chloride", "mEq/L", 50.0, 160.0, 1.0).normal_as(normals::CHLORIDE);
@@ -289,6 +289,220 @@ fn osmolal_gap(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: vec![format!("Calculated osmolality {} mOsm/kg.", show(calculated, 1))],
     })
 }
+
+/// Next steps and differential per band (book Nephrology Lecture 1,
+/// pp. 7–22, and the Diabetology book p. 193). Where the book is silent: the
+/// urine anion gap from Batlle et al., N Engl J Med 1988; a normal osmolal
+/// gap late after a toxic alcohol from Kraut and Kurtz, Clin J Am Soc
+/// Nephrol 2008.
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "anion_gap.high",
+        Guide {
+            next: &[
+                "Work out the delta ratio: a ratio far from 1 means a second disorder (pp. 10–12)",
+                "Name the anion: lactate, ketones, urea and creatinine, a salicylate level (pp. 8–9)",
+                "If an alcohol or glycol is possible, measure the osmolality for an osmolal gap (p. 20)",
+                "In hyperglycaemia, use the measured sodium, not the corrected one (pp. 7–8)",
+                "Check the expected pCO2 (1.5 × HCO3 + 8 ± 2) for a respiratory disorder as well (p. 14)",
+            ],
+            dd: HIGH_AG_DD,
+        },
+    ),
+    (
+        "anion_gap.normal",
+        Guide {
+            next: &[
+                "If the HCO3 is low, this is a normal anion gap (hyperchloraemic) metabolic acidosis (pp. 8–9)",
+                "Enter the albumin: each 1 g/dL below 4.0 hides 2.5 of gap, so a normal gap can be a high one (p. 9)",
+                "Labs that use ion-selective electrodes read lower (3–11): use your lab's range (p. 7)",
+                "Urine anion gap (Na + K − Cl): negative with loss in the stool, positive in distal renal tubular acidosis (Batlle 1988)",
+            ],
+            dd: NORMAL_AG_DD,
+        },
+    ),
+    (
+        "anion_gap.low",
+        Guide {
+            next: &[
+                "Check the albumin first: after a lab error, the commonest cause in hospital (p. 9)",
+                "Repeat the electrolytes to rule out a lab error (p. 9)",
+            ],
+            dd: &[
+                "Low albumin (p. 10)",
+                "Added cations: IgG myeloma, high calcium or magnesium, lithium toxicity (p. 10)",
+                "Bromide or salicylate read as chloride (p. 10)",
+                "Very high triglycerides upsetting the assay (p. 10)",
+            ],
+        },
+    ),
+    (
+        "delta_ratio.normal_ag",
+        Guide {
+            next: &[
+                "The acidosis is a normal anion gap one: look for bicarbonate lost in stool or urine (p. 9)",
+                "In hospital, think of saline or the recovery phase of DKA first (p. 9; Diabetology p. 193)",
+                "Urine anion gap (Na + K − Cl): negative with loss in the stool, positive in distal renal tubular acidosis (Batlle 1988)",
+            ],
+            dd: NORMAL_AG_DD,
+        },
+    ),
+    (
+        "delta_ratio.mixed",
+        Guide {
+            next: &[
+                "Two acidoses together: a high anion gap and a normal anion gap acidosis (pp. 11–12)",
+                "Find and treat the cause of each part (pp. 8–9)",
+                "In DKA the ratio falls from 2 early to 0 late, and saline adds chloride: time the sample (p. 11; Diabetology p. 193)",
+            ],
+            dd: &[
+                "DKA in the recovery phase or after saline (p. 9; Diabetology p. 193)",
+                "Renal failure: retained anions plus less ammonium excretion (pp. 8–9)",
+                "Diarrhoea together with a lactic acidosis or ketoacidosis (pp. 8–9)",
+            ],
+        },
+    ),
+    (
+        "delta_ratio.pure_high",
+        Guide {
+            next: &[
+                "A simple high anion gap acidosis: find the anion with MUDPILES (p. 9)",
+                "Lactic acidosis averages 1.6, because cells buffer up to half the acid (p. 11)",
+                "Check the expected pCO2 (1.5 × HCO3 + 8 ± 2) for a respiratory disorder as well (p. 14)",
+            ],
+            dd: HIGH_AG_DD,
+        },
+    ),
+    (
+        "delta_ratio.with_alkalosis",
+        Guide {
+            next: &[
+                "The HCO3 is higher than the gap explains: a metabolic alkalosis on top (p. 11)",
+                "Or a compensated chronic respiratory acidosis that raised the HCO3 beforehand (p. 12)",
+                "Early DKA can reach 2 before the ketones are excreted (p. 11)",
+                "Urine chloride sorts the cause of the alkalosis (p. 17)",
+            ],
+            dd: &[
+                "Vomiting, nasogastric suction or diuretics with a high anion gap acidosis (pp. 16–17)",
+                "Chronic respiratory acidosis, such as COPD, with a raised HCO3 (pp. 12, 19)",
+            ],
+        },
+    ),
+    (
+        "expected_compensation.appropriate",
+        Guide {
+            next: &[
+                "A simple disorder: in a metabolic acidosis, go on to the anion gap (p. 20)",
+                "If the gap is high, then the delta ratio, then the differential (p. 20)",
+                "In a metabolic alkalosis, urine chloride sorts the cause (p. 17)",
+            ],
+            dd: &[
+                "The causes of the primary disorder: metabolic acidosis (pp. 8–9), metabolic alkalosis (p. 16), respiratory acidosis (pp. 18–19), respiratory alkalosis (p. 19)",
+            ],
+        },
+    ),
+    (
+        "expected_compensation.added_resp_acidosis",
+        Guide {
+            next: &[
+                "The pCO2 did not fall as far as expected: ventilation is failing (p. 13)",
+                "Find the cause: drugs that depress breathing, weak muscles, a blocked airway or lung disease (pp. 18–19)",
+            ],
+            dd: &[
+                "Depressed breathing: sedatives, opiates, anaesthetics, brain injury or stroke (p. 18)",
+                "Weak muscles: myasthenia crisis, Guillain-Barré syndrome, low potassium or phosphate (p. 18)",
+                "Airway or lung: aspiration, severe asthma or pneumonia, pulmonary oedema, COPD (pp. 18–19)",
+            ],
+        },
+    ),
+    (
+        "expected_compensation.added_resp_alkalosis",
+        Guide {
+            next: &[
+                "The pCO2 fell more than compensation explains: something is driving the breathing (p. 13)",
+                "Salicylates give a respiratory alkalosis first, then a high anion gap acidosis: check a level (p. 22)",
+            ],
+            dd: &[
+                "Gram-negative sepsis, liver failure, pregnancy, fever or thyrotoxicosis (p. 19)",
+                "Drugs: salicylates, progesterone, xanthines, catecholamines (pp. 19, 22)",
+                "Lung disease (pneumonia, pulmonary embolus, pulmonary oedema) or anxiety (p. 19)",
+            ],
+        },
+    ),
+    (
+        "expected_compensation.added_met_alkalosis",
+        Guide {
+            next: &[
+                "The HCO3 is higher than expected: a metabolic alkalosis on top (p. 13)",
+                "Urine chloride below 10–20 points to vomiting or diuretics given earlier; above it, to diuretics now, alkali or mineralocorticoid excess (p. 17)",
+                "A chronic high pCO2 corrected quickly leaves the HCO3 high: posthypercapnic alkalosis (p. 16)",
+            ],
+            dd: &[
+                "Vomiting or nasogastric suction (p. 16)",
+                "Loop or thiazide diuretics (p. 16)",
+                "Alkali: bicarbonate, citrate in transfusions, antacids (p. 16)",
+                "Mineralocorticoid excess: primary aldosteronism, Cushing syndrome, liquorice (p. 16)",
+                "Severe potassium deficiency; Bartter or Gitelman syndrome (p. 16)",
+            ],
+        },
+    ),
+    (
+        "expected_compensation.added_met_acidosis",
+        Guide {
+            next: &[
+                "The HCO3 is lower than expected: a metabolic acidosis on top (p. 13)",
+                "Work out the anion gap, then the delta ratio (p. 20)",
+            ],
+            dd: &[
+                "High anion gap: lactate, ketones, uraemia, toxins (pp. 8–9)",
+                "Normal anion gap: diarrhoea, renal tubular acidosis, saline (p. 9)",
+            ],
+        },
+    ),
+    (
+        "osmolal_gap.present",
+        Guide {
+            next: &[
+                "With a high anion gap acidosis, suspect methanol or ethylene glycol: fomepizole or ethanol, with dialysis as needed (p. 22)",
+                "Clues: visual loss in methanol; AKI and calcium oxalate crystals in the urine in ethylene glycol (p. 22)",
+                "A gap with no acidosis fits isopropanol (acetone, fruity breath) or ethanol (p. 22)",
+            ],
+            dd: &[
+                "Ethylene glycol, methanol, ethanol or isopropyl alcohol (p. 21)",
+                "Ketoacidosis or lactic acidosis; kidney failure without dialysis (p. 21)",
+                "Infused mannitol, glycine or sorbitol (p. 21)",
+                "Very high protein or lipids; a lab error (p. 21)",
+                "Formaldehyde, paraldehyde or diethyl ether (p. 21)",
+            ],
+        },
+    ),
+    (
+        "osmolal_gap.normal",
+        Guide {
+            next: &[
+                "A normal gap does not rule out a toxic alcohol taken hours ago, once it has turned into its acid (Kraut 2008)",
+                "So if one is suspected, go by the history and the anion gap: all but isopropanol raise it (p. 22)",
+            ],
+            dd: &[],
+        },
+    ),
+];
+
+const HIGH_AG_DD: &[&str] = &[
+    "Lactic acidosis; D-lactate after small-bowel resection (p. 8)",
+    "Ketoacidosis: diabetic, alcoholic or starvation (pp. 8–9)",
+    "Uraemia: renal failure (pp. 8–9)",
+    "Methanol or ethylene glycol: look for an osmolal gap (pp. 9, 20)",
+    "Salicylates, paracetamol, propylene glycol, iron, isoniazid, toluene (pp. 8–9)",
+];
+
+const NORMAL_AG_DD: &[&str] = &[
+    "Bicarbonate lost in stool: diarrhoea, ureterosigmoidostomy or an ileal conduit (p. 9)",
+    "Renal tubular acidosis: proximal (type II), distal (type I) or type IV (p. 9)",
+    "Acetazolamide, spironolactone or cholestyramine (pp. 9, 15)",
+    "Saline infusion or parenteral nutrition (pp. 9, 15)",
+    "Recovery from ketoacidosis; CKD stage 4–5; Addison disease (pp. 9, 15)",
+];
 
 #[cfg(test)]
 mod tests {

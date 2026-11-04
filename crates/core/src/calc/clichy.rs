@@ -5,7 +5,7 @@
 //! encephalopathy stage 3–4 (confusion or coma) and factor V < 20% of normal
 //! below age 30, or < 30% from age 30.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "clichy",
@@ -44,6 +44,13 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+/// Next steps and differential, shared with King's College (book Lecture
+/// 10, pp. 178–187).
+pub const GUIDES: &[(&str, Guide)] = &[
+    ("clichy.met", Guide { next: super::kings::LIST_NOW, dd: super::kings::ALF_DD }),
+    ("clichy.not_met", Guide { next: super::kings::REASSESS, dd: super::kings::ALF_DD }),
+];
 
 #[cfg(test)]
 mod tests {

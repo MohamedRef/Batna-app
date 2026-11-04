@@ -92,7 +92,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                 p { class: "verdict bad", role: "alert", {cx::SAVE_FAILED} }
             }
             crate::ui::Card { class: "",
-                bdi { class: "case-stem", "{stem}" }
+                bdi { class: "case-stem", crate::labs::LabText { text: stem.to_string() } }
                 p { class: "case-question", dir: "auto",
                     {question.clone().unwrap_or_else(|| format!("Calculate {}.", spec.name))}
                 }
@@ -219,7 +219,12 @@ mod tests {
         let html = render(ITEM);
         let (_, item) = find_item(ITEM).unwrap();
         let Body::Calc { stem, question, .. } = &item.body else { unreachable!() };
-        assert!(html.contains(stem.as_str()), "{html}");
+        // Lab values in the stem are marked with their normal range (#623),
+        // so the stem is split by those marks: its opening words and a
+        // marked value show.
+        let opening: String = stem.chars().take(30).collect();
+        assert!(html.contains(&opening), "{html}");
+        assert!(html.contains("class=\"lab-v\""), "{html}");
         assert!(html.contains(question.as_deref().unwrap()), "{html}");
         for text in [tx::YOUR_RESULT, tx::YOUR_RESULT_HINT, tx::CHECK, tx::USE_CALC] {
             assert!(html.contains(text), "missing {text}");

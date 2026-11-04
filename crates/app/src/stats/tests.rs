@@ -174,6 +174,8 @@ fn the_screen_opens_on_the_tab_asked_for() {
         crate::store::use_provide_review();
         use_context_provider(crate::settings::SettingsNav::new);
         use_hook(|| *WANT.write() = w.tab);
+        // No exam day, whatever another test saved in the shared store.
+        use_hook(|| *crate::plan::SETTINGS.write() = Default::default());
         rsx! { crate::browser_fixture::Shell { screen: crate::Screen::Stats, focus: false, Stats {} } }
     }
     for (tab, selected, shows) in [
@@ -210,4 +212,89 @@ fn the_forecast_reads_the_scheduler_or_falls_back_to_a_rough_one() {
         });
     }
     assert_eq!(d.stats()[0].counts.seen, 1);
+}
+
+thread_local! {
+    static SEEN: std::cell::Cell<Option<(crate::Ui, crate::settings::SettingsNav)>> =
+        const { std::cell::Cell::new(None) };
+}
+
+#[component]
+fn Spy() -> Element {
+    SEEN.set(Some((use_context::<crate::Ui>(), use_context::<crate::settings::SettingsNav>())));
+    rsx! {}
+}
+
+fn pressable(studied_data: bool) -> crate::tap_dom::TestDom {
+    #[derive(Props, Clone, PartialEq)]
+    struct P {
+        studied: bool,
+    }
+    fn app(p: P) -> Element {
+        use_context_provider(crate::settings::SettingsNav::new);
+        let data = use_hook(|| Rc::new(if p.studied { studied() } else { fresh() }));
+        use_hook(|| *period::SPAN.write() = period::Span::Week);
+        rsx! {
+            crate::browser_fixture::Shell { screen: crate::Screen::Stats, focus: false,
+                Spy {}
+                Progress { data }
+            }
+        }
+    }
+    crate::store::use_memory_store();
+    crate::tap_dom::TestDom::new(VirtualDom::new_with_props(app, P { studied: studied_data }))
+}
+
+fn moved(t: &crate::tap_dom::TestDom) -> crate::Screen {
+    t.with(|| {
+        let (mut ui, nav) = SEEN.get().unwrap();
+        let at = *ui.screen.peek();
+        ui.screen.set(crate::Screen::Stats);
+        nav.close();
+        at
+    })
+}
+
+#[test]
+fn the_progress_numbers_open_study_and_the_checks() {
+    let mut t = pressable(true);
+    t.click(&format!("{}. {}", tx::SEEN, tx::STUDY_HINT));
+    assert_eq!(moved(&t), crate::Screen::Study);
+    t.click(&format!("{}. {}", tx::APPROVED, tx::APPROVED_HINT));
+    assert!(t.with(|| *SEEN.get().unwrap().1.open.peek()), "Settings › Data");
+    moved(&t);
+    t.click(tx::WEAK_START);
+    assert_eq!(moved(&t), crate::Screen::Study, "a session on the weak topics");
+    assert!(t.with(|| crate::study::START.peek().as_ref().is_some_and(|s| s.items.is_some())));
+    t.click(&format!("title=\"{}\"", tx::TOPIC_HINT));
+    assert_ne!(moved(&t), crate::Screen::Stats, "a topic opens its practice");
+    t.click(tx::OPEN_LECTURE);
+    assert!(t.with(crate::lecture::is_open));
+    t.with(crate::lecture::close_all);
+}
+
+#[test]
+fn the_tabs_switch_on_tap() {
+    crate::store::use_memory_store();
+    fn app() -> Element {
+        crate::store::use_provide_review();
+        use_context_provider(crate::settings::SettingsNav::new);
+        use_hook(|| *crate::plan::SETTINGS.write() = Default::default());
+        rsx! {
+            crate::browser_fixture::Shell { screen: crate::Screen::Stats, focus: false,
+                Spy {}
+                Stats {}
+            }
+        }
+    }
+    let mut t = crate::tap_dom::TestDom::of(app);
+    t.click(&format!(">{}<", tx::TAB_MISTAKES));
+    assert!(t.html().contains(tx::MISTAKES_TITLE), "{}", t.html());
+    t.click(&format!(">{}<", tx::TAB_PLAN));
+    assert!(t.html().contains(crate::i18n::plan::SETUP_TITLE));
+    t.click(&format!(">{}<", tx::TAB_PROGRESS));
+    assert!(t.html().contains(tx::SUMMARY));
+    // Asked for a tab while already here.
+    t.with(|| open(SEEN.get().unwrap().0, Tab::Mistakes));
+    assert_eq!(moved(&t), crate::Screen::Stats);
 }

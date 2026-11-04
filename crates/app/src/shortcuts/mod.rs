@@ -87,25 +87,31 @@ pub fn use_shortcuts() {
     use_future(move || async move {
         let mut eval = document::eval(KEYS_JS);
         while let Ok(msg) = eval.recv::<String>().await {
-            match parse(&msg) {
-                Some(Command::Go(screen)) => {
-                    open_sheet(false);
-                    settings.close();
-                    let mut s = ui.screen;
-                    s.set(screen);
-                }
-                Some(Command::Settings) => {
-                    open_sheet(false);
-                    settings.show(None);
-                }
-                Some(Command::Help) => {
-                    let open = !*SHEET_OPEN.peek();
-                    open_sheet(open);
-                }
-                None => {}
+            if let Some(cmd) = parse(&msg) {
+                apply(cmd, ui, settings);
             }
         }
     });
+}
+
+/// Does what a key asked: a screen closes the sheets first.
+fn apply(cmd: Command, ui: Ui, settings: SettingsNav) {
+    match cmd {
+        Command::Go(screen) => {
+            open_sheet(false);
+            settings.close();
+            let mut s = ui.screen;
+            s.set(screen);
+        }
+        Command::Settings => {
+            open_sheet(false);
+            settings.show(None);
+        }
+        Command::Help => {
+            let open = !*SHEET_OPEN.peek();
+            open_sheet(open);
+        }
+    }
 }
 
 /// The shortcut list: `?`, Help › Keyboard Shortcuts on the Mac, or the
@@ -182,5 +188,82 @@ mod tests {
         assert_eq!(parse("go:0"), None);
         assert_eq!(parse("go:8"), None);
         assert_eq!(parse("other"), None);
+    }
+
+    #[test]
+    fn keys_move_between_screens_settings_and_the_list() {
+        crate::store::use_memory_store();
+        fn app() -> Element {
+            let settings = use_context_provider(SettingsNav::new);
+            let ui = use_context_provider(|| Ui {
+                screen: Signal::new(Screen::Today),
+                prefs: Signal::new(Default::default()),
+                focus: Signal::new(false),
+            });
+            use_hook(|| {
+                apply(Command::Help, ui, settings);
+                assert!(*SHEET_OPEN.peek(), "? opens the list");
+                apply(Command::Settings, ui, settings);
+                assert!(!*SHEET_OPEN.peek() && *settings.open.peek(), "Ctrl+, opens Settings over it");
+                apply(Command::Help, ui, settings);
+                apply(Command::Go(Screen::Stats), ui, settings);
+                assert_eq!(*ui.screen.peek(), Screen::Stats);
+                assert!(!*SHEET_OPEN.peek() && !*settings.open.peek(), "a screen closes both");
+                apply(Command::Help, ui, settings);
+                apply(Command::Help, ui, settings);
+                assert!(!*SHEET_OPEN.peek(), "? again closes the list");
+            });
+            rsx! { "ok" }
+        }
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        assert_eq!(dioxus::ssr::render(&dom), "ok");
+    }
+
+    #[test]
+    fn the_key_listener_mounts_and_the_list_closes_on_tap() {
+        crate::store::use_memory_store();
+        fn app() -> Element {
+            use_context_provider(SettingsNav::new);
+            use_context_provider(|| Ui {
+                screen: Signal::new(Screen::Today),
+                prefs: Signal::new(Default::default()),
+                focus: Signal::new(false),
+            });
+            use_shortcuts();
+            use_hook(|| open_sheet(true));
+            rsx! { KeysSheet {} }
+        }
+        let mut t = crate::tap_dom::TestDom::of(app);
+        t.click(&format!("aria-label=\"{}\"", tx::CLOSE));
+        assert_eq!(t.html(), "", "✕ closes the list");
+        t.with(|| open_sheet(true));
+        t.settle();
+        t.click("class=\"sheet-backdrop keys-backdrop\"");
+        assert_eq!(t.html(), "", "so does a tap outside");
+    }
+
+    #[test]
+    fn the_list_names_every_key_and_closes_with_escape() {
+        fn app() -> Element {
+            use_hook(|| open_sheet(true));
+            rsx! { KeysSheet {} }
+        }
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        let html = dioxus::ssr::render(&dom);
+        assert!(html.contains(tx::TITLE) && html.contains("aria-modal=\"true\""), "{html}");
+        assert_eq!(html.matches("<tr").count(), 11, "{html}");
+        for text in [tx::SCREENS, tx::REVEAL, tx::RATE, tx::FLAG, tx::HELP, nav::TODAY, nav::STATS] {
+            assert!(html.contains(text), "missing {text}: {html}");
+        }
+        assert!(html.contains("<kbd>Space</kbd>") && html.contains("aria-keyshortcuts=\"Escape\""), "{html}");
+
+        fn closed() -> Element {
+            rsx! { KeysSheet {} }
+        }
+        let mut dom = VirtualDom::new(closed);
+        dom.rebuild_in_place();
+        assert_eq!(dioxus::ssr::render(&dom), "", "closed by default");
     }
 }

@@ -28,14 +28,37 @@ struct Draft {
     checked: bool,
 }
 
+impl Draft {
+    /// Moves the placed step at `from` to `to`.
+    fn shift(&mut self, from: usize, to: usize) {
+        if from < self.placed.len() && to < self.placed.len() {
+            let s = self.placed.remove(from);
+            self.placed.insert(to, s);
+        }
+    }
+
+    /// A dragged step dropped on position `on`.
+    fn drop_on(&mut self, on: usize) {
+        if let Some(from) = self.dragging.take() {
+            self.shift(from, on);
+        }
+    }
+}
+
 #[component]
 pub fn OrderItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
+    rsx! { OrderBoard { item, on_grade, start: Draft::default() } }
+}
+
+/// The board, from a given draft (tests start it part-way).
+#[component]
+fn OrderBoard(item: Item, on_grade: EventHandler<Grade>, start: Draft) -> Element {
     let Body::Order { prompt, steps } = &item.body else {
         return rsx! {};
     };
     let n = steps.len();
     let pool_order = use_hook(|| grade::shuffled(n, &item.id));
-    let mut draft = use_signal(Draft::default);
+    let mut draft = use_signal(|| start);
     let d = draft.read().clone();
     let wrong = if d.checked { grade::misplaced(&d.placed) } else { Vec::new() };
     let full = d.placed.len() == n;
@@ -147,11 +170,7 @@ fn PlacedStep(
         (true, false) => "or-step ok",
         (true, true) => "or-step wrong",
     };
-    let mut nudge = move |to: usize| {
-        let mut d = draft.write();
-        let s = d.placed.remove(pos);
-        d.placed.insert(to, s);
-    };
+    let mut nudge = move |to: usize| draft.write().shift(pos, to);
     rsx! {
         li {
             class,
@@ -162,11 +181,7 @@ fn PlacedStep(
             ondragover: move |e| e.prevent_default(),
             ondrop: move |e| {
                 e.prevent_default();
-                let mut d = draft.write();
-                if let Some(from) = d.dragging.take() {
-                    let s = d.placed.remove(from);
-                    d.placed.insert(pos, s);
-                }
+                draft.write().drop_on(pos);
             },
             span { class: "or-num", "{pos + 1}" }
             if checked {
@@ -204,5 +219,150 @@ fn PlacedStep(
                 }
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn item() -> Item {
+        let lib = crate::content::Library::get();
+        lib.lectures
+            .values()
+            .flat_map(|l| &l.items)
+            .find(|i| matches!(&i.body, Body::Order { steps, .. } if steps.len() >= 4))
+            .cloned()
+            .expect("the library has order items")
+    }
+
+    fn steps(item: &Item) -> Vec<String> {
+        let Body::Order { steps, .. } = &item.body else { unreachable!() };
+        steps.clone()
+    }
+
+    fn render(placed: Vec<usize>, checked: bool) -> String {
+        #[derive(Props, Clone, PartialEq)]
+        struct Case {
+            start: Draft,
+        }
+        fn root(c: Case) -> Element {
+            rsx! { OrderBoard { item: item(), on_grade: |_| {}, start: c.start } }
+        }
+        let mut dom =
+            VirtualDom::new_with_props(root, Case { start: Draft { placed, dragging: None, checked } });
+        dom.rebuild_in_place();
+        let html = dioxus::ssr::render(&dom);
+        html.split_once("</style>").map_or(html.clone(), |(_, r)| r.to_string())
+    }
+
+    #[test]
+    fn a_fresh_board_offers_every_step_and_waits_to_check() {
+        let n = steps(&item()).len();
+        let html = render(Vec::new(), false);
+        assert!(html.contains(tx::HINT) && html.contains(tx::POOL), "{html}");
+        assert_eq!(html.matches("class=\"or-tile\"").count(), n, "{html}");
+        assert!(html.contains("disabled=true"), "nothing to check yet: {html}");
+        assert!(!html.contains(tx::CLEAR), "{html}");
+        // The same item always shuffles the same way, and never to the answer.
+        let order = grade::shuffled(n, &item().id);
+        assert_ne!(order, (0..n).collect::<Vec<_>>());
+    }
+
+    #[test]
+    fn placed_steps_can_go_back_or_move() {
+        let s = steps(&item());
+        let html = render(vec![0, 1], false);
+        assert_eq!(html.matches("class=\"or-tile\"").count(), s.len() - 2, "{html}");
+        assert_eq!(html.matches("class=\"or-step\"").count(), 2, "{html}");
+        assert!(html.contains(tx::NEXT_SLOT) && html.contains(tx::CLEAR), "{html}");
+        assert!(html.contains(&format!("aria-label=\"{}\"", tx::SEND_BACK)), "{html}");
+        // The first can't go up, the last can't go down.
+        assert_eq!(html.matches("disabled=true").count(), 3, "↑ on the first, ↓ on the last, Check: {html}");
+    }
+
+    #[test]
+    fn a_full_board_can_be_checked() {
+        let n = steps(&item()).len();
+        let html = render((0..n).collect(), false);
+        assert!(!html.contains("class=\"or-tile\"") && !html.contains(tx::NEXT_SLOT), "{html}");
+        assert_eq!(html.matches("disabled=true").count(), 2, "only the ends' arrows: {html}");
+    }
+
+    #[test]
+    fn the_right_order_is_all_green() {
+        let n = steps(&item()).len();
+        let html = render((0..n).collect(), true);
+        assert!(html.contains(tx::ALL_IN_PLACE) && html.contains(tx::CORRECT_ORDER), "{html}");
+        assert_eq!(html.matches("class=\"or-step ok\"").count(), n, "{html}");
+        assert_eq!(html.matches("class=\"or-step or-key\"").count(), n);
+        assert!(!html.contains(tx::HINT));
+    }
+
+    #[test]
+    fn one_early_slip_marks_the_steps_and_counts_the_moves() {
+        let n = steps(&item()).len();
+        // The last step put first pushes every other step one place down.
+        let mut placed: Vec<usize> = (0..n - 1).collect();
+        placed.insert(0, n - 1);
+        let html = render(placed.clone(), true);
+        let wrong = grade::misplaced(&placed).len();
+        assert_eq!(wrong, n);
+        assert!(html.contains(&tx::in_place(0, n)), "{html}");
+        assert_eq!(html.matches("class=\"or-step wrong\"").count(), n, "{html}");
+        assert!(html.contains(&tx::should_be(n)), "{html}");
+        assert!(html.contains(&tx::moves_to_fix(1)), "one move fixes it: {html}");
+    }
+
+    #[test]
+    fn moves_and_drops_keep_every_step() {
+        let mut d = Draft { placed: vec![0, 1, 2, 3], ..Draft::default() };
+        d.shift(0, 2);
+        assert_eq!(d.placed, [1, 2, 0, 3]);
+        d.shift(3, 9);
+        assert_eq!(d.placed, [1, 2, 0, 3], "out of range: nothing moves");
+        d.dragging = Some(3);
+        d.drop_on(0);
+        assert_eq!(d.placed, [3, 1, 2, 0]);
+        assert_eq!(d.dragging, None);
+        d.drop_on(1);
+        assert_eq!(d.placed, [3, 1, 2, 0], "a drop with no drag does nothing");
+    }
+}
+
+#[cfg(test)]
+mod tap_tests {
+    use super::*;
+
+    #[test]
+    fn tapping_places_moves_sends_back_and_checks() {
+        fn app() -> Element {
+            let lib = crate::content::Library::get();
+            let item = lib
+                .lectures
+                .values()
+                .flat_map(|l| &l.items)
+                .find(|i| matches!(&i.body, Body::Order { steps, .. } if steps.len() >= 4))
+                .cloned()
+                .unwrap();
+            rsx! { OrderItem { item, on_grade: |_| {} } }
+        }
+        let mut t = crate::tap_dom::TestDom::of(app);
+        let tiles = |t: &crate::tap_dom::TestDom| t.html().matches("class=\"or-tile\"").count();
+        let n = tiles(&t);
+        t.click("class=\"or-tile\"");
+        assert_eq!(tiles(&t), n - 1);
+        t.click("class=\"or-tile\"");
+        t.click(&format!("aria-label=\"{}\"", tx::MOVE_DOWN));
+        t.click_nth(&format!("aria-label=\"{}\"", tx::MOVE_UP), 1);
+        t.click(&format!("aria-label=\"{}\"", tx::SEND_BACK));
+        assert_eq!(tiles(&t), n - 1, "one sent back");
+        t.click(tx::CLEAR);
+        assert_eq!(tiles(&t), n, "all back in the pool");
+        while tiles(&t) > 0 {
+            t.click("class=\"or-tile\"");
+        }
+        t.click(tx::CHECK);
+        assert!(t.html().contains(tx::CORRECT_ORDER), "{}", t.html());
     }
 }

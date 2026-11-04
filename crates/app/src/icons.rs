@@ -207,4 +207,67 @@ mod tests {
             assert!(d.chars().all(|c| "MmLlHhVvCcSsQqTtAaZz0123456789.,- ".contains(c)), "{s:?}: {d}");
         }
     }
+
+    /// The drawn path of an icon, after checking it is decorative (hidden
+    /// from screen readers, the label is on its button) and follows the text colour.
+    fn drawn(icon: Element) -> String {
+        let html = dioxus::ssr::render_element(icon);
+        assert!(html.starts_with("<svg") && html.contains("aria-hidden=\"true\""), "{html}");
+        assert!(html.contains("stroke=\"currentColor\"") && html.contains("viewBox=\"0 0 24 24\""), "{html}");
+        let d = html.split("d=\"").nth(1).and_then(|r| r.split('"').next()).expect("a path").to_owned();
+        assert!(
+            d.starts_with('M') && d.chars().all(|c| "MmLlHhVvCcSsQqTtAaZz0123456789.,- ".contains(c)),
+            "{d}"
+        );
+        d
+    }
+
+    #[test]
+    fn every_icon_is_a_decorative_drawing_of_its_own() {
+        let icons = [
+            ("more", more()),
+            ("book", book()),
+            ("abbreviations", abbreviations()),
+            ("courses", courses()),
+            ("caret", caret_down()),
+            ("add card", add_card()),
+            ("calculator", calculator()),
+            ("search", search()),
+            ("pulse", pulse()),
+            ("go", arrow_go()),
+            ("cards", layout_cards()),
+            ("list", layout_list()),
+            ("compact", layout_compact()),
+            ("sort", sort()),
+            ("check", check()),
+            ("refresh", refresh()),
+        ];
+        let mut seen = std::collections::BTreeMap::new();
+        for (name, icon) in icons {
+            if let Some(other) = seen.insert(drawn(icon), name) {
+                panic!("{name} looks the same as {other}");
+            }
+        }
+        // References and the pages toggle share the open book on purpose,
+        // as Study's settings section and the case steps share theirs.
+        assert_eq!(drawn(references()), drawn(book()));
+        assert_eq!(drawn(steps()), drawn(section("study")));
+        for s in [Screen::NAV.as_slice(), &[Screen::Settings]].concat() {
+            assert_eq!(drawn(nav(s)), nav_path(s));
+        }
+    }
+
+    #[test]
+    fn settings_sections_have_their_own_icons_and_a_fallback() {
+        let ids = ["study", "reminders", "sync", "look", "tablet", "mac", "data", "updates"];
+        let paths: std::collections::BTreeSet<String> = ids.iter().map(|id| drawn(section(id))).collect();
+        assert_eq!(paths.len(), ids.len());
+        let fallback = drawn(section("anything else"));
+        assert!(!paths.contains(&fallback));
+        assert_ne!(drawn(chevron(true)), drawn(chevron(false)), "back and next point opposite ways");
+        let on = dioxus::ssr::render_element(star(true));
+        let off = dioxus::ssr::render_element(star(false));
+        assert!(on.contains("fill=\"currentColor\"") && off.contains("fill=\"none\""), "{on} {off}");
+        assert!(on.contains("aria-hidden=\"true\""));
+    }
 }

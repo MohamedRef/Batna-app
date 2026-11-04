@@ -6,7 +6,7 @@
 //! drug dosing and warns that serum creatinine is not reliable in the
 //! elderly and the result is only an estimate. The book gives no bands.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, normals, num, show};
 
 const SEX: &[(&str, &str)] = &[("male", "Man"), ("female", "Woman")];
 
@@ -56,6 +56,25 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+/// Next steps and the pitfalls of the estimate (book Geriatrics Lectures 2
+/// and 3, pp. 28–30 and 42–43, and the Nephrology book p. 101). Which weight
+/// to use when overweight: Winter et al., Pharmacotherapy 2012.
+pub const GUIDES: &[(&str, Guide)] = &[(
+    "cockcroft_gault.crcl",
+    Guide {
+        next: &[
+            "Dose renally cleared drugs by this clearance, above all digoxin and gentamicin (p. 43)",
+            "Kidney function falls by about a third with normal ageing; a normal creatinine does not mean normal function in the elderly (p. 43)",
+            "With a low clearance, take care with potassium-sparing diuretics, RAAS blockers, NSAIDs and beta-blockers: high potassium (p. 28)",
+        ],
+        dd: &[
+            "Little muscle (age, wasting) keeps the creatinine low, so the clearance reads too high (pp. 29, 42)",
+            "Overweight: the total weight overstates it; use the adjusted weight, ideal + 0.4 × the excess (Winter 2012)",
+            "A creatinine that is still changing, as in AKI, does not yet reflect the GFR (Nephrology p. 101)",
+        ],
+    },
+)];
 
 #[cfg(test)]
 mod tests {

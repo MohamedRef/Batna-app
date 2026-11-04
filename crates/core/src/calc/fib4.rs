@@ -5,7 +5,7 @@
 //! 1.3–3.25 intermediate, > 3.25 high risk of advanced fibrosis. Lecture 2
 //! (EASL 2021) uses < 1.3 to rule out and refers above 1.3 for elastography.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show, shown};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show, shown};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "fib4",
@@ -54,6 +54,48 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+/// Next steps per band (book Lecture 6, p. 104: the EASL 2021 and ADA 2025
+/// pathways; p. 105 for care by stage; McPherson et al., Am J Gastroenterol
+/// 2017, for FIB-4 above 65 years).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "fib4.low",
+        Guide {
+            next: &[
+                "No referral needed: lifestyle changes and repeat FIB-4 in 1–3 years (EASL 2021, ADA 2025, p. 104)",
+                "Treat the metabolic risk: weight loss; in diabetes favour GLP-1 receptor agonists, SGLT2 inhibitors or pioglitazone (p. 105)",
+            ],
+            dd: OTHER_LIVER_DISEASE,
+        },
+    ),
+    (
+        "fib4.mid",
+        Guide {
+            next: &[
+                "Liver stiffness by transient elastography (Fibroscan): below 8 kPa low risk; 8 kPa or more, refer to a liver specialist (p. 104)",
+                "No elastography: a patented serum test such as ELF (p. 104)",
+            ],
+            dd: OTHER_LIVER_DISEASE,
+        },
+    ),
+    (
+        "fib4.high",
+        Guide {
+            next: &[
+                "Refer to a liver specialist and confirm with elastography; F3–F4 is highly likely when the tests agree (p. 104)",
+                "If cirrhosis: HCC ultrasound every 6 months and variceal screening (Lecture 1, p. 13)",
+            ],
+            dd: &[
+                "Other chronic liver disease: alcohol, hepatitis B or C, a family history (p. 104)",
+                "Falsely high: age over 65, an AST rise from muscle or acute hepatitis, a low platelet count from another cause",
+            ],
+        },
+    ),
+];
+
+const OTHER_LIVER_DISEASE: &[&str] =
+    &["Other chronic liver disease: alcohol, hepatitis B or C, a family history (p. 104)"];
 
 #[cfg(test)]
 mod tests {

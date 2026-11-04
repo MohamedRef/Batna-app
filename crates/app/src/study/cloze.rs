@@ -138,7 +138,7 @@ pub fn ClozeItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
             Some(r) => rsx! {
                 p { class: "st-verdict", "data-match": match_name(overall(&r)), {verdict(&r)} }
                 if let Some(extra) = extra {
-                    div { class: "st-answer", lang: "en", dir: "ltr", "{extra}" }
+                    div { class: "st-answer", lang: "en", dir: "ltr", crate::labs::LabText { text: extra.to_string() } }
                 }
                 GradeRow { item_id: item.id.clone(), suggested: Some(suggest_cloze(&r)), on_grade }
             },

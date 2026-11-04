@@ -27,6 +27,22 @@ const WAIT: Duration = Duration::from_secs(5 * 60);
 pub struct GoogleClient {
     pub client_id: String,
     pub client_secret: Option<String>,
+    pub endpoints: Endpoints,
+}
+
+/// Where sign-in goes: Google and the system browser, or a stand-in in tests.
+#[derive(Clone, Debug)]
+pub struct Endpoints {
+    pub auth: String,
+    pub token: String,
+    /// Opens the sign-in page.
+    pub open: fn(&str) -> Result<(), String>,
+}
+
+impl Default for Endpoints {
+    fn default() -> Self {
+        Self { auth: AUTH_URL.into(), token: TOKEN_URL.into(), open: super::open_url }
+    }
 }
 
 #[derive(Debug, PartialEq)]
@@ -78,7 +94,7 @@ fn random_state() -> String {
     URL_SAFE_NO_PAD.encode(bytes)
 }
 
-pub fn auth_url(client_id: &str, redirect_uri: &str, pkce: &Pkce, state: &str) -> String {
+pub fn auth_url(base: &str, client_id: &str, redirect_uri: &str, pkce: &Pkce, state: &str) -> String {
     let params = [
         ("client_id", client_id),
         ("redirect_uri", redirect_uri),
@@ -89,7 +105,7 @@ pub fn auth_url(client_id: &str, redirect_uri: &str, pkce: &Pkce, state: &str) -
         ("state", state),
         ("prompt", "select_account"),
     ];
-    format!("{AUTH_URL}?{}", form(&params))
+    format!("{base}?{}", form(&params))
 }
 
 /// What the browser hands back: everything [`exchange`] needs to turn the
@@ -116,8 +132,8 @@ pub async fn google_authorization(client: &GoogleClient) -> Result<Authorization
     let redirect_uri = format!("http://127.0.0.1:{port}");
     let pkce = Pkce::new();
     let state = random_state();
-    super::open_url(&auth_url(&client.client_id, &redirect_uri, &pkce, &state))
-        .map_err(OAuthError::Browser)?;
+    let url = auth_url(&client.endpoints.auth, &client.client_id, &redirect_uri, &pkce, &state);
+    (client.endpoints.open)(&url).map_err(OAuthError::Browser)?;
 
     let code = tokio::time::timeout(WAIT, wait_for_code(&listener, &state))
         .await
@@ -204,7 +220,10 @@ pub fn exchange(client: &GoogleClient, auth: &Authorization) -> Result<String, O
     if let Some(secret) = &client.client_secret {
         form.push(("client_secret", secret));
     }
-    let mut res = agent.post(TOKEN_URL).send_form(form).map_err(|e| OAuthError::Network(e.to_string()))?;
+    let mut res = agent
+        .post(&client.endpoints.token)
+        .send_form(form)
+        .map_err(|e| OAuthError::Network(e.to_string()))?;
     if !res.status().is_success() {
         let body = res.body_mut().read_to_string().unwrap_or_default();
         return Err(OAuthError::Failed(format!("token exchange {}: {body}", res.status())));
@@ -229,7 +248,7 @@ fn encode(s: &str) -> String {
     out
 }
 
-fn decode(s: &str) -> String {
+pub(super) fn decode(s: &str) -> String {
     let hex = |b: u8| (b as char).to_digit(16).map(|d| d as u8);
     let bytes = s.as_bytes();
     let mut out = Vec::with_capacity(bytes.len());
@@ -290,7 +309,8 @@ mod tests {
     #[test]
     fn auth_url_is_encoded() {
         let p = Pkce::from_verifier("v".into());
-        let url = auth_url("123-desk.apps.googleusercontent.com", "http://127.0.0.1:5000", &p, "s1");
+        let url =
+            auth_url(AUTH_URL, "123-desk.apps.googleusercontent.com", "http://127.0.0.1:5000", &p, "s1");
         assert!(url.starts_with("https://accounts.google.com/o/oauth2/v2/auth?client_id=123-desk.apps"));
         assert!(url.contains("redirect_uri=http%3A%2F%2F127.0.0.1%3A5000"));
         assert!(url.contains("scope=openid%20email"));
@@ -306,6 +326,27 @@ mod tests {
         let forged = "GET /?state=evil&code=x HTTP/1.1\r\n";
         assert_eq!(parse_redirect(forged, "s1"), None);
         assert_eq!(parse_redirect("GET /favicon.ico HTTP/1.1\r\n", "s1"), None);
+        let error = "GET /?state=s1&error=server_error HTTP/1.1\r\n";
+        assert_eq!(parse_redirect(error, "s1"), Some(Err(OAuthError::Failed("server_error".into()))));
+        let empty = "GET /?state=s1 HTTP/1.1\r\n";
+        assert_eq!(parse_redirect(empty, "s1"), Some(Err(OAuthError::Failed("no code".into()))));
+    }
+
+    #[test]
+    fn errors_read_plainly_and_codes_stay_out_of_logs() {
+        assert_eq!(OAuthError::Cancelled.to_string(), "sign-in was cancelled");
+        assert_eq!(OAuthError::TimedOut.to_string(), "sign-in timed out");
+        assert_eq!(OAuthError::Browser("x".into()).to_string(), "couldn't open the browser: x");
+        assert_eq!(OAuthError::Network("dns".into()).to_string(), "network: dns");
+        let auth = Authorization {
+            code: "secret-code".into(),
+            verifier: "v".into(),
+            redirect_uri: "http://127.0.0.1:1".into(),
+        };
+        let shown = format!("{auth:?}");
+        assert!(shown.contains("127.0.0.1:1") && !shown.contains("secret-code"), "{shown}");
+        let google = Endpoints::default();
+        assert_eq!((google.auth.as_str(), google.token.as_str()), (AUTH_URL, TOKEN_URL));
     }
 
     #[test]

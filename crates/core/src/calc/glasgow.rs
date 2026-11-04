@@ -6,7 +6,7 @@
 //! Score 5–12; ≥ 9 predicts poor 28-day survival, and in Forrest 2007 these
 //! patients (with DF ≥ 32) benefited from corticosteroids. Not in the book.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "glasgow_ah",
@@ -77,6 +77,34 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+/// Next steps per band (Forrest et al., Gut 2007, for the steroid benefit at
+/// 9 or more with DF ≥ 32; Louvet 2007 for the Lille rule; book Lecture 12,
+/// p. 196). The differential is shared with the Maddrey DF.
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "glasgow.high",
+        Guide {
+            next: &[
+                "With a Maddrey DF of 32 or more, prednisolone 40 mg a day for 28 days improved survival (Forrest 2007)",
+                "Screen for infection and GI bleeding before the steroid (EASL 2018)",
+                "Lille score at day 4–7: 0.45 or more is no response, so stop the steroid (Louvet 2007)",
+                "Abstinence and nutrition support (p. 196)",
+            ],
+            dd: super::maddrey::AH_DD,
+        },
+    ),
+    (
+        "glasgow.low",
+        Guide {
+            next: &[
+                "Steroids showed no survival benefit below 9 (Forrest 2007): supportive care, abstinence and nutrition",
+                "Rescore if the patient worsens",
+            ],
+            dd: super::maddrey::AH_DD,
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

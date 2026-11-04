@@ -6,7 +6,7 @@
 //! fibrosis, > 1.5 severe fibrosis or cirrhosis. The WHO hepatitis C
 //! guidelines (2016) use > 2.0 for cirrhosis; a note says so above 2.0.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show, shown};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show, shown};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "apri",
@@ -49,6 +49,46 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         },
     })
 }
+
+/// Next steps per band (book Lecture 2, pp. 34–36, EASL 2021 on
+/// non-invasive tests; Lecture 1, p. 13 for cirrhosis care).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "apri.low",
+        Guide {
+            next: &[
+                "Treat the liver disease and repeat a fibrosis score over time",
+                "If it does not fit the clinical picture, confirm with elastography (p. 35)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "apri.mid",
+        Guide {
+            next: &[
+                "Confirm with transient elastography (Fibroscan) or a combined serum test such as Fibrotest or ELF (pp. 34–35)",
+                "Liver stiffness above 20–25 kPa means clinically significant portal hypertension (p. 35)",
+            ],
+            dd: FALSELY_HIGH,
+        },
+    ),
+    (
+        "apri.high",
+        Guide {
+            next: &[
+                "Confirm with elastography; if cirrhosis, HCC ultrasound every 6 months (Lecture 1, p. 13)",
+                "Varices: screening endoscopy, unless liver stiffness below 20 kPa and platelets above 150 spare it (Baveno VI, p. 35)",
+            ],
+            dd: FALSELY_HIGH,
+        },
+    ),
+];
+
+const FALSELY_HIGH: &[&str] = &[
+    "An AST rise from acute hepatitis or muscle",
+    "A low platelet count from another cause, such as ITP or marrow disease",
+];
 
 #[cfg(test)]
 mod tests {

@@ -5,7 +5,7 @@
 //! ascites. Ascitic total protein (p. 150): low < 1.5 g/dL in cirrhosis,
 //! high > 2.5 g/dL in heart failure and malignant ascites.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
 
 /// Ascitic albumin above serum albumin.
 pub const ABOVE_SERUM: &str = "higher than the serum albumin";
@@ -69,6 +69,43 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+/// Next steps and differential per band (book Lecture 9, pp. 145–153).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "saag.high",
+        Guide {
+            next: &[
+                "Total protein sorts the cause: below 1.5 g/dL in cirrhosis, above 2.5 g/dL in heart failure (p. 150)",
+                "PMN count and culture to rule out SBP (pp. 150, 167)",
+                "Cirrhosis, grade 2: sodium 2 g a day and spironolactone from 100 mg; grade 3: large-volume paracentesis first (pp. 152–153)",
+            ],
+            dd: &[
+                "Cirrhosis or other portal hypertension, before or after the sinusoids (p. 145)",
+                "Right heart failure or constrictive pericarditis: high protein (pp. 145, 150)",
+                "Budd-Chiari syndrome or a narrowed inferior vena cava (p. 146)",
+                "Massive liver metastases",
+            ],
+        },
+    ),
+    (
+        "saag.low",
+        Guide {
+            next: &[
+                "Look at the peritoneum: cytology, LDH, glucose, TB PCR and lymphocytes, amylase, triglycerides (pp. 150–151)",
+                "CT when the cause is still unclear (p. 149)",
+            ],
+            dd: &[
+                "Peritoneal malignancy: carcinomatosis, mesothelioma, pseudomyxoma (p. 146)",
+                "Tuberculous peritonitis: lymphocytes, low glucose, PCR (pp. 146, 150–151)",
+                "Pancreatic ascites: high amylase (pp. 145, 151)",
+                "Nephrotic syndrome or protein-losing enteropathy (p. 145)",
+                "Serositis: SLE and other collagen diseases, familial Mediterranean fever (p. 146)",
+                "Chylous (triglycerides) or bile ascites (pp. 145, 151)",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

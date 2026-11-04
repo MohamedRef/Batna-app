@@ -2,7 +2,7 @@
 //! holds and what it would change, then merge it (`Store::apply_import`).
 //! Nothing on this device is deleted; newer rows win, as in sync.
 
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use batna_core::review::verify::rfc3339;
 use dioxus::prelude::*;
@@ -15,9 +15,13 @@ use crate::store::{self, use_review};
 
 /// Export files found where Batna writes them, newest name first.
 fn found_files() -> Vec<PathBuf> {
-    let mut out: Vec<PathBuf> = store::export_dir()
+    store::export_dir().map(|dir| found_in(&dir)).unwrap_or_default()
+}
+
+/// The `batna-export-*.json` files in `dir`, newest name first.
+fn found_in(dir: &Path) -> Vec<PathBuf> {
+    let mut out: Vec<PathBuf> = std::fs::read_dir(dir)
         .ok()
-        .and_then(|dir| std::fs::read_dir(dir).ok())
         .into_iter()
         .flatten()
         .flatten()
@@ -38,17 +42,28 @@ const MAX_IMPORT_BYTES: u64 = 50 * 1024 * 1024;
 
 /// Reads, parses and plans a backup file off the UI thread.
 async fn read_plan(path: PathBuf) -> Result<(Value, ImportPlan), String> {
-    crate::platform::time::blocking(move || {
-        let len = std::fs::metadata(&path).map_err(|e| e.to_string())?.len();
-        if len > MAX_IMPORT_BYTES {
-            return Err(tx::IMPORT_TOO_BIG.to_string());
-        }
-        let text = std::fs::read_to_string(&path).map_err(|e| e.to_string())?;
-        let doc = parse(&text).map_err(|e| e.to_string())?;
-        let plan = store::shared().plan_import(&doc).map_err(|e| e.to_string())?;
-        Ok((doc, plan))
-    })
-    .await?
+    crate::platform::time::blocking(move || plan_file(&path, store::shared())).await?
+}
+
+/// A backup file read and planned against `store`: too big, unreadable or
+/// not an export is an error to show.
+fn plan_file(path: &Path, store: &store::Store) -> Result<(Value, ImportPlan), String> {
+    let len = std::fs::metadata(path).map_err(|e| e.to_string())?.len();
+    if len > MAX_IMPORT_BYTES {
+        return Err(tx::IMPORT_TOO_BIG.to_string());
+    }
+    let text = std::fs::read_to_string(path).map_err(|e| e.to_string())?;
+    let doc = parse(&text).map_err(|e| e.to_string())?;
+    let plan = store.plan_import(&doc).map_err(|e| e.to_string())?;
+    Ok((doc, plan))
+}
+
+/// The step after picking or pasting `text`: its preview, or why it can't be read.
+fn plan_text(name: String, text: &str, store: &store::Store) -> Step {
+    match parse(text).and_then(|doc| store.plan_import(&doc).map(|plan| (doc, plan))) {
+        Ok((doc, plan)) => Step::Preview { name, doc, plan },
+        Err(e) => Step::Failed(e.to_string()),
+    }
 }
 
 #[derive(Clone, PartialEq)]
@@ -61,8 +76,14 @@ enum Step {
 
 #[component]
 pub fn ImportCard() -> Element {
+    rsx! { ImportFlow { start: Step::Pick } }
+}
+
+/// The restore card from `start` (always the file picker in the app).
+#[component]
+fn ImportFlow(start: Step) -> Element {
     let review = use_review();
-    let mut step = use_signal(|| Step::Pick);
+    let mut step = use_signal(|| start.clone());
     let mut pasted = use_signal(String::new);
     let mut picking = use_signal(|| false);
 
@@ -80,13 +101,7 @@ pub fn ImportCard() -> Element {
             });
         });
     };
-    let mut load = move |name: String, text: String| {
-        let s = store::shared();
-        step.set(match parse(&text).and_then(|doc| s.plan_import(&doc).map(|plan| (doc, plan))) {
-            Ok((doc, plan)) => Step::Preview { name, doc, plan },
-            Err(e) => Step::Failed(e.to_string()),
-        });
-    };
+    let mut load = move |name: String, text: String| step.set(plan_text(name, &text, store::shared()));
 
     let body = match step() {
         Step::Pick => {
@@ -261,5 +276,204 @@ fn table_label(name: &str) -> String {
         "settings" => tx::T_SETTINGS.to_string(),
         "own_cards" => tx::T_OWN.to_string(),
         other => other.replace('_', " "),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use batna_core::review::{Grade, Origin, ReviewEvent};
+
+    use super::*;
+
+    /// A phone's backup with two answers, as the export writes it.
+    fn backup() -> String {
+        let phone = store::Store::open_in_memory().unwrap();
+        for (item, at_ms) in [("hb.L01.001", 10), ("hb.L01.002", 20)] {
+            let e = ReviewEvent {
+                item_id: item.into(),
+                grade: Grade::Good,
+                origin: Origin::Review,
+                at_ms,
+                took_ms: 3000,
+            };
+            phone.append_review(e).unwrap();
+        }
+        serde_json::to_string(&phone.export("0.1.0", 2).unwrap().document).unwrap()
+    }
+
+    #[test]
+    fn only_batna_exports_are_offered_newest_first() {
+        let dir = tempfile::tempdir().unwrap();
+        for name in [
+            "batna-export-2026-01-01.json",
+            "batna-export-2026-03-01.json",
+            "notes.json",
+            "batna-export-x.txt",
+        ] {
+            std::fs::write(dir.path().join(name), "{}").unwrap();
+        }
+        let names: Vec<String> = found_in(dir.path())
+            .iter()
+            .map(|p| p.file_name().unwrap().to_string_lossy().into_owned())
+            .collect();
+        assert_eq!(names, ["batna-export-2026-03-01.json", "batna-export-2026-01-01.json"]);
+        assert!(found_in(&dir.path().join("missing")).is_empty());
+    }
+
+    #[test]
+    fn a_file_is_read_planned_or_refused_with_a_reason() {
+        let tablet = store::Store::open_in_memory().unwrap();
+        let dir = tempfile::tempdir().unwrap();
+        let good = dir.path().join("good.json");
+        std::fs::write(&good, backup()).unwrap();
+        let (_, plan) = plan_file(&good, &tablet).unwrap();
+        assert_eq!(plan.table("review_events").unwrap().new, 2);
+        assert_eq!(plan.changes(), 2);
+
+        assert!(plan_file(&dir.path().join("absent.json"), &tablet).is_err());
+        let junk = dir.path().join("junk.json");
+        std::fs::write(&junk, "not json").unwrap();
+        assert!(plan_file(&junk, &tablet).is_err());
+        // Far too big to be a backup: refused before reading.
+        let big = dir.path().join("big.json");
+        std::fs::File::create(&big).unwrap().set_len(MAX_IMPORT_BYTES + 1).unwrap();
+        assert_eq!(plan_file(&big, &tablet).unwrap_err(), tx::IMPORT_TOO_BIG);
+    }
+
+    #[test]
+    fn pasted_text_previews_or_fails() {
+        let tablet = store::Store::open_in_memory().unwrap();
+        match plan_text("pasted".into(), &backup(), &tablet) {
+            Step::Preview { name, plan, .. } => {
+                assert_eq!(name, "pasted");
+                assert_eq!(plan.changes(), 2);
+            }
+            _ => panic!("expected a preview"),
+        }
+        assert!(matches!(plan_text("x".into(), "{", &tablet), Step::Failed(_)));
+    }
+
+    fn render(start: Step) -> String {
+        #[derive(Props, Clone, PartialEq)]
+        struct P {
+            start: Step,
+        }
+        fn app(p: P) -> Element {
+            crate::store::use_provide_review();
+            rsx! { ImportFlow { start: p.start.clone() } }
+        }
+        crate::store::use_memory_store();
+        let mut dom = VirtualDom::new_with_props(app, P { start });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn each_step_of_the_restore_card_says_what_happens() {
+        let page = render(Step::Pick);
+        assert!(page.contains(tx::IMPORT_TITLE) && page.contains(tx::IMPORT_PASTE), "{page}");
+        assert!(page.contains("type=\"file\"") && page.contains(tx::IMPORT_READ), "{page}");
+
+        let tablet = store::Store::open_in_memory().unwrap();
+        let Step::Preview { doc, plan, .. } = plan_text("batna-export-1.json".into(), &backup(), &tablet)
+        else {
+            panic!("a preview")
+        };
+        let page = render(Step::Preview {
+            name: "batna-export-1.json".into(),
+            doc: doc.clone(),
+            plan: plan.clone(),
+        });
+        for text in
+            [tx::IMPORT_FILE, tx::IMPORT_FROM, tx::T_REVIEWS, tx::COL_NEW, tx::IMPORT_SAFE, tx::IMPORT_CANCEL]
+        {
+            assert!(page.contains(text), "missing {text}: {page}");
+        }
+        assert!(page.contains("batna-export-1.json") && page.contains(&tx::import_apply(2)), "{page}");
+        assert!(page.contains(&plan.device_id));
+
+        // Nothing new in the file: nothing to merge.
+        let mut same = plan.clone();
+        for t in &mut same.tables {
+            t.new = 0;
+            t.newer = 0;
+        }
+        let page = render(Step::Preview { name: "x".into(), doc, plan: same.clone() });
+        assert!(page.contains(tx::IMPORT_NOTHING) && page.contains(tx::IMPORT_BACK), "{page}");
+
+        let mut partial = plan.clone();
+        partial.tables[0].failed = 3;
+        let page = render(Step::Done(partial));
+        assert!(page.contains(&tx::import_done(2)) && page.contains(&tx::import_partial(3)), "{page}");
+        assert!(page.contains(tx::IMPORT_AGAIN));
+        assert!(!render(Step::Done(plan)).contains("role=\"alert\""), "all merged: no warning");
+
+        let page = render(Step::Failed("bad file".into()));
+        assert!(page.contains(tx::IMPORT_FAILED) && page.contains("bad file"), "{page}");
+    }
+
+    #[test]
+    fn table_names_read_as_words() {
+        assert_eq!(table_label("review_events"), tx::T_REVIEWS);
+        assert_eq!(table_label("item_status"), tx::T_CHECKS);
+        assert_eq!(table_label("settings"), tx::T_SETTINGS);
+        assert_eq!(table_label("own_cards"), tx::T_OWN);
+        assert_eq!(table_label("bank_sessions"), "bank sessions");
+    }
+
+    #[test]
+    fn pasting_a_backup_previews_it_and_cancel_goes_back() {
+        use crate::tap_dom::TestDom;
+        fn app() -> Element {
+            crate::store::use_provide_review();
+            rsx! { ImportFlow { start: Step::Pick } }
+        }
+        crate::store::use_memory_store();
+        let mut t = TestDom::of(app);
+        assert!(t.html().contains("disabled=true"), "nothing pasted, nothing to read");
+        t.input("class=\"export-text\"", "{ not json");
+        t.click(tx::IMPORT_READ);
+        assert!(t.html().contains(tx::IMPORT_FAILED), "{}", t.html());
+        t.click(tx::IMPORT_BACK);
+        assert!(t.html().contains(tx::IMPORT_PASTE));
+
+        t.input("class=\"export-text\"", &backup());
+        t.click(tx::IMPORT_READ);
+        let page = t.html();
+        assert!(page.contains(tx::IMPORT_PASTED) && page.contains(&tx::import_apply(2)), "{page}");
+        t.click(tx::IMPORT_CANCEL);
+        assert!(t.html().contains(tx::IMPORT_PASTE) && !t.html().contains(tx::IMPORT_SAFE));
+    }
+
+    #[test]
+    fn after_a_merge_or_a_failure_the_card_starts_over() {
+        use crate::tap_dom::TestDom;
+        #[derive(Props, Clone, PartialEq)]
+        struct P {
+            start: Step,
+        }
+        fn app(p: P) -> Element {
+            crate::store::use_provide_review();
+            rsx! { ImportFlow { start: p.start.clone() } }
+        }
+        crate::store::use_memory_store();
+        let tablet = store::Store::open_in_memory().unwrap();
+        let Step::Preview { doc, plan, .. } = plan_text("b.json".into(), &backup(), &tablet) else {
+            panic!()
+        };
+        let mut nothing = plan.clone();
+        for t in &mut nothing.tables {
+            t.new = 0;
+            t.newer = 0;
+        }
+        for (start, button) in [
+            (Step::Done(plan), tx::IMPORT_AGAIN),
+            (Step::Failed("x".into()), tx::IMPORT_BACK),
+            (Step::Preview { name: "b.json".into(), doc, plan: nothing }, tx::IMPORT_BACK),
+        ] {
+            let mut t = TestDom::new(VirtualDom::new_with_props(app, P { start }));
+            t.click(button);
+            assert!(t.html().contains(tx::IMPORT_PASTE), "{button}: {}", t.html());
+        }
     }
 }

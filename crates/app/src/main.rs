@@ -31,6 +31,7 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod labs;
 mod learn;
 mod lecture;
 mod look;
@@ -58,7 +59,13 @@ mod study;
 mod synced;
 mod table;
 #[cfg(test)]
+mod tap_dom;
+#[cfg(test)]
+pub(crate) mod test_dom;
+#[cfg(test)]
 mod testdom;
+#[cfg(test)]
+mod testing;
 mod today;
 mod ui;
 mod update;

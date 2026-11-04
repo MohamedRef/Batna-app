@@ -18,7 +18,7 @@ pub fn CardItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
         crate::desk::Panes {
             wide_side: shown(),
             primary: rsx! {
-                p { class: "st-prompt", lang: "en", dir: "ltr", "{front}" }
+                p { class: "st-prompt", lang: "en", dir: "ltr", crate::labs::LabText { text: front.to_string() } }
                 if !shown() {
                     p { class: "muted small", {tx::THINK_FIRST} }
                     button {
@@ -31,7 +31,7 @@ pub fn CardItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                 }
             },
             secondary: shown().then(|| rsx! {
-                div { class: "st-answer", lang: "en", dir: "ltr", "{back}" }
+                div { class: "st-answer", lang: "en", dir: "ltr", crate::labs::LabText { text: back.to_string() } }
             }),
             footer: shown().then(|| rsx! {
                 GradeRow { item_id: item.id.clone(), suggested: None, on_grade }

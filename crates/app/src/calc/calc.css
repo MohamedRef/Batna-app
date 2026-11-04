@@ -226,6 +226,22 @@
   white-space: nowrap;
 }
 .calc-field[data-invalid="true"] .calc-num { border-color: var(--bad); background-color: var(--bad-soft); }
+
+/* Out of the normal range: high is red, low is blue, on the box and on
+   the line under it. The line's arrow and words say which way, so the
+   colour is never the only sign. The blue is mixed with the text colour,
+   so it reads on light and dark themes alike. */
+.calc-num, .calc-normal {
+  --low: color-mix(in srgb, #3b5bdb 72%, var(--text));
+  --low-soft: color-mix(in srgb, #3b5bdb 13%, var(--surface));
+}
+:is(.calc-num, .calc-normal)[data-place="high"] { --place: var(--bad); --place-soft: var(--bad-soft); }
+:is(.calc-num, .calc-normal)[data-place="low"] { --place: var(--low); --place-soft: var(--low-soft); }
+.calc-num:is([data-place="high"], [data-place="low"]) { border-color: var(--place); background-color: var(--place-soft); }
+.field.calc-field .calc-num:is([data-place="high"], [data-place="low"]) > input[type="number"] { color: var(--place); font-weight: 600; }
+.calc-normal { margin: 0; color: var(--muted); font-size: var(--fs-sm); line-height: 1.45; }
+.calc-normal bdi { font-family: var(--font-latin); font-variant-numeric: tabular-nums; }
+.calc-normal:is([data-place="high"], [data-place="low"]) { color: var(--place); font-weight: 600; }
 .calc-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--sp-2); padding-block-start: var(--sp-2); border-block-start: 1px solid var(--line-soft, var(--line)); }
 
 /* The item's own answer box (calc/item.rs) matches the fields; the
@@ -305,3 +321,5 @@
   border-color: var(--glass-rim);
   box-shadow: var(--glass-hi);
 }
+.app[data-appearance="liquid-glass"] .calc-num:is([data-place="high"], [data-place="low"]) { border-color: var(--place); }
+.app[data-appearance="liquid-glass"] .calc-field[data-invalid="true"] .calc-num { border-color: var(--bad); }

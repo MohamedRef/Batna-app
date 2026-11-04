@@ -8,7 +8,7 @@
 //! cardiac failure 2. The book reads a score of 0–1 as very low risk, fit
 //! for outpatient care and endoscopy.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, num};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, normals, num};
 
 const SEX: &[(&str, &str)] = &[("male", "Man"), ("female", "Woman")];
 
@@ -17,11 +17,11 @@ pub const SPEC: CalcSpec = CalcSpec {
     name: "Glasgow-Blatchford score",
     area: Area::Gi,
     fields: &[
-        num("bun_mg_dl", "BUN", "mg/dL", 1.0, 300.0, 0.1).hint("Urea ÷ 2.14."),
+        num("bun_mg_dl", "BUN", "mg/dL", 1.0, 300.0, 0.1).normal_as(normals::BUN_MG_DL).hint("Urea ÷ 2.14."),
         choice("sex", "Sex", SEX),
-        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 25.0, 0.1),
-        num("sbp_mmhg", "Systolic blood pressure", "mmHg", 40.0, 260.0, 1.0),
-        num("hr_bpm", "Heart rate", "beats/min", 20.0, 250.0, 1.0),
+        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 25.0, 0.1).normal_as(normals::HB_G_DL),
+        num("sbp_mmhg", "Systolic blood pressure", "mmHg", 40.0, 260.0, 1.0).normal_as(normals::SBP_MM_HG),
+        num("hr_bpm", "Heart rate", "beats/min", 20.0, 250.0, 1.0).normal_as(normals::HEART_RATE),
         flag("melena", "Melena"),
         flag("syncope", "Syncope"),
         flag("hepatic_disease", "Hepatic disease"),

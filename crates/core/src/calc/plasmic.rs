@@ -9,19 +9,22 @@
 //! probability. p. 480: sensitivity 99%, specificity 57%. p. 466 places it
 //! in the TMA work-up. 5 is intermediate (Bendapudi et al., 2017).
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "plasmic",
     name: "PLASMIC score (TTP)",
     area: Area::Renal,
     fields: &[
-        num("platelets_10e9_l", "Platelets", "× 10⁹/L", 0.0, 1000.0, 1.0).hint("30 × 10⁹/L = 30,000/µL."),
+        num("platelets_10e9_l", "Platelets", "× 10⁹/L", 0.0, 1000.0, 1.0)
+            .normal_as(normals::PLATELETS_10E9_L)
+            .hint("30 × 10⁹/L = 30,000/µL."),
         flag("hemolysis", "Haemolysis")
             .hint("Reticulocytes > 2.5%, undetectable haptoglobin or indirect bilirubin > 2 mg/dL."),
-        num("mcv_fl", "MCV", "fL", 40.0, 150.0, 1.0),
-        num("inr", "INR", "", 0.5, 15.0, 0.1),
-        num("creatinine_mg_dl", "Serum creatinine", "mg/dL", 0.1, 30.0, 0.01),
+        num("mcv_fl", "MCV", "fL", 40.0, 150.0, 1.0).normal_as(normals::MCV_FL),
+        num("inr", "INR", "", 0.5, 15.0, 0.1).normal_as(normals::INR),
+        num("creatinine_mg_dl", "Serum creatinine", "mg/dL", 0.1, 30.0, 0.01)
+            .normal_as(normals::CREATININE_MG_DL),
         flag("active_cancer", "Active cancer"),
         flag("transplant", "Solid-organ or stem-cell transplant"),
     ],

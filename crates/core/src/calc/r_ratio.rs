@@ -5,16 +5,16 @@
 //! CIOMS/RUCAM, EASL DILI 2019 and Kullak-Ublick (Gut 2017) put R = 5 in
 //! hepatocellular and R = 2 in cholestatic; a note says so at those values.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "r_ratio",
     name: "R ratio (DILI pattern)",
     area: Area::Liver,
     fields: &[
-        num("alt_u_l", "ALT", "U/L", 1.0, 20000.0, 1.0),
+        num("alt_u_l", "ALT", "U/L", 1.0, 20000.0, 1.0).normal_as(normals::ALT_U_L),
         num("alt_uln_u_l", "ALT upper limit of normal", "U/L", 10.0, 100.0, 1.0),
-        num("alp_u_l", "ALP", "U/L", 1.0, 5000.0, 1.0),
+        num("alp_u_l", "ALP", "U/L", 1.0, 5000.0, 1.0).normal_as(normals::ALP_U_L),
         num("alp_uln_u_l", "ALP upper limit of normal", "U/L", 30.0, 500.0, 1.0),
     ],
     source: "Book Lecture 8, p. 129; EASL DILI 2019; Kullak-Ublick 2017",

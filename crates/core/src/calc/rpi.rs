@@ -10,16 +10,17 @@
 //! maturation time of 1 day for Hct 40% or more, 1.5 for 35–39, 2 for
 //! 25–34, 2.5 for 15–24 and 3 below 15.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "rpi",
     name: "Reticulocyte production index (RPI)",
     area: Area::Blood,
     fields: &[
-        num("retic_pct", "Reticulocytes", "%", 0.0, 60.0, 0.1),
-        num("hct_pct", "Haematocrit", "%", 5.0, 70.0, 0.1),
+        num("retic_pct", "Reticulocytes", "%", 0.0, 60.0, 0.1).normal_as(normals::RETIC_PCT),
+        num("hct_pct", "Haematocrit", "%", 5.0, 70.0, 0.1).normal_as(normals::HCT_PCT),
         num("rbc_10e12_l", "RBC count", "× 10⁶/µL", 0.5, 9.0, 0.01)
+            .normal_as(normals::RBC_10E12_L)
             .optional()
             .hint("Only for the absolute reticulocyte count."),
     ],

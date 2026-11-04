@@ -7,7 +7,7 @@
 //! survival 135, 95, 48 and 27 months. The book prints the blast cut-off
 //! as "< 1 / > 1"; the original IPSS (Cervantes 2009) counts ≥ 1%.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "ipss_mf",
@@ -15,9 +15,9 @@ pub const SPEC: CalcSpec = CalcSpec {
     area: Area::Blood,
     fields: &[
         num("age_years", "Age", "years", 18.0, 110.0, 1.0),
-        num("wbc_10e9_l", "WBC", "× 10⁹/L", 0.1, 500.0, 0.1),
-        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 25.0, 0.1),
-        num("blasts_pct", "Peripheral blasts", "%", 0.0, 100.0, 0.1),
+        num("wbc_10e9_l", "WBC", "× 10⁹/L", 0.1, 500.0, 0.1).normal_as(normals::WBC_10E9_L),
+        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 25.0, 0.1).normal_as(normals::HB_G_DL),
+        num("blasts_pct", "Peripheral blasts", "%", 0.0, 100.0, 0.1).normal_as(normals::BLASTS_PCT),
         flag("constitutional", "Constitutional symptoms"),
     ],
     source: "Cervantes 2009; book Hematology Lecture 9, p. 151",

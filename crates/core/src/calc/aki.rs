@@ -9,7 +9,7 @@
 //! vs above 2%, FEurea below 35% vs above 50%. FE = (urine X × plasma Cr)
 //! / (plasma X × urine Cr) × 100.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, normals, num, show};
 
 const URINE_OUTPUT: &[(&str, &str)] = &[
     ("normal", "Not reduced"),
@@ -23,8 +23,10 @@ pub const KDIGO: CalcSpec = CalcSpec {
     name: "KDIGO AKI stage",
     area: Area::Renal,
     fields: &[
-        num("baseline_cr_mg_dl", "Baseline creatinine", "mg/dL", 0.1, 20.0, 0.01),
-        num("current_cr_mg_dl", "Current creatinine", "mg/dL", 0.1, 30.0, 0.01),
+        num("baseline_cr_mg_dl", "Baseline creatinine", "mg/dL", 0.1, 20.0, 0.01)
+            .normal_as(normals::CREATININE_MG_DL),
+        num("current_cr_mg_dl", "Current creatinine", "mg/dL", 0.1, 30.0, 0.01)
+            .normal_as(normals::CREATININE_MG_DL),
         choice("urine_output", "Urine output", URINE_OUTPUT),
         flag("rrt", "Renal replacement therapy started"),
     ],
@@ -88,9 +90,10 @@ pub const FENA: CalcSpec = CalcSpec {
     area: Area::Renal,
     fields: &[
         num("urine_na_meq_l", "Urine sodium", "mEq/L", 1.0, 300.0, 1.0),
-        num("plasma_na_meq_l", "Plasma sodium", "mEq/L", 90.0, 200.0, 1.0),
+        num("plasma_na_meq_l", "Plasma sodium", "mEq/L", 90.0, 200.0, 1.0).normal_as(normals::SODIUM),
         num("urine_cr_mg_dl", "Urine creatinine", "mg/dL", 1.0, 1000.0, 0.1),
-        num("plasma_cr_mg_dl", "Plasma creatinine", "mg/dL", 0.1, 30.0, 0.01),
+        num("plasma_cr_mg_dl", "Plasma creatinine", "mg/dL", 0.1, 30.0, 0.01)
+            .normal_as(normals::CREATININE_MG_DL),
     ],
     source: "Book Nephrology Lecture 5, p. 109",
     compute: fena,
@@ -103,9 +106,10 @@ pub const FEUREA: CalcSpec = CalcSpec {
     fields: &[
         num("urine_urea_mg_dl", "Urine urea", "mg/dL", 1.0, 5000.0, 1.0)
             .hint("Urea or BUN, the same unit as the plasma value."),
-        num("plasma_urea_mg_dl", "Plasma urea", "mg/dL", 1.0, 500.0, 0.1),
+        num("plasma_urea_mg_dl", "Plasma urea", "mg/dL", 1.0, 500.0, 0.1).normal_as(normals::UREA_MG_DL),
         num("urine_cr_mg_dl", "Urine creatinine", "mg/dL", 1.0, 1000.0, 0.1),
-        num("plasma_cr_mg_dl", "Plasma creatinine", "mg/dL", 0.1, 30.0, 0.01),
+        num("plasma_cr_mg_dl", "Plasma creatinine", "mg/dL", 0.1, 30.0, 0.01)
+            .normal_as(normals::CREATININE_MG_DL),
     ],
     source: "Book Nephrology Lecture 5, p. 109",
     compute: feurea,

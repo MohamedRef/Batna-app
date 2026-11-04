@@ -4,15 +4,16 @@
 //! prerenal azotemia and ATN" (p. 109): plasma BUN-creatinine ratio > 20 in
 //! prerenal azotemia, < 15 in ATN. The book gives no word for 15–20.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "bun_creatinine",
     name: "BUN : creatinine ratio",
     area: Area::Renal,
     fields: &[
-        num("bun_mg_dl", "BUN", "mg/dL", 1.0, 300.0, 0.1).hint("Urea ÷ 2.14."),
-        num("creatinine_mg_dl", "Serum creatinine", "mg/dL", 0.1, 30.0, 0.01),
+        num("bun_mg_dl", "BUN", "mg/dL", 1.0, 300.0, 0.1).normal_as(normals::BUN_MG_DL).hint("Urea ÷ 2.14."),
+        num("creatinine_mg_dl", "Serum creatinine", "mg/dL", 0.1, 30.0, 0.01)
+            .normal_as(normals::CREATININE_MG_DL),
     ],
     source: "Book Nephrology Lecture 5, p. 109 (prerenal vs ATN table); no validated cut-off \
              study, so read it with the FENa",

@@ -54,8 +54,10 @@ preview workflow refuses to publish a build below the live feed's. Only move to 
 | Mac app | `just bundle-mac` | `dist/mac/Batna.app`, signed "Batna Code Signing" once that exists |
 | CI preview APK | Every 4 hours when `main` changed, and by hand (`.github/workflows/batna-android-preview.yml`) | `batna-preview.apk` on the `batna-preview` prerelease. Signed with the release keys since 2026-11-02 (§4), so it installs over the alpha and back. It updates itself from the same release (§5). |
 
-A preview APK and a release APK carry different keys. Uninstall one before
-installing the other, or keep only the release build.
+Preview and release APKs carry the same release keys (since 2026-11-02), so
+each installs over the other and keeps your data. Only a preview from before
+that date (signed with the old CI preview key) needs one reinstall: export
+first (Settings › Your data), or let sync bring it back.
 
 ## 4. Release day (only once Mohamed says go)
 
@@ -78,8 +80,9 @@ installing the other, or keep only the release build.
      for installing by hand;
    - the channel feed(s) (`batna-alpha`, …): the signed `update.json`
      that installed release builds read (§5).
-4. The first time only, install by hand: uninstall any *preview* build
-   (different key), install the APK on both Galaxy devices, and on the Mac
+4. The first time only, install by hand: install the APK on both Galaxy
+   devices (it installs over a preview build, which carries the same release
+   key; only a preview from before 2026-11-02 needs one reinstall), and on the Mac
    move Batna.app to Applications and run
    `xattr -dr com.apple.quarantine /Applications/Batna.app` once (it is
    self-signed). Every later release reaches them over the air.
@@ -123,8 +126,9 @@ and the files the manifest names: the APK, the zipped Batna.app, and
 What a device checks before it uses anything:
 
 1. The signature, against the public key built into the app
-   (`crates/app/update-key.pub` for release builds; previews carry the CI
-   preview key). Nothing in an unsigned or changed manifest is read.
+   (`crates/app/update-key.pub`; previews of `main` are signed with the same
+   release key, pull-request builds with a one-off key). Nothing in an
+   unsigned or changed manifest is read.
 2. The channel inside the manifest is the one asked for, the format is one
    this build understands, and every file name is a plain name (no paths,
    no URLs).
@@ -227,7 +231,7 @@ a full build.
 | Key | Where it lives | Made by |
 |---|---|---|
 | Release update key (secret) | Mac Keychain, service `batna-update` | `just update-keygen`, once. The public half is committed as `crates/app/update-key.pub`. |
-| Preview update key | GitHub Actions cache of the preview workflow | The workflow, on first run. Never the release key. |
+| Preview update key | None any more: previews of `main` use the release update key (Actions secret `BATNA_UPDATE_SECRET`); pull-request builds make a one-off key | `scripts/release-secrets.sh` (the release key) |
 
 `crates/app/update-key.pub` holds no key until `just update-keygen` runs, so
 until then a release build trusts no feed at all. Back the secret up with the

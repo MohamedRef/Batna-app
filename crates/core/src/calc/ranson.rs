@@ -10,7 +10,7 @@
 //! criteria as an image; its mortality bands (Lecture 15, p. 288): ≤ 2 points
 //! 0–3%, 3–4 15%, 5–6 40%, 7–11 nearly 100%.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, normals, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "ranson",
@@ -92,6 +92,35 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+/// Next steps and differential per band, shared with BISAP (book Lecture 15,
+/// pp. 278–292, the ACG guideline).
+pub const GUIDES: &[(&str, Guide)] = &[
+    ("ranson.0_2", Guide { next: MILD_NEXT, dd: AP_DD }),
+    ("ranson.3_4", Guide { next: SEVERE_NEXT, dd: AP_DD }),
+    ("ranson.5_6", Guide { next: SEVERE_NEXT, dd: AP_DD }),
+    ("ranson.7_11", Guide { next: SEVERE_NEXT, dd: AP_DD }),
+];
+
+pub(super) const MILD_NEXT: &[&str] = &[
+    "Fluids: Ringer's lactate, no more than 1.5 mL/kg/h if not hypovolaemic (p. 289)",
+    "Analgesia in the first 24 h; a low-fat solid diet as soon as nausea and pain allow (pp. 290–291)",
+    "Ultrasound for gallstones; if present, cholecystectomy before discharge (pp. 281, 292)",
+];
+
+pub(super) const SEVERE_NEXT: &[&str] = &[
+    "Intensive care if there is organ failure; otherwise close monitoring (p. 284)",
+    "Fluids: Ringer's lactate, a 10 mL/kg bolus if hypovolaemic, reassessed every 6 h for 48 h, aiming to bring the BUN down (p. 289)",
+    "Nasogastric feeding within 24–72 h if oral fails; avoid parenteral feeding (pp. 290–291)",
+    "No prophylactic antibiotics; worse after 7–10 days suggests infected necrosis: carbapenem (pp. 289–290)",
+    "Contrast CT if not improving after 48–72 h (p. 282)",
+    "Cholangitis: ERCP within 24 h (p. 291)",
+];
+
+pub(super) const AP_DD: &[&str] = &[
+    "Other causes of epigastric pain and a raised amylase: perforated peptic ulcer, mesenteric ischaemia, dissecting aortic aneurysm, myocardial infarction, biliary colic or cholecystitis, volvulus (pp. 279, 283)",
+    "The cause: gallstones, alcohol, after ERCP, triglycerides above 1000 mg/dL, high calcium, drugs (azathioprine, valproate, oestrogen), a tumour if over 40 (pp. 278, 280)",
+];
 
 #[cfg(test)]
 mod tests {

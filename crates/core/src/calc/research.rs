@@ -12,7 +12,7 @@
 //! accuracy measures follow the standard definitions taught in Lectures 6
 //! and 14. `page` stays `None`: these pages are slides, not book pages.
 
-use super::{Area, CalcError, CalcSpec, Field, Inputs, Outcome, Part, choice, num, show};
+use super::{Area, CalcError, CalcSpec, Field, Guide, Inputs, Outcome, Part, choice, num, show};
 
 const COUNT_MAX: f64 = 1.0e9;
 
@@ -685,6 +685,321 @@ pub const Z_SCORE: CalcSpec = CalcSpec {
         })
     },
 };
+
+/// How to read each result (the course slides, Lectures 2, 5 and 7). The
+/// differential heading does not fit a statistic, so these guides have next
+/// steps only. Diagnostic accuracy (Lecture 14) and the normal distribution
+/// (Lecture 16) are not taught yet, so they rest on standard texts: Gordis
+/// Epidemiology, 6th ed. 2019; Jaeschke et al., JAMA 1994 (likelihood
+/// ratios); Pewsner et al., BMJ 2004 (SpPin and SnNout); Šimundić, EJIFCC
+/// 2009; Kirkwood and Sterne, Essential Medical Statistics, 2nd ed. 2003;
+/// Park's Textbook of Preventive and Social Medicine, 26th ed. 2021; the
+/// CDC's Principles of Epidemiology, 3rd ed. 2012; Straus et al.,
+/// Evidence-Based Medicine, 5th ed. 2018; WHO, Estimating mortality from
+/// COVID-19, 2020.
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "incidence.rate",
+        Guide {
+            next: &[
+                "Incidence counts new cases among people at risk: it measures risk, so it is the rate to compare when looking for causes (L02 slides 25, 33)",
+                "Prevalence = incidence × mean duration: a long, non-fatal disease piles up cases (L02 slides 37–38)",
+                "Compare rates only over the same period and per the same population size (L02 slide 23)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "prevalence.rate",
+        Guide {
+            next: &[
+                "Prevalence counts all existing cases: it shows how much illness needs care, not the risk of getting it (L02 slide 32)",
+                "More new cases or longer survival raise it; cure or death lowers it (L02 slides 37–40)",
+                "People with the disease moving in or out change it (L02 slide 32)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "prevalence_id.prevalence",
+        Guide {
+            next: &[
+                "P = I × D holds for a disease in a steady state (L02 slide 37; Gordis 2019)",
+                "A treatment that prevents death without curing lengthens D and so raises P (L02 slides 40–41)",
+                "A rare but long-lasting disease, like diabetes, becomes a big public health problem (L02 slides 38–39)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "attack_rate.rate",
+        Guide {
+            next: &[
+                "An incidence for an outbreak: a defined group over a short time, as a percentage (L02 slides 26–28)",
+                "To find the source, compare the attack rate in those who did and did not eat or meet each suspect (CDC 2012)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "sar.rate",
+        Guide {
+            next: &[
+                "Take the primary cases and anyone immune out of the denominator (L02 slides 44, 46)",
+                "Count only cases within one incubation period (L02 slides 44–45)",
+                "It shows how infectious the disease is among close contacts (CDC 2012)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "cfr.rate",
+        Guide {
+            next: &[
+                "Case fatality measures how severe an acute disease is (L02 slide 61)",
+                "It is a share of the cases, not a death rate in the population (L02 slides 53, 60)",
+                "Early in an outbreak it misleads: mild cases go uncounted and some deaths come later (WHO 2020)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "pmr.ratio",
+        Guide {
+            next: &[
+                "The share of all deaths due to one cause, as a percentage (L02 slide 59)",
+                "Not a risk of dying: it can rise just because other causes fall (Gordis 2019)",
+                "It needs the deaths from all causes; the cases of one disease are not enough (L02 slide 62)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "imr.rate",
+        Guide {
+            next: &[
+                "Deaths under 1 year per 1,000 live births in the same year (L02 slide 63)",
+                "One of the most sensitive signs of a community's health and living standards (Park 2021)",
+                "Split it into neonatal (first 28 days) and later deaths to see where to act (L02 slide 64; Park 2021)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "nmr.rate",
+        Guide {
+            next: &[
+                "Deaths in the first 28 days per 1,000 live births (L02 slide 64)",
+                "It mostly reflects care in pregnancy and at birth: low birth weight, birth injury, congenital anomalies (Park 2021)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "relative_risk.risk",
+        Guide {
+            next: &[
+                "RR above 1: the exposure goes with more disease, a risk factor (L05 slide 53)",
+                CI,
+                CONFOUNDING,
+                "The attributable risk percent shows how much of the disease in the exposed comes from the exposure (L05 slide 51)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "relative_risk.protective",
+        Guide {
+            next: &[
+                "RR below 1: the exposure goes with less disease, a protective factor (L05 slide 53)",
+                "1 − RR is the relative risk reduction (L07 slide 53)",
+                CI,
+                CONFOUNDING,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "relative_risk.none",
+        Guide {
+            next: &[
+                "RR of 1: no association between the exposure and the disease (L05 slide 53)",
+                SMALL_STUDY,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "odds_ratio.risk",
+        Guide {
+            next: &[
+                "OR above 1: the exposure is commoner among cases than controls (L05 slides 32–34)",
+                RARE,
+                CI,
+                CASE_CONTROL_BIAS,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "odds_ratio.protective",
+        Guide {
+            next: &[
+                "OR below 1: the exposure is rarer among cases than controls, a protective factor (L05 slides 32–33)",
+                RARE,
+                CI,
+                CASE_CONTROL_BIAS,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "odds_ratio.none",
+        Guide {
+            next: &[
+                "OR of 1: the exposure is as common among cases as among controls, no association (L05 slide 33)",
+                SMALL_STUDY,
+                CASE_CONTROL_BIAS,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "attributable_risk.ar",
+        Guide {
+            next: &[
+                "The extra disease among the exposed that the exposure accounts for: what removing it could prevent (L05 slide 51)",
+                "Divided by Ie it gives the attributable risk percent (L05 slide 51)",
+                "Use it for public health impact, and the relative risk for how strong a cause is (Gordis 2019)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "nnt.benefit",
+        Guide {
+            next: &[
+                "Treat this many to prevent one event: the smaller, the better (L07 slides 52–53)",
+                "It depends on the baseline risk: the same 50% relative reduction gives NNT 4 at a 50% risk but 4,000 at 0.05% (L07 slide 56)",
+                "Read it with the outcome, the follow-up time and the confidence interval (L07 slides 57, 64–65)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "nnt.harm",
+        Guide {
+            next: &[
+                "Treat this many and one extra patient has the event: NNH = 1 / absolute risk increase (Straus 2018)",
+                "Weigh it against the NNT for the benefit: are the benefits worth the harm and the cost? (L07 slide 96)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "diagnostic_accuracy.sensitivity",
+        Guide {
+            next: &[
+                "Very sensitive: a negative result helps rule the disease out, SnNout (Pewsner 2004)",
+                "Screen with the most sensitive test when missing a case is costly (Gordis 2019)",
+                FIXED,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "diagnostic_accuracy.specificity",
+        Guide {
+            next: &[
+                "Very specific: a positive result helps rule the disease in, SpPin (Pewsner 2004)",
+                "Confirm a positive screen with a more specific test (Gordis 2019)",
+                FIXED,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "diagnostic_accuracy.ppv",
+        Guide {
+            next: &[
+                "PPV rises with prevalence: where the disease is rare, more positives are false (Gordis 2019)",
+                THIS_TABLE,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "diagnostic_accuracy.npv",
+        Guide {
+            next: &[
+                "NPV falls as prevalence rises: where the disease is common, more negatives are false (Gordis 2019)",
+                THIS_TABLE,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "diagnostic_accuracy.accuracy",
+        Guide {
+            next: &[
+                "Accuracy changes with prevalence even when sensitivity and specificity don't: with a rare disease it can look high for a weak test (Šimundić 2009)",
+                "So judge a test by its sensitivity, specificity and likelihood ratios (Šimundić 2009)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "diagnostic_accuracy.lr_positive",
+        Guide {
+            next: &[
+                "Above 10 shifts the probability a lot and often settles it; 5–10 moderately; 2–5 a little; 1–2 rarely matters (Jaeschke 1994)",
+                ODDS,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "diagnostic_accuracy.lr_negative",
+        Guide {
+            next: &[
+                "Below 0.1 shifts the probability a lot and often rules it out; 0.1–0.2 moderately; 0.2–0.5 a little; 0.5–1 rarely matters (Jaeschke 1994)",
+                ODDS,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "z_score.outside_95",
+        Guide {
+            next: &[
+                "Beyond ±1.96 lies the outer 5%: unusual at p < 0.05, two-sided; beyond ±2.58, at p < 0.01 (Kirkwood 2003)",
+                NORMAL_ONLY,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "z_score.within_95",
+        Guide {
+            next: &[
+                "Within ±1.96: inside the middle 95%, not unusual at the 5% level (Kirkwood 2003)",
+                NORMAL_ONLY,
+            ],
+            dd: &[],
+        },
+    ),
+];
+
+const CI: &str = "It is significant only if its 95% confidence interval leaves out 1, the value of no effect (L07 slides 64–66)";
+const CONFOUNDING: &str = "Rule out confounding: a third factor tied to both, as age is to smoking and lung cancer (L05 slides 22–24)";
+const SMALL_STUDY: &str = "A small study can miss a real effect: check the confidence interval and the study's power (L07 slides 5–8, 64–65)";
+const RARE: &str = "When the disease is rare, the OR is close to the relative risk (Gordis 2019)";
+const CASE_CONTROL_BIAS: &str = "Case-control studies are open to selection and recall bias: check how the controls were chosen (L05 slide 36)";
+const FIXED: &str = "Sensitivity and specificity stay the same whatever the prevalence; predictive values change (Gordis 2019)";
+const THIS_TABLE: &str = "It holds only at this table's prevalence (shown in the notes); recompute it for your own setting (Gordis 2019)";
+const ODDS: &str = "Post-test odds = pre-test odds × LR; unlike predictive values, the LR does not change with prevalence (Jaeschke 1994)";
+const NORMAL_ONLY: &str =
+    "These cut-offs assume a roughly normal distribution: check the shape of the data first (Kirkwood 2003)";
 
 #[cfg(test)]
 mod tests {

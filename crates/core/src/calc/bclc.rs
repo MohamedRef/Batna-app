@@ -7,7 +7,7 @@
 //! function is D. The 2022 BCLC update (Reig et al., J Hepatol 2022) differs:
 //! a single nodule of any size is stage A and stage B has three subgroups.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "bclc",
@@ -87,6 +87,73 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: vec!["BCLC 2022 differs: a single nodule of any size is stage A.".to_owned()],
     })
 }
+
+/// First-line treatment and what follows, per stage (book Lecture 18,
+/// pp. 361–374).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "bclc.0",
+        Guide {
+            next: &[
+                "Resection for a single tumour with good liver function and no portal hypertension; 5-year survival up to 90% (p. 364)",
+                "Or thermal ablation (RFA or microwave), an equal first line, most effective up to 3 cm (pp. 364–366)",
+                "Not for resection: transplant, bridged with TACE, TARE or RFA; not for transplant: RFA, then TACE, TARE or PEI (pp. 367–369)",
+                "No adjuvant systemic therapy after resection or ablation (p. 373)",
+            ],
+            dd: CONFIRM_HCC,
+        },
+    ),
+    (
+        "bclc.a",
+        Guide {
+            next: &[
+                "Resection for a single tumour with good liver function and no portal hypertension (p. 364)",
+                "Or thermal ablation (RFA or microwave), most effective up to 3 cm (pp. 364–365)",
+                "Not for resection: liver transplant within Milan criteria, bridged with TACE, TARE or RFA if the wait is over 3–6 months (pp. 367–368)",
+                "Not for transplant: RFA first, then TACE, TARE or PEI (p. 368)",
+            ],
+            dd: CONFIRM_HCC,
+        },
+    ),
+    (
+        "bclc.b",
+        Guide {
+            next: &[
+                "TACE or TARE first; consider adding percutaneous ablation (pp. 369–370)",
+                "No TACE with portal vein thrombosis or decompensated liver disease (p. 370)",
+                "Downstaging into Milan criteria with AFP below 1000 can open the way to transplant (p. 368)",
+                "Median survival with TACE 19–20 months (p. 374)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "bclc.c",
+        Guide {
+            next: &[
+                "Systemic therapy first: atezolizumab plus bevacizumab for Child-Pugh A and ECOG 0–1, after treating any oesophageal varices (pp. 370–371)",
+                "Alternatives: durvalumab plus tremelimumab, lenvatinib, sorafenib (sorafenib also in selected Child-Pugh B) (p. 371)",
+                "Second line: a tyrosine kinase inhibitor or immunotherapy; TARE with limited portal vein invasion (pp. 372–373)",
+                "Median survival about 10.7 months (p. 374)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "bclc.d",
+        Guide {
+            next: &[
+                "Palliative and hospice care (p. 373)",
+                "Transplant only for selected Child-Pugh C patients with performance status 0–1 and HCC within Milan criteria (p. 373)",
+            ],
+            dd: &[],
+        },
+    ),
+];
+
+const CONFIRM_HCC: &[&str] = &[
+    "Biopsy when imaging is indeterminate, without cirrhosis, or if metastasis or cholangiocarcinoma is possible (p. 361)",
+];
 
 #[cfg(test)]
 mod tests {

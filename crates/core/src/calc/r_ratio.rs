@@ -5,7 +5,7 @@
 //! CIOMS/RUCAM, EASL DILI 2019 and Kullak-Ublick (Gut 2017) put R = 5 in
 //! hepatocellular and R = 2 in cholestatic; a note says so at those values.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "r_ratio",
@@ -51,6 +51,59 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         },
     })
 }
+
+/// Next steps and differential per pattern (book Lecture 8, pp. 125–141,
+/// with the Kullak-Ublick 2017 workflow on p. 129).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "r_ratio.hepatocellular",
+        Guide {
+            next: &[
+                "Stop the suspected drug or herbal product now; most drug injury improves once it is withdrawn (p. 125)",
+                "Abdominal ultrasound and hepatitis A, B, C and E serology (p. 129)",
+                "Expect the enzymes to halve within 2 weeks and normalise by 4 weeks after stopping (p. 130)",
+                "Check bilirubin and INR: jaundice with hepatocellular injury worsens the prognosis (Hy's law, p. 141)",
+            ],
+            dd: HEPATOCELLULAR_DD,
+        },
+    ),
+    (
+        "r_ratio.mixed",
+        Guide {
+            next: &[
+                "Stop the suspected drug or herbal product (p. 125)",
+                "Abdominal ultrasound and hepatitis A, B, C and E serology (p. 129)",
+            ],
+            dd: HEPATOCELLULAR_DD,
+        },
+    ),
+    (
+        "r_ratio.cholestatic",
+        Guide {
+            next: &[
+                "Stop the suspected drug; cholestatic injury may take longer to settle (pp. 125, 130)",
+                "Abdominal ultrasound first, then MRCP and, if still unclear, liver biopsy (p. 129)",
+                "A raised GGT shows the ALP comes from the liver (pp. 134, 140)",
+            ],
+            dd: &[
+                "Bile duct obstruction: stones, tumour, stricture",
+                "Primary biliary cholangitis: anti-mitochondrial antibodies (pp. 13, 137)",
+                "Primary sclerosing cholangitis (MRCP)",
+                "Drug cholestasis: amoxicillin-clavulanate, erythromycin, chlorpromazine, carbamazepine, oestrogens (pp. 135–136)",
+                "ALP from bone if the GGT is normal (p. 140)",
+            ],
+        },
+    ),
+];
+
+const HEPATOCELLULAR_DD: &[&str] = &[
+    "Viral hepatitis A, B, C and E; CMV, EBV, HSV (p. 129)",
+    "Autoimmune hepatitis (p. 129)",
+    "Ischaemic hepatitis (shock liver) (pp. 129, 133)",
+    "Budd-Chiari syndrome (p. 129)",
+    "Wilson disease (p. 129)",
+    "ALT and AST of 5,000–10,000: paracetamol, toxins, toxic mushrooms, shock liver (p. 133)",
+];
 
 #[cfg(test)]
 mod tests {

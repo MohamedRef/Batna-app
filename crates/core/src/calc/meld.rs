@@ -8,7 +8,7 @@
 //! the result is capped at 40. MELD 3.0 (2023) is not used, because the book
 //! and the exam use MELD and MELD-Na.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, normals, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, normals, num};
 
 const FIELDS_MELD: &[super::Field] = &[
     num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1).normal_as(normals::BILIRUBIN_MG_DL),
@@ -141,6 +141,61 @@ fn compute_meld_na(i: &Inputs) -> Result<Outcome, CalcError> {
     };
     Ok(o)
 }
+
+/// Next steps per band (book Lecture 11, pp. 188–191, the Alexandria
+/// programme; Lecture 10, p. 186). The differential lists what moves the
+/// score without a sicker liver (OPTN policy on anticoagulated INR; Kim et
+/// al., Gastroenterology 2021, MELD 3.0, for creatinine in women).
+pub const GUIDES: &[(&str, Guide)] = &[
+    ("meld.lt10", BELOW_10),
+    ("meld.10_14", FROM_10),
+    ("meld.15_30", FROM_15),
+    ("meld.gt30", ABOVE_30),
+    ("meld_na.lt10", BELOW_10),
+    ("meld_na.10_14", FROM_10),
+    ("meld_na.15_30", FROM_15),
+    ("meld_na.gt30", ABOVE_30),
+];
+
+const NOT_THE_LIVER: &[&str] = &[
+    "Warfarin raises the INR, and the score, without a sicker liver",
+    "Low muscle mass (women, wasting) keeps creatinine low, so the score underestimates the risk",
+];
+
+const BELOW_10: Guide = Guide {
+    next: &[
+        "Recalculate at each visit: AASLD evaluates for transplant from MELD 10, Child-Pugh 7 or any decompensation (p. 188)",
+        "Refractory ascites or repeated encephalopathy qualify for transplant even below MELD 15 (p. 189)",
+        "HCC, hepatopulmonary syndrome, portopulmonary hypertension and recurrent cholangitis can earn exception points (p. 189)",
+    ],
+    dd: NOT_THE_LIVER,
+};
+
+const FROM_10: Guide = Guide {
+    next: &[
+        "Refer for transplant evaluation: the AASLD threshold is MELD 10 (p. 188)",
+        "The book's programme transplants from MELD 15, or earlier for refractory ascites or repeated encephalopathy (p. 189)",
+        "HCC within criteria and the other listed conditions earn exception points (pp. 189–190)",
+    ],
+    dd: NOT_THE_LIVER,
+};
+
+const FROM_15: Guide = Guide {
+    next: &[
+        "Transplant candidate: the book's programme transplants from MELD 15 (p. 189)",
+        "Check the exclusions: age over 70, uncontrolled sepsis, advanced heart or lung disease, alcohol in the last 6 months, HCC beyond criteria, cholangiocarcinoma (p. 191)",
+    ],
+    dd: NOT_THE_LIVER,
+};
+
+const ABOVE_30: Guide = Guide {
+    next: &[
+        "Very high short-term mortality: the book's programme discusses MELD above 30 case by case (p. 189)",
+        "Weigh the high-risk factors: renal failure or HRS, active variceal bleeding, portal vein thrombosis, severe malnutrition (p. 191)",
+        "Treat what can be reversed now: infection, bleeding, AKI",
+    ],
+    dd: NOT_THE_LIVER,
+};
 
 #[cfg(test)]
 mod tests {

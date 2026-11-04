@@ -258,6 +258,57 @@ fn preflight(root: &Path, base: &str) -> Res<String> {
     Ok(out)
 }
 
+/// Unquoted options in a YAML flow list (`options: [a, b, c]`) that start in
+/// lowercase or with `)`: a comma inside one option split it into several
+/// ("Analgesia, warmth, fluids" became three options). Quote that option.
+/// A first word with a capital or a digit (`pH`, `hCG`) is a term, not a split.
+/// Returns `line N: ...` problems for one file's text.
+pub fn split_options(text: &str) -> Vec<String> {
+    let mut out = Vec::new();
+    for (n, line) in text.lines().enumerate() {
+        let Some(at) = line.find("options: [") else { continue };
+        let rest = &line[at + "options: [".len()..];
+        let (mut depth, mut quote, mut cur, mut parts) = (0i32, None::<char>, String::new(), Vec::new());
+        for ch in rest.chars() {
+            match (quote, ch) {
+                (Some(q), c) if c == q => {
+                    quote = None;
+                    cur.push(c);
+                }
+                (Some(_), c) => cur.push(c),
+                (None, '"' | '\'') if cur.trim().is_empty() => {
+                    quote = Some(ch);
+                    cur.push(ch);
+                }
+                (None, '[' | '{') => {
+                    depth += 1;
+                    cur.push(ch);
+                }
+                (None, ']') if depth == 0 => break,
+                (None, ']' | '}') => {
+                    depth -= 1;
+                    cur.push(ch);
+                }
+                (None, ',') if depth == 0 => parts.push(std::mem::take(&mut cur)),
+                (None, c) => cur.push(c),
+            }
+        }
+        parts.push(cur);
+        for p in parts.iter().map(|p| p.trim()) {
+            // `pH`, `hCG`, `mTOR`, `c-MYC`: a capital or digit in the first word is a term.
+            let word = p.split_whitespace().next().unwrap_or("");
+            let term = word.chars().any(|c| c.is_ascii_uppercase() || c.is_ascii_digit());
+            if p.starts_with(')') || (p.starts_with(|c: char| c.is_ascii_lowercase()) && !term) {
+                out.push(format!(
+                    "line {}: option `{p}` starts in lowercase, so a comma probably split one option into several; put the whole option in quotes",
+                    n + 1
+                ));
+            }
+        }
+    }
+    out
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -444,5 +495,15 @@ mod tests {
         base.lectures[0].items[0].status = batna_core::content::Status::Unverified;
         let out = diff(&base, &head);
         assert!(out.contains(&format!("| {first} | 1 / ")), "{out}");
+    }
+
+    #[test]
+    fn split_options_are_caught() {
+        let text = "    options: [Analgesia, warmth, fluids, Splenectomy]\n    options: [\"Analgesia, warmth\", Splenectomy, \"s.c. only\", pH 7.1, hCG, mTOR inhibitor]\n    options: [Obstruction, ) late, [a, b], {k: v}]\n";
+        let p = split_options(text);
+        assert_eq!(p.len(), 3, "{p:?}");
+        assert!(p[0].starts_with("line 1: option `warmth`"));
+        assert!(p[1].starts_with("line 1: option `fluids`"));
+        assert!(p[2].starts_with("line 3: option `) late`"));
     }
 }

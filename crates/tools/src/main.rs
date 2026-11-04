@@ -149,6 +149,8 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
                 entry.pages
             ));
         }
+        problems
+            .extend(content::split_options(&text).into_iter().map(|p| format!("{}: {p}", rel(root, &path))));
         let cx = Context { raw_keys: raw_keys(&text), approved: Some(&approved) };
         for p in validate::lecture(&lec, &cx) {
             problems.push(format!("{}: {p}", rel(root, &path)));

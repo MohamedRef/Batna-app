@@ -104,6 +104,7 @@ pub fn validate_all(
         };
         let cx =
             LessonContext { lecture: &lecture, approved: Some(approved), raw_step_keys: raw_step_keys(text) };
+        problems.extend(crate::content::split_options(text).into_iter().map(|p| format!("{at}: {p}")));
         for p in lesson::validate(file, &cx) {
             problems.push(format!("{at}: {p}"));
         }

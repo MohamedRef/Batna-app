@@ -8,7 +8,7 @@
 //! its highest level met (5 small + 4 large joints scores 3); 6 or more of
 //! 10 is definite RA.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num};
 
 const SEROLOGY: &[(&str, &str)] = &[
     ("negative", "RF and ACPA negative"),
@@ -89,6 +89,46 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+/// Next steps and differential (book Rheumatology Lecture 16, pp. 245–264).
+/// Where the book is silent: the notes to the criteria in Aletaha et al.,
+/// Arthritis Rheum 2010 (who they apply to, typical erosions, scoring over
+/// time).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "acr_eular_2010_ra.definite",
+        Guide {
+            next: &[
+                "Start methotrexate with short-term glucocorticoids; if methotrexate is contraindicated, leflunomide or sulfasalazine (p. 261)",
+                "DMARDs within 12 weeks of onset: joint destruction happens in the first 2 years (pp. 260, 264)",
+                "Bridge with prednisolone 7.5 mg for 1–3 months while the DMARD takes effect (p. 264)",
+                "Treat to target: improved at 3 months and at target by 6; if not, add a biologic DMARD or a JAK inhibitor when poor prognostic factors are present, otherwise change or add a second conventional DMARD (p. 261)",
+                "Poor prognostic factors: early severe synovitis, erosions, extra-articular disease, RF positivity, a family history of severe RA (p. 260)",
+                "Baseline: ESR and CRP, RF and anti-CCP, joint X-rays; then disease activity (DAS28) and drug safety bloods (p. 257)",
+            ],
+            dd: &[
+                "The criteria apply only when no other disease explains the synovitis: SLE, psoriatic arthritis, gout (Aletaha 2010)",
+                "RF is also positive in Sjögren syndrome, other connective tissue diseases, chronic liver disease, sarcoidosis, myeloma and chronic infections (TB, leprosy, syphilis) (p. 258)",
+            ],
+        },
+    ),
+    (
+        "acr_eular_2010_ra.not_met",
+        Guide {
+            next: &[
+                "Not classifiable as RA yet: score again as the picture evolves, since the points can add up over time (Aletaha 2010)",
+                "Erosions typical of RA classify it as RA whatever the score (Aletaha 2010)",
+                "Anti-CCP is up to 98% specific and positive early, even before the arthritis; RF is positive in only 70% early on (pp. 258–259)",
+                "Synovial fluid separates inflammatory arthritis from degenerative or septic arthritis (p. 259)",
+            ],
+            dd: &[
+                "Viral or other self-limiting arthritis: why 6 weeks of synovitis matter (p. 245)",
+                "SLE, psoriatic arthritis, gout (Aletaha 2010)",
+                "Osteoarthritis (non-inflammatory fluid) or septic arthritis (p. 259)",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

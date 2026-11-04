@@ -6,7 +6,7 @@
 //! alcohol-associated liver disease guidance). The book (Lecture 12, p. 196)
 //! discusses steroids for moderate to severe disease but gives no DF.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "maddrey",
@@ -52,6 +52,47 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+/// Next steps per band. The book (Lecture 12, p. 196) advises abstinence and
+/// corticosteroids for moderate to severe alcoholic hepatitis without a
+/// threshold; the doses, the infection screen and the Lille stopping rule
+/// are from AASLD 2019 (Crabb et al., Hepatology 2020) and EASL 2018, and
+/// the Lille score from Louvet et al., Hepatology 2007.
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "maddrey.severe",
+        Guide {
+            next: &[
+                "Prednisolone 40 mg a day for 28 days if there is no contraindication: active infection, GI bleeding, AKI, pancreatitis (AASLD 2019; book p. 196)",
+                "Screen for infection first: blood, urine and ascitic cultures, chest X-ray (EASL 2018)",
+                "Lille score at day 4–7: 0.45 or more is no response, so stop the steroid (Louvet 2007)",
+                "Abstinence and nutrition: 35–40 kcal/kg and protein 1.2–1.5 g/kg a day (pp. 15, 196)",
+                "Non-responders: ask a transplant centre about early transplant (EASL 2018)",
+            ],
+            dd: AH_DD,
+        },
+    ),
+    (
+        "maddrey.not_severe",
+        Guide {
+            next: &[
+                "Supportive care: abstinence, nutrition, treat any infection; no steroid on the DF alone (p. 196)",
+                "Recalculate if the bilirubin or INR rises; a MELD above 20 also marks severe disease (AASLD 2019)",
+            ],
+            dd: AH_DD,
+        },
+    ),
+];
+
+/// What else gives jaundice and a long INR in a drinker (AASLD 2019 on
+/// confounders; book Lecture 8, p. 133, for the AST of alcohol).
+pub(super) const AH_DD: &[&str] = &[
+    "Decompensated alcohol-related cirrhosis without hepatitis",
+    "Drug-induced liver injury, including paracetamol taken with alcohol",
+    "Viral or autoimmune hepatitis",
+    "Bile duct obstruction or cholangitis (ultrasound)",
+    "Sepsis or ischaemic hepatitis: an AST above 300 points away from alcohol alone (p. 133)",
+];
 
 #[cfg(test)]
 mod tests {

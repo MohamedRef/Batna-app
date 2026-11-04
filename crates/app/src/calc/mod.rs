@@ -486,9 +486,9 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome, #[props(default = true)] 
 mod tests {
     use super::*;
 
-    /// The pages a calculator's results cite, found by trying many inputs
-    /// (seeded, so the same every run).
-    fn cited_pages(spec: &CalcSpec) -> BTreeMap<u32, Vec<&'static str>> {
+    /// The results a calculator gives, as (band, cited page), found by trying
+    /// many inputs (seeded, so the same every run).
+    fn reached(spec: &CalcSpec) -> Vec<(&'static str, Option<u32>)> {
         let mut seed: u64 = 0x9E37_79B9_7F4A_7C15;
         let mut rnd = move || {
             seed ^= seed << 13;
@@ -496,7 +496,7 @@ mod tests {
             seed ^= seed << 17;
             (seed >> 11) as f64 / (1u64 << 53) as f64
         };
-        let mut pages: BTreeMap<u32, Vec<&'static str>> = BTreeMap::new();
+        let mut seen = Vec::new();
         for _ in 0..4000 {
             let mut i = Inputs::new();
             for f in spec.fields {
@@ -513,7 +513,20 @@ mod tests {
                     FieldKind::Choice(o) => i.choice(f.key, o[(rnd() * o.len() as f64) as usize % o.len()].0),
                 };
             }
-            if let Ok(Outcome { page: Some(p), band, .. }) = spec.run(&i) {
+            if let Ok(Outcome { band, page, .. }) = spec.run(&i)
+                && !seen.contains(&(band, page))
+            {
+                seen.push((band, page));
+            }
+        }
+        seen
+    }
+
+    /// The pages a calculator's results cite, with the bands citing each.
+    fn cited_pages(spec: &CalcSpec) -> BTreeMap<u32, Vec<&'static str>> {
+        let mut pages: BTreeMap<u32, Vec<&'static str>> = BTreeMap::new();
+        for (band, page) in reached(spec) {
+            if let Some(p) = page {
                 let bands = pages.entry(p).or_default();
                 if !bands.contains(&band) {
                     bands.push(band);
@@ -543,6 +556,26 @@ mod tests {
             missing.is_empty(),
             "add the book's words for these pages to content/calc-quotes.yaml, then run \
              batna-tools refs --lecture <id> --write:\n{}",
+            missing.join("\n")
+        );
+    }
+
+    // Mohamed, 2026-11-02: every calculator rests on an accurate source, and
+    // its result says what the number means, the next step and the DD.
+    #[test]
+    fn every_result_has_a_next_step() {
+        let mut missing = Vec::new();
+        for spec in calc::all() {
+            for (band, _) in reached(spec) {
+                let line = format!("{} {band}", spec.id);
+                if calc::guide(band).is_none() && !missing.contains(&line) {
+                    missing.push(line);
+                }
+            }
+        }
+        assert!(
+            missing.is_empty(),
+            "add a GUIDES entry (next steps and DD, with their sources) for:\n{}",
             missing.join("\n")
         );
     }

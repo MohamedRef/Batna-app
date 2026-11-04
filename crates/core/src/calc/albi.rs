@@ -5,7 +5,7 @@
 //! grade 2 > −2.60 to ≤ −1.39, grade 3 > −1.39. Inputs are taken in mg/dL and
 //! g/dL and converted (bilirubin × 17.1, albumin × 10).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "albi",
@@ -43,6 +43,47 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+/// Next steps per grade (book Lecture 18, pp. 362–373; Lecture 8, p. 140 for
+/// albumin outside the liver).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "albi.1",
+        Guide {
+            next: &[
+                "Stage the tumour with BCLC and treat by stage (p. 362)",
+                "The best reserve for resection, ablation or TACE when the stage allows; resection still needs no portal hypertension (pp. 363–364)",
+            ],
+            dd: NOT_THE_LIVER,
+        },
+    ),
+    (
+        "albi.2",
+        Guide {
+            next: &[
+                "Stage with BCLC; weigh the risk of liver failure before resection or TACE (pp. 362–364)",
+                "Check Child-Pugh and look for portal hypertension too (p. 364)",
+            ],
+            dd: NOT_THE_LIVER,
+        },
+    ),
+    (
+        "albi.3",
+        Guide {
+            next: &[
+                "Poor reserve: a high risk of liver failure after resection or TACE; TACE is contraindicated in decompensated disease (pp. 363, 370)",
+                "Check Child-Pugh: above B7, or B7 with ascites, is BCLC stage D (p. 362)",
+                "Child-Pugh C: transplant only within Milan criteria with performance status 0–1, otherwise palliative care (p. 373)",
+            ],
+            dd: NOT_THE_LIVER,
+        },
+    ),
+];
+
+const NOT_THE_LIVER: &[&str] = &[
+    "Low albumin from malnutrition or nephrotic syndrome (p. 140)",
+    "High bilirubin from haemolysis or bile duct obstruction",
+];
 
 #[cfg(test)]
 mod tests {

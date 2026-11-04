@@ -7,7 +7,7 @@
 //! (Lecture 15, p. 288) reads a score of 2 or more as severe acute
 //! pancreatitis; Wu 2008 reported the mortality rise from 3 points.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, normals, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "bisap",
@@ -49,6 +49,13 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+/// Next steps and differential, shared with Ranson (book Lecture 15,
+/// pp. 278–292).
+pub const GUIDES: &[(&str, Guide)] = &[
+    ("bisap.mild", Guide { next: super::ranson::MILD_NEXT, dd: super::ranson::AP_DD }),
+    ("bisap.severe", Guide { next: super::ranson::SEVERE_NEXT, dd: super::ranson::AP_DD }),
+];
 
 #[cfg(test)]
 mod tests {

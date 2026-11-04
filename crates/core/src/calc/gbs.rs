@@ -8,7 +8,7 @@
 //! cardiac failure 2. The book reads a score of 0–1 as very low risk, fit
 //! for outpatient care and endoscopy.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, normals, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, normals, num};
 
 const SEX: &[(&str, &str)] = &[("male", "Man"), ("female", "Woman")];
 
@@ -100,6 +100,43 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+/// Next steps and differential per band (book Gastroenterology Lecture 11,
+/// pp. 301–308).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "glasgow_blatchford.very_low",
+        Guide {
+            next: &[
+                "Safe to manage as an outpatient with outpatient endoscopy (p. 302)",
+                "Aspirin for primary prevention: pause it and review; for secondary prevention: keep it (p. 303)",
+            ],
+            dd: UGIB_DD,
+        },
+    ),
+    (
+        "glasgow_blatchford.not_low",
+        Guide {
+            next: &[
+                "Admit and resuscitate with saline or Ringer's lactate; ICU for haematemesis, shock, persistent instability, serious illness or advanced liver disease (p. 302)",
+                "Transfuse below Hb 7 g/dL to 7–9; with cardiovascular disease below 8, to 10 (p. 303)",
+                "PPI: 80 mg IV, then 8 mg/h (or 40 mg every 12 h) (p. 304)",
+                "Endoscopy within 24 h; within 12 h if bleeding actively or varices are suspected (p. 305)",
+                "Suspected varices: terlipressin, somatostatin or octreotide, plus ceftriaxone 1 g a day for up to 7 days (p. 306)",
+                "Hold warfarin (vitamin K and PCC if unstable) and DOACs; keep aspirin given for secondary prevention (pp. 303–304)",
+            ],
+            dd: UGIB_DD,
+        },
+    ),
+];
+
+const UGIB_DD: &[&str] = &[
+    "Peptic ulcer; erosive oesophagitis, gastritis or duodenitis (p. 308)",
+    "Varices or portal hypertensive gastropathy in liver disease (pp. 306, 308)",
+    "Mallory-Weiss tear; Cameron ulcer (p. 308)",
+    "Vascular: Dieulafoy lesion, GAVE, angiodysplasia, aorto-enteric fistula (p. 308)",
+    "Tumours: gastric or oesophageal cancer, GIST (p. 308)",
+];
 
 #[cfg(test)]
 mod tests {

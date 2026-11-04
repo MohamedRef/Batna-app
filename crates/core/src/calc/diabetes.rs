@@ -7,7 +7,7 @@
 //! total osmolality 2 × Na + glucose + urea (mmol/L) above 320. HHS has
 //! resolved once osmolality is below 300 (p. 192).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
 
 const NA: super::Field = num("na_meq_l", "Sodium", "mEq/L", 90.0, 200.0, 1.0).normal_as(normals::SODIUM);
 const GLUCOSE: super::Field =
@@ -98,6 +98,59 @@ fn osmolality(i: &Inputs) -> Result<Outcome, CalcError> {
         notes,
     })
 }
+
+/// Next steps and differential (book Diabetology Lecture 15, pp. 187–192,
+/// and the Nephrology book pp. 7–8, 128–129 and 133). Where the book is
+/// silent: the rate limits of the JBDS HHS guideline (Mustafa et al.,
+/// Diabet Med 2023).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "corrected_sodium.na",
+        Guide {
+            next: &[
+                "A normal or high corrected sodium means a profound free-water loss (p. 189)",
+                "Replace about half the fluid deficit in the first 8–12 h with 0.9% saline or another crystalloid (p. 190)",
+                "In HHS the sodium often rises at first as the glucose falls; after that, no more than a 10 mmol/L fall in 24 h (JBDS 2023)",
+                "For the anion gap use the measured sodium, not this corrected one (Nephrology pp. 7–8)",
+            ],
+            dd: &[
+                "A low measured sodium from glucose drawing water out of the cells: translocational, not a true hyponatraemia (p. 189; Nephrology p. 128)",
+                "Pseudohyponatraemia from very high lipids or proteins, as in myeloma (Nephrology p. 129)",
+            ],
+        },
+    ),
+    (
+        "effective_osmolality.hhs",
+        Guide {
+            next: &[
+                "HHS also needs glucose 600 mg/dL or more, β-hydroxybutyrate below 3 mmol/L, pH 7.3 or more and HCO3 above 15 (p. 189)",
+                "Fluids first: 0.9% saline or another crystalloid, replacing half the deficit in 8–12 h; no insulin until the potassium is known and above 3.5 (pp. 190–191)",
+                "Then insulin 0.05 units/kg/h, keeping glucose at 200–250 mg/dL until resolution (p. 190)",
+                "Let the osmolality fall only 3–8 mOsm/kg/h (JBDS 2023); a sudden coma suggests brain oedema: mannitol 1 g/kg IV over 30 min (p. 192)",
+                "Prophylactic LMWH for the whole admission: the clot risk is higher than in DKA (p. 192)",
+                "Resolved when glucose is below 250 mg/dL, osmolality below 300 and urine output above 0.5 mL/kg/h (p. 192)",
+            ],
+            dd: &[
+                "Mixed DKA and HHS: check the ketones and the pH (pp. 188–189)",
+                "The trigger: infection most often; poor water intake in the elderly; diabetes not yet known in 20% (p. 187)",
+                "Hypernatraemia from a water deficit, with no high glucose (Nephrology p. 133)",
+            ],
+        },
+    ),
+    (
+        "effective_osmolality.below",
+        Guide {
+            next: &[
+                "Not hyperosmolar: with a high glucose, check the ketones and pH for DKA (p. 188)",
+                "Under treatment, below 300 is one of the HHS resolution criteria, with glucose below 250 mg/dL and urine above 0.5 mL/kg/h (p. 192)",
+            ],
+            dd: &[
+                "DKA: glucose 200 mg/dL or more (or known diabetes), β-hydroxybutyrate 3 mmol/L or more, pH below 7.3 or HCO3 below 18 (p. 188)",
+                "Euglycaemic DKA, glucose below 200: SGLT2 inhibitors, pregnancy, fasting, insulin given on the way in (p. 188)",
+            ],
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

@@ -30,5 +30,6 @@ not in the native build, so it is not counted; the Worker's wasm code is tested 
 
 ## Raising the floor
 
-When main's coverage is a whole point or more above the floor, raise `scripts/coverage-floor` to the new whole number
-in a housekeeping PR. Never lower it; if a change truly cannot be tested natively, say so in its PR.
+When main's coverage is two points or more above the floor, raise `scripts/coverage-floor` to one point under main's
+whole number (95.05% → 94) in a housekeeping PR, so parallel PRs that each add a little untested code don't turn
+each other red. The goal is 90% or more. Never lower it; if a change truly cannot be tested natively, say so in its PR.

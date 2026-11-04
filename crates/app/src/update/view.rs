@@ -125,6 +125,12 @@ pub(super) fn primary_action(phase: &Phase) -> Option<(&'static str, fn())> {
 #[component]
 pub fn UpdatesSection() -> Element {
     let status = use_update_status();
+    rsx! { UpdatesView { status } }
+}
+
+/// Settings › Updates for a given status (what [`UpdatesSection`] follows).
+#[component]
+pub(super) fn UpdatesView(status: Signal<Option<Status>>) -> Element {
     let s = status.read().clone();
     let build = super::build_number();
     let commit = super::commit();
@@ -506,6 +512,11 @@ fn open_install_permission() {
 #[component]
 pub fn UpdateBanner() -> Element {
     let status = use_update_status();
+    rsx! { BannerView { status } }
+}
+
+#[component]
+pub(super) fn BannerView(status: Signal<Option<Status>>) -> Element {
     let Some(s) = status.read().clone() else { return rsx! {} };
     let Some(offer) = s.banner().cloned() else { return rsx! {} };
     let Some((label, run)) = primary_action(&s.phase) else { return rsx! {} };
@@ -556,6 +567,11 @@ pub fn UpdateBanner() -> Element {
 #[component]
 pub fn ContentNote() -> Element {
     let status = use_update_status();
+    rsx! { ContentNoteView { status } }
+}
+
+#[component]
+pub(super) fn ContentNoteView(status: Signal<Option<Status>>) -> Element {
     let Some(s) = status.read().clone() else { return rsx! {} };
     if !s.content_only_news() {
         return rsx! {};

@@ -552,3 +552,5 @@ fn write_json(dir: &Path, name: &str, value: &impl Serialize) -> Result<(), Stri
 
 #[cfg(test)]
 mod tests;
+#[cfg(test)]
+mod ui_tests;

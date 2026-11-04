@@ -35,12 +35,40 @@ impl RemindPrefs {
         shared().setting(Self::KEY).unwrap_or_default()
     }
 
-    pub fn save(mut self) {
+    pub fn save(self) {
+        let prefs = self.normalized();
+        crate::store::save_setting(Self::KEY, &prefs);
+        *PREFS.write() = prefs;
+    }
+
+    /// Times soonest first, each once, at most [`MAX_TIMES`].
+    fn normalized(mut self) -> Self {
         self.times.sort_unstable();
         self.times.dedup();
         self.times.truncate(MAX_TIMES);
-        crate::store::save_setting(Self::KEY, &self);
-        *PREFS.write() = self;
+        self
+    }
+
+    /// "Add a time": two hours after the last one (7 pm with none), never
+    /// past 11 pm.
+    fn with_added_time(mut self) -> Self {
+        let last = self.times.last().copied().unwrap_or(17 * 60);
+        self.times.push((last + 120).min(23 * 60));
+        self
+    }
+
+    /// The `i`th time changed to what the time input says, if it reads.
+    fn with_time(mut self, i: usize, input: &str) -> Option<Self> {
+        let v = parse_hhmm(input)?;
+        *self.times.get_mut(i)? = v;
+        Some(self)
+    }
+
+    fn without_time(mut self, i: usize) -> Self {
+        if i < self.times.len() {
+            self.times.remove(i);
+        }
+        self
     }
 }
 
@@ -118,10 +146,6 @@ pub(crate) fn parse_hhmm(s: &str) -> Option<u16> {
 /// Settings › Reminders.
 #[component]
 pub fn RemindSection() -> Element {
-    use crate::i18n::remind as tx;
-    use crate::settings::DeviceOnly;
-    let prefs = PREFS();
-    let here = HERE();
     // Android: re-read when the sheet re-renders (e.g. after he returns from
     // its settings). The Mac answers later, so it is polled while open.
     let mut mac_allowed = use_signal(native::enabled);
@@ -137,10 +161,27 @@ pub fn RemindSection() -> Element {
         }
     });
     let allowed = if cfg!(target_os = "macos") { mac_allowed() } else { native::enabled() };
-    let unrestricted = native::battery_unrestricted();
+    rsx! {
+        RemindView {
+            local: native::local(),
+            mac: cfg!(target_os = "macos"),
+            allowed,
+            unrestricted: native::battery_unrestricted(),
+        }
+    }
+}
+
+/// Settings › Reminders on a device that can (`local`) or can't ring, with
+/// what the system said about notifications and the battery.
+#[component]
+fn RemindView(local: bool, mac: bool, allowed: Option<bool>, unrestricted: Option<bool>) -> Element {
+    use crate::i18n::remind as tx;
+    use crate::settings::DeviceOnly;
+    let prefs = PREFS();
+    let here = HERE();
     let on_off = |on: bool| if on { tx::ON } else { tx::OFF };
 
-    if !native::local() {
+    if !local {
         return rsx! {
             crate::ui::Card {
                 h2 { {tx::SECTION} }
@@ -182,9 +223,7 @@ pub fn RemindSection() -> Element {
                                 onchange: {
                                     let prefs = prefs.clone();
                                     move |e: FormEvent| {
-                                        if let Some(v) = parse_hhmm(&e.value()) {
-                                            let mut p = prefs.clone();
-                                            p.times[i] = v;
+                                        if let Some(p) = prefs.clone().with_time(i, &e.value()) {
                                             p.save();
                                         }
                                     }
@@ -195,11 +234,7 @@ pub fn RemindSection() -> Element {
                                     class: "btn btn-secondary",
                                     onclick: {
                                         let prefs = prefs.clone();
-                                        move |_| {
-                                            let mut p = prefs.clone();
-                                            p.times.remove(i);
-                                            p.save();
-                                        }
+                                        move |_| prefs.clone().without_time(i).save()
                                     },
                                     {tx::REMOVE}
                                 }
@@ -211,12 +246,7 @@ pub fn RemindSection() -> Element {
                             class: "btn btn-secondary",
                             onclick: {
                                 let prefs = prefs.clone();
-                                move |_| {
-                                    let mut p = prefs.clone();
-                                    let last = p.times.last().copied().unwrap_or(17 * 60);
-                                    p.times.push((last + 120).min(23 * 60));
-                                    p.save();
-                                }
+                                move |_| prefs.clone().with_added_time().save()
                             },
                             {tx::ADD}
                         }
@@ -247,13 +277,13 @@ pub fn RemindSection() -> Element {
                     p { {tx::BLOCKED} }
                     div { class: "row",
                         // macOS asks only once; after a no, only System Settings can change it.
-                        if !cfg!(target_os = "macos") {
+                        if !mac {
                             button { class: "btn btn-primary", onclick: move |_| native::request_permission(), {tx::ALLOW} }
                         }
                         button { class: "btn btn-secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                     }
                 }
-                if here && cfg!(target_os = "macos") && allowed != Some(false) {
+                if here && mac && allowed != Some(false) {
                     p { class: "muted small", {tx::MAC_HINT} }
                     button { class: "btn btn-secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                 }
@@ -277,6 +307,114 @@ mod tests {
         assert_eq!(hhmm(7 * 60 + 5), "07:05");
         assert_eq!(parse_hhmm("24:00"), None);
         assert_eq!(parse_hhmm("nope"), None);
+    }
+
+    #[test]
+    fn editing_times_keeps_them_sorted_unique_and_at_most_three() {
+        let p =
+            RemindPrefs { on: true, times: vec![20 * 60, 8 * 60, 20 * 60, 12 * 60, 22 * 60] }.normalized();
+        assert_eq!(p.times, vec![8 * 60, 12 * 60, 20 * 60]);
+        // Added: two hours after the last, never past 11 pm; 7 pm with none.
+        assert_eq!(
+            RemindPrefs { on: true, times: vec![18 * 60] }.with_added_time().times,
+            vec![18 * 60, 20 * 60]
+        );
+        assert_eq!(RemindPrefs { on: true, times: vec![22 * 60] }.with_added_time().times[1], 23 * 60);
+        assert_eq!(RemindPrefs { on: true, times: vec![] }.with_added_time().times, vec![19 * 60]);
+        // Changed from the time input, only when it reads.
+        let two = RemindPrefs { on: true, times: vec![8 * 60, 19 * 60] };
+        assert_eq!(two.clone().with_time(1, "21:30").unwrap().times, vec![8 * 60, 21 * 60 + 30]);
+        assert_eq!(two.clone().with_time(1, "nope"), None);
+        assert_eq!(two.clone().with_time(5, "10:00"), None);
+        assert_eq!(two.clone().without_time(0).times, vec![19 * 60]);
+        assert_eq!(two.clone().without_time(9), two);
+    }
+
+    #[derive(Props, Clone, PartialEq)]
+    struct Case {
+        prefs: RemindPrefs,
+        here: bool,
+        local: bool,
+        mac: bool,
+        allowed: Option<bool>,
+        unrestricted: Option<bool>,
+    }
+
+    fn root(c: Case) -> Element {
+        use_hook(|| {
+            *PREFS.write() = c.prefs.clone();
+            *HERE.write() = c.here;
+        });
+        rsx! { RemindView { local: c.local, mac: c.mac, allowed: c.allowed, unrestricted: c.unrestricted } }
+    }
+
+    fn render(c: Case) -> String {
+        crate::store::use_memory_store();
+        let mut dom = VirtualDom::new_with_props(root, c);
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    fn phone() -> Case {
+        Case {
+            prefs: RemindPrefs { on: true, times: vec![8 * 60, 19 * 60] },
+            here: true,
+            local: true,
+            mac: false,
+            allowed: Some(true),
+            unrestricted: Some(true),
+        }
+    }
+
+    #[test]
+    fn a_device_that_cannot_ring_says_the_phone_does() {
+        use crate::i18n::remind as tx;
+        let page = render(Case { local: false, ..phone() });
+        assert!(page.contains(tx::PHONE_ONLY) && !page.contains(tx::DAILY), "{page}");
+        // This desktop build arms nothing and knows nothing about permissions.
+        assert!(!native::local());
+        assert_eq!(native::enabled(), None);
+        assert_eq!(native::battery_unrestricted(), None);
+    }
+
+    #[test]
+    fn the_phone_lists_its_times_and_who_rings() {
+        use crate::i18n::remind as tx;
+        let page = render(phone());
+        for text in [tx::DAILY, tx::TIMES, tx::ADD, tx::REMOVE, tx::HERE] {
+            assert!(page.contains(text), "missing {text}: {page}");
+        }
+        assert!(page.contains("value=\"08:00\"") && page.contains("value=\"19:00\""), "{page}");
+        assert_eq!(page.matches(tx::REMOVE).count(), 2, "{page}");
+        assert!(!page.contains(tx::BLOCKED) && !page.contains(tx::BATTERY), "all allowed: {page}");
+
+        // Three times: no more to add. One time: nothing to remove.
+        let three = render(Case { prefs: RemindPrefs { on: true, times: vec![1, 2, 3] }, ..phone() });
+        assert!(!three.contains(tx::ADD), "{three}");
+        let one = render(Case { prefs: RemindPrefs::default(), ..phone() });
+        assert!(!one.contains(tx::REMOVE), "{one}");
+
+        // Off: no times and no device choice.
+        let off = render(Case { prefs: RemindPrefs { on: false, times: vec![60] }, ..phone() });
+        assert!(off.contains(tx::DAILY) && !off.contains(tx::TIMES) && !off.contains(tx::HERE), "{off}");
+    }
+
+    #[test]
+    fn blocked_notifications_and_battery_limits_say_how_to_fix_them() {
+        use crate::i18n::remind as tx;
+        let page = render(Case { allowed: Some(false), unrestricted: Some(false), ..phone() });
+        for text in [tx::BLOCKED, tx::ALLOW, tx::OPEN_NOTIFICATIONS, tx::BATTERY, tx::OPEN_APP] {
+            assert!(page.contains(text), "missing {text}: {page}");
+        }
+        // The Mac asks once: only System Settings can change a no.
+        let mac = render(Case { mac: true, allowed: Some(false), unrestricted: None, ..phone() });
+        assert!(mac.contains(tx::BLOCKED) && !mac.contains(tx::ALLOW), "{mac}");
+        let mac_ok = render(Case { mac: true, allowed: None, unrestricted: None, ..phone() });
+        assert!(mac_ok.contains(tx::MAC_HINT), "{mac_ok}");
+        // Another device rings: nothing to fix here.
+        let elsewhere =
+            render(Case { here: false, allowed: Some(false), unrestricted: Some(false), ..phone() });
+        assert!(!elsewhere.contains(tx::BLOCKED) && !elsewhere.contains(tx::BATTERY), "{elsewhere}");
     }
 
     #[test]

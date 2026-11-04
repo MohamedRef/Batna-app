@@ -25,7 +25,7 @@ its Dioxus screens (HTML/CSS, right-to-left) instead of their egui toolkit
 | Area | Mac / Android | Web |
 |---|---|---|
 | Database | SQLite file | The same SQLite, compiled to wasm, in memory; its bytes are saved in IndexedDB 1.5 s after a change and when the tab is hidden or closed |
-| Two tabs | n/a | The newest tab owns the data; an older one stops saving and says so on Today |
+| Two tabs | n/a | The newest tab owns the data; an older one stops saving and syncing and says so on Today. Tabs share one session, so a tab re-reads it before refreshing and never presents a token another tab already rotated (#646) |
 | Device prefs | `device-prefs.txt` | `localStorage` |
 | Exports (backup, checks, Anki) | A file in Downloads / Save to | A browser download |
 | Restore | File picker / found files | File picker or paste |

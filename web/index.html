@@ -20,6 +20,16 @@
       #boot p:empty { display: none; }
       @keyframes pulse { 0%, 100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.07); opacity: 1; } }
       @media (prefers-reduced-motion: reduce) { #boot img { animation: none; } }
+      /* "A newer Batna is here" (#655): calm, above the bottom bar, never forced. */
+      #fresh { position: fixed; z-index: 2147483000; inset-inline: 16px; margin-inline: auto; max-inline-size: 420px;
+               inset-block-end: calc(env(safe-area-inset-bottom, 0px) + 88px); display: flex; align-items: center;
+               gap: 12px; padding-block: 12px; padding-inline: 16px; border-radius: 16px; background: var(--surface, #fff); color: var(--text, #222);
+               box-shadow: 0 6px 24px rgba(0, 0, 0, .18); font: 15px system-ui, sans-serif; }
+      #fresh span { flex: 1; }
+      #fresh button { font: inherit; border: 0; border-radius: 999px; padding-block: 8px; padding-inline: 14px;
+                      min-block-size: 40px; cursor: pointer; background: transparent; color: inherit; }
+      #fresh button.go { background: var(--accent, #2f6f5e); color: var(--surface, #fff); font-weight: 700; }
+      @media (prefers-color-scheme: dark) { #fresh { background: var(--surface, #1c1c1e); color: var(--text, #eee); } }
     </style>
   </head>
   <body>
@@ -30,6 +40,32 @@
     </div>
     <noscript>Batna needs JavaScript and WebAssembly.</noscript>
     <script type="module">
+      // A page an older worker served (not the first visit) sees the new
+      // worker take over once a deploy has installed: say so, calmly (#655).
+      const hadWorker = "serviceWorker" in navigator && !!navigator.serviceWorker.controller;
+      function freshNote() {
+        if (document.getElementById("fresh")) return;
+        const note = document.createElement("div");
+        note.id = "fresh";
+        note.setAttribute("role", "status");
+        const text = document.createElement("span");
+        text.textContent = "نسخة أحدث من باطنة وصلت.";
+        const later = document.createElement("button");
+        later.textContent = "بعدين";
+        later.onclick = () => note.remove();
+        const go = document.createElement("button");
+        go.className = "go";
+        go.textContent = "افتحها";
+        go.onclick = () => {
+          go.disabled = later.disabled = true;
+          go.textContent = "لحظة…";
+          // The app saves its database every 1.5 s; let the last save land.
+          setTimeout(() => location.reload(), 1600);
+        };
+        note.append(text, later, go);
+        document.body.append(note);
+      }
+      if (hadWorker) navigator.serviceWorker.addEventListener("controllerchange", freshNote);
       // The content pack downloads alongside the wasm; the app waits for it.
       globalThis.batnaPack = fetch("./content.pack").then((r) => {
         if (!r.ok) throw new Error("content.pack: HTTP " + r.status);
@@ -40,7 +76,21 @@
         .then(() => globalThis.batnaPack)
         .then(() => {
           // Once this visit has everything, keep it on the device for the next.
-          if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
+          if (!("serviceWorker" in navigator)) return;
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then((reg) => {
+              // A home-screen app or tab that stays open is resumed, never
+              // navigated, so the browser wouldn't look for a deploy: look
+              // when it comes back into view, at most every 10 minutes.
+              let looked = Date.now();
+              document.addEventListener("visibilitychange", () => {
+                if (document.hidden || Date.now() - looked < 10 * 60 * 1000) return;
+                looked = Date.now();
+                reg.update().catch(() => {});
+              });
+            })
+            .catch(() => {});
         })
         .catch((e) => {
           document.querySelector("#boot img").style.animation = "none";

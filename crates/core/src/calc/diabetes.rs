@@ -27,14 +27,34 @@ fn corrected_sodium(i: &Inputs) -> Result<Outcome, CalcError> {
     let glucose = i.get_num("glucose_mg_dl")?;
     let add = 0.016 * (glucose - 100.0).max(0.0);
     let value = ((na + add) * 10.0).round() / 10.0;
+    // Sodium 135–145 mEq/L (Nephrology book, Lecture 6, p. 127).
+    let (band, label, meaning) = if value < 135.0 {
+        (
+            "corrected_sodium.low",
+            "Low (below 135)",
+            "Still low once the glucose is allowed for: a true hyponatraemia on top of the \
+             hyperglycaemia.",
+        )
+    } else if value > 145.0 {
+        (
+            "corrected_sodium.high",
+            "High (above 145)",
+            "High once the glucose is allowed for: a profound free-water loss (p. 189).",
+        )
+    } else {
+        (
+            "corrected_sodium.normal",
+            "Normal (135–145)",
+            "Normal once the glucose is allowed for: the low measured sodium is from the glucose, \
+             and a normal corrected sodium still means a large free-water loss (p. 189).",
+        )
+    };
     Ok(Outcome {
         score: Some(value),
         display: format!("{} mEq/L", show(value, 1)),
-        band: "corrected_sodium.na",
-        label: "Corrected sodium",
-        meaning: "The sodium once glucose is back to 100 mg/dL. A high or normal sodium in \
-                  hyperglycaemia means a profound free-water loss."
-            .to_owned(),
+        band,
+        label,
+        meaning: meaning.to_owned(),
         page: Some(189),
         parts: vec![
             Part::new("Measured Na", na),
@@ -105,17 +125,47 @@ fn osmolality(i: &Inputs) -> Result<Outcome, CalcError> {
 /// Diabet Med 2023).
 pub const GUIDES: &[(&str, Guide)] = &[
     (
-        "corrected_sodium.na",
+        "corrected_sodium.low",
         Guide {
             next: &[
-                "A normal or high corrected sodium means a profound free-water loss (p. 189)",
+                "A true hyponatraemia as well: check the serum osmolality and the volume status (Nephrology pp. 127–129)",
+                "Replace about half the fluid deficit in the first 8–12 h with 0.9% saline (p. 190)",
+                "Recheck the sodium as the glucose falls: the measured value should rise (p. 189)",
+                "For the anion gap use the measured sodium, not this corrected one (Nephrology pp. 7–8)",
+            ],
+            dd: &[
+                "Hypovolaemic: vomiting, diarrhoea, osmotic diuresis with salt loss, diuretics (Nephrology p. 129)",
+                "Euvolaemic or hypervolaemic: SIADH, hypothyroidism, heart, liver or kidney failure (Nephrology pp. 129–130)",
+                "Pseudohyponatraemia from very high lipids or proteins, as in myeloma (Nephrology p. 129)",
+            ],
+        },
+    ),
+    (
+        "corrected_sodium.normal",
+        Guide {
+            next: &[
+                "A normal corrected sodium still means a profound free-water loss (p. 189)",
                 "Replace about half the fluid deficit in the first 8–12 h with 0.9% saline or another crystalloid (p. 190)",
                 "In HHS the sodium often rises at first as the glucose falls; after that, no more than a 10 mmol/L fall in 24 h (JBDS 2023)",
                 "For the anion gap use the measured sodium, not this corrected one (Nephrology pp. 7–8)",
             ],
             dd: &[
                 "A low measured sodium from glucose drawing water out of the cells: translocational, not a true hyponatraemia (p. 189; Nephrology p. 128)",
-                "Pseudohyponatraemia from very high lipids or proteins, as in myeloma (Nephrology p. 129)",
+            ],
+        },
+    ),
+    (
+        "corrected_sodium.high",
+        Guide {
+            next: &[
+                "A high corrected sodium means a profound free-water loss (p. 189): work out the water deficit",
+                "Replace about half the fluid deficit in the first 8–12 h with 0.9% saline or another crystalloid (p. 190)",
+                "Let the sodium fall no more than 10 mmol/L in 24 h (JBDS 2023); in HHS it often rises at first as the glucose falls",
+            ],
+            dd: &[
+                "Osmotic diuresis from the glucose losing more water than salt (p. 189)",
+                "Too little water: elderly, immobile, no access to drink (Nephrology p. 133)",
+                "Diabetes insipidus or other water loss as well (Nephrology p. 133)",
             ],
         },
     ),

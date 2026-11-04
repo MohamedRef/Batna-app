@@ -2,7 +2,7 @@
 //! Medscape list theirs: a search field and an area filter on top, the
 //! pinned (★) and the last few opened first, then every calculator under its
 //! area as a full-width row with its name and one Arabic line on what it is
-//! for. On phones the list and the open calculator take turns; from 840dp
+//! for. On phones and tablets the list and the open calculator take turns; from 1100dp
 //! the open one sits beside the list, and that pane is never empty: it shows
 //! the one he used last.
 

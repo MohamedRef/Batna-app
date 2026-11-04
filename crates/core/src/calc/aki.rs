@@ -40,11 +40,15 @@ fn kdigo(i: &Inputs) -> Result<Outcome, CalcError> {
     let uo = i.get_choice("urine_output", &["normal", "lt05_6h", "lt05_12h", "lt03_24h_or_anuria"])?;
     let rrt = i.get_flag("rrt")?;
     let ratio = now / base;
-    let cr_stage = if ratio >= 3.0 || now >= 4.0 || rrt {
+    // A creatinine of 4.0 or more is stage 3 only once it has risen
+    // (KDIGO: an *increase to* ≥ 4.0 mg/dL); a stable one is CKD, not AKI.
+    // Rounded to the hundredth, as written: 4.1 − 3.8 is 0.3, not 0.2999….
+    let rose = ratio >= 1.5 || ((now - base) * 100.0).round() / 100.0 >= 0.3;
+    let cr_stage = if ratio >= 3.0 || (rose && now >= 4.0) || rrt {
         3.0
     } else if ratio >= 2.0 {
         2.0
-    } else if ratio >= 1.5 || now - base >= 0.3 {
+    } else if rose {
         1.0
     } else {
         0.0
@@ -315,6 +319,14 @@ mod tests {
                 .choice("urine_output", uo),
         )
         .unwrap()
+    }
+
+    #[test]
+    fn four_counts_only_after_a_rise() {
+        // Stable CKD at 4.5: no AKI (KDIGO: an increase *to* ≥ 4.0).
+        assert_eq!(stage(4.5, 4.5, "normal").band, "kdigo_aki.none");
+        // A rise of 0.3 that reaches 4.0: stage 3.
+        assert_eq!(stage(3.8, 4.1, "normal").band, "kdigo_aki.3");
     }
 
     #[test]

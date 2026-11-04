@@ -125,15 +125,15 @@ pub fn PeriodHead(data: Rc<StudyData>) -> Element {
         div { class: "stat-tiles st-minis",
             button { class: "tap stat-tile", title: tx::ACTIVITY_HINT, onclick: move |_| open(ui, Tab::Plan),
                 span { class: "stat-num", "{now.study_days}" }
-                span { class: "stat-label", {tx::DAYS_STUDIED} }
+                span { class: "stat-label", {tx::days_studied(now.study_days)} }
             }
             button { class: "tap stat-tile", title: tx::ACTIVITY_HINT, onclick: move |_| open(ui, Tab::Plan),
                 span { class: "stat-num", "{now.minutes}" }
-                span { class: "stat-label", {tx::MINUTES} }
+                span { class: "stat-label", {tx::minutes(now.minutes)} }
             }
             button { class: "tap stat-tile", title: tx::RECALL_HINT, onclick: move |_| open(ui, Tab::Mistakes),
                 span { class: "stat-num", "{now.answers}" }
-                span { class: "stat-label", {tx::ANSWERS} }
+                span { class: "stat-label", {tx::answers(now.answers)} }
             }
         }
     }

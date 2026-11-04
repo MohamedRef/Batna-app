@@ -4,7 +4,11 @@
 //! elderly, p. 30: CrCl = (140 − age) × weight (kg) / (72 × serum
 //! creatinine mg/dL), × 0.85 for women. Lecture 3, p. 42, repeats it for
 //! drug dosing and warns that serum creatinine is not reliable in the
-//! elderly and the result is only an estimate. The book gives no bands.
+//! elderly and the result is only an estimate. The book gives no bands;
+//! the bands are the renal-function groups for drug dosing in the FDA
+//! guidance "Pharmacokinetics in Patients with Impaired Renal Function"
+//! (2024): 90 or more normal, 60–89 mild, 30–59 moderate, 15–29 severe,
+//! below 15 kidney failure.
 
 use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, normals, num, show};
 
@@ -35,6 +39,7 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     }
     let base = (140.0 - age) * weight / (72.0 * cr);
     let crcl = ((if woman { base * 0.85 } else { base }) * 10.0).round() / 10.0;
+    let (band, label, meaning) = band(crcl);
     let mut parts = vec![
         Part::new("140 − age", 140.0 - age),
         Part::new("× weight (kg)", weight),
@@ -46,35 +51,78 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     Ok(Outcome {
         score: Some(crcl),
         display: format!("{} mL/min", show(crcl, 1)),
-        band: "cockcroft_gault.crcl",
-        label: "Estimated creatinine clearance",
-        meaning: "An estimate of GFR for drug dosing. In the elderly serum creatinine is not reliable \
-                  (less muscle), so read it as an estimate."
-            .to_owned(),
+        band,
+        label,
+        meaning: format!(
+            "{meaning} In the elderly serum creatinine is not reliable (less muscle), so read it as an \
+             estimate."
+        ),
         page: Some(30),
         parts,
         notes: Vec::new(),
     })
 }
 
+/// The FDA (2024) renal-function group for dosing.
+fn band(crcl: f64) -> (&'static str, &'static str, &'static str) {
+    if crcl >= 90.0 {
+        ("cockcroft_gault.normal", "90 or more: normal", "Normal clearance: usual doses.")
+    } else if crcl >= 60.0 {
+        ("cockcroft_gault.mild", "60–89: mild", "Mildly reduced: most drugs at the usual dose.")
+    } else if crcl >= 30.0 {
+        (
+            "cockcroft_gault.moderate",
+            "30–59: moderate",
+            "Moderately reduced: check each renally cleared drug.",
+        )
+    } else if crcl >= 15.0 {
+        (
+            "cockcroft_gault.severe",
+            "15–29: severe",
+            "Severely reduced: lower the dose or lengthen the interval of renally cleared drugs.",
+        )
+    } else {
+        (
+            "cockcroft_gault.failure",
+            "Below 15: kidney failure",
+            "Kidney failure: many drugs are avoided or need dialysis dosing.",
+        )
+    }
+}
+
 /// Next steps and the pitfalls of the estimate (book Geriatrics Lectures 2
 /// and 3, pp. 28–30 and 42–43, and the Nephrology book p. 101). Which weight
 /// to use when overweight: Winter et al., Pharmacotherapy 2012.
-pub const GUIDES: &[(&str, Guide)] = &[(
-    "cockcroft_gault.crcl",
-    Guide {
-        next: &[
-            "Dose renally cleared drugs by this clearance, above all digoxin and gentamicin (p. 43)",
-            "Kidney function falls by about a third with normal ageing; a normal creatinine does not mean normal function in the elderly (p. 43)",
-            "With a low clearance, take care with potassium-sparing diuretics, RAAS blockers, NSAIDs and beta-blockers: high potassium (p. 28)",
-        ],
-        dd: &[
-            "Little muscle (age, wasting) keeps the creatinine low, so the clearance reads too high (pp. 29, 42)",
-            "Overweight: the total weight overstates it; use the adjusted weight, ideal + 0.4 × the excess (Winter 2012)",
-            "A creatinine that is still changing, as in AKI, does not yet reflect the GFR (Nephrology p. 101)",
-        ],
-    },
-)];
+const PITFALLS: &[&str] = &[
+    "Little muscle (age, wasting) keeps the creatinine low, so the clearance reads too high (pp. 29, 42)",
+    "Overweight: the total weight overstates it; use the adjusted weight, ideal + 0.4 × the excess (Winter 2012)",
+    "A creatinine that is still changing, as in AKI, does not yet reflect the GFR (Nephrology p. 101)",
+];
+
+const DOSE: &str = "Dose renally cleared drugs by this clearance, above all digoxin and gentamicin (p. 43)";
+const AGEING: &str = "Kidney function falls by about a third with normal ageing; a normal creatinine does not mean normal function in the elderly (p. 43)";
+const POTASSIUM: &str = "With a low clearance, take care with potassium-sparing diuretics, RAAS blockers, NSAIDs and beta-blockers: high potassium (p. 28)";
+
+pub const GUIDES: &[(&str, Guide)] = &[
+    ("cockcroft_gault.normal", Guide { next: &[AGEING], dd: PITFALLS }),
+    ("cockcroft_gault.mild", Guide { next: &[DOSE, AGEING], dd: PITFALLS }),
+    ("cockcroft_gault.moderate", Guide { next: &[DOSE, POTASSIUM, AGEING], dd: PITFALLS }),
+    (
+        "cockcroft_gault.severe",
+        Guide { next: &[DOSE, POTASSIUM, "Below 30: plan nephrology care (Nephrology p. 36)"], dd: PITFALLS },
+    ),
+    (
+        "cockcroft_gault.failure",
+        Guide {
+            next: &[
+                DOSE,
+                POTASSIUM,
+                "Below 15 is kidney failure: nephrology care, dialysis or transplant planning (Nephrology p. 36)",
+            ],
+            dd: PITFALLS,
+        },
+    ),
+];
 
 #[cfg(test)]
 mod tests {

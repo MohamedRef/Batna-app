@@ -1119,6 +1119,13 @@ pub mod calc {
             ("effective_osmolality", "urea_mmol_l") => "للأوزمولاليتي الكلية. اليوريا بالـ mg/dL ÷ 6.",
             ("dka_severity", "bhb_mmol_l") => "سيبها فاضية لو معاك شريط بول بس، وعلّم الخانة اللي تحت.",
             ("feurea", "urine_urea_mg_dl") => "يوريا أو BUN، بس بنفس وحدة البلازما.",
+            ("bun_creatinine", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("kdigo_ckd", "acr_mg_g") => "في جدول الكتاب: 3 mg/mmol = 30 mg/g.",
+            ("aa_gradient", "fio2") => "هوا الغرفة = 0.21.",
+            ("plasmic", "platelets_10e9_l") => "30 × 10⁹/L = 30,000/µL.",
+            ("plasmic", "hemolysis") => {
+                "الريتيكيولوسايت فوق 2.5%، أو الهابتوجلوبين مش ظاهر، أو الـ indirect bilirubin فوق 2 mg/dL."
+            }
             ("anion_gap", "albumin_g_dl") => "بيصحح الـ gap لو الألبومين واطي.",
             ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
             ("relative_risk", "a") => "معرّض وعنده المرض (أو case)",
@@ -1211,6 +1218,12 @@ pub mod calc {
             "kdigo_aki" => "مرحلة الـ AKI من الكرياتينين وكمية البول",
             "fena" => "الـ AKI قبل الكلى (prerenal) ولا من الكلى نفسها (ATN)",
             "feurea" => "زي الـ FENa، بس بينفع والعيان على مدرّات",
+            "bun_creatinine" => "نسبة الـ BUN للكرياتينين: prerenal ولا ATN؟",
+            "ckd_epi_2021" => "الـ eGFR بمعادلة CKD-EPI 2021 من الكرياتينين والسن",
+            "kdigo_ckd" => "مرحلة الـ CKD بالـ G والـ A ولون الخطر والمتابعة",
+            "aa_gradient" => "نقص الأكسجين من الرئة نفسها ولا من قلة التهوية؟",
+            "free_water_deficit" => "نقص الميه في الـ hypernatraemia وحجم المحلول المطلوب",
+            "plasmic" => "احتمال إن الـ TMA تكون TTP قبل نتيجة الـ ADAMTS13",
             "cockcroft_gault" => "تصفية الكرياتينين لظبط جرعات الدوا، خصوصًا في المسنين",
             "katz_adl" => "الأنشطة اليومية الأساسية: مستقل ولا محتاج مساعدة؟",
             "lawton_iadl" => "الأنشطة الأعلى زي الفلوس والأدوية والمواصلات",

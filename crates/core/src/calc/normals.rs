@@ -58,6 +58,11 @@ pub const UREA_MMOL_L: Normal = r(2.5, 6.4);
 pub const UREA_MG_DL: Normal = r(15.0, 38.5);
 /// NBME.
 pub const CREATININE_MG_DL: Normal = r(0.6, 1.2);
+/// KDIGO 2024 CKD guideline: G1 is 90 and above ("normal or high").
+pub const EGFR: Normal = r(90.0, f64::INFINITY);
+/// KDIGO 2024 CKD guideline: A1, below 30 mg/g ("normal to mildly
+/// increased").
+pub const ACR_MG_G: Normal = under(30.0);
 
 // Chemistry.
 
@@ -101,6 +106,8 @@ pub const HCT_PCT: Normal = sexes((41.0, 53.0), (36.0, 46.0));
 pub const RBC_10E12_L: Normal = sexes((4.3, 5.9), (3.5, 5.5));
 /// NBME: 0.5–1.5 % of red cells.
 pub const RETIC_PCT: Normal = r(0.5, 1.5);
+/// NBME: 80–100 fL.
+pub const MCV_FL: Normal = r(80.0, 100.0);
 /// NBME (Westergren): men 0–15, women 0–20 mm/h.
 pub const ESR_MM_H: Normal = sexes((0.0, 15.0), (0.0, 20.0));
 /// NBME.

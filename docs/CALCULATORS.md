@@ -444,6 +444,71 @@ Source: Book Nephrology Lecture 5, p. 109
 | `urine_cr_mg_dl` | number, mg/dL | Urine creatinine |
 | `plasma_cr_mg_dl` | number, mg/dL | Plasma creatinine |
 
+## `bun_creatinine`: BUN : creatinine ratio
+
+Source: Book Nephrology Lecture 5, p. 109 (prerenal vs ATN table); no validated cut-off study, so read it with the FENa
+
+| input | kind | |
+|---|---|---|
+| `bun_mg_dl` | number, mg/dL | BUN |
+| `creatinine_mg_dl` | number, mg/dL | Serum creatinine |
+
+## `ckd_epi_2021`: eGFR (CKD-EPI 2021, race-free)
+
+Source: Book Nephrology Lecture 2, p. 29 (worked examples); equation from Inker et al., NEJM 2021 (the book doesn't print it)
+
+| input | kind | |
+|---|---|---|
+| `creatinine_mg_dl` | number, mg/dL | Serum creatinine |
+| `age_years` | number, years | Age |
+| `sex` | `male`, `female` | Sex |
+
+## `kdigo_ckd`: KDIGO CKD stage (G and A)
+
+Source: KDIGO 2012 CKD guideline (Kidney Int Suppl 2013); book Nephrology Lecture 2, pp. 24, 31–32
+
+| input | kind | |
+|---|---|---|
+| `egfr` | number, mL/min/1.73 m² | eGFR |
+| `acr_mg_g` | number, mg/g | Urine albumin : creatinine ratio (ACR) |
+
+## `aa_gradient`: A-a gradient
+
+Source: Book Nephrology Lecture 1, ABG table (p. 14): alveolar gas equation, expected gradient age/4 + 4 (room air)
+
+| input | kind | |
+|---|---|---|
+| `fio2` | number, fraction | FiO2 |
+| `pao2_mm_hg` | number, mmHg | PaO2 |
+| `pco2_mm_hg` | number, mmHg | PaCO2 |
+| `age_years` | number, years | Age |
+
+## `free_water_deficit`: Free water deficit (hypernatraemia)
+
+Source: Book Nephrology Lecture 6, pp. 133–135 (replacement volume and pace); deficit = TBW × (Na/140 − 1) and the TBW fractions from Adrogué & Madias, NEJM 2000 (the book doesn't print them)
+
+| input | kind | |
+|---|---|---|
+| `na_meq_l` | number, mEq/L | Serum sodium |
+| `weight_kg` | number, kg | Weight |
+| `sex` | `male`, `female` | Sex |
+| `elderly` | true / false (default false) | Elderly (65 or over) |
+| `fluid` | `water`, `saline_0_2`, `saline_0_45` | Replacement fluid |
+
+## `plasmic`: PLASMIC score (TTP)
+
+Source: Bendapudi et al., Lancet Haematol 2017 (derivation and validation); book Nephrology Lecture 14, pp. 466, 479–480
+
+| input | kind | |
+|---|---|---|
+| `platelets_10e9_l` | number, × 10⁹/L | Platelets |
+| `hemolysis` | true / false (default false) | Haemolysis |
+| `mcv_fl` | number, fL | MCV |
+| `inr` | number | INR |
+| `creatinine_mg_dl` | number, mg/dL | Serum creatinine |
+| `active_cancer` | true / false (default false) | Active cancer |
+| `transplant` | true / false (default false) | Solid-organ or stem-cell transplant |
+
 ## `cockcroft_gault`: Cockcroft-Gault creatinine clearance
 
 Source: Book Geriatrics Lecture 2, p. 30; Lecture 3, p. 42

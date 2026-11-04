@@ -7,7 +7,7 @@
 //! − 15.745; FLI = 100 eʸ / (1 + eʸ). < 30 rules out, ≥ 60 rules in fatty
 //! liver.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show, shown};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "fli",
@@ -36,9 +36,10 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     ];
     let y: f64 = parts.iter().map(|p| p.points).sum::<f64>() - 15.745;
     let score = 100.0 / (1.0 + (-y).exp());
-    let (band, label, meaning) = if score < 30.0 {
+    let at = shown(score, 0);
+    let (band, label, meaning) = if at < 30.0 {
         ("fli.low", "Below 30", "Fatty liver ruled out.")
-    } else if score < 60.0 {
+    } else if at < 60.0 {
         ("fli.mid", "30–59", "Indeterminate: confirm with ultrasound.")
     } else {
         ("fli.high", "60 or above", "Fatty liver likely.")

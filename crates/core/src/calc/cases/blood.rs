@@ -31,6 +31,7 @@ pub fn tables() -> Vec<Table> {
             .score(2.0, 1e-9)
             .noted("Hillman and Finch")
             .cut("RPI 1.9 / 2.0 at Hct 45 (book p. 14: RI < 2)", ins![hct_pct: 45.0], "retic_pct", (1.9, "rpi.low"), (2.0, "rpi.adequate"))
+            .cut("as shown: RPI 1.94 shows 1.9, 1.96 shows 2.0", ins![hct_pct: 45.0], "retic_pct", (1.94, "rpi.low"), (1.96, "rpi.adequate"))
             .cut("Hct 39.9 / 40: maturation 1.5 → 1 day", ins![retic_pct: 4.0], "hct_pct", (39.9, "rpi.adequate"), (40.0, "rpi.adequate"))
             .cut("Hct 34.9 / 35: 2 → 1.5 days", ins![retic_pct: 4.0], "hct_pct", (34.9, "rpi.low"), (35.0, "rpi.adequate"))
             .cut("Hct 24.9 / 25: 2.5 → 2 days", ins![retic_pct: 10.0], "hct_pct", (24.9, "rpi.adequate"), (25.0, "rpi.adequate"))

@@ -29,7 +29,7 @@ pub const SPEC: CalcSpec = CalcSpec {
         flag("synovitis_6_weeks", "Synovitis 6 weeks or longer"),
         flag("abnormal_crp_esr", "Abnormal CRP or ESR"),
     ],
-    source: "Book Rheumatology Lecture 16, p. 246",
+    source: "Book Rheumatology Lecture 16, p. 246; Aletaha 2010 (Arthritis Rheum 62:2569) for the joint count note",
     compute,
 };
 
@@ -72,6 +72,13 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     }
     if small == 0.0 && large > 10.0 {
         notes.push("The book lists no level above 2–10 medium-large joints, so this scores 1.".to_owned());
+    }
+    if (1.0..=10.0).contains(&small) && large + small > 10.0 {
+        notes.push(
+            "Book: 5 joint points need more than 10 small joints. The paper (Aletaha 2010) gives 5 for more than \
+             10 joints of any size with at least 1 small, so it scores this 5."
+                .to_owned(),
+        );
     }
     let (band, label, meaning) = if total >= 6.0 {
         ("acr_eular_2010_ra.definite", "6 or more", "Definite rheumatoid arthritis.")

@@ -30,7 +30,7 @@ its Dioxus screens (HTML/CSS, right-to-left) instead of their egui toolkit
 | Exports (backup, checks, Anki) | A file in Downloads / Save to | A browser download |
 | Restore | File picker / found files | File picker or paste |
 | Read aloud | System voice | The browser's voice (Web Speech) |
-| Updates | Over the air | Each deploy downloads in the background and is used from the next open |
+| Updates | Over the air | Each deploy downloads in the background and is used from the next open. An open tab or home-screen app looks for one when it comes back into view (at most every 10 minutes) and then says «نسخة أحدث من باطنة وصلت» with a button that reloads once the last save has landed (`web/index.html`) |
 | Sync (Batna Cloud) | Live, WebSocket with a Bearer header | Live, the browser's `fetch` and `WebSocket`; see Sync below |
 | Sign-in | Google, desktop client (code + PKCE) | Google by redirect, Web client (ID token); session in `localStorage` |
 | Reminders | System notifications | Not on the web; the phone or Mac rings |

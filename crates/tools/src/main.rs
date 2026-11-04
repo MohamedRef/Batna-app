@@ -192,7 +192,9 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     if calc_quotes.exists() {
         match read_yaml::<batna_core::content::CalcQuotes>(&calc_quotes) {
             Ok(q) => problems.extend(
-                validate::calc_quotes(&q, &index).into_iter().map(|p| format!("content/calc-quotes.yaml: {p}")),
+                validate::calc_quotes(&q, &index)
+                    .into_iter()
+                    .map(|p| format!("content/calc-quotes.yaml: {p}")),
             ),
             Err(e) => problems.push(e),
         }

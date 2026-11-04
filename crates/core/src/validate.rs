@@ -235,7 +235,10 @@ pub fn calc_quotes(q: &content::CalcQuotes, index: &content::Index) -> Vec<Probl
     let mut out = Vec::new();
     let mut bad = |at: String, message: String| out.push(Problem { at, message });
     if q.schema != content::CALC_QUOTES_SCHEMA {
-        bad("calc-quotes".into(), format!("schema is {:?}, expected {:?}", q.schema, content::CALC_QUOTES_SCHEMA));
+        bad(
+            "calc-quotes".into(),
+            format!("schema is {:?}, expected {:?}", q.schema, content::CALC_QUOTES_SCHEMA),
+        );
     }
     let mut seen = BTreeSet::new();
     for c in &q.quotes {

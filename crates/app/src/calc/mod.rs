@@ -29,7 +29,8 @@ const QUOTES_YAML: &str = include_str!("../../../../content/calc-quotes.yaml");
 pub fn quotes() -> &'static CalcQuotes {
     static Q: OnceLock<CalcQuotes> = OnceLock::new();
     Q.get_or_init(|| {
-        serde_yaml_ng::from_str(QUOTES_YAML).unwrap_or(CalcQuotes { schema: String::new(), quotes: Vec::new() })
+        serde_yaml_ng::from_str(QUOTES_YAML)
+            .unwrap_or(CalcQuotes { schema: String::new(), quotes: Vec::new() })
     })
 }
 
@@ -525,7 +526,11 @@ mod tests {
     // Mohamed, 2026-11-02: the calculators' page sheets showed no quote.
     #[test]
     fn every_cited_page_has_its_book_quote() {
-        assert_eq!(quotes().schema, batna_core::content::CALC_QUOTES_SCHEMA, "content/calc-quotes.yaml parses");
+        assert_eq!(
+            quotes().schema,
+            batna_core::content::CALC_QUOTES_SCHEMA,
+            "content/calc-quotes.yaml parses"
+        );
         let mut missing = Vec::new();
         for spec in calc::all() {
             for (page, bands) in cited_pages(spec) {

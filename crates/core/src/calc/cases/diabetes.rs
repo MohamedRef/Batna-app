@@ -4,17 +4,19 @@ use super::{Table, ins};
 
 pub fn tables() -> Vec<Table> {
     vec![
-        Table::new("corrected_sodium", &["corrected_sodium.na"])
+        Table::new("corrected_sodium", &["corrected_sodium.low", "corrected_sodium.normal", "corrected_sodium.high"])
             .paper(
                 "book p. 189 (Katz 1973 factor 1.6 / 100 mg/dL): glucose 500, Na 132 → 138.4",
                 ins![na_meq_l: 132, glucose_mg_dl: 500],
-                "corrected_sodium.na",
+                "corrected_sodium.normal",
             )
             .score(138.4, 1e-9)
-            .edge("glucose 90: no correction below 100", ins![na_meq_l: 140, glucose_mg_dl: 90], "corrected_sodium.na")
+            .edge("glucose 90: no correction below 100", ins![na_meq_l: 140, glucose_mg_dl: 90], "corrected_sodium.normal")
             .score(140.0, 1e-9)
-            .edge("glucose 200: + 1.6", ins![na_meq_l: 140, glucose_mg_dl: 200], "corrected_sodium.na")
-            .score(141.6, 1e-9),
+            .edge("glucose 200: + 1.6", ins![na_meq_l: 140, glucose_mg_dl: 200], "corrected_sodium.normal")
+            .score(141.6, 1e-9)
+            .cut("134 / 135 (Nephrology p. 127: 135–145)", ins![glucose_mg_dl: 100], "na_meq_l", (134.0, "corrected_sodium.low"), (135.0, "corrected_sodium.normal"))
+            .cut("145.0 / 146.0 (above 145 high)", ins![glucose_mg_dl: 100], "na_meq_l", (145.0, "corrected_sodium.normal"), (146.0, "corrected_sodium.high")),
         Table::new("effective_osmolality", &["effective_osmolality.hhs", "effective_osmolality.below"])
             .paper(
                 "book p. 189: 2 × 150 + 900/18 = 350, HHS",

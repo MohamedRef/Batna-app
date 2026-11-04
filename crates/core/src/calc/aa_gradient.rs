@@ -11,7 +11,7 @@ pub const SPEC: CalcSpec = CalcSpec {
     name: "A-a gradient",
     area: Area::Renal,
     fields: &[
-        num("fio2", "FiO2", "fraction", 0.21, 1.0, 0.01).hint("Room air = 0.21."),
+        num("fio2", "FiO2", "fraction", 0.21, 100.0, 0.01).hint("Room air = 0.21 (or 21%)."),
         num("pao2_mm_hg", "PaO2", "mmHg", 10.0, 700.0, 1.0).normal_as(normals::PAO2_MM_HG),
         num("pco2_mm_hg", "PaCO2", "mmHg", 5.0, 150.0, 1.0).normal_as(normals::PCO2_MM_HG),
         num("age_years", "Age", "years", 1.0, 120.0, 1.0),

@@ -66,7 +66,11 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
             Part::met("Organ failure > 48 h", of == "persistent"),
             Part::met("Local or systemic complications", comp),
         ],
-        notes: Vec::new(),
+        notes: vec![
+            "The book lists the organ failures on p. 285; the revised Atlanta paper defines organ failure as a \
+             modified Marshall score of 2 or more for breathing, kidneys or circulation (Banks 2013)."
+                .to_owned(),
+        ],
     })
 }
 

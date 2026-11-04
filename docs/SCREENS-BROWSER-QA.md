@@ -9,6 +9,11 @@ Settings suite ([SETTINGS-BROWSER-QA.md](SETTINGS-BROWSER-QA.md)) and uses the
 same pinned Playwright 1.62.1. There is no copied HTML or CSS, no real user
 data, no live API and no app launch.
 
+It runs on `main` every 4 hours (skipped when `main` has not moved since its
+last green run) and by hand (Actions › this workflow › Run workflow, on any
+branch), not on every pull request. A pull request that edits the test itself
+still runs it. Run it by hand on a branch that changes the screens it covers.
+
 ## What is rendered
 
 | Screen | States |

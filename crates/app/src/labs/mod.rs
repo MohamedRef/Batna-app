@@ -63,6 +63,9 @@ fn chip_text(lab: &Lab, bare: bool) -> String {
     s
 }
 
+/// A value, whether its chip shows, and the punctuation drawn before it.
+type Marked<'a> = (labs::Hit, bool, &'a str);
+
 /// Plain English text (a card's front or back, a stem) with its lab values
 /// marked and their chips. Each test's chip shows once.
 #[component]
@@ -73,7 +76,7 @@ pub fn LabText(text: String) -> Element {
     }
     // The comma or full stop right after a value goes before its chip, so a
     // wrapped line never starts with it.
-    let mut parts: Vec<(&str, Option<(labs::Hit, bool, &str)>)> = Vec::new();
+    let mut parts: Vec<(&str, Option<Marked>)> = Vec::new();
     let mut carry = "";
     for p in pieces {
         match p {

@@ -5,7 +5,7 @@
 //! modern form (Pugh et al., Br J Surg 1973; AASLD practice guidance) and is
 //! used only when PT is not entered.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, num};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, normals, num};
 
 pub const HE: &[(&str, &str)] = &[("none", "None"), ("grade_1_2", "Stage 1–2"), ("grade_3_4", "Stage 3–4")];
 pub const ASCITES: &[(&str, &str)] =
@@ -29,12 +29,15 @@ pub const SPEC: CalcSpec = CalcSpec {
     fields: &[
         choice("encephalopathy", "Encephalopathy", HE),
         choice("ascites", "Ascites", ASCITES),
-        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1),
-        num("albumin_g_dl", "Albumin", "g/dL", 0.5, 6.0, 0.1),
+        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1).normal_as(normals::BILIRUBIN_MG_DL),
+        num("albumin_g_dl", "Albumin", "g/dL", 0.5, 6.0, 0.1).normal_as(normals::ALBUMIN_G_DL),
         num("pt_prolonged_s", "Prothrombin time, seconds prolonged", "s", 0.0, 60.0, 0.5)
             .optional()
             .hint("The book's form. Leave empty to use INR."),
-        num("inr", "INR", "", 0.5, 15.0, 0.1).optional().hint("Used only when PT is empty."),
+        num("inr", "INR", "", 0.5, 15.0, 0.1)
+            .normal_as(normals::INR)
+            .optional()
+            .hint("Used only when PT is empty."),
     ],
     source: "Book Lecture 1, Table 2 (p. 14); INR bands: Pugh 1973 as used by AASLD",
     compute,

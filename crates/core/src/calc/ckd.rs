@@ -15,7 +15,7 @@
 //! number of checks a year. CKD needs a marker of damage or GFR < 60 for
 //! more than 3 months (p. 24).
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, normals, num, show};
 
 const SEX: &[(&str, &str)] = &[("male", "Man"), ("female", "Woman")];
 
@@ -24,7 +24,8 @@ pub const EGFR: CalcSpec = CalcSpec {
     name: "eGFR (CKD-EPI 2021, race-free)",
     area: Area::Renal,
     fields: &[
-        num("creatinine_mg_dl", "Serum creatinine", "mg/dL", 0.1, 25.0, 0.01),
+        num("creatinine_mg_dl", "Serum creatinine", "mg/dL", 0.1, 25.0, 0.01)
+            .normal_as(normals::CREATININE_MG_DL),
         num("age_years", "Age", "years", 18.0, 120.0, 1.0),
         choice("sex", "Sex", SEX),
     ],
@@ -97,8 +98,9 @@ pub const STAGE: CalcSpec = CalcSpec {
     name: "KDIGO CKD stage (G and A)",
     area: Area::Renal,
     fields: &[
-        num("egfr", "eGFR", "mL/min/1.73 m²", 0.0, 200.0, 0.1),
+        num("egfr", "eGFR", "mL/min/1.73 m²", 0.0, 200.0, 0.1).normal_as(normals::EGFR),
         num("acr_mg_g", "Urine albumin : creatinine ratio (ACR)", "mg/g", 0.0, 20000.0, 1.0)
+            .normal_as(normals::ACR_MG_G)
             .hint("The book's table: 3 mg/mmol = 30 mg/g."),
     ],
     source: "KDIGO 2012 CKD guideline (Kidney Int Suppl 2013); book Nephrology Lecture 2, pp. 24, 31–32",

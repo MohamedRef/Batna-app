@@ -10,7 +10,7 @@
 //! criteria as an image; its mortality bands (Lecture 15, p. 288): ≤ 2 points
 //! 0–3%, 3–4 15%, 5–6 40%, 7–11 nearly 100%.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "ranson",
@@ -19,17 +19,21 @@ pub const SPEC: CalcSpec = CalcSpec {
     fields: &[
         flag("gallstone", "Gallstone pancreatitis"),
         num("age_years", "Age", "years", 0.0, 110.0, 1.0),
-        num("wbc_per_mm3", "White cells", "/mm³", 0.0, 100000.0, 100.0),
-        num("glucose_mg_dl", "Glucose", "mg/dL", 10.0, 1500.0, 1.0),
-        num("ldh_iu_l", "LDH", "IU/L", 10.0, 10000.0, 1.0),
-        num("ast_iu_l", "AST", "IU/L", 1.0, 10000.0, 1.0),
+        num("wbc_per_mm3", "White cells", "/mm³", 0.0, 100000.0, 100.0).normal_as(normals::WBC_PER_MM3),
+        num("glucose_mg_dl", "Glucose", "mg/dL", 10.0, 1500.0, 1.0).normal_as(normals::GLUCOSE_MG_DL),
+        num("ldh_iu_l", "LDH", "IU/L", 10.0, 10000.0, 1.0).normal_as(normals::LDH_U_L),
+        num("ast_iu_l", "AST", "IU/L", 1.0, 10000.0, 1.0).normal_as(normals::AST_U_L),
         num("hct_fall_points", "Haematocrit fall in 48 h", "points", 0.0, 40.0, 1.0).optional(),
         num("bun_rise_mg_dl", "BUN rise in 48 h", "mg/dL", -50.0, 100.0, 1.0)
             .optional()
             .hint("Urea rise ÷ 2.14."),
-        num("calcium_mg_dl", "Calcium at 48 h", "mg/dL", 3.0, 15.0, 0.1).optional(),
-        num("pao2_mm_hg", "PaO₂ at 48 h", "mmHg", 20.0, 600.0, 1.0).optional(),
-        num("base_deficit_meq_l", "Base deficit at 48 h", "mEq/L", -20.0, 30.0, 1.0).optional(),
+        num("calcium_mg_dl", "Calcium at 48 h", "mg/dL", 3.0, 15.0, 0.1)
+            .normal_as(normals::CALCIUM_MG_DL)
+            .optional(),
+        num("pao2_mm_hg", "PaO₂ at 48 h", "mmHg", 20.0, 600.0, 1.0).normal_as(normals::PAO2_MM_HG).optional(),
+        num("base_deficit_meq_l", "Base deficit at 48 h", "mEq/L", -20.0, 30.0, 1.0)
+            .normal_as(normals::BASE_DEFICIT)
+            .optional(),
         num("fluid_sequestration_l", "Fluid sequestration in 48 h", "L", -10.0, 30.0, 0.5).optional(),
     ],
     source: "Ranson 1974/1979; book Lecture 15, p. 288 (mortality bands)",

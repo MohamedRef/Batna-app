@@ -4,7 +4,7 @@
 //! gas table on p. 14: PAO2 = (713 × FiO2) − (pCO2 × 1.25); A-a gradient =
 //! PAO2 − PaO2, expected (age / 4) + 4; pO2 80–100 normal, < 80 hypoxia.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "aa_gradient",
@@ -12,8 +12,8 @@ pub const SPEC: CalcSpec = CalcSpec {
     area: Area::Renal,
     fields: &[
         num("fio2", "FiO2", "fraction", 0.21, 1.0, 0.01).hint("Room air = 0.21."),
-        num("pao2_mm_hg", "PaO2", "mmHg", 10.0, 700.0, 1.0),
-        num("pco2_mm_hg", "PaCO2", "mmHg", 5.0, 150.0, 1.0),
+        num("pao2_mm_hg", "PaO2", "mmHg", 10.0, 700.0, 1.0).normal_as(normals::PAO2_MM_HG),
+        num("pco2_mm_hg", "PaCO2", "mmHg", 5.0, 150.0, 1.0).normal_as(normals::PCO2_MM_HG),
         num("age_years", "Age", "years", 1.0, 120.0, 1.0),
     ],
     source: "Book Nephrology Lecture 1, ABG table (p. 14): alveolar gas equation, expected gradient \

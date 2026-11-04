@@ -14,7 +14,7 @@
 //! standard deficit × 1 / [1 − (Na in fluid / 154)]: half-normal saline is
 //! half free water, so it takes twice the deficit.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, normals, num, show};
 
 const SEX: &[(&str, &str)] = &[("male", "Man"), ("female", "Woman")];
 
@@ -38,7 +38,7 @@ pub const SPEC: CalcSpec = CalcSpec {
     name: "Free water deficit (hypernatraemia)",
     area: Area::Renal,
     fields: &[
-        num("na_meq_l", "Serum sodium", "mEq/L", 100.0, 220.0, 1.0),
+        num("na_meq_l", "Serum sodium", "mEq/L", 100.0, 220.0, 1.0).normal_as(normals::SODIUM),
         num("weight_kg", "Weight", "kg", 2.0, 300.0, 0.1),
         choice("sex", "Sex", SEX),
         flag("elderly", "Elderly (65 or over)"),

@@ -6,7 +6,7 @@
 //! Score 5–12; ≥ 9 predicts poor 28-day survival, and in Forrest 2007 these
 //! patients (with DF ≥ 32) benefited from corticosteroids. Not in the book.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "glasgow_ah",
@@ -14,10 +14,12 @@ pub const SPEC: CalcSpec = CalcSpec {
     area: Area::Liver,
     fields: &[
         num("age_years", "Age", "years", 1.0, 110.0, 1.0),
-        num("wbc_10e9_l", "White cells", "×10⁹/L", 0.1, 100.0, 0.1),
-        num("urea_mmol_l", "Urea", "mmol/L", 0.5, 80.0, 0.1).hint("Urea in mg/dL ÷ 6 = mmol/L."),
-        num("inr", "INR or PT ratio", "", 0.5, 15.0, 0.1),
-        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1),
+        num("wbc_10e9_l", "White cells", "×10⁹/L", 0.1, 100.0, 0.1).normal_as(normals::WBC_10E9_L),
+        num("urea_mmol_l", "Urea", "mmol/L", 0.5, 80.0, 0.1)
+            .normal_as(normals::UREA_MMOL_L)
+            .hint("Urea in mg/dL ÷ 6 = mmol/L."),
+        num("inr", "INR or PT ratio", "", 0.5, 15.0, 0.1).normal_as(normals::INR),
+        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1).normal_as(normals::BILIRUBIN_MG_DL),
     ],
     source: "Forrest 2005 (Gut)",
     compute,

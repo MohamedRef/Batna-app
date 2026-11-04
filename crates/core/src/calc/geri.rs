@@ -32,7 +32,9 @@
 //!   pedis or posterior tibial) over the higher brachial pressure; above 0.9
 //!   normal, below 0.4 rest pain and tissue necrosis.
 
-use super::{Area, CalcError, CalcSpec, Field, Guide, Inputs, Outcome, Part, choice, flag, num, show};
+use super::{
+    Area, CalcError, CalcSpec, Field, Guide, Inputs, Outcome, Part, choice, flag, normals, num, show,
+};
 
 /// The points of the option picked for `key`: `options` and `points` are in
 /// the same order.
@@ -727,8 +729,11 @@ pub const ABI: CalcSpec = CalcSpec {
             .hint("Doppler pressure at the ankle; the higher of the two ankle pressures is used."),
         num("pt_mm_hg", "Ankle systolic: posterior tibial", "mm Hg", 0.0, 350.0, 1.0).optional(),
         num("brachial_right_mm_hg", "Brachial systolic: right arm", "mm Hg", 40.0, 300.0, 1.0)
+            .normal_as(normals::SBP_MM_HG)
             .hint("The higher of the two arm pressures is used."),
-        num("brachial_left_mm_hg", "Brachial systolic: left arm", "mm Hg", 40.0, 300.0, 1.0).optional(),
+        num("brachial_left_mm_hg", "Brachial systolic: left arm", "mm Hg", 40.0, 300.0, 1.0)
+            .normal_as(normals::SBP_MM_HG)
+            .optional(),
     ],
     source: "Book Geriatrics Lecture 1, Subclinical cardiovascular disease (p. 8); Book Diabetes Lecture 5, \
              Ankle brachial pressure index (p. 60); AHA/ACC 2016 PAD guideline (Gerhard-Herman et al., \

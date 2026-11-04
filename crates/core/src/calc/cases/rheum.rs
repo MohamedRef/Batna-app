@@ -38,7 +38,14 @@ pub fn tables() -> Vec<Table> {
             .noted("at least one swollen joint")
             .paper("over 10 large joints only still scores 1", ins![large_joints: 12, small_joints: 0, serology: "negative"], "acr_eular_2010_ra.not_met")
             .score(1.0, 0.0)
-            .noted("no level above 2–10"),
+            .noted("no level above 2–10")
+            .paper(
+                "book vs Aletaha 2010: 3 small + 8 large joints is 2 by the book, 5 by the paper (noted)",
+                ins![large_joints: 8, small_joints: 3, serology: "negative"],
+                "acr_eular_2010_ra.not_met",
+            )
+            .score(2.0, 0.0)
+            .noted("Aletaha 2010"),
         Table::new("caspar", &["caspar.met", "caspar.not_met"])
             .paper(
                 "Taylor 2006: inflammatory arthritis, psoriasis now (2) and RF negative (1) = 3",

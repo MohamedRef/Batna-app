@@ -188,6 +188,20 @@ pub fn tables() -> Vec<Table> {
                 (2.97, "albi.2"),
                 (2.95, "albi.3"),
             )
+            .cut(
+                "as shown: albumin 4.017 g/dL is −2.6007, shown −2.60, so grade 1 like the screen says",
+                ins![bilirubin_mg_dl: 1.0],
+                "albumin_g_dl",
+                (4.0, "albi.2"),
+                (4.017, "albi.1"),
+            )
+            .cut(
+                "as shown: albumin 2.964 g/dL is −1.3907, shown −1.39, so grade 2 (≤ −1.39)",
+                ins![bilirubin_mg_dl: 3.0],
+                "albumin_g_dl",
+                (2.964, "albi.2"),
+                (2.95, "albi.3"),
+            )
             .unit(
                 "bilirubin 5 mg/dL = 85.5 µmol/L, albumin 2.5 g/dL = 25 g/L: 0.66 × 1.932 − 2.125 = −0.85",
                 ins![bilirubin_mg_dl: 5.0, albumin_g_dl: 2.5],
@@ -227,6 +241,20 @@ pub fn tables() -> Vec<Table> {
                 "ast_u_l",
                 (50.0, "fib4.mid"),
                 (51.0, "fib4.high"),
+            )
+            .cut(
+                "as shown: 16 × 81 / 1000 = 1.296, shown 1.30, so intermediate",
+                ins![age_years: 16, alt_u_l: 1, platelets_10e9_l: 1000],
+                "ast_u_l",
+                (80.0, "fib4.low"),
+                (81.0, "fib4.mid"),
+            )
+            .cut(
+                "as shown: 23 × 283 / (1000 × 2) = 3.2545, shown 3.25, so still intermediate",
+                ins![age_years: 23, alt_u_l: 4, platelets_10e9_l: 1000],
+                "ast_u_l",
+                (283.0, "fib4.mid"),
+                (284.0, "fib4.high"),
             ),
         Table::new("apri", &["apri.low", "apri.mid", "apri.high"])
             .paper(
@@ -249,6 +277,20 @@ pub fn tables() -> Vec<Table> {
                 "ast_u_l",
                 (60.0, "apri.mid"),
                 (61.0, "apri.high"),
+            )
+            .cut(
+                "as shown: 20 / 40 × 100 / 101 = 0.495, shown 0.50, so moderate",
+                ins![ast_u_l: 20, ast_uln_u_l: 40],
+                "platelets_10e9_l",
+                (102.0, "apri.low"),
+                (101.0, "apri.mid"),
+            )
+            .cut(
+                "as shown: 62 / 40 × 100 / 103 = 1.505, shown 1.50, so still moderate",
+                ins![ast_u_l: 62, ast_uln_u_l: 40],
+                "platelets_10e9_l",
+                (103.0, "apri.mid"),
+                (102.0, "apri.high"),
             ),
         Table::new("fli", &["fli.low", "fli.mid", "fli.high"])
             .paper(
@@ -270,6 +312,13 @@ pub fn tables() -> Vec<Table> {
                 "waist_cm",
                 (109.0, "fli.mid"),
                 (111.0, "fli.high"),
+            )
+            .cut(
+                "as shown: waist 109.9 cm is FLI 59.5, shown 60, so fatty liver likely",
+                ins![tg_mg_dl: 100, bmi: 25, ggt_u_l: 30],
+                "waist_cm",
+                (109.0, "fli.mid"),
+                (109.9, "fli.high"),
             ),
         Table::new("baveno_vi", &["baveno_vi.spare", "baveno_vi.screen"])
             .paper(

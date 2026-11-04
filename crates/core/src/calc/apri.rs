@@ -6,7 +6,7 @@
 //! fibrosis, > 1.5 severe fibrosis or cirrhosis. The WHO hepatitis C
 //! guidelines (2016) use > 2.0 for cirrhosis; a note says so above 2.0.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show, shown};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "apri",
@@ -26,9 +26,10 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     let uln = i.get_pos("ast_uln_u_l")?;
     let plt = i.get_pos("platelets_10e9_l")?;
     let score = ast / uln * 100.0 / plt;
-    let (band, label, meaning) = if score < 0.5 {
+    let at = shown(score, 2);
+    let (band, label, meaning) = if at < 0.5 {
         ("apri.low", "Below 0.5", "Minimal or no fibrosis.")
-    } else if score <= 1.5 {
+    } else if at <= 1.5 {
         ("apri.mid", "0.5–1.5", "Moderate or significant fibrosis.")
     } else {
         ("apri.high", "Above 1.5", "Severe fibrosis or cirrhosis.")
@@ -41,7 +42,7 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         meaning: meaning.to_owned(),
         page: Some(34),
         parts: vec![Part::new("AST ÷ ULN", ast / uln)],
-        notes: if score > 2.0 {
+        notes: if at > 2.0 {
             vec!["WHO 2016 (hepatitis C): above 2.0 suggests cirrhosis.".to_owned()]
         } else {
             Vec::new()

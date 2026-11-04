@@ -644,7 +644,7 @@ Source: Book Geriatrics Lecture 1, Subclinical cardiovascular disease (p. 8); Bo
 
 ## `acr_eular_2010_ra`: ACR/EULAR 2010 RA criteria
 
-Source: Book Rheumatology Lecture 16, p. 246
+Source: Book Rheumatology Lecture 16, p. 246; Aletaha 2010 (Arthritis Rheum 62:2569) for the joint count note
 
 | input | kind | |
 |---|---|---|

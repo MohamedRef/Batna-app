@@ -1008,6 +1008,12 @@ fn show(v: f64, dp: usize) -> String {
     format!("{v:.dp$}")
 }
 
+/// `v` as [`show`] prints it, so the band always agrees with the number on
+/// screen (FLI 59.6 shows "60" and is banded 60 or above).
+fn shown(v: f64, dp: usize) -> f64 {
+    show(v, dp).parse().unwrap_or(v)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

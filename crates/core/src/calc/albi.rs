@@ -5,7 +5,7 @@
 //! grade 2 > −2.60 to ≤ −1.39, grade 3 > −1.39. Inputs are taken in mg/dL and
 //! g/dL and converted (bilirubin × 17.1, albumin × 10).
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show, shown};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "albi",
@@ -25,9 +25,10 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     let b = bili_umol.log10() * 0.66;
     let a = alb_g_l * -0.085;
     let score = b + a;
-    let (band, label, meaning) = if score <= -2.60 {
+    let at = shown(score, 2);
+    let (band, label, meaning) = if at <= -2.60 {
         ("albi.1", "Grade 1 (≤ −2.60)", "Best liver function and survival group.")
-    } else if score <= -1.39 {
+    } else if at <= -1.39 {
         ("albi.2", "Grade 2 (> −2.60 to ≤ −1.39)", "Intermediate liver function group.")
     } else {
         ("albi.3", "Grade 3 (> −1.39)", "Worst liver function and survival group.")

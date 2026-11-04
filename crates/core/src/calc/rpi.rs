@@ -10,7 +10,7 @@
 //! maturation time of 1 day for Hct 40% or more, 1.5 for 35–39, 2 for
 //! 25–34, 2.5 for 15–24 and 3 below 15.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show, shown};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "rpi",
@@ -57,7 +57,7 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         let arc = retic * rbc * 10.0;
         notes.push(format!("Absolute reticulocyte count: {} × 10⁹/L.", show(arc, 0)));
     }
-    let (band, label, meaning) = if rpi < 2.0 {
+    let (band, label, meaning) = if shown(rpi, 1) < 2.0 {
         ("rpi.low", "Below 2", "Inadequate marrow response: underproduction anaemia.")
     } else {
         ("rpi.adequate", "2 or more", "Adequate marrow response: increased destruction or loss.")

@@ -384,6 +384,101 @@ mod tests {
     }
 
     #[test]
+    fn a_line_fits_one_notification_line() {
+        let long = "ب".repeat(MAX_CHARS + 1);
+        assert_eq!(
+            parse(&format!("- kind: new\n  ar_eg: {long}\n")).unwrap_err(),
+            format!("ar_eg is {} characters (at most {MAX_CHARS})", MAX_CHARS + 1)
+        );
+        assert_eq!(
+            parse(&format!("- kind: new\n  ar_eg: درس\n  en: {}\n", "a".repeat(MAX_CHARS + 1))).unwrap_err(),
+            format!("en is {} characters (at most {MAX_CHARS})", MAX_CHARS + 1)
+        );
+        assert_eq!(
+            parse("- kind: new\n  ar_eg: \"درس\\nجديد\"\n").unwrap_err(),
+            "ar_eg is more than one line"
+        );
+        assert_eq!(parse("- kind: new\n  ar_eg: \"  \"\n").unwrap_err(), "ar_eg is empty");
+    }
+
+    #[test]
+    fn commits_without_a_file_fall_back_to_retro_then_their_title() {
+        let dir = repo();
+        let root = dir.path();
+        // The first commit has no parent: its files are all new.
+        let first = step(root, &[("changes/one.yaml", Some(ONE))]);
+        assert_eq!(collect(root, None).unwrap()[0].text.en, "A new liver lesson");
+        step(
+            root,
+            &[(
+                "changes/retro/titles.yaml",
+                Some("\"Old title\":\n  - kind: fixed\n    ar_eg: حاجة قديمة اتصلحت\n\"Chores\": []\n"),
+            )],
+        );
+        for title in ["Old title (#12)", "Chores", "Add a timer to mocks (#13)", "docs: RUN.md"] {
+            std::fs::write(root.join("notes.txt"), title).unwrap();
+            git(root, &["add", "-A"]).unwrap();
+            git(root, &["commit", "-qm", title]).unwrap();
+        }
+        let found = collect(root, Some(&first)).unwrap();
+        let lines: Vec<(ChangeKind, &str)> = found.iter().map(|c| (c.kind, line_of(c))).collect();
+        assert_eq!(
+            lines,
+            [
+                // The retro commit itself: its title, "step".
+                (ChangeKind::Improved, "step"),
+                (ChangeKind::Fixed, "حاجة قديمة اتصلحت"),
+                (ChangeKind::New, "Add a timer to mocks"),
+            ]
+        );
+        // A commit that isn't in this history: only HEAD.
+        assert_eq!(collect(root, Some("0123456789abcdef0123456789abcdef01234567")).unwrap().len(), 0);
+        assert!(gate(root, "no-such-ref").unwrap_err().starts_with("git rev-parse --verify no-such-ref: "));
+        let broken = step(root, &[("changes/retro/titles.yaml", Some("\"T\": [{ kind: nope }]\n"))]);
+        assert!(retro(root).unwrap_err().starts_with(RETRO), "{broken}");
+    }
+
+    #[test]
+    fn a_bad_file_in_a_commit_names_the_file_and_commit() {
+        let dir = repo();
+        let root = dir.path();
+        let base = step(root, &[("changes/one.yaml", Some(ONE))]);
+        step(root, &[("changes/two.yaml", Some("- kind: new\n  ar_eg: English\n"))]);
+        let err = gate(root, &base).unwrap_err();
+        assert_eq!(err, "changes/two.yaml at HEAD: ar_eg has no Arabic: \"English\"");
+        assert!(git(root, &["frobnicate"]).unwrap_err().starts_with("git frobnicate: "));
+    }
+
+    #[test]
+    fn a_huge_history_is_cut_to_fit_the_feed() {
+        let big = |build: u64| BuildChanges {
+            changes: (0..40)
+                .map(|i| Change {
+                    kind: ChangeKind::New,
+                    text: UpdateNotes { en: "x".repeat(150), ar_eg: format!("{i} {}", "ب".repeat(150)) },
+                })
+                .collect(),
+            ..entry(build)
+        };
+        let mut prev: UpdateManifest =
+            serde_json::from_str(include_str!("../../../fixtures/update/update.json")).unwrap();
+        prev.history = (1..HISTORY_BUILDS as u64).rev().map(big).collect();
+        let h = history(Some(&prev), Some(big(HISTORY_BUILDS as u64)), &BTreeMap::new());
+        assert!(h.len() < HISTORY_BUILDS && h.len() > 1, "{}", h.len());
+        assert!(serde_json::to_vec(&h).unwrap().len() <= MAX_HISTORY_BYTES);
+        assert_eq!(h[0].build, HISTORY_BUILDS as u64, "the newest build stays");
+    }
+
+    #[test]
+    fn check_all_needs_the_folder() {
+        let dir = tempfile::tempdir().unwrap();
+        assert!(check_all(dir.path()).unwrap_err().contains("changes"));
+        std::fs::create_dir_all(dir.path().join("changes")).unwrap();
+        std::fs::write(dir.path().join("changes/README.md"), "not yaml").unwrap();
+        assert_eq!(check_all(dir.path()).unwrap(), 0);
+    }
+
+    #[test]
     fn a_file_needs_egyptian_arabic() {
         let c = parse("- kind: fixed\n  ar_eg: الصوت مبقاش بيقطع\n").unwrap();
         assert_eq!((c[0].kind, c[0].text.ar_eg.as_str()), (ChangeKind::Fixed, "الصوت مبقاش بيقطع"));

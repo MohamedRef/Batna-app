@@ -28,7 +28,7 @@ impl Span {
     }
 }
 
-static SPAN: GlobalSignal<Span> = Signal::global(|| Span::Week);
+pub(super) static SPAN: GlobalSignal<Span> = Signal::global(|| Span::Week);
 
 /// How retention moved against the period before: (better, points), or
 /// `None` when either period has nothing to compare.
@@ -140,7 +140,7 @@ pub fn PeriodHead(data: Rc<StudyData>) -> Element {
 }
 
 /// A bar's height in percent: a day with answers always shows a little.
-fn bar_height(minutes: u32, answers: u32, peak: u32) -> u32 {
+pub(super) fn bar_height(minutes: u32, answers: u32, peak: u32) -> u32 {
     (minutes * 100 / peak.max(1)).max(if answers > 0 { 6 } else { 2 })
 }
 

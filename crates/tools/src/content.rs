@@ -296,6 +296,144 @@ mod tests {
         assert_eq!(unfinished(dir.path()).len(), 1);
     }
 
+    use crate::testkit::{self, strings, write};
+
+    fn cli(root: &Path, args: &[&str]) -> Res<String> {
+        run(root, &strings(args))
+    }
+
+    #[test]
+    fn retired_ids_are_never_handed_out_again() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        assert_eq!(
+            cli(root, &["next-id", "hb.L01"]).unwrap(),
+            "next item id: hb.L01.003\nnext lesson id: hb.L01.lesson2"
+        );
+        write(
+            root,
+            crate::ids::RETIRED,
+            "# header\nitem hb.L01.007  # merged\nlesson hb.L01.lesson4  # split\n",
+        );
+        assert_eq!(next_ids(root, "hb.L01").unwrap(), ("hb.L01.008".into(), "hb.L01.lesson5".into()));
+        assert!(cli(root, &["next-id"]).unwrap_err()[0].starts_with("usage:"));
+        assert!(cli(root, &["next-id", "hb.L09"]).unwrap_err()[0].contains("L09.yaml"));
+    }
+
+    #[test]
+    fn a_new_item_of_every_kind_starts_from_the_worked_example() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        for kind in ["case", "table", "order", "calc"] {
+            let out = cli(root, &["new-item", "hb.L01", kind]).unwrap();
+            assert!(out.starts_with("# Paste under `items:` in content/hb/L01.yaml."), "{kind}: {out}");
+            let yaml: String =
+                out.lines().filter(|l| !l.starts_with('#')).map(|l| format!("{l}\n")).collect();
+            let items: Vec<Item> = serde_yaml_ng::from_str(&yaml).unwrap();
+            let item = &items[0];
+            assert_eq!(item.id, "hb.L01.003", "{kind}");
+            assert_eq!(item.topic.as_deref(), Some("definition"), "{kind}: the lecture's first topic");
+            assert_eq!(item.src.page, 1, "{kind}: the lecture's first page");
+            assert!(item.src.quote.as_deref().is_some_and(|q| q.starts_with(TEMPLATE_MARK)), "{kind}");
+            // Pasted in, it fails validate until every marker is replaced.
+            let marked = format!(
+                "{}{}",
+                testkit::LECTURE,
+                yaml.replace("- id:", "  - id:").replace("\n  ", "\n    ").trim_end()
+            );
+            write(root, "content/hb/L01.yaml", &format!("{marked}\n"));
+            let problems = crate::validate_all(root).unwrap_err();
+            assert!(
+                problems.iter().any(|p| p.contains("unfinished: replace every TODO(author)")),
+                "{kind}: {problems:#?}"
+            );
+            write(root, "content/hb/L01.yaml", testkit::LECTURE);
+        }
+        assert!(cli(root, &["new-item", "hb.L01"]).unwrap_err()[0].starts_with("usage:"));
+        std::fs::remove_file(root.join("fixtures/content/sample.yaml")).unwrap();
+        assert!(cli(root, &["new-item", "hb.L01", "card"]).unwrap_err()[0].contains("sample.yaml"));
+        assert!(cli(root, &["rename"]).unwrap_err()[0].contains("next-id | new-item | diff | preflight"));
+    }
+
+    #[test]
+    fn the_diff_reads_built_packs_and_git_revisions() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        let out = root.join("dist").display().to_string();
+        crate::packs::run(root, &strings(&["build", "--out", &out])).unwrap();
+        let built = format!("{out}/batna-content.pack");
+        assert_eq!(
+            cli(root, &["diff", "--base-pack", &built, "--head-pack", &built]).unwrap(),
+            "no lecture or lesson differs"
+        );
+
+        // Head is the working tree: one item fewer, the program renamed.
+        write(
+            root,
+            "content/hb/L01.yaml",
+            &testkit::LECTURE[..testkit::LECTURE.find("  - id: hb.L01.002").unwrap()],
+        );
+        write(root, "content/program.yaml", &testkit::PROGRAM.replace("title: MSc", "title: MSc IM"));
+        let out = cli(root, &["diff", "--base-pack", &built]).unwrap();
+        assert_eq!(
+            out,
+            "program: changed\n| Lecture | Items added / changed / removed | Lessons added / changed / removed |\n|---|---|---|\n| hb.L01 | 0 / 0 / 1 | 0 / 0 / 0 |"
+        );
+
+        let err = |args: &[&str]| cli(root, args).unwrap_err()[0].clone();
+        assert_eq!(err(&["diff"]), "give --base REF or --base-pack FILE");
+        assert_eq!(
+            err(&["diff", "--base", "HEAD", "--base-pack", &built]),
+            "give --base REF or --base-pack FILE"
+        );
+        assert!(err(&["diff", "--base-pack", "/no/pack"]).starts_with("/no/pack: "));
+        let junk = root.join("junk.pack");
+        std::fs::write(&junk, b"junk").unwrap();
+        let junk = junk.display().to_string();
+        assert!(err(&["diff", "--base-pack", &junk]).starts_with(&format!("{junk}: ")));
+        assert!(
+            err(&["diff", "--base-pack", &built, "--head-pack", &junk]).starts_with(&format!("{junk}: "))
+        );
+        assert!(err(&["diff", "--base-pack", &built, "--head-pack", "/no/pack"]).starts_with("/no/pack: "));
+        // Not a repository: git archive says why.
+        assert!(err(&["diff", "--base", "HEAD"]).starts_with("git archive HEAD: "));
+    }
+
+    #[test]
+    fn preflight_prints_one_table_and_fails_on_any_check() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        testkit::commit_all(root, "content");
+        let table = cli(root, &["preflight", "--base", "HEAD"]).unwrap();
+        let rows: Vec<&str> = table.lines().collect();
+        assert_eq!(rows[..2], ["| Check | Result |", "|---|---|"]);
+        assert!(rows[2].starts_with("| content checks (validate) | ✓ content OK: 1 courses"), "{table}");
+        assert!(rows[3].starts_with("| pack devices take (packs build --check) | ✓ pack OK"), "{table}");
+        assert!(rows[4].starts_with("| content ids (records keep their targets) | ✓ ids: "), "{table}");
+
+        // Removing an item breaks two checks: its lock row and its id.
+        write(
+            root,
+            "content/hb/L01.yaml",
+            &testkit::LECTURE[..testkit::LECTURE.find("  - id: hb.L01.002").unwrap()],
+        );
+        let err = cli(root, &["preflight", "--base", "HEAD"]).unwrap_err();
+        assert_eq!(err[1], "2 check(s) failed; see above");
+        assert!(err[0].contains("| content checks (validate) | ✗ 1 problem(s) |"), "{}", err[0]);
+        assert!(
+            err[0].contains("| content ids (records keep their targets) | ✗ 2 problem(s) |"),
+            "{}",
+            err[0]
+        );
+        // A base that isn't there fails the ids row instead of passing it.
+        let err = cli(root, &["preflight", "--base", "no-such-branch"]).unwrap_err();
+        assert!(
+            err[0].contains("| content ids (records keep their targets) | ✗ 1 problem(s) |"),
+            "{}",
+            err[0]
+        );
+    }
+
     #[test]
     fn the_diff_counts_items_and_lessons_per_lecture() {
         let head = crate::ids::pack_at(&root()).unwrap();

@@ -65,18 +65,8 @@ pub fn ShareInbox() -> Element {
             "#,
         );
         while eval.recv::<bool>().await.is_ok() {
-            let Some(shared) = super::share::take() else { continue };
-            let (card, trimmed) = core_own::draft_from_shared(
-                &shared.text,
-                shared.source().as_deref(),
-                new_id(),
-                store::now_ms(),
-            );
-            let draft = Draft { card, kind: DraftKind::Shared, trimmed };
-            if DRAFT.peek().is_some() {
-                *QUEUED.write() = Some(draft);
-            } else {
-                *DRAFT.write() = Some(draft);
+            if let Some(shared) = super::share::take() {
+                arrive(&shared);
             }
         }
     });
@@ -92,6 +82,19 @@ pub fn ShareInbox() -> Element {
         if let Some(draft) = DRAFT() {
             Sheet { key: "{draft.card.id}", draft }
         }
+    }
+}
+
+/// Text shared in from another app becomes a draft card: the sheet opens
+/// on it, or, while he is writing a card, it waits its turn.
+fn arrive(shared: &super::share::Shared) {
+    let (card, trimmed) =
+        core_own::draft_from_shared(&shared.text, shared.source().as_deref(), new_id(), store::now_ms());
+    let draft = Draft { card, kind: DraftKind::Shared, trimmed };
+    if DRAFT.peek().is_some() {
+        *QUEUED.write() = Some(draft);
+    } else {
+        *DRAFT.write() = Some(draft);
     }
 }
 
@@ -428,6 +431,9 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
         }
     }
 }
+
+#[cfg(test)]
+mod flow;
 
 #[cfg(test)]
 mod tests {

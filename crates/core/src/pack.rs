@@ -347,6 +347,72 @@ mod tests {
     }
 
     #[test]
+    fn index_and_lesson_files_are_checked_like_lectures() {
+        let mut idx = index();
+        idx.schema = "batna.content/v9".into();
+        idx.lectures[1].id = "HB.2".into();
+        let p = Pack::new(idx, vec![sample()]).problems();
+        assert_eq!(
+            p,
+            [
+                "index: schema is \"batna.content/v9\", expected \"batna.content/v1\"",
+                "index: lecture id \"HB.2\" must look like hb.L01",
+            ]
+        );
+
+        let file = |lecture: &str,
+                    schema: &str,
+                    id: &str,
+                    topics: &[&str],
+                    steps: serde_json::Value|
+         -> LessonFile {
+            serde_json::from_value(serde_json::json!({
+                "schema": schema, "lecture": lecture,
+                "lessons": [{
+                    "id": id, "title": "t", "hook": "h", "minutes": 5, "pages": [1, 2], "topics": topics,
+                    "steps": steps, "recap": [], "status": "unverified"
+                }]
+            }))
+            .unwrap()
+        };
+        let v1 = crate::lesson::SCHEMA;
+        let p = Pack::new(index(), vec![sample()])
+            .with_lessons(vec![
+                file(
+                    "hb.L01",
+                    "batna.lesson/v9",
+                    "hb.L02.lesson1",
+                    &["ascites"],
+                    serde_json::json!([{ "kind": "try", "items": ["hb.L01.777"] }]),
+                ),
+                // Lessons of a lecture whose items don't ship: no reference to check.
+                file("hb.L02", v1, "hb.L02.lesson1", &["anything"], serde_json::json!([])),
+                file("hb.L07", v1, "hb.L07.lesson1", &[], serde_json::json!([])),
+            ])
+            .problems();
+        assert_eq!(
+            p,
+            [
+                "hb.L01 lessons: schema is \"batna.lesson/v9\", expected \"batna.lesson/v1\"",
+                "hb.L02.lesson1: lesson id isn't under its lecture hb.L01",
+                "hb.L02.lesson1: item hb.L01.777 isn't in lecture hb.L01",
+                "hb.L02.lesson1: topic ascites isn't in lecture hb.L01",
+                "hb.L02.lesson1: lesson id is used twice",
+                "hb.L07 lessons: the lecture isn't listed in the index",
+            ]
+        );
+    }
+
+    #[test]
+    fn a_program_that_breaks_its_rules_is_named() {
+        let mut program: Program =
+            serde_yaml_ng::from_str(include_str!("../../../content/program.yaml")).unwrap();
+        program.courses.retain(|c| c.id != "hb");
+        let p = Pack::new(index(), vec![sample()]).with_program(program).problems();
+        assert!(!p.is_empty() && p.iter().all(|m| m.starts_with("program: ")), "{p:?}");
+    }
+
+    #[test]
     fn garbage_is_rejected() {
         assert!(matches!(Pack::decode(b"PK\x03\x04"), Err(PackError::Magic)));
         let mut bad = MAGIC.to_vec();

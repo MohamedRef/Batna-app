@@ -949,6 +949,66 @@ mod tests {
     }
 
     #[test]
+    fn every_error_says_what_went_wrong() {
+        let said = [
+            (UpdateError::BadKey, "the update key in this build is invalid"),
+            (UpdateError::BadSignature, "the update signature is unreadable"),
+            (UpdateError::NotSigned, "the update isn't signed with Batna's key"),
+            (UpdateError::BadManifest("x".into()), "the update manifest is invalid: x"),
+            (
+                UpdateError::WrongChannel { asked: Channel::Beta, got: Channel::Preview },
+                "asked the beta channel, got preview",
+            ),
+            (UpdateError::TooNew, "this update needs a newer Batna; install it by hand once"),
+            (UpdateError::BadFileName("../x".into()), "unsafe file name in the manifest: ../x"),
+            (UpdateError::Mismatch, "the download doesn't match the signed manifest"),
+        ];
+        for (e, text) in said {
+            assert_eq!(e.to_string(), text);
+        }
+    }
+
+    #[test]
+    fn a_signed_manifest_with_a_bad_version_or_body_is_refused() {
+        let signer = SigningKey::from_bytes(&[5; 32]);
+        let key = signer.verifying_key();
+        let sign = |json: &[u8]| B64.encode(signer.sign(json).to_bytes());
+        let mut m = manifest(Channel::Alpha, "1.0.0-alpha.2", 0);
+        m.version = "one".into();
+        let json = serde_json::to_vec(&m).unwrap();
+        assert_eq!(
+            verify_manifest(&json, &sign(&json), &key),
+            Err(UpdateError::BadManifest("version \"one\"".into()))
+        );
+        for body in [&b"not json"[..], br#"{"format": 1}"#] {
+            assert!(matches!(verify_manifest(body, &sign(body), &key), Err(UpdateError::BadManifest(_))));
+        }
+        // 31 bytes is no key.
+        assert_eq!(parse_public_key(&B64.encode([1u8; 31])), Err(UpdateError::BadKey));
+    }
+
+    #[test]
+    fn odd_clock_fields_are_not_a_time() {
+        for bad in [
+            "2026-10-27T24:00:00Z",
+            "2026-10-27T08:60:00Z",
+            "2026-10-27T08:00:61Z",
+            "2026-10-32T08:00:00Z",
+            "2026-1-27T08:00:00Z",
+            "2026-10-27-01T08:00:00Z",
+            "2026-10-27T08:00:00:00Z",
+        ] {
+            assert_eq!(published_secs(bad), None, "{bad}");
+        }
+        assert_eq!(published_secs("2026-10-27T08:00:60Z"), Some(1_793_088_060), "a leap second reads");
+    }
+
+    #[test]
+    fn a_linux_build_has_no_app_updates() {
+        assert_eq!(this_platform(), None, "only Android arm64 and the Mac get app files");
+    }
+
+    #[test]
     fn key_files_may_carry_comments() {
         let key = SigningKey::from_bytes(&[3; 32]).verifying_key();
         let text = format!("# Batna's update key\n\n{}\n", B64.encode(key.as_bytes()));

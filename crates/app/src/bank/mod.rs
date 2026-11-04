@@ -3,12 +3,13 @@
 //! (the review at the end), and sit timed mock exams scored per lecture and
 //! topic. Picking, timing and scoring live in `batna_core::exam`.
 
+#[cfg(test)]
+mod flow;
 mod player;
 mod question;
 mod result;
 mod setup;
 
-use std::sync::atomic::{AtomicBool, Ordering};
 use web_time::{SystemTime, UNIX_EPOCH};
 
 use batna_core::content::Body;
@@ -290,8 +291,9 @@ pub fn start(mode: Mode, questions: Vec<Question>) {
 /// on the phone is not one to continue on the tablet.
 const OPEN_KEY: &str = "bank.open_paper";
 /// Whether `OPEN_KEY` may hold a paper, so tutor clicks don't rewrite an
-/// empty key every time.
-static OPEN_STORED: AtomicBool = AtomicBool::new(true);
+/// empty key every time. Per app (like the paper itself), so two apps in one
+/// process, as tests run them, never skip each other's writes.
+static OPEN_STORED: GlobalSignal<bool> = Signal::global(|| true);
 
 /// Write the open timed paper, or clear it once none is open. Called after
 /// every change to a paper: answers, flags, moves, leave, submit.
@@ -301,10 +303,10 @@ fn keep_open() {
         (Phase::Running(p), None) if p.mode.timed() => Some(p.clone()),
         _ => None,
     };
-    if open.is_none() && !OPEN_STORED.load(Ordering::Relaxed) {
+    if open.is_none() && !*OPEN_STORED.peek() {
         return;
     }
-    OPEN_STORED.store(open.is_some(), Ordering::Relaxed);
+    *OPEN_STORED.write() = open.is_some();
     let _ = crate::store::shared().put_local_setting(OPEN_KEY, &open);
 }
 
@@ -317,7 +319,7 @@ fn restore_open() {
     }
     match crate::store::shared().local_setting::<Option<Paper>>(OPEN_KEY).flatten() {
         Some(p) if p.mode.timed() && !p.questions.is_empty() => *PAUSED.write() = Some(p),
-        _ => OPEN_STORED.store(false, Ordering::Relaxed),
+        _ => *OPEN_STORED.write() = false,
     }
 }
 

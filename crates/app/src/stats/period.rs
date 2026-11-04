@@ -159,4 +159,23 @@ mod tests {
         assert_eq!(change(&with(5, 10), &with(7, 10)), Some((false, 20)));
         assert_eq!(change(&with(5, 10), &Period::default()), None);
     }
+
+    #[test]
+    fn tile_labels_agree_with_their_numbers() {
+        let rows: Vec<String> = [0, 1, 2, 5, 11, 103]
+            .into_iter()
+            .map(|n| format!("{n} {} | {} | {}", tx::days_studied(n), tx::minutes(n), tx::answers(n)))
+            .collect();
+        assert_eq!(
+            rows,
+            [
+                "0 يوم ذاكرت فيهم | دقيقة تركيز | سؤال وكارت جاوبتهم",
+                "1 يوم ذاكرت فيه | دقيقة تركيز | سؤال وكارت جاوبته",
+                "2 أيام ذاكرت فيهم | دقايق تركيز | أسئلة وكروت جاوبتهم",
+                "5 أيام ذاكرت فيهم | دقايق تركيز | أسئلة وكروت جاوبتهم",
+                "11 يوم ذاكرت فيهم | دقيقة تركيز | سؤال وكارت جاوبتهم",
+                "103 أيام ذاكرت فيهم | دقايق تركيز | أسئلة وكروت جاوبتهم",
+            ]
+        );
+    }
 }

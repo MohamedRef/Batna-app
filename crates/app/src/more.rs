@@ -19,21 +19,40 @@ pub struct Tool {
     pub label: &'static str,
     pub icon: fn() -> Element,
     pub open: fn(Ui),
+    /// True while the tool is the page on show (the sidebar marks it).
+    pub shown: fn(Ui) -> bool,
 }
 
-pub const CALCULATORS: Tool =
-    Tool { label: i18n::calc::TITLE, icon: icons::calculator, open: crate::case::open_calculators };
-pub const REFERENCES: Tool =
-    Tool { label: i18n::refs::TITLE, icon: icons::references, open: crate::lecture::open_references };
+fn never(_: Ui) -> bool {
+    false
+}
+
+pub const CALCULATORS: Tool = Tool {
+    label: i18n::calc::TITLE,
+    icon: icons::calculator,
+    open: crate::case::open_calculators,
+    shown: crate::case::calculators_shown,
+};
+pub const REFERENCES: Tool = Tool {
+    label: i18n::refs::TITLE,
+    icon: icons::references,
+    open: crate::lecture::open_references,
+    shown: never,
+};
 pub const COURSES: Tool =
-    Tool { label: i18n::courses::TITLE, icon: icons::courses, open: crate::courses::open_map };
+    Tool { label: i18n::courses::TITLE, icon: icons::courses, open: crate::courses::open_map, shown: never };
 pub const ABBREVIATIONS: Tool = Tool {
     label: i18n::abbr::DICT_TITLE,
     icon: icons::abbreviations,
     open: |ui| crate::abbrdict::open(ui, None),
+    shown: never,
 };
-pub const ADD_CARD: Tool =
-    Tool { label: i18n::refs::ADD_CARD, icon: icons::add_card, open: |_| crate::own::open_new() };
+pub const ADD_CARD: Tool = Tool {
+    label: i18n::refs::ADD_CARD,
+    icon: icons::add_card,
+    open: |_| crate::own::open_new(),
+    shown: never,
+};
 
 /// The tools the rail and sidebar list under the screens from 600dp (More
 /// holds them on phones).
@@ -213,6 +232,7 @@ pub fn ToolButtons() -> Element {
                 button {
                     key: "{tool.label}",
                     class: "nav-item nav-tool",
+                    "aria-current": if (tool.shown)(ui) { "page" } else { "false" },
                     aria_label: tool.label,
                     title: tool.label,
                     onclick: move |_| (tool.open)(ui),

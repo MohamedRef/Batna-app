@@ -10,16 +10,31 @@ mod render_tests;
 pub use picker::{Calculators, reload};
 
 use std::collections::BTreeMap;
+use std::sync::OnceLock;
 
 use batna_core::calc::{
     self, Area, CalcError, CalcSpec, CalcValue, FieldKind, Inputs, Normal, Outcome, Place,
 };
+use batna_core::content::CalcQuotes;
 use dioxus::prelude::*;
 
 use crate::i18n::calc as tx;
 use crate::look::{Css, css};
 
 pub const CSS: Css = css!("src/calc/calc.css");
+
+const QUOTES_YAML: &str = include_str!("../../../../content/calc-quotes.yaml");
+
+/// Every calculator's book quotes (`content/calc-quotes.yaml`), bundled. A
+/// file that doesn't parse gives none (CI's `batna-tools validate` fails on
+/// it first).
+pub fn quotes() -> &'static CalcQuotes {
+    static Q: OnceLock<CalcQuotes> = OnceLock::new();
+    Q.get_or_init(|| {
+        serde_yaml_ng::from_str(QUOTES_YAML)
+            .unwrap_or(CalcQuotes { schema: String::new(), quotes: Vec::new() })
+    })
+}
 
 fn area_label(area: Area) -> &'static str {
     match area {
@@ -448,11 +463,21 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome, #[props(default = true)] 
                     }
                 }
             }
-            // The book page opens its sheet, like every "ص N" chip.
+            // The book page opens its sheet, like every "ص N" chip, with the
+            // book's own words for the cut-offs, in that lecture's book.
             p { class: "small muted calc-source",
                 span { {tx::SOURCE} ": " bdi { "{source}" } }
                 if let Some(page) = outcome.page {
-                    crate::hover::BookPage { page, quote: None, of: calc::spec(id).map_or("hb", |s| area_course(s.area)).to_string() }
+                    {
+                        let quote = quotes().find(id, page);
+                        let of = quote.map_or_else(
+                            || calc::spec(id).map_or("hb", |s| area_course(s.area)).to_string(),
+                            |q| q.lecture.clone(),
+                        );
+                        rsx! {
+                            crate::hover::BookPage { page, quote: quote.map(|q| q.quote.clone()), of }
+                        }
+                    }
                 }
             }
         }
@@ -462,6 +487,67 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome, #[props(default = true)] 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// The pages a calculator's results cite, found by trying many inputs
+    /// (seeded, so the same every run).
+    fn cited_pages(spec: &CalcSpec) -> BTreeMap<u32, Vec<&'static str>> {
+        let mut seed: u64 = 0x9E37_79B9_7F4A_7C15;
+        let mut rnd = move || {
+            seed ^= seed << 13;
+            seed ^= seed >> 7;
+            seed ^= seed << 17;
+            (seed >> 11) as f64 / (1u64 << 53) as f64
+        };
+        let mut pages: BTreeMap<u32, Vec<&'static str>> = BTreeMap::new();
+        for _ in 0..4000 {
+            let mut i = Inputs::new();
+            for f in spec.fields {
+                if f.optional && rnd() < 0.3 {
+                    continue;
+                }
+                i = match f.kind {
+                    FieldKind::Number { min, max, step, .. } => {
+                        // Half the tries near the low end, where most cut-offs sit.
+                        let t = if rnd() < 0.5 { rnd() } else { rnd().powi(3) };
+                        i.num(f.key, ((min + (max - min) * t) / step).round() * step)
+                    }
+                    FieldKind::Flag => i.flag(f.key, rnd() < 0.5),
+                    FieldKind::Choice(o) => i.choice(f.key, o[(rnd() * o.len() as f64) as usize % o.len()].0),
+                };
+            }
+            if let Ok(Outcome { page: Some(p), band, .. }) = spec.run(&i) {
+                let bands = pages.entry(p).or_default();
+                if !bands.contains(&band) {
+                    bands.push(band);
+                }
+            }
+        }
+        pages
+    }
+
+    // Mohamed, 2026-11-02: the calculators' page sheets showed no quote.
+    #[test]
+    fn every_cited_page_has_its_book_quote() {
+        assert_eq!(
+            quotes().schema,
+            batna_core::content::CALC_QUOTES_SCHEMA,
+            "content/calc-quotes.yaml parses"
+        );
+        let mut missing = Vec::new();
+        for spec in calc::all() {
+            for (page, bands) in cited_pages(spec) {
+                if quotes().find(spec.id, page).is_none() {
+                    missing.push(format!("{} p{page} ({})", spec.id, bands.join(", ")));
+                }
+            }
+        }
+        assert!(
+            missing.is_empty(),
+            "add the book's words for these pages to content/calc-quotes.yaml, then run \
+             batna-tools refs --lecture <id> --write:\n{}",
+            missing.join("\n")
+        );
+    }
 
     #[test]
     fn missing_counts_required_fields_only() {

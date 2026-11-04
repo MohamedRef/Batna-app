@@ -306,6 +306,23 @@ pub fn collect(root: &Path, chapter: &str, num: &str) -> Result<Vec<Ref>, String
         let quote = src.get("quote").and_then(Value::as_str).map(String::from);
         out.push(Ref { id: id.into(), page, quote, text: text_of(item), book_figure: false });
     }
+    // Calculators' quotes on this lecture's pages (`content/calc-quotes.yaml`):
+    // the quote is all they say, with the calculator's name.
+    let quotes = root.join("content/calc-quotes.yaml");
+    if quotes.exists() {
+        let q: batna_core::content::CalcQuotes = crate::read_yaml(&quotes)?;
+        let lecture = format!("{chapter}.{num}");
+        for c in q.quotes.iter().filter(|c| c.lecture == lecture) {
+            let name = batna_core::calc::spec(&c.calculator).map_or("", |s| s.name);
+            out.push(Ref {
+                id: batna_core::content::calc_quote_ref(&c.calculator, c.page),
+                page: c.page,
+                quote: Some(c.quote.clone()),
+                text: format!("{name}\n{}", c.quote),
+                book_figure: false,
+            });
+        }
+    }
     let lessons = root.join("content/lessons").join(chapter).join(format!("{num}.yaml"));
     if lessons.exists() {
         let doc: Value = crate::read_yaml(&lessons)?;
@@ -528,7 +545,8 @@ fn scores(
     pages
         .iter()
         .map(|(p, t)| {
-            let got: f64 = weights.iter().filter(|(w, _)| t.contains(w)).map(|(_, w)| w).sum();
+            // A fold from +0.0: an empty f64 `sum` is -0.0, printed "-0%".
+            let got = weights.iter().filter(|(w, _)| t.contains(w)).fold(0.0, |a, (_, w)| a + w);
             (*p, if total > 0.0 { got / total } else { 0.0 })
         })
         .collect()
@@ -803,6 +821,22 @@ mod tests {
         assert_eq!(lock["hb.L01.001"].basis, "quote");
         assert_eq!(lock["hb.L01.002"].basis, "quote");
         assert!(check_locks(root, &["hb.L01".into()]).is_empty());
+    }
+
+    #[test]
+    fn a_page_without_the_terms_scores_zero_not_minus_zero() {
+        let pages: BTreeMap<u32, BTreeSet<String>> =
+            [(1, terms("Ascites is graded by volume")), (2, terms("neutrophils above 250 cefotaxime"))]
+                .into();
+        let mut df = HashMap::new();
+        for t in pages.values() {
+            for w in t {
+                *df.entry(w.clone()).or_default() += 1;
+            }
+        }
+        let sc = scores("neutrophils above 250: start cefotaxime", &pages, &df);
+        assert_eq!(format!("{:.0}%", sc[&1] * 100.0), "0%");
+        assert_eq!(format!("{:.0}%", sc[&2] * 100.0), "100%");
     }
 
     #[test]

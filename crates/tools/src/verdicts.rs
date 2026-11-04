@@ -280,6 +280,32 @@ verdicts:
     }
 
     #[test]
+    fn an_empty_export_has_nothing_to_fix_and_a_bad_one_is_refused() {
+        let dir = tree();
+        let file = dir.path().join("empty.yaml");
+        std::fs::write(&file, "schema: batna.verdicts/v1\nexported: \"\"\nverdicts:\n  - { id: hb.L01.002, verdict: edited, at: a, note: \"  \", edit: { id: hb.L01.777 } }\n").unwrap();
+        let out = run(dir.path(), &[file.display().to_string()]).unwrap();
+        assert!(out.starts_with("## hb.L01: 1 to fix\n✎ hb.L01.002 (cloze, p. 14) edited"), "{out}");
+        assert!(out.contains("edited\n    id → hb.L01.777\n    (can't apply: hb.L01.002: the edit changes `id`, which only the YAML may change)"), "{out}");
+        std::fs::write(&file, "schema: batna.verdicts/v1\nexported: \"\"\nverdicts: []\n").unwrap();
+        assert!(
+            run(dir.path(), &[file.display().to_string()])
+                .unwrap()
+                .starts_with("No ✎ or ✗ items: nothing to fix.")
+        );
+        std::fs::write(&file, "schema: batna.verdicts/v0\nexported: x\nverdicts: []\n").unwrap();
+        let err = run(dir.path(), &[file.display().to_string()]).unwrap_err();
+        assert_eq!(
+            err,
+            [format!("{}: schema is \"batna.verdicts/v0\", expected \"batna.verdicts/v1\"", file.display())]
+        );
+        assert_eq!(
+            run(dir.path(), &["--approve".into()]).unwrap_err(),
+            ["usage: batna-tools verdicts FILE [--approve]"]
+        );
+    }
+
+    #[test]
     fn edits_apply_to_the_item_or_say_why_not() {
         let lec: batna_core::content::Lecture =
             serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();

@@ -1,7 +1,7 @@
 //! Mohamed's own cards in the `own_cards` table (synced, last writer wins).
 
 use batna_core::own::{OwnCard, PREFIX};
-use rusqlite::params;
+use rusqlite::{OptionalExtension, params};
 
 use super::{Result, Store, now_ms};
 
@@ -29,9 +29,12 @@ impl Store {
     /// Deletes a card everywhere (a tombstone, so other devices drop it too).
     /// Its reviews stay in the log; they just no longer match a card.
     pub fn delete_own_card(&self, id: &str) -> Result<()> {
+        // No row: nothing to delete. A read that fails is an error, not
+        // "already gone", so the card never looks deleted while it stays.
         let value: Option<String> = {
             let conn = self.conn.lock().unwrap();
-            conn.query_row("SELECT value FROM own_cards WHERE id = ?1", params![id], |r| r.get(0)).ok()
+            conn.query_row("SELECT value FROM own_cards WHERE id = ?1", params![id], |r| r.get(0))
+                .optional()?
         };
         let Some(value) = value else { return Ok(()) };
         let hlc = self.tick(now_ms());
@@ -80,6 +83,16 @@ mod tests {
         // Only each card's newest version waits to go up: own.a as edited,
         // own.b as deleted (`sync::enqueue`).
         assert_eq!(s.outbox_len(), before + 2);
+    }
+
+    #[test]
+    fn a_delete_that_cannot_read_the_card_fails_instead_of_passing() {
+        let s = Store::open_in_memory().unwrap();
+        s.put_own_card(&card("own.a", 1)).unwrap();
+        s.conn.lock().unwrap().execute("ALTER TABLE own_cards RENAME TO own_cards_gone", []).unwrap();
+        assert!(s.delete_own_card("own.a").is_err());
+        s.conn.lock().unwrap().execute("ALTER TABLE own_cards_gone RENAME TO own_cards", []).unwrap();
+        assert_eq!(s.own_cards().len(), 1, "the card is still there, and nothing said it was deleted");
     }
 
     #[test]

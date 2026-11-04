@@ -177,4 +177,80 @@ mod tests {
         .unwrap();
         assert_eq!(short_text(&item), "Class A = ___ points");
     }
+
+    fn first(kind: &str) -> &'static Item {
+        crate::content::Library::get()
+            .lectures
+            .values()
+            .flat_map(|l| &l.items)
+            .find(|i| i.body.kind() == kind)
+            .unwrap_or_else(|| panic!("no {kind} item"))
+    }
+
+    #[test]
+    fn every_kind_has_a_label_and_a_one_line_name() {
+        let kinds = ["card", "cloze", "enumerate", "essay", "mcq", "case", "table", "order", "calc"];
+        let mut labels = std::collections::HashSet::new();
+        for kind in kinds {
+            let item = first(kind);
+            assert!(labels.insert(kind_label(&item.body)), "{kind} has its own label");
+            let line = short_text(item);
+            assert!(!line.is_empty() && !line.contains('\n') && !line.contains("{{"), "{kind}: {line}");
+            assert!(line.chars().count() <= 89, "{kind}: {line}");
+            let head = match &item.body {
+                Body::Card { front, .. } => front,
+                Body::Mcq { stem, .. } | Body::Case { stem, .. } | Body::Calc { stem, .. } => stem,
+                Body::Enumerate { prompt, .. } | Body::Essay { prompt, .. } | Body::Order { prompt, .. } => {
+                    prompt
+                }
+                Body::Table { title, .. } => title,
+                Body::Cloze { .. } => continue,
+            };
+            let words: String = head.split_whitespace().collect::<Vec<_>>().join(" ");
+            let shown = line.trim_end_matches('…');
+            assert!(words.starts_with(shown), "{kind}: {line:?} starts {words:?}");
+        }
+        let long: Item = serde_yaml_ng::from_str(&format!(
+            "{{ id: x.2, kind: card, front: '{}', back: b, src: {{ page: 1 }}, status: unverified }}",
+            "word ".repeat(40)
+        ))
+        .unwrap();
+        let line = short_text(&long);
+        assert_eq!(line.chars().count(), 89);
+        assert!(line.ends_with('…'));
+    }
+
+    #[test]
+    fn an_item_this_player_cannot_show_offers_skip() {
+        use std::cell::Cell;
+        thread_local! {
+            static GOT: Cell<Option<Grade>> = const { Cell::new(None) };
+        }
+        fn app() -> Element {
+            use_context_provider(|| crate::Ui {
+                screen: Signal::new(crate::Screen::Study),
+                prefs: Signal::new(crate::prefs::DevicePrefs::default()),
+                focus: Signal::new(false),
+            });
+            use_context_provider(crate::store::test_review);
+            rsx! {
+                ItemView {
+                    item: first("mcq").clone(),
+                    lecture_title: "Liver".to_string(),
+                    topic_title: Some("Child-Pugh".to_string()),
+                    fresh: false,
+                    retry: false,
+                    on_grade: move |g| GOT.set(Some(g)),
+                }
+            }
+        }
+        crate::store::use_memory_store();
+        let mut t = crate::testdom::TestDom::new(app);
+        assert!(t.text().contains(tx::NOT_HERE_YET));
+        assert_eq!(t.attr("span.st-badge", "data-badge").as_deref(), Some("review"));
+        assert_eq!(t.texts("p.st-where"), ["Liver · Child-Pugh"]);
+        assert!(t.texts("h1.st-sr-only")[0].starts_with(tx::KIND_MCQ));
+        t.click_text("button", tx::SKIP);
+        assert_eq!(GOT.get(), Some(Grade::Good));
+    }
 }

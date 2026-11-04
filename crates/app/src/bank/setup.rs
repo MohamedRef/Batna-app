@@ -30,17 +30,17 @@ static RESTORED: GlobalSignal<bool> = Signal::global(|| false);
 const SETUP_KEY: &str = "bank.setup";
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-struct Saved {
+pub(super) struct Saved {
     #[serde(default = "tutor")]
-    mode: Mode,
+    pub(super) mode: Mode,
     #[serde(default)]
-    filter: Filter,
+    pub(super) filter: Filter,
     #[serde(default = "twenty")]
-    count: usize,
+    pub(super) count: usize,
     #[serde(default = "mock_size")]
-    mock_count: usize,
+    pub(super) mock_count: usize,
     #[serde(default)]
-    advanced: bool,
+    pub(super) advanced: bool,
 }
 
 fn tutor() -> Mode {
@@ -66,7 +66,7 @@ impl Saved {
 
     /// Drop lectures, topics and tags the content no longer has, and counts
     /// the screen doesn't offer, so an old scope never hides every question.
-    fn pruned(mut self, pool: &[exam::Mcq]) -> Self {
+    pub(super) fn pruned(mut self, pool: &[exam::Mcq]) -> Self {
         let lectures: BTreeSet<&str> = pool.iter().map(|q| q.lecture).collect();
         let topics: BTreeSet<(&str, &str)> =
             pool.iter().filter_map(|q| Some((q.lecture, q.topic?))).collect();
@@ -144,7 +144,7 @@ const MODES: [(Mode, &str, &str); 3] = [
 /// Why a scope has no questions, so the empty state can say it and offer
 /// the one change that brings questions back.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-enum Empty {
+pub(super) enum Empty {
     /// Every question in scope was right last time.
     AllRight,
     /// No question of the chosen kinds in scope.
@@ -153,7 +153,7 @@ enum Empty {
     Topics,
 }
 
-fn why_empty(filter: &Filter, pool: &[exam::Mcq], last: &exam::LastResults) -> Empty {
+pub(super) fn why_empty(filter: &Filter, pool: &[exam::Mcq], last: &exam::LastResults) -> Empty {
     let any = |f: &Filter| pool.iter().any(|q| f.matches(q, last));
     if filter.only != Only::All && any(&Filter { only: Only::All, ..filter.clone() }) {
         Empty::AllRight

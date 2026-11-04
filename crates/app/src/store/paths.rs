@@ -14,6 +14,10 @@ pub fn data_dir() -> Result<PathBuf, String> {
 /// folder in shared storage (`Android/data/app.batna/files`, reachable over
 /// USB and from the Files app), else the private data directory.
 pub fn export_dir() -> Result<PathBuf, String> {
+    #[cfg(test)]
+    if let Some(dir) = TEST_EXPORT_DIR.with(|d| d.borrow().clone()) {
+        return Ok(dir);
+    }
     #[cfg(target_os = "android")]
     {
         let shared = PathBuf::from(format!("/storage/emulated/0/Android/data/{}/files", android_package()?));
@@ -29,6 +33,17 @@ pub fn export_dir() -> Result<PathBuf, String> {
             None => data_dir(),
         }
     }
+}
+
+#[cfg(test)]
+thread_local! {
+    static TEST_EXPORT_DIR: std::cell::RefCell<Option<PathBuf>> = const { std::cell::RefCell::new(None) };
+}
+
+/// Test-only: exports from this test thread go to `dir`, never to ~/Downloads.
+#[cfg(test)]
+pub fn export_to_for_test(dir: PathBuf) {
+    TEST_EXPORT_DIR.with(|d| *d.borrow_mut() = Some(dir));
 }
 
 /// Android only: a file in the app's `no_backup` folder, which Auto Backup

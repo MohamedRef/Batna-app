@@ -313,6 +313,45 @@ pub struct Update {
     pub reference: String,
 }
 
+/// `content/calc-quotes.yaml`.
+pub const CALC_QUOTES_SCHEMA: &str = "batna.calc-quotes/v1";
+
+/// The book's own words for a calculator's cut-offs on one page: what the
+/// sheet behind its result's page chip shows (Mohamed, 2026-11-02: the
+/// calculators' page sheets were empty). Checked against the book and
+/// locked like an item's quote (`batna-tools refs`), under
+/// [`calc_quote_ref`].
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CalcQuote {
+    pub calculator: String,
+    /// The lecture whose book holds the page (`hb.L09`).
+    pub lecture: String,
+    pub page: u32,
+    pub quote: String,
+}
+
+/// `content/calc-quotes.yaml`: one quote per calculator and page its
+/// results cite.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CalcQuotes {
+    pub schema: String,
+    pub quotes: Vec<CalcQuote>,
+}
+
+impl CalcQuotes {
+    /// The quote for page `page` of `calculator`.
+    pub fn find(&self, calculator: &str, page: u32) -> Option<&CalcQuote> {
+        self.quotes.iter().find(|q| q.calculator == calculator && q.page == page)
+    }
+}
+
+/// The reference id a calculator's quote is locked under (`calc:saag@150`).
+pub fn calc_quote_ref(calculator: &str, page: u32) -> String {
+    format!("calc:{calculator}@{page}")
+}
+
 /// `content/index.yaml`: the lecture list, in book order.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

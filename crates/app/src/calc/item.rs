@@ -2,7 +2,7 @@
 //! himself (or opens the calculator, pre-filled from the vignette), sees the
 //! worked result, then says what it means before the interpretation opens.
 
-use batna_core::calc::{self, Inputs};
+use batna_core::calc::{self, Inputs, Outcome};
 use batna_core::content::Body;
 use dioxus::prelude::*;
 
@@ -11,7 +11,7 @@ use crate::case::{ItemMeta, effective, find_item, record, use_case_store};
 use crate::hover::BookPage;
 use crate::i18n::{calc as tx, case as cx};
 
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 enum Computed {
     /// Not yet checked.
     Open,
@@ -19,6 +19,22 @@ enum Computed {
     Typed(bool),
     /// He used the calculator instead of typing.
     Calculator,
+}
+
+/// Whether the result he typed is right: anything [`calc::answer_matches`]
+/// accepts for the computed outcome, or the item's own `expect` text.
+fn typed_right(outcome: Option<&Outcome>, typed: &str, expect: &str) -> bool {
+    let t = typed.trim();
+    outcome.is_some_and(|o| calc::answer_matches(o, t)) || t.eq_ignore_ascii_case(expect.trim())
+}
+
+/// (right, out of) for the review record: two decisions when he typed a
+/// result (the number, then what it means), one when he used the calculator.
+fn decisions(computed: Computed, meaning_right: bool) -> (u32, u32) {
+    match computed {
+        Computed::Typed(ok) => (u32::from(ok) + u32::from(meaning_right), 2),
+        _ => (u32::from(meaning_right), 1),
+    }
 }
 
 #[component]
@@ -37,11 +53,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
             if verdict.peek().is_some() {
                 return;
             }
-            // Two decisions when he typed a result, one when he used the calculator.
-            let (got, total) = match computed() {
-                Computed::Typed(ok) => (u32::from(ok) + u32::from(right), 2),
-                _ => (u32::from(right), 1),
-            };
+            let (got, total) = decisions(computed(), right);
             match record(store.as_ref(), &item_id, got, total, started()) {
                 Ok(()) => {
                     verdict.set(Some(right));
@@ -66,9 +78,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
     let check = {
         let outcome = outcome.clone();
         move |_| {
-            let t = typed.read().trim().to_owned();
-            let right = outcome.as_ref().is_some_and(|o| calc::answer_matches(o, &t))
-                || t.eq_ignore_ascii_case(expect_text.trim());
+            let right = typed_right(outcome.as_ref(), &typed.read(), &expect_text);
             computed.set(Computed::Typed(right));
         }
     };
@@ -150,5 +160,87 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                 }
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// A content item: Child-Pugh B, 8 points.
+    const ITEM: &str = "hb.L01.200";
+
+    fn outcome() -> Outcome {
+        let (_, item) = find_item(ITEM).expect("the item is in the bundled content");
+        let Body::Calc { calculator, inputs, .. } = &item.body else { panic!("{ITEM} is a calc item") };
+        let spec = calc::spec(calculator).unwrap();
+        spec.run(&Inputs::for_spec(spec, inputs)).unwrap()
+    }
+
+    #[test]
+    fn a_typed_result_is_right_by_number_band_or_the_items_own_words() {
+        let o = outcome();
+        assert_eq!((o.band, o.score), ("child_pugh.b", Some(8.0)));
+        for typed in ["8", " 8 ", "Child-Pugh B", "class b", "Child-Pugh B (8 points)"] {
+            assert!(typed_right(Some(&o), typed, "Child-Pugh B (8 points)"), "{typed}");
+        }
+        for typed in ["9", "Class C", "Child-Pugh A (8 points)", ""] {
+            assert!(!typed_right(Some(&o), typed, "Child-Pugh B (8 points)"), "{typed}");
+        }
+        // Without a computed outcome only the item's own text counts.
+        assert!(typed_right(None, "child-pugh b (8 points)", " Child-Pugh B (8 points) "));
+        assert!(!typed_right(None, "8", "Child-Pugh B (8 points)"));
+    }
+
+    #[test]
+    fn typing_the_result_counts_two_decisions_and_the_calculator_one() {
+        assert_eq!(decisions(Computed::Typed(true), true), (2, 2));
+        assert_eq!(decisions(Computed::Typed(true), false), (1, 2));
+        assert_eq!(decisions(Computed::Typed(false), true), (1, 2));
+        assert_eq!(decisions(Computed::Typed(false), false), (0, 2));
+        assert_eq!(decisions(Computed::Calculator, true), (1, 1));
+        assert_eq!(decisions(Computed::Calculator, false), (0, 1));
+        assert_eq!(decisions(Computed::Open, true), (1, 1));
+    }
+
+    #[component]
+    fn Host(item_id: String) -> Element {
+        rsx! { CalcItem { item_id, on_back: move |_| {} } }
+    }
+
+    fn render(item_id: &str) -> String {
+        let mut dom = VirtualDom::new_with_props(Host, HostProps { item_id: item_id.to_owned() });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn the_item_opens_on_the_vignette_with_an_empty_answer() {
+        let html = render(ITEM);
+        let (_, item) = find_item(ITEM).unwrap();
+        let Body::Calc { stem, question, .. } = &item.body else { unreachable!() };
+        assert!(html.contains(stem.as_str()), "{html}");
+        assert!(html.contains(question.as_deref().unwrap()), "{html}");
+        for text in [tx::YOUR_RESULT, tx::YOUR_RESULT_HINT, tx::CHECK, tx::USE_CALC] {
+            assert!(html.contains(text), "missing {text}");
+        }
+        // Nothing typed yet: Check is off, and no result or meaning shows.
+        assert!(html.contains("disabled"), "{html}");
+        for text in [tx::MATCH, tx::NO_MATCH, tx::MEANING, "Class B"] {
+            assert!(!html.contains(text), "{text} shows too early");
+        }
+    }
+
+    #[test]
+    fn an_unknown_item_or_a_non_calc_item_renders_nothing() {
+        assert!(!render("hb.L99.999").contains("player"));
+        assert!(!render("nope").contains("player"));
+        let other = crate::content::Library::get()
+            .lectures
+            .values()
+            .flat_map(|l| l.items.iter())
+            .find(|i| !matches!(i.body, Body::Calc { .. }))
+            .expect("some non-calc item");
+        assert!(!render(&other.id).contains("calc-item"));
     }
 }

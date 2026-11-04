@@ -82,36 +82,10 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     let program: Option<batna_core::program::Program> =
         crate::read_yaml(&root.join("content/program.yaml")).ok();
     let mut approved = crate::read_approved(&root.join("content/approved.txt"));
-    let mut wrong = BTreeSet::new();
-    let mut edits = BTreeMap::new();
-    if let Some(v) = &verdicts {
-        let items: BTreeMap<&str, &Item> =
-            lectures.iter().flat_map(|l| &l.items).map(|i| (i.id.as_str(), i)).collect();
-        for (id, entry) in crate::verdicts::latest(v) {
-            // A verdict on text that changed since he judged it no longer applies (#18).
-            let now = items.get(id).and_then(|item| current(entry, item));
-            if now == Some(false) {
-                continue;
-            }
-            match entry.verdict {
-                // Only when the export shows he saw this exact text.
-                Verdict::Approved if now != Some(true) => {}
-                Verdict::Approved => {
-                    approved.insert(id.to_string());
-                }
-                Verdict::Wrong => {
-                    wrong.insert(id.to_string());
-                }
-                Verdict::Edited => match items.get(id).map(|item| apply_edit(item, &entry.edit)) {
-                    Some(Ok(fixed)) => {
-                        edits.insert(id.to_string(), fixed);
-                    }
-                    Some(Err(e)) => warnings.push(format!("{e} (kept the book version)")),
-                    None => {}
-                },
-            }
-        }
-    }
+    let Judged { wrong, edits } = match &verdicts {
+        Some(v) => judge(v, &lectures, &mut approved, &mut warnings),
+        None => Judged::default(),
+    };
     let opts = Options {
         approved: Some(&approved),
         wrong: Some(&wrong),
@@ -141,6 +115,51 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         report.push_str(&format!("\n  warning: {w}"));
     }
     Ok(report)
+}
+
+/// What his verdicts do to the deck: ✗ ids, ✎ items as he edited them.
+#[derive(Default)]
+struct Judged {
+    wrong: BTreeSet<String>,
+    edits: BTreeMap<String, Item>,
+}
+
+/// Applies the latest verdict on each item: ✓ adds to `approved` (only
+/// with a fingerprint of this exact text), ✗ and ✎ fill [`Judged`]. A
+/// verdict on text that changed since he judged it no longer applies (#18).
+fn judge(
+    v: &crate::verdicts::Verdicts,
+    lectures: &[Lecture],
+    approved: &mut BTreeSet<String>,
+    warnings: &mut Vec<String>,
+) -> Judged {
+    let mut out = Judged::default();
+    let items: BTreeMap<&str, &Item> =
+        lectures.iter().flat_map(|l| &l.items).map(|i| (i.id.as_str(), i)).collect();
+    for (id, entry) in crate::verdicts::latest(v) {
+        let now = items.get(id).and_then(|item| current(entry, item));
+        if now == Some(false) {
+            continue;
+        }
+        match entry.verdict {
+            // Only when the export shows he saw this exact text.
+            Verdict::Approved if now != Some(true) => {}
+            Verdict::Approved => {
+                approved.insert(id.to_string());
+            }
+            Verdict::Wrong => {
+                out.wrong.insert(id.to_string());
+            }
+            Verdict::Edited => match items.get(id).map(|item| apply_edit(item, &entry.edit)) {
+                Some(Ok(fixed)) => {
+                    out.edits.insert(id.to_string(), fixed);
+                }
+                Some(Err(e)) => warnings.push(format!("{e} (kept the book version)")),
+                None => {}
+            },
+        }
+    }
+    out
 }
 
 /// His live own cards from an app export (`tables.own_cards`).
@@ -256,6 +275,120 @@ mod tests {
             report.contains("hb.L01.002: a cloze has no field `nope` (kept the book version)"),
             "{report}"
         );
+    }
+
+    use crate::testkit::{self, strings, write};
+
+    fn verdicts(rows: &str) -> crate::verdicts::Verdicts {
+        serde_yaml_ng::from_str(&format!("schema: batna.verdicts/v1\nexported: x\nverdicts:\n{rows}"))
+            .unwrap()
+    }
+
+    #[test]
+    fn only_a_fingerprinted_tick_approves_and_changed_items_are_left_alone() {
+        let lec: Lecture = serde_yaml_ng::from_str(testkit::LECTURE).unwrap();
+        let fp = |i: usize| batna_core::review::verify::fingerprint(&lec.items[i]);
+        let v = verdicts(&format!(
+            concat!(
+                "  - {{ id: hb.L01.001, verdict: approved, at: b, fingerprint: \"{}\" }}\n",
+                "  - {{ id: hb.L01.002, verdict: approved, at: b }}\n",
+                "  - {{ id: hb.L01.002, verdict: wrong, at: a, fingerprint: \"{}\" }}\n",
+                "  - {{ id: hb.L09.001, verdict: wrong, at: a }}\n",
+            ),
+            fp(0),
+            fp(1)
+        ));
+        let (mut approved, mut warnings) = (BTreeSet::new(), Vec::new());
+        let j = judge(&v, std::slice::from_ref(&lec), &mut approved, &mut warnings);
+        assert_eq!(
+            approved.into_iter().collect::<Vec<_>>(),
+            ["hb.L01.001"],
+            "002's latest ✓ has no fingerprint"
+        );
+        assert_eq!(
+            j.wrong.into_iter().collect::<Vec<_>>(),
+            ["hb.L09.001"],
+            "an older ✗ is replaced by the later ✓"
+        );
+
+        // An edit on text that changed since is not applied; a current one is.
+        let v = verdicts(&format!(
+            concat!(
+                "  - {{ id: hb.L01.001, verdict: edited, at: a, fingerprint: \"0000000000000000\", edit: {{ back: Old. }} }}\n",
+                "  - {{ id: hb.L01.002, verdict: edited, at: a, fingerprint: \"{}\", edit: {{ back: Stellate cells. }} }}\n",
+                "  - {{ id: hb.L09.002, verdict: edited, at: a, edit: {{ back: Gone. }} }}\n",
+            ),
+            fp(1)
+        ));
+        let j = judge(&v, std::slice::from_ref(&lec), &mut BTreeSet::new(), &mut warnings);
+        assert_eq!(j.edits.keys().collect::<Vec<_>>(), ["hb.L01.002"]);
+        assert!(serde_json::to_string(&j.edits["hb.L01.002"]).unwrap().contains("Stellate cells."));
+        assert!(warnings.is_empty(), "{warnings:?}");
+    }
+
+    #[test]
+    fn one_lecture_or_own_cards_change_the_file_and_the_report() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        let out = root.join("out").display().to_string();
+        let anki = |extra: &[&str]| {
+            let mut a = strings(&["--merged-only", "--out", &out]);
+            a.extend(strings(extra));
+            run(root, &a)
+        };
+        let report = anki(&["--lecture", "hb.L01"]).unwrap();
+        assert!(report.starts_with(&format!("{out}/batna-hb-L01.apkg: 2 notes")), "{report}");
+        assert!(root.join("out/batna-hb-L01.apkg").metadata().unwrap().len() > 0);
+        assert_eq!(anki(&["--lecture", "hb.L09"]).unwrap_err(), ["hb.L09: no such lecture written yet"]);
+
+        let export = root.join("export.json");
+        let row = |deleted: i64| {
+            let value = r#"{"id":"own.a","front":"SAAG?","back":"≥ 1.1","lecture":"hb.L01","created_ms":1}"#;
+            serde_json::json!({"id": "own.a", "value": value, "deleted": deleted})
+        };
+        let doc = |rows: Vec<serde_json::Value>| {
+            serde_json::json!({"format": "batna-export", "tables": {"own_cards": {"rows": rows}}}).to_string()
+        };
+        let e = export.display().to_string();
+        std::fs::write(&export, doc(vec![row(0)])).unwrap();
+        let report = anki(&["--own", &e]).unwrap();
+        assert!(report.contains("batna.apkg: 3 notes"), "{report}");
+        // With --lecture, own cards stay out of a one-lecture file.
+        assert!(anki(&["--own", &e, "--lecture", "hb.L01"]).unwrap().contains(": 2 notes"));
+        std::fs::write(&export, doc(vec![row(1)])).unwrap();
+        let report = anki(&["--own", &e]).unwrap();
+        assert!(
+            report.contains("2 notes")
+                && report.ends_with(&format!("warning: {e}: no own cards in this export")),
+            "{report}"
+        );
+        std::fs::write(&export, r#"{"format":"kabar-export"}"#).unwrap();
+        assert!(anki(&["--own", &e]).unwrap_err()[0].ends_with("not a Batna export (Settings › Your data)"));
+        std::fs::write(&export, "{").unwrap();
+        assert!(anki(&["--own", &e]).unwrap_err()[0].starts_with(&e));
+        assert!(anki(&["--own", "/no/export.json"]).unwrap_err()[0].starts_with("/no/export.json: "));
+        assert!(anki(&["--verdicts", "/no/v.yaml"]).unwrap_err()[0].starts_with("/no/v.yaml: "));
+    }
+
+    #[test]
+    fn a_draft_that_names_another_lecture_is_left_out() {
+        let tree = testkit::tree();
+        let root = tree.path();
+        write(
+            root,
+            "content/index.yaml",
+            &format!("{}  - {{ id: hb.L02, title: Two, pages: [23, 36], chunk: 10 }}\n", testkit::INDEX),
+        );
+        write(root, "medstudy/drafts/L02.yaml", testkit::LECTURE);
+        let args = strings(&[
+            "--drafts",
+            &root.join("medstudy").display().to_string(),
+            "--out",
+            &root.join("o").display().to_string(),
+        ]);
+        let report = run(root, &args).unwrap();
+        assert!(report.contains("medstudy/drafts/L02.yaml: says it is hb.L01 (left out)"), "{report}");
+        assert!(report.contains("batna.apkg: 2 notes"), "{report}");
     }
 
     #[test]

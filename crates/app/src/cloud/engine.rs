@@ -98,6 +98,16 @@ pub struct Engine {
     events: UnboundedSender<Event>,
 }
 
+/// Whether this copy of Batna syncs: always, except a web tab a newer tab
+/// took the database from (`platform::web::owns_tab`). Every tab shares one
+/// refresh token, and two tabs rotating it race each other out (#646).
+fn this_tab_syncs() -> bool {
+    #[cfg(target_arch = "wasm32")]
+    return crate::platform::web::owns_tab();
+    #[cfg(not(target_arch = "wasm32"))]
+    true
+}
+
 impl Engine {
     pub fn new(
         store: &'static Store,
@@ -176,6 +186,11 @@ impl Engine {
                 _ = crate::platform::time::sleep(nap) => {}
             }
             let now = Instant::now();
+            if self.ws.is_some() && !this_tab_syncs() {
+                // A newer tab owns the database and syncs; this one stops
+                // (still signed in) until it is reloaded.
+                self.drop_socket();
+            }
             if self.ws.is_none() {
                 next_ping = now + PING_EVERY;
                 next_outbox = now + OUTBOX_EVERY;
@@ -200,7 +215,7 @@ impl Engine {
     }
 
     fn wants_socket(&self) -> bool {
-        self.auth.is_some() && !self.stopped
+        self.auth.is_some() && !self.stopped && this_tab_syncs()
     }
 
     // --- commands --------------------------------------------------------
@@ -507,6 +522,10 @@ impl Engine {
 
     /// A fresh access token, or `None` (with the reason recorded).
     async fn access(&mut self, force: bool) -> Option<String> {
+        // A web tab another tab took over never refreshes the shared token (#646).
+        if !this_tab_syncs() {
+            return None;
+        }
         let mut auth = self.auth.take()?;
         let result = auth.access_token(&self.api, now_ms(), force).await;
         self.auth = Some(auth);

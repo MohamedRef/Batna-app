@@ -193,7 +193,8 @@ pub fn stop_saving() {
     SAVING.with(|s| s.set(false));
 }
 
-fn owns_tab() -> bool {
+/// This tab owns the database (the newest tab does), and so also syncs.
+pub fn owns_tab() -> bool {
     TAB.with(|t| ls_get(OWNER_KEY).is_none_or(|owner| owner == *t.borrow()))
 }
 

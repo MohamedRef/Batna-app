@@ -25,21 +25,11 @@ name: Android preview APK
 # Mohamed, 2026-11-04: not after every merge any more, but every 4 hours and
 # by hand (Actions › Android preview APK › Run workflow). A scheduled run whose
 # main is already on the preview feed stops after the small `changed` job.
+# Mohamed, 2026-11-04 (later): not on pull requests either; they jammed the
+# Actions queue. To test-build a branch, run it by hand on that branch.
 on:
   schedule:
     - cron: "23 */4 * * *"
-  pull_request:
-    branches: [main]
-    paths:
-      - .github/workflows/batna-android-preview.yml
-      - android/**
-      - crates/app/AndroidManifest.xml
-      - crates/app/Dioxus.toml
-      - crates/app/Cargo.toml
-      - crates/app/src/platform/**
-      - crates/app/src/update/**
-      - scripts/android-check-apk.sh
-      - scripts/android-release-apk.sh
   workflow_dispatch:
 
 # A pull request's newer push cancels its older run. On main, runs queue
@@ -68,6 +58,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           TAG: batna-preview
+        # The release's asset list, not a download: gh refuses `-O /dev/null`
+        # (an existing path) without --clobber, so that check always failed
+        # and every scheduled run built (#652).
         run: |
           if [ "$GITHUB_EVENT_NAME" != schedule ]; then
             echo "build=true" >> "$GITHUB_OUTPUT"
@@ -75,7 +68,7 @@ jobs:
           fi
           if published="$(gh api "repos/$GH_REPO/git/refs/tags/$TAG" --jq .object.sha 2>/dev/null)" \
             && [ "$published" = "$GITHUB_SHA" ] \
-            && gh release download "$TAG" -p update.json -O /dev/null 2>/dev/null; then
+            && gh api "repos/$GH_REPO/releases/tags/$TAG" --jq '.assets[].name' 2>/dev/null | grep -qx update.json; then
             echo "The preview already carries ${GITHUB_SHA::7}: nothing new on main, no build."
             echo "build=false" >> "$GITHUB_OUTPUT"
           else
@@ -325,9 +318,14 @@ jobs:
             || ! [[ "$published" =~ ^[0-9a-f]{40}$ ]]; then
             published=""
           fi
+          # A run that died after moving the tag left this commit on the tag
+          # but no update.json: the same commit publishes again (#653).
           if [ -n "$published" ]; then
             status="$(gh api "repos/$GH_REPO/compare/$published...$GITHUB_SHA" --jq .status)"
-            if [ "$status" != "ahead" ]; then
+            if [ "$status" = identical ] \
+              && ! gh api "repos/$GH_REPO/releases/tags/$TAG" --jq '.assets[].name' 2>/dev/null | grep -qx update.json; then
+              echo "The release carries ${published::7} but has no update.json: publishing again."
+            elif [ "$status" != "ahead" ]; then
               echo "The release already carries ${published::7} ($status); nothing to publish."
               exit 0
             fi

@@ -297,6 +297,12 @@ impl Auth {
     /// A valid access token, refreshing (and rotating the refresh token) when
     /// it is about to expire.
     pub async fn access_token(&mut self, api: &Api, now_ms: u64, force: bool) -> Result<String, CloudError> {
+        // Another web tab on this device may have rotated the shared refresh
+        // token already: presenting the old one would sign every tab out, or
+        // get the device revoked as a reused token (#646). Its newer session
+        // also brings an access token that may still be good.
+        let adopted = self.adopt_newer();
+        let force = force && !adopted;
         if force || now_ms + REFRESH_MARGIN_MS >= self.session.access_expires_at_ms {
             let fresh = api.refresh(&self.session.refresh_token).await?;
             self.session = if self.vault.save(&fresh) {
@@ -313,6 +319,20 @@ impl Auth {
             };
         }
         Ok(self.session.access_token.clone())
+    }
+
+    /// Takes the vault's session when it is a later rotation of this one
+    /// (another tab refreshed). True when it did.
+    fn adopt_newer(&mut self) -> bool {
+        let Some(kept) = self.vault.load() else { return false };
+        let newer = kept.account_id == self.session.account_id
+            && kept.device_id == self.session.device_id
+            && kept.refresh_token != self.session.refresh_token
+            && kept.refresh_expires_at_ms > self.session.refresh_expires_at_ms;
+        if newer {
+            self.session = kept;
+        }
+        newer
     }
 
     /// False when this session ends with the app or the browser tab.

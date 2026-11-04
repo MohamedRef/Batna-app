@@ -85,6 +85,12 @@ impl SessionVault for BrowserVault {
 #[cfg(target_arch = "wasm32")]
 const BROWSER_KEY: &str = "cloud-session";
 
+/// This tab still holds a session signed in for this tab only (a reload).
+#[cfg(target_arch = "wasm32")]
+pub fn tab_session_kept() -> bool {
+    crate::platform::web::read_tab_pref(BROWSER_KEY).is_some()
+}
+
 /// Where a sign-in on someone else's device keeps its session: this tab
 /// in the browser, memory on the Mac and Android, so it ends when the app
 /// or the tab closes.

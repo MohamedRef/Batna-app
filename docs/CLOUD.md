@@ -113,7 +113,7 @@ Sync in one paragraph: the device sends `hello { last_seq }`, gets the missing o
 
 ### 4.1 Username and password
 
-For a borrowed laptop or a library computer, where your Gmail isn't. Set a username and password once from a signed-in device (Settings › المزامنة › «الدخول باسم مستخدم وباسورد»); then on any device, signed out, type them in the same screen. It is the same account as Google, so everything syncs down, including where each lesson stands. Tick «الجهاز ده مش بتاعي» on someone else's device: the session then lives only in that browser tab (`sessionStorage`) or, in the Mac and Android apps, in memory, and ends when it closes. Sign out there when you're done, or from your phone's «أجهزتك».
+For a borrowed laptop or a library computer, where your Gmail isn't. Set a username and password once from a signed-in device (Settings › المزامنة › «الدخول باسم مستخدم وباسورد»); then on any device, signed out, type them in the same screen. It is the same account as Google, so everything syncs down, including where each lesson stands. Tick «الجهاز ده مش بتاعي» on someone else's device: the session then lives only in that browser tab (`sessionStorage`) or, in the Mac and Android apps, in memory, and ends when it closes. What synced down goes too (#679): signing out there, or the next open after the tab or app closed, empties the local database (`Store::forget_study`; only the device id stays). Sign out there when you're done, or from your phone's «أجهزتك».
 
 How the password is kept safe:
 

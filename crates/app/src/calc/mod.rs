@@ -4,6 +4,8 @@
 
 pub mod item;
 mod picker;
+#[cfg(test)]
+mod render_tests;
 
 pub use picker::{Calculators, reload};
 

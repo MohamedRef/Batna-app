@@ -92,10 +92,12 @@
 /* Compact and medium: the list and the open calculator take turns. */
 .calcs[data-open="yes"] .calc-list { display: none; }
 .calcs[data-open="no"] .calc-pane { display: none; }
-/* Expanded: list and calculator side by side; the list keeps its own
+/* Wide windows: list and calculator side by side; the list keeps its own
    scroll so the open calculator stays in view, and the row on show is
-   marked. */
-@media (min-width: 840px) {
+   marked. From 840px the sidebar takes 13.5rem, so below 1100px the
+   calculator would get under 20rem beside the list: they keep taking
+   turns there (#686). */
+@media (min-width: 1100px) {
   .content:has(.calcs) { --content-max: 80rem; }
   .calcs { grid-template-columns: minmax(17rem, 23rem) minmax(0, 1fr); gap: var(--sp-6); }
   .calcs[data-open="yes"] .calc-list, .calcs[data-open="no"] .calc-pane { display: flex; }
@@ -301,6 +303,23 @@
 .calc-band { font-family: var(--font-latin); }
 .calc-meaning { display: block; font-family: var(--font-latin); line-height: 1.6; }
 .calc-parts summary { cursor: pointer; font-weight: 600; min-block-size: var(--tap); display: flex; align-items: center; }
+/* display: flex drops the disclosure marker: draw one, pointing down when
+   open, so "التفاصيل" reads as something that opens (UX #688). */
+.calc-parts summary { gap: var(--sp-2); list-style: none; }
+.calc-parts summary::-webkit-details-marker { display: none; }
+.calc-parts summary::after {
+  content: "";
+  inline-size: 0.45rem;
+  block-size: 0.45rem;
+  border-block-end: 2px solid currentColor;
+  border-inline-end: 2px solid currentColor;
+  transform: rotate(-45deg);
+  opacity: 0.6;
+  transition: transform 0.15s;
+}
+[dir="rtl"] .calc-parts summary::after { transform: rotate(45deg); }
+.calc-parts[open] summary::after { transform: rotate(45deg) translateY(-2px); }
+[dir="rtl"] .calc-parts[open] summary::after { transform: rotate(-45deg) translateY(-2px); }
 .calc-parts ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .calc-parts li { display: flex; justify-content: space-between; gap: var(--sp-3); padding-block: 2px; border-block-end: 1px dashed var(--line); }
 .calc-points { font-family: var(--font-latin); font-variant-numeric: tabular-nums; }

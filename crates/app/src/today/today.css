@@ -108,6 +108,17 @@ button.library-note { border: 0; color: inherit; }
   .tap-row.progress-row > .chip, .tap-row.lecture-row > .chip { order: 3; margin-inline-start: calc(2.4rem + var(--sp-3)); }
   .tap-row.progress-row > .chev, .tap-row.lecture-row > .chev { order: 2; }
 }
+/* From 840px the sidebar leaves the aside as little as 16rem: when it is
+   that narrow the readiness chip drops under the title, as on phones, or
+   the title is squeezed to a letter per line (#685). */
+.today-cols > .tab-aside { container: today-aside / inline-size; }
+@container today-aside (max-width: 26rem) {
+  .tap-row.progress-row, .tap-row.lecture-row { flex-wrap: wrap; }
+  .tap-row.progress-row > .chip, .tap-row.lecture-row > .chip { order: 3; margin-inline-start: calc(2.4rem + var(--sp-3)); }
+  .tap-row.progress-row > .chev, .tap-row.lecture-row > .chev { order: 2; }
+  /* The title keeps most of the line, so the chip has to wrap. */
+  .tap-row.progress-row > .tap-row-main, .tap-row.lecture-row > .tap-row-main { min-inline-size: 55%; }
+}
 
 .ring-tap { inline-size: auto; flex: none; border-radius: 50%; }
 

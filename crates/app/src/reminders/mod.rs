@@ -199,7 +199,7 @@ fn RemindView(local: bool, mac: bool, allowed: Option<bool>, unrestricted: Optio
         return rsx! {
             crate::ui::Card {
                 h2 { {tx::SECTION} }
-                p { class: "muted", {tx::PHONE_ONLY} }
+                p { class: "muted", if cfg!(target_arch = "wasm32") { {tx::WEB_ONLY} } else { {tx::PHONE_ONLY} } }
             }
         };
     }

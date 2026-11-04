@@ -274,9 +274,8 @@ items:
       - ["Critically ill (ICU-acquired AKI)", "20–60%"]
       - ["Overall mortality despite better care", "Generally exceeds 50%"]
       - ["Non-ICU AKI mortality", "Up to 10%"]
-      - ["ICU AKI mortality", "Over 50%"]
-    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
-    src: { page: 102, quote: "Between 5% and 7% of all hospitalized patients develop AKI." }
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 102, quote: "EPIDEMIOLOGY AND ETIOLOGY\nBetween 5% and 7% of all hospitalized patients develop AKI.\nA greater prevalence of AKI (20-60%) is found in critically ill patients (ICU-Acquired AKI).\nDespite improvements in the medical care of individuals with AKI, mortality generally exceeds 50%.\nClassification of AKI\nOliguric Vis-à-vis Non- oliguric AKI:\nNon- Oliguric:\n  In hospital set-up, secondary Nephrotoxic agents.\n  Non-oliguric has better prognosis than oliguric one.\nICU vs. Non-ICU AKI:\nNon-ICU AKI, in which the kidney is usually the only failed organ, with mortality rates of up to 10%." }
     status: unverified
     tags: [numbers]
   - id: neph.L05.025
@@ -419,8 +418,15 @@ items:
   - id: neph.L05.038
     kind: cloze
     topic: etiology
-    text: "Acute tubular necrosis accounts for {{c1::40%}} of all AKI cases; postrenal AKI accounts for less than {{c2::10%}}."
+    text: "Acute tubular necrosis accounts for {{c1::40%}} of all AKI cases."
     src: { page: 105, quote: "Acute tubular necrosis (ATN) (it accounts for 40% of all cases of AKI)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L05.138
+    kind: cloze
+    topic: etiology
+    text: "Postrenal AKI accounts for less than {{c1::10%}} of cases of AKI."
+    src: { page: 106, quote: "Postrenal AKI accounts for less than 10% of cases of AKI" }
     status: unverified
     tags: [numbers, high-yield]
   - id: neph.L05.039
@@ -1148,8 +1154,8 @@ items:
     kind: card
     topic: biomarkers
     front: How did the AKI pattern change between 1970–1980 and 1980–1990 in the p116 series?
-    back: Incident cases rose from 156 to 925, while mortality stayed high (58% then 54%).
-    src: { page: 116, quote: "AKI: Changing Pattern" }
+    back: Incident cases rose from 156 to 925 and moved from mostly ward (85%) to mostly ICU (92%), while mortality stayed high (58% then 54%).
+    src: { page: 116, quote: "AKI: Changing Pattern\n1970-1980\n  Total number of incident cases = 156\n  ICU 15%\n  Ward 85%\n  Mortality 58 %\n1980-1990\n  Total number of incident cases = 925\n  Ward 8 %\n  ICU 92 %\n  Mortality 54 %" }
     status: unverified
     tags: [numbers]
   - id: neph.L05.101
@@ -1364,10 +1370,10 @@ items:
     topic: reserve
     stem: Six months after AKI, a patient's GFR is 95 ml/min and a protein-load test raises it to only 110 ml/min. How is his recovery classed?
     options:
-      - Full recovery
+      - Full recovery of baseline GFR
       - Apparent full recovery
-      - Non-recovery
-      - CKD
+      - Non-recovery of kidney function
+      - CKD after maladaptive repair
     answer: 1
     why:
       - "Full recovery needs a reserve >30 ml/min; his is 15."
@@ -1379,8 +1385,8 @@ items:
   - id: neph.L05.123
     kind: cloze
     topic: reserve
-    text: "Patients with a preoperative renal functional reserve below {{c1::15}} ml/min/1.73 m² were {{c2::11.8}} times more likely to develop AKI after cardiac surgery."
-    src: { page: 125, quote: "Preoperative Renal Functional Reserve Predicts Risk of AKI Post Cardiac Surgery" }
+    text: "Patients with a preoperative renal functional reserve at or below {{c1::15}} ml/min/1.73 m² were {{c2::11.8}} times more likely to develop AKI after cardiac surgery."
+    src: { page: 125, quote: "Preoperative Renal Functional Reserve Predicts Risk of AKI Post Cardiac Surgery\nPatiens with preoperative RFR ≤15ml/min/1.73m² were 11.8 times more likely to develop AKI" }
     status: unverified
     tags: [numbers]
   - id: neph.L05.124
@@ -1447,9 +1453,9 @@ items:
       - question: What is the right first management?
         options:
           - Isotonic crystalloid, hold ramipril and furosemide
-          - Low-dose dopamine
-          - Albumin as the first fluid
-          - Urgent dialysis
+          - Low-dose dopamine to improve renal perfusion
+          - Albumin as the first fluid to expand her volume
+          - Urgent dialysis for the rising creatinine
         answer: 0
         why: "Restore perfusion with isotonic crystalloids and stop nephrotoxic drugs (p111). KDIGO recommends against low-dose dopamine (1A); there is no dialysis indication."
     src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN\n| Parameter | Prerenal AKI | Acute Tubular Necrosis |\n| Urinary sediment | Normal/Hyaline casts | Epithelial cell casts |\n| Urine specific gravity | >1.020 | <1.020 |\n| Urine sodium (mmol/L) | <20 | >40 |\n| FENa | <1% | >2% |\n| FEurea | <35% | >50% |\n| Urine osmolality (mOsmol/kg H2O) | >500 | <350 |\n| Urine-Plasma creatinine ratio | >40 | <10 |\n| Plasma BUN-creatinine ratio | >20 | <15 |" }
@@ -1461,18 +1467,18 @@ items:
     steps:
       - question: Which cause in the book's list fits best?
         options:
-          - Contrast-induced nephropathy (an exogenous toxin causing ATN)
-          - Prerenal azotemia from diuretics
-          - Postrenal obstruction
-          - Hepatorenal syndrome
+          - Contrast-induced nephropathy causing ATN
+          - Prerenal azotemia from diuretic overuse
+          - Postrenal obstruction of urinary outflow
+          - Hepatorenal syndrome from liver failure
         answer: 0
         why: "CIN is listed among the exogenous toxins causing ATN (p105) and fits the timing after contrast."
       - question: Which dialysis indications does he have?
         options:
-          - "Only uremia"
-          - "Acidosis, electrolytes (hyperkalemia) and overload"
-          - "Intoxication"
-          - "None yet; give diuretics"
+          - "Uremia only, from the rising creatinine"
+          - "Acidosis, hyperkalemia and volume overload"
+          - "Intoxication with the contrast agent"
+          - "None yet; a furosemide trial comes first"
         answer: 1
         why: "AEIOU: acidosis (HCO3 11), electrolyte disturbance (K 6.9 with ECG changes) and volume overload (p115)."
       - reveal: "BP 128/76 without pressors."
@@ -1486,10 +1492,10 @@ items:
         why: "He is hemodynamically stable, so IHD (p115). CRRT, PD and SLED are for unstable patients."
       - question: What should have been done before the angiogram, per the book?
         options:
-          - "Normal saline 1 ml/kg/h for 12 hours before and after"
-          - "Furosemide before contrast"
-          - "Low-dose dopamine infusion"
-          - "Nothing; CIN cannot be prevented"
+          - "Normal saline 1 ml/kg/h for 12 h before and after"
+          - "A furosemide dose just before the contrast"
+          - "Low-dose dopamine infusion during the procedure"
+          - "Nothing, since CIN cannot be prevented"
         answer: 0
         why: "KDIGO hydration with saline (or bicarbonate) prevents CIN (p110); diuretics and dopamine are not recommended."
     src: { page: 115, quote: "Intoxications (lithium, ethylene glycol, etc)" }
@@ -1541,9 +1547,9 @@ items:
       - question: What does the KDIGO care bundle in the p122 trial do?
         options:
           - Holds ACEi/ARB for 48 h, optimizes volume and perfusion, avoids hyperglycemia and contrast
-          - Starts low-dose dopamine and furosemide
-          - Starts prophylactic dialysis
-          - Waits for creatinine to rise
+          - Starts low-dose dopamine and furosemide to keep the urine flowing
+          - Starts prophylactic dialysis on the first postoperative day
+          - Waits for creatinine to rise before changing any part of care
         answer: 0
         why: "The bundle reduced AKI at 72 h from 71% to 55.1% (p122)."
     src: { page: 122, quote: "Preventive strategy performed in high risk on pump cardiac surgery patients-single center trial Cell cycle inhibitor marker (TIMP-2)x(IGFBP7) levels are associated with adverse outcomes in ICU with AKI" }

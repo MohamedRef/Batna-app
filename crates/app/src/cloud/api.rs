@@ -4,8 +4,8 @@
 // adapted from kabar-app main: crates/app/src/cloud/api.rs (no AI, TTS or usage)
 
 use batna_protocol::cloud::{
-    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest, Session,
-    SetPassword,
+    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest,
+    RemovePassword, Session, SetPassword,
 };
 use serde::Serialize;
 use serde::de::DeserializeOwned;
@@ -95,8 +95,12 @@ impl Api {
         read(self.call(Verb::Post, "/v1/login", Some(access), Some(json(body)?)).await)
     }
 
-    pub async fn remove_login(&self, access: &str) -> Result<PasswordLogin, CloudError> {
-        read(self.call(Verb::Delete, "/v1/login", Some(access), None).await)
+    pub async fn remove_login(
+        &self,
+        access: &str,
+        body: &RemovePassword,
+    ) -> Result<PasswordLogin, CloudError> {
+        read(self.call(Verb::Delete, "/v1/login", Some(access), Some(json(body)?)).await)
     }
 
     pub async fn refresh(&self, refresh_token: &str) -> Result<Session, CloudError> {

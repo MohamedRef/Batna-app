@@ -162,7 +162,7 @@ impl Device {
 
     /// Sets the account's username and password and waits for Batna Cloud's yes.
     fn set_login(&mut self, username: &str, password: &str) -> LoginStatus {
-        self.send(Command::SetLogin { username: username.into(), password: password.into() });
+        self.send(Command::SetLogin { username: username.into(), password: password.into(), current: None });
         self.login("saved", |l| l.saved)
     }
 
@@ -720,7 +720,11 @@ fn a_password_set_on_the_phone_signs_in_a_borrowed_computer() {
     assert_eq!(none.username, Some(None));
     assert!(!none.saved, "reading is not saving");
 
-    phone.send(Command::SetLogin { username: " Mo.Refaat ".into(), password: PASSWORD.into() });
+    phone.send(Command::SetLogin {
+        username: " Mo.Refaat ".into(),
+        password: PASSWORD.into(),
+        current: None,
+    });
     let busy = phone.login("saving", |l| l.saving);
     assert!(!busy.saved && busy.problem.is_none());
     let saved = phone.login("saved", |l| l.saved);
@@ -791,7 +795,7 @@ fn a_new_login_is_checked_and_a_taken_name_refused() {
     let mut phone = Device::signed_in(&cloud, "Galaxy S24 Ultra");
     phone.wait_live();
     let problem = |phone: &mut Device, username: &str, password: &str| {
-        phone.send(Command::SetLogin { username: username.into(), password: password.into() });
+        phone.send(Command::SetLogin { username: username.into(), password: password.into(), current: None });
         phone.login("refused", |l| l.problem.is_some()).problem.unwrap()
     };
     assert_eq!(problem(&mut phone, "mo", PASSWORD), Problem::BadUsername);
@@ -806,7 +810,7 @@ fn a_new_login_is_checked_and_a_taken_name_refused() {
     pc.sign_in_password("mo.refaat", PASSWORD, true);
     pc.wait_status("the old name is free", |s| s.problem == Some(Problem::WrongPassword));
 
-    phone.send(Command::RemoveLogin);
+    phone.send(Command::RemoveLogin { current: None });
     phone.login("removing", |l| l.saving);
     let removed = phone.login("removed", |l| l.saved);
     assert_eq!(removed.username, Some(None));
@@ -865,4 +869,52 @@ fn two_tabs_sharing_a_session_take_turns_refreshing_and_stay_signed_in() {
     }
     assert_eq!(cloud.refreshes(), 4, "one refresh per round, not two");
     assert_eq!(vault.load().unwrap().refresh_token, a.session().refresh_token);
+}
+
+/// A password session left open on someone else's computer can't change or
+/// turn off the password without the current one; Google can (#721).
+#[test]
+fn a_password_session_needs_the_current_password_to_change_it() {
+    let cloud = FakeCloud::start();
+    let mut phone = Device::signed_in(&cloud, "Galaxy S24 Ultra");
+    phone.wait_live();
+    phone.set_login("mo.refaat", PASSWORD);
+
+    let mut pc = Device::logged_out(&cloud, "Library PC");
+    pc.wait_status("signed out", |s| s.sync == SyncState::SignedOut);
+    pc.sign_in_password("mo.refaat", PASSWORD, false);
+    pc.wait_live();
+    pc.send(Command::LoadLogin);
+    let l = pc.login("loaded", |l| l.username.is_some());
+    assert!(l.needs_current, "Settings asks for the current password here");
+
+    let stranger = |current: Option<&str>| Command::SetLogin {
+        username: "mo.refaat".into(),
+        password: "a stranger's password".into(),
+        current: current.map(String::from),
+    };
+    pc.send(stranger(None));
+    pc.login("refused", |l| l.problem == Some(Problem::CurrentWrong));
+    pc.send(stranger(Some("not the password")));
+    pc.login("refused again", |l| l.problem == Some(Problem::CurrentWrong) && !l.saving);
+    pc.send(Command::RemoveLogin { current: None });
+    pc.login("not removed", |l| l.problem == Some(Problem::CurrentWrong) && !l.saving);
+    // The old password still signs in elsewhere.
+    let mut other = Device::logged_out(&cloud, "Other PC");
+    other.wait_status("signed out", |s| s.sync == SyncState::SignedOut);
+    other.sign_in_password("mo.refaat", PASSWORD, false);
+    other.wait_live();
+
+    // With the current password the change goes through.
+    pc.send(Command::SetLogin {
+        username: "mo.refaat".into(),
+        password: "a new long password".into(),
+        current: Some(PASSWORD.into()),
+    });
+    pc.login("changed", |l| l.saved);
+
+    // Mohamed's own Google device needs none, so a forgotten one can be reset.
+    phone.send(Command::LoadLogin);
+    assert!(!phone.login("loaded", |l| l.username.is_some() && !l.saving).needs_current);
+    phone.set_login("mo.refaat", "reset from the phone");
 }

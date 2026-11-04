@@ -35,6 +35,8 @@ mod bclc;
 mod bisap;
 mod bmi;
 mod bun_cr;
+#[cfg(test)]
+mod cases;
 mod cha2ds2_vasc;
 mod child_pugh;
 mod ckd;

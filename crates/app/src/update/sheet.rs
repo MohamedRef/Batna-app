@@ -21,9 +21,9 @@
 use batna_core::update::{BuildChanges, ChangeKind};
 use dioxus::prelude::*;
 
-use super::Phase;
 use super::changelog::{self, between, civil, day_of, label, line, of_kind, tally};
 use super::view::{UPDATE_CSS, megabytes, primary_action, use_update_status};
+use super::{Phase, Status};
 use crate::i18n::update as tx;
 
 const SHEET_CSS: &str = include_str!("sheet.css");
@@ -213,8 +213,14 @@ fn today() -> i64 {
 /// quiet card on Today offers it instead (`view::ContentNote`, #336).
 #[component]
 pub fn UpdateSheet() -> Element {
-    let UpdateSheetNav(mut mode) = use_context::<UpdateSheetNav>();
     let status = use_update_status();
+    rsx! { SheetView { status } }
+}
+
+/// The sheet for a given status (what [`UpdateSheet`] follows).
+#[component]
+pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
+    let UpdateSheetNav(mut mode) = use_context::<UpdateSheetNav>();
     // The update "What's new" last opened for (a content update can bring
     // another while Batna stays open).
     let mut opened_after_update = use_signal(|| None::<String>);

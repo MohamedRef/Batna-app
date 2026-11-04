@@ -3,6 +3,8 @@
 //! he rates himself Again or Good. Again comes back later in the session.
 //! No recording and no speech recognition: nothing leaves the device.
 
+#[cfg(test)]
+mod flow;
 mod session;
 
 use std::time::Duration;

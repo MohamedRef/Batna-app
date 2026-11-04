@@ -129,6 +129,8 @@ const MIGRATIONS: &[&str] = &[
 ];
 
 const REVIEW_SETTINGS_KEY: &str = "review";
+/// Local setting: signed in on someone else's device (`Store::mark_borrowed`).
+const BORROWED: &str = "borrowed";
 
 pub struct Store {
     conn: Mutex<Connection>,
@@ -410,6 +412,44 @@ impl Store {
         self.local_setting(key).or_else(|| self.setting(key))
     }
 
+    /// Marks this device as borrowed: Mohamed signed in with «الجهاز ده مش
+    /// بتاعي», so his study must not stay here once the session ends (#679).
+    /// `false` for a sign-in that is remembered here (Mohamed's own device).
+    pub fn mark_borrowed(&self, borrowed: bool) -> Result<()> {
+        self.put_local_setting(BORROWED, &borrowed)
+    }
+
+    pub fn is_borrowed(&self) -> bool {
+        self.local_setting::<bool>(BORROWED).unwrap_or(false)
+    }
+
+    /// Empties the database of everything Mohamed studied: answers, verdicts,
+    /// settings, own cards, places, the outbox and the log position. Only
+    /// what makes this install itself stays (its device id and install
+    /// marks), so the next sign-in starts clean. Used on a borrowed device.
+    pub fn forget_study(&self) -> Result<()> {
+        let mut conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+        let tx = conn.transaction()?;
+        let tables: Vec<String> = {
+            let mut stmt = tx.prepare(
+                "SELECT name FROM sqlite_master WHERE type = 'table'
+                 AND name NOT LIKE 'sqlite_%' AND name <> 'meta'",
+            )?;
+            stmt.query_map([], |r| r.get(0))?.collect::<rusqlite::Result<_>>()?
+        };
+        for t in tables {
+            tx.execute(&format!("DELETE FROM \"{t}\""), [])?;
+        }
+        tx.execute(
+            "DELETE FROM meta WHERE key <> 'device_id' AND key NOT LIKE 'device.%' AND key <> 'sync.tables'",
+            [],
+        )?;
+        // Nothing is left to queue: the seed must not run again either.
+        tx.execute("INSERT OR REPLACE INTO meta (key, value) VALUES ('sync.seeded', '1')", [])?;
+        tx.commit()?;
+        Ok(())
+    }
+
     pub fn review_settings(&self) -> ReviewSettings {
         self.setting(REVIEW_SETTINGS_KEY).unwrap_or_default()
     }
@@ -526,7 +566,7 @@ pub fn shared() -> &'static Store {
     }
     #[cfg(target_arch = "wasm32")]
     return STORE.get_or_init(|| match Store::from_snapshot(&crate::platform::web::take_snapshot()) {
-        Ok(s) => s,
+        Ok(s) => leave_no_trace(s),
         Err(e) => {
             // A snapshot this build can't read stays in the browser untouched
             // (`web::saving_allowed`); this session runs in memory.
@@ -542,13 +582,30 @@ pub fn shared() -> &'static Store {
                 .map_err(|e| format!("{}: {e}", dir.display()))
         });
         match opened {
-            Ok(s) => s,
+            Ok(s) => leave_no_trace(s),
             Err(e) => {
                 let _ = OPEN_ERROR.set(e);
                 Store::open_in_memory().expect("an in-memory database always opens")
             }
         }
     })
+}
+
+/// A borrowed device whose session already ended (the tab or the app
+/// closed) opens empty: nothing Mohamed studied there stays (#679). A reload
+/// of a tab still signed in for this tab only keeps it.
+fn leave_no_trace(store: Store) -> Store {
+    #[cfg(target_arch = "wasm32")]
+    let session_lives = crate::cloud::session::tab_session_kept();
+    #[cfg(not(target_arch = "wasm32"))]
+    let session_lives = false;
+    if store.is_borrowed()
+        && !session_lives
+        && let Err(e) = store.forget_study()
+    {
+        crate::diag::report!("clearing a borrowed device: {e}");
+    }
+    store
 }
 
 static STORE: OnceLock<Store> = OnceLock::new();
@@ -877,5 +934,36 @@ mod snapshot_tests {
         assert_eq!(back.snapshot().unwrap().1.len(), bytes.len());
         let fresh = Store::from_snapshot(&[]).unwrap();
         assert_ne!(fresh.device(), s.device());
+    }
+
+    #[test]
+    fn a_borrowed_device_forgets_the_study_and_keeps_its_identity() {
+        let s = Store::open_in_memory().unwrap();
+        let device = s.device();
+        s.mark_borrowed(true).unwrap();
+        s.append_review(batna_core::review::ReviewEvent {
+            item_id: "hb.L01.001".into(),
+            grade: batna_core::review::Grade::Good,
+            origin: batna_core::review::Origin::Study,
+            at_ms: 1,
+            took_ms: 1,
+        })
+        .unwrap();
+        s.put_setting("exam", &"2027-01").unwrap();
+        s.put_place("lessonpos.x", &2).unwrap();
+        s.put_local_setting("theme", &"dark").unwrap();
+        s.set_last_seq(9).unwrap();
+        assert!(s.is_borrowed() && s.outbox_len() > 0);
+        s.forget_study().unwrap();
+        assert!(s.reviews().unwrap().is_empty());
+        assert_eq!(s.setting::<String>("exam"), None);
+        assert_eq!(s.place::<u32>("lessonpos.x"), None);
+        assert_eq!(s.local_setting::<String>("theme"), None);
+        assert_eq!((s.outbox_len(), s.last_seq(), s.is_borrowed()), (0, 0, false));
+        assert_eq!(s.device(), device);
+        // Opening it again keeps the same device and queues nothing.
+        let bytes = s.snapshot().unwrap().1;
+        let again = Store::from_snapshot(&bytes).unwrap();
+        assert_eq!((again.device(), again.outbox_len()), (device, 0));
     }
 }

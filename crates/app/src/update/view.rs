@@ -310,22 +310,21 @@ pub fn UpdatesSection() -> Element {
             }
             crate::ui::Card {
                 h2 { {tx::CHANNEL} DeviceOnly {} }
-                if s.preview {
-                    p { span { class: "chip", {tx::PREVIEW} } }
-                } else {
-                    div { class: "segmented", role: "radiogroup", aria_label: tx::CHANNEL,
-                        style: "grid-template-columns: repeat(3, 1fr);",
-                        for c in Channel::RELEASE {
-                            button {
-                                key: "{c.as_str()}",
-                                role: "radio",
-                                aria_checked: if s.channel == c { "true" } else { "false" },
-                                disabled: busy,
-                                onclick: move |_| work(move |u| u.set_channel(c)),
-                                {channel_label(c)}
-                            }
+                div { class: "segmented", role: "radiogroup", aria_label: tx::CHANNEL,
+                    style: "grid-template-columns: repeat(4, 1fr);",
+                    for c in Channel::ALL {
+                        button {
+                            key: "{c.as_str()}",
+                            role: "radio",
+                            aria_checked: if s.channel == c { "true" } else { "false" },
+                            disabled: busy,
+                            onclick: move |_| work(move |u| u.set_channel(c)),
+                            {channel_label(c)}
                         }
                     }
+                }
+                if s.channel == Channel::Preview {
+                    p { class: "muted small", {tx::PREVIEW_CHANNEL_NOTE} }
                 }
             }
         }

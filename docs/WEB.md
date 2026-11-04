@@ -46,7 +46,7 @@ the same engine (`cloud/engine.rs`); only the transport differs.
 | Live socket | `tokio-tungstenite`, token in the `authorization` header | Browser `WebSocket` (`cloud/socket.rs`); browsers can't set headers, so the token rides in `?access_token=`, which the hub accepts on `/v1/sync` only |
 | Keep-alive | Protocol ping | An app-level `Ping` message |
 | Google sign-in | `cloud/oauth.rs`: loopback / deep link, code + PKCE | `cloud/oauth_web.rs`: the page goes to Google and comes back with an ID token in the `#` fragment (`response_type=id_token`, checked `state`); the fragment is cleared at once |
-| Session | Keychain / Keystore | `localStorage` (`cloud-session`), like any web app's session |
+| Session | Mac: private file in the data folder; Android: Keystore | `localStorage` (`cloud-session`), like any web app's session |
 | Device kind | `mac`, `android` | `web` (older apps read it as "other") |
 
 Batna Cloud answers the browser only from the origins in `WEB_ORIGINS`

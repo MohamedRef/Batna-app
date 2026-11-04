@@ -54,8 +54,7 @@ items:
     rows:
       - [Mass effect, "Obstruction, invasion or compression"]
       - [Remote effect, "Metastatic, or non-metastatic (paraneoplastic)"]
-      - [Psychic effect, "Loneliness, acceptance, fear of pain or loss of control"]
-    blanks: [[0, 1], [1, 1], [2, 1]]
+    blanks: [[0, 1], [1, 1]]
     src: { page: 31, quote: "Clinical picture of neoplastic disease\n  1) Mass effect Obstruction, invasion or compression.\n  2) Remote effect\n  Metastatic.\n  Non-metastatic (Paraneoplastic synd.)." }
     status: unverified
   # ---------- p32 ----------
@@ -85,17 +84,14 @@ items:
   - id: endo.L03.008
     kind: enumerate
     topic: criteria
-    prompt: Criteria for diagnosing an endocrine paraneoplastic syndrome.
+    prompt: Criteria for diagnosing an endocrine paraneoplastic syndrome, part 1 (criteria 1–4, p32).
     points:
       - Tumour associated with features of hormone excess
       - mRNA of the hormone shown in tumour tissue
       - High circulating hormone level
       - Hormone fails to respond to normal suppression
-      - Arteriovenous step-up gradient across the tumour (more than ten)
-      - Other causes of hormone excess excluded
-      - Biochemical and clinical improvement after tumour treatment
-    pass: 5
-    hook: "عشان تتهم الورم بالهرمون عايز 7 أدلة زي القضية: ورم مع علامات hormone excess، mRNA الهرمون في نسيج الورم، الهرمون عالي في الدم، مبيتكتمش بالـsuppression، AV step-up gradient عبر الورم (more than ten)، استبعاد أي سبب تاني، وتحسن biochemical وclinical بعد علاج الورم. 7 = إدانة."
+    pass: 3
+    hook: "عشان تتهم الورم بالهرمون، أول 4 أدلة زي القضية: ورم مع علامات hormone excess، mRNA الهرمون في نسيج الورم، الهرمون عالي في الدم، ومبيتكتمش بالـsuppression. (والـ 3 الباقيين في الجزء التاني.)"
     src: { page: 32, quote: "Criteria for diagnosing Endocrinal Paraneoplastic Syndrome\n  1) Association of neoplastic disease with manifestations of excess hormone secretion.\n  2) Demonstration of mRNA in neoplastic tissue.\n  3) Demonstration of high hormone level in the circulation.\n  4) Failure of plasma or urinary hormone level to respond to normal suppression." }
     status: unverified
     tags: [high-yield]
@@ -164,7 +160,7 @@ items:
     topic: ectopic-nature
     front: Why can an ectopic hormone read high on immunoassay but low on bioassay?
     back: Abnormal precursor processing makes molecules that are recognised by antibodies but are less active.
-    src: { page: 34, quote: "Accordingly, Immunoassay of ectopic hormone may show high level with low bioassay level:\n  High molecular weight ectopic hormone due to incomplete enzymatic cleavage of the precursor:\" Proopiomelanocortin\".\n  Low molecular weight ectopic hormone due to fragment of unregulated intra cellular processing like \"GHRH fragment\".\n  Altered glycosylation of ectopic hormones like:\n    Failure of cleavage of CHOes molecule as glycosylated ACTH.\n    Failure of normal glycosylation of Alpha subunit of HCG." }
+    src: { page: 34, quote: "Accordingly, Immunoassay of ectopic hormone may show high level with low bioassay level:\n  High molecular weight ectopic hormone due to incomplete enzymatic cleavage of the precursor:\" Proopiomelanocortin\".\n  Low molecular weight ectopic hormone due to fragment of unregulated intracellular processing like \"GHRH fragment\".\n  Altered glycosylation of ectopic hormones like:\n    Failure of cleavage of CHOes molecule as glycosylated ACTH.\n    Failure of normal glycosylation of Alpha subunit of HCG." }
     status: unverified
   - id: endo.L03.016
     kind: table
@@ -176,7 +172,7 @@ items:
       - [Low molecular weight, "Fragment from unregulated intracellular processing: GHRH fragment"]
       - [Altered glycosylation, "Glycosylated ACTH; failed normal glycosylation of hCG alpha subunit"]
     blanks: [[0, 1], [1, 1], [2, 1]]
-    src: { page: 34, quote: "Accordingly, Immunoassay of ectopic hormone may show high level with low bioassay level:\n  High molecular weight ectopic hormone due to incomplete enzymatic cleavage of the precursor:\" Proopiomelanocortin\".\n  Low molecular weight ectopic hormone due to fragment of unregulated intra cellular processing like \"GHRH fragment\".\n  Altered glycosylation of ectopic hormones like:\n    Failure of cleavage of CHOes molecule as glycosylated ACTH.\n    Failure of normal glycosylation of Alpha subunit of HCG." }
+    src: { page: 34, quote: "Accordingly, Immunoassay of ectopic hormone may show high level with low bioassay level:\n  High molecular weight ectopic hormone due to incomplete enzymatic cleavage of the precursor:\" Proopiomelanocortin\".\n  Low molecular weight ectopic hormone due to fragment of unregulated intracellular processing like \"GHRH fragment\".\n  Altered glycosylation of ectopic hormones like:\n    Failure of cleavage of CHOes molecule as glycosylated ACTH.\n    Failure of normal glycosylation of Alpha subunit of HCG." }
     status: unverified
   - id: endo.L03.017
     kind: table
@@ -300,6 +296,9 @@ items:
     blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
     src: { page: 36, quote: "Treatment\n  Mild hypercalcemia (12 mg/dl) Hydration with saline.\n  Moderate hypercalcemia (13-15 mg/dl) Biphosphonate plus diuretics.\n  Severe hypercalcemia more than (15 mg/dl) above plus calcitonin and mithramycin.\n  Special measures: phosphate, glucocorticoid or dialysis." }
     status: unverified
+    update:
+      text: "Current practice: IV saline first, then an IV bisphosphonate (zoledronic acid) or denosumab, with calcitonin added for a rapid effect when hypercalcaemia is severe. Mithramycin (plicamycin) is no longer used, and a loop diuretic is given only after volume repletion or for fluid overload. In the exam give the book's answer."
+      ref: "Endocrine Society clinical practice guideline: treatment of hypercalcemia of malignancy in adults 2022"
     tags: [high-yield, numbers]
   # ---------- p36-38: ACTH ----------
   - id: endo.L03.028
@@ -337,7 +336,7 @@ items:
     topic: acth
     front: How can ectopic adrenal receptors cause cortisol excess without ACTH?
     back: "GIP receptors make cortisol rise with food intake; adrenal LH receptors with macronodular hyperplasia give cushingoid features in pregnancy or the full picture at menopause."
-    src: { page: 37, quote: "Gastric inhibitory peptide (GIP) receptors stimulated by food intake leading to increased cortisol secretion." }
+    src: { page: 37, quote: "In rare cases there may be expression of ectopic receptors on the adrenal gland that are stimulated by hormones other than ACTH.\n  Gastric inhibitory peptide (GIP) receptors stimulated by food intake leading to increased cortisol secretion.\n    Now, known as Glucose dependant insulinotropic peptide.\n  LH receptor on adrenal gland associated with macro- nodular adrenal hyperplasia leading to Cushnoid features with pregnancy or full blown picture with menopause." }
     status: unverified
   - id: endo.L03.032
     kind: card
@@ -390,7 +389,7 @@ items:
       - [Mitotane, 1 g every 6 hours]
       - [Surgery, Bilateral adrenalectomy]
     blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
-    src: { page: 38, quote: "Medical: Ketoconazol 200-400 mg twice daily.\nMetyrapone 250-500 mg/6 hours.\nMitotane 1 gm/6 hours." }
+    src: { page: 38, quote: "Reduction of cortisol level by\n  Medical: Ketoconazol 200-400 mg twice daily.\n    Metyrapone 250-500 mg/6 hours.\n    Mitotane 1 gm/6 hours.\n  Surgical: Bilateral adrenalectomy." }
     status: unverified
     tags: [numbers]
   - id: endo.L03.037
@@ -413,8 +412,8 @@ items:
   - id: endo.L03.039
     kind: card
     topic: siadh
-    front: Pathogenesis and net result of paraneoplastic SIADH?
-    back: Increased vasopressin and ANP secretion; inappropriate water retention and urine concentration.
+    front: What is the net result of paraneoplastic SIADH?
+    back: Inappropriate water retention and inappropriate urine concentration.
     src: { page: 39, quote: "The net result is\n  Inappropriate retention of water.\n  Inappropriate urine concentration." }
     status: unverified
   - id: endo.L03.040
@@ -453,8 +452,8 @@ items:
     status: unverified
     tags: [high-yield, numbers]
     update:
-      text: "Current guidance adds vaptans (tolvaptan) as an option and limits correction of chronic hyponatraemia to about 8–10 mmol/L in 24 hours to avoid osmotic demyelination."
-      ref: "European clinical practice guideline on hyponatraemia 2014"
+      text: "The European guideline favours fluid restriction first, then urea or a low-dose loop diuretic with oral NaCl, and advises against vaptans and demeclocycline; the American expert panel lists tolvaptan as an option. Both limit correction of chronic hyponatraemia to 10 mmol/L in the first 24 hours and 8 mmol/L in each 24 hours after, to avoid osmotic demyelination. In the exam give the book's answer."
+      ref: "European clinical practice guideline on hyponatraemia 2014; Hyponatremia treatment guidelines: expert panel recommendations (Verbalis et al.) 2013"
   # ---------- p39-40: IGF-II ----------
   - id: endo.L03.043
     kind: card
@@ -473,10 +472,8 @@ items:
       - Less gluconeogenesis from a liver studded with metastases
       - Fewer counter-regulatory hormones such as GH
       - Big IGF-II that acts on insulin receptors
-      - Failure to form IGF binding protein 3, leaving IGF-II active
-      - IGF-II secretion exceeding binding proteins
-    pass: 4
-    hook: "الورم بيوطّي السكر بـ6: 3 «سرقة وعجز»: الورم بياكل glucose، كبد مليان metastases يعمل gluconeogenesis أقل، وcounter-regulatory hormones زي GH أقل… و3 «IGF-II»: big IGF-II يشتغل على insulin receptors، مفيش IGF binding protein 3 فيفضل شغال، وإفرازه أكتر من الـbinding proteins. 3 + 3 = 6."
+    pass: 3
+    hook: "الورم بيوطّي السكر بـ4 (ص39): 3 «سرقة وعجز»: الورم بياكل glucose، كبد مليان metastases يعمل gluconeogenesis أقل، وcounter-regulatory hormones زي GH أقل… والرابعة: big IGF-II يشتغل على insulin receptors. 3 + 1 = 4."
     src: { page: 39, quote: "Pathogenesis\n  Increased consumption of glucose by tumor cells.\n  Decreased gluoneogensis by studded liver by metastasis.\n  Decreased counter regulatory hormones like GH.\n  Increased ectopic IGFII (Big IGFII) that can react with insulin receptors." }
     status: unverified
   - id: endo.L03.045
@@ -484,7 +481,7 @@ items:
     topic: igf2
     front: Clinical picture and treatment of IGF-II hypoglycaemia?
     back: Recurrent fasting hypoglycaemia; small frequent meals, IV glucose especially at night, glucagon, GH and corticosteroids.
-    src: { page: 40, quote: "Treatment\n  Small frequent meals.\n  I.V. Glucose infusion especially by night.\n  Glucagon, G.H. and corticsteroids." }
+    src: { page: 40, quote: "Clinical picture\n  Recurrent attacks of fasting hypoglycemia.\nTreatment\n  Small frequent meals.\n  I.V. Glucose infusion especially by night.\n  Glucagon, G.H. and corticsteroids." }
     status: unverified
   # ---------- p40-41: hCG ----------
   - id: endo.L03.046
@@ -525,7 +522,7 @@ items:
       - [Adult male, Gynaecomastia]
       - [Any, Possible hyperthyroidism]
     blanks: [[0, 1], [1, 1], [2, 1]]
-    src: { page: 41, quote: "Young patient precocious puberty.\nAdult female uterine bleeding.\nAdult male gynecomastia." }
+    src: { page: 41, quote: "Clinical picture\n  It depends on the age and sex of the patient.\n  Young patient precocious puberty.\n  Adult female uterine bleeding.\n  Adult male gynecomastia.\n  There may be manifestations of hyperthyroidism." }
     status: unverified
     tags: [high-yield]
   # ---------- p41: osteomalacia, GH ----------
@@ -606,7 +603,7 @@ items:
       - "Not the book's mechanism."
       - "Low molecular weight fragments are the GHRH example; POMC is high weight."
       - "Not the book's explanation."
-    src: { page: 34, quote: "Accordingly, Immunoassay of ectopic hormone may show high level with low bioassay level:\n  High molecular weight ectopic hormone due to incomplete enzymatic cleavage of the precursor:\" Proopiomelanocortin\".\n  Low molecular weight ectopic hormone due to fragment of unregulated intra cellular processing like \"GHRH fragment\".\n  Altered glycosylation of ectopic hormones like:\n    Failure of cleavage of CHOes molecule as glycosylated ACTH.\n    Failure of normal glycosylation of Alpha subunit of HCG." }
+    src: { page: 34, quote: "Accordingly, Immunoassay of ectopic hormone may show high level with low bioassay level:\n  High molecular weight ectopic hormone due to incomplete enzymatic cleavage of the precursor:\" Proopiomelanocortin\".\n  Low molecular weight ectopic hormone due to fragment of unregulated intracellular processing like \"GHRH fragment\".\n  Altered glycosylation of ectopic hormones like:\n    Failure of cleavage of CHOes molecule as glycosylated ACTH.\n    Failure of normal glycosylation of Alpha subunit of HCG." }
     status: unverified
   - id: endo.L03.058
     kind: mcq
@@ -651,6 +648,9 @@ items:
       - "A special measure, not the standard step."
     src: { page: 36, quote: "Treatment\n  Mild hypercalcemia (12 mg/dl) Hydration with saline.\n  Moderate hypercalcemia (13-15 mg/dl) Biphosphonate plus diuretics.\n  Severe hypercalcemia more than (15 mg/dl) above plus calcitonin and mithramycin.\n  Special measures: phosphate, glucocorticoid or dialysis." }
     status: unverified
+    update:
+      text: "Current practice: IV saline first, then an IV bisphosphonate (zoledronic acid) or denosumab, with calcitonin added for a rapid effect when hypercalcaemia is severe. Mithramycin (plicamycin) is no longer used, and a loop diuretic is given only after volume repletion or for fluid overload. In the exam give the book's answer."
+      ref: "Endocrine Society clinical practice guideline: treatment of hypercalcemia of malignancy in adults 2022"
     tags: [numbers]
   - id: endo.L03.061
     kind: mcq
@@ -743,14 +743,14 @@ items:
     kind: mcq
     topic: hcg
     stem: A 30-year-old man with a testicular mass develops breast enlargement. Which mechanism links them?
-    options: [hCG drives aromatase and raises oestradiol, Prolactin from the tumour, Low LH, Ectopic ACTH, IGF-II]
+    options: [hCG drives aromatase and raises oestradiol, Tumour prolactin acting directly on the breast, "Low LH lowers testosterone, so oestrogen wins", Ectopic ACTH raising adrenal androgens, IGF-II acting on breast insulin receptors]
     answer: 0
     why:
       - "Correct: ectopic hCG increases steroidogenesis and aromatase, giving high E2 and gynaecomastia."
       - "Not the book's mechanism."
       - "Not the mechanism."
-      - "Causes Cushing's."
-      - "Causes hypoglycaemia."
+      - "Ectopic ACTH causes Cushing's, not this picture."
+      - "IGF-II causes hypoglycaemia."
     src: { page: 40, quote: "Pathogensis\n  Increased steroidogensis with increased aromatase activity leading to high E2 level.\n  B-subunit is used to differentiate and follow up of the different types of these hormones." }
     status: unverified
   - id: endo.L03.068
@@ -780,15 +780,18 @@ items:
         answer: 0
         why: "PTHrP over-expression with low PTH is HHM."
       - question: Treatment for this calcium level?
-        options: ["Saline, bisphosphonate and diuretic, plus calcitonin and mithramycin", "Saline only", "Thiazide", "Oral calcium restriction only"]
+        options: ["Saline, bisphosphonate, diuretic, calcitonin and mithramycin", "Saline hydration alone, then recheck calcium", "Saline plus a thiazide diuretic and bed rest", "Oral calcium restriction and oral phosphate only"]
         answer: 0
         why: "Above 15 mg/dL: the moderate regimen plus calcitonin and mithramycin."
       - question: Which other tests fit HHM?
-        options: ["High urinary cAMP, high calcium clearance, low-normal 1,25-D", "High 1,25-D", "Low urinary cAMP", "High PTH"]
+        options: ["High urinary cAMP and Ca clearance; low-normal 1,25-D", "High 1,25-D with low calcium clearance", "Low urinary cAMP with high calcium clearance", "High PTH, high 1,25-D and low urinary cAMP"]
         answer: 0
         why: "These separate it from primary hyperparathyroidism."
     src: { page: 36, quote: "Treatment\n  Mild hypercalcemia (12 mg/dl) Hydration with saline.\n  Moderate hypercalcemia (13-15 mg/dl) Biphosphonate plus diuretics.\n  Severe hypercalcemia more than (15 mg/dl) above plus calcitonin and mithramycin.\n  Special measures: phosphate, glucocorticoid or dialysis." }
     status: unverified
+    update:
+      text: "Current practice: IV saline first, then an IV bisphosphonate (zoledronic acid) or denosumab, with calcitonin added for a rapid effect when hypercalcaemia is severe. Mithramycin (plicamycin) is no longer used, and a loop diuretic is given only after volume repletion or for fluid overload. In the exam give the book's answer."
+      ref: "Endocrine Society clinical practice guideline: treatment of hypercalcemia of malignancy in adults 2022"
   - id: endo.L03.070
     kind: case
     topic: acth
@@ -805,7 +808,7 @@ items:
         answer: 0
         why: "Ectopic ACTH does not suppress on high-dose dexamethasone."
       - question: Lowering cortisol while the tumour is treated?
-        options: ["Ketoconazole, metyrapone or mitotane; or bilateral adrenalectomy", "Pituitary surgery", "Spironolactone only", "Dexamethasone"]
+        options: ["Ketoconazole, metyrapone or mitotane; or bilateral adrenalectomy", "Transsphenoidal pituitary surgery to remove the source", "Spironolactone and potassium replacement only", "High-dose dexamethasone to suppress ACTH"]
         answer: 0
         why: "Medical blockade or bilateral adrenalectomy, then consider cortisol replacement."
     src: { page: 38, quote: "Diagnosis\n  Urinary free cortisol is 2 to 4 times normal level.\n  ACTH is usually more than 100 pg/ml.\n  Negative high Dexamethsone dose suppression test ( 50% reduction from baseline)." }
@@ -821,11 +824,11 @@ items:
         answer: 0
         why: "Severe (Na under 110): hypertonic saline with furosemide."
       - question: What must be excluded before calling it SIADH?
-        options: ["Hypothyroidism and hypocortisolism", "Hypercalcaemia", "Diabetes mellitus", "Hyperkalaemia"]
+        options: ["Hypothyroidism and hypocortisolism", "Hypercalcaemia and hyperparathyroidism", "Hyperthyroidism and hypercortisolism", "Hyperkalaemia and hypermagnesaemia"]
         answer: 0
         why: "The book's diagnosis excludes hypothyroidism and hypocortisolism."
       - question: Long-term option for persistent moderate hyponatraemia?
-        options: ["Demeclocycline 150–300 mg three times daily", "Hypertonic saline daily", "Furosemide alone", "Free water"]
+        options: ["Demeclocycline 150–300 mg three times daily", "Hypertonic (3%) saline infusion every day", "Furosemide 40 mg twice daily, alone", "Liberal free water, 3 L a day"]
         answer: 0
         why: "Demeclocycline antagonises AVP on tubules; acts slowly over weeks."
     src: { page: 39, quote: "Treatment\n  Mild cases Fluid restriction to less than urine output.\n  Moderate cases Demeclocycline 150-300 mg three times daily. Slow action up to weeks. It antagonizes AVP action on renal tubules.\n  Severe cases (Na less than 110mEq/L) Hypertonic Saline with furesemide.\n  4) Ectopic IGFII secretion hypoglycemia Etiology\n  Mesenchymal tumor.\n  Hepatic tumor." }
@@ -885,3 +888,38 @@ items:
     src: { page: 37, quote: "Ectopic ACTH Cushing can be differentiated from Cushing disease:\n  1) Presence of marked hypokalemia.\n  2) Marked increase of ACTH.\n  3) Marked increase of serum and urine cortisol.\n  4) No suppression of ACTH or cortisol by high Dexamethasone dose suppression test.\n  5) Metabolic alkalosis.\n  6) Fluid retention and hypertension.\n  7) D.M.\n  8) Steroid psychosis." }
     status: unverified
     tags: [book-question]
+  # ---------- split-offs (cross-page parts of L03.005, .008, .039, .044) ----------
+  - id: endo.L03.077
+    kind: enumerate
+    topic: criteria
+    prompt: Criteria for diagnosing an endocrine paraneoplastic syndrome, part 2 (criteria 5–7, p33).
+    points:
+      - Arteriovenous step-up gradient of the hormone across the tumour (more than ten)
+      - Other causes of hormone excess excluded
+      - Biochemical and clinical improvement after tumour treatment
+    pass: 2
+    hook: "تكملة القضية بـ 3 أدلة: AV step-up gradient عبر الورم (more than ten)، استبعاد أي سبب تاني للـ hormone excess، وتحسن biochemical وclinical بعد علاج الورم. 4 + 3 = 7 = إدانة."
+    src: { page: 33, quote: "5) Arteriovenous step-up gradient more than ten if the hormone level across the tumor.\n6) Exclusion of other causes of excess hormone secretion.\n7) Biochemical and clinical improvement after neoplasm Rx." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.078
+    kind: card
+    topic: definition
+    front: Besides mass and remote effects, what is the third (psychic) effect of neoplastic disease?
+    back: Loneliness, acceptance, fear of pain or loss of control.
+    src: { page: 32, quote: "3) Psychic effect\n  Loneliness, acceptance, fear of pain or loss of control." }
+    status: unverified
+  - id: endo.L03.079
+    kind: card
+    topic: siadh
+    front: What is the pathogenesis of paraneoplastic SIADH?
+    back: Increased vasopressin (ADH) secretion and increased ANP secretion.
+    src: { page: 38, quote: "Pathogenesis\n  Increased vasopressin (ADH) secretion.\n  Increased ANP secretion." }
+    status: unverified
+  - id: endo.L03.080
+    kind: card
+    topic: igf2
+    front: Which two binding-protein problems add to IGF-II tumour hypoglycaemia?
+    back: Failure to form IGF binding protein 3, leaving IGF-II active, and IGF-II secretion that exceeds the binding proteins.
+    src: { page: 40, quote: "Failure of formation of IGFII binding protein3 leaving IGFII in an active form.\nMarked increase of IGFII secretion more than binding proteins." }
+    status: unverified

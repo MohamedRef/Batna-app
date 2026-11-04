@@ -79,9 +79,9 @@ items:
     stem: A 55-year-old with CKD stage 4 (eGFR 22) asks when he should start learning about dialysis and transplant. What does the book advise?
     options:
       - Now, at stage 4, to allow hepatitis B vaccination and fistula maturation
-      - Only when eGFR falls below 10
-      - Only once uraemic symptoms appear
-      - At stage 5D, after the first dialysis
+      - Later, once eGFR falls below 10 and dialysis start is close
+      - Later, once uraemic symptoms appear and dialysis is clearly needed
+      - At stage 5D, after the first dialysis session has been completed
     answer: 0
     why:
       - "Correct: counselling belongs in stage 4 CKD (p293)."
@@ -367,9 +367,9 @@ items:
     stem: A man with AKI needs urgent dialysis. He is a future transplant candidate with CKD. Ultrasound shows all central veins patent. Which site is preferred for the dialysis catheter?
     options:
       - Right internal jugular vein, under ultrasound guidance
-      - Left subclavian vein
-      - Right femoral vein
-      - Left internal jugular vein
+      - Left subclavian vein, under ultrasound guidance
+      - Right femoral vein, under ultrasound guidance
+      - Left internal jugular vein, under ultrasound guidance
     answer: 0
     why:
       - "Correct: right jugular is first choice, and ultrasound guidance is recommended (2A) (p297)."
@@ -520,17 +520,14 @@ items:
   - id: neph.L09.048
     kind: enumerate
     topic: prescription
-    prompt: Mention the renal indications for dialysis.
+    prompt: Mention the first renal indications for dialysis in the book's list (ESRD, fluid and acid–base).
     points:
       - ESRD with signs, symptoms or malnutrition
       - Volume overload not responding to medical treatment
       - Metabolic acidosis not responding, or with oliguria/anuria
-      - "Electrolytes not responding: hyperkalaemia, hyponatraemia, hyperphosphataemia"
-      - "Uraemia: encephalopathy, pericarditis"
-      - Persistent or progressive AKI
-    pass: 5
-    hook: "AEIOU من غير الـ I (السموم ليها list لوحدها): Acidosis مش بترد أو مع oliguria/anuria، Electrolytes مش بترد (hyperkalaemia، hyponatraemia، hyperphosphataemia)، Overload مش بيرد، Uraemia (encephalopathy، pericarditis)… + الكلية نفسها: ESRD بأعراض أو malnutrition، وAKI مستمر أو بيزيد. 4 + 2 = 6."
-    src: { page: 299, quote: "Volume overload not responding to medical R( Isolated UF could be used for1-2h prior to dialysis if exessive fluid removal is needed in first dialysis session. if hyperkalmia present isolated UF should be after not before dialysis.) Metabolic acidosis not responding to medical treatment or with associated oliguria/ anuria." }
+    pass: 3
+    hook: "أول 3 في الـ list: الكلية خلصت (ESRD بأعراض أو malnutrition)، المية زيادة (volume overload مش بيرد على العلاج)، والحموضة (metabolic acidosis مش بترد أو مع oliguria/anuria). الباقي في الصفحة اللي بعدها."
+    src: { page: 299, quote: "Indication for dialysis:\nESRD with sighns, symptoms or malnutrition or other indications.\nVolume overload not responding to medical R( Isolated UF could be used for1-2h prior to dialysis if exessive fluid removal is needed in first dialysis session. if hyperkalmia present isolated UF should be after not before dialysis.)\nMetabolic acidosis not responding to medical treatment or with associated oliguria/ anuria." }
     status: unverified
     tags: [high-yield]
   - id: neph.L09.049
@@ -688,19 +685,16 @@ items:
   - id: neph.L09.061
     kind: enumerate
     topic: hd-complications
-    prompt: Mention the consequences of intradialytic hypotension.
+    prompt: The book's list of intradialytic hypotension consequences runs on from the heart and brain. Mention the rest (gut, limbs and the dialysis itself).
     points:
-      - Severe metabolic acidosis
-      - Myocardial ischaemia and myocardial stunning
-      - Ischaemic stroke
-      - Venous thrombosis (retinal vein)
       - Intestinal ischaemia
       - Worse lower-limb arteritis
       - Inadequate dialysis (early termination)
+      - Myocardial stunning
       - Access thrombosis and increased mortality
-    pass: 5
-    hook: "الضغط لما يقع في الجلسة كل حتة بتجوع: القلب (ischaemia وstunning)، المخ (ischaemic stroke)، العين (venous thrombosis زي الـ retinal vein)، المصران (intestinal ischaemia)، الرجل (lower-limb arteritis بتسوء)، والدم (severe metabolic acidosis)… والغسيل نفسه: الجلسة تقف بدري (inadequate dialysis)، الـ access يتجلط، والوفيات تزيد."
-    src: { page: 302, quote: "Intestinal ischemia." }
+    pass: 4
+    hook: "الضغط لما يقع في الجلسة (الجزء التاني): المصران (intestinal ischaemia)، الرجل (lower-limb arteritis بتسوء)، الجلسة تقف بدري (inadequate dialysis)، القلب يتصدم (myocardial stunning)، والـ access يتجلط والوفيات تزيد. 5."
+    src: { page: 302, quote: "• Intestinal ischemia.\n• Aggravation of lower extremity arteritis myocardial ischemia.\n• Inadequate dialysis (early termination of dialysis session) Myocardial stunning, increased risk of access thrombosis inadequate dialysis (early termination of dialysis session)Myocardial stunning ,increased risk of access thrombosis increased mortality." }
     status: unverified
   - id: neph.L09.062
     kind: cloze
@@ -1072,10 +1066,9 @@ items:
       - Hyperglycaemia raising mitochondrial superoxide (polyol, hexosamine, protein kinase C, AGE pathways)
       - Carbohydrate load with truncal fat and dyslipidaemia
       - Insulin resistance, new-onset diabetes, cardiovascular disease
-      - Prolonged hyperglycaemia and hyperinsulinaemia (unlike oral glucose)
     pass: 3
-    hook: "الجلوكوز في البطن بيأذي 5: الغشا (peritoneum يتغير شكلًا ووظيفة)، الميتوكوندريا (hyperglycaemia → superoxide عبر polyol وhexosamine وPKC وAGE)، الكرش (carbohydrate load → truncal fat وdyslipidaemia)، السكر والقلب (insulin resistance، new-onset diabetes، cardiovascular disease)، ومش زي اللي بالبق (hyperglycaemia وhyperinsulinaemia مطوّلين)."
-    src: { page: 313, quote: "IP GLUCOSE: carbohydrate load: Truncal fattness, Dyslipidemia. All leads to Insulin resistance, New onset diabetes, CV disease. BrownleeM.Diabetes 2005, 541615-25." }
+    hook: "الجلوكوز في البطن بيأذي 4: الغشا (peritoneum يتغير شكلًا ووظيفة)، الميتوكوندريا (hyperglycaemia → superoxide عبر polyol وhexosamine وPKC وAGE)، الكرش (carbohydrate load → truncal fat وdyslipidaemia)، والسكر والقلب (insulin resistance، new-onset diabetes، cardiovascular disease)."
+    src: { page: 313, quote: "Glucose: can cause Morphologic changes in the eritoneum, Functional derangemt, Metabolic side effects.\nPD patients absorb from 100 -300 Glucose g/d. About 30-100 Kg/year dependent upon the prescription, transporter state. Burkart J.Seminar Dial 2004,17:498-504.\nHyperglycemia: increases Mitochondrial superoxide (Polyolen pathway, Hexosamine pathway, Protein kinase pathway, AGE pathway.\nIP GLUCOSE: carbohydrate load: Truncal fattness, Dyslipidemia.\nAll leads to Insulin resistance, New onset diabetes, CV disease. BrownleeM.Diabetes 2005, 541615-25." }
     status: unverified
   - id: neph.L09.094
     kind: table
@@ -1139,8 +1132,8 @@ items:
   - id: neph.L09.099
     kind: card
     topic: pd-types
-    front: Where is the PD catheter tip placed, and why tunnel it through the rectus sheath?
-    back: In the pelvis, with the proximal part tunnelled subcutaneously to an exit site several centimetres from the midline; rectus tunnelling gives built-in direction to the pelvis and less migration upward.
+    front: Where is the PD catheter tip placed, and where does the proximal catheter go?
+    back: The tip sits in the pelvis; the proximal catheter is tunnelled subcutaneously to an exit site several centimetres from the midline.
     src: { page: 315, quote: "The catheter tip is placed in the pelvis and the proximal catheter is tunnelled, subcutaneously, to an exit site several centimetres from the midline. Crabtree j etal. Am Surg 2005:71:135-143." }
     status: unverified
   - id: neph.L09.100
@@ -1392,9 +1385,9 @@ items:
     stem: Which finding is an absolute contraindication to kidney transplant in the book?
     options:
       - Positive CDC cross-match at the time of transplant
-      - Smoking
-      - Morbid obesity
-      - Uncontrolled hypertension
+      - Active smoking at the time of evaluation
+      - Morbid obesity at the time of evaluation
+      - Uncontrolled hypertension at the time of evaluation
     answer: 0
     why:
       - "Correct: a positive CDC cross-match at transplantation is an absolute (immunologic) contraindication (p320)."
@@ -1484,10 +1477,9 @@ items:
       - Cause of persistent microscopic haematuria
       - History and imaging for nephrolithiasis; history of gout
       - Blood pressure on at least 2 occasions
-      - Family history of kidney disease
     pass: 4
-    hook: "كلية المتبرع = «فلترة، زلال، دم، حصوة ونقرس، ضغط، وعيلة»: eGFR من الكرياتينين ويتأكد بـ measured GFR أو measured CrCl أو creatinine + cystatin C؛ albuminuria بـ ACR ويتأكد بـ AER أو ACR تاني؛ سبب الـ microscopic haematuria المستمرة؛ history وimaging للحصوات + history للـ gout؛ الضغط في مرتين على الأقل؛ وfamily history لأمراض الكلى."
-    src: { page: 323, quote: "Assess history of gout Measure blood pressure before donation on at least 2 occasions." }
+    hook: "كلية المتبرع = «فلترة، زلال، دم، حصوة ونقرس، وضغط»: eGFR من الكرياتينين ويتأكد بـ measured GFR أو measured CrCl أو creatinine + cystatin C؛ albuminuria بـ ACR ويتأكد بـ AER أو ACR تاني؛ سبب الـ microscopic haematuria المستمرة؛ history وimaging للحصوات + history للـ gout؛ والضغط في مرتين على الأقل."
+    src: { page: 323, quote: "Among the important investigations:\nEstimate GFR using serum creatinine-based estimating equations and confirm with one or more of the following according to availability: measured GFR using an exogenous filtration marker, (eg.urinary clearance of 99mTc-DTPA) measured creatinine clearance, estimated GFR from the combination of serum creatinine and cystatin C, or repeat estimated GFR using serum creatinine.\n5.6: GFRof 90mL/minper1.73m2 or greater should be considered acceptable level of kidney function for donation. KDIGO guidelines 2017.\nAssess albuminuria using albumin-to-creatinine ratio in an untimed urine specimen, and confirm albuminuria with AER in a timed urine, specimen or by repeating albumin-to-creatinine ratio if AER cannot be obtained.\nPerform testing to identify cause of microscopic hematuria that is not reversible assess history and renal imaging for nephrolithiasis.\nAssess history of gout\nMeasure blood pressure before donation on at least 2 occasions." }
     status: unverified
   - id: neph.L09.131
     kind: enumerate
@@ -1504,7 +1496,7 @@ items:
       - Others by geography and exposure
     pass: 5
     hook: "عدوى المتبرع = «3 الدم + 2 الهربس + الزهري + البول + اللي حسب البلد»: HIV وhepatitis B وhepatitis C؛ CMV وEBV؛ syphilis؛ urinary tract infection؛ وغيرهم حسب الجغرافيا والتعرّض."
-    src: { page: 324, quote: "Present and past use of tobacco products Screen for the following infections before donation:" }
+    src: { page: 324, quote: "Screen for the following infections before donation:\n• Human immunodeficiency virus.\n• Hepatitis B virus.\n• Hepatitis C virus.\n• Cytomegalovirus.\n• Epstein-Barr virus\n• Treponema pallidum (syphilis).\n• Urinary tract infection.\n• Other potential infections based on geography and environmental exposures." }
     status: unverified
   - id: neph.L09.132
     kind: enumerate
@@ -1518,7 +1510,7 @@ items:
       - Present and past tobacco use
     pass: 4
     hook: "ميتابولك المتبرع = «وزن، سكر بالسؤال والتحليل، دهون، وسجاير»: BMI؛ history سكر (شخصي، gestational، والعيلة)؛ fasting glucose و/أو HbA1c؛ fasting lipid profile؛ والتدخين دلوقتي وزمان."
-    src: { page: 324, quote: "Assess metabolic and lifestyle risk factors for CKD and/or CVD before donation by obtaining:" }
+    src: { page: 324, quote: "Assess metabolic and lifestyle risk factors for CKD and/or CVD before donation by obtaining:\n• BMI measurement\n• History of diabetes mellitus, gestational diabetes, and family history of diabetes\n• Fasting blood glucose and/or glycated hemoglobin (HbA1c)\n• Fasting lipid profile including total cholesterol, low-density lipoprotein cholesterol and high-density lipoprotein cholesterol, and triglycerides\n• Present and past use of tobacco products" }
     status: unverified
   - id: neph.L09.133
     kind: card
@@ -1539,7 +1531,7 @@ items:
       - Healthy lifestyle (exercise, diet, no tobacco)
     pass: 4
     hook: "متابعة المتبرع كل سنة = «ضغط، وزن، كرياتينين، زلال، وعيشة صحية»: blood pressure، BMI، serum creatinine مع eGFR، albuminuria، وhealthy lifestyle (رياضة، أكل، ومن غير سجاير)."
-    src: { page: 325, quote: "Select optimal surgical approach by an experienced surgeon Respect donor autonomy during all phases of evaluation and donation. Perform annual postdonation follow-up care including:" }
+    src: { page: 325, quote: "Perform annual postdonation follow-up care including:\n• Blood pressure measurement.\n• BMI measurement\n• Serum creatinine measurement with GFR estimation.\n• Albuminuria measurement.\n• Review and promotion of healthy lifestyle practices including exercise, diet, and abstinence from tobacco." }
     status: unverified
   - id: neph.L09.135
     kind: card
@@ -1600,7 +1592,7 @@ items:
       - ["CDC cross-match (cell-based)", "Reduced hyperacute rejection", "Cannot identify the antigen causing the positive result"]
       - ["Solid-phase (ELISA, Luminex)", "Sensitive, specific; quantify antibody level; Luminex more sensitive than ELISA", "–"]
     blanks: [[0, 1], [0, 2], [1, 1]]
-    src: { page: 327, quote: "Methods for HLA typing, detection of HLA Abs." }
+    src: { page: 327, quote: "Methods for HLA typing, detection of HLA Abs.\n| Cell-based assays | Solid-phase assays |\n|---|---|\n| CDC-XM reduced the incidence of hyperacute rejection | Sensitive with high degree of specificity to donor antigens, luminex more sensitive than ELISA |\n| Inability to identify the antigen causing positive | Capable of quantifying anti-HLA antibodies level |" }
     status: unverified
   - id: neph.L09.142
     kind: card
@@ -1902,7 +1894,7 @@ items:
       - ["1–6 months (unconventional)", "CMV onset, EBV, VZV, papova, adenovirus, Pneumocystis, tuberculosis, Listeria, Aspergillus, Nocardia, Toxoplasma"]
       - ["After 4–6 months", "Cryptococcus (from about 4 months), CMV chorioretinitis, relatively benign UTI"]
     blanks: [[0, 1], [1, 1], [2, 1]]
-    src: { page: 335, quote: "Infections: (Transplant = 0; Time, months 0–6; Conventional before 1 month, Unconventional after)\nViral:\n  HSV: 0–1 month\n  CMV onset: 1–4 months\n  EBV VZV papova adenovirus: 2–6 months\n  CMV chorioretinitis: from 6 months\nFungal, TB, Pneumocystis: 1–6 months\nCNS:\n  Listeria: from 1 month\n  Aspergillus, nocardia, toxoplasma: 1–4 months\n  Cryptococcus: from 4 months\nBacterial:\n  Wound, pneumonia, line-related: 0–1 month\nHepatitis:\n  Hepatitis B: 0–1 month\n  Onset of non-A, non-B hepatitis: 1–6 months\nUTI:\n  bacteremia, pyelitis, relapse: 0–4 months\n  relatively benign: from 6 months" }
+    src: { page: 335, quote: "Infections: (Transplant = 0; Time, months 0–6; Conventional before 1 month, Unconventional after)\nViral:\n  HSV: from just before transplant to about 2 months\n  CMV onset: 1–4 months\n  EBV VZV papova adenovirus: 2–6 months\n  CMV chorioretinitis: from 6 months\nFungal, TB, Pneumocystis: 1–6 months\nCNS:\n  Listeria: from 1 month\n  Aspergillus, nocardia, toxoplasma: 1–4 months\n  Cryptococcus: from 4 months\nBacterial:\n  Wound, pneumonia, line-related: 0–1 month\nHepatitis:\n  Hepatitis B: 0–1 month\n  Onset of non-A, non-B hepatitis: 1–6 months\nUTI:\n  bacteremia, pyelitis, relapse: 0–4 months\n  relatively benign: from 6 months" }
     status: unverified
     tags: [high-yield]
   - id: neph.L09.168
@@ -1916,11 +1908,11 @@ items:
       - Hepatitis B as a wound infection
     answer: 0
     why:
-      - "Correct: CMV onset is between 1 and 4–6 months (p335)."
-      - HSV is a first-month infection.
+      - "Correct: CMV onset runs from 1 to 4 months (p335)."
+      - HSV runs from around transplant to about 2 months, so it is early, not the typical 3-month virus.
       - Cryptococcus starts later (from about 4 months), and it is a fungus.
       - Hepatitis B is not a wound infection.
-    src: { page: 335, quote: "Infections: (Transplant = 0; Time, months 0–6; Conventional before 1 month, Unconventional after)\nViral:\n  HSV: 0–1 month\n  CMV onset: 1–4 months\n  EBV VZV papova adenovirus: 2–6 months\n  CMV chorioretinitis: from 6 months\nFungal, TB, Pneumocystis: 1–6 months\nCNS:\n  Listeria: from 1 month\n  Aspergillus, nocardia, toxoplasma: 1–4 months\n  Cryptococcus: from 4 months\nBacterial:\n  Wound, pneumonia, line-related: 0–1 month\nHepatitis:\n  Hepatitis B: 0–1 month\n  Onset of non-A, non-B hepatitis: 1–6 months\nUTI:\n  bacteremia, pyelitis, relapse: 0–4 months\n  relatively benign: from 6 months" }
+    src: { page: 335, quote: "Infections: (Transplant = 0; Time, months 0–6; Conventional before 1 month, Unconventional after)\nViral:\n  HSV: from just before transplant to about 2 months\n  CMV onset: 1–4 months\n  EBV VZV papova adenovirus: 2–6 months\n  CMV chorioretinitis: from 6 months\nFungal, TB, Pneumocystis: 1–6 months\nCNS:\n  Listeria: from 1 month\n  Aspergillus, nocardia, toxoplasma: 1–4 months\n  Cryptococcus: from 4 months\nBacterial:\n  Wound, pneumonia, line-related: 0–1 month\nHepatitis:\n  Hepatitis B: 0–1 month\n  Onset of non-A, non-B hepatitis: 1–6 months\nUTI:\n  bacteremia, pyelitis, relapse: 0–4 months\n  relatively benign: from 6 months" }
     status: unverified
   - id: neph.L09.169
     kind: table
@@ -1989,7 +1981,7 @@ items:
     stem: A 48-year-old diabetic has been on CAPD for 3 years. Fluid is building up despite 2.27% bags.
     steps:
       - question: Which test defines his peritoneal transport?
-        options: [Peritoneal equilibration test (D/P ratio), Kt/V only, Serum albumin, Abdominal CT]
+        options: ["Peritoneal equilibration test (D/P ratio)", "Kt/V urea alone (weekly dose)", "Serum albumin and protein intake", "Abdominal CT of the peritoneum"]
         answer: 0
         why: "The PET defines solute equilibration rates as the D/P ratio (p317)."
       - reveal: PET shows a fast (high) transporter.
@@ -2009,7 +2001,7 @@ items:
     stem: A 35-year-old woman wants to donate a kidney to her brother.
     steps:
       - question: Which immunological tests come before transplant?
-        options: ["ABO grouping, cross-match, HLA typing and PRA", Only ABO grouping, Only HLA typing, None if they are siblings]
+        options: ["ABO grouping, cross-match, HLA typing and PRA", "ABO grouping alone, as they are siblings", "HLA typing alone, as they are siblings", "No testing, since siblings share HLA"]
         answer: 0
         why: "ABO blood grouping, cross-matching, HLA typing and PRA (p330)."
       - reveal: Her eGFR is 95 mL/min/1.73 m² and BP is normal on two visits.
@@ -2023,7 +2015,7 @@ items:
         why: "The left, for the technical ease of a longer venous pedicle (p325)."
       - reveal: The CDC cross-match is negative but the flow cross-match is positive.
         question: What does that mean?
-        options: [Higher risk of antibody-mediated rejection and early graft loss, No added risk, Hyperacute rejection is certain, ABO incompatibility]
+        options: ["Higher risk of antibody-mediated rejection and early graft loss", "No added risk, since the CDC cross-match is negative", "Certain hyperacute rejection within minutes of reperfusion", "ABO incompatibility between donor and recipient"]
         answer: 0
         why: "Positive flow with negative CDC carries a significantly higher AMR risk, PPV 83% (p331)."
     src: { page: 323, quote: "Estimate GFR using serum creatinine-based estimating equations and confirm with one or more of the following according to availability: measured GFR using an exogenous filtration marker, (eg.urinary clearance of 99mTc- DTPA) measured creatinine clearance, estimated GFR from the combination of serum creatinine and cystatin C, or repeat estimated GFR using serum creatinine. 5.6: GFRof 90mL/minper1.73m2 or greater should be considered acceptable level of kidney function for donation. KDIGO guidelines 2017. Assess albuminuria using albumin-to-creatinine ratio in an untimed urine specimen, and confirm albuminuria with AER in a timed urine, specimen or by repeating albumin-to-creatinine ratio if AER cannot be obtained." }
@@ -2034,7 +2026,7 @@ items:
     stem: A 74-year-old starts haemodialysis with a pre-dialysis BUN of 170 mg/dL.
     steps:
       - question: What target post/pre BUN ratio should the first sessions aim for?
-        options: ["0.65–0.75", "0.30", "0.10", "1.0"]
+        options: ["0.65–0.75", "0.30–0.40", "0.10–0.20", "0.95–1.00"]
         answer: 0
         why: "0.65–0.75 in the first acute sessions or with high disequilibrium risk (p299)."
       - reveal: Months later he often drops his blood pressure and the session is stopped early. His UF rate is 14 mL/kg/h.
@@ -2043,7 +2035,7 @@ items:
         answer: 0
         why: "UFR above 10–13 mL/kg/h is linked to more IDH and mortality (p302)."
       - question: Which change in schedule does the book support for haemodynamic instability?
-        options: [Increase treatment time and/or frequency, Shorten sessions, Twice-weekly dialysis, Stop anticoagulation]
+        options: ["Increase treatment time and/or frequency", "Shorten each session to limit hypotension", "Drop to twice-weekly dialysis sessions", "Stop anticoagulation during the session"]
         answer: 0
         why: "Increase time and/or frequency for haemodynamic or CV instability (p295)."
     src: { page: 302, quote: "Higher UFR (>10–>13 mL/h/kg were consistently associated with a higher incidence of IDH and mortality [Kidney Int 2011; 79: 250–257]." }
@@ -2093,4 +2085,44 @@ items:
       - "Prevention": ["ABO, cross-match, HLA, PRA", "Induction: IL2-RA or lymphocyte-depleting if high risk"]
       - "Treatment (KDIGO 2011)": ["Biopsy first; steroids for cellular", "ATG for steroid-resistant", "AMR: plasma exchange, intravenous immunoglobulin, anti-CD20"]
     src: { page: 330, quote: "Pathological mechanisms of rejection Hyperacute :" }
+    status: unverified
+  - id: neph.L09.179
+    kind: enumerate
+    topic: prescription
+    prompt: Mention the electrolyte, uraemic and AKI indications for dialysis that end the book's list of renal indications.
+    points:
+      - "Electrolytes not responding: hyperkalaemia, hyponatraemia, hyperphosphataemia"
+      - "Uraemia: encephalopathy, pericarditis"
+      - Persistent or progressive AKI
+    pass: 3
+    hook: "باقي الـ list = «أملاح، يوريا، و AKI مش بيخف»: electrolytes مش بترد (hyperkalaemia، hyponatraemia، hyperphosphataemia)، uraemia (encephalopathy، pericarditis)، و AKI مستمر أو بيزيد. 3."
+    src: { page: 300, quote: "Electrolyte abnormalities not responding to medical treatment\n  Hyperkalemia\n  Hyponatremia\n  Hyperphosphatemia\nUremia\n  Encephalopathy\n  Pericarditis\nPersistent/progressive acute kidney injury." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L09.180
+    kind: enumerate
+    topic: hd-complications
+    prompt: Intradialytic hypotension, mostly from high ultrafiltration, can lead to what? Mention the first four consequences in the book's list.
+    points:
+      - Severe metabolic acidosis
+      - Myocardial ischaemia
+      - Ischaemic stroke
+      - Venous thrombosis (retinal vein)
+    pass: 3
+    hook: "الضغط لما يقع في الجلسة (أول 4): الدم يحمّض (severe metabolic acidosis)، القلب يجوع (myocardial ischaemia)، المخ (ischaemic stroke)، والعين (venous thrombosis في الـ retinal vein)."
+    src: { page: 301, quote: "Intradialytic hypotension mostly associated with increased UF can lead to:\n• Severe metabolic acidosis\n• Myocardial ischemia.\n• Ischemic cerebro-vascular accidents.\n• Venous thrombosis (retina vein)." }
+    status: unverified
+  - id: neph.L09.181
+    kind: card
+    topic: pd-types
+    front: Why is a PD catheter tunnelled through the rectus sheath rather than inserted at right angles to the skin?
+    back: Rectus sheath tunnelling gives the catheter a built-in direction toward the pelvis; a catheter inserted at right angles is more prone to migrate into the middle and upper abdomen.
+    src: { page: 314, quote: "Figure 1. As a result of rectus sheath tunneling, the catheter has a “built-in” directionality ard the pelvis. In contrast, if the catheter is inserted at right angles to the surface, then it will be more prone to migrate into the middle and upper abdominal quadrants. Courtesy of Dr. J, Crabtree (28)" }
+    status: unverified
+  - id: neph.L09.182
+    kind: card
+    topic: pd-solutions
+    front: How does glucose absorbed from the peritoneum differ in its metabolic effect from oral glucose?
+    back: It leads to extended periods of hyperglycaemia and hyperinsulinaemia.
+    src: { page: 314, quote: "Glucose absorption from peritoneum in contrast to oral G leads to extended periods of hyperglycemia and hyperinsulinemia. Delarue and colleagues (Am J Kidney Dis 2001,37:S 103-7) ." }
     status: unverified

@@ -10,7 +10,7 @@
 //! any 3 of INR > 3.5, bilirubin > 17.5 mg/dL, jaundice-to-encephalopathy >
 //! 7 days, age < 10 or > 40 years, indeterminate or drug-induced cause.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, num};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, normals, num};
 
 const CAUSE: &[(&str, &str)] = &[
     ("acetaminophen", "Acetaminophen (paracetamol)"),
@@ -25,12 +25,18 @@ pub const SPEC: CalcSpec = CalcSpec {
     area: Area::AcuteFailure,
     fields: &[
         choice("cause", "Cause of ALF", CAUSE),
-        num("inr", "INR", "", 0.5, 20.0, 0.1),
-        num("ph", "Arterial pH (after resuscitation)", "", 6.5, 7.8, 0.01).optional(),
-        num("lactate_mmol_l", "Lactate", "mmol/L", 0.0, 30.0, 0.1).optional(),
-        num("creatinine_mg_dl", "Creatinine", "mg/dL", 0.1, 20.0, 0.1).optional(),
+        num("inr", "INR", "", 0.5, 20.0, 0.1).normal_as(normals::INR),
+        num("ph", "Arterial pH (after resuscitation)", "", 6.5, 7.8, 0.01).normal_as(normals::PH).optional(),
+        num("lactate_mmol_l", "Lactate", "mmol/L", 0.0, 30.0, 0.1)
+            .normal_as(normals::LACTATE_MMOL_L)
+            .optional(),
+        num("creatinine_mg_dl", "Creatinine", "mg/dL", 0.1, 20.0, 0.1)
+            .normal_as(normals::CREATININE_MG_DL)
+            .optional(),
         num("he_stage", "Encephalopathy stage", "", 0.0, 4.0, 1.0).optional(),
-        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 60.0, 0.1).optional(),
+        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 60.0, 0.1)
+            .normal_as(normals::BILIRUBIN_MG_DL)
+            .optional(),
         num("age_years", "Age", "years", 0.0, 110.0, 1.0).optional(),
         num("jaundice_to_he_days", "Days from jaundice to encephalopathy", "days", 0.0, 180.0, 1.0)
             .optional(),

@@ -6,16 +6,16 @@
 //! fibrosis, > 1.5 severe fibrosis or cirrhosis. The WHO hepatitis C
 //! guidelines (2016) use > 2.0 for cirrhosis; a note says so above 2.0.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "apri",
     name: "APRI",
     area: Area::Liver,
     fields: &[
-        num("ast_u_l", "AST", "U/L", 1.0, 10000.0, 1.0),
+        num("ast_u_l", "AST", "U/L", 1.0, 10000.0, 1.0).normal_as(normals::AST_U_L),
         num("ast_uln_u_l", "AST upper limit of normal", "U/L", 10.0, 100.0, 1.0).hint("Often 40 U/L."),
-        num("platelets_10e9_l", "Platelets", "×10⁹/L", 1.0, 1500.0, 1.0),
+        num("platelets_10e9_l", "Platelets", "×10⁹/L", 1.0, 1500.0, 1.0).normal_as(normals::PLATELETS_10E9_L),
     ],
     source: "Book Lecture 2, p. 34; Wai 2003; WHO HCV guidelines 2016",
     compute,

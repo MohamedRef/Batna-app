@@ -9,7 +9,7 @@
 //! (moderate), stupor or coma (severe). Glucose below 200 with ketosis and
 //! acidosis is euglycaemic DKA (SGLT2 inhibitors, pregnancy, fasting).
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, normals, num, show};
 
 const MENTAL: &[(&str, &str)] = &[("alert", "Alert"), ("drowsy", "Drowsy"), ("stupor", "Stupor or coma")];
 
@@ -18,13 +18,16 @@ pub const SPEC: CalcSpec = CalcSpec {
     name: "DKA severity",
     area: Area::Diabetes,
     fields: &[
-        num("ph", "Venous or arterial pH", "", 6.5, 7.8, 0.01),
-        num("hco3_mmol_l", "Bicarbonate", "mmol/L", 0.0, 45.0, 0.1),
+        num("ph", "Venous or arterial pH", "", 6.5, 7.8, 0.01).normal_as(normals::PH),
+        num("hco3_mmol_l", "Bicarbonate", "mmol/L", 0.0, 45.0, 0.1).normal_as(normals::HCO3),
         num("bhb_mmol_l", "β-hydroxybutyrate", "mmol/L", 0.0, 20.0, 0.1)
+            .normal_as(normals::BHB_MMOL_L)
             .optional()
             .hint("Leave empty if you have only a urine strip and tick the box below."),
         flag("urine_ketones", "Urine ketones 2+ or more"),
-        num("glucose_mg_dl", "Glucose", "mg/dL", 10.0, 3000.0, 1.0).optional(),
+        num("glucose_mg_dl", "Glucose", "mg/dL", 10.0, 3000.0, 1.0)
+            .normal_as(normals::GLUCOSE_MG_DL)
+            .optional(),
         flag("known_diabetes", "Known diabetes"),
         choice("mental", "Mental status", MENTAL),
     ],

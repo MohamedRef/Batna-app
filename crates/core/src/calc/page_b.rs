@@ -10,7 +10,7 @@
 //! those (with 1 and 2 points the maximum is 18), so this uses 6 and 9 and
 //! says so in a note.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, normals, num};
 
 const SEX: &[(&str, &str)] = &[("male", "Male"), ("female", "Female")];
 
@@ -21,7 +21,7 @@ pub const SPEC: CalcSpec = CalcSpec {
     fields: &[
         num("age_years", "Age", "years", 16.0, 110.0, 1.0),
         choice("sex", "Sex", SEX),
-        num("platelets_10e9_l", "Platelets", "×10⁹/L", 1.0, 1500.0, 1.0),
+        num("platelets_10e9_l", "Platelets", "×10⁹/L", 1.0, 1500.0, 1.0).normal_as(normals::PLATELETS_10E9_L),
     ],
     source: "Papatheodoridis 2016; book Lecture 18, p. 351–352 (platelet points from the paper, see note)",
     compute,

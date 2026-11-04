@@ -7,7 +7,7 @@
 //! Overt PMF: Lecture 9, pp. 145–146. Each needs its major criteria (all
 //! of them, or the first ones plus the minor criterion) as the book prints.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, normals, num};
 
 const SEX: &[(&str, &str)] = &[("male", "Male"), ("female", "Female")];
 
@@ -17,8 +17,8 @@ pub const PV: CalcSpec = CalcSpec {
     area: Area::Blood,
     fields: &[
         choice("sex", "Sex", SEX),
-        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 30.0, 0.1),
-        num("hct_pct", "Haematocrit", "%", 10.0, 80.0, 0.1).optional(),
+        num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 30.0, 0.1).normal_as(normals::HB_G_DL),
+        num("hct_pct", "Haematocrit", "%", 10.0, 80.0, 0.1).normal_as(normals::HCT_PCT).optional(),
         flag("rcm_increased", "Increased red cell mass"),
         flag("bm_panmyelosis", "Marrow: hypercellular with trilineage growth (panmyelosis)"),
         flag("jak2", "JAK2 V617F or JAK2 exon 12 mutation"),
@@ -33,7 +33,8 @@ pub const ET: CalcSpec = CalcSpec {
     name: "WHO 2016 criteria: essential thrombocythaemia",
     area: Area::Blood,
     fields: &[
-        num("platelets_10e9_l", "Platelets", "× 10⁹/L", 1.0, 5000.0, 1.0),
+        num("platelets_10e9_l", "Platelets", "× 10⁹/L", 1.0, 5000.0, 1.0)
+            .normal_as(normals::PLATELETS_10E9_L),
         flag("bm_megakaryocytes", "Marrow: mainly enlarged, mature, hyperlobulated megakaryocytes"),
         flag(
             "not_other_myeloid",

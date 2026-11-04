@@ -5,14 +5,19 @@
 //! ascites. Ascitic total protein (p. 150): low < 1.5 g/dL in cirrhosis,
 //! high > 2.5 g/dL in heart failure and malignant ascites.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
+
+/// Ascitic albumin above serum albumin.
+pub const ABOVE_SERUM: &str = "higher than the serum albumin";
+/// Ascitic total protein below its own albumin.
+pub const BELOW_ALBUMIN: &str = "lower than the ascitic albumin";
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "saag",
     name: "SAAG",
     area: Area::Ascites,
     fields: &[
-        num("serum_albumin_g_dl", "Serum albumin", "g/dL", 0.5, 6.0, 0.1),
+        num("serum_albumin_g_dl", "Serum albumin", "g/dL", 0.5, 6.0, 0.1).normal_as(normals::ALBUMIN_G_DL),
         num("ascitic_albumin_g_dl", "Ascitic albumin", "g/dL", 0.0, 6.0, 0.1),
         num("ascitic_protein_g_dl", "Ascitic total protein", "g/dL", 0.0, 8.0, 0.1).optional(),
     ],
@@ -23,6 +28,15 @@ pub const SPEC: CalcSpec = CalcSpec {
 fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     let serum = i.get_num("serum_albumin_g_dl")?;
     let ascitic = i.get_num("ascitic_albumin_g_dl")?;
+    // Ascitic fluid comes from plasma: its albumin can't pass the serum's,
+    // and albumin is part of its total protein. Either way round is a slip
+    // (serum albumin 12 and ascitic 23 gave SAAG −11 before this).
+    if ascitic > serum {
+        return Err(CalcError::Invalid { field: "ascitic_albumin_g_dl", reason: ABOVE_SERUM });
+    }
+    if i.opt_num("ascitic_protein_g_dl")?.is_some_and(|p| p < ascitic) {
+        return Err(CalcError::Invalid { field: "ascitic_protein_g_dl", reason: BELOW_ALBUMIN });
+    }
     // Rounded to one decimal, as labs report, so 1.1 lands on the cut-off.
     let saag = ((serum - ascitic) * 10.0).round() / 10.0;
     let high = saag >= 1.1;
@@ -81,5 +95,29 @@ mod tests {
         )
         .unwrap();
         assert!(o.notes.iter().any(|n| n.contains("heart failure")));
+    }
+
+    #[test]
+    fn impossible_pairs_are_refused() {
+        // Mohamed's slip: serum 12 and ascitic 23 gave −11.0 before.
+        let i = Inputs::new().num("serum_albumin_g_dl", 3.0).num("ascitic_albumin_g_dl", 3.5);
+        assert_eq!(
+            compute(&i),
+            Err(CalcError::Invalid { field: "ascitic_albumin_g_dl", reason: ABOVE_SERUM })
+        );
+        let i = Inputs::new()
+            .num("serum_albumin_g_dl", 3.0)
+            .num("ascitic_albumin_g_dl", 1.0)
+            .num("ascitic_protein_g_dl", 0.8);
+        assert_eq!(
+            compute(&i),
+            Err(CalcError::Invalid { field: "ascitic_protein_g_dl", reason: BELOW_ALBUMIN })
+        );
+        // Serum albumin 12 g/dL is outside what a body shows.
+        let i = Inputs::new().num("serum_albumin_g_dl", 12.0).num("ascitic_albumin_g_dl", 2.3);
+        assert_eq!(
+            SPEC.run(&i),
+            Err(CalcError::Invalid { field: "serum_albumin_g_dl", reason: super::super::IMPOSSIBLE })
+        );
     }
 }

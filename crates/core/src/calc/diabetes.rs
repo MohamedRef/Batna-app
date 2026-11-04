@@ -7,10 +7,11 @@
 //! total osmolality 2 × Na + glucose + urea (mmol/L) above 320. HHS has
 //! resolved once osmolality is below 300 (p. 192).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
 
-const NA: super::Field = num("na_meq_l", "Sodium", "mEq/L", 90.0, 200.0, 1.0);
-const GLUCOSE: super::Field = num("glucose_mg_dl", "Glucose", "mg/dL", 10.0, 3000.0, 1.0);
+const NA: super::Field = num("na_meq_l", "Sodium", "mEq/L", 90.0, 200.0, 1.0).normal_as(normals::SODIUM);
+const GLUCOSE: super::Field =
+    num("glucose_mg_dl", "Glucose", "mg/dL", 10.0, 3000.0, 1.0).normal_as(normals::GLUCOSE_MG_DL);
 
 pub const CORRECTED_NA: CalcSpec = CalcSpec {
     id: "corrected_sodium",
@@ -51,6 +52,7 @@ pub const OSMOLALITY: CalcSpec = CalcSpec {
         NA,
         GLUCOSE,
         num("urea_mmol_l", "Urea", "mmol/L", 0.5, 100.0, 0.1)
+            .normal_as(normals::UREA_MMOL_L)
             .optional()
             .hint("For the total osmolality. Urea mg/dL ÷ 6."),
     ],

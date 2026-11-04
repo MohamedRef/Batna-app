@@ -11,10 +11,12 @@
 //! investigation; p. 228 words it as "OS < 8 carries 95% probability of safe
 //! discharge".
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, normals, num, show};
 
-const HR: super::Field = num("hr_bpm", "Heart rate", "beats/min", 20.0, 250.0, 1.0);
-const SBP: super::Field = num("sbp_mmhg", "Systolic blood pressure", "mmHg", 40.0, 260.0, 1.0);
+const HR: super::Field =
+    num("hr_bpm", "Heart rate", "beats/min", 20.0, 250.0, 1.0).normal_as(normals::HEART_RATE);
+const SBP: super::Field =
+    num("sbp_mmhg", "Systolic blood pressure", "mmHg", 40.0, 260.0, 1.0).normal_as(normals::SBP_MM_HG);
 
 pub const SHOCK_INDEX: CalcSpec = CalcSpec {
     id: "shock_index",
@@ -69,6 +71,7 @@ pub const OAKLAND: CalcSpec = CalcSpec {
         HR,
         SBP,
         num("hb_g_dl", "Haemoglobin", "g/dL", 2.0, 25.0, 0.1)
+            .normal_as(normals::HB_G_DL)
             .hint("The book's table is in g/L: 7 g/dL = 70 g/L."),
     ],
     source: "Oakland 2017; book Gastroenterology Lecture 7, Table 1 (pp. 228–229)",

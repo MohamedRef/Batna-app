@@ -1009,6 +1009,31 @@ pub mod calc {
     pub const FILL: &str = "املا البيانات وهتطلع النتيجة هنا.";
     pub const MISSING: &str = "ناقص";
     pub const INVALID: &str = "راجع القيمة دي";
+    /// A number outside what a body can show (`calc::IMPOSSIBLE`).
+    pub fn impossible(range: &str, unit: &str) -> String {
+        let unit = if unit.is_empty() { String::new() } else { format!(" {unit}") };
+        // The range is isolated (FSI…PDI) so it keeps its LTR order.
+        format!("الرقم ده مش ممكن هنا. اكتب رقم في المدى \u{2068}{range}{unit}\u{2069}، وراجع الوحدة.")
+    }
+    /// Other refusals a calculator gives, by its English reason.
+    pub fn reason(reason: &str) -> Option<&'static str> {
+        Some(match reason {
+            "higher than the serum albumin" => {
+                "ألبومين الاستسقاء مايبقاش أعلى من ألبومين الدم. راجع الرقمين والوحدة."
+            }
+            "lower than the ascitic albumin" => {
+                "البروتين الكلي في الاستسقاء مايبقاش أقل من الألبومين اللي فيه."
+            }
+            _ => return None,
+        })
+    }
+    /// Under a number box: its normal range, or which way it is out of it.
+    pub const NORMAL: &str = "الطبيعي:";
+    pub const HIGH: &str = "↑ أعلى من الطبيعي:";
+    pub const LOW: &str = "↓ أقل من الطبيعي:";
+    /// "رجالة 13.5–17.5 · ستات 12–16 g/dL" until he picks the sex.
+    pub const MEN: &str = "رجالة";
+    pub const WOMEN: &str = "ستات";
     pub const OPTIONAL: &str = "اختياري";
     pub const YES: &str = "أيوه";
     pub const NO: &str = "لأ";

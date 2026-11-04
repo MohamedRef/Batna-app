@@ -605,4 +605,87 @@ mod tests {
         assert_eq!(fold("٤٨ ساعة"), "48 ساعه");
         assert_eq!(fold("MELD-Na"), "meld-na");
     }
+
+    #[test]
+    fn every_calculator_has_its_own_search_words_or_none() {
+        // Each keyword list finds its own calculator.
+        for spec in calc::all() {
+            for word in keywords(spec.id).split_whitespace() {
+                assert!(matches(spec, word), "{} not found by its keyword {word}", spec.id);
+            }
+        }
+        assert_eq!(keywords("no_such_calculator"), "");
+    }
+
+    #[test]
+    fn search_ranks_names_that_start_with_the_query_first() {
+        let child = calc::spec("child_pugh").unwrap();
+        assert_eq!(rank(child, "child"), 0);
+        assert_eq!(rank(child, "pugh"), 1);
+        assert_eq!(rank(child, "cirrhosis"), 2);
+        assert_eq!(rank(calc::spec("meld_na").unwrap(), "meldna"), 0, "squashed start");
+    }
+
+    #[test]
+    fn search_results_and_an_empty_search_group_as_the_screen_shows_them() {
+        let g = groups("fib4", None, &["meld"], &["apri"]);
+        assert_eq!(g.len(), 1, "a search hides pins, recents and areas");
+        assert_eq!((g[0].key, g[0].with_area, g[0].label.as_str()), ("results", true, tx::RESULTS));
+        assert!(groups("zzz", None, &[], &[]).is_empty());
+        let all = groups("", None, &[], &[]);
+        assert!(all.iter().all(|g| !g.with_area), "area sections don't repeat the area");
+        let keys: Vec<&str> = all.iter().map(|g| g.key).collect();
+        assert_eq!(keys, AREAS.map(area_key));
+    }
+
+    #[test]
+    fn area_keys_are_unique_and_round_trip_the_filter() {
+        let keys: std::collections::BTreeSet<&str> = AREAS.iter().map(|a| area_key(*a)).collect();
+        assert_eq!(keys.len(), AREAS.len());
+        for a in AREAS {
+            assert_eq!(AREAS.into_iter().find(|x| area_key(*x) == area_key(a)), Some(a));
+        }
+    }
+
+    #[component]
+    fn Host(id: &'static str, with_area: bool, shown: bool, current: bool, pinned: bool) -> Element {
+        rsx! { CalcRow { id, row: format!("calc-x-{id}"), with_area, shown, current, pinned, on_open: |_| {} } }
+    }
+
+    fn row(id: &'static str, with_area: bool, shown: bool, current: bool, pinned: bool) -> String {
+        let mut dom = VirtualDom::new_with_props(Host, HostProps { id, with_area, shown, current, pinned });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn a_row_shows_the_name_its_line_and_where_it_sits() {
+        let html = row("saag", true, true, false, false);
+        assert!(html.contains("SAAG") && html.contains(tx::blurb("saag").unwrap()), "{html}");
+        assert!(
+            html.contains(&format!("<span class=\"calc-row-area\">{}</span>", tx::AREA_ASCITES)),
+            "a search result names its area"
+        );
+        assert!(html.contains("id=\"calc-x-saag\""));
+        assert!(html.contains("data-shown=\"true\"") && html.contains("aria-current=\"false\""));
+        assert!(html.contains(&format!("aria-label=\"{}: SAAG\"", tx::PIN)));
+        let plain = row("saag", false, false, true, true);
+        assert!(!plain.contains("calc-row-area"), "{plain}");
+        assert!(plain.contains("data-shown=\"false\"") && plain.contains("aria-current=\"true\""));
+        assert!(plain.contains("aria-pressed=\"true\""), "pinned: {plain}");
+        assert!(row("no_such", true, true, true, true).is_empty());
+    }
+
+    #[test]
+    fn the_wide_pin_says_pinned_or_pin() {
+        let on =
+            dioxus::ssr::render_element(rsx! { PinButton { id: "meld", pinned: true, with_label: true } });
+        let label = |t: &str| format!("<span>{t}</span>");
+        assert!(on.contains(&label(tx::PINNED)) && on.contains("aria-pressed=\"true\""), "{on}");
+        assert!(on.contains(&format!("title=\"{}\"", tx::UNPIN)), "{on}");
+        let off =
+            dioxus::ssr::render_element(rsx! { PinButton { id: "meld", pinned: false, with_label: true } });
+        assert!(off.contains(&label(tx::PIN)) && off.contains("aria-pressed=\"false\""), "{off}");
+        assert!(off.contains(&format!("title=\"{}\"", tx::PIN)), "{off}");
+    }
 }

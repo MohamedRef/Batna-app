@@ -742,9 +742,20 @@ pub mod stats {
     pub const ACTIVITY_UNIT: &str = "دقيقة / يوم";
     pub const ACTIVITY_HINT: &str = "افتح خطة الامتحان والأيام الجاية";
     pub const ACTIVITY_EMPTY: &str = "مفيش مذاكرة متسجّلة في الفترة دي لسه.";
-    pub const DAYS_STUDIED: &str = "أيام ذاكرت فيهم";
-    pub const MINUTES: &str = "دقيقة تركيز";
-    pub const ANSWERS: &str = "سؤال وكارت جاوبتهم";
+    /// The labels under the period's big numbers: the bare noun agrees
+    /// with the number ("1 يوم ذاكرت فيه", "5 أيام ذاكرت فيهم", "5 دقايق").
+    pub fn days_studied(n: u32) -> String {
+        use super::count::{DAY, word};
+        format!("{} ذاكرت {}", word(n, &DAY), if n == 1 { "فيه" } else { "فيهم" })
+    }
+    pub fn minutes(n: u32) -> String {
+        use super::count::{MINUTE, word};
+        format!("{} تركيز", word(n, &MINUTE))
+    }
+    pub fn answers(n: u32) -> String {
+        use super::count::{ITEM, word};
+        format!("{} {}", word(n, &ITEM), if n == 1 { "جاوبته" } else { "جاوبتهم" })
+    }
     pub const MONTH_START: &str = "من 30 يوم";
     pub const TODAY: &str = "النهارده";
     pub fn day_bar(minutes: u32, answers: u32) -> String {
@@ -1098,7 +1109,7 @@ pub mod calc {
             ("osmolal_gap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
             ("acr_eular_2010_ra", "large_joints") => "الكتف والكوع والحوض والركبة والكاحل.",
             ("acr_eular_2010_ra", "small_joints") => {
-                "الـ MCP والـ PIP والـ MTP من ٢ لـ ٥ والـ IP بتاع الإبهام والرسغ."
+                "الـ MCP والـ PIP والـ MTP من 2 لـ 5 والـ IP بتاع الإبهام والرسغ."
             }
             ("caspar", "inflammatory_disease") => "شرط الدخول: CASPAR بتتطبّق عليه بس.",
             ("asas_axial_spa", "back_pain_3_months_onset_45") => {
@@ -1543,9 +1554,9 @@ pub mod cloud {
     pub const PW_HOW: &str = "على أي جهاز: افتح باطنة، ومن «المزامنة» اكتب اسم المستخدم والباسورد.";
     pub const PW_NONE: &str =
         "اختار اسم مستخدم وباسورد عشان تدخل من أي جهاز من غير جيميل. حسابك هو هو، فكل حاجة بتتزامن.";
-    pub const USERNAME_HINT: &str = "من ٣ لـ ٣٢: حروف إنجليزي صغيرة وأرقام و . _ -";
+    pub const USERNAME_HINT: &str = "من 3 لـ 32: حروف إنجليزي صغيرة وأرقام و . _ -";
     pub const NEW_PASSWORD: &str = "الباسورد الجديد";
-    pub const PASSWORD_HINT: &str = "١٠ حروف على الأقل. جملة قصيرة تفتكرها أحسن من كلمة صعبة.";
+    pub const PASSWORD_HINT: &str = "10 حروف على الأقل. جملة قصيرة تفتكرها أحسن من كلمة صعبة.";
     pub const PASSWORD_AGAIN: &str = "اكتبه تاني";
     pub const PW_SAVE: &str = "احفظ";
     pub const PW_SAVING: &str = "بيحفظ…";
@@ -1563,8 +1574,8 @@ pub mod cloud {
         format!("محاولات غلط كتير، فالدخول بالاسم ده واقف شوية. جرّب تاني بعد {}.", count(minutes, &MINUTE))
     }
     pub const P_TAKEN: &str = "اسم المستخدم ده محجوز. اختار اسم تاني.";
-    pub const P_BAD_USERNAME: &str = "اسم المستخدم من ٣ لـ ٣٢: حروف إنجليزي وأرقام و . _ - بس.";
-    pub const P_SHORT_PASSWORD: &str = "الباسورد لازم يبقى ١٠ حروف على الأقل.";
+    pub const P_BAD_USERNAME: &str = "اسم المستخدم من 3 لـ 32: حروف إنجليزي وأرقام و . _ - بس.";
+    pub const P_SHORT_PASSWORD: &str = "الباسورد لازم يبقى 10 حروف على الأقل.";
     pub const P_MISMATCH: &str = "الباسوردين مش زي بعض.";
 }
 
@@ -1633,8 +1644,7 @@ pub mod settings {
     pub const CONTENT: &str = "المحتوى";
     pub const LECTURES_WRITTEN: &str = "المحاضرات المكتوبة:";
     pub const SOURCE: &str = "المصدر";
-    pub const BOOK: &str =
-        "Internal Medicine Postgraduate Lectures, Alexandria Faculty of Medicine (2025), part 1";
+    pub const BOOK: &str = "Internal Medicine Postgraduate Lectures, Alexandria Faculty of Medicine (2025), parts 1–5; Basics of Research lecture slides";
 
     pub const DIAG: &str = "اللي حصل من مشاكل";
     pub const DIAG_EMPTY: &str = "مفيش مشاكل لحد دلوقتي.";
@@ -1843,6 +1853,9 @@ pub mod remind {
     pub const CHANNEL_ABOUT: &str = "تذكير هادي بمراجعة اليوم";
     pub const PHONE_ONLY: &str =
         "التذكير بيرن من تطبيق باطنة المتثبّت على الموبايل أو الماك، مش من نسخة التطوير.";
+    /// The web app: a browser tab can't ring when it is closed.
+    pub const WEB_ONLY: &str =
+        "المتصفح مش بيرن بالتذكير. التذكير بيرن من تطبيق باطنة على الموبايل أو الماك، وتظبطه من هناك.";
     pub const MAC_HINT: &str =
         "على الماك الإشعار بيظهر حتى لو باطنة مقفولة. لو ما ظهرش، اسمح لباطنة من إعدادات النظام › الإشعارات.";
     pub const DAILY: &str = "تذكير المذاكرة اليومي";

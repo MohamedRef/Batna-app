@@ -642,9 +642,13 @@ impl SessionVault for Forgetful {
 #[test]
 fn batna_cloud_failing_a_sign_in_is_not_retried() {
     let cloud = FakeCloud::start();
-    let mut phone = sign_in(&cloud, "ok");
-    // Google answers; Batna Cloud's edge then answers 502.
+    let mut phone = Device::new(&cloud, "phone", Some(google(&cloud, "ok")), |_, _| None);
+    phone.wait_status("signed out", |s| s.sync == SyncState::SignedOut);
+    // Google answers; Batna Cloud's edge then answers 502. Armed before the
+    // sign-in starts: the fake Google answers at once, so arming it after
+    // `sign_in` returned raced the exchange on a busy runner.
     cloud.fail_next(1);
+    phone.send(Command::SignInGoogle);
     let s = phone.wait_status("failed", |s| s.problem.is_some());
     assert_eq!(s.problem, Some(Problem::SignInFailed));
     assert!(!s.finishing_sign_in);

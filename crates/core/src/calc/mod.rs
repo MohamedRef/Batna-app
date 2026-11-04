@@ -807,6 +807,7 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("mmse.borderline", &["borderline"]),
     ("mmse.marked", &["marked"]),
     ("mmse.severe", &["severe"]),
+    ("abi.non_compressible", &["non-compressible", "noncompressible"]),
     ("abi.normal", &["normal"]),
     ("abi.pad", &["pad", "peripheral arterial disease"]),
     ("abi.critical", &["critical"]),

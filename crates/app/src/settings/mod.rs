@@ -244,7 +244,8 @@ fn SectionList(current: Section) -> Element {
                 .as_ref()
                 .and_then(crate::update::view::summary)
                 .unwrap_or_else(|| s.summary().to_string()),
-            Section::About => format!("{} {}", tx::VERSION, env!("CARGO_PKG_VERSION")),
+            // LRI…PDI: "1.0.0-alpha.1" keeps its order inside the Arabic line.
+            Section::About => format!("{} \u{2066}{}\u{2069}", tx::VERSION, env!("CARGO_PKG_VERSION")),
             _ => s.summary().to_string(),
         }
     };

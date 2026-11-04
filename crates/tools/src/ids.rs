@@ -77,8 +77,13 @@ pub fn pack_at(root: &Path) -> Res<Pack> {
 /// The content at git commit `rev`: `content/` exported to a scratch
 /// directory (removed afterwards) and read like a checkout.
 pub fn pack_at_rev(root: &Path, rev: &str) -> Res<Pack> {
+    // One scratch directory per call: tests run in parallel threads of one
+    // process, and two calls for the same rev must not share (and delete)
+    // each other's directory.
+    static CALLS: std::sync::atomic::AtomicUsize = std::sync::atomic::AtomicUsize::new(0);
+    let call = CALLS.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
     let scratch = std::env::temp_dir().join(format!(
-        "batna-ids-{}-{}",
+        "batna-ids-{}-{call}-{}",
         std::process::id(),
         rev.replace(['/', '^', '~'], "_")
     ));

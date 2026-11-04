@@ -1903,6 +1903,7 @@ pub mod onboard {
     }
     pub const LATER: &str = "بعد كده";
     pub const CONTINUE: &str = "كمّل";
+    pub const HAVE_ACCOUNT: &str = "بتذاكر على باطنة قبل كده؟ ادخل على حسابك";
     pub const WELCOME_TITLE: &str = "مذاكرة تناسب يومك.";
     pub const WELCOME_BODY: &str = "درس قصير، محاولة تفتكر، ومراجعة تثبّت الفهم.";
     pub const WELCOME_NOTE: &str =

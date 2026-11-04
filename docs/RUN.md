@@ -20,7 +20,7 @@ Study reminders on the Mac come from UNUserNotificationCenter and only work from
 
 The Mac build (clippy, tests and `dx bundle`) runs in `.github/workflows/mac.yml` nightly and by hand (Actions › Mac › Run workflow), never on pull requests or merges (Mohamed, 2026-10-29): hosted Mac runners are slow and sometimes unavailable for most of an hour. No PR waits for it. Running `just check` plus `just bundle-mac` on the Mac checks the same things.
 
-Line coverage: `just coverage` (needs `cargo install cargo-llvm-cov --locked` and `rustup component add llvm-tools-preview`) prints coverage per file and fails below `scripts/coverage-floor`, like CI's `coverage` job (docs/TESTING.md).
+Line coverage: `just coverage` (needs `cargo install cargo-llvm-cov --locked` and `rustup component add llvm-tools-preview`) prints coverage per file and fails below `scripts/coverage-floor`, like the scheduled `Coverage` workflow (docs/TESTING.md).
 
 Release builds (`just apk`, `just install-android`, `just bundle-mac`), their one-time keys, the CI preview APK and updates over the air are described in [RELEASE.md](RELEASE.md). The alpha is out: install `batna-<version>.apk` and `Batna-<version>-mac.zip` from the `batna-v<version>` release on GitHub (RELEASE.md §4; the Mac app needs `xattr -dr com.apple.quarantine /Applications/Batna.app` once), and it updates itself from the `batna-alpha` feed. The CI preview APK on the `batna-preview` prerelease follows `main`: built every 4 hours when it changed, or by hand (Actions › Android preview APK › Run workflow). Each update says what changed (from `changes/*.yaml`, RELEASE.md §5): before installing, once after, and in Settings › التحديثات › سجل التغييرات.
 

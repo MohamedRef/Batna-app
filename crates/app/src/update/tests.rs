@@ -1116,3 +1116,14 @@ fn only_a_feed_answer_counts_and_a_huge_feed_is_refused() {
     assert_eq!(get_small(&format!("{url}/absent.json")), Err(Failure::Network));
     assert_eq!(update_failure(UpdateError::TooNew), Failure::TooNew);
 }
+
+#[test]
+fn the_background_job_on_a_development_build_never_notifies() {
+    // Debug builds are off (DevBuild): no feed is fetched, nothing to post.
+    let dir = tempfile::tempdir().unwrap();
+    assert!(background_check(dir.path(), false, true).is_none());
+    assert!(background_check(dir.path(), true, false).is_none(), "notifications off");
+    background_shown(dir.path(), "0.2.0+50");
+    assert_eq!(job_updater(dir.path()).status().prefs.notified.as_deref(), Some("0.2.0+50"));
+    assert!(get().is_none(), "a job-only process has no UI updater");
+}

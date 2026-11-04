@@ -103,6 +103,21 @@ pub fn SaveTo(path: String) -> Element {
 
 #[component]
 pub fn ExportCard() -> Element {
+    rsx! { ExportCardIn { dir: ExportDir(store::export_dir) } }
+}
+
+/// Where exports are written: Downloads in the app, a scratch folder in tests.
+#[derive(Clone, Copy)]
+struct ExportDir(#[cfg_attr(target_arch = "wasm32", allow(dead_code))] fn() -> Result<PathBuf, String>);
+
+impl PartialEq for ExportDir {
+    fn eq(&self, other: &Self) -> bool {
+        std::ptr::fn_addr_eq(self.0, other.0)
+    }
+}
+
+#[component]
+fn ExportCardIn(dir: ExportDir) -> Element {
     let mut outcome = use_signal(|| None::<Result<(String, u64), String>>);
     // Each export opens the "Save to" dialog afresh.
     let mut attempt = use_signal(|| 0u32);
@@ -110,7 +125,7 @@ pub fn ExportCard() -> Element {
         #[cfg(target_arch = "wasm32")]
         let result = download(store::shared(), &local_date(), store::now_ms());
         #[cfg(not(target_arch = "wasm32"))]
-        let result = store::export_dir()
+        let result = (dir.0)()
             .and_then(|dir| save(store::shared(), &dir, &local_date(), store::now_ms()))
             .map(|(p, rows)| (p.display().to_string(), rows));
         attempt += 1;
@@ -120,23 +135,30 @@ pub fn ExportCard() -> Element {
         crate::ui::Card {
             h2 { {tx::EXPORT_TITLE} }
             button { class: "btn btn-primary", onclick: move |_| run(), {tx::EXPORT_BUTTON} }
-            match outcome() {
-                Some(Ok((path, rows))) => rsx! {
-                    div { role: "status",
-                        p { class: "small", {tx::export_saved(rows)} }
-                        p { class: "small", bdi { dir: "ltr", "{path}" } }
-                        if cfg!(target_os = "android") {
-                            SaveTo { key: "{attempt}", path }
-                        }
-                    }
-                },
-                // Nothing was written; the same export runs again.
-                Some(Err(e)) => rsx! {
-                    crate::persistence::WriteFailed { message: tx::EXPORT_FAILED, detail: e, on_retry: move |_| run() }
-                },
-                None => rsx! {},
+            if let Some(result) = outcome() {
+                ExportResult { key: "{attempt}", result, on_retry: move |_| run() }
             }
         }
+    }
+}
+
+/// What the last export did: the file and its row count, or why it failed.
+#[component]
+fn ExportResult(result: Result<(String, u64), String>, on_retry: EventHandler) -> Element {
+    match result {
+        Ok((path, rows)) => rsx! {
+            div { role: "status",
+                p { class: "small", {tx::export_saved(rows)} }
+                p { class: "small", bdi { dir: "ltr", "{path}" } }
+                if cfg!(target_os = "android") {
+                    SaveTo { path }
+                }
+            }
+        },
+        // Nothing was written; the same export runs again.
+        Err(e) => rsx! {
+            crate::persistence::WriteFailed { message: tx::EXPORT_FAILED, detail: e, on_retry: move |_| on_retry(()) }
+        },
     }
 }
 
@@ -158,5 +180,95 @@ mod tests {
             std::fs::read_dir(&dir).unwrap().all(|e| !e.unwrap().path().to_string_lossy().ends_with(".part"))
         );
         let _ = std::fs::remove_dir_all(dir);
+    }
+
+    #[test]
+    fn a_folder_that_cannot_be_made_fails_without_a_file() {
+        let base = std::env::temp_dir().join(format!("batna-export-block-{}", store::now_ms()));
+        std::fs::write(&base, b"a file, not a folder").unwrap();
+        let s = Store::open_in_memory().unwrap();
+        let err = save(&s, &base.join("inside"), "2026-10-27", 1).unwrap_err();
+        assert!(err.contains("inside"), "{err}");
+        let _ = std::fs::remove_file(base);
+    }
+
+    #[test]
+    fn the_local_date_is_iso() {
+        let d = local_date();
+        assert_eq!(d.len(), 10, "{d}");
+        assert!(chrono::NaiveDate::parse_from_str(&d, "%Y-%m-%d").is_ok(), "{d}");
+    }
+
+    #[test]
+    fn the_card_offers_one_button_before_any_export() {
+        crate::store::use_memory_store();
+        let html = dioxus::ssr::render_element(rsx! { ExportCard {} });
+        assert!(html.contains(tx::EXPORT_TITLE) && html.contains(tx::EXPORT_BUTTON), "{html}");
+        assert!(!html.contains("role=\"status\"") && !html.contains(tx::EXPORT_FAILED), "{html}");
+    }
+
+    fn shown(result: Result<(String, u64), String>) -> String {
+        #[derive(Props, Clone, PartialEq)]
+        struct Case {
+            result: Result<(String, u64), String>,
+        }
+        fn root(c: Case) -> Element {
+            rsx! { ExportResult { result: c.result, on_retry: |_| {} } }
+        }
+        let mut dom = VirtualDom::new_with_props(root, Case { result });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn a_result_names_the_file_or_the_failure() {
+        let ok: Result<(String, u64), String> = Ok(("/data/batna-export-2026-10-27.json".into(), 1200));
+        let html = shown(ok);
+        assert!(html.contains(&tx::export_saved(1200)), "{html}");
+        assert!(html.contains("batna-export-2026-10-27.json") && html.contains("role=\"status\""), "{html}");
+        assert!(!html.contains(tx::EXPORT_SAVE_TO), "only Android hands it on: {html}");
+
+        let bad: Result<(String, u64), String> = Err("disk full".into());
+        let html = shown(bad);
+        assert!(html.contains(tx::EXPORT_FAILED) && html.contains("disk full"), "{html}");
+        assert!(html.contains("role=\"alert\""), "{html}");
+    }
+
+    fn scratch() -> Result<PathBuf, String> {
+        static DIR: std::sync::OnceLock<tempfile::TempDir> = std::sync::OnceLock::new();
+        Ok(DIR.get_or_init(|| tempfile::tempdir().unwrap()).path().to_path_buf())
+    }
+
+    fn nowhere() -> Result<PathBuf, String> {
+        Err("no Downloads folder".into())
+    }
+
+    #[test]
+    fn a_tap_writes_the_backup_and_says_where() {
+        use crate::tap_dom::TestDom;
+        crate::store::use_memory_store();
+        let mut t = TestDom::of(|| rsx! { ExportCardIn { dir: ExportDir(scratch) } });
+        t.click(tx::EXPORT_BUTTON);
+        let html = t.html();
+        assert!(html.contains("role=\"status\"") && html.contains("batna-export-"), "{html}");
+        let written: Vec<_> = std::fs::read_dir(scratch().unwrap()).unwrap().collect();
+        assert!(!written.is_empty());
+
+        let mut t = TestDom::of(|| rsx! { ExportCardIn { dir: ExportDir(nowhere) } });
+        t.click(tx::EXPORT_BUTTON);
+        assert!(
+            t.html().contains(tx::EXPORT_FAILED) && t.html().contains("no Downloads folder"),
+            "{}",
+            t.html()
+        );
+        t.click("class=\"btn btn-secondary save-retry\"");
+        assert!(t.html().contains("no Downloads folder"), "the same export ran again");
+    }
+
+    #[test]
+    fn away_from_android_save_to_fails_and_offers_a_retry() {
+        let html = dioxus::ssr::render_element(rsx! { SaveTo { path: "/tmp/batna-export.json" } });
+        assert!(html.contains(tx::EXPORT_SAVE_FAILED) && html.contains(tx::EXPORT_ANDROID_HINT), "{html}");
+        assert!(html.contains(tx::EXPORT_SAVE_TO), "{html}");
     }
 }

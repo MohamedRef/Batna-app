@@ -114,23 +114,37 @@ pub fn use_local_reminders() {
             let b = review.backend.borrow();
             (b.due_forecast(14, now), b.answers_today(now))
         };
-        let times = if prefs.on { prefs.times } else { Vec::new() };
-        let inputs = plan::Inputs {
-            here,
-            times: &times,
-            weekdays,
-            due: &due,
-            // He studied today and nothing is left due: today's done.
-            target_met: answered > 0 && due.first().is_none_or(|&d| d == 0),
-            now_ms: now.max(0) as u64,
-            utc_offset_min: utc_offset_minutes(),
-        };
-        // The fallback first, so a reminder firing in between finds it.
-        let repeat = plan::repeat(&inputs).and_then(|r| serde_json::to_string(&r).ok());
-        native::repeat(repeat.as_deref().unwrap_or("{}"));
-        let items = plan::schedule(&inputs);
-        native::schedule(&serde_json::to_string(&items).unwrap_or_else(|_| "[]".into()));
+        let (repeat, items) = armed(&prefs, here, weekdays, &due, answered, now);
+        native::repeat(&repeat);
+        native::schedule(&items);
     });
+}
+
+/// What this device arms: the fallback repeat and the scheduled reminders,
+/// as the JSON the native side reads (`{}` and `[]` when nothing rings).
+fn armed(
+    prefs: &RemindPrefs,
+    here: bool,
+    weekdays: [bool; 7],
+    due: &[u32],
+    answered: usize,
+    now: i64,
+) -> (String, String) {
+    let times = if prefs.on { prefs.times.clone() } else { Vec::new() };
+    let inputs = plan::Inputs {
+        here,
+        times: &times,
+        weekdays,
+        due,
+        // He studied today and nothing is left due: today's done.
+        target_met: answered > 0 && due.first().is_none_or(|&d| d == 0),
+        now_ms: now.max(0) as u64,
+        utc_offset_min: utc_offset_minutes(),
+    };
+    // The fallback first, so a reminder firing in between finds it.
+    let repeat = plan::repeat(&inputs).and_then(|r| serde_json::to_string(&r).ok());
+    let items = plan::schedule(&inputs);
+    (repeat.unwrap_or_else(|| "{}".into()), serde_json::to_string(&items).unwrap_or_else(|_| "[]".into()))
 }
 
 pub(crate) fn hhmm(t: u16) -> String {
@@ -300,6 +314,9 @@ fn RemindView(local: bool, mac: bool, allowed: Option<bool>, unrestricted: Optio
 mod tests {
     use super::*;
 
+    /// Tests that save to the shared test store take turns.
+    static SAVING: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
     #[test]
     fn times_round_trip_through_the_time_input() {
         assert_eq!(parse_hhmm("19:00"), Some(19 * 60));
@@ -421,5 +438,97 @@ mod tests {
     fn old_or_partial_settings_fall_back_to_defaults() {
         let p: RemindPrefs = serde_json::from_str(r#"{"on":false}"#).unwrap();
         assert_eq!(p, RemindPrefs { on: false, ..RemindPrefs::default() });
+    }
+
+    #[test]
+    fn only_a_device_that_rings_with_times_on_arms_anything() {
+        let now = 20_400 * 86_400_000 + 9 * 3_600_000;
+        let all = [true; 7];
+        let on = RemindPrefs { on: true, times: vec![20 * 60, 23 * 60] };
+        let (repeat, items) = armed(&on, true, all, &[5, 3], 0, now);
+        assert!(repeat.contains("\"20:00\"") && repeat.contains("\"23:00\""), "{repeat}");
+        let items: Vec<serde_json::Value> = serde_json::from_str(&items).unwrap();
+        assert!(!items.is_empty(), "today's evening reminders at least");
+
+        for (prefs, here, days) in [
+            (RemindPrefs { on: false, ..on.clone() }, true, all),
+            (on.clone(), false, all),
+            (on.clone(), true, [false; 7]),
+        ] {
+            assert_eq!(armed(&prefs, here, days, &[5], 0, now), ("{}".to_string(), "[]".to_string()));
+        }
+        // Studied today with nothing left: today stays quiet, later days still ring.
+        let (_, met) = armed(&on, true, all, &[0, 4], 12, now);
+        let (_, open) = armed(&on, true, all, &[2, 4], 12, now);
+        let first = |j: &str| serde_json::from_str::<Vec<serde_json::Value>>(j).unwrap()[0]["date"].clone();
+        assert!(first(&met).as_str() > first(&open).as_str(), "{met} vs {open}");
+    }
+
+    #[test]
+    fn taps_change_the_times_and_who_rings() {
+        let _one_at_a_time = SAVING.lock().unwrap_or_else(|e| e.into_inner());
+        use crate::i18n::remind as tx;
+        use crate::tap_dom::TestDom;
+        crate::store::use_memory_store();
+        let mut t = TestDom::new(VirtualDom::new_with_props(root, phone()));
+        t.click(tx::ADD);
+        assert!(t.html().contains("value=\"21:00\""), "two hours after the last: {}", t.html());
+        assert!(!t.html().contains(tx::ADD), "three is the most");
+        t.input_event("change", "value=\"08:00\"", "06:30");
+        assert!(t.html().contains("value=\"06:30\""), "{}", t.html());
+        t.input_event("change", "value=\"06:30\"", "not a time");
+        assert!(t.html().contains("value=\"06:30\""), "an unreadable time changes nothing");
+        t.click(tx::REMOVE);
+        assert!(!t.html().contains("value=\"06:30\"") && t.html().contains(tx::ADD), "{}", t.html());
+        assert_eq!(t.with(RemindPrefs::load).times, vec![19 * 60, 21 * 60], "saved as shown");
+
+        // This device stops ringing, then the reminders go off altogether.
+        // The second On/Off pair is this device's.
+        t.click_nth(tx::OFF, 1);
+        assert!(!t.with(|| *HERE.peek()));
+        t.click_nth(tx::ON, 1);
+        assert!(t.with(|| *HERE.peek()));
+        t.click(tx::OFF);
+        assert!(!t.html().contains(tx::TIMES) && !t.with(|| PREFS.peek().on), "{}", t.html());
+        t.click(tx::ON);
+        assert!(t.html().contains(tx::TIMES) && t.with(|| PREFS.peek().on));
+    }
+
+    #[test]
+    fn the_fix_buttons_do_nothing_harmful_on_a_desktop() {
+        use crate::i18n::remind as tx;
+        use crate::tap_dom::TestDom;
+        crate::store::use_memory_store();
+        let case = Case { allowed: Some(false), unrestricted: Some(false), ..phone() };
+        let mut t = TestDom::new(VirtualDom::new_with_props(root, case));
+        for button in [tx::ALLOW, tx::OPEN_NOTIFICATIONS, tx::OPEN_APP] {
+            t.click(button);
+            assert!(t.html().contains(button), "still offered: {button}");
+        }
+    }
+
+    #[test]
+    fn a_settings_section_and_the_planner_mount_off_device() {
+        let _one_at_a_time = SAVING.lock().unwrap_or_else(|e| e.into_inner());
+        use crate::i18n::remind as tx;
+        crate::store::use_memory_store();
+        fn app() -> Element {
+            crate::store::use_provide_review();
+            use_local_reminders();
+            rsx! { RemindSection {} }
+        }
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        let page = dioxus::ssr::render(&dom);
+        assert!(page.contains(tx::PHONE_ONLY), "this desktop build can't ring: {page}");
+        dom.in_runtime(|| {
+            let saved = RemindPrefs { on: true, times: vec![7 * 60] };
+            saved.clone().save();
+            *PREFS.write() = RemindPrefs::default();
+            reload();
+            assert_eq!(*PREFS.peek(), saved);
+            set_here(false);
+            assert!(!*HERE.peek());
+        });
     }
 }

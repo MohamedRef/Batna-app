@@ -45,7 +45,23 @@ enum State {
 
 #[component]
 pub fn AnkiExport() -> Element {
-    let mut state = use_signal(|| State::Idle);
+    rsx! { AnkiCard { start: State::Idle, save: Save(save_and_open) } }
+}
+
+/// Where a built deck goes: saved and opened in the app, somewhere harmless in tests.
+#[derive(Clone, Copy)]
+struct Save(fn(&[u8]) -> Result<String, String>);
+
+impl PartialEq for Save {
+    fn eq(&self, other: &Self) -> bool {
+        std::ptr::fn_addr_eq(self.0, other.0)
+    }
+}
+
+/// The export card from `start` (idle in the app).
+#[component]
+fn AnkiCard(start: State, save: Save) -> Element {
+    let mut state = use_signal(|| start.clone());
     let review = use_review();
     let lib = Library::get();
     let lectures = lib.lectures.len();
@@ -59,7 +75,7 @@ pub fn AnkiExport() -> Element {
         spawn(async move {
             futures_yield().await;
             let backend = review.backend.borrow();
-            state.set(match export_now(|id| backend.judgement(id)) {
+            state.set(match export_now(|id| backend.judgement(id), save) {
                 Ok((notes, place)) => State::Done { notes, place },
                 Err(e) => State::Failed(e),
             });
@@ -146,7 +162,17 @@ fn verdicts<'a>(lectures: &[Lecture], judgement: impl Fn(&str) -> Option<&'a Jud
 
 /// Builds the deck from the embedded content and his verdicts; returns the
 /// note count and where the file went.
-fn export_now<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(usize, String), String> {
+fn export_now<'a>(
+    judgement: impl Fn(&str) -> Option<&'a Judgement>,
+    save: Save,
+) -> Result<(usize, String), String> {
+    let (notes, bytes) = build_deck(judgement)?;
+    let place = (save.0)(&bytes)?;
+    Ok((notes, place))
+}
+
+/// The `.apkg` bytes and how many notes they hold.
+fn build_deck<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(usize, Vec<u8>), String> {
     let mut lectures: Vec<_> = Library::get().lectures.values().cloned().collect();
     // His own cards ride along as `Batna::My own cards`.
     lectures.extend(crate::own::lecture().cloned());
@@ -164,8 +190,7 @@ fn export_now<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(
         .map(|d| d.as_millis() as i64)
         .unwrap_or(0);
     let bytes = batna_anki::to_apkg(&deck, now_ms)?;
-    let place = save_and_open(&bytes)?;
-    Ok((deck.notes.len(), place))
+    Ok((deck.notes.len(), bytes))
 }
 
 #[cfg(target_os = "android")]
@@ -183,10 +208,7 @@ fn save_and_open(bytes: &[u8]) -> Result<String, String> {
 fn save_and_open(bytes: &[u8]) -> Result<String, String> {
     let home =
         std::env::var_os("HOME").or_else(|| std::env::var_os("USERPROFILE")).ok_or("no home folder")?;
-    let downloads = std::path::Path::new(&home).join("Downloads");
-    let dir = if downloads.is_dir() { downloads } else { std::path::PathBuf::from(home) };
-    let path = dir.join(FILE_NAME);
-    std::fs::write(&path, bytes).map_err(|e| format!("{}: {e}", path.display()))?;
+    let path = save_in(std::path::Path::new(&home), bytes)?;
     let opener = if cfg!(target_os = "macos") {
         "open"
     } else if cfg!(windows) {
@@ -199,8 +221,104 @@ fn save_and_open(bytes: &[u8]) -> Result<String, String> {
     Ok(path.display().to_string())
 }
 
+/// Writes the deck to `home`'s Downloads, or `home` itself without one.
+#[cfg(not(any(target_os = "android", target_arch = "wasm32")))]
+fn save_in(home: &std::path::Path, bytes: &[u8]) -> Result<std::path::PathBuf, String> {
+    let downloads = home.join("Downloads");
+    let dir = if downloads.is_dir() { downloads } else { home.to_path_buf() };
+    let path = dir.join(FILE_NAME);
+    std::fs::write(&path, bytes).map_err(|e| format!("{}: {e}", path.display()))?;
+    Ok(path)
+}
+
 #[cfg(test)]
 mod tests {
+    use super::*;
+
+    fn judged(item: &Item, verdict: Verdict) -> Judgement {
+        Judgement {
+            verdict,
+            edit: Default::default(),
+            note: None,
+            fingerprint: verify::fingerprint(item),
+            at_ms: 1,
+        }
+    }
+
+    #[test]
+    fn his_verdicts_shape_the_deck() {
+        let lib = Library::get();
+        // Unreviewed items: his verdict is what decides.
+        let open = |l: &&Lecture| {
+            l.items.len() >= 4
+                && l.items[..4].iter().all(|i| i.status == batna_core::content::Status::Unverified)
+        };
+        let lecture = lib.lectures.values().find(open).expect("unreviewed content").clone();
+        let items = &lecture.items;
+        let mut stale = judged(&items[3], Verdict::Wrong);
+        stale.fingerprint = "old text".into();
+        let js: BTreeMap<String, Judgement> = [
+            (items[0].id.clone(), judged(&items[0], Verdict::Approved)),
+            (items[1].id.clone(), judged(&items[1], Verdict::Edited)),
+            (items[2].id.clone(), judged(&items[2], Verdict::Wrong)),
+            (items[3].id.clone(), stale),
+        ]
+        .into();
+        let v = verdicts(std::slice::from_ref(&lecture), |id| js.get(id));
+        assert_eq!(
+            v.wrong,
+            BTreeSet::from([items[2].id.clone()]),
+            "✗ leaves the deck; a verdict on old text no longer counts"
+        );
+        assert_eq!(v.approved, BTreeSet::from([items[0].id.clone()]), "✓ is tagged approved");
+        assert_eq!(v.edits.keys().collect::<Vec<_>>(), [&items[1].id], "✎ carries his text");
+        assert!(!v.approved.contains(&items[1].id) && !v.wrong.contains(&items[0].id));
+    }
+
+    #[test]
+    fn the_deck_builds_and_lands_in_downloads() {
+        let (notes, bytes) = build_deck(|_| None).unwrap();
+        assert!(notes > 0 && bytes.starts_with(b"PK"));
+        let home = tempfile::tempdir().unwrap();
+        assert_eq!(save_in(home.path(), b"deck").unwrap(), home.path().join(FILE_NAME), "no Downloads: home");
+        std::fs::create_dir(home.path().join("Downloads")).unwrap();
+        let path = save_in(home.path(), b"deck").unwrap();
+        assert_eq!(path, home.path().join("Downloads").join(FILE_NAME));
+        assert_eq!(std::fs::read(path).unwrap(), b"deck");
+        assert!(save_in(&home.path().join("gone"), b"x").is_err());
+    }
+
+    fn render(start: State) -> String {
+        #[derive(Props, Clone, PartialEq)]
+        struct P {
+            start: State,
+        }
+        fn app(p: P) -> Element {
+            crate::store::use_provide_review();
+            rsx! { AnkiCard { start: p.start.clone(), save: Save(nowhere) } }
+        }
+        crate::store::use_memory_store();
+        let mut dom = VirtualDom::new_with_props(app, P { start });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn the_card_says_what_it_holds_and_how_the_export_went() {
+        let lib = Library::get();
+        let items: usize = lib.lectures.values().map(|l| l.items.len()).sum();
+        let page = render(State::Idle);
+        assert!(page.contains(tx::TITLE) && page.contains(tx::BUTTON), "{page}");
+        assert!(page.contains(&tx::contents(lib.lectures.len(), items)), "{page}");
+        let page = render(State::Working);
+        assert!(page.contains(tx::WORKING) && page.contains("disabled"), "{page}");
+        let page = render(State::Done { notes: 340, place: "/home/m/Downloads/batna.apkg".into() });
+        assert!(page.contains(&tx::done(340)) && page.contains(tx::SAVED_IN), "{page}");
+        assert!(page.contains("/home/m/Downloads/batna.apkg"));
+        let page = render(State::Failed("disk full".into()));
+        assert!(page.contains(tx::FAILED) && page.contains("disk full"), "{page}");
+    }
+
     #[test]
     fn the_embedded_content_exports() {
         let lectures: Vec<_> = super::Library::get().lectures.values().cloned().collect();
@@ -208,5 +326,65 @@ mod tests {
         let bytes = batna_anki::to_apkg(&deck, 0).unwrap();
         assert!(bytes.starts_with(b"PK"), "an .apkg is a zip");
         assert_eq!(deck.per_lecture.len(), lectures.len());
+    }
+
+    /// Keeps the deck in memory: tests never write to the real home folder.
+    fn nowhere(bytes: &[u8]) -> Result<String, String> {
+        if bytes.starts_with(b"PK") { Ok("memory".into()) } else { Err("not an .apkg".into()) }
+    }
+
+    fn broken(_: &[u8]) -> Result<String, String> {
+        Err("disk full".into())
+    }
+
+    #[test]
+    fn a_tap_builds_the_deck_and_says_where_it_went() {
+        use crate::tap_dom::TestDom;
+        #[derive(Props, Clone, PartialEq)]
+        struct P {
+            save: Save,
+        }
+        fn app(p: P) -> Element {
+            crate::store::use_provide_review();
+            rsx! { AnkiCard { start: State::Idle, save: p.save } }
+        }
+        crate::store::use_memory_store();
+        let mut t = TestDom::new(VirtualDom::new_with_props(app, P { save: Save(nowhere) }));
+        t.click(tx::BUTTON);
+        assert!(t.html().contains(tx::SAVED_IN) && t.html().contains("memory"), "{}", t.html());
+        let mut t = TestDom::new(VirtualDom::new_with_props(app, P { save: Save(broken) }));
+        t.click(tx::BUTTON);
+        assert!(t.html().contains(tx::FAILED) && t.html().contains("disk full"), "{}", t.html());
+    }
+
+    #[test]
+    fn retry_after_a_failure_exports_again() {
+        use crate::tap_dom::TestDom;
+        #[derive(Props, Clone, PartialEq)]
+        struct P {
+            start: State,
+        }
+        fn app(p: P) -> Element {
+            crate::store::use_provide_review();
+            rsx! { AnkiCard { start: p.start.clone(), save: Save(nowhere) } }
+        }
+        crate::store::use_memory_store();
+        let mut t = TestDom::new(VirtualDom::new_with_props(app, P { start: State::Idle }));
+        t.click(tx::BUTTON);
+        assert!(t.html().contains("memory"), "{}", t.html());
+
+        let mut t =
+            TestDom::new(VirtualDom::new_with_props(app, P { start: State::Failed("disk full".into()) }));
+        t.click("class=\"btn btn-secondary save-retry\"");
+        assert!(t.html().contains("memory") && !t.html().contains("disk full"), "{}", t.html());
+    }
+
+    #[test]
+    fn yielding_once_lets_the_label_paint() {
+        let waker = std::task::Waker::noop();
+        let mut cx = std::task::Context::from_waker(waker);
+        let mut f = std::pin::pin!(futures_yield());
+        assert!(f.as_mut().poll(&mut cx).is_pending());
+        assert!(f.as_mut().poll(&mut cx).is_ready());
     }
 }

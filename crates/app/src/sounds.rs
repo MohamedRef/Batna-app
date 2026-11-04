@@ -208,6 +208,9 @@ fn base64(bytes: &[u8]) -> String {
 mod tests {
     use super::*;
 
+    /// Tests that save to the shared test store take turns.
+    static SAVING: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
     #[test]
     fn base64_matches_the_rfc_vectors() {
         let cases = [("", ""), ("f", "Zg=="), ("fo", "Zm8="), ("foo", "Zm9v"), ("foobar", "Zm9vYmFy")];
@@ -241,5 +244,89 @@ mod tests {
     fn old_or_partial_settings_fall_back_to_defaults() {
         let p: SoundPrefs = serde_json::from_str(r#"{"chime":2}"#).unwrap();
         assert_eq!(p, SoundPrefs { chime: 2, ..SoundPrefs::default() });
+    }
+
+    #[derive(Props, Clone, PartialEq)]
+    struct Case {
+        prefs: SoundPrefs,
+    }
+
+    fn root(case: Case) -> Element {
+        use_hook(|| *PREFS.write() = case.prefs);
+        rsx! { SoundSection {} }
+    }
+
+    fn render(prefs: SoundPrefs) -> String {
+        crate::store::use_memory_store();
+        let mut dom = VirtualDom::new_with_props(root, Case { prefs });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn the_settings_card_shows_the_chosen_chime_and_tone() {
+        use crate::i18n::sound as tx;
+        let page = render(SoundPrefs { chime: 2, calm: 3, ..SoundPrefs::default() });
+        for text in [tx::TITLE, tx::SOUNDS, tx::RIGHT, tx::END] {
+            assert!(page.contains(text), "missing {text}: {page}");
+        }
+        // On, chime 2 and calm 3 are the three picks.
+        assert_eq!(page.matches("aria-checked=true").count(), 3, "{page}");
+        assert_eq!(page.matches(&format!("{} 1", tx::VARIATION)).count(), 2, "{page}");
+        assert_eq!(page.matches(&format!("{} 3", tx::VARIATION)).count(), 2, "{page}");
+        // No vibration motor on a desktop: the row is left out.
+        assert!(!page.contains(&format!("aria-label=\"{}\"", tx::VIBRATE)), "{page}");
+    }
+
+    #[test]
+    fn with_sounds_off_the_variations_are_hidden() {
+        use crate::i18n::sound as tx;
+        let page = render(SoundPrefs { on: false, ..SoundPrefs::default() });
+        assert!(page.contains(tx::OFF));
+        assert!(!page.contains(tx::RIGHT) && !page.contains(tx::END), "{page}");
+        assert_eq!(page.matches("aria-checked=true").count(), 1, "only Off: {page}");
+    }
+
+    #[test]
+    fn saved_prefs_come_back_and_apply_at_once() {
+        let _one_at_a_time = SAVING.lock().unwrap_or_else(|e| e.into_inner());
+        crate::store::use_memory_store();
+        fn app() -> Element {
+            let picked = SoundPrefs { on: false, chime: 3, calm: 2, vibrate: false };
+            picked.save();
+            assert_eq!(*PREFS.peek(), picked, "applied at once");
+            assert_eq!(SoundPrefs::load(), picked, "stored");
+            *PREFS.write() = SoundPrefs::default();
+            reload();
+            assert_eq!(*PREFS.peek(), picked, "a reload reads the store again");
+            reload();
+            // Playing and previewing never panic, sound on or off.
+            play(Cue::Right);
+            play(Cue::Wrong);
+            preview(Cue::SessionEnd, 2);
+            rsx! { "ok" }
+        }
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        assert_eq!(dioxus::ssr::render(&dom), "ok");
+    }
+
+    #[test]
+    fn picking_a_sound_saves_it_and_off_hides_the_choices() {
+        let _one_at_a_time = SAVING.lock().unwrap_or_else(|e| e.into_inner());
+        use crate::i18n::sound as tx;
+        crate::store::use_memory_store();
+        let mut t = crate::tap_dom::TestDom::new(VirtualDom::new_with_props(
+            root,
+            Case { prefs: SoundPrefs::default() },
+        ));
+        t.click_nth(&format!("{} 2", tx::VARIATION), 0);
+        t.click_nth(&format!("{} 3", tx::VARIATION), 1);
+        assert_eq!(t.with(|| *PREFS.peek()), SoundPrefs { chime: 2, calm: 3, ..SoundPrefs::default() });
+        t.click(&format!(">{}<", tx::OFF));
+        assert!(!t.html().contains(tx::RIGHT), "{}", t.html());
+        t.click(&format!(">{}<", tx::ON));
+        assert!(t.html().contains(tx::RIGHT));
+        t.with(|| SoundPrefs::default().save());
     }
 }

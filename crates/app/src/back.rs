@@ -199,4 +199,42 @@ mod tests {
         t.visit(Screen::Today);
         assert_eq!(t.back(Screen::Today), None);
     }
+
+    #[test]
+    fn the_trail_forgets_the_oldest_screens_past_its_depth() {
+        let mut t = Trail::default();
+        t.visit(Screen::Today);
+        let screens =
+            [Screen::Learn, Screen::Study, Screen::Bank, Screen::Cases, Screen::Oral, Screen::Stats];
+        // Revisits close loops, so only distinct screens pile up; the depth caps it anyway.
+        for s in screens.iter().cycle().take(DEPTH * 3) {
+            t.visit(*s);
+        }
+        assert!(t.stack.len() <= DEPTH, "{}", t.stack.len());
+        assert!(!t.stack.contains(&Screen::Settings));
+    }
+
+    #[test]
+    fn the_hook_follows_screen_changes_in_the_app() {
+        thread_local! {
+            static UI: std::cell::Cell<Option<Ui>> = const { std::cell::Cell::new(None) };
+        }
+        fn app() -> Element {
+            let ui = use_context_provider(|| Ui {
+                screen: Signal::new(Screen::Today),
+                prefs: Signal::new(Default::default()),
+                focus: Signal::new(false),
+            });
+            UI.set(Some(ui));
+            use_back(ui, (ui.screen)());
+            rsx! { "{(ui.screen)():?}" }
+        }
+        let mut t = crate::tap_dom::TestDom::of(app);
+        assert_eq!(t.html(), "Today");
+        for to in [Screen::Bank, Screen::Settings, Screen::Today] {
+            t.with(|| UI.get().unwrap().screen.set(to));
+            t.settle();
+            assert_eq!(t.html(), format!("{to:?}"));
+        }
+    }
 }

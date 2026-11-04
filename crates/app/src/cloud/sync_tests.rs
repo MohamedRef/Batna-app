@@ -741,9 +741,15 @@ fn a_password_set_on_the_phone_signs_in_a_borrowed_computer() {
     let out = pc.wait_status("signed out again", |s| s.sync == SyncState::SignedOut);
     assert!(!out.temporary);
     pc.login("forgotten", |l| *l == LoginStatus::default());
+    // And none of his study stays on someone else's computer (#679).
+    pc.wait_changed("review_events");
+    assert!(pc.store.reviews().unwrap().is_empty(), "the answers went with the session");
+    assert!(!pc.store.is_borrowed());
     pc.sign_in_password("mo.refaat", PASSWORD, true);
     assert!(!pc.wait_live().temporary);
     assert!(pc.vault.load().is_some(), "remembered");
+    eventually("everything syncs down again", || pc.store.reviews().unwrap().len() == 1);
+    assert!(!pc.store.is_borrowed(), "a remembered sign-in is this device's own");
 }
 
 #[test]

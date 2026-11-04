@@ -1536,7 +1536,8 @@ pub mod cloud {
     pub const USERNAME: &str = "اسم المستخدم";
     pub const PASSWORD: &str = "الباسورد";
     pub const NOT_MINE: &str = "الجهاز ده مش بتاعي";
-    pub const NOT_MINE_HINT: &str = "هتخرج لوحدك أول ما تقفل التاب أو التطبيق.";
+    pub const NOT_MINE_HINT: &str =
+        "هتخرج لوحدك أول ما تقفل التاب أو التطبيق، ومذاكرتك مش هتفضل على الجهاز ده.";
     pub const PW_SIGN_IN: &str = "ادخل";
     pub const PW_CHECKING: &str = "بيدخل…";
     pub const PW_YOURS: &str = "بتدخل من أي جهاز بـ";

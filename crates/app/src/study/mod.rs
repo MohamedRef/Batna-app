@@ -468,6 +468,8 @@ pub fn Study() -> Element {
 }
 
 #[cfg(test)]
+pub(crate) mod flow;
+#[cfg(test)]
 mod tests;
 
 /// Asked when "study this" arrives during a session: his session, its

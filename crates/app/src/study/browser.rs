@@ -37,11 +37,8 @@ fn root(case: Case) -> Element {
     }
 }
 
-#[test]
-#[ignore = "exports production HTML for the screens browser CI job"]
-fn export_screen_fixtures_study() {
-    crate::store::use_memory_store();
-    let dir = out_dir("study");
+/// Every state the browser job checks, by name.
+fn cases() -> Vec<(String, Case)> {
     let mut cases = vec![("setup".to_string(), Case { phase: "setup", item: None, reopened: false })];
     for kind in item::PLAYABLE {
         let first = ready_lectures().into_iter().flat_map(|l| &l.items).find(|i| i.body.kind() == *kind);
@@ -65,13 +62,54 @@ fn export_screen_fixtures_study() {
     cases.push(("item-enumerate-open".to_string(), open));
     let first = cases[1].1.item.clone();
     cases.push(("summary".to_string(), Case { phase: "summary", item: first, reopened: false }));
+    cases
+}
+
+/// One state, rendered.
+fn render(state: &str, case: Case) -> VirtualDom {
+    let opened = state == "item-enumerate-open";
+    enumerate::OPEN_FOR_FIXTURE.set(opened);
+    let mut dom = VirtualDom::new_with_props(root, case);
+    dom.rebuild_in_place();
+    dom
+}
+
+#[test]
+fn every_fixture_state_shows_what_its_name_says() {
+    crate::store::use_memory_store();
+    let all = cases();
+    assert_eq!(all.len(), item::PLAYABLE.len() + 4, "setup, kinds, reopened, open list, summary");
+    for (state, case) in all {
+        let reopened = case.reopened;
+        let kind = case.item.as_deref().and_then(find).map(|(_, i)| i.body.kind());
+        let html = dioxus::ssr::render(&render(&state, case));
+        match state.as_str() {
+            "setup" => assert!(html.contains(tx::LECTURES), "{state}"),
+            "summary" => assert!(html.contains("st-summary"), "{state}"),
+            _ => {
+                assert!(html.contains(&format!("data-kind=\"{}\"", kind.unwrap())), "{state}");
+                assert!(html.contains("data-focus=\"true\""), "a running session is in focus mode");
+            }
+        }
+        if reopened {
+            assert!(html.contains(tx::UNDONE) && html.contains("st-answer"), "{state}: answer shown");
+        }
+        if state == "item-enumerate-open" {
+            assert!(html.contains("st-hook") && html.contains(tx::ENUM_HOOK), "the تحشيشة shows");
+        }
+    }
+    enumerate::OPEN_FOR_FIXTURE.set(false);
+}
+
+#[test]
+#[ignore = "exports production HTML for the screens browser CI job"]
+fn export_screen_fixtures_study() {
+    crate::store::use_memory_store();
+    let dir = out_dir("study");
     let mut manifest = Vec::new();
-    for (state, case) in cases {
+    for (state, case) in cases() {
         let (phase, item) = (case.phase, case.item.clone());
-        let opened = state == "item-enumerate-open";
-        enumerate::OPEN_FOR_FIXTURE.store(opened, std::sync::atomic::Ordering::Relaxed);
-        let mut dom = VirtualDom::new_with_props(root, case);
-        dom.rebuild_in_place();
+        let dom = render(&state, case);
         let file = format!("study-{state}.html");
         write_page(&dir, &file, &dom);
         let kind = item.as_deref().and_then(find).map(|(_, i)| i.body.kind());

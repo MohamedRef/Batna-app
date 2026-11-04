@@ -59,6 +59,8 @@ mod synced;
 mod table;
 #[cfg(test)]
 mod test_dom;
+#[cfg(test)]
+mod testdom;
 mod today;
 mod ui;
 mod update;

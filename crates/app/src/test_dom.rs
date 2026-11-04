@@ -5,6 +5,9 @@
 //! The SSR pre-render marks every element with a listener (`,click:1`) in
 //! document order; walking the mounted templates in the same order gives each
 //! listener's element id, so the n-th marker is the n-th id.
+//!
+//! `crate::testdom` (B2) does the same with a mutation mirror and CSS-like
+//! selectors; both landed in parallel, and new tests may use either.
 
 use dioxus::core::{AttributeValue, DynamicNode, ElementId, Event, VNode};
 use dioxus::html::{EventData, SerializedFormData, SerializedMouseData};

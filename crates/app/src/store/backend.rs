@@ -391,6 +391,18 @@ pub fn use_provide_review() {
     use_context_provider(|| StudyStoreHandle(review.backend.clone() as Rc<RefCell<dyn StudyStore>>));
 }
 
+/// Test-only: a [`Review`] over its own fresh in-memory store, so a test's
+/// answers never leak into another test through the shared store.
+#[cfg(test)]
+pub fn test_review() -> Review {
+    let store: &'static Store =
+        Box::leak(Box::new(Store::open_in_memory().expect("an in-memory database always opens")));
+    let backend = Rc::new(RefCell::new(ReviewBackend::new(store, catalog(Library::get()))));
+    let mut revision = Signal::new(0);
+    backend.borrow_mut().on_change = Some(Box::new(move || *revision.write() += 1));
+    Review { backend, revision }
+}
+
 /// The review state, subscribed: the calling component re-renders after
 /// every answer, verdict or settings change.
 pub fn use_review() -> Review {

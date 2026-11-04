@@ -27,6 +27,8 @@ use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 
+#[cfg(test)]
+pub use backend::test_review;
 pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]

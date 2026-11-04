@@ -16,10 +16,10 @@ lessons:
     steps:
       - kind: explain
         page: 1
-        quote: "Too small a sample would produce insignificant results and would be a waste of efforts"
+        quote: "Step 5 - Sample Size Calculation:\n  Too small a sample would produce insignificant results and would be a waste of efforts.\n  Every subject in a clinical trial costs tremendous amount of money, so even one additional subject may mean poor financial management."
         title: "Step 5: ليه نحسب الـ sample size؟"
         text: |
-          كمّلنا الـ 12 step بتوع تخطيط الـ RCT. الـ step الخامسة: ==sample size calculation==.
+          كمّلنا الـ 12 step بتوع تخطيط الـ randomized controlled trial (RCT). الـ step الخامسة: ==sample size calculation==.
 
           - عيّنة **صغيرة**: النتيجة تطلع **insignificant** حتى لو الدوا شغّال، يعني مجهود ضايع.
           - عيّنة **كبيرة زيادة**: كل subject في الـ trial بيكلّف فلوس كتير، فحتى subject واحد زيادة يبقى **poor financial management**.
@@ -27,7 +27,7 @@ lessons:
           والطريقة العملية الوحيدة إنك تقلّل الـ random error: عدد كافي من الناس، محسوب بـ **sample size calculation** أو **power analysis**.
       - kind: explain
         page: 2
-        quote: "the probability of a false-negative conclusion accepting a false null hypothesis"
+        quote: "Random error can be divided into two types of errors with respect of hypothesis testing.\n  Type I error refers to the probability of drawing a false-positive conclusion by rejection of a true null hypothesis,\n  Type II error refers to the probability of a false-negative conclusion accepting a false null hypothesis\nThe most feasible way to improve the estimate of random error is to recruit a sufficient number of subjects according to a sample size calculation or power analysis."
         title: "غلطتين ممكن تقع فيهم"
         text: |
           - ==Type I error (alpha)==: لقيت **فرق مش موجود** في الحقيقة. رفضت null hypothesis صح. ده **false positive**.
@@ -36,7 +36,7 @@ lessons:
             بالبلدي: **خبّيت دوا كويس عن العيانين**.
       - kind: figure
         page: 5
-        quote: "Possible trial outcomes"
+        quote: "Possible trial outcomes\n| Reality | Trial Results |\n|---|---|\n| Treatments do NOT differ | Treatments do NOT differ (correct); Treatment do differ (α = Type 1 error) |\n| Treatments do differ | Treatments do NOT differ (β = Type 2 error); Treatment do differ (correct) |"
         title: "الحقيقة ضد نتيجة الـ trial"
         alt: "Two by two grid. Columns are the truth: no real difference, or a real difference. Rows are the trial result: treatments differ, or do not differ. Differ when there is no real difference is a type I error, alpha. Do not differ when there is a real difference is a type II error, beta. The other two cells are correct; finding a real difference is the power, 1 minus beta."
         caption: "خانتين صح وخانتين غلط. الـ **power** هي الخانة الخضرا اللي تحت **real difference**."
@@ -72,7 +72,7 @@ lessons:
           </svg>
       - kind: mnemonic
         page: 4
-        quote: "the probability of a false- negative conclusion by fail to reject a false null hypothesis"
+        quote: "What is β (Type II error)?\n  Type II error refers to the probability of a false-negative conclusion by fail to reject a false null hypothesis\n  (keep a good medicine away from patients!)"
         word: "PN"
         parts:
           - { key: "P", text: "Type I = false Positive: شفت فرق مش موجود. دوا فاشل نزل السوق." }
@@ -80,7 +80,7 @@ lessons:
         hook: "زي ترتيب الحروف: **P** الأول (type I)، و **N** بعده (type II). والـ **power = 1 - beta**: فرصتك ماتفوتكش الفرق."
       - kind: check
         page: 13
-        quote: "Assume in reality, however, the 2 groups do not differ"
+        quote: "QUESTION 3: A RCT comparing the efficacy of 2 drugs showed a difference between the two (p<0.05). Assume in reality, however, the 2 groups do not differ. This is therefore an example of:\n  a. Type 1 error (α error)\n  b. Type 2 error (β error)\n  c. 1- α\n  d. 1- β\nAnswer: a"
         question: "An RCT finds a difference between two drugs (p < 0.05), but in reality they do not differ. This is:"
         options:
           - "Type 1 error (alpha)"
@@ -95,18 +95,18 @@ lessons:
           - "الـ 1 - alpha هو إنك صح تقول مفيش فرق."
       - kind: explain
         page: 7
-        quote: "an investigator could choose a difference of 10% between the treatment group and the control group as MCRD"
+        quote: "Minimal clinically relevant difference (MCRD) δ:\n  For continuous outcome (body weight) the MCRD may be 5 Kg\n  For a trial with a binary outcome, for example the effect of a drug on the development of a myocardial infarction (yes/no), an investigator could choose a difference of 10% between the treatment group and the control group as MCRD"
         title: "الـ MCRD: أقل فرق يفرق مع العيان"
         text: |
           ==Minimal clinically relevant difference== (delta): أقل فرق بين المجموعتين **الباحث شايفه مهم إكلينيكيًا**.
 
-          - outcome **continuous** زي الوزن: ممكن الـ MCRD يبقى **5 kg**.
-          - outcome **binary** زي MI أيوه ولا لأ: ممكن تختار فرق **10%** بين الـ treatment والـ control.
+          - outcome **continuous** زي الوزن: ممكن الـ minimal clinically relevant difference (MCRD) يبقى **5 kg**.
+          - outcome **binary** زي myocardial infarction (MI) أيوه ولا لأ: ممكن تختار فرق **10%** بين الـ treatment والـ control.
 
           وخلي بالك: لو delta **كبيرة أوي**، أدوية مش فعالة هتعدّي كـ non-inferior وتنزل السوق. لو **صغيرة أوي**، أدوية مفيدة هتتهمل.
       - kind: table
         page: 8
-        quote: "Factors affecting sample size of RCT"
+        quote: "Factors affecting sample size of RCT\n| Component | Definition |\n|---|---|\n| Alpha (type I error) | The probability of falsely rejecting H0 and detecting a significant difference when the groups in reality are not different |\n| Beta (type II error) | The probability of falsely accepting H0 and not detecting a statistically significant when a specified difference between the groups in reality exist |\n| Power (1-beta) | The possibility of correctly rejecting H0 and detecting statistically significant difference when it is true |\n| (MCRD) δ | The minimal difference between the groups that the investigator considers clinically relevant |\n| Variance | The variability of the outcome measure as the SD in case of continuous outcome |"
         title: "الـ 5 factors: لو زوّدت الحاجة دي، العيّنة تعمل إيه؟"
         columns: ["Factor increased", "Sample size", "Why"]
         rows:
@@ -118,7 +118,7 @@ lessons:
       - kind: aside
         tone: analogy
         page: 8
-        quote: "The variability of the outcome measure as the SD in case of continuous outcome"
+        quote: "Factors affecting sample size of RCT\n| Component | Definition |\n|---|---|\n| Alpha (type I error) | The probability of falsely rejecting H0 and detecting a significant difference when the groups in reality are not different |\n| Beta (type II error) | The probability of falsely accepting H0 and not detecting a statistically significant when a specified difference between the groups in reality exist |\n| Power (1-beta) | The possibility of correctly rejecting H0 and detecting statistically significant difference when it is true |\n| (MCRD) δ | The minimal difference between the groups that the investigator considers clinically relevant |\n| Variance | The variability of the outcome measure as the SD in case of continuous outcome |"
         text: |
           تخيّل إنك عايز تسمع حد بيكلّمك في فرح.
 
@@ -127,7 +127,7 @@ lessons:
           - ولو عايز تبقى **متأكد** إنك مش هتفوّت ولا كلمة (power أعلى): برضه عيّنة أكبر.
       - kind: figure
         page: 11
-        quote: "typically .84 for 80% power"
+        quote: "Simple formula for difference in means: n = 2 × σ²(Zβ + Zα/2)² / difference²\n  n: Sample size in each group (assumes equal sized groups)\n  σ: Standard deviation of the outcome variable\n  Zβ: Represents the desired power (typically .84 for 80% power).\n  Zα/2: Represents the desired level of statistical significance (typically 1.96).\n  difference: Effect Size (the difference in means)"
         title: "معادلة الـ sample size للـ means"
         alt: "Formula: n per group equals 2 times sigma squared times the square of Z beta plus Z alpha over 2, divided by the difference squared. Labels: sigma is the standard deviation of the outcome, Z beta is the desired power, 0.84 for 80 percent, Z alpha over 2 is the significance level, 1.96, and the difference is the effect size. Variability and power sit on top; the effect size sits underneath."
         caption: "اللي **فوق** الكسر بيكبّر العيّنة: variance و power. اللي **تحت** بيصغّرها: الـ effect size. وللـ proportions بتحط **p(1-p)** مكان sigma تربيع."
@@ -153,7 +153,7 @@ lessons:
           </svg>
       - kind: check
         page: 18
-        quote: "All of the followings can be increased to get smaller sample size in RCT EXCEPT"
+        quote: "All of the followings can be increased to get smaller sample size in RCT EXCEPT?\n  a. α error\n  b. Power\n  c. (MCRD) δ"
         question: "All of the following can be increased to get a smaller sample size EXCEPT:"
         options:
           - "Alpha error"
@@ -169,7 +169,7 @@ lessons:
       - kind: aside
         tone: trap
         page: 17
-        quote: "It is not possible to decide which treatment is better based on these information"
+        quote: "In a well designed clinical trial of treatment of ovarian cancer, remission rate at one year is similar for new drug and usual care, p = 0.4. This means that:\n  a. Both treatment are effective\n  b. Neither treatment is effective\n  c. The statistical power of this study is 60%\n  d. The best estimate of treatment effect is 0.4\n  e. It is not possible to decide which treatment is better based on these information\nAnswer: e"
         text: |
           سؤال الـ ovarian cancer: remission متشابه، **p = 0.4**. الإجابة: **مش ممكن نحكم أنهي treatment أحسن من المعلومات دي**.
 
@@ -197,7 +197,7 @@ lessons:
     steps:
       - kind: explain
         page: 22
-        quote: "Detailed protocols of clinical procedures, laboratory investigations"
+        quote: "Step 6 - Detailed Descriptions of Measurement Protocols:\n  Ensure that the measurement process is accurate.\n  Detailed protocols of clinical procedures, laboratory investigations as well as the details of questionnaire and interview protocols.\n  For each and every variable (intervention, co-intervention, confounders and major and minor outcome variables), write down very clearly and explicitly, as regards:"
         title: "Step 6: كل variable ليه بروتوكول"
         text: |
           قبل ما تبدأ، اكتب **detailed protocols** للـ clinical procedures والـ lab والـ questionnaire. ولكل variable (intervention، co-intervention، confounders، outcomes) جاوب:
@@ -207,7 +207,7 @@ lessons:
           - إزاي الأجهزة والطرق والناس هيكونوا ==standardized and validated==؟
       - kind: explain
         page: 24
-        quote: "Recruitment and Participation Flow Chart"
+        quote: "Step 7 - Enrolling the Participants: It is important to present the \"Recruitment and Participation Flow Chart\" giving the numbers ('n') at each step"
         title: "Step 7: الـ flow chart"
         text: |
           في الـ enrolment لازم تعرض ==Recruitment and Participation Flow Chart== فيه **n عند كل خطوة**: اتعرض عليهم كام، اتقيّموا كام، اتوزّعوا كام، خدوا العلاج كام، ضاعوا كام، واتحلّلوا كام.
@@ -215,7 +215,7 @@ lessons:
           مثال المحاضرة: برنامج **web** ضد **print**. حوالي 247 في الـ web، و 233 في الـ print، ومن كل جروب ناس ماخدوش العلاج وناس ضاعت في الـ follow-up. وده بالظبط شكل الـ **CONSORT flow diagram** اللي هنشوفه في آخر المحاضرة.
       - kind: explain
         page: 26
-        quote: "Only way to control for unknown factors"
+        quote: "Step 8 - Randomization. Randomization avoids bias by:\n  Ensuring unpredictability of next assignment\n  Reduces baseline differences in risk between treatment and control groups.\n  Only way to control for unknown factors\n  should make both groups similar in terms of the distribution of confounding variables\n  larger the randomized groups, the greater the probability of equal baseline risks."
         title: "Step 8: الـ randomization بتمنع الـ bias إزاي؟"
         text: |
           - بتخلي **الـ assignment الجاي مش متوقع**.
@@ -225,7 +225,7 @@ lessons:
           وكل ما الجروبات **أكبر**، فرصة إن الـ baseline risks تتساوى بتزيد.
       - kind: reveal
         page: 27
-        quote: "It permits the use of probability theory to express the likelihood that any difference in outcome between treatment groups merely indicates chance"
+        quote: "Randomization:\n  \"It eliminates bias in treatment assignment,\" specifically selection bias and confounding.\n  \"It facilitates blinding (masking) of the identity of treatments from investigators, participants, and assessors.\"\n  \"It permits the use of probability theory to express the likelihood that any difference in outcome between treatment groups merely indicates chance.\""
         prompt: "المحاضرة بتقول للـ randomization **3 فوايد**. افتكرهم قبل ما تفتح."
         answer: |
           1. بتلغي الـ **bias in treatment assignment**: الـ selection bias والـ confounding.
@@ -233,7 +233,7 @@ lessons:
           3. بتسمح نستخدم **probability theory**: نقدر نحسب احتمال إن الفرق ده مجرد صدفة (الـ p value).
       - kind: explain
         page: 29
-        quote: "given a block size of 4, there are 6 possible ways to equally assign participants to a block"
+        quote: "Block Randomization. The basic idea of block randomization:\n  1. Divide potential patients into blocks\n  2. Randomize each block.\n  3. given a block size of 4, there are 6 possible ways to equally assign participants to a block.\n  4. Then choose the blocks randomly\nExample: Two treatments of A, B.\n  a. Possible treatment allocations within each block are (1) AABB, (2) BBAA, (3) ABAB, (4) BABA, (5) ABBA, (6) BAAB\n  b. Block size depends on the number of treatment, it should be short enough to prevent imbalance, and long enough to prevent guessing allocation in trials"
         title: "Block randomization: علشان الجروبات تبقى بنفس الحجم"
         text: |
           الـ simple randomization زي رمي العملة: ممكن تطلع 12 ضد 8 في 20 عيان. الـ ==block randomization== بتضمن **equal sample sizes**.
@@ -245,14 +245,14 @@ lessons:
       - kind: aside
         tone: trap
         page: 29
-        quote: "it should be short enough to prevent imbalance, and long enough to prevent guessing allocation"
+        quote: "Block Randomization. The basic idea of block randomization:\n  1. Divide potential patients into blocks\n  2. Randomize each block.\n  3. given a block size of 4, there are 6 possible ways to equally assign participants to a block.\n  4. Then choose the blocks randomly\nExample: Two treatments of A, B.\n  a. Possible treatment allocations within each block are (1) AABB, (2) BBAA, (3) ABAB, (4) BABA, (5) ABBA, (6) BAAB\n  b. Block size depends on the number of treatment, it should be short enough to prevent imbalance, and long enough to prevent guessing allocation in trials"
         text: |
           حجم البلوك: **قصير كفاية** يمنع الـ imbalance، و**طويل كفاية** يمنع إن حد **يخمّن** الـ allocation.
 
           لو البلوك 2 والدكتور عارف، أول عيان خد A يبقى التاني أكيد B: الـ concealment باظ.
       - kind: explain
         page: 31
-        quote: "Stratified randomization is achieved by generating a separate block for each combination of covariates"
+        quote: "Stratified randomization:\n  Addresses the need to control and balance the influence of covariates (prognostic variables).\n  This method can be used to achieve balance among groups in terms of subjects' baseline characteristics (covariates).\n  Stratified randomization is achieved by generating a separate block for each combination of covariates.\n  After all subjects have been identified and assigned into blocks, simple randomization is performed within each block to assign subjects to one of the groups."
         title: "Stratified randomization: وازن الـ covariates المهمة"
         text: |
           لما فيه **prognostic variable** مهمة (السن، النوع، شدة المرض) وعايز تضمن إنها متوزعة بالعدل:
@@ -263,7 +263,7 @@ lessons:
           مثال المحاضرة: تجربة **zidovudine** في الحوامل اتقسّمت حسب **gestational age**: 14 لـ 26 أسبوع وأكتر من 26، وبعدين قرعة جوه كل واحدة.
       - kind: figure
         page: 32
-        quote: "Stratify By Sex"
+        quote: "Stratified Randomization: 1,000 Patients\n  Stratify By Sex: 600 Males; 400 Females\n  Stratify By Age: 360 Young, 240 Old (males); 300 Young, 100 Old (females)\n  Randomize Each Sub-Group: New Treatment 180 + 120 + 150 + 50 = 500; Current Treatment 180 + 120 + 150 + 50 = 500"
         title: "١٠٠٠ عيان: sex ثم age ثم قرعة"
         alt: "Tree: 1,000 patients split by sex into 600 males and 400 females. Males split by age into 360 young and 240 old; females into 300 young and 100 old. Each of the four sub-groups is randomized in half, giving 180 plus 120 plus 150 plus 50, which is 500, in the new treatment and the same 500 in the current treatment."
         caption: "كل **stratum** بيتقسم نصّين بالقرعة، فالجروبين بيطلعوا **500 و 500** وفيهم نفس نسبة الرجالة والستات والكبار والصغار."
@@ -307,7 +307,7 @@ lessons:
           </svg>
       - kind: match
         page: 28
-        quote: "How to Do Random Allocation of subjects"
+        quote: "How to Do Random Allocation of subjects:\n  Simple randomization\n  Block randomization: to randomize subjects into groups that result in equal sample sizes\n  Stratified randomization"
         prompt: "وصّل كل هدف بطريقة الـ randomization المناسبة:"
         pairs:
           - ["Just give each patient a fair coin toss", "Simple randomization"]
@@ -316,7 +316,7 @@ lessons:
         why: "**Simple** = قرعة لكل واحد. **Block** = بلوكات متوازنة فالعدد يفضل متساوي. **Stratified** = بلوك لكل combination من الـ covariates، وقرعة جوّاه."
       - kind: check
         page: 34
-        quote: "Randomization guarantee that all participants will receive the intervention"
+        quote: "Which of the following statements about the advantages of randomized design is INCORRECT?\n  (A) Randomization removes selection bias in the allocation of participants to the intervention group or to the control;\n  (B) Randomization guarantee that all participants will receive the intervention;\n  (C) Randomization tends to produce comparable groups on measured as well as unknown or unmeasured confounding factors;"
         question: "Which statement about the advantages of randomization is INCORRECT?"
         options:
           - "It removes selection bias in allocation"
@@ -352,19 +352,19 @@ lessons:
     steps:
       - kind: explain
         page: 35
-        quote: "Sequentially numbered, opaque, sealed envelopes"
+        quote: "Some standard methods of ensuring allocation concealment include:\n  1. Sequentially numbered, opaque, sealed envelopes (SNOSE).\n  2. Pharmacy controlled allocation\n  3. Sophisticated off-site centralized randomization center"
         title: "إزاي تخبّي القرعة؟"
         text: |
           الـ ==allocation concealment== بتحمي تسلسل القرعة **قبل** ما العيان يدخل التجربة. طرقها:
 
-          - ظروف متنمّرة ومقفولة ومش شفافة: **SNOSE**
+          - ظروف متنمّرة ومقفولة ومش شفافة: **sequentially numbered, opaque, sealed envelopes (SNOSE)**
           - الصيدلية ماسكة القايمة: **pharmacy-controlled**
           - مركز بعيد يقولك رقم العلبة: **central randomization**
 
           والـ SNOSE اختصار: Sequentially Numbered, Opaque, Sealed Envelopes.
       - kind: figure
         page: 38
-        quote: "Selection bias Performance bias"
+        quote: "Allocation concealment vs. blinding, along time:\n  Before randomisation: Concealment of allocation, against Selection bias\n  After randomisation: Blinding, against Performance bias"
         title: "خط الزمن: قبل القرعة وبعدها"
         alt: "Timeline with randomisation in the middle. Before it, allocation concealment protects the sequence and prevents selection bias. After it, blinding hides the treatment and prevents performance and ascertainment bias."
         caption: "**قبل** القرعة: concealment ضد الـ selection bias. **بعد** القرعة: blinding ضد الـ performance والـ ascertainment bias."
@@ -391,7 +391,7 @@ lessons:
           </svg>
       - kind: table
         page: 37
-        quote: "Can always be implemented Can not always be implemented"
+        quote: "| Allocation concealment | Blinding |\n|---|---|\n| Prevents selection bias | Prevents ascertainment bias |\n| Protects the randomization sequence before and until the interventions are given to study participants | Protects the randomization sequence after allocation |\n| Can always be implemented | Can not always be implemented |"
         title: "الفرق في جدول"
         columns: ["", "Concealment", "Blinding"]
         rows:
@@ -402,14 +402,14 @@ lessons:
       - kind: aside
         tone: analogy
         page: 39
-        quote: "Randomization should be separate & distant from clinicians conducting the trial"
+        quote: "\"The patient's condition fits the trial, and she has consented. Which treatment pack should I give her?\"\n\"Yes doctor, your patient is eligible. She will be allocated to treatment pack X32. After the trial we will tell you what treatment X32 was.\"\nRandomization should be separate & distant from clinicians conducting the trial"
         text: |
           الكارتون في الشريحة: الدكتور بيتصل بالمركز: «العيانة مناسبة وموافقة، أدّيها أنهي علبة؟» والمركز يرد: «أدّيها **علبة X32**، وبعد التجربة هنقولك X32 كانت إيه».
 
           ده الـ concealment الصح: الـ randomization **بعيدة ومنفصلة** عن الـ clinicians اللي بيعملوا التجربة. زي ورقة امتحان التنسيق: مكتوب عليها رقم جلوس مش اسم.
       - kind: check
         page: 40
-        quote: "It prevents researchers from influencing which participants are assigned to the intervention/ control group"
+        quote: "Allocation concealment reduces bias as...\n  a. It prevents researchers from influencing which participants are assigned to the intervention/ control group.\n  b. prevents the participants from knowing which arm of the trial they are on"
         question: "Allocation concealment reduces bias because:"
         options:
           - "It prevents researchers from influencing which participants are assigned to each group"
@@ -424,7 +424,7 @@ lessons:
           - "الـ power بيعتمد على الـ sample size والـ alpha والـ effect size."
       - kind: sort
         page: 44
-        quote: "the following types of biases are reduced by randomization"
+        quote: "6. In a randomized controlled trial, the following types of biases are reduced by randomization:\n  a. Ascertainment bias\n  b. Selection bias\n  c. Recall bias\n  d. Publication bias\n  e. Bias in handling dropout\nAnswer: b"
         prompt: "كل bias من دول بيتمنع بإيه؟"
         bins: ["Randomization + concealment", "Blinding", "Intention to treat"]
         cards:
@@ -436,7 +436,7 @@ lessons:
         why: "القرعة والظرف المقفول بيخلّوا الجروبين شبه بعض في البداية. الـ blinding بيحمي القياس بعد كده. والـ intention to treat بيحمي التحليل من اللي وقفوا العلاج."
       - kind: explain
         page: 45
-        quote: "same shape, colour, size and taste"
+        quote: "Step 9 - Introduce the Intervention and Placebo Control Modalities:\n  Develop procedures for checking compliance\n  Ensure that they get the placebo drug in the same shape, colour, size and taste and is also administered using similar procedures."
         title: "Steps 9 و 10: الـ placebo والـ blinding"
         text: |
           - **Step 9**: الـ placebo لازم يبقى ==same shape, colour, size and taste== ويتدّى بنفس الطريقة. واعمل procedures لمراجعة الـ **compliance**.
@@ -444,12 +444,12 @@ lessons:
           - **Step 10**: الناس لو عرفت هي في أنهي جروب، سلوكها بيتغيّر. الحل: blinding للـ participants و/أو الـ observer و/أو الـ data reviewer.
       - kind: explain
         page: 49
-        quote: "Evidence of clearly high mortality or complication in the intervention group"
+        quote: "When to stop RCT (\"Stoppage Rules\"):\n  RCTs may be stopped early if an intervention produces \"larger than expected benefit or harm,\" or\n  If \"investigators find evidence of no important difference\"\n  Evidence of clearly high mortality or complication in the intervention group comes up."
         title: "Step 11 والـ stopping rules"
         text: |
           **Step 11**: تابع الناس لحد الـ **end point** أو **آخر مدة التجربة، أيهما أقرب**، وامنع الـ ==losses to follow up== لأنها ممكن تعمل bias كبير.
 
-          **إمتى نوقف الـ RCT بدري؟**
+          **إمتى نوقف الـ randomized controlled trial (RCT) بدري؟**
           - **Benefit** أكبر من المتوقع (مش أخلاقي نحرم الـ control منه).
           - **Harm** أكبر من المتوقع.
           - مفيش **important difference** خالص (futility).
@@ -457,7 +457,7 @@ lessons:
       - kind: aside
         tone: trap
         page: 50
-        quote: "Suppose that a randomized single masked experimental study is conducted"
+        quote: "Suppose that a randomized single masked experimental study is conducted. Which of the following problems are surely avoided in this study?\n  a. Noncompliance\n  b. Confounding\n  c. Biased assessment of the disease outcome\n  d. Loss to follow up"
         text: |
           سؤال شريحة 50: «randomized **single masked** study، إيه المشكلة اللي **أكيد** اتمنعت؟» إجابة الشريحة: **biased assessment of the outcome**.
 
@@ -478,14 +478,14 @@ lessons:
     pages: [51, 63]
     topics: [effect-measures]
     goals:
-      - "تحسب CER و EER و RRR و ARR و NNT من 2x2 table"
+      - "تحسب control event rate (CER) و experimental event rate (EER) و relative risk reduction (RRR) و absolute risk reduction (ARR) و number needed to treat (NNT) من 2x2 table"
       - "تفهم ليه الـ RRR لوحده بيخدع"
       - "تحل تمرين الـ INH وتمرين الـ zidovudine وتلاقي غلطة الشريحة"
     status: unverified
     steps:
       - kind: explain
         page: 52
-        quote: "The relative risk reduction (RRR) The absolute risk reduction (ARR) The numbers needed to treat (NNT)"
+        quote: "Measures used in Intervention Trials: When comparing 2 groups of participants in a RCT, the control group and the intervention group, you can use the following measures to help you judge the size of the effect of the intervention:\n  The relative risk reduction (RRR)\n  The absolute risk reduction (ARR)\n  The numbers needed to treat (NNT)"
         title: "Step 12: حجم الأثر بـ 3 أرقام"
         text: |
           في الـ analysis: أول حاجة **baseline table** يقارن الجروبين، وبعدين **2x2 table** بخانات a و b و c و d.
@@ -496,7 +496,7 @@ lessons:
           - ==Number needed to treat (NNT)==
       - kind: table
         page: 53
-        quote: "Number Needed to Treat NNT =1/ ARR"
+        quote: "Are the results Clinically Significant?\n| | Outcome Present | Outcome Absent | Totals |\n|---|---|---|---|\n| Experimental group | a | b | a+b |\n| Control group | c | d | c+d |\n| Totals | a+c | b+d | a+b+c+d |\n  Control Event Rate: CER = c / c+d\n  Experimental Event Rate: EER = a / a+b\n  Relative Risk Reduction = CER - EER / CER\n  Absolute Risk Reduction: ARR = CER - EER\n  Number Needed to Treat: NNT = 1 / ARR"
         title: "المعادلات"
         columns: ["Measure", "Formula"]
         rows:
@@ -508,7 +508,7 @@ lessons:
         hide: [[2, 1], [3, 1], [4, 1]]
       - kind: figure
         page: 54
-        quote: "We need to treat 20 people to prevent one death"
+        quote: "Example: mortality rate control 17%, intervention 12%\n  RRR = 17-12 / 17 = 29%\n  ARR = 17% - 12% = 5%\n  NNT = 1 / 5% = 100 / 5 = 20\nWe need to treat 20 people to prevent one death"
         title: "مثال المحاضرة: 17% ضد 12%"
         alt: "Bar chart. Control mortality 17 percent, intervention 12 percent. The gap between the bars is the absolute risk reduction, 5 percent. The relative risk reduction is 5 divided by 17, 29 percent. The number needed to treat is 100 divided by 5, 20."
         caption: "الفرق بين العمودين هو الـ **ARR = 5%**. اقسمه على عمود الـ control تاخد **RRR = 29%**. و **NNT = 100 / 5 = 20**."
@@ -528,7 +528,7 @@ lessons:
           </svg>
       - kind: explain
         page: 56
-        quote: "Importance of NNT"
+        quote: "Importance of NNT\n| CER | EER | RRR | ARR | NNT |\n|---|---|---|---|---|\n| 50% | 25% | 50% | 25% | 4 |\n| 5% | 2.50% | 50% | 2.50% | 40 |\n| 0.05% | 0.025% | 50% | 0.03% | 4000 |"
         title: "ليه الـ RRR لوحده بيخدع؟"
         text: |
           الـ RRR ==does not discriminate== بين أثر absolute ضخم وأثر تافه. بص على 3 أدوية كلهم **RRR = 50%**:
@@ -541,14 +541,14 @@ lessons:
       - kind: aside
         tone: analogy
         page: 55
-        quote: "does not discriminate between huge absolute treatment effects and trivial ones"
+        quote: "Relative Risk Reduction (RRR):\n  Is the extent to which a treatment reduces a risk, in comparison with patients not receiving the treatment of interest.\n  However does not discriminate between huge absolute treatment effects and trivial ones.\n  RRR = CER - EER / CER"
         text: |
           إعلان: «خصم 50%!» على إيه؟ لو على عربية، ده فرق مهول. لو على باكو لبان، فرقت معاك نص جنيه.
 
           الـ **RRR** هو الـ «50%» اللي في الإعلان. الـ **ARR** هو الفرق الـ absolute: الفلوس اللي وفّرتها فعلًا. وشركات الأدوية بتحب تكتب الـ RRR بخط كبير.
       - kind: check
         page: 62
-        quote: "which scenario results in the lowest NNT"
+        quote: "With respect to the influence of the relative risk reduction (RRR) and baseline risk on the NNT, which scenario results in the lowest NNT?\n  a. A greater RRR and higher base-line risk\n  b. A lower RRR and lower base-line risk\n  c. A lower RRR and higher base-line risk\n  d. A lower RRR regardless of base-line risk\n  e. A greater RRR and lower base-line risk\nAnswer: a"
         question: "Which scenario gives the lowest NNT?"
         options:
           - "Greater RRR and higher baseline risk"
@@ -563,8 +563,8 @@ lessons:
           - "الـ baseline risk الواطي بيصغّر الـ ARR."
       - kind: case
         page: 59
-        quote: "CER = 9/45 = 20%"
-        stem: "100 أطفال contacts لعيانين TB. 10 عندهم TB أصلًا. من الـ 90 الباقيين: 45 خدوا isoniazid و 3 منهم جالهم TB، و 45 ماخدوش و 9 منهم جالهم TB."
+        quote: "| | Got TB | Did not get TB | Total |\n|---|---|---|---|\n| INH | 3 | 42 | 45 |\n| No INH | 9 | 36 | 45 |\n  CER = 9/45 = 20%\n  EER = 3/45 = 6.67%\n  Calculate ARR = 13.33%\n  Calculate RRR = 0.67\n  Calculate NNT = 1 / 13.33 = 7.69"
+        stem: "100 أطفال contacts لعيانين tuberculosis (TB). 10 عندهم TB أصلًا. من الـ 90 الباقيين: 45 خدوا isoniazid و 3 منهم جالهم TB، و 45 ماخدوش و 9 منهم جالهم TB."
         steps:
           - question: "What are CER and EER?"
             options: ["CER 20%, EER 6.67%", "CER 6.67%, EER 20%", "CER 9%, EER 3%", "CER 10%, EER 3%"]
@@ -580,8 +580,8 @@ lessons:
             why: "NNT = 1 / 0.1333 = 7.69، والـ NNT دايمًا بيتقرّب لفوق: 8 أطفال علشان نمنع حالة TB واحدة."
       - kind: case
         page: 60
-        quote: "EER = 13/180 =0.07"
-        stem: "Zidovudine للحوامل: 13 من 180 طفل اتعدوا بالـ HIV في جروب الـ zidovudine، و 40 من 183 في الـ placebo."
+        quote: "| Outcome | Zidovudine | Placebo | Total |\n|---|---|---|---|\n| Infants HIV infected | 13 | 40 | 53 |\n| Non HIV Infected Infants | 167 | 143 | 11 |\n| Total | 180 | 183 | 363 |\nCompute all possible measures of association. Interpret the obtained results:\n  EER = 13 / 180 = 0.07\n  CER = 40 / 183 = 0.22\n  RR = 3.14\n  RRR = 0.22 - 0.07 / 0.22 = 68%\n  ARR = 0.22 - 0.07 = 0.15\n  NNT = 1 / 15% = 100 / 15 = 6"
+        stem: "Zidovudine للحوامل: 13 من 180 طفل اتعدوا بالـ human immunodeficiency virus (HIV) في جروب الـ zidovudine، و 40 من 183 في الـ placebo."
         steps:
           - question: "EER and CER?"
             options: ["EER 0.07, CER 0.22", "EER 0.22, CER 0.07", "EER 0.13, CER 0.40", "EER 0.07, CER 0.15"]
@@ -591,14 +591,14 @@ lessons:
             options: ["RRR 68%, ARR 0.15", "RRR 15%, ARR 0.68", "RRR 32%, ARR 0.15", "RRR 68%, ARR 0.22"]
             answer: 0
             why: "RRR = 0.15 / 0.22 = 68%. ARR = 0.22 - 0.07 = 0.15."
-          - question: "The slide prints RR = 3.14 and NNT = 100/15 = 6. What is right?"
+          - question: "The slide prints relative risk (RR) = 3.14 and NNT = 100/15 = 6. What is right?"
             options: ["RR = 0.33; NNT = 7", "RR = 3.14; NNT = 6", "RR = 0.68; NNT = 15", "RR = 3.14; NNT = 7"]
             answer: 0
             why: "الـ 3.14 هي CER/EER، مقلوبة. الـ RR = EER/CER = 0.07/0.22 = حوالي 0.33، يعني الدوا بيحمي. و 100/15 = 6.7، والـ NNT بيتقرّب لفوق: 7."
       - kind: aside
         tone: exam
         page: 63
-        quote: "the control event rate (CER) was 20% and the treatment event rate (TER) was 10%"
+        quote: "The results of an RCT where the control event rate (CER) was 20% and the treatment event rate (TER) was 10% can be described as:\n  a. RR = 2.0, RRR = 10%, ARR 10%, NNT 20\n  b. RR = 0.5, RRR = 50%, ARR 10%, NNT 10\n  c. RR = 2.0, RRR = 50%, ARR 10%, NNT 10\n  d. RR = 1.0, RRR = 30%, ARR 20%, NNT 20\nAnswer: b"
         text: |
           سؤال شريحة 63 بيتكرر كتير: CER 20%، treatment 10%.
 
@@ -626,12 +626,12 @@ lessons:
     goals:
       - "تقرا الـ significance من الـ confidence interval"
       - "تفرّق بين الـ intention to treat والـ per protocol"
-      - "تعرف ليه الـ ITT أحسن تقدير للـ benefit ومش للـ harm"
+      - "تعرف ليه الـ intention-to-treat (ITT) أحسن تقدير للـ benefit ومش للـ harm"
     status: unverified
     steps:
       - kind: explain
         page: 64
-        quote: "Two methods of assessing the role of chance"
+        quote: "Two methods of assessing the role of chance:\n  P-values (Hypothesis Testing): use statistical test to examine the 'null' hypothesis; associated with \"p values\": if p<0.05 then result is statistically significant\n  Confidence Intervals (Estimation): estimates the range of values that is likely to include the true value\nRelationship between p-values and confidence intervals: if the value corresponding to 'no effect' (RR of 1 or risk difference of 0) falls outside the CI then the result is statistically significant"
         title: "طريقتين نقيس بيهم دور الصدفة"
         text: |
           عندنا طريقتين نقيس بيهم دور الـ **chance**:
@@ -639,12 +639,12 @@ lessons:
           - ==P-values== (hypothesis testing): اختبار للـ null hypothesis. لو **p < 0.05** يبقى statistically significant.
           - ==Confidence intervals== (estimation): range غالبًا فيه القيمة الحقيقية.
 
-          والعلاقة بينهم: لو قيمة الـ **no effect** **برّه** الـ CI، النتيجة significant.
+          والعلاقة بينهم: لو قيمة الـ **no effect** **برّه** الـ confidence interval (CI)، النتيجة significant.
 
-          وقيمة الـ no effect في الـ RR هي **1**، وفي الـ risk difference هي **صفر**.
+          وقيمة الـ no effect في الـ relative risk (RR) هي **1**، وفي الـ risk difference هي **صفر**.
       - kind: figure
         page: 67
-        quote: "Statistically significant (increased risk)"
+        quote: "| Relative Risk | Confidence Interval | Interpretation |\n|---|---|---|\n| 1.77 | (1.22 – 2.45) | Statistically significant (increased risk) |\n| 1.63 | (0.85 – 2.46) | NOT statistically significant (risk is the same) |\n| 0.78 | (0.56 – 0.94) | Statistically significant (decreased risk) |"
         title: "الـ CI والخط اللي عند 1"
         alt: "Forest plot with a vertical line at relative risk 1. RR 1.77, CI 1.22 to 2.45, lies wholly right of 1: significant increased risk. RR 1.63, CI 0.85 to 2.46, crosses 1: not significant. RR 0.78, CI 0.56 to 0.94, lies wholly left of 1: significant decreased risk."
         caption: "الـ CI **عدّى** الخط اللي عند 1؟ يبقى **مش significant**. كله يمين الخط = خطر **زاد**. كله شمال = خطر **قلّ**."
@@ -671,7 +671,7 @@ lessons:
           </svg>
       - kind: explain
         page: 68
-        quote: "Insignificant less precised"
+        quote: "Relative Risk (95% CI):\n  Vegetable Fiber: Insignificant, less precised (0.9-1.4)\n  Fruit Fiber: Insignificant, less precised (0.8-1.2)\n  Cereal Fiber: Significant and precise (0.6-0.7)"
         title: "عرض الـ CI = الدقة"
         text: |
           مثال الألياف:
@@ -681,8 +681,8 @@ lessons:
           وكل ما الـ sample size يكبر، الـ CI **يضيق** (precision أعلى).
       - kind: check
         page: 66
-        quote: "If the confidence interval is 0.12- 1.5 ( includes 1) this is not statistically significant"
-        question: "In the DVT study, the relative risk has a 95% confidence interval of 0.12-1.5. What do you conclude?"
+        quote: "P-values (Hypothesis Testing) in DVT study:\n  Confidence interval of Relative risk = 0.12 - 0.18 (P=0.001)\n  Confidence interval does not include 1: statistically significant\n  If the confidence interval is 0.12 - 1.5 (includes 1) this is not statistically significant (P=0.6)"
+        question: "In the deep vein thrombosis (DVT) study, the relative risk has a 95% confidence interval of 0.12-1.5. What do you conclude?"
         options:
           - "Not statistically significant, because the interval includes 1"
           - "Significant, because the point estimate is below 1"
@@ -696,7 +696,7 @@ lessons:
           - "الـ CI بيروح من حماية لزيادة بسيطة، مفيش حاجة بتقول ضعف."
       - kind: explain
         page: 69
-        quote: "all study participants are included in the analyses as part of the groups to which they were randomized"
+        quote: "Intention-to-treat analysis: all study participants are included in the analyses as part of the groups to which they were randomized regardless of whether they completed the study or not\nPer protocol analysis: excludes patients who deviate from protocol"
         title: "Intention to treat ضد per protocol"
         text: |
           - ==Intention-to-treat (ITT)==: **كل** اللي اتقرعوا بيتحلّلوا في **الجروب اللي اتقرعوا فيه**، سواء كمّلوا أو التزموا أو لأ.
@@ -707,7 +707,7 @@ lessons:
           الـ ITT هو **optimal estimate of the true benefit**، بس ==not optimal for measuring harm== (لأن اللي ماخدش الدوا مش هيبان عليه الـ side effect).
       - kind: case
         page: 71
-        quote: "which represents a relative risk reduction (RRR) of 0.45"
+        quote: "Per protocol analysis of the treatment group (surgery + acetylsalicylic acid [ASA]) includes only those patients who adhered to the protocol (in this case, those who received surgery); \"nonadherent\" patients (those who died before having the opportunity to undergo surgery) are excluded.\nWith this analysis, the event rate is 0.11 in the surgery + ASA arm and 0.20 in the control arm, which represents a relative risk reduction (RRR) of 0.45.\nThe intention-to-treat analysis, which counts all events in all randomized patients, shows equal event rates (0.20) in both arms and no risk reduction. This analysis suggests the underlying truth, a treatment effect of zero."
         stem: "100 عيان cerebrovascular disease اتقرعوا على surgery + aspirin، و 100 على aspirin بس. في جروب العملية، 10 جالهم stroke قبل ما يلحقوا يعملوا العملية، ومن الـ 90 اللي اتعملّهم 10 جالهم stroke. في جروب الـ aspirin، 20 جالهم stroke."
         steps:
           - question: "Per-protocol stroke rate in the surgery arm?"
@@ -715,7 +715,7 @@ lessons:
             answer: 0
             why: "الـ per protocol بيشيل اللي ماتعملّهمش العملية، فالـ 10 اللي جالهم stroke بدري اختفوا من البسط والمقام."
           - question: "What does each analysis show?"
-            options: ["Per protocol RRR 0.45; ITT RRR 0", "Both RRR 0.45", "Per protocol 0; ITT 0.45", "Both no effect"]
+            options: ["Per protocol relative risk reduction (RRR) 0.45; ITT RRR 0", "Both RRR 0.45", "Per protocol 0; ITT 0.45", "Both no effect"]
             answer: 0
             why: "Per protocol: 0.11 ضد 0.20، RRR 0.45. ITT: 20/100 ضد 20/100، RRR صفر."
           - question: "Which one shows the underlying truth?"
@@ -725,14 +725,14 @@ lessons:
       - kind: aside
         tone: analogy
         page: 75
-        quote: "If these non compliant people were excluded from the analysis"
+        quote: "Noncompliance, Example: Trial of cancer-prevention diet vs placebo diet.\n  Treatment Group: some subjects had GI symptoms (these were actually precursors of the cancer), they did not comply with the diet\n  If these non compliant people were excluded from the analysis → Greater effect of the cancer-prevention diet"
         text: |
-          مثال الـ diet: تجربة **cancer-prevention diet** ضد placebo diet. ناس في جروب الـ diet جالهم أعراض GI ووقفوا الـ diet، والأعراض دي كانت **أول علامات الـ cancer**.
+          مثال الـ diet: تجربة **cancer-prevention diet** ضد placebo diet. ناس في جروب الـ diet جالهم أعراض gastrointestinal (GI) ووقفوا الـ diet، والأعراض دي كانت **أول علامات الـ cancer**.
 
           لو عملتلهم exclude من الـ analysis لأنهم مش compliant، شلت الـ cancers من جروب الـ diet، فالـ diet هيبان **أقوى من الحقيقة**. زي مدرس يقول «فصلي كله نجح» بعد ما طرد الضعاف قبل الامتحان.
       - kind: check
         page: 78
-        quote: "Performing the analysis of RCTs according to original randomised assignment"
+        quote: "Which of the followings is CORRECT about Intention to treat?\n  a. Analysis is according to whether they comply with treatment or not\n  b. Optimal estimate of the true harm of the intervention\n  c. Performing the analysis of RCTs according to original randomised assignment\n  d. Not optimal for measuring benefit of the intervention"
         question: "Which is CORRECT about intention to treat?"
         options:
           - "Analysis depends on whether patients complied"
@@ -748,7 +748,7 @@ lessons:
       - kind: aside
         tone: trap
         page: 77
-        quote: "Excessive exclusion criteria may result in which of the following"
+        quote: "Excessive exclusion criteria may result in which of the following:\n  a. Decreased external validity\n  b. Increased internal validity\n  c. Problems with recruitment\n  d. Increased costs\n  e. All of the above\nAnswer: a"
         text: |
           شريحة 77: «excessive exclusion criteria بتعمل إيه؟» والاختيارات فيها recruitment problems وزيادة costs و all of the above. **إجابة الشريحة: a، decreased external validity.**
 
@@ -776,7 +776,7 @@ lessons:
     steps:
       - kind: explain
         page: 79
-        quote: "Developed by the World Medical Association"
+        quote: "Ethical issues: Declaration of Helsinki. Developed by the World Medical Association. This set of ethical principles guides medical researchers in conducting research on human subjects."
         title: "Declaration of Helsinki"
         text: |
           ==Declaration of Helsinki==: مجموعة **ethical principles** عملتها الـ **World Medical Association**، بتوجّه الباحثين في أي research على human subjects.
@@ -784,12 +784,12 @@ lessons:
           والـ ethical issues اللي المحاضرة بتعدّها:
           - **Competence** الباحث.
           - **Stage of research**.
-          - **Special populations**: ستات، أطفال، مساجين، HIV، و suicidal individuals.
+          - **Special populations**: ستات، أطفال، مساجين، human immunodeficiency virus (HIV)، و suicidal individuals.
           - **Institutional approval**.
           - **Conflict of interest**.
       - kind: explain
         page: 81
-        quote: "Financial or other personal considerations may compromise an investigator's judgment"
+        quote: "Conflict of Interest:\n  Financial or other personal considerations may compromise an investigator's judgment in the conduct of research or the reporting of results.\n  Conflicts of interest may threaten the integrity of research, erode public trust in science, and negatively affect the rights and welfare of human subjects."
         title: "Conflict of interest"
         text: |
           ==Conflict of interest==: اعتبارات **financial** أو personal ممكن تأثر على حكم الباحث، يعني الـ judgment بتاعه، في إدارة البحث أو كتابة النتايج.
@@ -797,7 +797,7 @@ lessons:
           نتيجته: بيهدد **integrity** البحث، بيهزّ **ثقة الناس في العلم**، وممكن يضر **حقوق وسلامة** المشاركين.
       - kind: explain
         page: 82
-        quote: "genuine uncertainty about the appropriate course of action"
+        quote: "Equipoise: Is a state of mind characterized by genuine uncertainty about the appropriate course of action, that is, to give or withhold a particular treatment.\nIt is ethical to conduct an experimental study only when there is a state of equipoise in the expert community:\n  Sufficient belief to justify exposing subjects to treatment\n  Sufficient doubt to justify withholding treatment from subjects"
         title: "Equipoise: الحيرة الأمينة"
         text: |
           ==Equipoise==: حالة **genuine uncertainty**: هل ندّي العلاج ولا نمنعه؟
@@ -808,7 +808,7 @@ lessons:
           والتجربة **أخلاقية بس** لما الـ **expert community** كلها في equipoise.
       - kind: figure
         page: 82
-        quote: "Sufficient belief to Sufficient doubt to"
+        quote: "Equipoise: Is a state of mind characterized by genuine uncertainty about the appropriate course of action, that is, to give or withhold a particular treatment.\nIt is ethical to conduct an experimental study only when there is a state of equipoise in the expert community:\n  Sufficient belief to justify exposing subjects to treatment\n  Sufficient doubt to justify withholding treatment from subjects"
         title: "الميزان"
         alt: "A balance scale held level. The left pan reads sufficient belief to justify exposing subjects to treatment. The right pan reads sufficient doubt to justify withholding treatment. The level beam is labelled equipoise."
         caption: "الميزان **متوازن** = equipoise. لو مال لأي ناحية، يبقى عارف الإجابة، والتجربة مابقتش أخلاقية."
@@ -828,7 +828,7 @@ lessons:
           </svg>
       - kind: check
         page: 102
-        quote: "Neither drug is known to be more effective than the other"
+        quote: "16. Which of the following best describes \"equipoise\" as the rationale for a randomized trial of two drugs?\n  A. The drugs are known to be equally effective.\n  B. One of the drugs is known to be more toxic.\n  C. Neither drug is known to be more effective than the other.\n  D. Although one drug is more effective, the other drug is easier to take with fewer side effects.\nAnswer: C"
         question: "Which best describes equipoise as the rationale for a trial of two drugs?"
         options:
           - "The drugs are known to be equally effective"
@@ -843,7 +843,7 @@ lessons:
           - "لو واحد معروف إنه أحسن، مش أخلاقي نمنعه."
       - kind: explain
         page: 83
-        quote: "Participants may withdraw from the study at any time without losing their medical care"
+        quote: "Consent Process:\n  All eligible subjects must voluntarily agree to participate in a trial\n  The investigator must describe in a simple language the nature and objectives of the study, the treatment being investigated, tasks and procedures and tests required, method of treatment assignment and data to be collected\n  Likely benefits and risks of participation\n  Ensuring confidentiality\n  Participants may withdraw from the study at any time without losing their medical care\n  Written or oral consent according to a protocol that has been approved by the ethics committee"
         title: "الـ consent process"
         text: |
           - المشاركة **voluntary** لكل الـ eligible subjects.
@@ -855,27 +855,27 @@ lessons:
       - kind: aside
         tone: tip
         page: 83
-        quote: "All eligible subjects must voluntarily agree to participate in a trial"
+        quote: "Consent Process:\n  All eligible subjects must voluntarily agree to participate in a trial\n  The investigator must describe in a simple language the nature and objectives of the study, the treatment being investigated, tasks and procedures and tests required, method of treatment assignment and data to be collected\n  Likely benefits and risks of participation\n  Ensuring confidentiality\n  Participants may withdraw from the study at any time without losing their medical care\n  Written or oral consent according to a protocol that has been approved by the ethics committee"
         text: |
           في العيادة عندنا الجملة دي مهمة جدًا: الموافقة لازم تبقى voluntarily، والعيان لازم يعرف إنه لو انسحب، **مش هيتحرم من علاجه** ولا الدكتور هيزعل منه.
 
           ولو العيان مش بيقرا، الشرح الشفوي والـ oral consent ممكن، **بس** حسب protocol اللجنة موافقة عليه.
       - kind: explain
         page: 84
-        quote: "all RCTs trials are registered at their inception"
+        quote: "It is recommends that:\n  all RCTs trials are registered at their inception (at the time of ethical approval and/or funding approval);\n  registered information should be potentially accessible to all interested parties;\n  registration should be with a register that complies with an appropriate minimum standard of practice;\n  prospective registration of trials should be part of ethical guidelines for clinical trials;\n  government agencies should ensure that adequate mechanisms and infrastructure are provided so that all RCTs can be registered prospectively;"
         title: "Registration: سجّل قبل ما تبدأ"
         text: |
           التوصيات:
-          - كل الـ RCTs تتسجّل ==at their inception==، وقت الـ ethical أو funding approval.
+          - كل الـ randomized controlled trials (RCTs) تتسجّل ==at their inception==، وقت الـ ethical أو funding approval.
           - المعلومات تكون **متاحة لكل المهتمين**.
           - الـ register يكون مطابق لـ **minimum standard**.
           - الـ **prospective registration** جزء من الـ ethical guidelines.
           - الحكومات توفّر الإمكانيات علشان كل الـ RCTs تتسجّل prospectively.
 
-          مثال: **ISRCTN**، registry معترف بيه من **WHO**، بيدّي الرقم اللي محتاجه علشان تنشر، ومفتوح للبحث مجانًا. وده بيقلّل الـ **selective reporting**.
+          مثال: **International Standard Randomised Controlled Trial Number (ISRCTN)**، registry معترف بيه من **World Health Organization (WHO)**، بيدّي الرقم اللي محتاجه علشان تنشر، ومفتوح للبحث مجانًا. وده بيقلّل الـ **selective reporting**.
       - kind: match
         page: 80
-        quote: "Institutional approval Conflict of interest"
+        quote: "Ethical issues:\n  Competence\n  Stage of Research\n  Research with special populations such as women, children, prisoners, HIV and suicidal individuals\n  Institutional approval\n  Conflict of interest"
         prompt: "وصّل كل موقف بالـ ethical issue بتاعه:"
         pairs:
           - ["A drug company pays the investigator per patient enrolled", "Conflict of interest"]
@@ -900,14 +900,14 @@ lessons:
     pages: [86, 100]
     topics: [appraisal, quasi]
     goals:
-      - "تعدّ مزايا وعيوب الـ RCT"
+      - "تعدّ مزايا وعيوب الـ randomized controlled trial (RCT)"
       - "تعرف الـ CONSORT 2010 وترتيب الـ flow diagram"
       - "تفرّق بين الـ checklist والـ quality score وتعرف الـ quasi-experimental"
     status: unverified
     steps:
       - kind: table
         page: 86
-        quote: "Best evidence for causality"
+        quote: "| Advantages | Disadvantages |\n|---|---|\n| Best evidence for causality | Expensive (time and money). |\n| ensures that individuals are allocated to the intervention or control groups without prejudice | Organisationally difficult. |\n| Minimizes/ eliminates unequal distribution of factors that influence clinical outcome between groups | Not always generalisable. |\n| | Sometimes ethical problems. |"
         title: "الـ RCT: الحلو والوحش"
         columns: ["Advantages", "Disadvantages"]
         rows:
@@ -918,14 +918,14 @@ lessons:
       - kind: aside
         tone: joke
         page: 93
-        quote: "National Institute of Neurological Disorders and Stroke"
+        quote: "Costs: The mean cost of Phase III RCTs funded by the National Institute of Neurological Disorders and Stroke is US$12 million"
         text: |
           «Expensive» يعني قد إيه؟ متوسط تكلفة الـ phase III RCT اللي بيموّلها الـ **National Institute of Neurological Disorders and Stroke**: **12 مليون دولار**. 💸
 
           يعني لما حد يقولك «ما تعمل RCT في الرسالة»، قوله: «حاضر، بس نجيب الـ 12 مليون منين؟» 😄
       - kind: explain
         page: 88
-        quote: "The CONSORT 2010 checklist contains 25 items"
+        quote: "Reporting of RCT results:\n  The CONSORT 2010 Statement is \"an evidence-based, minimum set of recommendations for reporting RCTs\".\n  The CONSORT 2010 checklist contains 25 items (many with sub-items) focusing on \"individually randomised, two group, parallel trials\" which are the most common type of RCT."
         title: "CONSORT: إزاي تكتب الـ RCT"
         text: |
           ==CONSORT== = **Consolidated Standards of Reporting Trials**.
@@ -937,7 +937,7 @@ lessons:
           - مدعوم من مجلات زي **The Lancet** و **JAMA** و **Annals of Internal Medicine**.
       - kind: order
         page: 92
-        quote: "CONSORT 2010 Flow Diagram"
+        quote: "CONSORT 2010 Flow Diagram:\n  Enrollment: Assessed for eligibility (n=); Excluded (n=): Not meeting inclusion criteria, Declined to participate, Other reasons; Randomized (n=)\n  Allocation (each arm): Allocated to intervention (n=); Received allocated intervention (n=); Did not receive allocated intervention (give reasons) (n=)\n  Follow-Up (each arm): Lost to follow-up (give reasons) (n=); Discontinued intervention (give reasons) (n=)\n  Analysis (each arm): Analysed (n=); Excluded from analysis (give reasons) (n=)"
         prompt: "رتّب مربعات الـ CONSORT flow diagram من فوق لتحت:"
         steps:
           - "Assessed for eligibility"
@@ -948,7 +948,7 @@ lessons:
         why: "الترتيب: **enrolment** (assessed، والـ excluded بأسبابهم)، ثم **randomized**، ثم **allocation** (خد أو ماخدش)، ثم **follow-up** (ضاع أو وقف)، ثم **analysis**. ونفس الترتيب في كل جروب."
       - kind: explain
         page: 94
-        quote: "Quality scores are complicated and tend to vary depending on the instrument used"
+        quote: "Quality assessment of RCTs. Various approaches used:\n  Checklist approach\n  Quality scoring system approach\nQuality scores are complicated and tend to vary depending on the instrument used, so, not encouraged"
         title: "إزاي تحكم على جودة الـ RCT؟"
         text: |
           طريقتين:
@@ -958,7 +958,7 @@ lessons:
           بس الـ quality scores **complicated** وبتختلف حسب الأداة، **فمش مُشجَّعة**.
       - kind: reveal
         page: 96
-        quote: "Did experimental and control groups begin the study with a similar prognosis"
+        quote: "Checklist approach, Users' Guides for an Article About Therapy:\n  Are the results valid?\n    Did experimental and control groups begin the study with a similar prognosis? Were patients randomized? Was randomization concealed (blinded or masked)? Were patients analyzed in the groups to which they were randomized? Were patients in the treatment and control groups similar with respect to known prognostic factors?\n    Did experimental and control groups retain a similar prognosis after the study started? Were patients aware of group allocation? Were clinicians aware of group allocation? Were outcome assessors aware of group allocation? Was follow-up complete?\n  What are the results?\n    How large was the treatment effect?\n    How precise was the estimate of the treatment effect?\n  How can I apply the results to patient care?\n    Were the study patients similar to my patient?\n    Were all clinically important outcomes considered?\n    Are the likely treatment benefits worth the potential harm and costs?"
         prompt: "في الـ checklist: «هل الجروبين **بدأوا** بنفس الـ prognosis؟» إيه الـ 4 أسئلة اللي بتجاوب ده؟"
         answer: |
           1. Were patients **randomized**?
@@ -969,7 +969,7 @@ lessons:
           وبعدها: «هل **فضلوا** بنفس الـ prognosis؟» = blinding للعيان والدكتور والـ assessor، و follow-up كامل.
       - kind: explain
         page: 97
-        quote: "one characteristic of a true experiment is missing"
+        quote: "In a QUASI-EXPERIMENTAL STUDY, one characteristic of a true experiment is missing:\n  Randomization or\n  Use of a separate control group.\nPretest-Posttest Design"
         title: "Quasi-experimental: ناقصها حاجة"
         text: |
           في الـ ==quasi-experimental study== حاجة واحدة من الـ true experiment ناقصة:
@@ -981,7 +981,7 @@ lessons:
           - **Classical quasi-experimental**: جروب intervention وجروب comparison **من غير قرعة**، وقياس قبل وبعد في الاتنين.
       - kind: figure
         page: 99
-        quote: "Classical Quasi-Experimental Design"
+        quote: "Classical Quasi-Experimental Design (Non-random assignment to groups):\n  Intervention group: A1 → Intervention → A2\n  Control group: B1 → (no intervention) → B2\nA1, B1 = Pre-intervention data collection points; A2, B2 = Post-intervention data collection points"
         title: "التصميمين جنب بعض"
         alt: "Top row, one-group pre-test post-test: measurement, treatment, measurement, with no control group. Bottom, classical quasi-experimental design: non-random assignment into an intervention group and a comparison group; both are measured before (A1, B1) and after (A2, B2), and only the intervention group gets the treatment."
         caption: "فوق: **مفيش control**. تحت: فيه control **بس مش بالقرعة**. في الاتنين الـ **internal validity** في خطر."
@@ -1019,7 +1019,7 @@ lessons:
           </svg>
       - kind: check
         page: 100
-        quote: "Internal validity refers to the degree to which a researcher can be sure that the treatment was responsible for the change"
+        quote: "Quasi-experiments are subject to concerns regarding internal validity, because the treatment and control groups may not be comparable at baseline (pre-intervention characteristics).\nInternal validity refers to the degree to which a researcher can be sure that the treatment was responsible for the change in the experimental group."
         question: "Why are quasi-experiments a concern for internal validity?"
         options:
           - "The groups may not be comparable at baseline"
@@ -1055,7 +1055,7 @@ lessons:
     steps:
       - kind: explain
         page: 107
-        quote: "The risk of unbalanced randomization decreases"
+        quote: "When increasing the sample size (e.g. by including more participants in a trial), which of the following statements are true:\n  a) The confidence interval increases\n  b) The confidence interval decreases\n  c) The power increases\n  d) The power decreases\n  e) The risk of unbalanced randomization decreases\nAnswer: b, c, e"
         title: "لو كبّرت العيّنة..."
         text: |
           سؤال شريحة 107 ليه **3 إجابات صح**:
@@ -1064,11 +1064,11 @@ lessons:
           - الـ **power increases**.
           - الـ **risk of unbalanced randomization decreases**.
 
-          والغلط: إن الـ CI يوسع، أو إن الـ power يقل.
+          والغلط: إن الـ confidence interval (CI) يوسع، أو إن الـ power يقل.
       - kind: check
         page: 110
-        quote: "Ensure study groups are comparable on baseline characteristics"
-        question: "The major purpose of random assignment in an RCT is to:"
+        quote: "The major purpose of random assignment in a RCT is to:\n  a. Facilitate double blinding\n  b. Facilitate measurement of outcome variables\n  c. Ensure study groups are comparable on baseline characteristics\n  d. Reduce ascertainment bias."
+        question: "The major purpose of random assignment in a randomized controlled trial (RCT) is to:"
         options:
           - "Facilitate double blinding"
           - "Facilitate measurement of outcomes"
@@ -1082,7 +1082,7 @@ lessons:
           - "الـ ascertainment bias بيتمنع بالـ blinding."
       - kind: sort
         page: 117
-        quote: "In single blinding"
+        quote: "In single blinding, … is unaware of the status of the subject?\n  (a) Analyzer\n  (b) Observer\n  (c) Subject\n  (d) All of the above"
         prompt: "مين مش عارف الجروب في كل نوع blinding؟"
         bins: ["Single", "Double", "Triple"]
         cards:
@@ -1093,7 +1093,7 @@ lessons:
       - kind: aside
         tone: trap
         page: 114
-        quote: "the clinician assessing the patients condition does not know which treatment the patient has received"
+        quote: "State True (T) or False (F) for each of the following statements. In a double blind clinical trial:\n  (a) the patients do not know which treatment they receive.\n  (b) each patient receives a placebo.\n  (c) the patients do not know they are in a trial.\n  (d) each patient receives both treatments\n  (e) the clinician assessing the patients' condition does not know which treatment the patient has received."
         text: |
           شريحة 114: «في الـ double blind trial» صح ولا غلط:
 
@@ -1104,7 +1104,7 @@ lessons:
           - الـ clinician اللي بيقيّم مش عارف العلاج: **صح**.
       - kind: check
         page: 112
-        quote: "Researchers compared telephone company and police records"
+        quote: "Does using a cell phone while driving make an accident more likely? Researchers compared telephone company and police records to find 699 people who had cell phones and were also involved in an auto accident. Using phone billing records, they compared cell phone use in the period of the accident with cell phone use the same period on a previous day. Result: the risk of an accident was four times higher when using a cell phone. This study is:\n  a. A randomized comparative experiment\n  b. An experiment but without randomization\n  c. An observational study\n  d. A simple random sample\nAnswer: c"
         question: "699 drivers with accidents; phone use just before the crash compared with the same time on a previous day. This study is:"
         options:
           - "A randomized comparative experiment"
@@ -1119,7 +1119,7 @@ lessons:
           - "الـ simple random sample طريقة sampling، مش design."
       - kind: order
         page: 116
-        quote: "Arrange the followings ascending according to the level of evidence"
+        quote: "Arrange the followings ascending according to the level of evidence.\n  A. Cohort study\n  B. Randomized controlled study\n  C. Case control study\n  D. Case series\n  E. Expert opinion\nAnswer: E, D, C, A, B"
         prompt: "رتّب من الأضعف للأقوى في الـ evidence:"
         steps:
           - "Expert opinion"
@@ -1130,7 +1130,7 @@ lessons:
         why: "إجابة الشريحة E، D، C، A، B: expert opinion، ثم case series، ثم case-control، ثم cohort، وفوق الكل الـ RCT."
       - kind: order
         page: 118
-        quote: "While conducting experimental study, arrange the following steps in sequential manner"
+        quote: "While conducting experimental study, arrange the following steps in sequential manner: 1) Randomization 2) Blinding 3) Statistical analysis 4) Enumerate the inclusion and exclusion criteria\n  a. 4,1,2,3\n  b. 4,2,1,3\n  c. 2,1,3,4\n  d. 2,1,4,3\nAnswer: a"
         prompt: "رتّب الخطوات دي في التجربة:"
         steps:
           - "Enumerate the inclusion and exclusion criteria"
@@ -1140,8 +1140,8 @@ lessons:
         why: "خطوات الـ experimental study بالترتيب: الـ criteria الأول (step 3)، بعدين القرعة (step 8)، بعدين الـ blinding (step 10)، وآخر حاجة التحليل (step 12)."
       - kind: check
         page: 121
-        quote: "best suited to comparing cognitive behavioural therapy with a selective reuptake inhibitor"
-        question: "Best method to compare CBT with an SSRI in anxiety disorder?"
+        quote: "Which of the following research methods is best suited to comparing cognitive behavioural therapy with a selective reuptake inhibitor in anxiety disorder:\n  a. Double blind and placebo controlled\n  b. Randomization and open label\n  c. Randomization and placebo controlled (un blinded)\n  d. Randomization and triple blind"
+        question: "Best method to compare cognitive behavioural therapy (CBT) with a selective serotonin reuptake inhibitor (SSRI) in anxiety disorder?"
         options:
           - "Double blind and placebo controlled"
           - "Randomization and open label"
@@ -1156,7 +1156,7 @@ lessons:
       - kind: aside
         tone: exam
         page: 120
-        quote: "It uses a single dose of drug determined from the Phase I experience"
+        quote: "Which one of the following characterizes phase II drug testing?\n  a. It uses a single dose of drug determined from the Phase I experience.\n  b. It always treats divergent pathologies in a single trial.\n  c. It is the first human clinical experience with a new agent.\n  d. It always leads to a new drug approval from FDA."
         text: |
           أسئلة الـ **phases** في التمارين:
 

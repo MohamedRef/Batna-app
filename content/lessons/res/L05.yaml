@@ -16,7 +16,7 @@ lessons:
     steps:
       - kind: explain
         page: 9
-        quote: "The key feature of analytic epidemiology is a comparison group."
+        quote: "ANALYTICAL STUDIES:\n  To quantify the association between exposures and outcomes, and to test hypotheses about causal relationships.\n  The key feature of analytic epidemiology is a comparison group."
         title: "من الوصف للاختبار"
         text: |
           في المحاضرة اللي فاتت الـ descriptive كان بيوصف و**يقترح** hypotheses. دلوقتي الـ ==analytic== بيعمل حاجتين:
@@ -29,7 +29,7 @@ lessons:
           والنوعين الأشهر: **case-control** و **cohort**.
       - kind: table
         page: 6
-        quote: "Test hypotheses"
+        quote: "Types of Epi Studies: Observational\n  Descriptive: Natural history; Allocation of resources; Suggest hypotheses\n  Analytic: Test hypotheses; Assess causation"
         title: "Observational: مين بيعمل إيه؟"
         columns: ["Descriptive", "Analytic"]
         rows:
@@ -39,7 +39,7 @@ lessons:
         hide: [[0, 1], [1, 1]]
       - kind: check
         page: 4
-        quote: "Comparison Group?"
+        quote: "Overview of Epidemiologic Study Designs:\n  EXPERIMENTAL: Random allocation of study subjects; Investigator assigns treatment or exposure:\n    Randomized Control Trials\n    Community Trials\n    Laboratory Trials\n  OBSERVATIONAL: Investigators study people and exposures \"in nature\". Comparison Group?\n    NO, DESCRIPTIVE: Correlational; Case Series; Case Reports; Cross-Sectional\n    YES, ANALYTIC: Case-Control; Cohort"
         question: "A comparison (control) group is lacking in:"
         options: ["Cross-sectional studies", "Case-control studies", "Cohort studies", "Randomized controlled trial"]
         answer: 0
@@ -47,10 +47,10 @@ lessons:
           - "صح: المحاضرة حاطاه تحت **descriptive**، ومفيش comparison group."
           - "الـ **controls** هم الـ comparison group."
           - "الـ unexposed cohort هو الـ comparison group."
-          - "الـ RCT ليه control arm دايمًا."
+          - "الـ randomized controlled trial (RCT) ليه control arm دايمًا."
       - kind: explain
         page: 8
-        quote: "Disease or other health-related event under study (Dependent variable)"
+        quote: "Definitions of terms:\n  EXPOSED: Having, or being exposed to, a potential cause or risk factor for disease or other outcome (Independent variable)\n  OUTCOME: Disease or other health-related event under study (Dependent variable)\n  PREVALENCE: A measure of the burden of disease in a population, calculated as the number of individuals with a disease or outcome divided by the total number of individuals in a defined population at a given time. Prevalence is expressed as a proportion (%)\n  INCIDENCE: A measure of the rate at which new cases of a disease occur in a population, calculated as the number of new cases divided by the population at risk over time. Incidence is expressed as a rate per unit time (for example, annual rate)"
         title: "متغيرين بس"
         text: |
           - **Exposure** = ==independent variable== (السبب المحتمل).
@@ -59,7 +59,7 @@ lessons:
           الـ outcome «dependent» لأنه بيعتمد على الـ exposure. سهلة.
       - kind: explain
         page: 12
-        quote: "The selection of individuals on the basis of whether they do (cases) or they do not (control) have a particular disease"
+        quote: "Case Control Study, Definition: The selection of individuals on the basis of whether they do (cases) or they do not (control) have a particular disease then compared in respect to the proportion having a history of an exposure or certain characteristic of illness"
         title: "تعريف الـ case-control"
         text: |
           بنختار الناس على أساس ==المرض==:
@@ -70,7 +70,7 @@ lessons:
           وبعدين نقارن: كام في المية من كل مجموعة ==كان عنده exposure== في الماضي؟
       - kind: figure
         page: 13
-        quote: "Backwards Directionality"
+        quote: "Case-control studies, Backwards Directionality: start from Outcome/Disease (Yes or No) and look back in time to Exposure (?)"
         title: "Backwards directionality"
         alt: "A time arrow runs left to right from exposure to outcome. Two boxes on the right, disease yes and disease no, each with an arrow pointing backwards to a question mark on the exposure side. Study begins in the present."
         caption: "الزمن ماشي من الـ exposure للمرض، بس الـ case-control **بيمشي عكسه**: يبدأ من المرض النهارده ويدوّر على الـ exposure في الماضي. من **effect to cause**."
@@ -98,14 +98,14 @@ lessons:
       - kind: aside
         tone: analogy
         page: 13
-        quote: "Backwards Directionality"
+        quote: "Case-control studies, Backwards Directionality: start from Outcome/Disease (Yes or No) and look back in time to Exposure (?)"
         text: |
           الـ case-control (**backwards directionality**) زي المحقق في فيلم عربي قديم: الجريمة حصلت خلاص (المرض)، وهو بيرجع **لورا** يسأل «كنت فين ليلة الحادثة؟» (الـ exposure).
 
           والـ cohort (هنشوفه بعدين) زي الكاميرا اللي بتسجّل من الأول وتستنى تشوف هيحصل إيه.
       - kind: order
         page: 14
-        quote: "Case Control Study Steps"
+        quote: "Case Control Study Steps:\n  Definition of cases\n  Selection of cases\n  Selection of Controls\n  Ascertainment of exposure status\n  Analysis\n  Conclusion and interpretation"
         prompt: "رتّب خطوات الـ case-control study:"
         steps:
           - "Definition of cases"
@@ -117,7 +117,7 @@ lessons:
         why: "تعرّف الـ case، تختارهم، تختار الـ controls، تعرف مين اتعرض، تحلل، وبعدين تفسّر."
       - kind: explain
         page: 16
-        quote: "Ensures that all persons who are counted as cases actually have the same disease"
+        quote: "Case Definition:\n  A set of standard diagnostic criteria that must be fulfilled in order to identify a person as a case of a particular disease\n  Ensures that all persons who are counted as cases actually have the same disease\n  Typically includes clinical criteria (lab results, symptoms, signs) and sometimes restrictions on time, place, and person"
         title: "الـ case definition"
         text: |
           ==Case definition== = مجموعة **standard diagnostic criteria** لازم تتحقق علشان تعتبر حد case.
@@ -126,10 +126,10 @@ lessons:
 
           بتشمل clinical criteria (lab، symptoms، signs)، وأحيانًا قيود على **time, place, person**.
 
-          مثال المحاضرة: hypertension in pregnancy حسب ACOG: diastolic ≥ 90 أو systolic ≥ 140 بعد 20 أسبوع، في ست كان ضغطها طبيعي، متسجل مرتين بينهم 4 ساعات.
+          مثال المحاضرة: hypertension in pregnancy حسب American College of Obstetricians and Gynecologists (ACOG): diastolic ≥ 90 أو systolic ≥ 140 بعد 20 أسبوع، في ست كان ضغطها طبيعي، متسجل مرتين بينهم 4 ساعات.
       - kind: reveal
         page: 18
-        quote: "Preferably new cases or incident cases"
+        quote: "Selection of Cases:\n  Preferably new cases or incident cases\n  Prevalent cases (cases already present)"
         prompt: "تاخد cases جديدة (incident) ولا قديمة (prevalent)؟ وليه؟"
         answer: |
           المحاضرة: ==preferably new (incident) cases==، والـ prevalent ممكن تتاخد.
@@ -137,7 +137,7 @@ lessons:
           السبب المنطقي (مش من نص المحاضرة): العيان القديم ممكن يكون غيّر عاداته بسبب المرض، أو ذاكرته عن الـ exposure بقت أضعف، والعيانين اللي ماتوا بدري مش هيبقوا موجودين أصلًا.
       - kind: check
         page: 15
-        quote: "source of cases - hospital, general population"
+        quote: "Cases:\n  Define case: diagnostic and eligibility criteria\n  Source of cases: hospital, general population"
         question: "Which statement about cases in a case-control study is correct?"
         options:
           - "Cases are chosen because they were exposed"
@@ -175,7 +175,7 @@ lessons:
     steps:
       - kind: explain
         page: 19
-        quote: "Control must be Ideally matching with the cases by age, sex and other characteristics"
+        quote: "Control: Control must be Ideally matching with the cases by age, sex and other characteristics except the control must not be suffering from diseases"
         title: "الـ control المثالي"
         text: |
           الـ control لازم يكون ==شبه الـ case في كل حاجة== (السن، النوع، وصفات تانية)، ==ما عدا المرض==.
@@ -183,7 +183,7 @@ lessons:
           الفكرة: لو المجموعتين شبه بعض في كل حاجة، أي فرق في الـ exposure يبقى له معنى.
       - kind: explain
         page: 22
-        quote: "factors other than the studied exposure that disturb the relation between the studied exposure and the disease"
+        quote: "Confounding factors: These are factors other than the studied exposure that disturb the relation between the studied exposure and the disease"
         title: "الـ confounder: الطرف التالت"
         text: |
           ==Confounding factor== = عامل **غير** الـ exposure اللي بندرسه، بيلخبط العلاقة بين الـ exposure والمرض.
@@ -194,7 +194,7 @@ lessons:
           - وبيأثر لوحده على **المرض**.
       - kind: figure
         page: 25
-        quote: "(Confounder}"
+        quote: "Coffee (Exposure) → Pancreatic Cancer (Disease), with Smoking (Confounder) linked to both"
         title: "القهوة، السجاير، والـ pancreas"
         alt: "Triangle. Coffee (exposure) with a dashed arrow to pancreatic cancer (disease). Smoking (confounder) at the bottom, linked both ways to coffee and with a solid arrow to pancreatic cancer."
         caption: "شاربين القهوة بيدخنوا أكتر، والتدخين بيعمل pancreatic cancer. فالقهوة **شكلها** متهمة، والـ confounder هو اللي عمل كده."
@@ -223,7 +223,7 @@ lessons:
           </svg>
       - kind: explain
         page: 24
-        quote: "If the average ages of the smoking and non-smoking groups are very different"
+        quote: "Examples … confounding: SMOKING → LUNG CANCER, with AGE linked to both\n  AGE (As age advances chances of lung cancer increase)\n  (If the average ages of the smoking and non-smoking groups are very different)"
         title: "مثال تاني: السن"
         text: |
           في دراسة **smoking و lung cancer**: الـ lung cancer بيزيد مع السن.
@@ -231,7 +231,7 @@ lessons:
           لو متوسط سن المدخنين أكبر بكتير من غير المدخنين، جزء من الفرق ممكن يكون من ==السن== مش من التدخين بس. هنا ==age is a confounder==.
       - kind: explain
         page: 21
-        quote: "match upon a potential confounding variable in order to remove the confounding effect"
+        quote: "Matched case-control study: we enroll controls based upon some characteristic(s) of the case.\nThe idea in matching is to match upon a potential confounding variable in order to remove the confounding effect."
         title: "الحل: matching"
         text: |
           في الـ ==matched case-control== بنختار الـ controls على أساس صفات الـ case.
@@ -239,7 +239,7 @@ lessons:
           ونعمل match على الـ ==potential confounding variable== علشان نشيل تأثيره. لو كل case عنده 60 سنة جاله control عنده 60 سنة، السن مايقدرش يعمل الفرق.
       - kind: check
         page: 21
-        quote: "match upon a potential confounding variable in order to remove the confounding effect"
+        quote: "Matched case-control study: we enroll controls based upon some characteristic(s) of the case.\nThe idea in matching is to match upon a potential confounding variable in order to remove the confounding effect."
         question: "Why do we match controls to cases on age in a smoking-lung cancer study?"
         options:
           - "To increase the number of cases"
@@ -254,7 +254,7 @@ lessons:
           - "الـ case-control مايقدرش يحسب incidence مباشرة."
       - kind: table
         page: 26
-        quote: "Selection of controls: Sources"
+        quote: "Selection of controls: Sources\n| Source | Advantage | Disadvantage |\n|---|---|---|\n| Hospital based | Easily identified. Available for interview. More willing to cooperate. Tend to give complete and accurate information (↓recall bias). | Not typical of general population. Possess more risk factors for disease. Some diseases may share risk factors with disease under study (whom to exclude???) |\n| Population based (registry cases) | Most representative of the general population. Generally healthy. | Time, money, energy. Opportunity of exposure may not be same as that of cases (locⁿ, occu.) |\n| Neighbourhood controls/ Telephone exchange random dialing | Controls and cases similar in residence. Easier than sampling the population. | Non cooperation. Security issues. Not representative of general population. |\n| Best friend control/ Sibling control | Accessible, Cooperative. Similar to cases in most | Overmatching. |"
         title: "Sources of controls"
         columns: ["Source", "Plus", "Minus"]
         rows:
@@ -266,14 +266,14 @@ lessons:
       - kind: aside
         tone: joke
         page: 26
-        quote: "Overmatching"
+        quote: "Selection of controls: Sources\n| Source | Advantage | Disadvantage |\n|---|---|---|\n| Hospital based | Easily identified. Available for interview. More willing to cooperate. Tend to give complete and accurate information (↓recall bias). | Not typical of general population. Possess more risk factors for disease. Some diseases may share risk factors with disease under study (whom to exclude???) |\n| Population based (registry cases) | Most representative of the general population. Generally healthy. | Time, money, energy. Opportunity of exposure may not be same as that of cases (locⁿ, occu.) |\n| Neighbourhood controls/ Telephone exchange random dialing | Controls and cases similar in residence. Easier than sampling the population. | Non cooperation. Security issues. Not representative of general population. |\n| Best friend control/ Sibling control | Accessible, Cooperative. Similar to cases in most | Overmatching. |"
         text: |
           تجيب صاحبك الأنتيم control؟ هو بيقعد معاك على نفس القهوة، بيشرب نفس الشيشة، وبياكل من نفس عربية الفول 😅
 
           شبهك **أوي** لدرجة إنه بيشيل الفرق اللي إنت بتدوّر عليه. ده اسمه **overmatching**.
       - kind: check
         page: 26
-        quote: "Most representative of the general population"
+        quote: "Selection of controls: Sources\n| Source | Advantage | Disadvantage |\n|---|---|---|\n| Hospital based | Easily identified. Available for interview. More willing to cooperate. Tend to give complete and accurate information (↓recall bias). | Not typical of general population. Possess more risk factors for disease. Some diseases may share risk factors with disease under study (whom to exclude???) |\n| Population based (registry cases) | Most representative of the general population. Generally healthy. | Time, money, energy. Opportunity of exposure may not be same as that of cases (locⁿ, occu.) |\n| Neighbourhood controls/ Telephone exchange random dialing | Controls and cases similar in residence. Easier than sampling the population. | Non cooperation. Security issues. Not representative of general population. |\n| Best friend control/ Sibling control | Accessible, Cooperative. Similar to cases in most | Overmatching. |"
         question: "Which source gives the most representative controls?"
         options: ["Hospital controls", "Population-based (registry) controls", "Best-friend controls", "Sibling controls"]
         answer: 1
@@ -284,7 +284,7 @@ lessons:
           - "الإخوات = overmatching برضه."
       - kind: explain
         page: 27
-        quote: "But if cases < 50 therefore 2,3 or 4 times the number of cases"
+        quote: "Size of Controls:\n  Equal to the number of cases\n  But if cases < 50 therefore 2, 3 or 4 times the number of cases"
         title: "كام control؟ ونعرف الـ exposure إزاي؟"
         text: |
           - عادة عدد الـ controls ==equal== لعدد الـ cases.
@@ -309,14 +309,14 @@ lessons:
     pages: [29, 37]
     topics: [odds-ratio, cc-merits]
     goals:
-      - "تحسب الـ OR من أي 2×2 table"
+      - "تحسب الـ odds ratio (OR) من أي 2×2 table"
       - "تفسّر OR = 1 و > 1 و < 1"
       - "تعرف مزايا وعيوب الـ case-control"
     status: unverified
     steps:
       - kind: explain
         page: 32
-        quote: "ODDS: the probability of an event (exposure) occurring to the probability of the event not occurring"
+        quote: "ODDS: the probability of an event (exposure) occurring to the probability of the event not occurring\n  CASES: a/a+c divided by c/a+c = a/c\n  CONTROLS: b/b+d divided by d/b+d = b/d\nODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc"
         title: "يعني إيه odds؟"
         text: |
           ==Odds== = احتمال إن الحدث يحصل ÷ احتمال إنه **مايحصلش**.
@@ -327,7 +327,7 @@ lessons:
           - Odds في الـ **controls** = b/d
       - kind: table
         page: 31
-        quote: "Tabulation and Analysis"
+        quote: "Tabulation and Analysis\n| Exposure Status | Disease Status: Yes | Disease Status: No |\n|---|---|---|\n| Yes | a | b |\n| No | c | d |\n| Total | a+c | b+d |"
         title: "Tabulation and analysis: the case-control 2×2"
         columns: ["Exposure", "Disease: yes (cases)", "Disease: no (controls)"]
         rows:
@@ -337,7 +337,7 @@ lessons:
         hide: [[1, 1], [0, 2]]
       - kind: explain
         page: 32
-        quote: "ODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc"
+        quote: "ODDS: the probability of an event (exposure) occurring to the probability of the event not occurring\n  CASES: a/a+c divided by c/a+c = a/c\n  CONTROLS: b/b+d divided by d/b+d = b/d\nODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc"
         title: "الـ odds ratio"
         text: |
           ==OR== = odds of exposure في الـ cases ÷ odds of exposure في الـ controls
@@ -347,7 +347,7 @@ lessons:
           يعني اضرب **القطر** (a × d) وقسّم على **القطر التاني** (b × c).
       - kind: mnemonic
         page: 32
-        quote: "ODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc"
+        quote: "ODDS: the probability of an event (exposure) occurring to the probability of the event not occurring\n  CASES: a/a+c divided by c/a+c = a/c\n  CONTROLS: b/b+d divided by d/b+d = b/d\nODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc"
         word: "CROSS"
         parts:
           - { key: "C", text: "Cases column first: a over c" }
@@ -358,7 +358,7 @@ lessons:
         hook: "الـ OR اسمه كمان **cross-product ratio**: اعمل **X** على الجدول."
       - kind: case
         page: 34
-        quote: "Odds ratio = 160 x 110 = 4.89 90 x 40"
+        quote: "Example: Alcohol Consumption and Laryngeal Cancer\n| | Cases | Controls |\n|---|---|---|\n| Alcohol | 160 | 90 |\n| No Alcohol | 40 | 110 |\n| Total | 200 | 200 |\nOdds ratio = 160 x 110 / 90 x 40 = 4.89\nInterpretation: The odds of alcohol consumption are 4.89 times greater among those with laryngeal cancer than the odds of alcohol consumption among those without laryngeal cancer."
         stem: "Alcohol and laryngeal cancer. Cases: 160 drank, 40 did not. Controls: 90 drank, 110 did not."
         steps:
           - question: "What is the odds of alcohol among the cases?"
@@ -377,7 +377,7 @@ lessons:
             why: "الـ case-control بيقارن **odds of exposure** بين العيانين والسليمين، ده تفسير المحاضرة. الـ «risk» بتاعة الـ cohort."
       - kind: table
         page: 33
-        quote: "Interpretation of Odds Ratio"
+        quote: "Interpretation of Odds Ratio:\n  What do you understand by OR = 1 ?\n  What do you understand by OR = 3 ?\n  What is your opinion if OR is less than 1"
         title: "Interpretation of the odds ratio"
         columns: ["OR", "Meaning"]
         rows:
@@ -387,7 +387,7 @@ lessons:
         hide: [[0, 1], [2, 1]]
       - kind: check
         page: 35
-        quote: "The table below summarizes the findings of a case-control study."
+        quote: "The table below summarizes the findings of a case-control study.\n| Risk factor | Diseased | Non-diseased |\n|---|---|---|\n| Present | 30 | 20 |\n| Absent | 20 | 30 |\nThe Odd's ratio equals:\n  A. 0.44\n  B. 0.80\n  C. 1.50\n  D. 2.25"
         question: "In a case-control study, risk factor present: 30 diseased, 20 non-diseased. Absent: 20 diseased, 30 non-diseased. OR = ?"
         options: ["0.44", "0.80", "1.50", "2.25"]
         answer: 3
@@ -398,7 +398,7 @@ lessons:
           - "صح: (30 × 30)/(20 × 20) = 900/400 = **2.25**."
       - kind: sort
         page: 36
-        quote: "Advantages and disadvantages of case- control studies"
+        quote: "Advantages and disadvantages of case-control studies\n| Advantages | Disadvantages |\n|---|---|\n| Cheap, easy and quick studies | Subject to bias (selection, recall, misclassification) |\n| Multiple exposures can be examined | Direct incidence estimation is not possible |\n| Rare diseases and diseases with long latency can be studied | Temporal relationship is not clear |\n| Suitable when randomization is unethical (e.g., alcohol and pregnancy outcome) | Multiple outcomes cannot be studied |\n| | If the incidence of exposure is high, it is difficult to show the difference between cases and controls |\n| | Relative and attributable risk cannot be estimated |"
         prompt: "ميزة ولا عيب للـ case-control؟"
         bins: ["Advantage", "Disadvantage"]
         cards:
@@ -410,19 +410,19 @@ lessons:
           - { text: "No direct incidence", bin: 1 }
           - { text: "Temporal relationship not clear", bin: 1 }
           - { text: "Multiple outcomes cannot be studied", bin: 1 }
-          - { text: "RR and AR cannot be estimated", bin: 1 }
+          - { text: "relative risk (RR) and attributable risk (AR) cannot be estimated", bin: 1 }
         why: "الـ case-control سريع ورخيص وممتاز للنادر وطويل الـ latency، وبيدرس exposures كتير. بس مايدّيش incidence ولا RR/AR، والتسلسل الزمني مش واضح، ومرض واحد بس، وفيه bias."
       - kind: aside
         tone: trap
         page: 36
-        quote: "Multiple outcomes cannot be studied"
+        quote: "Advantages and disadvantages of case-control studies\n| Advantages | Disadvantages |\n|---|---|\n| Cheap, easy and quick studies | Subject to bias (selection, recall, misclassification) |\n| Multiple exposures can be examined | Direct incidence estimation is not possible |\n| Rare diseases and diseases with long latency can be studied | Temporal relationship is not clear |\n| Suitable when randomization is unethical (e.g., alcohol and pregnancy outcome) | Multiple outcomes cannot be studied |\n| | If the incidence of exposure is high, it is difficult to show the difference between cases and controls |\n| | Relative and attributable risk cannot be estimated |"
         text: |
           الفخ الكلاسيكي: **multiple exposures ✓** لكن **multiple outcomes ✗**.
 
           منطقي: إنت اخترت الـ cases على أساس **مرض واحد**، فمش هتقدر تدرس أمراض تانية. بس تقدر تسألهم عن كل الـ exposures اللي تخطر على بالك.
       - kind: check
         page: 36
-        quote: "Multiple outcomes cannot be studied"
+        quote: "Advantages and disadvantages of case-control studies\n| Advantages | Disadvantages |\n|---|---|\n| Cheap, easy and quick studies | Subject to bias (selection, recall, misclassification) |\n| Multiple exposures can be examined | Direct incidence estimation is not possible |\n| Rare diseases and diseases with long latency can be studied | Temporal relationship is not clear |\n| Suitable when randomization is unethical (e.g., alcohol and pregnancy outcome) | Multiple outcomes cannot be studied |\n| | If the incidence of exposure is high, it is difficult to show the difference between cases and controls |\n| | Relative and attributable risk cannot be estimated |"
         question: "Which is INCORRECT about a case-control study?"
         options:
           - "Many risk factors can be studied at the same time"
@@ -438,9 +438,9 @@ lessons:
       - kind: aside
         tone: exam
         page: 36
-        quote: "unethical (e.g., alcohol and"
+        quote: "Advantages and disadvantages of case-control studies\n| Advantages | Disadvantages |\n|---|---|\n| Cheap, easy and quick studies | Subject to bias (selection, recall, misclassification) |\n| Multiple exposures can be examined | Direct incidence estimation is not possible |\n| Rare diseases and diseases with long latency can be studied | Temporal relationship is not clear |\n| Suitable when randomization is unethical (e.g., alcohol and pregnancy outcome) | Multiple outcomes cannot be studied |\n| | If the incidence of exposure is high, it is difficult to show the difference between cases and controls |\n| | Relative and attributable risk cannot be estimated |"
         text: |
-          مثال المحاضرة لـ «suitable when randomization is unethical»: **alcohol and pregnancy outcome**. محدش هيعمل RCT يقول فيه لست حامل «اشربي».
+          مثال المحاضرة لـ «suitable when randomization is unethical»: **alcohol and pregnancy outcome**. محدش هيعمل randomized controlled trial (RCT) يقول فيه لست حامل «اشربي».
       - kind: try
         items: [res.L05.021, res.L05.022, res.L05.023, res.L05.026, res.L05.028]
     recap:
@@ -460,13 +460,13 @@ lessons:
     topics: [cohort, risk]
     goals:
       - "تعرّف الـ cohort وترتب خطواته"
-      - "تحسب Ie و Io و RR و AR و ARP"
+      - "تحسب Ie و Io و relative risk (RR) و attributable risk (AR) و attributable risk percent (ARP)"
       - "تفسّر كل رقم بجملة المحاضرة"
     status: unverified
     steps:
       - kind: explain
         page: 38
-        quote: "a group of individuals that is exposed to a risk factor (study group) is compared to a group of individuals not exposed"
+        quote: "Cohort studies:\n  In a COHORT STUDY, a group of individuals that is exposed to a risk factor (study group) is compared to a group of individuals not exposed to the risk factor (control group).\n  The researcher follows both groups over time and compares the occurrence of the problem that he expects to be related to the risk factor in the two groups to determine whether a greater proportion of those with the risk factor are indeed affected."
         title: "الـ cohort: نبدأ من الـ exposure"
         text: |
           في الـ ==cohort== بنبدأ بمجموعتين:
@@ -477,7 +477,7 @@ lessons:
           ونتابعهم ==over time== ونقارن مين بيجيله المرض أكتر. يعني **forward**: من الـ cause للـ effect.
       - kind: figure
         page: 40
-        quote: "Diagram of a cohort study"
+        quote: "Diagram of a cohort study:\n  Group of interest (e.g. smokers): Follow over time\n  Comparison group (e.g. non-smokers): Follow over time\n  Compare outcomes"
         title: "الكاميرا اللي بتسجّل لقدّام"
         alt: "Diagram of a cohort study. Two rows. Top: group of interest, smokers, five people, arrow follow over time, then five people with two now diseased. Bottom: comparison group, non-smokers, arrow follow over time, then five people with one diseased. A bracket says compare outcomes."
         caption: "نبدأ **من غير مرض** في الاتنين، نختار على أساس الـ **exposure**، ونتابع لقدّام ونقارن الـ outcomes."
@@ -507,7 +507,7 @@ lessons:
           </svg>
       - kind: order
         page: 41
-        quote: "Steps of a cohort study"
+        quote: "Steps of a cohort study:\n  1. Selection of study subjects\n  2. Obtaining data on exposure\n  3. Selection of a comparison group\n  4. Follow up\n  5. Analysis"
         prompt: "رتّب خطوات الـ cohort study:"
         steps:
           - "Selection of study subjects"
@@ -518,7 +518,7 @@ lessons:
         why: "تختار الناس، تعرف مين exposed وبدرجة قد إيه، تختار مجموعة المقارنة، تتابع، وبعدين تحلل."
       - kind: explain
         page: 42
-        quote: "-Heterogeneous (internal comparison) e.g smoking"
+        quote: "Prospective Cohort, Selection of cohort:\n  Heterogeneous (internal comparison) e.g smoking\n  Homogeneous (external comparison) e.g X-ray"
         title: "Heterogeneous ولا homogeneous؟"
         text: |
           - ==Heterogeneous== cohort: نفس المجموعة فيها exposed و unexposed، فالمقارنة **internal** (مثال: smoking).
@@ -528,7 +528,7 @@ lessons:
           والـ **follow-up**: periodic medical exam، records، death records، mailed questionnaires، تليفونات، زيارات بيت.
       - kind: check
         page: 46
-        quote: "obtaining smoking histories from women at the time of the prenatal visit"
+        quote: "The association between low birth weight and maternal smoking during pregnancy can be studied by obtaining smoking histories from women at the time of the prenatal visit, and then correlating birth weight (outcome) with smoking histories (exposure). What type of study is this?\n  A. Clinical trial\n  B. Cross-sectional\n  C. Prospective cohort\n  D. Case-control\n  E. Correlation"
         question: "Smoking histories are taken at the prenatal visit, and birth weight is later correlated with smoking. This study is:"
         options: ["Clinical trial", "Cross-sectional", "Prospective cohort", "Case-control"]
         answer: 2
@@ -539,7 +539,7 @@ lessons:
           - "الـ case-control كان هيبدأ من الأطفال اللي وزنهم قليل ويرجع لورا."
       - kind: explain
         page: 50
-        quote: "Incidence among exposed = Ie a a+b"
+        quote: "Incidence rate:\n  Incidence among exposed = Ie = a / a+b\n  Incidence among non-exposed = Io = c / c+d"
         title: "Ie و Io"
         text: |
           في جدول الـ cohort: الصفوف = exposed / not exposed، والأعمدة = disease yes / no.
@@ -550,7 +550,7 @@ lessons:
           ولاحظ: هنا بنمشي **بالعرض** على الصفوف، لأن المجموعات اتعملت على أساس الـ exposure.
       - kind: explain
         page: 51
-        quote: "Relative risk"
+        quote: "Relative risk: RR = Incidence among exposed / Incidence among non-exposed = Ie / Io\nAttributable risk percent: ARP = (Ie) - (Io) / (Ie) X 100"
         title: "3 أرقام بيطلعوا من Ie و Io"
         text: |
           - ==RR== (relative risk / risk ratio) = Ie ÷ Io: احتمال المرض في الـ exposed **نسبةً** للـ unexposed.
@@ -558,7 +558,7 @@ lessons:
           - ==ARP== (attributable risk percent) = (Ie − Io)/Ie × 100: كام في المية من مرض الـ exposed **هيختفي لو شلنا الـ exposure**.
       - kind: table
         page: 53
-        quote: "Relative risk > 1 Risk factor"
+        quote: "Interpreting the value of RR\n| Relative risk | Meaning |\n|---|---|\n| > 1 | Risk factor |\n| = 1 | No association |\n| < 1 | Protective factor |"
         title: "Interpreting RR"
         columns: ["RR", "Meaning"]
         rows:
@@ -568,7 +568,7 @@ lessons:
         hide: [[0, 1], [2, 1]]
       - kind: case
         page: 54
-        quote: "Smoking Lung cancer Total"
+        quote: "| Smoking | Lung cancer YES + | Lung cancer NO - | Total |\n|---|---|---|---|\n| YES + (Exposed) | 20 (a) | 180 (b) | 200 (a+b) |\n| NO - (Not exposed) | 2 (c) | 198 (d) | 200 (c+d) |\nFind out RR and AR for above data"
         stem: "Smoking and lung cancer cohort. Smokers: 20 of 200 got lung cancer. Non-smokers: 2 of 200."
         steps:
           - question: "What are Ie and Io?"
@@ -589,23 +589,23 @@ lessons:
             why: "ARP = 0.09/0.10 × 100 = **90%** من حالات المدخنين سببها التدخين."
       - kind: explain
         page: 56
-        quote: "The risk of developing hip fractures was 1.59 times higher in those with low bone mineral density"
+        quote: "Example: Risk of hip fracture among those with low BMD in 5 years of follow-up\n| Low BMD | Hip Fracture: Yes | Hip Fracture: No | Total |\n|---|---|---|---|\n| Yes | 230 | 400 | 630 |\n| No | 110 | 369 | 479 |\n| Total | 340 | 769 | 1,109 |\nRisk Ratio (Relative Risk) = CIe / CIu = (230/630) / (110/479) = 1.59\nThe risk of developing hip fractures was 1.59 times higher in those with low bone mineral density compared to those with normal bone mineral density during this 5-year follow-up study."
         title: "إزاي تكتب التفسير زي المحاضرة"
         text: |
-          - **RR**: «The risk of developing hip fractures was ==1.59 times higher== in those with low BMD... during this 5-year follow-up.» (230/630 ÷ 110/479)
+          - **RR**: «The risk of developing hip fractures was ==1.59 times higher== in those with low bone mineral density (BMD)... during this 5-year follow-up.» (230/630 ÷ 110/479)
           - **AR**: «The risk of stroke is ==increased by 0.20== for smokers compared to non-smokers.» (0.30 − 0.10)
           - **ARP**: Apgar 0–3 vs 4–6: (34.4 − 12.5)/34.4 = ==63.7%==، يعني تقريبًا تلتين الوفيات في المجموعة دي بسبب الـ Apgar الواطي. الـ asphyxia **major contributor** بس مش السبب الوحيد.
       - kind: aside
         tone: exam
         page: 61
-        quote: "The attributable risk percent typically is used as an indicator of the public health impact of exposure."
+        quote: "For the Apgar score–infant mortality data, the attributable risk percent is ARP = (0.344 - 0.125) / 0.344 X 100 = 63.7%\nAlmost two thirds of the total risk of infant mortality for newborns who weigh more than 2500 g and have 10-minute Apgar scores of 0–3 (exposed) is related to an Apgar score below the 4–6 level.\nThe attributable risk percent typically is used as an indicator of the public health impact of exposure.\nThese data suggest that birth asphyxia is a major contributor (63.7%) to, but not the sole cause of, infant mortality among severely asphyxiated children."
         text: |
           الـ **ARP** هو اللي بيقيس **public health impact**: لو منعنا الـ exposure، قد إيه من المرض هيختفي؟
 
           وخلي بالك من الفرق: **RR** نسبة (قسمة)، **AR** فرق (طرح)، **ARP** الفرق ÷ Ie × 100.
       - kind: mnemonic
         page: 51
-        quote: "Relative risk"
+        quote: "Relative risk: RR = Incidence among exposed / Incidence among non-exposed = Ie / Io\nAttributable risk percent: ARP = (Ie) - (Io) / (Ie) X 100"
         word: "RAD"
         parts:
           - { key: "R", text: "Ratio: RR = Ie ÷ Io" }
@@ -614,7 +614,7 @@ lessons:
         hook: "**RAD**: قسمة، طرح، وبعدين الطرح ÷ Ie. ترتيب الأسئلة في الامتحان نفسه."
       - kind: check
         page: 61
-        quote: "ARP= (0.344-0.125)X1OO= 63.7%"
+        quote: "For the Apgar score–infant mortality data, the attributable risk percent is ARP = (0.344 - 0.125) / 0.344 X 100 = 63.7%\nAlmost two thirds of the total risk of infant mortality for newborns who weigh more than 2500 g and have 10-minute Apgar scores of 0–3 (exposed) is related to an Apgar score below the 4–6 level.\nThe attributable risk percent typically is used as an indicator of the public health impact of exposure.\nThese data suggest that birth asphyxia is a major contributor (63.7%) to, but not the sole cause of, infant mortality among severely asphyxiated children."
         question: "Death rate 34.4% with Apgar 0–3 vs 12.5% with Apgar 4–6. The attributable risk percent is:"
         options: ["21.9%", "36.3%", "63.7%", "275%"]
         answer: 2
@@ -648,7 +648,7 @@ lessons:
     steps:
       - kind: sort
         page: 62
-        quote: "Dose response ratio"
+        quote: "Cohort studies\n| Strengths | Weaknesses |\n|---|---|\n| Incidence rate and risks | Attrition |\n| Multiple outcomes | Large sample |\n| Dose response ratio | Not for rare diseases |\n| Temporal relationship | Long time |\n| Rare exposure | Expensive |\n| Minimal selection and information bias | Ethical problem |"
         prompt: "Strength ولا weakness للـ cohort؟"
         bins: ["Strength", "Weakness"]
         cards:
@@ -661,22 +661,22 @@ lessons:
           - { text: "Large sample, long time, expensive", bin: 1 }
           - { text: "Not for rare diseases", bin: 1 }
           - { text: "Ethical problem", bin: 1 }
-        why: "الـ cohort بيدّي incidence و RR و AR، وبيدرس أمراض كتير، وبيعرف مين جه الأول، وممتاز للـ exposure النادر. بس طويل وغالي وعينة كبيرة، والناس بتقع من المتابعة (**attrition**)، ومش نافع للمرض النادر."
+        why: "الـ cohort بيدّي incidence و relative risk (RR) و attributable risk (AR)، وبيدرس أمراض كتير، وبيعرف مين جه الأول، وممتاز للـ exposure النادر. بس طويل وغالي وعينة كبيرة، والناس بتقع من المتابعة (**attrition**)، ومش نافع للمرض النادر."
       - kind: explain
         page: 63
-        quote: "Proceeds from effect to cause"
+        quote: "| Case Control Studies | Cohort Studies |\n|---|---|\n| Proceeds from effect to cause | Proceeds from cause to effect |\n| Starts with the disease | Starts with people exposed to the risk factor or suspected cause |\n| Tests whether the suspected cause occurs more frequently in those with disease than those without disease | Tests whether disease occurs more frequently in those exposed than in those not exposed |\n| Usually the 1st approach to the testing of hypothesis, but also useful for exploratory studies | Reserved for the testing of precisely formulated hypothesis |\n| Involves fewer study subjects | Involves larger number of subjects |\n| Yields results relatively quickly | Long follow-up, delayed results |\n| Suitable for study of rare diseases | Inappropriate when disease or exposure under investigation is rare |\n| Generally, yields only estimate of relative risk (Odds ratio) | Yields incidence rates, relative risk, attributable risk |\n| Cannot yield information about disease other than that under study | Can give information about more than one disease outcome |\n| Relatively inexpensive | Expensive |"
         title: "الاتنين جنب بعض"
         text: |
           - **الاتجاه**: case-control من ==effect to cause==، الـ cohort من ==cause to effect==.
           - **بيبدأ بـ**: المرض ↔ الناس اللي اتعرضوا.
           - **العدد**: أقل ↔ أكبر.
           - **النتيجة**: سريعة ↔ follow-up طويل.
-          - **المقياس**: OR (تقدير لـ RR) ↔ incidence و RR و AR.
+          - **المقياس**: odds ratio (OR) (تقدير لـ RR) ↔ incidence و RR و AR.
           - **الأمراض**: المرض اللي بندرسه بس ↔ أكتر من مرض.
           - **التكلفة**: رخيص ↔ غالي.
       - kind: table
         page: 64
-        quote: "Rare exposure"
+        quote: "Comparing case control to cohort\n| | Case control | Cohort |\n|---|---|---|\n| Logistic of the study: Time | quick | long term |\n| Cost | relatively cheap | costly |\n| Sample size | small | larger |\n| Ethical problem | - | + |\n| Type of investigation: Rare disease | best | - |\n| Disease with long LP | best | - |\n| Rare exposure | - | best |\n| Multiple outcomes | - | best |\n| Several risk factors | best | - |"
         title: "أنهي design أحسن؟"
         columns: ["Situation", "Case-control", "Cohort"]
         rows:
@@ -688,7 +688,7 @@ lessons:
         hide: [[0, 1], [2, 2], [3, 2], [4, 1]]
       - kind: mnemonic
         page: 64
-        quote: "Rare disease best"
+        quote: "Comparing case control to cohort\n| | Case control | Cohort |\n|---|---|---|\n| Logistic of the study: Time | quick | long term |\n| Cost | relatively cheap | costly |\n| Sample size | small | larger |\n| Ethical problem | - | + |\n| Type of investigation: Rare disease | best | - |\n| Disease with long LP | best | - |\n| Rare exposure | - | best |\n| Multiple outcomes | - | best |\n| Several risk factors | best | - |"
         word: "DOC"
         parts:
           - { key: "D", text: "rare Disease → case-control (start from the Disease)" }
@@ -697,7 +697,7 @@ lessons:
         hook: "اسأل الـ **DOC**: الحاجة النادرة اللي عندك، ابدأ **منها**. مرض نادر ← ابدأ من العيانين. exposure نادر ← ابدأ من المتعرضين."
       - kind: table
         page: 65
-        quote: "Selection bias always present"
+        quote: "Comparing case control to cohort\n| | Case control | Cohort |\n|---|---|---|\n| Problems: Selection bias | always present | - |\n| Recall bias | present | - |\n| Temporal relationship | not certain | certain |\n| Attrition problem | little | problematic |\n| Changes in the environment/behavior | not a problem | problematic |\n| Measurements: Incidence rate | cannot be calculated | yes |\n| Relative risk | approximation OR | yes |\n| Attributable risk | cannot be calculated | yes |\n| Dose response ratio | no | best |"
         title: "Problems and measurements"
         columns: ["", "Case-control", "Cohort"]
         rows:
@@ -711,7 +711,7 @@ lessons:
         hide: [[0, 1], [2, 2], [3, 2], [5, 1]]
       - kind: check
         page: 64
-        quote: "Rare exposure"
+        quote: "Comparing case control to cohort\n| | Case control | Cohort |\n|---|---|---|\n| Logistic of the study: Time | quick | long term |\n| Cost | relatively cheap | costly |\n| Sample size | small | larger |\n| Ethical problem | - | + |\n| Type of investigation: Rare disease | best | - |\n| Disease with long LP | best | - |\n| Rare exposure | - | best |\n| Multiple outcomes | - | best |\n| Several risk factors | best | - |"
         question: "Which situation is best studied by a cohort rather than a case-control design?"
         options: ["A rare disease", "A disease with a long latent period", "A rare exposure", "Several risk factors for one disease"]
         answer: 2
@@ -722,7 +722,7 @@ lessons:
           - "عوامل كتير لمرض واحد = **case-control**."
       - kind: explain
         page: 66
-        quote: "Known with the name of Historical Cohort and noncurrent cohort"
+        quote: "Retrospective Cohort Study:\n  A retrospective cohort study is one in which the outcome have all occurred before the start of investigation.\n  Investigator goes back to the past to select study group from existing records of the past employment, medical and other records and traces them forward through time from the past date fixed on the records usually to the present.\n  Known with the name of Historical Cohort and noncurrent cohort"
         title: "الـ retrospective cohort"
         text: |
           ده cohort بس ==كل الـ outcomes حصلت قبل ما الدراسة تبدأ==.
@@ -733,7 +733,7 @@ lessons:
       - kind: aside
         tone: trap
         page: 67
-        quote: "Outcome has already occurred"
+        quote: "Prospective versus Retrospective Cohort Studies\n| | Exposure | Outcome |\n|---|---|---|\n| Prospective | Assessed at the beginning of the study (present) | Followed into the future for outcome |\n| Retrospective | Assessed at some point in the past | Outcome has already occurred |"
         text: |
           متخلطش الـ **retrospective cohort** بالـ **case-control**!
 
@@ -743,7 +743,7 @@ lessons:
           - على أساس **المرض** وترجع لورا = **case-control**.
       - kind: table
         page: 67
-        quote: "Prospective versus Retrospective Cohort Studies"
+        quote: "Prospective versus Retrospective Cohort Studies\n| | Exposure | Outcome |\n|---|---|---|\n| Prospective | Assessed at the beginning of the study (present) | Followed into the future for outcome |\n| Retrospective | Assessed at some point in the past | Outcome has already occurred |"
         title: "Prospective vs retrospective cohort"
         columns: ["", "Prospective", "Retrospective"]
         rows:
@@ -752,7 +752,7 @@ lessons:
         hide: [[0, 2], [1, 2]]
       - kind: explain
         page: 68
-        quote: "Requires good records of past exposure for a group of people who can then be traced to determine their current health."
+        quote: "Retrospective cohort: Requires good records of past exposure for a group of people who can then be traced to determine their current health. E.g., studying the effects of exposure to industrial hazards, studying mortality or cancer outcomes."
         title: "بنستخدمه إمتى؟"
         text: |
           محتاج ==good records of past exposure== لمجموعة نقدر نوصلهم ونعرف صحتهم دلوقتي.
@@ -760,7 +760,7 @@ lessons:
           ممتاز لـ ==unusual or occupational exposures==: industrial hazards والكيماويات، مع outcomes زي الـ mortality والـ cancer.
       - kind: check
         page: 66
-        quote: "group from existing records of the past"
+        quote: "Retrospective Cohort Study:\n  A retrospective cohort study is one in which the outcome have all occurred before the start of investigation.\n  Investigator goes back to the past to select study group from existing records of the past employment, medical and other records and traces them forward through time from the past date fixed on the records usually to the present.\n  Known with the name of Historical Cohort and noncurrent cohort"
         question: "In 2026, researchers use 1995 factory records to find workers exposed and not exposed to benzene, then trace both to today to compare leukaemia. Design?"
         options: ["Case-control", "Retrospective (historical) cohort", "Prospective cohort", "Cross-sectional"]
         answer: 1
@@ -771,7 +771,7 @@ lessons:
           - "مش مقاسين في لحظة واحدة."
       - kind: case
         page: 72
-        quote: "the incidence rate of lung cancer was 120/100,000 for smokers and 10/100,000 for nonsmokers"
+        quote: "Qs 1-4: In a community-based study, the incidence rate of lung cancer was 120/100,000 for smokers and 10/100,000 for nonsmokers.\n1. What is the Relative Risk (Risk Ratio) of developing lung cancer for smokers compared with nonsmokers?\n  A. 5\n  B. 12\n  C. 50\n  D. 100\n  E. 120\n2. The above calculated Relative Risk is interpreted as follows:\n  A. The risk of developing lung cancer is 'x' times higher in smokers compared to nonsmokers.\n  B. The probability of being a smoker is 'x' times greater among those with lung cancer compared to those without lung cancer."
         stem: "Lung cancer incidence: 120/100,000 in smokers, 10/100,000 in non-smokers (the lecturer's own questions)."
         steps:
           - question: "Relative risk?"
@@ -799,5 +799,5 @@ lessons:
       - "**DOC**: rare Disease ← case-control؛ many Outcomes ← cohort؛ rare Cause ← cohort."
       - "Case-control: selection bias دايمًا و recall bias، والـ RR مجرد تقدير (OR)."
       - "**Retrospective = historical = non-concurrent cohort**: نختار بالـ exposure من records قديمة ونتتبع لحد النهارده؛ للـ occupational exposures."
-      - "RR 120/10 = 12، AR = 110/100,000، ARP ≈ 92%."
+      - "RR 120/10 = 12، AR = 110/100,000، attributable risk percent (ARP) ≈ 92%."
     practice: [res.L05.051, res.L05.052, res.L05.053, res.L05.054, res.L05.055, res.L05.056, res.L05.057, res.L05.058, res.L05.059, res.L05.060, res.L05.061, res.L05.068]

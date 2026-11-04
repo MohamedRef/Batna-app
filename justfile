@@ -156,3 +156,7 @@ cloud-deploy:
 # Stream live logs from the deployed Worker
 cloud-logs:
     cd {{server}} && wrangler tail
+
+# Line coverage with the CI floor (docs/TESTING.md); `just coverage --html` for a browsable report
+coverage *args:
+    scripts/coverage.sh {{args}}

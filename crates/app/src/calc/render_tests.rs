@@ -196,13 +196,19 @@ fn the_result_card_shows_the_band_breakdown_and_the_guide() {
 
 #[test]
 fn points_print_without_trailing_zeros_and_a_card_without_a_guide_has_none() {
-    let html =
-        card("meld", inputs(&[("bilirubin_mg_dl", n(1.0)), ("inr", n(1.0)), ("creatinine_mg_dl", n(6.0))]));
+    let i = inputs(&[("bilirubin_mg_dl", n(1.0)), ("inr", n(1.0)), ("creatinine_mg_dl", n(6.0))]);
+    let html = card("meld", i.clone());
     assert!(html.contains(">6.43<"), "constant: {html}");
     assert!(html.contains(">0<"), "ln 1 = 0: {html}");
     assert!(html.contains("Creatinine capped at 4 mg/dL."), "note: {html}");
-    assert!(calc::guide("meld.15_30").is_none());
-    assert!(!html.contains(tx::NEXT_STEP) && !html.contains(tx::DD));
+    assert!(html.contains(tx::NEXT_STEP) && html.contains(tx::DD), "meld.15_30 has a guide: {html}");
+    // Every real band has a guide (calc::tests::every_result_has_a_next_step),
+    // so the empty card is checked with a band that has none.
+    let mut outcome = calc::compute("meld", &i).unwrap();
+    outcome.band = "meld.no_guide";
+    assert!(calc::guide(outcome.band).is_none());
+    let html = dioxus::ssr::render_element(rsx! { OutcomeCard { id: "meld", outcome } });
+    assert!(!html.contains(tx::NEXT_STEP) && !html.contains(tx::DD), "{html}");
 }
 
 #[test]

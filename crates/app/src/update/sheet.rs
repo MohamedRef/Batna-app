@@ -26,7 +26,9 @@ use super::view::{UPDATE_CSS, megabytes, primary_action, use_update_status};
 use super::{Phase, Status};
 use crate::i18n::update as tx;
 
-const SHEET_CSS: &str = include_str!("sheet.css");
+/// Through `css!`, so a content-only update of this sheet reaches devices
+/// like every other stylesheet (`look.rs`).
+const SHEET_CSS: crate::look::Css = crate::look::css!("src/update/sheet.css");
 
 /// Which sheet is open.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -367,7 +369,7 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
 
     rsx! {
         style { {UPDATE_CSS} }
-        style { {SHEET_CSS} }
+        style { {SHEET_CSS.text()} }
         div { class: "us-backdrop", onclick: close }
         div { class: "us-sheet", role: "dialog", aria_modal: "true", aria_labelledby: "us-title",
             div { class: "us-head",

@@ -392,6 +392,40 @@ mod tests {
         assert_eq!(reads.load(std::sync::atomic::Ordering::SeqCst), 0);
     }
 
+    #[test]
+    fn keyring_vault_keeps_and_forgets_the_session() {
+        // Linux test runs use keyring-core's in-memory store.
+        let v = KeyringVault::new();
+        assert!(v.save(&session("k1")));
+        assert_eq!(v.load(), Some(session("k1")));
+        v.clear();
+        assert_eq!(v.load(), None);
+    }
+
+    #[test]
+    fn a_session_is_restored_only_while_its_refresh_token_lives() {
+        let v = MemoryVault::default();
+        assert!(v.save(&session("r")));
+        // refresh_expires_at_ms is 2.
+        let auth = Auth::restore(Box::new(v), 1).ok().unwrap();
+        assert_eq!(auth.session().refresh_token, "r");
+        let v = auth.forget();
+        assert_eq!(v.load(), None, "forgetting clears the vault");
+        assert!(v.save(&session("r")));
+        assert!(Auth::restore(v, 2).is_err());
+    }
+
+    #[test]
+    fn an_unreadable_session_file_means_signed_out() {
+        let dir = tempfile::tempdir().unwrap();
+        // A directory where the file should be: reading it fails.
+        std::fs::create_dir(dir.path().join(FILE_NAME)).unwrap();
+        let (v, reads) = vault(dir.path(), Some(session("old")));
+        assert_eq!(v.load(), None);
+        assert_eq!(reads.load(std::sync::atomic::Ordering::SeqCst), 0);
+        assert!(!v.save(&session("s")), "a failed save says so");
+    }
+
     #[cfg(unix)]
     #[test]
     fn file_vault_is_readable_by_this_user_only() {

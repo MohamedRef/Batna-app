@@ -69,23 +69,11 @@ pub fn use_provide_cloud() {
         commands.set(Some(handle.commands.clone()));
         let review = review.clone();
         spawn(async move {
-            let (mut status, mut devices, mut signing_in, mut login) =
-                (cloud.status, cloud.devices, cloud.signing_in, cloud.login);
             while let Some(event) = handle.events.recv().await {
-                match event {
-                    Event::Status(s) => {
-                        if *status.peek() != s {
-                            status.set(s);
-                        }
-                    }
-                    Event::Devices(d) => devices.set(Some(d)),
-                    Event::SigningIn(on) => signing_in.set(on),
-                    Event::Login(l) => login.set(l),
-                    Event::Changed(_) => {
-                        // Another device answered, judged or changed a setting.
-                        let _ = crate::store::shared().observe_stored();
-                        review.backend.borrow_mut().reload_and_notify();
-                    }
+                if mirror(event, cloud) {
+                    // Another device answered, judged or changed a setting.
+                    let _ = crate::store::shared().observe_stored();
+                    review.backend.borrow_mut().reload_and_notify();
                 }
             }
         });
@@ -112,6 +100,38 @@ pub fn use_provide_cloud() {
         revision.read();
         cloud.send(Command::Kick);
     });
+}
+
+/// Tests of screens that hold Settings › Sync: the [`Cloud`] of a build
+/// without Batna Cloud, and no engine.
+#[cfg(test)]
+pub fn use_unconfigured_cloud() {
+    use_context_provider(|| Cloud {
+        status: Signal::new(CloudStatus::not_configured("test-device".into())),
+        devices: Signal::new(None),
+        signing_in: Signal::new(false),
+        login: Signal::new(LoginStatus::default()),
+        commands: Signal::new(None),
+    });
+}
+
+/// Shows one engine event. True when another device changed stored data,
+/// so the screens should read it again.
+fn mirror(event: Event, cloud: Cloud) -> bool {
+    let (mut status, mut devices, mut signing_in, mut login) =
+        (cloud.status, cloud.devices, cloud.signing_in, cloud.login);
+    match event {
+        Event::Status(s) => {
+            if *status.peek() != s {
+                status.set(s);
+            }
+        }
+        Event::Devices(d) => devices.set(Some(d)),
+        Event::SigningIn(on) => signing_in.set(on),
+        Event::Login(l) => login.set(l),
+        Event::Changed(_) => return true,
+    }
+    false
 }
 
 fn problem_text(p: Problem) -> &'static str {
@@ -533,9 +553,372 @@ fn platform_icon(p: Platform, name: &str) -> Element {
 
 #[cfg(test)]
 mod tests {
+    use std::cell::RefCell;
+
+    use tokio::sync::mpsc::{UnboundedReceiver, unbounded_channel};
+
     use super::*;
 
     const MIN: u64 = 60_000;
+
+    struct Case {
+        status: CloudStatus,
+        devices: Option<Result<Vec<DeviceSummary>, Problem>>,
+        signing_in: bool,
+        login: LoginStatus,
+        sent: Option<UnboundedSender<Command>>,
+    }
+
+    thread_local! {
+        static CASE: RefCell<Option<Case>> = const { RefCell::new(None) };
+        static CLOUD: RefCell<Option<Cloud>> = const { RefCell::new(None) };
+    }
+
+    fn fixture() -> Element {
+        let case = CASE.with(|c| c.borrow_mut().take()).unwrap();
+        let cloud = use_context_provider(|| Cloud {
+            status: Signal::new(case.status),
+            devices: Signal::new(case.devices),
+            signing_in: Signal::new(case.signing_in),
+            login: Signal::new(case.login),
+            commands: Signal::new(case.sent),
+        });
+        CLOUD.with(|c| *c.borrow_mut() = Some(cloud));
+        rsx! { SyncSection {} }
+    }
+
+    fn status(sync: SyncState) -> CloudStatus {
+        CloudStatus {
+            configured: true,
+            email: (sync != SyncState::SignedOut).then(|| "mohamed@example.com".into()),
+            device_id: "phone-1".into(),
+            sync,
+            pending: 0,
+            last_sync_ms: None,
+            problem: None,
+            finishing_sign_in: false,
+            temporary: false,
+        }
+    }
+
+    /// Renders Settings › Sync and returns the HTML and what it asked the engine.
+    fn render(
+        status: CloudStatus,
+        devices: Option<Result<Vec<DeviceSummary>, Problem>>,
+    ) -> (String, Vec<Command>) {
+        render_with(status, devices, false)
+    }
+
+    fn render_with(
+        status: CloudStatus,
+        devices: Option<Result<Vec<DeviceSummary>, Problem>>,
+        signing_in: bool,
+    ) -> (String, Vec<Command>) {
+        let (tx, mut rx): (_, UnboundedReceiver<Command>) = unbounded_channel();
+        CASE.with(|c| {
+            *c.borrow_mut() =
+                Some(Case { status, devices, signing_in, login: LoginStatus::default(), sent: Some(tx) })
+        });
+        let mut dom = VirtualDom::new(fixture);
+        dom.rebuild_in_place();
+        // Let effects run once.
+        let runtime = tokio::runtime::Builder::new_current_thread().enable_all().build().unwrap();
+        runtime.block_on(async {
+            let _ = tokio::time::timeout(std::time::Duration::from_millis(20), dom.wait_for_work()).await;
+        });
+        dom.render_immediate(&mut dioxus::core::NoOpMutations);
+        let html = dioxus::ssr::render(&dom);
+        let mut sent = Vec::new();
+        while let Ok(c) = rx.try_recv() {
+            sent.push(c);
+        }
+        (html, sent)
+    }
+
+    fn device(id: &str, name: &str, platform: Platform) -> DeviceSummary {
+        DeviceSummary {
+            device_id: id.into(),
+            name: name.into(),
+            model: None,
+            platform,
+            signed_in_at_ms: 1,
+            last_seen_ms: 1,
+            last_sync_ms: None,
+            current: false,
+            revoked: false,
+        }
+    }
+
+    #[test]
+    fn a_build_without_a_server_says_sync_is_off() {
+        let (html, sent) = render(CloudStatus::not_configured("phone-1".into()), None);
+        assert!(html.contains(tx::NOT_CONFIGURED), "{html}");
+        assert!(!html.contains(tx::SIGN_IN) && !html.contains("sync-devices"), "{html}");
+        assert!(sent.is_empty());
+    }
+
+    #[test]
+    fn signed_out_offers_google_and_shows_each_step_of_signing_in() {
+        let (html, _) = render(status(SyncState::SignedOut), None);
+        assert!(html.contains(tx::SIGN_IN), "{html}");
+        assert!(!html.contains("sync-devices"), "no devices card while signed out");
+
+        let (html, _) = render_with(status(SyncState::SignedOut), None, true);
+        assert!(html.contains(tx::SIGNING_IN) && !html.contains(tx::SIGN_IN), "{html}");
+
+        let waiting = CloudStatus {
+            finishing_sign_in: true,
+            problem: Some(Problem::SignInWaiting),
+            ..status(SyncState::SignedOut)
+        };
+        let (html, _) = render(waiting, None);
+        assert!(html.contains(tx::FINISHING) && html.contains(tx::TRY_NOW), "{html}");
+        assert!(html.contains(tx::P_SIGN_IN_WAITING));
+    }
+
+    #[test]
+    fn engine_events_reach_the_screen() {
+        let dom = VirtualDom::new(|| rsx! {});
+        dom.in_scope(ScopeId::ROOT, || {
+            let cloud = Cloud {
+                status: Signal::new(CloudStatus::not_configured("p".into())),
+                devices: Signal::new(None),
+                signing_in: Signal::new(false),
+                login: Signal::new(LoginStatus::default()),
+                commands: Signal::new(None),
+            };
+            assert!(!mirror(Event::SigningIn(true), cloud));
+            assert!(*cloud.signing_in.peek());
+            assert!(!mirror(Event::Status(status(SyncState::Live)), cloud));
+            assert_eq!(cloud.status.peek().sync, SyncState::Live);
+            assert!(!mirror(Event::Devices(Err(Problem::Server)), cloud));
+            assert_eq!(*cloud.devices.peek(), Some(Err(Problem::Server)));
+            let tables = ["settings".to_string()].into_iter().collect();
+            assert!(mirror(Event::Changed(tables), cloud), "a change from another device reloads");
+            // Sending without an engine (this build has none) does nothing.
+            cloud.send(Command::Kick);
+        });
+    }
+
+    /// Renders, presses `label`, and returns what reached the engine.
+    fn press(
+        status: CloudStatus,
+        devices: Option<Result<Vec<DeviceSummary>, Problem>>,
+        label: &str,
+    ) -> Vec<String> {
+        let mut screen = Screen::new(status, devices, LoginStatus::default());
+        crate::testing::click(&mut screen.dom, label);
+        screen.sent()
+    }
+
+    /// Settings › Sync, live, to type into and press.
+    struct Screen {
+        dom: VirtualDom,
+        rx: UnboundedReceiver<Command>,
+    }
+
+    impl Screen {
+        fn new(
+            status: CloudStatus,
+            devices: Option<Result<Vec<DeviceSummary>, Problem>>,
+            login: LoginStatus,
+        ) -> Self {
+            let (tx, rx) = unbounded_channel();
+            CASE.with(|c| {
+                *c.borrow_mut() = Some(Case { status, devices, signing_in: false, login, sent: Some(tx) })
+            });
+            let mut dom = VirtualDom::new(fixture);
+            dom.rebuild_in_place();
+            Self { dom, rx }
+        }
+
+        fn html(&self) -> String {
+            crate::testing::html(&self.dom)
+        }
+
+        /// What it asked the engine since last time.
+        fn sent(&mut self) -> Vec<String> {
+            let mut sent = Vec::new();
+            while let Ok(c) = self.rx.try_recv() {
+                sent.push(format!("{c:?}"));
+            }
+            sent
+        }
+
+        /// The engine's answer about the username arrives.
+        fn answer(&mut self, login: LoginStatus) {
+            let mut signal = CLOUD.with(|c| *c.borrow()).unwrap().login;
+            self.dom.in_runtime(|| signal.set(login));
+            self.settle();
+        }
+
+        /// Lets effects run.
+        fn settle(&mut self) {
+            let runtime = tokio::runtime::Builder::new_current_thread().enable_all().build().unwrap();
+            runtime.block_on(async {
+                let _ = tokio::time::timeout(std::time::Duration::from_millis(20), self.dom.wait_for_work())
+                    .await;
+            });
+            self.dom.render_immediate(&mut dioxus::core::NoOpMutations);
+        }
+    }
+
+    fn login(username: Option<&str>) -> LoginStatus {
+        LoginStatus { username: Some(username.map(Into::into)), ..LoginStatus::default() }
+    }
+
+    #[test]
+    fn a_session_on_someone_elses_device_says_it_ends_with_the_app() {
+        let (html, _) = render(CloudStatus { temporary: true, ..status(SyncState::Live) }, None);
+        assert!(html.contains(tx::TEMPORARY), "{html}");
+        let (html, _) = render(status(SyncState::Live), None);
+        assert!(!html.contains(tx::TEMPORARY));
+    }
+
+    #[test]
+    fn a_device_without_google_signs_in_with_a_username_and_password() {
+        let mut screen = Screen::new(status(SyncState::SignedOut), None, LoginStatus::default());
+        let html = screen.html();
+        assert!(html.contains(tx::PW_TITLE) && html.contains(tx::NOT_MINE), "{html}");
+        // Nothing to send until both are filled in.
+        crate::testing::submit(&mut screen.dom, tx::PW_SIGN_IN);
+        assert!(screen.sent().is_empty());
+        crate::testing::type_into(&mut screen.dom, "text", "Mo.Refaat");
+        crate::testing::type_into(&mut screen.dom, "password", "correct horse battery");
+        crate::testing::type_into(&mut screen.dom, "checkbox", "true");
+        crate::testing::submit(&mut screen.dom, tx::PW_SIGN_IN);
+        assert_eq!(screen.sent(), ["SignInPassword { username: \"Mo.Refaat\", remember: false }"]);
+        assert!(!screen.html().contains("correct horse"), "the password field empties");
+
+        let (html, _) = render_with(status(SyncState::SignedOut), None, true);
+        assert!(html.contains(tx::PW_CHECKING), "{html}");
+    }
+
+    #[test]
+    fn signed_in_he_sets_changes_and_removes_his_password() {
+        let live = status(SyncState::Live);
+        let mut screen = Screen::new(live.clone(), None, LoginStatus::default());
+        screen.settle();
+        assert!(screen.sent().contains(&"LoadLogin".to_string()), "it asks once it's live");
+        assert!(screen.html().contains(tx::LOADING));
+
+        // No username yet: the form is open.
+        screen.answer(login(None));
+        assert!(screen.html().contains(tx::PW_NONE));
+        crate::testing::type_into(&mut screen.dom, "text", "mo.refaat");
+        crate::testing::type_nth(&mut screen.dom, "password", 0, "correct horse battery");
+        crate::testing::type_nth(&mut screen.dom, "password", 1, "correct horse batterY");
+        crate::testing::submit(&mut screen.dom, tx::PW_SAVE);
+        assert!(screen.sent().is_empty(), "the two passwords differ");
+        assert!(screen.html().contains(&problem_line(Problem::Mismatch)));
+        crate::testing::type_nth(&mut screen.dom, "password", 1, "correct horse battery");
+        assert!(!screen.html().contains(&problem_line(Problem::Mismatch)), "typing again clears it");
+        crate::testing::submit(&mut screen.dom, tx::PW_SAVE);
+        assert_eq!(screen.sent(), ["SetLogin { username: \"mo.refaat\" }"], "the password stays out of logs");
+
+        screen.answer(LoginStatus { saving: true, ..login(None) });
+        assert!(screen.html().contains(tx::PW_SAVING));
+        screen.answer(LoginStatus { saved: true, ..login(Some("mo.refaat")) });
+        let html = screen.html();
+        assert!(html.contains(tx::PW_SAVED) && html.contains("mo.refaat"), "{html}");
+        assert!(!html.contains(tx::PW_SAVE) && html.contains(tx::PW_CHANGE), "the form closes");
+
+        // Change opens the form with his username; Cancel closes it.
+        crate::testing::click(&mut screen.dom, tx::PW_CHANGE);
+        assert!(screen.html().contains(tx::PW_SAVE) && screen.html().contains(r#"value="mo.refaat""#));
+        crate::testing::click(&mut screen.dom, tx::CANCEL);
+        assert!(!screen.html().contains(tx::PW_SAVE));
+        crate::testing::click(&mut screen.dom, tx::PW_REMOVE);
+        assert_eq!(screen.sent(), ["RemoveLogin"]);
+
+        screen.answer(LoginStatus { problem: Some(Problem::Locked(3)), ..login(Some("mo.refaat")) });
+        assert!(screen.html().contains(&tx::locked(3)));
+    }
+
+    #[test]
+    fn each_button_asks_the_engine_for_its_own_thing() {
+        assert_eq!(press(status(SyncState::SignedOut), None, tx::SIGN_IN), ["SignInGoogle"]);
+        let waiting = CloudStatus { finishing_sign_in: true, ..status(SyncState::SignedOut) };
+        assert_eq!(press(waiting, None, tx::TRY_NOW), ["Kick"]);
+        assert_eq!(press(status(SyncState::Offline), None, tx::SIGN_OUT), ["SignOut"]);
+        assert_eq!(press(status(SyncState::Offline), None, tx::REFRESH), ["LoadDevices"]);
+        let tab = device("tab-1", "SM-X730", Platform::Android);
+        let sent = press(status(SyncState::Offline), Some(Ok(vec![tab])), tx::SIGN_OUT_DEVICE);
+        assert_eq!(sent, ["RevokeDevice(\"tab-1\")"]);
+    }
+
+    #[test]
+    fn every_problem_has_its_own_words() {
+        let all = [
+            Problem::NotConfigured,
+            Problem::NotAllowed,
+            Problem::SignInCancelled,
+            Problem::SignInFailed,
+            Problem::SignedOutRemotely,
+            Problem::Network,
+            Problem::SignInWaiting,
+            Problem::Server,
+            Problem::Outdated,
+            Problem::ClockOff,
+        ];
+        let words: std::collections::BTreeSet<&str> = all.iter().map(|p| problem_text(*p)).collect();
+        assert_eq!(words.len(), all.len());
+        let (html, _) =
+            render(CloudStatus { problem: Some(Problem::ClockOff), ..status(SyncState::Live) }, None);
+        assert!(html.contains(tx::P_CLOCK) && html.contains("role=\"status\""), "{html}");
+    }
+
+    #[test]
+    fn signed_in_shows_who_where_and_what_waits() {
+        let s = CloudStatus { pending: 3, last_sync_ms: Some(now_ms() - 5 * MIN), ..status(SyncState::Live) };
+        let (html, sent) = render(s, None);
+        assert!(html.contains("mohamed@example.com") && html.contains("dir=\"ltr\""), "{html}");
+        assert!(html.contains(tx::LIVE) && html.contains("data-tone=\"good\""), "{html}");
+        assert!(html.contains("3 تغييرات مستنية تترفع"), "{html}");
+        assert!(html.contains(&format!("{}: من 5 دقايق", tx::LAST)), "{html}");
+        assert!(html.contains(tx::SIGN_OUT));
+        // Opening it while live asks for the device list, which shows as loading.
+        assert!(html.contains(tx::LOADING));
+        assert!(sent.iter().any(|c| matches!(c, Command::LoadDevices)), "{sent:?}");
+
+        for (sync, words) in [
+            (SyncState::Connecting, tx::CONNECTING),
+            (SyncState::CatchingUp, tx::CATCHING_UP),
+            (SyncState::Offline, tx::OFFLINE),
+            (SyncState::Stopped, tx::STOPPED),
+        ] {
+            let (html, sent) = render(status(sync), Some(Ok(Vec::new())));
+            assert!(html.contains(words) && html.contains("data-tone=\"accent\""), "{sync:?}: {html}");
+            assert_eq!(sent.iter().any(|c| matches!(c, Command::LoadDevices)), sync == SyncState::CatchingUp);
+        }
+    }
+
+    #[test]
+    fn the_devices_card_lists_each_device_with_its_state() {
+        let mut me = device("phone-1", "Galaxy S24 Ultra", Platform::Android);
+        me.current = true;
+        me.last_sync_ms = Some(now_ms() - 2 * 60 * MIN);
+        let tab = device("tab-1", "SM-X730", Platform::Android);
+        let mut mac = device("mac-1", "Mohamed’s MacBook Air", Platform::Macos);
+        mac.revoked = true;
+        let web = device("web-1", "Chrome", Platform::Web);
+        let dev = device("dev-1", "Batna (dev)", Platform::Other);
+        let (html, _) = render(status(SyncState::Offline), Some(Ok(vec![me, tab, mac, web, dev])));
+        assert!(html.contains(tx::THIS_DEVICE));
+        assert!(html.contains(&format!("{}: من ساعتين", tx::LAST)), "{html}");
+        assert!(html.contains(tx::NEVER_SYNCED) && html.contains(tx::DEVICE_OUT));
+        assert!(html.contains("device-row revoked"));
+        // Only other, still signed-in devices can be signed out from here.
+        assert_eq!(html.matches(tx::SIGN_OUT_DEVICE).count(), 3, "{html}");
+        // Phone, tablet, laptop, browser and other icons are all different.
+        let icons = ["M8 3h8v18H8z", "M6 3h12a1", "M5 6h14v9H5z", "M4 5h16v14H4z", "M4 5h16v11H4z"];
+        for d in icons {
+            assert!(html.contains(d), "missing icon {d}");
+        }
+        let (html, _) = render(status(SyncState::Offline), Some(Err(Problem::Network)));
+        assert!(html.contains(tx::P_NETWORK));
+        assert_eq!(html.matches(tx::LOADING).count(), 1, "only the username card still waits");
+    }
 
     #[test]
     fn galaxy_tabs_get_the_tablet_icon() {

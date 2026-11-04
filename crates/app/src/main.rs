@@ -61,6 +61,8 @@ mod table;
 pub(crate) mod test_dom;
 #[cfg(test)]
 mod testdom;
+#[cfg(test)]
+mod testing;
 mod today;
 mod ui;
 mod update;

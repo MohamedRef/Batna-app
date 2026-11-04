@@ -298,7 +298,7 @@ jobs:
             gh release create "$tag" --prerelease --target "$GITHUB_SHA" --title "Batna $V" --notes "$(cat <<NOTES
           Batna $V, built by the Release workflow (run ${{ github.run_number }}, ${GITHUB_SHA::7}).
 
-          - Android (S24 Ultra, Tab S11): install batna-$V.apk. It is signed with the release key, so uninstall a *preview* build first (export your data from Settings first, or let sync bring it back). From now on it updates itself from the $CHANNELS feed.
+          - Android (S24 Ultra, Tab S11): install batna-$V.apk. It installs over the alpha or a preview build and keeps your data: they share the release key. (Only a preview from before 2026-11-02 needs one reinstall; export your data from Settings first, or let sync bring it back.) From now on it updates itself from the $CHANNELS feed.
           - Mac: unzip Batna-$V-mac.zip, move Batna.app to Applications, then once: \`xattr -dr com.apple.quarantine /Applications/Batna.app\` (it is self-signed). Later versions install themselves.
           NOTES
           )"

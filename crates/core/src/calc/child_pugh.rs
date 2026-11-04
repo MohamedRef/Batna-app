@@ -5,7 +5,7 @@
 //! modern form (Pugh et al., Br J Surg 1973; AASLD practice guidance) and is
 //! used only when PT is not entered.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, normals, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, normals, num};
 
 pub const HE: &[(&str, &str)] = &[("none", "None"), ("grade_1_2", "Stage 1–2"), ("grade_3_4", "Stage 3–4")];
 pub const ASCITES: &[(&str, &str)] =
@@ -122,6 +122,54 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         notes: Vec::new(),
     })
 }
+
+/// Next steps and differential diagnosis per class (book Lecture 1, pp. 5,
+/// 13–16; Lecture 11, pp. 188–189 for transplant; Lecture 8, p. 140 for the
+/// markers that can move without the liver).
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "child_pugh.a",
+        Guide {
+            next: &[
+                "Treat the cause; stop alcohol, sedatives and hepatotoxic drugs (p. 15)",
+                "Varices: screening endoscopy, unless liver stiffness is below 20 kPa and platelets above 150 (Baveno VI, pp. 13, 35)",
+                "HCC: ultrasound every 6 months, with or without AFP (p. 13)",
+                "Vaccinate against hepatitis A and B, pneumococcus, and influenza every year (p. 15)",
+                "Diet: 35–40 kcal/kg and protein 1.2–1.5 g/kg a day (p. 15)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "child_pugh.b",
+        Guide {
+            next: &[
+                "Refer for transplant evaluation: AASLD evaluates from Child-Pugh 7 or MELD 10 (p. 188)",
+                "Find and treat what tipped the liver over; that can bring it back to compensated (p. 16)",
+                "Treat the complications: ascites, encephalopathy, varices, SBP (p. 16)",
+                "HCC ultrasound every 6 months (p. 13); avoid PPIs and sedatives (p. 15)",
+            ],
+            dd: DECOMPENSATED_DD,
+        },
+    ),
+    (
+        "child_pugh.c",
+        Guide {
+            next: &[
+                "Liver transplantation: Child-Pugh C (10–15) is the book's indication for living-donor transplant (p. 189)",
+                "Find and treat the trigger of decompensation (p. 16)",
+                "Avoid surgery unless it is clearly needed: a poor operative risk (p. 15)",
+            ],
+            dd: DECOMPENSATED_DD,
+        },
+    ),
+];
+
+const DECOMPENSATED_DD: &[&str] = &[
+    "Triggers: variceal bleeding, infection (SBP), major surgery, HCC (p. 5)",
+    "Added liver injury: alcoholic hepatitis, drug injury, hepatitis A or E, a hepatitis B flare (p. 5)",
+    "Points that are not the liver: low albumin from malnutrition or nephrotic syndrome; a long PT from warfarin or vitamin K deficiency (p. 140)",
+];
 
 #[cfg(test)]
 mod tests {

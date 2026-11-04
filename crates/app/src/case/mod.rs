@@ -372,3 +372,6 @@ pub fn record(
 
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod screen_tests;

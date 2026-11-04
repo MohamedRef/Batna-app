@@ -15,7 +15,12 @@ use std::path::PathBuf;
 /// `$APP_BROWSER_FIXTURES/<screen>`, created, with the stylesheets in it.
 pub fn out_dir(screen: &str) -> PathBuf {
     let root = std::env::var_os("APP_BROWSER_FIXTURES").expect("APP_BROWSER_FIXTURES");
-    let dir = PathBuf::from(root).join(screen);
+    out_dir_in(std::path::Path::new(&root), screen)
+}
+
+/// [`out_dir`] under `root` (tests write the fixtures to a temporary folder).
+pub fn out_dir_in(root: &std::path::Path, screen: &str) -> PathBuf {
+    let dir = root.join(screen);
     std::fs::create_dir_all(&dir).unwrap();
     let app = [
         crate::fonts::css().to_string(),

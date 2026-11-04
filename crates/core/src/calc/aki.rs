@@ -9,7 +9,7 @@
 //! vs above 2%, FEurea below 35% vs above 50%. FE = (urine X × plasma Cr)
 //! / (plasma X × urine Cr) × 100.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, flag, normals, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, normals, num, show};
 
 const URINE_OUTPUT: &[(&str, &str)] = &[
     ("normal", "Not reduced"),
@@ -172,6 +172,136 @@ fn feurea(i: &Inputs) -> Result<Outcome, CalcError> {
         ],
     )
 }
+
+/// Next steps and differential per band (book Nephrology Lecture 5,
+/// pp. 100–118). Where the book is silent: the stage-based care of the
+/// KDIGO AKI guideline 2012; a low FENa outside prerenal states from
+/// Steiner, Am J Med 1984; FEurea after diuretics from Carvounis et al.,
+/// Kidney Int 2002, with the 2024 meta-analysis by Abdelhafez et al.,
+/// Am J Med Sci.
+pub const GUIDES: &[(&str, Guide)] = &[
+    (
+        "kdigo_aki.none",
+        Guide {
+            next: &[
+                "Not AKI by KDIGO: creatinine up 0.3 mg/dL in 48 h or 50% in 7 days, or urine below 0.5 mL/kg/h for 6 h (p. 100)",
+                "While the risk lasts, repeat the creatinine and watch the urine output: creatinine rises late after an injury (pp. 116–118)",
+                "Check the baseline: the first creatinine in hospital may already be raised (p. 101)",
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "kdigo_aki.1",
+        Guide {
+            next: &[
+                "Find the cause: history, volume status and every drug; urine analysis, urinary indices and sediment; renal ultrasound (pp. 107–110)",
+                "Restore perfusion with isotonic crystalloids rather than starches (p. 111)",
+                "Stop nephrotoxins where you can: NSAIDs, ACE inhibitors, ARBs, aminoglycosides (p. 111)",
+                "Adjust drug doses to the kidney function (p. 107)",
+            ],
+            dd: &[
+                PRERENAL,
+                INTRINSIC,
+                POSTRENAL,
+                "A rise that is not injury: a new ACE inhibitor or ARB, decongestion in heart failure, intensive blood pressure control (p. 101)",
+            ],
+        },
+    ),
+    (
+        "kdigo_aki.2",
+        Guide {
+            next: &[
+                "Watch for the complications: high potassium, fluid overload, acidosis, low sodium, high phosphate (p. 106)",
+                "Diuretics only for fluid overload, never to prevent or treat AKI; no low-dose dopamine (pp. 112–113)",
+                "In shock, vasopressors to a mean arterial pressure of 65–70 mmHg once filled (p. 112)",
+                "Oliguria despite resuscitation: a furosemide stress test (1 mg/kg) separates prerenal from intrinsic (p. 113)",
+                "Consider intensive care and plan renal replacement therapy early (KDIGO 2012)",
+            ],
+            dd: AKI_DD,
+        },
+    ),
+    (
+        "kdigo_aki.3",
+        Guide {
+            next: &[
+                "Dialysis for AEIOU: acidosis, electrolytes (high potassium), intoxication, overload, uraemia (p. 115)",
+                "Intermittent haemodialysis if stable; if not, continuous renal replacement (CRRT), peritoneal dialysis or slow low-efficiency dialysis (SLED) (p. 115)",
+                "Treat the cause: relieve obstruction; immunosuppression for glomerulonephritis or vasculitis; stop the drug in interstitial nephritis (p. 114)",
+                "Avoid subclavian lines, to keep the veins for dialysis (KDIGO 2012)",
+                "Follow the kidneys after recovery: 10% of those who needed dialysis go on to CKD (p. 115)",
+            ],
+            dd: AKI_DD,
+        },
+    ),
+    ("fena.prerenal", Guide { next: PRERENAL_NEXT, dd: LOW_FENA_DD }),
+    (
+        "fena.indeterminate",
+        Guide {
+            next: &[
+                BY_INDICES,
+                "After diuretics, use FEurea instead: below 35% still favours prerenal (Carvounis 2002)",
+            ],
+            dd: MIDDLE_DD,
+        },
+    ),
+    (
+        "fena.atn",
+        Guide {
+            next: ATN_NEXT,
+            dd: &[
+                ATN,
+                "A high FENa with no tubular injury: diuretics, or chronic kidney disease (Steiner 1984)",
+            ],
+        },
+    ),
+    (
+        "feurea.prerenal",
+        Guide {
+            next: &[
+                PERFUSE,
+                OTHER_INDICES,
+                "Unlike the FENa it holds after diuretics (Carvounis 2002), though a 2024 meta-analysis found it no better (Abdelhafez 2024)",
+                RECHECK,
+            ],
+            dd: &[PRERENAL],
+        },
+    ),
+    ("feurea.indeterminate", Guide { next: &[BY_INDICES], dd: &[TURNING] }),
+    ("feurea.atn", Guide { next: ATN_NEXT, dd: &[ATN] }),
+];
+
+const PRERENAL: &str = "Prerenal: blood or fluid loss, heart failure, liver failure, sepsis; NSAIDs, ACE inhibitors, ARBs, ciclosporin (p. 105)";
+const INTRINSIC: &str = "Intrinsic: acute tubular necrosis, glomerulonephritis, interstitial nephritis, renal vessel disease (pp. 104–106)";
+const POSTRENAL: &str = "Postrenal: prostate disease, a tumour or stone blocking the urinary tract (p. 106)";
+const ATN: &str = "Acute tubular necrosis: ischaemia, sepsis, contrast, aminoglycosides, amphotericin, myoglobin or haemoglobin (p. 105)";
+
+const AKI_DD: &[&str] = &[PRERENAL, INTRINSIC, POSTRENAL];
+
+const PERFUSE: &str =
+    "Restore perfusion with isotonic crystalloids and stop NSAIDs, ACE inhibitors and ARBs (p. 111)";
+const OTHER_INDICES: &str = "Back it with the other indices: urine sodium below 20, urine osmolality above 500, BUN to creatinine above 20, a bland sediment (p. 109)";
+const RECHECK: &str =
+    "Recheck the creatinine: prerenal AKI recovers fully when it is corrected promptly (p. 105)";
+const BY_INDICES: &str =
+    "Between the cut-offs: decide with the urine sodium, urine osmolality and the sediment (p. 109)";
+
+const PRERENAL_NEXT: &[&str] = &[PERFUSE, OTHER_INDICES, RECHECK];
+
+const ATN_NEXT: &[&str] = &[
+    "Favours acute tubular necrosis: look for epithelial cell and granular casts (p. 109)",
+    "Stop nephrotoxins, keep the volume right, and give diuretics only for overload (pp. 111, 113)",
+    "Watch for the dialysis indications: acidosis, high potassium, intoxication, overload, uraemia (p. 115)",
+];
+
+const LOW_FENA_DD: &[&str] = &[
+    PRERENAL,
+    "A low FENa that is not prerenal: contrast nephropathy, myoglobin or haemoglobin, acute glomerulonephritis, early obstruction (Steiner 1984)",
+];
+
+const TURNING: &str = "Prerenal AKI turning into tubular injury when not corrected in time (p. 106)";
+
+const MIDDLE_DD: &[&str] = &[TURNING, "Diuretics raise the FENa even in a prerenal state (Steiner 1984)"];
 
 #[cfg(test)]
 mod tests {

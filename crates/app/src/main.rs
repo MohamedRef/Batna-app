@@ -58,6 +58,8 @@ mod study;
 mod synced;
 mod table;
 #[cfg(test)]
+pub(crate) mod test_dom;
+#[cfg(test)]
 mod testdom;
 #[cfg(test)]
 mod testing;

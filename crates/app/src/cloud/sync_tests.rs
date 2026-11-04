@@ -826,3 +826,33 @@ fn login_problems_reach_settings() {
     let l = phone.login("answered", |l| l.username.is_some());
     assert_eq!(l.problem, None, "the next answer clears it");
 }
+
+/// Two web tabs share one session (`localStorage`) and refresh it in turn,
+/// each from its own copy in memory. Neither may present a token the other
+/// already rotated, or the hub signs the device out as a reused token (#646).
+#[test]
+fn two_tabs_sharing_a_session_take_turns_refreshing_and_stay_signed_in() {
+    use super::api::Api;
+    use super::session::Auth;
+    let cloud = FakeCloud::start();
+    let store = Store::open_in_memory().unwrap();
+    let vault = SharedVault::default();
+    assert!(vault.save(&cloud.session_for(&info(&store, "web"))));
+    let api = Api::new(&cloud.url);
+    let rt = tokio::runtime::Builder::new_current_thread().enable_all().build().unwrap();
+    let now = crate::store::now_ms() as u64;
+    let mut a = Auth::restore(Box::new(vault.clone()), now).ok().unwrap();
+    let mut b = Auth::restore(Box::new(vault.clone()), now).ok().unwrap();
+    for round in 0..4 {
+        // Each forced refresh stands for an access token running out.
+        let tab = if round % 2 == 0 { &mut a } else { &mut b };
+        rt.block_on(tab.access_token(&api, now, true)).unwrap_or_else(|e| panic!("round {round}: {e}"));
+        // The other tab, behind by one rotation, takes the kept session
+        // instead of refreshing with its stale token.
+        let other = if round % 2 == 0 { &mut b } else { &mut a };
+        rt.block_on(other.access_token(&api, now, true)).unwrap_or_else(|e| panic!("round {round}: {e}"));
+        assert_eq!(a.session().refresh_token, b.session().refresh_token, "round {round}");
+    }
+    assert_eq!(cloud.refreshes(), 4, "one refresh per round, not two");
+    assert_eq!(vault.load().unwrap().refresh_token, a.session().refresh_token);
+}

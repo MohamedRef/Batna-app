@@ -97,7 +97,8 @@ fn ann_arbor(i: &Inputs) -> Result<Outcome, CalcError> {
         band,
         label,
         meaning,
-        page: Some(193),
+        // Stages I–II are defined on p. 192; III–IV and A/B on p. 193.
+        page: Some(if stage <= 2 { 192 } else { 193 }),
         parts,
         notes: vec![
             "The E suffix (one extranodal site by direct spread) and X (bulk) are not entered here (Lugano 2014)."
@@ -333,6 +334,9 @@ mod tests {
         assert_eq!(stage("IV", false), "ann_arbor.4a");
         let o = ann_arbor(&Inputs::new().choice("spread", "both_sides").flag("weight_loss", true)).unwrap();
         assert_eq!(o.display, "Stage IIIB");
+        assert_eq!(o.page, Some(193));
+        let o = ann_arbor(&Inputs::new().choice("spread", "one_side")).unwrap();
+        assert_eq!(o.page, Some(192));
     }
 
     #[test]

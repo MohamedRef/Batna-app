@@ -306,6 +306,23 @@ pub fn collect(root: &Path, chapter: &str, num: &str) -> Result<Vec<Ref>, String
         let quote = src.get("quote").and_then(Value::as_str).map(String::from);
         out.push(Ref { id: id.into(), page, quote, text: text_of(item), book_figure: false });
     }
+    // Calculators' quotes on this lecture's pages (`content/calc-quotes.yaml`):
+    // the quote is all they say, with the calculator's name.
+    let quotes = root.join("content/calc-quotes.yaml");
+    if quotes.exists() {
+        let q: batna_core::content::CalcQuotes = crate::read_yaml(&quotes)?;
+        let lecture = format!("{chapter}.{num}");
+        for c in q.quotes.iter().filter(|c| c.lecture == lecture) {
+            let name = batna_core::calc::spec(&c.calculator).map_or("", |s| s.name);
+            out.push(Ref {
+                id: batna_core::content::calc_quote_ref(&c.calculator, c.page),
+                page: c.page,
+                quote: Some(c.quote.clone()),
+                text: format!("{name}\n{}", c.quote),
+                book_figure: false,
+            });
+        }
+    }
     let lessons = root.join("content/lessons").join(chapter).join(format!("{num}.yaml"));
     if lessons.exists() {
         let doc: Value = crate::read_yaml(&lessons)?;

@@ -108,6 +108,14 @@ button.library-note { border: 0; color: inherit; }
   .tap-row.progress-row > .chip, .tap-row.lecture-row > .chip { order: 3; margin-inline-start: calc(2.4rem + var(--sp-3)); }
   .tap-row.progress-row > .chev, .tap-row.lecture-row > .chev { order: 2; }
 }
+/* From 840px the sidebar leaves the aside about 16rem until the window
+   nears 1200px: the readiness chip drops under the title there too, or
+   the title is squeezed to a letter per line (#685). */
+@media (min-width: 840px) and (max-width: 1199.98px) {
+  .tab-aside .tap-row.progress-row, .tab-aside .tap-row.lecture-row { flex-wrap: wrap; }
+  .tab-aside .tap-row.progress-row > .chip, .tab-aside .tap-row.lecture-row > .chip { order: 3; margin-inline-start: calc(2.4rem + var(--sp-3)); }
+  .tab-aside .tap-row.progress-row > .chev, .tab-aside .tap-row.lecture-row > .chev { order: 2; }
+}
 
 .ring-tap { inline-size: auto; flex: none; border-radius: 50%; }
 

@@ -186,6 +186,18 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
             Err(e) => problems.push(e),
         }
     }
+    // Calculators' book quotes (their words are checked by refs, below).
+    let calc_quotes = content.join("calc-quotes.yaml");
+    if calc_quotes.exists() {
+        match read_yaml::<batna_core::content::CalcQuotes>(&calc_quotes) {
+            Ok(q) => problems.extend(
+                validate::calc_quotes(&q, &index)
+                    .into_iter()
+                    .map(|p| format!("content/calc-quotes.yaml: {p}")),
+            ),
+            Err(e) => problems.push(e),
+        }
+    }
     // Lessons (docs/LESSONS.md), with every abbreviation in the glossary.
     let (_, lessons) = lessons::validate_all(root, &approved, glossary.as_ref(), &mut problems);
     // Nothing left from a template (`batna-tools content new-item`).

@@ -214,7 +214,7 @@ pub fn tables() -> Vec<Table> {
             .paper("17 notes the book's gap", mmse(0, 0, 0), "mmse.severe")
             .score(17.0, 0.0)
             .noted("jumps from 18"),
-        Table::new("abi", &["abi.normal", "abi.pad", "abi.critical"])
+        Table::new("abi", &["abi.non_compressible", "abi.normal", "abi.pad", "abi.critical"])
             .paper(
                 "AHA/ACC 2016: higher ankle 100 (PT) over higher arm 140 (left) = 0.71, PAD",
                 ins![dp_mm_hg: 80, pt_mm_hg: 100, brachial_right_mm_hg: 120, brachial_left_mm_hg: 140],
@@ -229,8 +229,8 @@ pub fn tables() -> Vec<Table> {
             .noted("borderline")
             .cut("0.90 / 0.91 (book: above 0.9 normal)", ins![brachial_right_mm_hg: 100], "dp_mm_hg", (90.0, "abi.pad"), (91.0, "abi.normal"))
             .cut("0.40 / 0.39 (below 0.4 critical)", ins![brachial_right_mm_hg: 100], "dp_mm_hg", (40.0, "abi.pad"), (39.0, "abi.critical"))
-            .cut("1.40 / 1.41: non-compressible note above 1.40", ins![brachial_right_mm_hg: 100], "dp_mm_hg", (140.0, "abi.normal"), (141.0, "abi.normal"))
-            .paper("1.41 says non-compressible", ins![dp_mm_hg: 141, brachial_right_mm_hg: 100], "abi.normal")
+            .cut("1.40 / 1.41 (AHA/ACC 2016: above 1.40 non-compressible)", ins![brachial_right_mm_hg: 100], "dp_mm_hg", (140.0, "abi.normal"), (141.0, "abi.non_compressible"))
+            .paper("1.41 says non-compressible", ins![dp_mm_hg: 141, brachial_right_mm_hg: 100], "abi.non_compressible")
             .noted("non-compressible"),
     ]
 }

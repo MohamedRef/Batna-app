@@ -768,7 +768,13 @@ fn abi(i: &Inputs) -> Result<Outcome, CalcError> {
                 .to_owned(),
         );
     }
-    let (band, label, meaning) = if ratio > 0.9 {
+    let (band, label, meaning) = if ratio > 1.4 {
+        (
+            "abi.non_compressible",
+            "Above 1.40: non-compressible",
+            "The ankle arteries do not compress, so this ABI cannot rule disease in or out.",
+        )
+    } else if ratio > 0.9 {
         ("abi.normal", "Above 0.9: normal", "Normal.")
     } else if ratio >= 0.4 {
         (
@@ -1105,11 +1111,22 @@ pub const GUIDES: &[(&str, Guide)] = &[
     (
         "abi.normal",
         Guide {
-            next: &[
-                "With typical claudication and a normal resting ABI, do an exercise (treadmill) ABI",
-                "Above 1.40: arteries do not compress; use a toe-brachial index (abnormal 0.70 or less)",
-            ],
+            next: &["With typical claudication and a normal resting ABI, do an exercise (treadmill) ABI"],
             dd: &[],
+        },
+    ),
+    (
+        "abi.non_compressible",
+        Guide {
+            next: &[
+                "Measure a toe-brachial index instead: 0.70 or less is PAD (AHA/ACC 2016)",
+                "Or a duplex ultrasound or pulse volume recordings if PAD is still suspected (AHA/ACC 2016)",
+                "Treat the vascular risk as for PAD: stop smoking, statin, control BP and diabetes",
+            ],
+            dd: &[
+                "Medial arterial calcification: diabetes, chronic kidney disease or dialysis, old age",
+                "Hidden PAD behind the stiff arteries: the high ABI does not exclude it",
+            ],
         },
     ),
     (
@@ -1179,6 +1196,7 @@ mod tests {
             "mmse.borderline",
             "mmse.marked",
             "mmse.severe",
+            "abi.non_compressible",
             "abi.normal",
             "abi.pad",
             "abi.critical",
@@ -1361,6 +1379,8 @@ mod tests {
         assert_eq!((o.score, o.band), (Some(0.31), "abi.critical"));
         let o = abi(&Inputs::new().num("dp_mm_hg", 200.0).num("brachial_right_mm_hg", 130.0)).unwrap();
         assert_eq!(o.notes.len(), 1);
+        // 200 / 130 = 1.54: non-compressible, not normal (AHA/ACC 2016).
+        assert_eq!(o.band, "abi.non_compressible");
         assert!(abi(&Inputs::new().num("dp_mm_hg", 90.0).num("brachial_right_mm_hg", 0.0)).is_err());
     }
 }

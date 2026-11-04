@@ -44,7 +44,7 @@ pub fn load(root: &Path) -> Result<Vec<(PathBuf, LessonFile, String)>, Vec<Strin
 /// explain all of them. A capitalised word that isn't one goes in the
 /// glossary's `plain:` list.
 pub fn unknown_abbreviations(file: &LessonFile, g: &Glossary) -> Vec<String> {
-    let g = g.finder();
+    let g = g.finder_in(Some(batna_core::program::course_of(&file.lecture)));
     let mut out = Vec::new();
     for l in &file.lessons {
         for (k, step) in l.steps.iter().enumerate() {

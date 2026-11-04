@@ -35,10 +35,13 @@ pub struct Term {
 pub fn index() -> &'static BTreeMap<String, Vec<Term>> {
     static INDEX: Derived<BTreeMap<String, Vec<Term>>> = Derived::new();
     INDEX.get(|lib| {
-        let finder = crate::hover::glossary().finder();
+        let g = crate::hover::glossary();
+        let mut finders = BTreeMap::new();
         let mut by_course: BTreeMap<String, Vec<Term>> = BTreeMap::new();
         for (lecture, lesson) in lib.all_lessons() {
             let course = batna_core::program::course_of(lecture).to_string();
+            // Each course reads its own senses (`ICP` in neph and in hb).
+            let finder = finders.entry(course.clone()).or_insert_with(|| g.finder_in(Some(course.as_str())));
             let terms = by_course.entry(course).or_default();
             let texts: Vec<String> = lesson.steps.iter().flat_map(|s| s.shown_text()).collect();
             for e in finder.abbreviations_in(&texts) {

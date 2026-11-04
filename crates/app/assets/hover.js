@@ -12,7 +12,7 @@
 // Adapted from kabar-app main: crates/app/assets/reader.js (pointer plumbing).
 (() => {
   if (window.__batnaHover) return;
-  const state = { exact: {}, lower: {}, unverified: "", timer: 0, shownFor: null };
+  const state = { exact: {}, lower: {}, courses: {}, unverified: "", timer: 0, shownFor: null };
   const card = document.createElement("div");
   card.className = "peek";
   card.setAttribute("role", "tooltip");
@@ -55,9 +55,14 @@
     return { word: text.slice(a, b).replace(/^-+|-+$/g, ""), rect, node, a };
   }
 
-  function lookup(word) {
+  // A word inside `data-course` (a lesson step) reads its course's own
+  // sense first: ICP is intracranial pressure in neph, not cholestasis.
+  function lookup(word, node) {
     if (!word) return null;
-    return state.exact[word] || state.lower[word.toLowerCase()] || null;
+    const el = node && (node.nodeType === 1 ? node : node.parentElement);
+    const scope = el && el.closest ? el.closest("[data-course]") : null;
+    const own = scope && state.courses[scope.dataset.course];
+    return (own && own[word]) || state.exact[word] || state.lower[word.toLowerCase()] || null;
   }
 
   function show(text, note, rect) {
@@ -98,7 +103,7 @@
       return;
     }
     const hit = wordAt(x, y);
-    const entry = hit && lookup(hit.word);
+    const entry = hit && lookup(hit.word, hit.node);
     if (!entry) return hide();
     const key = hit.word + "@" + hit.a;
     if (state.shownFor === key) return;
@@ -138,7 +143,7 @@
       return;
     }
     const hit = wordAt(e.clientX, e.clientY);
-    const entry = hit && lookup(hit.word);
+    const entry = hit && lookup(hit.word, hit.node);
     if (!entry) return;
     const key = hit.word + "@" + hit.a;
     if (touchShown === key) return;
@@ -168,6 +173,7 @@
     setGlossary(g, unverifiedNote) {
       state.exact = g.exact || {};
       state.lower = g.lower || {};
+      state.courses = g.courses || {};
       state.unverified = unverifiedNote || "";
     },
     hide,

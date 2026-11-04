@@ -145,6 +145,18 @@ impl Mirror {
         }
     }
 
+    /// Whether `n` sits somewhere inside `outer`.
+    fn is_inside(&self, n: usize, outer: usize) -> bool {
+        let mut at = self.nodes[n].parent;
+        while let Some(p) = at {
+            if p == outer {
+                return true;
+            }
+            at = self.nodes[p].parent;
+        }
+        false
+    }
+
     fn listens(&self, n: usize, event: &str) -> bool {
         matches!(&self.nodes[n].kind, Kind::Element { listeners, .. } if listeners.iter().any(|l| l == event))
     }
@@ -396,8 +408,10 @@ impl TestDom {
             .into_iter()
             .filter(|n| text.is_none_or(|t| collapse(&self.mirror.text(*n)).contains(t)))
             .collect();
-        // The innermost hit, so "button" + text finds the button, not a parent.
-        let Some(n) = hits.iter().rev().find(|n| self.mirror.listens(**n, event)).or(hits.last()) else {
+        // The first hit with no other hit inside it, so `div` + text finds
+        // the innermost element holding the text, not its parent.
+        let inner = |n: &usize| !hits.iter().any(|h| h != n && self.mirror.is_inside(*h, *n));
+        let Some(n) = hits.iter().find(|n| inner(n)) else {
             panic!("no `{sel}` with text {text:?} in:\n{}", self.text());
         };
         self.target(*n, event)
@@ -412,6 +426,13 @@ impl TestDom {
     /// Taps the first element matching `sel`.
     pub fn click(&mut self, sel: &str) {
         let id = self.pick(sel, None, "click");
+        self.fire(id, "click", Box::new(SerializedMouseData::default()), true);
+    }
+
+    /// Taps the `i`th element matching `sel`.
+    pub fn click_nth(&mut self, sel: &str, i: usize) {
+        let n = *self.all(sel).get(i).unwrap_or_else(|| panic!("no element {i} for `{sel}`"));
+        let id = self.target(n, "click");
         self.fire(id, "click", Box::new(SerializedMouseData::default()), true);
     }
 
@@ -454,6 +475,21 @@ impl TestDom {
             false,
         );
         self.fire(id, "keydown", Box::new(data), true);
+    }
+
+    /// Fires `name` with `data` (a `Serialized*Data`) on the first element
+    /// matching `sel` that listens for it.
+    pub fn fire_on(&mut self, sel: &str, name: &str, data: Box<dyn Any>) {
+        let id = self.pick(sel, None, name);
+        self.fire(id, name, data, true);
+    }
+
+    /// The CSS animation on the element matching `sel` ran out.
+    pub fn animation_end(&mut self, sel: &str) {
+        let data: dioxus::html::SerializedAnimationData =
+            serde_json::from_str(r#"{"animation_name":"drain","pseudo_element":"","elapsed_time":1.0}"#)
+                .expect("animation data");
+        self.fire_on(sel, "animationend", Box::new(data));
     }
 
     /// Runs `f` inside the app's root scope (to set a signal from a test).

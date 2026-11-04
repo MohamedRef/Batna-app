@@ -468,7 +468,7 @@ pub fn Study() -> Element {
 }
 
 #[cfg(test)]
-mod flow;
+pub(crate) mod flow;
 #[cfg(test)]
 mod tests;
 

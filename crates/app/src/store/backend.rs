@@ -108,6 +108,13 @@ impl ReviewBackend {
         b
     }
 
+    /// Test-only: drops `table` from this backend's store, so the next
+    /// write to it fails the way a broken disk would.
+    #[cfg(test)]
+    pub fn break_table(&self, table: &str) {
+        self.store.conn.lock().unwrap().execute(&format!("DROP TABLE {table}"), []).unwrap();
+    }
+
     /// Re-reads everything from the store.
     pub fn reload(&mut self) {
         self.settings = self.store.review_settings();

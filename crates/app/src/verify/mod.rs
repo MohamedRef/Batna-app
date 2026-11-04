@@ -3,6 +3,8 @@
 //! above the grade row; it renders nothing when the item needs no check.
 
 mod export;
+#[cfg(test)]
+mod flow;
 
 use batna_core::content::Body;
 use batna_core::review::verify::{self, Check, Edit, FieldValue, Verdict};

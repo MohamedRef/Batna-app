@@ -14,7 +14,7 @@ use batna_core::content::Body;
 use batna_core::review::{ReviewEvent, StudyStore, StudyStoreHandle};
 
 /// The first playable item of `kind` in the library.
-pub(super) fn first(kind: &str) -> &'static Item {
+pub(crate) fn first(kind: &str) -> &'static Item {
     ready_lectures()
         .into_iter()
         .flat_map(|l| &l.items)

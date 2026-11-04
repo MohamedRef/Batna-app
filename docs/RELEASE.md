@@ -41,7 +41,7 @@ preview workflow refuses to publish a build below the live feed's. Only move to 
 |---|---|---|
 | Tools | `brew install just`, Rust, `cargo install dioxus-cli --version 0.7.10`, Android SDK + NDK | Same as `docs/RUN.md` |
 | Release signing key | `just android-keystore` | Writes `~/.batna/batna-release.jks`. The password goes into the Keychain (`batna-android`). **Back the file and password up.** Android only installs an update signed with the same key, so losing it means uninstalling Batna and starting over. |
-| Mac signing identity | `just mac-codesign-cert` | A free self-signed "Batna Code Signing" certificate. Every Batna.app keeps the same identity, so the Keychain and the updater keep trusting it. |
+| Mac signing identity | `just mac-codesign-cert` | A free self-signed "Batna Code Signing" certificate. Every Batna.app keeps the same identity, so the updater keeps trusting it. |
 | Update key | `just update-keygen` | Once, before the first alpha. Writes `crates/app/update-key.pub` (commit it) and keeps the secret in the Keychain (`batna-update`). See §5. |
 | Icons | `just icons` (only after editing `assets/src/icon/*.svg`) | Needs `pip install cairosvg pillow`. The exported PNGs are committed. |
 

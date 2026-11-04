@@ -418,3 +418,31 @@ button.activity-row:focus-visible { outline-offset: -3px; }
 .bk-q-list { margin: 0; padding-inline-start: 1.2em; line-height: 1.55; }
 .bk-q-list li.d1 { margin-inline-start: 1.2em; }
 .bk-q-list li.d2, .bk-q-list li.d3 { margin-inline-start: 2.4em; }
+
+/* Lab values in lessons and cards (src/labs): the value is blue when low
+   and red when high, as in the calculator boxes, and a small chip after it
+   gives the normal range; hover or tap it for the unit and the source. The
+   chip's arrow says which way, so colour is never the only sign. */
+.lab-v, .lab-n {
+  --low: color-mix(in srgb, #3b5bdb 72%, var(--text));
+  --low-soft: color-mix(in srgb, #3b5bdb 13%, var(--surface));
+}
+.lab-v[data-place="high"], .lab-n[data-place="high"] { --place: var(--bad); }
+.lab-v[data-place="low"], .lab-n[data-place="low"] { --place: var(--low); }
+.lab-v[data-place] { color: var(--place); font-weight: 600; }
+.lab-n {
+  display: inline-block;
+  margin-inline: 0.3em;
+  padding: 0 0.45em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.78em;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: 0.08em;
+  cursor: help;
+}
+.lab-n bdi { font-family: var(--font-latin); font-variant-numeric: tabular-nums; }
+.lab-n[data-place] .lab-arrow { color: var(--place); font-weight: 700; }

@@ -354,7 +354,7 @@ pub enum Tone {
 // ---------- the text markup ----------
 
 /// A run of lesson text with one look.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct Span {
     pub text: String,
     pub bold: bool,
@@ -362,6 +362,24 @@ pub struct Span {
     pub key: bool,
     /// Latin script (English terms, numbers with units): isolated left-to-right.
     pub latin: bool,
+    /// A lab value ("128 mmol/L" after "Na"), shown with its normal range.
+    pub lab: Option<LabMark>,
+}
+
+/// A lab value inside lesson text ([`crate::labs`]).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct LabMark {
+    /// Which value of the line it is: a value split over two spans keeps
+    /// one number.
+    pub n: u16,
+    /// The [`crate::labs::Lab`] id.
+    pub lab: &'static str,
+    pub place: Option<crate::calc::Place>,
+    /// The number had no unit, so the chip names it.
+    pub bare: bool,
+    /// The range chip goes after this span: the value's last span, and the
+    /// first value of its test on the line.
+    pub chip: bool,
 }
 
 /// A block of lesson text.
@@ -414,7 +432,7 @@ pub fn blocks(text: &str) -> Vec<Block> {
                 None => {
                     flush(&mut out, &mut list);
                     if !para.is_empty() {
-                        para.push(Span { text: " ".into(), bold: false, key: false, latin: false });
+                        para.push(Span { text: " ".into(), ..Span::default() });
                     }
                     para.extend(spans(l));
                 }
@@ -452,17 +470,37 @@ pub fn spans(line: &str) -> Vec<Span> {
             rest = &rest[c.len_utf8()..];
         }
     }
+    // Lab values, by the char they cover.
+    let mut marks: Vec<Option<LabMark>> = vec![None; look.len()];
+    {
+        let char_at: Vec<usize> = plain.char_indices().map(|(i, _)| i).collect();
+        let mut seen: Vec<&str> = Vec::new();
+        for (n, h) in crate::labs::find(&plain).into_iter().enumerate() {
+            let test = crate::labs::base(h.lab.id);
+            let chip = !seen.contains(&test);
+            seen.push(test);
+            let mark = LabMark { n: n as u16, lab: h.lab.id, place: h.place, bare: h.bare, chip };
+            for (k, &b) in char_at.iter().enumerate() {
+                if b >= h.start && b < h.end {
+                    marks[k] = Some(mark);
+                }
+            }
+        }
+    }
     let mut out: Vec<Span> = Vec::new();
     let mut at = 0;
     for (text, latin) in script_runs(&plain) {
         for c in text.chars() {
             let (bold, key) = look[at];
+            let lab = marks[at];
             at += 1;
             match out.last_mut() {
-                Some(last) if last.bold == bold && last.key == key && last.latin == latin => {
+                Some(last)
+                    if last.bold == bold && last.key == key && last.latin == latin && last.lab == lab =>
+                {
                     last.text.push(c)
                 }
-                _ => out.push(Span { text: c.to_string(), bold, key, latin }),
+                _ => out.push(Span { text: c.to_string(), bold, key, latin, lab }),
             }
         }
     }
@@ -476,8 +514,19 @@ pub fn spans(line: &str) -> Vec<Span> {
     let mut joined: Vec<Span> = Vec::with_capacity(out.len());
     for s in out {
         match joined.last_mut() {
-            Some(l) if l.bold == s.bold && l.key == s.key && l.latin == s.latin => l.text.push_str(&s.text),
+            Some(l) if l.bold == s.bold && l.key == s.key && l.latin == s.latin && l.lab == s.lab => {
+                l.text.push_str(&s.text)
+            }
             _ => joined.push(s),
+        }
+    }
+    // A value split over two spans (its number Arabic-side, its unit Latin)
+    // gets its chip after the last one only.
+    for k in 0..joined.len() {
+        let later =
+            joined[k + 1..].iter().any(|s| s.lab.is_some_and(|m| Some(m.n) == joined[k].lab.map(|m| m.n)));
+        if later && let Some(m) = &mut joined[k].lab {
+            m.chip = false;
         }
     }
     joined
@@ -1166,8 +1215,28 @@ mod tests {
 
     use super::*;
 
+    /// Neighbouring Latin spans (a lab value inside a term) are one run,
+    /// as the app isolates them.
     fn latin_runs(line: &str) -> Vec<String> {
-        spans(line).into_iter().filter(|s| s.latin).map(|s| s.text).collect()
+        let mut out: Vec<String> = Vec::new();
+        let mut was_latin = false;
+        for s in spans(line) {
+            match out.last_mut() {
+                Some(last) if was_latin && s.latin => last.push_str(&s.text),
+                _ if s.latin => out.push(s.text),
+                _ => {}
+            }
+            was_latin = s.latin;
+        }
+        out
+    }
+
+    #[test]
+    fn lab_values_are_marked_with_one_chip() {
+        let s = spans("لما **PaO2 <80 mmHg** يبقى hypoxia، والـ PaO2 60 mmHg أوطى");
+        let marked: Vec<_> = s.iter().filter_map(|s| s.lab.map(|m| (s.text.as_str(), m.chip))).collect();
+        assert_eq!(marked, [("80 mmHg", true), ("60 mmHg", false)]);
+        assert!(s.iter().any(|s| s.lab.is_some() && s.bold), "bold stays on the value");
     }
 
     #[test]

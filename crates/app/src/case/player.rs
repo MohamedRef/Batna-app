@@ -84,13 +84,13 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                 // step, and each finished step's question and answer.
                 crate::ui::Card { class: "case-data",
                     h2 { class: "label", {tx::KNOWN} }
-                    bdi { class: "case-stem", lang: "en", "{stem}" }
+                    bdi { class: "case-stem", lang: "en", crate::labs::LabText { text: stem.to_string() } }
                     for (i, s) in steps.iter().enumerate().take(k + 1) {
                         div { key: "{i}", id: "case-step-{i}", class: "case-history",
                             if let Some(reveal) = &s.reveal {
                                 div { class: if i == k && !done { "case-reveal new" } else { "case-reveal" },
                                     span { class: "small muted", "{tx::STEP} " span { class: "num-ltr", "{i + 1}" } if i == k && !done { " · {tx::NEW_DATA}" } }
-                                    bdi { lang: "en", "{reveal}" }
+                                    bdi { lang: "en", crate::labs::LabText { text: reveal.to_string() } }
                                 }
                             }
                             if let Some((ok, pick)) = run.results.get(i).copied().filter(|_| i < k) {

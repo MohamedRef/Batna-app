@@ -83,7 +83,7 @@ pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                                         }
                                     },
                                 }
-                                span { "{point}" }
+                                span { crate::labs::LabText { text: point.to_string() } }
                             }
                         }
                     }

@@ -31,6 +31,7 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod labs;
 mod learn;
 mod lecture;
 mod look;

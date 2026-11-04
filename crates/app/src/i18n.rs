@@ -1929,6 +1929,11 @@ pub mod recap {
     }
 }
 
+pub mod labs {
+    /// Before a lab value's normal range, in its chip.
+    pub const NORMAL: &str = "طبيعي";
+}
+
 pub mod learn {
     pub const NONE_YET: &str = "الدروس لسه بتتكتب. أول ما درس يجهز هتلاقيه هنا.";
     pub const OF: &str = "من";

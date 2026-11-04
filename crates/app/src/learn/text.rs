@@ -8,7 +8,8 @@ use dioxus::prelude::*;
 /// Paragraphs, bullet lists and numbered lists.
 #[component]
 pub fn Rich(text: String, #[props(default)] class: Option<&'static str>) -> Element {
-    let blocks = blocks(&text);
+    let mut blocks = blocks(&text);
+    one_chip_per_test(&mut blocks);
     rsx! {
         div { class: class.unwrap_or("ls-rich"),
             for (i , b) in blocks.into_iter().enumerate() {
@@ -31,6 +32,32 @@ pub fn Rich(text: String, #[props(default)] class: Option<&'static str>) -> Elem
                             }
                         }
                     },
+                }
+            }
+        }
+    }
+}
+
+/// A test's range chip shows at its first value in the text only, not on
+/// every bullet that names it again.
+fn one_chip_per_test(blocks: &mut [Block]) {
+    let mut seen: Vec<&str> = Vec::new();
+    for b in blocks {
+        let lines: Vec<&mut Vec<Span>> = match b {
+            Block::Para(s) => vec![s],
+            Block::Bullets(items) | Block::Numbered(items) => items.iter_mut().collect(),
+        };
+        for line in lines {
+            for s in line.iter_mut() {
+                if let Some(m) = &mut s.lab
+                    && m.chip
+                {
+                    let test = batna_core::labs::base(m.lab);
+                    if seen.contains(&test) {
+                        m.chip = false;
+                    } else {
+                        seen.push(test);
+                    }
                 }
             }
         }
@@ -119,7 +146,7 @@ fn pieces(mut groups: Vec<(bool, Vec<Span>)>) -> Vec<Piece> {
         let n: usize = first.text.chars().take_while(|c| PUNCT.contains(*c)).map(char::len_utf8).sum();
         if n > 0 {
             let punct: String = first.text.drain(..n).collect();
-            groups[k].1.push(Span { text: punct, bold: false, key: false, latin: true });
+            groups[k].1.push(Span { text: punct, latin: true, ..Span::default() });
         }
     }
     space_punctuation(&mut groups);
@@ -142,7 +169,7 @@ fn pieces(mut groups: Vec<(bool, Vec<Span>)>) -> Vec<Piece> {
             let body = &last.text[..last.text.len() - '\u{a0}'.len_utf8()];
             let at = body.rfind(' ').map_or(0, |i| i + 1);
             let word = last.text.split_off(at);
-            article.push(Span { text: word, bold: last.bold, key: last.key, latin: false });
+            article.push(Span { text: word, bold: last.bold, key: last.key, ..Span::default() });
             if last.text.is_empty() {
                 prev.pop();
             }
@@ -158,7 +185,20 @@ const PUNCT: &str = ".,;!?،؛؟";
 fn styled(spans: Vec<Span>) -> Element {
     rsx! {
         for (i , s) in spans.into_iter().enumerate() {
-            if s.key {
+            if let Some(m) = s.lab {
+                span { key: "{i}", class: "lab-v", "data-place": crate::labs::place(m.place),
+                    if s.key {
+                        mark { "{s.text}" }
+                    } else if s.bold {
+                        strong { "{s.text}" }
+                    } else {
+                        "{s.text}"
+                    }
+                }
+                if m.chip {
+                    crate::labs::RangeChip { lab: m.lab, bare: m.bare, place: m.place }
+                }
+            } else if s.key {
                 mark { key: "{i}", "{s.text}" }
             } else if s.bold {
                 strong { key: "{i}", "{s.text}" }
@@ -255,6 +295,13 @@ mod tests {
     fn html(text: &str) -> String {
         let text = text.to_string();
         dioxus::ssr::render_element(rsx! { Rich { text } })
+    }
+
+    #[test]
+    fn lab_values_get_their_range_once() {
+        let h = html("- الـ Na أقل من 135 يبقى hyponatraemia\n- لو Na 120 mmol/L عالج بسرعة");
+        assert_eq!(h.matches(r#"class="lab-n""#).count(), 1, "{h}");
+        assert!(h.contains("135–145") && h.contains(r#"data-place="low""#), "{h}");
     }
 
     #[test]

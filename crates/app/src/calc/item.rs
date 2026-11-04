@@ -82,7 +82,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                 p { class: "verdict bad", role: "alert", {cx::SAVE_FAILED} }
             }
             crate::ui::Card { class: "",
-                bdi { class: "case-stem", "{stem}" }
+                bdi { class: "case-stem", crate::labs::LabText { text: stem.to_string() } }
                 p { class: "case-question", dir: "auto",
                     {question.clone().unwrap_or_else(|| format!("Calculate {}.", spec.name))}
                 }

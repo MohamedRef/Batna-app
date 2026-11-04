@@ -14,11 +14,12 @@
 //! = 2 × Na + glucose/18 + BUN/2.8 (mg/dL); a gap above 10 mOsm is an
 //! osmolal gap (p. 20).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, choice, normals, num, show};
 
-const NA: super::Field = num("na_meq_l", "Sodium", "mEq/L", 90.0, 200.0, 1.0);
-const CL: super::Field = num("cl_meq_l", "Chloride", "mEq/L", 50.0, 160.0, 1.0);
-const HCO3: super::Field = num("hco3_meq_l", "Bicarbonate (HCO3)", "mEq/L", 1.0, 60.0, 0.1);
+const NA: super::Field = num("na_meq_l", "Sodium", "mEq/L", 90.0, 200.0, 1.0).normal_as(normals::SODIUM);
+const CL: super::Field = num("cl_meq_l", "Chloride", "mEq/L", 50.0, 160.0, 1.0).normal_as(normals::CHLORIDE);
+const HCO3: super::Field =
+    num("hco3_meq_l", "Bicarbonate (HCO3)", "mEq/L", 1.0, 60.0, 0.1).normal_as(normals::HCO3);
 
 pub const ANION_GAP: CalcSpec = CalcSpec {
     id: "anion_gap",
@@ -29,6 +30,7 @@ pub const ANION_GAP: CalcSpec = CalcSpec {
         CL,
         HCO3,
         num("albumin_g_dl", "Albumin", "g/dL", 0.5, 6.0, 0.1)
+            .normal_as(normals::ALBUMIN_G_DL)
             .optional()
             .hint("Corrects the gap for a low albumin."),
     ],
@@ -77,7 +79,10 @@ pub const DELTA_RATIO: CalcSpec = CalcSpec {
     id: "delta_ratio",
     name: "Delta ratio (gap : gap)",
     area: Area::Renal,
-    fields: &[num("anion_gap_meq_l", "Anion gap", "mEq/L", 0.0, 60.0, 0.1), HCO3],
+    fields: &[
+        num("anion_gap_meq_l", "Anion gap", "mEq/L", 0.0, 60.0, 0.1).normal_as(normals::ANION_GAP),
+        HCO3,
+    ],
     source: "Book Nephrology Lecture 1, pp. 12, 14",
     compute: delta_ratio,
 };
@@ -134,7 +139,7 @@ pub const COMPENSATION: CalcSpec = CalcSpec {
     fields: &[
         choice("disorder", "Primary disorder", DISORDERS),
         HCO3,
-        num("pco2_mm_hg", "pCO2", "mmHg", 5.0, 150.0, 1.0),
+        num("pco2_mm_hg", "pCO2", "mmHg", 5.0, 150.0, 1.0).normal_as(normals::PCO2_MM_HG),
     ],
     source: "Book Nephrology Lecture 1, pp. 13–14",
     compute: compensation,
@@ -243,10 +248,11 @@ pub const OSMOLAL_GAP: CalcSpec = CalcSpec {
     name: "Osmolal gap",
     area: Area::Renal,
     fields: &[
-        num("measured_osm", "Measured osmolality", "mOsm/kg", 200.0, 500.0, 1.0),
+        num("measured_osm", "Measured osmolality", "mOsm/kg", 200.0, 500.0, 1.0)
+            .normal_as(normals::OSMOLALITY),
         NA,
-        num("glucose_mg_dl", "Glucose", "mg/dL", 10.0, 2000.0, 1.0),
-        num("bun_mg_dl", "BUN", "mg/dL", 1.0, 300.0, 0.1).hint("Urea ÷ 2.14."),
+        num("glucose_mg_dl", "Glucose", "mg/dL", 10.0, 2000.0, 1.0).normal_as(normals::GLUCOSE_MG_DL),
+        num("bun_mg_dl", "BUN", "mg/dL", 1.0, 300.0, 0.1).normal_as(normals::BUN_MG_DL).hint("Urea ÷ 2.14."),
     ],
     source: "Book Nephrology Lecture 1, p. 20",
     compute: osmolal_gap,

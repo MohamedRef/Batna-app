@@ -201,7 +201,7 @@ fn body_problems(body: &Body) -> Vec<String> {
                     for key in crate::calc::unknown_inputs(spec, &inputs) {
                         p.push(format!("calc input `{key}` is not used by `{calculator}`"));
                     }
-                    match (spec.compute)(&inputs) {
+                    match spec.run(&inputs) {
                         Err(e) => p.push(format!("calc inputs: {e}")),
                         Ok(o) if !crate::calc::expect_matches(&o, expect) => p.push(format!(
                             "calc expect {expect:?} disagrees with the calculator: {} ({}, band `{}`)",
@@ -225,6 +225,43 @@ pub fn is_lecture_id(id: &str) -> bool {
         && chapter.bytes().all(|b| b.is_ascii_lowercase())
         && num.len() == 2
         && num.bytes().all(|b| b.is_ascii_digit())
+}
+
+/// Checks `content/calc-quotes.yaml`: the schema, a calculator the app has,
+/// a listed lecture whose pages hold the page, a quote, and one quote per
+/// calculator and page. That the words are on the page is `batna-tools
+/// refs`' job, like an item's quote.
+pub fn calc_quotes(q: &content::CalcQuotes, index: &content::Index) -> Vec<Problem> {
+    let mut out = Vec::new();
+    let mut bad = |at: String, message: String| out.push(Problem { at, message });
+    if q.schema != content::CALC_QUOTES_SCHEMA {
+        bad(
+            "calc-quotes".into(),
+            format!("schema is {:?}, expected {:?}", q.schema, content::CALC_QUOTES_SCHEMA),
+        );
+    }
+    let mut seen = BTreeSet::new();
+    for c in &q.quotes {
+        let at = content::calc_quote_ref(&c.calculator, c.page);
+        if crate::calc::spec(&c.calculator).is_none() {
+            bad(at.clone(), format!("no calculator {:?}", c.calculator));
+        }
+        match index.lectures.iter().find(|e| e.id == c.lecture) {
+            None => bad(at.clone(), format!("lecture {} is not in content/index.yaml", c.lecture)),
+            Some(e) if !(e.pages[0]..=e.pages[1]).contains(&c.page) => bad(
+                at.clone(),
+                format!("p{} is outside {} (pp. {}–{})", c.page, c.lecture, e.pages[0], e.pages[1]),
+            ),
+            Some(_) => {}
+        }
+        if c.quote.trim().is_empty() {
+            bad(at.clone(), "has no quote".into());
+        }
+        if !seen.insert((c.calculator.clone(), c.page)) {
+            bad(at, "is listed twice".into());
+        }
+    }
+    out
 }
 
 /// Checks `content/glossary.yaml` (the hover peeks, PARITY.md §6.3): the

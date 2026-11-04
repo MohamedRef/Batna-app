@@ -7,17 +7,17 @@
 //! − 15.745; FLI = 100 eʸ / (1 + eʸ). < 30 rules out, ≥ 60 rules in fatty
 //! liver.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "fli",
     name: "Fatty liver index (FLI)",
     area: Area::Liver,
     fields: &[
-        num("tg_mg_dl", "Triglycerides", "mg/dL", 10.0, 5000.0, 1.0),
-        num("bmi", "BMI", "kg/m²", 10.0, 80.0, 0.1),
-        num("waist_cm", "Waist circumference", "cm", 40.0, 250.0, 1.0),
-        num("ggt_u_l", "GGT", "U/L", 1.0, 5000.0, 1.0),
+        num("tg_mg_dl", "Triglycerides", "mg/dL", 10.0, 5000.0, 1.0).normal_as(normals::TRIGLYCERIDES_MG_DL),
+        num("bmi", "BMI", "kg/m²", 10.0, 80.0, 0.1).normal_as(normals::BMI),
+        num("waist_cm", "Waist circumference", "cm", 40.0, 250.0, 1.0).normal_as(normals::WAIST_CM),
+        num("ggt_u_l", "GGT", "U/L", 1.0, 5000.0, 1.0).normal_as(normals::GGT_U_L),
     ],
     source: "Bedogni 2006 (formula and cut-offs; the book names the FLI only, Lecture 6, p. 101)",
     compute,

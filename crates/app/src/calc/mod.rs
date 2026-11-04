@@ -8,14 +8,31 @@ mod picker;
 pub use picker::{Calculators, reload};
 
 use std::collections::BTreeMap;
+use std::sync::OnceLock;
 
-use batna_core::calc::{self, Area, CalcError, CalcSpec, CalcValue, FieldKind, Inputs, Outcome};
+use batna_core::calc::{
+    self, Area, CalcError, CalcSpec, CalcValue, FieldKind, Inputs, Normal, Outcome, Place,
+};
+use batna_core::content::CalcQuotes;
 use dioxus::prelude::*;
 
 use crate::i18n::calc as tx;
 use crate::look::{Css, css};
 
 pub const CSS: Css = css!("src/calc/calc.css");
+
+const QUOTES_YAML: &str = include_str!("../../../../content/calc-quotes.yaml");
+
+/// Every calculator's book quotes (`content/calc-quotes.yaml`), bundled. A
+/// file that doesn't parse gives none (CI's `batna-tools validate` fails on
+/// it first).
+pub fn quotes() -> &'static CalcQuotes {
+    static Q: OnceLock<CalcQuotes> = OnceLock::new();
+    Q.get_or_init(|| {
+        serde_yaml_ng::from_str(QUOTES_YAML)
+            .unwrap_or(CalcQuotes { schema: String::new(), quotes: Vec::new() })
+    })
+}
 
 fn area_label(area: Area) -> &'static str {
     match area {
@@ -95,14 +112,20 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
     let inputs = Inputs(
         values.read().iter().filter(|(_, v)| !is_blank(v)).map(|(k, v)| (k.clone(), v.clone())).collect(),
     );
-    let result = (spec.compute)(&inputs);
-    // The field the engine rejected, marked in place (a missing one is not
-    // an error yet: the result bar counts what is left).
+    let result = spec.run(&inputs);
+    // The field the engine rejected and why, marked in place (a missing one
+    // is not an error yet: the result bar counts what is left).
     let bad = match &result {
-        Err(CalcError::Invalid { field, .. }) => Some(*field),
+        Err(CalcError::Invalid { field, reason }) => Some((*field, *reason)),
         _ => None,
     };
     let left = missing(spec, &inputs);
+    // Women's normal ranges differ for some tests; `None` until he picks.
+    let female = match inputs.0.get("sex") {
+        Some(CalcValue::Text(s)) if s == "female" => Some(true),
+        Some(CalcValue::Text(s)) if s == "male" => Some(false),
+        _ => None,
+    };
     rsx! {
         style { {CSS.text()} }
         div { class: "calc-form",
@@ -118,7 +141,7 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                         div {
                             key: "{field.key}",
                             class: "field calc-field",
-                            "data-invalid": if bad == Some(field.key) { "true" } else { "false" },
+                            "data-invalid": if bad.is_some_and(|(k, _)| k == field.key) { "true" } else { "false" },
                             div { class: "calc-field-head",
                                 // Name and "optional" as separate pieces, so the
                                 // English name and the Arabic tag never mix.
@@ -142,9 +165,15 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                                 }
                             }
                             div { class: "calc-control",
-                                {field_input(field, values, bad == Some(field.key))}
-                                if bad == Some(field.key) {
-                                    p { id: "e-{field.key}", class: "field-error", role: "alert", {tx::INVALID} }
+                                {
+                                    let place = field.normal.zip(inputs.opt_num(field.key).ok().flatten())
+                                        .map(|(n, v)| n.place(v, female));
+                                    field_input(field, values, bad.is_some_and(|(k, _)| k == field.key), place)
+                                }
+                                if let Some((_, reason)) = bad.filter(|(k, _)| *k == field.key) {
+                                    p { id: "e-{field.key}", class: "field-error", role: "alert", {why(field, reason)} }
+                                } else if let Some(n) = field.normal {
+                                    {normal_line(field, n, female, inputs.opt_num(field.key).ok().flatten())}
                                 }
                             }
                         }
@@ -192,18 +221,88 @@ fn missing(spec: &CalcSpec, inputs: &Inputs) -> usize {
         .count()
 }
 
+/// Why a value was refused, in his words: the possible range for a number
+/// out of it, or what it can't be next to.
+fn why(field: &calc::Field, reason: &str) -> String {
+    match (reason, field.kind) {
+        (calc::IMPOSSIBLE, FieldKind::Number { unit, min, max, .. }) => {
+            tx::impossible(&span(min, max, false), unit)
+        }
+        _ => tx::reason(reason).unwrap_or(tx::INVALID).to_owned(),
+    }
+}
+
+/// "3.5–5.5", "≤ 2", "< 150", "0": a range as the line under the box
+/// shows it; `below` when `high` itself is out ([`Normal::below`]).
+fn span(low: f64, high: f64, below: bool) -> String {
+    match (low.is_finite(), high.is_finite()) {
+        (false, true) if below => format!("< {high}"),
+        (false, true) => format!("≤ {high}"),
+        (true, false) => format!("≥ {low}"),
+        _ if low == high => format!("{low}"),
+        _ => format!("{low}–{high}"),
+    }
+}
+
+/// The normal range under a number box. Out of range, it says which way,
+/// with an arrow and the same colour as the box (red high, blue low).
+fn normal_line(field: &calc::Field, n: Normal, female: Option<bool>, value: Option<f64>) -> Element {
+    let unit = match field.kind {
+        FieldKind::Number { unit, .. } => unit,
+        _ => "",
+    };
+    let unit = if unit.is_empty() { String::new() } else { format!(" {unit}") };
+    let place = value.map(|v| n.place(v, female)).unwrap_or(Place::Normal);
+    let (tag, text) = match place {
+        Place::High => ("high", tx::HIGH),
+        Place::Low => ("low", tx::LOW),
+        Place::Normal => ("normal", tx::NORMAL),
+    };
+    // Both sexes' ranges until he picks one, when they differ. The Arabic
+    // words stay outside the LTR numbers, so neither reorders the other.
+    match (n.female, female) {
+        (Some((fl, fh)), None) => rsx! {
+            p { id: "n-{field.key}", class: "calc-normal", "data-place": tag,
+                {text}
+                " {tx::MEN} "
+                bdi { dir: "ltr", {span(n.low, n.high, n.below)} }
+                " · {tx::WOMEN} "
+                bdi { dir: "ltr", "{span(fl, fh, n.below)}{unit}" }
+            }
+        },
+        _ => {
+            let (lo, hi) = n.bounds(female);
+            rsx! {
+                p { id: "n-{field.key}", class: "calc-normal", "data-place": tag,
+                    {text}
+                    " "
+                    bdi { dir: "ltr", "{span(lo, hi, n.below)}{unit}" }
+                }
+            }
+        }
+    }
+}
+
 fn field_input(
     field: &'static calc::Field,
     mut values: Signal<BTreeMap<String, CalcValue>>,
     invalid: bool,
+    place: Option<Place>,
 ) -> Element {
     let key = field.key;
     let invalid = if invalid { "true" } else { "false" };
     let current = values.read().get(key).cloned();
+    let place = match place {
+        Some(Place::High) => "high",
+        Some(Place::Low) => "low",
+        _ => "normal",
+    };
+    let described = if field.normal.is_some() { format!("e-{key} n-{key}") } else { format!("e-{key}") };
     match field.kind {
         FieldKind::Number { unit, min, max, step } => rsx! {
-            // The unit sits inside the box, at its end, as on MDCalc.
-            div { class: "calc-num", dir: "ltr",
+            // The unit sits inside the box, at its end, as on MDCalc. Out of
+            // the normal range the box takes the line's colour.
+            div { class: "calc-num", dir: "ltr", "data-place": place,
                 input {
                     id: "f-{key}",
                     r#type: "number",
@@ -213,7 +312,7 @@ fn field_input(
                     max: "{max}",
                     step: "{step}",
                     "aria-invalid": invalid,
-                    "aria-describedby": "e-{key}",
+                    "aria-describedby": "{described}",
                     value: field_text(current.as_ref()),
                     oninput: move |e: FormEvent| {
                         values.write().insert(key.to_owned(), CalcValue::Text(e.value()));
@@ -362,11 +461,21 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome, #[props(default = true)] 
                     }
                 }
             }
-            // The book page opens its sheet, like every "ص N" chip.
+            // The book page opens its sheet, like every "ص N" chip, with the
+            // book's own words for the cut-offs, in that lecture's book.
             p { class: "small muted calc-source",
                 span { {tx::SOURCE} ": " bdi { "{source}" } }
                 if let Some(page) = outcome.page {
-                    crate::hover::BookPage { page, quote: None, of: calc::spec(id).map_or("hb", |s| area_course(s.area)).to_string() }
+                    {
+                        let quote = quotes().find(id, page);
+                        let of = quote.map_or_else(
+                            || calc::spec(id).map_or("hb", |s| area_course(s.area)).to_string(),
+                            |q| q.lecture.clone(),
+                        );
+                        rsx! {
+                            crate::hover::BookPage { page, quote: quote.map(|q| q.quote.clone()), of }
+                        }
+                    }
                 }
             }
         }
@@ -376,6 +485,67 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome, #[props(default = true)] 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// The pages a calculator's results cite, found by trying many inputs
+    /// (seeded, so the same every run).
+    fn cited_pages(spec: &CalcSpec) -> BTreeMap<u32, Vec<&'static str>> {
+        let mut seed: u64 = 0x9E37_79B9_7F4A_7C15;
+        let mut rnd = move || {
+            seed ^= seed << 13;
+            seed ^= seed >> 7;
+            seed ^= seed << 17;
+            (seed >> 11) as f64 / (1u64 << 53) as f64
+        };
+        let mut pages: BTreeMap<u32, Vec<&'static str>> = BTreeMap::new();
+        for _ in 0..4000 {
+            let mut i = Inputs::new();
+            for f in spec.fields {
+                if f.optional && rnd() < 0.3 {
+                    continue;
+                }
+                i = match f.kind {
+                    FieldKind::Number { min, max, step, .. } => {
+                        // Half the tries near the low end, where most cut-offs sit.
+                        let t = if rnd() < 0.5 { rnd() } else { rnd().powi(3) };
+                        i.num(f.key, ((min + (max - min) * t) / step).round() * step)
+                    }
+                    FieldKind::Flag => i.flag(f.key, rnd() < 0.5),
+                    FieldKind::Choice(o) => i.choice(f.key, o[(rnd() * o.len() as f64) as usize % o.len()].0),
+                };
+            }
+            if let Ok(Outcome { page: Some(p), band, .. }) = spec.run(&i) {
+                let bands = pages.entry(p).or_default();
+                if !bands.contains(&band) {
+                    bands.push(band);
+                }
+            }
+        }
+        pages
+    }
+
+    // Mohamed, 2026-11-02: the calculators' page sheets showed no quote.
+    #[test]
+    fn every_cited_page_has_its_book_quote() {
+        assert_eq!(
+            quotes().schema,
+            batna_core::content::CALC_QUOTES_SCHEMA,
+            "content/calc-quotes.yaml parses"
+        );
+        let mut missing = Vec::new();
+        for spec in calc::all() {
+            for (page, bands) in cited_pages(spec) {
+                if quotes().find(spec.id, page).is_none() {
+                    missing.push(format!("{} p{page} ({})", spec.id, bands.join(", ")));
+                }
+            }
+        }
+        assert!(
+            missing.is_empty(),
+            "add the book's words for these pages to content/calc-quotes.yaml, then run \
+             batna-tools refs --lecture <id> --write:\n{}",
+            missing.join("\n")
+        );
+    }
 
     #[test]
     fn missing_counts_required_fields_only() {

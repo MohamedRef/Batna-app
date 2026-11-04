@@ -8,7 +8,7 @@
 //! feature (temperature > 37.8 °C, pulse ≥ 90, anaemia, ESR > 30 mm/h);
 //! moderate is in between.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, choice, flag, normals, num};
 
 const BLOOD: &[(&str, &str)] = &[
     ("small", "None or small amounts"),
@@ -26,7 +26,7 @@ pub const SPEC: CalcSpec = CalcSpec {
         flag("fever", "Temperature above 37.8 °C"),
         flag("pulse_90", "Pulse 90/min or more"),
         flag("anaemia", "Anaemia"),
-        num("esr_mm_h", "ESR", "mm/h", 0.0, 150.0, 1.0).optional(),
+        num("esr_mm_h", "ESR", "mm/h", 0.0, 150.0, 1.0).normal_as(normals::ESR_MM_H).optional(),
     ],
     source: "Book Gastroenterology Lecture 6, Table 4 (p. 222), titled there \"Mayo score\"; \
              the grading is Truelove and Witts 1955",

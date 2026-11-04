@@ -5,15 +5,15 @@
 //! grade 2 > −2.60 to ≤ −1.39, grade 3 > −1.39. Inputs are taken in mg/dL and
 //! g/dL and converted (bilirubin × 17.1, albumin × 10).
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, normals, num, show};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "albi",
     name: "ALBI grade",
     area: Area::Tumour,
     fields: &[
-        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1),
-        num("albumin_g_dl", "Albumin", "g/dL", 0.5, 6.0, 0.1),
+        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1).normal_as(normals::BILIRUBIN_MG_DL),
+        num("albumin_g_dl", "Albumin", "g/dL", 0.5, 6.0, 0.1).normal_as(normals::ALBUMIN_G_DL),
     ],
     source: "Johnson 2015; book Lecture 18, p. 363",
     compute,

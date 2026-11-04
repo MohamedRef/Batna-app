@@ -6,7 +6,7 @@
 //! the liver, ascites, albumin < 3 g/dL, bilirubin > 3 mg/dL; none = stage I,
 //! 1–2 = stage II, 3–4 = stage III.
 
-use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Guide, Inputs, Outcome, Part, flag, normals, num};
 
 pub const SPEC: CalcSpec = CalcSpec {
     id: "okuda",
@@ -15,8 +15,8 @@ pub const SPEC: CalcSpec = CalcSpec {
     fields: &[
         flag("tumour_over_half", "Tumour > 50% of the liver"),
         flag("ascites", "Ascites"),
-        num("albumin_g_dl", "Albumin", "g/dL", 0.5, 7.0, 0.1),
-        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 60.0, 0.1),
+        num("albumin_g_dl", "Albumin", "g/dL", 0.5, 7.0, 0.1).normal_as(normals::ALBUMIN_G_DL),
+        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 60.0, 0.1).normal_as(normals::BILIRUBIN_MG_DL),
     ],
     source: "Okuda 1985 (the book names it, Lecture 18, p. 361 and 355, without the criteria)",
     compute,

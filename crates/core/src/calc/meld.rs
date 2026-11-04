@@ -8,12 +8,12 @@
 //! the result is capped at 40. MELD 3.0 (2023) is not used, because the book
 //! and the exam use MELD and MELD-Na.
 
-use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, num};
+use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, flag, normals, num};
 
 const FIELDS_MELD: &[super::Field] = &[
-    num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1),
-    num("inr", "INR", "", 0.5, 15.0, 0.1),
-    num("creatinine_mg_dl", "Creatinine", "mg/dL", 0.1, 20.0, 0.1),
+    num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1).normal_as(normals::BILIRUBIN_MG_DL),
+    num("inr", "INR", "", 0.5, 15.0, 0.1).normal_as(normals::INR),
+    num("creatinine_mg_dl", "Creatinine", "mg/dL", 0.1, 20.0, 0.1).normal_as(normals::CREATININE_MG_DL),
     flag("dialysis", "Dialysis twice in the past week"),
 ];
 
@@ -31,11 +31,11 @@ pub const MELD_NA: CalcSpec = CalcSpec {
     name: "MELD-Na",
     area: Area::Liver,
     fields: &[
-        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1),
-        num("inr", "INR", "", 0.5, 15.0, 0.1),
-        num("creatinine_mg_dl", "Creatinine", "mg/dL", 0.1, 20.0, 0.1),
+        num("bilirubin_mg_dl", "Bilirubin", "mg/dL", 0.1, 50.0, 0.1).normal_as(normals::BILIRUBIN_MG_DL),
+        num("inr", "INR", "", 0.5, 15.0, 0.1).normal_as(normals::INR),
+        num("creatinine_mg_dl", "Creatinine", "mg/dL", 0.1, 20.0, 0.1).normal_as(normals::CREATININE_MG_DL),
         flag("dialysis", "Dialysis twice in the past week"),
-        num("sodium_mmol_l", "Sodium", "mmol/L", 100.0, 170.0, 1.0),
+        num("sodium_mmol_l", "Sodium", "mmol/L", 100.0, 170.0, 1.0).normal_as(normals::SODIUM),
     ],
     source: "Formula: UNOS/OPTN MELD-Na 2016 (Kim 2008). The book (Lecture 1, p. 14) names MELD-Na without a formula.",
     compute: compute_meld_na,

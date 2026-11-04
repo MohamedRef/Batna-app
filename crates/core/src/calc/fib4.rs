@@ -43,6 +43,9 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     if age < 35.0 || age > 65.0 {
         notes.push("Less accurate below 35 or above 65 years.".to_owned());
     }
+    if age >= 65.0 {
+        notes.push("65 or over: the low-risk cut-off is 2.0, not 1.3 (McPherson 2017).".to_owned());
+    }
     Ok(Outcome {
         score: Some(score),
         display: show(score, 2),

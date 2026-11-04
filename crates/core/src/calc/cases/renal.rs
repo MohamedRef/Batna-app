@@ -55,6 +55,7 @@ pub fn tables() -> Vec<Table> {
             .score(26.0, 1e-9)
             .cut("pCO2 28 / 29 (above 26 + 2)", ins![disorder: "metabolic_acidosis", hco3_meq_l: 12], "pco2_mm_hg", (28.0, "expected_compensation.appropriate"), (29.0, "expected_compensation.added_resp_acidosis"))
             .cut("pCO2 24 / 23 (below 26 − 2)", ins![disorder: "metabolic_acidosis", hco3_meq_l: 12], "pco2_mm_hg", (24.0, "expected_compensation.appropriate"), (23.0, "expected_compensation.added_resp_alkalosis"))
+            .cut("metabolic alkalosis, HCO3 40: pCO2 53 / 54 (above 48 + 5)", ins![disorder: "metabolic_alkalosis", hco3_meq_l: 40], "pco2_mm_hg", (53.0, "expected_compensation.appropriate"), (54.0, "expected_compensation.added_resp_acidosis"))
             .paper(
                 "book p. 14: metabolic alkalosis, HCO3 40 → pCO2 0.7 × 40 + 20 = 48 ± 5",
                 ins![disorder: "metabolic_alkalosis", hco3_meq_l: 40, pco2_mm_hg: 48],
@@ -119,7 +120,9 @@ pub fn tables() -> Vec<Table> {
             .cut("rise 0.29 / 0.30 mg/dL (≥ 0.3)", ins![baseline_cr_mg_dl: 1.0, urine_output: "normal"], "current_cr_mg_dl", (1.29, "kdigo_aki.none"), (1.3, "kdigo_aki.1"))
             .cut("ratio 1.99 / 2.0", ins![baseline_cr_mg_dl: 1.0, urine_output: "normal"], "current_cr_mg_dl", (1.99, "kdigo_aki.1"), (2.0, "kdigo_aki.2"))
             .cut("ratio 2.99 / 3.0", ins![baseline_cr_mg_dl: 1.0, urine_output: "normal"], "current_cr_mg_dl", (2.99, "kdigo_aki.2"), (3.0, "kdigo_aki.3"))
-            .cut("creatinine 3.99 / 4.0 mg/dL (≥ 4 is stage 3)", ins![baseline_cr_mg_dl: 2.0, urine_output: "normal"], "current_cr_mg_dl", (3.99, "kdigo_aki.1"), (4.0, "kdigo_aki.3")),
+            .cut("creatinine 3.99 / 4.0 mg/dL (≥ 4 is stage 3)", ins![baseline_cr_mg_dl: 2.0, urine_output: "normal"], "current_cr_mg_dl", (3.99, "kdigo_aki.1"), (4.0, "kdigo_aki.3"))
+            .paper("KDIGO 2012: an increase *to* ≥ 4.0; a stable 4.5 is no AKI", ins![baseline_cr_mg_dl: 4.5, current_cr_mg_dl: 4.5, urine_output: "normal"], "kdigo_aki.none")
+            .paper("a rise of 0.3 that reaches 4.1 is stage 3", ins![baseline_cr_mg_dl: 3.8, current_cr_mg_dl: 4.1, urine_output: "normal"], "kdigo_aki.3"),
         Table::new("fena", &["fena.prerenal", "fena.indeterminate", "fena.atn"])
             .paper(
                 "Espinel 1976 / book p. 109: (10 × 2) / (140 × 100) × 100 = 0.14%, prerenal",
@@ -270,16 +273,23 @@ pub fn tables() -> Vec<Table> {
                 "plasmic.intermediate",
             )
             .score(5.0, 0.0),
-        Table::new("cockcroft_gault", &["cockcroft_gault.crcl"])
+        Table::new(
+            "cockcroft_gault",
+            &["cockcroft_gault.normal", "cockcroft_gault.mild", "cockcroft_gault.moderate", "cockcroft_gault.severe", "cockcroft_gault.failure"],
+        )
             .paper(
                 "Cockcroft & Gault 1976 / book p. 30: man 60, 72 kg, creatinine 1.0: 80 × 72 / 72 = 80 mL/min",
                 ins![age_years: 60, weight_kg: 72, creatinine_mg_dl: 1.0, sex: "male"],
-                "cockcroft_gault.crcl",
+                "cockcroft_gault.mild",
             )
             .score(80.0, 1e-9)
-            .edge("man: no factor", ins![age_years: 80, weight_kg: 60, creatinine_mg_dl: 1.5, sex: "male"], "cockcroft_gault.crcl")
+            .edge("man: no factor", ins![age_years: 80, weight_kg: 60, creatinine_mg_dl: 1.5, sex: "male"], "cockcroft_gault.moderate")
             .score(33.3, 1e-9)
-            .edge("woman: × 0.85", ins![age_years: 80, weight_kg: 60, creatinine_mg_dl: 1.5, sex: "female"], "cockcroft_gault.crcl")
-            .score(28.3, 1e-9),
+            .edge("woman: × 0.85", ins![age_years: 80, weight_kg: 60, creatinine_mg_dl: 1.5, sex: "female"], "cockcroft_gault.severe")
+            .score(28.3, 1e-9)
+            .edge("FDA 2024: 90 or more normal", ins![age_years: 50, weight_kg: 72, creatinine_mg_dl: 1.0, sex: "male"], "cockcroft_gault.normal")
+            .score(90.0, 1e-9)
+            .edge("FDA 2024: below 15 kidney failure", ins![age_years: 80, weight_kg: 60, creatinine_mg_dl: 5.0, sex: "male"], "cockcroft_gault.failure")
+            .score(10.0, 1e-9),
     ]
 }

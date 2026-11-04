@@ -157,6 +157,18 @@ fn compensation(i: &Inputs) -> Result<Outcome, CalcError> {
     let mut notes = Vec::new();
     // (expected, range, measured, what is measured, too-high band, too-low band)
     let (expected, range, measured, what, high, low) = match disorder {
+        "metabolic_acidosis" if hco3 >= 24.0 => {
+            return Err(CalcError::Invalid {
+                field: "hco3_meq_l",
+                reason: "must be below 24 in metabolic acidosis",
+            });
+        }
+        "metabolic_alkalosis" if hco3 <= 24.0 => {
+            return Err(CalcError::Invalid {
+                field: "hco3_meq_l",
+                reason: "must be above 24 in metabolic alkalosis",
+            });
+        }
         "metabolic_acidosis" => (1.5 * hco3 + 8.0, 2.0, pco2, "pCO2", RESP_ACIDOSIS, RESP_ALKALOSIS),
         "metabolic_alkalosis" => (0.7 * hco3 + 20.0, 5.0, pco2, "pCO2", RESP_ACIDOSIS, RESP_ALKALOSIS),
         resp => {
@@ -225,12 +237,12 @@ const APPROPRIATE: Band =
 const RESP_ACIDOSIS: Band = (
     "expected_compensation.added_resp_acidosis",
     "pCO2 above expected",
-    "pCO2 failed to fall to the expected value: a complicating respiratory acidosis.",
+    "pCO2 is higher than compensation explains: a complicating respiratory acidosis.",
 );
 const RESP_ALKALOSIS: Band = (
     "expected_compensation.added_resp_alkalosis",
     "pCO2 below expected",
-    "pCO2 fell more than expected: a complicating respiratory alkalosis.",
+    "pCO2 is lower than compensation explains: a complicating respiratory alkalosis.",
 );
 const MET_ALKALOSIS: Band = (
     "expected_compensation.added_met_alkalosis",
@@ -405,7 +417,7 @@ pub const GUIDES: &[(&str, Guide)] = &[
         "expected_compensation.added_resp_acidosis",
         Guide {
             next: &[
-                "The pCO2 did not fall as far as expected: ventilation is failing (p. 13)",
+                "The pCO2 is above the expected value: ventilation is failing (p. 13)",
                 "Find the cause: drugs that depress breathing, weak muscles, a blocked airway or lung disease (pp. 18–19)",
             ],
             dd: &[
@@ -419,7 +431,7 @@ pub const GUIDES: &[(&str, Guide)] = &[
         "expected_compensation.added_resp_alkalosis",
         Guide {
             next: &[
-                "The pCO2 fell more than compensation explains: something is driving the breathing (p. 13)",
+                "The pCO2 is below the expected value: something is driving the breathing (p. 13)",
                 "Salicylates give a respiratory alkalosis first, then a high anion gap acidosis: check a level (p. 22)",
             ],
             dd: &[
@@ -558,6 +570,12 @@ mod tests {
         assert_eq!((o.score, o.band), (Some(26.0), "expected_compensation.appropriate"));
         assert_eq!(comp("metabolic_acidosis", 12.0, 35.0).band, "expected_compensation.added_resp_acidosis");
         assert_eq!(comp("metabolic_acidosis", 12.0, 20.0).band, "expected_compensation.added_resp_alkalosis");
+        // Metabolic alkalosis: pCO2 should rise to 0.7 × 40 + 20 = 48 ± 5.
+        assert_eq!(comp("metabolic_alkalosis", 40.0, 70.0).band, "expected_compensation.added_resp_acidosis");
+        assert_eq!(
+            comp("metabolic_alkalosis", 40.0, 38.0).band,
+            "expected_compensation.added_resp_alkalosis"
+        );
         // HCO3 40: expected pCO2 48 ± 5.
         assert_eq!(comp("metabolic_alkalosis", 40.0, 52.0).band, "expected_compensation.appropriate");
     }

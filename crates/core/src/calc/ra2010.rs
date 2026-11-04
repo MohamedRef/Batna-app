@@ -75,8 +75,8 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     }
     if (1.0..=10.0).contains(&small) && large + small > 10.0 {
         notes.push(
-            "Book: 5 joint points need more than 10 small joints. The paper (Aletaha 2010) gives 5 for more than \
-             10 joints of any size with at least 1 small, so it scores this 5."
+            "Scored by the book: 5 joint points need more than 10 small joints. The paper (Aletaha 2010) would \
+             give 5 here: more than 10 joints of any size with at least 1 small."
                 .to_owned(),
         );
     }

@@ -226,14 +226,18 @@ items:
   - id: neph.L02.020
     kind: enumerate
     topic: screening
-    prompt: List the World Kidney Day "golden rules" for healthy kidneys shown in the lecture.
+    prompt: List the 8 golden rules for healthy kidneys shown in the lecture.
     points:
-      - Test your kidney function regularly
-      - Keep regular control of blood sugar
+      - Keep fit and active
+      - Keep regular control of your blood sugar level
+      - Monitor your blood pressure
       - Eat healthy and keep your weight in check
       - Maintain a healthy fluid intake
-    pass: 3
-    hook: "قواعد يوم الكلية الذهبية الأربعة: «حلّل، ظبّط السكر، كُل صح ووزنك مظبوط، واشرب على قدك» = test kidney function بانتظام، control blood sugar، healthy eating و weight in check، healthy fluid intake."
+      - Do not smoke
+      - Do not take over-the-counter pills on a regular basis
+      - Get your kidney function checked if you have one or more high-risk factors
+    pass: 6
+    hook: "الـ 8 قواعد = 5 «اعمل» + 3 «متعملش/اتأكد»: اتحرك (keep fit and active)، ظبّط السكر (blood sugar)، قيس الضغط (blood pressure)، كُل صح ووزنك مظبوط (eat healthy, weight)، اشرب على قدك (healthy fluid intake)؛ وبعدين متدخنش (do not smoke)، متاخدش over-the-counter pills بانتظام، ولو عندك high-risk factor اكشف على kidney function. 5 + 3 = 8."
     src: { page: 27, quote: "8 Golden Rules for healthy kidneys\n1. Keep fit and active\n2. Keep regular control of your blood sugar level\n3. Monitor your blood pressure\n4. Eat healthy and keep your weight in check\n5. Maintain a healthy fluid intake\n6. Do not smoke\n7. Do not take over-the-counter pills on a regular basis\n8. Get your kidney function checked if you have one or more of the 'high risk' factors" }
     status: unverified
   - id: neph.L02.021
@@ -668,14 +672,13 @@ items:
   - id: neph.L02.058
     kind: order
     topic: progression
-    prompt: Put the optimal care model by CKD severity in order (Figure 46), from widest base to top.
+    prompt: Put the layers of the holistic approach to CKD treatment and risk modification (Figure 15) in order, from the top of the figure down (lifestyle first).
     steps:
-      - "All CKD: lifestyle, diet, exercise, smoking cessation"
-      - "First-line drugs for most: RAASi, SGLT2i, statin"
-      - "Additional risk-based therapy: BP drugs, ns-MRA, GLP-1 RA, aspirin"
-      - "Targeted treatment of complications (anemia, acidosis, K, MBD)"
-      - "Advanced CKD: KRT planning or conservative care"
-    src: { page: 37, quote: "Figure 46: Optimal care model by severity of chronic kidney disease (CKD). CV, cardiovascular; KF, kidney failure; KRT, kidney replacement therapy\n| Stage | Kidney failure risk | Care | Team |\n| CKD G1–G2 | Kidney failure risk <3–5% in 5 years | CV risk reduction; Identify patients at high risk | Primary care |\n| CKD G3 | Kidney failure risk ≥3–5% in 5 years | Promote self-management; Prevention and management of complications | Nephrologist, multidisciplinary care team |\n| CKD G4 | Kidney failure risk ≥10% in 2 years | KRT options; Education | Nephrologist, multidisciplinary care team |\n| CKD G5 | Kidney failure risk ≥40% in 2 years | Preparing for KRT | KRT preparation team/ comprehensive conservative care team |\nDelaying progression" }
+      - "Lifestyle: healthy diet, physical activity, stop tobacco, weight management"
+      - "First-line drug therapy for most patients: SGLT2i + RAS inhibitor + statin"
+      - "Targeted therapies for complications: GLP-1 RA, ns-MRA, CCB/diuretic, antiplatelet; manage anemia, CKD-MBD, acidosis, K"
+      - "Further add-ons: steroidal MRA for resistant hypertension (eGFR ≥ 45), ezetimibe or PCSK9i by ASCVD risk"
+    src: { page: 38, quote: "Figure 15: Holistic approach to chronic kidney disease (CKD) treatment and risk modification.\nLifestyle\n  Healthy diet\n  Physical activity\n  Stop use of tobacco products\n  Weight management\nRegular risk factor reassessment (every 3-6 months)\nFirst-line drug therapy for most patients\n  SGLT2i continue until dialysis or transplant\n  Aim for SBP <120 mmHg RAS inhibitor* at maximum tolerated dose (if HTN)\n  Statin-based therapy moderate- or high-intensity statin\nTargeted therapies for complications\n  Manage hyperglycemia as per the KDIGO Diabetes Guideline, including use of GLP-1 RA where indicated\n  Use ns-MRA in people with diabetes and an indication for use\n  Dihydropyridine CCB and/or diuretic if needed to achieve individualized BP target\n  Antiplatelet agent for clinical ASCVD\n  Manage anemia, CKD-MBD, acidosis, and potassium abnormalities, where indicated\n  Steroidal MRA if needed for resistant hypertension if eGFR ≥45\n  Ezetimibe, PCSK9i indicated based on ASCVD risk and lipids\n  Use the same principles to diagnose and manage ASCVD and atrial fibrillation as in people without CKD" }
     status: unverified
   # ---------- p38–39: lifestyle ----------
   - id: neph.L02.059
@@ -826,8 +829,8 @@ items:
     title: Ramadan fasting risk in CKD (book p45)
     columns: [Risk, Patients, Advice]
     rows:
-      - ["Very high", "G4–5 (eGFR < 30), dialysis, transplant on immunosuppression, pregnancy, G3–5 with CVD", "Should NOT fast"]
-      - ["High", "G3 (eGFR 30–60), electrolyte disturbance, risk of dehydration", "Should not fast; if insists, close follow-up"]
+      - ["Very high", "G4–5 (eGFR < 30), all dialysis, pregnancy, inflammatory kidney disease needing immunosuppression, G3–5 with pre-existing CVD, on tolvaptan", "Must NOT fast"]
+      - ["High", "G3 (eGFR 30–60), electrolyte abnormalities, risk of dehydration, G1–3 on ACE-I/ARB", "Should not fast; if insists, close follow-up"]
       - ["Low / moderate", "G1–2 with stable function; stone or UTI prone", "May fast; measure creatinine after 5 days if insists"]
     blanks: [[0, 1], [1, 1], [2, 2]]
     src: { page: 45, quote: "Fasting in Ramadan\nRisk Table and Recommendations Summary\n| | Very High Risk | High Risk | Low/Moderate Risk |\n| Condition | Advise MUST NOT fast | Advise should NOT fast | Decision to not fast based on discretion of medical opinion and ability of the individual to tolerate fast |\n| | If patients in these categories wish to fast, is fasting shorter fasts in the winter a safe alternative? If not an option, or patients not willing to defer fasts and still wishing to fast, then they should be supported and should: Receive structured education (where appropriate); Be followed by an appropriate specialist/primary care contact whilst fasting; Monitor their health regularly; Adjust medication dose, frequency and timing as per recommendations; Be prepared to break the fast/abstain from fasting in case of adverse events | | |\n| Chronic kidney disease | CKD patients in stage 4-5 with eGFR<30 ml/min; Patients on all forms of hemodialysis and peritoneal dialysis; Pregnant CKD patients; Patients with inflammatory conditions of the kidney requiring immunosuppression; CKD stage 3-5 patients with history of pre-existing cardiovascular disease; CKD patients on tolvaptan | CKD patients in stage 3 (eGFR 30-60 ml/min); CKD patients with known electrolyte abnormalities; Patients at risk of dehydration due to fluid restriction requirements or need for diuretics; CKD patients in stage 1-3 on ACE-I/ARB | CKD patients in stages 1-2 with stable kidney function; CKD patients prone to urinary tract infections or stone formation; If insists measure creatinine after 5 days of fasting |" }
@@ -887,8 +890,8 @@ items:
   - id: neph.L02.080
     kind: card
     topic: bp
-    front: What target BP range for most patients does the ESH 2023 figure in the lecture show?
-    back: Systolic 120–129 mmHg and diastolic 70–79 mmHg.
+    front: What target BP range for most patients does the BP target figure in the lecture show?
+    back: "Systolic 120–140 mmHg and diastolic 70–80 mmHg; avoid below 120 / 70."
     src: { page: 47, quote: "| | Systolic BP target | Diastolic BP target |\n| Target (most patients) | 120–140 mmHg | 70–80 mmHg |\n| Avoid | <120 mmHg | <70 mmHg |" }
     status: unverified
   # ---------- p47–48: RAASi ----------
@@ -960,12 +963,11 @@ items:
     title: Indication for SGLT2i in CKD G1–G4 (book p49)
     columns: [Group, Strength]
     rows:
-      - ["Type 2 diabetes, any albuminuria (A1–A3), eGFR ≥ 20", "Recommend (1A)"]
-      - ["No diabetes, eGFR 20–45, ACR < 200 mg/g", "Suggest (2B)"]
+      - ["Diabetes, any albuminuria (A1–A3)", "Recommend (1A)"]
+      - ["No diabetes, eGFR ≥ 20 to 45, ACR < 200 mg/g", "Suggest (2B)"]
       - ["No diabetes, ACR ≥ 200 mg/g", "Recommend (1A)"]
-      - ["Heart failure, regardless of albuminuria", "Recommend (1A)"]
     blanks: [[0, 1], [1, 1], [2, 1]]
-    src: { page: 49, quote: "Indication SGLT2i in CKD" }
+    src: { page: 49, quote: "Indication SGLT2i in CKD\nCKD (G1–G4) /min\n| Albuminuria category | Diabetes | No diabetes |\n|---|---|---|\n| A1 | Recommended (1A) | Suggested in eGFR ≥20 to 45 ml/min per 1.73 m2 & urine ACR <200 mg/g (2B). |\n| A2 | Recommended (1A) | Suggested in eGFR ≥20 to 45 ml/min per 1.73 m2 & urine ACR <200 mg/g (2B). |\n| A3 | Recommended (1A) | Recommended in ACR ≥200 mg/g (1A). |" }
     status: unverified
     tags: [high-yield]
   - id: neph.L02.088
@@ -1022,7 +1024,7 @@ items:
   - id: neph.L02.094
     kind: enumerate
     topic: sglt2i
-    prompt: List the nephroprotective (and systemic) effects of SGLT2 inhibitors.
+    prompt: Name seven of the nephroprotective (and systemic) effects of SGLT2 inhibitors shown in the lecture figure.
     points:
       - Reduce albuminuria
       - Reduce direct toxic effects on renal tubules
@@ -1652,14 +1654,14 @@ items:
     stem: A 70-year-old has a stable eGFR of 50 with ACR 10 mg/g. Using the book's age-adapted threshold, what is it?
     options:
     - Not CKD by the age-adapted threshold (< 45 over 65)
-    - AKI
-    - CKD G3b
-    - CKD G3a
+    - AKI, because eGFR is below 60 at this age
+    - CKD G3b, given the eGFR of 50 at age 70
+    - CKD G3a, by the fixed eGFR < 60 threshold
     answer: 0
     why:
     - Over 65, the book's age-adapted threshold for diagnosing CKD is < 45 mL/min.
     - Stable values are not AKI.
-    - G3b is 30–44.
+    - G3b is 30–44, and the age-adapted threshold is not met.
     - Under the fixed < 60 rule it would be G3aA1, but the age-adapted table says otherwise.
     src:
       page: 29
@@ -1710,17 +1712,17 @@ items:
     topic: staging
     stem: Two weeks after starting an ACEi, eGFR falls from 50 to 40 (20%). Next step?
     options:
-    - Continue the ACEi; a fall under 30% after a hemodynamic drug is expected
-    - Refer for urgent biopsy
-    - Add an ARB
-    - Start dialysis planning
-    - Stop the ACEi permanently
+    - Continue the ACEi; a fall under 30% is expected
+    - Refer for urgent kidney biopsy to find the cause
+    - Add an ARB for dual RAAS blockade
+    - Start dialysis planning given the falling eGFR
+    - Stop the ACEi permanently and switch drugs
     answer: 0
     why:
     - Only a fall > 30% after a hemodynamically active therapy warrants evaluation.
-    - No indication.
+    - No indication for a biopsy.
     - ACEi + ARB is to be avoided (1B).
-    - Unrelated to GFR 40.
+    - Dialysis planning is unrelated to GFR 40.
     - Stopping is a last resort.
     src:
       page: 32
@@ -1774,9 +1776,9 @@ items:
     stem: A patient with eGFR 35 has a KFRE 2-year risk of 12%. Which care level fits the risk-based approach?
     options:
     - Interprofessional (multidisciplinary) nephrology care
-    - Primary care only
-    - Immediate dialysis
-    - Access and transplant planning
+    - Primary care only, with yearly eGFR and ACR checks
+    - Immediate dialysis to protect remaining function
+    - Vascular access and transplant planning now
     answer: 0
     why:
     - KF risk ≥ 10% at 2 years = interprofessional care, even before eGFR < 30.
@@ -1813,11 +1815,11 @@ items:
     topic: lifestyle
     stem: In which CKD patient is a very low-protein diet with keto acids acceptable?
     options:
-    - Two days after surgery
-    - With cancer cachexia
-    - Metabolically stable, motivated, at risk of kidney failure
-    - Admitted with pneumonia
-    - With poorly controlled diabetes
+    - Two days after major abdominal surgery
+    - With cancer cachexia and weight loss
+    - Stable, motivated, at risk of kidney failure
+    - Admitted to hospital with pneumonia
+    - With poorly controlled type 2 diabetes
     answer: 2
     why:
     - 'Early postoperative: unstable.'
@@ -1877,11 +1879,11 @@ items:
     topic: raasi
     stem: Creatinine rises 40% after starting an ARB. What first?
     options:
-    - 'Ignore: expected dip'
-    - 'Look for AKI causes: volume depletion, NSAIDs, diuretics, renal artery stenosis'
-    - Add an ACE inhibitor
-    - Double the ARB dose
-    - Stop the ARB permanently
+    - 'Ignore it: an expected hemodynamic dip'
+    - 'Look for AKI causes: volume, NSAIDs, renal artery stenosis'
+    - Add an ACE inhibitor for more protection
+    - Double the ARB dose to reach the target
+    - Stop the ARB permanently and never retry
     answer: 1
     why:
     - Only < 30% is accepted.
@@ -1906,28 +1908,28 @@ items:
     why:
     - SGLT2i are started down to eGFR 20.
     - 'No diabetes, eGFR 20–45 and ACR < 200: suggest (2B).'
-    - 1A needs ACR ≥ 200, diabetes or heart failure.
-    - Heart failure is another indication, not the only one.
+    - 1A needs diabetes or ACR ≥ 200 mg/g.
+    - The indication table grades by diabetes, eGFR and ACR; heart failure is not required.
     src:
       page: 49
-      quote: Indication SGLT2i in CKD
+      quote: "Indication SGLT2i in CKD\nCKD (G1–G4) /min\n| Albuminuria category | Diabetes | No diabetes |\n|---|---|---|\n| A1 | Recommended (1A) | Suggested in eGFR ≥20 to 45 ml/min per 1.73 m2 & urine ACR <200 mg/g (2B). |\n| A2 | Recommended (1A) | Suggested in eGFR ≥20 to 45 ml/min per 1.73 m2 & urine ACR <200 mg/g (2B). |\n| A3 | Recommended (1A) | Recommended in ACR ≥200 mg/g (1A). |"
     status: unverified
   - id: neph.L02.168
     kind: mcq
     topic: sglt2i
     stem: A diabetic on dapagliflozin is booked for elective cholecystectomy. Best advice?
     options:
-    - Continue through surgery
-    - Withhold it 48–72 hours before surgery, with a restart plan
-    - Switch to metformin
-    - Double the dose
-    - Stop it permanently
+    - Continue it through surgery as usual
+    - Withhold it 48–72 h before, with a restart plan
+    - Switch to metformin for the operation
+    - Double the dose on the day of surgery
+    - Stop it permanently after the operation
     answer: 1
     why:
     - Risk of ketoacidosis.
     - SGLT2i are withheld for surgery (ketoacidosis risk) 48–72 h before, with a clear restart plan.
     - Metformin is also stopped before surgery.
-    - No.
+    - Doubling the dose adds to the ketoacidosis risk.
     - It is restarted after recovery.
     src:
       page: 61
@@ -1976,11 +1978,11 @@ items:
     topic: potassium
     stem: K 5.8 mmol/L in CKD G3b on an ACEi, bicarbonate 17. First-line action?
     options:
-    - Start a potassium binder only
-    - Fruit-free diet
-    - Stop the ACEi at once
-    - Correct acidosis and glycemia; add a loop diuretic or SGLT2i
-    - Emergency dialysis
+    - Start a potassium binder as the only step
+    - Strict fruit- and vegetable-free diet
+    - Stop the ACEi at once and do not restart
+    - Correct acidosis and glucose; add loop diuretic or SGLT2i
+    - Emergency dialysis for the hyperkalemia
     answer: 3
     why:
     - Binders are 3rd line.
@@ -1997,11 +1999,11 @@ items:
     topic: potassium
     stem: Which food source of potassium has the highest absorption rate?
     options:
-    - Fruits
-    - Red meat
-    - Whole grains
-    - Processed foods with potassium salts
-    - Vegetables
+    - Fresh fruits
+    - Red meat and poultry
+    - Whole grains and legumes
+    - Processed foods with K salts
+    - Leafy green vegetables
     answer: 3
     why:
     - Plant foods 50–60%.
@@ -2018,11 +2020,11 @@ items:
     topic: uric-acid
     stem: A CKD G3a patient has uric acid 8.5 mg/dL and has never had gout. Best advice?
     options:
-    - Probenecid
-    - Allopurinol 300 mg
-    - Do not treat to delay progression (2D)
-    - Febuxostat 80 mg
-    - Pegloticase
+    - Start probenecid to lower urate
+    - Start allopurinol 300 mg daily
+    - Do not treat it to slow CKD (2D)
+    - Start febuxostat 80 mg daily
+    - Start pegloticase infusions
     answer: 2
     why:
     - Uricosurics are not preferred.
@@ -2097,9 +2099,9 @@ items:
     stem: A patient with eGFR 22 needs a contrast MRI. Which gadolinium agent?
     options:
     - ACR group II (or III) agent
-    - Group I agent
-    - Avoid all MRI
-    - Any linear agent
+    - ACR group I agent
+    - Avoid all contrast MRI
+    - Any linear gadolinium agent
     answer: 0
     why:
     - With GFR < 30, use ACR group II and III agents.
@@ -2115,10 +2117,10 @@ items:
     topic: advanced
     stem: eGFR 9 in a well, euvolemic patient with normal K and bicarbonate and good appetite. Dialysis?
     options:
-    - Start when GFR < 15
-    - Start now because GFR < 10
-    - 'Not yet: start on symptoms, volume, labs or nutrition, not GFR alone'
-    - Never needed
+    - Start now, because GFR is below 15
+    - Start now, because GFR is below 10
+    - 'Not yet: start on symptoms or labs, not GFR'
+    - Dialysis will never be needed for him
     answer: 2
     why:
     - Not a start criterion.
@@ -2214,18 +2216,18 @@ items:
       why: G3bA3 = 3 times a year.
     - question: Kidney-protective drug to add first?
       options:
-      - ACEi + ARB together
-      - Beta-blocker
+      - ACEi plus ARB together, for dual blockade
+      - A beta-blocker titrated to heart rate
       - ACEi or ARB at the highest tolerated dose
-      - Spironolactone
+      - Spironolactone at a low starting dose
       answer: 2
       why: 'Diabetes with A3: RAASi recommended (1B); avoid dual blockade.'
     - question: And the second pillar?
       options:
-      - Nothing more
+      - Nothing more for now
       - An SGLT2i (eGFR ≥ 20)
-      - Insulin only
-      - Sulfonylurea
+      - Switch to insulin only
+      - Add a sulfonylurea
       answer: 1
       why: 'T2D with CKD and eGFR ≥ 20: SGLT2i recommended (1A).'
     - question: Metformin at eGFR 40?
@@ -2238,10 +2240,10 @@ items:
       why: Reduce below 45, stop below 30.
     - question: BP target?
       options:
-      - < 150/90
+      - BP below 150/90 mmHg
       - SBP < 120 when tolerated
-      - No target
-      - < 140/90
+      - No fixed BP target
+      - BP below 140/90 mmHg
       answer: 1
       why: KDIGO SBP < 120 mmHg when tolerated.
     src:
@@ -2255,34 +2257,34 @@ items:
     steps:
     - question: First-line step?
       options:
-      - Start a binder
-      - Stop ramipril
-      - Correct acidosis (sodium bicarbonate), add loop diuretic or SGLT2i
-      - Dialysis
+      - Start a potassium binder alone
+      - Stop ramipril and do not restart it
+      - Correct acidosis; add loop diuretic or SGLT2i
+      - Urgent dialysis for the potassium
       answer: 2
       why: '1st line: correctable factors.'
     - question: Which dietary advice helps most?
       options:
-      - Stop all vegetables
-      - Stop all fruit
-      - Cut processed foods (potassium salts ~90% absorbed)
-      - Drink more juice
+      - Stop all vegetables completely
+      - Stop all fruit completely
+      - Cut processed foods (K salts ~90% absorbed)
+      - Drink more fruit juice daily
       answer: 2
       why: Processed foods absorb ~90%; plant foods only 50–60% and alkalinize.
     - question: Bicarbonate target to slow CKD?
       options:
       - '> 22 mmol/L'
-      - None
-      - '> 16'
-      - '> 30'
+      - 'No target'
+      - '> 16 mmol/L'
+      - '> 30 mmol/L'
       answer: 0
       why: Aim > 22 mmol/L.
     - question: If K stays high despite all this?
       options:
-      - Licensed exchange resins, and lower the RAASi only as a last resort with a restart plan
-      - Ignore
-      - Add an ARB
-      - Stop ramipril forever
+      - Exchange resins; cut RAASi last, with a restart plan
+      - Ignore it and recheck K next year
+      - Add an ARB to the ramipril
+      - Stop ramipril forever and switch to a beta-blocker
       answer: 0
       why: '3rd line: binders and dose adjustment; signpost to restart RAASi later.'
     src:
@@ -2296,18 +2298,18 @@ items:
     steps:
     - question: Acute treatment?
       options:
-      - Diclofenac
-      - Colchicine 1.2 mg then 0.6 mg after 1 h (or prednisone 30 mg with taper)
-      - Allopurinol alone today
-      - High-dose aspirin
+      - Diclofenac 50 mg three times daily for a week
+      - Low-dose colchicine (1.2 mg, then 0.6 mg at 1 h) or prednisone
+      - Allopurinol alone, started today at full dose
+      - High-dose aspirin until the pain settles
       answer: 1
       why: Low-dose colchicine or glucocorticoids, not NSAIDs.
     - question: Long-term urate-lowering?
       options:
-      - 'Yes: symptomatic hyperuricemia, recurrent gout and urate > 9'
-      - Only on dialysis
-      - No, never in CKD
-      - Only if stones
+      - 'Yes: recurrent gout (symptomatic hyperuricemia)'
+      - Only once he starts dialysis
+      - No, urate-lowering is never used in CKD
+      - Only if he also develops kidney stones
       answer: 0
       why: 'Symptomatic hyperuricemia: offer urate-lowering (1C).'
     - question: Preferred class?
@@ -2320,9 +2322,9 @@ items:
       why: XOIs are preferred over uricosurics.
     - question: Allopurinol start and target?
       options:
-      - 100 mg weekly
-      - 300 mg/day to urate < 8
-      - 800 mg/day at once
+      - 100 mg once weekly, target urate < 7 mg/dL
+      - 300 mg/day, target urate < 8 mg/dL
+      - 800 mg/day at once, target urate < 6 mg/dL
       - 50 mg/day, titrate to urate < 6 mg/dL
       answer: 3
       why: Start 50 mg, slowly up to 800 mg; goal SU < 6.
@@ -2337,26 +2339,26 @@ items:
     steps:
     - question: Planning step now?
       options:
-      - Wait until GFR < 5
-      - Nothing; primary care follow-up
+      - Wait until GFR falls below 5 before planning
+      - Nothing yet; primary care follow-up only
       - Plan pre-emptive transplant and/or dialysis access
-      - Start dialysis today
+      - Start dialysis today, before symptoms appear
       answer: 2
       why: 'GFR < 20 or 2-year KRT risk > 40%: plan transplant/access.'
     - question: First for the anemia?
       options:
-      - Ignore
-      - ESA to Hb 14
-      - Replace iron, exclude other causes, then ESA if needed
-      - Transfuse to Hb 13
+      - Ignore it until Hb falls below 8 g/dL
+      - Start an ESA now, aiming for Hb 14 g/dL
+      - Replace iron, exclude other causes, then ESA
+      - Transfuse now, aiming for Hb 13 g/dL
       answer: 2
       why: Check iron and other causes first; keep Hb < 11.5–12 on ESA.
     - question: CKD-MBD first step?
       options:
-      - Start calcitriol at once
-      - Parathyroidectomy
-      - Correct hyperphosphatemia, hypocalcemia and vitamin D deficiency
-      - High-calcium diet
+      - Start calcitriol at once to suppress the PTH
+      - Refer for parathyroidectomy now
+      - Correct high phosphate, low calcium and low vitamin D
+      - Start a high-calcium diet to suppress the PTH
       answer: 2
       why: Correct the underlying causes first; avoid hypercalcemia.
     - question: How often to screen nutrition?

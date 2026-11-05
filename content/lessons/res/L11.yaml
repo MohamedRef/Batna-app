@@ -1,0 +1,794 @@
+schema: batna.lesson/v1
+lecture: res.L11
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L11.lesson1
+    title: "ليه بناخد sample أصلًا؟"
+    hook: "عايز تعرف نسبة الأنيميا في ستات مصر الحوامل. هتكشف على كام مليون؟ ولا هتختار صح؟"
+    minutes: 8
+    pages: [2, 14]
+    topics: [population]
+    goals:
+      - "تعرّف الـ population والـ study unit والـ sample"
+      - "تعرف مزايا وعيوب الـ sampling"
+      - "ترتّب خطوات الـ sampling process"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 3
+        quote: "What is the group of people (study population) from which we want to draw a sample?\nHow many people do we need in our sample?\nHow will these people be selected?\nSampling Methods and Sample Size"
+        title: "3 أسئلة قبل أي بحث"
+        text: |
+          أول ما تقرر تعمل بحث، هيقابلك 3 أسئلة:
+
+          - **مين؟** الـ ==study population== اللي هتسحب منها الـ sample.
+          - **كام؟** الـ ==sample size==.
+          - **إزاي؟** هتختارهم بأنهي طريقة، أي الـ **sampling method**.
+
+          المحاضرة كلها إجابة على السؤالين الأخيرين.
+      - kind: explain
+        page: 5
+        quote: "The study population has to be clearly defined. Apart from persons, a study population may consist of villages, institutions, records, etc.\nEach study population consists of STUDY UNITS. The way we define our study population and our study unit depends on the problem we want to investigate and on the objectives of the study."
+        title: "الـ population مش لازم تكون ناس"
+        text: |
+          ==Population== = مجموعة **well-defined** من ناس أو حاجات بيشتركوا في صفات، وعايزين نعرف عنهم معلومة (مثلًا كل مرضى الـ left hemiplegia).
+
+          الـ study population ممكن تكون **قرى، مؤسسات، أو records**، مش بس أشخاص. وكل population متكونة من ==study units==.
+
+          تحديد الاتنين بيعتمد على **المشكلة** و**الـ objectives** بتوعك.
+      - kind: table
+        page: 6
+        quote: "Example of Study Population and Study Units\n| Problem | Study population | Study unit |\n|---|---|---|\n| Malnutrition related to weaning in district X | All children 6-24 months of age in District X | One child between 6-24 months in District X |\n| High dropout rates in primary schools in District Y | All primary schools in District Y | One primary school in District Y |\n| Inappropriate record-keeping for leprosy patients registered in Hospital Z | All records on leprosy patients in hospital Z | One record on a leprosy patient registered in hospital Z |"
+        title: "المشكلة بتحدد الـ unit"
+        columns: ["Problem", "Study population", "Study unit"]
+        rows:
+          - ["Weaning malnutrition", "Children 6-24 months in district X", "One child"]
+          - ["School dropout", "Primary schools in district Y", "One school"]
+          - ["Leprosy record-keeping", "Leprosy records in hospital Z", "One record"]
+        hide: [[1, 2], [2, 2]]
+      - kind: check
+        page: 6
+        quote: "Example of Study Population and Study Units\n| Problem | Study population | Study unit |\n|---|---|---|\n| Malnutrition related to weaning in district X | All children 6-24 months of age in District X | One child between 6-24 months in District X |\n| High dropout rates in primary schools in District Y | All primary schools in District Y | One primary school in District Y |\n| Inappropriate record-keeping for leprosy patients registered in Hospital Z | All records on leprosy patients in hospital Z | One record on a leprosy patient registered in hospital Z |"
+        question: "Studying high dropout rates in the primary schools of district Y, what is the study unit?"
+        options: ["One primary school in district Y", "One pupil who dropped out", "All primary schools in district Y", "District Y"]
+        answer: 0
+        why:
+          - "صح: المشكلة عن معدل الـ dropout في المدارس، فالـ unit هي المدرسة."
+          - "التلميذ unit لمشكلة تانية؛ هنا بنقارن مدارس."
+          - "دي الـ study population كلها، مش الـ unit."
+          - "الـ district هو المكان، مش الوحدة اللي بنقيسها."
+      - kind: figure
+        page: 11
+        quote: "A sample is a small subset of the population that has been chosen to be studied.\nThe sample should represent the population and have sufficient size to be subjected to a fair statistical analysis.\nA representative sample has all the important characteristics of the population from which it is drawn."
+        title: "Population ← sampling frame ← sample"
+        alt: "Three nested shapes. The large outer one is the population; inside it a dashed box is the sampling frame, the listed part we can select from; inside that a small solid circle is the sample. An arrow labelled generalization runs from the sample back out to the population."
+        caption: "الـ sample حتة صغيرة من الـ **sampling frame**، وبنعمم نتيجتها على الـ **population** كلها؛ عشان كده لازم تكون **representative**."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L11a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <ellipse cx="150" cy="105" rx="140" ry="88" class="fg-box"/>
+            <text x="150" y="34" text-anchor="middle" class="t-sm t-b">Population</text>
+            <rect x="62" y="48" width="176" height="118" rx="10" class="fg-thin"/>
+            <text x="150" y="66" text-anchor="middle" class="t-sm t-mut">Sampling frame (the list)</text>
+            <circle cx="150" cy="118" r="34" class="fg-acc"/>
+            <text x="150" y="115" text-anchor="middle" class="t-sm t-b">Sample</text>
+            <text x="150" y="131" text-anchor="middle" class="t-sm">representative</text>
+            <path d="M186 118C260 118 300 80 292 40" class="fg-arrow-acc" marker-end="url(#L11a)"/>
+            <text x="322" y="30" text-anchor="end" class="t-sm t-acc">generalization</text>
+          </svg>
+      - kind: explain
+        page: 9
+        quote: "Advantages:\na smaller number of subjects\nmore time efficient\nless costly\npotentially more accurate (since it is more feasible to maintain control over a smaller number of subjects).\nDisadvantages:\nPotential bias in the selection of subjects, which may decrease the ability to generalize the results beyond the subjects actually studied"
+        title: "الـ sample: كسبنا إيه وخسرنا إيه؟"
+        text: |
+          المثالي إنك تدرس الـ population كلها (عشان الـ **generalization**)، بس غالبًا هي كبيرة أو متفرقة جدًا.
+
+          **المزايا** (Advantages):
+          - عدد أقل، وقت أقل، و**less costly**.
+          - و**potentially more accurate**: أسهل تتحكم في جودة القياس لـ 300 واحد من 3 مليون.
+
+          **العيب** (Disadvantage):
+          - ==Selection bias==: لو اخترت غلط، النتيجة متتعممش على حد غير اللي درستهم.
+      - kind: mnemonic
+        page: 12
+        quote: "3 factors that influence sample representativeness\nSampling procedure\nSample size\nParticipation (response rate)\nWhen might you sample the entire population?\nWhen your population is very small\nWhen you have extensive resources\nWhen you don't expect a very high response"
+        word: "SSP"
+        parts:
+          - { key: "S", text: "Sampling procedure: الطريقة اللي اخترت بيها." }
+          - { key: "S", text: "Sample size: العدد كفاية ولا لأ." }
+          - { key: "P", text: "Participation (response rate): كام واحد رد فعلًا." }
+        hook: "3 حاجات بتحدد الـ representativeness: **إزاي** اخترت، **كام** اخترت، و**مين رد**. وتاخد الـ population كلها لو صغيرة جدًا، أو عندك resources كتير، أو مش متوقع response عالي."
+      - kind: order
+        page: 13
+        quote: "Process of sampling\nThe sampling process comprises several stages:\nDefining the population of concern\nSpecifying a sampling frame, a set of persons, units or events possible to measure\nSpecifying a sampling method for selecting individuals or events from the frame\nDetermining the sample size\nImplementing the sampling plan\nSampling and data collecting"
+        prompt: "رتّب خطوات الـ sampling process"
+        steps:
+          - "Define the population of concern"
+          - "Specify a sampling frame"
+          - "Specify a sampling method"
+          - "Determine the sample size"
+          - "Implement the sampling plan"
+          - "Sample and collect the data"
+        why: "بتبدأ بـ **مين** (population ثم الـ list بتاعتها)، بعدين **إزاي** (method)، بعدين **كام** (size)، وبعدين تنفّذ وتجمع."
+      - kind: aside
+        tone: joke
+        page: 7
+        quote: "In clinical research it would be ideal to include the entire population\nGENERALIZATION\nHowever, in most cases, the population in question is too large or too spread out over time and distance to allow for measuring or evaluating each member of the population."
+        text: |
+          الدكتور اللي عايز يدرس «كل» مرضى السكر في مصر قبل ما يكتب الرسالة، هيناقشها وهو على المعاش. 😄
+
+          عشان كده بناخد **sample** كويسة ونعمم منها (generalization).
+      - kind: try
+        items: [res.L11.001, res.L11.009, res.L11.011]
+    recap:
+      - "3 أسئلة: مين (study population)، كام (sample size)، إزاي (sampling method)."
+      - "الـ study unit ممكن تكون شخص أو مدرسة أو record، حسب المشكلة."
+      - "الـ sample: أرخص وأسرع وممكن أدق، بس عيبها الـ selection bias."
+      - "الـ representativeness: sampling procedure، sample size، participation."
+    practice: [res.L11.001, res.L11.002, res.L11.003, res.L11.004, res.L11.005, res.L11.006, res.L11.007, res.L11.008, res.L11.009, res.L11.010, res.L11.011, res.L11.012]
+  # ------------------------------------------------------------------
+  - id: res.L11.lesson2
+    title: "Simple random و systematic: القرعة والكل خامس واحد"
+    hook: "اختيار 100 طالب من 1200 بالقرعة، ولا كل 12 واحد؟ الاتنين probability، بس كل واحد له فخ."
+    minutes: 8
+    pages: [15, 28]
+    topics: [probability]
+    goals:
+      - "تعرّف الـ probability sampling والـ sampling frame"
+      - "تحسب الـ sampling interval في الـ systematic sampling"
+      - "تعرف إمتى الـ systematic sampling يعمل bias"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 15
+        quote: "Each unit of the sample is chosen on the basis of chance. All units of the study population should have an equal, or at least a known chance of being included in the sample.\nThat guarantee requires subjects to be selected at random, or that randomization be employed."
+        title: "Probability sampling = الحظ هو اللي بيختار"
+        text: |
+          في الـ ==probability sampling== كل unit بتتختار **by chance**: كل واحد في الـ population له فرصة **equal** (أو على الأقل **known**) إنه يدخل الـ sample.
+
+          والضمان الوحيد لده هو الـ **randomization**.
+
+          وعشان تعمل randomization لازم يكون عندك ==sampling frame==: الجزء من الـ population اللي هتختار منه، وغالبًا **list**: خرايط، directories، أو **hospital admission list**.
+      - kind: explain
+        page: 21
+        quote: "Applicable for small, homogenous and readily available populations\nA sampling frame is essential\nMethods of Simple random sampling:\nLottery method (Ideal bowel technique)\nTables of random numbers\nComputer software."
+        title: "1. Simple random sampling"
+        text: |
+          ==Simple random sampling== زي **القرعة**: كل واحد في الـ list فرصته متساوية.
+
+          **إزاي؟**
+          - القرعة: **lottery method** (الورق في البولة).
+          - جدول الأرقام العشوائية: **tables of random numbers**.
+          - برنامج كمبيوتر: **computer software**.
+
+          **ينفع إمتى؟** population **صغيرة، homogeneous، وفي متناول إيدك**. والـ sampling frame **essential**.
+      - kind: check
+        page: 17
+        quote: "This is similar to lottery method that provides everyone in the population the equal chance to be picked as sample."
+        question: "Simple random sampling:"
+        options: ["Gives each unit an equal chance of being picked", "Picks every 5th or 10th unit at regular intervals", "Makes the sample represent each stratum", "Needs no sampling frame"]
+        answer: 0
+        why:
+          - "صح: زي القرعة، كل واحد فرصته متساوية."
+          - "ده الـ systematic sampling."
+          - "ده الـ stratified sampling."
+          - "بالعكس، الـ sampling frame essential."
+      - kind: explain
+        page: 22
+        quote: "In SYSTEMATIC sampling individuals are chosen at regular intervals (for example every fifth) from the sampling frame.\nIdeally we randomly select a number to tell us where to start selecting individuals from the list.\nA sampling frame is essential"
+        title: "2. Systematic sampling: كل K واحد"
+        text: |
+          في الـ ==systematic sampling== بتختار على **مسافات ثابتة** من الـ list (كل خامس واحد مثلًا).
+
+          - المسافة دي اسمها ==sampling interval (K)== = عدد الـ population ÷ عدد الـ sample.
+          - **أول رقم** بتختاره **عشوائي** بين 1 و K.
+          - برضه محتاج **sampling frame**، وينفع مع population **كبيرة** ليها list كاملة.
+      - kind: figure
+        page: 25
+        quote: "Systematic Random Sampling\nN = 100\nwant n = 20\nN/n = 5\nselect a random number from 1-5: chose 4\nstart with #4 and take every 5th unit"
+        title: "N = 100، عايز n = 20"
+        alt: "A row of numbered boxes from 1 to 20 standing for the list. A random start at box 4 is highlighted, then every fifth box after it (9, 14, 19) is highlighted too. Labels read N/n = 5 and random start 4."
+        caption: "K = N/n = 100/20 = **5**. اخترنا عشوائي من 1 لـ 5 فطلع **4**، فبناخد 4، 9، 14، 19 … لحد ما نكمّل 20."
+        svg: |
+          <svg viewBox="0 0 330 120" xmlns="http://www.w3.org/2000/svg">
+            <text x="8" y="20" class="t-sm t-b">K = N/n = 100/20 = 5</text>
+            <text x="322" y="20" text-anchor="end" class="t-sm t-acc">random start = 4</text>
+            <g class="t-sm">
+              <rect x="8" y="40" width="14" height="22" class="fg-box"/><rect x="24" y="40" width="14" height="22" class="fg-box"/><rect x="40" y="40" width="14" height="22" class="fg-box"/>
+              <rect x="56" y="40" width="14" height="22" class="fg-acc"/>
+              <rect x="72" y="40" width="14" height="22" class="fg-box"/><rect x="88" y="40" width="14" height="22" class="fg-box"/><rect x="104" y="40" width="14" height="22" class="fg-box"/><rect x="120" y="40" width="14" height="22" class="fg-box"/>
+              <rect x="136" y="40" width="14" height="22" class="fg-acc"/>
+              <rect x="152" y="40" width="14" height="22" class="fg-box"/><rect x="168" y="40" width="14" height="22" class="fg-box"/><rect x="184" y="40" width="14" height="22" class="fg-box"/><rect x="200" y="40" width="14" height="22" class="fg-box"/>
+              <rect x="216" y="40" width="14" height="22" class="fg-acc"/>
+              <rect x="232" y="40" width="14" height="22" class="fg-box"/><rect x="248" y="40" width="14" height="22" class="fg-box"/><rect x="264" y="40" width="14" height="22" class="fg-box"/><rect x="280" y="40" width="14" height="22" class="fg-box"/>
+              <rect x="296" y="40" width="14" height="22" class="fg-acc"/>
+              <rect x="312" y="40" width="14" height="22" class="fg-box"/>
+            </g>
+            <text x="63" y="80" text-anchor="middle" class="t-sm t-acc t-b">4</text>
+            <text x="143" y="80" text-anchor="middle" class="t-sm t-acc t-b">9</text>
+            <text x="223" y="80" text-anchor="middle" class="t-sm t-acc t-b">14</text>
+            <text x="303" y="80" text-anchor="middle" class="t-sm t-acc t-b">19</text>
+            <text x="165" y="108" text-anchor="middle" class="t-sm t-mut">every 5th unit until n = 20</text>
+          </svg>
+      - kind: case
+        page: 24
+        quote: "The sampling interval is, therefore, 12. The number of the first student to be included in the sample is chosen randomly, for example by blindly picking one out of twelve pieces of paper, numbered 1- 12.\nif number 6 is picked, then every twelfth student will be included in the sample, starting with student number 6, until 100 students are selected: then numbers selected would be 6, 18, 30, 42, etc."
+        stem: "مدرسة فيها 1200 طالب، وعايز systematic sample من 100 طالب."
+        steps:
+          - question: "What is the sampling interval?"
+            options: ["12", "100", "1/12"]
+            answer: 0
+            why: "K = 1200 ÷ 100 = **12**. والـ sampling fraction = 100/1200."
+          - question: "You blindly pick paper number 6 out of papers numbered 1-12. Which students are selected?"
+            options: ["6, 18, 30, 42 ...", "6, 12, 18, 24 ...", "12, 24, 36, 48 ..."]
+            answer: 0
+            why: "تبدأ بالـ **random start** = 6 وتزود 12 كل مرة، لحد ما تكمّل 100."
+      - kind: explain
+        page: 27
+        quote: "Systematic sampling is usually less time consuming and easier to perform than simple random sampling. However, there is a risk of bias, as the sampling interval may coincide with a systematic variation in the sampling frame.\nFor instance, if we want to select a random sample of days on which to count clinic attendance, systematic sampling with a sampling interval of 7 days would be inappropriate, as all study days would fall on the same day of the week, which might, for example, be market day."
+        title: "أسهل، بس فيه فخ"
+        text: |
+          الـ systematic sampling **أسرع وأسهل** من الـ simple random.
+
+          بس فيه ==risk of bias== لو الـ **sampling interval** صادف **systematic variation** في الـ list.
+
+          مثال الشريحة: عايز تعد زيارات العيادة، واخترت يوم كل **7 أيام**. كل الأيام هتطلع **نفس يوم الأسبوع**… ولو طلع يوم السوق، العيادة فاضية والنتيجة كلها غلط.
+      - kind: check
+        page: 27
+        quote: "Systematic sampling is usually less time consuming and easier to perform than simple random sampling. However, there is a risk of bias, as the sampling interval may coincide with a systematic variation in the sampling frame.\nFor instance, if we want to select a random sample of days on which to count clinic attendance, systematic sampling with a sampling interval of 7 days would be inappropriate, as all study days would fall on the same day of the week, which might, for example, be market day."
+        question: "Why is a 7-day interval wrong for sampling days to count clinic attendance?"
+        options: ["The interval coincides with the weekly cycle, so every study day is the same weekday", "Seven days give too small a sample", "Systematic sampling cannot be used for days", "It needs a sampling frame of patients"]
+        answer: 0
+        why:
+          - "صح: الـ interval طابق تكرار أسبوعي في الـ frame، فده bias."
+          - "المشكلة مش في العدد، في إن كل الأيام شبه بعض."
+          - "ينفع مع الأيام، بس بـ interval ميطابقش دورة الأسبوع."
+          - "الـ frame هنا هو الأيام، وموجود."
+      - kind: aside
+        tone: trap
+        page: 28
+        quote: "Based on sampling fraction: Every Kth unit is chosen in the population list, where K is chosen by sampling interval\nSampling Interval (K) Q = Total no. of units in population/ total no. of units in sample\nApplicable for large populations where complete list of individuals is available"
+        text: |
+          متلخبطش بين الاتنين:
+
+          - الـ **sampling fraction** = n ÷ N (مثلًا 100/1200).
+          - الـ **sampling interval (K)** = N ÷ n (مثلًا 12).
+
+          واحد مقلوب التاني. السؤال لو قال «every Kth»، يبقى عايز الـ interval.
+      - kind: try
+        items: [res.L11.016, res.L11.018, res.L11.020]
+    recap:
+      - "Probability sampling: كل unit لها فرصة equal أو known، بالـ randomization."
+      - "Simple random: قرعة أو random numbers أو software؛ لـ population صغيرة homogeneous، ومحتاج sampling frame."
+      - "Systematic: K = N/n، وأول رقم عشوائي بين 1 و K؛ لـ population كبيرة ليها list."
+      - "فخ الـ systematic: الـ interval يطابق تكرار في الـ list (كل 7 أيام = نفس اليوم)."
+    practice: [res.L11.013, res.L11.014, res.L11.015, res.L11.016, res.L11.017, res.L11.018, res.L11.019, res.L11.020, res.L11.021, res.L11.022, res.L11.023, res.L11.024, res.L11.046]
+  # ------------------------------------------------------------------
+  - id: res.L11.lesson3
+    title: "Stratified و cluster و multistage: تقسّم إزاي؟"
+    hook: "الـ strata زي أدوار العمارة، والـ clusters زي العمارات نفسها. الفرق ده لوحده سؤال امتحان."
+    minutes: 9
+    pages: [29, 47]
+    topics: [probability]
+    goals:
+      - "تفرّق بين proportionate و disproportionate (equal) allocation"
+      - "تفرّق بين الـ strata والـ clusters"
+      - "تعرف إمتى تستخدم cluster و multistage sampling"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 30
+        quote: "Dividing up the population into smaller groups (Strata) , and randomly sampling from each group.\nStratified sampling is only possible when we know what proportion of the study population belongs to each group we are interested in."
+        title: "3. Stratified sampling"
+        text: |
+          مشكلة الـ simple random: **المجموعات الصغيرة** اللي تهمك (ريف وحضر، أقليات) ممكن متظهرش في الـ sample أصلًا.
+
+          الحل: ==stratified sampling== = تقسّم الـ population لمجموعات (**strata**) وتسحب **random** من كل واحدة.
+
+          الشرط: لازم تكون **عارف نسبة** كل مجموعة في الـ population.
+      - kind: case
+        page: 35
+        quote: "Calculating proportional weights involves determining the probability that any one male or female will be selected.\nFor example, In a population of 1000, sample of 200 is to be drawn based on the proportion of each category in the study population(30% females and 70% mares). Means that I will select randomly 60 females and 140 males."
+        stem: "Survey of Faculty of Medicine staff: the grant covers 200 subjects; the population is 1000 (700 males, 300 females)."
+        steps:
+          - question: "With proportional allocation, how many females?"
+            options: ["60", "100", "30"]
+            answer: 0
+            why: "30% من 200 = **60** ستات، و 140 راجل."
+          - question: "With disproportional (equal) allocation, how many females?"
+            options: ["100", "60", "150"]
+            answer: 0
+            why: "**Equal allocation** = عدد متساوي من كل stratum: 100 + 100."
+          - question: "In the equal-allocation sample, what does the analysis need?"
+            options: ["Weighting, so the males count proportionally more", "Nothing, randomization fixes it", "Dropping 40 females"]
+            answer: 0
+            why: "كل ست فرصتها أعلى، فالستات **overrepresented**؛ الـ **weighting** بيرجّع النسب الحقيقية."
+      - kind: table
+        page: 36
+        quote: "Table 1 Proportional allocation of 1,600 students to four strata defined by college year\n| Year | Population Size: Total Enrollment | Sample Size: nh = nNh/N | Sample Size: Rounded Values |\n|---|---|---|---|\n| First | 5,000 | 399.4 | 399 |\n| Second | 4,058 | 324.1 | 324 |\n| Third | 4,677 | 373.6 | 374 |\n| Fourth | 6,296 | 502.9 | 503 |\n| Total | 20,031 | 1,600.0 | 1,600 |"
+        title: "Proportional allocation: n(h) = n × N(h) / N"
+        columns: ["Year", "Enrollment", "Sample"]
+        rows:
+          - ["First", "5,000", "399"]
+          - ["Second", "4,058", "324"]
+          - ["Third", "4,677", "374"]
+          - ["Fourth", "6,296", "503"]
+          - ["Total", "20,031", "1,600"]
+        hide: [[0, 2], [3, 2]]
+      - kind: mnemonic
+        page: 37
+        quote: "Non-homogenous population is converted to homogenous groups/classes (strata); sample is drawn from each strata at random, in proportion to its size\nApplicable for large non-homogenous population\nGives more representative sample than simple random sampling\nNone of the categories is under or over-represented"
+        word: "LHR"
+        parts:
+          - { key: "L", text: "Large non-homogeneous population: ده مكانه." }
+          - { key: "H", text: "Homogeneous strata: بنحوّل الخليط لمجموعات متجانسة، ونسحب من كل واحدة بنسبة حجمها." }
+          - { key: "R", text: "Representative أكتر من الـ simple random، ومفيش category under- أو over-represented." }
+        hook: "الـ stratified للـ **heterogeneous**: بتخلي كل طبقة جواها **homogeneous**."
+      - kind: explain
+        page: 40
+        quote: "Cluster sampling is a sampling method in which the entire population of the study is divided into externally homogeneous but internally heterogeneous groups called clusters. Essentially, each cluster is a mini-representation of the entire population."
+        title: "4. Cluster sampling"
+        text: |
+          لما **مفيش list كاملة** بالأفراد، أو الناس **متفرقين** في مساحة كبيرة، بس عندك list بالمجموعات (قرى، مدارس):
+
+          اختار **مجموعات كاملة عشوائي** بدل الأفراد؛ ده ==cluster sampling==.
+
+          الـ clusters غالبًا **geographic** (districts، شياخات، قرى) أو **organizational** (عيادات، مدارس). وكل cluster ==mini-representation== للـ population: **heterogeneous من جوه، وشبه بعض من بره**.
+      - kind: figure
+        page: 40
+        quote: "Cluster sampling is a sampling method in which the entire population of the study is divided into externally homogeneous but internally heterogeneous groups called clusters. Essentially, each cluster is a mini-representation of the entire population."
+        title: "Strata ضد clusters"
+        alt: "Left panel, stratified: three horizontal bands, each a single colour, with a few dots taken from every band. Right panel, cluster: four circles each holding mixed colours; two whole circles are highlighted as sampled."
+        caption: "**Strata**: كل طبقة لون واحد (homogeneous)، وبناخد شوية من **كل** طبقة. **Clusters**: كل دايرة فيها كل الألوان (mini-population)، وبناخد **دواير كاملة** بس."
+        svg: |
+          <svg viewBox="0 0 330 190" xmlns="http://www.w3.org/2000/svg">
+            <text x="80" y="18" text-anchor="middle" class="t-sm t-b">Stratified</text>
+            <rect x="10" y="28" width="140" height="40" rx="6" class="fg-acc"/>
+            <rect x="10" y="74" width="140" height="40" rx="6" class="fg-good"/>
+            <rect x="10" y="120" width="140" height="40" rx="6" class="fg-bad"/>
+            <circle cx="40" cy="48" r="5" class="fg-dot-acc"/><circle cx="90" cy="48" r="5" class="fg-dot-acc"/>
+            <circle cx="60" cy="94" r="5" class="fg-dot-good"/><circle cx="120" cy="94" r="5" class="fg-dot-good"/>
+            <circle cx="50" cy="140" r="5" class="fg-dot-bad"/><circle cx="110" cy="140" r="5" class="fg-dot-bad"/>
+            <text x="80" y="180" text-anchor="middle" class="t-sm t-mut">some from every stratum</text>
+            <text x="250" y="18" text-anchor="middle" class="t-sm t-b">Cluster</text>
+            <circle cx="205" cy="62" r="30" class="fg-acc"/>
+            <circle cx="290" cy="62" r="30" class="fg-thin"/>
+            <circle cx="205" cy="132" r="30" class="fg-thin"/>
+            <circle cx="290" cy="132" r="30" class="fg-acc"/>
+            <circle cx="195" cy="55" r="4" class="fg-dot-acc"/><circle cx="212" cy="70" r="4" class="fg-dot-good"/><circle cx="215" cy="50" r="4" class="fg-dot-bad"/>
+            <circle cx="280" cy="55" r="4" class="fg-dot-acc"/><circle cx="298" cy="70" r="4" class="fg-dot-good"/><circle cx="300" cy="50" r="4" class="fg-dot-bad"/>
+            <circle cx="195" cy="125" r="4" class="fg-dot-acc"/><circle cx="212" cy="140" r="4" class="fg-dot-good"/><circle cx="215" cy="120" r="4" class="fg-dot-bad"/>
+            <circle cx="280" cy="125" r="4" class="fg-dot-acc"/><circle cx="298" cy="140" r="4" class="fg-dot-good"/><circle cx="300" cy="120" r="4" class="fg-dot-bad"/>
+            <text x="250" y="180" text-anchor="middle" class="t-sm t-mut">whole clusters sampled</text>
+          </svg>
+      - kind: check
+        page: 43
+        quote: "Advantages :\nCuts down on the cost of preparing a sampling frame.\nThis can reduce travel and other administrative costs.\nDisadvantages:\nsampling error is higher over a simple random sample of same size."
+        question: "What is the main disadvantage of cluster sampling?"
+        options: ["Higher sampling error than a simple random sample of the same size", "It needs a complete list of every individual", "It raises travel costs", "It cannot be random"]
+        answer: 0
+        why:
+          - "صح: الناس جوه الـ cluster الواحدة شبه بعض أكتر، فالـ sampling error أعلى."
+          - "بالعكس، ميزته إنه بيوفّر تكلفة تجهيز الـ sampling frame."
+          - "بالعكس، بيقلل الـ travel والتكاليف الإدارية."
+          - "الـ clusters نفسها بتتختار random."
+      - kind: explain
+        page: 44
+        quote: "Two types of cluster sampling methods.\nOne-stage sampling. All of the elements within selected clusters are included in the sample.\nTwo-stage sampling. A subset of elements within selected clusters are randomly selected for inclusion in the sample."
+        title: "One-stage ولا two-stage؟"
+        text: |
+          - **One-stage**: كل الناس جوه الـ clusters المختارة بيدخلوا.
+          - **Two-stage**: بتسحب **random** جزء من الناس جوه كل cluster مختار.
+
+          مثال الشريحة: الـ **immunization coverage** في محافظة = **30 cluster × 7 أطفال** (12–23 شهر).
+      - kind: explain
+        page: 47
+        quote: "Is done in successive stages; each successive sampling unit is nested in the previous sampling unit\nAdvantage: Introduces flexibility in sampling\nFor example, in large country surveys, states are chosen, then districts, then villages, then every 10th person in village as final sampling unit\nin a school survey: Districts schools classes students by systmatic random technique"
+        title: "5. Multistage sampling"
+        text: |
+          ==Multistage sampling== = sampling على **مراحل**، كل وحدة **جوه** اللي قبلها، وميزته الـ **flexibility**.
+
+          - في survey على مستوى دولة: محافظات ← مراكز ← قرى ← كل عاشر واحد في القرية.
+          - في survey على المدارس: districts ← schools ← classes ← students (بالـ systematic random).
+      - kind: check
+        page: 30
+        quote: "Dividing up the population into smaller groups (Strata) , and randomly sampling from each group.\nStratified sampling is only possible when we know what proportion of the study population belongs to each group we are interested in."
+        question: "People are separated into sub-groups and some are selected randomly from each sub-group. Which sampling is this?"
+        options: ["Stratified random sampling", "Cluster random sampling", "Systematic random sampling", "Simple random sampling"]
+        answer: 0
+        why:
+          - "صح: sub-groups + random من **كل** واحدة = stratified."
+          - "الـ cluster بياخد **بعض** المجموعات كاملة، مش من كلها."
+          - "الـ systematic كل K واحد من list."
+          - "الـ simple random مفيهوش sub-groups."
+      - kind: try
+        items: [res.L11.026, res.L11.031, res.L11.034, res.L11.036, res.L11.040]
+    recap:
+      - "Stratified: strata متجانسة + random من كل واحدة؛ للـ large heterogeneous population، ولازم تعرف نسبة كل stratum."
+      - "Proportional allocation: n(h) = n × N(h)/N. Equal allocation محتاجة weighting في التحليل."
+      - "Cluster: مجموعات كاملة random؛ كل cluster mini-population. أرخص، بس sampling error أعلى."
+      - "Multistage: مراحل متداخلة (محافظة ← مركز ← قرية ← شخص)، وميزته الـ flexibility."
+    practice: [res.L11.025, res.L11.026, res.L11.027, res.L11.028, res.L11.029, res.L11.030, res.L11.031, res.L11.032, res.L11.033, res.L11.034, res.L11.035, res.L11.036, res.L11.037, res.L11.038, res.L11.039, res.L11.040, res.L11.041, res.L11.042, res.L11.043, res.L11.044, res.L11.045]
+  # ------------------------------------------------------------------
+  - id: res.L11.lesson4
+    title: "Non-probability: لما الصدفة مش هي اللي بتختار"
+    hook: "أغلب أبحاث المستشفيات بتاخد «اللي جه العيادة». ده اسمه إيه، وإمتى يبقى مقبول؟"
+    minutes: 8
+    pages: [48, 62]
+    topics: [nonprobability]
+    goals:
+      - "تفرّق بين convenience و consecutive و purposive و snowball و quota"
+      - "تعرف ليه الـ consecutive أحسن non-probability"
+      - "تقارن الـ quota بالـ stratified"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 50
+        quote: "Sampling\nProbability: Simple random; Systematic; Stratified random; Cluster; Multi-stage\nNon-probability: Quota; Purposive; Snowball; Self-selection; Convenience\nPurposive: Extreme case; Heterogeneous; Homogeneous; Critical case; Typical case"
+        title: "شجرة الـ sampling"
+        alt: "A tree. Sampling splits into probability and non-probability. Probability leads to simple random, systematic, stratified random and cluster, which combine into multistage. Non-probability leads to quota, purposive, snowball, self-selection and convenience; purposive branches into extreme case, heterogeneous, homogeneous, critical case and typical case."
+        caption: "يمين الشجرة **probability** (بالصدفة)، وشمالها **non-probability** (باختيار الباحث)."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <rect x="120" y="6" width="90" height="24" rx="6" class="fg-ink"/>
+            <text x="165" y="22" text-anchor="middle" class="t-sm t-b">Sampling</text>
+            <path d="M165 30V40M78 40H252M78 40V50M252 40V50" class="fg-arrow"/>
+            <rect x="18" y="50" width="120" height="24" rx="6" class="fg-good"/>
+            <text x="78" y="66" text-anchor="middle" class="t-sm t-b">Probability</text>
+            <rect x="192" y="50" width="120" height="24" rx="6" class="fg-bad"/>
+            <text x="252" y="66" text-anchor="middle" class="t-sm t-b">Non-probability</text>
+            <text x="20" y="96" class="t-sm">Simple random</text>
+            <text x="20" y="114" class="t-sm">Systematic</text>
+            <text x="20" y="132" class="t-sm">Stratified random</text>
+            <text x="20" y="150" class="t-sm">Cluster</text>
+            <text x="20" y="176" class="t-sm t-acc">→ Multistage</text>
+            <text x="194" y="96" class="t-sm">Convenience</text>
+            <text x="194" y="114" class="t-sm">Quota</text>
+            <text x="194" y="132" class="t-sm">Snowball</text>
+            <text x="194" y="150" class="t-sm">Self-selection</text>
+            <text x="194" y="168" class="t-sm">Purposive:</text>
+            <text x="204" y="186" class="t-sm t-mut">extreme, typical, critical case</text>
+            <text x="204" y="204" class="t-sm t-mut">heterogeneous, homogeneous</text>
+          </svg>
+      - kind: explain
+        page: 51
+        quote: "Is probably the most commonly used technique in clinical research today\nWith convenience sampling, subjects are selected because of their convenient accessibility to the researcher.\nThese subjects are chosen simply because they are the easiest to obtain for the study."
+        title: "Convenience sampling: اللي قدامك"
+        text: |
+          ==Convenience sampling== = بتختار اللي **سهل توصله**: الموجودين وقت جمع الداتا. وهو غالبًا **الأكثر استخدامًا** في الأبحاث الإكلينيكية.
+
+          **مثال الشريحة**: عايز تعرف رأي أهل القرية في خدمات تنظيم الأسرة، فتقابل كل الكبار اللي جم العيادة الخارجية **في يوم واحد**. أسهل من random sample، وبيدي **first impression** مفيد.
+      - kind: explain
+        page: 55
+        quote: "Some units may be over- selected, others under selected or missed altogether.\nIt is impossible to adjust for such a distortion - if you need to be representative you have to use another sampling method."
+        title: "سهل ورخيص… بس"
+        text: |
+          **الحلو**: سهل، سريع، والأرخص.
+
+          **الوحش**: الـ sample ممكن تكون ==unrepresentative== خالص: ناس **over-selected** وناس **under-selected** أو مش موجودين أصلًا.
+
+          والمهم: **مينفعش تصلّح** التشويه ده بعدين. لو محتاج representative sample، غيّر الطريقة.
+
+          ومقبول إمتى؟ في **أول الدراسة** وانت بتستكشف، أو لو الـ informants **شبه بعض** ومعندكش تفضيل، أو **مفيش غيرهم**.
+      - kind: check
+        page: 53
+        quote: "A researcher wants to study the attitudes of villagers towards family planning services provided by a MCH clinic.\nHe decides to interview all adult patients who visit the out patient clinic during one particular day.\nThis is more convenient than taking a random sample of people in the village, and it gives a useful first impression."
+        question: "A researcher interviews all adults visiting the outpatient clinic on one day to learn villagers' attitudes to family-planning services. Which sampling?"
+        options: ["Convenience", "Simple random", "Cluster", "Quota"]
+        answer: 0
+        why:
+          - "صح: اللي صادف إنه موجود يومها؛ أسهل من random sample."
+          - "مفيش قرعة من list أهل القرية."
+          - "مفيش قرى اتختارت random."
+          - "مفيش quota محدد لكل فئة."
+      - kind: explain
+        page: 57
+        quote: "is a strict version of convenience sampling where every available subject is selected, i.e., the complete accessible population is studied.\nThis is the best choice of the non-probability sampling techniques since by studying everybody available, a good representation of the overall population is possible in a reasonable period of time."
+        title: "Consecutive sampling: الـ convenience المحترم"
+        text: |
+          ==Consecutive sampling== = نسخة **strict** من الـ convenience: بتاخد **كل** subject متاح، يعني الـ accessible population **كلها**.
+
+          (زي «كل مريض stroke دخل القسم من يناير لمارس»، مش «اللي لحقته».)
+
+          وده ==أحسن non-probability technique==: لأنك أخدت الكل، بيدي representation كويسة في وقت معقول.
+      - kind: explain
+        page: 58
+        quote: "Qualitative research methods are typically used when focusing on a limited number of informants, whom we select strategically so that their in-depth information will give optimal insight into an issue about which little is known.\nThis is called purposeful sampling. Subjects usually are selected because the researcher believes that certain subjects are likely to benefit or be more compliant."
+        title: "Purposive و snowball: بتختار بالقصد"
+        text: |
+          ==Judgmental (purposive) sampling==: في الـ **qualitative research**، بتختار عدد قليل من الـ informants **بالقصد** عشان معلوماتهم العميقة تفهّمك موضوع محدش يعرف عنه كتير.
+
+          ==Snowball (chain) sampling==: تبدأ بواحد أو اتنين **key informants** وتسألهم «مين كمان يعرف؟». لو نفس الاسم اتقالك من 2 أو 3، غالبًا هو key informant ممتاز.
+
+          الـ snowball مفيد لو انت **جديد** في المكان، أو الناس **صعب توصلهم**.
+      - kind: aside
+        tone: analogy
+        page: 59
+        quote: "Snowball or chain sampling\nThis approach is particularly suitable for locating key informants or critical cases. You start with one or two information-rich key informants and ask them if they know persons who know a lot about your topic of interest. If a particular person is recommended to you by two or three different people you can be quite sure that he or she will be a valuable key informant.\nThe same approach can be used if an in-depth interview leads to discoveries, which seem rewarding to follow-up by a number of interviews with an additional group of informants."
+        text: |
+          الـ **snowball** زي ما تدوّر على سبّاك كويس في منطقة جديدة: تسأل البواب، يقولك على واحد، وتسأل الجيران فيقولوا نفس الاسم… خلاص، ده الـ **key informant**. 🔧
+      - kind: table
+        page: 62
+        quote: "It is similar to stratified sample in that:\nPopulation is divided into categories and elements are selected from each category based on certain proportions\nIt is different from stratified sample in that:\nNo sampling frame\nNo random selection\nThreatened by selection bias"
+        title: "Quota ضد stratified"
+        columns: ["", "Quota", "Stratified"]
+        rows:
+          - ["Categories with set proportions", "Yes", "Yes"]
+          - ["Sampling frame", "No", "Yes"]
+          - ["Random selection", "No", "Yes"]
+          - ["Selection bias", "Threatened", "Protected"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: check
+        page: 61
+        quote: "A method that ensures that a certain number of sample units from different categories with specific characteristics appear in the sample so that all these characteristics are represented.\nIn this method the investigator interviews as many people in each category of study unit as he can find until he has filled his quota."
+        question: "An interviewer must get 50 smokers and 50 non-smokers and stops each group once filled, with no list and no random selection. Which sampling?"
+        options: ["Quota sampling", "Stratified sampling", "Snowball sampling", "Consecutive sampling"]
+        answer: 0
+        why:
+          - "صح: فئات بأعداد محددة، يملاها لحد ما الـ **quota** يكمل."
+          - "الـ stratified محتاج sampling frame و random selection."
+          - "مفيش referrals من informants."
+          - "مش بياخد كل اللي متاح؛ بيقف عند الرقم."
+      - kind: try
+        items: [res.L11.047, res.L11.052, res.L11.058, res.L11.059, res.L11.060]
+    recap:
+      - "Convenience: اللي متاح؛ الأكثر استخدامًا، رخيص، بس unrepresentative ومينفعش يتصلّح."
+      - "Consecutive: كل subject متاح؛ أحسن non-probability."
+      - "Purposive للـ qualitative؛ snowball بالـ referrals للـ key informants والناس الصعب توصلهم."
+      - "Quota زي stratified في الفئات، بس من غير frame ولا random، فـ selection bias."
+    practice: [res.L11.047, res.L11.048, res.L11.049, res.L11.050, res.L11.051, res.L11.052, res.L11.053, res.L11.054, res.L11.055, res.L11.056, res.L11.057, res.L11.058, res.L11.059, res.L11.060]
+  # ------------------------------------------------------------------
+  - id: res.L11.lesson5
+    title: "الـ sample size محتاج إيه؟"
+    hook: "5 أرقام لازم تكون في إيدك قبل ما تفتح أي برنامج. ولو واحد فيهم اتغير، العينة كلها تتغير."
+    minutes: 8
+    pages: [63, 71]
+    topics: [requirements]
+    goals:
+      - "تعدّ الـ 5 requirements للـ sample size"
+      - "تعرف الـ minimum power والـ alpha المقبولين"
+      - "تعرف إمتى العينة تكبر"
+    status: unverified
+    steps:
+      - kind: mnemonic
+        page: 64
+        quote: "The main hypothesis of the study\nThe design of your study\nThe expected effect size\nThe desirable statistical power\nThe acceptable margin of error (alpha-α)"
+        word: "HDEPA"
+        parts:
+          - { key: "H", text: "Hypothesis: الـ main hypothesis، يعني الـ primary endpoint." }
+          - { key: "D", text: "Design: نوع الدراسة بيحدد طريقة الحساب." }
+          - { key: "E", text: "Effect size: الفرق المتوقع." }
+          - { key: "P", text: "Power: 80% على الأقل." }
+          - { key: "A", text: "Alpha: الـ margin of error المقبول، 5%." }
+        hook: "**H**amada **D**ecided **E**very **P**atient **A**ttends: فرض، تصميم، أثر، قوة، alpha."
+      - kind: explain
+        page: 65
+        quote: "Researchers sometimes plan for primary and secondary objectives and therefore, have primary and secondary endpoints for their studies. Sample size calculation procedure should be based on the primary endpoint (the main objective of the study)."
+        title: "1. الـ main hypothesis"
+        text: |
+          البحث ممكن يكون له **primary** و **secondary** objectives.
+
+          الـ sample size بيتحسب على ==primary endpoint== بس، يعني الـ **main objective** للدراسة.
+      - kind: table
+        page: 66
+        quote: "Understanding the design of your study will help you identify the relevant calculation method and determine the different requirements\n1. Cross sectional study: the main outcome is the prevalence ratio\n2. In case control study we deal with mean difference or difference in proportions of exposure.\n3. In cohort study, we deal with the mean difference or the difference in proportions of the outcome.\n4. In screening and diagnostic studies, data about the prevalence of the disease and suspected sensitivity are required\n5. In clinical trial (Equivalence and non inferiority ) the minimum clinically important difference is needed"
+        title: "2. الـ design بيحدد بتقارن إيه"
+        columns: ["Design", "You need"]
+        rows:
+          - ["Cross-sectional", "Prevalence ratio"]
+          - ["Case-control", "Difference in exposure (or means)"]
+          - ["Cohort", "Difference in outcome (or means)"]
+          - ["Screening / diagnostic", "Prevalence + expected sensitivity"]
+          - ["Equivalence / non-inferiority trial", "Minimum clinically important difference"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: explain
+        page: 67
+        quote: "1. The expected effect size differs according to the type of outcome measure.\nIn case of continuous measures, the required ES will be the expected mean difference between the two arms and the population standard deviation.\nIn the case of binary outcomes (events as death or remission), the required ES will be the rate of each group.\nThis expected estimate can be obtained from\nprevious literature\npilot study,\nexpert opinion\nthe minimum clinically important difference (MCID)."
+        title: "3. الـ effect size: الفرق اللي عايز تشوفه"
+        text: |
+          ==Effect size== بيختلف حسب نوع الـ outcome:
+
+          - **Continuous** (زي الضغط): الفرق المتوقع بين المتوسطات + الـ **standard deviation**.
+          - **Binary** (وفاة، remission): **النسبة** في كل مجموعة.
+
+          تجيبه منين؟ من **previous literature**، أو **pilot study**، أو **expert opinion**، أو الـ **minimum clinically important difference**.
+      - kind: explain
+        page: 68
+        quote: "What is the statistical power:\nIs the ability of the sample to represent the expected effect estimate (e.g, To detect a difference between groups-to estimate a prevalence….)\nThe minimum acceptable statistical power to use is 80%. Therefore, we can calculate the sample size based on a power of 80%, 85%, or 90%.\nFactors affecting the power of the study: The sample size-the sample variability (SD)-"
+        title: "4 و 5. الـ power والـ alpha"
+        text: |
+          ==Statistical power== = قدرة العينة إنها **تكشف** الفرق (أو تقدّر الـ prevalence) لو هو موجود فعلًا.
+
+          - أقل power مقبول **80%**؛ وبنحسب على 80% أو 85% أو 90%.
+          - بيتأثر بحجم العينة وبالـ **variability**.
+
+          ==Alpha== = احتمال الصدفة: مفيش فرق حقيقي بس النتيجة طلعت فرق بسبب الـ **sampling error**. المقبول في الأبحاث الإكلينيكية **5%**.
+      - kind: check
+        page: 69
+        quote: "The probability of chance (There is no difference however the results are due to sampling error)\nIn clinical research, the acceptable alpha level in sample size calculation is 5%"
+        question: "What are the usual minimum power and acceptable alpha in sample size calculation?"
+        options: ["Power 80%, alpha 5%", "Power 95%, alpha 5%", "Power 80%, alpha 20%", "Power 50%, alpha 1%"]
+        answer: 0
+        why:
+          - "صح: power ≥ 80% و alpha 5% (الشرائح 68–69)."
+          - "الـ 95% دي الـ confidence level، مش الـ power."
+          - "الـ 20% دي الـ beta (1 − power)، مش الـ alpha."
+          - "50% power يعني نص الفروق الحقيقية هتضيع."
+      - kind: figure
+        page: 70
+        quote: "A higher power is chosen\nA smaller significance level is chosen (Alpha)\nThe data have a high SD.\nA small effect size is expected (Difference between means or proportions)"
+        title: "إمتى العينة تكبر؟"
+        alt: "A balance. On the left pan four weights push the sample size up: higher power, smaller alpha, high SD and small effect size. An arrow labelled bigger n points up from the scale."
+        caption: "4 حاجات بتكبّر العينة: **power أعلى**، **alpha أصغر**، **SD عالي**، و**effect size صغير**."
+        svg: |
+          <svg viewBox="0 0 330 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L11b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="20" y="20" width="135" height="30" rx="6" class="fg-acc"/>
+            <text x="87" y="40" text-anchor="middle" class="t-sm">Higher power</text>
+            <rect x="20" y="58" width="135" height="30" rx="6" class="fg-acc"/>
+            <text x="87" y="78" text-anchor="middle" class="t-sm">Smaller alpha</text>
+            <rect x="20" y="96" width="135" height="30" rx="6" class="fg-acc"/>
+            <text x="87" y="116" text-anchor="middle" class="t-sm">High SD</text>
+            <rect x="20" y="134" width="135" height="30" rx="6" class="fg-acc"/>
+            <text x="87" y="154" text-anchor="middle" class="t-sm">Small effect size</text>
+            <path d="M160 35L215 90M160 73L215 92M160 111L215 96M160 149L215 98" class="fg-arrow"/>
+            <circle cx="255" cy="95" r="38" class="fg-bad"/>
+            <text x="255" y="92" text-anchor="middle" class="t-lg t-b">n</text>
+            <text x="255" y="110" text-anchor="middle" class="t-sm">bigger</text>
+            <path d="M255 52V20" class="fg-arrow-bad" marker-end="url(#L11b)"/>
+          </svg>
+      - kind: check
+        page: 70
+        quote: "A higher power is chosen\nA smaller significance level is chosen (Alpha)\nThe data have a high SD.\nA small effect size is expected (Difference between means or proportions)"
+        question: "Which change makes the required sample size smaller?"
+        options: ["Expecting a larger effect size", "Raising power to 90%", "Lowering alpha to 1%", "Data with a higher SD"]
+        answer: 0
+        why:
+          - "صح: الفرق الكبير سهل تشوفه بعدد أقل."
+          - "power أعلى = عينة أكبر."
+          - "alpha أصغر = عينة أكبر."
+          - "SD أعلى = عينة أكبر."
+      - kind: aside
+        tone: tip
+        page: 71
+        quote: "To estimate the minimum required Examples: sample size You need to Determine 1. EpiInfo7 (@CDC.gov) your hypothesis, determine ur 2. R Software requirements then run the 3. Statsdirect calculations on a software 4. MedCalc 5. GPower"
+        text: |
+          البرامج بتحسب، بس **انت** اللي بتحدد الـ hypothesis والـ requirements الأول.
+
+          أمثلة الشريحة: **Epi Info 7**، **R**، **StatsDirect**، **MedCalc**، **G*Power**. وفي Batna فيه حاسبتين بنفس معادلات Epi Info: «Sample size: prevalence survey» و «Sample size: case-control or cohort».
+      - kind: try
+        items: [res.L11.061, res.L11.063, res.L11.066, res.L11.068]
+    recap:
+      - "الـ requirements: hypothesis (primary endpoint)، design، effect size، power، alpha."
+      - "Power ≥ 80% (80، 85، أو 90%)؛ alpha 5%."
+      - "العينة تكبر مع: power أعلى، alpha أصغر، SD عالي، effect size صغير."
+      - "Effect size من الـ literature أو pilot أو experts أو الـ minimum clinically important difference."
+    practice: [res.L11.061, res.L11.062, res.L11.063, res.L11.064, res.L11.065, res.L11.066, res.L11.067, res.L11.068, res.L11.069, res.L11.070]
+  # ------------------------------------------------------------------
+  - id: res.L11.lesson6
+    title: "نحسبها بإيدينا: survey و case-control و cohort"
+    hook: "نفس أرقام شاشات Epi Info في المحاضرة، بس تفهم كل رقم جه منين."
+    minutes: 10
+    pages: [72, 89]
+    topics: [calculation]
+    goals:
+      - "تعرف مدخلات الـ population survey"
+      - "تفهم ليه الـ margin الأصغر بيكبّر العينة"
+      - "تقرا جدول Kelsey و Fleiss في الـ case-control والـ cohort"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 72
+        quote: "Requirements:\n1. The population size\n2. The expected prevalence from previous studies or pilot study or expert opinion (If no previous data from research use 50% expected prevalence)\n3. Accepted margin of error (Alpha)\n4. Confidence level (always 95%)"
+        title: "1. Prevalence study (population survey)"
+        text: |
+          محتاج 4 حاجات:
+
+          - **Population size**.
+          - **Expected prevalence**: من دراسات قبل كده أو pilot أو experts. ولو مفيش أي بيانات، استخدم ==50%==.
+          - **Margin of error** المقبول (الدقة اللي عايزها، ±كام %).
+          - **Confidence level**: دايمًا **95%**.
+
+          ليه 50%؟ لأن p × (1 − p) بتبقى **أكبر حاجة** عند 50%، فبتطلع أكبر وأأمن عينة.
+      - kind: explain
+        page: 75
+        quote: "Population survey or descriptive study\nFor simple random sampling, leave design effect and clusters equal to 1.\nPopulation size: 100000\nExpected frequency: 30%\nAcceptable Margin of Error: 5%\nDesign effect: 1.0\nClusters: 1\n| Confidence Level | Cluster Size | Total Sample |\n|---|---|---|\n| 80% | 138 | 138 |\n| 95% | 322 | 322 |\n| 99% | 554 | 554 |\n| 99.9% | 901 | 901 |\n| 99.99% | 1256 | 1256 |"
+        title: "شاشة Epi Info: Population survey"
+        text: |
+          المثال: population **100,000**، expected frequency **30%**، margin **5%**، والـ **design effect = 1** (للـ simple random sampling).
+
+          عند **95%** confidence: ==n = 322==.
+
+          المعادلة اللي وراها: n = N·p(1 − p) ÷ [(d²/z²)(N − 1) + p(1 − p)]، و z = 1.96 للـ 95%.
+
+          ولو الـ sampling بالـ **cluster**، الـ design effect بيبقى أكبر من 1 (غالبًا 2)، فالعينة بتتضاعف.
+      - kind: check
+        page: 76
+        quote: "Population survey or descriptive study\nFor simple random sampling, leave design effect and clusters equal to 1.\nPopulation size: 100000\nExpected frequency: 30%\nAcceptable Margin of Error: 3%\nDesign effect: 1.0\nClusters: 1\n| Confidence Level | Cluster Size | Total Sample |\n|---|---|---|\n| 80% | 382 | 382 |\n| 90% | 627 | 627 |\n| 95% | 888 | 888 |\n| 97% | 1087 | 1087 |\n| 99% | 1525 | 1525 |\n| 99.9% | 2464 | 2464 |\n| 99.99% | 3413 | 3413 |"
+        question: "Same survey (100,000 people, expected 30%, 95% confidence), but the margin of error drops from 5% to 3%. The sample size becomes"
+        options: ["888", "322", "194", "554"]
+        answer: 0
+        why:
+          - "صح: n بيمشي مع 1/d²، فالدقة الأعلى بتكلّف عينة أكبر بكتير."
+          - "322 ده مع margin 5%."
+          - "الـ margin الأصغر عمره ما يصغّر العينة."
+          - "554 ده سطر الـ 99% مع margin 5%."
+      - kind: explain
+        page: 77
+        quote: "Requirements:\nProbability of exposure in cases\nProbability of exposure in controls\nStatistical power (80%)\nConfidence level (the remaining of alpha ……1-α)\nNumber of controls per subject in the cases group"
+        title: "2. Unmatched case-control"
+        text: |
+          محتاج:
+
+          - نسبة الـ **exposure** في الـ **cases**، ونسبته في الـ **controls**.
+          - **Power** 80%، و **confidence level** (1 − α).
+          - عدد الـ **controls لكل case**.
+
+          في Epi Info: StatCalc ← **Unmatched case-control**.
+      - kind: table
+        page: 81
+        quote: "Unmatched Case-Control Study (Comparison of ILL and NOT ILL)\nTwo-sided confidence level: 95%\nPower: 80%\nRatio of controls to cases: 1\nPercent of controls exposed: 20%\nOdds ratio: 1.71429\nPercent of cases with exposure: 30%\n| | Kelsey | Fleiss | Fleiss w/ CC |\n|---|---|---|---|\n| Cases | 295 | 294 | 313 |\n| Controls | 295 | 294 | 313 |\n| Total | 590 | 588 | 626 |"
+        title: "Controls 20% exposed، cases 30%: الـ odds ratio = 1.71"
+        columns: ["", "Kelsey", "Fleiss", "Fleiss + CC"]
+        rows:
+          - ["Cases", "295", "294", "313"]
+          - ["Controls", "295", "294", "313"]
+          - ["Total", "590", "588", "626"]
+        hide: [[0, 1], [2, 1]]
+      - kind: aside
+        tone: exam
+        page: 81
+        quote: "Unmatched Case-Control Study (Comparison of ILL and NOT ILL)\nTwo-sided confidence level: 95%\nPower: 80%\nRatio of controls to cases: 1\nPercent of controls exposed: 20%\nOdds ratio: 1.71429\nPercent of cases with exposure: 30%\n| | Kelsey | Fleiss | Fleiss w/ CC |\n|---|---|---|---|\n| Cases | 295 | 294 | 313 |\n| Controls | 295 | 294 | 313 |\n| Total | 590 | 588 | 626 |"
+        text: |
+          الشريحة معلّمة على عمود **Kelsey**: 295 cases + 295 controls.
+
+          الـ 3 أعمدة 3 معادلات لنفس السؤال. **Fleiss with continuity correction (CC)** دايمًا الأكبر والأحوط. لو السؤال جاب الأرقام دي، دوّر على اللي الشريحة علّمت عليه.
+      - kind: case
+        page: 85
+        quote: "3. Sample size calculation for Independent cohort studies\nUnmatched Cohort and Cross-Sectional Studies (Exposed and Nonexposed)\nTwo-sided confidence level: 95%\nPower: 80%\nRatio (Unexposed : Exposed): 1\n% outcome in unexposed group: 25\nRisk ratio: 1.52\nOdds ratio: 1.83871\n% outcome in exposed group: 38\n| | Kelsey | Fleiss | Fleiss w/ CC |\n|---|---|---|---|\n| Exposed | 201 | 200 | 215 |\n| Unexposed | 201 | 200 | 215 |\n| Total | 402 | 400 | 430 |"
+        stem: "Cohort study: outcome in 25% of the unexposed and 38% of the exposed, equal groups, 95% confidence, 80% power."
+        steps:
+          - question: "Which StatCalc module do you open?"
+            options: ["Cohort or cross-sectional", "Population survey", "Unmatched case-control"]
+            answer: 0
+            why: "الـ cohort بيقارن **outcome** في exposed و unexposed؛ ده module الـ **cohort or cross-sectional**."
+          - question: "What is the risk ratio you are trying to detect?"
+            options: ["1.52 (38/25)", "1.84", "0.66"]
+            answer: 0
+            why: "RR = 38% ÷ 25% = **1.52**. الـ 1.84 ده الـ odds ratio."
+          - question: "How many per group (Kelsey)?"
+            options: ["201 exposed + 201 unexposed", "200 + 200", "215 + 215"]
+            answer: 0
+            why: "Kelsey = **201** لكل مجموعة (402). Fleiss = 200، و Fleiss + CC = 215."
+      - kind: check
+        page: 87
+        quote: "Unmatched Cohort and Cross-Sectional Studies (Exposed and Nonexposed)\nTwo-sided confidence level: 95%\nPower: 80%\nRatio (Unexposed : Exposed): 1\n% outcome in unexposed group: 4.9%\nRisk ratio: 3.67347\nOdds ratio: 4.26033\n% outcome in exposed group: 18%\n| | Kelsey | Fleiss | Fleiss w/ CC |\n|---|---|---|---|\n| Exposed | 93 | 92 | 107 |\n| Unexposed | 93 | 92 | 107 |\n| Total | 186 | 184 | 214 |"
+        question: "The CMV example: 18% versus 4.9% (risk ratio 3.67). Compared with the 38% versus 25% cohort (201 per group), the sample is"
+        options: ["Smaller: 93 per group (Kelsey)", "Larger: 402 per group", "The same: 201 per group", "Smaller: 25 per group"]
+        answer: 0
+        why:
+          - "صح: الفرق أكبر بكتير (effect size كبير)، فعينة أصغر بتكفي."
+          - "الـ effect size الكبير بيصغّر العينة، مش بيكبّرها."
+          - "العينة بتتغير مع الـ effect size."
+          - "الرقم ده مش من الجدول؛ Kelsey 93 و Fleiss 92."
+      - kind: explain
+        page: 89
+        quote: "Calculation requirements\n1. Expected effect size (difference between groups regarding the primary outcome)\n2. Type of clinical trial: Cross over or parallel\n3. Allocation ratio between the experimental and control groups\n4. Statistical power\n5. Alpha\n6. In the case of non inferiority or equivalence study we need what is called non inferiority margin or equivalence limit respectively"
+        title: "4. Clinical trials، والـ outcome الرقمي"
+        text: |
+          الـ **clinical trial** محتاج: الـ **effect size** على الـ primary outcome، نوع الـ trial (**cross-over** ولا **parallel**)، الـ **allocation ratio**، الـ **power**، الـ **alpha**، ولو non-inferiority أو equivalence: الـ ==non-inferiority margin== أو الـ **equivalence limit**.
+
+          وكل الأمثلة اللي فاتت كانت **qualitative outcome** (فرق بين نسبتين). لو الـ outcome **quantitative** (فرق متوسطات و standard deviation)، الأحسن ==G*Power==.
+      - kind: try
+        items: [res.L11.071, res.L11.076, res.L11.081, res.L11.082]
+    recap:
+      - "Survey: population size، expected prevalence (50% لو مفيش بيانات)، margin، confidence 95%."
+      - "100,000، 30%، margin 5% ← 322؛ margin 3% ← 888."
+      - "Case-control: exposure في cases و controls، power، confidence، controls per case. مثال 20% ضد 30% ← Kelsey 295 + 295."
+      - "Cohort: outcome في exposed و unexposed. 25% ضد 38% ← 201 + 201؛ 4.9% ضد 18% ← 93 + 93."
+      - "Quantitative outcome ← G*Power."
+    practice: [res.L11.071, res.L11.072, res.L11.073, res.L11.074, res.L11.075, res.L11.076, res.L11.077, res.L11.078, res.L11.079, res.L11.080, res.L11.081, res.L11.082]

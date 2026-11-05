@@ -211,7 +211,7 @@ Medicine "Internal Medicine Postgraduate Lectures" (2025) and research slides:
 | `dm` | Diabetes, Metabolism, Lipids (ch. 6) | part 3 | 23 |
 | `geri` | Geriatrics (ch. 7) | part 4 | 13 |
 | `neph` | Nephrology (ch. 8) | part 5 | 14 |
-| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 10 (L11 in progress) |
+| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 11 |
 
 Semester 1 = `res`, `hem`, `hb`. Not started (no material yet): `cvs`,
 `chest`, `neuro`, `trop`, `img`, `bioch`, `phys`, `path`, `clinpath`,
@@ -321,7 +321,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 92 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
 | Releases | `batna-v1.0.0-alpha.2` published 2026-11-04 (feed `batna-alpha`); previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
 | Open PRs / issues | none on 2026-11-05 |
@@ -329,7 +329,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 
 ### Open work and known gaps
 
-- Content for courses with no material yet; `res` L12–L21 as slides arrive (L11 slides are in Batna-sources; its content PR was in progress on 2026-11-05).
+- Content for courses with no material yet; `res` L12–L21 as slides arrive.
 - Content still `unverified` until Mohamed approves in-app.
 - Glossary: split remaining ICP/SBP stop-gap senses into `course:` entries.
 - Review leftovers from the 2026-11-04 content audit (ambiguous abbreviations,
@@ -357,6 +357,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-05: res.L11 (sampling and sample size) written: 82 items, 6 lessons; two sample-size calculators (`sample_size_survey`, `sample_size_two_proportions`) reproduce the slides' Epi Info numbers.
 - 2026-11-05: `res.L09` written (budget, ethics, plagiarism: 113 items, 6 lessons); L09–L11 slides, text and images added to Batna-sources; glossary gains REC, CIOMS, WAME, WMA, MLA and `res` senses of PI, CV, APA.
 - 2026-11-05: res.L10 (data collection and questionnaire design + searching the literature, 146 slides) added: 107 items, 8 lessons; image-slide quotes and review-MCQ refs in `courses/res/verdicts/L10.tsv`.
 - 2026-11-05: Mac nightly green again: three tests now expect the Mac's own answers (installer message, device name; menu test skipped on macOS, muda needs the main thread).

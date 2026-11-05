@@ -1,0 +1,1046 @@
+schema: batna.content/v1
+lecture: res.L11
+title: Sampling methods and sample size determination
+author: Prof. Heba El-Weshahi
+book: { chapter: 1, pages: [1, 95] }
+topics:
+  - { id: population, title: "Population, study units, sample and the sampling process" }
+  - { id: probability, title: "Probability sampling: simple random, systematic, stratified, cluster, multistage" }
+  - { id: nonprobability, title: "Non-probability sampling: convenience, consecutive, purposive, snowball, quota" }
+  - { id: requirements, title: "Requirements of sample size calculation" }
+  - { id: calculation, title: "Calculating the sample size: surveys, case-control, cohort and trials (Epi Info)" }
+items:
+  # ---------------- population (slides 2-13) ----------------
+  - id: res.L11.001
+    kind: enumerate
+    topic: population
+    prompt: When we draw a sample from a population, which three questions do we face?
+    points:
+      - Which group of people (the study population) do we draw the sample from?
+      - How many people do we need in the sample (sample size)?
+      - How will these people be selected (sampling method)?
+    pass: 3
+    hook: "الـ 3 أسئلة «مين؟ كام؟ إزاي؟» = study population، sample size، وsampling method."
+    src: { page: 3, quote: "What is the group of people (study population) from which we want to draw a sample?\nHow many people do we need in our sample?\nHow will these people be selected?\nSampling Methods and Sample Size" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.002
+    kind: card
+    topic: population
+    front: Define a population in a research study.
+    back: >-
+      A well-defined group of people or objects that share common characteristics, about which some information is
+      sought (e.g. all immigrants from Egypt, or all patients with left hemiplegia).
+    src: { page: 4, quote: "A population is as a well-defined group of people or objects that share common characteristics\nE.g. All immigrants from Egypt or all patients with left hemiplegia.\nA population in a research study is a group about which some information is sought." }
+    status: unverified
+  - id: res.L11.003
+    kind: card
+    topic: population
+    front: What can a study population consist of, and what is a study unit?
+    back: >-
+      Besides persons, a study population may consist of villages, institutions, records, etc. Each study population is
+      made of study units; how we define the population and its unit depends on the problem and the study objectives.
+    src: { page: 5, quote: "The study population has to be clearly defined. Apart from persons, a study population may consist of villages, institutions, records, etc.\nEach study population consists of STUDY UNITS. The way we define our study population and our study unit depends on the problem we want to investigate and on the objectives of the study." }
+    status: unverified
+  - id: res.L11.004
+    kind: table
+    topic: population
+    title: Study population and study unit (examples)
+    columns: [Problem, Study population, Study unit]
+    rows:
+      - [Malnutrition related to weaning in district X, All children 6-24 months of age in district X, One child 6-24 months in district X]
+      - [High dropout rates in primary schools in district Y, All primary schools in district Y, One primary school in district Y]
+      - [Poor record-keeping for leprosy patients in hospital Z, All records on leprosy patients in hospital Z, One record on a leprosy patient in hospital Z]
+    blanks: [[0, 2], [1, 2], [2, 1], [2, 2]]
+    src: { page: 6, quote: "Example of Study Population and Study Units\n| Problem | Study population | Study unit |\n|---|---|---|\n| Malnutrition related to weaning in district X | All children 6-24 months of age in District X | One child between 6-24 months in District X |\n| High dropout rates in primary schools in District Y | All primary schools in District Y | One primary school in District Y |\n| Inappropriate record-keeping for leprosy patients registered in Hospital Z | All records on leprosy patients in hospital Z | One record on a leprosy patient registered in hospital Z |" }
+    status: unverified
+  - id: res.L11.005
+    kind: card
+    topic: population
+    front: Why do we sample instead of studying the whole population?
+    back: >-
+      Studying the entire population would be ideal (it allows generalization), but usually the population is too large or
+      too spread out over time and distance to measure every member. So a small portion is sampled and the results are
+      generalized to the whole population.
+    src: { page: 7, quote: "In clinical research it would be ideal to include the entire population\nGENERALIZATION\nHowever, in most cases, the population in question is too large or too spread out over time and distance to allow for measuring or evaluating each member of the population." }
+    status: unverified
+  - id: res.L11.006
+    kind: table
+    topic: population
+    title: Sampling instead of studying everyone
+    columns: [Side, Points]
+    rows:
+      - [Advantages, "Fewer subjects; more time efficient; less costly; potentially more accurate (easier to keep control over fewer subjects)"]
+      - [Disadvantage, "Potential bias in selecting subjects, which may reduce how far the results generalize beyond the subjects studied"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 9, quote: "Advantages:\n  a smaller number of subjects\n  more time efficient\n  less costly\n  potentially more accurate (since it is more feasible to maintain control over a smaller number of subjects).\nDisadvantages:\n  Potential bias in the selection of subjects, which may decrease the ability to generalize the results beyond the subjects actually studied" }
+    status: unverified
+  - id: res.L11.007
+    kind: mcq
+    topic: population
+    stem: Why may a sample be more accurate than studying the whole population?
+    options:
+      - It is more feasible to keep control over a smaller number of subjects
+      - A sample is free of selection bias
+      - A sample always includes every small subgroup
+      - Statistical tests need fewer subjects to be valid
+    answer: 0
+    why:
+      - Fewer subjects means measurements and quality can be controlled better.
+      - Selection bias is the main disadvantage of sampling, not something it removes.
+      - Small subgroups can be missed by a simple random sample; that is why stratified sampling exists.
+      - Too few subjects weakens a test; the sample must be large enough for a fair analysis.
+    src: { page: 9, quote: "Advantages:\n  a smaller number of subjects\n  more time efficient\n  less costly\n  potentially more accurate (since it is more feasible to maintain control over a smaller number of subjects).\nDisadvantages:\n  Potential bias in the selection of subjects, which may decrease the ability to generalize the results beyond the subjects actually studied" }
+    status: unverified
+  - id: res.L11.008
+    kind: card
+    topic: population
+    front: What is a sample, and what is a representative sample?
+    back: >-
+      A sample is a small subset of the population chosen to be studied. It should represent the population and be large
+      enough for a fair statistical analysis. A representative sample has all the important characteristics of the
+      population it is drawn from.
+    src: { page: 11, quote: "A sample is a small subset of the population that has been chosen to be studied.\nThe sample should represent the population and have sufficient size to be subjected to a fair statistical analysis.\nA representative sample has all the important characteristics of the population from which it is drawn." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.009
+    kind: enumerate
+    topic: population
+    prompt: Enumerate the 3 factors that influence how representative a sample is.
+    points:
+      - Sampling procedure
+      - Sample size
+      - Participation (response rate)
+    pass: 3
+    hook: "الـ representativeness على 3 رجول «إزاي، كام، ومين رد»: sampling procedure، sample size، participation (response rate)."
+    src: { page: 12, quote: "3 factors that influence sample representativeness\n  Sampling procedure\n  Sample size\n  Participation (response rate)\nWhen might you sample the entire population?\n  When your population is very small\n  When you have extensive resources\n  When you don't expect a very high response" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.010
+    kind: enumerate
+    topic: population
+    prompt: When might you sample the entire population?
+    points:
+      - When the population is very small
+      - When you have extensive resources
+      - When you don't expect a very high response
+    pass: 3
+    hook: "تاخد الكل في 3 حالات «صغير، غني، ومش هيردّوا»: population very small، extensive resources، ومش متوقع very high response."
+    src: { page: 12, quote: "3 factors that influence sample representativeness\n  Sampling procedure\n  Sample size\n  Participation (response rate)\nWhen might you sample the entire population?\n  When your population is very small\n  When you have extensive resources\n  When you don't expect a very high response" }
+    status: unverified
+  - id: res.L11.011
+    kind: order
+    topic: population
+    prompt: Put the stages of the sampling process in order.
+    steps:
+      - Define the population of concern
+      - Specify a sampling frame
+      - Specify a sampling method
+      - Determine the sample size
+      - Implement the sampling plan
+      - Sample and collect the data
+    src: { page: 13, quote: "Process of sampling\nThe sampling process comprises several stages:\n  Defining the population of concern\n  Specifying a sampling frame, a set of persons, units or events possible to measure\n  Specifying a sampling method for selecting individuals or events from the frame\n  Determining the sample size\n  Implementing the sampling plan\n  Sampling and data collecting" }
+    status: unverified
+    tags: [high-yield]
+  # ---------------- probability (slides 14-47) ----------------
+  - id: res.L11.012
+    kind: card
+    topic: probability
+    front: What are the two main categories of sampling?
+    back: Probability and non-probability sampling.
+    src: { page: 14, quote: "There are two main categories of sampling, probability and nonprobability." }
+    status: unverified
+  - id: res.L11.013
+    kind: card
+    topic: probability
+    front: Define probability sampling.
+    back: >-
+      Each unit of the sample is chosen on the basis of chance: every unit of the study population has an equal, or at
+      least a known, chance of being included. This requires selecting subjects at random (randomization).
+    src: { page: 15, quote: "Each unit of the sample is chosen on the basis of chance. All units of the study population should have an equal, or at least a known chance of being included in the sample.\nThat guarantee requires subjects to be selected at random, or that randomization be employed." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.014
+    kind: card
+    topic: probability
+    front: What is a sampling frame, and how is it usually defined?
+    back: >-
+      The portion of the population from which the sample is selected, usually defined by geographical listings, maps,
+      directories, membership, hospital admission lists or other kinds of lists.
+    src: { page: 16, quote: "The portion of the population from which a sample is to be selected.\nUsually defined by geographical listings, maps, directories, membership, hospital admission list or other kinds of lists." }
+    status: unverified
+  - id: res.L11.015
+    kind: card
+    topic: probability
+    front: What is simple random sampling?
+    back: Like a lottery, it gives everyone in the population an equal chance of being picked for the sample.
+    src: { page: 17, quote: "This is similar to lottery method that provides everyone in the population the equal chance to be picked as sample." }
+    status: unverified
+  - id: res.L11.016
+    kind: enumerate
+    topic: probability
+    prompt: Enumerate the methods of simple random sampling.
+    points:
+      - Lottery method (the "fishbowl" technique)
+      - Tables of random numbers
+      - Computer software
+    pass: 3
+    hook: "الـ simple random بـ 3 أدوات «ورق، جدول، كمبيوتر»: lottery method، tables of random numbers، computer software."
+    src: { page: 21, quote: "Applicable for small, homogenous and readily available populations\nA sampling frame is essential\nMethods of Simple random sampling:\n  Lottery method (Ideal bowel technique)\n  Tables of random numbers\n  Computer software." }
+    status: unverified
+  - id: res.L11.017
+    kind: mcq
+    topic: probability
+    stem: Simple random sampling is best suited to which population?
+    options:
+      - A small, homogeneous and readily available population with a sampling frame
+      - A large, heterogeneous population with known subgroup proportions
+      - A population with no list of its members
+      - A population scattered over a whole country
+    answer: 0
+    why:
+      - "Slide 21: applicable for small, homogeneous, readily available populations, and a sampling frame is essential."
+      - A large heterogeneous population with known strata calls for stratified sampling.
+      - Without a list there is no sampling frame, which simple random sampling needs.
+      - A scattered population is cheaper to reach by cluster or multistage sampling.
+    src: { page: 21, quote: "Applicable for small, homogenous and readily available populations\nA sampling frame is essential\nMethods of Simple random sampling:\n  Lottery method (Ideal bowel technique)\n  Tables of random numbers\n  Computer software." }
+    status: unverified
+  - id: res.L11.018
+    kind: card
+    topic: probability
+    front: What is systematic sampling?
+    back: >-
+      Individuals are chosen at regular intervals (for example every fifth) from the sampling frame. Ideally a random number
+      tells us where to start. A sampling frame is essential.
+    src: { page: 22, quote: "In SYSTEMATIC sampling individuals are chosen at regular intervals (for example every fifth) from the sampling frame.\nIdeally we randomly select a number to tell us where to start selecting individuals from the list.\nA sampling frame is essential" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.019
+    kind: case
+    topic: probability
+    stem: A systematic sample of 100 is to be selected from the 1200 students of a school.
+    steps:
+      - question: What is the sampling fraction?
+        options: ["100/1200 (1 in 12)", "1200/100", "100/1100", "1/100"]
+        answer: 0
+        why: Sampling fraction = sample size / study population = 100/1200.
+      - question: What is the sampling interval?
+        options: ["12", "100", "1/12", "1200"]
+        answer: 0
+        why: Interval K = population / sample = 1200 / 100 = 12.
+      - question: The random start, picked blindly from papers numbered 1-12, is 6. Which students are selected?
+        options: ["6, 18, 30, 42 ... until 100 are selected", "6, 12, 18, 24 ...", "1, 13, 25, 37 ...", "Every 6th student"]
+        answer: 0
+        why: Start at 6 and add the interval 12 each time.
+    src: { page: 24, quote: "The sampling interval is, therefore, 12. The number of the first student to be included in the sample is chosen randomly, for example by blindly picking one out of twelve pieces of paper, numbered 1- 12.\nif number 6 is picked, then every twelfth student will be included in the sample, starting with student number 6, until 100 students are selected: then numbers selected would be 6, 18, 30, 42, etc." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: res.L11.020
+    kind: cloze
+    topic: probability
+    text: >-
+      In systematic sampling, the sampling interval K = total number of units in the {{c1::population}} / total number of
+      units in the {{c2::sample}}, and every Kth unit on the list is chosen.
+    src: { page: 28, quote: "Based on sampling fraction: Every Kth unit is chosen in the population list, where K is chosen by sampling interval\nSampling Interval (K) Q = Total no. of units in population/ total no. of units in sample\nApplicable for large populations where complete list of individuals is available" }
+    status: unverified
+  - id: res.L11.021
+    kind: mcq
+    topic: probability
+    stem: >-
+      From a list of N = 100, a systematic sample of n = 20 is wanted. The random number chosen from 1-5 is 4. Which
+      units are taken?
+    options: ["4, 9, 14, 19 ... (every 5th from 4)", "4, 8, 12, 16 ...", "1, 6, 11, 16 ...", "5, 10, 15, 20 ..."]
+    answer: 0
+    why:
+      - N/n = 100/20 = 5, so start at 4 and take every 5th unit.
+      - That uses an interval of 4, the random start, not N/n.
+      - That starts at 1, not at the chosen number 4.
+      - That ignores the random start and so is not random at all.
+    src: { page: 25, quote: "Systematic Random Sampling\nN = 100\nwant n = 20\nN/n = 5\nselect a random number from 1-5: chose 4\nstart with #4 and take every 5th unit" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L11.022
+    kind: card
+    topic: probability
+    front: What is the advantage and the risk of systematic sampling compared with simple random sampling?
+    back: >-
+      It is usually less time-consuming and easier. But there is a risk of bias when the sampling interval coincides with a
+      systematic variation in the sampling frame (e.g. counting clinic attendance every 7 days: all days fall on the same
+      weekday, which might be market day).
+    src: { page: 27, quote: "Systematic sampling is usually less time consuming and easier to perform than simple random sampling. However, there is a risk of bias, as the sampling interval may coincide with a systematic variation in the sampling frame.\nFor instance, if we want to select a random sample of days on which to count clinic attendance, systematic sampling with a sampling interval of 7 days would be inappropriate, as all study days would fall on the same day of the week, which might, for example, be market day." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.023
+    kind: mcq
+    topic: probability
+    stem: >-
+      To count clinic attendance, a researcher picks study days by systematic sampling with an interval of 7 days. What is
+      the problem?
+    options:
+      - Every study day falls on the same weekday, so the interval matches a systematic variation
+      - Systematic sampling needs no sampling frame
+      - The sample will be too large
+      - Systematic sampling cannot use a random start
+    answer: 0
+    why:
+      - If that weekday is market day, attendance is biased; the interval coincides with the weekly cycle.
+      - It does need a sampling frame (slide 22).
+      - The interval sets which days are picked, not an excessive size.
+      - A random start is the ideal way to begin a systematic sample.
+    src: { page: 27, quote: "Systematic sampling is usually less time consuming and easier to perform than simple random sampling. However, there is a risk of bias, as the sampling interval may coincide with a systematic variation in the sampling frame.\nFor instance, if we want to select a random sample of days on which to count clinic attendance, systematic sampling with a sampling interval of 7 days would be inappropriate, as all study days would fall on the same day of the week, which might, for example, be market day." }
+    status: unverified
+  - id: res.L11.024
+    kind: card
+    topic: probability
+    front: For which population is systematic sampling applicable?
+    back: Large populations where a complete list of individuals is available.
+    src: { page: 28, quote: "Based on sampling fraction: Every Kth unit is chosen in the population list, where K is chosen by sampling interval\nSampling Interval (K) Q = Total no. of units in population/ total no. of units in sample\nApplicable for large populations where complete list of individuals is available" }
+    status: unverified
+  - id: res.L11.025
+    kind: card
+    topic: probability
+    front: Which weakness of simple random sampling does stratified sampling fix?
+    back: >-
+      Small groups the researcher is interested in may hardly appear in a simple random sample. When the sample must include
+      representative units of small groups (urban and rural residents, religious or ethnic groups), stratify.
+    src: { page: 29, quote: "The simple random sampling method has a disadvantage that small groups in which the researcher is interested may hardly appear in the sample.\nIf it is important that the sample includes representative study units of small groups with specific characteristics (for example, residents from urban and rural areas, or different religious or ethnic groups)," }
+    status: unverified
+  - id: res.L11.026
+    kind: card
+    topic: probability
+    front: Define stratified sampling and its precondition.
+    back: >-
+      Dividing the population into smaller groups (strata) and randomly sampling from each. It is only possible when we know
+      what proportion of the study population belongs to each group.
+    src: { page: 30, quote: "Dividing up the population into smaller groups (Strata) , and randomly sampling from each group.\nStratified sampling is only possible when we know what proportion of the study population belongs to each group we are interested in." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.027
+    kind: case
+    topic: probability
+    stem: >-
+      A grant supports a survey of 200 staff members of the Faculty of Medicine. The population is 1000: 700 males and 300
+      females.
+    steps:
+      - question: With proportional allocation, how many females and males are selected?
+        options: ["60 females and 140 males", "100 females and 100 males", "30 females and 70 males", "300 females and 700 males"]
+        answer: 0
+        why: Each stratum keeps its share of the population, 30% and 70% of 200 = 60 and 140.
+      - question: With disproportional (equal) allocation, how many of each?
+        options: ["100 females and 100 males", "60 females and 140 males", "150 females and 50 males", "200 of each"]
+        answer: 0
+        why: Equal allocation takes the same number from each stratum, 100 + 100 = 200.
+      - question: In the equal-allocation sample, what must the analysis do?
+        options:
+          - Weight the data so males get proportionally more weight, because females are overrepresented
+          - Nothing, because random selection removes the imbalance
+          - Drop 40 females to restore the proportion
+          - Report the females only
+        answer: 0
+        why: Each female had a much higher chance of selection, so weighting restores the population's proportions.
+    src: { page: 34, quote: "This approach creates an adequate sample size, but it presents problems for data analysis because the characteristics of one group (in this case, the females) will be overrepresented in the sample.\nFortunately, this effect can be controlled by weighting the data so the males receive a proportionally larger mathematical representation in the analysis of scores than the females." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: res.L11.028
+    kind: mcq
+    topic: probability
+    stem: >-
+      In a population of 1000 (30% females, 70% males), a stratified sample of 200 is drawn in proportion to each
+      category. How many females are selected?
+    options: ["60", "30", "100", "140"]
+    answer: 0
+    why:
+      - 30% of 200 = 60 females (and 140 males).
+      - 30 is the percentage, not the number.
+      - 100 is equal (disproportional) allocation.
+      - 140 is the number of males.
+    src: { page: 35, quote: "Calculating proportional weights involves determining the probability that any one male or female will be selected.\nFor example, In a population of 1000, sample of 200 is to be drawn based on the proportion of each category in the study population(30% females and 70% mares). Means that I will select randomly 60 females and 140 males." }
+    status: unverified
+    tags: [numbers]
+  - id: res.L11.029
+    kind: card
+    topic: probability
+    front: In a disproportional (equal-allocation) stratified sample, what is the problem and how is it solved?
+    back: >-
+      It gives an adequate size from each category, but the smaller group (e.g. females) is overrepresented, which causes
+      problems in analysis. It is controlled by weighting the data so the larger group gets proportionally more weight.
+    src: { page: 34, quote: "This approach creates an adequate sample size, but it presents problems for data analysis because the characteristics of one group (in this case, the females) will be overrepresented in the sample.\nFortunately, this effect can be controlled by weighting the data so the males receive a proportionally larger mathematical representation in the analysis of scores than the females." }
+    status: unverified
+  - id: res.L11.030
+    kind: cloze
+    topic: probability
+    text: >-
+      Proportional allocation: the sample from each stratum n(h) = n x N(h) / N. With 1,600 students to draw from 20,031,
+      the first year (5,000 students) gets {{c1::399}} and the fourth year (6,296) gets {{c2::503}}.
+    src: { page: 36, quote: "Table 1 Proportional allocation of 1,600 students to four strata defined by college year\n| Year | Population Size: Total Enrollment | Sample Size: nh = nNh/N | Sample Size: Rounded Values |\n|---|---|---|---|\n| First | 5,000 | 399.4 | 399 |\n| Second | 4,058 | 324.1 | 324 |\n| Third | 4,677 | 373.6 | 374 |\n| Fourth | 6,296 | 502.9 | 503 |\n| Total | 20,031 | 1,600.0 | 1,600 |" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L11.031
+    kind: enumerate
+    topic: probability
+    prompt: Summarize stratified random sampling (how, when, and why it is better).
+    points:
+      - A non-homogeneous population is converted into homogeneous groups (strata) and a random sample is drawn from each, in proportion to its size
+      - Applicable for large non-homogeneous populations
+      - Gives a more representative sample than simple random sampling
+      - None of the categories is under- or over-represented
+    pass: 3
+    hook: "الـ stratified في 4: «قسّم، كبير ومتلخبط، أمثل، ومحدش مظلوم» = homogeneous strata، large non-homogeneous، more representative من الـ simple random، none under- or over-represented."
+    src: { page: 37, quote: "Non-homogenous population is converted to homogenous groups/classes (strata); sample is drawn from each strata at random, in proportion to its size\nApplicable for large non-homogenous population\nGives more representative sample than simple random sampling\nNone of the categories is under or over-represented" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.032
+    kind: card
+    topic: probability
+    front: When is cluster sampling used instead of simple random sampling?
+    back: >-
+      When a complete sampling frame of the units does not exist, or logistics make random sampling of individuals hard
+      (people scattered over a large area). If a list of groupings (villages, schools) exists or is easy to compile, some
+      groupings are selected at random.
+    src: { page: 39, quote: "However, when a list of groupings of study units is available (e.g., villages or schools) or can be easily compiled, a number of these groupings can be randomly selected.\nThe selection of groups of study units (clusters) instead of the selection of study units individually is called CLUSTER SAMPLING." }
+    status: unverified
+  - id: res.L11.033
+    kind: card
+    topic: probability
+    front: Define cluster sampling.
+    back: >-
+      Selecting groups of study units (clusters) at random instead of individual units. The population is divided into
+      clusters that are externally homogeneous but internally heterogeneous: each cluster is a mini-representation of the
+      whole population.
+    src: { page: 40, quote: "Cluster sampling is a sampling method in which the entire population of the study is divided into externally homogeneous but internally heterogeneous groups called clusters. Essentially, each cluster is a mini-representation of the entire population." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.034
+    kind: table
+    topic: probability
+    title: Strata versus clusters
+    columns: [Feature, Strata, Clusters]
+    rows:
+      - [Inside each group, Homogeneous, Heterogeneous (a mini-population)]
+      - [Between groups, Different, Similar to each other]
+      - [What is sampled at random, Units from every stratum, Some whole clusters]
+    blanks: [[0, 1], [0, 2], [2, 2]]
+    src: { page: 40, quote: "Cluster sampling is a sampling method in which the entire population of the study is divided into externally homogeneous but internally heterogeneous groups called clusters. Essentially, each cluster is a mini-representation of the entire population." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.035
+    kind: card
+    topic: probability
+    front: What units are clusters usually, and give the slide's example?
+    back: >-
+      Geographic units (districts, shiakhat, villages) or organizational units (clinics, health facilities, schools). In a
+      family-planning KAP study in rural communities, all villages are listed, a random sample of villages is chosen, and
+      all study units in those villages are interviewed.
+    src: { page: 42, quote: "Clusters are often:\n  geographic units (e.g., districts, shiakhat, villages) or\n  organizational units (e.g., clinics, heath facilities, schools).\nFor example, in a KAP study related to family planning in rural communities of a region, a list is made of all the villages. Using this list, a random sample of villages is chosen and all study units in the selected villages are interviewed." }
+    status: unverified
+  - id: res.L11.036
+    kind: table
+    topic: probability
+    title: Cluster sampling
+    columns: [Side, Points]
+    rows:
+      - [Advantages, "Cuts the cost of preparing a sampling frame; reduces travel and other administrative costs"]
+      - [Disadvantage, "Higher sampling error than a simple random sample of the same size"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 43, quote: "Advantages :\n  Cuts down on the cost of preparing a sampling frame.\n  This can reduce travel and other administrative costs.\nDisadvantages:\n  sampling error is higher over a simple random sample of same size." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.037
+    kind: card
+    topic: probability
+    front: What are the two types of cluster sampling?
+    back: >-
+      One-stage: all the elements in the selected clusters are included. Two-stage: a random subset of the elements in the
+      selected clusters is included.
+    src: { page: 44, quote: "Two types of cluster sampling methods.\nOne-stage sampling. All of the elements within selected clusters are included in the sample.\nTwo-stage sampling. A subset of elements within selected clusters are randomly selected for inclusion in the sample." }
+    status: unverified
+  - id: res.L11.038
+    kind: mcq
+    topic: probability
+    stem: >-
+      Immunization coverage in a province is estimated from seven children aged 12-23 months in each of 30 clusters.
+      Which sampling method is this?
+    options: [Cluster sampling, Quota sampling, Systematic sampling, Snowball sampling]
+    answer: 0
+    why:
+      - "Slide 45 lists the 30-cluster immunization survey as a typical use of cluster sampling."
+      - Quota sampling fills a quota per category without random selection.
+      - Systematic sampling picks every Kth unit from a full list.
+      - Snowball sampling follows referrals from key informants.
+    src: { page: 45, quote: "Determining proportion of undernourished five year olds in a village.\nInvestigating nutritional status of preschool children.\nSelecting maternity records for the study of previous abortions or duration of postnatal stay.\nIn estimation of immunization coverage in a province, data on seven children aged 12-23 months in 30 clusters are used to determine proportion of fully immunized children in the province." }
+    status: unverified
+  - id: res.L11.039
+    kind: enumerate
+    topic: probability
+    prompt: Enumerate the situations where cluster sampling is usually recommended.
+    points:
+      - Determining the proportion of undernourished five-year-olds in a village
+      - Investigating the nutritional status of preschool children
+      - Selecting maternity records to study previous abortions or the duration of postnatal stay
+      - Estimating immunization coverage in a province (7 children aged 12-23 months in 30 clusters)
+    pass: 3
+    hook: "الـ cluster بيحب «العيال والولادة»: undernourished five-year-olds، nutritional status of preschool children، maternity records، و immunization coverage (30 cluster × 7 أطفال)."
+    src: { page: 45, quote: "Determining proportion of undernourished five year olds in a village.\nInvestigating nutritional status of preschool children.\nSelecting maternity records for the study of previous abortions or duration of postnatal stay.\nIn estimation of immunization coverage in a province, data on seven children aged 12-23 months in 30 clusters are used to determine proportion of fully immunized children in the province." }
+    status: unverified
+  - id: res.L11.040
+    kind: card
+    topic: probability
+    front: What is multistage random sampling, and its advantage?
+    back: >-
+      Sampling done in successive stages, each sampling unit nested in the previous one (states, then districts, then
+      villages, then every 10th person; or districts, schools, classes, then students by systematic random sampling). It
+      introduces flexibility in sampling.
+    src: { page: 47, quote: "Is done in successive stages; each successive sampling unit is nested in the previous sampling unit\nAdvantage: Introduces flexibility in sampling\nFor example, in large country surveys, states are chosen, then districts, then villages, then every 10th person in village as final sampling unit\nin a school survey: Districts schools classes students by systmatic random technique" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.041
+    kind: order
+    topic: probability
+    prompt: Order the stages of the slide's multistage school survey.
+    steps:
+      - Districts
+      - Schools
+      - Classes
+      - Students (systematic random technique)
+    src: { page: 47, quote: "Is done in successive stages; each successive sampling unit is nested in the previous sampling unit\nAdvantage: Introduces flexibility in sampling\nFor example, in large country surveys, states are chosen, then districts, then villages, then every 10th person in village as final sampling unit\nin a school survey: Districts schools classes students by systmatic random technique" }
+    status: unverified
+  - id: res.L11.042
+    kind: enumerate
+    topic: probability
+    prompt: Enumerate the probability sampling methods in the lecture's classification.
+    points:
+      - Simple random
+      - Systematic
+      - Stratified random
+      - Cluster
+      - Multistage (combining the others)
+    pass: 4
+    hook: "الـ probability 5 «سِس كُم»: Simple random، Systematic، Stratified، Cluster، وMultistage (اللي بيجمعهم)."
+    src: { page: 46, quote: "Sampling\n  Probability: Simple random; Systematic; Stratified random; Cluster; Multi-stage\n  Non-probability: Quota; Purposive; Snowball; Self-selection; Convenience\n    Purposive: Extreme case; Heterogeneous; Homogeneous; Critical case; Typical case" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.043
+    kind: mcq
+    topic: probability
+    stem: >-
+      In a study, people are separated into certain sub-groups and then some are selected randomly from each of these
+      sub-groups. What type of sampling is being done?
+    options: [Simple random sampling, Cluster random sampling, Systematic random sampling, Stratified random sampling]
+    answer: 3
+    why:
+      - Simple random sampling picks from the whole list without sub-groups.
+      - Cluster sampling picks some whole groups at random, not some people from every group.
+      - Systematic sampling takes every Kth unit from a list.
+      - Sub-groups (strata) with random selection from each one is stratified random sampling (slide 30).
+    src: { page: 91, quote: "In a study, people are separated into certain sub-groups and then some are selected randomly from each of these sub-groups. What type of sampling is being done?\n  (a) Simple random sampling\n  (b) Cluster random sampling\n  (c) Systematic random sampling\n  (d) Stratified random sampling" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: res.L11.044
+    kind: mcq
+    topic: probability
+    stem: "Following are the sampling techniques used to conduct community health surveys, except:"
+    options: [Simple random, Systematic random, Stratified random, Cluster testing]
+    answer: 3
+    why:
+      - Simple random sampling is a probability method used in surveys.
+      - Systematic random sampling is a probability method used in surveys.
+      - Stratified random sampling is a probability method used in surveys.
+      - "\"Cluster testing\" is not a sampling technique; the method is cluster sampling."
+    src: { page: 92, quote: "Following are the sampling techniques used to conduct community health surveys, except:\n  (a) Simple random\n  (b) Systematic random\n  (c) Stratified random\n  (d) Cluster testing" }
+    status: unverified
+    tags: [book-question]
+  - id: res.L11.045
+    kind: mcq
+    topic: probability
+    stem: Stratified sampling is ideal for
+    options: [Heterogeneous data, Homogeneous data, Both, None]
+    answer: 0
+    why:
+      - Stratified sampling suits a large non-homogeneous population, made homogeneous inside each stratum (slide 37).
+      - Simple random sampling is the one for small homogeneous populations (slide 21).
+      - Stratifying a homogeneous population gains nothing.
+      - It has a clear use, a heterogeneous population.
+    src: { page: 93, quote: "Stratified sampling is ideal for: [Recent Question 2012]\n  (a) Heterogenous data\n  (b) Homogenous data\n  (c) Both\n  (d) None" }
+    status: unverified
+    tags: [book-question]
+  - id: res.L11.046
+    kind: mcq
+    topic: probability
+    stem: Simple random sampling
+    options:
+      - Provides the least number of possible samples
+      - Gives each unit an equal chance of being collected for a sample of a certain number
+      - Picks every 5th or 10th unit at regular intervals
+      - Makes the sample represent a corresponding stratum of the universe
+    answer: 1
+    why:
+      - It is not defined by the number of possible samples.
+      - Everyone has an equal chance of being picked, like a lottery (slide 17).
+      - Picking at regular intervals is systematic sampling.
+      - Representing each stratum is stratified sampling.
+    src: { page: 94, quote: "Simple random sampling:\n  a. Provides least number of possible samples\n  b. Equal chance to each for collection of certain number for a sample\n  c. Picking every 5th or 10th at regular intervals\n  d. Sample represent, a corresponding strata of universe" }
+    status: unverified
+    tags: [book-question]
+  # ---------------- nonprobability (slides 48-62) ----------------
+  - id: res.L11.047
+    kind: card
+    topic: nonprobability
+    front: What is convenience sampling?
+    back: >-
+      Subjects are selected because they are conveniently accessible to the researcher: the easiest to obtain, the study units
+      that happen to be available at the time of data collection. It is probably the most commonly used technique in
+      clinical research today.
+    src: { page: 51, quote: "Is probably the most commonly used technique in clinical research today\nWith convenience sampling, subjects are selected because of their convenient accessibility to the researcher.\nThese subjects are chosen simply because they are the easiest to obtain for the study." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.048
+    kind: mcq
+    topic: nonprobability
+    stem: >-
+      To study villagers' attitudes towards family-planning services of an MCH clinic, a researcher interviews all adult
+      patients visiting the outpatient clinic on one particular day. Which sampling method is this?
+    options: [Convenience sampling, Simple random sampling, Cluster sampling, Quota sampling]
+    answer: 0
+    why:
+      - Those who happen to be available that day are interviewed; it is convenient and gives a useful first impression.
+      - No random selection from a list of villagers is made.
+      - No group of villages was selected at random.
+      - No quota was set per category.
+    src: { page: 53, quote: "A researcher wants to study the attitudes of villagers towards family planning services provided by a MCH clinic.\nHe decides to interview all adult patients who visit the out patient clinic during one particular day.\nThis is more convenient than taking a random sample of people in the village, and it gives a useful first impression." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.049
+    kind: table
+    topic: nonprobability
+    title: Convenience sampling
+    columns: [Side, Points]
+    rows:
+      - [Advantages, "Easy, fast, and usually the least expensive and troublesome"]
+      - [Drawback, "The sample may be quite unrepresentative: some units over-selected, others under-selected or missed, and the distortion cannot be adjusted for"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 54, quote: "This technique is easy, fast and usually the least expensive and troublesome.\nA drawback of convenience sampling is that the sample may be quite unrepresentative of the population you want to study." }
+    status: unverified
+  - id: res.L11.050
+    kind: card
+    topic: nonprobability
+    front: Can you correct the distortion of a convenience sample afterwards?
+    back: >-
+      No. Some units may be over-selected and others under-selected or missed, and it is impossible to adjust for this. If
+      you need a representative sample, use another sampling method.
+    src: { page: 55, quote: "Some units may be over- selected, others under selected or missed altogether.\nIt is impossible to adjust for such a distortion - if you need to be representative you have to use another sampling method." }
+    status: unverified
+  - id: res.L11.051
+    kind: enumerate
+    topic: nonprobability
+    prompt: When may researchers sample conveniently?
+    points:
+      - At the beginning of a study, when they are merely orienting themselves
+      - When there are many similar informants and no preference (yet) for specific categories
+      - When there seems no other choice (no one else available for an interview)
+    pass: 3
+    hook: "الـ convenience مسموح في 3 «لسه بستكشف، كلهم شبه بعض، ومفيش غيرهم»: orienting، many similar informants، no other choice."
+    src: { page: 56, quote: "CONVENIENCE SAMPLING is a method in which, for convenience sake, the study units that happen to be available at the time of data collection are selected in the sample.\nThis may happen at the beginning of a study when researchers are merely orienting themselves, or, when there are many similar informants and the researchers do not (yet) have a preference for specific categories. When there seems no other choice (no one else available for an interview) researchers may also sample conveniently." }
+    status: unverified
+  - id: res.L11.052
+    kind: card
+    topic: nonprobability
+    front: What is consecutive sampling, and why is it the best non-probability technique?
+    back: >-
+      A strict version of convenience sampling where every available subject is selected, so the complete accessible
+      population is studied. Studying everybody available gives a good representation of the overall population in a
+      reasonable period of time.
+    src: { page: 57, quote: "is a strict version of convenience sampling where every available subject is selected, i.e., the complete accessible population is studied.\nThis is the best choice of the non-probability sampling techniques since by studying everybody available, a good representation of the overall population is possible in a reasonable period of time." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.053
+    kind: mcq
+    topic: nonprobability
+    stem: Which is the best choice among the non-probability sampling techniques?
+    options: [Consecutive sampling, Convenience sampling, Quota sampling, Snowball sampling]
+    answer: 0
+    why:
+      - Every available subject is taken, so it represents the population well in a reasonable time (slide 57).
+      - Plain convenience sampling may be quite unrepresentative.
+      - Quota sampling has no random selection and is threatened by selection bias.
+      - Snowball sampling finds key informants; it is not built to represent a population.
+    src: { page: 57, quote: "is a strict version of convenience sampling where every available subject is selected, i.e., the complete accessible population is studied.\nThis is the best choice of the non-probability sampling techniques since by studying everybody available, a good representation of the overall population is possible in a reasonable period of time." }
+    status: unverified
+  - id: res.L11.054
+    kind: card
+    topic: nonprobability
+    front: What is judgmental (purposive) sampling, and where is it used?
+    back: >-
+      Typical of qualitative research: a limited number of informants is selected strategically, so their in-depth information
+      gives optimal insight into an issue about which little is known. Subjects are chosen because the researcher believes
+      they are likely to benefit or be more compliant.
+    src: { page: 58, quote: "Qualitative research methods are typically used when focusing on a limited number of informants, whom we select strategically so that their in-depth information will give optimal insight into an issue about which little is known.\nThis is called purposeful sampling. Subjects usually are selected because the researcher believes that certain subjects are likely to benefit or be more compliant." }
+    status: unverified
+  - id: res.L11.055
+    kind: enumerate
+    topic: nonprobability
+    prompt: Enumerate the kinds of purposive sampling in the lecture's classification chart.
+    points:
+      - Extreme case
+      - Heterogeneous
+      - Homogeneous
+      - Critical case
+      - Typical case
+    pass: 4
+    hook: "الـ purposive 5 «3 cases + 2 genous»: extreme، critical وtypical case، و heterogeneous وhomogeneous."
+    src: { page: 50, quote: "Sampling\n  Probability: Simple random; Systematic; Stratified random; Cluster; Multi-stage\n  Non-probability: Quota; Purposive; Snowball; Self-selection; Convenience\n    Purposive: Extreme case; Heterogeneous; Homogeneous; Critical case; Typical case" }
+    status: unverified
+  - id: res.L11.056
+    kind: card
+    topic: nonprobability
+    front: How does snowball (chain) sampling work, and when is it useful?
+    back: >-
+      Start with one or two information-rich key informants and ask them who else knows a lot about the topic; a person
+      recommended by two or three people is likely a valuable informant. It suits locating key informants or critical
+      cases, a researcher new to the site, and people with rich information who are hard to reach.
+    src: { page: 59, quote: "Snowball or chain sampling\n  This approach is particularly suitable for locating key informants or critical cases. You start with one or two information-rich key informants and ask them if they know persons who know a lot about your topic of interest. If a particular person is recommended to you by two or three different people you can be quite sure that he or she will be a valuable key informant.\n  The same approach can be used if an in-depth interview leads to discoveries, which seem rewarding to follow-up by a number of interviews with an additional group of informants." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.057
+    kind: mcq
+    topic: nonprobability
+    stem: >-
+      In an exploratory study on coping among AIDS orphans, girl-headed households seemed to cope better than boy-headed
+      ones, so the researcher interviewed more adolescent boys and girls heading households. Which sampling is this?
+    options: [Snowball (chain) sampling, Quota sampling, Stratified sampling, Consecutive sampling]
+    answer: 0
+    why:
+      - The slide's example of following up a discovery with more interviews, the snowball approach (slides 59-60).
+      - No quota per category was set beforehand.
+      - There was no sampling frame or random selection.
+      - The researcher chose informants on purpose, not every available subject.
+    src: { page: 60, quote: "For example, in an exploratory study on coping behaviour among AIDS orphans, it seemed that child-headed households managed by girls survived better than those managed by boys. The researcher then interviewed more adolescent boys and girls heading households, to see whether this gender difference in the ability to cope was real, and how it could be explained.\nThis sampling technique is especially valuable when the researcher is new to the study site, and also important for identifying individuals who have rich information but are difficult to reach." }
+    status: unverified
+  - id: res.L11.058
+    kind: card
+    topic: nonprobability
+    front: What is quota sampling?
+    back: >-
+      A method that ensures a certain number of units from different categories with specific characteristics appear in the
+      sample. The investigator interviews as many people in each category as he can find until he has filled his quota.
+    src: { page: 61, quote: "A method that ensures that a certain number of sample units from different categories with specific characteristics appear in the sample so that all these characteristics are represented.\nIn this method the investigator interviews as many people in each category of study unit as he can find until he has filled his quota." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.059
+    kind: table
+    topic: nonprobability
+    title: Quota versus stratified sampling
+    columns: [Feature, Quota, Stratified]
+    rows:
+      - [Population divided into categories, "Yes, selected by set proportions", "Yes, by known proportions"]
+      - [Sampling frame, None, Essential]
+      - [Random selection, None, Within each stratum]
+      - [Selection bias, Threatened, Protected by randomization]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 62, quote: "It is similar to stratified sample in that:\n  Population is divided into categories and elements are selected from each category based on certain proportions\nIt is different from stratified sample in that:\n  No sampling frame\n  No random selection\n  Threatened by selection bias" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.060
+    kind: enumerate
+    topic: nonprobability
+    prompt: Enumerate the non-probability sampling methods in the lecture's classification.
+    points:
+      - Convenience (and its strict form, consecutive)
+      - Judgmental (purposive)
+      - Snowball (chain)
+      - Quota
+      - Self-selection
+    pass: 4
+    hook: "الـ non-probability 5 «كُنّا بنقصد نكوّر الكوتة لوحدنا»: Convenience، Purposive، Snowball، Quota، Self-selection."
+    src: { page: 50, quote: "Sampling\n  Probability: Simple random; Systematic; Stratified random; Cluster; Multi-stage\n  Non-probability: Quota; Purposive; Snowball; Self-selection; Convenience\n    Purposive: Extreme case; Heterogeneous; Homogeneous; Critical case; Typical case" }
+    status: unverified
+  # ---------------- requirements (slides 63-71) ----------------
+  - id: res.L11.061
+    kind: enumerate
+    topic: requirements
+    prompt: Enumerate the requirements of sample size calculation.
+    points:
+      - The main hypothesis of the study (primary endpoint)
+      - The design of the study
+      - The expected effect size
+      - The desirable statistical power
+      - The acceptable margin of error (alpha)
+    pass: 5
+    hook: "الـ sample size عايز 5 «فرض، تصميم، أثر، قوة، وغلط» = Hypothesis، Design، Effect size، Power، Alpha."
+    src: { page: 64, quote: "The main hypothesis of the study\nThe design of your study\nThe expected effect size\nThe desirable statistical power\nThe acceptable margin of error (alpha-α)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.062
+    kind: mcq
+    topic: requirements
+    stem: A study has a primary and several secondary objectives. The sample size calculation should be based on
+    options: [The primary endpoint, The secondary endpoint needing the largest sample, The average of all endpoints, The easiest endpoint to measure]
+    answer: 0
+    why:
+      - The calculation rests on the primary endpoint, the main objective of the study (slide 65).
+      - Secondary endpoints do not drive the calculation.
+      - Endpoints are not averaged.
+      - Ease of measurement does not decide it.
+    src: { page: 65, quote: "Researchers sometimes plan for primary and secondary objectives and therefore, have primary and secondary endpoints for their studies. Sample size calculation procedure should be based on the primary endpoint (the main objective of the study)." }
+    status: unverified
+  - id: res.L11.063
+    kind: table
+    topic: requirements
+    title: What each design needs for the sample size
+    columns: [Design, Main measure]
+    rows:
+      - [Cross-sectional, The prevalence ratio]
+      - [Case-control, Mean difference or difference in proportions of exposure]
+      - [Cohort, Mean difference or difference in proportions of the outcome]
+      - [Screening and diagnostic, Prevalence of the disease and the suspected sensitivity]
+      - [Clinical trial (equivalence or non-inferiority), The minimum clinically important difference]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 66, quote: "Understanding the design of your study will help you identify the relevant calculation method and determine the different requirements\n  1. Cross sectional study: the main outcome is the prevalence ratio\n  2. In case control study we deal with mean difference or difference in proportions of exposure.\n  3. In cohort study, we deal with the mean difference or the difference in proportions of the outcome.\n  4. In screening and diagnostic studies, data about the prevalence of the disease and suspected sensitivity are required\n  5. In clinical trial (Equivalence and non inferiority ) the minimum clinically important difference is needed" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.064
+    kind: card
+    topic: requirements
+    front: What is the expected effect size for a continuous and for a binary outcome, and where does it come from?
+    back: >-
+      Continuous: the expected mean difference between the two arms and the population standard deviation. Binary (death,
+      remission): the rate in each group. It comes from previous literature, a pilot study, expert opinion, or the minimum
+      clinically important difference (MCID).
+    src: { page: 67, quote: "1. The expected effect size differs according to the type of outcome measure.\n  In case of continuous measures, the required ES will be the expected mean difference between the two arms and the population standard deviation.\n  In the case of binary outcomes (events as death or remission), the required ES will be the rate of each group.\nThis expected estimate can be obtained from\n  previous literature\n  pilot study,\n  expert opinion\n  the minimum clinically important difference (MCID)." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.065
+    kind: card
+    topic: requirements
+    front: Define statistical power and its minimum acceptable value.
+    back: >-
+      The ability of the sample to show the expected effect (to detect a difference between groups, to estimate a prevalence).
+      The minimum acceptable power is 80%; sample sizes are calculated at 80%, 85% or 90%. Power depends on the sample size and
+      the sample variability (SD).
+    src: { page: 68, quote: "What is the statistical power:\n  Is the ability of the sample to represent the expected effect estimate (e.g, To detect a difference between groups-to estimate a prevalence….)\n  The minimum acceptable statistical power to use is 80%. Therefore, we can calculate the sample size based on a power of 80%, 85%, or 90%.\n  Factors affecting the power of the study: The sample size-the sample variability (SD)-" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.066
+    kind: cloze
+    topic: requirements
+    text: >-
+      The minimum acceptable statistical power is {{c1::80%}}, and the acceptable alpha in clinical research sample size
+      calculation is {{c2::5%}}.
+    src: { page: 69, quote: "The probability of chance (There is no difference however the results are due to sampling error)\nIn clinical research, the acceptable alpha level in sample size calculation is 5%" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.067
+    kind: card
+    topic: requirements
+    front: What is alpha, the acceptable margin of error?
+    back: >-
+      The probability of chance: there is no real difference, yet the results show one because of sampling error. In clinical
+      research the acceptable alpha for sample size calculation is 5%.
+    src: { page: 69, quote: "The probability of chance (There is no difference however the results are due to sampling error)\nIn clinical research, the acceptable alpha level in sample size calculation is 5%" }
+    status: unverified
+  - id: res.L11.068
+    kind: enumerate
+    topic: requirements
+    prompt: When do we require a higher sample size?
+    points:
+      - A higher power is chosen
+      - A smaller significance level (alpha) is chosen
+      - The data have a high SD
+      - A small effect size is expected (difference between means or proportions)
+    pass: 4
+    hook: "العينة تكبر في 4 «قوة أعلى، alpha أصغر، SD عالي، وأثر صغير»: higher power، smaller alpha، high SD، small effect size."
+    src: { page: 70, quote: "A higher power is chosen\nA smaller significance level is chosen (Alpha)\nThe data have a high SD.\nA small effect size is expected (Difference between means or proportions)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.069
+    kind: mcq
+    topic: requirements
+    stem: Which change would reduce the required sample size?
+    options:
+      - Expecting a larger effect size
+      - Raising the power from 80% to 90%
+      - Lowering alpha from 5% to 1%
+      - Data with a higher SD
+    answer: 0
+    why:
+      - A bigger difference is easier to detect, so fewer subjects are needed; a small effect size needs more (slide 70).
+      - A higher power needs a bigger sample.
+      - A smaller significance level needs a bigger sample.
+      - A high SD needs a bigger sample.
+    src: { page: 70, quote: "A higher power is chosen\nA smaller significance level is chosen (Alpha)\nThe data have a high SD.\nA small effect size is expected (Difference between means or proportions)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.070
+    kind: card
+    topic: requirements
+    front: Name software used to calculate the minimum sample size.
+    back: >-
+      Epi Info 7 (from the CDC), R, StatsDirect, MedCalc and G*Power. First set the hypothesis and the requirements, then
+      run the calculation.
+    src: { page: 71, quote: "To estimate the minimum required Examples: sample size You need to Determine 1. EpiInfo7 (@CDC.gov) your hypothesis, determine ur 2. R Software requirements then run the 3. Statsdirect calculations on a software 4. MedCalc 5. GPower" }
+    status: unverified
+  # ---------------- calculation (slides 72-89) ----------------
+  - id: res.L11.071
+    kind: enumerate
+    topic: calculation
+    prompt: Enumerate the requirements for the sample size of a prevalence study (population survey).
+    points:
+      - The population size
+      - The expected prevalence (from previous studies, a pilot or expert opinion; 50% if no data)
+      - The accepted margin of error
+      - The confidence level (always 95%)
+    pass: 4
+    hook: "الـ survey محتاج 4 «حجم، توقّع، هامش، وثقة»: population size، expected prevalence (أو 50%)، margin of error، confidence level 95%."
+    src: { page: 72, quote: "Requirements:\n  1. The population size\n  2. The expected prevalence from previous studies or pilot study or expert opinion (If no previous data from research use 50% expected prevalence)\n  3. Accepted margin of error (Alpha)\n  4. Confidence level (always 95%)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.072
+    kind: mcq
+    topic: calculation
+    stem: You plan a prevalence survey, but there are no previous data on the prevalence. What expected prevalence do you enter?
+    options: ["50%", "5%", "95%", "Skip the survey until a pilot is done"]
+    answer: 0
+    why:
+      - With no previous data, use 50% (slide 72); p(1 - p) is largest at 50%, giving the safest, largest sample.
+      - 5% is the usual alpha, not a default prevalence.
+      - 95% is the confidence level.
+      - A pilot or expert opinion can help, but 50% is the slide's default when nothing is known.
+    src: { page: 72, quote: "Requirements:\n  1. The population size\n  2. The expected prevalence from previous studies or pilot study or expert opinion (If no previous data from research use 50% expected prevalence)\n  3. Accepted margin of error (Alpha)\n  4. Confidence level (always 95%)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.073
+    kind: calc
+    topic: calculation
+    calculator: sample_size_survey
+    stem: "Population survey in Epi Info StatCalc: population 100,000, expected frequency 30%, margin of error 5%, design effect 1."
+    question: What is the minimum sample size at 95% confidence?
+    inputs: { population: 100000, expected_prevalence: 30, margin: 5, confidence: "95", design_effect: 1 }
+    expect: "n = 322"
+    interpret: "322 people estimate a prevalence of about 30% within ±5% at 95% confidence (the slide's StatCalc table also gives 138 at 80% and 554 at 99%)."
+    src: { page: 75, quote: "Population survey or descriptive study\nFor simple random sampling, leave design effect and clusters equal to 1.\nPopulation size: 100000\nExpected frequency: 30%\nAcceptable Margin of Error: 5%\nDesign effect: 1.0\nClusters: 1\n| Confidence Level | Cluster Size | Total Sample |\n|---|---|---|\n| 80% | 138 | 138 |\n| 95% | 322 | 322 |\n| 99% | 554 | 554 |\n| 99.9% | 901 | 901 |\n| 99.99% | 1256 | 1256 |" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L11.074
+    kind: calc
+    topic: calculation
+    calculator: sample_size_survey
+    stem: "The same survey (population 100,000, expected frequency 30%), but the margin of error is narrowed to 3%."
+    question: What is the minimum sample size at 95% confidence?
+    inputs: { population: 100000, expected_prevalence: 30, margin: 3, confidence: "95" }
+    expect: "n = 888"
+    interpret: "Narrowing the margin from 5% to 3% raises the sample from 322 to 888: a more precise estimate needs more people."
+    src: { page: 76, quote: "Population survey or descriptive study\nFor simple random sampling, leave design effect and clusters equal to 1.\nPopulation size: 100000\nExpected frequency: 30%\nAcceptable Margin of Error: 3%\nDesign effect: 1.0\nClusters: 1\n| Confidence Level | Cluster Size | Total Sample |\n|---|---|---|\n| 80% | 382 | 382 |\n| 90% | 627 | 627 |\n| 95% | 888 | 888 |\n| 97% | 1087 | 1087 |\n| 99% | 1525 | 1525 |\n| 99.9% | 2464 | 2464 |\n| 99.99% | 3413 | 3413 |" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L11.075
+    kind: mcq
+    topic: calculation
+    stem: >-
+      In the slide's StatCalc survey (population 100,000, expected 30%, 95% confidence), the margin of error is changed
+      from 5% to 3%. What happens to the sample size?
+    options: ["It rises from 322 to 888", "It falls from 888 to 322", "It stays 322", "It rises from 322 to 554"]
+    answer: 0
+    why:
+      - A narrower margin needs a bigger sample; n goes with 1/d², so 322 becomes 888.
+      - A smaller margin never needs fewer people.
+      - The margin of error is in the formula's denominator, so n must change.
+      - 554 is the 99% confidence row with a 5% margin.
+    src: { page: 76, quote: "Population survey or descriptive study\nFor simple random sampling, leave design effect and clusters equal to 1.\nPopulation size: 100000\nExpected frequency: 30%\nAcceptable Margin of Error: 3%\nDesign effect: 1.0\nClusters: 1\n| Confidence Level | Cluster Size | Total Sample |\n|---|---|---|\n| 80% | 382 | 382 |\n| 90% | 627 | 627 |\n| 95% | 888 | 888 |\n| 97% | 1087 | 1087 |\n| 99% | 1525 | 1525 |\n| 99.9% | 2464 | 2464 |\n| 99.99% | 3413 | 3413 |" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L11.076
+    kind: enumerate
+    topic: calculation
+    prompt: Enumerate the requirements for the sample size of an independent (unmatched) case-control study.
+    points:
+      - Probability of exposure in cases
+      - Probability of exposure in controls
+      - Statistical power (80%)
+      - Confidence level (1 - alpha)
+      - Number of controls per case
+    pass: 4
+    hook: "الـ case-control محتاج 5 «تعرّض مرتين، قوة، ثقة، ونسبة»: exposure in cases، exposure in controls، power 80%، confidence (1 − α)، controls per case."
+    src: { page: 77, quote: "Requirements:\n  Probability of exposure in cases\n  Probability of exposure in controls\n  Statistical power (80%)\n  Confidence level (the remaining of alpha ……1-α)\n  Number of controls per subject in the cases group" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L11.077
+    kind: calc
+    topic: calculation
+    calculator: sample_size_two_proportions
+    stem: >-
+      Unmatched case-control study in StatCalc: 95% two-sided confidence, 80% power, 1 control per case, 20% of controls
+      exposed, 30% of cases exposed (odds ratio 1.71).
+    question: How many cases and controls (Kelsey) are needed?
+    inputs: { design: case_control, confidence: "95", power: 80, ratio: 1, p_group2: 20, p_group1: 30 }
+    expect: "295 cases + 295 controls"
+    interpret: "Kelsey gives 295 cases and 295 controls (590 in all); Fleiss gives 294 + 294, and Fleiss with continuity correction 313 + 313."
+    src: { page: 81, quote: "Unmatched Case-Control Study (Comparison of ILL and NOT ILL)\nTwo-sided confidence level: 95%\nPower: 80%\nRatio of controls to cases: 1\nPercent of controls exposed: 20%\nOdds ratio: 1.71429\nPercent of cases with exposure: 30%\n| | Kelsey | Fleiss | Fleiss w/ CC |\n|---|---|---|---|\n| Cases | 295 | 294 | 313 |\n| Controls | 295 | 294 | 313 |\n| Total | 590 | 588 | 626 |" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L11.078
+    kind: calc
+    topic: calculation
+    calculator: sample_size_two_proportions
+    stem: >-
+      Unmatched cohort study in StatCalc: 95% two-sided confidence, 80% power, ratio unexposed to exposed 1, outcome in 25%
+      of the unexposed and 38% of the exposed (risk ratio 1.52).
+    question: How many exposed and unexposed (Kelsey) are needed?
+    inputs: { design: cohort, confidence: "95", power: 80, ratio: 1, p_group2: 25, p_group1: 38 }
+    expect: "201 exposed + 201 unexposed"
+    interpret: "Kelsey gives 201 exposed and 201 unexposed (402 in all); Fleiss gives 200 + 200, and Fleiss with continuity correction 215 + 215."
+    src: { page: 85, quote: "3. Sample size calculation for Independent cohort studies\nUnmatched Cohort and Cross-Sectional Studies (Exposed and Nonexposed)\nTwo-sided confidence level: 95%\nPower: 80%\nRatio (Unexposed : Exposed): 1\n% outcome in unexposed group: 25\nRisk ratio: 1.52\nOdds ratio: 1.83871\n% outcome in exposed group: 38\n| | Kelsey | Fleiss | Fleiss w/ CC |\n|---|---|---|---|\n| Exposed | 201 | 200 | 215 |\n| Unexposed | 201 | 200 | 215 |\n| Total | 402 | 400 | 430 |" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L11.079
+    kind: calc
+    topic: calculation
+    calculator: sample_size_two_proportions
+    stem: >-
+      A cohort study on congenital CMV infection and perinatal HIV transmission. Adachi et al. found CMV in 16 of 89
+      (18%) HIV-infected infants versus 42 of 858 (4.9%) HIV-exposed uninfected infants. 95% confidence, 80% power, equal
+      groups.
+    question: What sample size detects a similar effect size (Kelsey)?
+    inputs: { design: cohort, confidence: "95", power: 80, ratio: 1, p_group2: 4.9, p_group1: 18 }
+    expect: "93 exposed + 93 unexposed"
+    interpret: "Kelsey gives 93 per group (186 in all); Fleiss 92 + 92 (184); Fleiss with continuity correction 107 + 107 (214). Risk ratio 3.67."
+    src: { page: 87, quote: "Unmatched Cohort and Cross-Sectional Studies (Exposed and Nonexposed)\nTwo-sided confidence level: 95%\nPower: 80%\nRatio (Unexposed : Exposed): 1\n% outcome in unexposed group: 4.9%\nRisk ratio: 3.67347\nOdds ratio: 4.26033\n% outcome in exposed group: 18%\n| | Kelsey | Fleiss | Fleiss w/ CC |\n|---|---|---|---|\n| Exposed | 93 | 92 | 107 |\n| Unexposed | 93 | 92 | 107 |\n| Total | 186 | 184 | 214 |" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L11.080
+    kind: mcq
+    topic: calculation
+    stem: >-
+      Which Epi Info StatCalc module calculates the sample size of an unmatched cohort study (exposed versus non-exposed)?
+    options: [Cohort or cross-sectional, Population survey, Unmatched case-control, Population binomial]
+    answer: 0
+    why:
+      - "\"Cohort or cross-sectional\" takes the % outcome in the unexposed and exposed groups (slides 84-85)."
+      - Population survey is for a prevalence (descriptive) study.
+      - Unmatched case-control takes the % exposure in controls and cases.
+      - Population binomial compares one proportion with a standard.
+    src: { page: 84, quote: "StatCalc\n  POPULATION SURVEY\n  COHORT OR CROSS-SECTIONAL\n  UNMATCHED CASE-CONTROL\n  CHI SQUARE FOR TREND\n  TABLES (2 x 2 x N)\n  POISSON (RARE EVENT VS. STD)\n  POPULATION BINOMIAL (PROPORTION VS. STD.)\n  MATCHED PAIR CASE CONTROL STUDY" }
+    status: unverified
+  - id: res.L11.081
+    kind: card
+    topic: calculation
+    front: How do you calculate the sample size when the outcome is quantitative (a mean difference)?
+    back: >-
+      The Epi Info examples handle a qualitative outcome (difference between two proportions). For a quantitative outcome,
+      where the effect size is the mean difference and SD, it is better to use G*Power.
+    src: { page: 88, quote: "N.B: in the previous examples the outcome is qualitative and the effect size is the difference between two proportions\nTo calculate the sample size if the outcome is quantitative and the effect size is the mean difference and SD difference it is better to use G*Power software to estimate the minimum sample size" }
+    status: unverified
+  - id: res.L11.082
+    kind: enumerate
+    topic: calculation
+    prompt: Enumerate the requirements for the sample size of a clinical trial.
+    points:
+      - Expected effect size (difference between groups in the primary outcome)
+      - Type of trial (cross-over or parallel)
+      - Allocation ratio between the experimental and control groups
+      - Statistical power
+      - Alpha
+      - Non-inferiority margin or equivalence limit (for non-inferiority or equivalence trials)
+    pass: 5
+    hook: "الـ trial محتاج 6 «أثر، نوع، نسبة، قوة، alpha، وهامش»: effect size، cross-over أو parallel، allocation ratio، power، alpha، و non-inferiority margin أو equivalence limit."
+    src: { page: 89, quote: "Calculation requirements\n  1. Expected effect size (difference between groups regarding the primary outcome)\n  2. Type of clinical trial: Cross over or parallel\n  3. Allocation ratio between the experimental and control groups\n  4. Statistical power\n  5. Alpha\n  6. In the case of non inferiority or equivalence study we need what is called non inferiority margin or equivalence limit respectively" }
+    status: unverified
+    tags: [high-yield]

@@ -196,6 +196,10 @@ fn keywords(id: &str) -> &'static str {
         "nnt" => "number needed to treat harm nnh",
         "diagnostic_accuracy" => "sensitivity specificity ppv npv likelihood ratio",
         "z_score" => "standard deviation sd normal distribution",
+        "sample_size_survey" => "sample size prevalence survey margin of error epi info statcalc",
+        "sample_size_two_proportions" => {
+            "sample size power case control cohort kelsey fleiss epi info statcalc"
+        }
         _ => "",
     }
 }

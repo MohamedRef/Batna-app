@@ -357,6 +357,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-05: res.L10 (data collection and questionnaire design + searching the literature, 146 slides) added: 107 items, 8 lessons; image-slide quotes and review-MCQ refs in `courses/res/verdicts/L10.tsv`.
 - 2026-11-05: Mac nightly green again: three tests now expect the Mac's own answers (installer message, device name; menu test skipped on macOS, muda needs the main thread).
 - 2026-11-05: big files split into smaller modules (i18n per feature; core `lesson`, `calc`, `labs`, `session`); AGENTS.md § Small files; `check-file-sizes.sh` warns in CI.
 - 2026-11-05: the whole project folder and memory notes archived in `MohamedRef/Batna-sources`.

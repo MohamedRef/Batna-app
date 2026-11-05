@@ -4,7 +4,7 @@ Python helpers the content threads used, copied from the Claude project's
 shared folder on 2026-11-05 so they survive without it. They are snapshots:
 not run by CI, and some read the book text, which lives outside git
 (`docs/HANDOFF.md` § Sources outside git). Point them at that folder with
-`BATNA_SOURCES=/path/to/medstudy` (default `/mnt/project-files/medstudy`).
+`BATNA_SOURCES=/path/to/medstudy` (a clone of the private repo `MohamedRef/Batna-sources`; default `/mnt/project-files/medstudy`).
 Run with `python3 -I` from the repo root; they need `pyyaml`.
 
 | Script | What it does |

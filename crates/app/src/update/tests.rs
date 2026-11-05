@@ -1033,11 +1033,11 @@ fn install_checks_the_download_again_and_reports_what_the_system_said() {
     u.check(true);
     let Phase::Ready(o) = u.status().phase else { panic!("{:?}", u.status().phase) };
     u.install();
-    // This system has no installer: the download stays for a retry.
-    assert_eq!(
-        u.status().phase,
-        Phase::Failed { offer: Some(o.clone()), why: Failure::Install("no installer on this system".into()) }
-    );
+    // This system cannot install (no installer here; on a Mac the tests do
+    // not run from Batna.app): the download stays for a retry.
+    let why =
+        if cfg!(target_os = "macos") { "not running from Batna.app" } else { "no installer on this system" };
+    assert_eq!(u.status().phase, Phase::Failed { offer: Some(o.clone()), why: Failure::Install(why.into()) });
     assert!(u.dir.join(&o.asset.file).exists());
 
     // Changed on disk since: never installed, and the download goes.

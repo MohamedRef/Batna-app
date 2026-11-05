@@ -254,6 +254,10 @@ pub const CALCULATORS: &[&str] = &[
     "nnt",
     "diagnostic_accuracy",
     "z_score",
+    "disease_duration",
+    "death_rate",
+    "perinatal_mr",
+    "mmr",
     "sample_size_survey",
     "sample_size_two_proportions",
 ];

@@ -163,7 +163,7 @@ items:
     kind: card
     topic: sources
     front: What is record linkage?
-    back: Linking records that belong to the same individual from different sources.
+    back: "Linking records that belong to the same individual from different sources, e.g. their hospital, school and work records, for a fuller picture of their health (the lecturer's example in the recording)."
     src: { page: 20, quote: "7. Special subgroups records\n8. Morbidity Surveys\n9. Record Linkage: To link records that belong to the same individual from different sources" }
     status: unverified
   - id: res.L02.016
@@ -783,3 +783,135 @@ items:
     src: { page: 59, quote: "Proportionate Mortality Rate = Total number of deaths due to a certain disease / Total number of deaths from all causes x 100, which is usually expressed as a percentage.\nExample: There were 6000 deaths (1200 leukemia, 1750 stroke, 250 pneumonia, 250 Hodgkin's disease, and 2500 acute myocardial infarction) in Cook County, which had a population of 2.5 million in 1991. The proportionate mortality rate for leukemia is: (1200/6000) x 100 = 20%" }
     status: unverified
     tags: [numbers]
+  # ---------- 2026-11-05: the lecture recording, and calculators for duration and mortality ----------
+  - id: res.L02.066
+    kind: calc
+    topic: prevalence
+    calculator: disease_duration
+    stem: "Annual incidence of a disease = 20 per 10,000,000; annual mortality = 4 per 10,000,000; point prevalence = 80 per 10,000,000."
+    question: What is the average duration of the disease?
+    inputs: { prevalence: 80, incidence: 20 }
+    expect: "4 years"
+    interpret: "D = P / I = 80 / 20 = 4 years. The mortality rate (4) is a distractor: P = I × D needs only prevalence and incidence. In the recording the lecturer reads the prevalence as 80 off the slide."
+    src: { page: 42, quote: "P = I * D\n80 = 20 * D\nD = 80/20 = 4 years" }
+    status: unverified
+    tags: [numbers, slide-question]
+  - id: res.L02.067
+    kind: calc
+    topic: prevalence
+    calculator: disease_duration
+    stem: "Malignant melanoma: annual incidence = 30 per 1,000,000; annual mortality = 5 per 1,000,000; point prevalence = 90 per 1,000,000."
+    question: What is the average duration of the disease?
+    inputs: { prevalence: 90, incidence: 30 }
+    expect: "3 years"
+    interpret: "D = P / I = 90 / 30 = 3 years. Dividing by the mortality (5) gives nonsense: it is not part of the formula."
+    src: { page: 70, quote: "Annual incidence rate of malignant melanoma = 30 per 1,000,000\nAnnual mortality rate of malignant melanoma = 5 per 1,000,000\nPoint prevalence rate of malignant melanoma = 90 per 1,000,000\n1. With the information given, the average duration of the disease is:\n  (A) 3 years\n  (B) 4 years\n  (C) 5 years\n  (D) 6 years\n  (E) unable to be determined due to insufficient data" }
+    status: unverified
+    tags: [numbers, slide-question]
+  - id: res.L02.068
+    kind: calc
+    topic: mortality
+    calculator: death_rate
+    stem: "A city of 2 million reports 12,000 deaths from all causes in one year."
+    question: What is the annual crude death rate?
+    inputs: { kind: crude, deaths: 12000, population: 2000000, per: "1000" }
+    expect: "6 per 1,000"
+    interpret: "All deaths over the estimated midyear population: 12,000 / 2,000,000 × 1000 = 6 deaths per 1000 population per year."
+    src: { page: 54, quote: "Crude death rate = Number of deaths (all causes) / Estimated midyear population x 1,000\nExample: Atlanta, Georgia, with a population of 2 million, reported a total of 12,000 deaths from all causes in 1985. The annual crude mortality rate is 12,000/2,000,000 x 1000 = 6, or 6 deaths per 1000 population per year." }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.069
+    kind: calc
+    topic: mortality
+    calculator: death_rate
+    stem: "Pneumocystis carinii pneumonia (PCP) in Miami: the 28-47 age group has 750 deaths in a midyear population of 150,000."
+    question: What is the age-specific mortality rate for this group?
+    inputs: { kind: age, deaths: 750, population: 150000, per: "1000" }
+    expect: "5 per 1,000"
+    interpret: "Deaths in the age group over that age group's own midyear population: 750 / 150,000 × 1000 = 5 per 1000, the highest of the three groups even though the >48 group has more deaths (1000)."
+    src: { page: 56, quote: "Table 5.1: Pneumocystis carinii pneumonia in Miami, Florida, 1989\n| Age group in years | Cases in Miami | Population of Miami | Deaths in Miami | State population of Florida |\n|---|---|---|---|---|\n| 17 to 27 | 100 | 50,000 | 50 | 1,000,000 |\n| 28 to 47 | 300 | 150,000 | 750 | 2,500,000 |\n| > 48 | 350 | 250,000 | 1000 | 4,000,000 |\n| Total | 800 | 450,000 | 1800 | 7,500,000 |\nExample: The group that has the highest age-specific mortality rate from pneumocystis carinii pneumonia per 1000 population is found as follows:\n  17-27 (50/50,000) x 1000 = 1.0 per 1000 population\n  28-47 (750/150,000) x 1000 = 5.0 per 1000 population\n  > 48 (1000/250,000) x 1000 = 4.0 per 1000 population" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.070
+    kind: calc
+    topic: mortality
+    calculator: death_rate
+    stem: "A county of 2.5 million has 6000 deaths in a year, 2500 of them from acute myocardial infarction (MI)."
+    question: What is the cause-specific mortality rate for acute MI?
+    inputs: { kind: cause, deaths: 2500, population: 2500000, per: "1000" }
+    expect: "1 per 1,000"
+    interpret: "Deaths from the cause over the whole midyear population: 2500 / 2,500,000 × 1000 = 1 per 1000. Over all deaths (2500 / 6000) it would be the proportionate mortality, 41.7%."
+    src: { page: 58, quote: "Cause-Specific Mortality Rate = Number of deaths due a specific disease / Total midyear population x 1000\nExample: There were 6000 deaths (1250 leukemia, 1750 stroke, 250 pneumonia, 250 Hodgkin's disease, and 2500 acute myocardial infarction) in Cook County, which had a population of 2.5 million in 1991. The cause-specific mortality rate for acute myocardial infarction is: (2500/2,500,000) x 1000 = 1 per 1000" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.071
+    kind: calc
+    topic: mortality
+    calculator: perinatal_mr
+    stem: "A governorate records, in one year, 40 fetal deaths at 28 weeks of gestation or more, 20 deaths of babies in their first 7 days, and 3960 live births."
+    question: What is the perinatal mortality rate (period I)?
+    inputs: { late_fetal_deaths: 40, early_neonatal_deaths: 20, live_births: 3960 }
+    expect: "15 per 1,000"
+    interpret: "(40 + 20) / (40 + 3960) × 1000 = 60 / 4000 × 1000 = 15 per 1000 total births. The denominator is fetal deaths + live births, not live births alone."
+    src: { page: 66, quote: "Specific Death Rates (cont'd): Perinatal mortality rates\nPerinatal mortality rate (Period I) = Number of fetal deaths of 28 or more weeks gestation + postnatal deaths (7 days) / Total fetal deaths + live births in the same period x 1,000" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.072
+    kind: calc
+    topic: mortality
+    calculator: mmr
+    stem: "A governorate records 15 maternal deaths and 30,000 live births in one year."
+    question: What is the maternal mortality ratio?
+    inputs: { maternal_deaths: 15, live_births: 30000 }
+    expect: "50 per 100,000"
+    interpret: "15 / 30,000 × 100,000 = 50 per 100,000 live births. Live births stand in for the women at risk, so it is a ratio, and the multiplier is 100,000, not 1000."
+    src: { page: 68, quote: "Maternal mortality ratio (MMR) = Number of maternal deaths in a given year and area / Number of live births in the same year and area x 100,000 live births" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.073
+    kind: mcq
+    topic: uses
+    stem: In the natural history of disease, the time from exposure to the onset of symptoms is called the incubation period in infectious diseases. What is it called in chronic diseases?
+    options: [Latent period, Incubation period, Prodromal period, Usual time of diagnosis]
+    answer: 0
+    why:
+      - "Correct. The lecturer, in the recording: incubation period for infectious diseases, latent (latency) period for chronic ones; pathologic changes can start before any symptom."
+      - Incubation is the word for infectious diseases.
+      - The prodrome is the first vague symptoms, so it comes after the onset, not before it.
+      - Diagnosis usually comes after the onset of symptoms, not before it.
+    src: { page: 13, quote: "Natural history of disease timeline:\n  Exposure, then Pathologic Changes, then Onset of Symptoms, then Usual Time of Diagnosis\n  Stage of Susceptibility\n  Stage of Subclinical Disease\n  Stage of Clinical Disease\n  Stage of Recovery, Disability or Death\nSource: Centers for Disease Control and Prevention. Principles of epidemiology, 2nd ed. Atlanta: U.S. Department of Health and Human Services; 1992." }
+    status: unverified
+  - id: res.L02.074
+    kind: mcq
+    topic: sources
+    stem: Why can't hospital records alone show the true size of a disease in the community?
+    options:
+      - They include only people who seek care, often the more severe cases
+      - They count outpatients but not inpatients
+      - They give rates but no case counts
+      - They are confidential and can never be used in research
+    answer: 0
+    why:
+      - "Correct. As the lecturer stresses in the recording: mild and unseen cases never reach hospital, so morbidity surveys add what routine records miss."
+      - Hospital records cover both inpatients and outpatients (slide 19).
+      - Records give counts; you need a population denominator to make a rate.
+      - They are a standard source of epidemiological data (slides 16-20).
+    src: { page: 19, quote: "6. Hospital Records:\n  Inpatient\n  Outpatient" }
+    status: unverified
+  - id: res.L02.075
+    kind: mcq
+    topic: measures
+    stem: Governorate A reports 500 tuberculosis (TB) cases and governorate B reports 250 in the same year. Why can't you say TB is more common in A?
+    options:
+      - Raw counts ignore the population size; you need a rate with a denominator and a time period
+      - A count is always less accurate than a proportion
+      - The two counts must first be added together
+      - TB counts can only be compared over ten years
+    answer: 0
+    why:
+      - "Correct. A count is good for planning resources (how many tablets to order), but comparing places needs a rate: cases over the population in a stated period. The lecturer makes this point in the recording."
+      - A count can be exact; it just can't compare populations of different size.
+      - Adding them answers nothing about which is more common.
+      - Any stated period works, as long as both rates use the same one.
+    src: { page: 22, quote: "3. Rates: the relative frequency of cases in a population during a specified period of time. e.g., Morbidity-Rates, Mortality-Rates" }
+    status: unverified

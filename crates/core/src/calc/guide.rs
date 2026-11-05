@@ -70,6 +70,7 @@ pub(super) static GUIDE_LISTS: &[&[(&str, Guide)]] = &[
     diabetes::GUIDES,
     ipss_mf::GUIDES,
     research::GUIDES,
+    frequency::GUIDES,
     sample_size::GUIDES,
 ];
 

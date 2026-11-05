@@ -1,4 +1,3 @@
-
 use super::*;
 
 fn one(text: &str) -> Hit {

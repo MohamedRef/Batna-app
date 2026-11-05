@@ -290,8 +290,13 @@ The book PDFs, their extracted page text and page images are copyrighted and
 | `anki/batna.apkg` | the latest Anki export |
 | `book-issues.md` | errors found in the book |
 
-**Mohamed must keep his own copy of this folder** (Mac or Drive). If it is
-gone, rebuild the text from the PDFs: `pdftotext -layout -f M -l M` per page
+**Backup: the private repo `MohamedRef/Batna-sources`** (since 2026-11-05)
+holds the PDFs, the extracted text, the course briefs and `book-issues.md`
+(~120 MB). Page images are not stored; `scripts/make-page-images.sh` there
+rebuilds them from the PDFs. **Never copy anything from it into Batna-app**
+(public). Clone it and set `BATNA_SOURCES=<clone>` for the content scripts.
+When new books, slides or extracted text arrive, commit them there too. If it
+is ever gone, rebuild the text from the PDFs: `pdftotext -layout -f M -l M` per page
 into the format above, `pdftoppm -r 200 -jpeg` for images, `tesseract` for
 image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 (default `/mnt/project-files/medstudy`): see
@@ -348,5 +353,6 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-05: source material backed up to the private repo `MohamedRef/Batna-sources` (§ 8).
 - 2026-11-05: handoff docs added (`AGENTS.md`, this file, course briefs, content scripts).
 - 2026-11-04: 1.0.0-alpha.2 released (#726); final critic round closed.

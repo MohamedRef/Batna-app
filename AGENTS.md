@@ -25,6 +25,26 @@ folders. Everything you need is in this repo.
   `just check`, wait for green CI, squash-merge yourself.
 - New alpha releases only when Mohamed asks («طلّع ألفا»).
 
+## Small files (fewer merge conflicts)
+
+Many PRs run in parallel, so code is split so that two PRs rarely edit the
+same file (Mohamed, 2026-11-05).
+
+- One responsibility per file. Aim for under ~500 lines; a Rust file over
+  **800 lines** should be split (`scripts/check-file-sizes.sh` lists them and
+  CI shows a warning; it never fails a PR).
+- Split a big file when your PR already changes it a lot, in its **own
+  commit or PR that only moves code**: no behaviour change, same tests, items
+  keep their paths through `pub use` re-exports.
+- A feature adds its own files and touches shared files by one line at most:
+  UI strings go in `crates/app/src/i18n/<feature>.rs` plus one
+  `pub mod <feature>;` line in `i18n/mod.rs`; a calculator is its own
+  `calc/<id>.rs` plus one `mod` line and one `REGISTRY` line.
+- Long lists that every PR appends to (registries, `mod` lists, tables) stay
+  one entry per line, sorted or grouped, so parallel additions merge cleanly.
+- Tests of a module live beside it in a child `tests.rs`, not inline at the
+  bottom of a big file.
+
 ## Keep the handoff current (required)
 
 **Every PR that changes behaviour, process, commands, CI, secrets, deploys,

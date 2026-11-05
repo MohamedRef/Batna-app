@@ -19,7 +19,7 @@ The original plan is in `docs/SPLIT.md` (copied from `/mnt/project-files/medstud
 
 ## Language
 - Reply to Mohamed in Egyptian Arabic, and keep it short. Code, comments, commit messages and docs are in English.
-- UI text is Egyptian Arabic (`crates/app/src/i18n.rs`, one module per feature). Medical content is in English, wrapped in `<bdi>` inside Arabic UI.
+- UI text is Egyptian Arabic (`crates/app/src/i18n/`, one file per feature). Medical content is in English, wrapped in `<bdi>` inside Arabic UI.
 
 ## Workflow
 - Branch from `origin/main` and open PRs with base `main`. Before merging, merge the latest `origin/main`, run `just check`, wait for green CI, then squash-merge it yourself.

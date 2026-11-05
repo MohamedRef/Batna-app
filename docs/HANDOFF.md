@@ -56,7 +56,7 @@ Dioxus 0.7 (HTML/CSS UI in a WebView), SQLite, plus minimal Kotlin for Android.
 |---|---|---|
 | `crates/core` | `batna-core` | Pure logic: content schema types, FSRS (`srs`), review store traits + HLC (`review`), session composer, exam/MCQ shuffling, calculators (`calc`: 92 in `REGISTRY`, `calc::normals`, `calc::guide`), lab ranges (`labs`), glossary finder, update feed checks, content pack format (`pack`). No UI, no IO; builds for wasm32. |
 | `crates/protocol` | `batna-protocol` | Every type that crosses a process boundary (sync ops, `sync::TABLES`, HLC, auth, update feed). Versioned serde. |
-| `crates/app` | `batna-app` | The Dioxus app for desktop, Android and web (`--no-default-features --features web`). One module dir per feature: `today`, `study`, `bank`, `case`, `oral`, `learn` (lessons), `lecture`, `calc`, `stats`, `plan`, `own` (own cards), `abbrdict`/`abbrsheet`, `labs`, `hover` (glossary peek), `pagesheet` (book page chips), `settings`, `update`, `cloud`, `store`, `platform`, `i18n.rs` (all Arabic UI text). |
+| `crates/app` | `batna-app` | The Dioxus app for desktop, Android and web (`--no-default-features --features web`). One module dir per feature: `today`, `study`, `bank`, `case`, `oral`, `learn` (lessons), `lecture`, `calc`, `stats`, `plan`, `own` (own cards), `abbrdict`/`abbrsheet`, `labs`, `hover` (glossary peek), `pagesheet` (book page chips), `settings`, `update`, `cloud`, `store`, `platform`, `i18n/` (all Arabic UI text, one file per feature). |
 | `crates/anki` | `batna-anki` | `.apkg` deck builder shared by tools and the app's «صدّر لـ Anki». |
 | `crates/server` | `batna-server` | **Batna Cloud**: Cloudflare Worker (workers-rs) + one Durable Object per account (devices, sync hub) + `Login` DO per username. No D1. |
 | `crates/tools` | `batna-tools` | `validate`, `packs`, `anki`, `refs` (book page refs), `ids`, `content` (next-id/new-item/diff/preflight), `verdicts`, `update` (keygen/manifest/sign/verify/channels/changes). |
@@ -87,7 +87,7 @@ usually missing, so run the recipe lines by hand). `.env` (git-ignored, from
 
 | Task | Command |
 |---|---|
-| Full gate before every commit | `just check` = `scripts/check-tracked-files.sh`, `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, `batna-tools validate`, `batna-tools packs build --check` |
+| Full gate before every commit | `just check` = `scripts/check-tracked-files.sh`, `scripts/check-file-sizes.sh` (warns only), `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, `batna-tools validate`, `batna-tools packs build --check` |
 | Content only | `cargo run -q -p batna-tools -- validate`; `just content-preflight` |
 | Mac / Linux desktop | `just run` (`BATNA_DATA_DIR=<dir>` for a throwaway profile) |
 | Android | `just android-keystore` (once), `just apk`, `just devices`, install with adb ([RUN.md](RUN.md)) |
@@ -338,6 +338,8 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 - Test debt: merge duplicate click-test helpers; more calculator tests against
   original-paper examples and cut-offs.
 - Not yet verified on a real device: Back-key routing, update notifications.
+- 14 Rust files are still over 800 lines (`scripts/check-file-sizes.sh`);
+  split each when a PR already changes it a lot (AGENTS.md § Small files).
 
 ## 11. Resume message
 
@@ -353,6 +355,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-05: big files split into smaller modules (i18n per feature; core `lesson`, `calc`, `labs`, `session`); AGENTS.md § Small files; `check-file-sizes.sh` warns in CI.
 - 2026-11-05: source material backed up to the private repo `MohamedRef/Batna-sources` (§ 8).
 - 2026-11-05: handoff docs added (`AGENTS.md`, this file, course briefs, content scripts).
 - 2026-11-04: 1.0.0-alpha.2 released (#726); final critic round closed.

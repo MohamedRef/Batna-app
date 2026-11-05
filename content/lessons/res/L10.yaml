@@ -1,0 +1,1240 @@
+schema: batna.lesson/v1
+lecture: res.L10
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L10.lesson1
+    title: "تجيب الداتا إزاي؟ 5 طرق وأدواتها"
+    hook: "عايز تعرف كام عيان في العيادة واخد الـ statin صح؟ تفتح الدفاتر، تتفرج، تسأل، ولا تديله ورقة؟"
+    minutes: 7
+    pages: [2, 8]
+    topics: [techniques]
+    goals:
+      - "تعدّ الـ 5 data collection techniques وأداة كل واحدة"
+      - "تختار الطريقة المناسبة من مزاياها وعيوبها"
+      - "تعرّف الـ focus group discussion (FGD)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 2
+        quote: "Introduction\n  Data collection is a crucial stage in the planning and implementation of a study. If the data collection has been superficial, biased or incomplete, data analysis becomes difficult, and the research report will be of poor quality."
+        title: "ليه الـ data collection مرحلة حاسمة؟"
+        text: |
+          أحسن statistician في الدنيا مش هيصلّح داتا اتجمعت غلط. لو الـ ==data collection== كانت **superficial** أو **biased** أو **incomplete**، الـ analysis بتبقى صعبة والـ report بيطلع ضعيف.
+
+          عشان كده بنحط كل مجهودنا في إننا نعمل **tools** مناسبة، ونجرّبها **أكتر من مرة** قبل ما ننزل الميدان.
+      - kind: figure
+        page: 3
+        quote: "Various data collection techniques can be used as:\n  Using available information (Record review)\n  Observing\n  Interviewing (face-to-face)\n  Administering written questionnaires\n  Focus group discussions"
+        title: "الـ 5 techniques"
+        alt: "Five boxes, one per data collection technique: using available information (record review), observing, interviewing face to face, administering written questionnaires, and focus group discussions."
+        caption: "خمس طرق: **record review**، **observing**، **interviewing**، **written questionnaire**، و**focus group discussion**."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="150" height="50" rx="8" class="fg-acc"/>
+            <text x="85" y="31" text-anchor="middle" class="t-sm t-b">Available information</text>
+            <text x="85" y="48" text-anchor="middle" class="t-sm t-mut">record review</text>
+            <rect x="170" y="10" width="150" height="50" rx="8" class="fg-box"/>
+            <text x="245" y="31" text-anchor="middle" class="t-sm t-b">Observing</text>
+            <text x="245" y="48" text-anchor="middle" class="t-sm t-mut">watch and measure</text>
+            <rect x="10" y="72" width="150" height="50" rx="8" class="fg-box"/>
+            <text x="85" y="93" text-anchor="middle" class="t-sm t-b">Interviewing</text>
+            <text x="85" y="110" text-anchor="middle" class="t-sm t-mut">face to face</text>
+            <rect x="170" y="72" width="150" height="50" rx="8" class="fg-acc"/>
+            <text x="245" y="93" text-anchor="middle" class="t-sm t-b">Written questionnaire</text>
+            <text x="245" y="110" text-anchor="middle" class="t-sm t-mut">self-administered</text>
+            <rect x="90" y="134" width="150" height="56" rx="8" class="fg-good"/>
+            <text x="165" y="156" text-anchor="middle" class="t-sm t-b">Focus group discussion</text>
+            <text x="165" y="174" text-anchor="middle" class="t-sm t-mut">6-12 people + facilitator</text>
+          </svg>
+      - kind: table
+        page: 6
+        quote: "Data collection techniques and tools\n| Data collection techniques | Data collection tools |\n|---|---|\n| Using available information | Checklist; data compilation forms |\n| Observing | Eyes and other senses, pen/paper, watch, scales, microscope, etc. |\n| Interviewing | Interview guide, checklist, questionnaire, tape recorder |\n| Administering written questionnaires | Questionnaire |"
+        title: "كل technique وأداتها (tools)"
+        columns: ["Technique", "Tools"]
+        rows:
+          - ["Using available information", "Checklist; data compilation forms"]
+          - ["Observing", "Eyes and other senses, pen/paper, watch, scales, microscope"]
+          - ["Interviewing", "Interview guide, checklist, questionnaire, tape recorder"]
+          - ["Written questionnaires", "Questionnaire"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: table
+        page: 4
+        quote: "Advantages and disadvantages of various data collection techniques\n| Technique | Advantages | disadvantages |\n|---|---|---|\n| Using available information | Inexpensive, because data is already there; Permits examination of trends over the past | Data is not always easily accessible; Ethical issues concerning confidentiality; Information may be imprecise or incomplete |\n| Observing | Gives more detailed and context-related information; Permits tests of reliability of responses to questionnaires | Ethical issues concerning confidentiality or privacy; Observer bias; Presence of data collector can influence the situation observed |"
+        title: "الدفاتر ضد الملاحظة: advantages وdisadvantages"
+        columns: ["", "Available information", "Observing"]
+        rows:
+          - ["Plus", "Inexpensive; trends over the past", "Detailed, context-related; tests reliability of questionnaire answers"]
+          - ["Minus", "Not always accessible; confidentiality; imprecise or incomplete", "Confidentiality or privacy; observer bias; collector's presence changes the situation"]
+        hide: [[0, 1], [1, 2]]
+      - kind: aside
+        tone: analogy
+        page: 4
+        quote: "Observing | Gives more detailed and context-related information; Permits tests of reliability of responses to questionnaires | Ethical issues concerning confidentiality or privacy; Observer bias; Presence of data collector can influence the situation observed"
+        text: |
+          أول ما الـ consultant يدخل الـ ward، فجأة كله بيغسل إيده. ده بالظبط عيب الـ **observing**: ==presence of data collector== بيغيّر الموقف اللي بتتفرج عليه.
+
+          وفي نفس الوقت الملاحظة بتكشف لو اللي الناس **قالوه** في الـ questionnaire مش هو اللي **بيعملوه** (tests of reliability).
+      - kind: check
+        page: 5
+        quote: "Interviewing | Suitable for illiterates; Permits clarification of questions; Higher response rate than written questionnaires | Presence of interviewer can influence responses; Information on events may be less complete than gained by observation"
+        question: "A survey in a village where many adults cannot read needs a high response rate. Best technique?"
+        options: ["Interviewing (face-to-face)", "Administering written questionnaires", "Using available information", "Observing"]
+        answer: 0
+        why:
+          - "صح: الـ interviewing مناسب للـ illiterates، بيسمح بـ clarification، والـ response rate أعلى من الورق."
+          - "الورق مايتعملش مع اللي مابيقراش، والـ response rate واطي."
+          - "الدفاتر مش هتوضّحلك سؤال، وممكن تبقى ناقصة."
+          - "الملاحظة بتدّي context، بس مش هتسأل حد سؤال."
+      - kind: table
+        page: 5
+        quote: "Advantages and disadvantages of various data collection techniques\n| Technique | Advantages | disadvantages |\n|---|---|---|\n| Interviewing | Suitable for illiterates; Permits clarification of questions; Higher response rate than written questionnaires | Presence of interviewer can influence responses; Information on events may be less complete than gained by observation |\n| Administering written questionnaires | Less expensive; Permits anonymity and may result in more honest responses; Eliminates bias due to phrasing questions differently with different respondents | cannot be used with illiterates; Low response rate; Questions may be misunderstood |"
+        title: "المقابلة ضد الورقة: advantages وdisadvantages"
+        columns: ["", "Interviewing", "Written questionnaire"]
+        rows:
+          - ["Plus", "Illiterates OK; clarification; higher response rate", "Less expensive; anonymity, more honest; no bias from phrasing questions differently"]
+          - ["Minus", "Interviewer influences responses; events less complete than observation", "Not for illiterates; low response rate; questions may be misunderstood"]
+        hide: [[0, 2], [1, 1]]
+      - kind: aside
+        tone: trap
+        page: 5
+        quote: "Administering written questionnaires | Less expensive; Permits anonymity and may result in more honest responses; Eliminates bias due to phrasing questions differently with different respondents | cannot be used with illiterates; Low response rate; Questions may be misunderstood"
+        text: |
+          الامتحان بيقلب الجدول: **higher response rate** للـ ==interviewing==، و**low response rate** للـ written questionnaire.
+
+          و**anonymity** وإجابات أصدق، والـ **phrasing** واحد للكل: دول مزايا الـ ==written questionnaire==. سؤال حساس زي الإدمان؟ الورقة أحسن.
+      - kind: explain
+        page: 7
+        quote: "Focus group discussion (FGD)\n  A group discussion of approximately 6 - 12 persons guided by a facilitator, during which group members talk freely and spontaneously about a certain topic."
+        title: "الـ focus group discussion (FGD)"
+        text: |
+          ==Focus group discussion (FGD)== = مناقشة جماعية لحوالي **6 لـ 12** شخص، بيديرها **facilitator**، والناس بتتكلم **بحرية وتلقائية** في موضوع معيّن.
+
+          تخيّل 8 أمهات في وحدة صحية بيتكلموا عن ليه مش بيكمّلوا تطعيمات ولادهم. الـ facilitator مش بيسأل كل واحدة لوحدها؛ هو بيفتح الموضوع وبيسيبهم يردّوا على بعض.
+      - kind: reveal
+        page: 8
+        quote: "A FGD is a qualitative method. Its purpose is to obtain in-depth information on concepts, perceptions and ideas of a group.\n  A FGD aims to be more than a question-answer interaction. The idea is that group members discuss the topic among themselves, with guidance from facilitator."
+        prompt: "الـ FGD بتطلّع أرقام نعمل عليها statistics؟ وإيه اللي بيفرّقها عن interview جماعي؟"
+        answer: |
+          لأ: الـ FGD ==qualitative method==. هدفها **in-depth information** عن الـ concepts والـ perceptions والـ ideas بتاعة الجروب.
+
+          والفرق إنها **أكتر من سؤال وجواب**: الأعضاء بيناقشوا **بعض**، والـ facilitator بيوجّه بس.
+      - kind: check
+        page: 7
+        quote: "A group discussion of approximately 6 - 12 persons guided by a facilitator, during which group members talk freely and spontaneously about a certain topic."
+        question: "A focus group discussion (FGD) is a group of approximately how many persons?"
+        options: ["6-12", "2-4", "15-30", "50-100"]
+        answer: 0
+        why:
+          - "صح: حوالي 6 لـ 12 مع facilitator."
+          - "عدد صغير قوي؛ مش هيبقى في مناقشة جماعية."
+          - "ده عدد الـ pretesting sample للـ questionnaire، مش الـ FGD."
+          - "ده survey، مش مناقشة."
+      - kind: try
+        items: [res.L10.002, res.L10.003, res.L10.009]
+    recap:
+      - "5 techniques: record review، observing، interviewing، written questionnaire، FGD."
+      - "Interviewing: illiterates، clarification، response rate أعلى؛ بس الـ interviewer بيأثر."
+      - "Written questionnaire: أرخص، anonymity، إجابات أصدق؛ بس مش للـ illiterates والـ response rate واطي."
+      - "FGD: 6–12 شخص + facilitator، qualitative، in-depth."
+    practice: [res.L10.001, res.L10.002, res.L10.003, res.L10.004, res.L10.005, res.L10.006, res.L10.007, res.L10.008, res.L10.009, res.L10.010, res.L10.011]
+  # ------------------------------------------------------------------
+  - id: res.L10.lesson2
+    title: "الـ questionnaire: تبدأ منين، وكل سؤال فيه فكرة واحدة"
+    hook: "«بتشرب قهوة ولا شاي كام فنجان في اليوم؟» سؤال شكله بريء، بس مستحيل يتجاوب صح."
+    minutes: 8
+    pages: [9, 71]
+    topics: [questionnaire, content]
+    goals:
+      - "تعرّف الـ questionnaire وتقول أهميته"
+      - "ترتّب خطوات الـ questionnaire design"
+      - "تكتشف الـ double-barreled question وتصلّحه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 11
+        quote: "What is a Questionnaire?\n  A questionnaire is a formalized set of questions for obtaining information from respondents.\n  The objective is to translate the researcher’s information needs into a set of specific questions that respondents are able to answer."
+        title: "يعني إيه questionnaire؟"
+        text: |
+          ==Questionnaire== = مجموعة أسئلة **formalized** بنجمع بيها معلومات من الـ respondents.
+
+          شغلته إنه **يترجم** اللي الباحث محتاج يعرفه لأسئلة محددة الـ respondent **يقدر يجاوبها**. انت محتاج تعرف «الـ adherence»، والعيان محتاج سؤال زي «نسيت الحباية كام مرة الأسبوع اللي فات؟».
+      - kind: explain
+        page: 12
+        quote: "Why Is a Questionnaire Important?\n  A questionnaire ensures standardization and comparability of the data across interviewers,\n  increases speed and accuracy of recording, and\n  facilitates data processing."
+        title: "ليه مهم؟ 3 أسباب"
+        text: |
+          - **Standardization وcomparability**: 3 residents بيسألوا نفس الأسئلة بنفس الكلام، فالداتا تتقارن.
+          - **Speed وaccuracy of recording**: بتعلّم في خانة بدل ما تكتب موضوع إنشا.
+          - **Data processing** أسهل: الداتا جاهزة تدخل الكمبيوتر.
+      - kind: aside
+        tone: tip
+        page: 13
+        quote: "Questionnaire Design Process\n  No scientific principles guarantee an optimal or ideal questionnaire.\n  Questionnaire design is as much an art as it is a science.\n  The creativity, skill, and experience of the researcher play a major role in the end design."
+        text: |
+          مفيش **scientific principles** تضمنلك questionnaire مثالي. الـ design **فن بقدر ما هو علم**: الـ creativity والـ skill والـ experience بتاعتك بتفرق.
+
+          اللي عندنا **guidelines** على شكل خطوات، تحميك من الغلطات الكبيرة.
+      - kind: figure
+        page: 10
+        quote: "Questionnaire design process.\n    What Information Is Needed?\n    How Should Individual Questions Be Framed?\n    What Should Be the Structure of the Question?\n      – Unstructured Questions\n      – Structured Questions\n    How Should the Question Be Worded?\n    Formatting the Questionnaire\n    Pretesting"
+        title: "سلّم الـ questionnaire design"
+        alt: "A staircase of six steps going up: what information is needed, how should questions be framed, structure of the question, wording, formatting, pretesting. Coding comes after."
+        caption: "من تحت لفوق: **information** ← **content** ← **structure** ← **wording** ← **format** ← **pretest**، وبعدها **coding**."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="190" width="150" height="30" rx="5" class="fg-acc"/>
+            <text x="85" y="210" text-anchor="middle" class="t-sm t-b">1 Information needed</text>
+            <rect x="44" y="155" width="150" height="30" rx="5" class="fg-box"/>
+            <text x="119" y="175" text-anchor="middle" class="t-sm">2 Frame each question</text>
+            <rect x="78" y="120" width="150" height="30" rx="5" class="fg-box"/>
+            <text x="153" y="140" text-anchor="middle" class="t-sm">3 Structure</text>
+            <rect x="112" y="85" width="150" height="30" rx="5" class="fg-box"/>
+            <text x="187" y="105" text-anchor="middle" class="t-sm">4 Wording</text>
+            <rect x="146" y="50" width="150" height="30" rx="5" class="fg-box"/>
+            <text x="221" y="70" text-anchor="middle" class="t-sm">5 Format</text>
+            <rect x="170" y="15" width="150" height="30" rx="5" class="fg-good"/>
+            <text x="245" y="35" text-anchor="middle" class="t-sm t-b">6 Pretesting</text>
+            <text x="10" y="30" class="t-sm t-mut">then: coding</text>
+          </svg>
+      - kind: order
+        page: 10
+        quote: "Questionnaire design process.\n    What Information Is Needed?\n    How Should Individual Questions Be Framed?\n    What Should Be the Structure of the Question?\n      – Unstructured Questions\n      – Structured Questions\n    How Should the Question Be Worded?\n    Formatting the Questionnaire\n    Pretesting"
+        prompt: "رتّب خطوات الـ questionnaire design:"
+        steps:
+          - "What information is needed?"
+          - "How should individual questions be framed?"
+          - "Structure of the question"
+          - "Wording of the question"
+          - "Formatting the questionnaire"
+          - "Pretesting"
+        why: "بتبدأ بالمعلومة اللي محتاجها، وبعدين محتوى كل سؤال، شكله (open أو closed)، صياغته، شكل الورقة، وآخر حاجة تجرّبه."
+      - kind: explain
+        page: 15
+        quote: "What Information Is Needed?\n  The first step in questionnaire design is to specify the information needed.\n  A continual review of the earlier stages of the research project, particularly the specific components of the problem, the research questions, and the hypotheses, will help keep the questionnaire focused.\n  Make sure the questionnaire items match your research objectives."
+        title: "الخطوة الأولى: إيه المعلومة اللي محتاجها؟"
+        text: |
+          أول خطوة = ==specify the information needed==.
+
+          ارجع كل شوية للـ **problem** ومكوّناته، والـ **research questions**، والـ **hypotheses**. ده اللي بيخلّي الـ questionnaire **focused**.
+
+          القاعدة: كل item في الورقة لازم يقابل **research objective**. سؤال مالوش objective؟ يتشال.
+      - kind: check
+        page: 71
+        quote: "4. The first step in questionnaire design is:\n  (a) Development of specific questions.\n  (b) Formulation of a statistical analysis plan.\n  (c) Pretesting.\n  (d) Problem identification."
+        question: "The first step in questionnaire design is:"
+        options: ["Problem identification", "Development of specific questions", "Formulation of a statistical analysis plan", "Pretesting"]
+        answer: 0
+        why:
+          - "صح، ده مفتاح الشريحة: الـ questionnaire بيبدأ من الـ problem وأسئلته، اللي بتقولك إيه المعلومة المطلوبة."
+          - "كتابة الأسئلة بتيجي بعد ما تعرف المعلومة المطلوبة."
+          - "الـ analysis plan مش من خطوات الـ questionnaire design هنا."
+          - "الـ pretesting آخر خطوة."
+      - kind: aside
+        tone: trap
+        page: 71
+        quote: "4. The first step in questionnaire design is:\n  (a) Development of specific questions.\n  (b) Formulation of a statistical analysis plan.\n  (c) Pretesting.\n  (d) Problem identification."
+        text: |
+          الشريحة 15 بتقول أول خطوة «**specify the information needed**»، ومفتاح سؤال الشريحة 71 «**problem identification**». الاتنين نفس الفكرة: المعلومة المطلوبة جاية من الـ problem.
+
+          لو الاختيارين جم مع بعض في سؤال، فكّر في صياغة السؤال؛ ولو جه زي الشريحة، اختار ==problem identification==.
+      - kind: explain
+        page: 18
+        quote: "Is the Question Necessary?\n  There are exceptions to this rule:\n  Early in the interviewing process when the researcher is attempting to build a relationship with respondents and capture their attention, a few easy-to-answer neutral questions may be helpful.\n  At times, certain questions may also be repeated for the purpose of assessing reliability or validity."
+        title: "السؤال ده لازم؟"
+        text: |
+          سؤال «حلو نعرفه» بس مالوش دعوة بالـ research problem؟ **يتشال**.
+
+          إلا في حالتين:
+          - في **أول** المقابلة: كام سؤال **neutral** سهل يبني **relationship** مع الـ respondent ويشد انتباهه.
+          - سؤال **بيتكرر** عن قصد عشان تقيس الـ ==reliability== أو الـ **validity**.
+      - kind: explain
+        page: 20
+        quote: "Pitfalls to Avoid\n  Questions that use the words “or\" or “and\" can lead to unsatisfactory responses - each question should contain only one concept.\n  Such a question is called a double-barreled question because two or more questions are combined into one."
+        title: "الـ double-barreled question"
+        text: |
+          سؤال فيه «**or**» أو «**and**» غالبًا جواه سؤالين. ده اسمه ==double-barreled question==: اتنين أو أكتر متجمّعين في سؤال واحد.
+
+          القاعدة: **كل سؤال = concept واحد**.
+
+          «بتدخن وبتشرب كحول؟» لو قال «لأ»، يقصد مش بيعمل الاتنين، ولا مش بيعمل واحد منهم؟ مش هتعرف.
+      - kind: case
+        page: 21
+        quote: "To avoid confusion, these questions should be asked separately,\n  How many cups of the following do you drink during a typical day?\n  Coffee: ----- cups/day\n  Tea: -----cups/day"
+        stem: "في بحث عن الـ caffeine والـ palpitations، السؤال: «How many cups of coffee or tea do you drink during a day?»"
+        steps:
+          - question: "What is wrong with it?"
+            options: ["Double-barreled: two concepts in one question", "Built-in assumption", "Too sensitive", "Needs aided recall"]
+            answer: 0
+            why: "القهوة والشاي اتنين concepts. رقم واحد مش هيتقسم عليهم."
+          - question: "Best fix?"
+            options: ["Coffee ___ cups/day; Tea ___ cups/day, on a typical day", "Add a \"don't know\" option", "Move it to the end"]
+            answer: 0
+            why: "زي الشريحة: كل مشروب لوحده، في **typical day**."
+      - kind: mnemonic
+        page: 20
+        quote: "Questions that use the words “or\" or “and\" can lead to unsatisfactory responses - each question should contain only one concept."
+        word: "ONE"
+        parts:
+          - { key: "O", text: "Only one concept per question: or/and = double-barreled" }
+          - { key: "N", text: "Neutral easy questions early to build the relationship: the allowed extra" }
+          - { key: "E", text: "Eliminate nice-to-know questions that don't serve the research problem" }
+        hook: "كل سؤال = **ONE** فكرة."
+      - kind: try
+        items: [res.L10.015, res.L10.019, res.L10.020]
+    recap:
+      - "Questionnaire = أسئلة formalized تترجم احتياجك لأسئلة الـ respondent يقدر يجاوبها."
+      - "أهميته: standardization، speed وaccuracy، data processing."
+      - "الخطوات: information ← framing ← structure ← wording ← format ← pretesting."
+      - "Double-barreled = سؤالين في واحد (or/and): اسألهم منفصلين."
+    practice: [res.L10.012, res.L10.013, res.L10.014, res.L10.015, res.L10.016, res.L10.017, res.L10.018, res.L10.019, res.L10.020, res.L10.021, res.L10.022]
+  # ------------------------------------------------------------------
+  - id: res.L10.lesson3
+    title: "يقدر يجاوب؟ وعايز يجاوب؟"
+    hook: "تسأل عيان «عملت إيه تحاليل آخر 3 شهور؟» هيقولك «حاجات كتير يا دكتور». المشكلة في السؤال، مش فيه."
+    minutes: 8
+    pages: [22, 73]
+    topics: [content]
+    goals:
+      - "تعرف ليه الـ respondent مايقدرش يجاوب، وتصلّحها (don't know، aided recall)"
+      - "تكتشف الـ built-in assumption وعدم التطابق بين السؤال والاختيارات"
+      - "تتعامل مع السؤال المتعب والسؤال الحساس"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 22
+        quote: "Are the Respondents Able to Answer the Question?\n  Respondents may not always be able to answer the questions posed to them.\n  Why ??\n  Not informed.\n  Don’t remember."
+        title: "سؤالين قبل أي سؤال"
+        alt: "Two branches. Able to answer? If not informed, add a don't know option; if he can't remember, use aided recall. Willing to answer? If too much effort, give a checklist; if too sensitive, put it at the end and use categories."
+        caption: "**مش قادر**: not informed ← «don't know»؛ ناسي ← aided recall. **مش عايز**: متعب ← checklist؛ حساس ← في الآخر وبفئات."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L10c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="10" y="10" width="150" height="34" rx="6" class="fg-acc"/>
+            <text x="85" y="32" text-anchor="middle" class="t-sm t-b">Able to answer?</text>
+            <rect x="170" y="10" width="150" height="34" rx="6" class="fg-acc"/>
+            <text x="245" y="32" text-anchor="middle" class="t-sm t-b">Willing to answer?</text>
+            <path d="M45 44V70" class="fg-arrow" marker-end="url(#L10c)"/>
+            <path d="M125 44V70" class="fg-arrow" marker-end="url(#L10c)"/>
+            <path d="M205 44V70" class="fg-arrow" marker-end="url(#L10c)"/>
+            <path d="M285 44V70" class="fg-arrow" marker-end="url(#L10c)"/>
+            <rect x="8" y="74" width="74" height="40" rx="5" class="fg-bad"/>
+            <text x="45" y="98" text-anchor="middle" class="t-sm">Not informed</text>
+            <rect x="88" y="74" width="74" height="40" rx="5" class="fg-bad"/>
+            <text x="125" y="98" text-anchor="middle" class="t-sm">Can't recall</text>
+            <rect x="168" y="74" width="74" height="40" rx="5" class="fg-bad"/>
+            <text x="205" y="98" text-anchor="middle" class="t-sm">Effort</text>
+            <rect x="248" y="74" width="74" height="40" rx="5" class="fg-bad"/>
+            <text x="285" y="98" text-anchor="middle" class="t-sm">Sensitive</text>
+            <path d="M45 114V140" class="fg-arrow" marker-end="url(#L10c)"/>
+            <path d="M125 114V140" class="fg-arrow" marker-end="url(#L10c)"/>
+            <path d="M205 114V140" class="fg-arrow" marker-end="url(#L10c)"/>
+            <path d="M285 114V140" class="fg-arrow" marker-end="url(#L10c)"/>
+            <rect x="8" y="144" width="74" height="56" rx="5" class="fg-good"/>
+            <text x="45" y="168" text-anchor="middle" class="t-sm">add</text>
+            <text x="45" y="184" text-anchor="middle" class="t-sm t-b">don't know</text>
+            <rect x="88" y="144" width="74" height="56" rx="5" class="fg-good"/>
+            <text x="125" y="168" text-anchor="middle" class="t-sm t-b">aided</text>
+            <text x="125" y="184" text-anchor="middle" class="t-sm t-b">recall</text>
+            <rect x="168" y="144" width="74" height="56" rx="5" class="fg-good"/>
+            <text x="205" y="168" text-anchor="middle" class="t-sm">give a</text>
+            <text x="205" y="184" text-anchor="middle" class="t-sm t-b">checklist</text>
+            <rect x="248" y="144" width="74" height="56" rx="5" class="fg-good"/>
+            <text x="285" y="164" text-anchor="middle" class="t-sm t-b">at the end</text>
+            <text x="285" y="180" text-anchor="middle" class="t-sm">+ categories</text>
+          </svg>
+      - kind: explain
+        page: 23
+        quote: "If not informed:\n  Respondents may provide answers but those answers will be misleading.\n  What to do??\n  If it is suspected that many respondents may be uninformed about the topic, “don't know” should be added to the list of response alternatives."
+        title: "مش عارف: «don't know»"
+        text: |
+          الـ respondent اللي **not informed** مش هيسكت؛ هيجاوب أي حاجة، والإجابة هتبقى **misleading**.
+
+          لو شاكك إن ناس كتير مش عارفة الموضوع، زوّد ==don't know== للاختيارات. اسأل عيان سكر «الـ HbA1c target بتاعك كام؟» من غير «مش عارف»، وهتلاقي أرقام عشوائية.
+      - kind: explain
+        page: 24
+        quote: "Pitfalls to Avoid\nAvoid Built-in assumptions\n  Questions that assume familiarity with a given topic:\n  Example: This ANC service is an improvement over our last one. [ 1=strongly disagree, 5=strongly agree]\n  This question assumes that the survey participant has experience with the last ANC service."
+        title: "Built-in assumption"
+        text: |
+          سؤال بيفترض إن الـ respondent **عارف الموضوع**.
+
+          مثال الشريحة: «خدمة الـ antenatal care (ANC) دي أحسن من اللي قبلها» من 1 لـ 5. طب لو دي أول حمل ليها ومشافتش الخدمة القديمة؟ السؤال فيه ==built-in assumption==.
+      - kind: check
+        page: 25
+        quote: "Pitfalls to Avoid\n  The question and answer options don't match.\n  Have you had pain in the last week?\n  [ ] Never [ ] Seldom [ ] Often [ ] Very often\n  – Grammatically incorrect and can be confusing.\n  – Question should be changed to: How often have you had pain in the last week?\" or the response options should be changed to No/Yes."
+        question: "\"Have you had pain in the last week? [ ] Never [ ] Seldom [ ] Often [ ] Very often\". Best fix?"
+        options: ["\"How often have you had pain in the last week?\" or make the options No/Yes", "Add \"don't know\"", "Split it into two questions", "Put it at the end"]
+        answer: 0
+        why:
+          - "صح: السؤال واختياراته **don't match** (سؤال آه/لأ واختيارات تكرار). صلّح ناحية من الاتنين."
+          - "العيان عارف كان عنده ألم ولا لأ."
+          - "ده concept واحد، مش double-barreled."
+          - "الألم مش موضوع حساس."
+      - kind: reveal
+        page: 26
+        quote: "Pitfalls to Avoid\n  The question and answer options don't match.\n  I am sometimes depressed. [ ] Agree [ ] Disagree\n  Question about intensity is given agree/disagree options.\n  Disagreeing with this statement could mean that the person is often depressed or never depressed."
+        prompt: "«I am sometimes depressed. Agree / Disagree». واحد اختار Disagree. يقصد إيه؟"
+        answer: |
+          مش هتعرف! ممكن يقصد إنه **often depressed** أو **never depressed**. السؤال عن **intensity** واختياراته agree/disagree، فالـ question and answer options don't match.
+
+          الأوضح: «بتحس إنك مكتئب قد إيه؟» واختيارات **frequency**: never، sometimes، often.
+      - kind: explain
+        page: 28
+        quote: "If cannot remember:\n  “Which of these types of cereals did you eat yesterday? ……………”\n  Aided Recall\n  A question that employs aided recall attempts to stimulate the respondent's memory by providing cues related to the event of interest."
+        title: "ناسي: unaided ضد aided recall"
+        text: |
+          - **Unaided recall**: «فاكر أكلت أنهي cereals امبارح؟» من غير أي مساعدة.
+          - ==Aided recall==: «أنهي من دول أكلت امبارح؟» وتدّيه لستة. اللستة **cues** بتنشّط الذاكرة.
+
+          زي ما بتسأل العيان «واخد أنهي دوا للضغط؟» وانت ماسك علب الأدوية قدامه.
+      - kind: check
+        page: 28
+        quote: "“Which of these types of cereals did you eat yesterday? ……………”\n  Aided Recall"
+        question: "\"Which of these types of cereals did you eat yesterday?\" with a list. This is:"
+        options: ["Aided recall", "Unaided recall", "A built-in assumption", "Skip logic"]
+        answer: 0
+        why:
+          - "صح: اللستة cues بتساعد الذاكرة."
+          - "الـ unaided من غير لستة: «فاكر أكلت إيه؟»."
+          - "السؤال مش بيفترض حاجة."
+          - "الـ skip logic بيوديك لسؤال تاني حسب إجابتك."
+      - kind: explain
+        page: 31
+        quote: "In the list that follows, please check all the investigations you did during the last 3 months.\n  1. CBC ____\n  2. Blood glucose level ____\n  3. Urine analysis ____\n  4. ECG ____\n  16. ABG ____\n  17. Echocardiography ____"
+        title: "مش عايز يجاوب: too much effort"
+        text: |
+          قادر يجاوب بس **unwilling** ليه؟ يا السؤال **متعب**، يا **حساس**.
+
+          «اكتب كل التحاليل اللي عملتها آخر 3 شهور» = مجهود كبير، فهيسيبها فاضية. الحل: **لستة يعلّم عليها**: complete blood count (CBC)، blood glucose، urine analysis، electrocardiogram (ECG)... لحد arterial blood gas (ABG) والـ echocardiography.
+      - kind: explain
+        page: 33
+        quote: "What to do??\n  To increase the likelihood of obtaining sensitive information, such topics should be placed at the end of the questionnaire.\n  – By then, rapport has been created and legitimacy of the project established, making respondents more willing to give information."
+        title: "Too sensitive: حطّه في الآخر"
+        text: |
+          الـ **sensitive topics** (فلوس، حياة عائلية، معتقدات سياسية ودينية، حوادث أو جرايم) صعب تاخدها. فكّر في الـ demographic والـ cultural characteristics بتوعك.
+
+          الحل: حطّها في ==at the end of the questionnaire==. وقتها الـ **rapport** اتبنى والبحث بقى له **legitimacy**، فالناس بتبقى أكتر استعداد تحكي.
+      - kind: aside
+        tone: joke
+        page: 33
+        quote: "To increase the likelihood of obtaining sensitive information, such topics should be placed at the end of the questionnaire."
+        text: |
+          تخيّل أول سؤال في الـ questionnaire: «مرتبك كام بالظبط؟». ده مش سؤال، ده **باب في وشك**.
+
+          اسأل عن السن والشغل والأكل الأول، و**الفلوس في الآخر**، وبـ **categories** كمان.
+      - kind: check
+        page: 33
+        quote: "To increase the likelihood of obtaining sensitive information, such topics should be placed at the end of the questionnaire."
+        question: "To increase the likelihood of obtaining sensitive information, such topics should be placed:"
+        options: ["At the end of the questionnaire", "At the beginning", "Just after the demographic information", "In the middle part"]
+        answer: 0
+        why:
+          - "صح: الـ rapport والـ legitimacy بيكونوا اتبنوا."
+          - "في الأول مفيش rapport لسه، وممكن يقفل الـ survey."
+          - "لسه بدري؛ الـ legitimacy ماتبنتش."
+          - "أحسن من الأول، بس الشريحة قالت الآخر."
+      - kind: explain
+        page: 34
+        quote: "Too sensitive;\n  What is your household's annual income?\n  Which one of the following categories best describes your household’s annual income?\n  __ under $25,000\n  __ $25,001-$50,000\n  __ $50,001-$75,000\n  __ over $75,000"
+        title: "واسأل الحساس بـ categories"
+        text: |
+          بدل «**annual income** بتاعك كام؟» (رقم مفتوح)، اسأل: «أنهي **category** بتوصف دخلك السنوي؟» واختيارات زي under $25,000، $25,001–$50,000...
+
+          الفئة أخف على الـ respondent من الرقم بالظبط.
+      - kind: try
+        items: [res.L10.023, res.L10.029, res.L10.031]
+    recap:
+      - "مش قادر: not informed ← زوّد «don't know»؛ ناسي ← aided recall (لستة cues)."
+      - "Built-in assumption: سؤال بيفترض إنه عارف الموضوع (خدمة الـ ANC القديمة)."
+      - "السؤال لازم يطابق اختياراته: question and answer options match."
+      - "مش عايز: متعب ← checklist؛ حساس ← في الآخر وبـ categories."
+    practice: [res.L10.023, res.L10.024, res.L10.025, res.L10.026, res.L10.027, res.L10.028, res.L10.029, res.L10.030, res.L10.031, res.L10.032, res.L10.033]
+  # ------------------------------------------------------------------
+  - id: res.L10.lesson4
+    title: "Open ولا closed؟ وسلّم الـ Likert"
+    hook: "سؤال مفتوح بيديك كنز، بس تحليله كابوس. سؤال مقفول سهل، بس عمله صعب. تختار إمتى إيه؟"
+    minutes: 9
+    pages: [35, 67]
+    topics: [structure]
+    goals:
+      - "تفرّق بين open-ended وclosed-ended وإمتى تستخدم كل واحد"
+      - "تكتب اختيارات mutually exclusive وcollectively exhaustive وتتحكم في الـ order bias"
+      - "تعرف الـ Likert scale والـ 5-point scale"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 37
+        quote: "When to use it??\n  As first questions on a topic.\n  They enable the respondents to express general attitudes and opinions without the bias associated with restricting responses to predefined alternatives\n  This can help the researcher interpret their responses to structured questions.\n  »Useful in exploratory research."
+        title: "Unstructured (open-ended) questions"
+        text: |
+          ==Open-ended questions== = الـ respondent بيجاوب **بكلامه**؛ اسمها كمان free-response أو free-answer.
+
+          بنستخدمها:
+          - **كأول أسئلة** في موضوع: يعبّر عن رأيه من غير bias الاختيارات الجاهزة، وده بيساعدك تفهم إجاباته على الـ structured questions.
+          - في الـ **exploratory research**.
+
+          عيبها: بتاخد وقت فممكن يسيبها أو يقفل الـ survey، والـ recording والـ **coding** والـ tabulation والـ analysis معقدين.
+      - kind: explain
+        page: 40
+        quote: "Closed-ended Questions\n  The researcher provides a choice of answers, and respondents are asked to select one or more of the alternatives given.\n  Answers can be \"yes/no\" or a choice of multiple answers."
+        title: "Structured (closed-ended) questions"
+        text: |
+          ==Closed-ended questions==: انت بتحدد الإجابات وشكلها، وهو بيختار واحدة أو أكتر: **yes/no**، أو **multiple choice**، أو **scale**.
+
+          «عندك سكر؟ آه / لأ». «زرت الدكتور كام مرة الشهر اللي فات؟ مرة، مرتين، 3، أكتر من 3، مش متأكد».
+      - kind: table
+        page: 48
+        quote: "Open-Ended and Closed Questions\n| Open-ended | | Closed |\n|---|---|---|\n| Slow | Speed of completion | Fast |\n| High | Exploratory nature | Low |\n| High | Breadth and depth | Low |\n| Easy | Ease of preparation | Difficult |\n| Difficult | Ease of analysis | Easy |"
+        title: "Open-ended ضد closed"
+        columns: ["", "Open-ended", "Closed"]
+        rows:
+          - ["Speed of completion", "Slow", "Fast"]
+          - ["Exploratory nature", "High", "Low"]
+          - ["Breadth and depth", "High", "Low"]
+          - ["Ease of preparation", "Easy", "Difficult"]
+          - ["Ease of analysis", "Difficult", "Easy"]
+        hide: [[0, 2], [3, 1], [3, 2], [4, 1]]
+      - kind: aside
+        tone: trap
+        page: 47
+        quote: "Disadvantages\n  It is difficult to develop effective multiple-choice options.\n  Often, exploratory research must be conducted using open ended questions to identify the appropriate response options."
+        text: |
+          الخدعة: الـ open-ended **سهل في التحضير** و**صعب في التحليل**. الـ closed **صعب في التحضير** و**سهل في التحليل**.
+
+          يعني لو السؤال «disadvantage of structured questions»، الإجابة ==difficult to develop==، مش «صعب في التحليل».
+      - kind: check
+        page: 47
+        quote: "Disadvantages\n  It is difficult to develop effective multiple-choice options."
+        question: "Disadvantages of structured questions include:"
+        options: ["Difficult to develop", "Require long time to answer", "Difficult in data analysis", "Interviewer bias is increased"]
+        answer: 0
+        why:
+          - "صح: صعب تعمل multiple-choice options كويسة."
+          - "ده عيب الـ open-ended."
+          - "الـ closed أسهل في التحليل."
+          - "الـ interviewer bias بيقل مع الـ structured questions."
+      - kind: explain
+        page: 43
+        quote: "Number of alternatives\n  Closed-ended questions should include choices that cover the full range of possible alternatives.\n  The alternatives should be mutually exclusive and collectively exhaustive."
+        title: "الاختيارات: تغطي كل حاجة ومتتداخلش"
+        text: |
+          في الـ closed-ended خلي بالك من حاجتين: **number of alternatives** و**order bias**.
+
+          الاختيارات لازم تبقى:
+          - ==mutually exclusive==: مفيش إجابة تقع في خانتين.
+          - ==collectively exhaustive==: كل الإجابات الممكنة ليها خانة.
+
+          وزوّد «**other (please specify)**» لما يلزم، وقول بوضوح: «اختار واحدة» ولا «اختار كل اللي ينطبق».
+      - kind: check
+        page: 43
+        quote: "The alternatives should be mutually exclusive and collectively exhaustive.\n  » Example: How many times in the past month have you visited your physician? [ 0 1-2 3-4 5 or more]"
+        question: "\"How many times in the past month have you visited your physician?\" Best set of alternatives?"
+        options: ["0 / 1-2 / 3-4 / 5 or more", "0 / 1-2 / 2-4 / 4 or more", "1-2 / 3-4 / 5-6", "Rarely / Sometimes / Often"]
+        answer: 0
+        why:
+          - "صح: mutually exclusive وcollectively exhaustive، زي الشريحة."
+          - "2 و4 كل واحد في خانتين: مش mutually exclusive."
+          - "اللي مزارش خالص أو زار 7 مرات مالوش خانة: مش exhaustive."
+          - "كلام مطاط، كل واحد هيفهمه رقم مختلف."
+      - kind: explain
+        page: 45
+        quote: "Order or position bias\n  It is the respondents' tendency to check an alternative merely because it occupies a certain position in a list.\n  Alternatives that appear at the beginning and, to a lesser degree, at the end of a list have a tendency to be selected most often.\n  Order bias can be controlled by preparing several forms of the questionnaire with changes in the order of the alternatives from form to form unless the alternatives represent ordered categories."
+        title: "Order (position) bias"
+        text: |
+          ==Order bias== = إن الـ respondent يختار اختيار **عشان مكانه** في اللستة. الأول بيتختار أكتر، والآخر بدرجة أقل.
+
+          الحل: اعمل **كذا form** من الـ questionnaire وغيّر ترتيب الاختيارات، **إلا** لو الاختيارات **ordered categories** (زي 0، 1–2، 3–4) لازم تفضل مترتبة.
+      - kind: aside
+        tone: analogy
+        page: 45
+        quote: "Alternatives that appear at the beginning and, to a lesser degree, at the end of a list have a tendency to be selected most often."
+        text: |
+          زي منيو المطعم: أول طبق في الصفحة بيتطلب أكتر، وآخر طبق بعده، والوسط محدش بيقراه. ده **position bias** بالظبط.
+
+          الـ alternatives اللي في الـ **beginning** of a list بتتـ selected أكتر، وبعدها اللي في الآخر.
+      - kind: explain
+        page: 50
+        quote: "Likert Scale\n  Named after its developer, Rensis Likert, the Likert scale is one of the most widely used itemized scales.\n  The end-points of a Likert scale are typically “strongly disagree” and “strongly agree.”\n  The respondents are asked to indicate their degree of agreement by checking one of five response categories."
+        title: "Rating scales: الـ Likert"
+        text: |
+          الـ **rating scale questions** بتقيس انتشار **attitude** أو opinion أو knowledge أو behavior. أشهر نوعين: ==Likert scale== و**semantic differential scale**.
+
+          الـ Likert (على اسم **Rensis Likert**) من أكتر الـ itemized scales استخدامًا: **5 response categories** من «strongly disagree» لـ «strongly agree».
+      - kind: figure
+        page: 50
+        quote: "The end-points of a Likert scale are typically “strongly disagree” and “strongly agree.”\n  The respondents are asked to indicate their degree of agreement by checking one of five response categories."
+        title: "الـ Likert scale"
+        alt: "A five-point Likert scale for the statement 'The customer service representative was knowledgeable': 1 strongly disagree, 2 disagree, 3 neither agree nor disagree, 4 agree, 5 strongly agree, each with a circle to tick."
+        caption: "5 خانات: **1 strongly disagree** لحد **5 strongly agree**، والنص **neither**."
+        svg: |
+          <svg viewBox="0 0 330 130" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="20" text-anchor="middle" class="t-sm t-b">The staff were helpful</text>
+            <path d="M33 60H297" class="fg-arrow"/>
+            <circle cx="33" cy="60" r="10" class="fg-bad"/>
+            <circle cx="99" cy="60" r="10" class="fg-box"/>
+            <circle cx="165" cy="60" r="10" class="fg-thin"/>
+            <circle cx="231" cy="60" r="10" class="fg-box"/>
+            <circle cx="297" cy="60" r="10" class="fg-good"/>
+            <text x="33" y="64" text-anchor="middle" class="t-sm t-b">1</text>
+            <text x="99" y="64" text-anchor="middle" class="t-sm t-b">2</text>
+            <text x="165" y="64" text-anchor="middle" class="t-sm t-b">3</text>
+            <text x="231" y="64" text-anchor="middle" class="t-sm t-b">4</text>
+            <text x="297" y="64" text-anchor="middle" class="t-sm t-b">5</text>
+            <text x="33" y="92" text-anchor="middle" class="t-sm">Strongly</text>
+            <text x="33" y="106" text-anchor="middle" class="t-sm">disagree</text>
+            <text x="99" y="92" text-anchor="middle" class="t-sm">Disagree</text>
+            <text x="165" y="92" text-anchor="middle" class="t-sm">Neither</text>
+            <text x="231" y="92" text-anchor="middle" class="t-sm">Agree</text>
+            <text x="297" y="92" text-anchor="middle" class="t-sm">Strongly</text>
+            <text x="297" y="106" text-anchor="middle" class="t-sm">agree</text>
+          </svg>
+      - kind: sort
+        page: 52
+        quote: "Guidelines for using a 5-point scale\n| Satisfaction | How satisfied are you with...? | Very Satisfied | Satisfied | Neither Satisfied nor Dissatisfied | Dissatisfied | Very Dissatisfied |\n| Extent | To what extent do you...? | To a large extent | To a moderate extent | To some extent | To little extent | Not at all |\n| Relative Quantity | Should... do less or more of...? | Much more | Somewhat more | Fine as is | Somewhat less | Much less |\n| Quality Rating | Please rate the quality of... | Excellent | Above Average | Average | Below Average | Poor |"
+        prompt: "حط كل إجابة في مكانها على الـ 5-point scale:"
+        bins: ["5 (top)", "3 (middle)", "1 (bottom)"]
+        cards:
+          - { text: "Very satisfied", bin: 0 }
+          - { text: "To a large extent", bin: 0 }
+          - { text: "Excellent", bin: 0 }
+          - { text: "To some extent", bin: 1 }
+          - { text: "Fine as is", bin: 1 }
+          - { text: "Average", bin: 1 }
+          - { text: "Not at all", bin: 2 }
+          - { text: "Much less", bin: 2 }
+          - { text: "Poor", bin: 2 }
+        why: "الـ 5 = أعلى درجة (very satisfied، to a large extent، much more، excellent). الـ 3 = النص (neither، to some extent، fine as is، average). الـ 1 = أقل درجة (very dissatisfied، not at all، much less، poor)."
+      - kind: try
+        items: [res.L10.036, res.L10.039, res.L10.047]
+    recap:
+      - "Open-ended: بكلامه، أول أسئلة الموضوع وexploratory؛ سهل تحضّره، صعب تحلّله."
+      - "Closed: اختيارات جاهزة؛ صعب تحضّره، سهل تحلّله، الـ interviewer bias أقل."
+      - "الاختيارات: mutually exclusive + collectively exhaustive + «other (please specify)»."
+      - "Order bias: الأول بيتختار أكتر؛ غيّر الترتيب بين forms إلا لو ordered categories."
+      - "Likert: 5 categories من strongly disagree لـ strongly agree."
+    practice: [res.L10.034, res.L10.035, res.L10.036, res.L10.037, res.L10.038, res.L10.039, res.L10.040, res.L10.041, res.L10.042, res.L10.043, res.L10.044, res.L10.045, res.L10.046, res.L10.047, res.L10.048, res.L10.049, res.L10.050]
+  # ------------------------------------------------------------------
+  - id: res.L10.lesson5
+    title: "الصياغة، الشكل، الـ pretest والـ coding"
+    hook: "سؤال واحد مكتوب وحش ممكن يبوّظ بحث سنة. 5 قواعد للصياغة وتجربة على 15–30 واحد بيحموك."
+    minutes: 8
+    pages: [53, 69]
+    topics: [wording]
+    goals:
+      - "تفرّق بين الـ response error والـ non-response error"
+      - "تحفظ الـ 5 guidelines للصياغة"
+      - "تعرف الـ skip logic والـ pretesting وأنواع الـ coding"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 53
+        quote: "How Should the Question Be Worded?\n  Translating the information needed into clearly worded questions that are easily understood is the most difficult aspect of questionnaire development."
+        title: "أصعب حاجة: الصياغة"
+        text: |
+          إنك تحوّل المعلومة اللي محتاجها لـ **clearly worded questions** سهلة الفهم = ==the most difficult aspect== في عمل الـ questionnaire.
+      - kind: figure
+        page: 54
+        quote: "Poorly worded questions can also frustrate the respondents to the point that they refuse to answer those questions or items.\n  This is referred to as item non-response and leads to non-response error.\n  If respondents interpret questions differently than intended by the researcher, serious bias can occur, leading to response error."
+        title: "سؤال مكتوب وحش ← غلطتين"
+        alt: "A poorly worded question leads two ways. If the respondent is frustrated and refuses, that is item non-response, giving non-response error. If he answers but understands it differently from the researcher, that is response error."
+        caption: "**رفض يجاوب** ← item non-response ← **non-response error**. **جاوب بس فهم غلط** ← **response error**."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L10w" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="85" y="10" width="160" height="36" rx="6" class="fg-ink"/>
+            <text x="165" y="33" text-anchor="middle" class="t-sm t-b">Poorly worded question</text>
+            <path d="M130 46L80 82" class="fg-arrow-bad" marker-end="url(#L10w)"/>
+            <path d="M200 46L250 82" class="fg-arrow-bad" marker-end="url(#L10w)"/>
+            <rect x="10" y="86" width="145" height="44" rx="6" class="fg-box"/>
+            <text x="82" y="105" text-anchor="middle" class="t-sm">Frustrated, refuses</text>
+            <text x="82" y="121" text-anchor="middle" class="t-sm t-mut">item non-response</text>
+            <rect x="175" y="86" width="145" height="44" rx="6" class="fg-box"/>
+            <text x="247" y="105" text-anchor="middle" class="t-sm">Answers, but reads</text>
+            <text x="247" y="121" text-anchor="middle" class="t-sm">it differently</text>
+            <path d="M82 130V152" class="fg-arrow-bad" marker-end="url(#L10w)"/>
+            <path d="M247 130V152" class="fg-arrow-bad" marker-end="url(#L10w)"/>
+            <rect x="10" y="156" width="145" height="34" rx="6" class="fg-bad"/>
+            <text x="82" y="178" text-anchor="middle" class="t-sm t-b">Non-response error</text>
+            <rect x="175" y="156" width="145" height="34" rx="6" class="fg-bad"/>
+            <text x="247" y="178" text-anchor="middle" class="t-sm t-b">Response error</text>
+          </svg>
+      - kind: check
+        page: 54
+        quote: "If respondents interpret questions differently than intended by the researcher, serious bias can occur, leading to response error."
+        question: "If respondents interpret questions differently than intended by the researcher, this leads to:"
+        options: ["Response error", "Non-response error", "Aided recall", "Unaided recall"]
+        answer: 0
+        why:
+          - "صح: جاوب، بس الإجابة معناها حاجة تانية = serious bias."
+          - "الـ non-response error لما يرفض يجاوب (item non-response)."
+          - "الـ aided recall تكنيك بيساعد الذاكرة."
+          - "الـ unaided recall سؤال من غير cues."
+      - kind: mnemonic
+        page: 55
+        quote: "Five guidelines to avoid problems in question wording\n  (1) Define the issue (who, what, when, and where).\n  (2) Use ordinary words.\n  (3) Avoid ambiguous words.\n  (4) Avoid leading questions.\n  (5) Use positive and negative statements. Avoid double negatives."
+        word: "WORDS"
+        parts:
+          - { key: "W", text: "Who, what, when and where: define the issue" }
+          - { key: "O", text: "Ordinary words" }
+          - { key: "R", text: "Remove ambiguous words" }
+          - { key: "D", text: "Don't lead: avoid leading questions" }
+          - { key: "S", text: "Statements positive and negative; avoid double negatives" }
+        hook: "الـ wording قواعده في كلمة **WORDS** نفسها."
+      - kind: aside
+        tone: tip
+        page: 55
+        quote: "(4) Avoid leading questions.\n  (5) Use positive and negative statements. Avoid double negatives."
+        text: |
+          أمثلة تفهّمك:
+          - **Leading question**: «مش شايف إن التدخين مضر؟» السؤال بيقوله يقول إيه.
+          - **Double negative**: «مش موافق إن الـ vaccine مش مفيد؟» محدش هيفهم آه يعني إيه.
+          - **Ambiguous word**: «بتاكل سكريات كتير؟» كتير بالنسبة لمين؟
+      - kind: explain
+        page: 57
+        quote: "Skip logic or conditional branching\n  Skip logic enables you to guide participants to a specific follow-up question, based on a response to an earlier question.\n  This technique can be used to minimize non-relevant questions for each participant, and for filtering out survey participants."
+        title: "الشكل والـ skip logic"
+        text: |
+          الـ **format**: سيب **white space** كفاية، ومكان للكتابة في الـ open-ended، واطلب منه يعلّم إجابته بوضوح، وخليك **consistent** في الستايل.
+
+          ==Skip logic== (conditional branching): الإجابة بتوديه لسؤال معيّن. «لو ساكن في بيت ملك، روح لسؤال 14». بيقلل الأسئلة اللي مالهاش لازمة لكل واحد، وبيـ **filter** المشاركين.
+      - kind: figure
+        page: 57
+        quote: "Skip logic enables you to guide participants to a specific follow-up question, based on a response to an earlier question."
+        title: "Skip logic"
+        alt: "Q5 asks: do you own or rent your home? Own home skips to Q14 on the next page. Rent home goes to Q6, how much is your monthly rent."
+        caption: "**Own** ← اقفز لـ Q14. **Rent** ← كمّل Q6 عن الإيجار."
+        svg: |
+          <svg viewBox="0 0 330 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L10s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="65" y="10" width="200" height="40" rx="6" class="fg-acc"/>
+            <text x="165" y="35" text-anchor="middle" class="t-sm t-b">Q5 Own or rent your home?</text>
+            <path d="M120 50L70 98" class="fg-arrow-acc" marker-end="url(#L10s)"/>
+            <path d="M210 50L260 98" class="fg-arrow-acc" marker-end="url(#L10s)"/>
+            <text x="58" y="66" class="t-sm t-b">Own</text>
+            <text x="246" y="66" class="t-sm t-b">Rent</text>
+            <rect x="10" y="102" width="130" height="50" rx="6" class="fg-good"/>
+            <text x="75" y="124" text-anchor="middle" class="t-sm t-b">Skip to Q14</text>
+            <text x="75" y="141" text-anchor="middle" class="t-sm t-mut">next page</text>
+            <rect x="190" y="102" width="130" height="50" rx="6" class="fg-box"/>
+            <text x="255" y="124" text-anchor="middle" class="t-sm t-b">Q6 Monthly rent?</text>
+            <text x="255" y="141" text-anchor="middle" class="t-sm t-mut">under $100 ... $300+</text>
+          </svg>
+      - kind: explain
+        page: 60
+        quote: "Pretesting\n  Pretesting refers to testing the questionnaire on a small sample of respondents, usually 15 to 30, to identify and eliminate potential problems.\n  Even the best questionnaire can be improved by pretesting.\n  As a general rule, a questionnaire should not be used in the field study without extensive pretesting."
+        title: "Pretesting: جرّبه الأول"
+        text: |
+          ==Pretesting== = تجرّب الـ questionnaire على **sample صغيرة، عادة 15 لـ 30**، عشان تكتشف المشاكل وتشيلها. حتى أحسن questionnaire بيتحسّن بيه، ومفيش questionnaire ينزل الميدان من غير **extensive pretesting**.
+
+          بتختبر **كل حاجة**: content، wording، sequence، form وlayout، difficulty، وinstructions. والـ pretest group لازم يشبه الـ respondents الحقيقيين (خلفيتهم، معرفتهم بالموضوع، attitudes)، في بيئة شبه الـ survey الحقيقي.
+      - kind: check
+        page: 60
+        quote: "Pretesting refers to testing the questionnaire on a small sample of respondents, usually 15 to 30, to identify and eliminate potential problems."
+        question: "Pretesting a questionnaire is usually done on how many respondents?"
+        options: ["15 to 30", "6 to 12", "100 to 200", "The whole study sample"]
+        answer: 0
+        why:
+          - "صح: sample صغيرة، عادة 15–30."
+          - "ده حجم الـ focus group discussion."
+          - "ده مش pretest، ده survey."
+          - "الـ pretest قبل الميدان، على عدد صغير شبههم."
+      - kind: aside
+        tone: trap
+        page: 61
+        quote: "The pretest groups should be similar to the respondents in terms of their background characteristics, familiarity with the topic, and attitudes and behaviors of interest, and it should be conducted in an environment and context similar to that of the actual survey."
+        text: |
+          متعملش الـ pretest على زمايلك الـ residents وانت بحثك على فلاحين في قرية. الـ ==pretest groups should be similar to the respondents== وفي **environment** شبه الحقيقي، وإلا مش هتكتشف المشاكل اللي هتقابلك فعلًا.
+      - kind: match
+        page: 63
+        quote: "Questionnaire data can be:\n  Pre-coded (assigning codes to expected answers on designed questionnaire)\n  Field-coded (process of assigning codes as soon as the date flows, usually during fieldwork)\n  Post-coded (coding of open questions on completed questionnaires)"
+        prompt: "الـ coding = تحويل الداتا لشكل الكمبيوتر يفهمه. وصّل كل نوع بمعناه:"
+        pairs:
+          - ["Pre-coded", "Codes on expected answers in the designed questionnaire"]
+          - ["Field-coded", "Codes assigned as data flow, during fieldwork"]
+          - ["Post-coded", "Open questions coded on completed questionnaires"]
+        why: "Pre = قبل (الورقة نفسها فيها الأكواد). Field = في الميدان وانت بتجمع. Post = بعد ما الورق يخلص، للأسئلة المفتوحة."
+      - kind: try
+        items: [res.L10.054, res.L10.057, res.L10.061]
+    recap:
+      - "الصياغة أصعب حاجة في الـ questionnaire."
+      - "رفض يجاوب ← non-response error. فهم غلط ← response error."
+      - "WORDS: who/what/when/where، ordinary، remove ambiguous، don't lead، statements من غير double negatives."
+      - "Skip logic: الإجابة بتوديه لسؤال معيّن."
+      - "Pretest على 15–30 شبه الـ respondents. Coding: pre، field، post."
+    practice: [res.L10.051, res.L10.052, res.L10.053, res.L10.054, res.L10.055, res.L10.056, res.L10.057, res.L10.058, res.L10.059, res.L10.060, res.L10.061, res.L10.062]
+  # ------------------------------------------------------------------
+  - id: res.L10.lesson6
+    title: "تقرا إزاي وتقرا إيه؟ أنواع الـ publications"
+    hook: "Original، review، systematic review، guideline: 4 أنواع ورق، ولكل واحد وقته."
+    minutes: 8
+    pages: [75, 137]
+    topics: [sources]
+    goals:
+      - "تعدّ مستويات القراءة التلاتة"
+      - "تفرّق بين الـ 4 types of publications"
+      - "تعرف ليه Sackett قال احرقوا الكتب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 77
+        quote: "Three levels of reading the scientific literature have been described:\n  (1) Browsing — flicking through actual books and articles, looking for anything of interest, and browsing topic-related sites on the Internet;\n  (2) Reading for information — approaching the literature in search of an answer to a specific question\n  (3) Reading for research — reading in order to obtain a comprehensive view of the existing state of knowledge on a specific topic."
+        title: "3 مستويات قراءة"
+        text: |
+          الـ **scientific literature** موجودة في كتب وتقارير حكومية وjournals وpolicy statements ومؤتمرات. وبنقراها على 3 مستويات:
+          - ==Browsing==: بتقلّب في الكتب والمقالات والمواقع على أي حاجة تشدّك. كده بنعرف معظم اللي نعرفه.
+          - **Reading for information**: عندك **سؤال محدد** وبتدوّر على إجابته («الـ dose بتاعة الـ enoxaparin في الـ CKD كام؟»).
+          - ==Reading for research==: عايز **صورة كاملة** للمعروف عن موضوع (قبل ما تكتب الـ MSc protocol).
+      - kind: check
+        page: 77
+        quote: "(3) Reading for research — reading in order to obtain a comprehensive view of the existing state of knowledge on a specific topic."
+        question: "Reading to obtain a comprehensive view of the existing state of knowledge on a topic is:"
+        options: ["Reading for research", "Reading for information", "Browsing"]
+        answer: 0
+        why:
+          - "صح: صورة كاملة للمعروف = reading for research."
+          - "ده لإجابة سؤال واحد محدد."
+          - "ده تقليب على أي حاجة تشدّك."
+      - kind: explain
+        page: 78
+        quote: "We focus primarily on journal publications because they have gone through a process of peer review to enhance the quality of the information and are the closest thing to a gold standard that is available."
+        title: "ليه الـ journals؟"
+        text: |
+          عشان الـ literature review يبقى **structured**، بنركّز على الـ ==journal publications==: عدّت على **peer review** بيحسّن جودة المعلومة، وهي **أقرب حاجة لـ gold standard** عندنا.
+      - kind: figure
+        page: 79
+        quote: "When conducting a search of the scientific literature, there are four types of publications to look for:\n  1. Original research articles:\n  The papers written by the authors who conducted the research."
+        title: "4 أنواع publications"
+        alt: "Four boxes in a row: original research articles written by the researchers; review articles, a narrative summary; systematic reviews, a structured integration with meta-analysis giving a summary estimate; and guidelines, formal advice for practice."
+        caption: "**Original** (الباحثين نفسهم) ← **review** (ملخص سردي) ← **systematic review** (منظم، والـ meta-analysis بتطلع رقم واحد) ← **guidelines** (نصيحة للممارسة)."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L10p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="10" y="10" width="145" height="80" rx="8" class="fg-box"/>
+            <text x="82" y="34" text-anchor="middle" class="t-sm t-b">1 Original research</text>
+            <text x="82" y="54" text-anchor="middle" class="t-sm t-mut">by the researchers</text>
+            <text x="82" y="70" text-anchor="middle" class="t-sm t-mut">methods, results</text>
+            <rect x="175" y="10" width="145" height="80" rx="8" class="fg-thin"/>
+            <text x="247" y="34" text-anchor="middle" class="t-sm t-b">2 Review article</text>
+            <text x="247" y="54" text-anchor="middle" class="t-sm t-mut">narrative summary</text>
+            <text x="247" y="70" text-anchor="middle" class="t-sm t-bad">not always systematic</text>
+            <rect x="10" y="110" width="145" height="80" rx="8" class="fg-acc"/>
+            <text x="82" y="134" text-anchor="middle" class="t-sm t-b">3 Systematic review</text>
+            <text x="82" y="154" text-anchor="middle" class="t-sm t-mut">organized, structured</text>
+            <text x="82" y="170" text-anchor="middle" class="t-sm t-mut">meta-analysis: 1 estimate</text>
+            <rect x="175" y="110" width="145" height="80" rx="8" class="fg-good"/>
+            <text x="247" y="134" text-anchor="middle" class="t-sm t-b">4 Guidelines</text>
+            <text x="247" y="154" text-anchor="middle" class="t-sm t-mut">formal advice</text>
+            <text x="247" y="170" text-anchor="middle" class="t-sm t-mut">research → practice</text>
+            <path d="M155 50H171" class="fg-arrow" marker-end="url(#L10p)"/>
+            <path d="M247 90L90 108" class="fg-arrow" marker-end="url(#L10p)"/>
+            <path d="M155 150H171" class="fg-arrow" marker-end="url(#L10p)"/>
+          </svg>
+      - kind: explain
+        page: 80
+        quote: "2. Review articles:\n  A narrative summary of what is known on a particular topic (a review article presents a summary of original research articles).\n  Limitation: do not always follow systematic approaches, a practice that sometimes leads to inconsistent results."
+        title: "Original ضد review"
+        text: |
+          - **Original research articles**: كتبها اللي **عملوا البحث**، فيها الـ methods والـ results ومعناها.
+          - ==Review articles==: **narrative summary** للمعروف عن موضوع (ملخص للـ original articles)، زي الـ Annual Review of Public Health. عيبها: **مش دايمًا systematic**، فأحيانًا النتايج بتطلع **inconsistent**.
+      - kind: explain
+        page: 82
+        quote: "3. Systematic review\n  An approach that provides a systematic, organized, and structured way of integrating the findings of individual research studies.\n  In meta-analysis, researchers produce a summary statistical estimate of the measure of association.\n  For example, the Cochrane Collaboration (www.cochrane.org)"
+        title: "Systematic review وmeta-analysis"
+        text: |
+          ==Systematic review== = طريقة **systematic, organized, structured** تجمع بيها نتايج الدراسات الفردية.
+
+          والـ ==meta-analysis== بتزوّد **summary statistical estimate** واحد للـ measure of association (رقم واحد بدل 20 دراسة).
+
+          المثال: الـ **Cochrane Collaboration**؛ حاجات كتير ببلاش، والـ full reports محتاجة membership عن طريق مؤسسة.
+      - kind: check
+        page: 82
+        quote: "3. Systematic review\n  An approach that provides a systematic, organized, and structured way of integrating the findings of individual research studies."
+        question: "An organized approach of integrating the findings of individual research studies is called:"
+        options: ["A systematic review", "A review", "Practice guidelines", "None of the above"]
+        answer: 0
+        why:
+          - "صح: systematic, organized, structured integration."
+          - "الـ narrative review ملخص، بس مش دايمًا systematic."
+          - "الـ guidelines نصيحة رسمية للممارسة."
+          - "الإجابة موجودة: a."
+      - kind: explain
+        page: 85
+        quote: "There are several examples of useful guidelines. The terminology used within them differs across the globe. Thus, in the European Community, directives are stronger than recommendations, which are stronger than guidelines. No such hierarchy exists in North America."
+        title: "Guidelines"
+        text: |
+          ==Practice guidelines== = **formal statements** بتنصح الأطباء وناس الـ public health والـ managed-care organizations والناس، إزاي يحسّنوا تأثير الـ interventions. بتترجم نتايج الأبحاث لمعلومة تتطبّق.
+
+          الأسماء بتختلف: في الـ **European Community**: **directives** أقوى من **recommendations**، أقوى من **guidelines**. في **North America** مفيش الترتيب ده.
+      - kind: order
+        page: 85
+        quote: "Thus, in the European Community, directives are stronger than recommendations, which are stronger than guidelines."
+        prompt: "في الـ European Community، رتّبهم من الأقوى للأضعف:"
+        steps: ["Directives", "Recommendations", "Guidelines"]
+        why: "Directives > recommendations > guidelines. وفي North America مفيش hierarchy."
+      - kind: aside
+        tone: joke
+        page: 86
+        quote: "To find the best quality evidence for medical decision making, Sackett and colleagues recommended that practitioners burn their (traditional) textbooks."
+        text: |
+          ==Sackett== وزمايله قالوا للأطباء: «**احرقوا الـ textbooks**» عشان تلاقوا أحسن evidence.
+
+          بس قبل ما تولّع في كتاب الـ internal medicine: إجابة امتحانك لسه **من الكتاب**. الحرق بعد يناير 2027 إن شاء الله.
+      - kind: reveal
+        page: 87
+        quote: "To stay up to date in clinical practice, a textbook may need to be revised on a yearly basis.\n  However, research and publication of results in a journal is a deliberative process that often takes years from the germination of an idea, to obtaining funding, carrying out the study, analyzing data, writing up results, submitting to a journal, and waiting out the peer-review process and publication lag for a journal."
+        prompt: "ليه الـ textbook محدود في معلومات الـ cause والـ diagnosis والـ prognosis والـ treatment؟"
+        answer: |
+          عشان يفضل **up to date** محتاج يتراجع **كل سنة**، والبحث نفسه بياخد **سنين**: فكرة، funding، دراسة، تحليل، كتابة، submission، **peer review**، وانتظار النشر. فالكتاب دايمًا متأخر خطوة.
+
+          عشان كده الـ **review articles** والـ **guidelines** shortcut مفيد للمشغول.
+      - kind: try
+        items: [res.L10.063, res.L10.066, res.L10.071]
+    recap:
+      - "3 levels: browsing، reading for information، reading for research."
+      - "الـ journals: peer review، أقرب حاجة للـ gold standard."
+      - "4 types: original، review (narrative)، systematic review (+ meta-analysis)، guidelines."
+      - "Europe: directives > recommendations > guidelines؛ North America مفيش hierarchy."
+      - "Sackett: burn the textbooks، لأن الكتاب بيتأخر عن البحث."
+    practice: [res.L10.063, res.L10.064, res.L10.065, res.L10.066, res.L10.067, res.L10.068, res.L10.069, res.L10.070, res.L10.071, res.L10.072]
+  # ------------------------------------------------------------------
+  - id: res.L10.lesson7
+    title: "الـ search على PubMed خطوة بخطوة"
+    hook: "24,000 journal و1.4 مليون paper في السنة. من غير خطة هتغرق؛ بـ 7 خطوات وAND وOR هتلاقي اللي عايزه."
+    minutes: 10
+    pages: [88, 141]
+    topics: [search]
+    goals:
+      - "ترتّب الـ 7 خطوات لتنظيم الـ literature search"
+      - "تستخدم الـ MeSH terms والـ limits في PubMed"
+      - "تفرّق بين AND وOR وNOT وNEAR"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 89
+        quote: "Authors suggest that the most powerful technique for obtaining access to articles is to search using Google Scholar.\n  Nearly 20 % of articles may be readily accessible, and professionals may also use the PubMed author information to obtain the author’s e-mail address, for direct requests of articles."
+        title: "بحر من الأبحاث"
+        text: |
+          في حوالي **24,000 journal** بتنشر **1.4 مليون** paper جديدة كل سنة. لازم طريقة تلاقي بيها بسرعة.
+
+          - أقوى طريقة **توصل** بيها للمقالة نفسها: ==Google Scholar== (حوالي **20%** متاحة بسهولة).
+          - مقالة مقفولة؟ خد **e-mail** الكاتب من الـ PubMed author information واطلبها منه.
+      - kind: explain
+        page: 91
+        quote: "We focus mainly on the use of PubMed because it is the largest and most widely available bibliographic database, with coverage of over 19 million articles from MEDLINE and life sciences journals."
+        title: "PubMed وغيره"
+        text: |
+          ==PubMed== = **أكبر وأوسع bibliographic database**: أكتر من **19 مليون** article من MEDLINE والـ life sciences journals (على الشريحة).
+
+          - **Google وMetaCrawler**: بيلاقوا مصادر كتير، بس مفيش **control على الجودة**، فاقرا بعين ناقدة.
+          - **RePORTER** بتاع الـ National Institutes of Health (NIH): ملخصات أبحاث ممولة، تلاقي فيه المعلومة **قبل** ما تتنشر.
+      - kind: update
+        page: 91
+        quote: "We focus mainly on the use of PubMed because it is the largest and most widely available bibliographic database, with coverage of over 19 million articles from MEDLINE and life sciences journals."
+        text: "PubMed دلوقتي فيه أكتر من **36 مليون** citation. في الامتحان اكتب رقم الشريحة: **over 19 million**."
+        ref: "National Library of Medicine, PubMed overview, 2024"
+      - kind: figure
+        page: 96
+        quote: "Flowchart for organizing a search of scientific literature\n  1. Review the issue statement and purpose of the search\n  2. Select a bibliographic database\n  3. Identify key words\n  4. Conduct the search\n  4a. Refine the search\n  5. Select and organize documents for review\n  6. Abstract pertinent information from each document\n  7. Summarize and apply the literature review"
+        title: "الـ flowchart: 7 خطوات"
+        alt: "Flowchart: 1 review the issue statement and purpose, 2 select a bibliographic database, 3 identify key words, 4 conduct the search with a loop 4a refine the search back to key words, 5 select and organize documents, 6 abstract pertinent information, 7 summarize and apply the review."
+        caption: "**Purpose** ← **database** ← **key words** ← **search** (وتلف على **refine**) ← **organize** ← **abstract** (evidence matrix) ← **summarize**."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L10f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L10g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="84" y="6" width="236" height="30" rx="5" class="fg-box"/>
+            <text x="202" y="26" text-anchor="middle" class="t-sm">1 Review issue and purpose</text>
+            <rect x="84" y="48" width="236" height="30" rx="5" class="fg-box"/>
+            <text x="202" y="68" text-anchor="middle" class="t-sm">2 Select a bibliographic database</text>
+            <rect x="84" y="90" width="236" height="30" rx="5" class="fg-acc"/>
+            <text x="202" y="110" text-anchor="middle" class="t-sm t-b">3 Identify key words</text>
+            <rect x="84" y="132" width="236" height="30" rx="5" class="fg-acc"/>
+            <text x="202" y="152" text-anchor="middle" class="t-sm t-b">4 Conduct the search</text>
+            <rect x="84" y="174" width="236" height="30" rx="5" class="fg-box"/>
+            <text x="202" y="194" text-anchor="middle" class="t-sm">5 Select and organize documents</text>
+            <rect x="84" y="216" width="236" height="30" rx="5" class="fg-box"/>
+            <text x="202" y="236" text-anchor="middle" class="t-sm">6 Abstract information (matrix)</text>
+            <rect x="84" y="258" width="236" height="30" rx="5" class="fg-good"/>
+            <text x="202" y="278" text-anchor="middle" class="t-sm t-b">7 Summarize and apply</text>
+            <path d="M202 36V46" class="fg-arrow" marker-end="url(#L10f)"/>
+            <path d="M202 78V88" class="fg-arrow" marker-end="url(#L10f)"/>
+            <path d="M202 120V130" class="fg-arrow" marker-end="url(#L10f)"/>
+            <path d="M202 162V172" class="fg-arrow" marker-end="url(#L10f)"/>
+            <path d="M202 204V214" class="fg-arrow" marker-end="url(#L10f)"/>
+            <path d="M202 246V256" class="fg-arrow" marker-end="url(#L10f)"/>
+            <path d="M84 147H56V105H80" class="fg-arrow-acc" marker-end="url(#L10g)"/>
+            <text x="10" y="122" class="t-sm t-acc">4a</text>
+            <text x="6" y="136" class="t-sm t-acc">refine</text>
+          </svg>
+      - kind: order
+        page: 96
+        quote: "Flowchart for organizing a search of scientific literature\n  1. Review the issue statement and purpose of the search\n  2. Select a bibliographic database\n  3. Identify key words\n  4. Conduct the search\n  4a. Refine the search\n  5. Select and organize documents for review\n  6. Abstract pertinent information from each document\n  7. Summarize and apply the literature review"
+        prompt: "رتّب خطوات تنظيم الـ literature search:"
+        steps:
+          - "Review the issue statement and purpose"
+          - "Select a bibliographic database"
+          - "Identify key words"
+          - "Conduct (and refine) the search"
+          - "Select and organize documents"
+          - "Abstract pertinent information"
+          - "Summarize and apply the review"
+        why: "الهدف ← فين هتدوّر ← بأنهي كلمات ← دوّر وضيّق ← رتّب الورق ← طلّع المعلومة في matrix ← لخّص واستخدم."
+      - kind: explain
+        page: 100
+        quote: "MEDLINE does not provide the full text of articles, but rather lists the title, authors, source of the publication, the authors’ abstract (if one is available) and key word subject headings.\n  For some journals, the full text of articles can be accessed via a link on the search results page."
+        title: "MEDLINE بيديك إيه؟"
+        text: |
+          الـ **MEDLINE «PubMed»** بيديره الـ **National Library of Medicine**: **free**، بيتحدّث كتير، وسهل.
+
+          بس ==does not provide the full text==: بيديك الـ title والـ authors والـ source والـ abstract (لو موجود) والـ key word subject headings. لبعض الـ journals في **link** للـ full text.
+      - kind: explain
+        page: 102
+        quote: "3. Identify Key Words\n  Key words are terms that describe the characteristics of the subject being reviewed.\n  Most bibliographic databases require the use of standardized key words.\n  These key words are often found in the list of Medical Subject Heading (MeSH) terms."
+        title: "Key words والـ MeSH"
+        text: |
+          الـ **key words** بتوصف الموضوع. معظم الـ databases عايزة **standardized key words** من لستة الـ ==Medical Subject Heading (MeSH)== terms.
+
+          تجيبها منين؟
+          - **ورقتين** عن الموضوع (واحدة جديدة وواحدة أقدم): في الـ abstract بتاعهم لستة MeSH terms.
+          - **اللستة الأبجدية** للـ MeSH على النت.
+          - **كلماتك انت**: الـ MEDLINE بيقبلها، بس البحث **أقل دقة**.
+      - kind: check
+        page: 105
+        quote: "There is also a screen “Search details” which includes MeSH terms. This screen may be helpful when entering open text on a search, and noting that an indicated MeSH term may be a better choice."
+        question: "Which PubMed side screen shows the MeSH terms behind the words you typed?"
+        options: ["Search details", "Titles with your search terms", "Send to"]
+        answer: 0
+        why:
+          - "صح: الـ Search details فيها الـ MeSH terms، وممكن تلاقي MeSH term أحسن من كلامك."
+          - "دي بتوريك مقالات شبه بحثك عشان تراجع وتزوّد search terms."
+          - "دي بتحفظ المقالات."
+      - kind: explain
+        page: 111
+        quote: "Searches can be limited to English-language publications, to a certain date of publication, or the search can be limited to “journal article.” An initial search can focus on review articles by selecting the publication type."
+        title: "النتايج كتير؟ ضيّق"
+        text: |
+          أول search هيطلّعلك آلاف المقالات، كتير منها مالوش دعوة. ضيّق بـ **limits**:
+          - **English-language** بس، و**date** معيّن، و**journal article**.
+          - ابدأ بالـ ==review articles== من الـ **publication type**.
+
+          ولقيت مقالة حلوة؟ دوس **related articles**، ودوّر باسم الكاتب (**last name + first and middle initials**)، واحفظ بـ «**send to**».
+      - kind: figure
+        page: 116
+        quote: "The word AND used in this way combines the search terms so that the yield includes articles including both.\n  An example of the operator NOT would be: accidents NOT automobile.\n  The operator OR permits coupling two search terms that may tap a similar domain."
+        title: "AND وOR وNOT بالدواير"
+        alt: "Three pairs of overlapping circles A and B. AND combines the search terms: only the overlap, articles including both. OR, coupling two terms: both whole circles. NOT, as in accidents NOT automobile: circle A without the overlap with B."
+        caption: "**AND** = التقاطع بس. **OR** = الدايرتين كلهم. **NOT** = الأولى من غير التانية."
+        svg: |
+          <svg viewBox="0 0 330 150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="60" r="28" class="fg-thin"/>
+            <circle cx="70" cy="60" r="28" class="fg-thin"/>
+            <path d="M55 36A28 28 0 0 1 55 84A28 28 0 0 1 55 36z" class="fg-dot-acc"/>
+            <text x="55" y="118" text-anchor="middle" class="t-b">AND</text>
+            <text x="55" y="138" text-anchor="middle" class="t-sm t-mut">both</text>
+            <circle cx="150" cy="60" r="28" class="fg-dot-acc"/>
+            <circle cx="180" cy="60" r="28" class="fg-dot-acc"/>
+            <text x="165" y="118" text-anchor="middle" class="t-b">OR</text>
+            <text x="165" y="138" text-anchor="middle" class="t-sm t-mut">either or both</text>
+            <circle cx="260" cy="60" r="28" class="fg-dot-acc"/>
+            <circle cx="290" cy="60" r="28" class="fg-box"/>
+            <text x="275" y="118" text-anchor="middle" class="t-b">NOT</text>
+            <text x="275" y="138" text-anchor="middle" class="t-sm t-mut">A without B</text>
+          </svg>
+      - kind: check
+        page: 116
+        quote: "The word AND used in this way combines the search terms so that the yield includes articles including both."
+        question: "Searching for \"Obesity AND Hypertension\" may yield articles about:"
+        options: ["Obesity and hypertension together", "Obesity alone", "Hypertension alone", "All of the above"]
+        answer: 0
+        why:
+          - "صح: AND = المقالات اللي فيها الاتنين."
+          - "مقالة obesity بس بتطلع برّه."
+          - "مقالة hypertension بس بتطلع برّه."
+          - "ده اللي OR بيعمله."
+      - kind: check
+        page: 116
+        quote: "The operator OR permits coupling two search terms that may tap a similar domain."
+        question: "Searching for \"Smoking OR Lung cancer\" may yield articles about:"
+        options: ["All of the above", "Smoking alone", "Lung cancer alone", "Smoking and lung cancer together"]
+        answer: 0
+        why:
+          - "صح: OR بيجيب أي مقالة فيها واحدة منهم أو الاتنين."
+          - "صح بس ناقص."
+          - "صح بس ناقص."
+          - "صح بس ناقص؛ ده لوحده نتيجة AND."
+      - kind: explain
+        page: 117
+        quote: "The operator NEAR will define two search terms that must appear within 10 words of each other in order to select an article.\n  Use of parentheses will define a search term that must appear as listed.\n  For example, the search terms (school clinic) must appear as that phrase to be identified, rather than search “school” and “clinic” separately."
+        title: "NEAR والأقواس"
+        text: |
+          الـ **Boolean operators** بتتكتب **CAPS**: AND، NOT، OR، NEAR، و( ).
+          - ==NEAR==: الكلمتين لازم يبقوا **في حدود 10 كلمات** من بعض.
+          - **الأقواس** (school clinic): لازم تظهر **كـ phrase** زي ما هي، مش «school» لوحدها و«clinic» لوحدها.
+      - kind: update
+        page: 117
+        quote: "Use of parentheses will define a search term that must appear as listed.\n  For example, the search terms (school clinic) must appear as that phrase to be identified, rather than search “school” and “clinic” separately."
+        text: "في PubMed النهارده الـ phrase بتتكتب بين **علامات تنصيص** \"school clinic\"، والأقواس بتجمّع الكلمات وبتحدد ترتيب AND وOR وNOT. في الامتحان: الأقواس = phrase، زي الشريحة."
+        ref: "PubMed Help (National Library of Medicine), 2024"
+      - kind: explain
+        page: 120
+        quote: "6. Abstract Pertinent Information from Each Document\n  The next step is to create an evidence matrix: a spreadsheet with rows and columns that allows users to abstract the key information from each article.\n  Creating a matrix provides a structure for putting the information in order.\n  In developing a matrix, the choice of column topics is a key consideration.\n  It is often useful to consider both methodological characteristics and content-specific results as column headings."
+        title: "رتّب، طلّع، لخّص"
+        text: |
+          - **5. Organize**: رتّب الورق حسب **type of study**، ودخّله **reference manager** زي **EndNote** (بيغيّر الـ reference format، بينزّل الـ citations من غير أخطاء كتابة، وبيعمل search وsort).
+          - **6. Abstract**: اعمل ==evidence matrix==: spreadsheet، كل صف مقالة، والأعمدة **methodological characteristics** (author، year، design، population، sample size) و**content-specific results** (results، conclusions).
+          - **7. Summarize**: الملخص بيستخدم لـ budget item جديد قدام الـ administrator، أو تقنع **policy makers**، أو **grant application**.
+      - kind: try
+        items: [res.L10.078, res.L10.088, res.L10.095]
+    recap:
+      - "PubMed = أكبر bibliographic database؛ Google Scholar أقوى طريقة توصل للمقالة."
+      - "7 خطوات: purpose، database، key words، search (refine)، organize، abstract، summarize."
+      - "MeSH = Medical Subject Heading؛ MEDLINE مش بيدّي full text."
+      - "AND = الاتنين، OR = أي واحد (all of the above)، NOT = استبعد، NEAR = في حدود 10 كلمات."
+      - "Evidence matrix: methodological characteristics + content-specific results."
+    practice: [res.L10.073, res.L10.074, res.L10.075, res.L10.076, res.L10.077, res.L10.078, res.L10.079, res.L10.080, res.L10.081, res.L10.082, res.L10.083, res.L10.084, res.L10.085, res.L10.086, res.L10.087, res.L10.088, res.L10.089, res.L10.090, res.L10.091, res.L10.092, res.L10.093, res.L10.094, res.L10.095]
+  # ------------------------------------------------------------------
+  - id: res.L10.lesson8
+    title: "الأدلة اللي مش في PubMed"
+    hook: "أحسن تقييم لبرنامج الـ hepatitis C في قريتك يمكن ماتنشرش خالص. تلاقيه فين؟"
+    minutes: 7
+    pages: [123, 145]
+    topics: [beyond, search]
+    goals:
+      - "تعرف ليه الـ published literature مش كفاية، والـ publication bias"
+      - "تعرّف الـ fugitive (grey) literature"
+      - "ترتّب خطوات الـ key informant process"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 123
+        quote: "SEEKING SOURCES OUTSIDE THE SEARCHABLE LITERATURE\n  Reasons for limitations of searching the published literature:\n  1) many researchers and practitioners fail to write up their research because of competing projects and other time demands.\n  2) journal editors are faced with difficult decisions on what to publish and there is a tendency toward publishing studies showing a significant effect of an intervention (publication bias)\n  3) in some areas of the world, lack of resources precludes systematic empirical research."
+        title: "ليه المنشور مش كل الحكاية؟"
+        text: |
+          3 أسباب:
+          - باحثين كتير **ماكتبوش** أبحاثهم (مشاريع تانية، وقت).
+          - الـ editors بيميلوا ينشروا الدراسات اللي فيها **significant effect**: ده ==publication bias==.
+          - في أماكن في العالم مفيش **resources** أصلًا لبحث منظم.
+      - kind: aside
+        tone: analogy
+        page: 123
+        quote: "there is a tendency toward publishing studies showing a significant effect of an intervention (publication bias)"
+        text: |
+          الـ **publication bias** زي صفحة الجيم على الفيسبوك: بتنشر صور «قبل وبعد» للي خسّوا 30 كيلو بس. اللي ما خسّش ولا كيلو مالوش بوست، فتفتكر إن الجيم بيشتغل مع الكل.
+      - kind: explain
+        page: 125
+        quote: "The “Fugitive” Literature\n  The “fugitive” or “grey” literature includes government reports, book chapters, conference proceedings, and other materials that are not found in online databases such as MEDLINE.\n  These are particularly important in attempting a summary of the literature involving meta-analysis or cost-effectiveness analysis."
+        title: "3 طرق برّه الـ database: أولها الـ fugitive literature"
+        text: |
+          برّه الـ searchable literature عندك 3: **fugitive literature**، **key informant interviews**، و**professional meetings**.
+
+          الـ ==fugitive (grey) literature== = تقارير حكومية، book chapters، **conference proceedings**، وأي حاجة مش موجودة في online databases زي MEDLINE. مهمة جدًا في الـ **meta-analysis** والـ **cost-effectiveness analysis**.
+
+          صعب تلاقيها؛ أحسن مصدر **الخبرا**: ابعتلهم e-mail واسألهم عن الورق اللي الـ database مش هتجيبه.
+      - kind: check
+        page: 125
+        quote: "The “fugitive” or “grey” literature includes government reports, book chapters, conference proceedings, and other materials that are not found in online databases such as MEDLINE."
+        question: "Conference proceedings and other materials not found in online databases are called:"
+        options: ["Fugitive literature", "Professional meetings", "Key informant interviews", "Practice guidelines"]
+        answer: 0
+        why:
+          - "صح: الـ fugitive أو grey literature."
+          - "دي الأماكن اللي البحث بيتعرض فيها، مش اسم الورق ده."
+          - "دي مقابلات مع خبرا."
+          - "الـ guidelines نصيحة رسمية، وغالبًا منشورة."
+      - kind: explain
+        page: 129
+        quote: "Key informants are experts on a certain topic and may include a university researcher who has years of experience in a particular intervention area or a local program manager who has the field experience to know what works when it comes to designing and implementing effective interventions."
+        title: "Key informant interviews"
+        text: |
+          ليه؟ الـ **process** (إزاي البرنامج اتعمل) صعب تفهمه من الـ methods section، والبرنامج ممكن **يكون اتغيّر** عن المنشور، وتقييمات كتير **ماتنشرتش**.
+
+          الـ ==key informants== = خبرا: أستاذ جامعة عنده سنين في المجال، أو **local program manager** عارف من الميدان إيه اللي بيشتغل. زي مدير وحدة صحية شغّال في البرنامج من 10 سنين.
+      - kind: figure
+        page: 130
+        quote: "Steps in carrying out a “key informant” process:\n  1. Identify the key informants who might be useful for gathering information."
+        title: "خطوات الـ key informant process"
+        alt: "Five steps in a row with a loop: 1 identify key informants, 2 determine the information needed, 3 collect the data in a 15 to 30 minute call, 4 summarize the data, 5 follow up. Follow-up snowballs back to step 1 as one expert names another, until the information becomes repetitious."
+        caption: "**Identify** ← **determine info** ← **collect** (مكالمة 15–30 دقيقة) ← **summarize** ← **follow-up**، والـ **snowball** بيرجّعك لخبير جديد لحد ما الكلام يتكرر."
+        svg: |
+          <svg viewBox="0 0 330 216" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L10k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L10b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="10" y="10" width="140" height="36" rx="6" class="fg-acc"/>
+            <text x="80" y="33" text-anchor="middle" class="t-sm t-b">1 Identify informants</text>
+            <rect x="180" y="10" width="140" height="36" rx="6" class="fg-box"/>
+            <text x="250" y="33" text-anchor="middle" class="t-sm">2 Determine info</text>
+            <rect x="180" y="80" width="140" height="44" rx="6" class="fg-box"/>
+            <text x="250" y="99" text-anchor="middle" class="t-sm">3 Collect data</text>
+            <text x="250" y="115" text-anchor="middle" class="t-sm t-mut">15-30 min call</text>
+            <rect x="10" y="80" width="140" height="44" rx="6" class="fg-box"/>
+            <text x="80" y="99" text-anchor="middle" class="t-sm">4 Summarize</text>
+            <text x="80" y="115" text-anchor="middle" class="t-sm t-mut">bullet points</text>
+            <rect x="10" y="158" width="140" height="40" rx="6" class="fg-good"/>
+            <text x="80" y="182" text-anchor="middle" class="t-sm t-b">5 Follow-up</text>
+            <path d="M150 28H176" class="fg-arrow" marker-end="url(#L10k)"/>
+            <path d="M250 46V76" class="fg-arrow" marker-end="url(#L10k)"/>
+            <path d="M180 102H154" class="fg-arrow" marker-end="url(#L10k)"/>
+            <path d="M80 124V154" class="fg-arrow" marker-end="url(#L10k)"/>
+            <path d="M10 186Q-6 118 18 50" class="fg-arrow-acc" marker-end="url(#L10b)"/>
+            <text x="165" y="174" class="t-sm t-acc">snowball: one expert</text>
+            <text x="165" y="190" class="t-sm t-acc">names another, until</text>
+            <text x="165" y="206" class="t-sm t-acc">the info repeats</text>
+          </svg>
+      - kind: order
+        page: 130
+        quote: "Steps in carrying out a “key informant” process:\n  1. Identify the key informants who might be useful for gathering information."
+        prompt: "رتّب خطوات الـ key informant process:"
+        steps:
+          - "Identify the key informants"
+          - "Determine the types of information needed"
+          - "Collect the data"
+          - "Summarize the data collected"
+          - "Conduct follow-up, as needed"
+        why: "مين ← عايز أعرف إيه ← اسأل ← لخّص ← كمّل مع اللي رشّحوهم."
+      - kind: explain
+        page: 134
+        quote: "5. Conduct follow-up, as needed.\n  As with literature searching, key informant interviews often result in a snowballing effect in which one expert identifies another who is also knowledgeable.\n  As information becomes repetitious, the data collector can decide when enough information has been collected."
+        title: "Snowballing وإمتى تقف"
+        text: |
+          - تلاقي الخبرا في الـ literature، الـ professional networks، والنت (زي ProfNet).
+          - اكتب **short list of open-ended questions** وابعتها بالـ e-mail قبل المكالمة.
+          - **Collect** في مكالمة تليفون **15–30 دقيقة**، و**summarize** في bullet points.
+          - ==Snowballing effect==: خبير يرشّحلك خبير. ولما المعلومة تبدأ **تتكرر**، كفاية.
+      - kind: explain
+        page: 135
+        quote: "Professional Meetings\n  Annually, there are dozens of relevant and helpful professional meetings in public health.\n  Important intervention research is often presented at these meetings.\n  Practitioners should seek out meetings that use a peer-review process for abstract review, helping to ensure that high quality research is presented.\n  The main limitation for many practitioners is the inability to attend a variety of professional meetings because of limited travel funds."
+        title: "Professional meetings"
+        text: |
+          كل سنة عشرات المؤتمرات، وأبحاث **intervention** مهمة بتتعرض فيها. اختار اللي بتعمل **peer-review** للـ abstracts.
+
+          العيب الأساسي: ==limited travel funds==، مش هتقدر تحضر كله.
+      - kind: check
+        page: 145
+        quote: "5. the largest and most widely available bibliographic database is:\n  (a) PubMed.\n  (b) Google scholar.\n  (c) MetaCrawler.\n  (d) Cochrane collaboration."
+        question: "The largest and most widely available bibliographic database is:"
+        options: ["PubMed", "Google Scholar", "MetaCrawler", "Cochrane Collaboration"]
+        answer: 0
+        why:
+          - "صح: أكتر من 19 مليون article (على الشريحة)."
+          - "ده search engine، أقوى طريقة توصل للمقالة، بس مش bibliographic database."
+          - "search engine واسع ومفيش control على الجودة."
+          - "مصدر systematic reviews."
+      - kind: try
+        items: [res.L10.096, res.L10.098, res.L10.104]
+    recap:
+      - "المنشور ناقص: ماتكتبش، publication bias، ومفيش resources."
+      - "Fugitive (grey) literature: تقارير حكومية، book chapters، conference proceedings."
+      - "Key informants: خبرا (أستاذ جامعة أو program manager)؛ 5 خطوات وsnowballing."
+      - "Professional meetings: اختار اللي فيها peer review؛ العيب travel funds."
+    practice: [res.L10.096, res.L10.097, res.L10.098, res.L10.099, res.L10.100, res.L10.101, res.L10.102, res.L10.103, res.L10.104, res.L10.105, res.L10.106, res.L10.107]

@@ -89,6 +89,7 @@ mod research;
 mod rome_ibs;
 mod rpi;
 mod saag;
+mod sample_size;
 mod sle;
 mod sos;
 mod spa;

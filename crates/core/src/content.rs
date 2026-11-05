@@ -254,6 +254,8 @@ pub const CALCULATORS: &[&str] = &[
     "nnt",
     "diagnostic_accuracy",
     "z_score",
+    "sample_size_survey",
+    "sample_size_two_proportions",
 ];
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

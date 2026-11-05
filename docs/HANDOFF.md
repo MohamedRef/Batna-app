@@ -321,7 +321,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 92 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
 | Releases | `batna-v1.0.0-alpha.2` published 2026-11-04 (feed `batna-alpha`); previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
 | Open PRs / issues | none on 2026-11-05 |
@@ -357,6 +357,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-05: res.L11 (sampling and sample size) written: 82 items, 6 lessons; two sample-size calculators (`sample_size_survey`, `sample_size_two_proportions`) reproduce the slides' Epi Info numbers.
 - 2026-11-05: Mac nightly green again: three tests now expect the Mac's own answers (installer message, device name; menu test skipped on macOS, muda needs the main thread).
 - 2026-11-05: big files split into smaller modules (i18n per feature; core `lesson`, `calc`, `labs`, `session`); AGENTS.md § Small files; `check-file-sizes.sh` warns in CI.
 - 2026-11-05: the whole project folder and memory notes archived in `MohamedRef/Batna-sources`.

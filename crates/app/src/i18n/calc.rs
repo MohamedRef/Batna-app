@@ -70,6 +70,14 @@ pub const SHOW_MEANING: &str = "ورّيني التفسير";
 /// The Arabic hint under a calculator field (core keeps the English one).
 pub fn hint(calc: &str, field: &str) -> Option<&'static str> {
     Some(match (calc, field) {
+        ("sample_size_survey", "expected_prevalence") => {
+            "من دراسات قبل كده أو pilot أو experts؛ 50% لو مفيش أي بيانات."
+        }
+        ("sample_size_survey", "design_effect") => {
+            "1 للـ simple random sampling؛ غالبًا 2 للـ cluster sampling."
+        }
+        ("sample_size_two_proportions", "power") => "80% على الأقل؛ 85% أو 90% أحسن.",
+        ("sample_size_two_proportions", "ratio") => "1 لو المجموعتين متساويين.",
         ("child_pugh", "pt_prolonged_s") => "دي طريقة الكتاب. سيبها فاضية لو هتستخدم الـ INR.",
         ("child_pugh", "inr") => "بيتحسب بس لو خانة الـ PT فاضية.",
         ("apri", "ast_uln_u_l") => "غالبًا 40 U/L.",
@@ -268,6 +276,10 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
         "nnt" => "تعالج كام واحد عشان واحد يستفيد (أو يتأذى)",
         "diagnostic_accuracy" => "الحساسية والنوعية والـ PPV والـ NPV من جدول 2×2",
         "z_score" => "القيمة بعيدة عن المتوسط بكام انحراف معياري",
+        "sample_size_survey" => "محتاج كام واحد في الـ survey عشان تقدّر الـ prevalence",
+        "sample_size_two_proportions" => {
+            "محتاج كام case و control (أو exposed و unexposed) بالـ power اللي عايزه"
+        }
         _ => return None,
     })
 }

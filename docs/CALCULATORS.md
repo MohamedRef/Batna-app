@@ -1085,3 +1085,28 @@ Source: Research L16: normal distribution and Z-score
 | `value` | number | Observation (x) |
 | `mean` | number | Mean (μ) |
 | `sd` | number | Standard deviation (σ) |
+
+## `sample_size_survey`: Sample size: prevalence survey
+
+Source: Research L11: sampling and sample size, slides 72–76 (Epi Info StatCalc, population survey; Lwanga and Lemeshow, WHO 1991)
+
+| input | kind | |
+|---|---|---|
+| `population` | number | Population size (N) |
+| `expected_prevalence` | number, % | Expected frequency (prevalence) |
+| `margin` | number, % | Acceptable margin of error (d) |
+| `confidence` | `80`, `90`, `95`, `97`, `99`, `99.9`, `99.99` | Confidence level |
+| `design_effect` | number | Design effect (DEFF); optional |
+
+## `sample_size_two_proportions`: Sample size: case-control or cohort (two proportions)
+
+Source: Research L11: sampling and sample size, slides 77–87 (Epi Info StatCalc; Kelsey 1996; Fleiss 2003)
+
+| input | kind | |
+|---|---|---|
+| `design` | `case_control`, `cohort` | Study design |
+| `confidence` | `80`, `90`, `95`, `97`, `99`, `99.9`, `99.99` | Two-sided confidence level |
+| `power` | number, % | Power |
+| `ratio` | number | Ratio of group 2 to group 1 (controls : cases, unexposed : exposed); optional |
+| `p_group2` | number, % | % exposed among controls, or % with the outcome among the unexposed |
+| `p_group1` | number, % | % exposed among cases, or % with the outcome among the exposed |

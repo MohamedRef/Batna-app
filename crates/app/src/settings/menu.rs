@@ -162,7 +162,10 @@ mod tests {
         });
     }
 
+    // muda builds macOS menus only on the main thread, and the test harness
+    // runs each test on a worker thread; Linux CI checks the same structure.
     #[test]
+    #[cfg_attr(target_os = "macos", ignore = "muda menus need the main thread on macOS")]
     fn the_menu_bar_has_batna_edit_go_window_and_help() {
         let bar = menu_bar();
         let titles: Vec<String> =

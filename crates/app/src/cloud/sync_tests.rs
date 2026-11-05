@@ -668,7 +668,13 @@ fn an_old_saved_session_is_not_used() {
 fn every_device_names_itself() {
     let d = super::device_info("dev-1".into());
     assert_eq!(d.device_id, "dev-1");
-    assert_eq!((d.name.as_str(), d.platform), ("Batna (dev)", Platform::Other));
+    if cfg!(target_os = "macos") {
+        // A Mac names itself after the computer (or plain "Mac").
+        assert_eq!(d.platform, Platform::Macos);
+        assert!(!d.name.is_empty());
+    } else {
+        assert_eq!((d.name.as_str(), d.platform), ("Batna (dev)", Platform::Other));
+    }
     assert_eq!(d.model, None);
 }
 

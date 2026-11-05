@@ -28,7 +28,7 @@ The study and opinion behind this plan: https://claude.ai/artifact/4YysQ71AHvM77
 
 ## 3. File ownership (no overlap)
 
-Each chunk owns the paths listed in its brief and edits nothing else. Files that everyone needs (the workspace `Cargo.toml`, `crates/app/src/main.rs` routes, `crates/app/src/i18n.rs`, `content/index.yaml`) belong to **chunk 1**. A feature chunk may add **one line** to register its route or module and one block of strings under its own key prefix. On a conflict, merge `origin/main` (MohamedRef/Batna-app) and keep both sides.
+Each chunk owns the paths listed in its brief and edits nothing else. Files that everyone needs (the workspace `Cargo.toml`, `crates/app/src/main.rs` routes, `crates/app/src/i18n/mod.rs`, `content/index.yaml`) belong to **chunk 1**. A feature chunk may add **one line** to register its route or module and its own strings file (`i18n/<feature>.rs`). On a conflict, merge `origin/main` (MohamedRef/Batna-app) and keep both sides.
 
 Workspace layout, which chunk 1 creates:
 

@@ -16,6 +16,7 @@ default:
 # fmt + clippy (zero warnings) + tests + content checks: run before every commit
 check:
     scripts/check-tracked-files.sh
+    scripts/check-file-sizes.sh
     cargo fmt --all --check
     cargo clippy --workspace --all-targets -- -D warnings
     cargo test --workspace

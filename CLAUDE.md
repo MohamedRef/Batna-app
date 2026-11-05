@@ -1,10 +1,12 @@
 # Batna: working conventions
 
+**New here? Start with [`AGENTS.md`](AGENTS.md) and [`docs/HANDOFF.md`](docs/HANDOFF.md).** They hold the full picture (architecture, commands, CI, releases, secrets by name, URLs, content rules, current state).
+
 Batna (باطنة) is a personal internal-medicine study app in Rust, for one learner: Mohamed, who is studying for an Egyptian MSc in General Internal Medicine. His exam is in January 2027. Batna is personal and is never published to a store. The `MohamedRef/Batna-app` repo stays public on purpose while testing (free Actions minutes); Mohamed makes it private afterwards, so do not flag its visibility.
 
 It lives in its own repo, `MohamedRef/Batna-app`, on `main`. It moved there from the old `batna` branch of `MohamedRef/Kabar-app` on 2026-10-28, with its full history. **Kabar (`MohamedRef/Kabar-app`) is a separate app: never push or open PRs there for Batna work, and never depend on Kabar crates.** Copy a Kabar module when it helps, adapt it, and credit the source path in a comment ("adapted from kabar-app main: <path>").
 
-The plan and the per-thread briefs are in `/mnt/project-files/medstudy/SPLIT.md` and `chunks/`. Where this file and SPLIT.md differ, SPLIT.md wins.
+The original plan is in `docs/SPLIT.md` (copied from `/mnt/project-files/medstudy/SPLIT.md`) and the course briefs in `docs/courses/`. Where they differ from this file or `docs/HANDOFF.md`, this file and HANDOFF win (for example, quotes have no length cap now).
 
 ## Non-negotiables
 - $0 a month. Ask before adding anything that could cost money.
@@ -23,11 +25,13 @@ The plan and the per-thread briefs are in `/mnt/project-files/medstudy/SPLIT.md`
 - Branch from `origin/main` and open PRs with base `main`. Before merging, merge the latest `origin/main`, run `just check`, wait for green CI, then squash-merge it yourself.
 - `just check` = check-tracked-files, `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, `batna-tools validate`.
 - Keep `docs/RUN.md` current.
+- **Keep `docs/HANDOFF.md` current**: every PR that changes behaviour, process, commands, CI, secrets, deploys, content rules or the state of the work updates it in the same PR (affected section, Current state, one Log line). See `AGENTS.md`.
 - The Mac workflow runs nightly and by hand only (Mohamed, 2026-10-29), never per PR or per merge. No PR waits for it; a nightly failure is fixed in its own PR.
 - Every PR adds `changes/<topic>.yaml` or appends to one (one line per change Mohamed can see: `kind` new/improved/fixed, `ar_eg`, optional `en`); the app's "What's new" is built from these (`docs/RELEASE.md` §5). Housekeeping PRs add a file holding `[]`. CI fails a PR without one.
 
 ## Code
-- Rust stable, edition 2024. Workspace: `crates/core` (pure logic, no UI, no IO, builds for wasm32), `crates/app` (Dioxus 0.7 + HTML/CSS), and `crates/tools`.
+- Rust stable, edition 2024. Workspace: `crates/core` (pure logic, no UI, no IO, builds for wasm32), `crates/protocol` (types that cross a process boundary, versioned), `crates/app` (Dioxus 0.7 + HTML/CSS; desktop, Android, web), `crates/anki` (Anki deck builder), `crates/server` (Batna Cloud Worker) and `crates/tools`.
+- A new synced table goes in `batna_protocol::sync::TABLES` and is written through the store's `sync_outbox`, or the hub rejects it.
 - UI: logical CSS properties only (RTL). Layout by window width (compact under 600dp, medium under 840dp, expanded 840dp and up), never by device name.
 - Review events are append-only. Statuses and settings are last-writer-wins. Synced tables carry `account_id`, `device_id`, an HLC timestamp and a tombstone.
 

@@ -211,7 +211,7 @@ Medicine "Internal Medicine Postgraduate Lectures" (2025) and research slides:
 | `dm` | Diabetes, Metabolism, Lipids (ch. 6) | part 3 | 23 |
 | `geri` | Geriatrics (ch. 7) | part 4 | 13 |
 | `neph` | Nephrology (ch. 8) | part 5 | 14 |
-| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 8 |
+| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 10 (L11 in progress) |
 
 Semester 1 = `res`, `hem`, `hb`. Not started (no material yet): `cvs`,
 `chest`, `neuro`, `trop`, `img`, `bioch`, `phys`, `path`, `clinpath`,
@@ -286,7 +286,7 @@ The book PDFs, their extracted page text and page images are copyrighted and
 | `book/LNN.txt` | hepatology text by printed page (printed p = PDF p + 4) |
 | `courses/<id>/text/LNN.txt` | other courses: `=== book page N (PDF page M) ===` blocks + tesseract OCR of image pages |
 | `courses/<id>/img/pNNN.jpg` | page images at 200 dpi |
-| `courses/res/slides/*.pdf` | research slide decks (`src.page` = slide number) |
+| `courses/res/slides/*.pdf` | research slide decks (`src.page` = slide number). A lecture taught as several decks is one merged PDF (`res-L09.pdf` = budget 1–14 + ethics 15–85 + plagiarism 86–141); the original files are in `slides/originals/` |
 | `anki/batna.apkg` | the latest Anki export |
 | `book-issues.md` | errors found in the book |
 
@@ -329,7 +329,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 
 ### Open work and known gaps
 
-- Content for courses with no material yet; `res` L09–L21 as slides arrive.
+- Content for courses with no material yet; `res` L12–L21 as slides arrive (L11 slides are in Batna-sources; its content PR was in progress on 2026-11-05).
 - Content still `unverified` until Mohamed approves in-app.
 - Glossary: split remaining ICP/SBP stop-gap senses into `course:` entries.
 - Review leftovers from the 2026-11-04 content audit (ambiguous abbreviations,
@@ -357,6 +357,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-05: `res.L09` written (budget, ethics, plagiarism: 113 items, 6 lessons); L09–L11 slides, text and images added to Batna-sources; glossary gains REC, CIOMS, WAME, WMA, MLA and `res` senses of PI, CV, APA.
 - 2026-11-05: res.L10 (data collection and questionnaire design + searching the literature, 146 slides) added: 107 items, 8 lessons; image-slide quotes and review-MCQ refs in `courses/res/verdicts/L10.tsv`.
 - 2026-11-05: Mac nightly green again: three tests now expect the Mac's own answers (installer message, device name; menu test skipped on macOS, muda needs the main thread).
 - 2026-11-05: big files split into smaller modules (i18n per feature; core `lesson`, `calc`, `labs`, `session`); AGENTS.md § Small files; `check-file-sizes.sh` warns in CI.

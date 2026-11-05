@@ -1,0 +1,17 @@
+pub const BACK: &str = "رجوع";
+pub const KICKER: &str = "المحاضرة";
+pub const PAGES: &str = "صفحات";
+pub const SLIDES: &str = "سلايدز";
+pub const PROGRESS: &str = "اللي بدأته من المحاضرة";
+pub const OF: &str = "من";
+pub const STARTED: &str = "بدأتهم";
+pub const DUE: &str = "مستحق";
+pub const STUDY: &str = "ذاكر المحاضرة دي";
+pub const REVIEW_DUE: &str = "راجع المستحق";
+pub const WRITING: &str = "المحاضرة دي لسه بتتكتب. أول ما تجهز هتلاقي أسئلتها هنا.";
+pub const LESSONS: &str = "الدروس";
+pub const PRACTICE: &str = "اتمرّن";
+pub const MCQS: &str = "سؤال اختيارات في البنك";
+pub const CASES: &str = "حالة";
+pub const TOPICS: &str = "المواضيع";
+pub const CHECKED: &str = "صحة المحتوى: راجعت";

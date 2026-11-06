@@ -357,6 +357,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-06: res.L11 lesson 4 sampling tree: purposive labels wrapped onto four lines (they ran past the picture edge and failed the nightly lesson browser regression).
 - 2026-11-05: res.L11 (sampling and sample size) written: 82 items, 6 lessons; two sample-size calculators (`sample_size_survey`, `sample_size_two_proportions`) reproduce the slides' Epi Info numbers.
 - 2026-11-05: `res.L09` written (budget, ethics, plagiarism: 113 items, 6 lessons); L09–L11 slides, text and images added to Batna-sources; glossary gains REC, CIOMS, WAME, WMA, MLA and `res` senses of PI, CV, APA.
 - 2026-11-05: res.L10 (data collection and questionnaire design + searching the literature, 146 slides) added: 107 items, 8 lessons; image-slide quotes and review-MCQ refs in `courses/res/verdicts/L10.tsv`.

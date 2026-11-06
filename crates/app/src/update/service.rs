@@ -228,26 +228,34 @@ impl Updater {
             }
         };
         self.remember_history(&m.history);
-        if content {
-            let found = self.refresh_content(&m);
-            self.tx.send_modify(|s| s.content_check = Some(found));
-        }
-        match self.offer(&m) {
-            Ok(Some(offer)) => {
-                if let Some(k) = keep.filter(|k| k.asset == offer.asset) {
+        // The app's answer shows as soon as the feed is read; the content
+        // pack (megabytes) and the build download come after it.
+        let to_download = match self.offer(&m) {
+            Ok(Some(offer)) => match keep.filter(|k| k.asset == offer.asset) {
+                Some(k) => {
                     self.set_phase(match self.status().phase {
                         Phase::Checking => Phase::Ready(k),
                         other => other,
                     });
-                    return;
+                    None
                 }
-                self.set_phase(Phase::Available(offer.clone()));
-                if download {
-                    self.download_locked(offer);
+                None => {
+                    self.set_phase(Phase::Available(offer.clone()));
+                    download.then_some(offer)
                 }
+            },
+            Ok(None) => None,
+            Err(why) => {
+                self.set_phase(Phase::Failed { offer: None, why });
+                None
             }
-            Ok(None) => {}
-            Err(why) => self.set_phase(Phase::Failed { offer: None, why }),
+        };
+        if content {
+            let found = self.refresh_content(&m);
+            self.tx.send_modify(|s| s.content_check = Some(found));
+        }
+        if let Some(offer) = to_download {
+            self.download_locked(offer);
         }
     }
 
@@ -338,6 +346,7 @@ impl Updater {
             let bytes = match self.held(&asset) {
                 Some(bytes) => bytes,
                 None => {
+                    self.tx.send_modify(|s| s.content_check = Some(ContentCheck::Fetching));
                     let url = format!("{}/{}", self.feed_url(), asset.file);
                     let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60))
                         .map_err(|f| (false, format!("{f:?}")))?;

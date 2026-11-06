@@ -366,6 +366,7 @@ fn ContentResult(status: Status) -> Element {
         (true, _) | (_, Some(ContentCheck::New)) => ("", tx::CONTENT_NEW),
         (false, Some(ContentCheck::Current)) => ("✓ ", tx::CONTENT_CURRENT),
         (false, Some(ContentCheck::Failed)) => ("", tx::CONTENT_FAILED),
+        (false, Some(ContentCheck::Fetching)) => ("", tx::CONTENT_FETCHING),
         (false, None) => return rsx! {},
     };
     // The same box as the app's half above, so the two read as a pair.

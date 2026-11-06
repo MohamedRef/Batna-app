@@ -64,7 +64,10 @@ Dioxus 0.7 (HTML/CSS UI in a WebView), SQLite, plus minimal Kotlin for Android.
 Other top-level paths: `content/` (all study content, § 7), `android/`
 (Kotlin glue: WebViewGuard, BackKey, UpdateInstaller, notifications, Share),
 `web/` (index.html, sw.js service worker), `assets/`, `scripts/`, `fixtures/`
-(recorded replies, test feeds), `changes/` (What's new fragments).
+(recorded replies, test feeds), `changes/` (What's new fragments), `vendor/`
+(Dioxus 0.7.10 `dioxus-desktop` + `dioxus-interpreter-js` patched so the
+screen survives Android destroying its edit socket; see `vendor/README.md`,
+and re-check it before any Dioxus upgrade).
 
 Key design rules (also in `CLAUDE.md`):
 - Synced tables carry `account_id`, `device_id`, HLC, tombstone. Reviews are
@@ -160,6 +163,11 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   (CI skips the APK when only content/changes/docs/CSS changed). Details:
   [RELEASE.md](RELEASE.md), [COMPATIBILITY.md](COMPATIBILITY.md).
 - What's new comes from `changes/*.yaml` (Morphe-style sheet before/after an update).
+- A check shows the app's answer as soon as the feed is read; a newer
+  content pack downloads after it (Settings shows «بيجيب الدروس…»), then an
+  automatic build download. Every update request fails after 20 s without
+  progress (lookup, connect, each read), so a connection Android cut while
+  the phone was locked doesn't hold the check for minutes.
 
 ### Secrets (names only, values never in git)
 
@@ -317,7 +325,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 - Android crash reports start from Settings › Your data › diagnostics
   (WebViewGuard records renderer loss and exit reasons).
 
-## 10. Current state (2026-11-05)
+## 10. Current state (2026-11-06)
 
 | Area | State |
 |---|---|
@@ -339,7 +347,8 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
   wipes the first tab's data.
 - Test debt: merge duplicate click-test helpers; more calculator tests against
   original-paper examples and cut-offs.
-- Not yet verified on a real device: Back-key routing, update notifications.
+- Not yet verified on a real device: Back-key routing, update notifications,
+  the lock/unlock freeze fix (`vendor/`, tested on desktop sockets only).
 - 14 Rust files are still over 800 lines (`scripts/check-file-sizes.sh`);
   split each when a PR already changes it a lot (AGENTS.md § Small files).
 
@@ -357,6 +366,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-06: Android screen froze after lock/unlock: Dioxus's edit socket patched in `vendor/` (edits resent until acknowledged); update check shows the app result before the content pack downloads, requests time out after 20 s of no progress.
 - 2026-11-06: res.L11 lesson 4 sampling tree: purposive labels wrapped onto four lines (they ran past the picture edge and failed the nightly lesson browser regression).
 - 2026-11-05: res.L11 (sampling and sample size) written: 82 items, 6 lessons; two sample-size calculators (`sample_size_survey`, `sample_size_two_proportions`) reproduce the slides' Epi Info numbers.
 - 2026-11-05: `res.L09` written (budget, ethics, plagiarism: 113 items, 6 lessons); L09–L11 slides, text and images added to Batna-sources; glossary gains REC, CIOMS, WAME, WMA, MLA and `res` senses of PI, CV, APA.

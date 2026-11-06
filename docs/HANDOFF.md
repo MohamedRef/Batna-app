@@ -148,7 +148,7 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 
 ## 6. Releases and updates
 
-- Version in workspace `Cargo.toml` (now **1.0.0-alpha.2**).
+- Version in workspace `Cargo.toml` (now **1.0.0-alpha.3**).
 - Channels: `batna-preview` (CI, every 4 h), `batna-alpha`, `batna-beta`,
   `batna-stable`. Human release tags: `batna-v<version>`.
 - **Alpha only when Mohamed says so** («طلّع ألفا»). Steps: PR bumping
@@ -330,7 +330,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 | Area | State |
 |---|---|
 | App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
-| Releases | `batna-v1.0.0-alpha.2` published 2026-11-04 (feed `batna-alpha`); previews every 4 h |
+| Releases | `batna-v1.0.0-alpha.3` published 2026-11-06 (feed `batna-alpha`); previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
 | Open PRs / issues | none on 2026-11-05 |
 | Coverage | 95.05% (floor 94) |
@@ -366,6 +366,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-06: 1.0.0-alpha.3 released on Mohamed's ask, so the Mac app (alpha feed only; previews carry no Mac build) gets the lock/unlock and update-check fixes.
 - 2026-11-06: Android screen froze after lock/unlock: Dioxus's edit socket patched in `vendor/` (edits resent until acknowledged); update check shows the app result before the content pack downloads, requests time out after 20 s of no progress.
 - 2026-11-06: res.L11 lesson 4 sampling tree: purposive labels wrapped onto four lines (they ran past the picture edge and failed the nightly lesson browser regression).
 - 2026-11-05: res.L11 (sampling and sample size) written: 82 items, 6 lessons; two sample-size calculators (`sample_size_survey`, `sample_size_two_proportions`) reproduce the slides' Epi Info numbers.

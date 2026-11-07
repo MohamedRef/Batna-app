@@ -53,6 +53,16 @@ window.__batnaKeys = (e) => {
   // With the command palette open, arrow keys move focus between actual
   // result buttons, and Enter on the search box opens its first match.
   const palette = document.querySelector('.command-palette[role="dialog"]');
+  if (palette && !mod && !e.altKey && e.key === "Tab") {
+    const focusable = [...palette.querySelectorAll('button:not(:disabled), input:not(:disabled)')];
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (focusable.length && (e.shiftKey ? document.activeElement === first :
+      document.activeElement === last)) {
+      e.preventDefault();
+      (e.shiftKey ? last : first).focus();
+      return;
+    }
+  }
   if (palette && !mod && !e.altKey && !e.shiftKey) {
     const rows = [...palette.querySelectorAll('.palette-result:not(:disabled)')];
     const index = rows.indexOf(document.activeElement);

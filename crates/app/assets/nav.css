@@ -69,6 +69,40 @@
   :root:not([data-nav-style="slim"]) .nav-foot .label { font-size: var(--fs-md); }
 }
 
+/* The Mac workspace uses a quiet, distinct navigation surface rather than
+   a stretched phone tab bar. Scope it to taller desktop windows so the short
+   Tab S11 landscape view remains compact. */
+@media (min-width: 1200px) and (min-height: 740px) {
+  :root:not([data-nav-style="slim"]) {
+    --sidebar-w: 14.5rem;
+  }
+  :root:not([data-nav-style="slim"]) .nav {
+    background: color-mix(in srgb, var(--surface) 84%, var(--bg));
+    padding-inline: var(--sp-3);
+    gap: var(--sp-2);
+  }
+  :root:not([data-nav-style="slim"]) .nav-brand {
+    margin-block: var(--sp-2) var(--sp-4);
+    padding-block: var(--sp-2) var(--sp-4);
+    border-color: var(--line-soft, var(--line));
+  }
+  :root:not([data-nav-style="slim"]) .nav-item {
+    min-height: max(var(--tap-lg), 3.25rem);
+    border: 1px solid transparent;
+    transition: background-color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+  }
+  :root:not([data-nav-style="slim"]) .nav-item[aria-current="page"] {
+    border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  :root:not([data-nav-style="slim"]) .nav-item:hover:not([aria-current="page"]) {
+    background: var(--surface);
+    border-color: var(--line-soft, var(--line));
+  }
+}
+
 /* Short landscape windows (Tab S11 landscape is about 1205 × 680dp with the
    system bars): tighter rows so all six screens and Settings fit. */
 @media (min-width: 600px) and (max-height: 760px) {

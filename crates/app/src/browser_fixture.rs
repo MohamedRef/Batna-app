@@ -56,10 +56,15 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
         prefs: Signal::new(DevicePrefs::default()),
         focus: Signal::new(focus),
     });
+    // The normal Rust click-through tests search screen text; duplicate nav
+    // labels would intercept their taps. The browser export sets this path
+    // explicitly, so only its screenshots need the desktop shell chrome.
+    let browser_preview = std::env::var_os("APP_BROWSER_FIXTURES").is_some();
     rsx! {
         div { class: "app", lang: "ar", dir: "rtl", "data-appearance": "calm",
             "data-focus": if focus { "true" } else { "false" },
-            header { class: "topbar",
+            if browser_preview {
+                header { class: "topbar",
                 div { class: "brand",
                     span { class: "brand-name", {crate::i18n::app::NAME} }
                     span { class: "brand-tag", {crate::i18n::app::TAGLINE} }
@@ -83,6 +88,7 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
                     span { class: "glyph", {crate::icons::nav(Screen::Settings)} }
                     span { class: "label", {Screen::Settings.label()} }
                 }
+            }
             }
             main { class: "content", "data-screen": "{screen:?}",
                 div { class: "content-rev", {children} }

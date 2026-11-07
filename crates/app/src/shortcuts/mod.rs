@@ -28,6 +28,8 @@ window.__batnaKeys = (e) => {
   // Review keys are single actions, never auto-repeat through multiple cards.
   if (e.defaultPrevented || e.isComposing || e.repeat) return;
   const t = e.target;
+  // Separator arrows belong to the keyboard-adjustable split divider.
+  if (t?.closest?.(".desk-resize")) return;
   const typing = t && (t.closest?.('input, textarea, select, [contenteditable=""], [contenteditable="true"], [role="textbox"]') ||
     t.isContentEditable);
   const mod = e.metaKey || e.ctrlKey;

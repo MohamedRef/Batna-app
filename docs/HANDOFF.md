@@ -369,7 +369,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
-- 2026-11-07: Mac expanded-layout pass: eliminate fixed-width canvas padding, adapt lesson Steps into context and active-step panes on ≥1440px, widen study/Settings, and default the Mac window to 1280×820; browser SSR at 1600px includes the desktop nav and saves previews. Native Mac QA remains open.
+- 2026-11-07: Mac expanded-layout pass: eliminate fixed-width canvas padding, adapt lesson Steps into context and active-step panes on ≥1440px, widen study/Settings, and default the Mac window to 1280×820; browser SSR at 1600px includes inert desktop navigation and saves previews. Layout at 840–1099px stacks form panes to prevent larger-text overflow. Native Mac QA remains open.
 
 - 2026-11-06: 1.0.0-alpha.3 released on Mohamed's ask, so the Mac app (alpha feed only; previews carry no Mac build) gets the lock/unlock and update-check fixes.
 - 2026-11-06: Android screen froze after lock/unlock: Dioxus's edit socket patched in `vendor/` (edits resent until acknowledged); update check shows the app result before the content pack downloads, requests time out after 20 s of no progress.

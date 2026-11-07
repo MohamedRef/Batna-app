@@ -12,6 +12,14 @@ Last full refresh: 2026-11-05, main at `c35ffec` (1.0.0-alpha.2).
 
 ---
 
+## Mac desktop UX follow-up (2026-11-07, PR #739)
+
+- Desktop references reviewed: RemNote for spaced-repetition home, AMBOSS for clear clinical question/explanation separation, Obsidian for navigable workspaces, and Apple macOS sidebar/split-view guidance.
+- The previous Mac canvas fix removed excess margins but the 1440px lesson breakpoint missed the default 1280x820 Mac window. On desktop-height windows (>=1200px wide, >=740px high) the Steps player now uses a 2-pane reading workspace: a compact sticky context card and a centered, generous active step; footer controls remain below the stage.
+- The labelled Mac sidebar is slightly wider and visually separated, with stronger active/hover affordances. Short Tab S11 landscape and phone layouts are unchanged. Pages reading mode remains single column.
+- Browser check now asserts side-by-side lesson panes at 1280px as well as at 1600px. New PR Actions must pass before merge. Native Mac visual QA remains pending; Playwright fixtures are not native screenshots.
+- Next larger UX phase after this PR: task-first Today dashboard and resizable/collapsible side panels; do not imply those are already implemented.
+
 ## 1. What Batna is
 
 - **Batna (باطنة)**: a personal internal-medicine study app for one learner,

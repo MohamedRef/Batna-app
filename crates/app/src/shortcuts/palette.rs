@@ -62,34 +62,44 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
         return hits;
     }
     for lecture in &lib.index.lectures {
-        if hits.len() >= MAX_RESULTS {
-            break;
-        }
         let title = lib.title(&lecture.id);
         let context = lib.lecture_tag(&lecture.id);
         if matches_query(&q, &format!("{} {title} {context}", lecture.id)) {
             hits.push(Hit {
                 id: format!("lecture-{}", lecture.id),
                 name: title.into(),
-                subtitle: context,
+                subtitle: format!("محاضرة · {context}"),
                 destination: Destination::Lecture(lecture.id.clone()),
             });
         }
     }
     for (lecture_id, lesson) in lib.all_lessons() {
-        if hits.len() >= MAX_RESULTS {
-            break;
-        }
         let context = lib.crumb(lecture_id);
         if matches_query(&q, &format!("{} {} {context}", lesson.id, lesson.title)) {
             hits.push(Hit {
                 id: format!("lesson-{}", lesson.id),
                 name: lesson.title.clone(),
-                subtitle: context,
+                subtitle: format!("درس · {context}"),
                 destination: Destination::Lesson(lesson.id.clone()),
             });
         }
     }
+    // Exact ids and titles first, then prefix matches, then general hits.
+    // Stable sorting keeps the original library order for equal relevance.
+    hits.sort_by_key(|hit| {
+        let id = hit.id.to_lowercase();
+        let name = hit.name.to_lowercase();
+        if id == q || name == q {
+            0
+        } else if name.starts_with(&q) {
+            1
+        } else if id.contains(&q) {
+            2
+        } else {
+            3
+        }
+    });
+    hits.truncate(MAX_RESULTS);
     hits
 }
 

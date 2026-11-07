@@ -208,6 +208,27 @@ fn Toggle(label: &'static str, note: &'static str, on: bool, onchange: EventHand
     }
 }
 
+/// A deliberate one-click focus for Mac reading. Unlike phone focus, this
+/// keeps its choice on this device and only hides the sidebar while a study
+/// item or lesson player is actually present.
+#[component]
+pub fn FocusToggle() -> Element {
+    let ui = use_context::<Ui>();
+    let focused = ui.prefs.read().desk_focus;
+    let label = if focused { tx::FOCUS_LEAVE } else { tx::FOCUS_ENTER };
+    rsx! {
+        button {
+            r#type: "button",
+            class: "desk-focus-toggle",
+            aria_pressed: if focused { "true" } else { "false" },
+            aria_label: label,
+            title: label,
+            onclick: move |_| ui.update_prefs(|p| p.desk_focus = !p.desk_focus),
+            "{label}"
+        }
+    }
+}
+
 #[cfg(test)]
 mod resize_tests {
     use super::*;

@@ -134,8 +134,8 @@ pub fn Palette() -> Element {
         section {
             class: "command-palette",
             role: "dialog",
-            aria_modal: "true",
-            aria_labelledby: "command-palette-title",
+            "aria-modal": "true",
+            "aria-labelledby": "command-palette-title",
             onmounted: move |_| {
                 document::eval("document.querySelector('.palette-search')?.focus();");
             },
@@ -144,7 +144,7 @@ pub fn Palette() -> Element {
                 button {
                     r#type: "button",
                     class: "icon-button",
-                    aria_label: "إغلاق البحث السريع",
+                    "aria-label": "إغلاق البحث السريع",
                     "data-back": "true",
                     "aria-keyshortcuts": "Escape",
                     onclick: move |_| open_palette(false),
@@ -155,7 +155,7 @@ pub fn Palette() -> Element {
                 input {
                     class: "command-search palette-search",
                     r#type: "search",
-                    aria_label: "ابحث عن قسم أو محاضرة أو درس",
+                    "aria-label": "ابحث عن قسم أو محاضرة أو درس",
                     placeholder: "ابحث عن قسم، محاضرة أو درس…",
                     autocomplete: "off",
                     autofocus: true,

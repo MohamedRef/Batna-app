@@ -162,6 +162,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 }
                 StepMeter { current: i + 1, question_steps }
                 span { class: "muted small ls-count num-ltr", "{i + 1}/{n}" }
+                crate::desk::FocusToggle {}
                 button {
                     class: "ls-view",
                     aria_label: if pages { tx::TO_STEPS } else { tx::TO_PAGES },

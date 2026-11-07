@@ -236,6 +236,33 @@ async function run() {
                 if (width === 1600 && scheme === 'light' && appearance === 'calm' && size === 'normal' &&
                     !desktopCaptured.has(screen) &&
                     (screen === 'learn' ? item.view === 'steps' : item.phase === 'running')) {
+                  const desktop = await page.evaluate(() => {
+                    const nav = document.querySelector('.nav').getBoundingClientRect();
+                    const main = document.querySelector('main.content');
+                    const style = getComputedStyle(main);
+                    const context = document.querySelector('.ls-player[data-view="steps"] > .ls-context');
+                    const stage = document.querySelector('.ls-stage:not([hidden])');
+                    const study = document.querySelector('.st:has(> .st-item)');
+                    return {
+                      navWidth: nav.width,
+                      padStart: parseFloat(style.paddingInlineStart),
+                      padEnd: parseFloat(style.paddingInlineEnd),
+                      context: context && { left: context.getBoundingClientRect().left, width: context.getBoundingClientRect().width },
+                      stage: stage && { right: stage.getBoundingClientRect().right, width: stage.getBoundingClientRect().width },
+                      studyWidth: study?.getBoundingClientRect().width,
+                    };
+                  });
+                  assert.ok(desktop.navWidth >= 200, `${name}: Mac labelled sidebar must be present`);
+                  assert.ok(Math.abs(desktop.padStart - desktop.padEnd) < 1,
+                    `${name}: Mac canvas must use both sides of the window: ${JSON.stringify(desktop)}`);
+                  if (screen === 'learn') {
+                    assert.ok(desktop.context?.width >= 200 && desktop.stage?.width >= 600 &&
+                      desktop.context.left >= desktop.stage.right - 1,
+                    `${name}: lesson context should sit beside the active step, not above it: ${JSON.stringify(desktop)}`);
+                  } else {
+                    assert.ok(desktop.studyWidth >= 1000,
+                      `${name}: study card should use the wide desktop canvas: ${JSON.stringify(desktop)}`);
+                  }
                   await page.screenshot({ path: path.join(output, `mac-preview-${screen}-1600.png`) });
                   desktopCaptured.add(screen);
                 }

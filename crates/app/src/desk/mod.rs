@@ -42,8 +42,7 @@ pub fn Chrome() -> Element {
         // Zero restores the original 60/40 or 40/60 preset per study item.
         document::eval(&format!(
             "if ({} === 0) document.documentElement.style.removeProperty('--desk-split-width'); else document.documentElement.style.setProperty('--desk-split-width', '{}%');",
-            p.desk_split,
-            p.desk_split,
+            p.desk_split, p.desk_split,
         ));
     });
     // A content pack switched in while open restyles the nav and desk too.
@@ -237,9 +236,16 @@ mod resize_tests {
     fn divider_has_keyboard_and_pointer_contract() {
         let script = include_str!("resize.js");
         for required in [
-            "setPointerCapture", "ArrowLeft", "ArrowRight", "pointercancel",
-            "dblclick", "desk-resizing", "split:0", "dioxus.send",
-            "getBoundingClientRect", "rtl",
+            "setPointerCapture",
+            "ArrowLeft",
+            "ArrowRight",
+            "pointercancel",
+            "dblclick",
+            "desk-resizing",
+            "split:0",
+            "dioxus.send",
+            "getBoundingClientRect",
+            "rtl",
         ] {
             assert!(script.contains(required), "desktop divider needs {required}");
         }

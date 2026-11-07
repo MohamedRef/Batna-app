@@ -135,13 +135,16 @@ fn main() {
     {
         use dioxus::desktop::{Config, LogicalSize, WindowBuilder};
         // BATNA_WINDOW_SIZE=412x900 previews the phone layout on the Mac.
+        // Give the Mac a useful two-pane window on first launch without
+        // changing the Linux default or overriding a caller's preview size.
+        let default_size = if cfg!(target_os = "macos") { (1280.0, 820.0) } else { (1100.0, 760.0) };
         let (w, h) = std::env::var("BATNA_WINDOW_SIZE")
             .ok()
             .and_then(|v| {
                 let (w, h) = v.split_once('x')?;
                 Some((w.parse().ok()?, h.parse().ok()?))
             })
-            .unwrap_or((1100.0, 760.0));
+            .unwrap_or(default_size);
         let window = WindowBuilder::new()
             .with_title("Batna")
             .with_inner_size(LogicalSize::new(w, h))

@@ -12,6 +12,22 @@ Last full refresh: 2026-11-05, main at `c35ffec` (1.0.0-alpha.2).
 
 ---
 
+## Mac desktop workflow plan, 2026-11-07 (active branch: `feat/mac-desk-panels-focus-20261107`)
+
+User directive: **code work first**. Native Mac interaction testing is deferred to the user; don't block feature implementation on manual macOS verification. Automated CI, layout regression checks, PR review, and conflict checks remain mandatory before merging. Leave interface-language work out of this batch. No alpha unless explicitly requested. Keep the PR-first, sequential merge discipline.
+
+Status on `main`: PR #739 (full-window desktop UI) and PR #740 (Anki-like keyboard navigation) merged. Do not rebuild their already-working pieces.
+
+Priority-ordered product backlog (not all implemented):
+1. **Current PR:** resizable question/explanation panes on desktop pointer devices with keyboard-operable divider, a reset to default, device-local persistent width and safe small-window fallback; intentional Mac focus mode for running Study and Lesson, hiding the sidebar while keeping Back/end, lesson progress, and grade controls. Use existing layout CSS, `desk::Panes`, shared `Ui::update_prefs`, and the single app scroll container. Preserve study state when toggling.
+2. **Next separate PR:** task-first Today dashboard with due reviews, continue-learning card, weak topics, and explicit priority for the next action, adapting smoothly to window width.
+3. **Then separate PR:** `⌘K` command palette for searching lessons, questions, calculators, settings, with keyboard focus and results restricted by available content.
+4. **Then:** configurable review shortcuts with collision detection (reserved macOS combos, input/IME safety, A–E and 1–4 compatibility); quicker review actions (mark, defer, show source) only after review-store behavior is specified and tested.
+5. **Later UX:** keyboard focus restoration after grading/switching steps, reduced UI jank on item transitions, readable very-wide typography, saved panel preferences and narrow-window behavior, consistent empty/loading states, shortcut discoverability/tooltips, accessible contrast and reduced motion.
+6. **Deferred manual checks by user:** actual WKWebView shortcuts, splitter dragging with mouse, both right-to-left panes and Mac window resizing, focus escape/restore and IME. Browser previews are **not** native Mac screenshots.
+
+Keep these labels honest as PRs merge, refresh this section and a `changes/*.yaml` fragment in each PR. Prefer a single PR for related pane/focus work, then move to the next feature only after CI passes and merge succeeds.
+
 ## Mac desktop UX follow-up (2026-11-07, PR #739)
 
 - Desktop references reviewed: RemNote for spaced-repetition home, AMBOSS for clear clinical question/explanation separation, Obsidian for navigable workspaces, and Apple macOS sidebar/split-view guidance.

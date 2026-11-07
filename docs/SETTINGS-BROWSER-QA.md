@@ -16,18 +16,22 @@ No real user data, live APIs, app launch, installation or release is involved.
 
 | Dimension | Cases |
 |---|---|
-| Width | 320, 384, 600, 840, 1280 CSS px |
+| Width | 320, 384, 600, 840, 1280 CSS px; plus one 1600px Paper/Calm/Normal Mac preview |
 | Height | 900 CSS px |
 | Theme | Every supported theme; System variants in light and dark OS schemes |
 | Appearance | Calm, Glossy and Liquid Glass |
 | Text size | Normal and the largest supported size |
 | Direction | Arabic RTL with the production Latin medical sample |
 
-The matrix runs 240 browser cases with the current three appearances. Assertions inspect computed dialog bounds,
+The matrix runs 240 browser cases with the current three appearances, plus
+one wide-screen Mac preview case (241 total). Assertions inspect computed dialog bounds,
 document and pane overflow, the exact production text-size scale (15px compact\nNormal / 16px wider Normal, multiplied by 125% for Larger), the responsive\nsection index and Back target, actual
 focus after Tab/Shift+Tab, the Escape target, inert background and focus restored
 after removal. Browser errors fail the job. Largest-text Calm screenshots and a
 JSON report are attached as `settings-browser-results`; failures attach a screenshot.
+The wide-screen case adds `mac-preview-settings-1600.png` and verifies the
+Settings dialog uses at least 1200px. This is a production-component Chromium
+screenshot, not a capture of a native Mac app.
 
 ## Run
 

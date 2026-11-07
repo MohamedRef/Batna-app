@@ -10,6 +10,9 @@
 // adapted from kabar-app main: crates/app/src/settings/menu.rs ("?" key) and
 // crates/app/src/review.rs (keys on visible buttons).
 
+mod palette;
+pub use palette::Palette;
+
 use dioxus::prelude::*;
 
 use crate::i18n::{keys as tx, nav};
@@ -17,6 +20,11 @@ use crate::settings::SettingsNav;
 use crate::{Screen, Ui};
 
 static SHEET_OPEN: GlobalSignal<bool> = Signal::global(|| false);
+static PALETTE_OPEN: GlobalSignal<bool> = Signal::global(|| false);
+
+pub fn open_palette(open: bool) {
+    *PALETTE_OPEN.write() = open;
+}
 
 pub fn open_sheet(open: bool) {
     *SHEET_OPEN.write() = open;
@@ -38,9 +46,28 @@ window.__batnaKeys = (e) => {
   if (mod && !e.altKey && !e.shiftKey) {
     if (/^Digit[1-7]$/.test(e.code)) { e.preventDefault(); dioxus.send("go:" + e.code.slice(5)); return; }
     if (e.code === "Comma") { e.preventDefault(); dioxus.send("go:settings"); return; }
+    if (e.code === "KeyK") { e.preventDefault(); dioxus.send("palette"); return; }
     return;
   }
   if (e.altKey || mod || e.shiftKey && e.key !== "?" && e.key !== "\u061F") return;
+  // With the command palette open, arrow keys move focus between actual
+  // result buttons, and Enter on the search box opens its first match.
+  const palette = document.querySelector('.command-palette[role="dialog"]');
+  if (palette && !mod && !e.altKey && !e.shiftKey) {
+    const rows = [...palette.querySelectorAll('.palette-result:not(:disabled)')];
+    const index = rows.indexOf(document.activeElement);
+    if ((e.key === "ArrowDown" || e.key === "ArrowUp") && rows.length) {
+      e.preventDefault();
+      const step = e.key === "ArrowDown" ? 1 : -1;
+      rows[index < 0 ? (step > 0 ? 0 : rows.length - 1) : (index + step + rows.length) % rows.length].focus();
+      return;
+    }
+    if (e.key === "Enter" && t?.matches?.(".palette-search") && rows.length) {
+      e.preventDefault();
+      rows[0].click();
+      return;
+    }
+  }
   if (e.key === "Escape" && window.__batnaHover?.visible()) {
     window.__batnaHover.hide(); e.preventDefault(); return;
   }
@@ -49,7 +76,7 @@ window.__batnaKeys = (e) => {
   // Escape may still close a modal via its own button.
   if (typing && e.key !== "Escape") return;
   if (e.key === "?" || e.key === "\u061F") {
-    if (!typing) { e.preventDefault(); dioxus.send("help"); }
+    if (!typing && !palette) { e.preventDefault(); dioxus.send("help"); }
     return;
   }
   let key = null;
@@ -88,11 +115,13 @@ enum Command {
     Go(Screen),
     Settings,
     Help,
+    Palette,
 }
 
 fn parse(msg: &str) -> Option<Command> {
     match msg {
         "help" => Some(Command::Help),
+        "palette" => Some(Command::Palette),
         "go:settings" => Some(Command::Settings),
         _ => {
             let n: usize = msg.strip_prefix("go:")?.parse().ok()?;
@@ -119,17 +148,25 @@ fn apply(cmd: Command, ui: Ui, settings: SettingsNav) {
     match cmd {
         Command::Go(screen) => {
             open_sheet(false);
+            open_palette(false);
             settings.close();
             let mut s = ui.screen;
             s.set(screen);
         }
         Command::Settings => {
             open_sheet(false);
+            open_palette(false);
             settings.show(None);
         }
         Command::Help => {
+            open_palette(false);
             let open = !*SHEET_OPEN.peek();
             open_sheet(open);
+        }
+        Command::Palette => {
+            open_sheet(false);
+            let open = !*PALETTE_OPEN.peek();
+            open_palette(open);
         }
     }
 }
@@ -142,9 +179,10 @@ pub fn KeysSheet() -> Element {
         return rsx! {};
     }
     let screens = format!("{} … {}", nav::TODAY, nav::STATS);
-    let rows: [(&[&str], String); 13] = [
+    let rows: [(&[&str], String); 14] = [
         (&["Ctrl", "1–7"], format!("{} ({screens})", tx::SCREENS)),
         (&["Ctrl", ","], tx::SETTINGS.into()),
+        (&["Ctrl/⌘", "K"], tx::PALETTE.into()),
         (&["Space", "Enter"], tx::REVEAL.into()),
         (&["Space", "Enter"], tx::GOOD.into()),
         (&["1", "2", "3", "4"], tx::RATE.into()),
@@ -227,6 +265,7 @@ mod tests {
         assert_eq!(parse("go:7"), Some(Command::Go(Screen::Stats)));
         assert_eq!(parse("go:settings"), Some(Command::Settings));
         assert_eq!(parse("help"), Some(Command::Help));
+        assert_eq!(parse("palette"), Some(Command::Palette));
         assert_eq!(parse("go:0"), None);
         assert_eq!(parse("go:8"), None);
         assert_eq!(parse("other"), None);
@@ -295,7 +334,7 @@ mod tests {
         dom.rebuild_in_place();
         let html = dioxus::ssr::render(&dom);
         assert!(html.contains(tx::TITLE) && html.contains("aria-modal=\"true\""), "{html}");
-        assert_eq!(html.matches("<tr").count(), 13, "{html}");
+        assert_eq!(html.matches("<tr").count(), 14, "{html}");
         for text in [tx::SCREENS, tx::REVEAL, tx::RATE, tx::FLAG, tx::HELP, nav::TODAY, nav::STATS] {
             assert!(html.contains(text), "missing {text}: {html}");
         }

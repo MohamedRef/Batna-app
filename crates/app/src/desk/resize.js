@@ -24,7 +24,7 @@ const pointerdown = e => {
   if (!handle || !fineDesktop() || e.button !== 0) return;
   const split = handle.closest(".desk-split");
   if (!split) return;
-  drag = { handle, split, pointerId: e.pointerId };
+  drag = { handle, split, pointerId: e.pointerId, moved: false };
   handle.setPointerCapture?.(e.pointerId);
   root.classList.add("desk-resizing");
   e.preventDefault();
@@ -33,18 +33,19 @@ const pointermove = e => {
   if (!drag || e.pointerId !== drag.pointerId) return;
   const b = drag.split.getBoundingClientRect();
   if (!b.width) return;
+  drag.moved = true;
   const rtl = getComputedStyle(drag.split).direction === "rtl";
   const x = rtl ? b.right - e.clientX : e.clientX - b.left;
   apply(100 * x / b.width, false);
 };
 const pointerup = e => {
   if (!drag || e.pointerId !== drag.pointerId) return;
-  const handle = drag.handle;
+  const { handle, moved } = drag;
   drag = null;
   root.classList.remove("desk-resizing");
   try { if (handle.hasPointerCapture?.(e.pointerId)) handle.releasePointerCapture(e.pointerId); } catch (_) {}
   const value = Number(root.style.getPropertyValue("--desk-split-width").replace("%", ""));
-  if (Number.isFinite(value)) apply(value, true);
+  if (moved && Number.isFinite(value) && value >= 35) apply(value, true);
 };
 const pointercancel = e => {
   if (!drag || e.pointerId !== drag.pointerId) return;

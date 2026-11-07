@@ -100,10 +100,19 @@ fn export_browser_fixtures() {
         std::path::PathBuf::from(std::env::var_os("APP_BROWSER_FIXTURES").expect("APP_BROWSER_FIXTURES"));
     std::fs::create_dir_all(&dir).unwrap();
     let mut manifest = Vec::new();
-    for width in [320, 384, 600, 840, 1280] {
+    for width in [320, 384, 600, 840, 1280, 1600] {
         for theme in Theme::ALL {
             for appearance in Appearance::ALL.iter().copied() {
                 for size in [TextSize::Normal, TextSize::Larger] {
+                    // One wide, representative Mac capture; keep the full
+                    // theme/size/appearance matrix at regular widths.
+                    if width == 1600
+                        && (theme != Theme::Paper
+                            || appearance != Appearance::Calm
+                            || size != TextSize::Normal)
+                    {
+                        continue;
+                    }
                     let html = render(Case { theme, appearance, size }, Section::Look);
                     assert!(html.contains("settings-window") && html.contains("text-sample"));
                     let file =

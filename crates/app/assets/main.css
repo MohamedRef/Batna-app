@@ -303,10 +303,11 @@ input[type="file"]::file-selector-button {
 /* Redrawn when a content update switches in (main.rs); adds no box. */
 .content-rev { display: contents; }
 @media (min-width: 840px) {
-  /* A reading column (60rem, 80rem on dashboards: desk.css) at the start
-     side; the padding, not a max-width, keeps it there so the scrollbar
-     stays at the window's edge. */
-  .content { padding-inline: var(--sp-6) max(var(--sp-6), calc(100% - var(--content-max, 60rem) - var(--sp-6))); }
+  /* The desktop canvas uses both sides of the window. Older builds capped
+     it at 60rem by adding a huge trailing pad, wasting space on the Mac.
+     Keep reading widths on the lesson/study components instead; dashboards,
+     grids and split views can use the room available. */
+  .content { padding-inline: clamp(var(--sp-6), 2.5vw, 3rem); }
 }
 
 h1 { font-size: var(--fs-xl); margin: 0; line-height: 1.35; }

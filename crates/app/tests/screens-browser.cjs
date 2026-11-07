@@ -8,7 +8,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 
-const WIDTHS = [320, 384, 600, 840, 1280];
+const WIDTHS = [320, 384, 600, 840, 1280, 1600];
 const SCHEMES = ['light', 'dark'];
 const APPEARANCES = ['calm', 'glossy'];
 const SIZES = ['normal', 'larger'];
@@ -171,6 +171,7 @@ async function run() {
   const results = [];
   const known = [];
   const seen = new Set();
+  const desktopCaptured = new Set();
   let current = '';
   try {
     for (const screen of ['learn', 'study']) {
@@ -228,6 +229,57 @@ async function run() {
                 await screenChecks(page, item, name);
                 if (width === 384 && appearance === 'calm' && size === 'larger') {
                   await page.screenshot({ path: path.join(output, `${name}.png`), fullPage: true });
+                }
+                // The native Mac starts at 1280x820. Lesson context must be
+                // beside the stage at that size too, not only at 1600px.
+                if (screen === 'learn' && width === 1280 && scheme === 'light' &&
+                    appearance === 'calm' && size === 'normal' && item.view === 'steps') {
+                  const panes = await page.evaluate(() => {
+                    const player = document.querySelector('.ls-player[data-view="steps"]');
+                    const context = player?.querySelector(':scope > .ls-context')?.getBoundingClientRect();
+                    const stage = player?.querySelector(':scope > .ls-stage:not([hidden])')?.getBoundingClientRect();
+                    return { columns: getComputedStyle(player).gridTemplateColumns, contextLeft: context?.left,
+                      stageRight: stage?.right, contextWidth: context?.width, stageWidth: stage?.width };
+                  });
+                  assert.ok(panes.contextWidth >= 200 && panes.stageWidth >= 500 &&
+                    panes.contextLeft >= panes.stageRight - 1,
+                    `${name}: default Mac window must present real side-by-side lesson panes: ${JSON.stringify(panes)}`);
+                }
+                // Real production SSR + styles, now including the desktop sidebar.
+                // One representative Steps lesson and one running study item
+                // give Mohamed Mac-width screenshots alongside the test report.
+                if (width === 1600 && scheme === 'light' && appearance === 'calm' && size === 'normal' &&
+                    !desktopCaptured.has(screen) &&
+                    (screen === 'learn' ? item.view === 'steps' : item.phase === 'running')) {
+                  const desktop = await page.evaluate(() => {
+                    const nav = document.querySelector('.nav').getBoundingClientRect();
+                    const main = document.querySelector('main.content');
+                    const style = getComputedStyle(main);
+                    const context = document.querySelector('.ls-player[data-view="steps"] > .ls-context');
+                    const stage = document.querySelector('.ls-stage:not([hidden])');
+                    const study = document.querySelector('.st:has(> .st-item)');
+                    return {
+                      navWidth: nav.width,
+                      padStart: parseFloat(style.paddingInlineStart),
+                      padEnd: parseFloat(style.paddingInlineEnd),
+                      context: context && { left: context.getBoundingClientRect().left, width: context.getBoundingClientRect().width },
+                      stage: stage && { right: stage.getBoundingClientRect().right, width: stage.getBoundingClientRect().width },
+                      studyWidth: study?.getBoundingClientRect().width,
+                    };
+                  });
+                  assert.ok(desktop.navWidth >= 200, `${name}: Mac labelled sidebar must be present`);
+                  assert.ok(Math.abs(desktop.padStart - desktop.padEnd) < 1,
+                    `${name}: Mac canvas must use both sides of the window: ${JSON.stringify(desktop)}`);
+                  if (screen === 'learn') {
+                    assert.ok(desktop.context?.width >= 200 && desktop.stage?.width >= 600 &&
+                      desktop.context.left >= desktop.stage.right - 1,
+                    `${name}: lesson context should sit beside the active step, not above it: ${JSON.stringify(desktop)}`);
+                  } else {
+                    assert.ok(desktop.studyWidth >= 1000,
+                      `${name}: study card should use the wide desktop canvas: ${JSON.stringify(desktop)}`);
+                  }
+                  await page.screenshot({ path: path.join(output, `mac-preview-${screen}-1600.png`) });
+                  desktopCaptured.add(screen);
                 }
                 results.push({ ...item, width, scheme, appearance, size, controls: m.controls, under48: m.under48 });
               }

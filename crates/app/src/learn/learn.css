@@ -219,6 +219,59 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 @keyframes ls-in-back { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
 .ls-player[data-dir="back"] .ls-stage { animation-name: ls-in-back; }
 
+/* On a genuinely wide desktop, keep the lesson name and context in a
+   dedicated sticky column and the active step in the reading pane.
+   Tablet landscape, compact Mac windows and the book/pages view retain the
+   existing single-column experience. Hidden steps stay mounted but out of
+   the grid, preserving answer state and Back navigation. */
+@media (min-width: 1200px) and (min-height: 740px) {
+  .ls-player[data-view="steps"] {
+    max-inline-size: none;
+    display: grid;
+    grid-template-columns: minmax(15rem, min(28%, 20rem)) minmax(0, 1fr);
+    grid-template-rows: auto minmax(min-content, 1fr) auto;
+    align-items: start;
+    column-gap: clamp(var(--sp-6), 2.8vw, 3rem);
+  }
+  .ls-player[data-view="steps"] > .ls-bar {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    border-block-end: 1px solid var(--line-soft, var(--line));
+    padding-block-end: var(--sp-3);
+  }
+  .ls-player[data-view="steps"] > .ls-context {
+    grid-column: 1;
+    grid-row: 2;
+    position: sticky;
+    top: var(--sp-4);
+    padding: clamp(var(--sp-4), 1.8vw, var(--sp-6));
+    background: var(--surface);
+    border: 1px solid var(--line-soft, var(--line));
+    border-block-start: 3px solid var(--accent);
+    border-radius: var(--radius-card);
+  }
+  .ls-player[data-view="steps"] > .ls-stage:not([hidden]) {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    justify-self: stretch;
+    min-block-size: clamp(19rem, 38dvh, 34rem);
+    padding: clamp(var(--sp-4), 2vw, 2rem);
+  }
+  .ls-player[data-view="steps"] > .ls-nav {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: end;
+    min-block-size: calc(var(--tap-lg) + 2 * var(--sp-3));
+    padding-inline: var(--sp-3);
+    margin-block-end: var(--sp-2);
+    background: var(--surface);
+    border: 1px solid var(--line-soft, var(--line));
+    border-radius: var(--radius-card);
+  }
+  .ls-player[data-view="steps"] .ls-rich { max-inline-size: 72ch; }
+}
+
 /* Focus: a lesson takes the whole phone screen. The app bar and the tab
    bar step aside (× closes the lesson); wider windows keep their rail. */
 .app:has(.ls-player) > .topbar { display: none; }

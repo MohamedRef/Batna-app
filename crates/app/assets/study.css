@@ -194,6 +194,13 @@
   .st-item .desk-side .st-grades { position: static; }
 }
 
+/* The Mac's full-width two-pane cards grow with the window. Keep the
+   single-column question text readable, while the answer and grade row
+   can use the full card. */
+@media (min-width: 1440px) {
+  .st:has(> .st-item) { max-inline-size: none; }
+}
+
 /* ---------- Glossy ----------
    The pinned progress row is a small floating surface: a light blur over
    the gradient instead of a solid band. Solid when transparency is reduced. */

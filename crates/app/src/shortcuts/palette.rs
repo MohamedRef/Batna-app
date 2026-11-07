@@ -30,7 +30,8 @@ struct Hit {
 
 fn matches_query(query: &str, words: &str) -> bool {
     let haystack = words.to_lowercase();
-    query.split_whitespace().all(|word| haystack.contains(word))
+    let needle = query.to_lowercase();
+    needle.split_whitespace().all(|word| haystack.contains(word))
 }
 
 /// The initial palette shows navigable sections, not a wall of hundreds of

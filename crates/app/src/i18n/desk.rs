@@ -13,3 +13,9 @@ pub const SIDE_WAITING: &str = "الشرح وصفحة الكتاب هيظهرو�
 pub const SIDE_LABEL: &str = "الشرح";
 #[allow(dead_code)]
 pub const LIST_LABEL: &str = "القايمة";
+
+// Resizable Mac study workspace. Double-click the divider to restore 60/40.
+pub const SPLIT_HANDLE: &str = "تغيير عرض السؤال والشرح";
+pub const SPLIT_HELP: &str = "اسحب الفاصل، أو استخدم الأسهم. ضغطتين ترجع التقسيم الافتراضي.";
+pub const FOCUS_ENTER: &str = "تركيز";
+pub const FOCUS_LEAVE: &str = "إظهار القائمة";

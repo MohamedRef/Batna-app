@@ -247,6 +247,7 @@ fn App() -> Element {
             // and scroll position stay mounted (assets/liquid-glass.css).
             "data-appearance": ui.prefs.read().appearance.as_str(),
             "data-focus": if *ui.focus.read() { "true" } else { "false" },
+            "data-desk-focus": if ui.prefs.read().desk_focus { "true" } else { "false" },
             header { class: "topbar",
                 div { class: "brand",
                     span { class: "brand-name", {i18n::app::NAME} }

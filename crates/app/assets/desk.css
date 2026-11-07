@@ -228,3 +228,90 @@ kbd {
   .tab-cols[data-align="stretch"] { align-items: stretch; }
   .tab-cols[data-align="stretch"] > * > .card:only-child { flex: 1; }
 }
+
+
+/* ---------- Desktop reading workspace (Mac pointer/keyboard) ---------- */
+/* The splitter is noninteractive on phones and touch-first tablets. The
+   existing 840px two-column layout is their fallback. */
+.desk-resize, .desk-focus-toggle { display: none; }
+
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+  .desk-split {
+    grid-template-columns: minmax(0, var(--desk-split-width, 60%)) 1rem minmax(0, 1fr);
+    gap: 0;
+  }
+  /* Long explanations start with the wider side, until the owner drags. */
+  .desk-split[data-wide="side"] {
+    grid-template-columns: minmax(0, var(--desk-split-width, 40%)) 1rem minmax(0, 1fr);
+  }
+  .desk-split > .desk-main { padding-inline-end: var(--sp-3); }
+  .desk-split > .desk-side {
+    margin-inline-start: var(--sp-3);
+    padding-inline-start: var(--sp-4);
+  }
+  .desk-resize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    min-block-size: 8rem;
+    inline-size: 1rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    cursor: col-resize;
+    touch-action: none;
+  }
+  .desk-resize-grip {
+    inline-size: 3px;
+    block-size: clamp(3rem, 20vh, 7rem);
+    border-radius: var(--radius-pill);
+    background: var(--line);
+    transition: background-color var(--dur) var(--ease), inline-size var(--dur) var(--ease);
+  }
+  .desk-resize:hover .desk-resize-grip,
+  .desk-resize:focus-visible .desk-resize-grip,
+  .desk-resizing .desk-resize-grip { background: var(--accent); inline-size: 5px; }
+  .desk-resize:focus-visible { outline-offset: 2px; }
+  .desk-resizing, .desk-resizing * { cursor: col-resize !important; user-select: none !important; }
+
+  /* Explicit, persistent focus is separate from the existing phone focus.
+     Only an actual lesson or active study card gets the larger canvas. */
+  .app[data-desk-focus="true"]:has(.ls-player),
+  .app[data-desk-focus="true"]:has(.st-item) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "content";
+  }
+  .app[data-desk-focus="true"]:has(.ls-player) > .nav,
+  .app[data-desk-focus="true"]:has(.st-item) > .nav { display: none; }
+  .app[data-desk-focus="true"]:has(.ls-player) > .content,
+  .app[data-desk-focus="true"]:has(.st-item) > .content {
+    padding-inline: clamp(var(--sp-6), 3.5vw, 4.5rem);
+  }
+
+  .desk-focus-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    min-block-size: var(--target);
+    padding-inline: var(--sp-3);
+    gap: var(--sp-1);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .desk-focus-toggle[aria-pressed="true"] {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
+  }
+  .desk-focus-toggle:hover { border-color: var(--accent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .desk-resize-grip { transition: none; }
+}

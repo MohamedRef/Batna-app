@@ -315,3 +315,95 @@ kbd {
 @media (prefers-reduced-motion: reduce) {
   .desk-resize-grip { transition: none; }
 }
+
+
+/* ---------- Cmd/Ctrl+K: offline command palette ---------- */
+/* A distinct modal search surface above Settings and the keyboard sheet.
+   Nothing is copied to a secondary search index: results come from Library. */
+.command-backdrop { z-index: 70; }
+.command-palette {
+  position: fixed;
+  z-index: 71;
+  inset-block-start: clamp(1rem, 11vh, 6rem);
+  inset-inline: 0;
+  margin-inline: auto;
+  inline-size: min(42rem, calc(100vw - 1.5rem));
+  max-block-size: calc(100dvh - 2rem);
+  padding: var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--glass-solid, var(--surface));
+  color: var(--text);
+  box-shadow: 0 16px 60px rgb(0 0 0 / 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  min-inline-size: 0;
+}
+.command-palette-head, .command-search-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.command-palette-head { justify-content: space-between; }
+.command-palette-head h2 { font-size: var(--fs-lg); }
+.command-palette-head .icon-button { flex: none; }
+.command-search-row {
+  padding-inline: var(--sp-3);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.command-search {
+  flex: 1;
+  min-inline-size: 0;
+  min-block-size: var(--tap-lg);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  outline: none;
+}
+.command-search-row:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
+.command-search:focus-visible { outline: none; }
+.command-search-row kbd { flex: none; color: var(--muted); }
+.command-results {
+  min-block-size: 0;
+  max-block-size: min(60dvh, 30rem);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  overscroll-behavior: contain;
+}
+.palette-result {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-inline-size: 0;
+  min-block-size: var(--tap-lg);
+  padding: var(--sp-2) var(--sp-3);
+  gap: 0.1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: transparent;
+  text-align: start;
+  color: var(--text);
+  cursor: pointer;
+}
+.palette-result-name { font-weight: 600; overflow-wrap: anywhere; }
+.palette-result-subtitle { font-size: var(--fs-sm); color: var(--muted); overflow-wrap: anywhere; }
+.palette-result:hover, .palette-result:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 25%, var(--line));
+  background: var(--accent-soft);
+}
+.command-empty { padding: var(--sp-4); color: var(--muted); }
+.command-palette-hint { color: var(--muted); font-size: var(--fs-sm); }
+@media (max-width: 599.98px) {
+  .command-palette { padding: var(--sp-3); inset-block-start: max(1rem, env(safe-area-inset-top, 0px)); }
+  .command-search-row kbd { display: none; }
+}
+@media (prefers-contrast: more), (forced-colors: active) {
+  .command-palette, .palette-result:focus-visible { border-width: 2px; }
+}

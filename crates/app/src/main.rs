@@ -308,6 +308,7 @@ fn App() -> Element {
             settings::SettingsSheet {}
             // After Settings, which opens it, so it draws and takes Back on top.
             shortcuts::KeysSheet {}
+            shortcuts::Palette {}
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
             abbrsheet::AbbrSheet {}

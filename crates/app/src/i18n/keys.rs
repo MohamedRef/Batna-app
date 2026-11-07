@@ -14,3 +14,4 @@ pub const MOVE: &str = "تنقل بين خطوات الدرس أو أسئلة ا
 pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
 pub const ESC: &str = "تقفل أي حاجة مفتوحة";
 pub const HELP: &str = "القايمة دي";
+pub const PALETTE: &str = "الانتقال السريع للأقسام والدروس والمحاضرات";

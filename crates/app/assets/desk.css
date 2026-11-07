@@ -197,6 +197,15 @@ kbd {
     grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
   }
 }
+/* At the tablet/desktop hand-off, the sidebar leaves too little usable
+   room for two independent form panes at larger text sizes. Stack until
+   the window can accommodate both without clipping the controls. */
+@media (min-width: 840px) and (max-width: 1099.98px) {
+  .tab-cols { display: flex; flex-direction: column; }
+  .tab-sticky { position: static; max-block-size: none; overflow: visible; }
+  .st-setup-pick { padding-inline-start: 0; border-inline-start: 0; }
+}
+
 /* Wide Mac windows: useful panes grow with the canvas. Keep the bank's
    question list at a scan-friendly width and give the detail the rest. */
 @media (min-width: 1440px) {

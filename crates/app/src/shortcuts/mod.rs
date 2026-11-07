@@ -198,6 +198,20 @@ mod tests {
     use super::*;
 
     #[test]
+    fn reviewer_keys_remain_safe_and_discoverable() {
+        // The dispatcher is an external JS script in a WKWebView. Check
+        // contract invariants alongside the Rust DOM regression tests.
+        for s in [
+            "e.isComposing", "e.repeat", "t.isContentEditable",
+            "[role=\"textbox\"]", "if (typing && e.key !== \"Escape\") return",
+            "const modal =", "if (!hit && inStudy",
+            "find(\"3\")", "Key[A-FZ]", "e.defaultPrevented",
+        ] {
+            assert!(KEYS_JS.contains(s), "missing keyboard safety contract: {s}");
+        }
+    }
+
+    #[test]
     fn messages_map_to_screens() {
         assert_eq!(parse("go:1"), Some(Command::Go(Screen::Today)));
         assert_eq!(parse("go:7"), Some(Command::Go(Screen::Stats)));

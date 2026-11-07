@@ -334,6 +334,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
 | Open PRs / issues | none on 2026-11-05 |
 | Coverage | 95.05% (floor 94) |
+| Mac wide layout | Expanded content uses balanced padding instead of an artificial 60/80rem cap; ≥1440px has lesson Steps context/step panes, wider study and Settings; Mac's first window is 1280×820 |
 
 ### Open work and known gaps
 
@@ -349,6 +350,8 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
   original-paper examples and cut-offs.
 - Not yet verified on a real device: Back-key routing, update notifications,
   the lock/unlock freeze fix (`vendor/`, tested on desktop sockets only).
+- Wide Mac layout needs visual and interaction QA in the native macOS bundle;
+  the 1600px browser screenshots are SSR previews, not native-device checks.
 - 14 Rust files are still over 800 lines (`scripts/check-file-sizes.sh`);
   split each when a PR already changes it a lot (AGENTS.md § Small files).
 
@@ -365,6 +368,8 @@ Mohamed can paste this into any new chat or account to continue:
 ## 12. Log
 
 Newest first. One line per PR that changes behaviour, process or state.
+
+- 2026-11-07: Mac expanded-layout pass: eliminate fixed-width canvas padding, adapt lesson Steps into context and active-step panes on ≥1440px, widen study/Settings, and default the Mac window to 1280×820; browser SSR at 1600px includes the desktop nav and saves previews. Native Mac QA remains open.
 
 - 2026-11-06: 1.0.0-alpha.3 released on Mohamed's ask, so the Mac app (alpha feed only; previews carry no Mac build) gets the lock/unlock and update-check fixes.
 - 2026-11-06: Android screen froze after lock/unlock: Dioxus's edit socket patched in `vendor/` (edits resent until acknowledged); update check shows the app result before the content pack downloads, requests time out after 20 s of no progress.

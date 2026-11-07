@@ -38,8 +38,9 @@ Each file is loaded once and switched the way the app switches: the prefs
 stylesheet and `data-appearance` on `.app`. 38 files × 48 = 1,824 cases.
 The fixture includes the actual sidebar/top-bar structure and production
 `nav.css` and `desk.css`, rather than silently measuring desktop views
-without their sidebar. Navigation is deliberately inert inside the fixture
-so screen click-through tests cannot accidentally activate the duplicated nav.
+without their sidebar. Navigation is deliberately inert and only rendered during browser fixture
+exports (when `APP_BROWSER_FIXTURES` is set), so screen click-through tests
+cannot accidentally match duplicate sidebar labels.
 
 ## Assertions
 

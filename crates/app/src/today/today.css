@@ -163,3 +163,30 @@ table.plan th { color: var(--muted); font-weight: 600; }
    only Today's own pieces here. Nothing blurs, nothing moves. */
 .app[data-appearance="glossy"] .td-chip { background: color-mix(in srgb, var(--surface) 70%, var(--accent-soft)); }
 .app[data-appearance="glossy"] .td-hero .td-go { border-radius: var(--radius-pill); }
+
+
+/* Mac dashboard hierarchy: the daily plan and next lesson own the primary
+   column; the lecture catalogue is a supporting, independently scrollable
+   reference. At narrower windows keep the existing tablet composition. */
+@media (min-width: 1200px) and (min-height: 740px) {
+  .today-cols.tab-cols[data-wide="aside"] {
+    grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr);
+    column-gap: clamp(var(--sp-4), 2vw, var(--sp-6));
+    align-items: start;
+  }
+  /* The reading canvas already scrolls: do not trap the priority work in
+     a separate nested scrolling panel on a normal-height Mac window. */
+  .today-cols > .tab-main.tab-sticky {
+    position: static;
+    max-block-size: none;
+    overflow: visible;
+  }
+  .today-cols > .tab-aside {
+    position: sticky;
+    inset-block-start: var(--sp-4);
+    max-block-size: calc(100dvh - 2 * var(--sp-6));
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scroll-padding-block: var(--sp-4);
+  }
+}

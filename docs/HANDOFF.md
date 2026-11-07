@@ -8,21 +8,21 @@ last one stopped, with no other history. Read it top to bottom once, then
 secrets, deploys or the state of the work updates this file in the same PR
 (usually § Current state and § Log). See `AGENTS.md`.
 
-Last full refresh: 2026-11-05, main at `c35ffec` (1.0.0-alpha.2).
+Last full refresh: 2026-11-05. Mac desktop continuation refreshed 2026-11-07, main at `e096d390` (1.0.0-alpha.3).
 
 ---
 
-## Mac desktop workflow plan, 2026-11-07 (active branch: `feat/mac-desk-panels-focus-20261107`)
+## Mac desktop workflow plan, 2026-11-07 (current: `feat/mac-today-task-first-20261107`)
 
 User directive: **code work first**. Native Mac interaction testing is deferred to the user; don't block feature implementation on manual macOS verification. Automated CI, layout regression checks, PR review, and conflict checks remain mandatory before merging. Leave interface-language work out of this batch. No alpha unless explicitly requested. Keep the PR-first, sequential merge discipline.
 
-Status on `main`: PR #739 (full-window desktop UI) and PR #740 (Anki-like keyboard navigation) merged. Do not rebuild their already-working pieces.
+Status on `main`: PR #739 (full-window desktop UI), PR #740 (Anki-like keyboard navigation), and PR #741 (resizable Mac panes + Focus Mode) merged. Do not rebuild their already-working pieces.
 
 Priority-ordered product backlog (not all implemented):
-1. **Current PR:** resizable question/explanation panes on desktop pointer devices with keyboard-operable divider, a reset to default, device-local persistent width and safe small-window fallback; intentional Mac focus mode for running Study and Lesson, hiding the sidebar while keeping Back/end, lesson progress, and grade controls. Use existing layout CSS, `desk::Panes`, shared `Ui::update_prefs`, and the single app scroll container. Preserve study state when toggling.
-2. **Next separate PR:** task-first Today dashboard with due reviews, continue-learning card, weak topics, and explicit priority for the next action, adapting smoothly to window width.
-3. **Then separate PR:** `⌘K` command palette for searching lessons, questions, calculators, settings, with keyboard focus and results restricted by available content.
-4. **Then:** configurable review shortcuts with collision detection (reserved macOS combos, input/IME safety, A–E and 1–4 compatibility); quicker review actions (mark, defer, show source) only after review-store behavior is specified and tested.
+1. **Merged PR #741:** resizable question/explanation panes on desktop pointer devices with keyboard-operable divider, a reset to default, device-local persistent width and safe small-window fallback; intentional Mac focus mode for running Study and Lesson, hiding the sidebar while keeping Back/end, lesson progress, and grade controls. Use existing layout CSS, `desk::Panes`, shared `Ui::update_prefs`, and the single app scroll container. Preserve study state when toggling.
+2. **Current branch:** desktop task-first Today **layout** with the existing hero, due/new metrics, resume lesson, and library. The 1200px+ task column now gets 3/5 of the space instead of 2/5, the long task column follows the main app scroll, and the library stays a scrollable side reference. Do not rebuild its already-working data or review actions. New weak-topic insight stays a later separate item.
+3. **Next separate PR:** `⌘K` command palette for searching lessons, questions, calculators, settings, with keyboard focus and results restricted by available content.
+4. **Then:** add weak-topic insight to Today without duplicating its existing study stats; configurable review shortcuts with collision detection (reserved macOS combos, input/IME safety, A–E and 1–4 compatibility); quicker review actions (mark, defer, show source) only after review-store behavior is specified and tested.
 5. **Later UX:** keyboard focus restoration after grading/switching steps, reduced UI jank on item transitions, readable very-wide typography, saved panel preferences and narrow-window behavior, consistent empty/loading states, shortcut discoverability/tooltips, accessible contrast and reduced motion.
 6. **Deferred manual checks by user:** actual WKWebView shortcuts, splitter dragging with mouse, both right-to-left panes and Mac window resizing, focus escape/restore and IME. Browser previews are **not** native Mac screenshots.
 
@@ -36,7 +36,7 @@ Keep these labels honest as PRs merge, refresh this section and a `changes/*.yam
 - Browser check now asserts side-by-side lesson panes at 1280px as well as at 1600px. New PR Actions must pass before merge. Native Mac visual QA remains pending; Playwright fixtures are not native screenshots.
 - Next larger UX phase after this PR: task-first Today dashboard and resizable/collapsible side panels; do not imply those are already implemented.
 
-## Keyboard-first Mac review (2026-11-07, new PR)
+## Keyboard-first Mac review (2026-11-07, merged PR #740)
 
 - Reviewed Anki's desktop review workflow. Batna already had Space-to-reveal and 1–4 grading; do not duplicate these actions.
 - The global keyboard dispatcher in `crates/app/src/shortcuts/mod.rs` now uses Space/Enter to choose Good after revealing the answer in an active Study item, and `Z` triggers Study Undo when available. Lesson steps accept RTL-correct arrows: Right goes back and Left advances only when allowed. The original 1–4, A–E, Cmd/Ctrl+1–7, Cmd/Ctrl+, and ? remain.

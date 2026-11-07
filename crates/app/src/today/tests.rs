@@ -421,3 +421,19 @@ fn due_cases_open_the_cases_and_a_progress_row_its_lecture() {
     assert!(t.with(crate::lecture::is_open));
     t.with(crate::lecture::close_all);
 }
+
+#[test]
+fn wide_desktop_today_keeps_study_primary_and_untraps_scrolling() {
+    let css = include_str!("today.css");
+    for required in [
+        "@media (min-width: 1200px) and (min-height: 740px)",
+        ".today-cols.tab-cols[data-wide=\"aside\"]",
+        "grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr)",
+        ".today-cols > .tab-main.tab-sticky",
+        "max-block-size: none",
+        ".today-cols > .tab-aside",
+        "overflow-y: auto",
+    ] {
+        assert!(css.contains(required), "desktop task-first layout needs {required}");
+    }
+}

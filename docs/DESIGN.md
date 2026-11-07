@@ -161,6 +161,14 @@ markup so all three layouts work without per-layout code.
   sticky action bar. `.tab-grid` and `.tab-cols` rows are `max-content`
   and start-aligned, so a short card never stretches and a tall one never
   collapses.
+- On expanded widths (≥840px) the content canvas uses balanced fluid inline
+  padding rather than a fixed 60/80rem limit masquerading as trailing space.
+  At ≥1440px, wide desktop screens use the available width: tabs and the
+  question bank detail adapt, Settings grows, study split cards span the
+  canvas, and the lesson Steps view uses a sticky context pane beside the
+  active step. The lesson Pages view and single-column study text retain a
+  readable measure. Tablets below 1440px and phone layouts keep their
+  existing structure.
 
 ## Maintenance and shared primitives
 

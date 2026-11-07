@@ -422,7 +422,6 @@ fn due_cases_open_the_cases_and_a_progress_row_its_lecture() {
     t.with(crate::lecture::close_all);
 }
 
-
 #[test]
 fn wide_desktop_today_keeps_study_primary_and_untraps_scrolling() {
     let css = include_str!("today.css");

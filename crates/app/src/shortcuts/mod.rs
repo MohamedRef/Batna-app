@@ -28,8 +28,10 @@ window.__batnaKeys = (e) => {
   // Review keys are single actions, never auto-repeat through multiple cards.
   if (e.defaultPrevented || e.isComposing || e.repeat) return;
   const t = e.target;
-  // Separator arrows belong to the keyboard-adjustable split divider.
-  if (t?.closest?.(".desk-resize")) return;
+  // Only unmodified separator arrows/Home/End belong to the split divider;
+  // Cmd/Ctrl screen navigation and ? still work while the handle has focus.
+  if (t?.closest?.(".desk-resize") && !e.metaKey && !e.ctrlKey && !e.altKey &&
+      ["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
   const typing = t && (t.closest?.('input, textarea, select, [contenteditable=""], [contenteditable="true"], [role="textbox"]') ||
     t.isContentEditable);
   const mod = e.metaKey || e.ctrlKey;

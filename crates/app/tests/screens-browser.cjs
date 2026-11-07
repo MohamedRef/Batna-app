@@ -8,7 +8,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 
-const WIDTHS = [320, 384, 600, 840, 1280];
+const WIDTHS = [320, 384, 600, 840, 1280, 1600];
 const SCHEMES = ['light', 'dark'];
 const APPEARANCES = ['calm', 'glossy'];
 const SIZES = ['normal', 'larger'];
@@ -171,6 +171,7 @@ async function run() {
   const results = [];
   const known = [];
   const seen = new Set();
+  const desktopCaptured = new Set();
   let current = '';
   try {
     for (const screen of ['learn', 'study']) {
@@ -228,6 +229,15 @@ async function run() {
                 await screenChecks(page, item, name);
                 if (width === 384 && appearance === 'calm' && size === 'larger') {
                   await page.screenshot({ path: path.join(output, `${name}.png`), fullPage: true });
+                }
+                // Real production SSR + styles, now including the desktop sidebar.
+                // One representative Steps lesson and one running study item
+                // give Mohamed Mac-width screenshots alongside the test report.
+                if (width === 1600 && scheme === 'light' && appearance === 'calm' && size === 'normal' &&
+                    !desktopCaptured.has(screen) &&
+                    (screen === 'learn' ? item.view === 'steps' : item.phase === 'running')) {
+                  await page.screenshot({ path: path.join(output, `mac-preview-${screen}-1600.png`) });
+                  desktopCaptured.add(screen);
                 }
                 results.push({ ...item, width, scheme, appearance, size, controls: m.controls, under48: m.under48 });
               }

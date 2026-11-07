@@ -46,9 +46,9 @@ pub fn out_dir_in(root: &std::path::Path, screen: &str) -> PathBuf {
 }
 
 /// The app's frame around one screen, as `App` draws it (main.rs).
-/// Keep its real nav buttons and production desktop styles: focus mode only
-/// hides navigation on phones, so desktop screenshots must include the rail
-/// or labelled sidebar when assessing the available reading width.
+/// Keep its navigation structure and production desktop styles: focus mode
+/// only hides navigation on phones. Fixture navigation is deliberately inert:
+/// click-through tests must target the screen, not a duplicate test nav.
 #[component]
 pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
     use_context_provider(|| Ui {
@@ -71,13 +71,15 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
                     span { class: "brand-tag", {crate::i18n::app::TAGLINE} }
                 }
                 for tab in Screen::NAV {
-                    crate::NavButton {
+                    div {
                         key: "{tab:?}",
-                        screen: tab,
                         class: crate::more::nav_class(tab),
+                        "aria-current": if tab == screen { "page" } else { "false" },
+                        span { class: "glyph", {crate::icons::nav(tab)} }
+                        span { class: "label", {tab.label()} }
                     }
                 }
-                button { class: "nav-item nav-foot", aria_label: Screen::Settings.label(),
+                div { class: "nav-item nav-foot",
                     span { class: "glyph", {crate::icons::nav(Screen::Settings)} }
                     span { class: "label", {Screen::Settings.label()} }
                 }

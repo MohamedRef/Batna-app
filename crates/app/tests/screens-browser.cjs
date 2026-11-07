@@ -230,6 +230,21 @@ async function run() {
                 if (width === 384 && appearance === 'calm' && size === 'larger') {
                   await page.screenshot({ path: path.join(output, `${name}.png`), fullPage: true });
                 }
+                // The native Mac starts at 1280x820. Lesson context must be
+                // beside the stage at that size too, not only at 1600px.
+                if (screen === 'learn' && width === 1280 && scheme === 'light' &&
+                    appearance === 'calm' && size === 'normal' && item.view === 'steps') {
+                  const panes = await page.evaluate(() => {
+                    const player = document.querySelector('.ls-player[data-view="steps"]');
+                    const context = player?.querySelector(':scope > .ls-context')?.getBoundingClientRect();
+                    const stage = player?.querySelector(':scope > .ls-stage:not([hidden])')?.getBoundingClientRect();
+                    return { columns: getComputedStyle(player).gridTemplateColumns, contextLeft: context?.left,
+                      stageRight: stage?.right, contextWidth: context?.width, stageWidth: stage?.width };
+                  });
+                  assert.ok(panes.contextWidth >= 200 && panes.stageWidth >= 500 &&
+                    panes.contextLeft >= panes.stageRight - 1,
+                    `${name}: default Mac window must present real side-by-side lesson panes: ${JSON.stringify(panes)}`);
+                }
                 // Real production SSR + styles, now including the desktop sidebar.
                 // One representative Steps lesson and one running study item
                 // give Mohamed Mac-width screenshots alongside the test report.

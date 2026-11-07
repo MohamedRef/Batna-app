@@ -20,6 +20,14 @@ Last full refresh: 2026-11-05, main at `c35ffec` (1.0.0-alpha.2).
 - Browser check now asserts side-by-side lesson panes at 1280px as well as at 1600px. New PR Actions must pass before merge. Native Mac visual QA remains pending; Playwright fixtures are not native screenshots.
 - Next larger UX phase after this PR: task-first Today dashboard and resizable/collapsible side panels; do not imply those are already implemented.
 
+## Keyboard-first Mac review (2026-11-07, new PR)
+
+- Reviewed Anki's desktop review workflow. Batna already had Space-to-reveal and 1–4 grading; do not duplicate these actions.
+- The global keyboard dispatcher in `crates/app/src/shortcuts/mod.rs` now uses Space/Enter to choose Good after revealing the answer in an active Study item, and `Z` triggers Study Undo when available. Lesson steps accept RTL-correct arrows: Right goes back and Left advances only when allowed. The original 1–4, A–E, Cmd/Ctrl+1–7, Cmd/Ctrl+, and ? remain.
+- A modal always owns shortcuts over the underlying screen; typing fields, contenteditable and textboxes ignore review shortcuts and ?; auto-repeat/composition are ignored; focused buttons retain native Space/Enter behavior.
+- `crates/app/src/study/mod.rs` marks its Undo with `aria-keyshortcuts="Z"`; `crates/app/src/learn/player.rs` assigns arrows on the real navigation buttons; help sheet adds Good and Undo rows.
+- Check CI and Mac behavior in the PR before merge. No alpha release unless requested.
+
 ## 1. What Batna is
 
 - **Batna (باطنة)**: a personal internal-medicine study app for one learner,

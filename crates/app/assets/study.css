@@ -212,3 +212,23 @@
 @media (prefers-reduced-transparency: reduce) {
   .app[data-appearance="glossy"] .st-progress { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
+
+/* Mac/desktop keyboard affordances: discover 1-4 grading without opening
+   the shortcuts sheet. Keep them out of the touch-first phone UI. */
+.st-grade-key { display: none; }
+@media (min-width: 840px) and (hover: hover) and (pointer: fine) {
+  .st-grades .rating { position: relative; padding-inline-end: 1.8rem; }
+  .st-grade-key {
+    display: inline-grid;
+    position: absolute;
+    inset-inline-end: var(--sp-2);
+    inset-block-start: var(--sp-2);
+    place-items: center;
+    min-inline-size: 1.2rem;
+    block-size: 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font: 600 0.75rem/1 var(--font-latin);
+    color: var(--muted);
+  }
+}

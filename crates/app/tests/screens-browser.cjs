@@ -278,6 +278,57 @@ async function run() {
                     assert.ok(desktop.studyWidth >= 1000,
                       `${name}: study card should use the wide desktop canvas: ${JSON.stringify(desktop)}`);
                   }
+                  // A wide desktop can hide its rail without losing the
+                  // running lesson/card, and can restore it without navigation.
+                  const focus = await page.evaluate(() => {
+                    const app = document.querySelector('.app');
+                    const main = document.querySelector('main.content');
+                    const nav = document.querySelector('nav.nav');
+                    const toggle = main.querySelector('.desk-focus-toggle');
+                    const before = main.getBoundingClientRect().width;
+                    app.dataset.deskFocus = 'true';
+                    const after = main.getBoundingClientRect().width;
+                    const hidden = getComputedStyle(nav).display === 'none';
+                    app.dataset.deskFocus = 'false';
+                    return { before, after, hidden,
+                      toggleVisible: Boolean(toggle && toggle.getClientRects().length) };
+                  });
+                  assert.ok(focus.hidden && focus.toggleVisible && focus.after > focus.before + 140,
+                    `${name}: focus must widen the reading canvas and keep the toggle: ${JSON.stringify(focus)}`);
+
+                  if (screen === 'study') {
+                    const divider = page.locator('.desk-split .desk-resize').first();
+                    assert.equal(await divider.count(), 1, `${name}: study has one pane separator`);
+                    const before = await page.evaluate(() => {
+                      const h = document.querySelector('.desk-resize');
+                      return { visible: getComputedStyle(h).display !== 'none',
+                        value: Number(h.getAttribute('aria-valuenow')) };
+                    });
+                    assert.ok(before.visible && before.value >= 35 && before.value <= 70,
+                      `${name}: keyboard-adjustable separator visible on Mac`);
+                    // Run the exact production pointer listener with a stub
+                    // for the Rust bridge; SSR cannot save real preferences.
+                    await page.evaluate(() => {
+                      window.__paneMessages = [];
+                      window.dioxus = { send: message => window.__paneMessages.push(message) };
+                    });
+                    const code = await fs.readFile(path.join(dir, 'desk-resize.js'), 'utf8');
+                    await page.addScriptTag({ content: `(async () => {\n${code}\n})();` });
+                    await divider.focus();
+                    await page.keyboard.press('ArrowLeft'); // RTL: left widens the primary pane.
+                    const keyed = await page.evaluate(() => Number(document.querySelector('.desk-resize').getAttribute('aria-valuenow')));
+                    assert.equal(keyed, before.value + 5, `${name}: arrows adjust RTL primary width`);
+                    await divider.dblclick(); // Reset without losing the active item.
+                    const reset = await page.evaluate(() => ({
+                      value: Number(document.querySelector('.desk-resize').getAttribute('aria-valuenow')),
+                      custom: document.documentElement.style.getPropertyValue('--desk-split-width'),
+                      sent: window.__paneMessages,
+                    }));
+                    assert.equal(reset.custom, '', `${name}: double click resets the split`);
+                    assert.equal(reset.value, before.value, `${name}: reset restores the item default`);
+                    assert.ok(reset.sent.includes('split:0') && reset.sent.includes('split:' + keyed),
+                      `${name}: valid widths go through the preference bridge`);
+                  }
                   await page.screenshot({ path: path.join(output, `mac-preview-${screen}-1600.png`) });
                   desktopCaptured.add(screen);
                 }

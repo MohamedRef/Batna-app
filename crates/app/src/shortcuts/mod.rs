@@ -1,6 +1,6 @@
 //! Keyboard shortcuts for tablet keyboards and the Mac (PARITY.md §6.5):
 //! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, and on study
-//! screens Space to reveal, 1–4 to rate, A–E for MCQ options, Enter for next,
+//! screens Space to reveal or rate Good, 1–4 to rate, Z to undo, A–E for MCQ options, Enter to check or rate Good,
 //! ← / → between questions of a timed paper, F to flag, Esc to close, ? for
 //! the list.
 //!
@@ -25,36 +25,52 @@ pub fn open_sheet(open: bool) {
 const KEYS_JS: &str = r#"
 if (window.__batnaKeys) document.removeEventListener("keydown", window.__batnaKeys, true);
 window.__batnaKeys = (e) => {
+  // Review keys are single actions, never auto-repeat through multiple cards.
+  if (e.defaultPrevented || e.isComposing || e.repeat) return;
   const t = e.target;
-  const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
+  const typing = t && (t.closest?.('input, textarea, select, [contenteditable=""], [contenteditable="true"], [role="textbox"]') ||
+    t.isContentEditable);
   const mod = e.metaKey || e.ctrlKey;
   if (mod && !e.altKey && !e.shiftKey) {
     if (/^Digit[1-7]$/.test(e.code)) { e.preventDefault(); dioxus.send("go:" + e.code.slice(5)); return; }
     if (e.code === "Comma") { e.preventDefault(); dioxus.send("go:settings"); return; }
     return;
   }
-  if (e.altKey || mod) return;
-  if (e.key === "Escape") {
-    if (window.__batnaHover && window.__batnaHover.visible()) { window.__batnaHover.hide(); e.preventDefault(); return; }
-  } else if (typing) return;
-  if (e.key === "?" || e.key === "\u061F") { e.preventDefault(); dioxus.send("help"); return; }
-  // By physical key, so an Arabic keyboard layout works the same.
+  if (e.altKey || mod || e.shiftKey && e.key !== "?" && e.key !== "\u061F") return;
+  if (e.key === "Escape" && window.__batnaHover?.visible()) {
+    window.__batnaHover.hide(); e.preventDefault(); return;
+  }
+  // Typing a clinical answer (or editing a search/filter) must never trigger
+  // grading, revealing, moving, the help sheet, or character shortcuts.
+  // Escape may still close a modal via its own button.
+  if (typing && e.key !== "Escape") return;
+  if (e.key === "?" || e.key === "\u061F") {
+    if (!typing) { e.preventDefault(); dioxus.send("help"); }
+    return;
+  }
   let key = null;
   if (e.code === "Space") key = "space";
   else if (e.key === "Enter") key = "enter";
   else if (e.key === "Escape") key = "escape";
   else if (/^(Digit|Numpad)[1-9]$/.test(e.code)) key = e.code.slice(-1);
   else if (e.key === "ArrowLeft" || e.key === "ArrowRight") key = e.key.toLowerCase();
-  else if (/^Key[A-F]$/.test(e.code)) key = e.code.slice(3).toLowerCase();
+  else if (/^Key[A-FZ]$/.test(e.code)) key = e.code.slice(3).toLowerCase();
   if (!key) return;
-  // An open dialog (the shortcut list) takes the keys first.
-  const scope = document.querySelector("[role=dialog][aria-modal=true], [role=alertdialog][aria-modal=true]") || document;
-  const hit = [...scope.querySelectorAll("[aria-keyshortcuts]")].find((el) =>
-    !el.disabled && el.getClientRects().length > 0 &&
-    el.getAttribute("aria-keyshortcuts").toLowerCase().split(/\s+/).includes(key));
+  // Modals take precedence. A shortcut must not click behind a dialog.
+  const modal = document.querySelector('[role="alertdialog"][aria-modal="true"], [role="dialog"][aria-modal="true"]');
+  const scope = modal || document.querySelector("main.content") || document;
+  const visible = el => !el.disabled && !el.closest('[hidden], [inert], [aria-hidden="true"]') &&
+    el.getClientRects().length > 0 && getComputedStyle(el).visibility !== "hidden";
+  const find = name => [...scope.querySelectorAll("[aria-keyshortcuts]")].find(el =>
+    visible(el) && el.getAttribute("aria-keyshortcuts").toLowerCase().split(/\s+/).includes(name));
+  let hit = find(key);
+  // Anki-style: once the answer is shown, Space/Enter chooses Good (3).
+  // This is only for the active Study card, never lessons, dialogs or bank exams.
+  const inStudy = !modal && document.querySelector('main.content[data-screen="Study"] .st-item');
+  if (!hit && inStudy && (key === "space" || key === "enter")) hit = find("3");
   if (!hit) return;
-  // Enter and Space already press a focused button; don't press twice.
-  if ((key === "enter" || key === "space") && t && t.tagName === "BUTTON" && t !== hit) return;
+  // Let focused buttons process their native Space/Enter once, not twice.
+  if ((key === "enter" || key === "space") && t?.closest?.("button, a[href], [role=button]")) return;
   e.preventDefault();
   hit.click();
 };
@@ -122,11 +138,13 @@ pub fn KeysSheet() -> Element {
         return rsx! {};
     }
     let screens = format!("{} … {}", nav::TODAY, nav::STATS);
-    let rows: [(&[&str], String); 11] = [
+    let rows: [(&[&str], String); 13] = [
         (&["Ctrl", "1–7"], format!("{} ({screens})", tx::SCREENS)),
         (&["Ctrl", ","], tx::SETTINGS.into()),
-        (&["Space"], tx::REVEAL.into()),
+        (&["Space", "Enter"], tx::REVEAL.into()),
+        (&["Space", "Enter"], tx::GOOD.into()),
         (&["1", "2", "3", "4"], tx::RATE.into()),
+        (&["Z"], tx::UNDO.into()),
         (&["A", "B", "C", "D", "E"], tx::OPTIONS.into()),
         (&["Enter"], tx::NEXT.into()),
         (&["←", "→"], tx::MOVE.into()),
@@ -178,6 +196,26 @@ pub fn KeysSheet() -> Element {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn reviewer_keys_remain_safe_and_discoverable() {
+        // The dispatcher is an external JS script in a WKWebView. Check
+        // contract invariants alongside the Rust DOM regression tests.
+        for s in [
+            "e.isComposing",
+            "e.repeat",
+            "t.isContentEditable",
+            "[role=\"textbox\"]",
+            "if (typing && e.key !== \"Escape\") return",
+            "const modal =",
+            "if (!hit && inStudy",
+            "find(\"3\")",
+            "Key[A-FZ]",
+            "e.defaultPrevented",
+        ] {
+            assert!(KEYS_JS.contains(s), "missing keyboard safety contract: {s}");
+        }
+    }
 
     #[test]
     fn messages_map_to_screens() {
@@ -253,7 +291,7 @@ mod tests {
         dom.rebuild_in_place();
         let html = dioxus::ssr::render(&dom);
         assert!(html.contains(tx::TITLE) && html.contains("aria-modal=\"true\""), "{html}");
-        assert_eq!(html.matches("<tr").count(), 11, "{html}");
+        assert_eq!(html.matches("<tr").count(), 13, "{html}");
         for text in [tx::SCREENS, tx::REVEAL, tx::RATE, tx::FLAG, tx::HELP, nav::TODAY, nav::STATS] {
             assert!(html.contains(text), "missing {text}: {html}");
         }

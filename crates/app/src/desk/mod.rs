@@ -20,8 +20,8 @@ use crate::look::{Css, css};
 use crate::prefs::NavStyle;
 use crate::settings::{DeviceOnly, Section};
 
-const DESK_CSS: Css = css!("assets/desk.css");
-const NAV_CSS: Css = css!("assets/nav.css");
+pub(crate) const DESK_CSS: Css = css!("assets/desk.css");
+pub(crate) const NAV_CSS: Css = css!("assets/nav.css");
 
 /// Rendered once by the app root: the desk's styles, the stored device
 /// switches, the hover script, the keyboard and (on the Mac) the menu.

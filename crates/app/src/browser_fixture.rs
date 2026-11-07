@@ -35,6 +35,8 @@ pub fn out_dir_in(root: &std::path::Path, screen: &str) -> PathBuf {
     ]
     .join("\n");
     std::fs::write(dir.join("app.css"), app).unwrap();
+    // Browser regression loads the same drag logic as the Mac WebView.
+    std::fs::write(dir.join("desk-resize.js"), include_str!("desk/resize.js")).unwrap();
     for theme in Theme::ALL {
         for size in [TextSize::Normal, TextSize::Larger] {
             let prefs = DevicePrefs { theme, text_size: size, ..DevicePrefs::default() };
@@ -62,6 +64,7 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
     let browser_preview = std::env::var_os("APP_BROWSER_FIXTURES").is_some();
     rsx! {
         div { class: "app", lang: "ar", dir: "rtl", "data-appearance": "calm",
+            "data-desk-focus": "false",
             "data-focus": if focus { "true" } else { "false" },
             if browser_preview {
                 header { class: "topbar",

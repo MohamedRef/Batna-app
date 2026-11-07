@@ -28,15 +28,17 @@ The store is in memory and the review log is empty, so items are fresh.
 
 | Dimension | Cases |
 |---|---|
-| Width | 320, 384, 600, 840, 1280 CSS px (height 900) |
+| Width | 320, 384, 600, 840, 1280, 1600 CSS px (height 900) |
 | Theme | System, in the light and dark OS schemes |
 | Appearance | Calm and Glossy |
 | Text size | Normal and Larger |
 | Direction | Arabic RTL |
 
 Each file is loaded once and switched the way the app switches: the prefs
-stylesheet and `data-appearance` on `.app`. 38 files × 40 = 1,520 cases, about
-20 seconds.
+stylesheet and `data-appearance` on `.app`. 38 files × 48 = 1,824 cases.
+The fixture includes the actual app's navigation markup (sidebar and phone top
+bar) and the production `nav.css` and `desk.css`, rather than silently
+measuring desktop views without their sidebar.
 
 ## Assertions
 
@@ -52,8 +54,11 @@ stylesheet and `data-appearance` on `.app`. 38 files × 40 = 1,520 cases, about
 | Figures | Every `<text>` label of every lesson figure stays inside its picture's `viewBox`: one past the edge is cut off on the phone |
 | Errors | Any browser page error fails the job |
 
-Calm, Larger, 384px screenshots in both schemes and `report.json` are
-uploaded as `screens-browser-results`; a failure attaches `failure.png`.
+Calm, Larger, 384px screenshots in both schemes, plus two 1600px Mac-width
+previews (`mac-preview-learn-1600.png`, `mac-preview-study-1600.png`), and
+`report.json` are uploaded as `screens-browser-results`; a failure attaches
+`failure.png`. The preview PNGs are screenshots of real production screen
+components in Chromium, **not captures of a running native macOS bundle**.
 
 ## Known gaps
 

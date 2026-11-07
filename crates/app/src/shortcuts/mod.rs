@@ -202,10 +202,16 @@ mod tests {
         // The dispatcher is an external JS script in a WKWebView. Check
         // contract invariants alongside the Rust DOM regression tests.
         for s in [
-            "e.isComposing", "e.repeat", "t.isContentEditable",
-            "[role=\"textbox\"]", "if (typing && e.key !== \"Escape\") return",
-            "const modal =", "if (!hit && inStudy",
-            "find(\"3\")", "Key[A-FZ]", "e.defaultPrevented",
+            "e.isComposing",
+            "e.repeat",
+            "t.isContentEditable",
+            "[role=\"textbox\"]",
+            "if (typing && e.key !== \"Escape\") return",
+            "const modal =",
+            "if (!hit && inStudy",
+            "find(\"3\")",
+            "Key[A-FZ]",
+            "e.defaultPrevented",
         ] {
             assert!(KEYS_JS.contains(s), "missing keyboard safety contract: {s}");
         }

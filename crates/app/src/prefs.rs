@@ -18,6 +18,8 @@ const NAV_STYLE: &str = "nav_style";
 const PEN_HOVER: &str = "pen_hover";
 const MOUSE_HOVER: &str = "mouse_hover";
 const APPEARANCE: &str = "appearance";
+const DESK_SPLIT: &str = "desk_split";
+const DESK_FOCUS: &str = "desk_focus";
 
 /// The app's own data folder: the local database and device files live here.
 pub fn data_dir() -> Option<PathBuf> {
@@ -153,6 +155,10 @@ pub struct DevicePrefs {
     /// Calm, Glossy or Liquid Glass. Older files have no line for it
     /// and loads as Calm.
     pub appearance: Appearance,
+    /// Primary pane width in percent; zero keeps the original 60/40 split.
+    pub desk_split: u8,
+    /// Explicit focus mode for wide desktop study and lessons, device-local.
+    pub desk_focus: bool,
 }
 
 impl Default for DevicePrefs {
@@ -164,6 +170,8 @@ impl Default for DevicePrefs {
             pen_hover: true,
             mouse_hover: true,
             appearance: Appearance::default(),
+            desk_split: 0,
+            desk_focus: false,
         }
     }
 }
@@ -205,19 +213,27 @@ impl DevicePrefs {
             pen_hover: map.get(PEN_HOVER) != Some(&"off"),
             mouse_hover: map.get(MOUSE_HOVER) != Some(&"off"),
             appearance: map.get(APPEARANCE).map_or_else(Appearance::default, |v| Appearance::parse(v)),
+            desk_split: map
+                .get(DESK_SPLIT)
+                .and_then(|v| v.parse::<u8>().ok())
+                .filter(|v| (35..=70).contains(v))
+                .unwrap_or(0),
+            desk_focus: map.get(DESK_FOCUS) == Some(&"on"),
         }
     }
 
     fn render(&self) -> String {
         let on_off = |on: bool| if on { "on" } else { "off" };
         format!(
-            "{THEME}={}\n{TEXT_SIZE}={}\n{NAV_STYLE}={}\n{PEN_HOVER}={}\n{MOUSE_HOVER}={}\n{APPEARANCE}={}\n",
+            "{THEME}={}\n{TEXT_SIZE}={}\n{NAV_STYLE}={}\n{PEN_HOVER}={}\n{MOUSE_HOVER}={}\n{APPEARANCE}={}\n{DESK_SPLIT}={}\n{DESK_FOCUS}={}\n",
             self.theme.as_str(),
             self.text_size.as_str(),
             self.nav_style.as_str(),
             on_off(self.pen_hover),
             on_off(self.mouse_hover),
             self.appearance.as_str(),
+            self.desk_split,
+            on_off(self.desk_focus),
         )
     }
 
@@ -246,6 +262,8 @@ mod tests {
             pen_hover: false,
             mouse_hover: true,
             appearance: Appearance::Glossy,
+            desk_split: 65,
+            desk_focus: true,
         };
         assert_eq!(DevicePrefs::parse(&p.render()), p);
         assert_eq!(DevicePrefs::parse("theme=neon\nnonsense\ntext_size=huge"), DevicePrefs::default());
@@ -266,6 +284,9 @@ mod tests {
         assert_eq!(p.appearance, Appearance::Calm);
         assert_eq!((p.theme, p.text_size, p.mouse_hover), (Theme::Night, TextSize::Small, false));
         assert_eq!(DevicePrefs::parse("appearance=sparkly").appearance, Appearance::Calm);
+        assert_eq!((p.desk_split, p.desk_focus), (0, false), "older preference files keep desktop defaults");
+        assert_eq!(DevicePrefs::parse("desk_split=99\ndesk_focus=no").desk_split, 0);
+        assert_eq!(DevicePrefs::parse("desk_split=35\ndesk_focus=on").desk_split, 35);
         for appearance in Appearance::ALL {
             let with_appearance = DevicePrefs { appearance, ..p };
             assert_eq!(DevicePrefs::parse(&with_appearance.render()), with_appearance);

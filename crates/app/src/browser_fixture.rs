@@ -76,15 +76,17 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
                     span { class: "brand-tag", {crate::i18n::app::TAGLINE} }
                 }
                 for tab in Screen::NAV {
-                    div {
+                    crate::NavButton {
                         key: "{tab:?}",
+                        screen: tab,
                         class: crate::more::nav_class(tab),
-                        "aria-current": if tab == screen { "page" } else { "false" },
-                        span { class: "glyph", {crate::icons::nav(tab)} }
-                        span { class: "label", {tab.label()} }
                     }
                 }
-                div { class: "nav-item nav-foot",
+                button { class: "nav-item nav-foot",
+                    aria_label: Screen::Settings.label(),
+                    // Browser fixture only; Settings has its own production
+                    // screen renderer and browser regression suite.
+                    onclick: move |_| {},
                     span { class: "glyph", {crate::icons::nav(Screen::Settings)} }
                     span { class: "label", {Screen::Settings.label()} }
                 }

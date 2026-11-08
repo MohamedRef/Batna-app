@@ -437,3 +437,22 @@ fn wide_desktop_today_keeps_study_primary_and_untraps_scrolling() {
         assert!(css.contains(required), "desktop task-first layout needs {required}");
     }
 }
+
+#[test]
+fn resume_button_returns_to_existing_study_without_queuing_a_new_start() {
+    use crate::tap_dom::TestDom;
+    crate::store::use_memory_store();
+    let mut t = TestDom::of(|| {
+        shell(rsx! {
+            Spy {}
+            ResumeStudy { index: 2, total: 7 }
+        })
+    });
+    assert!(t.html().contains(tx::RESUME_TITLE), "resume is clearly labeled");
+    assert!(t.html().contains("2 / 7"), "progress is visible");
+    assert_eq!(screen(&t), Screen::Today);
+    t.click(tx::RESUME_SESSION);
+    assert_eq!(screen(&t), Screen::Study);
+    assert!(t.with(|| crate::study::START.peek().is_none()), "resume must not create a new session request");
+}
+

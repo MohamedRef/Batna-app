@@ -19,7 +19,9 @@ const focus = node => {
 };
 const activeStep = () => $('.ls-player .ls-stage:not([hidden])');
 const activeItem = () => $('main.content[data-screen="Study"] .st-item');
-const freshControl = root => $( 'input:not([disabled]), textarea:not([disabled]), [contenteditable="true"], button[aria-keyshortcuts~="Space"]:not([disabled]), button[aria-keyshortcuts~="Enter"]:not([disabled])', root);
+const freshControl = root => [...root.querySelectorAll(
+  'input:not([disabled]), textarea:not([disabled]), [contenteditable="true"], button[aria-keyshortcuts~="Space"]:not([disabled]), button[aria-keyshortcuts~="Enter"]:not([disabled])'
+)].find(focusable);
 const finish = () => {
   pending = null;
   if (timeout) clearTimeout(timeout);

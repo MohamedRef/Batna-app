@@ -8,6 +8,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 const { keyboardFocusChecks } = require('./keyboard-focus-browser.cjs');
+const { highlightChecks } = require('./highlight-browser.cjs');
 // The compact controls check also verifies bank scope/history touch targets.
 const { mobileControlChecks } = require('./mobile-touch-browser.cjs');
 
@@ -503,6 +504,8 @@ async function run() {
     current = 'compact touch controls';
     await mobileControlChecks(page, fixtures);
     await keyboardFocusChecks(browser);
+    current = 'own highlights';
+    await highlightChecks(browser, fixtures);
     assert.deepEqual(errors, [], 'browser page errors');
     const stale = [...KNOWN.small, ...KNOWN.overflow, ...KNOWN.noHeading].filter(k => !seen.has(k));
     await fs.writeFile(path.join(output, 'report.json'),

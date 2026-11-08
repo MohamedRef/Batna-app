@@ -108,7 +108,7 @@ async function keyboardFocusChecks(browser) {
     await page.evaluate(() => {
       window.dioxus = { send: message => (window.__foregroundMessages ||= []).push(message) };
     });
-    await page.addScriptTag({ content: '(async () => {\\n' + foreground + '\\n})();' });
+    await page.addScriptTag({ content: '(async () => {\n' + foreground + '\n})();' });
     const beforeScroll = await page.evaluate(() => {
       const main = document.querySelector('main.content');
       main.scrollTop = 420;

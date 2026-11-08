@@ -514,6 +514,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 
 | Area | State |
 |---|---|
+| Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
 | App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
 | Releases | Latest `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump merged but was never released. Next release is the first calendar one (`2026.11.1`), once the lesson screen redesign merges (Mohamed, 2026-11-08). Previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
@@ -554,6 +555,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-08: rebrand B0 (Mohamed's pick from the proposal page https://claude.ai/artifact/Y9h75TKgVP3TBEJNX68pKT): launcher icon is the liver redrawn as one clean shape on petrol `#245f7c` with a green bile drop (`assets/src/icon/*.svg`, re-exported); the same mark now heads the phone top bar, rail and sidebar (`crates/app/src/brand.rs`, theme colours `--accent`/`--good`; a test keeps it equal to the icon paths).
 - 2026-11-08: release numbering switched to calendar versions (`2026.11.N`) and one build counter (commits on main) for previews and releases, on Mohamed's ask; `scripts/version.sh`, versionCode 20000000 + build, tags `v<version>`, no bump PR (`docs/RELEASE.md` §1).
 - 2026-11-08: PR #753 merged with green Rust/Android/Node CI: foreground return resets only Study's active answer timer; native S24 Ultra event delivery unverified, process-death resume remains out of scope.
 

@@ -68,10 +68,7 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
             "data-focus": if focus { "true" } else { "false" },
             if browser_preview {
                 header { class: "topbar",
-                div { class: "brand",
-                    span { class: "brand-name", {crate::i18n::app::NAME} }
-                    span { class: "brand-tag", {crate::i18n::app::TAGLINE} }
-                }
+                crate::brand::TopBrand {}
                 div { class: "topbar-actions",
                     crate::shortcuts::MobileSearchButton {}
                     button {
@@ -83,10 +80,7 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
                 }
             }
             nav { class: "nav", aria_label: crate::i18n::nav::LABEL,
-                div { class: "nav-brand", aria_hidden: "true",
-                    span { class: "brand-name", {crate::i18n::app::NAME} }
-                    span { class: "brand-tag", {crate::i18n::app::TAGLINE} }
-                }
+                crate::brand::NavBrand {}
                 for tab in Screen::NAV {
                     crate::NavButton {
                         key: "{tab:?}",

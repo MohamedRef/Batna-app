@@ -17,6 +17,8 @@
   }
   .nav-brand .brand-name { font-size: var(--fs-md); }
   .nav-brand .brand-tag { display: none; }
+  .nav-brand { gap: var(--sp-1); }
+  .nav-brand .brand-mark { inline-size: 2rem; }
   /* References, a new card and the calculators, under the screens and
      set off by a hairline (more.rs ToolButtons; phones use More). */
   .nav-tools {
@@ -41,10 +43,15 @@
     gap: var(--sp-1);
     padding-inline: var(--sp-2);
   }
+  /* Sidebar: the mark beside the name and tagline, one lockup. */
   :root:not([data-nav-style="slim"]) .nav-brand {
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--sp-3);
     padding-inline: var(--sp-3);
   }
+  :root:not([data-nav-style="slim"]) .nav-brand .brand-mark { inline-size: 2.6rem; }
+  :root:not([data-nav-style="slim"]) .nav-brand .brand-words { align-items: flex-start; }
   :root:not([data-nav-style="slim"]) .nav-brand .brand-name { font-size: var(--fs-xl); line-height: 1.3; }
   :root:not([data-nav-style="slim"]) .nav-brand .brand-tag {
     display: block;

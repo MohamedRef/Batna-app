@@ -256,6 +256,22 @@ impl Store {
         Ok(logged)
     }
 
+    /// A deterministic fingerprint of the active review log. A Study snapshot
+    /// written before an additional committed answer (or Undo / sync replay)
+    /// must never be restored as though it included that answer.
+    pub fn study_review_marker(&self) -> Result<String> {
+        // Reuse the authoritative non-tombstoned view, in canonical HLC order.
+        // The marker is device-local; it does not become a sync operation.
+        let log = self.reviews()?;
+        let bytes = serde_json::to_vec(&log)?;
+        let mut hash = 0xcbf29ce484222325_u64;
+        for byte in &bytes {
+            hash ^= u64::from(*byte);
+            hash = hash.wrapping_mul(0x100000001b3);
+        }
+        Ok(format!("v1:{}:{hash:016x}", log.len()))
+    }
+
     /// Takes one answer back (Undo): its row gets the tombstone, queued for
     /// sync, so every device replays the schedule without it. False when it
     /// was already gone (or never existed): nothing is written twice.
@@ -923,6 +939,28 @@ mod snapshot_tests {
 
     /// The web build keeps the database as bytes: they come back whole,
     /// with the same device, and an empty snapshot is a fresh store.
+    #[test]
+    fn study_marker_detects_committed_review_and_undo_and_survives_reopen() {
+        use batna_core::review::{Grade, Origin, ReviewEvent};
+        let store = Store::open_in_memory().unwrap();
+        let empty = store.study_review_marker().unwrap();
+        let logged = store
+            .append_review(ReviewEvent {
+                item_id: "hb.L01.001".into(),
+                grade: Grade::Good,
+                origin: Origin::Study,
+                at_ms: 100,
+                took_ms: 200,
+            })
+            .unwrap();
+        let after_answer = store.study_review_marker().unwrap();
+        assert_ne!(empty, after_answer, "a committed answer invalidates the old queue");
+        let reopened = Store::from_snapshot(&store.snapshot().unwrap().1).unwrap();
+        assert_eq!(after_answer, reopened.study_review_marker().unwrap());
+        store.retract_review(&logged.id).unwrap();
+        assert_eq!(store.study_review_marker().unwrap(), empty, "only active reviews count");
+    }
+
     #[test]
     fn a_snapshot_round_trips() {
         let s = Store::open_in_memory().unwrap();

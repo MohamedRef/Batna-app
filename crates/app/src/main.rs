@@ -180,6 +180,8 @@ fn App() -> Element {
     let settings = use_context_provider(settings::SettingsNav::new);
     use_context_provider(update::sheet::UpdateSheetNav::new);
     store::use_provide_review();
+    // Restore a validated, device-local Study queue before Today first renders.
+    study::use_restore();
     cloud::use_provide_cloud();
     #[cfg(target_arch = "wasm32")]
     platform::web::use_saver();

@@ -14,7 +14,9 @@ mod backend;
 #[cfg(test)]
 mod browser;
 mod card;
+mod checkpoint;
 mod cloze;
+pub(crate) use checkpoint::use_restore;
 mod enumerate;
 mod essay;
 mod foreground;
@@ -212,6 +214,11 @@ pub fn Study() -> Element {
             session.set(Session::new(planned));
             started.set(Instant::now());
             phase.set(if empty { Phase::Summary } else { Phase::Running });
+            if empty {
+                checkpoint::clear();
+            } else {
+                checkpoint::save_running(&session.peek());
+            }
         }
     };
 
@@ -227,6 +234,11 @@ pub fn Study() -> Element {
                 session.set(Session::new(planned));
                 started.set(Instant::now());
                 phase.set(if empty { Phase::Summary } else { Phase::Running });
+                if empty {
+                    checkpoint::clear();
+                } else {
+                    checkpoint::save_running(&session.peek());
+                }
                 return;
             }
             let picked: Vec<&Lecture> = ready_lectures()
@@ -286,6 +298,7 @@ pub fn Study() -> Element {
             undo_note.set(Some(tx::UNDONE));
             started.set(Instant::now());
             phase.set(Phase::Running);
+            checkpoint::save_running(&session.peek());
         }
     };
 
@@ -330,7 +343,10 @@ pub fn Study() -> Element {
             match current.and_then(|p| find(&p.item_id).map(|(l, i)| (p, l, i))) {
                 // Only when content changed under a running session; "end" still works.
                 None => rsx! {
-                    button { class: "btn btn-primary btn-lg", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
+                    button { class: "btn btn-primary btn-lg", onclick: move |_| {
+                        phase.set(Phase::Summary);
+                        checkpoint::clear();
+                    }, {tx::END} }
                 },
                 Some((p, lecture, item)) => {
                     let item = store.0.borrow().effective(item);
@@ -366,7 +382,9 @@ pub fn Study() -> Element {
                         started.set(Instant::now());
                         if session.read().is_done() {
                             phase.set(Phase::Summary);
+                            checkpoint::clear();
                         } else {
+                            checkpoint::save_running(&session.peek());
                             crate::sounds::play(if grade == Grade::Again {
                                 crate::sounds::Cue::Wrong
                             } else {
@@ -401,7 +419,10 @@ pub fn Study() -> Element {
                                 class: "btn-link",
                                 "aria-keyshortcuts": "Escape",
                                 "data-back": "true",
-                                onclick: move |_| phase.set(Phase::Summary),
+                                onclick: move |_| {
+                                    phase.set(Phase::Summary);
+                                    checkpoint::clear();
+                                },
                                 {tx::END}
                             }
                         }
@@ -420,6 +441,7 @@ pub fn Study() -> Element {
                                     move |ids: Vec<String>| {
                                         let more = plan_items(&store_for_add, &ids);
                                         session.write().append(more);
+                                        checkpoint::save_running(&session.peek());
                                         pending.set(None);
                                     }
                                 },
@@ -471,7 +493,10 @@ pub fn Study() -> Element {
                         move |_| undo()
                     },
                     undo_failed: undo_note() == Some(tx::UNDO_FAILED),
-                    on_again: move |_| phase.set(Phase::Setup),
+                    on_again: move |_| {
+                        phase.set(Phase::Setup);
+                        checkpoint::clear();
+                    },
                 }
             }
         }

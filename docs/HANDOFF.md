@@ -36,7 +36,15 @@ Keep these labels honest as PRs merge, refresh this section and a `changes/*.yam
 - Only restore on keyboard / screen-reader (zero-detail click), not on pointer clicks; cancel on pointer activity, modal, contenteditable, or active input. Keep updates in `crates/app/src/shortcuts/` with focused browser regression; no manual macOS QA is required to progress code.
 - PR #744 merged after green CI: the palette opens real calculators, Settings sections and lecture-filtered practice, not individual question deep links.
 
-## Mobile study UX continuation, 2026-11-08 (current PR: compact touch controls)
+## Mobile Study progress continuity (2026-11-08, PR pending)
+
+- Previous PR #748 merged as `f43e7570` with successful Rust/Android/Chromium workflows. Its compact list + calculator 48dp target changes must not be duplicated.
+- Current separate PR `fix/mobile-study-toolbar-20261108`: at 320/384dp the running Study toolbar has its progress meter/counter on a dedicated row and the existing Undo/End buttons on a second 48dp row, preserving the single content scroll container and existing phone focus mode. Grade controls keep 4-across positions, stay readable at large text and respect the bottom gesture safe-area inset.
+- Added production SSR Playwright assertions for meter width, non-overlapping actions and screen bounds. This does not test native S24 Ultra gestures; user will manually validate native interaction later.
+- Next: inspect short-height screens and keyboard/IME occlusion using browser viewport fixtures and then profile study transition/render cost **before** changing architecture. Keep progress state, scroll and Android Back intact.
+- Do not start a new PR until this one is green and merged. No alpha release or English interface scope.
+
+## Mobile study UX continuation, 2026-11-08 (PR #748 merged, compact reading follow-up)
 
 The top-bar search is a reusable `shortcuts::MobileSearchButton` opening
 `⌘K`'s offline palette, not a second search engine. Dismissal restores focus

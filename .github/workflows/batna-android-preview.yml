@@ -89,8 +89,18 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
-          # "What's new" reads the changes/ files merged since the build on the feed.
+          # "What's new" reads the changes/ files merged since the build on
+          # the feed, and the build number counts the commits.
           fetch-depth: 0
+      # docs/RELEASE.md §1 (Mohamed, 2026-11-08): a preview carries the
+      # latest release's calendar version and the build number every build
+      # shares, the commits on main, so it sorts after that release.
+      - name: Preview version and build number
+        run: |
+          read -r v build < <(scripts/version.sh preview)
+          scripts/version.sh apply "$v"
+          echo "BATNA_BUILD=$build" >> "$GITHUB_ENV"
+          echo "Batna $v, build $build"
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: aarch64-linux-android
@@ -155,7 +165,6 @@ jobs:
           {
             echo "BATNA_UPDATE_CHANNEL=preview"
             echo "BATNA_UPDATE_KEY=$(grep -v '^#' ~/.batna-preview-update/key.pub | head -1)"
-            echo "BATNA_BUILD=${{ github.run_number }}"
             echo "BATNA_COMMIT=${GITHUB_SHA::7}"
           } >> "$GITHUB_ENV"
 
@@ -337,11 +346,11 @@ jobs:
           if live="$(gh release download "$TAG" -p update.json -O - 2>/dev/null)"; then
             old_code="$(jq -r '.assets[] | select(.platform == "android-arm64") | .version_code // 0' <<<"$live")"
             if [[ "$old_code" =~ ^[0-9]+$ && "$new_code" =~ ^[0-9]+$ ]] && (( new_code < old_code )); then
-              echo "::error::versionCode $new_code is below the published preview's $old_code. Raise version in Cargo.toml (docs/RELEASE.md §1)."
+              echo "::error::versionCode $new_code is below the published preview's $old_code. The build number (commits on main, scripts/version.sh) should only grow: is this an old commit? (docs/RELEASE.md §1)"
               exit 1
             fi
           fi
-          NOTES="Preview build of ${GITHUB_SHA::7}, signed with the release key, so it installs over the alpha and back. Install: download batna-preview.apk on the phone or tablet and allow installs from your browser. Releases are the batna-v* alphas."
+          NOTES="Preview build of ${GITHUB_SHA::7}, signed with the release key, so it installs over the alpha and back. Install: download batna-preview.apk on the phone or tablet and allow installs from your browser. Releases are the v* tags (v2026.11.1, …)."
           # The release stays in place and only its tag and files change, so
           # the download link and the update feed never 404.
           if gh release view "$TAG" >/dev/null 2>&1; then

@@ -70,6 +70,7 @@ mod today;
 mod ui;
 mod update;
 mod verify;
+mod version;
 
 use crate::look::{Css, css};
 use dioxus::prelude::*;

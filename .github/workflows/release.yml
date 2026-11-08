@@ -1,13 +1,18 @@
 name: Release
+run-name: Release (${{ inputs.channel || 'alpha' }})
 
-# Builds a real Batna release (alpha, beta or stable, from `version` in
-# Cargo.toml) and publishes it (docs/RELEASE.md §4–5): the signed release
-# APK, the signed Batna.app and the content pack, on
+# Builds a real Batna release and publishes it (docs/RELEASE.md §4–5): the
+# signed release APK, the signed Batna.app and the content pack. Since
+# 2026-11-08 (Mohamed) the version is the calendar's, YEAR.MONTH.N
+# (2026.11.1 = the first release of November 2026), and the build number is
+# one counter shared with the preview builds (scripts/version.sh). Nothing
+# needs bumping first. The release goes on
 #
 # - the channel feed(s) the version belongs to (`batna-alpha`, …): the
-#   signed update.json the installed apps read, files first, manifest last;
-# - a release of its own (`batna-v<version>`) with the APK and the zipped
-#   Batna.app for installing by hand.
+#   signed update.json the installed apps read, files first, manifest last
+#   (alpha unless the `channel` input says beta or stable);
+# - a release of its own (`v<version>`, e.g. v2026.11.1) with the APK and
+#   the zipped Batna.app for installing by hand.
 #
 # By hand only (Actions › Release › Run workflow): nothing is released
 # unless Mohamed says go. The keys come from repo secrets that
@@ -18,6 +23,11 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
+      channel:
+        description: "Channel (a beta also reaches alpha, a stable release everyone)"
+        type: choice
+        options: [alpha, beta, stable]
+        default: alpha
       notes_en:
         description: "Short notes (English, optional: what's new comes from changes/)"
         required: false
@@ -42,7 +52,6 @@ env:
   # build steps. Never echo these.
   BATNA_CLOUD_URL: ${{ vars.BATNA_CLOUD_URL || 'https://batna-cloud.hamorefaat85.workers.dev' }}
   BATNA_GOOGLE_CLIENT_ID: ${{ vars.BATNA_GOOGLE_CLIENT_ID || '1001052243528-3d8bmf0efprgdvov9f663fm8u63kblck.apps.googleusercontent.com' }}
-  BATNA_BUILD: ${{ github.run_number }}
 
 jobs:
   prepare:
@@ -51,25 +60,32 @@ jobs:
     timeout-minutes: 20
     outputs:
       version: ${{ steps.v.outputs.version }}
+      build: ${{ steps.v.outputs.build }}
       channels: ${{ steps.v.outputs.channels }}
     steps:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+          # The build number counts the commits; the version counts this
+          # month's release tags.
+          fetch-depth: 0
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
         with:
           key: release-tools
           save-if: false
-      - name: Release version and its channels
+      - name: Release version, build number and channels
         id: v
+        env:
+          CHANNEL: ${{ inputs.channel || 'alpha' }}
         run: |
-          v="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
-          channels="$(cargo run -q -p batna-tools -- update channels --version "$v" | tr '\n' ' ')"
+          read -r v build < <(scripts/version.sh release)
+          [ -z "$(git tag -l "v$v")" ] || { echo "::error::v$v exists already"; exit 1; }
+          scripts/version.sh apply "$v"
+          channels="$(cargo run -q -p batna-tools -- update channels --version "$v" --channel "$CHANNEL" | tr '\n' ' ')"
           [ -n "${channels// }" ] || { echo "::error::$v belongs on no channel"; exit 1; }
-          echo "version=$v" >> "$GITHUB_OUTPUT"
-          echo "channels=$channels" >> "$GITHUB_OUTPUT"
-          echo "Batna $v → $channels"
+          { echo "version=$v"; echo "build=$build"; echo "channels=$channels"; } >> "$GITHUB_OUTPUT"
+          echo "Batna $v, build $build → $channels"
       - name: Every key is there
         env:
           HAVE_UPDATE: ${{ secrets.BATNA_UPDATE_SECRET != '' }}
@@ -100,10 +116,14 @@ jobs:
     needs: prepare
     runs-on: ubuntu-24.04
     timeout-minutes: 60
+    env:
+      BATNA_BUILD: ${{ needs.prepare.outputs.build }}
     steps:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+      - name: Release version into Cargo.toml (the app's label, versionName, CFBundleShortVersionString)
+        run: scripts/version.sh apply "${{ needs.prepare.outputs.version }}"
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: aarch64-linux-android
@@ -170,10 +190,14 @@ jobs:
     needs: prepare
     runs-on: macos-15
     timeout-minutes: 60
+    env:
+      BATNA_BUILD: ${{ needs.prepare.outputs.build }}
     steps:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+      - name: Release version into Cargo.toml (the app's label, versionName, CFBundleShortVersionString)
+        run: scripts/version.sh apply "${{ needs.prepare.outputs.version }}"
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: llvm-tools
@@ -205,6 +229,13 @@ jobs:
           app="$(find dist/mac/raw -maxdepth 4 -name '*.app' | head -1)"
           test -n "$app"
           rm -rf dist/mac/Batna.app && cp -R "$app" dist/mac/Batna.app
+          # Apple's split (before signing): the release people read, and the
+          # build number that only grows.
+          plist=dist/mac/Batna.app/Contents/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{ needs.prepare.outputs.version }}" "$plist" \
+            || /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string ${{ needs.prepare.outputs.version }}" "$plist"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BATNA_BUILD" "$plist" \
+            || /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BATNA_BUILD" "$plist"
       - name: Sign as "Batna Code Signing" (the identity installed apps trust)
         env:
           P12_B64: ${{ secrets.BATNA_MAC_CERT_P12 }}
@@ -238,6 +269,8 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: write
+    env:
+      BATNA_BUILD: ${{ needs.prepare.outputs.build }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -288,22 +321,27 @@ jobs:
           GH_REPO: ${{ github.repository }}
           V: ${{ needs.prepare.outputs.version }}
           CHANNELS: ${{ needs.prepare.outputs.channels }}
+          NOTES_EN: ${{ inputs.notes_en }}
+          NOTES_AR_EG: ${{ inputs.notes_ar_eg }}
         run: |
-          # The release people install from by hand.
-          tag="batna-v$V"
+          # The release people install from by hand: built as a draft, files
+          # uploaded, then published, so the page never shows half a release.
+          # Alpha and beta stay pre-releases; a stable one becomes "Latest".
+          tag="v$V"
+          channel="$(awk '{print $NF}' <<<"$CHANNELS")"   # the one picked; the others are below it
           mkdir -p dist/human
-          cp dist/in/batna-release-apk/batna.apk "dist/human/batna-$V.apk"
+          cp dist/in/batna-release-apk/batna.apk "dist/human/Batna-$V-android.apk"
           cp dist/in/batna-release-mac/Batna.app.zip "dist/human/Batna-$V-mac.zip"
-          if ! gh release view "$tag" >/dev/null 2>&1; then
-            gh release create "$tag" --prerelease --target "$GITHUB_SHA" --title "Batna $V" --notes "$(cat <<NOTES
-          Batna $V, built by the Release workflow (run ${{ github.run_number }}, ${GITHUB_SHA::7}).
-
-          - Android (S24 Ultra, Tab S11): install batna-$V.apk. It installs over the alpha or a preview build and keeps your data: they share the release key. (Only a preview from before 2026-11-02 needs one reinstall; export your data from Settings first, or let sync bring it back.) From now on it updates itself from the $CHANNELS feed.
-          - Mac: unzip Batna-$V-mac.zip, move Batna.app to Applications, then once: \`xattr -dr com.apple.quarantine /Applications/Batna.app\` (it is self-signed). Later versions install themselves.
-          NOTES
-          )"
-          fi
-          gh release upload "$tag" dist/human/* --clobber
+          (cd dist/human && sha256sum Batna-* > SHA256SUMS.txt && cat SHA256SUMS.txt)
+          scripts/release-notes.sh "dist/update/$channel/update.json" "$channel" "$NOTES_EN" "$NOTES_AR_EG" \
+            > dist/release-notes.md
+          cat dist/release-notes.md >> "$GITHUB_STEP_SUMMARY"
+          kind=(--prerelease --latest=false)
+          [ "$channel" != stable ] || kind=(--latest)
+          gh release create "$tag" --draft "${kind[@]}" --target "$GITHUB_SHA" --title "Batna $V" \
+            --notes-file dist/release-notes.md dist/human/*
+          gh release edit "$tag" --draft=false
+          echo "released $V: https://github.com/$GH_REPO/releases/tag/$tag"
           # The feeds: files first, the signed manifest last.
           for channel in $CHANNELS; do
             feed="batna-$channel"

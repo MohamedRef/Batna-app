@@ -335,11 +335,17 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 
 ## 6. Releases and updates
 
-- Version in workspace `Cargo.toml` (now **1.0.0-alpha.4**).
+- **Numbering (Mohamed, 2026-11-08):** calendar versions `YEAR.MONTH.N`
+  (`2026.11.1` = first release of November 2026) and one build number for
+  every build, preview or release (commits on `main`). Android versionCode
+  = 20000000 + build; Mac CFBundleVersion = build. Release tags `v<version>`
+  (the old ones are `batna-v1.0.0-alpha.1…3`). `scripts/version.sh` works it
+  out; `Cargo.toml` keeps `2026.11.0` and is never bumped by hand. Details:
+  `docs/RELEASE.md` §1.
 - Channels: `batna-preview` (CI, every 4 h), `batna-alpha`, `batna-beta`,
-  `batna-stable`. Human release tags: `batna-v<version>`.
-- **Alpha only when Mohamed says so** («طلّع ألفا»). Steps: PR bumping
-  `version` (+ `changes/` line) → merge → Actions › Release › Run workflow.
+  `batna-stable` (feed tags: never rename, installed apps read them).
+- **Alpha only when Mohamed says so** («طلّع ألفا»). Steps: Actions ›
+  Release › Run workflow (channel alpha); no bump PR.
   It builds the content pack, release APK (Linux), Batna.app (macOS), signs
   the feed and publishes. Then verify `update.json` with
   `batna-tools update verify` against `crates/app/update-key.pub`.
@@ -512,12 +518,12 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 - Android crash reports start from Settings › Your data › diagnostics
   (WebViewGuard records renderer loss and exit reasons).
 
-## 10. Current state (2026-11-06)
+## 10. Current state (2026-11-08)
 
 | Area | State |
 |---|---|
 | App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
-| Releases | `batna-v1.0.0-alpha.4` published 2026-11-08 (feed `batna-alpha`); previews every 4 h |
+| Releases | Latest `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump merged but was never released. Next release is the first calendar one (`2026.11.1`), once the lesson screen redesign merges (Mohamed, 2026-11-08). Previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
 | Open PRs / issues | None open on 2026-11-08; PRs #752 and #753 merged after green Rust/Android/Node CI |
 | Coverage | 95.05% (floor 94) |
@@ -556,6 +562,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-08: release numbering switched to calendar versions (`2026.11.N`) and one build counter (commits on main) for previews and releases, on Mohamed's ask; `scripts/version.sh`, versionCode 20000000 + build, tags `v<version>`, no bump PR (`docs/RELEASE.md` §1).
 - 2026-11-08: PR #753 merged with green Rust/Android/Node CI: foreground return resets only Study's active answer timer; native S24 Ultra event delivery unverified, process-death resume remains out of scope.
 
 - 2026-11-08: Study background time fix PR: on WebView visibility return, reset answer timing only for a running session; isolated JS bridge tests, without session/scroll/navigation changes. PR #752 benchmark merged green (16 cards, p50 2380µs, p95 65600µs on hosted Linux).
@@ -583,7 +590,7 @@ Newest first. One line per PR that changes behaviour, process or state.
 
 - 2026-11-07: Mac expanded-layout pass: eliminate fixed-width canvas padding, adapt lesson Steps into context and active-step panes on ≥1440px, widen study/Settings, and default the Mac window to 1280×820; browser SSR at 1600px includes inert desktop navigation and saves previews. Layout at 840–1099px stacks form panes to prevent larger-text overflow. Native Mac QA remains open.
 
-- 2026-11-08: 1.0.0-alpha.4 released on Mohamed's ask, so the Mac app gets everything merged since alpha.3. The Keychain password prompt ("app.batna.cloud") Mohamed kept seeing came from local builds of a checkout older than #612; main builds keep the session in `cloud-session.json` and launch without it.
+- 2026-11-08: 1.0.0-alpha.4 bump merged (#766) but the release was held for the lesson screen redesign, then replaced by calendar numbering. The Keychain password prompt ("app.batna.cloud") Mohamed kept seeing came from local builds of a checkout older than #612; main builds keep the session in `cloud-session.json` and launch without it.
 - 2026-11-06: 1.0.0-alpha.3 released on Mohamed's ask, so the Mac app (alpha feed only; previews carry no Mac build) gets the lock/unlock and update-check fixes.
 - 2026-11-06: Android screen froze after lock/unlock: Dioxus's edit socket patched in `vendor/` (edits resent until acknowledged); update check shows the app result before the content pack downloads, requests time out after 20 s of no progress.
 - 2026-11-06: res.L11 lesson 4 sampling tree: purposive labels wrapped onto four lines (they ran past the picture edge and failed the nightly lesson browser regression).

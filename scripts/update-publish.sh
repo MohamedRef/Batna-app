@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Publishes the current release builds as an over-the-air update
-# (docs/RELEASE.md §5): one signed feed per channel the version belongs to
-# (an alpha → batna-alpha; a beta → alpha + beta; a release → all three),
+# (docs/RELEASE.md §5): one signed feed per channel the release reaches
+# (alpha unless `batna-tools update channels --channel` says otherwise),
 # each on its own GitHub release. The content pack rides along, so lectures
 # reach devices whose app updates are off.
 #
@@ -49,7 +49,8 @@ for channel in $channels; do
   previous="$(mktemp)"
   gh release download "batna-$channel" --repo "$repo" --pattern update.json --output "$previous" --clobber \
     2>/dev/null || rm -f "$previous"
-  $tools update manifest --channel "$channel" --version "$v" --commit "$(git rev-parse --short HEAD)" \
+  $tools update manifest --channel "$channel" --version "$v" --build "$(git rev-list --count HEAD)" \
+    --commit "$(git rev-parse --short HEAD)" \
     --notes-en "$notes_en" --notes-ar-eg "$notes_ar_eg" --previous "$previous" --changes \
     --asset "android-arm64=$apk" --asset "$mac=dist/mac/Batna.app.zip" --asset "content=$pack" \
     --out "$out"

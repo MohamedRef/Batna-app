@@ -31,15 +31,9 @@ fn load(backend: &StudyStoreHandle) -> Option<Session> {
     let db = crate::store::shared();
     let checkpoint = db.local_setting::<SessionCheckpoint>(KEY)?;
     let marker = db.study_review_marker().ok()?;
-    let live = db
-        .reviews()
-        .ok()?
-        .into_iter()
-        .map(|entry| (entry.id, entry.event))
-        .collect::<HashMap<_, _>>();
-    let recovered = checkpoint.recover(&marker, &live, |id| {
-        super::is_playable(id) && !backend.0.borrow().is_hidden(id)
-    });
+    let live = db.reviews().ok()?.into_iter().map(|entry| (entry.id, entry.event)).collect::<HashMap<_, _>>();
+    let recovered =
+        checkpoint.recover(&marker, &live, |id| super::is_playable(id) && !backend.0.borrow().is_hidden(id));
     if recovered.is_none() {
         clear();
     }
@@ -60,9 +54,7 @@ pub(super) fn save_running(session: &Session) {
 }
 
 pub(super) fn clear() {
-    if let Err(error) =
-        crate::store::shared().put_local_setting(KEY, &Option::<SessionCheckpoint>::None)
-    {
+    if let Err(error) = crate::store::shared().put_local_setting(KEY, &Option::<SessionCheckpoint>::None) {
         crate::diag::report!("clearing Study checkpoint: {error}");
     }
 }

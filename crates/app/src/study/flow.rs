@@ -510,6 +510,10 @@ fn profile_study_card_transitions() {
     let max = transition_us[transition_us.len() - 1];
     println!(
         "STUDY_TRANSITION_BASELINE cards={} mount_us={} grade_p50_us={} grade_p95_us={} grade_max_us={} scope=TestDom_event_and_mutation_not_Android_paint",
-        ids.len(), mount_us, p50, p95, max
+        ids.len(),
+        mount_us,
+        p50,
+        p95,
+        max
     );
 }

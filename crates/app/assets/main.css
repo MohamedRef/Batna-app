@@ -120,7 +120,14 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
   border-block-end: 1px solid var(--line);
   background: var(--surface);
 }
-.brand { display: flex; align-items: baseline; gap: var(--sp-2); min-width: 0; }
+.brand { display: flex; align-items: baseline; gap: var(--sp-2); min-width: 0; flex: 1; }
+.brand-name { flex: none; white-space: nowrap; }
+.brand-tag { min-inline-size: 0; }
+.topbar-actions { display: flex; align-items: center; gap: var(--sp-2); flex: none; }
+@media (max-width: 599.98px) {
+  /* Search and Settings stay reachable at 320-384dp, even with larger text. */
+  .topbar-actions .icon-button { min-inline-size: 3rem; min-block-size: 3rem; }
+}
 .brand-name { font-weight: 700; font-size: var(--fs-lg); color: var(--accent); }
 .brand-tag { color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .icon-button {

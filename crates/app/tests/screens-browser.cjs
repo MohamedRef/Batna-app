@@ -228,6 +228,46 @@ async function run() {
                 assert.deepEqual(m.unnamed, [], `${name}: controls without a name`);
                 assert.deepEqual(m.tooSmall, [], `${name}: controls under ${FLOOR[screen]} (${m.target}px)`);
                 await screenChecks(page, item, name);
+                // The compact phone header must offer the same quick-search
+                // action at a thumb-sized target, without overflowing 320dp.
+                if (screen === 'study' && item.phase === 'setup' && (width === 320 || width === 384)) {
+                  const action = await page.evaluate(() => {
+                    const b = document.querySelector('.topbar-search');
+                    if (!b) return null;
+                    const r = b.getBoundingClientRect();
+                    return { w: r.width, h: r.height, left: r.left, right: r.right, name: b.getAttribute('aria-label') };
+                  });
+                  assert.ok(action && action.w >= 47.5 && action.h >= 47.5 &&
+                    action.left >= -1 && action.right <= width + 1 && action.name,
+                    `${name}: mobile search must remain visible, named and at least 48dp: ${JSON.stringify(action)}`);
+                }
+                // Simulate a soft-keyboard-reduced viewport for the real
+                // palette CSS. Its results remain scrollable below the field.
+                if (screen === 'study' && item.phase === 'setup' && width === 384 &&
+                    scheme === 'light' && appearance === 'calm' && size === 'normal') {
+                  await page.setViewportSize({ width: 384, height: 520 });
+                  const popup = await page.evaluate(() => {
+                    const dialog = document.createElement('section');
+                    dialog.className = 'command-palette';
+                    dialog.setAttribute('role', 'dialog');
+                    dialog.innerHTML = '<header class="command-palette-head"><h2>Search</h2></header>' +
+                      '<div class="command-search-row"><input class="command-search palette-search" aria-label="Search"></div>' +
+                      '<nav class="command-results">' +
+                      '<button class="palette-result">Result</button>'.repeat(12) + '</nav>';
+                    document.body.append(dialog);
+                    const r = dialog.getBoundingClientRect();
+                    const input = dialog.querySelector('input').getBoundingClientRect();
+                    const result = dialog.querySelector('.command-results');
+                    const data = { top: r.top, bottom: r.bottom, inputBottom: input.bottom,
+                      scrollable: getComputedStyle(result).overflowY === 'auto' };
+                    dialog.remove();
+                    return data;
+                  });
+                  assert.ok(popup.top >= 0 && popup.bottom <= 520 + 1 &&
+                    popup.inputBottom < popup.bottom && popup.scrollable,
+                    `${name}: palette must fit a phone viewport with on-screen keyboard: ${JSON.stringify(popup)}`);
+                  await page.setViewportSize({ width: 384, height: 900 });
+                }
                 if (width === 384 && appearance === 'calm' && size === 'larger') {
                   await page.screenshot({ path: path.join(output, `${name}.png`), fullPage: true });
                 }

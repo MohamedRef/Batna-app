@@ -123,6 +123,23 @@ mod tests {
     }
 
     #[test]
+    fn legacy_v1_checkpoint_recovers_once_and_new_save_uses_v2() {
+        let db = crate::store::use_thread_store();
+        let card = super::super::flow::first("card");
+        let session = Session::new(vec![planned(&card.id)]);
+        let original_marker = db.study_review_marker_legacy().unwrap();
+        db.put_local_setting(KEY, &SessionCheckpoint::new(&session, original_marker)).unwrap();
+
+        let backend = memory_backend();
+        assert!(load(&backend).is_some(), "v1 checkpoint should validate against the original log");
+        save_running(&session);
+        let modern = db.local_setting::<SessionCheckpoint>(KEY).unwrap();
+        assert!(!modern.uses_legacy_review_marker(), "next checkpoint writes v2 revision");
+        assert!(load(&backend).is_some(), "v2 checkpoint also recovers");
+        clear();
+    }
+
+    #[test]
     fn crash_after_review_commit_before_snapshot_fails_closed() {
         let db = crate::store::use_thread_store();
         let card = super::super::flow::first("card");

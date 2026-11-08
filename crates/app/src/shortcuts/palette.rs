@@ -12,6 +12,15 @@ use super::{PALETTE_OPEN, open_palette};
 
 const MAX_RESULTS: usize = 12;
 
+/// Dismissal returns focus to the control that opened the palette, if it is
+/// still visible. A selected destination deliberately does not restore it.
+fn dismiss() {
+    open_palette(false);
+    document::eval(
+        "requestAnimationFrame(() => { const el = window.__batnaPaletteOpener; if (el?.isConnected && el.getClientRects().length) el.focus({preventScroll:true}); });",
+    );
+}
+
 #[derive(Clone, Debug, PartialEq, Eq)]
 enum Destination {
     Screen(Screen),
@@ -203,7 +212,7 @@ pub fn Palette() -> Element {
     rsx! {
         div {
             class: "sheet-backdrop command-backdrop",
-            onclick: move |_| open_palette(false),
+            onclick: move |_| dismiss(),
         }
         section {
             class: "command-palette",
@@ -211,7 +220,7 @@ pub fn Palette() -> Element {
             "aria-modal": "true",
             "aria-labelledby": "command-palette-title",
             onmounted: move |_| {
-                document::eval("document.querySelector('.palette-search')?.focus();");
+                document::eval("window.__batnaPaletteOpener = document.activeElement; document.querySelector('.palette-search')?.focus();");
             },
             div { class: "command-palette-head",
                 h2 { id: "command-palette-title", "الانتقال السريع" }

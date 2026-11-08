@@ -74,6 +74,16 @@ jobs:
             grep 'STUDY_CHECKPOINT_MARKER_BASELINE' marker-perf.log || true
             echo '~~~'
           } >> "$GITHUB_STEP_SUMMARY"
+      - name: FSRS full-review replay baseline (hosted runner, informational)
+        run: |
+          set -o pipefail
+          cargo test -p batna-app store::backend::replay_perf::profile_review_replay -- --ignored --nocapture 2>&1 | tee replay-perf.log
+          {
+            echo "### Study FSRS replay baseline, hosted Linux only"
+            echo '~~~'
+            grep 'STUDY_REPLAY_BASELINE' replay-perf.log || true
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/setup-node@v5
         with:
           node-version: 22

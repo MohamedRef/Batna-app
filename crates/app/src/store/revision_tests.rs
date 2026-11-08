@@ -86,3 +86,17 @@ fn two_branches_with_same_review_count_cannot_share_marker() {
     fork_b.append_review(other).unwrap();
     assert_ne!(fork_a.study_review_marker().unwrap(), fork_b.study_review_marker().unwrap());
 }
+
+#[test]
+fn borrowed_device_wipe_keeps_a_valid_future_revision() {
+    let store = Store::open_in_memory().unwrap();
+    store.append_review(sample()).unwrap();
+    let before = store.study_review_marker().unwrap();
+    store.forget_study().unwrap();
+    let wiped = store.study_review_marker().unwrap();
+    assert_ne!(wiped, before, "forgetting data invalidates the older checkpoint");
+    assert!(store.reviews().unwrap().is_empty());
+
+    store.append_review(sample()).unwrap();
+    assert_ne!(store.study_review_marker().unwrap(), wiped, "new answers after wipe still invalidate");
+}

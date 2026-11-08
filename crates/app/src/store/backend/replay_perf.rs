@@ -49,13 +49,16 @@ fn profile_review_replay() {
         // replays FSRS and signals the UI. It intentionally does *not* include
         // the separate checkpoint marker or WebView rendering time.
         let start = Instant::now();
-        let event_id = StudyStore::record_logged(&mut backend, ReviewEvent {
-            item_id: "hb.L01.replay.0".into(),
-            grade: Grade::Good,
-            origin: Origin::Study,
-            at_ms: 1_793_610_000_000 + count as i64 * 60_000,
-            took_ms: 1_200,
-        })
+        let event_id = StudyStore::record_logged(
+            &mut backend,
+            ReviewEvent {
+                item_id: "hb.L01.replay.0".into(),
+                grade: Grade::Good,
+                origin: Origin::Study,
+                at_ms: 1_793_610_000_000 + count as i64 * 60_000,
+                took_ms: 1_200,
+            },
+        )
         .expect("persist grade")
         .expect("committed review id");
         let grade_us = start.elapsed().as_micros();

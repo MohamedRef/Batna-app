@@ -12,7 +12,14 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
-## FSRS replay latency diagnostic (2026-11-08, PR pending)
+## Cloud main-CI wasm-bindgen dependency (2026-11-08, PR pending)
+
+- PR #761 merged green as `5b604038`. Hosted Linux p50: FSRS replay = 0.218 / 1.386 / 4.028 ms; full commit + replay = 0.349 / 1.511 / 4.568 ms; checkpoint marker = 0.903 / 8.869 / 26.977 ms at 100 / 1,000 / 3,000 synthetic events. Marker dominates at larger histories. These are not S24 Ultra UI latencies.
+- PR #760's full PR Cloud E2E passed, but the following **main** run failed: worker-build could not download `wasm-bindgen` 0.2.129 from GitHub Releases (HTTP 504, five retries). This is distinct from the earlier `wasm-opt` download failure; the Worker never started, so no sync assertion failed.
+- `fix/cloud-ci-pinned-bindgen-20261108` pins `wasm-bindgen-cli` 0.2.129, installs from crates.io source and caches the resulting binary in main CI and the path-scoped PR Cloud E2E workflow; exports `WASM_BINDGEN_BIN` to worker-build. The existing test-only `--no-opt` remains, the app and production Worker deployment configuration are unchanged.
+- Require a successful **full** fake-Google + device-sync PR E2E, Rust/content and Android checks, then merge. Recheck main Cloud CI because its cache and workflow context differ. Native performance and release remain deferred. Next performance priority: make checkpoint marker cheaper without weakening crash/Undo/sync integrity.
+
+## FSRS replay latency diagnostic (2026-11-08, merged PR #761)
 
 - Cloud E2E regression PR #760 **merged as `ba319f49`**, with the complete local Worker fake-Google/device sync PR test and Rust/Android checks passing. Production Worker build remains optimized; test-only Wrangler config avoids external Binaryen downloads. Verify the next `main` Cloud E2E run separately.
 - New `test/study-review-replay-baseline-20261108` adds an ignored benchmark calling the real `ReviewBackend::replay()` seven times over independent synthetic SQLite histories of 100/1,000/3,000 committed events across 64 items, mixed grades. It also times a full `StudyStore::record_logged` grade, including SQLite + in-memory replay but excluding checkpoint marker and WebView painting.

@@ -13,6 +13,8 @@ pub mod import;
 mod install;
 #[cfg(test)]
 mod marker_perf;
+#[cfg(test)]
+mod revision_tests;
 pub mod own;
 mod paths;
 pub mod sync;

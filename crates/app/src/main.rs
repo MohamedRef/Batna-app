@@ -253,12 +253,23 @@ fn App() -> Element {
                     span { class: "brand-name", {i18n::app::NAME} }
                     span { class: "brand-tag", {i18n::app::TAGLINE} }
                 }
-                button {
-                    class: "icon-button",
-                    aria_label: Screen::Settings.label(),
-                    title: Screen::Settings.label(),
-                    onclick: move |_| settings.show(None),
-                    {icons::nav(Screen::Settings)}
+                div { class: "topbar-actions",
+                    button {
+                        r#type: "button",
+                        class: "icon-button topbar-search",
+                        aria_label: i18n::keys::SEARCH_OPEN,
+                        title: i18n::keys::SEARCH_OPEN,
+                        "aria-keyshortcuts": "Meta+K Control+K",
+                        onclick: move |_| shortcuts::open_palette(true),
+                        {icons::search()}
+                    }
+                    button {
+                        class: "icon-button",
+                        aria_label: Screen::Settings.label(),
+                        title: Screen::Settings.label(),
+                        onclick: move |_| settings.show(None),
+                        {icons::nav(Screen::Settings)}
+                    }
                 }
             }
             nav { class: "nav", aria_label: i18n::nav::LABEL,

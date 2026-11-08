@@ -12,11 +12,17 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
-## Mobile medical table touch targets (2026-11-08, PR #758 pending)
+## Study checkpoint performance baseline (2026-11-08, PR pending)
+
+- PR #758 merged green as `b8775089` (Android, Rust/content, Chromium); table controls are >=48dp on compact phones. The previous touch-target PR's pending label below is historical.
+- Follow-up `test/study-checkpoint-marker-baseline-20261108` measures the existing `Store::study_review_marker` read/hash separately from the local SQLite checkpoint-meta write at 100, 1000, and 3000 committed review events. The ignored diagnostic runs in PR CI and publishes p50/p95/max; it changes no persistence, syncing, review grading or UX.
+- Hosted Linux timings are **not** S24 Ultra UI frame times. Do not optimize without considering the full scan's growth and the fail-closed semantics after a crash. Next, review results, then use a separate feature PR for any optimization, preserving cold-process recovery tests and event IDs. Native Android profiling remains deferred. No release.
+
+## Mobile medical table touch targets (2026-11-08, PR #758 merged)
 
 - PR #756 merged as `6d3d885a`, and follow-up SQLite crash/restart tests PR #757 merged as `d05b23a5`; native process-kill QA remains deferred.
 - PR #758 widens medical table typing, mark (yes/no) and correction targets to the existing 48dp `--target` while leaving Reveal, scroll, pinned labels and grading unchanged.
-- The production-CSS Chromium regression covers all five table controls at 320/384px with normal/enlarged text. Screens-browser CI triggers for the table CSS or related browser test. Merge after current-head CI and browser success; no alpha release.
+- The production-CSS Chromium regression covers all five table controls at 320/384px with normal/enlarged text. Screens-browser CI passed alongside Rust/content and Android; PR #758 merged as `b8775089`. No alpha release.
 
 ## Durable Study checkpoint (2026-11-08, PR #756 merged)
 

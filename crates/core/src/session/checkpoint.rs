@@ -24,6 +24,12 @@ impl SessionCheckpoint {
         Self { version: Self::VERSION, review_marker, session: session.clone() }
     }
 
+    /// Version prefix lets the app validate old checkpoints once, using the
+    /// original full-log fingerprint, before writing new O(1) v2 markers.
+    pub fn uses_legacy_review_marker(&self) -> bool {
+        self.review_marker.starts_with("v1:")
+    }
+
     /// Reject old/corrupt snapshots, missing/tombstoned grades and unplayable
     /// items rather than risking a second FSRS event after a crash.
     ///

@@ -188,8 +188,24 @@ fn activate(target: Destination, mut ui: Ui, settings: SettingsNav) {
     }
 }
 
-/// Always mounted in the app shell; the dialog itself mounts only when
-/// `Cmd+K` / `Ctrl+K` is pressed. The focus starts in the search box.
+/// Touch trigger on the compact top bar. Search logic and destinations stay
+/// in the same palette used by Cmd/Ctrl+K, with no duplicate index or route.
+#[component]
+pub fn MobileSearchButton() -> Element {
+    rsx! {
+        button {
+            r#type: "button",
+            class: "icon-button topbar-search",
+            "aria-label": "بحث سريع",
+            title: "بحث سريع",
+            onclick: move |_| open_palette(true),
+            {crate::icons::search()}
+        }
+    }
+}
+
+/// Always mounted in the app shell; the dialog mounts when either a
+/// keyboard shortcut or the phone search button opens the palette.
 #[component]
 pub fn Palette() -> Element {
     let ui = use_context::<Ui>();
@@ -264,6 +280,21 @@ pub fn Palette() -> Element {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn mobile_search_button_opens_shared_palette() {
+        fn app() -> Element {
+            use_hook(|| open_palette(false));
+            rsx! { MobileSearchButton {} }
+        }
+        let mut dom = crate::tap_dom::TestDom::of(app);
+        assert!(dom.html().contains("aria-label=\"بحث سريع\""));
+        dom.click("aria-label=\"بحث سريع\"");
+        dom.with(|| {
+            assert!(*PALETTE_OPEN.peek(), "touch opens the same Cmd/Ctrl+K dialog");
+            open_palette(false);
+        });
+    }
 
     #[test]
     fn empty_query_shows_existing_sections_and_settings_only() {

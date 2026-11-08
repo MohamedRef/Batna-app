@@ -12,13 +12,13 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
-## Durable Study checkpoint (2026-11-08, PR pending)
+## Durable Study checkpoint (2026-11-08, PR #756 merged)
 
-- PR #755 merged as `81cc01b1` after successful Rust/Android checks. Today already offers Continue for a live, same-process Study queue.
+- PR #756 merged as `6d3d885a` after green Rust/Android CI. PR #755 had merged as `81cc01b1`. Today already offers Continue for a live, same-process Study queue.
 - Follow-up branch `feat/durable-study-checkpoint-20261108`: a **device-local versioned** `SessionCheckpoint` preserves queue order, progress, Again retries, outcomes, and the exact review IDs needed for Undo. A new run reads it before rendering Today, without replaying or recording any answers.
 - A deterministic marker covers the committed, non-tombstoned SQLite review log. If the process dies **after** a review commits but **before** its matching checkpoint, a marker mismatch refuses recovery rather than duplicating FSRS grades. Invalid schema, unknown or hidden cards, missing or altered review events similarly fail closed. A stale/invalid checkpoint is cleared and the app starts normally.
 - Save after starting, grading, Undo and appending items; clear after End or finishing. Uses `meta.local.study.session.v1`, not synced settings or a new sync table. A borrowed device still clears its local meta when its session ends.
-- Automated coverage includes core version/grade/undo/retry validation plus review marker invalidation and SQLite snapshot reopen. **Not yet native-tested:** Android process death, OS background kills and macOS relaunch. The snapshot is not an automatic recovery guarantee when storage is unavailable; a failed snapshot write never blocks an already-saved review.
+- Automated coverage includes core version/grade/undo/retry validation plus review marker invalidation and SQLite snapshot reopen. Follow-up PR adds application-level SQLite recovery tests: a real persisted Again grade and Undo event ID must restore without replay, and a crash after review commit but before snapshot update must reject and clear the stale checkpoint. **Not yet native-tested:** Android process death, OS background kills and macOS relaunch. The snapshot is not an automatic recovery guarantee when storage is unavailable; a failed snapshot write never blocks an already-saved review.
 - CI must pass on the latest PR head before merging; no new Alpha, language change, or release.
 
 ## Mac desktop workflow plan, refreshed 2026-11-08 (PR #744 merged; mobile UX is next)

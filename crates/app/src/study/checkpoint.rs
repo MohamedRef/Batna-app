@@ -58,3 +58,82 @@ pub(super) fn clear() {
         crate::diag::report!("clearing Study checkpoint: {error}");
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::cell::RefCell;
+    use std::rc::Rc;
+
+    use batna_core::review::{Grade, Origin, ReviewEvent};
+    use batna_core::session::Planned;
+
+    fn memory_backend() -> StudyStoreHandle {
+        StudyStoreHandle(Rc::new(RefCell::new(super::super::backend::MemoryStore::default())))
+    }
+
+    fn planned(id: &str) -> Planned {
+        Planned {
+            item_id: id.to_string(),
+            lecture: "hb.L01".into(),
+            topic: "hb.L01/definition".into(),
+            est_secs: 20,
+            fresh: true,
+        }
+    }
+
+    #[test]
+    fn sqlite_restart_loads_exact_queue_and_keeps_undo_event_id() {
+        let db = crate::store::use_thread_store();
+        let card = super::super::flow::first("card");
+        let cloze = super::super::flow::first("cloze");
+        let mut session = Session::new(vec![planned(&card.id), planned(&cloze.id)]);
+        save_running(&session);
+        let backend = memory_backend();
+        assert_eq!(load(&backend).unwrap().progress(), (0, 2));
+
+        // Grading saves the review first, then its corresponding checkpoint.
+        let logged = db
+            .append_review(ReviewEvent {
+                item_id: card.id.clone(),
+                grade: Grade::Again,
+                origin: Origin::Study,
+                at_ms: 100,
+                took_ms: 20,
+            })
+            .unwrap();
+        session.grade_logged(Grade::Again, Some(logged.id.clone()), |_| false);
+        save_running(&session);
+
+        // Simulate a fresh loader reading SQLite rather than any global SESSION.
+        let mut restored = load(&backend).expect("committed review and snapshot agree");
+        assert_eq!(restored.progress(), (1, 3), "Again retry survives");
+        assert_eq!(restored.current().unwrap().item_id, cloze.id);
+        assert_eq!(restored.undo().unwrap().event.as_deref(), Some(logged.id.as_str()));
+
+        clear();
+        assert!(load(&backend).is_none(), "ended session should not reopen");
+    }
+
+    #[test]
+    fn crash_after_review_commit_before_snapshot_fails_closed() {
+        let db = crate::store::use_thread_store();
+        let card = super::super::flow::first("card");
+        let session = Session::new(vec![planned(&card.id)]);
+        save_running(&session);
+        db.append_review(ReviewEvent {
+            item_id: card.id.clone(),
+            grade: Grade::Good,
+            origin: Origin::Study,
+            at_ms: 100,
+            took_ms: 20,
+        })
+        .unwrap();
+
+        // The old snapshot must not reopen the just-graded item or emit a
+        // second review event. Existing committed reviews stay untouched.
+        assert!(load(&memory_backend()).is_none());
+        assert_eq!(db.reviews().unwrap().len(), 1);
+        assert!(db.local_setting::<SessionCheckpoint>(KEY).is_none());
+    }
+}

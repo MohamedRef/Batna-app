@@ -12,6 +12,7 @@ async function mobileControlChecks(page, fixtures) {
   assert.ok(setup, 'study setup fixture exists');
   await page.goto(pathToFileURL(path.join(study, setup.file)).href);
   await page.addStyleTag({ path: path.join(__dirname, '../src/calc/calc.css') });
+  await page.addStyleTag({ path: path.join(__dirname, '../src/bank/bank.css') });
   for (const size of ['normal', 'larger']) {
     await page.evaluate(size => new Promise(resolve => {
       const link = document.querySelector('#prefs');
@@ -31,7 +32,9 @@ async function mobileControlChecks(page, fixtures) {
           '<button aria-label="Compact">S</button></div></div>' +
           '<div class="calc-form"><div class="calc-foot"><button class="btn-link">إعادة</button></div>' +
           '<div class="calc-result"><details class="calc-parts"><summary>التفاصيل</summary></details></div></div>' +
-          '<div class="section-head"><button class="btn-ghost">عرض الكل</button></div>';
+          '<div class="section-head"><button class="btn-ghost">عرض الكل</button></div>' +
+          '<div class="bank-setup"><button class="bank-scope-tap">نطاق الأسئلة</button></div>' +
+          '<details class="history-paper"><summary>محاولة سابقة</summary></details>';
         document.querySelector('main.content').append(host);
         const result = [...host.querySelectorAll('button, summary')].map(el => {
           const box = el.getBoundingClientRect();
@@ -41,12 +44,12 @@ async function mobileControlChecks(page, fixtures) {
         host.remove();
         return result;
       });
-      assert.equal(controls.length, 7);
+      assert.equal(controls.length, 9);
       assert.deepEqual(controls.filter(x =>
         x.width < 23.5 || x.height < 47.5 || x.left < -1 || x.right > width + 1), [],
       `compact controls at ${width}px (${size}): ${JSON.stringify(controls)}`);
     }
   }
-  console.log('Compact list/calculator controls: >=48dp at 320/384px.');
+  console.log('Compact list/calculator/bank controls: >=48dp at 320/384px.');
 }
 module.exports = { mobileControlChecks };

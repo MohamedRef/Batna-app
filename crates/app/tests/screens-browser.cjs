@@ -8,6 +8,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 const { keyboardFocusChecks } = require('./keyboard-focus-browser.cjs');
+// The compact controls check also verifies bank scope/history touch targets.
 const { mobileControlChecks } = require('./mobile-touch-browser.cjs');
 
 const WIDTHS = [320, 384, 600, 840, 1280, 1600];

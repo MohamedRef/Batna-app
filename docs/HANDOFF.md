@@ -36,6 +36,14 @@ Keep these labels honest as PRs merge, refresh this section and a `changes/*.yam
 - Only restore on keyboard / screen-reader (zero-detail click), not on pointer clicks; cancel on pointer activity, modal, contenteditable, or active input. Keep updates in `crates/app/src/shortcuts/` with focused browser regression; no manual macOS QA is required to progress code.
 - PR #744 merged after green CI: the palette opens real calculators, Settings sections and lecture-filtered practice, not individual question deep links.
 
+## Same-process Study resume regression (2026-11-08, PR in progress)
+
+- New Rust TestDom regression mounts a two-card running Study session, reveals/rates its first card, unmounts **only the screen**, and remounts it in the same app context. It asserts the second card and 2/2 progress remain active, recorded grades are not duplicated and Undo is available. **This does not claim process-death recovery**.
+- Production-JS Chromium regression checks that a retained Study scroll container remains at the same offset and active card after foreground visibility/pageshow events. It does not simulate actual Android lifecycle or restore a killed WebView.
+- The existing focus continuity and background-answer timer implementations remain unchanged; tests are intended to prevent regressing them.
+- Native macOS and S24 Ultra manual verification remains with the user. Next: isolate a real Android-grade item scroll jump if observed, then investigate cold-process durable snapshots separately with versioned schema and sync/backward-compatibility rules. No alpha or language changes.
+- PR-first, merge only after branch CI and relevant browser tests are green.
+
 ## Study event-to-render and background timing, 2026-11-08 (PRs #752–#753 merged)
 
 - An ignored diagnostic test in `crates/app/src/study/flow.rs` measures 16 real card Reveal → Good → next-card actions through the in-memory Dioxus TestDom and review backend. It prints mount time plus grade-action p50/p95/max in microseconds.

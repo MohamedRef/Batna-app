@@ -123,6 +123,18 @@ fn due_elsewhere(store: &StudyStoreHandle) -> usize {
 
 static SESSION: GlobalSignal<Session> = Signal::global(Session::default);
 static PHASE: GlobalSignal<Phase> = Signal::global(|| Phase::Setup);
+/// An unfinished, in-memory Study session that can be resumed on Today.
+/// Read the globals reactively so a completed/ended session stops advertising
+/// Continue. This is not cold-process recovery; no new Start is queued.
+pub fn running_progress() -> Option<(usize, usize)> {
+    if *PHASE.read() != Phase::Running {
+        return None;
+    }
+    let session = SESSION.read();
+    let (pos, total) = session.progress();
+    (total > 0 && !session.is_done() && session.current().is_some()).then_some((pos + 1, total))
+}
+
 static STARTED: GlobalSignal<Instant> = Signal::global(Instant::now);
 /// What the last Undo said: taken back (the item is reopened) or not saved,
 /// or that the last rating wasn't saved.

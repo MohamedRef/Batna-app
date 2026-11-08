@@ -528,6 +528,19 @@ fn switching_away_and_back_preserves_active_card_and_review_log() {
     assert_eq!(t.count("button.st-undo"), 1, "Undo remains available after remount");
 }
 
+#[test]
+fn active_resume_status_tracks_the_existing_session_and_disappears_when_ended() {
+    let card = first("card");
+    let cloze = first("cloze");
+    let mut t = mount(items(&[&card.id, &cloze.id]), None);
+    assert_eq!(t.in_root(super::running_progress), Some((1, 2)));
+    t.click_text("button", tx::REVEAL);
+    grade(&mut t, "good");
+    assert_eq!(t.in_root(super::running_progress), Some((2, 2)));
+    t.click_text("button.btn-link", tx::END);
+    assert_eq!(t.in_root(super::running_progress), None);
+}
+
 /// Diagnostic measurement of the real Study reveal -> Good -> next-card
 /// event and VirtualDom mutation path. Run only on the CI runner with
 /// \`--ignored --nocapture\`; it is NOT a native Android paint benchmark.

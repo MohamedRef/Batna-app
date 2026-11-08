@@ -44,6 +44,13 @@ Keep these labels honest as PRs merge, refresh this section and a `changes/*.yam
 - Native macOS and S24 Ultra manual verification remains with the user. Next: isolate a real Android-grade item scroll jump if observed, then investigate cold-process durable snapshots separately with versioned schema and sync/backward-compatibility rules. No alpha or language changes.
 - PR-first, merge only after branch CI and relevant browser tests are green.
 
+## Today: resume existing Study session (2026-11-08, PR pending)
+
+- PR #754 merged (`a5b40421`) after successful Rust, Android arm64 and browser checks; same-process Study remount and foreground scroll are regression-covered. No killed-process restoration is claimed.
+- Follow-up branch `feat/today-resume-study-20261108`: expose the active Study session's reactive position and length; Today displays a clear Continue action when a running unfinished session exists. Clicking returns to the same in-memory queue **without** pushing `START`, re-planning, re-grading, or replacing active Undo history.
+- Keep ordinary daily-plan and new-session actions intact, and hide Continue after summary/end. Ensure phone hit targets and Mac layout remain stable; add Rust behavior checks and a change fragment. Run CI and merge sequentially.
+- Future work: consider an explicit new-session warning when a live session is being replaced; versioned process-death snapshots require separate design, invalid-id recovery, event-id/Undo integrity, and consistency with synced review events. No alpha or language changes.
+
 ## Study event-to-render and background timing, 2026-11-08 (PRs #752–#753 merged)
 
 - An ignored diagnostic test in `crates/app/src/study/flow.rs` measures 16 real card Reveal → Good → next-card actions through the in-memory Dioxus TestDom and review backend. It prints mount time plus grade-action p50/p95/max in microseconds.

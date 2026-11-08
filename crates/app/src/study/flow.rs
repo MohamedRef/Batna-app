@@ -471,6 +471,63 @@ fn the_player_falls_back_to_memory_without_a_store() {
     assert_eq!(t.texts("p"), ["true"]);
 }
 
+/// Mount and unmount only the Study screen while keeping the app's review
+/// context alive: switching tabs must not restart the session, discard its
+/// progress or duplicate the recorded grade.
+#[component]
+fn RemountShell() -> Element {
+    use_context_provider(|| Ui {
+        screen: Signal::new(crate::Screen::Study),
+        prefs: Signal::new(DevicePrefs::default()),
+        focus: Signal::new(false),
+    });
+    let review = use_context_provider(crate::store::test_review);
+    REVIEW.with(|r| *r.borrow_mut() = Some(review.clone()));
+    use_context_provider(|| StudyStoreHandle(review.backend.clone() as Rc<RefCell<dyn StudyStore>>));
+    use_hook(|| {
+        if let Some(start) = START_WITH.with(|s| s.borrow_mut().take()) {
+            *START.write() = Some(start);
+        }
+    });
+    let mut mounted = use_signal(|| true);
+    rsx! {
+        button {
+            class: "remount-toggle",
+            onclick: move |_| mounted.set(!mounted()),
+            "Toggle Study screen"
+        }
+        if mounted() {
+            Study {}
+        }
+    }
+}
+
+#[test]
+fn switching_away_and_back_preserves_active_card_and_review_log() {
+    let card = first("card");
+    let cloze = first("cloze");
+    crate::store::use_memory_store();
+    BROKEN.with(|b| *b.borrow_mut() = None);
+    START_WITH.with(|s| *s.borrow_mut() = items(&[&card.id, &cloze.id]));
+    let mut t = TestDom::new(RemountShell);
+
+    assert_eq!(t.texts("span.st-count"), ["1 / 2"]);
+    t.click_text("button", tx::REVEAL);
+    grade(&mut t, "good");
+    assert_eq!(logged(), 1);
+    assert_eq!(t.texts("span.st-count"), ["2 / 2"]);
+    assert_eq!(t.attr("article.st-item", "data-kind").as_deref(), Some("cloze"));
+
+    // This removes only Study, not its global Session or review backend.
+    t.click("button.remount-toggle");
+    assert_eq!(t.count("article.st-item"), 0);
+    t.click("button.remount-toggle");
+    assert_eq!(t.texts("span.st-count"), ["2 / 2"]);
+    assert_eq!(t.attr("article.st-item", "data-kind").as_deref(), Some("cloze"));
+    assert_eq!(logged(), 1, "returning to Study must not record a second grade");
+    assert_eq!(t.count("button.st-undo"), 1, "Undo remains available after remount");
+}
+
 /// Diagnostic measurement of the real Study reveal -> Good -> next-card
 /// event and VirtualDom mutation path. Run only on the CI runner with
 /// \`--ignored --nocapture\`; it is NOT a native Android paint benchmark.

@@ -64,6 +64,16 @@ jobs:
             grep 'STUDY_TRANSITION_BASELINE' study-perf.log || true
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+      - name: Study checkpoint marker SQLite baseline (informational)
+        run: |
+          set -o pipefail
+          cargo test -p batna-app store::marker_perf::profile_study_checkpoint_marker -- --ignored --nocapture 2>&1 | tee marker-perf.log
+          {
+            echo "### Study checkpoint marker cost, hosted Linux only"
+            echo '~~~'
+            grep 'STUDY_CHECKPOINT_MARKER_BASELINE' marker-perf.log || true
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/setup-node@v5
         with:
           node-version: 22

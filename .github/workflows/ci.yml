@@ -52,6 +52,18 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets -- -D warnings
       - run: cargo test --workspace
+      # This runs an ignored diagnostic after the regular regression suite.
+      # No absolute timing gate: hosted runners vary and cannot represent S24U GPU paint.
+      - name: Study grade-to-next-render baseline (hosted runner, informational)
+        run: |
+          set -o pipefail
+          cargo test -p batna-app study::flow::profile_study_card_transitions -- --ignored --nocapture 2>&1 | tee study-perf.log
+          {
+            echo "### Study transition baseline, hosted Linux runner only"
+            echo '```'
+            grep 'STUDY_TRANSITION_BASELINE' study-perf.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/setup-node@v5
         with:
           node-version: 22

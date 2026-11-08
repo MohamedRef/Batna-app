@@ -151,6 +151,12 @@ pub fn use_shortcuts() {
             }
         }
     });
+    // Keep focus on the new task after a keyboard/screen-reader action.
+    // The script never modifies grades or navigation; pointer input is ignored.
+    use_future(|| async move {
+        let mut eval = document::eval(include_str!("focus.js"));
+        while eval.recv::<String>().await.is_ok() {}
+    });
 }
 
 /// Does what a key asked: a screen closes the sheets first.

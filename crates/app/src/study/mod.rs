@@ -14,8 +14,8 @@ mod backend;
 #[cfg(test)]
 mod browser;
 mod card;
-mod cloze;
 mod checkpoint;
+mod cloze;
 pub(crate) use checkpoint::use_restore;
 mod enumerate;
 mod essay;
@@ -214,7 +214,11 @@ pub fn Study() -> Element {
             session.set(Session::new(planned));
             started.set(Instant::now());
             phase.set(if empty { Phase::Summary } else { Phase::Running });
-            if empty { checkpoint::clear(); } else { checkpoint::save_running(&session.peek()); }
+            if empty {
+                checkpoint::clear();
+            } else {
+                checkpoint::save_running(&session.peek());
+            }
         }
     };
 
@@ -230,7 +234,11 @@ pub fn Study() -> Element {
                 session.set(Session::new(planned));
                 started.set(Instant::now());
                 phase.set(if empty { Phase::Summary } else { Phase::Running });
-                if empty { checkpoint::clear(); } else { checkpoint::save_running(&session.peek()); }
+                if empty {
+                    checkpoint::clear();
+                } else {
+                    checkpoint::save_running(&session.peek());
+                }
                 return;
             }
             let picked: Vec<&Lecture> = ready_lectures()

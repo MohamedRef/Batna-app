@@ -491,7 +491,15 @@ impl Store {
             tx.execute(&format!("DELETE FROM \"{t}\""), [])?;
         }
         tx.execute(
-            "DELETE FROM meta WHERE key <> 'device_id' AND key NOT LIKE 'device.%' AND key <> 'sync.tables'",
+            "DELETE FROM meta WHERE key <> 'device_id' AND key NOT LIKE 'device.%'
+             AND key <> 'sync.tables' AND key <> 'study.review_revision.v2'",
+            [],
+        )?;
+        // Forgetting a borrowed device must also invalidate any old Study
+        // marker, while preserving the revision row used by future grades.
+        tx.execute(
+            "UPDATE meta SET value = lower(hex(randomblob(16)))
+             WHERE key = 'study.review_revision.v2'",
             [],
         )?;
         // Nothing is left to queue: the seed must not run again either.

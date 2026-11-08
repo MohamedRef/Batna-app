@@ -36,7 +36,15 @@ Keep these labels honest as PRs merge, refresh this section and a `changes/*.yam
 - Only restore on keyboard / screen-reader (zero-detail click), not on pointer clicks; cancel on pointer activity, modal, contenteditable, or active input. Keep updates in `crates/app/src/shortcuts/` with focused browser regression; no manual macOS QA is required to progress code.
 - PR #744 merged after green CI: the palette opens real calculators, Settings sections and lecture-filtered practice, not individual question deep links.
 
-## Mobile study UX continuation, 2026-11-08 (current PR: bank setup/history touch)
+## Mobile Study progress continuity (2026-11-08, PR #749 pending)
+
+- PRs #748 and #750 merged with successful Rust/Android/Chromium workflows; their compact list, calculator and bank touch-target changes are preserved.
+- Current PR #749 (`fix/mobile-study-toolbar-20261108`): at 320/384dp, the running Study toolbar keeps the progress meter and counter on a dedicated row, with Undo and End on a separate 48dp row. The grade row respects Android's bottom safe-area while preserving the existing four-button order and running session.
+- Production SSR/Chromium checks assert meter readability and non-overlap, including larger text. Native S24 Ultra gesture behavior remains for owner QA.
+- Next after merge: short-height/IME occlusion tests; profile study transitions before optimization. Preserve Android Back, review state and scrolling.
+- Do not open a new PR until #749 is green and merged; no alpha release or English UI changes.
+
+## Mobile study UX continuation, 2026-11-08 (PR #750 merged; current PR #749 study toolbar)
 
 The top-bar search is a reusable `shortcuts::MobileSearchButton` opening
 `⌘K`'s offline palette, not a second search engine. Dismissal restores focus
@@ -56,14 +64,14 @@ Android Back controller, keyboard safety, 48dp Study targets, and safe-area
 insets. Do not duplicate or redesign working features. No alpha without an
 explicit request, and English UI stays deferred.
 
-Priority order and scope (#746-#748 merged; current PR finishes bank setup/history touch audit):
+Priority order and scope (#746-#748 and #750 merged; PR #749 running Study toolbar in progress):
 1. **Merged PR #746, P0 mobile quick search:** an always-visible, reachable search affordance
    in the compact top bar that opens the existing Cmd/Ctrl+K palette; reuses
    its Library, calculator, Settings-section and lecture-practice destinations
    without another index or router. Support hardware keyboards as before;
    ensure modal close/back, text focus, on-screen keyboard, and unobstructed
    result selection at ~384dp and large font sizes.
-2. **P0 one-handed tap audit (#747 and #748 merged, bank follow-up):** measure all interactive controls on phone-sized
+2. **P0 one-handed tap audit (#747, #748 and #750 merged):** measure all interactive controls on phone-sized
    pages, prioritize Study / lesson progression, bottom navigation, question
    bank and calculator picker; fix any undersized or crowded controls, respect
    system gesture/nav insets. Study already uses 48dp controls and sticky
@@ -421,7 +429,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 | App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
 | Releases | `batna-v1.0.0-alpha.3` published 2026-11-06 (feed `batna-alpha`); previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
-| Open PRs / issues | PRs #746–#748 merged after green CI; bank setup/history touch PR in progress on 2026-11-08 |
+| Open PRs / issues | PR #750 merged; PR #749 for running Study toolbar pending CI/merge (2026-11-08) |
 | Coverage | 95.05% (floor 94) |
 | Mac wide layout | PRs #739–745 merged as applicable: expanded window, Anki-style keys, focus continuity and quick palette; native Mac QA remains with Mohamed |
 
@@ -457,6 +465,8 @@ Mohamed can paste this into any new chat or account to continue:
 ## 12. Log
 
 Newest first. One line per PR that changes behaviour, process or state.
+
+- 2026-11-08: PR #750 merged with green Rust, Android and Chromium checks. Bank scope and history disclosures now use 48dp targets; PR #749 follows for the running Study toolbar.
 
 - 2026-11-08: Bank touch-target follow-up PR: guarantee 48dp on lecture/topic scope opener and previous-paper disclosure; extend 320/384px normal/larger text browser geometry regression. Includes native-device QA caveat and avoids rebuilding bank answer controls.
 - 2026-11-08: PR #748 merged after Rust, Android and Chromium CI green; compact list and calculator actions now use 48dp controls.

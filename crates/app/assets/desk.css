@@ -401,7 +401,12 @@ kbd {
 .command-empty { padding: var(--sp-4); color: var(--muted); }
 .command-palette-hint { color: var(--muted); font-size: var(--fs-sm); }
 @media (max-width: 599.98px) {
-  .command-palette { padding: var(--sp-3); inset-block-start: max(1rem, env(safe-area-inset-top, 0px)); }
+  .command-palette {
+    padding: var(--sp-3);
+    inset-block-start: max(1rem, env(safe-area-inset-top, 0px));
+    max-block-size: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 1rem);
+  }
+  .command-results { max-block-size: min(45dvh, 24rem); }
   .command-search-row kbd { display: none; }
 }
 @media (prefers-contrast: more), (forced-colors: active) {

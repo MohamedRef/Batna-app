@@ -73,6 +73,9 @@ pub fn Today() -> Element {
                         }
                     }
                 }
+                if let Some((index, total)) = crate::study::running_progress() {
+                    ResumeStudy { index, total }
+                }
                 Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0, minutes }
                 // Each count opens what it counts.
                 div { class: "stat-tiles",
@@ -173,6 +176,29 @@ pub fn Today() -> Element {
                 }
             }
             div { class: "tab-aside", LibraryList {} }
+        }
+    }
+}
+
+/// A currently open Study session takes priority over starting a new one.
+/// Navigates straight back to the same in-memory session. It never queues
+/// another START, so grading and Undo remain attached to the original card.
+#[component]
+fn ResumeStudy(index: usize, total: usize) -> Element {
+    let mut ui = use_context::<Ui>();
+    rsx! {
+        crate::ui::Card { class: "td-resume",
+            div { class: "td-resume-copy",
+                strong { {tx::RESUME_TITLE} }
+                span { class: "muted small num-ltr", "{index} / {total}" }
+            }
+            button {
+                r#type: "button",
+                class: "btn btn-primary td-resume-action",
+                onclick: move |_| ui.screen.set(Screen::Study),
+                {tx::RESUME_SESSION}
+                {crate::icons::arrow_go()}
+            }
         }
     }
 }

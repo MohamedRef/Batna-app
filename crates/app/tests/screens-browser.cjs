@@ -261,6 +261,41 @@ async function run() {
                       `${name}: Undo and End must not overlap`);
                   }
                 }
+                // Check a reduced Android WebView viewport after the IME
+                // appears. The item must remain scrollable, and visible
+                // grading controls must not be hidden below the gesture area.
+                if (screen === 'study' && item.phase === 'running' && width === 384 &&
+                    scheme === 'light' && appearance === 'calm' && size === 'normal') {
+                  await page.setViewportSize({ width: 384, height: 520 });
+                  const compactViewport = await page.evaluate(() => {
+                    const main = document.querySelector('main.content');
+                    main.scrollTop = 0;
+                    const end = main.querySelector('.st-progress button[data-back="true"]');
+                    const exit = end?.getBoundingClientRect();
+                    const canScroll = main.scrollHeight > main.clientHeight;
+                    main.scrollTop = main.scrollHeight;
+                    const grades = [...main.querySelectorAll('.st-grades button')]
+                      .filter(el => el.getClientRects().length > 0 && !el.disabled)
+                      .map(el => {
+                        const r = el.getBoundingClientRect();
+                        return { top: r.top, bottom: r.bottom, left: r.left, right: r.right,
+                          width: r.width, height: r.height };
+                      });
+                    return { end: exit && { top: exit.top, bottom: exit.bottom },
+                      canScroll, viewportHeight: window.innerHeight, grades,
+                      scrollWidth: document.documentElement.scrollWidth };
+                  });
+                  assert.ok(compactViewport.end && compactViewport.end.top >= -1 &&
+                    compactViewport.end.bottom <= 521,
+                    `${name}: End must remain reachable at top of short viewport: ${JSON.stringify(compactViewport)}`);
+                  assert.ok(compactViewport.viewportHeight === 520 && compactViewport.scrollWidth <= 385,
+                    `${name}: no horizontal overflow on a short phone: ${JSON.stringify(compactViewport)}`);
+                  assert.deepEqual(compactViewport.grades.filter(g =>
+                    g.height < 47.5 || g.left < -1 || g.right > 385 ||
+                    (g.bottom > 521 && !compactViewport.canScroll)), [],
+                    `${name}: visible grade targets must remain usable: ${JSON.stringify(compactViewport)}`);
+                  await page.setViewportSize({ width: 384, height: 900 });
+                }
                 // The compact phone header must offer the same quick-search
                 // action at a thumb-sized target, without overflowing 320dp.
                 if (screen === 'study' && item.phase === 'setup' && (width === 320 || width === 384)) {

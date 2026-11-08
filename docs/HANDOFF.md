@@ -36,15 +36,15 @@ Keep these labels honest as PRs merge, refresh this section and a `changes/*.yam
 - Only restore on keyboard / screen-reader (zero-detail click), not on pointer clicks; cancel on pointer activity, modal, contenteditable, or active input. Keep updates in `crates/app/src/shortcuts/` with focused browser regression; no manual macOS QA is required to progress code.
 - PR #744 merged after green CI: the palette opens real calculators, Settings sections and lecture-filtered practice, not individual question deep links.
 
-## Mobile Study progress continuity (2026-11-08, PR #749 pending)
+## Mobile Study progress continuity (2026-11-08, PR #749 merged; short-height regression in progress)
 
 - PRs #748 and #750 merged with successful Rust/Android/Chromium workflows; their compact list, calculator and bank touch-target changes are preserved.
-- Current PR #749 (`fix/mobile-study-toolbar-20261108`): at 320/384dp, the running Study toolbar keeps the progress meter and counter on a dedicated row, with Undo and End on a separate 48dp row. The grade row respects Android's bottom safe-area while preserving the existing four-button order and running session.
+- Merged PR #749 (`fix/mobile-study-toolbar-20261108`): at 320/384dp, the running Study toolbar keeps the progress meter and counter on a dedicated row, with Undo and End on a separate 48dp row. The grade row respects Android's bottom safe-area while preserving the existing four-button order and running session.
 - Production SSR/Chromium checks assert meter readability and non-overlap, including larger text. Native S24 Ultra gesture behavior remains for owner QA.
-- Next after merge: short-height/IME occlusion tests; profile study transitions before optimization. Preserve Android Back, review state and scrolling.
-- Do not open a new PR until #749 is green and merged; no alpha release or English UI changes.
+- Current PR: browser regression at 384×520 for short-height/IME-sized viewports, verifying End remains reachable, grades stay thumb-sized and content has no horizontal overflow. This is an SSR layout test, not hydrated WebView or a native keyboard test. Next: profile study transitions before optimization. Preserve Android Back, review state and scrolling.
+- No alpha release or English UI changes. Native S24 Ultra lock/keyboard gesture validation remains deferred.
 
-## Mobile study UX continuation, 2026-11-08 (PR #750 merged; current PR #749 study toolbar)
+## Mobile study UX continuation, 2026-11-08 (PRs #749 and #750 merged; short-height browser QA next)
 
 The top-bar search is a reusable `shortcuts::MobileSearchButton` opening
 `⌘K`'s offline palette, not a second search engine. Dismissal restores focus
@@ -64,7 +64,7 @@ Android Back controller, keyboard safety, 48dp Study targets, and safe-area
 insets. Do not duplicate or redesign working features. No alpha without an
 explicit request, and English UI stays deferred.
 
-Priority order and scope (#746-#748 and #750 merged; PR #749 running Study toolbar in progress):
+Priority order and scope (#746–#750 relevant mobile PRs merged; short-height QA in progress):
 1. **Merged PR #746, P0 mobile quick search:** an always-visible, reachable search affordance
    in the compact top bar that opens the existing Cmd/Ctrl+K palette; reuses
    its Library, calculator, Settings-section and lecture-practice destinations
@@ -429,7 +429,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 | App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
 | Releases | `batna-v1.0.0-alpha.3` published 2026-11-06 (feed `batna-alpha`); previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
-| Open PRs / issues | PR #750 merged; PR #749 for running Study toolbar pending CI/merge (2026-11-08) |
+| Open PRs / issues | #749 and #750 merged after green Rust, Android, Chromium; short-height browser QA PR in progress |
 | Coverage | 95.05% (floor 94) |
 | Mac wide layout | PRs #739–745 merged as applicable: expanded window, Anki-style keys, focus continuity and quick palette; native Mac QA remains with Mohamed |
 
@@ -465,6 +465,9 @@ Mohamed can paste this into any new chat or account to continue:
 ## 12. Log
 
 Newest first. One line per PR that changes behaviour, process or state.
+
+- 2026-11-08: Short-height Android study layout regression PR: run running Study SSR at 384×520, assert End reachability and grade target geometry, and preserve original desktop/phone viewport tests. Native keyboard and background-resume checks remain for device QA.
+- 2026-11-08: PR #749 merged after green current-head CI; 320/384 phone running Study progress and Undo/End are separated, with safe-area grading.
 
 - 2026-11-08: PR #750 merged with green Rust, Android and Chromium checks. Bank scope and history disclosures now use 48dp targets; PR #749 follows for the running Study toolbar.
 

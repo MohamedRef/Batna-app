@@ -36,7 +36,18 @@ Keep these labels honest as PRs merge, refresh this section and a `changes/*.yam
 - Only restore on keyboard / screen-reader (zero-detail click), not on pointer clicks; cancel on pointer activity, modal, contenteditable, or active input. Keep updates in `crates/app/src/shortcuts/` with focused browser regression; no manual macOS QA is required to progress code.
 - PR #744 merged after green CI: the palette opens real calculators, Settings sections and lecture-filtered practice, not individual question deep links.
 
-## Mobile study UX continuation, 2026-11-08 (current PR: phone search entry)
+## Mobile study UX continuation, 2026-11-08 (current PR #746)
+
+The top-bar search is a reusable `shortcuts::MobileSearchButton` opening
+`⌘K`'s offline palette, not a second search engine. Dismissal restores focus
+to the mobile trigger if still mounted; selecting a destination does not
+return to the old screen. Browser fixtures now render the real compact
+top-bar actions; Chromium regression checks 320dp/384dp search hit target
+(48dp) and a 520px viewport simulating the on-screen keyboard. Retain
+safe-area CSS, 48dp controls, Android Back/IME behavior and no alpha release.
+Manual device validation is deferred, automated browser and CI are required.
+
+
 
 Mohamed directive: **finish and merge the Mac work first**, then improve the
 Android phone experience in small, sequential PRs. Primary device: Galaxy S24

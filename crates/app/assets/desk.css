@@ -401,8 +401,16 @@ kbd {
 .command-empty { padding: var(--sp-4); color: var(--muted); }
 .command-palette-hint { color: var(--muted); font-size: var(--fs-sm); }
 @media (max-width: 599.98px) {
-  .command-palette { padding: var(--sp-3); inset-block-start: max(1rem, env(safe-area-inset-top, 0px)); }
+  /* Let search results shrink and scroll when Android's keyboard takes
+     up room; keep the close button inside the safe visual viewport. */
+  .command-palette {
+    padding: var(--sp-3);
+    inset-block-start: max(0.5rem, env(safe-area-inset-top, 0px));
+    max-block-size: calc(100dvh - max(0.5rem, env(safe-area-inset-top, 0px)) - max(0.5rem, env(safe-area-inset-bottom, 0px)));
+  }
   .command-search-row kbd { display: none; }
+  .command-results { flex: 1 1 auto; max-block-size: none; }
+  .palette-result { min-block-size: var(--target, 48px); }
 }
 @media (prefers-contrast: more), (forced-colors: active) {
   .command-palette, .palette-result:focus-visible { border-width: 2px; }

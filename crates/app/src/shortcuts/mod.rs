@@ -11,7 +11,7 @@
 // crates/app/src/review.rs (keys on visible buttons).
 
 mod palette;
-pub use palette::Palette;
+pub use palette::{MobileSearchButton, Palette};
 
 use dioxus::prelude::*;
 

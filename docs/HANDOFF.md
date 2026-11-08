@@ -535,6 +535,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 | Open PRs / issues | None open on 2026-11-08; PRs #752 and #753 merged after green Rust/Android/Node CI |
 | Coverage | 95.05% (floor 94) |
 | Mac wide layout | PRs #739–745 merged as applicable: expanded window, Anki-style keys, focus continuity and quick palette; 2026-11-08 lesson player is one centred reading column (§ Lesson focus layout); native Mac QA remains with Mohamed |
+| Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
 
 ### Open work and known gaps
 
@@ -569,6 +570,7 @@ Mohamed can paste this into any new chat or account to continue:
 
 Newest first. One line per PR that changes behaviour, process or state.
 
+- 2026-11-08: rebrand B0 (Mohamed's pick from the proposal page https://claude.ai/artifact/Y9h75TKgVP3TBEJNX68pKT): launcher icon is the liver redrawn as one clean shape on petrol `#245f7c` with a green bile drop (`assets/src/icon/*.svg`, re-exported); the same mark now heads the phone top bar, rail and sidebar (`crates/app/src/brand.rs`, theme colours `--accent`/`--good`; a test keeps it equal to the icon paths).
 - 2026-11-08: release numbering switched to calendar versions (`2026.11.N`) and one build counter (commits on main) for previews and releases, on Mohamed's ask; `scripts/version.sh`, versionCode 20000000 + build, tags `v<version>`, no bump PR (`docs/RELEASE.md` §1).
 - 2026-11-08: PR #753 merged with green Rust/Android/Node CI: foreground return resets only Study's active answer timer; native S24 Ultra event delivery unverified, process-death resume remains out of scope.
 

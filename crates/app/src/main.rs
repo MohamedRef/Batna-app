@@ -15,6 +15,7 @@ mod abbrsheet;
 mod anki;
 mod back;
 mod bank;
+mod brand;
 #[cfg(test)]
 mod browser_fixture;
 mod calc;
@@ -255,10 +256,7 @@ fn App() -> Element {
             "data-focus": if *ui.focus.read() { "true" } else { "false" },
             "data-desk-focus": if ui.prefs.read().desk_focus { "true" } else { "false" },
             header { class: "topbar",
-                div { class: "brand",
-                    span { class: "brand-name", {i18n::app::NAME} }
-                    span { class: "brand-tag", {i18n::app::TAGLINE} }
-                }
+                brand::TopBrand {}
                 // The phone needs a touch entry to the same offline palette
                 // that Cmd/Ctrl+K already opens for hardware keyboards.
                 div { class: "topbar-actions",
@@ -275,10 +273,7 @@ fn App() -> Element {
             nav { class: "nav", aria_label: i18n::nav::LABEL,
                 // From 600px the top bar goes and the name heads the rail or
                 // sidebar, so the screen gets the full height (nav.css).
-                div { class: "nav-brand", aria_hidden: "true",
-                    span { class: "brand-name", {i18n::app::NAME} }
-                    span { class: "brand-tag", {i18n::app::TAGLINE} }
-                }
+                brand::NavBrand {}
                 for screen in Screen::NAV {
                     NavButton {
                         key: "{screen:?}",

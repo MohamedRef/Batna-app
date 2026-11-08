@@ -3,6 +3,8 @@
 //! [`StudyStore`] for the study player and the other study screens.
 
 mod study;
+#[cfg(test)]
+mod replay_perf;
 
 use std::cell::RefCell;
 use std::collections::{BTreeMap, HashMap};

@@ -30,7 +30,14 @@ pub(crate) fn use_restore() {
 fn load(backend: &StudyStoreHandle) -> Option<Session> {
     let db = crate::store::shared();
     let checkpoint = db.local_setting::<SessionCheckpoint>(KEY)?;
-    let marker = db.study_review_marker().ok()?;
+    // Old checkpoints stay recoverable after the revision-trigger migration:
+    // validate their *original* full-log marker once, then save v2 on the
+    // next transition. Never weaken validation to a count-only comparison.
+    let marker = if checkpoint.uses_legacy_review_marker() {
+        db.study_review_marker_legacy().ok()?
+    } else {
+        db.study_review_marker().ok()?
+    };
     let live = db.reviews().ok()?.into_iter().map(|entry| (entry.id, entry.event)).collect::<HashMap<_, _>>();
     let recovered =
         checkpoint.recover(&marker, &live, |id| super::is_playable(id) && !backend.0.borrow().is_hidden(id));
@@ -113,6 +120,23 @@ mod tests {
 
         clear();
         assert!(load(&backend).is_none(), "ended session should not reopen");
+    }
+
+    #[test]
+    fn legacy_v1_checkpoint_recovers_once_and_new_save_uses_v2() {
+        let db = crate::store::use_thread_store();
+        let card = super::super::flow::first("card");
+        let session = Session::new(vec![planned(&card.id)]);
+        let original_marker = db.study_review_marker_legacy().unwrap();
+        db.put_local_setting(KEY, &SessionCheckpoint::new(&session, original_marker)).unwrap();
+
+        let backend = memory_backend();
+        assert!(load(&backend).is_some(), "v1 checkpoint should validate against the original log");
+        save_running(&session);
+        let modern = db.local_setting::<SessionCheckpoint>(KEY).unwrap();
+        assert!(!modern.uses_legacy_review_marker(), "next checkpoint writes v2 revision");
+        assert!(load(&backend).is_some(), "v2 checkpoint also recovers");
+        clear();
     }
 
     #[test]

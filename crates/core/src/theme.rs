@@ -56,7 +56,8 @@ pub struct Palette {
     /// its own tint, so it never reads as one more card on the page.
     pub sheet: &'static str,
     /// The key-term pill (`==key==` in lessons): a hue opposite the theme's
-    /// own (amber on the blue themes, teal on the warm Study ones), so it
+    /// own (a true yellow on Paper, Night, True black and Night shift; teal on
+    /// the warm Study themes), so it
     /// stands out from the card instead of blending into it.
     pub mark: &'static str,
     /// Text on `mark`.
@@ -144,8 +145,8 @@ pub const PAPER: Palette = Palette {
     gold: "#8a641d",
     gold_soft: "#fbf1d9",
     sheet: "#fcf4e0",
-    mark: "#fbe1a4",
-    mark_ink: "#5a3f0c",
+    mark: "#ffd43b",
+    mark_ink: "#2b2000",
 };
 
 /// Night: the default dark theme ("batna-dark"): deep petrol with a light
@@ -170,8 +171,8 @@ pub const NIGHT: Palette = Palette {
     gold: "#e3c581",
     gold_soft: "#3d3624",
     sheet: "#2c4f64",
-    mark: "#6a5320",
-    mark_ink: "#ffe7ad",
+    mark: "#ffd43b",
+    mark_ink: "#2b2000",
 };
 
 /// True black, for OLED screens: the page and cards are `#000000`, so those
@@ -198,8 +199,8 @@ pub const BLACK: Palette = Palette {
     gold: "#e3c581",
     gold_soft: "#2a2416",
     sheet: "#1c2a33",
-    mark: "#4d3c12",
-    mark_ink: "#ffe3a0",
+    mark: "#ffd43b",
+    mark_ink: "#2b2000",
 };
 
 /// Night shift: for studying late. Very dark and warm, with no colour where
@@ -225,8 +226,8 @@ pub const NIGHT_SHIFT: Palette = Palette {
     gold: "#d9b56a",
     gold_soft: "#2e2414",
     sheet: "#3a2c1f",
-    mark: "#635a20",
-    mark_ink: "#f1e4a8",
+    mark: "#ffd43b",
+    mark_ink: "#2b2000",
 };
 
 /// Study: a calm light theme for long reading sessions. Dark text on a

@@ -285,3 +285,19 @@ fn each_area_has_a_label_and_opens_its_own_book() {
     let labels: std::collections::BTreeSet<&str> = AREAS.iter().map(|a| area_label(*a)).collect();
     assert_eq!(labels.len(), AREAS.len(), "every area has its own label");
 }
+
+#[test]
+fn calculator_breakdown_and_reset_keep_full_touch_targets() {
+    let css = include_str!("calc.css");
+    assert!(
+        css.contains(
+            ".calc-parts summary { cursor: pointer; font-weight: 600; min-block-size: var(--target);"
+        )
+    );
+    assert!(css.contains(".calc-foot > .btn-link { min-block-size: var(--target); }"));
+    let html = card(
+        "cam",
+        inputs(&[("acute_fluctuating", CalcValue::Bool(true)), ("inattention", CalcValue::Bool(true))]),
+    );
+    assert!(html.contains("<summary>") && html.contains(tx::BREAKDOWN));
+}

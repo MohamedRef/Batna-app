@@ -8,6 +8,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 const { keyboardFocusChecks } = require('./keyboard-focus-browser.cjs');
+const { mobileControlChecks } = require('./mobile-touch-browser.cjs');
 
 const WIDTHS = [320, 384, 600, 840, 1280, 1600];
 const SCHEMES = ['light', 'dark'];
@@ -418,6 +419,8 @@ async function run() {
     }
     current = 'figures';
     await figureChecks(page, fixtures);
+    current = 'compact touch controls';
+    await mobileControlChecks(page, fixtures);
     await keyboardFocusChecks(browser);
     assert.deepEqual(errors, [], 'browser page errors');
     const stale = [...KNOWN.small, ...KNOWN.overflow, ...KNOWN.noHeading].filter(k => !seen.has(k));

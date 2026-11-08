@@ -245,6 +245,7 @@
 .calc-normal bdi { font-family: var(--font-latin); font-variant-numeric: tabular-nums; }
 .calc-normal:is([data-place="high"], [data-place="low"]) { color: var(--place); font-weight: 600; }
 .calc-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--sp-2); padding-block-start: var(--sp-2); border-block-start: 1px solid var(--line-soft, var(--line)); }
+.calc-foot > .btn-link { min-block-size: var(--target); }
 
 /* The item's own answer box (calc/item.rs) matches the fields; the
    number box above overrides this for its bare input. */
@@ -302,7 +303,7 @@
 }
 .calc-band { font-family: var(--font-latin); }
 .calc-meaning { display: block; font-family: var(--font-latin); line-height: 1.6; }
-.calc-parts summary { cursor: pointer; font-weight: 600; min-block-size: var(--tap); display: flex; align-items: center; }
+.calc-parts summary { cursor: pointer; font-weight: 600; min-block-size: var(--target); display: flex; align-items: center; }
 /* display: flex drops the disclosure marker: draw one, pointing down when
    open, so "التفاصيل" reads as something that opens (UX #688). */
 .calc-parts summary { gap: var(--sp-2); list-style: none; }

@@ -990,7 +990,8 @@ mod snapshot_tests {
         let reopened = Store::from_snapshot(&store.snapshot().unwrap().1).unwrap();
         assert_eq!(after_answer, reopened.study_review_marker().unwrap());
         store.retract_review(&logged.id).unwrap();
-        assert_eq!(store.study_review_marker().unwrap(), empty, "only active reviews count");
+        assert_ne!(store.study_review_marker().unwrap(), after_answer, "Undo invalidates the checkpoint");
+        assert!(store.reviews().unwrap().is_empty(), "Undo removes the active review");
     }
 
     #[test]

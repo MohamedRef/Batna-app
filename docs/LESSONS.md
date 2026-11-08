@@ -68,6 +68,22 @@ The model to copy is `content/lessons/hb/L01.yaml`.
     show that sense; everywhere else the entry without a course does. Its
     approval id is `glossary.ICP@neph`.
 
+13. **Bring the تحشيشة back.** A step that teaches a list which already has
+    a تحشيشة (an enumerate item's `hook`, in this lecture or any other, or a
+    `mnemonic` step of another lesson) lists it in `remind:`, so it shows
+    under the step and, from another lesson, links back to it:
+
+    ```yaml
+    - kind: explain
+      remind: [hb.L01.033, hb.L01.034, hb.L01.lesson2:SHIBS]
+    ```
+
+    Only on explain, figure, aside, mnemonic or open-table steps (a hook
+    under a question gives the answer away). When the same list repeats,
+    remind of the first تحشيشة instead of inventing another; partial
+    overlap still earns a reminder. `validate` fails on an entry that is not
+    an enumerate with a hook or a lesson's mnemonic word.
+
 ## File shape
 
 ```yaml

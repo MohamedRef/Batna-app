@@ -390,7 +390,7 @@ mod tests {
     use crate::lesson::{MnemonicPart, SortCard, Step};
 
     fn step(body: StepBody) -> Step {
-        Step { body, page: None, quote: None }
+        Step { body, page: None, quote: None, remind: vec![] }
     }
 
     fn check() -> StepBody {

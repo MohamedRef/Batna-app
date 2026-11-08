@@ -199,6 +199,44 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
             for m in step_problems(&step.body, &items) {
                 bad(&sat, m);
             }
+            for m in remind_problems(step) {
+                bad(&sat, m);
+            }
+        }
+    }
+    out
+}
+
+/// A step's `remind` list, on its own: each entry reads as a [`Reminder`],
+/// none twice, and only on a step that shows its answer already (a hook
+/// under a question or a hidden cell would give the answer away). That
+/// each one exists is checked with all the content (`batna-tools validate`).
+pub fn remind_problems(step: &Step) -> Vec<String> {
+    let mut out = Vec::new();
+    if step.remind.is_empty() {
+        return out;
+    }
+    let shows_all = match &step.body {
+        StepBody::Explain { .. }
+        | StepBody::Figure { .. }
+        | StepBody::Aside { .. }
+        | StepBody::Mnemonic { .. } => true,
+        StepBody::Table { hide, .. } => hide.is_empty(),
+        _ => false,
+    };
+    if !shows_all {
+        out.push(format!(
+            "remind goes on an explain, figure, aside, mnemonic or open table step, not a {} step",
+            step.body.kind()
+        ));
+    }
+    let mut seen = BTreeSet::new();
+    for r in &step.remind {
+        if Reminder::parse(r).is_none() {
+            out.push(format!("remind `{r}` is neither an item id nor `<lesson id>:<WORD>`"));
+        }
+        if !seen.insert(r.as_str()) {
+            out.push(format!("remind `{r}` is listed twice"));
         }
     }
     out

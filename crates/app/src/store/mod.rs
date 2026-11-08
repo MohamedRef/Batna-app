@@ -128,6 +128,25 @@ const MIGRATIONS: &[&str] = &[
         deleted     INTEGER NOT NULL DEFAULT 0
     ) STRICT;
 ",
+    "
+    -- A random revision avoids O(history) JSON hashing on every answer.
+    -- It is local and never synced. A fresh random token per mutation also
+    -- prevents equal counters on divergent database copies from matching.
+    INSERT OR IGNORE INTO meta (key, value)
+    VALUES ('study.review_revision.v2', lower(hex(randomblob(16))));
+    CREATE TRIGGER review_revision_insert AFTER INSERT ON review_events BEGIN
+      UPDATE meta SET value = lower(hex(randomblob(16)))
+      WHERE key = 'study.review_revision.v2';
+    END;
+    CREATE TRIGGER review_revision_update AFTER UPDATE ON review_events BEGIN
+      UPDATE meta SET value = lower(hex(randomblob(16)))
+      WHERE key = 'study.review_revision.v2';
+    END;
+    CREATE TRIGGER review_revision_delete AFTER DELETE ON review_events BEGIN
+      UPDATE meta SET value = lower(hex(randomblob(16)))
+      WHERE key = 'study.review_revision.v2';
+    END;
+",
 ];
 
 const REVIEW_SETTINGS_KEY: &str = "review";
@@ -258,12 +277,23 @@ impl Store {
         Ok(logged)
     }
 
-    /// A deterministic fingerprint of the active review log. A Study snapshot
-    /// written before an additional committed answer (or Undo / sync replay)
-    /// must never be restored as though it included that answer.
+    /// O(1) local revision of the review table, updated by SQLite triggers in
+    /// the *same transaction* as all local and remote review mutations.
+    /// A crash between committing an answer and the Study snapshot therefore
+    /// invalidates the older checkpoint, without rescanning the review log.
     pub fn study_review_marker(&self) -> Result<String> {
-        // Reuse the authoritative non-tombstoned view, in canonical HLC order.
-        // The marker is device-local; it does not become a sync operation.
+        let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+        let revision: String = conn.query_row(
+            "SELECT value FROM meta WHERE key = 'study.review_revision.v2'",
+            [],
+            |row| row.get(0),
+        )?;
+        Ok(format!("v2:{revision}"))
+    }
+
+    /// One-time compatibility for unfinished v1 Study checkpoints created by
+    /// earlier builds. Never called for new checkpoints or subsequent saves.
+    pub fn study_review_marker_legacy(&self) -> Result<String> {
         let log = self.reviews()?;
         let bytes = serde_json::to_vec(&log)?;
         let mut hash = 0xcbf29ce484222325_u64;

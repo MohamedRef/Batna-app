@@ -12,11 +12,17 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
-## Cloud Worker CI: Binaryen download failure (2026-11-08, PR pending)
+## FSRS replay latency diagnostic (2026-11-08, PR pending)
+
+- Cloud E2E regression PR #760 **merged as `ba319f49`**, with the complete local Worker fake-Google/device sync PR test and Rust/Android checks passing. Production Worker build remains optimized; test-only Wrangler config avoids external Binaryen downloads. Verify the next `main` Cloud E2E run separately.
+- New `test/study-review-replay-baseline-20261108` adds an ignored benchmark calling the real `ReviewBackend::replay()` seven times over independent synthetic SQLite histories of 100/1,000/3,000 committed events across 64 items, mixed grades. It also times a full `StudyStore::record_logged` grade, including SQLite + in-memory replay but excluding checkpoint marker and WebView painting.
+- Report p50/p95/max in the existing CI job summary. No fixed timing gate and no application state, scheduling, saving or Undo behavior changes. Treat hosted Linux data as directional only; do not infer real phone latency until S24 Ultra profiling. After green CI and merge, compare marker vs FSRS replay cost before a separate optimization PR.
+
+## Cloud Worker CI: Binaryen download failure (2026-11-08, merged PR #760)
 
 - Main CI on #756-#759 reports **Cloud Worker E2E failed**, although Rust, Android and web compile jobs passed. Logs identify five HTTP 504 responses while wasm-pack downloaded Binaryen version 132 for `wasm-opt`; consequently the local Worker never started. This is a build-time dependency failure, **not** evidence of a failed sync assertion.
 - `crates/server/tests/e2e.mjs` writes a disposable `wrangler.e2e.toml` next to `wrangler.toml` and changes only its build command to `worker-build --release --no-opt`. The test still performs a Rust release build, launches the real local Worker, runs fake Google + WebSocket/device flows and the Rust app sync E2E. The normal production `wrangler.toml`, deploy and optimization are unchanged. The ephemeral test file is cleaned on exit and ignored by git.
-- A path-scoped PR workflow runs these integration tests on E2E launcher changes so a successful compile alone cannot falsely count as verified. Require the end-to-end job and standard PR CI green, then merge; do not trigger a release.
+- A path-scoped PR workflow runs these integration tests on E2E launcher changes so a successful compile alone cannot falsely count as verified. The end-to-end job and standard PR CI passed; PR #760 squash-merged as `ba319f49`. No release.
 - PR #759 previously merged as `3e7b2458`: hosted Linux marker p50 = 1.118 ms at 100 reviews, 10.898 ms at 1,000 and 32.540 ms at 3,000. Writes of its local meta were 0.019/0.032/0.055 ms. Measure `ReviewBackend::replay` with similar large histories **after fixing the CI**, not concurrently modifying grading or FSRS.
 
 ## Study checkpoint performance baseline (2026-11-08, merged PR #759)

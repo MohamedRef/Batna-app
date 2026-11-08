@@ -13,10 +13,10 @@ pub mod import;
 mod install;
 #[cfg(test)]
 mod marker_perf;
-#[cfg(test)]
-mod revision_tests;
 pub mod own;
 mod paths;
+#[cfg(test)]
+mod revision_tests;
 pub mod sync;
 
 use std::collections::BTreeMap;
@@ -285,11 +285,10 @@ impl Store {
     /// invalidates the older checkpoint, without rescanning the review log.
     pub fn study_review_marker(&self) -> Result<String> {
         let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
-        let revision: String = conn.query_row(
-            "SELECT value FROM meta WHERE key = 'study.review_revision.v2'",
-            [],
-            |row| row.get(0),
-        )?;
+        let revision: String =
+            conn.query_row("SELECT value FROM meta WHERE key = 'study.review_revision.v2'", [], |row| {
+                row.get(0)
+            })?;
         Ok(format!("v2:{revision}"))
     }
 

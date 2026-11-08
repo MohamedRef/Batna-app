@@ -36,15 +36,6 @@ Keep these labels honest as PRs merge, refresh this section and a `changes/*.yam
 - Only restore on keyboard / screen-reader (zero-detail click), not on pointer clicks; cancel on pointer activity, modal, contenteditable, or active input. Keep updates in `crates/app/src/shortcuts/` with focused browser regression; no manual macOS QA is required to progress code.
 - PR #744 merged after green CI: the palette opens real calculators, Settings sections and lecture-filtered practice, not individual question deep links.
 
-## Today: resume active Study session (2026-11-08, current PR)
-
-- PR #754 merged as `a5b40421` after Rust + browser + Android CI green, adding a same-process Study remount and foreground scroll regression. Do not duplicate.
-- This PR adds a reactive `study::running_progress()` query of in-memory Session/Phase, **only** when the player is Running, has a current card and is not finished. It returns a 1-based position and total, never a new plan.
-- Today shows a prominent **Continue session** card with progress and an action routing straight to `Screen::Study`. The existing Today new-session hero remains below it, and its existing PendingCard guard prevents silent replacement.
-- Component navigation test verifies no `study::START` is queued by Continue, and Study flow tests verify progress follows grading and disappears after End. No new database schema or background lifecycle writes.
-- This is **same-process resume only**. A closed or killed app cannot yet restore an in-progress queue from this. Native testing stays with the user, no Alpha requested, no English UI work.
-- After successful CI and merge, the next step is a design review for *versioned, atomic cold-process session snapshotting* that reconciles the review event log and Undo without double grades. Do not claim crash-safe resume until that is implemented and tested.
-
 ## Same-process Study resume regression (2026-11-08, PR in progress)
 
 - New Rust TestDom regression mounts a two-card running Study session, reveals/rates its first card, unmounts **only the screen**, and remounts it in the same app context. It asserts the second card and 2/2 progress remain active, recorded grades are not duplicated and Undo is available. **This does not claim process-death recovery**.

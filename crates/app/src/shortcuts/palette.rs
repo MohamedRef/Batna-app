@@ -21,7 +21,6 @@ fn dismiss() {
     );
 }
 
-
 #[derive(Clone, Debug, PartialEq, Eq)]
 enum Destination {
     Screen(Screen),

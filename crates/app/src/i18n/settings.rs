@@ -30,6 +30,12 @@ pub const THEME_BLACK: &str = "أسود AMOLED";
 pub const THEME_BLACK_SUB: &str = "أسود خالص، فبكسلات شاشة الأموليد بتطفي: أريح للعين بالليل وبتوفّر بطارية";
 pub const THEME_SHIFT: &str = "نبطشية";
 pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
+pub const THEME_STUDY: &str = "مذاكرة";
+pub const THEME_STUDY_SUB: &str = "فاتح دافي هادي من غير أبيض ساطع، للقراية الطويلة في النور";
+pub const THEME_STUDY_DIM: &str = "مذاكرة خافت";
+pub const THEME_STUDY_DIM_SUB: &str = "رمادي دافي وخط مش أبيض ساطع، للمذاكرة في أوضة ضلمة";
+pub const THEME_SYSTEM_STUDY: &str = "مذاكرة زي الجهاز";
+pub const THEME_SYSTEM_STUDY_SUB: &str = "مذاكرة بالنهار، ومذاكرة خافت لما الجهاز يبقى غامق";
 
 pub const APPEARANCE: &str = "نمط الواجهة";
 pub const APPEARANCE_CALM: &str = "هادئ";

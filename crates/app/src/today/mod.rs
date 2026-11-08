@@ -187,7 +187,8 @@ pub fn Today() -> Element {
 fn ResumeStudy(index: usize, total: usize) -> Element {
     let mut ui = use_context::<Ui>();
     rsx! {
-        crate::ui::Card { class: "td-resume",
+        crate::ui::Card { class: "card-action td-resume",
+            onclick: move |_| ui.screen.set(Screen::Study),
             div { class: "td-resume-copy",
                 strong { {tx::RESUME_TITLE} }
                 span { class: "muted small num-ltr", "{index} / {total}" }
@@ -195,7 +196,10 @@ fn ResumeStudy(index: usize, total: usize) -> Element {
             button {
                 r#type: "button",
                 class: "btn btn-primary td-resume-action",
-                onclick: move |_| ui.screen.set(Screen::Study),
+                onclick: move |e: MouseEvent| {
+                    e.stop_propagation();
+                    ui.screen.set(Screen::Study);
+                },
                 {tx::RESUME_SESSION}
                 {crate::icons::arrow_go()}
             }

@@ -16,6 +16,7 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 - Mohamed (2026-11-08, ACLF card in Liver Cirrhosis): a topic that comes back must bring its تحشيشة back, or at least remind him of it. Lesson steps now take `remind: [<item id> | <lesson id>:<WORD>]`; the player (`crates/app/src/learn/remind.rs`) shows each one under the step in a dotted box, with «📖 من درس …» opening the lesson that taught it when that is another lesson.
 - Content: 791 reminders on 689 steps in 126 lesson files. Found by script (a step whose text covers at least 80% of an enumerate's points, or 70% of another lesson's mnemonic letters), every off-topic match read and dropped; plus 13 cross-lecture twin lists (e.g. KDIGO in hb.L09/neph.L05, anti-TNF in rheum L01/L16) and SHIBS on the ACLF step by hand. Question, reveal and hidden-cell steps never get one.
+- `pack::SCHEMA` is 3 (steps gained `remind`): an older app keeps its own content until it updates, so this ships with an APK/Mac/web build, not as a content-only update.
 - Checks: `batna_core::lesson::remind_problems` (shape, step kind, duplicates) and `batna-tools validate` (`lessons::remind_targets`: each entry is an enumerate with a hook, or a lesson's mnemonic word). Rule: docs/CONTENT.md and docs/LESSONS.md rule 13. New lessons should add `remind` where a list repeats.
 
 ## Own highlights in lessons (2026-11-08)

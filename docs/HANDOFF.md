@@ -28,6 +28,44 @@ Priority-ordered product backlog (not all implemented):
 
 Keep these labels honest as PRs merge, refresh this section and a `changes/*.yaml` fragment in each PR. Prefer a single PR for related pane/focus work, then move to the next feature only after CI passes and merge succeeds.
 
+## Mobile study UX continuation, 2026-11-08 (queued after Mac PR #744)
+
+Mohamed directive: **finish and merge the Mac work first**, then improve the
+Android phone experience in small, sequential PRs. Primary device: Galaxy S24
+Ultra (~384dp). Preserve the existing phone bottom bar, five-row More sheet,
+Android Back controller, keyboard safety, 48dp Study targets, and safe-area
+insets. Do not duplicate or redesign working features. No alpha without an
+explicit request, and English UI stays deferred.
+
+Priority order and scope (planned, not yet merged):
+1. **P0 mobile quick search:** an always-visible, reachable search affordance
+   in the compact top bar that opens the existing Cmd/Ctrl+K palette; reuses
+   its Library, calculator, Settings-section and lecture-practice destinations
+   without another index or router. Support hardware keyboards as before;
+   ensure modal close/back, text focus, on-screen keyboard, and unobstructed
+   result selection at ~384dp and large font sizes.
+2. **P0 one-handed tap audit:** measure all interactive controls on phone-sized
+   pages, prioritize Study / lesson progression, bottom navigation, question
+   bank and calculator picker; fix any undersized or crowded controls, respect
+   system gesture/nav insets. Study already uses 48dp controls and sticky
+   grading, so improve verified gaps only.
+3. **P1 focused mobile study view:** keep an explicit exit/Back, progress,
+   reveal and grade access while reducing chrome; preserve active session when
+   enabling/disabling the view (do not collide with Mac Focus Mode).
+4. **P1 speed and resume:** profile question transitions and large lecture
+   rendering before optimizing; verify state resumes at the same item and
+   scroll position after backgrounding/lock without breaking Android Back.
+5. **P2 medical reading:** ensure readable English/Arabic mixing, scrollable
+   medical tables, appropriately zoomable real figures, and optional low-key
+   haptics. No new generated figures and no unnecessary permissions.
+
+Implementation rules: PR-first and sequential; update this handoff and add a
+`changes/*.yaml` fragment each PR. Run the fast PR CI and relevant Android
+regression / browser viewport tests; native S24 Ultra usability validation is
+deferred to Mohamed. **Do not mark any mobile item delivered until merged.**
+
+---
+
 ## Mac desktop UX follow-up (2026-11-07, PR #739)
 
 - Desktop references reviewed: RemNote for spaced-repetition home, AMBOSS for clear clinical question/explanation separation, Obsidian for navigable workspaces, and Apple macOS sidebar/split-view guidance.

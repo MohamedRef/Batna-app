@@ -72,6 +72,15 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
                     span { class: "brand-name", {crate::i18n::app::NAME} }
                     span { class: "brand-tag", {crate::i18n::app::TAGLINE} }
                 }
+                div { class: "topbar-actions",
+                    crate::shortcuts::MobileSearchButton {}
+                    button {
+                        class: "icon-button",
+                        aria_label: Screen::Settings.label(),
+                        onclick: move |_| {},
+                        {crate::icons::nav(Screen::Settings)}
+                    }
+                }
             }
             nav { class: "nav", aria_label: crate::i18n::nav::LABEL,
                 div { class: "nav-brand", aria_hidden: "true",

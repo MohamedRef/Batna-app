@@ -15,3 +15,6 @@ pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
 pub const ESC: &str = "تقفل أي حاجة مفتوحة";
 pub const HELP: &str = "القايمة دي";
 pub const PALETTE: &str = "الانتقال السريع للأقسام والدروس والمحاضرات";
+
+/// Compact mobile top bar: the same offline palette as Cmd/Ctrl+K.
+pub const SEARCH_OPEN: &str = "بحث سريع";

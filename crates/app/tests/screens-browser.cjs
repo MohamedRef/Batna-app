@@ -241,6 +241,24 @@ async function run() {
                     action.left >= -1 && action.right <= width + 1 && action.name,
                     `${name}: mobile search must remain visible, named and at least 48dp: ${JSON.stringify(action)}`);
                 }
+                // The regular control audit scopes main.content, not the
+                // navigation shell. Cover the bottom bar at phone widths.
+                if (screen === 'study' && item.phase === 'setup' && (width === 320 || width === 384)) {
+                  const chrome = await page.evaluate(() => {
+                    const nav = document.querySelector('.app > .nav');
+                    return [...nav.querySelectorAll('button.nav-item')].filter(el =>
+                      el.getClientRects().length > 0 && getComputedStyle(el).display !== 'none')
+                      .map(el => {
+                        const r = el.getBoundingClientRect();
+                        return { name: el.getAttribute('aria-label') || el.textContent.trim(),
+                          width: r.width, height: r.height, left: r.left, right: r.right };
+                      });
+                  });
+                  assert.ok(chrome.length >= 4, `${name}: bottom navigation missing: ${JSON.stringify(chrome)}`);
+                  assert.deepEqual(chrome.filter(b => !b.name || b.width < 47.5 || b.height < 47.5 ||
+                    b.left < -1 || b.right > width + 1), [],
+                    `${name}: bottom tab unnamed, undersized, or off-screen`);
+                }
                 // Simulate a soft-keyboard-reduced viewport for the real
                 // palette CSS. Its results remain scrollable below the field.
                 if (screen === 'study' && item.phase === 'setup' && width === 384 &&

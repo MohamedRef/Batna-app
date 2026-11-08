@@ -287,6 +287,14 @@ mod view_tests {
     };
 
     #[test]
+    fn compact_view_actions_keep_full_touch_targets() {
+        let css = include_str!("../assets/parts.css");
+        assert!(css.contains(".view-seg > button { inline-size: var(--target); block-size: var(--target); }"));
+        assert!(css.contains("gap: 6px; min-block-size: var(--target); padding-inline: var(--sp-3);"));
+        assert!(css.contains(".section-head .btn-ghost { min-block-size: max(var(--target), var(--tap));"));
+    }
+
+    #[test]
     fn a_pick_round_trips_and_old_or_odd_values_fall_back() {
         let p = ViewPick { layout: Layout::Compact, sort: Sort::Left, grouped: true };
         let json = serde_json::to_string(&p).unwrap();

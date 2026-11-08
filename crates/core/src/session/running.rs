@@ -166,14 +166,13 @@ impl Session {
             {
                 return false;
             }
-            if let Some(index) = step.retry_at {
-                if index >= self.queue.len()
+            if let Some(index) = step.retry_at
+                && (index >= self.queue.len()
                     || self.queue[index].item_id != outcome.item_id
                     || outcome.grade != Grade::Again
-                    || !again_retry_ids.insert(outcome.item_id.clone())
-                {
-                    return false;
-                }
+                    || !again_retry_ids.insert(outcome.item_id.clone()))
+            {
+                return false;
             }
             last_pos = Some(step.pos);
         }

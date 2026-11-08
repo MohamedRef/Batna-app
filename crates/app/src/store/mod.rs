@@ -256,6 +256,22 @@ impl Store {
         Ok(logged)
     }
 
+    /// A deterministic fingerprint of the active review log. A Study snapshot
+    /// written before an additional committed answer (or Undo / sync replay)
+    /// must never be restored as though it included that answer.
+    pub fn study_review_marker(&self) -> Result<String> {
+        // Reuse the authoritative non-tombstoned view, in canonical HLC order.
+        // The marker is device-local; it does not become a sync operation.
+        let log = self.reviews()?;
+        let bytes = serde_json::to_vec(&log)?;
+        let mut hash = 0xcbf29ce484222325_u64;
+        for byte in &bytes {
+            hash ^= u64::from(*byte);
+            hash = hash.wrapping_mul(0x100000001b3);
+        }
+        Ok(format!("v1:{}:{hash:016x}", log.len()))
+    }
+
     /// Takes one answer back (Undo): its row gets the tombstone, queued for
     /// sync, so every device replays the schedule without it. False when it
     /// was already gone (or never existed): nothing is written twice.

@@ -13,6 +13,7 @@ async function mobileControlChecks(page, fixtures) {
   await page.goto(pathToFileURL(path.join(study, setup.file)).href);
   await page.addStyleTag({ path: path.join(__dirname, '../src/calc/calc.css') });
   await page.addStyleTag({ path: path.join(__dirname, '../src/bank/bank.css') });
+  await page.addStyleTag({ path: path.join(__dirname, '../src/table/table.css') });
   for (const size of ['normal', 'larger']) {
     await page.evaluate(size => new Promise(resolve => {
       const link = document.querySelector('#prefs');
@@ -44,12 +45,36 @@ async function mobileControlChecks(page, fixtures) {
         host.remove();
         return result;
       });
+      // The actual table-grid controls used to be only 36-40px high.
+      // Measure every state, not just the first Reveal button.
+      const tableTargets = await page.evaluate(() => {
+        const host = document.createElement('section');
+        host.className = 'tb-item';
+        host.innerHTML = '<div class="tb-scroll" dir="ltr"><table class="tb-grid"><tbody><tr>' +
+          '<td class="tb-blank"><button class="tb-reveal">?</button></td>' +
+          '<td class="tb-blank"><input class="tb-input" aria-label="Type"></td>' +
+          '<td class="tb-blank"><span class="tb-marks">' +
+          '<button class="tb-mark yes">✓</button><button class="tb-mark no">✗</button></span></td>' +
+          '<td class="tb-blank"><button class="tb-flip">✓</button></td>' +
+          '</tr></tbody></table></div>';
+        document.querySelector('main.content').append(host);
+        const result = [...host.querySelectorAll('button, input')].map(el => ({
+          name: el.className,
+          height: el.getBoundingClientRect().height,
+          width: el.getBoundingClientRect().width,
+        }));
+        host.remove();
+        return result;
+      });
+      assert.equal(tableTargets.length, 5);
+      assert.deepEqual(tableTargets.filter(x => x.height < 47.5 || x.width < 47.5), [],
+        `medical table targets at ${width}px (${size}): ${JSON.stringify(tableTargets)}`);
       assert.equal(controls.length, 9);
       assert.deepEqual(controls.filter(x =>
         x.width < 23.5 || x.height < 47.5 || x.left < -1 || x.right > width + 1), [],
       `compact controls at ${width}px (${size}): ${JSON.stringify(controls)}`);
     }
   }
-  console.log('Compact list/calculator/bank controls: >=48dp at 320/384px.');
+  console.log('Compact list/calculator/bank/table controls: >=48dp at 320/384px.');
 }
 module.exports = { mobileControlChecks };

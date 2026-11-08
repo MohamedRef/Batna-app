@@ -12,6 +12,12 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
+## Mobile medical table touch targets (2026-11-08, PR #758 pending)
+
+- PR #756 merged as `6d3d885a`, and follow-up SQLite crash/restart tests PR #757 merged as `d05b23a5`; native process-kill QA remains deferred.
+- PR #758 widens medical table typing, mark (yes/no) and correction targets to the existing 48dp `--target` while leaving Reveal, scroll, pinned labels and grading unchanged.
+- The production-CSS Chromium regression covers all five table controls at 320/384px with normal/enlarged text. Screens-browser CI triggers for the table CSS or related browser test. Merge after current-head CI and browser success; no alpha release.
+
 ## Durable Study checkpoint (2026-11-08, PR #756 merged)
 
 - PR #756 merged as `6d3d885a` after green Rust/Android CI. PR #755 had merged as `81cc01b1`. Today already offers Continue for a live, same-process Study queue.

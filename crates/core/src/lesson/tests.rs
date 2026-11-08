@@ -11,6 +11,7 @@ fn shown_text_covers_what_the_step_shows_and_svg_words_only() {
         },
         page: Some(3),
         quote: Some("not shown".into()),
+        remind: vec![],
     };
     let t = step.shown_text();
     assert_eq!(t[0], "Portal pressure");
@@ -191,4 +192,20 @@ page: 3
     assert_eq!(step.page, Some(3));
     let back: Step = serde_yaml_ng::from_str(&serde_yaml_ng::to_string(&step).unwrap()).unwrap();
     assert_eq!(step, back);
+}
+
+#[test]
+fn reminders_parse_item_ids_and_lesson_mnemonics() {
+    assert_eq!(Reminder::parse("hb.L01.033"), Some(Reminder::Item("hb.L01.033")));
+    assert_eq!(
+        Reminder::parse("hb.L01.lesson2:SHIBS"),
+        Some(Reminder::Mnemonic { lesson: "hb.L01.lesson2", word: "SHIBS" })
+    );
+    assert_eq!(
+        Reminder::parse("hb.L18.lesson2:ABCD OF C"),
+        Some(Reminder::Mnemonic { lesson: "hb.L18.lesson2", word: "ABCD OF C" })
+    );
+    for bad in ["", "hb.L01", "hb.L01.lesson2", "hb.L01.lesson2:", "hb.L01.033:X", "hb L01.033"] {
+        assert_eq!(Reminder::parse(bad), None, "{bad:?}");
+    }
 }

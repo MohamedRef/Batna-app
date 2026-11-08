@@ -11,6 +11,7 @@ mod browser;
 mod highlight;
 mod player;
 mod practice;
+mod remind;
 mod steps;
 #[cfg(test)]
 pub(crate) mod tests;

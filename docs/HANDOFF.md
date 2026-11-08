@@ -12,6 +12,12 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
+## Repeated topics remind their تحشيشة (2026-11-08)
+
+- Mohamed (2026-11-08, ACLF card in Liver Cirrhosis): a topic that comes back must bring its تحشيشة back, or at least remind him of it. Lesson steps now take `remind: [<item id> | <lesson id>:<WORD>]`; the player (`crates/app/src/learn/remind.rs`) shows each one under the step in a dotted box, with «📖 من درس …» opening the lesson that taught it when that is another lesson.
+- Content: 791 reminders on 689 steps in 126 lesson files. Found by script (a step whose text covers at least 80% of an enumerate's points, or 70% of another lesson's mnemonic letters), every off-topic match read and dropped; plus 13 cross-lecture twin lists (e.g. KDIGO in hb.L09/neph.L05, anti-TNF in rheum L01/L16) and SHIBS on the ACLF step by hand. Question, reveal and hidden-cell steps never get one.
+- Checks: `batna_core::lesson::remind_problems` (shape, step kind, duplicates) and `batna-tools validate` (`lessons::remind_targets`: each entry is an enumerate with a hook, or a lesson's mnemonic word). Rule: docs/CONTENT.md and docs/LESSONS.md rule 13. New lessons should add `remind` where a list repeats.
+
 ## Own highlights in lessons (2026-11-08)
 
 - Mohamed asked to highlight or underline lesson text himself, in colours he picks, shaped as a pill or a rectangle. Select words in the open step → a bar (`crates/app/src/learn/highlight.js`) offers 5 colours (yellow `#ffd43b`, green, blue, pink, orange), fill/underline and pill/rect; tapping a highlight edits or removes it. The chosen style/shape is remembered per device (localStorage).
@@ -460,6 +466,8 @@ quote cap there is outdated), course briefs in [courses/](courses/).
    Arabic words ("من 2 لـ 3") so RTL doesn't flip them. All 1,927 lists in 9
    courses are done; new enumerates need one. Combined file for Mohamed:
    `python3 -I scripts/content-tools/tahshishat-gen.py <repo> <out-prefix>`.
+   A lesson step that teaches a list with a تحشيشة lists it in `remind:` so it
+   shows again there (from another lesson too, with a link back).
 7. **Calculators** must rest on cited original papers/guidelines. Every
    result band states what it means, the **next step** and the **DD**
    (`GUIDES` per module; app test `every_result_has_a_next_step` blocks a band
@@ -535,6 +543,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 | Open PRs / issues | None open on 2026-11-08; PRs #752 and #753 merged after green Rust/Android/Node CI |
 | Coverage | 95.05% (floor 94) |
 | Mac wide layout | PRs #739–745 merged as applicable: expanded window, Anki-style keys, focus continuity and quick palette; 2026-11-08 lesson player is one centred reading column (§ Lesson focus layout); native Mac QA remains with Mohamed |
+| Reminders | Lesson steps that repeat a list show its تحشيشة (`remind:`), 791 on 689 steps (§ Repeated topics) |
 | Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
 
 ### Open work and known gaps
@@ -614,3 +623,4 @@ Newest first. One line per PR that changes behaviour, process or state.
 - 2026-11-04: 1.0.0-alpha.2 released (#726); final critic round closed.
 - 2026-11-08: lesson focus layout (one centred reading column ≥840px), text colours by importance, key-term pill, Study/Study dim/System study themes.
 - 2026-11-08: own highlights in lessons (select → colour, fill/underline, pill/rect; synced per highlight).
+- 2026-11-08: repeated topics remind their تحشيشة (`remind:` on lesson steps, 791 reminders, «من درس …» link).

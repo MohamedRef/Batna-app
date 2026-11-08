@@ -12,7 +12,14 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
-## Study checkpoint performance baseline (2026-11-08, PR pending)
+## Cloud Worker CI: Binaryen download failure (2026-11-08, PR pending)
+
+- Main CI on #756-#759 reports **Cloud Worker E2E failed**, although Rust, Android and web compile jobs passed. Logs identify five HTTP 504 responses while wasm-pack downloaded Binaryen version 132 for `wasm-opt`; consequently the local Worker never started. This is a build-time dependency failure, **not** evidence of a failed sync assertion.
+- `crates/server/tests/e2e.mjs` writes a disposable `wrangler.e2e.toml` next to `wrangler.toml` and changes only its build command to `worker-build --release --no-opt`. The test still performs a Rust release build, launches the real local Worker, runs fake Google + WebSocket/device flows and the Rust app sync E2E. The normal production `wrangler.toml`, deploy and optimization are unchanged. The ephemeral test file is cleaned on exit and ignored by git.
+- A path-scoped PR workflow runs these integration tests on E2E launcher changes so a successful compile alone cannot falsely count as verified. Require the end-to-end job and standard PR CI green, then merge; do not trigger a release.
+- PR #759 previously merged as `3e7b2458`: hosted Linux marker p50 = 1.118 ms at 100 reviews, 10.898 ms at 1,000 and 32.540 ms at 3,000. Writes of its local meta were 0.019/0.032/0.055 ms. Measure `ReviewBackend::replay` with similar large histories **after fixing the CI**, not concurrently modifying grading or FSRS.
+
+## Study checkpoint performance baseline (2026-11-08, merged PR #759)
 
 - PR #758 merged green as `b8775089` (Android, Rust/content, Chromium); table controls are >=48dp on compact phones. The previous touch-target PR's pending label below is historical.
 - Follow-up `test/study-checkpoint-marker-baseline-20261108` measures the existing `Store::study_review_marker` read/hash separately from the local SQLite checkpoint-meta write at 100, 1000, and 3000 committed review events. The ignored diagnostic runs in PR CI and publishes p50/p95/max; it changes no persistence, syncing, review grading or UX.

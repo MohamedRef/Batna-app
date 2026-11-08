@@ -12,7 +12,14 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
-## Cloud main-CI wasm-bindgen dependency (2026-11-08, PR pending)
+## Study checkpoint constant-time marker (2026-11-08, PR pending)
+
+- PR #762 merged as `83710ccd` after green PR Rust/content, Android and full Cloud Worker multi-device E2E. The pinned `wasm-bindgen-cli` setup avoids GitHub Releases HTTP 504s in CI. A post-merge main run should be verified separately.
+- `perf/study-review-marker-constant-time-20261108` replaces repeated full-log JSON hashing on **checkpoint saves** with an O(1) SQLite-local `v2` marker stored in `meta`. Migration 4 adds review-events INSERT/UPDATE/DELETE triggers that rotate a random 128-bit token in the same committed transaction, covering local grades, Undo, remote merges, imports and direct SQL mutations. Rolled-back writes also roll back the token. A random revision prevents equally sized divergent DB snapshots from accidentally sharing a counter.
+- Old `v1` checkpoints are verified against the original complete review-log hash on first reopen. They can recover safely and the next save upgrades to `v2`; corrupt/stale checkpoints are still rejected. No cloud protocol, review event, grading logic or sync schema change.
+- Regression tests cover transaction rollback, insert/update/delete, double Undo, two divergent DB copies, snapshot reopen and legacy Study recovery. The existing crash-between-grade-and-checkpoint test must remain green, alongside Rust/Clippy, Android and content checks. The original marker benchmark will compare O(1) against previous baseline of ~27ms at 3,000 reviews; hosted Linux is not native S24 Ultra timing. **Do not merge if restore or CI fails. No release.**
+
+## Cloud main-CI wasm-bindgen dependency (2026-11-08, merged PR #762)
 
 - PR #761 merged green as `5b604038`. Hosted Linux p50: FSRS replay = 0.218 / 1.386 / 4.028 ms; full commit + replay = 0.349 / 1.511 / 4.568 ms; checkpoint marker = 0.903 / 8.869 / 26.977 ms at 100 / 1,000 / 3,000 synthetic events. Marker dominates at larger histories. These are not S24 Ultra UI latencies.
 - PR #760's full PR Cloud E2E passed, but the following **main** run failed: worker-build could not download `wasm-bindgen` 0.2.129 from GitHub Releases (HTTP 504, five retries). This is distinct from the earlier `wasm-opt` download failure; the Worker never started, so no sync assertion failed.

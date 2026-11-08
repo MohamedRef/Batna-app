@@ -17,6 +17,8 @@ mod card;
 mod cloze;
 mod enumerate;
 mod essay;
+mod foreground;
+pub(crate) use foreground::use_foreground_reset;
 pub mod grade;
 mod item;
 mod planning;

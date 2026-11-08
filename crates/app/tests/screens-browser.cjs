@@ -259,6 +259,24 @@ async function run() {
                     b.left < -1 || b.right > width + 1), [],
                     `${name}: bottom tab unnamed, undersized, or off-screen`);
                 }
+                // More's real CSS is rendered from production styles,
+                // even though this static fixture cannot open its UI.
+                if (screen === 'study' && item.phase === 'setup' && width === 384 &&
+                    scheme === 'light' && appearance === 'calm' && size === 'normal') {
+                  const moreClose = await page.evaluate(() => {
+                    const sheet = document.createElement('div');
+                    sheet.className = 'more-sheet';
+                    sheet.innerHTML = '<button class="btn btn-ghost more-close">إغلاق</button>';
+                    document.querySelector('.app').append(sheet);
+                    const r = sheet.querySelector('button').getBoundingClientRect();
+                    const b = sheet.getBoundingClientRect();
+                    sheet.remove();
+                    return { width: r.width, height: r.height, sheetRight: b.right, sheetLeft: b.left };
+                  });
+                  assert.ok(moreClose.width > 0 && moreClose.height >= 47.5 &&
+                    moreClose.sheetLeft >= -1 && moreClose.sheetRight <= width + 1,
+                    `${name}: More Close must be 48dp and remain within screen: ${JSON.stringify(moreClose)}`);
+                }
                 // Simulate a soft-keyboard-reduced viewport for the real
                 // palette CSS. Its results remain scrollable below the field.
                 if (screen === 'study' && item.phase === 'setup' && width === 384 &&

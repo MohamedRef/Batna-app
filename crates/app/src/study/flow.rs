@@ -470,3 +470,46 @@ fn the_player_falls_back_to_memory_without_a_store() {
     let t = TestDom::new(app);
     assert_eq!(t.texts("p"), ["true"]);
 }
+
+/// Diagnostic measurement of the real Study reveal -> Good -> next-card
+/// event and VirtualDom mutation path. Run only on the CI runner with
+/// \`--ignored --nocapture\`; it is NOT a native Android paint benchmark.
+#[test]
+#[ignore = "diagnostic: invoke the focused test from CI and print timings, not a timing gate"]
+fn profile_study_card_transitions() {
+    let ids: Vec<String> = ready_lectures()
+        .into_iter()
+        .flat_map(|lecture| lecture.items.iter())
+        .filter(|item| matches!(&item.body, Body::Card { .. }))
+        .take(16)
+        .map(|item| item.id.clone())
+        .collect();
+    assert!(ids.len() >= 8, "need several distinct cards to measure the real transition path");
+
+    let started = std::time::Instant::now();
+    let mut t = mount(Some(Start { lectures: None, items: Some(ids.clone()), minutes: 15 }), None);
+    let mount_us = started.elapsed().as_micros();
+    assert_eq!(t.texts("span.st-count"), [format!("1 / {}", ids.len())]);
+    let mut transition_us = Vec::with_capacity(ids.len());
+
+    for (n, _) in ids.iter().enumerate() {
+        t.click_text("button", tx::REVEAL);
+        assert_eq!(t.count("button.rating"), 4);
+        let started = std::time::Instant::now();
+        grade(&mut t, "good");
+        transition_us.push(started.elapsed().as_micros());
+        if n + 1 < ids.len() {
+            assert_eq!(t.texts("span.st-count"), [format!("{} / {}", n + 2, ids.len())]);
+        }
+    }
+    assert_eq!(logged(), ids.len(), "each grade must be persisted by the test review store");
+    assert!(t.text().contains(tx::SUMMARY_TITLE), "all items should lead to a summary");
+    transition_us.sort_unstable();
+    let p50 = transition_us[(transition_us.len() - 1) / 2];
+    let p95 = transition_us[(transition_us.len() * 95).div_ceil(100) - 1];
+    let max = transition_us[transition_us.len() - 1];
+    println!(
+        "STUDY_TRANSITION_BASELINE cards={} mount_us={} grade_p50_us={} grade_p95_us={} grade_max_us={} scope=TestDom_event_and_mutation_not_Android_paint",
+        ids.len(), mount_us, p50, p95, max
+    );
+}

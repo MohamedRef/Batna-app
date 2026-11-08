@@ -18,6 +18,9 @@ fn theme_label(t: Theme) -> (&'static str, &'static str) {
         Theme::Night => (tx::THEME_NIGHT, tx::THEME_NIGHT_SUB),
         Theme::Black => (tx::THEME_BLACK, tx::THEME_BLACK_SUB),
         Theme::NightShift => (tx::THEME_SHIFT, tx::THEME_SHIFT_SUB),
+        Theme::SystemStudy => (tx::THEME_SYSTEM_STUDY, tx::THEME_SYSTEM_STUDY_SUB),
+        Theme::Study => (tx::THEME_STUDY, tx::THEME_STUDY_SUB),
+        Theme::StudyDim => (tx::THEME_STUDY_DIM, tx::THEME_STUDY_DIM_SUB),
     }
 }
 

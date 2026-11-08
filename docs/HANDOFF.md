@@ -12,6 +12,14 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
+## Lesson focus layout and Study themes (2026-11-08)
+
+- Mohamed asked (from a Mac screenshot: small context card top-right, step card offset left, nav far at the bottom) for a focused lesson screen based on where the eye rests, plus a calm study theme and text colours by importance. This replaces PR #739's ≥1200px two-pane lesson grid.
+- From 840px up (`crates/app/src/learn/learn.css`) the player is one centred column (40rem, 44rem with 1.125rem text from 1200px, ≈ 60–75 characters a line). The column's top sits at the same height on every step; the lesson name is a quiet muted header above the card; Back/Next follow the card (still sticky while a long step scrolls). Phones keep the bottom nav for thumb reach. Pages view also gets the centred column.
+- Text hierarchy: `==key==` marks are a pill in new palette tokens `--mark`/`--mark-ink`, a hue opposite each theme (true yellow `#ffd43b` on Paper/Night/Black/Night shift, picked by Mohamed from five shades; teal on Study themes); Mohamed rejected a gold highlighter band and asked the pill to stand out from its card (test `the_key_term_pill_stands_out`); headings and `**terms**` use full `--text`; body text is `--text` softened 16% toward the card; meta stays muted.
+- New themes in `batna_core::theme`: `study` (warm off-white, charcoal text), `study-dim` (warm graphite, parchment text) and `system-study`; AA-tested plus `study_themes_are_calm` (no pure white/black, text contrast 7–15:1). Research basis and sources: `docs/LESSONS.md` § Reading layout.
+- `screens-browser.cjs` now asserts the centred column at 840/1280/1600px instead of side-by-side panes.
+
 ## Study checkpoint constant-time marker (2026-11-08, merged PR #763)
 
 - PR #762 merged as `83710ccd` after green PR Rust/content, Android and full Cloud Worker multi-device E2E. The pinned `wasm-bindgen-cli` setup avoids GitHub Releases HTTP 504s in CI. A post-merge main run should be verified separately.
@@ -178,7 +186,7 @@ deferred to Mohamed. **Do not mark any mobile item delivered until merged.**
 ## Mac desktop UX follow-up (2026-11-07, PR #739)
 
 - Desktop references reviewed: RemNote for spaced-repetition home, AMBOSS for clear clinical question/explanation separation, Obsidian for navigable workspaces, and Apple macOS sidebar/split-view guidance.
-- The previous Mac canvas fix removed excess margins but the 1440px lesson breakpoint missed the default 1280x820 Mac window. On desktop-height windows (>=1200px wide, >=740px high) the Steps player now uses a 2-pane reading workspace: a compact sticky context card and a centered, generous active step; footer controls remain below the stage.
+- The previous Mac canvas fix removed excess margins but the 1440px lesson breakpoint missed the default 1280x820 Mac window. On desktop-height windows (>=1200px wide, >=740px high) the Steps player used a 2-pane reading workspace (superseded 2026-11-08 by the single centred reading column, see § Lesson focus layout).
 - The labelled Mac sidebar is slightly wider and visually separated, with stronger active/hover affordances. Short Tab S11 landscape and phone layouts are unchanged. Pages reading mode remains single column.
 - Browser check now asserts side-by-side lesson panes at 1280px as well as at 1600px. New PR Actions must pass before merge. Native Mac visual QA remains pending; Playwright fixtures are not native screenshots.
 - Next larger UX phase after this PR: task-first Today dashboard and resizable/collapsible side panels; do not imply those are already implemented.
@@ -514,12 +522,12 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | Latest `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump merged but was never released. Next release is the first calendar one (`2026.11.1`), once the lesson screen redesign merges (Mohamed, 2026-11-08). Previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
 | Open PRs / issues | None open on 2026-11-08; PRs #752 and #753 merged after green Rust/Android/Node CI |
 | Coverage | 95.05% (floor 94) |
-| Mac wide layout | PRs #739–745 merged as applicable: expanded window, Anki-style keys, focus continuity and quick palette; native Mac QA remains with Mohamed |
+| Mac wide layout | PRs #739–745 merged as applicable: expanded window, Anki-style keys, focus continuity and quick palette; 2026-11-08 lesson player is one centred reading column (§ Lesson focus layout); native Mac QA remains with Mohamed |
 
 ### Open work and known gaps
 
@@ -595,3 +603,4 @@ Newest first. One line per PR that changes behaviour, process or state.
 - 2026-11-05: source material backed up to the private repo `MohamedRef/Batna-sources` (§ 8).
 - 2026-11-05: handoff docs added (`AGENTS.md`, this file, course briefs, content scripts).
 - 2026-11-04: 1.0.0-alpha.2 released (#726); final critic round closed.
+- 2026-11-08: lesson focus layout (one centred reading column ≥840px), text colours by importance, key-term pill, Study/Study dim/System study themes.

@@ -86,6 +86,17 @@ impl Channel {
         }
     }
 
+    /// The feeds a release on this channel goes to: a beta also reaches
+    /// everyone on alpha, a stable release everyone.
+    pub fn reach(self) -> &'static [Channel] {
+        match self {
+            Self::Preview => &[Self::Preview],
+            Self::Alpha => &[Self::Alpha],
+            Self::Beta => &[Self::Alpha, Self::Beta],
+            Self::Stable => &[Self::Alpha, Self::Beta, Self::Stable],
+        }
+    }
+
     /// `update.json`'s URL for this channel.
     pub fn feed_url(self) -> String {
         format!("{FEED_BASE}/{}/{MANIFEST_FILE}", self.release_tag())
@@ -316,7 +327,23 @@ pub struct UpdateAsset {
     pub build: Option<u64>,
 }
 
-/// A workspace version: `1.0.0`, `1.0.0-alpha.2`, `1.0.0-beta.1`, `1.0.0-rc.1`.
+/// Android's `versionCode` for a build: [`VERSION_CODE_BASE`] plus the
+/// build number, the same recipe as `scripts/android-release-apk.sh`. Since
+/// 2026-11-08 (Mohamed) every build, preview or release, takes its number
+/// from one counter (the commits on main, `scripts/version.sh`), so the code
+/// grows with every build whatever its version (docs/RELEASE.md §1).
+pub fn version_code(build: u64) -> u64 {
+    VERSION_CODE_BASE + build
+}
+
+/// Above every code the old `1.0.0-alpha.N` recipe made (10 000 1NN), so
+/// installed apps take the first build of the new scheme as an update.
+pub const VERSION_CODE_BASE: u64 = 20_000_000;
+
+/// A workspace version. Since 2026-11-08 a release is `YEAR.MONTH.N`
+/// (`2026.11.1`, the first of November 2026); the older `1.0.0-alpha.2`,
+/// `1.0.0-beta.1` and `1.0.0-rc.1` forms still parse, since feeds and
+/// installed apps carry them, and every calendar version sorts above them.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub struct Version {
     pub major: u32,
@@ -362,22 +389,10 @@ impl Version {
         Some(Self { major, minor, patch, stage })
     }
 
-    /// Android's `versionCode`, the same recipe as
-    /// `scripts/android-release-apk.sh`: `1.2.3-alpha.4` → 10203104. Major,
-    /// minor and patch, then the stage (alpha 100+N, beta 500+N, rc 800+N, a
-    /// release 999), so each update installs over the one before.
-    pub fn version_code(self) -> u64 {
-        let stage = match self.stage {
-            Stage::Alpha(n) => 100 + u64::from(n),
-            Stage::Beta(n) => 500 + u64::from(n),
-            Stage::Rc(n) => 800 + u64::from(n),
-            Stage::Final => 999,
-        };
-        (u64::from(self.major) * 10_000 + u64::from(self.minor) * 100 + u64::from(self.patch)) * 1000 + stage
-    }
-
-    /// The release channels that should offer this version: a beta also
-    /// reaches everyone on alpha, a release everyone.
+    /// The release channels this version may be published on: an old-style
+    /// alpha only on alpha, a beta on alpha and beta, a version without a
+    /// stage (every calendar version) on any of them. Which ones a release
+    /// actually reaches is its channel's [`Channel::reach`].
     pub fn channels(self) -> &'static [Channel] {
         match self.stage {
             Stage::Alpha(_) => &[Channel::Alpha],
@@ -687,7 +702,7 @@ mod tests {
             notes: UpdateNotes::default(),
             assets: vec![
                 UpdateAsset {
-                    version_code: Some(v(version).version_code()),
+                    version_code: Some(version_code(build)),
                     ..asset(UpdatePlatform::AndroidArm64, &format!("batna-{version}.apk"), &"ab".repeat(32))
                 },
                 asset(UpdatePlatform::Content, &format!("batna-content-{version}.pack"), &"cd".repeat(32)),
@@ -753,24 +768,32 @@ mod tests {
     }
 
     #[test]
-    fn version_codes_match_the_release_script() {
+    fn version_codes_follow_the_build() {
         // The examples in scripts/android-release-apk.sh.
-        assert_eq!(v("1.2.3-alpha.4").version_code(), 10_203_104);
-        assert_eq!(v("1.0.0-alpha.1").version_code(), 10_000_101);
-        assert_eq!(v("0.1.0").version_code(), 100_999);
-        // The workspace sits at 0.1.1-alpha.0 until the first alpha: above
-        // the early previews (0.1.0, stage 999) so they keep updating, and
-        // below every real alpha.
-        assert!(v("0.1.0").version_code() < v("0.1.1-alpha.0").version_code());
-        assert!(v("0.1.0") < v("0.1.1-alpha.0"));
-        assert!(v("0.1.1-alpha.0").version_code() < v("0.1.1-alpha.1").version_code());
-        assert!(v("0.1.1-alpha.0").version_code() < v("1.0.0-alpha.1").version_code());
-        assert!(v("0.1.1-alpha.0") < v("0.1.1-alpha.1"));
-        let ladder =
-            ["1.0.0-alpha.1", "1.0.0-alpha.2", "1.0.0-beta.1", "1.0.0-rc.1", "1.0.0", "1.0.1-alpha.1"];
-        for pair in ladder.windows(2) {
-            assert!(v(pair[0]).version_code() < v(pair[1]).version_code());
-        }
+        assert_eq!(version_code(564), 20_000_564);
+        // Above every code the old recipe made (1.0.0-alpha.4 was 10 000 104),
+        // so the first build of the new scheme installs over it.
+        assert!(version_code(1) > 10_000_104);
+        assert!(version_code(2_000_000_000 - VERSION_CODE_BASE) <= 2_100_000_000, "Android's ceiling");
+    }
+
+    #[test]
+    fn calendar_versions_sort_above_the_old_alphas() {
+        assert!(v("2026.11.1") > v("1.0.0-alpha.4"));
+        assert!(v("2026.11.1") > v("1.0.0"));
+        assert!(v("2026.11.1") < v("2026.11.2"));
+        assert!(v("2026.11.9") < v("2026.12.1"));
+        assert!(v("2026.12.1") < v("2027.1.1"));
+        assert_eq!(v("2026.11.1").to_string(), "2026.11.1");
+        assert_eq!(v("2026.11.1").channels(), Channel::RELEASE);
+    }
+
+    #[test]
+    fn channels_reach_the_ones_below() {
+        assert_eq!(Channel::Alpha.reach(), [Channel::Alpha]);
+        assert_eq!(Channel::Beta.reach(), [Channel::Alpha, Channel::Beta]);
+        assert_eq!(Channel::Stable.reach(), Channel::RELEASE);
+        assert_eq!(Channel::Preview.reach(), [Channel::Preview]);
     }
 
     #[test]

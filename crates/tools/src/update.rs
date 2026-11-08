@@ -9,7 +9,7 @@
 //!                 [--previous FEED/update.json] [--changes] [--carry PLATFORM …]
 //! update changes [--since COMMIT]          what the next build's "what's new" says
 //! update changes --gate BASE               fails unless HEAD adds a line (CI, #320)
-//! update channels [--version V]             the channels a version is published on
+//! update channels [--version V] [--channel C] the feeds a release goes to
 //! update sign DIR [--public-key FILE]       secret from BATNA_UPDATE_SECRET
 //! update verify DIR [--public-key FILE] [--carried PLATFORM …]
 //! ```
@@ -24,8 +24,11 @@
 //! - `verify` runs the app's checks on a feed folder. `--carried PLATFORM`
 //!   names a row `--carry` kept: its file is on the release already, not in
 //!   the folder, so only its build is checked (older than the feed's).
-//! - `channels` prints one channel per line (an alpha → alpha; a beta → alpha
-//!   and beta; a release → all three), for `scripts/update-publish.sh`.
+//! - `channels` prints one channel per line: the feeds a release on
+//!   `--channel` (default `alpha`) reaches (alpha → alpha; beta → alpha and
+//!   beta; stable → all three), for the Release workflow and
+//!   `scripts/update-publish.sh`. An old-style `-alpha.N`/`-beta.N` version
+//!   keeps the channels its stage names; asking it for another one fails.
 //! - `--previous` keeps the channel's current history (a missing file is
 //!   fine); with `--changes`, `changes/` since that feed's commit becomes
 //!   this build's entry, and the notes when none are given (`crate::changes`).
@@ -43,8 +46,9 @@ use std::path::{Path, PathBuf};
 use base64::Engine as _;
 use base64::engine::general_purpose::STANDARD as B64;
 use batna_core::update::{
-    BuildChanges, Channel, MANIFEST_FILE, SIGNATURE_FILE, UPDATE_FORMAT, UpdateAsset, UpdateManifest,
+    BuildChanges, Channel, MANIFEST_FILE, SIGNATURE_FILE, Stage, UPDATE_FORMAT, UpdateAsset, UpdateManifest,
     UpdateNotes, UpdatePlatform, Version, check_download, key_line, parse_public_key, verify_manifest,
+    version_code,
 };
 use ed25519_dalek::{Signer, SigningKey};
 use sha2::{Digest, Sha256};
@@ -188,7 +192,23 @@ fn run_inner(root: &Path, args: &[String], secret: Option<String>) -> Res<String
                 None => workspace_version(root)?,
             };
             let parsed = Version::parse(&v).ok_or_else(|| format!("{v:?} isn't a version"))?;
-            Ok(parsed.channels().iter().map(|c| c.as_str()).collect::<Vec<_>>().join("\n"))
+            let reach = match flag(args, "--channel") {
+                Some(c) => {
+                    let c = Channel::parse(c)
+                        .filter(|c| *c != Channel::Preview)
+                        .ok_or_else(|| format!("--channel {c:?}: alpha, beta or stable"))?;
+                    let reach = c.reach();
+                    if !reach.iter().all(|r| parsed.channels().contains(r)) {
+                        return Err(format!("{v} doesn't belong on the {} channel", c.as_str()));
+                    }
+                    reach
+                }
+                // A calendar version goes to alpha unless asked; an
+                // old-style one where its stage says.
+                None if parsed.stage == Stage::Final => Channel::Alpha.reach(),
+                None => parsed.channels(),
+            };
+            Ok(reach.iter().map(|c| c.as_str()).collect::<Vec<_>>().join("\n"))
         }
         Some("verify") => {
             let dir = args.get(1).filter(|a| !a.starts_with("--")).ok_or(USAGE)?;
@@ -317,7 +337,7 @@ pub fn write_manifest(
             file,
             size: bytes.len() as u64,
             sha256: sha256_hex(&bytes),
-            version_code: (*platform == UpdatePlatform::AndroidArm64).then(|| parsed.version_code()),
+            version_code: (*platform == UpdatePlatform::AndroidArm64).then(|| version_code(build)),
             build: None,
         });
     }
@@ -469,7 +489,7 @@ mod tests {
         )
         .unwrap();
         assert_eq!(m.assets[0].file, "batna-1.0.0-alpha.2-android-arm64.apk");
-        assert_eq!(m.assets[0].version_code, Some(10_000_102));
+        assert_eq!(m.assets[0].version_code, Some(20_000_000));
         assert_eq!(m.assets[1].file, "batna-content-1.0.0-alpha.2-content.pack");
         assert_eq!(m.assets[1].version_code, None);
 
@@ -847,7 +867,16 @@ mod tests {
         let channels = |v: &str| run(dir.path(), &strings(&["channels", "--version", v]));
         assert_eq!(channels("0.1.1-alpha.1").unwrap(), "alpha");
         assert_eq!(channels("0.2.0-beta.1").unwrap(), "alpha\nbeta");
-        assert_eq!(channels("1.0.0").unwrap(), "alpha\nbeta\nstable");
+        // A calendar version (or any without a stage) goes to alpha unless
+        // its channel is named.
+        assert_eq!(channels("2026.11.1").unwrap(), "alpha");
+        assert_eq!(channels("1.0.0").unwrap(), "alpha");
+        let on = |v: &str, c: &str| run(dir.path(), &strings(&["channels", "--version", v, "--channel", c]));
+        assert_eq!(on("2026.11.1", "beta").unwrap(), "alpha\nbeta");
+        assert_eq!(on("2026.11.1", "stable").unwrap(), "alpha\nbeta\nstable");
+        assert!(on("2026.11.1", "preview").is_err());
+        assert!(on("1.0.0-alpha.3", "beta").is_err(), "an old alpha stays an alpha");
+        assert_eq!(on("1.0.0-beta.1", "beta").unwrap(), "alpha\nbeta");
         assert!(channels("one").is_err(), "a bad version fails instead of publishing nowhere");
     }
 

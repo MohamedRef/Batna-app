@@ -1,11 +1,11 @@
-//! macOS-style quick navigation for sections, lectures, and lessons.
+//! macOS-style quick navigation for screens, content, calculators, Settings and question practice.
 //! The on-device Library is the only search index; no network or sync
 //! mutation is needed to jump directly into existing content.
 
 use dioxus::prelude::*;
 
 use crate::content::Library;
-use crate::settings::SettingsNav;
+use crate::settings::{Section, SettingsNav};
 use crate::{Screen, Ui};
 
 use super::{PALETTE_OPEN, open_palette};
@@ -16,8 +16,11 @@ const MAX_RESULTS: usize = 12;
 enum Destination {
     Screen(Screen),
     Settings,
+    SettingsSection(Section),
     Lecture(String),
     Lesson(String),
+    Calculator(&'static str),
+    BankLecture(String),
 }
 
 #[derive(Clone, Debug)]
@@ -32,6 +35,16 @@ fn matches_query(query: &str, words: &str) -> bool {
     let haystack = words.to_lowercase();
     let needle = query.to_lowercase();
     needle.split_whitespace().all(|word| haystack.contains(word))
+}
+
+/// Deliberate "questions <lecture>" requests open that lecture's existing
+/// filtered practice setup, not an arbitrary question in a running paper.
+fn bank_query(query: &str) -> Option<&str> {
+    ["questions ", "question ", "bank ", "mcq ", "أسئلة ", "اسئلة ", "سؤال "]
+        .into_iter()
+        .find_map(|prefix| query.strip_prefix(prefix))
+        .map(str::trim)
+        .filter(|s| !s.is_empty())
 }
 
 /// The initial palette shows navigable sections, not a wall of hundreds of
@@ -85,6 +98,46 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             });
         }
     }
+    // Settings sections and calculators use their existing searchable
+    // metadata, rather than inventing another list of destinations.
+    for section in Section::ALL {
+        if section.applies() && section.matches(&q) {
+            hits.push(Hit {
+                id: format!("settings-{}", section.id()),
+                name: section.title().into(),
+                subtitle: "قسم من الإعدادات".into(),
+                destination: Destination::SettingsSection(section),
+            });
+        }
+    }
+    for spec in crate::calc::search_for_palette(&q) {
+        hits.push(Hit {
+            id: format!("calc-{}", spec.id),
+            name: spec.name.into(),
+            subtitle: format!("حاسبة · {}", crate::calc::area_label(spec.area)),
+            destination: Destination::Calculator(spec.id),
+        });
+    }
+    if let Some(needle) = bank_query(&q) {
+        for lecture in &lib.index.lectures {
+            let title = lib.title(&lecture.id);
+            let context = lib.lecture_tag(&lecture.id);
+            if !matches_query(needle, &format!("{} {title} {context}", lecture.id)) {
+                continue;
+            }
+            let has_questions = lib.lectures.get(&lecture.id).is_some_and(|l| {
+                l.items.iter().any(|item| matches!(&item.body, batna_core::content::Body::Mcq { .. }))
+            });
+            if has_questions {
+                hits.push(Hit {
+                    id: format!("bank-{}", lecture.id),
+                    name: format!("أسئلة · {title}"),
+                    subtitle: format!("تدريب المحاضرة · {context}"),
+                    destination: Destination::BankLecture(lecture.id.clone()),
+                });
+            }
+        }
+    }
     // Exact ids and titles first, then prefix matches, then general hits.
     // Stable sorting keeps the original library order for equal relevance.
     hits.sort_by_key(|hit| {
@@ -114,6 +167,16 @@ fn activate(target: Destination, mut ui: Ui, settings: SettingsNav) {
             ui.screen.set(screen);
         }
         Destination::Settings => settings.show(None),
+        Destination::SettingsSection(section) => settings.show(Some(section)),
+        Destination::Calculator(id) => {
+            settings.close();
+            crate::calc::request_open(id);
+            crate::case::open_calculators(ui);
+        }
+        Destination::BankLecture(id) => {
+            settings.close();
+            crate::bank::practise(ui, &id, None);
+        }
         Destination::Lecture(id) => {
             settings.close();
             crate::lecture::open(ui, &id);
@@ -166,8 +229,8 @@ pub fn Palette() -> Element {
                 input {
                     class: "command-search palette-search",
                     r#type: "search",
-                    "aria-label": "ابحث عن قسم أو محاضرة أو درس",
-                    placeholder: "ابحث عن قسم، محاضرة أو درس…",
+                    "aria-label": "ابحث عن قسم أو محاضرة أو درس أو حاسبة أو إعدادات أو أسئلة",
+                    placeholder: "قسم، درس، حاسبة، إعدادات، أو questions واسم المحاضرة…",
                     autocomplete: "off",
                     autofocus: true,
                     value: "{query}",
@@ -221,6 +284,39 @@ mod tests {
         let lesson_hits = find(&lesson.id, lib);
         assert!(lesson_hits.iter().any(|h| h.destination == Destination::Lesson(lesson.id.clone())));
         assert!(lesson_hits.len() <= MAX_RESULTS);
+    }
+
+    #[test]
+    fn calculator_and_settings_results_open_real_destinations() {
+        let lib = Library::get();
+        assert!(find("child pugh", lib).iter().any(|h| h.destination == Destination::Calculator("child_pugh")));
+        if Section::Mac.applies() {
+            assert!(find("keyboard shortcuts", lib)
+                .iter()
+                .any(|h| h.destination == Destination::SettingsSection(Section::Mac)));
+        }
+        assert!(find("update download", lib)
+            .iter()
+            .any(|h| h.destination == Destination::SettingsSection(Section::Updates)));
+    }
+
+    #[test]
+    fn explicit_question_search_only_targets_lectures_with_mcqs() {
+        let lib = Library::get();
+        let lecture = lib
+            .index
+            .lectures
+            .iter()
+            .find(|entry| {
+                lib.lectures.get(&entry.id).is_some_and(|l| {
+                    l.items.iter().any(|item| matches!(&item.body, batna_core::content::Body::Mcq { .. }))
+                })
+            })
+            .expect("a lecture has MCQs");
+        let hits = find(&format!("questions {}", lecture.id), lib);
+        assert!(hits.iter().any(|h| h.destination == Destination::BankLecture(lecture.id.clone())));
+        assert!(bank_query("bank").is_none());
+        assert!(bank_query("questions ").is_none());
     }
 
     #[test]

@@ -8,21 +8,21 @@ last one stopped, with no other history. Read it top to bottom once, then
 secrets, deploys or the state of the work updates this file in the same PR
 (usually § Current state and § Log). See `AGENTS.md`.
 
-Last full refresh: 2026-11-05. Mac desktop continuation refreshed 2026-11-07, main at `f0b6a9e3` (1.0.0-alpha.3).
+Last full refresh: 2026-11-05. Mac desktop continuation refreshed 2026-11-08, main before this PR at `367d9902` (1.0.0-alpha.3).
 
 ---
 
-## Mac desktop workflow plan, 2026-11-07 (current: `feat/mac-command-palette-20261107`)
+## Mac desktop workflow plan, 2026-11-08 (current: `feat/mac-palette-destinations-20261108`)
 
 User directive: **code work first**. Native Mac interaction testing is deferred to the user; don't block feature implementation on manual macOS verification. Automated CI, layout regression checks, PR review, and conflict checks remain mandatory before merging. Leave interface-language work out of this batch. No alpha unless explicitly requested. Keep the PR-first, sequential merge discipline.
 
-Status on `main`: PR #739 (full-window desktop UI), PR #740 (Anki-like keyboard navigation), and PR #741 (resizable Mac panes + Focus Mode), and PR #742 (Today task-first layout) merged. Do not rebuild their already-working pieces.
+Status on `main`: PRs #739 (full-window desktop UI), #740 (Anki-like keys), #741 (resizable panes + Focus Mode), #742 (Today task-first layout), and #743 (Cmd/Ctrl+K palette for screens, lectures and lessons) merged. Do not rebuild their already-working pieces.
 
 Priority-ordered product backlog (not all implemented):
 1. **Merged PR #741:** resizable question/explanation panes on desktop pointer devices with keyboard-operable divider, a reset to default, device-local persistent width and safe small-window fallback; intentional Mac focus mode for running Study and Lesson, hiding the sidebar while keeping Back/end, lesson progress, and grade controls. Use existing layout CSS, `desk::Panes`, shared `Ui::update_prefs`, and the single app scroll container. Preserve study state when toggling.
 2. **Merged PR #742:** desktop task-first Today **layout** with the existing hero, due/new metrics, resume lesson, and library. The 1200px+ task column now gets 3/5 of the space instead of 2/5, the long task column follows the main app scroll, and the library stays a scrollable side reference. Do not rebuild its already-working data or review actions. New weak-topic insight stays a later separate item.
-3. **Current PR:** `⌘K` / `Ctrl+K` offline command palette, using the real content Library for **screen, lecture and lesson navigation**. Search from existing lecture/lesson ids and titles, rank exact/prefix matches, max 12 results, keyboard arrows/Enter/Escape, Tab focus trap, modal isolation and no network. Do not claim question/calc indexing yet; those should be linked to their existing product search interfaces only when concrete navigation/filters are supported.
-4. **Then:** extend the palette to question-bank/calculator destinations and Settings sections when their existing routing supports opening exact results; add weak-topic insight to Today without duplicating its existing study stats; configurable review shortcuts with collision detection (reserved macOS combos, input/IME safety, A–E and 1–4 compatibility); quicker review actions (mark, defer, show source) only after review-store behavior is specified and tested.
+3. **Merged PR #743:** `⌘K` / `Ctrl+K` offline command palette, using the real content Library for **screen, lecture and lesson navigation**. Search from existing lecture/lesson ids and titles, rank exact/prefix matches, max 12 results, keyboard arrows/Enter/Escape, Tab focus trap, modal isolation and no network. Do not claim question/calc indexing yet; those should be linked to their existing product search interfaces only when concrete navigation/filters are supported.
+4. **This PR:** extend the palette with direct calculator opening (reuse the calculator picker's Arabic-aware search), exact Settings section routing, and *lecture-scoped* bank practice for explicit `questions <lecture>` searches (never claim direct question-by-id navigation). Fix the Calculators tool when Cases is already mounted. Preserve recent calculators and existing study/review state. **Then:** add weak-topic insight to Today without duplicating existing study stats; configurable review shortcuts with collision detection (reserved macOS combos, input/IME safety, A–E and 1–4 compatibility); quicker review actions (mark, defer, show source) only after review-store behavior is specified and tested.
 5. **Later UX:** keyboard focus restoration after grading/switching steps, reduced UI jank on item transitions, readable very-wide typography, saved panel preferences and narrow-window behavior, consistent empty/loading states, shortcut discoverability/tooltips, accessible contrast and reduced motion.
 6. **Deferred manual checks by user:** actual WKWebView shortcuts, splitter dragging with mouse, both right-to-left panes and Mac window resizing, focus escape/restore and IME. Browser previews are **not** native Mac screenshots.
 
@@ -364,9 +364,9 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 | App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
 | Releases | `batna-v1.0.0-alpha.3` published 2026-11-06 (feed `batna-alpha`); previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
-| Open PRs / issues | none on 2026-11-05 |
+| Open PRs / issues | PR for palette destinations in progress on 2026-11-08; review outstanding issues separately |
 | Coverage | 95.05% (floor 94) |
-| Mac wide layout | Expanded content uses balanced padding instead of an artificial 60/80rem cap; ≥1440px has lesson Steps context/step panes, wider study and Settings; Mac's first window is 1280×820 |
+| Mac wide layout | PRs #739–743 merged: full desktop width, resizable lesson panes/Focus Mode, task-first Today, Anki keys, Cmd/Ctrl+K. Native Mac QA still deferred |
 
 ### Open work and known gaps
 
@@ -400,6 +400,8 @@ Mohamed can paste this into any new chat or account to continue:
 ## 12. Log
 
 Newest first. One line per PR that changes behaviour, process or state.
+
+- 2026-11-08: Cmd/Ctrl+K destination pass: reuse calculator picker search to open a named calculator, navigate to individual Settings sections, or open lecture-filtered question-bank practice via explicit `questions <lecture>` search; fix Calculators tool switching while already on Cases. Question-by-id search and native Mac QA are still deferred.
 
 - 2026-11-07: Mac expanded-layout pass: eliminate fixed-width canvas padding, adapt lesson Steps into context and active-step panes on ≥1440px, widen study/Settings, and default the Mac window to 1280×820; browser SSR at 1600px includes inert desktop navigation and saves previews. Layout at 840–1099px stacks form panes to prevent larger-text overflow. Native Mac QA remains open.
 

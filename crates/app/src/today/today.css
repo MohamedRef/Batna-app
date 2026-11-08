@@ -190,3 +190,20 @@ table.plan th { color: var(--muted); font-weight: 600; }
     scroll-padding-block: var(--sp-4);
   }
 }
+
+/* One clearly separated continue action for an already-running session;
+   starting a new session remains available beneath it, but is not mistaken
+   for resuming the existing review queue. */
+.td-resume {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  border-color: var(--accent);
+}
+.td-resume-copy { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
+.td-resume-action { display: inline-flex; gap: var(--sp-2); align-items: center; justify-content: center; }
+@media (max-width: 599.98px) {
+  .td-resume-action { inline-size: 100%; min-block-size: var(--target); }
+}

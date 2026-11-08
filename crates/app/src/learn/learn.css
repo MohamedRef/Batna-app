@@ -47,7 +47,7 @@
 /* ---------- text ---------- */
 /* Colour follows importance (the signaling principle: cues on the few
    relevant words help learning, Mayer). Four steps, strongest first:
-   1. ==key== marker: a warm highlighter band, 1-3 per step;
+   1. ==key== marker: a pill in the theme's opposite hue, 1-3 per step;
    2. step heading and **terms**: full text colour, bold;
    3. body text: the text colour softened a notch toward the card, so long
       paragraphs glare less and the bold terms stand out from them;
@@ -66,14 +66,15 @@
 /* Every lesson text, Line ones too (options, cards, cells, recap): never
    the browser's yellow, which is unreadable at night (#321). */
 mark {
-  color: var(--text);
+  /* A pill (Mohamed picked it 2026-11-08 over a highlighter band) in the
+     theme's opposite hue (--mark: amber on blue themes, teal on warm ones),
+     so it stands out from the card; never confused with plain bold.
+     mark-ink on mark is AA-tested in batna_core::theme. */
+  color: var(--mark-ink);
   font-weight: 700;
-  /* A real highlighter: warm, under the lower part of the letters, in every
-     theme (gold is never blue, so Night shift stays blue-free). The accent
-     blue was nearly invisible on the dark themes. */
-  background: linear-gradient(transparent 38%, color-mix(in srgb, var(--gold) 30%, transparent) 38%);
-  padding-inline: 3px;
-  border-radius: 3px;
+  background: var(--mark);
+  padding: 1px 0.45em;
+  border-radius: var(--radius-pill);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }

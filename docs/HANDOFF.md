@@ -16,7 +16,7 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 - Mohamed asked (from a Mac screenshot: small context card top-right, step card offset left, nav far at the bottom) for a focused lesson screen based on where the eye rests, plus a calm study theme and text colours by importance. This replaces PR #739's ≥1200px two-pane lesson grid.
 - From 840px up (`crates/app/src/learn/learn.css`) the player is one centred column (40rem, 44rem with 1.125rem text from 1200px, ≈ 60–75 characters a line). The column's top sits at the same height on every step; the lesson name is a quiet muted header above the card; Back/Next follow the card (still sticky while a long step scrolls). Phones keep the bottom nav for thumb reach. Pages view also gets the centred column.
-- Text hierarchy: `==key==` marks are a warm gold highlighter band (works on every theme, blue-free for Night shift); headings and `**terms**` use full `--text`; body text is `--text` softened 16% toward the card; meta stays muted.
+- Text hierarchy: `==key==` marks are a pill in new palette tokens `--mark`/`--mark-ink`, a hue opposite each theme (amber on Paper/Night/Black, olive-amber on Night shift, teal on Study themes); Mohamed rejected a gold highlighter band and asked the pill to stand out from its card (test `the_key_term_pill_stands_out`); headings and `**terms**` use full `--text`; body text is `--text` softened 16% toward the card; meta stays muted.
 - New themes in `batna_core::theme`: `study` (warm off-white, charcoal text), `study-dim` (warm graphite, parchment text) and `system-study`; AA-tested plus `study_themes_are_calm` (no pure white/black, text contrast 7–15:1). Research basis and sources: `docs/LESSONS.md` § Reading layout.
 - `screens-browser.cjs` now asserts the centred column at 840/1280/1600px instead of side-by-side panes.
 
@@ -595,4 +595,4 @@ Newest first. One line per PR that changes behaviour, process or state.
 - 2026-11-05: source material backed up to the private repo `MohamedRef/Batna-sources` (§ 8).
 - 2026-11-05: handoff docs added (`AGENTS.md`, this file, course briefs, content scripts).
 - 2026-11-04: 1.0.0-alpha.2 released (#726); final critic round closed.
-- 2026-11-08: lesson focus layout (one centred reading column ≥840px), text colours by importance, warm highlighter, Study/Study dim/System study themes.
+- 2026-11-08: lesson focus layout (one centred reading column ≥840px), text colours by importance, key-term pill, Study/Study dim/System study themes.

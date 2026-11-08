@@ -55,11 +55,17 @@ pub struct Palette {
     /// The info sheet (what a tapped "ص N" chip opens): a raised layer in
     /// its own tint, so it never reads as one more card on the page.
     pub sheet: &'static str,
+    /// The key-term pill (`==key==` in lessons): a hue opposite the theme's
+    /// own (amber on the blue themes, teal on the warm Study ones), so it
+    /// stands out from the card instead of blending into it.
+    pub mark: &'static str,
+    /// Text on `mark`.
+    pub mark_ink: &'static str,
 }
 
 impl Palette {
     /// `(css variable, value)` for every token.
-    pub fn tokens(&self) -> [(&'static str, &'static str); 18] {
+    pub fn tokens(&self) -> [(&'static str, &'static str); 20] {
         [
             ("--bg", self.bg),
             ("--surface", self.surface),
@@ -79,6 +85,8 @@ impl Palette {
             ("--gold", self.gold),
             ("--gold-soft", self.gold_soft),
             ("--sheet", self.sheet),
+            ("--mark", self.mark),
+            ("--mark-ink", self.mark_ink),
         ]
     }
 
@@ -136,6 +144,8 @@ pub const PAPER: Palette = Palette {
     gold: "#8a641d",
     gold_soft: "#fbf1d9",
     sheet: "#fcf4e0",
+    mark: "#fbe1a4",
+    mark_ink: "#5a3f0c",
 };
 
 /// Night: the default dark theme ("batna-dark"): deep petrol with a light
@@ -160,6 +170,8 @@ pub const NIGHT: Palette = Palette {
     gold: "#e3c581",
     gold_soft: "#3d3624",
     sheet: "#2c4f64",
+    mark: "#6a5320",
+    mark_ink: "#ffe7ad",
 };
 
 /// True black, for OLED screens: the page and cards are `#000000`, so those
@@ -186,6 +198,8 @@ pub const BLACK: Palette = Palette {
     gold: "#e3c581",
     gold_soft: "#2a2416",
     sheet: "#1c2a33",
+    mark: "#4d3c12",
+    mark_ink: "#ffe3a0",
 };
 
 /// Night shift: for studying late. Very dark and warm, with no colour where
@@ -211,6 +225,8 @@ pub const NIGHT_SHIFT: Palette = Palette {
     gold: "#d9b56a",
     gold_soft: "#2e2414",
     sheet: "#3a2c1f",
+    mark: "#635a20",
+    mark_ink: "#f1e4a8",
 };
 
 /// Study: a calm light theme for long reading sessions. Dark text on a
@@ -242,6 +258,8 @@ pub const STUDY: Palette = Palette {
     gold: "#7a5a1c",
     gold_soft: "#f3e7cb",
     sheet: "#d2e3df",
+    mark: "#9fd2c6",
+    mark_ink: "#163d38",
 };
 
 /// Study dim: the same calm theme for a dark room. In low light, light text
@@ -269,6 +287,8 @@ pub const STUDY_DIM: Palette = Palette {
     gold: "#dcc07f",
     gold_soft: "#383120",
     sheet: "#3f3b36",
+    mark: "#2a6359",
+    mark_ink: "#dcf7ef",
 };
 
 /// What the learner picked in Settings › Look.
@@ -445,6 +465,7 @@ mod tests {
                 ("accent on sheet", p.accent, p.sheet),
                 ("good on sheet", p.good, p.sheet),
                 ("bad on sheet", p.bad, p.sheet),
+                ("mark-ink on mark", p.mark_ink, p.mark),
             ];
             for (what, fg, bg) in pairs {
                 let c = contrast(fg, bg);
@@ -473,6 +494,23 @@ mod tests {
                     luminance(p.sheet) > luminance(p.surface),
                     "{name}: a dark sheet sits above its cards"
                 );
+            }
+        }
+    }
+
+    #[test]
+    fn the_key_term_pill_stands_out() {
+        // Mohamed, 2026-11-08: the pill must be distinct against its card,
+        // not one more shade of the theme.
+        let dist = |a: &str, b: &str| {
+            let (a, b) = (rgb(a), rgb(b));
+            let d = |x: u8, y: u8| (f64::from(x) - f64::from(y)).powi(2);
+            (d(a.0, b.0) + d(a.1, b.1) + d(a.2, b.2)).sqrt()
+        };
+        for (name, p) in ALL {
+            for (what, under) in [("card", p.surface), ("page", p.bg), ("accent-soft", p.accent_soft)] {
+                let d = dist(p.mark, under);
+                assert!(d >= 48.0, "{name}: key-term pill vs {what} too close ({d:.0})");
             }
         }
     }

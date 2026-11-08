@@ -174,7 +174,7 @@ How the lesson player is laid out, and why (Mohamed, 2026-11-08: "study where th
 | One centred column whose top stays put on every step; step heading at the top start (right) | Readers fixate the top and line starts; Arabic readers follow a mirrored F (NN/g eyetracking, 2006/2017). A fixed spot saves the eye hunting after each step. |
 | Back/Next right under the card (sticky while a long step scrolls); phones keep them at the bottom | Fitts's law: nearer, larger targets are faster; on phones the bottom is the thumb's reach. |
 | Lesson name muted above the card, not a second card | One focal point; the step is what to read. |
-| Text colour by importance: `==key==` warm highlighter, then heading and `**terms**` in full text colour, body softened, meta muted | Signaling principle: cues on the few relevant words improve learning (Mayer; Cambridge Handbook of Multimedia Learning ch. 11). Hence max 3 marks a step. |
+| Text colour by importance: `==key==` pill in the theme's opposite hue (`--mark`), then heading and `**terms**` in full text colour, body softened, meta muted | Signaling principle: cues on the few relevant words improve learning (Mayer; Cambridge Handbook of Multimedia Learning ch. 11). Hence max 3 marks a step. |
 | Study theme: warm off-white page, charcoal text; Study dim: warm graphite page, parchment text | Dark text on a light page reads best in a lit room (Piepenbrock et al., Ergonomics 2013, 2014); a dark page tires less in a dark room and is most comfortable at moderate contrast (Xie et al., IEEE Access 2021; Vision Research 2025); moderate warmth, since 2800 K screens tired readers most (IJHCI 2024). |
 
 ## Check before the PR

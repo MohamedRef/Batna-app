@@ -97,8 +97,10 @@ mod tests {
     #[test]
     fn unanswered_session_needs_no_replayed_grade() {
         let session = Session::new(vec![plan("a")]);
-        assert!(SessionCheckpoint::new(&session, "empty".into())
-            .recover("empty", &HashMap::new(), |_| true)
-            .is_some());
+        assert!(
+            SessionCheckpoint::new(&session, "empty".into())
+                .recover("empty", &HashMap::new(), |_| true)
+                .is_some()
+        );
     }
 }

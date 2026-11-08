@@ -8,6 +8,7 @@ mod picker;
 mod render_tests;
 
 pub use picker::{Calculators, reload};
+pub(crate) use picker::{request_open, search_for_palette};
 
 use std::collections::BTreeMap;
 use std::sync::OnceLock;
@@ -36,7 +37,7 @@ pub fn quotes() -> &'static CalcQuotes {
     })
 }
 
-fn area_label(area: Area) -> &'static str {
+pub(crate) fn area_label(area: Area) -> &'static str {
     match area {
         Area::Liver => tx::AREA_LIVER,
         Area::Ascites => tx::AREA_ASCITES,

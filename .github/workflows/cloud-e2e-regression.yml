@@ -1,0 +1,36 @@
+name: Batna Cloud E2E regression
+
+# The full Worker tests run on main in ci.yml. Run them on a PR only when
+# changing the local E2E launcher or its isolated build configuration.
+on:
+  pull_request:
+    paths:
+      - crates/server/tests/e2e.mjs
+      - .github/workflows/cloud-e2e-regression.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cloud-e2e:
+    name: Local Cloud Worker, fake Google and device sync
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: cloud-e2e
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Install local Worker test tools
+        run: |
+          cargo install worker-build --version ^0.8 --locked
+          npm install -g wrangler@4
+      - name: Local Worker, Google stub and multi-device synchronization
+        run: node crates/server/tests/e2e.mjs

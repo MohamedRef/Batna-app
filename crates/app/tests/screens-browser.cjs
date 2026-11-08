@@ -229,6 +229,38 @@ async function run() {
                 assert.deepEqual(m.unnamed, [], `${name}: controls without a name`);
                 assert.deepEqual(m.tooSmall, [], `${name}: controls under ${FLOOR[screen]} (${m.target}px)`);
                 await screenChecks(page, item, name);
+                // Running Study on a compact phone has a readable meter
+                // above 48dp Undo/End controls, never an overlapped row.
+                if (screen === 'study' && item.phase === 'running' && (width === 320 || width === 384)) {
+                  const compact = await page.evaluate(() => {
+                    const get = selector => {
+                      const node = document.querySelector(selector);
+                      if (!node || !node.getClientRects().length) return null;
+                      const b = node.getBoundingClientRect();
+                      return { left: b.left, right: b.right, top: b.top, bottom: b.bottom,
+                        width: b.width, height: b.height };
+                    };
+                    return {
+                      meter: get('.st-progress > .st-bar'),
+                      count: get('.st-progress > .st-count'),
+                      undo: get('.st-progress > .st-undo'),
+                      end: get('.st-progress > button[data-back="true"]'),
+                    };
+                  });
+                  const { meter, count, undo, end } = compact;
+                  assert.ok(meter && count && end, `${name}: progress, count and exit stay accessible`);
+                  assert.ok(meter.width >= 60 && meter.right <= width + 1 && meter.left >= -1,
+                    `${name}: meter must retain a readable width: ${JSON.stringify(compact)}`);
+                  assert.ok(meter.bottom <= end.top + 1 && count.bottom <= end.top + 1,
+                    `${name}: action row must be below progress: ${JSON.stringify(compact)}`);
+                  assert.ok(end.height >= 47.5 && end.left >= -1 && end.right <= width + 1,
+                    `${name}: end stays inside the phone viewport`);
+                  if (undo) {
+                    assert.ok(undo.height >= 47.5 && (undo.right <= end.left + 1 || end.right <= undo.left + 1),
+                      `${name}: Undo and End must not overlap`);
+                  }
+                }
+
                 // The compact phone header must offer the same quick-search
                 // action at a thumb-sized target, without overflowing 320dp.
                 if (screen === 'study' && item.phase === 'setup' && (width === 320 || width === 384)) {

@@ -289,7 +289,11 @@ fn each_area_has_a_label_and_opens_its_own_book() {
 #[test]
 fn calculator_breakdown_and_reset_keep_full_touch_targets() {
     let css = include_str!("calc.css");
-    assert!(css.contains(".calc-parts summary { cursor: pointer; font-weight: 600; min-block-size: var(--target);"));
+    assert!(
+        css.contains(
+            ".calc-parts summary { cursor: pointer; font-weight: 600; min-block-size: var(--target);"
+        )
+    );
     assert!(css.contains(".calc-foot > .btn-link { min-block-size: var(--target); }"));
     let html = card(
         "cam",

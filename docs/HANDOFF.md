@@ -12,14 +12,21 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
-## Durable Study checkpoint (2026-11-08, PR pending)
+## Mobile medical table touch targets (2026-11-08, PR pending)
 
+- After successful Rust, Android arm64, and content CI, PR #756 merged as `6d3d885a`: durable local Study recovery is on `main` (native process-kill QA remains deferred).
+- Follow-up `fix/mobile-table-cell-touch-20261108` enlarges table `tb-input`, `tb-mark` and `tb-flip` from 36–40px to the existing 48dp `--target`; Reveal was already 48dp. It preserves table scrolling, pinned labels, marking logic and keyboard semantics.
+- `mobile-touch-browser.cjs` checks all five real table-control classes at 320/384px with normal and enlarged text. The screens-browser workflow now runs when that regression or table CSS changes. CI and browser checks must pass before squash merge; no new release.
+
+## Durable Study checkpoint (2026-11-08, merged PR #756)
+
+- PR #756 merged as `6d3d885a` after successful Rust, Android arm64 and content checks. Automated restore checks passed, native relaunch QA remains deferred.
 - PR #755 merged as `81cc01b1` after successful Rust/Android checks. Today already offers Continue for a live, same-process Study queue.
 - Follow-up branch `feat/durable-study-checkpoint-20261108`: a **device-local versioned** `SessionCheckpoint` preserves queue order, progress, Again retries, outcomes, and the exact review IDs needed for Undo. A new run reads it before rendering Today, without replaying or recording any answers.
 - A deterministic marker covers the committed, non-tombstoned SQLite review log. If the process dies **after** a review commits but **before** its matching checkpoint, a marker mismatch refuses recovery rather than duplicating FSRS grades. Invalid schema, unknown or hidden cards, missing or altered review events similarly fail closed. A stale/invalid checkpoint is cleared and the app starts normally.
 - Save after starting, grading, Undo and appending items; clear after End or finishing. Uses `meta.local.study.session.v1`, not synced settings or a new sync table. A borrowed device still clears its local meta when its session ends.
 - Automated coverage includes core version/grade/undo/retry validation plus review marker invalidation and SQLite snapshot reopen. **Not yet native-tested:** Android process death, OS background kills and macOS relaunch. The snapshot is not an automatic recovery guarantee when storage is unavailable; a failed snapshot write never blocks an already-saved review.
-- CI must pass on the latest PR head before merging; no new Alpha, language change, or release.
+- CI passed on the merged PR #756 head; no new Alpha, language change, or release.
 
 ## Mac desktop workflow plan, refreshed 2026-11-08 (PR #744 merged; mobile UX is next)
 

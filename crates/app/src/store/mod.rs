@@ -11,6 +11,8 @@ mod backend;
 pub mod export;
 pub mod import;
 mod install;
+#[cfg(test)]
+mod marker_perf;
 pub mod own;
 mod paths;
 pub mod sync;

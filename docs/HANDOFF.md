@@ -63,10 +63,10 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 ## Manual Mac preview build, 2026-11-08
 
 - The Mac workflow (`.github/workflows/mac.yml`) still compiles/tests nightly without publishing an app.
-- On `workflow_dispatch` on `main`, it additionally signs the newly built `Batna.app` with the existing `Batna Code Signing` identity and uploads `Batna-Mac-preview.zip` as a GitHub Actions artifact (30 days). This is a new build from the selected commit, **not** a new version/tag or an update feed. It does not publish an Alpha release.
-- To get a new Mac preview after the workflow change merges: Actions > Mac > Run workflow > main; open the successful run and download the `Batna-Mac-preview-<sha>` artifact. Unzip both the Actions artifact and the enclosed app ZIP, move Batna.app to Applications and run `xattr -dr com.apple.quarantine /Applications/Batna.app` when required for the self-signed app.
+- On `workflow_dispatch` on `main` **or once on the `main` push that changes `mac.yml`**, it additionally signs the newly built `Batna.app` with the existing `Batna Code Signing` identity and uploads `Batna-Mac-preview.zip` as a GitHub Actions artifact (30 days). This is a new build from the selected commit, **not** a new version/tag or an update feed. It does not publish an Alpha release.
+- A new Mac preview is triggered automatically when this packaging workflow merges. To rebuild later: Actions > Mac > Run workflow > main; open the successful run and download the `Batna-Mac-preview-<sha>` artifact. Unzip both the Actions artifact and the enclosed app ZIP, move Batna.app to Applications and run `xattr -dr com.apple.quarantine /Applications/Batna.app` when required for the self-signed app.
 - Build signing uses the already configured `BATNA_MAC_CERT_P12` and `BATNA_MAC_CERT_PASSWORD` repository secrets; a manual run fails rather than silently shipping an unsigned preview if either is missing.
-- Mac native visual/keyboard testing remains for Mohamed. The new workflow changes packaging only. No actual downloadable artifact exists until the manual workflow runs successfully.
+- Mac native visual/keyboard testing remains for Mohamed. The new workflow changes packaging only. No actual downloadable artifact exists until the automatic push or manual workflow runs successfully.
 
 ## Mac desktop workflow plan, refreshed 2026-11-08 (PR #744 merged; mobile UX is next)
 

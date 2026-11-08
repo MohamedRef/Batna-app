@@ -12,6 +12,16 @@ use super::{PALETTE_OPEN, open_palette};
 
 const MAX_RESULTS: usize = 12;
 
+/// Closing search returns focus to the opener if that control still exists.
+/// Selecting a search result does not restore focus to the old screen.
+fn dismiss() {
+    open_palette(false);
+    document::eval(
+        "requestAnimationFrame(() => { const el = window.__batnaPaletteOpener; if (el?.isConnected && el.getClientRects().length) el.focus({preventScroll:true}); });",
+    );
+}
+
+
 #[derive(Clone, Debug, PartialEq, Eq)]
 enum Destination {
     Screen(Screen),
@@ -219,7 +229,7 @@ pub fn Palette() -> Element {
     rsx! {
         div {
             class: "sheet-backdrop command-backdrop",
-            onclick: move |_| open_palette(false),
+            onclick: move |_| dismiss(),
         }
         section {
             class: "command-palette",
@@ -227,7 +237,7 @@ pub fn Palette() -> Element {
             "aria-modal": "true",
             "aria-labelledby": "command-palette-title",
             onmounted: move |_| {
-                document::eval("document.querySelector('.palette-search')?.focus();");
+                document::eval("window.__batnaPaletteOpener = document.activeElement; document.querySelector('.palette-search')?.focus();");
             },
             div { class: "command-palette-head",
                 h2 { id: "command-palette-title", "الانتقال السريع" }
@@ -237,7 +247,7 @@ pub fn Palette() -> Element {
                     "aria-label": "إغلاق البحث السريع",
                     "data-back": "true",
                     "aria-keyshortcuts": "Escape",
-                    onclick: move |_| open_palette(false),
+                    onclick: move |_| dismiss(),
                     "×"
                 }
             }

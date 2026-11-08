@@ -289,15 +289,21 @@ mod tests {
     #[test]
     fn calculator_and_settings_results_open_real_destinations() {
         let lib = Library::get();
-        assert!(find("child pugh", lib).iter().any(|h| h.destination == Destination::Calculator("child_pugh")));
+        assert!(
+            find("child pugh", lib).iter().any(|h| h.destination == Destination::Calculator("child_pugh"))
+        );
         if Section::Mac.applies() {
-            assert!(find("keyboard shortcuts", lib)
-                .iter()
-                .any(|h| h.destination == Destination::SettingsSection(Section::Mac)));
+            assert!(
+                find("keyboard shortcuts", lib)
+                    .iter()
+                    .any(|h| h.destination == Destination::SettingsSection(Section::Mac))
+            );
         }
-        assert!(find("update download", lib)
-            .iter()
-            .any(|h| h.destination == Destination::SettingsSection(Section::Updates)));
+        assert!(
+            find("update download", lib)
+                .iter()
+                .any(|h| h.destination == Destination::SettingsSection(Section::Updates))
+        );
     }
 
     #[test]

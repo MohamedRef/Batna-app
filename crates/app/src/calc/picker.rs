@@ -346,7 +346,8 @@ pub fn Calculators() -> Element {
     // Consume jumps once, including while this tab is already on screen.
     // Reuse the recent list and back button instead of building another form.
     use_effect(move || {
-        if let Some(id) = *DIRECT_OPEN.read() {
+        let requested = *DIRECT_OPEN.read();
+        if let Some(id) = requested {
             *DIRECT_OPEN.write() = None;
             open.set(Some(id));
             from.set(None);

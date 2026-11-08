@@ -177,6 +177,10 @@ How the lesson player is laid out, and why (Mohamed, 2026-11-08: "study where th
 | Text colour by importance: `==key==` pill in the theme's opposite hue (`--mark`), then heading and `**terms**` in full text colour, body softened, meta muted | Signaling principle: cues on the few relevant words improve learning (Mayer; Cambridge Handbook of Multimedia Learning ch. 11). Hence max 3 marks a step. |
 | Study theme: warm off-white page, charcoal text; Study dim: warm graphite page, parchment text | Dark text on a light page reads best in a lit room (Piepenbrock et al., Ergonomics 2013, 2014); a dark page tires less in a dark room and is most comfortable at moderate contrast (Xie et al., IEEE Access 2021; Vision Research 2025); moderate warmth, since 2800 K screens tired readers most (IJHCI 2024). |
 
+## Own highlights
+
+Mohamed can highlight any words in a step himself (`learn/highlight.js`, `batna_core::highlight`). They are his notes, not content: they are stored as synced settings (`hl.<lesson>.<id>`), never in `content/`. A highlight is found again by its words and a little text around them, so rewording a sentence in a lesson can drop a highlight on it; small edits elsewhere in the step keep it.
+
 ## Check before the PR
 
 `cargo run -p batna-tools -- validate` checks schema, ids, pages, quotes,

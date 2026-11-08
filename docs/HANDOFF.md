@@ -12,6 +12,13 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
+## Own highlights in lessons (2026-11-08)
+
+- Mohamed asked to highlight or underline lesson text himself, in colours he picks, shaped as a pill or a rectangle. Select words in the open step → a bar (`crates/app/src/learn/highlight.js`) offers 5 colours (yellow `#ffd43b`, green, blue, pink, orange), fill/underline and pill/rect; tapping a highlight edits or removes it. The chosen style/shape is remembered per device (localStorage).
+- Storage: one synced setting per highlight, `hl.<lesson>.<id>` = `batna_core::highlight::Saved` (a highlight or `{"gone":true}`), so devices never overwrite each other; no new sync table or migration. Anchoring by quote + 32 chars of context + position (`batna_core::highlight::locate`, mirrored in the script).
+- Drawing never edits Dioxus nodes: shapes go in a `.uhl-layer` under the text of the nearest box with a background (`[data-uhl-host]`); fill text turns dark through `::highlight(uhl-ink)` (CSS Custom Highlight API), else the fill is lighter. Swipe ignores drags while text is selected; on touch the bar sits under the selection (the system copy menu is above).
+- Tests: `learn::highlight` (messages, load/tombstones), `batna_core::highlight` (locate, cleaning, serde) and `crates/app/tests/highlight-browser.cjs` (select → colour → edit → remove → reload) inside the screens-browser run.
+
 ## Lesson focus layout and Study themes (2026-11-08)
 
 - Mohamed asked (from a Mac screenshot: small context card top-right, step card offset left, nav far at the bottom) for a focused lesson screen based on where the eye rests, plus a calm study theme and text colours by importance. This replaces PR #739's ≥1200px two-pane lesson grid.
@@ -522,7 +529,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, own lesson highlights, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | Latest `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump merged but was never released. Next release is the first calendar one (`2026.11.1`), once the lesson screen redesign merges (Mohamed, 2026-11-08). Previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
 | Open PRs / issues | None open on 2026-11-08; PRs #752 and #753 merged after green Rust/Android/Node CI |
@@ -604,3 +611,4 @@ Newest first. One line per PR that changes behaviour, process or state.
 - 2026-11-05: handoff docs added (`AGENTS.md`, this file, course briefs, content scripts).
 - 2026-11-04: 1.0.0-alpha.2 released (#726); final critic round closed.
 - 2026-11-08: lesson focus layout (one centred reading column ≥840px), text colours by importance, key-term pill, Study/Study dim/System study themes.
+- 2026-11-08: own highlights in lessons (select → colour, fill/underline, pill/rect; synced per highlight).

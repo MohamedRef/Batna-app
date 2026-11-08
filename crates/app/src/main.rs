@@ -187,6 +187,9 @@ fn App() -> Element {
     // Android: a renderer reclaimed in the background ends Batna quietly
     // instead of crashing it; earlier crashes show in the diagnostics.
     use_hook(platform::webview_guard::install);
+    // Background time must not inflate the answer duration if Android
+    // resumes an existing in-memory Study session.
+    study::use_foreground_reset();
     let current = *ui.screen.read();
     // System themes follow the device's dark mode. Android's WebView can't
     // be trusted for it (it reports light under a light activity theme), so

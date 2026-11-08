@@ -36,13 +36,16 @@ Keep these labels honest as PRs merge, refresh this section and a `changes/*.yam
 - Only restore on keyboard / screen-reader (zero-detail click), not on pointer clicks; cancel on pointer activity, modal, contenteditable, or active input. Keep updates in `crates/app/src/shortcuts/` with focused browser regression; no manual macOS QA is required to progress code.
 - PR #744 merged after green CI: the palette opens real calculators, Settings sections and lecture-filtered practice, not individual question deep links.
 
-## Study event-to-render baseline, 2026-11-08 (current PR)
+## Study event-to-render baseline, 2026-11-08 (PR #752 merged; lifecycle fix in progress)
 
 - An ignored diagnostic test in `crates/app/src/study/flow.rs` measures 16 real card Reveal → Good → next-card actions through the in-memory Dioxus TestDom and review backend. It prints mount time plus grade-action p50/p95/max in microseconds.
 - The normal PR CI check runs this focused diagnostic *after* `cargo test --workspace`, and writes results to the job summary. No fixed timing failure threshold: GitHub-hosted Linux CPUs are noisy and this omits Android WebView layout/paint, Java/Kotlin lifecycle, IO variance and GPU timing.
 - Compare multiple runs on similar runners to locate a regression, then profile on S24 Ultra before optimizing; do not treat CI measurements as phone latency. Avoid changing review persistence or study scheduling without correctness coverage.
 - Existing Study `SESSION`/`PHASE` are global in-memory signals, so same-process tab switching retains the current card. Cold process death is **not** proven durable. Lock/unlock, scroll offset, Android Back and elapsed-time-after-background are separate native validation items.
-- After this PR is green/merged: test lifecycle return to the same active card and remaining scroll, then address measured hotspots. No new alpha or language changes.
+- PR #752 merged green. First CI hosted Linux baseline: 16 cards, setup 167948µs, grade p50 2380µs, p95/max 65600µs. These are TestDom event/mutation timings, **not** Android paint and not a pass/fail speed threshold.
+- Current PR: the app-level `visibilitychange`/`pageshow` listener resets the active Study answer clock on returning from background, to avoid counting away time as answer time. It does not navigate, change the saved grade, change scroll or rebuild the session. Add isolated JS bridge tests; native Android lifecycle event coverage still needs owner confirmation.
+- A retained WebView should keep the live Study `SESSION` and current item. A killed process does not have a durable session snapshot; do not claim crash/process-death resume. Next: state/scroll regression and native S24 Ultra verification, then profile the review-store replay path against a larger history.
+- No new alpha or language changes.
 
 ## Mobile Study progress continuity (2026-11-08, PRs #749–#751 merged)
 
@@ -437,7 +440,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 | App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
 | Releases | `batna-v1.0.0-alpha.3` published 2026-11-06 (feed `batna-alpha`); previews every 4 h |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
-| Open PRs / issues | Study grade-to-next-render diagnostic PR in progress on 2026-11-08; #749–#751 merged with green CI |
+| Open PRs / issues | #752 merged after green CI; Study background answer-time lifecycle PR in progress on 2026-11-08 |
 | Coverage | 95.05% (floor 94) |
 | Mac wide layout | PRs #739–745 merged as applicable: expanded window, Anki-style keys, focus continuity and quick palette; native Mac QA remains with Mohamed |
 
@@ -473,6 +476,8 @@ Mohamed can paste this into any new chat or account to continue:
 ## 12. Log
 
 Newest first. One line per PR that changes behaviour, process or state.
+
+- 2026-11-08: Study background time fix PR: on WebView visibility return, reset answer timing only for a running session; isolated JS bridge tests, without session/scroll/navigation changes. PR #752 benchmark merged green (16 cards, p50 2380µs, p95 65600µs on hosted Linux).
 
 - 2026-11-08: Added focused CI-runner baseline for actual Study grade-to-next-card TestDom mutations (mount, p50/p95/max) with no timing gate. Native Android render latency and durable process-death resume remain unverified.
 

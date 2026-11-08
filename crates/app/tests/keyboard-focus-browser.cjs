@@ -96,6 +96,37 @@ async function keyboardFocusChecks(browser) {
     assert.equal(await page.evaluate(() => document.activeElement.id), 'typed',
       'typing stays in the answer field');
 
+    // A retained Study WebView must not jump to the top after backgrounding.
+    // This exercises the production listener in an actual scroll container;
+    // a killed process remains explicitly out of scope.
+    await page.setViewportSize({ width: 384, height: 520 });
+    await page.setContent('<!doctype html><html><body style="margin:0">' +
+      '<main class="content" data-screen="Study" style="height:480px;overflow-y:auto">' +
+      '<article class="st-item" data-kind="card" style="height:1600px">' +
+      '<h1>Current card</h1><button id="resume-grade">Review</button></article></main></body></html>');
+    const foreground = await fs.readFile(path.join(__dirname, '../src/study/foreground.js'), 'utf8');
+    await page.evaluate(() => {
+      window.dioxus = { send: message => (window.__foregroundMessages ||= []).push(message) };
+    });
+    await page.addScriptTag({ content: '(async () => {\\n' + foreground + '\\n})();' });
+    const beforeScroll = await page.evaluate(() => {
+      const main = document.querySelector('main.content');
+      main.scrollTop = 420;
+      return main.scrollTop;
+    });
+    assert.equal(beforeScroll, 420);
+    await page.evaluate(() => {
+      document.dispatchEvent(new Event('visibilitychange'));
+      window.dispatchEvent(new Event('pageshow'));
+    });
+    const afterScroll = await page.evaluate(() => {
+      const main = document.querySelector('main.content');
+      return { top: main.scrollTop, cardKind: main.querySelector('.st-item')?.dataset.kind,
+        count: main.querySelectorAll('.st-item').length };
+    });
+    assert.equal(afterScroll.top, beforeScroll, 'foreground must retain the in-item scroll offset');
+    assert.equal(afterScroll.cardKind, 'card', 'foreground must preserve the active Study item');
+    assert.equal(afterScroll.count, 1, 'foreground must not remount/duplicate the card');
     console.log('Keyboard focus continuity: reveal, grade, mouse, modal, lesson, and typing passed.');
   } finally {
     await page.close();

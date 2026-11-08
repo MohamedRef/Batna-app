@@ -35,6 +35,21 @@ const KNOWN = {
   noHeading: [],
 };
 
+// The lesson's reading column, measured in the page (learn.css ≥840px).
+function readingColumn() {
+  const player = document.querySelector('.ls-player[data-view="steps"]');
+  const main = document.querySelector('main.content');
+  const context = player.querySelector(':scope > .ls-context').getBoundingClientRect();
+  const stage = player.querySelector(':scope > .ls-stage:not([hidden])').getBoundingClientRect();
+  const nav = player.querySelector(':scope > .ls-nav').getBoundingClientRect();
+  const m = main.getBoundingClientRect();
+  const style = getComputedStyle(main);
+  const inner = (m.left + parseFloat(style.paddingLeft) + m.right - parseFloat(style.paddingRight)) / 2;
+  return { stageWidth: stage.width, stageTop: stage.top, contextBottom: context.bottom,
+    // A long step scrolls under Back/Next, which then stick to the bottom.
+    navGap: nav.top - stage.bottom, navStuck: nav.bottom >= m.bottom - parseFloat(style.paddingBottom) - 2, navBottom: nav.bottom, mainBottom: m.bottom, offCentre: (stage.left + stage.right) / 2 - inner };
+}
+
 // Everything a finger or the keyboard can reach on screen, with the layout
 // facts the assertions need. Runs in the page.
 function measure([floor, known]) {
@@ -375,20 +390,17 @@ async function run() {
                 if (width === 384 && appearance === 'calm' && size === 'larger') {
                   await page.screenshot({ path: path.join(output, `${name}.png`), fullPage: true });
                 }
-                // The native Mac starts at 1280x820. Lesson context must be
-                // beside the stage at that size too, not only at 1600px.
-                if (screen === 'learn' && width === 1280 && scheme === 'light' &&
+                // The native Mac starts at 1280x820. From 840px up the lesson is
+                // one centred reading column (learn.css, docs/LESSONS.md §
+                // Reading layout): ~60-75 characters a line, the lesson name
+                // above the card, Back/Next right under it.
+                if (screen === 'learn' && (width === 1280 || width === 840) && scheme === 'light' &&
                     appearance === 'calm' && size === 'normal' && item.view === 'steps') {
-                  const panes = await page.evaluate(() => {
-                    const player = document.querySelector('.ls-player[data-view="steps"]');
-                    const context = player?.querySelector(':scope > .ls-context')?.getBoundingClientRect();
-                    const stage = player?.querySelector(':scope > .ls-stage:not([hidden])')?.getBoundingClientRect();
-                    return { columns: getComputedStyle(player).gridTemplateColumns, contextLeft: context?.left,
-                      stageRight: stage?.right, contextWidth: context?.width, stageWidth: stage?.width };
-                  });
-                  assert.ok(panes.contextWidth >= 200 && panes.stageWidth >= 500 &&
-                    panes.contextLeft >= panes.stageRight - 1,
-                    `${name}: default Mac window must present real side-by-side lesson panes: ${JSON.stringify(panes)}`);
+                  const col = await page.evaluate(readingColumn);
+                  assert.ok(col.stageWidth >= 480 && col.stageWidth <= 760 &&
+                    col.contextBottom <= col.stageTop + 1 && (col.navGap >= 0 || col.navStuck) && col.navGap <= 48 &&
+                    Math.abs(col.offCentre) <= 2,
+                    `${name}: lesson must be one centred reading column with its controls under the card: ${JSON.stringify(col)}`);
                 }
                 // Real production SSR + styles, now including the desktop sidebar.
                 // One representative Steps lesson and one running study item
@@ -416,9 +428,11 @@ async function run() {
                   assert.ok(Math.abs(desktop.padStart - desktop.padEnd) < 1,
                     `${name}: Mac canvas must use both sides of the window: ${JSON.stringify(desktop)}`);
                   if (screen === 'learn') {
-                    assert.ok(desktop.context?.width >= 200 && desktop.stage?.width >= 600 &&
-                      desktop.context.left >= desktop.stage.right - 1,
-                    `${name}: lesson context should sit beside the active step, not above it: ${JSON.stringify(desktop)}`);
+                    const col = await page.evaluate(readingColumn);
+                    assert.ok(col.stageWidth >= 560 && col.stageWidth <= 760 &&
+                      col.contextBottom <= col.stageTop + 1 && (col.navGap >= 0 || col.navStuck) && col.navGap <= 48 &&
+                      Math.abs(col.offCentre) <= 2,
+                    `${name}: a wide Mac window keeps one centred reading column, not a pane per side: ${JSON.stringify(col)}`);
                   } else {
                     assert.ok(desktop.studyWidth >= 1000,
                       `${name}: study card should use the wide desktop canvas: ${JSON.stringify(desktop)}`);

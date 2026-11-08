@@ -213,6 +213,64 @@ pub const NIGHT_SHIFT: Palette = Palette {
     sheet: "#3a2c1f",
 };
 
+/// Study: a calm light theme for long reading sessions. Dark text on a
+/// light page reads best in a lit room (the "positive polarity advantage",
+/// Piepenbrock et al., Ergonomics 2013/2014), but a pure white page is the
+/// brightest thing on the desk, so the page is a soft, slightly warm
+/// off-white and the text a warm charcoal instead of black. The warmth stays
+/// moderate (about 4500 K, not amber): very warm 2800 K screens tired readers
+/// most (Effects of Screen Color Mode and Color Temperature on Visual
+/// Fatigue, IJHCI 2024). The accent is a muted sage-teal, so links and the
+/// primary button are found without shouting.
+pub const STUDY: Palette = Palette {
+    scheme: Scheme::Light,
+    bg: "#f2eee6",
+    surface: "#faf7f1",
+    surface_2: "#ebe5da",
+    text: "#2f2a24",
+    muted: "#665c51",
+    line: "#ddd5c8",
+    accent: "#2f6461",
+    on_accent: "#fbf8f2",
+    accent_soft: "#dbe8e3",
+    accent_ink: "#28524f",
+    soft: "#efe8dc",
+    good: "#3b6a43",
+    good_soft: "#e3ede0",
+    bad: "#9a4535",
+    bad_soft: "#f6e4dc",
+    gold: "#7a5a1c",
+    gold_soft: "#f3e7cb",
+    sheet: "#d2e3df",
+};
+
+/// Study dim: the same calm theme for a dark room. In low light, light text
+/// on a dark page tires the eyes less (Xie et al., IEEE Access 2021), and a
+/// dark page is most comfortable with moderate, not maximal, contrast, so
+/// the page is a warm graphite (never pure black) and the text a soft
+/// parchment instead of white.
+pub const STUDY_DIM: Palette = Palette {
+    scheme: Scheme::Dark,
+    bg: "#1c1a18",
+    surface: "#252220",
+    surface_2: "#2e2a27",
+    text: "#e2dace",
+    muted: "#b6ab9c",
+    line: "#48423c",
+    accent: "#9cc5b9",
+    on_accent: "#1a2522",
+    accent_soft: "#2b3a36",
+    accent_ink: "#c4ded6",
+    soft: "#2a2724",
+    good: "#a8ce9a",
+    good_soft: "#25321f",
+    bad: "#e9a593",
+    bad_soft: "#3d2722",
+    gold: "#dcc07f",
+    gold_soft: "#383120",
+    sheet: "#3f3b36",
+};
+
 /// What the learner picked in Settings › Look.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
 pub enum Theme {
@@ -226,11 +284,26 @@ pub enum Theme {
     /// True black (AMOLED).
     Black,
     NightShift,
+    /// Study by day, Study dim when the device is dark.
+    SystemStudy,
+    /// Calm warm off-white for long reading sessions.
+    Study,
+    /// Calm warm graphite for studying in a dark room.
+    StudyDim,
 }
 
 impl Theme {
-    pub const ALL: [Self; 6] =
-        [Self::System, Self::SystemBlack, Self::Paper, Self::Night, Self::Black, Self::NightShift];
+    pub const ALL: [Self; 9] = [
+        Self::System,
+        Self::SystemBlack,
+        Self::SystemStudy,
+        Self::Paper,
+        Self::Night,
+        Self::Black,
+        Self::NightShift,
+        Self::Study,
+        Self::StudyDim,
+    ];
 
     /// Stored value.
     pub fn as_str(self) -> &'static str {
@@ -241,6 +314,9 @@ impl Theme {
             Self::Night => "night",
             Self::Black => "black",
             Self::NightShift => "night-shift",
+            Self::SystemStudy => "system-study",
+            Self::Study => "study",
+            Self::StudyDim => "study-dim",
         }
     }
 
@@ -252,11 +328,13 @@ impl Theme {
     /// device; see [`Theme::day_and_night`]).
     pub fn palette(self) -> Option<&'static Palette> {
         match self {
-            Self::System | Self::SystemBlack => None,
+            Self::System | Self::SystemBlack | Self::SystemStudy => None,
             Self::Paper => Some(&PAPER),
             Self::Night => Some(&NIGHT),
             Self::Black => Some(&BLACK),
             Self::NightShift => Some(&NIGHT_SHIFT),
+            Self::Study => Some(&STUDY),
+            Self::StudyDim => Some(&STUDY_DIM),
         }
     }
 
@@ -266,6 +344,7 @@ impl Theme {
         match self {
             Self::System => (&PAPER, &NIGHT),
             Self::SystemBlack => (&PAPER, &BLACK),
+            Self::SystemStudy => (&STUDY, &STUDY_DIM),
             fixed => {
                 let p = fixed.palette().unwrap_or(&PAPER);
                 (p, p)
@@ -328,8 +407,14 @@ fn rgb(hex: &str) -> (u8, u8, u8) {
 mod tests {
     use super::*;
 
-    const ALL: [(&str, &Palette); 4] =
-        [("paper", &PAPER), ("night", &NIGHT), ("black", &BLACK), ("night-shift", &NIGHT_SHIFT)];
+    const ALL: [(&str, &Palette); 6] = [
+        ("paper", &PAPER),
+        ("night", &NIGHT),
+        ("black", &BLACK),
+        ("night-shift", &NIGHT_SHIFT),
+        ("study", &STUDY),
+        ("study-dim", &STUDY_DIM),
+    ];
 
     #[test]
     fn every_theme_meets_wcag_aa_for_text() {
@@ -447,6 +532,23 @@ mod tests {
         for token in ["--on-accent:", "--accent-ink:", "--soft:", "--gold:", "--gold-soft:"] {
             assert!(css.contains(token), "{token} missing from {css}");
         }
+    }
+
+    #[test]
+    fn study_themes_are_calm() {
+        // Readable (AA is checked above) but never the harshest pair: no
+        // pure white page or pure black text by day, no pure black page or
+        // pure white text at night, and body text kept below the 21:1 glare
+        // of black on white.
+        for p in [&STUDY, &STUDY_DIM] {
+            assert!(!["#ffffff", "#000000"].contains(&p.bg), "{}", p.bg);
+            assert!(!["#ffffff", "#000000"].contains(&p.surface), "{}", p.surface);
+            assert!(!["#ffffff", "#000000"].contains(&p.text), "{}", p.text);
+            let c = contrast(p.text, p.surface);
+            assert!((7.0..=15.0).contains(&c), "study text contrast {c:.1}:1");
+        }
+        assert_eq!(Theme::SystemStudy.day_and_night(), (&STUDY, &STUDY_DIM));
+        assert!(Theme::SystemStudy.css().contains("prefers-color-scheme: dark){:root{--bg:#1c1a18;"));
     }
 
     #[test]

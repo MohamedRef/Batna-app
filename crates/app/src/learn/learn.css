@@ -45,21 +45,37 @@
 }
 
 /* ---------- text ---------- */
-.ls-rich { display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95; }
+/* Colour follows importance (the signaling principle: cues on the few
+   relevant words help learning, Mayer). Four steps, strongest first:
+   1. ==key== marker: a warm highlighter band, 1-3 per step;
+   2. step heading and **terms**: full text colour, bold;
+   3. body text: the text colour softened a notch toward the card, so long
+      paragraphs glare less and the bold terms stand out from them;
+   4. source chips and meta: muted. */
+.ls-rich {
+  display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95;
+  color: color-mix(in oklab, var(--text) 84%, var(--surface));
+}
+.ls-h, .ls-q { color: var(--text); }
 .ls-rich p { margin: 0; }
 .ls-rich ul, .ls-rich ol { margin: 0; padding-inline-start: 1.4rem; display: grid; gap: var(--sp-2); }
 .ls-rich li::marker { color: var(--accent); }
 /* **bold** is a term, set in weight only; ==key== is one of the step's few
    key terms and gets the marker (docs/LESSONS.md). */
-.ls-rich strong, .ls-mn-hook strong { font-weight: 700; }
+.ls-rich strong, .ls-mn-hook strong { font-weight: 700; color: var(--text); }
 /* Every lesson text, Line ones too (options, cards, cells, recap): never
    the browser's yellow, which is unreadable at night (#321). */
 mark {
-  color: inherit;
+  color: var(--text);
   font-weight: 700;
-  background: linear-gradient(transparent 55%, var(--accent-soft) 55%);
-  padding-inline: 2px;
-  border-radius: 2px;
+  /* A real highlighter: warm, under the lower part of the letters, in every
+     theme (gold is never blue, so Night shift stays blue-free). The accent
+     blue was nearly invisible on the dark themes. */
+  background: linear-gradient(transparent 38%, color-mix(in srgb, var(--gold) 30%, transparent) 38%);
+  padding-inline: 3px;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .ls-rich bdi { font-size: 0.97em; }
 /* An English run inside Arabic is one LTR box (learn/text.rs `runs`): split
@@ -200,7 +216,9 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-count { flex: none; font-variant-numeric: tabular-nums; }
 /* Name the lesson and keep its English lecture label separate. */
 .ls-context { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
-.ls-context-title { margin: 0; font-size: var(--fs-lg); font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+/* The lesson name is context, the step heading below is what to read: the
+   name is smaller and muted so the eye lands on the step first. */
+.ls-context-title { margin: 0; font-size: var(--fs-md); font-weight: 600; color: var(--muted); line-height: 1.5; overflow-wrap: anywhere; }
 .ls-context-lecture { margin: 0; overflow-wrap: anywhere; }
 .ls-stage {
   gap: var(--sp-3);
@@ -219,57 +237,49 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 @keyframes ls-in-back { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
 .ls-player[data-dir="back"] .ls-stage { animation-name: ls-in-back; }
 
-/* On a genuinely wide desktop, keep the lesson name and context in a
-   dedicated sticky column and the active step in the reading pane.
-   Tablet landscape, compact Mac windows and the book/pages view retain the
-   existing single-column experience. Hidden steps stay mounted but out of
-   the grid, preserving answer state and Back navigation. */
-@media (min-width: 1200px) and (min-height: 740px) {
-  .ls-player[data-view="steps"] {
-    max-inline-size: none;
-    display: grid;
-    grid-template-columns: minmax(15rem, min(28%, 20rem)) minmax(0, 1fr);
-    grid-template-rows: auto minmax(min-content, 1fr) auto;
-    align-items: start;
-    column-gap: clamp(var(--sp-6), 2.8vw, 3rem);
+/* Wider windows (tablet landscape, every Mac window): one calm reading
+   column, built on reading research (docs/LESSONS.md § Reading layout).
+   - Measure: about 60-70 characters a line. Lines of ~55-75 characters
+     gave the best comprehension on screen (Dyson & Haselgrove 2001;
+     Bringhurst's 66); the old 1600px pane gave over 120.
+   - One fixation point: the column is centred and its top sits at the same
+     height on every step, so the eye returns to the same spot instead of
+     hunting (Arabic readers scan a mirrored F: line starts and the top get
+     the most attention, NN/g eyetracking).
+   - Controls close to the content (Fitts's law): Back/Next follow the card
+     instead of waiting at the bottom of a tall window. They still stick to
+     the bottom while a long step scrolls.
+   - The lesson name is quiet context above the card, not a competing card.
+   Hidden steps stay mounted but display: none (answer state, Back). */
+@media (min-width: 840px) {
+  .ls-player {
+    max-inline-size: 40rem;
+    gap: var(--sp-3);
   }
-  .ls-player[data-view="steps"] > .ls-bar {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    border-block-end: 1px solid var(--line-soft, var(--line));
-    padding-block-end: var(--sp-3);
+  .ls-player > .ls-bar { order: -2; gap: var(--sp-3); padding-block: var(--sp-3); }
+  /* The fixed gap that puts the column's top in the upper third. */
+  .ls-player::before {
+    content: "";
+    order: -1;
+    flex: none;
+    block-size: clamp(0px, 5dvh, 3.5rem);
   }
-  .ls-player[data-view="steps"] > .ls-context {
-    grid-column: 1;
-    grid-row: 2;
-    position: sticky;
-    top: var(--sp-4);
-    padding: clamp(var(--sp-4), 1.8vw, var(--sp-6));
-    background: var(--surface);
-    border: 1px solid var(--line-soft, var(--line));
-    border-block-start: 3px solid var(--accent);
-    border-radius: var(--radius-card);
+  .ls-player > .ls-context { padding-inline: var(--sp-1); }
+  .ls-player > .ls-nav {
+    margin-block-start: 0;
+    padding-inline: var(--sp-1);
   }
-  .ls-player[data-view="steps"] > .ls-stage:not([hidden]) {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: center;
-    justify-self: stretch;
-    min-block-size: clamp(19rem, 38dvh, 34rem);
-    padding: clamp(var(--sp-4), 2vw, 2rem);
+  .ls-player[data-view="steps"] > .ls-stage {
+    min-block-size: clamp(14rem, 34dvh, 24rem);
+    padding: clamp(var(--sp-4), 2.2vw, 2.25rem);
   }
-  .ls-player[data-view="steps"] > .ls-nav {
-    grid-column: 2;
-    grid-row: 3;
-    align-self: end;
-    min-block-size: calc(var(--tap-lg) + 2 * var(--sp-3));
-    padding-inline: var(--sp-3);
-    margin-block-end: var(--sp-2);
-    background: var(--surface);
-    border: 1px solid var(--line-soft, var(--line));
-    border-radius: var(--radius-card);
-  }
-  .ls-player[data-view="steps"] .ls-rich { max-inline-size: 72ch; }
+  .ls-segs { gap: 4px; }
+}
+/* A big desk screen is read from further away: a notch larger type in a
+   column widened to keep the same ~70 characters a line. */
+@media (min-width: 1200px) {
+  .ls-player { max-inline-size: 44rem; }
+  .ls-player :where(.ls-rich) { font-size: 1.125rem; }
 }
 
 /* Focus: a lesson takes the whole phone screen. The app bar and the tab

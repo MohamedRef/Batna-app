@@ -944,13 +944,15 @@ mod snapshot_tests {
         use batna_core::review::{Grade, Origin, ReviewEvent};
         let store = Store::open_in_memory().unwrap();
         let empty = store.study_review_marker().unwrap();
-        let logged = store.append_review(ReviewEvent {
-            item_id: "hb.L01.001".into(),
-            grade: Grade::Good,
-            origin: Origin::Study,
-            at_ms: 100,
-            took_ms: 200,
-        }).unwrap();
+        let logged = store
+            .append_review(ReviewEvent {
+                item_id: "hb.L01.001".into(),
+                grade: Grade::Good,
+                origin: Origin::Study,
+                at_ms: 100,
+                took_ms: 200,
+            })
+            .unwrap();
         let after_answer = store.study_review_marker().unwrap();
         assert_ne!(empty, after_answer, "a committed answer invalidates the old queue");
         let reopened = Store::from_snapshot(&store.snapshot().unwrap().1).unwrap();

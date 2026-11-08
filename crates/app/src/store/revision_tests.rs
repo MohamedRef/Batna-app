@@ -55,12 +55,7 @@ fn revision_is_constant_time_to_read_and_changes_on_mutations() {
     let reopened = Store::from_snapshot(&store.snapshot().unwrap().1).unwrap();
     assert_eq!(reopened.study_review_marker().unwrap(), undone);
 
-    reopened
-        .conn
-        .lock()
-        .unwrap()
-        .execute("DELETE FROM review_events WHERE id = ?1", [&logged.id])
-        .unwrap();
+    reopened.conn.lock().unwrap().execute("DELETE FROM review_events WHERE id = ?1", [&logged.id]).unwrap();
     assert_ne!(reopened.study_review_marker().unwrap(), undone);
 }
 

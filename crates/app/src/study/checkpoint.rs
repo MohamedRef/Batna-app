@@ -30,7 +30,14 @@ pub(crate) fn use_restore() {
 fn load(backend: &StudyStoreHandle) -> Option<Session> {
     let db = crate::store::shared();
     let checkpoint = db.local_setting::<SessionCheckpoint>(KEY)?;
-    let marker = db.study_review_marker().ok()?;
+    // Old checkpoints stay recoverable after the revision-trigger migration:
+    // validate their *original* full-log marker once, then save v2 on the
+    // next transition. Never weaken validation to a count-only comparison.
+    let marker = if checkpoint.uses_legacy_review_marker() {
+        db.study_review_marker_legacy().ok()?
+    } else {
+        db.study_review_marker().ok()?
+    };
     let live = db.reviews().ok()?.into_iter().map(|entry| (entry.id, entry.event)).collect::<HashMap<_, _>>();
     let recovered =
         checkpoint.recover(&marker, &live, |id| super::is_playable(id) && !backend.0.borrow().is_hidden(id));

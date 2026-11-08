@@ -338,7 +338,7 @@ fn Stage(
     let course = batna_core::program::course_of(&seed).to_string();
     let has_abbr = use_hook(|| !crate::abbrsheet::entries(&texts, Some(&course)).is_empty());
     rsx! {
-        crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1, "data-course": "{course}",
+        crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", tabindex: "-1", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1, "data-course": "{course}",
             if try_done {
                 div { class: "ls-try-done",
                     p { class: "ls-kicker", {tx::TRY} }

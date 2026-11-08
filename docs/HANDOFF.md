@@ -8,25 +8,33 @@ last one stopped, with no other history. Read it top to bottom once, then
 secrets, deploys or the state of the work updates this file in the same PR
 (usually § Current state and § Log). See `AGENTS.md`.
 
-Last full refresh: 2026-11-05. Mac desktop continuation refreshed 2026-11-07, main at `f0b6a9e3` (1.0.0-alpha.3).
+Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base `main` at `367d9902` (1.0.0-alpha.3, no new release in this batch).
 
 ---
 
-## Mac desktop workflow plan, 2026-11-07 (current: `feat/mac-command-palette-20261107`)
+## Mac desktop workflow plan, refreshed 2026-11-08 (current: `fix/mac-keyboard-focus-continuity-20261108`)
 
 User directive: **code work first**. Native Mac interaction testing is deferred to the user; don't block feature implementation on manual macOS verification. Automated CI, layout regression checks, PR review, and conflict checks remain mandatory before merging. Leave interface-language work out of this batch. No alpha unless explicitly requested. Keep the PR-first, sequential merge discipline.
 
-Status on `main`: PR #739 (full-window desktop UI), PR #740 (Anki-like keyboard navigation), and PR #741 (resizable Mac panes + Focus Mode), and PR #742 (Today task-first layout) merged. Do not rebuild their already-working pieces.
+Status on `main`: PR #739 (full-window desktop UI), PR #740 (Anki-like keyboard navigation), and PR #741 (resizable Mac panes + Focus Mode), PR #742 (Today task-first layout), and PR #743 (offline Cmd+K command palette) merged. Do not rebuild their already-working pieces.
 
 Priority-ordered product backlog (not all implemented):
 1. **Merged PR #741:** resizable question/explanation panes on desktop pointer devices with keyboard-operable divider, a reset to default, device-local persistent width and safe small-window fallback; intentional Mac focus mode for running Study and Lesson, hiding the sidebar while keeping Back/end, lesson progress, and grade controls. Use existing layout CSS, `desk::Panes`, shared `Ui::update_prefs`, and the single app scroll container. Preserve study state when toggling.
 2. **Merged PR #742:** desktop task-first Today **layout** with the existing hero, due/new metrics, resume lesson, and library. The 1200px+ task column now gets 3/5 of the space instead of 2/5, the long task column follows the main app scroll, and the library stays a scrollable side reference. Do not rebuild its already-working data or review actions. New weak-topic insight stays a later separate item.
-3. **Current PR:** `⌘K` / `Ctrl+K` offline command palette, using the real content Library for **screen, lecture and lesson navigation**. Search from existing lecture/lesson ids and titles, rank exact/prefix matches, max 12 results, keyboard arrows/Enter/Escape, Tab focus trap, modal isolation and no network. Do not claim question/calc indexing yet; those should be linked to their existing product search interfaces only when concrete navigation/filters are supported.
+3. **Merged PR #743:** `⌘K` / `Ctrl+K` offline command palette, using the real content Library for **screen, lecture and lesson navigation**. Search from existing lecture/lesson ids and titles, rank exact/prefix matches, max 12 results, keyboard arrows/Enter/Escape, Tab focus trap, modal isolation and no network. Do not claim question/calc indexing yet; those should be linked to their existing product search interfaces only when concrete navigation/filters are supported.
 4. **Then:** extend the palette to question-bank/calculator destinations and Settings sections when their existing routing supports opening exact results; add weak-topic insight to Today without duplicating its existing study stats; configurable review shortcuts with collision detection (reserved macOS combos, input/IME safety, A–E and 1–4 compatibility); quicker review actions (mark, defer, show source) only after review-store behavior is specified and tested.
-5. **Later UX:** keyboard focus restoration after grading/switching steps, reduced UI jank on item transitions, readable very-wide typography, saved panel preferences and narrow-window behavior, consistent empty/loading states, shortcut discoverability/tooltips, accessible contrast and reduced motion.
-6. **Deferred manual checks by user:** actual WKWebView shortcuts, splitter dragging with mouse, both right-to-left panes and Mac window resizing, focus escape/restore and IME. Browser previews are **not** native Mac screenshots.
+5. **Current PR (2026-11-08):** restore focus **only** after keyboard/screen-reader activation of study reveal, grade, Undo, and lesson next/back; make the active card/step headings programmatically focusable; never steal focus from a typed clinical answer, pointer users, modal dialog or an unrelated screen. Keep Space/Enter and keyboard shortcuts from #740 intact. Add browser-level regression for dynamic focus transitions and failure/no-op cases.
+6. **Later UX:** reduced UI jank on item transitions, readable very-wide typography, saved panel preferences and narrow-window behavior, consistent empty/loading states, shortcut discoverability/tooltips, accessible contrast and reduced motion.
+7. **Deferred manual checks by user:** actual WKWebView shortcuts, splitter dragging with mouse, both right-to-left panes and Mac window resizing, focus escape/restore and IME. Browser previews are **not** native Mac screenshots.
 
 Keep these labels honest as PRs merge, refresh this section and a `changes/*.yaml` fragment in each PR. Prefer a single PR for related pane/focus work, then move to the next feature only after CI passes and merge succeeds.
+
+## Current branch: keyboard focus continuity (2026-11-08)
+
+- Base: `main` commit `367d9902`. No pending PRs at branch creation.
+- Real keyboard interactions: with the active Study item removed during grading, the browser can drop focus to the document, causing Tab order/assistive-tech context loss. Similarly, a lesson changes the `hidden` Stage rather than replacing the whole player. Scope focus restoration to those transitions.
+- Only restore on keyboard / screen-reader (zero-detail click), not on pointer clicks; cancel on pointer activity, modal, contenteditable, or active input. Keep updates in `crates/app/src/shortcuts/` with focused browser regression; no manual macOS QA is required to progress code.
+- Subsequent PR once merged: index real calculator destinations in `⌘K` using the existing calculator picker routing, then consider question-bank actions only if an exact, safe navigation path is implemented. Do not pretend search finds individual MCQs without that route.
 
 ## Mac desktop UX follow-up (2026-11-07, PR #739)
 

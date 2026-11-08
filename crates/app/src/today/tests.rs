@@ -455,4 +455,3 @@ fn resume_button_returns_to_existing_study_without_queuing_a_new_start() {
     assert_eq!(screen(&t), Screen::Study);
     assert!(t.with(|| crate::study::START.peek().is_none()), "resume must not create a new session request");
 }
-

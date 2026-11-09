@@ -518,6 +518,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-09: the GitHub release page is written in Egyptian Arabic only (`scripts/release-notes.sh`); a `changes/` line without Arabic text is left out (Mohamed).
 - 2026-11-09: the book-page / abbreviations sheet floats as a movable, resizable card by the tapped chip on tablet and Mac; phones keep the bottom sheet (#773).
 - 2026-11-09: review of the Mac/phone/Study batch (#739–#765): quick-search text moved to `i18n/palette.rs`, the search folds Arabic spelling like the calculator search, the Study perf diagnostics run on main only (PRs stay fast).
 - 2026-11-09: handoff reorganised (per-PR journal folded into § 10, open work as a table) and checked against main; README brought up to date.

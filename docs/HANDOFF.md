@@ -354,6 +354,16 @@ Add a bullet here when a PR adds something a later agent must know.
   the card (sticky while a long step scrolls). Phones keep the bottom nav.
   `crates/app/src/learn/learn.css`; `screens-browser.cjs` asserts it at
   840/1280/1600px. Research basis: [LESSONS.md](LESSONS.md) § Reading layout.
+- **Reading settings** («Aa» in the lesson bar, and Settings › Look; adapted
+  from Steps-app main: `crates/app/src/learn/reading.rs`): text size
+  (×0.9/1/1.15/1.3 on step text only, the bar and buttons stay), line spacing
+  (×0.86/1/1.2) and line width (Narrow 34/37rem, Book = the focus column
+  40/44rem, Wide 52/60rem; 840px and up only, phones are always full width).
+  Device-local in `device-prefs.txt` (`read_size`, `read_spacing`,
+  `read_width`; older files load the defaults), never synced. The popover sits
+  over the step so the text never jumps; while open, «Aa» is the Escape/Back
+  target. `data-read-*` on `.ls-player`, rules in `learn/reading.css`; tests
+  `reading_choices_restyle_the_lesson_and_close_before_the_lesson`.
 - **Text by importance**: `==key==` is a pill in `--mark`/`--mark-ink`, true
   yellow `#ffd43b` on Paper/Night/Black/Night shift (Mohamed's pick; he
   rejected a gold highlighter band), teal on Study themes; test
@@ -519,7 +529,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 94 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
 | Content | 9 courses, 132 lectures, 132 lesson files; `res` L01–L11 written. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
@@ -558,6 +568,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-09: lesson reading settings («Aa»: text size, line spacing, line width per device), ported from Steps-app.
 - 2026-11-09: notes (synced `notes` table), weak-fact marks and go to page (Ctrl/⌘+G, per-course books) ported from Steps-app (§ 10 Notes, weak-fact marks, go to page).
 - 2026-11-09: from Steps-app: confidence and error reason on answers (migration 5), sure misses first in the mistakes log with a 2–7 day retest, and a catch-up plan for a review backlog (§ 10 Study signals).
 - 2026-11-09: a release with no new `changes/` lines says «تصليحات صغيرة وتنضيف.» on its page instead of repeating the previous release's lines (`scripts/release-notes.sh` reads the feed's newest history entry only when it is this version's).

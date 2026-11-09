@@ -74,13 +74,21 @@ fn look_shows_the_device_s_own_choices_as_checked() {
     let case = Case { theme: Theme::NightShift, appearance: Appearance::Glossy, size: TextSize::Larger };
     let html = render(case, Section::Look);
     assert!(html.contains("settings-window") && html.contains("data-drilled=\"true\""), "{html}");
-    // Every theme, appearance and size; exactly one of each checked.
-    // (The sheet's CSS names [role="radio"] too, so count the buttons.)
+    // Every theme, appearance and size, and the three lesson reading rows;
+    // exactly one of each checked. (The sheet's CSS names [role="radio"]
+    // too, so count the buttons.)
+    use crate::prefs::{ReadSize, ReadSpacing, ReadWidth};
+    let reading = ReadSize::ALL.len() + ReadSpacing::ALL.len() + ReadWidth::ALL.len();
     assert_eq!(
-        html.matches("role=\"radio\" aria-checked=").count(),
-        Theme::ALL.len() + Appearance::ALL.len() + TextSize::ALL.len()
+        html.matches("role=\"radio\" aria-checked=").count()
+            + html.matches("role=\"radio\" data-size=").count(),
+        Theme::ALL.len() + Appearance::ALL.len() + TextSize::ALL.len() + reading
     );
-    assert_eq!(html.matches("role=\"radio\" aria-checked=\"true\"").count(), 3);
+    assert_eq!(
+        html.matches("role=\"radio\" aria-checked=\"true\"").count()
+            + html.matches("aria-checked=\"true\" aria-label=").count(),
+        6
+    );
     let checked = |label: &str| {
         let at = html.find(label).unwrap();
         html[..at].rfind("aria-checked=").map(|i| &html[i..i + 19]) == Some("aria-checked=\"true\"")
@@ -88,7 +96,7 @@ fn look_shows_the_device_s_own_choices_as_checked() {
     assert!(checked(tx::THEME_SHIFT) && checked(tx::APPEARANCE_GLOSSY) && checked(tx::TEXT_LARGER));
     assert!(!checked(tx::THEME_PAPER));
     // Choices here stay on this device, and the sample shows the term in <bdi>.
-    assert_eq!(html.matches(tx::THIS_DEVICE).count(), 3);
+    assert_eq!(html.matches(tx::THIS_DEVICE).count(), 4);
     assert!(html.contains(&format!("<bdi>{}</bdi>", tx::TEXT_SAMPLE_TERM)));
     assert!(html.contains("--sw-a:") && html.contains("data-swatch=\"liquid-glass\""), "{html}");
 }

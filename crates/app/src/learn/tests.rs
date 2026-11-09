@@ -826,3 +826,65 @@ fn the_view_setting_switches_between_steps_and_pages() {
     d.click(|e| e.attr("role") == Some("radio") && e.text.contains(tx::VIEW_STEPS));
     assert_eq!(d.read(|| *VIEW.peek()), View::Steps);
 }
+
+#[test]
+fn reading_choices_restyle_the_lesson_and_close_before_the_lesson() {
+    // Adapted from Steps-app main: crates/app/src/render_tests/learn.rs.
+    use crate::i18n::learn as tl;
+    let (l, _) = claim(|l, k, _| k == 0 && reading(&l.steps[0].body));
+    let n = l.steps.len();
+    let mut d = open(l, 0);
+    // The book's defaults, on the player the lesson CSS keys on.
+    let html = d.html();
+    for attr in ["data-read-size=\"m\"", "data-read-spacing=\"normal\"", "data-read-width=\"book\""] {
+        assert!(html.contains(attr), "{attr}");
+    }
+    // Closed: × is the Escape target. Open: «Aa» is, so Escape and Android
+    // Back close the popover before they close the lesson.
+    assert!(!html.contains(tl::READ_SPACING));
+    assert_eq!(html.matches("aria-keyshortcuts=\"Escape\"").count(), 1);
+    d.click(is("ls-read-aa"));
+    let html = d.html();
+    assert!(html.contains(tl::READ_SPACING) && html.contains(tl::READ_SAMPLE[1]), "{html}");
+    assert!(html.contains("aria-expanded=\"true\""), "the button says the popover is open");
+    assert_eq!(html.matches("aria-keyshortcuts=\"Escape\"").count(), 1, "only the popover answers Escape");
+    assert!(
+        d.find(|e| e.has_class("ls-read-aa")).first().is_some_and(|e| e.attr("data-back") == Some("true"))
+    );
+
+    d.click(|e| e.attr("aria-label") == Some(tl::READ_SIZE_LARGER));
+    d.click(|e| e.tag == "button" && e.text == tl::READ_SPACING_AIRY);
+    d.click(|e| e.tag == "button" && e.text == tl::READ_WIDTH_NARROW);
+    let player = d.find(is("ls-player")).first().cloned().expect("player");
+    assert_eq!(player.attr("data-read-size"), Some("xl"));
+    assert_eq!(player.attr("data-read-spacing"), Some("airy"));
+    assert_eq!(player.attr("data-read-width"), Some("narrow"));
+    // The preview follows the choice too.
+    assert!(d.find(is("ls-read-preview")).first().is_some_and(|e| e.attr("data-read-size") == Some("xl")));
+
+    // Done closes it; the lesson is where it was.
+    d.click(is("ls-read-done"));
+    assert!(!d.html().contains(tl::READ_SPACING));
+    assert_eq!(count(&d), format!("1/{n}"));
+}
+
+#[test]
+fn reading_css_scales_the_step_text_and_moves_the_reading_column() {
+    let learn = include_str!("learn.css");
+    for want in [
+        "font-size: calc(1.05rem * var(--ls-scale, 1)); line-height: calc(1.95 * var(--ls-space, 1));",
+        "max-inline-size: var(--ls-one, 40rem);",
+        "max-inline-size: var(--ls-one-xl, 44rem);",
+    ] {
+        assert!(learn.contains(want), "learn.css lacks {want}");
+    }
+    let reading = include_str!("reading.css");
+    for want in [
+        "[data-read-size=\"xl\"] { --ls-scale: 1.3; }",
+        ".ls-player[data-read-width=\"narrow\"]",
+        ".ls-player[data-read-width=\"wide\"]",
+        ".ls-read-pop {",
+    ] {
+        assert!(reading.contains(want), "reading.css lacks {want}");
+    }
+}

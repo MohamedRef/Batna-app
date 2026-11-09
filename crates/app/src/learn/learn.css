@@ -21,7 +21,7 @@
   font-size: var(--fs-sm);
   font-weight: 700;
 }
-.ls-h { font-size: var(--fs-lg); margin: 0 0 var(--sp-3); line-height: 1.4; }
+.ls-h { font-size: calc(var(--fs-lg) * var(--ls-scale, 1)); margin: 0 0 var(--sp-3); line-height: 1.4; }
 .ls-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
 .ls-verdict {
   font-weight: 700;
@@ -53,7 +53,7 @@
       paragraphs glare less and the bold terms stand out from them;
    4. source chips and meta: muted. */
 .ls-rich {
-  display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95;
+  display: flex; flex-direction: column; gap: var(--sp-3); font-size: calc(1.05rem * var(--ls-scale, 1)); line-height: calc(1.95 * var(--ls-space, 1));
   color: color-mix(in oklab, var(--text) 84%, var(--surface));
 }
 .ls-h, .ls-q { color: var(--text); }
@@ -254,7 +254,8 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
    Hidden steps stay mounted but display: none (answer state, Back). */
 @media (min-width: 840px) {
   .ls-player {
-    max-inline-size: 40rem;
+    /* --ls-one: the line width he picks (learn/reading.rs). */
+    max-inline-size: var(--ls-one, 40rem);
     gap: var(--sp-3);
   }
   .ls-player > .ls-bar { order: -2; gap: var(--sp-3); padding-block: var(--sp-3); }
@@ -279,8 +280,8 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 /* A big desk screen is read from further away: a notch larger type in a
    column widened to keep the same ~70 characters a line. */
 @media (min-width: 1200px) {
-  .ls-player { max-inline-size: 44rem; }
-  .ls-player :where(.ls-rich) { font-size: 1.125rem; }
+  .ls-player { max-inline-size: var(--ls-one-xl, 44rem); }
+  .ls-player :where(.ls-rich) { font-size: calc(1.125rem * var(--ls-scale, 1)); }
 }
 
 /* Focus: a lesson takes the whole phone screen. The app bar and the tab
@@ -515,7 +516,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   gap: var(--sp-2);
 }
 .ls-reveal > *, .ls-check > *, .ls-mnemonic > * { margin: 0; }
-.ls-q { font-size: 1.25rem; font-weight: 600; line-height: 1.6; }
+.ls-q { font-size: calc(1.25rem * var(--ls-scale, 1)); font-weight: 600; line-height: calc(1.6 * var(--ls-space, 1)); }
 .ls-q .ls-rich { font-size: inherit; }
 .ls-answer {
   border-inline-start: 4px solid var(--good);
@@ -588,7 +589,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   background: var(--accent-soft);
   border: 1px solid var(--line-soft, var(--line));
 }
-.ls-why-box .ls-rich { font-size: var(--fs-md); }
+.ls-why-box .ls-rich { font-size: calc(var(--fs-md) * var(--ls-scale, 1)); }
 
 /* tiles: order, match, sort */
 .ls-pool { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
@@ -774,7 +775,7 @@ button.ls-slot:hover { border-color: var(--accent); }
 
 /* table */
 .ls-table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
-.ls-table table { border-collapse: collapse; inline-size: 100%; font-size: var(--fs-sm); }
+.ls-table table { border-collapse: collapse; inline-size: 100%; font-size: calc(var(--fs-sm) * var(--ls-scale, 1)); }
 .ls-table th, .ls-table td { padding: var(--sp-2) var(--sp-3); border-block-end: 1px solid var(--line); text-align: start; vertical-align: top; }
 .ls-table thead th { background: var(--accent-soft); color: var(--accent); }
 .ls-table tbody th { font-weight: 700; background: var(--bg); }

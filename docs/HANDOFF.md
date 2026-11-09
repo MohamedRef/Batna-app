@@ -300,7 +300,7 @@ quote cap there is outdated), course briefs in [courses/](courses/).
 ## 8. Sources outside git (important)
 
 The book PDFs, their extracted page text and page images are copyrighted and
-**must never be committed**. They lived in the Claude project's shared folder
+**must never be committed**. They lived in the old project's shared folder
 `/mnt/project-files/medstudy/` (about 880 MB):
 
 | Path (under `medstudy/`) | What |

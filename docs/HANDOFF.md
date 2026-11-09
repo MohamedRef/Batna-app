@@ -416,6 +416,15 @@ Add a bullet here when a PR adds something a later agent must know.
 - **Not yet verified natively**: Android process death and OS kills, macOS
   relaunch, S24 Ultra lock/unlock, keyboard and Back with a running session.
 
+### Study signals from Steps-app (2026-11-09)
+
+Ported from Mohamed's `MohamedRef/Steps-app` (a Batna fork), credited in each file's header.
+
+- **Confidence and error reason** (`batna_core::review::{Confidence, ErrorReason}`, `crates/app/src/metacog/`): an optional sure / unsure / guess tap before an answer shows (study and bank), and an optional reason chip after a miss (knowledge, misread, second-guessed, reasoning, timing). In study a reason chip also rates Again; in tutor mode it replaces the logged answer (retract, then log again at its first time). Both are optional fields on the append-only `ReviewEvent` and two nullable columns (store migration 5); events from older builds read without them, and an older build keeps the answer and drops the tags. The Worker stores payloads as JSON, so it needs no migration.
+- **Mistakes log**: misses he was sure of come first and are marked «كنت متأكد»; chips count and filter by reason (`stats::mistake_reasons`, `mistakes_with_reason`).
+- **Retest sure misses** (`stats::retest_due`): misses he was sure of, 2–7 days old and not answered right since, come back from the mistakes view (cards as a study session, MCQs as a tutor set).
+- **Catch-up plan** (`crates/app/src/catchup/`): when far more reviews are due than he usually does in a day, Today offers a plan that spreads them over 2–7 days in minutes, most overdue first, optionally pausing new items. A synced setting; `study/planning.rs` cuts the session's due list to today's share.
+
 ### Info sheet (book page, abbreviations)
 
 - **Floating card on tablet and Mac** (#773, Mohamed 2026-11-09): docked at the window's foot, a drag up made the «ص N» / abbreviations sheet a very tall strip. From 600dp wide and 480dp tall, `crate::sheet::Sheet` is a floating card (`.bsheet.float`, end of `assets/sheet.css`), placed by `assets/sheet.js` under the chip that opened it, else above, else on the side with more room (content scrolls), else centred; height capped at min(36rem, 76% of the window) until sized by hand.
@@ -479,7 +488,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, own lesson highlights, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, own lesson highlights, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
 | Content | 9 courses, 132 lectures, 132 lesson files; `res` L01–L11 written. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
@@ -518,6 +527,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-09: from Steps-app: confidence and error reason on answers (migration 5), sure misses first in the mistakes log with a 2–7 day retest, and a catch-up plan for a review backlog (§ 10 Study signals).
 - 2026-11-09: a release with no new `changes/` lines says «تصليحات صغيرة وتنضيف.» on its page instead of repeating the previous release's lines (`scripts/release-notes.sh` reads the feed's newest history entry only when it is this version's).
 - 2026-11-09: the GitHub release page is written in Egyptian Arabic only (`scripts/release-notes.sh`); a `changes/` line without Arabic text is left out (Mohamed).
 - 2026-11-09: the book-page / abbreviations sheet floats as a movable, resizable card by the tapped chip on tablet and Mac; phones keep the bottom sheet (#773).

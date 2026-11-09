@@ -65,7 +65,7 @@ mod tests {
     }
 
     fn event(id: &str, grade: Grade) -> ReviewEvent {
-        ReviewEvent { item_id: id.into(), grade, origin: Origin::Study, at_ms: 42, took_ms: 20 }
+        ReviewEvent::new(id, grade, Origin::Study, 42, 20)
     }
 
     #[test]

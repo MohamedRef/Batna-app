@@ -20,6 +20,8 @@ fn profile_study_checkpoint_marker() {
     for count in [100_usize, 1_000, 3_000] {
         for n in inserted..count {
             db.append_review(ReviewEvent {
+                confidence: None,
+                reason: None,
                 item_id: format!("hb.L01.profile.{}", n % 64),
                 grade: Grade::Good,
                 origin: Origin::Study,

@@ -102,6 +102,8 @@ mod tests {
         // Grading saves the review first, then its corresponding checkpoint.
         let logged = db
             .append_review(ReviewEvent {
+                confidence: None,
+                reason: None,
                 item_id: card.id.clone(),
                 grade: Grade::Again,
                 origin: Origin::Study,
@@ -146,6 +148,8 @@ mod tests {
         let session = Session::new(vec![planned(&card.id)]);
         save_running(&session);
         db.append_review(ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: card.id.clone(),
             grade: Grade::Good,
             origin: Origin::Study,

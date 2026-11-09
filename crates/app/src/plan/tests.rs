@@ -28,6 +28,8 @@ fn data(n: usize) -> StudyData {
     let mut events = Vec::new();
     for (i, item) in lectures[0].items.iter().take(4).enumerate() {
         events.push(ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: item.id.clone(),
             grade: Grade::Good,
             origin: Origin::Review,

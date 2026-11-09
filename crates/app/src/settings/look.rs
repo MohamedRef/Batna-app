@@ -118,5 +118,6 @@ pub fn LookSection() -> Element {
             }
             p { class: "text-sample", {tx::TEXT_SAMPLE_AR} " " bdi { {tx::TEXT_SAMPLE_TERM} } "؟" }
         }
+        crate::learn::reading::ReadingSection {}
     }
 }

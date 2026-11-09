@@ -8,7 +8,7 @@ mod picker;
 mod render_tests;
 
 pub use picker::{Calculators, reload};
-pub(crate) use picker::{request_open, search_for_palette};
+pub(crate) use picker::{fold, request_open, search_for_palette};
 
 use std::collections::BTreeMap;
 use std::sync::OnceLock;

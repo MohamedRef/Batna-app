@@ -5,6 +5,7 @@
 use dioxus::prelude::*;
 
 use crate::content::Library;
+use crate::i18n::palette as tx;
 use crate::settings::{Section, SettingsNav};
 use crate::{Screen, Ui};
 
@@ -40,10 +41,12 @@ struct Hit {
     destination: Destination,
 }
 
+/// Every typed word must appear. Both sides go through the calculator
+/// search's Arabic folding, so hamza forms, ة/ه, ى/ي, tashkeel and Arabic
+/// digits don't hide a lecture or a lesson.
 fn matches_query(query: &str, words: &str) -> bool {
-    let haystack = words.to_lowercase();
-    let needle = query.to_lowercase();
-    needle.split_whitespace().all(|word| haystack.contains(word))
+    let haystack = crate::calc::fold(words);
+    crate::calc::fold(query).split_whitespace().all(|word| haystack.contains(word))
 }
 
 /// Deliberate "questions <lecture>" requests open that lecture's existing
@@ -68,7 +71,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             hits.push(Hit {
                 id: format!("screen-{ascii}"),
                 name: title,
-                subtitle: "قسم".into(),
+                subtitle: tx::KIND_SCREEN.into(),
                 destination: Destination::Screen(screen),
             });
         }
@@ -77,7 +80,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
         hits.push(Hit {
             id: "screen-settings".into(),
             name: Screen::Settings.label().into(),
-            subtitle: "إعدادات التطبيق".into(),
+            subtitle: tx::KIND_SETTINGS.into(),
             destination: Destination::Settings,
         });
     }
@@ -91,7 +94,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             hits.push(Hit {
                 id: format!("lecture-{}", lecture.id),
                 name: title.into(),
-                subtitle: format!("محاضرة · {context}"),
+                subtitle: tx::lecture(&context),
                 destination: Destination::Lecture(lecture.id.clone()),
             });
         }
@@ -102,7 +105,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             hits.push(Hit {
                 id: format!("lesson-{}", lesson.id),
                 name: lesson.title.clone(),
-                subtitle: format!("درس · {context}"),
+                subtitle: tx::lesson(&context),
                 destination: Destination::Lesson(lesson.id.clone()),
             });
         }
@@ -114,7 +117,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             hits.push(Hit {
                 id: format!("settings-{}", section.id()),
                 name: section.title().into(),
-                subtitle: "قسم من الإعدادات".into(),
+                subtitle: tx::KIND_SETTINGS_SECTION.into(),
                 destination: Destination::SettingsSection(section),
             });
         }
@@ -123,7 +126,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
         hits.push(Hit {
             id: format!("calc-{}", spec.id),
             name: spec.name.into(),
-            subtitle: format!("حاسبة · {}", crate::calc::area_label(spec.area)),
+            subtitle: tx::calculator(crate::calc::area_label(spec.area)),
             destination: Destination::Calculator(spec.id),
         });
     }
@@ -140,8 +143,8 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             if has_questions {
                 hits.push(Hit {
                     id: format!("bank-{}", lecture.id),
-                    name: format!("أسئلة · {title}"),
-                    subtitle: format!("تدريب المحاضرة · {context}"),
+                    name: tx::questions(title),
+                    subtitle: tx::practice(&context),
                     destination: Destination::BankLecture(lecture.id.clone()),
                 });
             }
@@ -205,8 +208,8 @@ pub fn MobileSearchButton() -> Element {
         button {
             r#type: "button",
             class: "icon-button topbar-search",
-            "aria-label": "بحث سريع",
-            title: "بحث سريع",
+            "aria-label": tx::OPEN,
+            title: tx::OPEN,
             onclick: move |_| open_palette(true),
             {crate::icons::search()}
         }
@@ -239,11 +242,11 @@ pub fn Palette() -> Element {
                 document::eval("window.__batnaPaletteOpener = document.activeElement; document.querySelector('.palette-search')?.focus();");
             },
             div { class: "command-palette-head",
-                h2 { id: "command-palette-title", "الانتقال السريع" }
+                h2 { id: "command-palette-title", {tx::TITLE} }
                 button {
                     r#type: "button",
                     class: "icon-button",
-                    "aria-label": "إغلاق البحث السريع",
+                    "aria-label": tx::CLOSE,
                     "data-back": "true",
                     "aria-keyshortcuts": "Escape",
                     onclick: move |_| dismiss(),
@@ -254,8 +257,8 @@ pub fn Palette() -> Element {
                 input {
                     class: "command-search palette-search",
                     r#type: "search",
-                    "aria-label": "ابحث عن قسم أو محاضرة أو درس أو حاسبة أو إعدادات أو أسئلة",
-                    placeholder: "قسم، درس، حاسبة، إعدادات، أو questions واسم المحاضرة…",
+                    "aria-label": tx::FIELD,
+                    placeholder: tx::PLACEHOLDER,
                     autocomplete: "off",
                     autofocus: true,
                     value: "{query}",
@@ -263,9 +266,9 @@ pub fn Palette() -> Element {
                 }
                 kbd { "⌘K" }
             }
-            nav { class: "command-results", aria_label: "نتائج البحث السريع",
+            nav { class: "command-results", aria_label: tx::RESULTS,
                 if results.is_empty() {
-                    p { class: "command-empty", role: "status", "مفيش نتائج مطابقة." }
+                    p { class: "command-empty", role: "status", {tx::EMPTY} }
                 }
                 for hit in results {
                     button {
@@ -281,7 +284,7 @@ pub fn Palette() -> Element {
                     }
                 }
             }
-            p { class: "command-palette-hint", "↑ ↓ للتنقل · Enter للفتح · Esc للإغلاق" }
+            p { class: "command-palette-hint", {tx::HINT} }
         }
     }
 }
@@ -297,8 +300,9 @@ mod tests {
             rsx! { MobileSearchButton {} }
         }
         let mut dom = crate::tap_dom::TestDom::of(app);
-        assert!(dom.html().contains("aria-label=\"بحث سريع\""));
-        dom.click("aria-label=\"بحث سريع\"");
+        let label = format!("aria-label=\"{}\"", tx::OPEN);
+        assert!(dom.html().contains(&label));
+        dom.click(&label);
         dom.with(|| {
             assert!(*PALETTE_OPEN.peek(), "touch opens the same Cmd/Ctrl+K dialog");
             open_palette(false);
@@ -369,5 +373,13 @@ mod tests {
     fn matches_all_words_in_any_case() {
         assert!(matches_query("Heart Failure", "Heart failure notes"));
         assert!(!matches_query("heart renal", "Heart failure notes"));
+    }
+
+    #[test]
+    fn arabic_spelling_variants_still_match() {
+        assert!(matches_query("الاستسقاء", "الإستسقاء والكبد"));
+        assert!(matches_query("كلي", "أمراض الكُلى"));
+        assert!(matches_query("محاضره ٣", "محاضرة 3"));
+        assert!(!matches_query("قلب", "أمراض الكُلى"));
     }
 }

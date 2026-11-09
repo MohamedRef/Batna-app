@@ -98,7 +98,7 @@ fn fallback(recent: &[&'static str], favourites: &[&'static str]) -> &'static st
 
 /// Text folded for search: lower case, Arabic without tashkeel or tatweel,
 /// one alef, ة as ه, ى and ئ as ي, ؤ as و, Arabic-Indic digits as ASCII.
-fn fold(s: &str) -> String {
+pub(crate) fn fold(s: &str) -> String {
     s.chars()
         .filter_map(|c| match c {
             '\u{064B}'..='\u{065F}' | '\u{0670}' | '\u{0640}' => None,

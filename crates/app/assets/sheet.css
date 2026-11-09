@@ -103,7 +103,9 @@
    rounded, next to the chip that opened it (below it, else above it, else
    in the middle), never taller than --float-h (the room on that side,
    capped at 36rem / 76% of the window). sheet.js sets its place in
-   --float-x (from the inline start) / --float-y; its heading row moves it. Its content scrolls. */
+   --float-x (from the inline start) / --float-y; its heading row moves it
+   and its edges and corners (.bsheet-rz) size it to --float-w / --float-hh
+   (.resized, remembered). Its content scrolls. */
 .bsheet.float,
 .bsheet.float.sized {
   --float-h: min(36rem, 76dvh);
@@ -141,3 +143,45 @@
   .bsheet.float.closing { transition: transform 130ms ease-in, opacity 130ms ease-in; transform: scale(0.96); opacity: 0; }
 }
 @keyframes bsheet-pop { from { transform: scale(0.94); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Sized by hand: exactly the size he left it, inside the window. */
+.bsheet.float.resized {
+  inline-size: min(var(--float-w), calc(100vw - 2 * var(--sp-3)));
+  block-size: min(var(--float-hh), calc(100dvh - 2 * var(--sp-3)));
+  max-block-size: none;
+}
+.bsheet.float.resized .bsheet-body { flex: 1 1 auto; }
+/* Sizing handles: invisible strips on the edges, squares on the corners;
+   a phone sheet has none. */
+.bsheet-rz { display: none; }
+.bsheet.float .bsheet-rz {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  touch-action: none;
+}
+.bsheet.float .bsheet-rz:is([data-rz="bs"], [data-rz="be"]) { inset-inline: 1rem; block-size: 0.6rem; cursor: ns-resize; }
+.bsheet.float .bsheet-rz:is([data-rz="is"], [data-rz="ie"]) { inset-block: 1rem; inline-size: 0.6rem; cursor: ew-resize; }
+.bsheet.float .bsheet-rz[data-rz^="bs"] { inset-block-start: -0.3rem; }
+.bsheet.float .bsheet-rz[data-rz^="be"] { inset-block-end: -0.3rem; }
+.bsheet.float .bsheet-rz:is([data-rz="is"], [data-rz$="-is"]) { inset-inline-start: -0.3rem; }
+.bsheet.float .bsheet-rz:is([data-rz="ie"], [data-rz$="-ie"]) { inset-inline-end: -0.3rem; }
+.bsheet.float .bsheet-rz[data-rz*="-"] { inline-size: 1.6rem; block-size: 1.6rem; }
+.bsheet.float .bsheet-rz:is([data-rz="bs-is"], [data-rz="be-ie"]) { cursor: nwse-resize; }
+.bsheet.float .bsheet-rz:is([data-rz="bs-ie"], [data-rz="be-is"]) { cursor: nesw-resize; }
+[dir="rtl"] .bsheet.float .bsheet-rz:is([data-rz="bs-is"], [data-rz="be-ie"]) { cursor: nesw-resize; }
+[dir="rtl"] .bsheet.float .bsheet-rz:is([data-rz="bs-ie"], [data-rz="be-is"]) { cursor: nwse-resize; }
+/* A visible grip in the corner at the end of the card's foot, so he can see
+   it sizes. */
+.bsheet.float .bsheet-rz[data-rz="be-ie"]::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0.95rem;
+  inset-inline-end: 0.95rem;
+  inline-size: 0.55rem;
+  block-size: 0.55rem;
+  border-block-end: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  border-inline-end: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  border-end-end-radius: 0.2rem;
+}
+.bsheet.float.sizing, .bsheet.float.sizing * { -webkit-user-select: none; user-select: none; }

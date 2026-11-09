@@ -2,10 +2,11 @@
    from kabar-app main: crates/app/assets/sheet.css). A raised layer in its
    own colour (--sheet, a tinted surface tested per theme) with an accent
    hairline and a long shadow, so it never reads as one more card on the
-   page. Docked at the bottom on every width, a phone-width card from
-   600dp. Its height is --sheet-f of the window: at most, until he sizes
-   it, then exactly. No scrim: the page under it stays usable, and it floats over the page
-   without moving it. */
+   page. On a phone it is docked at the bottom; its height is --sheet-f of
+   the window: at most, until he sizes it, then exactly. On a tablet or the
+   Mac (.float, see the end of this file) it is a floating card by what was
+   tapped. No scrim: the page under it stays usable, and it floats over the
+   page without moving it. */
 .bsheet {
   --sheet-f: 0.56;
   position: fixed;
@@ -94,3 +95,93 @@
 .bsheet-body > * { flex-shrink: 0; }
 /* Tinted boxes inside (a quote, a note) stay boxes on the tinted sheet. */
 .bsheet :is(.note, blockquote, figure) { background: color-mix(in srgb, var(--surface) 55%, var(--sheet)); }
+
+/* ---- Floating card: tablet and Mac (Mohamed, 2026-11-09) ----
+   From 600dp wide and 480dp tall (sheet.js adds .float on the same media
+   query) the sheet is no longer docked at the window's foot, where a drag
+   up made it a very tall strip. It floats as a card with every corner
+   rounded, next to the chip that opened it (below it, else above it, else
+   in the middle), never taller than --float-h (the room on that side,
+   capped at 36rem / 76% of the window). sheet.js sets its place in
+   --float-x (from the inline start) / --float-y; its heading row moves it
+   and its edges and corners (.bsheet-rz) size it to --float-w / --float-hh
+   (.resized, remembered). Its content scrolls. */
+.bsheet.float,
+.bsheet.float.sized {
+  --float-h: min(36rem, 76dvh);
+  inset: auto;
+  inset-block-start: var(--float-y, 50dvh);
+  inset-inline-start: var(--float-x, 25vw);
+  margin: 0;
+  inline-size: min(27rem, calc(100vw - 2 * var(--sp-4)));
+  max-inline-size: none;
+  block-size: auto;
+  max-block-size: var(--float-h);
+  border-block-end: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: var(--radius-sheet);
+  box-shadow: 0 18px 48px -8px rgb(0 0 0 / 0.34), 0 3px 10px rgb(0 0 0 / 0.14);
+  transform-origin: var(--float-origin, top center);
+}
+/* Wider for a drawn book table on the Mac. */
+@media (min-width: 1100px) {
+  .bsheet.float, .bsheet.float.sized { inline-size: 30rem; }
+}
+.app[data-appearance="liquid-glass"] .bsheet.float {
+  box-shadow: var(--glass-hi), 0 18px 48px -10px color-mix(in srgb, var(--text) 32%, transparent);
+}
+/* Not until it has its place, so it never flashes at the window's foot. */
+.bsheet.float:not(.placed) { visibility: hidden; }
+.bsheet.float .bsheet-grip { display: none; }
+.bsheet.float .bsheet-head {
+  padding-block-start: var(--sp-3);
+  cursor: grab;
+}
+.bsheet.float.dragging, .bsheet.float.dragging * { cursor: grabbing; }
+@media (prefers-reduced-motion: no-preference) {
+  .bsheet.float { animation: none; }
+  .bsheet.float.placed { animation: bsheet-pop 170ms cubic-bezier(0.2, 0, 0, 1) backwards; }
+  .bsheet.float.closing { transition: transform 130ms ease-in, opacity 130ms ease-in; transform: scale(0.96); opacity: 0; }
+}
+@keyframes bsheet-pop { from { transform: scale(0.94); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Sized by hand: exactly the size he left it, inside the window. */
+.bsheet.float.resized {
+  inline-size: min(var(--float-w), calc(100vw - 2 * var(--sp-3)));
+  block-size: min(var(--float-hh), calc(100dvh - 2 * var(--sp-3)));
+  max-block-size: none;
+}
+.bsheet.float.resized .bsheet-body { flex: 1 1 auto; }
+/* Sizing handles: invisible strips on the edges, squares on the corners;
+   a phone sheet has none. */
+.bsheet-rz { display: none; }
+.bsheet.float .bsheet-rz {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  touch-action: none;
+}
+.bsheet.float .bsheet-rz:is([data-rz="bs"], [data-rz="be"]) { inset-inline: 1rem; block-size: 0.6rem; cursor: ns-resize; }
+.bsheet.float .bsheet-rz:is([data-rz="is"], [data-rz="ie"]) { inset-block: 1rem; inline-size: 0.6rem; cursor: ew-resize; }
+.bsheet.float .bsheet-rz[data-rz^="bs"] { inset-block-start: -0.3rem; }
+.bsheet.float .bsheet-rz[data-rz^="be"] { inset-block-end: -0.3rem; }
+.bsheet.float .bsheet-rz:is([data-rz="is"], [data-rz$="-is"]) { inset-inline-start: -0.3rem; }
+.bsheet.float .bsheet-rz:is([data-rz="ie"], [data-rz$="-ie"]) { inset-inline-end: -0.3rem; }
+.bsheet.float .bsheet-rz[data-rz*="-"] { inline-size: 1.6rem; block-size: 1.6rem; }
+.bsheet.float .bsheet-rz:is([data-rz="bs-is"], [data-rz="be-ie"]) { cursor: nwse-resize; }
+.bsheet.float .bsheet-rz:is([data-rz="bs-ie"], [data-rz="be-is"]) { cursor: nesw-resize; }
+[dir="rtl"] .bsheet.float .bsheet-rz:is([data-rz="bs-is"], [data-rz="be-ie"]) { cursor: nesw-resize; }
+[dir="rtl"] .bsheet.float .bsheet-rz:is([data-rz="bs-ie"], [data-rz="be-is"]) { cursor: nwse-resize; }
+/* A visible grip in the corner at the end of the card's foot, so he can see
+   it sizes. */
+.bsheet.float .bsheet-rz[data-rz="be-ie"]::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0.95rem;
+  inset-inline-end: 0.95rem;
+  inline-size: 0.55rem;
+  block-size: 0.55rem;
+  border-block-end: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  border-inline-end: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  border-end-end-radius: 0.2rem;
+}
+.bsheet.float.sizing, .bsheet.float.sizing * { -webkit-user-select: none; user-select: none; }

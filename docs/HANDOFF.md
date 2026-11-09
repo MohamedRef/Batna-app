@@ -416,6 +416,12 @@ Add a bullet here when a PR adds something a later agent must know.
 - **Not yet verified natively**: Android process death and OS kills, macOS
   relaunch, S24 Ultra lock/unlock, keyboard and Back with a running session.
 
+### Info sheet (book page, abbreviations)
+
+- **Floating card on tablet and Mac** (#773, Mohamed 2026-11-09): docked at the window's foot, a drag up made the «ص N» / abbreviations sheet a very tall strip. From 600dp wide and 480dp tall, `crate::sheet::Sheet` is a floating card (`.bsheet.float`, end of `assets/sheet.css`), placed by `assets/sheet.js` under the chip that opened it, else above, else on the side with more room (content scrolls), else centred; height capped at min(36rem, 76% of the window) until sized by hand.
+- He moves it by its heading row and sizes it from any of its four edges or four corners (`.bsheet-rz`, from `sheet.rs` `RESIZE_EDGES`; a grip mark in the foot's end corner). The size is kept in localStorage `batna.sheet.float`; a double-click on an edge forgets it.
+- Phones (and phone landscape under 480dp tall) keep the resizable bottom sheet. Crossing the breakpoint switches between the two.
+
 ### Desktop (Mac) layout
 
 - Full-window canvas, wider labelled sidebar, 1280×820 default window (#739).
@@ -478,6 +484,7 @@ further; don't change FSRS or Undo speculatively.
 | Content | 9 courses, 132 lectures, 132 lesson files; `res` L01–L11 written. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
+| Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
 | Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
 | Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks |
 | Open PRs / issues | None on 2026-11-09 |
@@ -512,6 +519,7 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-09: the GitHub release page is written in Egyptian Arabic only (`scripts/release-notes.sh`); a `changes/` line without Arabic text is left out (Mohamed).
+- 2026-11-09: the book-page / abbreviations sheet floats as a movable, resizable card by the tapped chip on tablet and Mac; phones keep the bottom sheet (#773).
 - 2026-11-09: review of the Mac/phone/Study batch (#739–#765): quick-search text moved to `i18n/palette.rs`, the search folds Arabic spelling like the calculator search, the Study perf diagnostics run on main only (PRs stay fast).
 - 2026-11-09: handoff reorganised (per-PR journal folded into § 10, open work as a table) and checked against main; README brought up to date.
 - 2026-11-08: `v2026.11.2` released: repeated topics remind their تحشيشة (#771, `remind:` on lesson steps, 791 reminders, «من درس …» link; `pack::SCHEMA` 3).

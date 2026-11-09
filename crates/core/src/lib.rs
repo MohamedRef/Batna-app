@@ -10,6 +10,7 @@ pub mod ids;
 pub mod labs;
 pub mod layout;
 pub mod lesson;
+pub mod note;
 pub mod own;
 pub mod pack;
 pub mod plan;

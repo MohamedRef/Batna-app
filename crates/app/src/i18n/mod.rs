@@ -17,6 +17,7 @@ pub mod count;
 pub mod courses;
 pub mod data;
 pub mod desk;
+pub mod gopage;
 pub mod hover;
 pub mod keys;
 pub mod labs;
@@ -24,6 +25,7 @@ pub mod learn;
 pub mod lecture;
 pub mod metacog;
 pub mod nav;
+pub mod notes;
 pub mod onboard;
 pub mod oral;
 pub mod order;
@@ -45,6 +47,7 @@ pub mod today;
 pub mod update;
 pub mod verify;
 pub mod views;
+pub mod weak;
 #[cfg_attr(not(target_arch = "wasm32"), allow(dead_code))]
 pub mod web;
 

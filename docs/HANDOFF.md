@@ -431,6 +431,37 @@ Ported from Mohamed's `MohamedRef/Steps-app` (a Batna fork), credited in each fi
 - He moves it by its heading row and sizes it from any of its four edges or four corners (`.bsheet-rz`, from `sheet.rs` `RESIZE_EDGES`; a grip mark in the foot's end corner). The size is kept in localStorage `batna.sheet.float`; a double-click on an edge forgets it.
 - Phones (and phone landscape under 480dp tall) keep the resizable bottom sheet. Crossing the breakpoint switches between the two.
 
+### Notes, weak-fact marks, go to page (from Steps-app)
+
+Ported from `MohamedRef/Steps-app` (its PR text credits each source path).
+Batna's books number pages per course (Gastroenterology starts again at 1)
+and `res` numbers slides per lecture, so everything page-shaped carries a
+**book**: a course id (`hb`) or a slide lecture id (`res.L02`), the same key
+as `pagesheet::Scope::book()` / `Scope::of_book()`.
+
+- **Notes** (`batna_core::note`, `crate::notes`, `store/notes.rs`): synced LWW
+  table `notes` (migration 6, in `sync::TABLES`), one row per anchor
+  (`item:<id>`, `lesson:<lesson>#<step>`, `page:<book>:<n>`), JSON `Note`
+  with the page it cited when saved. «＋ ملاحظة» chip on study items (text
+  held back until the answer shows), MCQ explanations and lesson steps; the
+  page sheet lists a page's notes (`PageNotes { book, page }`); the list
+  «ملاحظاتك» is a lecture-stack page (`notes::PAGE`), sorted by the
+  program's course order then page, filtered by course, searchable. Max 2000
+  characters; empty text deletes. Not in the Anki deck yet (Steps adds a
+  `Notes` field to its note types; Batna's would change the deck's note
+  types, so it is left for its own PR).
+- **Weak-fact marks** (`crate::weak`): computed from the review log (last
+  answer Again = weak; a right answer clears), nothing new to sync. A lesson
+  step whose page (in its own book) holds a weak item shows «راجعها تاني»;
+  the page sheet lists the weak cards with «ذاكر … دلوقتي» and counts weak
+  questions. Synced setting `weak_marks` (default on), Settings › Study.
+- **Go to page** (`crate::gopage`): More / the rail «روح لصفحة» or Ctrl/⌘+G.
+  Course chips (courses with lectures), a lecture picker for slide courses;
+  starts on the course in view, else the last book used (device-only
+  `gopage.book`). A page outside every lecture offers the nearest one. Quick
+  search (`shortcuts/palette.rs`) turns «30» / «ص 30» into one hit per
+  course book that has that page.
+
 ### Desktop (Mac) layout
 
 - Full-window canvas, wider labelled sidebar, 1280×820 default window (#739).
@@ -488,7 +519,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, own lesson highlights, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
 | Content | 9 courses, 132 lectures, 132 lesson files; `res` L01–L11 written. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
@@ -527,6 +558,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-09: notes (synced `notes` table), weak-fact marks and go to page (Ctrl/⌘+G, per-course books) ported from Steps-app (§ 10 Notes, weak-fact marks, go to page).
 - 2026-11-09: from Steps-app: confidence and error reason on answers (migration 5), sure misses first in the mistakes log with a 2–7 day retest, and a catch-up plan for a review backlog (§ 10 Study signals).
 - 2026-11-09: a release with no new `changes/` lines says «تصليحات صغيرة وتنضيف.» on its page instead of repeating the previous release's lines (`scripts/release-notes.sh` reads the feed's newest history entry only when it is this version's).
 - 2026-11-09: the GitHub release page is written in Egyptian Arabic only (`scripts/release-notes.sh`); a `changes/` line without Arabic text is left out (Mohamed).

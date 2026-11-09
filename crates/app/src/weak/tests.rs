@@ -48,6 +48,8 @@ fn Host(p: With) -> Element {
                 origin: Origin::Study,
                 at_ms: 1_793_610_000_000 + k as i64 * 60_000,
                 took_ms: 5_000,
+                confidence: None,
+                reason: None,
             });
         }
         review

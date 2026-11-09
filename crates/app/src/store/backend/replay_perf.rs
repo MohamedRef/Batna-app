@@ -20,6 +20,8 @@ fn profile_review_replay() {
         let db: &'static Store = Box::leak(Box::new(Store::open_in_memory().unwrap()));
         for n in 0..count {
             db.append_review(ReviewEvent {
+                confidence: None,
+                reason: None,
                 item_id: format!("hb.L01.replay.{}", n % 64),
                 grade: match n % 4 {
                     0 => Grade::Again,
@@ -52,6 +54,8 @@ fn profile_review_replay() {
         let event_id = StudyStore::record_logged(
             &mut backend,
             ReviewEvent {
+                confidence: None,
+                reason: None,
                 item_id: "hb.L01.replay.0".into(),
                 grade: Grade::Good,
                 origin: Origin::Study,

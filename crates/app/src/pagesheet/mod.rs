@@ -42,6 +42,22 @@ pub enum Scope {
     /// A slide of this lecture (`res.L02`).
     Slides(String),
 }
+
+impl Scope {
+    /// The scope a page anchor's book names: a lecture id is slides.
+    pub fn of_book(book: &str) -> Self {
+        if book.contains('.') { Scope::Slides(book.into()) } else { Scope::Book(book.into()) }
+    }
+
+    /// The book a page anchor names (`batna_core::note::Anchor::Page`): the
+    /// course id, or the lecture id for slides.
+    pub fn book(&self) -> &str {
+        match self {
+            Scope::Book(c) | Scope::Slides(c) => c,
+        }
+    }
+}
+
 static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
 
 /// Opens the sheet for page `page` cited by `of` (an item, lesson step or
@@ -50,6 +66,7 @@ static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
 pub fn open(page: u32, of: &str, quote: Option<String>, held: bool, hook: Option<Hook>) {
     document::eval("window.__batnaHover && window.__batnaHover.hide();");
     crate::abbrsheet::close();
+    crate::gopage::close();
     *OPEN.write() =
         Some((page, scope(Library::get(), of), quote.filter(|q| !q.trim().is_empty()), held, hook));
 }
@@ -70,6 +87,29 @@ pub fn close() {
     *OPEN.write() = None;
 }
 
+/// Whether lecture `id` numbers its pages in `scope`'s book.
+pub fn in_scope(lib: &Library, scope: &Scope, id: &str) -> bool {
+    match scope {
+        Scope::Slides(l) => id == l,
+        Scope::Book(c) => batna_core::program::course_of(id) == c && !lib.program.slides(id),
+    }
+}
+
+/// The page's facts to go over again (`crate::weak`): the cards a
+/// session can play, and how many missed questions or cases cite it.
+/// Adapted from Steps-app main: crates/app/src/pagesheet/mod.rs.
+pub fn weak_on_page<'a>(
+    lib: &'a Library,
+    page: u32,
+    scope: &Scope,
+    weak: &std::collections::BTreeSet<String>,
+) -> (Vec<&'a batna_core::content::Item>, usize) {
+    let (facts, others): (Vec<_>, Vec<_>) = crate::weak::on_page(lib, weak, scope, page)
+        .into_iter()
+        .partition(|i| crate::study::PLAYABLE.contains(&i.body.kind()));
+    (facts, others.len())
+}
+
 /// What Batna has made from one book page.
 #[derive(Debug, Default, PartialEq)]
 pub struct PageContent {
@@ -84,10 +124,7 @@ pub struct PageContent {
 /// Collects the page's items from the library, leaving out hidden ones.
 /// `scope` keeps it to one course's book or one lecture's slides.
 pub fn page_content(lib: &Library, page: u32, scope: &Scope, hidden: impl Fn(&str) -> bool) -> PageContent {
-    let in_scope = |id: &str| match scope {
-        Scope::Slides(l) => id == l,
-        Scope::Book(c) => batna_core::program::course_of(id) == c && !lib.program.slides(id),
-    };
+    let in_scope = |id: &str| in_scope(lib, scope, id);
     let lecture = lib
         .index
         .lectures
@@ -117,6 +154,7 @@ pub fn page_content(lib: &Library, page: u32, scope: &Scope, hidden: impl Fn(&st
 pub fn BookSheet() -> Element {
     let ui = use_context::<Ui>();
     let review = use_review();
+    let weak = crate::weak::use_weak();
     let Some((page, scope, chip_quote, held, hook)) = OPEN.read().clone() else {
         return rsx! {};
     };
@@ -134,6 +172,10 @@ pub fn BookSheet() -> Element {
     let playable = content.playable.clone();
     let n = playable.len();
     let lecture_id = content.lecture.clone();
+    let (weak_facts, weak_questions) =
+        weak.as_ref().map(|w| weak_on_page(lib, page, &scope, w)).unwrap_or_default();
+    let weak_ids: Vec<String> = weak_facts.iter().map(|i| i.id.clone()).collect();
+    let book = scope.book().to_string();
 
     rsx! {
         style { {CSS.text()} }
@@ -183,6 +225,47 @@ pub fn BookSheet() -> Element {
                 } else {
                     p { class: "muted", {tx::NOTHING_YET} }
                 }
+                if !weak_facts.is_empty() || weak_questions > 0 {
+                    style { {crate::weak::CSS.text()} }
+                    section { class: "bk-weak", aria_labelledby: "bk-weak-title",
+                        h3 { id: "bk-weak-title", class: "weak-title", {crate::i18n::weak::MARK} }
+                        if !weak_facts.is_empty() {
+                            ul { class: "weak-facts",
+                                for item in weak_facts.iter() {
+                                    li { key: "{item.id}", class: "weak-fact",
+                                        bdi { {crate::study::short_text(item)} }
+                                    }
+                                }
+                            }
+                        }
+                        if weak_questions > 0 {
+                            p { class: "muted small", {crate::i18n::weak::questions(weak_questions)} }
+                        }
+                        if !weak_ids.is_empty() {
+                            button {
+                                class: "btn btn-tonal",
+                                onclick: {
+                                    let lecture_id = lecture_id.clone();
+                                    let ids = weak_ids.clone();
+                                    move |_| {
+                                        *crate::study::START.write() = Some(crate::study::Start {
+                                            lectures: lecture_id.clone().map(|l| vec![l]),
+                                            items: Some(ids.clone()),
+                                            minutes: crate::onboarding::session_minutes(),
+                                        });
+                                        close();
+                                        crate::lecture::close_all();
+                                        crate::learn::forget();
+                                        let mut screen = ui.screen;
+                                        screen.set(Screen::Study);
+                                    }
+                                },
+                                {crate::i18n::weak::study(weak_ids.len())}
+                            }
+                        }
+                    }
+                }
+                crate::notes::PageNotes { book, page }
             }
             div { class: "bk-foot",
                 if n > 0 {

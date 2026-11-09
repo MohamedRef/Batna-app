@@ -33,3 +33,8 @@ pub fn questions(title: &str) -> String {
 pub fn practice(context: &str) -> String {
     format!("تدريب المحاضرة · {context}")
 }
+
+/// "ص 30 · كبد": a book page in the quick search.
+pub fn page(cite: &str, course: &str) -> String {
+    format!("{cite} · {course}")
+}

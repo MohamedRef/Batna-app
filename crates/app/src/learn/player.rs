@@ -378,20 +378,23 @@ fn Stage(
                     span { aria_hidden: "true", "↻" }
                 }
             }
-            // The page chip, with the step's abbreviations beside it.
-            if step.page.is_some() || has_abbr {
-                footer { class: "ls-src",
+            // The page chip, with the step's abbreviations, a weak-fact mark
+            // and his note beside it.
+            footer { class: "ls-src",
+                if has_abbr {
                     crate::abbrsheet::AbbrChip { texts: texts.clone(), course: Some(course.clone()) }
-                    if let Some(page) = step.page {
-                        crate::hover::BookPage {
-                            page,
-                            quote: if quote_held { None } else { step.quote.clone() },
-                            held: quote_held && step.quote.is_some(),
-                            of: seed.clone(),
-                            hook: step_hook(&step.body),
-                        }
-                    }
                 }
+                if let Some(page) = step.page {
+                    crate::hover::BookPage {
+                        page,
+                        quote: if quote_held { None } else { step.quote.clone() },
+                        held: quote_held && step.quote.is_some(),
+                        of: seed.clone(),
+                        hook: step_hook(&step.body),
+                    }
+                    crate::weak::StepMark { of: seed.clone(), page }
+                }
+                crate::notes::NoteChip { anchor: batna_core::note::Anchor::Lesson(seed.clone()), page: step.page }
             }
         }
     }

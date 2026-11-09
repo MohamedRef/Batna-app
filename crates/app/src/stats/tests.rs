@@ -204,6 +204,8 @@ fn the_forecast_reads_the_scheduler_or_falls_back_to_a_rough_one() {
     let item = d.lectures[0].items[0].id.clone();
     for (back, grade) in [(3, Grade::Again), (1, Grade::Good)] {
         d.events.push(batna_core::review::ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: item.clone(),
             grade,
             origin: Origin::Review,
@@ -297,4 +299,50 @@ fn the_tabs_switch_on_tap() {
     // Asked for a tab while already here.
     t.with(|| open(SEEN.get().unwrap().0, Tab::Mistakes));
     assert_eq!(moved(&t), crate::Screen::Stats);
+}
+
+/// Misses he was sure of, with reasons: a card three days ago (due for a
+/// retest) and an MCQ yesterday (too soon). Adapted from Steps-app main:
+/// crates/app/src/render_tests/stats.rs.
+fn sure_misses() -> StudyData {
+    use batna_core::review::{Confidence, ErrorReason, ReviewEvent};
+    let lectures = lectures();
+    let items: Vec<&batna_core::content::Item> = lectures.iter().flat_map(|l| &l.items).collect();
+    let card = items.iter().find(|i| matches!(i.body, Body::Card { .. })).expect("a card");
+    let mcq = items.iter().find(|i| i.body.kind() == "mcq").expect("an MCQ");
+    let miss = |item: &str, days_ago: i64, reason: ErrorReason| ReviewEvent {
+        confidence: Some(Confidence::Sure),
+        reason: Some(reason),
+        ..ReviewEvent::new(item, Grade::Again, Origin::Study, NOW_MS - days_ago * DAY_MS - 3_600_000, 8_000)
+    };
+    let events = vec![miss(&card.id, 3, ErrorReason::Misread), miss(&mcq.id, 1, ErrorReason::Knowledge)];
+    StudyData { lectures, events, marks: Default::default(), forecast: None, clock: clock(), demo: false }
+}
+
+#[test]
+fn sure_misses_lead_the_log_and_come_back_for_a_retest() {
+    use crate::i18n::metacog as mc;
+    fn app() -> Element {
+        use_context_provider(crate::settings::SettingsNav::new);
+        let data = use_hook(|| Rc::new(sure_misses()));
+        rsx! {
+            crate::browser_fixture::Shell { screen: crate::Screen::Stats, focus: false,
+                Spy {}
+                mistakes::Mistakes { data }
+            }
+        }
+    }
+    crate::store::use_memory_store();
+    let mut t = crate::tap_dom::TestDom::of(app);
+    let page = t.html();
+    for want in [mc::WAS_SURE, mc::BY_REASON, mc::MISREAD, mc::KNOWLEDGE, mc::RETEST_TITLE] {
+        assert!(page.contains(want), "{want}: {page}");
+    }
+    // One reason narrows the log; "all" widens it again.
+    t.click(&format!(">{}<", mc::KNOWLEDGE));
+    assert!(t.html().contains(mc::KNOWLEDGE));
+    t.click(&format!(">{}<", mc::ALL_REASONS));
+    // The card missed three days ago is due for one more try.
+    t.click(mc::RETEST_START);
+    assert_eq!(moved(&t), crate::Screen::Study);
 }

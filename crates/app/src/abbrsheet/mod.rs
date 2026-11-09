@@ -33,6 +33,7 @@ pub fn ids(texts: &[String], course: Option<&str>) -> Vec<String> {
 pub fn open(terms: Vec<String>) {
     document::eval("window.__batnaHover && window.__batnaHover.hide();");
     crate::pagesheet::close();
+    crate::gopage::close();
     *OPEN.write() = Some(terms);
 }
 

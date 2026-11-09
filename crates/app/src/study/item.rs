@@ -21,6 +21,12 @@ pub struct Revealed(pub Signal<bool>);
 #[derive(Clone, Copy)]
 pub struct Reopened(pub bool);
 
+/// The study player logs confidence and reasons for this item (other
+/// screens that show an `ItemView` don't): the frame offers the confidence
+/// chips, and the rating row the reason chips.
+#[derive(Clone, Copy)]
+pub struct Tagging(pub bool);
+
 /// Item kinds this player can show; the session composer picks only these.
 /// A chunk that adds a renderer adds its kind here and an arm below.
 pub const PLAYABLE: &[&str] = &["card", "cloze", "enumerate", "essay", "table", "order"];
@@ -33,10 +39,19 @@ pub fn ItemView(
     fresh: bool,
     retry: bool,
     #[props(default)] reopened: bool,
+    #[props(default)] tagging: bool,
     on_grade: EventHandler<Grade>,
 ) -> Element {
     let revealed = use_context_provider(|| Revealed(Signal::new(false))).0;
     use_context_provider(|| Reopened(reopened));
+    use_context_provider(|| Tagging(tagging));
+    // Every item starts with no taps (the item is keyed, so this runs per item).
+    use_hook(|| {
+        if tagging {
+            *super::TAGS.write() = super::Tags::default();
+        }
+    });
+    let confidence = super::TAGS.read().confidence;
     let badge = if retry {
         tx::BADGE_RETRY
     } else if fresh {
@@ -67,8 +82,21 @@ pub fn ItemView(
             div { class: "st-body",
                 {render(&item, on_grade)}
             }
+            // Before the answer is out: how sure is he? One optional tap.
+            if tagging && !revealed() && !reopened {
+                crate::metacog::ConfidencePicker {
+                    value: confidence,
+                    on_pick: move |c| super::TAGS.write().confidence = c,
+                }
+            }
             footer { class: "st-item-foot",
                 crate::learn::ExplainLink { item_id: item.id.clone() }
+                // His note stays out of sight until the answer is (it may hold it).
+                crate::notes::NoteChip {
+                    anchor: batna_core::note::Anchor::Item(item.id.clone()),
+                    page: (item.src.page > 0).then_some(item.src.page),
+                    show_text: revealed(),
+                }
                 // His own cards may have no page.
                 if item.src.page > 0 {
                     crate::hover::BookPage {

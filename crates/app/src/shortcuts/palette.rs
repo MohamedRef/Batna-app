@@ -31,6 +31,8 @@ enum Destination {
     Lesson(String),
     Calculator(&'static str),
     BankLecture(String),
+    /// A printed page of a course's book, in this lecture (`crate::gopage`).
+    Page(u32, String),
 }
 
 #[derive(Clone, Debug)]
@@ -130,6 +132,17 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             destination: Destination::Calculator(spec.id),
         });
     }
+    // "30" or "ص 30": that page in every course book that has it.
+    if let Some(page) = crate::gopage::page_query(&q) {
+        for (course, lecture) in crate::gopage::books_with(lib, page) {
+            hits.push(Hit {
+                id: format!("page-{course}-{page}"),
+                name: tx::page(&crate::i18n::cite::page(page), lib.course_short(&course)),
+                subtitle: lib.crumb(&lecture),
+                destination: Destination::Page(page, lecture),
+            });
+        }
+    }
     if let Some(needle) = bank_query(&q) {
         for lecture in &lib.index.lectures {
             let title = lib.title(&lecture.id);
@@ -196,6 +209,10 @@ fn activate(target: Destination, mut ui: Ui, settings: SettingsNav) {
         Destination::Lesson(id) => {
             settings.close();
             crate::learn::open(ui, &id);
+        }
+        Destination::Page(page, lecture) => {
+            settings.close();
+            crate::gopage::go(page, &lecture);
         }
     }
 }
@@ -316,6 +333,23 @@ mod tests {
         assert_eq!(hits.len(), Screen::NAV.len() + 1);
         assert!(hits.iter().any(|h| h.destination == Destination::Settings));
         assert!(hits.iter().all(|h| matches!(h.destination, Destination::Screen(_) | Destination::Settings)));
+    }
+
+    #[test]
+    fn a_page_number_offers_that_page_in_each_course_book() {
+        let lib = Library::get();
+        let hits = find("ص 1", lib);
+        let pages: Vec<&Destination> =
+            hits.iter().map(|h| &h.destination).filter(|d| matches!(d, Destination::Page(..))).collect();
+        assert!(pages.contains(&&Destination::Page(1, "hb.L01".into())), "{pages:?}");
+        // Gastroenterology's book starts again at page 1 too.
+        assert!(
+            pages.iter().any(|d| matches!(d, Destination::Page(1, l) if l.starts_with("git."))),
+            "{pages:?}"
+        );
+        // Slides are no book page.
+        assert!(pages.iter().all(|d| !matches!(d, Destination::Page(_, l) if l.starts_with("res."))));
+        assert!(find("hepatology", lib).iter().all(|h| !matches!(h.destination, Destination::Page(..))));
     }
 
     #[test]

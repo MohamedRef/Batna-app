@@ -124,7 +124,7 @@ jobs are periodic or manual. Never re-add PR/push triggers to heavy workflows.
 
 | Workflow | Runs on | What |
 |---|---|---|
-| `ci.yml` | PR + push to main (newer run cancels older) | PR: `check` job (fmt, clippy, tests, content, ids, What's new file, then the Study perf diagnostics into the job summary, § 10) + Android arm64 clippy. Main only: web wasm build, Worker build + cloud e2e. |
+| `ci.yml` | PR + push to main (newer run cancels older) | PR: `check` job (fmt, clippy, tests, content, ids, What's new file) + Android arm64 clippy. Main only: the Study perf diagnostics into the job summary (§ 10), web wasm build, Worker build + cloud e2e. |
 | `coverage.yml` | every 4 h on main (skips if unchanged) + manual | line-coverage floor (94%). Red run → fix in its own PR. |
 | `batna-android-preview.yml` | every 4 h (skips if main unchanged) + manual | signed preview APK → `batna-preview` release + feed |
 | `settings-browser.yml`, `screens-browser.yml` | every 4 h + manual; PR only when the test file changes | Playwright checks of Settings / screens on the web build |
@@ -425,7 +425,8 @@ Add a bullet here when a PR adds something a later agent must know.
   (#741).
 - Today is task-first: from 1200px the task column takes 3/5 (#742).
 - **⌘K / Ctrl+K palette** (#743, #744): offline, searches screens, lectures,
-  lessons and calculators (Arabic-aware), opens Settings sections, and
+  lessons and calculators (Arabic-aware: the calculator search's `fold` for
+  hamza, ة/ه, ى/ي, tashkeel and Arabic digits; text in `i18n/palette.rs`), opens Settings sections, and
   `questions <lecture>` starts lecture-filtered practice. Max 12 results; no
   per-question deep links.
 
@@ -442,7 +443,7 @@ Add a bullet here when a PR adds something a later agent must know.
 
 ### Performance baselines (hosted Linux CI, not phone frame times)
 
-Ignored diagnostics run in PR CI and print to the job summary; no timing gate.
+Ignored diagnostics run in main CI only (not on PRs) and print to the job summary; no timing gate.
 
 | What | 100 / 1,000 / 3,000 reviews (p50) |
 |---|---|
@@ -510,6 +511,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-09: review of the Mac/phone/Study batch (#739–#765): quick-search text moved to `i18n/palette.rs`, the search folds Arabic spelling like the calculator search, the Study perf diagnostics run on main only (PRs stay fast).
 - 2026-11-09: handoff reorganised (per-PR journal folded into § 10, open work as a table) and checked against main; README brought up to date.
 - 2026-11-08: `v2026.11.2` released: repeated topics remind their تحشيشة (#771, `remind:` on lesson steps, 791 reminders, «من درس …» link; `pack::SCHEMA` 3).
 - 2026-11-08: `v2026.11.1` released, the first calendar version.

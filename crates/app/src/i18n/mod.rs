@@ -26,6 +26,7 @@ pub mod onboard;
 pub mod oral;
 pub mod order;
 pub mod own;
+pub mod palette;
 pub mod plan;
 pub mod recap;
 pub mod refs;

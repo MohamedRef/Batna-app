@@ -52,6 +52,8 @@ fn target(focus: Focus) -> DailyTarget {
     let now_ms = 20_400 * DAY_MS + 12 * 3_600_000;
     let clock = Clock { now_ms, zone: batna_core::zone::Zone::fixed(0), rollover_hour: 4 };
     let events = vec![ReviewEvent {
+        confidence: None,
+        reason: None,
         item_id: lectures[0].items[0].id.clone(),
         grade: Grade::Good,
         origin: Origin::Review,

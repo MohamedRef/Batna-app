@@ -6,6 +6,8 @@ use batna_core::review::{Grade, Origin};
 
 fn sample() -> ReviewEvent {
     ReviewEvent {
+        confidence: None,
+        reason: None,
         item_id: "hb.L01.001".into(),
         grade: Grade::Good,
         origin: Origin::Study,

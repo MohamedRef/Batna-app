@@ -404,6 +404,8 @@ fn a_course_in_view_narrows_setup_and_counts_due_elsewhere() {
     // An answer a month ago makes the other course's item due now.
     REVIEW.with(|r| {
         r.borrow().as_ref().unwrap().backend.borrow_mut().record(ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: away_item.id.clone(),
             grade: batna_core::review::Grade::Again,
             origin: batna_core::review::Origin::Study,
@@ -443,6 +445,8 @@ fn content_gone_under_a_session_still_lets_him_end_it() {
 fn the_memory_store_logs_and_takes_back() {
     let mut m = backend::MemoryStore::default();
     let ev = |id: &str| ReviewEvent {
+        confidence: None,
+        reason: None,
         item_id: id.into(),
         grade: batna_core::review::Grade::Good,
         origin: batna_core::review::Origin::Study,

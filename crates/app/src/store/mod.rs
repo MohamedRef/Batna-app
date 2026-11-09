@@ -24,7 +24,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Mutex, OnceLock};
 
 use batna_core::review::verify::Judgement;
-use batna_core::review::{Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent};
+use batna_core::review::{Confidence, ErrorReason, Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent};
 use batna_core::srs::ReviewSettings;
 use batna_core::zone::Zone;
 use rusqlite::{Connection, OptionalExtension, params};
@@ -148,6 +148,13 @@ const MIGRATIONS: &[&str] = &[
       UPDATE meta SET value = lower(hex(randomblob(16)))
       WHERE key = 'study.review_revision.v2';
     END;
+",
+    "
+    -- How sure he was before the answer (sure / unsure / guess) and why he
+    -- missed it (batna_core::review::ErrorReason); both optional, so rows
+    -- from older builds and devices stay as they are.
+    ALTER TABLE review_events ADD COLUMN confidence TEXT;
+    ALTER TABLE review_events ADD COLUMN reason TEXT;
 ",
 ];
 
@@ -325,7 +332,8 @@ impl Store {
     pub fn reviews(&self) -> Result<Vec<LoggedReview>> {
         let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         let mut stmt = conn.prepare(
-            "SELECT id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter
+            "SELECT id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter,
+                    confidence, reason
              FROM review_events WHERE deleted = 0
              ORDER BY hlc_wall, hlc_counter, device_id",
         )?;
@@ -340,18 +348,30 @@ impl Store {
                 r.get::<_, String>(6)?,
                 r.get::<_, i64>(7)?,
                 r.get::<_, u32>(8)?,
+                r.get::<_, Option<String>>(9)?,
+                r.get::<_, Option<String>>(10)?,
             ))
         })?;
         let mut out = Vec::new();
         for row in rows {
-            let (id, item_id, grade, origin, at_ms, took_ms, device, wall_ms, counter) = row?;
+            let (id, item_id, grade, origin, at_ms, took_ms, device, wall_ms, counter, confidence, reason) =
+                row?;
             let (Some(grade), Some(origin)) = (Grade::parse(&grade), Origin::parse(&origin)) else {
                 continue;
             };
             out.push(LoggedReview {
                 id,
                 hlc: Hlc { wall_ms, counter, device },
-                event: ReviewEvent { item_id, grade, origin, at_ms, took_ms },
+                event: ReviewEvent {
+                    item_id,
+                    grade,
+                    origin,
+                    at_ms,
+                    took_ms,
+                    // A value from a newer build that this one doesn't know reads as unset.
+                    confidence: confidence.as_deref().and_then(Confidence::parse),
+                    reason: reason.as_deref().and_then(ErrorReason::parse),
+                },
             });
         }
         Ok(out)
@@ -572,8 +592,8 @@ fn insert_review(conn: &rusqlite::Connection, l: &LoggedReview) -> Result<()> {
     let e = &l.event;
     conn.execute(
         "INSERT OR IGNORE INTO review_events
-         (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
-         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
+         (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter, confidence, reason)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)",
         params![
             l.id,
             e.item_id,
@@ -583,7 +603,9 @@ fn insert_review(conn: &rusqlite::Connection, l: &LoggedReview) -> Result<()> {
             e.took_ms,
             l.hlc.device,
             l.hlc.wall_ms,
-            l.hlc.counter
+            l.hlc.counter,
+            e.confidence.map(Confidence::as_str),
+            e.reason.map(ErrorReason::as_str)
         ],
     )?;
     Ok(())
@@ -830,11 +852,42 @@ mod tests {
     use super::*;
 
     fn ev(item: &str, grade: Grade, at_ms: i64) -> ReviewEvent {
-        ReviewEvent { item_id: item.into(), grade, origin: Origin::Study, at_ms, took_ms: 3000 }
+        ReviewEvent::new(item, grade, Origin::Study, at_ms, 3000)
     }
 
     fn judgement(verdict: Verdict) -> Judgement {
         Judgement { verdict, edit: Edit::new(), note: None, fingerprint: "f".into(), at_ms: 1 }
+    }
+
+    #[test]
+    fn answers_logged_before_the_tags_read_without_them() {
+        // A database from the build before confidence and reasons.
+        let conn = Connection::open_in_memory().unwrap();
+        for sql in &MIGRATIONS[..5] {
+            conn.execute_batch(sql).unwrap();
+        }
+        conn.pragma_update(None, "user_version", 5).unwrap();
+        conn.execute(
+            "INSERT INTO review_events (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
+             VALUES ('old-1', 'hb.L01.001', 'again', 'bank', 5, 900, 'old', 5, 0)",
+            [],
+        )
+        .unwrap();
+        let s = Store::init(conn, None, None).unwrap();
+        let log = s.reviews().unwrap();
+        assert_eq!(log[0].event, ReviewEvent::new("hb.L01.001", Grade::Again, Origin::Bank, 5, 900));
+        // And a new answer keeps its tags.
+        let tagged = ReviewEvent {
+            confidence: Some(Confidence::Guess),
+            reason: Some(ErrorReason::Timing),
+            ..ev("hb.L01.002", Grade::Again, 10)
+        };
+        s.append_review(tagged.clone()).unwrap();
+        assert_eq!(s.reviews().unwrap()[1].event, tagged);
+        // A value from a newer build reads as unset, and the answer still counts.
+        s.conn.lock().unwrap().execute("UPDATE review_events SET reason = 'future'", []).unwrap();
+        assert_eq!(s.reviews().unwrap()[1].event.reason, None);
+        assert_eq!(s.reviews().unwrap().len(), 2);
     }
 
     #[test]
@@ -987,6 +1040,8 @@ mod snapshot_tests {
         let empty = store.study_review_marker().unwrap();
         let logged = store
             .append_review(ReviewEvent {
+                confidence: None,
+                reason: None,
                 item_id: "hb.L01.001".into(),
                 grade: Grade::Good,
                 origin: Origin::Study,
@@ -1022,6 +1077,8 @@ mod snapshot_tests {
         let device = s.device();
         s.mark_borrowed(true).unwrap();
         s.append_review(batna_core::review::ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: "hb.L01.001".into(),
             grade: batna_core::review::Grade::Good,
             origin: batna_core::review::Origin::Study,

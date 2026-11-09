@@ -50,6 +50,8 @@ pub struct ReviewBackend {
     log: Vec<LoggedReview>,
     states: BTreeMap<String, CardState>,
     judgements: BTreeMap<String, Judgement>,
+    /// His notes (`batna_core::note`), every live one.
+    notes: Vec<batna_core::note::Note>,
     /// Bumps the screens' revision signal after every write.
     on_change: Option<Box<dyn FnMut()>>,
 }
@@ -104,6 +106,7 @@ impl ReviewBackend {
             log: Vec::new(),
             states: BTreeMap::new(),
             judgements: BTreeMap::new(),
+            notes: Vec::new(),
             on_change: None,
         };
         b.reload();
@@ -123,6 +126,7 @@ impl ReviewBackend {
         self.scheduler = Scheduler::from_settings(&self.settings, super::zone());
         self.log = self.store.reviews().unwrap_or_default();
         self.judgements = self.store.judgements().unwrap_or_default();
+        self.notes = self.store.notes();
         self.refresh_own();
         self.replay();
     }
@@ -160,6 +164,43 @@ impl ReviewBackend {
         self.refresh_own();
         self.changed();
         Ok(())
+    }
+
+    /// Every note he has written.
+    pub fn notes(&self) -> &[batna_core::note::Note] {
+        &self.notes
+    }
+
+    /// The note on `anchor`, if any.
+    pub fn note(&self, anchor: &batna_core::note::Anchor) -> Option<&batna_core::note::Note> {
+        self.notes.iter().find(|n| &n.anchor == anchor)
+    }
+
+    /// Saves what he typed on `anchor`: empty text deletes the note.
+    pub fn save_note(
+        &mut self,
+        anchor: batna_core::note::Anchor,
+        text: &str,
+        page: Option<u32>,
+    ) -> std::result::Result<(), NoteError> {
+        use batna_core::note::{Save, save};
+        let existing = self.note(&anchor).cloned();
+        match save(anchor.clone(), text, page, existing.as_ref(), now_ms()).map_err(NoteError::Check)? {
+            Save::Put(n) => self.store.put_note(&n),
+            Save::Delete => self.store.delete_note(&anchor),
+        }
+        .map_err(NoteError::Store)?;
+        self.notes = self.store.notes();
+        self.changed();
+        Ok(())
+    }
+
+    /// Items whose last answer was a miss, hidden ones left out
+    /// (`crate::weak`).
+    pub fn weak(&self) -> std::collections::BTreeSet<String> {
+        let mut weak = crate::weak::weak_ids(&self.log);
+        weak.retain(|id| !self.hidden(id));
+        weak
     }
 
     /// Re-reads everything and tells the screens (after an import).
@@ -377,6 +418,13 @@ impl ReviewBackend {
             lectures,
         }
     }
+}
+
+/// Why a note didn't save.
+#[derive(Debug)]
+pub enum NoteError {
+    Check(batna_core::note::Problem),
+    Store(super::StoreError),
 }
 
 /// The review state in context, with a revision the screens subscribe to.

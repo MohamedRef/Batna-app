@@ -47,6 +47,7 @@ window.__batnaKeys = (e) => {
     if (/^Digit[1-7]$/.test(e.code)) { e.preventDefault(); dioxus.send("go:" + e.code.slice(5)); return; }
     if (e.code === "Comma") { e.preventDefault(); dioxus.send("go:settings"); return; }
     if (e.code === "KeyK") { e.preventDefault(); dioxus.send("palette"); return; }
+    if (e.code === "KeyG") { e.preventDefault(); dioxus.send("page"); return; }
     return;
   }
   if (e.altKey || mod || e.shiftKey && e.key !== "?" && e.key !== "\u061F") return;
@@ -126,12 +127,15 @@ enum Command {
     Settings,
     Help,
     Palette,
+    /// Go to a book page (`crate::gopage`).
+    Page,
 }
 
 fn parse(msg: &str) -> Option<Command> {
     match msg {
         "help" => Some(Command::Help),
         "palette" => Some(Command::Palette),
+        "page" => Some(Command::Page),
         "go:settings" => Some(Command::Settings),
         _ => {
             let n: usize = msg.strip_prefix("go:")?.parse().ok()?;
@@ -184,6 +188,11 @@ fn apply(cmd: Command, ui: Ui, settings: SettingsNav) {
             let open = !*PALETTE_OPEN.peek();
             open_palette(open);
         }
+        Command::Page => {
+            open_sheet(false);
+            open_palette(false);
+            crate::gopage::open(ui);
+        }
     }
 }
 
@@ -195,10 +204,11 @@ pub fn KeysSheet() -> Element {
         return rsx! {};
     }
     let screens = format!("{} … {}", nav::TODAY, nav::STATS);
-    let rows: [(&[&str], String); 14] = [
+    let rows: [(&[&str], String); 15] = [
         (&["Ctrl", "1–7"], format!("{} ({screens})", tx::SCREENS)),
         (&["Ctrl", ","], tx::SETTINGS.into()),
         (&["Ctrl/⌘", "K"], tx::PALETTE.into()),
+        (&["Ctrl/⌘", "G"], tx::PAGE.into()),
         (&["Space", "Enter"], tx::REVEAL.into()),
         (&["Space", "Enter"], tx::GOOD.into()),
         (&["1", "2", "3", "4"], tx::RATE.into()),
@@ -282,6 +292,7 @@ mod tests {
         assert_eq!(parse("go:settings"), Some(Command::Settings));
         assert_eq!(parse("help"), Some(Command::Help));
         assert_eq!(parse("palette"), Some(Command::Palette));
+        assert_eq!(parse("page"), Some(Command::Page));
         assert_eq!(parse("go:0"), None);
         assert_eq!(parse("go:8"), None);
         assert_eq!(parse("other"), None);
@@ -350,7 +361,7 @@ mod tests {
         dom.rebuild_in_place();
         let html = dioxus::ssr::render(&dom);
         assert!(html.contains(tx::TITLE) && html.contains("aria-modal=\"true\""), "{html}");
-        assert_eq!(html.matches("<tr").count(), 14, "{html}");
+        assert_eq!(html.matches("<tr").count(), 15, "{html}");
         for text in [tx::SCREENS, tx::REVEAL, tx::RATE, tx::FLAG, tx::HELP, nav::TODAY, nav::STATS] {
             assert!(html.contains(text), "missing {text}: {html}");
         }

@@ -28,6 +28,7 @@ mod dead_ends;
 mod desk;
 mod diag;
 mod fonts;
+mod gopage;
 mod hover;
 mod i18n;
 mod icons;
@@ -37,6 +38,7 @@ mod learn;
 mod lecture;
 mod look;
 mod more;
+mod notes;
 mod onboarding;
 mod oral;
 mod order;
@@ -72,6 +74,7 @@ mod ui;
 mod update;
 mod verify;
 mod version;
+mod weak;
 
 use crate::look::{Css, css};
 use dioxus::prelude::*;
@@ -317,7 +320,10 @@ fn App() -> Element {
             shortcuts::Palette {}
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
+            gopage::GoPage {}
             abbrsheet::AbbrSheet {}
+            // Over the page sheet, which offers it.
+            notes::NoteSheet {}
             courses::Picker {}
             own::ShareInbox {}
             onboarding::Onboarding {}

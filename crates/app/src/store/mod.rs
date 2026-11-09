@@ -13,6 +13,7 @@ pub mod import;
 mod install;
 #[cfg(test)]
 mod marker_perf;
+mod notes;
 pub mod own;
 mod paths;
 #[cfg(test)]
@@ -33,7 +34,7 @@ use serde::de::DeserializeOwned;
 
 #[cfg(test)]
 pub use backend::test_review;
-pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
+pub use backend::{LectureProgress, NoteError, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
 pub enum StoreError {
@@ -148,6 +149,19 @@ const MIGRATIONS: &[&str] = &[
       UPDATE meta SET value = lower(hex(randomblob(16)))
       WHERE key = 'study.review_revision.v2';
     END;
+",
+    "
+    -- Mohamed's notes on items, lesson steps and pages
+    -- (batna_core::note::Note as JSON), keyed by Anchor::row_id. Last writer wins.
+    CREATE TABLE notes (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
 ",
 ];
 

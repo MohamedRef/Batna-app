@@ -6,6 +6,9 @@
 //! reopens at the size it was left. There is no scrim: the page under it
 //! keeps scrolling, and the sheet floats over it without moving it
 //! (Mohamed, 2026-10-29). A tap outside it closes it (Mohamed, 2026-11-03).
+//! On a tablet or the Mac (600dp wide and 480dp tall) it is a floating card
+//! next to the chip that opened it instead, moved by its heading row, never
+//! a tall strip at the window's foot (Mohamed, 2026-11-09).
 //!
 //! Adapted from kabar-app main: crates/app/src/sheet.rs (PR #453). The
 //! gestures live in `assets/sheet.js`, installed once by [`use_gestures`]:

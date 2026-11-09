@@ -8,6 +8,11 @@
 //   body   : scrolled to the top, pulling down drags the sheet too.
 //   Esc    : closes the sheet before anything under it.
 //   outside: a tap outside the sheet closes it (and does nothing else).
+//   tablet / Mac (from 600dp wide and 480dp tall): the sheet is a floating
+//            card (.float) placed by the chip that opened it; dragging its
+//            heading row moves it, and it never grows past the room it has
+//            (Mohamed, 2026-11-09: docked at the foot, a drag up made it a
+//            very tall strip).
 // The size is a fraction of the window height (--sheet-f), remembered for
 // the next sheet. Listeners are delegated from document, installed once.
 if (!window.__batnaSheetInit) {
@@ -44,6 +49,83 @@ if (!window.__batnaSheetInit) {
   const shown = (el) => el.offsetHeight / vh();
   const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // ---- floating card (tablet and Mac) ----
+  const FLOAT = matchMedia("(min-width: 600px) and (min-height: 480px)");
+  const EDGE = 12; // px kept free at the window's edges
+  const GAP = 8; // px between the chip and the card
+  const vw = () => window.innerWidth || document.documentElement.clientWidth;
+  const rem = () => parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  const rtl = (el) => getComputedStyle(el).direction === "rtl";
+  // What was tapped last, so the card opens next to it.
+  let anchor = null; // { el, t }
+  const noteTap = (e) => {
+    const t = e.target instanceof Element ? e.target : null;
+    if (!t || t.closest(".bsheet")) return;
+    const el = t.closest("[aria-haspopup], button, a, [role=button]") || t;
+    anchor = { el, t: performance.now() };
+  };
+  const anchorRect = () => {
+    if (!anchor || !anchor.el.isConnected || performance.now() - anchor.t > 3000) return null;
+    const r = anchor.el.getBoundingClientRect();
+    if (!r.width || r.bottom < 0 || r.top > vh() || r.right < 0 || r.left > vw()) return null;
+    return r;
+  };
+  // Places the card at `left` / `top` (window px), kept inside the window.
+  // The CSS reads its place from the inline start, so RTL flips it.
+  const setPos = (el, left, top) => {
+    const w = el.offsetWidth;
+    const h = el.offsetHeight;
+    left = Math.min(Math.max(EDGE, left), Math.max(EDGE, vw() - w - EDGE));
+    top = Math.min(Math.max(EDGE, top), Math.max(EDGE, vh() - h - EDGE));
+    el.style.setProperty("--float-x", `${Math.round(rtl(el) ? vw() - left - w : left)}px`);
+    el.style.setProperty("--float-y", `${Math.round(top)}px`);
+  };
+  // Below the chip if it fits, else above it, else on the side with more
+  // room (its content scrolls), else in the middle of the window.
+  const place = (el) => {
+    if (!FLOAT.matches) {
+      el.classList.remove("float", "placed");
+      for (const v of ["--float-x", "--float-y", "--float-h", "--float-origin"]) el.style.removeProperty(v);
+      return;
+    }
+    el.classList.add("float");
+    const cap = Math.min(36 * rem(), 0.76 * vh());
+    el.style.setProperty("--float-h", `${Math.round(cap)}px`);
+    const w = el.offsetWidth;
+    const h = el.offsetHeight;
+    const r = anchorRect();
+    let left = (vw() - w) / 2;
+    let top = (vh() - h) / 2;
+    let origin = "center";
+    if (r) {
+      left = rtl(el) ? r.right - w : r.left;
+      const below = vh() - r.bottom - GAP - EDGE;
+      const above = r.top - GAP - EDGE;
+      const side = rtl(el) ? "right" : "left";
+      if (h <= below || (below >= above && below >= 260)) {
+        if (h > below) el.style.setProperty("--float-h", `${Math.round(below)}px`);
+        top = r.bottom + GAP;
+        origin = `top ${side}`;
+      } else if (h <= above || above >= 260) {
+        const room = Math.min(h, above);
+        if (h > above) el.style.setProperty("--float-h", `${Math.round(above)}px`);
+        top = r.top - GAP - room;
+        origin = `bottom ${side}`;
+      }
+    }
+    el.style.setProperty("--float-origin", origin);
+    setPos(el, left, top);
+    el.classList.add("placed");
+  };
+  // Keeps a placed card inside the window when its content or the window
+  // changes size; crossing the tablet width switches sheet <-> card.
+  const keepIn = (el) => {
+    if (FLOAT.matches !== el.classList.contains("float")) return place(el);
+    if (!el.classList.contains("placed")) return;
+    const r = el.getBoundingClientRect();
+    setPos(el, r.left, r.top);
+  };
+
   // The sheet floats over the page (Mohamed, 2026-10-29: it overlays the
   // content, it never pushes it up), so it adds no room under the page and
   // scrolls nothing. `data-sheet` only says one is open.
@@ -51,6 +133,7 @@ if (!window.__batnaSheetInit) {
     const open = sheets().some((el) => !el.classList.contains("closing"));
     if (open) document.documentElement.dataset.sheet = "open";
     else delete document.documentElement.dataset.sheet;
+    sheets().forEach(keepIn);
   };
 
   const setF = (el, f, settle) => {
@@ -99,10 +182,24 @@ if (!window.__batnaSheetInit) {
 
   const start = (el, y) => {
     drag = { el, y0: y, f0: shown(el), y, t: performance.now(), v: 0, moved: false };
+    if (el.classList.contains("float")) {
+      const r = el.getBoundingClientRect();
+      drag.left0 = r.left;
+      drag.top0 = r.top;
+      el.classList.add("dragging");
+      return;
+    }
     el.classList.add("dragging", "sized");
     el.classList.remove("settling");
   };
-  const move = (y) => {
+  const move = (y, x) => {
+    if (drag.left0 !== undefined) {
+      if (drag.x0 === undefined) drag.x0 = x;
+      drag.y = y;
+      if (Math.abs(y - drag.y0) + Math.abs(x - drag.x0) > 4) drag.moved = true;
+      setPos(drag.el, drag.left0 + x - drag.x0, drag.top0 + y - drag.y0);
+      return;
+    }
     const now = performance.now();
     const dt = Math.max(1, now - drag.t);
     // Smoothed velocity, positive downwards.
@@ -116,6 +213,7 @@ if (!window.__batnaSheetInit) {
     const d = drag;
     drag = null;
     d.el.classList.remove("dragging");
+    if (d.left0 !== undefined) return { ...d, moved: true }; // a card: moved, never sized
     if (d.moved) settle(d.el, d.f0 - (d.y - d.y0) / vh(), d.v);
     return d;
   };
@@ -129,9 +227,10 @@ if (!window.__batnaSheetInit) {
     e.preventDefault();
     grip.setPointerCapture?.(e.pointerId);
     start(el, e.clientY);
+    if (drag.left0 !== undefined) drag.x0 = e.clientX;
   });
   document.addEventListener("pointermove", (e) => {
-    if (drag && drag.kind !== "touch") move(e.clientY);
+    if (drag && drag.kind !== "touch") move(e.clientY, e.clientX);
   });
   const up = () => {
     if (!drag || drag.kind === "touch") return;
@@ -158,7 +257,7 @@ if (!window.__batnaSheetInit) {
     (e) => {
       const body = e.target instanceof Element && e.target.closest(".bsheet-body");
       const el = body?.closest(".bsheet");
-      if (!el || e.touches.length > 1) return;
+      if (!el || e.touches.length > 1 || el.classList.contains("float")) return;
       pull = { el, body, y0: e.touches[0].clientY };
     },
     { passive: true },
@@ -228,6 +327,16 @@ if (!window.__batnaSheetInit) {
   // sheet in place of this one. Taps inside another dialog, menu, peek
   // card or backdrop are theirs. Keyboard and scripted clicks don't count.
   const PASS = "[aria-haspopup], [role=dialog], [role=menu], [role=tooltip], [class*=backdrop], [class*=scrim]";
+  window.addEventListener("pointerdown", noteTap, true);
+  window.addEventListener("click", (e) => {
+    noteTap(e);
+    // A chip tapped while a card is open fills that card with its own
+    // content: move the card next to the new chip.
+    const t = e.target instanceof Element ? e.target : null;
+    if (t && !t.closest(".bsheet") && t.closest("[aria-haspopup]")) {
+      setTimeout(() => sheets().filter((s) => s.classList.contains("placed")).forEach(place), 60);
+    }
+  }, true);
   window.addEventListener("click", (e) => {
     if (!e.isTrusted || e.detail === 0) return;
     const t = e.target instanceof Element ? e.target : null;
@@ -246,8 +355,13 @@ if (!window.__batnaSheetInit) {
       if (other !== el) other.querySelector("[data-sheet-close]")?.click();
     }
     el.classList.toggle("sized", chosen);
+    // Hidden until placed, so a card never flashes at the window's foot.
+    if (FLOAT.matches) el.classList.add("float");
     setF(el, last, false);
-    requestAnimationFrame(() => room());
+    requestAnimationFrame(() => {
+      place(el);
+      room();
+    });
   };
   new MutationObserver((records) => {
     let changed = false;

@@ -12,6 +12,11 @@ Last full refresh: 2026-11-05. Mac desktop continuation updated 2026-11-08, base
 
 ---
 
+## Floating book-page and abbreviation card (2026-11-09)
+
+- Mohamed (2026-11-09): on the Mac and the tablet the sheet a «ص N» chip or the abbreviations chip opens sat at the window's foot, and dragged up it became a very tall strip. From 600dp wide and 480dp tall, `crate::sheet::Sheet` is now a floating card (`.bsheet.float`, `assets/sheet.css`): every corner rounded, 27rem wide (30rem from 1100px), placed by `assets/sheet.js` right under the chip that opened it, else above it, else on the side with more room (content scrolls inside), else centred. Its height is capped at min(36rem, 76% of the window). Dragging its heading row moves it; there is no resize handle. Esc, Back, ✕ and a tap outside still close it.
+- Phones (and phone landscape, under 480dp tall) keep the resizable bottom sheet unchanged. Crossing the breakpoint (window resize) switches between the two.
+
 ## Repeated topics remind their تحشيشة (2026-11-08)
 
 - Mohamed (2026-11-08, ACLF card in Liver Cirrhosis): a topic that comes back must bring its تحشيشة back, or at least remind him of it. Lesson steps now take `remind: [<item id> | <lesson id>:<WORD>]`; the player (`crates/app/src/learn/remind.rs`) shows each one under the step in a dotted box, with «📖 من درس …» opening the lesson that taught it when that is another lesson.
@@ -545,6 +550,7 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 | Coverage | 95.05% (floor 94) |
 | Mac wide layout | PRs #739–745 merged as applicable: expanded window, Anki-style keys, focus continuity and quick palette; 2026-11-08 lesson player is one centred reading column (§ Lesson focus layout); native Mac QA remains with Mohamed |
 | Reminders | Lesson steps that repeat a list show its تحشيشة (`remind:`), 791 on 689 steps (§ Repeated topics) |
+| Info sheet | Bottom sheet on phones; floating card next to the tapped chip on tablet and Mac (§ Floating book-page card) |
 | Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
 
 ### Open work and known gaps
@@ -625,3 +631,4 @@ Newest first. One line per PR that changes behaviour, process or state.
 - 2026-11-08: lesson focus layout (one centred reading column ≥840px), text colours by importance, key-term pill, Study/Study dim/System study themes.
 - 2026-11-08: own highlights in lessons (select → colour, fill/underline, pill/rect; synced per highlight).
 - 2026-11-08: repeated topics remind their تحشيشة (`remind:` on lesson steps, 791 reminders, «من درس …» link).
+- 2026-11-09: the book-page / abbreviations sheet floats as a card by the tapped chip on tablet and Mac (phones keep the bottom sheet).

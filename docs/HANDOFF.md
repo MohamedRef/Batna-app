@@ -140,6 +140,7 @@ jobs are periodic or manual. Never re-add PR/push triggers to heavy workflows.
 | `web-deploy.yml` | push to main touching app/content/web | builds wasm, deploys Worker `batna-web` |
 | `cloud-deploy.yml` | push to main touching server/protocol/Cargo + manual | deploys Worker `batna-cloud` |
 | `release.yml` | manual only | alpha/beta/stable release (§ 6) |
+| `audit.yml` | weekly (Mon 05:17 UTC) + manual, **never on PRs** | `cargo audit` against RustSec (audit F23). A finding → fix in its own PR. |
 
 Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 `CLOUDFLARE_API_TOKEN` is missing. Check that the step "Deploy" succeeded.
@@ -345,6 +346,13 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
   Today»). Tests must use `history.system()`, not `history.back()`.
 - Android crash reports start from Settings › Your data › diagnostics
   (WebViewGuard records renderer loss and exit reasons).
+- Journey test (audit F23): `store/backend/journey_tests.rs` runs first
+  launch → grade → restart → restore → two-device sync on one review state.
+  What only a device can show (process death, TalkBack, 200% text…) is the
+  manual matrix in `docs/NATIVE_QA.md`; record runs there against their
+  exact commit.
+- Shared plumbing with Kabar: `docs/INFRA_PARITY.md` (audit F24, same file
+  in both repos). A fix there says in its PR whether Kabar needs it too.
 
 ## 10. Feature notes (what exists, where, and why)
 
@@ -625,6 +633,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: journey test (launch → grade → restart → restore → two-device sync), native QA matrix `docs/NATIVE_QA.md`, weekly `cargo audit`, and the shared `docs/INFRA_PARITY.md` checklist (engineering audit F23, F24, § 9).
 - 2026-11-11: a local answer updates only its own item instead of replaying the whole log (43 ms → 0.6 ms at 100k answers); live content switches are bounded to 2 a run; UI writes wait up to 750 ms for the sync lock instead of failing at once (engineering audit F15–F17, § 10 Study sessions).
 - 2026-11-11: sync ops the hub refuses (or the device can't read) are held with their reason and shown in Settings › Sync with send-again / let-go; the export is one read snapshot (engineering audit F12–F14, § 10 Study sessions).
 - 2026-11-11: the Batna Cloud deploy for #780 had failed (504), so the hub rejected `notes`; deploy re-run, ops on a table the hub doesn't know now wait in the outbox, and notes are queued again once.

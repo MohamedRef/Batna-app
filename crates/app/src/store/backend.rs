@@ -3,6 +3,8 @@
 //! [`StudyStore`] for the study player and the other study screens.
 
 #[cfg(test)]
+mod journey_tests;
+#[cfg(test)]
 mod replay_perf;
 mod study;
 

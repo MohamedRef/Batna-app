@@ -1,0 +1,976 @@
+# Basics of Research, Lecture 16 (slides in medstudy/courses/res/slides/res-L16.pdf).
+schema: batna.content/v1
+lecture: res.L16
+title: Normal distribution curve and Z-score
+author: Ass. Prof. Noha Selim Elshaer
+book:
+  chapter: 1
+  pages: [1, 34]
+topics:
+- id: normal
+  title: The normal (Gaussian) distribution curve and its areas
+- id: empirical
+  title: 'The empirical rule: the exam-score example'
+- id: zscore
+  title: 'The Z-score: ordinary, unusual and extreme values'
+- id: shape
+  title: Spread, skewness, population vs sample, and choosing the summary
+items:
+- id: res.L16.001
+  kind: card
+  topic: normal
+  front: When is a variable said to be normally distributed?
+  back: When its distribution has the shape of a normal curve (the Gaussian distribution, a bell-shaped curve).
+  src:
+    page: 2
+    quote: A variable is said to be normally distributed or to have a normal distribution if its distribution has the shape
+      of a normal curve.
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.002
+  kind: mcq
+  topic: normal
+  stem: The normal distribution is used to describe which type of variable?
+  options:
+  - Continuous quantitative variables
+  - Nominal qualitative variables
+  - Ordinal qualitative variables
+  - Any variable that can be counted
+  answer: 0
+  why:
+  - The slide says the normal distribution describes continuous quantitative variables, like weight or a test score.
+  - Nominal data (blood group, sex) have categories, not a curve of values.
+  - Ordinal data (stage I–IV) are ranked categories, not continuous values.
+  - A count can be quantitative, but the slide ties the normal curve to continuous quantitative variables.
+  src:
+    page: 3
+    quote: Normal Distribution is used to describe continuous quantitative variables.
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.003
+  kind: card
+  topic: normal
+  front: Why does the normal distribution matter for statistical testing?
+  back: The normal distribution and normal approximations are the bases of analytic statistical tests.
+  src:
+    page: 3
+    quote: The normal distribution & normal approximations are the bases of analytic statistical tests.
+  status: unverified
+- id: res.L16.004
+  kind: card
+  topic: normal
+  front: Give the slide's examples of human traits distributed in a fairly normal way in a population.
+  back: Intelligence, attitudes and personality.
+  src:
+    page: 4
+    quote: Many human traits (characteristics) such as intelligence, attitudes, and personality, are distributed among the
+      population in a fairly "Normal" way.
+  status: unverified
+- id: res.L16.005
+  kind: cloze
+  topic: normal
+  text: The base line of the normal curve is measured in {{c1::standard deviation (SD)}} units.
+  src:
+    page: 4
+    quote: The base line for the normal curve is measured in standard deviation (SD) units.
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.006
+  kind: card
+  topic: normal
+  front: If you measure a variable in a representative sample of sufficient size, what shape will the scores take?
+  back: 'A distribution similar to the normal curve: most scores fall around the mean and there are relatively few extreme
+    scores.'
+  src:
+    page: 5
+    quote: |-
+      Normal distribution curve
+      That is: if you measure something, a variable, in a representative sample of sufficient size, the resulting score will assume a distribution that is similar to the normal curve.
+      Most of the scores will fall around the mean and there will be relatively few extreme score.
+      2.2% | 13.6% | 34.1% | 34.1% | 13.6% | 2.2%
+      X-3SD | X-2SD | X-1SD | mean | X+1SD | X+2SD | X+3SD
+      68%
+      95%
+      99%
+  status: unverified
+- id: res.L16.007
+  kind: mcq
+  topic: normal
+  stem: In a normal distribution curve, where do the mean, median and mode lie?
+  options:
+  - All three coincide at the centre
+  - The mean lies to the right of the median
+  - The mode lies to the left of the mean
+  - The median lies at +1 SD
+  answer: 0
+  why:
+  - The curve is perfectly symmetrical, so the three measures of central tendency coincide at its peak.
+  - That happens in a positively skewed distribution, not a normal one.
+  - 'That happens in a positively skewed distribution: the mode sits at the peak and the mean is pulled right.'
+  - The median splits the values in half, so it sits at the centre (the mean), not at +1 SD.
+  src:
+    page: 11
+    quote: 1 It is a theoretically perfect frequency polygon in which the mean, median and mode all coincide in the center.
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.008
+  kind: enumerate
+  topic: normal
+  prompt: Enumerate the three properties of the normal distribution curve on the slide.
+  points:
+  - A theoretically perfect frequency polygon in which the mean, median and mode all coincide in the centre
+  - A symmetrical bell-shaped curve of infinite range
+  - Approximately 68% of scores fall within ±1 SD, 95% within ±2 SD and 99% (99.7%) within ±3 SD
+  pass: 3
+  hook: 'منحنى «الجرس» 3 صفات: «الـ 3 M في النص» (mean = median = mode)، «جرس متماثل ملوش آخر» (symmetrical, infinite range)،
+    و«68 / 95 / 99.7» على 1 و2 و3 SD.'
+  src:
+    page: 11
+    quote: |-
+      Normal distribution curve
+      1 It is a theoretically perfect frequency polygon in which the mean, median and mode all coincide in the center.
+      2 It takes the form of a symmetrical bell-shaped curve of infinite range.
+      3 Approximately,
+      68% of the scores fall between ± 1 SD
+      95% of the scores fall between ± 2 SD
+      99% of the scores fall between ± 3 SD
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.009
+  kind: mcq
+  topic: normal
+  stem: Which statement about the range of the normal curve is correct?
+  options:
+  - 'It is infinite: the tails never touch the base line'
+  - It ends at exactly ±3 SD
+  - It ends at the largest observed value
+  - It ends at ±2 SD, where 95% of values lie
+  answer: 0
+  why:
+  - 'The slide calls it a symmetrical bell-shaped curve of infinite range: the tails get closer to the base line but never
+    end.'
+  - About 99.7% lies within ±3 SD, so a few values lie beyond it.
+  - The theoretical curve does not stop at any observed value.
+  - About 5% of values lie beyond ±2 SD.
+  src:
+    page: 11
+    quote: 2 It takes the form of a symmetrical bell-shaped curve of infinite range.
+  status: unverified
+- id: res.L16.010
+  kind: table
+  topic: normal
+  title: Areas under the normal curve (slide 4 figure)
+  columns:
+  - Segment
+  - Share of values (each side)
+  rows:
+  - - Mean to 1 SD
+    - 34.1%
+  - - 1 SD to 2 SD
+    - 13.6%
+  - - Beyond 2 SD (the tail)
+    - 2.2% (about 2.15%; slide 28)
+  blanks:
+  - - 0
+    - 1
+  - - 1
+    - 1
+  - - 2
+    - 1
+  src:
+    page: 4
+    quote: |-
+      2.2% | 13.6% | 34.1% | 34.1% | 13.6% | 2.2%
+      μ - 3σ | μ - 2σ | μ - σ | μ | μ + σ | μ + 2σ | μ + 3σ
+      68%
+      95%
+      99%
+  status: unverified
+  tags: [high-yield, numbers]
+- id: res.L16.011
+  kind: mcq
+  topic: normal
+  stem: What share of values lies between the mean and +1 SD?
+  options:
+  - 34.1%
+  - 68%
+  - 13.6%
+  - 47.7%
+  answer: 0
+  why:
+  - The figure gives 34.1% on each side between the mean and 1 SD.
+  - 68% is the whole band from −1 SD to +1 SD, both sides together.
+  - 13.6% lies between +1 SD and +2 SD.
+  - 47.7% is the mean to +2 SD (34.1 + 13.6), one side of the 95% band.
+  src:
+    page: 4
+    quote: |-
+      2.2% | 13.6% | 34.1% | 34.1% | 13.6% | 2.2%
+      μ - 3σ | μ - 2σ | μ - σ | μ | μ + σ | μ + 2σ | μ + 3σ
+  status: unverified
+  tags: [numbers, high-yield]
+- id: res.L16.012
+  kind: mcq
+  topic: normal
+  stem: In a normal distribution, what share of values lies between +1 SD and +2 SD?
+  options:
+  - 13.6%
+  - 34.1%
+  - 27.2%
+  - 2.2%
+  answer: 0
+  why:
+  - The figure shows 13.6% in each band between 1 and 2 SD.
+  - 34.1% lies between the mean and 1 SD.
+  - 27.2% is both bands together (−2 to −1 and +1 to +2 SD).
+  - About 2.2% lies beyond 2 SD on one side.
+  src:
+    page: 9
+    quote: |-
+      2.2% | 13.6% | 34.1% | 34.1% | 13.6% | 2.2%
+      X- 3SD | X-2SD | X - 1SD | X | X+1SD | X+2SD | X+3SD
+      68%
+      95%
+      99%
+  status: unverified
+  tags: [numbers]
+- id: res.L16.013
+  kind: mcq
+  topic: normal
+  stem: Approximately what share of scores falls between −2 SD and +2 SD?
+  options:
+  - 95%
+  - 68%
+  - 99.7%
+  - 50%
+  answer: 0
+  why:
+  - 'The empirical rule: about 95% within ±2 SD.'
+  - 68% is within ±1 SD.
+  - About 99.7% (rounded to 99% on slide 11) is within ±3 SD.
+  - 50% is the share on each side of the mean.
+  src:
+    page: 11
+    quote: |-
+      3 Approximately,
+      68% of the scores fall between ± 1 SD
+      95% of the scores fall between ± 2 SD
+      99% of the scores fall between ± 3 SD
+  status: unverified
+  tags: [high-yield, numbers]
+- id: res.L16.014
+  kind: mcq
+  topic: normal
+  stem: In a normal distribution, what share of values lies above +2 SD?
+  options:
+  - About 2.2% (2.15%)
+  - About 5%
+  - About 13.6%
+  - About 0.13%
+  answer: 0
+  why:
+  - The upper tail beyond 2 SD holds about 2.2% (slide 28 gives the finer 2.15%).
+  - 5% is both tails beyond ±2 SD together.
+  - 13.6% lies between +1 and +2 SD.
+  - 0.13% is the tail beyond +3 SD (slide 28).
+  src:
+    page: 4
+    quote: |-
+      2.2% | 13.6% | 34.1% | 34.1% | 13.6% | 2.2%
+      μ - 3σ | μ - 2σ | μ - σ | μ | μ + σ | μ + 2σ | μ + 3σ
+  status: unverified
+  tags: [numbers]
+- id: res.L16.015
+  kind: card
+  topic: normal
+  front: Give the finer areas under the normal curve shown on slide 28.
+  back: Mean to 1 SD 34.13% on each side; 1 to 2 SD 13.59%; 2 to 3 SD 2.15%; beyond 3 SD 0.13%. So ±1 SD holds 68.26%, ±2
+    SD 95.44% and ±3 SD 99.74%.
+  src:
+    page: 28
+    quote: |-
+      .13% | 2.15% | 13.59% | 34.13% | 34.13% | 13.59% | 2.15% | .13%
+      68.26%
+      95.44%
+      99.74%
+  status: unverified
+  tags: [numbers]
+- id: res.L16.016
+  kind: order
+  topic: normal
+  prompt: Order the bands on one side of the normal curve from the largest share of values to the smallest.
+  steps:
+  - Mean to 1 SD (34.13%)
+  - 1 to 2 SD (13.59%)
+  - 2 to 3 SD (2.15%)
+  - Beyond 3 SD (0.13%)
+  src:
+    page: 28
+    quote: .13% | 2.15% | 13.59% | 34.13% | 34.13% | 13.59% | 2.15% | .13%
+  status: unverified
+- id: res.L16.017
+  kind: card
+  topic: normal
+  front: What does slide 6 show about a sample drawn from a population?
+  back: 'A representative sample of a normally distributed population has the same bell shape as the population, only smaller:
+    the sample''s distribution mirrors the population''s.'
+  src:
+    page: 6
+    quote: |-
+      POPULATION
+      SAMPLE
+  status: unverified
+- id: res.L16.018
+  kind: card
+  topic: empirical
+  front: Which tool helps explain the standard deviation intuitively?
+  back: 'The Empirical Rule: about 68% of values lie within ±1 SD of the mean, 95% within ±2 SD and 99.7% within ±3 SD. The
+    mean is easy to grasp as the average student''s score; the SD is harder, and the rule makes it concrete.'
+  src:
+    page: 14
+    quote: Most people would have an intuitive grasp of the mean score as being the "average student's score" and would say
+      this student did better than average. However, having an intuitive grasp of standard deviation is more challenging.
+      The Empirical Rule is a helpful tool in explaining standard deviation.
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.019
+  kind: table
+  topic: empirical
+  title: 'Exam scores: mean 75, SD 10 (slide 15)'
+  columns:
+  - Band
+  - Score range
+  - Share of students
+  rows:
+  - - Mean ± 1 SD
+    - 65 to 85
+    - 68%
+  - - Mean ± 2 SD
+    - 55 to 95
+    - 95%
+  - - Mean ± 3 SD
+    - 45 to 105
+    - 99.7%
+  blanks:
+  - - 0
+    - 1
+  - - 1
+    - 1
+  - - 2
+    - 1
+  - - 2
+    - 2
+  src:
+    page: 15
+    quote: |-
+      In the example, our interpretation would be:
+      68% of students scored between 65 and 85.
+      95% of students scored between 55 and 95.
+      99.7% of students scored between 45 and 105.
+      The student who scored an 87 would be at more than one standard deviation above the mean score.
+  status: unverified
+  tags: [high-yield, numbers]
+- id: res.L16.020
+  kind: mcq
+  topic: empirical
+  stem: 'Exam scores are bell-shaped with mean 75 and SD 10. About 95% of students scored between:'
+  options:
+  - 55 and 95
+  - 65 and 85
+  - 45 and 105
+  - 75 and 95
+  answer: 0
+  why:
+  - '±2 SD: 75 − 20 = 55 and 75 + 20 = 95.'
+  - 65 to 85 is ±1 SD, which holds about 68%.
+  - 45 to 105 is ±3 SD, which holds about 99.7%.
+  - 75 to 95 is only the upper half of the band (about 47.5%).
+  src:
+    page: 15
+    quote: 95% of students scored between 55 and 95.
+  status: unverified
+  tags: [high-yield, numbers]
+- id: res.L16.021
+  kind: mcq
+  topic: empirical
+  stem: With mean 75 and SD 10, where does Mohamed's score of 87 lie?
+  options:
+  - More than one SD above the mean
+  - Within one SD of the mean
+  - More than two SD above the mean
+  - Below the mean
+  answer: 0
+  why:
+  - 87 is above 85 (mean + 1 SD) but below 95 (mean + 2 SD).
+  - Within 1 SD would be 65 to 85; 87 is past 85.
+  - Mean + 2 SD is 95; 87 has not reached it.
+  - 87 is above the mean of 75.
+  src:
+    page: 15
+    quote: The student who scored an 87 would be at more than one standard deviation above the mean score.
+  status: unverified
+  tags: [numbers]
+- id: res.L16.022
+  kind: mcq
+  topic: empirical
+  stem: Mean 75, SD 10. Roughly what share of students scored above 85?
+  options:
+  - About 16%
+  - About 34%
+  - About 32%
+  - About 2.5%
+  answer: 0
+  why:
+  - 'Above +1 SD = 13.6% + 2.2% (+ the far tail) ≈ 16%: half of the 32% outside ±1 SD.'
+  - 34% lies between 75 and 85.
+  - 32% is outside ±1 SD on both sides together.
+  - About 2.5% lies above 95 (+2 SD).
+  src:
+    page: 16
+    quote: 45 | 55 | 65 | 75 | 85 | 95 | 105
+  status: unverified
+  tags: [numbers]
+- id: res.L16.023
+  kind: card
+  topic: zscore
+  front: Define the Z-score (standard score).
+  back: The number of standard deviations a random variable X falls away from the mean, i.e. how many SDs a particular data
+    point is above or below the mean.
+  src:
+    page: 22
+    quote: |-
+      The standard score, or Z-score, represents the number of standard deviations a random variable X falls away from the mean.
+      i.e. How many standard deviations a particular data point is above or below the mean?
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.024
+  kind: cloze
+  topic: zscore
+  text: 'Z-score = ({{c1::Xi − X̄}}) ÷ {{c2::s}}: the value minus the mean, divided by the standard deviation.'
+  src:
+    page: 17
+    quote: 'Formula for Z-score: Z = (Xi - X̄) / s'
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.025
+  kind: mcq
+  topic: zscore
+  stem: 'A negative Z-score means the value is:'
+  options:
+  - Below the mean
+  - Above the mean
+  - 'An error: Z cannot be negative'
+  - Equal to the mean
+  answer: 0
+  why:
+  - Z = (X − mean)/SD, so a value under the mean gives a negative Z.
+  - Above the mean gives a positive Z.
+  - Z is negative for every value below the mean, as Fares's −3.6 on slide 20.
+  - A value equal to the mean gives Z = 0.
+  src:
+    page: 22
+    quote: |-
+      The standard score, or Z-score, represents the number of standard deviations a random variable X falls away from the mean.
+      i.e. How many standard deviations a particular data point is above or below the mean?
+      Formula for Z-score: Z = (Xi - X̄) / s
+  status: unverified
+- id: res.L16.026
+  kind: calc
+  topic: zscore
+  calculator: z_score
+  stem: Exam scores are bell-shaped with mean 75 and SD 10. Mohamed scored 87.
+  question: What is his Z-score?
+  inputs:
+    value: 87
+    mean: 75
+    sd: 10
+  expect: z = 1.2
+  interpret: 'Z = (87 − 75)/10 = +1.2: well above average, but not highly unusual (within ±2).'
+  src:
+    page: 17
+    quote: |-
+      Mohamed who received an 87 on the exam would have a Z-score of 1.2, meaning his score was well above average, but not highly unusual.
+      Z = (87-75)/10 = 1.2
+  status: unverified
+  tags: [numbers, high-yield]
+- id: res.L16.027
+  kind: calc
+  topic: zscore
+  calculator: z_score
+  stem: Same exam (mean 75, SD 10). Ahmed scored 71.
+  question: What is his Z-score?
+  inputs:
+    value: 71
+    mean: 75
+    sd: 10
+  expect: z = -0.4
+  interpret: 'Z = (71 − 75)/10 = −0.4: slightly below average.'
+  src:
+    page: 20
+    quote: |-
+      Mean score =75; and Standard deviation =10
+      Interpreting Z-score for Several Students
+      Test Score | Z-score | Interpretation
+      87 | +1.2 | well above average
+      71 | -0.4 | slightly below average
+  status: unverified
+  tags: [numbers]
+- id: res.L16.028
+  kind: calc
+  topic: zscore
+  calculator: z_score
+  stem: Same exam (mean 75, SD 10). Sarah scored 99.
+  question: What is her Z-score?
+  inputs:
+    value: 99
+    mean: 75
+    sd: 10
+  expect: z_score.unusual
+  interpret: 'Z = (99 − 75)/10 = +2.4: over 2, so unusually above average.'
+  src:
+    page: 20
+    quote: |-
+      Mean score =75; and Standard deviation =10
+      Interpreting Z-score for Several Students
+      Test Score | Z-score | Interpretation
+      87 | +1.2 | well above average
+      71 | -0.4 | slightly below average
+      99 | +2.4 | unusually above average
+  status: unverified
+  tags: [numbers]
+- id: res.L16.029
+  kind: calc
+  topic: zscore
+  calculator: z_score
+  stem: Same exam (mean 75, SD 10). Fares scored 39.
+  question: What is his Z-score, and how is it read?
+  inputs:
+    value: 39
+    mean: 75
+    sd: 10
+  expect: z_score.extreme
+  interpret: 'Z = (39 − 75)/10 = −3.6: under −3, so extremely below average; investigate it as a potential outlier.'
+  src:
+    page: 20
+    quote: |-
+      Mean score =75; and Standard deviation =10
+      Interpreting Z-score for Several Students
+      Test Score | Z-score | Interpretation
+      87 | +1.2 | well above average
+      71 | -0.4 | slightly below average
+      99 | +2.4 | unusually above average
+      39 | -3.6 | extremely below average
+  status: unverified
+  tags: [numbers, high-yield]
+- id: res.L16.030
+  kind: mcq
+  topic: zscore
+  stem: 'Mean 75, SD 10. Regarding Mohamed''s score of 87 (Z = +1.2), we would conclude his score is:'
+  options:
+  - Well above average
+  - Unusually above average
+  - Extremely above average
+  - Slightly above average
+  answer: 0
+  why:
+  - 'The slide''s answer (D): +1.2 is well above average but not highly unusual.'
+  - Unusual needs a Z over 2, like Sarah's +2.4.
+  - Extreme needs a Z over 3.
+  - Slightly is for a small Z such as Ahmed's −0.4 (slightly below).
+  src:
+    page: 21
+    quote: |-
+      Regarding Mohamed's performance in the Examination, we would conclude that his test score is:
+      A. Unusually above average
+      B. Extremely above average
+      C. Slightly above average
+      D. Well above average
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.031
+  kind: table
+  topic: zscore
+  title: Interpreting Z-scores (mean 75, SD 10; slide 20)
+  columns:
+  - Test score
+  - Z-score
+  - Interpretation
+  rows:
+  - - '87'
+    - '+1.2'
+    - Well above average
+  - - '71'
+    - −0.4
+    - Slightly below average
+  - - '99'
+    - '+2.4'
+    - Unusually above average
+  - - '39'
+    - −3.6
+    - Extremely below average
+  blanks:
+  - - 0
+    - 2
+  - - 1
+    - 1
+  - - 2
+    - 2
+  - - 3
+    - 1
+  - - 3
+    - 2
+  src:
+    page: 20
+    quote: |-
+      Test Score | Z-score | Interpretation
+      87 | +1.2 | well above average
+      71 | -0.4 | slightly below average
+      99 | +2.4 | unusually above average
+      39 | -3.6 | extremely below average
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.032
+  kind: card
+  topic: zscore
+  front: Which Z-scores mark unusual and extreme observations?
+  back: 'Unusual: a Z-score over 2 or under −2. Extreme: over 3 or under −3, and these should be investigated as potential
+    outliers.'
+  src:
+    page: 18
+    quote: |-
+      Unusual observations would have a Z-score over 2 or under -2.
+      Extreme observations would have Z-scores over 3 or under -3 and should be investigated as potential outliers.
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.033
+  kind: mcq
+  topic: zscore
+  stem: A lab value has a Z-score of −3.4. What should you do?
+  options:
+  - Investigate it as a potential outlier
+  - 'Accept it: it is an ordinary value'
+  - Call it unusual but not extreme
+  - Drop it from the data without checking
+  answer: 0
+  why:
+  - Under −3 is an extreme observation, which the slide says should be investigated as a potential outlier.
+  - Ordinary values lie within ±2.
+  - Unusual is between 2 and 3 SD; −3.4 is beyond 3.
+  - 'Investigate, not delete: an outlier may be a real value or an error.'
+  src:
+    page: 18
+    quote: Extreme observations would have Z-scores over 3 or under -3 and should be investigated as potential outliers.
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.034
+  kind: mcq
+  topic: zscore
+  stem: On slide 23, which Z-scores are ordinary values?
+  options:
+  - Between −2 and +2 (about 95% of values)
+  - Between −1 and +1 only
+  - Between −3 and +3
+  - Above 0 only
+  answer: 0
+  why:
+  - The figure marks −2 to +2 as ordinary values, 95% of all values.
+  - ±1 holds only about 68%; the ordinary band reaches ±2.
+  - Between 2 and 3 (either side) is unusual, not ordinary.
+  - Ordinary values sit on both sides of the mean.
+  src:
+    page: 23
+    quote: |-
+      The Gaussian Distribution (Normal Distribution Curve) and the Z Score
+      Extreme value outlier | Unusual Value | Ordinary Values 95% of values | Unusual Value | Extreme value outlier
+      Z: -3 | -2 | -1 | 0 | 1 | 2 | 3
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.035
+  kind: order
+  topic: zscore
+  prompt: Order these Z-scores from the most ordinary to the most extreme.
+  steps:
+  - Z = +0.3 (ordinary)
+  - Z = −1.8 (ordinary)
+  - Z = +2.5 (unusual)
+  - Z = −3.6 (extreme)
+  src:
+    page: 23
+    quote: |-
+      The Gaussian Distribution (Normal Distribution Curve) and the Z Score
+      Extreme value outlier | Unusual Value | Ordinary Values 95% of values | Unusual Value | Extreme value outlier
+      Z: -3 | -2 | -1 | 0 | 1 | 2 | 3
+  status: unverified
+- id: res.L16.036
+  kind: mcq
+  topic: zscore
+  stem: 'Two students sat different exams. Ali: 70 (mean 60, SD 5). Mona: 80 (mean 70, SD 10). Who did better relative to
+    the class?'
+  options:
+  - 'Ali: Z = +2.0 against Mona''s +1.0'
+  - 'Mona: her raw score is higher'
+  - 'They did equally well: both are 10 above the mean'
+  - It cannot be compared without the full data
+  answer: 0
+  why:
+  - 'Z puts both on the same SD scale: (70 − 60)/5 = 2, (80 − 70)/10 = 1.'
+  - Raw scores from different exams can't be compared directly.
+  - 10 points mean 2 SD on Ali's exam but only 1 SD on Mona's.
+  - The mean and SD are enough to compare with Z-scores.
+  src:
+    page: 17
+    quote: How many standard deviations a particular data point is above or below the mean?
+  status: unverified
+  tags: [numbers]
+- id: res.L16.037
+  kind: mcq
+  topic: shape
+  stem: 'Several normal curves share the same mean (μ = 0) but have different variances. The one with the smallest variance
+    (σ² = 0.2) is:'
+  options:
+  - The tallest and narrowest
+  - The flattest and widest
+  - Shifted to the left
+  - Skewed to the right
+  answer: 0
+  why:
+  - 'Less spread piles the values near the mean: a tall, narrow curve.'
+  - That is the largest variance (σ² = 5.0).
+  - A shift comes from a different mean, like μ = −2.
+  - A normal curve stays symmetrical whatever its variance.
+  src:
+    page: 24
+    quote: |-
+      Normal distribution curve
+      μ=0, σ²=0.2
+      μ=0, σ²=1.0
+      μ=0, σ²=5.0
+      μ=−2, σ²=0.5
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.038
+  kind: card
+  topic: shape
+  front: On slide 24, what changes a normal curve's position and what changes its width?
+  back: 'The mean (μ) sets where the centre lies (μ = −2 moves the curve left); the SD (σ, or variance σ²) sets the spread:
+    a smaller SD gives a taller, narrower curve, a larger SD a flatter, wider one.'
+  src:
+    page: 24
+    quote: |-
+      Normal distribution curve
+      μ=0, σ²=0.2
+      μ=0, σ²=1.0
+      μ=0, σ²=5.0
+      μ=−2, σ²=0.5
+  status: unverified
+- id: res.L16.039
+  kind: table
+  topic: shape
+  title: Skewness and the measures of central tendency (slide 26)
+  columns:
+  - Distribution
+  - Tail points
+  - Order along the x-axis
+  rows:
+  - - Negatively skewed
+    - Left (negative direction)
+    - Mean < median < mode
+  - - Normal (no skew)
+    - 'No tail: symmetrical'
+    - Mean = median = mode
+  - - Positively skewed
+    - Right (positive direction)
+    - Mode < median < mean
+  blanks:
+  - - 0
+    - 1
+  - - 0
+    - 2
+  - - 2
+    - 1
+  - - 2
+    - 2
+  src:
+    page: 26
+    quote: |-
+      (a) Negatively skewed | (b) Normal (no skew) | (c) Positively skewed
+      Negatively skewed: Mean | Median | Mode
+      Normal: Mean Median Mode
+      Positively skewed: Mode | Median | Mean
+      Negative direction
+      The normal curve represents a perfectly symmetrical distribution
+      Positive direction
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.040
+  kind: mcq
+  topic: shape
+  stem: In a positively (right) skewed distribution, which is true?
+  options:
+  - Mean > median > mode
+  - Mean = median = mode
+  - Mode > median > mean
+  - Median > mean > mode
+  answer: 0
+  why:
+  - The long right tail pulls the mean furthest right; the mode stays at the peak.
+  - That is a normal, symmetrical distribution.
+  - That is negative (left) skew.
+  - The median always sits between the mean and the mode in a skewed curve.
+  src:
+    page: 26
+    quote: 'Positively skewed: Mode | Median | Mean'
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.041
+  kind: mcq
+  topic: shape
+  stem: 'A distribution has its peak on the right and a long tail stretching to the left. It is:'
+  options:
+  - Negatively (left-hand) skewed
+  - Positively (right-hand) skewed
+  - Normal
+  - Bimodal
+  answer: 0
+  why:
+  - 'The skew is named after the tail: a tail to the left is negative skew.'
+  - Positive skew has the long tail to the right.
+  - A normal curve is symmetrical with no long tail.
+  - One peak only, so not bimodal.
+  src:
+    page: 26
+    quote: |-
+      (a) Negatively skewed | (b) Normal (no skew) | (c) Positively skewed
+      Negatively skewed: Mean | Median | Mode
+      Normal: Mean Median Mode
+      Positively skewed: Mode | Median | Mean
+      Negative direction
+      The normal curve represents a perfectly symmetrical distribution
+      Positive direction
+  status: unverified
+- id: res.L16.042
+  kind: card
+  topic: shape
+  front: How do you name the direction of a skew?
+  back: 'By the tail: a long tail to the left (negative direction) is negative skew; a long tail to the right (positive direction)
+    is positive skew. The normal curve represents a perfectly symmetrical distribution.'
+  src:
+    page: 26
+    quote: |-
+      Negative direction
+      The normal curve represents a perfectly symmetrical distribution
+      Positive direction
+  status: unverified
+- id: res.L16.043
+  kind: table
+  topic: shape
+  title: Population parameters and sample statistics (slide 27)
+  columns:
+  - ''
+  - Population
+  - Sample
+  rows:
+  - - Count
+    - N
+    - n
+  - - Mean
+    - μ
+    - x̄
+  - - Variance
+    - σ²
+    - s²
+  - - Standard deviation
+    - σ
+    - s
+  blanks:
+  - - 0
+    - 1
+  - - 1
+    - 1
+  - - 1
+    - 2
+  - - 2
+    - 2
+  - - 3
+    - 1
+  src:
+    page: 27
+    quote: |-
+      Population
+      quantity (count) = N
+      mean = μ
+      variance = σ2
+      standard deviation =σ
+      Sample
+      quantity (count) = n
+      mean = x̄
+      variance = s2
+      standard deviation =s
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.044
+  kind: mcq
+  topic: shape
+  stem: Which symbol stands for the standard deviation of a sample?
+  options:
+  - s
+  - σ
+  - μ
+  - N
+  answer: 0
+  why:
+  - 'Sample statistics use Latin letters: x̄, s², s.'
+  - σ is the population standard deviation.
+  - μ is the population mean.
+  - N is the population count.
+  src:
+    page: 27
+    quote: |-
+      mean = μ
+      variance = σ2
+      standard deviation =σ
+      Sample
+      quantity (count) = n
+      mean = x̄
+      variance = s2
+      standard deviation =s
+  status: unverified
+- id: res.L16.045
+  kind: card
+  topic: shape
+  front: How do you summarise data that are normally distributed, and data that are skewed?
+  back: 'Normal data: the mean and standard deviation. Skewed data (a left-hand or right-hand skew): the median and the interquartile
+    range (IQR), because the mean is pulled toward the tail. (The lecturer''s explanation of slides 26–33.)'
+  src:
+    page: 29
+    quote: Negative, left-hand skew
+  status: unverified
+  tags: [high-yield]
+- id: res.L16.046
+  kind: card
+  topic: shape
+  front: Why does the shape of the data in each sample matter when two samples are compared?
+  back: Normal data in the samples suit parametric tests (built on the mean and SD); skewed data call for non-parametric tests.
+    (The lecturer's explanation of slides 30–31; the tests come in the next lectures.)
+  src:
+    page: 31
+    quote: |-
+      Sample 1
+      Sample 2
+      Positive, right-hand skew
+  status: unverified
+- id: res.L16.047
+  kind: card
+  topic: shape
+  front: The same n people are measured twice (before and after). What is analysed?
+  back: 'Measurement 1 minus measurement 2 for each person: the differences, summarised by their mean (X̄d) and standard deviation
+    (Sd). Their shape (normal or skewed) again decides the test (slide 33).'
+  src:
+    page: 32
+    quote: |-
+      n
+      Measurement 1
+      minus
+      Measurement 2
+      X̄d, Sd
+  status: unverified

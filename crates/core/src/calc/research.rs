@@ -662,34 +662,59 @@ pub const Z_SCORE: CalcSpec = CalcSpec {
         num("mean", "Mean (μ)", "", -1.0e6, 1.0e6, 0.1),
         num("sd", "Standard deviation (σ)", "", 0.0, 1.0e6, 0.1),
     ],
-    source: "Research L16: normal distribution and Z-score",
+    source: "Research L16: normal distribution curve and Z-score, slides 17–23 (Ass. Prof. Noha Elshaer)",
     compute: |i| {
         let x = i.get_num("value")?;
         let mean = i.get_num("mean")?;
         let sd = i.get_pos("sd")?;
         let z = round2((x - mean) / sd);
-        let (band, label, meaning) = if z.abs() > 1.96 {
-            ("z_score.outside_95", "Beyond ±1.96", "Outside the middle 95% of a normal distribution.")
+        // L16 slides 18 and 23: within ±2 is ordinary (the middle 95%),
+        // beyond ±2 unusual, beyond ±3 extreme (a potential outlier).
+        let side = if z > 0.0 {
+            "above the mean"
+        } else if z < 0.0 {
+            "below the mean"
         } else {
-            ("z_score.within_95", "Within ±1.96", "Inside the middle 95% of a normal distribution.")
+            "at the mean"
+        };
+        let (band, label, meaning) = if z.abs() > 3.0 {
+            (
+                "z_score.extreme",
+                "Extreme (beyond ±3 SD)",
+                "an extreme observation; investigate it as a potential outlier.",
+            )
+        } else if z.abs() > 2.0 {
+            (
+                "z_score.unusual",
+                "Unusual (beyond ±2 SD)",
+                "an unusual observation, outside the middle 95% of values.",
+            )
+        } else {
+            (
+                "z_score.ordinary",
+                "Ordinary (within ±2 SD)",
+                "an ordinary value, inside the middle 95% of values.",
+            )
         };
         Ok(Outcome {
             score: Some(z),
             display: format!("z = {}", show2(z)),
             band,
             label,
-            meaning: meaning.to_owned(),
+            meaning: format!("{} SD {side}: {meaning}", show2(z.abs())),
             page: None,
             parts: vec![Part::new("x", x), Part::new("Mean", mean), Part::new("SD", sd)],
-            notes: vec!["±1 SD holds about 68%, ±2 SD about 95%, ±3 SD about 99.7%.".to_owned()],
+            notes: vec![
+                "±1 SD holds about 68%, ±2 SD about 95%, ±3 SD about 99.7% (L16 slides 11, 15).".to_owned(),
+            ],
         })
     },
 };
 
 /// How to read each result (the course slides, Lectures 2, 5 and 7). The
 /// differential heading does not fit a statistic, so these guides have next
-/// steps only. Diagnostic accuracy (Lecture 14) and the normal distribution
-/// (Lecture 16) are not taught yet, so they rest on standard texts: Gordis
+/// steps only. The Z-score bands follow Lecture 16 (slides 18–23). Diagnostic
+/// accuracy (Lecture 14) is not taught yet, so it rests on standard texts: Gordis
 /// Epidemiology, 6th ed. 2019; Jaeschke et al., JAMA 1994 (likelihood
 /// ratios); Pewsner et al., BMJ 2004 (SpPin and SnNout); Šimundić, EJIFCC
 /// 2009; Kirkwood and Sterne, Essential Medical Statistics, 2nd ed. 2003;
@@ -969,20 +994,33 @@ pub const GUIDES: &[(&str, Guide)] = &[
         },
     ),
     (
-        "z_score.outside_95",
+        "z_score.ordinary",
         Guide {
             next: &[
-                "Beyond ±1.96 lies the outer 5%: unusual at p < 0.05, two-sided; beyond ±2.58, at p < 0.01 (Kirkwood 2003)",
+                "Within ±2 SD sit the ordinary values, about 95% of a normal distribution (L16 slide 23)",
+                "Read the sign and size: +1.2 is well above average, −0.4 slightly below (L16 slide 20)",
                 NORMAL_ONLY,
             ],
             dd: &[],
         },
     ),
     (
-        "z_score.within_95",
+        "z_score.unusual",
         Guide {
             next: &[
-                "Within ±1.96: inside the middle 95%, not unusual at the 5% level (Kirkwood 2003)",
+                "Over 2 or under −2 is unusual: outside the middle 95% (L16 slides 18, 23); for a two-sided test at 5% the exact cut-off is ±1.96 (Kirkwood 2003)",
+                "+2.4 reads as unusually above average (L16 slide 20)",
+                NORMAL_ONLY,
+            ],
+            dd: &[],
+        },
+    ),
+    (
+        "z_score.extreme",
+        Guide {
+            next: &[
+                "Over 3 or under −3 is extreme: investigate it as a potential outlier (L16 slide 18)",
+                "Check it is not a measuring or data-entry error before you keep or drop it (Kirkwood 2003)",
                 NORMAL_ONLY,
             ],
             dd: &[],
@@ -1086,6 +1124,13 @@ mod tests {
     #[test]
     fn z_score() {
         let o = run(&Z_SCORE, Inputs::new().num("value", 130.0).num("mean", 100.0).num("sd", 15.0));
-        assert_eq!((o.score, o.band), (Some(2.0), "z_score.outside_95"));
+        assert_eq!((o.score, o.band), (Some(2.0), "z_score.ordinary"));
+        // L16 slide 20: Mean 75, SD 10.
+        let at = |x: f64| run(&Z_SCORE, Inputs::new().num("value", x).num("mean", 75.0).num("sd", 10.0));
+        assert_eq!((at(87.0).score, at(87.0).band), (Some(1.2), "z_score.ordinary"));
+        assert_eq!((at(71.0).score, at(71.0).band), (Some(-0.4), "z_score.ordinary"));
+        assert_eq!((at(99.0).score, at(99.0).band), (Some(2.4), "z_score.unusual"));
+        assert_eq!((at(39.0).score, at(39.0).band), (Some(-3.6), "z_score.extreme"));
+        assert!(at(39.0).meaning.starts_with("3.6 SD below the mean"));
     }
 }

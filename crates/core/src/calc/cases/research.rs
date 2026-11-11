@@ -261,27 +261,53 @@ pub fn tables() -> Vec<Table> {
             "diagnostic_accuracy.ppv",
         )
         .score(20.0, 1e-9),
-        Table::new("z_score", &["z_score.outside_95", "z_score.within_95"])
+        Table::new("z_score", &["z_score.ordinary", "z_score.unusual", "z_score.extreme"])
             .paper(
-                "(130 − 100) / 15 = 2.0, outside the middle 95%",
-                ins![value: 130.0, mean: 100.0, sd: 15.0],
-                "z_score.outside_95",
+                "L16 slide 17: Mohamed's 87 with mean 75 and SD 10 = +1.2, well above average but not unusual",
+                ins![value: 87.0, mean: 75.0, sd: 10.0],
+                "z_score.ordinary",
             )
-            .score(2.0, 1e-9)
+            .score(1.2, 1e-9)
             .noted("68%")
+            .edge(
+                "L16 slide 20: Sarah's 99 = +2.4, unusually above average",
+                ins![value: 99.0, mean: 75.0, sd: 10.0],
+                "z_score.unusual",
+            )
+            .score(2.4, 1e-9)
+            .edge(
+                "L16 slide 20: Fares's 39 = −3.6, extremely below average",
+                ins![value: 39.0, mean: 75.0, sd: 10.0],
+                "z_score.extreme",
+            )
+            .score(-3.6, 1e-9)
             .cut(
-                "z 1.96 / 1.97 (beyond ±1.96)",
+                "z 2.0 / 2.01 (over 2 is unusual)",
                 ins![mean: 100.0, sd: 10.0],
                 "value",
-                (119.6, "z_score.within_95"),
-                (119.7, "z_score.outside_95"),
+                (120.0, "z_score.ordinary"),
+                (120.1, "z_score.unusual"),
             )
             .cut(
-                "z −1.96 / −1.97",
+                "z −2.0 / −2.01",
                 ins![mean: 100.0, sd: 10.0],
                 "value",
-                (80.4, "z_score.within_95"),
-                (80.3, "z_score.outside_95"),
+                (80.0, "z_score.ordinary"),
+                (79.9, "z_score.unusual"),
+            )
+            .cut(
+                "z 3.0 / 3.01 (over 3 is extreme)",
+                ins![mean: 100.0, sd: 10.0],
+                "value",
+                (130.0, "z_score.unusual"),
+                (130.1, "z_score.extreme"),
+            )
+            .cut(
+                "z −3.0 / −3.01",
+                ins![mean: 100.0, sd: 10.0],
+                "value",
+                (70.0, "z_score.unusual"),
+                (69.9, "z_score.extreme"),
             ),
     ]
 }

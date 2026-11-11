@@ -282,37 +282,6 @@ impl Store {
         Ok(())
     }
 
-    /// The oldest `limit` ops waiting for the hub.
-    pub fn outbox(&self, limit: usize) -> Result<Vec<Op>> {
-        let conn = self.conn.lock().unwrap();
-        let mut stmt = conn.prepare("SELECT op FROM sync_outbox ORDER BY seq LIMIT ?1")?;
-        let ops = stmt
-            .query_map([limit as i64], |r| r.get::<_, String>(0))?
-            .filter_map(|r| r.ok().and_then(|json| serde_json::from_str(&json).ok()))
-            .collect();
-        Ok(ops)
-    }
-
-    /// Like [`Store::outbox`], leaving out ops on `skip` tables (ones the hub
-    /// said it doesn't know yet on this connection).
-    pub fn outbox_skipping(&self, limit: usize, skip: &BTreeSet<String>) -> Result<Vec<Op>> {
-        if skip.is_empty() {
-            return self.outbox(limit);
-        }
-        let conn = self.conn.lock().unwrap();
-        let skip = serde_json::to_string(skip).unwrap_or_default();
-        let mut stmt = conn.prepare(
-            "SELECT op FROM sync_outbox
-             WHERE json_extract(op, '$.table') NOT IN (SELECT value FROM json_each(?2))
-             ORDER BY seq LIMIT ?1",
-        )?;
-        let ops = stmt
-            .query_map(params![limit as i64, skip], |r| r.get::<_, String>(0))?
-            .filter_map(|r| r.ok().and_then(|json| serde_json::from_str(&json).ok()))
-            .collect();
-        Ok(ops)
-    }
-
     /// The tables of these outbox ops.
     pub fn outbox_tables<'a>(&self, op_ids: impl IntoIterator<Item = &'a str>) -> Result<BTreeSet<String>> {
         let conn = self.conn.lock().unwrap();
@@ -335,7 +304,9 @@ impl Store {
         conn.query_row("SELECT COUNT(*) FROM sync_outbox", [], |r| r.get::<_, i64>(0)).unwrap_or(0) as u64
     }
 
-    /// Drops acked (or finally rejected) ops.
+    /// Drops ops from the outbox (tests stand in for the hub with it;
+    /// the engine settles a push with `settle_outbox`).
+    #[cfg(test)]
     pub fn remove_from_outbox<'a>(&self, op_ids: impl IntoIterator<Item = &'a str>) -> Result<()> {
         let mut conn = self.conn.lock().unwrap();
         let tx = conn.transaction()?;

@@ -203,6 +203,25 @@ fn finishing_a_lesson_marks_it_done_and_shows_the_recap() {
 }
 
 #[test]
+fn a_finish_the_store_refuses_stays_on_the_last_step_until_it_saves() {
+    let (l, at) = claim(|l, k, _| k + 1 == l.steps.len() && !l.practice.is_empty());
+    let mut d = open(l, at);
+    let n = l.steps.len();
+    crate::store::shared().set_read_only(true);
+    d.click(is("ls-skip"));
+    crate::store::shared().set_read_only(false);
+    assert!(d.html().contains(tx::FINISH_UNSAVED), "{}", d.html());
+    assert!(!shows(&d, "ls-summary"), "not done yet");
+    assert_eq!(count(&d), format!("{n}/{n}"));
+    assert!(d.read(|| mark(&l.id)).is_none(), "no mark without its cleared place");
+    // Retry finishes it: the mark and the cleared place together.
+    d.click(is("save-retry"));
+    assert!(shows(&d, "ls-summary"), "{}", d.html());
+    assert!(d.read(|| mark(&l.id)).is_some());
+    assert_eq!(d.read(|| resume_step(&l.id)), None);
+}
+
+#[test]
 fn a_question_gates_continue_until_answered_or_skipped() {
     let (l, at) = claim(kind("check"));
     let mut d = open(l, at);

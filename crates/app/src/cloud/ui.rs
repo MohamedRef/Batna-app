@@ -232,6 +232,9 @@ pub fn SyncSection() -> Element {
         if status.configured && !signed_in {
             PasswordSignIn {}
         }
+        if signed_in && status.held > 0 {
+            super::held_ui::HeldCard { held: status.held }
+        }
         if signed_in {
             LoginCard {}
             DevicesCard {}
@@ -625,6 +628,7 @@ mod tests {
             device_id: "phone-1".into(),
             sync,
             pending: 0,
+            held: 0,
             last_sync_ms: None,
             problem: None,
             finishing_sign_in: false,
@@ -897,6 +901,18 @@ mod tests {
         let (html, _) =
             render(CloudStatus { problem: Some(Problem::ClockOff), ..status(SyncState::Live) }, None);
         assert!(html.contains(tx::P_CLOCK) && html.contains("role=\"status\""), "{html}");
+    }
+
+    /// Refused changes are named, with a way to send them again or let
+    /// them go (audit F12).
+    #[test]
+    fn held_changes_get_their_own_card() {
+        let (html, _) = render(status(SyncState::Live), None);
+        assert!(!html.contains("sync-held"), "nothing held, no card: {html}");
+        let (html, _) = render(CloudStatus { held: 3, ..status(SyncState::Live) }, None);
+        assert!(html.contains("sync-held") && html.contains("3 تغييرات من الجهاز ده"), "{html}");
+        assert!(html.contains(tx::HELD_SEND_AGAIN) && html.contains(tx::HELD_FORGET), "{html}");
+        assert!(!html.contains(tx::HELD_FORGET_SURE), "letting go asks first: {html}");
     }
 
     #[test]

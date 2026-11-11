@@ -94,3 +94,21 @@ pub const P_TAKEN: &str = "اسم المستخدم ده محجوز. اختار �
 pub const P_BAD_USERNAME: &str = "اسم المستخدم من 3 لـ 32: حروف إنجليزي وأرقام و . _ - بس.";
 pub const P_SHORT_PASSWORD: &str = "الباسورد لازم يبقى 10 حروف على الأقل.";
 pub const P_MISMATCH: &str = "الباسوردين مش زي بعض.";
+/// Changes Batna Cloud refused, or this build couldn't read (`cloud/held_ui.rs`).
+pub const HELD_TITLE: &str = "تغييرات ما اترفعتش";
+pub const HELD_CHANGE: super::count::Noun =
+    super::count::Noun {
+        one: "تغيير واحد", two: "تغييرين", few: "تغييرات", many: "تغيير"
+    };
+/// "{n} … Batna Cloud didn't take"; the changes are safe on this device.
+pub fn held(n: u64) -> String {
+    format!(
+        "{} من الجهاز ده ما اترفعوش على باطنة كلاود. هما محفوظين هنا عادي، بس أجهزتك التانية مش شايفاهم. ابعتهم تاني (بعد تحديث مثلًا)، أو سيبهم.",
+        super::count::count(n, &HELD_CHANGE)
+    )
+}
+pub const HELD_SEND_AGAIN: &str = "ابعتهم تاني";
+pub const HELD_FORGET: &str = "سيبهم";
+pub const HELD_FORGET_SURE: &str = "هيفضلوا على الجهاز ده بس، ومش هيوصلوا لأجهزتك التانية. متأكد؟";
+pub const HELD_FORGET_YES: &str = "أيوه، سيبهم";
+pub const HELD_FORGET_NO: &str = "لأ";

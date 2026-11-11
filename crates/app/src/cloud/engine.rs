@@ -276,6 +276,18 @@ impl Engine {
                 }
                 self.load_devices().await;
             }
+            Command::SendHeldAgain => {
+                match self.store.send_held_again() {
+                    Ok(n) => crate::diag::report!("sync: {n} held ops offered again"),
+                    Err(e) => crate::diag::report!("sync: sending held ops again: {e}"),
+                }
+                self.pump().await;
+            }
+            Command::ForgetHeld => {
+                if let Err(e) = self.store.forget_held() {
+                    crate::diag::report!("sync: forgetting held ops: {e}");
+                }
+            }
             Command::Kick => {
                 // Also sent when Batna comes back to the front: a waiting
                 // sign-in tries again right away.
@@ -702,9 +714,9 @@ impl Engine {
                     if self.problem == Some(Problem::ClockOff) && !done.is_empty() {
                         self.problem = None;
                     }
-                    let ids =
-                        done.iter().map(String::as_str).chain(rejected.iter().map(|r| r.op_id.as_str()));
-                    if let Err(e) = self.store.remove_from_outbox(ids) {
+                    // Refused ops are held, not dropped: Settings › Sync
+                    // counts them and can send them again (store/held.rs).
+                    if let Err(e) = self.store.settle_outbox(&done, &rejected) {
                         crate::diag::report!("outbox: {e}");
                     }
                     self.touch_last_sync();
@@ -788,6 +800,7 @@ impl Engine {
             device_id: self.device.device_id.clone(),
             sync,
             pending: self.store.outbox_len(),
+            held: self.store.held_len(),
             last_sync_ms: self.store.last_sync_ms(),
             problem: self.problem,
             finishing_sign_in: self.pending_sign_in.is_some(),

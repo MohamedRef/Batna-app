@@ -21,7 +21,7 @@
   font-size: var(--fs-sm);
   font-weight: 700;
 }
-.ls-h { font-size: var(--fs-lg); margin: 0 0 var(--sp-3); line-height: 1.4; }
+.ls-h { font-size: calc(var(--fs-lg) * var(--ls-scale, 1)); margin: 0 0 var(--sp-3); line-height: 1.4; }
 .ls-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
 .ls-verdict {
   font-weight: 700;
@@ -45,21 +45,38 @@
 }
 
 /* ---------- text ---------- */
-.ls-rich { display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95; }
+/* Colour follows importance (the signaling principle: cues on the few
+   relevant words help learning, Mayer). Four steps, strongest first:
+   1. ==key== marker: a pill in the theme's opposite hue, 1-3 per step;
+   2. step heading and **terms**: full text colour, bold;
+   3. body text: the text colour softened a notch toward the card, so long
+      paragraphs glare less and the bold terms stand out from them;
+   4. source chips and meta: muted. */
+.ls-rich {
+  display: flex; flex-direction: column; gap: var(--sp-3); font-size: calc(1.05rem * var(--ls-scale, 1)); line-height: calc(1.95 * var(--ls-space, 1));
+  color: color-mix(in oklab, var(--text) 84%, var(--surface));
+}
+.ls-h, .ls-q { color: var(--text); }
 .ls-rich p { margin: 0; }
 .ls-rich ul, .ls-rich ol { margin: 0; padding-inline-start: 1.4rem; display: grid; gap: var(--sp-2); }
 .ls-rich li::marker { color: var(--accent); }
 /* **bold** is a term, set in weight only; ==key== is one of the step's few
    key terms and gets the marker (docs/LESSONS.md). */
-.ls-rich strong, .ls-mn-hook strong { font-weight: 700; }
+.ls-rich strong, .ls-mn-hook strong { font-weight: 700; color: var(--text); }
 /* Every lesson text, Line ones too (options, cards, cells, recap): never
    the browser's yellow, which is unreadable at night (#321). */
 mark {
-  color: inherit;
+  /* A pill (Mohamed picked it 2026-11-08 over a highlighter band) in the
+     theme's opposite hue (--mark: true yellow on blue themes, teal on warm ones),
+     so it stands out from the card; never confused with plain bold.
+     mark-ink on mark is AA-tested in batna_core::theme. */
+  color: var(--mark-ink);
   font-weight: 700;
-  background: linear-gradient(transparent 55%, var(--accent-soft) 55%);
-  padding-inline: 2px;
-  border-radius: 2px;
+  background: var(--mark);
+  padding: 1px 0.45em;
+  border-radius: var(--radius-pill);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .ls-rich bdi { font-size: 0.97em; }
 /* An English run inside Arabic is one LTR box (learn/text.rs `runs`): split
@@ -200,7 +217,9 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-count { flex: none; font-variant-numeric: tabular-nums; }
 /* Name the lesson and keep its English lecture label separate. */
 .ls-context { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
-.ls-context-title { margin: 0; font-size: var(--fs-lg); font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+/* The lesson name is context, the step heading below is what to read: the
+   name is smaller and muted so the eye lands on the step first. */
+.ls-context-title { margin: 0; font-size: var(--fs-md); font-weight: 600; color: var(--muted); line-height: 1.5; overflow-wrap: anywhere; }
 .ls-context-lecture { margin: 0; overflow-wrap: anywhere; }
 .ls-stage {
   gap: var(--sp-3);
@@ -218,6 +237,52 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 @keyframes ls-in { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
 @keyframes ls-in-back { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
 .ls-player[data-dir="back"] .ls-stage { animation-name: ls-in-back; }
+
+/* Wider windows (tablet landscape, every Mac window): one calm reading
+   column, built on reading research (docs/LESSONS.md § Reading layout).
+   - Measure: about 60-70 characters a line. Lines of ~55-75 characters
+     gave the best comprehension on screen (Dyson & Haselgrove 2001;
+     Bringhurst's 66); the old 1600px pane gave over 120.
+   - One fixation point: the column is centred and its top sits at the same
+     height on every step, so the eye returns to the same spot instead of
+     hunting (Arabic readers scan a mirrored F: line starts and the top get
+     the most attention, NN/g eyetracking).
+   - Controls close to the content (Fitts's law): Back/Next follow the card
+     instead of waiting at the bottom of a tall window. They still stick to
+     the bottom while a long step scrolls.
+   - The lesson name is quiet context above the card, not a competing card.
+   Hidden steps stay mounted but display: none (answer state, Back). */
+@media (min-width: 840px) {
+  .ls-player {
+    /* --ls-one: the line width he picks (learn/reading.rs). */
+    max-inline-size: var(--ls-one, 40rem);
+    gap: var(--sp-3);
+  }
+  .ls-player > .ls-bar { order: -2; gap: var(--sp-3); padding-block: var(--sp-3); }
+  /* The fixed gap that puts the column's top in the upper third. */
+  .ls-player::before {
+    content: "";
+    order: -1;
+    flex: none;
+    block-size: clamp(0px, 5dvh, 3.5rem);
+  }
+  .ls-player > .ls-context { padding-inline: var(--sp-1); }
+  .ls-player > .ls-nav {
+    margin-block-start: 0;
+    padding-inline: var(--sp-1);
+  }
+  .ls-player[data-view="steps"] > .ls-stage {
+    min-block-size: clamp(14rem, 34dvh, 24rem);
+    padding: clamp(var(--sp-4), 2.2vw, 2.25rem);
+  }
+  .ls-segs { gap: 4px; }
+}
+/* A big desk screen is read from further away: a notch larger type in a
+   column widened to keep the same ~70 characters a line. */
+@media (min-width: 1200px) {
+  .ls-player { max-inline-size: var(--ls-one-xl, 44rem); }
+  .ls-player :where(.ls-rich) { font-size: calc(1.125rem * var(--ls-scale, 1)); }
+}
 
 /* Focus: a lesson takes the whole phone screen. The app bar and the tab
    bar step aside (× closes the lesson); wider windows keep their rail. */
@@ -451,7 +516,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   gap: var(--sp-2);
 }
 .ls-reveal > *, .ls-check > *, .ls-mnemonic > * { margin: 0; }
-.ls-q { font-size: 1.25rem; font-weight: 600; line-height: 1.6; }
+.ls-q { font-size: calc(1.25rem * var(--ls-scale, 1)); font-weight: 600; line-height: calc(1.6 * var(--ls-space, 1)); }
 .ls-q .ls-rich { font-size: inherit; }
 .ls-answer {
   border-inline-start: 4px solid var(--good);
@@ -524,7 +589,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   background: var(--accent-soft);
   border: 1px solid var(--line-soft, var(--line));
 }
-.ls-why-box .ls-rich { font-size: var(--fs-md); }
+.ls-why-box .ls-rich { font-size: calc(var(--fs-md) * var(--ls-scale, 1)); }
 
 /* tiles: order, match, sort */
 .ls-pool { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
@@ -710,7 +775,7 @@ button.ls-slot:hover { border-color: var(--accent); }
 
 /* table */
 .ls-table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
-.ls-table table { border-collapse: collapse; inline-size: 100%; font-size: var(--fs-sm); }
+.ls-table table { border-collapse: collapse; inline-size: 100%; font-size: calc(var(--fs-sm) * var(--ls-scale, 1)); }
 .ls-table th, .ls-table td { padding: var(--sp-2) var(--sp-3); border-block-end: 1px solid var(--line); text-align: start; vertical-align: top; }
 .ls-table thead th { background: var(--accent-soft); color: var(--accent); }
 .ls-table tbody th { font-weight: 700; background: var(--bg); }
@@ -783,3 +848,88 @@ button.ls-soon .coll-title { color: var(--muted); }
 }
 .ls-tools { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-block: var(--sp-2) 0; }
 .ls-tools .abd-open { min-block-size: var(--target, 48px); }
+
+/* ---------- your own highlights (highlight.js) ---------- */
+/* Bright marker colours on every theme; the words on a fill turn dark
+   through ::highlight(uhl-ink). A WebView without the Custom Highlight API
+   gets a lighter fill instead, so the theme's own text still reads. */
+:root {
+  --uhl-yellow: #ffd43b;
+  --uhl-green: #8ce99a;
+  --uhl-blue: #74c0fc;
+  --uhl-pink: #faa2c1;
+  --uhl-orange: #ffa94d;
+  --uhl-ink: #1d1a12;
+}
+[data-uhl-host] { position: relative; isolation: isolate; }
+.uhl-layer { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: visible; }
+.uhl-layer i { position: absolute; display: block; background: var(--c); }
+:is(.uhl-layer i, .uhl-dot)[data-c="yellow"] { --c: var(--uhl-yellow); }
+:is(.uhl-layer i, .uhl-dot)[data-c="green"] { --c: var(--uhl-green); }
+:is(.uhl-layer i, .uhl-dot)[data-c="blue"] { --c: var(--uhl-blue); }
+:is(.uhl-layer i, .uhl-dot)[data-c="pink"] { --c: var(--uhl-pink); }
+:is(.uhl-layer i, .uhl-dot)[data-c="orange"] { --c: var(--uhl-orange); }
+.uhl-layer i[data-sh="pill"] { border-radius: 999px; }
+.uhl-layer i[data-sh="rect"] { border-radius: 2px; }
+:root[data-uhl-ink="no"] .uhl-layer i[data-s="fill"] { opacity: 0.45; }
+::highlight(uhl-ink) { color: var(--uhl-ink); }
+
+.uhl-bar {
+  position: fixed;
+  z-index: 80;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  max-inline-size: calc(100vw - 16px);
+  padding: 6px 10px;
+  border-radius: 22px;
+  background: var(--sheet);
+  color: var(--text);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.22);
+  font-size: var(--fs-sm);
+}
+.uhl-bar[hidden] { display: none; }
+.uhl-dots, .uhl-seg { display: flex; gap: 4px; align-items: center; }
+.uhl-dot {
+  inline-size: 34px;
+  block-size: 34px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: var(--c);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12);
+  cursor: pointer;
+}
+.uhl-dot[aria-pressed="true"] { border-color: var(--text); }
+.uhl-seg { padding: 2px; border-radius: 999px; background: var(--surface-2); }
+.uhl-opt, .uhl-del {
+  min-block-size: 34px;
+  padding-inline: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.uhl-opt[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.uhl-del { color: var(--bad); background: var(--bad-soft); }
+.uhl-del[hidden] { display: none; }
+
+/* Reminders under a step: the تحشيشة this topic already has (remind.rs). */
+.ls-remind { display: flex; flex-direction: column; gap: var(--sp-2); margin-block-start: var(--sp-3); }
+.ls-remind-one {
+  border: 2px dotted var(--accent); border-radius: var(--radius);
+  background: var(--surface); padding: var(--sp-3) var(--sp-4);
+  display: flex; flex-direction: column; gap: var(--sp-1);
+}
+.ls-remind-one > p { margin: 0; }
+.ls-remind-label { font-weight: 800; color: var(--accent); }
+.ls-remind-what { font-size: var(--fs-sm); color: var(--muted); font-family: var(--font-latin); }
+.ls-remind-word { font-family: var(--font-latin); letter-spacing: 0.2em; font-weight: 800; color: var(--accent); }
+.ls-remind-parts { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-family: var(--font-latin); font-size: var(--fs-sm); }
+.ls-remind-parts b { display: inline-block; min-inline-size: 2rem; color: var(--accent); }
+.ls-remind-text p { margin: 0; white-space: pre-line; }
+.ls-remind-from { align-self: flex-start; font-size: var(--fs-sm); }

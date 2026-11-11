@@ -83,7 +83,7 @@ impl Section {
         Self::ALL.into_iter().find(|s| s.id() == id)
     }
 
-    fn title(self) -> &'static str {
+    pub(crate) fn title(self) -> &'static str {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION,
             Self::Reminders => crate::i18n::remind::SECTION,
@@ -97,7 +97,7 @@ impl Section {
         }
     }
 
-    fn summary(self) -> &'static str {
+    pub(crate) fn summary(self) -> &'static str {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION_SUB,
             Self::Reminders => crate::i18n::remind::SECTION_SUB,
@@ -110,10 +110,10 @@ impl Section {
             Self::About => tx::ABOUT_SUB,
         }
     }
-    fn matches(self, query: &str) -> bool {
+    pub(crate) fn matches(self, query: &str) -> bool {
         let keywords = match self {
             Self::Study => {
-                "study review daily limit fsrs sounds vibration onboarding مذاكرة مراجعة حد يومي صوت اهتزاز ترحيب"
+                "study review daily limit fsrs sounds vibration onboarding weak marks مذاكرة مراجعة حد يومي صوت اهتزاز ترحيب علامات راجعها"
             }
             Self::Reminders => "notifications permission quiet hours اشعارات تنبيهات اذونات هدوء مواعيد",
             Self::Sync => "google sign in account cloud devices جوجل دخول حساب مزامنة أجهزة",
@@ -244,8 +244,7 @@ fn SectionList(current: Section) -> Element {
                 .as_ref()
                 .and_then(crate::update::view::summary)
                 .unwrap_or_else(|| s.summary().to_string()),
-            // LRI…PDI: "1.0.0-alpha.1" keeps its order inside the Arabic line.
-            Section::About => format!("{} \u{2066}{}\u{2069}", tx::VERSION, env!("CARGO_PKG_VERSION")),
+            Section::About => format!("{} {}", tx::VERSION, crate::version::line()),
             _ => s.summary().to_string(),
         }
     };
@@ -296,6 +295,7 @@ fn SectionView(section: Section) -> Element {
             rsx! {
                 crate::today::StudySection {}
                 crate::learn::ViewSection {}
+                crate::weak::WeakSection {}
                 crate::sounds::SoundSection {}
                 crate::onboarding::ReopenCard {}
             }

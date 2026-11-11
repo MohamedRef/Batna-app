@@ -101,8 +101,13 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     use_hook(|| {
         document::eval(SWIPE_JS);
     });
+    super::highlight::use_highlights(&lesson.id);
     let view = VIEW();
     let pages = view == View::Pages;
+    // The reading choices (learn/reading.rs) and whether their popover is open.
+    let reading = ui.prefs.read().reading;
+    let [(_, read_size), (_, read_spacing), (_, read_width)] = super::reading::attrs(reading);
+    let read_open = use_signal(|| false);
     let question_steps: Vec<bool> = lesson.steps.iter().map(|step| step.body.is_question()).collect();
 
     let go = {
@@ -150,11 +155,15 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
             class: "ls-player",
             "data-view": if pages { "pages" } else { "steps" },
             "data-dir": dir(),
+            "data-read-size": read_size,
+            "data-read-spacing": read_spacing,
+            "data-read-width": read_width,
             header { class: "ls-bar",
                 button {
                     class: "ls-close",
                     "data-back": "true",
-                    "aria-keyshortcuts": "Escape",
+                    // Escape closes the reading popover first, when it is open.
+                    "aria-keyshortcuts": if read_open() { None } else { Some("Escape") },
                     aria_label: tx::CLOSE,
                     title: tx::CLOSE,
                     onclick: move |_| close(ui),
@@ -162,6 +171,8 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 }
                 StepMeter { current: i + 1, question_steps }
                 span { class: "muted small ls-count num-ltr", "{i + 1}/{n}" }
+                super::reading::ReadingButton { open: read_open }
+                crate::desk::FocusToggle {}
                 button {
                     class: "ls-view",
                     aria_label: if pages { tx::TO_STEPS } else { tx::TO_PAGES },
@@ -214,6 +225,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 button {
                     class: if pages { "ls-arrow" } else { "btn btn-secondary" },
                     "data-nav": "back",
+                    "aria-keyshortcuts": "ArrowRight",
                     aria_label: tx::BACK,
                     title: tx::BACK,
                     disabled: i == 0,
@@ -250,7 +262,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     button {
                         class: "ls-arrow ls-arrow-next",
                         "data-nav": "next",
-                        "aria-keyshortcuts": "Enter",
+                        "aria-keyshortcuts": "Enter ArrowLeft",
                         aria_label: tx::NEXT,
                         title: tx::NEXT,
                         disabled: !can_go,
@@ -262,7 +274,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     button {
                         class: "btn btn-primary btn-lg ls-next",
                         "data-nav": "next",
-                        "aria-keyshortcuts": "Enter",
+                        "aria-keyshortcuts": "Enter ArrowLeft",
                         disabled: !can_go,
                         aria_describedby: if needs_answer { Some("ls-gate-hint") } else { None },
                         onclick: move |_| go_next(i + 1),
@@ -336,7 +348,7 @@ fn Stage(
     let course = batna_core::program::course_of(&seed).to_string();
     let has_abbr = use_hook(|| !crate::abbrsheet::entries(&texts, Some(&course)).is_empty());
     rsx! {
-        crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1, "data-course": "{course}",
+        crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", tabindex: "-1", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1, "data-course": "{course}",
             if try_done {
                 div { class: "ls-try-done",
                     p { class: "ls-kicker", {tx::TRY} }
@@ -348,6 +360,10 @@ fn Stage(
                 for r in std::iter::once(round()) {
                     StepView { key: "{r}", body: step.body.clone(), seed: seed.clone(), on_answer }
                 }
+            }
+            // A تحشيشة this topic already has, from this lesson or another.
+            if !try_done && !step.remind.is_empty() {
+                super::remind::Reminders { remind: step.remind.clone(), here: seed.split('#').next().unwrap_or_default().to_string() }
             }
             if can_retry && !try_done {
                 button {
@@ -362,20 +378,23 @@ fn Stage(
                     span { aria_hidden: "true", "↻" }
                 }
             }
-            // The page chip, with the step's abbreviations beside it.
-            if step.page.is_some() || has_abbr {
-                footer { class: "ls-src",
+            // The page chip, with the step's abbreviations, a weak-fact mark
+            // and his note beside it.
+            footer { class: "ls-src",
+                if has_abbr {
                     crate::abbrsheet::AbbrChip { texts: texts.clone(), course: Some(course.clone()) }
-                    if let Some(page) = step.page {
-                        crate::hover::BookPage {
-                            page,
-                            quote: if quote_held { None } else { step.quote.clone() },
-                            held: quote_held && step.quote.is_some(),
-                            of: seed.clone(),
-                            hook: step_hook(&step.body),
-                        }
-                    }
                 }
+                if let Some(page) = step.page {
+                    crate::hover::BookPage {
+                        page,
+                        quote: if quote_held { None } else { step.quote.clone() },
+                        held: quote_held && step.quote.is_some(),
+                        of: seed.clone(),
+                        hook: step_hook(&step.body),
+                    }
+                    crate::weak::StepMark { of: seed.clone(), page }
+                }
+                crate::notes::NoteChip { anchor: batna_core::note::Anchor::Lesson(seed.clone()), page: step.page }
             }
         }
     }

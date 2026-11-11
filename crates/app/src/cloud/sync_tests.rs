@@ -191,6 +191,8 @@ fn info(store: &Store, name: &str) -> DeviceInfo {
 
 pub(super) fn answer(item: &str) -> ReviewEvent {
     ReviewEvent {
+        confidence: None,
+        reason: None,
         item_id: item.into(),
         grade: Grade::Good,
         origin: Origin::Review,

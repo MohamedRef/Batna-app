@@ -1,8 +1,8 @@
 //! Phones: the bottom bar keeps four screens (Today, Lessons, Review,
 //! Questions) and a "More" tab. More opens a bounded sheet above the bar,
 //! grouped as in the 2026-10 redesign: practice (Cases, Oral, Calculators)
-//! and your references and tools (References, a new card, Progress,
-//! Settings). From 600dp the rail and sidebar show every screen and the
+//! and your references and tools (the course map, go to a page,
+//! References, abbreviations, your notes, a new card, Progress, Settings). From 600dp the rail and sidebar show every screen and the
 //! tools ([`ToolButtons`]), so the tab and the sheet hide (shape.css).
 
 use dioxus::prelude::*;
@@ -47,6 +47,15 @@ pub const ABBREVIATIONS: Tool = Tool {
     open: |ui| crate::abbrdict::open(ui, None),
     shown: never,
 };
+// A sheet over the screen, not a page.
+pub const GO_PAGE: Tool =
+    Tool { label: i18n::gopage::TOOL, icon: icons::go_page, open: crate::gopage::open, shown: never };
+pub const NOTES: Tool = Tool {
+    label: i18n::notes::LIST_TITLE,
+    icon: icons::notes,
+    open: crate::notes::open_list,
+    shown: crate::notes::list_shown,
+};
 pub const ADD_CARD: Tool = Tool {
     label: i18n::refs::ADD_CARD,
     icon: icons::add_card,
@@ -56,7 +65,7 @@ pub const ADD_CARD: Tool = Tool {
 
 /// The tools the rail and sidebar list under the screens from 600dp (More
 /// holds them on phones).
-pub const TOOLS: [Tool; 5] = [COURSES, REFERENCES, ABBREVIATIONS, ADD_CARD, CALCULATORS];
+pub const TOOLS: [Tool; 7] = [COURSES, GO_PAGE, REFERENCES, ABBREVIATIONS, NOTES, ADD_CARD, CALCULATORS];
 
 /// One row in More.
 #[derive(Clone, Copy)]
@@ -93,8 +102,10 @@ const GROUPS: [(&str, &[Row]); 2] = [
         i18n::nav::MORE_TOOLS,
         &[
             Row::Tool(COURSES),
+            Row::Tool(GO_PAGE),
             Row::Tool(REFERENCES),
             Row::Tool(ABBREVIATIONS),
+            Row::Tool(NOTES),
             Row::Tool(ADD_CARD),
             Row::Screen(Screen::Stats),
             Row::Settings,

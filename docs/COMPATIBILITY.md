@@ -12,7 +12,7 @@ rule names where it lives and the test that holds it.
 | Thing | Where | What orders it | Who checks it |
 |---|---|---|---|
 | App version | workspace `version` (`0.1.1-alpha.0`) | `Version` in `crates/core/src/update.rs` | the updater; Android's `versionCode` |
-| App build | the CI run number for `preview`, `0` for releases | `(version, build)` | the updater, the content pack |
+| App build | commits on `main` for every CI build, preview or release (`scripts/version.sh`); `0` for a local build | `(version, build)` | the updater, the content pack |
 | Feed format | `UPDATE_FORMAT` in `crates/core/src/update.rs` | integer | `verify_manifest` |
 | Pack container | `MAGIC` = `BATNAPK1` in `crates/core/src/pack.rs` | the magic bytes | `Pack::decode` |
 | Pack schema | `pack::SCHEMA` (the content types a build reads) | integer | `Pack::decode` |

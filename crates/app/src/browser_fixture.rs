@@ -29,9 +29,14 @@ pub fn out_dir_in(root: &std::path::Path, screen: &str) -> PathBuf {
         crate::PARTS_CSS.text().to_string(),
         crate::APPEARANCE_CSS.text().to_string(),
         crate::sheet::CSS.text().to_string(),
+        crate::LIQUID_GLASS_CSS.text().to_string(),
+        crate::desk::NAV_CSS.text().to_string(),
+        crate::desk::DESK_CSS.text().to_string(),
     ]
     .join("\n");
     std::fs::write(dir.join("app.css"), app).unwrap();
+    // Browser regression loads the same drag logic as the Mac WebView.
+    std::fs::write(dir.join("desk-resize.js"), include_str!("desk/resize.js")).unwrap();
     for theme in Theme::ALL {
         for size in [TextSize::Normal, TextSize::Larger] {
             let prefs = DevicePrefs { theme, text_size: size, ..DevicePrefs::default() };
@@ -42,8 +47,10 @@ pub fn out_dir_in(root: &std::path::Path, screen: &str) -> PathBuf {
     dir
 }
 
-/// The app's frame around one screen, as `App` draws it (main.rs): the
-/// phone bar and rail are left out, as focus mode hides them anyway.
+/// The app's frame around one screen, as `App` draws it (main.rs).
+/// Keep its navigation structure and production desktop styles: focus mode
+/// only hides navigation on phones. Fixture navigation is deliberately inert:
+/// click-through tests must target the screen, not a duplicate test nav.
 #[component]
 pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
     use_context_provider(|| Ui {
@@ -51,9 +58,46 @@ pub fn Shell(screen: Screen, focus: bool, children: Element) -> Element {
         prefs: Signal::new(DevicePrefs::default()),
         focus: Signal::new(focus),
     });
+    // The normal Rust click-through tests search screen text; duplicate nav
+    // labels would intercept their taps. The browser export sets this path
+    // explicitly, so only its screenshots need the desktop shell chrome.
+    let browser_preview = std::env::var_os("APP_BROWSER_FIXTURES").is_some();
     rsx! {
         div { class: "app", lang: "ar", dir: "rtl", "data-appearance": "calm",
+            "data-desk-focus": "false",
             "data-focus": if focus { "true" } else { "false" },
+            if browser_preview {
+                header { class: "topbar",
+                crate::brand::TopBrand {}
+                div { class: "topbar-actions",
+                    crate::shortcuts::MobileSearchButton {}
+                    button {
+                        class: "icon-button",
+                        aria_label: Screen::Settings.label(),
+                        onclick: move |_| {},
+                        {crate::icons::nav(Screen::Settings)}
+                    }
+                }
+            }
+            nav { class: "nav", aria_label: crate::i18n::nav::LABEL,
+                crate::brand::NavBrand {}
+                for tab in Screen::NAV {
+                    crate::NavButton {
+                        key: "{tab:?}",
+                        screen: tab,
+                        class: crate::more::nav_class(tab),
+                    }
+                }
+                button { class: "nav-item nav-foot",
+                    aria_label: Screen::Settings.label(),
+                    // Browser fixture only; Settings has its own production
+                    // screen renderer and browser regression suite.
+                    onclick: move |_| {},
+                    span { class: "glyph", {crate::icons::nav(Screen::Settings)} }
+                    span { class: "label", {Screen::Settings.label()} }
+                }
+            }
+            }
             main { class: "content", "data-screen": "{screen:?}",
                 div { class: "content-rev", {children} }
             }

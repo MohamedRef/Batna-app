@@ -52,6 +52,8 @@ fn target(focus: Focus) -> DailyTarget {
     let now_ms = 20_400 * DAY_MS + 12 * 3_600_000;
     let clock = Clock { now_ms, zone: batna_core::zone::Zone::fixed(0), rollover_hour: 4 };
     let events = vec![ReviewEvent {
+        confidence: None,
+        reason: None,
         item_id: lectures[0].items[0].id.clone(),
         grade: Grade::Good,
         origin: Origin::Review,
@@ -420,4 +422,38 @@ fn due_cases_open_the_cases_and_a_progress_row_its_lecture() {
     t.click("class=\"tap tap-row progress-row\"");
     assert!(t.with(crate::lecture::is_open));
     t.with(crate::lecture::close_all);
+}
+
+#[test]
+fn wide_desktop_today_keeps_study_primary_and_untraps_scrolling() {
+    let css = include_str!("today.css");
+    for required in [
+        "@media (min-width: 1200px) and (min-height: 740px)",
+        ".today-cols.tab-cols[data-wide=\"aside\"]",
+        "grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr)",
+        ".today-cols > .tab-main.tab-sticky",
+        "max-block-size: none",
+        ".today-cols > .tab-aside",
+        "overflow-y: auto",
+    ] {
+        assert!(css.contains(required), "desktop task-first layout needs {required}");
+    }
+}
+
+#[test]
+fn resume_button_returns_to_existing_study_without_queuing_a_new_start() {
+    use crate::tap_dom::TestDom;
+    crate::store::use_memory_store();
+    let mut t = TestDom::of(|| {
+        shell(rsx! {
+            Spy {}
+            ResumeStudy { index: 2, total: 7 }
+        })
+    });
+    assert!(t.html().contains(tx::RESUME_TITLE), "resume is clearly labeled");
+    assert!(t.html().contains("2 / 7"), "progress is visible");
+    assert_eq!(screen(&t), Screen::Today);
+    t.click(tx::RESUME_SESSION);
+    assert_eq!(screen(&t), Screen::Study);
+    assert!(t.with(|| crate::study::START.peek().is_none()), "resume must not create a new session request");
 }

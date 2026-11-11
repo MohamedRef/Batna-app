@@ -18,6 +18,11 @@ const NAV_STYLE: &str = "nav_style";
 const PEN_HOVER: &str = "pen_hover";
 const MOUSE_HOVER: &str = "mouse_hover";
 const APPEARANCE: &str = "appearance";
+const DESK_SPLIT: &str = "desk_split";
+const DESK_FOCUS: &str = "desk_focus";
+const READ_SIZE: &str = "read_size";
+const READ_SPACING: &str = "read_spacing";
+const READ_WIDTH: &str = "read_width";
 
 /// The app's own data folder: the local database and device files live here.
 pub fn data_dir() -> Option<PathBuf> {
@@ -141,6 +146,101 @@ impl Appearance {
     }
 }
 
+// The lesson reading choices: text size, line spacing and line width.
+// Adapted from Steps-app main: crates/app/src/prefs.rs (itself adapted
+// from kabar-app main: crates/app/src/reader/reading.rs).
+
+/// The lesson text size, on top of the interface size (Settings › Look):
+/// scales the step's text only, so the bar and the buttons stay put.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum ReadSize {
+    Small,
+    #[default]
+    Normal,
+    Large,
+    Larger,
+}
+
+impl ReadSize {
+    pub const ALL: [Self; 4] = [Self::Small, Self::Normal, Self::Large, Self::Larger];
+
+    /// Stored value and `data-read-size` on the lesson player.
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::Small => "s",
+            Self::Normal => "m",
+            Self::Large => "l",
+            Self::Larger => "xl",
+        }
+    }
+
+    fn parse(s: &str) -> Self {
+        Self::ALL.into_iter().find(|t| t.as_str() == s).unwrap_or_default()
+    }
+}
+
+/// The space between a lesson's lines.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum ReadSpacing {
+    Snug,
+    #[default]
+    Normal,
+    Airy,
+}
+
+impl ReadSpacing {
+    pub const ALL: [Self; 3] = [Self::Snug, Self::Normal, Self::Airy];
+
+    /// Stored value and `data-read-spacing`.
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::Snug => "snug",
+            Self::Normal => "normal",
+            Self::Airy => "airy",
+        }
+    }
+
+    fn parse(s: &str) -> Self {
+        Self::ALL.into_iter().find(|t| t.as_str() == s).unwrap_or_default()
+    }
+}
+
+/// How wide a lesson's column runs on a tablet or the Mac (a phone is
+/// always the screen's width): a narrow column, the book's width, or most
+/// of the window.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum ReadWidth {
+    Narrow,
+    #[default]
+    Book,
+    Wide,
+}
+
+impl ReadWidth {
+    pub const ALL: [Self; 3] = [Self::Narrow, Self::Book, Self::Wide];
+
+    /// Stored value and `data-read-width`.
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::Narrow => "narrow",
+            Self::Book => "book",
+            Self::Wide => "wide",
+        }
+    }
+
+    fn parse(s: &str) -> Self {
+        Self::ALL.into_iter().find(|t| t.as_str() == s).unwrap_or_default()
+    }
+}
+
+/// How lessons read on this device.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct Reading {
+    pub size: ReadSize,
+    pub spacing: ReadSpacing,
+    pub width: ReadWidth,
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct DevicePrefs {
     pub theme: Theme,
@@ -153,6 +253,13 @@ pub struct DevicePrefs {
     /// Calm, Glossy or Liquid Glass. Older files have no line for it
     /// and loads as Calm.
     pub appearance: Appearance,
+    /// Primary pane width in percent; zero keeps the original 60/40 split.
+    pub desk_split: u8,
+    /// Explicit focus mode for wide desktop study and lessons, device-local.
+    pub desk_focus: bool,
+    /// Lesson text size, line spacing and line width. Older files have no
+    /// lines for them and load as the defaults.
+    pub reading: Reading,
 }
 
 impl Default for DevicePrefs {
@@ -164,6 +271,9 @@ impl Default for DevicePrefs {
             pen_hover: true,
             mouse_hover: true,
             appearance: Appearance::default(),
+            desk_split: 0,
+            desk_focus: false,
+            reading: Reading::default(),
         }
     }
 }
@@ -205,19 +315,36 @@ impl DevicePrefs {
             pen_hover: map.get(PEN_HOVER) != Some(&"off"),
             mouse_hover: map.get(MOUSE_HOVER) != Some(&"off"),
             appearance: map.get(APPEARANCE).map_or_else(Appearance::default, |v| Appearance::parse(v)),
+            desk_split: map
+                .get(DESK_SPLIT)
+                .and_then(|v| v.parse::<u8>().ok())
+                .filter(|v| (35..=70).contains(v))
+                .unwrap_or(0),
+            desk_focus: map.get(DESK_FOCUS) == Some(&"on"),
+            reading: Reading {
+                size: map.get(READ_SIZE).map_or_else(ReadSize::default, |v| ReadSize::parse(v)),
+                spacing: map.get(READ_SPACING).map_or_else(ReadSpacing::default, |v| ReadSpacing::parse(v)),
+                width: map.get(READ_WIDTH).map_or_else(ReadWidth::default, |v| ReadWidth::parse(v)),
+            },
         }
     }
 
     fn render(&self) -> String {
         let on_off = |on: bool| if on { "on" } else { "off" };
         format!(
-            "{THEME}={}\n{TEXT_SIZE}={}\n{NAV_STYLE}={}\n{PEN_HOVER}={}\n{MOUSE_HOVER}={}\n{APPEARANCE}={}\n",
+            "{THEME}={}\n{TEXT_SIZE}={}\n{NAV_STYLE}={}\n{PEN_HOVER}={}\n{MOUSE_HOVER}={}\n{APPEARANCE}={}\n{DESK_SPLIT}={}\n{DESK_FOCUS}={}\n\
+             {READ_SIZE}={}\n{READ_SPACING}={}\n{READ_WIDTH}={}\n",
             self.theme.as_str(),
             self.text_size.as_str(),
             self.nav_style.as_str(),
             on_off(self.pen_hover),
             on_off(self.mouse_hover),
             self.appearance.as_str(),
+            self.desk_split,
+            on_off(self.desk_focus),
+            self.reading.size.as_str(),
+            self.reading.spacing.as_str(),
+            self.reading.width.as_str(),
         )
     }
 
@@ -246,8 +373,21 @@ mod tests {
             pen_hover: false,
             mouse_hover: true,
             appearance: Appearance::Glossy,
+            desk_split: 65,
+            desk_focus: true,
+            reading: Reading { size: ReadSize::Larger, spacing: ReadSpacing::Airy, width: ReadWidth::Narrow },
         };
         assert_eq!(DevicePrefs::parse(&p.render()), p);
+        for size in ReadSize::ALL {
+            for spacing in ReadSpacing::ALL {
+                for width in ReadWidth::ALL {
+                    let q = DevicePrefs { reading: Reading { size, spacing, width }, ..p };
+                    assert_eq!(DevicePrefs::parse(&q.render()), q);
+                }
+            }
+        }
+        let junk = DevicePrefs::parse("read_size=huge\nread_spacing=wide\nread_width=page");
+        assert_eq!(junk.reading, Reading::default());
         assert_eq!(DevicePrefs::parse("theme=neon\nnonsense\ntext_size=huge"), DevicePrefs::default());
     }
 
@@ -266,6 +406,10 @@ mod tests {
         assert_eq!(p.appearance, Appearance::Calm);
         assert_eq!((p.theme, p.text_size, p.mouse_hover), (Theme::Night, TextSize::Small, false));
         assert_eq!(DevicePrefs::parse("appearance=sparkly").appearance, Appearance::Calm);
+        assert_eq!((p.desk_split, p.desk_focus), (0, false), "older preference files keep desktop defaults");
+        assert_eq!(p.reading, Reading::default(), "older preference files read lessons as before");
+        assert_eq!(DevicePrefs::parse("desk_split=99\ndesk_focus=no").desk_split, 0);
+        assert_eq!(DevicePrefs::parse("desk_split=35\ndesk_focus=on").desk_split, 35);
         for appearance in Appearance::ALL {
             let with_appearance = DevicePrefs { appearance, ..p };
             assert_eq!(DevicePrefs::parse(&with_appearance.render()), with_appearance);

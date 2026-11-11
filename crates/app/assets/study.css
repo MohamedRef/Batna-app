@@ -62,6 +62,26 @@
 .st-undo-note[data-failed="yes"] { color: var(--bad); }
 .st-bar { flex: 1; }
 
+/* The phone's reading focus hides the navigation, but the progress row
+   must remain usable at 320dp and at larger text sizes. A dedicated meter
+   row prevents Undo/End from squeezing the progress track into nothing. */
+@media (max-width: 599.98px) {
+  .content[data-screen="Study"] .st-progress {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: var(--sp-1) var(--sp-2);
+  }
+  .st-progress > .st-bar { grid-column: 1 / 3; grid-row: 1; min-inline-size: 0; }
+  .st-progress > .st-count { grid-column: 3; grid-row: 1; }
+  .st-progress > .st-undo { grid-column: 2; grid-row: 2; }
+  .st-progress > button[data-back="true"] { grid-column: 3; grid-row: 2; }
+  /* The grade panel stays above the system gesture strip on edge-to-edge
+     Android, and every grade remains a full-size button. */
+  .st-grades { padding-block-end: max(var(--sp-2), env(safe-area-inset-bottom, 0px)); }
+  .st-grades .rating-row { min-inline-size: 0; }
+  .st-grades .rating { min-inline-size: 0; overflow-wrap: anywhere; }
+}
+
 /* ---------- item ---------- */
 .st-item { gap: var(--sp-3); }
 /* Read to screen readers only (the item's heading). */
@@ -194,6 +214,13 @@
   .st-item .desk-side .st-grades { position: static; }
 }
 
+/* The Mac's full-width two-pane cards grow with the window. Keep the
+   single-column question text readable, while the answer and grade row
+   can use the full card. */
+@media (min-width: 1440px) {
+  .st:has(> .st-item) { max-inline-size: none; }
+}
+
 /* ---------- Glossy ----------
    The pinned progress row is a small floating surface: a light blur over
    the gradient instead of a solid band. Solid when transparency is reduced. */
@@ -204,4 +231,24 @@
 .app[data-appearance="glossy"] .st-answer { border-radius: 18px; }
 @media (prefers-reduced-transparency: reduce) {
   .app[data-appearance="glossy"] .st-progress { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* Mac/desktop keyboard affordances: discover 1-4 grading without opening
+   the shortcuts sheet. Keep them out of the touch-first phone UI. */
+.st-grade-key { display: none; }
+@media (min-width: 840px) and (hover: hover) and (pointer: fine) {
+  .st-grades .rating { position: relative; padding-inline-end: 1.8rem; }
+  .st-grade-key {
+    display: inline-grid;
+    position: absolute;
+    inset-inline-end: var(--sp-2);
+    inset-block-start: var(--sp-2);
+    place-items: center;
+    min-inline-size: 1.2rem;
+    block-size: 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font: 600 0.75rem/1 var(--font-latin);
+    color: var(--muted);
+  }
 }

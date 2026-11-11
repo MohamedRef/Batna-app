@@ -80,6 +80,18 @@ pub fn abbreviations() -> Element {
     stroke("M4 11l3-7 3 7M5.3 8h3.4M14 4h6l-6 7h6M4 15h16M7 20h10")
 }
 
+/// Go to a book page: a page with a turned corner and an arrow
+/// (adapted from Steps-app main: crates/app/src/icons.rs).
+pub fn go_page() -> Element {
+    stroke("M6 3h8l4 4v14H6zM14 3v4h4M9 14h6M12.5 11.5 15 14l-2.5 2.5")
+}
+
+/// His notes: a page with lines and a pencil
+/// (adapted from Steps-app main: crates/app/src/icons.rs).
+pub fn notes() -> Element {
+    stroke("M5 3h10l4 4v5M5 3v18h7M8 8h6M8 12h5M14 21l1-3 5-5 2 2-5 5z")
+}
+
 /// The MSc map: a graduation cap.
 pub fn courses() -> Element {
     stroke("M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6")

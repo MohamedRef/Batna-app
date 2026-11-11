@@ -142,6 +142,7 @@ fn step_keys_pages_and_quotes() {
         },
         page: None,
         quote: None,
+        remind: vec![],
     };
     assert_eq!(
         broken(|f| f.lessons[0].steps.push(figure(true))),
@@ -295,6 +296,7 @@ fn embedding_reads_each_picture_once_and_flags_big_or_missing_files() {
         },
         page: Some(1),
         quote: None,
+        remind: vec![],
     };
     f.lessons[0].steps.extend([figure("hb/small.png"), figure("hb/big.webp"), figure("hb/gone.webp")]);
     let mut files = vec![f];
@@ -322,4 +324,27 @@ fn embedding_reads_each_picture_once_and_flags_big_or_missing_files() {
     assert_eq!(data(3), "data:image/png;base64,AQID");
     assert!(data(4).starts_with("data:image/webp;base64,AAAA"));
     assert_eq!(data(5), "", "a missing file stays empty");
+}
+
+#[test]
+fn remind_lists_parse_stay_unique_and_skip_question_steps() {
+    let explain = |remind: Vec<&str>| Step {
+        body: StepBody::Explain { title: None, text: "ACLF".into() },
+        page: None,
+        quote: None,
+        remind: remind.into_iter().map(String::from).collect(),
+    };
+    assert!(remind_problems(&explain(vec!["hb.L01.033", "hb.L01.lesson2:SHIBS"])).is_empty());
+    let twice = remind_problems(&explain(vec!["hb.L01.033", "hb.L01.033"]));
+    assert_eq!(twice, ["remind `hb.L01.033` is listed twice"]);
+    assert_eq!(
+        remind_problems(&explain(vec!["SHIBS"])),
+        ["remind `SHIBS` is neither an item id nor `<lesson id>:<WORD>`"]
+    );
+    let mut question = explain(vec!["hb.L01.033"]);
+    question.body = StepBody::Order { prompt: "p".into(), steps: vec!["a".into(), "b".into()], why: None };
+    assert_eq!(
+        remind_problems(&question),
+        ["remind goes on an explain, figure, aside, mnemonic or open table step, not a order step"]
+    );
 }

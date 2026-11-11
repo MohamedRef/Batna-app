@@ -3,7 +3,7 @@ resolver = "3"
 members = ["crates/core", "crates/protocol", "crates/anki", "crates/app", "crates/server", "crates/tools"]
 
 [workspace.package]
-version = "1.0.0-alpha.2"
+version = "2026.11.0"
 edition = "2024"
 rust-version = "1.90"
 license = "LicenseRef-Private"
@@ -55,3 +55,9 @@ inherits = "dev"
 [profile.wasm-dev]
 inherits = "dev"
 opt-level = 1
+
+# Dioxus's Android screen-update socket, patched so the screen keeps updating
+# after Android destroys it (phone locked, app frozen). See vendor/README.md.
+[patch.crates-io]
+dioxus-desktop = { path = "vendor/dioxus-desktop" }
+dioxus-interpreter-js = { path = "vendor/dioxus-interpreter-js" }

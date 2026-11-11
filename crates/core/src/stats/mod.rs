@@ -13,14 +13,15 @@
 //!   answers, scored `0.6 × misses on retention + 0.4 × misses on MCQs`.
 //!   A topic that hasn't been studied is never "weak": that's the planner's job.
 //! - **Mistake:** an "Again" in the last [`MISTAKE_WINDOW_DAYS`], unless the
-//!   item has since been answered right [`RECOVERED_AFTER`] times.
+//!   item has since been answered right [`RECOVERED_AFTER`] times. Its reason
+//!   is the one he gave for the latest miss; misses he was sure of come first.
 //! - Rejected items (✗) count nowhere.
 
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 use crate::content::{Lecture, Status};
 use crate::plan::{Day, LectureProgress};
-use crate::review::{Grade, ReviewEvent};
+use crate::review::{ErrorReason, Grade, ReviewEvent};
 
 pub const RETENTION_WINDOW_DAYS: i64 = 30;
 pub const WEAK_MIN_ANSWERS: u32 = 5;
@@ -450,6 +451,11 @@ pub struct Mistake {
     /// "Again" answers inside the window.
     pub misses: u32,
     pub last_miss_ms: i64,
+    /// Why he missed it last time, when he said.
+    pub reason: Option<ErrorReason>,
+    /// He was sure of an answer that was wrong, inside the window: a
+    /// high-confidence error, the one most worth re-testing.
+    pub sure: bool,
 }
 
 /// Mistakes of one topic.
@@ -485,7 +491,14 @@ pub fn mistakes(
             }
             let misses =
                 answers.iter().filter(|e| e.grade == Grade::Again && e.at_ms >= since).count() as u32;
-            let mistake = Mistake { item_id: item.id.clone(), misses, last_miss_ms: answers[last].at_ms };
+            let sure = answers.iter().any(|e| e.at_ms >= since && e.sure_miss());
+            let mistake = Mistake {
+                item_id: item.id.clone(),
+                misses,
+                last_miss_ms: answers[last].at_ms,
+                reason: answers[last].reason,
+                sure,
+            };
             match groups.iter_mut().find(|g| g.topic == item.topic) {
                 Some(g) => g.items.push(mistake),
                 None => {
@@ -511,18 +524,83 @@ pub fn mistakes(
         };
         groups.sort_by_key(order);
         for g in &mut groups {
-            g.items.sort_by_key(|m| std::cmp::Reverse(m.last_miss_ms));
+            g.items.sort_by_key(|m| (!m.sure, std::cmp::Reverse(m.last_miss_ms)));
         }
         out.extend(groups);
     }
     out
 }
 
-/// Item ids for a session from the mistakes log: most-missed first, then newest.
+/// Item ids for a session from the mistakes log: misses he was sure of
+/// first, then most-missed, then newest.
 pub fn mistakes_session(groups: &[MistakeGroup]) -> Vec<String> {
     let mut all: Vec<&Mistake> = groups.iter().flat_map(|g| &g.items).collect();
-    all.sort_by(|a, b| b.misses.cmp(&a.misses).then(b.last_miss_ms.cmp(&a.last_miss_ms)));
+    all.sort_by(|a, b| {
+        b.sure.cmp(&a.sure).then(b.misses.cmp(&a.misses)).then(b.last_miss_ms.cmp(&a.last_miss_ms))
+    });
     all.into_iter().map(|m| m.item_id.clone()).collect()
+}
+
+/// A miss he was sure of comes back for one more test this many days later
+/// (high-confidence errors are corrected well but relapse if not re-tested,
+/// Butler 2011), until it has been answered on a later day.
+pub const RETEST_AFTER_DAYS: std::ops::RangeInclusive<i64> = 2..=7;
+
+/// Items to re-test now: a miss he was sure of 2 to 7 days ago, not
+/// answered since that day. Oldest miss first; rejected items left out.
+pub fn retest_due(
+    lectures: &[Lecture],
+    events: &[ReviewEvent],
+    marks: &BTreeMap<String, Status>,
+    clock: Clock,
+) -> Vec<String> {
+    let status: HashMap<&str, Status> = lectures
+        .iter()
+        .flat_map(|l| &l.items)
+        .map(|i| (i.id.as_str(), status_of(&i.id, i.status, marks)))
+        .collect();
+    let today = clock.today();
+    let mut due: Vec<(i64, String)> = Vec::new();
+    for (id, answers) in answers_by_item(events) {
+        if status.get(id).is_none_or(|s| *s == Status::Rejected) {
+            continue;
+        }
+        let Some(miss) = answers.iter().rev().find(|e| e.sure_miss()) else { continue };
+        let miss_day = clock.day_of(miss.at_ms);
+        let age = (today.0 - miss_day.0) as i64;
+        let tested_since = answers.iter().any(|e| clock.day_of(e.at_ms).0 > miss_day.0);
+        if RETEST_AFTER_DAYS.contains(&age) && !tested_since {
+            due.push((miss.at_ms, id.to_string()));
+        }
+    }
+    due.sort();
+    due.into_iter().map(|(_, id)| id).collect()
+}
+
+/// How many mistakes in the log carry each reason, in [`ErrorReason::ALL`]
+/// order, reasons with none left out; then how many have no reason.
+pub fn mistake_reasons(groups: &[MistakeGroup]) -> (Vec<(ErrorReason, u32)>, u32) {
+    let mut counts = BTreeMap::<ErrorReason, u32>::new();
+    let mut none = 0;
+    for m in groups.iter().flat_map(|g| &g.items) {
+        match m.reason {
+            Some(r) => *counts.entry(r).or_default() += 1,
+            None => none += 1,
+        }
+    }
+    let listed = ErrorReason::ALL.into_iter().filter_map(|r| counts.get(&r).map(|&n| (r, n))).collect();
+    (listed, none)
+}
+
+/// The log narrowed to mistakes with one reason; empty groups dropped.
+pub fn mistakes_with_reason(groups: &[MistakeGroup], reason: ErrorReason) -> Vec<MistakeGroup> {
+    groups
+        .iter()
+        .filter_map(|g| {
+            let items: Vec<Mistake> = g.items.iter().filter(|m| m.reason == Some(reason)).cloned().collect();
+            (!items.is_empty()).then(|| MistakeGroup { items, ..g.clone() })
+        })
+        .collect()
 }
 
 /// Item ids for a session on the given topics: items already seen first
@@ -554,212 +632,4 @@ pub fn topics_session(
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::review::Origin;
-
-    const LECTURE: &str = r#"
-schema: batna.content/v1
-lecture: hb.L01
-title: Liver Cirrhosis
-book: { chapter: 1, pages: [1, 22] }
-topics:
-  - { id: definition, title: Definition and causes }
-  - { id: child-pugh, title: Child-Pugh and MELD }
-items:
-  - id: hb.L01.001
-    kind: card
-    topic: definition
-    front: Anatomical definition of cirrhosis?
-    back: Diffuse fibrosis with regenerative nodules.
-    src: { page: 1 }
-    status: unverified
-  - id: hb.L01.002
-    kind: mcq
-    topic: child-pugh
-    stem: Which is not part of Child-Pugh?
-    options: [Bilirubin, Albumin, INR, Creatinine]
-    answer: 3
-    why: [In it, In it, In it, That's MELD]
-    src: { page: 5 }
-    status: unverified
-  - id: hb.L01.003
-    kind: cloze
-    topic: child-pugh
-    text: "Child-Pugh class C starts at {{c1::10}} points."
-    src: { page: 5 }
-    status: unverified
-  - id: hb.L01.004
-    kind: card
-    front: Rejected one
-    back: x
-    src: { page: 6 }
-    status: unverified
-"#;
-
-    fn lectures() -> Vec<Lecture> {
-        vec![serde_yaml_ng::from_str(LECTURE).unwrap()]
-    }
-
-    const NOW: i64 = 20_000 * DAY_MS + 12 * 3_600_000;
-
-    fn ev(id: &str, grade: Grade, days_ago: i64) -> ReviewEvent {
-        ReviewEvent {
-            item_id: id.into(),
-            grade,
-            origin: Origin::Review,
-            at_ms: NOW - days_ago * DAY_MS,
-            took_ms: 5000,
-        }
-    }
-
-    fn clock() -> Clock {
-        Clock { now_ms: NOW, zone: crate::zone::Zone::fixed(0), rollover_hour: 4 }
-    }
-
-    fn marks() -> BTreeMap<String, Status> {
-        BTreeMap::from([
-            ("hb.L01.004".to_string(), Status::Rejected),
-            ("hb.L01.001".to_string(), Status::Approved),
-        ])
-    }
-
-    #[test]
-    fn a_period_counts_its_own_days_only() {
-        let events = [
-            ev("hb.L01.001", Grade::Good, 10),
-            ev("hb.L01.001", Grade::Again, 3),
-            ev("hb.L01.001", Grade::Good, 1),
-            ev("hb.L01.002", Grade::Good, 1),
-            ev("hb.L01.004", Grade::Good, 1),
-        ];
-        let week = period(&events, &marks(), clock(), 7, 0);
-        assert_eq!(week.days.len(), 7);
-        assert_eq!(week.days.last().unwrap().day, clock().today());
-        assert_eq!(week.answers, 3, "the rejected item and the old answer are out");
-        assert_eq!(week.study_days, 2);
-        assert_eq!(week.minutes, 2, "5 s answers round up per day");
-        // 001 was first seen 10 days ago; 002's first answer is a first sighting.
-        assert_eq!(week.retention, Ratio { right: 1, total: 2 });
-        let before = period(&events, &marks(), clock(), 7, 1);
-        assert_eq!(before.answers, 1);
-        assert_eq!(before.retention, Ratio::default(), "a first sighting isn't retention");
-    }
-
-    #[test]
-    fn counts_per_lecture_and_topic() {
-        let events = [
-            ev("hb.L01.001", Grade::Good, 5),
-            ev("hb.L01.001", Grade::Again, 2),
-            ev("hb.L01.002", Grade::Again, 3),
-            ev("hb.L01.002", Grade::Good, 3),
-            ev("hb.L01.004", Grade::Good, 1),
-        ];
-        let s = lecture_stats(&lectures(), &events, &marks(), clock());
-        let l = &s[0];
-        assert_eq!(l.counts.total, 3, "the rejected item doesn't count");
-        assert_eq!(l.counts.seen, 2);
-        assert_eq!(l.counts.seen_twice, 1, "two answers on one day are one sighting");
-        assert_eq!(l.counts.approved, 1);
-        assert_eq!(l.counts.unverified, 2);
-        // Only 001's later-day answer counts for retention.
-        assert_eq!(l.counts.retention, Ratio { right: 0, total: 1 });
-        assert_eq!(l.counts.mcq, Ratio { right: 1, total: 2 });
-        assert_eq!(l.topics.len(), 2, "no untagged group once the rejected item is out");
-        assert_eq!(l.topics[1].counts.total, 2);
-        let p = progress(&s);
-        assert_eq!((p[0].total, p[0].seen, p[0].seen_twice), (3, 2, 1));
-    }
-
-    #[test]
-    fn weak_topics_need_enough_answers() {
-        let mut events = vec![ev("hb.L01.001", Grade::Good, 20)];
-        for d in 1..=4 {
-            events.push(ev("hb.L01.001", Grade::Again, d));
-        }
-        let s = lecture_stats(&lectures(), &events, &marks(), clock());
-        assert!(weakest_topics(&s, 3).is_empty(), "4 counted answers are too few");
-        events.push(ev("hb.L01.001", Grade::Good, 0));
-        for d in 1..=6 {
-            events.push(ev("hb.L01.002", Grade::Good, d));
-        }
-        let s = lecture_stats(&lectures(), &events, &marks(), clock());
-        let weak = weakest_topics(&s, 3);
-        assert_eq!(weak.len(), 1, "a topic with no misses isn't weak");
-        assert_eq!(weak[0].topic.as_deref(), Some("definition"));
-        assert!((weak[0].score - 0.8).abs() < 1e-6);
-        let ids = topics_session(&lectures(), &weak, &events, &marks());
-        assert_eq!(ids, ["hb.L01.001"]);
-    }
-
-    #[test]
-    fn mistakes_log_window_and_recovery() {
-        let events = [
-            ev("hb.L01.001", Grade::Again, 20), // too old
-            ev("hb.L01.002", Grade::Again, 3),
-            ev("hb.L01.002", Grade::Again, 2),
-            ev("hb.L01.002", Grade::Good, 1), // one right answer isn't recovery yet
-            ev("hb.L01.003", Grade::Again, 4),
-            ev("hb.L01.003", Grade::Good, 3),
-            ev("hb.L01.003", Grade::Good, 2),  // recovered
-            ev("hb.L01.004", Grade::Again, 1), // rejected
-        ];
-        let log = mistakes(&lectures(), &events, &marks(), NOW);
-        assert_eq!(log.len(), 1);
-        assert_eq!(log[0].topic.as_deref(), Some("child-pugh"));
-        assert_eq!(log[0].title, "Child-Pugh and MELD");
-        assert_eq!(
-            log[0].items,
-            [Mistake { item_id: "hb.L01.002".into(), misses: 2, last_miss_ms: NOW - 2 * DAY_MS }]
-        );
-        assert_eq!(mistakes_session(&log), ["hb.L01.002"]);
-    }
-
-    #[test]
-    fn rough_forecast_follows_the_ladder() {
-        let events = [
-            ev("hb.L01.001", Grade::Good, 2), // first right answer: back after 1 day, overdue
-            ev("hb.L01.002", Grade::Good, 3),
-            ev("hb.L01.002", Grade::Good, 1), // second: back 3 days after
-            ev("hb.L01.003", Grade::Good, 4),
-            ev("hb.L01.003", Grade::Again, 0), // starts over: back tomorrow
-            ev("hb.L01.004", Grade::Good, 1),  // rejected
-        ];
-        let f = rough_forecast(&lectures(), &events, &marks(), clock(), 5);
-        assert_eq!(f, [1, 1, 1, 0, 0]);
-    }
-
-    #[test]
-    fn first_sightings_per_day() {
-        let events = [
-            ev("hb.L01.001", Grade::Good, 3),
-            ev("hb.L01.001", Grade::Good, 1),
-            ev("hb.L01.002", Grade::Again, 1),
-            ev("hb.L01.004", Grade::Good, 1), // rejected
-        ];
-        let today = clock().today();
-        let got = first_seen_by_day(&lectures(), &events, &marks(), clock());
-        assert_eq!(got, BTreeMap::from([(today.plus(-3), 1), (today.plus(-1), 1)]));
-    }
-
-    #[test]
-    fn day_start_progress_and_today_so_far() {
-        let events = [
-            ev("hb.L01.001", Grade::Good, 2),
-            ev("hb.L01.001", Grade::Good, 0),
-            ev("hb.L01.001", Grade::Again, 0),
-            ev("hb.L01.002", Grade::Good, 0),
-            ev("hb.L01.004", Grade::Good, 0), // rejected
-        ];
-        let p = progress_at_day_start(&lectures(), &events, &marks(), clock());
-        assert_eq!((p[0].total, p[0].seen, p[0].seen_twice), (3, 1, 0), "today's answers don't count yet");
-        let done = done_today(&lectures(), &events, &marks(), clock());
-        assert_eq!(done, DayDone { new: 1, reviews: 2 });
-    }
-
-    #[test]
-    fn ratio_percent() {
-        assert_eq!(Ratio { right: 2, total: 3 }.percent(), Some(67));
-        assert_eq!(Ratio::default().percent(), None);
-    }
-}
+mod tests;

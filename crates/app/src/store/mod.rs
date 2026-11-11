@@ -11,8 +11,13 @@ mod backend;
 pub mod export;
 pub mod import;
 mod install;
+#[cfg(test)]
+mod marker_perf;
+mod notes;
 pub mod own;
 mod paths;
+#[cfg(test)]
+mod revision_tests;
 pub mod sync;
 
 use std::collections::BTreeMap;
@@ -20,7 +25,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Mutex, OnceLock};
 
 use batna_core::review::verify::Judgement;
-use batna_core::review::{Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent};
+use batna_core::review::{Confidence, ErrorReason, Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent};
 use batna_core::srs::ReviewSettings;
 use batna_core::zone::Zone;
 use rusqlite::{Connection, OptionalExtension, params};
@@ -29,7 +34,7 @@ use serde::de::DeserializeOwned;
 
 #[cfg(test)]
 pub use backend::test_review;
-pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
+pub use backend::{LectureProgress, NoteError, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
 pub enum StoreError {
@@ -117,6 +122,45 @@ const MIGRATIONS: &[&str] = &[
     "
     -- Mohamed's own cards (batna_core::own::OwnCard as JSON). Last writer wins.
     CREATE TABLE own_cards (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+",
+    "
+    -- A random revision avoids O(history) JSON hashing on every answer.
+    -- It is local and never synced. A fresh random token per mutation also
+    -- prevents equal counters on divergent database copies from matching.
+    INSERT OR IGNORE INTO meta (key, value)
+    VALUES ('study.review_revision.v2', lower(hex(randomblob(16))));
+    CREATE TRIGGER review_revision_insert AFTER INSERT ON review_events BEGIN
+      UPDATE meta SET value = lower(hex(randomblob(16)))
+      WHERE key = 'study.review_revision.v2';
+    END;
+    CREATE TRIGGER review_revision_update AFTER UPDATE ON review_events BEGIN
+      UPDATE meta SET value = lower(hex(randomblob(16)))
+      WHERE key = 'study.review_revision.v2';
+    END;
+    CREATE TRIGGER review_revision_delete AFTER DELETE ON review_events BEGIN
+      UPDATE meta SET value = lower(hex(randomblob(16)))
+      WHERE key = 'study.review_revision.v2';
+    END;
+",
+    "
+    -- How sure he was before the answer (sure / unsure / guess) and why he
+    -- missed it (batna_core::review::ErrorReason); both optional, so rows
+    -- from older builds and devices stay as they are.
+    ALTER TABLE review_events ADD COLUMN confidence TEXT;
+    ALTER TABLE review_events ADD COLUMN reason TEXT;
+",
+    "
+    -- Mohamed's notes on items, lesson steps and pages
+    -- (batna_core::note::Note as JSON), keyed by Anchor::row_id. Last writer wins.
+    CREATE TABLE notes (
         id          TEXT PRIMARY KEY,
         value       TEXT NOT NULL,
         account_id  TEXT,
@@ -256,6 +300,32 @@ impl Store {
         Ok(logged)
     }
 
+    /// O(1) local revision of the review table, updated by SQLite triggers in
+    /// the *same transaction* as all local and remote review mutations.
+    /// A crash between committing an answer and the Study snapshot therefore
+    /// invalidates the older checkpoint, without rescanning the review log.
+    pub fn study_review_marker(&self) -> Result<String> {
+        let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+        let revision: String =
+            conn.query_row("SELECT value FROM meta WHERE key = 'study.review_revision.v2'", [], |row| {
+                row.get(0)
+            })?;
+        Ok(format!("v2:{revision}"))
+    }
+
+    /// One-time compatibility for unfinished v1 Study checkpoints created by
+    /// earlier builds. Never called for new checkpoints or subsequent saves.
+    pub fn study_review_marker_legacy(&self) -> Result<String> {
+        let log = self.reviews()?;
+        let bytes = serde_json::to_vec(&log)?;
+        let mut hash = 0xcbf29ce484222325_u64;
+        for byte in &bytes {
+            hash ^= u64::from(*byte);
+            hash = hash.wrapping_mul(0x100000001b3);
+        }
+        Ok(format!("v1:{}:{hash:016x}", log.len()))
+    }
+
     /// Takes one answer back (Undo): its row gets the tombstone, queued for
     /// sync, so every device replays the schedule without it. False when it
     /// was already gone (or never existed): nothing is written twice.
@@ -276,7 +346,8 @@ impl Store {
     pub fn reviews(&self) -> Result<Vec<LoggedReview>> {
         let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         let mut stmt = conn.prepare(
-            "SELECT id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter
+            "SELECT id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter,
+                    confidence, reason
              FROM review_events WHERE deleted = 0
              ORDER BY hlc_wall, hlc_counter, device_id",
         )?;
@@ -291,18 +362,30 @@ impl Store {
                 r.get::<_, String>(6)?,
                 r.get::<_, i64>(7)?,
                 r.get::<_, u32>(8)?,
+                r.get::<_, Option<String>>(9)?,
+                r.get::<_, Option<String>>(10)?,
             ))
         })?;
         let mut out = Vec::new();
         for row in rows {
-            let (id, item_id, grade, origin, at_ms, took_ms, device, wall_ms, counter) = row?;
+            let (id, item_id, grade, origin, at_ms, took_ms, device, wall_ms, counter, confidence, reason) =
+                row?;
             let (Some(grade), Some(origin)) = (Grade::parse(&grade), Origin::parse(&origin)) else {
                 continue;
             };
             out.push(LoggedReview {
                 id,
                 hlc: Hlc { wall_ms, counter, device },
-                event: ReviewEvent { item_id, grade, origin, at_ms, took_ms },
+                event: ReviewEvent {
+                    item_id,
+                    grade,
+                    origin,
+                    at_ms,
+                    took_ms,
+                    // A value from a newer build that this one doesn't know reads as unset.
+                    confidence: confidence.as_deref().and_then(Confidence::parse),
+                    reason: reason.as_deref().and_then(ErrorReason::parse),
+                },
             });
         }
         Ok(out)
@@ -441,7 +524,15 @@ impl Store {
             tx.execute(&format!("DELETE FROM \"{t}\""), [])?;
         }
         tx.execute(
-            "DELETE FROM meta WHERE key <> 'device_id' AND key NOT LIKE 'device.%' AND key <> 'sync.tables'",
+            "DELETE FROM meta WHERE key <> 'device_id' AND key NOT LIKE 'device.%'
+             AND key <> 'sync.tables' AND key <> 'study.review_revision.v2'",
+            [],
+        )?;
+        // Forgetting a borrowed device must also invalidate any old Study
+        // marker, while preserving the revision row used by future grades.
+        tx.execute(
+            "UPDATE meta SET value = lower(hex(randomblob(16)))
+             WHERE key = 'study.review_revision.v2'",
             [],
         )?;
         // Nothing is left to queue: the seed must not run again either.
@@ -515,8 +606,8 @@ fn insert_review(conn: &rusqlite::Connection, l: &LoggedReview) -> Result<()> {
     let e = &l.event;
     conn.execute(
         "INSERT OR IGNORE INTO review_events
-         (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
-         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
+         (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter, confidence, reason)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)",
         params![
             l.id,
             e.item_id,
@@ -526,7 +617,9 @@ fn insert_review(conn: &rusqlite::Connection, l: &LoggedReview) -> Result<()> {
             e.took_ms,
             l.hlc.device,
             l.hlc.wall_ms,
-            l.hlc.counter
+            l.hlc.counter,
+            e.confidence.map(Confidence::as_str),
+            e.reason.map(ErrorReason::as_str)
         ],
     )?;
     Ok(())
@@ -773,11 +866,42 @@ mod tests {
     use super::*;
 
     fn ev(item: &str, grade: Grade, at_ms: i64) -> ReviewEvent {
-        ReviewEvent { item_id: item.into(), grade, origin: Origin::Study, at_ms, took_ms: 3000 }
+        ReviewEvent::new(item, grade, Origin::Study, at_ms, 3000)
     }
 
     fn judgement(verdict: Verdict) -> Judgement {
         Judgement { verdict, edit: Edit::new(), note: None, fingerprint: "f".into(), at_ms: 1 }
+    }
+
+    #[test]
+    fn answers_logged_before_the_tags_read_without_them() {
+        // A database from the build before confidence and reasons.
+        let conn = Connection::open_in_memory().unwrap();
+        for sql in &MIGRATIONS[..5] {
+            conn.execute_batch(sql).unwrap();
+        }
+        conn.pragma_update(None, "user_version", 5).unwrap();
+        conn.execute(
+            "INSERT INTO review_events (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
+             VALUES ('old-1', 'hb.L01.001', 'again', 'bank', 5, 900, 'old', 5, 0)",
+            [],
+        )
+        .unwrap();
+        let s = Store::init(conn, None, None).unwrap();
+        let log = s.reviews().unwrap();
+        assert_eq!(log[0].event, ReviewEvent::new("hb.L01.001", Grade::Again, Origin::Bank, 5, 900));
+        // And a new answer keeps its tags.
+        let tagged = ReviewEvent {
+            confidence: Some(Confidence::Guess),
+            reason: Some(ErrorReason::Timing),
+            ..ev("hb.L01.002", Grade::Again, 10)
+        };
+        s.append_review(tagged.clone()).unwrap();
+        assert_eq!(s.reviews().unwrap()[1].event, tagged);
+        // A value from a newer build reads as unset, and the answer still counts.
+        s.conn.lock().unwrap().execute("UPDATE review_events SET reason = 'future'", []).unwrap();
+        assert_eq!(s.reviews().unwrap()[1].event.reason, None);
+        assert_eq!(s.reviews().unwrap().len(), 2);
     }
 
     #[test]
@@ -924,6 +1048,31 @@ mod snapshot_tests {
     /// The web build keeps the database as bytes: they come back whole,
     /// with the same device, and an empty snapshot is a fresh store.
     #[test]
+    fn study_marker_detects_committed_review_and_undo_and_survives_reopen() {
+        use batna_core::review::{Grade, Origin, ReviewEvent};
+        let store = Store::open_in_memory().unwrap();
+        let empty = store.study_review_marker().unwrap();
+        let logged = store
+            .append_review(ReviewEvent {
+                confidence: None,
+                reason: None,
+                item_id: "hb.L01.001".into(),
+                grade: Grade::Good,
+                origin: Origin::Study,
+                at_ms: 100,
+                took_ms: 200,
+            })
+            .unwrap();
+        let after_answer = store.study_review_marker().unwrap();
+        assert_ne!(empty, after_answer, "a committed answer invalidates the old queue");
+        let reopened = Store::from_snapshot(&store.snapshot().unwrap().1).unwrap();
+        assert_eq!(after_answer, reopened.study_review_marker().unwrap());
+        store.retract_review(&logged.id).unwrap();
+        assert_ne!(store.study_review_marker().unwrap(), after_answer, "Undo invalidates the checkpoint");
+        assert!(store.reviews().unwrap().is_empty(), "Undo removes the active review");
+    }
+
+    #[test]
     fn a_snapshot_round_trips() {
         let s = Store::open_in_memory().unwrap();
         s.put_setting("sounds", &serde_json::json!(true)).unwrap();
@@ -942,6 +1091,8 @@ mod snapshot_tests {
         let device = s.device();
         s.mark_borrowed(true).unwrap();
         s.append_review(batna_core::review::ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: "hb.L01.001".into(),
             grade: batna_core::review::Grade::Good,
             origin: batna_core::review::Origin::Study,

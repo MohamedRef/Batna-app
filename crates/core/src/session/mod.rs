@@ -15,6 +15,8 @@ pub use compose::*;
 
 mod running;
 pub use running::*;
+mod checkpoint;
+pub use checkpoint::*;
 
 mod typed;
 pub use typed::*;

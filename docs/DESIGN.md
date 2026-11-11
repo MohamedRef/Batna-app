@@ -118,7 +118,7 @@ Radii: `--radius-control` 13px, `--radius-card` 18px (22px Glossy),
 | Progress | `div.progress[role=progressbar] > div.progress-fill` | `data-tone="good"` for done. |
 | Rating row | `div.rating-row > button.rating[data-grade=again\|hard\|good\|easy] > span + span.rating-when` | Real intervals only. Content checks never sit here. |
 | Sheet | `div.sheet-backdrop` + `div.sheet[role=dialog] > div.sheet-head` | Bottom sheet on phones, ≤430px box from 600px; scrolls inside. For forms, confirms and lists. |
-| Info sheet | `crate::sheet::Sheet { label_id, on_close, head, children }` | What a tap opens to tell more (the book page). No scrim; `--sheet` colour; he drags it to any height (stops at 32/56/90%), flings or drags down to close, Esc/Back close; the size is remembered (`assets/sheet.js`). |
+| Info sheet | `crate::sheet::Sheet { label_id, on_close, head, children }` | What a tap opens to tell more (the book page, abbreviations). No scrim; `--sheet` colour. Phones: a bottom sheet he drags to any height (stops at 32/56/90%), flings or drags down to close; the size is remembered. From 600dp wide and 480dp tall: a floating card next to the chip that opened it (below, else above, else centred), at most min(36rem, 76% of the window) tall, moved by its heading row and sized from any edge or corner (size remembered). Esc/Back/tap outside close both (`assets/sheet.js`). |
 | Field | `label.field > span + input + span.field-hint? + span.field-error[role=alert]?`, `[data-invalid=true]` | Keep the typed text on errors. |
 | Search | `label.search > svg + input[type=search]` | |
 | Segmented | `div.segmented[role=radiogroup] > button[role=radio]` | |
@@ -161,6 +161,14 @@ markup so all three layouts work without per-layout code.
   sticky action bar. `.tab-grid` and `.tab-cols` rows are `max-content`
   and start-aligned, so a short card never stretches and a tall one never
   collapses.
+- On expanded widths (≥840px) the content canvas uses balanced fluid inline
+  padding rather than a fixed 60/80rem limit masquerading as trailing space.
+  At ≥1440px, wide desktop screens use the available width: tabs and the
+  question bank detail adapt, Settings grows, study split cards span the
+  canvas, and the lesson Steps view uses a sticky context pane beside the
+  active step. The lesson Pages view and single-column study text retain a
+  readable measure. Tablets below 1440px and phone layouts keep their
+  existing structure.
 
 ## Maintenance and shared primitives
 

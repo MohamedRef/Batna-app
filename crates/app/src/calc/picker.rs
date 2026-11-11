@@ -21,6 +21,22 @@ const RECENT_MAX: usize = 5;
 /// Pinned ids in the order he pinned them. `None` until first read.
 static FAVOURITES: GlobalSignal<Option<Vec<&'static str>>> = Signal::global(|| None);
 
+/// One-shot direct navigation from Cmd/Ctrl+K. A signal rather than a
+/// startup-only prop also works when the Calculators tab is already mounted.
+static DIRECT_OPEN: GlobalSignal<Option<&'static str>> = Signal::global(|| None);
+
+pub(crate) fn request_open(id: &'static str) {
+    if calc::spec(id).is_some() {
+        *DIRECT_OPEN.write() = Some(id);
+    }
+}
+
+/// Share the picker index, including Arabic synonyms, with the command
+/// palette. Do not maintain a second calculator search implementation.
+pub(crate) fn search_for_palette(query: &str) -> Vec<&'static CalcSpec> {
+    search(query, None)
+}
+
 /// Only ids this build knows, each once (a sync from a newer build, or a
 /// calculator that was renamed, leaves the rest out).
 fn known(ids: Option<Vec<String>>) -> Vec<&'static str> {
@@ -82,7 +98,7 @@ fn fallback(recent: &[&'static str], favourites: &[&'static str]) -> &'static st
 
 /// Text folded for search: lower case, Arabic without tashkeel or tatweel,
 /// one alef, ة as ه, ى and ئ as ي, ؤ as و, Arabic-Indic digits as ASCII.
-fn fold(s: &str) -> String {
+pub(crate) fn fold(s: &str) -> String {
     s.chars()
         .filter_map(|c| match c {
             '\u{064B}'..='\u{065F}' | '\u{0670}' | '\u{0640}' => None,
@@ -327,6 +343,23 @@ pub fn Calculators() -> Element {
     let mut recent = use_signal(|| known(crate::store::shared().local_setting::<Vec<String>>(RECENT_KEY)));
     // The row he opened it from, so Back on a phone lands on it again.
     let mut from = use_signal(|| None::<String>);
+    // Consume jumps once, including while this tab is already on screen.
+    // Reuse the recent list and back button instead of building another form.
+    use_effect(move || {
+        let requested = *DIRECT_OPEN.read();
+        if let Some(id) = requested {
+            *DIRECT_OPEN.write() = None;
+            open.set(Some(id));
+            from.set(None);
+            let next = pushed(&recent.peek(), id);
+            let _ = crate::store::shared().put_local_setting(RECENT_KEY, &next);
+            recent.set(next);
+            scroll_top();
+            document::eval(
+                r#"requestAnimationFrame(() => requestAnimationFrame(() => { const b = document.querySelector(".calc-back"); if (b && b.offsetParent) b.focus({preventScroll: true}); }));"#,
+            );
+        }
+    });
     let favs = favourites();
     let current = open();
     let shown = current.unwrap_or_else(|| fallback(&recent.read(), &favs));

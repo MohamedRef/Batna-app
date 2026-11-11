@@ -67,6 +67,13 @@
   .settings-back, .settings-title-section { display: none; }
 }
 
+/* Settings is also a two-pane workspace on wide Mac windows; the old
+   62rem dialog used less than two-thirds of a maximized display. */
+@media (min-width: 1440px) {
+  .settings-window { inset-inline: max(2rem, calc((100vw - min(92vw, 86rem)) / 2)); }
+  .settings-body { grid-template-columns: minmax(17rem, 25%) minmax(0, 1fr); }
+}
+
 /* Choices */
 .choice-list { display: grid; gap: var(--sp-2); }
 @media (min-width: 840px) { .choice-list { grid-template-columns: 1fr 1fr; } }

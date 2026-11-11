@@ -1,9 +1,10 @@
 //! A running session: outcomes, undo and the summary.
 
 use super::*;
+use serde::{Deserialize, Serialize};
 
 /// How one item went.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Outcome {
     pub item_id: String,
     pub grade: Grade,
@@ -14,7 +15,7 @@ pub struct Outcome {
 
 /// A session in progress. An item graded Again comes back once at the end of
 /// the session, so it is retrieved again while it is still fresh.
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct Session {
     queue: Vec<Planned>,
     pos: usize,
@@ -25,7 +26,7 @@ pub struct Session {
 }
 
 /// What one grade changed, to take it back exactly.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 struct Step {
     /// The position before the grade (hidden items it skipped included).
     pos: usize,
@@ -129,6 +130,53 @@ impl Session {
             }
         }
         added
+    }
+
+    /// A corrupt checkpoint must never be allowed to replay a saved grade.
+    /// Missing, modified or tombstoned event ids invalidate the entire
+    /// snapshot; the review log remains the authoritative record.
+    pub(super) fn valid_for_restore(
+        &self,
+        reviews: &std::collections::HashMap<String, crate::review::ReviewEvent>,
+        playable: impl Fn(&str) -> bool,
+    ) -> bool {
+        if self.queue.is_empty()
+            || self.pos >= self.queue.len()
+            || self.steps.len() != self.outcomes.len()
+            || self.queue.iter().any(|p| !playable(&p.item_id))
+        {
+            return false;
+        }
+        let mut used_events = HashSet::new();
+        let mut again_retry_ids = HashSet::new();
+        let mut last_pos = None;
+        for (step, outcome) in self.steps.iter().zip(&self.outcomes) {
+            if step.pos >= self.queue.len()
+                || self.queue[step.pos].item_id != outcome.item_id
+                || last_pos.is_some_and(|pos| step.pos <= pos)
+            {
+                return false;
+            }
+            let Some(id) = step.event.as_deref() else { return false };
+            let Some(event) = reviews.get(id) else { return false };
+            if !used_events.insert(id)
+                || event.origin != crate::review::Origin::Study
+                || event.item_id != outcome.item_id
+                || event.grade != outcome.grade
+            {
+                return false;
+            }
+            if let Some(index) = step.retry_at
+                && (index >= self.queue.len()
+                    || self.queue[index].item_id != outcome.item_id
+                    || outcome.grade != Grade::Again
+                    || !again_retry_ids.insert(outcome.item_id.clone()))
+            {
+                return false;
+            }
+            last_pos = Some(step.pos);
+        }
+        last_pos.is_none_or(|pos| self.pos > pos) && self.retried == again_retry_ids
     }
 
     pub fn summary(&self) -> Summary {

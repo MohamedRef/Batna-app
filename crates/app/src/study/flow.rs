@@ -404,6 +404,8 @@ fn a_course_in_view_narrows_setup_and_counts_due_elsewhere() {
     // An answer a month ago makes the other course's item due now.
     REVIEW.with(|r| {
         r.borrow().as_ref().unwrap().backend.borrow_mut().record(ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: away_item.id.clone(),
             grade: batna_core::review::Grade::Again,
             origin: batna_core::review::Origin::Study,
@@ -443,6 +445,8 @@ fn content_gone_under_a_session_still_lets_him_end_it() {
 fn the_memory_store_logs_and_takes_back() {
     let mut m = backend::MemoryStore::default();
     let ev = |id: &str| ReviewEvent {
+        confidence: None,
+        reason: None,
         item_id: id.into(),
         grade: batna_core::review::Grade::Good,
         origin: batna_core::review::Origin::Study,
@@ -469,4 +473,121 @@ fn the_player_falls_back_to_memory_without_a_store() {
     }
     let t = TestDom::new(app);
     assert_eq!(t.texts("p"), ["true"]);
+}
+
+/// Mount and unmount only the Study screen while keeping the app's review
+/// context alive: switching tabs must not restart the session, discard its
+/// progress or duplicate the recorded grade.
+#[component]
+fn RemountShell() -> Element {
+    use_context_provider(|| Ui {
+        screen: Signal::new(crate::Screen::Study),
+        prefs: Signal::new(DevicePrefs::default()),
+        focus: Signal::new(false),
+    });
+    let review = use_context_provider(crate::store::test_review);
+    REVIEW.with(|r| *r.borrow_mut() = Some(review.clone()));
+    use_context_provider(|| StudyStoreHandle(review.backend.clone() as Rc<RefCell<dyn StudyStore>>));
+    use_hook(|| {
+        if let Some(start) = START_WITH.with(|s| s.borrow_mut().take()) {
+            *START.write() = Some(start);
+        }
+    });
+    let mut mounted = use_signal(|| true);
+    rsx! {
+        button {
+            class: "remount-toggle",
+            onclick: move |_| mounted.set(!mounted()),
+            "Toggle Study screen"
+        }
+        if mounted() {
+            Study {}
+        }
+    }
+}
+
+#[test]
+fn switching_away_and_back_preserves_active_card_and_review_log() {
+    let card = first("card");
+    let cloze = first("cloze");
+    crate::store::use_memory_store();
+    BROKEN.with(|b| *b.borrow_mut() = None);
+    START_WITH.with(|s| *s.borrow_mut() = items(&[&card.id, &cloze.id]));
+    let mut t = TestDom::new(RemountShell);
+
+    assert_eq!(t.texts("span.st-count"), ["1 / 2"]);
+    t.click_text("button", tx::REVEAL);
+    grade(&mut t, "good");
+    assert_eq!(logged(), 1);
+    assert_eq!(t.texts("span.st-count"), ["2 / 2"]);
+    assert_eq!(t.attr("article.st-item", "data-kind").as_deref(), Some("cloze"));
+
+    // This removes only Study, not its global Session or review backend.
+    t.click("button.remount-toggle");
+    assert_eq!(t.count("article.st-item"), 0);
+    t.click("button.remount-toggle");
+    assert_eq!(t.texts("span.st-count"), ["2 / 2"]);
+    assert_eq!(t.attr("article.st-item", "data-kind").as_deref(), Some("cloze"));
+    assert_eq!(logged(), 1, "returning to Study must not record a second grade");
+    assert_eq!(t.count("button.st-undo"), 1, "Undo remains available after remount");
+}
+
+#[test]
+fn active_resume_status_tracks_the_existing_session_and_disappears_when_ended() {
+    let card = first("card");
+    let cloze = first("cloze");
+    let mut t = mount(items(&[&card.id, &cloze.id]), None);
+    assert_eq!(t.in_root(super::running_progress), Some((1, 2)));
+    t.click_text("button", tx::REVEAL);
+    grade(&mut t, "good");
+    assert_eq!(t.in_root(super::running_progress), Some((2, 2)));
+    t.click_text("button.btn-link", tx::END);
+    assert_eq!(t.in_root(super::running_progress), None);
+}
+
+/// Diagnostic measurement of the real Study reveal -> Good -> next-card
+/// event and VirtualDom mutation path. Run only on the CI runner with
+/// \`--ignored --nocapture\`; it is NOT a native Android paint benchmark.
+#[test]
+#[ignore = "diagnostic: invoke the focused test from CI and print timings, not a timing gate"]
+fn profile_study_card_transitions() {
+    let ids: Vec<String> = ready_lectures()
+        .into_iter()
+        .flat_map(|lecture| lecture.items.iter())
+        .filter(|item| matches!(&item.body, Body::Card { .. }))
+        .take(16)
+        .map(|item| item.id.clone())
+        .collect();
+    assert!(ids.len() >= 8, "need several distinct cards to measure the real transition path");
+
+    let started = std::time::Instant::now();
+    let mut t = mount(Some(Start { lectures: None, items: Some(ids.clone()), minutes: 15 }), None);
+    let mount_us = started.elapsed().as_micros();
+    assert_eq!(t.texts("span.st-count"), [format!("1 / {}", ids.len())]);
+    let mut transition_us = Vec::with_capacity(ids.len());
+
+    for (n, _) in ids.iter().enumerate() {
+        t.click_text("button", tx::REVEAL);
+        assert_eq!(t.count("button.rating"), 4);
+        let started = std::time::Instant::now();
+        grade(&mut t, "good");
+        transition_us.push(started.elapsed().as_micros());
+        if n + 1 < ids.len() {
+            assert_eq!(t.texts("span.st-count"), [format!("{} / {}", n + 2, ids.len())]);
+        }
+    }
+    assert_eq!(logged(), ids.len(), "each grade must be persisted by the test review store");
+    assert!(t.text().contains(tx::SUMMARY_TITLE), "all items should lead to a summary");
+    transition_us.sort_unstable();
+    let p50 = transition_us[(transition_us.len() - 1) / 2];
+    let p95 = transition_us[(transition_us.len() * 95).div_ceil(100) - 1];
+    let max = transition_us[transition_us.len() - 1];
+    println!(
+        "STUDY_TRANSITION_BASELINE cards={} mount_us={} grade_p50_us={} grade_p95_us={} grade_max_us={} scope=TestDom_event_and_mutation_not_Android_paint",
+        ids.len(),
+        mount_us,
+        p50,
+        p95,
+        max
+    );
 }

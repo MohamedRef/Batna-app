@@ -103,6 +103,11 @@ async function run() {
             item.width === 384 && ['paper', 'night', 'black'].includes(item.theme))) {
         await page.screenshot({ path: path.join(output, name + '.png') });
       }
+      if (item.width === 1600) {
+        assert.ok(layout.dialog.width >= 1200,
+          `${name}: Mac Settings should use the wide dialog, got ${layout.dialog.width}px`);
+        await page.screenshot({ path: path.join(output, 'mac-preview-settings-1600.png') });
+      }
       await page.locator('#opener').focus();
       await page.addScriptTag({ content: controller });
       assert.equal(await page.locator('#background').evaluate(el => el.inert), true, name);

@@ -113,11 +113,67 @@ pub fn validate_all(
         }
         lessons += file.lessons.len();
     }
+    problems.extend(remind_targets(&content, &files));
     let mut all: Vec<LessonFile> = files.into_iter().map(|(_, f, _)| f).collect();
     problems.extend(
         lesson::embed_images(&mut all, read_image(root)).into_iter().map(|p| format!("lessons: {p}")),
     );
     (all.len(), lessons)
+}
+
+/// Every step's `remind` entry points at something that holds a hook: an
+/// enumerate item (any course) with a `hook`, or a mnemonic step of a lesson
+/// with that `word`. A step never reminds of itself.
+fn remind_targets(content: &Path, files: &[(PathBuf, LessonFile, String)]) -> Vec<String> {
+    use batna_core::content::Body;
+    use batna_core::lesson::{Reminder, StepBody};
+    use std::collections::BTreeMap;
+    let lessons: BTreeMap<&str, &lesson::Lesson> =
+        files.iter().flat_map(|(_, f, _)| f.lessons.iter().map(|l| (l.id.as_str(), l))).collect();
+    let mut lectures: BTreeMap<String, Option<Lecture>> = BTreeMap::new();
+    let mut out = Vec::new();
+    for (_, f, _) in files {
+        for l in &f.lessons {
+            for (k, step) in l.steps.iter().enumerate() {
+                let at = format!("{} step {}", l.id, k + 1);
+                for r in &step.remind {
+                    let problem = match Reminder::parse(r) {
+                        // The step itself checks the shape (lesson::validate).
+                        None => None,
+                        Some(Reminder::Item(id)) => {
+                            let lec = id.rsplit_once('.').map_or(id, |(l, _)| l).to_string();
+                            let lecture = lectures.entry(lec.clone()).or_insert_with(|| {
+                                crate::read_yaml(&crate::lecture_path(content, &lec)).ok()
+                            });
+                            match lecture.as_ref().and_then(|x| x.items.iter().find(|i| i.id == id)) {
+                                None => Some(format!("remind `{r}`: no such item")),
+                                Some(i) => match &i.body {
+                                    Body::Enumerate { hook: Some(h), .. } if !h.trim().is_empty() => None,
+                                    _ => Some(format!("remind `{r}`: not an enumerate item with a hook")),
+                                },
+                            }
+                        }
+                        Some(Reminder::Mnemonic { lesson, word }) => {
+                            let found = lessons.get(lesson).and_then(|o| {
+                                o.steps.iter().position(
+                                    |s| matches!(&s.body, StepBody::Mnemonic { word: w, .. } if w == word),
+                                )
+                            });
+                            match found {
+                                None => Some(format!("remind `{r}`: no mnemonic `{word}` in {lesson}")),
+                                Some(j) if lesson == l.id && j == k => {
+                                    Some(format!("remind `{r}`: a step can't remind of itself"))
+                                }
+                                Some(_) => None,
+                            }
+                        }
+                    };
+                    out.extend(problem.map(|p| format!("lessons: {at}: {p}")));
+                }
+            }
+        }
+    }
+    out
 }
 
 /// Reads `content/lessons/img/<path>`, for [`lesson::embed_images`].
@@ -160,6 +216,34 @@ mod tests {
     }
 
     use crate::testkit::{self, write};
+
+    #[test]
+    fn reminders_must_point_at_a_real_hook() {
+        let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let mut files = load(&root).expect("lessons load");
+        let (_, f, _) = files.iter_mut().find(|(_, f, _)| f.lecture == "hb.L01").expect("hb.L01 lessons");
+        let l = &mut f.lessons[2];
+        let id = l.id.clone();
+        let k =
+            l.steps.iter().position(|s| s.remind.iter().any(|r| r == "hb.L01.033")).expect("the ACLF step");
+        l.steps[k].remind = vec![
+            "hb.L01.033".into(),           // enumerate with a hook: fine
+            "hb.L01.lesson2:SHIBS".into(), // mnemonic in another lesson: fine
+            "hb.L01.999".into(),           // no such item
+            "hb.L01.031".into(),           // not an enumerate
+            "hb.L01.lesson2:NOPE".into(),  // no such mnemonic
+        ];
+        let p = remind_targets(&root.join("content"), &files);
+        let at = format!("lessons: {id} step {}", k + 1);
+        assert_eq!(
+            p,
+            [
+                format!("{at}: remind `hb.L01.999`: no such item"),
+                format!("{at}: remind `hb.L01.031`: not an enumerate item with a hook"),
+                format!("{at}: remind `hb.L01.lesson2:NOPE`: no mnemonic `NOPE` in hb.L01.lesson2"),
+            ]
+        );
+    }
 
     fn problems(root: &Path, glossary: Option<&Glossary>) -> (usize, usize, Vec<String>) {
         let mut p = Vec::new();

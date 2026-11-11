@@ -1127,3 +1127,61 @@ fn the_background_job_on_a_development_build_never_notifies() {
     assert_eq!(job_updater(dir.path()).status().prefs.notified.as_deref(), Some("0.2.0+50"));
     assert!(get().is_none(), "a job-only process has no UI updater");
 }
+
+/// Serves `dir`, holding every `.pack` answer until `gate` lets it go.
+fn serve_gated(dir: PathBuf, gate: std::sync::mpsc::Receiver<()>) -> String {
+    use std::io::{BufRead as _, BufReader};
+    let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+    let url = format!("http://{}", listener.local_addr().unwrap());
+    std::thread::spawn(move || {
+        for stream in listener.incoming().flatten() {
+            let mut reader = BufReader::new(stream);
+            let mut line = String::new();
+            if reader.read_line(&mut line).is_err() {
+                continue;
+            }
+            let path = line.split_whitespace().nth(1).unwrap_or("/").trim_start_matches('/').to_owned();
+            loop {
+                let mut h = String::new();
+                if reader.read_line(&mut h).is_err() || h.trim().is_empty() {
+                    break;
+                }
+            }
+            if path.ends_with(".pack") {
+                let _ = gate.recv();
+            }
+            let mut stream = reader.into_inner();
+            let body = fs::read(dir.join(&path)).unwrap_or_default();
+            let head =
+                format!("HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n", body.len());
+            let _ = stream.write_all(head.as_bytes()).and_then(|()| stream.write_all(&body));
+        }
+    });
+    url
+}
+
+/// Mohamed, 2026-11-06: "checking for an update is very slow". The app's
+/// answer shows as soon as the feed is read, while the content pack (several
+/// megabytes on a phone) is still on its way.
+#[test]
+fn the_app_offer_shows_before_the_content_pack_arrives() {
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[12; 32]);
+    let feed = pack_feed(&signer, 45, Some(41), &pack, Vec::new());
+    let (open, gate) = std::sync::mpsc::channel();
+    let url = serve_gated(feed.path().to_path_buf(), gate);
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let (u, _data) = updater(&url, info);
+    let check = std::thread::spawn(move || u.check(false));
+    let mut waited = 0;
+    while u.status().content_check != Some(ContentCheck::Fetching) {
+        assert!(waited < 500, "the pack download never started");
+        std::thread::sleep(std::time::Duration::from_millis(10));
+        waited += 1;
+    }
+    assert!(matches!(u.status().phase, Phase::Available(_)), "the new build shows while the pack downloads");
+    open.send(()).unwrap();
+    check.join().unwrap();
+    assert_eq!(u.status().content_check, Some(ContentCheck::New));
+    assert!(matches!(u.status().phase, Phase::Available(_)));
+}

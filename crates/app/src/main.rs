@@ -15,10 +15,12 @@ mod abbrsheet;
 mod anki;
 mod back;
 mod bank;
+mod brand;
 #[cfg(test)]
 mod browser_fixture;
 mod calc;
 mod case;
+mod catchup;
 mod cloud;
 mod content;
 mod courses;
@@ -27,6 +29,7 @@ mod dead_ends;
 mod desk;
 mod diag;
 mod fonts;
+mod gopage;
 mod hover;
 mod i18n;
 mod icons;
@@ -35,7 +38,9 @@ mod labs;
 mod learn;
 mod lecture;
 mod look;
+mod metacog;
 mod more;
+mod notes;
 mod onboarding;
 mod oral;
 mod order;
@@ -70,6 +75,8 @@ mod today;
 mod ui;
 mod update;
 mod verify;
+mod version;
+mod weak;
 
 use crate::look::{Css, css};
 use dioxus::prelude::*;
@@ -135,13 +142,16 @@ fn main() {
     {
         use dioxus::desktop::{Config, LogicalSize, WindowBuilder};
         // BATNA_WINDOW_SIZE=412x900 previews the phone layout on the Mac.
+        // Give the Mac a useful two-pane window on first launch without
+        // changing the Linux default or overriding a caller's preview size.
+        let default_size = if cfg!(target_os = "macos") { (1280.0, 820.0) } else { (1100.0, 760.0) };
         let (w, h) = std::env::var("BATNA_WINDOW_SIZE")
             .ok()
             .and_then(|v| {
                 let (w, h) = v.split_once('x')?;
                 Some((w.parse().ok()?, h.parse().ok()?))
             })
-            .unwrap_or((1100.0, 760.0));
+            .unwrap_or(default_size);
         let window = WindowBuilder::new()
             .with_title("Batna")
             .with_inner_size(LogicalSize::new(w, h))
@@ -177,6 +187,8 @@ fn App() -> Element {
     let settings = use_context_provider(settings::SettingsNav::new);
     use_context_provider(update::sheet::UpdateSheetNav::new);
     store::use_provide_review();
+    // Restore a validated, device-local Study queue before Today first renders.
+    study::use_restore();
     cloud::use_provide_cloud();
     #[cfg(target_arch = "wasm32")]
     platform::web::use_saver();
@@ -184,6 +196,9 @@ fn App() -> Element {
     // Android: a renderer reclaimed in the background ends Batna quietly
     // instead of crashing it; earlier crashes show in the diagnostics.
     use_hook(platform::webview_guard::install);
+    // Background time must not inflate the answer duration if Android
+    // resumes an existing in-memory Study session.
+    study::use_foreground_reset();
     let current = *ui.screen.read();
     // System themes follow the device's dark mode. Android's WebView can't
     // be trusted for it (it reports light under a light activity theme), so
@@ -244,26 +259,26 @@ fn App() -> Element {
             // and scroll position stay mounted (assets/liquid-glass.css).
             "data-appearance": ui.prefs.read().appearance.as_str(),
             "data-focus": if *ui.focus.read() { "true" } else { "false" },
+            "data-desk-focus": if ui.prefs.read().desk_focus { "true" } else { "false" },
             header { class: "topbar",
-                div { class: "brand",
-                    span { class: "brand-name", {i18n::app::NAME} }
-                    span { class: "brand-tag", {i18n::app::TAGLINE} }
-                }
-                button {
-                    class: "icon-button",
-                    aria_label: Screen::Settings.label(),
-                    title: Screen::Settings.label(),
-                    onclick: move |_| settings.show(None),
-                    {icons::nav(Screen::Settings)}
+                brand::TopBrand {}
+                // The phone needs a touch entry to the same offline palette
+                // that Cmd/Ctrl+K already opens for hardware keyboards.
+                div { class: "topbar-actions",
+                    shortcuts::MobileSearchButton {}
+                    button {
+                        class: "icon-button",
+                        aria_label: Screen::Settings.label(),
+                        title: Screen::Settings.label(),
+                        onclick: move |_| settings.show(None),
+                        {icons::nav(Screen::Settings)}
+                    }
                 }
             }
             nav { class: "nav", aria_label: i18n::nav::LABEL,
                 // From 600px the top bar goes and the name heads the rail or
                 // sidebar, so the screen gets the full height (nav.css).
-                div { class: "nav-brand", aria_hidden: "true",
-                    span { class: "brand-name", {i18n::app::NAME} }
-                    span { class: "brand-tag", {i18n::app::TAGLINE} }
-                }
+                brand::NavBrand {}
                 for screen in Screen::NAV {
                     NavButton {
                         key: "{screen:?}",
@@ -304,9 +319,13 @@ fn App() -> Element {
             settings::SettingsSheet {}
             // After Settings, which opens it, so it draws and takes Back on top.
             shortcuts::KeysSheet {}
+            shortcuts::Palette {}
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
+            gopage::GoPage {}
             abbrsheet::AbbrSheet {}
+            // Over the page sheet, which offers it.
+            notes::NoteSheet {}
             courses::Picker {}
             own::ShareInbox {}
             onboarding::Onboarding {}

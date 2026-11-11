@@ -68,6 +68,22 @@ The model to copy is `content/lessons/hb/L01.yaml`.
     show that sense; everywhere else the entry without a course does. Its
     approval id is `glossary.ICP@neph`.
 
+13. **Bring the تحشيشة back.** A step that teaches a list which already has
+    a تحشيشة (an enumerate item's `hook`, in this lecture or any other, or a
+    `mnemonic` step of another lesson) lists it in `remind:`, so it shows
+    under the step and, from another lesson, links back to it:
+
+    ```yaml
+    - kind: explain
+      remind: [hb.L01.033, hb.L01.034, hb.L01.lesson2:SHIBS]
+    ```
+
+    Only on explain, figure, aside, mnemonic or open-table steps (a hook
+    under a question gives the answer away). When the same list repeats,
+    remind of the first تحشيشة instead of inventing another; partial
+    overlap still earns a reminder. `validate` fails on an entry that is not
+    an enumerate with a hook or a lesson's mnemonic word.
+
 ## File shape
 
 ```yaml
@@ -163,6 +179,24 @@ a line in `ATTRIBUTION.md`:
 
 The app shows the credit under the caption. The pack build embeds the file,
 so nothing is fetched at runtime.
+
+## Reading layout
+
+How the lesson player is laid out, and why (Mohamed, 2026-11-08: "study where the eye rests"). Change it only with evidence.
+
+| Choice | Evidence |
+|---|---|
+| ≈ 60–75 characters a line (40rem column, 44rem with larger type from 1200px) | 55 characters a line gave the best on-screen comprehension (Dyson & Haselgrove, IJHCS 2001); 45–75 with 66 ideal (Bringhurst); moderate lengths are the easiest to read on screen (Dyson & Kipping 1998). |
+| One centred column whose top stays put on every step; step heading at the top start (right) | Readers fixate the top and line starts; Arabic readers follow a mirrored F (NN/g eyetracking, 2006/2017). A fixed spot saves the eye hunting after each step. |
+| Back/Next right under the card (sticky while a long step scrolls); phones keep them at the bottom | Fitts's law: nearer, larger targets are faster; on phones the bottom is the thumb's reach. |
+| Lesson name muted above the card, not a second card | One focal point; the step is what to read. |
+| Text colour by importance: `==key==` pill in the theme's opposite hue (`--mark`), then heading and `**terms**` in full text colour, body softened, meta muted | Signaling principle: cues on the few relevant words improve learning (Mayer; Cambridge Handbook of Multimedia Learning ch. 11). Hence max 3 marks a step. |
+| Reading settings («Aa»): size, spacing and width per device; Book width is the column above, Narrow/Wide sit either side of it | Readers differ (age, eyes, screen distance); a reader-set size and spacing helps without changing the default that the research above picked. |
+| Study theme: warm off-white page, charcoal text; Study dim: warm graphite page, parchment text | Dark text on a light page reads best in a lit room (Piepenbrock et al., Ergonomics 2013, 2014); a dark page tires less in a dark room and is most comfortable at moderate contrast (Xie et al., IEEE Access 2021; Vision Research 2025); moderate warmth, since 2800 K screens tired readers most (IJHCI 2024). |
+
+## Own highlights
+
+Mohamed can highlight any words in a step himself (`learn/highlight.js`, `batna_core::highlight`). They are his notes, not content: they are stored as synced settings (`hl.<lesson>.<id>`), never in `content/`. A highlight is found again by its words and a little text around them, so rewording a sentence in a lesson can drop a highlight on it; small edits elsewhere in the step keep it.
 
 ## Check before the PR
 

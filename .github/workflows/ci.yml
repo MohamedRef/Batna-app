@@ -52,6 +52,43 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets -- -D warnings
       - run: cargo test --workspace
+      # Ignored performance diagnostics, printed to the job summary. Main
+      # only: they gate nothing and the transition one adds about a minute,
+      # and a pull request runs only the fast checks (Mohamed, 2026-11-04).
+      # No absolute timing gate: hosted runners vary and cannot represent S24U GPU paint.
+      - name: Study grade-to-next-render baseline (hosted runner, informational)
+        if: github.event_name != 'pull_request'
+        run: |
+          set -o pipefail
+          cargo test -p batna-app study::flow::profile_study_card_transitions -- --ignored --nocapture 2>&1 | tee study-perf.log
+          {
+            echo "### Study transition baseline, hosted Linux runner only"
+            echo '```'
+            grep 'STUDY_TRANSITION_BASELINE' study-perf.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Study checkpoint marker SQLite baseline (informational)
+        if: github.event_name != 'pull_request'
+        run: |
+          set -o pipefail
+          cargo test -p batna-app store::marker_perf::profile_study_checkpoint_marker -- --ignored --nocapture 2>&1 | tee marker-perf.log
+          {
+            echo "### Study checkpoint marker cost, hosted Linux only"
+            echo '~~~'
+            grep 'STUDY_CHECKPOINT_MARKER_BASELINE' marker-perf.log || true
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: FSRS full-review replay baseline (hosted runner, informational)
+        if: github.event_name != 'pull_request'
+        run: |
+          set -o pipefail
+          cargo test -p batna-app store::backend::replay_perf::profile_review_replay -- --ignored --nocapture 2>&1 | tee replay-perf.log
+          {
+            echo "### Study FSRS replay baseline, hosted Linux only"
+            echo '~~~'
+            grep 'STUDY_REPLAY_BASELINE' replay-perf.log || true
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/setup-node@v5
         with:
           node-version: 22
@@ -59,6 +96,8 @@ jobs:
         run: node --test crates/app/tests/system-back.test.cjs
       - name: Production Android Back and Settings keyboard regression tests
         run: node --test crates/app/tests/ui-runtime.test.mjs
+      - name: Study foreground lifecycle bridge regression tests
+        run: node --test crates/app/tests/study-visibility.test.cjs
       - name: Content impact classification tests
         run: python3 -m unittest discover -s scripts/tests -p 'test_content_impact.py' -v
       - name: Explain update impact
@@ -150,5 +189,18 @@ jobs:
         run: |
           cargo install worker-build --version ^0.8 --locked
           npm install -g wrangler@4
+      # Avoid transient GitHub Releases 504s during worker-build's auto
+      # download of wasm-bindgen 0.2.129. Use a pinned CLI built from crates.io.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/wasm-bindgen
+          key: wasm-bindgen-cli-0.2.129-${{ runner.os }}-${{ runner.arch }}
+      - name: Ensure pinned wasm-bindgen CLI (no release-asset download)
+        run: |
+          if [ ! -x "$HOME/.cargo/bin/wasm-bindgen" ]; then
+            cargo install wasm-bindgen-cli --version 0.2.129 --locked
+          fi
+          "$HOME/.cargo/bin/wasm-bindgen" --version | grep -Fx 'wasm-bindgen 0.2.129'
+          echo "WASM_BINDGEN_BIN=$HOME/.cargo/bin/wasm-bindgen" >> "$GITHUB_ENV"
       - name: Batna Cloud end-to-end (fake Google, two devices)
         run: node crates/server/tests/e2e.mjs

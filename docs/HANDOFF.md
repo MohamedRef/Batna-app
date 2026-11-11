@@ -564,6 +564,11 @@ further; don't change FSRS or Undo speculatively.
   a build of that commit, not a version or a feed. Unzip twice, move Batna.app
   to Applications, `xattr -dr com.apple.quarantine /Applications/Batna.app`.
   Fails rather than ship unsigned if `BATNA_MAC_CERT_*` is missing.
+- Linux apt installs in CI and Coverage go through `scripts/ci-apt-install.sh`:
+  it walks a mirror list (Azure, archive.ubuntu.com, kernel.org, MIT), skips
+  names that don't resolve, rewrites every file in `/etc/apt` (including
+  `apt-mirrors.txt`) to the chosen mirror and time-boxes each try (on
+  2026-11-11 both ubuntu.com names failed DNS and jobs hung for an hour).
 
 ## 11. Current state (2026-11-09)
 
@@ -609,6 +614,7 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-11: res.L17 (hypothesis testing, 33 slides from the enriched lecture PDF): 52 items, 5 lessons; calculators `chi_square` (2×2) and `t_test` (one sample, paired, two groups) reproduce the slides' coffee X² and haemoglobin t examples.
+- 2026-11-11: CI apt installs go through `scripts/ci-apt-install.sh` (first resolving mirror of Azure, archive.ubuntu.com, kernel.org, MIT; time-boxed) after ubuntu.com DNS failures hung CI for an hour.
 - 2026-11-11: res.L16 (normal distribution curve and Z-score): 47 items, 4 lessons; the `z_score` calculator now uses the lecture's bands (ordinary within ±2, unusual beyond ±2, extreme beyond ±3) instead of ±1.96. Slide 34's 13-answer key has no questions in the deck, so it was left out.
 - 2026-11-11: res.L03–L11 checked against the enriched lecture copies and the four revisions: 63 new items (tags `lecturer`, `revision`), lecturer's explanations in lessons, res.L08.020 second correct option fixed.
 - 2026-11-11: res.L02 gap-fill from the lecture's video recording (same 70 slides plus the lecturer's spoken points and the 8 pages of Arabic notes): 16 items, lesson 7; calculators `disease_duration`, `death_rate`, `perinatal_mr`, `mmr` (`calc/frequency.rs`); new slide verdicts in `courses/res/verdicts/L02.tsv`.

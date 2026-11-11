@@ -640,6 +640,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: res.L07.121 covers the slide 72 table (Drug A/B × insulin, 523 patients) the lecturer showed without explaining; open L03–L11 questions (L11 quiz 92–94 keys, L09 video-only plagiarism slides) kept as they are, unverified.
 - 2026-11-11: Settings and Screens browser runs point apt at a resolving mirror (`scripts/ci-apt-install.sh`) before `playwright install --with-deps`.
 - 2026-11-11: journey test (launch → grade → restart → restore → two-device sync), native QA matrix `docs/NATIVE_QA.md`, weekly `cargo audit`, and the shared `docs/INFRA_PARITY.md` checklist (engineering audit F23, F24, § 9).
 - 2026-11-11: a local answer updates only its own item instead of replaying the whole log (43 ms → 0.6 ms at 100k answers); live content switches are bounded to 2 a run; UI writes wait up to 750 ms for the sync lock instead of failing at once (engineering audit F15–F17, § 10 Study sessions).

@@ -135,4 +135,6 @@ pub(super) static REGISTRY: &[CalcSpec] = &[
     frequency::MMR,
     sample_size::SURVEY,
     sample_size::TWO_PROPORTIONS,
+    diagnostic::PREDICTIVE,
+    diagnostic::POST_TEST,
 ];

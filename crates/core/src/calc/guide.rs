@@ -72,6 +72,7 @@ pub(super) static GUIDE_LISTS: &[&[(&str, Guide)]] = &[
     research::GUIDES,
     frequency::GUIDES,
     sample_size::GUIDES,
+    diagnostic::GUIDES,
 ];
 
 /// The next step and differential for a band id (`cam.positive`), if

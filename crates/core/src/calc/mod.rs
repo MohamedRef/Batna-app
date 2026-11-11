@@ -61,6 +61,7 @@ mod cll;
 mod cockcroft;
 mod ctsi;
 mod diabetes;
+mod diagnostic;
 mod dka;
 mod fib4;
 mod fli;

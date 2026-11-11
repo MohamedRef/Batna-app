@@ -80,6 +80,13 @@ pub fn hint(calc: &str, field: &str) -> Option<&'static str> {
         ("sample_size_two_proportions", "ratio") => "1 لو المجموعتين متساويين.",
         ("disease_duration", "prevalence") => "لازم نفس الأساس بتاع الـ incidence، مثلًا الاتنين لكل مليون.",
         ("death_rate", "population") => "كل السكان، أو بس الفئة العمرية أو الجنس اللي بتعدّ وفياته.",
+        ("predictive_values", "prevalence") => {
+            "بتاعة الناس اللي هتكشف عليهم أنت، مش بتاعة الدراسة اللي عملت الـ test."
+        }
+        ("post_test_probability", "pretest") => "الـ prevalence في عيانين زي ده، أو تقديرك الإكلينيكي.",
+        ("post_test_probability", "lr") => {
+            "نتيجة positive: LR+ = sensitivity ÷ (1 − specificity). نتيجة negative: LR− = (1 − sensitivity) ÷ specificity."
+        }
         ("child_pugh", "pt_prolonged_s") => "دي طريقة الكتاب. سيبها فاضية لو هتستخدم الـ INR.",
         ("child_pugh", "inr") => "بيتحسب بس لو خانة الـ PT فاضية.",
         ("apri", "ast_uln_u_l") => "غالبًا 40 U/L.",
@@ -286,6 +293,8 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
         "sample_size_two_proportions" => {
             "محتاج كام case و control (أو exposed و unexposed) بالـ power اللي عايزه"
         }
+        "predictive_values" => "الـ PPV والـ NPV لنفس الـ test في population بـ prevalence تانية",
+        "post_test_probability" => "الاحتمال بعد النتيجة من الـ pre-test probability والـ likelihood ratio",
         _ => return None,
     })
 }

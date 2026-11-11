@@ -34,7 +34,7 @@ never goes in git; items paraphrase it and cite the page.
 | Basics of Research (`res`) | 11 | 11 |
 | **Total** | **132** | **132** |
 
-Plus 94 calculators (each cites its original paper, and every result band
+Plus 96 calculators (each cites its original paper, and every result band
 says what it means, the next step and the differential), an abbreviations
 dictionary per course, normal-range chips on lab values and a تحشيشة
 (Egyptian-Arabic mnemonic) for every list.

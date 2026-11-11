@@ -232,7 +232,7 @@ Medicine "Internal Medicine Postgraduate Lectures" (2025) and research slides:
 | `dm` | Diabetes, Metabolism, Lipids (ch. 6) | part 3 | 23 |
 | `geri` | Geriatrics (ch. 7) | part 4 | 13 |
 | `neph` | Nephrology (ch. 8) | part 5 | 14 |
-| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 14 (L01–L12, L14, L15) |
+| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 15 (L01–L15) |
 
 Semester 1 = `res`, `hem`, `hb`. Not started (no material yet): `cvs`,
 `chest`, `neuro`, `trop`, `img`, `bioch`, `phys`, `path`, `clinpath`,
@@ -309,7 +309,7 @@ The book PDFs, their extracted page text and page images are copyrighted and
 | `book/LNN.txt` | hepatology text by printed page (printed p = PDF p + 4) |
 | `courses/<id>/text/LNN.txt` | other courses: `=== book page N (PDF page M) ===` blocks + tesseract OCR of image pages |
 | `courses/<id>/img/pNNN.jpg` | page images at 200 dpi |
-| `courses/res/slides/*.pdf` | research slide decks (`src.page` = slide number). A lecture taught as several decks is one merged PDF (`res-L09.pdf` = budget 1–14 + ethics 15–85 + plagiarism 86–141); the original files are in `slides/originals/` |
+| `courses/res/slides/*.pdf` | research slide decks (`src.page` = slide number). A lecture taught as several decks is one merged PDF (`res-L09.pdf` = budget 1–14 + ethics 15–85 + plagiarism 86–141; `res-L13.pdf` = writing a paper 1–53 + Vancouver 54–120); the original files are in `slides/originals/` |
 | `anki/batna.apkg` | the latest Anki export |
 | `book-issues.md` | errors found in the book |
 
@@ -545,7 +545,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | What |
 |---|---|
-| Content | Courses with no material yet; `res` L13, L16–L20 from the lecture PDFs (L12, L14, L15 done) (Mohamed also wants L02–L11 checked against the enriched lecture copies); everything stays `unverified` until he approves in-app |
+| Content | Courses with no material yet; `res` L16–L20 from the lecture PDFs (L12–L15 done) (Mohamed also wants L02–L11 checked against the enriched lecture copies); everything stays `unverified` until he approves in-app |
 | Glossary / audit | Split remaining ICP/SBP stop-gap senses into `course:` entries; 2026-11-04 audit leftovers (ambiguous abbreviations, quote cuts) only if Mohamed asks |
 | Mac | Mohamed (2026-11-07) kept being asked for the login Keychain password ("app.batna.cloud") after updates and wants it gone for good. Main builds keep the session in `cloud-session.json` (since #612), and the prompt was traced to local builds of an older checkout; confirm on his Mac after the next update. If it returns, the cause is each build being signed differently (Keychain ACL): fix with a stable signing identity or storage not tied to the build |
 | UX backlog | Weak-topic insight on Today; configurable review shortcuts with conflict checks; a focused phone Study view (keep exit, progress, reveal, grades; don't collide with Mac Focus Mode); medical reading polish (mixed Arabic/English, zoomable figures, optional haptics); a warning before a new session replaces a live one |
@@ -573,6 +573,7 @@ state; details live in the PR and in § 10.
 - 2026-11-11: res.L15 (introduction to biostatistics: variables, tables, graphs, mean/median/mode, range and SD): 118 items, 7 lessons. Source is the video-frame PDF (142 slides + 7 pages of Arabic notes); slide text typed from the frames into `courses/res/text/L15.txt`, generators in `courses/res/gen-L15/`.
 - 2026-11-11: res.L12 (bias and confounders, 61 image-only slides from the lecture video, hand-transcribed in `courses/res/text/L12.txt`): 83 items with the 7-question quiz keyed from the lecturer's notes, 6 lessons with 7 drawn figures; glossary gains STD.
 - 2026-11-11: res.L14 (screening and diagnostic accuracy, 31 slides) written: 65 items, 5 lessons; calculators `predictive_values` (slide 25 formula) and `post_test_probability` (likelihood ratios; Deeks 2004, Fagan 1975, Jaeschke 1994); `diagnostic_accuracy` guides now cite the L14 slides; glossary gains AUC, ROC, TP/FP/FN/TN, SpPin, SnNout.
+- 2026-11-11: res.L13 (writing a scientific paper + Vancouver referencing, two decks merged as 120 slides): 101 items, 9 lessons; slide text hand-transcribed from the video-frame slides.
 - 2026-11-09: lesson reading settings («Aa»: text size, line spacing, line width per device), ported from Steps-app.
 - 2026-11-09: notes (synced `notes` table), weak-fact marks and go to page (Ctrl/⌘+G, per-course books) ported from Steps-app (§ 10 Notes, weak-fact marks, go to page).
 - 2026-11-09: from Steps-app: confidence and error reason on answers (migration 5), sure misses first in the mistakes log with a 2–7 day retest, and a catch-up plan for a review backlog (§ 10 Study signals).

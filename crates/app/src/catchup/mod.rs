@@ -190,6 +190,14 @@ pub fn CatchUpCard(due: usize, due_minutes: u32) -> Element {
 mod tests {
     use super::*;
 
+    /// The plan is one setting in the shared test store, so the tests that
+    /// save it take turns (in parallel one test's plan showed in another).
+    static PLAN_LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
+    fn plan_lock() -> std::sync::MutexGuard<'static, ()> {
+        PLAN_LOCK.lock().unwrap_or_else(|e| e.into_inner())
+    }
+
     #[test]
     fn a_backlog_is_twice_the_usual_day_and_never_small() {
         assert_eq!(usual(&[10, 20, 30, 999]), 20.0, "today is left out");
@@ -215,6 +223,7 @@ mod tests {
 
     #[test]
     fn the_running_plan_caps_reviews_and_can_pause_new_items() {
+        let _turn = plan_lock();
         let mut dom = VirtualDom::new(|| {
             use_hook(|| save(Some(Plan { start_day: 7, days: 2, backlog: 5, pause_new: true })));
             rsx! {}
@@ -258,6 +267,7 @@ mod tests {
 
     #[test]
     fn today_offers_a_plan_only_for_a_real_backlog() {
+        let _turn = plan_lock();
         assert!(!render(20, None).contains("catchup"), "a small pile needs no plan");
         let html = render(120, None);
         assert!(html.contains(r#"data-state="offer""#), "{html}");
@@ -269,6 +279,7 @@ mod tests {
 
     #[test]
     fn a_running_plan_shows_the_day_and_what_is_left() {
+        let _turn = plan_lock();
         let plan = Plan { start_day: 0, days: 3, backlog: 90, pause_new: true };
         let html = render(90, Some(plan));
         assert!(html.contains(r#"data-state="running""#), "{html}");
@@ -279,6 +290,7 @@ mod tests {
 
     #[test]
     fn the_plan_round_trips_as_a_synced_setting() {
+        let _turn = plan_lock();
         let plan = Plan { start_day: -5, days: 2, backlog: 40, pause_new: false };
         assert!(crate::store::save_setting(KEY, &plan));
         assert_eq!(crate::store::shared().setting::<Plan>(KEY), Some(plan));

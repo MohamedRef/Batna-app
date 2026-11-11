@@ -55,6 +55,11 @@ mod tests {
         let waited = t.elapsed();
         assert!(waited >= UI_BUSY.mul_f32(0.9), "it waited for the lock: {waited:?}");
         assert!(waited < UI_BUSY * 3, "within the budget: {waited:?}");
+        // A write that reads first (last-writer-wins compares stamps) waits
+        // too: its transaction takes the lock up front.
+        let t = Instant::now();
+        assert!(ui.put_setting("theme", &"night").is_err());
+        assert!(t.elapsed() >= UI_BUSY.mul_f32(0.9), "it waited: {:?}", t.elapsed());
 
         sync.conn.lock().unwrap().execute_batch("COMMIT").unwrap();
         ui.append_review(answer()).unwrap();

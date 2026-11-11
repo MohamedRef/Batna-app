@@ -255,10 +255,13 @@ impl Store {
         self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner).total_changes()
     }
 
-    fn init(conn: Connection, path: Option<PathBuf>, marker: Option<&Path>) -> Result<Self> {
+    fn init(mut conn: Connection, path: Option<PathBuf>, marker: Option<&Path>) -> Result<Self> {
         conn.pragma_update(None, "foreign_keys", "ON")?;
         // The sync engine's connection may hold the write lock (contention.rs).
         conn.busy_timeout(contention::UI_BUSY)?;
+        // Every transaction takes the write lock up front: a read that turns
+        // into a write mid-transaction fails at once instead of waiting.
+        conn.set_transaction_behavior(rusqlite::TransactionBehavior::Immediate);
         let version: u32 = conn.pragma_query_value(None, "user_version", |r| r.get(0))?;
         if version as usize > MIGRATIONS.len() {
             return Err(StoreError::TooNew(version));

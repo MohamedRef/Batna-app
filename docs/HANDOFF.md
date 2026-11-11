@@ -472,7 +472,10 @@ Add a bullet here when a PR adds something a later agent must know.
   waits at most `UI_BUSY` (750 ms) for the sync engine's write lock, then
   the write fails into the screen's own saving/retry state; the sync
   connection waits up to `SYNC_BUSY` (5 s) (`store/contention.rs`). Before,
-  SQLite's default failed a UI write at once while sync wrote.
+  SQLite's default failed a UI write at once while sync wrote. Every
+  transaction begins IMMEDIATE (the connection's default behaviour), since
+  a read that turns into a write mid-transaction fails without waiting;
+  the export's snapshot stays a deferred read.
 - **Export is one moment** (audit F14): `Store::export` reads every table
   in one read transaction, so a sync merge on the other connection can't
   tear it.

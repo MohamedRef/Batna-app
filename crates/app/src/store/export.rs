@@ -73,7 +73,9 @@ impl Store {
         // One read transaction: the sync thread writes through its own
         // connection, and an export must be one moment, not tables read
         // before and after a merge (audit F14).
-        let conn = guard.unchecked_transaction()?;
+        // Deferred: a read snapshot that never takes the write lock (other
+        // transactions start IMMEDIATE, contention.rs).
+        let conn = rusqlite::Transaction::new_unchecked(&guard, rusqlite::TransactionBehavior::Deferred)?;
         let schema_version: u32 = conn.pragma_query_value(None, "user_version", |r| r.get(0))?;
         let names: Vec<String> = {
             let mut stmt = conn.prepare(

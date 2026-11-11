@@ -1066,7 +1066,7 @@ Source: Research L06–L07: experimental studies (NNT = 1/ARR)
 
 ## `diagnostic_accuracy`: Diagnostic accuracy (2×2)
 
-Source: Research L14: measures of diagnostic accuracy
+Source: Research L14: measures of diagnostic accuracy, slides 12–18
 
 | input | kind | |
 |---|---|---|
@@ -1110,3 +1110,23 @@ Source: Research L11: sampling and sample size, slides 77–87 (Epi Info StatCal
 | `ratio` | number | Ratio of group 2 to group 1 (controls : cases, unexposed : exposed); optional |
 | `p_group2` | number, % | % exposed among controls, or % with the outcome among the unexposed |
 | `p_group1` | number, % | % exposed among cases, or % with the outcome among the exposed |
+
+## `predictive_values`: Predictive values at a new prevalence
+
+Source: Research L14: measures of diagnostic accuracy, slides 24–25 (Altman and Bland, BMJ 1994)
+
+| input | kind | |
+|---|---|---|
+| `sensitivity` | number, % | Sensitivity |
+| `specificity` | number, % | Specificity |
+| `prevalence` | number, % | Prevalence (pre-test probability) |
+| `measure` | `ppv`, `npv` | Answer with |
+
+## `post_test_probability`: Post-test probability (likelihood ratio)
+
+Source: Research L14: measures of diagnostic accuracy (Deeks and Altman, BMJ 2004; Fagan, NEJM 1975; Jaeschke, JAMA 1994)
+
+| input | kind | |
+|---|---|---|
+| `pretest` | number, % | Pre-test probability |
+| `lr` | number | Likelihood ratio of the result |

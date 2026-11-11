@@ -213,3 +213,5 @@ pub const REMIND: &str = "افتكر التحشيشة";
 pub const REMIND_LIST: &str = "افتكرها";
 pub const REMIND_FROM: &str = "من درس";
 pub const REMIND_FROM_HINT: &str = "افتح الدرس اللي التحشيشة دي اتشرحت فيه";
+pub const FINISH_UNSAVED: &str = "ما عرفتش أسجّل إن الدرس خلص، فلسه على آخر خطوة وإجاباتك زي ما هي. جرّب تاني.";
+pub const PLACE_UNSAVED: &str = "ما عرفتش أحفظ مكانك في الدرس. إجاباتك لسه هنا؛ جرّب تاني قبل ما تقفل.";

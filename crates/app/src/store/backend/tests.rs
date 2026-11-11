@@ -285,3 +285,24 @@ fn the_daily_new_cap_counts_items_started_today() {
     let i = b.intervals("hb.L01.002", T0).unwrap();
     assert!(i[0] <= i[3]);
 }
+
+#[test]
+fn a_review_log_that_cant_be_read_keeps_the_last_good_copy_and_says_so() {
+    let mut b = backend();
+    answer(&mut b, "hb.L01.001", Grade::Good, T0);
+    let state = b.states.get("hb.L01.001").cloned();
+    assert!(state.is_some());
+    let rename = |from: &str, to: &str| {
+        b.store.conn.lock().unwrap().execute(&format!("ALTER TABLE {from} RENAME TO {to}"), []).unwrap();
+    };
+    rename("review_events", "review_events_away");
+    b.reload();
+    assert_eq!(b.reviews_logged(), 1, "not an empty log");
+    assert_eq!(b.states.get("hb.L01.001").cloned(), state, "the item isn't new again");
+    assert!(crate::store::read_error().is_some_and(|e| e.starts_with(REVIEW_LOG)));
+    rename("review_events_away", "review_events");
+    // Today's Retry (`reload_and_notify`) reads again the same way.
+    b.reload();
+    assert!(!crate::store::read_error().is_some_and(|e| e.starts_with(REVIEW_LOG)), "Retry clears it");
+    assert_eq!(b.reviews_logged(), 1);
+}

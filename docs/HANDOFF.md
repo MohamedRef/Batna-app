@@ -432,6 +432,19 @@ Add a bullet here when a PR adds something a later agent must know.
   hides «sent to review» until they are in the log. Tests use
   `Store::set_read_only` (SQLite `query_only`) to refuse and then accept
   writes.
+- **Finishing a lesson** (audit F09, 2026-11-11): the done mark and the
+  cleared place are written in one transaction (`Store::finish_place`,
+  `store/places.rs`, on `put_lww_in`). A refusal keeps him on the last step
+  with «ما عرفتش أسجّل إن الدرس خلص» and Retry; a refused place save
+  mid-lesson says so too (`WriteFailed` in `learn/player.rs`).
+- **Reads that fail** (audit F10): `ReviewBackend::reload` keeps the last
+  good review log and verdicts when a read fails, and `Store::setting`
+  reports a database error instead of reading it as "never set"
+  (`store/health.rs`: `read_failed`/`read_error`); Today shows it with
+  «اقرأ تاني».
+- **Storage that didn't open** (audit F11): the in-memory session is said
+  above every screen (`persistence::VolatileNotice` in `main.rs`) with what
+  will be lost and a button to Settings › Data to export.
 - **Not yet verified natively**: Android process death and OS kills, macOS
   relaunch, S24 Ultra lock/unlock, keyboard and Back with a running session.
 
@@ -578,6 +591,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: finishing a lesson is one transaction with a Retry; a failed read keeps the last good copy and says so on Today; an in-memory session is announced on every screen (engineering audit F09–F11, § 10 Study sessions).
 - 2026-11-11: answers the store refuses outside the main Study session (lesson Try, Oral, question bank) are no longer lost silently: the item stays or the answer is kept with a retry (engineering audit F02, § 10 Study sessions).
 - 2026-11-11: his notes on items ride in the Anki deck (`Notes` field on Batna Basic and Batna Cloze; docs/ANKI.md), from Steps-app.
 - 2026-11-11: res.L15 (introduction to biostatistics: variables, tables, graphs, mean/median/mode, range and SD): 118 items, 7 lessons. Source is the video-frame PDF (142 slides + 7 pages of Arabic notes); slide text typed from the frames into `courses/res/text/L15.txt`, generators in `courses/res/gen-L15/`.

@@ -3,6 +3,9 @@
 //! writes; never enqueue append-only study events. Capture owned desired
 //! values and long-lived storage handles, not component-local signals.
 mod queue;
+mod volatile;
+
+pub use volatile::VolatileNotice;
 
 use dioxus::core::Runtime;
 use dioxus::prelude::*;

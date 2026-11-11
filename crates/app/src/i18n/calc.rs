@@ -295,6 +295,8 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
         }
         "predictive_values" => "الـ PPV والـ NPV لنفس الـ test في population بـ prevalence تانية",
         "post_test_probability" => "الاحتمال بعد النتيجة من الـ pre-test probability والـ likelihood ratio",
+        "chi_square" => "فيه علاقة بين متغيرين نوعيين في جدول 2×2 ولا صدفة؟",
+        "t_test" => "الفرق بين المتوسطات حقيقي ولا صدفة؟ (عينة واحدة، paired، أو مجموعتين)",
         _ => return None,
     })
 }

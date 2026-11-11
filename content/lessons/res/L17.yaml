@@ -1,0 +1,938 @@
+schema: batna.lesson/v1
+lecture: res.L17
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L17.lesson1
+    title: "الصدفة وفرضية العدم"
+    hook: "دواك نزّل الضغط 10 مللي أكتر من الدوا التاني. شطارة ولا صدفة؟ ده بالظبط اللي الـ hypothesis testing بيجاوب عليه."
+    minutes: 8
+    pages: [2, 11]
+    topics: ["chance", "steps", "hypotheses"]
+    goals:
+      - "تفهم ليه محتاجين test of significance أصلًا"
+      - "ترتّب خطوات التحليل الإحصائي"
+      - "تكتب H0 و Ha صح لأي سؤال"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 2
+        quote: "Because no study is perfect, there is always a chance for error; perhaps this is one of five chances in 100 (p < 0.05), that such an extreme result has happened by chance"
+        title: "مفيش دراسة كاملة"
+        text: |
+          مهما كانت الدراسة محترمة، فيه دايمًا احتمال إن النتيجة طلعت كده ==by chance==.
+
+          لما نقول **p < 0.05** فإحنا بنقول: فيه حوالي 5 فرص من 100 إن نتيجة متطرفة زي دي تحصل بالصدفة.
+
+          عشان كده قبل ما نصدّق أي فرق أو علاقة، لازم نستبعد الصدفة.
+      - kind: explain
+        page: 3
+        quote: |
+          To rule out the effect of chance
+          Formulate a hypothesis
+          Testing it appropriately
+        title: "إزاي نستبعد الصدفة؟"
+        text: |
+          خطوتين بس:
+
+          - نكتب ==hypothesis== (فرضية).
+          - ونختبرها بالـ **test** المناسب.
+
+          باقي المحاضرة كلها تفاصيل الخطوتين دول.
+      - kind: check
+        page: 4
+        quote: |
+          OBSERVATIONAL
+          Investigators study people and exposures "in nature"
+          Comparison Group?
+          NO: DESCRIPTIVE
+          Correlational
+          Case Series
+          Case Reports
+          Cross-Sectional
+          YES: ANALYTIC
+          Case-Control
+          Cohort
+        question: "Investigators observe people and exposures without assigning anything, and they include a comparison group. Which design family is this?"
+        options:
+          - "Analytic observational (case-control, cohort)"
+          - "Descriptive observational"
+          - "Experimental"
+          - "Laboratory trial"
+        answer: 0
+        why:
+          - "صح: observational + comparison group = analytic."
+          - "الـ descriptive مفيهاش comparison group."
+          - "الـ experimental الباحث هو اللي بيوزّع الـ exposure بالـ randomization."
+          - "الـ laboratory trial نوع من الـ experimental."
+      - kind: explain
+        page: 5
+        quote: |
+          Types of statistical analysis
+          Differences: Compare one variable (the dependent)
+          Associations: Compare two or more variables, one of them must be dependent and the others are independents within the same group.
+        title: "فروق ولا علاقات؟"
+        text: |
+          التحليل الإحصائي نوعين:
+
+          - **Differences**: بنقارن متغير واحد (الـ ==dependent==) بين مجموعات. مثلًا متوسط الكوليسترول في مجموعتين.
+          - **Associations**: بنقارن متغيرين أو أكتر جوه نفس المجموعة، واحد dependent والباقي ==independent==. مثلًا التدخين والـ lung cancer.
+
+          في مثال التدخين: التدخين هو الـ exposure أو الـ independent، والمرض هو الـ outcome أو الـ dependent.
+      - kind: order
+        page: 6
+        quote: |
+          Formulate hypotheses
+          H0 Null hypothesis: No significant difference/association
+          H1 or Ha Alternative hypothesis: Significant difference/association
+          Determine the type of the statistical test.
+          Determine the significance according to:
+          Calculated value of the test.
+          P value
+          Confidence interval (CI)
+        prompt: "رتّب خطوات الـ statistical analysis"
+        steps:
+          - "Formulate hypotheses (H0 and H1)"
+          - "Determine the type of the statistical test"
+          - "Determine the significance (test value, P value, CI)"
+        why: "الأول بتقول بتدوّر على إيه (الفرضيات)، بعدين تختار الأداة (الـ test)، وفي الآخر تحكم بالنتيجة."
+      - kind: mnemonic
+        page: 6
+        quote: |
+          Determine the significance according to:
+          Calculated value of the test.
+          P value
+          Confidence interval (CI)
+        word: "CPC"
+        parts:
+          - { key: "C", text: "Calculated value of the test: الرقم اللي طلع من الحساب." }
+          - { key: "P", text: "P value: احتمال الصدفة." }
+          - { key: "C", text: "Confidence interval (CI)." }
+        hook: "بتحكم على الـ significance بـ 3 حاجات: Calculated value، P value، و CI."
+      - kind: figure
+        page: 8
+        quote: |
+          Null hypothesis H0 contains a statement of equality such as ≥ , = or ≤.
+          Alternative hypothesis Ha contains a statement of inequality such as < , ≠ or >
+          Complementary Statements
+        title: "H0 و Ha: وشّين لعملة واحدة"
+        alt: "Two boxes. Left: H0, the null hypothesis, a statement of equality with the signs equals, greater than or equal, less than or equal. Right: Ha, the alternative hypothesis, a statement of inequality with the signs not equal, less than, greater than. A bracket joins them: complementary statements, if one is false the other is true."
+        caption: "الـ **H0** فيها علامة ==equality== (= أو ≥ أو ≤)، والـ **Ha** فيها inequality (≠ أو < أو >). واحدة بس فيهم صح."
+        svg: |
+          <svg viewBox="0 0 340 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="20" width="140" height="78" rx="10" class="fg-ink"/>
+            <text x="80" y="44" text-anchor="middle" class="t-lg t-b">H0 (null)</text>
+            <text x="80" y="66" text-anchor="middle" class="t-sm">equality</text>
+            <text x="80" y="86" text-anchor="middle" class="t-b">=   ≥   ≤</text>
+            <rect x="190" y="20" width="140" height="78" rx="10" class="fg-acc"/>
+            <text x="260" y="44" text-anchor="middle" class="t-lg t-b t-acc">Ha (alternative)</text>
+            <text x="260" y="66" text-anchor="middle" class="t-sm">inequality</text>
+            <text x="260" y="86" text-anchor="middle" class="t-b">≠   &lt;   &gt;</text>
+            <path d="M80 104 L80 128 L260 128 L260 104" class="fg-thin"/>
+            <text x="170" y="148" text-anchor="middle" class="t-sm t-b">Complementary statements</text>
+            <text x="170" y="170" text-anchor="middle" class="t-sm t-mut">If one is false, the other is true</text>
+          </svg>
+      - kind: explain
+        page: 9
+        quote: |
+          Example:
+          Ho : There is no difference in the reduction of blood pressure achieved by drug A and B. the mean decrease of blood pressure achieved by drug A ( X1) is equal to the mean decrease in blood pressure achieved by drug B (X 2).
+          HA: There is a difference in the reduction of blood pressure achieved by drug A and B. The mean decrease in blood pressure achieved by drug A is different from that of drug B.
+        title: "مثال: دوا A ودوا B"
+        text: |
+          **H0**: مفيش فرق في نزول الضغط بين دوا A ودوا B؛ متوسط النزول مع A (X̄1) = متوسطه مع B (X̄2).
+
+          **HA**: فيه فرق؛ متوسط النزول مع A مختلف عن B.
+
+          لاحظ إن الـ HA هنا مش بتقول مين أحسن، بتقول **مختلف** بس. ده سؤال عن ==الفرق== في الاتجاهين.
+      - kind: check
+        page: 9
+        quote: |
+          Example:
+          Ho : There is no difference in the reduction of blood pressure achieved by drug A and B. the mean decrease of blood pressure achieved by drug A ( X1) is equal to the mean decrease in blood pressure achieved by drug B (X 2).
+          HA: There is a difference in the reduction of blood pressure achieved by drug A and B. The mean decrease in blood pressure achieved by drug A is different from that of drug B.
+        question: "For the drug A versus drug B trial, which statement is the null hypothesis?"
+        options:
+          - "Mean BP decrease with drug A equals that with drug B"
+          - "Drug A lowers BP more than drug B"
+          - "The mean decrease with A differs from B"
+          - "Both drugs lower BP"
+        answer: 0
+        why:
+          - "صح: الـ H0 دايمًا equality: X̄1 = X̄2."
+          - "دي alternative في اتجاه واحد."
+          - "دي الـ HA."
+          - "دي مش مقارنة بينهم أصلًا."
+      - kind: explain
+        page: 11
+        quote: |
+          Null hypothesis ( H0 )
+          We would reject the Null Hypothesis based upon simple inequality of means.
+          The first mean could be greater than the second or the second greater than the first.
+          Our Null Hypothesis distribution for an α = .05 would look something like this
+          1 - α = 0.95
+          α = .05
+        title: "ليه الرفض في الطرفين؟"
+        text: |
+          إحنا بنرفض الـ H0 لمجرد إن المتوسطين ==مش متساويين==: الأول ممكن يكون أكبر من التاني، أو التاني أكبر من الأول.
+
+          عشان كده الـ α = 0.05 بتتقسم على الطرفين، **0.025** في كل طرف، والنص (1 − α = 0.95) هو منطقة عدم الرفض.
+      - kind: aside
+        tone: "joke"
+        page: 8
+        quote: |
+          Null hypothesis H0 contains a statement of equality such as ≥ , = or ≤.
+          Alternative hypothesis Ha contains a statement of inequality such as < , ≠ or >
+        text: "الـ Null hypothesis والـ Alternative hypothesis زي اتنين بيتخانقوا على كرسي واحد: «If I am false, you are true». 😄 مفيش حل وسط، واحد بس اللي يقعد."
+      - kind: try
+        items: ["res.L17.001", "res.L17.008", "res.L17.012"]
+    recap:
+      - "مفيش دراسة كاملة؛ لازم نستبعد الصدفة بـ hypothesis و test."
+      - "Differences = متغير dependent بين مجموعات؛ Associations = متغيرات في نفس المجموعة."
+      - "الخطوات: فرضيات، نوع الـ test، الـ significance (test value و P و CI)."
+      - "الـ H0 فيها equality، والـ Ha فيها inequality، ومكمّلين لبعض."
+    practice: [res.L17.001, res.L17.002, res.L17.003, res.L17.004, res.L17.005, res.L17.006, res.L17.007, res.L17.008, res.L17.009, res.L17.010, res.L17.011, res.L17.012, res.L17.013, res.L17.014, res.L17.015, res.L17.016]
+  # ------------------------------------------------------------------
+  - id: res.L17.lesson2
+    title: "Alpha والـ critical value والـ P value: إزاي نحكم؟"
+    hook: "قبل ما تبدأ البحث بتحط خط أحمر (α). بعد الحساب بتشوف رقمك عدّى الخط ولا لأ. بس كده."
+    minutes: 9
+    pages: [10, 19]
+    topics: ["significance"]
+    goals:
+      - "تعرّف α والـ rejection region والـ critical value"
+      - "تحسب الـ degrees of freedom"
+      - "تاخد قرار رفض أو قبول الـ H0"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 10
+        quote: |
+          Alpha : level of significance
+          Rejection region
+          Your decision before you conduct a research
+        title: "Alpha: قرارك قبل البحث"
+        text: |
+          ==Alpha (α)== هي الـ **level of significance**، وهي اللي بتحدد الـ **rejection region**.
+
+          ودي قرار بتاخده ==قبل ما تعمل البحث==، مش بعد ما تشوف النتيجة.
+      - kind: figure
+        page: 10
+        quote: |
+          Alpha : level of significance
+          Rejection region
+          Your decision before you conduct a research
+          Critical Value
+          Critical Value
+          Rejection Region
+          Nonrejection Region
+          Rejection Region
+          α /2
+          α /2
+        title: "منحنى الـ H0 ومنطقتين الرفض"
+        alt: "A bell-shaped curve. Both tails beyond two vertical lines marked critical value are shaded as rejection regions, each labelled alpha over 2 equals 0.025. The middle area is the non-rejection region, 1 minus alpha equals 0.95."
+        caption: "في الـ two-sided test الـ α بتتقسم نصين: ==α/2== في كل طرف بعد الـ **critical value**."
+        svg: |
+          <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 160 C80 160 100 30 170 30 C240 30 260 160 320 160" class="fg-ink" fill="none"/>
+            <path d="M20 160 C45 160 60 152 78 138 L78 160 Z" class="fg-dot-bad"/>
+            <path d="M320 160 C295 160 280 152 262 138 L262 160 Z" class="fg-dot-bad"/>
+            <line x1="78" y1="125" x2="78" y2="165" class="fg-arrow-bad"/>
+            <line x1="262" y1="125" x2="262" y2="165" class="fg-arrow-bad"/>
+            <line x1="10" y1="160" x2="330" y2="160" class="fg-arrow"/>
+            <text x="38" y="104" text-anchor="middle" class="t-sm t-bad">critical</text>
+            <text x="38" y="120" text-anchor="middle" class="t-sm t-bad">value</text>
+            <text x="302" y="104" text-anchor="middle" class="t-sm t-bad">critical</text>
+            <text x="302" y="120" text-anchor="middle" class="t-sm t-bad">value</text>
+            <text x="170" y="110" text-anchor="middle" class="t-sm t-b">Non-rejection region</text>
+            <text x="170" y="128" text-anchor="middle" class="t-sm">1 − α = 0.95</text>
+            <text x="40" y="182" text-anchor="middle" class="t-sm t-bad">α/2 = 0.025</text>
+            <text x="300" y="182" text-anchor="middle" class="t-sm t-bad">α/2 = 0.025</text>
+            <text x="170" y="182" text-anchor="middle" class="t-sm t-mut">rejection regions in both tails</text>
+          </svg>
+      - kind: explain
+        page: 13
+        quote: |
+          Level of significance
+          Usually a small value for α is chosen as 0.01, 0.05. In medicine, α is 0.05 or smaller.
+          Choosing a value for α of 0.05 means that we are 95% sure that we made the correct decision
+        title: "بنختار α كام؟"
+        text: |
+          عادةً قيمة صغيرة: **0.01** أو **0.05**. في الطب الـ α = ==0.05 أو أقل==.
+
+          والسلايد بتقول إن α = 0.05 معناها إننا ==95% متأكدين== إن قرارنا صح.
+      - kind: update
+        page: 13
+        quote: "Choosing a value for α of 0.05 means that we are 95% sure that we made the correct decision"
+        text: "بالدقة: choosing α = 0.05 معناه إننا قابلين type I error بنسبة 5%، يعني نرفض H0 وهي صح حوالي 5 مرات من 100؛ مش إن القرار ده بالذات صح بنسبة 95%. في الامتحان اكتب جملة السلايد (correct decision)."
+        ref: "Altman, Practical Statistics for Medical Research, 1991"
+      - kind: check
+        page: 10
+        quote: |
+          Alpha : level of significance
+          Rejection region
+          Your decision before you conduct a research
+        question: "When is the level of significance (α) decided?"
+        options:
+          - "Before conducting the research"
+          - "After seeing the P value"
+          - "After calculating the test value"
+          - "Only if the result is not significant"
+        answer: 0
+        why:
+          - "صح: «Your decision before you conduct a research»."
+          - "كده إنت بتفصّل القاعدة على النتيجة."
+          - "الـ test value بيتقارن بـ critical value الـ α حددتها قبل كده."
+          - "الـ α ثابتة مهما كانت النتيجة."
+      - kind: explain
+        page: 14
+        quote: |
+          Degree of freedom
+          Degree of freedom is the number of data values that are free to vary, in other terms, degree of freedom is a measure of the number of independent pieces of information on which the parameter estimate is based.
+          D.f = n – 1.
+          D.f.= n1 + n2 – 2.
+          D.f. = (c-1) (r-1)
+        title: "Degrees of freedom"
+        text: |
+          ==Degrees of freedom (df)== = عدد القيم اللي «حرة» تتغير، يعني عدد قطع المعلومات المستقلة اللي التقدير مبني عليها.
+
+          - **n − 1**: عينة واحدة (one-sample أو paired t).
+          - **n1 + n2 − 2**: مجموعتين مستقلتين (Student's t).
+          - **(c − 1)(r − 1)**: جدول الـ chi-square.
+      - kind: table
+        page: 14
+        quote: |
+          D.f = n – 1.
+          D.f.= n1 + n2 – 2.
+          D.f. = (c-1) (r-1)
+        title: "الـ df لكل test"
+        columns: ["Test", "df"]
+        rows: [["One-sample or paired t", "n − 1"], ["Student's t (two independent)", "n1 + n2 − 2"], ["Chi-square", "(c − 1)(r − 1)"]]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 15
+        quote: |
+          The critical value is the tabulated value of the test that indicates whether the results obtained by the appropriate statistical test lies in the non-rejection area of the curve according to the chosen value of (α).
+          The critical value is compared to the value obtained by the test statistics.
+        title: "الـ critical value"
+        text: |
+          الـ ==critical value== رقم **من الجدول** (tabulated)، بيقولك نتيجة الـ test واقعة في منطقة عدم الرفض ولا لأ حسب الـ α اللي اخترتها.
+
+          وبنقارنه بالرقم اللي طلع من الحساب (الـ ==test statistic==).
+      - kind: explain
+        page: 16
+        quote: |
+          | degrees of freedom | 20% | 10% | 5% | 2% | 1% | 0.1% |
+          |---|---|---|---|---|---|---|
+          | 1 | 3.078 | 6.314 | 12.706 | 31.821 | 63.657 | 636.619 |
+          | 2 | 1.886 | 2.920 | 4.303 | 6.965 | 9.925 | 31.598 |
+          | 3 | 1.638 | 2.353 | 3.182 | 4.541 | 5.841 | 12.941 |
+          | 4 | 1.533 | 2.132 | 2.776 | 3.747 | 4.604 | 8.610 |
+          | 5 | 1.476 | 2.015 | 2.571 | 3.365 | 4.032 | 6.859 |
+          | 6 | 1.440 | 1.943 | 2.447 | 3.143 | 3.707 | 5.959 |
+          | 7 | 1.415 | 1.895 | 2.365 | 2.998 | 3.499 | 5.405 |
+          | 8 | 1.397 | 1.860 | 2.306 | 2.896 | 3.355 | 5.041 |
+          | 9 | 1.383 | 1.833 | 2.262 | 2.821 | 3.250 | 4.781 |
+          | 10 | 1.372 | 1.812 | 2.228 | 2.764 | 3.169 | 4.587 |
+          | 11 | 1.363 | 1.796 | 2.201 | 2.718 | 3.106 | 4.437 |
+          | 12 | 1.356 | 1.782 | 2.179 | 2.681 | 3.055 | 4.318 |
+          | 13 | 1.350 | 1.771 | 2.160 | 2.650 | 3.012 | 4.221 |
+          | 14 | 1.345 | 1.761 | 2.145 | 2.624 | 2.977 | 4.140 |
+          | 15 | 1.341 | 1.753 | 2.131 | 2.602 | 2.947 | 4.073 |
+          | 16 | 1.337 | 1.746 | 2.120 | 2.583 | 2.921 | 4.015 |
+          | 17 | 1.333 | 1.740 | 2.110 | 2.567 | 2.898 | 3.965 |
+          | 18 | 1.330 | 1.734 | 2.101 | 2.552 | 2.878 | 3.922 |
+          | 19 | 1.328 | 1.729 | 2.093 | 2.539 | 2.861 | 3.883 |
+          | 20 | 1.325 | 1.725 | 2.086 | 2.528 | 2.845 | 3.850 |
+          | 21 | 1.323 | 1.721 | 2.080 | 2.518 | 2.831 | 3.819 |
+          | 22 | 1.321 | 1.717 | 2.074 | 2.508 | 2.819 | 3.792 |
+          | 23 | 1.319 | 1.714 | 2.069 | 2.500 | 2.807 | 3.767 |
+          | 24 | 1.318 | 1.711 | 2.064 | 2.492 | 2.797 | 3.745 |
+          | 25 | 1.316 | 1.708 | 2.060 | 2.485 | 2.787 | 3.725 |
+          | 26 | 1.315 | 1.706 | 2.056 | 2.479 | 2.779 | 3.707 |
+          | 27 | 1.314 | 1.703 | 2.052 | 2.473 | 2.771 | 3.690 |
+          | 28 | 1.313 | 1.701 | 2.048 | 2.467 | 2.763 | 3.674 |
+          | 29 | 1.311 | 1.699 | 2.043 | 2.462 | 2.756 | 3.659 |
+          | 30 | 1.310 | 1.697 | 2.042 | 2.457 | 2.750 | 3.646 |
+          | 40 | 1.303 | 1.684 | 2.021 | 2.423 | 2.704 | 3.551 |
+          | 60 | 1.296 | 1.671 | 2.000 | 2.390 | 2.660 | 3.460 |
+          | 120 | 1.289 | 1.658 | 1.980 | 2.358 | 2.617 | 3.373 |
+          | ∞ | 1.282 | 1.645 | 1.960 | 2.326 | 2.576 | 3.291 |
+        title: "جدول الـ t: كل ما الـ df تزيد، الحد يقل"
+        text: |
+          في عمود الـ **5%**: الـ df 1 = 12.706، الـ df 24 = ==2.064==، الـ df 30 = 2.042، والـ ∞ = **1.960**.
+
+          عينة أكبر = معلومات أكتر = محتاج t أصغر عشان تكون significant. ولما الـ df تبقى لا نهائية بنرجع لرقم الـ normal بتاع 1.96.
+      - kind: check
+        page: 16
+        quote: |
+          | degrees of freedom | 20% | 10% | 5% | 2% | 1% | 0.1% |
+          |---|---|---|---|---|---|---|
+          | 1 | 3.078 | 6.314 | 12.706 | 31.821 | 63.657 | 636.619 |
+          | 2 | 1.886 | 2.920 | 4.303 | 6.965 | 9.925 | 31.598 |
+          | 3 | 1.638 | 2.353 | 3.182 | 4.541 | 5.841 | 12.941 |
+          | 4 | 1.533 | 2.132 | 2.776 | 3.747 | 4.604 | 8.610 |
+          | 5 | 1.476 | 2.015 | 2.571 | 3.365 | 4.032 | 6.859 |
+          | 6 | 1.440 | 1.943 | 2.447 | 3.143 | 3.707 | 5.959 |
+          | 7 | 1.415 | 1.895 | 2.365 | 2.998 | 3.499 | 5.405 |
+          | 8 | 1.397 | 1.860 | 2.306 | 2.896 | 3.355 | 5.041 |
+          | 9 | 1.383 | 1.833 | 2.262 | 2.821 | 3.250 | 4.781 |
+          | 10 | 1.372 | 1.812 | 2.228 | 2.764 | 3.169 | 4.587 |
+          | 11 | 1.363 | 1.796 | 2.201 | 2.718 | 3.106 | 4.437 |
+          | 12 | 1.356 | 1.782 | 2.179 | 2.681 | 3.055 | 4.318 |
+          | 13 | 1.350 | 1.771 | 2.160 | 2.650 | 3.012 | 4.221 |
+          | 14 | 1.345 | 1.761 | 2.145 | 2.624 | 2.977 | 4.140 |
+          | 15 | 1.341 | 1.753 | 2.131 | 2.602 | 2.947 | 4.073 |
+          | 16 | 1.337 | 1.746 | 2.120 | 2.583 | 2.921 | 4.015 |
+          | 17 | 1.333 | 1.740 | 2.110 | 2.567 | 2.898 | 3.965 |
+          | 18 | 1.330 | 1.734 | 2.101 | 2.552 | 2.878 | 3.922 |
+          | 19 | 1.328 | 1.729 | 2.093 | 2.539 | 2.861 | 3.883 |
+          | 20 | 1.325 | 1.725 | 2.086 | 2.528 | 2.845 | 3.850 |
+          | 21 | 1.323 | 1.721 | 2.080 | 2.518 | 2.831 | 3.819 |
+          | 22 | 1.321 | 1.717 | 2.074 | 2.508 | 2.819 | 3.792 |
+          | 23 | 1.319 | 1.714 | 2.069 | 2.500 | 2.807 | 3.767 |
+          | 24 | 1.318 | 1.711 | 2.064 | 2.492 | 2.797 | 3.745 |
+        question: "From the t table, what is the critical t at 5% with 24 degrees of freedom?"
+        options:
+          - "2.064"
+          - "1.711"
+          - "2.797"
+          - "2.060"
+        answer: 0
+        why:
+          - "صح: صف 24، عمود 5%."
+          - "ده عمود الـ 10%."
+          - "ده عمود الـ 1%."
+          - "ده صف 25 مش 24."
+      - kind: explain
+        page: 17
+        quote: |
+          P-value
+          P-value is known as the observed level of significance (probability of the chance).
+          Instead of stating our findings in the form of there is a significant difference or there is no significant difference, it is preferable to report the exact probability (referred to by P-value)
+        title: "الـ P value"
+        text: |
+          الـ ==P value== اسمها **observed level of significance**، يعني احتمال الصدفة اللي طلع من بياناتك.
+
+          وأحسن من إنك تكتب «significant» أو «not significant» وخلاص، ==اكتب الرقم بالظبط== (مثلًا p = 0.03).
+      - kind: update
+        page: 17
+        quote: "P-value is known as the observed level of significance (probability of the chance)."
+        text: "بالدقة: الـ P-value (observed level of significance) هي probability نتيجة بالتطرف ده أو أكتر لو الـ H0 صح. مش احتمال إن الـ H0 صح، ومش مقياس لحجم الأثر."
+        ref: "Wasserstein and Lazar, ASA statement on p-values, 2016"
+      - kind: explain
+        page: 19
+        quote: |
+          If the test value is ≥ to the critical value then a decision is made to reject the null hypothesis.
+          If the test value is < than the critical value, a decision is made to accept the null hypothesis and, concluding that there is no significant difference in the parameter of interest between the 2 groups.
+        title: "القرار"
+        text: |
+          القرار بيعتمد على الـ critical value، اللي بيعتمد على الـ **level of significance** والـ **df**.
+
+          - الـ test value ==≥ الـ critical value==: ارفض الـ H0.
+          - الـ test value ==< الـ critical value==: اقبل الـ H0، مفيش فرق significant بين المجموعتين.
+      - kind: update
+        page: 19
+        quote: "If the test value is < than the critical value, a decision is made to accept the null hypothesis and, concluding that there is no significant difference in the parameter of interest between the 2 groups."
+        text: "الإحصائيين بيقولوا «fail to reject H0» بدل «accept»: عدم الـ significance معناه إن الدليل مش كفاية، مش إن المجموعتين متساويتين أكيد."
+        ref: "Altman and Bland, BMJ 1995"
+      - kind: check
+        page: 19
+        quote: |
+          If the test value is ≥ to the critical value then a decision is made to reject the null hypothesis.
+          If the test value is < than the critical value, a decision is made to accept the null hypothesis and, concluding that there is no significant difference in the parameter of interest between the 2 groups.
+        question: "Calculated t = 1.80, critical t = 2.06. What is the decision?"
+        options:
+          - "Accept H0: no significant difference"
+          - "Reject H0"
+          - "Accept H1 because t is positive"
+          - "Lower α and recalculate"
+        answer: 0
+        why:
+          - "صح: 1.80 أصغر من 2.06."
+          - "الرفض محتاج test value ≥ critical."
+          - "الإشارة مش بتفرق؛ الحجم هو اللي بيفرق."
+          - "الـ α بتتحدد قبل البحث."
+      - kind: try
+        items: ["res.L17.019", "res.L17.022", "res.L17.030"]
+    recap:
+      - "α = level of significance، بتتحدد قبل البحث، وعادةً 0.05 في الطب."
+      - "df: n − 1، أو n1 + n2 − 2، أو (c − 1)(r − 1)."
+      - "الـ critical value من الجدول وبيعتمد على α والـ df."
+      - "test value ≥ critical: ارفض H0؛ أقل: اقبل H0."
+      - "اكتب الـ P value بالرقم."
+    practice: [res.L17.017, res.L17.018, res.L17.019, res.L17.020, res.L17.021, res.L17.022, res.L17.023, res.L17.024, res.L17.025, res.L17.026, res.L17.027, res.L17.028, res.L17.029, res.L17.030, res.L17.031]
+  # ------------------------------------------------------------------
+  - id: res.L17.lesson3
+    title: "أنهي test؟ chi-square ولا t ولا ANOVA"
+    hook: "3 أسئلة بس تختار بيهم الـ test: نوع الـ dependent variable، عدد المتغيرات، وعدد المجموعات."
+    minutes: 7
+    pages: [7, 22]
+    topics: ["steps", "choosing"]
+    goals:
+      - "تعرف الحاجات اللي بتحدد الـ test"
+      - "تختار بين chi-square و t-test و paired t و ANOVA"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 7
+        quote: |
+          Determination of the statistical test depends on:
+          Type of the dependent variable, and the distribution of the quantitative one.
+          Number of variables (one, two and more than two)
+          Number of groups (one, two and more than two)
+        title: "الـ test بيتحدد بإيه؟"
+        text: |
+          3 حاجات:
+
+          - ==نوع الـ dependent variable== (qualitative ولا quantitative)، ولو quantitative: **توزيعه** normal ولا لأ.
+          - **عدد المتغيرات**: واحد، اتنين، أكتر.
+          - ==عدد المجموعات==: واحدة، اتنين، أكتر.
+      - kind: figure
+        page: 12
+        quote: |
+          Type of statistical test
+          | Variables and groups to be compared | Appropriate statistical tests of difference |
+          |---|---|
+          | Dependent variable is qualitative | Chi-square test |
+          | Dependent variable is quantitative, presented as mean, and is normally distributed: if | Parametric test: e.g., |
+          | One group | t-test with population |
+          | Two different (independent) samples | Student's t-test |
+          | Two related samples (Before and After) | Paired t-test |
+          | More than two groups | F-test (Analysis of variance = ANOVA) |
+        title: "شجرة اختيار الـ test"
+        alt: "A decision tree. From the dependent variable: if qualitative, chi-square. If quantitative and normally distributed, ask how many groups: one compared with the population, t-test with population; two independent, Student's t-test; two related before and after, paired t-test; more than two, F-test or ANOVA."
+        caption: "ابدأ بالـ **dependent variable**. qualitative = ==chi-square==؛ quantitative وnormal = t-test بأنواعه أو ANOVA حسب المجموعات."
+        svg: |
+          <svg viewBox="0 0 360 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L17t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="110" y="6" width="140" height="30" rx="8" class="fg-ink"/>
+            <text x="180" y="26" text-anchor="middle" class="t-sm t-b">Dependent variable?</text>
+            <path d="M150 36 L60 62" class="fg-arrow" marker-end="url(#L17t)"/>
+            <path d="M210 36 L260 62" class="fg-arrow" marker-end="url(#L17t)"/>
+            <rect x="6" y="64" width="110" height="44" rx="8" class="fg-good"/>
+            <text x="61" y="82" text-anchor="middle" class="t-sm">Qualitative</text>
+            <text x="61" y="100" text-anchor="middle" class="t-sm t-b">Chi-square</text>
+            <rect x="190" y="64" width="160" height="30" rx="8" class="fg-box"/>
+            <text x="270" y="84" text-anchor="middle" class="t-sm">Quantitative, normal (means)</text>
+            <path d="M270 94 L270 112" class="fg-arrow" marker-end="url(#L17t)"/>
+            <rect x="150" y="114" width="200" height="30" rx="8" class="fg-acc"/>
+            <text x="250" y="134" text-anchor="middle" class="t-sm t-b">How many groups?</text>
+            <text x="140" y="168" text-anchor="end" class="t-sm">One vs population</text>
+            <text x="150" y="168" class="t-sm t-b">t-test with population</text>
+            <text x="140" y="190" text-anchor="end" class="t-sm">Two independent</text>
+            <text x="150" y="190" class="t-sm t-b">Student's t-test</text>
+            <text x="140" y="212" text-anchor="end" class="t-sm">Two related (before/after)</text>
+            <text x="150" y="212" class="t-sm t-b">Paired t-test</text>
+            <text x="140" y="234" text-anchor="end" class="t-sm">More than two</text>
+            <text x="150" y="234" class="t-sm t-b">F-test (ANOVA)</text>
+          </svg>
+      - kind: table
+        page: 12
+        quote: |
+          Type of statistical test
+          | Variables and groups to be compared | Appropriate statistical tests of difference |
+          |---|---|
+          | Dependent variable is qualitative | Chi-square test |
+          | Dependent variable is quantitative, presented as mean, and is normally distributed: if | Parametric test: e.g., |
+          | One group | t-test with population |
+          | Two different (independent) samples | Student's t-test |
+          | Two related samples (Before and After) | Paired t-test |
+          | More than two groups | F-test (Analysis of variance = ANOVA) |
+        title: "Type of statistical test"
+        columns: ["Groups compared", "Test"]
+        rows: [["Dependent variable qualitative", "Chi-square test"], ["One group vs population", "t-test with population"], ["Two independent samples", "Student's t-test"], ["Two related (before and after)", "Paired t-test"], ["More than two groups", "F-test (ANOVA)"]]
+        hide: [[0, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: aside
+        tone: "trap"
+        page: 21
+        quote: |
+          Haemoglobin levels of a group of anaemic patients were measured before and after one-month intake of a drug X. To determine whether or not the drug was effective in treating anaemia (whether these measurements were significantly different), the most appropriate statistical test would be:
+          Student's t test
+          Paired t-test
+          Chi-square test
+          Correlation analysis
+          Regression analysis
+        text: "**فخ الامتحان**: «before and after» في نفس الناس = ==paired== t-test، حتى لو معاك عمودين أرقام. الـ Student's t للمجموعتين المختلفتين بس."
+      - kind: check
+        page: 20
+        quote: |
+          Serum cholesterol levels for two groups of patients (A and B) were recorded. The mean cholesterol level for a group A was 271 mg/Dl, and 184 mg/dl for group B. To determine whether or not these measurements were significantly different, the most appropriate statistical test would be:
+          Student's t- test
+          Correlation analysis
+          Chi-square test
+          F-test (Analysis of variance = ANOVA)
+          Regression analysis
+        question: "Mean serum cholesterol: group A 271 mg/dL, group B 184 mg/dL. Which test checks whether they differ significantly?"
+        options:
+          - "Student's t-test"
+          - "Chi-square test"
+          - "Correlation analysis"
+          - "ANOVA"
+        answer: 0
+        why:
+          - "صح: مجموعتين مستقلتين ومتوسطات."
+          - "الكوليسترول quantitative."
+          - "الـ correlation للعلاقة مش للفرق في المتوسطات."
+          - "الـ ANOVA لأكتر من مجموعتين."
+      - kind: check
+        page: 21
+        quote: |
+          Haemoglobin levels of a group of anaemic patients were measured before and after one-month intake of a drug X. To determine whether or not the drug was effective in treating anaemia (whether these measurements were significantly different), the most appropriate statistical test would be:
+          Student's t test
+          Paired t-test
+          Chi-square test
+          Correlation analysis
+          Regression analysis
+        question: "Haemoglobin of anaemic patients before and after one month of drug X. Which test?"
+        options:
+          - "Paired t-test"
+          - "Student's t-test"
+          - "Chi-square test"
+          - "Regression analysis"
+        answer: 0
+        why:
+          - "صح: نفس المرضى مرتين = related samples."
+          - "مش مجموعتين مستقلتين."
+          - "الـ Hb quantitative."
+          - "الـ regression للتنبؤ."
+      - kind: check
+        page: 22
+        quote: |
+          A researcher wants to know if there is a statistically significant difference in the mean ages between students at four colleges.
+          The researcher collects a random sample of students from each college and records their ages, which are normally distributed. What statistical test should the researcher use?
+          Student's t test
+          Paired t-test
+          Chi-square test
+          F-test (Analysis of variance = ANOVA)
+          Regression analysis
+        question: "Mean ages of students at four colleges (normally distributed). Which test?"
+        options:
+          - "F-test (ANOVA)"
+          - "Student's t-test"
+          - "Paired t-test"
+          - "Chi-square test"
+        answer: 0
+        why:
+          - "صح: أكتر من مجموعتين."
+          - "الـ t لمجموعتين بس."
+          - "مفيش قياس مكرر."
+          - "السن quantitative."
+      - kind: reveal
+        page: 12
+        quote: "| Dependent variable is qualitative | Chi-square test |"
+        prompt: "بنقارن نسبة المدخنين (أيوه/لأ) بين الرجالة والستات. أنهي test؟"
+        answer: "الـ dependent (مدخن ولا لأ) **qualitative**، يبقى ==chi-square==."
+      - kind: aside
+        tone: "analogy"
+        page: 12
+        quote: "| One group | t-test with population |"
+        text: "الـ **t-test with population** زي إنك تقارن متوسط درجات فصلك بمتوسط المدرسة كلها المعروف: مجموعة واحدة قصاد رقم ثابت."
+      - kind: try
+        items: ["res.L17.032", "res.L17.010"]
+    recap:
+      - "الـ test بيتحدد بنوع الـ dependent variable وتوزيعه، وعدد المتغيرات، وعدد المجموعات."
+      - "qualitative: chi-square."
+      - "quantitative normal: مجموعة قصاد population = t with population؛ اتنين مستقلين = Student's t؛ before/after = paired t؛ أكتر من اتنين = ANOVA."
+    practice: [res.L17.010, res.L17.011, res.L17.032, res.L17.033, res.L17.034, res.L17.035, res.L17.036, res.L17.037]
+  # ------------------------------------------------------------------
+  - id: res.L17.lesson4
+    title: "Chi-square: القهوة والضغط"
+    hook: "50 واحد بيشربوا أكتر من 8 فناجين، و45 مبيشربوش خالص. الضغط العالي ليه علاقة بالقهوة ولا صدفة؟"
+    minutes: 9
+    pages: [23, 28]
+    topics: ["chi_square"]
+    goals:
+      - "تعرف إمتى تستخدم الـ chi-square"
+      - "تحسب الـ expected والـ X² والـ df"
+      - "تكتب الإجابة الكاملة بالـ 4 أجزاء"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 23
+        quote: |
+          Chi – Square test (X2- test)
+          X2- test is used to test an association between categorical variables which include a condition and characteristic.
+          It is used when we want to study whether there is a relation between two qualitative variables.
+          Degree of freedom = (c-1) (r-1)
+          The final conclusion is reached is whether there is a significant association between certain condition and certain characteristic .
+        title: "الـ chi-square لمين؟"
+        text: |
+          الـ ==X² test== بيختبر **association** بين متغيرات ==categorical== (condition وcharacteristic)، يعني علاقة بين **متغيرين qualitative**.
+
+          - df = **(c − 1)(r − 1)**.
+          - النتيجة: فيه association significant بين الـ condition والـ characteristic ولا لأ.
+      - kind: figure
+        page: 24
+        quote: |
+          | | Hypertension | Normal blood pressure | Total |
+          |---|---|---|---|
+          | > 8 cups | 30 | 20 | 50 |
+          | No coffee | 10 | 35 | 45 |
+          | Total | 40 | 55 | 95 |
+        title: "جدول القهوة والضغط"
+        alt: "A 2 by 2 table. Rows: more than 8 cups (30 hypertension, 20 normal, total 50) and no coffee (10 hypertension, 35 normal, total 45). Column totals 40 and 55, grand total 95. Under each count its expected value: 21.05, 28.95, 18.95, 26.05."
+        caption: "تحت كل رقم الـ **expected (E)**: لو مفيش علاقة، كنا نتوقع كام في الخانة دي."
+        svg: |
+          <svg viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg">
+            <rect x="90" y="10" width="80" height="30" class="fg-box"/>
+            <rect x="170" y="10" width="80" height="30" class="fg-box"/>
+            <rect x="250" y="10" width="80" height="30" class="fg-box"/>
+            <text x="130" y="30" text-anchor="middle" class="t-sm t-b">HTN</text>
+            <text x="210" y="30" text-anchor="middle" class="t-sm t-b">Normal</text>
+            <text x="290" y="30" text-anchor="middle" class="t-sm t-b">Total</text>
+            <text x="84" y="68" text-anchor="end" class="t-sm t-b">&gt; 8 cups</text>
+            <text x="84" y="112" text-anchor="end" class="t-sm t-b">No coffee</text>
+            <text x="84" y="150" text-anchor="end" class="t-sm t-b">Total</text>
+            <rect x="90" y="44" width="80" height="44" class="fg-acc"/>
+            <rect x="170" y="44" width="80" height="44" class="fg-box"/>
+            <rect x="90" y="88" width="80" height="44" class="fg-box"/>
+            <rect x="170" y="88" width="80" height="44" class="fg-acc"/>
+            <text x="130" y="64" text-anchor="middle" class="t-lg t-b">30</text>
+            <text x="130" y="80" text-anchor="middle" class="t-sm t-mut">E 21.05</text>
+            <text x="210" y="64" text-anchor="middle" class="t-lg t-b">20</text>
+            <text x="210" y="80" text-anchor="middle" class="t-sm t-mut">E 28.95</text>
+            <text x="130" y="108" text-anchor="middle" class="t-lg t-b">10</text>
+            <text x="130" y="124" text-anchor="middle" class="t-sm t-mut">E 18.95</text>
+            <text x="210" y="108" text-anchor="middle" class="t-lg t-b">35</text>
+            <text x="210" y="124" text-anchor="middle" class="t-sm t-mut">E 26.05</text>
+            <text x="290" y="70" text-anchor="middle" class="t-b">50</text>
+            <text x="290" y="114" text-anchor="middle" class="t-b">45</text>
+            <text x="130" y="150" text-anchor="middle" class="t-b">40</text>
+            <text x="210" y="150" text-anchor="middle" class="t-b">55</text>
+            <text x="290" y="150" text-anchor="middle" class="t-b t-acc">95</text>
+          </svg>
+      - kind: explain
+        page: 26
+        quote: |
+          X2=Σ (30–21.05)2+ (10–18.94)2+(20–28.94)2+(35–26.05)2
+          21.05 18.94 28.94 26.05
+        title: "الـ expected والـ X²"
+        text: |
+          **Expected** = مجموع الصف × مجموع العمود ÷ المجموع الكلي.
+
+          مثلًا خانة >8 فناجين + ضغط: 50 × 40 ÷ 95 = ==21.05==.
+
+          وبعدين لكل خانة: (O − E)² ÷ E، ونجمعهم:
+
+          **X² = 3.80 + 4.21 + 2.76 + 3.07 = ==13.84==**
+      - kind: reveal
+        page: 25
+        quote: "(Critical value at 5% level of significance and d.f.1 = 3.84)."
+        prompt: "الـ df هنا كام، والـ critical value كام؟"
+        answer: "جدول 2 × 2: df = (2 − 1)(2 − 1) = **1**. والسؤال إداك الـ critical value عند 5%: ==3.84==."
+      - kind: check
+        page: 26
+        quote: |
+          ∵ Calculated X2 > critical value
+          ∴ reject Ho & accept H1
+        question: "Calculated X² = 13.84; critical value = 3.84. What do you conclude?"
+        options:
+          - "Reject H0, accept H1: coffee is associated with hypertension"
+          - "Accept H0"
+          - "Coffee causes hypertension"
+          - "The test is invalid"
+        answer: 0
+        why:
+          - "صح: 13.84 أكبر من 3.84."
+          - "الـ H0 بتتقبل بس لو X² أصغر من الـ critical."
+          - "الـ test بيثبت association مش causation."
+          - "مفيش حد أقصى للـ X²."
+      - kind: order
+        page: 25
+        quote: "N.B. Your answer should include: Stating the hypothesis, formulae used, Calculations, and the interpretation)"
+        prompt: "رتّب أجزاء الإجابة الكاملة زي ما السؤال طالب"
+        steps:
+          - "Stating the hypothesis"
+          - "Formulae used"
+          - "Calculations"
+          - "Interpretation"
+        why: "السؤال بيقول N.B.: الفرضيات، القانون، الحسابات، والتفسير. اسم الـ test لوحده مش إجابة."
+      - kind: explain
+        page: 27
+        quote: |
+          In a 3x4 contingency table, the degree of freedom equals:
+          1
+          5
+          6
+          7
+          12
+        title: "سؤال الـ 3 × 4"
+        text: |
+          في جدول **3 × 4**: df = (3 − 1)(4 − 1) = 2 × 3 = ==6==.
+
+          متجمعش (2 + 3 = 5) ومتعدّش الخانات (12). اطرح واحد من كل بُعد واضرب.
+      - kind: check
+        page: 28
+        quote: |
+          Which of the following is TRUE about Chi-square test?
+          It requires that the expected value in each cell be at least 5
+          It requires that the observed value in each cell be at least 5
+        question: "Which is TRUE about the chi-square test?"
+        options:
+          - "The expected value in each cell must be at least 5"
+          - "The observed value in each cell must be at least 5"
+          - "It compares means"
+          - "It needs normally distributed data"
+        answer: 0
+        why:
+          - "صح: الشرط على الـ expected، والسلايد حاطة خط تحتها."
+          - "الشرط مش على الـ observed."
+          - "الـ means للـ t أو ANOVA."
+          - "الـ chi-square على counts ومش محتاج normality."
+      - kind: aside
+        tone: "exam"
+        page: 28
+        quote: |
+          Which of the following is TRUE about Chi-square test?
+          It requires that the expected value in each cell be at least 5
+          It requires that the observed value in each cell be at least 5
+        text: "حفظها كده: الـ chi-square ==بيتوقّع== خمسة على الأقل في كل خانة (**expected ≥ 5**). لو أقل، المراجع بتقول استخدم Fisher's exact test."
+      - kind: try
+        items: ["res.L17.038", "res.L17.042", "res.L17.043"]
+    recap:
+      - "X² لعلاقة بين متغيرين qualitative؛ df = (c − 1)(r − 1)."
+      - "Expected = صف × عمود ÷ الكلي؛ X² = Σ (O − E)² / E."
+      - "مثال القهوة: X² 13.84 أكبر من 3.84، ارفض H0."
+      - "الإجابة الكاملة: hypothesis، formula، calculations، interpretation."
+      - "شرط الـ chi-square: expected ≥ 5 في كل خانة."
+    practice: [res.L17.038, res.L17.039, res.L17.040, res.L17.041, res.L17.042, res.L17.043, res.L17.044, res.L17.045, res.L17.046]
+  # ------------------------------------------------------------------
+  - id: res.L17.lesson5
+    title: "الـ t-test: الحمل والهيموجلوبين"
+    hook: "متوسط الـ Hb% في ستات البلد 89%. أخدنا 25 حامل متوسطهم 86%. الحمل بيأثر فعلًا ولا الـ 3% دول صدفة؟"
+    minutes: 8
+    pages: [29, 33]
+    topics: ["t_test"]
+    goals:
+      - "تكتب الـ H0 لمثال الـ Hb"
+      - "تحسب الـ one-sample t والـ df"
+      - "تقرأ الـ critical t وتكتب الاستنتاج"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 30
+        quote: |
+          If it is known that the mean Hb% of adult females in a community is 89% and we want to test whether pregnancy has a significant effect on hemoglobin level.
+          So a sample of pregnant females is chosen and calculate the arithmetic mean and standard deviation (S) of the sample n = 25, X= 86%, S = 7%
+        title: "المسألة"
+        text: |
+          متوسط الـ **Hb%** في ستات المجتمع البالغين = ==89%== (معروف).
+
+          أخدنا sample من الحوامل: n = **25**، X̄ = **86%**، S = **7%**.
+
+          مجموعة واحدة قصاد متوسط population معروف، يبقى ==t-test with population== (one-sample t).
+      - kind: explain
+        page: 31
+        quote: |
+          Null hypothesis (Ho):
+          No significant effect of pregnancy on Hb level.
+          I.e.: difference between the mean Hb% of total population and that of the sample is only by chance,
+          i.e.: 86% does not differ significantly from 89%.
+        title: "الـ H0"
+        text: |
+          **H0**: مفيش أثر significant للحمل على الـ Hb.
+
+          يعني الفرق بين متوسط المجتمع ومتوسط العينة ==مجرد صدفة==، و86% مش مختلفة significantly عن 89%.
+      - kind: explain
+        page: 32
+        quote: "t = (X - μ) / (S / √n) = (86 - 89) / (7 / √25) = 2.14"
+        title: "القانون والحساب"
+        text: |
+          **t = (X̄ − μ) / (S / √n)**
+
+          = (86 − 89) / (7 / √25) = −3 / 1.4 = ==−2.14==
+
+          السلايد كاتباها 2.14 لأن اللي بيهمنا ==حجم الـ t== مش إشارته (الطرفين بيترفضوا).
+      - kind: reveal
+        page: 33
+        quote: |
+          1. Level of significance and usually we choose 5% level.
+          2. Degree of freedom (d.f) = n – 1.
+        prompt: "الـ critical t بيعتمد على إيه، والـ df هنا كام؟"
+        answer: "على الـ **level of significance** (عادةً 5%) والـ **df = n − 1** = 25 − 1 = ==24==."
+      - kind: figure
+        page: 33
+        quote: |
+          Here to with level of significant 5% and d.f. = 24 is 2.064.
+          Since 2.14 > to
+          (2.064), so we accept H1, i.e.: pregnancy has a significant effect on Hb level.
+        title: "2.14 عدّت الخط"
+        alt: "A number line from 0. A red vertical line marks the critical t of 2.064 at df 24 and alpha 5 percent; beyond it is the shaded rejection region. A dot just past the line marks the calculated absolute t of 2.14, inside the rejection region."
+        caption: "الـ |t| المحسوبة **2.14** أكبر من الـ critical **2.064**، يعني وقعت في ==rejection region==."
+        svg: |
+          <svg viewBox="0 0 340 130" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L17n" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker></defs>
+            <line x1="20" y1="70" x2="320" y2="70" class="fg-arrow"/>
+            <rect x="236" y="56" width="84" height="28" class="fg-bad"/>
+            <text x="278" y="108" text-anchor="middle" class="t-sm t-bad">rejection region</text>
+            <line x1="40" y1="60" x2="40" y2="80" class="fg-arrow"/>
+            <text x="40" y="100" text-anchor="middle" class="t-sm">0</text>
+            <line x1="236" y1="44" x2="236" y2="96" class="fg-arrow-bad"/>
+            <text x="236" y="36" text-anchor="middle" class="t-sm t-bad">critical t 2.064</text>
+            <circle cx="252" cy="70" r="6" class="fg-dot-acc"/>
+            <path d="M252 122 L252 80" class="fg-arrow-acc" marker-end="url(#L17n)"/>
+            <text x="200" y="124" text-anchor="end" class="t-sm t-acc t-b">calculated |t| 2.14</text>
+            <text x="130" y="50" text-anchor="middle" class="t-sm t-mut">df = 24, α = 5%</text>
+          </svg>
+      - kind: check
+        page: 33
+        quote: |
+          1. Level of significance and usually we choose 5% level.
+          2. Degree of freedom (d.f) = n – 1.
+          Here to with level of significant 5% and d.f. = 24 is 2.064.
+          Since 2.14 > to
+          (2.064), so we accept H1, i.e.: pregnancy has a significant effect on Hb level.
+        question: "Calculated |t| = 2.14; critical t (df 24, 5%) = 2.064. What is the conclusion?"
+        options:
+          - "Accept H1: pregnancy has a significant effect on Hb level"
+          - "Accept H0: no effect"
+          - "Use df = 25"
+          - "Significant only at 1%"
+        answer: 0
+        why:
+          - "صح: 2.14 أكبر من 2.064."
+          - "الـ H0 بتتقبل لو الـ t أصغر من الـ critical."
+          - "الـ df = n − 1 = 24."
+          - "عند 1% الـ critical 2.797، فالنتيجة مش significant عنده."
+      - kind: explain
+        page: 29
+        quote: |
+          Calculated t > critical value
+          Reject H0 and accept H1
+          There is statistical significant difference in the average scores of both groups (X1 > X2)
+        title: "إزاي تكتب الاستنتاج"
+        text: |
+          لما **calculated t > critical value**:
+
+          - ==Reject H0 and accept H1==.
+          - There is a statistically significant difference in the average scores of both groups، وقول مين أكبر (X̄1 > X̄2).
+      - kind: aside
+        tone: "tip"
+        page: 32
+        quote: "t = (X - μ) / (S / √n) = (86 - 89) / (7 / √25) = 2.14"
+        text: "جرّب الحاسبة: **Student's t-test** في الحاسبات، اختار One sample واكتب 86 و7 و25 و89. هتطلعلك 2.14 والـ critical 2.064 والـ P."
+      - kind: check
+        page: 30
+        quote: |
+          If it is known that the mean Hb% of adult females in a community is 89% and we want to test whether pregnancy has a significant effect on hemoglobin level.
+          So a sample of pregnant females is chosen and calculate the arithmetic mean and standard deviation (S) of the sample n = 25, X= 86%, S = 7%
+        question: "Which test fits the Hb example (one sample of pregnant women vs a known community mean)?"
+        options:
+          - "t-test with population (one-sample)"
+          - "Paired t-test"
+          - "Student's t-test for two groups"
+          - "Chi-square"
+        answer: 0
+        why:
+          - "صح: مجموعة واحدة قصاد رقم معروف."
+          - "مفيش قياس قبل وبعد."
+          - "مفيش مجموعة تانية متقاسة."
+          - "الـ Hb quantitative."
+      - kind: try
+        items: ["res.L17.047", "res.L17.048", "res.L17.049"]
+    recap:
+      - "مجموعة واحدة قصاد μ معروف = one-sample t (t-test with population)."
+      - "t = (X̄ − μ) / (S / √n)؛ df = n − 1."
+      - "مثال الـ Hb: |t| 2.14 أكبر من 2.064 (df 24، 5%)، الحمل له أثر significant."
+      - "الاستنتاج: Reject H0، accept H1، وقول مين المتوسط الأكبر."
+    practice: [res.L17.047, res.L17.048, res.L17.049, res.L17.050, res.L17.051, res.L17.052]

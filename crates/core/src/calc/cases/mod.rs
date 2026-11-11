@@ -27,6 +27,7 @@ mod renal;
 mod research;
 mod rheum;
 mod sample_size;
+mod significance;
 
 use std::collections::BTreeSet;
 
@@ -184,6 +185,7 @@ fn tables() -> Vec<Table> {
         frequency::tables(),
         sample_size::tables(),
         diagnostic::tables(),
+        significance::tables(),
     ]
     .into_iter()
     .flatten()

@@ -262,6 +262,8 @@ pub const CALCULATORS: &[&str] = &[
     "sample_size_two_proportions",
     "predictive_values",
     "post_test_probability",
+    "chi_square",
+    "t_test",
 ];
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

@@ -457,9 +457,10 @@ as `pagesheet::Scope::book()` / `Scope::of_book()`.
   page sheet lists a page's notes (`PageNotes { book, page }`); the list
   «ملاحظاتك» is a lecture-stack page (`notes::PAGE`), sorted by the
   program's course order then page, filtered by course, searchable. Max 2000
-  characters; empty text deletes. Not in the Anki deck yet (Steps adds a
-  `Notes` field to its note types; Batna's would change the deck's note
-  types, so it is left for its own PR).
+  characters; empty text deletes. Notes on items go to Anki in a sixth
+  field, `Notes` (both note types; «My note» last on the back), from the
+  app's export and `batna-tools anki --own <backup>`; the first import after
+  2026-11-11 asks Anki to update the note types (docs/ANKI.md).
 - **Weak-fact marks** (`crate::weak`): computed from the review log (last
   answer Again = weak; a right answer clears), nothing new to sync. A lesson
   step whose page (in its own book) holds a weak item shows «راجعها تاني»;
@@ -568,6 +569,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: his notes on items ride in the Anki deck (`Notes` field on Batna Basic and Batna Cloze; docs/ANKI.md), from Steps-app.
 - 2026-11-11: res.L15 (introduction to biostatistics: variables, tables, graphs, mean/median/mode, range and SD): 118 items, 7 lessons. Source is the video-frame PDF (142 slides + 7 pages of Arabic notes); slide text typed from the frames into `courses/res/text/L15.txt`, generators in `courses/res/gen-L15/`.
 - 2026-11-11: res.L12 (bias and confounders, 61 image-only slides from the lecture video, hand-transcribed in `courses/res/text/L12.txt`): 83 items with the 7-question quiz keyed from the lecturer's notes, 6 lessons with 7 drawn figures; glossary gains STD.
 - 2026-11-11: res.L14 (screening and diagnostic accuracy, 31 slides) written: 65 items, 5 lessons; calculators `predictive_values` (slide 25 formula) and `post_test_probability` (likelihood ratios; Deeks 2004, Fagan 1975, Jaeschke 1994); `diagnostic_accuracy` guides now cite the L14 slides; glossary gains AUC, ROC, TP/FP/FN/TN, SpPin, SnNout.

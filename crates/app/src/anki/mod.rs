@@ -75,7 +75,8 @@ fn AnkiCard(start: State, save: Save) -> Element {
         spawn(async move {
             futures_yield().await;
             let backend = review.backend.borrow();
-            state.set(match export_now(|id| backend.judgement(id), save) {
+            let mine = item_notes(backend.notes());
+            state.set(match export_now(|id| backend.judgement(id), &mine, save) {
                 Ok((notes, place)) => State::Done { notes, place },
                 Err(e) => State::Failed(e),
             });
@@ -160,19 +161,36 @@ fn verdicts<'a>(lectures: &[Lecture], judgement: impl Fn(&str) -> Option<&'a Jud
     out
 }
 
-/// Builds the deck from the embedded content and his verdicts; returns the
-/// note count and where the file went.
+/// His notes on items, by item id, for the deck's `Notes` field. Notes on
+/// pages and lesson steps have no Anki card to sit on. Adapted from Steps-app
+/// main: crates/app/src/anki/mod.rs.
+fn item_notes(notes: &[batna_core::note::Note]) -> BTreeMap<String, String> {
+    notes
+        .iter()
+        .filter_map(|n| match &n.anchor {
+            batna_core::note::Anchor::Item(id) => Some((id.clone(), n.text.clone())),
+            _ => None,
+        })
+        .collect()
+}
+
+/// Builds the deck from the embedded content, his verdicts and his notes;
+/// returns the note count and where the file went.
 fn export_now<'a>(
     judgement: impl Fn(&str) -> Option<&'a Judgement>,
+    mine: &BTreeMap<String, String>,
     save: Save,
 ) -> Result<(usize, String), String> {
-    let (notes, bytes) = build_deck(judgement)?;
+    let (notes, bytes) = build_deck(judgement, mine)?;
     let place = (save.0)(&bytes)?;
     Ok((notes, place))
 }
 
 /// The `.apkg` bytes and how many notes they hold.
-fn build_deck<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(usize, Vec<u8>), String> {
+fn build_deck<'a>(
+    judgement: impl Fn(&str) -> Option<&'a Judgement>,
+    mine: &BTreeMap<String, String>,
+) -> Result<(usize, Vec<u8>), String> {
     let mut lectures: Vec<_> = Library::get().lectures.values().cloned().collect();
     // His own cards ride along as `Batna::My own cards`.
     lectures.extend(crate::own::lecture().cloned());
@@ -183,6 +201,7 @@ fn build_deck<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(
         edits: Some(&v.edits),
         drafts: None,
         program: Some(&crate::content::Library::get().program),
+        notes: Some(mine),
     };
     let deck = batna_anki::build(&lectures, &opts);
     let now_ms = web_time::SystemTime::now()
@@ -276,8 +295,33 @@ mod tests {
     }
 
     #[test]
+    fn only_notes_on_items_go_to_anki() {
+        use batna_core::note::{Anchor, Note};
+        let n =
+            |anchor, text: &str| Note { anchor, text: text.into(), page: None, created_ms: 1, edited_ms: 1 };
+        let notes = [
+            n(Anchor::Item("hb.L01.001".into()), "Child-Pugh"),
+            n(Anchor::Lesson("hb.L01.lesson1#2".into()), "step"),
+            n(Anchor::page("hb", 3), "page"),
+            n(Anchor::Item("own.x".into()), "mine"),
+        ];
+        let mine = item_notes(&notes);
+        assert_eq!(
+            mine,
+            BTreeMap::from([
+                ("hb.L01.001".to_string(), "Child-Pugh".to_string()),
+                ("own.x".to_string(), "mine".to_string())
+            ])
+        );
+        // They reach the deck: the built file holds the note's text.
+        let (_, bytes) = build_deck(|_| None, &mine).unwrap();
+        let (_, plain) = build_deck(|_| None, &BTreeMap::new()).unwrap();
+        assert_ne!(bytes, plain);
+    }
+
+    #[test]
     fn the_deck_builds_and_lands_in_downloads() {
-        let (notes, bytes) = build_deck(|_| None).unwrap();
+        let (notes, bytes) = build_deck(|_| None, &BTreeMap::new()).unwrap();
         assert!(notes > 0 && bytes.starts_with(b"PK"));
         let home = tempfile::tempdir().unwrap();
         assert_eq!(save_in(home.path(), b"deck").unwrap(), home.path().join(FILE_NAME), "no Downloads: home");

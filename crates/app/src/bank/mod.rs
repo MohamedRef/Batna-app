@@ -9,6 +9,7 @@ mod player;
 mod question;
 mod result;
 mod setup;
+mod unsaved;
 
 use web_time::{SystemTime, UNIX_EPOCH};
 
@@ -222,18 +223,7 @@ pub fn study_lectures() -> Vec<Lecture> {
         .collect()
 }
 
-/// Send an answer to the review store, where FSRS counts it as evidence.
-fn record(event: ReviewEvent) {
-    if let Some(store) = try_consume_context::<StudyStoreHandle>() {
-        store.0.borrow_mut().record(event);
-    }
-}
-
-/// [`record`], keeping the id the answer was logged under.
-fn record_logged(event: ReviewEvent) -> Option<String> {
-    let store = try_consume_context::<StudyStoreHandle>()?;
-    store.0.borrow_mut().record_logged(event).ok().flatten()
-}
+use unsaved::{UNSAVED, UnsavedNote};
 
 /// After a sync or restore (see `crate::synced`): take the finished papers
 /// from the store now, and rebuild the last results from the log the next
@@ -403,7 +393,7 @@ pub fn check() {
     };
     if let Some((at, (q, a))) = sent {
         if let Some(e) = exam::review_event(&q, &a, Mode::Tutor, now) {
-            let id = record_logged(e);
+            let id = unsaved::log(Some(at), e);
             if let (Some(event_id), Phase::Running(p)) = (id, &mut *PHASE.write()) {
                 p.logged = Some(Logged { at, event_id, at_ms: now });
             }
@@ -435,11 +425,8 @@ pub fn set_reason(reason: ErrorReason) {
     let Some(store) = try_consume_context::<StudyStoreHandle>() else { return };
     let gone = store.0.borrow_mut().retract(&old.event_id);
     let logged = if gone {
-        store.0.borrow_mut().record_logged(event).ok().flatten().map(|event_id| Logged {
-            at,
-            event_id,
-            at_ms: old.at_ms,
-        })
+        // Taken back but not logged again: kept for a retry, never lost.
+        unsaved::log(Some(at), event).map(|event_id| Logged { at, event_id, at_ms: old.at_ms })
     } else {
         Some(old)
     };
@@ -497,7 +484,7 @@ fn close(paper: Paper, now: i64) -> Outcome {
     if paper.mode.timed() {
         for (q, a) in paper.questions.iter().zip(&paper.answers) {
             if let Some(e) = exam::review_event(q, a, paper.mode, now) {
-                record(e);
+                unsaved::log(None, e);
             }
         }
         let mut history = HISTORY.write();

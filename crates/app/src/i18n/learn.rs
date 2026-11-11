@@ -73,6 +73,7 @@ pub const NOT_QUITE: &str = "قريب، بس مش دي.";
 pub const TRY: &str = "جرّب بنفسك";
 pub const TRY_OF: &str = "كارت";
 pub const TRY_DONE: &str = "تمام كده ✓";
+pub const TRY_SAVE_FAILED: &str = "ما عرفتش أحفظ تقييمك، فلسه على نفس الكارت وإجابتك زي ما هي. قيّم تاني.";
 
 pub const DONE_TITLE: &str = "خلّصت الدرس";
 pub const FIRST_TRY: &str = "صح من أول مرة";

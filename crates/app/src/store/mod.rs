@@ -200,6 +200,13 @@ impl Store {
         Self::init(conn, Some(path.to_path_buf()), marker)
     }
 
+    /// Test-only: refuses every write (`true`) or takes them again, the way
+    /// a full or broken disk would, so failure and retry paths can be tested.
+    #[cfg(test)]
+    pub fn set_read_only(&self, on: bool) {
+        self.conn.lock().unwrap().pragma_update(None, "query_only", on).unwrap();
+    }
+
     pub fn open_in_memory() -> Result<Self> {
         Self::init(Connection::open_in_memory()?, None, None)
     }

@@ -121,9 +121,13 @@ items:
     kind: card
     topic: case-control
     front: Which cases are preferred in a case-control study, incident or prevalent?
-    back: New (incident) cases are preferred; prevalent cases (already present) may also be used.
+    back: >-
+      New (incident) cases are preferred; prevalent cases (already present) may also be used. In the talk: the
+      disease can change behaviour (a patient a year after angina may have stopped smoking and changed diet), so
+      a prevalent case's current habits can hide the exposure that came before the disease.
     src: { page: 18, quote: "Selection of Cases:\n  Preferably new cases or incident cases\n  Prevalent cases (cases already present)" }
     status: unverified
+    tags: [lecturer]
   - id: res.L05.011
     kind: card
     topic: case-control
@@ -824,3 +828,88 @@ items:
     src: { page: 72, quote: "Qs 1-4: In a community-based study, the incidence rate of lung cancer was 120/100,000 for smokers and 10/100,000 for nonsmokers.\n1. What is the Relative Risk (Risk Ratio) of developing lung cancer for smokers compared with nonsmokers?\n  A. 5\n  B. 12\n  C. 50\n  D. 100\n  E. 120\n2. The above calculated Relative Risk is interpreted as follows:\n  A. The risk of developing lung cancer is 'x' times higher in smokers compared to nonsmokers.\n  B. The probability of being a smoker is 'x' times greater among those with lung cancer compared to those without lung cancer." }
     status: unverified
     tags: [book-question, numbers]
+  # ------------------------------------------------- from the lecture video and revisions (2026-11)
+  - id: res.L05.069
+    kind: enumerate
+    topic: controls
+    prompt: Enumerate the common confounders listed on the matched case-control slide.
+    points:
+      - Age
+      - Sex
+      - Religion
+      - Educational level
+      - Social status
+      - Family income
+      - Marital status
+      - Employment
+      - Obesity
+      - Smoking
+    pass: 7
+    hook: "اتنين بيتولدوا معاك (age و sex)، وخمسة من بطاقتك وبيتك (religion و educational level و social status و family income و marital status)، وواحد من شغلك (employment)، واتنين من الميزان والسجارة (obesity و smoking): اتنين وخمسة وواحد واتنين يبقوا عشرة."
+    src: { page: 21, quote: "Matched case-control study: we enroll controls based upon some characteristic(s) of the case.\nThe idea in matching is to match upon a potential confounding variable in order to remove the confounding effect.\nSome common confounders:\n  Age\n  Sex\n  Religion\n  Educational level\n  Social status\n  Family income\n  Marital status\n  Employment\n  Obesity\n  Smoking........" }
+    status: unverified
+  - id: res.L05.070
+    kind: mcq
+    topic: controls
+    stem: >-
+      A case-control study asks whether a family history of the disease is a risk factor, and takes the cases'
+      siblings as controls. What is the main problem?
+    options:
+      - Recall bias, because siblings forget their exposure
+      - Overmatching, because the controls share the very exposure being studied
+      - The controls are not cooperative
+      - Too few controls per case
+    answer: 1
+    why:
+      - Recall bias is about cases remembering exposure differently from controls; that is not the main issue here.
+      - Matching or choosing controls on the exposure you want to study hides its effect. The slide lists overmatching as the drawback of best-friend and sibling controls.
+      - The slide lists sibling controls as accessible and cooperative.
+      - The number of controls does not fix a control source that shares the exposure.
+    src: { page: 26, quote: "Selection of controls: Sources\n| Source | Advantage | Disadvantage |\n|---|---|---|\n| Hospital based | Easily identified. Available for interview. More willing to cooperate. Tend to give complete and accurate information (↓recall bias). | Not typical of general population. Possess more risk factors for disease. Some diseases may share risk factors with disease under study (whom to exclude???) |\n| Population based (registry cases) | Most representative of the general population. Generally healthy. | Time, money, energy. Opportunity of exposure may not be same as that of cases (locⁿ, occu.) |\n| Neighbourhood controls/ Telephone exchange random dialing | Controls and cases similar in residence. Easier than sampling the population. | Non cooperation. Security issues. Not representative of general population. |\n| Best friend control/ Sibling control | Accessible, Cooperative. Similar to cases in most | Overmatching. |" }
+    status: unverified
+    tags: [lecturer, revision]
+  - id: res.L05.071
+    kind: mcq
+    topic: odds-ratio
+    stem: >-
+      A case-control study: 100 cases (60 exposed, 40 not) and 100 controls (20 exposed, 80 not). What is the
+      odds ratio?
+    options: ["1.5", "3", "6", "0.17"]
+    answer: 2
+    why:
+      - "1.5 is the odds of exposure among the cases alone, a/c = 60/40."
+      - "3 is the ratio of the proportions exposed (60/100 ÷ 20/100), a different measure, not the odds ratio."
+      - "OR = (a/c) ÷ (b/d) = (60/40) ÷ (20/80) = ad/bc = (60 × 80)/(20 × 40) = 6."
+      - "That is bc/ad, the cross-products upside down."
+    src: { page: 32, quote: "ODDS: the probability of an event (exposure) occurring to the probability of the event not occurring\n  CASES: a/a+c divided by c/a+c = a/c\n  CONTROLS: b/b+d divided by d/b+d = b/d\nODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc" }
+    status: unverified
+    tags: [revision, numbers]
+  - id: res.L05.072
+    kind: mcq
+    topic: risk
+    stem: >-
+      In a cohort, 20 of 200 smokers and 2 of 200 non-smokers develop lung cancer. What is the attributable risk
+      percent (ARP)?
+    options: ["9%", "10%", "90%", "91%"]
+    answer: 2
+    why:
+      - "9 percentage points is the attributable risk (risk difference), Ie − Io = 10% − 1%."
+      - "10 is the relative risk, Ie/Io."
+      - "ARP = (Ie − Io)/Ie × 100 = (0.10 − 0.01)/0.10 × 100 = 90% of the smokers' risk."
+      - "Dividing by the wrong denominator; ARP divides the difference by Ie."
+    src: { page: 59, quote: "Attributable Risk Percent (ARP):\n  AR% is the percent of the incidence of a disease in the exposed that is due to the exposure.\n  It is the % of the incidence of a disease in the exposed that would be eliminated if exposure were eliminated.\n  The risk difference is expressed as a percentage of the total risk experienced by the exposed group: AR% = (Ie – Iu) / Ie × 100, or AR% = AR / Ie × 100" }
+    status: unverified
+    tags: [revision, numbers]
+  - id: res.L05.073
+    kind: card
+    topic: cohort
+    front: >-
+      At the start of a cohort study, the exposed and non-exposed groups must be free of what? (Example: human immunodeficiency virus (HIV)-positive
+      and HIV-negative people followed for cerebral toxoplasmosis.)
+    back: >-
+      Free of the outcome under study (the slide's "sample of healthy subjects"), not of every disease. In the
+      example, HIV status is the exposure and new cerebral toxoplasmosis is the outcome; being unexposed does not
+      guarantee someone stays free of the disease.
+    src: { page: 10, quote: "Two commonly used types of analytical studies:\n  Case-control\n  Cohort\nFIGURE 2:\n  a: Direction of data collection (forward in time): Sample of healthy subjects, then Exposure (Exposed / Not exposed), then Illness (Yes / No)\n  b: Direction of data collection (backward in time): Population, then Illness (Yes / No), then Exposure (Exposed / Not exposed)\nGraphical depiction of a prospective cohort study (simplest case (2a)) and a retrospective case control study (2b)" }
+    status: unverified
+    tags: [lecturer, revision]

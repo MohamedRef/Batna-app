@@ -208,7 +208,10 @@ mod tests {
         store.append_review(ev(1)).unwrap();
         MID_EXPORT.with(|h| {
             *h.borrow_mut() = Some(Box::new(move || {
-                other.append_review(ev(2)).unwrap();
+                // A later wall time: `other` shares the device id and has its
+                // own clock, so in the same millisecond it would mint the very
+                // id the first write got, and the insert would be ignored.
+                other.append_review(ev(crate::store::now_ms() + 60_000)).unwrap();
             }))
         });
         let export = store.export("0.1.0", 2).unwrap();

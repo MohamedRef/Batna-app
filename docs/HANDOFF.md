@@ -80,7 +80,13 @@ Key design rules (also in `CLAUDE.md`):
   append-only events; statuses and settings are LWW by HLC.
 - **A new synced table must be added to `batna_protocol::sync::TABLES`** and
   written through the store so it is queued in `sync_outbox`; otherwise the
-  hub rejects it.
+  hub rejects it. The Worker that knows the table must be deployed: check the
+  "Deploy Batna Cloud" run of that PR and re-run it the same day if it fails
+  (#780's deploy failed on a 504 and the hub rejected `notes` for two days).
+  A hub that doesn't know a table answers `UnknownTable`; the client keeps
+  those ops in the outbox, skips that table until the next connection, and
+  sends them again then. `store/sync.rs` `RESEND` queues a table's own rows
+  again once, for ops an older build dropped.
 - Layout by window width (compact <600dp, medium <840dp, expanded ≥840dp),
   never by device. Logical CSS properties only (RTL). English medical text
   inside Arabic UI is wrapped in `<bdi>`.
@@ -310,6 +316,7 @@ The book PDFs, their extracted page text and page images are copyrighted and
 | `courses/<id>/text/LNN.txt` | other courses: `=== book page N (PDF page M) ===` blocks + tesseract OCR of image pages |
 | `courses/<id>/img/pNNN.jpg` | page images at 200 dpi |
 | `courses/res/slides/*.pdf` | research slide decks (`src.page` = slide number). A lecture taught as several decks is one merged PDF (`res-L09.pdf` = budget 1–14 + ethics 15–85 + plagiarism 86–141; `res-L13.pdf` = writing a paper 1–53 + Vancouver 54–120); the original files are in `slides/originals/` |
+| `../Lecture N ….pdf`, `../Dr Sahar Revision.pdf`, `../Revision Dr Eman Anwar.pdf`, `../Biostatistics Revision.pdf`, `../Revision Dr Heba.pdf` (project-folder root) | enriched lecture copies: frames of the recorded lecture (video slide numbering, not the deck's), then Arabic study notes of what the lecturer said (text layer: `pdftotext` + NFKC). Facts only said in the talk cite the slide being discussed and carry the tag `lecturer`; revision questions carry `revision` |
 | `anki/batna.apkg` | the latest Anki export |
 | `book-issues.md` | errors found in the book |
 
@@ -432,6 +439,29 @@ Add a bullet here when a PR adds something a later agent must know.
   hides «sent to review» until they are in the log. Tests use
   `Store::set_read_only` (SQLite `query_only`) to refuse and then accept
   writes.
+- **Finishing a lesson** (audit F09, 2026-11-11): the done mark and the
+  cleared place are written in one transaction (`Store::finish_place`,
+  `store/places.rs`, on `put_lww_in`). A refusal keeps him on the last step
+  with «ما عرفتش أسجّل إن الدرس خلص» and Retry; a refused place save
+  mid-lesson says so too (`WriteFailed` in `learn/player.rs`).
+- **Reads that fail** (audit F10): `ReviewBackend::reload` keeps the last
+  good review log and verdicts when a read fails, and `Store::setting`
+  reports a database error instead of reading it as "never set"
+  (`store/health.rs`: `read_failed`/`read_error`); Today shows it with
+  «اقرأ تاني».
+- **Storage that didn't open** (audit F11): the in-memory session is said
+  above every screen (`persistence::VolatileNotice` in `main.rs`) with what
+  will be lost and a button to Settings › Data to export.
+- **Sync ops that can't go up** (audit F12, F13, 2026-11-11): an op Batna
+  Cloud refuses for good, or an outbox row this build can't read, moves to
+  the local `sync_held` table (migration 7, never synced or exported) with
+  its reason instead of vanishing (`store/held.rs`; the engine settles a
+  push with `Store::settle_outbox`). Settings › Sync shows a «تغييرات ما
+  اترفعتش» card (`cloud/held_ui.rs`) with «ابعتهم تاني» (back to the
+  outbox) and «سيبهم» (asks first). Newest 1000 kept.
+- **Export is one moment** (audit F14): `Store::export` reads every table
+  in one read transaction, so a sync merge on the other connection can't
+  tear it.
 - **Not yet verified natively**: Android process death and OS kills, macOS
   relaunch, S24 Ultra lock/unlock, keyboard and Back with a running session.
 
@@ -539,9 +569,9 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 96 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 100 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
-| Content | 9 courses, 137 lectures, 137 lesson files; `res` L01–L16 written. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
+| Content | 9 courses, 137 lectures, 137 lesson files; `res` L01–L16 written; L02–L11 checked against the enriched lecture copies, and res.L02 against its video recording (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
@@ -554,7 +584,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | What |
 |---|---|
-| Content | Courses with no material yet; `res` L17–L20 from the lecture PDFs (L12–L16 done) (Mohamed also wants L02–L11 checked against the enriched lecture copies); everything stays `unverified` until he approves in-app |
+| Content | Courses with no material yet; `res` L17–L20 from the lecture PDFs (L12–L16 done); everything stays `unverified` until he approves in-app |
 | Glossary / audit | Split remaining ICP/SBP stop-gap senses into `course:` entries; 2026-11-04 audit leftovers (ambiguous abbreviations, quote cuts) only if Mohamed asks |
 | Mac | Mohamed (2026-11-07) kept being asked for the login Keychain password ("app.batna.cloud") after updates and wants it gone for good. Main builds keep the session in `cloud-session.json` (since #612), and the prompt was traced to local builds of an older checkout; confirm on his Mac after the next update. If it returns, the cause is each build being signed differently (Keychain ACL): fix with a stable signing identity or storage not tied to the build |
 | UX backlog | Weak-topic insight on Today; configurable review shortcuts with conflict checks; a focused phone Study view (keep exit, progress, reveal, grades; don't collide with Mac Focus Mode); medical reading polish (mixed Arabic/English, zoomable figures, optional haptics); a warning before a new session replaces a live one |
@@ -579,6 +609,11 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-11: res.L16 (normal distribution curve and Z-score): 47 items, 4 lessons; the `z_score` calculator now uses the lecture's bands (ordinary within ±2, unusual beyond ±2, extreme beyond ±3) instead of ±1.96. Slide 34's 13-answer key has no questions in the deck, so it was left out.
+- 2026-11-11: res.L03–L11 checked against the enriched lecture copies and the four revisions: 63 new items (tags `lecturer`, `revision`), lecturer's explanations in lessons, res.L08.020 second correct option fixed.
+- 2026-11-11: res.L02 gap-fill from the lecture's video recording (same 70 slides plus the lecturer's spoken points and the 8 pages of Arabic notes): 16 items, lesson 7; calculators `disease_duration`, `death_rate`, `perinatal_mr`, `mmr` (`calc/frequency.rs`); new slide verdicts in `courses/res/verdicts/L02.tsv`.
+- 2026-11-11: sync ops the hub refuses (or the device can't read) are held with their reason and shown in Settings › Sync with send-again / let-go; the export is one read snapshot (engineering audit F12–F14, § 10 Study sessions).
+- 2026-11-11: the Batna Cloud deploy for #780 had failed (504), so the hub rejected `notes`; deploy re-run, ops on a table the hub doesn't know now wait in the outbox, and notes are queued again once.
+- 2026-11-11: finishing a lesson is one transaction with a Retry; a failed read keeps the last good copy and says so on Today; an in-memory session is announced on every screen (engineering audit F09–F11, § 10 Study sessions).
 - 2026-11-11: answers the store refuses outside the main Study session (lesson Try, Oral, question bank) are no longer lost silently: the item stays or the answer is kept with a retry (engineering audit F02, § 10 Study sessions).
 - 2026-11-11: his notes on items ride in the Anki deck (`Notes` field on Batna Basic and Batna Cloze; docs/ANKI.md), from Steps-app.
 - 2026-11-11: res.L15 (introduction to biostatistics: variables, tables, graphs, mean/median/mode, range and SD): 118 items, 7 lessons. Source is the video-frame PDF (142 slides + 7 pages of Arabic notes); slide text typed from the frames into `courses/res/text/L15.txt`, generators in `courses/res/gen-L15/`.

@@ -740,7 +740,7 @@ items:
       - question: "The slide prints relative risk (RR) = 3.14 and number needed to treat (NNT) = 100/15 = 6. What should you write?"
         options: ["RR = EER/CER = 0.33; NNT = 6.7, so 7", "RR = 3.14; NNT = 6, so 6 people", "RR = 0.68; NNT = 15, so 15", "RR = 3.14; NNT = 6.7, so 7"]
         answer: 0
-        why: 3.14 is CER/EER, the inverse. The risk ratio of treated over untreated is 0.07/0.22 = about 0.33 (protective). 100/15 = 6.7, and NNT is always rounded up, so 7.
+        why: "3.14 is CER/EER, the inverse. The risk ratio of treated over untreated is 0.07/0.22 = about 0.33 (protective). 100/15 = 6.7, and NNT is always rounded up, so 7. With the unrounded rates (13/180 = 0.072, 40/183 = 0.219) the ARR is 0.146, the RRR 67% and the NNT 6.8, still rounded up to 7."
     src: { page: 60, quote: "| Outcome | Zidovudine | Placebo | Total |\n|---|---|---|---|\n| Infants HIV infected | 13 | 40 | 53 |\n| Non HIV Infected Infants | 167 | 143 | 11 |\n| Total | 180 | 183 | 363 |\nCompute all possible measures of association. Interpret the obtained results:\n  EER = 13 / 180 = 0.07\n  CER = 40 / 183 = 0.22\n  RR = 3.14\n  RRR = 0.22 - 0.07 / 0.22 = 68%\n  ARR = 0.22 - 0.07 = 0.15\n  NNT = 1 / 15% = 100 / 15 = 6" }
     status: unverified
   - id: res.L07.059
@@ -1487,3 +1487,88 @@ items:
       - Triple blinding is impossible when patients can see their treatment.
     src: { page: 121, quote: "Which of the following research methods is best suited to comparing cognitive behavioural therapy with a selective reuptake inhibitor in anxiety disorder:\n  a. Double blind and placebo controlled\n  b. Randomization and open label\n  c. Randomization and placebo controlled (un blinded)\n  d. Randomization and triple blind" }
     status: unverified
+  # ---------------- added from the recorded lecture and the revisions (2026-11-11) ----------------
+  - id: res.L07.115
+    kind: cloze
+    topic: sample-size
+    text: >-
+      Power = 1 - beta. If beta (the type II error) is 20%, the power is {{c1::80%}}; if beta is 10%, the power is {{c2::90%}}.
+      A higher power needs a {{c3::larger}} sample.
+    src: { page: 6, quote: "What is Power?\n  Power quantifies the ability of the study to find true differences of various values of δ.\n  Power = 1 - β = P (accept H1 | H1 is true)\n  the chance of correctly identify H1 (correctly identify a better medicine)" }
+    status: unverified
+    tags: [lecturer, numbers]
+  - id: res.L07.116
+    kind: card
+    topic: concealment
+    front: What is contamination in a randomized controlled trial (RCT)? Give the lecturer's example.
+    back: >-
+      Part of the intervention reaches the control group, so the real difference between the arms shrinks.
+      The lecturer's example: a health-education programme meant for the intervention group, which some control participants also hear about.
+    src: { page: 41, quote: "Which is not an issue with RCTs?\n  a. Contamination\n  b. Losses to follow up\n  c. Recall bias\n  d. Bias in assessment of outcome" }
+    status: unverified
+    tags: [lecturer]
+  - id: res.L07.117
+    kind: card
+    topic: conduct
+    front: How much loss to follow-up did the lecturer say is acceptable in a trial, and why does it matter?
+    back: >-
+      Keep it to a minimum, and not more than 20%. Losses can seriously bias the results (especially if they differ between the arms) and they reduce the power.
+    src: { page: 48, quote: "Step 11 - Follow Up and Assessment:\n  Follow up the subjects till the end point, or the period of trial, whichever is earlier\n  Avoid losses to follow up, which may otherwise seriously bias the study results" }
+    status: unverified
+    tags: [lecturer, numbers, high-yield]
+  - id: res.L07.118
+    kind: mcq
+    topic: concealment
+    stem: >-
+      A new study evaluates the benefit of regular exercise in preventing depression, compared with unmodified lifestyle, in 80 healthy elderly men.
+      Which of the following is NOT possible in such a study design?
+    options:
+      - Randomized trial
+      - Allocation concealed trial
+      - Prospective trial
+      - Double-blinded trial
+      - Controlled trial
+    answer: 3
+    why:
+      - The men can still be allocated to exercise or usual lifestyle by randomization.
+      - Allocation concealment can always be implemented, for example with sealed envelopes.
+      - The men are followed forwards in time, so the trial is prospective.
+      - A man always knows whether he is exercising, so the participants cannot be blinded. Blinding cannot always be implemented.
+      - The unmodified-lifestyle group is the control group.
+    src: { page: 37, quote: "| Allocation concealment | Blinding |\n|---|---|\n| Prevents selection bias | Prevents ascertainment bias |\n| Protects the randomization sequence before and until the interventions are given to study participants | Protects the randomization sequence after allocation |\n| Can always be implemented | Can not always be implemented |" }
+    status: unverified
+    tags: [revision, high-yield]
+  - id: res.L07.119
+    kind: mcq
+    topic: effect-measures
+    stem: >-
+      A 24-week randomized controlled trial (RCT) of memantine in Alzheimer's dementia: 40% of patients in the memantine group responded,
+      compared with 20% in the placebo group. Calculate the relative change, as in the relative risk reduction formula (difference divided by the control event rate).
+    options: ["20", "5", "2", "1", "10"]
+    answer: 3
+    why:
+      - 20 (percentage points) is the absolute difference, 40% - 20%, not the relative one.
+      - 5 is the number needed to treat for an absolute difference of 20%, not a relative measure.
+      - 2 is the risk ratio, 40% / 20%, not the relative change.
+      - Right. (40 - 20) / 20 = 1, that is a 100% relative increase in response. The difference is divided by the control event rate.
+      - 10 does not come from these numbers.
+    src: { page: 53, quote: "Are the results Clinically Significant?\n| | Outcome Present | Outcome Absent | Totals |\n|---|---|---|---|\n| Experimental group | a | b | a+b |\n| Control group | c | d | c+d |\n| Totals | a+c | b+d | a+b+c+d |\n  Control Event Rate: CER = c / c+d\n  Experimental Event Rate: EER = a / a+b\n  Relative Risk Reduction = CER - EER / CER\n  Absolute Risk Reduction: ARR = CER - EER\n  Number Needed to Treat: NNT = 1 / ARR" }
+    status: unverified
+    tags: [revision]
+  - id: res.L07.120
+    kind: mcq
+    topic: effect-measures
+    stem: >-
+      A drug representative shows that drug A prevents annual hospitalization in 20% more dementia patients than placebo.
+      How many patients do you need to treat to prevent one hospitalization?
+    options: ["20", "5", "80", "1", "100"]
+    answer: 1
+    why:
+      - 20 is the absolute risk reduction in percent, not the number needed to treat.
+      - Right. Number needed to treat (NNT) = 1 / ARR = 1 / 0.20 = 5 patients a year.
+      - 80 is 100 - 20, which has no meaning here.
+      - One patient would only be enough if the drug prevented every hospitalization (ARR 100%).
+      - 100 would correspond to an ARR of 1%.
+    src: { page: 53, quote: "Are the results Clinically Significant?\n| | Outcome Present | Outcome Absent | Totals |\n|---|---|---|---|\n| Experimental group | a | b | a+b |\n| Control group | c | d | c+d |\n| Totals | a+c | b+d | a+b+c+d |\n  Control Event Rate: CER = c / c+d\n  Experimental Event Rate: EER = a / a+b\n  Relative Risk Reduction = CER - EER / CER\n  Absolute Risk Reduction: ARR = CER - EER\n  Number Needed to Treat: NNT = 1 / ARR" }
+    status: unverified
+    tags: [revision, high-yield]

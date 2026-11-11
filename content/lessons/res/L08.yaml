@@ -24,6 +24,8 @@ lessons:
           الكلمة المهمة في المقام: **at risk**. اللي عنده المرض أصلًا مش ممكن «يجيله» تاني، فبيطلع من المقام.
 
           و ==attack rate== نوع من الـ incidence، بنستخدمه لما فترة الخطر **محدودة** (وباء، ولادة) أو الخطر **مقصور على سن معيّن**.
+
+          الدكتورة قالت في الشرح إن الـ attack rate بيتكتب عادة **نسبة مئوية (%)** مش per 1000، زي الـ puerperal sepsis: 100 من 2000 ولادة = 5%.
       - kind: table
         page: 8
         quote: "Period Prevalence Rate = The no. of existing cases (old+new) of a specified disease during a given period of time / Population during the same period of time * 1000"
@@ -93,7 +95,9 @@ lessons:
         page: 9
         quote: "Problem: On the first of January 2010, 1000 females above 40 years of age were screened for Diabetes Mellitus (DM) and 40 females were proved to be Diabetic. During the same year, 20 females developed Diabetes, 5 died and 5 migrated out of the country. Calculate the following rates:\n  Point prevalence of DM on the 1st of January 2010\n  Incidence of DM during the year 2010\n  Point prevalence of DM on the 31st of December 2010\n  Period prevalence in the year 2010"
         text: |
-          المسألة مش محلولة على الشريحة، فده حلّنا بافتراض إن اللي ماتوا وسافروا كانوا من الستات اللي عندهم سكر.
+          المسألة مش محلولة على الشريحة، بس الدكتورة حلّتها في المحاضرة بنفس الافتراض ده: إن اللي ماتوا وسافروا كانوا من الستات اللي عندهم سكر. وكتبت النتايج نسبة مئوية: يناير 40/1000 = 4%، الـ incidence = 20/960 = 2.08%، ديسمبر 50/990 = 5.05%، والـ period = 60/1000 = 6%.
+
+          وخلي بالك: في الـ period prevalence اللي مات أو سافر خلال السنة **مابيطلعش من البسط**؛ كان حالة موجودة في الفترة.
 
           لو الامتحان قال إنهم **مش** diabetic، الحالات في ديسمبر = 60 من 990. اقرا المسألة كويس واكتب افتراضك جنب الحل؛ ده بيجيب الدرجة حتى لو المصحح فهمها بشكل تاني.
 
@@ -146,7 +150,7 @@ lessons:
       - "Attack rate = incidence لفترة خطر محدودة، زي الـ puerperium أو وباء."
       - "Point prevalence = old + new في لحظة. Period prevalence = old + new خلال فترة."
       - "مسألة الـ DM: 40/1000، 20/960، 50/990، 60/1000."
-    practice: [res.L08.001, res.L08.002, res.L08.003, res.L08.004, res.L08.005, res.L08.006, res.L08.007, res.L08.008]
+    practice: [res.L08.001, res.L08.002, res.L08.003, res.L08.004, res.L08.005, res.L08.006, res.L08.007, res.L08.008, res.L08.055]
   # ------------------------------------------------------------------
   - id: res.L08.lesson2
     title: "الـ 2x2 table: prevalence و odds ratio"
@@ -241,13 +245,13 @@ lessons:
         page: 56
         quote: "At a specific hospital, patients diagnosed with pancreatic carcinoma are asked about their current smoking status. At the same hospital, patients without pancreatic carcinoma are also asked about their current smoking status. The following table is constructed.\n| Smoking | Pancreatic cancer | No pancreatic cancer | Total |\n|---|---|---|---|\n| Exposed | 50 | 60 | 110 |\n| Not exposed | 40 | 80 | 120 |\n| Total | 90 | 140 | 230 |\nWhat is the odds ratio that a patient diagnosed with pancreatic cancer is a current smoker compared to a patient without pancreatic cancer?\n  a. (50/90)/(60/140)\n  b. (50/40)/(60/80)\n  c. (50/110)/(40/120)\n  d. (50/60)/(40/80)\n  e. (90/230)/(140/230)"
         question: "Pancreatic cancer cases: 50 smokers, 40 non-smokers. Controls: 60 smokers, 80 non-smokers. Odds ratio?"
-        options: ["(50/40)/(60/80)", "(50/90)/(60/140)", "(50/110)/(40/120)", "(50/60)/(40/80)"]
+        options: ["(50/40)/(60/80)", "(50/90)/(60/140)", "(50/110)/(40/120)", "(50 × 60)/(40 × 80)"]
         answer: 0
         why:
           - "صح: odds التدخين في الـ cases (50/40) ÷ odds في الـ controls (60/80) = 1.25/0.75 = 1.67."
           - "دي نسب، مش odds."
           - "دي risk حسب الـ exposure، ومينفعش في case-control."
-          - "قسمة خانات غلط."
+          - "ضربت خانات غلط: الـ OR = ad/bc، مش (a × b)/(c × d)؛ الناتج هنا 0.94."
       - kind: aside
         tone: trap
         page: 56
@@ -256,6 +260,8 @@ lessons:
           سؤال الـ pancreatic cancer والـ smoking: في الشريحة الأصلية الاختيارات **مطبوعة بالمقلوب**، من اليمين للشمال، فاختيار b شكله غلط.
 
           اقراه صح: odds التدخين في الـ cases على odds التدخين في الـ controls، والناتج **1.67**، وده اللي عليه الدايرة الحمرا. لو شفت سؤال زيه في الامتحان، احسب بنفسك الأول وبعدين دوّر على الرقم.
+
+          وفي الـ revision الدكتورة نبّهت: اختيار d على الشريحة، (50/60)/(40/80)، **بيدّي نفس الرقم 1.67**، لأن الاتنين = (50 × 80)/(60 × 40). يعني b و d متكافئين حسابيًا، والدايرة على b. احسب ad/bc الأول، وبعدين شوف أنهي اختيار بيطلّع نفس الرقم.
       - kind: check
         page: 55
         quote: "A study is performed in which mothers of babies born with neural tube defects are questioned about their acetaminophen consumption during the first trimester of pregnancy. At the same time, mothers of babies born without neural tube defect are also questioned about their consumption of acetaminophen during the first trimester. Which of the following measures of association is most likely to be reported by investigators?\n  a. Prevalence\n  b. Median survival\n  c. Relative risk\n  d. Odds ratio\n  e. Hazard ratio"
@@ -274,7 +280,7 @@ lessons:
       - "OR = ad/bc. الـ exposure rate = المعرضين ÷ الجروب."
       - "OR > 1: الـ cases أكتر تعرّض بـ x مرة. = 1: مفيش علاقة. < 1: protective."
       - "مسألة CHD: OR = 6. مسألة pancreas: OR = 1.67."
-    practice: [res.L08.009, res.L08.010, res.L08.011, res.L08.012, res.L08.013, res.L08.017, res.L08.019, res.L08.020]
+    practice: [res.L08.009, res.L08.010, res.L08.011, res.L08.012, res.L08.013, res.L08.017, res.L08.019, res.L08.020, res.L08.054]
   # ------------------------------------------------------------------
   - id: res.L08.lesson3
     title: "RR والـ attributable risk، وصح ولا غلط"
@@ -366,6 +372,8 @@ lessons:
           - الـ role of chance لازم يتقيّم **دايمًا** قبل التفسير: «may or may not» = **F**.
           - الـ case control studies سهلة وبتاخد وقت قصير: **T**.
           - الـ **odds ratio** هو المقياس الوحيد من الـ case control: **T**.
+
+          والدكتورة أكدت في الشرح: ماتقفش عند الرقم الخام للـ RR أو الـ OR. لازم **statistical evaluation** للصدفة (p value و confidence interval)، وتفكّر كمان في الـ bias والـ confounding. والـ significance لوحدها مش إثبات إن الـ exposure سبب المرض.
       - kind: mnemonic
         page: 22
         quote: "Interpretation of relative risk (RR):\n  RR > 1 (x): the exposed to the risk factor are more liable to the disease than the non exposed by x times\n  RR = 1: the exposure has no relationship with the disease\n  RR < 1: the exposure is protective factor"
@@ -381,7 +389,7 @@ lessons:
       - "Smoking و lung cancer: RR 10، AR 90 في الألف، ARP 90%."
       - "الآبار: RR 1.33، ARP 25%. الـ fibrinogen: RR = (40/70)/(20/60)."
       - "الـ OR بيقرّب للـ RR. الـ case-control مايدّيش incidence. الـ AR مش «أضعاف»."
-    practice: [res.L08.014, res.L08.015, res.L08.016, res.L08.018, res.L08.021, res.L08.022, res.L08.023, res.L08.024, res.L08.025, res.L08.026, res.L08.027, res.L08.028]
+    practice: [res.L08.014, res.L08.015, res.L08.016, res.L08.018, res.L08.021, res.L08.022, res.L08.023, res.L08.024, res.L08.025, res.L08.026, res.L08.027, res.L08.028, res.L08.056]
   # ------------------------------------------------------------------
   - id: res.L08.lesson4
     title: "اعرف الـ design من القصة"
@@ -466,7 +474,7 @@ lessons:
         text: |
           سؤال الـ **neck radiation**: البالغين اتعرّضوا في **الطفولة**، و«follow up» علشان الـ thyroid cancer. **مفتاح الشريحة: d، prospective cohort.**
 
-          كتب كتير بتعتبره **retrospective (historical) cohort** لأن الـ exposure حصل زمان. في امتحان القسم اختار إجابة الشريحة، **prospective**، لأن السؤال قال follow up.
+          كتب كتير بتعتبره **retrospective (historical) cohort** لأن الـ exposure حصل زمان. بس الدكتورة ثبّتت الإجابة دي في المحاضرة وفي الـ revision: المشاركين **بيتتابعوا من بداية الدراسة لحد ما الـ outcome يظهر**، و«قِدم الـ exposure» لوحده مايخليهاش retrospective. الـ retrospective cohort مبني على **سجلات قديمة** للـ exposure والـ outcome (زي سؤال القريتين). في امتحان القسم: **prospective**.
       - kind: aside
         tone: trap
         page: 50
@@ -474,7 +482,7 @@ lessons:
         text: |
           سؤال الـ **environmental toxin**: ناس اتعرضوا وبنتابعهم «over time on a standard set of measures». **مفتاح الشريحة: c، longitudinal.**
 
-          الـ prospective cohort معقول برضه، بس مفيش جروب **unexposed** للمقارنة، والسؤال بيقول «this type of study design is called»، وده الوصف الحرفي لـ **longitudinal**.
+          الـ prospective cohort معقول برضه، بس مفيش جروب **unexposed** للمقارنة، والسؤال بيقول «this type of study design is called»، وده الوصف الحرفي لـ **longitudinal**. والدكتورة ثبّتت الإجابة دي في الشرح: متابعة جروب واحد اتعرّض من غير مقارنة = دراسة longitudinal.
       - kind: check
         page: 46
         quote: "An investigator suspects that acetaminophen use during the first trimester of pregnancy can cause neural tube defects. She estimates the risk of neural tube defect in the general population is 1:1,000. Which of the following is the best study design to investigate the hypothesis?\n  a. Cohort study\n  b. Case-control study\n  c. Clinical trial\n  d. Ecologic Study\n  e. Cross-sectional study"
@@ -511,14 +519,24 @@ lessons:
           - المرض **نادر** (hereditary diseases، neural tube defects، ALL): **case control**.
           - الـ **exposure** نادر (radiation، وظيفة خطرة): **cohort**.
           - عايز تثبت إن **علاج** شغّال: **randomized controlled trial (RCT)**.
+
+          وفي سؤال الـ ALL الدكتورة اختارت أطفال الـ **outpatient clinic** اللي مش عندهم ALL، **سواء اتعرّضوا للـ waste أو لأ**: الـ controls ماتختارهمش حسب الـ exposure، لأن المطلوب نقيس الـ exposure فيهم ونقارنه بالـ cases.
+      - kind: aside
+        tone: trap
+        page: 40
+        quote: "During pre-placement examination of 200 new employees, 20 persons were hypertensive among 80 smokers while 6 hypertensive persons were detected among the remainder non-smoker employees.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        text: |
+          فخ كلمة **new**: «pre-placement examination of 200 **new employees**». الدكتورة نبّهت في الشرح والـ revision إن «new» هنا وصف للموظفين، **مش** للحالات: الـ hypertension ممكن تكون موجودة من زمان.
+
+          التدخين والضغط اتقاسوا في **نفس الكشف**، يعني ==cross-sectional==، والأرقام **prevalence**: 20/80 = 25% في الـ smokers، و 6/120 = 5% في الـ non-smokers. مش incidence.
       - kind: try
         items: [res.L08.029, res.L08.033, res.L08.036]
     recap:
       - "الباحث ادّى الـ exposure بقرعة = RCT. البداية من المرض = case-control. الاتنين في نفس الوقت = cross-sectional."
       - "البداية من الـ exposure: سجلات قديمة = retrospective cohort، متابعة من دلوقتي = prospective cohort."
       - "مرض نادر = case control. Exposure نادر = cohort."
-      - "انتبه: الـ neck radiation مفتاحه prospective، والـ toxin مفتاحه longitudinal."
-    practice: [res.L08.029, res.L08.030, res.L08.031, res.L08.032, res.L08.033, res.L08.034, res.L08.035, res.L08.036, res.L08.037, res.L08.038, res.L08.039, res.L08.040, res.L08.041, res.L08.042, res.L08.043, res.L08.044, res.L08.045, res.L08.046, res.L08.047]
+      - "انتبه: الـ neck radiation مفتاحه prospective (الدكتورة ثبّتته)، والـ toxin مفتاحه longitudinal."
+    practice: [res.L08.029, res.L08.030, res.L08.031, res.L08.032, res.L08.033, res.L08.034, res.L08.035, res.L08.036, res.L08.037, res.L08.038, res.L08.039, res.L08.040, res.L08.041, res.L08.042, res.L08.043, res.L08.044, res.L08.045, res.L08.046, res.L08.047, res.L08.057]
   # ------------------------------------------------------------------
   - id: res.L08.lesson5
     title: "Bias ولا confounding؟"

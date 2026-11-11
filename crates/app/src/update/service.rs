@@ -441,7 +441,10 @@ impl Updater {
             return false;
         }
         let Some(pack) = pack_in_use(&self.dir, &self.info) else { return false };
-        crate::content::Library::reload();
+        // Past the run's bound on live switches it waits for the next start.
+        if !crate::content::Library::reload() {
+            return false;
+        }
         let s = self.status();
         let before = s.content_key().unwrap_or_else(|| s.app_key());
         self.tx.send_modify(|s| {

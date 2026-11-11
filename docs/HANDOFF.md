@@ -458,6 +458,16 @@ Add a bullet here when a PR adds something a later agent must know.
   push with `Store::settle_outbox`). Settings › Sync shows a «تغييرات ما
   اترفعتش» card (`cloud/held_ui.rs`) with «ابعتهم تاني» (back to the
   outbox) and «سيبهم» (asks first). Newest 1000 kept.
+- **One answer, one item** (audit F15, 2026-11-11): a local answer newer
+  than everything in the log updates only its item (`Scheduler::step`,
+  `core/src/replay.rs`); anything out of order, a reload, sync, import or
+  retraction still replays the whole log. Tests assert step = full replay
+  after every answer (random grades/origins/gaps; and a debug check in every
+  app test). Release timings (hosted Linux, `replay_timings`): 10k answers
+  3.6 ms full vs 0.05 ms step; 50k 20 ms vs 0.25 ms; 100k 43 ms vs 0.6 ms.
+- **Live content switches are bounded** (audit F17): old libraries are
+  leaked (screens hold `&'static`), so a run switches packs live at most
+  `MAX_LIVE_RELOADS` (2) times; a later pack opens at the next start.
 - **Export is one moment** (audit F14): `Store::export` reads every table
   in one read transaction, so a sync merge on the other connection can't
   tear it.
@@ -607,6 +617,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: a local answer updates only its own item instead of replaying the whole log (43 ms → 0.6 ms at 100k answers); live content switches are bounded to 2 a run (engineering audit F15, F17, § 10 Study sessions).
 - 2026-11-11: sync ops the hub refuses (or the device can't read) are held with their reason and shown in Settings › Sync with send-again / let-go; the export is one read snapshot (engineering audit F12–F14, § 10 Study sessions).
 - 2026-11-11: the Batna Cloud deploy for #780 had failed (504), so the hub rejected `notes`; deploy re-run, ops on a table the hub doesn't know now wait in the outbox, and notes are queued again once.
 - 2026-11-11: finishing a lesson is one transaction with a Retry; a failed read keeps the last good copy and says so on Today; an in-memory session is announced on every screen (engineering audit F09–F11, § 10 Study sessions).

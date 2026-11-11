@@ -16,6 +16,7 @@ pub mod pack;
 pub mod plan;
 pub mod program;
 pub mod quote;
+pub mod replay;
 pub mod response;
 pub mod review;
 pub mod session;

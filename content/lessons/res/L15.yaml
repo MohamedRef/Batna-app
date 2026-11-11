@@ -1,0 +1,1439 @@
+schema: batna.lesson/v1
+lecture: res.L15
+lessons:
+- id: res.L15.lesson1
+  title: 'الإحصاء: من العيّنة للناس كلها'
+  hook: إنت بتقيس ضغط 100 عيان في العيادة، بس عايز تتكلم عن كل الناس. إزاي ده يبقى صح؟
+  minutes: 8
+  pages: [1, 12]
+  topics: [intro]
+  goals:
+  - تعرف الإحصاء بيعمل إيه في 6 خطوات
+  - تفرّق بين الـ population والـ sample ورموزهم
+  - تفرّق بين الـ descriptive والـ analytic والـ vital statistics
+  status: unverified
+  steps:
+  - kind: explain
+    page: 4
+    quote: |-
+      Definition
+      Statistics is the scientific field that deals with
+      collection,
+      classification,
+      presentation
+      description
+      analysis
+      & interpretation of data.
+    title: الإحصاء بيعمل إيه؟
+    text: |-
+      الإحصاء مش «حسابات وبس». هو علم بيمسك الـ **data** من أولها لآخرها:
+
+      - ==collection== (تجمع) ← **classification** (تصنّف) ← **presentation** (تعرض)
+      - **description** (توصف) ← **analysis** (تحلل) ← ==interpretation== (تفسّر)
+
+      ولما الكلام ده يتطبّق على الطب والعلوم البيولوجية اسمه **biostatistics**.
+    remind: [res.L15.001]
+  - kind: explain
+    page: 5
+    quote: |-
+      Some definitions
+      Population (target population)
+      Is the population about which one wishes to make an inference. It is a large set of individuals( human) or other living organisms (animals ,insects ,plant or non living organisms (water ,vaccines)
+      Sample:
+      Is a subset of the population selected in a way that is representative of the target population.
+      It should reflect the similarities and differences found in the population .Result from it can be generalized to the population
+    title: الـ population والـ sample
+    text: |-
+      - **Population (target population)**: الناس (أو الكائنات، أو حتى ماية ولقاحات) اللي ==عايز تطلع عليهم استنتاج==.
+      - **Sample**: جزء منهم، بتختاره بطريقة تخليه ==representative==: يشيل نفس التشابه والاختلاف اللي في الـ population.
+
+      ليه representative؟ لأن النتيجة هتتعمم على الناس كلها، مش على الـ 100 اللي قستهم وبس.
+  - kind: figure
+    page: 6
+    quote: |-
+      Population: quantity (count) = N; mean = μ; standard deviation = σ
+      Sample: quantity (count) = n; mean = x̄; standard deviation = s
+    title: نفس المقاييس، رموز مختلفة
+    svg: |-
+      <svg viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="L15a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+        <ellipse cx="96" cy="80" rx="90" ry="62" class="fg-box"/>
+        <text x="96" y="30" text-anchor="middle" class="t-sm t-b">Population</text>
+        <g class="fg-dot-acc"><circle cx="50" cy="60" r="4"/><circle cx="70" cy="90" r="4"/><circle cx="96" cy="55" r="4"/><circle cx="120" cy="100" r="4"/><circle cx="140" cy="70" r="4"/><circle cx="60" cy="115" r="4"/><circle cx="100" cy="120" r="4"/><circle cx="150" cy="105" r="4"/><circle cx="35" cy="88" r="4"/><circle cx="118" cy="45" r="4"/></g>
+        <text x="96" y="160" text-anchor="middle" class="t-sm">N · μ · σ</text>
+        <path d="M190 80H226" class="fg-arrow" marker-end="url(#L15a)"/>
+        <text x="208" y="70" text-anchor="middle" class="t-sm t-mut">select</text>
+        <ellipse cx="282" cy="80" rx="52" ry="40" class="fg-acc"/>
+        <text x="282" y="34" text-anchor="middle" class="t-sm t-b">Sample</text>
+        <g class="fg-dot-acc"><circle cx="262" cy="72" r="4"/><circle cx="290" cy="64" r="4"/><circle cx="300" cy="92" r="4"/><circle cx="270" cy="96" r="4"/></g>
+        <text x="282" y="160" text-anchor="middle" class="t-sm">n · x̄ · s</text>
+        <path d="M282 124C250 150 140 150 110 146" class="fg-arrow-acc" marker-end="url(#L15a)"/>
+        <text x="196" y="138" text-anchor="middle" class="t-sm t-acc">generalize</text>
+      </svg>
+    caption: الـ population ليها N وμ وσ، والعيّنة ليها n وx̄ وs. العيّنة بتتعمم على الـ population.
+    alt: A large ellipse labelled population with N, mu, sigma and a smaller ellipse labelled sample with n, x-bar, s; an
+      arrow selects the sample and another generalizes back.
+  - kind: table
+    page: 6
+    quote: |-
+      Population: quantity (count) = N; mean = μ; standard deviation = σ
+      Sample: quantity (count) = n; mean = x̄; standard deviation = s
+    title: احفظ الرموز
+    columns:
+    - Measure
+    - Population
+    - Sample
+    rows:
+    - - Count
+      - N
+      - n
+    - - Mean
+      - μ
+      - x̄
+    - - Standard deviation
+      - σ
+      - s
+    hide:
+    - - 0
+      - 2
+    - - 1
+      - 1
+    - - 2
+      - 2
+  - kind: aside
+    page: 6
+    quote: |-
+      Population: quantity (count) = N; mean = μ; standard deviation = σ
+      Sample: quantity (count) = n; mean = x̄; standard deviation = s
+    tone: tip
+    text: |-
+      قاعدة سهلة: **اليوناني والكابيتال للـ population** (N، μ، σ)، و**اللاتيني الصغير للـ sample** (n، x̄، s). الكبير للكل، والصغير للجزء.
+  - kind: explain
+    page: 8
+    quote: |-
+      2- Analytic statistics:
+      Concerned with the use of data from a sample of population to make inferences about the population (ex: to come to a conclusion about the relation between a condition ( disease and its cause) to be generalized over the population
+      Example : relation between smoking and lung cancer
+    title: 3 فروع
+    text: |-
+      - **Descriptive statistics**: بتلخّص العيّنة، زي ==% age and sex distribution== أو **average blood pressure**.
+      - **Analytic statistics**: بتستخدم العيّنة عشان ==تستنتج== حاجة عن الـ population، زي علاقة **smoking** بالـ **lung cancer**.
+      - **Vital statistics**: الحكومة بتجمع على طول births، deaths، marriage، divorces، والحالات الصحية، ومكتب الصحة هو اللي بيبلّغ.
+    remind: [res.L15.010]
+  - kind: check
+    page: 8
+    quote: |-
+      2- Analytic statistics:
+      Concerned with the use of data from a sample of population to make inferences about the population (ex: to come to a conclusion about the relation between a condition ( disease and its cause) to be generalized over the population
+      Example : relation between smoking and lung cancer
+    question: A study concludes, from a sample, that smoking is related to lung cancer in the population. Which branch?
+    options:
+    - Analytic statistics
+    - Descriptive statistics
+    - Vital statistics
+    answer: 0
+    why:
+    - 'صح: استنتاج من العيّنة عن علاقة في الـ population.'
+    - الـ descriptive بيلخّص العيّنة بس من غير استنتاج.
+    - الـ vital دي سجلات الحكومة للمواليد والوفيات وغيرها.
+  - kind: explain
+    page: 12
+    quote: |-
+      Statistics is helpful to assess:
+      Diagnostic testing
+      Effects of new drugs and treatment modalities.
+      Epidemiologists need to know how to:
+      Calculate rates
+      Compare between groups and to decide how likely the differences in comparison groups could be due to chance.
+    title: طب ليه الدكتور يتعب نفسه؟
+    text: |-
+      لأنك هتقرا papers طول عمرك، ولازم تعرف ==تقيّم وتنقد== اللي فيها. الإحصاء بيساعدك تقيّم:
+
+      - **diagnostic testing** و**effects of new drugs**.
+      - والـ epidemiologist بيحسب **rates** ويقارن الـ groups ويسأل: الفرق ده ==ممكن يكون chance==؟
+    remind: [res.L15.014]
+  - kind: aside
+    page: 11
+    quote: |-
+      Uses in Medicine:
+      Biostatistics is necessary for both clinical and preventive medicine.
+      Physicians should have the basic knowledge for evaluation and criticism of researches published in medical journals.
+    tone: joke
+    text: |-
+      الدكتور اللي مبيعرفش إحصاء بيقرا الـ abstract ويصدّق. واللي بيعرف بيبص على الـ n الأول. 😄
+  - kind: try
+    items: [res.L15.001, res.L15.003, res.L15.004, res.L15.007]
+  recap:
+  - 'الإحصاء: collection → classification → presentation → description → analysis → interpretation.'
+  - الـ sample لازم تكون representative عشان النتيجة تتعمم.
+  - N، μ، σ للـ population؛ n، x̄، s للـ sample.
+  - descriptive يلخّص، analytic يستنتج، vital سجلات الحكومة.
+  practice: [res.L15.001, res.L15.002, res.L15.003, res.L15.004, res.L15.005, res.L15.006, res.L15.007, res.L15.008, res.L15.009,
+    res.L15.010, res.L15.011, res.L15.012, res.L15.013, res.L15.014]
+- id: res.L15.lesson2
+  title: 'أنواع المتغيرات: بتقيس ولا بتعد ولا بتصنّف؟'
+  hook: الوزن والنبض الاتنين أرقام. بس واحد continuous والتاني discrete. الفرق ده بيحدد الجدول والرسمة والتست.
+  minutes: 9
+  pages: [13, 21]
+  topics: [variables]
+  goals:
+  - تفرّق بين الـ constant data والـ variables
+  - 'تصنّف أي متغير: continuous، discrete، ordinal، nominal'
+  - تتجنب فخ الـ pulse وعدد العيال
+  status: unverified
+  steps:
+  - kind: explain
+    page: 14
+    quote: |-
+      Types of data:
+      Data are classified into:
+      Constant data:
+      These are observations which do not vary from one person to another such as number of eyes, fingers, ears... etc
+      Variables:
+      These are observations, which vary from one person to another or from one group of members to others and are subdivided into the following:
+    title: ثابت ولا متغير؟
+    text: |-
+      - **Constant data**: ==مبتتغيرش== من شخص للتاني: عدد العينين، الصوابع، الودان.
+      - **Variables**: بتتغير من شخص لشخص أو من group لـ group، ودي اللي الإحصاء بيشتغل عليها.
+  - kind: figure
+    page: 15
+    quote: |-
+      Quantitative variables:
+      These may be continuous or discrete.
+      a- Continuos quantitative variable:
+      Which are obtained by measurement and its value could be integer or fractionated value.
+      Examples:
+      Weight, height, hemoglobin, age, income, volume of urine.
+    title: شجرة المتغيرات
+    svg: |-
+      <svg viewBox="0 0 340 196" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="L15b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+        <rect x="120" y="4" width="100" height="26" rx="6" class="fg-ink"/>
+        <text x="170" y="21" text-anchor="middle" class="t-sm t-b">Data</text>
+        <path d="M150 30L70 50" class="fg-arrow" marker-end="url(#L15b)"/>
+        <path d="M190 30L270 50" class="fg-arrow" marker-end="url(#L15b)"/>
+        <rect x="20" y="52" width="100" height="26" rx="6" class="fg-thin"/>
+        <text x="70" y="69" text-anchor="middle" class="t-sm">Constant</text>
+        <rect x="220" y="52" width="100" height="26" rx="6" class="fg-box"/>
+        <text x="270" y="69" text-anchor="middle" class="t-sm t-b">Variables</text>
+        <path d="M245 78L130 98" class="fg-arrow" marker-end="url(#L15b)"/>
+        <path d="M295 78L280 98" class="fg-arrow" marker-end="url(#L15b)"/>
+        <rect x="40" y="100" width="130" height="26" rx="6" class="fg-acc"/>
+        <text x="105" y="117" text-anchor="middle" class="t-sm t-b">Quantitative</text>
+        <rect x="210" y="100" width="124" height="26" rx="6" class="fg-good"/>
+        <text x="272" y="117" text-anchor="middle" class="t-sm t-b">Qualitative</text>
+        <rect x="4" y="142" width="80" height="48" rx="6" class="fg-box"/>
+        <text x="44" y="160" text-anchor="middle" class="t-sm t-b">Continuous</text>
+        <text x="44" y="176" text-anchor="middle" class="t-sm t-mut">measured</text>
+        <rect x="90" y="142" width="80" height="48" rx="6" class="fg-box"/>
+        <text x="130" y="160" text-anchor="middle" class="t-sm t-b">Discrete</text>
+        <text x="130" y="176" text-anchor="middle" class="t-sm t-mut">counted</text>
+        <rect x="180" y="142" width="74" height="48" rx="6" class="fg-box"/>
+        <text x="217" y="160" text-anchor="middle" class="t-sm t-b">Ordinal</text>
+        <text x="217" y="176" text-anchor="middle" class="t-sm t-mut">ordered</text>
+        <rect x="260" y="142" width="76" height="48" rx="6" class="fg-box"/>
+        <text x="298" y="160" text-anchor="middle" class="t-sm t-b">Nominal</text>
+        <text x="298" y="176" text-anchor="middle" class="t-sm t-mut">no order</text>
+        <path d="M90 126L48 140M120 126L130 140M255 126L222 140M290 126L298 140" class="fg-arrow"/>
+      </svg>
+    caption: الـ variables يا كمية (continuous بتتقاس، discrete بتتعد) يا نوعية (ordinal ليها ترتيب، nominal ملهاش).
+    alt: 'Tree: data splits into constant and variables; variables into quantitative (continuous, discrete) and qualitative
+      (ordinal, nominal).'
+  - kind: explain
+    page: 16
+    quote: |-
+      B- Discret or discontinus quantitative variables:
+      Which are obtained by enumeration and its value is always integer value.
+      Examples:
+      Pulse
+      Family size
+      Number of live births
+      Number of abortions.
+    title: 'الكمي: قِسته ولا عدّيته؟'
+    text: |-
+      - **Continuous**: جه من ==measurement==، ينفع يبقى كسر: weight، height، hemoglobin، age، income، volume of urine.
+      - **Discrete**: جه من ==enumeration== (عد)، دايمًا رقم صحيح: pulse، family size، number of live births، number of abortions.
+
+      السؤال السحري: **«ينفع يبقى 2.5؟»** لو آه → continuous. لو لأ (مفيش 2.5 عيل) → discrete.
+  - kind: aside
+    page: 16
+    quote: |-
+      B- Discret or discontinus quantitative variables:
+      Which are obtained by enumeration and its value is always integer value.
+      Examples:
+      Pulse
+      Family size
+      Number of live births
+      Number of abortions.
+    tone: trap
+    text: |-
+      الـ **pulse** في السلايدز ==discrete==، لأنك بتعد الضربات. ومتتلخبطش: الـ age والـ income في السلايدز continuous.
+  - kind: explain
+    page: 19
+    quote: |-
+      b- Nominal qualitative variables :
+      Can not be put in order and is further subdivided into:
+      Dichotomous
+      Examples
+      Sex
+      Yes / no variables
+      Multichotomous
+      Examples
+      Marital status:
+      (married, single, divorced, widow)
+      Blood groups: A, B, AB, O
+    title: 'النوعي: ليه ترتيب ولا لأ؟'
+    text: |-
+      - **Ordinal**: فئات ليها ==ترتيب==: degree of success (excellent، very good، good، fair)، degree of disease (mild، moderate، severe).
+      - **Nominal**: فئات ==ملهاش ترتيب==:
+        - **Dichotomous** (اتنين بس): sex، yes/no.
+        - **Multichotomous** (أكتر): marital status، blood groups A، B، AB، O.
+  - kind: sort
+    page: 20
+    quote: |-
+      Exercises
+      I: Classify each of the following measured variables by the type of variable
+      | Variable measured | Type of variable |
+      |---|---|
+      | 1- The presence of type II diabetes (Yes or No) |  |
+      | 2- Number of new H1N1 cases in Mexico in a given month (n=118) |  |
+      | 3- Income of a group of workers (L.E) |  |
+      | 4- High density lipoprotein level (mg / dL) |  |
+      | 5- degree of success of medical students (excellent, very good, good, fair, and weak) |  |
+    prompt: حط كل متغير في نوعه
+    bins:
+    - Continuous
+    - Discrete
+    - Ordinal
+    - Nominal
+    cards:
+    - text: HDL level (mg/dL)
+      bin: 0
+    - text: Income of workers (L.E)
+      bin: 0
+    - text: New H1N1 cases in a month
+      bin: 1
+    - text: Family size
+      bin: 1
+    - text: Degree of success
+      bin: 2
+    - text: Mild / moderate / severe
+      bin: 2
+    - text: Type II diabetes yes/no
+      bin: 3
+    - text: Blood group
+      bin: 3
+    why: 'اسأل: اتقاس (continuous)؟ اتعد (discrete)؟ فئات مترتبة (ordinal)؟ فئات من غير ترتيب (nominal)؟'
+  - kind: check
+    page: 21
+    quote: |-
+      2- All of the following are examples of quantitative variable EXCEPT:
+      a- blood pressure b- blood group
+      c- Hb percent d- length of hospital stay
+    question: 'All of the following are quantitative EXCEPT:'
+    options:
+    - Blood group
+    - Blood pressure
+    - Hb percent
+    - Length of hospital stay
+    answer: 0
+    why:
+    - 'صح: blood group فئة (nominal).'
+    - الضغط بيتقاس.
+    - الـ Hb بيتقاس.
+    - مدة الإقامة رقم أيام.
+  - kind: check
+    page: 16
+    quote: |-
+      B- Discret or discontinus quantitative variables:
+      Which are obtained by enumeration and its value is always integer value.
+      Examples:
+      Pulse
+      Family size
+      Number of live births
+      Number of abortions.
+    question: Which of these is a discrete quantitative variable?
+    options:
+    - Number of live births
+    - Age
+    - Income
+    - Volume of urine
+    answer: 0
+    why:
+    - 'صح: بيتعد ودايمًا صحيح، زي عدد العيال (وده اللي الدكتورة نبّهت عليه).'
+    - الـ age في السلايدز continuous.
+    - الـ income في السلايدز continuous.
+    - الحجم بيتقاس.
+  - kind: try
+    items: [res.L15.018, res.L15.019, res.L15.023, res.L15.027]
+  recap:
+  - Constant data مبتتغيرش (عدد الصوابع)؛ الـ variables بتتغير.
+  - Continuous = measurement (ينفع كسر)، discrete = enumeration (صحيح دايمًا).
+  - Ordinal ليه ترتيب، nominal ملهوش (dichotomous أو multichotomous).
+  - الـ pulse وعدد العيال discrete.
+  practice: [res.L15.015, res.L15.016, res.L15.017, res.L15.018, res.L15.019, res.L15.020, res.L15.021, res.L15.022, res.L15.023,
+    res.L15.024, res.L15.025, res.L15.026, res.L15.027, res.L15.028, res.L15.029, res.L15.030]
+- id: res.L15.lesson3
+  title: 'الجدول الصح: من كومة أرقام لـ frequency table'
+  hook: 57 وزن متكومين على السلايد. في 5 دقايق هتحوّلهم لجدول نضيف من 7 فئات.
+  minutes: 10
+  pages: [22, 54]
+  topics: [tables]
+  goals:
+  - تعرف طرق عرض البيانات الـ 3 وأنواع الجداول الـ 4
+  - 'تبني frequency table: أول فئة، الـ width، وعدد الفئات'
+  - تحسب الـ width والـ midpoint للـ continuous والـ discrete
+  status: unverified
+  steps:
+  - kind: explain
+    page: 23
+    quote: |-
+      Data presentation
+      I. Numerical presentation:
+      II. Graphical presentation
+      III. Mathematical presentation
+    title: 3 طرق تعرض بيها البيانات
+    text: |-
+      - **Numerical**: أرقام وجداول.
+      - **Graphical**: رسومات.
+      - **Mathematical**: أرقام بتلخّص، زي ==mean، median، mode، range، standard deviation==.
+
+      والـ numerical نوعين: **simple** للبيانات القليلة (أوزان 5 أطفال: 8، 6، 9، 5، 7 kg)، و**tabular** للكتير (==grouped data==).
+    remind: [res.L15.031, res.L15.032]
+  - kind: explain
+    page: 29
+    quote: |-
+      Tabular presentation
+      I. Simple frequency distribution table
+      II- Table of an association or contingency table
+      2 X 2
+      c x r
+      III. Comparing frequency distribution table
+      IV. Two way table or two way classification table
+    title: 4 أنواع جداول
+    text: |-
+      1. **Simple frequency distribution table**: متغير واحد.
+      2. **Table of association (contingency)**: ==2 × 2== أو ==c × r==.
+      3. **Comparing frequency distribution table**.
+      4. **Two way classification table**.
+    remind: [res.L15.034]
+  - kind: figure
+    page: 31
+    quote: |-
+      Title
+      what, who, where & when
+      | Variable | Frequency (Number or percent) |
+      |---|---|
+      | Categories |  |
+      | Total | n |
+      Source of data
+    title: تشريح الجدول
+    svg: |-
+      <svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="4" width="240" height="30" rx="6" class="fg-acc"/>
+        <text x="160" y="17" text-anchor="middle" class="t-sm t-b">Title</text>
+        <text x="160" y="29" text-anchor="middle" class="t-sm t-mut">what · who · where · when</text>
+        <rect x="40" y="42" width="140" height="24" class="fg-ink"/>
+        <rect x="180" y="42" width="100" height="24" class="fg-ink"/>
+        <text x="110" y="58" text-anchor="middle" class="t-sm t-b">Variable</text>
+        <text x="230" y="58" text-anchor="middle" class="t-sm t-b">Frequency</text>
+        <rect x="40" y="66" width="140" height="72" class="fg-box"/>
+        <rect x="180" y="66" width="100" height="72" class="fg-box"/>
+        <text x="110" y="86" text-anchor="middle" class="t-sm">category 1</text>
+        <text x="110" y="106" text-anchor="middle" class="t-sm">category 2</text>
+        <text x="110" y="126" text-anchor="middle" class="t-sm">…</text>
+        <text x="230" y="98" text-anchor="middle" class="t-sm t-mut">number or %</text>
+        <rect x="40" y="138" width="140" height="24" class="fg-ink"/>
+        <rect x="180" y="138" width="100" height="24" class="fg-ink"/>
+        <text x="110" y="154" text-anchor="middle" class="t-sm t-b">Total</text>
+        <text x="230" y="154" text-anchor="middle" class="t-sm t-b">n</text>
+        <rect x="40" y="172" width="240" height="26" rx="6" class="fg-good"/>
+        <text x="160" y="189" text-anchor="middle" class="t-sm">Source of data</text>
+      </svg>
+    caption: عنوان يجاوب what, who, where, when؛ عمود للـ variable بالـ categories؛ عمود للـ frequency (رقم أو %)؛ total =
+      n؛ وتحت المصدر.
+    alt: 'Table skeleton: title box, header row variable and frequency, category rows, total row with n, source of data box.'
+  - kind: check
+    page: 36
+    quote: |-
+      | Parasites | n | % |
+      |---|---|---|
+      | Giardia lamblia | 6 | 28.57 |
+      | Ascaris lumbricoides | 6 | 28.57 |
+      | Enterobius vermicularis | 6 | 28.57 |
+      | Entamoeba histolytica | 3 | 14.29 |
+      | Total | 21 | 100.00 |
+    question: Ascaris was found 6 times among 21 parasites. Its relative frequency?
+    options:
+    - 28.57%
+    - 6%
+    - 14.29%
+    - 21%
+    answer: 0
+    why:
+    - 'صح: 6 ÷ 21 × 100.'
+    - 6 ده العدد مش النسبة.
+    - 14.29% دي الـ Entamoeba (3 من 21).
+    - 21 ده الـ total.
+  - kind: explain
+    page: 41
+    quote: |-
+      Width of interval
+      Usually 5 or 10 or 15… etc.
+      all of the same size unless otherwise indicated.
+      Permissible number of 4-12 intervals.
+      If resulting intervals < 4
+      Therefore width less than 5.
+      If resulting intervals >12
+      reconstruct the table using a width greater than 5.
+    title: نبني الفئات إزاي؟
+    text: |-
+      **أول فئة**: لو أصغر قيمة 0 أو 5 ابدأ بيها، وإلا ==أقرب رقم مدوّر أقل منها==.
+
+      **الـ width**: عادة 5 أو 10 أو 15، والفئات كلها قد بعض.
+
+      **عدد الفئات**: ==4 لـ 12==. أقل من 4 = بتخسر precision كتير؛ أكتر من 12 = الجدول مبقاش ملخّص.
+    remind: [res.L15.042]
+  - kind: check
+    page: 42
+    quote: |-
+      Smallest =12 largest =79
+      Therefore first interval at 10.
+      10–
+      20–
+      30–
+      40–
+      50–
+      60–
+      70–80
+    question: 'Weights range from 12 to 79. The first interval starts at:'
+    options:
+    - '10'
+    - '12'
+    - '0'
+    - '5'
+    answer: 0
+    why:
+    - 'صح: 12 مش 0 ولا 5، فنروح لأقرب رقم مدوّر تحته: 10، والفئات 10–، 20–، … 70–80.'
+    - 12 هي القيمة نفسها؛ القاعدة بتدوّر لتحت.
+    - 0 بس لو أصغر قيمة 0.
+    - 5 بس لو أصغر قيمة 5.
+  - kind: table
+    page: 44
+    quote: |-
+      Duplication of the limits of intervals must be avoided by one of the 4 methods
+      | A | B | C | D |
+      |---|---|---|---|
+      | 10 to less than 15 | 10-14 | 10- | 10-14.9 |
+      | 15 to less than 20 | 15-19 | 15- | 15-19.9 |
+      | 20 to less than 25 | 20-24 | 20- | 20-24.9 |
+      | 25 to less than 30 | 25-29 | 25<30 | 25-29.9 |
+      A and C continuous / discrete
+      B discrete variables
+      D continuous.
+    title: 'متكررش الحد في فئتين: 4 طرق'
+    columns:
+    - Method
+    - Example
+    - Suits
+    rows:
+    - - A
+      - 10 to less than 15
+      - Continuous / discrete
+    - - B
+      - 10-14
+      - Discrete
+    - - C
+      - 10-
+      - Continuous / discrete
+    - - D
+      - 10-14.9
+      - Continuous
+    hide:
+    - - 1
+      - 2
+    - - 3
+      - 2
+  - kind: figure
+    page: 49
+    quote: |-
+      Each interval in the table has the following:
+      First interval:
+      L.L= 65
+      U.L = 69.999, practically ≈ 70
+      W (Continuous quantitative variable) = U.L. – L.L. = 70 – 65 = 5
+      Mid point (x)= (UL+LL)/2=65+70=67.5
+      Number of observations (f)= 22
+    title: الـ width والـ midpoint
+    svg: |-
+      <svg viewBox="0 0 330 150" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 90H310" class="fg-ink"/>
+        <g class="t-sm" text-anchor="middle">
+          <text x="60" y="110">65</text><text x="160" y="110">70</text><text x="260" y="110">75</text>
+        </g>
+        <rect x="60" y="50" width="100" height="40" class="fg-acc"/>
+        <rect x="160" y="64" width="100" height="26" class="fg-box"/>
+        <text x="110" y="74" text-anchor="middle" class="t-sm t-b">f = 22</text>
+        <text x="210" y="82" text-anchor="middle" class="t-sm">f = 15</text>
+        <path d="M110 90V126" class="fg-thin"/>
+        <text x="110" y="140" text-anchor="middle" class="t-sm t-acc">midpoint 67.5</text>
+        <text x="60" y="40" text-anchor="middle" class="t-sm t-mut">LL</text>
+        <text x="160" y="40" text-anchor="middle" class="t-sm t-mut">UL ≈ 70</text>
+        <path d="M62 24H158" class="fg-arrow"/>
+        <text x="110" y="18" text-anchor="middle" class="t-sm">width = 70 − 65 = 5</text>
+      </svg>
+    caption: 'الفئة 65– (من 65 لأقل من 70): LL = 65، UL ≈ 70، width = 5، midpoint = 67.5.'
+    alt: Number line with interval 65 to 70 shaded, frequency 22, width 5 marked above and midpoint 67.5 marked below.
+  - kind: explain
+    page: 50
+    quote: |-
+      Example for discrete quantitative variable:
+      Last interval:
+      L.L. = 3
+      U.L. = 4
+      Width (discrete) = (U.L. – L.L.) + 1 = (4 – 3) + 1
+      = 2 (No. of counts within the interval e.g. (3 & 4 = 2).
+      Mid point (x)= (3+4)/2=3.5
+      Number of observations(f)=25
+    title: الـ discrete بيزيد واحد
+    text: |-
+      - **Continuous**: width = ==UL − LL== (70 − 65 = 5).
+      - **Discrete**: width = ==(UL − LL) + 1==، لأنه بيعد القيم: الفئة 3–4 فيها رقمين (3 و4)، يعني width = 2.
+
+      والـ **midpoint** في الحالتين = (UL + LL) ÷ 2: يعني 67.5 و3.5.
+  - kind: check
+    page: 49
+    quote: |-
+      Each interval in the table has the following:
+      First interval:
+      L.L= 65
+      U.L = 69.999, practically ≈ 70
+      W (Continuous quantitative variable) = U.L. – L.L. = 70 – 65 = 5
+      Mid point (x)= (UL+LL)/2=65+70=67.5
+      Number of observations (f)= 22
+    question: Hb% intervals 65-, 70-, 75-… What is the midpoint of the 70- interval?
+    options:
+    - '72.5'
+    - '70'
+    - '75'
+    - '67.5'
+    answer: 0
+    why:
+    - 'صح: من 70 لأقل من 75، (70 + 75) ÷ 2.'
+    - 70 الـ lower limit.
+    - 75 الـ upper limit.
+    - 67.5 midpoint الفئة الأولى.
+  - kind: aside
+    page: 54
+    quote: |-
+      N.B.:
+      we should avoid open ended table
+      i.e.
+      lower limit of first interval
+      and/or upper limit of last interval are:
+      missed or unknown.
+    tone: exam
+    text: |-
+      اتجنب الـ ==open-ended table==: الجدول اللي أول lower limit أو آخر upper limit فيه مش معروف. من غير الحدود مش هتعرف تحسب midpoint، وبالتالي مفيش mean.
+  - kind: try
+    items: [res.L15.035, res.L15.040, res.L15.044, res.L15.049, res.L15.050]
+  recap:
+  - '3 طرق عرض: numerical، graphical، mathematical.'
+  - '4 جداول: simple، association (2 × 2، c × r)، comparing، two way.'
+  - أول فئة = أقرب رقم مدوّر تحت أصغر قيمة؛ 4–12 فئة.
+  - 'Width: continuous UL − LL، discrete (UL − LL) + 1؛ midpoint = (UL + LL) ÷ 2.'
+  - اتجنب الـ open-ended table.
+  practice: [res.L15.031, res.L15.032, res.L15.033, res.L15.034, res.L15.035, res.L15.036, res.L15.037, res.L15.038, res.L15.039,
+    res.L15.040, res.L15.041, res.L15.042, res.L15.043, res.L15.044, res.L15.045, res.L15.046, res.L15.047, res.L15.048, res.L15.049,
+    res.L15.050, res.L15.051, res.L15.052, res.L15.053, res.L15.054]
+- id: res.L15.lesson4
+  title: 'جداول المقارنة والارتباط: اسم الجدول من شكله'
+  hook: 'في الامتحان السؤال سهل: «Give the name of this table». بس لازم تعرف تبص على إيه.'
+  minutes: 8
+  pages: [55, 69]
+  topics: [comparing]
+  goals:
+  - تفرّق بين comparing وassociation وtwo way table
+  - تعرف إمتى 2 × 2 وإمتى c × r
+  - تقارن groups بأحجام مختلفة صح
+  status: unverified
+  steps:
+  - kind: explain
+    page: 55
+    quote: |-
+      Comparing frequency distribution table
+      Distribution of 2 or more different groups according to 1 variable.
+      The total groups should have the same total frequencies
+      Otherwise
+      Calculate the percent of total for each frequency
+    title: Comparing frequency distribution table
+    text: |-
+      ==أكتر من group== موزّعين على ==متغير واحد==، زي **L.B.W.** والـ normal babies حسب تعليم الأم.
+
+      لازم الـ groups يبقى ليهم نفس الـ total. ولو مش متساويين؟ ==حوّل لـ %== جوه كل group قبل ما تقارن.
+  - kind: reveal
+    page: 55
+    quote: |-
+      Comparing frequency distribution table
+      Distribution of 2 or more different groups according to 1 variable.
+      The total groups should have the same total frequencies
+      Otherwise
+      Calculate the percent of total for each frequency
+    prompt: group فيه 55 والتاني 30. ليه تقارن بالـ % مش بالأعداد؟
+    answer: 'لأن الأعداد هتعكس **حجم الـ group** مش التوزيع: أي فئة في الـ group الكبير هتبان أكبر. الـ % جوه كل group بتخليك
+      تقارن التوزيع نفسه، وده اللي هتشوفه تاني في رسمة الـ blood groups.'
+  - kind: explain
+    page: 58
+    quote: |-
+      Table of association
+      It is used to show a relation between a condition and characteristic e.g. relation between smoking and lung cancer.
+      TYPES:
+      2 X2 table
+      c x r table
+    title: Table of association
+    text: |-
+      بيوري **علاقة** بين condition وcharacteristic، زي smoking والـ lung cancer.
+
+      - **2 × 2**: كل متغير ليه احتمالين (smoker/non-smoker × cancer yes/no).
+      - **c × r**: واحد منهم أو الاتنين ليه ==أكتر من احتمالين== (Drug A/B/C × cured/improved/worsened).
+  - kind: explain
+    page: 62
+    quote: |-
+      IV. Two way table or two way classification table
+      1 group
+      2 quantitative variables
+      (dependent & independent variables).
+      It is assumed that these 2 variables are related to each others
+      To find any correlation between these two variables
+    title: Two way classification table
+    text: |-
+      ==group واحد== متصنّف حسب ==متغيرين كميين== مرتبطين (dependent و independent)، والهدف تشوف الـ **correlation** بينهم: weight و height، أو age و BP.
+  - kind: match
+    page: 63
+    quote: |-
+      One group classified into 2 QUANTITATIVE related variables to find correlation between these variables (wt and ht, age and BP)
+      | Weight | Height 150- | 155- | 160- | 165- | 170-175 | Total |
+      |---|---|---|---|---|---|---|
+      | 60- | 18 | 5 | 2 | - | - | 25 |
+      | 65- | 15 | 8 | 7 | 2 | - | 32 |
+      | 70- | 11 | 15 | 8 | 2 | 2 | 38 |
+      | 75- | 7 | 15 | 10 | 5 | 3 | 40 |
+      | 80- 85 | - | 2 | 5 | 1 | 7 | 15 |
+      | Total | 51 | 45 | 32 | 10 | 12 | 150 |
+    prompt: وصّل كل مثال باسم جدوله
+    pairs:
+    - - Blood groups A, B, AB, O with frequencies
+      - Simple frequency distribution
+    - - LBW vs normal babies by mother's education
+      - Comparing frequency distribution
+    - - Smokers vs non-smokers by lung cancer yes/no
+      - 2 × 2 association
+    - - Drugs A, B, C by cured/improved/worsened
+      - c × r association
+    - - 150 people by weight and height intervals
+      - Two way classification
+    why: 'عدّ المتغيرات والـ groups: متغير واحد = simple؛ groups بمتغير واحد = comparing؛ علاقة فئات = association؛ متغيرين
+      كميين لـ group واحد = two way.'
+  - kind: check
+    page: 67
+    quote: |-
+      2-To show the relation between occurrence of cancer colon and eating fast food, the suitable type of table that could be used to represent such relation is
+      Table of association or contingency table
+    question: 'To show the relation between cancer colon and eating fast food, use:'
+    options:
+    - Table of association (contingency)
+    - Two way classification table
+    - Simple frequency table
+    answer: 0
+    why:
+    - 'صح: علاقة بين condition وcharacteristic.'
+    - الـ two way لمتغيرين كميين.
+    - الـ simple لمتغير واحد.
+  - kind: check
+    page: 66
+    quote: |-
+      Answer
+      Simple frequency distribution table
+      The variable is qualitative nominal
+    question: A table of blood groups with frequencies (total 20) is a … and its variable is …
+    options:
+    - Simple frequency table; qualitative nominal
+    - Comparing table; qualitative ordinal
+    - Association table; nominal
+    answer: 0
+    why:
+    - 'صح: متغير واحد، فئات من غير ترتيب.'
+    - مفيش غير group واحد، والـ blood groups ملهاش ترتيب.
+    - الـ association محتاج متغيرين.
+  - kind: aside
+    page: 66
+    quote: |-
+      Answer
+      Simple frequency distribution table
+      The variable is qualitative nominal
+    tone: exam
+    text: |-
+      سؤال «name the table» ليه خطوتين: ==عدّ المتغيرات== وحدد ==نوع كل متغير==، وبعدين اختار الاسم. ومتنساش تكتب نوع المتغير كمان.
+  - kind: try
+    items: [res.L15.055, res.L15.057, res.L15.059, res.L15.061]
+  recap:
+  - 'Comparing: groups × متغير واحد؛ لو الـ totals مختلفة حوّل لـ %.'
+  - 'Association: 2 × 2 أو c × r (أكتر من احتمالين).'
+  - 'Two way: group واحد × متغيرين كميين، للـ correlation.'
+  practice: [res.L15.055, res.L15.056, res.L15.057, res.L15.058, res.L15.059, res.L15.060, res.L15.061, res.L15.062, res.L15.063,
+    res.L15.064, res.L15.065]
+- id: res.L15.lesson5
+  title: 'الرسمة المناسبة: خط ولا عمدان ولا تورتة؟'
+  hook: كل رسمة ليها نوع بيانات. الـ histogram لنوع معيّن، والـ pie لنوع تاني، والامتحان بيسأل عن الفرق.
+  minutes: 10
+  pages: [70, 123]
+  topics: [graphs]
+  goals:
+  - تختار الرسمة حسب نوع المتغير
+  - تحسب زاوية الـ pie chart
+  - تفرّق بين bar chart وhistogram وfrequency polygon
+  status: unverified
+  steps:
+  - kind: figure
+    page: 71
+    quote: |-
+      Line graph
+      Bar chart
+      Histogram
+      Frequency polygons
+      Pie chart
+      Others
+    title: 5 رسومات
+    svg: |-
+      <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path d="M10 80V10M10 80H100" class="fg-ink"/>
+          <path d="M14 66L36 48L58 54L80 26L96 34" class="fg-arrow-acc"/>
+          <text x="55" y="96" text-anchor="middle" class="t-sm t-b">Line graph</text>
+          <text x="55" y="110" text-anchor="middle" class="t-sm t-mut">X = time</text>
+        </g>
+        <g>
+          <path d="M125 80V10M125 80H215" class="fg-ink"/>
+          <rect x="132" y="40" width="14" height="40" class="fg-acc"/><rect x="156" y="20" width="14" height="60" class="fg-acc"/><rect x="180" y="50" width="14" height="30" class="fg-acc"/>
+          <text x="170" y="96" text-anchor="middle" class="t-sm t-b">Bar chart</text>
+          <text x="170" y="110" text-anchor="middle" class="t-sm t-mut">spaces</text>
+        </g>
+        <g>
+          <circle cx="285" cy="45" r="36" class="fg-box"/>
+          <path d="M285 45V9A36 36 0 0 1 318 59Z" class="fg-acc"/>
+          <text x="285" y="96" text-anchor="middle" class="t-sm t-b">Pie chart</text>
+          <text x="285" y="110" text-anchor="middle" class="t-sm t-mut">from 12, clockwise</text>
+        </g>
+        <g>
+          <path d="M40 185V125M40 185H150" class="fg-ink"/>
+          <rect x="50" y="160" width="20" height="25" class="fg-good"/><rect x="70" y="140" width="20" height="45" class="fg-good"/><rect x="90" y="128" width="20" height="57" class="fg-good"/><rect x="110" y="150" width="20" height="35" class="fg-good"/>
+          <text x="95" y="120" text-anchor="middle" class="t-sm t-b">Histogram (no spaces)</text>
+        </g>
+        <g>
+          <path d="M200 185V125M200 185H310" class="fg-ink"/>
+          <path d="M212 170L232 152L252 136L272 158L292 176" class="fg-arrow-acc"/>
+          <g class="fg-dot-acc"><circle cx="232" cy="152" r="3"/><circle cx="252" cy="136" r="3"/><circle cx="272" cy="158" r="3"/></g>
+          <text x="255" y="120" text-anchor="middle" class="t-sm t-b">Frequency polygon</text>
+        </g>
+      </svg>
+    caption: Line graph للزمن، bar chart بمسافات، pie chart من الساعة 12، histogram لازق، وfrequency polygon نقط على الـ midpoints.
+    alt: 'Five small sketches: line graph, bar chart with gaps, pie chart, histogram with touching bars, frequency polygon.'
+    remind: [res.L15.066]
+  - kind: explain
+    page: 72
+    quote: |-
+      Line Graph
+      Observation varies with TIME
+      Time on X axis
+      Variable quantitative continuous /discreet variables on Y axis
+      Data is presented by a line
+      Each observation : a dot opposite (X axis) and (Y axis)
+    title: Line graph
+    text: |-
+      لما القيمة ==بتتغير مع الزمن==: الزمن على X، والمتغير الكمي (continuous أو discrete) على Y، وكل نقطة قصاد X وY، والنقط متوصلة بخط.
+
+      أمثلة السلايدز: **temperature chart**، **birth rate**، **death rates** (زي CBR وCDR لـ country X من 2004 لـ 2008).
+  - kind: explain
+    page: 80
+    quote: |-
+      Bar chart
+      Qualitative /Quantitative discrete type
+      Each category, a bar
+      Height opposite corresponding frequency on Y axis.
+      Bars width equal
+      spaces
+    title: Bar chart
+    text: |-
+      - لـ **qualitative** أو ==quantitative discrete==.
+      - كل category عمود، طوله قصاد الـ frequency على Y.
+      - العمدان ==عرضها واحد== و==بينها مسافات==.
+  - kind: explain
+    page: 88
+    quote: |-
+      Pie Chart
+      All variables
+      Simple table /one variable
+      Circle sectors = number of categories or intervals
+      From 12 O'clock
+      Clockwise direction.
+      Sector is proportional to the frequency of the category.
+      Calculating the angle of each sector.
+      Angle = Frequency of the category or the interval x 360 / Total frequency
+      Comparisons: two pie charts.
+    title: Pie chart
+    text: |-
+      لمتغير واحد من simple table. القطاعات = عدد الفئات، تبدأ من ==الساعة 12== وتمشي ==مع عقارب الساعة==.
+
+      **Angle = frequency ÷ total × 360**
+
+      وللمقارنة؟ ارسم **pie chart اتنين**.
+  - kind: check
+    page: 89
+    quote: |-
+      | Type of parasite | Frequency | Angle |
+      |---|---|---|
+      | Ascaris | 6 | 86.4 |
+      | Bilharzia | 10 | 144.0 |
+      | Oxyuris | 5 | 72.0 |
+      | E. histolytica | 4 | 57.6 |
+      | Total | 25 | 360.0 |
+    question: Ascaris 6 of 25 parasites. Sector angle?
+    options:
+    - 86.4°
+    - 144°
+    - 24°
+    - 60°
+    answer: 0
+    why:
+    - 'صح: 6 ÷ 25 × 360.'
+    - 144° للـ Bilharzia (10 من 25).
+    - 24 دي النسبة % مش الزاوية.
+    - 60° لو كان العدد 6 من 36.
+  - kind: aside
+    page: 89
+    quote: |-
+      | Type of parasite | Frequency | Angle |
+      |---|---|---|
+      | Ascaris | 6 | 86.4 |
+      | Bilharzia | 10 | 144.0 |
+      | Oxyuris | 5 | 72.0 |
+      | E. histolytica | 4 | 57.6 |
+      | Total | 25 | 360.0 |
+    tone: trap
+    text: |-
+      رسمة الـ pie في السلايد 90 مكتوب عليها نسب (Ascaris 17%، Oxyuris 43%) ==مش بتاعة جدول السلايد 89== (6، 10، 5، 4 من 25 = 24%، 40%، 20%، 16%). الدكتورة نبّهت: اتأكد دايمًا إن النسب والزوايا جاية من الجدول اللي بترسمه.
+  - kind: explain
+    page: 91
+    quote: |-
+      The histogram
+      Continuous quantitative variables
+      Simple table/one variable
+      Each interval a column
+      Height opposite the frequency on Y axis.
+      X axis should be continuous
+      Column arises from the lower limit and upper limit of the on the X axis.
+      No space between the consecutive columns.
+      Scale break if lower limit of the first interval is far from zero,
+      Allowed only on the horizontal axis
+    title: Histogram
+    text: |-
+      - لـ ==continuous quantitative== من simple table.
+      - كل فئة عمود من الـ lower limit للـ upper limit على X، وطوله قصاد الـ frequency.
+      - X axis متصل، و==مفيش مسافات== بين العمدان.
+      - **Scale break** لو أول lower limit بعيد عن الصفر، ومسموح ==على الـ horizontal axis بس==.
+  - kind: explain
+    page: 94
+    quote: |-
+      The frequency polygon
+      Continuous quantitative variables
+      Table is of simple or complex type.
+      Each interval a single point opposite frequency on Y axis and opposite the mid-point of the interval on X axis.
+      Consecutive points are connected by straight line.
+      The scale break
+      key may be used when necessary.
+    title: Frequency polygon
+    text: |-
+      نفس بيانات الـ histogram، بس كل فئة ==نقطة واحدة== قصاد الـ frequency على Y و==الـ midpoint== على X، والنقط بتتوصل بخطوط مستقيمة.
+
+      ميزته: تقدر تحط ==اتنين على نفس الرسمة== (أطوال الولاد والبنات) مع key.
+  - kind: sort
+    page: 123
+    quote: |-
+      Examine yourself
+      Select all of the following statements which you believe to be true. A histogram:
+      Can be used instead of a pie chart to display categorical data.
+      Is similar to a bar chart but there are no gaps between the bars.
+      Contains contiguous bars, with the height of each bar being proportional to the frequency of the observations in the range specified by the bar.
+      Can be used to display either a frequency or a relative frequency distribution.
+      Is used to show the relationship between two variables.
+    prompt: 'الـ histogram: صح ولا غلط؟'
+    bins:
+    - 'True'
+    - 'False'
+    cards:
+    - text: Like a bar chart but no gaps between bars
+      bin: 0
+    - text: Bar height proportional to frequency in its range
+      bin: 0
+    - text: Can show frequency or relative frequency
+      bin: 0
+    - text: Can replace a pie chart for categorical data
+      bin: 1
+    - text: Shows the relationship between two variables
+      bin: 1
+    why: الصح العبارات التانية والتالتة والرابعة. الـ histogram لمتغير كمي continuous واحد، مش للفئات ولا للعلاقة بين متغيرين.
+  - kind: check
+    page: 91
+    quote: |-
+      The histogram
+      Continuous quantitative variables
+      Simple table/one variable
+      Each interval a column
+      Height opposite the frequency on Y axis.
+      X axis should be continuous
+      Column arises from the lower limit and upper limit of the on the X axis.
+      No space between the consecutive columns.
+      Scale break if lower limit of the first interval is far from zero,
+      Allowed only on the horizontal axis
+    question: 'In a histogram, a scale break is allowed on:'
+    options:
+    - The horizontal axis only
+    - The vertical axis only
+    - Both axes
+    answer: 0
+    why:
+    - 'صح: لما أول lower limit يبقى بعيد عن الصفر.'
+    - كسر محور الـ frequency يبوّظ أطوال العمدان.
+    - الـ X بس.
+  - kind: try
+    items: [res.L15.069, res.L15.071, res.L15.073, res.L15.076]
+  recap:
+  - 'Line graph: متغير كمي مع الزمن.'
+  - 'Bar chart: qualitative أو discrete، عمدان بمسافات.'
+  - 'Pie: angle = f ÷ total × 360، من الساعة 12 مع عقارب الساعة.'
+  - 'Histogram: continuous، من غير مسافات، scale break على X بس.'
+  - 'Frequency polygon: نقطة على الـ midpoint، وينفع اتنين على رسمة واحدة.'
+  practice: [res.L15.066, res.L15.067, res.L15.068, res.L15.069, res.L15.070, res.L15.071, res.L15.072, res.L15.073, res.L15.074,
+    res.L15.075, res.L15.076, res.L15.077, res.L15.078, res.L15.079, res.L15.080]
+- id: res.L15.lesson6
+  title: 'المتوسط والوسيط والمنوال: مين يمثّل البيانات؟'
+  hook: '6 مرضى transplant: 5 منهم تحت الـ 65، وواحد 623. المتوسط 135.8! مين فيهم بيكذب؟'
+  minutes: 10
+  pages: [97, 127]
+  topics: [central]
+  goals:
+  - تحسب الـ mean للـ ungrouped والـ grouped
+  - تحسب الـ median لـ n فردي وزوجي
+  - تحدد الـ mode وتعرف مزايا وعيوب كل مقياس
+  status: unverified
+  steps:
+  - kind: explain
+    page: 98
+    quote: |-
+      Measures of Central Tendency
+      I- Measures of central tendency
+      These are computed values around which most observations tend to concentrate or allocate.
+    title: Central tendency
+    text: |-
+      قيم محسوبة ==البيانات بتتجمع حواليها==. أشهرهم 3: **mean**، **median**، **mode**.
+
+      الـ **mean** = مجموع القيم ÷ عددها: للـ sample اسمه ==x̄ = Σx ÷ n==، وللـ population ==μ = Σx ÷ N==.
+  - kind: check
+    page: 103
+    quote: |-
+      Test yourself
+      Mean = sum of values / Sample size = Σ (values) / n
+      Suppose data are: 90, 80, 95, 85, 65
+      x1 = 90, x2 = 80, x3 = 95, x4 = 85, x5 = 65
+      x̄ = Σxi / n = (x1+x2+x3+x4+x5) / 5 = (90+80+95+85+65) / 5 = 83
+    question: Mean of 90, 80, 95, 85, 65?
+    options:
+    - '83'
+    - '85'
+    - '415'
+    answer: 0
+    why:
+    - 'صح: 415 ÷ 5.'
+    - 85 هو الـ median.
+    - 415 المجموع.
+  - kind: explain
+    page: 105
+    quote: |-
+      Calculate the mean.
+      | Age (year) | F | xi | fxi |
+      |---|---|---|---|
+      | 15- | 10 | 20 | 200 |
+      | 25- | 12 | 30 | 360 |
+      | 35- | 15 | 40 | 600 |
+      | 45- | 8 | 50 | 400 |
+      | 55 < 65 | 5 | 60 | 300 |
+      | Total | f=50 |  | fxi = 1860 |
+      x̄ = ΣfX / Σf = 1860 / 50 = 37.2years
+    title: Mean من جدول (grouped)
+    text: |-
+      1. هات **midpoint (X)** لكل فئة.
+      2. اضرب **f × X**.
+      3. اجمعهم = **ΣfX**.
+      4. اقسم على **Σf**.
+
+      مثال السلايد: ΣfX = 1860، Σf = 50 → ==x̄ = 37.2 years==.
+  - kind: explain
+    page: 108
+    quote: |-
+      Example:
+      Find the median age of the following values
+      5, 8, 7, 12 and 10 years.
+      Ordering the observation: 5, 7, 8, 10, 12
+      The rank of the median = (n+1)/2 = (5+1)/2 = 6/2 = 3
+      The median = 8 years.
+    title: 'Median: اللي واقف في النص'
+    text: |-
+      ==رتّب الأول== (أي غلطة هنا بتضيّع السؤال).
+
+      - **n فردي**: الـ rank = ==(n + 1) ÷ 2==. القيم 5، 8، 7، 12، 10 ← 5، 7، 8، 10، 12 ← الـ rank 3 ← **8 years**.
+      - **n زوجي**: الـ ranks = n/2 و n/2 + 1، والـ median ==متوسطهم==. القيم 8، 6، 12، 3، 5، 7 ← 3، 5، 6، 7، 8، 12 ← (6 + 7) ÷ 2 = **6.5 kg**.
+  - kind: explain
+    page: 113
+    quote: |-
+      Definitions
+      Mode
+      the score that occurs most frequently
+      Bimodal
+      Multimodal
+      No Mode
+      denoted by M
+      the only measure of central tendency that can be used with nominal data
+    title: 'Mode: الأكتر تكرار'
+    text: |-
+      القيمة اللي بتتكرر أكتر، ورمزها **M**. ممكن تلاقي اتنين (**bimodal**)، أكتر (**multimodal**)، أو ==No mode== لو كله متكرر بنفس العدد.
+
+      وهو ==الوحيد اللي ينفع مع الـ nominal data==.
+  - kind: check
+    page: 119
+    quote: |-
+      For qualitative data
+      Modal interval (opposite the highest frequency)= "married" in the following table
+      | Marital Status | Frequency |
+      |---|---|
+      | Single | 2 |
+      | Married | 10 |
+      | Divorced | 4 |
+      | Widow | 3 |
+      | Total | 19 |
+    question: 'Single 2, married 10, divorced 4, widow 3. The mode is:'
+    options:
+    - Married
+    - '10'
+    - '19'
+    answer: 0
+    why:
+    - 'صح: الـ mode هو الفئة نفسها.'
+    - ده التكرار بتاعها، فخ مشهور.
+    - ده الـ total.
+  - kind: aside
+    page: 118
+    quote: |-
+      Examples:
+      Modal interval = 30<35 kg.
+      Mid-point of modal interval = 32.5 kg (is better).
+      | Weight (kg) | Frequency |
+      |---|---|
+      | 20- | 2 |
+      | 25- | 4 |
+      | 30- | 10 |
+      | 35- | 5 |
+      | 40-45 | 3 |
+      | Total | 24 |
+    tone: tip
+    text: |-
+      في الجدول (grouped): الـ **modal interval** = الفئة قصاد أعلى frequency (30<35 kg)، والـ ==midpoint of the modal interval== (32.5 kg) أحسن، بس للـ quantitative بس.
+  - kind: figure
+    page: 122
+    quote: |-
+      Mean = 135.8
+      Median = 55
+      Mode = 64
+    title: الـ outlier بيشد الـ mean
+    svg: |-
+      <svg viewBox="0 0 330 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 70H320" class="fg-ink"/>
+        <g class="fg-dot-acc"><circle cx="14" cy="70" r="5"/><circle cx="26" cy="70" r="5"/><circle cx="40" cy="70" r="5"/><circle cx="52" cy="62" r="5"/><circle cx="52" cy="76" r="5"/></g>
+        <circle cx="310" cy="70" r="6" class="fg-dot-bad"/>
+        <text x="310" y="94" text-anchor="middle" class="t-sm t-bad">623</text>
+        <path d="M38 40V100" class="fg-thin"/>
+        <text x="38" y="34" text-anchor="middle" class="t-sm t-good">median 55</text>
+        <path d="M52 52V44" class="fg-thin"/>
+        <text x="80" y="116" text-anchor="middle" class="t-sm">mode 64</text>
+        <path d="M130 40V100" class="fg-arrow-bad"/>
+        <text x="140" y="34" text-anchor="middle" class="t-sm t-bad">mean 135.8</text>
+      </svg>
+    caption: '3، 15، 46، 64، 64، 623: الـ median 55 والـ mode 64 فضلوا مع البيانات، والـ mean اتشد لـ 135.8 بسبب 623.'
+    alt: 'Dot plot: five values clustered left, one outlier at 623 far right; median and mode marked near the cluster, mean
+      marked far toward the outlier.'
+    remind: [res.L15.086, res.L15.092, res.L15.101]
+  - kind: table
+    page: 120
+    quote: |-
+      Advantages & Disadvantages
+      Advantages:
+      It can be used in all types of variables.
+      It is not affected by extremes or out-lying observation.
+      Can be used to determine the average from open ended table
+      Disadvantages:
+      Sometimes can not be determined, this happens when all observations have the same frequency.
+      Sometimes we may obtain two modes (bimodal) or more (multimodal) from the same group of data.
+    title: مين ينفع فين؟
+    columns:
+    - Feature
+    - Mean
+    - Median
+    - Mode
+    rows:
+    - - Qualitative nominal
+      - 'No'
+      - 'No'
+      - 'Yes'
+    - - Qualitative ordinal
+      - 'No'
+      - 'Yes'
+      - 'Yes'
+    - - Affected by extreme values
+      - 'Yes'
+      - 'No'
+      - 'No'
+    - - Open-ended table
+      - 'No'
+      - 'Yes'
+      - 'Yes'
+    hide:
+    - - 0
+      - 3
+    - - 2
+      - 1
+    - - 3
+      - 1
+  - kind: case
+    page: 126
+    quote: |-
+      In nine families surveyed, the numbers of children per family were: 4, 6, 2, 2, 4, 3, 2, 1 and 7 respectively.
+      |  | A | B | C | D | E | Answer |
+      |---|---|---|---|---|---|---|
+      | 1. The mean | 3.2 | 2.3 | 3.4 | 2 | 3.7 |  |
+      | 2. The Median | 4 | 4 & 2 | 3 | 2 | 2.5 |  |
+      | 3. The mode | 7 | 4 | 3 | 2 | No mode |  |
+    stem: 'In nine families surveyed, the numbers of children per family were: 4, 6, 2, 2, 4, 3, 2, 1 and 7.'
+    steps:
+    - question: 'The mean is:'
+      options:
+      - '3.4'
+      - '3.2'
+      - '2.3'
+      - '3.7'
+      answer: 0
+      why: 31 ÷ 9 = 3.44 ≈ 3.4.
+    - question: 'The median is:'
+      options:
+      - '3'
+      - '4'
+      - 4 & 2
+      - '2.5'
+      answer: 0
+      why: 'مترتبين: 1، 2، 2، 2، 3، 4، 4، 6، 7؛ الـ rank (9 + 1) ÷ 2 = 5 ← 3.'
+    - question: 'The mode is:'
+      options:
+      - '2'
+      - '4'
+      - '7'
+      - No mode
+      answer: 0
+      why: 2 متكررة 3 مرات.
+  - kind: try
+    items: [res.L15.086, res.L15.092, res.L15.094, res.L15.101]
+  recap:
+  - Mean = Σx ÷ n؛ grouped = ΣfX ÷ Σf.
+  - 'Median: رتّب، (n + 1) ÷ 2 للفردي، ومتوسط الاتنين اللي في النص للزوجي.'
+  - 'Mode: الأكتر تكرار؛ الوحيد للـ nominal؛ ممكن bimodal أو no mode.'
+  - الـ mean بيتأثر بالـ outliers ومينفعش مع open-ended table؛ الـ median والـ mode لأ.
+  practice: [res.L15.081, res.L15.082, res.L15.083, res.L15.084, res.L15.085, res.L15.086, res.L15.087, res.L15.088, res.L15.089,
+    res.L15.090, res.L15.091, res.L15.092, res.L15.093, res.L15.094, res.L15.095, res.L15.096, res.L15.097, res.L15.098, res.L15.099,
+    res.L15.100, res.L15.101, res.L15.102, res.L15.103, res.L15.104, res.L15.105, res.L15.106]
+- id: res.L15.lesson7
+  title: 'التشتت: المدى والانحراف المعياري'
+  hook: مجموعتين متوسطهم 5 الاتنين، بس واحدة متلمّة والتانية مفروشة. المتوسط لوحده مش كفاية.
+  minutes: 9
+  pages: [128, 141]
+  topics: [dispersion]
+  goals:
+  - تفهم ليه محتاجين measure of dispersion
+  - تحسب الـ range والـ SD والـ variance
+  - تعرف إمتى تقسم على n − 1 وإمتى على n
+  status: unverified
+  steps:
+  - kind: figure
+    page: 128
+    quote: |-
+      Measures of Variability
+      What is variability?
+      The degree of dispersion (spread) of data points in a distribution
+      Data set: 3 5 7 (x̄ = 5)
+      Data points all fairly "close" together
+      Data set: 0 5 10 (x̄ = 5)
+      Data points relatively "far" apart
+    title: نفس المتوسط، فرشة مختلفة
+    svg: |-
+      <svg viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 40H300M20 96H300" class="fg-ink"/>
+        <g class="t-sm t-mut"><text x="20" y="22">3, 5, 7</text><text x="20" y="78">0, 5, 10</text></g>
+        <g class="fg-dot-acc"><circle cx="132" cy="40" r="5"/><circle cx="160" cy="40" r="5"/><circle cx="188" cy="40" r="5"/>
+        <circle cx="90" cy="96" r="5"/><circle cx="160" cy="96" r="5"/><circle cx="230" cy="96" r="5"/></g>
+        <path d="M160 26V110" class="fg-thin"/>
+        <text x="160" y="118" text-anchor="middle" class="t-sm t-acc">x̄ = 5 for both</text>
+        <text x="300" y="34" text-anchor="end" class="t-sm t-good">close</text>
+        <text x="300" y="90" text-anchor="end" class="t-sm t-bad">far apart</text>
+      </svg>
+    caption: '3، 5، 7 و 0، 5، 10: الاتنين x̄ = 5، بس التانية مفروشة أكتر.'
+    alt: 'Two number lines: 3, 5, 7 close together and 0, 5, 10 far apart, both centred on 5.'
+  - kind: explain
+    page: 129
+    quote: |-
+      Measures of Dispersion (variability)
+      Range
+      Variance
+      Standard Deviation
+      IQR
+      Standard Error
+      Confidence Intervals
+    title: مقاييس التشتت
+    text: |-
+      الـ **variability** = درجة ==انتشار== البيانات. مقاييسها في السلايد: **range**، **variance**، ==standard deviation==، **IQR**، **standard error**، **confidence intervals**.
+    remind: [res.L15.108]
+  - kind: explain
+    page: 130
+    quote: |-
+      The Range
+      Conceptual definition: difference between the 2 extreme scores in the distribution
+      Calculated: range = X max – X min
+      Scores: 4, 8, 10, 16, 26
+      Range: 26 – 4 = 22
+      | Advantages | Disadvantages |
+      |---|---|
+      | Easy to calculate | Only uses the 2 extreme scores |
+      | Makes conceptual sense | Not resistant to outliers |
+    title: Range
+    text: |-
+      **Range = X max − X min**: 4، 8، 10، 16، 26 ← 26 − 4 = **22**.
+
+      - مزاياه: ==سهل== ومفهوم.
+      - عيوبه: بيستخدم ==أكبر وأصغر قيمة بس==، ومش resistant للـ outliers.
+  - kind: explain
+    page: 131
+    quote: |-
+      Standard Deviation σ
+      The standard deviation abbreviated as S.D and symbolically represented as sigma is the most important and wide used measure of dispersion.
+      It is defined as the positive square root of deviation of values from their mean i.e. it is the square root of the means of square deviation of values from their mean. The square of the s.d. is called the variance.
+      It is the typical (standard) difference (deviation) of an observation from the mean
+      It is the average distance a data point is from the mean.
+    title: Standard deviation
+    text: |-
+      أهم وأشهر مقياس تشتت. هو ==متوسط بُعد النقطة عن الـ mean==: الجذر التربيعي الموجب لمتوسط مربعات الانحرافات.
+
+      ومربعه هو الـ ==variance==.
+  - kind: order
+    page: 132
+    quote: |-
+      Standard Deviation (S)
+      First step
+      is obtaining the deviation of each value from the arithmetic mean.
+      Second step
+      is to square the deviation from the mean.
+      Third step:
+      The squared deviations are summed and divided by the number of observations minus one (n-1) to get the variance (S2)
+      Fourth step:
+      The square root of variance (S2) gives us the standard deviation(S).
+    prompt: رتّب خطوات حساب الـ SD
+    steps:
+    - Deviation of each value from the mean
+    - Square each deviation
+    - Sum and divide by n − 1 → variance (S²)
+    - Square root → SD (S)
+    why: انحراف، تربيع، جمع وقسمة (variance)، وبعدين جذر (SD). التربيع عشان السالب والموجب ميلغوش بعض.
+  - kind: aside
+    page: 133
+    quote: 'N.B.: If n is equal to or more than 30 we divide only by n instead of n-1.'
+    tone: exam
+    text: |-
+      الـ sample بنقسم على ==n − 1==، بس لو ==n ≥ 30== بنقسم على **n**. والـ population formula على **N**. والدكتورة قالت إن القانون هيجي مع السؤال في الامتحان: ركّز على الخطوات والتعويض.
+  - kind: case
+    page: 134
+    quote: |-
+      Example: Find the standard deviation of the following weight values 5, 7, 4, 8 and 6 Kg.
+      Solution:
+      1- X̄ = ΣX / n = 30 / 5 = 6 Kg
+      2- Deviation of values from X̄
+      5 – 6 = - 1
+      7 – 6 = + 1
+      4 – 6 = - 2
+      8 – 6 = + 2
+      6 – 6 = 0
+      3- Square the deviation and sum
+      (-1)² + (+1)² + (-2)² + (+2)² + (0)² = 1+1+4+4= 10
+      S = √[ Σ(X – X̄)² / (n – 1) ] = √(10/4) = √2.5 = 1.58 Kg
+    stem: Find the standard deviation of the weights 5, 7, 4, 8 and 6 kg.
+    steps:
+    - question: 'The mean is:'
+      options:
+      - 6 kg
+      - 5 kg
+      - 30 kg
+      answer: 0
+      why: 30 ÷ 5 = 6.
+    - question: 'Sum of squared deviations:'
+      options:
+      - '10'
+      - '0'
+      - '2.5'
+      answer: 0
+      why: (−1)² + 1² + (−2)² + 2² + 0² = 10. ومجموع الانحرافات من غير تربيع = 0 دايمًا.
+    - question: 'The SD is:'
+      options:
+      - 1.58 kg
+      - 2.5 kg
+      - 1.41 kg
+      answer: 0
+      why: 10 ÷ (5 − 1) = 2.5 (variance)، √2.5 = 1.58. و1.41 لو قسمت غلط على 5.
+  - kind: explain
+    page: 139
+    quote: |-
+      S = √[ (ΣfX² – (ΣfX)²/Σf) / (Σf – 1) ] = √[ (76800 – (1860)²/50) / 50 ] = √[ (76800 – 69192) / 50 ]
+      = √(7608/50) = √152.15 = 12.3353 years
+    title: SD من جدول (grouped)
+    text: |-
+      هات الـ midpoints، وبعدين **fX** و**fX²** ومجاميعهم، وعوّض:
+
+      S = √[(ΣfX² − (ΣfX)² ÷ Σf) ÷ (Σf − 1)]
+
+      مثال السلايد: (76800 − 1860² ÷ 50) = 7608. ولأن ==n = 50 ≥ 30== السلايد قسم على **50**: 152.15 ← ==S = 12.34 years==.
+  - kind: check
+    page: 141
+    quote: |-
+      Variance
+      standard deviation squared
+    question: 'If SD = 3, the variance is:'
+    options:
+    - '9'
+    - '1.73'
+    - '6'
+    answer: 0
+    why:
+    - 'صح: الـ variance = مربع الـ SD، يعني 3 × 3.'
+    - 1.73 ده √3.
+    - 6 ده 2 × 3.
+  - kind: try
+    items: [res.L15.107, res.L15.109, res.L15.112, res.L15.113]
+  recap:
+  - 'الـ mean لوحده مش كفاية: لازم measure of dispersion.'
+  - 'Range = max − min: سهل بس بيتأثر بالـ outliers.'
+  - 'SD: انحراف ← تربيع ← جمع ÷ (n − 1) ← جذر؛ n ≥ 30 قسمة على n.'
+  - الـ variance = مربع الـ standard deviation.
+  practice: [res.L15.107, res.L15.108, res.L15.109, res.L15.110, res.L15.111, res.L15.112, res.L15.113, res.L15.114, res.L15.115,
+    res.L15.116, res.L15.117, res.L15.118]

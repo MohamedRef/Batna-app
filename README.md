@@ -31,10 +31,10 @@ never goes in git; items paraphrase it and cite the page.
 | Diabetes, Metabolism, Lipids (`dm`) | 23 | 23 |
 | Geriatrics (`geri`) | 13 | 13 |
 | Nephrology (`neph`) | 14 | 14 |
-| Basics of Research (`res`) | 12 | 12 |
-| **Total** | **133** | **133** |
+| Basics of Research (`res`) | 15 | 15 |
+| **Total** | **136** | **136** |
 
-Plus 96 calculators (each cites its original paper, and every result band
+Plus 98 calculators (each cites its original paper, and every result band
 says what it means, the next step and the differential), an abbreviations
 dictionary per course, normal-range chips on lab values and a تحشيشة
 (Egyptian-Arabic mnemonic) for every list.

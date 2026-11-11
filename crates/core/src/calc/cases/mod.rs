@@ -18,6 +18,7 @@
 
 mod blood;
 mod diabetes;
+mod diagnostic;
 mod geri;
 mod gi;
 mod liver;
@@ -181,6 +182,7 @@ fn tables() -> Vec<Table> {
         blood::tables(),
         research::tables(),
         sample_size::tables(),
+        diagnostic::tables(),
         significance::tables(),
     ]
     .into_iter()

@@ -9,8 +9,11 @@
 //! `/mnt/project-files/medstudy/anki/make_apkg.py` (genanki), so decks
 //! imported from either one update in place and keep their review history.
 //!
-//! Note types: Batna Basic (Front, Back, Source, Update, Id) and Batna Cloze
-//! (Text, Extra, Source, Update, Id). MCQ, enumerate, essay, order and calc
+//! Note types: Batna Basic (Front, Back, Source, Update, Id, Notes) and Batna
+//! Cloze (Text, Extra, Source, Update, Id, Notes). `Notes` holds Mohamed's own
+//! note on the item (`batna_core::note`), shown last on the back; it was added
+//! after make_apkg.py, so the first import of a deck with it asks Anki to
+//! update the note type (adapted from Steps-app main: crates/anki/src/lib.rs). MCQ, enumerate, essay, order and calc
 //! items become Basic notes; a case becomes one note per step and a table one
 //! note per blank. Tags: `hb::L01`, `topic::<slug>`, `approved` or
 //! `unverified`, `draft` for unmerged lectures, and the item's own tags.
@@ -29,10 +32,10 @@ const CSS: &str = ".card{font-family:system-ui,sans-serif;font-size:18px;line-he
 .nightMode .card{color:#e6ebe7;background:#1b211e}
 .src{margin-top:14px;font-size:13px;color:#6b766f}
 .upd{margin-top:10px;padding:6px 8px;border-left:3px solid #c08a1e;font-size:14px}
-.why{font-size:15px}.cloze{font-weight:bold;color:#2f6b4f}";
+.why{font-size:15px}.cloze{font-weight:bold;color:#2f6b4f}
+.mine{margin-top:10px;padding:6px 8px;border-left:3px solid #2f6b4f;font-size:15px}";
 
-const BACK_TAIL: &str =
-    r#"<div class="src">{{Source}}</div>{{#Update}}<div class="upd">Update: {{Update}}</div>{{/Update}}"#;
+const BACK_TAIL: &str = r#"<div class="src">{{Source}}</div>{{#Update}}<div class="upd">Update: {{Update}}</div>{{/Update}}{{#Notes}}<div class="mine">My note: {{Notes}}</div>{{/Notes}}"#;
 
 const LETTERS: &[u8] = b"ABCDEFGH";
 
@@ -52,6 +55,8 @@ pub struct Options<'a> {
     /// `Batna::Basics of Research::03 …`. Without it, lectures sit straight
     /// under `Batna` with their old names (`Batna::L01 …`).
     pub program: Option<&'a batna_core::program::Program>,
+    /// His notes by item id: each goes in the `Notes` field of the item's notes.
+    pub notes: Option<&'a BTreeMap<String, String>>,
 }
 
 fn has(set: Option<&BTreeSet<String>>, id: &str) -> bool {
@@ -77,8 +82,8 @@ impl Model {
 pub struct Note {
     pub model: Model,
     pub deck: i64,
-    /// Front/Back/Source/Update/Id, or Text/Extra/Source/Update/Id.
-    pub fields: [String; 5],
+    /// Front/Back/Source/Update/Id/Notes, or Text/Extra/Source/Update/Id/Notes.
+    pub fields: [String; 6],
     pub tags: Vec<String>,
     pub guid: String,
 }
@@ -183,6 +188,9 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Deck {
                 None => (item, item.status == Status::Approved || has(opts.approved, &item.id)),
             };
             let mut notes = notes_for(item, lec, did, approved);
+            if let Some(mine) = opts.notes.and_then(|n| n.get(&item.id)) {
+                notes.iter_mut().for_each(|n| n.fields[5] = esc(mine));
+            }
             if draft {
                 notes.iter_mut().for_each(|n| n.tags.push("draft".into()));
             }
@@ -223,7 +231,7 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
     let basic = |front: String, back: String, suffix: &str| Note {
         model: Model::Basic,
         deck,
-        fields: [front, back, src.clone(), upd.clone(), format!("{id}{suffix}")],
+        fields: [front, back, src.clone(), upd.clone(), format!("{id}{suffix}"), String::new()],
         tags: tags.clone(),
         guid: guid_for(&format!("{id}{suffix}")),
     };
@@ -250,6 +258,7 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
                 src.clone(),
                 upd.clone(),
                 id.to_string(),
+                String::new(),
             ],
             tags: tags.clone(),
             guid: guid_for(id),
@@ -420,14 +429,14 @@ fn model_json(model: Model, deck: i64, now_s: i64) -> Value {
     let (name, fields, qfmt, afmt, kind) = match model {
         Model::Basic => (
             "Batna Basic",
-            ["Front", "Back", "Source", "Update", "Id"],
+            ["Front", "Back", "Source", "Update", "Id", "Notes"],
             "{{Front}}".to_string(),
             format!(r#"{{{{FrontSide}}}}<hr id="answer">{{{{Back}}}}{BACK_TAIL}"#),
             0,
         ),
         Model::Cloze => (
             "Batna Cloze",
-            ["Text", "Extra", "Source", "Update", "Id"],
+            ["Text", "Extra", "Source", "Update", "Id", "Notes"],
             "{{cloze:Text}}".to_string(),
             format!("{{{{cloze:Text}}}}<br>{{{{Extra}}}}{BACK_TAIL}"),
             1,
@@ -640,6 +649,31 @@ mod tests {
     }
 
     #[test]
+    fn his_note_rides_on_every_note_of_its_item() {
+        let lec = fixture();
+        let mine = BTreeMap::from([
+            ("hb.L01.006".to_string(), "Orthodeoxia <HPS>".to_string()),
+            ("hb.L01.001".to_string(), "Child-Pugh".to_string()),
+        ]);
+        let deck = build(std::slice::from_ref(&lec), &Options { notes: Some(&mine), ..Options::default() });
+        let field = |id: &str| deck.notes.iter().find(|n| n.fields[4] == id).map(|n| n.fields[5].clone());
+        assert_eq!(field("hb.L01.001").as_deref(), Some("Child-Pugh"));
+        // A case's every step carries it, escaped like any field.
+        assert_eq!(field("hb.L01.006#s1").as_deref(), Some("Orthodeoxia &lt;HPS&gt;"));
+        assert_eq!(field("hb.L01.006#s2").as_deref(), Some("Orthodeoxia &lt;HPS&gt;"));
+        let others = deck
+            .notes
+            .iter()
+            .filter(|n| n.fields[4] != "hb.L01.001" && !n.fields[4].starts_with("hb.L01.006"));
+        assert!(others.clone().count() > 0 && others.into_iter().all(|n| n.fields[5].is_empty()));
+        // The back shows it only when there is one.
+        assert!(BACK_TAIL.contains("{{#Notes}}") && BACK_TAIL.contains("{{Notes}}"));
+        // Without notes the field is empty everywhere.
+        let plain = build(std::slice::from_ref(&lec), &Options::default());
+        assert!(plain.notes.iter().all(|n| n.fields[5].is_empty()));
+    }
+
+    #[test]
     fn every_kind_becomes_notes() {
         let lec = fixture();
         let approved = BTreeSet::from(["hb.L01.001".to_string()]);
@@ -699,6 +733,7 @@ mod tests {
             edits: Some(&edits),
             drafts: Some(&drafts),
             program: None,
+            notes: None,
         };
         let deck = build(&[lec], &opts);
         assert_eq!(deck.skipped, 1);

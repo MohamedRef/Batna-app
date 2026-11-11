@@ -71,6 +71,7 @@ pub(super) static GUIDE_LISTS: &[&[(&str, Guide)]] = &[
     ipss_mf::GUIDES,
     research::GUIDES,
     sample_size::GUIDES,
+    diagnostic::GUIDES,
     significance::GUIDES,
 ];
 

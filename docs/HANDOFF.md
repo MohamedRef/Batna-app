@@ -564,7 +564,8 @@ further; don't change FSRS or Undo speculatively.
   a build of that commit, not a version or a feed. Unzip twice, move Batna.app
   to Applications, `xattr -dr com.apple.quarantine /Applications/Batna.app`.
   Fails rather than ship unsigned if `BATNA_MAC_CERT_*` is missing.
-- Linux apt installs in CI and Coverage go through `scripts/ci-apt-install.sh`:
+- Linux apt installs in CI and Coverage go through `scripts/ci-apt-install.sh`, and the
+  Settings/Screens browser runs call it with no packages before `playwright install --with-deps`:
   it walks a mirror list (Azure, archive.ubuntu.com, kernel.org, MIT), skips
   names that don't resolve, rewrites every file in `/etc/apt` (including
   `apt-mirrors.txt`) to the chosen mirror and time-boxes each try (on
@@ -613,6 +614,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: Settings and Screens browser runs point apt at a resolving mirror (`scripts/ci-apt-install.sh`) before `playwright install --with-deps`.
 - 2026-11-11: res.L18 (non-parametric tests, correlation, regression; 37 slides), res.L19 (introduction to EBM; 125 slides) and res.L20 (critical appraisal; 69 slides) from the enriched lecture PDFs (video frames + Arabic notes): slide text retyped from the images in `courses/res/text/L18–L20.txt`, Arabic notes kept beside them as `LNN-notes-ar.txt`; 45 + 115 + 100 items, 4 + 7 + 6 lessons; glossary gains ANOVA, MLogRA, CME, LBP, EBHC, GP, EMBASE, DARE, PIER, ARI, NNH, ES, PRISMA, STARD.
 - 2026-11-11: res.L17 (hypothesis testing, 33 slides from the enriched lecture PDF): 52 items, 5 lessons; calculators `chi_square` (2×2) and `t_test` (one sample, paired, two groups) reproduce the slides' coffee X² and haemoglobin t examples.
 - 2026-11-11: CI apt installs go through `scripts/ci-apt-install.sh` (first resolving mirror of Azure, archive.ubuntu.com, kernel.org, MIT; time-boxed) after ubuntu.com DNS failures hung CI for an hour.

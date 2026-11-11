@@ -66,6 +66,8 @@ jobs:
         env:
           APP_BROWSER_FIXTURES: ${{ github.workspace }}/target/screen-fixtures
         run: cargo test -p batna-app --no-default-features --locked export_screen_fixtures -- --ignored
+      - name: Point apt at an Ubuntu mirror that resolves
+        run: scripts/ci-apt-install.sh
       - name: Install the pinned test browser
         run: |
           npm install --prefix "$RUNNER_TEMP/browser-tools" --no-audit --no-fund playwright@1.62.1

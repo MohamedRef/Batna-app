@@ -254,10 +254,16 @@ pub const CALCULATORS: &[&str] = &[
     "nnt",
     "diagnostic_accuracy",
     "z_score",
+    "disease_duration",
+    "death_rate",
+    "perinatal_mr",
+    "mmr",
     "sample_size_survey",
     "sample_size_two_proportions",
     "predictive_values",
     "post_test_probability",
+    "chi_square",
+    "t_test",
 ];
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

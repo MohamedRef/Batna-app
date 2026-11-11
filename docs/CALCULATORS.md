@@ -1078,13 +1078,52 @@ Source: Research L14: measures of diagnostic accuracy, slides 12–18
 
 ## `z_score`: Z-score
 
-Source: Research L16: normal distribution and Z-score
+Source: Research L16: normal distribution curve and Z-score, slides 17–23 (Ass. Prof. Noha Elshaer)
 
 | input | kind | |
 |---|---|---|
 | `value` | number | Observation (x) |
 | `mean` | number | Mean (μ) |
 | `sd` | number | Standard deviation (σ) |
+
+## `disease_duration`: Disease duration (D = P / I)
+
+Source: Research L02: measures of disease frequency, slides 37, 42, 70 (Freeman and Hutchison 1980)
+
+| input | kind | |
+|---|---|---|
+| `prevalence` | number, per population base | Point prevalence |
+| `incidence` | number, per population base per year | Annual incidence |
+
+## `death_rate`: Death rate (crude, cause-, age- or sex-specific)
+
+Source: Research L02: measures of disease frequency, slides 53–58, 65, 67 (CDC, Principles of Epidemiology, 3rd ed. 2012)
+
+| input | kind | |
+|---|---|---|
+| `kind` | `crude`, `cause`, `age`, `sex` | Which rate |
+| `deaths` | number | Deaths in the year |
+| `population` | number | Midyear population |
+| `per` | `1000`, `100000` | Expressed |
+
+## `perinatal_mr`: Perinatal mortality rate (period I)
+
+Source: Research L02: measures of disease frequency, slide 66 (Park 2021; WHO ICD-10)
+
+| input | kind | |
+|---|---|---|
+| `late_fetal_deaths` | number | Fetal deaths, 28 weeks or more |
+| `early_neonatal_deaths` | number | Deaths in the first 7 days |
+| `live_births` | number | Live births, same period |
+
+## `mmr`: Maternal mortality ratio
+
+Source: Research L02: measures of disease frequency, slide 68 (WHO 2023)
+
+| input | kind | |
+|---|---|---|
+| `maternal_deaths` | number | Maternal deaths in the year |
+| `live_births` | number | Live births, same year and area |
 
 ## `sample_size_survey`: Sample size: prevalence survey
 
@@ -1130,3 +1169,31 @@ Source: Research L14: measures of diagnostic accuracy (Deeks and Altman, BMJ 200
 |---|---|---|
 | `pretest` | number, % | Pre-test probability |
 | `lr` | number | Likelihood ratio of the result |
+
+## `chi_square`: Chi-square test (2×2 table)
+
+Source: Research L17: hypothesis testing, slides 23–28 (Pearson 1900; Cochran 1954; Kirkwood and Sterne 2003)
+
+| input | kind | |
+|---|---|---|
+| `a` | number | Row 1, column 1 (a) |
+| `b` | number | Row 1, column 2 (b) |
+| `c` | number | Row 2, column 1 (c) |
+| `d` | number | Row 2, column 2 (d) |
+| `alpha` | `0.05`, `0.01` | Level of significance |
+
+## `t_test`: Student's t-test (one sample, paired, two groups)
+
+Source: Research L17: hypothesis testing, slides 12–14 and 29–33 (Student 1908; Kirkwood and Sterne 2003; Altman 1991)
+
+| input | kind | |
+|---|---|---|
+| `test` | `one_sample`, `paired`, `independent` | Which t-test |
+| `mean` | number | Mean (x̄): the sample, the differences (paired) or group 1 |
+| `sd` | number | Standard deviation (S) of the same |
+| `n` | number | Number (n) of the same |
+| `mu` | number | Population mean (μ), one sample only; optional |
+| `mean2` | number | Group 2 mean; optional |
+| `sd2` | number | Group 2 standard deviation; optional |
+| `n2` | number | Group 2 number; optional |
+| `alpha` | `0.05`, `0.01` | Level of significance |

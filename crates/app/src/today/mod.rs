@@ -118,9 +118,22 @@ pub fn Today() -> Element {
                 if !o.due_cases.is_empty() {
                     DueCases { ids: o.due_cases.clone() }
                 }
-                if let Some(e) = store::open_error() {
-                    p { class: "note", "{tx::STORE_FAILED} " bdi { dir: "ltr", "{e}" } }
-                } else if let Some(e) = write_error {
+                // A store that didn't open is said above every screen
+                // instead (persistence::VolatileNotice).
+                if let Some(e) = store::read_error() {
+                    div { class: "note td-read-failed", role: "alert",
+                        p { "{tx::READ_FAILED} " bdi { dir: "ltr", "{e}" } }
+                        button {
+                            class: "btn btn-secondary td-read-retry",
+                            onclick: {
+                                let review = review.clone();
+                                move |_| review.backend.borrow_mut().reload_and_notify()
+                            },
+                            {tx::READ_RETRY}
+                        }
+                    }
+                }
+                if let Some(e) = write_error.filter(|_| store::open_error().is_none()) {
                     p { class: "note", "{tx::WRITE_FAILED} " bdi { dir: "ltr", "{e}" } }
                 }
                 div { class: "section-head",

@@ -130,8 +130,12 @@ pub enum RejectReason {
 
 impl RejectReason {
     /// The hub will never take this op, however often it is sent.
+    ///
+    /// `UnknownTable` is not final: a build can sync a table before the
+    /// Worker that knows it is deployed (a failed deploy left the hub without
+    /// `notes` for two days), and the op must still go once it is.
     pub fn is_final(self) -> bool {
-        self != RejectReason::ClockSkew
+        !matches!(self, RejectReason::ClockSkew | RejectReason::UnknownTable)
     }
 }
 

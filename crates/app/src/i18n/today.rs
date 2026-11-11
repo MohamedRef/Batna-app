@@ -8,7 +8,6 @@ pub const ALL_DONE: &str = "خلّصت المستحق النهارده. شغل �
 pub const NEW_CAP_REACHED: &str = "وخلّصت الجديد اللي محدّده لليوم";
 pub const TOMORROW: &str = "بكرة:";
 pub const NOTHING_WRITTEN: &str = "المحتوى لسه بيتكتب. أول ما محاضرة تجهز هتلاقيها هنا.";
-pub const STORE_FAILED: &str = "مش قادر أفتح قاعدة البيانات، فالمراجعات مش هتتحفظ بعد ما تقفل التطبيق:";
 pub const WRITE_FAILED: &str = "في اختيار ما اتحفظش على الجهاز، جرّبه تاني:";
 pub const IN_PROGRESS: &str = "محاضرات شغّال فيها";
 pub const OF: &str = "من";
@@ -127,3 +126,5 @@ pub fn checked_sub(n: usize) -> String {
 // device-local checkpoint after a restart.
 pub const RESUME_TITLE: &str = "عندك جلسة مذاكرة لسه مفتوحة";
 pub const RESUME_SESSION: &str = "كمّل الجلسة";
+pub const READ_FAILED: &str = "ما عرفتش أقرأ حاجة من الجهاز، فبعرض آخر نسخة سليمة عندي:";
+pub const READ_RETRY: &str = "اقرأ تاني";

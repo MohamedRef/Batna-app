@@ -157,6 +157,36 @@ pub(super) fn seed(conn: &Connection, device: &str) -> rusqlite::Result<()> {
     Ok(())
 }
 
+/// Tables whose own rows are queued again, once each, under a `meta` key.
+/// `notes` (#780): the deploy of the Worker that knows the table failed, so
+/// the hub rejected every note op and older builds dropped rejected ops.
+const RESEND: &[(&str, &str)] = &[("notes", "sync.resent.notes")];
+
+/// Queues again, once per table in [`RESEND`], every row this device wrote.
+/// Op ids come from the row's HLC, so a row the hub already has is not
+/// taken twice.
+pub(super) fn resend_once(conn: &Connection, device: &str) -> rusqlite::Result<()> {
+    for (table, key) in RESEND {
+        if meta_get(conn, key)?.is_some() {
+            continue;
+        }
+        if let Some(key_col) = key_column(conn, table)? {
+            let keys: Vec<String> = {
+                let mut stmt = conn.prepare(&format!(
+                    "SELECT \"{key_col}\" FROM \"{table}\" WHERE device_id = ?1
+                     ORDER BY hlc_wall, hlc_counter"
+                ))?;
+                stmt.query_map([device], |r| r.get(0))?.collect::<rusqlite::Result<_>>()?
+            };
+            for k in keys {
+                enqueue(conn, table, &key_col, &k, device)?;
+            }
+        }
+        meta_set(conn, key, "1")?;
+    }
+    Ok(())
+}
+
 /// The single-column primary key of a local table, if it has one.
 fn key_column(conn: &Connection, table: &str) -> rusqlite::Result<Option<String>> {
     let mut stmt = conn.prepare("SELECT name FROM pragma_table_info(?1) WHERE pk > 0")?;
@@ -252,15 +282,21 @@ impl Store {
         Ok(())
     }
 
-    /// The oldest `limit` ops waiting for the hub.
-    pub fn outbox(&self, limit: usize) -> Result<Vec<Op>> {
+    /// The tables of these outbox ops.
+    pub fn outbox_tables<'a>(&self, op_ids: impl IntoIterator<Item = &'a str>) -> Result<BTreeSet<String>> {
         let conn = self.conn.lock().unwrap();
-        let mut stmt = conn.prepare("SELECT op FROM sync_outbox ORDER BY seq LIMIT ?1")?;
-        let ops = stmt
-            .query_map([limit as i64], |r| r.get::<_, String>(0))?
-            .filter_map(|r| r.ok().and_then(|json| serde_json::from_str(&json).ok()))
-            .collect();
-        Ok(ops)
+        let mut out = BTreeSet::new();
+        for id in op_ids {
+            let t: Option<String> = conn
+                .query_row(
+                    "SELECT json_extract(op, '$.table') FROM sync_outbox WHERE op_id = ?1",
+                    [id],
+                    |r| r.get(0),
+                )
+                .optional()?;
+            out.extend(t);
+        }
+        Ok(out)
     }
 
     pub fn outbox_len(&self) -> u64 {
@@ -268,7 +304,9 @@ impl Store {
         conn.query_row("SELECT COUNT(*) FROM sync_outbox", [], |r| r.get::<_, i64>(0)).unwrap_or(0) as u64
     }
 
-    /// Drops acked (or rejected) ops.
+    /// Drops ops from the outbox (tests stand in for the hub with it;
+    /// the engine settles a push with `settle_outbox`).
+    #[cfg(test)]
     pub fn remove_from_outbox<'a>(&self, op_ids: impl IntoIterator<Item = &'a str>) -> Result<()> {
         let mut conn = self.conn.lock().unwrap();
         let tx = conn.transaction()?;

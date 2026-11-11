@@ -212,12 +212,22 @@ fn keywords(id: &str) -> &'static str {
         "nnt" => "number needed to treat harm nnh",
         "diagnostic_accuracy" => "sensitivity specificity ppv npv likelihood ratio",
         "z_score" => "standard deviation sd normal distribution",
+        "disease_duration" => "duration prevalence incidence p = i x d epidemiology",
+        "death_rate" => "crude mortality cause specific age specific sex specific death rate",
+        "perinatal_mr" => "perinatal mortality stillbirth fetal death early neonatal",
+        "mmr" => "maternal mortality ratio",
         "sample_size_survey" => "sample size prevalence survey margin of error epi info statcalc",
         "sample_size_two_proportions" => {
             "sample size power case control cohort kelsey fleiss epi info statcalc"
         }
         "predictive_values" => "ppv npv prevalence sensitivity specificity screening bayes",
         "post_test_probability" => "likelihood ratio lr pre-test post-test odds fagan bayes",
+        "chi_square" => {
+            "chi square x2 test of significance association qualitative categorical contingency 2x2 hypothesis p value"
+        }
+        "t_test" => {
+            "student t test paired one sample independent means test of significance hypothesis p value"
+        }
         _ => "",
     }
 }

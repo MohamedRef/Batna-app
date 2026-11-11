@@ -125,6 +125,16 @@ lessons:
           - لو صوته **عالي** (delta كبيرة) هتسمعه من أول كلمة: عيّنة صغيرة تكفي.
           - لو **الدوشة** حواليك عالية (variability أو variance كبيرة) محتاج تقرّب أكتر: عيّنة أكبر.
           - ولو عايز تبقى **متأكد** إنك مش هتفوّت ولا كلمة (power أعلى): برضه عيّنة أكبر.
+      - kind: aside
+        tone: exam
+        page: 8
+        quote: "Factors affecting sample size of RCT\n| Component | Definition |\n|---|---|\n| Alpha (type I error) | The probability of falsely rejecting H0 and detecting a significant difference when the groups in reality are not different |\n| Beta (type II error) | The probability of falsely accepting H0 and not detecting a statistically significant when a specified difference between the groups in reality exist |\n| Power (1-beta) | The possibility of correctly rejecting H0 and detecting statistically significant difference when it is true |\n| (MCRD) δ | The minimal difference between the groups that the investigator considers clinically relevant |\n| Variance | The variability of the outcome measure as the SD in case of continuous outcome |"
+        text: |
+          الدكتورة قالت في الشرح: **مش مطلوب تحفظ المعادلة**. المطلوب تفهم المدخلات وكل واحد بيأثر إزاي: alpha، beta، الـ ==power==، الفرق المهم إكلينيكيًا (delta)، والـ **variance**.
+
+          - Power = 1 - beta: لو beta = **20%** يبقى الـ power = **80%**، ولو beta = **10%** يبقى **90%**.
+          - فرق أصغر عايز تكشفه، أو variance (SD) أعلى، أو alpha أصغر، أو power أعلى: كله بيكبّر العيّنة.
+          - والـ delta لازم يبقى فرق **يهم العيان** فعلًا، يتحدد قبل الحساب، مش رقم تظبطه علشان العيّنة تطلع مريحة.
       - kind: figure
         page: 11
         quote: "Simple formula for difference in means: n = 2 × σ²(Zβ + Zα/2)² / difference²\n  n: Sample size in each group (assumes equal sized groups)\n  σ: Standard deviation of the outcome variable\n  Zβ: Represents the desired power (typically .84 for 80% power).\n  Zα/2: Represents the desired level of statistical significance (typically 1.96).\n  difference: Effect Size (the difference in means)"
@@ -181,7 +191,7 @@ lessons:
       - "Power = 1 - beta: فرصة إنك تلاقي الفرق الحقيقي."
       - "الـ 5 factors: alpha، beta، power، MCRD، variance. Power و variance أكبر = عيّنة أكبر. Alpha و MCRD أكبر = عيّنة أصغر."
       - "المعادلة: Zβ = 0.84 لـ 80% power، Zα/2 = 1.96."
-    practice: [res.L07.001, res.L07.002, res.L07.003, res.L07.004, res.L07.005, res.L07.006, res.L07.007, res.L07.008, res.L07.009, res.L07.010, res.L07.011, res.L07.012, res.L07.013, res.L07.014, res.L07.015, res.L07.016, res.L07.017, res.L07.018, res.L07.019, res.L07.020]
+    practice: [res.L07.001, res.L07.002, res.L07.003, res.L07.004, res.L07.005, res.L07.006, res.L07.007, res.L07.008, res.L07.009, res.L07.010, res.L07.011, res.L07.012, res.L07.013, res.L07.014, res.L07.015, res.L07.016, res.L07.017, res.L07.018, res.L07.019, res.L07.020, res.L07.115]
   # ------------------------------------------------------------------
   - id: res.L07.lesson2
     title: "القرعة: simple و block و stratified"
@@ -456,6 +466,20 @@ lessons:
           - مفيش **important difference** خالص (futility).
           - **Mortality** أو complications عالية بوضوح في جروب الـ intervention.
       - kind: aside
+        tone: exam
+        page: 48
+        quote: "Step 11 - Follow Up and Assessment:\n  Follow up the subjects till the end point, or the period of trial, whichever is earlier\n  Avoid losses to follow up, which may otherwise seriously bias the study results"
+        text: |
+          الدكتورة قالت في الشرح: الـ ==losses to follow up== لازم تبقى أقل ما يمكن، و**ماتعدّيش 20%**. وحتى لو أقل من كده، ممكن تعمل bias لو مرتبطة بالعلاج أو بالـ outcome، وبتقلل الـ power.
+      - kind: aside
+        tone: tip
+        page: 41
+        quote: "Which is not an issue with RCTs?\n  a. Contamination\n  b. Losses to follow up\n  c. Recall bias\n  d. Bias in assessment of outcome"
+        text: |
+          ==Contamination==: جزء من الـ intervention يوصل للـ control group، فالفرق الحقيقي بين الجروبين يصغر.
+
+          مثال الدكتورة في المحاضرة: **برنامج تثقيف صحي** معمول للجروب التجريبي، وبعض الناس في الـ control سمعوه أو اتعرضوا له. خطّط تمنع التسريب ده، وسجّل أي co-interventions.
+      - kind: aside
         tone: trap
         page: 50
         quote: "Suppose that a randomized single masked experimental study is conducted. Which of the following problems are surely avoided in this study?\n  a. Noncompliance\n  b. Confounding\n  c. Biased assessment of the disease outcome\n  d. Loss to follow up"
@@ -470,7 +494,7 @@ lessons:
       - "Blinding: بعد الـ allocation، مش دايمًا ممكن، وبيمنع الـ ascertainment والـ performance bias."
       - "الـ placebo: نفس الشكل واللون والحجم والطعم. والـ data بنفس الجودة في الجروبين، وإلا observer bias."
       - "Stopping rules: benefit أو harm أكبر من المتوقع، مفيش فرق، أو mortality عالية."
-    practice: [res.L07.024, res.L07.025, res.L07.026, res.L07.027, res.L07.028, res.L07.029, res.L07.041, res.L07.042, res.L07.043, res.L07.044, res.L07.045, res.L07.046, res.L07.047, res.L07.048, res.L07.049, res.L07.050]
+    practice: [res.L07.024, res.L07.025, res.L07.026, res.L07.027, res.L07.028, res.L07.029, res.L07.041, res.L07.042, res.L07.043, res.L07.044, res.L07.045, res.L07.046, res.L07.047, res.L07.048, res.L07.049, res.L07.050, res.L07.116, res.L07.117, res.L07.118]
   # ------------------------------------------------------------------
   - id: res.L07.lesson4
     title: "NNT: كام عيان نعالج علشان ننقذ واحد؟"
@@ -617,7 +641,7 @@ lessons:
       - "17% ضد 12%: RRR 29%، ARR 5%، NNT 20."
       - "الـ RRR مابيفرّقش بين أثر ضخم وتافه. ARR = RRR × baseline risk."
       - "INH: CER 20%، EER 6.67%، ARR 13.33%، RRR 0.67، NNT 7.5 (السلايد كاتب 7.69) يعني 8. Zidovudine: الـ RR الصح 0.33 مش 3.14، والـ NNT 7."
-    practice: [res.L07.051, res.L07.052, res.L07.053, res.L07.054, res.L07.055, res.L07.056, res.L07.057, res.L07.058, res.L07.059, res.L07.060, res.L07.061, res.L07.062]
+    practice: [res.L07.051, res.L07.052, res.L07.053, res.L07.054, res.L07.055, res.L07.056, res.L07.057, res.L07.058, res.L07.059, res.L07.060, res.L07.061, res.L07.062, res.L07.119, res.L07.120]
   # ------------------------------------------------------------------
   - id: res.L07.lesson5
     title: "صدفة ولا حقيقة؟ وحلّل زي ما قرعت"

@@ -11,6 +11,7 @@ pub mod api;
 pub mod engine;
 // The Mac and Android sign in through a loopback listener; the web app
 // leaves the page for Google and comes back (docs/WEB.md).
+mod held_ui;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod oauth;
 #[cfg(target_arch = "wasm32")]
@@ -130,6 +131,10 @@ pub enum Command {
     SignOut,
     LoadDevices,
     RevokeDevice(String),
+    /// Offer the held changes to Batna Cloud again.
+    SendHeldAgain,
+    /// Let the held changes go: they stay here but won't reach the others.
+    ForgetHeld,
     /// A local write landed in the outbox: push it now rather than on the
     /// next two-second tick.
     Kick,
@@ -177,6 +182,8 @@ impl std::fmt::Debug for Command {
             Self::SignOut => write!(f, "SignOut"),
             Self::LoadDevices => write!(f, "LoadDevices"),
             Self::RevokeDevice(d) => write!(f, "RevokeDevice({d:?})"),
+            Self::SendHeldAgain => write!(f, "SendHeldAgain"),
+            Self::ForgetHeld => write!(f, "ForgetHeld"),
             Self::Kick => write!(f, "Kick"),
             Self::Shutdown => write!(f, "Shutdown"),
         }
@@ -234,6 +241,9 @@ pub struct CloudStatus {
     pub sync: SyncState,
     /// Local changes not yet acked.
     pub pending: u64,
+    /// Changes Batna Cloud refused for good, or this build couldn't read,
+    /// kept on the device (`store/held.rs`).
+    pub held: u64,
     pub last_sync_ms: Option<u64>,
     pub problem: Option<Problem>,
     /// Google approved a sign-in that is still reaching the server.
@@ -250,6 +260,7 @@ impl CloudStatus {
             device_id,
             sync: SyncState::SignedOut,
             pending: 0,
+            held: 0,
             last_sync_ms: None,
             problem: None,
             finishing_sign_in: false,

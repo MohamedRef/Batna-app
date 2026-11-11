@@ -12,7 +12,7 @@ use batna_core::response::{Attempt, Draft, StepState, sig};
 use super::practice::Tries;
 use super::steps::{AnsweredBefore, CheckBar, Gate, Responses, StepAt, StepView};
 use super::text::Line;
-use super::{Mark, VIEW, View, close, mark, next_lesson, save_mark, set_view};
+use super::{Mark, VIEW, View, close, finish, mark, next_lesson, set_view};
 use crate::i18n::learn as tx;
 use crate::{Screen, Ui};
 
@@ -23,9 +23,15 @@ pub(super) fn pos_key(id: &str) -> String {
     format!("lessonpos.{id}")
 }
 
-fn save_pos(id: &str, pos: &Attempt) {
-    if let Err(e) = crate::store::shared().put_place(&pos_key(id), pos) {
-        crate::diag::report!("saving lesson position {id} failed: {e}");
+/// Saves the lesson's place; `false` when the store refused (the player then
+/// says so and saves again on the next step, or on Retry).
+fn save_pos(id: &str, pos: &Attempt) -> bool {
+    match crate::store::shared().put_place(&pos_key(id), pos) {
+        Ok(()) => true,
+        Err(e) => {
+            crate::diag::report!("saving lesson position {id} failed: {e}");
+            false
+        }
     }
 }
 
@@ -53,6 +59,9 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     let sigs = use_hook(|| lesson.steps.iter().map(|s| sig(&s.body)).collect::<Vec<_>>());
     let mut attempt = use_signal(|| start.clone());
     let mut at = use_signal(|| start.at);
+    // The last save of his place, or of the finished lesson, was refused.
+    let mut unsaved = use_signal(|| false);
+    let mut finishing = use_signal(|| false);
     // Saves where he is now: after every response and every graded card,
     // not only on Back/Continue, since the lesson can close mid-step (the
     // page chip's lecture, the rail).
@@ -62,7 +71,8 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
             if *at.peek() < n {
                 let mut a = attempt.peek().clone();
                 a.at = *at.peek();
-                save_pos(&id, &a);
+                let mut unsaved = unsaved;
+                unsaved.set(!save_pos(&id, &a));
             }
         }
     };
@@ -114,20 +124,27 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         let id = id.clone();
         let lesson = lesson.clone();
         move |to: usize| {
-            dir.set(if to < *at.peek() { "back" } else { "fwd" });
-            at.set(to);
-            if to < n {
-                seen.write()[to] = true;
-            }
             if to == n {
+                // Done only once the mark and the cleared place are saved
+                // together; otherwise stay on the last step and say so.
                 let (right, asked) = attempt.peek().score(&lesson);
-                save_mark(&id, Mark { done_ms: crate::store::now_ms(), right, asked });
-                save_pos(&id, &Attempt::default());
+                if !finish(&id, Mark { done_ms: crate::store::now_ms(), right, asked }) {
+                    unsaved.set(true);
+                    finishing.set(true);
+                    return;
+                }
+                unsaved.set(false);
+                finishing.set(false);
                 crate::sounds::play(crate::sounds::Cue::SessionEnd);
             } else {
                 let mut a = attempt.peek().clone();
                 a.at = to;
-                save_pos(&id, &a);
+                unsaved.set(!save_pos(&id, &a));
+            }
+            dir.set(if to < *at.peek() { "back" } else { "fwd" });
+            at.set(to);
+            if to < n {
+                seen.write()[to] = true;
             }
             document::eval(
                 "document.querySelector('.content')?.scrollTo({top: 0}); window.scrollTo({top: 0});",
@@ -179,6 +196,17 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     title: if pages { tx::TO_STEPS } else { tx::TO_PAGES },
                     onclick: move |_| set_view(if pages { View::Steps } else { View::Pages }),
                     {if pages { crate::icons::steps() } else { crate::icons::book() }}
+                }
+            }
+            if unsaved() {
+                crate::persistence::WriteFailed {
+                    message: if finishing() { tx::FINISH_UNSAVED } else { tx::PLACE_UNSAVED },
+                    detail: None,
+                    on_retry: {
+                        let save_now = save_now.clone();
+                        let mut finish_again = go.clone();
+                        move |_| if finishing() { finish_again(n) } else { save_now() }
+                    },
                 }
             }
             // Name the lesson independently of the exercise step below.

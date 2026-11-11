@@ -78,6 +78,8 @@ pub fn hint(calc: &str, field: &str) -> Option<&'static str> {
         }
         ("sample_size_two_proportions", "power") => "80% على الأقل؛ 85% أو 90% أحسن.",
         ("sample_size_two_proportions", "ratio") => "1 لو المجموعتين متساويين.",
+        ("disease_duration", "prevalence") => "لازم نفس الأساس بتاع الـ incidence، مثلًا الاتنين لكل مليون.",
+        ("death_rate", "population") => "كل السكان، أو بس الفئة العمرية أو الجنس اللي بتعدّ وفياته.",
         ("predictive_values", "prevalence") => {
             "بتاعة الناس اللي هتكشف عليهم أنت، مش بتاعة الدراسة اللي عملت الـ test."
         }
@@ -283,12 +285,18 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
         "nnt" => "تعالج كام واحد عشان واحد يستفيد (أو يتأذى)",
         "diagnostic_accuracy" => "الحساسية والنوعية والـ PPV والـ NPV من جدول 2×2",
         "z_score" => "القيمة بعيدة عن المتوسط بكام انحراف معياري",
+        "disease_duration" => "متوسط مدة المرض من الانتشار ÷ الحدوث",
+        "death_rate" => "معدل الوفيات الخام أو حسب السبب أو السن أو الجنس",
+        "perinatal_mr" => "وفيات الأجنة من 28 أسبوع وأول أسبوع بعد الولادة لكل 1000 ولادة",
+        "mmr" => "وفيات الأمهات لكل 100,000 مولود حي",
         "sample_size_survey" => "محتاج كام واحد في الـ survey عشان تقدّر الـ prevalence",
         "sample_size_two_proportions" => {
             "محتاج كام case و control (أو exposed و unexposed) بالـ power اللي عايزه"
         }
         "predictive_values" => "الـ PPV والـ NPV لنفس الـ test في population بـ prevalence تانية",
         "post_test_probability" => "الاحتمال بعد النتيجة من الـ pre-test probability والـ likelihood ratio",
+        "chi_square" => "فيه علاقة بين متغيرين نوعيين في جدول 2×2 ولا صدفة؟",
+        "t_test" => "الفرق بين المتوسطات حقيقي ولا صدفة؟ (عينة واحدة، paired، أو مجموعتين)",
         _ => return None,
     })
 }

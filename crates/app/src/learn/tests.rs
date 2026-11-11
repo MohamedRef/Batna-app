@@ -205,6 +205,9 @@ fn finishing_a_lesson_marks_it_done_and_shows_the_recap() {
 #[test]
 fn a_finish_the_store_refuses_stays_on_the_last_step_until_it_saves() {
     let (l, at) = claim(|l, k, _| k + 1 == l.steps.len() && !l.practice.is_empty());
+    // Its own store: a read-only shared store would refuse every other
+    // test's writes running alongside it.
+    crate::store::use_thread_store();
     let mut d = open(l, at);
     let n = l.steps.len();
     crate::store::shared().set_read_only(true);
@@ -455,6 +458,9 @@ fn a_try_grade_the_log_refuses_keeps_the_card_until_it_saves() {
         _ => false,
     });
     let StepBody::Try { items } = &l.steps[at].body else { unreachable!() };
+    // Its own store: a read-only shared store would refuse every other
+    // test's writes running alongside it.
+    crate::store::use_thread_store();
     let mut d = open(l, at);
     d.click(|e| e.tag == "button" && e.text.contains(crate::i18n::study::REVEAL));
     crate::store::shared().set_read_only(true);

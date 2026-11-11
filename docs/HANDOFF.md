@@ -238,7 +238,7 @@ Medicine "Internal Medicine Postgraduate Lectures" (2025) and research slides:
 | `dm` | Diabetes, Metabolism, Lipids (ch. 6) | part 3 | 23 |
 | `geri` | Geriatrics (ch. 7) | part 4 | 13 |
 | `neph` | Nephrology (ch. 8) | part 5 | 14 |
-| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 15 (L01–L15) |
+| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 16 (L01–L16) |
 
 Semester 1 = `res`, `hem`, `hb`. Not started (no material yet): `cvs`,
 `chest`, `neuro`, `trop`, `img`, `bioch`, `phys`, `path`, `clinpath`,
@@ -571,8 +571,7 @@ further; don't change FSRS or Undo speculatively.
 |---|---|
 | App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 100 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
-| Content | 9 courses, 135 lectures, 135 lesson files; `res` L01–L12, L14 and L15 written; L03–L11 checked against the enriched lecture copies (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
-| Content | 9 courses, 135 lectures, 135 lesson files; `res` L01–L12, L14 and L15 written; res.L02 also checked against the lecture's video recording (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
+| Content | 9 courses, 137 lectures, 137 lesson files; `res` L01–L16 written; L02–L11 checked against the enriched lecture copies, and res.L02 against its video recording (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
@@ -585,7 +584,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | What |
 |---|---|
-| Content | Courses with no material yet; `res` L16–L20 from the lecture PDFs (L12–L15 done) (L02–L11 checked against the enriched lecture copies); everything stays `unverified` until he approves in-app |
+| Content | Courses with no material yet; `res` L17–L20 from the lecture PDFs (L12–L16 done); everything stays `unverified` until he approves in-app |
 | Glossary / audit | Split remaining ICP/SBP stop-gap senses into `course:` entries; 2026-11-04 audit leftovers (ambiguous abbreviations, quote cuts) only if Mohamed asks |
 | Mac | Mohamed (2026-11-07) kept being asked for the login Keychain password ("app.batna.cloud") after updates and wants it gone for good. Main builds keep the session in `cloud-session.json` (since #612), and the prompt was traced to local builds of an older checkout; confirm on his Mac after the next update. If it returns, the cause is each build being signed differently (Keychain ACL): fix with a stable signing identity or storage not tied to the build |
 | UX backlog | Weak-topic insight on Today; configurable review shortcuts with conflict checks; a focused phone Study view (keep exit, progress, reveal, grades; don't collide with Mac Focus Mode); medical reading polish (mixed Arabic/English, zoomable figures, optional haptics); a warning before a new session replaces a live one |
@@ -609,6 +608,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: res.L16 (normal distribution curve and Z-score): 47 items, 4 lessons; the `z_score` calculator now uses the lecture's bands (ordinary within ±2, unusual beyond ±2, extreme beyond ±3) instead of ±1.96. Slide 34's 13-answer key has no questions in the deck, so it was left out.
 - 2026-11-11: res.L03–L11 checked against the enriched lecture copies and the four revisions: 63 new items (tags `lecturer`, `revision`), lecturer's explanations in lessons, res.L08.020 second correct option fixed.
 - 2026-11-11: res.L02 gap-fill from the lecture's video recording (same 70 slides plus the lecturer's spoken points and the 8 pages of Arabic notes): 16 items, lesson 7; calculators `disease_duration`, `death_rate`, `perinatal_mr`, `mmr` (`calc/frequency.rs`); new slide verdicts in `courses/res/verdicts/L02.tsv`.
 - 2026-11-11: sync ops the hub refuses (or the device can't read) are held with their reason and shown in Settings › Sync with send-again / let-go; the export is one read snapshot (engineering audit F12–F14, § 10 Study sessions).

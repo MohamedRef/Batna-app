@@ -1078,7 +1078,7 @@ Source: Research L14: measures of diagnostic accuracy, slides 12–18
 
 ## `z_score`: Z-score
 
-Source: Research L16: normal distribution and Z-score
+Source: Research L16: normal distribution curve and Z-score, slides 17–23 (Ass. Prof. Noha Elshaer)
 
 | input | kind | |
 |---|---|---|

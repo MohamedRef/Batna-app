@@ -1,0 +1,826 @@
+schema: batna.lesson/v1
+lecture: res.L16
+lessons:
+- id: res.L16.lesson1
+  title: 'منحنى الجرس: الـ normal distribution'
+  hook: 'قيس طول 1,000 طالب في الكلية: هتلاقي أغلبهم حوالين المتوسط، وقليلين جدًا قصيرين أوي أو طوال أوي. الشكل ده اسمه إيه؟'
+  minutes: 9
+  pages: [2, 11]
+  topics: [normal]
+  goals:
+  - تعرّف الـ normal distribution وتعرف بيوصف أنهي نوع variables
+  - تحفظ صفات المنحنى الـ 3
+  - 'تقسّم المساحة تحت المنحنى: 34.1 و13.6 و2.2'
+  status: unverified
+  steps:
+  - kind: explain
+    page: 2
+    quote: |-
+      The Gaussian Distribution (Normal Distribution Curve)
+      A variable is said to be normally distributed or to have a normal distribution if its distribution has the shape of a normal curve.
+    title: يعني إيه variable «normally distributed»؟
+    text: |-
+      الـ variable يبقى ==normally distributed== لو التوزيع بتاعه **شكله زي الـ normal curve**: منحنى على شكل **جرس** (bell)، واسمه كمان الـ ==Gaussian distribution==.
+
+      مثال من العيادة: الـ **hemoglobin** في ستات أصحاء. أغلبهم حوالين المتوسط، وكل ما تبعد يمين أو شمال، العدد يقل.
+  - kind: explain
+    page: 3
+    quote: |-
+      The Gaussian Distribution (Normal Distribution Curve)
+      Normal Distribution is used to describe continuous quantitative variables.
+      The normal distribution & normal approximations are the bases of analytic statistical tests.
+    title: بيوصف إيه، وليه مهم؟
+    text: |-
+      - بيوصف الـ ==continuous quantitative variables==: حاجة بتتقاس بأرقام متصلة، زي الوزن والضغط ودرجة الامتحان.
+      - الـ **normal distribution** والـ **normal approximations** هما ==أساس الـ analytic statistical tests==. يعني أغلب الـ tests اللي جاية (الـ t-test مثلًا) مبنية عليه.
+  - kind: check
+    page: 3
+    quote: Normal Distribution is used to describe continuous quantitative variables.
+    question: Which variable is the normal curve meant to describe?
+    options:
+    - Systolic blood pressure in mmHg
+    - Blood group (A, B, AB, O)
+    - Cancer stage (I–IV)
+    - Smoker or non-smoker
+    answer: 0
+    why:
+    - 'صح: رقم متصل بيتقاس، يعني continuous quantitative.'
+    - 'ده nominal: categories ملهاش ترتيب.'
+    - 'ده ordinal: categories مترتبة، مش أرقام متصلة.'
+    - ده binary (نعم/لأ)، مش continuous.
+  - kind: explain
+    page: 5
+    quote: |-
+      Normal distribution curve
+      That is: if you measure something, a variable, in a representative sample of sufficient size, the resulting score will assume a distribution that is similar to the normal curve.
+      Most of the scores will fall around the mean and there will be relatively few extreme score.
+      2.2% | 13.6% | 34.1% | 34.1% | 13.6% | 2.2%
+      X-3SD | X-2SD | X-1SD | mean | X+1SD | X+2SD | X+3SD
+      68%
+      95%
+      99%
+    title: العينة الكبيرة بتطلع جرس
+    text: |-
+      السلايد بيقول: لو قست variable في ==representative sample of sufficient size==، الدرجات هتاخد توزيع شبه الـ normal curve:
+
+      - **أغلب الدرجات** حوالين الـ **mean**.
+      - **قليل** من الـ ==extreme scores== على الطرفين.
+
+      وزي ما في السلايد 6: الـ sample الكويسة شكلها نسخة صغيرة من الـ population.
+
+      والسلايد 4 بيدي أمثلة: **intelligence** و**attitudes** و**personality** بيتوزعوا تقريبًا normal في الناس.
+  - kind: figure
+    page: 4
+    quote: |-
+      Normal distribution curve
+      Many human traits (characteristics) such as intelligence, attitudes, and personality, are distributed among the population in a fairly "Normal" way.
+      The base line for the normal curve is measured in standard deviation (SD) units.
+      2.2% | 13.6% | 34.1% | 34.1% | 13.6% | 2.2%
+      μ - 3σ | μ - 2σ | μ - σ | μ | μ + σ | μ + 2σ | μ + 3σ
+      68%
+      95%
+      99%
+    title: المساحات تحت المنحنى
+    alt: A bell curve with its base marked in standard deviations from −3 to +3. The two bands next to the mean each hold
+      34.1%, the next two 13.6% each, and the tails beyond 2 SD 2.2% each. Brackets below show 68% within ±1 SD, 95% within
+      ±2 SD and 99.7% within ±3 SD. The peak is labelled mean = median = mode.
+    caption: الـ **base line** بيتقاس بـ ==SD units==. من الـ mean لـ 1 SD = **34.1%** في كل ناحية، ومن 1 لـ 2 SD = **13.6%**،
+      وبعد 2 SD = **2.2%** بس.
+    svg: |-
+      <svg viewBox="0 0 340 236" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.6 150 L13.6 149.7 L15.6 149.6 L17.6 149.5 L19.6 149.5 L21.6 149.4 L23.6 149.3 L25.6 149.2 L27.6 149.1 L29.6 148.9 L31.6 148.8 L33.6 148.6 L35.6 148.4 L37.6 148.2 L39.6 148.0 L41.6 147.7 L43.6 147.4 L45.6 147.1 L47.6 146.8 L49.6 146.4 L51.6 145.9 L53.6 145.4 L55.6 144.9 L57.6 144.3 L59.6 143.7 L61.6 143.0 L63.6 142.3 L65.6 141.5 L67.6 140.6 L69.6 139.7 L71.6 138.6 L73.6 137.5 L75.6 136.4 L77.6 135.1 L77.6 150Z" class="fg-bad"/>
+        <path d="M78.0 150 L78.0 134.8 L80.0 133.5 L82.0 132.0 L84.0 130.5 L86.0 128.9 L88.0 127.1 L90.0 125.3 L92.0 123.4 L94.0 121.4 L96.0 119.3 L98.0 117.1 L100.0 114.8 L102.0 112.4 L104.0 110.0 L106.0 107.5 L108.0 104.8 L110.0 102.2 L112.0 99.4 L114.0 96.6 L116.0 93.8 L118.0 90.9 L120.0 88.0 L122.0 85.0 L124.0 82.1 L124.0 150Z" class="fg-box"/>
+        <path d="M124.0 150 L124.0 82.1 L126.0 79.1 L128.0 76.2 L130.0 73.3 L132.0 70.4 L134.0 67.5 L136.0 64.8 L138.0 62.1 L140.0 59.5 L142.0 56.9 L144.0 54.5 L146.0 52.3 L148.0 50.1 L150.0 48.1 L152.0 46.3 L154.0 44.6 L156.0 43.1 L158.0 41.7 L160.0 40.6 L162.0 39.7 L164.0 38.9 L166.0 38.4 L168.0 38.1 L170.0 38.0 L172.0 38.1 L174.0 38.4 L176.0 38.9 L178.0 39.7 L180.0 40.6 L182.0 41.7 L184.0 43.1 L186.0 44.6 L188.0 46.3 L190.0 48.1 L192.0 50.1 L194.0 52.3 L196.0 54.5 L198.0 56.9 L200.0 59.5 L202.0 62.1 L204.0 64.8 L206.0 67.5 L208.0 70.4 L210.0 73.3 L212.0 76.2 L214.0 79.1 L216.0 82.1 L216.0 150Z" class="fg-acc"/>
+        <path d="M216.0 150 L216.0 82.1 L218.0 85.0 L220.0 88.0 L222.0 90.9 L224.0 93.8 L226.0 96.6 L228.0 99.4 L230.0 102.2 L232.0 104.8 L234.0 107.5 L236.0 110.0 L238.0 112.4 L240.0 114.8 L242.0 117.1 L244.0 119.3 L246.0 121.4 L248.0 123.4 L250.0 125.3 L252.0 127.1 L254.0 128.9 L256.0 130.5 L258.0 132.0 L260.0 133.5 L262.0 134.8 L262.0 150Z" class="fg-box"/>
+        <path d="M262.0 150 L262.0 134.8 L264.0 136.1 L266.0 137.3 L268.0 138.4 L270.0 139.5 L272.0 140.4 L274.0 141.3 L276.0 142.1 L278.0 142.9 L280.0 143.6 L282.0 144.2 L284.0 144.8 L286.0 145.3 L288.0 145.8 L290.0 146.3 L292.0 146.7 L294.0 147.0 L296.0 147.4 L298.0 147.7 L300.0 147.9 L302.0 148.2 L304.0 148.4 L306.0 148.6 L308.0 148.8 L310.0 148.9 L312.0 149.0 L314.0 149.2 L316.0 149.3 L318.0 149.4 L320.0 149.5 L322.0 149.5 L324.0 149.6 L326.0 149.6 L326.0 150Z" class="fg-bad"/>
+        <path d="M13.6 149.7 L15.6 149.6 L17.6 149.5 L19.6 149.5 L21.6 149.4 L23.6 149.3 L25.6 149.2 L27.6 149.1 L29.6 148.9 L31.6 148.8 L33.6 148.6 L35.6 148.4 L37.6 148.2 L39.6 148.0 L41.6 147.7 L43.6 147.4 L45.6 147.1 L47.6 146.8 L49.6 146.4 L51.6 145.9 L53.6 145.4 L55.6 144.9 L57.6 144.3 L59.6 143.7 L61.6 143.0 L63.6 142.3 L65.6 141.5 L67.6 140.6 L69.6 139.7 L71.6 138.6 L73.6 137.5 L75.6 136.4 L77.6 135.1 L79.6 133.8 L81.6 132.3 L83.6 130.8 L85.6 129.2 L87.6 127.5 L89.6 125.7 L91.6 123.8 L93.6 121.8 L95.6 119.7 L97.6 117.5 L99.6 115.3 L101.6 112.9 L103.6 110.5 L105.6 108.0 L107.6 105.4 L109.6 102.7 L111.6 100.0 L113.6 97.2 L115.6 94.3 L117.6 91.5 L119.6 88.5 L121.6 85.6 L123.6 82.7 L125.6 79.7 L127.6 76.8 L129.6 73.8 L131.6 71.0 L133.6 68.1 L135.6 65.3 L137.6 62.6 L139.6 60.0 L141.6 57.4 L143.6 55.0 L145.6 52.7 L147.6 50.5 L149.6 48.5 L151.6 46.6 L153.6 44.9 L155.6 43.4 L157.6 42.0 L159.6 40.8 L161.6 39.9 L163.6 39.1 L165.6 38.5 L167.6 38.2 L169.6 38.0 L171.6 38.1 L173.6 38.3 L175.6 38.8 L177.6 39.5 L179.6 40.4 L181.6 41.5 L183.6 42.8 L185.6 44.3 L187.6 45.9 L189.6 47.7 L191.6 49.7 L193.6 51.8 L195.6 54.1 L197.6 56.4 L199.6 58.9 L201.6 61.5 L203.6 64.2 L205.6 67.0 L207.6 69.8 L209.6 72.7 L211.6 75.6 L213.6 78.5 L215.6 81.5 L217.6 84.4 L219.6 87.4 L221.6 90.3 L223.6 93.2 L225.6 96.1 L227.6 98.9 L229.6 101.6 L231.6 104.3 L233.6 106.9 L235.6 109.5 L237.6 112.0 L239.6 114.3 L241.6 116.6 L243.6 118.9 L245.6 121.0 L247.6 123.0 L249.6 124.9 L251.6 126.8 L253.6 128.5 L255.6 130.2 L257.6 131.7 L259.6 133.2 L261.6 134.6 L263.6 135.9 L265.6 137.1 L267.6 138.2 L269.6 139.3 L271.6 140.2 L273.6 141.1 L275.6 142.0 L277.6 142.7 L279.6 143.4 L281.6 144.1 L283.6 144.7 L285.6 145.2 L287.6 145.7 L289.6 146.2 L291.6 146.6 L293.6 147.0 L295.6 147.3 L297.6 147.6 L299.6 147.9 L301.6 148.1 L303.6 148.3 L305.6 148.5 L307.6 148.7 L309.6 148.9 L311.6 149.0 L313.6 149.1 L315.6 149.3 L317.6 149.3 L319.6 149.4 L321.6 149.5 L323.6 149.6 L325.6 149.6" fill="none" class="fg-ink"/>
+        <path d="M10 150H330" class="fg-ink"/>
+        <path d="M170 38V150" class="fg-thin"/>
+        <text x="147" y="120" text-anchor="middle" class="t-sm t-b">34.1%</text>
+        <text x="193" y="120" text-anchor="middle" class="t-sm t-b">34.1%</text>
+        <text x="102" y="142" text-anchor="middle" class="t-sm">13.6%</text>
+        <text x="238" y="142" text-anchor="middle" class="t-sm">13.6%</text>
+        <text x="48" y="128" text-anchor="middle" class="t-sm t-bad">2.2%</text>
+        <text x="292" y="128" text-anchor="middle" class="t-sm t-bad">2.2%</text>
+        <path d="M32 150V155" class="fg-ink"/>
+        <text x="32" y="167" text-anchor="middle" class="t-sm">−3 SD</text>
+        <path d="M78 150V155" class="fg-ink"/>
+        <text x="78" y="167" text-anchor="middle" class="t-sm">−2 SD</text>
+        <path d="M124 150V155" class="fg-ink"/>
+        <text x="124" y="167" text-anchor="middle" class="t-sm">−1 SD</text>
+        <path d="M170 150V155" class="fg-ink"/>
+        <text x="170" y="167" text-anchor="middle" class="t-sm">mean</text>
+        <path d="M216 150V155" class="fg-ink"/>
+        <text x="216" y="167" text-anchor="middle" class="t-sm">+1 SD</text>
+        <path d="M262 150V155" class="fg-ink"/>
+        <text x="262" y="167" text-anchor="middle" class="t-sm">+2 SD</text>
+        <path d="M308 150V155" class="fg-ink"/>
+        <text x="308" y="167" text-anchor="middle" class="t-sm">+3 SD</text>
+        <path d="M124 178H216" class="fg-arrow-acc"/>
+        <text x="170" y="190" text-anchor="middle" class="t-sm t-acc t-b">68% within ±1 SD</text>
+        <path d="M78 198H262" class="fg-arrow"/>
+        <text x="170" y="210" text-anchor="middle" class="t-sm t-b">95% within ±2 SD</text>
+        <path d="M32 218H308" class="fg-arrow"/>
+        <text x="170" y="231" text-anchor="middle" class="t-sm t-b">99.7% within ±3 SD</text>
+        <text x="170" y="32" text-anchor="middle" class="t-sm t-mut">mean = median = mode</text>
+      </svg>
+  - kind: mnemonic
+    page: 11
+    quote: |-
+      3 Approximately,
+      68% of the scores fall between ± 1 SD
+      95% of the scores fall between ± 2 SD
+      99% of the scores fall between ± 3 SD
+    word: 68 · 95 · 99.7
+    parts:
+    - key: '68'
+      text: ±1 SD = 34.1 + 34.1 ≈ 68%
+    - key: '95'
+      text: ±2 SD = 68 + 13.6 + 13.6 ≈ 95%
+    - key: '99.7'
+      text: ±3 SD ≈ 99.7% (السلايد 11 بيقرّبها لـ 99%)
+    hook: '«ستة وتمانين؟ لأ: **68**، **95**، **99.7**»: كل خطوة SD بتزوّد المساحة لحد ما تقريبًا كله يبقى جوه.'
+  - kind: check
+    page: 4
+    quote: |-
+      2.2% | 13.6% | 34.1% | 34.1% | 13.6% | 2.2%
+      μ - 3σ | μ - 2σ | μ - σ | μ | μ + σ | μ + 2σ | μ + 3σ
+    question: What share of values lies between −1 SD and +2 SD?
+    options:
+    - About 81.8% (34.1 + 34.1 + 13.6)
+    - About 95%
+    - About 68%
+    - About 47.7%
+    answer: 0
+    why:
+    - 'صح: اجمع الـ bands: 34.1 + 34.1 + 13.6 = 81.8%.'
+    - الـ 95% من −2 لـ +2 SD.
+    - الـ 68% من −1 لـ +1 SD بس.
+    - 47.7% من الـ mean لـ +2 SD بس (ناحية واحدة).
+  - kind: explain
+    page: 11
+    quote: |-
+      Normal distribution curve
+      1 It is a theoretically perfect frequency polygon in which the mean, median and mode all coincide in the center.
+      2 It takes the form of a symmetrical bell-shaped curve of infinite range.
+      3 Approximately,
+      68% of the scores fall between ± 1 SD
+      95% of the scores fall between ± 2 SD
+      99% of the scores fall between ± 3 SD
+    title: 3 صفات لازم تحفظها
+    text: |-
+      1. ==Theoretically perfect frequency polygon==: الـ **mean** والـ **median** والـ **mode** كلهم في **النص** بالظبط (سلايد 7).
+      2. ==Symmetrical bell-shaped curve of infinite range==: متماثل، والأطراف بتقرب من الخط بس **مبتلمسوش أبدًا**.
+      3. تقريبًا **68%** بين ±1 SD، و**95%** بين ±2 SD، و**99%** بين ±3 SD.
+    remind: [res.L16.008]
+  - kind: aside
+    page: 11
+    quote: |-
+      3 Approximately,
+      68% of the scores fall between ± 1 SD
+      95% of the scores fall between ± 2 SD
+      99% of the scores fall between ± 3 SD
+    tone: exam
+    text: |-
+      السلايدات بتقرّب الأرقام بطرق مختلفة، فمتتلخبطش:
+
+      - سلايد 4 و11: tail = **2.2%** و±3 SD = **99%**.
+      - سلايد 15 و28: ±3 SD = **99.7%** (بالتفصيل 99.74%)، والـ tail = **2.15%**، وبعد 3 SD = **0.13%**.
+
+      في الامتحان: الرقم المعروف هو **99.7%**. لو الاختيارات فيها 99 بس من غير 99.7، يبقى هو ده.
+  - kind: try
+    page: null
+    quote: null
+    items: [res.L16.002, res.L16.007, res.L16.009, res.L16.011, res.L16.013]
+  recap:
+  - Normal = منحنى جرس (Gaussian) بيوصف continuous quantitative variables.
+  - هو أساس الـ analytic statistical tests.
+  - الـ mean = median = mode في النص، والمنحنى متماثل وملوش آخر.
+  - 34.1 / 13.6 / 2.2 في كل ناحية، و68 / 95 / 99.7 على ±1 / ±2 / ±3 SD.
+  practice: [res.L16.001, res.L16.002, res.L16.003, res.L16.004, res.L16.005, res.L16.006, res.L16.007, res.L16.008, res.L16.009,
+    res.L16.010, res.L16.011, res.L16.012, res.L16.013, res.L16.014, res.L16.015, res.L16.016, res.L16.017]
+- id: res.L16.lesson2
+  title: 'درجة محمد: الـ empirical rule في امتحان'
+  hook: 'محمد جاب 87 من 100. الدكتور قاله: المتوسط 75 والـ SD 10. يفرح قد إيه؟'
+  minutes: 7
+  pages: [12, 16]
+  topics: [empirical]
+  goals:
+  - تحوّل 68 / 95 / 99.7 لمدى درجات حقيقي
+  - تعرف مكان أي درجة بالنسبة للـ mean بعدد الـ SDs
+  status: unverified
+  steps:
+  - kind: explain
+    page: 13
+    quote: |-
+      Mohamed, a postgraduate student at the Faculty of Medicine, asked the professor about the distribution of exam scores after he saw his score of 87 out of 100.
+      The professor told him the distribution of test scores was approximately bell-shaped with a mean score of 75 and a standard deviation of 10.
+    title: القصة
+    text: |-
+      **محمد**، طالب دراسات عليا في كلية الطب، شاف درجته **87 من 100**. سأل الدكتور عن توزيع الدرجات، فقاله:
+
+      - التوزيع تقريبًا ==bell-shaped==.
+      - الـ **mean = 75**.
+      - الـ **SD = 10**.
+
+      وقارن درجته بزمايله: **أحمد 71**، **سارة 99**، و**فارس 39**.
+  - kind: explain
+    page: 14
+    quote: Most people would have an intuitive grasp of the mean score as being the "average student's score" and would say
+      this student did better than average. However, having an intuitive grasp of standard deviation is more challenging.
+      The Empirical Rule is a helpful tool in explaining standard deviation.
+    title: الـ mean سهل، الـ SD لأ
+    text: |-
+      كلنا فاهمين الـ **mean** = «درجة الطالب المتوسط»، فهنقول محمد أحسن من المتوسط.
+
+      بس الـ **SD** صعب نحسّه. هنا ييجي ==Empirical Rule==: يحوّل الـ SD لمدى درجات تقدر تتخيله.
+  - kind: figure
+    page: 16
+    quote: Mohamed
+    title: الامتحان على المنحنى
+    alt: A bell curve for exam scores with the base marked 45, 55, 65, 75, 85, 95 and 105. The middle band from 65 to 85 is
+      shaded and labelled 68%. An arrow marks Mohamed's score of 87, just past 85. A note below reads 95% from 55 to 95 and
+      99.7% from 45 to 105.
+    caption: كل SD = **10 درجات**. فـ ±1 SD = **65–85**، و±2 SD = **55–95**، و±3 SD = **45–105**. ودرجة محمد **87** بعد الـ
+      85 بشوية.
+    svg: |-
+      <svg viewBox="0 0 340 214" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="L16a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+        </defs>
+        <path d="M20.4 150 L20.4 149.7 L22.4 149.6 L24.4 149.5 L26.4 149.5 L28.4 149.4 L30.4 149.3 L32.4 149.2 L34.4 149.0 L36.4 148.9 L38.4 148.7 L40.4 148.6 L42.4 148.4 L44.4 148.1 L46.4 147.9 L48.4 147.6 L50.4 147.3 L52.4 146.9 L54.4 146.5 L56.4 146.1 L58.4 145.6 L60.4 145.1 L62.4 144.5 L64.4 143.8 L66.4 143.1 L68.4 142.4 L70.4 141.5 L72.4 140.6 L74.4 139.6 L76.4 138.6 L78.4 137.4 L80.4 136.2 L82.4 134.8 L84.4 133.4 L86.4 131.9 L88.4 130.3 L90.4 128.6 L92.4 126.8 L94.4 124.9 L96.4 122.8 L98.4 120.7 L100.4 118.5 L102.4 116.2 L104.4 113.8 L106.4 111.3 L108.4 108.7 L110.4 106.0 L112.4 103.3 L114.4 100.5 L116.4 97.6 L118.4 94.7 L120.4 91.7 L122.4 88.7 L124.4 85.7 L124.4 150Z" class="fg-box"/>
+        <path d="M126.0 150 L126.0 83.3 L128.0 80.3 L130.0 77.2 L132.0 74.2 L134.0 71.3 L136.0 68.4 L138.0 65.6 L140.0 62.8 L142.0 60.2 L144.0 57.6 L146.0 55.2 L148.0 52.9 L150.0 50.8 L152.0 48.8 L154.0 47.0 L156.0 45.4 L158.0 44.0 L160.0 42.8 L162.0 41.8 L164.0 41.0 L166.0 40.5 L168.0 40.1 L170.0 40.0 L172.0 40.1 L174.0 40.5 L176.0 41.0 L178.0 41.8 L180.0 42.8 L182.0 44.0 L184.0 45.4 L186.0 47.0 L188.0 48.8 L190.0 50.8 L192.0 52.9 L194.0 55.2 L196.0 57.6 L198.0 60.2 L200.0 62.8 L202.0 65.6 L204.0 68.4 L206.0 71.3 L208.0 74.2 L210.0 77.2 L212.0 80.3 L214.0 83.3 L214.0 150Z" class="fg-acc"/>
+        <path d="M214.0 150 L214.0 83.3 L216.0 86.3 L218.0 89.3 L220.0 92.3 L222.0 95.3 L224.0 98.2 L226.0 101.1 L228.0 103.9 L230.0 106.6 L232.0 109.2 L234.0 111.8 L236.0 114.3 L238.0 116.7 L240.0 119.0 L242.0 121.2 L244.0 123.3 L246.0 125.3 L248.0 127.1 L250.0 128.9 L252.0 130.6 L254.0 132.2 L256.0 133.7 L258.0 135.1 L260.0 136.4 L262.0 137.6 L264.0 138.8 L266.0 139.8 L268.0 140.8 L270.0 141.7 L272.0 142.5 L274.0 143.3 L276.0 144.0 L278.0 144.6 L280.0 145.2 L282.0 145.7 L284.0 146.2 L286.0 146.6 L288.0 147.0 L290.0 147.3 L292.0 147.6 L294.0 147.9 L296.0 148.2 L298.0 148.4 L300.0 148.6 L302.0 148.8 L304.0 148.9 L306.0 149.1 L308.0 149.2 L310.0 149.3 L312.0 149.4 L314.0 149.5 L316.0 149.6 L318.0 149.6 L318.0 150Z" class="fg-box"/>
+        <path d="M20.4 149.7 L22.4 149.6 L24.4 149.5 L26.4 149.5 L28.4 149.4 L30.4 149.3 L32.4 149.2 L34.4 149.0 L36.4 148.9 L38.4 148.7 L40.4 148.6 L42.4 148.4 L44.4 148.1 L46.4 147.9 L48.4 147.6 L50.4 147.3 L52.4 146.9 L54.4 146.5 L56.4 146.1 L58.4 145.6 L60.4 145.1 L62.4 144.5 L64.4 143.8 L66.4 143.1 L68.4 142.4 L70.4 141.5 L72.4 140.6 L74.4 139.6 L76.4 138.6 L78.4 137.4 L80.4 136.2 L82.4 134.8 L84.4 133.4 L86.4 131.9 L88.4 130.3 L90.4 128.6 L92.4 126.8 L94.4 124.9 L96.4 122.8 L98.4 120.7 L100.4 118.5 L102.4 116.2 L104.4 113.8 L106.4 111.3 L108.4 108.7 L110.4 106.0 L112.4 103.3 L114.4 100.5 L116.4 97.6 L118.4 94.7 L120.4 91.7 L122.4 88.7 L124.4 85.7 L126.4 82.7 L128.4 79.6 L130.4 76.6 L132.4 73.6 L134.4 70.7 L136.4 67.8 L138.4 65.0 L140.4 62.3 L142.4 59.6 L144.4 57.1 L146.4 54.7 L148.4 52.5 L150.4 50.4 L152.4 48.5 L154.4 46.7 L156.4 45.1 L158.4 43.8 L160.4 42.6 L162.4 41.6 L164.4 40.9 L166.4 40.4 L168.4 40.1 L170.4 40.0 L172.4 40.2 L174.4 40.5 L176.4 41.2 L178.4 42.0 L180.4 43.0 L182.4 44.3 L184.4 45.7 L186.4 47.4 L188.4 49.2 L190.4 51.2 L192.4 53.4 L194.4 55.7 L196.4 58.1 L198.4 60.7 L200.4 63.4 L202.4 66.1 L204.4 69.0 L206.4 71.9 L208.4 74.8 L210.4 77.8 L212.4 80.9 L214.4 83.9 L216.4 86.9 L218.4 89.9 L220.4 92.9 L222.4 95.9 L224.4 98.8 L226.4 101.6 L228.4 104.4 L230.4 107.1 L232.4 109.8 L234.4 112.3 L236.4 114.8 L238.4 117.1 L240.4 119.4 L242.4 121.6 L244.4 123.7 L246.4 125.6 L248.4 127.5 L250.4 129.3 L252.4 131.0 L254.4 132.5 L256.4 134.0 L258.4 135.4 L260.4 136.7 L262.4 137.9 L264.4 139.0 L266.4 140.0 L268.4 141.0 L270.4 141.9 L272.4 142.7 L274.4 143.4 L276.4 144.1 L278.4 144.7 L280.4 145.3 L282.4 145.8 L284.4 146.3 L286.4 146.7 L288.4 147.1 L290.4 147.4 L292.4 147.7 L294.4 148.0 L296.4 148.2 L298.4 148.4 L300.4 148.6 L302.4 148.8 L304.4 149.0 L306.4 149.1 L308.4 149.2 L310.4 149.3 L312.4 149.4 L314.4 149.5 L316.4 149.6 L318.4 149.6" fill="none" class="fg-ink"/>
+        <path d="M10 150H330" class="fg-ink"/>
+        <path d="M38 150V155" class="fg-ink"/>
+        <text x="38" y="168" text-anchor="middle" class="t-sm">45</text>
+        <path d="M82 150V155" class="fg-ink"/>
+        <text x="82" y="168" text-anchor="middle" class="t-sm">55</text>
+        <path d="M126 150V155" class="fg-ink"/>
+        <text x="126" y="168" text-anchor="middle" class="t-sm">65</text>
+        <path d="M170 150V155" class="fg-ink"/>
+        <text x="170" y="168" text-anchor="middle" class="t-sm t-b">75</text>
+        <path d="M214 150V155" class="fg-ink"/>
+        <text x="214" y="168" text-anchor="middle" class="t-sm">85</text>
+        <path d="M258 150V155" class="fg-ink"/>
+        <text x="258" y="168" text-anchor="middle" class="t-sm">95</text>
+        <path d="M302 150V155" class="fg-ink"/>
+        <text x="302" y="168" text-anchor="middle" class="t-sm">105</text>
+        <path d="M222.8 22V146" class="fg-arrow-acc" marker-end="url(#L16a)"/>
+        <text x="228.8" y="20" class="t-sm t-acc t-b">Mohamed 87</text>
+        <text x="170" y="112" text-anchor="middle" class="t-sm t-b">68%</text>
+        <text x="170" y="126" text-anchor="middle" class="t-sm t-mut">65 to 85</text>
+        <text x="170" y="188" text-anchor="middle" class="t-sm">95%: 55 to 95 · 99.7%: 45 to 105</text>
+        <text x="170" y="206" text-anchor="middle" class="t-sm t-mut">mean 75, SD 10</text>
+      </svg>
+  - kind: table
+    page: 15
+    quote: |-
+      In the example, our interpretation would be:
+      68% of students scored between 65 and 85.
+      95% of students scored between 55 and 95.
+      99.7% of students scored between 45 and 105.
+      The student who scored an 87 would be at more than one standard deviation above the mean score.
+    title: تفسير السلايد 15
+    columns:
+    - Band
+    - Scores
+    - Students
+    rows:
+    - - ±1 SD
+      - 65 to 85
+      - 68%
+    - - ±2 SD
+      - 55 to 95
+      - 95%
+    - - ±3 SD
+      - 45 to 105
+      - 99.7%
+    hide:
+    - - 0
+      - 1
+    - - 1
+      - 1
+    - - 2
+      - 1
+  - kind: check
+    page: 15
+    quote: The student who scored an 87 would be at more than one standard deviation above the mean score.
+    question: Where does 87 sit (mean 75, SD 10)?
+    options:
+    - More than 1 SD above the mean
+    - Within 1 SD of the mean
+    - More than 2 SD above the mean
+    - Exactly at +1 SD
+    answer: 0
+    why:
+    - 'صح: +1 SD = 85، و87 عدّاها، بس لسه قبل +2 SD (95).'
+    - جوه 1 SD يعني لحد 85 بس.
+    - الـ +2 SD عند 95.
+    - +1 SD بالظبط = 85، مش 87.
+  - kind: check
+    page: 16
+    quote: 45 | 55 | 65 | 75 | 85 | 95 | 105
+    question: About what share of the class scored above 95?
+    options:
+    - About 2.2% (2.5% by the 95% rule)
+    - About 13.6%
+    - About 5%
+    - About 16%
+    answer: 0
+    why:
+    - 'صح: 95 = +2 SD، وبعدها الـ tail بتاع ناحية واحدة: نص الـ 5% اللي برّه ±2 SD.'
+    - 13.6% بين 85 و95.
+    - 5% دي الناحيتين مع بعض (تحت 55 وفوق 95).
+    - 16% فوق 85 (+1 SD).
+  - kind: reveal
+    page: 15
+    quote: 99.7% of students scored between 45 and 105.
+    prompt: الدرجة من 100، يبقى إزاي ±3 SD بيوصل لـ 105؟
+    answer: 'لأن الـ empirical rule **نموذج نظري**: المنحنى ملوش آخر، والحساب 75 + 3×10 = 105 حتى لو الامتحان مبيعدّيش 100.
+      التوزيع الحقيقي «تقريبًا» bell-shaped بس.'
+  - kind: try
+    page: null
+    quote: null
+    items: [res.L16.019, res.L16.020, res.L16.021, res.L16.022]
+  recap:
+  - 'Mean 75 و SD 10: ±1 SD = 65–85 (68%)، ±2 SD = 55–95 (95%)، ±3 SD = 45–105 (99.7%).'
+  - الـ empirical rule بيخلّي الـ SD حاجة تتخيلها.
+  - محمد 87 = أكتر من SD واحد فوق المتوسط.
+  practice: [res.L16.018, res.L16.019, res.L16.020, res.L16.021, res.L16.022]
+- id: res.L16.lesson3
+  title: 'الـ Z-score: بعيد عن المتوسط بكام SD؟'
+  hook: سارة جابت 99 وفارس جاب 39. مين فيهم «غريب»؟ ومين لازم نراجع درجته؟
+  minutes: 10
+  pages: [17, 23]
+  topics: [zscore]
+  goals:
+  - تحسب الـ Z-score وتقرا إشارته
+  - 'تصنّف القيمة: ordinary، unusual، extreme'
+  - تقارن درجات من امتحانات مختلفة
+  status: unverified
+  steps:
+  - kind: explain
+    page: 22
+    quote: |-
+      The Z - Score
+      The standard score, or Z-score, represents the number of standard deviations a random variable X falls away from the mean.
+      i.e. How many standard deviations a particular data point is above or below the mean?
+      Formula for Z-score: Z = (Xi - X̄) / s
+    title: التعريف
+    text: |-
+      الـ ==standard score== أو ==Z-score== = **عدد الـ standard deviations** اللي القيمة بعيدة بيها عن الـ mean.
+
+      يعني بيجاوب على سؤال واحد: «القيمة دي **فوق** أو **تحت** المتوسط بكام SD؟»
+  - kind: explain
+    page: 17
+    quote: 'Formula for Z-score: Z = (Xi - X̄) / s'
+    title: المعادلة
+    text: |-
+      **Z = (Xi − X̄) ÷ s**
+
+      - اطرح الـ **mean** من القيمة.
+      - اقسم على الـ **SD**.
+
+      والإشارة: ==موجب== = فوق المتوسط، ==سالب== = تحت المتوسط، و**صفر** = هو المتوسط نفسه.
+
+      مثال محمد: (87 − 75) ÷ 10 = **+1.2**. حاسبة «Z-score» في Batna بتعملها.
+  - kind: check
+    page: 17
+    quote: Z = (87-75)/10 = 1.2
+    question: 'Ahmed scored 71 (mean 75, SD 10). His Z-score is:'
+    options:
+    - −0.4
+    - '+0.4'
+    - −4
+    - −7.1
+    answer: 0
+    why:
+    - 'صح: (71 − 75) ÷ 10 = −0.4، تحت المتوسط بشوية.'
+    - 'الإشارة غلط: 71 أقل من 75.'
+    - نسيت تقسم على 10.
+    - قسمت 71 على 10 من غير ما تطرح المتوسط.
+  - kind: explain
+    page: 18
+    quote: |-
+      Unusual observations would have a Z-score over 2 or under -2.
+      Extreme observations would have Z-scores over 3 or under -3 and should be investigated as potential outliers.
+    title: ordinary ولا unusual ولا extreme؟
+    text: |-
+      - ==Ordinary==: Z بين **−2 و+2** (حوالي 95% من القيم).
+      - ==Unusual==: Z **فوق 2 أو تحت −2**.
+      - ==Extreme==: Z **فوق 3 أو تحت −3**، ودي لازم **investigate as potential outliers**: ممكن تكون قيمة حقيقية، وممكن غلطة في القياس أو الإدخال.
+  - kind: figure
+    page: 23
+    quote: |-
+      The Gaussian Distribution (Normal Distribution Curve) and the Z Score
+      Extreme value outlier | Unusual Value | Ordinary Values 95% of values | Unusual Value | Extreme value outlier
+      Z: -3 | -2 | -1 | 0 | 1 | 2 | 3
+    title: الـ Z على خط واحد
+    alt: 'A horizontal Z line from −4 to +4 split into zones: extreme beyond ±3, unusual between 2 and 3 on each side, ordinary
+      from −2 to +2 holding 95% of values. Four students are marked: Fares 39 at −3.6 in the extreme zone, Ahmed 71 at −0.4
+      and Mohamed 87 at +1.2 in the ordinary zone, Sarah 99 at +2.4 in the unusual zone.'
+    caption: '**فارس −3.6** في الـ extreme، و**سارة +2.4** في الـ unusual، و**أحمد** و**محمد** في الـ ordinary.'
+    svg: |-
+      <svg viewBox="0 0 340 176" xmlns="http://www.w3.org/2000/svg">
+        <text x="170" y="13" text-anchor="middle" class="t-sm t-b">Z = (value − mean) ÷ SD   ·   mean 75, SD 10</text>
+        <rect x="10.4" y="44" width="45.6" height="30" class="fg-bad"/>
+        <text x="37.0" y="28" text-anchor="middle" class="t-sm t-bad">extreme</text>
+        <rect x="56.0" y="44" width="38.0" height="30" class="fg-box"/>
+        <text x="75.0" y="40" text-anchor="middle" class="t-sm">unusual</text>
+        <rect x="94.0" y="44" width="152.0" height="30" class="fg-good"/>
+        <text x="170.0" y="63" text-anchor="middle" class="t-sm t-b">Ordinary 95%</text>
+        <rect x="246.0" y="44" width="38.0" height="30" class="fg-box"/>
+        <text x="265.0" y="40" text-anchor="middle" class="t-sm">unusual</text>
+        <rect x="284.0" y="44" width="45.6" height="30" class="fg-bad"/>
+        <text x="303.0" y="28" text-anchor="middle" class="t-sm t-bad">extreme</text>
+        <text x="18.0" y="90" text-anchor="middle" class="t-sm t-mut">−4</text>
+        <text x="56.0" y="90" text-anchor="middle" class="t-sm t-mut">−3</text>
+        <text x="94.0" y="90" text-anchor="middle" class="t-sm t-mut">−2</text>
+        <text x="132.0" y="90" text-anchor="middle" class="t-sm t-mut">−1</text>
+        <text x="170.0" y="90" text-anchor="middle" class="t-sm t-mut">0</text>
+        <text x="208.0" y="90" text-anchor="middle" class="t-sm t-mut">+1</text>
+        <text x="246.0" y="90" text-anchor="middle" class="t-sm t-mut">+2</text>
+        <text x="284.0" y="90" text-anchor="middle" class="t-sm t-mut">+3</text>
+        <text x="322.0" y="90" text-anchor="middle" class="t-sm t-mut">+4</text>
+        <path d="M33.2 76V104" class="fg-thin"/>
+        <circle cx="33.2" cy="104" r="4" class="fg-dot-acc"/>
+        <text x="6.0" y="120" text-anchor="start" class="t-sm t-bad">Fares 39 (−3.6)</text>
+        <path d="M154.8 76V130" class="fg-thin"/>
+        <circle cx="154.8" cy="130" r="4" class="fg-dot-acc"/>
+        <text x="154.8" y="146" text-anchor="middle" class="t-sm t-mut">Ahmed 71 (−0.4)</text>
+        <path d="M215.6 76V104" class="fg-thin"/>
+        <circle cx="215.6" cy="104" r="4" class="fg-dot-acc"/>
+        <text x="215.6" y="120" text-anchor="middle" class="t-sm t-acc">Mohamed 87 (+1.2)</text>
+        <path d="M261.2 76V130" class="fg-thin"/>
+        <circle cx="261.2" cy="130" r="4" class="fg-dot-acc"/>
+        <text x="261.2" y="146" text-anchor="middle" class="t-sm t-b">Sarah 99 (+2.4)</text>
+      </svg>
+  - kind: table
+    page: 20
+    quote: |-
+      Test Score | Z-score | Interpretation
+      87 | +1.2 | well above average
+      71 | -0.4 | slightly below average
+      99 | +2.4 | unusually above average
+      39 | -3.6 | extremely below average
+    title: جدول السلايد 20
+    columns:
+    - Score
+    - Z
+    - Interpretation
+    rows:
+    - - '87'
+      - '+1.2'
+      - Well above average
+    - - '71'
+      - −0.4
+      - Slightly below average
+    - - '99'
+      - '+2.4'
+      - Unusually above average
+    - - '39'
+      - −3.6
+      - Extremely below average
+    hide:
+    - - 0
+      - 2
+    - - 2
+      - 2
+    - - 3
+      - 2
+  - kind: check
+    page: 21
+    quote: |-
+      Regarding Mohamed's performance in the Examination, we would conclude that his test score is:
+      A. Unusually above average
+      B. Extremely above average
+      C. Slightly above average
+      D. Well above average
+    question: 'Regarding Mohamed''s score (Z = +1.2), we conclude it is:'
+    options:
+    - Well above average
+    - Unusually above average
+    - Extremely above average
+    - Slightly above average
+    answer: 0
+    why:
+    - 'صح: إجابة السلايد (D). أعلى من المتوسط بوضوح، بس مش unusual لأن Z أقل من 2.'
+    - الـ unusual محتاج Z فوق 2، زي سارة.
+    - الـ extreme محتاج Z فوق 3.
+    - الـ slightly لقيمة قريبة جدًا من المتوسط، زي أحمد −0.4.
+  - kind: check
+    page: 18
+    quote: Extreme observations would have Z-scores over 3 or under -3 and should be investigated as potential outliers.
+    question: A patient's serum sodium has Z = +3.3 against the lab's reference group. What do you do first?
+    options:
+    - Investigate it as a potential outlier (re-check the sample and the entry)
+    - 'Ignore it: it is ordinary'
+    - Delete it from the data
+    - Call it unusual but not extreme
+    answer: 0
+    why:
+    - 'صح: فوق 3 = extreme، والسلايد بيقول investigate as potential outlier. يمكن الـ sample اتلوث، أو الرقم اتكتب غلط، أو
+      هو فعلًا عالي.'
+    - الـ ordinary بين −2 و+2.
+    - الـ outlier بنحقق فيه، مش بنمسحه على طول.
+    - الـ unusual من 2 لـ 3؛ 3.3 بعدها.
+  - kind: explain
+    page: 22
+    quote: The standard score, or Z-score, represents the number of standard deviations a random variable X falls away from
+      the mean.
+    title: ليه الـ Z مفيد؟ المقارنة
+    text: |-
+      الـ Z بيحوّل أي قيمة لـ **نفس المقياس** (الـ SD)، فتقدر تقارن حاجات مختلفة:
+
+      - علي: 70 في امتحان (mean 60، SD 5) ← **Z = +2**.
+      - منى: 80 في امتحان تاني (mean 70، SD 10) ← **Z = +1**.
+
+      علي **أحسن** بالنسبة لدفعته، مع إن درجة منى الخام أعلى.
+  - kind: aside
+    page: 18
+    quote: Unusual observations would have a Z-score over 2 or under -2.
+    tone: tip
+    text: |-
+      هتقابل كمان **1.96** في الـ hypothesis testing: ده الحد الدقيق للـ 95% (two-sided). المحاضرة دي بتقرّبه لـ **2**، فعند السؤال عن «unusual» جاوب بـ **2** و**3** زي السلايد.
+  - kind: try
+    page: null
+    quote: null
+    items: [res.L16.026, res.L16.029, res.L16.030, res.L16.033, res.L16.034]
+  recap:
+  - 'Z = (value − mean) ÷ SD: موجب فوق المتوسط، سالب تحته.'
+  - '|Z| ≤ 2 ordinary، فوق 2 unusual، فوق 3 extreme (potential outlier).'
+  - محمد +1.2 well above، أحمد −0.4 slightly below، سارة +2.4 unusually above، فارس −3.6 extremely below.
+  - الـ Z بيقارن قيم من توزيعات مختلفة.
+  practice: [res.L16.023, res.L16.024, res.L16.025, res.L16.026, res.L16.027, res.L16.028, res.L16.029, res.L16.030, res.L16.031,
+    res.L16.032, res.L16.033, res.L16.034, res.L16.035, res.L16.036]
+- id: res.L16.lesson4
+  title: 'شكل البيانات: الانتشار والـ skew'
+  hook: 'مدة القعدة في المستشفى: أغلب العيانين 3–4 أيام، وكام واحد قعد شهرين. ينفع تلخصها بالـ mean؟'
+  minutes: 9
+  pages: [24, 33]
+  topics: [shape]
+  goals:
+  - تفرّق بين الـ mean (المكان) والـ SD (الانتشار)
+  - تحدد اتجاه الـ skew وترتيب mean و median و mode
+  - تعرف رموز الـ population والـ sample
+  - تختار التلخيص المناسب (mean/SD أو median/IQR)
+  status: unverified
+  steps:
+  - kind: figure
+    page: 24
+    quote: |-
+      Normal distribution curve
+      μ=0, σ²=0.2
+      μ=0, σ²=1.0
+      μ=0, σ²=5.0
+      μ=−2, σ²=0.5
+    title: الـ SD بيغيّر العرض
+    alt: Three normal curves on one axis sharing the same mean. The one with the smallest SD is tall and narrow, the medium
+      one is in between, and the one with the largest SD is flat and wide.
+    caption: 'الـ **mean** بيحدد ==مكان== المنحنى (μ = −2 بيزقّه شمال)، والـ **SD** بيحدد ==انتشاره==: SD صغير = منحنى **عالي
+      وضيق**، وكبير = **واطي وعريض**.'
+    svg: |-
+      <svg viewBox="0 0 340 186" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.0 150.0 L12.0 150.0 L14.0 150.0 L16.0 150.0 L18.0 150.0 L20.0 150.0 L22.0 150.0 L24.0 150.0 L26.0 150.0 L28.0 150.0 L30.0 150.0 L32.0 150.0 L34.0 150.0 L36.0 150.0 L38.0 150.0 L40.0 150.0 L42.0 150.0 L44.0 150.0 L46.0 150.0 L48.0 150.0 L50.0 150.0 L52.0 150.0 L54.0 150.0 L56.0 150.0 L58.0 150.0 L60.0 150.0 L62.0 150.0 L64.0 150.0 L66.0 150.0 L68.0 150.0 L70.0 150.0 L72.0 150.0 L74.0 150.0 L76.0 150.0 L78.0 150.0 L80.0 150.0 L82.0 150.0 L84.0 150.0 L86.0 150.0 L88.0 150.0 L90.0 150.0 L92.0 149.9 L94.0 149.9 L96.0 149.9 L98.0 149.8 L100.0 149.7 L102.0 149.6 L104.0 149.5 L106.0 149.3 L108.0 149.0 L110.0 148.7 L112.0 148.2 L114.0 147.6 L116.0 146.9 L118.0 145.9 L120.0 144.7 L122.0 143.3 L124.0 141.5 L126.0 139.3 L128.0 136.8 L130.0 133.8 L132.0 130.3 L134.0 126.3 L136.0 121.7 L138.0 116.6 L140.0 111.0 L142.0 105.0 L144.0 98.5 L146.0 91.6 L148.0 84.5 L150.0 77.2 L152.0 70.0 L154.0 62.9 L156.0 56.1 L158.0 49.8 L160.0 44.1 L162.0 39.2 L164.0 35.3 L166.0 32.4 L168.0 30.6 L170.0 30.0 L172.0 30.6 L174.0 32.4 L176.0 35.3 L178.0 39.2 L180.0 44.1 L182.0 49.8 L184.0 56.1 L186.0 62.9 L188.0 70.0 L190.0 77.2 L192.0 84.5 L194.0 91.6 L196.0 98.5 L198.0 105.0 L200.0 111.0 L202.0 116.6 L204.0 121.7 L206.0 126.3 L208.0 130.3 L210.0 133.8 L212.0 136.8 L214.0 139.3 L216.0 141.5 L218.0 143.3 L220.0 144.7 L222.0 145.9 L224.0 146.9 L226.0 147.6 L228.0 148.2 L230.0 148.7 L232.0 149.0 L234.0 149.3 L236.0 149.5 L238.0 149.6 L240.0 149.7 L242.0 149.8 L244.0 149.9 L246.0 149.9 L248.0 149.9 L250.0 150.0 L252.0 150.0 L254.0 150.0 L256.0 150.0 L258.0 150.0 L260.0 150.0 L262.0 150.0 L264.0 150.0 L266.0 150.0 L268.0 150.0 L270.0 150.0 L272.0 150.0 L274.0 150.0 L276.0 150.0 L278.0 150.0 L280.0 150.0 L282.0 150.0 L284.0 150.0 L286.0 150.0 L288.0 150.0 L290.0 150.0 L292.0 150.0 L294.0 150.0 L296.0 150.0 L298.0 150.0 L300.0 150.0 L302.0 150.0 L304.0 150.0 L306.0 150.0 L308.0 150.0 L310.0 150.0 L312.0 150.0 L314.0 150.0 L316.0 150.0 L318.0 150.0 L320.0 150.0 L322.0 150.0 L324.0 150.0 L326.0 150.0 L328.0 150.0 L330.0 150.0" fill="none" class="fg-arrow-acc"/>
+        <path d="M10.0 150.0 L12.0 150.0 L14.0 150.0 L16.0 150.0 L18.0 150.0 L20.0 149.9 L22.0 149.9 L24.0 149.9 L26.0 149.9 L28.0 149.9 L30.0 149.9 L32.0 149.8 L34.0 149.8 L36.0 149.8 L38.0 149.7 L40.0 149.7 L42.0 149.6 L44.0 149.6 L46.0 149.5 L48.0 149.4 L50.0 149.3 L52.0 149.2 L54.0 149.1 L56.0 148.9 L58.0 148.8 L60.0 148.6 L62.0 148.4 L64.0 148.1 L66.0 147.9 L68.0 147.6 L70.0 147.3 L72.0 146.9 L74.0 146.5 L76.0 146.1 L78.0 145.6 L80.0 145.1 L82.0 144.5 L84.0 143.9 L86.0 143.2 L88.0 142.4 L90.0 141.6 L92.0 140.7 L94.0 139.8 L96.0 138.8 L98.0 137.7 L100.0 136.6 L102.0 135.4 L104.0 134.1 L106.0 132.8 L108.0 131.3 L110.0 129.9 L112.0 128.3 L114.0 126.7 L116.0 125.1 L118.0 123.4 L120.0 121.6 L122.0 119.8 L124.0 118.0 L126.0 116.1 L128.0 114.3 L130.0 112.4 L132.0 110.5 L134.0 108.6 L136.0 106.8 L138.0 105.0 L140.0 103.2 L142.0 101.5 L144.0 99.8 L146.0 98.2 L148.0 96.7 L150.0 95.3 L152.0 94.0 L154.0 92.8 L156.0 91.7 L158.0 90.7 L160.0 89.9 L162.0 89.2 L164.0 88.7 L166.0 88.3 L168.0 88.1 L170.0 88.0 L172.0 88.1 L174.0 88.3 L176.0 88.7 L178.0 89.2 L180.0 89.9 L182.0 90.7 L184.0 91.7 L186.0 92.8 L188.0 94.0 L190.0 95.3 L192.0 96.7 L194.0 98.2 L196.0 99.8 L198.0 101.5 L200.0 103.2 L202.0 105.0 L204.0 106.8 L206.0 108.6 L208.0 110.5 L210.0 112.4 L212.0 114.3 L214.0 116.1 L216.0 118.0 L218.0 119.8 L220.0 121.6 L222.0 123.4 L224.0 125.1 L226.0 126.7 L228.0 128.3 L230.0 129.9 L232.0 131.3 L234.0 132.8 L236.0 134.1 L238.0 135.4 L240.0 136.6 L242.0 137.7 L244.0 138.8 L246.0 139.8 L248.0 140.7 L250.0 141.6 L252.0 142.4 L254.0 143.2 L256.0 143.9 L258.0 144.5 L260.0 145.1 L262.0 145.6 L264.0 146.1 L266.0 146.5 L268.0 146.9 L270.0 147.3 L272.0 147.6 L274.0 147.9 L276.0 148.1 L278.0 148.4 L280.0 148.6 L282.0 148.8 L284.0 148.9 L286.0 149.1 L288.0 149.2 L290.0 149.3 L292.0 149.4 L294.0 149.5 L296.0 149.6 L298.0 149.6 L300.0 149.7 L302.0 149.7 L304.0 149.8 L306.0 149.8 L308.0 149.8 L310.0 149.9 L312.0 149.9 L314.0 149.9 L316.0 149.9 L318.0 149.9 L320.0 149.9 L322.0 150.0 L324.0 150.0 L326.0 150.0 L328.0 150.0 L330.0 150.0" fill="none" class="fg-arrow"/>
+        <path d="M10.0 147.4 L12.0 147.2 L14.0 147.0 L16.0 146.8 L18.0 146.6 L20.0 146.4 L22.0 146.1 L24.0 145.9 L26.0 145.7 L28.0 145.4 L30.0 145.1 L32.0 144.8 L34.0 144.5 L36.0 144.2 L38.0 143.9 L40.0 143.6 L42.0 143.2 L44.0 142.9 L46.0 142.5 L48.0 142.1 L50.0 141.7 L52.0 141.3 L54.0 140.9 L56.0 140.4 L58.0 140.0 L60.0 139.5 L62.0 139.1 L64.0 138.6 L66.0 138.1 L68.0 137.5 L70.0 137.0 L72.0 136.5 L74.0 135.9 L76.0 135.4 L78.0 134.8 L80.0 134.2 L82.0 133.7 L84.0 133.1 L86.0 132.5 L88.0 131.9 L90.0 131.3 L92.0 130.6 L94.0 130.0 L96.0 129.4 L98.0 128.8 L100.0 128.2 L102.0 127.5 L104.0 126.9 L106.0 126.3 L108.0 125.7 L110.0 125.1 L112.0 124.5 L114.0 123.9 L116.0 123.3 L118.0 122.7 L120.0 122.1 L122.0 121.5 L124.0 121.0 L126.0 120.5 L128.0 119.9 L130.0 119.4 L132.0 118.9 L134.0 118.5 L136.0 118.0 L138.0 117.6 L140.0 117.2 L142.0 116.8 L144.0 116.4 L146.0 116.1 L148.0 115.7 L150.0 115.4 L152.0 115.2 L154.0 114.9 L156.0 114.7 L158.0 114.5 L160.0 114.4 L162.0 114.2 L164.0 114.1 L166.0 114.1 L168.0 114.0 L170.0 114.0 L172.0 114.0 L174.0 114.1 L176.0 114.1 L178.0 114.2 L180.0 114.4 L182.0 114.5 L184.0 114.7 L186.0 114.9 L188.0 115.2 L190.0 115.4 L192.0 115.7 L194.0 116.1 L196.0 116.4 L198.0 116.8 L200.0 117.2 L202.0 117.6 L204.0 118.0 L206.0 118.5 L208.0 118.9 L210.0 119.4 L212.0 119.9 L214.0 120.5 L216.0 121.0 L218.0 121.5 L220.0 122.1 L222.0 122.7 L224.0 123.3 L226.0 123.9 L228.0 124.5 L230.0 125.1 L232.0 125.7 L234.0 126.3 L236.0 126.9 L238.0 127.5 L240.0 128.2 L242.0 128.8 L244.0 129.4 L246.0 130.0 L248.0 130.6 L250.0 131.3 L252.0 131.9 L254.0 132.5 L256.0 133.1 L258.0 133.7 L260.0 134.2 L262.0 134.8 L264.0 135.4 L266.0 135.9 L268.0 136.5 L270.0 137.0 L272.0 137.5 L274.0 138.1 L276.0 138.6 L278.0 139.1 L280.0 139.5 L282.0 140.0 L284.0 140.4 L286.0 140.9 L288.0 141.3 L290.0 141.7 L292.0 142.1 L294.0 142.5 L296.0 142.9 L298.0 143.2 L300.0 143.6 L302.0 143.9 L304.0 144.2 L306.0 144.5 L308.0 144.8 L310.0 145.1 L312.0 145.4 L314.0 145.7 L316.0 145.9 L318.0 146.1 L320.0 146.4 L322.0 146.6 L324.0 146.8 L326.0 147.0 L328.0 147.2 L330.0 147.4" fill="none" class="fg-arrow-bad"/>
+        <path d="M10 150H330" class="fg-ink"/>
+        <path d="M170 24V150" class="fg-thin"/>
+        <text x="196" y="40" class="t-sm t-acc t-b">small SD: tall, narrow</text>
+        <text x="222" y="100" class="t-sm">medium SD</text>
+        <text x="10" y="116" class="t-sm t-bad">large SD: flat, wide</text>
+        <text x="170" y="168" text-anchor="middle" class="t-sm t-mut">same mean, different spread</text>
+        <text x="170" y="182" text-anchor="middle" class="t-sm t-mut">a different mean would slide the whole curve</text>
+      </svg>
+  - kind: check
+    page: 24
+    quote: |-
+      Normal distribution curve
+      μ=0, σ²=0.2
+      μ=0, σ²=1.0
+      μ=0, σ²=5.0
+      μ=−2, σ²=0.5
+    question: 'Two normal curves have the same mean. Curve A is taller and narrower. So A has:'
+    options:
+    - A smaller SD
+    - A larger SD
+    - A larger mean
+    - A positive skew
+    answer: 0
+    why:
+    - 'صح: القيم متجمعة قريب من المتوسط، يعني انتشار أقل.'
+    - الـ SD الكبير بيفرش المنحنى ويخليه واطي.
+    - الـ mean واحد في الاتنين.
+    - المنحنى الـ normal متماثل مهما كان الـ SD.
+  - kind: figure
+    page: 26
+    quote: |-
+      (a) Negatively skewed | (b) Normal (no skew) | (c) Positively skewed
+      Negatively skewed: Mean | Median | Mode
+      Normal: Mean Median Mode
+      Positively skewed: Mode | Median | Mean
+      Negative direction
+      The normal curve represents a perfectly symmetrical distribution
+      Positive direction
+    title: 'الـ skew: الذيل بيشاور فين؟'
+    alt: 'Three panels. Left: a negatively skewed curve with its peak on the right and a long tail to the left; from left
+      to right the lines read mean, median, mode. Middle: a symmetrical normal curve where all three coincide. Right: a positively
+      skewed curve with its peak on the left and a long tail to the right; from left to right the lines read mode, median,
+      mean.'
+    caption: الـ skew **اسمه على اسم الذيل**. ذيل شمال = ==negative==، ذيل يمين = ==positive==. والـ **mean** دايمًا بيتشد
+      ناحية الذيل، والـ **mode** عند القمة، والـ **median** في النص بينهم.
+    svg: |-
+      <svg viewBox="0 0 340 184" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.0 120 L6.0 118.5 L8.0 118.3 L10.0 118.0 L12.0 117.8 L14.0 117.4 L16.0 117.1 L18.0 116.6 L20.0 116.1 L22.0 115.6 L24.0 115.0 L26.0 114.3 L28.0 113.5 L30.0 112.6 L32.0 111.6 L34.0 110.5 L36.0 109.2 L38.0 107.8 L40.0 106.3 L42.0 104.6 L44.0 102.6 L46.0 100.5 L48.0 98.2 L50.0 95.7 L52.0 92.9 L54.0 90.0 L56.0 86.8 L58.0 83.3 L60.0 79.7 L62.0 75.8 L64.0 71.8 L66.0 67.7 L68.0 63.5 L70.0 59.2 L72.0 55.1 L74.0 51.2 L76.0 47.6 L78.0 44.5 L80.0 42.1 L82.0 40.5 L84.0 40.0 L86.0 40.9 L88.0 43.2 L90.0 47.4 L92.0 53.4 L94.0 61.5 L96.0 71.3 L98.0 82.7 L100.0 94.9 L102.0 106.6 L104.0 116.0 L106.0 120.0 L106.0 120Z" class="fg-box"/>
+        <path d="M6.0 118.5 L8.0 118.3 L10.0 118.0 L12.0 117.8 L14.0 117.4 L16.0 117.1 L18.0 116.6 L20.0 116.1 L22.0 115.6 L24.0 115.0 L26.0 114.3 L28.0 113.5 L30.0 112.6 L32.0 111.6 L34.0 110.5 L36.0 109.2 L38.0 107.8 L40.0 106.3 L42.0 104.6 L44.0 102.6 L46.0 100.5 L48.0 98.2 L50.0 95.7 L52.0 92.9 L54.0 90.0 L56.0 86.8 L58.0 83.3 L60.0 79.7 L62.0 75.8 L64.0 71.8 L66.0 67.7 L68.0 63.5 L70.0 59.2 L72.0 55.1 L74.0 51.2 L76.0 47.6 L78.0 44.5 L80.0 42.1 L82.0 40.5 L84.0 40.0 L86.0 40.9 L88.0 43.2 L90.0 47.4 L92.0 53.4 L94.0 61.5 L96.0 71.3 L98.0 82.7 L100.0 94.9 L102.0 106.6 L104.0 116.0 L106.0 120.0" fill="none" class="fg-ink"/>
+        <path d="M58.0 120V36" class="fg-thin"/>
+        <path d="M58.0 120V123" class="fg-thin"/>
+        <text x="58.0" y="134" text-anchor="middle" class="t-sm">mean</text>
+        <path d="M69.0 120V36" class="fg-thin"/>
+        <path d="M69.0 120V135" class="fg-thin"/>
+        <text x="69.0" y="146" text-anchor="middle" class="t-sm">median</text>
+        <path d="M84.0 120V36" class="fg-thin"/>
+        <path d="M84.0 120V147" class="fg-thin"/>
+        <text x="84.0" y="158" text-anchor="middle" class="t-sm">mode</text>
+        <text x="56.0" y="18" text-anchor="middle" class="t-sm t-b t-bad">Negative skew</text>
+        <text x="56.0" y="176" text-anchor="middle" class="t-sm t-mut">tail ←</text>
+        <path d="M120.0 120 L120.0 119.4 L122.0 119.1 L124.0 118.7 L126.0 118.2 L128.0 117.4 L130.0 116.5 L132.0 115.2 L134.0 113.6 L136.0 111.6 L138.0 109.2 L140.0 106.2 L142.0 102.7 L144.0 98.6 L146.0 94.0 L148.0 88.9 L150.0 83.4 L152.0 77.5 L154.0 71.5 L156.0 65.4 L158.0 59.6 L160.0 54.2 L162.0 49.4 L164.0 45.4 L166.0 42.5 L168.0 40.6 L170.0 40.0 L172.0 40.6 L174.0 42.5 L176.0 45.4 L178.0 49.4 L180.0 54.2 L182.0 59.6 L184.0 65.4 L186.0 71.5 L188.0 77.5 L190.0 83.4 L192.0 88.9 L194.0 94.0 L196.0 98.6 L198.0 102.7 L200.0 106.2 L202.0 109.2 L204.0 111.6 L206.0 113.6 L208.0 115.2 L210.0 116.5 L212.0 117.4 L214.0 118.2 L216.0 118.7 L218.0 119.1 L220.0 119.4 L220.0 120Z" class="fg-box"/>
+        <path d="M120.0 119.4 L122.0 119.1 L124.0 118.7 L126.0 118.2 L128.0 117.4 L130.0 116.5 L132.0 115.2 L134.0 113.6 L136.0 111.6 L138.0 109.2 L140.0 106.2 L142.0 102.7 L144.0 98.6 L146.0 94.0 L148.0 88.9 L150.0 83.4 L152.0 77.5 L154.0 71.5 L156.0 65.4 L158.0 59.6 L160.0 54.2 L162.0 49.4 L164.0 45.4 L166.0 42.5 L168.0 40.6 L170.0 40.0 L172.0 40.6 L174.0 42.5 L176.0 45.4 L178.0 49.4 L180.0 54.2 L182.0 59.6 L184.0 65.4 L186.0 71.5 L188.0 77.5 L190.0 83.4 L192.0 88.9 L194.0 94.0 L196.0 98.6 L198.0 102.7 L200.0 106.2 L202.0 109.2 L204.0 111.6 L206.0 113.6 L208.0 115.2 L210.0 116.5 L212.0 117.4 L214.0 118.2 L216.0 118.7 L218.0 119.1 L220.0 119.4" fill="none" class="fg-ink"/>
+        <path d="M170.0 120V36" class="fg-thin"/>
+        <path d="M170.0 120V123" class="fg-thin"/>
+        <text x="170.0" y="134" text-anchor="middle" class="t-sm">all 3</text>
+        <text x="170.0" y="18" text-anchor="middle" class="t-sm t-b t-good">Normal</text>
+        <text x="170.0" y="176" text-anchor="middle" class="t-sm t-mut">symmetrical</text>
+        <path d="M234.0 120 L234.0 120.0 L236.0 116.0 L238.0 106.6 L240.0 94.9 L242.0 82.7 L244.0 71.3 L246.0 61.5 L248.0 53.4 L250.0 47.4 L252.0 43.2 L254.0 40.9 L256.0 40.0 L258.0 40.5 L260.0 42.1 L262.0 44.5 L264.0 47.6 L266.0 51.2 L268.0 55.1 L270.0 59.2 L272.0 63.5 L274.0 67.7 L276.0 71.8 L278.0 75.8 L280.0 79.7 L282.0 83.3 L284.0 86.8 L286.0 90.0 L288.0 92.9 L290.0 95.7 L292.0 98.2 L294.0 100.5 L296.0 102.6 L298.0 104.6 L300.0 106.3 L302.0 107.8 L304.0 109.2 L306.0 110.5 L308.0 111.6 L310.0 112.6 L312.0 113.5 L314.0 114.3 L316.0 115.0 L318.0 115.6 L320.0 116.1 L322.0 116.6 L324.0 117.1 L326.0 117.4 L328.0 117.8 L330.0 118.0 L332.0 118.3 L334.0 118.5 L334.0 120Z" class="fg-box"/>
+        <path d="M234.0 120.0 L236.0 116.0 L238.0 106.6 L240.0 94.9 L242.0 82.7 L244.0 71.3 L246.0 61.5 L248.0 53.4 L250.0 47.4 L252.0 43.2 L254.0 40.9 L256.0 40.0 L258.0 40.5 L260.0 42.1 L262.0 44.5 L264.0 47.6 L266.0 51.2 L268.0 55.1 L270.0 59.2 L272.0 63.5 L274.0 67.7 L276.0 71.8 L278.0 75.8 L280.0 79.7 L282.0 83.3 L284.0 86.8 L286.0 90.0 L288.0 92.9 L290.0 95.7 L292.0 98.2 L294.0 100.5 L296.0 102.6 L298.0 104.6 L300.0 106.3 L302.0 107.8 L304.0 109.2 L306.0 110.5 L308.0 111.6 L310.0 112.6 L312.0 113.5 L314.0 114.3 L316.0 115.0 L318.0 115.6 L320.0 116.1 L322.0 116.6 L324.0 117.1 L326.0 117.4 L328.0 117.8 L330.0 118.0 L332.0 118.3 L334.0 118.5" fill="none" class="fg-ink"/>
+        <path d="M256.0 120V36" class="fg-thin"/>
+        <path d="M256.0 120V123" class="fg-thin"/>
+        <text x="256.0" y="134" text-anchor="middle" class="t-sm">mode</text>
+        <path d="M271.0 120V36" class="fg-thin"/>
+        <path d="M271.0 120V135" class="fg-thin"/>
+        <text x="271.0" y="146" text-anchor="middle" class="t-sm">median</text>
+        <path d="M282.0 120V36" class="fg-thin"/>
+        <path d="M282.0 120V147" class="fg-thin"/>
+        <text x="282.0" y="158" text-anchor="middle" class="t-sm">mean</text>
+        <text x="284.0" y="18" text-anchor="middle" class="t-sm t-b t-bad">Positive skew</text>
+        <text x="284.0" y="176" text-anchor="middle" class="t-sm t-mut">tail →</text>
+      </svg>
+  - kind: table
+    page: 26
+    quote: |-
+      (a) Negatively skewed | (b) Normal (no skew) | (c) Positively skewed
+      Negatively skewed: Mean | Median | Mode
+      Normal: Mean Median Mode
+      Positively skewed: Mode | Median | Mean
+      Negative direction
+      The normal curve represents a perfectly symmetrical distribution
+      Positive direction
+    title: ترتيب المقاييس الـ 3
+    columns:
+    - Shape
+    - Order
+    rows:
+    - - Negative (left) skew
+      - Mean < median < mode
+    - - Normal
+      - Mean = median = mode
+    - - Positive (right) skew
+      - Mode < median < mean
+    hide:
+    - - 0
+      - 1
+    - - 2
+      - 1
+  - kind: check
+    page: 25
+    quote: |-
+      Negative, left-hand skew
+      Positive, right-hand skew
+    question: 'Length of hospital stay: most patients stay 3–4 days, a few stay 60 days. The distribution is:'
+    options:
+    - 'Positively skewed: mean > median'
+    - 'Negatively skewed: mean < median'
+    - 'Normal: mean = median'
+    - 'Positively skewed: mean < median'
+    answer: 0
+    why:
+    - 'صح: الذيل الطويل يمين (الـ 60 يوم)، فالـ mean بيتشد لفوق أكتر من الـ median.'
+    - الذيل هنا يمين مش شمال.
+    - الأرقام الكبيرة النادرة بتكسر التماثل.
+    - في الـ positive skew الـ mean أكبر من الـ median.
+  - kind: table
+    page: 27
+    quote: |-
+      Population
+      quantity (count) = N
+      mean = μ
+      variance = σ2
+      standard deviation =σ
+      Sample
+      quantity (count) = n
+      mean = x̄
+      variance = s2
+      standard deviation =s
+    title: Population ولا sample؟
+    columns:
+    - ''
+    - Population
+    - Sample
+    rows:
+    - - Count
+      - N
+      - n
+    - - Mean
+      - μ
+      - x̄
+    - - Variance
+      - σ²
+      - s²
+    - - SD
+      - σ
+      - s
+    hide:
+    - - 1
+      - 1
+    - - 1
+      - 2
+    - - 3
+      - 1
+    - - 3
+      - 2
+  - kind: mnemonic
+    page: 27
+    quote: |-
+      Population
+      quantity (count) = N
+      mean = μ
+      variance = σ2
+      standard deviation =σ
+      Sample
+      quantity (count) = n
+      mean = x̄
+      variance = s2
+      standard deviation =s
+    word: Greek Latin
+    parts:
+    - key: Greek
+      text: 'μ و σ و σ² و N: الـ population كلها (الكبيرة)'
+    - key: Latin
+      text: 'x̄ و s و s² و n: الـ sample (الصغيرة)'
+    hook: الحروف **اليوناني** للـ population الكبيرة، و**اللاتيني** للـ sample الصغيرة، والـ **N** الكبيرة للكبيرة والـ **n**
+      الصغيرة للصغيرة.
+  - kind: explain
+    page: 29
+    quote: Negative, left-hand skew
+    title: شكل البيانات بيحدد التلخيص
+    text: |-
+      الدكتورة ربطت الشكل بطريقة التلخيص (شرح سلايدات 26–33):
+
+      - بيانات ==normal== ← لخّصها بالـ **mean** والـ **SD**.
+      - بيانات ==skewed== ← لخّصها بالـ **median** والـ ==IQR== (interquartile range)، لأن الـ mean بيتشد ناحية الذيل.
+
+      ولما تقارن **sample 1** و**sample 2** (سلايد 30–31): لو الاتنين normal ← **parametric tests**، ولو فيه skew ← **non-parametric tests**. التفاصيل في المحاضرات الجاية.
+  - kind: explain
+    page: 32
+    quote: |-
+      n
+      Measurement 1
+      minus
+      Measurement 2
+      X̄d, Sd
+    title: نفس الناس، قياسين
+    text: |-
+      لو قست **نفس الـ n شخص** مرتين (قبل وبعد علاج مثلًا):
+
+      - احسب لكل واحد **measurement 1 − measurement 2**.
+      - لخّص الفروق بـ **X̄d** (متوسط الفرق) و**Sd** (الـ SD بتاعه).
+
+      وبرضه شكل الفروق (normal ولا skewed، سلايد 33) هو اللي بيختار الـ test.
+  - kind: check
+    page: 29
+    quote: Negative, left-hand skew
+    question: 'Income in a village is strongly right-skewed. The best summary is:'
+    options:
+    - Median and interquartile range
+    - Mean and standard deviation
+    - Mode only
+    - Mean and range
+    answer: 0
+    why:
+    - 'صح: في الـ skew الـ median مش بيتأثر بالأرقام المتطرفة.'
+    - الـ mean والـ SD للبيانات الـ normal؛ هنا هيتشدوا ناحية الأغنيا.
+    - الـ mode لوحده مش كفاية يلخّص.
+    - الـ mean والـ range الاتنين بيتأثروا بالقيم المتطرفة.
+  - kind: try
+    page: null
+    quote: null
+    items: [res.L16.037, res.L16.040, res.L16.041, res.L16.044, res.L16.045]
+  recap:
+  - الـ mean = المكان، والـ SD = الانتشار (SD صغير = منحنى ضيق وعالي).
+  - 'الـ skew اسمه على الذيل، والـ mean بيتشد ناحيته: positive ← mean > median > mode.'
+  - 'Population: N، μ، σ²، σ. Sample: n، x̄، s²، s.'
+  - Normal ← mean و SD (parametric)، skewed ← median و IQR (non-parametric).
+  practice: [res.L16.037, res.L16.038, res.L16.039, res.L16.040, res.L16.041, res.L16.042, res.L16.043, res.L16.044, res.L16.045,
+    res.L16.046, res.L16.047]

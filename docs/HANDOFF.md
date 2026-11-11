@@ -140,6 +140,7 @@ jobs are periodic or manual. Never re-add PR/push triggers to heavy workflows.
 | `web-deploy.yml` | push to main touching app/content/web | builds wasm, deploys Worker `batna-web` |
 | `cloud-deploy.yml` | push to main touching server/protocol/Cargo + manual | deploys Worker `batna-cloud` |
 | `release.yml` | manual only | alpha/beta/stable release (§ 6) |
+| `audit.yml` | weekly (Mon 05:17 UTC) + manual, **never on PRs** | `cargo audit` against RustSec (audit F23). A finding → fix in its own PR. |
 
 Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 `CLOUDFLARE_API_TOKEN` is missing. Check that the step "Deploy" succeeded.
@@ -346,6 +347,13 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
   Today»). Tests must use `history.system()`, not `history.back()`.
 - Android crash reports start from Settings › Your data › diagnostics
   (WebViewGuard records renderer loss and exit reasons).
+- Journey test (audit F23): `store/backend/journey_tests.rs` runs first
+  launch → grade → restart → restore → two-device sync on one review state.
+  What only a device can show (process death, TalkBack, 200% text…) is the
+  manual matrix in `docs/NATIVE_QA.md`; record runs there against their
+  exact commit.
+- Shared plumbing with Kabar: `docs/INFRA_PARITY.md` (audit F24, same file
+  in both repos). A fix there says in its PR whether Kabar needs it too.
 
 ## 10. Feature notes (what exists, where, and why)
 
@@ -459,6 +467,24 @@ Add a bullet here when a PR adds something a later agent must know.
   push with `Store::settle_outbox`). Settings › Sync shows a «تغييرات ما
   اترفعتش» card (`cloud/held_ui.rs`) with «ابعتهم تاني» (back to the
   outbox) and «سيبهم» (asks first). Newest 1000 kept.
+- **One answer, one item** (audit F15, 2026-11-11): a local answer newer
+  than everything in the log updates only its item (`Scheduler::step`,
+  `core/src/replay.rs`); anything out of order, a reload, sync, import or
+  retraction still replays the whole log. Tests assert step = full replay
+  after every answer (random grades/origins/gaps; and a debug check in every
+  app test). Release timings (hosted Linux, `replay_timings`): 10k answers
+  3.6 ms full vs 0.05 ms step; 50k 20 ms vs 0.25 ms; 100k 43 ms vs 0.6 ms.
+- **Live content switches are bounded** (audit F17): old libraries are
+  leaked (screens hold `&'static`), so a run switches packs live at most
+  `MAX_LIVE_RELOADS` (2) times; a later pack opens at the next start.
+- **Two connections, bounded waits** (audit F16): the UI's connection
+  waits at most `UI_BUSY` (750 ms) for the sync engine's write lock, then
+  the write fails into the screen's own saving/retry state; the sync
+  connection waits up to `SYNC_BUSY` (5 s) (`store/contention.rs`). Before,
+  SQLite's default failed a UI write at once while sync wrote. Every
+  transaction begins IMMEDIATE (the connection's default behaviour), since
+  a read that turns into a write mid-transaction fails without waiting;
+  the export's snapshot stays a deferred read.
 - **Export is one moment** (audit F14): `Store::export` reads every table
   in one read transaction, so a sync merge on the other connection can't
   tear it.
@@ -615,6 +641,8 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-11: Settings and Screens browser runs point apt at a resolving mirror (`scripts/ci-apt-install.sh`) before `playwright install --with-deps`.
+- 2026-11-11: journey test (launch → grade → restart → restore → two-device sync), native QA matrix `docs/NATIVE_QA.md`, weekly `cargo audit`, and the shared `docs/INFRA_PARITY.md` checklist (engineering audit F23, F24, § 9).
+- 2026-11-11: a local answer updates only its own item instead of replaying the whole log (43 ms → 0.6 ms at 100k answers); live content switches are bounded to 2 a run; UI writes wait up to 750 ms for the sync lock instead of failing at once (engineering audit F15–F17, § 10 Study sessions).
 - 2026-11-11: res.L18 (non-parametric tests, correlation, regression; 37 slides), res.L19 (introduction to EBM; 125 slides) and res.L20 (critical appraisal; 69 slides) from the enriched lecture PDFs (video frames + Arabic notes): slide text retyped from the images in `courses/res/text/L18–L20.txt`, Arabic notes kept beside them as `LNN-notes-ar.txt`; 45 + 115 + 100 items, 4 + 7 + 6 lessons; glossary gains ANOVA, MLogRA, CME, LBP, EBHC, GP, EMBASE, DARE, PIER, ARI, NNH, ES, PRISMA, STARD.
 - 2026-11-11: res.L17 (hypothesis testing, 33 slides from the enriched lecture PDF): 52 items, 5 lessons; calculators `chi_square` (2×2) and `t_test` (one sample, paired, two groups) reproduce the slides' coffee X² and haemoglobin t examples.
 - 2026-11-11: CI apt installs go through `scripts/ci-apt-install.sh` (first resolving mirror of Azure, archive.ubuntu.com, kernel.org, MIT; time-boxed) after ubuntu.com DNS failures hung CI for an hour.

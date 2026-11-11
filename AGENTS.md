@@ -25,6 +25,9 @@ folders. Everything you need is in this repo.
   `just check`, wait for green CI, squash-merge yourself.
 - New releases (calendar versions, `2026.11.N`) only when Mohamed asks
   («طلّع ألفا»).
+- Fixing shared plumbing (sync, store, install identity, auth, updates)?
+  Check `docs/INFRA_PARITY.md` and say in the PR whether Kabar needs the
+  same change (link its PR, or name the intentional difference).
 
 ## Small files (fewer merge conflicts)
 

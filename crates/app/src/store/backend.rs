@@ -3,6 +3,8 @@
 //! [`StudyStore`] for the study player and the other study screens.
 
 #[cfg(test)]
+mod journey_tests;
+#[cfg(test)]
 mod replay_perf;
 mod study;
 
@@ -240,6 +242,20 @@ impl ReviewBackend {
 
     fn replay(&mut self) {
         self.states = self.scheduler.replay_all(&self.log);
+    }
+
+    /// Adds an answer just logged here. One newer than everything in the
+    /// log changes only its item (`Scheduler::step`, audit F15); anything
+    /// else (a clock set back) replays the whole log, which stays the rule.
+    fn log_answer(&mut self, logged: batna_core::review::LoggedReview) {
+        let newest = batna_core::replay::newest(&self.log).cloned();
+        let stepped = self.scheduler.step(&mut self.states, newest.as_ref(), &logged);
+        self.log.push(logged);
+        if !stepped {
+            self.replay();
+        }
+        #[cfg(test)]
+        debug_assert_eq!(self.states, self.scheduler.replay_all(&self.log), "a step left the replay");
     }
 
     fn changed(&mut self) {

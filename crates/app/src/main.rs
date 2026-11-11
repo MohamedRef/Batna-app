@@ -300,6 +300,7 @@ fn App() -> Element {
                 }
             }
             main { class: "content", "data-screen": "{current:?}", "data-course": crate::courses::focus::current().unwrap_or_default(),
+                persistence::VolatileNotice {}
                 if !*settings.open.read() { persistence::SaveNotice {} }
                 update::view::UpdateBanner {}
                 if current == Screen::Today {

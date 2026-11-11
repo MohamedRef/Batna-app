@@ -96,11 +96,29 @@ pub fn mark(id: &str) -> Option<Mark> {
     crate::store::shared().setting(&format!("{PREFIX}{id}"))
 }
 
-fn save_mark(id: &str, m: Mark) {
-    if let Err(e) = crate::store::shared().put_setting(&format!("{PREFIX}{id}"), &m) {
-        crate::diag::report!("saving lesson mark {id} failed: {e}");
+/// Marks lesson `id` done and clears its saved place, both or neither
+/// (`Store::finish_place`). `false` when the store refused: nothing changed,
+/// the player stays on the last step and Continue tries again.
+fn finish(id: &str, m: Mark) -> bool {
+    let place = player::pos_key(id);
+    let done = crate::store::shared().finish_place(
+        &format!("{PREFIX}{id}"),
+        &m,
+        &place,
+        &batna_core::response::Attempt::default(),
+    );
+    let what = format!("finishing the lesson {id}");
+    match done {
+        Ok(()) => {
+            crate::store::write_recovered(&what);
+            reload();
+            true
+        }
+        Err(e) => {
+            crate::store::write_failed(&what, &e);
+            false
+        }
     }
-    reload();
 }
 
 /// Re-reads the marks and the lesson view (after a sync or a restore).

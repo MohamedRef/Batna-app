@@ -16,7 +16,10 @@ const DAY: i64 = 86_400_000;
 fn catalog() -> Catalog {
     let lec: Lecture =
         serde_yaml_ng::from_str(include_str!("../../../../../fixtures/content/sample.yaml")).unwrap();
-    lec.items.iter().map(|i| (i.id.clone(), Entry { lecture: lec.lecture.clone(), item: i.clone() })).collect()
+    lec.items
+        .iter()
+        .map(|i| (i.id.clone(), Entry { lecture: lec.lecture.clone(), item: i.clone() }))
+        .collect()
 }
 
 fn leak(store: Store) -> &'static Store {

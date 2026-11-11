@@ -216,6 +216,8 @@ fn keywords(id: &str) -> &'static str {
         "sample_size_two_proportions" => {
             "sample size power case control cohort kelsey fleiss epi info statcalc"
         }
+        "predictive_values" => "ppv npv prevalence sensitivity specificity screening bayes",
+        "post_test_probability" => "likelihood ratio lr pre-test post-test odds fagan bayes",
         _ => "",
     }
 }

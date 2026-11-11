@@ -1,0 +1,1020 @@
+schema: batna.content/v1
+lecture: res.L12
+title: Bias and confounders
+author: Dr. Heba Elweshahi
+book: { chapter: 1, pages: [1, 61] }
+topics:
+  - { id: validity, title: "Internal and external validity and their threats" }
+  - { id: confounding, title: "Confounding variables: definition, criteria and examples" }
+  - { id: control, title: "Controlling confounding in planning (randomization, restriction, matching) and analysis" }
+  - { id: selection, title: "Bias and selection bias: survival, diagnosis, non-response, Neyman, hospital controls, attrition" }
+  - { id: information, title: "Information bias: instrumental, recall, interviewer, prevarication, ascertainment; other types" }
+  - { id: prevention, title: "How to avoid bias" }
+items:
+  - id: res.L12.001
+    kind: order
+    topic: validity
+    prompt: "Put the steps of the research process in order (as on the bias lecture's opening slide)."
+    steps:
+      - "Research question"
+      - "Hypothesis"
+      - "Identify research design"
+      - "Data collection"
+      - "Presentation of data"
+      - "Data analysis"
+      - "Interpretation of data"
+    src: { page: 2, quote: "Research Process\nResearch question\nHypothesis\nIdentify research design\nData collection\nPresentation of data\nData analysis\nInterpretation of data" }
+    status: unverified
+  - id: res.L12.002
+    kind: card
+    topic: validity
+    front: "What is meant by the external validity of a research study?"
+    back: "The extent to which the study results for the study population can be generalized to the whole target population."
+    src: { page: 4, quote: "What is meant by?\nExternal validity of the research\nIt Refers to the extent to which the study results for the study population can be\nGeneralized to the whole target population." }
+    status: unverified
+    tags: [definition, high-yield]
+  - id: res.L12.003
+    kind: card
+    topic: validity
+    front: "What is meant by the internal validity of a research study?"
+    back: "The extent to which the study results obtained reflect the 'truth' in the study population, i.e. the true relationship between the dependent and independent variables."
+    src: { page: 5, quote: "What is meant by?\nInternal validity of the research\nIt Refers to the extent to which the study results obtained\nReflect the 'truth' in the study population.\nThe relationship between dependent and independent variables" }
+    status: unverified
+    tags: [definition, high-yield]
+  - id: res.L12.004
+    kind: mcq
+    topic: validity
+    stem: "A well-run study on hospital nurses in Alexandria gives results that truly reflect the relation between night shifts and insomnia among those nurses, but they cannot be applied to all Egyptian nurses. This study has:"
+    options:
+      - "Good internal validity but poor external validity"
+      - "Good external validity but poor internal validity"
+      - "Poor internal and external validity"
+      - "Good internal and external validity"
+    answer: 0
+    why:
+      - "Truth inside the study population = internal validity; failure to generalize to the target population = poor external validity."
+      - "It is the other way round: the results are true for the nurses studied but don't generalize."
+      - "The results do reflect the truth in the study population, so internal validity is good."
+      - "The results cannot be generalized, so external validity is poor."
+    src: { page: 5, quote: "What is meant by?\nInternal validity of the research\nIt Refers to the extent to which the study results obtained\nReflect the 'truth' in the study population.\nThe relationship between dependent and independent variables" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.005
+    kind: enumerate
+    topic: validity
+    prompt: "Enumerate the 4 threats to external validity."
+    points:
+      - "Selecting a convenient sample"
+      - "Participants' characteristics (affect both internal and external validity)"
+      - "Timing of the research"
+      - "Setting of conducting the research"
+    pass: 4
+    hook: "الـ external validity بيهددها «مين، إمتى، وفين»: convenient sample، participants characteristics (مين)، timing (إمتى)، وsetting (فين)."
+    src: { page: 6, quote: "Threats to External validity:\n1. Selecting a convenient sample\n2. Participants characteristics (affects both internal and external validity)\n3. Timing of the research\n4. Setting of conducting the research" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.006
+    kind: enumerate
+    topic: validity
+    prompt: "Enumerate the 3 threats to internal validity."
+    points: ["Potential confounding variables", "Bias (systematic errors)", "Pretest/post-test design"]
+    pass: 3
+    hook: "الـ internal validity بيقع بـ 3 «C B P»: Confounding، Bias، وPretest/post test design."
+    src: { page: 7, quote: "Threats to internal validity:\n1. Potential confounding variables\n2. Bias (systematic errors)\n3. Pretest/post test design" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.007
+    kind: mcq
+    topic: validity
+    stem: "Which threat to validity affects both internal and external validity?"
+    options:
+      - "Participants' characteristics"
+      - "Timing of the research"
+      - "Setting of conducting the research"
+      - "Selecting a convenient sample"
+    answer: 0
+    why:
+      - "The slide marks participants' characteristics as affecting both internal and external validity."
+      - "Timing is listed as a threat to external validity."
+      - "Setting is listed as a threat to external validity."
+      - "A convenient sample is listed as a threat to external validity (generalization)."
+    src: { page: 6, quote: "Threats to External validity:\n1. Selecting a convenient sample\n2. Participants characteristics (affects both internal and external validity)\n3. Timing of the research\n4. Setting of conducting the research" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.008
+    kind: mcq
+    topic: validity
+    stem: "Giving the same questionnaire before and after a health-education session (pretest/post-test design) mainly threatens:"
+    options: ["Internal validity", "External validity only", "The sample size", "Nothing, it is the ideal design"]
+    answer: 0
+    why:
+      - "Pretest/post-test design is the third threat to internal validity: the second answers can reflect remembering the questions, not only the effect of the intervention (as the lecturer explained)."
+      - "It is listed under internal, not external, validity."
+      - "Sample size is not the problem here."
+      - "The slide lists it as a threat."
+    src: { page: 7, quote: "Threats to internal validity:\n1. Potential confounding variables\n2. Bias (systematic errors)\n3. Pretest/post test design" }
+    status: unverified
+  - id: res.L12.009
+    kind: cloze
+    topic: validity
+    text: "External validity is the extent to which the study results for the study population can be {{c1::generalized to the whole target population}}; internal validity is the extent to which they reflect the {{c2::truth in the study population}}."
+    src: { page: 4, quote: "What is meant by?\nExternal validity of the research\nIt Refers to the extent to which the study results for the study population can be\nGeneralized to the whole target population." }
+    status: unverified
+  - id: res.L12.010
+    kind: card
+    topic: confounding
+    front: "Define a confounding variable."
+    back: "A factor (a variable) that causes distortion of the relationship between the outcome and the exposure of interest."
+    src: { page: 8, quote: "1. Potential Confounding variables\nIs a factor (a variable ) causes distortion of the relationship between the outcome and the exposure of interest :\nMight alter the strength of an apparent relationship between the two variables (e.g. Incorrect odds ratio or relative risk)\nMight lead to incorrect association between E&D or disappearance of a real association between E&D." }
+    status: unverified
+    tags: [definition, high-yield]
+  - id: res.L12.011
+    kind: enumerate
+    topic: confounding
+    prompt: "Enumerate the 4 criteria (characteristics) of a confounding variable."
+    points:
+      - "It is associated with the outcome variable"
+      - "It is related to the exposure variable"
+      - "It does not lie in the chain of sequence (causal pathway) between the exposure and the outcome"
+      - "It is differentially distributed in the two groups"
+    pass: 4
+    hook: "الـ confounder «ماسك الطرفين، بس مش في النص، ومتوزع مايل»: مرتبط بالـ outcome، ومرتبط بالـ exposure، مش في الـ chain بينهم، وdifferentially distributed في المجموعتين."
+    src: { page: 9, quote: "1. Potential Confounding variables\nIt is associated with the outcome variable.\nIt is related to the exposure variable.\nIt does not lie in the chain of sequence between the exposure and outcome variable.\nIt is \"differentially\" distributed in the two groups." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.012
+    kind: mcq
+    topic: confounding
+    stem: "A variable lies on the causal pathway between the exposure and the outcome (exposure causes it, and it causes the outcome). Is it a confounder?"
+    options:
+      - "No, a confounder does not lie in the chain of sequence between exposure and outcome"
+      - "Yes, because it is associated with both exposure and outcome"
+      - "Yes, if it is equally distributed in the two groups"
+      - "Only in case-control studies"
+    answer: 0
+    why:
+      - "Right: the third criterion says a confounder is not in the chain between exposure and outcome."
+      - "Being associated with both is necessary but not enough; a step on the pathway is part of the effect itself."
+      - "A confounder must be differentially (unequally) distributed between the groups."
+      - "The criteria are the same in every design."
+    src: { page: 9, quote: "1. Potential Confounding variables\nIt is associated with the outcome variable.\nIt is related to the exposure variable.\nIt does not lie in the chain of sequence between the exposure and outcome variable.\nIt is \"differentially\" distributed in the two groups." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.013
+    kind: enumerate
+    topic: confounding
+    prompt: "What can a confounding variable do to the exposure-disease (E&D) relationship?"
+    points:
+      - "Alter the strength of an apparent relationship (e.g. an incorrect odds ratio or relative risk)"
+      - "Lead to an incorrect (spurious) association between E&D"
+      - "Make a real association between E&D disappear"
+    pass: 3
+    hook: "الـ confounder يعمل في العلاقة 3 حاجات: «يكبّرها أو يصغّرها، يخترعها، أو يخفيها»."
+    src: { page: 8, quote: "1. Potential Confounding variables\nIs a factor (a variable ) causes distortion of the relationship between the outcome and the exposure of interest :\nMight alter the strength of an apparent relationship between the two variables (e.g. Incorrect odds ratio or relative risk)\nMight lead to incorrect association between E&D or disappearance of a real association between E&D." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.014
+    kind: case
+    topic: confounding
+    stem: "A case-control study looks at birth order and Down syndrome. Mothers of high birth-order babies are usually older."
+    steps:
+      - question: "What is the confounder here?"
+        options: ["Maternal age", "Birth order", "Down syndrome", "Gravidity"]
+        answer: 0
+        why: "Maternal age is related to birth order (high gravidity goes with advanced age) and is a known risk factor for Down syndrome."
+      - question: "Why is advanced maternal age a risk factor on its own?"
+        options:
+          - "It is a known risk factor even if birth order is low"
+          - "Only because it raises birth order"
+          - "It is not a risk factor"
+          - "Because it is on the causal pathway"
+        answer: 0
+        why: "The slide: advanced maternal age is a known risk factor even if birth order is low."
+      - question: "When does maternal age distort the birth order - Down syndrome relation?"
+        options:
+          - "When the proportion with advanced age is higher among cases (with Down syndrome)"
+          - "When age is equal in cases and controls"
+          - "Never in a case-control study"
+          - "Only if birth order is low"
+        answer: 0
+        why: "Unequal (differential) distribution of the confounder between cases and controls distorts the relation."
+    src: { page: 12, quote: "Confounding factor\nBirth Order\nDown Syndrome\nMaternal Age\nMaternal age is correlated with birth order as usually high gravidity is associated with advanced maternal age\nadvanced maternal age is a known risk factor even if birth order is low\nIf the proportion of those with advanced age is more among cases (with Down syndrome) this leads to distortion of the relation between birth order and Down syndrome" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.015
+    kind: card
+    topic: confounding
+    front: "Why does smoking confound the relation between beta carotene intake and lung cancer?"
+    back: "People who are less health conscious are more likely both to smoke and to neglect dietary advice. If a greater percentage smoke in the low beta carotene group than in the high group, smoking (a cause of lung cancer) will confound the association between beta carotene intake and lung cancer."
+    src: { page: 13, quote: "Confounding\nBeta carotene intake\nlung cancer\nTobacco smoking\nBecause people who are less health conscious are more likely to smoke as well as to neglect dietary recommendations.\nIf a greater percentage of people smoke in the low beta carotene intake group than in the high beta carotene intake group\nThen smoking will confound the association between beta carotene intake and lung cancer" }
+    status: unverified
+  - id: res.L12.016
+    kind: mcq
+    topic: confounding
+    stem: "In the beta carotene and lung cancer example, which variable is the confounder?"
+    options: ["Tobacco smoking", "Beta carotene intake", "Lung cancer", "Dietary recommendations"]
+    answer: 0
+    why:
+      - "Smoking is linked to low beta carotene intake (less health-conscious people) and causes lung cancer."
+      - "That is the exposure."
+      - "That is the outcome."
+      - "Neglecting them is just why smokers eat less beta carotene."
+    src: { page: 13, quote: "Confounding\nBeta carotene intake\nlung cancer\nTobacco smoking\nBecause people who are less health conscious are more likely to smoke as well as to neglect dietary recommendations.\nIf a greater percentage of people smoke in the low beta carotene intake group than in the high beta carotene intake group\nThen smoking will confound the association between beta carotene intake and lung cancer" }
+    status: unverified
+  - id: res.L12.017
+    kind: enumerate
+    topic: confounding
+    prompt: "In the diagram of smoking and % coronary artery narrowing, which other variables surround the relation as possible confounders?"
+    points: ["Age", "Sex", "LDL-C", "DM", "HTN", "Uric acid", "Obesity"]
+    pass: 5
+    hook: "حوالين التدخين والشرايين 7 «عيلة القلب»: Age وSex (اللي اتولدت بيه)، وLDL-C وDM وHTN وUric acid وObesity (اللي كسبته)."
+    src: { page: 10, quote: "% coronary artery narrowing\nSmoking\nAge\nSex\nLDL- C\nDM\nHTN\nUric acid\nObesity" }
+    status: unverified
+  - id: res.L12.018
+    kind: cloze
+    topic: confounding
+    text: "In the confounding diagram, the {{c1::third (confounding) variable}} is linked to the exposure and to the outcome, so it distorts the apparent exposure → outcome arrow."
+    src: { page: 11, quote: "Confounding\nExposure\nOutcome\nThird variable\nConfounding variable" }
+    status: unverified
+  - id: res.L12.019
+    kind: order
+    topic: control
+    prompt: "Order the steps of controlling confounding."
+    steps:
+      - "Identify all potential confounding variables (PCV) when the research question is developed (literature review)"
+      - "Collect data about all possible confounders"
+      - "Control them in the planning stage or during analysis"
+    src: { page: 14, quote: "How do we control for confounding\nIdentify all potential confounding variables (PCV) right at the time when the research question is being developed. (literature review)\nCollect data about all possible confounders.\nOnce all PCV have been identified, action may be taken to control them either in planning stage or during analysis" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.020
+    kind: table
+    topic: control
+    title: "Controlling confounding"
+    columns: ["Stage", "Methods"]
+    rows: [["During planning", "Randomization (random allocation); restriction; matching"], ["During analysis", "Stratified analysis or regression (multivariate) analysis"]]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 15, quote: "How do we control for confounding\nDuring planning :\n-Randomization (random allocation)\n-Restriction\n-Matching -\nDuring analysis :\n-by either \"Stratified Analysis\" or by \"Regression Analysis\"" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.021
+    kind: card
+    topic: control
+    front: "When and how should potential confounding variables (PCV) be identified?"
+    back: "Right at the time the research question is being developed, through the literature review; then data are collected on all possible confounders."
+    src: { page: 14, quote: "How do we control for confounding\nIdentify all potential confounding variables (PCV) right at the time when the research question is being developed. (literature review)\nCollect data about all possible confounders.\nOnce all PCV have been identified, action may be taken to control them either in planning stage or during analysis" }
+    status: unverified
+  - id: res.L12.022
+    kind: mcq
+    topic: control
+    stem: "The best method to minimize the effect of confounders in the planning phase is:"
+    options: ["Randomization", "Restriction", "Matching", "Stratified analysis"]
+    answer: 0
+    why:
+      - "The slide calls randomization the best method in the planning phase."
+      - "Restriction works but limits what you can study and generalize."
+      - "Matching handles only known confounders."
+      - "Stratification is an analysis-phase method."
+    src: { page: 17, quote: "1. Randomization\nThe best method to minimize the effect of confounders in planning phase\nAll study population will be randomly distributed into two groups, experimental group and control group\nIt help to distribute both known and unknown confounders equal in both groups" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.023
+    kind: card
+    topic: control
+    front: "What is special about randomization in controlling confounders?"
+    back: "The whole study population is randomly distributed into an experimental and a control group, which distributes both known and unknown confounders equally in both groups."
+    src: { page: 17, quote: "1. Randomization\nThe best method to minimize the effect of confounders in planning phase\nAll study population will be randomly distributed into two groups, experimental group and control group\nIt help to distribute both known and unknown confounders equal in both groups" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.024
+    kind: mcq
+    topic: control
+    stem: "Which method can balance unknown confounders between the study groups?"
+    options: ["Randomization", "Matching", "Restriction", "Stratified analysis"]
+    answer: 0
+    why:
+      - "Random allocation spreads known and unknown confounders equally."
+      - "Matching ensures equal representation of known confounders only."
+      - "You can only restrict a confounder you already know."
+      - "You can only stratify by a variable you measured."
+    src: { page: 17, quote: "1. Randomization\nThe best method to minimize the effect of confounders in planning phase\nAll study population will be randomly distributed into two groups, experimental group and control group\nIt help to distribute both known and unknown confounders equal in both groups" }
+    status: unverified
+  - id: res.L12.025
+    kind: enumerate
+    topic: control
+    prompt: "Enumerate the 4 points about restriction as a way to control confounding."
+    points:
+      - "Restrict inclusion of subjects with certain confounders (e.g. smokers, alcoholics, obese, a certain age group, females)"
+      - "Done while deciding the eligibility (inclusion and exclusion) criteria"
+      - "You can't examine the effect of the excluded variables on the outcome"
+      - "Too many restrictions affect the generalizability of the results (only to a subgroup, e.g. non-smokers)"
+    pass: 4
+    hook: "الـ restriction «اقفل الباب»: تمنع ناس بالـ confounder، في الـ eligibility criteria، بس اللي برّه مش هتعرف تأثيره، ولو قفلت كتير نتيجتك متتعممش."
+    src: { page: 18, quote: "2. Restriction (while designing the study)\n1. Restrict inclusion of subjects with certain confounders(e.g: smokers, alcoholics, obese, certain age group, females.......)\n2. Done while deciding the eligibility criteria (inclusion and exclusion criteria)\n3. Remember that you can't examine the effect of excluded variables on the outcome\n4. Too many restrictions will affect the generalizability of study results (generalize your results to subgroup of the population e.g non smokers)." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.026
+    kind: mcq
+    topic: control
+    stem: "A trial on a new antihypertensive enrols only non-smokers to remove smoking as a confounder. The price of this choice is:"
+    options:
+      - "The effect of smoking can't be examined and results generalize only to non-smokers"
+      - "Smoking will still confound the results"
+      - "Unknown confounders become unequal"
+      - "The study can no longer be randomized"
+    answer: 0
+    why:
+      - "Both are the restriction drawbacks on the slide."
+      - "Restriction removes smoking as a confounder."
+      - "Restriction does not unbalance anything; randomization handles unknown confounders."
+      - "Restriction and randomization can be used together."
+    src: { page: 18, quote: "2. Restriction (while designing the study)\n1. Restrict inclusion of subjects with certain confounders(e.g: smokers, alcoholics, obese, certain age group, females.......)\n2. Done while deciding the eligibility criteria (inclusion and exclusion criteria)\n3. Remember that you can't examine the effect of excluded variables on the outcome\n4. Too many restrictions will affect the generalizability of study results (generalize your results to subgroup of the population e.g non smokers)." }
+    status: unverified
+  - id: res.L12.027
+    kind: card
+    topic: control
+    front: "At which step of the study is restriction applied?"
+    back: "While designing the study, when the eligibility criteria (inclusion and exclusion criteria) are decided."
+    src: { page: 18, quote: "2. Restriction (while designing the study)\n1. Restrict inclusion of subjects with certain confounders(e.g: smokers, alcoholics, obese, certain age group, females.......)\n2. Done while deciding the eligibility criteria (inclusion and exclusion criteria)\n3. Remember that you can't examine the effect of excluded variables on the outcome\n4. Too many restrictions will affect the generalizability of study results (generalize your results to subgroup of the population e.g non smokers)." }
+    status: unverified
+  - id: res.L12.028
+    kind: mcq
+    topic: control
+    stem: "Matching is suitable mainly in:"
+    options: ["Case-control studies", "Cross-sectional surveys", "Ecological studies", "Descriptive case series"]
+    answer: 0
+    why:
+      - "The slide: matching is suitable in case-control study."
+      - "Surveys sample one group; there is no case to match a control to."
+      - "Ecological studies compare groups, not matched individuals."
+      - "A case series has no control group."
+    src: { page: 19, quote: "3. Matching\nIt is suitable in case control study\nIt ensures equal representation of subjects with known confounders in study groups (the groups could be made \"equal\" in respect of the confounder)\nMight need a long time to complete study sample.\nEither pair matching or frequency matching." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.029
+    kind: enumerate
+    topic: control
+    prompt: "Enumerate the 4 points about matching."
+    points:
+      - "Suitable in case-control studies"
+      - "Ensures equal representation of subjects with known confounders in the study groups"
+      - "Might need a long time to complete the study sample"
+      - "Either pair matching or frequency matching"
+    pass: 4
+    hook: "الـ matching «4 كلمات»: case-control، known confounders بالتساوي، بياخد وقت طويل، ونوعين pair وfrequency."
+    src: { page: 19, quote: "3. Matching\nIt is suitable in case control study\nIt ensures equal representation of subjects with known confounders in study groups (the groups could be made \"equal\" in respect of the confounder)\nMight need a long time to complete study sample.\nEither pair matching or frequency matching." }
+    status: unverified
+  - id: res.L12.030
+    kind: card
+    topic: control
+    front: "What is pair matching?"
+    back: "Matching \"one for one\": for every subject (case) we take a control who is similar to that case in respect of the confounding variable."
+    src: { page: 20, quote: "a. Pair matching\nThis method in which we match \"one for one\" (i.e. for every subject or case, we take a control who is similar to that case in respect of the confounding variable" }
+    status: unverified
+  - id: res.L12.031
+    kind: case
+    topic: control
+    stem: "A case-control study matches on tobacco use, age and sex. Of 100 cases, 25 are 40-50-year-old female tobacco users."
+    steps:
+      - question: "With group (frequency) matching, which controls are chosen for this group?"
+        options:
+          - "25 healthy females aged 40-50 who are tobacco users"
+          - "25 healthy people of any age and sex"
+          - "100 healthy females aged 40-50"
+          - "One control picked for each case at random"
+        answer: 0
+        why: "An equal number of controls who fit the same criteria."
+      - question: "How does this differ from pair matching?"
+        options:
+          - "Pair matching picks one similar control for each individual case"
+          - "Pair matching ignores the confounders"
+          - "Pair matching needs no controls"
+          - "There is no difference"
+        answer: 0
+        why: "Pair matching = one for one; frequency matching balances the proportions of each category."
+    src: { page: 21, quote: "b. Group or frequency matching\nSuppose we want to match on 3 variables (tobacco use, age and sex) . Let us say, out of 100 cases we have 25 of them as \"40 - 50 years old female tobacco users\".\nWe will then select out an equal number of controls who fit into this criteria, i.e. 25 healthy females who are 40 - 50 years old and tobacco users as controls" }
+    status: unverified
+  - id: res.L12.032
+    kind: mcq
+    topic: control
+    stem: "For every case of oral cancer, the researcher recruits one control of the same age and sex. This is:"
+    options: ["Pair matching", "Frequency matching", "Restriction", "Stratification"]
+    answer: 0
+    why:
+      - "One for one on the confounding variables = pair matching."
+      - "Frequency matching balances the group proportions, not each case."
+      - "Restriction excludes people with the confounder."
+      - "Stratification is done during analysis."
+    src: { page: 20, quote: "a. Pair matching\nThis method in which we match \"one for one\" (i.e. for every subject or case, we take a control who is similar to that case in respect of the confounding variable" }
+    status: unverified
+  - id: res.L12.033
+    kind: card
+    topic: control
+    front: "What is stratification (stratified analysis)?"
+    back: "Dividing the subjects into categories (strata) of the possible confounder and calculating the measure of risk for each stratum as well as the overall one."
+    src: { page: 23, quote: "1. Stratification\nDivide up the subjects into different categories (strata) of the possible confounders. Calculate the measure of risk for each stratum as well as the overall one.\nIf sex is might be a confounder: Calculate the overall risk in the study group the calculate the risk among males and that among females. If the are widely different, then sex act as a potential confounder." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.034
+    kind: mcq
+    topic: control
+    stem: "The overall risk in a study is calculated, then the risk among males and among females. The two are widely different. This means:"
+    options:
+      - "Sex acts as a potential confounder"
+      - "Sex is the exposure"
+      - "There is selection bias"
+      - "The sample size is too small"
+    answer: 0
+    why:
+      - "The slide: if they are widely different, sex acts as a potential confounder."
+      - "Sex is the stratifying (third) variable here, not the exposure."
+      - "Stratification looks for confounding, not selection bias."
+      - "The comparison says nothing about sample size."
+    src: { page: 23, quote: "1. Stratification\nDivide up the subjects into different categories (strata) of the possible confounders. Calculate the measure of risk for each stratum as well as the overall one.\nIf sex is might be a confounder: Calculate the overall risk in the study group the calculate the risk among males and that among females. If the are widely different, then sex act as a potential confounder." }
+    status: unverified
+  - id: res.L12.035
+    kind: card
+    topic: control
+    front: "What does multivariate analysis do?"
+    back: "Computer software adjusts the associations simultaneously for a number of potential confounders, examining the simultaneous effect of many independent variables on one dependent variable. It is the best way to control for the effect of confounding factors."
+    src: { page: 24, quote: "2. Multivariate analysis:\nComputer software has permitted the adjustment of associations simultaneously for a number of potential confounders\nExamine the simultaneous effect of many independent variables over one dependent variable\nIs the best way to control for the effect of confounding factors" }
+    status: unverified
+  - id: res.L12.036
+    kind: mcq
+    topic: control
+    stem: "According to the lecture, the best way to control for the effect of confounding factors (in analysis) is:"
+    options: ["Multivariate analysis", "Stratified analysis", "Restriction", "Blinding"]
+    answer: 0
+    why:
+      - "Slide 24: multivariate analysis is the best way to control confounding (randomization is the best in the planning phase)."
+      - "Stratification handles one or two confounders at a time."
+      - "Restriction is a planning method with a cost in generalizability."
+      - "Blinding reduces information bias, not confounding."
+    src: { page: 24, quote: "2. Multivariate analysis:\nComputer software has permitted the adjustment of associations simultaneously for a number of potential confounders\nExamine the simultaneous effect of many independent variables over one dependent variable\nIs the best way to control for the effect of confounding factors" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.037
+    kind: mcq
+    topic: control
+    stem: "At the time of designing a study we can reduce the risk of confounding through:"
+    options: ["Restriction", "Stratified analysis", "Multivariate analysis", "Blinding", "All of the above"]
+    answer: 0
+    why:
+      - "Restriction is decided with the eligibility criteria, at design time."
+      - "Stratification is applied during analysis."
+      - "Multivariate analysis is applied during analysis."
+      - "Blinding reduces information bias."
+      - "Only restriction is a design-stage method here."
+    src: { page: 61, quote: "At the time of designing a study we can reduce the risk of confounding through:\nA. Restriction\nB. Stratified analysis\nC. Multivariate analysis\nD. Blinding\nE. All of the above" }
+    status: unverified
+    tags: [lecture-quiz]
+  - id: res.L12.038
+    kind: mcq
+    topic: control
+    stem: "During data analysis, we can overcome the effect of which problems?"
+    options:
+      - "Confounding factors"
+      - "Effect of chance"
+      - "Selection bias"
+      - "All of the above"
+      - "Both confounding factors and effect of chance"
+    answer: 4
+    why:
+      - "True, but chance can also be dealt with in analysis."
+      - "True, but confounding can also be dealt with in analysis."
+      - "Bias can't be overcome in analysis."
+      - "Selection bias is the exception."
+      - "The lecturer's key: confounding and chance both, unlike selection bias."
+    src: { page: 58, quote: "4. During data analysis, we can overcome the effect of the following problems:\nA. Confounding factors\nB. Effect of chance\nC. Selection bias\nD. All of the above\nE. Both 1&2" }
+    status: unverified
+    tags: [lecture-quiz]
+  - id: res.L12.039
+    kind: card
+    topic: selection
+    front: "Define bias (Last, 2001)."
+    back: "Any trend in the collection, analysis, interpretation, publication or review of data that can lead to conclusions that are systematically different from the truth."
+    src: { page: 25, quote: "II. Bias\n\"Systematic error\" or \"Bias\" leads to Loss of Internal Validity.\nAny trend in the Collection, Analysis, Interpretation, Publication Or Review Of Data that can lead to conclusions that are systematically different from the truth (Last, 2001)\nA process at any state of inference tending to produce results that depart systematically from the true values (Fletcher et al, 1988)" }
+    status: unverified
+    tags: [definition, high-yield]
+  - id: res.L12.040
+    kind: cloze
+    topic: selection
+    text: "\"Systematic error\" or bias leads to loss of {{c1::internal validity}}."
+    src: { page: 25, quote: "II. Bias\n\"Systematic error\" or \"Bias\" leads to Loss of Internal Validity.\nAny trend in the Collection, Analysis, Interpretation, Publication Or Review Of Data that can lead to conclusions that are systematically different from the truth (Last, 2001)\nA process at any state of inference tending to produce results that depart systematically from the true values (Fletcher et al, 1988)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.041
+    kind: enumerate
+    topic: selection
+    prompt: "In which stages of handling data can bias enter (Last, 2001)?"
+    points: ["Collection", "Analysis", "Interpretation", "Publication", "Review of data"]
+    pass: 4
+    hook: "الـ bias بيتسرسب في 5 محطات للداتا «جمع، تحليل، تفسير، نشر، مراجعة»: Collection، Analysis، Interpretation، Publication، Review."
+    src: { page: 25, quote: "II. Bias\n\"Systematic error\" or \"Bias\" leads to Loss of Internal Validity.\nAny trend in the Collection, Analysis, Interpretation, Publication Or Review Of Data that can lead to conclusions that are systematically different from the truth (Last, 2001)\nA process at any state of inference tending to produce results that depart systematically from the true values (Fletcher et al, 1988)" }
+    status: unverified
+  - id: res.L12.042
+    kind: mcq
+    topic: selection
+    stem: "On a target diagram, the shots cluster tightly together but far from the bull's-eye. This shows:"
+    options: ["High systematic error (bias)", "Low systematic error", "High random error only", "A valid study"]
+    answer: 0
+    why:
+      - "Systematic, non-random deviation from the truth: all shots miss the same way."
+      - "Low systematic error is scatter around the centre."
+      - "Random error would scatter the shots, not shift them together."
+      - "Shots that all miss the truth are not valid."
+    src: { page: 26, quote: "Bias or Systematic Error\nSystematic, non-random, deviation of results from the truth\nhigh systematic error\nlow systematic error" }
+    status: unverified
+  - id: res.L12.043
+    kind: enumerate
+    topic: selection
+    prompt: "What are the two main types of bias?"
+    points: ["Selection bias", "Information bias"]
+    pass: 2
+    hook: "الـ bias نوعين بس: «مين دخل» (selection) و«قسنا إزاي» (information)."
+    src: { page: 27, quote: "BIAS\n1. Selection bias\n2. Information bias" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.044
+    kind: card
+    topic: selection
+    front: "What are the sources of selection bias?"
+    back: "1) The participant selection procedure, e.g. exposure affects case ascertainment (detection bias) or control selection. 2) Differential unavailability due to death (selective survival), illness, migration or refusal (non-response bias)."
+    src: { page: 28, quote: "Selection Bias\nParticipant selection procedure, e.g., exposure affects case ascertainment (\"detection bias\") or control selection\nDifferential unavailability due to death (\"selective survival\"), illness, migration, or refusal (nonresponse bias)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.045
+    kind: mcq
+    topic: selection
+    stem: "Exposure affects how cases are ascertained (found) in a study. This type of selection bias is called:"
+    options: ["Detection bias", "Recall bias", "Prevarication bias", "Attrition bias"]
+    answer: 0
+    why:
+      - "The slide names exposure affecting case ascertainment \"detection bias\"."
+      - "Recall bias is information bias about remembering exposures."
+      - "Prevarication is a participant hiding the truth."
+      - "Attrition is loss to follow-up."
+    src: { page: 28, quote: "Selection Bias\nParticipant selection procedure, e.g., exposure affects case ascertainment (\"detection bias\") or control selection\nDifferential unavailability due to death (\"selective survival\"), illness, migration, or refusal (nonresponse bias)" }
+    status: unverified
+  - id: res.L12.046
+    kind: card
+    topic: selection
+    front: "How does the population-base diagram explain selection bias?"
+    back: "The study population should include equal proportions from each category of the population base (exposed/not exposed, with/without disease). If the selection takes unequal shares, the study population gives a distorted picture of the population base."
+    src: { page: 30, quote: "Selection Bias\nWith disease\nWithout disease\nExposed\nNot exposed\nPopulation base\nStudy population\nDistorted picture of the population base" }
+    status: unverified
+  - id: res.L12.047
+    kind: case
+    topic: selection
+    stem: "A case-control study in one large hospital asks whether smoking increases the risk of stroke. Cases are patients admitted with stroke; controls are patients admitted for everything else."
+    steps:
+      - question: "Whom should the controls represent?"
+        options:
+          - "The non-cases of the source population, especially in smoking"
+          - "Other hospital patients"
+          - "Stroke patients"
+          - "Smokers only"
+        answer: 0
+        why: "For an unbiased result, controls must represent the non-cases in the source population regarding the exposure."
+      - question: "Why do hospital controls fail here?"
+        options:
+          - "Smokers are admitted more for other diseases (lung cancer, COPD), so smoking is commoner in hospital controls"
+          - "Hospital controls smoke less than the community"
+          - "Stroke patients forget they smoked"
+          - "The hospital is too large"
+        answer: 0
+        why: "Smoking raises the risk of many diseases that lead to admission."
+      - question: "What is the effect on the result?"
+        options:
+          - "Underestimation of the effect of smoking on stroke risk"
+          - "Overestimation of the effect"
+          - "No effect"
+          - "A reversed association always"
+        answer: 0
+        why: "Exposure is inflated among controls, so the difference between cases and controls shrinks."
+    src: { page: 31, quote: "Example I: Selection Bias in Case Control Studies\nImagine a cumulative case-control study conducted in one large hospital. The study aims to explore whether smoking increases the risk of experiencing a stroke. Cases are patients admitted for stroke, controls are patients admitted for everything else. In order to have an unbiased result, the controls need to be representative of the non-cases in the source population, particularly in regards to the exposure of interest (smoking). However, because smokers are also at higher risk for other diseases that lead to hospitalizations than non-smokers (lung cancer, COPD, etc), smoking is more common among hospitalized non-cases than among non-cases in the source population. This will result in an underestimation of the effect of smoking on stroke risk." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.048
+    kind: card
+    topic: selection
+    front: "What is survival bias?"
+    back: "Dealing with survivors in cross-sectional and case-control studies: the picture of the disease among those who lived certainly differs from those who died."
+    src: { page: 32, quote: "1. Survival bias\nDealing with survivor in cross sectional study and case control study is associated with survival bias.\nThe picture of the disease among those who lived are certainly differ from those who died" }
+    status: unverified
+  - id: res.L12.049
+    kind: mcq
+    topic: selection
+    stem: "Survival bias is associated with which designs, according to the lecture?"
+    options:
+      - "Cross-sectional and case-control studies"
+      - "Randomized controlled trials"
+      - "Prospective cohort only"
+      - "Ecological studies"
+    answer: 0
+    why:
+      - "Both deal with the survivors present at the time of study."
+      - "A trial follows its subjects from allocation."
+      - "Prospective cohorts suffer attrition (loss to follow-up) instead."
+      - "Not discussed."
+    src: { page: 32, quote: "1. Survival bias\nDealing with survivor in cross sectional study and case control study is associated with survival bias.\nThe picture of the disease among those who lived are certainly differ from those who died" }
+    status: unverified
+  - id: res.L12.050
+    kind: enumerate
+    topic: selection
+    prompt: "Enumerate the 3 causes of differential diagnosis bias."
+    points:
+      - "Many patients remain undiagnosed for several years"
+      - "In persons at high risk and those who seek medical care frequently, the disease is more likely to be discovered"
+      - "Persons differ in clinical, geographical or economic characteristics that affect access to diagnostic procedures"
+    pass: 3
+    hook: "الـ differential diagnosis bias «مين اتشخّص أصلًا؟»: ناس فضلت سنين من غير تشخيص، الـ high risk واللي بيروح للدكتور كتير بيتكشفوا أكتر، والفلوس والمكان والحالة بيحددوا مين يوصل للفحص."
+    src: { page: 33, quote: "2.Differential diagnosis bias :\n1. Many patients remain undiagnosed for several years.\n2. In Persons who are at high risk for certain diseases and those who seek medical care frequently , the disease is more likely to be discovered.\n3. Persons differ in in their clinical, geographical or economic characteristics tht affect access to diagnostic procedures." }
+    status: unverified
+  - id: res.L12.051
+    kind: enumerate
+    topic: selection
+    prompt: "Explain non-response and volunteer bias (2 points and the example)."
+    points:
+      - "Volunteers might be at low risk or non-exposed to risk factors"
+      - "Those who refuse to participate might be at high risk for developing the disease"
+      - "Example: in a survey on STDs, those who practise unsafe sex will not respond"
+    pass: 3
+    hook: "«اللي جه لوحده سليم، واللي رفض هو اللي فيه الحكاية»: volunteers low risk، الرافضين high risk، زي survey الـ STDs."
+    src: { page: 34, quote: "3.Non response and volunteer bias :\n1. Those who volunteer to participate in the study might be at low risk or non-exposed to risk factors\n2. On the other hand, those who refuse to participate might be at high risk for developing a disease\nE.g. survey for studying STDs , those who practice unsafe sex will not respond." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.052
+    kind: mcq
+    topic: selection
+    stem: "In a survey on sexually transmitted diseases (STDs), people who practise unsafe sex do not respond. This is:"
+    options: ["Non-response bias", "Recall bias", "Interviewer bias", "Neyman bias"]
+    answer: 0
+    why:
+      - "Those who refuse may be the high-risk ones: the slide's own example."
+      - "Recall bias is about remembering exposures."
+      - "Interviewer bias comes from the interviewer's questioning or recording."
+      - "Neyman bias comes from studying long-standing (prevalent) cases."
+    src: { page: 34, quote: "3.Non response and volunteer bias :\n1. Those who volunteer to participate in the study might be at low risk or non-exposed to risk factors\n2. On the other hand, those who refuse to participate might be at high risk for developing a disease\nE.g. survey for studying STDs , those who practice unsafe sex will not respond." }
+    status: unverified
+  - id: res.L12.053
+    kind: enumerate
+    topic: selection
+    prompt: "Dealing only with cases affected long ago (incidence-prevalence, Neyman bias) results in missing which cases?"
+    points:
+      - "Fatal cases"
+      - "Short episodes"
+      - "Mild or silent cases"
+      - "Cases in which evidence of the risk factor disappears with disease onset"
+    pass: 4
+    hook: "الـ Neyman bias بيفوّت 4 «اللي مات، اللي خف بسرعة، اللي ساكت، واللي الـ risk factor بتاعه اختفى»."
+    src: { page: 35, quote: "4.Incidence prevalence bias (Neyman) :\n1. Dealing only with cases who are affected early (since long period), will result in\na. Missing fatal cases\nb. Missing short episodes\nc. Missing mild or silent cases\nd. Missing cases in which evidence of risk factor disappear with the disease onset." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.054
+    kind: mcq
+    topic: selection
+    stem: "Restricting recruitment of cases to those who have active disease at an arbitrary point in time results in:"
+    options: ["Ascertainment bias", "Incidence/prevalence bias", "Admission bias", "None of the above"]
+    answer: 1
+    why:
+      - "Ascertainment bias is measuring the outcome differently in the two groups."
+      - "Active cases at one moment are prevalent cases: fatal, short and mild cases are missed (Neyman)."
+      - "Admission bias comes from which patients get admitted to hospital."
+      - "Incidence/prevalence bias fits."
+    src: { page: 57, quote: "3. Restricting recruitment of cases to those who have active disease at an arbitrary point in time resulting in:\nA. Ascertainment bias\nB. Incidence/ Prevalence bias\nC. Admission bias\nD. None of the above" }
+    status: unverified
+    tags: [lecture-quiz]
+  - id: res.L12.055
+    kind: table
+    topic: selection
+    title: "Hospital controls"
+    columns: ["Side", "Points"]
+    rows: [["Advantages", "Easier and less expensive to recruit; higher response rate; better information about medical exposures"], ["Drawback", "If the conditions that bring people to hospital are related to the exposure, the control group and the whole study are biased"]]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 36, quote: "Hospital controls\nA control group drawn from among hospitalized patients will be easier and less expensive to recruit, have a higher response rate, and provide better information about medical exposures.\nBut if the conditions that bring people to the hospital are related to the exposure under study, then the control group and the overall study will be biased." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.056
+    kind: card
+    topic: selection
+    front: "Why do hospital patients differ from the community (admission factors)?"
+    back: "If the disease is serious, all cases are admitted, but otherwise admission occurs only in complicated cases; and people referred to private hospitals differ from those admitted to governmental hospitals."
+    src: { page: 37, quote: "If the disease is a serious one, all cases with disease will be admitted. On the other hand admission occur only in complicated cases only\nPeople referred to private hospitals differ from those admitted to governmental hospital." }
+    status: unverified
+  - id: res.L12.057
+    kind: card
+    topic: selection
+    front: "What is attrition bias?"
+    back: "In a prospective cohort, a long follow-up may lose many participants. Bias occurs when those lost to follow-up differ systematically from those who remain in the study."
+    src: { page: 38, quote: "Attrition Bias\nIn prospective cohort, long period of follow up might lead to loss of follow up to many participants .\nBias occur when those lost to follow up differ systematically from those remain in the study" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.058
+    kind: mcq
+    topic: selection
+    stem: "In a 5-year cohort, 20% of participants are lost to follow-up. Attrition bias occurs when:"
+    options:
+      - "Those lost differ systematically from those who remain"
+      - "Any participant is lost"
+      - "More than 10% are lost"
+      - "The follow-up lasts over a year"
+    answer: 0
+    why:
+      - "The slide ties the bias to systematic differences, not to the loss itself."
+      - "Loss alone (if random) doesn't bias the result."
+      - "The lecture gives no percentage cut-off."
+      - "Length raises the chance of loss but is not the definition."
+    src: { page: 38, quote: "Attrition Bias\nIn prospective cohort, long period of follow up might lead to loss of follow up to many participants .\nBias occur when those lost to follow up differ systematically from those remain in the study" }
+    status: unverified
+  - id: res.L12.059
+    kind: card
+    topic: information
+    front: "What is information bias?"
+    back: "Often called measurement bias: it occurs due to poor measurement (classification) of the study variables (exposure)."
+    src: { page: 39, quote: "II. Information bias\nOften referred to as measurement bias\nOccurs due to poor measurement (classification) of study variables (exposure)Distinguish two basic types of information bias\n1. Non-differential\nMisclassification between groups is approximately equal\n2. Differential\nAmount of misclassification differs between groups" }
+    status: unverified
+    tags: [definition, high-yield]
+  - id: res.L12.060
+    kind: table
+    topic: information
+    title: "Two types of information bias"
+    columns: ["Type", "Misclassification"]
+    rows: [["Non-differential", "Approximately equal between groups"], ["Differential", "Amount differs between groups"]]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 39, quote: "II. Information bias\nOften referred to as measurement bias\nOccurs due to poor measurement (classification) of study variables (exposure)Distinguish two basic types of information bias\n1. Non-differential\nMisclassification between groups is approximately equal\n2. Differential\nAmount of misclassification differs between groups" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.061
+    kind: enumerate
+    topic: information
+    prompt: "Enumerate the 5 types of information (measurement or misclassification) bias."
+    points:
+      - "Instrumentation"
+      - "Recall bias"
+      - "Interviewer bias (eliciting information, recording and interpretation)"
+      - "Prevarication bias"
+      - "Ascertainment bias"
+    pass: 5
+    hook: "الـ information bias «IRIPA» = آلة، ذاكرة، محاور، كداب، وطريقة كشف: Instrumentation، Recall، Interviewer، Prevarication، Ascertainment."
+    src: { page: 40, quote: "II. Information bias (Measurement OR Misclassification bias)\n1. Instrumentation\n2. Recall bias\n3. Interviewer bias: (eliciting information, recording and interpretation bias)\n4. Prevarication bias\n5. Ascertainment bias" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.062
+    kind: card
+    topic: information
+    front: "When does instrumental bias take place?"
+    back: "When the measuring instrument (a device, a survey, interviews or participant observation) changes over time, is not tested for validity and reliability, or is poorly maintained."
+    src: { page: 41, quote: "1. Instrumental bias\nSuch instrumental bias takes place when the measuring instrument (e.g., a measuring device, a survey, interviews/participant observation) that is used in a study changes over time, not tested for validity and reliability, poor maintainance..." }
+    status: unverified
+  - id: res.L12.063
+    kind: mcq
+    topic: information
+    stem: "In a case-control study, mothers of babies with congenital malformations report drug intake in pregnancy more fully than mothers of healthy babies. This is:"
+    options: ["Recall bias", "Prevarication bias", "Survival bias", "Volunteer bias"]
+    answer: 0
+    why:
+      - "Subjects with the disease remember past relevant exposures more than controls."
+      - "Prevarication is deliberately exaggerating or minimizing."
+      - "Survival bias is studying only survivors."
+      - "Volunteer bias is about who agrees to join."
+    src: { page: 42, quote: "2.Recall bias:\nIn case control study, and retrospective cohort study Subjects with a disease are more likely to remember past relevant exposures, in comparison to controls" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.064
+    kind: enumerate
+    topic: information
+    prompt: "Enumerate the 4 forms of interviewer bias."
+    points:
+      - "Cases are asked about exposure meticulously, unlike controls"
+      - "Leading questions"
+      - "Recording of (atypical) information differs between cases and controls"
+      - "Interpreting the same information differently on different occasions"
+    pass: 4
+    hook: "الـ interviewer «بيسأل، بيوجّه، بيكتب، وبيفسّر» على مزاجه: meticulous مع الـ cases، leading questions، recording مختلف، وinterpretation مختلف."
+    src: { page: 43, quote: "3.Interviewer bias:\nIn case control study, cases are asked about exposure in a meticulous way unlike control.\nLeading questions\nRecording of information (if a typical) might differ between cases and control.\nInterpretation of the same information differently in different occasions." }
+    status: unverified
+  - id: res.L12.065
+    kind: mcq
+    topic: information
+    stem: "Factory workers minimize their symptoms because they fear losing their jobs, while others exaggerate them to increase compensation. This is:"
+    options: ["Prevarication bias", "Recall bias", "Instrumental bias", "Detection bias"]
+    answer: 0
+    why:
+      - "Escaping the truth by exaggeration or minimizing according to what they wish."
+      - "Recall bias is about memory, not wishes."
+      - "The instrument is not the problem."
+      - "Detection bias is a selection bias in case ascertainment."
+    src: { page: 44, quote: "4. Prevarication bias:\nThe patient might escape truth either by exaggeration or minimizing according to what they wish.\ne.g. workers may minimize their symptoms because of fear of loosing their jobs, others may exaggerate to increase compensation" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.066
+    kind: card
+    topic: information
+    front: "What is ascertainment bias?"
+    back: "It occurs if data about the outcome of interest are obtained by different methods in the two comparison groups."
+    src: { page: 45, quote: "5. Ascertainment bias:\nIt occurs if data about the outcome of interest is obtained by using different methods in the two comparison groups." }
+    status: unverified
+  - id: res.L12.067
+    kind: enumerate
+    topic: information
+    prompt: "Enumerate the 5 other types of bias listed in the lecture."
+    points:
+      - "Non-random allocation of study subjects (produces selection bias)"
+      - "Co-intervention bias"
+      - "Cross-over bias"
+      - "Placebo effect"
+      - "Contamination bias"
+    pass: 5
+    hook: "5 «مشاكل الـ trial»: non-random allocation، co-intervention، cross over، placebo، وcontamination."
+    src: { page: 46, quote: "Other types of bias\n1. Non random allocation of study subjects (produce selection bias)\n2. Co-intervention bias\n3. Cross over bias\n4. Placebo effect\n5. Contamination bias" }
+    status: unverified
+  - id: res.L12.068
+    kind: mcq
+    topic: information
+    stem: "Non-random allocation of study subjects produces:"
+    options: ["Selection bias", "Recall bias", "Interviewer bias", "No bias if groups are large"]
+    answer: 0
+    why:
+      - "The slide notes it produces selection bias."
+      - "Recall bias is about memory."
+      - "Interviewer bias is about questioning."
+      - "Size doesn't fix a biased allocation."
+    src: { page: 46, quote: "Other types of bias\n1. Non random allocation of study subjects (produce selection bias)\n2. Co-intervention bias\n3. Cross over bias\n4. Placebo effect\n5. Contamination bias" }
+    status: unverified
+  - id: res.L12.069
+    kind: mcq
+    topic: information
+    stem: "All the following are considered sources of selection bias EXCEPT:"
+    options:
+      - "High non-response rate"
+      - "Interpretation of the same information differently on different occasions"
+      - "Lack of a standard case definition for selection of cases"
+      - "Selection of all cases from one hospital"
+    answer: 1
+    why:
+      - "Non-response is a selection bias."
+      - "That is interviewer bias, an information bias: the lecturer's key."
+      - "It changes who enters as a case, a selection problem."
+      - "One hospital's cases may not represent all cases."
+    src: { page: 60, quote: "All the followings are considered sources for selection bias EXCEPT:\nA. High non response rate\nB. Interpretation of the same information differently in different occasions\nC. Lack of standard case definition for selection of cases\nD. Selection of all cases from one hospital" }
+    status: unverified
+    tags: [lecture-quiz]
+  - id: res.L12.070
+    kind: mcq
+    topic: information
+    stem: "The internal validity of the research is greatly affected by:"
+    options: ["Information bias", "Confounding factors", "Selection bias", "All of the above", "None of the above"]
+    answer: 3
+    why:
+      - "True but incomplete."
+      - "True but incomplete."
+      - "True but incomplete."
+      - "Confounding and bias (selection and information) are all threats to internal validity."
+      - "All three affect it."
+    src: { page: 56, quote: "The internal validity of the research is greatly affected by:\nA. Information Bias\nB. Confounding factors\nC. Selection bias\nD. All of the above\nE. None of the above" }
+    status: unverified
+    tags: [lecture-quiz]
+  - id: res.L12.071
+    kind: mcq
+    topic: information
+    stem: "Using standardized wording of introductions to questions and clearly standardized examination techniques may help to minimize:"
+    options: ["Selection bias", "Effect of potential confounders", "Information bias", "All of the above"]
+    answer: 2
+    why:
+      - "Wording doesn't change who enters the study."
+      - "Confounders are handled by design and analysis methods."
+      - "Standard questions and examinations reduce measurement error: the lecturer's key."
+      - "Only information bias."
+    src: { page: 55, quote: "1. Using standardized wording of introductions to questions and clearly standardized examination techniques, may help to minimize:\nA. Selection bias.\nB. Effect of potential confounders.\nC. Information bias.\nD. All of the above." }
+    status: unverified
+    tags: [lecture-quiz]
+  - id: res.L12.072
+    kind: mcq
+    topic: information
+    stem: "Blinding of the interviewer helps to minimize:"
+    options: ["Selection bias", "Information bias", "Effect of potential confounders", "All of the above"]
+    answer: 1
+    why:
+      - "Blinding doesn't change who is selected."
+      - "A blinded interviewer can't question or record cases differently."
+      - "Confounding is controlled by randomization, restriction, matching or analysis."
+      - "Only information bias."
+    src: { page: 59, quote: "5. Blinding of the interviewer help to minimize:\nA. Selection bias\nB. Information bias\nC. Effect of potential confounders\nD. All of the above" }
+    status: unverified
+    tags: [lecture-quiz]
+  - id: res.L12.073
+    kind: enumerate
+    topic: prevention
+    prompt: "Why must bias be dealt with at design, and what do we need to know its sources for?"
+    points:
+      - "Bias is far more difficult to evaluate than confounders"
+      - "It is impossible to overcome in analysis"
+      - "Know its sources to prevent bias"
+      - "Know its sources to minimize bias"
+      - "Know its sources to consider bias when interpreting the results"
+    pass: 5
+    hook: "الـ bias «مش بيتصلّح بعدين»: أصعب من الـ confounders ومستحيل في الـ analysis، فاعرف مصادره عشان تمنع، تقلّل، وتفسّر."
+    src: { page: 47, quote: "How to avoid bias\n1. Bias are far more difficult to evaluate than confounders.\n2. It is impossible to overcome in analysis.\n3. It is important to know its sources in order to\nPrevent bias .\nMinimize bias\nConsider them in the interpretation of results." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.074
+    kind: mcq
+    topic: prevention
+    stem: "Which statement best contrasts bias with confounding?"
+    options:
+      - "Confounding can be controlled in analysis, but bias is impossible to overcome in analysis"
+      - "Both are fixed by multivariate analysis"
+      - "Bias is easier to evaluate than confounding"
+      - "Bias affects only external validity"
+    answer: 0
+    why:
+      - "Slide 47: bias is far harder to evaluate and impossible to overcome in analysis, while confounding can be adjusted."
+      - "Multivariate analysis adjusts confounders, not bias."
+      - "The opposite: far more difficult."
+      - "Bias causes loss of internal validity."
+    src: { page: 47, quote: "How to avoid bias\n1. Bias are far more difficult to evaluate than confounders.\n2. It is impossible to overcome in analysis.\n3. It is important to know its sources in order to\nPrevent bias .\nMinimize bias\nConsider them in the interpretation of results." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.075
+    kind: card
+    topic: prevention
+    front: "How can recall bias be prevented?"
+    back: "If possible, do not tell the subjects your research hypothesis, and take information about exposure from other sources in addition to the subjects."
+    src: { page: 48, quote: "How to avoid bias\nIf possible, do not tell your research hypothesis to the subjects (helps preventing recall bias). In addition, if possible, try and take information about exposure from other sources, in addition to the subjects." }
+    status: unverified
+  - id: res.L12.076
+    kind: card
+    topic: prevention
+    front: "How do you avoid bias in a follow-up study (cohort or clinical trial)?"
+    back: "Take a well-defined population to avoid loss to follow-up, and develop methods to retrieve subjects who are getting lost to follow-up."
+    src: { page: 49, quote: "How to avoid bias\nIn a follow - up study (cohort study or clinical trial), take a well defined population to avoid loss to follow up; develop methods to retrieve those subjects who are getting lost to follow up." }
+    status: unverified
+  - id: res.L12.077
+    kind: card
+    topic: prevention
+    front: "How do you reduce bias from controls in a case-control study?"
+    back: "Select two or more groups of controls (e.g. one from hospital and another healthy group), and take different categories of diagnoses when selecting hospital controls."
+    src: { page: 50, quote: "How to avoid bias\nSelect two or more than 2 \"groups\" of controls in a case control study (e.g. one from hospital and another healthy group); try and take different categories of diagnoses if selecting hospital controls.\nIn any type of study, see the \"entire spectrum\" of the outcome or disease - e.g. in IHD, also see in addition to MI, angina, sudden death and asymptomatic ECG changes." }
+    status: unverified
+  - id: res.L12.078
+    kind: cloze
+    topic: prevention
+    text: "In any study, see the \"entire spectrum\" of the outcome: in IHD, besides MI also see {{c1::angina}}, {{c2::sudden death}} and {{c3::asymptomatic ECG changes}}."
+    src: { page: 50, quote: "How to avoid bias\nSelect two or more than 2 \"groups\" of controls in a case control study (e.g. one from hospital and another healthy group); try and take different categories of diagnoses if selecting hospital controls.\nIn any type of study, see the \"entire spectrum\" of the outcome or disease - e.g. in IHD, also see in addition to MI, angina, sudden death and asymptomatic ECG changes." }
+    status: unverified
+  - id: res.L12.079
+    kind: mcq
+    topic: prevention
+    stem: "Why is it advisable to take incident rather than prevalent cases?"
+    options:
+      - "Prevalent cases might have changed their exposure status due to medical advice"
+      - "Incident cases are easier to find"
+      - "Prevalent cases are always fewer"
+      - "Incident cases need no controls"
+    answer: 0
+    why:
+      - "The slide's reason: a smoker with angina may stop smoking after advice."
+      - "Not the reason given."
+      - "Not true."
+      - "Every case-control study needs controls."
+    src: { page: 51, quote: "How to avoid bias\n- It is always advisable to take the incident cases since the prevalent cases might have changed their exposure status due to medical advice.\n- examine all subjects of both groups at the pre - decided dates using \"similar\" methods of history taking, physical examination and investigations, and make arrangements that losses to follow up are minimized." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.080
+    kind: enumerate
+    topic: prevention
+    prompt: "Enumerate 4 measurement measures that help avoid bias."
+    points:
+      - "Questionnaire validation"
+      - "Use accurate and reliable instruments (proper maintenance)"
+      - "Define and put an operational definition for each variable"
+      - "Training of data collectors (supervisory checks)"
+    pass: 4
+    hook: "قياس نضيف = «ورقة متجرّبة، جهاز متظبط، تعريف واضح، وناس متدرّبة»."
+    src: { page: 52, quote: "How to avoid bias\nQuestionnaire validation\nUse accurate and reliable instruments (proper maintainance)\nDefine and put operational definition for variable\nTraining of data collectors or one (supervisory checks)" }
+    status: unverified
+  - id: res.L12.081
+    kind: enumerate
+    topic: prevention
+    prompt: "In an experimental design (clinical trial), what three measures avoid bias?"
+    points: ["Random allocation", "Blinding", "Placebo control"]
+    pass: 3
+    hook: "الـ trial النضيف «RBP»: Random allocation، Blinding، Placebo control."
+    src: { page: 53, quote: "How to avoid bias\nIn an experimental design (clinical trial), ensure Random allocation, Blinding and Placebo control.\nAs far as possible, ensure blinding - definitely in an experimental design; even in a case control study or cohort study, the observer can be \"blinded\"." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L12.082
+    kind: card
+    topic: prevention
+    front: "Can blinding be used outside clinical trials?"
+    back: "Yes. Blinding should be ensured as far as possible, definitely in an experimental design; even in a case-control or cohort study the observer can be \"blinded\"."
+    src: { page: 53, quote: "How to avoid bias\nIn an experimental design (clinical trial), ensure Random allocation, Blinding and Placebo control.\nAs far as possible, ensure blinding - definitely in an experimental design; even in a case control study or cohort study, the observer can be \"blinded\"." }
+    status: unverified
+  - id: res.L12.083
+    kind: card
+    topic: prevention
+    front: "How should both groups be examined to avoid bias in a follow-up study?"
+    back: "Examine all subjects of both groups at pre-decided dates using similar methods of history taking, physical examination and investigations, and arrange that losses to follow-up are minimized."
+    src: { page: 51, quote: "How to avoid bias\n- It is always advisable to take the incident cases since the prevalent cases might have changed their exposure status due to medical advice.\n- examine all subjects of both groups at the pre - decided dates using \"similar\" methods of history taking, physical examination and investigations, and make arrangements that losses to follow up are minimized." }
+    status: unverified

@@ -31,8 +31,8 @@ never goes in git; items paraphrase it and cite the page.
 | Diabetes, Metabolism, Lipids (`dm`) | 23 | 23 |
 | Geriatrics (`geri`) | 13 | 13 |
 | Nephrology (`neph`) | 14 | 14 |
-| Basics of Research (`res`) | 15 | 15 |
-| **Total** | **136** | **136** |
+| Basics of Research (`res`) | 16 | 16 |
+| **Total** | **137** | **137** |
 
 Plus 98 calculators (each cites its original paper, and every result band
 says what it means, the next step and the differential), an abbreviations

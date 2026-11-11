@@ -80,7 +80,13 @@ Key design rules (also in `CLAUDE.md`):
   append-only events; statuses and settings are LWW by HLC.
 - **A new synced table must be added to `batna_protocol::sync::TABLES`** and
   written through the store so it is queued in `sync_outbox`; otherwise the
-  hub rejects it.
+  hub rejects it. The Worker that knows the table must be deployed: check the
+  "Deploy Batna Cloud" run of that PR and re-run it the same day if it fails
+  (#780's deploy failed on a 504 and the hub rejected `notes` for two days).
+  A hub that doesn't know a table answers `UnknownTable`; the client keeps
+  those ops in the outbox, skips that table until the next connection, and
+  sends them again then. `store/sync.rs` `RESEND` queues a table's own rows
+  again once, for ops an older build dropped.
 - Layout by window width (compact <600dp, medium <840dp, expanded ≥840dp),
   never by device. Logical CSS properties only (RTL). English medical text
   inside Arabic UI is wrapped in `<bdi>`.
@@ -602,6 +608,7 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-11: sync ops the hub refuses (or the device can't read) are held with their reason and shown in Settings › Sync with send-again / let-go; the export is one read snapshot (engineering audit F12–F14, § 10 Study sessions).
+- 2026-11-11: the Batna Cloud deploy for #780 had failed (504), so the hub rejected `notes`; deploy re-run, ops on a table the hub doesn't know now wait in the outbox, and notes are queued again once.
 - 2026-11-11: finishing a lesson is one transaction with a Retry; a failed read keeps the last good copy and says so on Today; an in-memory session is announced on every screen (engineering audit F09–F11, § 10 Study sessions).
 - 2026-11-11: answers the store refuses outside the main Study session (lesson Try, Oral, question bank) are no longer lost silently: the item stays or the answer is kept with a retry (engineering audit F02, § 10 Study sessions).
 - 2026-11-11: his notes on items ride in the Anki deck (`Notes` field on Batna Basic and Batna Cloze; docs/ANKI.md), from Steps-app.

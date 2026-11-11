@@ -7,6 +7,8 @@
 //! says how many there are, and Mohamed can send them again (after an
 //! update, say) or let them go.
 
+use std::collections::BTreeSet;
+
 use batna_protocol::sync::{Op, Rejected};
 use rusqlite::{Connection, params};
 
@@ -48,11 +50,26 @@ fn reason_name(r: &Rejected) -> String {
 impl Store {
     /// The oldest `limit` ops waiting for the hub. A row this build can't
     /// read moves to `sync_held` rather than blocking or vanishing.
+    #[cfg(test)]
     pub fn outbox(&self, limit: usize) -> Result<Vec<Op>> {
+        self.outbox_skipping(limit, &BTreeSet::new())
+    }
+
+    /// Like [`Store::outbox`], leaving out ops on `skip` tables (ones the hub
+    /// said it doesn't know yet on this connection).
+    pub fn outbox_skipping(&self, limit: usize, skip: &BTreeSet<String>) -> Result<Vec<Op>> {
         let mut conn = self.conn.lock().unwrap();
         let rows: Vec<(String, String)> = {
-            let mut stmt = conn.prepare("SELECT op_id, op FROM sync_outbox ORDER BY seq LIMIT ?1")?;
-            stmt.query_map([limit as i64], |r| Ok((r.get(0)?, r.get(1)?)))?
+            let skip = serde_json::to_string(skip).unwrap_or_else(|_| "[]".into());
+            // A row whose JSON is broken has no table, so it isn't skipped:
+            // it comes through here and is held below.
+            let mut stmt = conn.prepare(
+                "SELECT op_id, op FROM sync_outbox
+                 WHERE NOT json_valid(op)
+                    OR coalesce(json_extract(op, '$.table'), '') NOT IN (SELECT value FROM json_each(?2))
+                 ORDER BY seq LIMIT ?1",
+            )?;
+            stmt.query_map(params![limit as i64, skip], |r| Ok((r.get(0)?, r.get(1)?)))?
                 .collect::<rusqlite::Result<_>>()?
         };
         let mut ops = Vec::with_capacity(rows.len());
@@ -189,6 +206,16 @@ mod tests {
         assert_eq!(s.outbox(10).unwrap(), vec![ops[1].clone()]);
         assert_eq!(s.held_reason(&ops[0].id).as_deref(), Some(UNREADABLE));
         assert_eq!(s.outbox_len(), 1);
+        // Skipping a table the hub lacks doesn't hide a broken row.
+        s.conn
+            .lock()
+            .unwrap()
+            .execute("INSERT INTO sync_outbox (op_id, op) VALUES ('broken', 'nope')", [])
+            .unwrap();
+        let skip = BTreeSet::from(["review_events".to_string()]);
+        assert!(s.outbox_skipping(10, &skip).unwrap().is_empty());
+        assert_eq!(s.held_reason("broken").as_deref(), Some(UNREADABLE));
+        s.conn.lock().unwrap().execute("DELETE FROM sync_held WHERE op_id = 'broken'", []).unwrap();
         // Still unreadable: sending again leaves it held.
         assert_eq!(s.send_held_again().unwrap(), 0);
         assert_eq!(s.held_len(), 1);

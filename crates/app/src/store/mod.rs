@@ -281,6 +281,7 @@ impl Store {
             None => device,
         };
         sync::seed(&conn, &device)?;
+        sync::resend_once(&conn, &device)?;
         sync::check_tables(&conn)?;
         let mut clock = HlcClock::new(device);
         // Start past every stamp already stored, whichever device wrote it.

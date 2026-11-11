@@ -26,11 +26,27 @@ pub struct Library {
     pub program: Program,
 }
 
-/// The library in use. Each one is leaked: screens hold `&'static` items,
-/// and it is replaced at most a few times a session.
+/// The library in use. Each one is leaked: screens hold `&'static` items.
+/// That is only safe because it is bounded (engineering audit F17): at most
+/// [`MAX_LIVE_RELOADS`] replacements a run, so at most that many old
+/// libraries (and their [`Derived`] values) stay behind until Batna closes.
+/// A pack that arrives after that opens at the next start.
 static LIB: RwLock<Option<&'static Library>> = RwLock::new(None);
 /// Bumped each time the library is replaced, so caches built from it know.
 static GENERATION: AtomicU64 = AtomicU64::new(0);
+
+/// Live content switches allowed per run. A content pack is ~8 MB packed;
+/// a run that has switched this many times takes the next pack at restart.
+/// Unbounded in tests, where many apply a pack in one process.
+#[cfg(not(test))]
+const MAX_LIVE_RELOADS: u64 = 2;
+#[cfg(test)]
+const MAX_LIVE_RELOADS: u64 = u64::MAX;
+
+/// Whether another live switch fits in the bound, after `done` of them.
+fn may_reload(done: u64, max: u64) -> bool {
+    done < max
+}
 
 impl Library {
     pub fn get() -> &'static Library {
@@ -50,10 +66,22 @@ impl Library {
 
     /// Opens the newest pack again (one the update feed just delivered).
     /// Screens built from the old one must be shown again afterwards.
-    pub fn reload() {
+    /// Returns false, changing nothing, once this run has switched
+    /// [`MAX_LIVE_RELOADS`] times: the pack then opens at the next start.
+    pub fn reload() -> bool {
+        if !may_reload(Library::generation(), MAX_LIVE_RELOADS) {
+            static TOLD: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+            if !TOLD.swap(true, Ordering::SeqCst) {
+                crate::diag::report!(
+                    "content: {MAX_LIVE_RELOADS} live switches this run; the new pack opens at restart"
+                );
+            }
+            return false;
+        }
         let fresh: &'static Library = Box::leak(Box::new(Library::load()));
         *LIB.write().unwrap_or_else(|e| e.into_inner()) = Some(fresh);
         GENERATION.fetch_add(1, Ordering::SeqCst);
+        true
     }
 
     /// Changes each time the library is replaced.
@@ -211,6 +239,13 @@ impl<T> CourseRows<'_, T> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Old libraries are leaked, so live switches are bounded (audit F17).
+    #[test]
+    fn live_switches_are_bounded() {
+        assert!(may_reload(0, 2) && may_reload(1, 2));
+        assert!(!may_reload(2, 2) && !may_reload(7, 2));
+    }
 
     #[test]
     fn lectures_are_named_by_course_number_and_title() {

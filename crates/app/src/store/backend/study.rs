@@ -14,8 +14,7 @@ impl StudyStore for ReviewBackend {
                 // Rating again after a failed save clears Today's note.
                 super::super::write_recovered(&format!("the answer to {id}"));
                 let logged_id = logged.id.clone();
-                self.log.push(logged);
-                self.replay();
+                self.log_answer(logged);
                 self.changed();
                 Ok(Some(logged_id))
             }

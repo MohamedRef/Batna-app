@@ -83,6 +83,8 @@ fn screen_fixtures_render_every_step_kind() {
         abbr.len()
             > std::fs::read_to_string(dir.join("lesson-mixed-hb.L01.lesson2-9-steps.html")).unwrap().len()
     );
+    let remind = std::fs::read_to_string(dir.join("lesson-mixed-hb.L01.lesson3-12-steps.html")).unwrap();
+    assert!(remind.contains("ls-remind") && remind.contains("SHIBS") && remind.contains("ls-remind-from"));
     assert!(dir.join("abbr-dictionary.html").exists() && dir.join("app.css").exists());
 }
 
@@ -186,12 +188,15 @@ fn case_pick() -> Pick {
 }
 
 /// The mixed Arabic and English steps (lesson, step, abbreviations open).
-const MIXED: [(&str, usize, bool); 5] = [
+/// The last one is the ACLF step with its reminders (2026-11-08): two
+/// تحشيشات of this lesson and SHIBS from lesson 2, linked back.
+const MIXED: [(&str, usize, bool); 6] = [
     ("hb.L01.lesson2", 5, false),
     ("hb.L01.lesson2", 7, false),
     ("hb.L01.lesson2", 8, false),
     ("hb.L01.lesson2", 8, true),
     ("hb.L01.lesson3", 9, false),
+    ("hb.L01.lesson3", 11, false),
 ];
 
 /// The first lesson with each step kind, in book order.

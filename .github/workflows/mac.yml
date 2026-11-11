@@ -10,6 +10,12 @@ on:
   schedule:
     - cron: "17 2 * * *"
   workflow_dispatch:
+  # Build a fresh signed Mac ZIP once when this packaging workflow lands.
+  # Unrelated changes do not trigger extra hosted Mac builds.
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/mac.yml
 
 # A started run finishes; a waiting one is replaced by the newest.
 concurrency:
@@ -26,7 +32,7 @@ jobs:
   macos:
     # adapted from kabar-app main: .github/workflows/ci.yml (macos)
     timeout-minutes: 45
-    name: Mac app compiles
+    name: Mac app build and test
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v5
@@ -58,3 +64,40 @@ jobs:
           app="$(find ../../dist/mac -maxdepth 3 -name '*.app' -print -quit)"
           test -n "$app"
           plutil -lint "$app/Contents/Info.plist"
+      # A manual Mac run produces an installable, signed preview ZIP.
+      # Nightly runs keep their existing compile-only behavior.
+      - name: Sign on-demand Mac preview
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+        env:
+          P12_B64: ${{ secrets.BATNA_MAC_CERT_P12 }}
+          P12_PASS: ${{ secrets.BATNA_MAC_CERT_PASSWORD }}
+        run: |
+          test -n "$P12_B64" && test -n "$P12_PASS" || {
+            echo "::error::Batna's existing Mac signing secrets are required"
+            exit 1
+          }
+          kc="$RUNNER_TEMP/batna-preview.keychain-db"
+          kcpass="$(openssl rand -hex 16)"
+          printf %s "$P12_B64" | base64 -d > "$RUNNER_TEMP/batna-preview.p12"
+          security create-keychain -p "$kcpass" "$kc"
+          security set-keychain-settings -lut 3600 "$kc"
+          security unlock-keychain -p "$kcpass" "$kc"
+          security import "$RUNNER_TEMP/batna-preview.p12" -k "$kc" -P "$P12_PASS" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$kcpass" "$kc" >/dev/null
+          security list-keychains -d user -s "$kc" $(security list-keychains -d user | tr -d '"')
+          rm -f "$RUNNER_TEMP/batna-preview.p12"
+          app="$(find dist/mac -maxdepth 3 -name '*.app' -print -quit)"
+          test -n "$app"
+          codesign --force --deep --keychain "$kc" --sign "Batna Code Signing" "$app"
+          codesign --verify --deep --strict "$app"
+          mkdir -p dist/mac/preview
+          ditto -c -k --keepParent "$app" dist/mac/preview/Batna-Mac-preview.zip
+          unzip -t dist/mac/preview/Batna-Mac-preview.zip | tail -n 1
+      - name: Upload installable Mac preview
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Batna-Mac-preview-${{ github.sha }}
+          path: dist/mac/preview/Batna-Mac-preview.zip
+          if-no-files-found: error
+          retention-days: 30

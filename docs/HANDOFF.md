@@ -5,10 +5,16 @@ last one stopped, with no other history. Read it top to bottom once, then
 `CLAUDE.md` (working conventions) and the doc for the area you touch.
 
 **Keep it current.** Every PR that changes behaviour, process, commands,
-secrets, deploys or the state of the work updates this file in the same PR
-(usually § Current state and § Log). See `AGENTS.md`.
+secrets, deploys or the state of the work updates this file in the same PR:
+the section it affects (feature notes go in § 10), § 11 Current state if it
+changed, and one line in § 13 Log. See `AGENTS.md`.
 
-Last full refresh: 2026-11-05, main at `c35ffec` (1.0.0-alpha.2).
+Last full refresh: 2026-11-09, main at `d6214ce` (= release `v2026.11.2`).
+
+**Contents:** 1 What Batna is · 2 Architecture · 3 Build, test, run · 4 CI ·
+5 Merge routine · 6 Releases, secrets, URLs · 7 Content · 8 Sources outside
+git · 9 Testing · 10 Feature notes · 11 Current state and open work ·
+12 Resume message · 13 Log
 
 ---
 
@@ -45,7 +51,7 @@ Last full refresh: 2026-11-05, main at `c35ffec` (1.0.0-alpha.2).
 - PRs he opens from ChatGPT/Codex under his login ("No merge requested"):
   review the whole diff critically, fix and improve on the branch, then merge
   (his standing rule, 2026-10-30).
-- New alpha releases only when he says «طلّع ألفا» (§ 6).
+- New releases only when he says «طلّع ألفا» (§ 6).
 
 ## 2. Architecture
 
@@ -64,7 +70,10 @@ Dioxus 0.7 (HTML/CSS UI in a WebView), SQLite, plus minimal Kotlin for Android.
 Other top-level paths: `content/` (all study content, § 7), `android/`
 (Kotlin glue: WebViewGuard, BackKey, UpdateInstaller, notifications, Share),
 `web/` (index.html, sw.js service worker), `assets/`, `scripts/`, `fixtures/`
-(recorded replies, test feeds), `changes/` (What's new fragments).
+(recorded replies, test feeds), `changes/` (What's new fragments), `vendor/`
+(Dioxus 0.7.10 `dioxus-desktop` + `dioxus-interpreter-js` patched so the
+screen survives Android destroying its edit socket; see `vendor/README.md`,
+and re-check it before any Dioxus upgrade).
 
 Key design rules (also in `CLAUDE.md`):
 - Synced tables carry `account_id`, `device_id`, HLC, tombstone. Reviews are
@@ -115,12 +124,13 @@ jobs are periodic or manual. Never re-add PR/push triggers to heavy workflows.
 
 | Workflow | Runs on | What |
 |---|---|---|
-| `ci.yml` | PR + push to main (newer run cancels older) | PR: `check` job (fmt, clippy, tests, content, ids, What's new file) + Android arm64 clippy. Main only: web wasm build, Worker build + cloud e2e. |
+| `ci.yml` | PR + push to main (newer run cancels older) | PR: `check` job (fmt, clippy, tests, content, ids, What's new file) + Android arm64 clippy. Main only: the Study perf diagnostics into the job summary (§ 10), web wasm build, Worker build + cloud e2e. |
 | `coverage.yml` | every 4 h on main (skips if unchanged) + manual | line-coverage floor (94%). Red run → fix in its own PR. |
 | `batna-android-preview.yml` | every 4 h (skips if main unchanged) + manual | signed preview APK → `batna-preview` release + feed |
 | `settings-browser.yml`, `screens-browser.yml` | every 4 h + manual; PR only when the test file changes | Playwright checks of Settings / screens on the web build |
 | `android-webview-regression.yml` | `android/**` changes + manual | Kotlin/JVM tests |
-| `mac.yml` | nightly 02:17 UTC + manual, **never on PRs** | macOS build. Don't wait on it to merge. |
+| `mac.yml` | nightly 02:17 UTC + manual (+ once when `mac.yml` itself changes on main), **never on PRs** | macOS build; manual runs on main also upload a signed `Batna-Mac-preview-<sha>` artifact (§ 10). Don't wait on it to merge. |
+| `cloud-e2e-regression.yml` | PR only when `crates/server/tests/e2e.mjs` or this file changes + manual | full local Worker e2e (fake Google, two devices) |
 | `web-deploy.yml` | push to main touching app/content/web | builds wasm, deploys Worker `batna-web` |
 | `cloud-deploy.yml` | push to main touching server/protocol/Cargo + manual | deploys Worker `batna-cloud` |
 | `release.yml` | manual only | alpha/beta/stable release (§ 6) |
@@ -145,11 +155,17 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 
 ## 6. Releases and updates
 
-- Version in workspace `Cargo.toml` (now **1.0.0-alpha.2**).
+- **Numbering (Mohamed, 2026-11-08):** calendar versions `YEAR.MONTH.N`
+  (`2026.11.1` = first release of November 2026) and one build number for
+  every build, preview or release (commits on `main`). Android versionCode
+  = 20000000 + build; Mac CFBundleVersion = build. Release tags `v<version>`
+  (the old ones are `batna-v1.0.0-alpha.1…3`). `scripts/version.sh` works it
+  out; `Cargo.toml` keeps `2026.11.0` and is never bumped by hand. Details:
+  `docs/RELEASE.md` §1.
 - Channels: `batna-preview` (CI, every 4 h), `batna-alpha`, `batna-beta`,
-  `batna-stable`. Human release tags: `batna-v<version>`.
-- **Alpha only when Mohamed says so** («طلّع ألفا»). Steps: PR bumping
-  `version` (+ `changes/` line) → merge → Actions › Release › Run workflow.
+  `batna-stable` (feed tags: never rename, installed apps read them).
+- **Alpha only when Mohamed says so** («طلّع ألفا»). Steps: Actions ›
+  Release › Run workflow (channel alpha); no bump PR.
   It builds the content pack, release APK (Linux), Batna.app (macOS), signs
   the feed and publishes. Then verify `update.json` with
   `batna-tools update verify` against `crates/app/update-key.pub`.
@@ -160,6 +176,11 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   (CI skips the APK when only content/changes/docs/CSS changed). Details:
   [RELEASE.md](RELEASE.md), [COMPATIBILITY.md](COMPATIBILITY.md).
 - What's new comes from `changes/*.yaml` (Morphe-style sheet before/after an update).
+- A check shows the app's answer as soon as the feed is read; a newer
+  content pack downloads after it (Settings shows «بيجيب الدروس…»), then an
+  automatic build download. Every update request fails after 20 s without
+  progress (lookup, connect, each read), so a connection Android cut while
+  the phone was locked doesn't hold the check for minutes.
 
 ### Secrets (names only, values never in git)
 
@@ -252,6 +273,8 @@ quote cap there is outdated), course briefs in [courses/](courses/).
    Arabic words ("من 2 لـ 3") so RTL doesn't flip them. All 1,927 lists in 9
    courses are done; new enumerates need one. Combined file for Mohamed:
    `python3 -I scripts/content-tools/tahshishat-gen.py <repo> <out-prefix>`.
+   A lesson step that teaches a list with a تحشيشة lists it in `remind:` so it
+   shows again there (from another lesson too, with a link back).
 7. **Calculators** must rest on cited original papers/guidelines. Every
    result band states what it means, the **next step** and the **DD**
    (`GUIDES` per module; app test `every_result_has_a_next_step` blocks a band
@@ -277,7 +300,7 @@ quote cap there is outdated), course briefs in [courses/](courses/).
 ## 8. Sources outside git (important)
 
 The book PDFs, their extracted page text and page images are copyrighted and
-**must never be committed**. They lived in the Claude project's shared folder
+**must never be committed**. They lived in the old project's shared folder
 `/mnt/project-files/medstudy/` (about 880 MB):
 
 | Path (under `medstudy/`) | What |
@@ -317,33 +340,220 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 - Android crash reports start from Settings › Your data › diagnostics
   (WebViewGuard records renderer loss and exit reasons).
 
-## 10. Current state (2026-11-05)
+## 10. Feature notes (what exists, where, and why)
+
+Durable notes on recent features, distilled from the PRs of 2026-11-07/08.
+Add a bullet here when a PR adds something a later agent must know.
+
+### Lessons
+
+- **Focus layout** (#767, replaces #739's two-pane grid): from 840px up the
+  player is one centred column (40rem; 44rem with 1.125rem text from
+  1200px, ≈ 60–75 characters a line), its top at the same height on every
+  step, the lesson name a muted header above the card, Back/Next following
+  the card (sticky while a long step scrolls). Phones keep the bottom nav.
+  `crates/app/src/learn/learn.css`; `screens-browser.cjs` asserts it at
+  840/1280/1600px. Research basis: [LESSONS.md](LESSONS.md) § Reading layout.
+- **Reading settings** («Aa» in the lesson bar, and Settings › Look; adapted
+  from Steps-app main: `crates/app/src/learn/reading.rs`): text size
+  (×0.9/1/1.15/1.3 on step text only, the bar and buttons stay), line spacing
+  (×0.86/1/1.2) and line width (Narrow 34/37rem, Book = the focus column
+  40/44rem, Wide 52/60rem; 840px and up only, phones are always full width).
+  Device-local in `device-prefs.txt` (`read_size`, `read_spacing`,
+  `read_width`; older files load the defaults), never synced. The popover sits
+  over the step so the text never jumps; while open, «Aa» is the Escape/Back
+  target. `data-read-*` on `.ls-player`, rules in `learn/reading.css`; tests
+  `reading_choices_restyle_the_lesson_and_close_before_the_lesson`.
+- **Text by importance**: `==key==` is a pill in `--mark`/`--mark-ink`, true
+  yellow `#ffd43b` on Paper/Night/Black/Night shift (Mohamed's pick; he
+  rejected a gold highlighter band), teal on Study themes; test
+  `the_key_term_pill_stands_out`. Headings and `**terms**` use full `--text`;
+  body text is `--text` softened 16% toward the card; meta stays muted.
+- **Study themes** (`batna_core::theme`): `study` (warm off-white, charcoal
+  text), `study-dim` (warm graphite, parchment text), `system-study`.
+  AA-tested; `study_themes_are_calm` keeps contrast 7–15:1, no pure
+  white/black.
+- **Own highlights** (#770): select words in the open step → a bar
+  (`learn/highlight.js`) with 5 colours, fill/underline, pill/rectangle; tap a
+  highlight to edit or remove it; style is remembered per device
+  (localStorage). Each highlight is one synced setting
+  `hl.<lesson>.<id>` = `batna_core::highlight::Saved` (or `{"gone":true}`),
+  so no new sync table. Anchored by quote + 32 chars of context + position
+  (`highlight::locate`, mirrored in JS). Shapes are drawn in a `.uhl-layer`
+  under the text (`[data-uhl-host]`), never by editing Dioxus nodes; fill text
+  darkens via `::highlight(uhl-ink)`. Tests: `learn::highlight`,
+  `batna_core::highlight`, `crates/app/tests/highlight-browser.cjs`.
+- **Repeated topics remind their تحشيشة** (#771, Mohamed's ask from the ACLF
+  card): steps take `remind: [<item id> | <lesson id>:<WORD>]`; the player
+  (`learn/remind.rs`) shows each in a dotted box, with «📖 من درس …» opening
+  the teaching lesson. 791 reminders on 689 steps in 126 lesson files (script
+  match ≥80% of an enumerate's points or ≥70% of a mnemonic's letters, every
+  off-topic match dropped by hand, plus 13 cross-lecture twins). Question,
+  reveal and hidden-cell steps never get one. `pack::SCHEMA` = 3, so this
+  needs an app build, not a content-only update. Checks:
+  `lesson::remind_problems` and `batna-tools validate`
+  (`lessons::remind_targets`). Rule: [LESSONS.md](LESSONS.md) rule 13.
+
+### Study sessions
+
+- **Keyboard** (#740, Anki-style, `crates/app/src/shortcuts/`): Space reveals,
+  1–4 grade, Space/Enter = Good after reveal, `Z` = Undo, RTL arrows in
+  lessons (Right = back, Left = next when allowed), A–E, Cmd/Ctrl+1–7,
+  Cmd/Ctrl+, and `?` help. A modal owns shortcuts; typing fields,
+  contenteditable, auto-repeat and IME composition are ignored.
+- **Focus continuity** (#745): after keyboard/screen-reader reveal, grading,
+  Undo or lesson step change, focus is restored; never on pointer clicks, in a
+  modal or while typing. `keyboard-focus-browser.cjs`.
+- **Resume**: `SESSION`/`PHASE` are app-lifetime signals, so switching tabs
+  keeps the card (#754 tests a same-process remount and foreground scroll).
+  Today shows **Continue** for a live unfinished session and returns to the
+  same queue without re-planning or touching Undo (#755).
+- **Durable checkpoint** (#756, #757, #763): a device-local versioned
+  `SessionCheckpoint` in `meta.local.study.session.v1` (not synced) keeps
+  queue order, progress, Again retries, outcomes and the review ids Undo
+  needs; it is saved after start, grade, Undo and append, cleared on End or
+  finish, and read before Today renders. It is trusted only when its review
+  marker matches the committed review log; otherwise (crash between grade and
+  save, unknown cards, altered events) it is dropped and the app starts
+  normally, never re-recording grades. Marker `v2` is an O(1) random revision
+  in `meta`, rotated by migration 4's INSERT/UPDATE/DELETE triggers on review
+  events in the same transaction; `v1` checkpoints are checked once against
+  the old full-log hash, then upgraded. A borrowed-device wipe keeps and
+  rotates the revision row.
+- **Background time** (#753): returning from background
+  (`visibilitychange`/`pageshow`) resets only the running item's answer clock.
+  `study-visibility.test.cjs`.
+- **Not yet verified natively**: Android process death and OS kills, macOS
+  relaunch, S24 Ultra lock/unlock, keyboard and Back with a running session.
+
+### Study signals from Steps-app (2026-11-09)
+
+Ported from Mohamed's `MohamedRef/Steps-app` (a Batna fork), credited in each file's header.
+
+- **Confidence and error reason** (`batna_core::review::{Confidence, ErrorReason}`, `crates/app/src/metacog/`): an optional sure / unsure / guess tap before an answer shows (study and bank), and an optional reason chip after a miss (knowledge, misread, second-guessed, reasoning, timing). In study a reason chip also rates Again; in tutor mode it replaces the logged answer (retract, then log again at its first time). Both are optional fields on the append-only `ReviewEvent` and two nullable columns (store migration 5); events from older builds read without them, and an older build keeps the answer and drops the tags. The Worker stores payloads as JSON, so it needs no migration.
+- **Mistakes log**: misses he was sure of come first and are marked «كنت متأكد»; chips count and filter by reason (`stats::mistake_reasons`, `mistakes_with_reason`).
+- **Retest sure misses** (`stats::retest_due`): misses he was sure of, 2–7 days old and not answered right since, come back from the mistakes view (cards as a study session, MCQs as a tutor set).
+- **Catch-up plan** (`crates/app/src/catchup/`): when far more reviews are due than he usually does in a day, Today offers a plan that spreads them over 2–7 days in minutes, most overdue first, optionally pausing new items. A synced setting; `study/planning.rs` cuts the session's due list to today's share.
+
+### Info sheet (book page, abbreviations)
+
+- **Floating card on tablet and Mac** (#773, Mohamed 2026-11-09): docked at the window's foot, a drag up made the «ص N» / abbreviations sheet a very tall strip. From 600dp wide and 480dp tall, `crate::sheet::Sheet` is a floating card (`.bsheet.float`, end of `assets/sheet.css`), placed by `assets/sheet.js` under the chip that opened it, else above, else on the side with more room (content scrolls), else centred; height capped at min(36rem, 76% of the window) until sized by hand.
+- He moves it by its heading row and sizes it from any of its four edges or four corners (`.bsheet-rz`, from `sheet.rs` `RESIZE_EDGES`; a grip mark in the foot's end corner). The size is kept in localStorage `batna.sheet.float`; a double-click on an edge forgets it.
+- Phones (and phone landscape under 480dp tall) keep the resizable bottom sheet. Crossing the breakpoint switches between the two.
+
+### Notes, weak-fact marks, go to page (from Steps-app)
+
+Ported from `MohamedRef/Steps-app` (its PR text credits each source path).
+Batna's books number pages per course (Gastroenterology starts again at 1)
+and `res` numbers slides per lecture, so everything page-shaped carries a
+**book**: a course id (`hb`) or a slide lecture id (`res.L02`), the same key
+as `pagesheet::Scope::book()` / `Scope::of_book()`.
+
+- **Notes** (`batna_core::note`, `crate::notes`, `store/notes.rs`): synced LWW
+  table `notes` (migration 6, in `sync::TABLES`), one row per anchor
+  (`item:<id>`, `lesson:<lesson>#<step>`, `page:<book>:<n>`), JSON `Note`
+  with the page it cited when saved. «＋ ملاحظة» chip on study items (text
+  held back until the answer shows), MCQ explanations and lesson steps; the
+  page sheet lists a page's notes (`PageNotes { book, page }`); the list
+  «ملاحظاتك» is a lecture-stack page (`notes::PAGE`), sorted by the
+  program's course order then page, filtered by course, searchable. Max 2000
+  characters; empty text deletes. Not in the Anki deck yet (Steps adds a
+  `Notes` field to its note types; Batna's would change the deck's note
+  types, so it is left for its own PR).
+- **Weak-fact marks** (`crate::weak`): computed from the review log (last
+  answer Again = weak; a right answer clears), nothing new to sync. A lesson
+  step whose page (in its own book) holds a weak item shows «راجعها تاني»;
+  the page sheet lists the weak cards with «ذاكر … دلوقتي» and counts weak
+  questions. Synced setting `weak_marks` (default on), Settings › Study.
+- **Go to page** (`crate::gopage`): More / the rail «روح لصفحة» or Ctrl/⌘+G.
+  Course chips (courses with lectures), a lecture picker for slide courses;
+  starts on the course in view, else the last book used (device-only
+  `gopage.book`). A page outside every lecture offers the nearest one. Quick
+  search (`shortcuts/palette.rs`) turns «30» / «ص 30» into one hit per
+  course book that has that page.
+
+### Desktop (Mac) layout
+
+- Full-window canvas, wider labelled sidebar, 1280×820 default window (#739).
+- Resizable question/explanation panes (`desk::Panes`, keyboard-operable
+  divider, reset, width saved per device) and **Focus Mode** for running Study
+  and lessons, hiding the sidebar but keeping Back/End, progress and grades
+  (#741).
+- Today is task-first: from 1200px the task column takes 3/5 (#742).
+- **⌘K / Ctrl+K palette** (#743, #744): offline, searches screens, lectures,
+  lessons and calculators (Arabic-aware: the calculator search's `fold` for
+  hamza, ة/ه, ى/ي, tashkeel and Arabic digits; text in `i18n/palette.rs`), opens Settings sections, and
+  `questions <lecture>` starts lecture-filtered practice. Max 12 results; no
+  per-question deep links.
+
+### Phone layout (S24 Ultra, ~384dp)
+
+- Top-bar search button (`shortcuts::MobileSearchButton`) opens the same ⌘K
+  palette, results scroll above the keyboard (#746).
+- 48dp touch targets: bottom tabs and More Close (#747), list sort/layout,
+  section actions, calculator Reset and breakdowns (#748), bank scope and
+  history (#750), medical table controls (#758). `mobile-touch-browser.cjs`
+  measures them at 320/384px with normal and larger text.
+- Running Study toolbar: progress on its own row, Undo and End on a 48dp row,
+  grades above the safe area (#749); checked at 384×520 (keyboard open, #751).
+
+### Performance baselines (hosted Linux CI, not phone frame times)
+
+Ignored diagnostics run in main CI only (not on PRs) and print to the job summary; no timing gate.
+
+| What | 100 / 1,000 / 3,000 reviews (p50) |
+|---|---|
+| Study grade → next card, TestDom (#752) | 2.4 ms p50, 65.6 ms p95 (16 cards) |
+| `ReviewBackend::replay` (#761) | 0.22 / 1.39 / 4.03 ms |
+| Full grade commit + replay (#761) | 0.35 / 1.51 / 4.57 ms |
+| Checkpoint marker, `v1` full hash (#759) | 0.90 / 8.87 / 26.98 ms |
+| Checkpoint marker, `v2` revision (#763) | 9 / 11 / 9 µs |
+
+Next: profile real interaction latency on the S24 Ultra before optimizing
+further; don't change FSRS or Undo speculatively.
+
+### CI and build notes
+
+- The Cloud Worker e2e uses a throwaway `wrangler.e2e.toml` with
+  `worker-build --release --no-opt` (Binaryen downloads kept failing with
+  HTTP 504, #760) and a pinned, cached `wasm-bindgen-cli` 0.2.129 built from
+  crates.io (`WASM_BINDGEN_BIN`, #762). Production `wrangler.toml` and deploys
+  are unchanged.
+- Signed Mac preview without a release (#765): Actions › Mac › Run workflow ›
+  main, then download the `Batna-Mac-preview-<sha>` artifact (30 days). It is
+  a build of that commit, not a version or a feed. Unzip twice, move Batna.app
+  to Applications, `xattr -dr com.apple.quarantine /Applications/Batna.app`.
+  Fails rather than ship unsigned if `BATNA_MAC_CERT_*` is missing.
+
+## 11. Current state (2026-11-09)
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today, study, bank, cases, oral, lessons, 94 calculators, stats/planner, own cards + Share, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, two System themes), sync, password login, OTA app + content updates, web |
-| Releases | `batna-v1.0.0-alpha.2` published 2026-11-04 (feed `batna-alpha`); previews every 4 h |
-| Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks. |
-| Open PRs / issues | none on 2026-11-05 |
-| Coverage | 95.05% (floor 94) |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 94 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
+| Content | 9 courses, 132 lectures, 132 lesson files; `res` L01–L11 written. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
+| Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
+| Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
+| Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
+| Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
+| Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks |
+| Open PRs / issues | None on 2026-11-09 |
+| Coverage | 95.05% when last measured (2026-11-04); floor 94 |
 
 ### Open work and known gaps
 
-- Content for courses with no material yet; `res` L12–L21 as slides arrive.
-- Content still `unverified` until Mohamed approves in-app.
-- Glossary: split remaining ICP/SBP stop-gap senses into `course:` entries.
-- Review leftovers from the 2026-11-04 content audit (ambiguous abbreviations,
-  quote cuts) if Mohamed asks; lists were in `/mnt/project-files/content-audit/`.
-- Low, deliberately not fixed: IndexedDB handle never closed per save;
-  Argon2 on the web main thread (~0.5 s); a second tab on a borrowed computer
-  wipes the first tab's data.
-- Test debt: merge duplicate click-test helpers; more calculator tests against
-  original-paper examples and cut-offs.
-- Not yet verified on a real device: Back-key routing, update notifications.
-- 14 Rust files are still over 800 lines (`scripts/check-file-sizes.sh`);
-  split each when a PR already changes it a lot (AGENTS.md § Small files).
+| Area | What |
+|---|---|
+| Content | Courses with no material yet; `res` L12–L20 from the lecture PDFs (Mohamed also wants L02–L11 checked against the enriched lecture copies); everything stays `unverified` until he approves in-app |
+| Glossary / audit | Split remaining ICP/SBP stop-gap senses into `course:` entries; 2026-11-04 audit leftovers (ambiguous abbreviations, quote cuts) only if Mohamed asks |
+| Mac | Mohamed (2026-11-07) kept being asked for the login Keychain password ("app.batna.cloud") after updates and wants it gone for good. Main builds keep the session in `cloud-session.json` (since #612), and the prompt was traced to local builds of an older checkout; confirm on his Mac after the next update. If it returns, the cause is each build being signed differently (Keychain ACL): fix with a stable signing identity or storage not tied to the build |
+| UX backlog | Weak-topic insight on Today; configurable review shortcuts with conflict checks; a focused phone Study view (keep exit, progress, reveal, grades; don't collide with Mac Focus Mode); medical reading polish (mixed Arabic/English, zoomable figures, optional haptics); a warning before a new session replaces a live one |
+| Device QA (Mohamed) | Native Mac: WKWebView shortcuts, pane dragging, window resizing, focus, IME. S24 Ultra: Back-key routing, update notifications, lock/unlock freeze fix (`vendor/`, tested on desktop sockets only), Study across background, lock and process death. Browser screenshots are SSR previews, not device checks |
+| Low, deliberately not fixed | IndexedDB handle never closed per save; Argon2 on the web main thread (~0.5 s); a second tab on a borrowed computer wipes the first tab's data |
+| Test debt | Merge the duplicate click-test helpers (`testdom.rs`, `test_dom.rs`, `tap_dom.rs`, `testing.rs`); more calculator tests against original-paper examples and cut-offs |
+| Big files | 14 Rust files over 800 lines (`scripts/check-file-sizes.sh`); split each when a PR already changes it a lot (AGENTS.md § Small files) |
 
-## 11. Resume message
+## 12. Resume message
 
 Mohamed can paste this into any new chat or account to continue:
 
@@ -353,16 +563,41 @@ Mohamed can paste this into any new chat or account to continue:
 > Egyptian Arabic. Keep `docs/HANDOFF.md` updated in every PR that changes
 > behaviour, process or state.
 
-## 12. Log
+## 13. Log
 
-Newest first. One line per PR that changes behaviour, process or state.
+Newest first. One line per PR (or batch) that changes behaviour, process or
+state; details live in the PR and in § 10.
 
-- 2026-11-05: res.L11 (sampling and sample size) written: 82 items, 6 lessons; two sample-size calculators (`sample_size_survey`, `sample_size_two_proportions`) reproduce the slides' Epi Info numbers.
-- 2026-11-05: `res.L09` written (budget, ethics, plagiarism: 113 items, 6 lessons); L09–L11 slides, text and images added to Batna-sources; glossary gains REC, CIOMS, WAME, WMA, MLA and `res` senses of PI, CV, APA.
-- 2026-11-05: res.L10 (data collection and questionnaire design + searching the literature, 146 slides) added: 107 items, 8 lessons; image-slide quotes and review-MCQ refs in `courses/res/verdicts/L10.tsv`.
-- 2026-11-05: Mac nightly green again: three tests now expect the Mac's own answers (installer message, device name; menu test skipped on macOS, muda needs the main thread).
-- 2026-11-05: big files split into smaller modules (i18n per feature; core `lesson`, `calc`, `labs`, `session`); AGENTS.md § Small files; `check-file-sizes.sh` warns in CI.
-- 2026-11-05: the whole project folder and memory notes archived in `MohamedRef/Batna-sources`.
-- 2026-11-05: source material backed up to the private repo `MohamedRef/Batna-sources` (§ 8).
+- 2026-11-09: lesson reading settings («Aa»: text size, line spacing, line width per device), ported from Steps-app.
+- 2026-11-09: notes (synced `notes` table), weak-fact marks and go to page (Ctrl/⌘+G, per-course books) ported from Steps-app (§ 10 Notes, weak-fact marks, go to page).
+- 2026-11-09: from Steps-app: confidence and error reason on answers (migration 5), sure misses first in the mistakes log with a 2–7 day retest, and a catch-up plan for a review backlog (§ 10 Study signals).
+- 2026-11-09: a release with no new `changes/` lines says «تصليحات صغيرة وتنضيف.» on its page instead of repeating the previous release's lines (`scripts/release-notes.sh` reads the feed's newest history entry only when it is this version's).
+- 2026-11-09: the GitHub release page is written in Egyptian Arabic only (`scripts/release-notes.sh`); a `changes/` line without Arabic text is left out (Mohamed).
+- 2026-11-09: the book-page / abbreviations sheet floats as a movable, resizable card by the tapped chip on tablet and Mac; phones keep the bottom sheet (#773).
+- 2026-11-09: review of the Mac/phone/Study batch (#739–#765): quick-search text moved to `i18n/palette.rs`, the search folds Arabic spelling like the calculator search, the Study perf diagnostics run on main only (PRs stay fast).
+- 2026-11-09: handoff reorganised (per-PR journal folded into § 10, open work as a table) and checked against main; README brought up to date.
+- 2026-11-08: `v2026.11.2` released: repeated topics remind their تحشيشة (#771, `remind:` on lesson steps, 791 reminders, «من درس …» link; `pack::SCHEMA` 3).
+- 2026-11-08: `v2026.11.1` released, the first calendar version.
+- 2026-11-08: rebrand B0 (#769): liver redrawn on petrol `#245f7c` with a green bile drop (`assets/src/icon/*.svg`); the same mark heads the top bar, rail and sidebar (`brand.rs`, a test keeps it equal to the icon).
+- 2026-11-08: own highlights in lessons (#770): select → colour, fill/underline, pill/rect; one synced setting per highlight.
+- 2026-11-08: lesson focus layout (#767): one centred reading column ≥840px, text by importance, key-term pill, Study / Study dim / System study themes.
+- 2026-11-08: calendar versions `2026.11.N` and one build counter for previews and releases (#768, Mohamed's ask); `scripts/version.sh`, versionCode 20000000 + build, tags `v<version>`, no bump PR. The `1.0.0-alpha.4` bump (#766) merged just before and was never released.
+- 2026-11-08: signed Mac preview as an Actions artifact (#765).
+- 2026-11-08: Study checkpoint marker O(1) via review-event triggers, migration 4 (#763, #764); perf diagnostics for the marker, replay and grade path (#759, #761).
+- 2026-11-08: Cloud e2e CI made reliable: `--no-opt` test build (#760), pinned `wasm-bindgen-cli` (#762).
+- 2026-11-08: durable Study checkpoint (#756) with crash-safety tests (#757); Today Continue resumes a live session (#755); same-process remount and foreground scroll tests (#754).
+- 2026-11-08: answer clock ignores background time (#753); grade-to-next-card CI baseline (#752).
+- 2026-11-08: phone batch: top-bar search opens the ⌘K palette (#746); 48dp targets for navigation, lists, calculators, bank and tables (#747, #748, #750, #758); Study toolbar rows and 384×520 check (#749, #751).
+- 2026-11-07/08: Mac batch: full-window layout (#739), Anki-style keys (#740), resizable panes + Focus Mode (#741), task-first Today (#742), ⌘K palette and its destinations (#743, #744), keyboard focus continuity (#745).
+- 2026-11-08: the Keychain prompt ("app.batna.cloud") was traced to local builds of a checkout older than #612; still reported after updates, so it stays open work (§ 11).
+- 2026-11-06: `1.0.0-alpha.3` released on Mohamed's ask, so the Mac app (alpha feed only) gets the lock/unlock and update-check fixes.
+- 2026-11-06: Android screen froze after lock/unlock: Dioxus's edit socket patched in `vendor/` (edits resent until acknowledged); update check shows the app result before the content pack downloads, requests time out after 20 s of no progress.
+- 2026-11-06: res.L11 lesson 4 sampling tree labels wrapped (they failed the nightly lesson browser check).
+- 2026-11-05: res.L11 (sampling and sample size): 82 items, 6 lessons; two sample-size calculators reproduce the slides' Epi Info numbers.
+- 2026-11-05: res.L10 (data collection, questionnaires, searching the literature): 107 items, 8 lessons.
+- 2026-11-05: res.L09 (budget, ethics, plagiarism): 113 items, 6 lessons; glossary gains REC, CIOMS, WAME, WMA, MLA and `res` senses of PI, CV, APA.
+- 2026-11-05: Mac nightly green again (tests expect the Mac's own answers; menu test skipped on macOS).
+- 2026-11-05: big files split (i18n per feature; core `lesson`, `calc`, `labs`, `session`); AGENTS.md § Small files; `check-file-sizes.sh` warns in CI.
+- 2026-11-05: sources and the whole project folder + memory notes backed up to the private repo `MohamedRef/Batna-sources` (§ 8).
 - 2026-11-05: handoff docs added (`AGENTS.md`, this file, course briefs, content scripts).
-- 2026-11-04: 1.0.0-alpha.2 released (#726); final critic round closed.
+- 2026-11-04: `1.0.0-alpha.2` released (#726); final critic round closed.

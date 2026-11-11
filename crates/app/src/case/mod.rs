@@ -40,7 +40,11 @@ pub fn open_due(mut ui: crate::Ui, calc_only: bool) {
 
 /// Open the Cases screen on its Calculators tab (More › الحاسبات).
 pub fn open_calculators(mut ui: crate::Ui) {
-    *START_TAB.write() = Some(Tab::Calculators);
+    // Change the live tab as well as the destination screen. START_TAB alone
+    // is only consumed on mount and did nothing when Cases was already open.
+    *START_TAB.write() = None;
+    *OPEN.write() = None;
+    *TAB.write() = Tab::Calculators;
     ui.screen.set(crate::Screen::Cases);
 }
 
@@ -365,6 +369,8 @@ pub fn record(
         origin: Origin::Case,
         at_ms,
         took_ms: u32::try_from(at_ms.saturating_sub(started_ms)).unwrap_or(u32::MAX),
+        confidence: None,
+        reason: None,
     };
     match store {
         Some(s) => s.0.borrow_mut().record_logged(event).map(|_| ()),

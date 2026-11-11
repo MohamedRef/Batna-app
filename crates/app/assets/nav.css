@@ -17,6 +17,8 @@
   }
   .nav-brand .brand-name { font-size: var(--fs-md); }
   .nav-brand .brand-tag { display: none; }
+  .nav-brand { gap: var(--sp-1); }
+  .nav-brand .brand-mark { inline-size: 2rem; }
   /* References, a new card and the calculators, under the screens and
      set off by a hairline (more.rs ToolButtons; phones use More). */
   .nav-tools {
@@ -41,10 +43,15 @@
     gap: var(--sp-1);
     padding-inline: var(--sp-2);
   }
+  /* Sidebar: the mark beside the name and tagline, one lockup. */
   :root:not([data-nav-style="slim"]) .nav-brand {
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--sp-3);
     padding-inline: var(--sp-3);
   }
+  :root:not([data-nav-style="slim"]) .nav-brand .brand-mark { inline-size: 2.6rem; }
+  :root:not([data-nav-style="slim"]) .nav-brand .brand-words { align-items: flex-start; }
   :root:not([data-nav-style="slim"]) .nav-brand .brand-name { font-size: var(--fs-xl); line-height: 1.3; }
   :root:not([data-nav-style="slim"]) .nav-brand .brand-tag {
     display: block;
@@ -67,6 +74,40 @@
   }
   :root:not([data-nav-style="slim"]) .nav-item .glyph { inline-size: 1.5rem; text-align: center; }
   :root:not([data-nav-style="slim"]) .nav-foot .label { font-size: var(--fs-md); }
+}
+
+/* The Mac workspace uses a quiet, distinct navigation surface rather than
+   a stretched phone tab bar. Scope it to taller desktop windows so the short
+   Tab S11 landscape view remains compact. */
+@media (min-width: 1200px) and (min-height: 740px) {
+  :root:not([data-nav-style="slim"]) {
+    --sidebar-w: 14.5rem;
+  }
+  :root:not([data-nav-style="slim"]) .nav {
+    background: color-mix(in srgb, var(--surface) 84%, var(--bg));
+    padding-inline: var(--sp-3);
+    gap: var(--sp-2);
+  }
+  :root:not([data-nav-style="slim"]) .nav-brand {
+    margin-block: var(--sp-2) var(--sp-4);
+    padding-block: var(--sp-2) var(--sp-4);
+    border-color: var(--line-soft, var(--line));
+  }
+  :root:not([data-nav-style="slim"]) .nav-item {
+    min-height: max(var(--tap-lg), 3.25rem);
+    border: 1px solid transparent;
+    transition: background-color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+  }
+  :root:not([data-nav-style="slim"]) .nav-item[aria-current="page"] {
+    border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  :root:not([data-nav-style="slim"]) .nav-item:hover:not([aria-current="page"]) {
+    background: var(--surface);
+    border-color: var(--line-soft, var(--line));
+  }
 }
 
 /* Short landscape windows (Tab S11 landscape is about 1205 × 680dp with the

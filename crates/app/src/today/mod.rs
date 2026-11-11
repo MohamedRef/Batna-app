@@ -36,6 +36,8 @@ pub fn Today() -> Element {
     // With an exam day, the plan sets today's new items (#99).
     let target = crate::plan::target_now(&*review.backend.borrow());
     let new_today = target.as_ref().map_or(o.new_today, |t| (t.new_left() as usize).min(o.unseen));
+    // A catch-up plan that pauses new items (catchup/mod.rs).
+    let new_today = crate::catchup::new_left(review.backend.borrow().study_day(store::now_ms()), new_today);
     let mut ui = use_context::<Ui>();
     let settings = use_context::<crate::settings::SettingsNav>();
     let ready = o.due + new_today > 0;
@@ -73,7 +75,11 @@ pub fn Today() -> Element {
                         }
                     }
                 }
+                if let Some((index, total)) = crate::study::running_progress() {
+                    ResumeStudy { index, total }
+                }
                 Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0, minutes }
+                crate::catchup::CatchUpCard { due: o.due, due_minutes: o.due_minutes }
                 // Each count opens what it counts.
                 div { class: "stat-tiles",
                     Tile {
@@ -173,6 +179,33 @@ pub fn Today() -> Element {
                 }
             }
             div { class: "tab-aside", LibraryList {} }
+        }
+    }
+}
+
+/// A currently open Study session takes priority over starting a new one.
+/// Navigates straight back to the same in-memory session. It never queues
+/// another START, so grading and Undo remain attached to the original card.
+#[component]
+fn ResumeStudy(index: usize, total: usize) -> Element {
+    let mut ui = use_context::<Ui>();
+    rsx! {
+        crate::ui::Card { class: "card-action td-resume",
+            onclick: move |_| ui.screen.set(Screen::Study),
+            div { class: "td-resume-copy",
+                strong { {tx::RESUME_TITLE} }
+                span { class: "muted small num-ltr", "{index} / {total}" }
+            }
+            button {
+                r#type: "button",
+                class: "btn btn-primary td-resume-action",
+                onclick: move |e: MouseEvent| {
+                    e.stop_propagation();
+                    ui.screen.set(Screen::Study);
+                },
+                {tx::RESUME_SESSION}
+                {crate::icons::arrow_go()}
+            }
         }
     }
 }

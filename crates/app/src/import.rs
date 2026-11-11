@@ -290,6 +290,8 @@ mod tests {
         let phone = store::Store::open_in_memory().unwrap();
         for (item, at_ms) in [("hb.L01.001", 10), ("hb.L01.002", 20)] {
             let e = ReviewEvent {
+                confidence: None,
+                reason: None,
                 item_id: item.into(),
                 grade: Grade::Good,
                 origin: Origin::Review,

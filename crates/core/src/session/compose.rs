@@ -1,6 +1,7 @@
 //! Composing a session: which items, in what order, within the time budget.
 
 use super::*;
+use serde::{Deserialize, Serialize};
 
 /// A rough time for one item, in seconds, used to fit a session to its budget.
 pub fn estimate_secs(body: &Body) -> u32 {
@@ -42,7 +43,7 @@ pub struct Inputs<'a> {
 }
 
 /// One planned item.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Planned {
     pub item_id: String,
     pub lecture: String,

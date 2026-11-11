@@ -14,9 +14,13 @@ mod backend;
 #[cfg(test)]
 mod browser;
 mod card;
+mod checkpoint;
 mod cloze;
+pub(crate) use checkpoint::use_restore;
 mod enumerate;
 mod essay;
+mod foreground;
+pub(crate) use foreground::use_foreground_reset;
 pub mod grade;
 mod item;
 mod planning;
@@ -25,7 +29,7 @@ use std::collections::{BTreeSet, HashMap, HashSet};
 use web_time::Instant;
 
 use batna_core::content::{Item, Lecture};
-use batna_core::review::{Grade, Origin, ReviewEvent};
+use batna_core::review::{Confidence, ErrorReason, Grade, Origin, ReviewEvent};
 use batna_core::session::Session;
 use dioxus::prelude::*;
 
@@ -38,7 +42,7 @@ use crate::i18n::count::{DAY, HOUR, ITEM, MINUTE, REVIEW, count};
 use crate::i18n::study as tx;
 use crate::look::{Css, css};
 use backend::now_ms;
-use item::short_text;
+pub(crate) use item::short_text;
 use planning::{plan, plan_items};
 
 pub(crate) const STUDY_CSS: Css = css!("assets/study.css");
@@ -121,6 +125,18 @@ fn due_elsewhere(store: &StudyStoreHandle) -> usize {
 
 static SESSION: GlobalSignal<Session> = Signal::global(Session::default);
 static PHASE: GlobalSignal<Phase> = Signal::global(|| Phase::Setup);
+/// An unfinished, in-memory Study session that can be resumed on Today.
+/// Read the globals reactively so a completed/ended session stops advertising
+/// Continue. This is not cold-process recovery; no new Start is queued.
+pub fn running_progress() -> Option<(usize, usize)> {
+    if *PHASE.read() != Phase::Running {
+        return None;
+    }
+    let session = SESSION.read();
+    let (pos, total) = session.progress();
+    (total > 0 && !session.is_done() && session.current().is_some()).then_some((pos + 1, total))
+}
+
 static STARTED: GlobalSignal<Instant> = Signal::global(Instant::now);
 /// What the last Undo said: taken back (the item is reopened) or not saved,
 /// or that the last rating wasn't saved.
@@ -128,6 +144,26 @@ static UNDO_NOTE: GlobalSignal<Option<&'static str>> = Signal::global(|| None);
 /// Ratings that couldn't be saved so far. The rating row lets him rate again
 /// once this moves past the count it was pressed at.
 pub(crate) static SAVE_FAILS: GlobalSignal<u32> = Signal::global(|| 0);
+
+/// The optional taps on the item on screen (`crate::metacog`): his
+/// confidence before the answer came out, and the reason a reason chip
+/// rated it "تاني" with. Cleared when an item opens and once its rating is saved.
+#[derive(Debug, Clone, Copy, Default, PartialEq)]
+pub(crate) struct Tags {
+    pub confidence: Option<Confidence>,
+    pub reason: Option<ErrorReason>,
+}
+
+pub(crate) static TAGS: GlobalSignal<Tags> = Signal::global(Tags::default);
+
+/// The answer to log: the grade plus the taps, a reason only on "تاني".
+fn tagged_event(item_id: String, grade: Grade, at_ms: i64, took_ms: u32, tags: Tags) -> ReviewEvent {
+    ReviewEvent {
+        confidence: tags.confidence,
+        reason: tags.reason.filter(|_| grade == Grade::Again),
+        ..ReviewEvent::new(item_id, grade, Origin::Study, at_ms, took_ms)
+    }
+}
 
 #[derive(Clone, Copy, PartialEq)]
 enum Phase {
@@ -198,6 +234,11 @@ pub fn Study() -> Element {
             session.set(Session::new(planned));
             started.set(Instant::now());
             phase.set(if empty { Phase::Summary } else { Phase::Running });
+            if empty {
+                checkpoint::clear();
+            } else {
+                checkpoint::save_running(&session.peek());
+            }
         }
     };
 
@@ -213,6 +254,11 @@ pub fn Study() -> Element {
                 session.set(Session::new(planned));
                 started.set(Instant::now());
                 phase.set(if empty { Phase::Summary } else { Phase::Running });
+                if empty {
+                    checkpoint::clear();
+                } else {
+                    checkpoint::save_running(&session.peek());
+                }
                 return;
             }
             let picked: Vec<&Lecture> = ready_lectures()
@@ -272,6 +318,7 @@ pub fn Study() -> Element {
             undo_note.set(Some(tx::UNDONE));
             started.set(Instant::now());
             phase.set(Phase::Running);
+            checkpoint::save_running(&session.peek());
         }
     };
 
@@ -316,7 +363,10 @@ pub fn Study() -> Element {
             match current.and_then(|p| find(&p.item_id).map(|(l, i)| (p, l, i))) {
                 // Only when content changed under a running session; "end" still works.
                 None => rsx! {
-                    button { class: "btn btn-primary btn-lg", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
+                    button { class: "btn btn-primary btn-lg", onclick: move |_| {
+                        phase.set(Phase::Summary);
+                        checkpoint::clear();
+                    }, {tx::END} }
                 },
                 Some((p, lecture, item)) => {
                     let item = store.0.borrow().effective(item);
@@ -330,13 +380,9 @@ pub fn Study() -> Element {
                     let item_id = p.item_id.clone();
                     let on_grade = move |grade: Grade| {
                         let took = started().elapsed().as_millis().min(u32::MAX as u128) as u32;
-                        let event = match store.0.borrow_mut().record_logged(ReviewEvent {
-                            item_id: item_id.clone(),
-                            grade,
-                            origin: Origin::Study,
-                            at_ms: now_ms(),
-                            took_ms: took,
-                        }) {
+                        let tags = *TAGS.peek();
+                        let answer = tagged_event(item_id.clone(), grade, now_ms(), took, tags);
+                        let event = match store.0.borrow_mut().record_logged(answer) {
                             Ok(event) => event,
                             // Not saved: stay on this item with his answer on
                             // screen, say so, and let him rate again.
@@ -346,13 +392,16 @@ pub fn Study() -> Element {
                                 return;
                             }
                         };
+                        *TAGS.write() = Tags::default();
                         let hidden = |id: &str| store.0.borrow().is_hidden(id);
                         session.write().grade_logged(grade, event, hidden);
                         undo_note.set(None);
                         started.set(Instant::now());
                         if session.read().is_done() {
                             phase.set(Phase::Summary);
+                            checkpoint::clear();
                         } else {
+                            checkpoint::save_running(&session.peek());
                             crate::sounds::play(if grade == Grade::Again {
                                 crate::sounds::Cue::Wrong
                             } else {
@@ -369,9 +418,11 @@ pub fn Study() -> Element {
                                 div { class: "progress-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
                             }
                             span { class: "muted small num-ltr st-count", "{pos + 1} / {len}" }
+                            crate::desk::FocusToggle {}
                             if can_undo {
                                 button {
                                     class: "btn-link st-undo",
+                                    "aria-keyshortcuts": "Z",
                                     title: tx::UNDO_HINT,
                                     aria_label: tx::UNDO_HINT,
                                     onclick: {
@@ -385,7 +436,10 @@ pub fn Study() -> Element {
                                 class: "btn-link",
                                 "aria-keyshortcuts": "Escape",
                                 "data-back": "true",
-                                onclick: move |_| phase.set(Phase::Summary),
+                                onclick: move |_| {
+                                    phase.set(Phase::Summary);
+                                    checkpoint::clear();
+                                },
                                 {tx::END}
                             }
                         }
@@ -404,6 +458,7 @@ pub fn Study() -> Element {
                                     move |ids: Vec<String>| {
                                         let more = plan_items(&store_for_add, &ids);
                                         session.write().append(more);
+                                        checkpoint::save_running(&session.peek());
                                         pending.set(None);
                                     }
                                 },
@@ -427,6 +482,7 @@ pub fn Study() -> Element {
                                 fresh: p.fresh,
                                 retry,
                                 reopened,
+                                tagging: true,
                                 on_grade,
                             }
                         }
@@ -455,7 +511,10 @@ pub fn Study() -> Element {
                         move |_| undo()
                     },
                     undo_failed: undo_note() == Some(tx::UNDO_FAILED),
-                    on_again: move |_| phase.set(Phase::Setup),
+                    on_again: move |_| {
+                        phase.set(Phase::Setup);
+                        checkpoint::clear();
+                    },
                 }
             }
         }
@@ -471,6 +530,24 @@ pub fn Study() -> Element {
 pub(crate) mod flow;
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod tag_tests {
+    use super::*;
+
+    #[test]
+    fn a_reason_goes_only_on_again() {
+        let tags = Tags { confidence: Some(Confidence::Sure), reason: Some(ErrorReason::Knowledge) };
+        let again = tagged_event("x.1".into(), Grade::Again, 1, 2, tags);
+        assert_eq!((again.confidence, again.reason), (Some(Confidence::Sure), Some(ErrorReason::Knowledge)));
+        let good = tagged_event("x.1".into(), Grade::Good, 1, 2, tags);
+        assert_eq!((good.confidence, good.reason), (Some(Confidence::Sure), None));
+        assert_eq!(
+            tagged_event("x.1".into(), Grade::Hard, 1, 2, Tags::default()),
+            ReviewEvent::new("x.1", Grade::Hard, Origin::Study, 1, 2)
+        );
+    }
+}
 
 /// Asked when "study this" arrives during a session: his session, its
 /// retries and its summary stay unless he says otherwise.

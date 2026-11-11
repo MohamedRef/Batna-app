@@ -163,3 +163,47 @@ table.plan th { color: var(--muted); font-weight: 600; }
    only Today's own pieces here. Nothing blurs, nothing moves. */
 .app[data-appearance="glossy"] .td-chip { background: color-mix(in srgb, var(--surface) 70%, var(--accent-soft)); }
 .app[data-appearance="glossy"] .td-hero .td-go { border-radius: var(--radius-pill); }
+
+
+/* Mac dashboard hierarchy: the daily plan and next lesson own the primary
+   column; the lecture catalogue is a supporting, independently scrollable
+   reference. At narrower windows keep the existing tablet composition. */
+@media (min-width: 1200px) and (min-height: 740px) {
+  .today-cols.tab-cols[data-wide="aside"] {
+    grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr);
+    column-gap: clamp(var(--sp-4), 2vw, var(--sp-6));
+    align-items: start;
+  }
+  /* The reading canvas already scrolls: do not trap the priority work in
+     a separate nested scrolling panel on a normal-height Mac window. */
+  .today-cols > .tab-main.tab-sticky {
+    position: static;
+    max-block-size: none;
+    overflow: visible;
+  }
+  .today-cols > .tab-aside {
+    position: sticky;
+    inset-block-start: var(--sp-4);
+    max-block-size: calc(100dvh - 2 * var(--sp-6));
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scroll-padding-block: var(--sp-4);
+  }
+}
+
+/* One clearly separated continue action for an already-running session;
+   starting a new session remains available beneath it, but is not mistaken
+   for resuming the existing review queue. */
+.td-resume {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  border-color: var(--accent);
+}
+.td-resume-copy { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
+.td-resume-action { display: inline-flex; gap: var(--sp-2); align-items: center; justify-content: center; }
+@media (max-width: 599.98px) {
+  .td-resume-action { inline-size: 100%; min-block-size: var(--target); }
+}

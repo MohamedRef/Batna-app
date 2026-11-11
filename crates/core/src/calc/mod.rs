@@ -92,6 +92,7 @@ mod rome_ibs;
 mod rpi;
 mod saag;
 mod sample_size;
+mod significance;
 mod sle;
 mod sos;
 mod spa;

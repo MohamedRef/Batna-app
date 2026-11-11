@@ -1169,3 +1169,31 @@ Source: Research L14: measures of diagnostic accuracy (Deeks and Altman, BMJ 200
 |---|---|---|
 | `pretest` | number, % | Pre-test probability |
 | `lr` | number | Likelihood ratio of the result |
+
+## `chi_square`: Chi-square test (2×2 table)
+
+Source: Research L17: hypothesis testing, slides 23–28 (Pearson 1900; Cochran 1954; Kirkwood and Sterne 2003)
+
+| input | kind | |
+|---|---|---|
+| `a` | number | Row 1, column 1 (a) |
+| `b` | number | Row 1, column 2 (b) |
+| `c` | number | Row 2, column 1 (c) |
+| `d` | number | Row 2, column 2 (d) |
+| `alpha` | `0.05`, `0.01` | Level of significance |
+
+## `t_test`: Student's t-test (one sample, paired, two groups)
+
+Source: Research L17: hypothesis testing, slides 12–14 and 29–33 (Student 1908; Kirkwood and Sterne 2003; Altman 1991)
+
+| input | kind | |
+|---|---|---|
+| `test` | `one_sample`, `paired`, `independent` | Which t-test |
+| `mean` | number | Mean (x̄): the sample, the differences (paired) or group 1 |
+| `sd` | number | Standard deviation (S) of the same |
+| `n` | number | Number (n) of the same |
+| `mu` | number | Population mean (μ), one sample only; optional |
+| `mean2` | number | Group 2 mean; optional |
+| `sd2` | number | Group 2 standard deviation; optional |
+| `n2` | number | Group 2 number; optional |
+| `alpha` | `0.05`, `0.01` | Level of significance |

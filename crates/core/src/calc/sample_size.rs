@@ -38,7 +38,7 @@ fn z_two_sided(i: &Inputs) -> Result<(f64, f64), CalcError> {
 
 /// The standard normal quantile Φ⁻¹(p), 0 < p < 1, by Acklam's rational
 /// approximation (relative error under 1.2 × 10⁻⁹): 0.975 → 1.959964.
-fn inverse_normal(p: f64) -> f64 {
+pub(super) fn inverse_normal(p: f64) -> f64 {
     const A: [f64; 6] = [
         -3.969683028665376e1,
         2.209460984245205e2,

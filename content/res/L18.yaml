@@ -1,0 +1,595 @@
+schema: batna.content/v1
+lecture: res.L18
+title: Non-parametric tests, correlation and regression analysis
+author: Dr. Heba El-Weshahi
+book: { chapter: 1, pages: [1, 37] }
+topics:
+  - { id: nonparametric, title: "Non-parametric tests and their parametric counterparts" }
+  - { id: correlation, title: "Scatter diagram, correlation coefficient r, Pearson vs Spearman, r²" }
+  - { id: regression, title: "Simple regression line and equation Y = a + bX" }
+  - { id: multivariate, title: "Multivariate analysis: multiple linear and multiple logistic regression" }
+items:
+  # ---------------- non-parametric tests (slides 2-4) ----------------
+  - id: res.L18.001
+    kind: enumerate
+    topic: nonparametric
+    prompt: What are the 2 advantages of non-parametric tests?
+    points:
+      - They don't assume a normal distribution (distribution-free methods)
+      - They suit small sample sizes
+    pass: 2
+    hook: "الـ non-parametric «مش متطلّبة»: مش لازم normal، ومش لازم sample كبيرة."
+    src: { page: 2, quote: "Non parametric tests\nAdvantages:\n1- Don't assume a normal distribution (distribution free methods)\n2- Small sample sizes" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.002
+    kind: cloze
+    topic: nonparametric
+    text: >-
+      Non-parametric tests are called {{c1::distribution free}} methods because they don't assume a normal
+      distribution.
+    src: { page: 2, quote: "1- Don't assume a normal distribution (distribution free methods)" }
+    status: unverified
+  - id: res.L18.003
+    kind: mcq
+    topic: nonparametric
+    stem: Which null hypothesis does a non-parametric test actually test?
+    options:
+      - That the medians (or mean ranks) are equal
+      - That the means are equal
+      - That the standard deviations are equal
+      - That the data are normally distributed
+    answer: 0
+    why:
+      - "Slide 2: they test that medians (or mean rank), rather than mean, are equal."
+      - Equal means is the hypothesis of parametric tests (t-test, ANOVA).
+      - Equal variances is an assumption check, not what these tests compare.
+      - Normality is exactly what non-parametric tests don't need to assume.
+    src: { page: 2, quote: "They actually test the hypothesis that medians (or mean rank), rather than mean, are equal." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.004
+    kind: card
+    topic: nonparametric
+    front: In a standard normal distribution, how much of the area lies within ±1, ±1.96 and ±2.58 SD of the mean?
+    back: >-
+      About 68% within ±1 SD, 95% within ±1.96 SD and 99% within ±2.58 SD. The slide's example is a blood pressure
+      of 120 ± 10 mmHg.
+    src: { page: 3, quote: "Empirical properties of the standard normal distribution\nBp 120±10 mm/Hg\n-2.58 -1.96 -1.00 0 1.00 1.96 2.58\n68% of area\n95% of area\n99% of area" }
+    status: unverified
+  - id: res.L18.005
+    kind: mcq
+    topic: nonparametric
+    stem: Blood pressure is normally distributed with mean 120 and SD 10 mmHg (the slide's example). Between which values do 95% of readings lie?
+    options: ["100.4 to 139.6 mmHg", "110 to 130 mmHg", "94.2 to 145.8 mmHg", "90 to 150 mmHg"]
+    answer: 0
+    why:
+      - "95% lies within ±1.96 SD: 1.96 × 10 = 19.6, so 120 ± 19.6 = 100.4 to 139.6."
+      - "That is ±1 SD, which holds about 68%."
+      - "That is ±2.58 SD, which holds about 99%."
+      - "That is ±3 SD, more than 99%."
+    src: { page: 3, quote: "Empirical properties of the standard normal distribution\nBp 120±10 mm/Hg\n-2.58 -1.96 -1.00 0 1.00 1.96 2.58\n68% of area\n95% of area\n99% of area" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L18.006
+    kind: table
+    topic: nonparametric
+    title: Parametric tests and their non-parametric counterparts
+    columns: [Comparison, Parametric test, Non-parametric test]
+    rows:
+      - [One sample against the population, One-sample t-test, Kolmogorov-Smirnov test]
+      - ["Paired comparison (mean difference), one group", Paired t-test, Wilcoxon signed rank test]
+      - [2 independent groups, Student t-test, Mann-Whitney test]
+      - [3 or more groups (means), ANOVA, Kruskal-Wallis test]
+      - [Correlation (r), Pearson, Spearman]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 2], [3, 1], [3, 2], [4, 2]]
+    src: { page: 4, quote: "| Comparison | Parametric Test | Non parametric test |\n|---|---|---|\n| One sample against the population | One sample t test | Kolmogrov Sminrov test |\n| Paired comparison (mean difference)--------one group | Paired t-test | Wilcoxon signed rank test |\n| 2 independent groups | Student t-test | Mann whitney |\n| 3 or more groups (A means) | ANOVA | Kruskall wallis |\n| Correlation (r) | Pearson | Spearman |" }
+    update: { text: "The Kolmogorov-Smirnov one-sample test compares a sample's whole distribution with a reference distribution (often used to check normality); for the median of one sample against a set value, statistics books usually name the Wilcoxon signed rank (or sign) test. For the exam, keep the slide's table.", ref: "Altman, Practical Statistics for Medical Research, 1991" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.007
+    kind: mcq
+    topic: nonparametric
+    stem: Blood sugar is measured in the same diabetics before and after a diet; the differences are not normally distributed. Which test fits?
+    options: [Wilcoxon signed rank test, Paired t-test, Mann-Whitney test, Kruskal-Wallis test]
+    answer: 0
+    why:
+      - "Paired comparison (one group measured twice) with non-normal data: Wilcoxon signed rank."
+      - The paired t-test is the parametric choice; it needs normally distributed differences.
+      - Mann-Whitney compares 2 independent groups, not the same people twice.
+      - Kruskal-Wallis compares 3 or more independent groups.
+    src: { page: 4, quote: "| Paired comparison (mean difference)--------one group | Paired t-test | Wilcoxon signed rank test |" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.008
+    kind: mcq
+    topic: nonparametric
+    stem: Hospital stay (skewed) is compared across 3 independent wards. Which test fits?
+    options: [Kruskal-Wallis test, ANOVA, Mann-Whitney test, Spearman correlation]
+    answer: 0
+    why:
+      - "3 or more independent groups, not normal: Kruskal-Wallis, the non-parametric ANOVA."
+      - ANOVA is the parametric test for 3 or more means; it assumes normal data.
+      - Mann-Whitney compares only 2 independent groups.
+      - Spearman measures correlation between two variables, not a difference between groups.
+    src: { page: 4, quote: "| 3 or more groups (A means) | ANOVA | Kruskall wallis |" }
+    status: unverified
+  - id: res.L18.009
+    kind: mcq
+    topic: nonparametric
+    stem: >-
+      To compare the mean knowledge score about osteoporosis between working women and housewives, knowing that the
+      score is not normally distributed, the most suitable test is:
+    options: [Mann-Whitney test, Student t-test, Wilcoxon signed rank test, ANOVA]
+    answer: 0
+    why:
+      - Two independent groups and a score that isn't normal → Mann-Whitney, the non-parametric Student t-test.
+      - The Student t-test is right for two independent groups only when the data are normal.
+      - Wilcoxon signed rank is for paired data (the same people measured twice).
+      - ANOVA is for 3 or more groups, and it is parametric.
+    src: { page: 34, quote: "To compare the mean knowledge score about osteoporosis among a group of working females and another group of housewives, knowing that the knowledge score was not normally distributed, the most suitable test is:\n1. Student t test\n2. Wilcoxon signed rank test\n3. Mann whitney test\n4. ANOVA" }
+    status: unverified
+    tags: [high-yield, past-paper]
+  - id: res.L18.010
+    kind: case
+    topic: nonparametric
+    stem: You are choosing tests for a thesis on diabetic patients in an outpatient clinic.
+    steps:
+      - question: "HbA1c (normal) of the same patients before and after an education program?"
+        options: ["Paired t-test", "Student t-test", "Wilcoxon signed rank test", "Pearson correlation"]
+        answer: 0
+        why: "Same group measured twice with normal data: paired t-test."
+      - question: "Neuropathy pain score (skewed) of men vs women?"
+        options: ["Mann-Whitney test", "Student t-test", "Kruskal-Wallis test", "Paired t-test"]
+        answer: 0
+        why: "Two independent groups with non-normal data: Mann-Whitney."
+      - question: "Duration of diabetes vs creatinine, both skewed: are they related?"
+        options: ["Spearman rank correlation", "Pearson correlation", "ANOVA", "Mann-Whitney test"]
+        answer: 0
+        why: "Relationship between two quantitative variables that are not normal: Spearman."
+      - question: "BMI (normal) across 4 social classes?"
+        options: ["ANOVA", "Kruskal-Wallis test", "Student t-test", "Paired t-test"]
+        answer: 0
+        why: "3 or more independent groups with normal data: ANOVA."
+    src: { page: 4, quote: "| Comparison | Parametric Test | Non parametric test |\n|---|---|---|\n| One sample against the population | One sample t test | Kolmogrov Sminrov test |\n| Paired comparison (mean difference)--------one group | Paired t-test | Wilcoxon signed rank test |\n| 2 independent groups | Student t-test | Mann whitney |\n| 3 or more groups (A means) | ANOVA | Kruskall wallis |\n| Correlation (r) | Pearson | Spearman |" }
+    status: unverified
+  # ---------------- correlation (slides 5-18) ----------------
+  - id: res.L18.011
+    kind: card
+    topic: correlation
+    front: Define (simple, bivariate) correlation.
+    back: A measure of the strength of association between two quantitative variables (e.g. height and weight).
+    src: { page: 5, quote: "Simple Correlation (BI-Variate)\nCorrelation is a measure of the strength of association between two quantitative variables" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.012
+    kind: mcq
+    topic: correlation
+    stem: What is always the first step in examining the relationship between two quantitative variables measured on the same subjects?
+    options: [Drawing a scatter diagram, Calculating Pearson's r, Fitting a regression line, Testing for normality]
+    answer: 0
+    why:
+      - "Slide 6: the first step is always to draw a scatter diagram."
+      - r comes after the scatter shows whether the relation is linear at all.
+      - The regression line summarizes the scatter, so the scatter comes first.
+      - Normality decides Pearson vs Spearman later; the slide's first step is the scatter diagram.
+    src: { page: 6, quote: "The first step in examining\nthe relationship between two quantitative variables,\nmeasured on the same subjects,\nis always to draw a scatter diagram." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.013
+    kind: card
+    topic: correlation
+    front: What do the 5 classic scatter diagrams (a–e) show about r?
+    back: >-
+      Positive linear (r = +0.82), negative linear (r = −0.70), independent (r = 0.00), and two curvilinear patterns
+      that also give r = 0.00: a curved relation can be strong yet show no linear correlation.
+    src: { page: 6, quote: "Scatter diagrams\nPositive linear r = +.82\nNegative linear r = -.70\nIndependent r = 0.00\nCurvilinear r = 0.00\nCurvilinear r = 0.00" }
+    status: unverified
+  - id: res.L18.014
+    kind: card
+    topic: correlation
+    front: In correlation, what are the two variables called? Give the slide's example.
+    back: One is independent (explanatory) and the other is dependent (response), e.g. temperature (independent) and pulse (dependent).
+    src: { page: 7, quote: "The two variables under study is an independent one (explanatory) and the other is dependent (response) variable e.g temperature & pulse." }
+    status: unverified
+  - id: res.L18.015
+    kind: cloze
+    topic: correlation
+    text: >-
+      We start correlation with a scatter plot to identify a {{c1::non linear}} relationship, because correlation and
+      regression describe only {{c2::linear}} relationships.
+    src: { page: 7, quote: "In conducting correlation, we initially start by scatter plot to identify non linear relationship.\nAn important point to note is that correlation & regression describe only linear relationship" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.016
+    kind: mcq
+    topic: correlation
+    stem: A scatter plot shows a clear U-shaped relation between two variables and r = 0. What is the best conclusion?
+    options:
+      - There is no linear relationship, but a curvilinear one may still exist
+      - The variables are completely unrelated
+      - There is a strong negative correlation
+      - The regression line will predict y well
+    answer: 0
+    why:
+      - Correlation and regression describe only linear relationships; a curvilinear pattern can give r = 0.
+      - r = 0 only rules out a linear relation; the scatter shows a curved one.
+      - A negative correlation would give r below 0.
+      - A straight regression line fits a U-shape badly.
+    src: { page: 7, quote: "An important point to note is that correlation & regression describe only linear relationship" }
+    status: unverified
+  - id: res.L18.017
+    kind: card
+    topic: correlation
+    front: What does the correlation coefficient r estimate?
+    back: The strength and direction of the linear association between two numerical variables. It runs from −1 (perfect inverse) through 0 (none) to +1 (perfect positive).
+    src: { page: 12, quote: "Correlation coefficient \"r\"\nIt gives us an estimate of the strength and direction of the linear association between two numerical variables.\nPositive Correlation +1.00\nInverse Correlation -1.00\nNo Correlation 0.00" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.018
+    kind: card
+    topic: correlation
+    front: How does r show strength and direction?
+    back: >-
+      The sign gives the direction (negative below 0, positive above 0). The size gives the strength: weak near 0,
+      strong towards −1 or +1. So r = −0.9 is as strong as r = +0.9, only inverse.
+    src: { page: 13, quote: "Correlation Coefficient\nShows Strength & Direction of Correlation\nStrong <- Weak | Weak -> Strong\n-1.0 -0.5 0.0 +0.5 +1.0\nNegative Correlation\nZero\nPositive Correlation" }
+    status: unverified
+  - id: res.L18.019
+    kind: card
+    topic: correlation
+    front: What does r = 0 mean?
+    back: >-
+      There is no linear relationship between y and x. This may mean there is no relationship at all between the two
+      variables, i.e. knowing x tells us nothing about the value of y.
+    src: { page: 14, quote: "If r = 0,\nthere is no linear relationship between y and x.\nThis may mean that there is no relationship at all between the two variables\ni.e. knowing x tells us nothing about the value of y." }
+    status: unverified
+  - id: res.L18.020
+    kind: table
+    topic: correlation
+    title: Strength of the correlation coefficient r
+    columns: [Value of r, Association]
+    rows:
+      - ["r = 0", No association]
+      - ["0 < r < 0.4", Weak]
+      - ["0.4 ≤ r < 0.6", Moderate]
+      - ["0.6 ≤ r < 1", Strong]
+      - ["r = 1", Perfect]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 15, quote: "Strength of Correlation coefficient \"r\"\nr = 0 : no association\n0 < r <0.4 : weak association\n0.6 > r ≥ 0.4 : moderate association\n1 > r ≥ 0.6 : strong association\nr = 1 : perfect association" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: res.L18.021
+    kind: mcq
+    topic: correlation
+    stem: Between age and systolic blood pressure, r = −0.45. How is this association described?
+    options: [Moderate inverse association, Weak inverse association, Strong inverse association, Moderate positive association]
+    answer: 0
+    why:
+      - "|r| = 0.45 falls in 0.4–0.6 (moderate) and the minus sign means inverse."
+      - Weak is below 0.4.
+      - Strong is 0.6 and above.
+      - The negative sign makes it inverse, not positive.
+    src: { page: 15, quote: "0 < r <0.4 : weak association\n0.6 > r ≥ 0.4 : moderate association\n1 > r ≥ 0.6 : strong association" }
+    status: unverified
+  - id: res.L18.022
+    kind: mcq
+    topic: correlation
+    stem: Which correlation coefficient shows the strongest association?
+    options: ["r = −0.99", "r = +0.9", "r = +0.5", "r = −0.3"]
+    answer: 0
+    why:
+      - "Strength is the size of r regardless of sign: 0.99 is closest to 1."
+      - 0.9 is strong but smaller than 0.99.
+      - 0.5 is moderate.
+      - 0.3 is weak.
+    src: { page: 11, quote: "Correlation r = 0\nCorrelation r = -0.3\nCorrelation r = 0.5\nCorrelation r = -0.7\nCorrelation r = 0.9\nCorrelation r = -0.99" }
+    status: unverified
+  - id: res.L18.023
+    kind: mcq
+    topic: correlation
+    stem: When is Spearman rank correlation calculated instead of Pearson correlation?
+    options:
+      - When the two variables are not normally distributed
+      - When both variables are normally distributed
+      - When one variable is qualitative with two categories
+      - When we want to predict one variable from the other
+    answer: 0
+    why:
+      - "Slide 17: not normally distributed → Spearman rank correlation."
+      - Normally distributed variables → Pearson.
+      - Two qualitative variables are related with chi-square, not correlation.
+      - Prediction is the job of regression.
+    src: { page: 17, quote: "If the two variables are normally distributed Pearson correlation is calculated while if not normally distributed Spearman rank correlation is calculated." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.024
+    kind: mcq
+    topic: correlation
+    stem: >-
+      To estimate the direction and strength of the linear relationship between systolic blood pressure (dependent)
+      and blood cholesterol (independent) among a group of workers, which test is most suitable?
+    options: [Pearson correlation, Student t-test, Chi-square test, None of the above]
+    answer: 0
+    why:
+      - Direction and strength of a linear relation between two quantitative variables = the correlation coefficient (Pearson).
+      - The t-test compares two means; it doesn't measure a relationship.
+      - Chi-square tests association between qualitative variables.
+      - Pearson fits, so "none" is wrong.
+    src: { page: 35, quote: "To estimate the direction and strength of the linear relationship between the systolic blood pressure (dependent variable) and blood cholesterol (independent variable) among a group of workers, which of the following tests is most suitable:\nA. Student t test\nB. Pearson correlation\nC. Chi-square test\nD. None of the above" }
+    status: unverified
+    tags: [past-paper]
+  - id: res.L18.025
+    kind: card
+    topic: correlation
+    front: What is the coefficient of determination (r²) and how is it expressed?
+    back: >-
+      It is the square of r, expressed as the % of variation in the dependent variable accounted for (explained) by
+      the other, independent variable.
+    src: { page: 18, quote: "Coefficient of determination (r2)\nIt is the square of (r) .\nit is expressed as % of variation in dependent variable accounted or explained by the other variable (independent)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.026
+    kind: mcq
+    topic: correlation
+    stem: The correlation between temperature and pulse is r = 0.9 (the slide's example). What does r² tell us?
+    options:
+      - 81% of the variation in pulse is explained by temperature
+      - 90% of the variation in pulse is explained by temperature
+      - 81% of patients have a pulse that follows their temperature
+      - The pulse rises 0.81 beats per degree
+    answer: 0
+    why:
+      - "r² = 0.9 × 0.9 = 0.81: 81% of the variation in the dependent variable (pulse) is explained."
+      - 0.9 is r itself; the % explained is r squared.
+      - r² is a share of variation, not a share of people.
+      - A change per unit is the regression slope b, not r².
+    src: { page: 18, quote: "Example: if (r) is 0.9 between temperature & pulse, it means that 81% of variation in pulse is explained by temperature." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L18.027
+    kind: mcq
+    topic: correlation
+    stem: "The correlation coefficient (r) computed for two parameters measured in 429 patients is −0.829. This means that:"
+    options:
+      - 69% of the variation in the dependent parameter could be explained by variation in the independent one
+      - The two parameters are positively correlated, and the link is weak
+      - The two parameters are inversely correlated, and the link is weak
+      - The two parameters are positively correlated, and the link is strong
+    answer: 0
+    why:
+      - "r² = 0.829² ≈ 0.687, about 69% of the variation explained."
+      - The sign is negative, so not positive; and 0.83 is strong, not weak.
+      - Inverse is right, but |r| = 0.83 is strong (≥ 0.6), not weak.
+      - Strong is right, but the minus sign makes it inverse, not positive.
+    src: { page: 33, quote: "The correlation coefficient (r) computed for two parameters measured in 429 patients is =- 0.829. This means that:\n1. The two parameters are positively correlated, and the link is weak\n2. The two parameters are inversely correlated, and the link is Weak\n3. The two parameters are positively correlated, and the link is strong\n4. 69% of variation in the dependent parameter could be explained by variation in the independent one" }
+    status: unverified
+    tags: [past-paper, high-yield]
+  # ---------------- regression (slides 19-22) ----------------
+  - id: res.L18.028
+    kind: card
+    topic: regression
+    front: What is the regression line and what is it used for?
+    back: >-
+      A line drawn through the scatter of points as a simple summary of the relationship between the two variables
+      (the fitted line). It is used to predict the value of the dependent variable when the value of the independent
+      variable is known.
+    src: { page: 19, quote: "Regression line\nWe can draw a line through the scatter of points, as a simple summary of the relationship between these two variables.\nThis fitted line is called the \"regression line\".\nIt is used to predict the value of dependent variable when the value of independent variable is known." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.029
+    kind: card
+    topic: regression
+    front: What is one of the major differences between correlation and regression?
+    back: "The purpose of the analysis: correlation describes a (linear) relationship, while regression extends it to predict the value of one variable from the other."
+    src: { page: 20, quote: "Correlation & regression\nRelationship between two variables (linear) extending to predict the value of one variable from the other.\nOne of the major differences between correlation & regression is the purpose of analysis whether it is to describe a relationship or to predict a value." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.030
+    kind: cloze
+    topic: regression
+    text: >-
+      In the regression equation Y = a + bX, a is the {{c1::intercept (constant)}} and b is the {{c2::slope of the line}},
+      also called the {{c3::regression coefficient}}.
+    src: { page: 22, quote: "Y = a + b (x)\nwhere (a) is the intercept (constant)\nwhile b ( slope of line ) is value changing each time when X increases by one unit.\n(b) is the regression coefficient" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.031
+    kind: card
+    topic: regression
+    front: Define the regression coefficient (b).
+    back: "The slope of the regression line: the amount of change in the value of y when X increases by one unit."
+    src: { page: 22, quote: "(b) is the regression coefficient\nThe amount of change in the value of y when X increase by one unit" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.032
+    kind: mcq
+    topic: regression
+    stem: "A regression of systolic pressure (Y, mmHg) on cholesterol (X, mg/dL) gives Y = 20 + 0.5X. What pressure does it predict for a cholesterol of 180 mg/dL?"
+    options: ["110 mmHg", "90 mmHg", "200 mmHg", "180.5 mmHg"]
+    answer: 0
+    why:
+      - "Y = a + bX = 20 + 0.5 × 180 = 20 + 90 = 110 mmHg."
+      - "90 is only b × X; the intercept a = 20 must be added."
+      - "That adds X to a without multiplying by the slope."
+      - "That just adds the slope to X."
+    src: { page: 22, quote: "Y = a + b (x)\nwhere (a) is the intercept (constant)\nwhile b ( slope of line ) is value changing each time when X increases by one unit." }
+    status: unverified
+    tags: [numbers]
+  - id: res.L18.033
+    kind: mcq
+    topic: regression
+    stem: "All the following are TRUE for the regression line EXCEPT:"
+    options:
+      - It gives an idea about the strength of correlation between two quantitative parameters
+      - It represents the best fit of dots in the scatter plot
+      - It can be used to predict the value of the dependent variable when the independent variable is known
+      - In positive correlation it runs upward and forward
+    answer: 0
+    why:
+      - The line alone doesn't show strength; that is r (how tightly the dots hug the line).
+      - "True: it is the fitted line through the scatter."
+      - "True: slide 19, it predicts the dependent variable."
+      - "True: a positive slope rises from left to right."
+    src: { page: 36, quote: "All the followings are TRUE for regression line EXCEPT:\n1. It give an idea about the strength of correlation between two quantitative parameters\n2. It represent the best fit of dots in the scatter plot\n3. It can be used to predict the value of the dependent variable when the independent variable is known\n4. In positive correlation it runs upward and forward." }
+    status: unverified
+    tags: [past-paper]
+  - id: res.L18.034
+    kind: mcq
+    topic: regression
+    stem: In Y = 20 + 0.5X, what does 0.5 mean?
+    options:
+      - Y rises by 0.5 units for every one-unit increase in X
+      - The correlation between X and Y is moderate
+      - 50% of the variation in Y is explained by X
+      - Y equals 0.5 when X is zero
+    answer: 0
+    why:
+      - b, the regression coefficient, is the change in y when X increases by one unit.
+      - b is not r; a slope says nothing about how tightly the dots fit.
+      - That would be r² = 0.5, a different number.
+      - The value of Y at X = 0 is the intercept a (20 here).
+    src: { page: 22, quote: "(b) is the regression coefficient\nThe amount of change in the value of y when X increase by one unit" }
+    status: unverified
+  # ---------------- multivariate (slides 23-32, 37) ----------------
+  - id: res.L18.035
+    kind: card
+    topic: multivariate
+    front: What is multivariate analysis, and why do we need it in medicine?
+    back: >-
+      Many health problems have many observations per subject, so multivariate analysis examines the simultaneous
+      effect of multiple independent variables on a certain outcome (the dependent variable), e.g. age, sex, LDL-C,
+      DM, HTN, smoking, obesity and uric acid on % coronary artery narrowing.
+    src: { page: 25, quote: "Multivariate analysis\nMany health problems in medicine have many observations / subject.\nSo\nMultivariate analysis is to examine simultaneous effect of multiple variables (independent variables) on a certain outcome (dependent variable)." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.036
+    kind: table
+    topic: multivariate
+    title: Choosing the multiple regression by the dependent variable
+    columns: [Dependent variable, Use]
+    rows:
+      - [Numerical (quantitative), Multiple linear regression]
+      - ["Nominal, qualitative (dichotomy)", Multiple logistic regression]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 26, quote: "If dependent variable is numerical (quantitative) – use Multiple linear regression.\nIf nominal -Qualitative (dichotomy) --- use Multiple logistic regression." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.037
+    kind: card
+    topic: multivariate
+    front: In multiple linear regression, what types of variables are allowed?
+    back: >-
+      The dependent variable is numerical. The independent variables are numerical, or may include nominal but
+      dichotomous ones coded 0 and 1 (dummy coding); which value is 1 and which is 0 is arbitrary, chosen by the
+      researcher to make interpretation easier.
+    src: { page: 27, quote: "1-Multiple linear regression\nThe Dependent Variable is numerical & independent either Numerical OR may include Nominal but dichotomous (0 & 1 coding – dummy coding).\nThe choice of which value is 1 & 0 is arbitrary and chosen by researcher to facilitate interpretation." }
+    status: unverified
+  - id: res.L18.038
+    kind: mcq
+    topic: multivariate
+    stem: "In multiple linear regression analysis the dependent variable should be:"
+    options: [Quantitative, Nominal dichotomous, Nominal multi-chotomous, Dummy coded]
+    answer: 0
+    why:
+      - Multiple LINEAR regression needs a numerical (quantitative) dependent variable.
+      - A dichotomous dependent variable calls for multiple logistic regression.
+      - A multi-category outcome isn't analysed by linear regression.
+      - Dummy coding (0 & 1) is for dichotomous independent variables, not the dependent one.
+    src: { page: 37, quote: "In multiple linear regression analysis the dependent variable should be:\n1. Nominal dichotomous\n2. Nominal multi-chotomous\n3. Quantitative\n4. Dummy coded" }
+    status: unverified
+    tags: [past-paper, high-yield]
+  - id: res.L18.039
+    kind: cloze
+    topic: multivariate
+    text: >-
+      The multiple regression equation is like simple regression but with more than one independent variable:
+      Y = a + {{c1::b1x1 + b2x2 + b3x3}} + ...
+    src: { page: 28, quote: "The equation for multiple regression\nThe equation is similar to simple regression (Y=a+ bx), yet, including more than one independent variables\nY= a + b1x1+ b2x2+ b3x3+......" }
+    status: unverified
+  - id: res.L18.040
+    kind: enumerate
+    topic: multivariate
+    prompt: What does multiple linear regression allow us to do (2 points)?
+    points:
+      - Use several variables at once to explain the variation in a continuous dependent variable
+      - Isolate the unique effect of one variable on the continuous dependent variable while taking into account that other variables affect it too
+    pass: 2
+    hook: "الـ multiple regression «بتجمّع وتفرّق»: تجمّع variables كتير تشرح الـ outcome، وتفرّق أثر كل واحد لوحده."
+    src: { page: 30, quote: "Isolate the unique effect of one variable on the continuous dependent variable while taking into consideration that other variables are affecting it too." }
+    status: unverified
+  - id: res.L18.041
+    kind: card
+    topic: multivariate
+    front: Give the slide's example of a multiple linear regression equation.
+    back: >-
+      HB% = α + b1 age + b2 height + b3 sex (or parity) + b4 weight + b5 income + b6 family size + b7 smoking +
+      b8 residence + b9 race + b10 lung size + b11 education level + b12 type of food + b13 pregnancy ... Each b is
+      the effect of its own variable on HB% with the others taken into account.
+    src: { page: 29, quote: "Multiple Regression allows us to:\nUse several variables at once to explain the variation in a continuous dependent variable.\nHB% = α + b1 age +b2 Height +b3 Sex + b4 weight + b5 income + b6 family size + b7 smoking + b8 residence + b9 race + b10 lung size + b11 education level + b12 type of food + b13 pregnancy + .......etc." }
+    status: unverified
+  - id: res.L18.042
+    kind: card
+    topic: multivariate
+    front: When is multiple logistic regression (MLogRA) used, and how is its regression coefficient expressed?
+    back: >-
+      For a qualitative dependent variable that is a dichotomy coded 0 & 1 (two outcomes, e.g. survival, recurrence,
+      cure) against independent variables that are nominal dichotomous or numerical. Its regression coefficient is
+      expressed as an odds ratio.
+    src: { page: 32, quote: "Dealing with qualitative dependent variable (dichotomy, 0&1) = two outcomes (e.g survival, recurrence, cure.........)\n, against independent variables (Nominal Dichotomy, Or Numerical).\nRegression coefficient in MLogRA is expressed as odds ratio" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L18.043
+    kind: mcq
+    topic: multivariate
+    stem: >-
+      A study looks at which factors (age, smoking, DM, LDL-C) predict death (yes/no) within a year after myocardial
+      infarction. Which analysis fits, and how are its results expressed?
+    options:
+      - Multiple logistic regression, as odds ratios
+      - Multiple linear regression, as regression coefficients in mmHg
+      - Pearson correlation, as r
+      - Multiple logistic regression, as r²
+    answer: 0
+    why:
+      - A dichotomous outcome (dead/alive) with several predictors → multiple logistic regression; its coefficient is an odds ratio.
+      - Linear regression needs a numerical dependent variable.
+      - Correlation handles only two quantitative variables, and the outcome here is yes/no.
+      - The slide expresses MLogRA coefficients as odds ratios, not r².
+    src: { page: 32, quote: "Dealing with qualitative dependent variable (dichotomy, 0&1) = two outcomes (e.g survival, recurrence, cure.........)\n, against independent variables (Nominal Dichotomy, Or Numerical).\nRegression coefficient in MLogRA is expressed as odds ratio" }
+    status: unverified
+  - id: res.L18.044
+    kind: case
+    topic: multivariate
+    stem: A cardiology MSc thesis studies % coronary artery narrowing on angiography in 300 patients, with age, sex, DM, HTN, LDL-C, smoking, obesity and uric acid recorded.
+    steps:
+      - question: "What kind of analysis looks at all these factors together?"
+        options: ["Multivariate analysis (multiple regression)", "Many separate Pearson correlations only", "Chi-square", "Mann-Whitney"]
+        answer: 0
+        why: "Multivariate analysis examines the simultaneous effect of many independent variables on one outcome."
+      - question: "The outcome is % narrowing (a number). Which regression?"
+        options: ["Multiple linear regression", "Multiple logistic regression", "Simple linear regression", "Kruskal-Wallis"]
+        answer: 0
+        why: "A numerical dependent variable → multiple linear regression."
+      - question: "How is sex entered as an independent variable?"
+        options: ["Dummy coded 0 and 1, the choice of which is 1 being arbitrary", "It can't be entered", "As a Spearman rank", "As the dependent variable"]
+        answer: 0
+        why: "Nominal dichotomous independents enter linear regression with 0 & 1 (dummy) coding."
+      - question: "If the outcome becomes 'significant stenosis: yes/no', what changes?"
+        options: ["Multiple logistic regression, with odds ratios", "Nothing", "Pearson correlation", "Paired t-test"]
+        answer: 0
+        why: "A dichotomous dependent variable → multiple logistic regression; coefficients are odds ratios."
+    src: { page: 26, quote: "If dependent variable is numerical (quantitative) – use Multiple linear regression.\nIf nominal -Qualitative (dichotomy) --- use Multiple logistic regression." }
+    status: unverified
+  - id: res.L18.045
+    kind: order
+    topic: correlation
+    prompt: Put the steps of studying the relation between two quantitative variables in the lecture's order.
+    steps:
+      - Draw a scatter diagram to see whether the relation is linear
+      - Choose Pearson (both normal) or Spearman (not normal)
+      - Read r for strength and direction
+      - Square r to get the % of variation explained (r²)
+      - Fit the regression line Y = a + bX to predict y from x
+    src: { page: 7, quote: "In conducting correlation, we initially start by scatter plot to identify non linear relationship." }
+    status: unverified

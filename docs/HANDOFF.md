@@ -60,7 +60,7 @@ Dioxus 0.7 (HTML/CSS UI in a WebView), SQLite, plus minimal Kotlin for Android.
 
 | Crate | Package | What |
 |---|---|---|
-| `crates/core` | `batna-core` | Pure logic: content schema types, FSRS (`srs`), review store traits + HLC (`review`), session composer, exam/MCQ shuffling, calculators (`calc`: 96 in `REGISTRY`, `calc::normals`, `calc::guide`), lab ranges (`labs`), glossary finder, update feed checks, content pack format (`pack`). No UI, no IO; builds for wasm32. |
+| `crates/core` | `batna-core` | Pure logic: content schema types, FSRS (`srs`), review store traits + HLC (`review`), session composer, exam/MCQ shuffling, calculators (`calc`: 98 in `REGISTRY`, `calc::normals`, `calc::guide`), lab ranges (`labs`), glossary finder, update feed checks, content pack format (`pack`). No UI, no IO; builds for wasm32. |
 | `crates/protocol` | `batna-protocol` | Every type that crosses a process boundary (sync ops, `sync::TABLES`, HLC, auth, update feed). Versioned serde. |
 | `crates/app` | `batna-app` | The Dioxus app for desktop, Android and web (`--no-default-features --features web`). One module dir per feature: `today`, `study`, `bank`, `case`, `oral`, `learn` (lessons), `lecture`, `calc`, `stats`, `plan`, `own` (own cards), `abbrdict`/`abbrsheet`, `labs`, `hover` (glossary peek), `pagesheet` (book page chips), `settings`, `update`, `cloud`, `store`, `platform`, `i18n/` (all Arabic UI text, one file per feature). |
 | `crates/anki` | `batna-anki` | `.apkg` deck builder shared by tools and the app's «صدّر لـ Anki». |
@@ -140,6 +140,7 @@ jobs are periodic or manual. Never re-add PR/push triggers to heavy workflows.
 | `web-deploy.yml` | push to main touching app/content/web | builds wasm, deploys Worker `batna-web` |
 | `cloud-deploy.yml` | push to main touching server/protocol/Cargo + manual | deploys Worker `batna-cloud` |
 | `release.yml` | manual only | alpha/beta/stable release (§ 6) |
+| `audit.yml` | weekly (Mon 05:17 UTC) + manual, **never on PRs** | `cargo audit` against RustSec (audit F23). A finding → fix in its own PR. |
 
 Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 `CLOUDFLARE_API_TOKEN` is missing. Check that the step "Deploy" succeeded.
@@ -238,7 +239,7 @@ Medicine "Internal Medicine Postgraduate Lectures" (2025) and research slides:
 | `dm` | Diabetes, Metabolism, Lipids (ch. 6) | part 3 | 23 |
 | `geri` | Geriatrics (ch. 7) | part 4 | 13 |
 | `neph` | Nephrology (ch. 8) | part 5 | 14 |
-| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 16 (L01–L16) |
+| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 20 (L01–L20) |
 
 Semester 1 = `res`, `hem`, `hb`. Not started (no material yet): `cvs`,
 `chest`, `neuro`, `trop`, `img`, `bioch`, `phys`, `path`, `clinpath`,
@@ -346,6 +347,13 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
   Today»). Tests must use `history.system()`, not `history.back()`.
 - Android crash reports start from Settings › Your data › diagnostics
   (WebViewGuard records renderer loss and exit reasons).
+- Journey test (audit F23): `store/backend/journey_tests.rs` runs first
+  launch → grade → restart → restore → two-device sync on one review state.
+  What only a device can show (process death, TalkBack, 200% text…) is the
+  manual matrix in `docs/NATIVE_QA.md`; record runs there against their
+  exact commit.
+- Shared plumbing with Kabar: `docs/INFRA_PARITY.md` (audit F24, same file
+  in both repos). A fix there says in its PR whether Kabar needs it too.
 
 ## 10. Feature notes (what exists, where, and why)
 
@@ -459,6 +467,24 @@ Add a bullet here when a PR adds something a later agent must know.
   push with `Store::settle_outbox`). Settings › Sync shows a «تغييرات ما
   اترفعتش» card (`cloud/held_ui.rs`) with «ابعتهم تاني» (back to the
   outbox) and «سيبهم» (asks first). Newest 1000 kept.
+- **One answer, one item** (audit F15, 2026-11-11): a local answer newer
+  than everything in the log updates only its item (`Scheduler::step`,
+  `core/src/replay.rs`); anything out of order, a reload, sync, import or
+  retraction still replays the whole log. Tests assert step = full replay
+  after every answer (random grades/origins/gaps; and a debug check in every
+  app test). Release timings (hosted Linux, `replay_timings`): 10k answers
+  3.6 ms full vs 0.05 ms step; 50k 20 ms vs 0.25 ms; 100k 43 ms vs 0.6 ms.
+- **Live content switches are bounded** (audit F17): old libraries are
+  leaked (screens hold `&'static`), so a run switches packs live at most
+  `MAX_LIVE_RELOADS` (2) times; a later pack opens at the next start.
+- **Two connections, bounded waits** (audit F16): the UI's connection
+  waits at most `UI_BUSY` (750 ms) for the sync engine's write lock, then
+  the write fails into the screen's own saving/retry state; the sync
+  connection waits up to `SYNC_BUSY` (5 s) (`store/contention.rs`). Before,
+  SQLite's default failed a UI write at once while sync wrote. Every
+  transaction begins IMMEDIATE (the connection's default behaviour), since
+  a read that turns into a write mid-transaction fails without waiting;
+  the export's snapshot stays a deferred read.
 - **Export is one moment** (audit F14): `Store::export` reads every table
   in one read transaction, so a sync merge on the other connection can't
   tear it.
@@ -564,14 +590,19 @@ further; don't change FSRS or Undo speculatively.
   a build of that commit, not a version or a feed. Unzip twice, move Batna.app
   to Applications, `xattr -dr com.apple.quarantine /Applications/Batna.app`.
   Fails rather than ship unsigned if `BATNA_MAC_CERT_*` is missing.
+- Linux apt installs in CI and Coverage go through `scripts/ci-apt-install.sh`:
+  it walks a mirror list (Azure, archive.ubuntu.com, kernel.org, MIT), skips
+  names that don't resolve, rewrites every file in `/etc/apt` (including
+  `apt-mirrors.txt`) to the chosen mirror and time-boxes each try (on
+  2026-11-11 both ubuntu.com names failed DNS and jobs hung for an hour).
 
 ## 11. Current state (2026-11-09)
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 100 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
-| Content | 9 courses, 137 lectures, 137 lesson files; `res` L01–L16 written; L02–L11 checked against the enriched lecture copies, and res.L02 against its video recording (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
+| Content | 9 courses, 141 lectures, 141 lesson files; `res` L01–L20 written; L02–L11 checked against the enriched lecture copies, and res.L02 against its video recording (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
@@ -584,7 +615,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | What |
 |---|---|
-| Content | Courses with no material yet; `res` L17–L20 from the lecture PDFs (L12–L16 done); everything stays `unverified` until he approves in-app |
+| Content | Courses with no material yet; `res` L21 is the revision session (practice sets, no new lecture); L01–L20 done; everything stays `unverified` until he approves in-app |
 | Glossary / audit | Split remaining ICP/SBP stop-gap senses into `course:` entries; 2026-11-04 audit leftovers (ambiguous abbreviations, quote cuts) only if Mohamed asks |
 | Mac | Mohamed (2026-11-07) kept being asked for the login Keychain password ("app.batna.cloud") after updates and wants it gone for good. Main builds keep the session in `cloud-session.json` (since #612), and the prompt was traced to local builds of an older checkout; confirm on his Mac after the next update. If it returns, the cause is each build being signed differently (Keychain ACL): fix with a stable signing identity or storage not tied to the build |
 | UX backlog | Weak-topic insight on Today; configurable review shortcuts with conflict checks; a focused phone Study view (keep exit, progress, reveal, grades; don't collide with Mac Focus Mode); medical reading polish (mixed Arabic/English, zoomable figures, optional haptics); a warning before a new session replaces a live one |
@@ -609,6 +640,11 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-11: res.L07.121 covers the slide 72 table (Drug A/B × insulin, 523 patients) the lecturer showed without explaining; open L03–L11 questions (L11 quiz 92–94 keys, L09 video-only plagiarism slides) kept as they are, unverified.
+- 2026-11-11: journey test (launch → grade → restart → restore → two-device sync), native QA matrix `docs/NATIVE_QA.md`, weekly `cargo audit`, and the shared `docs/INFRA_PARITY.md` checklist (engineering audit F23, F24, § 9).
+- 2026-11-11: a local answer updates only its own item instead of replaying the whole log (43 ms → 0.6 ms at 100k answers); live content switches are bounded to 2 a run; UI writes wait up to 750 ms for the sync lock instead of failing at once (engineering audit F15–F17, § 10 Study sessions).
+- 2026-11-11: res.L18 (non-parametric tests, correlation, regression; 37 slides), res.L19 (introduction to EBM; 125 slides) and res.L20 (critical appraisal; 69 slides) from the enriched lecture PDFs (video frames + Arabic notes): slide text retyped from the images in `courses/res/text/L18–L20.txt`, Arabic notes kept beside them as `LNN-notes-ar.txt`; 45 + 115 + 100 items, 4 + 7 + 6 lessons; glossary gains ANOVA, MLogRA, CME, LBP, EBHC, GP, EMBASE, DARE, PIER, ARI, NNH, ES, PRISMA, STARD.
+- 2026-11-11: res.L17 (hypothesis testing, 33 slides from the enriched lecture PDF): 52 items, 5 lessons; calculators `chi_square` (2×2) and `t_test` (one sample, paired, two groups) reproduce the slides' coffee X² and haemoglobin t examples.
+- 2026-11-11: CI apt installs go through `scripts/ci-apt-install.sh` (first resolving mirror of Azure, archive.ubuntu.com, kernel.org, MIT; time-boxed) after ubuntu.com DNS failures hung CI for an hour.
 - 2026-11-11: res.L16 (normal distribution curve and Z-score): 47 items, 4 lessons; the `z_score` calculator now uses the lecture's bands (ordinary within ±2, unusual beyond ±2, extreme beyond ±3) instead of ±1.96. Slide 34's 13-answer key has no questions in the deck, so it was left out.
 - 2026-11-11: res.L03–L11 checked against the enriched lecture copies and the four revisions: 63 new items (tags `lecturer`, `revision`), lecturer's explanations in lessons, res.L08.020 second correct option fixed.
 - 2026-11-11: res.L02 gap-fill from the lecture's video recording (same 70 slides plus the lecturer's spoken points and the 8 pages of Arabic notes): 16 items, lesson 7; calculators `disease_duration`, `death_rate`, `perinatal_mr`, `mmr` (`calc/frequency.rs`); new slide verdicts in `courses/res/verdicts/L02.tsv`.

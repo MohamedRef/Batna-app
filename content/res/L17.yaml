@@ -1,0 +1,676 @@
+schema: batna.content/v1
+lecture: res.L17
+title: Hypothesis testing and tests of significance
+author: Nahla Ahmed Gamaleldin
+book: { chapter: 1, pages: [1, 33] }
+topics:
+  - { id: chance, title: "Chance, error and the overview of study designs" }
+  - { id: steps, title: "Types and steps of statistical analysis; choosing the test" }
+  - { id: hypotheses, title: "Null and alternative hypotheses" }
+  - { id: significance, title: "Alpha, rejection region, degrees of freedom, critical value, P value and the decision" }
+  - { id: choosing, title: "Which test: chi-square, t-tests and ANOVA" }
+  - { id: chi_square, title: "The chi-square test (coffee and hypertension)" }
+  - { id: t_test, title: "The one-sample t-test (haemoglobin in pregnancy)" }
+items:
+  - id: res.L17.001
+    kind: card
+    topic: chance
+    front: "Why do we need a test of significance after a study?"
+    back: "Because no study is perfect, there is always a chance of error: the result may be an extreme one that happened by chance. p < 0.05 means about five chances in 100 that such an extreme result happened by chance."
+    src: { page: 2, quote: "Because no study is perfect, there is always a chance for error; perhaps this is one of five chances in 100 (p < 0.05), that such an extreme result has happened by chance" }
+    status: unverified
+  - id: res.L17.002
+    kind: card
+    topic: chance
+    front: "How do we rule out the effect of chance on a study result?"
+    back: "Formulate a hypothesis, then test it appropriately (with the right test of significance)."
+    src: { page: 3, quote: "To rule out the effect of chance\nFormulate a hypothesis\nTesting it appropriately" }
+    status: unverified
+  - id: res.L17.003
+    kind: mcq
+    topic: chance
+    stem: "Investigators study people and their exposures \"in nature\" (they assign nothing) and include a comparison group. Which family of study design is this?"
+    options:
+      - "Experimental"
+      - "Descriptive observational"
+      - "Analytic observational"
+      - "Community trial"
+      - "Case series"
+    answer: 2
+    why:
+      - "Experimental studies randomly allocate subjects and the investigator assigns the exposure."
+      - "Descriptive studies have no comparison group."
+      - "Observational with a comparison group = analytic: case-control and cohort."
+      - "A community trial is experimental."
+      - "A case series is descriptive (no comparison group)."
+    src: { page: 4, quote: "OBSERVATIONAL\nInvestigators study people and exposures \"in nature\"\nComparison Group?\nNO: DESCRIPTIVE\nCorrelational\nCase Series\nCase Reports\nCross-Sectional\nYES: ANALYTIC\nCase-Control\nCohort" }
+    status: unverified
+  - id: res.L17.004
+    kind: table
+    topic: chance
+    title: "Overview of epidemiologic study designs"
+    columns: ["Family", "Key feature", "Examples"]
+    rows:
+      - ["Experimental", "Random allocation; the investigator assigns treatment or exposure", "Randomized control trials, community trials, laboratory trials"]
+      - ["Observational, descriptive", "People and exposures studied \"in nature\"; no comparison group", "Correlational, case series, case reports, cross-sectional"]
+      - ["Observational, analytic", "People and exposures studied \"in nature\"; with a comparison group", "Case-control, cohort"]
+    blanks: [[0, 2], [1, 2], [2, 1], [2, 2]]
+    src: { page: 4, quote: "Overview of Epidemiologic Study Designs\nEXPERIMENTAL\nRandom allocation of study subjects; Investigator assigns treatment or exposure\nRandomized Control Trials\nCommunity Trials\nLaboratory Trials\nOBSERVATIONAL\nInvestigators study people and exposures \"in nature\"\nComparison Group?\nNO: DESCRIPTIVE\nCorrelational\nCase Series\nCase Reports\nCross-Sectional\nYES: ANALYTIC\nCase-Control\nCohort" }
+    status: unverified
+  - id: res.L17.005
+    kind: card
+    topic: steps
+    front: "What are the two types of statistical analysis?"
+    back: "**Differences**: compare one variable (the dependent) between groups. **Associations**: compare two or more variables within the same group, one dependent and the others independent."
+    src: { page: 5, quote: "Types of statistical analysis\nDifferences: Compare one variable (the dependent)\nAssociations: Compare two or more variables, one of them must be dependent and the others are independents within the same group." }
+    status: unverified
+  - id: res.L17.006
+    kind: mcq
+    topic: steps
+    stem: "In one group of patients, a researcher studies whether smoking (yes/no) is related to lung cancer (yes/no). Which type of statistical analysis is this?"
+    options:
+      - "Differences"
+      - "Associations"
+      - "Descriptive only"
+      - "Sampling"
+      - "Screening"
+    answer: 1
+    why:
+      - "Differences compare one dependent variable between groups."
+      - "Two variables in the same group, one dependent (lung cancer) and one independent (smoking): an association."
+      - "Testing a relation is analysis, not description only."
+      - "Sampling is how subjects are chosen, not a type of analysis."
+      - "Screening finds disease early; it is not an analysis type."
+    src: { page: 5, quote: "Associations: Compare two or more variables, one of them must be dependent and the others are independents within the same group." }
+    status: unverified
+  - id: res.L17.007
+    kind: order
+    topic: steps
+    prompt: "Order the steps of statistical analysis."
+    steps:
+      - "Formulate hypotheses (H0 and H1)"
+      - "Determine the type of the statistical test"
+      - "Determine the significance"
+    src: { page: 6, quote: "Formulate hypotheses\nH0 Null hypothesis: No significant difference/association\nH1 or Ha Alternative hypothesis: Significant difference/association\nDetermine the type of the statistical test.\nDetermine the significance according to:" }
+    status: unverified
+  - id: res.L17.008
+    kind: enumerate
+    topic: steps
+    prompt: "The significance of a result is determined according to which three things?"
+    points:
+      - "The calculated value of the test"
+      - "The P value"
+      - "The confidence interval (CI)"
+    pass: 3
+    hook: "«حِسبة، P، وفترة»: الـ Calculated value، الـ P value، والـ CI."
+    src: { page: 6, quote: "Determine the significance according to:\nCalculated value of the test.\nP value\nConfidence interval (CI)" }
+    status: unverified
+  - id: res.L17.009
+    kind: cloze
+    topic: steps
+    text: "H0, the {{c1::null}} hypothesis: no significant difference or association. H1 or Ha, the {{c2::alternative}} hypothesis: a significant difference or association."
+    src: { page: 6, quote: "H0 Null hypothesis: No significant difference/association\nH1 or Ha Alternative hypothesis: Significant difference/association" }
+    status: unverified
+  - id: res.L17.010
+    kind: enumerate
+    topic: steps
+    prompt: "Choosing the statistical test depends on which three things?"
+    points:
+      - "The type of the dependent variable (and, if quantitative, its distribution)"
+      - "The number of variables (one, two, more than two)"
+      - "The number of groups (one, two, more than two)"
+    pass: 3
+    hook: "«نوع، وعدد، وعدد»: نوع الـ dependent variable (وتوزيعه لو كمّي)، عدد الـ variables، وعدد الـ groups."
+    src: { page: 7, quote: "Determination of the statistical test depends on:\nType of the dependent variable, and the distribution of the quantitative one.\nNumber of variables (one, two and more than two)\nNumber of groups (one, two and more than two)" }
+    status: unverified
+  - id: res.L17.011
+    kind: mcq
+    topic: steps
+    stem: "Which of the following does NOT decide which statistical test to use?"
+    options:
+      - "Whether the dependent variable is qualitative or quantitative"
+      - "Whether a quantitative dependent variable is normally distributed"
+      - "The number of groups compared"
+      - "The number of variables"
+      - "The P value the researcher hopes to get"
+    answer: 4
+    why:
+      - "The type of the dependent variable is the first thing the test table looks at."
+      - "The distribution of a quantitative variable decides parametric or not."
+      - "One, two or more than two groups changes the test."
+      - "One, two or more variables changes the test."
+      - "The P value is the result of the test, never a reason to choose it."
+    src: { page: 7, quote: "Determination of the statistical test depends on:\nType of the dependent variable, and the distribution of the quantitative one.\nNumber of variables (one, two and more than two)\nNumber of groups (one, two and more than two)" }
+    status: unverified
+  - id: res.L17.012
+    kind: card
+    topic: hypotheses
+    front: "What is a statistical hypothesis, and how do H0 and Ha differ?"
+    back: "A claim about a population. The null hypothesis H0 holds a statement of equality (≥, = or ≤); the alternative Ha holds a statement of inequality (<, ≠ or >). They are complementary: if one is false, the other is true."
+    src: { page: 8, quote: "A statistical hypothesis is a claim about a population.\nNull hypothesis H0 contains a statement of equality such as ≥ , = or ≤.\nAlternative hypothesis Ha contains a statement of inequality such as < , ≠ or >\nComplementary Statements\nIf I am false, you are true\nIf I am false, you are true" }
+    status: unverified
+  - id: res.L17.013
+    kind: mcq
+    topic: hypotheses
+    stem: "Which sign can a null hypothesis (H0) contain?"
+    options:
+      - "≠"
+      - "<"
+      - ">"
+      - "≤"
+      - "None of them"
+    answer: 3
+    why:
+      - "≠ is inequality: it belongs to the alternative hypothesis."
+      - "< is inequality: alternative hypothesis."
+      - "> is inequality: alternative hypothesis."
+      - "H0 holds a statement of equality: ≥, = or ≤."
+      - "H0 always contains one of the equality signs."
+    src: { page: 8, quote: "Null hypothesis H0 contains a statement of equality such as ≥ , = or ≤.\nAlternative hypothesis Ha contains a statement of inequality such as < , ≠ or >" }
+    status: unverified
+  - id: res.L17.014
+    kind: card
+    topic: hypotheses
+    front: "Drug A and drug B both lower blood pressure. Write H0 and HA."
+    back: "H0: there is no difference in the reduction of blood pressure achieved by drug A and B; the mean decrease with A (X̄1) equals the mean decrease with B (X̄2). HA: there is a difference; the mean decrease with drug A is different from that of drug B."
+    src: { page: 9, quote: "Example:\nHo : There is no difference in the reduction of blood pressure achieved by drug A and B. the mean decrease of blood pressure achieved by drug A ( X1) is equal to the mean decrease in blood pressure achieved by drug B (X 2).\nHA: There is a difference in the reduction of blood pressure achieved by drug A and B. The mean decrease in blood pressure achieved by drug A is different from that of drug B." }
+    status: unverified
+  - id: res.L17.015
+    kind: mcq
+    topic: hypotheses
+    stem: "A trial compares the mean fall in blood pressure with drug A and drug B. Which is the null hypothesis?"
+    options:
+      - "Drug A lowers blood pressure more than drug B"
+      - "The mean decrease in blood pressure with drug A equals that with drug B"
+      - "The mean decrease with drug A is different from that with drug B"
+      - "Drug B lowers blood pressure more than drug A"
+      - "Both drugs lower blood pressure"
+    answer: 1
+    why:
+      - "That is a one-sided alternative hypothesis."
+      - "H0 states no difference: X̄1 = X̄2."
+      - "That is HA, the alternative hypothesis."
+      - "That is also an alternative (one-sided)."
+      - "That is not about a difference between them at all."
+    src: { page: 9, quote: "Example:\nHo : There is no difference in the reduction of blood pressure achieved by drug A and B. the mean decrease of blood pressure achieved by drug A ( X1) is equal to the mean decrease in blood pressure achieved by drug B (X 2).\nHA: There is a difference in the reduction of blood pressure achieved by drug A and B. The mean decrease in blood pressure achieved by drug A is different from that of drug B." }
+    status: unverified
+  - id: res.L17.016
+    kind: card
+    topic: hypotheses
+    front: "Why is the null hypothesis distribution drawn with a rejection region in both tails?"
+    back: "We would reject H0 on simple inequality of means: the first mean could be greater than the second, or the second greater than the first. So for α = 0.05 each tail holds 0.025, and the middle 1 − α = 0.95 is the non-rejection region."
+    src: { page: 11, quote: "Null hypothesis ( H0 )\nWe would reject the Null Hypothesis based upon simple inequality of means.\nThe first mean could be greater than the second or the second greater than the first.\nOur Null Hypothesis distribution for an α = .05 would look something like this\n1 - α = 0.95\nα = .05" }
+    status: unverified
+  - id: res.L17.017
+    kind: card
+    topic: significance
+    front: "What is alpha (α), and when is it chosen?"
+    back: "Alpha is the level of significance: it sets the rejection region. It is your decision before you conduct the research. In a two-sided test it is split into α/2 in each tail, and the critical values mark where the rejection regions start."
+    src: { page: 10, quote: "Alpha : level of significance\nRejection region\nYour decision before you conduct a research\nCritical Value\nCritical Value\nRejection Region\nNonrejection Region\nRejection Region\nα /2\nα /2" }
+    status: unverified
+  - id: res.L17.018
+    kind: mcq
+    topic: significance
+    stem: "When should the level of significance (α) be fixed?"
+    options:
+      - "Before conducting the research"
+      - "After seeing the P value"
+      - "After calculating the test statistic"
+      - "When writing the discussion"
+      - "Only if the result is not significant"
+    answer: 0
+    why:
+      - "The slide: alpha is your decision before you conduct a research."
+      - "Choosing α after seeing P lets the data decide the rule."
+      - "The test value is compared with a critical value that α already fixed."
+      - "Too late: the decision rule must come first."
+      - "α is chosen in advance whatever the result."
+    src: { page: 10, quote: "Alpha : level of significance\nRejection region\nYour decision before you conduct a research" }
+    status: unverified
+  - id: res.L17.019
+    kind: cloze
+    topic: significance
+    text: "Usually a small value for α is chosen, {{c1::0.01}} or {{c2::0.05}}. In medicine, α is {{c3::0.05}} or smaller."
+    src: { page: 13, quote: "Usually a small value for α is chosen as 0.01, 0.05. In medicine, α is 0.05 or smaller." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L17.020
+    kind: card
+    topic: significance
+    front: "Per the slides, what does choosing α = 0.05 mean?"
+    back: "That we are 95% sure that we made the correct decision (α = 0.05 pairs with 95% confidence)."
+    src: { page: 13, quote: "Choosing a value for α of 0.05 means that we are 95% sure that we made the correct decision" }
+    status: unverified
+    update: { text: "Strictly, α is the risk we accept of a type I error: rejecting H0 when it is true. With α = 0.05, a true H0 is wrongly rejected about 5 times in 100. It is not the chance that this particular decision is right. In the exam, write the slide's wording.", ref: "Altman, Practical Statistics for Medical Research, 1991" }
+  - id: res.L17.021
+    kind: card
+    topic: significance
+    front: "Define degrees of freedom."
+    back: "The number of data values that are free to vary; in other terms, the number of independent pieces of information on which the parameter estimate is based."
+    src: { page: 14, quote: "Degree of freedom is the number of data values that are free to vary, in other terms, degree of freedom is a measure of the number of independent pieces of information on which the parameter estimate is based." }
+    status: unverified
+  - id: res.L17.022
+    kind: table
+    topic: significance
+    title: "Degrees of freedom by test"
+    columns: ["Test", "Degrees of freedom"]
+    rows:
+      - ["One-sample t-test (or paired t on the differences)", "n − 1"]
+      - ["Student's t-test, two independent samples", "n1 + n2 − 2"]
+      - ["Chi-square test (contingency table)", "(c − 1)(r − 1)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 14, quote: "D.f = n – 1.\nD.f.= n1 + n2 – 2.\nD.f. = (c-1) (r-1)" }
+    status: unverified
+  - id: res.L17.023
+    kind: mcq
+    topic: significance
+    stem: "Serum cholesterol is compared between two independent groups of 15 and 12 patients with Student's t-test. How many degrees of freedom does the test have?"
+    options:
+      - "14"
+      - "25"
+      - "26"
+      - "27"
+      - "11"
+    answer: 1
+    why:
+      - "n − 1 of the first group only."
+      - "Two independent samples: n1 + n2 − 2 = 15 + 12 − 2 = 25."
+      - "n1 + n2 − 1: one too many."
+      - "That is the total number of patients, not the df."
+      - "n − 1 of the second group only."
+    src: { page: 14, quote: "D.f.= n1 + n2 – 2." }
+    status: unverified
+  - id: res.L17.024
+    kind: card
+    topic: significance
+    front: "What is the critical value?"
+    back: "The tabulated value of the test that shows whether the result of the statistical test lies in the non-rejection area of the curve, for the chosen α. It is compared with the value obtained by the test statistic."
+    src: { page: 15, quote: "The critical value is the tabulated value of the test that indicates whether the results obtained by the appropriate statistical test lies in the non-rejection area of the curve according to the chosen value of (α).\nThe critical value is compared to the value obtained by the test statistics." }
+    status: unverified
+  - id: res.L17.025
+    kind: mcq
+    topic: significance
+    stem: "From the slide's t table, what is the critical t for 24 degrees of freedom at the 5% level of significance?"
+    options:
+      - "1.711"
+      - "2.064"
+      - "2.492"
+      - "2.797"
+      - "2.060"
+    answer: 1
+    why:
+      - "1.711 is the 10% column."
+      - "df 24, 5% column: 2.064 (the value used in the haemoglobin example)."
+      - "2.492 is the 2% column."
+      - "2.797 is the 1% column."
+      - "2.060 is df 25, not 24."
+    src: { page: 16, quote: "| degrees of freedom | 20% | 10% | 5% | 2% | 1% | 0.1% |\n|---|---|---|---|---|---|---|\n| 1 | 3.078 | 6.314 | 12.706 | 31.821 | 63.657 | 636.619 |\n| 2 | 1.886 | 2.920 | 4.303 | 6.965 | 9.925 | 31.598 |\n| 3 | 1.638 | 2.353 | 3.182 | 4.541 | 5.841 | 12.941 |\n| 4 | 1.533 | 2.132 | 2.776 | 3.747 | 4.604 | 8.610 |\n| 5 | 1.476 | 2.015 | 2.571 | 3.365 | 4.032 | 6.859 |\n| 6 | 1.440 | 1.943 | 2.447 | 3.143 | 3.707 | 5.959 |\n| 7 | 1.415 | 1.895 | 2.365 | 2.998 | 3.499 | 5.405 |\n| 8 | 1.397 | 1.860 | 2.306 | 2.896 | 3.355 | 5.041 |\n| 9 | 1.383 | 1.833 | 2.262 | 2.821 | 3.250 | 4.781 |\n| 10 | 1.372 | 1.812 | 2.228 | 2.764 | 3.169 | 4.587 |\n| 11 | 1.363 | 1.796 | 2.201 | 2.718 | 3.106 | 4.437 |\n| 12 | 1.356 | 1.782 | 2.179 | 2.681 | 3.055 | 4.318 |\n| 13 | 1.350 | 1.771 | 2.160 | 2.650 | 3.012 | 4.221 |\n| 14 | 1.345 | 1.761 | 2.145 | 2.624 | 2.977 | 4.140 |\n| 15 | 1.341 | 1.753 | 2.131 | 2.602 | 2.947 | 4.073 |\n| 16 | 1.337 | 1.746 | 2.120 | 2.583 | 2.921 | 4.015 |\n| 17 | 1.333 | 1.740 | 2.110 | 2.567 | 2.898 | 3.965 |\n| 18 | 1.330 | 1.734 | 2.101 | 2.552 | 2.878 | 3.922 |\n| 19 | 1.328 | 1.729 | 2.093 | 2.539 | 2.861 | 3.883 |\n| 20 | 1.325 | 1.725 | 2.086 | 2.528 | 2.845 | 3.850 |\n| 21 | 1.323 | 1.721 | 2.080 | 2.518 | 2.831 | 3.819 |\n| 22 | 1.321 | 1.717 | 2.074 | 2.508 | 2.819 | 3.792 |\n| 23 | 1.319 | 1.714 | 2.069 | 2.500 | 2.807 | 3.767 |\n| 24 | 1.318 | 1.711 | 2.064 | 2.492 | 2.797 | 3.745 |" }
+    status: unverified
+  - id: res.L17.026
+    kind: card
+    topic: significance
+    front: "On the t table, what happens to the 5% critical t as the degrees of freedom rise?"
+    back: "It falls: 12.706 at df 1, 2.042 at df 30, 1.980 at df 120 and 1.960 at infinity (the normal distribution's value). Bigger samples need a smaller t to be significant."
+    src: { page: 16, quote: "| degrees of freedom | 20% | 10% | 5% | 2% | 1% | 0.1% |\n|---|---|---|---|---|---|---|\n| 1 | 3.078 | 6.314 | 12.706 | 31.821 | 63.657 | 636.619 |\n| 2 | 1.886 | 2.920 | 4.303 | 6.965 | 9.925 | 31.598 |\n| 3 | 1.638 | 2.353 | 3.182 | 4.541 | 5.841 | 12.941 |\n| 4 | 1.533 | 2.132 | 2.776 | 3.747 | 4.604 | 8.610 |\n| 5 | 1.476 | 2.015 | 2.571 | 3.365 | 4.032 | 6.859 |\n| 6 | 1.440 | 1.943 | 2.447 | 3.143 | 3.707 | 5.959 |\n| 7 | 1.415 | 1.895 | 2.365 | 2.998 | 3.499 | 5.405 |\n| 8 | 1.397 | 1.860 | 2.306 | 2.896 | 3.355 | 5.041 |\n| 9 | 1.383 | 1.833 | 2.262 | 2.821 | 3.250 | 4.781 |\n| 10 | 1.372 | 1.812 | 2.228 | 2.764 | 3.169 | 4.587 |\n| 11 | 1.363 | 1.796 | 2.201 | 2.718 | 3.106 | 4.437 |\n| 12 | 1.356 | 1.782 | 2.179 | 2.681 | 3.055 | 4.318 |\n| 13 | 1.350 | 1.771 | 2.160 | 2.650 | 3.012 | 4.221 |\n| 14 | 1.345 | 1.761 | 2.145 | 2.624 | 2.977 | 4.140 |\n| 15 | 1.341 | 1.753 | 2.131 | 2.602 | 2.947 | 4.073 |\n| 16 | 1.337 | 1.746 | 2.120 | 2.583 | 2.921 | 4.015 |\n| 17 | 1.333 | 1.740 | 2.110 | 2.567 | 2.898 | 3.965 |\n| 18 | 1.330 | 1.734 | 2.101 | 2.552 | 2.878 | 3.922 |\n| 19 | 1.328 | 1.729 | 2.093 | 2.539 | 2.861 | 3.883 |\n| 20 | 1.325 | 1.725 | 2.086 | 2.528 | 2.845 | 3.850 |\n| 21 | 1.323 | 1.721 | 2.080 | 2.518 | 2.831 | 3.819 |\n| 22 | 1.321 | 1.717 | 2.074 | 2.508 | 2.819 | 3.792 |\n| 23 | 1.319 | 1.714 | 2.069 | 2.500 | 2.807 | 3.767 |\n| 24 | 1.318 | 1.711 | 2.064 | 2.492 | 2.797 | 3.745 |\n| 25 | 1.316 | 1.708 | 2.060 | 2.485 | 2.787 | 3.725 |\n| 26 | 1.315 | 1.706 | 2.056 | 2.479 | 2.779 | 3.707 |\n| 27 | 1.314 | 1.703 | 2.052 | 2.473 | 2.771 | 3.690 |\n| 28 | 1.313 | 1.701 | 2.048 | 2.467 | 2.763 | 3.674 |\n| 29 | 1.311 | 1.699 | 2.043 | 2.462 | 2.756 | 3.659 |\n| 30 | 1.310 | 1.697 | 2.042 | 2.457 | 2.750 | 3.646 |\n| 40 | 1.303 | 1.684 | 2.021 | 2.423 | 2.704 | 3.551 |\n| 60 | 1.296 | 1.671 | 2.000 | 2.390 | 2.660 | 3.460 |\n| 120 | 1.289 | 1.658 | 1.980 | 2.358 | 2.617 | 3.373 |\n| ∞ | 1.282 | 1.645 | 1.960 | 2.326 | 2.576 | 3.291 |" }
+    status: unverified
+  - id: res.L17.027
+    kind: card
+    topic: significance
+    front: "What is the P value, and how should it be reported?"
+    back: "The observed level of significance (the probability of chance). Rather than only stating \"significant\" or \"not significant\", it is preferable to report the exact probability, the P value."
+    src: { page: 17, quote: "P-value\nP-value is known as the observed level of significance (probability of the chance).\nInstead of stating our findings in the form of there is a significant difference or there is no significant difference, it is preferable to report the exact probability (referred to by P-value)" }
+    status: unverified
+    update: { text: "Precisely, P is the probability of a result at least as extreme as the one observed if H0 were true. It is not the probability that H0 is true, and it does not measure the size of an effect.", ref: "Wasserstein and Lazar, ASA statement on p-values, 2016" }
+  - id: res.L17.028
+    kind: mcq
+    topic: significance
+    stem: "The P value is also known as:"
+    options:
+      - "The level of significance chosen before the study"
+      - "The observed level of significance"
+      - "The critical value"
+      - "The degree of freedom"
+      - "The power of the study"
+    answer: 1
+    why:
+      - "That is α, fixed in advance; P comes from the data."
+      - "The slide: P-value is the observed level of significance (probability of the chance)."
+      - "The critical value comes from the table."
+      - "Degrees of freedom count independent pieces of information."
+      - "Power is 1 − β, not P."
+    src: { page: 17, quote: "P-value is known as the observed level of significance (probability of the chance)." }
+    status: unverified
+  - id: res.L17.029
+    kind: cloze
+    topic: significance
+    text: "Making a decision depends on the {{c1::critical value}}, which in turn depends on the {{c2::level of significance}} and the {{c3::degree of freedom}}."
+    src: { page: 18, quote: "Making a decision\nMaking a decision depends on the critical value which, in turn, depends on the level of significance and degree of freedom." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L17.030
+    kind: card
+    topic: significance
+    front: "How do you decide using the critical value?"
+    back: "If the test value is ≥ the critical value, reject the null hypothesis. If it is < the critical value, accept the null hypothesis: there is no significant difference in the parameter of interest between the 2 groups."
+    src: { page: 19, quote: "If the test value is ≥ to the critical value then a decision is made to reject the null hypothesis.\nIf the test value is < than the critical value, a decision is made to accept the null hypothesis and, concluding that there is no significant difference in the parameter of interest between the 2 groups." }
+    status: unverified
+    update: { text: "Statisticians say \"fail to reject H0\" rather than \"accept\": a non-significant result means the evidence was not strong enough, not that the groups are proven equal. Write the slide's wording in the exam.", ref: "Altman and Bland, BMJ 1995 (absence of evidence is not evidence of absence)" }
+  - id: res.L17.031
+    kind: mcq
+    topic: significance
+    stem: "A t-test gives a calculated t of 1.80; the critical value at 5% is 2.06. What is the decision?"
+    options:
+      - "Reject H0: significant difference"
+      - "Accept H0: no significant difference"
+      - "Accept H1 because t is positive"
+      - "Recalculate with a smaller α"
+      - "The result is significant at 10% only, so reject H0"
+    answer: 1
+    why:
+      - "Rejection needs the test value ≥ the critical value; 1.80 < 2.06."
+      - "1.80 < 2.06: the decision is to accept H0, no significant difference between the 2 groups."
+      - "The sign of t does not decide significance; its size against the critical value does."
+      - "α is fixed before the study; changing it afterwards is wrong."
+      - "The test was planned at 5%; the decision is made at that level."
+    src: { page: 19, quote: "If the test value is ≥ to the critical value then a decision is made to reject the null hypothesis.\nIf the test value is < than the critical value, a decision is made to accept the null hypothesis and, concluding that there is no significant difference in the parameter of interest between the 2 groups." }
+    status: unverified
+  - id: res.L17.032
+    kind: table
+    topic: choosing
+    title: "Type of statistical test"
+    columns: ["Variables and groups to be compared", "Appropriate test of difference"]
+    rows:
+      - ["Dependent variable qualitative", "Chi-square test"]
+      - ["Quantitative, normal, one group (vs the population)", "t-test with population"]
+      - ["Quantitative, normal, two different (independent) samples", "Student's t-test"]
+      - ["Quantitative, normal, two related samples (before and after)", "Paired t-test"]
+      - ["Quantitative, normal, more than two groups", "F-test (analysis of variance = ANOVA)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 12, quote: "Type of statistical test\n| Variables and groups to be compared | Appropriate statistical tests of difference |\n|---|---|\n| Dependent variable is qualitative | Chi-square test |\n| Dependent variable is quantitative, presented as mean, and is normally distributed: if | Parametric test: e.g., |\n| One group | t-test with population |\n| Two different (independent) samples | Student's t-test |\n| Two related samples (Before and After) | Paired t-test |\n| More than two groups | F-test (Analysis of variance = ANOVA) |" }
+    status: unverified
+  - id: res.L17.033
+    kind: mcq
+    topic: choosing
+    stem: "Serum cholesterol levels for two groups of patients (A and B) were recorded: mean 271 mg/dL in group A and 184 mg/dL in group B. To determine whether these measurements were significantly different, the most appropriate statistical test would be:"
+    options:
+      - "Student's t-test"
+      - "Correlation analysis"
+      - "Chi-square test"
+      - "F-test (Analysis of variance = ANOVA)"
+      - "Regression analysis"
+    answer: 0
+    why:
+      - "Two independent groups, a quantitative outcome shown as means: Student's t-test."
+      - "Correlation studies the relation between two quantitative variables, not a difference in means."
+      - "Chi-square is for a qualitative dependent variable."
+      - "ANOVA is for more than two groups."
+      - "Regression predicts one variable from another."
+    src: { page: 20, quote: "Serum cholesterol levels for two groups of patients (A and B) were recorded. The mean cholesterol level for a group A was 271 mg/Dl, and 184 mg/dl for group B. To determine whether or not these measurements were significantly different, the most appropriate statistical test would be:\nStudent's t- test\nCorrelation analysis\nChi-square test\nF-test (Analysis of variance = ANOVA)\nRegression analysis" }
+    status: unverified
+  - id: res.L17.034
+    kind: mcq
+    topic: choosing
+    stem: "Haemoglobin levels of a group of anaemic patients were measured before and after one month of drug X. To determine whether the measurements were significantly different, the most appropriate statistical test would be:"
+    options:
+      - "Student's t test"
+      - "Paired t-test"
+      - "Chi-square test"
+      - "Correlation analysis"
+      - "Regression analysis"
+    answer: 1
+    why:
+      - "Student's t is for two independent groups; these are the same people twice."
+      - "Two related samples (before and after in the same patients): paired t-test."
+      - "Haemoglobin is quantitative; chi-square is for qualitative variables."
+      - "Correlation tests a relation, not a before–after difference."
+      - "Regression predicts; it does not compare before and after."
+    src: { page: 21, quote: "Haemoglobin levels of a group of anaemic patients were measured before and after one-month intake of a drug X. To determine whether or not the drug was effective in treating anaemia (whether these measurements were significantly different), the most appropriate statistical test would be:\nStudent's t test\nPaired t-test\nChi-square test\nCorrelation analysis\nRegression analysis" }
+    status: unverified
+  - id: res.L17.035
+    kind: mcq
+    topic: choosing
+    stem: "A researcher wants to know if mean ages differ significantly between students at four colleges. Ages from a random sample in each college are normally distributed. Which test should be used?"
+    options:
+      - "Student's t test"
+      - "Paired t-test"
+      - "Chi-square test"
+      - "F-test (Analysis of variance = ANOVA)"
+      - "Regression analysis"
+    answer: 3
+    why:
+      - "Student's t compares two groups only."
+      - "Paired t is for two related samples."
+      - "Age is quantitative, not qualitative."
+      - "Means of more than two (four) groups, normally distributed: F-test, ANOVA."
+      - "Regression predicts one variable from another."
+    src: { page: 22, quote: "A researcher wants to know if there is a statistically significant difference in the mean ages between students at four colleges.\nThe researcher collects a random sample of students from each college and records their ages, which are normally distributed. What statistical test should the researcher use?\nStudent's t test\nPaired t-test\nChi-square test\nF-test (Analysis of variance = ANOVA)\nRegression analysis" }
+    status: unverified
+  - id: res.L17.036
+    kind: mcq
+    topic: choosing
+    stem: "A study compares the proportion of smokers (yes/no) between men and women. Which test of significance fits?"
+    options:
+      - "Student's t-test"
+      - "Paired t-test"
+      - "Chi-square test"
+      - "ANOVA"
+      - "t-test with population"
+    answer: 2
+    why:
+      - "t-tests need a quantitative dependent variable shown as a mean."
+      - "Paired t needs a quantitative variable measured twice."
+      - "Smoking yes/no is qualitative: chi-square test."
+      - "ANOVA compares means of more than two groups."
+      - "A one-sample t needs a quantitative mean and a known population mean."
+    src: { page: 12, quote: "| Dependent variable is qualitative | Chi-square test |" }
+    status: unverified
+  - id: res.L17.037
+    kind: mcq
+    topic: choosing
+    stem: "The mean Hb% of adult females in a community is known (89%). A sample of 25 pregnant women has a mean Hb% of 86%. Which test checks whether pregnancy affects Hb?"
+    options:
+      - "t-test with population (one-sample t-test)"
+      - "Student's t-test for two independent samples"
+      - "Paired t-test"
+      - "Chi-square test"
+      - "ANOVA"
+    answer: 0
+    why:
+      - "One group compared with a known population mean: t-test with population."
+      - "There is only one sample; the population mean is known, not sampled."
+      - "Nobody is measured twice."
+      - "Hb% is quantitative."
+      - "There are not more than two groups."
+    src: { page: 12, quote: "| One group | t-test with population |" }
+    status: unverified
+  - id: res.L17.038
+    kind: card
+    topic: chi_square
+    front: "When is the chi-square (X²) test used, and what does it conclude?"
+    back: "To test an association between categorical variables (a condition and a characteristic): whether there is a relation between two qualitative variables. Degrees of freedom = (c − 1)(r − 1). It concludes whether there is a significant association between the condition and the characteristic."
+    src: { page: 23, quote: "Chi – Square test (X2- test)\nX2- test is used to test an association between categorical variables which include a condition and characteristic.\nIt is used when we want to study whether there is a relation between two qualitative variables.\nDegree of freedom = (c-1) (r-1)\nThe final conclusion is reached is whether there is a significant association between certain condition and certain characteristic ." }
+    status: unverified
+  - id: res.L17.039
+    kind: mcq
+    topic: chi_square
+    stem: "In a 3 × 4 contingency table, the degree of freedom equals:"
+    options:
+      - "1"
+      - "5"
+      - "6"
+      - "7"
+      - "12"
+    answer: 2
+    why:
+      - "1 is the df of a 2 × 2 table."
+      - "5 adds (3 − 1) + (4 − 1); df multiplies them."
+      - "(c − 1)(r − 1) = (4 − 1)(3 − 1) = 3 × 2 = 6."
+      - "7 is the number of rows plus columns."
+      - "12 is the number of cells."
+    src: { page: 27, quote: "In a 3x4 contingency table, the degree of freedom equals:\n1\n5\n6\n7\n12" }
+    status: unverified
+  - id: res.L17.040
+    kind: mcq
+    topic: chi_square
+    stem: "Which of the following is TRUE about the chi-square test?"
+    options:
+      - "It requires that the expected value in each cell be at least 5"
+      - "It requires that the observed value in each cell be at least 5"
+      - "It compares the means of two groups"
+      - "It needs normally distributed data"
+      - "Its degrees of freedom are n − 1"
+    answer: 0
+    why:
+      - "The slide underlines it: the expected value in each cell must be at least 5."
+      - "The rule is about expected counts, not observed ones."
+      - "Means are compared with t-tests or ANOVA."
+      - "Chi-square works on counts of qualitative variables; no normality is needed."
+      - "Its df are (c − 1)(r − 1)."
+    src: { page: 28, quote: "Which of the following is TRUE about Chi-square test?\nIt requires that the expected value in each cell be at least 5\nIt requires that the observed value in each cell be at least 5" }
+    status: unverified
+  - id: res.L17.041
+    kind: calc
+    topic: chi_square
+    calculator: chi_square
+    stem: "Coffee and hypertension: of 50 people drinking more than 8 cups a day, 30 have hypertension and 20 normal blood pressure; of 45 who drink no coffee, 10 have hypertension and 35 normal blood pressure. Critical value at 5% with 1 df = 3.84."
+    question: "Apply the chi-square test. Is there a significant relation between excessive coffee and hypertension?"
+    inputs: {"a": 30, "b": 20, "c": 10, "d": 35, "alpha": "0.05"}
+    expect: "chi_square.significant"
+    interpret: "X² = 13.84 on the slide (13.87 without rounding) > 3.84, so reject H0 and accept H1: excessive coffee consumption is significantly associated with hypertension."
+    src: { page: 26, quote: "X2=Σ (30–21.05)2+ (10–18.94)2+(20–28.94)2+(35–26.05)2\n21.05 18.94 28.94 26.05\n= 3.80 + 4.21 + 2.76 + 3.07 = 13.84\n∵ Calculated X2 > critical value\n∴ reject Ho & accept H1" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L17.042
+    kind: card
+    topic: chi_square
+    front: "In the coffee table (>8 cups: 30 hypertensive of 50; total hypertensive 40 of 95), how is the expected count 21.05 found?"
+    back: "Expected = row total × column total / grand total = 50 × 40 / 95 = 21.05. Each cell then adds (O − E)² / E to X²: (30 − 21.05)² / 21.05 = 3.80."
+    src: { page: 26, quote: "X2=Σ (30–21.05)2+ (10–18.94)2+(20–28.94)2+(35–26.05)2\n21.05 18.94 28.94 26.05" }
+    status: unverified
+  - id: res.L17.043
+    kind: order
+    topic: chi_square
+    prompt: "Order the parts of a full answer to a test-of-significance problem."
+    steps:
+      - "Stating the hypothesis"
+      - "Formulae used"
+      - "Calculations"
+      - "Interpretation"
+    src: { page: 25, quote: "N.B. Your answer should include: Stating the hypothesis, formulae used, Calculations, and the interpretation)" }
+    status: unverified
+  - id: res.L17.044
+    kind: card
+    topic: chi_square
+    front: "State H0 and H1 for the coffee and hypertension problem."
+    back: "H0: there is no relation (association) between excessive coffee consumption and hypertension. H1: there is a significant relation between excessive coffee consumption and hypertension."
+    src: { page: 25, quote: "Apply the most appropriate test of significance to investigate if there is a relation between excessive coffee consumption and hypertension." }
+    status: unverified
+  - id: res.L17.045
+    kind: mcq
+    topic: chi_square
+    stem: "The calculated X² for the coffee table is 13.84; the critical value at 5% with 1 df is 3.84. What is the conclusion?"
+    options:
+      - "Reject H0 and accept H1: excessive coffee is associated with hypertension"
+      - "Accept H0: no association"
+      - "Coffee is proven to cause hypertension"
+      - "The test is invalid because X² is larger than 10"
+      - "Recalculate with 2 degrees of freedom"
+    answer: 0
+    why:
+      - "13.84 > 3.84: reject H0 and accept H1, a significant association."
+      - "H0 is accepted only when X² is below the critical value."
+      - "A test shows an association beyond chance, not causation."
+      - "There is no upper limit; a large X² means strong evidence against H0."
+      - "A 2 × 2 table has (2 − 1)(2 − 1) = 1 df."
+    src: { page: 26, quote: "∵ Calculated X2 > critical value\n∴ reject Ho & accept H1" }
+    status: unverified
+  - id: res.L17.046
+    kind: case
+    topic: chi_square
+    stem: "You are given the slide's coffee table: >8 cups, 30 with hypertension and 20 normal; no coffee, 10 with hypertension and 35 normal (95 people)."
+    steps:
+      - question: "Which test of significance fits?"
+        options: ["Student's t-test", "Chi-square test", "Paired t-test", "ANOVA"]
+        answer: 1
+        why: "Both variables (coffee group, hypertension) are qualitative: chi-square."
+      - question: "How many degrees of freedom?"
+        options: ["1", "2", "4", "94"]
+        answer: 0
+        why: "(c − 1)(r − 1) = (2 − 1)(2 − 1) = 1."
+      - reveal: "X² = 3.80 + 4.21 + 2.76 + 3.07 = 13.84; critical value 3.84."
+        question: "What is the decision?"
+        options: ["Reject H0 and accept H1", "Accept H0", "Cannot decide without the P value", "Use the t table"]
+        answer: 0
+        why: "Calculated X² 13.84 > critical 3.84: reject H0 and accept H1."
+    src: { page: 26, quote: "X2=Σ (30–21.05)2+ (10–18.94)2+(20–28.94)2+(35–26.05)2\n21.05 18.94 28.94 26.05\n= 3.80 + 4.21 + 2.76 + 3.07 = 13.84\n∵ Calculated X2 > critical value\n∴ reject Ho & accept H1" }
+    status: unverified
+  - id: res.L17.047
+    kind: card
+    topic: t_test
+    front: "Write the conclusion when the calculated t exceeds the critical value and group 1's mean is higher."
+    back: "Calculated t > critical value: reject H0 and accept H1. There is a statistically significant difference in the average scores of both groups (X̄1 > X̄2)."
+    src: { page: 29, quote: "Calculated t > critical value\nReject H0 and accept H1\nThere is statistical significant difference in the average scores of both groups (X1 > X2)" }
+    status: unverified
+  - id: res.L17.048
+    kind: card
+    topic: t_test
+    front: "Mean Hb% in adult females is 89%; a sample of 25 pregnant women has 86%. State the null hypothesis."
+    back: "No significant effect of pregnancy on Hb level: the difference between the population mean Hb% and the sample's is only by chance, i.e. 86% does not differ significantly from 89%."
+    src: { page: 31, quote: "Null hypothesis (Ho):\nNo significant effect of pregnancy on Hb level.\nI.e.: difference between the mean Hb% of total population and that of the sample is only by chance,\ni.e.: 86% does not differ significantly from 89%." }
+    status: unverified
+  - id: res.L17.049
+    kind: cloze
+    topic: t_test
+    text: "One-sample t-test: t = ({{c1::X̄ − μ}}) / ({{c2::S / √n}}); for the Hb example (86 − 89) / (7 / √25) gives |t| = {{c3::2.14}}."
+    src: { page: 32, quote: "t = (X - μ) / (S / √n) = (86 - 89) / (7 / √25) = 2.14" }
+    status: unverified
+  - id: res.L17.050
+    kind: calc
+    topic: t_test
+    calculator: t_test
+    stem: "Mean Hb% of adult females in a community is 89%. A sample of pregnant females: n = 25, X̄ = 86%, S = 7%."
+    question: "Does pregnancy have a significant effect on Hb level at the 5% level?"
+    inputs: {"test": "one_sample", "mean": 86, "sd": 7, "n": 25, "mu": 89, "alpha": "0.05"}
+    expect: "t_test.significant"
+    interpret: "|t| = 2.14 with df = n − 1 = 24; the critical t at 5% is 2.064. Since 2.14 > 2.064, accept H1: pregnancy has a significant effect on Hb level."
+    src: { page: 33, quote: "The value 2.14 is the calculated t and we compare it with the value of critical to obtained from t-Student table, which depends on:\n1. Level of significance and usually we choose 5% level.\n2. Degree of freedom (d.f) = n – 1.\nHere to with level of significant 5% and d.f. = 24 is 2.064.\nSince 2.14 > to\n(2.064), so we accept H1, i.e.: pregnancy has a significant effect on Hb level." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L17.051
+    kind: mcq
+    topic: t_test
+    stem: "The critical t taken from the Student t table depends on:"
+    options:
+      - "The level of significance and the degrees of freedom"
+      - "The sample mean and the standard deviation"
+      - "The calculated t only"
+      - "The population mean"
+      - "The P value"
+    answer: 0
+    why:
+      - "The slide: critical t depends on (1) the level of significance, usually 5%, and (2) df = n − 1."
+      - "Those make up the calculated t, not the critical one."
+      - "The calculated t is compared with the critical value; it does not set it."
+      - "μ is part of the calculated t."
+      - "P is a result of the test, not a table entry."
+    src: { page: 33, quote: "The value 2.14 is the calculated t and we compare it with the value of critical to obtained from t-Student table, which depends on:\n1. Level of significance and usually we choose 5% level.\n2. Degree of freedom (d.f) = n – 1." }
+    status: unverified
+  - id: res.L17.052
+    kind: mcq
+    topic: t_test
+    stem: "In the Hb example (n = 25), which critical value is used, and why?"
+    options:
+      - "2.064: df = 24 at the 5% level"
+      - "2.060: df = 25 at the 5% level"
+      - "1.960: the normal value"
+      - "2.797: df = 24 at the 1% level"
+      - "1.711: df = 24 at the 10% level"
+    answer: 0
+    why:
+      - "df = n − 1 = 24; the 5% column gives 2.064."
+      - "df is n − 1 = 24, not n."
+      - "1.96 is the value at infinite df; with 25 people the t table is used."
+      - "The example works at 5%, not 1%."
+      - "The example works at 5%, not 10%."
+    src: { page: 33, quote: "Here to with level of significant 5% and d.f. = 24 is 2.064.\nSince 2.14 > to\n(2.064), so we accept H1, i.e.: pregnancy has a significant effect on Hb level." }
+    status: unverified

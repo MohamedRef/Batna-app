@@ -1,0 +1,585 @@
+schema: batna.lesson/v1
+lecture: res.L18
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L18.lesson1
+    title: "الـ non-parametric: لما الداتا متمشيش على الـ bell"
+    hook: "الـ t-test بيحب الداتا normal زي الجرس. طب لو الداتا مايلة؟ ليها توأم تاني."
+    minutes: 8
+    pages: [2, 4]
+    topics: [nonparametric]
+    goals:
+      - "تعرف ميزتين الـ non-parametric tests وبيختبروا إيه"
+      - "تفتكر الـ normal curve: 68، 95، 99"
+      - "تطلّع لكل parametric test التوأم الـ non-parametric بتاعه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 2
+        quote: "Non parametric tests\nAdvantages:\n1- Don't assume a normal distribution (distribution free methods)\n2- Small sample sizes\nThey actually test the hypothesis that medians (or mean rank), rather than mean, are equal."
+        title: "ليه نسيب الـ t-test أصلًا؟"
+        text: |
+          الـ **parametric tests** (زي الـ t-test والـ ANOVA) بتفترض إن الداتا **normal**، وبتقارن **means**.
+
+          الـ ==non-parametric tests== ليها ميزتين:
+          - **مش بتفترض normal distribution**، عشان كده اسمها **distribution free methods**.
+          - تنفع مع الـ **small sample sizes**.
+
+          والأهم: هي بتختبر إن الـ ==medians (or mean rank)== متساوية، **مش** الـ means.
+      - kind: reveal
+        page: 2
+        quote: "They actually test the hypothesis that medians (or mean rank), rather than mean, are equal."
+        prompt: "ليه منطقي إن الـ test اللي مش بيفترض normal يقارن medians مش means؟"
+        answer: |
+          لأن في الداتا الـ **skewed** الـ mean بيتشد ناحية القيم المتطرفة (مريض واحد قعد 90 يوم في القسم يبوّظ الـ mean). الـ **median** والـ **ranks** مش بيتأثروا بيه.
+
+          عشان كده الـ non-parametric بيرتّب القيم (1، 2، 3…) ويشتغل على **الرتب**.
+      - kind: figure
+        page: 3
+        quote: "Empirical properties of the standard normal distribution\nBp 120±10 mm/Hg\n-2.58 -1.96 -1.00 0 1.00 1.96 2.58\n68% of area\n95% of area\n99% of area"
+        title: "الجرس: 68، 95، 99"
+        alt: "A bell-shaped normal curve centred on 0 (blood pressure 120). Vertical lines mark ±1, ±1.96 and ±2.58 standard deviations. Brackets underneath read 68% of area for ±1 SD (110 to 130), 95% for ±1.96 SD and 99% for ±2.58 SD."
+        caption: "ضغط متوسطه **120 ± 10**: حوالي **68%** بين 110 و130، و**95%** جوه ±1.96 SD، و**99%** جوه ±2.58 SD. ده الشكل اللي الـ parametric tests بتفترضه."
+        svg: |
+          <svg viewBox="0 0 330 222" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 149.6 L20 149.4 L25 149.1 L30 148.7 L35 148.2 L40 147.6 L45 146.7 L50 145.6 L55 144.2 L60 142.4 L65 140.3 L70 137.6 L75 134.4 L80 130.7 L85 126.3 L90 121.3 L95 115.7 L100 109.5 L105 102.7 L110 95.5 L115 88.0 L120 80.2 L125 72.5 L130 65.0 L135 57.9 L140 51.4 L145 45.8 L150 41.2 L155 37.8 L160 35.7 L165 35.0 L170 35.7 L175 37.8 L180 41.2 L185 45.8 L190 51.4 L195 57.9 L200 65.0 L205 72.5 L210 80.2 L215 88.0 L220 95.5 L225 102.7 L230 109.5 L235 115.7 L240 121.3 L245 126.3 L250 130.7 L255 134.4 L260 137.6 L265 140.3 L270 142.4 L275 144.2 L280 145.6 L285 146.7 L290 147.6 L295 148.2 L300 148.7 L305 149.1 L310 149.4 L315 149.6" class="fg-ink" fill="none"/>
+            <line x1="10" y1="150" x2="320" y2="150" class="fg-thin"/>
+            <line x1="165" y1="35" x2="165" y2="150" class="fg-thin"/>
+            <line x1="120" y1="80" x2="120" y2="150" class="fg-thin"/><line x1="210" y1="80" x2="210" y2="150" class="fg-thin"/>
+            <line x1="77" y1="126" x2="77" y2="150" class="fg-thin"/><line x1="253" y1="126" x2="253" y2="150" class="fg-thin"/>
+            <line x1="49" y1="143" x2="49" y2="150" class="fg-thin"/><line x1="281" y1="143" x2="281" y2="150" class="fg-thin"/>
+            <g class="t-sm" text-anchor="middle">
+              <text x="77" y="163">-1.96</text><text x="120" y="163">-1</text><text x="165" y="163">0</text><text x="210" y="163">+1</text><text x="253" y="163">+1.96</text>
+              <text x="40" y="163">-2.58</text><text x="290" y="163">+2.58</text>
+            </g>
+            <g class="t-sm t-mut" text-anchor="middle"><text x="120" y="70">110</text><text x="165" y="28">120</text><text x="210" y="70">130</text></g>
+            <line x1="120" y1="178" x2="210" y2="178" class="fg-arrow-acc" stroke-width="2"/><text x="165" y="175" text-anchor="middle" class="t-sm t-acc t-b">68%</text>
+            <line x1="77" y1="196" x2="253" y2="196" class="fg-arrow" stroke-width="2"/><text x="165" y="193" text-anchor="middle" class="t-sm t-b">95%</text>
+            <line x1="49" y1="214" x2="281" y2="214" class="fg-arrow" stroke-width="2"/><text x="165" y="211" text-anchor="middle" class="t-sm t-mut">99%</text>
+            <text x="320" y="20" text-anchor="end" class="t-sm t-b">BP 120 ± 10 mmHg</text>
+          </svg>
+      - kind: check
+        page: 3
+        quote: "Empirical properties of the standard normal distribution\nBp 120±10 mm/Hg\n-2.58 -1.96 -1.00 0 1.00 1.96 2.58\n68% of area\n95% of area\n99% of area"
+        question: "BP is 120 ± 10 mmHg and normally distributed. About what share of people lie between 110 and 130?"
+        options: ["68%", "95%", "99%", "50%"]
+        answer: 0
+        why:
+          - "صح: 110–130 = mean ± 1 SD = حوالي 68%."
+          - "الـ 95% محتاجة ±1.96 SD، يعني 100.4 لـ 139.6."
+          - "الـ 99% محتاجة ±2.58 SD."
+          - "50% هي اللي فوق الـ mean أو تحته، مش ±1 SD."
+      - kind: table
+        page: 4
+        quote: "| Comparison | Parametric Test | Non parametric test |\n|---|---|---|\n| One sample against the population | One sample t test | Kolmogrov Sminrov test |\n| Paired comparison (mean difference)--------one group | Paired t-test | Wilcoxon signed rank test |\n| 2 independent groups | Student t-test | Mann whitney |\n| 3 or more groups (A means) | ANOVA | Kruskall wallis |\n| Correlation (r) | Pearson | Spearman |"
+        title: "كل test وتوأمه"
+        columns: ["Comparison", "Parametric", "Non-parametric"]
+        rows:
+          - ["One sample vs population", "One-sample t-test", "Kolmogorov-Smirnov"]
+          - ["Paired (same group twice)", "Paired t-test", "Wilcoxon signed rank"]
+          - ["2 independent groups", "Student t-test", "Mann-Whitney"]
+          - ["3 or more groups", "ANOVA", "Kruskal-Wallis"]
+          - ["Correlation (r)", "Pearson", "Spearman"]
+        hide: [[1, 2], [2, 2], [3, 2], [4, 2]]
+      - kind: mnemonic
+        page: 4
+        quote: "| Paired comparison (mean difference)--------one group | Paired t-test | Wilcoxon signed rank test |\n| 2 independent groups | Student t-test | Mann whitney |\n| 3 or more groups (A means) | ANOVA | Kruskall wallis |\n| Correlation (r) | Pearson | Spearman |"
+        word: "WMKS"
+        parts:
+          - { key: "W", text: "Wilcoxon signed rank: نفس الناس مرتين (paired) ← بدل الـ paired t-test." }
+          - { key: "M", text: "Mann-Whitney: مجموعتين مختلفتين ← بدل الـ Student t-test." }
+          - { key: "K", text: "Kruskal-Wallis: 3 مجموعات أو أكتر ← بدل الـ ANOVA." }
+          - { key: "S", text: "Spearman: correlation ← بدل الـ Pearson." }
+        hook: "«**W**ala **M**ish **K**ida **S**a7» 😄: Wilcoxon للـ paired، Mann-Whitney لاتنين، Kruskal لـ 3+، وSpearman للـ correlation. والـ «**S**igned» في Wilcoxon بتفكرك إن نفس الشخص بيمضي مرتين (قبل وبعد)."
+      - kind: aside
+        tone: trap
+        page: 4
+        quote: "| Paired comparison (mean difference)--------one group | Paired t-test | Wilcoxon signed rank test |\n| 2 independent groups | Student t-test | Mann whitney |"
+        text: |
+          أشهر فخ: **Wilcoxon** vs **Mann-Whitney**.
+
+          - نفس المرضى **قبل وبعد** العلاج = **paired** ← Wilcoxon signed rank.
+          - رجالة vs ستات، أو شغالين vs ربات بيوت = **independent** ← Mann-Whitney.
+
+          اسأل نفسك الأول: **نفس الناس ولا ناس تانيين؟**
+      - kind: update
+        page: 4
+        quote: "| One sample against the population | One sample t test | Kolmogrov Sminrov test |"
+        text: "الـ Kolmogorov-Smirnov one-sample test بيقارن **شكل التوزيع كله** بتوزيع مرجعي (وغالبًا بيتستخدم يشيك على الـ normality). كتب الإحصاء بتحط Wilcoxon signed rank (أو الـ sign test) لمقارنة median عينة واحدة برقم ثابت. في الامتحان: جدول الدكتورة."
+        ref: "Altman, Practical Statistics for Medical Research, 1991"
+      - kind: sort
+        page: 4
+        quote: "| Comparison | Parametric Test | Non parametric test |\n|---|---|---|\n| One sample against the population | One sample t test | Kolmogrov Sminrov test |\n| Paired comparison (mean difference)--------one group | Paired t-test | Wilcoxon signed rank test |\n| 2 independent groups | Student t-test | Mann whitney |\n| 3 or more groups (A means) | ANOVA | Kruskall wallis |\n| Correlation (r) | Pearson | Spearman |"
+        prompt: "حط كل test في عيلته."
+        bins: ["Parametric", "Non-parametric"]
+        cards:
+          - { text: "Paired t-test", bin: 0 }
+          - { text: "Wilcoxon signed rank", bin: 1 }
+          - { text: "ANOVA", bin: 0 }
+          - { text: "Kruskal-Wallis", bin: 1 }
+          - { text: "Pearson", bin: 0 }
+          - { text: "Spearman", bin: 1 }
+          - { text: "Mann-Whitney", bin: 1 }
+          - { text: "Student t-test", bin: 0 }
+        why: "الـ parametric بيفترض normal ويقارن means؛ التوأم الـ non-parametric بيشتغل على الـ ranks والـ medians."
+      - kind: check
+        page: 4
+        quote: "| 2 independent groups | Student t-test | Mann whitney |"
+        question: "Knowledge score about osteoporosis (not normally distributed): working women vs housewives. The most suitable test is:"
+        options: ["Mann-Whitney test", "Student t-test", "Wilcoxon signed rank test", "ANOVA"]
+        answer: 0
+        why:
+          - "صح: مجموعتين independent والداتا مش normal."
+          - "ده الاختيار لو الـ score كان normal."
+          - "ده للـ paired: نفس الستات مرتين."
+          - "الـ ANOVA لـ 3 مجموعات أو أكتر، وparametric كمان."
+      - kind: try
+        items: [res.L18.001, res.L18.003, res.L18.006, res.L18.007, res.L18.009]
+    recap:
+      - "الـ non-parametric: مش بتفترض normal (distribution free)، وتنفع للـ small samples، وبتقارن medians/mean ranks."
+      - "الـ normal curve: ±1 SD = 68%، ±1.96 = 95%، ±2.58 = 99%."
+      - "Paired ← Wilcoxon، 2 groups ← Mann-Whitney، 3+ ← Kruskal-Wallis، correlation ← Spearman، one sample ← Kolmogorov-Smirnov."
+    practice: [res.L18.001, res.L18.002, res.L18.003, res.L18.004, res.L18.005, res.L18.006, res.L18.007, res.L18.008, res.L18.009, res.L18.010]
+  # ------------------------------------------------------------------
+  - id: res.L18.lesson2
+    title: "الـ scatter والـ r: علاقة قوية ولا ضعيفة؟"
+    hook: "كل ما الوزن يزيد الضغط بيزيد؟ ارسم النقط الأول، وبعدين اسأل الـ r."
+    minutes: 9
+    pages: [5, 18]
+    topics: [correlation]
+    goals:
+      - "تعرف الـ correlation وأول خطوة فيه (الـ scatter)"
+      - "تقرأ الـ r: الإشارة اتجاه، والرقم قوة"
+      - "تختار Pearson أو Spearman، وتحسب r²"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 5
+        quote: "Simple Correlation (BI-Variate)\nCorrelation is a measure of the strength of association between two quantitative variables"
+        title: "الـ correlation = قوة العلاقة"
+        text: |
+          الـ ==correlation== (bivariate) = مقياس **لقوة العلاقة** بين **متغيرين كميين** (quantitative)، زي الطول والوزن.
+
+          واحد فيهم **independent (explanatory)** والتاني **dependent (response)**، زي الحرارة والنبض: الحرارة بتعلى ← النبض بيعلى.
+      - kind: explain
+        page: 7
+        quote: "In conducting correlation, we initially start by scatter plot to identify non linear relationship.\nAn important point to note is that correlation & regression describe only linear relationship"
+        title: "أول خطوة دايمًا: ارسم"
+        text: |
+          قبل أي رقم، ارسم ==scatter diagram==: كل مريض نقطة (x = الأول، y = التاني).
+
+          ليه؟ لأن الـ correlation والـ regression بيوصفوا **العلاقة الخطية بس** (==linear==). لو العلاقة منحنية (curvilinear)، الـ r ممكن يطلع صفر والعلاقة موجودة وقوية!
+      - kind: figure
+        page: 6
+        quote: "Scatter diagrams\nPositive linear r = +.82\nNegative linear r = -.70\nIndependent r = 0.00\nCurvilinear r = 0.00\nCurvilinear r = 0.00"
+        title: "4 أشكال للنقط"
+        alt: "Four small scatter plots stacked in a 2 by 2 grid. Top left: dots rising from left to right, labelled positive linear r = +0.82. Top right: dots falling, negative linear r = -0.70. Bottom left: a shapeless cloud, independent r = 0. Bottom right: dots forming an arch, curvilinear r = 0."
+        caption: "طالعة = **positive**، نازلة = **negative**، سحابة = مفيش علاقة. والقوس؟ علاقة واضحة جدًا، بس **مش خطية**، فالـ r = 0."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <g class="fg-thin"><path d="M20 15V105H155"/><path d="M180 15V105H315"/><path d="M20 135V225H155"/><path d="M180 135V225H315"/></g>
+            <g class="fg-dot-good"><circle cx="35" cy="95" r="3"/><circle cx="50" cy="85" r="3"/><circle cx="62" cy="88" r="3"/><circle cx="75" cy="70" r="3"/><circle cx="90" cy="66" r="3"/><circle cx="102" cy="50" r="3"/><circle cx="118" cy="45" r="3"/><circle cx="132" cy="30" r="3"/><circle cx="145" cy="25" r="3"/></g>
+            <g class="fg-dot-bad"><circle cx="195" cy="25" r="3"/><circle cx="210" cy="35" r="3"/><circle cx="222" cy="30" r="3"/><circle cx="238" cy="52" r="3"/><circle cx="252" cy="58" r="3"/><circle cx="265" cy="70" r="3"/><circle cx="280" cy="85" r="3"/><circle cx="295" cy="80" r="3"/><circle cx="305" cy="97" r="3"/></g>
+            <g class="fg-dot-acc"><circle cx="40" cy="160" r="3"/><circle cx="60" cy="200" r="3"/><circle cx="75" cy="150" r="3"/><circle cx="90" cy="185" r="3"/><circle cx="105" cy="165" r="3"/><circle cx="120" cy="205" r="3"/><circle cx="135" cy="155" r="3"/><circle cx="70" cy="178" r="3"/><circle cx="125" cy="182" r="3"/></g>
+            <g class="fg-dot-acc"><circle cx="190" cy="215" r="3"/><circle cx="205" cy="185" r="3"/><circle cx="220" cy="165" r="3"/><circle cx="237" cy="150" r="3"/><circle cx="252" cy="146" r="3"/><circle cx="268" cy="152" r="3"/><circle cx="283" cy="168" r="3"/><circle cx="297" cy="190" r="3"/><circle cx="310" cy="216" r="3"/></g>
+            <g class="t-sm" text-anchor="middle">
+              <text x="88" y="122" class="t-good">Positive linear r = +0.82</text>
+              <text x="248" y="122" class="t-bad">Negative linear r = -0.70</text>
+              <text x="88" y="243">Independent r = 0</text>
+              <text x="248" y="243">Curvilinear r = 0</text>
+            </g>
+          </svg>
+      - kind: check
+        page: 7
+        quote: "An important point to note is that correlation & regression describe only linear relationship"
+        question: "A scatter of age vs a lab value forms a clear arch (U-shape) and r = 0. The best conclusion is:"
+        options: ["There is no linear relation, but a curved one exists", "The two are completely unrelated", "There is a strong negative correlation", "The regression line will predict well"]
+        answer: 0
+        why:
+          - "صح: الـ r بيقيس الخطي بس، والقوس علاقة منحنية."
+          - "الـ scatter نفسه بيقول إن فيه علاقة؛ الـ r = 0 بينفي الخطية بس."
+          - "الـ negative كان هيطلع r أقل من صفر."
+          - "خط مستقيم على قوس هيطلع توقع وحش."
+      - kind: explain
+        page: 12
+        quote: "Correlation coefficient \"r\"\nIt gives us an estimate of the strength and direction of the linear association between two numerical variables.\nPositive Correlation +1.00\nInverse Correlation -1.00\nNo Correlation 0.00"
+        title: "الـ r بيقول حاجتين"
+        text: |
+          الـ ==correlation coefficient r== بيدينا تقدير لـ **قوة** و**اتجاه** العلاقة الخطية بين متغيرين رقميين. قيمته من **-1** لـ **+1**:
+
+          - **الإشارة = الاتجاه**: موجب = الاتنين بيطلعوا مع بعض؛ سالب (inverse) = واحد يطلع والتاني ينزل.
+          - **الرقم = القوة**: قريب من 1 (أو -1) = قوي؛ قريب من 0 = ضعيف.
+
+          يعني **-0.99 و +0.99 نفس القوة بالظبط**، الفرق في الاتجاه بس.
+      - kind: figure
+        page: 13
+        quote: "Correlation Coefficient\nShows Strength & Direction of Correlation\nStrong <- Weak | Weak -> Strong\n-1.0 -0.5 0.0 +0.5 +1.0\nNegative Correlation\nZero\nPositive Correlation"
+        title: "مسطرة الـ r"
+        alt: "A horizontal ruler from -1.0 to +1.0. The left half is red and labelled negative correlation, the right half green and labelled positive correlation, with zero in the middle. Arrows show strength growing from weak near 0 to strong at both ends. Bands under the ruler mark weak below 0.4, moderate 0.4 to 0.6 and strong 0.6 and above on each side."
+        caption: "القوة بتزيد كل ما تبعد عن الصفر **في الاتجاهين**. والإشارة بس بتقولك العلاقة طردية ولا عكسية."
+        svg: |
+          <svg viewBox="0 0 330 160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L18a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="92" y="22" text-anchor="middle" class="t-sm t-bad t-b">Negative (inverse)</text>
+            <text x="238" y="22" text-anchor="middle" class="t-sm t-good t-b">Positive</text>
+            <line x1="135" y1="36" x2="30" y2="36" class="fg-arrow" marker-end="url(#L18a)"/>
+            <line x1="195" y1="36" x2="300" y2="36" class="fg-arrow" marker-end="url(#L18a)"/>
+            <text x="165" y="40" text-anchor="middle" class="t-sm t-mut">stronger</text>
+            <line x1="20" y1="62" x2="165" y2="62" class="fg-arrow-bad" stroke-width="5"/>
+            <line x1="165" y1="62" x2="310" y2="62" class="fg-arrow" stroke-width="5"/>
+            <g class="fg-thin"><line x1="69" y1="52" x2="69" y2="72"/><line x1="117" y1="52" x2="117" y2="72"/><line x1="213" y1="52" x2="213" y2="72"/><line x1="261" y1="52" x2="261" y2="72"/><line x1="165" y1="48" x2="165" y2="76"/></g>
+            <g class="t-sm" text-anchor="middle">
+              <text x="20" y="88">-1</text><text x="69" y="88">-0.6</text><text x="117" y="88">-0.4</text><text x="165" y="88">0</text><text x="213" y="88">+0.4</text><text x="261" y="88">+0.6</text><text x="310" y="88">+1</text>
+            </g>
+            <g class="t-sm t-b" text-anchor="middle">
+              <text x="44" y="110">strong</text><text x="93" y="110">mod.</text><text x="141" y="110">weak</text>
+              <text x="189" y="110">weak</text><text x="237" y="110">mod.</text><text x="286" y="110">strong</text>
+            </g>
+            <text x="165" y="138" text-anchor="middle" class="t-sm t-mut">r = 0: no linear association · r = ±1: perfect</text>
+            <text x="165" y="154" text-anchor="middle" class="t-sm t-mut">(bands drawn evenly, not to scale)</text>
+          </svg>
+      - kind: table
+        page: 15
+        quote: "Strength of Correlation coefficient \"r\"\nr = 0 : no association\n0 < r <0.4 : weak association\n0.6 > r ≥ 0.4 : moderate association\n1 > r ≥ 0.6 : strong association\nr = 1 : perfect association"
+        title: "قوة الـ r (بالقيمة المطلقة)"
+        columns: ["r", "Association"]
+        rows:
+          - ["0", "No association"]
+          - ["0 to < 0.4", "Weak"]
+          - ["0.4 to < 0.6", "Moderate"]
+          - ["0.6 to < 1", "Strong"]
+          - ["1", "Perfect"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: tip
+        page: 15
+        quote: "0 < r <0.4 : weak association\n0.6 > r ≥ 0.4 : moderate association\n1 > r ≥ 0.6 : strong association"
+        text: |
+          احفظ رقمين بس: **0.4** و **0.6**.
+
+          تحت 0.4 ضعيف، من 0.4 لـ 0.6 متوسط، و0.6 وطالع قوي. وبص على الرقم **من غير الإشارة**.
+      - kind: check
+        page: 15
+        quote: "0 < r <0.4 : weak association\n0.6 > r ≥ 0.4 : moderate association\n1 > r ≥ 0.6 : strong association"
+        question: "Age and a test score: r = −0.45. This is:"
+        options: ["A moderate inverse association", "A weak inverse association", "A strong inverse association", "A moderate positive association"]
+        answer: 0
+        why:
+          - "صح: 0.45 بين 0.4 و0.6 = moderate، والسالب = inverse."
+          - "الضعيف تحت 0.4."
+          - "القوي من 0.6 وطالع."
+          - "الإشارة سالبة، يبقى inverse."
+      - kind: explain
+        page: 17
+        quote: "If the two variables are normally distributed Pearson correlation is calculated while if not normally distributed Spearman rank correlation is calculated."
+        title: "Pearson ولا Spearman؟"
+        text: |
+          نفس قاعدة الدرس اللي فات:
+
+          - الاتنين **normally distributed** ← ==Pearson correlation==.
+          - مش normal ← ==Spearman rank correlation== (بيشتغل على الرتب). وبينفع كمان مع متغير **رتبي** زي درجات شدة المرض.
+      - kind: explain
+        page: 18
+        quote: "Coefficient of determination (r2)\nIt is the square of (r) .\nit is expressed as % of variation in dependent variable accounted or explained by the other variable (independent)\nExample: if (r) is 0.9 between temperature & pulse, it means that 81% of variation in pulse is explained by temperature."
+        title: "r² = النسبة اللي اتفسرت"
+        text: |
+          الـ ==coefficient of determination (r²)== = **مربع الـ r**.
+
+          معناه: **كام %** من التغير (variation) في الـ **dependent** بيتفسر بالـ **independent**.
+
+          مثال الدكتورة: r = 0.9 بين الحرارة والنبض ← r² = 0.81 ← **81%** من التغير في النبض بتفسره الحرارة. والـ 19% الباقيين؟ عوامل تانية (قلق، أنيميا، أدوية…).
+      - kind: check
+        page: 18
+        quote: "Coefficient of determination (r2)\nIt is the square of (r) .\nit is expressed as % of variation in dependent variable accounted or explained by the other variable (independent)"
+        question: "r = −0.829 in 429 patients. This means that:"
+        options: ["69% of variation in the dependent parameter is explained by the independent one", "They are positively correlated and the link is weak", "They are inversely correlated and the link is weak", "They are positively correlated and the link is strong"]
+        answer: 0
+        why:
+          - "صح: 0.829² ≈ 0.687 ≈ 69%. (والعلاقة عكسية قوية، بس مفيش اختيار بيقول كده.)"
+          - "الإشارة سالبة، و0.83 قوي مش ضعيف."
+          - "عكسي صح، بس 0.83 أكبر من 0.6 = قوي."
+          - "قوي صح، بس السالب يعني inverse."
+      - kind: aside
+        tone: joke
+        page: 18
+        quote: "Example: if (r) is 0.9 between temperature & pulse, it means that 81% of variation in pulse is explained by temperature."
+        text: |
+          الـ r² زي ما تقول «81% من زعل مراتك سببه إنك نسيت عيد الجواز». الـ 19% الباقيين؟ لسه بتدوّر عليهم. 😄
+      - kind: try
+        items: [res.L18.012, res.L18.015, res.L18.017, res.L18.020, res.L18.025]
+    recap:
+      - "Correlation = قوة العلاقة الخطية بين متغيرين كميين؛ أول خطوة دايمًا scatter diagram."
+      - "الـ r من -1 لـ +1: الإشارة = الاتجاه، الرقم = القوة. 0.4 و0.6 هما الحدود."
+      - "r = 0: مفيش علاقة خطية (ممكن تكون منحنية)."
+      - "Normal ← Pearson، مش normal ← Spearman."
+      - "r² = % من تغير الـ dependent اللي بيفسره الـ independent (0.9 ← 81%)."
+    practice: [res.L18.011, res.L18.012, res.L18.013, res.L18.014, res.L18.015, res.L18.016, res.L18.017, res.L18.018, res.L18.019, res.L18.020, res.L18.021, res.L18.022, res.L18.023, res.L18.024, res.L18.025, res.L18.026, res.L18.027, res.L18.045]
+  # ------------------------------------------------------------------
+  - id: res.L18.lesson3
+    title: "الـ regression: من الوصف للتوقّع"
+    hook: "الـ correlation بيقولك العلاقة قوية. الـ regression بيقولك: لو الكوليسترول 180، الضغط هيبقى كام؟"
+    minutes: 7
+    pages: [19, 36]
+    topics: [regression]
+    goals:
+      - "تفرّق بين الـ correlation والـ regression"
+      - "تفهم Y = a + bX: الـ intercept والـ slope"
+      - "تستخدم المعادلة في التوقع"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 19
+        quote: "Regression line\nWe can draw a line through the scatter of points, as a simple summary of the relationship between these two variables.\nThis fitted line is called the \"regression line\".\nIt is used to predict the value of dependent variable when the value of independent variable is known."
+        title: "خط في نص النقط"
+        text: |
+          نقدر نرسم **خط** جوه سحابة النقط يلخص العلاقة. ده الـ ==regression line== (الـ fitted line، أحسن خط بيعدي وسط النقط).
+
+          فايدته: **نتوقع** قيمة الـ dependent لما نعرف قيمة الـ independent.
+      - kind: explain
+        page: 20
+        quote: "Correlation & regression\nRelationship between two variables (linear) extending to predict the value of one variable from the other.\nOne of the major differences between correlation & regression is the purpose of analysis whether it is to describe a relationship or to predict a value."
+        title: "الفرق في الغرض"
+        text: |
+          الاتنين بيدرسوا علاقة **linear** بين متغيرين. الفرق الأساسي في **الغرض** (==purpose of analysis==):
+
+          - **Correlation** ← **يوصف** العلاقة (قوية؟ طردية؟).
+          - **Regression** ← **يتوقع** قيمة متغير من التاني.
+      - kind: figure
+        page: 21
+        quote: "Scatter graph & regression line\nRegression line\ny\nX\na\nb\none unit"
+        title: "a و b على الرسمة"
+        alt: "A scatter of dots with a straight regression line rising to the right. Where the line meets the y axis it is labelled a, the intercept. A small step of one unit along x and the rise it causes along y is labelled b, the slope."
+        caption: "**a** = النقطة اللي الخط بيقطع فيها محور y (لما X = صفر). **b** = الخط بيطلع قد إيه لكل **unit** زيادة في X."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L18b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <path d="M40 15V170H320" class="fg-ink" fill="none"/>
+            <text x="30" y="20" text-anchor="end" class="t-sm t-b">y</text><text x="318" y="188" text-anchor="end" class="t-sm t-b">X</text>
+            <line x1="40" y1="140" x2="310" y2="40" class="fg-arrow-acc" stroke-width="2"/>
+            <g class="fg-dot-good"><circle cx="70" cy="120" r="3"/><circle cx="95" cy="132" r="3"/><circle cx="120" cy="100" r="3"/><circle cx="150" cy="110" r="3"/><circle cx="175" cy="80" r="3"/><circle cx="205" cy="92" r="3"/><circle cx="230" cy="60" r="3"/><circle cx="260" cy="70" r="3"/><circle cx="290" cy="42" r="3"/></g>
+            <circle cx="40" cy="140" r="4" class="fg-dot-acc"/>
+            <text x="30" y="144" text-anchor="end" class="t-sm t-acc t-b">a</text>
+            <path d="M130 106.7H184V86.7" class="fg-thin" fill="none"/>
+            <text x="157" y="122" text-anchor="middle" class="t-sm">one unit</text>
+            <text x="192" y="100" class="t-sm t-acc t-b">b</text>
+            <text x="250" y="30" text-anchor="middle" class="t-sm t-acc">Regression line</text>
+            <text x="200" y="160" text-anchor="middle" class="t-sm t-b">Y = a + bX</text>
+          </svg>
+      - kind: explain
+        page: 22
+        quote: "Y = a + b (x)\nwhere (a) is the intercept (constant)\nwhile b ( slope of line ) is value changing each time when X increases by one unit.\n(b) is the regression coefficient\nThe amount of change in the value of y when X increase by one unit"
+        title: "Y = a + bX"
+        text: |
+          - **a** = الـ ==intercept (constant)==: قيمة Y لما X = صفر.
+          - **b** = الـ **slope** (ميل الخط) = ==regression coefficient==: **مقدار التغير في y لما X تزيد unit واحدة**.
+
+          مثال: الضغط = 20 + 0.5 × الكوليسترول. كل 1 mg/dL زيادة في الكوليسترول ← الضغط يزيد **0.5 mmHg**.
+      - kind: reveal
+        page: 22
+        quote: "Y = a + b (x)\nwhere (a) is the intercept (constant)\nwhile b ( slope of line ) is value changing each time when X increases by one unit."
+        prompt: "Y = 20 + 0.5X. لو الكوليسترول (X) = 180، الضغط المتوقع كام؟"
+        answer: |
+          Y = 20 + 0.5 × 180 = 20 + 90 = **110 mmHg**.
+
+          الـ **intercept** (a = 20) هو قيمة Y لما X = صفر، والـ **slope** (b = 0.5) هو اللي بيتغير لكل unit زيادة في X. متنساش تضيف الـ a؛ الـ 90 لوحدها نص الإجابة بس.
+      - kind: aside
+        tone: trap
+        page: 36
+        quote: "All the followings are TRUE for regression line EXCEPT:\n1. It give an idea about the strength of correlation between two quantitative parameters\n2. It represent the best fit of dots in the scatter plot\n3. It can be used to predict the value of the dependent variable when the independent variable is known\n4. In positive correlation it runs upward and forward."
+        text: |
+          الـ **b مش هو الـ r**!
+
+          - الـ **b** = ميل الخط (بوحدات: mmHg لكل mg/dL).
+          - الـ **r** = القوة (من غير وحدات، بين -1 و+1).
+
+          خط مايل جدًا ممكن تكون النقط حواليه متبعترة (r ضعيف). عشان كده **الخط لوحده مبيديكش القوة**؛ القوة بتبان من قد إيه النقط لازقة في الخط.
+      - kind: check
+        page: 36
+        quote: "All the followings are TRUE for regression line EXCEPT:\n1. It give an idea about the strength of correlation between two quantitative parameters\n2. It represent the best fit of dots in the scatter plot\n3. It can be used to predict the value of the dependent variable when the independent variable is known\n4. In positive correlation it runs upward and forward."
+        question: "All are TRUE for the regression line EXCEPT:"
+        options: ["It gives an idea about the strength of correlation", "It represents the best fit of dots in the scatter plot", "It predicts the dependent variable when the independent is known", "In positive correlation it runs upward and forward"]
+        answer: 0
+        why:
+          - "صح، دي الغلط: القوة من الـ r، مش من الخط."
+          - "صح عن الخط: هو الـ best fit."
+          - "صح: ده استخدامه الأساسي (slide 19)."
+          - "صح: الـ slope الموجب بيطلع لفوق ناحية اليمين."
+      - kind: match
+        page: 22
+        quote: "Y = a + b (x)\nwhere (a) is the intercept (constant)\nwhile b ( slope of line ) is value changing each time when X increases by one unit.\n(b) is the regression coefficient"
+        prompt: "وصّل كل رمز بمعناه."
+        pairs:
+          - ["a", "Intercept: Y when X = 0"]
+          - ["b", "Change in Y per one-unit rise in X"]
+          - ["r", "Strength and direction of the linear relation"]
+          - ["r²", "% of variation in Y explained by X"]
+        why: "a وb من معادلة الـ regression؛ r وr² من الـ correlation."
+      - kind: try
+        items: [res.L18.028, res.L18.029, res.L18.030, res.L18.031]
+    recap:
+      - "الـ regression line = أحسن خط وسط النقط، بيتوقع الـ dependent من الـ independent."
+      - "Correlation يوصف، Regression يتوقع: الفرق في الغرض."
+      - "Y = a + bX: a = intercept، b = slope = regression coefficient = التغير في y لكل unit في X."
+      - "الخط لوحده مبيقولش القوة؛ القوة هي الـ r."
+    practice: [res.L18.028, res.L18.029, res.L18.030, res.L18.031, res.L18.032, res.L18.033, res.L18.034]
+  # ------------------------------------------------------------------
+  - id: res.L18.lesson4
+    title: "الـ multiple regression: عوامل كتير ونتيجة واحدة"
+    hook: "ضيق الشرايين سببه السن؟ التدخين؟ السكر؟ ولا كله مع بعض؟ هنا الـ multivariate بيشتغل."
+    minutes: 8
+    pages: [23, 37]
+    topics: [multivariate]
+    goals:
+      - "تعرف الـ multivariate analysis وليه بنحتاجه"
+      - "تختار linear ولا logistic حسب الـ dependent"
+      - "تعرف الـ dummy coding والـ odds ratio"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 24
+        quote: "% coronary artery narrowing\nAge\nSex\nLDL- C\nDM\nSmoking\nHTN\nUric acid\nObesity"
+        title: "مين بيضيّق الشريان؟"
+        alt: "A central box reading % coronary artery narrowing, with eight ovals around it: age, sex, LDL-C, DM, HTN, smoking, obesity and uric acid, each joined to the box by a line. A question mark sits above the box."
+        caption: "نتيجة واحدة (**dependent**) وعوامل كتير (**independent**) شغالة **في نفس الوقت**. نعرف أثر كل واحد لوحده إزاي؟"
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <g class="fg-thin">
+              <line x1="165" y1="115" x2="60" y2="30"/><line x1="165" y1="115" x2="165" y2="25"/><line x1="165" y1="115" x2="270" y2="30"/>
+              <line x1="165" y1="115" x2="45" y2="115"/><line x1="165" y1="115" x2="285" y2="115"/>
+              <line x1="165" y1="115" x2="60" y2="200"/><line x1="165" y1="115" x2="165" y2="205"/><line x1="165" y1="115" x2="270" y2="200"/>
+            </g>
+            <g class="fg-box">
+              <ellipse cx="60" cy="30" rx="38" ry="16"/><ellipse cx="165" cy="25" rx="38" ry="16"/><ellipse cx="270" cy="30" rx="38" ry="16"/>
+              <ellipse cx="45" cy="115" rx="38" ry="16"/><ellipse cx="60" cy="200" rx="38" ry="16"/>
+              <ellipse cx="165" cy="205" rx="38" ry="16"/><ellipse cx="270" cy="200" rx="38" ry="16"/>
+            </g>
+            <ellipse cx="285" cy="115" rx="38" ry="16" class="fg-good"/>
+            <rect x="105" y="95" width="120" height="40" rx="8" class="fg-acc"/>
+            <g class="t-sm" text-anchor="middle">
+              <text x="60" y="34">Age</text><text x="165" y="29">Sex</text><text x="270" y="34">LDL-C</text>
+              <text x="45" y="119">DM</text><text x="285" y="119">Smoking</text>
+              <text x="60" y="204">HTN</text><text x="165" y="209">Uric acid</text><text x="270" y="204">Obesity</text>
+              <text x="165" y="112" class="t-b">% coronary artery</text><text x="165" y="127" class="t-b">narrowing</text>
+            </g>
+          </svg>
+      - kind: explain
+        page: 25
+        quote: "Multivariate analysis\nMany health problems in medicine have many observations / subject.\nSo\nMultivariate analysis is to examine simultaneous effect of multiple variables (independent variables) on a certain outcome (dependent variable)."
+        title: "الـ multivariate analysis"
+        text: |
+          مشاكل الطب الحقيقية فيها **ملاحظات كتير لكل مريض**.
+
+          الـ ==multivariate analysis== بيدرس ==simultaneous effect== لـ **متغيرات مستقلة كتير** على **outcome واحد** (dependent).
+
+          يعني بدل ما تعمل 8 correlations لوحدهم، بتحطهم كلهم في معادلة واحدة.
+      - kind: table
+        page: 26
+        quote: "If dependent variable is numerical (quantitative) – use Multiple linear regression.\nIf nominal -Qualitative (dichotomy) --- use Multiple logistic regression."
+        title: "الـ dependent بيحدد النوع"
+        columns: ["Dependent variable", "Use"]
+        rows:
+          - ["Numerical (quantitative)", "Multiple linear regression"]
+          - ["Nominal qualitative (dichotomy)", "Multiple logistic regression"]
+        hide: [[0, 1], [1, 1]]
+      - kind: mnemonic
+        page: 26
+        quote: "If dependent variable is numerical (quantitative) – use Multiple linear regression.\nIf nominal -Qualitative (dichotomy) --- use Multiple logistic regression."
+        word: "NL"
+        parts:
+          - { key: "N", text: "Number outcome (HB%، % narrowing، ضغط) ← Linear." }
+          - { key: "L", text: "Life or death (yes/no: survival، recurrence، cure) ← Logistic." }
+        hook: "**رقم ← Linear، نعم/لا ← Logistic.** الـ «L» التانية في Logistic = «Life or death»."
+      - kind: explain
+        page: 27
+        quote: "1-Multiple linear regression\nThe Dependent Variable is numerical & independent either Numerical OR may include Nominal but dichotomous (0 & 1 coding – dummy coding).\nThe choice of which value is 1 & 0 is arbitrary and chosen by researcher to facilitate interpretation."
+        title: "الـ multiple linear regression"
+        text: |
+          - الـ **dependent**: لازم **numerical**.
+          - الـ **independent**: numerical، أو nominal بس **dichotomous** متكوّد **0 و1** (==dummy coding==)، زي ذكر/أنثى أو مدخن/مش مدخن.
+
+          مين ياخد 1 ومين ياخد 0؟ **arbitrary**، الباحث بيختار اللي يسهّل التفسير.
+      - kind: explain
+        page: 28
+        quote: "The equation for multiple regression\nThe equation is similar to simple regression (Y=a+ bx), yet, including more than one independent variables\nY= a + b1x1+ b2x2+ b3x3+......"
+        title: "نفس المعادلة… بس أطول"
+        text: |
+          زي الـ simple regression بالظبط، بس فيها أكتر من independent:
+
+          **Y = a + b1x1 + b2x2 + b3x3 + …**
+
+          مثال الدكتورة: **HB%** = α + b1 age + b2 height + b3 sex + b4 weight + b5 income + b6 family size + b7 smoking + … + b13 pregnancy.
+      - kind: explain
+        page: 30
+        quote: "Isolate the unique effect of one variable on the continuous dependent variable while taking into consideration that other variables are affecting it too."
+        title: "بيعمل حاجتين"
+        text: |
+          الـ multiple regression بيسمح لنا:
+
+          - **نستخدم متغيرات كتير مرة واحدة** نفسّر بيها تغير الـ dependent المتصل (continuous).
+          - **نعزل الأثر الخاص** (==unique effect==) لكل متغير، واحنا عاملين حساب إن الباقيين بيأثروا برضه.
+
+          يعني b للتدخين = أثر التدخين على الـ HB% **بعد** ما شلنا أثر السن والوزن والدخل…
+        remind: [res.L18.040]
+      - kind: check
+        page: 37
+        quote: "In multiple linear regression analysis the dependent variable should be:\n1. Nominal dichotomous\n2. Nominal multi-chotomous\n3. Quantitative\n4. Dummy coded"
+        question: "In multiple linear regression analysis the dependent variable should be:"
+        options: ["Quantitative", "Nominal dichotomous", "Nominal multi-chotomous", "Dummy coded"]
+        answer: 0
+        why:
+          - "صح: Linear = الـ outcome رقم."
+          - "الـ dependent الثنائي = logistic."
+          - "ده مش linear خالص."
+          - "الـ dummy coding للـ independent الثنائي، مش للـ dependent."
+      - kind: explain
+        page: 32
+        quote: "Dealing with qualitative dependent variable (dichotomy, 0&1) = two outcomes (e.g survival, recurrence, cure.........)\n, against independent variables (Nominal Dichotomy, Or Numerical).\nRegression coefficient in MLogRA is expressed as odds ratio"
+        title: "الـ multiple logistic regression (MLogRA)"
+        text: |
+          لما الـ **dependent** يبقى **qualitative ثنائي** (0 و1): نتيجتين بس، زي **survival** (عاش/مات)، **recurrence**، **cure**.
+
+          الـ independent: nominal dichotomous أو numerical.
+
+          والأهم للامتحان: الـ regression coefficient في الـ MLogRA بيطلع ==odds ratio==.
+      - kind: case
+        page: 26
+        quote: "If dependent variable is numerical (quantitative) – use Multiple linear regression.\nIf nominal -Qualitative (dichotomy) --- use Multiple logistic regression."
+        stem: "رسالة ماجستير في القلب: 300 مريض قسطرة، ومتسجّل لكل واحد السن، النوع، DM، HTN، LDL-C، التدخين، السمنة، وحمض اليوريك."
+        steps:
+          - question: "The outcome is % coronary narrowing (a number). Which analysis?"
+            options: ["Multiple linear regression", "Multiple logistic regression", "Pearson correlation only", "Mann-Whitney"]
+            answer: 0
+            why: "Outcome رقمي وعوامل كتير ← multiple linear regression."
+          - question: "How does sex enter the model?"
+            options: ["Dummy coded 0 and 1", "It cannot be entered", "As the dependent variable", "As a rank"]
+            answer: 0
+            why: "Nominal dichotomous independent ← dummy coding 0 و1، ومين ياخد 1 اختيار الباحث."
+          - question: "The outcome changes to 'significant stenosis: yes/no'. What now?"
+            options: ["Multiple logistic regression, results as odds ratios", "Multiple linear regression", "Kruskal-Wallis", "Paired t-test"]
+            answer: 0
+            why: "Outcome ثنائي ← logistic، والـ coefficient = odds ratio."
+      - kind: aside
+        tone: exam
+        page: 35
+        quote: "To estimate the direction and strength of the linear relationship between the systolic blood pressure (dependent variable) and blood cholesterol (independent variable) among a group of workers, which of the following tests is most suitable:\nA. Student t test\nB. Pearson correlation\nC. Chi-square test\nD. None of the above"
+        text: |
+          أسئلة الدكتورة في الآخر (اتحلّت في الشرح):
+
+          - r = -0.829 ← **69%** من التغير اتفسر (r²).
+          - knowledge score مش normal، مجموعتين ← **Mann-Whitney**.
+          - **اتجاه وقوة** علاقة الضغط بالكوليسترول ← **Pearson correlation**.
+          - الغلط عن الـ regression line ← إنه «بيدي فكرة عن القوة».
+          - الـ dependent في الـ multiple linear ← **quantitative**.
+      - kind: try
+        items: [res.L18.035, res.L18.036, res.L18.037, res.L18.040, res.L18.042]
+    recap:
+      - "Multivariate = أثر عوامل كتير في نفس الوقت على outcome واحد."
+      - "Dependent رقم ← multiple linear؛ dependent ثنائي (0/1) ← multiple logistic."
+      - "Independent ثنائي يدخل الـ linear بالـ dummy coding (0 و1، الاختيار arbitrary)."
+      - "Y = a + b1x1 + b2x2 + …؛ كل b = الأثر الخاص لمتغيره مع حساب الباقيين."
+      - "الـ coefficient في الـ MLogRA = odds ratio."
+    practice: [res.L18.035, res.L18.036, res.L18.037, res.L18.038, res.L18.039, res.L18.040, res.L18.041, res.L18.042, res.L18.043, res.L18.044]

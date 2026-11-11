@@ -120,6 +120,13 @@ impl ReviewBackend {
         self.store.conn.lock().unwrap().execute(&format!("DROP TABLE {table}"), []).unwrap();
     }
 
+    /// Test-only: sets this backend's store read-only (`true`) or writable
+    /// again, so a write fails and a retry after recovery can succeed.
+    #[cfg(test)]
+    pub fn set_read_only(&self, on: bool) {
+        self.store.set_read_only(on);
+    }
+
     /// Re-reads everything from the store.
     pub fn reload(&mut self) {
         self.settings = self.store.review_settings();

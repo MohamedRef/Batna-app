@@ -92,6 +92,7 @@ pub fn Result() -> Element {
 
     rsx! {
         crate::ui::Card { class: "result",
+            super::UnsavedNote {}
             // Submit is gone: land focus on the result so it is read out.
             h1 {
                 tabindex: "-1",
@@ -112,7 +113,8 @@ pub fn Result() -> Element {
                     " · " bdi { "{outcome.unanswered}" } " {tx::UNANSWERED}"
                 }
             }
-            if has_wrong {
+            // Only once the log really has them (bank/unsaved.rs).
+            if has_wrong && super::UNSAVED.read().is_empty() {
                 p { class: "small", {tx::SENT_TO_REVIEW} }
             }
             // The one next step sits with the score, not under the review list.

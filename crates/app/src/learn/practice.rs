@@ -66,6 +66,8 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
     let mut again = use_signal(|| before.again as usize);
     let mut started = use_signal(web_time::Instant::now);
     let mut reported = use_signal(|| false);
+    // The last grade didn't reach the log: the card stays, he rates again.
+    let mut save_failed = use_signal(|| false);
     use_effect(move || {
         // Nothing playable, or every card graded before he left mid-step.
         if n == n_before && !reported() {
@@ -86,7 +88,7 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
             let id = item.id.clone();
             let store = store.clone();
             let on_grade = move |grade: Grade| {
-                store.0.borrow_mut().record(ReviewEvent {
+                let saved = store.0.borrow_mut().record_logged(ReviewEvent {
                     item_id: id.clone(),
                     grade,
                     origin: Origin::Study,
@@ -95,6 +97,15 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
                     confidence: None,
                     reason: None,
                 });
+                // Not saved: keep this card and his answer, say so, and let
+                // him rate again (as the study player does, #244).
+                if saved.is_err() {
+                    save_failed.set(true);
+                    // Re-enables the rating row (study/grade.rs).
+                    *crate::study::SAVE_FAILS.write() += 1;
+                    return;
+                }
+                save_failed.set(false);
                 if grade == Grade::Again {
                     *again.write() += 1;
                 }
@@ -116,6 +127,9 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
             rsx! {
                 div { key: "{at()}-{item.id}", class: "ls-try-item",
                     p { class: "muted small", "{tx::TRY_OF} {at() + n_before + 1} {tx::OF} {n}" }
+                    if save_failed() {
+                        p { class: "verdict bad ls-try-note", role: "alert", {tx::TRY_SAVE_FAILED} }
+                    }
                     ItemView {
                         item,
                         lecture_title: lecture.title.clone(),

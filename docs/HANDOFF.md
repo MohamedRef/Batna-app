@@ -565,10 +565,10 @@ further; don't change FSRS or Undo speculatively.
   to Applications, `xattr -dr com.apple.quarantine /Applications/Batna.app`.
   Fails rather than ship unsigned if `BATNA_MAC_CERT_*` is missing.
 - Linux apt installs in CI and Coverage go through `scripts/ci-apt-install.sh`:
-  each try is time-boxed, and when the runner's Azure Ubuntu mirror does not
-  resolve or a try fails, it rewrites `/etc/apt` (including `apt-mirrors.txt`)
-  to `archive.ubuntu.com` (on 2026-11-11 the Azure mirror hung jobs for an
-  hour).
+  it walks a mirror list (Azure, archive.ubuntu.com, kernel.org, MIT), skips
+  names that don't resolve, rewrites every file in `/etc/apt` (including
+  `apt-mirrors.txt`) to the chosen mirror and time-boxes each try (on
+  2026-11-11 both ubuntu.com names failed DNS and jobs hung for an hour).
 
 ## 11. Current state (2026-11-09)
 
@@ -613,7 +613,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
-- 2026-11-11: CI apt installs time-boxed with a fallback to archive.ubuntu.com (`scripts/ci-apt-install.sh`) after the Azure mirror hung CI for an hour.
+- 2026-11-11: CI apt installs go through `scripts/ci-apt-install.sh` (first resolving mirror of Azure, archive.ubuntu.com, kernel.org, MIT; time-boxed) after ubuntu.com DNS failures hung CI for an hour.
 - 2026-11-11: res.L16 (normal distribution curve and Z-score): 47 items, 4 lessons; the `z_score` calculator now uses the lecture's bands (ordinary within ±2, unusual beyond ±2, extreme beyond ±3) instead of ±1.96. Slide 34's 13-answer key has no questions in the deck, so it was left out.
 - 2026-11-11: res.L03–L11 checked against the enriched lecture copies and the four revisions: 63 new items (tags `lecturer`, `revision`), lecturer's explanations in lessons, res.L08.020 second correct option fixed.
 - 2026-11-11: res.L02 gap-fill from the lecture's video recording (same 70 slides plus the lecturer's spoken points and the 8 pages of Arabic notes): 16 items, lesson 7; calculators `disease_duration`, `death_rate`, `perinatal_mr`, `mmr` (`calc/frequency.rs`); new slide verdicts in `courses/res/verdicts/L02.tsv`.

@@ -131,4 +131,6 @@ pub(super) static REGISTRY: &[CalcSpec] = &[
     research::Z_SCORE,
     sample_size::SURVEY,
     sample_size::TWO_PROPORTIONS,
+    diagnostic::PREDICTIVE,
+    diagnostic::POST_TEST,
 ];

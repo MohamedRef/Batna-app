@@ -232,7 +232,7 @@ Medicine "Internal Medicine Postgraduate Lectures" (2025) and research slides:
 | `dm` | Diabetes, Metabolism, Lipids (ch. 6) | part 3 | 23 |
 | `geri` | Geriatrics (ch. 7) | part 4 | 13 |
 | `neph` | Nephrology (ch. 8) | part 5 | 14 |
-| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 13 (L01–L12, L14) |
+| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 15 (L01–L15) |
 
 Semester 1 = `res`, `hem`, `hb`. Not started (no material yet): `cvs`,
 `chest`, `neuro`, `trop`, `img`, `bioch`, `phys`, `path`, `clinpath`,
@@ -309,7 +309,7 @@ The book PDFs, their extracted page text and page images are copyrighted and
 | `book/LNN.txt` | hepatology text by printed page (printed p = PDF p + 4) |
 | `courses/<id>/text/LNN.txt` | other courses: `=== book page N (PDF page M) ===` blocks + tesseract OCR of image pages |
 | `courses/<id>/img/pNNN.jpg` | page images at 200 dpi |
-| `courses/res/slides/*.pdf` | research slide decks (`src.page` = slide number). A lecture taught as several decks is one merged PDF (`res-L09.pdf` = budget 1–14 + ethics 15–85 + plagiarism 86–141); the original files are in `slides/originals/` |
+| `courses/res/slides/*.pdf` | research slide decks (`src.page` = slide number). A lecture taught as several decks is one merged PDF (`res-L09.pdf` = budget 1–14 + ethics 15–85 + plagiarism 86–141; `res-L13.pdf` = writing a paper 1–53 + Vancouver 54–120); the original files are in `slides/originals/` |
 | `../Lecture N ….pdf`, `../Dr Sahar Revision.pdf`, `../Revision Dr Eman Anwar.pdf`, `../Biostatistics Revision.pdf`, `../Revision Dr Heba.pdf` (project-folder root) | enriched lecture copies: frames of the recorded lecture (video slide numbering, not the deck's), then Arabic study notes of what the lecturer said (text layer: `pdftotext` + NFKC). Facts only said in the talk cite the slide being discussed and carry the tag `lecturer`; revision questions carry `revision` |
 | `anki/batna.apkg` | the latest Anki export |
 | `book-issues.md` | errors found in the book |
@@ -424,6 +424,15 @@ Add a bullet here when a PR adds something a later agent must know.
 - **Background time** (#753): returning from background
   (`visibilitychange`/`pageshow`) resets only the running item's answer clock.
   `study-visibility.test.cjs`.
+- **A save that fails is never silent** (engineering audit F02, 2026-11-11):
+  every grading entry point logs through `StudyStore::record_logged` and acts
+  on its result, never through the fire-and-forget `record`. Study, a lesson's
+  Try step (`learn/practice.rs`) and Oral (`oral/mod.rs`) keep the item and
+  the answer, say so and let him rate again; the question bank keeps refused
+  answers in `bank/unsaved.rs` (`UNSAVED`) with a «احفظها تاني» button and
+  hides «sent to review» until they are in the log. Tests use
+  `Store::set_read_only` (SQLite `query_only`) to refuse and then accept
+  writes.
 - **Not yet verified natively**: Android process death and OS kills, macOS
   relaunch, S24 Ultra lock/unlock, keyboard and Back with a running session.
 
@@ -458,9 +467,10 @@ as `pagesheet::Scope::book()` / `Scope::of_book()`.
   page sheet lists a page's notes (`PageNotes { book, page }`); the list
   «ملاحظاتك» is a lecture-stack page (`notes::PAGE`), sorted by the
   program's course order then page, filtered by course, searchable. Max 2000
-  characters; empty text deletes. Not in the Anki deck yet (Steps adds a
-  `Notes` field to its note types; Batna's would change the deck's note
-  types, so it is left for its own PR).
+  characters; empty text deletes. Notes on items go to Anki in a sixth
+  field, `Notes` (both note types; «My note» last on the back), from the
+  app's export and `batna-tools anki --own <backup>`; the first import after
+  2026-11-11 asks Anki to update the note types (docs/ANKI.md).
 - **Weak-fact marks** (`crate::weak`): computed from the review log (last
   answer Again = weak; a right answer clears), nothing new to sync. A lesson
   step whose page (in its own book) holds a weak item shows «راجعها تاني»;
@@ -532,7 +542,7 @@ further; don't change FSRS or Undo speculatively.
 |---|---|
 | App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 96 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
-| Content | 9 courses, 134 lectures, 134 lesson files; `res` L01–L12 and L14 written; L03–L11 checked against the enriched lecture copies (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
+| Content | 9 courses, 135 lectures, 135 lesson files; `res` L01–L12, L14 and L15 written; L03–L11 checked against the enriched lecture copies (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
@@ -545,7 +555,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | What |
 |---|---|
-| Content | Courses with no material yet; `res` L13, L15–L20 from the lecture PDFs (L12, L14 done) (L02–L11 checked against the enriched lecture copies); everything stays `unverified` until he approves in-app |
+| Content | Courses with no material yet; `res` L16–L20 from the lecture PDFs (L12–L15 done) (L02–L11 checked against the enriched lecture copies); everything stays `unverified` until he approves in-app |
 | Glossary / audit | Split remaining ICP/SBP stop-gap senses into `course:` entries; 2026-11-04 audit leftovers (ambiguous abbreviations, quote cuts) only if Mohamed asks |
 | Mac | Mohamed (2026-11-07) kept being asked for the login Keychain password ("app.batna.cloud") after updates and wants it gone for good. Main builds keep the session in `cloud-session.json` (since #612), and the prompt was traced to local builds of an older checkout; confirm on his Mac after the next update. If it returns, the cause is each build being signed differently (Keychain ACL): fix with a stable signing identity or storage not tied to the build |
 | UX backlog | Weak-topic insight on Today; configurable review shortcuts with conflict checks; a focused phone Study view (keep exit, progress, reveal, grades; don't collide with Mac Focus Mode); medical reading polish (mixed Arabic/English, zoomable figures, optional haptics); a warning before a new session replaces a live one |
@@ -570,8 +580,12 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-11: res.L03–L11 checked against the enriched lecture copies and the four revisions: 63 new items (tags `lecturer`, `revision`), lecturer's explanations in lessons, res.L08.020 second correct option fixed.
+- 2026-11-11: answers the store refuses outside the main Study session (lesson Try, Oral, question bank) are no longer lost silently: the item stays or the answer is kept with a retry (engineering audit F02, § 10 Study sessions).
+- 2026-11-11: his notes on items ride in the Anki deck (`Notes` field on Batna Basic and Batna Cloze; docs/ANKI.md), from Steps-app.
+- 2026-11-11: res.L15 (introduction to biostatistics: variables, tables, graphs, mean/median/mode, range and SD): 118 items, 7 lessons. Source is the video-frame PDF (142 slides + 7 pages of Arabic notes); slide text typed from the frames into `courses/res/text/L15.txt`, generators in `courses/res/gen-L15/`.
 - 2026-11-11: res.L12 (bias and confounders, 61 image-only slides from the lecture video, hand-transcribed in `courses/res/text/L12.txt`): 83 items with the 7-question quiz keyed from the lecturer's notes, 6 lessons with 7 drawn figures; glossary gains STD.
 - 2026-11-11: res.L14 (screening and diagnostic accuracy, 31 slides) written: 65 items, 5 lessons; calculators `predictive_values` (slide 25 formula) and `post_test_probability` (likelihood ratios; Deeks 2004, Fagan 1975, Jaeschke 1994); `diagnostic_accuracy` guides now cite the L14 slides; glossary gains AUC, ROC, TP/FP/FN/TN, SpPin, SnNout.
+- 2026-11-11: res.L13 (writing a scientific paper + Vancouver referencing, two decks merged as 120 slides): 101 items, 9 lessons; slide text hand-transcribed from the video-frame slides.
 - 2026-11-09: lesson reading settings («Aa»: text size, line spacing, line width per device), ported from Steps-app.
 - 2026-11-09: notes (synced `notes` table), weak-fact marks and go to page (Ctrl/⌘+G, per-course books) ported from Steps-app (§ 10 Notes, weak-fact marks, go to page).
 - 2026-11-09: from Steps-app: confidence and error reason on answers (migration 5), sure misses first in the mistakes log with a 2–7 day retest, and a catch-up plan for a review backlog (§ 10 Study signals).

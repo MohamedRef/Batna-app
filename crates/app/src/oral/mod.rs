@@ -286,12 +286,22 @@ fn Runner() -> Element {
     let settled = move || rated_at.peek().is_none_or(|at| at.elapsed() >= SETTLE);
     // Rates question `turn` once and shows the next one as unasked right away
     // (the driver's own task runs later), so a second tap finds nothing to grade.
-    let mut grade_turn = move |turn: u64, grade: Option<Grade>| {
-        if rate_current(&store.read(), turn, grade, *asked_at.peek()) {
+    // The last rating didn't reach the log: the answer stays up, rate again.
+    let mut save_failed = use_signal(|| false);
+    let mut grade_turn = move |turn: u64, grade: Option<Grade>| match rate_current(
+        &store.read(),
+        turn,
+        grade,
+        *asked_at.peek(),
+    ) {
+        Rated::Moved => {
+            save_failed.set(false);
             phase.set(Phase::Asking);
             rated_at.set(Some(Instant::now()));
             tts::stop();
         }
+        Rated::NotSaved => save_failed.set(true),
+        Rated::Stale => {}
     };
 
     let mut drive = move |step: Step| {
@@ -545,6 +555,9 @@ fn Runner() -> Element {
             if revealed {
                 crate::verify::VerifyBar { item_id: p.item_id.clone() }
             }
+            if save_failed() {
+                p { class: "verdict bad oral-save-failed", role: "alert", {tx::SAVE_FAILED} }
+            }
             div { class: "oral-actions",
                 if revealed {
                     button {
@@ -640,15 +653,30 @@ fn end_session() {
     }
 }
 
+/// What happened to a rating tap.
+#[derive(Debug, PartialEq)]
+enum Rated {
+    /// Logged (or heard without a rating) and the round moved on.
+    Moved,
+    /// That question is already past (a second tap): nothing done.
+    Stale,
+    /// The log refused it: the question stays so he can rate it again.
+    NotSaved,
+}
+
 /// Records the rating of question `turn` (none when heard without one) and
-/// moves on. `false` when that question is already past (a second tap).
-fn rate_current(store: &StudyStoreHandle, turn: u64, grade: Option<Grade>, asked_at: Instant) -> bool {
+/// moves on. The answer is logged first; the round moves on only once it is
+/// saved, so the summary never counts an answer the log doesn't have.
+fn rate_current(store: &StudyStoreHandle, turn: u64, grade: Option<Grade>, asked_at: Instant) -> Rated {
     let mut guard = SESSION.write();
-    let Some(s) = guard.as_mut() else { return false };
-    let Some(prompt) = s.rate_turn(turn, grade) else { return false };
+    let Some(s) = guard.as_mut() else { return Rated::Stale };
+    if turn != s.asked {
+        return Rated::Stale;
+    }
+    let Some(item_id) = s.current.as_ref().map(|e| e.prompt.item_id.clone()) else { return Rated::Stale };
     if let Some(grade) = grade {
-        store.0.borrow_mut().record(ReviewEvent {
-            item_id: prompt.item_id,
+        let saved = store.0.borrow_mut().record_logged(ReviewEvent {
+            item_id,
             grade,
             origin: Origin::Oral,
             at_ms: now_ms(),
@@ -656,8 +684,14 @@ fn rate_current(store: &StudyStoreHandle, turn: u64, grade: Option<Grade>, asked
             confidence: None,
             reason: None,
         });
+        if saved.is_err() {
+            return Rated::NotSaved;
+        }
     }
-    true
+    match s.rate_turn(turn, grade) {
+        Some(_) => Rated::Moved,
+        None => Rated::Stale,
+    }
 }
 
 /// One missed item in a study session, or its lecture's page when the study

@@ -216,6 +216,12 @@ fn keywords(id: &str) -> &'static str {
         "sample_size_two_proportions" => {
             "sample size power case control cohort kelsey fleiss epi info statcalc"
         }
+        "chi_square" => {
+            "chi square x2 test of significance association qualitative categorical contingency 2x2 hypothesis p value"
+        }
+        "t_test" => {
+            "student t test paired one sample independent means test of significance hypothesis p value"
+        }
         _ => "",
     }
 }

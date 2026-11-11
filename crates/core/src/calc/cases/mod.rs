@@ -25,6 +25,7 @@ mod renal;
 mod research;
 mod rheum;
 mod sample_size;
+mod significance;
 
 use std::collections::BTreeSet;
 
@@ -180,6 +181,7 @@ fn tables() -> Vec<Table> {
         blood::tables(),
         research::tables(),
         sample_size::tables(),
+        significance::tables(),
     ]
     .into_iter()
     .flatten()

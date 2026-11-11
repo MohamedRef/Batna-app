@@ -280,6 +280,8 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
         "sample_size_two_proportions" => {
             "محتاج كام case و control (أو exposed و unexposed) بالـ power اللي عايزه"
         }
+        "chi_square" => "فيه علاقة بين متغيرين نوعيين في جدول 2×2 ولا صدفة؟",
+        "t_test" => "الفرق بين المتوسطات حقيقي ولا صدفة؟ (عينة واحدة، paired، أو مجموعتين)",
         _ => return None,
     })
 }

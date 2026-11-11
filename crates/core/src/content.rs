@@ -256,6 +256,8 @@ pub const CALCULATORS: &[&str] = &[
     "z_score",
     "sample_size_survey",
     "sample_size_two_proportions",
+    "chi_square",
+    "t_test",
 ];
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

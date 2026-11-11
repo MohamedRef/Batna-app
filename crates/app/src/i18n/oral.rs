@@ -53,3 +53,4 @@ pub const MISSED: &str = "الأسئلة اللي محتاجة مراجعة";
 pub const NONE_MISSED: &str = "ولا سؤال وقع منك. شغل حلو!";
 pub const ANOTHER: &str = "جلسة كمان";
 pub const BACK: &str = "رجوع للإعدادات";
+pub const SAVE_FAILED: &str = "ما عرفتش أحفظ تقييمك، فلسه على نفس السؤال. قيّم تاني.";

@@ -209,6 +209,33 @@ fn a_round_asks_reveals_ticks_and_rates_into_review() {
 }
 
 #[test]
+fn a_rating_the_log_refuses_keeps_the_question_until_it_saves() {
+    let clock = Clock::new();
+    let _g = clock.0.enter();
+    let mut t = mount(&clock, quiet());
+    t.click("button.oral-start");
+    clock.pass(&mut t, 0.2);
+    t.click_text("button.oral-big", tx::SHOW);
+    clock.pass(&mut t, 0.2);
+    let first = session(&mut t, |s| s.current.clone().unwrap().prompt.item_id);
+    let backend = REVIEW.with(|r| r.borrow().as_ref().unwrap().backend.clone());
+    backend.borrow().set_read_only(true);
+    t.click_text("button.oral-big", tx::GOOD);
+    assert!(oral_reviews().is_empty(), "nothing was saved");
+    assert_eq!(t.texts("p.oral-save-failed"), [tx::SAVE_FAILED]);
+    assert_eq!(session(&mut t, |s| (s.asked, s.tally.good)), (1, 0), "same question, nothing counted");
+    assert_eq!(t.attr("div.oral-run", "data-phase").as_deref(), Some("answer"));
+    // Once the store takes writes again, rating again saves it exactly once.
+    backend.borrow().set_read_only(false);
+    t.click_text("button.oral-big", tx::GOOD);
+    let logged = oral_reviews();
+    assert_eq!(logged.len(), 1);
+    assert_eq!(logged[0].item_id, first);
+    assert_eq!(t.count("p.oral-save-failed"), 0);
+    assert_eq!(session(&mut t, |s| (s.asked, s.tally.good)), (2, 1));
+}
+
+#[test]
 fn the_timer_runs_to_the_answer_and_auto_continue_moves_on() {
     let clock = Clock::new();
     let _g = clock.0.enter();

@@ -427,6 +427,31 @@ fn a_try_step_grades_the_lectures_cards_as_real_reviews() {
 }
 
 #[test]
+fn a_try_grade_the_log_refuses_keeps_the_card_until_it_saves() {
+    let (l, at) = claim(|_, _, b| match b {
+        StepBody::Try { items } => {
+            items.len() >= 2
+                && items.iter().all(|i| practice::find(i).is_some_and(|(_, it)| it.body.kind() == "card"))
+        }
+        _ => false,
+    });
+    let StepBody::Try { items } = &l.steps[at].body else { unreachable!() };
+    let mut d = open(l, at);
+    d.click(|e| e.tag == "button" && e.text.contains(crate::i18n::study::REVEAL));
+    crate::store::shared().set_read_only(true);
+    d.click(|e| e.has_class("rating") && e.attr("data-grade") == Some("good"));
+    crate::store::shared().set_read_only(false);
+    assert!(d.html().contains(tx::TRY_SAVE_FAILED), "{}", d.html());
+    assert!(d.html().contains(&format!("{} 1 {} {}", tx::TRY_OF, tx::OF, items.len())), "same card");
+    assert!(saved(&l.id).is_none_or(|a| a.tries[at].graded.is_empty()), "nothing counted as graded");
+    // Rated again once the disk takes writes: logged once, on to card 2.
+    d.click(|e| e.has_class("rating") && e.attr("data-grade") == Some("good"));
+    assert!(!d.html().contains(tx::TRY_SAVE_FAILED));
+    assert_eq!(saved(&l.id).unwrap().tries[at].graded, items[..1].to_vec());
+    assert!(d.html().contains(&format!("{} 2 {} {}", tx::TRY_OF, tx::OF, items.len())));
+}
+
+#[test]
 fn a_reveal_opens_its_answer_and_unlocks_continue() {
     let (l, at) = claim(kind("reveal"));
     let StepBody::Reveal { answer, .. } = &l.steps[at].body else { unreachable!() };

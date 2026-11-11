@@ -565,9 +565,10 @@ further; don't change FSRS or Undo speculatively.
   to Applications, `xattr -dr com.apple.quarantine /Applications/Batna.app`.
   Fails rather than ship unsigned if `BATNA_MAC_CERT_*` is missing.
 - Linux apt installs in CI and Coverage go through `scripts/ci-apt-install.sh`:
-  each try is time-boxed, and if the runner's Azure Ubuntu mirror stalls it
-  retries once on `archive.ubuntu.com` (on 2026-11-11 the mirror hung jobs
-  for an hour).
+  each try is time-boxed, and when the runner's Azure Ubuntu mirror does not
+  resolve or a try fails, it rewrites `/etc/apt` (including `apt-mirrors.txt`)
+  to `archive.ubuntu.com` (on 2026-11-11 the Azure mirror hung jobs for an
+  hour).
 
 ## 11. Current state (2026-11-09)
 

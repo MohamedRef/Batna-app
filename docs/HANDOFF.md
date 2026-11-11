@@ -232,7 +232,7 @@ Medicine "Internal Medicine Postgraduate Lectures" (2025) and research slides:
 | `dm` | Diabetes, Metabolism, Lipids (ch. 6) | part 3 | 23 |
 | `geri` | Geriatrics (ch. 7) | part 4 | 13 |
 | `neph` | Nephrology (ch. 8) | part 5 | 14 |
-| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 12 (L01–L11, L14) |
+| `res` | Basics of Research | slide decks (21 lectures 3 Oct–12 Dec 2026) | 13 (L01–L12, L14) |
 
 Semester 1 = `res`, `hem`, `hb`. Not started (no material yet): `cvs`,
 `chest`, `neuro`, `trop`, `img`, `bioch`, `phys`, `path`, `clinpath`,
@@ -532,7 +532,7 @@ further; don't change FSRS or Undo speculatively.
 |---|---|
 | App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 96 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
-| Content | 9 courses, 132 lectures, 132 lesson files; `res` L01–L11 written. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
+| Content | 9 courses, 134 lectures, 134 lesson files; `res` L01–L12 and L14 written. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
@@ -545,7 +545,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | What |
 |---|---|
-| Content | Courses with no material yet; `res` L12, L13, L15–L20 from the lecture PDFs (L14 done) (Mohamed also wants L02–L11 checked against the enriched lecture copies); everything stays `unverified` until he approves in-app |
+| Content | Courses with no material yet; `res` L13, L15–L20 from the lecture PDFs (L12, L14 done) (Mohamed also wants L02–L11 checked against the enriched lecture copies); everything stays `unverified` until he approves in-app |
 | Glossary / audit | Split remaining ICP/SBP stop-gap senses into `course:` entries; 2026-11-04 audit leftovers (ambiguous abbreviations, quote cuts) only if Mohamed asks |
 | Mac | Mohamed (2026-11-07) kept being asked for the login Keychain password ("app.batna.cloud") after updates and wants it gone for good. Main builds keep the session in `cloud-session.json` (since #612), and the prompt was traced to local builds of an older checkout; confirm on his Mac after the next update. If it returns, the cause is each build being signed differently (Keychain ACL): fix with a stable signing identity or storage not tied to the build |
 | UX backlog | Weak-topic insight on Today; configurable review shortcuts with conflict checks; a focused phone Study view (keep exit, progress, reveal, grades; don't collide with Mac Focus Mode); medical reading polish (mixed Arabic/English, zoomable figures, optional haptics); a warning before a new session replaces a live one |
@@ -570,6 +570,7 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-11: his notes on items ride in the Anki deck (`Notes` field on Batna Basic and Batna Cloze; docs/ANKI.md), from Steps-app.
+- 2026-11-11: res.L12 (bias and confounders, 61 image-only slides from the lecture video, hand-transcribed in `courses/res/text/L12.txt`): 83 items with the 7-question quiz keyed from the lecturer's notes, 6 lessons with 7 drawn figures; glossary gains STD.
 - 2026-11-11: res.L14 (screening and diagnostic accuracy, 31 slides) written: 65 items, 5 lessons; calculators `predictive_values` (slide 25 formula) and `post_test_probability` (likelihood ratios; Deeks 2004, Fagan 1975, Jaeschke 1994); `diagnostic_accuracy` guides now cite the L14 slides; glossary gains AUC, ROC, TP/FP/FN/TN, SpPin, SnNout.
 - 2026-11-09: lesson reading settings («Aa»: text size, line spacing, line width per device), ported from Steps-app.
 - 2026-11-09: notes (synced `notes` table), weak-fact marks and go to page (Ctrl/⌘+G, per-course books) ported from Steps-app (§ 10 Notes, weak-fact marks, go to page).

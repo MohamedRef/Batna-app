@@ -451,6 +451,16 @@ Add a bullet here when a PR adds something a later agent must know.
 - **Storage that didn't open** (audit F11): the in-memory session is said
   above every screen (`persistence::VolatileNotice` in `main.rs`) with what
   will be lost and a button to Settings › Data to export.
+- **Sync ops that can't go up** (audit F12, F13, 2026-11-11): an op Batna
+  Cloud refuses for good, or an outbox row this build can't read, moves to
+  the local `sync_held` table (migration 7, never synced or exported) with
+  its reason instead of vanishing (`store/held.rs`; the engine settles a
+  push with `Store::settle_outbox`). Settings › Sync shows a «تغييرات ما
+  اترفعتش» card (`cloud/held_ui.rs`) with «ابعتهم تاني» (back to the
+  outbox) and «سيبهم» (asks first). Newest 1000 kept.
+- **Export is one moment** (audit F14): `Store::export` reads every table
+  in one read transaction, so a sync merge on the other connection can't
+  tear it.
 - **Not yet verified natively**: Android process death and OS kills, macOS
   relaunch, S24 Ultra lock/unlock, keyboard and Back with a running session.
 
@@ -598,6 +608,7 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-11: res.L02 gap-fill from the lecture's video recording (same 70 slides plus the lecturer's spoken points and the 8 pages of Arabic notes): 16 items, lesson 7; calculators `disease_duration`, `death_rate`, `perinatal_mr`, `mmr` (`calc/frequency.rs`); new slide verdicts in `courses/res/verdicts/L02.tsv`.
+- 2026-11-11: sync ops the hub refuses (or the device can't read) are held with their reason and shown in Settings › Sync with send-again / let-go; the export is one read snapshot (engineering audit F12–F14, § 10 Study sessions).
 - 2026-11-11: the Batna Cloud deploy for #780 had failed (504), so the hub rejected `notes`; deploy re-run, ops on a table the hub doesn't know now wait in the outbox, and notes are queued again once.
 - 2026-11-11: finishing a lesson is one transaction with a Retry; a failed read keeps the last good copy and says so on Today; an in-memory session is announced on every screen (engineering audit F09–F11, § 10 Study sessions).
 - 2026-11-11: answers the store refuses outside the main Study session (lesson Try, Oral, question bank) are no longer lost silently: the item stays or the answer is kept with a retry (engineering audit F02, § 10 Study sessions).

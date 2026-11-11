@@ -56,11 +56,24 @@ pub(super) fn cell(v: ValueRef<'_>) -> Value {
     }
 }
 
+#[cfg(test)]
+type Hook = Box<dyn FnOnce()>;
+
+#[cfg(test)]
+thread_local! {
+    /// Test-only: runs once, after the first table is read.
+    static MID_EXPORT: std::cell::RefCell<Option<Hook>> = std::cell::RefCell::new(None);
+}
+
 impl Store {
     /// The whole local store as one JSON document.
     pub fn export(&self, app_version: &str, now_ms: i64) -> Result<Export> {
         let device = self.device();
-        let conn = self.conn.lock().unwrap();
+        let guard = self.conn.lock().unwrap();
+        // One read transaction: the sync thread writes through its own
+        // connection, and an export must be one moment, not tables read
+        // before and after a merge (audit F14).
+        let conn = guard.unchecked_transaction()?;
         let schema_version: u32 = conn.pragma_query_value(None, "user_version", |r| r.get(0))?;
         let names: Vec<String> = {
             let mut stmt = conn.prepare(
@@ -72,8 +85,10 @@ impl Store {
 
         let mut tables = Map::new();
         let mut total = 0u64;
-        // The sync outbox is this device's queue, not data: restore re-reads rows.
-        for name in names.into_iter().filter(|n| !is_secret_name(n) && n != "sync_outbox") {
+        // The sync outbox (and what it held back) is this device's queue,
+        // not data: restore re-reads rows.
+        let local = ["sync_outbox", "sync_held"];
+        for name in names.into_iter().filter(|n| !is_secret_name(n) && !local.contains(&n.as_str())) {
             let mut stmt = conn.prepare(&format!("SELECT * FROM \"{}\"", name.replace('"', "\"\"")))?;
             let columns: Vec<String> = stmt.column_names().map(String::from).collect();
             let keep: Vec<bool> = columns.iter().map(|c| !is_secret_name(c)).collect();
@@ -100,6 +115,12 @@ impl Store {
                 }
                 rows.push(Value::Object(obj));
             }
+            #[cfg(test)]
+            MID_EXPORT.with(|h| {
+                if let Some(hook) = h.borrow_mut().take() {
+                    hook();
+                }
+            });
             total += rows.len() as u64;
             let kept: Vec<&String> = columns.iter().zip(&keep).filter(|(_, k)| **k).map(|(c, _)| c).collect();
             tables.insert(name, json!({ "columns": kept, "rows": rows }));
@@ -171,6 +192,28 @@ mod tests {
         let counted: u64 = tables.values().map(|t| t["rows"].as_array().unwrap().len() as u64).sum();
         assert_eq!(export.rows, counted);
         assert_eq!(doc["row_count"], counted);
+    }
+
+    /// Another connection (the sync thread's) writing mid-export doesn't
+    /// tear the file: every table is read at the same moment.
+    #[test]
+    fn the_export_is_one_moment() {
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("batna.db");
+        let store = Store::open(&path).unwrap();
+        let other = Store::open(&path).unwrap();
+        let ev = |at_ms| ReviewEvent::new("hb.L01.003", Grade::Good, Origin::Review, at_ms, 4000);
+        store.append_review(ev(1)).unwrap();
+        MID_EXPORT.with(|h| {
+            *h.borrow_mut() = Some(Box::new(move || {
+                other.append_review(ev(2)).unwrap();
+            }))
+        });
+        let export = store.export("0.1.0", 2).unwrap();
+        let reviews = export.document["tables"]["review_events"]["rows"].as_array().unwrap();
+        assert_eq!(reviews.len(), 1, "a write after the export began leaked into it");
+        // The write itself landed.
+        assert_eq!(store.reviews().unwrap().len(), 2);
     }
 
     #[test]

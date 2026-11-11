@@ -10,6 +10,7 @@
 mod backend;
 pub mod export;
 mod health;
+mod held;
 pub mod import;
 mod install;
 #[cfg(test)]
@@ -171,6 +172,17 @@ const MIGRATIONS: &[&str] = &[
         hlc_wall    INTEGER NOT NULL,
         hlc_counter INTEGER NOT NULL,
         deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+",
+    "
+    -- Sync ops Batna Cloud turned away for good, and outbox rows this build
+    -- can't read (store/held.rs): kept so nothing leaves without a trace.
+    -- Local to this device, never synced or exported.
+    CREATE TABLE sync_held (
+        op_id  TEXT PRIMARY KEY,
+        op     TEXT NOT NULL,
+        reason TEXT NOT NULL,
+        at_ms  INTEGER NOT NULL
     ) STRICT;
 ",
 ];

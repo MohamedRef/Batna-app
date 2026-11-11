@@ -8,7 +8,8 @@ pub const TITLE_NEW: &str = "ملاحظة جديدة";
 pub const TITLE_EDIT: &str = "ملاحظتك";
 pub const FIELD: &str = "الملاحظة";
 pub const HINT: &str = "بالعربي أو بالإنجليزي: اللي عايز تفتكره هنا…";
-pub const PRIVATE: &str = "ملاحظاتك بتفضل على أجهزتك وبتتزامن بينها، وبتروح معاك في النسخة الاحتياطية.";
+pub const PRIVATE: &str =
+    "ملاحظاتك بتفضل على أجهزتك وبتتزامن بينها، وبتروح معاك في النسخة الاحتياطية وفي Anki.";
 pub const SAVE: &str = "احفظ";
 pub const DELETE: &str = "امسحها";
 pub const CANCEL: &str = "إلغاء";

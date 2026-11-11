@@ -457,9 +457,10 @@ as `pagesheet::Scope::book()` / `Scope::of_book()`.
   page sheet lists a page's notes (`PageNotes { book, page }`); the list
   «ملاحظاتك» is a lecture-stack page (`notes::PAGE`), sorted by the
   program's course order then page, filtered by course, searchable. Max 2000
-  characters; empty text deletes. Not in the Anki deck yet (Steps adds a
-  `Notes` field to its note types; Batna's would change the deck's note
-  types, so it is left for its own PR).
+  characters; empty text deletes. Notes on items go to Anki in a sixth
+  field, `Notes` (both note types; «My note» last on the back), from the
+  app's export and `batna-tools anki --own <backup>`; the first import after
+  2026-11-11 asks Anki to update the note types (docs/ANKI.md).
 - **Weak-fact marks** (`crate::weak`): computed from the review log (last
   answer Again = weak; a right answer clears), nothing new to sync. A lesson
   step whose page (in its own book) holds a weak item shows «راجعها تاني»;
@@ -568,6 +569,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: his notes on items ride in the Anki deck (`Notes` field on Batna Basic and Batna Cloze; docs/ANKI.md), from Steps-app.
 - 2026-11-09: lesson reading settings («Aa»: text size, line spacing, line width per device), ported from Steps-app.
 - 2026-11-09: notes (synced `notes` table), weak-fact marks and go to page (Ctrl/⌘+G, per-course books) ported from Steps-app (§ 10 Notes, weak-fact marks, go to page).
 - 2026-11-09: from Steps-app: confidence and error reason on answers (migration 5), sure misses first in the mistakes log with a 2–7 day retest, and a catch-up plan for a review backlog (§ 10 Study signals).

@@ -21,7 +21,8 @@
 //!
 //! `--own batna-export-….json` adds Mohamed's own cards (the app's Settings ›
 //! Your data export) as one more subdeck, `Batna::My own cards`, tagged
-//! `own` and never `unverified`.
+//! `own` and never `unverified`, and puts his notes on items in each
+//! note's `Notes` field (adapted from Steps-app main: crates/tools/src/anki.rs).
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
@@ -70,8 +71,10 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
             return Err(vec![format!("{id}: no such lecture written yet")]);
         }
     }
+    let mut mine = BTreeMap::new();
     if let Some(file) = crate::flag(args, "--own") {
         let cards = own_cards(Path::new(file)).map_err(|e| vec![e])?;
+        mine = item_notes(Path::new(file)).map_err(|e| vec![e])?;
         if cards.is_empty() {
             warnings.push(format!("{file}: no own cards in this export"));
         } else if only.is_none() {
@@ -92,6 +95,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         edits: Some(&edits),
         drafts: Some(&drafts),
         program: program.as_ref(),
+        notes: Some(&mine),
     };
     let deck = build(&lectures, &opts);
 
@@ -115,6 +119,24 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         report.push_str(&format!("\n  warning: {w}"));
     }
     Ok(report)
+}
+
+/// His live notes on items from an app export (`tables.notes`), by item id.
+/// Notes on pages and lesson steps have no Anki card to sit on.
+pub fn item_notes(path: &Path) -> Result<BTreeMap<String, String>, String> {
+    use batna_core::note::{Anchor, Note};
+    let text = std::fs::read_to_string(path).map_err(|e| format!("{}: {e}", path.display()))?;
+    let doc: Value = serde_json::from_str(&text).map_err(|e| format!("{}: {e}", path.display()))?;
+    let rows = doc["tables"]["notes"]["rows"].as_array().cloned().unwrap_or_default();
+    Ok(rows
+        .iter()
+        .filter(|r| r["deleted"].as_i64() == Some(0))
+        .filter_map(|r| r["value"].as_str().and_then(|v| serde_json::from_str::<Note>(v).ok()))
+        .filter_map(|n| match n.anchor {
+            Anchor::Item(id) => Some((id, n.text)),
+            _ => None,
+        })
+        .collect())
 }
 
 /// What his verdicts do to the deck: ✗ ids, ✎ items as he edited them.
@@ -368,6 +390,25 @@ mod tests {
         assert!(anki(&["--own", &e]).unwrap_err()[0].starts_with(&e));
         assert!(anki(&["--own", "/no/export.json"]).unwrap_err()[0].starts_with("/no/export.json: "));
         assert!(anki(&["--verdicts", "/no/v.yaml"]).unwrap_err()[0].starts_with("/no/v.yaml: "));
+    }
+
+    #[test]
+    fn his_notes_on_items_come_from_an_export() {
+        let dir = tempfile::tempdir().unwrap();
+        let export = dir.path().join("export.json");
+        let row = |id: &str, anchor: serde_json::Value, text: &str, deleted: i64| {
+            let value = serde_json::json!({"anchor": anchor, "text": text, "created_ms": 1, "edited_ms": 1});
+            serde_json::json!({"id": id, "value": value.to_string(), "deleted": deleted})
+        };
+        let doc = serde_json::json!({"format": "batna-export", "tables": {"notes": {"rows": [
+            row("item:hb.L01.001", serde_json::json!({"on": "item", "id": "hb.L01.001"}), "Child-Pugh", 0),
+            row("item:hb.L01.002", serde_json::json!({"on": "item", "id": "hb.L01.002"}), "gone", 1),
+            row("page:hb:3", serde_json::json!({"on": "page", "id": {"book": "hb", "page": 3}}), "page", 0),
+        ]}}});
+        std::fs::write(&export, doc.to_string()).unwrap();
+        let mine = item_notes(&export).unwrap();
+        assert_eq!(mine, BTreeMap::from([("hb.L01.001".to_string(), "Child-Pugh".to_string())]));
+        assert!(item_notes(Path::new("/no/export.json")).is_err());
     }
 
     #[test]

@@ -66,6 +66,7 @@ mod dka;
 mod fib4;
 mod fli;
 mod free_water;
+mod frequency;
 mod gbs;
 mod geri;
 mod glasgow;

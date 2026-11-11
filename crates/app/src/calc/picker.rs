@@ -212,6 +212,10 @@ fn keywords(id: &str) -> &'static str {
         "nnt" => "number needed to treat harm nnh",
         "diagnostic_accuracy" => "sensitivity specificity ppv npv likelihood ratio",
         "z_score" => "standard deviation sd normal distribution",
+        "disease_duration" => "duration prevalence incidence p = i x d epidemiology",
+        "death_rate" => "crude mortality cause specific age specific sex specific death rate",
+        "perinatal_mr" => "perinatal mortality stillbirth fetal death early neonatal",
+        "mmr" => "maternal mortality ratio",
         "sample_size_survey" => "sample size prevalence survey margin of error epi info statcalc",
         "sample_size_two_proportions" => {
             "sample size power case control cohort kelsey fleiss epi info statcalc"

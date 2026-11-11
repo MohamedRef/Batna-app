@@ -9,6 +9,8 @@
 
 mod backend;
 pub mod export;
+mod health;
+mod held;
 pub mod import;
 mod install;
 #[cfg(test)]
@@ -16,6 +18,7 @@ mod marker_perf;
 mod notes;
 pub mod own;
 mod paths;
+mod places;
 #[cfg(test)]
 mod revision_tests;
 pub mod sync;
@@ -35,6 +38,7 @@ use serde::de::DeserializeOwned;
 #[cfg(test)]
 pub use backend::test_review;
 pub use backend::{LectureProgress, NoteError, Overview, Review, use_provide_review, use_review};
+pub use health::{read_error, read_failed, read_recovered};
 
 #[derive(Debug)]
 pub enum StoreError {
@@ -170,6 +174,17 @@ const MIGRATIONS: &[&str] = &[
         deleted     INTEGER NOT NULL DEFAULT 0
     ) STRICT;
 ",
+    "
+    -- Sync ops Batna Cloud turned away for good, and outbox rows this build
+    -- can't read (store/held.rs): kept so nothing leaves without a trace.
+    -- Local to this device, never synced or exported.
+    CREATE TABLE sync_held (
+        op_id  TEXT PRIMARY KEY,
+        op     TEXT NOT NULL,
+        reason TEXT NOT NULL,
+        at_ms  INTEGER NOT NULL
+    ) STRICT;
+",
 ];
 
 const REVIEW_SETTINGS_KEY: &str = "review";
@@ -266,6 +281,7 @@ impl Store {
             None => device,
         };
         sync::seed(&conn, &device)?;
+        sync::resend_once(&conn, &device)?;
         sync::check_tables(&conn)?;
         let mut clock = HlcClock::new(device);
         // Start past every stamp already stored, whichever device wrote it.
@@ -424,15 +440,26 @@ impl Store {
     }
 
     /// A synced setting (last writer wins across devices), by key.
+    /// A database that can't be read is reported (`read_failed`), not taken
+    /// for "never set"; a value this build can't parse reads as unset.
     pub fn setting<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
         let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
-        conn.query_row("SELECT value FROM settings WHERE key = ?1 AND deleted = 0", [key], |r| {
-            r.get::<_, String>(0)
-        })
-        .optional()
-        .ok()
-        .flatten()
-        .and_then(|v| serde_json::from_str(&v).ok())
+        let read = conn
+            .query_row("SELECT value FROM settings WHERE key = ?1 AND deleted = 0", [key], |r| {
+                r.get::<_, String>(0)
+            })
+            .optional();
+        let what = format!("setting {key}");
+        match read {
+            Ok(v) => {
+                health::read_recovered(&what);
+                v.and_then(|v| serde_json::from_str(&v).ok())
+            }
+            Err(e) => {
+                health::read_failed(&what, &e);
+                None
+            }
+        }
     }
 
     /// Every synced setting whose key starts with `prefix`, in key order.
@@ -569,6 +596,27 @@ impl Store {
         deleted: bool,
         hlc: &Hlc,
     ) -> Result<()> {
+        let mut conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+        // The row and its outbox entry land together or not at all.
+        let tx = conn.transaction()?;
+        self.put_lww_in(&tx, table, key_col, key, status, value, deleted, hlc)?;
+        tx.commit()?;
+        Ok(())
+    }
+
+    /// [`Store::put_lww`] inside `tx`, so several writes can land together.
+    #[allow(clippy::too_many_arguments)]
+    fn put_lww_in(
+        &self,
+        tx: &rusqlite::Transaction<'_>,
+        table: &str,
+        key_col: &str,
+        key: &str,
+        status: Option<&str>,
+        value: &str,
+        deleted: bool,
+        hlc: &Hlc,
+    ) -> Result<()> {
         let (status_col, status_val, status_set) = match status {
             Some(_) => (", status", ", ?7", ", status = excluded.status"),
             None => ("", "", ""),
@@ -584,9 +632,6 @@ impl Store {
         );
         let mine =
             hlc.device == self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).device();
-        let mut conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
-        // The row and its outbox entry land together or not at all.
-        let tx = conn.transaction()?;
         let base = params![key, value, hlc.device, hlc.wall_ms, hlc.counter, deleted];
         let changed = match status {
             Some(s) => {
@@ -598,12 +643,11 @@ impl Store {
         };
         // This device's writes go to Batna Cloud too.
         if changed > 0 && mine {
-            sync::enqueue(&tx, table, key_col, key, &hlc.device)?;
+            sync::enqueue(tx, table, key_col, key, &hlc.device)?;
         } else if mine {
             // Our clock should always be past every stored stamp (#257).
             crate::diag::report!("a local {table} write lost to a newer stored stamp: {key}");
         }
-        tx.commit()?;
         Ok(())
     }
 }
@@ -713,6 +757,12 @@ static OPEN_ERROR: OnceLock<String> = OnceLock::new();
 
 #[cfg(test)]
 thread_local! {
+    /// Test-only: this thread's store "failed to open" with this error.
+    pub static OPEN_ERROR_TEST: std::cell::Cell<Option<&'static str>> = const { std::cell::Cell::new(None) };
+}
+
+#[cfg(test)]
+thread_local! {
     static THREAD_STORE: std::cell::Cell<Option<&'static Store>> = const { std::cell::Cell::new(None) };
 }
 
@@ -735,6 +785,10 @@ pub fn use_memory_store() {
 
 /// Why the store fell back to memory, if it did.
 pub fn open_error() -> Option<&'static str> {
+    #[cfg(test)]
+    if let Some(e) = OPEN_ERROR_TEST.get() {
+        return Some(e);
+    }
     OPEN_ERROR.get().map(String::as_str)
 }
 

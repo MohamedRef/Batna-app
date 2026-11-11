@@ -19,6 +19,7 @@
 mod blood;
 mod diabetes;
 mod diagnostic;
+mod frequency;
 mod geri;
 mod gi;
 mod liver;
@@ -181,6 +182,7 @@ fn tables() -> Vec<Table> {
         diabetes::tables(),
         blood::tables(),
         research::tables(),
+        frequency::tables(),
         sample_size::tables(),
         diagnostic::tables(),
         significance::tables(),

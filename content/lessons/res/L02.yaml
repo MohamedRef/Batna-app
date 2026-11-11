@@ -785,3 +785,123 @@ lessons:
       - "Infant/neonatal/under-5 ÷ live births × 1000. Perinatal ÷ (fetal deaths + live births). MMR ÷ live births × 100,000."
       - "Perinatal I = 28 أسبوع حمل لـ 7 أيام. Neonatal = 28 يوم."
     practice: [res.L02.043, res.L02.044, res.L02.045, res.L02.046, res.L02.047, res.L02.048, res.L02.049, res.L02.050, res.L02.051, res.L02.052, res.L02.053, res.L02.054, res.L02.055, res.L02.056, res.L02.058, res.L02.059, res.L02.065]
+  # ------------------------------------------------------------------
+  - id: res.L02.lesson7
+    title: "من شرح الدكتورة: النقط اللي في الفيديو ومش في السلايدات"
+    hook: "الـ slides هي هي، بس الدكتورة في التسجيل زوّدت كام نقطة بتيجي في الامتحان: الـ latent period، حدود سجلات المستشفى، وليه الـ count مش بيقارن."
+    minutes: 8
+    pages: [13, 70]
+    topics: [uses, sources, measures, prevalence, mortality]
+    goals:
+      - "تفرق بين الـ incubation period والـ latent period"
+      - "تعرف ليه hospital records لوحدها مش بتورّي حجم المرض الحقيقي"
+      - "تحسب مدة المرض ومعدلات الوفيات بالحاسبات الجديدة"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 13
+        quote: "Natural history of disease timeline:\n  Exposure, then Pathologic Changes, then Onset of Symptoms, then Usual Time of Diagnosis\n  Stage of Susceptibility\n  Stage of Subclinical Disease\n  Stage of Clinical Disease\n  Stage of Recovery, Disability or Death\nSource: Centers for Disease Control and Prevention. Principles of epidemiology, 2nd ed. Atlanta: U.S. Department of Health and Human Services; 1992."
+        title: "من الـ exposure للأعراض: incubation ولا latent؟"
+        alt: "A timeline: exposure, then pathologic changes, then onset of symptoms. A bracket spans exposure to onset of symptoms, labelled incubation period for infectious diseases and latent period for chronic diseases. The part from pathologic changes to symptoms is marked subclinical."
+        caption: "نفس المسافة، اسمين: في المرض المعدي ==incubation period==، وفي المرض المزمن ==latent period==. والتغيرات المرضية ممكن تبدأ قبل الأعراض بكتير."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L02t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <path d="M14 70h300" class="fg-arrow" marker-end="url(#L02t)"/>
+            <circle cx="30" cy="70" r="7" class="fg-good"/>
+            <text x="30" y="50" text-anchor="middle" class="t-sm t-b">Exposure</text>
+            <circle cx="140" cy="70" r="7" class="fg-acc"/>
+            <text x="140" y="38" text-anchor="middle" class="t-sm t-b">Pathologic</text>
+            <text x="140" y="52" text-anchor="middle" class="t-sm t-b">changes</text>
+            <circle cx="260" cy="70" r="7" class="fg-bad"/>
+            <text x="260" y="38" text-anchor="middle" class="t-sm t-b">Onset of</text>
+            <text x="260" y="52" text-anchor="middle" class="t-sm t-b">symptoms</text>
+            <rect x="140" y="82" width="120" height="22" rx="4" class="fg-box"/>
+            <text x="200" y="97" text-anchor="middle" class="t-sm t-mut">subclinical</text>
+            <path d="M30 118v10h230v-10" class="fg-ink" fill="none"/>
+            <rect x="20" y="140" width="290" height="32" rx="6" class="fg-acc"/>
+            <text x="165" y="161" text-anchor="middle" class="t-sm t-b">Infectious disease: incubation period</text>
+            <rect x="20" y="180" width="290" height="32" rx="6" class="fg-box"/>
+            <text x="165" y="201" text-anchor="middle" class="t-sm t-b">Chronic disease: latent period</text>
+          </svg>
+      - kind: figure
+        page: 19
+        quote: "6. Hospital Records:\n  Inpatient\n  Outpatient"
+        title: "سجلات المستشفى = راس جبل التلج"
+        alt: "An iceberg. Above the water line, a small tip labelled hospital records: people who sought care, often the severe cases. Below the water, a much larger part labelled mild and unseen cases in the community, reached by morbidity surveys."
+        caption: "المستشفى بيشوف بس اللي ==طلب رعاية==، وغالبًا الحالات الأشد. الباقي تحت المية، والـ ==morbidity surveys== هي اللي بتوصله."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 92h330" class="fg-ink" stroke-dasharray="6 4"/>
+            <text x="322" y="86" text-anchor="end" class="t-sm t-mut">water line</text>
+            <path d="M165 20L205 92H125z" class="fg-bad"/>
+            <text x="165" y="70" text-anchor="middle" class="t-sm t-b">Hospital</text>
+            <text x="165" y="84" text-anchor="middle" class="t-sm t-b">records</text>
+            <path d="M125 92H205L285 240H45z" class="fg-box"/>
+            <text x="165" y="140" text-anchor="middle" class="t-sm t-b">Mild and unseen cases</text>
+            <text x="165" y="158" text-anchor="middle" class="t-sm t-b">in the community</text>
+            <text x="165" y="196" text-anchor="middle" class="t-sm">reached by morbidity surveys</text>
+            <text x="20" y="34" class="t-sm t-mut">sought care,</text>
+            <text x="20" y="50" class="t-sm t-mut">often severe</text>
+          </svg>
+      - kind: explain
+        page: 20
+        quote: "7. Special subgroups records\n8. Morbidity Surveys\n9. Record Linkage: To link records that belong to the same individual from different sources"
+        title: "الـ record linkage بمثال الدكتورة"
+        text: |
+          الـ ==record linkage==: تجمع السجلات اللي بتخص **نفس الشخص** من أكتر من مصدر.
+
+          - مثال الدكتورة: سجله في **المستشفى** + **المدرسة** + **الشغل**.
+          - النتيجة: صورة أشمل عن صحته من أي سجل لوحده.
+      - kind: explain
+        page: 22
+        quote: "3. Rates: the relative frequency of cases in a population during a specified period of time. e.g., Morbidity-Rates, Mortality-Rates"
+        title: "الـ count للتخطيط، والـ rate للمقارنة"
+        text: |
+          - **Count**: كويس عشان تقدّر الموارد (كام قرص chloroquine تطلب السنة الجاية).
+          - بس ==مش بيقارن== بين مكانين حجمهم مختلف: 500 حالة في محافظة كبيرة ممكن تكون أقل من 250 في محافظة صغيرة.
+          - **Rate**: بسط + مقام (الـ population) + ==فترة زمنية محددة==. الدكتورة أكدت على الزمن: من غيره مايبقاش rate.
+      - kind: check
+        page: 42
+        quote: "P = I * D\n80 = 20 * D\nD = 80/20 = 4 years"
+        question: "Incidence 20 per 10,000,000/year, mortality 4 per 10,000,000/year, prevalence 80 per 10,000,000. Average duration?"
+        options: ["4 years", "20 years", "5 years", "1 year"]
+        answer: 0
+        why:
+          - "صح: D = P ÷ I = 80 ÷ 20 = 4 سنين. الدكتورة قرت الـ prevalence 80 من السلايد."
+          - "80 ÷ 4: قسمت على الـ mortality، وده مش في المعادلة."
+          - "20 ÷ 4: الـ incidence على الـ mortality، مالهاش معنى."
+          - "مفيش قسمة من الأرقام دي تدّي سنة."
+      - kind: explain
+        page: 58
+        quote: "Example: There were 6000 deaths (1250 leukemia, 1750 stroke, 250 pneumonia, 250 Hodgkin's disease, and 2500 acute myocardial infarction) in Cook County, which had a population of 2.5 million in 1991. The cause-specific mortality rate for acute myocardial infarction is: (2500/2,500,000) x 1000 = 1 per 1000"
+        title: "حاسبات جديدة للوفيات"
+        text: |
+          في **Calculators ← Research** بقى فيه:
+
+          - **Disease duration (D = P / I)**: مدة المرض من الـ prevalence والـ incidence.
+          - **Death rate**: crude أو cause-specific أو age-specific أو sex-specific، ×1000 أو ×100,000.
+          - **Perinatal mortality rate**: (fetal deaths ≥28 weeks + first-week deaths) ÷ (fetal deaths + live births) × 1000.
+          - **Maternal mortality ratio**: maternal deaths ÷ live births × 100,000.
+
+          جرّب بمثال السلايد: 2500 وفاة MI في 2.5 مليون = **1 per 1000**.
+      - kind: explain
+        page: 23
+        quote: "Rate:\n  Measures the occurrence of an event or disease in a given population during a given period (one Year). (Birth rate, growth rate, accident rate)\n  Usually expressed per 100 or per 1000 population.\n  It has a time dimension, whereas a PROPORTION does not."
+        title: "نقط زيادة من ملاحظات الفيديو"
+        text: |
+          - **Coverage مش impact**: 95% أخدوا التطعيم دي ==coverage==؛ الـ impact هو الحالات قلّت ولا لأ.
+          - الـ epidemiology مش للأوبئة بس: معدية، مزمنة، و**health behaviours** زي التدخين.
+          - الـ attack rate والـ prevalence حسابيًا ==proportions==؛ الـ true rate مقامه person-time. في الامتحان استخدم أسماء المحاضرة.
+          - **P = I × D** تقريب: محتاج steady state ونفس الوحدات، وأدق لما المرض نادر.
+          - الـ **under-five mortality rate** مقامه live births، أما الـ age-specific فمقامه سكان الفئة نفسها.
+      - kind: try
+        items: [res.L02.073, res.L02.074, res.L02.075, res.L02.076, res.L02.080]
+    recap:
+      - "من الـ exposure للأعراض: incubation (معدي)، latent (مزمن)."
+      - "Hospital records = بس اللي طلب رعاية والأشد؛ الـ morbidity surveys بتكمّل."
+      - "Count للتخطيط، rate (بمقام وزمن) للمقارنة."
+      - "D = P ÷ I، والـ mortality رقم مُلهي."
+    practice: [res.L02.015, res.L02.066, res.L02.067, res.L02.068, res.L02.069, res.L02.070, res.L02.071, res.L02.072, res.L02.073, res.L02.074, res.L02.075, res.L02.076, res.L02.077, res.L02.078, res.L02.079, res.L02.080, res.L02.081]

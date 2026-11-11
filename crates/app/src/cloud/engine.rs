@@ -2,6 +2,7 @@
 //! database connection. It drives [`SyncClient`] and reports to the UI.
 // adapted from kabar-app main: crates/app/src/cloud/engine.rs
 
+use std::collections::BTreeSet;
 use std::time::Duration;
 
 use batna_protocol::client::{Backoff, Effect, Phase, SyncClient};
@@ -91,6 +92,9 @@ pub struct Engine {
     problem: Option<Problem>,
     /// Pushes wait until then (the clock was ahead); pulls go on.
     hold_pushes_until: Option<Instant>,
+    /// Tables the hub said it doesn't know, on this connection: their ops
+    /// wait in the outbox and are tried again on the next connection.
+    hub_lacks: BTreeSet<String>,
     pending_sign_in: Option<PendingSignIn>,
     /// The usual vault, set aside while a sign-in on someone else's device
     /// keeps its session in a forgetful one; back after sign-out.
@@ -145,6 +149,7 @@ impl Engine {
             force_refresh: false,
             problem: None,
             hold_pushes_until: None,
+            hub_lacks: BTreeSet::new(),
             pending_sign_in,
             spare_vault: None,
             login: LoginStatus::default(),
@@ -275,6 +280,18 @@ impl Engine {
                     self.cloud_error(&e);
                 }
                 self.load_devices().await;
+            }
+            Command::SendHeldAgain => {
+                match self.store.send_held_again() {
+                    Ok(n) => crate::diag::report!("sync: {n} held ops offered again"),
+                    Err(e) => crate::diag::report!("sync: sending held ops again: {e}"),
+                }
+                self.pump().await;
+            }
+            Command::ForgetHeld => {
+                if let Err(e) = self.store.forget_held() {
+                    crate::diag::report!("sync: forgetting held ops: {e}");
+                }
             }
             Command::Kick => {
                 // Also sent when Batna comes back to the front: a waiting
@@ -610,6 +627,8 @@ impl Engine {
             Ok(ws) => {
                 self.ws = Some(ws);
                 self.problem = None;
+                // A new connection may reach a newly deployed hub.
+                self.hub_lacks.clear();
                 let effects = self.client.on_open();
                 self.run_effects(effects).await;
             }
@@ -702,9 +721,9 @@ impl Engine {
                     if self.problem == Some(Problem::ClockOff) && !done.is_empty() {
                         self.problem = None;
                     }
-                    let ids =
-                        done.iter().map(String::as_str).chain(rejected.iter().map(|r| r.op_id.as_str()));
-                    if let Err(e) = self.store.remove_from_outbox(ids) {
+                    // Refused ops are held, not dropped: Settings › Sync
+                    // counts them and can send them again (store/held.rs).
+                    if let Err(e) = self.store.settle_outbox(&done, &rejected) {
                         crate::diag::report!("outbox: {e}");
                     }
                     self.touch_last_sync();
@@ -714,6 +733,15 @@ impl Engine {
                     crate::diag::report!("clock ahead of the server: {} ops wait", kept.len());
                     self.problem = Some(Problem::ClockOff);
                     self.hold_pushes_until = Some(Instant::now() + CLOCK_RETRY);
+                }
+                Effect::HubLacksTable { kept } => {
+                    match self.store.outbox_tables(kept.iter().map(String::as_str)) {
+                        Ok(tables) => {
+                            crate::diag::report!("hub doesn't know {tables:?} yet: {} ops wait", kept.len());
+                            self.hub_lacks.extend(tables);
+                        }
+                        Err(e) => crate::diag::report!("outbox: {e}"),
+                    }
                 }
                 Effect::Reconnect { reason } => {
                     crate::diag::report!("sync reconnects: {reason}");
@@ -748,7 +776,7 @@ impl Engine {
         if self.ws.is_none() || self.hold_pushes_until.is_some_and(|t| Instant::now() < t) {
             return;
         }
-        let outbox = match self.store.outbox(MAX_OPS_PER_PUSH) {
+        let outbox = match self.store.outbox_skipping(MAX_OPS_PER_PUSH, &self.hub_lacks) {
             Ok(o) => o,
             Err(e) => {
                 crate::diag::report!("reading outbox: {e}");
@@ -788,6 +816,7 @@ impl Engine {
             device_id: self.device.device_id.clone(),
             sync,
             pending: self.store.outbox_len(),
+            held: self.store.held_len(),
             last_sync_ms: self.store.last_sync_ms(),
             problem: self.problem,
             finishing_sign_in: self.pending_sign_in.is_some(),

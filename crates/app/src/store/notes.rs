@@ -109,4 +109,40 @@ mod tests {
         phone.apply_remote(&[SeqOp { seq: 3, op: last }], 3).unwrap();
         assert!(phone.notes().is_empty());
     }
+
+    /// Note ops the hub rejected (the Worker without `notes`) and an older
+    /// build dropped are queued again, once, and a table the hub doesn't know
+    /// yet can be left out of a push.
+    #[test]
+    fn notes_are_sent_again_once_and_can_wait_for_the_hub() {
+        let s = Store::open_in_memory().unwrap();
+        s.put_note(&note(Anchor::page("hb", 28), "page")).unwrap();
+        s.put_note(&note(Anchor::Item("hb.L01.003".into()), "item")).unwrap();
+        // What an older build did with the rejected ops.
+        let ids: Vec<String> = s.outbox(100).unwrap().into_iter().map(|o| o.id).collect();
+        s.remove_from_outbox(ids.iter().map(String::as_str)).unwrap();
+        assert_eq!(s.outbox_len(), 0);
+        let device = s.device();
+        {
+            let conn = s.conn.lock().unwrap();
+            conn.execute("DELETE FROM meta WHERE key = 'sync.resent.notes'", []).unwrap();
+            super::super::sync::resend_once(&conn, &device).unwrap();
+        }
+        let ops = s.outbox(100).unwrap();
+        assert_eq!(ops.len(), 2);
+        assert_eq!(ops.iter().map(|o| o.id.clone()).collect::<Vec<_>>(), ids, "same op ids as before");
+        // Only once.
+        {
+            let conn = s.conn.lock().unwrap();
+            super::super::sync::resend_once(&conn, &device).unwrap();
+        }
+        assert_eq!(s.outbox_len(), 2);
+        assert_eq!(
+            s.outbox_tables(ids.iter().map(String::as_str)).unwrap(),
+            ["notes".to_string()].into_iter().collect()
+        );
+        let skip = ["notes".to_string()].into_iter().collect();
+        assert!(s.outbox_skipping(100, &skip).unwrap().is_empty());
+        assert_eq!(s.outbox_skipping(100, &Default::default()).unwrap().len(), 2);
+    }
 }

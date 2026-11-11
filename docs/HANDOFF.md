@@ -80,7 +80,13 @@ Key design rules (also in `CLAUDE.md`):
   append-only events; statuses and settings are LWW by HLC.
 - **A new synced table must be added to `batna_protocol::sync::TABLES`** and
   written through the store so it is queued in `sync_outbox`; otherwise the
-  hub rejects it.
+  hub rejects it. The Worker that knows the table must be deployed: check the
+  "Deploy Batna Cloud" run of that PR and re-run it the same day if it fails
+  (#780's deploy failed on a 504 and the hub rejected `notes` for two days).
+  A hub that doesn't know a table answers `UnknownTable`; the client keeps
+  those ops in the outbox, skips that table until the next connection, and
+  sends them again then. `store/sync.rs` `RESEND` queues a table's own rows
+  again once, for ops an older build dropped.
 - Layout by window width (compact <600dp, medium <840dp, expanded ≥840dp),
   never by device. Logical CSS properties only (RTL). English medical text
   inside Arabic UI is wrapped in `<bdi>`.
@@ -432,6 +438,19 @@ Add a bullet here when a PR adds something a later agent must know.
   hides «sent to review» until they are in the log. Tests use
   `Store::set_read_only` (SQLite `query_only`) to refuse and then accept
   writes.
+- **Finishing a lesson** (audit F09, 2026-11-11): the done mark and the
+  cleared place are written in one transaction (`Store::finish_place`,
+  `store/places.rs`, on `put_lww_in`). A refusal keeps him on the last step
+  with «ما عرفتش أسجّل إن الدرس خلص» and Retry; a refused place save
+  mid-lesson says so too (`WriteFailed` in `learn/player.rs`).
+- **Reads that fail** (audit F10): `ReviewBackend::reload` keeps the last
+  good review log and verdicts when a read fails, and `Store::setting`
+  reports a database error instead of reading it as "never set"
+  (`store/health.rs`: `read_failed`/`read_error`); Today shows it with
+  «اقرأ تاني».
+- **Storage that didn't open** (audit F11): the in-memory session is said
+  above every screen (`persistence::VolatileNotice` in `main.rs`) with what
+  will be lost and a button to Settings › Data to export.
 - **Not yet verified natively**: Android process death and OS kills, macOS
   relaunch, S24 Ultra lock/unlock, keyboard and Back with a running session.
 
@@ -579,6 +598,8 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-11: res.L02 gap-fill from the lecture's video recording (same 70 slides plus the lecturer's spoken points and the 8 pages of Arabic notes): 16 items, lesson 7; calculators `disease_duration`, `death_rate`, `perinatal_mr`, `mmr` (`calc/frequency.rs`); new slide verdicts in `courses/res/verdicts/L02.tsv`.
+- 2026-11-11: the Batna Cloud deploy for #780 had failed (504), so the hub rejected `notes`; deploy re-run, ops on a table the hub doesn't know now wait in the outbox, and notes are queued again once.
+- 2026-11-11: finishing a lesson is one transaction with a Retry; a failed read keeps the last good copy and says so on Today; an in-memory session is announced on every screen (engineering audit F09–F11, § 10 Study sessions).
 - 2026-11-11: answers the store refuses outside the main Study session (lesson Try, Oral, question bank) are no longer lost silently: the item stays or the answer is kept with a retry (engineering audit F02, § 10 Study sessions).
 - 2026-11-11: his notes on items ride in the Anki deck (`Notes` field on Batna Basic and Batna Cloze; docs/ANKI.md), from Steps-app.
 - 2026-11-11: res.L15 (introduction to biostatistics: variables, tables, graphs, mean/median/mode, range and SD): 118 items, 7 lessons. Source is the video-frame PDF (142 slides + 7 pages of Arabic notes); slide text typed from the frames into `courses/res/text/L15.txt`, generators in `courses/res/gen-L15/`.

@@ -535,7 +535,7 @@ pub const DIAGNOSTIC: CalcSpec = CalcSpec {
         Field { hint: "Test −, disease −", ..count("tn", "True negatives (d)") },
         choice("measure", "Answer with", MEASURES),
     ],
-    source: "Research L14: measures of diagnostic accuracy",
+    source: "Research L14: measures of diagnostic accuracy, slides 12–18",
     compute: |i| {
         let tp = get_count(i, "tp")?;
         let fp = get_count(i, "fp")?;
@@ -688,8 +688,9 @@ pub const Z_SCORE: CalcSpec = CalcSpec {
 
 /// How to read each result (the course slides, Lectures 2, 5 and 7). The
 /// differential heading does not fit a statistic, so these guides have next
-/// steps only. Diagnostic accuracy (Lecture 14) and the normal distribution
-/// (Lecture 16) are not taught yet, so they rest on standard texts: Gordis
+/// steps only. Diagnostic accuracy follows the Lecture 14 slides (SpPin and
+/// SnNout slide 16, prevalence slide 24); the likelihood ratios and the
+/// normal distribution (Lecture 16, not taught yet) rest on standard texts: Gordis
 /// Epidemiology, 6th ed. 2019; Jaeschke et al., JAMA 1994 (likelihood
 /// ratios); Pewsner et al., BMJ 2004 (SpPin and SnNout); Šimundić, EJIFCC
 /// 2009; Kirkwood and Sterne, Essential Medical Statistics, 2nd ed. 2003;
@@ -900,8 +901,8 @@ pub const GUIDES: &[(&str, Guide)] = &[
         "diagnostic_accuracy.sensitivity",
         Guide {
             next: &[
-                "Very sensitive: a negative result helps rule the disease out, SnNout (Pewsner 2004)",
-                "Screen with the most sensitive test when missing a case is costly (Gordis 2019)",
+                "Very sensitive: a negative result helps rule the disease out, SnNout (L14 slide 16; Pewsner 2004)",
+                "Use a high-sensitivity cut-point when missing a case is costly: fatal and treatable, or easily spread (L14 slide 21)",
                 FIXED,
             ],
             dd: &[],
@@ -911,8 +912,8 @@ pub const GUIDES: &[(&str, Guide)] = &[
         "diagnostic_accuracy.specificity",
         Guide {
             next: &[
-                "Very specific: a positive result helps rule the disease in, SpPin (Pewsner 2004)",
-                "Confirm a positive screen with a more specific test (Gordis 2019)",
+                "Very specific: a positive result helps rule the disease in, SpPin (L14 slide 16; Pewsner 2004)",
+                "Use a high-specificity cut-point when the confirmatory test is invasive or a false label stigmatises (L14 slide 21)",
                 FIXED,
             ],
             dd: &[],
@@ -922,7 +923,7 @@ pub const GUIDES: &[(&str, Guide)] = &[
         "diagnostic_accuracy.ppv",
         Guide {
             next: &[
-                "PPV rises with prevalence: where the disease is rare, more positives are false (Gordis 2019)",
+                "PPV rises with prevalence: where the disease is rare, more positives are false (L14 slide 24)",
                 THIS_TABLE,
             ],
             dd: &[],
@@ -932,7 +933,7 @@ pub const GUIDES: &[(&str, Guide)] = &[
         "diagnostic_accuracy.npv",
         Guide {
             next: &[
-                "NPV falls as prevalence rises: where the disease is common, more negatives are false (Gordis 2019)",
+                "NPV falls as prevalence rises: where the disease is common, more negatives are false (L14 slide 24)",
                 THIS_TABLE,
             ],
             dd: &[],
@@ -995,8 +996,8 @@ const CONFOUNDING: &str = "Rule out confounding: a third factor tied to both, as
 const SMALL_STUDY: &str = "A small study can miss a real effect: check the confidence interval and the study's power (L07 slides 5–8, 64–65)";
 const RARE: &str = "When the disease is rare, the OR is close to the relative risk (Gordis 2019)";
 const CASE_CONTROL_BIAS: &str = "Case-control studies are open to selection and recall bias: check how the controls were chosen (L05 slide 36)";
-const FIXED: &str = "Sensitivity and specificity stay the same whatever the prevalence; predictive values change (Gordis 2019)";
-const THIS_TABLE: &str = "It holds only at this table's prevalence (shown in the notes); recompute it for your own setting (Gordis 2019)";
+const FIXED: &str = "Sensitivity and specificity stay the same whatever the prevalence; predictive values change (L14 slide 24)";
+const THIS_TABLE: &str = "It holds only at this table's prevalence (shown in the notes); recompute it for your own setting with the Predictive values calculator (L14 slide 25)";
 const ODDS: &str = "Post-test odds = pre-test odds × LR; unlike predictive values, the LR does not change with prevalence (Jaeschke 1994)";
 const NORMAL_ONLY: &str =
     "These cut-offs assume a roughly normal distribution: check the shape of the data first (Kirkwood 2003)";

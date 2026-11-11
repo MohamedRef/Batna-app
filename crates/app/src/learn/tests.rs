@@ -203,6 +203,25 @@ fn finishing_a_lesson_marks_it_done_and_shows_the_recap() {
 }
 
 #[test]
+fn a_finish_the_store_refuses_stays_on_the_last_step_until_it_saves() {
+    let (l, at) = claim(|l, k, _| k + 1 == l.steps.len() && !l.practice.is_empty());
+    let mut d = open(l, at);
+    let n = l.steps.len();
+    crate::store::shared().set_read_only(true);
+    d.click(is("ls-skip"));
+    crate::store::shared().set_read_only(false);
+    assert!(d.html().contains(tx::FINISH_UNSAVED), "{}", d.html());
+    assert!(!shows(&d, "ls-summary"), "not done yet");
+    assert_eq!(count(&d), format!("{n}/{n}"));
+    assert!(d.read(|| mark(&l.id)).is_none(), "no mark without its cleared place");
+    // Retry finishes it: the mark and the cleared place together.
+    d.click(is("save-retry"));
+    assert!(shows(&d, "ls-summary"), "{}", d.html());
+    assert!(d.read(|| mark(&l.id)).is_some());
+    assert_eq!(d.read(|| resume_step(&l.id)), None);
+}
+
+#[test]
 fn a_question_gates_continue_until_answered_or_skipped() {
     let (l, at) = claim(kind("check"));
     let mut d = open(l, at);
@@ -424,6 +443,31 @@ fn a_try_step_grades_the_lectures_cards_as_real_reviews() {
         items.iter().filter(|i| !s.is_new(i)).count()
     });
     assert_eq!(reviewed, n);
+}
+
+#[test]
+fn a_try_grade_the_log_refuses_keeps_the_card_until_it_saves() {
+    let (l, at) = claim(|_, _, b| match b {
+        StepBody::Try { items } => {
+            items.len() >= 2
+                && items.iter().all(|i| practice::find(i).is_some_and(|(_, it)| it.body.kind() == "card"))
+        }
+        _ => false,
+    });
+    let StepBody::Try { items } = &l.steps[at].body else { unreachable!() };
+    let mut d = open(l, at);
+    d.click(|e| e.tag == "button" && e.text.contains(crate::i18n::study::REVEAL));
+    crate::store::shared().set_read_only(true);
+    d.click(|e| e.has_class("rating") && e.attr("data-grade") == Some("good"));
+    crate::store::shared().set_read_only(false);
+    assert!(d.html().contains(tx::TRY_SAVE_FAILED), "{}", d.html());
+    assert!(d.html().contains(&format!("{} 1 {} {}", tx::TRY_OF, tx::OF, items.len())), "same card");
+    assert!(saved(&l.id).is_none_or(|a| a.tries[at].graded.is_empty()), "nothing counted as graded");
+    // Rated again once the disk takes writes: logged once, on to card 2.
+    d.click(|e| e.has_class("rating") && e.attr("data-grade") == Some("good"));
+    assert!(!d.html().contains(tx::TRY_SAVE_FAILED));
+    assert_eq!(saved(&l.id).unwrap().tries[at].graded, items[..1].to_vec());
+    assert!(d.html().contains(&format!("{} 2 {} {}", tx::TRY_OF, tx::OF, items.len())));
 }
 
 #[test]

@@ -59,6 +59,7 @@ pub fn Player() -> Element {
     rsx! {
         div { class: "bank-run", "data-mode": if timed { "timed" } else { "tutor" },
             div { class: "run-main",
+                super::UnsavedNote {}
                 // The count, time left and clock stay in view while he
                 // scrolls a long question (#234).
                 div { class: "run-sticky",

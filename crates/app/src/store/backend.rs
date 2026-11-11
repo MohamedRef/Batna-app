@@ -20,6 +20,10 @@ use super::{Store, now_ms};
 use crate::content::Library;
 use crate::study::PLAYABLE;
 
+/// What [`ReviewBackend::reload`] reports when a read fails.
+const REVIEW_LOG: &str = "the review log";
+const VERDICTS: &str = "the content checks";
+
 /// Kinds the Cases screen plays, so they come back there when due (#242).
 pub const CASE_KINDS: &[&str] = &["case", "calc"];
 
@@ -120,12 +124,34 @@ impl ReviewBackend {
         self.store.conn.lock().unwrap().execute(&format!("DROP TABLE {table}"), []).unwrap();
     }
 
+    /// Test-only: sets this backend's store read-only (`true`) or writable
+    /// again, so a write fails and a retry after recovery can succeed.
+    #[cfg(test)]
+    pub fn set_read_only(&self, on: bool) {
+        self.store.set_read_only(on);
+    }
+
     /// Re-reads everything from the store.
     pub fn reload(&mut self) {
         self.settings = self.store.review_settings();
         self.scheduler = Scheduler::from_settings(&self.settings, super::zone());
-        self.log = self.store.reviews().unwrap_or_default();
-        self.judgements = self.store.judgements().unwrap_or_default();
+        // A log or verdicts that can't be read keep the last good copy in use
+        // (never an empty one that would make every item look new); Today
+        // says so and offers to read again (store/health.rs).
+        match self.store.reviews() {
+            Ok(log) => {
+                super::read_recovered(REVIEW_LOG);
+                self.log = log;
+            }
+            Err(e) => super::read_failed(REVIEW_LOG, &e),
+        }
+        match self.store.judgements() {
+            Ok(j) => {
+                super::read_recovered(VERDICTS);
+                self.judgements = j;
+            }
+            Err(e) => super::read_failed(VERDICTS, &e),
+        }
         self.notes = self.store.notes();
         self.refresh_own();
         self.replay();

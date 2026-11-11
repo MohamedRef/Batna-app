@@ -1,0 +1,2604 @@
+schema: batna.content/v1
+lecture: res.L15
+title: Introduction to biostatistics
+author: Prof. Sahar Khashab
+book:
+  chapter: 1
+  pages: [1, 142]
+topics:
+- id: intro
+  title: Statistics, population and sample, branches and uses
+- id: variables
+  title: Types of data and variables
+- id: tables
+  title: Data presentation and frequency tables
+- id: comparing
+  title: Comparing, association and two way tables
+- id: graphs
+  title: 'Graphs: line, bar, pie, histogram, frequency polygon'
+- id: central
+  title: 'Measures of central tendency: mean, median, mode'
+- id: dispersion
+  title: 'Measures of dispersion: range, standard deviation, variance'
+items:
+- id: res.L15.001
+  kind: enumerate
+  topic: intro
+  prompt: Statistics is the scientific field that deals with which 6 steps of handling data?
+  points:
+  - Collection
+  - Classification
+  - Presentation
+  - Description
+  - Analysis
+  - Interpretation
+  pass: 6
+  hook: 'الإحصاء مطبخ من 6 خطوات بالترتيب: تجيب الخضار (collection)، تفرزه (classification)، ترصّه في الطبق (presentation)،
+    توصفه للضيوف (description)، تدوقه (analysis)، وتقول رأيك (interpretation).'
+  src:
+    page: 4
+    quote: |-
+      Definition
+      Statistics is the scientific field that deals with
+      collection,
+      classification,
+      presentation
+      description
+      analysis
+      & interpretation of data.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.002
+  kind: card
+  topic: intro
+  front: Define the (target) population.
+  back: 'The population about which one wishes to make an inference: a large set of individuals (humans) or other living organisms
+    (animals, insects, plants) or non-living things (water, vaccines).'
+  src:
+    page: 5
+    quote: |-
+      Population (target population)
+      Is the population about which one wishes to make an inference. It is a large set of individuals( human) or other living organisms (animals ,insects ,plant or non living organisms (water ,vaccines)
+  status: unverified
+- id: res.L15.003
+  kind: card
+  topic: intro
+  front: Define a sample, and what must it reflect?
+  back: A subset of the population selected in a way that is representative of the target population. It should reflect the
+    similarities and differences found in the population, so its results can be generalized to the population.
+  src:
+    page: 5
+    quote: |-
+      Sample:
+      Is a subset of the population selected in a way that is representative of the target population.
+      It should reflect the similarities and differences found in the population .Result from it can be generalized to the population
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.004
+  kind: table
+  topic: intro
+  title: Population vs sample symbols
+  columns:
+  - Measure
+  - Population
+  - Sample
+  rows:
+  - - Quantity (count)
+    - N
+    - n
+  - - Mean
+    - μ (mu)
+    - x̄ (x-bar)
+  - - Standard deviation
+    - σ (sigma)
+    - s
+  blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+  src:
+    page: 6
+    quote: |-
+      Population: quantity (count) = N; mean = μ; standard deviation = σ
+      Sample: quantity (count) = n; mean = x̄; standard deviation = s
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.005
+  kind: mcq
+  topic: intro
+  stem: On the population–sample slide, which symbol is the mean of a sample?
+  options:
+  - x̄
+  - μ
+  - σ
+  - N
+  answer: 0
+  why:
+  - x̄ (x-bar) is the sample mean.
+  - μ (mu) is the population mean.
+  - σ is the population standard deviation.
+  - N is the number in the population; the sample count is n.
+  src:
+    page: 6
+    quote: |-
+      Population: quantity (count) = N; mean = μ; standard deviation = σ
+      Sample: quantity (count) = n; mean = x̄; standard deviation = s
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.006
+  kind: card
+  topic: intro
+  front: What is descriptive statistics? Give the slide's examples.
+  back: Statistics concerned with the summary measures of data for a sample of a population, e.g. the % age and sex distribution,
+    or the average blood pressure.
+  src:
+    page: 7
+    quote: |-
+      1- Descriptive statistics:
+      Which is concerned with the summary measures of data for a sample of a population.
+      E.g.: % of age and sex distribution
+      Average blood pressure
+  status: unverified
+- id: res.L15.007
+  kind: card
+  topic: intro
+  front: What is analytic statistics? Give the slide's example.
+  back: The use of data from a sample to make inferences about the population, e.g. reaching a conclusion about the relation
+    between a disease and its cause (smoking and lung cancer) that is generalized over the population.
+  src:
+    page: 8
+    quote: |-
+      2- Analytic statistics:
+      Concerned with the use of data from a sample of population to make inferences about the population (ex: to come to a conclusion about the relation between a condition ( disease and its cause) to be generalized over the population
+      Example : relation between smoking and lung cancer
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.008
+  kind: mcq
+  topic: intro
+  stem: 'A researcher uses a sample to conclude whether smoking is related to lung cancer in the whole population. This is:'
+  options:
+  - Analytic statistics
+  - Descriptive statistics
+  - Vital statistics
+  - Constant data
+  answer: 0
+  why:
+  - Inference from a sample about a relation in the population is analytic statistics; the slide's own example is smoking
+    and lung cancer.
+  - Descriptive statistics only summarizes the sample (percentages, averages) without inference.
+  - Vital statistics is government collection of births, deaths, marriages and so on.
+  - Constant data are observations that don't vary, like the number of eyes.
+  src:
+    page: 8
+    quote: |-
+      2- Analytic statistics:
+      Concerned with the use of data from a sample of population to make inferences about the population (ex: to come to a conclusion about the relation between a condition ( disease and its cause) to be generalized over the population
+      Example : relation between smoking and lung cancer
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.009
+  kind: mcq
+  topic: intro
+  stem: 'Reporting the average blood pressure and the % age and sex distribution of a study sample is:'
+  options:
+  - Descriptive statistics
+  - Analytic statistics
+  - Vital statistics
+  - Biostatistics inference
+  answer: 0
+  why:
+  - Summary measures of a sample are descriptive statistics; both are the slide's examples.
+  - Analytic statistics makes inferences about the population, e.g. a relation between a cause and a disease.
+  - Vital statistics is ongoing government collection of births, deaths and similar events.
+  - Nothing is being inferred about the population here, only summarized.
+  src:
+    page: 7
+    quote: |-
+      1- Descriptive statistics:
+      Which is concerned with the summary measures of data for a sample of a population.
+      E.g.: % of age and sex distribution
+      Average blood pressure
+  status: unverified
+- id: res.L15.010
+  kind: enumerate
+  topic: intro
+  prompt: Vital statistics is the ongoing collection by government agencies of data on which events?
+  points:
+  - Births
+  - Deaths
+  - Marriage
+  - Divorces
+  - Health and disease related conditions
+  pass: 5
+  hook: 'الـ vital statistics هي «دفتر الحياة» اللي مكتب الصحة بيسجّله: اتولد (births)، اتجوز (marriage)، اتطلق (divorces)،
+    عيي (health and disease related conditions)، ومات (deaths). 5 محطات.'
+  src:
+    page: 9
+    quote: |-
+      3- Vital statistics:
+      It is the ongoing collection by government agencies of data relating to events such as:
+      Births
+      Deaths
+      Marriage
+      Divorces
+      Health and disease related conditions
+      reportable by local health authorities ( health office or health center)
+  status: unverified
+- id: res.L15.011
+  kind: card
+  topic: intro
+  front: Who reports vital statistics data?
+  back: Local health authorities (the health office or health center), as part of the ongoing collection by government agencies.
+  src:
+    page: 9
+    quote: |-
+      3- Vital statistics:
+      It is the ongoing collection by government agencies of data relating to events such as:
+      Births
+      Deaths
+      Marriage
+      Divorces
+      Health and disease related conditions
+      reportable by local health authorities ( health office or health center)
+  status: unverified
+- id: res.L15.012
+  kind: card
+  topic: intro
+  front: Define biostatistics.
+  back: The application of statistical procedures in the field of biological sciences and medicine.
+  src:
+    page: 10
+    quote: |-
+      Biostatistics
+      Application of statistical procedures in the field of biological sciences & medicine
+  status: unverified
+- id: res.L15.013
+  kind: card
+  topic: intro
+  front: Why do physicians need biostatistics?
+  back: It is necessary for both clinical and preventive medicine, and physicians need its basics to evaluate and criticize
+    research published in medical journals.
+  src:
+    page: 11
+    quote: |-
+      Uses in Medicine:
+      Biostatistics is necessary for both clinical and preventive medicine.
+      Physicians should have the basic knowledge for evaluation and criticism of researches published in medical journals.
+  status: unverified
+- id: res.L15.014
+  kind: enumerate
+  topic: intro
+  prompt: List what statistics helps to assess and what epidemiologists need it for (4 uses on the slide).
+  points:
+  - Diagnostic testing
+  - Effects of new drugs and treatment modalities
+  - Calculating rates (epidemiologists)
+  - Comparing groups and deciding how likely the differences could be due to chance (epidemiologists)
+  pass: 4
+  hook: '2 للدكتور + 2 للـ epidemiologist: الدكتور بيقيّم الـ test والدوا (diagnostic testing، new drugs)، والـ epidemiologist
+    بيحسب rates ويقارن الـ groups ويسأل «ده فرق حقيقي ولا chance؟».'
+  src:
+    page: 12
+    quote: |-
+      Statistics is helpful to assess:
+      Diagnostic testing
+      Effects of new drugs and treatment modalities.
+      Epidemiologists need to know how to:
+      Calculate rates
+      Compare between groups and to decide how likely the differences in comparison groups could be due to chance.
+  status: unverified
+- id: res.L15.015
+  kind: card
+  topic: variables
+  front: What are data?
+  back: 'The basic building blocks of statistics: the individual values measured or observed. They can come from a total population
+    or a sample.'
+  src:
+    page: 13
+    quote: |-
+      Data
+      Data are the basic building blocks of statistics and refer to the individual values measured or observed. Data can be derived from a total population or a sample.
+  status: unverified
+- id: res.L15.016
+  kind: card
+  topic: variables
+  front: Constant data vs variables?
+  back: Constant data are observations that do not vary from one person to another (number of eyes, fingers, ears). Variables
+    are observations that vary from one person to another or from one group to others.
+  src:
+    page: 14
+    quote: |-
+      Types of data:
+      Data are classified into:
+      Constant data:
+      These are observations which do not vary from one person to another such as number of eyes, fingers, ears... etc
+      Variables:
+      These are observations, which vary from one person to another or from one group of members to others and are subdivided into the following:
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.017
+  kind: mcq
+  topic: variables
+  stem: 'The number of fingers in a group of healthy adults is an example of:'
+  options:
+  - Constant data
+  - A discrete quantitative variable
+  - An ordinal qualitative variable
+  - A continuous quantitative variable
+  answer: 0
+  why:
+  - It does not vary from one person to another, which is the slide's definition of constant data (its own example).
+  - It is a count, but a variable must vary between people; this one doesn't.
+  - Ordinal variables are ordered categories like mild, moderate, severe.
+  - Continuous variables are measured and vary, like weight.
+  src:
+    page: 14
+    quote: |-
+      Types of data:
+      Data are classified into:
+      Constant data:
+      These are observations which do not vary from one person to another such as number of eyes, fingers, ears... etc
+      Variables:
+      These are observations, which vary from one person to another or from one group of members to others and are subdivided into the following:
+  status: unverified
+- id: res.L15.018
+  kind: cloze
+  topic: variables
+  text: Quantitative variables may be continuous or discrete. A continuous quantitative variable is obtained by {{c1::measurement}}
+    and its value can be an {{c2::integer or a fraction}}, e.g. weight, height, hemoglobin, age, income, volume of urine.
+  src:
+    page: 15
+    quote: |-
+      Quantitative variables:
+      These may be continuous or discrete.
+      a- Continuos quantitative variable:
+      Which are obtained by measurement and its value could be integer or fractionated value.
+      Examples:
+      Weight, height, hemoglobin, age, income, volume of urine.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.019
+  kind: cloze
+  topic: variables
+  text: A discrete (discontinuous) quantitative variable is obtained by {{c1::enumeration}} and its value is always {{c2::an
+    integer}}, e.g. pulse, family size, number of live births, number of abortions.
+  src:
+    page: 16
+    quote: |-
+      B- Discret or discontinus quantitative variables:
+      Which are obtained by enumeration and its value is always integer value.
+      Examples:
+      Pulse
+      Family size
+      Number of live births
+      Number of abortions.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.020
+  kind: mcq
+  topic: variables
+  stem: 'On the slides, pulse is classified as:'
+  options:
+  - Discrete quantitative
+  - Continuous quantitative
+  - Ordinal qualitative
+  - Nominal qualitative
+  answer: 0
+  why:
+  - 'Pulse is counted (beats), so it is enumerated and always an integer: the slide lists it under discrete.'
+  - Continuous variables are measured and may be fractions, like weight or hemoglobin.
+  - Pulse is a number, not an ordered category.
+  - Pulse is a number, not a named category.
+  src:
+    page: 16
+    quote: |-
+      B- Discret or discontinus quantitative variables:
+      Which are obtained by enumeration and its value is always integer value.
+      Examples:
+      Pulse
+      Family size
+      Number of live births
+      Number of abortions.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.021
+  kind: card
+  topic: variables
+  front: What is a qualitative variable?
+  back: 'One expressed in quality: it cannot be enumerated or measured but can only be categorized.'
+  src:
+    page: 17
+    quote: |-
+      Qualitative variables
+      Which are expressed in quality and cannot be enumerated or measured but can be categorized only.
+  status: unverified
+- id: res.L15.022
+  kind: card
+  topic: variables
+  front: What is an ordinal qualitative variable? Give the slide's examples.
+  back: 'A qualitative variable whose categories can be put in order: degree of success (excellent, very good, good, fair)
+    and degree of a disease (mild, moderate, severe).'
+  src:
+    page: 18
+    quote: |-
+      a- Ordinal qualitative variables :
+      Can be put in order:
+      Examples
+      Degree of success
+      excellent
+      very good
+      good
+      fair
+      Degree of a disease:
+      mild
+      moderate
+      severe
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.023
+  kind: card
+  topic: variables
+  front: 'Nominal qualitative variables: definition and the two subtypes with examples.'
+  back: 'Categories that cannot be put in order. Dichotomous (two categories): sex, yes/no variables. Multichotomous (more
+    than two): marital status (married, single, divorced, widow), blood groups A, B, AB, O.'
+  src:
+    page: 19
+    quote: |-
+      b- Nominal qualitative variables :
+      Can not be put in order and is further subdivided into:
+      Dichotomous
+      Examples
+      Sex
+      Yes / no variables
+      Multichotomous
+      Examples
+      Marital status:
+      (married, single, divorced, widow)
+      Blood groups: A, B, AB, O
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.024
+  kind: mcq
+  topic: variables
+  stem: 'Disease severity graded as mild, moderate or severe is:'
+  options:
+  - Ordinal qualitative
+  - Nominal qualitative
+  - Discrete quantitative
+  - Continuous quantitative
+  answer: 0
+  why:
+  - The categories have an order, which makes it ordinal (the slide's own example).
+  - Nominal categories can't be ordered, like blood groups.
+  - Discrete variables are counts, like family size.
+  - Continuous variables are measured, like weight.
+  src:
+    page: 18
+    quote: |-
+      a- Ordinal qualitative variables :
+      Can be put in order:
+      Examples
+      Degree of success
+      excellent
+      very good
+      good
+      fair
+      Degree of a disease:
+      mild
+      moderate
+      severe
+  status: unverified
+- id: res.L15.025
+  kind: mcq
+  topic: variables
+  stem: 'Blood group (A, B, AB, O) is:'
+  options:
+  - Nominal multichotomous
+  - Nominal dichotomous
+  - Ordinal
+  - Discrete quantitative
+  answer: 0
+  why:
+  - 'Four categories with no order: nominal, multichotomous.'
+  - Dichotomous means only two categories, like sex or yes/no.
+  - Blood groups can't be put in order.
+  - Blood group is a category, not a count.
+  src:
+    page: 19
+    quote: |-
+      b- Nominal qualitative variables :
+      Can not be put in order and is further subdivided into:
+      Dichotomous
+      Examples
+      Sex
+      Yes / no variables
+      Multichotomous
+      Examples
+      Marital status:
+      (married, single, divorced, widow)
+      Blood groups: A, B, AB, O
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.026
+  kind: mcq
+  topic: variables
+  stem: 'The presence of type II diabetes recorded as Yes or No is:'
+  options:
+  - Nominal dichotomous
+  - Nominal multichotomous
+  - Ordinal
+  - Discrete quantitative
+  answer: 0
+  why:
+  - Two unordered categories (yes/no) make a dichotomous nominal variable.
+  - Multichotomous needs more than two categories.
+  - Yes and no have no order.
+  - It is a category, not a count.
+  src:
+    page: 19
+    quote: |-
+      b- Nominal qualitative variables :
+      Can not be put in order and is further subdivided into:
+      Dichotomous
+      Examples
+      Sex
+      Yes / no variables
+      Multichotomous
+      Examples
+      Marital status:
+      (married, single, divorced, widow)
+      Blood groups: A, B, AB, O
+  status: unverified
+- id: res.L15.027
+  kind: table
+  topic: variables
+  title: 'Exercise I: classify each measured variable'
+  columns:
+  - Variable measured
+  - Type of variable
+  rows:
+  - - Presence of type II diabetes (yes or no)
+    - Qualitative nominal (dichotomous)
+  - - Number of new H1N1 cases in Mexico in a month (n=118)
+    - Quantitative discrete
+  - - Income of a group of workers (L.E)
+    - Quantitative continuous
+  - - High density lipoprotein level (mg/dL)
+    - Quantitative continuous
+  - - Degree of success of medical students (excellent to weak)
+    - Qualitative ordinal
+  blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+  src:
+    page: 20
+    quote: |-
+      Exercises
+      I: Classify each of the following measured variables by the type of variable
+      | Variable measured | Type of variable |
+      |---|---|
+      | 1- The presence of type II diabetes (Yes or No) |  |
+      | 2- Number of new H1N1 cases in Mexico in a given month (n=118) |  |
+      | 3- Income of a group of workers (L.E) |  |
+      | 4- High density lipoprotein level (mg / dL) |  |
+      | 5- degree of success of medical students (excellent, very good, good, fair, and weak) |  |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.028
+  kind: mcq
+  topic: variables
+  stem: 'All of the following are examples of a qualitative variable EXCEPT:'
+  options:
+  - Body weight
+  - Sex
+  - Place of birth
+  - Socioeconomic class
+  answer: 0
+  why:
+  - Body weight is measured, so it is quantitative (continuous).
+  - Sex is qualitative nominal (dichotomous).
+  - Place of birth is qualitative nominal.
+  - Socioeconomic class is qualitative ordinal.
+  src:
+    page: 21
+    quote: |-
+      1- All of the following are examples of qualitative variable EXCEPT:
+      a- sex b- place of birth
+      c- body weight d- socioeconomic class
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.029
+  kind: mcq
+  topic: variables
+  stem: 'All of the following are examples of a quantitative variable EXCEPT:'
+  options:
+  - Blood group
+  - Blood pressure
+  - Hb percent
+  - Length of hospital stay
+  answer: 0
+  why:
+  - Blood group is a category (qualitative nominal).
+  - Blood pressure is measured (continuous).
+  - Hb percent is measured (continuous).
+  - Length of stay is a number of days (quantitative).
+  src:
+    page: 21
+    quote: |-
+      2- All of the following are examples of quantitative variable EXCEPT:
+      a- blood pressure b- blood group
+      c- Hb percent d- length of hospital stay
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.030
+  kind: mcq
+  topic: variables
+  stem: 'All are examples of a continuous quantitative variable EXCEPT:'
+  options:
+  - Number of children
+  - Weight
+  - Hb level
+  - Volume of urine
+  answer: 0
+  why:
+  - 'Number of children is counted and always an integer: discrete.'
+  - 'Weight is measured: continuous.'
+  - 'Hb level is measured: continuous.'
+  - 'Volume of urine is measured: continuous.'
+  src:
+    page: 127
+    quote: |-
+      Examine yourself
+      All are examples of continuous quantitative variable Except:
+      1. Weight,
+      2. Height,
+      3. Hb level
+      4. Age
+      5. Number of children
+      6. Income
+      7. Volume of urine
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.031
+  kind: enumerate
+  topic: tables
+  prompt: What are the 3 methods of data presentation?
+  points:
+  - Numerical presentation
+  - Graphical presentation
+  - Mathematical presentation
+  pass: 3
+  hook: 'البيانات بتتقدّم 3 أطباق «جدول، رسمة، رقم»: numerical (الجدول)، graphical (الرسمة)، وmathematical (المتوسط والـ SD).'
+  src:
+    page: 23
+    quote: |-
+      Data presentation
+      I. Numerical presentation:
+      II. Graphical presentation
+      III. Mathematical presentation
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.032
+  kind: enumerate
+  topic: tables
+  prompt: 'Mathematical presentation of data: list the 5 measures on the slide.'
+  points:
+  - Arithmetic mean
+  - Median
+  - Mode
+  - Range
+  - Standard deviation
+  pass: 5
+  hook: '3 للنص + 2 للفرشة: mean وmedian وmode بيقولوا البيانات متجمعة فين، وrange وstandard deviation بيقولوا متفرشة قد إيه.'
+  src:
+    page: 26
+    quote: |-
+      III. Mathematical presentation
+      Arithmetic mean
+      Median
+      Mode
+      Range
+      Standard deviation
+  status: unverified
+- id: res.L15.033
+  kind: card
+  topic: tables
+  front: 'Simple numerical vs tabular presentation: when is each used?'
+  back: Simple numerical presentation is for small data (ungrouped, unclassified), e.g. weights of 5 infants 8, 6, 9, 5, 7
+    kg. Tabular presentation is for large data (grouped).
+  src:
+    page: 27
+    quote: |-
+      I. Numerical presentation:
+      1. Simple numerical presentation small size data
+      (ungrouped or unclassified data)
+      Example
+      2. Tabular presentation large size data
+      (grouped data )
+      Example
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.034
+  kind: enumerate
+  topic: tables
+  prompt: Name the 4 types of tabular presentation.
+  points:
+  - Simple frequency distribution table
+  - 'Table of association (contingency table): 2 × 2 or c × r'
+  - Comparing frequency distribution table
+  - Two way (two way classification) table
+  pass: 4
+  hook: '4 جداول «بسيط، رابط، مقارِن، اتجاهين»: simple (متغير واحد)، association (2 × 2 أو c × r)، comparing (أكتر من group)،
+    two way (متغيرين كميين).'
+  src:
+    page: 29
+    quote: |-
+      Tabular presentation
+      I. Simple frequency distribution table
+      II- Table of an association or contingency table
+      2 X 2
+      c x r
+      III. Comparing frequency distribution table
+      IV. Two way table or two way classification table
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.035
+  kind: enumerate
+  topic: tables
+  prompt: What are the parts of a complete frequency table (slide 31)?
+  points:
+  - Title (what, who, where and when)
+  - Variable with its categories
+  - Frequency (number or percent)
+  - Total (n)
+  - Source of data
+  pass: 5
+  hook: 'الجدول زي الجواب: عنوان (title: what, who, where, when)، وجوه عمودين (variable بالـ categories، وfrequency رقم أو
+    %)، وتحت توقيع (total n) وختم (source of data). 5 حاجات.'
+  src:
+    page: 31
+    quote: |-
+      Title
+      what, who, where & when
+      | Variable | Frequency (Number or percent) |
+      |---|---|
+      | Categories |  |
+      | Total | n |
+      Source of data
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.036
+  kind: mcq
+  topic: tables
+  stem: 'A table''s title should answer:'
+  options:
+  - What, who, where and when
+  - Only the variable's name
+  - The source of the data
+  - The sample size
+  answer: 0
+  why:
+  - The slide circles the title with 'what, who, where & when'.
+  - The variable heads its own column inside the table.
+  - The source of data is written under the table.
+  - The total n goes in the table's total row.
+  src:
+    page: 31
+    quote: |-
+      Title
+      what, who, where & when
+      | Variable | Frequency (Number or percent) |
+      |---|---|
+      | Categories |  |
+      | Total | n |
+      Source of data
+  status: unverified
+- id: res.L15.037
+  kind: mcq
+  topic: tables
+  stem: 'A table shows third-year students by degree of success (excellent, very good, good, fair). Its variable is:'
+  options:
+  - Qualitative ordinal
+  - Qualitative nominal
+  - Quantitative discrete
+  - Quantitative continuous
+  answer: 0
+  why:
+  - Grades are categories that can be put in order, so ordinal; the slide calls it a frequency table for qualitative data.
+  - Nominal categories have no order, unlike grades.
+  - The variable is the grade, not a count.
+  - The variable is the grade, not a measurement.
+  src:
+    page: 33
+    quote: |-
+      Simple frequency distribution table for qualitative data
+      Distribution of third year medical students according to their degree of success in May 2004 in Alexandria Faculty of Medicine
+      | Degree of success | No. of students | Percent % |
+      |---|---|---|
+      | Excellent | 120 | 14.12 |
+      | Very good | 200 | 23.52 |
+      | Good | 350 | 41.18 |
+      | Fair | 180 | 21.18 |
+      | Total | 850 | 100 |
+      Source: records of Alexandria faculty of medicine
+  status: unverified
+- id: res.L15.038
+  kind: mcq
+  topic: tables
+  stem: 'Of 21 intestinal parasites, Giardia lamblia was found 6 times. Its relative frequency is:'
+  options:
+  - 28.57%
+  - 14.29%
+  - 6%
+  - 35%
+  answer: 0
+  why:
+  - 6 ÷ 21 × 100 = 28.57%, as in the slide's table.
+  - 14.29% is Entamoeba histolytica (3 of 21).
+  - 6 is the count, not the percent.
+  - 6 ÷ 21 is not 35%.
+  src:
+    page: 36
+    quote: |-
+      | Parasites | n | % |
+      |---|---|---|
+      | Giardia lamblia | 6 | 28.57 |
+      | Ascaris lumbricoides | 6 | 28.57 |
+      | Enterobius vermicularis | 6 | 28.57 |
+      | Entamoeba histolytica | 3 | 14.29 |
+      | Total | 21 | 100.00 |
+  status: unverified
+- id: res.L15.039
+  kind: card
+  topic: tables
+  front: Give the slide's example of a frequency table for a discrete quantitative variable.
+  back: 'Distribution of families according to the number of children: 3–4 (25 families), 5–6 (55), 7–8 (18), 9–10 (9), total
+    107.'
+  src:
+    page: 38
+    quote: |-
+      Simple frequency distribution table for quantitative variable
+      E.g.2. Distribution of families according to the number of children (Quantitative discrete)
+      | No. of children | No. of families |
+      |---|---|
+      | 3 – 4 | 25 |
+      | 5 – 6 | 55 |
+      | 7 – 8 | 18 |
+      | 9 – 10 | 9 |
+      | Total | 107 |
+  status: unverified
+- id: res.L15.040
+  kind: card
+  topic: tables
+  front: How do you choose the lower limit of the first interval?
+  back: If the smallest observation is 0 or 5, start there. Otherwise take the round figure immediately lower than the smallest
+    observation.
+  src:
+    page: 40
+    quote: |-
+      Determining the lower limit of the first interval
+      if smallest observation= 0 or 5
+      Otherwise
+      Round figure immediately lower than the smallest observation
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.041
+  kind: mcq
+  topic: tables
+  stem: Weights of 57 children range from 12 to 79 lb. Where does the first interval start?
+  options:
+  - '10'
+  - '12'
+  - '0'
+  - '15'
+  answer: 0
+  why:
+  - 'The smallest value (12) is not 0 or 5, so take the round figure immediately below it: 10.'
+  - 12 is the smallest observation itself; the rule rounds down.
+  - 0 is used only when the smallest observation is 0.
+  - 15 is above the smallest value, so 12 would be left out.
+  src:
+    page: 42
+    quote: |-
+      Smallest =12 largest =79
+      Therefore first interval at 10.
+      10–
+      20–
+      30–
+      40–
+      50–
+      60–
+      70–80
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.042
+  kind: enumerate
+  topic: tables
+  prompt: State the rules for the width of class intervals.
+  points:
+  - Usually 5 or 10 or 15… etc.
+  - All of the same size unless otherwise indicated
+  - The permissible number of intervals is 4–12
+  - If the intervals come out fewer than 4, use a width less than 5
+  - If they come out more than 12, reconstruct the table with a width greater than 5
+  pass: 5
+  hook: 'الـ width «5 مضاعفات وعدد من 4 لـ 12»: خليه 5 أو 10 أو 15 وكله قد بعضه، ولو الفئات أقل من 4 صغّر الـ width تحت 5،
+    ولو أكتر من 12 كبّره فوق 5.'
+  src:
+    page: 41
+    quote: |-
+      Width of interval
+      Usually 5 or 10 or 15… etc.
+      all of the same size unless otherwise indicated.
+      Permissible number of 4-12 intervals.
+      If resulting intervals < 4
+      Therefore width less than 5.
+      If resulting intervals >12
+      reconstruct the table using a width greater than 5.
+  status: unverified
+- id: res.L15.043
+  kind: card
+  topic: tables
+  front: Why 4–12 intervals?
+  back: 'Tabular presentation summarizes a large mass of data (advantage) at the cost of some precision (disadvantage). Fewer
+    than 4 intervals: greater loss of precision. More than 12: the table misses its summarization value.'
+  src:
+    page: 43
+    quote: |-
+      4 -12 intervals
+      Why ?????
+      Tabular presentation
+      Advantage :summarization of a large mass of data
+      Disadvantage : loss of precision in the presentation
+      < 4 -> greater loss of precision
+      >12 -> missing the summarization value.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.044
+  kind: table
+  topic: tables
+  title: 'Avoiding duplicated interval limits: the 4 methods'
+  columns:
+  - Method
+  - First intervals
+  - Suits
+  rows:
+  - - A
+    - 10 to less than 15, 15 to less than 20
+    - Continuous or discrete
+  - - B
+    - 10-14, 15-19
+    - Discrete variables
+  - - C
+    - 10-, 15-, … 25<30
+    - Continuous or discrete
+  - - D
+    - 10-14.9, 15-19.9
+    - Continuous
+  blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+  src:
+    page: 44
+    quote: |-
+      Duplication of the limits of intervals must be avoided by one of the 4 methods
+      | A | B | C | D |
+      |---|---|---|---|
+      | 10 to less than 15 | 10-14 | 10- | 10-14.9 |
+      | 15 to less than 20 | 15-19 | 15- | 15-19.9 |
+      | 20 to less than 25 | 20-24 | 20- | 20-24.9 |
+      | 25 to less than 30 | 25-29 | 25<30 | 25-29.9 |
+      A and C continuous / discrete
+      B discrete variables
+      D continuous.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.045
+  kind: mcq
+  topic: tables
+  stem: Intervals written 10-14, 15-19, 20-24 suit which variables?
+  options:
+  - Discrete variables only
+  - Continuous variables only
+  - Both continuous and discrete
+  - Qualitative variables
+  answer: 0
+  why:
+  - 'A value like 14.5 would fall between 14 and 15, so this form only fits whole numbers (method B: discrete).'
+  - Continuous data need 10-14.9 (method D) or 'to less than' forms.
+  - Methods A (to less than) and C (10-) suit both.
+  - Intervals are for quantitative data.
+  src:
+    page: 44
+    quote: |-
+      Duplication of the limits of intervals must be avoided by one of the 4 methods
+      | A | B | C | D |
+      |---|---|---|---|
+      | 10 to less than 15 | 10-14 | 10- | 10-14.9 |
+      | 15 to less than 20 | 15-19 | 15- | 15-19.9 |
+      | 20 to less than 25 | 20-24 | 20- | 20-24.9 |
+      | 25 to less than 30 | 25-29 | 25<30 | 25-29.9 |
+      A and C continuous / discrete
+      B discrete variables
+      D continuous.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.046
+  kind: enumerate
+  topic: tables
+  prompt: Each interval in a frequency table has which 5 things?
+  points:
+  - Lower limit
+  - Upper limit
+  - Width
+  - Midpoint (x), calculated
+  - Number of observations (f)
+  pass: 5
+  hook: 'كل فئة شقة فيها 5: أرضية (lower limit)، سقف (upper limit)، عرض (width)، نص (midpoint x)، وسكان (f).'
+  src:
+    page: 45
+    quote: |-
+      Each interval in the table has the following:
+      Lower limit.
+      Upper limit.
+      Width.
+      Midpoint (x) (to be calculated).
+      Number of observations (f).
+  status: unverified
+- id: res.L15.047
+  kind: card
+  topic: tables
+  front: How is interval width defined on slide 46?
+  back: The difference between two consecutive lower class limits; e.g. family size 0-2, 3-5, 6-8… has a width of 3.
+  src:
+    page: 46
+    quote: |-
+      Interval Width
+      is the difference between two consecutive lower class limits
+      | Family size | Frequency |
+      |---|---|
+      | 0 - 2 | 20 |
+      | 3 - 5 | 14 |
+      | 6 - 8 | 15 |
+      | 9 - 11 | 2 |
+      | 12 - 14 | 1 |
+      Interval Width = 3
+  status: unverified
+- id: res.L15.048
+  kind: mcq
+  topic: tables
+  stem: 'Family size intervals 0-2, 3-5, 6-8, 9-11, 12-14. The midpoint of 6-8 is:'
+  options:
+  - '7'
+  - '6.5'
+  - '8'
+  - '3'
+  answer: 0
+  why:
+  - (6 + 8) ÷ 2 = 7, the red middle number on the slide.
+  - 6.5 would be the midpoint of 6 and 7 only.
+  - 8 is the upper limit.
+  - 3 is the interval width.
+  src:
+    page: 47
+    quote: |-
+      Interval Midpoints
+      midpoints of the intervals
+      | Family size | Frequency |
+      |---|---|
+      | 0 - 1 - 2 | 20 |
+      | 3 - 4 - 5 | 14 |
+      | 6 - 7 - 8 | 15 |
+      | 9 - 10 - 11 | 2 |
+      | 12 - 13 - 14 | 1 |
+      interval Midpoints: 1, 4, 7, 10, 13
+  status: unverified
+- id: res.L15.049
+  kind: card
+  topic: tables
+  front: For the continuous interval 65- (65 to <70), give LL, UL, width and midpoint.
+  back: LL = 65; UL = 69.999, practically 70; width (continuous) = UL − LL = 70 − 65 = 5; midpoint = (65 + 70) ÷ 2 = 67.5.
+  src:
+    page: 49
+    quote: |-
+      Each interval in the table has the following:
+      First interval:
+      L.L= 65
+      U.L = 69.999, practically ≈ 70
+      W (Continuous quantitative variable) = U.L. – L.L. = 70 – 65 = 5
+      Mid point (x)= (UL+LL)/2=65+70=67.5
+      Number of observations (f)= 22
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.050
+  kind: card
+  topic: tables
+  front: For the discrete interval 3–4 children, give width and midpoint.
+  back: Width (discrete) = (UL − LL) + 1 = (4 − 3) + 1 = 2, the number of counts in the interval (3 and 4). Midpoint = (3
+    + 4) ÷ 2 = 3.5.
+  src:
+    page: 50
+    quote: |-
+      Example for discrete quantitative variable:
+      Last interval:
+      L.L. = 3
+      U.L. = 4
+      Width (discrete) = (U.L. – L.L.) + 1 = (4 – 3) + 1
+      = 2 (No. of counts within the interval e.g. (3 & 4 = 2).
+      Mid point (x)= (3+4)/2=3.5
+      Number of observations(f)=25
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.051
+  kind: mcq
+  topic: tables
+  stem: Hb% intervals 65-, 70-, 75-, 80-… What is the midpoint of the third interval?
+  options:
+  - '77.5'
+  - '75'
+  - '80'
+  - '72.5'
+  answer: 0
+  why:
+  - 'The third interval is 75 to <80: (75 + 80) ÷ 2 = 77.5.'
+  - 75 is its lower limit.
+  - 80 is its upper limit.
+  - 72.5 is the midpoint of the second interval (70-).
+  src:
+    page: 69
+    quote: |-
+      Answer
+      The mid point= (75 + 80) / 2 = 77.5
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.052
+  kind: card
+  topic: tables
+  front: 'Data reduction: ages of 47 people run from 20 to 69. How were the intervals built?'
+  back: Range 69 − 20 = 49; 5 intervals; width 49 ÷ 5 = 9.8 ≈ 10; class intervals 20-29, 30-39, 40-49, 50-59, 60-69.
+  src:
+    page: 52
+    quote: |-
+      Data Reduction
+      Example (cont.)
+      Range: 69-20= 49
+      No. of intervals= 5
+      Width of intervals= 49/5 = 9.8 ≈ 10
+      Class intervals :20-29, 30-39, 40-49, 50-59, 60-69
+  status: unverified
+- id: res.L15.053
+  kind: mcq
+  topic: tables
+  stem: 'In the table of students who smoked at least once (n = 534), the cumulative % at the 22- interval is 55.63. It means:'
+  options:
+  - 55.63% of the students were aged 19 to under 23
+  - 55.63% were aged 22
+  - 55.63% were older than 22
+  - 18.94% were aged under 23
+  answer: 0
+  why:
+  - A cumulative % adds the % of every interval up to and including this one (19-, 20-, 21-, 22-).
+  - 18.94% were in the 22- interval alone.
+  - 'Older than 22 is the rest: 100 − 55.63 = 44.37%.'
+  - 18.94% is the 22- interval's own %.
+  src:
+    page: 53
+    quote: |-
+      Distribution of frequencies in students that have smoked at least once. n=534
+      | Age (years) | n | % | % cumulative |
+      |---|---|---|---|
+      | 19- | 52 | 14.70 | 14.70 |
+      | 20- | 32 | 9.00 | 23.70 |
+      | 21- | 46 | 12.99 | 36.69 |
+      | 22- | 67 | 18.94 | 55.63 |
+  status: unverified
+- id: res.L15.054
+  kind: card
+  topic: tables
+  front: What is an open-ended table, and should we use it?
+  back: A table where the lower limit of the first interval and/or the upper limit of the last interval is missed or unknown.
+    We should avoid it.
+  src:
+    page: 54
+    quote: |-
+      N.B.:
+      we should avoid open ended table
+      i.e.
+      lower limit of first interval
+      and/or upper limit of last interval are:
+      missed or unknown.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.055
+  kind: card
+  topic: comparing
+  front: What is a comparing frequency distribution table, and what if the groups differ in size?
+  back: A table showing the distribution of 2 or more groups according to 1 variable. The groups should have the same total
+    frequencies; otherwise calculate the percent of total for each frequency.
+  src:
+    page: 55
+    quote: |-
+      Comparing frequency distribution table
+      Distribution of 2 or more different groups according to 1 variable.
+      The total groups should have the same total frequencies
+      Otherwise
+      Calculate the percent of total for each frequency
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.056
+  kind: mcq
+  topic: comparing
+  stem: '100 low birth weight babies and 100 normal babies are tabulated by their mother''s level of education. This table
+    is a:'
+  options:
+  - Comparing frequency distribution table
+  - Two way classification table
+  - Simple frequency distribution table
+  - c × r association table of two quantitative variables
+  answer: 0
+  why:
+  - Two groups (LBW and normal) distributed by one variable (education), with equal totals.
+  - A two way table classifies one group by two quantitative variables.
+  - A simple table has one group and one variable.
+  - Education is qualitative, and the point is comparing two groups' distributions.
+  src:
+    page: 57
+    quote: |-
+      Example: Distribution of low birth weight babies and normal babies according to their mother's education
+      | Level of mothers education | L.B.W. | Normal |
+      |---|---|---|
+      | University | 22 | 30 |
+      | Secondary | 13 | 39 |
+      | Preparatory | 15 | 18 |
+      | Primary | 20 | 8 |
+      | Illiterate | 30 | 5 |
+      | Total | 100 | 100 |
+  status: unverified
+- id: res.L15.057
+  kind: card
+  topic: comparing
+  front: What is a table of association, and its types?
+  back: 'A table used to show a relation between a condition and a characteristic, e.g. smoking and lung cancer. Types: 2
+    × 2 table and c × r table.'
+  src:
+    page: 58
+    quote: |-
+      Table of association
+      It is used to show a relation between a condition and characteristic e.g. relation between smoking and lung cancer.
+      TYPES:
+      2 X2 table
+      c x r table
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.058
+  kind: mcq
+  topic: comparing
+  stem: 'Smokers and non-smokers in Alexandria (2003) are tabulated by lung cancer yes/no. This is a:'
+  options:
+  - 2 × 2 table of association
+  - c × r table
+  - Comparing frequency distribution table
+  - Two way classification table
+  answer: 0
+  why:
+  - Two rows (smoker, non-smoker) by two columns (cancer yes/no) relating a condition to an outcome.
+  - A c × r table needs more than two possibilities in a row or column variable.
+  - A comparing table shows groups by one variable, not a relation.
+  - Two way tables classify one group by two quantitative variables.
+  src:
+    page: 59
+    quote: |-
+      2 x 2 table
+      Relation between a condition and outcome
+      Ex. Relation between smoking and lung cancer among population in Alexandria 2003.
+      | Smoking status | Lung cancer Yes | Lung cancer No | Total |
+      |---|---|---|---|
+      | Smokers | 35 | 15 | 50 |
+      | Non-smokers | 65 | 85 | 150 |
+      | Total | 100 | 100 | 200 |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.059
+  kind: card
+  topic: comparing
+  front: When is a c × r table used?
+  back: With more than 2 rows and/or more than 2 columns, to reveal the association between a condition and a characteristic
+    when one or both of them has more than two possibilities.
+  src:
+    page: 60
+    quote: |-
+      c x r table
+      > 2 rows
+      > 2 columns to reveal the association between a condition and a characteristic, one or both of them having more than two possibilities
+  status: unverified
+- id: res.L15.060
+  kind: mcq
+  topic: comparing
+  stem: 'Three drugs (A, B, C) are tabulated against outcome (cured, improved, worsened). This is a:'
+  options:
+  - c × r table
+  - 2 × 2 table
+  - Two way classification table
+  - Simple frequency distribution table
+  answer: 0
+  why:
+  - 'Both variables have more than two possibilities: 3 × 3.'
+  - A 2 × 2 table has two possibilities each.
+  - Two way tables are for two quantitative variables.
+  - There are two variables here, not one.
+  src:
+    page: 61
+    quote: |-
+      c x r table
+      Different types of treatment of disease (X) and the outcome
+      | Treatment | Cured | Improved | Worsened | Total |
+      |---|---|---|---|---|
+      | Drug A | 35 | 12 | 3 | 50 |
+      | Drug B | 30 | 10 | 10 | 50 |
+      | Drug C | 33 | 12 | 5 | 50 |
+      | Total | 98 | 34 | 18 | 150 |
+  status: unverified
+- id: res.L15.061
+  kind: card
+  topic: comparing
+  front: What is a two way (two way classification) table?
+  back: One group classified by 2 quantitative variables (dependent and independent) that are assumed to be related, to find
+    any correlation between them, e.g. weight and height, or age and BP.
+  src:
+    page: 62
+    quote: |-
+      IV. Two way table or two way classification table
+      1 group
+      2 quantitative variables
+      (dependent & independent variables).
+      It is assumed that these 2 variables are related to each others
+      To find any correlation between these two variables
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.062
+  kind: mcq
+  topic: comparing
+  stem: '150 people are tabulated by weight intervals (rows) and height intervals (columns). This is a:'
+  options:
+  - Two way classification table
+  - c × r association table
+  - Comparing frequency distribution table
+  - Simple frequency distribution table
+  answer: 0
+  why:
+  - 'One group, two related quantitative variables, looking for correlation: the slide''s own example.'
+  - Association tables relate a condition to a characteristic (categories).
+  - A comparing table has two or more groups and one variable.
+  - A simple table has one variable.
+  src:
+    page: 63
+    quote: |-
+      One group classified into 2 QUANTITATIVE related variables to find correlation between these variables (wt and ht, age and BP)
+      | Weight | Height 150- | 155- | 160- | 165- | 170-175 | Total |
+      |---|---|---|---|---|---|---|
+      | 60- | 18 | 5 | 2 | - | - | 25 |
+      | 65- | 15 | 8 | 7 | 2 | - | 32 |
+      | 70- | 11 | 15 | 8 | 2 | 2 | 38 |
+      | 75- | 7 | 15 | 10 | 5 | 3 | 40 |
+      | 80- 85 | - | 2 | 5 | 1 | 7 | 15 |
+      | Total | 51 | 45 | 32 | 10 | 12 | 150 |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.063
+  kind: mcq
+  topic: comparing
+  stem: A table lists blood groups A, B, AB, O with their frequencies (total 20). Name the table and its variable type.
+  options:
+  - Simple frequency distribution table; qualitative nominal
+  - Comparing frequency table; qualitative ordinal
+  - Table of association; qualitative nominal
+  - Simple frequency table; quantitative discrete
+  answer: 0
+  why:
+  - 'One variable with unordered categories: the slide''s answer.'
+  - There is only one group, and blood groups have no order.
+  - Association needs two variables.
+  - Blood group is a category, not a count.
+  src:
+    page: 66
+    quote: |-
+      Answer
+      Simple frequency distribution table
+      The variable is qualitative nominal
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.064
+  kind: mcq
+  topic: comparing
+  stem: 'To show the relation between cancer colon and eating fast food, the suitable table is:'
+  options:
+  - Table of association (contingency table)
+  - Simple frequency distribution table
+  - Two way classification table
+  - Comparing frequency distribution table
+  answer: 0
+  why:
+  - A relation between a condition and a characteristic goes in a table of association, as the slide answers.
+  - A simple table shows one variable only.
+  - Two way tables are for two quantitative variables.
+  - A comparing table shows groups by one variable, not a relation.
+  src:
+    page: 67
+    quote: |-
+      2-To show the relation between occurrence of cancer colon and eating fast food, the suitable type of table that could be used to represent such relation is
+      Table of association or contingency table
+  status: unverified
+- id: res.L15.065
+  kind: mcq
+  topic: comparing
+  stem: A table shows smoking (exposed, not exposed) by CHD (cases, controls) with cells a, b, c, d. Name it.
+  options:
+  - 2 × 2 table of association (contingency)
+  - c × r table
+  - Two way classification table
+  - Simple frequency distribution table
+  answer: 0
+  why:
+  - 'Two possibilities for each variable relating an exposure to a disease: a 2 × 2 contingency table.'
+  - Each variable here has only two possibilities.
+  - Both variables are qualitative (yes/no), not quantitative.
+  - There are two variables.
+  src:
+    page: 64
+    quote: |-
+      1- Give the name of this table and the type of its variable
+      | Smoking | CHD YES + Cases | CHD NO - Control | Total |
+      |---|---|---|---|
+      | YES + Exposed | + + a 60 | - + b 20 | ---- |
+      | NO - Not exposed | + - c 40 | - - d 80 | ---- |
+      | Total | 100 a+c | 100 b+d | ---- |
+  status: unverified
+- id: res.L15.066
+  kind: enumerate
+  topic: graphs
+  prompt: List the graphs on slide 71 for presenting data.
+  points:
+  - Line graph
+  - Bar chart
+  - Histogram
+  - Frequency polygon
+  - Pie chart
+  pass: 5
+  hook: '5 رسومات «خط، عمدان لازقة وعمدان مفرّقة، نقط متوصلة، وتورتة»: line graph، histogram (لازقة)، bar chart (مفرّقة)،
+    frequency polygon، pie chart.'
+  src:
+    page: 71
+    quote: |-
+      Line graph
+      Bar chart
+      Histogram
+      Frequency polygons
+      Pie chart
+      Others
+  status: unverified
+- id: res.L15.067
+  kind: card
+  topic: graphs
+  front: Describe the line graph.
+  back: 'Used when an observation varies with time: time on the X axis, the quantitative (continuous or discrete) variable
+    on the Y axis; each observation is a dot opposite its X and Y values, and the data are presented by a line.'
+  src:
+    page: 72
+    quote: |-
+      Line Graph
+      Observation varies with TIME
+      Time on X axis
+      Variable quantitative continuous /discreet variables on Y axis
+      Data is presented by a line
+      Each observation : a dot opposite (X axis) and (Y axis)
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.068
+  kind: mcq
+  topic: graphs
+  stem: Which of these is best shown by a line graph?
+  options:
+  - Crude birth rate per 1000 over 2004–2008
+  - Blood groups of 20 patients
+  - Hb% of 100 pregnant women
+  - Parasites found in 25 children
+  answer: 0
+  why:
+  - 'A rate that varies with time: time on X, rate on Y (temperature chart, birth and death rates are the slide''s examples).'
+  - 'Blood groups are categories: bar or pie chart.'
+  - 'A continuous frequency distribution: histogram or frequency polygon.'
+  - 'Categories of one variable: bar or pie chart.'
+  src:
+    page: 73
+    quote: |-
+      Examples
+      Temperature chart
+      Birth rate
+      Death rates.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.069
+  kind: card
+  topic: graphs
+  front: Rules of the bar chart.
+  back: For qualitative or quantitative discrete data. Each category is a bar whose height is opposite its frequency on the
+    Y axis; bars have equal widths, with spaces between them.
+  src:
+    page: 80
+    quote: |-
+      Bar chart
+      Qualitative /Quantitative discrete type
+      Each category, a bar
+      Height opposite corresponding frequency on Y axis.
+      Bars width equal
+      spaces
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.070
+  kind: card
+  topic: graphs
+  front: Male and female patients (55 and 30) are compared by blood group in a bar chart. What should the bars show?
+  back: 'Percentages within each sex, not raw counts: with different totals, counts reflect group size. The slides cross out
+    the count chart and redraw it with % (A: 27.3% vs 16.7%, AB: 45.5% vs 40.0%).'
+  src:
+    page: 86
+    quote: |-
+      | Blood group | M | % | F | % |
+      |---|---|---|---|---|
+      | A | 15 | 27.3 | 5 | 16.7 |
+      | B | 10 | 18.2 | 4 | 13.3 |
+      | AB | 25 | 45.5 | 12 | 40.0 |
+      | O | 5 | 9.1 | 9 | 30.0 |
+      | Total | 55 | 100.0 | 30 | 100.0 |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.071
+  kind: card
+  topic: graphs
+  front: Rules of the pie chart.
+  back: For all variables, one variable from a simple table. Sectors = number of categories or intervals, drawn from 12 o'clock
+    clockwise; each sector is proportional to its frequency. Angle = frequency of the category ÷ total frequency × 360. To
+    compare, draw two pie charts.
+  src:
+    page: 88
+    quote: |-
+      Pie Chart
+      All variables
+      Simple table /one variable
+      Circle sectors = number of categories or intervals
+      From 12 O'clock
+      Clockwise direction.
+      Sector is proportional to the frequency of the category.
+      Calculating the angle of each sector.
+      Angle = Frequency of the category or the interval x 360 / Total frequency
+      Comparisons: two pie charts.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.072
+  kind: mcq
+  topic: graphs
+  stem: 'Bilharzia was found in 10 of 25 children. Its pie chart sector angle is:'
+  options:
+  - 144°
+  - 86.4°
+  - 40°
+  - 72°
+  answer: 0
+  why:
+  - 10 ÷ 25 × 360 = 144°.
+  - 86.4° is Ascaris (6 of 25).
+  - 40 is the percent (40%), not the angle.
+  - 72° is Oxyuris (5 of 25).
+  src:
+    page: 89
+    quote: |-
+      | Type of parasite | Frequency | Angle |
+      |---|---|---|
+      | Ascaris | 6 | 86.4 |
+      | Bilharzia | 10 | 144.0 |
+      | Oxyuris | 5 | 72.0 |
+      | E. histolytica | 4 | 57.6 |
+      | Total | 25 | 360.0 |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.073
+  kind: card
+  topic: graphs
+  front: Rules of the histogram.
+  back: For continuous quantitative variables, one variable in a simple table. Each interval is a column rising from its lower
+    to its upper limit on the X axis, height opposite its frequency on Y. The X axis is continuous, with no space between
+    columns. A scale break is used if the first lower limit is far from zero, allowed only on the horizontal axis.
+  src:
+    page: 91
+    quote: |-
+      The histogram
+      Continuous quantitative variables
+      Simple table/one variable
+      Each interval a column
+      Height opposite the frequency on Y axis.
+      X axis should be continuous
+      Column arises from the lower limit and upper limit of the on the X axis.
+      No space between the consecutive columns.
+      Scale break if lower limit of the first interval is far from zero,
+      Allowed only on the horizontal axis
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.074
+  kind: mcq
+  topic: graphs
+  stem: 'In a histogram, a scale break is allowed:'
+  options:
+  - Only on the horizontal axis
+  - Only on the vertical axis
+  - On either axis
+  - Never
+  answer: 0
+  why:
+  - 'The slide: used when the first lower limit is far from zero, and allowed only on the horizontal axis.'
+  - Breaking the frequency axis would distort the bar heights.
+  - Only the X axis may be broken.
+  - It is allowed, on the X axis.
+  src:
+    page: 91
+    quote: |-
+      The histogram
+      Continuous quantitative variables
+      Simple table/one variable
+      Each interval a column
+      Height opposite the frequency on Y axis.
+      X axis should be continuous
+      Column arises from the lower limit and upper limit of the on the X axis.
+      No space between the consecutive columns.
+      Scale break if lower limit of the first interval is far from zero,
+      Allowed only on the horizontal axis
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.075
+  kind: mcq
+  topic: graphs
+  stem: What separates a bar chart from a histogram?
+  options:
+  - Bar chart bars have spaces between them; histogram columns touch
+  - Bar charts are only for continuous data
+  - Histograms are for qualitative data
+  - Bar chart bars have unequal widths
+  answer: 0
+  why:
+  - Bar charts show separate categories with spaces; histograms show continuous intervals with no space.
+  - Bar charts are for qualitative or discrete data.
+  - Histograms are for continuous quantitative data.
+  - Bar widths are equal.
+  src:
+    page: 80
+    quote: |-
+      Bar chart
+      Qualitative /Quantitative discrete type
+      Each category, a bar
+      Height opposite corresponding frequency on Y axis.
+      Bars width equal
+      spaces
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.076
+  kind: card
+  topic: graphs
+  front: Rules of the frequency polygon.
+  back: For continuous quantitative variables, simple or complex tables. Each interval is a point opposite its frequency on
+    Y and its midpoint on X; consecutive points are joined by straight lines. A scale break and a key may be used.
+  src:
+    page: 94
+    quote: |-
+      The frequency polygon
+      Continuous quantitative variables
+      Table is of simple or complex type.
+      Each interval a single point opposite frequency on Y axis and opposite the mid-point of the interval on X axis.
+      Consecutive points are connected by straight line.
+      The scale break
+      key may be used when necessary.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.077
+  kind: mcq
+  topic: graphs
+  stem: 'In a frequency polygon, each interval''s point is plotted opposite its:'
+  options:
+  - Midpoint
+  - Lower limit
+  - Upper limit
+  - Width
+  answer: 0
+  why:
+  - The point sits above the interval's midpoint on X.
+  - The histogram column starts at the lower limit.
+  - The column ends at the upper limit; the point is in the middle.
+  - Width is not plotted.
+  src:
+    page: 94
+    quote: |-
+      The frequency polygon
+      Continuous quantitative variables
+      Table is of simple or complex type.
+      Each interval a single point opposite frequency on Y axis and opposite the mid-point of the interval on X axis.
+      Consecutive points are connected by straight line.
+      The scale break
+      key may be used when necessary.
+  status: unverified
+- id: res.L15.078
+  kind: mcq
+  topic: graphs
+  stem: 'To compare the height distributions of 20 boys and 20 girls on one graph, the slides use:'
+  options:
+  - Two frequency polygons with a key
+  - Two histograms on one axis
+  - One pie chart
+  - A line graph against time
+  answer: 0
+  why:
+  - Polygons can share axes without hiding each other, so the slides draw male and female polygons together.
+  - Overlapping histogram columns would hide each other.
+  - One pie shows one distribution; comparisons need two pies.
+  - There is no time variable here.
+  src:
+    page: 95
+    quote: |-
+      The frequency polygon
+      | Height in cm | Male | Female |
+      |---|---|---|
+      | 100- | 2 | 3 |
+      | 105- | 4 | 6 |
+      | 110- | 7 | 6 |
+      | 115- | 5 | 4 |
+      | 120<125 | 2 | 1 |
+      | Total | 20 | 20 |
+  status: unverified
+- id: res.L15.079
+  kind: mcq
+  topic: graphs
+  stem: About a histogram, which statement is NOT true?
+  options:
+  - It can be used instead of a pie chart to display categorical data
+  - It is similar to a bar chart but with no gaps between the bars
+  - Its bar heights are proportional to the frequency in each range
+  - It can display a frequency or a relative frequency distribution
+  answer: 0
+  why:
+  - Histograms are for continuous quantitative data; categories go in bar or pie charts.
+  - 'True: contiguous bars.'
+  - 'True: height opposite frequency.'
+  - 'True: frequency or relative frequency.'
+  src:
+    page: 123
+    quote: |-
+      Examine yourself
+      Select all of the following statements which you believe to be true. A histogram:
+      Can be used instead of a pie chart to display categorical data.
+      Is similar to a bar chart but there are no gaps between the bars.
+      Contains contiguous bars, with the height of each bar being proportional to the frequency of the observations in the range specified by the bar.
+      Can be used to display either a frequency or a relative frequency distribution.
+      Is used to show the relationship between two variables.
+  status: unverified
+- id: res.L15.080
+  kind: mcq
+  topic: graphs
+  stem: Which of these does a histogram NOT do?
+  options:
+  - Show the relationship between two variables
+  - Use contiguous bars
+  - Show a relative frequency distribution
+  - Represent a continuous quantitative variable
+  answer: 0
+  why:
+  - A histogram presents one variable; a relation between two needs another tool.
+  - It does use contiguous bars.
+  - It can show relative frequencies.
+  - That is exactly its use.
+  src:
+    page: 123
+    quote: |-
+      Examine yourself
+      Select all of the following statements which you believe to be true. A histogram:
+      Can be used instead of a pie chart to display categorical data.
+      Is similar to a bar chart but there are no gaps between the bars.
+      Contains contiguous bars, with the height of each bar being proportional to the frequency of the observations in the range specified by the bar.
+      Can be used to display either a frequency or a relative frequency distribution.
+      Is used to show the relationship between two variables.
+  status: unverified
+- id: res.L15.081
+  kind: card
+  topic: central
+  front: Define measures of central tendency.
+  back: Computed values around which most observations tend to concentrate.
+  src:
+    page: 98
+    quote: |-
+      Measures of Central Tendency
+      I- Measures of central tendency
+      These are computed values around which most observations tend to concentrate or allocate.
+  status: unverified
+- id: res.L15.082
+  kind: card
+  topic: central
+  front: x̄ vs μ.
+  back: 'x̄ (x-bar) is the mean of a set of sample values: Σx ÷ n. μ (mu) is the mean of all values in a population: Σx ÷
+    N.'
+  src:
+    page: 101
+    quote: |-
+      Notation
+      x̄ is pronounced 'x-bar' and denotes the mean of a set of sample values
+      x̄ = Σx / n
+      μ is pronounced 'mu' and denotes the mean of all values in a population
+      μ = Σx / N
+  status: unverified
+- id: res.L15.083
+  kind: mcq
+  topic: central
+  stem: What is the mean of 90, 80, 95, 85 and 65?
+  options:
+  - '83'
+  - '85'
+  - '80'
+  - '415'
+  answer: 0
+  why:
+  - Sum 415 ÷ 5 = 83.
+  - 85 is the median.
+  - 80 is one of the values.
+  - 415 is the sum, not the mean.
+  src:
+    page: 103
+    quote: |-
+      Test yourself
+      Mean = sum of values / Sample size = Σ (values) / n
+      Suppose data are: 90, 80, 95, 85, 65
+      x1 = 90, x2 = 80, x3 = 95, x4 = 85, x5 = 65
+      x̄ = Σxi / n = (x1+x2+x3+x4+x5) / 5 = (90+80+95+85+65) / 5 = 83
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.084
+  kind: order
+  topic: central
+  prompt: Put the steps of the mean of grouped data in order.
+  steps:
+  - Find the midpoint (X) of each interval = (UL + LL) ÷ 2
+  - Multiply f by X for each interval
+  - Find the sum of these products (ΣfX)
+  - 'Divide by the total frequency: x̄ = ΣfX ÷ Σf'
+  src:
+    page: 104
+    quote: |-
+      Find midpoint (X) of each interval= UL+LL/2
+      Multiply F by X for each interval
+      Find the sum of these products
+      Find arithmetic mean
+  status: unverified
+- id: res.L15.085
+  kind: mcq
+  topic: central
+  stem: 'Ages 15-, 25-, 35-, 45-, 55<65 have f = 10, 12, 15, 8, 5 (Σf = 50, ΣfX = 1860). The mean is:'
+  options:
+  - 37.2 years
+  - 40 years
+  - 35 years
+  - 18.6 years
+  answer: 0
+  why:
+  - ΣfX ÷ Σf = 1860 ÷ 50 = 37.2.
+  - 40 is the middle midpoint, not the weighted mean.
+  - 35 is a lower limit.
+  - Dividing by 100 is wrong; Σf is 50.
+  src:
+    page: 105
+    quote: |-
+      Calculate the mean.
+      | Age (year) | F | xi | fxi |
+      |---|---|---|---|
+      | 15- | 10 | 20 | 200 |
+      | 25- | 12 | 30 | 360 |
+      | 35- | 15 | 40 | 600 |
+      | 45- | 8 | 50 | 400 |
+      | 55 < 65 | 5 | 60 | 300 |
+      | Total | f=50 |  | fxi = 1860 |
+      x̄ = ΣfX / Σf = 1860 / 50 = 37.2years
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.086
+  kind: enumerate
+  topic: central
+  prompt: List the 4 disadvantages of the arithmetic mean.
+  points:
+  - Cannot be used with qualitative variables
+  - Can be a fraction when the variable takes only integer values
+  - Affected by extreme observations (outliers)
+  - Cannot be used for open-ended tables
+  pass: 4
+  hook: 'الـ mean بيقع في 4 مطبات «نوعي، كسر، شاذ، مفتوح»: مينفعش مع qualitative، ممكن يطلع كسر (2.4 عيل!)، بيتشد بالـ outliers،
+    ومينفعش مع open-ended table.'
+  src:
+    page: 106
+    quote: |-
+      Advantages & Disadvantages
+      Advantages:
+      easy to compute and interpret
+      generally the best measure of central location.
+      Disadvantages:
+      It cannot be used with qualitative variables
+      It can take on a fraction when the variable itself can take only integer values.
+      It is affected by the extreme observation or outliers.
+      Can not be used for open-ended tables.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.087
+  kind: card
+  topic: central
+  front: Advantages of the mean.
+  back: Easy to compute and interpret; generally the best measure of central location.
+  src:
+    page: 106
+    quote: |-
+      Advantages & Disadvantages
+      Advantages:
+      easy to compute and interpret
+      generally the best measure of central location.
+  status: unverified
+- id: res.L15.088
+  kind: card
+  topic: central
+  front: Define the median and give its rank when n is odd.
+  back: The middle value of the observations arranged from smallest to largest. For odd n, order them and its rank is (n +
+    1) ÷ 2.
+  src:
+    page: 107
+    quote: |-
+      Median
+      Defined as the middle value of the observations when arranged from smallest to largest.
+      Computation of the median from ungrouped data:
+      When n is odd:
+      The steps are:
+      Order observations ascending or descending
+      Determine the rank of the median given by (n+1)/2
+      Find the value of median.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.089
+  kind: mcq
+  topic: central
+  stem: Median age of 5, 8, 7, 12 and 10 years?
+  options:
+  - '8'
+  - '7'
+  - '8.4'
+  - '10'
+  answer: 0
+  why:
+  - 'Order: 5, 7, 8, 10, 12; rank (5 + 1) ÷ 2 = 3 → 8.'
+  - 7 is the 2nd value.
+  - 8.4 is the mean.
+  - 10 is the 4th value.
+  src:
+    page: 108
+    quote: |-
+      Example:
+      Find the median age of the following values
+      5, 8, 7, 12 and 10 years.
+      Ordering the observation: 5, 7, 8, 10, 12
+      The rank of the median = (n+1)/2 = (5+1)/2 = 6/2 = 3
+      The median = 8 years.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.090
+  kind: order
+  topic: central
+  prompt: Put the steps of the median for even n in order.
+  steps:
+  - Arrange the observations in ascending or descending order
+  - 'Find the ranks of the two middle observations: n/2 and n/2 + 1'
+  - Read the two middle values from the ordered list
+  - Median = sum of the 2 middle values ÷ 2
+  src:
+    page: 109
+    quote: |-
+      When n is even:
+      The steps are:
+      1. The observations are arranged in an ascending or descending magnitude.
+      2. Determine the ranks of the two middle observations given by: n/2 and n/2 + 1
+      3. Refer back to ordered observations and using the obtained ranks, we determine the two middle values.
+      4. The median = Sum of the 2 middle values / 2
+  status: unverified
+- id: res.L15.091
+  kind: mcq
+  topic: central
+  stem: Median weight of 8, 6, 12, 3, 5 and 7 kg?
+  options:
+  - 6.5 kg
+  - 6 kg
+  - 7 kg
+  - 6.83 kg
+  answer: 0
+  why:
+  - 'Order: 3, 5, 6, 7, 8, 12; ranks 3 and 4 → (6 + 7) ÷ 2 = 6.5.'
+  - 6 is only the 3rd value.
+  - 7 is only the 4th value.
+  - 6.83 is the mean.
+  src:
+    page: 110
+    quote: |-
+      Example:
+      Find the median weight of the following values: 8, 6, 12, 3, 5 and 7 Kg.
+      Ordering the observation: 3, 5, 6, 7, 8, 12
+      The ranks = 6/2 = 3 and 6/2 + 1 = 4
+      Median = (6 + 7) / 2 = 6.5 Kg
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.092
+  kind: enumerate
+  topic: central
+  prompt: List the 3 advantages of the median.
+  points:
+  - Used with quantitative and qualitative ordinal variables
+  - Used in open-ended tables
+  - Not affected by extreme values
+  pass: 3
+  hook: 'الـ median «الواقف في النص» مبيتهزّش: بيشتغل مع الكمي والـ ordinal، مع الـ open-ended table، ومبيتأثرش بالـ extreme
+    values. 3 مزايا.'
+  src:
+    page: 111
+    quote: |-
+      Median Advantages & Disadvantages:
+      Advantages:
+      Used with quantitative and qualitative ordinal variables.
+      Used in open ended tables.
+      Not affected by extreme values.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.093
+  kind: card
+  topic: central
+  front: Disadvantages of the median.
+  back: Cannot be used for qualitative nominal variables; not easy to use in statistical analysis; takes only one or two middle
+    observations into account, not all of them.
+  src:
+    page: 111
+    quote: |-
+      Median Advantages & Disadvantages:
+      Advantages:
+      Used with quantitative and qualitative ordinal variables.
+      Used in open ended tables.
+      Not affected by extreme values.
+      Disadvantages:
+      It can not be used for qualitative nominal variables
+      It is not easy to be used in statistical analysis
+      Not all observations are taken into consideration but only one or two middle observations.
+  status: unverified
+- id: res.L15.094
+  kind: card
+  topic: central
+  front: Define the mode. Which data can only the mode describe?
+  back: The score that occurs most frequently (denoted M). There may be two (bimodal), more (multimodal) or no mode. It is
+    the only measure of central tendency that can be used with nominal data.
+  src:
+    page: 113
+    quote: |-
+      Definitions
+      Mode
+      the score that occurs most frequently
+      Bimodal
+      Multimodal
+      No Mode
+      denoted by M
+      the only measure of central tendency that can be used with nominal data
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.095
+  kind: mcq
+  topic: central
+  stem: Mode of 3, 6, 7, 4, 19, 4, 10, 13, 10, 2, 1, 21, 4, 22?
+  options:
+  - '4'
+  - '10'
+  - '3'
+  - '22'
+  answer: 0
+  why:
+  - 4 occurs 3 times, more than any other value.
+  - 10 occurs twice.
+  - 3 occurs once.
+  - 22 is the largest value.
+  src:
+    page: 112
+    quote: |-
+      Mode
+      Mode
+      Most common value.
+      3, 6, 7, 4, 19, 4, 10, 13, 10, 2, 1, 21, 4, 22
+      Mode = 4
+  status: unverified
+- id: res.L15.096
+  kind: mcq
+  topic: central
+  stem: 'Data set 1 2 2 2 3 4 5 6 6 6 7 9 is:'
+  options:
+  - Bimodal (2 and 6)
+  - Unimodal (2)
+  - No mode
+  - Multimodal (2, 6, 9)
+  answer: 0
+  why:
+  - 2 and 6 each occur 3 times.
+  - 6 ties with 2.
+  - Some values repeat, so there is a mode.
+  - 9 occurs once.
+  src:
+    page: 114
+    quote: |-
+      Examples
+      a. 5 5 5 3 1 5 1 4 3 5
+      b. 1 2 2 2 3 4 5 6 6 6 7 9
+      c. 1 2 3 6 7 8 9 10
+  status: unverified
+- id: res.L15.097
+  kind: mcq
+  topic: central
+  stem: 'Data set 1 2 3 6 7 8 9 10 has:'
+  options:
+  - No mode
+  - A mode of 1
+  - A mode of 10
+  - Many modes
+  answer: 0
+  why:
+  - Every value occurs once, so the mode can't be determined.
+  - 1 occurs once like the others.
+  - 10 occurs once like the others.
+  - No value repeats.
+  src:
+    page: 114
+    quote: |-
+      Examples
+      a. 5 5 5 3 1 5 1 4 3 5
+      b. 1 2 2 2 3 4 5 6 6 6 7 9
+      c. 1 2 3 6 7 8 9 10
+  status: unverified
+- id: res.L15.098
+  kind: mcq
+  topic: central
+  stem: 'Marital status: single 2, married 10, divorced 4, widow 3. The mode is:'
+  options:
+  - Married
+  - '10'
+  - '19'
+  - Divorced
+  answer: 0
+  why:
+  - The mode is the category with the highest frequency, 'married'.
+  - 10 is its frequency, not the mode; a classic trap.
+  - 19 is the total.
+  - Divorced has 4.
+  src:
+    page: 119
+    quote: |-
+      For qualitative data
+      Modal interval (opposite the highest frequency)= "married" in the following table
+      | Marital Status | Frequency |
+      |---|---|
+      | Single | 2 |
+      | Married | 10 |
+      | Divorced | 4 |
+      | Widow | 3 |
+      | Total | 19 |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.099
+  kind: card
+  topic: central
+  front: The 2 ways to give the mode of grouped data.
+  back: '1. The modal interval: the interval opposite the highest frequency. 2. The midpoint of the modal interval (quantitative
+    data only) = (lower limit + upper limit of the modal interval) ÷ 2.'
+  src:
+    page: 117
+    quote: |-
+      Two methods can be used
+      1. The modal interval.
+      The interval opposite the highest frequency.
+      2. The mid-point of modal interval
+      (Used only for quantitative data)
+      mid point is obtained as follows:
+      = (Lower limit of modal interval + upper limit of modal interval) / 2
+  status: unverified
+- id: res.L15.100
+  kind: mcq
+  topic: central
+  stem: 'Weights 20-, 25-, 30-, 35-, 40-45 have f = 2, 4, 10, 5, 3. The midpoint of the modal interval is:'
+  options:
+  - 32.5 kg
+  - 30 kg
+  - '10'
+  - 35 kg
+  answer: 0
+  why:
+  - Modal interval 30<35 (f = 10); (30 + 35) ÷ 2 = 32.5, which the slide calls better.
+  - 30 is the lower limit.
+  - 10 is the highest frequency.
+  - 35 is the upper limit.
+  src:
+    page: 118
+    quote: |-
+      Examples:
+      Modal interval = 30<35 kg.
+      Mid-point of modal interval = 32.5 kg (is better).
+      | Weight (kg) | Frequency |
+      |---|---|
+      | 20- | 2 |
+      | 25- | 4 |
+      | 30- | 10 |
+      | 35- | 5 |
+      | 40-45 | 3 |
+      | Total | 24 |
+  status: unverified
+- id: res.L15.101
+  kind: enumerate
+  topic: central
+  prompt: List the 3 advantages of the mode.
+  points:
+  - Can be used with all types of variables
+  - Not affected by extreme or out-lying observations
+  - Can give the average of an open-ended table
+  pass: 3
+  hook: 'الـ mode «الأكتر شعبية» مقبول في كل حتة: كل أنواع المتغيرات، مبيتأثرش بالـ extremes، وبيشتغل مع الـ open-ended table.'
+  src:
+    page: 120
+    quote: |-
+      Advantages & Disadvantages
+      Advantages:
+      It can be used in all types of variables.
+      It is not affected by extremes or out-lying observation.
+      Can be used to determine the average from open ended table
+  status: unverified
+- id: res.L15.102
+  kind: card
+  topic: central
+  front: Disadvantages of the mode.
+  back: Sometimes it can't be determined (all observations have the same frequency); sometimes there are two (bimodal) or
+    more (multimodal) modes in the same data.
+  src:
+    page: 120
+    quote: |-
+      Advantages & Disadvantages
+      Advantages:
+      It can be used in all types of variables.
+      It is not affected by extremes or out-lying observation.
+      Can be used to determine the average from open ended table
+      Disadvantages:
+      Sometimes can not be determined, this happens when all observations have the same frequency.
+      Sometimes we may obtain two modes (bimodal) or more (multimodal) from the same group of data.
+  status: unverified
+- id: res.L15.103
+  kind: mcq
+  topic: central
+  stem: Transplant data 3, 15, 46, 64, 64, 623 give mean 135.8, median 55, mode 64. Why is the mean so far from the others?
+  options:
+  - It is pulled up by the extreme value 623
+  - Because n is even
+  - Because 64 occurs twice
+  - Because the data are qualitative
+  answer: 0
+  why:
+  - One outlier (623) inflates the mean; median and mode resist it.
+  - An even n only changes how the median is found.
+  - That decides the mode, not the mean.
+  - The data are numbers.
+  src:
+    page: 122
+    quote: |-
+      Mean = 135.8
+      Median = 55
+      Mode = 64
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.104
+  kind: mcq
+  topic: central
+  stem: 'Children per family in 9 families: 4, 6, 2, 2, 4, 3, 2, 1, 7. The mean is:'
+  options:
+  - '3.4'
+  - '3.2'
+  - '2.3'
+  - '3.7'
+  answer: 0
+  why:
+  - Sum 31 ÷ 9 = 3.44 ≈ 3.4 (choice C).
+  - 3.2 is off.
+  - 2.3 is off.
+  - 3.7 is off.
+  src:
+    page: 126
+    quote: |-
+      In nine families surveyed, the numbers of children per family were: 4, 6, 2, 2, 4, 3, 2, 1 and 7 respectively.
+      |  | A | B | C | D | E | Answer |
+      |---|---|---|---|---|---|---|
+      | 1. The mean | 3.2 | 2.3 | 3.4 | 2 | 3.7 |  |
+      | 2. The Median | 4 | 4 & 2 | 3 | 2 | 2.5 |  |
+      | 3. The mode | 7 | 4 | 3 | 2 | No mode |  |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.105
+  kind: mcq
+  topic: central
+  stem: 'The same 9 families (4, 6, 2, 2, 4, 3, 2, 1, 7). The median is:'
+  options:
+  - '3'
+  - '4'
+  - '2'
+  - '2.5'
+  answer: 0
+  why:
+  - Ordered 1, 2, 2, 2, 3, 4, 4, 6, 7; rank (9 + 1) ÷ 2 = 5th → 3.
+  - 4 is the 6th and 7th values.
+  - 2 is the mode.
+  - n is odd, so no averaging of two values.
+  src:
+    page: 126
+    quote: |-
+      In nine families surveyed, the numbers of children per family were: 4, 6, 2, 2, 4, 3, 2, 1 and 7 respectively.
+      |  | A | B | C | D | E | Answer |
+      |---|---|---|---|---|---|---|
+      | 1. The mean | 3.2 | 2.3 | 3.4 | 2 | 3.7 |  |
+      | 2. The Median | 4 | 4 & 2 | 3 | 2 | 2.5 |  |
+      | 3. The mode | 7 | 4 | 3 | 2 | No mode |  |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.106
+  kind: mcq
+  topic: central
+  stem: 'The same 9 families (4, 6, 2, 2, 4, 3, 2, 1, 7). The mode is:'
+  options:
+  - '2'
+  - '4'
+  - '7'
+  - No mode
+  answer: 0
+  why:
+  - 2 occurs 3 times.
+  - 4 occurs twice.
+  - 7 occurs once.
+  - 2 repeats most, so there is a mode.
+  src:
+    page: 126
+    quote: |-
+      In nine families surveyed, the numbers of children per family were: 4, 6, 2, 2, 4, 3, 2, 1 and 7 respectively.
+      |  | A | B | C | D | E | Answer |
+      |---|---|---|---|---|---|---|
+      | 1. The mean | 3.2 | 2.3 | 3.4 | 2 | 3.7 |  |
+      | 2. The Median | 4 | 4 & 2 | 3 | 2 | 2.5 |  |
+      | 3. The mode | 7 | 4 | 3 | 2 | No mode |  |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.107
+  kind: card
+  topic: dispersion
+  front: What is variability, and why isn't the mean enough?
+  back: The degree of dispersion (spread) of data points in a distribution. Data sets 3, 5, 7 and 0, 5, 10 have the same mean
+    (5), but the first points are close together and the second far apart.
+  src:
+    page: 128
+    quote: |-
+      Measures of Variability
+      What is variability?
+      The degree of dispersion (spread) of data points in a distribution
+      Data set: 3 5 7 (x̄ = 5)
+      Data points all fairly "close" together
+      Data set: 0 5 10 (x̄ = 5)
+      Data points relatively "far" apart
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.108
+  kind: enumerate
+  topic: dispersion
+  prompt: List the measures of dispersion (variability) on slide 129.
+  points:
+  - Range
+  - Variance
+  - Standard deviation
+  - IQR
+  - Standard error
+  - Confidence intervals
+  pass: 6
+  hook: 'الفرشة 6 «مدى، تباين وجذره، ربعين، خطأ، وفترة»: range، variance، standard deviation، IQR، standard error، confidence
+    intervals.'
+  src:
+    page: 129
+    quote: |-
+      Measures of Dispersion (variability)
+      Range
+      Variance
+      Standard Deviation
+      IQR
+      Standard Error
+      Confidence Intervals
+  status: unverified
+- id: res.L15.109
+  kind: card
+  topic: dispersion
+  front: 'The range: definition, formula, advantages and disadvantages.'
+  back: 'The difference between the 2 extreme scores: X max − X min (4, 8, 10, 16, 26 → 26 − 4 = 22). Easy to calculate and
+    makes conceptual sense, but uses only the 2 extreme scores and is not resistant to outliers.'
+  src:
+    page: 130
+    quote: |-
+      The Range
+      Conceptual definition: difference between the 2 extreme scores in the distribution
+      Calculated: range = X max – X min
+      Scores: 4, 8, 10, 16, 26
+      Range: 26 – 4 = 22
+      | Advantages | Disadvantages |
+      |---|---|
+      | Easy to calculate | Only uses the 2 extreme scores |
+      | Makes conceptual sense | Not resistant to outliers |
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.110
+  kind: mcq
+  topic: dispersion
+  stem: 'Main weakness of the range:'
+  options:
+  - It uses only the 2 extreme scores and is not resistant to outliers
+  - It is hard to calculate
+  - It can't be used for quantitative data
+  - It needs the mean first
+  answer: 0
+  why:
+  - The slide's two disadvantages.
+  - It is easy to calculate.
+  - It is for quantitative data.
+  - Range is just max − min.
+  src:
+    page: 130
+    quote: |-
+      The Range
+      Conceptual definition: difference between the 2 extreme scores in the distribution
+      Calculated: range = X max – X min
+      Scores: 4, 8, 10, 16, 26
+      Range: 26 – 4 = 22
+      | Advantages | Disadvantages |
+      |---|---|
+      | Easy to calculate | Only uses the 2 extreme scores |
+      | Makes conceptual sense | Not resistant to outliers |
+  status: unverified
+- id: res.L15.111
+  kind: card
+  topic: dispersion
+  front: Define the standard deviation and the variance.
+  back: 'SD (σ) is the most important, widely used measure of dispersion: the positive square root of the mean of squared
+    deviations of values from their mean, i.e. the typical distance of a data point from the mean. Its square is the variance.'
+  src:
+    page: 131
+    quote: |-
+      Standard Deviation σ
+      The standard deviation abbreviated as S.D and symbolically represented as sigma is the most important and wide used measure of dispersion.
+      It is defined as the positive square root of deviation of values from their mean i.e. it is the square root of the means of square deviation of values from their mean. The square of the s.d. is called the variance.
+      It is the typical (standard) difference (deviation) of an observation from the mean
+      It is the average distance a data point is from the mean.
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.112
+  kind: order
+  topic: dispersion
+  prompt: Put the steps of the sample standard deviation in order.
+  steps:
+  - Get the deviation of each value from the arithmetic mean
+  - Square each deviation
+  - Sum the squared deviations and divide by n − 1 to get the variance (S²)
+  - Take the square root of the variance to get the SD (S)
+  src:
+    page: 132
+    quote: |-
+      Standard Deviation (S)
+      First step
+      is obtaining the deviation of each value from the arithmetic mean.
+      Second step
+      is to square the deviation from the mean.
+      Third step:
+      The squared deviations are summed and divided by the number of observations minus one (n-1) to get the variance (S2)
+      Fourth step:
+      The square root of variance (S2) gives us the standard deviation(S).
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.113
+  kind: cloze
+  topic: dispersion
+  text: In the sample SD formula we divide by n − 1, but if n is {{c1::equal to or more than 30}} we divide by {{c2::n}} instead.
+  src:
+    page: 133
+    quote: 'N.B.: If n is equal to or more than 30 we divide only by n instead of n-1.'
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.114
+  kind: mcq
+  topic: dispersion
+  stem: SD of the weights 5, 7, 4, 8 and 6 kg?
+  options:
+  - 1.58 kg
+  - 2.5 kg
+  - 1.41 kg
+  - 10 kg
+  answer: 0
+  why:
+  - Mean 6; squared deviations 1+1+4+4+0 = 10; 10 ÷ (5 − 1) = 2.5; √2.5 = 1.58.
+  - 2.5 is the variance.
+  - √2 = 1.41 comes from dividing by n (5), not n − 1.
+  - 10 is the sum of squares.
+  src:
+    page: 134
+    quote: |-
+      Example: Find the standard deviation of the following weight values 5, 7, 4, 8 and 6 Kg.
+      Solution:
+      1- X̄ = ΣX / n = 30 / 5 = 6 Kg
+      2- Deviation of values from X̄
+      5 – 6 = - 1
+      7 – 6 = + 1
+      4 – 6 = - 2
+      8 – 6 = + 2
+      6 – 6 = 0
+      3- Square the deviation and sum
+      (-1)² + (+1)² + (-2)² + (+2)² + (0)² = 1+1+4+4= 10
+      S = √[ Σ(X – X̄)² / (n – 1) ] = √(10/4) = √2.5 = 1.58 Kg
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.115
+  kind: card
+  topic: dispersion
+  front: Population SD formula.
+  back: 'σ = √[Σ(x − μ)² ÷ N]: deviations from the population mean μ, divided by N (not N − 1).'
+  src:
+    page: 136
+    quote: |-
+      Population Standard Deviation
+      σ = √[ Σ(x – μ)² / N ]
+      calculators can compute the population standard deviation of data
+  status: unverified
+- id: res.L15.116
+  kind: order
+  topic: dispersion
+  prompt: Put the steps of the SD of grouped data in order.
+  steps:
+  - Find the midpoints (X)
+  - Find fX for each interval and their sum (ΣfX)
+  - Find fX² (midpoint × fX) and their sum (ΣfX²)
+  - S = √[(ΣfX² − (ΣfX)² ÷ Σf) ÷ (Σf − 1)]
+  src:
+    page: 137
+    quote: |-
+      Standard deviation for grouped data
+      Find the mid points (X) as before.
+      Find the product FX for each interval and the sum of these products (ΣfX).
+      Find the product fX2 by the multiplying the mid point (X) by the corresponding product fX and the sum of these products (ΣfX2)
+      Compute the standard deviation (s) given by:
+      S = √[ (ΣfX² – (ΣfX)²/Σf) / (Σf – 1) ]
+  status: unverified
+- id: res.L15.117
+  kind: mcq
+  topic: dispersion
+  stem: 'Grouped ages: Σf = 50, ΣfX = 1860, ΣfX² = 76800. On the slide the SD comes to:'
+  options:
+  - 12.34 years
+  - 152.15 years
+  - 37.2 years
+  - 7608 years
+  answer: 0
+  why:
+  - (76800 − 1860² ÷ 50) = 7608; with n ≥ 30 divide by 50 → 152.15; √152.15 = 12.34.
+  - 152.15 is the variance.
+  - 37.2 is the mean.
+  - 7608 is the sum of squared deviations.
+  src:
+    page: 139
+    quote: |-
+      S = √[ (ΣfX² – (ΣfX)²/Σf) / (Σf – 1) ] = √[ (76800 – (1860)²/50) / 50 ] = √[ (76800 – 69192) / 50 ]
+      = √(7608/50) = √152.15 = 12.3353 years
+  status: unverified
+  tags: [high-yield]
+- id: res.L15.118
+  kind: card
+  topic: dispersion
+  front: What is the variance?
+  back: The standard deviation squared.
+  src:
+    page: 141
+    quote: |-
+      Variance
+      standard deviation squared
+  status: unverified

@@ -73,6 +73,7 @@ pub const NOT_QUITE: &str = "قريب، بس مش دي.";
 pub const TRY: &str = "جرّب بنفسك";
 pub const TRY_OF: &str = "كارت";
 pub const TRY_DONE: &str = "تمام كده ✓";
+pub const TRY_SAVE_FAILED: &str = "ما عرفتش أحفظ تقييمك، فلسه على نفس الكارت وإجابتك زي ما هي. قيّم تاني.";
 
 pub const DONE_TITLE: &str = "خلّصت الدرس";
 pub const FIRST_TRY: &str = "صح من أول مرة";
@@ -212,3 +213,5 @@ pub const REMIND: &str = "افتكر التحشيشة";
 pub const REMIND_LIST: &str = "افتكرها";
 pub const REMIND_FROM: &str = "من درس";
 pub const REMIND_FROM_HINT: &str = "افتح الدرس اللي التحشيشة دي اتشرحت فيه";
+pub const FINISH_UNSAVED: &str = "ما عرفتش أسجّل إن الدرس خلص، فلسه على آخر خطوة وإجاباتك زي ما هي. جرّب تاني.";
+pub const PLACE_UNSAVED: &str = "ما عرفتش أحفظ مكانك في الدرس. إجاباتك لسه هنا؛ جرّب تاني قبل ما تقفل.";

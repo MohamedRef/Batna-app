@@ -215,6 +215,7 @@ mod tests {
 
     #[test]
     fn the_running_plan_caps_reviews_and_can_pause_new_items() {
+        crate::store::use_thread_store(); // the plan is one shared setting key
         let mut dom = VirtualDom::new(|| {
             use_hook(|| save(Some(Plan { start_day: 7, days: 2, backlog: 5, pause_new: true })));
             rsx! {}
@@ -251,6 +252,7 @@ mod tests {
     }
 
     fn render(due: usize, plan: Option<Plan>) -> String {
+        crate::store::use_thread_store(); // the plan is one shared setting key
         let mut dom = VirtualDom::new_with_props(Card, CardProps { due, plan });
         dom.rebuild_in_place();
         dioxus::ssr::render(&dom)
@@ -279,6 +281,7 @@ mod tests {
 
     #[test]
     fn the_plan_round_trips_as_a_synced_setting() {
+        crate::store::use_thread_store(); // the plan is one shared setting key
         let plan = Plan { start_day: -5, days: 2, backlog: 40, pause_new: false };
         assert!(crate::store::save_setting(KEY, &plan));
         assert_eq!(crate::store::shared().setting::<Plan>(KEY), Some(plan));

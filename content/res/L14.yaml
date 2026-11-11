@@ -1,0 +1,1410 @@
+schema: batna.content/v1
+lecture: res.L14
+title: Disease screening and diagnostic tests accuracy
+author: Prof. Maha Moamen
+book:
+  chapter: 1
+  pages: [1, 31]
+topics:
+- id: screening
+  title: Levels of prevention, the iceberg, screening and its criteria
+- id: good_test
+  title: 'A good screening test: reliability and validity'
+- id: validity
+  title: Sensitivity, specificity, false results, SpPin and SnNout
+- id: predictive
+  title: Predictive values, accuracy and the effect of prevalence
+- id: cutoff
+  title: The cost of false results and choosing a cut-point
+- id: roc
+  title: The ROC curve and the area under it
+items:
+- id: res.L14.001
+  kind: enumerate
+  topic: screening
+  prompt: Enumerate the three levels of prevention, with the slide's example of each.
+  points:
+  - 'Primary prevention: intervene before the disease develops (e.g. immunisation)'
+  - 'Secondary prevention: intervene after the disease develops to reduce severity or recurrence (e.g. screening)'
+  - 'Tertiary prevention: intervene after the disease develops to reduce its consequences (e.g. screening for diabetic eye
+    disease)'
+  pass: 3
+  hook: 'الوقاية 3 أدوار «قبل، بدري، وبعد»: primary قبل المرض (immunisation)، secondary تقلل الـ severity (screening)، و tertiary
+    تقلل الـ consequences (screening for diabetic eye disease).'
+  src:
+    page: 2
+    quote: |-
+      Intervene before disease develops: primary prevention e.g. immunisation
+      Intervene after disease develops to reduce severity or recurrence: secondary prevention e.g. screening
+      Intervene after disease develops to reduce consequences: tertiary prevention e.g. screening for diabetic eye disease
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.002
+  kind: mcq
+  topic: screening
+  stem: 'On the slide''s prevention timeline, screening diabetics for eye disease is an example of:'
+  options:
+  - Tertiary prevention
+  - Primary prevention
+  - Secondary prevention
+  - Health promotion
+  answer: 0
+  why:
+  - The diabetes is already there; finding its eye complication early reduces the consequences (disability), which the slide
+    calls tertiary prevention.
+  - Primary prevention acts before the disease develops, like immunisation.
+  - Secondary prevention screens for the disease itself to reduce its severity; here the disease (diabetes) is already known.
+  - Health promotion is not one of the three levels on the slide.
+  src:
+    page: 2
+    quote: |-
+      Intervene before disease develops: primary prevention e.g. immunisation
+      Intervene after disease develops to reduce severity or recurrence: secondary prevention e.g. screening
+      Intervene after disease develops to reduce consequences: tertiary prevention e.g. screening for diabetic eye disease
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.003
+  kind: card
+  topic: screening
+  front: What is the iceberg phenomenon of disease?
+  back: Disease progresses from sub-clinical stages to overt disease. The hidden mass of unrecognised (undiagnosed) cases
+    in the community is the submerged part of the iceberg; the apparent, overt cases physicians see are the floating tip.
+    Detecting the hidden mass is a challenge to preventive medicine.
+  src:
+    page: 3
+    quote: |-
+      Iceberg Phenomenon
+      The disease progress from sub-clinical stages to overt or apparent disease
+      The hidden mass of unrecognised disease in the community (undiagnosed cases) corresponds to the submerged portion of the iceberg
+      What physicians see in their practices (apparent and overt cases) corresponds to the floating tip
+      Detection of this mass is a challenge to preventive medicine
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.004
+  kind: mcq
+  topic: screening
+  stem: 'In the iceberg phenomenon, the submerged portion of the iceberg corresponds to:'
+  options:
+  - Undiagnosed cases of unrecognised disease in the community
+  - The cases physicians see in their practices
+  - People who will never develop the disease
+  - Cases that have died of the disease
+  answer: 0
+  why:
+  - The hidden mass of unrecognised disease is under the water, and finding it is preventive medicine's challenge.
+  - Those apparent, overt cases are the floating tip.
+  - Healthy people are not part of the iceberg at all.
+  - Deaths are not what the iceberg describes; it contrasts hidden and overt cases.
+  src:
+    page: 3
+    quote: |-
+      The hidden mass of unrecognised disease in the community (undiagnosed cases) corresponds to the submerged portion of the iceberg
+      What physicians see in their practices (apparent and overt cases) corresponds to the floating tip
+  status: unverified
+- id: res.L14.005
+  kind: card
+  topic: screening
+  front: Define disease screening.
+  back: A process of identifying apparently healthy people who may be at increased risk of a disease. They can then be offered
+    further diagnostic tests and appropriate treatment to reduce the risk of the disease or its complications.
+  src:
+    page: 4
+    quote: |-
+      A process of identifying apparently healthy people who may be at increased risk of a disease.
+      They can then be offered further diagnostic tests and appropriate treatment to reduce the risk of the disease or its related complications.
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.006
+  kind: cloze
+  topic: screening
+  text: Early diagnosis and treatment ensure a better outcome than the usual {{c1::symptomatic (late)}} diagnosis, and screening
+    extends to screening of {{c2::risk factors}}, such as elevated cholesterol as a risk for coronary heart disease.
+  src:
+    page: 4
+    quote: |-
+      Early diagnosis and treatment ensure better outcome compared with usual symptomatic (late) diagnosis and treatment
+      Screening extends to screening of risk factors (Elevated cholesterol level as a risk for coronary heart disease)
+  status: unverified
+- id: res.L14.007
+  kind: order
+  topic: screening
+  prompt: Put the path of a screen-detected case in order.
+  steps:
+  - Apparently well population (well persons plus those with undiagnosed disease)
+  - Screening test
+  - 'Positives: persons presumed to have the disease or be at increased risk'
+  - Diagnostic procedures
+  - Disease or risk factor present
+  - Therapeutic intervention
+  src:
+    page: 5
+    quote: |-
+      APPARENTLY WELL POPULATION
+      (Well persons plus those with undiagnosed disease)
+      Population To Be Tested
+      SCREENING TEST
+      Negatives (Persons presumed to be free of disease under study)
+      Positives (Persons presumed to have the disease or be at increased risk in future)
+      DIAGNOSTIC PROCEDURES
+      Disease or Risk Factor Present -> THERAPEUTIC INTERVENTION
+  status: unverified
+- id: res.L14.008
+  kind: mcq
+  topic: screening
+  stem: A person's screening test is positive. What comes next?
+  options:
+  - Diagnostic procedures to confirm or exclude the disease
+  - Treatment straight away, since the test is positive
+  - 'Nothing: a positive screen is the diagnosis'
+  - Repeat screening in a year
+  answer: 0
+  why:
+  - Screen positives are only presumed to have the disease; some are false positives, so a diagnostic test decides.
+  - Treatment follows only when the diagnostic procedure finds the disease or risk factor present.
+  - 'Screening is not diagnosis: the slide shows positives on test with no disease.'
+  - Rescreening is for negatives, not for a positive that needs confirming.
+  src:
+    page: 5
+    quote: |-
+      Negatives (Persons presumed to be free of disease under study)
+      Positives (Persons presumed to have the disease or be at increased risk in future)
+      DIAGNOSTIC PROCEDURES
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.009
+  kind: table
+  topic: screening
+  title: Logic of screening
+  columns:
+  - Screening result
+  - Disease present
+  - No disease
+  rows:
+  - - Negative
+    - False negative
+    - True negative
+  - - Positive (then diagnostic test)
+    - True positive
+    - False positive
+  blanks:
+  - - 0
+    - 1
+  - - 0
+    - 2
+  - - 1
+    - 1
+  - - 1
+    - 2
+  src:
+    page: 6
+    quote: |-
+      Logic of screening
+      Apparently well population
+      Screening test
+      Negative results
+        Disease (False negative)
+        No disease (True negative)
+      Positive results: Diagnostic test
+        Disease (True positive)
+        No disease (False positive)
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.010
+  kind: card
+  topic: screening
+  front: Who set the classic criteria for a disease suitable for screening, and when?
+  back: Wilson and Jungner, 1968 (the classic screening criteria).
+  src:
+    page: 7
+    quote: Box 1. Wilson and Jungner classic screening criteria
+  status: unverified
+- id: res.L14.011
+  kind: enumerate
+  topic: screening
+  prompt: Enumerate Wilson and Jungner's classic screening criteria (1968).
+  points:
+  - The condition is an important health problem
+  - There is an accepted treatment for patients with recognized disease
+  - Facilities for diagnosis and treatment are available
+  - There is a recognizable latent or early symptomatic stage
+  - There is a suitable test or examination
+  - The test is acceptable to the population
+  - The natural history of the condition, from latent to declared disease, is adequately understood
+  - There is an agreed policy on whom to treat as patients
+  - The cost of case-finding is economically balanced against medical care as a whole
+  - Case-finding is a continuing process, not a once-and-for-all project
+  pass: 7
+  hook: 'الـ 10 بتوع Wilson and Jungner = 4 للمرض + 3 للـ test + 3 للسيستم: المرض (important problem، accepted treatment،
+    latent stage، natural history)، الـ test (suitable test، acceptable، cost balanced)، والسيستم (facilities، agreed policy
+    on whom to treat، case-finding continuing).'
+  src:
+    page: 7
+    quote: |-
+      Criteria for the disease suitable for screening 1968
+      Box 1. Wilson and Jungner classic screening criteria
+      1. The condition sought should be an important health problem.
+      2. There should be an accepted treatment for patients with recognized disease.
+      3. Facilities for diagnosis and treatment should be available.
+      4. There should be a recognizable latent or early symptomatic stage.
+      5. There should be a suitable test or examination.
+      6. The test should be acceptable to the population.
+      7. The natural history of the condition, including development from latent to declared disease, should be adequately understood.
+      8. There should be an agreed policy on whom to treat as patients.
+      9. The cost of case-finding (including diagnosis and treatment of patients diagnosed) should be economically balanced in relation to possible expenditure on medical care as a whole.
+      10. Case-finding should be a continuing process and not a "once and for all" project.
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.012
+  kind: table
+  topic: screening
+  title: Screening criteria (1968) grouped
+  columns:
+  - Related to
+  - Criteria
+  rows:
+  - - The disease
+    - Important public health problem; acceptable treatment available; well-known natural history; recognizable latent (preclinical)
+      period
+  - - The test
+    - A suitable test is available; the test is acceptable; the programme's cost is balanced against total expenditure
+  - - The system
+    - Facilities to diagnose (confirm) and treat; agreed policy on whom to treat as patients; case finding is a continuous
+      process
+  blanks:
+  - - 0
+    - 1
+  - - 1
+    - 1
+  - - 2
+    - 1
+  src:
+    page: 8
+    quote: |-
+      Criteria for the disease suitable for screening 1968
+      Criteria related to the disease
+      1. The disease is an important public health problem
+      2. Availbility of acceptable treatment for patients
+      3. Well known natural history of the disease
+      4. Recognizable latent period of the disease(preclinical phase)
+      Criteria related to the test
+      1. Availability of a suitable test
+      2. The test is acceptable
+      3. The cost of the screening program is balanced in relation to the total expenditure
+      Criteria related to the system
+      1. Facilities to diagnose (confirm ) and treat patients
+      2. Agreed policy on whom to treat as patients
+      3. Case finding is a continous process
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.013
+  kind: mcq
+  topic: screening
+  stem: 'In the grouped 1968 criteria, "case finding is a continuous process" is a criterion related to:'
+  options:
+  - The system
+  - The disease
+  - The test
+  - The population's acceptance
+  answer: 0
+  why:
+  - The system side holds facilities to confirm and treat, an agreed policy on whom to treat, and continuous case finding.
+  - Disease criteria are importance, treatment, natural history and a latent period.
+  - Test criteria are a suitable, acceptable test with a balanced cost.
+  - Acceptability is a test criterion, and it is not this one.
+  src:
+    page: 8
+    quote: |-
+      Criteria related to the disease
+      1. The disease is an important public health problem
+      2. Availbility of acceptable treatment for patients
+      3. Well known natural history of the disease
+      4. Recognizable latent period of the disease(preclinical phase)
+      Criteria related to the test
+      1. Availability of a suitable test
+      2. The test is acceptable
+      3. The cost of the screening program is balanced in relation to the total expenditure
+      Criteria related to the system
+      1. Facilities to diagnose (confirm ) and treat patients
+      2. Agreed policy on whom to treat as patients
+      3. Case finding is a continous process
+  status: unverified
+- id: res.L14.014
+  kind: enumerate
+  topic: screening
+  prompt: Give the five examples of screening programmes on the slide.
+  points:
+  - Neonatal screening for hypothyroidism
+  - Screening for hepatitis C
+  - Screening for breast cancer and cervical cancer
+  - Screening of diabetic patients for eye problems
+  - Hearing and visual defects in school children
+  pass: 4
+  hook: '5 برامج «من المولود للمدرسة»: neonatal hypothyroidism، hepatitis C، breast و cervical cancer، عين مريض السكر، وسمع
+    ونظر تلاميذ المدارس.'
+  src:
+    page: 9
+    quote: |-
+      Examples for screening programs
+      Neonatal screening for hypothyrodism
+      Screning for hepatitis C
+      Screening for breast cancer and cervical cancer
+      Screening of diabetic patients for eye problems
+      Hearing and visual defects in school children
+  status: unverified
+- id: res.L14.015
+  kind: enumerate
+  topic: good_test
+  prompt: Enumerate the characteristics of a good screening test.
+  points:
+  - Inexpensive
+  - Easy to administer
+  - Minimal discomfort
+  - Reliable (consistent)
+  - Valid (distinguishes diseased from non-diseased people)
+  pass: 4
+  hook: 'الـ test الكويس «رخيص، سهل، مبيوجعش، ثابت، وصادق»: inexpensive، easy to administer، minimal discomfort، reliable،
+    valid.'
+  src:
+    page: 10
+    quote: |-
+      Characteristics of a Good Screening Test
+      Inexpensive
+      Easy to administer
+      Minimal discomfort
+      Reliable (consistent)
+      Valid (distinguishes diseased & non-diseased people)
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.016
+  kind: card
+  topic: good_test
+  front: Define reliability.
+  back: The extent to which the outcomes are consistent when the experiment is repeated more than once.
+  src:
+    page: 11
+    quote: RELIABILITY is the extent to which the outcomes are consistent when the experiment is repeated more than once.
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.017
+  kind: card
+  topic: good_test
+  front: Define validity.
+  back: The extent to which the instruments used in the experiment measure exactly what you want them to measure.
+  src:
+    page: 11
+    quote: VALIDITY is the extent to which the instruments that are used in the experiment measure exactly what you want them
+      to measure.
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.018
+  kind: mcq
+  topic: good_test
+  stem: 'A blood test gives the same reading every time it is repeated on the same sample, but it misses many people who have
+    the disease. The test is:'
+  options:
+  - Reliable but not valid
+  - Valid but not reliable
+  - Both reliable and valid
+  - Neither reliable nor valid
+  answer: 0
+  why:
+  - Consistent on repetition is reliability; failing to measure what we want (the disease) is poor validity.
+  - Its results are consistent, so it is reliable; it is validity that fails.
+  - 'Missing many diseased people means it is not measuring what we want: not valid.'
+  - It is consistent, so it is reliable.
+  src:
+    page: 11
+    quote: |-
+      RELIABILITY is the extent to which the outcomes are consistent when the experiment is repeated more than once.
+      DEFINITION
+      VALIDITY is the extent to which the instruments that are used in the experiment measure exactly what you want them to measure.
+  status: unverified
+- id: res.L14.019
+  kind: card
+  topic: validity
+  front: What is the validity of a screening test?
+  back: The extent to which the test distinguishes between persons with and without the disease (measured by sensitivity and
+    specificity).
+  src:
+    page: 12
+    quote: the extent to which the test distinguishes between persons with and without the disease
+  status: unverified
+- id: res.L14.020
+  kind: card
+  topic: validity
+  front: 'Sensitivity: what is it the ability to avoid, and what is that error?'
+  back: 'Sensitivity is the ability to avoid false negatives: accuracy in including all who have the problem. A false negative
+    is a subject who has the problem but is incorrectly identified as not having it.'
+  src:
+    page: 12
+    quote: |-
+      Sensitivity
+      Ability to avoid false negatives; accuracy in including all who have the problem
+      False negative- Subjects have problem, incorrectly identified as not having the problem
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.021
+  kind: card
+  topic: validity
+  front: 'Specificity: what is it the ability to avoid, and what is that error?'
+  back: 'Specificity is the ability to avoid false positives: accuracy in not including non-affected persons. A false positive
+    is a subject who does not have the problem but is incorrectly identified as having it.'
+  src:
+    page: 12
+    quote: |-
+      Specificity
+      Ability to avoid false positive; accuracy in not including non affected persons
+      False positive - subjects doesn't have the problem, incorrectly identified as having the problem
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.022
+  kind: cloze
+  topic: validity
+  text: Sensitivity is the proportion of those who {{c1::have the disease}} who are correctly identified by the test as {{c2::positive}}.
+  src:
+    page: 13
+    quote: Sensitivity is the proportion of those who have the disease who are correctly identified by the test as positive
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.023
+  kind: cloze
+  topic: validity
+  text: Specificity is the proportion of those who {{c1::do not have the disease}} who are correctly identified by the test
+    as {{c2::negative}}.
+  src:
+    page: 13
+    quote: Specificity is the proportion of those who do not have the disease who are correctly identified by the test as
+      negative
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.024
+  kind: mcq
+  topic: validity
+  stem: 'Sensitivity and specificity are characteristics of:'
+  options:
+  - The test
+  - The population tested
+  - The disease prevalence
+  - The individual patient's result
+  answer: 0
+  why:
+  - 'The slide states it outright: they describe how the test behaves in the diseased and the non-diseased.'
+  - The population changes predictive values, not these two.
+  - They are not related to prevalence (slide 24).
+  - They don't interpret one patient's result; predictive values do (slide 19).
+  src:
+    page: 13
+    quote: |-
+      Sensitivity and specificity are characteristics of the test
+      Sensitivity is the proportion of those who have the disease who are correctly identified by the test as positive
+      Specificity is the proportion of those who do not have the disease who are correctly identified by the test as negative
+  status: unverified
+- id: res.L14.025
+  kind: calc
+  topic: validity
+  calculator: diagnostic_accuracy
+  stem: 'Screening 1,000 people: 80 true positives, 100 false positives, 20 false negatives, 800 true negatives.'
+  question: What is the sensitivity?
+  inputs:
+    tp: 80
+    fp: 100
+    fn: 20
+    tn: 800
+    measure: sensitivity
+  expect: 80%
+  interpret: '80 of the 100 people with the disease test positive: 80/100 = 80%.'
+  src:
+    page: 14
+    quote: |-
+      Calculations of sensitivity and specificity
+      | Screening Results | Disease | No Disease | Total |
+      |---|---|---|---|
+      | Positive | 80 | 100 | 180 |
+      | Negative | 20 | 800 | 820 |
+      | Total | 100 | 900 | 1,000 |
+      Sensitivity = 80/100 = 80%
+      Specificity = 800/900 = 89%
+  status: unverified
+  tags: [numbers, high-yield]
+- id: res.L14.026
+  kind: calc
+  topic: validity
+  calculator: diagnostic_accuracy
+  stem: 'Same table: 80 true positives, 100 false positives, 20 false negatives, 800 true negatives.'
+  question: What is the specificity?
+  inputs:
+    tp: 80
+    fp: 100
+    fn: 20
+    tn: 800
+    measure: specificity
+  expect: 88.89%
+  interpret: '800 of the 900 people without the disease test negative: 800/900 = 88.9%, which the slide rounds to 89%.'
+  src:
+    page: 14
+    quote: |-
+      Calculations of sensitivity and specificity
+      | Screening Results | Disease | No Disease | Total |
+      |---|---|---|---|
+      | Positive | 80 | 100 | 180 |
+      | Negative | 20 | 800 | 820 |
+      | Total | 100 | 900 | 1,000 |
+      Sensitivity = 80/100 = 80%
+      Specificity = 800/900 = 89%
+  status: unverified
+  tags: [numbers, high-yield]
+- id: res.L14.027
+  kind: mcq
+  topic: validity
+  stem: 'In the slide''s table (positive: 80 diseased, 100 not; negative: 20 diseased, 800 not), how many are false negatives?'
+  options:
+  - '20'
+  - '100'
+  - '80'
+  - '800'
+  answer: 0
+  why:
+  - 'False negatives have the disease but test negative: the 20 in the disease column, negative row.'
+  - '100 are false positives: test positive without the disease.'
+  - 80 are true positives.
+  - 800 are true negatives.
+  src:
+    page: 14
+    quote: |-
+      Calculations of sensitivity and specificity
+      | Screening Results | Disease | No Disease | Total |
+      |---|---|---|---|
+      | Positive | 80 | 100 | 180 |
+      | Negative | 20 | 800 | 820 |
+      | Total | 100 | 900 | 1,000 |
+      Sensitivity = 80/100 = 80%
+      Specificity = 800/900 = 89%
+  status: unverified
+  tags: [numbers]
+- id: res.L14.028
+  kind: mcq
+  topic: validity
+  stem: A student computes sensitivity from the slide's table as 80/180. What went wrong?
+  options:
+  - 180 is all test positives (the PPV denominator); sensitivity divides by all with the disease, 100
+  - 'Nothing: sensitivity is true positives over all positives'
+  - Sensitivity should be 800/900
+  - Sensitivity should be 80/1000
+  answer: 0
+  why:
+  - 'Sensitivity starts from the true state, disease present (a + c = 100): 80/100 = 80%. 80/180 is the PPV.'
+  - True positives over all positives is the positive predictive value, not sensitivity.
+  - 800/900 is the specificity.
+  - Dividing by everyone tested gives no named measure here; the denominator is the diseased.
+  src:
+    page: 14
+    quote: |-
+      | Screening Results | Disease | No Disease | Total |
+      |---|---|---|---|
+      | Positive | 80 | 100 | 180 |
+      | Negative | 20 | 800 | 820 |
+      | Total | 100 | 900 | 1,000 |
+      Sensitivity = 80/100 = 80%
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.029
+  kind: card
+  topic: validity
+  front: Why does every test have some false positives and false negatives, and which error type is each on the slide?
+  back: Ideally sensitivity and specificity are both close to 1.0 (100%), but in reality it is hard to have both high. So
+    there are always some false positives (type I error) and some false negatives (type II error).
+  src:
+    page: 15
+    quote: |-
+      Ideally tests should have both sensitivity and specificity close to 1.0 (or 100% if they are presented as percentages), although it is often difficult in reality to have both high sensitivity and specificity.
+      Which means that we will always have some false positives (type I error) and some false negatives (type II error)
+  status: unverified
+- id: res.L14.030
+  kind: mcq
+  topic: validity
+  stem: 'On the slide, a false positive result is likened to:'
+  options:
+  - A type I error
+  - A type II error
+  - A sampling error
+  - A random error of the gold standard
+  answer: 0
+  why:
+  - 'Calling someone diseased when they are not, like rejecting a true null hypothesis: type I.'
+  - 'Type II is the false negative: missing a real case.'
+  - Sampling error is about choosing a sample, not test results.
+  - The gold standard is taken as true; the error is the test's.
+  src:
+    page: 15
+    quote: Which means that we will always have some false positives (type I error) and some false negatives (type II error)
+  status: unverified
+- id: res.L14.031
+  kind: card
+  topic: validity
+  front: What does SpPin mean?
+  back: A highly Specific test with a Positive result tends to rule IN the diagnosis of the disease.
+  src:
+    page: 16
+    quote: 'SpPin: A highly Specific test with a positive result tends to rule in the diagnosis of the disease.'
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.032
+  kind: card
+  topic: validity
+  front: What does SnNout mean?
+  back: A highly Sensitive test with a Negative result tends to rule OUT the diagnosis of the disease.
+  src:
+    page: 16
+    quote: 'SnNout: A highly Sensitive test with a negative result tends to rule out the diagnosis of the disease.'
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.033
+  kind: mcq
+  topic: validity
+  stem: A test with sensitivity 99% and specificity 60% comes back negative. What can you say?
+  options:
+  - The disease is very likely ruled out (SnNout)
+  - The disease is ruled in (SpPin)
+  - 'Nothing: specificity is too low to use a negative result'
+  - The patient has a false negative result
+  answer: 0
+  why:
+  - A very sensitive test rarely misses disease, so a negative result rules it out.
+  - SpPin needs a highly specific test with a positive result; this one is negative and only 60% specific.
+  - A negative result is read through sensitivity, which is high here.
+  - With 99% sensitivity, false negatives are rare, not expected.
+  src:
+    page: 16
+    quote: |-
+      SpPin: A highly Specific test with a positive result tends to rule in the diagnosis of the disease.
+      SnNout: A highly Sensitive test with a negative result tends to rule out the diagnosis of the disease.
+      Don't forget:
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.034
+  kind: card
+  topic: predictive
+  front: Define the positive predictive value, and what question does it answer for the patient?
+  back: 'The probability of disease among patients with a positive test. It answers: if the test was positive, how likely
+    is it that he really has the disease (how worried should he be)?'
+  src:
+    page: 17
+    quote: |-
+      Positive predictive value= probability of disease among patients with a positive test.
+      Negative predictive value= probability of no test among patient with a negative test.
+      When thinking about Predictive Value of a Test, ... imagine you are a physician discussing the results of a screening test with a patient.
+      1) If the test was positive, how likely is it that he really has the disease? [How worried should he be?]
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.035
+  kind: card
+  topic: predictive
+  front: Define the negative predictive value, and what question does it answer for the patient?
+  back: 'The probability of no disease among patients with a negative test (the slide''s "no test" means no disease). It answers:
+    if the test was negative, how likely is it that he really does not have it (how reassured should he be)?'
+  src:
+    page: 17
+    quote: |-
+      Negative predictive value= probability of no test among patient with a negative test.
+      When thinking about Predictive Value of a Test, ... imagine you are a physician discussing the results of a screening test with a patient.
+      1) If the test was positive, how likely is it that he really has the disease? [How worried should he be?]
+      2) If the test was negative, how likely is it that he really does NOT have it? [How reassured should he be?]
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.036
+  kind: calc
+  topic: predictive
+  calculator: diagnostic_accuracy
+  stem: Of 180 people who test positive, 80 actually have the outcome and 100 are free of it; of 820 who test negative, 20
+    have it and 800 don't.
+  question: What is the positive predictive value?
+  inputs:
+    tp: 80
+    fp: 100
+    fn: 20
+    tn: 800
+    measure: ppv
+  expect: 44.44%
+  interpret: 'Only 80 of the 180 positives really have it: PPV = a/(a+b) = 44.4%. More than half the positives are false.'
+  src:
+    page: 17
+    quote: |-
+      | | Actually having the outcome | Free from the outcome | total |
+      |---|---|---|---|
+      | Positive | 80 | 100 | 180 |
+      | Negative | 20 | 800 | 820 |
+      | Total | 100 | 900 | 1000 |
+  status: unverified
+  tags: [numbers, high-yield]
+- id: res.L14.037
+  kind: calc
+  topic: predictive
+  calculator: diagnostic_accuracy
+  stem: 'Same table: 80 true positives, 100 false positives, 20 false negatives, 800 true negatives.'
+  question: What is the negative predictive value?
+  inputs:
+    tp: 80
+    fp: 100
+    fn: 20
+    tn: 800
+    measure: npv
+  expect: 97.56%
+  interpret: '800 of the 820 negatives are really free of the disease: NPV = d/(c+d) = 97.6%.'
+  src:
+    page: 17
+    quote: |-
+      | | Actually having the outcome | Free from the outcome | total |
+      |---|---|---|---|
+      | Positive | 80 | 100 | 180 |
+      | Negative | 20 | 800 | 820 |
+      | Total | 100 | 900 | 1000 |
+  status: unverified
+  tags: [numbers, high-yield]
+- id: res.L14.038
+  kind: table
+  topic: predictive
+  title: Measures from the 2×2 table (a, b, c, d)
+  columns:
+  - Measure
+  - Formula
+  - Meaning
+  rows:
+  - - Positive predictive value (PPV)
+    - a/(a+b)
+    - Proportion of test positives who are true positive
+  - - Negative predictive value (NPV)
+    - d/(c+d)
+    - Proportion of test negatives who are true negative
+  - - Prevalence of disease
+    - (a+c)/n
+    - Proportion of all individuals who have the disease
+  - - Diagnostic accuracy
+    - (a+d)/n
+    - Proportion of subjects among whom the test gives the correct diagnosis
+  blanks:
+  - - 0
+    - 1
+  - - 1
+    - 1
+  - - 2
+    - 1
+  - - 3
+    - 1
+  src:
+    page: 18
+    quote: |-
+      Disease status (gold standard)
+      | Test | Positive | Negative | Total |
+      |---|---|---|---|
+      | Positive | a | b | a+b |
+      | Negative | c | d | c+d |
+      | Total | a+c | b+d | n |
+      Positive predictive value (PPV) = a/(a+b)
+      (proportion of test positives who are true positive)
+      Negative predictive value (NPV) = d/(c+d)
+      (proportion of test negatives who are true negative)
+      Prevalence of disease = (a+c)/n
+      (proportion of all individuals who have the disease, i.e. are positive)
+      Diagnostic accuracy = (a+d)/n
+      (proportion of study subjects among whom the test gives correct diagnosis)
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.039
+  kind: calc
+  topic: predictive
+  calculator: diagnostic_accuracy
+  stem: 80 true positives, 100 false positives, 20 false negatives, 800 true negatives (1,000 tested).
+  question: What is the diagnostic accuracy?
+  inputs:
+    tp: 80
+    fp: 100
+    fn: 20
+    tn: 800
+    measure: accuracy
+  expect: 88%
+  interpret: 'The test is right for 80 + 800 = 880 of 1,000 people: (a+d)/n = 88%.'
+  src:
+    page: 18
+    quote: |-
+      Diagnostic accuracy = (a+d)/n
+      (proportion of study subjects among whom the test gives correct diagnosis)
+  status: unverified
+  tags: [numbers]
+- id: res.L14.040
+  kind: mcq
+  topic: predictive
+  stem: In the slides' table of 1,000 people (100 with the disease, 900 without), what is the prevalence?
+  options:
+  - 10%
+  - 18%
+  - 8%
+  - 44.4%
+  answer: 0
+  why:
+  - Prevalence = (a+c)/n = 100/1000 = 10%.
+  - 18% is the share who test positive (180/1000), not who have the disease.
+  - 8% is the true positives over everyone (80/1000).
+  - 44.4% is the PPV.
+  src:
+    page: 18
+    quote: |-
+      Prevalence of disease = (a+c)/n
+      (proportion of all individuals who have the disease, i.e. are positive)
+  status: unverified
+  tags: [numbers]
+- id: res.L14.041
+  kind: card
+  topic: predictive
+  front: Why are predictive values more useful than sensitivity and specificity in the clinic?
+  back: Sensitivity and specificity are characteristics of the test and do not help interpret an individual result. PPV and
+    NPV give the probability that an individual is truly positive given a positive test, or truly negative given a negative
+    test.
+  src:
+    page: 19
+    quote: |-
+      Sensitivity and specificity are characteristics of the test but they do not help a clinician to interpret the results of an individual test.
+      Positive and negative predictive values are useful in a clinical setting as they give the probabilities that an individual is truly positive given that they tested positive, or truly negative given that they tested negative.
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.042
+  kind: card
+  topic: predictive
+  front: How do sensitivity, specificity, PPV and NPV relate to disease prevalence?
+  back: Sensitivity and specificity are not related to prevalence. PPV is directly related to prevalence; NPV is inversely
+    related.
+  src:
+    page: 24
+    quote: |-
+      Sensitivity and specificity are not related to disease prevalence
+      PPV is directly related to disease prevalence
+      NPV is inversely related to disease prevalence
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.043
+  kind: cloze
+  topic: predictive
+  text: PPV is {{c1::directly}} related to disease prevalence, while NPV is {{c2::inversely}} related to it.
+  src:
+    page: 24
+    quote: |-
+      PPV is directly related to disease prevalence
+      NPV is inversely related to disease prevalence
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.044
+  kind: mcq
+  topic: predictive
+  stem: The same screening test is moved from a general clinic to a high-risk clinic where the disease is far more common.
+    What happens?
+  options:
+  - PPV rises, NPV falls; sensitivity and specificity don't change
+  - Sensitivity rises and specificity falls
+  - PPV falls and NPV rises
+  - All four stay the same
+  answer: 0
+  why:
+  - More of the positives are real cases (PPV up) and more negatives are missed cases (NPV down); the test itself is unchanged.
+  - Sensitivity and specificity are properties of the test, not of prevalence.
+  - That is what happens when prevalence falls.
+  - Predictive values depend on prevalence, so they change.
+  src:
+    page: 24
+    quote: |-
+      Sensitivity and specificity are not related to disease prevalence
+      PPV is directly related to disease prevalence
+      NPV is inversely related to disease prevalence
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.045
+  kind: card
+  topic: predictive
+  front: When do you use the standard formula for PPV and NPV from sensitivity, specificity and prevalence?
+  back: 'When a test''s sensitivity and specificity are known but it will be used in a different population from the one it
+    was developed in: PPV = Se×P / [Se×P + (1−Sp)(1−P)]; NPV = Sp(1−P) / [(1−Se)P + Sp(1−P)].'
+  src:
+    page: 25
+    quote: If the sensitivity and specificity for a test are known but we wish to use the test on a different population from
+      the one it was developed in, the PPV and NPV can be calculated using the following standard formula
+  status: unverified
+- id: res.L14.046
+  kind: calc
+  topic: predictive
+  calculator: predictive_values
+  stem: A test has sensitivity 80% and specificity 88.889% (the slides' table) and is used where the prevalence is 10%.
+  question: What is the PPV by the standard formula?
+  inputs:
+    sensitivity: 80
+    specificity: 88.889
+    prevalence: 10
+    measure: ppv
+  expect: 44.4%
+  interpret: 'The formula gives the same 44.4% as counting the table (80/180): the two routes agree at the table''s own prevalence.'
+  src:
+    page: 25
+    quote: |-
+      Effect of prevalence
+      If the sensitivity and specificity for a test are known but we wish to use the test on a different population from the one it was developed in, the PPV and NPV can be calculated using the following standard formula
+      PPV = sensitivity x prevalence / [sensitivity x prevalence] + [(1-specificity) x (1-prevalence)]
+      NPV = specificity x (1-prevalence) / [(1-sensitivity) x prevalence] + [specificity x (1-prevalence)]
+  status: unverified
+  tags: [numbers, high-yield]
+- id: res.L14.047
+  kind: calc
+  topic: predictive
+  calculator: predictive_values
+  stem: The same test (sensitivity 80%, specificity 88.889%) is now used to screen a population where the prevalence is only
+    1%.
+  question: What is the PPV?
+  inputs:
+    sensitivity: 80
+    specificity: 88.889
+    prevalence: 1
+    measure: ppv
+  expect: 6.8%
+  interpret: 'PPV falls from 44% to about 7%: in a low-prevalence population most positives are false, so every positive screen
+    needs a diagnostic test.'
+  src:
+    page: 25
+    quote: |-
+      Effect of prevalence
+      If the sensitivity and specificity for a test are known but we wish to use the test on a different population from the one it was developed in, the PPV and NPV can be calculated using the following standard formula
+      PPV = sensitivity x prevalence / [sensitivity x prevalence] + [(1-specificity) x (1-prevalence)]
+      NPV = specificity x (1-prevalence) / [(1-sensitivity) x prevalence] + [specificity x (1-prevalence)]
+  status: unverified
+  tags: [numbers, high-yield]
+- id: res.L14.048
+  kind: calc
+  topic: predictive
+  calculator: predictive_values
+  stem: The same test (sensitivity 80%, specificity 88.889%) is used in a high-risk clinic where the prevalence is 30%.
+  question: What is the NPV?
+  inputs:
+    sensitivity: 80
+    specificity: 88.889
+    prevalence: 30
+    measure: npv
+  expect: 91.2%
+  interpret: 'NPV falls from 97.6% (at 10%) to 91.2%: where the disease is common, a negative result reassures less.'
+  src:
+    page: 25
+    quote: |-
+      Effect of prevalence
+      If the sensitivity and specificity for a test are known but we wish to use the test on a different population from the one it was developed in, the PPV and NPV can be calculated using the following standard formula
+      PPV = sensitivity x prevalence / [sensitivity x prevalence] + [(1-specificity) x (1-prevalence)]
+      NPV = specificity x (1-prevalence) / [(1-sensitivity) x prevalence] + [specificity x (1-prevalence)]
+  status: unverified
+  tags: [numbers]
+- id: res.L14.049
+  kind: card
+  topic: cutoff
+  front: Give the slide's examples of how the harm of a false result depends on the setting.
+  back: A false negative test for a sexually transmitted disease could falsely reassure and lead to further transmission.
+    In a pregnant woman, a false positive test for a congenital anomaly may result in an unnecessary abortion.
+  src:
+    page: 20
+    quote: |-
+      The consequences of a false positive or false negative depends on the setting. For example:
+      A false negative test for a sexually transmitted disease could falsely reassure and lead to further transmission
+      In a pregnant woman, a false positive test for congenital anomaly may result in an unnecessary abortion
+  status: unverified
+- id: res.L14.050
+  kind: card
+  topic: cutoff
+  front: When should you minimise false positives (use a high-specificity cut-point)?
+  back: When the confirmatory test is expensive or invasive, or a false diagnosis will bring much shame and stigma.
+  src:
+    page: 21
+    quote: |-
+      If the confirmatory test is expensive or invasive or false diagnosis will be associated with much sham and stigma:
+      -Minimize false positives or
+      -Use a cut-point with high specificity
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.051
+  kind: card
+  topic: cutoff
+  front: When should you minimise false negatives (use a high-sensitivity cut-point)?
+  back: 'When the penalty for missing a case is high: the disease is fatal and treatment exists, or the disease spreads easily.'
+  src:
+    page: 21
+    quote: |-
+      If the penalty for missing a case is high (e.g., the disease is fatal and treatment exists, or disease easily spreads):
+      -Minimize false negatives or
+      -Use a cut-point with high sensitivity
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.052
+  kind: mcq
+  topic: cutoff
+  stem: Screening for a fatal disease that has an effective early treatment. Which cut-point do you choose?
+  options:
+  - One with high sensitivity, to minimise false negatives
+  - One with high specificity, to minimise false positives
+  - The one with the highest accuracy, whatever the errors
+  - The one where sensitivity equals specificity
+  answer: 0
+  why:
+  - Missing a case of a fatal, treatable disease is the costly error, so cut false negatives.
+  - High specificity is for an invasive or expensive confirmatory test, or stigma from a false label.
+  - Accuracy hides which error you make; the setting decides which error matters.
+  - The slide picks the cut-point by the cost of each error, not by balancing the two.
+  src:
+    page: 21
+    quote: |-
+      If the confirmatory test is expensive or invasive or false diagnosis will be associated with much sham and stigma:
+      -Minimize false positives or
+      -Use a cut-point with high specificity
+      If the penalty for missing a case is high (e.g., the disease is fatal and treatment exists, or disease easily spreads):
+      -Minimize false negatives or
+      -Use a cut-point with high sensitivity
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.053
+  kind: mcq
+  topic: cutoff
+  stem: 'A positive screening result leads to a costly, invasive confirmatory biopsy and carries social stigma. The priority
+    is to:'
+  options:
+  - Minimise false positives with a high-specificity cut-point
+  - Minimise false negatives with a high-sensitivity cut-point
+  - Lower the cut-point so that more people test positive
+  - Skip the confirmatory test
+  answer: 0
+  why:
+  - Each false positive here means an invasive test and stigma, so make positives trustworthy.
+  - That protects against missed cases, the other setting on the slide.
+  - Lowering the cut-point raises false positives, the opposite of what is needed.
+  - Screening positives still need diagnostic confirmation (slide 5).
+  src:
+    page: 21
+    quote: |-
+      If the confirmatory test is expensive or invasive or false diagnosis will be associated with much sham and stigma:
+      -Minimize false positives or
+      -Use a cut-point with high specificity
+  status: unverified
+- id: res.L14.054
+  kind: case
+  topic: cutoff
+  stem: 'Two overlapping curves: healthy controls (left) and patients (right), with a vertical decision threshold; values
+    to the right of it are called positive. The areas are labelled A, B, C and D.'
+  steps:
+  - question: 'Area A (patients, right of the threshold) is:'
+    options:
+    - True positives
+    - False positives
+    - False negatives
+    - True negatives
+    answer: 0
+    why: Patients who land on the positive side are correctly called positive.
+  - question: 'Area B (healthy controls, right of the threshold) is:'
+    options:
+    - False positives
+    - True positives
+    - False negatives
+    - True negatives
+    answer: 0
+    why: Healthy people on the positive side are wrongly called positive.
+  - question: 'Area C (patients, left of the threshold) is:'
+    options:
+    - False negatives
+    - False positives
+    - True negatives
+    - True positives
+    answer: 0
+    why: 'Patients on the negative side are missed: false negatives.'
+  - question: The threshold is moved to the right. What happens?
+    options:
+    - Specificity rises and sensitivity falls
+    - Sensitivity rises and specificity falls
+    - Both rise
+    - Neither changes
+    answer: 0
+    why: B (false positives) shrinks, so specificity rises; C (false negatives) grows, so sensitivity falls.
+  src:
+    page: 23
+    quote: |-
+      negative test <- decision threshold -> positive test
+      group of healthy controls: D (left of the threshold), B (right of the threshold)
+      group of patients: A (right of the threshold), C (left of the threshold)
+      number of observations
+      discrimination criterion
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.055
+  kind: card
+  topic: roc
+  front: What does the ROC curve allow, and which test is best on it?
+  back: It allows comparison of different tests for the same condition without (before) specifying a cut-off point. The test
+    with the largest area under the curve (AUC) is the best.
+  src:
+    page: 26
+    quote: |-
+      Receiver Operating Characteristic (ROC)
+      ROC Curve allows comparison of different tests for the same condition without (before) specifying a cut-off point.
+      The test with the largest AUC (Area under the curve) is the best.
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.056
+  kind: card
+  topic: roc
+  front: What are the axes of the ROC curve?
+  back: The y-axis is the true positive fraction (sensitivity); the x-axis is the false positive fraction (1 − specificity).
+  src:
+    page: 27
+    quote: |-
+      true positive fraction (sensitivity)
+      false positive fraction (1-specificity)
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.057
+  kind: mcq
+  topic: roc
+  stem: 'On an ROC curve, the x-axis shows:'
+  options:
+  - 1 − specificity (false positive fraction)
+  - Specificity
+  - Sensitivity
+  - 1 − sensitivity (false negative fraction)
+  answer: 0
+  why:
+  - The x-axis is the false positive fraction, 1 − specificity.
+  - Specificity itself is not plotted; its complement is.
+  - Sensitivity (true positive fraction) is the y-axis.
+  - The false negative fraction is not an axis of the ROC curve.
+  src:
+    page: 27
+    quote: |-
+      true positive fraction (sensitivity)
+      false positive fraction (1-specificity)
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.058
+  kind: mcq
+  topic: roc
+  stem: 'On the ROC plot, the straight diagonal line from (0, 0) to (1, 1) stands for:'
+  options:
+  - 'Random guessing: the test does not discriminate'
+  - The best possible test
+  - A test with 100% specificity
+  - The decision threshold
+  answer: 0
+  why:
+  - 'On the diagonal the true positive fraction equals the false positive fraction: no better than chance (AUC 0.5).'
+  - The best test hugs the top-left corner.
+  - 100% specificity is the left edge (x = 0), not the diagonal.
+  - The threshold is one point on a curve, not a line on the ROC plot.
+  src:
+    page: 27
+    quote: |-
+      random guessing
+      the worst system
+      better system
+      yet better system
+      the best system
+  status: unverified
+- id: res.L14.059
+  kind: table
+  topic: roc
+  title: AUC and the quality of a test
+  columns:
+  - AUC
+  - Quality of test
+  rows:
+  - - 0.9–1
+    - Excellent
+  - - 0.8–0.9
+    - Good
+  - - 0.7–0.8
+    - Fair
+  - - 0.6–0.7
+    - Poor
+  - - 0.5–0.6
+    - Fail
+  blanks:
+  - - 0
+    - 1
+  - - 1
+    - 1
+  - - 2
+    - 1
+  - - 3
+    - 1
+  - - 4
+    - 1
+  src:
+    page: 28
+    quote: |-
+      AUC Quality of Test
+      0.9-1 Excellent
+      0.8-0.9 Good
+      0.7-0.8 Fair
+      0.6-0.7 Poor
+      0.5-0.6 Fail
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.060
+  kind: mcq
+  topic: roc
+  stem: 'A new test has an area under the ROC curve of 0.84. By the slide''s scale, its quality is:'
+  options:
+  - Good
+  - Excellent
+  - Fair
+  - Poor
+  answer: 0
+  why:
+  - 0.8–0.9 is good.
+  - Excellent needs 0.9–1.
+  - Fair is 0.7–0.8.
+  - Poor is 0.6–0.7.
+  src:
+    page: 28
+    quote: |-
+      AUC Quality of Test
+      0.9-1 Excellent
+      0.8-0.9 Good
+      0.7-0.8 Fair
+      0.6-0.7 Poor
+      0.5-0.6 Fail
+  status: unverified
+- id: res.L14.061
+  kind: card
+  topic: roc
+  front: Besides comparing tests, what else is the ROC curve used for?
+  back: To compare the sensitivity and specificity for all possible cut-offs, so that the most appropriate cut-off can be
+    chosen for the particular context.
+  src:
+    page: 29
+    quote: |-
+      Also ....
+      The receiver operating characteristic (ROC) curve to compare the sensitivity and specificity for all possible cut-offs.
+      This allows the most appropriate cut-off to be chosen for the particular context.
+  status: unverified
+- id: res.L14.062
+  kind: table
+  topic: roc
+  title: Sensitivity and specificity for each cut-off of the chest x-ray score
+  columns:
+  - Cut-off
+  - Sensitivity
+  - Specificity
+  rows:
+  - - ≥0
+    - 100%
+    - 0%
+  - - ≥1
+    - 97%
+    - 4%
+  - - ≥2
+    - 97%
+    - 13%
+  - - ≥3
+    - 81%
+    - 28%
+  - - ≥4
+    - 68%
+    - 52%
+  - - ≥5
+    - 57%
+    - 70%
+  - - ≥6
+    - 30%
+    - 86%
+  - - ≥7
+    - 14%
+    - 97%
+  - - '8'
+    - 3%
+    - 100%
+  blanks:
+  - - 3
+    - 1
+  - - 3
+    - 2
+  - - 5
+    - 2
+  - - 8
+    - 1
+  src:
+    page: 30
+    quote: |-
+      Table 9.3 Sensitivity and specificity for each possible cut-off of chest x-ray score
+      | Cut-off | Sensitivity | Specificity |
+      |---|---|---|
+      | ≥0 | 100% | 0% |
+      | ≥1 | 97% | 4% |
+      | ≥2 | 97% | 13% |
+      | ≥3 | 81% | 28% |
+      | ≥4 | 68% | 52% |
+      | ≥5 | 57% | 70% |
+      | ≥6 | 30% | 86% |
+      | ≥7 | 14% | 97% |
+      | 8 | 3% | 100% |
+  status: unverified
+  tags: [numbers]
+- id: res.L14.063
+  kind: mcq
+  topic: roc
+  stem: 'In the chest x-ray score table, as the cut-off rises from ≥0 to 8:'
+  options:
+  - Sensitivity falls and specificity rises
+  - Sensitivity and specificity both rise
+  - Sensitivity rises and specificity falls
+  - Both stay about the same
+  answer: 0
+  why:
+  - 'Sensitivity goes 100% → 3% and specificity 0% → 100%: no cut-off gives both high.'
+  - Raising the cut-off trades one for the other; they never rise together here.
+  - That is what lowering the cut-off does.
+  - They change from one extreme to the other.
+  src:
+    page: 30
+    quote: |-
+      | Cut-off | Sensitivity | Specificity |
+      |---|---|---|
+      | ≥0 | 100% | 0% |
+      | ≥1 | 97% | 4% |
+      | ≥2 | 97% | 13% |
+      | ≥3 | 81% | 28% |
+      | ≥4 | 68% | 52% |
+      | ≥5 | 57% | 70% |
+      | ≥6 | 30% | 86% |
+      | ≥7 | 14% | 97% |
+      | 8 | 3% | 100% |
+      No cut-off gives both high sensitivity and high specificity
+  status: unverified
+  tags: [numbers]
+- id: res.L14.064
+  kind: mcq
+  topic: roc
+  stem: Why was the cut-off ≥3 (sensitivity 81%, specificity 28%) chosen for the chest x-ray score?
+  options:
+  - A low rate of false negatives was wanted, because infants likely to get later respiratory disease would benefit from extra
+    treatment
+  - It gives the highest specificity
+  - It gives both high sensitivity and high specificity
+  - It has the largest area under the curve
+  answer: 0
+  why:
+  - Missing an infant who would benefit from treatment was the costly error, so high sensitivity was chosen.
+  - Its specificity is only 28%; the highest is at 8 (100%).
+  - The slide says no cut-off gives both high sensitivity and specificity.
+  - The AUC (0.65) belongs to the whole curve, not to one cut-off.
+  src:
+    page: 30
+    quote: |-
+      In this particular clinical setting it was desirable to have a low rate of false negatives (high sensitivity) since infants who were likely to have later respiratory disease would benefit from extra treatment in infancy
+      The cut-off chosen was ≥3 giving sensitivity 81%, and specificity 28%
+  status: unverified
+  tags: [high-yield]
+- id: res.L14.065
+  kind: card
+  topic: roc
+  front: What was the AUC of the chest x-ray score, and how does the slide judge it?
+  back: 0.65 (maximum 1.0); slide 30 calls the test's predictive power in general moderately high. Note that slide 28's scale
+    would call 0.6–0.7 poor; in the exam, quote the scale you are asked about.
+  src:
+    page: 30
+    quote: The area under the curve was 0.65 (maximum = 1.0). Thus the predictive power of this test in general is moderately
+      high
+  status: unverified

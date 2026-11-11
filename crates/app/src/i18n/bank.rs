@@ -121,3 +121,6 @@ pub const CONFIRM_SUBMIT: &str = "سلّم كده";
 pub fn questions(n: usize) -> String {
     super::count::count(n, &super::count::QUESTION)
 }
+pub const UNSAVED: &str =
+    "في إجابات ما عرفتش أحفظها لسه، ومحفوظة هنا لحد ما تتسجّل. ما تقفلش التطبيق قبل ما تجرّب تاني.";
+pub const UNSAVED_RETRY: &str = "احفظها تاني";

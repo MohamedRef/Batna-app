@@ -134,6 +134,55 @@ fn a_tutor_set_checks_each_answer_once_and_logs_it() {
     assert_eq!(saved_papers(), 0, "tutor sets are not papers");
 }
 
+fn read_only(on: bool) {
+    REVIEW.with(|r| r.borrow().as_ref().unwrap().backend.borrow().set_read_only(on));
+}
+
+#[test]
+fn a_tutor_answer_the_log_refuses_is_kept_and_saved_once_on_retry() {
+    let mut t = mount();
+    t.click_text("button.chip.toggle", "10");
+    t.click("button.bank-go");
+    let right = right_option(&mut t);
+    tap_option(&mut t, right);
+    read_only(true);
+    t.click_text("button.run-main-action", tx::CHECK);
+    assert_eq!(logged(), 0);
+    assert_eq!(t.texts("div.bank-unsaved p"), [tx::UNSAVED]);
+    // Still refused: nothing moves, the answer stays kept.
+    t.click("button.bank-unsaved-retry");
+    assert_eq!((logged(), t.count("div.bank-unsaved")), (0, 1));
+    read_only(false);
+    t.click("button.bank-unsaved-retry");
+    assert_eq!(logged(), 1, "saved exactly once");
+    assert_eq!(t.count("div.bank-unsaved"), 0);
+    assert!(paper(&mut t).logged.is_some(), "a reason or Undo now finds it");
+    t.in_root(super::unsaved::retry);
+    assert_eq!(logged(), 1, "a second retry logs nothing more");
+}
+
+#[test]
+fn a_timed_paper_the_log_refuses_says_so_instead_of_sent_to_review() {
+    let mut t = mount();
+    t.click_text("button[role=radio]", tx::MODE_TIMED_NAME);
+    t.click_text("button.chip.toggle", "10");
+    t.click("button.bank-go");
+    let right = right_option(&mut t);
+    let wrong = (right + 1) % paper(&mut t).questions[0].order.len();
+    tap_option(&mut t, wrong);
+    read_only(true);
+    t.click(".run-side button.btn-secondary");
+    t.click_text("[role=alertdialog] button", tx::CONFIRM_SUBMIT);
+    assert!(t.text().contains(tx::RESULT));
+    assert_eq!(logged(), 0);
+    assert!(!t.text().contains(tx::SENT_TO_REVIEW));
+    assert_eq!(t.count("div.bank-unsaved"), 1);
+    read_only(false);
+    t.click("button.bank-unsaved-retry");
+    assert_eq!(logged(), 1);
+    assert!(t.text().contains(tx::SENT_TO_REVIEW));
+}
+
 #[test]
 fn a_timed_paper_flags_navigates_asks_before_submitting_and_scores() {
     let mut t = mount();

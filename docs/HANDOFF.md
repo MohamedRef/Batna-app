@@ -423,6 +423,15 @@ Add a bullet here when a PR adds something a later agent must know.
 - **Background time** (#753): returning from background
   (`visibilitychange`/`pageshow`) resets only the running item's answer clock.
   `study-visibility.test.cjs`.
+- **A save that fails is never silent** (engineering audit F02, 2026-11-11):
+  every grading entry point logs through `StudyStore::record_logged` and acts
+  on its result, never through the fire-and-forget `record`. Study, a lesson's
+  Try step (`learn/practice.rs`) and Oral (`oral/mod.rs`) keep the item and
+  the answer, say so and let him rate again; the question bank keeps refused
+  answers in `bank/unsaved.rs` (`UNSAVED`) with a «احفظها تاني» button and
+  hides «sent to review» until they are in the log. Tests use
+  `Store::set_read_only` (SQLite `query_only`) to refuse and then accept
+  writes.
 - **Not yet verified natively**: Android process death and OS kills, macOS
   relaunch, S24 Ultra lock/unlock, keyboard and Back with a running session.
 
@@ -569,6 +578,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: answers the store refuses outside the main Study session (lesson Try, Oral, question bank) are no longer lost silently: the item stays or the answer is kept with a retry (engineering audit F02, § 10 Study sessions).
 - 2026-11-11: his notes on items ride in the Anki deck (`Notes` field on Batna Basic and Batna Cloze; docs/ANKI.md), from Steps-app.
 - 2026-11-11: res.L15 (introduction to biostatistics: variables, tables, graphs, mean/median/mode, range and SD): 118 items, 7 lessons. Source is the video-frame PDF (142 slides + 7 pages of Arabic notes); slide text typed from the frames into `courses/res/text/L15.txt`, generators in `courses/res/gen-L15/`.
 - 2026-11-11: res.L12 (bias and confounders, 61 image-only slides from the lecture video, hand-transcribed in `courses/res/text/L12.txt`): 83 items with the 7-question quiz keyed from the lecturer's notes, 6 lessons with 7 drawn figures; glossary gains STD.

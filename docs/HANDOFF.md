@@ -568,9 +568,9 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 96 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 100 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
-| Content | 9 courses, 135 lectures, 135 lesson files; `res` L01–L12, L14 and L15 written. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
+| Content | 9 courses, 135 lectures, 135 lesson files; `res` L01–L12, L14 and L15 written; res.L02 also checked against the lecture's video recording (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
@@ -607,6 +607,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: res.L02 gap-fill from the lecture's video recording (same 70 slides plus the lecturer's spoken points and the 8 pages of Arabic notes): 16 items, lesson 7; calculators `disease_duration`, `death_rate`, `perinatal_mr`, `mmr` (`calc/frequency.rs`); new slide verdicts in `courses/res/verdicts/L02.tsv`.
 - 2026-11-11: sync ops the hub refuses (or the device can't read) are held with their reason and shown in Settings › Sync with send-again / let-go; the export is one read snapshot (engineering audit F12–F14, § 10 Study sessions).
 - 2026-11-11: the Batna Cloud deploy for #780 had failed (504), so the hub rejected `notes`; deploy re-run, ops on a table the hub doesn't know now wait in the outbox, and notes are queued again once.
 - 2026-11-11: finishing a lesson is one transaction with a Retry; a failed read keeps the last good copy and says so on Today; an in-memory session is announced on every screen (engineering audit F09–F11, § 10 Study sessions).

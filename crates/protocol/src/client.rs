@@ -5,7 +5,7 @@
 //! it pure means every ordering of messages can be tested without a socket.
 
 use crate::PROTOCOL_VERSION;
-use crate::sync::{ClientMsg, MAX_OPS_PER_PUSH, Op, Rejected, SeqOp, ServerMsg, SyncErrorCode};
+use crate::sync::{ClientMsg, MAX_OPS_PER_PUSH, Op, RejectReason, Rejected, SeqOp, ServerMsg, SyncErrorCode};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Phase {
@@ -41,6 +41,12 @@ pub enum Effect {
     /// The hub found this device's clock too far ahead. These ops stay in the
     /// outbox; hold pushes for a while and tell the user to fix the clock.
     ClockAhead {
+        kept: Vec<String>,
+    },
+    /// The hub doesn't know these ops' table yet (this build is newer than
+    /// the deployed Worker). They stay in the outbox; skip their table until
+    /// the next connection, which may reach a hub that knows it.
+    HubLacksTable {
         kept: Vec<String>,
     },
     /// Close the socket and reconnect after a backoff.
@@ -131,9 +137,14 @@ impl SyncClient {
                 }
                 let (rejected, kept): (Vec<_>, Vec<_>) =
                     rejected.into_iter().partition(|r| r.reason.is_final());
+                let (unknown, skewed): (Vec<_>, Vec<_>) =
+                    kept.into_iter().partition(|r| r.reason == RejectReason::UnknownTable);
                 let mut out = vec![Effect::Acked { done, rejected }];
-                if !kept.is_empty() {
-                    out.push(Effect::ClockAhead { kept: kept.into_iter().map(|r| r.op_id).collect() });
+                if !skewed.is_empty() {
+                    out.push(Effect::ClockAhead { kept: skewed.into_iter().map(|r| r.op_id).collect() });
+                }
+                if !unknown.is_empty() {
+                    out.push(Effect::HubLacksTable { kept: unknown.into_iter().map(|r| r.op_id).collect() });
                 }
                 // Live sockets get every other op before the ack of a later
                 // push, so everything up to head_seq is here now.
@@ -212,7 +223,7 @@ impl Backoff {
 #[cfg(test)]
 mod tests {
     use crate::Hlc;
-    use crate::sync::{OpKind, RejectReason};
+    use crate::sync::OpKind;
     use serde_json::json;
 
     use super::*;
@@ -291,15 +302,18 @@ mod tests {
     }
 
     #[test]
-    fn clock_skew_keeps_the_op_for_later() {
+    fn clock_skew_and_an_unknown_table_keep_the_op_for_later() {
         let mut c = live(0);
-        let Some(ClientMsg::Push { batch, .. }) = c.next_push(&[op("a"), op("b"), op("c")]) else { panic!() };
+        let Some(ClientMsg::Push { batch, .. }) = c.next_push(&[op("a"), op("b"), op("c"), op("d")]) else {
+            panic!()
+        };
         let fx = c.on_message(ServerMsg::Ack {
             batch,
             done: vec!["a".into()],
             rejected: vec![
                 Rejected { op_id: "b".into(), reason: RejectReason::ClockSkew },
                 Rejected { op_id: "c".into(), reason: RejectReason::UnknownTable },
+                Rejected { op_id: "d".into(), reason: RejectReason::InvalidId },
             ],
             head_seq: 0,
         });
@@ -308,9 +322,10 @@ mod tests {
             vec![
                 Effect::Acked {
                     done: vec!["a".into()],
-                    rejected: vec![Rejected { op_id: "c".into(), reason: RejectReason::UnknownTable }],
+                    rejected: vec![Rejected { op_id: "d".into(), reason: RejectReason::InvalidId }],
                 },
                 Effect::ClockAhead { kept: vec!["b".into()] },
+                Effect::HubLacksTable { kept: vec!["c".into()] },
             ]
         );
         assert!(c.in_flight().is_empty());

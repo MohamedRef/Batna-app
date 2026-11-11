@@ -80,7 +80,13 @@ Key design rules (also in `CLAUDE.md`):
   append-only events; statuses and settings are LWW by HLC.
 - **A new synced table must be added to `batna_protocol::sync::TABLES`** and
   written through the store so it is queued in `sync_outbox`; otherwise the
-  hub rejects it.
+  hub rejects it. The Worker that knows the table must be deployed: check the
+  "Deploy Batna Cloud" run of that PR and re-run it the same day if it fails
+  (#780's deploy failed on a 504 and the hub rejected `notes` for two days).
+  A hub that doesn't know a table answers `UnknownTable`; the client keeps
+  those ops in the outbox, skips that table until the next connection, and
+  sends them again then. `store/sync.rs` `RESEND` queues a table's own rows
+  again once, for ops an older build dropped.
 - Layout by window width (compact <600dp, medium <840dp, expanded ≥840dp),
   never by device. Logical CSS properties only (RTL). English medical text
   inside Arabic UI is wrapped in `<bdi>`.
@@ -568,6 +574,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: the Batna Cloud deploy for #780 had failed (504), so the hub rejected `notes`; deploy re-run, ops on a table the hub doesn't know now wait in the outbox, and notes are queued again once.
 - 2026-11-09: lesson reading settings («Aa»: text size, line spacing, line width per device), ported from Steps-app.
 - 2026-11-09: notes (synced `notes` table), weak-fact marks and go to page (Ctrl/⌘+G, per-course books) ported from Steps-app (§ 10 Notes, weak-fact marks, go to page).
 - 2026-11-09: from Steps-app: confidence and error reason on answers (migration 5), sure misses first in the mistakes log with a 2–7 day retest, and a catch-up plan for a review backlog (§ 10 Study signals).

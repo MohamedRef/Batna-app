@@ -157,6 +157,36 @@ pub(super) fn seed(conn: &Connection, device: &str) -> rusqlite::Result<()> {
     Ok(())
 }
 
+/// Tables whose own rows are queued again, once each, under a `meta` key.
+/// `notes` (#780): the deploy of the Worker that knows the table failed, so
+/// the hub rejected every note op and older builds dropped rejected ops.
+const RESEND: &[(&str, &str)] = &[("notes", "sync.resent.notes")];
+
+/// Queues again, once per table in [`RESEND`], every row this device wrote.
+/// Op ids come from the row's HLC, so a row the hub already has is not
+/// taken twice.
+pub(super) fn resend_once(conn: &Connection, device: &str) -> rusqlite::Result<()> {
+    for (table, key) in RESEND {
+        if meta_get(conn, key)?.is_some() {
+            continue;
+        }
+        if let Some(key_col) = key_column(conn, table)? {
+            let keys: Vec<String> = {
+                let mut stmt = conn.prepare(&format!(
+                    "SELECT \"{key_col}\" FROM \"{table}\" WHERE device_id = ?1
+                     ORDER BY hlc_wall, hlc_counter"
+                ))?;
+                stmt.query_map([device], |r| r.get(0))?.collect::<rusqlite::Result<_>>()?
+            };
+            for k in keys {
+                enqueue(conn, table, &key_col, &k, device)?;
+            }
+        }
+        meta_set(conn, key, "1")?;
+    }
+    Ok(())
+}
+
 /// The single-column primary key of a local table, if it has one.
 fn key_column(conn: &Connection, table: &str) -> rusqlite::Result<Option<String>> {
     let mut stmt = conn.prepare("SELECT name FROM pragma_table_info(?1) WHERE pk > 0")?;
@@ -263,12 +293,49 @@ impl Store {
         Ok(ops)
     }
 
+    /// Like [`Store::outbox`], leaving out ops on `skip` tables (ones the hub
+    /// said it doesn't know yet on this connection).
+    pub fn outbox_skipping(&self, limit: usize, skip: &BTreeSet<String>) -> Result<Vec<Op>> {
+        if skip.is_empty() {
+            return self.outbox(limit);
+        }
+        let conn = self.conn.lock().unwrap();
+        let skip = serde_json::to_string(skip).unwrap_or_default();
+        let mut stmt = conn.prepare(
+            "SELECT op FROM sync_outbox
+             WHERE json_extract(op, '$.table') NOT IN (SELECT value FROM json_each(?2))
+             ORDER BY seq LIMIT ?1",
+        )?;
+        let ops = stmt
+            .query_map(params![limit as i64, skip], |r| r.get::<_, String>(0))?
+            .filter_map(|r| r.ok().and_then(|json| serde_json::from_str(&json).ok()))
+            .collect();
+        Ok(ops)
+    }
+
+    /// The tables of these outbox ops.
+    pub fn outbox_tables<'a>(&self, op_ids: impl IntoIterator<Item = &'a str>) -> Result<BTreeSet<String>> {
+        let conn = self.conn.lock().unwrap();
+        let mut out = BTreeSet::new();
+        for id in op_ids {
+            let t: Option<String> = conn
+                .query_row(
+                    "SELECT json_extract(op, '$.table') FROM sync_outbox WHERE op_id = ?1",
+                    [id],
+                    |r| r.get(0),
+                )
+                .optional()?;
+            out.extend(t);
+        }
+        Ok(out)
+    }
+
     pub fn outbox_len(&self) -> u64 {
         let conn = self.conn.lock().unwrap();
         conn.query_row("SELECT COUNT(*) FROM sync_outbox", [], |r| r.get::<_, i64>(0)).unwrap_or(0) as u64
     }
 
-    /// Drops acked (or rejected) ops.
+    /// Drops acked (or finally rejected) ops.
     pub fn remove_from_outbox<'a>(&self, op_ids: impl IntoIterator<Item = &'a str>) -> Result<()> {
         let mut conn = self.conn.lock().unwrap();
         let tx = conn.transaction()?;

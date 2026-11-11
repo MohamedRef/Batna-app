@@ -590,7 +590,8 @@ further; don't change FSRS or Undo speculatively.
   a build of that commit, not a version or a feed. Unzip twice, move Batna.app
   to Applications, `xattr -dr com.apple.quarantine /Applications/Batna.app`.
   Fails rather than ship unsigned if `BATNA_MAC_CERT_*` is missing.
-- Linux apt installs in CI and Coverage go through `scripts/ci-apt-install.sh`:
+- Linux apt installs in CI and Coverage go through `scripts/ci-apt-install.sh`, and the
+  Settings/Screens browser runs call it with no packages before `playwright install --with-deps`:
   it walks a mirror list (Azure, archive.ubuntu.com, kernel.org, MIT), skips
   names that don't resolve, rewrites every file in `/etc/apt` (including
   `apt-mirrors.txt`) to the chosen mirror and time-boxes each try (on
@@ -639,6 +640,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-11: Settings and Screens browser runs point apt at a resolving mirror (`scripts/ci-apt-install.sh`) before `playwright install --with-deps`.
 - 2026-11-11: journey test (launch → grade → restart → restore → two-device sync), native QA matrix `docs/NATIVE_QA.md`, weekly `cargo audit`, and the shared `docs/INFRA_PARITY.md` checklist (engineering audit F23, F24, § 9).
 - 2026-11-11: a local answer updates only its own item instead of replaying the whole log (43 ms → 0.6 ms at 100k answers); live content switches are bounded to 2 a run; UI writes wait up to 750 ms for the sync lock instead of failing at once (engineering audit F15–F17, § 10 Study sessions).
 - 2026-11-11: res.L18 (non-parametric tests, correlation, regression; 37 slides), res.L19 (introduction to EBM; 125 slides) and res.L20 (critical appraisal; 69 slides) from the enriched lecture PDFs (video frames + Arabic notes): slide text retyped from the images in `courses/res/text/L18–L20.txt`, Arabic notes kept beside them as `LNN-notes-ar.txt`; 45 + 115 + 100 items, 4 + 7 + 6 lessons; glossary gains ANOVA, MLogRA, CME, LBP, EBHC, GP, EMBASE, DARE, PIER, ARI, NNH, ES, PRISMA, STARD.

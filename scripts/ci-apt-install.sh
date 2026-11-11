@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Install apt packages on a GitHub-hosted Ubuntu runner.
+# Install apt packages on a GitHub-hosted Ubuntu runner (with no arguments it
+# only points apt at a working mirror and refreshes the lists, for steps such
+# as `playwright install --with-deps` that call apt themselves).
 # On 2026-11-11 the runners could not resolve azure.archive.ubuntu.com (the
 # image's mirror, listed in /etc/apt/apt-mirrors.txt) nor archive.ubuntu.com,
 # and apt hung jobs for an hour. This picks the first Ubuntu mirror whose name

@@ -36,6 +36,8 @@ lessons:
           الـ study population ممكن تكون **قرى، مؤسسات، أو records**، مش بس أشخاص. وكل population متكونة من ==study units==.
 
           تحديد الاتنين بيعتمد على **المشكلة** و**الـ objectives** بتوعك.
+
+          الدكتورة فرّقت في الشرح بين الـ **target population** (كل الحوامل في مصر مثلًا) والـ population اللي تقدر فعلًا تسحب منها في مكان الدراسة (الحوامل اللي بيترددوا على مستشفى معيّن). نتيجة مستشفى واحد **مش بتتعمم أوتوماتيك** على كل الحوامل من غير ما تسأل: هل المستشفى ده بيمثّلهم؟
       - kind: table
         page: 6
         quote: "Example of Study Population and Study Units\n| Problem | Study population | Study unit |\n|---|---|---|\n| Malnutrition related to weaning in district X | All children 6-24 months of age in District X | One child between 6-24 months in District X |\n| High dropout rates in primary schools in District Y | All primary schools in District Y | One primary school in District Y |\n| Inappropriate record-keeping for leprosy patients registered in Hospital Z | All records on leprosy patients in hospital Z | One record on a leprosy patient registered in hospital Z |"
@@ -100,6 +102,14 @@ lessons:
           - { key: "S", text: "Sample size: العدد كفاية ولا لأ." }
           - { key: "P", text: "Participation (response rate): كام واحد رد فعلًا." }
         hook: "3 حاجات بتحدد الـ representativeness: **إزاي** اخترت، **كام** اخترت، و**مين رد**. وتاخد الـ population كلها لو صغيرة جدًا، أو عندك resources كتير، أو مش متوقع response عالي."
+      - kind: aside
+        tone: exam
+        page: 12
+        quote: "3 factors that influence sample representativeness\nSampling procedure\nSample size\nParticipation (response rate)\nWhen might you sample the entire population?\nWhen your population is very small\nWhen you have extensive resources\nWhen you don't expect a very high response"
+        text: |
+          في المحاضرة اتقال إن **80%** هدف شائع للـ ==response rate==. بس النسبة لوحدها مش ضمان: المهم هل اللي ردّوا **مختلفين** عن اللي مردّوش في حاجة تأثر على النتيجة؟
+
+          وخلّي بالك: **كبر العدد لوحده مش بيصلّح sample متحيّزة**، ولو دعيت الـ population كلها برضه مش كله هيرد.
       - kind: order
         page: 13
         quote: "Process of sampling\nThe sampling process comprises several stages:\nDefining the population of concern\nSpecifying a sampling frame, a set of persons, units or events possible to measure\nSpecifying a sampling method for selecting individuals or events from the frame\nDetermining the sample size\nImplementing the sampling plan\nSampling and data collecting"
@@ -127,7 +137,7 @@ lessons:
       - "الـ study unit ممكن تكون شخص أو مدرسة أو record، حسب المشكلة."
       - "الـ sample: أرخص وأسرع وممكن أدق، بس عيبها الـ selection bias."
       - "الـ representativeness: sampling procedure، sample size، participation."
-    practice: [res.L11.001, res.L11.002, res.L11.003, res.L11.004, res.L11.005, res.L11.006, res.L11.007, res.L11.008, res.L11.009, res.L11.010, res.L11.011, res.L11.012]
+    practice: [res.L11.001, res.L11.002, res.L11.003, res.L11.004, res.L11.005, res.L11.006, res.L11.007, res.L11.008, res.L11.009, res.L11.010, res.L11.011, res.L11.012, res.L11.083]
   # ------------------------------------------------------------------
   - id: res.L11.lesson2
     title: "Simple random و systematic: القرعة والكل خامس واحد"
@@ -185,6 +195,8 @@ lessons:
           - المسافة دي اسمها ==sampling interval (K)== = عدد الـ population ÷ عدد الـ sample.
           - **أول رقم** بتختاره **عشوائي** بين 1 و K.
           - برضه محتاج **sampling frame**، وينفع مع population **كبيرة** ليها list كاملة.
+
+          الدكتورة وضّحت في الشرح: الـ **sampling fraction** = n/N (100/1200)، والـ **interval** هو **مقلوبها** N/n = 1200/100 = **12**. ولو البداية العشوائية طلعت **7**، تاخد 7 ثم 19 ثم 31 … (كل مرة تزوّد 12).
       - kind: figure
         page: 25
         quote: "Systematic Random Sampling\nN = 100\nwant n = 20\nN/n = 5\nselect a random number from 1-5: chose 4\nstart with #4 and take every 5th unit"
@@ -264,7 +276,7 @@ lessons:
       - "Simple random: قرعة أو random numbers أو software؛ لـ population صغيرة homogeneous، ومحتاج sampling frame."
       - "Systematic: K = N/n، وأول رقم عشوائي بين 1 و K؛ لـ population كبيرة ليها list."
       - "فخ الـ systematic: الـ interval يطابق تكرار في الـ list (كل 7 أيام = نفس اليوم)."
-    practice: [res.L11.013, res.L11.014, res.L11.015, res.L11.016, res.L11.017, res.L11.018, res.L11.019, res.L11.020, res.L11.021, res.L11.022, res.L11.023, res.L11.024, res.L11.046]
+    practice: [res.L11.013, res.L11.014, res.L11.015, res.L11.016, res.L11.017, res.L11.018, res.L11.019, res.L11.020, res.L11.021, res.L11.022, res.L11.023, res.L11.024, res.L11.046, res.L11.085, res.L11.087, res.L11.088]
   # ------------------------------------------------------------------
   - id: res.L11.lesson3
     title: "Stratified و cluster و multistage: تقسّم إزاي؟"
@@ -382,7 +394,9 @@ lessons:
           - **One-stage**: كل الناس جوه الـ clusters المختارة بيدخلوا.
           - **Two-stage**: بتسحب **random** جزء من الناس جوه كل cluster مختار.
 
-          مثال الشريحة: الـ **immunization coverage** في محافظة = **30 cluster × 7 أطفال** (12–23 شهر).
+          مثال الشريحة: الـ **immunization coverage** في محافظة = **30 cluster × 7 أطفال** (12–23 شهر)، يعني **210** أطفال. الدكتورة نبّهت إن الأرقام دي مثال تعليمي، مش sample size جاهز لأي survey.
+
+          وفي الشرح اتأكد الفرق: في الـ **stratified** بتاخد من **كل** طبقة، وفي الـ **cluster** بتختار **بعض** الـ clusters بس.
       - kind: explain
         page: 47
         quote: "Is done in successive stages; each successive sampling unit is nested in the previous sampling unit\nAdvantage: Introduces flexibility in sampling\nFor example, in large country surveys, states are chosen, then districts, then villages, then every 10th person in village as final sampling unit\nin a school survey: Districts schools classes students by systmatic random technique"
@@ -410,7 +424,7 @@ lessons:
       - "Proportional allocation: n(h) = n × N(h)/N. Equal allocation محتاجة weighting في التحليل."
       - "Cluster: مجموعات كاملة random؛ كل cluster mini-population. أرخص، بس sampling error أعلى."
       - "Multistage: مراحل متداخلة (محافظة ← مركز ← قرية ← شخص)، وميزته الـ flexibility."
-    practice: [res.L11.025, res.L11.026, res.L11.027, res.L11.028, res.L11.029, res.L11.030, res.L11.031, res.L11.032, res.L11.033, res.L11.034, res.L11.035, res.L11.036, res.L11.037, res.L11.038, res.L11.039, res.L11.040, res.L11.041, res.L11.042, res.L11.043, res.L11.044, res.L11.045]
+    practice: [res.L11.025, res.L11.026, res.L11.027, res.L11.028, res.L11.029, res.L11.030, res.L11.031, res.L11.032, res.L11.033, res.L11.034, res.L11.035, res.L11.036, res.L11.037, res.L11.038, res.L11.039, res.L11.040, res.L11.041, res.L11.042, res.L11.043, res.L11.044, res.L11.045, res.L11.086, res.L11.089, res.L11.090]
   # ------------------------------------------------------------------
   - id: res.L11.lesson4
     title: "Non-probability: لما الصدفة مش هي اللي بتختار"
@@ -496,6 +510,8 @@ lessons:
           (زي «كل مريض stroke دخل القسم من يناير لمارس»، مش «اللي لحقته».)
 
           وده ==أحسن non-probability technique==: لأنك أخدت الكل، بيدي representation كويسة في وقت معقول.
+
+          بس الدكتورة نبّهت: مهما كانت أحسن من انتقاء «اللي لحقته»، الـ consecutive **مش بتتحول لـ probability sample** للـ population العامة؛ هي كل المؤهلين اللي عدّوا في فترة محددة بمعايير ثابتة.
       - kind: explain
         page: 58
         quote: "Qualitative research methods are typically used when focusing on a limited number of informants, whom we select strategically so that their in-depth information will give optimal insight into an issue about which little is known.\nThis is called purposeful sampling. Subjects usually are selected because the researcher believes that certain subjects are likely to benefit or be more compliant."
@@ -608,6 +624,10 @@ lessons:
           - بيتأثر بحجم العينة وبالـ **variability**.
 
           ==Alpha== = احتمال الصدفة: مفيش فرق حقيقي بس النتيجة طلعت فرق بسبب الـ **sampling error**. المقبول في الأبحاث الإكلينيكية **5%**.
+
+          الدكتورة قالت في الشرح إن **Power = 1 − β** (β = احتمال الـ type II error)؛ فلو β = 20% يبقى الـ power = 80%. وزيادة الـ power مع ثبات الباقي = عينة أكبر.
+
+          وخلّي بالك: الـ **alpha** (type I error في الـ test) حاجة، والـ **margin of error** في الـ prevalence survey (الدقة المطلوبة للـ confidence interval) حاجة تانية، حتى لو الاتنين بييجوا 5% في الأمثلة.
       - kind: check
         page: 69
         quote: "The probability of chance (There is no difference however the results are due to sampling error)\nIn clinical research, the acceptable alpha level in sample size calculation is 5%"
@@ -670,7 +690,7 @@ lessons:
       - "Power ≥ 80% (80، 85، أو 90%)؛ alpha 5%."
       - "العينة تكبر مع: power أعلى، alpha أصغر، SD عالي، effect size صغير."
       - "Effect size من الـ literature أو pilot أو experts أو الـ minimum clinically important difference."
-    practice: [res.L11.061, res.L11.062, res.L11.063, res.L11.064, res.L11.065, res.L11.066, res.L11.067, res.L11.068, res.L11.069, res.L11.070]
+    practice: [res.L11.061, res.L11.062, res.L11.063, res.L11.064, res.L11.065, res.L11.066, res.L11.067, res.L11.068, res.L11.069, res.L11.070, res.L11.084]
   # ------------------------------------------------------------------
   - id: res.L11.lesson6
     title: "نحسبها بإيدينا: survey و case-control و cohort"
@@ -696,7 +716,7 @@ lessons:
           - **Margin of error** المقبول (الدقة اللي عايزها، ±كام %).
           - **Confidence level**: دايمًا **95%**.
 
-          ليه 50%؟ لأن p × (1 − p) بتبقى **أكبر حاجة** عند 50%، فبتطلع أكبر وأأمن عينة.
+          ليه 50%؟ لأن p × (1 − p) بتبقى **أكبر حاجة** عند 50%، فبتطلع أكبر وأأمن عينة. الدكتورة وضّحت إن الـ 50% دي **مش تقدير حقيقي للمرض**، دي بس أكبر variance للنسبة.
       - kind: explain
         page: 75
         quote: "Population survey or descriptive study\nFor simple random sampling, leave design effect and clusters equal to 1.\nPopulation size: 100000\nExpected frequency: 30%\nAcceptable Margin of Error: 5%\nDesign effect: 1.0\nClusters: 1\n| Confidence Level | Cluster Size | Total Sample |\n|---|---|---|\n| 80% | 138 | 138 |\n| 95% | 322 | 322 |\n| 99% | 554 | 554 |\n| 99.9% | 901 | 901 |\n| 99.99% | 1256 | 1256 |"
@@ -786,6 +806,8 @@ lessons:
           الـ **clinical trial** محتاج: الـ **effect size** على الـ primary outcome، نوع الـ trial (**cross-over** ولا **parallel**)، الـ **allocation ratio**، الـ **power**، الـ **alpha**، ولو non-inferiority أو equivalence: الـ ==non-inferiority margin== أو الـ **equivalence limit**.
 
           وكل الأمثلة اللي فاتت كانت **qualitative outcome** (فرق بين نسبتين). لو الـ outcome **quantitative** (فرق متوسطات و standard deviation)، الأحسن ==G*Power==.
+
+          في المحاضرة اتقال كمان: شوف الرقم اللي طلع ده **لكل group** ولا للمجموع، وزوّده عشان الـ **loss to follow-up**: العدد اللي تسجّله = العدد المطلوب يكمّل ÷ (1 − نسبة الفقد المتوقعة). مثلًا 200 مطلوبين وفقد متوقع 20% ← 200 ÷ 0.8 = **250**.
       - kind: try
         items: [res.L11.071, res.L11.076, res.L11.081, res.L11.082]
     recap:

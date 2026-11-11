@@ -5,7 +5,7 @@ lessons:
   - id: res.L04.lesson1
     title: "تختار الـ study design إزاي؟"
     hook: "نفس السؤال ممكن تجاوبه بـ case report أو بـ randomized controlled trial (RCT). الفرق بينهم هو الفرق بين «حكاية» و«دليل»."
-    minutes: 9
+    minutes: 11
     pages: [3, 15]
     topics: [designs, hierarchy]
     goals:
@@ -195,6 +195,8 @@ lessons:
           - **Case-control**: retrospective، عندهم الـ outcome وبندوّر على الـ risk factor.
           - **Case report / case series**: ==no design==.
           - تحت خالص: narrative reviews و expert opinions و editorials.
+
+          الدكتورة نبّهت في الشرح: قوة الاستنتاج مش بالاسم بس. **جودة التنفيذ** ونوع السؤال بيفرقوا، ومش أي حاجة اسمها systematic review تبقى قوية أوتوماتيك.
       - kind: order
         page: 12
         quote: "Hierarchy of Scientific Evidence (levels of evidence, top to bottom):\n  Secondary, pre-appraised or filtered studies:\n    Clinical Practice Guidelines\n    Meta-Analysis, Systematic Reviews\n  Primary studies:\n    Level 1, Experimental: Randomized Controlled Trial. Prospective: tests treatment\n    Level 2, Nonexperimental observational: Cohort Studies. Prospective: cohort has been exposed to a risk; observe for outcome of interest\n    Level 3, Nonexperimental observational: Case Control Studies. Retrospective: subjects have the outcome of interest; looking for risk factor\n  Level 4, No design: Case Report or Case Series; Narrative reviews, expert opinions, or editorials\n  Level 5, Not involved with humans: Animal and Laboratory Studies\n(©2016 Forrest & Miller, EBDM in Action; Developing Competence in EB Practice)"
@@ -218,15 +220,48 @@ lessons:
           - "الـ analytic محتاج **comparison group**."
           - "صح: observational ومفيش comparison group = **descriptive**."
           - "الـ secondary زي systematic review و meta-analysis، بتجمع دراسات تانية."
+      - kind: explain
+        page: 3
+        quote: "Different study types in medical research\nMedical research:\n  Primary research:\n    Basic research: Theoretical (method development: physics, chemistry, biology, bioinformatics, biometrics, psychology; analytical measurement procedure; imaging procedure; biometric procedure; test development, assessment procedure); Applied (animal study, cell study, genetic engineering/gene sequencing, biochemistry, material development, genetic studies)\n    Clinical research: Experimental (clinical study; phase I, II, III and IV study); Observational (therapy study without intervention, prognostic study, diagnostic study, observational study with drugs, secondary data analysis, case series, single case report)\n    Epidemiological research: Experimental (intervention study, field study, group study); Observational (cohort study: prospective, historical; case control study; cross-sectional study; ecological study; monitoring, surveillance; description with registry data)\n  Secondary research: Meta-analysis; Review (systematic, simple (narrative))\nClassification of different study types"
+        title: "Primary ولا secondary؟"
+        text: |
+          قبل الـ designs، المحاضرة بتقسم **medical research** نصين:
+
+          - ==Primary research==: الباحث بيجمع الداتا بتاعته. وليه 3 فروع: **basic** (theoretical و applied زي animal و cell studies)، و**clinical** (experimental زي phase I–IV، و observational زي case series و single case report)، و**epidemiological** (experimental: intervention و field و group studies؛ و observational: ==cohort و case-control و cross-sectional و ecological== و surveillance).
+          - ==Secondary research==: بتلخّص دراسات اتعملت قبل كده: **meta-analysis** و**review** (systematic أو simple narrative).
+
+          الدكتورة قالت في الشرح: الدراسة الأصلية ممكن تستخدم سجلات موجودة وتفضل primary؛ اللي بيخليها secondary إنها بتجمع **دراسات** تانية.
+
+          وفي الشرح كمان: الفرق بين observational و experimental هو **دور الباحث**. لو هو اللي حدد مين ياخد الـ exposure يبقى experimental. وجود دوا في عنوان البحث لوحده ما يخليهوش trial. ودكتورة سحر في المراجعة شبّهتها بنبتتين: واحدة حطّتها في الشمس والتانية في الضل، هي اللي حددت الـ exposure، فده intervention. والـ intervention مش لازم يبقى دوا: برنامج تثقيف صحي أو طريقة تعليم الباحث هو اللي وزّعها برضه intervention.
+      - kind: table
+        page: 15
+        quote: "Epidemiologic studies ask five questions (5 Ws): what, who, where, when, and why.\nThe Five Ws of Epidemiology Studies:\n  What = Clinical\n  Who = Person\n  Where = Place\n  When = Time\n  (Who, Where, When: Disease pattern)\n  What, Who, Where, When: Descriptive Epidemiology\n  Why / How = Causes, Risk factors, Modes of transmission: Analytic Epidemiology"
+        title: "The five Ws"
+        columns: ["Question", "Stands for", "Branch"]
+        rows:
+          - ["What", "Clinical", "Descriptive"]
+          - ["Who", "Person", "Descriptive"]
+          - ["Where", "Place", "Descriptive"]
+          - ["When", "Time", "Descriptive"]
+          - ["Why / How", "Causes, risk factors, modes of transmission", "Analytic"]
+        hide: [[1, 1], [2, 1], [3, 1], [4, 2]]
+      - kind: aside
+        tone: exam
+        page: 15
+        quote: "Epidemiologic studies ask five questions (5 Ws): what, who, where, when, and why.\nThe Five Ws of Epidemiology Studies:\n  What = Clinical\n  Who = Person\n  Where = Place\n  When = Time\n  (Who, Where, When: Disease pattern)\n  What, Who, Where, When: Descriptive Epidemiology\n  Why / How = Causes, Risk factors, Modes of transmission: Analytic Epidemiology"
+        text: |
+          في الشرح: الـ **descriptive** بيجاوب «إيه المشكلة، ومين، وفين، وإمتى» = ==person, place, time==. الـ **analytic** بيسأل «ليه وإزاي»: الأسباب والـ risk factors.
+
+          الوصف بيولّد hypothesis، بس لوحده ما يثبتش causation.
       - kind: try
-        items: [res.L04.002, res.L04.005, res.L04.008, res.L04.013, res.L04.010]
+        items: [res.L04.005, res.L04.008, res.L04.010, res.L04.060, res.L04.062]
     recap:
       - "**Prevalence** = كل الحالات ÷ الكل في وقت معين (proportion). **Incidence** = الجديد ÷ الـ at risk على مدة (rate)."
       - "الـ design بيحدده: **KNOWTS** (knowledge، nature، objectives، time/resources، talent، safety/ethics)."
       - "معرفة قليلة ← descriptive. عوامل مشكوك فيها ← analytic. سبب معروف ← experimental."
       - "**Burden/prevalence ← cross-sectional**. Natural history ← cohort. Prevent / alter course ← randomised trial."
       - "سؤالين بيصنفوا أي study: الباحث حدد الـ exposure؟ وفي comparison group؟"
-    practice: [res.L04.001, res.L04.002, res.L04.003, res.L04.004, res.L04.005, res.L04.006, res.L04.007, res.L04.008, res.L04.009, res.L04.010, res.L04.011, res.L04.012, res.L04.013, res.L04.014, res.L04.015]
+    practice: [res.L04.001, res.L04.002, res.L04.003, res.L04.004, res.L04.005, res.L04.006, res.L04.007, res.L04.008, res.L04.009, res.L04.010, res.L04.011, res.L04.012, res.L04.013, res.L04.014, res.L04.015, res.L04.059, res.L04.060, res.L04.061, res.L04.062]
 
   # ------------------------------------------------------------------
   - id: res.L04.lesson2
@@ -286,6 +321,8 @@ lessons:
           - ==TIME==: **time-trend studies** (نفس المكان في أوقات مختلفة).
 
           الهدف: نلاقي pattern يقترح hypothesis عن السبب.
+
+          الدكتورة قالت في الشرح: لما تفسّر الرسم ابدأ بالبلاد مش بالناس: «البلاد اللي متوسط استهلاك الدهون فيها أعلى عندها معدل breast cancer أعلى». ونفس الكلام في مثال تصنيع السجاير ووفيات lung cancer: الـ association بين **بلاد**، ما تحوّلوش لنتيجة عن كل فرد. والـ time trend اللي ممتد على سنين طويلة اسمه **secular trend** زي ما مكتوب على سلايد الـ NSAID.
       - kind: sort
         page: 19
         quote: "Ecological studies, time series: Secular trends in NSAID use and colorectal cancer incidence\n  NSAID use was associated with lower incidence of colorectal cancer\n  Negative correlation\n  Time trend study"
@@ -359,6 +396,8 @@ lessons:
           متوسط الـ intelligence quotient (IQ) بتاع الدفعة عالي، يبقى كل واحد في الدفعة عبقري؟ 😅 اسأل أي حد كان قاعد في آخر الـ lecture hall.
 
           ده بالظبط الـ **ecological fallacy**: متوسط المجموعة مش بيقول حاجة أكيدة عن فرد فيها.
+
+          دكتورة سحر قالتها في المراجعة بشكل تاني: لو قسمت استهلاك البلد كله من السجاير على عدد السكان، هيطلع لك ==متوسط للفرد==، مش معناه إن كل واحد شرب الكمية دي. ومش شرط اللي اتعرضوا هم نفسهم اللي جالهم المرض.
       - kind: check
         page: 25
         quote: "The weakness of ecological approach is that exposure and disease are measured at the population (group) level.\nEcological fallacy (Definition) is a logic error in the interpretation of statistical data. Drawing conclusions about specific individuals based on the analysis of aggregate data on the larger group.\nThere is assumption that all members of a given population share the same exposure and same risk of disease. Hence caution must be exercised in drawing causal inferences/conclusions for the individual based on the results of an ecological study.\nThe term \"ecological fallacy\" is applied to such conclusions, since the true relation between exposure and disease is distorted by the inability to control for the confounding variables."
@@ -417,6 +456,8 @@ lessons:
           - **0**: مفيش علاقة، زي لون البشرة والذكاء.
 
           والقوة = ==حجم الرقم== بغض النظر عن الإشارة.
+
+          في المحاضرة والمراجعة اتقال بوضوح: ==الإشارة = الاتجاه، والرقم المطلق = القوة==. يعني −1 مش «أضعف» من +0.5؛ −1 ده inverse correlation كامل. والـ r = 0 معناها مفيش **linear** correlation، مش لازم يبقى مفيش أي علاقة خالص. والقوة مش بميل الخط في الرسم (الميل بيتغير بمقياس المحاور).
       - kind: figure
         page: 30
         quote: "The relationship between two correlated variables is presented graphically by Scatter Diagram:\n  A. No correlation, r = 0\n  B. Perfect positive correlation, r = +1\n  C. Perfect negative correlation, r = -1\n  D. Positive correlation coefficient of low magnitude"
@@ -461,6 +502,8 @@ lessons:
           **Correlation does NOT mean causation.** حتى لو r = +1 أو −1، ده مش معناه إن في **causal relationship** بين الـ two variables.
 
           مبيعات الآيس كريم والغرق في الصيف بيطلعوا مع بعض. الآيس كريم مش بيغرّق حد، الصيف هو اللي بيعمل الاتنين.
+
+          الدكتورة قالت في الشرح: قبل ما تصدّق أي r، بص على الـ **scatter diagram** والـ outliers وفكّر في الـ confounders. ورقم الـ 30 في السلايد مش حد سحري: فوقه مش معناه إن أي correlation بقى موثوق.
       - kind: reveal
         page: 31
         quote: "Limitations of the Correlation Coefficient: Although correlation analysis is very helpful in determining the degree to which two variables are associated, it becomes very ineffective when the total number of observations in the study are small (n < 30). When small sample scattergrams are plotted, the outliers (observations that lie outside the normal range) have a marked effect on the correlation coefficient and often produce misleading results."
@@ -541,6 +584,8 @@ lessons:
           - فايدتها: ==generate clinical hypotheses== تتختبر بعدين بـ design أقوى زي **case-control**.
 
           مثال: كل حالات **bone marrow depression** في مستشفى، والأدوية والـ risk factors عندهم. ده وصف مجموعة، مفيش مقارنة.
+
+          الدكتورة قالت في الشرح: إن دوا معين طالع كتير بين الحالات ده لوحده ما يكفيش نقيس أثره، لأننا مش عارفين نسبته عند الناس اللي ما عندهمش المرض. الخطوة الجاية: **case-control** يختبر الـ hypothesis. ونفس السبب بيخلّي الـ case series ما تثبتش إن علاج نافع: مش عارفين كان هيحصل إيه من غير العلاج.
       - kind: sort
         page: 40
         quote: "Merits and limitations of case report\n| Merits | Limitations |\n|---|---|\n| Detecting novelties (emerging/new disease) | Lack of ability to generalize |\n| Generating hypotheses | No possibility to establish cause-effect relationship |\n| Unexplained outcome of treatment | Difficult to replicate |\n| High applicability: allows detailed investigation into situations which would be unethical or impractical to perform using another study design | Publication bias: tendency of investigators (to submit) or reviewers or editors (to accept) manuscripts for publication based on the direction or strengths of study findings |\n| Provide very detailed information | Retrospective design |\n| Educational value (present a scenario to help clinician to improve clinical skills). | distraction of reader when focusing on the unusual. |"
@@ -589,7 +634,7 @@ lessons:
       - "**Case report** = حالة واحدة غريبة. **Case series** = مجموعة بنفس المرض، من غير control، بتولّد hypotheses."
       - "Case report: يكتشف الجديد، بس مايعممش ولا يثبت سبب، وفيه **publication bias**."
       - "**Exploratory** = small-scale، قصير، لما المعرفة قليلة؛ غالبًا in-depth interviews."
-    practice: [res.L04.029, res.L04.030, res.L04.031, res.L04.032, res.L04.033, res.L04.034, res.L04.035, res.L04.036, res.L04.037, res.L04.038, res.L04.039, res.L04.040, res.L04.041, res.L04.042, res.L04.043, res.L04.044, res.L04.045, res.L04.046, res.L04.047]
+    practice: [res.L04.029, res.L04.030, res.L04.031, res.L04.032, res.L04.033, res.L04.034, res.L04.035, res.L04.036, res.L04.037, res.L04.038, res.L04.039, res.L04.040, res.L04.041, res.L04.042, res.L04.043, res.L04.044, res.L04.045, res.L04.046, res.L04.047, res.L04.063]
 
   # ------------------------------------------------------------------
   - id: res.L04.lesson4
@@ -614,6 +659,8 @@ lessons:
           الباحث بيقيس الـ ==exposure والـ outcome في نفس الوقت==.
 
           بيستخدموه في الـ **population-based surveys**، وعلشان نعرف **prevalence** الأمراض في عينات العيادات.
+
+          دكتورة سحر نبّهت في المراجعة: الحالات اللي المسح بيكتشفها لأول مرة **مش incident cases**؛ ممكن تكون موجودة من قبل يوم المسح. المسح بيعدّ الموجود = ==prevalence==. وفي أمراض زي الـ asthma والـ epilepsy عدد المرضى غير عدد النوبات والزيارات، فالـ prevalence لوحده مش هو حجم استخدام الخدمة.
       - kind: explain
         page: 44
         quote: "Cross-sectional studies form a bridge between simple descriptive studies (case reports and case series) and those that can test hypotheses (analytic and intervention studies).\nThey can suggest the presence of relationships."
@@ -667,6 +714,8 @@ lessons:
           - عادات التغذية، والمعرفة والمعتقدات اللي وراها.
 
           وبعدين يقارن ==malnourished vs well-nourished== علشان يعرف أنهي variables ممكن تكون ساهمت.
+
+          الدكتورة قالت في الشرح إن الـ cross-sectional comparative ممكن يتستخدم **analytically** يختبر association (زي ما هو في جدول الـ analytical studies)، بس مشكلة الترتيب الزمني بتفضل موجودة.
       - kind: table
         page: 47
         quote: "Interpreting results of cross-sectional studies: The findings can be presented in the 2x2 table (Contingency table or Table of association) as follows:\n| Exposure (Risk factor) | Disease (Malnutrition): Yes | Disease (Malnutrition): No | Total |\n|---|---|---|---|\n| Yes (Exposed) | a | b | a+b |\n| No (Non-exposed) | c | d | c+d |\n| Total | a+c | b+d | a+b+c+d |\nPrevalence of malnutrition = a+c / a+b+c+d x 100 (proportion of malnourished among the total surveyed)"
@@ -739,6 +788,8 @@ lessons:
           لأنه ==one time measurement==: الاتنين اتقاسوا في نفس اللحظة، فمش عارف مين جه الأول.
 
           ولاحظ إن ده بالظبط أهم criterion في الـ causation: الـ ==temporal relationship==. السبب لازم ييجي **قبل** النتيجة.
+
+          الدكتورة قالت في الشرح: ممكن الـ exposure يكون **نتيجة** للمرض مش سببه (اللي عنده ألم ضهر بيقلّل الرياضة، مش العكس). وحتى لو الـ chi-squared طلع significant، ده ما يحلّش مشكلة مين جه الأول.
       - kind: check
         page: 52
         quote: "In establishing exposure-outcome 'causal association', what is the most essential criterion?\n  A. Consistency of relationship\n  B. Temporal relationship\n  C. Duration of relationship\n  D. Strength of relationship"
@@ -773,4 +824,4 @@ lessons:
       - "Prevalence = (a+c)/(a+b+c+d) × 100. بين الـ exposed a/(a+b)، بين العيانين a/(a+c). الـ test: **chi-squared**."
       - "عيوبه: one-time measurement، مش للنادر، **survival/refusal bias**."
       - "أهم criterion للسببية: **temporal relationship**."
-    practice: [res.L04.048, res.L04.049, res.L04.050, res.L04.051, res.L04.052, res.L04.053, res.L04.054, res.L04.055, res.L04.056, res.L04.009, res.L04.045, res.L04.057, res.L04.058]
+    practice: [res.L04.048, res.L04.049, res.L04.050, res.L04.051, res.L04.052, res.L04.053, res.L04.054, res.L04.055, res.L04.056, res.L04.009, res.L04.045, res.L04.057, res.L04.058, res.L04.064, res.L04.065, res.L04.066]

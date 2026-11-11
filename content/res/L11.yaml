@@ -531,10 +531,10 @@ items:
       - Simple random sampling picks from the whole list without sub-groups.
       - Cluster sampling picks some whole groups at random, not some people from every group.
       - Systematic sampling takes every Kth unit from a list.
-      - Sub-groups (strata) with random selection from each one is stratified random sampling (slide 30).
+      - Sub-groups (strata) with random selection from each one is stratified random sampling (slide 30); the lecturer gave this answer in the video.
     src: { page: 91, quote: "In a study, people are separated into certain sub-groups and then some are selected randomly from each of these sub-groups. What type of sampling is being done?\n  (a) Simple random sampling\n  (b) Cluster random sampling\n  (c) Systematic random sampling\n  (d) Stratified random sampling" }
     status: unverified
-    tags: [book-question, high-yield]
+    tags: [book-question, high-yield, lecturer]
   - id: res.L11.044
     kind: mcq
     topic: probability
@@ -1044,3 +1044,114 @@ items:
     src: { page: 89, quote: "Calculation requirements\n  1. Expected effect size (difference between groups regarding the primary outcome)\n  2. Type of clinical trial: Cross over or parallel\n  3. Allocation ratio between the experimental and control groups\n  4. Statistical power\n  5. Alpha\n  6. In the case of non inferiority or equivalence study we need what is called non inferiority margin or equivalence limit respectively" }
     status: unverified
     tags: [high-yield]
+  # ---------------- added from the lecture video and the revision lectures ----------------
+  - id: res.L11.083
+    kind: card
+    topic: population
+    front: Participation (response rate) affects how representative a sample is. What response rate did the lecturer give as a common target, and is a high rate enough?
+    back: >-
+      About 80% is a common target. But the rate alone does not rule out bias: what matters is whether responders differ from
+      non-responders in ways that affect the results. A bigger sample does not fix a biased one, and inviting the whole
+      population does not mean everyone will respond.
+    src: { page: 12, quote: "3 factors that influence sample representativeness\n  Sampling procedure\n  Sample size\n  Participation (response rate)" }
+    status: unverified
+    tags: [lecturer]
+  - id: res.L11.084
+    kind: cloze
+    topic: requirements
+    text: >-
+      Statistical power = 1 − {{c1::beta}} (the probability of a type II error); the minimum acceptable power is
+      {{c2::80%}}, and with everything else fixed a higher power needs a {{c3::larger}} sample.
+    src: { page: 68, quote: "What is the statistical power:\nIs the ability of the sample to represent the expected effect estimate (e.g, To detect a difference between groups-to estimate a prevalence….)\nThe minimum acceptable statistical power to use is 80%.\nTherefore, we can calculate the sample size based on a power of 80%, 85%, or 90%.\nFactors affecting the power of the study: The sample size-the sample variability (SD)-" }
+    status: unverified
+    tags: [lecturer, high-yield]
+  - id: res.L11.085
+    kind: mcq
+    topic: probability
+    stem: "When each member of a population has an equal chance of being selected in the sample, this is called:"
+    options: [Quota sampling, Convenience sampling, Probability sampling, Snowball sampling, Judgmental sampling]
+    answer: 2
+    why:
+      - Quota sampling fills a set number per category with no random selection.
+      - Convenience sampling takes whoever is easiest to reach, so chances are not equal.
+      - "Probability sampling: every unit has an equal, or at least a known, chance of being included (slide 15)."
+      - Snowball sampling follows referrals from one informant to the next.
+      - Judgmental (purposive) sampling picks informants on purpose.
+    src: { page: 15, quote: "Each unit of the sample is chosen on the basis of chance.\nAll units of the study population should have an equal, or at least a known chance of being included in the sample.\nThat guarantee requires subjects to be selected at random, or that randomization be employed." }
+    status: unverified
+    tags: [revision]
+  - id: res.L11.086
+    kind: mcq
+    topic: probability
+    stem: Which of the following sampling techniques is a probability sampling?
+    options: [Simple random sampling, Systematic sampling, Stratified sampling, Cluster sampling, All of the above]
+    answer: 4
+    why:
+      - Simple random sampling is probability sampling, but so are the others.
+      - Systematic sampling is probability sampling, but so are the others.
+      - Stratified sampling is probability sampling, but so are the others.
+      - Cluster sampling is probability sampling, but so are the others.
+      - All four sit under probability sampling in the lecture's chart (with multistage); quota, snowball, purposive and convenience are non-probability.
+    src: { page: 46, quote: "Sampling\n  Probability: Simple random; Systematic; Stratified random; Cluster; Multi-stage\n  Non-probability: Quota; Purposive; Snowball; Self-selection; Convenience" }
+    status: unverified
+    tags: [revision]
+  - id: res.L11.087
+    kind: mcq
+    topic: probability
+    stem: >-
+      If the researcher aims at measuring variables and generalizing the findings obtained from a representative sample to
+      the total study population, which of the following sampling methods is the best?
+    options: [Convenience sampling, Quota sampling, Simple random sampling, Judgmental sampling]
+    answer: 2
+    why:
+      - A convenience sample may be quite unrepresentative, and the distortion cannot be adjusted for (slides 54-55).
+      - Quota sampling has no sampling frame and no random selection, so it is threatened by selection bias (slide 62).
+      - Simple random sampling is a probability method that gives every unit an equal chance, so the results can be generalized.
+      - Judgmental sampling picks informants on purpose, for in-depth qualitative insight.
+    src: { page: 15, quote: "Each unit of the sample is chosen on the basis of chance.\nAll units of the study population should have an equal, or at least a known chance of being included in the sample.\nThat guarantee requires subjects to be selected at random, or that randomization be employed." }
+    status: unverified
+    tags: [revision]
+  - id: res.L11.088
+    kind: mcq
+    topic: probability
+    stem: "The list of all study population units from which the sample is selected is called:"
+    options: [Sample size, Sampling error, Sampling ratio, Sampling frame, Sampling procedure]
+    answer: 3
+    why:
+      - Sample size is how many units you take.
+      - Sampling error is chance difference between the sample and the population.
+      - The sampling ratio (fraction) is n/N, a number, not a list.
+      - "The sampling frame: the portion of the population the sample is selected from, usually a list (slide 16)."
+      - The sampling procedure is the method of selecting from the frame.
+    src: { page: 16, quote: "The portion of the population from which a sample is to be selected.\nUsually defined by geographical listings, maps, directories, membership, hospital admission list or other kinds of lists." }
+    status: unverified
+    tags: [revision]
+  - id: res.L11.089
+    kind: mcq
+    topic: probability
+    stem: "In a study, groups of study units were selected instead of selecting the study units individually. This is called:"
+    options: [Stratified sampling, Cluster sampling, Systematic sampling, Multistage sampling]
+    answer: 1
+    why:
+      - Stratified sampling takes individuals at random from every stratum.
+      - Selecting groups of study units (clusters) instead of individual units is cluster sampling (slide 39).
+      - Systematic sampling picks individuals at a fixed interval from a list.
+      - Multistage sampling chains several stages; the definition given here is cluster sampling.
+    src: { page: 39, quote: "However, when a list of groupings of study units is available (e.g., villages or schools) or can be easily compiled, a number of these groupings can be randomly selected.\nThe selection of groups of study units (clusters) instead of the selection of study units individually is called CLUSTER SAMPLING." }
+    status: unverified
+    tags: [revision, high-yield]
+  - id: res.L11.090
+    kind: mcq
+    topic: probability
+    stem: Households are selected at random, and every person in each selected household is included in the sample. Which sampling procedure is this?
+    options: [Systematic sampling, Paired sampling, Simple random sampling, Stratified sampling, Cluster sampling]
+    answer: 4
+    why:
+      - Systematic sampling picks individuals at regular intervals from a list.
+      - Paired sampling is not one of the lecture's sampling methods.
+      - Simple random sampling picks individuals, each with an equal chance.
+      - Stratified sampling picks some individuals from every subgroup.
+      - Random groups (households) with all their members included is one-stage cluster sampling (slide 44).
+    src: { page: 44, quote: "Two types of cluster sampling methods.\nOne-stage sampling. All of the elements within selected clusters are included in the sample.\nTwo-stage sampling. A subset of elements within selected clusters are randomly selected for inclusion in the sample." }
+    status: unverified
+    tags: [revision]

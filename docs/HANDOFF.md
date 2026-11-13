@@ -60,7 +60,7 @@ Dioxus 0.7 (HTML/CSS UI in a WebView), SQLite, plus minimal Kotlin for Android.
 
 | Crate | Package | What |
 |---|---|---|
-| `crates/core` | `batna-core` | Pure logic: content schema types, FSRS (`srs`), review store traits + HLC (`review`), session composer, exam/MCQ shuffling, calculators (`calc`: 98 in `REGISTRY`, `calc::normals`, `calc::guide`), lab ranges (`labs`), glossary finder, update feed checks, content pack format (`pack`). No UI, no IO; builds for wasm32. |
+| `crates/core` | `batna-core` | Pure logic: content schema types, FSRS (`srs`), review store traits + HLC (`review`), session composer, exam/MCQ shuffling, calculators (`calc`: all in `REGISTRY`; README's count is checked by a test, `calc::normals`, `calc::guide`), lab ranges (`labs`), glossary finder, update feed checks, content pack format (`pack`). No UI, no IO; builds for wasm32. |
 | `crates/protocol` | `batna-protocol` | Every type that crosses a process boundary (sync ops, `sync::TABLES`, HLC, auth, update feed). Versioned serde. |
 | `crates/app` | `batna-app` | The Dioxus app for desktop, Android and web (`--no-default-features --features web`). One module dir per feature: `today`, `study`, `bank`, `case`, `oral`, `learn` (lessons), `lecture`, `calc`, `stats`, `plan`, `own` (own cards), `abbrdict`/`abbrsheet`, `labs`, `hover` (glossary peek), `pagesheet` (book page chips), `settings`, `update`, `cloud`, `store`, `platform`, `i18n/` (all Arabic UI text, one file per feature). |
 | `crates/anki` | `batna-anki` | `.apkg` deck builder shared by tools and the app's «صدّر لـ Anki». |
@@ -640,6 +640,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: README content table (141 lectures, courses not written yet) and calculator count (102) corrected; `batna-tools` tests `readme_tests.rs` now fail when README's lecture or calculator numbers drift (#803, #818).
 - 2026-11-11: res.L07.121 covers the slide 72 table (Drug A/B × insulin, 523 patients) the lecturer showed without explaining; open L03–L11 questions (L11 quiz 92–94 keys, L09 video-only plagiarism slides) kept as they are, unverified.
 - 2026-11-11: Settings and Screens browser runs point apt at a resolving mirror (`scripts/ci-apt-install.sh`) before `playwright install --with-deps`.
 - 2026-11-11: journey test (launch → grade → restart → restore → two-device sync), native QA matrix `docs/NATIVE_QA.md`, weekly `cargo audit`, and the shared `docs/INFRA_PARITY.md` checklist (engineering audit F23, F24, § 9).

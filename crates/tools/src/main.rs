@@ -24,6 +24,8 @@ mod lessons;
 mod packs;
 mod refs;
 #[cfg(test)]
+mod readme_tests;
+#[cfg(test)]
 mod testkit;
 mod update;
 mod verdicts;

@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: rheum.L17 to the Hepatology bar: 5 → 9 lessons (lesson1 → 6, lesson2/3 → 7, lesson4 → 8, lesson5 → 9), reasons labelled «التفسير المقبول (مش في الكتاب)», four new SVGs, words per page 119 → 270, explain steps without a reason 23/27 → 0/31; p300 now taught (#827–#829).
 - 2026-11-13: dm.L18 to the Hepatology bar: 4 → 8 lessons (lesson2 split → lesson5 pathogenesis and acute treatment, lesson3 → lesson6 xanthine oxidase inhibitors, lesson4 → lesson7 tophi and kidney and lesson8 workup), reasons labelled «التفسير المقبول (مش في الكتاب)», four new figures, p245 now taught, words per page 159 → 340 on the `lessons --report` count; listed in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: rheum.L11 to the Hepatology bar: 4 → 7 lessons (lesson1 split → lesson5, lesson3 → lesson6, lesson4 → lesson7), a reason for every list labelled «التفسير المقبول (مش في الكتاب)» where the book gives none, four new figures, book MCQs as checks, words per page 91 → 307; p196 (review MCQs) skipped in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: rheum.L01 to the Hepatology bar: 5 → 8 lessons (lesson1 split → lesson6, lesson2 → lesson7, lesson5 → lesson8), reasons labelled «التفسير المقبول (مش في الكتاب)», three new SVG figures, words per page 96 → 238 on the `lessons --report` count; p22 (book MCQs) skipped in `content/lesson-skips.yaml` (#827–#829).

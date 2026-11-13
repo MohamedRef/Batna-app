@@ -675,6 +675,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: longest-option cue, nephrology (#816): 43 distractors made as long as their keys, every neph lecture at or under 25%; bank share 26.3% → 24.4%, ceiling 25%. Hepatology (32%) and geriatrics (33%) were already lower and are left for now.
 - 2026-11-13: longest-option cue, rheumatology (#816): 47 distractors made as long as their keys, every rheum lecture but L03 (27%) at or under 25%; bank share 28.4% → 26.3%, ceiling 27%.
 - 2026-11-13: longest-option cue, research (#816): 60 distractors made as long as their keys, every res lecture at or under 25%; bank share 31.1% → 28.4%, ceiling 29%.
 - 2026-11-13: longest-option cue, diabetes and metabolism (#816): 67 distractors made as long as their keys, every dm lecture at or under 25%; bank share 34.0% → 31.1%, ceiling 31.5%.

@@ -6,7 +6,7 @@ lessons:
     title: "الـ non-parametric: لما الداتا متمشيش على الـ bell"
     hook: "الـ t-test بيحب الداتا normal زي الجرس. طب لو الداتا مايلة؟ ليها توأم تاني."
     minutes: 8
-    pages: [2, 4]
+    pages: [2, 34]
     topics: [nonparametric]
     goals:
       - "تعرف ميزتين الـ non-parametric tests وبيختبروا إيه"
@@ -123,8 +123,8 @@ lessons:
           - { text: "Student t-test", bin: 0 }
         why: "الـ parametric بيفترض normal ويقارن means؛ التوأم الـ non-parametric بيشتغل على الـ ranks والـ medians."
       - kind: check
-        page: 4
-        quote: "| 2 independent groups | Student t-test | Mann whitney |"
+        page: 34
+        quote: "To compare the mean knowledge score about osteoporosis among a group of working females and another group of housewives, knowing that the knowledge score was not normally distributed, the most suitable test is:\n1. Student t test\n2. Wilcoxon signed rank test\n3. Mann whitney test\n4. ANOVA"
         question: "Knowledge score about osteoporosis (not normally distributed): working women vs housewives. The most suitable test is:"
         options: ["Mann-Whitney test", "Student t-test", "Wilcoxon signed rank test", "ANOVA"]
         answer: 0
@@ -144,8 +144,8 @@ lessons:
   - id: res.L18.lesson2
     title: "الـ scatter والـ r: علاقة قوية ولا ضعيفة؟"
     hook: "كل ما الوزن يزيد الضغط بيزيد؟ ارسم النقط الأول، وبعدين اسأل الـ r."
-    minutes: 9
-    pages: [5, 18]
+    minutes: 10
+    pages: [5, 35]
     topics: [correlation]
     goals:
       - "تعرف الـ correlation وأول خطوة فيه (الـ scatter)"
@@ -240,6 +240,16 @@ lessons:
             <text x="165" y="138" text-anchor="middle" class="t-sm t-mut">r = 0: no linear association · r = ±1: perfect</text>
             <text x="165" y="154" text-anchor="middle" class="t-sm t-mut">(bands drawn evenly, not to scale)</text>
           </svg>
+      - kind: explain
+        page: 14
+        quote: "If r = 0,\nthere is no linear relationship between y and x.\nThis may mean that there is no relationship at all between the two variables\ni.e. knowing x tells us nothing about the value of y."
+        title: "لو r = 0؟"
+        text: |
+          ==r = 0== معناها ==مفيش علاقة linear== بين y و x.
+
+          وده ممكن يعني إن مفيش علاقة خالص بين المتغيرين، يعني ==معرفة x مش بتقولك أي حاجة عن y==.
+
+          ليه السلايد بتقول «ممكن» بس؟ لأن الـ r بيقيس الخط المستقيم بس؛ ممكن تكون فيه علاقة منحنية (curvilinear) والـ r برضه صفر، زي ما شفنا في الـ scatter diagrams. التفسير المقبول (مش في الكتاب).
       - kind: table
         page: 15
         quote: "Strength of Correlation coefficient \"r\"\nr = 0 : no association\n0 < r <0.4 : weak association\n0.6 > r ≥ 0.4 : moderate association\n1 > r ≥ 0.6 : strong association\nr = 1 : perfect association"
@@ -271,6 +281,21 @@ lessons:
           - "الضعيف تحت 0.4."
           - "القوي من 0.6 وطالع."
           - "الإشارة سالبة، يبقى inverse."
+      - kind: check
+        page: 11
+        quote: "Correlation r = 0\nCorrelation r = -0.3\nCorrelation r = 0.5\nCorrelation r = -0.7\nCorrelation r = 0.9\nCorrelation r = -0.99"
+        question: "Which correlation coefficient shows the strongest association?"
+        options:
+          - "r = −0.99"
+          - "r = +0.9"
+          - "r = +0.5"
+          - "r = −0.3"
+        answer: 0
+        why:
+          - "صح: القوة هي حجم الـ r من غير الإشارة، و 0.99 أقرب حاجة للـ 1."
+          - "0.9 قوية، بس أصغر من 0.99."
+          - "0.5 متوسطة."
+          - "0.3 ضعيفة."
       - kind: explain
         page: 17
         quote: "If the two variables are normally distributed Pearson correlation is calculated while if not normally distributed Spearman rank correlation is calculated."
@@ -280,6 +305,21 @@ lessons:
 
           - الاتنين **normally distributed** ← ==Pearson correlation==.
           - مش normal ← ==Spearman rank correlation== (بيشتغل على الرتب). وبينفع كمان مع متغير **رتبي** زي درجات شدة المرض.
+      - kind: check
+        page: 35
+        quote: "To estimate the direction and strength of the linear relationship between the systolic blood pressure (dependent variable) and blood cholesterol (independent variable) among a group of workers, which of the following tests is most suitable:\nA. Student t test\nB. Pearson correlation\nC. Chi-square test\nD. None of the above"
+        question: "To estimate the direction and strength of the linear relationship between systolic blood pressure (dependent) and blood cholesterol (independent) among a group of workers, which test is most suitable?"
+        options:
+          - "Pearson correlation"
+          - "Student t-test"
+          - "Chi-square test"
+          - "None of the above"
+        answer: 0
+        why:
+          - "صح: اتجاه وقوة علاقة linear بين متغيرين quantitative = correlation coefficient (Pearson)."
+          - "الـ t-test بيقارن متوسطين، مش بيقيس علاقة."
+          - "الـ Chi-square للعلاقة بين متغيرات qualitative."
+          - "Pearson مناسب، فـ «ولا حاجة» غلط."
       - kind: explain
         page: 18
         quote: "Coefficient of determination (r2)\nIt is the square of (r) .\nit is expressed as % of variation in dependent variable accounted or explained by the other variable (independent)\nExample: if (r) is 0.9 between temperature & pulse, it means that 81% of variation in pulse is explained by temperature."
@@ -291,8 +331,8 @@ lessons:
 
           مثال الدكتورة: r = 0.9 بين الحرارة والنبض ← r² = 0.81 ← **81%** من التغير في النبض بتفسره الحرارة. والـ 19% الباقيين؟ عوامل تانية (قلق، أنيميا، أدوية…).
       - kind: check
-        page: 18
-        quote: "Coefficient of determination (r2)\nIt is the square of (r) .\nit is expressed as % of variation in dependent variable accounted or explained by the other variable (independent)"
+        page: 33
+        quote: "The correlation coefficient (r) computed for two parameters measured in 429 patients is =- 0.829. This means that:\n1. The two parameters are positively correlated, and the link is weak\n2. The two parameters are inversely correlated, and the link is Weak\n3. The two parameters are positively correlated, and the link is strong\n4. 69% of variation in the dependent parameter could be explained by variation in the independent one"
         question: "r = −0.829 in 429 patients. This means that:"
         options: ["69% of variation in the dependent parameter is explained by the independent one", "They are positively correlated and the link is weak", "They are inversely correlated and the link is weak", "They are positively correlated and the link is strong"]
         answer: 0
@@ -307,8 +347,6 @@ lessons:
         quote: "Example: if (r) is 0.9 between temperature & pulse, it means that 81% of variation in pulse is explained by temperature."
         text: |
           الـ r² زي ما تقول «81% من زعل مراتك سببه إنك نسيت عيد الجواز». الـ 19% الباقيين؟ لسه بتدوّر عليهم. 😄
-      - kind: try
-        items: [res.L18.012, res.L18.015, res.L18.017, res.L18.020, res.L18.025]
     recap:
       - "Correlation = قوة العلاقة الخطية بين متغيرين كميين؛ أول خطوة دايمًا scatter diagram."
       - "الـ r من -1 لـ +1: الإشارة = الاتجاه، الرقم = القوة. 0.4 و0.6 هما الحدود."
@@ -430,7 +468,7 @@ lessons:
   - id: res.L18.lesson4
     title: "الـ multiple regression: عوامل كتير ونتيجة واحدة"
     hook: "ضيق الشرايين سببه السن؟ التدخين؟ السكر؟ ولا كله مع بعض؟ هنا الـ multivariate بيشتغل."
-    minutes: 8
+    minutes: 9
     pages: [24, 37]
     topics: [multivariate]
     goals:
@@ -512,6 +550,16 @@ lessons:
           **Y = a + b1x1 + b2x2 + b3x3 + …**
 
           مثال الدكتورة: **HB%** = α + b1 age + b2 height + b3 sex + b4 weight + b5 income + b6 family size + b7 smoking + … + b13 pregnancy.
+      - kind: explain
+        page: 29
+        quote: "Multiple Regression allows us to:\nUse several variables at once to explain the variation in a continuous dependent variable.\nHB% = α + b1 age +b2 Height +b3 Sex + b4 weight + b5 income + b6 family size + b7 smoking + b8 residence + b9 race + b10 lung size + b11 education level + b12 type of food + b13 pregnancy + .......etc."
+        title: "ليه متغيرات كتير مرة واحدة؟"
+        text: |
+          الـ multiple regression بتسمحلنا ==نستخدم متغيرات كتير مرة واحدة== علشان نفسّر التغيّر في ==dependent variable continuous==.
+
+          مثال السلايد: الـ ==HB%== = α + b1 age + b2 height + b3 sex + b4 weight + … لحد b13 pregnancy.
+
+          ليه ده مفيد؟ لأن الهيموجلوبين في الحقيقة بيتأثر بحاجات كتير مع بعض، وكل b بتطلّع أثر متغيرها هو بس. التفسير المقبول (مش في الكتاب).
       - kind: explain
         page: 30
         quote: "Isolate the unique effect of one variable on the continuous dependent variable while taking into consideration that other variables are affecting it too."

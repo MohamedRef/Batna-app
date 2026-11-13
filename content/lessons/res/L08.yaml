@@ -26,6 +26,28 @@ lessons:
           و ==attack rate== نوع من الـ incidence، بنستخدمه لما فترة الخطر **محدودة** (وباء، ولادة) أو الخطر **مقصور على سن معيّن**.
 
           الدكتورة قالت في الشرح إن الـ attack rate بيتكتب عادة **نسبة مئوية (%)** مش per 1000، زي الـ puerperal sepsis: 100 من 2000 ولادة = 5%.
+      - kind: explain
+        page: 5
+        quote: "2. Attack Rate. Uses:\n  limited period of risk\n  restricted to a special age group"
+        title: "Attack rate: incidence في فترة قصيرة"
+        text: |
+          الـ **attack rate** هو نوع من الـ ==incidence rate==، بنستخدمه في حالتين بس:
+
+          - لما ==فترة الخطر محدودة== (limited period of risk): زي الـ puerperal sepsis بعد الولادة، أو outbreak.
+          - لما الخطر ==مقصور على سن معين== (restricted to a special age group).
+
+          ليه اسم خاص؟ لأن العيان بيبقى معرّض لفترة قصيرة وبعدها الخطر بيخلص، فبنحسب الحالات الجديدة على كل اللي اتعرضوا في الفترة دي من غير ما نقسم على سنين متابعة. التفسير المقبول (مش في الكتاب).
+      - kind: explain
+        page: 7
+        quote: "Point Prevalence Rate = The no. of current cases (old+new) of a specified disease existing at a given point of time / Population on a date at the same point of time * 1000"
+        title: "Point prevalence: صورة في لحظة"
+        text: |
+          **Point prevalence rate** = ==كل الحالات الموجودة (old + new)== في لحظة معينة ÷ ==السكان في نفس اللحظة== × 1000.
+
+          - البسط: القديم والجديد مع بعض، مش الجديد بس زي الـ incidence.
+          - المقام: السكان في **نفس التاريخ**.
+
+          ليه الاتنين في نفس اللحظة؟ لأن الـ prevalence بتوصف العبء الموجود دلوقتي، فالبسط والمقام لازم يتعدّوا في نفس الصورة. التفسير المقبول (مش في الكتاب).
       - kind: table
         page: 8
         quote: "Period Prevalence Rate = The no. of existing cases (old+new) of a specified disease during a given period of time / Population during the same period of time * 1000"
@@ -176,6 +198,19 @@ lessons:
           - **Intervention**: preventive trials و curative trials.
 
           وكل دراسة ليها **مقياس**: الـ cross-sectional بيدّي **prevalence**، والـ case-control بيدّي **odds ratio**، والـ cohort بيدّي **relative risk**.
+      - kind: explain
+        page: 13
+        quote: "Analytic Studies:\n  Case control study\n  Cohort studies: Prospective cohort; Retrospective cohort"
+        title: "الـ analytic studies: من فين بتبدأ؟"
+        text: |
+          الـ **analytic studies** في المحاضرة نوعين:
+
+          - **Case control study**: بتبدأ من ==المرض==: ناس عندها المرض وناس ماعندهاش، وبتسأل عن الـ exposure اللي فات. المقياس: **odds ratio**.
+          - **Cohort studies**: بتبدأ من ==الـ exposure==: معرّضين ومش معرّضين، وبتعدّ الحالات الجديدة. المقياس: **relative risk**.
+            - **Prospective cohort**: هتتابعهم من دلوقتي لقدّام.
+            - **Retrospective cohort**: الـ exposure والنتيجة الاتنين موجودين في سجلات قديمة.
+
+          ليه ده مهم؟ لأن نقطة البداية هي اللي بتحدد المقياس اللي ينفع تحسبه. التفسير المقبول (مش في الكتاب).
       - kind: figure
         page: 15
         quote: "Tabulation and Analysis\n| Exposure Status | Disease Status: Yes | Disease Status: No |\n|---|---|---|\n| Yes | a | b |\n| No | c | d |\n| Total | a+c | b+d |"
@@ -218,6 +253,21 @@ lessons:
             options: ["2.25", "6", "1.5"]
             answer: 0
             why: "75 ÷ 33.3 = 2.25. ده **prevalence** ratio مش relative risk (RR)، لأن الـ cross-sectional مفيهوش incidence."
+      - kind: check
+        page: 52
+        quote: "Based on the information in the 2 x 2 table below, which of the following expressions represents the prevalence of disease?\n| | Disease positive | Disease negative |\n|---|---|---|\n| Exposed | W | Y |\n| Not exposed | X | Z |\n  a) W/(W + X)\n  b) [W/(W + Y)]/[X/(X + Z)]\n  c) (W/Y)/(X/Z)\n  d) (W/X)/(Y/Z)\n  e) (W + X)/(W + X + Y + Z)"
+        question: "In a 2 x 2 table, exposed are W (disease +) and Y (disease −); not exposed are X (+) and Z (−). Which expression is the prevalence of disease?"
+        options:
+          - "(W + X)/(W + X + Y + Z)"
+          - "W/(W + X)"
+          - "[W/(W + Y)]/[X/(X + Z)]"
+          - "(W/Y)/(X/Z)"
+        answer: 0
+        why:
+          - "صح (e في السلايد): كل اللي عندهم المرض (W + X) على كل الناس."
+          - "دي نسبة الـ cases اللي كانوا exposed، مش المرض في الناس."
+          - "دي نسبة الخطر في المعرّضين على غير المعرّضين (prevalence ratio)."
+          - "دي الـ odds ratio."
       - kind: explain
         page: 16
         quote: "Interpretation of odds ratio (OR):\n  OR > 1 (x): cases are more exposed to the risk factor than controls by x times\n  OR = 1: the exposure has no relationship with the disease\n  OR < 1: the exposure is protective factor"
@@ -280,12 +330,12 @@ lessons:
       - "OR = ad/bc. الـ exposure rate = المعرضين ÷ الجروب."
       - "OR > 1: الـ cases أكتر تعرّض بـ x مرة. = 1: مفيش علاقة. < 1: protective."
       - "مسألة CHD: OR = 6. مسألة pancreas: OR = 1.67."
-    practice: [res.L08.009, res.L08.010, res.L08.011, res.L08.012, res.L08.013, res.L08.017, res.L08.019, res.L08.020, res.L08.054]
+    practice: [res.L08.009, res.L08.010, res.L08.011, res.L08.013, res.L08.017, res.L08.019, res.L08.020, res.L08.054, res.L08.029]
   # ------------------------------------------------------------------
   - id: res.L08.lesson3
     title: "RR والـ attributable risk، وصح ولا غلط"
     hook: "الـ smokers جالهم lung cancer عشر أضعاف. طب كام في المية من سرطانهم سببه التدخين؟"
-    minutes: 8
+    minutes: 6
     pages: [21, 54]
     topics: [measures, true-false]
     goals:
@@ -361,6 +411,18 @@ lessons:
           - { text: "Incidence can always be estimated from a case-control study", bin: 1 }
           - { text: "An attributable risk of 10 means 10 times the risk", bin: 1 }
         why: "الـ odds ratio (OR) بيقرّب للـ **relative risk** مش الـ attributable. الـ case-control مفيهوش incidence. والـ «10 أضعاف» دي **RR**؛ الـ AR فرق."
+      - kind: explain
+        page: 30
+        quote: "False or true:\n  An exposure with a relative risk more than one should have an attributable risk greater than zero. (T)\n  Statistical evaluation of the role of chance may or may not be needed before the interpretation of the study finding (F)\n  The relative risk less than one means that the factor under study is a preventive factor (T)"
+        title: "صح ولا غلط: RR و AR و الصدفة"
+        text: |
+          إجابات slide 30، وكل واحدة بسببها:
+
+          - RR أكبر من 1 يبقى الـ attributable risk ==أكبر من صفر==: **T**. لأن RR > 1 معناها Ie أكبر من I0، والـ AR = Ie − I0.
+          - الـ role of chance «may or may not» تتقيّم: **F**. لازم ==دايمًا== تتقيّم (p value و confidence interval) قبل ما تفسّر أي رقم.
+          - RR أقل من 1 يبقى الـ factor ==preventive==: **T**. المعرّضين حصلهم المرض أقل.
+
+          ليه الصدفة دايمًا؟ لأن أي فرق في عيّنة ممكن يطلع بالصدفة لوحدها، فلازم نعرف احتماله الأول. التفسير المقبول (مش في الكتاب).
       - kind: aside
         tone: exam
         page: 32
@@ -389,13 +451,13 @@ lessons:
       - "Smoking و lung cancer: RR 10، AR 90 في الألف، ARP 90%."
       - "الآبار: RR 1.33، ARP 25%. الـ fibrinogen: RR = (40/70)/(20/60)."
       - "الـ OR بيقرّب للـ RR. الـ case-control مايدّيش incidence. الـ AR مش «أضعاف»."
-    practice: [res.L08.014, res.L08.015, res.L08.016, res.L08.018, res.L08.021, res.L08.022, res.L08.023, res.L08.024, res.L08.025, res.L08.026, res.L08.027, res.L08.028, res.L08.056]
+    practice: [res.L08.012, res.L08.014, res.L08.015, res.L08.016, res.L08.018, res.L08.021, res.L08.022, res.L08.023, res.L08.024, res.L08.025, res.L08.026, res.L08.027, res.L08.028, res.L08.056]
   # ------------------------------------------------------------------
   - id: res.L08.lesson4
     title: "اعرف الـ design من القصة"
     hook: "١٩ سؤال في المحاضرة بيقولولك «a) cross sectional... e) retrospective cohort». تعال نعمل خطة تحلهم كلهم."
-    minutes: 9
-    pages: [33, 50]
+    minutes: 6
+    pages: [33, 40]
     topics: [designs]
     goals:
       - "تعرف الـ design من نقطة البداية واتجاه الزمن"
@@ -443,6 +505,42 @@ lessons:
             <text x="287" y="248" text-anchor="middle" class="t-sm">Pro cohort</text>
             <text x="165" y="290" text-anchor="middle" class="t-sm t-mut">Group data only? Correlation (ecologic)</text>
           </svg>
+      - kind: aside
+        tone: trap
+        page: 34
+        quote: "Follow up of a population of adults who were exposed and not exposed during childhood to radiation of the neck to assess risk of thyroid cancer.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        text: |
+          سؤال الـ **neck radiation**: البالغين اتعرّضوا في **الطفولة**، و«follow up» علشان الـ thyroid cancer. **مفتاح الشريحة: d، prospective cohort.**
+
+          كتب كتير بتعتبره **retrospective (historical) cohort** لأن الـ exposure حصل زمان. بس الدكتورة ثبّتت الإجابة دي في المحاضرة وفي الـ revision: المشاركين **بيتتابعوا من بداية الدراسة لحد ما الـ outcome يظهر**، و«قِدم الـ exposure» لوحده مايخليهاش retrospective. الـ retrospective cohort مبني على **سجلات قديمة** للـ exposure والـ outcome (زي سؤال القريتين). في امتحان القسم: **prospective**.
+      - kind: check
+        page: 35
+        quote: "A study was carried out in country X to find out whether the risk of diarrhea in under-five children was different between two nearby villages. It was suspected that village B had a higher risk because the community used unprotected wells while village A used tap water. village A had a population of 10,000, while village B included 15,000 people. The under-five populations were 1,000 and 1,500 respectively. The records kept by village health workers (VHWs) responsible for the villages in the previous four weeks were checked. village B had had 100 cases of diarrhea while village A had had 50 cases.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        question: "Under-fives in village A (tap water) and village B (unprotected wells); health-worker records of the past four weeks show 50 and 100 cases of diarrhoea. The design is"
+        options:
+          - "Retrospective cohort"
+          - "Cross sectional"
+          - "Case control"
+          - "Correlation study"
+          - "Prospective cohort"
+        answer: 0
+        why:
+          - "صح: جروبين حسب الـ exposure (مصدر المية)، والحالات اتعدّت من سجلات الأربع أسابيع اللي فاتوا."
+          - "بنعدّ حالات جديدة على أربع أسابيع، مش حالات موجودة في لحظة."
+          - "البداية مش من المرض."
+          - "البيانات هنا لأفراد، مش متوسطات جروبات."
+          - "محدش اتتابع من دلوقتي؛ السجلات قديمة."
+      - kind: check
+        page: 37
+        quote: "Macular degeneration is a leading cause of blindness. City residents aged 43 to 86 years were asked to participate in a recent study to determine the relation between smoking and macular degeneration. At a baseline examination, 1232 participant were found to be free from macular degeneration and were asked to report their life time smoking habits. After 5 years, participants had an examination to determine the development of macular degeneration. Out of 368 never smoked, 26 developed macular degeneration and out of 864 ever smoked,79 developed macular degeneration at the end of the study.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        question: "1232 people free of macular degeneration report lifetime smoking; after 5 years they are examined. Design?"
+        options: ["Prospective cohort", "Retrospective cohort", "Case control", "Cross sectional"]
+        answer: 0
+        why:
+          - "صح: ناس سليمة، اتقسموا على الـ exposure، واتتابعوا 5 سنين. Relative risk (RR) = 9.1% ÷ 7.1% = 1.29."
+          - "التدخين اتسأل عنه من الماضي، بس المرض لسه هيتقاس قدّام."
+          - "مابدأناش من ناس عندها المرض."
+          - "فيه متابعة، فمش لحظة واحدة."
       - kind: sort
         page: 38
         quote: "In Alexandria Main University Hospital, all male patients were interviewed (A). They were asked about their smoking status to identify smokers (S). Their blood pressure was measured to detect hypertensive (H).\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
@@ -457,32 +555,131 @@ lessons:
           - { text: "Pre-placement exam: smoking and hypertension among 200 new employees", bin: 0 }
         why: "نفس الزيارة = **cross-sectional**. البداية من المرض = **case-control**. البداية من الـ exposure ومتابعة لقدّام = **prospective**. البداية من الـ exposure من سجلات قديمة = **retrospective**."
       - kind: check
-        page: 37
-        quote: "Macular degeneration is a leading cause of blindness. City residents aged 43 to 86 years were asked to participate in a recent study to determine the relation between smoking and macular degeneration. At a baseline examination, 1232 participant were found to be free from macular degeneration and were asked to report their life time smoking habits. After 5 years, participants had an examination to determine the development of macular degeneration. Out of 368 never smoked, 26 developed macular degeneration and out of 864 ever smoked,79 developed macular degeneration at the end of the study.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
-        question: "1232 people free of macular degeneration report lifetime smoking; after 5 years they are examined. Design?"
-        options: ["Prospective cohort", "Retrospective cohort", "Case control", "Cross sectional"]
+        page: 39
+        quote: "Suppose that, 200 healthy workers were employed in two jobs in a textile industry. One of these jobs (job A) involves a known hazardous exposure and the other (job B) does not. Out of the 100 workers in job A, 20 developed respiratory symptoms by time X .By the same time X, 5 workers in the second job B developed the disease.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        question: "200 healthy textile workers: 100 in job A (hazardous exposure), 100 in job B. By time X, 20 in A and 5 in B develop respiratory symptoms. The design is"
+        options:
+          - "Prospective cohort"
+          - "Cross sectional"
+          - "Case control"
+          - "Correlation study"
+          - "Retrospective cohort"
         answer: 0
         why:
-          - "صح: ناس سليمة، اتقسموا على الـ exposure، واتتابعوا 5 سنين. Relative risk (RR) = 9.1% ÷ 7.1% = 1.29."
-          - "التدخين اتسأل عنه من الماضي، بس المرض لسه هيتقاس قدّام."
-          - "مابدأناش من ناس عندها المرض."
-          - "فيه متابعة، فمش لحظة واحدة."
+          - "صح: ناس سليمة متقسمة حسب الـ exposure (الشغلانة) ومتابَعة لحد time X. والـ RR = 20% ÷ 5% = 4."
+          - "الناس كانت سليمة في الأول واتتابعت."
+          - "البداية مش من المرض."
+          - "البيانات هنا لأفراد، مش متوسطات جروبات."
+          - "مفيش سجلات قديمة في القصة."
       - kind: aside
         tone: trap
-        page: 34
-        quote: "Follow up of a population of adults who were exposed and not exposed during childhood to radiation of the neck to assess risk of thyroid cancer.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        page: 40
+        quote: "During pre-placement examination of 200 new employees, 20 persons were hypertensive among 80 smokers while 6 hypertensive persons were detected among the remainder non-smoker employees.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
         text: |
-          سؤال الـ **neck radiation**: البالغين اتعرّضوا في **الطفولة**، و«follow up» علشان الـ thyroid cancer. **مفتاح الشريحة: d، prospective cohort.**
+          فخ كلمة **new**: «pre-placement examination of 200 **new employees**». الدكتورة نبّهت في الشرح والـ revision إن «new» هنا وصف للموظفين، **مش** للحالات: الـ hypertension ممكن تكون موجودة من زمان.
 
-          كتب كتير بتعتبره **retrospective (historical) cohort** لأن الـ exposure حصل زمان. بس الدكتورة ثبّتت الإجابة دي في المحاضرة وفي الـ revision: المشاركين **بيتتابعوا من بداية الدراسة لحد ما الـ outcome يظهر**، و«قِدم الـ exposure» لوحده مايخليهاش retrospective. الـ retrospective cohort مبني على **سجلات قديمة** للـ exposure والـ outcome (زي سؤال القريتين). في امتحان القسم: **prospective**.
+          التدخين والضغط اتقاسوا في **نفس الكشف**، يعني ==cross-sectional==، والأرقام **prevalence**: 20/80 = 25% في الـ smokers، و 6/120 = 5% في الـ non-smokers. مش incidence.
+      - kind: try
+        items: [res.L08.033, res.L08.035, res.L08.036]
+    recap:
+      - "الباحث ادّى الـ exposure بقرعة = RCT. البداية من المرض = case-control. الاتنين في نفس الوقت = cross-sectional."
+      - "البداية من الـ exposure: سجلات قديمة = retrospective cohort، متابعة من دلوقتي = prospective cohort."
+      - "مرض نادر = case control. Exposure نادر = cohort."
+      - "انتبه: الـ neck radiation مفتاحه prospective (الدكتورة ثبّتته)، والـ toxin مفتاحه longitudinal."
+    practice: [res.L08.030, res.L08.031, res.L08.032, res.L08.033, res.L08.034, res.L08.035, res.L08.036, res.L08.057]
+  # ------------------------------------------------------------------
+  - id: res.L08.lesson6
+    title: "مسائل الـ design: من folic acid للـ HIV trial"
+    hook: "١١ قصة من المحاضرة، وفي كل واحدة سؤالين بس: بدأنا منين؟ ورحنا لقدّام ولا رجعنا لورا؟"
+    minutes: 8
+    pages: [41, 51]
+    topics: [designs]
+    goals:
+      - "تحل مسائل الـ design بالـ ٣ أسئلة"
+      - "تعرف الـ case control من الـ cohort من نقطة البداية"
+      - "تعرف الـ randomized double-blind trial من تفاصيل القصة"
+    status: unverified
+    steps:
+      - kind: check
+        page: 41
+        quote: "An Epidemiologic study was carried and revealed that the development of neural defects in the newborn whose mothers were not receiving folic acid during pregnancy is 50% while it is 10% among those whose mothers were receiving folic acid rich diet during pregnancy.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        question: "Neural tube defects in 50% of newborns whose mothers did not get folic acid in pregnancy, against 10% with a folic-acid-rich diet. The design is"
+        options:
+          - "Prospective cohort"
+          - "Cross sectional"
+          - "Case control"
+          - "Correlation study"
+          - "Retrospective cohort"
+        answer: 0
+        why:
+          - "صح (مفتاح السلايد): جروبات حسب الـ exposure (folic acid) ومعدّل النتيجة في كل جروب. والـ RR = 50 ÷ 10 = 5."
+          - "الـ exposure قبل النتيجة (الحمل قبل الولادة)."
+          - "النتايج مكتوبة كـ rates لكل جروب exposure، مش exposure بين الـ cases."
+          - "البيانات هنا لأفراد، مش متوسطات جروبات."
+          - "مفيش سجلات قديمة؛ المتابعة بتحصل دلوقتي."
+      - kind: check
+        page: 42
+        quote: "A research team followed 1200 HIV positive patients and a similar group of HIV negative at an outpatient clinic over 3 years to determine the rate of occurrence of cerebral Toxoplasmosis\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        question: "1200 HIV-positive patients and a similar HIV-negative group followed at a clinic for 3 years for the rate of cerebral toxoplasmosis. The design is"
+        options:
+          - "Prospective cohort"
+          - "Cross sectional"
+          - "Case control"
+          - "Correlation study"
+          - "Retrospective cohort"
+        answer: 0
+        why:
+          - "صح: البداية من الـ exposure (HIV)، ومتابعة 3 سنين لقدّام لحالات جديدة."
+          - "فيه متابعة 3 سنين."
+          - "البداية من الـ HIV، مش من الـ toxoplasmosis."
+          - "البيانات هنا لأفراد، مش متوسطات جروبات."
+          - "مفيش سجلات قديمة؛ المتابعة بتحصل دلوقتي."
+      - kind: check
+        page: 43
+        quote: "The association between low birth weight and maternal smoking. The smoking habit of women was determined at the antenatal visits and then subsequently the birth weight was recorded.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        question: "Mothers' smoking is recorded at antenatal visits, and their babies' birth weight is recorded later. The design is"
+        options:
+          - "Prospective cohort"
+          - "Cross sectional"
+          - "Case control"
+          - "Correlation study"
+          - "Retrospective cohort"
+        answer: 0
+        why:
+          - "صح: الـ exposure (التدخين) اتسجّل الأول، والنتيجة (وزن المولود) اتسجّلت بعدين وهي بتحصل."
+          - "الـ exposure اتسجّل قبل النتيجة."
+          - "مابدأناش من الأطفال ناقصين الوزن."
+          - "البيانات هنا لأفراد، مش متوسطات جروبات."
+          - "مفيش سجلات قديمة؛ المتابعة بتحصل دلوقتي."
       - kind: aside
-        tone: trap
-        page: 50
-        quote: "In a study, a group of people are exposed to an environmental toxin but are not treated. Instead, they are observed over time on a standard set of measures to ascertain the potential effects of the toxin. This type of study design is called\n  a. Clinical trial\n  b. Double-blind\n  c. Longitudinal\n  d. Prospective cohort\n  e. Retrospective cohort"
+        tone: tip
+        page: 44
+        quote: "The study of the effect of parental consanguinity on hereditary diseases in the offspring is best studied by:\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
         text: |
-          سؤال الـ **environmental toxin**: ناس اتعرضوا وبنتابعهم «over time on a standard set of measures». **مفتاح الشريحة: c، longitudinal.**
+          قاعدة سريعة لسؤال «**best studied by**»:
 
-          الـ prospective cohort معقول برضه، بس مفيش جروب **unexposed** للمقارنة، والسؤال بيقول «this type of study design is called»، وده الوصف الحرفي لـ **longitudinal**. والدكتورة ثبّتت الإجابة دي في الشرح: متابعة جروب واحد اتعرّض من غير مقارنة = دراسة longitudinal.
+          - المرض **نادر** (hereditary diseases، neural tube defects، ALL): **case control**.
+          - الـ **exposure** نادر (radiation، وظيفة خطرة): **cohort**.
+          - عايز تثبت إن **علاج** شغّال: **randomized controlled trial (RCT)**.
+
+          وفي سؤال الـ ALL الدكتورة اختارت أطفال الـ **outpatient clinic** اللي مش عندهم ALL، **سواء اتعرّضوا للـ waste أو لأ**: الـ controls ماتختارهمش حسب الـ exposure، لأن المطلوب نقيس الـ exposure فيهم ونقارنه بالـ cases.
+      - kind: check
+        page: 45
+        quote: "An investigator selected 100 women with a confirmed diagnosis of rheumatoid arthritis and 200 women free from rheumatoid arthritis but undergoing treatment at the same medical facility for other musculoskeletal condition. All subjects were reviewed for evidence of oral contraceptive use.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        question: "100 women with rheumatoid arthritis and 200 women without it, treated at the same facility for other musculoskeletal conditions, are reviewed for oral contraceptive use. The design is"
+        options:
+          - "Case control"
+          - "Cross sectional"
+          - "Correlation study"
+          - "Prospective cohort"
+          - "Retrospective cohort"
+        answer: 0
+        why:
+          - "صح: الاختيار حسب المرض (RA ولا لأ)، وبعدين بنقارن الـ exposure اللي فات (حبوب منع الحمل)."
+          - "الاختيار حسب المرض، مش مسح لسكان."
+          - "البيانات لأفراد."
+          - "الـ cohort بتبدأ من الـ exposure، مش المرض."
+          - "البداية من المرض، مش من الـ exposure."
       - kind: check
         page: 46
         quote: "An investigator suspects that acetaminophen use during the first trimester of pregnancy can cause neural tube defects. She estimates the risk of neural tube defect in the general population is 1:1,000. Which of the following is the best study design to investigate the hypothesis?\n  a. Cohort study\n  b. Case-control study\n  c. Clinical trial\n  d. Ecologic Study\n  e. Cross-sectional study"
@@ -509,39 +706,77 @@ lessons:
           - "لو اخترت على أساس الـ exposure هتبوّظ المقارنة."
           - "نفس المشكلة: اختيار على أساس الـ exposure."
           - "دول عندهم acute lymphoblastic leukemia (ALL)، يعني cases."
-      - kind: aside
-        tone: tip
-        page: 44
-        quote: "The study of the effect of parental consanguinity on hereditary diseases in the offspring is best studied by:\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
-        text: |
-          قاعدة سريعة لسؤال «**best studied by**»:
-
-          - المرض **نادر** (hereditary diseases، neural tube defects، ALL): **case control**.
-          - الـ **exposure** نادر (radiation، وظيفة خطرة): **cohort**.
-          - عايز تثبت إن **علاج** شغّال: **randomized controlled trial (RCT)**.
-
-          وفي سؤال الـ ALL الدكتورة اختارت أطفال الـ **outpatient clinic** اللي مش عندهم ALL، **سواء اتعرّضوا للـ waste أو لأ**: الـ controls ماتختارهمش حسب الـ exposure، لأن المطلوب نقيس الـ exposure فيهم ونقارنه بالـ cases.
+      - kind: check
+        page: 48
+        quote: "500 women aged 40 – 54 who present for routine check-ups are asked about their meat consumption. 20% of the women turn out to be vegetarian. During the following 5 years, 5 vegetarians and 43 non-vegetarians develop colorectal cancer. Which of the following best describes the study design?\n  a. Case series report\n  b. Cohort study\n  c. Case-control study\n  d. Cross-sectional study\n  e. Randomized clinical trial"
+        question: "500 women aged 40-54 are asked about meat consumption at check-ups; 20% are vegetarian. Over 5 years, 5 vegetarians and 43 non-vegetarians develop colorectal cancer. The design is"
+        options:
+          - "Cohort study"
+          - "Case series report"
+          - "Case-control study"
+          - "Cross-sectional study"
+          - "Randomized clinical trial"
+        answer: 0
+        why:
+          - "صح (b في السلايد): جروبين حسب الأكل (الـ exposure) ومتابعة 5 سنين لحالات جديدة. الخطر 5 من 100 = 5% ضد 43 من 400 = 10.75%."
+          - "الـ case series مالهاش comparison group."
+          - "مابدأناش من الستات اللي عندهم cancer."
+          - "فيه متابعة، فمش لحظة واحدة."
+          - "محدش اتفرض عليه أكل معين."
+      - kind: check
+        page: 49
+        quote: "A group of patients with lung cancer is matched to a group of patients without lung cancer. Their smoking habits over the course of their lives are compared. On the basis of this information, researchers compute the odds of smoking among patients with lung cancer compared to the odds of smoking among those without lung cancer. This is an example of a\n  a. Case-control study\n  b. Cohort study\n  c. Cross-sectional study\n  d. Longitudinal study\n  e. Randomized controlled study"
+        question: "Lung cancer patients are matched to patients without it, lifetime smoking is compared, and the odds of smoking in each group are computed. This is a"
+        options:
+          - "Case-control study"
+          - "Cohort study"
+          - "Cross-sectional study"
+          - "Longitudinal study"
+          - "Randomized controlled study"
+        answer: 0
+        why:
+          - "صح (a في السلايد): البداية من المرض، ومقارنة الـ exposure اللي فات، والمقياس odds ratio."
+          - "الـ cohort كانت هتبدأ من المدخنين وغير المدخنين."
+          - "تاريخ التدخين طول العمر مش لحظة واحدة."
+          - "الـ longitudinal معناها متابعة لقدّام."
+          - "محدش اتقاله يدخن."
       - kind: aside
         tone: trap
-        page: 40
-        quote: "During pre-placement examination of 200 new employees, 20 persons were hypertensive among 80 smokers while 6 hypertensive persons were detected among the remainder non-smoker employees.\n  a) Cross sectional\n  b) Case control\n  c) Correlation study\n  d) Prospective cohort\n  e) Retrospective cohort"
+        page: 50
+        quote: "In a study, a group of people are exposed to an environmental toxin but are not treated. Instead, they are observed over time on a standard set of measures to ascertain the potential effects of the toxin. This type of study design is called\n  a. Clinical trial\n  b. Double-blind\n  c. Longitudinal\n  d. Prospective cohort\n  e. Retrospective cohort"
         text: |
-          فخ كلمة **new**: «pre-placement examination of 200 **new employees**». الدكتورة نبّهت في الشرح والـ revision إن «new» هنا وصف للموظفين، **مش** للحالات: الـ hypertension ممكن تكون موجودة من زمان.
+          سؤال الـ **environmental toxin**: ناس اتعرضوا وبنتابعهم «over time on a standard set of measures». **مفتاح الشريحة: c، longitudinal.**
 
-          التدخين والضغط اتقاسوا في **نفس الكشف**، يعني ==cross-sectional==، والأرقام **prevalence**: 20/80 = 25% في الـ smokers، و 6/120 = 5% في الـ non-smokers. مش incidence.
+          الـ prospective cohort معقول برضه، بس مفيش جروب **unexposed** للمقارنة، والسؤال بيقول «this type of study design is called»، وده الوصف الحرفي لـ **longitudinal**. والدكتورة ثبّتت الإجابة دي في الشرح: متابعة جروب واحد اتعرّض من غير مقارنة = دراسة longitudinal.
+      - kind: check
+        page: 51
+        quote: "A new drug with in vitro activity against HIV is tested on a population of patients with Western-blot confirmed HIV infections. Out of the 200 individuals in the patient population, 100 are chosen by lottery to receive the drug. The drug, which is tasteless, is administered in a cup of orange juice; the other patients receive pure orange juice. Neither the nurses, doctors, nor the patients know which patients receive the drug. At the end of the study period, the number of CD4+ T cells is determined for all of the subjects. This is an example of a\n  a. Case-control study\n  b. Case report\n  c. Cohort study\n  d. Cross-sectional study\n  e. Double-blind randomized clinical trial"
+        question: "200 HIV patients: 100 chosen by lottery get a new tasteless drug in orange juice, the rest get plain juice; nurses, doctors and patients do not know who gets what. CD4 counts are measured at the end. This is a"
+        options:
+          - "Double-blind randomized clinical trial"
+          - "Case-control study"
+          - "Case report"
+          - "Prospective cohort study"
+          - "Cross-sectional survey"
+        answer: 0
+        why:
+          - "صح (e في السلايد): lottery = randomized، عصير شكله واحد = placebo، والعيانين والفريق مش عارفين = double-blind."
+          - "الاختيار مش حسب النتيجة."
+          - "فيه 200 عيان ومقارنة."
+          - "في الـ cohort الباحث مابيدّيش الـ exposure."
+          - "فيه علاج ومتابعة."
       - kind: try
-        items: [res.L08.029, res.L08.033, res.L08.036]
+        items: [res.L08.041, res.L08.044, res.L08.047]
     recap:
-      - "الباحث ادّى الـ exposure بقرعة = RCT. البداية من المرض = case-control. الاتنين في نفس الوقت = cross-sectional."
-      - "البداية من الـ exposure: سجلات قديمة = retrospective cohort، متابعة من دلوقتي = prospective cohort."
-      - "مرض نادر = case control. Exposure نادر = cohort."
-      - "انتبه: الـ neck radiation مفتاحه prospective (الدكتورة ثبّتته)، والـ toxin مفتاحه longitudinal."
-    practice: [res.L08.029, res.L08.030, res.L08.031, res.L08.032, res.L08.033, res.L08.034, res.L08.035, res.L08.036, res.L08.037, res.L08.038, res.L08.039, res.L08.040, res.L08.041, res.L08.042, res.L08.043, res.L08.044, res.L08.045, res.L08.046, res.L08.047, res.L08.057]
+      - "البداية من الـ exposure ومتابعة لقدّام = prospective cohort."
+      - "البداية من المرض ومقارنة الـ exposure اللي فات = case control، والمقياس odds ratio."
+      - "lottery + placebo شكله واحد + محدش عارف = double-blind randomized clinical trial."
+    practice: [res.L08.037, res.L08.038, res.L08.039, res.L08.040, res.L08.041, res.L08.042, res.L08.043, res.L08.044, res.L08.045, res.L08.046, res.L08.047]
   # ------------------------------------------------------------------
   - id: res.L08.lesson5
     title: "Bias ولا confounding؟"
     hook: "الكحول بيعمل lung cancer؟ OR = 2.5... لحد ما قسّمنا الناس smokers و non-smokers والعلاقة اختفت."
-    minutes: 7
+    minutes: 6
     pages: [57, 62]
     topics: [bias]
     goals:
@@ -558,6 +793,21 @@ lessons:
           ==Bias== = أي **systematic error** في الـ design أو الـ conduct أو الـ analysis، بيطلّع تقدير **غلط** لأثر الـ exposure.
 
           الفرق عن الصدفة (random error): الـ bias **بيزق النتيجة في اتجاه واحد**، وكبر العيّنة **مش** بيعالجه.
+      - kind: check
+        page: 58
+        quote: "The purpose of a double-blind or doublemasked study is to:\n  a. Achieve comparability of treated and untreated subjects\n  b. Reduce the effects of sampling variation\n  c. Avoid observer and subject bias\n  d. Avoid observer bias and sampling variation"
+        question: "The purpose of a double-blind or double-masked study is to"
+        options:
+          - "Avoid observer and subject bias"
+          - "Achieve comparability of treated and untreated subjects"
+          - "Reduce the effects of sampling variation"
+          - "Avoid observer bias and sampling variation"
+        answer: 0
+        why:
+          - "صح (c في السلايد): لما العيان واللي بيقيس مايعرفوش مين خد إيه، محدش فيهم يقدر يميل بالنتيجة."
+          - "التشابه بين الجروبين بييجي من الـ randomization."
+          - "الـ sampling variation بتقل بعيّنة أكبر."
+          - "الـ blinding مالوش علاقة بالـ sampling variation."
       - kind: figure
         page: 60
         quote: "A case-control study is conducted to assess the association between alcohol consumption and lung cancer. 100 patients with lung cancer and 100 controls are asked about their past alcohol consumption. According to the study results, alcohol consumption is strongly associated with lung cancer (OR = 2.5). The researchers then divide the study subjects into two groups: smokers and non-smokers. Subsequent statistical analysis does not reveal any association between alcohol consumption and lung cancer within either group. The scenario described is an example of which of the following?\n  a. Observer bias\n  b. Confounding\n  c. Placebo effect\n  d. Non-response bias\n  e. Recall bias"

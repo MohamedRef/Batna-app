@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: neph.L09 to the Hepatology bar: 7 → 11 lessons (lesson4 → lesson8, lesson5 → lesson9, lesson6 → lesson10, lesson7 → lesson11), reasons labelled «التفسير المقبول (مش في الكتاب)», six new book-figure crops (dialysis, HLA, cross-match, three-signal), words per page 83 → 225 on the `lessons --report` count, the 9 pages without a step now taught; `neph.L09: {}` in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: dm.L10 to the Hepatology bar: 3 lessons kept, reasons added to every list and labelled «التفسير المقبول (مش في الكتاب)», words per page 205 → 254; p129 (review questions only) listed in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: endo.L06 to the Hepatology bar: 4 → 6 lessons (lesson1 split → lesson5 screening/patterns, lesson4 → lesson6 binding/RTH/algorithm), every list with its reason, words per page 148 → 236; added to `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: dm.L09 to the Hepatology bar: 5 → 9 lessons (sulfonylureas → lesson6, TZDs → lesson7, DPP-4 and oral GLP-1 → lesson8, the algorithm → lesson9), reasons labelled «التفسير المقبول (مش في الكتاب)», pp105 and 116 now taught, words per page 113 → 225; in `content/lesson-skips.yaml` (#827–#829).

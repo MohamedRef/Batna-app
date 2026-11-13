@@ -4,14 +4,14 @@ lessons:
   # ------------------------------------------------------------------
   - id: rheum.L08.lesson1
     title: "الأوعية بتولّع: ليه وإزاي نقسّمها؟"
-    hook: "مرض واحد ممكن يعمل صداع، أو purpura، أو فشل كلوي. السر في حجم الوعاء."
-    minutes: 8
+    hook: "مرض واحد ممكن يبقى بقعة في الرجل، أو نزيف في الرئة وفشل كلوي. السر في حجم الوعاء والطريقة اللي الجدار بيتضرب بيها."
+    minutes: 10
     pages: [123, 126]
     topics: [basics, classification]
     goals:
-      - "تفهم الـ pathogenesis: التهاب في الجدار + ischaemia"
-      - "تعرف الأربع mechanisms وأمثلتها"
-      - "ترسم الـ Chapel Hill 2012 حسب حجم الوعاء"
+      - "تعرّف الـ vasculitis وتفهم ليه أعراضه متنوعة كده"
+      - "تعدّ الأربع mechanisms اللي بيضربوا الجدار، وليه كل واحد بيدّي علامة معملية مختلفة"
+      - "تقسّم بالـ Chapel Hill 2012 حسب حجم الوعاء والأقسام التانية"
     status: unverified
     steps:
       - kind: explain
@@ -34,6 +34,20 @@ lessons:
           2. **Ischaemia of tissues** (الوعاء ضاق أو اتسد، فالعضو اللي بيغذيه جاع)
 
           أغلبهم **immune-mediated** و **idiopathic**.
+      - kind: reveal
+        page: 123
+        quote: "Pathogenesis of vasculitis involves two processes, namely."
+        prompt: "لو العملية بس «التهاب وعاء» و«ischaemia»، ليه أعراض الـ vasculitis متنوعة لدرجة إنها بتقلّد أمراض كتير؟"
+        answer: |
+          لأن العرض بيتحدد بـ **مين الوعاء ده بيغذّي**، مش بالمرض نفسه. الكتاب بيقول **vessels of any size and of any organ** ممكن تتصاب.
+
+          التفسير المقبول (مش في الكتاب):
+          - وعاء صغير في الجلد ← **purpura**.
+          - وعاء الـ nerve (vasa nervorum) ← **foot drop** مفاجئ.
+          - شريان الكلية ← **hypertension** أو **renal infarction**.
+          - شريان في المخ ← **stroke** في شاب.
+
+          فنفس العملية بتلبس وش عضو مختلف كل مرة، وعشان كده الكتاب بيقول محتاج ==systematic approach==.
       - kind: table
         page: 124
         quote: "Immune complex mediated with immune complex deposition or formation in situ. This is associated with low complement levels, e.g. Henoch-Schonlein purpura (HSP), polyarteritis nodosa (PAN)."
@@ -45,6 +59,18 @@ lessons:
           - ["Immune complex", "Low complement", "HSP, PAN"]
           - ["T cell (Th1)", "Granulomatous infiltrate", "GCA, Takayasu"]
         hide: [[0, 2], [1, 1], [2, 1], [3, 2]]
+      - kind: explain
+        page: 124
+        title: "ليه كل mechanism ليه علامة معملية؟"
+        quote: "Immune complex mediated with immune complex deposition or formation in situ. This is associated with low complement levels"
+        text: |
+          الكتاب بيدّي أربع طرق لضرب الجدار، وكل واحدة بتسيب **بصمة** تقدر تدوّر عليها:
+          - **Allergic angiitis** (زي **Churg–Strauss**): **eosinophilia** و **IgE عالي**، لأن العملية allergic أصلًا، فالـ eosinophils هي اللي بتهاجم.
+          - **Antibody mediated (pauci-immune)** = الـ **ANCA-associated vasculitis (AAV)**: الـ ANCA في الدم، بس الجدار تحت الميكروسكوب **فيه immune deposits قليلة جدًا** (pauci = قليل).
+          - **Immune complex**: زي **HSP** و **PAN**، ومعاها ==low complement== لأن الـ complexes بتشغّل الـ classical pathway فالـ complement **بيتصرف** (افتكر المحاضرة 7).
+          - **T cell mediated** بالـ **Th1**: زي **GCA** و **Takayasu**، فبيعمل **granuloma** و giant cells بدل antibodies.
+
+          يعني لما تطلب **complement** و **ANCA** و **eosinophils**، إنت بتسأل "أنهي mechanism شغال؟".
       - kind: check
         page: 124
         quote: "Immune complex mediated with immune complex deposition or formation in situ. This is associated with low complement levels, e.g. Henoch-Schonlein purpura (HSP), polyarteritis nodosa (PAN)."
@@ -76,6 +102,16 @@ lessons:
         prompt: "ليه الـ focal and segmental دي بتهمك عمليًا قدام عيان GCA؟"
         answer: |
           لأن الـ biopsy ممكن تيجي **سليمة** لو أخدت حتة ما فيهاش التهاب. علشان كده في GCA بناخد **4–6 cm**، ولو الشك قوي والـ biopsy سليمة نعمل الناحية التانية (هتشوفها في درس 3).
+      - kind: explain
+        page: 125
+        title: "Primary ولا secondary؟"
+        quote: "Polysystemic autoimmun diseases"
+        text: |
+          الكتاب بيقسّم الأول لنوعين:
+          - **Primary**: الوعاء هو المرض نفسه: **arteritis temporalis**، **Takayasu**، **Wegener granulomatosis**، **Churg–Strauss**، **PAN**، **Schönlein–Henoch purpura**.
+          - **Secondary**: الـ vasculitis نتيجة لحاجة تانية: **polysystemic autoimmune diseases** (زي الـ lupus والـ RA)، **infections**، **hypersensitivity** (أدوية)، **cryoglobulinaemic vasculitis**، وغيرهم زي Cogan و Sweet.
+
+          ليه التقسيمة دي مهمة؟ لأن في الـ ==secondary== العلاج الأول هو **السبب**: توقف الدوا، تعالج الـ hepatitis C، تتحكم في الـ lupus. وده نفس اللي هتلاقيه في آخر المحاضرة: علاج الـ cryoglobulinaemic vasculitis بيبدأ بـ **treat Hep C**.
       - kind: figure
         page: 125
         quote: "Schönlein-Henoch purpura Names for Vasculitides Adopted by the 2011-2012 International Chapel Hill Consensus Conference Nomenclature of the Vasculitides Large Vessel Vasculitis (LVV)\nTakayasu Arteritis (TAK).\nGiant Cell Arteritis (GCA).\nMedium Vessel Vasculitis (MVV)\nPolyarteritis Nodosa (PAN).\nKawasaki Disease (KD)."
@@ -115,6 +151,17 @@ lessons:
           - { key: "S", text: "Small: ANCA (MPA, granulomatosis with polyangiitis (GPA), eosinophilic granulomatosis with polyangiitis (EGPA)) + immune complex (anti-GBM, cryo, immunoglobulin A (IgA), anti-C1q)" }
           - { key: "V", text: "Variable: Behçet, Cogan" }
         hook: "**L-M-S-V** زي مقاسات التيشيرت: Large, Medium, Small... والـ **V** ده Behçet اللي بيلبس أي مقاس."
+      - kind: reveal
+        page: 125
+        quote: "Names for Vasculitides Adopted by the 2011-2012 International"
+        prompt: "ليه Chapel Hill 2012 بيقسّم حسب حجم الوعاء؟ إيه اللي الحجم بيقولهولك عن العيان؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): حجم الوعاء بيحدد **شكل الإصابة**:
+          - **Large** (الـ aorta وفروعها): تضييق طويل ← **claudication** في الدراع، **pulselessness**، فرق ضغط، أو blindness من شريان العين.
+          - **Medium** (شرايين الأعضاء): **aneurysms** و **infarcts**: كلية، أمعاء، nerve، testis.
+          - **Small** (capillaries و venules و arterioles): **palpable purpura**، **glomerulonephritis**، **alveolar haemorrhage**، لأن دي الأماكن اللي فيها capillaries كتير.
+
+          فلو العيان عنده GN و نزيف في الرئة، فكّر في ==small vessel== على طول، ولو عنده aneurysms في الكلية والأمعاء من غير GN، فكّر في **medium** (PAN).
       - kind: sort
         page: 126
         quote: "Vasculitis Associated with Probable Etiology\n  Hepatitis C Virus-Associated Cryoglobulinemic Vasculitis.\n  Hepatitis B Virus-Associated Vasculitis.\n  Syphilis-Associated Aortitis.\n  Drug-Associated Immune Complex Vasculitis.\n  Drug-Associated ANCA-Associated Vasculitis.\n  Cancer-Associated Vasculitis.\n  Others."
@@ -129,25 +176,37 @@ lessons:
           - { text: "Syphilis-associated aortitis", bin: 2 }
           - { text: "Drug-associated AAV", bin: 2 }
         why: "الـ single organ محصور في عضو واحد (جلد، CNS، aorta). الـ systemic disease جزء من مرض تاني (lupus، RA، sarcoid). والـ probable etiology ليه سبب: فيروس، syphilis، دوا، أو cancer."
+      - kind: check
+        page: 126
+        quote: "Hepatitis C Virus-Associated Cryoglobulinemic Vasculitis."
+        question: "In Chapel Hill 2012, hepatitis C virus–associated cryoglobulinaemic vasculitis sits under which heading?"
+        options: ["Vasculitis associated with probable etiology", "Single organ vasculitis", "Variable vessel vasculitis", "Large vessel vasculitis"]
+        answer: 0
+        why:
+          - "صح: السبب (الـ virus) معروف، فبيتحط تحت probable etiology مع الـ HBV والـ syphilis والأدوية والـ cancer."
+          - "الـ single organ زي الـ cutaneous leukocytoclastic angiitis والـ primary CNS vasculitis: عضو واحد من غير سبب."
+          - "الـ variable vessel = Behçet و Cogan، اللي بيمسكوا أي حجم."
+          - "الـ large vessel = Takayasu و GCA."
       - kind: try
-        items: [rheum.L08.004, rheum.L08.006, rheum.L08.016, rheum.L08.017, rheum.L08.021]
+        items: [rheum.L08.003, rheum.L08.006, rheum.L08.012, rheum.L08.016, rheum.L08.021]
     recap:
-      - "Vasculitis = inflammation + necrosis of vessels، والـ pathogenesis = التهاب الجدار + ischaemia."
-      - "Mechanisms: allergic (EGPA)، pauci-immune ANCA، immune complex (complement واطي: HSP، PAN)، Th1 (GCA، Takayasu)."
-      - "الـ pathology مش بتدي الاسم، والإصابة focal and segmental."
-      - "Chapel Hill: **LMSV**."
-    practice: [rheum.L08.001, rheum.L08.002, rheum.L08.003, rheum.L08.004, rheum.L08.005, rheum.L08.006, rheum.L08.007, rheum.L08.008, rheum.L08.009, rheum.L08.010, rheum.L08.011, rheum.L08.012, rheum.L08.013, rheum.L08.014, rheum.L08.015, rheum.L08.016, rheum.L08.017, rheum.L08.018, rheum.L08.019, rheum.L08.020, rheum.L08.021, rheum.L08.022, rheum.L08.023]
+      - "Vasculitis = inflammation و necrosis للأوعية؛ أي حجم وأي عضو، فبيقلّد أمراض كتير."
+      - "عمليتين: inflammation للجدار + ischaemia للعضو اللي بيغذيه."
+      - "Allergic (eosinophils، IgE)، pauci-immune ANCA، immune complex (complement واطي)، Th1 (granuloma)."
+      - "Pathology مش diagnostic، focal و segmental (skip lesions)؛ 19.8 per million، 65–74، رجالة أكتر."
+      - "Primary ضد secondary (عالج السبب). Chapel Hill: large، medium، small، variable، single organ، systemic، probable etiology."
+    practice: [rheum.L08.001, rheum.L08.002, rheum.L08.003, rheum.L08.004, rheum.L08.005, rheum.L08.006, rheum.L08.007, rheum.L08.008, rheum.L08.009, rheum.L08.010, rheum.L08.011, rheum.L08.012, rheum.L08.013, rheum.L08.014, rheum.L08.015, rheum.L08.016, rheum.L08.017, rheum.L08.018, rheum.L08.019, rheum.L08.020, rheum.L08.021, rheum.L08.022, rheum.L08.023, rheum.L08.057]
   # ------------------------------------------------------------------
   - id: rheum.L08.lesson2
-    title: "امتى تشك؟ وإزاي تتأكد؟"
-    hook: "شاب عنده جلطة، أو ست كبيرة فقدت النظر فجأة: الاتنين ممكن يبقوا vasculitis."
-    minutes: 8
-    pages: [126, 130]
-    topics: [clues, organs, workup]
+    title: "امتى تشك؟ وكل عضو بيشتكي إزاي"
+    hook: "شاب عنده ضغط عالي، أو كبير فقد النظر في عين فجأة، أو حد صحي برجل مرخية. كلها ممكن تبقى أوعية ملتهبة."
+    minutes: 10
+    pages: [126, 129]
+    topics: [clues, organs]
     goals:
-      - "تحفظ الـ red flags اللي تخليك تفكر في vasculitis"
-      - "تفرّق بين cutaneous و systemic"
-      - "تعرف الـ workup والـ mimics"
+      - "تعرف الـ red flags اللي تخليك تفكر في vasculitis وليه"
+      - "تفرّق الـ cutaneous من الـ systemic vasculitis"
+      - "تربط إصابة كل عضو بالمرض اللي الكتاب ربطه بيه، وتفهم السبب"
     status: unverified
     steps:
       - kind: explain
@@ -170,6 +229,14 @@ lessons:
           - **Wrist drop** أو **foot drop** فجأة (mononeuritis)
           - **Stroke** أو **myocardial infarction (MI)** في شاب
           - **Pulmonary nodules** أو cavities مش مفسّرة
+      - kind: reveal
+        page: 127
+        quote: "Sudden appearance of peripheral neuropathy - wrist drop,foot drop."
+        prompt: "ليه الـ vasculitis بيعمل wrist drop أو foot drop مفاجئ في nerve واحد، مش تنميل في الإيدين والرجلين زي السكر؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): كل nerve ليه **شرايين صغيرة بتغذيه** (vasa nervorum). لما شريان واحد منهم يتسد، الجزء اللي بيغذيه من الـ nerve ده بالذات **يموت فجأة**، فتلاقي nerve واحد واقع: radial ← wrist drop، peroneal ← foot drop.
+
+          ولما يتكرر في كذا nerve في أماكن مختلفة يبقى ==mononeuritis multiplex== (الكتاب بيذكرها في Nerves ص 129). أما السكر فبيأذي الأعصاب **بالتدريج ومن الأطراف**، فتلاقي glove and stocking.
       - kind: check
         page: 127
         quote: "Systemic vasculitis usually presents in individuals of 2-5th decade, the exceptions being HSP and Kawasaki disease which are common in children and Takayasu's arteritis, which is more common in young females."
@@ -185,6 +252,18 @@ lessons:
           - "الـ HSP شائع في الأطفال: استثناء."
           - "الـ Kawasaki في الأطفال: استثناء."
           - "الـ Takayasu أكتر في الـ young females: استثناء."
+      - kind: explain
+        page: 127
+        title: "ليه الكتاب بيستثني HSP و Kawasaki و Takayasu؟"
+        quote: "Systemic vasculitis usually presents in individuals of 2-5th decade, the exceptions being HSP and Kawasaki disease which are common in children and"
+        text: |
+          الكتاب بيقول الـ systemic vasculitis عادة بيظهر من **العقد التاني للخامس**، ما عدا:
+          - **HSP** و **Kawasaki disease**: في ==الأطفال==.
+          - **Takayasu arteritis**: أكتر في **الشابات**.
+
+          وفي نفس الوقت الـ **GCA** (هتشوفه بعد شوية) شرطه **≥50 سنة**. يعني **السن لوحده** بيقرّب لك التشخيص: طفل ببقع في رجله ووجع بطن ← فكّر HSP. طفل بسخونية 5 أيام وشفايف مشققة ← Kawasaki. بنت 25 سنة نبضها مش موجود في دراع ← Takayasu. ست 70 سنة بصداع جديد ← GCA.
+
+          والكتاب بيقول كمان إن **pattern** الأعضاء المصابة بيساعد في تحديد الـ syndrome، وده اللي الجدول الجاي بيعمله.
       - kind: table
         page: 127
         quote: "Usual presentation is in the form of palpable purpura,urticaria, bullous ulcers or splinter haemorrhages, mainly limited to lower extremities. The salient features are:\n  Absence of systemic involvement.\n  Negative serology.\n  Small vessel leucocytoclastic vasculitis.\n  Better prognosis."
@@ -196,12 +275,22 @@ lessons:
           - ["Vessel", "Small, leucocytoclastic", "Any size"]
           - ["Prognosis", "Better", "Poor in general"]
         hide: [[1, 1], [2, 1], [3, 1], [3, 2]]
+      - kind: reveal
+        page: 127
+        quote: "Small vessel leucocytoclastic vasculitis."
+        prompt: "ليه الـ cutaneous vasculitis بيعمل purpura «palpable» (تحسها بإيدك)، وليه بيبقى في الرجلين أكتر؟"
+        answer: |
+          الكتاب بيقول إنه **small vessel leucocytoclastic vasculitis** و **mainly limited to lower extremities**.
+
+          التفسير المقبول (مش في الكتاب):
+          - **Palpable**: الـ venule الملتهب مليان **neutrophils** بتتكسر (leucocytoclastic) و **دم بيخرج** للجلد، فالبقعة **منفوخة** مش مسطحة زي purpura الـ platelets الواطية.
+          - **في الرجلين**: الضغط في الأوعية هناك أعلى وأنت واقف (gravity)، فالـ immune complexes بتترسّب أكتر والدم بيسرّب أسهل.
       - kind: figure
         page: 128
         quote: "Kidney -Affected in most of the vasculitis except PAN and TA: - Glomerulonephritis (absent in classical PAN)."
         title: "خريطة الأعضاء"
         alt: "A body outline as boxes from head to legs. ENT: epistaxis, otitis in WG. Eye: scleritis, uveitis, proptosis. Lung: alveolar haemorrhage, nodules, asthma in CSS. Kidney: GN except PAN and Takayasu. Gut: ischaemic necrosis, infarction. Nerves: mononeuritis multiplex. Skin: purpura, livedo, Raynaud."
-        caption: "الكلية متصابة في أغلبهم ==except PAN and transfusion-associated (TA)==. الرئة: **Wegener's granulomatosis (WG)، Churg–Strauss syndrome (CSS)، MPA**. والـ asthma علامة **CSS**."
+        caption: "الكلية متصابة في أغلبهم ==except PAN and Takayasu arteritis (TA)==. الرئة: **Wegener's granulomatosis (WG)، Churg–Strauss syndrome (CSS)، MPA**. والـ asthma علامة **CSS**."
         svg: |
           <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
             <circle cx="165" cy="40" r="28" class="fg-box"/>
@@ -236,6 +325,19 @@ lessons:
         text: |
           فخ مشهور: **classical polyarteritis nodosa (PAN)** = ==no glomerulonephritis== (بيعمل renal infarction و hypertension).
           والعكس: **Wegener's granulomatosis (WG)** بيعمل glomerulonephritis (GN) بس الكتاب بيقول **hypertension not seen in WG**.
+      - kind: explain
+        page: 128
+        title: "الرئة والكلية: ليه الصورة كده؟"
+        quote: "Alveolar haemorrhage, characterized by haemoptysis, anaemia and bilateral"
+        text: |
+          الجدول بيقول الرئة بتتصاب في **WG** و **CSS** و **MPA**، وأخطر حاجة الـ ==alveolar haemorrhage==: **haemoptysis** و **anaemia** و **bilateral evanescent lung opacities**.
+
+          التفسير المقبول (مش في الكتاب) للتلاتة:
+          - الـ **capillaries** حوالين الـ alveoli ملتهبة، فالدم بيسرّب جوه الـ alveoli ← **haemoptysis**.
+          - الدم ده ضايع من الدورة ← **anaemia** (ممكن تبقى شديدة حتى لو الـ haemoptysis قليل).
+          - الدم في الـ alveoli بيتشفط ويختفي في أيام ← opacities **evanescent** (بتروح وتيجي).
+
+          والكلية: **GN** و **renal failure** و **hypertension** و **renal infarction**. الـ GN من الـ glomerular capillaries (small vessel)، والـ infarction من شريان أكبر.
       - kind: match
         page: 129
         quote: "Muscles:\n  Jaw claudication as in GCA.\n  Myalgia.\n  Arm claudication as in TA.\n  Weakness and stiffness of muscles."
@@ -247,6 +349,66 @@ lessons:
           - ["Epistaxis, otitis media", "Wegener (GPA)"]
         why: "الـ GCA بيمسك الـ temporal و maxillary arteries فالمضغ يوجع. الـ Takayasu بيضيّق الـ subclavian فالدراع يتعب. الـ CSS = asthma + eosinophils. والـ WG بيبدأ من الأنف والودن."
       - kind: explain
+        page: 129
+        title: "العضلات والأعصاب والعين: كله ischaemia"
+        quote: "Jaw claudication as in GCA."
+        text: |
+          الكتاب بيكمّل الجدول في ص 129، وكل علامة فيها تقدر تفهمها بكلمة ==ischaemia==:
+          - **Muscles**: **jaw claudication** في الـ **GCA** و **arm claudication** في الـ **TA**. العضلة بتوجع **وهي شغالة** بس (مضغ أو رفع دراع)، لأن ساعتها بتحتاج دم أكتر والشريان الضيق مش بيوصّل.
+          - **Nerves**: **mononeuropathies (acute onset)** و **mononeuritis multiplex**.
+          - **CNS**: focal deficit، altered mental state، seizures.
+          - **Genitourinary**: **testicular** و epididymal pain.
+          - **Skin**: rash، purpura، infarcts، **livedo reticularis**، **Raynaud's**.
+          - **Constitutional (B symptoms)**: fever، malaise، anorexia، weight loss، لأن الالتهاب نفسه بيطلّع cytokines.
+          - **ENT**: otitis media، nasal obstruction أو epistaxis **في WG**.
+      - kind: explain
+        page: 129
+        title: "البطن والخصية والجلد: ليه الأعضاء دي بالذات؟"
+        quote: "Hepatic and pancreatic infarction."
+        text: |
+          الكتاب بيكمّل الخريطة: في البطن **ischaemic mucosal necrosis** مع hematemesis و melaena، **bowel infarction**، و **hepatic and pancreatic infarction**. في الـ genitourinary: **testicular pain**، epididymal pain، و ovarian involvement. وفي الجلد: rash، purpura، cutaneous infarcts، **livedo reticularis**، و Raynaud's.
+
+          التفسير المقبول (مش في الكتاب) للرابط:
+          - **البطن**: الأمعاء والكبد والبنكرياس متغذيين من شرايين ==medium-sized== (الـ mesenteric)، فلما تلتهب وتتقفل العضو يموت حتة حتة؛ ده اللي بيخلي وجع البطن بعد الأكل في شاب عنده ضغط عالي ونزول وزن علامة خطيرة.
+          - **الخصية**: الشريان بتاعها **end artery** طويل ورفيع، فأي التهاب فيه بيبان بسرعة كوجع. عشان كده testicular pain واحدة من الـ ACR criteria بتاعة الـ PAN (ص 141).
+          - **Livedo reticularis**: الشبكة البنفسجية دي بتطلع لما الشرايين الصغيرة اللي تحت الجلد تضيق، والدم يقعد في الأوردة اللي حواليها.
+
+          يعني لما تشوف وجع خصية أو بطن مع **B symptoms**، افتكر الـ medium vessels قبل ما تفتكر الجراحة.
+      - kind: check
+        page: 129
+        quote: "Otitis media, nasal obstruction or epistaxis (in WG)."
+        question: "In the book's organ table, nasal obstruction, epistaxis and otitis media point to which vasculitis?"
+        options: ["Wegener's granulomatosis (GPA)", "Polyarteritis nodosa", "Takayasu arteritis", "Giant cell arteritis"]
+        answer: 0
+        why:
+          - "صح: الـ ENT في الكتاب مكتوب جنبها WG، لأن الـ granulomas بتحب الأنف والجيوب والودن."
+          - "الـ PAN medium vessel: كلية من غير GN، أعصاب، testis، أمعاء."
+          - "الـ Takayasu: arm claudication و pulselessness."
+          - "الـ GCA: jaw claudication و blindness."
+      - kind: try
+        items: [rheum.L08.024, rheum.L08.028, rheum.L08.031, rheum.L08.035, rheum.L08.192]
+    recap:
+      - "Red flags: ضغط أو انسداد شرايين في شاب، fever و weight loss، proteinuria، purpura، monocular blindness و jaw claudication، foot drop، stroke في شاب، lung nodules."
+      - "Systemic من العقد 2–5، ما عدا HSP و Kawasaki (أطفال)، Takayasu (شابات)."
+      - "Cutaneous: palpable purpura في الرجلين، مفيش systemic، serology سلبية، prognosis أحسن."
+      - "Kidney في الأغلب ما عدا PAN و TA (PAN من غير GN، و WG من غير hypertension). Lungs: WG، CSS، MPA؛ asthma = CSS."
+      - "Alveolar haemorrhage = haemoptysis + anaemia + evanescent opacities. Claudication = ischaemia وقت الشغل."
+    practice: [rheum.L08.024, rheum.L08.025, rheum.L08.026, rheum.L08.027, rheum.L08.028, rheum.L08.029, rheum.L08.030, rheum.L08.031, rheum.L08.032, rheum.L08.033, rheum.L08.034, rheum.L08.035, rheum.L08.036, rheum.L08.037, rheum.L08.038, rheum.L08.039, rheum.L08.040, rheum.L08.041, rheum.L08.119, rheum.L08.192, rheum.L08.194]
+  # ------------------------------------------------------------------
+  # Split from lesson2 on 2026-11-13 (#828): the workup and the mimics.
+  - id: rheum.L08.lesson7
+    title: "الـ workup واللي بيقلّد الـ vasculitis"
+    hook: "قبل ما تكتب steroids لعيان شكله vasculitis، اسأل: ده ممكن يكون endocarditis؟ الغلطة دي بتموّت."
+    minutes: 8
+    pages: [130, 130]
+    topics: [workup]
+    goals:
+      - "تعرف الـ workup وليه كل test"
+      - "تفرّق c-ANCA من p-ANCA"
+      - "تعدّ الـ mimics وتفهم ليه كل واحد بيقلّد"
+    status: unverified
+    steps:
+      - kind: explain
         remind: [rheum.L08.042]
         page: 130
         title: "الـ workup"
@@ -256,6 +418,30 @@ lessons:
           - ==Antineutrophil cytoplasmic antibodies (ANCA)==: **c-ANCA**، **p-ANCA**، و atypical (A أو x-ANCA)
           - Renal و hepatic function، **echo**، **angiography**
           - والأهم: ==organ biopsy==
+      - kind: explain
+        page: 130
+        title: "كل test بيجاوب سؤال"
+        quote: "Antineutrophil cytoplasmic autoantibodies (ANCA):"
+        text: |
+          الـ workup مش قايمة تحفظها، كل test بيجاوب سؤال:
+          - **Haemogram**: anaemia (نزيف رئة أو مرض مزمن)، eosinophils (Churg–Strauss).
+          - **Urinalysis**: RBCs و **casts** يعني ==glomerulonephritis==، وده بيقلب الخطة لأنه organ-threatening.
+          - **Serum proteins**: الالتهاب المزمن والـ cryoglobulins.
+          - **ANCA**: **c-ANCA** (cytoplasmic) و **p-ANCA** (perinuclear) و **atypical (A أو x-ANCA)**: بيوجّهك للـ AAV.
+          - **Renal و hepatic function**: الكلية للـ GN، والكبد للـ hepatitis B/C اللي بتعمل PAN و cryoglobulinaemia.
+          - **Angiography**: الـ aneurysms في الـ medium vessels (PAN) أو التضييق في الـ large (Takayasu).
+          - **Echocardiography**: الـ endocarditis (mimic) والقلب نفسه.
+          - **Organ biopsy**: الإثبات.
+      - kind: reveal
+        page: 130
+        quote: "Cytoplasmic ANCA (c-ANCA)."
+        prompt: "يعني إيه c-ANCA و p-ANCA؟ الفرق في إيه بالظبط؟"
+        answer: |
+          الاتنين antibodies ضد حاجات جوه الـ **neutrophil**، والاسم جاي من **شكل الـ staining** تحت الـ immunofluorescence:
+          - **c-ANCA** = **cytoplasmic**: لون منتشر في الـ cytoplasm كله. الـ antigen بتاعه **proteinase 3 (PR3)** (الكتاب ص 150)، وده بتاع **GPA**.
+          - **p-ANCA** = **perinuclear**: لون حوالين النواة. الـ antigen غالبًا **myeloperoxidase (MPO)**، وده بتاع **MPA** (جدول ص 146).
+
+          التفسير المقبول (مش في الكتاب) للشكل: ساعة تثبيت الشريحة بالـ ethanol، الـ MPO لأنه مشحون بيروح يلزق حوالين النواة، فيبان perinuclear.
       - kind: aside
         tone: trap
         page: 130
@@ -265,6 +451,14 @@ lessons:
           **Endocarditis**، **antiphospholipid syndrome (APS)**، viruses (HIV، cytomegalovirus (CMV)، Hepatitis B virus (HBV)، Hepatitis C virus (HCV))، **cholesterol emboli**، ergot، hypertensive arteriopathy، thoracic outlet، sepsis/disseminated intravascular coagulation (DIC)، sarcoid، **thrombotic thrombocytopenic purpura (TTP)**، lymphoma و hairy cell leukaemia.
 
           أخطرهم إنك تدي steroids لـ **endocarditis**: العيان هيتعب جدًا.
+      - kind: reveal
+        page: 130
+        quote: "Bacterial endocarditis."
+        prompt: "ليه الـ bacterial endocarditis بالذات أول mimic في القايمة، وليه غلطته خطيرة؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ endocarditis بيعمل **نفس الصورة** بالظبط: fever، weight loss، **splinter haemorrhages**، purpura، hematuria و GN (immune complexes)، و emboli في المخ والكلية والجلد. وممكن كمان يطلّع ANCA إيجابي.
+
+          الخطورة: لو افتكرته vasculitis وإدّيته **steroids** أو **cyclophosphamide**، إنت كده بتقفل المناعة على عدوى في صمام القلب. عشان كده **blood cultures** و **echo** قبل أي immunosuppression.
       - kind: check
         page: 130
         quote: "Mimicks of vasculitis\n  Bacterial endocarditis.\n  Antiphospholipid antibody syndrome.\n  Viral infections like HIV, CMV, HBV, HCV etc.\n  Cholesterol emboli syndrome.\n  Vasoconstrictor drugs (ergot poisoning).\n  Hypertensive arteriopathy.\n  Thoracic outlet syndrome.\n    Sepsis, DIC.\n    Sarcoidosis*.\n    Thrombotic thrombocytopenic purpura (TTP).\n  Lymphoma, hairy cell leukaemia."
@@ -280,25 +474,81 @@ lessons:
           - "الـ thoracic outlet بيأثر على الدراع من compression."
           - "الـ ergot بيعمل vasospasm بعد دوا، مش بعد قسطرة."
           - "مفيش هنا حاجة تشاور على leukaemia."
+      - kind: figure
+        page: 130
+        quote: "Mimicks of vasculitis"
+        title: "الطريق من الشك للتشخيص"
+        alt: "Flow chart. Step 1: suspect vasculitis from red flags. Step 2: exclude the mimics: endocarditis, antiphospholipid syndrome, viral infection, cholesterol emboli, drugs, TTP, lymphoma. Step 3: tests: blood count, urinalysis for casts, ANCA, kidney and liver function. Step 4: confirm with biopsy or angiography. Step 5: name it by vessel size and organ pattern."
+        caption: "شك ← ==استبعد الـ mimics== ← tests ← biopsy أو angiography ← سمّيه بحجم الوعاء."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L08w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fg-head"/></marker></defs>
+            <rect x="40" y="10" width="250" height="40" rx="10" class="fg-box"/>
+            <text x="165" y="35" text-anchor="middle" class="t-sm t-b">1 Suspect: red flags</text>
+            <path d="M165 50 V70" class="fg-arrow" marker-end="url(#L08w)"/>
+            <rect x="20" y="72" width="290" height="58" rx="10" class="fg-bad"/>
+            <text x="165" y="92" text-anchor="middle" class="t-sm t-b">2 Exclude mimics first</text>
+            <text x="165" y="110" text-anchor="middle" class="t-sm">endocarditis, APS, viruses, emboli</text>
+            <text x="165" y="125" text-anchor="middle" class="t-sm">drugs, TTP, lymphoma, sepsis</text>
+            <path d="M165 130 V150" class="fg-arrow" marker-end="url(#L08w)"/>
+            <rect x="40" y="152" width="250" height="44" rx="10" class="fg-acc"/>
+            <text x="165" y="171" text-anchor="middle" class="t-sm t-b">3 CBC, urine casts, ANCA</text>
+            <text x="165" y="188" text-anchor="middle" class="t-sm">renal + liver tests, echo</text>
+            <path d="M165 196 V216" class="fg-arrow" marker-end="url(#L08w)"/>
+            <rect x="40" y="218" width="250" height="40" rx="10" class="fg-good"/>
+            <text x="165" y="243" text-anchor="middle" class="t-sm t-b">4 Biopsy or angiography</text>
+            <path d="M165 258 V278" class="fg-arrow" marker-end="url(#L08w)"/>
+            <rect x="40" y="280" width="250" height="40" rx="10" class="fg-box"/>
+            <text x="165" y="305" text-anchor="middle" class="t-sm t-b">5 Name it: vessel size + organs</text>
+          </svg>
+      - kind: reveal
+        page: 130
+        prompt: "ليه الـ cholesterol emboli والـ ergot والـ thoracic outlet syndrome داخلين في قايمة الـ mimics، وهم مش التهاب أصلًا؟"
+        quote: "Cholesterol emboli syndrome."
+        answer: |
+          لأن الـ vasculitis بتبان للعيان والدكتور على هيئة **ischaemia**: عضو أو طرف الدم مش واصله. وأي حاجة تانية تقفل الوعاء أو تضيّقه هتعمل **نفس الصورة** من غير ما يكون فيه التهاب في الجدار.
+
+          التفسير المقبول (مش في الكتاب) لكل واحد:
+          - **Cholesterol emboli syndrome**: بلورات cholesterol بتطلع من plaque بعد قسطرة أو جراحة وتسد الشرايين الصغيرة، فتعمل صوابع زرقا و livedo وفشل كلوي، وده شبه الـ small/medium vessel vasculitis بالظبط.
+          - **Vasoconstrictor drugs (ergot)**: الشريان بيتقفل من ==spasm== مش من التهاب، فتلاقي برودة وغرغرينا في الأطراف.
+          - **Thoracic outlet syndrome**: ضغط ميكانيكي على الـ subclavian عند رفع الدراع، فالنبض يضعف في دراع واحد، وده شبه الـ Takayasu.
+          - **Hypertensive arteriopathy**: الضغط العالي جدًا بيأذي جدار الشرايين الصغيرة ويعمل نزيف وفشل أعضاء.
+
+          يعني القاعدة: قبل ما تقول vasculitis، اسأل نفسك **الوعاء مقفول ليه؟** التهاب ولا سدة ولا spasm ولا ضغط من برّه.
+      - kind: explain
+        page: 130
+        title: "Sepsis و DIC و TTP و الـ lymphoma: ليه دول كمان؟"
+        quote: "Thrombotic thrombocytopenic purpura (TTP)."
+        text: |
+          الكتاب بيكمّل القايمة بـ **sepsis و DIC**، **sarcoidosis**، **thrombotic thrombocytopenic purpura (TTP)**، و **lymphoma و hairy cell leukaemia**، وكمان **viral infections** زي HIV و CMV و HBV و HCV.
+
+          التفسير المقبول (مش في الكتاب) للرابط بينهم:
+          - **Sepsis و DIC**: purpura وفشل أعضاء متعددة وسخونية، يعني نفس **multisystem** الصورة اللي بتخليك تشك في vasculitis.
+          - **TTP**: جلطات صغيرة جوه الـ small vessels بتعمل purpura وكلية ومخ، بس السبب ==جلطة مش التهاب==، والعلاج مختلف تمامًا، وsteroids لوحدها مش هتنقذه.
+          - **Lymphoma و hairy cell leukaemia**: سخونية ونزول وزن و ESR عالي، نفس الـ constitutional symptoms.
+          - **Sarcoidosis**: granulomas في أعضاء كتير، زي الـ granulomatous vasculitis.
+          - **الـ viruses**: مش بس بتقلّد، دي ممكن **تعمل** vasculitis حقيقية: الـ HBV مع الـ PAN (ص 137)، والـ HCV مع الـ cryoglobulinaemia (ص 162).
+
+          يعني الـ mimics مش قايمة للحفظ؛ كل واحد فيهم بيقول **ليه لازم تثبت الالتهاب** قبل ما تكتب steroids وcyclophosphamide.
       - kind: try
-        items: [rheum.L08.024, rheum.L08.029, rheum.L08.033, rheum.L08.037, rheum.L08.044]
+        items: [rheum.L08.042, rheum.L08.043, rheum.L08.044, rheum.L08.045, rheum.L08.194]
     recap:
-      - "شك في vasculitis مع: انسداد أو ضغط في شاب، fever، proteinuria، purpura، mononeuritis، nodules، عمى مفاجئ في كبير."
-      - "Cutaneous: جلد بس، serology سلبي، small vessel، prognosis أحسن."
-      - "الكلية متصابة في أغلبهم إلا PAN و Takayasu. الرئة: WG، CSS، MPA."
-      - "Workup: CBC، urine، ANCA، organ tests، echo، angio، biopsy. واستبعد الـ mimics."
-    practice: [rheum.L08.024, rheum.L08.025, rheum.L08.026, rheum.L08.027, rheum.L08.028, rheum.L08.029, rheum.L08.030, rheum.L08.031, rheum.L08.032, rheum.L08.033, rheum.L08.034, rheum.L08.035, rheum.L08.036, rheum.L08.037, rheum.L08.038, rheum.L08.039, rheum.L08.040, rheum.L08.041, rheum.L08.042, rheum.L08.043, rheum.L08.044, rheum.L08.045, rheum.L08.192, rheum.L08.194]
+      - "Workup: CBC، urinalysis (casts = GN)، serum proteins، ANCA، كلية وكبد، echo، angiography، و biopsy هي الإثبات."
+      - "c-ANCA = cytoplasmic = PR3 = GPA؛ p-ANCA = perinuclear = MPO = MPA."
+      - "Mimics: endocarditis، APS، HIV/CMV/HBV/HCV، cholesterol emboli، ergot، hypertensive arteriopathy، thoracic outlet، sepsis/DIC، sarcoid، TTP، lymphoma."
+      - "Endocarditis قبل steroids دايمًا: cultures و echo."
+    practice: [rheum.L08.042, rheum.L08.043, rheum.L08.044, rheum.L08.045]
   # ------------------------------------------------------------------
   - id: rheum.L08.lesson3
-    title: "الكبار: GCA و PMR و Takayasu"
-    hook: "صداع ووجع في الفك عند ست عندها 75 سنة: عندك ساعات قبل ما تفقد النظر."
+    title: "الكبار: GCA و PMR"
+    hook: "ست 70 سنة بصداع جديد ووجع في الفك وهي بتاكل. لو استنيت، ممكن تصحى عمية."
     minutes: 10
-    pages: [131, 137]
-    topics: [gca, pmr, tak, lvv-rx]
+    pages: [131, 134]
+    topics: [gca, pmr]
     goals:
-      - "تحسب الـ GCA score وتعرف الـ biopsy rules"
-      - "تحسب الـ PMR score"
-      - "تعرف الـ Takayasu criteria وعلاج الـ LVV والـ PMR"
+      - "تعرف صورة الـ GCA وتفهم كل علامة منين"
+      - "تحسب الـ GCA score وتعرف تاخد الـ biopsy صح"
+      - "تعرف الـ PMR والـ score بتاعها والـ DD"
     status: unverified
     steps:
       - kind: explain
@@ -310,6 +560,14 @@ lessons:
           - **Local:** **temporal headache**، ==blindness==، scalp necrosis، **jaw claudication**، cranial و peripheral neuropathies
 
           المنطق: الشريان اللي بيغذي الجلد والفك والعين ضاق، فكل حاجة بيغذيها تشتكي.
+      - kind: reveal
+        page: 131
+        quote: "Jaw Claudication."
+        prompt: "ليه الـ jaw claudication علامة قوية للـ GCA، وليه الـ blindness هي الخوف الأكبر؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ GCA بيمسك فروع الـ **carotid**: الشريان اللي بيغذي **عضلات المضغ**، و الـ **temporal artery**، والشريان اللي بيغذي **العين**.
+          - **Jaw claudication**: عضلة المضغ بتشتغل ← تحتاج دم ← الشريان الضيق مش مكفّي ← وجع **بعد** ما تبدأ تاكل وبيروح لما توقف. ده نادر في أي صداع تاني، فبيخلّي الـ GCA قريب جدًا.
+          - **Blindness**: لو شريان العين اتسد، العصب البصري **بيموت ومش بيرجع**. عشان كده بنبدأ steroids فورًا من غير ما نستنى الـ biopsy.
       - kind: figure
         page: 131
         quote: "In the presence of 3 points or more out of 11 with at least one point belonging to domain I along with all entry criteria, the diagnosis of Giant cell arteritis can be established."
@@ -357,6 +615,19 @@ lessons:
         text: |
           نقطة **fever and/or anaemia** ==بتتلغي لو فيه polymyalgia rheumatica (PMR)==: الـ PMR نفسها بتعمل الحاجات دي، فما ينفعش تعدّها مرتين.
       - kind: explain
+        page: 131
+        title: "الـ exclusion criteria: ليه دول بالذات؟"
+        quote: "Exclusion criteria are including: ENT and eye inflammation, kidney, skin"
+        text: |
+          الـ GCA score بيتلغي لو فيه حاجة من الـ **exclusion criteria**: ENT و eye inflammation، **kidney**، **skin**، **peripheral nervous system**، lung infiltration، lymphadenopathy، stiff neck، و digital gangrene أو ulceration. وشرط كمان: **مفيش سبب تاني** يفسّر أي criterion.
+
+          التفسير المقبول (مش في الكتاب): دي كلها علامات **أمراض تانية** شبهها:
+          - الكلية والجلد والأعصاب الطرفية = **small/medium vessel** (AAV أو PAN)، والـ GCA large vessel.
+          - الـ ENT والعين الملتهبة = **GPA** غالبًا.
+          - الـ stiff neck = **meningitis**.
+
+          يعني الـ exclusions بتتأكد إن الصداع والـ ESR العالي مش جايين من vasculitis تاني.
+      - kind: explain
         remind: [rheum.L08.055]
         page: 132
         title: "الـ biopsy صح"
@@ -366,6 +637,18 @@ lessons:
           2. لو الشريان شكله سليم: خُد ==4–6 cm== (علشان الـ skip lesions)
           3. الشك قوي والـ biopsy سليمة؟ ==biopsy the opposite side==
           4. الـ **Doppler guidance** ممكن يساعد
+      - kind: reveal
+        page: 132
+        quote: "If strong suspicion and normal biopsy, then biopsy opposite side."
+        prompt: "ليه الـ biopsy بتاعة الـ GCA لازم تكون 4–6 cm، وليه نعيدها في الناحية التانية لو طلعت سليمة؟"
+        answer: |
+          بسبب اللي اتعلمته في أول المحاضرة: الإصابة ==focal and segmental== (ص 124)، يعني فيه حتت ملتهبة وحتت سليمة في نفس الشريان (skip lesions).
+
+          - حتة قصيرة ممكن تيجي كلها من **الحتة السليمة** ← biopsy سلبية والعيان عنده GCA.
+          - 4–6 cm بتزوّد فرصة إنك تمسك حتة ملتهبة.
+          - ولو الشك لسه قوي، الناحية التانية فرصة جديدة.
+
+          يعني الـ biopsy السلبية **ما بتنفيش** الـ GCA لو الصورة قوية.
       - kind: explain
         page: 133
         title: "PMR: الكتف والحوض الصبح"
@@ -375,6 +658,18 @@ lessons:
           - وجع في ==shoulders و pelvic girdle== (والرقبة) **≥1 month**، بداية مفاجئة
           - **Severe morning stiffness** و gelling، malaise، night sweats، low-grade fever
           - ESR و C-reactive protein (CRP) عاليين، **no pathognomonic test**، و ==no myopathy== (الـ creatine kinase (CK) عادي، العضلة نفسها سليمة)
+      - kind: explain
+        page: 133
+        title: "ليه الـ PMR مش myositis؟"
+        quote: "Severe Morning Stiffness and Gelling."
+        text: |
+          الـ **PMR**: وجع وتيبّس في الـ **shoulders** والـ **pelvic girdle** (والرقبة)، **≥1 month**، و ==severe morning stiffness and gelling==، والكتاب بيقول **no myopathy**.
+
+          يعني الوجع **مش من العضلة نفسها**: الـ CK طبيعي، والعضلة مش ضعيفة. التفسير المقبول (مش في الكتاب): الالتهاب في **الأنسجة حوالين المفاصل الكبيرة** (bursae والـ synovium حوالين الكتف والورك)، فالعيان مش قادر يرفع دراعه **من الوجع والتيبس**، مش من الضعف.
+
+          وده أهم فرق مع الـ **polymyositis** (في الـ DD): هناك العضلة ضعيفة والـ CK عالي.
+
+          ولاحظ إن الـ **PMR** نفسها جزء من الـ systemic features بتاعة الـ GCA، وبتاخد **2 points** في الـ GCA score. عشان كده كل عيان PMR لازم تسأله عن صداع وفك ونظر.
       - kind: table
         page: 133
         quote: "Scoring Algorithm without Ultrasound – 3 required criteria:\n  Age ≥50 years, bilateral shoulder aching, abnormal ESR/CRP.\n  Optional classification criteria OR (95% CI) Points.\n  Morning stiffness >45 minutes 6.2 (3.2, 11.8) 2.\n  Hip pain or limited range of motion 2.1 (1.1, 4.0) 1.\n  Normal RF or ACPA 3.0 (1.3, 6.8) 2.\n  Absence of other joint pain 2.7 (1.4, 5.0) 1.\n  Optimal cut-off point = 4."
@@ -397,6 +692,54 @@ lessons:
 
           الـ RF الطبيعي بياخد نقطتين لأنه بيبعدك عن **rheumatoid arthritis (RA)** اللي ممكن تبدأ بنفس الشكل في الكبار.
       - kind: explain
+        page: 134
+        title: "الـ DD: ليه كل واحد في القايمة؟"
+        quote: "NO pathognomonic test."
+        text: |
+          الكتاب بيقول **NO pathognomonic test** للـ PMR، يعني التشخيص بالاستبعاد. والقايمة كلها حاجات بتعمل **وجع عضلات + ESR عالي** في كبير السن:
+          - **Temporal arteritis**: بيمشي معاها، ولازم يتدوّر عليه.
+          - **Rheumatoid arthritis**: ممكن يبدأ في الكبار بالكتاف، وعشان كده الـ **normal RF/ACPA** بياخد نقطتين في الـ score.
+          - **Polymyositis**: بس هنا فيه ضعف و CK عالي.
+          - **Occult infection** و **occult malignancy** و **multiple myeloma**: كلهم بيرفعوا الـ ESR ويعملوا وجع عام.
+          - **Endocrinopathy** (زي الغدة)، **viral myalgia**، **fibrositis**، **depression**، **osteoarthritis**.
+
+          والكتاب بيقول **concept of normal ESR debatable**: يعني ESR طبيعي **ما بينفيش** الـ PMR تمامًا.
+      - kind: check
+        page: 134
+        quote: "No myopathy."
+        question: "A 68-year-old has 6 weeks of shoulder and hip aching with 2 hours of morning stiffness and a high ESR. Which finding argues AGAINST PMR?"
+        options: ["True proximal weakness with a high CK", "Normal rheumatoid factor and ACPA", "Hip pain with limited motion", "No other joints are painful"]
+        answer: 0
+        why:
+          - "صح: الـ PMR no myopathy. ضعف حقيقي و CK عالي يوديك لـ polymyositis."
+          - "الـ normal RF/ACPA بياخد 2 points لصالح الـ PMR."
+          - "الـ hip pain بياخد نقطة لصالحها."
+          - "غياب مفاصل تانية بياخد نقطة لصالحها."
+      - kind: try
+        items: [rheum.L08.046, rheum.L08.050, rheum.L08.055, rheum.L08.060, rheum.L08.193]
+    recap:
+      - "GCA: systemic (PMR، fever، ESR، anaemia) + local (temporal headache، blindness، scalp necrosis، jaw claudication)."
+      - "Jaw claudication = ischaemia وقت المضغ؛ blindness مش بترجع ← steroids فورًا."
+      - "Score: age ≥50 + مفيش exclusion + ≥3 من 11 ومنهم نقطة من domain I؛ fever/anaemia تتلغي مع PMR."
+      - "Biopsy: المكان الـ abnormal، 4–6 cm، الناحية التانية لو الشك قوي (skip lesions)."
+      - "PMR: ≥50، كتاف وحوض ≥1 month، morning stiffness، ESR عالي، no myopathy، no pathognomonic test."
+    practice: [rheum.L08.046, rheum.L08.047, rheum.L08.048, rheum.L08.049, rheum.L08.050, rheum.L08.051, rheum.L08.052, rheum.L08.053, rheum.L08.054, rheum.L08.055, rheum.L08.056, rheum.L08.058, rheum.L08.059, rheum.L08.060, rheum.L08.061, rheum.L08.062, rheum.L08.063, rheum.L08.064, rheum.L08.065, rheum.L08.193]
+  # ------------------------------------------------------------------
+  # Split from lesson3 on 2026-11-13 (#828): Takayasu arteritis and the
+  # treatment of large vessel vasculitis and PMR.
+  - id: rheum.L08.lesson8
+    title: "Takayasu وعلاج الـ large vessel والـ PMR"
+    hook: "بنت 25 سنة الضغط مش بيتقاس في دراعها الشمال. ولما تشخّص، الـ steroids بتبدأ النهارده مش بكرة."
+    minutes: 9
+    pages: [135, 137]
+    topics: [tak, lvv-rx]
+    goals:
+      - "تعرف الـ 3 major criteria للـ Takayasu وليه الـ subclavian بالذات"
+      - "تعرف علاج الـ GCA و TAK وليه كل خطوة"
+      - "تعرف علاج الـ PMR"
+    status: unverified
+    steps:
+      - kind: explain
         page: 135
         title: "Takayasu: الشابة اللي مالهاش نبض"
         quote: "Left mid subclavian artery lesion The most severe stenosis or occlusion present in the mid portion from the point 1 cm proximal to the vertebral artery orifice up to 3 cm distal to the orifice determined by angiography."
@@ -407,6 +750,41 @@ lessons:
           3. أعراض **≥1 month**: limb claudication، ==pulselessness==، فرق ضغط **>10 mmHg**، fever، neck pain، amaurosis، syncope
 
           **10 minor:** ESR >20، carotid tenderness (مش عضلات الرقبة)، HTN (>140/90 brachial أو >160/90 popliteal)، AR، pulmonary artery، left mid carotid، brachiocephalic، thoracic aorta، abdominal aorta، coronary (<30 سنة من غير risk factors).
+      - kind: figure
+        page: 135
+        quote: "Left mid subclavian artery lesion"
+        title: "خريطة الـ Takayasu على الـ aorta"
+        alt: "Drawing of the aortic arch with its branches: brachiocephalic trunk, left common carotid and left subclavian; the descending thoracic and abdominal aorta below, and the pulmonary artery. The mid portions of both subclavian arteries are highlighted as the two major-criterion sites; the carotid, brachiocephalic, thoracic and abdominal aorta, pulmonary and coronary sites are marked as minor criteria."
+        caption: "الـ ==mid subclavian== في الناحيتين = major criteria. الباقي (carotid، brachiocephalic، thoracic و abdominal aorta، pulmonary، coronary) = minor."
+        svg: |
+          <svg viewBox="0 0 330 320" xmlns="http://www.w3.org/2000/svg">
+            <path d="M120 300 V150 Q120 70 190 70 Q250 70 250 130 V300" class="fg-ink" fill="none" stroke-width="14"/>
+            <path d="M150 85 L95 30" class="fg-ink" stroke-width="8"/>
+            <path d="M95 30 L30 30" class="fg-ink" stroke-width="7"/>
+            <path d="M190 72 L190 20" class="fg-ink" stroke-width="7"/>
+            <path d="M225 80 L280 40 L320 40" class="fg-ink" stroke-width="7"/>
+            <rect x="35" y="22" width="40" height="16" class="fg-bad"/>
+            <rect x="275" y="32" width="40" height="16" class="fg-bad"/>
+            <text x="10" y="58" class="t-sm t-b t-bad">R subclavian</text>
+            <text x="240" y="66" class="t-sm t-b t-bad">L subclavian</text>
+            <text x="198" y="30" class="t-sm">L carotid</text>
+            <text x="45" y="95" class="t-sm">Brachio-</text>
+            <text x="45" y="110" class="t-sm">cephalic</text>
+            <text x="262" y="200" class="t-sm">Thoracic</text>
+            <text x="262" y="215" class="t-sm">aorta</text>
+            <text x="262" y="290" class="t-sm">Abdominal</text>
+            <text x="20" y="200" class="t-sm">Pulmonary,</text>
+            <text x="20" y="215" class="t-sm">coronary</text>
+            <text x="165" y="315" text-anchor="middle" class="t-sm t-mut">red = major; others = minor</text>
+          </svg>
+      - kind: reveal
+        page: 135
+        quote: "unobtainable or significant blood pressure difference (>10 mmHg systolic"
+        prompt: "ليه الـ Takayasu بيعمل pulselessness وفرق ضغط أكتر من 10 mmHg بين الدراعين؟"
+        answer: |
+          لأن الـ major criteria نفسها بتقول المكان: **mid subclavian artery** في الناحيتين. الـ subclavian هو اللي بيغذي **الدراع**.
+
+          التفسير المقبول (مش في الكتاب): لما ناحية تضيق أكتر من التانية، الدم اللي بيوصل للدراع ده **أقل**، فالضغط فيه **أوطى** والنبض **أضعف أو مش موجود**، والدراع بيوجع لما يشتغل (**limb claudication**). عشان كده اسمه زمان "**pulseless disease**". وعشان كده لازم **تقيس الضغط في الدراعين** في أي شابة عندها ضغط أو أعراض مش مفهومة.
       - kind: reveal
         page: 136
         quote: "Abdominal aorta lesion Narrowing, dilation or aneurysm, luminal irregularity or any combination 10. Coronary artery lesion Documented on angiography below the age of 30 years in the absence of risk factors like hyperlipidemia or diabetes mellitus."
@@ -424,6 +802,32 @@ lessons:
           - **TAK:** non-biologic steroid-sparing لكل العيانين، و biologics للـ refractory
           - **No routine** antiplatelets أو anticoagulants
           - **PMR:** prednisone **15 mg**، taper على **12–18 months**، methotrexate (MTX) second line، **glucocorticoid-induced osteoporosis (GIOP) prophylaxis**، ودوّر على temporal arteritis
+      - kind: explain
+        page: 136
+        title: "ليه الجرعة عالية، وليه النهارده؟"
+        quote: "High dose glucocorticoid therapy (40-60 mg/day prednisone-equivalent) should be initiated immediately for induction of remission in active giant cell"
+        text: |
+          الكتاب بيقول **high dose glucocorticoid (40–60 mg/day)** يبدأ ==immediately== في الـ active GCA أو TAK.
+
+          التفسير المقبول (مش في الكتاب):
+          - **Immediately**: في الـ GCA العين ممكن تروح في **ساعات أو أيام**، والـ blindness مش بترجع. الـ biopsy ممكن تتعمل بعد ما تبدأ steroids بأيام قليلة والالتهاب لسه باين.
+          - **جرعة عالية**: عشان **induction of remission**، تطفي الالتهاب بسرعة قبل ما الجدار يتليف ويضيق على طول.
+
+          وبعدين ليه **tocilizumab** في الـ GCA الـ refractory أو اللي عنده خطر من الـ steroids؟ لأنه **glucocorticoid-sparing**: بيسمح تنزل الـ steroids أسرع. والـ **antiplatelets** و **anticoagulants** مش routine لأن المشكلة التهاب الجدار مش جلطة، فتديهم بس لو فيه سبب تاني.
+      - kind: explain
+        page: 137
+        title: "علاج الـ PMR: ليه 15 mg بس؟"
+        quote: "Slow taper over 12 to 18 months."
+        text: |
+          الكتاب: **prednisone 15 mg**، **slow taper over 12–18 months**، **MTX** كـ second line، **GIOP prophylaxis**، و ==look for temporal arteritis==.
+
+          التفسير المقبول (مش في الكتاب) لكل نقطة:
+          - **15 mg** مش 40–60: لأن الـ PMR من غير GCA **مفيش عين في خطر**، والجرعة الصغيرة كفاية تطفيها، والاستجابة السريعة عليها بتأكد التشخيص.
+          - **Taper بطيء 12–18 شهر**: لو نزلت بسرعة الـ PMR بترجع.
+          - **GIOP prophylaxis**: steroids سنة ونص في ست كبيرة = **عضم بيضعف**، فلازم calcium و vitamin D وغيرهم.
+          - **دوّر على الـ temporal arteritis**: لأنها بتمشي مع الـ PMR، وجرعة 15 mg **مش كفاية** تحمي العين.
+
+          والكتاب بيقول **concept of benign outcome challengeable**: يعني الـ PMR مش دايمًا "مرض خفيف".
       - kind: check
         page: 137
         quote: "Treatment of PMR\n  Prednisone 15 mg.\n  Slow taper over 12 to 18 months.\n  Possible mtx use as 2nd line agent.\n  GIOP prophylaxis.\n  Look for temporal arteritis.\n  Concept of benign outcome challengeable."
@@ -439,27 +843,67 @@ lessons:
           - "40–60 mg ده للـ GCA/TAK."
           - "1 mg/kg ده الـ high-dose في PAN."
           - "الـ pulse للـ severe vasculitis مش PMR."
+      - kind: explain
+        page: 135
+        title: "الـ major criteria: ليه الـ subclavian بالذات؟"
+        quote: "Three major criteria"
+        text: |
+          الكتاب بيحط **three major criteria** للـ Takayasu arteritis (TAK):
+          1. **Left mid subclavian artery lesion** بالـ angiography.
+          2. **Right mid subclavian artery lesion** بالـ angiography.
+          3. **Characteristic signs and symptoms لمدة شهر على الأقل**: limb claudication، pulselessness أو فرق نبض، فرق ضغط **>10 mmHg** systolic، سخونية، neck pain، transient amaurosis، blurred vision، syncope، dyspnea أو palpitations.
+
+          التفسير المقبول (مش في الكتاب): الـ subclavian هو ==أكتر شريان بيتصاب== في الـ TAK، عشان كده اتنين من التلاتة major عليه. والكتاب بيحدد **مكان بالسنتيمتر** حوالين فتحة الـ vertebral artery، عشان الـ angiography تقيس نفس الحتة عند كل العيانين وما تتلخبطش مع atherosclerosis اللي بتمسك الأصل.
+
+          وشرط **شهر على الأقل** للأعراض؟ لأن المرض **مزمن**، والأعراض اللي بتيجي يومين وتروح غالبًا حاجة تانية.
+      - kind: explain
+        page: 135
+        title: "الـ minor criteria: كل واحد بيدلّ على إيه"
+        quote: "Neck muscle tenderness is unacceptable."
+        text: |
+          الـ minor criteria في الكتاب: **ESR >20 mm/h** غير مفسّر، **carotid artery tenderness**، **hypertension** (>140/90 في الدراع أو >160/90 في الـ popliteal)، **aortic regurgitation أو annuloaortic ectasia**، **pulmonary artery lesion**، وبعدهم lesions في الـ left common carotid، الـ brachiocephalic trunk، الـ descending thoracic aorta، الـ abdominal aorta، والـ coronary.
+
+          التفسير المقبول (مش في الكتاب) لكل واحد:
+          - **ESR**: الالتهاب لسه **active**.
+          - **Carotid tenderness**: الشريان نفسه ملتهب، عشان كده الكتاب بيقول neck muscle tenderness ==unacceptable==: وجع العضلة مش وجع الشريان.
+          - **Hypertension**: غالبًا من تضييق الـ **renal artery** أو الـ aorta. وليه بيقيسوه في الـ **popliteal**؟ لأن الدراعين ممكن **مافيهمش نبض**، فقياسهم يضحك عليك.
+          - **AR و ectasia**: الـ aortic root بيتوسّع من التهاب الجدار، فالـ valve ما تقفلش.
+
+          يعني كل criterion هو **عضو تاني على نفس الطريق**: الـ aorta وفروعها.
       - kind: try
-        items: [rheum.L08.049, rheum.L08.055, rheum.L08.061, rheum.L08.066, rheum.L08.083]
+        items: [rheum.L08.066, rheum.L08.070, rheum.L08.075, rheum.L08.080, rheum.L08.190]
     recap:
-      - "GCA: age ≥50، score ≥3 من 11 ومنهم Domain I. الـ fever/anaemia تتلغي مع PMR."
-      - "Biopsy: المكان الـ abnormal، 4–6 cm، والناحية التانية لو الشك قوي."
-      - "PMR: 3 required + 2-1-2-1، cut-off 4. علاجها 15 mg و 12–18 شهر."
-      - "Takayasu: 3 major + 10 minor. LVV: 40–60 mg فورًا، tocilizumab للـ GCA الصعبة، ومفيش routine antiplatelets."
-    practice: [rheum.L08.046, rheum.L08.047, rheum.L08.048, rheum.L08.049, rheum.L08.050, rheum.L08.051, rheum.L08.052, rheum.L08.053, rheum.L08.054, rheum.L08.055, rheum.L08.056, rheum.L08.057, rheum.L08.058, rheum.L08.059, rheum.L08.060, rheum.L08.061, rheum.L08.062, rheum.L08.063, rheum.L08.064, rheum.L08.065, rheum.L08.066, rheum.L08.067, rheum.L08.068, rheum.L08.069, rheum.L08.070, rheum.L08.071, rheum.L08.072, rheum.L08.073, rheum.L08.074, rheum.L08.075, rheum.L08.076, rheum.L08.077, rheum.L08.078, rheum.L08.079, rheum.L08.080, rheum.L08.081, rheum.L08.082, rheum.L08.083, rheum.L08.084, rheum.L08.190, rheum.L08.191, rheum.L08.193]
+      - "TAK major: left mid subclavian، right mid subclavian، أعراض ≥1 month (claudication، pulselessness، فرق ضغط >10 mmHg)."
+      - "Minor: ESR >20، carotid tenderness، HTN، AR، pulmonary، carotid، brachiocephalic، thoracic و abdominal aorta، coronary <30 سنة."
+      - "LVV: أكّد بالـ imaging أو histology؛ prednisone 40–60 mg فورًا (العين)؛ tocilizumab (أو MTX) للـ GCA refractory؛ steroid-sparing لكل TAK؛ no routine antiplatelets."
+      - "PMR: 15 mg، taper 12–18 شهر، MTX second line، GIOP prophylaxis، دوّر على GCA."
+    practice: [rheum.L08.066, rheum.L08.067, rheum.L08.068, rheum.L08.069, rheum.L08.070, rheum.L08.071, rheum.L08.072, rheum.L08.073, rheum.L08.074, rheum.L08.075, rheum.L08.076, rheum.L08.077, rheum.L08.078, rheum.L08.079, rheum.L08.080, rheum.L08.081, rheum.L08.082, rheum.L08.083, rheum.L08.084, rheum.L08.190, rheum.L08.191]
   # ------------------------------------------------------------------
   - id: rheum.L08.lesson4
-    title: "الوعاء المتوسط: Kawasaki و PAN"
-    hook: "طفل سخن 5 أيام بعين حمرا ولسان فراولة، وراجل عنده foot drop وخصيته بتوجعه: نفس حجم الوعاء."
-    minutes: 10
-    pages: [137, 144]
-    topics: [kawasaki, polychondritis, pan]
+    title: "Kawasaki والـ polychondritis"
+    hook: "طفل بسخونية خمس أيام وشفايف مشققة ولسان فراولة. الخوف مش من السخونية، الخوف على شرايين قلبه."
+    minutes: 9
+    pages: [137, 140]
+    topics: [kawasaki, polychondritis]
     goals:
-      - "تشخّص Kawasaki وتعالجه"
+      - "تشخّص الـ Kawasaki الكامل والـ incomplete"
+      - "تعرف العلاج وليه الـ IVIG بدري"
       - "تعرف الـ relapsing polychondritis"
-      - "تشخّص PAN وتختار علاجه حسب الـ severity"
     status: unverified
     steps:
+      - kind: explain
+        page: 137
+        title: "الـ medium vessel vasculitis: ليه دول بالذات في القايمة؟"
+        quote: "Familial Mediterranean fever."
+        text: |
+          الكتاب بيعد الـ **medium vessel vasculitis**: **Kawasaki's disease**، **polyarteritis nodosa**، **hepatitis B-related**، **familial Mediterranean fever**، و **cutaneous PAN**.
+
+          التفسير المقبول (مش في الكتاب): الرابط إن الشريان المتوسط (اللي داخل للعضو) هو اللي ملتهب، فالنتيجة **aneurysms و infarcts**: في الـ Kawasaki الـ ==coronary== aneurysms، وفي الـ PAN الـ mesenteric و renal aneurysms (ص 143).
+          - **Hepatitis B**: الـ virus بيعمل immune complexes في جدار الشريان، فبيعمل PAN، وعشان كده بتدوّر عليه في أي PAN.
+          - **FMF**: مهم عندنا في مصر؛ الالتهاب المتكرر ممكن يصاحبه PAN-like vasculitis.
+          - **Cutaneous PAN**: نفس الشكل بس في الجلد بس، من غير أعضاء جوه.
+
+          وليه الكتاب بيبدأ بيهم قبل الـ Kawasaki والـ PAN؟ عشان تفتكر القاعدة اللي من أول المحاضرة: **حجم الوعاء بيحدد الصورة**. الـ large vessel = فرق نبض وclaudication، الـ medium = aneurysms وinfarcts ووجع خصية وmononeuritis، والـ small = purpura وGN ونزيف رئة. لما تقابل عيان، ابدأ بسؤال **أنهي حجم؟** وبعدها دوّر جوه المجموعة دي على المرض بالسن والعلامات: طفل بسخونية = Kawasaki، شاب عنده hepatitis B وضغط = PAN.
       - kind: explain
         page: 137
         title: "Kawasaki: القاعدة"
@@ -479,6 +923,14 @@ lessons:
           - { key: "S", text: "Strawberry tongue, cracked red lips, oral erythema" }
           - { key: "H", text: "Hands and feet: erythema and oedema, then periungual peeling" }
         hook: "**CRASH and burn**: الـ burn هو الـ fever ≥5 أيام."
+      - kind: reveal
+        page: 139
+        quote: "Coronary artery measurements without delay is strongly recommended over"
+        prompt: "ليه كل توصيات الـ Kawasaki بتلف حوالين الـ echo والـ coronary arteries؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ Kawasaki **medium vessel vasculitis** (الكتاب حاططه في الـ medium vessel)، والشرايين المتوسطة اللي بيحبها هي **الـ coronaries**. الالتهاب بيضعّف الجدار فيعمل ==coronary artery aneurysms==، وده ممكن يعمل **جلطة في القلب** في طفل.
+
+          السخونية والطفح بيروحوا لوحدهم، بس الـ aneurysm ممكن يفضل. عشان كده الكتاب بيقول **echo with coronary measurements without delay** في الـ incomplete KD، وفي الطفل اللي عنده **shock** أو **MAS** مش مفسّر.
       - kind: explain
         page: 138
         title: "Incomplete KD"
@@ -499,6 +951,18 @@ lessons:
           - ["Aspirin moderate", "30–50 mg/kg/day"]
           - ["Aspirin low", "3–5 mg/kg/day"]
         hide: [[0, 1], [2, 1], [4, 1]]
+      - kind: explain
+        page: 139
+        title: "ليه الـ IVIG بدري، وإيه اللي يتضاف؟"
+        quote: "Good practice statement: IVIG is the standard-of-care therapy for the initial"
+        text: |
+          الـ **IVIG** هو ==standard of care== للعلاج الأول. والتوصيات حواليه:
+          - **High risk** لمقاومة الـ IVIG أو لـ coronary aneurysms: **IVIG + glucocorticoids** (أو + non-glucocorticoid immunomodulators) أحسن من IVIG لوحده.
+          - **Incomplete KD**: IVIG **فورًا** عند التشخيص، مش نستنى **لليوم 10** أو بعده.
+          - **MAS**: IVIG للـ KD + علاج للـ MAS.
+          - سخونية مستمرة بعد أول IVIG: **كورس IVIG تاني** أحسن من الـ steroids.
+
+          ليه قبل اليوم 10؟ التفسير المقبول (مش في الكتاب): الـ aneurysms بتتكوّن في **الأسابيع الأولى**، والـ IVIG بيقلل حدوثها لو اتدّى **قبل** ما الجدار يتأذي. بعد كده بتعالج حاجة حصلت خلاص.
       - kind: order
         page: 139
         quote: "For patients with acute KD and persistent fevers after initial treatment with IVIG, a second course of IVIG is conditionally recommended over the use of glucocorticoids."
@@ -525,6 +989,18 @@ lessons:
           - "الـ aspirin مساعد مش علاج لوحده."
       - kind: explain
         page: 140
+        title: "Aspirin والـ NSAIDs ومتابعة السخونية"
+        quote: "For patients with acute KD, using aspirin is strongly recommended over"
+        text: |
+          الكتاب بيكمّل التوصيات:
+          - **Aspirin** في الـ acute KD ==strongly recommended==.
+          - بعد ما السخونية تروح: **متابعة يومية للسخونية** (strongly recommended)، لأن رجوعها معناه إن المرض لسه شغال ومحتاج IVIG تاني.
+          - سخونية مستمرة بعد IVIG **متكرر**: non-glucocorticoid immunosuppression أو glucocorticoids.
+          - **Arthritis** بتفضل بعد الـ IVIG ومن غير coronary aneurysms: **NSAIDs** مقبولة.
+
+          التفسير المقبول (مش في الكتاب) للـ aspirin: بيهدّي الالتهاب بالجرعة العالية، وبالجرعة الواطية بيمنع **الـ platelets** تتجمع جوه الـ coronary المتوسعة. وشرط "من غير aneurysms" في الـ NSAIDs منطقي لأنها ممكن تبوّظ مفعول الـ aspirin على الـ platelets.
+      - kind: explain
+        page: 140
         title: "Relapsing polychondritis"
         quote: "Relapsing polychondritis\n  Uncommon, cartilage inflammation.\n  Episodic.\n  Auricular and nasal chondritis.\n  Saddle-nose deformity.\n  Arthritis, hearing loss, vertigo, LTB symptoms and vasculitis.\n  Associated disorders.\n  Prednisone.+?."
         text: |
@@ -535,6 +1011,40 @@ lessons:
         quote: "Relapsing polychondritis\n  Uncommon, cartilage inflammation.\n  Episodic.\n  Auricular and nasal chondritis.\n  Saddle-nose deformity.\n  Arthritis, hearing loss, vertigo, LTB symptoms and vasculitis.\n  Associated disorders.\n  Prednisone.+?."
         text: |
           الـ polychondritis بتمسك أي غضروف: **auricular chondritis** تحمّر الودن، و **nasal chondritis** توقّع الأنف (**saddle-nose deformity**). الفرق إن **فص الودن** (lobule) مافيهوش غضروف، فبيفضل سليم وكأنه عامل نفسه مش من العيلة. (معلومة تشريح، مش من الكتاب.)
+      - kind: check
+        page: 139
+        quote: "For patients with incomplete KD, prompt treatment with IVIG at the time of"
+        question: "A child meets the definition of incomplete Kawasaki disease on day 6 of fever. When should IVIG be given?"
+        options: ["At diagnosis, now", "Only if fever persists to day 10", "Only after coronary aneurysms appear on echo", "Never; incomplete KD is observed"]
+        answer: 0
+        why:
+          - "صح: الكتاب strongly recommends IVIG at the time of diagnosis، مش التأجيل لليوم 10."
+          - "الاستنا لليوم 10 هو بالظبط اللي الكتاب بيقول لأ عليه."
+          - "الهدف إننا نمنع الـ aneurysms، مش نستناها."
+          - "الـ incomplete KD بيتعالج زي الكامل."
+      - kind: try
+        items: [rheum.L08.085, rheum.L08.088, rheum.L08.092, rheum.L08.097, rheum.L08.101]
+    recap:
+      - "KD: fever ≥5 أيام + ≥4 من 5 (CRASH)؛ ممكن من اليوم 4 لو ≥4 findings."
+      - "Incomplete: fever طويلة + <4 findings + labs أو echo؛ IVIG فورًا."
+      - "الخوف: coronary aneurysms ← echo من غير تأخير."
+      - "IVIG 2 g/kg standard؛ high risk + steroids؛ سخونية مستمرة ← IVIG تاني؛ aspirin strongly."
+      - "Polychondritis: cartilage episodic، ودن وأنف (saddle nose)، hearing loss، LTB، prednisone."
+    practice: [rheum.L08.085, rheum.L08.086, rheum.L08.087, rheum.L08.088, rheum.L08.089, rheum.L08.090, rheum.L08.091, rheum.L08.092, rheum.L08.093, rheum.L08.094, rheum.L08.095, rheum.L08.096, rheum.L08.097, rheum.L08.098, rheum.L08.099, rheum.L08.100, rheum.L08.101, rheum.L08.102]
+  # ------------------------------------------------------------------
+  # Split from lesson4 on 2026-11-13 (#828): polyarteritis nodosa.
+  - id: rheum.L08.lesson9
+    title: "PAN: الـ medium vessel اللي بيعمل aneurysms"
+    hook: "راجل بيخس، خصيته بتوجعه، ورجله ارتخت فجأة، والـ angiography مليانة بلالين صغيرة. ده PAN."
+    minutes: 10
+    pages: [141, 144]
+    topics: [pan]
+    goals:
+      - "تعرف الـ ACR 1990 والمعيار التاني للـ PAN"
+      - "تفهم ليه الـ PAN بيعمل aneurysms و infarcts من غير GN"
+      - "تعرف الـ cutaneous PAN والعلاج حسب الـ severity"
+    status: unverified
+    steps:
       - kind: explain
         page: 141
         title: "PAN: ACR 1990"
@@ -547,6 +1057,60 @@ lessons:
           - **Abnormal coeliac أو renal angiography** (aneurysms)، و biopsy فيها polymorphonuclear neutrophils (PMNs) في الشرايين
 
           المعيار التاني (p141): biopsy أو angiography **mandatory** + ≥2 من 7، ولو MRA سلبي اعمل **conventional angiography**.
+      - kind: explain
+        page: 141
+        title: "كل criterion ليه سبب"
+        quote: "Weight loss of more than 4 kg which is not related with diet or other factors from"
+        text: |
+          الـ ACR 1990 مش أرقام عشوائية. التفسير المقبول (مش في الكتاب): الـ PAN بيمسك **الشرايين المتوسطة** اللي بتغذي الأعضاء، فكل criterion هو **عضو جاع**:
+          - **Mono- أو polyneuropathy**: شرايين الأعصاب (vasa nervorum) ← foot drop.
+          - **Testicular pain**: شريان الخصية.
+          - **Myalgia**: شرايين العضلات.
+          - **Livedo reticularis**: الشرايين تحت الجلد ضيقة، فالجلد يبان شبكة.
+          - **Diastolic >90** و **urea/creatinine** عالي: شرايين الكلية ضيقة ← renin يعلى، و infarcts.
+          - **Abnormal coeliac أو renal angiography**: الـ ==aneurysms== والـ occlusions نفسها.
+          - **HBsAg**: الـ hepatitis B بيعمل **immune complexes** تترسب في الجدار (ص 124: PAN immune complex mediated).
+          - **Weight loss** و fever: الالتهاب المزمن والأمعاء اللي بتجوع.
+      - kind: explain
+        page: 141
+        title: "الصيغة التانية: شرط إجباري + 2 من 7"
+        quote: "magnetic resonance angiography is negative), plus at least two of the"
+        text: |
+          في نفس الصفحة الكتاب بيدي صيغة تانية للـ PAN: **systemic illness** + شرط ==mandatory==: إما **biopsy** فيها necrotizing vasculitis في الشرايين الصغيرة والمتوسطة، أو **angiography** فيها aneurysms أو occlusions (ولو الـ magnetic resonance angiography سليمة، تتعمل **conventional angiography**). وبعدها **2 على الأقل من 7**: الجلد (livedo، nodules)، myalgia، hypertension، neuropathy، الكلية (GFR أقل من 50%)، الخصية، أو أي عضو كبير تاني.
+
+          التفسير المقبول (مش في الكتاب):
+          - **ليه فيه شرط إجباري هنا؟** لأن الأعراض لوحدها (وجع عضلات وضغط وأعصاب) بتحصل في أمراض كتير، فلازم **دليل إن الشريان نفسه ملتهب** قبل ما تقول PAN.
+          - **ليه conventional angiography لو الـ MRA سليمة؟** لأن الـ microaneurysms اللي شفتها في صورة ص 143 ==صغيرة جدًا==، والـ MRA ممكن ما تشوفهاش؛ يعني MRA سليمة ما بتنفيش.
+          - الضغط بيتقاس **relative to childhood normative data**، يعني الصيغة دي معمولة للأطفال، وده سبب إنها مش هي نفسها الـ ACR 1990.
+      - kind: reveal
+        page: 141
+        quote: "A systemic illness accompanied by either a biopsy showing small and mid-"
+        prompt: "ليه الـ classical PAN ما بيعملش glomerulonephritis، مع إنه بيبوّظ الكلية؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ **glomerulus** شبكة **capillaries**، يعني **small vessels**. والـ PAN بيمسك **medium arteries** (الكتاب: small and mid-size artery necrotizing vasculitis، والـ Chapel Hill حاطه medium).
+
+          فالـ PAN بيضرب **الشرايين اللي قبل** الـ glomerulus: الكلية بتعمل **infarcts** و **hypertension** (renin) و creatinine عالي، بس الـ urine ==من غير RBC casts==. لو لقيت casts و GN، فكّر في **small vessel** زي MPA. وده الفخ اللي الكتاب كتبه في جدول الأعضاء: GN absent in classical PAN.
+      - kind: figure
+        page: 143
+        title: "الـ PAN في صور الكتاب (ص 143)"
+        image: { file: rheum/L08-pan-angiogram.webp, book: true }
+        alt: "Book figure: a mesenteric angiogram with many small round outpouchings along the medium-sized arteries (microaneurysms) and areas of narrowing."
+        caption: |
+          الكتاب في ص 143 بيوري صور الـ PAN: **wrist drop** (mononeuritis)، شريان متوسط ملتهب تحت الميكروسكوب، و الـ ==mesenteric angiogram== اللي هنا.
+
+          البلالين الصغيرة على طول الشرايين دي الـ **microaneurysms**: الجدار ملتهب ومتنكرز في حتت (focal and segmental)، فالحتة الضعيفة **بتنفخ** من الضغط، والحتة اللي بتلتئم **بتضيق**. عشان كده الـ angiography بتوري aneurysms و occlusions مع بعض.
+      - kind: explain
+        page: 142
+        title: "الـ cutaneous PAN"
+        quote: "Fibrinoid necrotizing vasculitis of small and medium"
+        text: |
+          جدول ص 142 بيفرّق الـ **cutaneous PAN** (اللي في قايمة الـ medium vessel ص 137) عن الـ systemic:
+          - **Compatible clinical findings**: **subcutaneous nodules**، livedo، purpura أو ulcers.
+          - **Histopathology**: ==fibrinoid necrotizing vasculitis== في شرايين small و medium caliber.
+          - علامات الـ **systemic** اللي **ما ينفعش** تبقى موجودة: fever ≥38°C لأسبوعين، weight loss ≥6 kg، hypertension، renal failure، strokes، MI، pleuritis، intestinal bleeding.
+          - **Exclusion**: neuropathy أو arthritis أو myalgia **بره منطقة الجلد** المصابة.
+
+          يعني نفس الـ pathology، بس محصورة في الجلد. التفسير المقبول (مش في الكتاب): الفرق ده بيغيّر كل حاجة: الـ cutaneous محتاج علاج أخف بكتير، والـ systemic ممكن يموّت.
       - kind: figure
         page: 144
         quote: "Key recommendations for the treatment of polyarteritis nodosa (PAN)"
@@ -582,6 +1146,19 @@ lessons:
             <text x="245" y="266" text-anchor="middle" class="t-sm t-mut">+ GC taper</text>
             <text x="165" y="305" text-anchor="middle" class="t-sm t-mut">No remission: other non-GC agent (or CYC)</text>
           </svg>
+      - kind: explain
+        page: 144
+        title: "Severe ولا non-severe: إزاي تقرر؟"
+        quote: "Severe disease Vasculitis with life- or organ-threatening manifestations"
+        text: |
+          جدول التعريفات في ص 144:
+          - **Severe disease** = ==life- or organ-threatening==: **renal disease**، **mononeuritis multiplex**، muscle disease، **mesenteric ischaemia**، **coronary**، limb/digit ischaemia.
+          - **Nonsevere** = mild systemic symptoms، cutaneous بسيط، arthritis خفيف.
+          - **Remission**: مفيش علامات، بعلاج أو من غيره. **Refractory**: نشاط مستمر رغم العلاج. **Relapse**: رجوع بعد remission.
+
+          والجرعات: **IV pulse** methylprednisolone 500–1,000 mg/day لـ 3–5 أيام، **high-dose oral** prednisone 1 mg/kg/day (لحد 80 mg)، **moderate** 0.25–0.5 mg/kg، **low** <10 mg/day.
+
+          ليه التقسيمة؟ التفسير المقبول (مش في الكتاب): الـ cyclophosphamide سلاح قوي وليه أضرار، فبتدّيه بس للي عضو عنده في خطر، والباقي بياخد حاجة أخف.
       - kind: case
         page: 144
         quote: "High-dose oral or pulse IV GC with CYC over GC alone"
@@ -595,27 +1172,49 @@ lessons:
             options: ["Severe: high-dose or pulse GC + cyclophosphamide", "Non-severe: GC + methotrexate", "GC alone", "Rituximab"]
             answer: 0
             why: "الـ mononeuritis (foot drop) والـ mesenteric involvement = severe، فـ GC + CYC. الـ MTX للـ non-severe. الـ GC لوحده أقل. الـ rituximab مش في خطة الـ PAN."
+      - kind: check
+        page: 141
+        quote: "Presence of Hepatitis B surface antigen or antibody."
+        question: "Which laboratory finding is one of the ACR 1990 criteria for polyarteritis nodosa?"
+        options: ["Hepatitis B surface antigen or antibody", "Positive c-ANCA", "Low serum IgE", "Red cell casts in the urine"]
+        answer: 0
+        why:
+          - "صح: الـ HBV بيعمل immune complexes بتضرب الشرايين المتوسطة، فهو criterion رقم 8."
+          - "الـ c-ANCA بتاع الـ GPA؛ الـ PAN مش ANCA-associated."
+          - "مفيش criterion عن IgE؛ الـ IgE العالي بتاع الـ Churg–Strauss."
+          - "الـ RBC casts معناها GN، والـ classical PAN من غير GN."
       - kind: try
-        items: [rheum.L08.087, rheum.L08.091, rheum.L08.103, rheum.L08.114, rheum.L08.115]
+        items: [rheum.L08.103, rheum.L08.106, rheum.L08.110, rheum.L08.114, rheum.L08.118]
     recap:
-      - "Kawasaki: fever ≥5 أيام + 4 من **CRASH**. علاجه IVIG 2 g/kg + aspirin، وكورس IVIG تاني لو السخونية فضلت."
-      - "Incomplete KD: <4 findings + labs/echo، و IVIG فورًا."
-      - "Polychondritis: ودن وأنف وحنجرة، و prednisone."
-      - "PAN: no GN، HBV، testicular pain، mononeuritis، microaneurysms. Severe = GC + CYC، non-severe = GC + MTX/AZA، maintenance 18 شهر."
-    practice: [rheum.L08.085, rheum.L08.086, rheum.L08.087, rheum.L08.088, rheum.L08.089, rheum.L08.090, rheum.L08.091, rheum.L08.092, rheum.L08.093, rheum.L08.094, rheum.L08.095, rheum.L08.096, rheum.L08.097, rheum.L08.098, rheum.L08.099, rheum.L08.100, rheum.L08.101, rheum.L08.102, rheum.L08.103, rheum.L08.104, rheum.L08.105, rheum.L08.106, rheum.L08.107, rheum.L08.108, rheum.L08.109, rheum.L08.110, rheum.L08.111, rheum.L08.112, rheum.L08.113, rheum.L08.114, rheum.L08.115, rheum.L08.116, rheum.L08.117, rheum.L08.118, rheum.L08.119]
+      - "ACR 1990: weight loss >4 kg، livedo، testicular pain، myalgia، neuropathy، diastolic >90، urea/creatinine، HBV، abnormal angiography، PMNs في الـ biopsy."
+      - "المعيار التاني: biopsy أو angiography mandatory + ≥2 من 7؛ conventional angiography لو MRA سلبي."
+      - "Medium arteries ← aneurysms و infarcts و hypertension، من غير GN."
+      - "Cutaneous PAN: nodules و livedo، fibrinoid necrosis، من غير systemic."
+      - "Severe (كلية، mononeuritis، mesenteric، coronary، limb) ← GC + CYC؛ nonsevere ← GC + MTX/AZA."
+    practice: [rheum.L08.103, rheum.L08.104, rheum.L08.105, rheum.L08.106, rheum.L08.107, rheum.L08.108, rheum.L08.109, rheum.L08.110, rheum.L08.111, rheum.L08.112, rheum.L08.113, rheum.L08.114, rheum.L08.115, rheum.L08.116, rheum.L08.117, rheum.L08.118]
   # ------------------------------------------------------------------
   - id: rheum.L08.lesson5
-    title: "ANCA: GPA و MPA و EGPA وعلاجهم"
-    hook: "أنف بتنزف ورئة فيها كهوف وكلية بتقع: ده الـ c-ANCA بيكلمك."
+    title: "ANCA: GPA و MPA و EGPA"
+    hook: "تلات أخوات من نفس العيلة: واحد بيحب الأنف، واحد بيحب الكلية، وواحد بيحب الـ eosinophils والربو."
     minutes: 10
-    pages: [146, 156]
-    topics: [aav, aav-rx]
+    pages: [145, 150]
+    topics: [aav]
     goals:
-      - "تفرّق GPA و MPA و EGPA بالأعضاء والـ ANCA والـ criteria"
-      - "تختار induction حسب organ-threatening ولا لأ"
-      - "تحفظ الـ maintenance والـ refractory والـ monitoring"
+      - "تفرّق GPA و MPA و EGPA بالـ ANCA والـ pathology والأعضاء"
+      - "تحسب الـ 2022 ACR/EULAR scores"
+      - "تعرف الـ c-ANCA و PR3 ومعناهم"
     status: unverified
     steps:
+      - kind: explain
+        page: 145
+        title: "الـ AAV spectrum: الخطر الأول"
+        quote: "AVV Spectrum"
+        text: |
+          شكل ص 145 بيرتّب إصابات الـ AAV على خط واحد من الأخطر للأخف:
+          - **Organ- or life-threatening**: ==alveolar haemorrhage==، **glomerulonephritis**، **mononeuritis multiplex**، **mesenteric ischaemia**.
+          - **Nonorgan-threatening**: **sinusitis**، **lung nodule**، **arthralgia**، **purpura**.
+
+          ليه تبدأ بالتقسيمة دي قبل الاسم؟ التفسير المقبول (مش في الكتاب): لأن **العلاج** بيتحدد بيها (هتشوفها في درس العلاج): الـ organ-threatening محتاج cyclophosphamide أو rituximab، والأخف ممكن methotrexate. فأول سؤال قدام عيان AAV: "فيه عضو هيروح؟"
       - kind: table
         page: 146
         quote: "| GPA | MPA |\n|---|---|\n| c-ANCA+ | p-ANCA+ |\n| PR-3+ | MPO+ |\n| Necrotizing vasculitis and granulomas | Necrotizing vasculitis |\nC-ANCA, cytoplasmic antineutrophil cytoplasmic antibody, GPA, granulomatosis with polyangiitis; MPA, microscopic polyanglitis, MPO, myeloperoxidase; p-ANCA, perinuclear antineutrophil Cytoplasmic antibody; PR-3, proteinase-3."
@@ -634,6 +1233,14 @@ lessons:
         text: |
           **C** = **C**lassic Wegener = **c**-ANCA = PR3 (حرف الـ **P** في الـ PR3 بيقعد مع الـ **c**، مش منطقي بس بيتحفظ).
           **M**PA = **M**by mouth (PO) = p-ANCA: حرف **M** مع **M**.
+      - kind: reveal
+        page: 146
+        quote: "Necrotizing vasculitis and granulomas"
+        prompt: "الـ GPA و الـ MPA الاتنين necrotizing vasculitis. إيه اللي بيفرّقهم تحت الميكروسكوب، وده بيفسّر إيه؟"
+        answer: |
+          شكل ص 146: الـ **GPA** = necrotizing vasculitis **and granulomas**، والـ **MPA** = necrotizing vasculitis **بس** (من غير granulomas).
+
+          التفسير المقبول (مش في الكتاب): الـ **granuloma** كتلة التهاب بتاكل النسيج حواليها، وبتحب **مجرى الهوا الفوقاني**. عشان كده الـ GPA بيعمل **sinusitis** و **septal perforation** و **saddle nose** و **subglottic stenosis** و **lung nodules** ممكن تتجوّف. الـ MPA مفيهوش الكتل دي، فالمرض كله **capillaritis**: كلية ورئة نازفة.
       - kind: explain
         page: 147
         title: "2022 ACR/EULAR: GPA ≥5"
@@ -666,6 +1273,35 @@ lessons:
           - "نسيت بند من الـ +3."
           - "عدّيت الـ MPO بس."
           - "مفيش بنود تانية بالموجب."
+      - kind: explain
+        page: 148
+        title: "مين بيحب أنهي عضو؟"
+        quote: "Kidneys 50-80 90-100"
+        text: |
+          جدول ص 148 (نسبة الإصابة):
+
+          | | GPA | MPA |
+          |---|---|---|
+          | ENT | **80–90%** | 20–30% |
+          | Lungs | **60–80%** | 20–60% |
+          | Kidneys | 50–80% | **90–100%** |
+          | Skin | 30–60% | 40–70% |
+
+          والدواير في نفس الصفحة: **Wegener's** = necrotizing granuloma (sinusitis، subglottic stenosis، pulmonary nodules، orbital pseudotumor). **MPA** = pulmonary capillaritis، GN، sensory neuropathy، mononeuritis multiplex. **Churg–Strauss** = ==hypereosinophilia== (asthma، pulmonary infiltrates، myocarditis).
+
+          يعني الـ ==GPA أنف وجيوب أولًا==، والـ **MPA كلية أولًا** (تقريبًا كلهم)، وده نفس سبب الـ +3 و −3 في الـ scores.
+      - kind: explain
+        page: 148
+        title: "EGPA score (2022): ≥6"
+        quote: "CLASSIFICATION CRITERIA FOR EOSINOPHILIC GRANULOMATOSIS WITH POLYANGIITIS"
+        text: |
+          الـ **EGPA** بيتحسب بعد ما يبقى فيه small- أو medium-vessel vasculitis، والـ mimics مستبعدة:
+          - **+3** obstructive airway disease (الربو)، **+3** nasal polyps، **+1** mononeuritis multiplex.
+          - ==+5 blood eosinophils ≥1 × 10⁹/L==، **+2** extravascular eosinophil-predominant inflammation على الـ biopsy.
+          - بالسالب: **−3** c-ANCA أو anti-PR3، **−1** haematuria.
+          - المجموع ==≥6==.
+
+          ليه c-ANCA بالسالب؟ لأنه بيوديك لـ GPA. وليه الـ haematuria بالسالب؟ التفسير المقبول (مش في الكتاب): الكلية أقل في الـ EGPA، فوجود GN بيقرّبك لـ MPA أو GPA. نفس منطق الـ −4 eosinophils في scores الـ GPA و MPA بس معكوس.
       - kind: table
         page: 149
         quote: "Nasal polyposis. Pulm infilterate. Cardiomyopathy. Polyneuropathy. Esinophilic gastritis. Histopatholgy. Esinophil tissue infilteration."
@@ -676,6 +1312,16 @@ lessons:
           - ["Tissue", "Small vessel vasculitis", "Eosinophil infiltration"]
           - ["Mechanism", "ANCA", "Eosinophil toxic products"]
         hide: [[0, 2], [1, 2], [2, 2]]
+      - kind: reveal
+        page: 149
+        quote: "Toxic products from eosinophil."
+        prompt: "ليه الـ EGPA ليه «وشّين»: ANCA-positive و ANCA-negative؟"
+        answer: |
+          جدول ص 149 بيفرّق:
+          - **ANCA positive**: الضرر من **الـ vasculitis** نفسه (ANCA related): **necrotizing GN**، purpura، pulmonary haemorrhage، **mononeuritis**.
+          - **ANCA negative**: الضرر من **الـ eosinophils** وهي قاعدة في الأنسجة (**toxic products from eosinophil**): **nasal polyposis**، pulmonary infiltrates، ==cardiomyopathy==، polyneuropathy، eosinophilic gastritis.
+
+          التفسير المقبول (مش في الكتاب): يعني مرض واحد بـ mechanism-ين. والمهم عمليًا: الـ **cardiomyopathy** في الوش الـ ANCA-negative هي أكتر حاجة بتموّت، فـ ANCA السلبي **مش معناه** إن المرض أخف.
       - kind: explain
         page: 150
         title: "الـ c-ANCA والـ PR3"
@@ -683,6 +1329,52 @@ lessons:
         text: |
           - **Indirect immunofluorescence**، **90% sensitive** للـ GPA الـ active، الـ antigen = **proteinase 3**
           - ==PR3-ANCA== معناه: **fast** decline في الكلية، extra-renal أكتر، granulomas، و ==relapses أكتر==
+      - kind: check
+        page: 148
+        quote: "Kidneys 50-80 90-100"
+        question: "Per the book's table, which organ is involved in 90–100% of patients with MPA?"
+        options: ["Kidneys", "Ear, nose and throat", "Lungs", "Skin"]
+        answer: 0
+        why:
+          - "صح: الـ MPA small vessel من غير granulomas، والـ glomerular capillaries أكتر هدف."
+          - "الـ ENT 80–90% في الـ GPA، و 20–30% بس في الـ MPA."
+          - "الرئة في الـ MPA 20–60%."
+          - "الجلد 40–70%."
+      - kind: try
+        items: [rheum.L08.120, rheum.L08.123, rheum.L08.126, rheum.L08.129, rheum.L08.132]
+    recap:
+      - "AAV spectrum: organ-threatening (DAH، GN، mononeuritis، mesenteric) ضد nonorgan (sinusitis، nodule، arthralgia، purpura)."
+      - "GPA: c-ANCA/PR3، granulomas، ENT 80–90%؛ MPA: p-ANCA/MPO، من غير granulomas، كلية 90–100%."
+      - "GPA ≥5 (c-ANCA +5)، MPA ≥5 (p-ANCA +6)، EGPA ≥6 (eosinophils +5، asthma +3، polyps +3)."
+      - "EGPA: ANCA+ = vasculitis (GN، mononeuritis)؛ ANCA− = eosinophil toxicity (cardiomyopathy، polyps)."
+      - "c-ANCA 90% sensitive في الـ active GPA؛ PR3 = كلية أسرع، extra-renal أكتر، granulomas، relapses أكتر."
+    practice: [rheum.L08.120, rheum.L08.121, rheum.L08.122, rheum.L08.123, rheum.L08.124, rheum.L08.125, rheum.L08.126, rheum.L08.127, rheum.L08.128, rheum.L08.129, rheum.L08.130, rheum.L08.131, rheum.L08.132, rheum.L08.133]
+  # ------------------------------------------------------------------
+  # Split from lesson5 on 2026-11-13 (#828): treatment of ANCA-associated
+  # vasculitis (EULAR statements).
+  - id: rheum.L08.lesson10
+    title: "علاج الـ ANCA vasculitis: الـ EULAR خطوة بخطوة"
+    hook: "الـ steroids أنقذت العيانين دول 60 سنة، وبرضه هي اللي بتأذيهم أكتر في أول سنة. العلاج كله لعبة توازن."
+    minutes: 10
+    pages: [151, 156]
+    topics: [aav-rx]
+    goals:
+      - "تعرف ليه الـ steroid-sparing بقى ضرورة"
+      - "تختار الـ induction حسب الخطورة وتعرف ممنوعات الـ MTX"
+      - "تعرف الـ maintenance والـ refractory والمتابعة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 151
+        title: "ليه نوفّر الـ steroids؟"
+        quote: "Steroids are the major contributor to serious adverse events, especially"
+        text: |
+          الكتاب بيدّي تلات حقائق من الـ EUVAS trials:
+          - الـ **high-dose steroids** في قلب علاج الـ vasculitis من **60 سنة**.
+          - الـ steroids هي ==the major contributor to serious adverse events==، خصوصًا **infection**، في **أول سنة**.
+          - الـ **long-term damage** من الـ steroids **rivals that of the disease**.
+
+          يعني العلاج اللي بيطفي المرض بيعمل ضرر قد المرض نفسه. التفسير المقبول (مش في الكتاب): steroids جرعة عالية + cyclophosphamide أو rituximab = مناعة **مقفولة جدًا**، فالـ pneumonia والـ sepsis بتموّت في أول سنة أكتر من الـ vasculitis نفسه. عشان كده الشكل في ص 152 بيقارن **target prednisolone doses** في الـ trials، والاتجاه كله لـ **جرعات أقل**.
       - kind: figure
         page: 151
         quote: "Algorithm to describe the management of new antineutrophil cytoplasmic antibody (ANCA)-associated vasculitis."
@@ -716,6 +1408,16 @@ lessons:
             <text x="165" y="323" text-anchor="middle" class="t-sm t-mut">re-check diagnosis, doses,</text>
             <text x="165" y="339" text-anchor="middle" class="t-sm t-mut">damage vs activity, infection</text>
           </svg>
+      - kind: explain
+        page: 152
+        title: "Statements 1–3: فين، إزاي تتأكد، وبإيه تبدأ"
+        quote: "We recommend that patients with AAV are managed in close collaboration"
+        text: |
+          - **Statement 1**: العيان يتعالج في **centre of expertise** أو بالتعاون معاه. ليه؟ مرض نادر وعلاجه سام، والخبرة بتفرق.
+          - **Statement 2**: ==positive biopsy== بيدعم التشخيص جامد، ونعملها في التشخيص الجديد و**في الـ relapse المشكوك فيه**. ليه في الـ relapse؟ لأن العدوى والضرر القديم بيقلّدوا الـ relapse، والـ biopsy بتفرّق.
+          - **Statement 3**: الـ **new-onset organ- or life-threatening** AAV ← **glucocorticoids + cyclophosphamide أو rituximab**.
+
+          التفسير المقبول (مش في الكتاب) للـ CYC أو RTX: الاتنين بيضربوا مصدر الـ ANCA. الـ **rituximab** بيشيل الـ **B cells** اللي بتعمل الـ ANCA، والـ cyclophosphamide بيقتل الخلايا اللي بتتكاثر بسرعة ومنها الـ lymphocytes.
       - kind: aside
         tone: exam
         page: 153
@@ -724,6 +1426,16 @@ lessons:
           ==Methotrexate (MTX)/mycophenolate mofetil (MMF) ممنوع في الـ induction== مع: **meningeal**، **retro-orbital**، **cardiac**، **mesenteric**، acute **mononeuritis multiplex**، و **pulmonary haemorrhage بأي درجة**.
 
           الـ MTX مسموح بس في الحاجات البسيطة: أنف من غير erosion، جلد من غير ulcer، myositis، nodules من غير haemoptysis، ومن غير كلية.
+      - kind: reveal
+        page: 153
+        quote: "For a major relapse of organ-threatening or life-threatening disease in AAV"
+        prompt: "ليه الـ MTX ممنوع في الـ induction مع الـ pulmonary haemorrhage أو الـ mononeuritis multiplex الحاد، حتى لو بسيط؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ **MTX** أبطأ وأضعف من الـ CYC والـ RTX. ده كويس في الأنف والجلد والـ nodules، لأن مفيش حاجة هتضيع لو استنيت أسابيع.
+
+          لكن في الحاجات اللي في القايمة (meningeal، retro-orbital، cardiac، mesenteric، **acute mononeuritis**، **pulmonary haemorrhage**) العضو ممكن **يضيع في أيام**: نزيف رئة يموّت، عين تروح، أمعاء تموت. فمحتاج أقوى علاج من أول يوم. وكمان الـ MTX بيطلع من الكلية، فلو فيه renal involvement مش أمان.
+
+          وعشان كده **Statement 5**: الـ major relapse يتعالج **زي المرض الجديد**: GC + CYC أو RTX.
       - kind: check
         page: 154
         quote: "Plasma exchange should be considered for patients with AAV and a serum creatine level of >500 μmol/L (5.7 mg/dL) due to rapidly progressive glomerulonephritis in the setting of new or relapsing disease"
@@ -745,6 +1457,30 @@ lessons:
         text: "PEXIVAS (2020) لقت إن الـ plasma exchange الروتيني ما قللش الوفاة أو الـ end-stage kidney disease (ESKD). Kidney Disease: Improving Global Outcomes (KDIGO) 2024 بتقول ممكن تفكر فيه لو creatinine >3.4 mg/dL، أو dialysis، أو creatinine بيعلى بسرعة، أو diffuse alveolar haemorrhage (DAH) مع hypoxemia. في الامتحان: رقم الكتاب >500 μmol/L."
         ref: "KDIGO 2024 ANCA vasculitis guideline; PEXIVAS 2020"
       - kind: explain
+        page: 154
+        title: "الـ maintenance والـ refractory"
+        quote: "We recommend that remission-maintenance therapy for AAV be continued for"
+        text: |
+          - **Statement 7**: الـ maintenance = **low-dose GC** + **azathioprine** أو **rituximab** أو **MTX** أو **MMF**.
+          - **Statement 8**: كمّل ==24 months على الأقل== بعد الـ sustained remission. ليه؟ لأن الكتاب بيقول **AAV is characteristically a relapsing disease** (ص 156)، والوقف بدري بيرجّعه.
+          - **Statement 9**: الـ **refractory** ← **بدّل**: من CYC لـ RTX أو العكس، وحوّل لمركز متخصص.
+
+          تعريف الـ refractory عند EULAR:
+          - نشاط **زي ما هو أو أكتر** بعد **4 أسابيع** من العلاج.
+          - أقل من **50% reduction** في الـ **Birmingham Vasculitis Activity Score (BVAS)** بعد **6 أسابيع**.
+          - مرض **مستمر** (1 major أو 3 minor) بعد **أكتر من 12 أسبوع**.
+      - kind: reveal
+        page: 155
+        quote: "Re-evaluate the primary diagnosis; are they truly refractory—do they have AAV?"
+        prompt: "عيانك مش بيتحسن على العلاج. الكتاب بيقولك تسأل أربع أسئلة قبل ما تقول refractory. إيه هما وليه؟"
+        answer: |
+          1. **التشخيص صح؟** يمكن مش AAV أصلًا (افتكر الـ mimics: endocarditis، lymphoma).
+          2. **العلاج اتدّى صح؟** الجرعات وصلت للـ target ولا لأ.
+          3. **ده active disease ولا damage؟** ندبة قديمة في الكلية أو الأعصاب مش هتتحسن مهما زوّدت العلاج.
+          4. **ده AAV ولا infection أو comorbidity أو malignancy؟** المريض مقفول المناعة، فالعدوى بتلبس وش الـ relapse.
+
+          ليه كل ده؟ التفسير المقبول (مش في الكتاب): لأن الخطوة اللي بعد "refractory" هي **تزويد** الـ immunosuppression، ولو المشكلة عدوى أو damage، الزيادة دي بتأذي من غير فايدة.
+      - kind: explain
         page: 155
         title: "المتابعة"
         quote: "We recommend that structured clinical assessment rather than ANCA testing should inform decisions on changes in treatment for"
@@ -754,6 +1490,15 @@ lessons:
           - **Immunoglobulins** قبل كل كورس **rituximab**
           - **Cardiovascular risk** دوريًا، وعلّم العيان علامات الـ relapse
           - الـ AAV **controllable but incurable**
+      - kind: explain
+        page: 156
+        title: "Statements 14–15: العيان شريك"
+        quote: "AAV is characteristically a relapsing disease."
+        text: |
+          - **Statement 14**: اشرح للعيان بالكلام **طبيعة المرض**، العلاج، الأعراض الجانبية، والـ prognosis. ليه؟ الكتاب: AAV ==characteristically a relapsing disease==، وكل relapse بيزوّد الضرر، والعيان اللي فاهم بيلاحظ **علامات الـ relapse بدري**.
+          - **Statement 15**: بعد الـ induction قيّم الـ **comorbidities** ووجّهه للعلاج والدعم: الـ AAV ممكن يسيب ضرر دايم في الكلية والرئة والقلب والأعصاب، والنظر أو السمع.
+
+          والجملة اللي تلخّص: AAV ==controllable but currently incurable lifelong illness==، فمحتاج **holistic approach**.
       - kind: reveal
         page: 156
         quote: "Targeting Complement\n| Target | Effect | Drug |\n|---|---|---|\n| C3a → C3aR | Leukocyte migration and signaling | |\n| C3b → CR1, CR1g, CR3, CR4 | Phagocytosis and clearance | |\n| C3b → CR2 | Adaptive signaling | |\n| C5 convertase → C5b → C6-C9 → MAC (C5b-9) | Cell lysis (i.e., Neisseria control); Reason for black box warning for eculizumab | Eculizumab |\n| C5a → C5a (desArg) → C5L2 | C5a internalization and destruction | Vilobelimab, C5a antibodies |\n| C5a → C5aR | Leukocyte trafficking, migration and activation; Downstream is best | Avacopan |"
@@ -763,24 +1508,26 @@ lessons:
 
           الـ **avacopan** بيقفل الـ **C5a receptor** بس: يوقف جذب وتنشيط الـ neutrophils، ويسيب الـ MAC شغال. "Downstream is best".
       - kind: try
-        items: [rheum.L08.122, rheum.L08.123, rheum.L08.140, rheum.L08.142, rheum.L08.147]
+        items: [rheum.L08.135, rheum.L08.140, rheum.L08.145, rheum.L08.150, rheum.L08.155]
     recap:
-      - "GPA = c-ANCA/PR3، granulomas، ENT. MPA = p-ANCA/MPO، كلية. EGPA = asthma + eosinophils."
-      - "2022 criteria: GPA ≥5، MPA ≥5، والـ eosinophils ≥1 × 10⁹ = −4."
-      - "Organ-threatening: GC + CYC أو RTX. Non-organ: GC + MTX أو MMF. PLEX لو creatinine >500 أو DAH شديد."
-      - "Maintenance ≥24 شهر. Refractory: بدّل CYC ↔ RTX. العلاج حسب الـ clinical assessment مش الـ ANCA."
-    practice: [rheum.L08.120, rheum.L08.121, rheum.L08.122, rheum.L08.123, rheum.L08.124, rheum.L08.125, rheum.L08.126, rheum.L08.127, rheum.L08.128, rheum.L08.129, rheum.L08.130, rheum.L08.131, rheum.L08.132, rheum.L08.133, rheum.L08.134, rheum.L08.135, rheum.L08.136, rheum.L08.137, rheum.L08.138, rheum.L08.139, rheum.L08.140, rheum.L08.141, rheum.L08.142, rheum.L08.143, rheum.L08.144, rheum.L08.145, rheum.L08.146, rheum.L08.147, rheum.L08.148, rheum.L08.149, rheum.L08.150, rheum.L08.151, rheum.L08.152, rheum.L08.153, rheum.L08.154, rheum.L08.155, rheum.L08.156, rheum.L08.157, rheum.L08.158, rheum.L08.159, rheum.L08.195]
+      - "الـ steroids أكبر سبب للـ serious adverse events (infection) في أول سنة ← steroid-sparing."
+      - "Centre of expertise؛ biopsy للتشخيص والـ relapse؛ organ-threatening ← GC + CYC أو RTX؛ non-organ ← GC + MTX أو MMF."
+      - "MTX ممنوع: meningeal، retro-orbital، cardiac، mesenteric، acute mononeuritis، pulmonary haemorrhage."
+      - "Plasma exchange: creatinine >500 μmol/L من RPGN أو DAH شديد."
+      - "Maintenance: low-dose GC + AZA/RTX/MTX/MMF ≥24 شهر؛ refractory ← بدّل CYC↔RTX بعد ما تراجع التشخيص."
+      - "قرارات العلاج بالـ clinical assessment مش الـ ANCA؛ haematuria بعد CYC؛ Ig قبل RTX؛ CV risk؛ تعليم العيان."
+    practice: [rheum.L08.134, rheum.L08.135, rheum.L08.136, rheum.L08.137, rheum.L08.138, rheum.L08.139, rheum.L08.140, rheum.L08.141, rheum.L08.142, rheum.L08.143, rheum.L08.144, rheum.L08.145, rheum.L08.146, rheum.L08.147, rheum.L08.148, rheum.L08.149, rheum.L08.150, rheum.L08.151, rheum.L08.152, rheum.L08.153, rheum.L08.154, rheum.L08.155, rheum.L08.156, rheum.L08.157, rheum.L08.158, rheum.L08.159, rheum.L08.195]
   # ------------------------------------------------------------------
   - id: rheum.L08.lesson6
-    title: "Behçet والمخ وباقي العيلة"
-    hook: "قرحة في البق 3 مرات في السنة ونقطة حمرا مكان الإبرة: كده عرفت Behçet."
+    title: "Behçet والمخ"
+    hook: "قرح في البق بتتكرر، وإبرة صغيرة في الجلد بتعمل حبّاية بعد يومين، وعين ممكن تضيع في كام سنة."
     minutes: 9
-    pages: [157, 162]
-    topics: [behcet, pacns, other]
+    pages: [157, 160]
+    topics: [behcet, pacns]
     goals:
-      - "تطبّق criteria الـ Behçet والـ scoring"
-      - "تعرف الـ 7 heuristics بتاعة PACNS"
-      - "تفرّق Buerger و hypersensitivity و HSP و cryoglobulinemia"
+      - "تطبّق الـ 1990 criteria والـ points"
+      - "تعرف خطر العين في الـ Behçet وعلاجه"
+      - "تعرف الـ PACNS والـ 7 heuristics"
     status: unverified
     steps:
       - kind: explain
@@ -833,6 +1580,14 @@ lessons:
           - ==Blindness خلال 4–5 سنين==، و **retinal vein thrombosis** مش نادرة
           - المفاصل: **أكتر من النص**، multiple joints. في الأطفال الـ arthritis أشهر minor feature (11 من 40)
           - العلاج: aphthous ← ==colchicine، thalidomide==؛ العين ← **azathioprine**؛ وكمان cyclosporine
+      - kind: reveal
+        page: 158
+        quote: "Retinal vein thrombosis leading to"
+        prompt: "ليه الـ Behçet بيعمل retinal vein thrombosis، وده ليه علاقة بتقسيمه في Chapel Hill؟"
+        answer: |
+          الـ Behçet في Chapel Hill هو **variable vessel vasculitis** (ص 126): بيمسك أي حجم، **شرايين وأوردة**.
+
+          التفسير المقبول (مش في الكتاب): التهاب جدار **الوريد** بيخلّي الدم يتجلط جواه، فالـ Behçet من الأمراض القليلة اللي بتعمل **جلطات وريدية** بسبب الالتهاب. في العين، جلطة وريد الشبكية = ==sudden blindness== (زي ما الكتاب بيقول not rare). وعشان كده الـ **azathioprine** للعين بدري، والكتاب بيقول blindness ممكن تحصل خلال **4–5 سنين**.
       - kind: check
         page: 157
         quote: "Positive pathergy test - An erythematous papule larger than 2 mm at the prick site 48 hours after the application of a 20- to 22-gauge sterile needle, which obliquely penetrated avascular skin to a depth of 5 mm as read by a physician at 48 hours."
@@ -854,13 +1609,82 @@ lessons:
         quote: "No diagnosis of PACNS should be made in the absence of a lumbar puncture to rule out infection and malignancy."
         text: |
           Neuro deficit مكتسب مش مفسّر + angiography أو histology فيها angiitis في الـ central nervous system (CNS) + مفيش systemic vasculitis.
-          1. مفيش صورة مميزة؛ اشتبه مع **strokes متعددة في territories مختلفة** أو colony-stimulating factor (CSF) فيه **chronic meningitis**
-          2. ==No lectin pathway (LP) = no diagnosis==
+          1. مفيش صورة مميزة؛ اشتبه مع **strokes متعددة في territories مختلفة** أو cerebrospinal fluid (CSF) فيه **chronic meningitis**
+          2. ==No lumbar puncture (LP) = no diagnosis==
           3. **magnetic resonance imaging (MRI)** حساس بس مش specific
           4. مفيش angiography **100% specific**
           5. ==Brain biopsy== بتأكد وتستبعد الـ mimics
           6. الـ must-rule-outs: **infection و malignancy**
           7. مفيش استجابة لـ **cyclophosphamide** ← فكّر في تشخيص تاني
+      - kind: reveal
+        page: 159
+        quote: "No diagnosis of PACNS should be made in the absence of a lumbar puncture"
+        prompt: "ليه مفيش تشخيص PACNS من غير lumbar puncture، وليه الـ brain biopsy مهمة كده؟"
+        answer: |
+          لأن الـ **must-rule-outs** هما **infection** و **malignancy** (الكتاب ص 160)، والاتنين بيعملوا نفس الصورة: strokes متعددة، و CSF شكله chronic meningitis، و MRI غير طبيعي.
+
+          التفسير المقبول (مش في الكتاب): علاج الـ PACNS **cyclophosphamide** و steroids. لو المشكلة **TB meningitis** أو **lymphoma** في المخ وإدّيت العلاج ده، هتموّت العيان. فالـ LP بيدوّر على الميكروب والخلايا الخبيثة، والـ biopsy بتأكد الـ angiitis وتستبعد الـ mimics. ولو العيان **ما استجابش** للـ cyclophosphamide، الكتاب بيقولك: ارجع فكّر في تشخيص تاني.
+      - kind: check
+        page: 159
+        quote: "Neuroimaging is highly sensitive but nonspecific. MRI is the test of choice."
+        question: "Per the PACNS heuristics, what is the imaging test of choice, and what is its limitation?"
+        options: ["MRI: highly sensitive but nonspecific", "Angiography: 100% specific for CNS arteritis", "CT: diagnostic when normal", "PET: replaces lumbar puncture"]
+        answer: 0
+        why:
+          - "صح: الـ MRI test of choice، حساس جدًا (نادر يطلع طبيعي) بس مش specific."
+          - "الكتاب بيقول NO angiographic picture is 100% specific."
+          - "الـ CT مش مذكور، والصورة الطبيعية مش بتشخّص حاجة."
+          - "مفيش حاجة بتغني عن الـ LP في الـ PACNS."
+      - kind: explain
+        page: 159
+        title: "المفاصل في الـ Behçet: ليه مهمة رغم إنها مش في الـ criteria؟"
+        quote: "Multiple-joint involvement is common."
+        text: |
+          الكتاب: **أكتر من نص العيانين** بيجيلهم synovitis أو arthritis أو arthralgia، والـ **multiple-joint involvement is common**، والصورة: وجع، tenderness، تورم، حركة محدودة، سخونية، و morning stiffness. وفي الأطفال الـ arthritis هي أشهر minor feature (11 من 40).
+
+          التفسير المقبول (مش في الكتاب): المفاصل **مش** في الـ 1990 criteria لأنها مش مميزة؛ نص أمراض الروماتيزم بتعمل نفس الشكل. بس لو شاب عنده قرح في البق بتتكرر ومفاصل متورمة، ==فكّر في Behçet== قبل ما تقول rheumatoid arthritis، واسأل عن القرح التناسلية والعين.
+      - kind: explain
+        page: 159
+        title: "PACNS: ليه التعريف كله استبعاد؟"
+        quote: "No evidence of systemic vasculitis or any condition that could elicit the"
+        text: |
+          الكتاب بيقول الـ **primary angiitis of the CNS (PACNS)** = neurologic deficit **مكتسب ومش مفسّر** مع:
+          - (a) شكل angiitis في الـ CNS بالـ **angiography أو الـ histopathology**.
+          - (b) **No evidence of systemic vasculitis** أو أي حاجة تانية تعمل نفس الشكل.
+
+          التفسير المقبول (مش في الكتاب): كلمة **primary** معناها إن المخ هو العضو **الوحيد**. لو فيه vasculitis في الكلية أو الجلد، يبقى ده systemic vasculitis واصل للمخ، وده علاجه وتوقّعه مختلف. وكتير من اللي بيعمل نفس شكل الـ angiography (spasm، infection، atherosclerosis) ==مش التهاب==، فلازم يتشال الأول.
+      - kind: reveal
+        page: 160
+        prompt: "ليه الكتاب بيقول إن الـ PACNS اللي ما استجابش للـ cyclophosphamide غالبًا مش PACNS؟"
+        quote: "The must-rule-outs are infection and malignancy."
+        answer: |
+          الكتاب: الـ **must-rule-outs** هما **infection و malignancy**، والـ **failure to respond to cyclophosphamide** غالبًا معناه **alternative diagnosis**، والـ brain biopsy مفيدة للتشخيص ولاستبعاد الـ mimics، والموضوع **multispeciality**.
+
+          التفسير المقبول (مش في الكتاب): الـ vasculitis الحقيقية بتهدى مع الـ immunosuppression. لو العيان ساء رغم الـ cyclophosphamide، يبقى الالتهاب **مش هو المشكلة**: عدوى أو lymphoma في المخ مثلًا، والـ immunosuppression هنا ==بتأذي== مش بتعالج. عشان كده الـ LP والـ biopsy قبل العلاج مش رفاهية، ومحتاج neurology و rheumatology و radiology مع بعض.
+      - kind: try
+        items: [rheum.L08.160, rheum.L08.163, rheum.L08.167, rheum.L08.172, rheum.L08.176]
+    recap:
+      - "Behçet 1990: oral ulcers ≥3 في 12 شهر + 2 من: genital، eye، skin، pathergy."
+      - "Pathergy: إبرة 20–22 G، 5 mm، تقرا بعد 48 ساعة، papule >2 mm."
+      - "Points: eye 2، genital 2، oral 2، skin/neuro/vascular/pathergy 1."
+      - "Variable vessel ← retinal vein thrombosis ← blindness خلال 4–5 سنين؛ aphthous ← colchicine، thalidomide؛ eye ← azathioprine."
+      - "PACNS: no LP = no diagnosis؛ MRI حساس مش specific؛ biopsy؛ استبعد infection و malignancy؛ مفيش استجابة لـ CYC ← تشخيص تاني."
+    practice: [rheum.L08.160, rheum.L08.161, rheum.L08.162, rheum.L08.163, rheum.L08.164, rheum.L08.165, rheum.L08.166, rheum.L08.167, rheum.L08.168, rheum.L08.169, rheum.L08.170, rheum.L08.171, rheum.L08.172, rheum.L08.173, rheum.L08.174, rheum.L08.175, rheum.L08.176, rheum.L08.177, rheum.L08.178, rheum.L08.179]
+  # ------------------------------------------------------------------
+  # Split from lesson6 on 2026-11-13 (#828): Buerger, hypersensitivity
+  # vasculitis, HSP and cryoglobulinaemic vasculitis.
+  - id: rheum.L08.lesson11
+    title: "Buerger و HSP والـ cryoglobulins"
+    hook: "مدخّن شاب صوابعه بتزرق، وطفل ببقع في رجله ووجع بطن، وعيان hepatitis C إيديه بتبرد. تلات صور لباقي العيلة."
+    minutes: 8
+    pages: [160, 162]
+    topics: [other]
+    goals:
+      - "تعرف الـ Buerger وليه علاجه مختلف"
+      - "تعرف الـ hypersensitivity vasculitis والـ HSP"
+      - "تقسّم الـ cryoglobulins وتربطهم بالسبب والعلاج"
+    status: unverified
+    steps:
       - kind: explain
         page: 160
         title: "Buerger"
@@ -874,6 +1698,31 @@ lessons:
         quote: "Thromboangiitis Obliterans\n  Non necrotizing vasculitis.\n  Cause unknown.\n  Affects all populations...19-45 years.\n  Arms and legs.....claudication.\n  Amputation of limb but not lethal.\n  RX = alcohol abstinence."
         text: "الـ Buerger مرتبط بالتدخين، والعلاج الوحيد المثبت هو بطّل أي tobacco تمامًا. كلمة alcohol غالبًا غلطة في الكتاب؛ في الامتحان لو السؤال نقل كلام الكتاب اكتبه، وفي العيادة: smoking cessation."
         ref: "Standard references (e.g., Harrison's 21e, 2022)"
+      - kind: explain
+        page: 161
+        title: "Hypersensitivity vasculitis: الدوا هو المتهم"
+        quote: "Medication at Disease Onset."
+        text: |
+          الـ ACR criteria للـ **hypersensitivity vasculitis**:
+          1. السن **>16** سنة عند البداية.
+          2. ==Medication at disease onset==.
+          3. **Palpable purpura**.
+          4. **Maculopapular rash**.
+          5. **Biopsy** فيها arteriole و venule و **granulocytes** حوالين الوعاء أو براه.
+
+          التفسير المقبول (مش في الكتاب): الدوا بيعمل **immune complexes** صغيرة، بتترسّب في أصغر الأوعية في الجلد، فالصورة **small vessel**: purpura في الرجلين و rash. ودي من الـ **secondary** vasculitis اللي اتكلمنا عنها في أول المحاضرة: أول علاج إنك **توقف الدوا**. وشرط **>16 سنة** عشان يفرّقها عن الـ HSP اللي في الأطفال.
+      - kind: explain
+        page: 161
+        title: "HSP: الـ IgA في طفل"
+        quote: "Purpura, arthritis, abdominal pain and GN."
+        text: |
+          الـ **Henoch–Schönlein purpura** (الـ IgA vasculitis في Chapel Hill):
+          - التتراد: **purpura**، **arthritis**، **abdominal pain**، و **GN**.
+          - ==IgA deposition==.
+          - **90% تحت 10 سنين**، وفي الأطفال **أخف**.
+          - الكبار اللي عندهم GN: **13% renal failure**.
+
+          التفسير المقبول (مش في الكتاب): الـ **IgA** هو antibody الـ **mucosa** (افتكر المحاضرة 6). غالبًا HSP بييجي بعد **عدوى في الزور أو البطن**، فالـ IgA immune complexes بتترسب في **أوعية الجلد والأمعاء والـ glomerulus** في نفس الوقت، وده يفسّر التتراد كله. وليه الكبار أوحش؟ لأن الكلية عندهم بتتأثر أكتر وبتتعافى أقل.
       - kind: table
         page: 162
         quote: "Cryoglobulinemic Vasculitis\n  Type 1..monoclonal and lack RF....myeloma.\n  Type 2... mixed because contain IgG and IgM=RF...monoclonal...hep C, neoplastic and connective tissue diseases.\n  Type 3...IgM=polyclonal...circulating immune complexes."
@@ -884,6 +1733,27 @@ lessons:
           - ["2 (mixed)", "IgG + monoclonal IgM RF", "Hepatitis C"]
           - ["3 (mixed)", "Polyclonal IgM", "Immune complexes"]
         hide: [[0, 2], [1, 2], [2, 1]]
+      - kind: explain
+        page: 162
+        title: "الـ cryoglobulins: ليه البرد بيفرق؟"
+        quote: "Type 2... mixed because contain IgG and IgM=RF...monoclonal...hep C,"
+        text: |
+          الكتاب بيقسّم الـ cryoglobulinaemia تلات أنواع:
+          - **Type 1**: **monoclonal** ومن غير RF ← **myeloma**.
+          - **Type 2**: **mixed** (IgG و IgM)، والـ IgM ==monoclonal== وشغال **RF** ← **hepatitis C**، neoplastic، و connective tissue diseases.
+          - **Type 3**: IgM **polyclonal** ← circulating immune complexes.
+
+          الصورة: **purpura**، weakness، **arthralgias**، **Raynaud's**، **neuropathy**، و **GN**.
+
+          التفسير المقبول (مش في الكتاب): الـ cryoglobulins بروتينات **بتترسّب في البرد**. الأطراف (الصوابع والرجلين) أبرد من باقي الجسم، فبتتجمع هناك ← Raynaud's و purpura. وكمان بتعمل immune complexes بتشغّل الـ complement وتترسب في الكلية ← GN.
+      - kind: reveal
+        page: 162
+        quote: "Treat Hep C."
+        prompt: "ليه أول سطر في علاج الـ cryoglobulinaemic vasculitis في الكتاب هو «Treat Hep C» قبل الـ prednisone والـ Cytoxan؟"
+        answer: |
+          لأن الـ hepatitis C هو اللي **بيصنع** المشكلة: الـ virus بيحفّز الـ B cells تعمل الـ IgM-RF (type 2). ده مثال واضح على **vasculitis associated with probable etiology** في Chapel Hill (ص 126).
+
+          التفسير المقبول (مش في الكتاب): لو إدّيت steroids و cyclophosphamide بس، هتطفي الالتهاب **مؤقتًا** والـ virus لسه شغال، وكمان الـ immunosuppression ممكن تزوّد الـ viral load. لما تعالج الـ HCV، **المصنع يقفل**، والـ cryoglobulins تقل. والـ prednisone و Cytoxan للحالات الشديدة لحد ما ده يحصل.
       - kind: sort
         page: 161
         quote: "Henoch-Schonlein Purpura\n  Purpura, arthritis, abdominal pain and GN.\n  IgA deposition.\n  90%=age<10.\n  Children=milder.\n  Adults with GN...13% renal failure."
@@ -897,11 +1767,36 @@ lessons:
           - { text: "Raynaud's and neuropathy", bin: 2 }
           - { text: "Treat hepatitis C", bin: 2 }
         why: "الـ HSP: IgA و purpura و arthritis و abdominal pain و GN في الأطفال. الـ hypersensitivity: دوا عند البداية وسن >16. الـ cryo: purpura و weakness و arthralgia و Raynaud و neuropathy و GN، وعلاجها HCV + prednisone أو cyclophosphamide."
+      - kind: reveal
+        page: 160
+        prompt: "الـ Buerger بيقطع الرجل بس مش بيموّت. ليه الفرق ده؟"
+        quote: "Non necrotizing vasculitis."
+        answer: |
+          الكتاب: **thromboangiitis obliterans** = **non necrotizing** vasculitis، السبب مش معروف، بيصيب أعمار **19–45**، الدراعات والرجلين مع **claudication**، و ==amputation of limb but not lethal==.
+
+          التفسير المقبول (مش في الكتاب): الالتهاب والجلطة **في شرايين وأوردة الأطراف** بس، مش في الكلية ولا القلب ولا المخ، فالطرف يموت من الـ ischaemia بس العيان نفسه يعيش. وكونه **non necrotizing** يعني الجدار مش بيتهد زي الـ PAN، فمفيش aneurysms ولا نزيف.
+
+          وده بيفرّقه عن الـ atherosclerosis: شاب **تحت 45** بيدخّن وعنده claudication في **الإيدين كمان**، مش راجل كبير عنده رجلين بس.
+      - kind: explain
+        page: 162
+        title: "أعراض الـ cryoglobulinaemia: كل عرض من أنهي ناحية"
+        quote: "Neuropathy."
+        text: |
+          الكتاب: **purpura**، **weakness**، **arthralgias**، **Raynaud's**، **neuropathy**، و **GN**.
+
+          التفسير المقبول (مش في الكتاب): فكّر في الـ cryoglobulin كبروتين **بيتجمّد في البرد ويترسّب كـ immune complex** في الأوعية الصغيرة:
+          - **Purpura**: الترسيب في أوعية الجلد، وأكتر في الرجلين لأنها أبرد وتحت ضغط أعلى.
+          - **Raynaud's**: الصوابع الباردة بتخلي البروتين يتجمّد ويقفل الدورة.
+          - **Neuropathy**: الأوعية الصغيرة اللي بتغذي الأعصاب (vasa nervorum) بتتقفل.
+          - **GN**: الـ immune complexes بتقعد في الـ ==glomerulus== زي أي immune-complex disease.
+          - **Weakness و arthralgias**: الالتهاب العام.
+
+          يعني التتراد اللي تفتكره: **purpura + arthralgia + weakness**، ولو معاهم GN أو neuropathy اسأل على الـ hepatitis C.
       - kind: try
-        items: [rheum.L08.161, rheum.L08.164, rheum.L08.179, rheum.L08.184, rheum.L08.186]
+        items: [rheum.L08.180, rheum.L08.182, rheum.L08.184, rheum.L08.186, rheum.L08.188]
     recap:
-      - "Behçet: oral ulcers ≥3/سنة + 2 (genital، eye، skin، pathergy). Pathergy: papule >2 mm بعد 48 ساعة."
-      - "عين Behçet ممكن تعمي في 4–5 سنين. Colchicine/thalidomide للقرح، azathioprine للعين."
-      - "PACNS: من غير LP ما فيش تشخيص، MRI حساس مش specific، والـ biopsy بتحسم."
-      - "Buerger 19–45 سنة، not lethal. HSP = IgA في الأطفال. Cryo type 2 = HCV."
-    practice: [rheum.L08.160, rheum.L08.161, rheum.L08.162, rheum.L08.163, rheum.L08.164, rheum.L08.165, rheum.L08.166, rheum.L08.167, rheum.L08.168, rheum.L08.169, rheum.L08.170, rheum.L08.171, rheum.L08.172, rheum.L08.173, rheum.L08.174, rheum.L08.175, rheum.L08.176, rheum.L08.177, rheum.L08.178, rheum.L08.179, rheum.L08.180, rheum.L08.181, rheum.L08.182, rheum.L08.183, rheum.L08.184, rheum.L08.185, rheum.L08.186, rheum.L08.187, rheum.L08.188, rheum.L08.189]
+      - "Buerger: non-necrotizing، 19–45 سنة، claudication، amputation بس not lethal؛ الكتاب: alcohol abstinence (الإرشادات: وقف التدخين)."
+      - "Hypersensitivity vasculitis: >16 سنة، دوا عند البداية، palpable purpura، rash، granulocytes في الـ biopsy ← وقّف الدوا."
+      - "HSP: purpura، arthritis، abdominal pain، GN؛ IgA؛ 90% تحت 10؛ الكبار مع GN 13% renal failure."
+      - "Cryo: type 1 monoclonal (myeloma)، type 2 mixed IgM-RF (hep C)، type 3 polyclonal؛ purpura، Raynaud's، neuropathy، GN؛ treat Hep C."
+    practice: [rheum.L08.180, rheum.L08.181, rheum.L08.182, rheum.L08.183, rheum.L08.184, rheum.L08.185, rheum.L08.186, rheum.L08.187, rheum.L08.188, rheum.L08.189]

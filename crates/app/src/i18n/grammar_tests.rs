@@ -38,3 +38,26 @@ fn other_counted_lines_agree() {
     assert_eq!(plan::days_left(40), "فاضل 40 يوم مذاكرة");
     assert_eq!(anki::contents(12, 2), "12 محاضرة · سؤالين");
 }
+
+/// The catch-up plan and weak-fact lines came in after the sweep above
+/// (#801): «2 أيام» and «حوالي 5 دقيقة» on screen.
+#[test]
+fn catchup_and_weak_lines_agree() {
+    assert_eq!(catchup::days(1), "يوم");
+    assert_eq!(catchup::days(2), "يومين");
+    assert_eq!(catchup::days(5), "5 أيام");
+    assert_eq!(catchup::days(14), "14 يوم");
+    assert_eq!(catchup::offer_line(1, 1), "اتجمّع عندك مراجعة واحدة، حوالي دقيقة. عادي، بيحصل، ونقسمهم على كام يوم.");
+    assert_eq!(catchup::offer_line(120, 2), "اتجمّع عندك 120 مراجعة، حوالي دقيقتين. عادي، بيحصل، ونقسمهم على كام يوم.");
+    assert_eq!(catchup::offer_line(5, 5), "اتجمّع عندك 5 مراجعات، حوالي 5 دقايق. عادي، بيحصل، ونقسمهم على كام يوم.");
+    assert_eq!(catchup::per_day(8), "يعني حوالي 8 دقايق مراجعة في اليوم، الأقدم الأول.");
+    assert_eq!(catchup::per_day(14), "يعني حوالي 14 دقيقة مراجعة في اليوم، الأقدم الأول.");
+    assert_eq!(catchup::today_left(2, 4), "فاضل النهارده مراجعتين، حوالي 4 دقايق.");
+    assert_eq!(catchup::today_left(14, 1), "فاضل النهارده 14 مراجعة، حوالي دقيقة.");
+    assert_eq!(weak::questions(1), "وفيه سؤال واحد من الصفحة دي محتاج تبص عليه تاني.");
+    assert_eq!(weak::questions(2), "وفيه سؤالين من الصفحة دي محتاجين تبص عليهم تاني.");
+    assert_eq!(weak::questions(5), "وفيه 5 أسئلة من الصفحة دي محتاجين تبص عليهم تاني.");
+    assert_eq!(weak::questions(14), "وفيه 14 سؤال من الصفحة دي محتاج تبص عليه تاني.");
+    assert_eq!(weak::study(2), "ذاكر كارتين دلوقتي");
+    assert_eq!(weak::study(5), "ذاكر 5 كروت دلوقتي");
+}

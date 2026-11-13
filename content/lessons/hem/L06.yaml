@@ -6,12 +6,12 @@ lessons:
     title: "ABO: مين يدّي مين؟"
     hook: "كيس دم واحد غلط ممكن يموّت. الفكرة كلها: الـ antibodies اللي في مين، ضد الـ antigens اللي على مين."
     minutes: 8
-    pages: [84, 87]
-    topics: [antigens, antibodies, compatibility]
+    pages: [84, 86]
+    topics: [antigens, antibodies]
     goals:
-      - "تعرف الـ antigens والـ antibodies في كل blood group"
-      - "تفرّق naturally occurring عن immune antibodies، و IgM عن IgG"
-      - "تفرّق major عن minor incompatibility"
+      - "تعرف الـ antigens على الكرة الحمرا ومعمولة من إيه"
+      - "تفرّق allo عن auto، و naturally occurring عن immune antibodies"
+      - "تفرّق IgM عن IgG وتعرف ليه ده بيفرق في المعمل"
     status: unverified
     steps:
       - kind: explain
@@ -25,6 +25,25 @@ lessons:
           الـ membrane حوالي **40% lipids** و **10% carbohydrates** والباقي protein. الـ antigen ممكن يبقى protein أو glycoprotein أو glycolipid:
           - في **Rh** و **Kell** الفرق في الـ **amino acid sequence**.
           - في **ABO** الفرق في الـ **oligosaccharide (sugar) sequence**.
+
+          ليه ده يهمك؟ لأن الـ ABO antigen **سكر** متركّب على البروتين أو الدهون، والسكريات دي شبه سكريات كتير على البكتيريا والأكل. وده (التفسير المقبول، مش في الكتاب) اللي هيشرح بعد شوية ليه الـ anti-A والـ anti-B بيطلعوا لوحدهم من غير نقل دم.
+      - kind: figure
+        page: 85
+        title: "صورة الكتاب: الـ antigens قاعدة فين في الـ membrane"
+        image: { file: hem/L06-antigen-proteins.webp, book: true }
+        alt: "Book diagram of the red cell membrane with blood group proteins: single-pass type 1 and 2 (glycophorins, Kell, Lutheran), multi-pass type 3 (Rh, Kidd, Diego, Duffy) and GPI-anchored type 5 (Yt, Dombrock, Cromer), with sugar chains drawn as red branches."
+        caption: "البروتينات اللي بتشيل الـ antigens: بعضها بيعدّي الـ membrane مرة (**Kell**، glycophorins)، وبعضها كذا مرة (==Rh==، Kidd، Duffy)، وبعضها متعلّق بـ GPI anchor. الفروع الحمرا هي السكريات."
+      - kind: explain
+        page: 84
+        title: "Allo ولا auto؟"
+        quote: "Development of most other allo-Abs requires prior sensitization."
+        text: |
+          الكتاب بيسأل السؤال ده ومش بيجاوبه، والإجابة المقبولة (مش في الكتاب):
+
+          - **Alloantibody**: ضد antigen موجود عند **شخص تاني** ومش موجود عندك، زي anti-Kell عند واحدة اتنقلها دم Kell positive.
+          - **Autoantibody**: ضد antigens **كراتك انت**، زي اللي في الـ autoimmune haemolytic anaemia.
+
+          والكتاب بيقول إن أغلب الـ ==allo-Abs== محتاجة **prior sensitization**: يعني لازم الجسم يشوف الـ antigen الغريب قبل كده (حمل أو نقل) عشان يعمل الـ antibody. الاستثناء الكبير anti-A و anti-B.
       - kind: explain
         page: 85
         title: "Naturally occurring ولا immune؟"
@@ -32,6 +51,19 @@ lessons:
         text: |
           - ==Naturally occurring==: بتطلع من غير pregnancy ولا transfusion، زي **anti-A** و **anti-B**. مش موجودة وقت الولادة، وبتظهر حوالي **3–6 months**، غالبًا ردًا على antigens بكتيريا وفيروسات بنتنفسها أو بناكلها.
           - **Immune (allo-) antibodies**: بس بعد **pregnancy** أو **transfusion**. ده حال أغلب الـ systems غير ABO.
+
+          ليه اسمها "naturally occurring" مع إن الكتاب نفسه بيقول إنها غالبًا ردّ على بكتيريا وأكل؟ لأن مفيش **كرات حمرا** هي اللي حرّضتها، فالاسم اتساب كده: ==non-red-cell-induced==. وعشان كده مش موجودة وقت الولادة: الطفل لسه ما قابلش البكتيريا دي.
+      - kind: check
+        page: 85
+        quote: "These antibodies are not present at birth and, inthe case of anti-A,B, anti-A and anti-B, start to appear in the serum at about 3–6 months of age."
+        question: "When do anti-A and anti-B start to appear in the serum?"
+        options: ["At about 3–6 months of age", "At birth, from the mother", "Only after the first transfusion", "At puberty"]
+        answer: 0
+        why:
+          - "صح: مش موجودين وقت الولادة، وبيظهروا حوالي 3–6 شهور."
+          - "الكتاب بيقول not present at birth."
+          - "دي naturally occurring، مش محتاجة نقل."
+          - "بيظهروا بدري جدًا، مش في البلوغ."
       - kind: reveal
         page: 86
         quote: "Most adults have antibodies to the A or B antigens, or to both; that is, they have 'naturally occurring' antibodies to those ABO antigens they lack."
@@ -57,12 +89,48 @@ lessons:
           الـ **Immunoglobulin M (IgM)** خماسي (pentamer)، دراعاته كتير وطويلة فبيمسك كذا كرة مع بعض لوحده، زي شبكة صيد. الـ **Immunoglobulin G (IgG)** صغير (dimer)، بيلزق على الكرة بس ما يقدرش يلم كرتين، فمحتاج **anti-human globulin** يعمل الكوبري.
 
           (تفسير الشكل من الـ immunology، والمعلومة من الكتاب.)
+
+          يعني في المعمل: الـ ==IgM== (زي anti-A و anti-B) بيبان على طول في الـ saline، أما الـ **IgG** (أغلب الـ alloantibodies) محتاج **Coombs** عشان يبان. ولو نسيت الخطوة دي هتعدّي كيس فيه مشكلة.
+      - kind: check
+        page: 86
+        quote: "Conversely, IgG antibodies do not usually agglutinate saline suspended red cells."
+        question: "Which antibody usually needs anti-human globulin to show agglutination?"
+        options: ["IgG", "IgM", "Anti-A of a group B person", "Anti-B of a group A person"]
+        answer: 0
+        why:
+          - "صح: الـ IgG صغير ومش بيلمّ كرتين في الـ saline، فمحتاج AHG."
+          - "الـ IgM بيعمل agglutination مباشرة (saline agglutinin)."
+          - "الـ anti-A الطبيعي IgM، بيبان في الـ saline."
+          - "نفس الكلام: anti-B الطبيعي IgM."
+      - kind: try
+        items: [hem.L06.001, hem.L06.007, hem.L06.010, hem.L06.013, hem.L06.014]
+    recap:
+      - "Systems مهمة: ABO، Rh، Kell، Kidd، Duffy. ABO = sugar، Rh و Kell = amino acids."
+      - "Allo = ضد antigen عند غيرك؛ auto = ضد كراتك. أغلب الـ allo-Abs محتاجة sensitization قبلها."
+      - "Anti-A و anti-B naturally occurring (بكتيريا وأكل، مش كرات حمرا)، بتظهر 3–6 months. الباقي immune بعد transfusion أو pregnancy."
+      - "IgM بيعمل agglutination في saline. IgG محتاج AHG (Coombs)."
+    practice: [hem.L06.001, hem.L06.002, hem.L06.003, hem.L06.004, hem.L06.005, hem.L06.006, hem.L06.007, hem.L06.008, hem.L06.009, hem.L06.010, hem.L06.011, hem.L06.012, hem.L06.013, hem.L06.014]
+  # ------------------------------------------------------------------
+  # Split from lesson1 on 2026-11-13 (#828): blood group systems and ABO compatibility.
+  - id: hem.L06.lesson6
+    title: "ABO: مين يدّي مين؟"
+    hook: "كيس دم واحد غلط ممكن يموّت. الفكرة كلها: الـ antibodies اللي في مين، ضد الـ antigens اللي على مين."
+    minutes: 7
+    pages: [86, 87]
+    topics: [compatibility]
+    goals:
+      - "تعرف الـ antigens والـ antibodies في كل ABO group"
+      - "تفرّق major عن minor incompatibility وتعرف ليه الـ major أخطر"
+    status: unverified
+    steps:
       - kind: explain
         page: 86
         title: "قد إيه blood group؟"
         quote: "The International Society of Blood Transfusion (ISBT) recognizes 339 blood group antigens; 297 of these are classified into 1 of 33 blood group systems"
         text: |
           الـ **International Society of Blood Transfusion (ISBT)** بتعرف **339 antigens**، منهم **297** في **33 systems**. كل system = **gene واحد** أو cluster من 2–3 genes قريبين، فكل system ==genetically discrete==.
+
+          يعني إيه؟ الـ genes جوه الـ system قريبين من بعض ومفيش recombination بينهم تقريبًا، فبيتورثوا **حتة واحدة**. عشان كده كل system بيتعامل لوحده: الـ ABO بتاعك مالوش دعوة بالـ Kell بتاعك.
       - kind: figure
         page: 87
         quote: "| | Group A | Group B | Group AB | Group O |\n| Red blood cell type | A | B | AB | O |\n| Antibodies in Plasma | Anti-B | Anti-A | None | Anti-A and Anti-B |\n| Antigens in Red Blood Cell | A antigen | B antigen | A and B antigens | None |"
@@ -97,6 +165,19 @@ lessons:
 
           - ==Major==: antibodies **العيان** بتكسّر كرات **المتبرع** (A ← O يعني A لعيان O، B لـ O، A لـ B، B لـ A). ده الخطر الكبير.
           - **Minor**: antibodies **في كيس المتبرع** بتكسّر كرات **العيان** (O لـ A، O لـ B).
+
+          ليه الـ major أخطر؟ التفسير المقبول (مش في الكتاب): في الـ major، **كل plasma العيان** (لترات) فيها antibodies جاهزة بتهجم على كرات الكيس كلها مرة واحدة. في الـ minor، الـ antibodies اللي في plasma الكيس الصغيرة **بتتخفّف** في دم العيان كله، فأثرها أقل.
+      - kind: reveal
+        page: 87
+        quote: "Blood components that contain > 2 ml of RBC must be compatible with patient‘s plasma."
+        prompt: "من اللوحة: ليه كرات O تنفع لأي حد تقريبًا، وعيان AB بياخد كرات من أي group؟"
+        answer: |
+          بص على **الـ antigens والـ antibodies** بس:
+
+          - كرات **O** مفيش عليها A ولا B، فمفيش antibody عند أي عيان يلاقي حاجة يمسكها.
+          - عيان **AB** مفيش في الـ plasma بتاعته anti-A ولا anti-B، فمفيش حاجة تكسّر أي كرات.
+
+          القاعدة اللي في الكتاب: أي component فيه **أكتر من 2 ml RBCs** لازم يبقى compatible مع ==plasma العيان==.
       - kind: aside
         tone: trap
         page: 87
@@ -114,27 +195,57 @@ lessons:
           - "الـ minor لما antibodies المتبرع هي اللي بتهاجم (O لـ A)."
           - "فيه reaction أكيد: anti-A ضد A cells."
           - "الـ Rh مش في السؤال؛ الـ ABO لوحده كفاية يعمل hemolysis."
+      - kind: sort
+        page: 87
+        quote: "Two types of ABO incompatibility can be distinguished:\n  Major incompatibility, where antibodies in the recipient will destroy transfused red cells (e.g. A to O, B to O, A to B, B to A).\n  Minor incompatibility, where antibodies in the donated blood will destroy the recipient's red cells (e.g. O to A, O to B)."
+        prompt: "Major ولا minor؟ (الأول المتبرع، بعده العيان)"
+        bins: ["Major", "Minor"]
+        cards:
+          - { text: "A to O", bin: 0 }
+          - { text: "B to O", bin: 0 }
+          - { text: "A to B", bin: 0 }
+          - { text: "B to A", bin: 0 }
+          - { text: "O to A", bin: 1 }
+          - { text: "O to B", bin: 1 }
+        why: "اسأل: الـ antibody اللي هيهجم في مين؟ لو في العيان (عنده anti- ضد كرات الكيس) يبقى major. لو في plasma الكيس (O معاه anti-A و anti-B) ضد كرات العيان يبقى minor."
       - kind: try
-        items: [hem.L06.006, hem.L06.013, hem.L06.018, hem.L06.019, hem.L06.020]
+        items: [hem.L06.015, hem.L06.017, hem.L06.018, hem.L06.019, hem.L06.020]
     recap:
-      - "Systems مهمة: ABO، Rh، Kell، Kidd، Duffy. ABO = sugar، Rh و Kell = amino acids."
-      - "Anti-A و anti-B naturally occurring، بتظهر 3–6 months. الباقي immune بعد transfusion أو pregnancy."
-      - "IgM بيعمل agglutination في saline. IgG محتاج AHG."
-      - "Major: antibodies العيان ضد كرات المتبرع. Minor: antibodies المتبرع ضد كرات العيان."
-    practice: [hem.L06.001, hem.L06.002, hem.L06.003, hem.L06.004, hem.L06.005, hem.L06.006, hem.L06.007, hem.L06.008, hem.L06.009, hem.L06.010, hem.L06.011, hem.L06.012, hem.L06.013, hem.L06.014, hem.L06.015, hem.L06.016, hem.L06.017, hem.L06.018, hem.L06.019, hem.L06.020, hem.L06.021, hem.L06.022]
+      - "ISBT: 339 antigens، 297 في 33 systems؛ كل system gene واحد أو cluster، genetically discrete."
+      - "الـ antibodies دايمًا ضد اللي مش موجود: A معاه anti-B، B معاه anti-A، O الاتنين، AB ولا حاجة."
+      - "أي component فيه >2 ml RBCs لازم compatible مع plasma العيان."
+      - "Major: antibodies العيان ضد كرات المتبرع (الأخطر). Minor: antibodies المتبرع ضد كرات العيان."
+    practice: [hem.L06.015, hem.L06.016, hem.L06.017, hem.L06.018, hem.L06.019, hem.L06.020, hem.L06.021, hem.L06.022]
   # ------------------------------------------------------------------
   - id: hem.L06.lesson2
-    title: "الكيس المناسب للعيان المناسب"
-    hook: "مش كل نزيف عايز whole blood، ومش كل خلية عايزة نفس المعاملة: كل component ليه دلع."
-    minutes: 10
-    pages: [88, 93]
-    topics: [components, derivatives]
+    title: "الكيس المناسب للعيان المناسب: الكرات الحمرا وتعديلاتها"
+    hook: "مش كل نزيف عايز whole blood، ومش كل كيس عايز نفس المعاملة: filter، غسيل، ولا إشعاع؟"
+    minutes: 9
+    pages: [88, 90]
+    topics: [components]
     goals:
-      - "تعرف كل component وإمتى تديه"
-      - "تفرّق leukoreduced و washed و irradiated"
-      - "تعرف الـ derivatives: albumin و IVIG و Rh immune globulin والـ factors"
+      - "تفرّق الـ components عن الـ derivatives والـ cellular عن الـ non-cellular"
+      - "تعرف إمتى whole blood وإمتى packed RBCs"
+      - "تفرّق leukoreduced و washed و irradiated وتعرف ليه كل واحد"
     status: unverified
     steps:
+      - kind: figure
+        page: 88
+        title: "صورة الكتاب: من الكيس الكامل لكل حاجة"
+        image: { file: hem/L06-components-derivatives.webp, book: true }
+        alt: "Book chart: whole blood splits into blood components (packed red cells, granulocyte concentrate, cryoprecipitate, platelet concentrate, fresh frozen plasma) and blood derivatives (factor VIII and IX concentrates, albumin, immunoglobulins, prothrombin complex concentrate)."
+        caption: "الـ **components** بتتفصل من الكيس في بنك الدم، والـ ==derivatives== بتتعمل في مصنع من plasma متبرعين كتير. الدرس ده للكرات الحمرا، والدرس الجاي للباقي."
+      - kind: explain
+        page: 88
+        title: "Cellular و non-cellular"
+        quote: "Blood components\n  Cellular:\n    Packed red blood cells (PRBCS)\n    Platelets, random (from whole blood)\n    Platelets, apheresis\n  Possible modifications (specifications):\n    CMV-negative\n    Leukoreduced\n    Irradiated\n    Washed (only PRBCs)\n  Non-cellular:\n    Plasma (FFP, FP24, thawed plasma, etc)\n    Cryoprecipitate\n    Above specifications do not apply"
+        text: |
+          الـ components نوعين:
+
+          - **Cellular**: packed RBCs، و platelets (random من الـ whole blood أو apheresis).
+          - **Non-cellular**: plasma (FFP وغيره) و cryoprecipitate.
+
+          والتعديلات (==CMV-negative==، leukoreduced، irradiated، washed) للـ **cellular بس**، و washed للـ PRBCs بس. ليه؟ التفسير المقبول (مش في الكتاب): كل التعديلات دي بتستهدف **خلايا**: الـ WBCs اللي فيها الـ CMV، والـ lymphocytes اللي بتعمل GVHD، أو الـ plasma اللي حوالين الكرات. الـ plasma والـ cryo مفيهمش خلايا تتعدّل.
       - kind: explain
         page: 88
         title: "Whole blood و packed RBCs"
@@ -142,6 +253,19 @@ lessons:
         text: |
           - **Whole blood**: لـ ==acute hypovolemia with red blood cell (RBC) loss==. مش مصدر platelets ولا granulocytes شغّالة، لأنهم بيبوظوا في **أقل من 24 ساعة** في التلاجة.
           - **Packed red blood cells (RBCs)**: لـ **symptomatic anemia**. الوحدة بتعلّي الـ Hb حوالي **1 g/dl** في البالغ متوسط الحجم.
+
+          ليه الـ whole blood للنزيف الحاد بس؟ لأن العيان ده خسر **حجم وكرات** مع بعض. أما عيان الأنيميا المزمنة فحجمه طبيعي، والتفسير المقبول (مش في الكتاب): لو اديته whole blood هتحمّل القلب plasma مالوش لازمة، فبندّيله الكرات بس (packed).
+      - kind: check
+        page: 89
+        quote: "1 Unit of packed RBC increases Hb by 1 g/dl in an average-sized adult.\nIndications: treatment of symptomatic anemia."
+        question: "An average-sized adult with symptomatic anaemia has Hb 6 g/dl. About what Hb do you expect after 2 units of packed RBCs?"
+        options: ["About 8 g/dl", "About 7 g/dl", "About 10 g/dl", "About 12 g/dl"]
+        answer: 0
+        why:
+          - "صح: كل وحدة ≈ 1 g/dl، فوحدتين ≈ +2."
+          - "ده وحدة واحدة بس."
+          - "ده محتاج حوالي 4 وحدات."
+          - "ده محتاج حوالي 6 وحدات."
       - kind: table
         page: 89
         quote: "Leukoreduction (LR)\n  Filtration with specialized filters that bind 99.9% of WBC from donor unit\n  LR essentially eliminates risk of:\n    Febrile non-hemolytic transfusion reaction\n    CMV, HLTV I-II\n    Herpesviruses, EBV\n    Trypanosoma cruzi\n  Decreases risk of TRALI\n  Universal LR is common practice"
@@ -152,6 +276,19 @@ lessons:
           - ["Washed PRBC (no plasma, K, additive)", "IgA deficiency, hyperkalemia, allergy"]
           - ["Irradiated (donor lymphocytes stopped)", "TA-GVHD"]
         hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 89
+        title: "ليه كل تعديل بيمنع اللي بيمنعه؟"
+        quote: "Washed PRBCs\n  Purpose\n    To remove supernatant (plasma proteins, K, additive solution, etc)\n  Indications\n    Severe IgA deficiency to prevent anaphylaxis\n    Significant hyperkalemia\n    Ongoing hemolysis from anti-A or anti-B\n    History of repetitive allergic reactions\n  Risk\n    Contamination in the process of opening bag and adding saline multiple times - 24 hours of shelf-life"
+        text: |
+          **Leukoreduction**: filter بيمسك **99.9%** من الـ WBCs. والتفسير المقبول (مش في الكتاب) لقايمته: الـ ==FNHTR== بييجي من cytokines بتفرزها الـ WBCs في الكيس، والـ **CMV** والـ **HTLV** والـ **EBV** فيروسات عايشة **جوه الـ WBCs**. شيل الخلايا تشيل المصدر.
+
+          **Washed PRBCs**: بنشيل الـ **supernatant** (plasma proteins، K، additive solution):
+          - **Severe IgA deficiency**: عشان الـ IgA اللي في plasma المتبرع ما يعملش anaphylaxis.
+          - **Hyperkalemia**: الـ K اللي خرج من الكرات في التخزين بيتشال.
+          - **Ongoing hemolysis from anti-A/anti-B** و **repetitive allergic reactions**: الـ antibodies والبروتينات اللي في الـ plasma بتتشال.
+
+          التمن: الكيس اتفتح وادّاله saline كذا مرة، فخطر ==contamination== ويعيش **24 ساعة** بس.
       - kind: explain
         remind: [hem.L06.032]
         page: 90
@@ -165,6 +302,8 @@ lessons:
           - **Congenital immunodeficiency**
           - اللي بياخدوا **fludarabine / nelarabine / clofarabine**
           - بعض المستشفيات لكل مرضى السرطان، بس مش absolute
+
+          الخيط اللي بيجمعهم: عيان **مش قادر يقتل** lymphocytes المتبرع، يا إما لأن مناعته ضعيفة (transplant، immunodeficiency، جنين وطفل صغير، والـ fludarabine اللي بيضرب الـ lymphocytes)، يا إما لأنه **شايفها شبهه** (القرايب، في الـ reveal الجاي).
       - kind: reveal
         page: 90
         quote: "Irradiation\n  Purpose\n    To prevent lymphocyte proliferation in recipient and transfusion-associated graft-versus-host disease (TA-GVHD)\n  Indications\n    Stem cell transplant patients: Must give at least 30 days before, and indefinitely after\n    Recipients of blood products from 1st degree relatives\n    Intrauterine transfusions & babies up to 4 months\n    Congenital Immunodeficiency Syndromes\n    Recipients of Fludarabine/Nelarabine/Clofarabine\n    Some hospitals irradiate for all cancer patients – not an absolute indication"
@@ -173,6 +312,39 @@ lessons:
           بالعكس، هنا القريب أخطر. الـ lymphocytes بتاعة الأخ شبه العيان في الـ **HLA**، فجهاز مناعة العيان **مش بيشوفها غريبة** وما يقتلهاش.
 
           تفضل عايشة وتتكاثر وتهاجم أنسجة العيان: ده ==TA-GVHD==. الـ irradiation بيمنعها تتكاثر.
+      - kind: check
+        page: 90
+        quote: "Recipients of Fludarabine/Nelarabine/Clofarabine"
+        question: "A man with CLL on fludarabine needs red cells. Which modification is a must?"
+        options: ["Irradiated", "Washed", "CMV-negative only", "None"]
+        answer: 0
+        why:
+          - "صح: الـ fludarabine في قايمة الـ irradiation، عشان يمنع الـ TA-GVHD."
+          - "الـ washing للـ IgA deficiency والـ K والـ allergy."
+          - "الـ CMV مش القضية هنا؛ الخطر lymphocytes المتبرع."
+          - "الـ fludarabine indication صريحة للـ irradiation."
+      - kind: try
+        items: [hem.L06.024, hem.L06.026, hem.L06.029, hem.L06.032, hem.L06.033]
+    recap:
+      - "Components (بنك الدم) مقابل derivatives (مصنع، fractionation). التعديلات للـ cellular بس."
+      - "Whole blood: acute hypovolemia (platelets و granulocytes بيبوظوا في التلاجة <24 ساعة). PRBC: symptomatic anemia، +1 g/dl للوحدة."
+      - "LR (99.9% WBCs): FNHTR، CMV، HTLV، EBV، أقل TRALI. Washed: IgA deficiency، K، anti-A/B hemolysis، allergy؛ 24 ساعة بس."
+      - "Irradiated: TA-GVHD (SCT 30 يوم قبل وبعد على طول، أقارب، intrauterine وأطفال 4 شهور، immunodeficiency، fludarabine)."
+    practice: [hem.L06.023, hem.L06.024, hem.L06.025, hem.L06.026, hem.L06.027, hem.L06.028, hem.L06.029, hem.L06.030, hem.L06.031, hem.L06.032, hem.L06.033, hem.L06.044, hem.L06.045, hem.L06.117]
+  # ------------------------------------------------------------------
+  # Split from lesson2 on 2026-11-13 (#828): platelets, plasma, cryo and derivatives.
+  - id: hem.L06.lesson7
+    title: "Platelets، plasma، cryo، والـ derivatives"
+    hook: "الـ plasma بتتفصل وتتجمد وتدوب على البارد وتتكسّر في مصنع: كل خطوة بتطلّع منتج ليه عيانه."
+    minutes: 10
+    pages: [90, 93]
+    topics: [components, derivatives]
+    goals:
+      - "تعرف إمتى platelets وليه بتفشل أحيانًا (refractoriness)"
+      - "تعرف إمتى FFP وإمتى cryo، وليه الـ FFP مش للـ volume"
+      - "تعرف الـ derivatives: Rh immune globulin و albumin و IVIG والـ factors"
+    status: unverified
+    steps:
       - kind: explain
         page: 90
         title: "Platelets و الـ refractoriness"
@@ -184,6 +356,19 @@ lessons:
           - **Non-immune**: fever، infection، splenomegaly، disseminated intravascular coagulation (DIC)، massive bleeding، أدوية
           - **Immune**: transfusions كتير (خصوصًا non-leukoreduced) و **multiparity** ← antibodies ضد **Human leukocyte antigen (HLA)** و **human platelet antigen (HPA)**
           - العلاج: **HLA-compatible** أو **cross-match compatible** platelets
+
+          ليه الـ immune refractoriness بتيجي مع النقل الكتير والحمل الكتير؟ لأن كل مرة الجسم بيشوف **HLA** و **HPA** غريبة (من متبرع أو من الجنين) فبيعمل ==alloantibodies==، وبعدين أي platelets جديدة بتتكسّر على طول. ولأن الـ HLA أغلبه على الـ WBCs، الـ **non-leukocyte reduced** platelets بتحسّس أكتر (التفسير المقبول، مش في الكتاب).
+      - kind: check
+        page: 90
+        quote: "Immune-mediated: repeated transfusions especially with non-leukocyte reduced PLT and multiparity (alloimmunization to HLA and human PLT antigens)."
+        question: "A woman with five previous pregnancies and acute leukaemia gets no platelet rise after several transfusions. No fever, no splenomegaly. Best next product?"
+        options: ["HLA-compatible or cross-match compatible platelets", "More random-donor platelets", "Fresh frozen plasma", "Cryoprecipitate"]
+        answer: 0
+        why:
+          - "صح: الـ multiparity بتشاور على immune refractoriness (HLA/HPA)، فالحل platelets متوافقة."
+          - "نفس الـ antibodies هتكسّرها تاني."
+          - "الـ FFP factors مش platelets."
+          - "الـ cryo للـ fibrinogen، مش للـ platelets."
       - kind: explain
         remind: [hem.L06.043, hem.L06.042]
         page: 91
@@ -193,6 +378,48 @@ lessons:
           - **Granulocytes**: apheresis من متبرع واخد **G-CSF**. لـ **absolute neutrophil count (ANC) <0.5** مع **documented infection**، أو **chronic granulomatous disease (CGD)**.
           - **Fresh frozen plasma (FFP)**: نقص factors كتير (نزيف أو قبل procedure)، **DIC**، **liver disease**، **massive transfusion**، **plasma exchange (TTP)**، **warfarin reversal**. ==مش للـ volume== ولا للـ protein في سوء التغذية.
           - **Cryoprecipitate**: فيه **VIII** و **fibrinogen** و **XIII** و **von Willebrand factor (vWF)**. لـ fibrinogen deficiency، dysfibrinogenemia، XIII deficiency، DIC، و hemophilia A أو von Willebrand disease (vWD) لو مفيش concentrate.
+
+          الأسباب:
+          - المتبرع بياخد **G-CSF** عشان نخرج granulocytes كتير من النخاع للدم قبل الـ apheresis.
+          - الـ FFP فيه **كل الـ factors**، عشان كده بيمشي مع أي نقص متعدد (DIC، liver، warfarin). وللـ **congenital** deficiency الكتاب بيفضّل الـ concentrate عشان يقلّل نقل الفيروسات.
+          - ليه مش للـ volume؟ التفسير المقبول (مش في الكتاب): فيه crystalloids و albumin أأمن وأرخص، والـ FFP منتج دم بمخاطره (infection، reactions) من غير فايدة هنا.
+      - kind: figure
+        page: 91
+        quote: "A unit of cryoprecipitate is a fraction of plasma and contains factor VIII, fibrinogen, factor XIII and vWF activity."
+        title: "رحلة الـ plasma"
+        alt: "Flow: whole blood is spun into packed red cells, platelets and plasma. Plasma is frozen as FFP with all factors. FFP thawed cold leaves cryoprecipitate with VIII, fibrinogen, XIII and vWF. Plasma pooled from many donors is fractionated in a factory into derivatives: albumin, immunoglobulins and factor concentrates, which are heat or chemically treated against viruses."
+        caption: "الـ **FFP** فيه كل الـ factors؛ الـ ==cryo== حتة منه (8، 1، 13، vWF)؛ والـ **derivatives** بتتعمل في مصنع من plasma متبرعين كتير وبتتعالج ضد الفيروسات."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L06c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="95" y="8" width="140" height="30" rx="10" class="fg-ink"/>
+            <text x="165" y="28" text-anchor="middle" class="t-b">Whole blood</text>
+            <path d="M120 38 L50 68" class="fg-arrow" marker-end="url(#L06c)"/>
+            <path d="M165 38 V68" class="fg-arrow" marker-end="url(#L06c)"/>
+            <path d="M210 38 L280 68" class="fg-arrow" marker-end="url(#L06c)"/>
+            <rect x="5" y="70" width="95" height="30" rx="8" class="fg-bad"/>
+            <text x="52" y="90" text-anchor="middle" class="t-sm">Packed RBCs</text>
+            <rect x="118" y="70" width="95" height="30" rx="8" class="fg-box"/>
+            <text x="165" y="90" text-anchor="middle" class="t-sm">Platelets</text>
+            <rect x="230" y="70" width="95" height="30" rx="8" class="fg-acc"/>
+            <text x="277" y="90" text-anchor="middle" class="t-sm t-b">Plasma</text>
+            <path d="M260 100 L200 135" class="fg-arrow" marker-end="url(#L06c)"/>
+            <path d="M290 100 V215" class="fg-arrow" marker-end="url(#L06c)"/>
+            <rect x="110" y="137" width="150" height="40" rx="8" class="fg-acc"/>
+            <text x="185" y="155" text-anchor="middle" class="t-sm t-b">FFP</text>
+            <text x="185" y="170" text-anchor="middle" class="t-sm">all factors</text>
+            <path d="M150 177 L110 212" class="fg-arrow" marker-end="url(#L06c)"/>
+            <text x="150" y="200" class="t-sm t-mut">thaw cold</text>
+            <rect x="10" y="214" width="150" height="44" rx="8" class="fg-good"/>
+            <text x="85" y="232" text-anchor="middle" class="t-sm t-b">Cryoprecipitate</text>
+            <text x="85" y="248" text-anchor="middle" class="t-sm">VIII, fibrinogen, XIII, vWF</text>
+            <rect x="175" y="217" width="150" height="104" rx="8" class="fg-thin"/>
+            <text x="250" y="236" text-anchor="middle" class="t-sm t-b">Derivatives</text>
+            <text x="250" y="253" text-anchor="middle" class="t-sm">pooled, fractionated</text>
+            <text x="250" y="270" text-anchor="middle" class="t-sm">albumin, IVIG, Rh Ig</text>
+            <text x="250" y="287" text-anchor="middle" class="t-sm">factor concentrates</text>
+            <text x="250" y="306" text-anchor="middle" class="t-sm t-mut">virus-inactivated</text>
+          </svg>
       - kind: mnemonic
         page: 91
         quote: "A unit of cryoprecipitate is a fraction of plasma and contains factor VIII, fibrinogen, factor XIII and vWF activity."
@@ -223,6 +450,16 @@ lessons:
           - **Rh immune globulin**: للأم **Rh-negative** اللي جنينها **Rh-positive**، علشان ما تعملش **anti-D** و **haemolytic disease of the newborn (HDN)**.
           - **Albumin**: hypovolemia، acute liver failure، cardiopulmonary bypass، burns، وقبل exchange transfusion في HDN (بيمسك الـ bilirubin ويقلّل الـ kernicterus).
           - **Intravenous immunoglobulin (IVIG)**: passive immunity، primary immunodeficiency، **refractory immune thrombocytopenia (ITP)**، Human immunodeficiency virus (HIV) thrombocytopenia، cytomegalovirus (CMV) pneumonitis، Guillain-Barré.
+
+          ليه الـ Rh immune globulin بيمنع الـ anti-D؟ التفسير المقبول (مش في الكتاب): بيمسك كرات الجنين الـ Rh-positive اللي عدّت لدم الأم ويخلّصها **قبل** ما جهاز مناعتها يلحق يتعلّمها ويعمل ==anti-D== بنفسه. والـ albumin في الـ HDN: الكتاب بيقول إنه **بيمسك الـ free bilirubin**، فأقل bilirubin يوصل للمخ (kernicterus).
+      - kind: reveal
+        page: 92
+        quote: "Ther are heat-or chemically treated to kill or inactivate viruses (DD. Components)"
+        prompt: "ليه الـ derivatives بتتعالج بالحرارة أو كيميائيًا ضد الفيروسات، والـ components (زي الـ PRBCs) لأ؟"
+        answer: |
+          الكتاب بيقول إن الـ derivatives ==heat- or chemically treated== وده الفرق بينها وبين الـ components.
+
+          التفسير المقبول (مش في الكتاب): الـ derivative **بروتين** (albumin، immunoglobulin، factor)، يستحمل المعالجة دي. أما الـ component فيه **خلايا عايشة** (كرات، platelets) لو سخّنتها هتموت. وكمان الـ derivative معمول من plasma **آلاف المتبرعين** متجمعة، فلو فيه فيروس هيوصل لناس كتير، فلازم يتعالج.
       - kind: table
         page: 93
         quote: "Recombinant factor VIIa (rVIIa):\n  - F VII deficiency (rare).\n  - Refractory hemophilia A or B.\n  - High F VIII or IX inhibitor levels in hemophilia A or B.\n  - Severe bleeding refractory to other therapy.\n  Factor VIII concentrate: F VIII def. and vWD.\n  Recombinant F VIII: hemophilia A."
@@ -248,14 +485,14 @@ lessons:
           - "الـ albumin مالوش دعوة بالتجلط."
           - "الـ Rh immune globulin للحوامل Rh-negative."
       - kind: try
-        items: [hem.L06.026, hem.L06.028, hem.L06.032, hem.L06.039, hem.L06.042]
+        items: [hem.L06.035, hem.L06.039, hem.L06.042, hem.L06.050, hem.L06.053]
     recap:
-      - "Whole blood: hypovolemia. PRBC: symptomatic anemia، +1 g/dl للوحدة."
-      - "LR: FNHTR و CMV و TRALI. Washed: IgA deficiency، K، allergy. Irradiated: TA-GVHD (SCT، أقارب، fludarabine)."
-      - "Platelet refractoriness: non-immune (fever، spleen، DIC) أو immune (HLA/HPA) ← HLA-compatible."
-      - "FFP مش للـ volume. Cryo = **8-1-13-W**."
-      - "rFVIIa للـ inhibitors. Rh Ig تمنع anti-D. Albumin و IVIG ليهم قوايم."
-    practice: [hem.L06.023, hem.L06.024, hem.L06.025, hem.L06.026, hem.L06.027, hem.L06.028, hem.L06.029, hem.L06.030, hem.L06.031, hem.L06.032, hem.L06.033, hem.L06.034, hem.L06.035, hem.L06.036, hem.L06.037, hem.L06.038, hem.L06.039, hem.L06.040, hem.L06.041, hem.L06.042, hem.L06.043, hem.L06.044, hem.L06.045, hem.L06.046, hem.L06.047, hem.L06.048, hem.L06.049, hem.L06.050, hem.L06.051, hem.L06.052, hem.L06.053, hem.L06.054, hem.L06.055, hem.L06.117, hem.L06.121]
+      - "Platelets: bleeding مع thrombocytopenia أو qualitative defects. Refractoriness: non-immune (fever، spleen، DIC) أو immune (HLA/HPA من نقل وحمل) ← HLA-compatible."
+      - "Granulocytes: متبرع واخد G-CSF، لـ ANC <0.5 مع infection أو CGD."
+      - "FFP: كل الـ factors (DIC، liver، warfarin، TTP exchange)، مش للـ volume. Cryo = **8-1-13-W**."
+      - "Derivatives: من plasma مجمعة ومتعالجة ضد الفيروسات. Rh Ig تمنع anti-D، albumin يمسك bilirubin، IVIG ليه قايمة."
+      - "rFVIIa للـ inhibitors والـ FVII deficiency. Factor IX complex للـ hemophilia B و X و VII."
+    practice: [hem.L06.034, hem.L06.035, hem.L06.036, hem.L06.037, hem.L06.038, hem.L06.039, hem.L06.040, hem.L06.041, hem.L06.042, hem.L06.043, hem.L06.046, hem.L06.047, hem.L06.048, hem.L06.049, hem.L06.050, hem.L06.051, hem.L06.052, hem.L06.053, hem.L06.054, hem.L06.055, hem.L06.121]
   # ------------------------------------------------------------------
   - id: hem.L06.lesson3
     title: "العيان سخن وهو بياخد دم"
@@ -289,6 +526,19 @@ lessons:
           - السبب: **cytokines** اتجمعت في الكيس وقت التخزين.
           - العلاج: **بطّأ** النقل و **paracetamol**.
           - الوقاية: **leukodepletion**، شيل الـ plasma، و antipyretic premedication.
+
+          ليه diagnosis of exclusion؟ لأن نفس الحرارة ممكن تكون أول علامة لحاجة بتموّت (AHTR أو TRALI أو كيس ملوّث). فالـ FNHTR الأشهر، بس ما تقولهوش غير لما تستبعد الخطير.
+      - kind: check
+        page: 94
+        quote: "Management: slow the rate of transfusion, and antipyretic (paracetamol)."
+        question: "Halfway through a platelet transfusion, temperature rises 1.2°C with chills. BP normal, no back pain, no rash, no dyspnoea. Management?"
+        options: ["Slow the transfusion and give paracetamol", "Give adrenaline", "Give antihistamine only", "Start broad-spectrum antibiotics and stop all products for a week"]
+        answer: 0
+        why:
+          - "صح: صورة FNHTR بعد ما استبعدت الخطير: بطّأ وادّي paracetamol."
+          - "الـ adrenaline للـ anaphylaxis، ومفيهاش حرارة."
+          - "الـ antihistamine للـ urticaria."
+          - "مفيش علامات sepsis (shock، hypotension)؛ ده over-treatment."
       - kind: reveal
         page: 94
         quote: "Mechanism: Cytokines in blood component bag accumulated during storage passively transferred from the donor to the recipient in the blood component."
@@ -306,6 +556,8 @@ lessons:
 
           **Anaphylactic**: لا متوقع ولا ممكن منعه. flushing، vomiting، diarrhea، **hypertension ثم hypotension**، edema، wheeze، stridor، laryngeal edema، shock. ==Fever is not a feature==.
           السبب: **anti-IgA** في عيان **Immunoglobulin A (IgA) deficient**. العلاج: **stop**، **adrenaline**، steroids، circulatory support.
+
+          ليه عيان الـ IgA deficiency بالذات؟ التفسير المقبول (مش في الكتاب): جسمه عمره ما عمل IgA، فبيشوف الـ IgA اللي في plasma المتبرع **بروتين غريب** ويعمل ضده antibodies. وعشان كده الـ **washed PRBCs** (من غير plasma) من indications الدرس اللي فات.
       - kind: aside
         tone: exam
         page: 95
@@ -321,6 +573,8 @@ lessons:
           ==AHTR = ABO incompatibility = mismatched transfusion==.
           - الـ **Immunoglobulin M (IgM) anti-A/anti-B** الجاهزين في العيان بيكسّروا الكرات المتنقلة.
           - الصورة: fever، chills، **flank/back pain**، dyspnea، chest pain، anxiety، flushing، throbbing head، nausea، وفي الشديد **hypotension** و **renal failure** و shock و death.
+
+          ليه بالشدة دي؟ لأن الـ antibodies **IgM جاهزة** (naturally occurring، من أول الدرس الأول) فبتهجم في **ثواني**، والتفسير المقبول (مش في الكتاب): الـ IgM بيشغّل الـ complement فالكرات تتفرتك **جوه الأوعية** (intravascular)، والـ free Hb يوصل للكلية ويأذيها، ومعاه الـ hypotension.
       - kind: order
         page: 96
         quote: "Management:\n  - Stop transfusion.\n  - Support of BP and renal blood flow with fluids and pressors and induction of diuresis to maintain urine output > 100 ml/hour.\n  - Check the identity of the patient and units transfused.\n  - Obtain blood samples (repeat type, cross match, DAT (should be +ve), HCT decrease, LDH increase, bilirubin increase (within 6-10 Hs) as indicators of hemolysis."
@@ -330,7 +584,7 @@ lessons:
           - "Fluids and pressors; diuresis to keep urine >100 ml/h"
           - "Check the patient's identity and the units"
           - "Send repeat type, cross-match, DAT, Hct, LDH, bilirubin"
-        why: "الأول وقّف المصدر، وبعدين احمي الكلية والضغط، وبعدين اعرف حصل إزاي (غالبًا خطأ هوية)، وآخر حاجة التحاليل."
+        why: "الأول وقّف المصدر، وبعدين احمي الكلية والضغط، وبعدين اعرف حصل إزاي (غالبًا خطأ هوية)، وآخر حاجة التحاليل. الـ diuresis فوق 100 ml/h عشان الكلية تفضل شغالة وتغسل الـ free Hb."
       - kind: explain
         page: 96
         title: "التشخيص"
@@ -340,6 +594,8 @@ lessons:
 
           التأكيد: ==positive direct antiglobulin test (DAT)== (anti-IgG و/أو anti-C3) و **positive elution** بالـ alloantibody على الكرات المتنقلة.
           لو الـ serology **negative** ولقيت سبب physical (thermal، osmotic، mechanical، chemical) ← **non-immune** hemolysis.
+
+          ليه الـ haptoglobin بيقل والـ LDH بيعلى؟ التفسير المقبول (مش في الكتاب): الـ haptoglobin بيمسك الـ free Hb ويتشال معاه فبيخلص، والـ LDH بيطلع من جوه الكرات اللي اتفرتكت. واتنين على الأقل عشان علامة واحدة لوحدها ممكن تيجي من حاجة تانية.
       - kind: figure
         page: 94
         quote: "1. Febrile Non-hemolytic Transfusion Reaction\n  Most common blood transfusion reaction\n  Defined by > 1°C increase in temperature. It is a diagnosis of exclusion (AHTR, TRALI and sepsis)."
@@ -387,15 +643,15 @@ lessons:
     practice: [hem.L06.056, hem.L06.057, hem.L06.058, hem.L06.059, hem.L06.060, hem.L06.061, hem.L06.062, hem.L06.063, hem.L06.064, hem.L06.065, hem.L06.066, hem.L06.067, hem.L06.068, hem.L06.069, hem.L06.070, hem.L06.071, hem.L06.072, hem.L06.073, hem.L06.074, hem.L06.116, hem.L06.119]
   # ------------------------------------------------------------------
   - id: hem.L06.lesson4
-    title: "بعد ما الكيس يخلص"
-    hook: "العيان روّح كويس، ورجع بعد أسبوع أصفر أو مليان purpura. وفي العنبر، عيان قلب اتخنق من كيس زيادة."
-    minutes: 9
-    pages: [97, 101]
-    topics: [delayed-reactions, non-immune]
+    title: "بعد ما الكيس يخلص: DHTR و PTP"
+    hook: "العيان روّح كويس، ورجع بعد أسبوع أصفر أو مليان purpura. الذاكرة المناعية صحيت."
+    minutes: 8
+    pages: [97, 99]
+    topics: [delayed-reactions]
     goals:
-      - "تعرف الـ DHTR والـ PTP: الميعاد والسبب والعلاج"
-      - "تعرف الـ bacterial contamination والـ TACO"
-      - "تحفظ الـ TTIs والـ hemosiderosis"
+      - "تعرف الـ DHTR: الميعاد والسبب وليه مفيش hemoglobinuria"
+      - "تعرف إمتى تتدخل في الـ DHTR"
+      - "تعرف الـ PTP: الميعاد والـ antibody والعلاج"
     status: unverified
     steps:
       - kind: explain
@@ -407,8 +663,41 @@ lessons:
           - الـ triad: ==fever، hyperbilirubinemia، anemia==، و **direct antiglobulin test (DAT) +ve**.
           - **No hemoglobinuria** لأن الـ hemolysis **extravascular**.
           - السبب: **anamnestic reaction** في عيان اتعمله alloimmunization قبل كده (transfusion أو pregnancy).
-          - العلاج: self-limited، تابع الـ Hb. لو hemolysis شغّالة: **glucocorticoid** أو **intravenous immunoglobulin (IVIG)** أو **rituximab**، و hydration للكلية.
-          - الوقاية: أي دم بعد كده **antigen-negative** للـ antibody ده.
+          - الوقاية: أي دم بعد كده **antigen-negative** للـ antibody ده، عشان الـ memory ما تصحاش تاني.
+      - kind: figure
+        page: 97
+        quote: "There is no Hemoglobinuria because hemolysis is extra-vascular."
+        title: "جوه الأوعية ولا في الطحال؟"
+        alt: "Two columns. AHTR: IgM anti-A or anti-B, complement, red cells burst inside vessels, free haemoglobin, haemoglobinuria, minutes. DHTR: IgG from memory cells coats red cells, the spleen removes them, bilirubin rises, no haemoglobinuria, 1 to 3 weeks."
+        caption: "الـ **AHTR**: IgM جاهز والكرات تتفرتك جوه الأوعية (hemoglobinuria). الـ **DHTR**: ==IgG== بييجي بعد أيام ويغطي الكرات والطحال يشيلها (extravascular)، فـ jaundice من غير hemoglobinuria."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L06d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <text x="82" y="20" text-anchor="middle" class="t-b t-bad">AHTR</text>
+            <text x="248" y="20" text-anchor="middle" class="t-b t-acc">DHTR</text>
+            <rect x="10" y="32" width="145" height="34" rx="8" class="fg-bad"/>
+            <text x="82" y="54" text-anchor="middle" class="t-sm">IgM anti-A / anti-B</text>
+            <rect x="175" y="32" width="145" height="34" rx="8" class="fg-acc"/>
+            <text x="248" y="54" text-anchor="middle" class="t-sm">Memory → IgG</text>
+            <path d="M82 66 V92" class="fg-arrow" marker-end="url(#L06d)"/>
+            <path d="M248 66 V92" class="fg-arrow" marker-end="url(#L06d)"/>
+            <rect x="10" y="94" width="145" height="44" rx="8" class="fg-box"/>
+            <text x="82" y="112" text-anchor="middle" class="t-sm">Complement: cells</text>
+            <text x="82" y="128" text-anchor="middle" class="t-sm">burst in vessels</text>
+            <rect x="175" y="94" width="145" height="44" rx="8" class="fg-box"/>
+            <text x="248" y="112" text-anchor="middle" class="t-sm">Coated cells</text>
+            <text x="248" y="128" text-anchor="middle" class="t-sm">removed by spleen</text>
+            <path d="M82 138 V164" class="fg-arrow" marker-end="url(#L06d)"/>
+            <path d="M248 138 V164" class="fg-arrow" marker-end="url(#L06d)"/>
+            <rect x="10" y="166" width="145" height="44" rx="8" class="fg-bad"/>
+            <text x="82" y="184" text-anchor="middle" class="t-sm">Free Hb:</text>
+            <text x="82" y="200" text-anchor="middle" class="t-sm t-b">haemoglobinuria</text>
+            <rect x="175" y="166" width="145" height="44" rx="8" class="fg-acc"/>
+            <text x="248" y="184" text-anchor="middle" class="t-sm">Bilirubin up,</text>
+            <text x="248" y="200" text-anchor="middle" class="t-sm t-b">no haemoglobinuria</text>
+            <text x="82" y="240" text-anchor="middle" class="t-sm t-mut">minutes</text>
+            <text x="248" y="240" text-anchor="middle" class="t-sm t-mut">1–3 weeks</text>
+          </svg>
       - kind: reveal
         page: 97
         quote: "Mechanism: Anamnestic reaction in a previously alloimmunized patient (by transfusion or pregnancy) upon re-exposure to the offending Ag."
@@ -417,6 +706,16 @@ lessons:
           العيان عنده **memory cells** من حمل أو نقل قديم، بس الـ antibody نفسه نزل لمستوى ما بيبانش في الـ cross-match.
 
           لما يقابل الـ antigen تاني، الـ memory بتصحى وتعمل ==IgG== كتير في أيام (anamnestic). الـ IgG بيغطي الكرات والطحال يشيلها (**extravascular**)، فمفيش hemoglobinuria.
+      - kind: explain
+        page: 98
+        title: "إمتى تتدخل في الـ DHTR؟"
+        quote: "If there is ongoing hemolysis, you may consider giving a glucocorticoid, intravenous immune globulin (IVIG), or rituximab."
+        text: |
+          الكتاب بيقول: تابع الـ **Hb** لحد ما تتأكد إن الـ hemolysis خلصت. ومفيش تدخل خاص من غير ==brisk hemolysis==، ودي معناها: Hb بينزل، bilirubin بيعلى، haptoglobin مختفي، أو hemoglobinuria. ممكن antipyretics للأعراض.
+
+          لو الـ hemolysis مستمرة: **glucocorticoid** أو **intravenous immunoglobulin (IVIG)** أو **rituximab**. التفسير المقبول (مش في الكتاب) للتلاتة: الـ steroid والـ IVIG بيهدّوا الـ macrophages اللي بتاكل الكرات المتغطية، والـ rituximab بيقتل الـ B cells اللي بتعمل الـ antibody.
+
+          والكلية: الـ brisk hemolysis ممكن يعمل **kidney failure**، فـ ==hydration== (لو مفيش مانع) مع متابعة الـ urine output لحد ما الـ Hb يثبت.
       - kind: explain
         remind: [hem.L06.084]
         page: 98
@@ -428,6 +727,8 @@ lessons:
           - الغريب: بيكسّر **platelets العيان نفسه** كمان. نظريات: passive transfer، antibody ضد **Glycoprotein IIb (GPIIb)/IIIa** بتاع العيان، immune complexes، أو الـ alloantigen بيلزق على platelets العيان.
           - العلاج: ممكن self-limited، ولو شديد **IVIG** أو **plasma exchange**. الوقاية: دم **antigen-negative**.
           - التحاليل في reference labs: immunofluorescence، enzyme-linked immunosorbent assay (ELISA)، polymerase chain reaction (PCR) genotyping، **monoclonal antibody-specific immobilisation of platelet antigens (MAIPA)**.
+
+          ليه الـ IVIG أو الـ plasma exchange؟ التفسير المقبول (مش في الكتاب): الـ plasma exchange بيشيل الـ antibody نفسه من الدم، والـ IVIG بيشغل الـ macrophages فما تاكلش الـ platelets المتغطية. وليه platelets عادية مش هتنفع؟ لأن الـ anti-HPA-1a هيكسّرها هي كمان، عشان كده الوقاية بدم **antigen-negative**.
       - kind: check
         page: 98
         quote: "Mechanism:\n  Presence in the recipient of an Ab (anti-HPA-1a) against the PLT specific Ag (HPA-1a). The Ab results from a previous transfusion or pregnancy.\n  Antiplatelet alloantibodies to human platelet antigens (HPA), following the transfusion of any platelet-containing product (whole blood,red blood cells or platelets). usually due to prior transfusion, transplant or pregnancy\n  Anti-HPA-1a is the most common culprit\n  Other HPA antibodies have been implicated\n  Anti-HPA antibody destroys autologous platelets; mechanism is not fully understood\n  Passive transfer of antibody is possible\n  Antibody to autologous GPIIb/IIIa platelet receptor\n  Immune complex binding to platelets\n  Adhesion of transfused alloantigen to autologous platelets\nManagement: may be self limited, but if severe, IVIG or plasma exchange."
@@ -439,6 +740,53 @@ lessons:
           - "الـ anti-IgA بيعمل anaphylaxis في الدقايق الأولى."
           - "الـ anti-A بيعمل AHTR في الكرات الحمرا."
           - "الـ anti-D مشكلة Rh في الحمل والكرات الحمرا."
+      - kind: check
+        page: 99
+        quote: "Human platelet antigen (HPA) testing is a highly specialized methodology and is performed at reference labs:"
+        question: "Where and how is HPA antibody testing for suspected PTP done?"
+        options: ["In reference labs: immunofluorescence, ELISA, PCR genotyping, MAIPA", "Bedside platelet count only", "Routine cross-match in any blood bank", "Direct antiglobulin test on red cells"]
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول highly specialized وبيتعمل في reference labs، وبيعدّ الأربع طرق."
+          - "العدد بيقولك إن الـ platelets واطية، مش السبب."
+          - "الـ HPA testing مش routine، محتاج reference lab."
+          - "الـ DAT للكرات الحمرا (الـ DHTR)، مش للـ platelets."
+      - kind: sort
+        page: 98
+        quote: "Rare → sudden profound thrombocytopenia 5-10 days after transfusion of PLT-containing blood components, usually RBCs."
+        prompt: "DHTR ولا PTP؟"
+        bins: ["DHTR", "PTP"]
+        cards:
+          - { text: "1–3 weeks after transfusion", bin: 0 }
+          - { text: "Fever, jaundice, anaemia", bin: 0 }
+          - { text: "DAT positive", bin: 0 }
+          - { text: "5–10 days after transfusion", bin: 1 }
+          - { text: "Sudden profound thrombocytopenia", bin: 1 }
+          - { text: "Anti-HPA-1a", bin: 1 }
+          - { text: "IVIG or plasma exchange if severe", bin: 1 }
+        why: "الاتنين delayed و immune ومن memory قديمة (نقل أو حمل). الـ DHTR antibody ضد **كرات حمرا** (DAT +ve، jaundice). الـ PTP antibody ضد **platelets** (HPA-1a)، وبيكسّر platelets العيان نفسه كمان."
+      - kind: try
+        items: [hem.L06.075, hem.L06.076, hem.L06.080, hem.L06.081, hem.L06.083]
+    recap:
+      - "DHTR: 1–3 weeks، fever + jaundice + anemia، DAT +ve، extravascular (IgG والطحال) فمفيش hemoglobinuria، anamnestic."
+      - "تدخّل بس في الـ brisk hemolysis: steroid أو IVIG أو rituximab، و hydration للكلية."
+      - "PTP: 5–10 days، platelets تختفي، anti-HPA-1a، بيكسّر platelets العيان نفسه، IVIG أو plasma exchange."
+      - "الوقاية في الاتنين: دم antigen-negative."
+    practice: [hem.L06.075, hem.L06.076, hem.L06.077, hem.L06.078, hem.L06.079, hem.L06.080, hem.L06.081, hem.L06.082, hem.L06.083, hem.L06.084, hem.L06.085, hem.L06.086]
+  # ------------------------------------------------------------------
+  # Split from lesson4 on 2026-11-13 (#828): sepsis, TACO, infections, hemosiderosis.
+  - id: hem.L06.lesson8
+    title: "كيس ملوّث، قلب متحمّل، وحديد متراكم"
+    hook: "مش كل مشكلة في النقل مناعة: بكتيريا في كيس دافي، سوايل أكتر من قد القلب، فيروس، أو حديد مالوش مخرج."
+    minutes: 9
+    pages: [99, 101]
+    topics: [non-immune]
+    goals:
+      - "تعرف ليه الـ platelets أكتر component بيتلوّث"
+      - "تفرّق الـ TACO وتعرف تمنعه"
+      - "تحفظ العدوى اللي بتتنقل بالدم والـ hemosiderosis وحسبة الحديد"
+    status: unverified
+    steps:
       - kind: explain
         page: 99
         title: "Bacterial contamination"
@@ -449,6 +797,8 @@ lessons:
           - في الـ **platelets**: محفوظة في ==room temperature==، فالبكتيريا بتكبر، غالبًا **staph و strep**.
 
           العلاج: **broad-spectrum antibiotics** و shock. الوقاية: تلاجات مضبوطة **2–6°C**، وما تطلبش كذا كيس وتسيبهم بره.
+
+          يعني نوع البكتيريا بيتحدد بحرارة التخزين: التلاجة بتقتل أغلب البكتيريا إلا اللي بتحب البرد (Yersinia)، والـ room temperature بتاعة الـ platelets بتسيب بكتيريا الجلد (staph) تكبر براحتها.
       - kind: aside
         tone: joke
         page: 99
@@ -457,6 +807,17 @@ lessons:
           الـ **multiple units** اللي بتستناك على الترابيزة في **room temp** "لحد ما نخلّص اللي قبله" ده بيتحوّل لـ **culture medium** ببلاش. البكتيريا بتحب الدم الدافي زي ما احنا بنحب الشاي.
 
           اطلب كيس كيس، والباقي يفضل في التلاجة.
+      - kind: check
+        page: 99
+        quote: "PLT are stored at room temp. and thus more susceptible to bacterial growth. Commonly implicated bacteria in PLT: staphylococci & streptococci."
+        question: "Shortly after a platelet transfusion a patient has rigors, high fever and hypotension. Which organism is most likely?"
+        options: ["Staphylococcus", "Yersinia", "Plasmodium", "Cytomegalovirus"]
+        answer: 0
+        why:
+          - "صح: الـ platelets في room temperature، وأشهر بكتيريا فيها staph و strep."
+          - "الـ Yersinia في الـ RBCs لأنها بتستحمل البرد."
+          - "الـ malaria عدوى بتتنقل بالدم، مش sepsis بعد دقايق."
+          - "الـ CMV فيروس بيتنقل، مش shock فوري."
       - kind: explain
         page: 100
         title: "TACO"
@@ -467,6 +828,8 @@ lessons:
           - ==CVP يعلى== والـ pulmonary edema **cardiogenic**.
           - العلاج: **stop**، O2، diuresis، phlebotomy لو لازم.
           - الوقاية: كميات أقل وأبطأ **1–4 ml/kg/h**، وأي كيس ما يعدّيش **4 hours**.
+
+          ليه دول بالذات؟ لأن الـ TACO مش مناعة، هو **حجم**: القلب الضعيف (أو الصغير في الأطفال) مش بيلحق يضخ اللي داخل، فالضغط يرجع للرئة. عشان كده العلاج diuresis، والوقاية إنك تبطّأ.
       - kind: sort
         page: 100
         quote: "There is increase in CVP and cardiac failure.\nPulm. edema is cardiogenic in origin"
@@ -496,6 +859,14 @@ lessons:
           - ["Prions", "CJD"]
         hide: [[1, 1], [4, 1], [5, 1]]
       - kind: explain
+        page: 100
+        title: "اربط العدوى بالتعديلات"
+        quote: "Herpesviruses: CMV, EBV."
+        text: |
+          الكتاب بيقسّمها: **viruses** (hepatotropic، retroviruses، herpes، parvovirus B19، West Nile)، **bacteria** (TB، brucellosis، syphilis)، **parasites** (malaria، trypanosomiasis، leishmaniasis، toxoplasmosis)، و ==prions== (CJD).
+
+          اربطها بالدرس اللي فات: الـ **CMV** و **EBV** و **HTLV** هي نفسها اللي الـ **leukoreduction** بيمنعها، لأنها فيروسات بتعيش جوه الـ WBCs. يعني الـ filter مش بس للحرارة، ده كمان بيقلّل عدوى. أما الـ **HBV** و **HCV** و **HIV** فبيعيشوا في الـ plasma، والـ filter مش بيشيلهم (التفسير المقبول، مش في الكتاب).
+      - kind: explain
         page: 101
         title: "Hemosiderosis"
         quote: "Prevention: consider chelation for > 20 unit RBC burden &/or serum ferritin > 1000 ng/ml"
@@ -503,15 +874,39 @@ lessons:
           بيحصل بعد ==أكتر من 20 transfusion==. كل وحدة فيها **200–250 mg iron**، والجسم مالوش طريق يطلّع الحديد.
           - الصورة: **bronze skin**، hepatic fibrosis، **diabetes**، endocrine dysfunction، **cardiac failure**.
           - الوقاية: **chelation** لو أكتر من **20 units** و/أو **ferritin >1000 ng/ml**.
+      - kind: figure
+        page: 101
+        quote: "Mechanism: accumulation of iron in the skin and internal organs. One unit of RBCs contains 200-250 mg of iron."
+        title: "حسبة الحديد"
+        alt: "Twenty bags of red cells, each 200 to 250 mg of iron, add up to 4 to 5 g. An arrow into the body with no exit arrow. Iron settles in skin, liver, pancreas, endocrine glands and heart."
+        caption: "20 كيس × 200–250 mg = ==4–5 g حديد== داخلين، ومفيش باب خروج. بيترسّب في الجلد والكبد والبنكرياس والغدد والقلب."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L06e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="10" y="20" width="120" height="60" rx="10" class="fg-bad"/>
+            <text x="70" y="44" text-anchor="middle" class="t-sm t-b">20 units RBC</text>
+            <text x="70" y="64" text-anchor="middle" class="t-sm">× 200–250 mg</text>
+            <path d="M130 50 H178" class="fg-arrow" marker-end="url(#L06e)"/>
+            <text x="154" y="40" text-anchor="middle" class="t-sm t-b">4–5 g</text>
+            <rect x="180" y="15" width="140" height="70" rx="10" class="fg-ink"/>
+            <text x="250" y="45" text-anchor="middle" class="t-b">Body iron</text>
+            <text x="250" y="65" text-anchor="middle" class="t-sm t-bad">no way out</text>
+            <path d="M250 85 V112" class="fg-arrow-bad" marker-end="url(#L06e)"/>
+            <rect x="20" y="115" width="95" height="30" rx="8" class="fg-acc"/><text x="67" y="135" text-anchor="middle" class="t-sm">Skin: bronze</text>
+            <rect x="120" y="115" width="95" height="30" rx="8" class="fg-acc"/><text x="167" y="135" text-anchor="middle" class="t-sm">Liver: fibrosis</text>
+            <rect x="220" y="115" width="100" height="30" rx="8" class="fg-acc"/><text x="270" y="135" text-anchor="middle" class="t-sm">Pancreas: DM</text>
+            <rect x="60" y="155" width="100" height="30" rx="8" class="fg-acc"/><text x="110" y="175" text-anchor="middle" class="t-sm">Endocrine</text>
+            <rect x="170" y="155" width="100" height="30" rx="8" class="fg-bad"/><text x="220" y="175" text-anchor="middle" class="t-sm">Heart failure</text>
+            <text x="165" y="222" text-anchor="middle" class="t-sm t-good t-b">Chelate: &gt;20 units or ferritin &gt;1000</text>
+          </svg>
       - kind: try
-        items: [hem.L06.075, hem.L06.080, hem.L06.087, hem.L06.092, hem.L06.097]
+        items: [hem.L06.087, hem.L06.091, hem.L06.092, hem.L06.094, hem.L06.097]
     recap:
-      - "DHTR: 1–3 weeks، fever + jaundice + anemia، DAT +ve، extravascular، anamnestic."
-      - "PTP: 5–10 days، platelets تختفي، anti-HPA-1a، IVIG أو plasma exchange."
-      - "Bacteria: RBCs (Yersinia، Pseudomonas)، platelets في room temp (staph، strep)."
-      - "TACO: كبار ومرضى قلب، CVP عالي، cardiogenic edema. 1–4 ml/kg/h، أقصى 4 ساعات."
+      - "Bacteria: RBCs في التلاجة (Yersinia، Pseudomonas)، platelets في room temp (staph، strep). Antibiotics + shock؛ كيس كيس من التلاجة."
+      - "TACO: حجم مش مناعة؛ كبار وأطفال ومرضى قلب، CVP عالي، cardiogenic edema. 1–4 ml/kg/h، أقصى 4 ساعات."
+      - "Transfusion-transmitted infections: viruses، bacteria، parasites، prions؛ CMV و EBV و HTLV بيقلّوا بالـ LR."
       - "Hemosiderosis: >20 units، 200–250 mg/unit، chelation لو ferritin >1000."
-    practice: [hem.L06.075, hem.L06.076, hem.L06.077, hem.L06.078, hem.L06.079, hem.L06.080, hem.L06.081, hem.L06.082, hem.L06.083, hem.L06.084, hem.L06.085, hem.L06.086, hem.L06.087, hem.L06.088, hem.L06.089, hem.L06.090, hem.L06.091, hem.L06.092, hem.L06.093, hem.L06.094, hem.L06.095, hem.L06.096, hem.L06.097, hem.L06.098, hem.L06.099, hem.L06.100]
+    practice: [hem.L06.087, hem.L06.088, hem.L06.089, hem.L06.090, hem.L06.091, hem.L06.092, hem.L06.093, hem.L06.094, hem.L06.095, hem.L06.096, hem.L06.097, hem.L06.098, hem.L06.099, hem.L06.100]
   # ------------------------------------------------------------------
   - id: hem.L06.lesson5
     title: "Massive transfusion: الدم البارد اللي فيه citrate"
@@ -533,6 +928,8 @@ lessons:
           ==Massive transfusion==: في **24 ساعة** تدي كمية تساوي أو أكتر من **total blood volume**، يعني حوالي **10 units whole blood** أو **20 units packed red blood cells (RBCs)** في البالغ.
 
           المشاكل: **dilution** و consumption للـ platelets والـ factors (DIC)، **hypothermia**، **acidosis**، **electrolytes**، و **hypocalcemia** من الـ citrate.
+
+          يعني العيان دمه **اتغيّر كله تقريبًا** بدم مخزّن. والدم المخزّن مختلف عن الدم الطازة: بارد، فيه citrate، فيه K طالع من الكرات، وفقير في الـ platelets والـ factors الشغالة. كل مشكلة في الدرس ده جاية من صفة من دول.
       - kind: explain
         page: 101
         title: "Dilutional coagulopathy"
@@ -541,6 +938,8 @@ lessons:
           في الـ hemorrhagic shock، السوايل بتتنقل من الـ interstitium للأوعية فتخفّف الـ factors. ولما تعوّض بسوايل مفيهاش factors، الموضوع يزيد. والـ ==colloids والـ crystalloids== بيعملوا coagulopathy أكتر من مجرد dilution.
 
           وكمان **low colloid oncotic pressure** ← interstitial edema.
+
+          ليه ده مهم؟ لأن كل لتر saline أو PRBCs من غير FFP و platelets بيخفّف اللي فاضل، فالنزيف يزيد، فتدّي سوايل أكتر: دايرة. والتفسير المقبول (مش في الكتاب): عشان كده الـ massive transfusion بيدّي الـ plasma والـ platelets مع الكرات من بدري، مش بعد ما الـ coagulopathy تبان.
       - kind: figure
         page: 102
         quote: "Unmetabolised citrate can then lead to hypocalcaemia, hypomagnesemia and worsen the acidosis. Hypocalcaemia can lead to myocardial depression that manifests earlier than hypocalcaemic coagulopathy."
@@ -576,6 +975,19 @@ lessons:
           كل كيس فيه **80 ml citrate phosphate dextrose adenine (CPDA)** بـ ==3 g citrate==، والبالغ السليم بيكسّره في **5 دقايق** (في الكبد).
 
           بس الـ **hypoperfusion** و **hypothermia** بيبطّأوا ده، فالـ citrate يتراكم ← **hypocalcemia** و hypomagnesemia و acidosis أسوأ.
+
+          ليه الكيس فيه citrate أصلًا؟ التفسير المقبول (مش في الكتاب): الـ citrate بيمسك الـ calcium، والـ calcium لازم للتجلّط (فاكر رسمة الـ cascade في محاضرة 5؟)، فالكيس ما يتجلطش. نفس الخاصية دي هي اللي بتعمل المشكلة جوه العيان: بيمسك الـ calcium بتاعه.
+      - kind: check
+        page: 102
+        quote: "Hypocalcaemia can lead to myocardial depression that manifests earlier than hypocalcaemic coagulopathy."
+        question: "In citrate-induced hypocalcaemia during massive transfusion, what usually shows first?"
+        options: ["Myocardial depression with fluid-resistant hypotension", "Hypocalcaemic coagulopathy", "Tetany", "Hyperkalaemic arrest"]
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول الـ myocardial depression بتيجي قبل الـ coagulopathy، وتبان كـ hypotension مش بتستجيب للسوايل."
+          - "بتيجي بعد الـ myocardial depression."
+          - "الكتاب مش بيذكرها هنا."
+          - "الـ K مشكلة تانية بتزيد مع السرعة العالية، مش أول علامة للـ citrate."
       - kind: aside
         tone: exam
         page: 102
@@ -607,7 +1019,7 @@ lessons:
         title: "Potassium و magnesium و البرد"
         quote: "Hypothermia: Factors contributing to hypothermia include infusion of cold fluids and blood and blood products, opening of coelomic cavities and decreased heat production. Hypothermia leads to decreased citrate metabolism and drug clearance and more importantly, contributes to the development of coagulopathy. Slowing of enzyme activity and decreased platelet function individually have been shown to contribute to hypothermic coagulopathy at core temperatures below 34°C."
         text: |
-          - **Hyperkalemia**: الـ K في الـ packed red blood cells (PRBCs) من **7 لـ 77 mEq/L** حسب عمر الكيس. بتحصل مع سرعة فوق **100–150 ml/min**، ومع الكلى والـ acidosis. والـ hypocalcemia بتزوّد تأثيرها على القلب.
+          - **Hyperkalemia**: الـ K في الـ packed red blood cells (PRBCs) من **7 لـ 77 mEq/L** حسب عمر الكيس. بتحصل مع سرعة فوق **100–150 ml/min**، ومع الكلى والـ acidosis. والـ hypocalcemia بتزوّد تأثيرها على القلب. ليه الكيس القديم أعلى؟ التفسير المقبول (مش في الكتاب): الكرات في البرد بتسرّب الـ K بالتدريج، فكل يوم تخزين يزوّده.
           - **Hypomagnesemia**: الـ citrate بيمسك الـ Mg، والسوايل فقيرة في Mg.
           - **Hypothermia**: سوايل ودم بارد، بطن مفتوحة، heat production قليل. بتبطّأ الـ citrate والأدوية، وبتعمل ==coagulopathy below 34°C==.
       - kind: reveal

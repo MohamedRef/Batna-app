@@ -31,10 +31,16 @@ never goes in git; items paraphrase it and cite the page.
 | Diabetes, Metabolism, Lipids (`dm`) | 23 | 23 |
 | Geriatrics (`geri`) | 13 | 13 |
 | Nephrology (`neph`) | 14 | 14 |
-| Basics of Research (`res`) | 16 | 16 |
-| **Total** | **137** | **137** |
+| Basics of Research (`res`) | 20 | 20 |
+| **Total** | **141** | **141** |
 
-Plus 98 calculators (each cites its original paper, and every result band
+Not written yet (no material): 11 of the 20 MSc courses: cardiology (`cvs`),
+chest (`chest`), neuro-psychiatry (`neuro`), tropical medicine (`trop`),
+imaging (`img`), biochemistry (`bioch`), physiology (`phys`), pathology
+(`path`), clinical pathology (`clinpath`), pharmacology (`pharm`) and
+microbiology (`micro`).
+
+Plus 102 calculators (each cites its original paper, and every result band
 says what it means, the next step and the differential), an abbreviations
 dictionary per course, normal-range chips on lab values and a تحشيشة
 (Egyptian-Arabic mnemonic) for every list.

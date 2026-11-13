@@ -3,15 +3,15 @@ lecture: git.L07
 lessons:
   # ------------------------------------------------------------------
   - id: git.L07.lesson1
-    title: "دم من تحت: جاي منين؟"
-    hook: "لون البراز وكمية الدم ووجود الألم بيقولولك مكان النزيف قبل ما تمسك المنظار."
-    minutes: 9
-    pages: [225, 227]
-    topics: [definition, upper-source, causes, clinical]
+    title: "دم من تحت: الحدود والأرقام والفخ"
+    hook: "مش كل دم بينزل من تحت جاي من تحت. الحدود والأرقام والضغط بيقولولك تبص فين الأول."
+    minutes: 8
+    pages: [225, 226]
+    topics: [definition, upper-source]
     goals:
       - "تعرّف الـ lower gastrointestinal bleeding (LGIB) وتحفظ أرقامه"
-      - "تعرف امتى الـ hematochezia تبقى نزيف من فوق"
-      - "تقسّم الأسباب بالـ etiology وبالألم (أسئلة كتاب)"
+      - "تعرف ليه الدم بيطلع أحمر أو أسود"
+      - "تعرف امتى الـ hematochezia تبقى نزيف من فوق، وليه"
     status: unverified
     steps:
       - kind: explain
@@ -25,6 +25,49 @@ lessons:
           - بيبقى **significant** لو أكتر من **10 ml/day**.
 
           بيظهر كـ **hematochezia** (من دم أحمر فاتح لحد clots قديمة)، أو **melena** لو المصدر proximal والنزيف بطيء.
+      - kind: explain
+        page: 225
+        title: "أحمر ولا أسود؟ السرعة والمسافة هم اللي بيقرروا"
+        quote: "It might be presented as: Hematochezia ranges from bright red blood to old clots or Melena if the bleeding from proximal source with slow rate of bleeding."
+        text: |
+          الكتاب بيقول الـ LGIB يا إما **hematochezia** (من دم أحمر فاتح لحد clots قديمة)، يا إما **melena** لما المصدر ==proximal== والنزيف ==slow==.
+
+          ليه؟ التفسير المقبول (مش في الكتاب): الدم بيسودّ لما يقعد وقت كفاية في الأمعاء والبكتيريا تكسّر الـ haemoglobin. يعني:
+          - مصدر **بعيد عن الشرج** (small bowel، right colon) + نزيف **بطيء** = الدم قعد كتير ← أسود.
+          - مصدر **قريب من الشرج** أو نزيف **سريع** = الدم خرج قبل ما يتغيّر ← أحمر أو clots.
+
+          وبالكمية الكتاب بيقسّمه تلاتة: **massive**، **moderate**، و **occult** (يعني مستخبّي، مش باين بالعين).
+      - kind: figure
+        page: 225
+        title: "الخط الفاصل: ligament of Treitz"
+        quote: "It is bleeding below the ligament of Treitz."
+        alt: "A vertical gut from oesophagus to anus. A line at the duodenojejunal flexure marks the ligament of Treitz: above it is upper GI bleeding, below it lower GI bleeding. A second line at the ileocaecal valve shows that 80 to 85 percent of lower GI bleeds come from below it and only 0.7 to 9 percent from the small intestine."
+        caption: "الحد هو الـ ==ligament of Treitz==. وتحته، أغلب النزيف (80–85%) جاي من **بعد الـ ileocecal valve**، يعني من القولون والـ rectum."
+        svg: |
+          <svg viewBox="0 0 330 340" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="10" width="120" height="28" rx="6" class="fg-box"/>
+            <text x="80" y="29" text-anchor="middle" class="t-sm">Oesophagus</text>
+            <rect x="20" y="44" width="120" height="28" rx="6" class="fg-box"/>
+            <text x="80" y="63" text-anchor="middle" class="t-sm">Stomach</text>
+            <rect x="20" y="78" width="120" height="28" rx="6" class="fg-box"/>
+            <text x="80" y="97" text-anchor="middle" class="t-sm">Duodenum</text>
+            <path d="M10 116 H320" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="150" y="111" class="t-sm t-acc t-b">Ligament of Treitz</text>
+            <text x="200" y="60" class="t-b">Upper GI bleed</text>
+            <rect x="20" y="126" width="120" height="70" rx="6" class="fg-thin"/>
+            <text x="80" y="156" text-anchor="middle" class="t-sm">Jejunum, ileum</text>
+            <text x="80" y="174" text-anchor="middle" class="t-sm t-mut">0.7–9%</text>
+            <path d="M10 206 H320" class="fg-arrow" stroke-width="2"/>
+            <text x="150" y="201" class="t-sm t-b">Ileocaecal valve</text>
+            <rect x="20" y="216" width="120" height="50" rx="6" class="fg-bad"/>
+            <text x="80" y="245" text-anchor="middle" class="t-sm t-b">Colon</text>
+            <rect x="20" y="272" width="120" height="50" rx="6" class="fg-bad"/>
+            <text x="80" y="301" text-anchor="middle" class="t-sm t-b">Rectum, anus</text>
+            <text x="200" y="160" class="t-b">Lower GI bleed</text>
+            <text x="160" y="255" class="t-lg t-bad t-b">80–85%</text>
+            <text x="160" y="276" class="t-sm t-mut">of lower GI bleeds</text>
+            <text x="160" y="292" class="t-sm t-mut">start below the valve</text>
+          </svg>
       - kind: table
         page: 225
         quote: "It accounts for 22-30% of GIT bleeding. Lower tract bleeding is one-third as common as upper gastrointestinal hemorrhage and tends to have a more benign course.80% to 85% of lower GI bleeds originate distal to the ileocaecal valve, with only 0.7% to 9% originating from the small intestine."
@@ -38,6 +81,21 @@ lessons:
           - ["Stop by themselves", "80%"]
           - ["Recur", "25%"]
         hide: [[0, 1], [2, 1], [4, 1], [5, 1]]
+      - kind: check
+        page: 225
+        quote: "It is bleeding below the ligament of Treitz. Normal fecal blood loss 1.2 ml/day. It is significant if the loss >10 ml/day."
+        question: "Which statement about lower GI bleeding fits the book?"
+        options:
+          - "It is bleeding below the ligament of Treitz; a loss above 10 ml/day is significant"
+          - "It is bleeding below the ileocecal valve only"
+          - "Any fecal blood loss above 1.2 ml/day is significant"
+          - "Most lower GI bleeds come from the small intestine"
+        answer: 0
+        why:
+          - "صح: الحد هو الـ ligament of Treitz، والـ significant فوق 10 ml/day."
+          - "الـ ileocecal valve ده المكان اللي 80–85% من النزيف بيبقى بعده، مش الحد نفسه."
+          - "الـ 1.2 ml/day ده الطبيعي اللي بيضيع كل يوم من غير ما تاخد بالك."
+          - "الـ small intestine بتطلّع 0.7–9% بس."
       - kind: aside
         tone: tip
         page: 225
@@ -46,6 +104,8 @@ lessons:
           افتكر **80 / 80 / 25**: الـ **80%** تحت الـ ileocecal valve، و **80%** بيقفوا لوحدهم، و **25%** بيرجعوا.
 
           والـ incidence بتزيد **جامد مع السن**، علشان كده أغلب حالاتك هتبقى كبار.
+
+          وليه بتزيد مع السن؟ التفسير المقبول (مش في الكتاب): أشهر سببين في الكتاب، الـ **diverticulosis** والـ **angiodysplasia**، الاتنين بيكتروا كل ما الواحد يكبر، والكبار كمان أكتر ناس بياخدوا **antiplatelets** و **anticoagulants**.
       - kind: explain
         page: 225
         title: "الفخ الكبير: دم من تحت بس جاي من فوق"
@@ -57,6 +117,8 @@ lessons:
           - **antiplatelets أو anticoagulants**
 
           وكمان **blood urea nitrogen (BUN)/creatinine >30** بيشاور على فوق. أما **red blood and clots** فبعيد إنها تكون من فوق.
+
+          ليه الـ instability بالذات تخليك تبص فوق؟ التفسير المقبول (مش في الكتاب): النزيف العلوي لازم يبقى **غزير وسريع جدًا** علشان الدم يعدّي الأمعاء كلها ويطلع لسه أحمر، والغزارة دي نفسها هي اللي بتوقّع الضغط. والتلات فئات اللي في القايمة هم أكتر ناس عندهم مصدر علوي بينزف جامد: قرحة، varices، أو دم مش بيتجلط.
       - kind: reveal
         page: 225
         quote: "An elevated blood urea nitrogen to creatinine ratio (> 30) also suggests an UGIB"
@@ -81,6 +143,52 @@ lessons:
           - "الـ capsule للـ small bowel بعد ما فوق وتحت يبقوا negative."
           - "الـ sigmoidoscopy مش هتشوف مصدر علوي."
       - kind: explain
+        page: 226
+        title: "ليه الـ clots الحمرا بتبعدك عن فوق؟"
+        quote: "source whereas red blood and clots are unlikely to be from an upper gastrointestinal source."
+        text: |
+          الكتاب بيكمّل في أول ص 226: ==red blood and clots== بعيد إنهم يكونوا من **upper gastrointestinal source**.
+
+          التفسير المقبول (مش في الكتاب): الدم اللي بينزل في المعدة بيقابل الـ **acid** فيسودّ، وبيتهضم وهو ماشي مسافة طويلة، فنادرًا ما يوصل لتحت لسه clots حمرا. عشان كده:
+          - **clots حمرا والعيان stable** ← دوّر تحت.
+          - **دم أحمر مع instability** ← لسه لازم تستبعد فوق (الفخ اللي فات).
+
+          يعني اللون لوحده مش كفاية: اقراه مع النبض والضغط والـ BUN.
+      - kind: try
+        items: [git.L07.002, git.L07.005, git.L07.006, git.L07.009, git.L07.010]
+    recap:
+      - "LGIB = تحت الـ ligament of Treitz. الطبيعي 1.2 ml/day، significant فوق 10."
+      - "Melena لو المصدر proximal والنزيف بطيء: الدم قعد وقت يكفي يسودّ."
+      - "80–85% تحت الـ ileocecal valve، 80% بيقفوا لوحدهم، 25% بيرجعوا."
+      - "Hematochezia + instability أو BUN/Cr >30 = فكّر في UGIB واعمل upper endoscopy."
+      - "Red blood and clots بعيد إنها تكون من فوق، بس اقراها مع الضغط."
+    practice: [git.L07.001, git.L07.002, git.L07.003, git.L07.004, git.L07.005, git.L07.006, git.L07.007, git.L07.008, git.L07.009, git.L07.010, git.L07.011, git.L07.013]
+  # ------------------------------------------------------------------
+  # Split from lesson1 on 2026-11-13 (#828): causes and clinical clues.
+  - id: git.L07.lesson4
+    title: "الأسباب، والألم، ولون البراز"
+    hook: "سبع عائلات أسباب، وسؤال واحد عن الألم، ولون البراز: تلات أدوات تقرّبك من المصدر قبل المنظار."
+    minutes: 9
+    pages: [226, 227]
+    topics: [causes, clinical]
+    goals:
+      - "تعدّ أسباب الـ LGIB بالـ etiology (سؤال كتاب) وتعرف ليه الـ diverticulosis أشهرهم"
+      - "تقسّم الأسباب بالألم وشكل الدم (سؤال كتاب) وتعرف ليه"
+      - "تقرا لون البراز والأعراض وتحدد المكان"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 226
+        title: "تلات طرق تقسّم بيها"
+        quote: "Types: we can classifiy the lower GI bleeding according to:\n• Etiology.\n• Site of bleeding\n• Relation to the pain."
+        text: |
+          الكتاب بيقسّم الـ lower GI bleeding بتلات طرق:
+          - **Etiology**: السبب نفسه.
+          - **Site of bleeding**: المكان.
+          - **Relation to the pain**: فيه ألم ولا لأ.
+
+          ليه تلاتة؟ التفسير المقبول (مش في الكتاب): كل واحدة بتجاوب سؤال مختلف. الـ etiology للامتحان وللعلاج، والمكان علشان تختار أنهي scope أو أشعة، والألم علشان تعرف من أول جملة في الـ history إذا كنت حوالين الشرج ولا جوه القولون.
+      - kind: explain
         remind: [git.L07.017]
         page: 226
         title: "الأسباب بالـ etiology"
@@ -93,6 +201,8 @@ lessons:
           - **Vascular:** angiodysplasia، ischemic colitis، vasculitis، hemangioma
           - **Clotting disorders:** hemophilia، leukemia، warfarin، disseminated intravascular coagulation (DIC)
           - **Miscellaneous:** piles، anal fissure، rectal injury
+
+          ليه الـ **diverticulosis** الأشهر؟ التفسير المقبول (مش في الكتاب): الـ diverticulum بيطلع من نقطة ضعيفة في الجدار مكان ما الـ **vasa recta** بتخش، فالشريان بيتمط على قبة الكيس ويرقّ لحد ما يتقطع. النزيف شرياني من غير التهاب، فبيبقى **كتير ومن غير ألم**، والمرض نفسه شايع جدًا في الكبار.
       - kind: mnemonic
         page: 226
         quote: "Congenital - Polyp‘s / Meckel‘s diverticulum /hereditary hemorrhagic telangiectasia."
@@ -106,6 +216,14 @@ lessons:
           - { key: "C", text: "Clotting: hemophilia, leukemia, warfarin, DIC" }
           - { key: "M", text: "Miscellaneous: piles, fissure, rectal injury" }
         hook: "**CIND** و **VCM**: اتنين كلمات زي رقم عربية. سؤال «causes of lower GIB» بيتجاوب بالسبعة دول بالترتيب."
+      - kind: reveal
+        page: 226
+        quote: "Clotting disorders - Haemophilia / Leukaemia / Warfarin therapy / DIC."
+        prompt: "ليه الـ clotting disorders (haemophilia، leukaemia، warfarin، DIC) في قايمة أسباب نزيف القولون، مع إنها مش مرض في القولون؟"
+        answer: |
+          الكتاب بيحطها عيلة لوحدها في الـ etiology.
+
+          التفسير المقبول (مش في الكتاب): هي مش بتعمل جرح، هي بتخلّي **أي جرح صغير** (hemorrhoid، polyp، diverticulum) ينزف أكتر ومايقفش. عشان كده اسأل دايمًا عن الـ **warfarin**، ولو العيان عليه وبينزف، لسه لازم تدوّر على الـ lesion اللي تحت.
       - kind: sort
         page: 226
         quote: "With pain Fissure in Anus, Fistula in Anus. Ca. Anal Canal. Rup. perianal haematoma. Rup. AnoRectal abscess. Endometriosis. Injury."
@@ -132,6 +250,16 @@ lessons:
           - [Blood with mucus, "UC, intussusception, ischemic colitis"]
           - [Blood streaked on stool, Carcinoma of the rectum]
         hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: explain
+        page: 226
+        title: "ليه شكل الدم بيفرّق؟"
+        quote: "Without pain\n• Blood Alone: Polyp, Villous Adenoma, Diverticular diseases\n• Blood After Defecation Hemorrhoids\n• Blood with mucus\n• Ulcerative colitis."
+        text: |
+          الكتاب بيقسّم الـ painless حسب شكل الدم. التفسير المقبول (مش في الكتاب) لكل شكل:
+          - **Blood alone**: وعاء واحد بينزف من سطح polyp أو adenoma أو diverticulum، والغشا حواليه سليم فمفيش mucus ولا إسهال.
+          - **Blood after defecation** (==hemorrhoids==): البراز بيحك في الـ cushion المنفوخ وهو خارج، فالدم بينقّط **بعد** التبرز.
+          - **Blood with mucus** (UC، intussusception، ischemic colitis): الغشا **ملتهب أو ميت**، والغدد بتطلّع mucus مع الدم.
+          - **Blood streaked on stool** (Ca rectum): الورم على الجدار، والبراز بيمسح عليه وهو معدّي، فالدم **على** البراز مش جواه.
       - kind: figure
         page: 227
         quote: "Maroon stools imply a lesion in the right colon or small intestine. Black stools (melena) predict a source proximal to the ligament of Treitz."
@@ -162,6 +290,14 @@ lessons:
             <text x="172" y="286" class="t-sm t-b">Brown, streaked</text>
             <text x="172" y="302" class="t-sm t-mut">rectosigmoid or anus</text>
           </svg>
+      - kind: reveal
+        page: 227
+        quote: "Maroon stools imply a lesion in the right colon or small intestine."
+        prompt: "ليه الـ maroon بالذات بيشاور على الـ right colon أو الـ small intestine؟"
+        answer: |
+          الكتاب: **maroon** = right colon أو small intestine، و **melena** = فوق الـ Treitz، و **large bright red** = colonic source.
+
+          التفسير المقبول (مش في الكتاب): اللون **بيتدرّج** مع المسافة اللي الدم مشيها جوه الأمعاء. الـ right colon والـ small bowel في النص: الدم بيقعد وقت يكفي يغمّق شوية، بس مش يكفي يسودّ خالص زي اللي نازل من المعدة.
       - kind: explain
         page: 227
         title: "الأعراض بتشاور"
@@ -171,22 +307,39 @@ lessons:
           - **Bloody diarrhea** مع cramps أو urgency أو tenesmus ← **inflammatory bowel disease (IBD)** أو **infectious** أو **ischemic colitis**.
 
           وفي الكشف ما تنساش الـ **perianal area** لو شاكك في hemorrhoids.
+
+          ليه الفرق ده؟ التفسير المقبول (مش في الكتاب): الـ diverticulum بينزف من شريان والجدار حواليه سليم، فمفيش ألم. أما في الـ colitis (IBD، infection، ischemia) فالجدار نفسه ملتهب: الـ cramps والـ urgency والـ tenesmus من الالتهاب، والإسهال الدموي من الغشا المتقرّح.
+      - kind: check
+        page: 227
+        quote: "Painless large-volume bleeding usually suggests diverticular bleeding."
+        question: "A 72-year-old passes a large volume of bright red blood per rectum with no pain. Pulse and BP are normal. Most likely cause?"
+        options:
+          - "Diverticular bleeding"
+          - "Anal fissure"
+          - "Ischemic colitis"
+          - "Infectious colitis"
+        answer: 0
+        why:
+          - "صح: painless large-volume bleeding = diverticular غالبًا، وأشهر سبب في الكبار."
+          - "الـ fissure **بيوجع** (في قايمة with pain)، والدم فيه قليل."
+          - "الـ ischemic colitis بيجي بألم وإسهال دموي."
+          - "الـ infectious colitis = bloody diarrhea مع cramps وسخونية."
       - kind: try
-        items: [git.L07.005, git.L07.010, git.L07.016, git.L07.019, git.L07.024]
+        items: [git.L07.015, git.L07.017, git.L07.018, git.L07.020, git.L07.024]
     recap:
-      - "LGIB = تحت الـ ligament of Treitz. الطبيعي 1.2 ml/day، significant فوق 10."
-      - "80–85% تحت الـ ileocecal valve، 80% بيقفوا لوحدهم، 25% بيرجعوا."
-      - "Hematochezia + instability أو BUN/Cr >30 = فكّر في UGIB واعمل upper endoscopy."
-      - "أشهر سبب: diverticulosis. الأسباب: **CIND VCM**."
+      - "تلات تقسيمات: etiology، site، relation to pain."
+      - "أشهر سبب: diverticulosis (شريان بيتمط على قبة الكيس). الأسباب: **CIND VCM**."
+      - "With pain = حوالين الشرج (fissure، fistula، abscess، Ca anal canal) + endometriosis + injury."
       - "Painless: blood alone (polyp، adenoma، diverticula)، بعد التبرز (hemorrhoids)، مع mucus (UC)، streaked (Ca rectum)."
-    practice: [git.L07.001, git.L07.002, git.L07.003, git.L07.004, git.L07.005, git.L07.006, git.L07.007, git.L07.008, git.L07.009, git.L07.010, git.L07.011, git.L07.012, git.L07.013, git.L07.014, git.L07.015, git.L07.016, git.L07.017, git.L07.018, git.L07.019, git.L07.020, git.L07.021, git.L07.022, git.L07.023, git.L07.024, git.L07.025, git.L07.077, git.L07.079]
+      - "Black = فوق الـ Treitz، maroon = right colon أو small bowel، large bright red = colon، brown streaked = rectosigmoid أو anus."
+    practice: [git.L07.014, git.L07.015, git.L07.016, git.L07.017, git.L07.018, git.L07.019, git.L07.020, git.L07.021, git.L07.022, git.L07.023, git.L07.024, git.L07.025, git.L07.077, git.L07.079]
   # ------------------------------------------------------------------
   - id: git.L07.lesson2
     title: "الخطة: shock index، Oakland، وبعدين مين؟"
     hook: "رقم بسيط بيقولك العيان unstable، وscore بيقولك يروّح بيته، وCT بيقولك فين النزيف."
     minutes: 10
-    pages: [227, 230]
-    topics: [risk, management, ddx]
+    pages: [227, 229]
+    topics: [risk, management]
     goals:
       - "تحسب الـ shock index والـ Oakland score"
       - "تمشي على الـ algorithm بتاع Figure 1"
@@ -201,6 +354,8 @@ lessons:
           - ==Colonoscopy== هو الـ **gold standard**.
           - **Computed tomography (CT) angiography** بيشوف نزيف **0.5 ml/min**.
           - **Radionuclide scan** (Tc sulfur colloid أو tagged red blood cell (RBC)) بيشوف **0.1 ml/min**، يعني أحسّ بس مش بيحدد المكان بدقة.
+
+          ليه الـ scan أحسّ بس أضعف في تحديد المكان؟ التفسير المقبول (مش في الكتاب): الـ **tagged RBCs** بتفضل تلف في الدم ساعات، فبتلقط النزيف البطيء أو المتقطع، بس الصورة النووية مش حادة، والدم اللي نزل بيتحرك جوه القولون فالمكان بيتوه. الـ **CT angiography** صورته واضحة، بس لازم النزيف يبقى شغّال وقت الحقن.
       - kind: explain
         page: 227
         title: "أول سؤال: stable ولا لأ؟"
@@ -212,6 +367,8 @@ lessons:
           - الـ **stable** نقسّمه **major** أو **minor** بـ score زي **Oakland**.
 
           يعني نبض 120 وضغط 100 = 1.2 = unstable، حتى لو الضغط «لسه فوق 90».
+
+          ليه نسبة مش ضغط بس؟ التفسير المقبول (مش في الكتاب): أول ما الدم يقل القلب بيسرّع يعوّض قبل ما الضغط يقع، فالنبض بيعلى بدري والـ SBP بيفضل ماسك شوية. النسبة بتكشف الـ shock وهو لسه compensated.
       - kind: table
         page: 229
         quote: "Table 1: Variables comprising the Oakland score\n| Predictor | Score component value |\n|---|---|\n| Age: <40 | 0 |\n| Age: 40–69 | 1 |\n| Age: ≥70 | 2 |\n| Gender: Female | 0 |\n| Gender: Male | 1 |\n| Previous LGIB admission: No | 0 |\n| Previous LGIB admission: Yes | 1 |\n| DRE findings: No blood | 0 |\n| DRE findings: Blood | 1 |\n| Heart rate: <70 | 0 |\n| Heart rate: 70–89 | 1 |\n| Heart rate: 90–109 | 2 |\n| Heart rate: ≥110 | 3 |\n| Systolic blood pressure: <90 | 5 |\n| Systolic blood pressure: 90–119 | 4 |\n| Systolic blood pressure: 120–129 | 3 |\n| Systolic blood pressure: 130–159 | 2 |\n| Systolic blood pressure: ≥160 | 0 |\n| Haemoglobin (g/L): <70 | 22 |\n| Haemoglobin (g/L): 70–89 | 17 |\n| Haemoglobin (g/L): 90–109 | 13 |\n| Haemoglobin (g/L): 110–129 | 8 |\n| Haemoglobin (g/L): 130–159 | 4 |\n| Haemoglobin (g/L): ≥160 | 0 |\nPatients scoring ≤8, with no other indications for hospital admission are suitable for immediate discharge from Accident and Emergency and outpatient investigation.\nDRE, digital rectal examination; LGIB, lower gastrointestinal bleeding."
@@ -237,6 +394,14 @@ lessons:
           - بيتوقع rebleeding و transfusion، بس **ضعيف في الـ mortality**.
 
           ولاحظ: الـ **Hb** لوحده ممكن يدّي **22 نقطة**، يعني الأنيميا هي اللي بتحرّك الـ score.
+      - kind: reveal
+        page: 228
+        quote: "It can also predict rebleeding and the need for RBC transfusion but is inferior at predicting mortality."
+        prompt: "الـ Oakland شاطر في الـ low risk بس ضعيف في الـ mortality. وأي score الكتاب بيقول يتوقع الـ in-hospital death؟"
+        answer: |
+          الكتاب: الـ Oakland **superior** في إنه يطلّع الـ low risk، وبيتوقع **rebleeding** و **RBC transfusion**، بس **inferior at predicting mortality**. أما الـ **Glasgow-Blatchford score** (من الـ upper GIB) فبيحدد الـ adverse outcomes: rebleeding، transfusion، و **in-hospital death**.
+
+          ليه ده منطقي؟ التفسير المقبول (مش في الكتاب): الـ Oakland اتعمل علشان يجاوب سؤال واحد: **«مين يروّح؟»**. والوفاة في الـ LGIB غالبًا من أمراض العيان التانية مش من النزيف نفسه، والمتغيرات دي مش في الـ score.
       - kind: case
         page: 229
         quote: "Table 1: Variables comprising the Oakland score\n| Predictor | Score component value |\n|---|---|\n| Age: <40 | 0 |\n| Age: 40–69 | 1 |\n| Age: ≥70 | 2 |\n| Gender: Female | 0 |\n| Gender: Male | 1 |\n| Previous LGIB admission: No | 0 |\n| Previous LGIB admission: Yes | 1 |\n| DRE findings: No blood | 0 |\n| DRE findings: Blood | 1 |\n| Heart rate: <70 | 0 |\n| Heart rate: 70–89 | 1 |\n| Heart rate: 90–109 | 2 |\n| Heart rate: ≥110 | 3 |\n| Systolic blood pressure: <90 | 5 |\n| Systolic blood pressure: 90–119 | 4 |\n| Systolic blood pressure: 120–129 | 3 |\n| Systolic blood pressure: 130–159 | 2 |\n| Systolic blood pressure: ≥160 | 0 |\n| Haemoglobin (g/L): <70 | 22 |\n| Haemoglobin (g/L): 70–89 | 17 |\n| Haemoglobin (g/L): 90–109 | 13 |\n| Haemoglobin (g/L): 110–129 | 8 |\n| Haemoglobin (g/L): 130–159 | 4 |\n| Haemoglobin (g/L): ≥160 | 0 |\nPatients scoring ≤8, with no other indications for hospital admission are suitable for immediate discharge from Accident and Emergency and outpatient investigation.\nDRE, digital rectal examination; LGIB, lower gastrointestinal bleeding."
@@ -261,6 +426,8 @@ lessons:
           - ممكن **تستغنى عنه** لو النزيف وقف وعنده colonoscopy كويس في آخر **12 شهر** بـ prep كويس ورّى **diverticulosis من غير neoplasia**.
           - **CT angiography** أول test في الـ **ongoing hemodynamically significant** hematochezia، وقليل الفايدة لو النزيف بسيط أو وقف. ولو لقى المصدر ← **arteriography and embolization**.
           - **Diverticular stigmata:** **Through-the-scope (TTS) clips** أو **band ligation** أو **coagulation**.
+
+          ليه restrictive؟ التفسير المقبول (مش في الكتاب): الدم المنقول ليه مخاطره (زيادة الـ volume، reactions، عدوى)، والعيان الـ stable بيستحمل Hb 7 كويس. وليه الـ CT angiography قليل الفايدة لما النزيف يهدى؟ لأنه بيشوف الدم وهو **بيخرج** من الوعاء (0.5 ml/min)؛ لو النزيف وقف مفيش حاجة تتشاف.
       - kind: figure
         page: 229
         quote: "Severe Hematochezia\n  IVF resuscitation, PRBC transfusion to threshold >7g/dL (or higher if shock or cardiovascular ischemia), Exclude UGI source* if appropriate\n    Ongoing significant bleeding: CT Angiography**\n      Extravasation\n        Prompt transcatheter angiography with embolization if extravasation seen\n        Consider urgent colonoscopy (large volume purge prep with 4-6L PEG over 3-4 hours) with intervention for specialized centers with expertise in endoscopic hemostasis\n      No Extravasation: Nonurgent colonoscopy\n    Milder LGIB or bleeding has subsided: Nonurgent colonoscopy (with split-dose PEG) vs. observation if bleeding subsides and patient has had recent colonoscopy\n*Risk factors of UGI bleeding include history of peptic ulcer bleeding, portal hypertension, BUN/Cr>30, aspirin/NSAID use, and positive nasogastric lavage\n** Predictors of a positive CTA include the following: performance of a CTA within 4 hours of hematochezia, recent bowel resection or intervention, transfusion of >3 units of PRBC, use of antiplatelets or DOACs, tachycardia, or hypotension. For centers without interventional radiology availability, would consider performing a prompt colonoscopy after resuscitation."
@@ -309,6 +476,14 @@ lessons:
             <text x="178" y="400" class="t-sm t-mut">subsided and a recent</text>
             <text x="178" y="414" class="t-sm t-mut">colonoscopy was done</text>
           </svg>
+      - kind: explain
+        page: 229
+        title: "امتى تعمل upper endoscopy لعيان بينزف من تحت؟"
+        quote: "Hematochezia associated with hemodynamic instability may be indicative of an UGIB source, and an upper endoscopy should be performed if the suspicion is high to exclude a proximal source of bleeding."
+        text: |
+          الكتاب بيرجع للفخ تاني في ص 229: ==hematochezia + hemodynamic instability== ممكن تبقى **UGIB**، فلو الشك عالي اعمل **upper endoscopy** الأول **to exclude a proximal source of bleeding**.
+
+          وده نفس أول مربع في Figure 1: «exclude an upper source if appropriate». ليه قبل الـ colonoscopy؟ التفسير المقبول (مش في الكتاب): الـ upper endoscopy مش محتاجة prep وبتتعمل بسرعة، ولو المصدر قرحة أو varices فعلاجها مختلف وتأخيره أخطر.
       - kind: check
         page: 228
         quote: "Patients hospitalized with LGIB requiring a colonoscopy, it is recommended to perform a nonemergent inpatient colonoscopy, as performing an urgent colonoscopy within 24 hours has not been shown to improve clinical outcomes such as rebleeding and mortality."
@@ -334,6 +509,29 @@ lessons:
           انت: «لأ، بكرة الصبح بعد الـ prep.» 🧴
 
           مش كسل، ده **evidence**: الـ urgent جوه 24 ساعة ما فرقش في الـ rebleeding ولا الـ mortality. والـ prep الكويس هو اللي بيخلّيك تشوف أصلًا.
+      - kind: try
+        items: [git.L07.012, git.L07.028, git.L07.032, git.L07.039, git.L07.044]
+    recap:
+      - "Colonoscopy gold standard. CTA يشوف 0.5 ml/min، scintigraphy 0.1."
+      - "Shock index = HR/SBP؛ فوق 1 = unstable."
+      - "Oakland: أول score للـ LGIB؛ أقل من 8 (≤8 في الجدول) = 95% safe discharge؛ الـ Hb لحد 22 نقطة؛ ضعيف في الـ mortality."
+      - "Transfuse عند Hb 7. Colonoscopy nonemergent. CTA للنزيف المستمر الخطير ← embolization."
+      - "Hematochezia + instability مع شك عالي ← upper endoscopy الأول."
+      - "Diverticular stigmata: clips، band ligation، coagulation."
+    practice: [git.L07.012, git.L07.026, git.L07.027, git.L07.028, git.L07.029, git.L07.030, git.L07.031, git.L07.032, git.L07.033, git.L07.034, git.L07.035, git.L07.036, git.L07.037, git.L07.038, git.L07.039, git.L07.040, git.L07.041, git.L07.042, git.L07.043, git.L07.044, git.L07.045, git.L07.046, git.L07.047, git.L07.048, git.L07.049, git.L07.074, git.L07.078]
+  # ------------------------------------------------------------------
+  - id: git.L07.lesson3
+    title: "Table 2، والنزيف الغامض في الـ small bowel"
+    hook: "كل تشخيص ليه بصمة وعلاج. ولو المنظار من فوق ومن تحت سليم والعيان لسه بينزف؟ أهلًا بيك في الـ obscure GI bleeding."
+    minutes: 10
+    pages: [230, 232]
+    topics: [ddx, obscure]
+    goals:
+      - "تفرّق تشخيصات Table 2 بالـ clue وتعرف علاج كل واحد"
+      - "تعرّف الـ obscure gastrointestinal bleeding (OGIB)"
+      - "ترتّب الخطوات: second look، capsule، enteroscopy، وتختار الأشعة حسب سرعة النزيف (سؤال كتاب)"
+    status: unverified
+    steps:
       - kind: match
         page: 230
         quote: "Table 2: Differential Diagnosis and Treatment of Acute Lower Gastrointestinal Bleeding\n| Diagnosis | Distinguishing features | Evaluation and treatment |\n|---|---|---|\n| Angiodysplasia, angioectasias, or arteriovenous malformation | Recurrent painless bleeding episodes; patient > 60 years | Colonoscopy with endoscopic argon plasma coagulation. Consider long-term treatment with lanreotide (Somatuline), 120 mg subcutaneously every 4 weeks (adjust dosing for patients with renal or hepatic impairment) |\n| Colon cancer | Slow, chronic blood loss with occasional changes in bowel habit | Colonoscopy with endoscopic therapy (e.g., cautery, banding, clipping, epinephrine injection) to control bleeding. Referral to surgical and oncologic specialists |\n| Diverticular bleeding | Acute, severe, painless bleeding; history of or suspected diverticular disease | Colonoscopy with endoscopic therapy to control bleeding. Consider abdominal CTA to localize the bleeding site |\n| Hemorrhoids | Bleeding associated with bowel movements. External: painful and itchy. Internal: painless, may be itchy | Fiber supplementation (decreases bleeding by 50%); banding or infrared photocoagulation for grades I to III; surgery likely required for symptomatic grade III and grade IV |\n| Infectious colitis | Bloody diarrhea with fever; new or concerning food exposures | Antibiotics based on identified pathogen, except for Shiga toxin-producing Escherichia coli and Salmonella, which are treated with supportive care alone |\n| Inflammatory bowel disease | Bloody diarrhea associated with recurrent abdominal pain and weight loss | Colonoscopy with biopsies to confirm diagnosis. Fecal calprotectin ≥ 250 mcg per g. Rectal 5-aminosalicylic acid derivatives (e.g., mesalamine) |\n| Ischemic colitis | Bloody diarrhea followed by acute lower abdominal pain, especially in patients with cardiac risk factors | Colonoscopy or CTA to confirm diagnosis. Medical management of underlying vascular disease; may require surgery |\n| Postpolypectomy bleeding | Bleeding within 30 days of polypectomy or biopsy | Colonoscopy with endoscopic therapy to control bleeding |\nNote: Colonoscopy should always be preceded by adequate bowel preparation. CTA = computed tomographic angiography"
@@ -355,28 +553,26 @@ lessons:
           - **Infectious colitis:** antibiotics حسب الميكروب، **ماعدا** Shiga toxin E. coli و **Salmonella**: supportive بس.
           - **IBD:** colonoscopy مع biopsy، calprotectin **≥250 mcg/g**، و rectal **5-ASA**.
           - **Ischemic colitis:** colonoscopy أو CTA، وعلاج الـ vascular disease، وممكن جراحة.
-      - kind: try
-        items: [git.L07.028, git.L07.032, git.L07.039, git.L07.044, git.L07.050]
-    recap:
-      - "Colonoscopy gold standard. CTA يشوف 0.5 ml/min، scintigraphy 0.1."
-      - "Shock index = HR/SBP؛ فوق 1 = unstable."
-      - "Oakland: أول score للـ LGIB؛ أقل من 8 (≤8 في الجدول) = 95% safe discharge؛ الـ Hb لحد 22 نقطة."
-      - "Transfuse عند Hb 7. Colonoscopy nonemergent. CTA للنزيف المستمر الخطير ← embolization."
-      - "Diverticular stigmata: clips، band ligation، coagulation."
-    practice: [git.L07.026, git.L07.027, git.L07.028, git.L07.029, git.L07.030, git.L07.031, git.L07.032, git.L07.033, git.L07.034, git.L07.035, git.L07.036, git.L07.037, git.L07.038, git.L07.039, git.L07.040, git.L07.041, git.L07.042, git.L07.043, git.L07.044, git.L07.045, git.L07.046, git.L07.047, git.L07.048, git.L07.049, git.L07.050, git.L07.051, git.L07.052, git.L07.053, git.L07.054, git.L07.055, git.L07.074, git.L07.078]
-  # ------------------------------------------------------------------
-  - id: git.L07.lesson3
-    title: "النزيف الغامض: الـ small bowel المستخبّي"
-    hook: "المنظار من فوق ومن تحت سليم والعيان لسه بينزف؟ أهلًا بيك في الـ obscure GI bleeding."
-    minutes: 9
-    pages: [230, 232]
-    topics: [obscure]
-    goals:
-      - "تعرّف الـ obscure gastrointestinal bleeding (OGIB)"
-      - "ترتّب الخطوات: second look، capsule، enteroscopy"
-      - "تختار الأشعة حسب سرعة النزيف (سؤال كتاب)"
-    status: unverified
-    steps:
+
+          ليه العلاجات دي؟ التفسير المقبول (مش في الكتاب):
+          - الـ **fiber** بيطرّي البراز ويخلّي الحزق أقل، فالضغط على الـ hemorrhoids يقل والنزيف يقل.
+          - الـ **Shiga toxin E. coli**: الـ antibiotics ممكن تكسّر البكتيريا فتطلّع toxin أكتر وتزوّد خطر الـ haemolytic uraemic syndrome. والـ **Salmonella** الـ antibiotics ممكن تطوّل حملها في الأمعاء.
+          - الـ **lanreotide** (somatostatin analogue) بيقلل الدم الواصل للأوعية الهشة في الـ angiodysplasia.
+      - kind: check
+        page: 230
+        quote: "Colonoscopy with endoscopic argon plasma coagulation. Consider long-term treatment with lanreotide (Somatuline), 120 mg subcutaneously every 4 weeks"
+        question: "An 80-year-old has recurrent painless bleeding; colonoscopy shows angiodysplasia. Treatment in Table 2?"
+        options:
+          - "Argon plasma coagulation; consider long-term lanreotide"
+          - "Fiber supplements and banding"
+          - "Antibiotics for the identified pathogen"
+          - "Rectal 5-aminosalicylic acid"
+        answer: 0
+        why:
+          - "صح: Table 2 بيقول colonoscopy مع **argon plasma coagulation**، وممكن **lanreotide 120 mg SC كل 4 أسابيع**."
+          - "ده علاج الـ hemorrhoids."
+          - "ده علاج الـ infectious colitis."
+          - "ده علاج الـ IBD."
       - kind: explain
         page: 230
         title: "يعني إيه obscure؟"
@@ -387,6 +583,8 @@ lessons:
           بيحصل في حوالي **5%** من كل حالات الـ GI bleeding.
 
           وأول خطوة في الكتاب: **contrast-enhanced helical computed tomography (CT)** للـ small bowel (لو مفيش renal failure أو contrast allergy). ولو طلع فيه حاجة ← **deep enteroscopy** (DBE، single-balloon enteroscopy (SBE)، spiral) من البُق أو من تحت حسب مكان الـ lesion.
+
+          ليه CT الأول؟ التفسير المقبول (مش في الكتاب): الـ small bowel أمتار والـ scope مش بيوصل كله، فالـ CT بيمسحه كله مرة واحدة ويقولك تدخل منين: من البُق لو الـ lesion فوق، ومن تحت لو تحت. والـ contrast بيتعب الكلية وممكن يعمل allergy، عشان كده الاستثناءين دول.
       - kind: explain
         page: 230
         title: "قبل ما تدوّر في الـ small bowel: بُص تاني"
@@ -397,6 +595,8 @@ lessons:
           - **Push enteroscopy** ممكن تبقى هي الـ second look.
 
           لو الـ second looks **normal** ← ==small bowel evaluation==.
+
+          ليه تبص تاني قبل الـ small bowel؟ التفسير المقبول (مش في الكتاب): كتير من الـ lesions اللي بتتسمى obscure بتطلع في الآخر في مكان المنظار الأول وصلّه بس اتفوّتت: دم مغطيها، أو prep وحش، أو الفحص ما كملش.
       - kind: aside
         tone: analogy
         page: 231
@@ -463,8 +663,10 @@ lessons:
           - **Total deep enteroscopy** لو الـ suspicion قوي.
           - **Deep enteroscopy أولًا** في الـ **massive hemorrhage** أو لو الـ VCE contraindicated.
           - **Intraoperative enteroscopy:** sensitive جدًا بس invasive، بس لما الـ enteroscopy مش ممكن (عمليات قديمة و adhesions).
-          - ==No barium== في الـ small bowel bleeding.
+          - **No barium** في الـ small bowel bleeding.
           - **CT enterography (CTE) بعد capsule negative**: أحسن في الـ **mural masses** وتحديد مكانها وتوجيه الـ enteroscopy.
+
+          ليه ==no barium==؟ التفسير المقبول (مش في الكتاب): الـ barium بيورّي شكل الغشا من بره، وما بيشوفش الـ **vascular lesions** المسطّحة اللي بتنزف، وكمان بيفضل في الأمعاء ويبوّظ أي CT أو angiography بعده.
       - kind: check
         page: 231
         quote: "Barium study shouldn‘t be used in Small Bowel Bleeding."
@@ -506,12 +708,15 @@ lessons:
           - لقيت السبب ← ==endoscopic treatment==.
           - ما لقيتش ← **oral أو IV iron**.
           - النزيف مستمر أو بيرجع ← فكّر في **somatostatin**، **iron**، **antiangiogenesis**.
+
+          ليه **somatostatin**؟ التفسير المقبول (مش في الكتاب): بيقلل الدم الواصل للأمعاء (splanchnic blood flow)، فالأوعية الهشة تنزف أقل. والـ **iron** عشان يعوّض اللي ضاع لما المصدر ما يتلاقاش أو يفضل ينزف شوية.
       - kind: try
-        items: [git.L07.056, git.L07.062, git.L07.064, git.L07.068, git.L07.076]
+        items: [git.L07.050, git.L07.056, git.L07.062, git.L07.064, git.L07.068]
     recap:
+      - "Table 2: angiodysplasia = APC ± lanreotide، hemorrhoids = fiber ثم banding، STEC و Salmonella = supportive."
       - "OGIB = نزيف مستمر أو متكرر ومصدره مش باين في الـ upper ولا lower endoscopy؛ حوالي 5%."
       - "Second look الأول، وبعدين small bowel evaluation."
       - "VCE first-line (ولو فيه obstruction: CTE/MRE)، وقبل الـ deep enteroscopy إلا لو massive."
       - "No barium. CTE بعد capsule negative."
       - "Unstable: angiography. Stable نشط: CTA. بطيء: tagged RBC. شاب وكله سليم: Meckel scan."
-    practice: [git.L07.056, git.L07.057, git.L07.058, git.L07.059, git.L07.060, git.L07.061, git.L07.062, git.L07.063, git.L07.064, git.L07.065, git.L07.066, git.L07.067, git.L07.068, git.L07.069, git.L07.070, git.L07.071, git.L07.072, git.L07.073, git.L07.075, git.L07.076]
+    practice: [git.L07.050, git.L07.051, git.L07.052, git.L07.053, git.L07.054, git.L07.055, git.L07.056, git.L07.057, git.L07.058, git.L07.059, git.L07.060, git.L07.061, git.L07.062, git.L07.063, git.L07.064, git.L07.065, git.L07.066, git.L07.067, git.L07.068, git.L07.069, git.L07.070, git.L07.071, git.L07.072, git.L07.073, git.L07.075, git.L07.076]

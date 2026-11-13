@@ -10,7 +10,11 @@ pub const SETTING_LINE: &str = "علّم في الدروس وصفحات الكت
 pub fn study(n: usize) -> String {
     format!("ذاكر {} دلوقتي", count(n, &CARD))
 }
-/// "وفيه سؤال واحد من الصفحة دي محتاج تبص عليه تاني."
+/// "وفيه سؤال واحد من الصفحة دي محتاج تبص عليه تاني."; the verb and
+/// pronoun follow the number like the noun does («سؤالين … محتاجين تبص
+/// عليهم», as `cloud::pending`).
 pub fn questions(n: usize) -> String {
-    format!("وفيه {} من الصفحة دي محتاج تبص عليه تاني.", count(n, &QUESTION))
+    let plural = n == 2 || (3..=10).contains(&(n % 100));
+    let tail = if plural { "محتاجين تبص عليهم" } else { "محتاج تبص عليه" };
+    format!("وفيه {} من الصفحة دي {tail} تاني.", count(n, &QUESTION))
 }

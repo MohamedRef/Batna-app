@@ -667,6 +667,8 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-13: res.L01 lessons cover every slide that carries a card (4 → 6 lessons; course and definition split, priority criteria split at criterion 3); the other slides are listed in `content/lesson-skips.yaml` (part of #829).
+- 2026-11-13: hem.L05 to the Hepatology bar: 4 → 7 lessons (lesson1 → lesson5, lesson2 → lesson6, lesson3 → lesson7), reasons labelled «التفسير المقبول (مش في الكتاب)», book haemarthrosis photo p75, three new SVGs, words per page 137 → 277 on the `lessons --report` count; added to `content/lesson-skips.yaml` (#827–#829).
+- 2026-11-13: hem.L01 to the Hepatology bar: 3 → 5 lessons (lesson1 split → lesson4, lesson3 split → lesson5), reasons labelled «التفسير المقبول (مش في الكتاب)», book marrow figure p5, words per page 186 → 323 on the `lessons --report` count; first lecture in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: `validate` checks lesson coverage against the book (`coverage.rs`, `content/lesson-skips.yaml`, `batna-tools lessons`); 204 lessons' `pages` narrowed to the pages their steps cite; LESSONS.md rule 8 rewritten for Mohamed's lesson-count rule (#833, part of #828/#829).
 - 2026-11-13: lesson flip view renamed «تقليب» and counts steps, not «صفحة» (#832).
 - 2026-11-13: a book page lists and opens the lesson steps that explain it; «اشرحهولي» opens at the card's page step; lecture page «بترتيب الكتاب» outline (#831).

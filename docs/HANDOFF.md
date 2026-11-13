@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: rheum.L21 to the Hepatology bar: 3 → 4 lessons (lesson2 renal/GI/heart → lesson4), reasons labelled «التفسير المقبول (مش في الكتاب)», two new SVGs, words per page 146 → 281, explain steps without a reason 8/10 → 0/12; p353 (review MCQs) skipped (#827–#829).
 - 2026-11-13: rheum.L05 to the Hepatology bar: 2 → 3 lessons (lesson1 split → lesson3 for T and B cell tolerance; the two principal factors moved into lesson1), reasons labelled «التفسير المقبول (مش في الكتاب)», one new SVG figure, words per page 165 → 367 on the `lessons --report` count; p77 (agenda) now taught, no pages left without a step (#827–#829).
 - 2026-11-13: dm.L07 to the Hepatology bar: 4 → 6 lessons (risk + pathogenesis split → lesson5, silent signs split → lesson6), reasons labelled «التفسير المقبول (مش في الكتاب)», 3 new SVG figures, HF on p86 corrected to high frequency, words per page 135 → 250; in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: rheum.L04 to the Hepatology bar: 3 → 4 lessons (lesson2 split → lesson4 for CAPS and work-up; the Sapporo criteria moved beside the antibodies), reasons labelled «التفسير المقبول (مش في الكتاب)», one new SVG figure, words per page 164 → 286 on the `lessons --report` count; p76 (book MCQs) skipped in `content/lesson-skips.yaml` (#827–#829).

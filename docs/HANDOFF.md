@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: geri.L01 to the Hepatology bar: 6 → 7 lessons (lesson5 split → lesson7), reasons labelled «التفسير المقبول (مش في الكتاب)», systolic/diastolic SVG, PS (5) case on p24, words per page 144 → 243 on the `lessons --report` count; added to `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: web deploy fixed after Rust 1.100: `scripts/web/build.sh` finds the content pack by package id, since cargo now writes build output to `build/batna-app/<hash>/` (deploys had failed since #821).
 - 2026-11-13: res.L01 lessons cover every slide that carries a card (4 → 6 lessons; course and definition split, priority criteria split at criterion 3); the other slides are listed in `content/lesson-skips.yaml` (part of #829).
 - 2026-11-13: hem.L05 to the Hepatology bar: 4 → 7 lessons (lesson1 → lesson5, lesson2 → lesson6, lesson3 → lesson7), reasons labelled «التفسير المقبول (مش في الكتاب)», book haemarthrosis photo p75, three new SVGs, words per page 137 → 277 on the `lessons --report` count; added to `content/lesson-skips.yaml` (#827–#829).

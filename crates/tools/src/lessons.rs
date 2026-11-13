@@ -222,7 +222,10 @@ mod tests {
         let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
         let mut files = load(&root).expect("lessons load");
         let (_, f, _) = files.iter_mut().find(|(_, f, _)| f.lecture == "hb.L01").expect("hb.L01 lessons");
-        let l = &mut f.lessons[2];
+        let has_aclf = |l: &batna_core::lesson::Lesson| {
+            l.steps.iter().any(|s| s.remind.iter().any(|r| r == "hb.L01.033"))
+        };
+        let l = f.lessons.iter_mut().find(|l| has_aclf(l)).expect("the ACLF lesson");
         let id = l.id.clone();
         let k =
             l.steps.iter().position(|s| s.remind.iter().any(|r| r == "hb.L01.033")).expect("the ACLF step");

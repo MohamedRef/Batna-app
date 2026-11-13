@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: hem.L09 to the Hepatology bar: 5 → 9 lessons (lesson2 split → lesson6, lesson3 → lesson7, lesson4 → lesson8, lesson5 → lesson9), reasons labelled «التفسير المقبول (مش في الكتاب)», words per page 130 → 271 on the `lessons --report` count; p155 (references, essay questions) skipped in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: `validate` checks lesson coverage against the book (`coverage.rs`, `content/lesson-skips.yaml`, `batna-tools lessons`); 204 lessons' `pages` narrowed to the pages their steps cite; LESSONS.md rule 8 rewritten for Mohamed's lesson-count rule (#833, part of #828/#829).
 - 2026-11-13: lesson flip view renamed «تقليب» and counts steps, not «صفحة» (#832).
 - 2026-11-13: a book page lists and opens the lesson steps that explain it; «اشرحهولي» opens at the card's page step; lecture page «بترتيب الكتاب» outline (#831).

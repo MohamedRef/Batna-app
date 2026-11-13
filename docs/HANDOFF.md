@@ -384,6 +384,9 @@ Add a bullet here when a PR adds something a later agent must know.
   has a collapsible «بترتيب الكتاب» outline (`lecture/outline.rs`): one row per
   page with the section (majority topic of its cards), the steps and the card
   count; a row opens the page sheet.
+- **«صفحة» is the book's word** (#832): the lesson's flip view is «تقليب»
+  and counts «خطوة 3 من 12» like the steps view; «صفحة»/«ص» only ever mean a
+  book page.
 - **Reading settings** («Aa» in the lesson bar, and Settings › Look; adapted
   from Steps-app main: `crates/app/src/learn/reading.rs`): text size
   (×0.9/1/1.15/1.3 on step text only, the bar and buttons stay), line spacing
@@ -655,6 +658,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: lesson flip view renamed «تقليب» and counts steps, not «صفحة» (#832).
 - 2026-11-13: a book page lists and opens the lesson steps that explain it; «اشرحهولي» opens at the card's page step; lecture page «بترتيب الكتاب» outline (#831).
 - 2026-11-13: lesson rows show their book pages and book sections; the lesson header shows the page range (#830).
 - 2026-11-13: 52 cut quotes completed from the book pages (sentence continues on the next page or in the list below); four trailing fragments where the book itself breaks off were dropped and logged in `medstudy/book-issues.md` (#804, #805, #807–#812).

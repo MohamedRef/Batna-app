@@ -647,7 +647,9 @@ fn the_pages_view_turns_with_arrows_and_the_view_switch_is_kept() {
     );
     let html = d.html();
     assert!(html.contains("data-view=\"pages\""));
-    assert!(html.contains(&format!("{} 1 {} {n}", tx::PAGE_OF, tx::OF_N)), "{html}");
+    // A lesson's screen is counted as a step, never a «صفحة» (#832).
+    assert!(html.contains(&tx::step_of(1, n)), "{html}");
+    assert!(!html.contains("صفحة 1 من"), "{html}");
     d.click(|e| e.has_class("ls-arrow-next"));
     assert_eq!(count(&d), format!("2/{n}"));
     // The switch in the bar goes back to Steps and saves it.

@@ -17,12 +17,12 @@ pub const NAV_REQUIRED: &str = "كمّل المطلوب في الخطوة دي �
 pub const VIEW_TITLE: &str = "شكل الدرس";
 pub const VIEW_STEPS: &str = "خطوات";
 pub const VIEW_STEPS_HINT: &str = "زرار «كمّل» كبير تحت";
-pub const VIEW_PAGES: &str = "صفحات";
-pub const VIEW_PAGES_HINT: &str = "زي الكتاب، بتقلب الصفحة";
-pub const TO_PAGES: &str = "اعرض الدرس صفحات زي الكتاب";
+// «صفحة» and «ص» mean the book's pages only; a lesson's own units are
+// screens (#832).
+pub const VIEW_PAGES: &str = "تقليب";
+pub const VIEW_PAGES_HINT: &str = "تقلّب الشاشات زي الكتاب";
+pub const TO_PAGES: &str = "اعرض الدرس شاشات تتقلّب زي الكتاب";
 pub const TO_STEPS: &str = "اعرض الدرس خطوات";
-pub const PAGE_OF: &str = "صفحة";
-pub const OF_N: &str = "من";
 pub const BACK: &str = "رجوع";
 pub const NEXT: &str = "كمّل";
 pub const FINISH: &str = "خلّصت";

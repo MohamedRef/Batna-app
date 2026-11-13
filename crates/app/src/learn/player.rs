@@ -283,7 +283,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         {tx::SKIP}
                     }
                 } else if pages {
-                    span { class: "ls-page-of muted small", "{tx::PAGE_OF} {i + 1} {tx::OF_N} {n}" }
+                    span { class: "ls-page-of muted small", {tx::step_of(i + 1, n)} }
                 }
                 if let Some(run) = ready {
                     button {

@@ -2,16 +2,21 @@ schema: batna.lesson/v1
 lecture: rheum.L04
 lessons:
   # ------------------------------------------------------------------
+  # Book order. Ids are never reused: lesson4 (pp 72-73, CAPS and work-up)
+  # was split out of lesson2; the Sapporo criteria (p70) moved from lesson1
+  # into lesson2 beside the antibodies they test (#828, 2026-11-13).
+  # lesson3 keeps three topics on purpose: "adjunct" is one page (p75) that
+  # closes the management section.
   - id: rheum.L04.lesson1
     title: "الـ APS: دم بيتجلط من غير سبب"
     hook: "ست شابة عندها DVT وإجهاض متكرر وصفايح واطية: ده مش حظ وحش، ده antibody واحد."
-    minutes: 9
-    pages: [68, 70]
-    topics: [definition, clinical, criteria]
+    minutes: 8
+    pages: [68, 69]
+    topics: [definition, clinical]
     goals:
       - "تعرّف الـ APS بالتلات أركان"
       - "تعدّ الـ clinical features: venous و arterial و pregnancy و other"
-      - "تحفظ الـ 2006 revised Sapporo criteria بالأرقام"
+      - "تفسّر ليه الـ APS ممكن يمسك أي organ، وليه الحمل بيتأثر"
     status: unverified
     steps:
       - kind: explain
@@ -27,6 +32,8 @@ lessons:
           3. **Persistent antiphospholipid antibodies**، أو **aPL**، في الدم.
 
           جلطة + حمل + antibody ثابت = APS.
+
+          التفسير المقبول (مش في الكتاب): ليه التلاتة مع بعض؟ عشان الجلطة لوحدها أسبابها كتير، والإجهاض المتكرر لوحده أسبابه كتير، والـ antibody ممكن يطلع مؤقت بعد عدوى من غير أي مرض. يعني التشخيص محتاج **حدث إكلينيكي** + **antibody ثابت** مع بعض، والجلطات الصغيرة في الـ placenta هي اللي بتربط الركنين الأولانيين.
       - kind: explain
         page: 68
         title: "Primary ولا secondary؟"
@@ -36,14 +43,20 @@ lessons:
           - **Secondary APS**: مع مرض autoimmune، وأشهرهم ==systemic lupus erythematosus (SLE)==.
 
           وهو ==the most common acquired cause of thrombophilia==. ممكن يمسك أي organ، لأن أي وعا ممكن يتجلط، وأي سن، بس أكتر في **women of childbearing age**.
-      - kind: aside
-        tone: analogy
-        page: 70
-        quote: "Lupus Anticoagulant (LA)\n  Functional assay based on clotting time.\n  Associated with the highest risk of thrombosis.\n  Not a true \"anticoagulant\" in vivo — rather, it increases thrombosis risk."
+      - kind: explain
+        page: 68
+        quote: "APS can affect virtually any organ system through thrombotic or ischemic complications."
+        title: "ليه أي organ؟"
         text: |
-          تخيّل الـ antibodies دي زي واحد بيلزق **صمغ** على جدار الوعا من جوه: الصفايح والـ clotting factors بتلزق، والجلطة تطلع في أي حتة، شريان أو وريد أو المشيمة.
+          الكتاب بيقول الـ APS ممكن يمسك **virtually any organ system**، والسبب في نفس الجملة: **thrombotic or ischemic complications**.
 
-          والطريف إن أخطرهم اسمه **lupus anticoagulant** وهو في الحقيقة **بيجلّط**. الاسم جاي من الأنبوبة في المعمل مش من جسم العيان.
+          يعني المرض مش في عضو معين، المرض في **الدم نفسه** اللي بقى سهل يتجلط. وأي وعا في الجسم ممكن يتسد:
+          - وريد الرجل ← **DVT**، ولو الجلطة طلعت ← **PE**.
+          - شريان المخ ← **stroke** و TIA.
+          - شريان القلب ← **MI**.
+          - أوعية المشيمة ← ==placental insufficiency==.
+
+          وليه أكتر في الستات في سن الإنجاب؟ التفسير المقبول (مش في الكتاب): ده نفس سن وجنس الـ **SLE**، أشهر مرض بيصاحب الـ secondary APS، والحمل نفسه بيزوّد قابلية التجلط فبيكشف المرض.
       - kind: figure
         page: 69
         quote: "Thrombotic Events\n  Venous Thrombosis\n    Deep vein thrombosis (DVT).\n    Pulmonary embolism (PE).\n  Arterial Thrombosis\n    Stroke.\n    Transient ischemic attacks.\n    Myocardial infarction.\n    Retinal artery or vein thrombosis."
@@ -80,6 +93,18 @@ lessons:
             <text x="20" y="372" class="t-sm">Miscarriage &lt;10 wk · fetal death &gt;10 wk</text>
             <text x="20" y="388" class="t-sm">Premature birth &lt;34 wk (preeclampsia, placenta)</text>
           </svg>
+      - kind: explain
+        page: 69
+        quote: "Premature birth (<34 weeks) due to severe preeclampsia, eclampsia, or placental insufficiency."
+        title: "ليه الحمل بيتأثر؟"
+        text: |
+          الكتاب بيعدّ تلات صور للـ pregnancy morbidity: إجهاض بدري متكرر قبل **10 أسابيع**، موت جنين من غير سبب بعد **10 أسابيع**، وولادة مبكرة قبل **34 أسبوع** من preeclampsia أو eclampsia أو **placental insufficiency**.
+
+          التفسير المقبول (مش في الكتاب) اللي بيربطهم: المشيمة شبكة أوعية صغيرة، والجنين بياخد منها كل أكله وأكسجينه. لو الأوعية دي اتجلطت:
+          - الجنين ممكن يموت.
+          - أو المشيمة تشتغل نص شغل ← الجنين صغير والأم تعمل ==preeclampsia==، فالدكاترة يولّدوها بدري.
+
+          عشان كده علاج الحمل (صفحة 74) هو نفس الفكرة: نمنع التجلط بالـ aspirin والـ heparin.
       - kind: sort
         page: 69
         quote: "Other Clinical Manifestations\n  Thrombocytopenia.\n  Livedo reticularis.\n  Valvular heart disease (Libman–Sacks endocarditis).\n  Neurological symptoms (e.g., migraine, seizures, chorea).\n  Catastrophic APS (CAPS) – a rare but life-threatening form with multiorgan thrombosis."
@@ -95,6 +120,39 @@ lessons:
           - { text: "Thrombocytopenia", bin: 2 }
           - { text: "Chorea", bin: 2 }
         why: "الـ venous هما الـ DVT والـ PE بس. الـ arterial: stroke و transient ischemic attack (TIA) و myocardial infarction (MI) و retinal thrombosis. والباقي تحت **other**: thrombocytopenia و livedo و Libman–Sacks و migraine/seizures/chorea و CAPS."
+      - kind: check
+        page: 69
+        quote: "Valvular heart disease (Libman–Sacks endocarditis)."
+        question: "A 29-year-old woman with APS has a new murmur. Echo shows sterile vegetations on the mitral valve. What is this called?"
+        options: ["Libman–Sacks endocarditis", "Infective endocarditis", "Rheumatic heart disease", "Mitral valve prolapse"]
+        answer: 0
+        why:
+          - "صح: الكتاب بيعدّها في الـ other clinical manifestations: valvular heart disease (Libman–Sacks)."
+          - "دي محتاجة ميكروب و fever و blood cultures موجبة."
+          - "ده بعد rheumatic fever، مش APS."
+          - "ده مش vegetations أصلًا."
+      - kind: try
+        items: [rheum.L04.001, rheum.L04.004, rheum.L04.008, rheum.L04.010, rheum.L04.011]
+    recap:
+      - "APS = thrombosis و/أو pregnancy morbidity + aPL ثابت. أشهر acquired thrombophilia."
+      - "Primary لوحده، secondary مع SLE غالبًا. أكتر في الستات في سن الإنجاب."
+      - "أي organ عشان المرض في الدم: venous (DVT، PE)، arterial (stroke، TIA، MI، retina)."
+      - "الحمل: جلطات المشيمة ← إجهاض، موت جنين، أو ولادة قبل 34 أسبوع."
+      - "Other: thrombocytopenia، livedo، Libman–Sacks، migraine/seizures/chorea، CAPS."
+    practice: [rheum.L04.001, rheum.L04.002, rheum.L04.003, rheum.L04.004, rheum.L04.005, rheum.L04.006, rheum.L04.007, rheum.L04.008, rheum.L04.009, rheum.L04.010, rheum.L04.011, rheum.L04.012, rheum.L04.013]
+  # ------------------------------------------------------------------
+  - id: rheum.L04.lesson2
+    title: "Sapporo والتلات antibodies"
+    hook: "مش كل aPL positive زي بعض: نوعه وعدده وثباته بيحددوا التشخيص وخطر الجلطة الجاية."
+    minutes: 10
+    pages: [70, 71]
+    topics: [criteria, antibodies]
+    goals:
+      - "تحفظ الـ 2006 revised Sapporo criteria بالأرقام"
+      - "تفرّق بين LA و aCL و anti-β2GPI"
+      - "ترتّب العيان high ولا low risk، وتعرف ليه"
+    status: unverified
+    steps:
       - kind: explain
         page: 70
         title: "Sapporo 2006: واحد من كل ناحية"
@@ -135,6 +193,8 @@ lessons:
           1. **Lupus anticoagulant (LA)**
           2. **Anticardiolipin (aCL)** Immunoglobulin G (IgG) أو Immunoglobulin M (IgM) بـ **medium to high titer**
           3. **Anti-β2 glycoprotein I** IgG أو IgM
+
+          التفسير المقبول (مش في الكتاب): ليه مرتين بينهم 12 أسبوع؟ عشان الـ aPL ممكن يطلع **مؤقت** بعد عدوى أو دوا ويختفي. والعلاج بعدها ممكن يبقى warfarin مدى الحياة، فمش هتبني قرار زي ده على نتيجة ممكن تختفي. ويعني الـ medium to high titer إن الرقم الواطي أقل ارتباط بالجلطات.
       - kind: reveal
         page: 70
         quote: "At least one laboratory criterion (Repeated on two or more occasions, at least 12 weeks apart)."
@@ -163,27 +223,14 @@ lessons:
         quote: "To classify a patient as having APS, they must have:\n  At least one clinical criterion"
         text: "الـ **2023 American College of Rheumatology (ACR)/European League Against Rheumatism (EULAR) APS criteria** بقت بنقط. الأول **entry criterion**: aPL positive في خلال 3 سنين من الـ clinical event. وبعدين clinical و laboratory domains، ولازم **3 points على الأقل** من كل ناحية. في الامتحان: Sapporo بتاع الكتاب."
         ref: "ACR/EULAR APS classification criteria, 2023"
-      - kind: try
-        items: [rheum.L04.001, rheum.L04.010, rheum.L04.016, rheum.L04.017, rheum.L04.018]
-    recap:
-      - "APS = thrombosis و/أو pregnancy morbidity + aPL ثابت. أشهر acquired thrombophilia."
-      - "Primary لوحده، secondary مع SLE غالبًا."
-      - "Sapporo: clinical واحد + lab واحد. الحمل: **1-1-3** (موت ≥10 أسابيع، ولادة <34، تلات إجهاضات <10)."
-      - "الـ lab: LA أو aCL أو anti-β2GPI، مرتين بينهم ≥12 أسبوع."
-    practice: [rheum.L04.001, rheum.L04.002, rheum.L04.003, rheum.L04.004, rheum.L04.005, rheum.L04.006, rheum.L04.007, rheum.L04.008, rheum.L04.009, rheum.L04.010, rheum.L04.011, rheum.L04.012, rheum.L04.013, rheum.L04.014, rheum.L04.015, rheum.L04.016, rheum.L04.017, rheum.L04.018, rheum.L04.019, rheum.L04.020]
-  # ------------------------------------------------------------------
-  - id: rheum.L04.lesson2
-    title: "التلات antibodies والـ CAPS"
-    hook: "مش كل aPL positive زي بعض: نوعه وعدده بيحددوا خطر الجلطة الجاية."
-    minutes: 8
-    pages: [70, 73]
-    topics: [antibodies, caps, workup]
-    goals:
-      - "تفرّق بين LA و aCL و anti-β2GPI"
-      - "ترتّب العيان high ولا low risk"
-      - "تعرف الـ CAPS: تعريفه، triggers، و triple therapy"
-    status: unverified
-    steps:
+      - kind: aside
+        tone: analogy
+        page: 70
+        quote: "Lupus Anticoagulant (LA)\n  Functional assay based on clotting time.\n  Associated with the highest risk of thrombosis.\n  Not a true \"anticoagulant\" in vivo — rather, it increases thrombosis risk."
+        text: |
+          تخيّل الـ antibodies دي زي واحد بيلزق **صمغ** على جدار الوعا من جوه: الصفايح والـ clotting factors بتلزق، والجلطة تطلع في أي حتة، شريان أو وريد أو المشيمة.
+
+          والطريف إن أخطرهم اسمه **lupus anticoagulant** وهو في الحقيقة **بيجلّط**. الاسم جاي من الأنبوبة في المعمل مش من جسم العيان.
       - kind: table
         page: 71
         quote: "Anticardiolipin Antibodies (aCL)\n  Detected via ELISA.\n  IgG and IgM isotypes.\n  Moderate to high titers (≥40 GPL or MPL units) are clinically significant."
@@ -226,6 +273,17 @@ lessons:
             <text x="60" y="262" class="t-sm">Transient or single positive test</text>
             <text x="60" y="278" class="t-sm t-mut">(infection, pregnancy)</text>
           </svg>
+      - kind: explain
+        page: 71
+        quote: "Transient or single-time positive tests (e.g., during infection or pregnancy)."
+        title: "ليه السلّم مترتب كده؟"
+        text: |
+          الكتاب بيقول الخطر بيمشي مع **نوع** و **عدد** الـ tests الموجبة. التفسير المقبول (مش في الكتاب) لكل درجة:
+
+          - **Triple positivity** فوق خالص: تلات اختبارات مختلفة بتشوف نفس الـ antibody المؤذي من تلات زوايا، فالاحتمال إنه حقيقي ومؤذي أعلى حاجة.
+          - **Isolated LA**: لأن الـ LA **functional assay**، يعني بيقيس إن الـ antibody فعلًا **بيأثر على التجلط**، مش بس موجود.
+          - **IgG عالي فوق 40**: كل ما الكمية أكتر والنوع IgG، كل ما الـ antibody أقوى.
+          - **تحت**: low titer، **IgM من غير LA**، و **transient** مع infection أو حمل: ده غالبًا antibody عابر، وعشان كده الـ criteria بتطلب ==12 weeks==.
       - kind: check
         page: 70
         quote: "Lupus Anticoagulant (LA)\n  Functional assay based on clotting time.\n  Associated with the highest risk of thrombosis.\n  Not a true \"anticoagulant\" in vivo — rather, it increases thrombosis risk."
@@ -237,6 +295,27 @@ lessons:
           - "الـ IgM aCL من غير LA = lower risk."
           - "الـ IgM anti-β2GPI لوحده = lower risk."
           - "الـ anti-dsDNA ده antibody الـ SLE، مش aPL أصلًا."
+      - kind: try
+        items: [rheum.L04.016, rheum.L04.018, rheum.L04.021, rheum.L04.025, rheum.L04.027]
+    recap:
+      - "Sapporo: clinical واحد + lab واحد. الحمل: **1-1-3** (موت ≥10 أسابيع، ولادة <34، تلات إجهاضات <10)."
+      - "الـ lab: LA أو aCL أو anti-β2GPI، مرتين بينهم ≥12 أسبوع."
+      - "LA = clotting assay، أعلى خطر، وبيجلّط مش بيسيّل. aCL و anti-β2GPI = ELISA، IgG و IgM. aCL significant ≥40."
+      - "High risk: triple positive، isolated LA، IgG عالي. Low: low titer، IgM من غير LA، transient."
+    practice: [rheum.L04.014, rheum.L04.015, rheum.L04.016, rheum.L04.017, rheum.L04.018, rheum.L04.019, rheum.L04.020, rheum.L04.021, rheum.L04.022, rheum.L04.023, rheum.L04.024, rheum.L04.025, rheum.L04.026, rheum.L04.027, rheum.L04.028, rheum.L04.029, rheum.L04.030]
+  # ------------------------------------------------------------------
+  - id: rheum.L04.lesson4
+    title: "الـ CAPS والـ work-up"
+    hook: "تلات organs في تلات أيام بعد ما وقفت الـ warfarin عشان خلع ضرس: دي مش صدفة، دي CAPS."
+    minutes: 8
+    pages: [72, 73]
+    topics: [caps, workup]
+    goals:
+      - "تعرف الـ CAPS: تعريفه، triggers، و triple therapy، وليه كل جزء"
+      - "تعمل work-up لعيان شاكك فيه APS"
+      - "تعرف مين محتاج SLE screen، وليه"
+    status: unverified
+    steps:
       - kind: explain
         page: 72
         title: "الـ CAPS: العاصفة"
@@ -247,6 +326,21 @@ lessons:
           - **≥3 organ systems** في وقت قصير (غالبًا **أيام**)
           - دليل على **small-vessel thrombosis**
           - **High mortality** لو ما اتعالجش
+
+          التفسير المقبول (مش في الكتاب): ليه العاصفة دي خطيرة كده؟ عشان الجلطات في الأوعية الصغيرة بتقفل الدم عن أعضاء كتير في نفس الوقت (كلى، رئة، مخ، قلب)، وكل عضو بيقع بيزوّد الالتهاب والتجلط، فالدايرة بتكبر بسرعة. يعني لو مريض APS دخل بفشل في أكتر من عضو في أيام، فكّر في الـ CAPS وابدأ بسرعة.
+      - kind: explain
+        page: 72
+        quote: "Withdrawal of anticoagulation."
+        title: "ليه الـ triggers دي بالذات؟"
+        text: |
+          التفسير المقبول (مش في الكتاب): كل trigger من الأربعة بيزوّد قابلية التجلط فجأة عند حد أصلًا دمه سهل يتجلط:
+
+          - **Infection**: الالتهاب بينشّط الـ endothelium والـ clotting.
+          - **Surgery**: جرح في النسيج + رقاد في السرير.
+          - ==Withdrawal of anticoagulation==: الحماية الوحيدة اتشالت، زي اللي في الـ case بعد خلع الضرس.
+          - **Obstetric complications**: الحمل والولادة نفسهم من أعلى أوقات التجلط.
+
+          وعشان كده الكتاب في صفحة 74 بيقول: لو المريض داخل عملية ← **perioperative prophylaxis**، ولو هتوقف الـ warfarin ← **bridge بالـ LMWH**. ده بالظبط منع للـ trigger.
       - kind: mnemonic
         page: 72
         quote: "Common Triggers\n  Infection.\n  Surgery.\n  Withdrawal of anticoagulation.\n  Obstetric complications."
@@ -269,6 +363,50 @@ lessons:
           3. **Plasmapheresis و/أو intravenous immunoglobulin (IVIG)**
 
           ولو **refractory**: **rituximab** أو **eculizumab**.
+
+          التفسير المقبول (مش في الكتاب): ليه rituximab و eculizumab للـ refractory؟ عشان دول بيضربوا أبعد في السلسلة: الـ rituximab بيشيل الـ B cells اللي بتصنّع الـ antibody نفسه، والـ eculizumab بيقفل الـ complement اللي الـ antibody بيشغّله ويعمل الجلطة. يعني لو الـ triple therapy ماوقفتش العاصفة، بتقطع المصدر.
+      - kind: explain
+        page: 72
+        quote: "High mortality if untreated."
+        title: "ليه تلات علاجات مع بعض؟"
+        text: |
+          الـ CAPS **high mortality** و **rapidly progressive**، فمفيش وقت تجرّب علاج ورا التاني. التفسير المقبول (مش في الكتاب) لكل ضلع في الـ triple therapy:
+
+          - **Anticoagulation**: يوقف الجلطات الجديدة ويمنع القديمة تكبر.
+          - **High-dose corticosteroids**: يطفي الالتهاب الكبير اللي بيصاحب الجلطات في أعضاء كتير.
+          - ==Plasmapheresis و/أو IVIG==: الـ plasmapheresis **بيشيل الـ antibodies** نفسها من الدم، والـ IVIG بيعدّل المناعة.
+
+          ولو مافيش فايدة: **rituximab** (بيشيل الـ B cells اللي بتعمل الـ antibodies) أو **eculizumab** (بيقفل الـ complement).
+
+          يعني القاعدة: في العاصفة بتضرب كل حلقات السلسلة مرة واحدة (الجلطة، الالتهاب، الـ antibody)، مش واحدة واحدة.
+      - kind: figure
+        page: 72
+        quote: "Anticoagulation.\n  High-dose corticosteroids.\n  Plasmapheresis and/or intravenous immunoglobulin (IVIG).\n  Rituximab or eculizumab may be used in refractory cases."
+        title: "كل علاج بيقطع حلقة"
+        alt: "A chain of three links: antibody, then clot in small vessels, then inflammation and organ failure. Under each link an arrow from its treatment: plasmapheresis or IVIG removes the antibody, anticoagulation stops the clot, high-dose steroids calm the inflammation. A dashed box for refractory cases: rituximab removes the B cells that make the antibody, eculizumab blocks complement."
+        caption: "الـ ==triple therapy== بتقطع التلات حلقات مع بعض. والـ refractory: بتروح للمصدر (B cells) أو للـ complement."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L04c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fg-head"/></marker></defs>
+            <rect x="5" y="20" width="95" height="40" rx="8" class="fg-box"/>
+            <text x="14" y="45" class="t-sm t-b">aPL antibody</text>
+            <path d="M100 40 H117" class="fg-arrow" marker-end="url(#L04c)"/>
+            <rect x="118" y="20" width="95" height="40" rx="8" class="fg-bad"/>
+            <text x="127" y="38" class="t-sm t-b">Small-vessel</text>
+            <text x="127" y="53" class="t-sm t-b">clots</text>
+            <path d="M213 40 H230" class="fg-arrow" marker-end="url(#L04c)"/>
+            <rect x="231" y="20" width="95" height="40" rx="8" class="fg-bad"/>
+            <text x="238" y="38" class="t-sm t-b">Inflammation,</text>
+            <text x="238" y="53" class="t-sm t-b">≥3 organs</text>
+            <path d="M52 115 V65 M165 115 V65 M278 115 V65" class="fg-arrow" marker-end="url(#L04c)"/>
+            <text x="8" y="132" class="t-sm t-acc">PLEX / IVIG</text>
+            <text x="118" y="132" class="t-sm t-acc">Anticoagulation</text>
+            <text x="236" y="132" class="t-sm t-acc">High-dose</text>
+            <text x="236" y="147" class="t-sm t-acc">steroids</text>
+            <rect x="5" y="165" width="320" height="55" rx="8" class="fg-thin"/>
+            <text x="14" y="185" class="t-sm t-b">Refractory:</text>
+            <text x="14" y="202" class="t-sm">rituximab (B cells) · eculizumab (complement)</text>
+          </svg>
       - kind: case
         page: 72
         quote: "Key Features\n  Involves ≥3 organ systems within a short time (usually days).\n  Evidence of small-vessel thrombosis.\n  High mortality if untreated."
@@ -291,22 +429,33 @@ lessons:
           - **Exam**: ==livedo reticularis==، cardiac murmurs، neurological deficits.
           - **Labs**: **activated partial thromboplastin time (aPTT), Dilute Russell viper venom time (dRVVT)** للـ lupus anticoagulant (LA)؛ **enzyme-linked immunosorbent assay (ELISA)** للـ aCL و anti-β2GPI، الاتنين Immunoglobulin G (IgG) و Immunoglobulin M (IgM)؛ **re-test بعد 12 weeks**.
           - **Systemic lupus erythematosus (SLE) screen** بالـ antinuclear antibodies (ANA) و anti-dsDNA، خصوصًا الصغيرين أو اللي عندهم systemic symptoms.
+
+          التفسير المقبول (مش في الكتاب): ليه الـ re-test بعد 12 أسبوع؟ نفس سبب الـ Sapporo criteria: الـ antibody لازم يكون ثابت. وليه الـ SLE screen؟ عشان الـ secondary APS أغلبه مع الـ SLE، ولو موجود العلاج والمتابعة بيتغيروا. والـ livedo reticularis علامة إن الأوعية الصغيرة في الجلد فيها تجلط بطيء، فهو مفتاح في الفحص.
+      - kind: explain
+        page: 73
+        quote: "Additional screening for SLE (ANA, anti-dsDNA), especially in younger patients or those with systemic symptoms."
+        title: "ليه SLE screen، وليه نعيد بعد 12 أسبوع؟"
+        text: |
+          - **SLE screen (ANA و anti-dsDNA)** خصوصًا في **الصغيرين** واللي عندهم **systemic symptoms**: عشان الـ SLE أشهر سبب للـ ==secondary APS== (صفحة 68)، ولو موجود هيغيّر المتابعة والعلاج كلها (HCQ مثلًا في صفحة 75).
+          - **Re-test بعد 12 أسبوع**: عشان الـ aPL ممكن يطلع **transient** مع infection أو حمل (صفحة 71)، والتشخيص محتاج antibody **persistent**.
+          - **aPTT و dRVVT للـ LA**: لأن الـ LA اختبار تجلط (functional)، مش ELISA.
       - kind: try
-        items: [rheum.L04.025, rheum.L04.027, rheum.L04.032, rheum.L04.034, rheum.L04.038]
+        items: [rheum.L04.031, rheum.L04.032, rheum.L04.034, rheum.L04.036, rheum.L04.038]
     recap:
-      - "LA = clotting assay وأعلى خطر. aCL و anti-β2GPI = ELISA، IgG و IgM. aCL significant ≥40."
-      - "High risk: triple positive، isolated LA، IgG عالي. Low: low titer، IgM من غير LA، transient."
-      - "CAPS: ≥3 organs في أيام + small vessels. Triggers **SWIP**. علاج: anticoagulation + steroids + PLEX/IVIG."
-    practice: [rheum.L04.021, rheum.L04.022, rheum.L04.023, rheum.L04.024, rheum.L04.025, rheum.L04.026, rheum.L04.027, rheum.L04.028, rheum.L04.029, rheum.L04.030, rheum.L04.031, rheum.L04.032, rheum.L04.033, rheum.L04.034, rheum.L04.035, rheum.L04.036, rheum.L04.037, rheum.L04.038, rheum.L04.039]
+      - "CAPS: ≥3 organs في أيام + small vessels + high mortality."
+      - "Triggers **SWIP**: surgery، withdrawal of anticoagulation، infection، pregnancy؛ كلهم بيزوّدوا التجلط فجأة."
+      - "علاج: anticoagulation + steroids + PLEX/IVIG؛ refractory: rituximab أو eculizumab."
+      - "Work-up: history و family history، livedo و murmurs و neuro؛ aPTT و dRVVT و ELISA؛ re-test بعد 12 أسبوع؛ SLE screen في الصغيرين."
+    practice: [rheum.L04.031, rheum.L04.032, rheum.L04.033, rheum.L04.034, rheum.L04.035, rheum.L04.036, rheum.L04.037, rheum.L04.038, rheum.L04.039]
   # ------------------------------------------------------------------
   - id: rheum.L04.lesson3
     title: "العلاج: warfarin، حمل، وحالات خاصة"
     hook: "سؤال الامتحان الكلاسيكي: عيان APS عمل DVT، تديله إيه ولحد امتى؟ وست حامل؟"
-    minutes: 9
+    minutes: 10
     pages: [73, 75]
     topics: [thrombotic, obstetric, adjunct]
     goals:
-      - "تعرف علاج الـ thrombotic APS والـ INR المطلوب"
+      - "تعرف علاج الـ thrombotic APS والـ INR المطلوب، وليه heparin الأول"
       - "تعرف ليه الـ DOACs ممنوعة في الـ high risk"
       - "تعالج الـ obstetric APS وتعرف الـ primary prevention"
     status: unverified
@@ -321,6 +470,20 @@ lessons:
           - **في الأول:** **heparin**، يا **unfractionated heparin (UFH)** يا **low-molecular-weight heparin (LMWH)**. الـ **UFH** ميزته إنك تقدر **تعكسه بسرعة**.
           - **على المدى الطويل:** **warfarin** هو الأساس، **international normalised ratio (INR) 2–3** لمعظم العيانين.
           - **INR 3–4** لو الجلطة رجعت رغم الـ standard anticoagulation.
+
+          التفسير المقبول (مش في الكتاب): ليه lifelong؟ عشان الـ antibody فاضل، فخطر الجلطة مابيروحش بعد أول مرة، وأول جلطة بتقولك إن المريض ده من النوع اللي بيتجلط. وليه الـ UFH في الأول؟ عشان لو حصل نزيف أو محتاج عملية تقدر توقفه وتعكسه بسرعة. والـ INR الأعلى (3–4) للي جلطته رجعت يعني الجرعة العادية ماكفتش.
+      - kind: explain
+        page: 73
+        quote: "UFH allows rapid reversal if needed."
+        title: "ليه heparin الأول، وليه UFH أحيانًا؟"
+        text: |
+          الكتاب بيقول ابدأ بـ **heparin (UFH أو LMWH)** في الجلطة الحادة، وبعدين **warfarin** على المدى الطويل.
+
+          التفسير المقبول (مش في الكتاب):
+          - الـ **heparin** بيشتغل **فورًا**، أما الـ warfarin بياخد أيام لحد ما الـ INR يوصل للمطلوب. فالـ heparin بيغطي الفترة دي.
+          - الكتاب بيدّي ميزة الـ ==UFH==: **rapid reversal**. ده مهم في عيان ممكن ينزف أو محتاج عملية أو procedure، لأنك تقدر توقفه وتعكسه بسرعة.
+
+          وبعدين warfarin **lifelong** في الغالب، لأن الـ antibody لسه موجود والجلطة ممكن ترجع.
       - kind: aside
         tone: trap
         page: 73
@@ -358,6 +521,8 @@ lessons:
           - وقّف الـ LMWH **قبل الولادة بشوية**، ورجّعه **postpartum**.
 
           **Refractory:** LMWH بجرعة أعلى، **hydroxychloroquine**، أو **intravenous immunoglobulin (IVIG)** في حالات مختارة.
+
+          التفسير المقبول (مش في الكتاب): ليه aspirin مع LMWH؟ عشان المشكلة في الـ placenta جلطات صغيرة، فالـ aspirin بيقلل الـ platelets والـ heparin بيقلل التجلط، والاتنين أمان في الحمل (عكس الـ warfarin اللي بيأذي الجنين). وليه وقف الـ LMWH قبل الولادة؟ عشان تقلل النزيف وقت الولادة وتسمح بالـ epidural، وبعدها ترجّعه لأن خطر الجلطة بيعلى بعد الولادة.
       - kind: reveal
         page: 74
         quote: "Prophylactic low-molecular-weight heparin (LMWH)\n  Start therapy early in pregnancy and continue throughout gestation.\n  Discontinue LMWH shortly before delivery and resume postpartum to reduce thrombosis risk."
@@ -427,7 +592,7 @@ lessons:
       - kind: try
         items: [rheum.L04.042, rheum.L04.043, rheum.L04.046, rheum.L04.055, rheum.L04.057]
     recap:
-      - "بعد جلطة: heparin في الأول، بعدين **warfarin lifelong، INR 2–3**، و 3–4 لو رجعت."
+      - "بعد جلطة: heparin في الأول (فوري، والـ UFH بيتعكس بسرعة)، بعدين **warfarin lifelong، INR 2–3**، و 3–4 لو رجعت."
       - "**No DOACs** في الـ high risk / triple positive."
       - "الحمل: **LDA 75–100 + prophylactic LMWH**، وقّف قبل الولادة ورجّع بعدها."
       - "Asymptomatic: مفيش consensus، غالبًا LDA. Surgery: prophylaxis و bridging بالـ LMWH."

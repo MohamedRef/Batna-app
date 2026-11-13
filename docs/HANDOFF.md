@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: hb.L01 lessons split for #828/#829: 7 → 10 (lesson3 → +lesson8 further decompensation/HCC/ACLF, lesson4 → +lesson9 labs, lesson6 → +lesson10 transplant/ACLF treatment), p22 now cited, practice cards follow their pages; words per page 219 → 281; lecture added to `content/lesson-skips.yaml`.
 - 2026-11-13: rheum.L16 to the Hepatology bar: 7 → 13 lessons (lesson1 → 8, lesson4 → 9, lesson5 → 10, lesson6 → 11, lesson7 → 12 and 13), reasons labelled «التفسير المقبول (مش في الكتاب)», book joint figure p243 and four new SVGs, words per page 102 → 238, explain steps without a reason 27/38 → 3/53; p278 (review questions) skipped (#827–#829).
 - 2026-11-13: dm.L11 to the Hepatology bar: 4 → 5 lessons (lesson1 split → lesson5), p133 taught with the book's insulin action curves, reasons labelled «التفسير المقبول (مش في الكتاب)», words per page 113 → 263; in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: endo.L01 to the Hepatology bar: 5 → 8 lessons (lesson2 split → lesson6, lesson3 → lesson7, lesson5 → lesson8), every list with its reason, three new figures, words per page 202 → 349; added to `content/lesson-skips.yaml` (#827–#829).

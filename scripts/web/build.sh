@@ -28,7 +28,9 @@ pack=$(CARGO_PROFILE_RELEASE_STRIP=false cargo build -p batna-app --bin batna --
 import json, sys
 for line in sys.stdin:
     m = json.loads(line)
-    if m.get("reason") == "build-script-executed" and "/build/batna-app-" in m.get("out_dir", ""):
+    # Match the package, not the path: cargo 1.100 moved build output from
+    # build/batna-app-<hash>/ to build/batna-app/<hash>/.
+    if m.get("reason") == "build-script-executed" and "#batna-app@" in m.get("package_id", ""):
         print(m["out_dir"] + "/content.pack")
 ' | tail -1)
 [[ -f "$pack" ]] || { echo "content.pack not found (cargo didn't report batna-app's build script)" >&2; exit 1; }

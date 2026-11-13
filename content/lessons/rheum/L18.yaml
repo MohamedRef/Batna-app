@@ -46,6 +46,8 @@ lessons:
         text: |
           - ==Primary Sjögren== (pSS): **من غير** أي autoimmune disease تاني. فيه **keratoconjunctivitis sicca** + **xerostomia** = الـ **sicca syndrome**.
           - **Secondary Sjögren**: بييجي **مع** مرض autoimmune تاني: **Rheumatoid arthritis (RA)**، **systemic sclerosis**، **systemic lupus erythematosus (SLE)**.
+
+          ليه التفرقة دي مهمة؟ لأن في الـ secondary المرض التاني (RA، SSc، SLE) هو اللي بيحدد العلاج والـ prognosis، والـ sicca بيتعالج جنبه. وكمان الـ 2016 criteria معمولة للـ primary (الدرس التالت).
       - kind: check
         page: 302
         quote: "Primary Sjogren's syndrome (pSS) occurs in the absence of other autoimmune diseases and is characterized by keratoconjunctiva sicca (dry eyes) and xerostomia (dry mouth), collectively called the sicca syndrome. In contrast, secondary Sjogren's syndrome presents along with other autoimmune diseases such as rheumatoid arthritis (RA), systemic sclerosis and systemic lupus erythematosus (SLE)."
@@ -81,6 +83,14 @@ lessons:
           - **Glandular cell apoptosis**
           - **Atrophy** في الـ salivary والـ **sebaceous** والـ **sweat glands** (علشان كده الجلد كمان بينشف)
           - **Edema** وتغييرات secondary في الـ conjunctiva
+      - kind: reveal
+        page: 302
+        quote: "glandular epithelial cells become deregulated and release chemokines and adhesion molecules."
+        prompt: "في الـ Sjögren مين اللي بيبدأ الحكاية: المناعة ولا الغدة نفسها؟"
+        answer: |
+          الكتاب بيقول إن الـ ==glandular epithelial cells== هي اللي بتتلخبط الأول (deregulated) وتطلّع **chemokines** و **adhesion molecules**. يعني الغدة نفسها هي اللي "بتنده" على الـ dendritic cells والـ lymphocytes.
+
+          التفسير المقبول (مش في الكتاب): علشان كده بعض الناس بيسمّوه **autoimmune epithelitis**: المرض بيبدأ من الخلية اللي بتعمل الريق والدموع، والمناعة بتيجي بعدها. وده بيفسّر ليه الضرر بيتركّز في الـ **exocrine glands** بالذات (salivary، lacrimal، sebaceous، sweat).
       - kind: figure
         remind: [rheum.L18.011]
         page: 303
@@ -128,16 +138,19 @@ lessons:
           - "Interferon stimulates BAFF"
           - "Autoimmune B cells make autoantibodies"
         why: "الـ epithelium هو أول واحد بيصرخ (chemokines)، والـ dendritic cells بتيجي وتطلّع interferon، والـ interferon يطلّع BAFF، والـ BAFF يربّي B cells غلط."
-      - kind: reveal
+      - kind: check
         page: 303
-        quote: "BAFF promotes irregular B-cell maturation, leading to the formation of autoimmune B-cells, which secrete autoantibodies locally."
-        prompt: "ليه منطقي إن مرض فيه BAFF عالي يبقى عنده risk عالي للـ B-cell lymphoma؟"
-        answer: |
-          الـ **BAFF** معناه B-cell activating factor: بيخلّي الـ B cells تعيش وتتكاثر.
-
-          لو الـ B cells فضلت متحفّزة سنين جوه الغدة، احتمال إن clone منها يفلت ويبقى **lymphoma** بيزيد. ده تفسير منطقي؛ الرقم (**44 times** risk) هتشوفه في الدرس الجاي.
+        quote: "Interferons stimulate the production of BAFF by epithelial cells, dendritic cells and T cells."
+        question: "In the book's Sjögren pathway, what stimulates BAFF production?"
+        options: ["Interferons from dendritic cells", "Anti-Ro antibodies", "Estrogen directly", "IL-17 from Th17 cells"]
+        answer: 0
+        why:
+          - "صح: الـ dendritic cells بتعمل interferon، والـ interferon يخلّي الـ epithelium والـ dendritic cells والـ T cells يطلّعوا BAFF."
+          - "الـ anti-Ro نتيجة في آخر السلسلة، مش اللي بيطلّع الـ BAFF."
+          - "الـ estrogen من الـ triggers، مش اللي بيحفّز الـ BAFF في الكتاب."
+          - "الـ IL-17 بتاع الـ AS والـ RA، مش في سلسلة Sjögren في الكتاب."
       - kind: try
-        items: [rheum.L18.001, rheum.L18.004, rheum.L18.008, rheum.L18.016, rheum.L18.018]
+        items: [rheum.L18.001, rheum.L18.004, rheum.L18.008, rheum.L18.012, rheum.L18.016]
     recap:
       - "Sjögren = lymphocytes + plasma cells في الـ salivary والـ lacrimal glands ← xerostomia + xerophthalmia."
       - "1–23 per 10 000، ستات 9–20 ضعف، سن 30–60."
@@ -147,15 +160,15 @@ lessons:
     practice: [rheum.L18.001, rheum.L18.002, rheum.L18.003, rheum.L18.004, rheum.L18.005, rheum.L18.006, rheum.L18.007, rheum.L18.008, rheum.L18.009, rheum.L18.010, rheum.L18.011, rheum.L18.012, rheum.L18.013, rheum.L18.014, rheum.L18.015, rheum.L18.016, rheum.L18.017, rheum.L18.018, rheum.L18.019]
   # ------------------------------------------------------------------
   - id: rheum.L18.lesson2
-    title: "من البُق للكلى: الصورة الإكلينيكية والـ lymphoma"
-    hook: "Sjögren مش بس عين وبُق: نص العيانين عندهم جلد، وفيه 44 ضعف risk لـ lymphoma لازم تشم ريحته بدري."
-    minutes: 9
-    pages: [303, 305]
-    topics: [glandular, extraglandular, lymphoma]
+    title: "من البُق للكلى: الصورة الإكلينيكية"
+    hook: "Sjögren مش بس عين وبُق: نص العيانين عندهم جلد، وفيه كلى وأعصاب ومفاصل ورئة."
+    minutes: 8
+    pages: [303, 304]
+    topics: [glandular, extraglandular]
     goals:
-      - "تعدّ الـ glandular manifestations"
+      - "تعدّ الـ glandular manifestations وتعرف سبب كل واحدة"
       - "تمشي على الـ systems: جلد، كلى، أعصاب، مفاصل، رئة، أمعاء"
-      - "تحفظ الـ predictors of lymphoma: clinical وserologic"
+      - "تفتكر الأرقام: 50، 22، 53، 22"
     status: unverified
     steps:
       - kind: explain
@@ -168,6 +181,34 @@ lessons:
           **العين:** **burning** و **itching**، وجفاف = **keratoconjunctivitis sicca**.
 
           **المهبل:** dryness و burning.
+
+          يعني كل الأعراض دي نتيجة حاجة واحدة: الغدة الـ exocrine اللي بتعمل الريق أو الدموع أو إفرازات المهبل اتملت lymphocytes وبطّلت تشتغل.
+      - kind: figure
+        page: 303
+        quote: "Glandular manifestations Dry mouth (xerostomia)."
+        title: "الغدد الأول، وبعدين الجسم"
+        alt: "Two columns. Glandular (exocrine): eyes dry and burning, mouth dry with caries and candida, parotid swelling, lips cracked, vagina dry. Extraglandular: skin 50% (xeroderma, Sweet syndrome), kidney (nephrotic, vasculitis with hypertension), nerves (sensory neuropathy 22%), joints (arthralgia 53%, small asymmetric), lung (cough from xerotrachea), gut (malabsorption, pancreatitis, hepatitis)."
+        caption: "على الشمال الـ **glandular**: كل غدة exocrine بتنشف. على اليمين الـ ==extraglandular==: نفس الـ lymphocytes بتروح الجلد والكلى والأعصاب والمفاصل والرئة والأمعاء."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="140" height="264" rx="8" class="fg-acc"/>
+            <text x="78" y="30" text-anchor="middle" class="t-b">Glandular</text>
+            <text x="18" y="58" class="t-sm">Eyes: dry, burning</text>
+            <text x="18" y="84" class="t-sm">Mouth: dry, caries</text>
+            <text x="18" y="102" class="t-sm">candida</text>
+            <text x="18" y="128" class="t-sm">Parotid swelling</text>
+            <text x="18" y="154" class="t-sm">Lips: cracked</text>
+            <text x="18" y="180" class="t-sm">Vagina: dry</text>
+            <rect x="158" y="8" width="164" height="264" rx="8" class="fg-box"/>
+            <text x="240" y="30" text-anchor="middle" class="t-b">Extraglandular</text>
+            <text x="168" y="58" class="t-sm">Skin 50%</text>
+            <text x="168" y="84" class="t-sm">Kidney: nephrotic, HTN</text>
+            <text x="168" y="110" class="t-sm">Nerve: sensory 22%</text>
+            <text x="168" y="136" class="t-sm">Joints: arthralgia 53%</text>
+            <text x="168" y="162" class="t-sm">Lung: cough</text>
+            <text x="168" y="188" class="t-sm">Gut: malabsorption</text>
+            <text x="168" y="206" class="t-sm">pancreatitis, hepatitis</text>
+          </svg>
       - kind: reveal
         page: 303
         quote: "Clinical picture\n  Glandular manifestations Dry mouth (xerostomia).\n  Parotits, swellimg of salivary glands.\n  Cracked, peeling and atrophic appearance of lips.\n  Dry fissured tongue, oral candidiasis.\n  Dental caries and loss of teeth.\n  Lacrimal gland involvement:\n    Burning and itchy eye sensation.\n    Dryness of the eyes (keratoconjunctivits sicca."
@@ -184,6 +225,26 @@ lessons:
         text: |
           - **Skin** = ==50%== من الـ manifestations: **xeroderma**، scaling، **pruritus**، و **annular papular erythema** ومنها **Sweet syndrome**.
           - **Renal:** **hematuria**، **proteinuria**، **nephrotic syndrome**، **renal vasculitis** مع hypertension واضح، و **renal insufficiency**.
+
+          السبب في الخطوتين الجايين: الجلد من الغدد الضامرة، والكلى من الـ lymphocytes والأوعية.
+      - kind: reveal
+        page: 303
+        quote: "Xeroderma, scaling, pruritus."
+        prompt: "ليه جلد عيان Sjögren ناشف وبيهرش (xeroderma، pruritus)؟"
+        answer: |
+          ارجع للـ pathology في ص 302: الـ ==atrophy== مش في الغدد اللعابية بس، كمان في الـ **sebaceous glands** والـ **sweat glands**.
+
+          يعني الجلد فقد الزيت والعرق اللي بيرطّبوه، فينشف ويتقشّر (scaling) ويهرش. نفس المرض، غدة exocrine تانية. وده سبب إن الجلد **50%** من الـ manifestations في الكتاب.
+      - kind: reveal
+        page: 303
+        quote: "Renal vasculitis with significant hypertension."
+        prompt: "ليه الكلى بتتأثر في مرض أصله غدد؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): نفس الـ **lymphocytes** اللي بتدخل الغدد بتدخل الكلى، وكمان الـ **immune complexes** ممكن تترسّب في الأوعية. علشان كده الكتاب بيذكر نوعين من الضرر:
+          - **Hematuria، proteinuria، nephrotic syndrome**: الـ glomerulus اتأثر.
+          - **Renal vasculitis مع hypertension واضح**: الأوعية نفسها ملتهبة، فالكلية تحس إن الدم قليل وتعلّي الضغط.
+
+          والنتيجة في الآخر ممكن **renal insufficiency**. يعني افحص البول والضغط في كل متابعة، مش بس العين والبُق.
       - kind: table
         page: 304
         quote: "Peripheral neuropathy, primarily sensory, was found in 22% of patients with primary SS."
@@ -201,6 +262,17 @@ lessons:
         page: 304
         quote: "Musculoskeletal\n  Joint disease in primary SS is typically an intermittent asymmetrical poly-articular.\n  Arthropathy primarily affecting small joints.\n  Joint deformity and mild erosions occur.\n  Arthralgia's exist in as many as 53% of patients.\n  Myalgia's in as many as 22% of Sijogren patients."
         text: "المفاصل في الـ primary Sjögren syndrome (SS): **intermittent** و **asymmetrical** و **small joints**، وممكن **mild erosions** و deformity. افتكر **22 / 53 / 22**: neuropathy، arthralgia، myalgia."
+      - kind: check
+        page: 304
+        quote: "Peripheral neuropathy, primarily sensory, was found in 22% of patients with primary SS."
+        question: "A woman with primary Sjögren has numb, burning feet. Which fits the book?"
+        options: ["Peripheral sensory neuropathy, about 22%", "CNS disease, the commonest form", "Motor neuropathy, about 53%", "Never seen in Sjögren"]
+        answer: 0
+        why:
+          - "صح: peripheral neuropathy، primarily sensory، في 22%."
+          - "الـ CNS نادر جدًا."
+          - "الـ 53% دي الـ arthralgia مش neuropathy، والنوع sensory مش motor."
+          - "الكتاب بيذكرها في 22%."
       - kind: explain
         remind: [rheum.L18.030]
         page: 304
@@ -213,6 +285,8 @@ lessons:
           - مضاعفات تانية: **lymphocytic alveolitis**، **lymphocytic interstitial pneumonitis**، **fibrosis**، **pseudolymphoma**.
 
           **Gastrointestinal tract (GIT):** malabsorption، **pancreatitis**، **hepatitis**، sialadenitis.
+
+          يعني نفس الفكرة: الـ trachea فيها غدد بتعمل mucus، لما تنشف الكحة تيجي (xerotrachea). والـ pancreas نفسه غدة exocrine، علشان كده الـ pancreatitis والـ malabsorption في القايمة (التفسير المقبول، مش في الكتاب).
       - kind: check
         page: 304
         quote: "Cough is often the main respiratory symptom and is usually a symptom of xero-trachea."
@@ -228,6 +302,29 @@ lessons:
           - "الـ central nervous system (CNS) نادر جدًا؛ الشائع peripheral sensory neuropathy (22%)."
           - "الـ arthritis asymmetrical وفي الـ small joints."
           - "الرئة common بس seldom clinically significant."
+      - kind: try
+        items: [rheum.L18.020, rheum.L18.022, rheum.L18.026, rheum.L18.028, rheum.L18.032]
+    recap:
+      - "البُق: xerostomia، parotitis، fissured tongue، candida، caries. العين: keratoconjunctivitis sicca."
+      - "الجلد 50% (sebaceous و sweat glands ضامرة؛ Sweet syndrome)."
+      - "الكلى: nephrotic، vasculitis + HTN، insufficiency."
+      - "Neuropathy sensory 22%، CNS نادر جدًا. Arthralgia 53%، asymmetric small joints."
+      - "Cough من الـ xerotrachea. LIP، fibrosis، pseudolymphoma. GIT: malabsorption، pancreatitis، hepatitis."
+    practice: [rheum.L18.020, rheum.L18.021, rheum.L18.022, rheum.L18.023, rheum.L18.024, rheum.L18.025, rheum.L18.026, rheum.L18.027, rheum.L18.028, rheum.L18.029, rheum.L18.030, rheum.L18.031, rheum.L18.032, rheum.L18.033, rheum.L18.034, rheum.L18.071]
+  # ------------------------------------------------------------------
+  # Split from lesson2 on 2026-11-13 (#828): lymphoma and its predictors.
+  - id: rheum.L18.lesson4
+    title: "الخطر الكبير: الـ lymphoma وعلاماته"
+    hook: "44 ضعف risk لـ non-Hodgkin lymphoma. الـ parotid اللي ما بيصغرش والـ C4 اللي بيقل هما جرس الإنذار."
+    minutes: 7
+    pages: [303, 305]
+    topics: [lymphoma]
+    goals:
+      - "تفهم ليه الـ BAFF بيقرّب الـ lymphoma"
+      - "تحفظ الـ predictors: clinical (PSLPL) و serologic"
+      - "تعرف ليه الـ monoclonal و low C4 علامات خطر"
+    status: unverified
+    steps:
       - kind: explain
         page: 304
         title: "الخطر الكبير: lymphoma"
@@ -236,6 +333,14 @@ lessons:
           في دراسة، عيان Sjögren كان عنده ==44 times== relative risk لـ **non-Hodgkin lymphoma**.
 
           علشان كده في كل متابعة دوّر على الـ **predictors**: clinical و serologic.
+      - kind: reveal
+        page: 303
+        quote: "BAFF promotes irregular B-cell maturation, leading to the formation of autoimmune B-cells, which secrete autoantibodies locally."
+        prompt: "ليه منطقي إن مرض فيه BAFF عالي يبقى عنده risk عالي للـ B-cell lymphoma؟"
+        answer: |
+          الـ **BAFF** معناه B-cell activating factor: بيخلّي الـ B cells تعيش وتتكاثر.
+
+          لو الـ B cells فضلت متحفّزة سنين جوه الغدة، احتمال إن clone منها يفلت ويبقى **lymphoma** بيزيد. ده تفسير منطقي؛ الرقم (**44 times** risk) هتشوفه في الدرس الجاي.
       - kind: mnemonic
         page: 305
         quote: "Splenomegaly.\nLymphadenopathy.\nPalpable purpura.\nLeg ulcers."
@@ -278,6 +383,27 @@ lessons:
             <text x="30" y="327" class="t-sm">Mixed monoclonal cryoglobulinemia</text>
             <text x="30" y="352" class="t-sm">Cross-reactive idiotypes of monoclonal RF</text>
           </svg>
+      - kind: reveal
+        page: 305
+        quote: "Low levels of C4."
+        prompt: "ليه low C4 و cryoglobulins و monoclonal RF بيقولوا إن الـ lymphoma قرّب؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): التلاتة علامات إن **clone واحد** من الـ B cells بقى مسيطر:
+          - **Mixed monoclonal cryoglobulinemia** و **monoclonal RF** (cross-reactive idiotypes): antibody **monoclonal** يعني جاي من clone واحد، وده أول خطوة لـ B-cell lymphoma.
+          - **Low C4**: الـ cryoglobulins والـ immune complexes بتستهلك الـ complement.
+
+          وده بيكمّل قصة الـ **BAFF**: B cells متحفّزة سنين ← clone يكبر ← monoclonal antibodies ← lymphoma. والعلامات الـ clinical (purpura، leg ulcers) هي نفس الـ cryoglobulins بتسد الأوعية الصغيرة.
+      - kind: check
+        page: 305
+        quote: "Mixed monoclonal cryoglobulinemia."
+        question: "Which is a serologic predictor of lymphoma in Sjögren syndrome in the book?"
+        options: ["Mixed monoclonal cryoglobulinemia", "High C4", "Anti-dsDNA", "Anti-CCP"]
+        answer: 0
+        why:
+          - "صح: مع low C4 و monoclonal rheumatoid factors (cross-reactive idiotypes)."
+          - "العكس: الـ C4 الواطي هو الـ predictor."
+          - "الـ anti-dsDNA للـ lupus، مش في القائمة."
+          - "الـ anti-CCP للـ RA، مش في القائمة."
       - kind: case
         page: 305
         quote: "Serologic:\n  Low levels of C4.\n  Mixed monoclonal cryoglobulinemia.\n  Cross-reactive idiotypes of monoclonal.\n  Rheumatoid factors."
@@ -293,25 +419,24 @@ lessons:
             answer: 0
             why: "الـ low levels of C4 من الـ serologic predictors، ومعاها mixed monoclonal cryoglobulinemia. الـ high C3 والـ anti-CCP والـ erythrocyte sedimentation rate (ESR) مش في القائمة."
       - kind: try
-        items: [rheum.L18.020, rheum.L18.026, rheum.L18.032, rheum.L18.036, rheum.L18.037]
+        items: [rheum.L18.034, rheum.L18.036, rheum.L18.037, rheum.L18.038, rheum.L18.040]
     recap:
-      - "البُق: xerostomia، parotitis، fissured tongue، candida، caries. العين: keratoconjunctivitis sicca."
-      - "الجلد 50% (Sweet syndrome)، الكلى (nephrotic، vasculitis + HTN)."
-      - "Neuropathy sensory 22%، CNS نادر جدًا. Arthralgia 53%، asymmetric small joints."
-      - "Cough من الـ xerotrachea. LIP، fibrosis، pseudolymphoma."
-      - "NHL risk ×44. Predictors: PSLPL + low C4، cryoglobulins، monoclonal RF."
-    practice: [rheum.L18.020, rheum.L18.021, rheum.L18.022, rheum.L18.023, rheum.L18.024, rheum.L18.025, rheum.L18.026, rheum.L18.027, rheum.L18.028, rheum.L18.029, rheum.L18.030, rheum.L18.031, rheum.L18.032, rheum.L18.033, rheum.L18.034, rheum.L18.035, rheum.L18.036, rheum.L18.037, rheum.L18.038, rheum.L18.039, rheum.L18.040, rheum.L18.068, rheum.L18.071]
+      - "NHL risk ×44 في دراسة."
+      - "BAFF → B cells متحفّزة سنين → clone يفلت."
+      - "Clinical: PSLPL (parotid، spleen، lymph nodes، purpura، leg ulcers)."
+      - "Serologic: low C4، mixed monoclonal cryoglobulinemia، monoclonal RF."
+    practice: [rheum.L18.035, rheum.L18.036, rheum.L18.037, rheum.L18.038, rheum.L18.039, rheum.L18.040, rheum.L18.068]
   # ------------------------------------------------------------------
   - id: rheum.L18.lesson3
-    title: "عدّاد النقط والعلاج: 2016 criteria وEULAR 2019"
+    title: "الـ 2016 criteria والتحاليل"
     hook: "تلات نقط للـ biopsy، تلاتة للـ anti-Ro، ونقطة لكل اختبار ناشف. محتاج 4."
-    minutes: 10
-    pages: [305, 308]
-    topics: [criteria, investigations, management]
+    minutes: 8
+    pages: [305, 306]
+    topics: [criteria, investigations]
     goals:
-      - "تحسب الـ 2016 ACR-EULAR score"
+      - "تحسب الـ 2016 ACR-EULAR score وتعرف ليه الأوزان كده"
       - "تعرف الـ inclusion والـ exclusion"
-      - "تمشي على علاج الجفاف والمرض الـ systemic حسب EULAR 2019"
+      - "تعرف كل تحليل بيجاوب على أنهي سؤال"
     status: unverified
     steps:
       - kind: explain
@@ -354,6 +479,14 @@ lessons:
             <text x="165" y="292" text-anchor="middle" class="t-b t-good">Total ≥4 = primary Sjögren</text>
             <text x="165" y="309" text-anchor="middle" class="t-sm">(with inclusion, no exclusion)</text>
           </svg>
+      - kind: reveal
+        page: 305
+        quote: "Labial salivary gland with focal lymphocytic sialadenitis and focus score ≥ 1. (score: 3)."
+        prompt: "ليه الـ biopsy والـ anti-Ro بـ 3 نقط، واختبارات الجفاف بنقطة بس؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الجفاف ممكن يكون من حاجات كتير: سن، أدوية، تكييف، radiation. يعني الـ Schirmer والـ saliva flow بيقولوا "الغدة مش شغالة" بس مش بيقولوا **ليه**.
+
+          الـ **biopsy** (focal lymphocytic sialadenitis) بيوري الـ ==lymphocytes جوّه الغدة== بعينك، والـ **anti-Ro** بيوري الـ autoimmunity في الدم. الاتنين بيثبتوا **آلية المرض** نفسها (ص 302: infiltration و anti-Ro). علشان كده واحد منهم + أي اختبار جفاف = 4.
       - kind: check
         page: 305
         quote: "Schirmer ≤ 5 mm/5min on at least one eye (score: 1).\nUnstimulated whole saliva flow rate ≤ 0.1 ml/min5 (score: 1). 2016 ACR-EULAR Classification Criteria for primary Sjögren's Syndrome Inclusion criteria These criteria are applicable to any patient with at least one symptom of ocular or oral dryness (defined as a positive response to at least one of the following questions:"
@@ -408,6 +541,41 @@ lessons:
           - **Parotid scintigraphy** و **sialometry** لوظيفة الغدة
           - **Labial gland biopsy**
           - **Ultrasonography** للـ major salivary glands
+
+          ليه كل ده؟ لأن كل مجموعة بتجاوب على سؤال مختلف (الخطوة الجاية)، ومفيش تحليل واحد بيشخّص لوحده.
+      - kind: reveal
+        page: 306
+        quote: "Salivary gland function scan (parotid scintigraphy)."
+        prompt: "التحاليل دي كتير. كل مجموعة بتجاوب على سؤال إيه؟"
+        answer: |
+          - **فيه autoimmunity؟** ANA، ==anti-SS-A (Ro)== و anti-SS-B (La). (وده سؤال الكتاب في ص 308: أهم lab markers هم anti-Ro و anti-La.)
+          - **العين ناشفة قد إيه؟** Schirmer و ocular surface staining.
+          - **الغدة اللعابية شغالة قد إيه؟** sialometry، parotid scintigraphy، ultrasonography.
+          - **جوّه الغدة إيه؟** labial gland biopsy.
+
+          يعني كل سؤال ليه تحليل، وده اللي بيخلّيك تختار قبل ما تطلب كله. والسؤال التالت بالذات مهم للعلاج (الدرس الجاي): درجة وظيفة الغدة بتحدد نوع علاج الريق.
+      - kind: try
+        items: [rheum.L18.042, rheum.L18.045, rheum.L18.049, rheum.L18.052, rheum.L18.053]
+    recap:
+      - "Inclusion (سؤال واحد) + no exclusion + score ≥4."
+      - "Biopsy focus ≥1 = 3، anti-Ro = 3 (آلية المرض)؛ staining/Schirmer/saliva = 1 لكل واحد."
+      - "Exclusions: radiation، HCV، AIDS، sarcoid، amyloid، GVHD، IgG4."
+      - "Labs: ANA، anti-Ro/La؛ العين: Schirmer، staining؛ الغدة: sialometry، scintigraphy، US، biopsy."
+    practice: [rheum.L18.041, rheum.L18.042, rheum.L18.043, rheum.L18.044, rheum.L18.045, rheum.L18.046, rheum.L18.047, rheum.L18.048, rheum.L18.049, rheum.L18.050, rheum.L18.051, rheum.L18.052, rheum.L18.053, rheum.L18.054, rheum.L18.067, rheum.L18.069]
+  # ------------------------------------------------------------------
+  # Split from lesson3 on 2026-11-13 (#828): EULAR 2019 management.
+  - id: rheum.L18.lesson5
+    title: "العلاج: EULAR 2019 من الجفاف للـ systemic"
+    hook: "الجفاف بيتعالج من برّه وعلى قد الغدة، والمرض الـ systemic بأقل steroids ممكنة."
+    minutes: 8
+    pages: [307, 308]
+    topics: [management]
+    goals:
+      - "تختار علاج الريق حسب وظيفة الغدة وتعرف ليه"
+      - "تعالج جفاف العين خطوة خطوة"
+      - "تمشي على علاج المرض الـ systemic وتعرف ليه الـ GC أقل جرعة"
+    status: unverified
+    steps:
       - kind: explain
         page: 307
         title: "العلاج: الجفاف الأول"
@@ -421,6 +589,31 @@ lessons:
           - **Severe** ← saliva substitution
 
           **العين:** artificial tears و gels؛ لو refractory ← **topical immunosuppressive drops** و **autologous serum** drops.
+
+          ليه topical الأول؟ لأن الجفاف مش خطر على الحياة، فمش هتدّي دوا systemic بأعراضه علشان عرض ممكن يتظبط من برّه. والـ baseline function هو اللي بيحدد الدرجة.
+      - kind: figure
+        page: 307
+        quote: "The preferred first therapeutic approach for oral dryness according to salivary gland function may be:"
+        title: "الريق على قد الغدة"
+        alt: "A ladder of three steps linked to remaining salivary gland function. Mild dysfunction: non-pharmacological stimulation. Moderate dysfunction: pharmacological stimulation. Severe dysfunction: saliva substitution. A note at the top: measure baseline salivary function first."
+        caption: "قيس الـ **baseline salivary function** الأول. غدة لسه شغالة: ==stimulation==. غدة خلصت: **substitution**."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="34" rx="8" class="fg-thin"/>
+            <text x="165" y="32" text-anchor="middle" class="t-sm t-b">Baseline salivary gland function first</text>
+            <rect x="10" y="160" width="100" height="60" rx="8" class="fg-good"/>
+            <text x="60" y="182" text-anchor="middle" class="t-sm t-b">Mild</text>
+            <text x="60" y="198" text-anchor="middle" class="t-sm">non-drug</text>
+            <text x="60" y="212" text-anchor="middle" class="t-sm">stimulation</text>
+            <rect x="115" y="115" width="100" height="105" rx="8" class="fg-acc"/>
+            <text x="165" y="137" text-anchor="middle" class="t-sm t-b">Moderate</text>
+            <text x="165" y="153" text-anchor="middle" class="t-sm">drug</text>
+            <text x="165" y="167" text-anchor="middle" class="t-sm">stimulation</text>
+            <rect x="220" y="70" width="100" height="150" rx="8" class="fg-bad"/>
+            <text x="270" y="92" text-anchor="middle" class="t-sm t-b">Severe</text>
+            <text x="270" y="108" text-anchor="middle" class="t-sm">saliva</text>
+            <text x="270" y="122" text-anchor="middle" class="t-sm">substitution</text>
+          </svg>
       - kind: reveal
         page: 307
         quote: "Non-pharmacological stimulation for mild dysfunction. 2. Pharmacological stimulation* for moderate dysfunction. 3. Saliva substitution for severe dysfunction."
@@ -429,6 +622,17 @@ lessons:
           الـ **stimulation** (سواء لبان أو دوا) بيشغّل الغدة اللي لسه فيها acini شغالة.
 
           لو الغدة **severe dysfunction**، مفيش حاجة تتشغّل، فبتعوّض الريق من برّه: **saliva substitution**. (الدوا اللي الكتاب معلّم عليه بنجمة غالبًا muscarinic agonist زي pilocarpine؛ ده من خارج الكتاب.)
+      - kind: check
+        page: 307
+        quote: "Refractory/severe ocular dryness may be managed using topical immunosuppressive-containing drops* and autologous serum eye drops."
+        question: "Sjögren dry eye still severe on artificial tears and gels. Next step per EULAR 2019?"
+        options: ["Topical immunosuppressive drops or autologous serum drops", "Systemic glucocorticoids", "B-cell targeted therapy", "Saliva substitution"]
+        answer: 0
+        why:
+          - "صح: refractory/severe ocular dryness = topical immunosuppressive أو autologous serum drops."
+          - "الجفاف بيتعالج topical الأول؛ الـ systemic للمرض الـ systemic النشط."
+          - "الـ B-cell therapy للـ severe refractory systemic disease."
+          - "الـ saliva substitution للبُق مش للعين."
       - kind: explain
         page: 308
         title: "المرض الـ systemic"
@@ -441,6 +645,16 @@ lessons:
           - **B-cell targeted** للـ severe refractory.
           - الترتيب: Glucocorticoids (GCs) ← immunosuppressants ← biologics (sequential أو combined).
           - **B-cell lymphoma** حسب الـ histological subtype والـ stage.
+
+          يعني العلاج على قد الـ organ: كلى أو أعصاب أو vasculitis تاخد علاج أقوى، والـ fatigue لوحده لأ. وده سبب استخدام الـ ESSDAI.
+      - kind: reveal
+        page: 307
+        quote: "Glucocorticoids should be used at the minimum dose and length of time necessary to control active systemic disease."
+        prompt: "ليه الـ EULAR مصرّة على أقل جرعة وأقصر مدة glucocorticoids (minimum dose)، وتبعتها بـ immunosuppressant كـ GC-sparing؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): Sjögren مرض **مزمن** لسنين، والـ steroids الطويلة بتعمل osteoporosis وسكر وضغط وعدوى (زي ما شفنا في الـ RA). فبتطفّي بيها النار في الـ organ اللي بيتأذي، وبعدين الـ **immunosuppressant** يشيل الشغل علشان تقلّل الجرعة (الكتاب: ==GC-sparing==).
+
+          والكتاب بيقول **مفيش دليل** إن immunosuppressant أحسن من التاني، فالاختيار على حسب العيان. والـ **B-cell targeted** للـ severe refractory بس: منطقي، لأن المرض أصلًا B cells متحفّزة (BAFF).
       - kind: match
         page: 307
         quote: "Refractory/severe ocular dryness may be managed using topical immunosuppressive-containing drops* and autologous serum eye drops."
@@ -453,11 +667,10 @@ lessons:
           - ["Active systemic disease, first", "Glucocorticoids, minimum dose"]
         why: "الجفاف topical ومتدرج حسب وظيفة الغدة؛ الـ systemic disease بالـ GCs ثم immunosuppressants ثم biologics."
       - kind: try
-        items: [rheum.L18.042, rheum.L18.049, rheum.L18.057, rheum.L18.063, rheum.L18.053]
+        items: [rheum.L18.055, rheum.L18.057, rheum.L18.060, rheum.L18.063, rheum.L18.066]
     recap:
-      - "Inclusion (سؤال واحد) + no exclusion + score ≥4."
-      - "Biopsy focus ≥1 = 3، anti-Ro = 3، staining/Schirmer/saliva = 1 لكل واحد."
-      - "Exclusions: radiation، HCV، AIDS، sarcoid، amyloid، GVHD، IgG4."
-      - "الريق: mild non-drug، moderate drug، severe substitution. العين: tears ← immunosuppressive أو serum drops."
-      - "Systemic: ESSDAI، GCs أقل جرعة، immunosuppressants GC-sparing، B-cell للـ refractory."
-    practice: [rheum.L18.041, rheum.L18.042, rheum.L18.043, rheum.L18.044, rheum.L18.045, rheum.L18.046, rheum.L18.047, rheum.L18.048, rheum.L18.049, rheum.L18.050, rheum.L18.051, rheum.L18.052, rheum.L18.053, rheum.L18.054, rheum.L18.055, rheum.L18.056, rheum.L18.057, rheum.L18.058, rheum.L18.059, rheum.L18.060, rheum.L18.061, rheum.L18.062, rheum.L18.063, rheum.L18.064, rheum.L18.065, rheum.L18.066, rheum.L18.067, rheum.L18.069, rheum.L18.070]
+      - "مراكز خبرة؛ الجفاف topical الأول؛ systemic للمرض النشط."
+      - "الريق: baseline function ← mild non-drug، moderate drug، severe substitution."
+      - "العين: tears و gels ← immunosuppressive أو autologous serum drops."
+      - "Systemic: ESSDAI، GCs أقل جرعة، immunosuppressants GC-sparing، B-cell للـ refractory، lymphoma حسب الـ subtype."
+    practice: [rheum.L18.055, rheum.L18.056, rheum.L18.057, rheum.L18.058, rheum.L18.059, rheum.L18.060, rheum.L18.061, rheum.L18.062, rheum.L18.063, rheum.L18.064, rheum.L18.065, rheum.L18.066, rheum.L18.070]

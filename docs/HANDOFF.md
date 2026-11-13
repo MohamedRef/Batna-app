@@ -675,6 +675,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: longest-option cue, endocrinology (#816): 29 distractors made as long as their keys, every endo lecture at or under 25%; bank share 35.3% → 34.0%, ceiling 34.5%.
 - 2026-11-13: longest-option cue, gastroenterology (#816): 47 distractors made as long as their keys, every git lecture at or under 25%; bank share 37.4% → 35.3%, ceiling 36%.
 - 2026-11-13: longest-option cue (#816): `batna-tools cue` and a line in `validate`; bank share 39.3% → 37.4% after rewriting 42 hematology distractors (every hem lecture at or under 25%); ceiling test at 38% (content rule 15).
 - 2026-11-13: neph.L10 to the Hepatology bar: 4 → 5 lessons (UTI treatment and special groups → lesson5), reasons labelled «التفسير المقبول (مش في الكتاب)», words per page 152 → 225 on the `lessons --report` count, every page taught; p351 (review questions) skipped in `content/lesson-skips.yaml` (#827–#829).

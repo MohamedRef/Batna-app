@@ -4,7 +4,7 @@ lessons:
 - id: res.L15.lesson1
   title: 'الإحصاء: من العيّنة للناس كلها'
   hook: إنت بتقيس ضغط 100 عيان في العيادة، بس عايز تتكلم عن كل الناس. إزاي ده يبقى صح؟
-  minutes: 8
+  minutes: 10
   pages: [4, 12]
   topics: [intro]
   goals:
@@ -109,6 +109,39 @@ lessons:
     text: |-
       قاعدة سهلة: **اليوناني والكابيتال للـ population** (N، μ، σ)، و**اللاتيني الصغير للـ sample** (n، x̄، s). الكبير للكل، والصغير للجزء.
   - kind: explain
+    page: 7
+    quote: |-
+      1- Descriptive statistics:
+      Which is concerned with the summary measures of data for a sample of a population.
+      E.g.: % of age and sex distribution
+      Average blood pressure
+    title: Descriptive statistics
+    text: |
+      الـ **descriptive statistics** بتهتم بـ ==summary measures== لبيانات sample من population.
+
+      أمثلة السلايد: ==% توزيع السن والنوع==، أو ==متوسط الضغط==.
+
+      ليه بنبدأ بيها؟ لأن قبل أي استنتاج لازم توصف العيّنة بتاعتك: مين هما وأرقامهم شكلها إيه. التفسير المقبول (مش في الكتاب).
+  - kind: check
+    page: 7
+    quote: |-
+      1- Descriptive statistics:
+      Which is concerned with the summary measures of data for a sample of a population.
+      E.g.: % of age and sex distribution
+      Average blood pressure
+    question: 'Reporting the average blood pressure and the % age and sex distribution of a study sample is:'
+    options:
+    - Descriptive statistics
+    - Analytic statistics
+    - Vital statistics
+    - Biostatistics inference
+    answer: 0
+    why:
+    - 'صح: ده وصف للعيّنة بأرقام ملخصة.'
+    - الـ analytic بتختبر علاقة وتستنتج للـ population.
+    - الـ vital statistics مواليد ووفيات وجواز.
+    - الـ inference استنتاج للـ population، مش وصف.
+  - kind: explain
     page: 8
     quote: |-
       2- Analytic statistics:
@@ -136,6 +169,38 @@ lessons:
     - 'صح: استنتاج من العيّنة عن علاقة في الـ population.'
     - الـ descriptive بيلخّص العيّنة بس من غير استنتاج.
     - الـ vital دي سجلات الحكومة للمواليد والوفيات وغيرها.
+  - kind: explain
+    page: 9
+    quote: |-
+      3- Vital statistics:
+      It is the ongoing collection by government agencies of data relating to events such as:
+      Births
+      Deaths
+      Marriage
+      Divorces
+      Health and disease related conditions
+      reportable by local health authorities ( health office or health center)
+    title: Vital statistics
+    text: |
+      الـ **vital statistics** = جمع مستمر من ==جهات حكومية== لبيانات عن:
+
+      - Births و Deaths
+      - Marriage و Divorces
+      - ==Health and disease related conditions==
+
+      وبيبلّغ عنها ==local health authorities== (مكتب الصحة أو الوحدة الصحية).
+
+      ليه حكومية ومستمرة؟ لأنها أرقام البلد كلها اللي بنحسب منها المعدلات، فلازم تتجمع بانتظام ومن مصدر رسمي. التفسير المقبول (مش في الكتاب).
+  - kind: explain
+    page: 10
+    quote: |-
+      Biostatistics
+      Application of statistical procedures in the field of biological sciences & medicine
+    title: يعني إيه biostatistics؟
+    text: |
+      الـ **biostatistics** = ==تطبيق الطرق الإحصائية== في مجال ==العلوم البيولوجية والطب==.
+
+      ليه اسم خاص؟ لأن البيانات الطبية ليها طبيعتها (عيانين، أمراض، علاج)، والطرق دي اتكيفت عليها. التفسير المقبول (مش في الكتاب).
   - kind: explain
     page: 12
     quote: |-
@@ -173,8 +238,8 @@ lessons:
 - id: res.L15.lesson2
   title: 'أنواع المتغيرات: بتقيس ولا بتعد ولا بتصنّف؟'
   hook: الوزن والنبض الاتنين أرقام. بس واحد continuous والتاني discrete. الفرق ده بيحدد الجدول والرسمة والتست.
-  minutes: 9
-  pages: [14, 21]
+  minutes: 10
+  pages: [13, 127]
   topics: [variables]
   goals:
   - تفرّق بين الـ constant data والـ variables
@@ -182,6 +247,18 @@ lessons:
   - تتجنب فخ الـ pulse وعدد العيال
   status: unverified
   steps:
+  - kind: explain
+    page: 13
+    quote: |-
+      Data
+      Data are the basic building blocks of statistics and refer to the individual values measured or observed. Data can be derived from a total population or a sample.
+    title: يعني إيه data؟
+    text: |
+      الـ **data** هي ==حجر الأساس== في الإحصاء: ==القيم الفردية== اللي اتقاست أو اتلاحظت.
+
+      وممكن تيجي من ==population كاملة== أو من sample.
+
+      ليه نفرق المصدر؟ لأن الرموز والمعادلات بتختلف بين الـ sample والـ population. التفسير المقبول (مش في الكتاب).
   - kind: explain
     page: 14
     quote: |-
@@ -268,6 +345,70 @@ lessons:
     tone: trap
     text: |-
       الـ **pulse** في السلايدز ==discrete==، لأنك بتعد الضربات. ومتتلخبطش: الـ age والـ income في السلايدز continuous.
+  - kind: explain
+    page: 17
+    quote: |-
+      Qualitative variables
+      Which are expressed in quality and cannot be enumerated or measured but can be categorized only.
+    title: Qualitative variable
+    text: |
+      الـ **qualitative variable** بيتعبّر عنه ==بالنوع (quality)==: ==مايتعدّش ولا يتقاس==، بس ==يتصنّف==.
+
+      مثال توضيحي: فصيلة الدم أو النوع.
+
+      ليه ده مهم؟ لأن نوع المتغير بيحدد الجدول والرسمة والمقياس المسموح بيه، فالـ mean مثلًا ماينفعش هنا. التفسير المقبول (مش في الكتاب).
+  - kind: explain
+    page: 18
+    quote: |-
+      a- Ordinal qualitative variables :
+      Can be put in order:
+      Examples
+      Degree of success
+      excellent
+      very good
+      good
+      fair
+      Degree of a disease:
+      mild
+      moderate
+      severe
+    title: 'Ordinal: ليه ترتيب'
+    text: |
+      الـ **ordinal qualitative variable** = متغير نوعي ==categories بتاعته ليها ترتيب==.
+
+      أمثلة السلايد:
+
+      - ==Degree of success==: excellent، very good، good، fair.
+      - ==Degree of a disease==: mild، moderate، severe.
+
+      ليه الترتيب يفرق؟ لأنه بيسمح بالـ median، بس المسافة بين الدرجات مش متساوية فالـ mean لأ. التفسير المقبول (مش في الكتاب).
+  - kind: check
+    page: 18
+    quote: |-
+      a- Ordinal qualitative variables :
+      Can be put in order:
+      Examples
+      Degree of success
+      excellent
+      very good
+      good
+      fair
+      Degree of a disease:
+      mild
+      moderate
+      severe
+    question: 'Disease severity graded as mild, moderate or severe is:'
+    options:
+    - Ordinal qualitative
+    - Nominal qualitative
+    - Discrete quantitative
+    - Continuous quantitative
+    answer: 0
+    why:
+    - 'صح: categories ليها ترتيب.'
+    - الـ nominal مالوش ترتيب، وهنا فيه.
+    - مفيش عدّ هنا.
+    - مفيش قياس هنا.
   - kind: explain
     page: 19
     quote: |-
@@ -364,6 +505,30 @@ lessons:
     - الـ age في السلايدز continuous.
     - الـ income في السلايدز continuous.
     - الحجم بيتقاس.
+  - kind: check
+    page: 127
+    quote: |-
+      Examine yourself
+      All are examples of continuous quantitative variable Except:
+      1. Weight,
+      2. Height,
+      3. Hb level
+      4. Age
+      5. Number of children
+      6. Income
+      7. Volume of urine
+    question: 'All are examples of a continuous quantitative variable EXCEPT:'
+    options:
+    - Number of children
+    - Weight
+    - Hb level
+    - Volume of urine
+    answer: 0
+    why:
+    - 'صح: عدد الأطفال بيتعدّ، فهو discrete.'
+    - الوزن بيتقاس، continuous.
+    - الـ Hb بيتقاس، continuous.
+    - حجم البول بيتقاس، continuous.
   - kind: try
     items: [res.L15.018, res.L15.019, res.L15.023, res.L15.027]
   recap:
@@ -374,15 +539,15 @@ lessons:
   practice: [res.L15.015, res.L15.016, res.L15.017, res.L15.018, res.L15.019, res.L15.020, res.L15.021, res.L15.022, res.L15.023,
     res.L15.024, res.L15.025, res.L15.026, res.L15.027, res.L15.028, res.L15.029, res.L15.030]
 - id: res.L15.lesson3
-  title: 'الجدول الصح: من كومة أرقام لـ frequency table'
+  title: تعرض البيانات إزاي؟ رقم ولا جدول
   hook: 57 وزن متكومين على السلايد. في 5 دقايق هتحوّلهم لجدول نضيف من 7 فئات.
-  minutes: 10
-  pages: [23, 54]
+  minutes: 6
+  pages: [23, 38]
   topics: [tables]
   goals:
-  - تعرف طرق عرض البيانات الـ 3 وأنواع الجداول الـ 4
-  - 'تبني frequency table: أول فئة، الـ width، وعدد الفئات'
-  - تحسب الـ width والـ midpoint للـ continuous والـ discrete
+  - تعرف الـ 3 طرق لعرض البيانات
+  - تفرق بين الـ simple numerical والـ tabular
+  - تقرا أجزاء الجدول وتحسب الـ relative frequency
   status: unverified
   steps:
   - kind: explain
@@ -400,6 +565,42 @@ lessons:
 
       والـ numerical نوعين: **simple** للبيانات القليلة (أوزان 5 أطفال: 8، 6، 9، 5، 7 kg)، و**tabular** للكتير (==grouped data==).
     remind: [res.L15.031, res.L15.032]
+  - kind: explain
+    page: 26
+    quote: |-
+      III. Mathematical presentation
+      Arithmetic mean
+      Median
+      Mode
+      Range
+      Standard deviation
+    title: 'العرض الرياضي: 5 مقاييس'
+    text: |
+      الـ **mathematical presentation** للبيانات بيستخدم:
+
+      - ==Arithmetic mean==
+      - ==Median==
+      - ==Mode==
+      - Range
+      - Standard deviation
+
+      أول تلاتة بيقولوا البيانات متجمعة فين، وآخر اتنين بيقولوا متفرقة قد إيه. ليه الاتنين؟ متوسط لوحده مايقولكش الأرقام قريبة منه ولا بعيدة. التفسير المقبول (مش في الكتاب).
+  - kind: explain
+    page: 27
+    quote: |-
+      I. Numerical presentation:
+      1. Simple numerical presentation small size data
+      (ungrouped or unclassified data)
+      Example
+      2. Tabular presentation large size data
+      (grouped data )
+      Example
+    title: رقم بسيط ولا جدول؟
+    text: |
+      - ==Simple numerical presentation==: للبيانات ==القليلة== (ungrouped). مثال: أوزان 5 أطفال 8، 6، 9، 5، 7 kg.
+      - ==Tabular presentation==: للبيانات الكتير (grouped).
+
+      ليه؟ 5 أرقام تتقري في سطر، لكن 500 رقم محتاجين جدول يلخصهم وإلا محدش هيفهم حاجة. التفسير المقبول (مش في الكتاب).
   - kind: explain
     page: 29
     quote: |-
@@ -454,6 +655,31 @@ lessons:
       n؛ وتحت المصدر.
     alt: 'Table skeleton: title box, header row variable and frequency, category rows, total row with n, source of data box.'
   - kind: check
+    page: 33
+    quote: |-
+      Simple frequency distribution table for qualitative data
+      Distribution of third year medical students according to their degree of success in May 2004 in Alexandria Faculty of Medicine
+      | Degree of success | No. of students | Percent % |
+      |---|---|---|
+      | Excellent | 120 | 14.12 |
+      | Very good | 200 | 23.52 |
+      | Good | 350 | 41.18 |
+      | Fair | 180 | 21.18 |
+      | Total | 850 | 100 |
+      Source: records of Alexandria faculty of medicine
+    question: 'A table shows third-year students by degree of success (excellent, very good, good, fair). Its variable is:'
+    options:
+    - Qualitative ordinal
+    - Qualitative nominal
+    - Quantitative discrete
+    - Quantitative continuous
+    answer: 0
+    why:
+    - 'صح: درجات ليها ترتيب.'
+    - الـ nominal مالوش ترتيب، والتقديرات ليها.
+    - التقدير مش عدد.
+    - التقدير مش قياس.
+  - kind: check
     page: 36
     quote: |-
       | Parasites | n | % |
@@ -475,6 +701,65 @@ lessons:
     - 6 ده العدد مش النسبة.
     - 14.29% دي الـ Entamoeba (3 من 21).
     - 21 ده الـ total.
+  - kind: explain
+    page: 38
+    quote: |-
+      Simple frequency distribution table for quantitative variable
+      E.g.2. Distribution of families according to the number of children (Quantitative discrete)
+      | No. of children | No. of families |
+      |---|---|
+      | 3 – 4 | 25 |
+      | 5 – 6 | 55 |
+      | 7 – 8 | 18 |
+      | 9 – 10 | 9 |
+      | Total | 107 |
+    title: جدول لمتغير discrete
+    text: |
+      مثال السلايد: توزيع الأسر حسب عدد الأطفال:
+
+      | عدد الأطفال | الأسر |
+      |---|---|
+      | 3–4 | 25 |
+      | 5–6 | 55 |
+      | 7–8 | 18 |
+      | 9–10 | 9 |
+      | Total | 107 |
+
+      ليه الفئات هنا أرقام صحيحة من غير كسور؟ لأن عدد الأطفال ==discrete==، فمفيش قيمة بين 4 و 5. التفسير المقبول (مش في الكتاب).
+  - kind: try
+    items: [res.L15.032, res.L15.033, res.L15.037]
+  recap:
+  - '3 طرق عرض: numerical، graphical، mathematical.'
+  - '4 جداول: simple، association (2 × 2، c × r)، comparing، two way.'
+  - أول فئة = أقرب رقم مدوّر تحت أصغر قيمة؛ 4–12 فئة.
+  - 'Width: continuous UL − LL، discrete (UL − LL) + 1؛ midpoint = (UL + LL) ÷ 2.'
+  - اتجنب الـ open-ended table.
+  practice: [res.L15.031, res.L15.032, res.L15.033, res.L15.034, res.L15.035, res.L15.036, res.L15.037, res.L15.038, res.L15.039]
+- id: res.L15.lesson8
+  title: 'تبني فئات الجدول: الحدود والـ width والـ midpoint'
+  hook: عندك 500 رقم. تقسّمهم كام فئة؟ تبدأ منين؟ وتحسب نص الفئة إزاي؟
+  minutes: 10
+  pages: [40, 69]
+  topics: [tables]
+  goals:
+  - تختار عدد الفئات وأول حد
+  - تعرف أجزاء الفئة الخمسة وتحسب الـ width والـ midpoint
+  - تقرا الـ cumulative %
+  status: unverified
+  steps:
+  - kind: explain
+    page: 40
+    quote: |-
+      Determining the lower limit of the first interval
+      if smallest observation= 0 or 5
+      Otherwise
+      Round figure immediately lower than the smallest observation
+    title: أول فئة تبدأ منين؟
+    text: |
+      - لو أصغر قيمة ==0 أو 5==، ابدأ منها.
+      - غير كده، خد ==الرقم المدوّر اللي تحت أصغر قيمة على طول==.
+
+      ليه رقم مدوّر؟ علشان الفئات تتقري بسهولة (10-، 20-) بدل حدود غريبة زي 12-. التفسير المقبول (مش في الكتاب).
   - kind: explain
     page: 41
     quote: |-
@@ -518,6 +803,24 @@ lessons:
     - 12 هي القيمة نفسها؛ القاعدة بتدوّر لتحت.
     - 0 بس لو أصغر قيمة 0.
     - 5 بس لو أصغر قيمة 5.
+  - kind: explain
+    page: 43
+    quote: |-
+      4 -12 intervals
+      Why ?????
+      Tabular presentation
+      Advantage :summarization of a large mass of data
+      Disadvantage : loss of precision in the presentation
+      < 4 -> greater loss of precision
+      >12 -> missing the summarization value.
+    title: ليه من 4 لـ 12 فئة؟
+    text: |
+      الجدول بيلخّص كمية بيانات كبيرة (==ميزة==)، على حساب شوية ==دقة== (==عيب==).
+
+      - أقل من 4 فئات: الدقة بتضيع أكتر.
+      - أكتر من 12: الجدول بيفقد فايدته كملخص.
+
+      ليه الحد ده؟ ده التوازن بين إنك تشوف شكل البيانات وإنك ماتغرقش في تفاصيل. التفسير المقبول (مش في الكتاب).
   - kind: table
     page: 44
     quote: |-
@@ -554,6 +857,71 @@ lessons:
       - 2
     - - 3
       - 2
+  - kind: explain
+    page: 45
+    quote: |-
+      Each interval in the table has the following:
+      Lower limit.
+      Upper limit.
+      Width.
+      Midpoint (x) (to be calculated).
+      Number of observations (f).
+    title: كل فئة فيها 5 حاجات
+    text: |
+      كل interval في الـ frequency table ليه:
+
+      1. ==Lower limit==
+      2. ==Upper limit==
+      3. ==Width==
+      4. Midpoint (x)، بيتحسب
+      5. Number of observations (f)
+
+      ليه الـ midpoint؟ لأننا في الحسابات بنعامل كل اللي في الفئة كأنهم عند نصها. التفسير المقبول (مش في الكتاب).
+  - kind: explain
+    page: 46
+    quote: |-
+      Interval Width
+      is the difference between two consecutive lower class limits
+      | Family size | Frequency |
+      |---|---|
+      | 0 - 2 | 20 |
+      | 3 - 5 | 14 |
+      | 6 - 8 | 15 |
+      | 9 - 11 | 2 |
+      | 12 - 14 | 1 |
+      Interval Width = 3
+    title: الـ width
+    text: |
+      الـ **width** = ==الفرق بين lower limits لفئتين ورا بعض==.
+
+      مثال: family size 0-2، 3-5، 6-8… الـ width = ==3==.
+
+      ليه من الـ lower limits مش من الحدود جوه الفئة؟ لأن 0-2 فيها 3 قيم (0، 1، 2)، فلو طرحت 2 − 0 هتطلع 2 غلط. التفسير المقبول (مش في الكتاب).
+  - kind: check
+    page: 47
+    quote: |-
+      Interval Midpoints
+      midpoints of the intervals
+      | Family size | Frequency |
+      |---|---|
+      | 0 - 1 - 2 | 20 |
+      | 3 - 4 - 5 | 14 |
+      | 6 - 7 - 8 | 15 |
+      | 9 - 10 - 11 | 2 |
+      | 12 - 13 - 14 | 1 |
+      interval Midpoints: 1, 4, 7, 10, 13
+    question: 'Family size intervals 0-2, 3-5, 6-8, 9-11, 12-14. The midpoint of 6-8 is:'
+    options:
+    - '7'
+    - '6.5'
+    - '8'
+    - '3'
+    answer: 0
+    why:
+    - 'صح: (6 + 8) ÷ 2 = 7.'
+    - ده لو الفئة continuous من 6 لـ 7.
+    - ده الحد الأعلى.
+    - ده الـ width.
   - kind: figure
     page: 49
     quote: |-
@@ -584,23 +952,6 @@ lessons:
       </svg>
     caption: 'الفئة 65– (من 65 لأقل من 70): LL = 65، UL ≈ 70، width = 5، midpoint = 67.5.'
     alt: Number line with interval 65 to 70 shaded, frequency 22, width 5 marked above and midpoint 67.5 marked below.
-  - kind: explain
-    page: 50
-    quote: |-
-      Example for discrete quantitative variable:
-      Last interval:
-      L.L. = 3
-      U.L. = 4
-      Width (discrete) = (U.L. – L.L.) + 1 = (4 – 3) + 1
-      = 2 (No. of counts within the interval e.g. (3 & 4 = 2).
-      Mid point (x)= (3+4)/2=3.5
-      Number of observations(f)=25
-    title: الـ discrete بيزيد واحد
-    text: |-
-      - **Continuous**: width = ==UL − LL== (70 − 65 = 5).
-      - **Discrete**: width = ==(UL − LL) + 1==، لأنه بيعد القيم: الفئة 3–4 فيها رقمين (3 و4)، يعني width = 2.
-
-      والـ **midpoint** في الحالتين = (UL + LL) ÷ 2: يعني 67.5 و3.5.
   - kind: check
     page: 49
     quote: |-
@@ -623,6 +974,82 @@ lessons:
     - 70 الـ lower limit.
     - 75 الـ upper limit.
     - 67.5 midpoint الفئة الأولى.
+  - kind: check
+    page: 69
+    quote: |-
+      Answer
+      The mid point= (75 + 80) / 2 = 77.5
+    question: Hb% intervals 65-, 70-, 75-, 80-… What is the midpoint of the third interval?
+    options:
+    - '77.5'
+    - '75'
+    - '80'
+    - '72.5'
+    answer: 0
+    why:
+    - 'صح: الفئة التالتة 75- لحد 80، والنص 77.5.'
+    - ده الحد الأدنى.
+    - ده بداية الفئة اللي بعدها.
+    - ده نص الفئة التانية.
+  - kind: explain
+    page: 50
+    quote: |-
+      Example for discrete quantitative variable:
+      Last interval:
+      L.L. = 3
+      U.L. = 4
+      Width (discrete) = (U.L. – L.L.) + 1 = (4 – 3) + 1
+      = 2 (No. of counts within the interval e.g. (3 & 4 = 2).
+      Mid point (x)= (3+4)/2=3.5
+      Number of observations(f)=25
+    title: الـ discrete بيزيد واحد
+    text: |-
+      - **Continuous**: width = ==UL − LL== (70 − 65 = 5).
+      - **Discrete**: width = ==(UL − LL) + 1==، لأنه بيعد القيم: الفئة 3–4 فيها رقمين (3 و4)، يعني width = 2.
+
+      والـ **midpoint** في الحالتين = (UL + LL) ÷ 2: يعني 67.5 و3.5.
+  - kind: explain
+    page: 52
+    quote: |-
+      Data Reduction
+      Example (cont.)
+      Range: 69-20= 49
+      No. of intervals= 5
+      Width of intervals= 49/5 = 9.8 ≈ 10
+      Class intervals :20-29, 30-39, 40-49, 50-59, 60-69
+    title: 'Data reduction: مثال 47 واحد'
+    text: |
+      أعمار 47 واحد من 20 لـ 69:
+
+      1. ==Range== = 69 − 20 = 49.
+      2. ==5 فئات==.
+      3. ==Width== = 49 ÷ 5 = 9.8 ≈ 10.
+      4. الفئات: 20-29، 30-39، 40-49، 50-59، 60-69.
+
+      ليه بنقرّب لـ 10؟ علشان الحدود تبقى أرقام مدوّرة سهلة، ولسه مغطية المدى كله. التفسير المقبول (مش في الكتاب).
+  - kind: check
+    page: 53
+    quote: |-
+      Distribution of frequencies in students that have smoked at least once. n=534
+      | Age (years) | n | % | % cumulative |
+      |---|---|---|---|
+      | 19- | 52 | 14.70 | 14.70 |
+      | 20- | 32 | 9.00 | 23.70 |
+      | 21- | 46 | 12.99 | 36.69 |
+      | 22- | 67 | 18.94 | 55.63 |
+    question: 'In the table of students who smoked at least once (n = 534), the cumulative % at the 22- interval is 55.63.
+      It means:'
+    options:
+    - 55.63% of the students were aged 19 to under 23
+    - 55.63% were aged 22
+    - 55.63% were older than 22
+    - 18.94% were aged under 23
+    answer: 0
+    why:
+    - 'صح: الـ cumulative % بيجمع كل الفئات لحد آخر الفئة دي (أقل من 23).'
+    - ده للفئة لوحدها مش التجميعي.
+    - التجميعي بيعد اللي تحت مش اللي فوق.
+    - ده رقم فئة واحدة مش التجميعي.
   - kind: aside
     page: 54
     quote: |-
@@ -636,20 +1063,18 @@ lessons:
     text: |-
       اتجنب الـ ==open-ended table==: الجدول اللي أول lower limit أو آخر upper limit فيه مش معروف. من غير الحدود مش هتعرف تحسب midpoint، وبالتالي مفيش mean.
   - kind: try
-    items: [res.L15.035, res.L15.040, res.L15.044, res.L15.049, res.L15.050]
+    items: [res.L15.040, res.L15.046, res.L15.052]
   recap:
-  - '3 طرق عرض: numerical، graphical، mathematical.'
-  - '4 جداول: simple، association (2 × 2، c × r)، comparing، two way.'
-  - أول فئة = أقرب رقم مدوّر تحت أصغر قيمة؛ 4–12 فئة.
-  - 'Width: continuous UL − LL، discrete (UL − LL) + 1؛ midpoint = (UL + LL) ÷ 2.'
-  - اتجنب الـ open-ended table.
-  practice: [res.L15.031, res.L15.032, res.L15.033, res.L15.034, res.L15.035, res.L15.036, res.L15.037, res.L15.038, res.L15.039,
-    res.L15.040, res.L15.041, res.L15.042, res.L15.043, res.L15.044, res.L15.045, res.L15.046, res.L15.047, res.L15.048, res.L15.049,
-    res.L15.050, res.L15.051, res.L15.052, res.L15.053, res.L15.054]
+  - 'من 4 لـ 12 فئة: أقل الدقة بتضيع، أكتر الملخص بيضيع.'
+  - 'أول حد: 0 أو 5، أو الرقم المدوّر تحت أصغر قيمة.'
+  - Width = الفرق بين lower limits. Midpoint = (LL + UL) ÷ 2.
+  - Cumulative % = كل اللي تحت نهاية الفئة.
+  practice: [res.L15.040, res.L15.041, res.L15.042, res.L15.043, res.L15.044, res.L15.045, res.L15.046, res.L15.047, res.L15.048,
+    res.L15.049, res.L15.050, res.L15.051, res.L15.052, res.L15.053, res.L15.054]
 - id: res.L15.lesson4
   title: 'جداول المقارنة والارتباط: اسم الجدول من شكله'
   hook: 'في الامتحان السؤال سهل: «Give the name of this table». بس لازم تعرف تبص على إيه.'
-  minutes: 8
+  minutes: 10
   pages: [55, 67]
   topics: [comparing]
   goals:
@@ -682,6 +1107,31 @@ lessons:
     prompt: group فيه 55 والتاني 30. ليه تقارن بالـ % مش بالأعداد؟
     answer: 'لأن الأعداد هتعكس **حجم الـ group** مش التوزيع: أي فئة في الـ group الكبير هتبان أكبر. الـ % جوه كل group بتخليك
       تقارن التوزيع نفسه، وده اللي هتشوفه تاني في رسمة الـ blood groups.'
+  - kind: check
+    page: 57
+    quote: |-
+      Example: Distribution of low birth weight babies and normal babies according to their mother's education
+      | Level of mothers education | L.B.W. | Normal |
+      |---|---|---|
+      | University | 22 | 30 |
+      | Secondary | 13 | 39 |
+      | Preparatory | 15 | 18 |
+      | Primary | 20 | 8 |
+      | Illiterate | 30 | 5 |
+      | Total | 100 | 100 |
+    question: '100 low birth weight babies and 100 normal babies are tabulated by their mother''s level of education. This
+      table is a:'
+    options:
+    - Comparing frequency distribution table
+    - Two way classification table
+    - Simple frequency distribution table
+    - c × r association table of two quantitative variables
+    answer: 0
+    why:
+    - 'صح: جروبين وبنقارن توزيع متغير واحد (التعليم) فيهم.'
+    - الـ two way بيصنّف جروب واحد بمتغيرين.
+    - الـ simple جروب واحد ومتغير واحد.
+    - التعليم مش quantitative.
   - kind: explain
     page: 58
     quote: |-
@@ -696,6 +1146,65 @@ lessons:
 
       - **2 × 2**: كل متغير ليه احتمالين (smoker/non-smoker × cancer yes/no).
       - **c × r**: واحد منهم أو الاتنين ليه ==أكتر من احتمالين== (Drug A/B/C × cured/improved/worsened).
+  - kind: check
+    page: 59
+    quote: |-
+      2 x 2 table
+      Relation between a condition and outcome
+      Ex. Relation between smoking and lung cancer among population in Alexandria 2003.
+      | Smoking status | Lung cancer Yes | Lung cancer No | Total |
+      |---|---|---|---|
+      | Smokers | 35 | 15 | 50 |
+      | Non-smokers | 65 | 85 | 150 |
+      | Total | 100 | 100 | 200 |
+    question: 'Smokers and non-smokers in Alexandria (2003) are tabulated by lung cancer yes/no. This is a:'
+    options:
+    - 2 × 2 table of association
+    - c × r table
+    - Comparing frequency distribution table
+    - Two way classification table
+    answer: 0
+    why:
+    - 'صح: متغيرين كل واحد ليه احتمالين (smoker/non، cancer yes/no).'
+    - الـ c × r لما فيه أكتر من احتمالين.
+    - مش بنقارن توزيع في جروبين منفصلين.
+    - ده جدول association مش two way classification.
+  - kind: explain
+    page: 60
+    quote: |-
+      c x r table
+      > 2 rows
+      > 2 columns to reveal the association between a condition and a characteristic, one or both of them having more than two possibilities
+    title: c × r table
+    text: |
+      الـ **c × r table** بيستخدم لما يبقى فيه ==أكتر من صفين و/أو أكتر من عمودين==.
+
+      بيوضح ==العلاقة بين condition و characteristic== لما واحد منهم أو الاتنين ليه ==أكتر من احتمالين==.
+
+      ليه مش 2 × 2؟ لأن 3 أدوية أو 3 نتايج مش هيدخلوا في خانتين. التفسير المقبول (مش في الكتاب).
+  - kind: check
+    page: 61
+    quote: |-
+      c x r table
+      Different types of treatment of disease (X) and the outcome
+      | Treatment | Cured | Improved | Worsened | Total |
+      |---|---|---|---|---|
+      | Drug A | 35 | 12 | 3 | 50 |
+      | Drug B | 30 | 10 | 10 | 50 |
+      | Drug C | 33 | 12 | 5 | 50 |
+      | Total | 98 | 34 | 18 | 150 |
+    question: 'Three drugs (A, B, C) are tabulated against outcome (cured, improved, worsened). This is a:'
+    options:
+    - c × r table
+    - 2 × 2 table
+    - Two way classification table
+    - Simple frequency distribution table
+    answer: 0
+    why:
+    - 'صح: 3 أدوية × 3 نتايج = أكتر من صفين وعمودين.'
+    - الـ 2 × 2 كل متغير فيه احتمالين بس.
+    - ده جدول association.
+    - فيه متغيرين مش واحد.
   - kind: explain
     page: 62
     quote: |-
@@ -735,20 +1244,26 @@ lessons:
     why: 'عدّ المتغيرات والـ groups: متغير واحد = simple؛ groups بمتغير واحد = comparing؛ علاقة فئات = association؛ متغيرين
       كميين لـ group واحد = two way.'
   - kind: check
-    page: 67
+    page: 64
     quote: |-
-      2-To show the relation between occurrence of cancer colon and eating fast food, the suitable type of table that could be used to represent such relation is
-      Table of association or contingency table
-    question: 'To show the relation between cancer colon and eating fast food, use:'
+      1- Give the name of this table and the type of its variable
+      | Smoking | CHD YES + Cases | CHD NO - Control | Total |
+      |---|---|---|---|
+      | YES + Exposed | + + a 60 | - + b 20 | ---- |
+      | NO - Not exposed | + - c 40 | - - d 80 | ---- |
+      | Total | 100 a+c | 100 b+d | ---- |
+    question: A table shows smoking (exposed, not exposed) by CHD (cases, controls) with cells a, b, c, d. Name it.
     options:
-    - Table of association (contingency)
+    - 2 × 2 table of association (contingency)
+    - c × r table
     - Two way classification table
-    - Simple frequency table
+    - Simple frequency distribution table
     answer: 0
     why:
-    - 'صح: علاقة بين condition وcharacteristic.'
-    - الـ two way لمتغيرين كميين.
-    - الـ simple لمتغير واحد.
+    - 'صح: exposed/not exposed × cases/controls بخانات a، b، c، d.'
+    - كل متغير هنا احتمالين بس.
+    - ده جدول association.
+    - فيه متغيرين.
   - kind: check
     page: 66
     quote: |-
@@ -765,6 +1280,21 @@ lessons:
     - 'صح: متغير واحد، فئات من غير ترتيب.'
     - مفيش غير group واحد، والـ blood groups ملهاش ترتيب.
     - الـ association محتاج متغيرين.
+  - kind: check
+    page: 67
+    quote: |-
+      2-To show the relation between occurrence of cancer colon and eating fast food, the suitable type of table that could be used to represent such relation is
+      Table of association or contingency table
+    question: 'To show the relation between cancer colon and eating fast food, use:'
+    options:
+    - Table of association (contingency)
+    - Two way classification table
+    - Simple frequency table
+    answer: 0
+    why:
+    - 'صح: علاقة بين condition وcharacteristic.'
+    - الـ two way لمتغيرين كميين.
+    - الـ simple لمتغير واحد.
   - kind: aside
     page: 66
     quote: |-
@@ -853,6 +1383,25 @@ lessons:
       لما القيمة ==بتتغير مع الزمن==: الزمن على X، والمتغير الكمي (continuous أو discrete) على Y، وكل نقطة قصاد X وY، والنقط متوصلة بخط.
 
       أمثلة السلايدز: **temperature chart**، **birth rate**، **death rates** (زي CBR وCDR لـ country X من 2004 لـ 2008).
+  - kind: check
+    page: 73
+    quote: |-
+      Examples
+      Temperature chart
+      Birth rate
+      Death rates.
+    question: Which of these is best shown by a line graph?
+    options:
+    - Crude birth rate per 1000 over 2004–2008
+    - Blood groups of 20 patients
+    - Hb% of 100 pregnant women
+    - Parasites found in 25 children
+    answer: 0
+    why:
+    - 'صح: معدل بيتغير مع الزمن = line graph.'
+    - فصايل الدم qualitative = bar أو pie.
+    - Hb continuous = histogram.
+    - أنواع الطفيليات qualitative = bar أو pie.
   - kind: explain
     page: 80
     quote: |-
@@ -867,6 +1416,23 @@ lessons:
       - لـ **qualitative** أو ==quantitative discrete==.
       - كل category عمود، طوله قصاد الـ frequency على Y.
       - العمدان ==عرضها واحد== و==بينها مسافات==.
+  - kind: explain
+    page: 86
+    quote: |-
+      | Blood group | M | % | F | % |
+      |---|---|---|---|---|
+      | A | 15 | 27.3 | 5 | 16.7 |
+      | B | 10 | 18.2 | 4 | 13.3 |
+      | AB | 25 | 45.5 | 12 | 40.0 |
+      | O | 5 | 9.1 | 9 | 30.0 |
+      | Total | 55 | 100.0 | 30 | 100.0 |
+    title: Bar chart لجروبين مختلفين في الحجم
+    text: |
+      لو بتقارن ==55 راجل و 30 ست== بفصيلة الدم، الأعمدة لازم تبقى ==%== جوه كل نوع، ==مش أعداد==.
+
+      السلايدز بتشطب رسمة الأعداد وبتعيدها بالـ %: A = 27.3% ضد 16.7%، و AB = 45.5% ضد 40.0%.
+
+      ليه؟ لأن الأعداد بتعكس حجم الجروب: الرجالة أكتر فأعمدتهم أطول حتى لو النسبة أقل. التفسير المقبول (مش في الكتاب).
   - kind: explain
     page: 88
     quote: |-
@@ -956,6 +1522,30 @@ lessons:
       نفس بيانات الـ histogram، بس كل فئة ==نقطة واحدة== قصاد الـ frequency على Y و==الـ midpoint== على X، والنقط بتتوصل بخطوط مستقيمة.
 
       ميزته: تقدر تحط ==اتنين على نفس الرسمة== (أطوال الولاد والبنات) مع key.
+  - kind: check
+    page: 95
+    quote: |-
+      The frequency polygon
+      | Height in cm | Male | Female |
+      |---|---|---|
+      | 100- | 2 | 3 |
+      | 105- | 4 | 6 |
+      | 110- | 7 | 6 |
+      | 115- | 5 | 4 |
+      | 120<125 | 2 | 1 |
+      | Total | 20 | 20 |
+    question: 'To compare the height distributions of 20 boys and 20 girls on one graph, the slides use:'
+    options:
+    - Two frequency polygons with a key
+    - Two histograms on one axis
+    - One pie chart
+    - A line graph against time
+    answer: 0
+    why:
+    - 'صح: 2 frequency polygons على نفس المحاور مع key.'
+    - الـ histograms فوق بعض بيغطوا على بعض.
+    - الـ pie لجروب واحد ومتغير qualitative.
+    - الـ line graph للتغير مع الزمن.
   - kind: sort
     page: 123
     quote: |-
@@ -1016,15 +1606,15 @@ lessons:
   practice: [res.L15.066, res.L15.067, res.L15.068, res.L15.069, res.L15.070, res.L15.071, res.L15.072, res.L15.073, res.L15.074,
     res.L15.075, res.L15.076, res.L15.077, res.L15.078, res.L15.079, res.L15.080]
 - id: res.L15.lesson6
-  title: 'المتوسط والوسيط والمنوال: مين يمثّل البيانات؟'
+  title: 'المتوسط والوسيط: تحسبهم إزاي وإمتى؟'
   hook: '6 مرضى transplant: 5 منهم تحت الـ 65، وواحد 623. المتوسط 135.8! مين فيهم بيكذب؟'
-  minutes: 10
-  pages: [98, 126]
+  minutes: 8
+  pages: [98, 111]
   topics: [central]
   goals:
-  - تحسب الـ mean للـ ungrouped والـ grouped
+  - تحسب الـ mean من قيم ومن جدول
   - تحسب الـ median لـ n فردي وزوجي
-  - تحدد الـ mode وتعرف مزايا وعيوب كل مقياس
+  - تعرف مميزات وعيوب كل واحد
   status: unverified
   steps:
   - kind: explain
@@ -1038,6 +1628,20 @@ lessons:
       قيم محسوبة ==البيانات بتتجمع حواليها==. أشهرهم 3: **mean**، **median**، **mode**.
 
       الـ **mean** = مجموع القيم ÷ عددها: للـ sample اسمه ==x̄ = Σx ÷ n==، وللـ population ==μ = Σx ÷ N==.
+  - kind: explain
+    page: 101
+    quote: |-
+      Notation
+      x̄ is pronounced 'x-bar' and denotes the mean of a set of sample values
+      x̄ = Σx / n
+      μ is pronounced 'mu' and denotes the mean of all values in a population
+      μ = Σx / N
+    title: x̄ و μ
+    text: |
+      - ==x̄ (x-bar)==: متوسط ==sample== = Σx ÷ ==n==.
+      - μ (mu): متوسط population = Σx ÷ N.
+
+      ليه رمزين؟ علشان تعرف من الرمز إنت بتتكلم عن عيّنتك ولا عن الناس كلهم. التفسير المقبول (مش في الكتاب).
   - kind: check
     page: 103
     quote: |-
@@ -1056,6 +1660,21 @@ lessons:
     - 'صح: 415 ÷ 5.'
     - 85 هو الـ median.
     - 415 المجموع.
+  - kind: explain
+    page: 104
+    quote: |-
+      Find midpoint (X) of each interval= UL+LL/2
+      Multiply F by X for each interval
+      Find the sum of these products
+      Find arithmetic mean
+    title: 'Mean من جدول: 4 خطوات'
+    text: |
+      1. هات ==midpoint (X)== كل فئة = (UL + LL) ÷ 2.
+      2. اضرب ==f × X== لكل فئة.
+      3. اجمعهم: ==ΣfX==.
+      4. اقسم على مجموع الـ frequency: x̄ = ΣfX ÷ Σf.
+
+      ليه الـ midpoint؟ لأننا مش عارفين القيم بالظبط جوه الفئة، فبنفترض إنهم كلهم عند نصها. التفسير المقبول (مش في الكتاب).
   - kind: explain
     page: 105
     quote: |-
@@ -1078,6 +1697,48 @@ lessons:
 
       مثال السلايد: ΣfX = 1860، Σf = 50 → ==x̄ = 37.2 years==.
   - kind: explain
+    page: 106
+    quote: |-
+      Advantages & Disadvantages
+      Advantages:
+      easy to compute and interpret
+      generally the best measure of central location.
+      Disadvantages:
+      It cannot be used with qualitative variables
+      It can take on a fraction when the variable itself can take only integer values.
+      It is affected by the extreme observation or outliers.
+      Can not be used for open-ended tables.
+    title: 'الـ mean: مميزات وعيوب'
+    text: |
+      المميزات: ==سهل يتحسب ويتفهم==، وغالبًا ==أحسن مقياس== للـ central location.
+
+      العيوب:
+
+      - ماينفعش مع ==qualitative variables==.
+      - ممكن يطلع كسر حتى لو المتغير أرقام صحيحة (2.4 طفل).
+      - بيتأثر بالـ outliers.
+      - ماينفعش مع open-ended tables.
+
+      ليه الـ outliers بتأثر؟ لأن كل قيمة داخلة في المجموع، فقيمة واحدة كبيرة جدًا بتشد المتوسط ناحيتها. التفسير المقبول (مش في الكتاب).
+  - kind: explain
+    page: 107
+    quote: |-
+      Median
+      Defined as the middle value of the observations when arranged from smallest to largest.
+      Computation of the median from ungrouped data:
+      When n is odd:
+      The steps are:
+      Order observations ascending or descending
+      Determine the rank of the median given by (n+1)/2
+      Find the value of median.
+    title: الـ median ورتبته لو n فردي
+    text: |
+      الـ **median** = ==القيمة اللي في النص== بعد ما ترتب القيم من الأصغر للأكبر.
+
+      لو ==n فردي==: رتّب، والرتبة = ==(n + 1) ÷ 2==.
+
+      مثال توضيحي: 5 قيم، الـ median هي القيمة التالتة. التفسير المقبول (مش في الكتاب).
+  - kind: explain
     page: 108
     quote: |-
       Example:
@@ -1092,6 +1753,103 @@ lessons:
 
       - **n فردي**: الـ rank = ==(n + 1) ÷ 2==. القيم 5، 8، 7، 12، 10 ← 5، 7، 8، 10، 12 ← الـ rank 3 ← **8 years**.
       - **n زوجي**: الـ ranks = n/2 و n/2 + 1، والـ median ==متوسطهم==. القيم 8، 6، 12، 3، 5، 7 ← 3، 5، 6، 7، 8، 12 ← (6 + 7) ÷ 2 = **6.5 kg**.
+  - kind: explain
+    page: 109
+    quote: |-
+      When n is even:
+      The steps are:
+      1. The observations are arranged in an ascending or descending magnitude.
+      2. Determine the ranks of the two middle observations given by: n/2 and n/2 + 1
+      3. Refer back to ordered observations and using the obtained ranks, we determine the two middle values.
+      4. The median = Sum of the 2 middle values / 2
+    title: الـ median لو n زوجي
+    text: |
+      1. ==رتّب== القيم.
+      2. رتب القيمتين اللي في النص: ==n/2 و n/2 + 1==.
+      3. اقرا القيمتين.
+      4. الـ median = ==مجموعهم ÷ 2==.
+
+      ليه اتنين؟ لأن العدد الزوجي مالوش قيمة واحدة في النص بالظبط. التفسير المقبول (مش في الكتاب).
+  - kind: check
+    page: 110
+    quote: |-
+      Example:
+      Find the median weight of the following values: 8, 6, 12, 3, 5 and 7 Kg.
+      Ordering the observation: 3, 5, 6, 7, 8, 12
+      The ranks = 6/2 = 3 and 6/2 + 1 = 4
+      Median = (6 + 7) / 2 = 6.5 Kg
+    question: Median weight of 8, 6, 12, 3, 5 and 7 kg?
+    options:
+    - 6.5 kg
+    - 6 kg
+    - 7 kg
+    - 6.83 kg
+    answer: 0
+    why:
+    - 'صح: رتّب 3، 5، 6، 7، 8، 12 → (6 + 7) ÷ 2 = 6.5.'
+    - دي القيمة التالتة بس.
+    - دي القيمة الرابعة بس.
+    - ده الـ mean مش الـ median.
+  - kind: explain
+    page: 111
+    quote: |-
+      Median Advantages & Disadvantages:
+      Advantages:
+      Used with quantitative and qualitative ordinal variables.
+      Used in open ended tables.
+      Not affected by extreme values.
+    title: 'الـ median: مميزات وعيوب'
+    text: |
+      المميزات:
+
+      - بينفع مع ==quantitative و qualitative ordinal==.
+      - بينفع في ==open-ended tables==.
+      - ==مابيتأثرش بالقيم المتطرفة==.
+
+      العيوب: ماينفعش مع الـ nominal، مش سهل في التحليل الإحصائي، وبياخد قيمة أو اتنين بس مش كل القيم.
+
+      ليه مابيتأثرش بالـ outlier؟ لأنه بيبص على الترتيب، فلو أكبر قيمة كبرت أكتر، اللي في النص لسه في النص. التفسير المقبول (مش في الكتاب).
+  - kind: try
+    items: [res.L15.086, res.L15.088, res.L15.091]
+  recap:
+  - Mean = Σx ÷ n؛ grouped = ΣfX ÷ Σf.
+  - 'Median: رتّب، (n + 1) ÷ 2 للفردي، ومتوسط الاتنين اللي في النص للزوجي.'
+  - 'Mode: الأكتر تكرار؛ الوحيد للـ nominal؛ ممكن bimodal أو no mode.'
+  - الـ mean بيتأثر بالـ outliers ومينفعش مع open-ended table؛ الـ median والـ mode لأ.
+  practice: [res.L15.081, res.L15.082, res.L15.083, res.L15.084, res.L15.085, res.L15.086, res.L15.087, res.L15.088, res.L15.089,
+    res.L15.090, res.L15.091, res.L15.092, res.L15.093]
+- id: res.L15.lesson9
+  title: المنوال، وتختار المقياس المناسب
+  hook: الأكتر تكرارًا ممكن يبقى رقم واحد، أو اتنين، أو مفيش خالص.
+  minutes: 8
+  pages: [112, 126]
+  topics: [central]
+  goals:
+  - تطلع الـ mode من قيم ومن جدول
+  - تعرف الـ unimodal والـ bimodal والـ no mode
+  - تختار الـ mean أو الـ median أو الـ mode حسب البيانات
+  status: unverified
+  steps:
+  - kind: check
+    page: 112
+    quote: |-
+      Mode
+      Mode
+      Most common value.
+      3, 6, 7, 4, 19, 4, 10, 13, 10, 2, 1, 21, 4, 22
+      Mode = 4
+    question: Mode of 3, 6, 7, 4, 19, 4, 10, 13, 10, 2, 1, 21, 4, 22?
+    options:
+    - '4'
+    - '10'
+    - '3'
+    - '22'
+    answer: 0
+    why:
+    - 'صح: 4 اتكررت 3 مرات، أكتر من أي رقم.'
+    - 10 اتكررت مرتين بس.
+    - 3 مرة واحدة.
+    - 22 مرة واحدة.
   - kind: explain
     page: 113
     quote: |-
@@ -1108,6 +1866,77 @@ lessons:
       القيمة اللي بتتكرر أكتر، ورمزها **M**. ممكن تلاقي اتنين (**bimodal**)، أكتر (**multimodal**)، أو ==No mode== لو كله متكرر بنفس العدد.
 
       وهو ==الوحيد اللي ينفع مع الـ nominal data==.
+  - kind: check
+    page: 114
+    quote: |-
+      Examples
+      a. 5 5 5 3 1 5 1 4 3 5
+      b. 1 2 2 2 3 4 5 6 6 6 7 9
+      c. 1 2 3 6 7 8 9 10
+    question: 'Data set 1 2 2 2 3 4 5 6 6 6 7 9 is:'
+    options:
+    - Bimodal (2 and 6)
+    - Unimodal (2)
+    - No mode
+    - Multimodal (2, 6, 9)
+    answer: 0
+    why:
+    - 'صح: 2 و 6 كل واحد 3 مرات.'
+    - فيه رقمين متساويين في التكرار مش واحد.
+    - فيه أرقام بتتكرر.
+    - 9 مرة واحدة بس.
+  - kind: check
+    page: 114
+    quote: |-
+      Examples
+      a. 5 5 5 3 1 5 1 4 3 5
+      b. 1 2 2 2 3 4 5 6 6 6 7 9
+      c. 1 2 3 6 7 8 9 10
+    question: 'Data set 1 2 3 6 7 8 9 10 has:'
+    options:
+    - No mode
+    - A mode of 1
+    - A mode of 10
+    - Many modes
+    answer: 0
+    why:
+    - 'صح: مفيش ولا رقم اتكرر.'
+    - 1 مرة واحدة زي الباقي.
+    - 10 مرة واحدة زي الباقي.
+    - مفيش تكرار خالص.
+  - kind: explain
+    page: 117
+    quote: |-
+      Two methods can be used
+      1. The modal interval.
+      The interval opposite the highest frequency.
+      2. The mid-point of modal interval
+      (Used only for quantitative data)
+      mid point is obtained as follows:
+      = (Lower limit of modal interval + upper limit of modal interval) / 2
+    title: 'Mode من جدول: طريقتين'
+    text: |
+      1. ==Modal interval==: الفئة قصاد ==أعلى frequency==.
+      2. ==Midpoint الـ modal interval== (للبيانات الكمية بس) = (lower + upper limit) ÷ 2.
+
+      ليه الطريقة التانية للكمية بس؟ لأن الـ qualitative مالهاش حدود رقمية تاخد نصها. التفسير المقبول (مش في الكتاب).
+  - kind: aside
+    page: 118
+    quote: |-
+      Examples:
+      Modal interval = 30<35 kg.
+      Mid-point of modal interval = 32.5 kg (is better).
+      | Weight (kg) | Frequency |
+      |---|---|
+      | 20- | 2 |
+      | 25- | 4 |
+      | 30- | 10 |
+      | 35- | 5 |
+      | 40-45 | 3 |
+      | Total | 24 |
+    tone: tip
+    text: |-
+      في الجدول (grouped): الـ **modal interval** = الفئة قصاد أعلى frequency (30<35 kg)، والـ ==midpoint of the modal interval== (32.5 kg) أحسن، بس للـ quantitative بس.
   - kind: check
     page: 119
     quote: |-
@@ -1130,47 +1959,6 @@ lessons:
     - 'صح: الـ mode هو الفئة نفسها.'
     - ده التكرار بتاعها، فخ مشهور.
     - ده الـ total.
-  - kind: aside
-    page: 118
-    quote: |-
-      Examples:
-      Modal interval = 30<35 kg.
-      Mid-point of modal interval = 32.5 kg (is better).
-      | Weight (kg) | Frequency |
-      |---|---|
-      | 20- | 2 |
-      | 25- | 4 |
-      | 30- | 10 |
-      | 35- | 5 |
-      | 40-45 | 3 |
-      | Total | 24 |
-    tone: tip
-    text: |-
-      في الجدول (grouped): الـ **modal interval** = الفئة قصاد أعلى frequency (30<35 kg)، والـ ==midpoint of the modal interval== (32.5 kg) أحسن، بس للـ quantitative بس.
-  - kind: figure
-    page: 122
-    quote: |-
-      Mean = 135.8
-      Median = 55
-      Mode = 64
-    title: الـ outlier بيشد الـ mean
-    svg: |-
-      <svg viewBox="0 0 330 120" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 70H320" class="fg-ink"/>
-        <g class="fg-dot-acc"><circle cx="14" cy="70" r="5"/><circle cx="26" cy="70" r="5"/><circle cx="40" cy="70" r="5"/><circle cx="52" cy="62" r="5"/><circle cx="52" cy="76" r="5"/></g>
-        <circle cx="310" cy="70" r="6" class="fg-dot-bad"/>
-        <text x="310" y="94" text-anchor="middle" class="t-sm t-bad">623</text>
-        <path d="M38 40V100" class="fg-thin"/>
-        <text x="38" y="34" text-anchor="middle" class="t-sm t-good">median 55</text>
-        <path d="M52 52V44" class="fg-thin"/>
-        <text x="80" y="116" text-anchor="middle" class="t-sm">mode 64</text>
-        <path d="M130 40V100" class="fg-arrow-bad"/>
-        <text x="140" y="34" text-anchor="middle" class="t-sm t-bad">mean 135.8</text>
-      </svg>
-    caption: '3، 15، 46، 64، 64، 623: الـ median 55 والـ mode 64 فضلوا مع البيانات، والـ mean اتشد لـ 135.8 بسبب 623.'
-    alt: 'Dot plot: five values clustered left, one outlier at 623 far right; median and mode marked near the cluster, mean
-      marked far toward the outlier.'
-    remind: [res.L15.086, res.L15.092, res.L15.101]
   - kind: table
     page: 120
     quote: |-
@@ -1212,6 +2000,30 @@ lessons:
       - 1
     - - 3
       - 1
+  - kind: figure
+    page: 122
+    quote: |-
+      Mean = 135.8
+      Median = 55
+      Mode = 64
+    title: الـ outlier بيشد الـ mean
+    svg: |-
+      <svg viewBox="0 0 330 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 70H320" class="fg-ink"/>
+        <g class="fg-dot-acc"><circle cx="14" cy="70" r="5"/><circle cx="26" cy="70" r="5"/><circle cx="40" cy="70" r="5"/><circle cx="52" cy="62" r="5"/><circle cx="52" cy="76" r="5"/></g>
+        <circle cx="310" cy="70" r="6" class="fg-dot-bad"/>
+        <text x="310" y="94" text-anchor="middle" class="t-sm t-bad">623</text>
+        <path d="M38 40V100" class="fg-thin"/>
+        <text x="38" y="34" text-anchor="middle" class="t-sm t-good">median 55</text>
+        <path d="M52 52V44" class="fg-thin"/>
+        <text x="80" y="116" text-anchor="middle" class="t-sm">mode 64</text>
+        <path d="M130 40V100" class="fg-arrow-bad"/>
+        <text x="140" y="34" text-anchor="middle" class="t-sm t-bad">mean 135.8</text>
+      </svg>
+    caption: '3، 15، 46، 64، 64، 623: الـ median 55 والـ mode 64 فضلوا مع البيانات، والـ mean اتشد لـ 135.8 بسبب 623.'
+    alt: 'Dot plot: five values clustered left, one outlier at 623 far right; median and mode marked near the cluster, mean
+      marked far toward the outlier.'
+    remind: [res.L15.086, res.L15.092, res.L15.101]
   - kind: case
     page: 126
     quote: |-
@@ -1224,11 +2036,7 @@ lessons:
     stem: 'In nine families surveyed, the numbers of children per family were: 4, 6, 2, 2, 4, 3, 2, 1 and 7.'
     steps:
     - question: 'The mean is:'
-      options:
-      - '3.4'
-      - '3.2'
-      - '2.3'
-      - '3.7'
+      options: ['3.4', '3.2', '2.3', '3.7']
       answer: 0
       why: 31 ÷ 9 = 3.44 ≈ 3.4.
     - question: 'The median is:'
@@ -1248,15 +2056,14 @@ lessons:
       answer: 0
       why: 2 متكررة 3 مرات.
   - kind: try
-    items: [res.L15.086, res.L15.092, res.L15.094, res.L15.101]
+    items: [res.L15.095, res.L15.099, res.L15.101]
   recap:
-  - Mean = Σx ÷ n؛ grouped = ΣfX ÷ Σf.
-  - 'Median: رتّب، (n + 1) ÷ 2 للفردي، ومتوسط الاتنين اللي في النص للزوجي.'
-  - 'Mode: الأكتر تكرار؛ الوحيد للـ nominal؛ ممكن bimodal أو no mode.'
-  - الـ mean بيتأثر بالـ outliers ومينفعش مع open-ended table؛ الـ median والـ mode لأ.
-  practice: [res.L15.081, res.L15.082, res.L15.083, res.L15.084, res.L15.085, res.L15.086, res.L15.087, res.L15.088, res.L15.089,
-    res.L15.090, res.L15.091, res.L15.092, res.L15.093, res.L15.094, res.L15.095, res.L15.096, res.L15.097, res.L15.098, res.L15.099,
-    res.L15.100, res.L15.101, res.L15.102, res.L15.103, res.L15.104, res.L15.105, res.L15.106]
+  - Mode = الأكتر تكرار؛ ممكن مفيش، أو أكتر من واحد.
+  - 'من جدول: modal interval أو midpoint بتاعه.'
+  - الـ outlier بيشد الـ mean، والـ median ثابت.
+  - Nominal = mode بس؛ ordinal = median أو mode.
+  practice: [res.L15.094, res.L15.095, res.L15.096, res.L15.097, res.L15.098, res.L15.099, res.L15.100, res.L15.101, res.L15.102,
+    res.L15.103, res.L15.104, res.L15.105, res.L15.106]
 - id: res.L15.lesson7
   title: 'التشتت: المدى والانحراف المعياري'
   hook: مجموعتين متوسطهم 5 الاتنين، بس واحدة متلمّة والتانية مفروشة. المتوسط لوحده مش كفاية.
@@ -1366,7 +2173,8 @@ lessons:
   - kind: update
     page: 133
     quote: 'N.B.: If n is equal to or more than 30 we divide only by n instead of n-1.'
-    text: 'بالدقة: كتب الإحصاء بتقسم الـ sample SD على ==n − 1== دايمًا. مع n كبير الفرق صغير، فبعض الكورسات بتقبل القسمة على n لما n ≥ 30 كتقريب. في الامتحان اكتب قاعدة السلايد.'
+    text: |-
+      بالدقة: كتب الإحصاء بتقسم الـ sample SD على ==n − 1== دايمًا. مع n كبير الفرق صغير، فبعض الكورسات بتقبل القسمة على n لما n ≥ 30 كتقريب. في الامتحان اكتب قاعدة السلايد.
     ref: Altman, Practical Statistics for Medical Research, 1991; Kirkwood and Sterne, Essential Medical Statistics, 2003
   - kind: case
     page: 134
@@ -1406,6 +2214,37 @@ lessons:
       - 1.41 kg
       answer: 0
       why: 10 ÷ (5 − 1) = 2.5 (variance)، √2.5 = 1.58. و1.41 لو قسمت غلط على 5.
+  - kind: explain
+    page: 136
+    quote: |-
+      Population Standard Deviation
+      σ = √[ Σ(x – μ)² / N ]
+      calculators can compute the population standard deviation of data
+    title: SD للـ population
+    text: |
+      ==σ = √[Σ(x − μ)² ÷ N]==
+
+      - الانحرافات من ==μ== (متوسط الـ population).
+      - بنقسم على ==N== (مش N − 1).
+
+      ليه N هنا؟ لأن معاك كل القيم، فمفيش حاجة بتقدّرها؛ الـ n − 1 تصحيح للعيّنة بس. التفسير المقبول (مش في الكتاب).
+  - kind: explain
+    page: 137
+    quote: |-
+      Standard deviation for grouped data
+      Find the mid points (X) as before.
+      Find the product FX for each interval and the sum of these products (ΣfX).
+      Find the product fX2 by the multiplying the mid point (X) by the corresponding product fX and the sum of these products (ΣfX2)
+      Compute the standard deviation (s) given by:
+      S = √[ (ΣfX² – (ΣfX)²/Σf) / (Σf – 1) ]
+    title: 'SD من جدول: الخطوات'
+    text: |
+      1. هات الـ ==midpoints (X)==.
+      2. ==fX== لكل فئة، ومجموعهم ΣfX.
+      3. ==fX²== (X × fX) لكل فئة، ومجموعهم ΣfX².
+      4. S = √[(ΣfX² − (ΣfX)² ÷ Σf) ÷ (Σf − 1)].
+
+      ليه الطريقة دي؟ بدل ما تطرح المتوسط من كل قيمة، بتستخدم المجاميع على طول، وده أسرع مع جدول. التفسير المقبول (مش في الكتاب).
   - kind: explain
     page: 139
     quote: |-

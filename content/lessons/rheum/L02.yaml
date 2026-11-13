@@ -2,16 +2,19 @@ schema: batna.lesson/v1
 lecture: rheum.L02
 lessons:
   # ------------------------------------------------------------------
+  # Book order. Ids are never reused: lesson8 (pp 34-35, chronic gout and
+  # the kidney) was split out of lesson3, lesson9 (pp 45-47, the book's
+  # summary pages) out of lessons 5 and 6 (#828, 2026-11-13).
   - id: rheum.L02.lesson1
     title: "النقرس: بلورات في المكان الغلط"
     hook: "السكر لما يزيد في الشاي بيترسب في القاع. الـ uric acid لما يزيد في الدم بيترسب في صباع رجلك."
-    minutes: 8
+    minutes: 10
     pages: [23, 26]
     topics: [definition, hyperuricemia]
     goals:
       - "تعرّف الـ gout والـ pseudogout بالبلورة"
-      - "تحفظ أرقام الـ epidemiology"
-      - "تعرّف الـ hyperuricaemia وتعرف أسبابها بالنسب"
+      - "تحفظ أرقام الـ epidemiology وتعرف سبب كل رقم"
+      - "تعرّف الـ hyperuricaemia وتعرف أسبابها بالنسب وبالآلية"
     status: unverified
     steps:
       - kind: explain
@@ -26,6 +29,18 @@ lessons:
 
           ممكن يظهروا acute mono/oligoarthritis، أو chronic polyarthropathy شبه الـ Osteoarthritis (OA) أو الـ rheumatoid arthritis (RA). والكتاب بيقول: gout is a **curable** disease، بس لو اتساب بيبقى صعب جدًا.
       - kind: explain
+        page: 23
+        quote: "Gout and pseudoguot are inflammatory arthitides (crystal – induced synovial inflammation) due to monosodium urate (MSU, gout) or calcium pyrophosphate dehydrate (CPPD, pseudogout) crystal formation."
+        title: "ليه البلورة بتولّع المفصل؟"
+        text: |
+          الكتاب بيسميها **crystal-induced synovial inflammation**: البلورة نفسها هي اللي بتعمل الالتهاب، مش ميكروب.
+
+          التفسير المقبول (مش في الكتاب)، وهتلاقي أوله في رسمة الـ colchicine في صفحة 40: الـ neutrophils والـ macrophages بتشوف البلورة كجسم غريب وتحاول **تبلعها**. البلورة بتشغّل الـ ==inflammasome== جوه الخلية، فيطلع **IL-1** بكمية كبيرة، و IL-1 بينادي neutrophils أكتر.
+
+          عشان كده:
+          - المفصل بيبقى **أحمر وسخن ووارم** زي الـ septic arthritis بالظبط.
+          - الأدوية اللي بتقفل الـ neutrophil أو IL-1 (colchicine، anti-IL-1) بتطفي النوبة، مع إنها مش بتنزّل الـ urate.
+      - kind: explain
         page: 24
         quote: "Epidemiology of Gout\n  Gout commoner in men > women [10 : 1].\n  Peak age of onset in men 40 – 50 yrs.\n  Females > 60 years.\n  Gout is the commonest cause of inflammatory arthritis in men over 40 yrs of age.\n  Rarely occurs before young adulthood {when it occurs suggests a specific enzyme defect}.\n  Seldom in premenopausal women.\n  Prevalence of older women is increasing with diuretic use.\n  Only 15% of all patients with hyperuricaemia develop gout."
         title: "مين بيجيله؟"
@@ -35,6 +50,17 @@ lessons:
           - ==أشهر inflammatory arthritis في رجل فوق 40==.
           - لو ظهر قبل الشباب ← فكّر في **enzyme defect**.
           - الستات الكبار بيزيدوا بسبب الـ **diuretics**.
+      - kind: explain
+        page: 24
+        quote: "Prevalence of older women is increasing with diuretic use."
+        title: "ليه الأرقام دي كده؟"
+        text: |
+          الأرقام في الكتاب، والتفسير المقبول (مش في الكتاب) عشان تفتكرها:
+
+          - **رجالة 10 : 1، والستات بعد 60، ونادر قبل الـ menopause**: الـ oestrogen بيساعد الكلى تطلّع urate، فالست قبل سن اليأس محمية. بعدها الحماية بتروح، فبيظهر بعد 60.
+          - **الستات الكبار بيزيدوا مع الـ diuretics**: الـ diuretic بيعمل volume depletion، والكلى بتعوّض بإنها **ترجّع urate** أكتر (ده مكتوب في آليات صفحة 26).
+          - **قبل الشباب = enzyme defect**: الـ urate بيحتاج سنين عشان يترسب، فلو ظهر بدري يبقى فيه سبب قوي جدًا من الأول، زي نقص إنزيم بيخلي الإنتاج مهول.
+          - **15% بس من الـ hyperuricaemia بيجيلهم gout**: يعني ==hyperuricaemia ≠ gout==. الترسيب محتاج حاجات تانية غير الرقم (صفحة 27: solubility و nucleation).
       - kind: check
         page: 24
         quote: "Epidemiology of Gout\n  Gout commoner in men > women [10 : 1].\n  Peak age of onset in men 40 – 50 yrs.\n  Females > 60 years.\n  Gout is the commonest cause of inflammatory arthritis in men over 40 yrs of age.\n  Rarely occurs before young adulthood {when it occurs suggests a specific enzyme defect}.\n  Seldom in premenopausal women.\n  Prevalence of older women is increasing with diuretic use.\n  Only 15% of all patients with hyperuricaemia develop gout."
@@ -57,6 +83,8 @@ lessons:
           2. أو أكتر من **2 standard deviation (SD)** فوق متوسط المجتمع.
 
           الـ uric acid: **تلت** من الأكل و **تلتين** من الـ purine metabolism. بيخرج **تلتين** من الكلى و **تلت** من الأمعاء. وآخر خطوتين بيعملهم ==xanthine oxidase==: hypoxanthine ← xanthine ← uric acid.
+
+          التفسير المقبول (مش في الكتاب): ليه الحد 6.0 بالذات؟ عشان ده الرقم اللي فوقه الـ urate مايقدرش يفضل دايب في سوائل الجسم، فيبدأ يترسب بلورات. يعني الـ hyperuricaemia مش رقم إحصائي وبس، دي النقطة اللي البلورة بتبتدي عندها. وعشان آخر خطوتين في إيد إنزيم واحد (xanthine oxidase)، ده بالظبط المكان اللي الـ allopurinol بيقفله بعدين (صفحة 43).
       - kind: figure
         page: 25
         quote: "Purine nucleotide synthesis and degration are regulated by a network of enzyme pathways; xanthine oxidase catalyses the end conversion hypoxanthine to xanthine and then xanthine to uric acid."
@@ -100,6 +128,22 @@ lessons:
           - { text: "HGPRT deficiency (Lesch-Nyhan)", bin: 1 }
           - { text: "Glucose-6-phosphatase deficiency", bin: 1 }
         why: "الأغلبية الساحقة بتاعة الـ primary gout هم under-excretors (75%). الـ enzyme defects أقل من 1%، بس هي اللي بتيجي في سؤال «gout في سن صغير»."
+      - kind: explain
+        page: 26
+        quote: "Increased purine turnover: chronic myeloproliferative and lymphoproliferative disorders (polycythaemia, chronic lymphocytic leukaemia)."
+        title: "ليه كل سبب بيرفع الـ urate؟"
+        text: |
+          ارجع للحوض: الـ urate بيعلى لو **الحنفية زادت** أو **البلاعة اتسدت**.
+
+          **البلاعة (أشهر، 75%)**:
+          - **Renal failure**: الكلى هي اللي بتطلّع تلتين الـ urate، فلو وقعت يتحبس.
+          - **Lactic acidosis (alcohol)** والـ ketoacids: الكتاب بيقول إنها بتقلل الـ **secretion**. التفسير المقبول (مش في الكتاب): بتتنافس مع الـ urate على نفس الـ transporters في الـ tubule.
+
+          **الحنفية (أقل)**:
+          - **Myeloproliferative و lymphoproliferative** (polycythaemia، CLL): خلايا كتير بتتولد وتموت، وكل خلية بتموت بتسيب الـ ==purines== بتاعة الـ DNA بتاعها، فالـ urate يزيد.
+          - **Enzyme defects** (أقل من 1%): زي Lesch-Nyhan، الإنتاج بيبقى عالي من الولادة، وده سبب الـ gout في سن صغير.
+
+          والنتيجة العملية: لما تلاقي مريض gout، اسأل الأول عن **البلاعة** (الكلى، الأدوية، الكحول) عشان دي 75% من الحالات، وبعدين دوّر على **الحنفية** لو المريض صغير أو عنده تضخم طحال أو صورة دم غريبة.
       - kind: mnemonic
         page: 26
         quote: "Chronic drug therapy: thiazide and loop diuretics, low-dose aspirin, cyclosporine, pyrazinamide."
@@ -129,18 +173,18 @@ lessons:
       - kind: try
         items: [rheum.L02.003, rheum.L02.005, rheum.L02.010, rheum.L02.016, rheum.L02.019]
     recap:
-      - "Gout = MSU، pseudogout = CPPD؛ الاتنين crystal synovitis."
-      - "رجالة 10:1، 40-50 سنة؛ أشهر inflammatory arthritis فوق 40."
+      - "Gout = MSU، pseudogout = CPPD؛ الاتنين crystal synovitis: البلورة ← inflammasome ← IL-1."
+      - "رجالة 10:1، 40-50 سنة؛ أشهر inflammatory arthritis فوق 40؛ الستات بعد الـ menopause ومع الـ diuretics."
       - "Hyperuricaemia فوق 6.0 mg/dl، وبس 15% بيجيلهم gout."
       - "Under-excretors 75%، over-producers 20%، enzyme defects أقل من 1%."
       - "CALT: cyclosporine، aspirin، loop، thiazide (+ pyrazinamide)."
-    practice: [rheum.L02.001, rheum.L02.002, rheum.L02.003, rheum.L02.004, rheum.L02.005, rheum.L02.006, rheum.L02.007, rheum.L02.008, rheum.L02.009, rheum.L02.010, rheum.L02.011, rheum.L02.012, rheum.L02.013, rheum.L02.014, rheum.L02.015, rheum.L02.016, rheum.L02.017, rheum.L02.018, rheum.L02.019, rheum.L02.020, rheum.L02.145, rheum.L02.146, rheum.L02.147, rheum.L02.148]
+    practice: [rheum.L02.001, rheum.L02.002, rheum.L02.003, rheum.L02.004, rheum.L02.005, rheum.L02.006, rheum.L02.007, rheum.L02.008, rheum.L02.009, rheum.L02.010, rheum.L02.011, rheum.L02.012, rheum.L02.013, rheum.L02.014, rheum.L02.015, rheum.L02.016, rheum.L02.017, rheum.L02.018, rheum.L02.019, rheum.L02.020, rheum.L02.145, rheum.L02.146, rheum.L02.147]
   # ------------------------------------------------------------------
   - id: rheum.L02.lesson2
     title: "الـ uric acid مش لوحده: القلب والسكر والكلية المزروعة"
     hook: "الـ urate العالي بيسبق الضغط والسكر. ولو المريض كلية مزروعة، فيه فخ دوائي ممكن يموّته."
-    minutes: 8
-    pages: [27, 30]
+    minutes: 9
+    pages: [27, 31]
     topics: [associations]
     goals:
       - "تعرف علاقة الـ hyperuricaemia بالضغط والسكر"
@@ -160,6 +204,18 @@ lessons:
           - موجودة في **26%** من مرضى الضغط، و **58%** من اللي بياخدوا أدوية ضغط.
           - بتحصل في **تلت** اللي بياخدوا diuretic.
           - بتشارك في الـ **cardio-renal disease**.
+
+          التفسير المقبول (مش في الكتاب): ليه الـ urate يسبق الضغط والسكر؟ الـ urate العالي بيأذي بطانة الأوعية (endothelial dysfunction) ويشغّل الـ RAAS في الكلى، فالضغط يعلى مع الوقت. يعني الـ hyperuricaemia مش مجرد نتيجة، ممكن تبقى جزء من السبب. وعشان كده مريض الـ gout محتاج كشف على الضغط والسكر والكلى، مش المفصل بس.
+      - kind: explain
+        page: 27
+        quote: "Develops in 1/3 of patients treated with a diuretic."
+        title: "ليه الرقم بيقفز مع أدوية الضغط؟"
+        text: |
+          الكتاب بيقول **26%** من مرضى الضغط عندهم hyperuricaemia، والرقم بيوصل **58%** في اللي بياخدوا أدوية ضغط، وإنها بتحصل في **تلت** اللي بياخدوا diuretic.
+
+          ليه القفزة دي؟ عشان أشهر أدوية الضغط القديمة هي الـ ==thiazide و loop diuretics==، ودول في قايمة الأدوية اللي بتقلل إخراج الـ urate (صفحة 26).
+
+          والعكس كمان صحيح: الكتاب بيقول إن الـ hyperuricaemia **بتسبق وتتنبأ** بالضغط والسكر. يعني مش بس نتيجة، ممكن تبقى **جزء من السبب**، وده اللي صفحة 29 و 30 بيشرحوه في الـ insulin resistance والـ diabetic nephropathy.
       - kind: order
         page: 27
         quote: "Disease progression in gout\n| Clinical manifestation | Disease progression | Risk factor or cause |\n|---|---|---|\n| No disease | Normouricaemia | |\n| Asymptomatic state | Hyperuricaemia | Genetic factors (e.g. SNPs in urate transporter genes); Environmental factors (e.g. diet and BMI); Impaired kidney function; Increasing age; Male sex; Medications; High cell turnover states, etc. |\n| Asymptomatic state | MSU crystal deposition | Reduced solubility of urate; Increased nucleation of MSU crystals; Growth of MSU crystals |\n| Symptomatic disease | Recurrent gout flares | Acute inflammatory response to deposited MSU crystals |\n| Symptomatic disease with complications | Chronic gouty arthritis and tophaceous gout | Chronic granulomatous inflammatory response to deposited crystals |"
@@ -205,6 +261,17 @@ lessons:
             <text x="90" y="178" class="t-sm t-good">excretion</text>
             <text x="70" y="252" class="t-sm t-mut">ABCG2 also exports urate in the gut</text>
           </svg>
+      - kind: explain
+        page: 28
+        quote: "Dysfunctional variants of ABCG2 increase serum urate levels and the risk of gout."
+        title: "اقرا الـ transporter من اتجاهه"
+        text: |
+          ماتحفظش أسامي. اسأل: الـ transporter ده بيرجّع الـ urate للدم، ولا بيطلّعه برّه؟
+
+          - **بيرجّع (reabsorption)**: URAT1 (apical) و GLUT9 (basolateral). لو شغالين زيادة ← urate يعلى.
+          - **بيطلّع (excretion)**: NPT1 في الكلى، و ==ABCG2== في الكلى **والأمعاء**. لو اشتغلوا أكتر ← urate ينزل؛ لو باظوا ← urate يعلى.
+
+          عشان كده الـ **gain-of-function** في NPT1 بيقلل الـ gout، والـ **dysfunctional** ABCG2 بيزوّده. والتفسير المقبول (مش في الكتاب): ABCG2 بيطلّع الـ urate من الأمعاء كمان، وده الطريق اللي بيشيل التلت (صفحة 25).
       - kind: check
         page: 28
         quote: "NPT1 is present on the apical membrane of renal proximal tubule cells and mediates urate excretion, and a gain-of-function mutation in the gene encoding NPT1 results in increased renal urate excretion and can decrease the risk of gout."
@@ -225,6 +292,8 @@ lessons:
           Age، obesity، high-protein diet، alcohol، **type IV hyperlipidaemia**، DM/insulin resistance، metabolic syndrome، ischaemic heart disease (IHD)/smoking، hypertension، family history.
 
           والعلاقة مع الـ ==insulin resistance==: الـ hyperinsulinaemia بتزوّد **urate reabsorption** في الكلى ← hyperuricaemia ← endothelial dysfunction. وفي الـ diabetic nephropathy الـ uric acid بيشغّل inflammation و renin–angiotensin–aldosterone system (RAAS) ويقلل NO.
+
+          التفسير المقبول (مش في الكتاب): ليه القايمة دي كلها؟ كل عامل منها يا إما بيزوّد الـ purines (الأكل الغني بالبروتين، الكحول، السمنة) يا إما بيضيّق الإخراج (الضغط وأدويته، الـ insulin resistance، السن). يعني القايمة دي هي نفس الحوض: حنفية زيادة أو بلاعة ضيقة. واحفظ إنها نفس عوامل الـ metabolic syndrome، فمريض الـ gout غالبًا عنده قلب وكلى في خطر.
       - kind: explain
         page: 30
         quote: "Gout in Transplant Patients\n  Due to renal toxicity of calcineurin inhibitors (ciclosporine and tacrolimus).\n  Coprescription of azathiorine and xanthine oxydase (allopurinol and febuxostat) inhibitors is hazardous."
@@ -256,25 +325,47 @@ lessons:
             options: ["Benzbromarone", "Probenecid", "Pegloticase"]
             answer: 0
             why: "الكتاب: If impossible ← benzbromarone، أو amlodipine لو فيه ciclosporin-induced hypertension."
+      - kind: explain
+        page: 31
+        quote: "Amlodipine in ciclosporine-induced hypertension."
+        title: "لو التبديل مستحيل"
+        text: |
+          الكتاب بيدّي حلين لو مش قادر تبدّل الـ calcineurin inhibitor أو الـ azathioprine:
+
+          - **Benzbromarone**: uricosuric، يعني بيخلّي الكلى تطلّع urate أكتر. ميزته هنا إنه مش XO inhibitor، فمفيش مشكلة مع الـ azathioprine.
+          - ==Amlodipine== للضغط اللي عامله الـ ciclosporin: الكتاب بيستشهد بدراسة إنه **بيقلل** الـ ciclosporin-induced hyperuricaemia.
+
+          التفسير المقبول (مش في الكتاب) لاختيار amlodipine: البديل المعتاد للضغط كان هيبقى diuretic، وده بيرفع الـ urate أكتر. فإنت بتعالج الضغط من غير ما تزوّد المشكلة.
+      - kind: check
+        page: 31
+        quote: "Amlodipine in ciclosporine-induced hypertension."
+        question: "A renal transplant patient on ciclosporin has hypertension and hyperuricaemia. Which antihypertensive does the book favour?"
+        options: ["Amlodipine", "Hydrochlorothiazide", "Furosemide", "Low-dose aspirin"]
+        answer: 0
+        why:
+          - "صح: الكتاب: amlodipine reduces cyclosporin-induced hyperuricaemia."
+          - "الـ thiazide بيقلل إخراج الـ urate، فهيزوّد المشكلة."
+          - "الـ loop diuretic نفس الكلام."
+          - "الـ aspirin مش دوا ضغط، والجرعة الصغيرة منه بترفع الـ urate كمان."
       - kind: try
-        items: [rheum.L02.021, rheum.L02.023, rheum.L02.025, rheum.L02.033, rheum.L02.034]
+        items: [rheum.L02.021, rheum.L02.023, rheum.L02.025, rheum.L02.033, rheum.L02.036]
     recap:
-      - "Hyperuricaemia بتسبق الضغط والسكر؛ 26% من مرضى الضغط."
+      - "Hyperuricaemia بتسبق الضغط والسكر؛ 26% من مرضى الضغط و 58% مع الأدوية، عشان الـ diuretics."
       - "Normo ← hyper ← deposition ← flares ← tophi."
-      - "URAT1 و GLUT9 بيرجّعوا؛ NPT1 و ABCG2 بيطلّعوا."
-      - "Azathioprine + XOI = خطر؛ بدّل لـ MMF."
+      - "URAT1 و GLUT9 بيرجّعوا؛ NPT1 و ABCG2 بيطلّعوا (ABCG2 في الأمعاء كمان)."
+      - "Azathioprine + XOI = خطر؛ بدّل لـ MMF. لو مستحيل: benzbromarone، و amlodipine للضغط."
     practice: [rheum.L02.021, rheum.L02.022, rheum.L02.023, rheum.L02.024, rheum.L02.025, rheum.L02.026, rheum.L02.027, rheum.L02.028, rheum.L02.029, rheum.L02.030, rheum.L02.031, rheum.L02.032, rheum.L02.033, rheum.L02.034, rheum.L02.035, rheum.L02.036, rheum.L02.149]
   # ------------------------------------------------------------------
   - id: rheum.L02.lesson3
     title: "النوبة: أسوأ وجع في حياته"
     hook: "مش قادر يحط الشراب، ولا حتى الملاية على صباعه. ده الـ podagra."
     minutes: 9
-    pages: [31, 35]
-    topics: [clinical, acute, chronic]
+    pages: [31, 33]
+    topics: [clinical, acute]
     goals:
-      - "تعدّ الأربع syndromes"
-      - "توصف النوبة الحادة بالأرقام"
-      - "تعرف الـ tophi والكلى في الـ chronic gout"
+      - "تعدّ الأربع syndromes وتعرف بيحصلوا ليه"
+      - "توصف النوبة الحادة بالأرقام وتفسّر كل صفة"
+      - "تعرف إيه اللي بيحصل ما بين النوبات، وإيه اللي بيحدد السرعة"
     status: unverified
     steps:
       - kind: reveal
@@ -317,6 +408,18 @@ lessons:
           </svg>
       - kind: explain
         page: 32
+        quote: "As the crystal deposits slowly increase and enlarge there is progressive involvement of more proximal sites and cartilage + bone damage from both inflammation and mass pressure effects and development of 2ry osteoarthritis."
+        title: "ليه بيطلع لفوق ويبوّظ المفصل؟"
+        text: |
+          الترسيب بيبدأ في **الأطراف** (first MTP)، ومع الوقت:
+
+          - الترسبات **بتكبر وتزيد** ← مفاصل **proximal** أكتر بتتصاب.
+          - الغضروف والعضم بيتأذوا من سببين، والكتاب ذاكرهم الاتنين: ==inflammation== (النوبات المتكررة) و **mass pressure** (كتلة البلورات نفسها بتضغط).
+          - النتيجة: **secondary osteoarthritis**.
+
+          ليه الأعراض بتتأخر؟ عشان البلورات بتاخد **شهور لسنين** لحد ما توصل لحجم يتحسّ. يعني لما المريض يجيلك بأول نوبة، البلورات كانت بتتراكم من زمان. وده سبب إن الـ ULT بياخد وقت طويل يدوّبها.
+      - kind: explain
+        page: 32
         quote: "Especially targeting the first metatarsophalangeal and small joints feet and hands."
         title: "بيبدأ فين؟"
         text: |
@@ -337,6 +440,17 @@ lessons:
           - { key: "C", text: "Can't bear a sock or bedding: extreme tenderness" }
           - { key: "K", text: "Kind of red, shiny, swollen skin" }
           - { key: "S", text: "Self-limiting في 5-14 يوم ويرجع طبيعي" }
+      - kind: explain
+        page: 32
+        quote: "Extreme tenderness-the patient unable to wear a sock or to let bedding rest on the joint."
+        title: "ليه النوبة بالشكل ده؟"
+        text: |
+          التفسير المقبول (مش في الكتاب) لكل صفة في الكتاب:
+
+          - **Rapid onset, peak في 2-6 ساعات**: الـ neutrophils بتتجمع بسرعة جدًا لما البلورات تتقلقل، وكل neutrophil بينادي غيره بالـ IL-1 (دايرة بتكبر).
+          - **بيصحى الفجر**: الرجل بتبرد بالليل، والـ urate بيذوب أقل في البرد، فالبلورات بتترسب أسهل.
+          - **Extreme tenderness**: مش قادر يلبس sock ولا يستحمل الـ bedding: الالتهاب الحاد في مفصل صغير محدود، فالضغط جوه بيعلى والأعصاب حساسة جدًا.
+          - ==Self-limiting في 5-14 يوم==: الالتهاب بيطفي نفسه، والـ neutrophils اللي بلعت البلورات بتموت، والفرامل الطبيعية بتشتغل.
       - kind: check
         page: 33
         quote: "Acute gouty attack\n  During the attack the joint, on examination, shows:\n    Signs of synovitis.\n    Periarticular swelling.\n    Overlying erythema.\n  Attack may be accompanied by fever, malaise and confusion.\n  As attack subsides pruritus and desquamation of overlying skin are common.\n  Main differential diagnosis septic arthritis, infective cellulitis or another crystal disease.\n  Atypical attacks may also manifest as bursitis, tenosynovitis or cellulitis."
@@ -350,6 +464,18 @@ lessons:
           - "مش inflammatory بالصورة دي."
       - kind: explain
         page: 33
+        quote: "As attack subsides pruritus and desquamation of overlying skin are common."
+        title: "النوبة بتعمل إيه في الجسم كله؟"
+        text: |
+          الكتاب بيقول إن النوبة ممكن يبقى معاها ==fever و malaise و confusion==.
+
+          ليه؟ ارجع لمحاضرة الـ cytokines: IL-1 بيكلم الـ hypothalamus ← fever، ومع IL-6 بيعملوا acute phase response. يعني نوبة في صباع واحد ممكن تعمل أعراض في الجسم كله، وده اللي بيخلّيها تتلخبط مع الـ **septic arthritis**.
+
+          وبعد ما النوبة تهدى: **pruritus** و **desquamation** للجلد. التفسير المقبول (مش في الكتاب): الجلد كان مشدود ومحتقن من الورم، ولما الورم ينزل الطبقة السطحية بتتقشر.
+
+          والـ **atypical attacks** ممكن تيجي **bursitis** أو **tenosynovitis** أو **cellulitis**، فماتستبعدش الـ gout عشان المفصل نفسه سليم.
+      - kind: explain
+        page: 33
         quote: "In most a second attack occurs within 1 year."
         title: "ما بين النوبات"
         text: |
@@ -361,6 +487,40 @@ lessons:
           - من أول نوبة للـ chronic: حوالي **10 سنين**، والمحدد الأساسي **مستوى الـ uric acid**.
 
           وفي آخر النوبة: **pruritus** و **desquamation** للجلد.
+
+          التفسير المقبول (مش في الكتاب): ليه النوبات بتكتر مع الوقت؟ عشان الـ urate لسه عالي بين النوبات، فالبلورات بتفضل تترسب بهدوء وتكبر. يعني الهدوء ده مش شفا، ده وقت تخزين. وعشان كده الكتاب بيقول المحدد الأساسي هو مستوى الـ uric acid: لو نزّلته تحت 6 البلورات تدوب والسنين العشرة دي ممكن ماتحصلش. والـ desquamation في الآخر سببها إن الجلد اللي كان وارم ومشدود بيتقشّر لما الورم يخف.
+      - kind: check
+        page: 33
+        quote: "The main determinant is the uric acid level, the higher it is, the earlier and more severe the development of joint damage and MSUM deposits."
+        question: "What is the main determinant of how early and how severely joint damage develops in gout?"
+        options: ["The serum uric acid level", "The number of joints in the first attack", "The patient's age at the first attack", "The NSAID used for flares"]
+        answer: 0
+        why:
+          - "صح: كل ما الـ urate أعلى، كل ما الـ damage والترسيب أبدر وأشد. ده سبب الـ treat to target."
+          - "الكتاب مش بيربطها بعدد المفاصل في أول نوبة."
+          - "السن مش هو المحدد في الكتاب."
+          - "علاج النوبة مش بيأثر على الـ urate أصلًا (صفحة 45)."
+      - kind: try
+        items: [rheum.L02.037, rheum.L02.041, rheum.L02.043, rheum.L02.044, rheum.L02.049]
+    recap:
+      - "4 syndromes: acute، chronic polyarticular، tophaceous، stones/nephropathy."
+      - "First MTP، الرجل قبل الإيد؛ وبعدين proximal، والضرر من الالتهاب ومن ضغط الكتلة ← 2ry OA."
+      - "Peak في 2-6 ساعات وبيصحيه الفجر؛ يخلص في 5-14 يوم؛ ممكن fever و confusion."
+      - "النوبة التانية خلال سنة في الأغلب؛ chronic بعد حوالي 10 سنين؛ المحدد: مستوى الـ uric acid."
+    practice: [rheum.L02.037, rheum.L02.038, rheum.L02.039, rheum.L02.040, rheum.L02.041, rheum.L02.042, rheum.L02.043, rheum.L02.044, rheum.L02.045, rheum.L02.046, rheum.L02.047, rheum.L02.048, rheum.L02.049, rheum.L02.050, rheum.L02.051, rheum.L02.150]
+  # ------------------------------------------------------------------
+  - id: rheum.L02.lesson8
+    title: "الـ tophi والكلى: لما البلورة تقعد"
+    hook: "النوبة بتروح وبتيجي. الـ tophus والحصوة بيفضلوا، ومنهم اللي ممكن يوقّف الكلى في يومين."
+    minutes: 8
+    pages: [34, 35]
+    topics: [chronic]
+    goals:
+      - "توصف الـ tophi وتعرف ليه بيتوزعوا كده"
+      - "تفرّق الـ stones عن الـ acute uric acid nephropathy عن الـ chronic urate nephropathy"
+      - "تعرف مين محتاج allopurinol قبل الكيماوي، وليه"
+    status: unverified
+    steps:
       - kind: explain
         page: 34
         quote: "Marked asymmetry, both locally and between sides is characteristic."
@@ -371,6 +531,41 @@ lessons:
           - **Asymmetry** واضح: ده المميز (عكس الـ rheumatoid arthritis (RA)).
           - تحت الجلد ممكن تبان **chalky**، ولو اتسابت تتفتح وتطلّع **white gritty material**.
           - المفاصل المتضررة: first MTP، midfoot، finger joints، wrists.
+
+          التفسير المقبول (مش في الكتاب): ليه الأماكن دي بالذات؟ الـ urate بيذوب أقل في **البرد**، والأطراف وصوان الودن أبرد حتة في الجسم، وكمان الأماكن اللي عليها ضغط واحتكاك (الكوع، الـ Achilles). والـ asymmetry سببه إن الـ tophi بتتكون في المكان اللي حصل فيه ترسيب، مش بتوزيع مناعي متماثل زي الـ RA. يعني تاخد الـ tophus كدليل إن الـ urate بقاله سنين عالي.
+      - kind: explain
+        page: 34
+        quote: "If left untreated, tophi enlarge into gross knobbly swellings (Nodules)."
+        title: "ليه الـ tophi في الأماكن دي؟"
+        text: |
+          الكتاب بيحط الـ tophi في **أماكن الـ nodules المعتادة**: الـ extensor surfaces للصوابع والإيد والكوع والـ forearm، والـ **Achilles** و ==helix of the ear==.
+
+          التفسير المقبول (مش في الكتاب): دي أماكن **باردة** (بعيدة عن قلب الجسم) وأماكن **احتكاك وضغط**، والـ urate بيترسب أسهل في البرد. ودان الواحد أبرد حتة فيه تقريبًا، عشان كده الـ tophus في الـ helix علامة كلاسيكية.
+
+          ولو اتسابت: بتكبر لـ **knobbly swellings**، وممكن تتقرّح وتطلّع **مادة بيضا gritty** (دي البلورات نفسها) ومعاها التهاب و pus.
+      - kind: figure
+        page: 34
+        quote: "Achilles tendon and helix of the ear."
+        title: "خريطة الـ tophi"
+        alt: "A simple body outline. Marked spots: helix of the ear, extensor surface of the elbow and forearm, back of the fingers and hand, Achilles tendon, and the first metatarsophalangeal joint. The two sides are marked unevenly to show asymmetry."
+        caption: "الـ tophi على الـ extensor surfaces وفي الأماكن الباردة: الودن والكوع والصوابع والـ Achilles. ولاحظ إن الجنبين **مش زي بعض** (asymmetry)."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="165" cy="40" r="24" class="fg-thin"/>
+            <circle cx="190" cy="40" r="7" class="fg-dot-bad"/>
+            <text x="200" y="30" class="t-sm">helix of ear</text>
+            <path d="M165 64V170M165 90L105 140L90 190M165 90L225 140L240 190M165 170L135 280M165 170L195 280" class="fg-ink"/>
+            <circle cx="105" cy="140" r="8" class="fg-dot-bad"/>
+            <circle cx="225" cy="140" r="5" class="fg-dot-bad"/>
+            <text x="30" y="135" class="t-sm">elbow</text>
+            <circle cx="90" cy="190" r="8" class="fg-dot-bad"/>
+            <text x="20" y="200" class="t-sm">fingers</text>
+            <circle cx="135" cy="268" r="6" class="fg-dot-bad"/>
+            <text x="40" y="270" class="t-sm">Achilles</text>
+            <circle cx="198" cy="285" r="8" class="fg-dot-bad"/>
+            <text x="212" y="290" class="t-sm">first MTP</text>
+            <text x="230" y="230" class="t-sm t-mut">sides differ</text>
+          </svg>
       - kind: table
         page: 34
         quote: "Acute uric acid nephropathy = precipitation of uric acid crystals in the collecting ducts and ureters causes secondary acute obstructive renal failure.\n  Strongly acid urine which reduces uric acid solubility potentiates this problem {likely to occur in ill, dehydrated patients with lymphoma or malignancy subjected to chemotherapy without adequate prophylactic treatment with allopurinol}."
@@ -381,30 +576,72 @@ lessons:
           - ["Acute uric acid nephropathy", "Crystals block ducts; chemo without allopurinol"]
           - ["Chronic urate nephropathy", "Medullary deposits; only untreated tophaceous gout"]
         hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 34
+        quote: "Dehydration and lowering of urine pH (chronic diarrhoea, starvation)."
+        title: "ليه بتتكون الحصوة؟"
+        text: |
+          الكتاب بيقول إن uric acid stones بتعمل renal colic في **10%**، وبيدّي 3 حاجات بتساعدها. كل واحدة ليها منطق:
+
+          - **Purine overproduction**: urate أكتر بيتصفى في البول.
+          - **Uricosuric drugs** وعيوب الـ tubular reabsorption: الكلى بتطلّع urate أكتر في البول.
+          - **Dehydration** و ==low urine pH== (chronic diarrhoea، starvation): بول أقل يعني تركيز أعلى، والبول الحامضي بيقلل ذوبان الـ uric acid.
+
+          يعني نفس قاعدة الشاي والسكر: **تركيز عالي + مذيب قليل = ترسيب**. وعشان كده التفسير المقبول (مش في الكتاب) للوقاية: سوايل كتير، وتجنّب الـ uricosurics عند مريض عنده حصوات.
+      - kind: explain
+        page: 34
+        quote: "Acute uric acid nephropathy = precipitation of uric acid crystals in the collecting ducts and ureters causes secondary acute obstructive renal failure."
+        title: "الـ acute uric acid nephropathy: ليه بعد الكيماوي؟"
+        text: |
+          البلورات بتترسب في الـ **collecting ducts** والـ **ureters** فتسدّها ← ==acute obstructive renal failure==. والبول الحامضي جدًا بيزوّد المشكلة.
+
+          الكتاب بيحدد المريض: **ill و dehydrated**، عنده **lymphoma أو malignancy**، أخد **chemotherapy من غير allopurinol** كـ prophylaxis.
+
+          ليه التلاتة دول بالذات؟ ارجع لصفحة 26: الخلايا السرطانية لما تموت مرة واحدة بالكيماوي بتسيب **purines** كتير جدًا ← urate بيعلى فجأة. والجفاف بيقلل البول. فلو ماكنتش قفلت الإنتاج بالـ allopurinol قبلها، البلورات بتسد الأنابيب في أيام.
       - kind: aside
         tone: exam
         page: 35
         quote: "Progressive renal disease is an important complication confined to untreated severe chronic tophaceous gout."
         text: "كلمة «confined» مهمة: الـ chronic urate nephropathy مقصورة على الـ untreated severe chronic tophaceous gout. مش كل مريض نقرس هيعمل kidney failure من النقرس."
+      - kind: explain
+        page: 35
+        quote: "This results from MSUM crystal deposition in the interstitium of the medulla and pyramids with consequent chronic inflammation, fibrosis, glomerulosclerosis and secondary pyelonephritis."
+        title: "الـ chronic urate nephropathy: بطيئة وفي النسيج"
+        text: |
+          عكس الـ acute اللي بتسد الأنابيب، هنا البلورات بتترسب في **الـ interstitium** بتاع الـ ==medulla و pyramids==.
+
+          والكتاب بيمشي السلسلة: chronic inflammation ← **fibrosis** ← **glomerulosclerosis** ← secondary **pyelonephritis**.
+
+          التفسير المقبول (مش في الكتاب) لمكانها: الـ medulla هي الحتة اللي البول بيتركّز فيها، فتركيز الـ urate هناك أعلى حتة في الكلية. وعشان كده هي مقصورة على الـ **untreated severe** tophaceous gout: محتاجة urate عالي لسنين طويلة.
+      - kind: check
+        page: 34
+        quote: "Strongly acid urine which reduces uric acid solubility potentiates this problem {likely to occur in ill, dehydrated patients with lymphoma or malignancy subjected to chemotherapy without adequate prophylactic treatment with allopurinol}."
+        question: "A dehydrated man with lymphoma develops oliguric renal failure two days after chemotherapy given without allopurinol. What is the mechanism?"
+        options: ["Uric acid crystals obstruct the collecting ducts and ureters", "Crystals deposit slowly in the medullary interstitium", "Immune-complex glomerulonephritis", "Calcium pyrophosphate deposits in the kidney"]
+        answer: 0
+        why:
+          - "صح: ده الـ acute uric acid nephropathy، obstructive، والبول الحامضي بيزوّده."
+          - "ده الـ chronic urate nephropathy، بياخد سنين في الـ untreated tophaceous gout."
+          - "مالوش علاقة بالـ urate في الكتاب."
+          - "الـ CPPD مش بيعمل الصورة دي."
       - kind: try
-        items: [rheum.L02.037, rheum.L02.043, rheum.L02.044, rheum.L02.052, rheum.L02.057]
+        items: [rheum.L02.052, rheum.L02.053, rheum.L02.057, rheum.L02.058, rheum.L02.152]
     recap:
-      - "4 syndromes: acute، chronic polyarticular، tophaceous، stones/nephropathy."
-      - "First MTP، الرجل قبل الإيد؛ peak في 2-6 ساعات، يخلص في 5-14 يوم."
-      - "النوبة التانية خلال سنة في الأغلب؛ chronic بعد حوالي 10 سنين."
-      - "Tophi: extensor surfaces و Achilles و helix، asymmetric."
-      - "Stones 10%؛ acute nephropathy بعد الكيماوي من غير allopurinol."
-    practice: [rheum.L02.037, rheum.L02.038, rheum.L02.039, rheum.L02.040, rheum.L02.041, rheum.L02.042, rheum.L02.043, rheum.L02.044, rheum.L02.045, rheum.L02.046, rheum.L02.047, rheum.L02.048, rheum.L02.049, rheum.L02.050, rheum.L02.051, rheum.L02.052, rheum.L02.053, rheum.L02.054, rheum.L02.055, rheum.L02.056, rheum.L02.057, rheum.L02.058, rheum.L02.059, rheum.L02.142, rheum.L02.150, rheum.L02.151, rheum.L02.152]
+      - "Tophi: extensor surfaces، Achilles، helix of ear؛ asymmetric؛ chalky، وممكن تطلّع white gritty material."
+      - "Stones 10%: overproduction، uricosurics، dehydration و low urine pH."
+      - "Acute nephropathy: بلورات بتسد الـ ducts؛ lymphoma + chemo + جفاف من غير allopurinol."
+      - "Chronic nephropathy: interstitium الـ medulla؛ مقصورة على الـ untreated severe tophaceous gout."
+    practice: [rheum.L02.052, rheum.L02.053, rheum.L02.054, rheum.L02.055, rheum.L02.056, rheum.L02.057, rheum.L02.058, rheum.L02.059, rheum.L02.142, rheum.L02.151, rheum.L02.152]
   # ------------------------------------------------------------------
   - id: rheum.L02.lesson4
     title: "التشخيص: الإبرة قبل أي حاجة"
     hook: "الـ uric acid العالي مش بيأكد، والطبيعي مش بينفي. اللي بيحسمها: بلورة تحت الميكروسكوب."
-    minutes: 8
+    minutes: 10
     pages: [35, 38]
     topics: [diagnosis]
     goals:
       - "تعرف ليه الـ aspiration هو الحَكَم"
-      - "تحفظ أرقام الـ synovial fluid والـ 24-h urine"
+      - "تحفظ أرقام الـ synovial fluid والـ 24-h urine، وتعرف كل تحليل بيدوّر على إيه"
       - "تقرا X-ray و US و DECT في الـ gout"
     status: unverified
     steps:
@@ -417,6 +654,8 @@ lessons:
           - ==Definite==: **Monosodium urate monohydrate (MSUM) crystals** تحت الـ **polarized light microscopy** من aspirate المفصل أو الـ bursa أو الـ tophus.
 
           الـ synovial fluid في النوبة: **turbid**، viscosity قليلة، **20,000-100,000** white blood cell (WBC)/mm³ أغلبها **neutrophils**.
+
+          التفسير المقبول (مش في الكتاب): ليه البلورة هي الـ definite؟ عشان الـ uric acid العالي موجود في ناس كتير مش عندهم gout أصلًا، وكمان ممكن يبقى طبيعي وقت النوبة نفسها. يعني الرقم بيقولك احتمال، والبلورة جوه الـ neutrophil بتقولك يقين. والـ WBC العالية جدًا (لحد 100,000) سببها إن الـ neutrophils بتهجم على البلورات، وده اللي بيخلي السائل turbid زي الـ septic.
       - kind: check
         page: 35
         quote: "Although hyperuricaemía is usually present it does not confirm gout.\nEqually a normal uric acid level does not exclude gout.."
@@ -428,6 +667,15 @@ lessons:
           - "غلط شائع: الـ urate ممكن يبقى طبيعي في النوبة."
           - "المستوى مش بيفرّق بين البلورتين؛ الـ microscopy بس."
           - "مفيش علاقة؛ التأكيد بالبلورات."
+      - kind: reveal
+        page: 35
+        quote: "Although hyperuricaemía is usually present it does not confirm gout."
+        prompt: "ليه الـ uric acid مش بيأكد ولا بينفي؟"
+        answer: |
+          - **مش بيأكد**: عشان 85% من اللي عندهم hyperuricaemia عمرهم ما بيجيلهم gout (صفحة 24). المريض ممكن يكون عنده urate عالي **و** septic arthritis.
+          - **مش بينفي**: التفسير المقبول (مش في الكتاب): الـ urate ممكن **ينزل** وقت النوبة نفسها، لأن الالتهاب بيخلّي الكلى تطلّع urate أكتر، ولأن جزء منه بيترسب كبلورات.
+
+          عشان كده الكتاب بيقول hyperuricaemia بتتأكد بـ **2 قياسات صايمة أو أكتر**، والتشخيص الأكيد بالبلورة.
       - kind: explain
         page: 35
         quote: "A 24-hr urine collection is obtained to determine the uric acid and creatinine excretion. On a regular purine diet, a urate value of more than 800mg/24hr suggests overproduction of uric acid."
@@ -436,6 +684,30 @@ lessons:
           - Hyperuricaemia بتتأكد بـ **2 fasting levels أو أكتر** فوق الطبيعي للسن والجنس.
           - **24-h urine** على أكل عادي: أكتر من ==800 mg== = **overproducer**.
           - Synovial fluid للبلورات: ==sensitivity 90%، specificity 100%==. لو فيه بلورات يبقى gout.
+
+          التفسير المقبول (مش في الكتاب): ليه مرتين صايم؟ عشان مستوى الـ urate بيتغير مع الأكل والكحول والـ diuretic، فقياس واحد ممكن يخدعك. والـ 24-h urine بيقسم المرضى لـ overproducer و under-excretor، وده بيفرق في اختيار العلاج: الـ uricosuric مايتديش لواحد بيطلّع urate كتير أصلًا، لأنه هيزوّد الحصوات. والـ specificity 100% يعني البلورة مش بتكدب.
+      - kind: check
+        page: 35
+        quote: "On a regular purine diet, a urate value of more than 800mg/24hr suggests overproduction of uric acid."
+        question: "A man with primary gout collects a 24-hour urine on a regular purine diet: urate 950 mg/24 h. What does this suggest?"
+        options: ["Overproduction of uric acid", "Under-excretion of uric acid", "Normal handling", "Acute uric acid nephropathy"]
+        answer: 0
+        why:
+          - "صح: أكتر من 800 mg/24h على أكل عادي = overproducer، يعني من الـ 20%."
+          - "الـ under-excretor بيطلّع أقل في البول مش أكتر."
+          - "الرقم فوق الحد."
+          - "دي حالة obstructive، مش تحليل بول 24 ساعة."
+      - kind: explain
+        page: 36
+        quote: "Measuring of fasting lipoprotein concentrations in patients with primary gout."
+        title: "باقي التحاليل: كل واحد بيدوّر على إيه؟"
+        text: |
+          الكتاب بيعدّ تحاليل، وكل واحد ليه سبب مربوط بحاجة اتعلمتها:
+
+          - **Renal function** (creatinine، urea، electrolytes، urine): عشان الكلى سبب (under-excretion) ونتيجة (stones و nephropathy) في نفس الوقت.
+          - **Fasting lipoproteins في الـ primary gout**: عشان الـ **type IV hyperlipidaemia** والـ metabolic syndrome من عوامل الخطر (صفحة 29).
+          - **ESR و CBC**: عشان تدوّر على ==myeloproliferative disease== (overproduction، صفحة 26).
+          - **في النوبة**: acute phase response عالي (ESR و CRP عاليين، neutrophil leucocytosis، thrombocytosis)، عشان IL-1 و IL-6 شغالين.
       - kind: table
         page: 37
         quote: "Gouty erosions (bony tophi) are less common but more specific feature occurring as paraarticular \"punched out\" defects with a well-delineated borders and retained bone density."
@@ -481,6 +753,8 @@ lessons:
           Sepsis، crystal synovitis تانية، traumatic arthritis.
 
           ==Crystals + Gram stain + culture== على نفس العينة = **الطريقة الوحيدة الأكيدة**. وممكن sepsis و gout مع بعض، فماتكتفيش بالبلورة لو المريض شكله septic.
+
+          التفسير المقبول (مش في الكتاب): ليه مانكتفيش بالبلورة؟ عشان المفصل اللي عنده بلورات قديمة ممكن يتلوّث بميكروب، والصورة الاتنين شبه بعض: سخونية وورم و neutrophils كتير. ولو فوّت الـ septic arthritis المفصل ممكن يتدمر في أيام. يعني قاعدة الأمان: نفس العينة تروح للبلورات والـ Gram stain والـ culture مع بعض.
       - kind: explain
         page: 38
         quote: "DCS: urate crystal deposition on articular cartilage surface."
@@ -489,6 +763,8 @@ lessons:
           - **High-resolution ultrasound (US)**: ==double contour sign (DCS)== = urate مترسب على سطح الـ cartilage (خط فوق خط).
           - **Dual-energy computed tomography (DECT)**: صورة 3D، بيبيّن erosions أكتر بكتير، خصوصًا في الـ midfoot والـ spine.
           - مكانه: **second-line** لما الـ polarizing microscopy ماتأكدش التشخيص.
+
+          التفسير المقبول (مش في الكتاب): ليه ده مفيد؟ الـ US و الـ DECT بيشوفوا الـ urate نفسه من غير إبرة، فينفعوا لو المفصل صعب يتسحب منه (زي الـ midfoot) أو لو السحب طلع سلبي. بس عشان مش بيشوفوا البلورة جوه الـ neutrophil ولا بيستبعدوا الـ sepsis، الكتاب بيحطهم second-line مش بديل للميكروسكوب.
       - kind: case
         page: 36
         quote: "In almost all circumstances, arthrocentesis should be performed Synovial fluid analysis for demonstrating negative birefringent crystals in patients with acute gouty arthritis:\n  Sensitivity: 90%.\n  Specificity: 100%.\n    If there are uric acid crystals, then you have gout."
@@ -504,24 +780,24 @@ lessons:
             answer: 0
             why: "Needles negatively birefringent = MSU. الكتاب: crystals و sepsis الاتنين؛ الـ culture لسه مهم."
       - kind: try
-        items: [rheum.L02.060, rheum.L02.063, rheum.L02.065, rheum.L02.067, rheum.L02.073]
+        items: [rheum.L02.060, rheum.L02.063, rheum.L02.065, rheum.L02.067, rheum.L02.148]
     recap:
-      - "Definite = MSUM تحت الـ polarized microscopy."
-      - "Urate طبيعي مش بينفي، وعالي مش بيأكد."
+      - "Definite = MSUM تحت الـ polarized microscopy من مفصل أو bursa أو tophus."
+      - "Urate طبيعي مش بينفي، وعالي مش بيأكد؛ hyperuricaemia بـ 2 قياسات صايمة."
       - "Fluid: 20,000-100,000 neutrophils؛ sensitivity 90% و specificity 100%."
-      - "24-h urine فوق 800 mg = overproducer."
+      - "24-h urine فوق 800 mg = overproducer؛ lipids في الـ primary، و CBC للـ myeloproliferative."
       - "X-ray: punched-out erosions بعضم محفوظ. US: DCS. DECT: second-line."
-    practice: [rheum.L02.060, rheum.L02.061, rheum.L02.062, rheum.L02.063, rheum.L02.064, rheum.L02.065, rheum.L02.066, rheum.L02.067, rheum.L02.068, rheum.L02.069, rheum.L02.070, rheum.L02.071, rheum.L02.072, rheum.L02.073, rheum.L02.137, rheum.L02.153, rheum.L02.154]
+    practice: [rheum.L02.060, rheum.L02.061, rheum.L02.062, rheum.L02.063, rheum.L02.064, rheum.L02.065, rheum.L02.066, rheum.L02.067, rheum.L02.068, rheum.L02.069, rheum.L02.070, rheum.L02.071, rheum.L02.072, rheum.L02.073, rheum.L02.137, rheum.L02.148, rheum.L02.153, rheum.L02.154]
   # ------------------------------------------------------------------
   - id: rheum.L02.lesson5
     title: "طفّي النار: علاج النوبة الحادة"
     hook: "تلات طفايات في الدولاب: NSAID و colchicine و steroid. اختار على حسب المريض، مش على حسب المزاج."
-    minutes: 9
-    pages: [38, 47]
-    topics: [acute-tx]
+    minutes: 10
+    pages: [38, 41]
+    topics: [acute-tx, ult]
     goals:
       - "تعرف التلات أهداف للعلاج"
-      - "تختار الـ first-line المناسب لكل مريض"
+      - "تختار الـ first-line المناسب لكل مريض، وتعرف ليه"
       - "تعرف الـ IL-1 inhibitors ومكانها"
     status: unverified
     steps:
@@ -536,6 +812,18 @@ lessons:
         why: "الأول طفّي النار، بعدين امنع نار جديدة، وفي الآخر شيل البنزين (الـ urate pool)."
       - kind: explain
         page: 39
+        quote: "ACR Gout Guidelines 2020: Allopurinol Is First-line Therapy!"
+        title: "خطين منفصلين: النار والبنزين"
+        text: |
+          الكتاب بيحط عنوان الـ ACR 2020 قبل علاج النوبة: ==allopurinol is first-line therapy==، ده للـ **ULT** (تنزيل الـ urate على المدى الطويل)، مش للنوبة.
+
+          ليه لازم تفصل الاتنين في دماغك؟
+          - **علاج النوبة** (NSAID، colchicine، steroid) بيطفي **الالتهاب**، ومالوش أي تأثير على الـ urate (صفحة 45).
+          - **الـ ULT** بيشيل **البلورات** نفسها على شهور، بس مش بيطفي نوبة شغالة.
+
+          عشان كده في سؤال الكتاب التاني، allopurinol و febuxostat غلط كعلاج لنوبة حادة، حتى لو المريض محتاجهم بعدين.
+      - kind: explain
+        page: 39
         quote: "Select any one of first line therapy according to patient preference, associated comorbidities, renal function, tolerance and adverse effect profile.\n  NSAIDS.\n  Corticosteroids.\n  Colchicine."
         title: "التلات first-line"
         text: |
@@ -546,6 +834,8 @@ lessons:
           - ==Corticosteroids==
 
           على حسب: رغبة المريض، الـ comorbidities، الـ **renal function**، والـ side effects. والقاعدة: **كل ما بدري كل ما أحسن**، ومفيش واحد فيهم بيأثر على الـ urate.
+
+          التفسير المقبول (مش في الكتاب): ليه واحد بس؟ عشان التلاتة بيطفوا نفس الالتهاب من أماكن مختلفة، وكل واحد له عيوب: الـ NSAIDs على الكلى والمعدة، والـ colchicine على الأمعاء، والـ steroids على السكر والضغط. يعني اختيارك بيتحدد بالـ comorbidity اللي عند المريض، مش بالدوا الأقوى. ومفيش منهم بيأثر على الـ urate، فالنوبة تخلص بس السبب لسه موجود.
       - kind: explain
         page: 40
         quote: "NSAID should be commenced on its maximum dose, rather than titrating upwards from the lower end of the dose range."
@@ -555,6 +845,16 @@ lessons:
           - ابدأ ==بأعلى جرعة== (maximum dose) على طول، ماتطلعش بالتدريج.
           - **Indomethacin مش أحسن** من غيره: الـ quick-acting NSAIDs كلهم زي بعض.
           - **COX-2**: نفس الفعالية، gastrointestinal (GI) events أقل.
+
+          والكتاب بيقول COX-2 ليها نفس الفعالية مع GI events أقل، يعني تنفع للي عنده تاريخ قرحة. التفسير المقبول (مش في الكتاب): ليه indomethacin مش أحسن؟ عشان كل الـ NSAIDs بتقفل نفس الإنزيم، فالفرق في الجرعة والسرعة مش في الاسم، والمهم إنك تبدأ بدري وبالجرعة الكاملة.
+      - kind: reveal
+        page: 40
+        quote: "NSAID should be commenced on its maximum dose, rather than titrating upwards from the lower end of the dose range."
+        prompt: "ليه نبدأ الـ NSAID بأعلى جرعة على طول؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): النوبة بتوصل لذروتها في **2-6 ساعات** (صفحة 32)، والالتهاب دايرة بتكبر نفسها. لو بدأت بجرعة صغيرة وزوّدت بالتدريج، الدايرة هتكون سبقتك. الأحسن تضربها جامد بدري، وبعدين تنزّل.
+
+          وبنفس المنطق الكتاب بيقول في صفحة 45: **drugs work better when given early**.
       - kind: figure
         page: 40
         quote: "Colchicine\nMain effects of colchicine:\n  Binds to tubulin in cells (affecting cell division)\n  Inhibits function of leukocytes\n  Inhibits chemotactic factors\n  Inhibits inflammasome and IL-1 production\n  Inhibits release of histamine from mast cells\nOral administration → Liver (enterohepatic recycling):\n  10-20% renal excretion\n  80-90% faecal excretion"
@@ -578,11 +878,18 @@ lessons:
             <path d="M120 80L80 42M210 80L250 42M120 124L80 140M210 124L250 140M165 124V180" class="fg-thin"/>
             <text x="10" y="240" class="t-sm t-mut">excretion: faeces 80-90%, kidney 10-20%</text>
           </svg>
-      - kind: aside
-        tone: exam
-        page: 46
-        quote: "Terkeltaub et al.* RCT comparing 2 dosages given early (<12h) 180 patients mg/d (1.2 + 0.6 1h after) is as efficient and better tolerated than 4.8 mg/d (1.2 + 0.6/h x 6).\n  Terkeltaub RA, et al. High versus low dosing of oral colchicine for early acute gout flare: Twenty-four-hour outcome of the first multicenter, randomized, double-blind, placebo-controlled, parallel-group, dose-comparison colchicine study. Arthritis Rheum 2010,62(4):1060-8."
-        text: "Terkeltaub randomised controlled trial (RCT): الجرعة الصغيرة بدري (1.2 mg وبعد ساعة 0.6 mg) = نفس فعالية الـ 4.8 mg، بس أخف بكتير على البطن. والـ tolerance بتعتمد على الجرعة والكلى والكبد والـ drug interactions."
+      - kind: explain
+        page: 40
+        quote: "Main effects of colchicine: Binds to tubulin in cells (affecting cell division); Inhibits function of leukocytes; Inhibits inflammasome and IL-1 production"
+        title: "اقرا رسمة الـ colchicine"
+        text: |
+          كل سهم في الرسمة بيفسّر حاجة في العلاج:
+
+          - **بيمسك الـ tubulin**: الـ neutrophil محتاج الـ microtubules عشان يتحرك ويبلع، فالـ colchicine ==بيشلّه== قبل ما يوصل للبلورة. وده نفس السبب إنه بيأثر على الـ cell division، وده مصدر الـ side effects.
+          - **بيقفل الـ inflammasome و IL-1**: ده نفس مسار البلورة اللي في أول المحاضرة، فبيقطع الدايرة من أولها.
+          - **بيخرج أغلبه في البراز (80-90%) مع enterohepatic recycling**، و **10-20%** بس من الكلى.
+
+          التفسير المقبول (مش في الكتاب): الـ enterohepatic recycling بيخلّي الدوا يلف ويرجع، فالجرعات الكبيرة بتتراكم، وده اللي بيعمل الإسهال. عشان كده الجرعة الصغيرة كسبت في دراسة Terkeltaub (صفحة 46).
       - kind: explain
         page: 41
         quote: "Dose of 30-35 mg/day can be used where colchicine or NSAIDs are contraindicated or failed to provide sufficient relief (elderly people and patients with renal/liver impairment, IHD, PUD, hypersensitivity to NSAIDs)."
@@ -595,16 +902,23 @@ lessons:
           - عيوبها: بتبوّظ الضغط والسكر، و **rebound** متكرر.
 
           مفيش استجابة؟ ← **combination** ← **second-line**.
-      - kind: table
-        page: 47
-        quote: "Anti-interleukin-1 (IL-1) agents\nFor Refractory Gout When Nsaids, Colchicine, Gc Are Ineffective Or When Patient Have Contraindications To Any Of The Three Option Drugs.\n| Agent | Action and dose |\n|---|---|\n| ANAKINRA | IL-1 reseptor Antagonist; 100 mg/D, Sc |\n| RILONACEPT | Dimeric fusion protein directed against IL-1; 80-120 mg/weekly, Sc |\n| CANAKINUMAB | Fully humanized monoclonal antibody directed at IL-1β; 150 mg Sc |"
-        title: "الـ IL-1 inhibitors"
-        columns: ["Drug", "How", "Dose"]
-        rows:
-          - ["Anakinra", "IL-1 receptor antagonist", "100 mg/d SC"]
-          - ["Rilonacept", "Decoy fusion protein", "80-120 mg/week SC"]
-          - ["Canakinumab", "Anti-IL-1β antibody", "150 mg SC"]
-        hide: [[0, 1], [2, 1]]
+
+          التفسير المقبول (مش في الكتاب): ليه intra-articular في مفصل أو اتنين؟ عشان الدوا بيروح مكان الالتهاب على طول، والجسم كله مابياخدش غير كمية صغيرة، فالسكر والضغط مايتأثروش تقريبًا. ولما المفاصل تكتر يبقى الـ oral أسهل. والـ taper على 7-10 أيام سببه إن البلورات لسه موجودة، فلو وقفت فجأة الالتهاب يرجع (الـ rebound).
+      - kind: explain
+        page: 41
+        quote: "Best in pts who cannot take steroids or colchcine."
+        title: "ليه IL-1 بالذات؟"
+        text: |
+          الكتاب بيقول الـ biologic agents **effective للنوبة**، و **أحسن حاجة للي مايقدرش ياخد steroids أو colchicine**.
+
+          ليه بتشتغل؟ عشان IL-1 هو قلب الالتهاب اللي البلورة بتعمله (الـ inflammasome في رسمة صفحة 40). اقفل IL-1، النوبة بتطفي.
+
+          وتلات طرق للقفل، زي محاضرة الـ cytokines:
+          - **Receptor antagonist**: anakinra، بيقعد على الـ receptor.
+          - **Anti-IL-1 antibody**: canakinumab، بيمسك الـ cytokine.
+          - **Decoy receptor fusion protein**: ==rilonacept==، receptor عايم بيصطاد IL-1.
+
+          العيب: غالية جدًا و off-label في أغلب البلاد.
       - kind: explain
         page: 41
         quote: "In practice, anakinra has been the preferred off-label anti-IL-1ẞ strategy among experienced \"goutologists\", due to its short half-life and lower cost compared with canakinumab."
@@ -613,6 +927,8 @@ lessons:
           للـ **refractory gout** أو لما الـ NSAIDs والـ colchicine والـ steroids كلهم ممنوعين.
 
           غاليين و off-label في أغلب البلاد. الـ ==anakinra== هو المفضل عند الخبرا: **half-life قصيرة وأرخص**.
+
+          التفسير المقبول (مش في الكتاب): ليه الـ anti-IL-1 بيشتغل؟ عشان البلورة بتشغّل الـ inflammasome اللي بيطلّع IL-1، وده المحرك الرئيسي للنوبة. يعني إنت بتقفل نفس الخطوة اللي الـ colchicine بيقفلها، بس بشكل مباشر. والـ anakinra half-life بتاعته قصيرة، فلو حصلت عدوى تقدر توقفه ويخرج من الجسم بسرعة.
       - kind: update
         page: 41
         quote: "Canakinumab is now licenced for use in Europe, but not in the UK or USA."
@@ -628,23 +944,23 @@ lessons:
             answer: 0
             why: "الـ non-steroidal anti-inflammatory drugs (NSAID) ممنوع (CKD 4، PUD، asthma). الـ colchicine خطر: CKD 4 + verapamil + simvastatin (interactions). الـ allopurinol والـ febuxostat urate-lowering therapy (ULT) مش علاج نوبة. يبقى steroid."
       - kind: try
-        items: [rheum.L02.074, rheum.L02.076, rheum.L02.084, rheum.L02.085, rheum.L02.086]
+        items: [rheum.L02.074, rheum.L02.076, rheum.L02.084, rheum.L02.085, rheum.L02.094]
     recap:
       - "الأهداف: طفّي النوبة، امنع غيرها، نزّل الـ urate pool."
-      - "First line: NSAID أو colchicine أو steroid، على حسب المريض والكلى."
-      - "NSAID بأعلى جرعة؛ indomethacin مش أحسن."
-      - "Colchicine low dose (1.2 + 0.6) زي الـ high dose وأخف."
-      - "Steroid oral 30-35 mg يومين وtaper 7-10 أيام؛ IL-1 inhibitors للـ refractory."
-    practice: [rheum.L02.074, rheum.L02.075, rheum.L02.076, rheum.L02.077, rheum.L02.078, rheum.L02.079, rheum.L02.080, rheum.L02.081, rheum.L02.082, rheum.L02.083, rheum.L02.084, rheum.L02.085, rheum.L02.086, rheum.L02.087, rheum.L02.088, rheum.L02.089, rheum.L02.090, rheum.L02.091, rheum.L02.092, rheum.L02.093, rheum.L02.138, rheum.L02.139, rheum.L02.155]
+      - "علاج النوبة مش بينزّل الـ urate؛ allopurinol first-line للـ ULT مش للنوبة."
+      - "First line: NSAID أو colchicine أو steroid، على حسب المريض والكلى. NSAID بأعلى جرعة؛ indomethacin مش أحسن."
+      - "Colchicine بيشلّ الـ neutrophil ويقفل IL-1؛ 80-90% في البراز."
+      - "Steroid oral 30-35 mg يومين وtaper 7-10 أيام؛ IL-1 inhibitors للي مايقدرش ياخد steroids أو colchicine."
+    practice: [rheum.L02.074, rheum.L02.075, rheum.L02.076, rheum.L02.077, rheum.L02.078, rheum.L02.079, rheum.L02.080, rheum.L02.083, rheum.L02.084, rheum.L02.085, rheum.L02.087, rheum.L02.088, rheum.L02.089, rheum.L02.094, rheum.L02.095, rheum.L02.138, rheum.L02.139, rheum.L02.155]
   # ------------------------------------------------------------------
   - id: rheum.L02.lesson6
-    title: "شيل البنزين: الـ ULT والعلاج طويل المدى"
+    title: "شيل البنزين: الـ ULT"
     hook: "الـ colchicine بيطفي النار. الـ allopurinol بيشيل البنزين. ولو نسيت الـ prophylaxis، النار هتولع تاني وانت بتشيله."
     minutes: 10
-    pages: [42, 47]
+    pages: [42, 44]
     topics: [ult]
     goals:
-      - "تعرف إمتى تبدأ ULT"
+      - "تعرف إمتى تبدأ ULT، وليه كل indication"
       - "تبدأ الـ prophylaxis صح وتحفظ مدته"
       - "تفرّق allopurinol عن febuxostat عن pegloticase"
     status: unverified
@@ -660,6 +976,21 @@ lessons:
           - **2 نوبات أو أكتر في السنة**.
           - **Chronic kidney disease (CKD) stage 2 or worse**.
           - **Past urolithiasis**.
+
+          التفسير المقبول (مش في الكتاب): ليه الأربعة دول؟ كلهم علامة إن البلورات بقت كتير أو إن الضرر بدأ: الـ tophi يعني مخزون كبير، والنوبات المتكررة يعني الترسيب مستمر، والـ CKD والحصوات يعني الكلى نفسها بتتأذي من الـ urate. يعني مستنيتش الضرر يكبر، وبتنزّل الـ urate عشان البلورات تدوب.
+      - kind: explain
+        page: 42
+        quote: "Frequent attacks of gouty arthritis (22 attacks/yr)."
+        title: "ليه الأربعة دول بالذات؟"
+        text: |
+          التفسير المقبول (مش في الكتاب): كل indication من الأربعة معناه إن **الـ urate pool كبير وبيعمل ضرر**، مش مجرد رقم في التحليل:
+
+          - **Tophi**: البلورات بقت كتلة بتتشاف، يعني الـ pool مليان.
+          - **نوبتين أو أكتر في السنة**: البلورات كتير لدرجة إنها بتتقلقل كل شوية.
+          - **CKD stage 2 أو أسوأ**: الكلى مش بتطلّع urate كويس، والـ urate نفسه ممكن يأذيها أكتر (chronic urate nephropathy).
+          - **Past urolithiasis**: الحصوة هتتكرر طول ما الـ urate عالي.
+
+          وفي الأربعة: المريض لازم يكون عنده ==established gouty arthritis==. الـ urate العالي لوحده مش indication (صفحة 45).
       - kind: update
         page: 42
         quote: "Any patient with established diagnosis of gouty arthritis and:\n  Tophi by clinical exam or imaging study.\n  Frequent attacks of gouty arthritis (22 attacks/yr).\n  CKD stage 2 or worse.\n  Past urolithiasis."
@@ -676,6 +1007,14 @@ lessons:
           - Second line: **prednisolone 5-10 mg/day**.
 
           المدة: **ACR 2012**: 3 شهور من غير tophi، 6 مع tophi. **European League Against Rheumatism (EULAR) 2016**: 6 شهور للكل.
+      - kind: reveal
+        page: 42
+        quote: "3 months if no tophi, 6 months in presence of tophi (ACR 2012)."
+        prompt: "ليه الـ prophylaxis أطول لو فيه tophi؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): لما الـ ULT ينزّل الـ urate، البلورات الموجودة **بتبدأ تدوب وتتقلقل**، وده بيعمل نوبات في الأول.
+
+          الـ tophi معناها بلورات أكتر بكتير، فبتاخد وقت أطول لحد ما تخلص، وفترة النوبات بتطول. عشان كده **6 شهور مع tophi و 3 من غيرها** (ACR 2012)، والـ EULAR 2016 اختصرها وقال 6 للكل.
       - kind: check
         page: 42
         quote: "Duration of prophylaxis:\n  3 months if no tophi, 6 months in presence of tophi (ACR 2012).\n  6 months for all (EULAR 2016)."
@@ -698,6 +1037,20 @@ lessons:
           - **ماتوقفوش في النوبة**.
           - الـ ACR: مقبول تبدأه أثناء النوبة لو المريض بيستجيب للـ anti-inflammatory.
           - Lifelong.
+
+          التفسير المقبول (مش في الكتاب): ليه start low, go slow؟ عشان أي نزول سريع في الـ urate بيخلي البلورات المترسبة تتقلقل وتطلع للمفصل، فتعمل نوبة. وكمان الجرعة الصغيرة في الـ CKD سببها إن الكلى هي اللي بتطلّع الـ allopurinol، فلو ضعيفة الدوا يتراكم. وماتوقفوش في النوبة عشان التغيير في مستوى الـ urate (طلوع أو نزول) هو اللي بيشعللها.
+      - kind: explain
+        page: 43
+        quote: "XOI Effective for both underexcreters and overproducers of UA."
+        title: "ليه الـ allopurinol بينفع الكل؟"
+        text: |
+          الـ allopurinol **XOI**، يعني بيقفل الـ xanthine oxidase، وده الإنزيم اللي بيعمل آخر خطوتين في تصنيع الـ uric acid (صفحة 25).
+
+          فمهما كان سبب الـ hyperuricaemia، لو قفلت **المصنع** الـ urate هينزل:
+          - الـ **overproducer**: المصنع شغال زيادة، وإنت قفلته.
+          - الـ **under-excretor**: البلاعة ضيقة، بس إنت قللت اللي داخل الحوض.
+
+          عشان كده هو ==first choice== في أغلب الـ guidelines. و **start low, go slow** (100 mg، و 50 في CKD 4) عشان التفسير المقبول (مش في الكتاب): النزول الفجائي للـ urate بيقلقل البلورات ويعمل نوبات، والكلى الضعيفة بتراكم الدوا.
       - kind: aside
         tone: trap
         page: 43
@@ -717,6 +1070,16 @@ lessons:
         hide: [[3, 2], [4, 2]]
       - kind: explain
         page: 44
+        quote: "Febuxostat is an excellent alternative for patients with renal insufficiency"
+        title: "ليه febuxostat للكلى الضعيفة؟"
+        text: |
+          الجدول بيجاوب: الـ allopurinol **renal metabolism** ومحتاج تعديل جرعة في الـ CKD الخفيف والمتوسط. الـ febuxostat **liver metabolism** ومش محتاج تعديل في الـ CKD الخفيف والمتوسط.
+
+          النتيجة: الكتاب بيقول febuxostat ==excellent alternative== في الـ renal insufficiency.
+
+          وفرق تاني في الجدول: الـ allopurinol **purine-selective** (شكله شبه الـ purines)، والـ febuxostat **non-purine selective**. والاتنين XOI، فالاتنين ممنوعين مع الـ azathioprine (صفحة 30).
+      - kind: explain
+        page: 44
         quote: "Antigenic, with a risk of anaphylaxis, so: premedication with antihistamine and corticosteroids is recommended."
         title: "الـ pegloticase"
         text: |
@@ -724,6 +1087,8 @@ lessons:
           - بينزّل الـ urate جامد ويدوّب الـ tophi بسرعة.
           - بس: **antigenic** وفيه **anaphylaxis** ← premedication بـ antihistamine و steroid. وفيه قلق **cardiovascular** (حذر في الـ heart failure).
           - استخدامه محدود: قليلين بس refractory فعلًا، وغالي.
+
+          التفسير المقبول (مش في الكتاب): ليه antigenic؟ الـ pegloticase إنزيم (uricase) من مصدر مش بشري، والإنسان أصلًا مافيهوش الإنزيم ده، فالجهاز المناعي بيشوفه غريب ويعمل antibodies. يعني ممكن anaphylaxis، والـ antibodies كمان بتبطّل مفعوله. وعشان كده premedication وبيتحجز للحالات الـ refractory بس.
       - kind: sort
         page: 44
         quote: "Treatment objectives\n| Phase | Objective |\n|---|---|\n| Asymptomatic Phase | Prevent the 1st Attack |\n| ACUTE GOUT | Terminate The Attack |\n| INTERVAL GOUT and CHRONIC GOUT | Prevent recurrent attacks; Prevent/reverse complications; Lower serum uric acid to target |"
@@ -736,6 +1101,40 @@ lessons:
           - { text: "Prevent or reverse complications", bin: 2 }
           - { text: "Lower serum urate to target", bin: 2 }
         why: "ده جدول صفحة 44. لاحظ إن الـ asymptomatic hyperuricaemia الكتاب مش بيعالجها بدوا (صفحة 45)."
+      - kind: try
+        items: [rheum.L02.096, rheum.L02.098, rheum.L02.100, rheum.L02.103, rheum.L02.108]
+    recap:
+      - "ULT لأي gout مؤكد مع: tophi، نوبتين في السنة، CKD 2+، حصوات."
+      - "Prophylaxis الأول: colchicine 0.6 أو NSAID + PPI، ثم prednisolone 5-10؛ 3 أو 6 شهور (ACR 2012)، 6 للكل (EULAR 2016)."
+      - "Target أقل من 6 (أو 5). Allopurinol بيقفل المصنع فبينفع الكل؛ 100، و50 في CKD 4، زوّد كل 2-4 أسابيع."
+      - "Febuxostat كبدي، مش محتاج تعديل في الـ CKD الخفيف؛ excellent alternative."
+      - "Pegloticase للـ refractory: anaphylaxis، premedicate، حذر في الـ heart failure."
+    practice: [rheum.L02.096, rheum.L02.097, rheum.L02.098, rheum.L02.099, rheum.L02.100, rheum.L02.101, rheum.L02.102, rheum.L02.103, rheum.L02.104, rheum.L02.105, rheum.L02.106, rheum.L02.107, rheum.L02.108, rheum.L02.109, rheum.L02.110, rheum.L02.111, rheum.L02.112, rheum.L02.140, rheum.L02.143, rheum.L02.156, rheum.L02.157]
+  # ------------------------------------------------------------------
+  - id: rheum.L02.lesson9
+    title: "الخلاصة: من غير أعراض، النوبة، وطول العمر"
+    hook: "الكتاب بيرجع في آخر المحاضرة يلمّ الخيوط: مين نعالجه، بإيه، وإمتى نسيبه."
+    minutes: 8
+    pages: [45, 47]
+    topics: [acute-tx, ult]
+    goals:
+      - "تعرف تعمل إيه مع الـ asymptomatic hyperuricaemia، وليه مفيش دوا"
+      - "تعدّ وسايل علاج النوبة والقاعدتين بتوعها"
+      - "تعرف مشاكل الـ steroids، ومين محتاج hypouricaemic drug طول العمر"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 45
+        quote: "Hyperuricemia: when sUA level persistently above 6,8 mg/dL or 0,41 mmol/l."
+        title: "الـ asymptomatic hyperuricaemia"
+        text: |
+          الكتاب هنا بيعرّفها كـ serum uric acid **فوق 6.8 mg/dL (0.41 mmol/l) بشكل مستمر**.
+
+          الإدارة:
+          - **دوّر على السبب وعالجه**، خصوصًا الـ ==metabolic syndrome== وأمراضه.
+          - **مفيش دليل كفاية** إن علاجها بدوا بيمنع gout أو مرض كلى أو أحداث قلبية.
+
+          ليه مفيش دوا؟ التفسير المقبول (مش في الكتاب): 85% منهم عمرهم ما هيجيلهم gout (صفحة 24)، فلو عالجت الكل هتدّي دوا طول العمر لناس كتير مش محتاجينه، بكل الـ side effects بتاعته، من غير فايدة مثبتة.
       - kind: check
         page: 45
         quote: "There is insufficient evidence to recommend treatment of asymptomatic hyperuricemia to prevent gouty arthritis, renal disease or cardiovascular events."
@@ -748,6 +1147,43 @@ lessons:
           - "نفس السبب."
           - "الـ prophylaxis مع الـ ULT بس."
       - kind: explain
+        page: 45
+        quote: "As a rule drugs work better when given early."
+        title: "النوبة: الوسايل والقاعدتين"
+        text: |
+          الكتاب بيعدّ وسايل علاج النوبة: **icing و rest**، colchicine، NSAIDs، glucocorticoids، ACTH، anticytokines. والـ colchicine والـ NSAIDs **frequently combined**.
+
+          وبعدين قاعدتين، وكل واحدة ليها سبب:
+          - ==Drugs work better when given early==: عشان الالتهاب دايرة بتكبر نفسها في ساعات، فالأحسن تقطعها في أولها.
+          - **No effect on uricemia; cannot cure gout**: عشان دي أدوية **ضد الالتهاب**، مش ضد البلورة. اللي بيشفي هو الـ ULT.
+      - kind: aside
+        tone: exam
+        page: 46
+        quote: "Terkeltaub et al.* RCT comparing 2 dosages given early (<12h) 180 patients mg/d (1.2 + 0.6 1h after) is as efficient and better tolerated than 4.8 mg/d (1.2 + 0.6/h x 6).\n  Terkeltaub RA, et al. High versus low dosing of oral colchicine for early acute gout flare: Twenty-four-hour outcome of the first multicenter, randomized, double-blind, placebo-controlled, parallel-group, dose-comparison colchicine study. Arthritis Rheum 2010,62(4):1060-8."
+        text: "Terkeltaub randomised controlled trial (RCT): الجرعة الصغيرة بدري (1.2 mg وبعد ساعة 0.6 mg) = نفس فعالية الـ 4.8 mg، بس أخف بكتير على البطن. والـ tolerance بتعتمد على الجرعة والكلى والكبد والـ drug interactions."
+      - kind: explain
+        page: 46
+        quote: "Frequent rebounds with orals. Patients may remain on long-term steroid therapy."
+        title: "مشاكل الـ steroids، وليه"
+        text: |
+          الكتاب بيقول على الـ systemic steroids:
+          - الجرعة **30 mg prednisone أو أكتر**.
+          - ==Worsen hypertension and diabetes==: ودول أصلًا عوامل خطر ومرتبطين بالـ hyperuricaemia (صفحة 27 و 29)، فإنت بتعالج النوبة وبتبوّظ الأرضية.
+          - **Rebounds متكررة** مع الـ oral، والمريض ممكن **يفضل على steroid طويل**.
+          - الـ indication: اللي مايقدرش ياخد colchicine أو NSAIDs. والـ ACR بيحطهم first line زي الـ colchicine.
+
+          التفسير المقبول (مش في الكتاب) للـ rebound: الـ steroid بيطفي الالتهاب بس البلورات لسه موجودة، فلما تقلل الجرعة بسرعة الالتهاب بيرجع.
+      - kind: table
+        page: 47
+        quote: "Anti-interleukin-1 (IL-1) agents\nFor Refractory Gout When Nsaids, Colchicine, Gc Are Ineffective Or When Patient Have Contraindications To Any Of The Three Option Drugs.\n| Agent | Action and dose |\n|---|---|\n| ANAKINRA | IL-1 reseptor Antagonist; 100 mg/D, Sc |\n| RILONACEPT | Dimeric fusion protein directed against IL-1; 80-120 mg/weekly, Sc |\n| CANAKINUMAB | Fully humanized monoclonal antibody directed at IL-1β; 150 mg Sc |"
+        title: "الـ IL-1 inhibitors"
+        columns: ["Drug", "How", "Dose"]
+        rows:
+          - ["Anakinra", "IL-1 receptor antagonist", "100 mg/d SC"]
+          - ["Rilonacept", "Decoy fusion protein", "80-120 mg/week SC"]
+          - ["Canakinumab", "Anti-IL-1β antibody", "150 mg SC"]
+        hide: [[0, 1], [2, 1]]
+      - kind: explain
         page: 47
         quote: "Correction of any modifiable predisposing factors and patient education.\n  Lifestyle alteration to correct obesity, stop diuretic give alternative."
         title: "على المدى الطويل"
@@ -756,25 +1192,50 @@ lessons:
 
           - صحّح العوامل: الوزن، وقّف الـ ==diuretic== وادّي بديل، وعلّم المريض.
           - **Prolonged hypouricaemic therapy** في: نوبات متكررة، tophi، تآكل عضم أو مفصل، مرض كلى أو حصوات، uric acid عالي جدًا.
+
+          التفسير المقبول (مش في الكتاب): ليه potentially curable؟ عشان البلورة بتتكون من الـ urate اللي فوق حد الذوبان، فلو نزّلت المستوى تحت 6 لمدة كفاية البلورات بتدوب والنوبات بتقف. يعني على عكس أغلب أمراض المفاصل، الـ gout له سبب تقدر تشيله. ووقف الـ diuretic عشان هو من أشهر أسباب ضيق البلاعة (صفحة 26).
+      - kind: figure
+        page: 47
+        quote: "Once acute attack has resolved long term treatment needs consideration."
+        title: "تلات مراحل، تلات أهداف"
+        alt: "Three boxes in a row joined by arrows. Asymptomatic hyperuricaemia: find and treat the cause, no drug. Acute attack: anti-inflammatory early, no effect on urate. Interval and chronic: lifestyle, stop diuretic, urate-lowering therapy to target with prophylaxis."
+        caption: "من غير أعراض: عالج السبب بس. في النوبة: anti-inflammatory بدري. بعد النوبة: الـ ULT والـ lifestyle هما اللي بيشفوا."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R02e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="10" width="320" height="60" rx="10" class="fg-good"/>
+            <text x="15" y="32" class="t-sm t-b">Asymptomatic hyperuricaemia</text>
+            <text x="15" y="54" class="t-sm">find and treat the cause; no drug</text>
+            <path d="M165 72V88" class="fg-arrow" marker-end="url(#R02e)"/>
+            <rect x="5" y="92" width="320" height="60" rx="10" class="fg-bad"/>
+            <text x="15" y="114" class="t-sm t-b">Acute attack</text>
+            <text x="15" y="136" class="t-sm">anti-inflammatory early; urate unchanged</text>
+            <path d="M165 154V170" class="fg-arrow" marker-end="url(#R02e)"/>
+            <rect x="5" y="174" width="320" height="66" rx="10" class="fg-acc"/>
+            <text x="15" y="196" class="t-sm t-b">Interval and chronic gout</text>
+            <text x="15" y="216" class="t-sm">lifestyle, stop diuretic, ULT to target</text>
+            <text x="15" y="232" class="t-sm t-mut">with flare prophylaxis</text>
+          </svg>
       - kind: try
-        items: [rheum.L02.096, rheum.L02.098, rheum.L02.100, rheum.L02.103, rheum.L02.107]
+        items: [rheum.L02.082, rheum.L02.086, rheum.L02.090, rheum.L02.114, rheum.L02.116]
     recap:
-      - "ULT: tophi، نوبتين في السنة، CKD 2+، حصوات."
-      - "Prophylaxis الأول: colchicine 0.6 أو NSAID + PPI؛ 3 أو 6 شهور."
-      - "Target أقل من 6 (أو 5). Allopurinol 100، و50 في CKD 4، زوّد كل 2-4 أسابيع."
-      - "Febuxostat كبدي، مش محتاج تعديل في الـ CKD الخفيف."
-      - "Pegloticase للـ refractory: anaphylaxis، premedicate."
-      - "Asymptomatic hyperuricaemia: عالج السبب، من غير دوا."
-    practice: [rheum.L02.094, rheum.L02.095, rheum.L02.096, rheum.L02.097, rheum.L02.098, rheum.L02.099, rheum.L02.100, rheum.L02.101, rheum.L02.102, rheum.L02.103, rheum.L02.104, rheum.L02.105, rheum.L02.106, rheum.L02.107, rheum.L02.108, rheum.L02.109, rheum.L02.110, rheum.L02.111, rheum.L02.112, rheum.L02.113, rheum.L02.114, rheum.L02.115, rheum.L02.116, rheum.L02.117, rheum.L02.140, rheum.L02.143, rheum.L02.156, rheum.L02.157]
+      - "Asymptomatic: sUA فوق 6.8 بشكل مستمر؛ عالج السبب، ومفيش دليل للدوا."
+      - "النوبة: icing و rest، colchicine، NSAIDs، steroids، ACTH، anticytokines. بدري أحسن، ومش بتنزّل الـ urate."
+      - "Colchicine: الجرعة الصغيرة بدري زي الكبيرة وأخف (Terkeltaub)."
+      - "Steroids: ≥30 mg، بتبوّظ الضغط والسكر، rebound."
+      - "Hypouricaemic طول العمر: نوبات متكررة، tophi، تآكل، كلى/حصوات، urate عالي جدًا."
+    practice: [rheum.L02.081, rheum.L02.082, rheum.L02.086, rheum.L02.090, rheum.L02.091, rheum.L02.092, rheum.L02.093, rheum.L02.113, rheum.L02.114, rheum.L02.115, rheum.L02.116, rheum.L02.117]
   # ------------------------------------------------------------------
   - id: rheum.L02.lesson7
     title: "الـ pseudogout: النقرس بتاع الركبة الكبيرة"
     hook: "ست عندها 70 سنة، ركبتها ورمت بعد عملية. مش gout: دي البلورة التانية."
-    minutes: 8
+    minutes: 10
     pages: [48, 50]
     topics: [pseudogout]
     goals:
-      - "تعرف مين بيجيله الـ pseudogout وفين"
+      - "تعرف مين بيجيله الـ pseudogout وفين، وليه"
       - "تفرّق بلورة CPPD عن MSU"
       - "تعرف الأسباب الـ metabolic والعلاج"
     status: unverified
@@ -789,6 +1250,20 @@ lessons:
           بيقلّد gout و rheumatoid arthritis (RA) و ankylosing spondylitis (AS) و haemarthrosis و neuropathic joint. وفكّر فيه في أي **degenerative arthritis توزيعها غريب**.
 
           البلورات بتتكون من **calcium + pyrophosphate** زيادة محليًا (الـ pyrophosphate ناتج طبيعي من adenosine triphosphate (ATP) ← adenosine monophosphate (AMP)).
+
+          التفسير المقبول (مش في الكتاب): ليه بيقلّد أمراض كتير؟ عشان البلورة بتعمل التهاب حاد زي الـ gout، والترسيب المزمن في الغضروف بيعمل تآكل زي الـ OA، والـ inflammation المزمن في أكتر من مفصل ممكن يبان زي الـ RA. يعني لو شفت degenerative arthritis في wrist أو كتف (أماكن مش بتاعة الـ OA العادي)، فكّر في الـ CPPD.
+      - kind: explain
+        page: 48
+        quote: "CPP crystals form due to elevated local levels of calcium and pyrophosphate which is a normal metabolite from the conversion of ATP to AMP."
+        title: "ليه البلورة دي بتتكون؟"
+        text: |
+          الكتاب بيقول السبب في سطر: **calcium و pyrophosphate عاليين محليًا** في المفصل، والـ pyrophosphate ناتج طبيعي من تحويل ATP لـ AMP.
+
+          يعني المعادلة: ==calcium × pyrophosphate== لو زاد عن حد معين ← بلورة. ومن هنا تفهم الأسباب الثانوية في الكتاب، والتفسير المقبول (مش في الكتاب):
+          - **Hyperparathyroidism**: calcium عالي.
+          - **Hypomagnesaemia**: الـ magnesium بيساعد الإنزيم اللي بيكسّر الـ pyrophosphate، فلو قل الـ pyrophosphate بيتراكم.
+          - **Haemochromatosis**: الحديد بيترسب في الغضروف ويسهّل تكوين البلورة.
+          - **السن (sporadic، فوق 55)**: الغضروف القديم بيتغير ويبقى أرض أسهل للترسيب.
       - kind: table
         page: 48
         quote: "Pseudogout may be acute or chronic and is primary (esp. in elderly), familial or secondary (hypothyroidism, hyperparathyroidism, hypomagnesemia)."
@@ -811,6 +1286,18 @@ lessons:
           - { key: "H", text: "Hypothyroidism و hypomagnesaemia" }
           - { key: "W", text: "Wilson's disease" }
       - kind: explain
+        page: 48
+        quote: "Sites of predilection are hyaline and fibrocartilage of knee, triangular ligament of wrist, symphysis pubis and hyaline cartilage of hips and shoulders."
+        title: "التشخيص والـ chondrocalcinosis"
+        text: |
+          التشخيص بيعتمد على تلات حاجات: **CP** (البلورة)، **نمط المفاصل** (wrist و knee و shoulder)، و **calcification جوه المفصل على الأشعة** = ==chondrocalcinosis==.
+
+          أماكنها المفضلة: hyaline و fibrocartilage الركبة (الـ menisci)، الـ **triangular ligament of wrist**، الـ **symphysis pubis**، وغضروف الـ hip والـ shoulder.
+
+          بس خلي بالك من حاجتين في الكتاب:
+          - الـ chondrocalcinosis ممكن تبقى **asymptomatic**. يعني صورة فيها calcium مش معناها إن ده سبب الوجع.
+          - ==Definitive diagnosis== بالبلورات في الـ joint fluid، زي الـ gout بالظبط.
+      - kind: explain
         page: 49
         quote: "Commonest cause of acute monoarthritis of the elderly.\n  Triggering factors trauma or illness.\n  Typical attack resembles acute gout = pain+ swelling.\n  Physical exam. Reveals warmth, swelling with effusion tenderness and limitation of motion and overlying erythema.\n  Fever\n  Attack is self-limiting but takes 1-3 weeks to resolve.\n  DD: sepsis and gout.\n  Chronic pyrophosphate arthritis: in elderly women with chronic pain + early morning and inactivity stiffness.\n  Affected joints show features of OA(bony swelling, crepitus and effusion)."
         title: "الصورة الإكلينيكية"
@@ -821,6 +1308,19 @@ lessons:
           - شبه الـ gout: وجع وورم وسخونية و effusion وأحمرار و fever.
           - Self-limiting بس بياخد **1-3 أسابيع** (أطول من الـ gout).
           - **Chronic** في ستات كبار: وجع مزمن و morning/inactivity stiffness وشكل Osteoarthritis (OA).
+
+          التفسير المقبول (مش في الكتاب): ليه كبار السن؟ عشان الغضروف مع السن بيطلّع pyrophosphate أكتر ويتغيّر تركيبه، فالبلورة تتكون أسهل. والعملية أو المرض بيعمل تغيّر مفاجئ في الـ calcium وفي المفصل، فالبلورات تتقلقل وتعمل نوبة. يعني مريض كبير بعد عملية وعنده ركبة سخنة: فكّر في pseudogout، بس اسحب واستبعد الـ sepsis.
+      - kind: check
+        page: 49
+        quote: "Commonest cause of acute monoarthritis of the elderly."
+        question: "A 78-year-old woman has an acutely hot, swollen knee three days after hip surgery. Per the book, what is the commonest cause of acute monoarthritis at her age?"
+        options: ["Pseudogout (CPPD)", "Gout", "Rheumatoid arthritis", "Ankylosing spondylitis"]
+        answer: 0
+        why:
+          - "صح: الكتاب: commonest cause of acute monoarthritis of the elderly، والـ trigger illness أو trauma (العملية هنا)."
+          - "الـ gout أشهر في الرجالة 40-50، وأول مفصل غالبًا الـ first MTP."
+          - "الـ RA مش mono-arthritis حادة بالشكل ده."
+          - "الـ AS مرض شباب، وأوله الضهر."
       - kind: figure
         page: 50
         title: "البلورتين تحت الـ polarized light"
@@ -845,6 +1345,18 @@ lessons:
         page: 49
         quote: "In acute pseudogout examination of synovial fluid using compensated polarized microscopy demonstrates CPPD crystals-weakly positive birefringent rhomboid shaped crystals."
         text: "Pseudogout = «P» لـ Positive و Pyrophosphate و Parallelogram (rhomboid). Gout = Needle و Negative. وفي الـ pseudogout الـ fluid بيكون turbid و blood stained، فماتتلخبطش وتقول haemarthrosis."
+      - kind: explain
+        page: 49
+        quote: "Gram stain and culture of the fluid to exclude sepsis."
+        title: "التحاليل: كل واحد ليه"
+        text: |
+          - **Synovial fluid تحت compensated polarized microscopy**: البلورة weakly positive rhomboid. ده **التأكيد**.
+          - السايل **turbid و blood stained**.
+          - ==Gram stain و culture==: عشان الـ DD الأول هو الـ sepsis، والمريض كبير وعنده fever، فماينفعش تكتفي بالبلورة.
+          - **Radiographs**: chondrocalcinosis.
+          - **Metabolic screening** (calcium، alkaline phosphatase، liver function)، **خصوصًا في الـ early-onset polyarticular disease**.
+
+          ليه الصغير بالذات؟ عشان الـ primary شائع في الكبار. لو مريض صغير عنده CPPD في مفاصل كتير، الأقرب إن فيه **سبب metabolic** (hyperparathyroidism، haemochromatosis) لازم يتلاقى.
       - kind: case
         page: 49
         quote: "Metabolic screening (serim calcium, alkaline phosphatase, liver function-esp in early onset polyarticular disease."
@@ -872,12 +1384,14 @@ lessons:
           - الـ chronic arthropathy: **زي الـ OA**.
 
           ومفيش «urate-lowering therapy (ULT)» للـ CPPD: مفيش دوا بيشيل البلورة دي.
+
+          التفسير المقبول (مش في الكتاب): ليه الـ aspiration لوحده ممكن يكفي؟ عشان بيطلّع السائل المليان بلورات و neutrophils، فالضغط والالتهاب ينزلوا مع بعض. والـ NSAIDs بحذر عشان المريض غالبًا كبير وكليته أضعف. ومفيش ULT عشان مفيش دوا بيذوّب بلورات الـ CPP، فالعلاج كله للالتهاب والوظيفة.
       - kind: try
-        items: [rheum.L02.121, rheum.L02.125, rheum.L02.131, rheum.L02.135, rheum.L02.141]
+        items: [rheum.L02.121, rheum.L02.125, rheum.L02.128, rheum.L02.131, rheum.L02.135]
     recap:
-      - "CPPD: الركبة، ستات 65-75، أشهر acute monoarthritis في الكبار."
+      - "CPPD: calcium × pyrophosphate عاليين محليًا؛ الركبة؛ ستات 65-75؛ أشهر acute monoarthritis في الكبار."
       - "Primary/familial/secondary؛ HHHW: haemochromatosis، hyperpara، hypothyroid/hypoMg، Wilson's."
-      - "Weakly positive rhomboid؛ الـ fluid turbid و blood stained."
-      - "Chondrocalcinosis: menisci، triangular ligament، symphysis pubis."
-      - "العلاج: aspiration، intra-articular steroid، NSAID، early mobilization."
+      - "Chondrocalcinosis: menisci، triangular ligament، symphysis pubis؛ ممكن asymptomatic."
+      - "Weakly positive rhomboid؛ الـ fluid turbid و blood stained؛ Gram و culture دايمًا؛ metabolic screen في الـ early-onset."
+      - "العلاج: aspiration، intra-articular steroid، NSAID، early mobilization؛ الـ chronic زي الـ OA."
     practice: [rheum.L02.118, rheum.L02.119, rheum.L02.120, rheum.L02.121, rheum.L02.122, rheum.L02.123, rheum.L02.124, rheum.L02.125, rheum.L02.126, rheum.L02.127, rheum.L02.128, rheum.L02.129, rheum.L02.130, rheum.L02.131, rheum.L02.132, rheum.L02.133, rheum.L02.134, rheum.L02.135, rheum.L02.136, rheum.L02.141, rheum.L02.144, rheum.L02.158]

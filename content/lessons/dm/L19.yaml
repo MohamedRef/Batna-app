@@ -2,16 +2,18 @@ schema: batna.lesson/v1
 lecture: dm.L19
 lessons:
   # ------------------------------------------------------------------
+  # Split on 2026-11-13 (#828): lesson1 keeps the burden and structure;
+  # metabolism and reverse transport moved to lesson4.
   - id: dm.L19.lesson1
     title: "الدهون بتتنقل في الدم إزاي؟"
     hook: "الزيت والمية مابيختلطوش. طب الكوليسترول بيمشي في الدم إزاي؟ الإجابة: أتوبيسات اسمها lipoproteins."
     minutes: 8
     pages: [246, 247]
-    topics: [burden, structure, metabolism, rct]
+    topics: [burden, structure]
     goals:
-      - "تعرف حجم مشكلة الـ CVD في مصر والأرقام اللي بتتسأل"
-      - "ترسم الـ lipoprotein: قشرة hydrophilic وقلب hydrophobic"
-      - "تمشي مع الدهون من الأكل للكبد، وترجّع الكوليسترول بالـ HDL"
+      - "تعرف حجم مشكلة الـ CVD في مصر والأرقام اللي بتتسأل وليه الوقاية بتكسب"
+      - "ترسم الـ lipoprotein: قشرة hydrophilic وقلب hydrophobic، وتعرف ليه"
+      - "تعرف شغل الـ lipoproteins والـ apolipoproteins"
     status: unverified
     steps:
       - kind: explain
@@ -30,6 +32,14 @@ lessons:
         page: 246
         quote: "Cardiovascular diseases: Size of the problem:\n  1. CVD remains a leading cause of morbidity and mortality, despite improvements in outcomes for CVD.\n  2. Cardiovascular diseases account for 46% of total deaths in Egypt.\n  3. Prevalence of some risk factors, notably diabetes and obesity, is increasing.\n  4. Prevalence of elevated blood cholesterol levels in the Egyptian population is 37%\n  5. Prevention is effective in reducing the impact of CVD.\n  6. It is possible to prevent at least 80% of CVD."
         text: "احفظ الأرقام كده: **46** بيموتوا، **37** عندهم كوليسترول عالي، و **80** نقدر ننقذهم. من 46 لـ 80: الوقاية بتكسب."
+      - kind: reveal
+        page: 246
+        quote: "Prevalence of some risk factors, notably diabetes and obesity, is increasing."
+        prompt: "ليه محاضرة دهون في كورس السكر؟ وليه الكتاب متفائل إن 80% ممكن يتمنع؟"
+        answer: |
+          الكتاب بيقولك إن الـ risk factors، خصوصًا ==diabetes== و ==obesity==، بتزيد في مصر، وإن الـ prevention ==effective==.
+
+          التفسير المقبول (مش في الكتاب): مريض السكر بيموت غالبًا من القلب والشرايين مش من السكر نفسه، والدهون من أكبر الحاجات اللي بتقدر تغيّرها فيه. والـ 80% دي معناها إن أغلب أسباب الـ CVD حاجات بتتعدّل (سجاير، ضغط، سكر، كوليسترول، وزن)، مش جينات ولا سن.
       - kind: explain
         page: 246
         title: "Dyslipidemia مش بس \"كوليسترول عالي\""
@@ -66,6 +76,16 @@ lessons:
             <path d="M232 104 L218 102" class="fg-thin"/>
           </svg>
       - kind: explain
+        page: 246
+        title: "ليه القشرة بتحب المية والقلب بيكرهها؟"
+        quote: "Water-soluble way to transport hydrophobic lipids."
+        text: |
+          الكتاب بيقول إن الـ lipoprotein هو ==water-soluble way to transport hydrophobic lipids==: الدم مية، والدهون مش بتدوب في المية.
+
+          الحل: تحط اللي بيكره المية (==triglyceride== و cholesteryl ester) في **القلب**، وتلفّه بقشرة بتحب المية (phospholipids، free cholesterol، apolipoproteins).
+
+          التفسير المقبول (مش في الكتاب) للتقسيمة دي: الـ phospholipid والـ free cholesterol ليهم ناحية بتحب المية وناحية بتحب الدهن، فبيقفوا على الحدود بالظبط. أما الـ cholesteryl ester والـ TG فدهون "صافية" مالهاش ناحية بتحب المية، فلازم يستخبّوا جوه. يعني الكوليسترول نفسه بيتنقل في شكلين: حر في القشرة، و ester في القلب.
+      - kind: explain
         page: 247
         title: "بيعمل إيه؟"
         quote: "Apolipoproteins: ligands for cellular receptor binding, and enzyme activators or inhibitors."
@@ -93,6 +113,28 @@ lessons:
           - "الـ phospholipid في الـ envelope، وشه للمية."
           - "الـ free cholesterol في الـ envelope مش الـ core."
           - "الـ apolipoproteins على السطح عشان تمسك الـ receptors."
+      - kind: try
+        items: [dm.L19.001, dm.L19.004, dm.L19.007, dm.L19.008, dm.L19.011]
+    recap:
+      - "CVD = 46% من وفيات مصر، 37% كوليسترول عالي، و 80% ممكن نمنعه."
+      - "Dyslipidemia = عالي أو واطي أو تركيب بايظ."
+      - "القشرة hydrophilic (PL، free cholesterol، apo)؛ القلب hydrophobic (TG + CE): طريقة الدهون تمشي في المية."
+      - "Apolipoproteins: ligands للـ receptors، و activators أو inhibitors للإنزيمات."
+    practice: [dm.L19.001, dm.L19.002, dm.L19.003, dm.L19.004, dm.L19.005, dm.L19.006, dm.L19.007, dm.L19.008, dm.L19.009, dm.L19.010, dm.L19.011, dm.L19.012, dm.L19.013, dm.L19.057, dm.L19.059]
+  # ------------------------------------------------------------------
+  # Split from lesson1 on 2026-11-13 (#828): metabolism and reverse transport.
+  - id: dm.L19.lesson4
+    title: "من الأكل للكبد، ومن الشريان للكبد"
+    hook: "طريقين بيودّوا الدهون للأنسجة، وطريق تالت بيرجّع الكوليسترول. اعرف الأتوبيسات ومحطاتها."
+    minutes: 8
+    pages: [247, 247]
+    topics: [metabolism, rct]
+    goals:
+      - "تمشي مع الدهون من الأكل (exogenous) ومن الكبد (endogenous)"
+      - "تعرف ليه الـ LDL آخر المشوار وأغنى واحد في الكوليسترول"
+      - "ترجّع الكوليسترول بالـ HDL وتعرف ليه اسمه reverse"
+    status: unverified
+    steps:
       - kind: figure
         page: 247
         quote: "Lipoprotein Metabolism"
@@ -138,6 +180,17 @@ lessons:
             <text x="162" y="290" text-anchor="middle" class="t-sm">Each step loses TG and gets smaller,</text>
             <text x="162" y="307" text-anchor="middle" class="t-sm">so the particle ends cholesterol-rich (LDL)</text>
           </svg>
+      - kind: explain
+        page: 247
+        title: "ليه طريقين، وليه الـ LDL آخر المشوار؟"
+        quote: "Transport lipids to tissues for energy utilization."
+        text: |
+          الكتاب بيقولك إن الـ lipoproteins بتعمل transport lipids to tissues for energy utilization، وبيرسم طريقين في شكل الصفحة. التفسير المقبول (مش في الكتاب) للمنطق:
+
+          - **Exogenous**: الدهون اللي لسه واكلها، فالأتوبيس (==chylomicron==) طالع من الأمعاء، وكبير جدًا عشان شايل وجبة كاملة. عشان كده الـ TG بيعلى بعد الأكل.
+          - **Endogenous**: الكبد بيعبّي الدهون اللي صنعها في الـ ==VLDL== ويبعتها بين الوجبات.
+
+          وفي الطريقين الـ **LPL** على جدار الأوعية بيفضّي الـ TG للعضل والدهن. كل ما الـ TG يخرج، الـ particle يصغر ويبقى نسبة الكوليسترول فيه أعلى؛ فآخر الطريق التاني هو الـ **LDL**، أغنى واحد في الكوليسترول. يعني الـ LDL مش بيتعمل من الصفر، ده بواقي الـ VLDL.
       - kind: aside
         tone: analogy
         page: 247
@@ -186,6 +239,14 @@ lessons:
             <rect x="10" y="252" width="310" height="36" rx="8" class="fg-good"/>
             <text x="165" y="275" text-anchor="middle" class="t-b">Hepatocyte (cholesterol out)</text>
           </svg>
+      - kind: reveal
+        page: 247
+        quote: "Reverse cholesterol transfer:"
+        prompt: "ليه اسمه «reverse»، وليه ده بيخلّي الـ HDL «good»؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الطريقين اللي فاتوا بيودّوا الدهون ==من الكبد والأمعاء للأنسجة==. الـ HDL بيمشي ==عكسهم==: من الأنسجة (ومنها الـ macrophage اللي في جدار الشريان) للكبد. عشان كده "reverse".
+
+          والكبد هو المكان الوحيد اللي بيقدر يتخلص من الكوليسترول (في الـ bile). وده اللي الكتاب بيقوله عن الـ HDL في ص 249: بيشيل الكوليسترول الزيادة من الخلايا ويوديه الكبد يتخلص منه، فبيمنع تراكمه في الأوعية.
       - kind: check
         page: 247
         quote: "Reverse cholesterol transfer"
@@ -202,26 +263,25 @@ lessons:
           - "الـ LCAT إنزيم بيعمل esterification، مش receptor."
           - "الـ LPL بيشتغل على الـ TG في الـ chylomicrons والـ VLDL."
       - kind: try
-        items: [dm.L19.008, dm.L19.011, dm.L19.015, dm.L19.019, dm.L19.003]
+        items: [dm.L19.014, dm.L19.015, dm.L19.016, dm.L19.019, dm.L19.021]
     recap:
-      - "CVD = 46% من وفيات مصر، 37% كوليسترول عالي، و 80% ممكن نمنعه."
-      - "Dyslipidemia = عالي أو واطي أو تركيب بايظ."
-      - "القشرة hydrophilic (PL، free cholesterol، apo)؛ القلب hydrophobic (TG + CE)."
-      - "Apolipoproteins: ligands للـ receptors، و activators أو inhibitors للإنزيمات."
       - "Exogenous: chylomicron (ApoB-48) ← LPL ← remnant للكبد. Endogenous: VLDL ← IDL ← LDL."
+      - "كل ما الـ TG يتفضّى الـ particle يصغر ويغنى بالكوليسترول؛ الـ LDL بواقي الـ VLDL."
       - "Reverse transport: ABCA1 ← nascent HDL ← LCAT ← HDL3 ← HDL2 ← SCARB1 في الكبد."
-    practice: [dm.L19.001, dm.L19.002, dm.L19.003, dm.L19.004, dm.L19.005, dm.L19.006, dm.L19.007, dm.L19.008, dm.L19.009, dm.L19.010, dm.L19.011, dm.L19.012, dm.L19.013, dm.L19.014, dm.L19.015, dm.L19.016, dm.L19.017, dm.L19.019, dm.L19.020, dm.L19.021, dm.L19.056, dm.L19.057, dm.L19.059]
+    practice: [dm.L19.014, dm.L19.015, dm.L19.016, dm.L19.017, dm.L19.019, dm.L19.020, dm.L19.021, dm.L19.056]
   # ------------------------------------------------------------------
+  # Split on 2026-11-13 (#828): lesson2 keeps classes and LDL; HDL and Lp(a)
+  # moved to lesson5.
   - id: dm.L19.lesson2
-    title: "عيلة الـ lipoproteins: الكبير والصغير والطيب والشرير"
-    hook: "خمس أتوبيسات، كل واحد ليه حجم وكارت (apo) ودور. والـ Lp(a) هو الأخ الخبيث اللي محدش بيقيسه."
+    title: "عيلة الـ lipoproteins والـ LDL"
+    hook: "خمس أتوبيسات، كل واحد ليه حجم وكارت (apo) ودور. والـ LDL هو الشرير الرسمي."
     minutes: 8
-    pages: [248, 249]
-    topics: [classes, ldl, hdl, lpa]
+    pages: [248, 248]
+    topics: [classes, ldl]
     goals:
-      - "ترتّب الـ lipoproteins بالحجم والـ density وتعرف الـ apo بتاع كل واحد"
-      - "تفرّق الـ LDL من الـ HDL"
-      - "تعرف الـ Lp(a): تركيبه، خطره، ومين يقيسه"
+      - "ترتّب الـ lipoproteins بالحجم والـ density وتعرف ليه"
+      - "تعرف الـ apo بتاع كل واحد"
+      - "تعرف ليه الـ LDL هو الـ bad cholesterol"
     status: unverified
     steps:
       - kind: figure
@@ -275,15 +335,19 @@ lessons:
           - ["HDL", "7", "ApoA-I"]
           - ["Lp(a)", "4-8", "Apo(a)"]
         hide: [[0, 2], [0, 1], [3, 1], [4, 2], [5, 2]]
-      - kind: mnemonic
-        page: 249
-        quote: "Removes excess cholesterol from body cells and transports it to the liver for elimination."
-        word: "HDL"
-        parts:
-          - { key: "H", text: "Heads Home: takes excess cholesterol back to the liver" }
-          - { key: "D", text: "Densest and smallest particle" }
-          - { key: "L", text: "LCAT matures it; ApoA-I is its protein" }
-        hook: "والـ apo؟ **48 للأكل، 100 للكبد**: الـ chylomicron بتاع الأمعاء عليه ApoB-48، وكل اللي الكبد بيعمله (VLDL و IDL و LDL) عليه ApoB-100."
+      - kind: explain
+        page: 248
+        title: "ليه الكبير خفيف والصغير تقيل؟"
+        quote: "Most cholesterol rich lipoprotein."
+        text: |
+          الجدول بيرتّبهم بالحجم والـ density. التفسير المقبول (مش في الكتاب):
+
+          - الدهون أخف من المية، والبروتين أتقل منها.
+          - الـ ==chylomicron== أغلبه TG وبروتينه قليل، فهو الأكبر والأخف.
+          - كل ما الـ TG يتفضّى (VLDL ← IDL ← LDL) الـ particle يصغر ونسبة البروتين تعلى، فيتقل.
+          - الـ ==HDL== أصغرهم وأغناهم بروتين، فهو الأتقل ("high density").
+
+          يعني الاسم نفسه بيحكيلك التركيب: low density = دهن كتير، high density = بروتين كتير. والـ LDL في النص: TG اتشال منه، وفضل الكوليسترول، فبقى ==most cholesterol rich lipoprotein== زي ما الكتاب بيقول.
       - kind: explain
         page: 248
         title: "الـ LDL: الشرير الرسمي"
@@ -294,6 +358,65 @@ lessons:
           - شايل **أغلب** الكوليسترول اللي في الدم.
           - عليه **ApoB-100**.
           - له الدور الأكبر في الـ **atherosclerosis**، علشان كده اسمه "bad cholesterol".
+      - kind: reveal
+        page: 248
+        quote: "LDL plays a major role in development of atherosclerosis."
+        prompt: "ليه الـ LDL بالذات هو «bad cholesterol»؟"
+        answer: |
+          الكتاب بيدّيك الأسباب: ==أغنى lipoprotein في الكوليسترول==، وشايل ==أغلب الكوليسترول== اللي في الدم، وله ==major role== في الـ atherosclerosis، وعليه **apo B-100**.
+
+          والربط بيكمل في ص 250: أول حدث في الـ atherosclerosis هو إن الـ LDL والـ ApoB lipoproteins تتحبس في جدار الشريان. التفسير المقبول (مش في الكتاب): الـ LDL صغير كفاية يعدّي الـ endothelium، وكبير كفاية يتمسك جوه، وشايل كوليسترول كتير يسيبه هناك.
+      - kind: check
+        page: 248
+        quote: "Most cholesterol rich lipoprotein."
+        question: "Which lipoprotein is the most cholesterol-rich, according to the lecture?"
+        options:
+          - "LDL"
+          - "Chylomicron"
+          - "VLDL"
+          - "HDL"
+        answer: 0
+        why:
+          - "صح: الـ LDL بواقي الـ VLDL بعد ما الـ TG اتفضّى، فبقى أغناهم كوليسترول."
+          - "أغلبه TG من الأكل."
+          - "لسه شايل TG كتير؛ هو أصل الـ LDL."
+          - "أصغرهم وأغناهم بروتين، وشايل 20-35% بس من الكوليسترول."
+      - kind: check
+        page: 248
+        quote: "LDL contains apo B-100"
+        question: "Which apolipoprotein does the lecture name on LDL?"
+        options:
+          - "Apo B-100"
+          - "Apo A-I"
+          - "Apo B-48"
+          - "Apo(a) alone"
+        answer: 0
+        why:
+          - "صح: apo B-100 على الـ LDL."
+          - "ده الـ structural protein بتاع الـ HDL."
+          - "ده بتاع الـ chylomicron."
+          - "الـ Apo(a) بيتربط على الـ LDL في الـ Lp(a)، مش هو بتاع الـ LDL نفسه."
+      - kind: try
+        items: [dm.L19.022, dm.L19.023, dm.L19.025, dm.L19.028, dm.L19.030]
+    recap:
+      - "من الأكبر للأصغر: chylomicron ← VLDL ← IDL ← LDL ← HDL؛ الأصغر أتقل (بروتين أكتر) وأقل TG."
+      - "ApoB-48 = chylomicron؛ ApoB-100 = VLDL و IDL و LDL؛ ApoA-I = HDL؛ Apo(a) = Lp(a)."
+      - "LDL: أغنى كوليسترول، من الـ IDL، شايل الأغلبية، بيتحبس في الجدار: bad."
+    practice: [dm.L19.018, dm.L19.022, dm.L19.023, dm.L19.024, dm.L19.025, dm.L19.026, dm.L19.027, dm.L19.028, dm.L19.029, dm.L19.030, dm.L19.031]
+  # ------------------------------------------------------------------
+  # Split from lesson2 on 2026-11-13 (#828): HDL and Lp(a).
+  - id: dm.L19.lesson5
+    title: "الـ HDL الطيب والـ Lp(a) الخبيث"
+    hook: "الـ HDL بيرجّع الكوليسترول للكبد. والـ Lp(a) LDL لابس شنطة: بيدخل الجدار وبيعطّل تكسير الجلطة، ومحدش بيقيسه."
+    minutes: 9
+    pages: [248, 249]
+    topics: [hdl, lpa]
+    goals:
+      - "تفرّق الـ LDL من الـ HDL"
+      - "تعرف الـ Lp(a): تركيبه، خطره من ناحيتين"
+      - "تعرف مين يقيس Lp(a) وليه مرة واحدة"
+    status: unverified
+    steps:
       - kind: explain
         page: 249
         title: "الـ HDL: الطيب"
@@ -304,6 +427,17 @@ lessons:
           - شايل **20-35%** من كوليسترول البلازما.
           - بيشيل الكوليسترول الزيادة من الخلايا ويوديه **الكبد** يتخلص منه.
           - "good cholesterol": بيمنع تراكم الكوليسترول في الشرايين ومرتبط بـ **coronary artery disease (CAD) أقل**.
+
+          ليه شايل 20-35% بس وهو الطيب؟ عشان شغلته مش التخزين، شغلته النقل للكبد: بياخد ويسلّم ويرجع تاني. يعني المهم مش كام هو شايل، المهم بيرجّع قد إيه.
+      - kind: mnemonic
+        page: 249
+        quote: "Removes excess cholesterol from body cells and transports it to the liver for elimination."
+        word: "HDL"
+        parts:
+          - { key: "H", text: "Heads Home: takes excess cholesterol back to the liver" }
+          - { key: "D", text: "Densest and smallest particle" }
+          - { key: "L", text: "LCAT matures it; ApoA-I is its protein" }
+        hook: "والـ apo؟ **48 للأكل، 100 للكبد**: الـ chylomicron بتاع الأمعاء عليه ApoB-48، وكل اللي الكبد بيعمله (VLDL و IDL و LDL) عليه ApoB-100."
       - kind: sort
         page: 248
         quote: "2. LDL-Cholesterol:\n  1. Core is rich in cholesteryl ester.\n  2. Most cholesterol rich lipoprotein.\n  3. Synthesized from IDL.\n  4. Accounts for majority of cholesterol circulating in blood\n  1. LDL plays a major role in development of atherosclerosis.\n  2. The cholesterol in LDL is often called \"bad cholesterol\".\n  3. LDL contains apo B-100"
@@ -328,6 +462,32 @@ lessons:
           خطره من ناحيتين:
           1. **Atherogenic**: حجمه أقل من **70 nm**، فبيعدّي الـ endothelium ويتحبس في جدار الشريان زي الـ LDL.
           2. **Pro-thrombotic**: الـ Apo(a) شبه الـ **plasminogen** وبيمسك الـ plasminogen receptor، فالـ thrombosis بتزيد.
+
+          يعني الـ Lp(a) بيأذي بطريقتين في نفس الوقت: بيبني الـ plaque، وبيخلّي الجلطة اللي فوقها ما تدوبش.
+      - kind: figure
+        page: 249
+        quote: "LDL particle with an Apo(a) moiety covalently bound to its ApoB component."
+        title: "الـ Lp(a): LDL وشنطة"
+        alt: "An LDL particle drawn as a circle with an ApoB band, and a long chain labelled Apo(a) attached to the ApoB by a covalent bond. Two arrows lead away: smaller than 70 nm, enters and is retained in the arterial wall; looks like plasminogen, binds its receptor, more thrombosis."
+        caption: "نفس الـ LDL، بس متعلّق فيه Apo(a). الحجم بيدخّله الجدار، والشبه بالـ plasminogen بيعطّل تكسير الجلطة."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L19a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <circle cx="90" cy="80" r="48" class="fg-acc"/>
+            <text x="90" y="78" text-anchor="middle" class="t-b">LDL</text>
+            <text x="90" y="96" text-anchor="middle" class="t-sm t-mut">ApoB-100</text>
+            <path d="M138 80 C160 50 175 110 195 80 S230 50 250 80 S285 110 305 80" class="fg-arrow-bad" fill="none" stroke-width="4"/>
+            <text x="225" y="50" text-anchor="middle" class="t-sm t-b t-bad">Apo(a)</text>
+            <text x="225" y="120" text-anchor="middle" class="t-sm t-mut">covalent bond to ApoB</text>
+            <path d="M70 130L50 170" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="8" y="172" width="150" height="54" rx="8" class="fg-box"/>
+            <text x="83" y="194" text-anchor="middle" class="t-sm t-b">&lt;70 nm</text>
+            <text x="83" y="212" text-anchor="middle" class="t-sm">retained in artery wall</text>
+            <path d="M250 100L250 170" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="172" y="172" width="150" height="54" rx="8" class="fg-bad"/>
+            <text x="247" y="194" text-anchor="middle" class="t-sm t-b">Looks like plasminogen</text>
+            <text x="247" y="212" text-anchor="middle" class="t-sm">more thrombosis</text>
+          </svg>
       - kind: aside
         tone: joke
         page: 249
@@ -341,6 +501,16 @@ lessons:
           - Lp(a) أكتر من ==180 mg/dL== = lifetime atherosclerotic cardiovascular disease (ASCVD) risk زي الـ **heterozygous familial hypercholesterolaemia (HeFH)** (heterozygous familial hypercholesterolaemia (FH)).
           - يتقاس **مرة واحدة على الأقل** في عمر كل إنسان، لو متاح.
           - وفي اللي عندهم **family history of premature cardiovascular disease (CVD)**.
+
+          ليه الـ family history بالذات؟ عشان الـ Lp(a) العالي بيتورث، فلو أبوك جاله MI بدري والـ LDL بتاعك طبيعي، ممكن يبقى الـ Lp(a) هو السبب المستخبي.
+      - kind: reveal
+        page: 249
+        quote: "People with extremely high Lp(a) levels >180 mg/ dL have an increased lifetime risk of ASCVD similar to HeFH."
+        prompt: "ليه الـ Lp(a) يتقاس «مرة واحدة في العمر» بس، مش كل سنة زي الـ LDL؟"
+        answer: |
+          الكتاب بيقول: ==مرة واحدة على الأقل== في عمر كل حد لو متاح (measurement at least once in each lifetime)، وفي المرضى المختارين اللي عندهم family history لـ premature CVD.
+
+          التفسير المقبول (مش في الكتاب): مستوى الـ Lp(a) ==بيتحدد بالجينات== أساسًا وبيفضل ثابت طول العمر، والأكل والرياضة ما بيغيّروهوش كتير. فقياسه مرة بيكفي يقولك المريض ده في أنهي خانة. وده سبب إن الكتاب بيقارنه بالـ ==HeFH==: الاتنين خطر وراثي من الولادة.
       - kind: check
         page: 249
         quote: "Lp(a) should be considered in selected patients with a family history of premature CVD."
@@ -357,25 +527,22 @@ lessons:
           - "الـ LDL الطبيعي مش بيستبعد Lp(a) عالي."
           - "الـ family history سبب واضح للقياس."
       - kind: try
-        items: [dm.L19.022, dm.L19.028, dm.L19.032, dm.L19.040, dm.L19.041]
+        items: [dm.L19.033, dm.L19.034, dm.L19.037, dm.L19.040, dm.L19.042]
     recap:
-      - "من الأكبر للأصغر: chylomicron ← VLDL ← IDL ← LDL ← HDL؛ الأصغر أتقل وأقل TG."
-      - "ApoB-48 = chylomicron؛ ApoB-100 = VLDL و IDL و LDL؛ ApoA-I = HDL؛ Apo(a) = Lp(a)."
-      - "LDL: أغنى كوليسترول، من الـ IDL، شايل الأغلبية، bad."
       - "HDL: الأصغر، A-I، 20-35%، بيرجّع الكوليسترول للكبد، good."
       - "Lp(a) = LDL + Apo(a): بيدخل الجدار وشبه plasminogen (thrombosis)."
-      - "Lp(a) > 180 mg/dL = risk زي HeFH. قيسه مرة في العمر وفي الـ premature CVD family history."
-    practice: [dm.L19.018, dm.L19.022, dm.L19.023, dm.L19.024, dm.L19.025, dm.L19.026, dm.L19.027, dm.L19.028, dm.L19.029, dm.L19.030, dm.L19.031, dm.L19.032, dm.L19.033, dm.L19.034, dm.L19.035, dm.L19.036, dm.L19.037, dm.L19.038, dm.L19.039, dm.L19.040, dm.L19.041, dm.L19.042, dm.L19.043, dm.L19.058]
+      - "Lp(a) > 180 mg/dL = risk زي HeFH. قيسه مرة في العمر (جيني وثابت) وفي الـ premature CVD family history."
+    practice: [dm.L19.032, dm.L19.033, dm.L19.034, dm.L19.035, dm.L19.036, dm.L19.037, dm.L19.038, dm.L19.039, dm.L19.040, dm.L19.041, dm.L19.042, dm.L19.043, dm.L19.055, dm.L19.058, dm.L19.060]
   # ------------------------------------------------------------------
   - id: dm.L19.lesson3
     title: "من الـ LDL للـ plaque، وإزاي نقيس"
     hook: "الـ atherosclerosis بتبدأ بحاجة واحدة: LDL اتحبس في الجدار. وبعدين: أي تحليل نطلب، وصايم ولا فاطر؟"
-    minutes: 7
+    minutes: 9
     pages: [250, 251]
     topics: [athero, lab]
     goals:
       - "تحكي الـ atherogenesis من الـ retention للـ foam cell"
-      - "تعرف التحاليل السبعة وتحسب الـ non-HDL-C"
+      - "تعرف التحاليل السبعة وتحسب الـ non-HDL-C وتعرف ليه موجود"
       - "تعرف إمتى الصيام لازم"
     status: unverified
     steps:
@@ -460,6 +627,16 @@ lessons:
             <rect x="10" y="125" width="310" height="36" rx="8" class="fg-acc"/>
             <text x="165" y="148" text-anchor="middle" class="t-b">non-HDL-C = TC − HDL-C</text>
           </svg>
+      - kind: reveal
+        page: 250
+        quote: "TC carried by all atherogenic ApoB-containing lipoproteins, including TG-rich particles in VLDL and their remnants."
+        prompt: "عندك الـ LDL-C. ليه الكتاب بيضيف non-HDL-C و ApoB كمان؟"
+        answer: |
+          الكتاب بيعرّف الـ non-HDL-C بإنه الكوليسترول اللي في ==كل الـ ApoB-containing lipoproteins==، ومنهم الـ VLDL والـ remnants الغنية بالـ TG.
+
+          والـ atherosclerosis بتبدأ بـ retention الـ LDL ==و== باقي الـ ApoB lipoproteins (نفس الصفحة). يعني الـ LDL-C لوحده بيشوف جزء من المشكلة بس.
+
+          التفسير المقبول (مش في الكتاب): لما الـ TG عالي (سكر، سمنة)، الـ remnants بتزيد والـ LDL-C ممكن يبان كويس وهو مش كده. والـ ApoB = particle واحد لكل ApoB، فبيعدّ عدد الأتوبيسات الضارة نفسه.
       - kind: check
         page: 250
         quote: "Laboratory measurement of lipids and lipoproteins:\n  1. Total cholesterol (TC)\n  2. LDL-C\n  3. HDL-C\n  4. TG\n  5. Non-HDL-C= TC - HDL-C"
@@ -508,12 +685,21 @@ lessons:
             options: ["Lp(a)", "Uric acid", "Lipase"]
             answer: 0
             why: "Lp(a) في الـ family history of premature cardiovascular disease (CVD) (p249)."
+      - kind: aside
+        tone: exam
+        page: 251
+        quote: "The most common site of premature atherosclerosis in dyslipidemia is:"
+        text: |
+          آخر صفحة فيها تلات أسئلة MCQ من الكتاب:
+          1. الـ "good" cholesterol: ==HDL== (بيرجّع الكوليسترول للكبد).
+          2. الصح عن الـ lipoproteins: ==chylomicrons contain exogenous triglycerides== (الدهون اللي جاية من الأكل). الباقي غلط: مش carbohydrate، ومش بتنقل بروتينات، والـ VLDL مش أصل الـ chylomicron.
+          3. أشهر مكان للـ premature atherosclerosis في الـ dyslipidemia: الكتاب بيحط ==coronary artery disease== كاختيار، وده المتوقع لأن الـ HDL مرتبط بـ "reduced risk of CAD" (ص 249).
       - kind: try
         items: [dm.L19.044, dm.L19.045, dm.L19.047, dm.L19.048, dm.L19.052]
     recap:
       - "البداية: retention للـ LDL والـ ApoB lipoproteins في جدار الشريان."
       - "Retention ← modification ← macrophage uptake ← foam cell ← apoptosis."
       - "7 تحاليل: TC، LDL-C، HDL-C، TG، non-HDL-C، ApoB، Lp(a)."
-      - "Non-HDL-C = TC − HDL-C = كل الـ ApoB particles."
+      - "Non-HDL-C = TC − HDL-C = كل الـ ApoB particles، وبيشوف الـ remnants اللي الـ LDL-C مش شايفها."
       - "Non-fasting عادي؛ صيام لو TG > 400 أو familial dyslipidemia."
-    practice: [dm.L19.044, dm.L19.045, dm.L19.046, dm.L19.047, dm.L19.048, dm.L19.049, dm.L19.050, dm.L19.051, dm.L19.052, dm.L19.053, dm.L19.054, dm.L19.055, dm.L19.060]
+    practice: [dm.L19.044, dm.L19.045, dm.L19.046, dm.L19.047, dm.L19.048, dm.L19.049, dm.L19.050, dm.L19.051, dm.L19.052, dm.L19.053, dm.L19.054]

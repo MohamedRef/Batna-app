@@ -212,7 +212,7 @@ lessons:
   - id: res.L12.lesson3
     title: "نسيطر على الـ confounding إزاي؟ في التخطيط وفي التحليل"
     hook: "5 أدوات: 3 قبل ما تجمع الداتا، و2 بعد ما تجمعها. والسؤال المشهور: أنهي فيهم «the best»؟"
-    minutes: 10
+    minutes: 9
     pages: [14, 24]
     topics: [control]
     goals:
@@ -266,6 +266,16 @@ lessons:
         title: "3. Matching: لكل case حد شبهه"
         text: "==Matching== مناسب في الـ **case control study**:\n- بيضمن إن الـ **known confounders** ممثلين بالتساوي في المجموعتين.\n- **عيبه**: ممكن ياخد **وقت طويل** لحد ما تكمّل الـ sample.\n- نوعين:\n  - **Pair matching**: «one for one»: لكل case، control شبهه في الـ confounder.\n  - **Group (frequency) matching**: توازن **النسب**. لو 25 من 100 case ستات 40–50 سنة بيستخدموا tobacco، تختار 25 control ستات أصحاء 40–50 سنة بيستخدموا tobacco."
         remind: [res.L12.029]
+      - kind: explain
+        page: 21
+        quote: "b. Group or frequency matching\nSuppose we want to match on 3 variables (tobacco use, age and sex) . Let us say, out of 100 cases we have 25 of them as \"40 - 50 years old female tobacco users\".\nWe will then select out an equal number of controls who fit into this criteria, i.e. 25 healthy females who are 40 - 50 years old and tobacco users as controls"
+        title: "Group (frequency) matching"
+        text: |
+          عايز تعمل matching على 3 متغيرات: tobacco use والسن والنوع.
+
+          لو من 100 case فيه ==25 ست عندهم 40-50 سنة وبيدخنوا==، تختار ==نفس العدد== من الـ controls بنفس المواصفات: ==25 ست سليمة== عندها 40-50 سنة وبتدخن.
+
+          ليه «group» مش «pair»؟ لأنك بتطابق توزيع المجموعة كلها، مش بتدوّر على توأم لكل case لوحده، وده أسهل في التنفيذ. التفسير المقبول (مش في الكتاب).
       - kind: match
         page: 20
         quote: "a. Pair matching\nThis method in which we match \"one for one\" (i.e. for every subject or case, we take a control who is similar to that case in respect of the confounding variable"
@@ -351,6 +361,17 @@ lessons:
         caption: "الشمال: كل الرميات **مع بعض** بس **بعيد** عن النص = **high systematic error** (bias). اليمين: متفرقة حوالين النص = low systematic error."
         svg: "<svg viewBox=\"0 0 330 170\" xmlns=\"http://www.w3.org/2000/svg\">\n  <circle cx=\"82\" cy=\"78\" r=\"64\" class=\"fg-box\"/><circle cx=\"82\" cy=\"78\" r=\"42\" class=\"fg-thin\"/><circle cx=\"82\" cy=\"78\" r=\"14\" class=\"fg-acc\"/>\n  <circle cx=\"248\" cy=\"78\" r=\"64\" class=\"fg-box\"/><circle cx=\"248\" cy=\"78\" r=\"42\" class=\"fg-thin\"/><circle cx=\"248\" cy=\"78\" r=\"14\" class=\"fg-acc\"/>\n  <g class=\"fg-dot-bad\"><circle cx=\"118\" cy=\"118\" r=\"4\"/><circle cx=\"126\" cy=\"114\" r=\"4\"/><circle cx=\"122\" cy=\"124\" r=\"4\"/><circle cx=\"130\" cy=\"121\" r=\"4\"/><circle cx=\"114\" cy=\"126\" r=\"4\"/><circle cx=\"133\" cy=\"112\" r=\"4\"/></g>\n  <g class=\"fg-dot-good\"><circle cx=\"232\" cy=\"50\" r=\"4\"/><circle cx=\"270\" cy=\"62\" r=\"4\"/><circle cx=\"252\" cy=\"80\" r=\"4\"/><circle cx=\"222\" cy=\"98\" r=\"4\"/><circle cx=\"278\" cy=\"104\" r=\"4\"/><circle cx=\"244\" cy=\"118\" r=\"4\"/></g>\n  <text x=\"82\" y=\"162\" text-anchor=\"middle\" class=\"t-sm t-bad\">high systematic error</text>\n  <text x=\"248\" y=\"162\" text-anchor=\"middle\" class=\"t-sm t-good\">low systematic error</text>\n</svg>"
       - kind: explain
+        page: 27
+        quote: "BIAS\n1. Selection bias\n2. Information bias"
+        title: "نوعين bias"
+        text: |
+          الـ **bias** نوعين أساسيين:
+
+          1. ==Selection bias==: الغلط في ==مين دخل== الدراسة.
+          2. ==Information bias==: الغلط في قسنا إزاي.
+
+          ليه التقسيم ده مفيد؟ لأن كل نوع ليه حلول مختلفة: الأول بيتحل في اختيار الناس، والتاني في أدوات القياس. التفسير المقبول (مش في الكتاب).
+      - kind: explain
         page: 28
         quote: "Selection Bias\nParticipant selection procedure, e.g., exposure affects case ascertainment (\"detection bias\") or control selection\nDifferential unavailability due to death (\"selective survival\"), illness, migration, or refusal (nonresponse bias)"
         title: "نوعين: selection وinformation"
@@ -395,21 +416,34 @@ lessons:
         text: "**1. Survival bias**: في الـ **cross sectional** والـ **case control** بتدرس اللي **عاشوا**. وصورة المرض عند اللي عاشوا أكيد غير اللي ماتوا.\n\n**2. Differential diagnosis bias**:\n- ناس كتير بتفضل **من غير تشخيص سنين**.\n- الـ **high risk** واللي **بيروحوا للدكتور كتير** مرضهم بيتكشف أكتر.\n- الفروق **clinical، geographical أو economic** بتحدد مين يوصل للفحص."
         remind: [res.L12.050]
       - kind: explain
+        page: 33
+        quote: "2.Differential diagnosis bias :\n1. Many patients remain undiagnosed for several years.\n2. In Persons who are at high risk for certain diseases and those who seek medical care frequently , the disease is more likely to be discovered.\n3. Persons differ in in their clinical, geographical or economic characteristics tht affect access to diagnostic procedures."
+        title: "Differential diagnosis bias: ٣ أسباب"
+        text: |
+          1. عيانين كتير بيفضلوا ==من غير تشخيص سنين==.
+          2. اللي عندهم ==high risk== واللي ==بيروحوا للدكتور كتير==، المرض عندهم بيتكشف أكتر.
+          3. الناس بتختلف في صفات clinical أو geographical أو economic بتأثر على الوصول للتشخيص.
+
+          ليه ده bias؟ لأن الـ cases اللي في الدراسة هتبقى «اللي اتشخصوا» مش «اللي عندهم المرض»، فأي exposure مرتبط بزيارة الدكتور هيبان كأنه risk factor. التفسير المقبول (مش في الكتاب).
+      - kind: explain
         page: 34
         quote: "3.Non response and volunteer bias :\n1. Those who volunteer to participate in the study might be at low risk or non-exposed to risk factors\n2. On the other hand, those who refuse to participate might be at high risk for developing a disease\nE.g. survey for studying STDs , those who practice unsafe sex will not respond."
         title: "(2): non-response وNeyman"
         text: "**3. Non response and volunteer bias**: اللي **بيتطوّع** غالبًا **low risk** أو مش exposed، واللي **بيرفض** ممكن يكون **high risk**. مثال: survey عن الـ **STDs**: اللي عنده unsafe sex مش هيرد.\n\n**4. ==Incidence prevalence bias (Neyman)==**: لو أخدت بس الـ cases اللي عيانة **من زمان**، هتفوّت:\n- الـ **fatal cases** (ماتوا)\n- الـ **short episodes** (خفّوا بسرعة)\n- الـ **mild or silent cases**\n- الـ cases اللي **دليل الـ risk factor اختفى** مع بداية المرض"
         remind: [res.L12.051, res.L12.053]
       - kind: explain
-        page: 36
-        quote: "Hospital controls\nA control group drawn from among hospitalized patients will be easier and less expensive to recruit, have a higher response rate, and provide better information about medical exposures.\nBut if the conditions that bring people to the hospital are related to the exposure under study, then the control group and the overall study will be biased."
-        title: "Hospital controls: سهلين بس خطرين"
-        text: "**المميزات**: أسهل وأرخص، **response rate** أعلى، ومعلومات أحسن عن الـ medical exposures.\n\n**الخطر**: لو الأمراض اللي بتجيب الناس المستشفى **مربوطة بالـ exposure**، الـ control group والدراسة كلها **biased** (زي مثال التدخين).\n\nوكمان: المرض الخطير **كل حالاته** بتدخل، والبسيط بيدخل منه **المضاعفات بس**. واللي في **المستشفيات الخاصة** غير اللي في **الحكومي**."
-      - kind: explain
-        page: 38
-        quote: "Attrition Bias\nIn prospective cohort, long period of follow up might lead to loss of follow up to many participants .\nBias occur when those lost to follow up differ systematically from those remain in the study"
-        title: "Attrition bias"
-        text: "في الـ **prospective cohort**، الـ follow-up الطويل بيضيّع مشاركين كتير.\n\nالـ ==attrition bias== بيحصل لما اللي ضاعوا **يختلفوا بشكل منتظم** عن اللي فضلوا. يعني المشكلة مش في الضياع نفسه، في **مين** اللي ضاع."
+        page: 35
+        quote: "4.Incidence prevalence bias (Neyman) :\n1. Dealing only with cases who are affected early (since long period), will result in\na. Missing fatal cases\nb. Missing short episodes\nc. Missing mild or silent cases\nd. Missing cases in which evidence of risk factor disappear with the disease onset."
+        title: "Neyman bias: الحالات القديمة بس"
+        text: |
+          لو أخدت ==الحالات اللي بقالها كتير== بس (incidence-prevalence bias)، هتفوّتك:
+
+          - ==Fatal cases==
+          - ==Short episodes==
+          - Mild or silent cases
+          - حالات الـ risk factor اختفى أول ما المرض بدأ.
+
+          ليه؟ اللي مات أو خف بسرعة مش موجود علشان تقابله، فالـ sample كله «اللي عاشوا مع المرض»، وده مش شبه كل الـ cases. التفسير المقبول (مش في الكتاب).
       - kind: check
         page: 34
         quote: "3.Non response and volunteer bias :\n1. Those who volunteer to participate in the study might be at low risk or non-exposed to risk factors\n2. On the other hand, those who refuse to participate might be at high risk for developing a disease\nE.g. survey for studying STDs , those who practice unsafe sex will not respond."
@@ -421,8 +455,27 @@ lessons:
           - "الـ recall عن الذاكرة."
           - "الـ Neyman عن الـ prevalent cases القديمة."
           - "ده من طريقة السؤال، مش من مين رد."
+      - kind: explain
+        page: 36
+        quote: "Hospital controls\nA control group drawn from among hospitalized patients will be easier and less expensive to recruit, have a higher response rate, and provide better information about medical exposures.\nBut if the conditions that bring people to the hospital are related to the exposure under study, then the control group and the overall study will be biased."
+        title: "Hospital controls: سهلين بس خطرين"
+        text: "**المميزات**: أسهل وأرخص، **response rate** أعلى، ومعلومات أحسن عن الـ medical exposures.\n\n**الخطر**: لو الأمراض اللي بتجيب الناس المستشفى **مربوطة بالـ exposure**، الـ control group والدراسة كلها **biased** (زي مثال التدخين).\n\nوكمان: المرض الخطير **كل حالاته** بتدخل، والبسيط بيدخل منه **المضاعفات بس**. واللي في **المستشفيات الخاصة** غير اللي في **الحكومي**."
+      - kind: explain
+        page: 37
+        quote: "If the disease is a serious one, all cases with disease will be admitted. On the other hand admission occur only in complicated cases only\nPeople referred to private hospitals differ from those admitted to governmental hospital."
+        title: "ليه عيانين المستشفى مختلفين؟"
+        text: |
+          - لو المرض ==خطير==، كل الحالات بتدخل المستشفى. لكن لو مش خطير، اللي بيدخل ==الحالات المضاعفة بس==.
+          - واللي بيروحوا ==مستشفيات خاصة== مختلفين عن اللي بيدخلوا مستشفيات حكومية.
+
+          ليه ده مهم؟ لأن الـ hospital controls أو الـ cases ممكن يختلفوا عن المجتمع في حاجات مرتبطة بالـ exposure (زي الدخل)، فالنتيجة تتلخبط. التفسير المقبول (مش في الكتاب).
+      - kind: explain
+        page: 38
+        quote: "Attrition Bias\nIn prospective cohort, long period of follow up might lead to loss of follow up to many participants .\nBias occur when those lost to follow up differ systematically from those remain in the study"
+        title: "Attrition bias"
+        text: "في الـ **prospective cohort**، الـ follow-up الطويل بيضيّع مشاركين كتير.\n\nالـ ==attrition bias== بيحصل لما اللي ضاعوا **يختلفوا بشكل منتظم** عن اللي فضلوا. يعني المشكلة مش في الضياع نفسه، في **مين** اللي ضاع."
       - kind: try
-        items: [res.L12.044, res.L12.047, res.L12.051, res.L12.053]
+        items: [res.L12.043, res.L12.050, res.L12.053, res.L12.056]
     recap:
       - "Bias = systematic error بيضيّع الـ internal validity."
       - "نوعين: selection وinformation."
@@ -444,7 +497,6 @@ lessons:
       - res.L12.051
       - res.L12.052
       - res.L12.053
-      - res.L12.054
       - res.L12.055
       - res.L12.056
       - res.L12.057
@@ -452,7 +504,7 @@ lessons:
   - id: res.L12.lesson5
     title: "Information bias: قسنا غلط"
     hook: "أم طفل عنده تشوّه فاكرة كل برشامة خدتها في الحمل، وأم الطفل السليم ناسية. مين الصادقة؟ الاتنين، بس الداتا اتلخبطت."
-    minutes: 9
+    minutes: 8
     pages: [39, 46]
     topics: [information]
     goals:
@@ -496,6 +548,31 @@ lessons:
         title: "Interviewer وprevarication وascertainment"
         text: "**3. Interviewer bias**:\n- بيسأل الـ cases عن الـ exposure **بتدقيق**، والـ controls لأ.\n- **Leading questions**.\n- **Recording** مختلف بين الـ cases والـ controls.\n- **Interpretation** لنفس المعلومة بشكل مختلف في مرات مختلفة.\n\n**4. Prevarication bias**: المريض **بيهرب من الحقيقة** بالمبالغة أو التقليل حسب مصلحته: عامل يقلّل أعراضه **عشان ميترفدش**، وغيره يبالغ **عشان التعويض**.\n\n**5. Ascertainment bias**: داتا الـ **outcome** بتتجمع **بطرق مختلفة** في المجموعتين."
         remind: [res.L12.064]
+      - kind: check
+        page: 44
+        quote: "4. Prevarication bias:\nThe patient might escape truth either by exaggeration or minimizing according to what they wish.\ne.g. workers may minimize their symptoms because of fear of loosing their jobs, others may exaggerate to increase compensation"
+        question: "Factory workers minimize their symptoms because they fear losing their jobs, while others exaggerate them to increase compensation. This is:"
+        options:
+          - "Prevarication bias"
+          - "Recall bias"
+          - "Instrumental bias"
+          - "Detection bias"
+        answer: 0
+        why:
+          - "صح: العيان بيهرب من الحقيقة بالتهويل أو التهوين حسب مصلحته."
+          - "الـ recall مشكلة ذاكرة مش مصلحة."
+          - "الأداة مش هي المشكلة."
+          - "الـ detection bias selection bias في اكتشاف الحالات."
+      - kind: explain
+        page: 45
+        quote: "5. Ascertainment bias:\nIt occurs if data about the outcome of interest is obtained by using different methods in the two comparison groups."
+        title: "Ascertainment bias"
+        text: |
+          بيحصل لو ==data الـ outcome== اتجمعت ==بطرق مختلفة== في الجروبين اللي بنقارنهم.
+
+          مثال توضيحي: جروب بيتعمله ECG كل شهر وجروب بيتسأل بس، فالأول هيطلع فيه حالات أكتر.
+
+          ليه؟ الطريقة الأدق بتلاقي حالات أكتر، فالفرق يطلع من القياس مش من الـ exposure. التفسير المقبول (مش في الكتاب).
       - kind: sort
         page: 42
         quote: "2.Recall bias:\nIn case control study, and retrospective cohort study Subjects with a disease are more likely to remember past relevant exposures, in comparison to controls"
@@ -545,15 +622,15 @@ lessons:
       - res.L12.067
       - res.L12.068
   - id: res.L12.lesson6
-    title: "نمنع الـ bias إزاي؟ ومراجعة الكويز"
+    title: "نمنع الـ bias إزاي؟"
     hook: "الـ confounder تقدر تصلّحه في الـ analysis. الـ bias لأ: لازم تمنعه من الأول. ده آخر درس، والكويز في آخره."
-    minutes: 10
-    pages: [47, 61]
+    minutes: 7
+    pages: [47, 53]
     topics: [prevention, information, control, selection]
     goals:
-      - "تفهم ليه الـ bias لازم يتمنع في التصميم"
-      - "تربط كل نوع bias بالحل بتاعه"
-      - "تحل أسئلة الكويز السبعة بمنطق الدكتورة"
+      - "تختار الحل المناسب لكل نوع bias"
+      - "تعرف ليه الـ incident cases أحسن"
+      - "تطبّق random allocation وblinding وplacebo"
     status: unverified
     steps:
       - kind: explain
@@ -575,11 +652,42 @@ lessons:
         title: "حلول حسب المشكلة"
         text: "- **Recall bias**: متقولش الـ **hypothesis** للمشاركين لو ينفع، وخد معلومة الـ exposure من **مصادر تانية** (records مثلًا).\n- **Follow-up** (cohort أو trial): population **well defined**، وطرق **ترجّع** اللي بيضيعوا.\n- **Case control**: **مجموعتين controls أو أكتر** (واحدة من المستشفى وواحدة أصحاء)، ولو hospital controls خد **تشخيصات مختلفة**.\n- في أي دراسة: شوف ==entire spectrum== للمرض. في الـ **IHD** مش الـ **MI** بس: **angina**، **sudden death**، و**asymptomatic ECG changes**."
       - kind: explain
+        page: 49
+        quote: "How to avoid bias\nIn a follow - up study (cohort study or clinical trial), take a well defined population to avoid loss to follow up; develop methods to retrieve those subjects who are getting lost to follow up."
+        title: "Follow-up study: ماتخسرش حد"
+        text: |
+          في الـ ==follow-up study== (cohort أو clinical trial):
+
+          - خد ==population محددة كويس== علشان تتجنب الـ ==loss to follow up==.
+          - اعمل طرق ترجّع بيها اللي بيضيعوا من المتابعة.
+
+          ليه؟ اللي بيسيبوا الدراسة غالبًا مختلفين (أعيى أو مش مستفيدين)، فلو ضاعوا النتيجة هتتحيز. التفسير المقبول (مش في الكتاب).
+      - kind: explain
+        page: 50
+        quote: "How to avoid bias\nSelect two or more than 2 \"groups\" of controls in a case control study (e.g. one from hospital and another healthy group); try and take different categories of diagnoses if selecting hospital controls.\nIn any type of study, see the \"entire spectrum\" of the outcome or disease - e.g. in IHD, also see in addition to MI, angina, sudden death and asymptomatic ECG changes."
+        title: "Controls أكتر من جروب، والمرض بكل أشكاله"
+        text: |
+          - في الـ case control: اختار ==جروبين controls أو أكتر== (واحد من المستشفى وواحد أصحاء)، ولو hospital controls خد ==تشخيصات مختلفة==.
+          - في أي دراسة: شوف ==«entire spectrum»== للمرض. مثلًا في الـ IHD: مش بس MI، كمان angina و sudden death و asymptomatic ECG changes.
+
+          ليه جروبين؟ لو النتيجة واحدة مع الاتنين يبقى الـ controls مش هما السبب. التفسير المقبول (مش في الكتاب).
+      - kind: explain
         page: 51
         quote: "How to avoid bias\n- It is always advisable to take the incident cases since the prevalent cases might have changed their exposure status due to medical advice.\n- examine all subjects of both groups at the pre - decided dates using \"similar\" methods of history taking, physical examination and investigations, and make arrangements that losses to follow up are minimized."
         title: "Incident cases وتوحيد القياس"
         text: "- خد **incident cases**: الـ **prevalent cases** ممكن تكون **غيّرت الـ exposure** بعد نصيحة الدكتور (اللي جاله angina بطّل سجاير).\n- افحص المجموعتين في **مواعيد محددة** بطرق **similar** للـ history والفحص والتحاليل.\n- **Questionnaire validation**، أجهزة **accurate وreliable** ومتصانة، **operational definition** لكل variable، و**training** للي بيجمعوا الداتا مع supervisory checks.\n- في الـ **trial**: **random allocation**، **blinding**، و**placebo control**. والـ **blinding** ينفع كمان للـ observer في الـ case control والـ cohort."
         remind: [res.L12.080, res.L12.081]
+      - kind: check
+        page: 51
+        quote: "How to avoid bias\n- It is always advisable to take the incident cases since the prevalent cases might have changed their exposure status due to medical advice.\n- examine all subjects of both groups at the pre - decided dates using \"similar\" methods of history taking, physical examination and investigations, and make arrangements that losses to follow up are minimized."
+        question: "Why prefer incident to prevalent cases?"
+        options:
+          - "Prevalent cases may have changed exposure after medical advice"
+          - "Incident cases are cheaper"
+          - "Prevalent cases are rarer"
+          - "Incident cases need no controls"
+        answer: 0
+        why: ["صح: ده سبب الشريحة.", "مش السبب.", "غلط.", "كل case control محتاج controls."]
       - kind: sort
         page: 52
         quote: "How to avoid bias\nQuestionnaire validation\nUse accurate and reliable instruments (proper maintainance)\nDefine and put operational definition for variable\nTraining of data collectors or one (supervisory checks)"
@@ -594,27 +702,105 @@ lessons:
           - { text: "Retrieving those lost to follow-up", bin: 1 }
           - { text: "A well-defined population in a cohort", bin: 1 }
         why: "الـ information عن **القياس** (الورقة، اللي بيسأل، اللي بيجاوب). الـ selection عن **مين دخل وفضل** (الـ controls والـ follow-up)."
-      - kind: check
-        page: 51
-        quote: "How to avoid bias\n- It is always advisable to take the incident cases since the prevalent cases might have changed their exposure status due to medical advice.\n- examine all subjects of both groups at the pre - decided dates using \"similar\" methods of history taking, physical examination and investigations, and make arrangements that losses to follow up are minimized."
-        question: "Why prefer incident to prevalent cases?"
-        options:
-          - "Prevalent cases may have changed exposure after medical advice"
-          - "Incident cases are cheaper"
-          - "Prevalent cases are rarer"
-          - "Incident cases need no controls"
-        answer: 0
-        why: ["صح: ده سبب الشريحة.", "مش السبب.", "غلط.", "كل case control محتاج controls."]
+      - kind: explain
+        page: 53
+        quote: "How to avoid bias\nIn an experimental design (clinical trial), ensure Random allocation, Blinding and Placebo control.\nAs far as possible, ensure blinding - definitely in an experimental design; even in a case control study or cohort study, the observer can be \"blinded\"."
+        title: "في الـ trial: random وblind وplacebo"
+        text: |
+          في الـ experimental design اتأكد من:
+
+          1. ==Random allocation==
+          2. ==Blinding==
+          3. ==Placebo control==
+
+          والـ blinding على قد ما تقدر: أكيد في الـ trial، وحتى في case control أو cohort الـ observer ممكن يبقى «blinded».
+
+          ليه؟ الـ randomization بتوزّع الـ confounders، والـ blinding والـ placebo بيمنعوا الـ information bias من العيان والمراقب. التفسير المقبول (مش في الكتاب).
+      - kind: try
+        items: [res.L12.076, res.L12.077, res.L12.081, res.L12.083]
+    recap:
+      - "الـ bias مبيتصلّحش في التحليل؛ امنعه في التصميم."
+      - "Follow-up: population محددة وطرق ترجّع الضايعين."
+      - "Case control: أكتر من جروب controls، وشوف الـ entire spectrum."
+      - "Trial: random allocation + blinding + placebo؛ والـ observer ممكن يتعمي في أي design."
+    practice:
+      - res.L12.073
+      - res.L12.074
+      - res.L12.075
+      - res.L12.076
+      - res.L12.077
+      - res.L12.078
+      - res.L12.079
+      - res.L12.080
+      - res.L12.081
+      - res.L12.082
+      - res.L12.083
+  # ------------------------------------------------------------------
+  - id: res.L12.lesson7
+    title: "مراجعة الكويز: bias و confounding"
+    hook: "٦ أسئلة من الكويز، وكل إجابة ليها سبب من المحاضرة."
+    minutes: 6
+    pages: [55, 61]
+    topics: [information, control, selection]
+    goals:
+      - "تجاوب أسئلة الـ internal validity والـ blinding"
+      - "تفرّق بين مصادر الـ selection bias"
+      - "تختار طريقة تقليل الـ confounding في التصميم"
+    status: unverified
+    steps:
       - kind: aside
         page: 55
         quote: "1. Using standardized wording of introductions to questions and clearly standardized examination techniques, may help to minimize:\nA. Selection bias.\nB. Effect of potential confounders.\nC. Information bias.\nD. All of the above."
         tone: exam
         text: "الكويز (1 و5): **standardized wording** و**standardized examination** و**blinding of the interviewer** كلهم بيقلّلوا ==information bias==، مش selection ولا confounders."
+      - kind: check
+        page: 56
+        quote: "The internal validity of the research is greatly affected by:\nA. Information Bias\nB. Confounding factors\nC. Selection bias\nD. All of the above\nE. None of the above"
+        question: "The internal validity of the research is greatly affected by:"
+        options:
+          - "All of the above"
+          - "Information bias"
+          - "Confounding factors"
+          - "Selection bias"
+          - "None of the above"
+        answer: 0
+        why:
+          - "صح (D في السلايد): الـ confounding والـ selection والـ information bias التلاتة بيهددوا الـ internal validity."
+          - "صح بس ناقص."
+          - "صح بس ناقص."
+          - "صح بس ناقص."
+          - "التلاتة بيأثروا."
+      - kind: check
+        page: 57
+        quote: "3. Restricting recruitment of cases to those who have active disease at an arbitrary point in time resulting in:\nA. Ascertainment bias\nB. Incidence/ Prevalence bias\nC. Admission bias\nD. None of the above"
+        question: "Recruiting only cases with active disease at an arbitrary point in time causes:"
+        options: ["Incidence/prevalence bias", "Ascertainment bias", "Admission bias", "None of the above"]
+        answer: 0
+        why:
+          - "صح: دي prevalent cases، فبتفوّت الـ fatal والـ short والـ mild (Neyman)."
+          - "ده قياس الـ outcome بطرق مختلفة."
+          - "ده عن مين بيدخل المستشفى."
+          - "في إجابة صح."
       - kind: aside
         page: 58
         quote: "4. During data analysis, we can overcome the effect of the following problems:\nA. Confounding factors\nB. Effect of chance\nC. Selection bias\nD. All of the above\nE. Both 1&2"
         tone: exam
         text: "الكويز (2 و4):\n- الـ **internal validity** بتتأثر بـ **all of the above**: information bias وconfounding وselection bias.\n- في الـ **data analysis** تقدر تتغلب على **confounding factors** و**effect of chance** (الإجابة «Both 1&2»)، بس **مش selection bias**."
+      - kind: check
+        page: 59
+        quote: "5. Blinding of the interviewer help to minimize:\nA. Selection bias\nB. Information bias\nC. Effect of potential confounders\nD. All of the above"
+        question: "Blinding of the interviewer helps to minimize:"
+        options:
+          - "Information bias"
+          - "Selection bias"
+          - "Effect of potential confounders"
+          - "All of the above"
+        answer: 0
+        why:
+          - "صح (B في السلايد): الـ interviewer المتعمّي مايقدرش يسأل الـ cases بطريقة غير الـ controls."
+          - "الـ blinding مابيغيرش مين اتختار."
+          - "الـ confounding بيتحل بـ randomization أو restriction أو matching أو analysis."
+          - "الـ information bias بس."
       - kind: check
         page: 60
         quote: "All the followings are considered sources for selection bias EXCEPT:\nA. High non response rate\nB. Interpretation of the same information differently in different occasions\nC. Lack of standard case definition for selection of cases\nD. Selection of all cases from one hospital"
@@ -631,17 +817,6 @@ lessons:
           - "بيغيّر مين يدخل كـ case."
           - "مستشفى واحدة ممكن متمثلش كل الحالات."
       - kind: check
-        page: 57
-        quote: "3. Restricting recruitment of cases to those who have active disease at an arbitrary point in time resulting in:\nA. Ascertainment bias\nB. Incidence/ Prevalence bias\nC. Admission bias\nD. None of the above"
-        question: "Recruiting only cases with active disease at an arbitrary point in time causes:"
-        options: ["Incidence/prevalence bias", "Ascertainment bias", "Admission bias", "None of the above"]
-        answer: 0
-        why:
-          - "صح: دي prevalent cases، فبتفوّت الـ fatal والـ short والـ mild (Neyman)."
-          - "ده قياس الـ outcome بطرق مختلفة."
-          - "ده عن مين بيدخل المستشفى."
-          - "في إجابة صح."
-      - kind: check
         page: 61
         quote: "At the time of designing a study we can reduce the risk of confounding through:\nA. Restriction\nB. Stratified analysis\nC. Multivariate analysis\nD. Blinding\nE. All of the above"
         question: "At the time of designing a study, confounding is reduced through:"
@@ -654,29 +829,10 @@ lessons:
           - "ده بيقلّل information bias."
           - "واحدة بس في مرحلة التصميم."
       - kind: try
-        items: [res.L12.073, res.L12.079, res.L12.080, res.L12.081]
+        items: [res.L12.054, res.L12.070, res.L12.072, res.L12.037]
     recap:
-      - "الـ bias مبيتصلّحش في الـ analysis: امنعه وقلّله وخده في الاعتبار."
-      - "Recall: متقولش الـ hypothesis وخد من مصادر تانية."
-      - "Incident cases أحسن من prevalent. Entire spectrum للمرض."
-      - "Trial: random allocation وblinding وplacebo."
-      - "الكويز: C، D، B، E، B، B، A."
-    practice:
-      - res.L12.037
-      - res.L12.038
-      - res.L12.054
-      - res.L12.069
-      - res.L12.070
-      - res.L12.071
-      - res.L12.072
-      - res.L12.073
-      - res.L12.074
-      - res.L12.075
-      - res.L12.076
-      - res.L12.077
-      - res.L12.078
-      - res.L12.079
-      - res.L12.080
-      - res.L12.081
-      - res.L12.082
-      - res.L12.083
+      - "Internal validity بتتأثر بالـ information bias والـ confounding والـ selection bias (all of the above)."
+      - "Blinding of the interviewer يقلل الـ information bias."
+      - "الـ active cases بس = incidence-prevalence (Neyman) bias."
+      - "في التصميم: randomization و restriction و matching."
+    practice: [res.L12.037, res.L12.038, res.L12.054, res.L12.069, res.L12.070, res.L12.071, res.L12.072]

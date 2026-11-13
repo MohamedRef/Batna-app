@@ -45,7 +45,12 @@ pub(super) fn Table(
                                             }, aria_label: tx::REVEAL, "؟" }
                                         }
                                     } else if c == 0 {
-                                        th { key: "{c}", scope: "row", "{cell}" }
+                                        th {
+                                            key: "{c}",
+                                            scope: "row",
+                                            "data-opened": if hide.contains(&[r, c]) { "yes" } else { "no" },
+                                            "{cell}"
+                                        }
                                     } else {
                                         td {
                                             key: "{c}",

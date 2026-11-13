@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: endo.L01 to the Hepatology bar: 5 → 8 lessons (lesson2 split → lesson6, lesson3 → lesson7, lesson5 → lesson8), every list with its reason, three new figures, words per page 202 → 349; added to `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: neph.L01 to the Hepatology bar: 6 → 9 lessons (lesson1 split → lesson2 takes Henderson, lesson2 split → lesson7, lesson3 split → lesson8, lesson5 split → lesson9), reasons labelled «التفسير المقبول (مش في الكتاب)», 4 new figures, words per page 142 → 278 on the `lessons --report` count; glossary gains ENaC and NH3 (#827–#829).
 - 2026-11-13: git.L07 to the Hepatology bar: 3 → 4 lessons (lesson1 split → lesson4; Table 2 moved to lesson3), reasons labelled «التفسير المقبول (مش في الكتاب)», Treitz figure, words per page 196 → 354; p233 (review questions) skipped (#827–#829).
 - 2026-11-13: geri.L10 to the Hepatology bar: 4 → 7 lessons (lesson1 → lesson2 takes the classification, lesson2 split → lesson5, lesson3 split → lesson6, lesson4 split → lesson7), reasons labelled «التفسير المقبول (مش في الكتاب)», alveolar wall and nintedanib figures, p185 now taught, words per page 113 → 271 on the `lessons --report` count; in `content/lesson-skips.yaml` (#827–#829).

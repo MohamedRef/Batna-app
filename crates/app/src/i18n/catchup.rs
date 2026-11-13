@@ -1,6 +1,6 @@
 //! Adapted from Steps-app main: crates/app/src/i18n/catchup.rs.
 
-use super::count::{REVIEW, count};
+use super::count::{DAY, MINUTE, REVIEW, count};
 
 pub const OFFER_TITLE: &str = "نلحق المراجعات على كام يوم؟";
 pub const RUNNING_TITLE: &str = "خطة اللحاق شغالة";
@@ -10,19 +10,24 @@ pub const START: &str = "يلا نبدأ";
 pub const STOP: &str = "وقّف الخطة";
 pub const TODAY_DONE: &str = "خلصت نصيب النهارده. اللي فاضل مستنيك بكرة.";
 pub const NEW_PAUSED: &str = "الجديد واقف لحد ما الخطة تخلص.";
-/// "اتجمّع 120 مراجعة، حوالي 45 دقيقة. عادي، بيحصل."
+/// "اتجمّع عندك 120 مراجعة، حوالي 45 دقيقة. عادي، بيحصل."
 pub fn offer_line(due: usize, minutes: u32) -> String {
-    format!("اتجمّع عندك {}، حوالي {minutes} دقيقة. عادي، بيحصل، ونقسمهم على كام يوم.", count(due, &REVIEW))
+    format!(
+        "اتجمّع عندك {}، حوالي {}. عادي، بيحصل، ونقسمهم على كام يوم.",
+        count(due, &REVIEW),
+        count(minutes, &MINUTE)
+    )
 }
+/// A day chip: "يومين", "3 أيام", "7 أيام".
 pub fn days(n: u32) -> String {
-    format!("{n} أيام")
+    count(n, &DAY)
 }
 pub fn per_day(minutes: u32) -> String {
-    format!("يعني حوالي {minutes} دقيقة مراجعة في اليوم، الأقدم الأول.")
+    format!("يعني حوالي {} مراجعة في اليوم، الأقدم الأول.", count(minutes, &MINUTE))
 }
 pub fn running_line(day: i64, days: u32) -> String {
     format!("اليوم {day} من {days}.")
 }
 pub fn today_left(left: usize, minutes: u32) -> String {
-    format!("فاضل النهارده {}، حوالي {minutes} دقيقة.", count(left, &REVIEW))
+    format!("فاضل النهارده {}، حوالي {}.", count(left, &REVIEW), count(minutes, &MINUTE))
 }

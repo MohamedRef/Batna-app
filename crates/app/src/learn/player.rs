@@ -214,6 +214,8 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 h1 { class: "ls-context-title", Line { text: lesson.title.clone() } }
                 p { class: "ls-context-lecture muted small",
                     bdi { dir: "ltr", lang: "en", "{lecture_title}" }
+                    " · "
+                    super::BookPages { id: lesson.id.clone(), pages: lesson.pages }
                 }
             }
             for (k , st) in lesson.steps.iter().enumerate().filter(|(k, _)| seen.read()[*k]) {

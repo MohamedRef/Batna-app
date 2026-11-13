@@ -369,6 +369,11 @@ Add a bullet here when a PR adds something a later agent must know.
   the card (sticky while a long step scrolls). Phones keep the bottom nav.
   `crates/app/src/learn/learn.css`; `screens-browser.cjs` asserts it at
   840/1280/1600px. Research basis: [LESSONS.md](LESSONS.md) § Reading layout.
+- **Book map on lesson rows** (#830): each Lessons-screen row has a third
+  line with the page range (`BookPages`, «سلايد» for slide courses) and the
+  lecture's `topics` titles for the lesson's topics (`learn::section_titles`),
+  one clipped line in list view, hidden in compact view; the player header
+  shows the same range beside the lecture title.
 - **Reading settings** («Aa» in the lesson bar, and Settings › Look; adapted
   from Steps-app main: `crates/app/src/learn/reading.rs`): text size
   (×0.9/1/1.15/1.3 on step text only, the bar and buttons stay), line spacing
@@ -640,6 +645,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: lesson rows show their book pages and book sections; the lesson header shows the page range (#830).
 - 2026-11-13: 52 cut quotes completed from the book pages (sentence continues on the next page or in the list below); four trailing fragments where the book itself breaks off were dropped and logged in `medstudy/book-issues.md` (#804, #805, #807–#812).
 - 2026-11-13: res.L15.113, res.L15.117, res.L17.001 and their lesson steps get `update:` notes (n vs n − 1, 152.16 unrounded, p-value meaning); slide answers unchanged (#802).
 - 2026-11-13: stray root file from a mistyped command removed; `check-tracked-files.sh` now fails on tracked paths with shell characters or root names with spaces (#817).

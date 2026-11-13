@@ -151,6 +151,9 @@ fn continue_back_and_close_walk_the_lesson_and_save_the_place() {
             .first()
             .is_some_and(|e| e.text.contains(l.title.split_whitespace().next().unwrap()))
     );
+    // The header names the lesson's book pages beside the lecture (#830).
+    let lecture_line = d.find(is("ls-context-lecture")).remove(0).text;
+    assert!(lecture_line.contains(&l.pages[0].to_string()), "{lecture_line}");
     // Back is off on the first step; Continue moves on and is saved.
     assert!(d.find(|e| e.attr("data-nav") == Some("back")).first().unwrap().disabled());
     d.click(next);
@@ -760,6 +763,15 @@ fn rows_show_each_lessons_state_and_open_it() {
     assert!(row(a).text.contains("2/3") && row(a).text.contains(tx::STATE_DONE));
     assert_eq!(row(b).attr("data-state"), Some("current"));
     assert!(row(b).text.contains(&tx::step_of(3, b.steps.len())));
+    // Each row maps itself to the book (#830): its pages and its first section.
+    let [first, last] = a.pages;
+    let range = if first == last { first.to_string() } else { format!("{first}–{last}") };
+    assert!(row(a).text.contains(&range), "{}", row(a).text);
+    let first_section = d.read(|| {
+        let lib = Library::get();
+        lib.lectures[lec].topics.iter().find(|t| t.id == a.topics[0]).map(|t| t.title.clone()).unwrap()
+    });
+    assert!(row(a).text.contains(&first_section), "{}", row(a).text);
     // The lecture card leads back into the lesson left part-way.
     let go = d.find(is("ls-lec-go")).remove(0);
     assert!(go.text.contains(tx::CONTINUE));

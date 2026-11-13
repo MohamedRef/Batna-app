@@ -3,15 +3,15 @@ lecture: neph.L01
 lessons:
   # ------------------------------------------------------------------
   - id: neph.L01.lesson1
-    title: "الـ ABG: العينة، الأرقام، وROME"
-    hook: "ورقة الـ ABG فيها 6 أرقام. لو عرفت تقرا اتنين صح، نص الشغل خلص."
+    title: "الـ ABG: العينة والأرقام وROME"
+    hook: "ورقة الـ ABG فيها 6 أرقام. لو العينة غلط، كلهم غلط؛ ولو العينة صح، ROME بتقرا لك أول اتنين."
     minutes: 8
-    pages: [1, 4]
-    topics: [sampling, normals, henderson]
+    pages: [1, 3]
+    topics: [sampling, normals]
     goals:
-      - "تعرف أشهر أخطاء العينة وإمتى الـ venous ينفع"
-      - "تحفظ الأرقام الطبيعية وتستخدم ROME"
-      - "تتأكد إن الـ pH حقيقي بالـ Henderson equation"
+      - "تعرف أشهر أخطاء العينة وكل غلطة بتحرّك أنهي رقم"
+      - "تعرف إمتى الـ venous ينفع وإمتى لأ"
+      - "تحفظ الأرقام الطبيعية وتفهم ليه ROME شغالة"
     status: unverified
     steps:
       - kind: explain
@@ -32,6 +32,19 @@ lessons:
         quote: "Correct method of mixing of the arterial sample with the anticoagulant in two dimensions to prevent stacking of red blood cells."
         tone: tip
         text: "قلّب السرنجة مع الـ anticoagulant في **اتجاهين** (two dimensions) علشان الـ red blood cells (RBCs) متترصّش فوق بعض. زي ما بتقلّب كوباية العصير، مش بترجّها لفوق وتحت بس."
+      - kind: explain
+        page: 1
+        quote: "The most common problems that are encountered include nonarterial samples, air bubbles in the sample, inadequate or excessive anticoagulant in the sample, and delayed analysis of sample."
+        title: "كل غلطة بتحرّك الرقم في اتجاه معروف"
+        text: |
+          الكتاب بيعدّ الأربع مشاكل. التفسير المقبول (مش في الكتاب) لكل واحدة، علشان تعرف تشك في النتيجة لوحدك:
+
+          - **Nonarterial sample**: الدم الوريدي اتسحب منه أكسجين في الأنسجة واتحمّل CO2، فالـ ==pO2== يطلع واطي من غير ما الرئة يكون فيها حاجة.
+          - **Air bubbles**: هوا الأوضة فيه أكسجين كتير وتقريبًا مفيهوش CO2، فالفقاعة بتشد الـ pO2 لفوق والـ pCO2 لتحت.
+          - **Anticoagulant كتير**: السايل بيخفف العينة، فالـ pCO2 والـ HCO3 يبانوا أقل من الحقيقة.
+          - **Delayed analysis**: الخلايا جوه السرنجة لسه عايشة وبتتنفس، فبتاكل O2 وتطلّع CO2 طول ما العينة مستنية.
+
+          يعني لو الـ ABG مش راكب على المريض قدامك، اسأل الأول: العينة اتسحبت واتحللت إزاي؟
       - kind: check
         page: 1
         quote: "The most common problems that are encountered include nonarterial samples, air bubbles in the sample, inadequate or excessive anticoagulant in the sample, and delayed analysis of sample."
@@ -62,6 +75,21 @@ lessons:
 
           - الـ **arterial**: بيقيس الـ pulmonary gas exchange
           - الـ **central venous**: بيقيس الـ pH والـ tissue oxygenation
+      - kind: check
+        page: 2
+        quote: "In low cardiac output states, an arterial ABG is useful in assessing pulmonary gas exchange, and central venous ABG is useful in assessing pH and tissue oxygenation."
+        question: "A ventilated patient in low cardiac output shock. Which sample best reflects tissue oxygenation and pH?"
+        options:
+          - "Central venous blood gas"
+          - "Arterial blood gas"
+          - "Capillary blood gas"
+          - "Either: there is no arteriovenous difference"
+        answer: 0
+        why:
+          - "صح: الـ central venous بيوريك الدم بعد ما عدّى على الأنسجة، فبيقيس الـ pH والـ tissue oxygenation."
+          - "الـ arterial هنا بيقيس الـ pulmonary gas exchange بس، والـ pCO2 فيه ممكن يبان طبيعي."
+          - "الكتاب مقارنش بالـ capillary خالص."
+          - "الفرق صغير في الطبيعي بس، وبيكبر جدًا في الـ low cardiac output."
       - kind: table
         page: 3
         quote: "Normal Acid Base values\n| pH | 7.35 – 7.45 |\n| paCO2: | 35 – 45 mm Hg |\n| paO2: | 80 – 100 mm Hg |\n| HCO3: | 22 – 26 mEq/L |\n| BE/BD: | - 2 to + 2 |\n| SpO2: | > 95 % |"
@@ -85,6 +113,17 @@ lessons:
           - { key: "M", text: "Metabolic" }
           - { key: "E", text: "Equal: pH and HCO3 move in the same direction" }
         hook: "**كل الطرق تؤدي إلى روما**، وكل الـ ABG بيبدأ بـ ROME. 😄"
+      - kind: explain
+        page: 3
+        quote: "Acid-Base Mnemonic—ROME"
+        title: "ليه ROME شغالة؟"
+        text: |
+          الـ mnemonic مش حفظ أعمى. التفسير المقبول (مش في الكتاب):
+
+          - الـ **CO2 حمض**: بيدوب في الميه ويعمل carbonic acid اللي بيطلّع H+. فلما الـ ==pCO2== يطلع، الـ H+ يطلع والـ pH **ينزل**. علشان كده الـ **Respiratory = Opposite**.
+          - الـ **HCO3 قاعدة**: بيشيل H+. فلما الـ ==HCO3== يطلع، الـ H+ يقل والـ pH **يطلع** معاه. علشان كده الـ **Metabolic = Equal**.
+
+          وهتشوف نفس الكلام بالأرقام في معادلة Henderson في الدرس الجاي: الـ pCO2 فوق في البسط، والـ HCO3 تحت في المقام.
       - kind: figure
         page: 3
         quote: "Respiratory Opposite – pH ↑ PaCO2 ↓ Alkalosis – pH ↓ PaCO2 ↑ Acidosis"
@@ -148,6 +187,28 @@ lessons:
           1. ==Henderson equation==: النتيجة دي حقيقية؟
           2. **Anion gap**: الـ metabolic acidosis دي نوعها إيه؟
           3. **Secondary physiologic response** (compensation): فيه مشكلة تانية مستخبية؟
+      - kind: try
+        items: [neph.L01.004, neph.L01.011, neph.L01.014, neph.L01.001]
+    recap:
+      - "أخطاء الـ ABG غالبًا preanalytic: nonarterial، air bubbles، anticoagulant، تأخير."
+      - "الفقاعة: pO2 يطلع و pCO2 ينزل؛ التأخير: O2 ينزل و CO2 يطلع."
+      - "الـ venous قريب من الـ arterial في الطبيعي، ويبعد في الـ low cardiac output."
+      - "pH 7.35–7.45، pCO2 35–45، HCO3 22–26."
+      - "ROME: الـ CO2 حمض (Opposite)، والـ HCO3 قاعدة (Equal)."
+    practice: [neph.L01.001, neph.L01.002, neph.L01.003, neph.L01.004, neph.L01.005, neph.L01.006, neph.L01.007, neph.L01.008, neph.L01.009, neph.L01.010, neph.L01.011, neph.L01.012, neph.L01.013, neph.L01.014, neph.L01.015, neph.L01.016, neph.L01.123, neph.L01.124, neph.L01.125]
+  # ------------------------------------------------------------------
+  - id: neph.L01.lesson2
+    title: "Henderson والـ anion gap: الأنيونات اللي محدش بيقيسها"
+    hook: "معادلة من غير log بتكشف لو المعمل غلط، وطرح بسيط بيكشف أنيونات محدش قاسها."
+    minutes: 9
+    pages: [4, 7]
+    topics: [henderson, anion-gap]
+    goals:
+      - "تتأكد إن الـ pH حقيقي بالـ Henderson equation"
+      - "تحسب الـ AG وتعرف ليه الـ K+ مش داخل"
+      - "تعرف الطبيعي القديم والجديد للـ AG وليه اختلفوا"
+    status: unverified
+    steps:
       - kind: explain
         page: 4
         quote: "The same information can be obtained by using the Henderson equation, which relates [H+] to pH. This equation, which calculates [H+], is expressed as: This [H+] of 40 corresponds to the pH of 7.40. The Henderson equation is thus used clinically to check the validity of pH obtained from the clinical laboratory."
@@ -159,7 +220,19 @@ lessons:
 
           مثال الكتاب: pCO2 40 و HCO3 24 يدّوا H+ = 24 × 40/24 = **40**، وده بالظبط pH **7.40**.
 
-          استخدامها في الواقع: تتأكد إن الـ **pH اللي طالع من المعمل valid**. لو الحسبة مش ماشية مع الـ pH، العينة أو الجهاز فيهم حاجة.
+          استخدامها في الواقع: تتأكد إن الـ **pH اللي طالع من المعمل valid**. لو الحسبة مش ماشية مع الـ pH، العينة أو الجهاز فيهم حاجة، لأن الـ pH والـ pCO2 والـ HCO3 مربوطين ببعض بالمعادلة دي ومينفعش واحد يتغير لوحده.
+      - kind: explain
+        page: 4
+        quote: "In clinical practice, the Henderson–Hasselbalch equation is a rather cumbersome way to calculate the pH using logarithms."
+        title: "اقرا المعادلة كقصة"
+        text: |
+          الـ Henderson equation: **[H+] = 24 × pCO2 / HCO3**
+
+          - الـ **pCO2 في البسط**: كل ما يزيد، الـ H+ يزيد (الـ CO2 حمض).
+          - الـ **HCO3 في المقام**: كل ما يزيد، الـ H+ يقل (الـ HCO3 قاعدة).
+          - الـ **24** ثابت بيظبط الوحدات علشان النتيجة تطلع بالـ nmol/L.
+
+          النتيجة إن الـ H+ بيعتمد على **النسبة** بين الاتنين مش على رقم واحد فيهم. علشان كده الـ compensation شغالة: لو الـ HCO3 نزل، الرئة تنزّل الـ pCO2 كمان، فالنسبة ترجع قريبة من الطبيعي.
       - kind: table
         page: 4
         quote: "Remember the following approximate [H+] corresponds to clinically relevant pH values: pH 7.50 = 30 pH 7.40 = 40 pH 7.30 = 50 pH 7.20 = 60 pH 7.10 = 80 pH 7.00 = 100 or Last 2 digits of pH= 80 - H+"
@@ -183,28 +256,6 @@ lessons:
         quote: "The same information can be obtained by using the Henderson equation, which relates [H+] to pH. This equation, which calculates [H+], is expressed as: This [H+] of 40 corresponds to the pH of 7.40. The Henderson equation is thus used clinically to check the validity of pH obtained from the clinical laboratory."
         prompt: "المعمل كاتب pH 7.40، و pCO2 60، و HCO3 24. تصدّق؟"
         answer: "لأ. H+ = 24 × 60 / 24 = **60 nmol/L**، وده يقابل pH حوالي **7.20** مش 7.40. النتيجة مش valid: كرر العينة."
-      - kind: try
-        items: [neph.L01.004, neph.L01.011, neph.L01.014, neph.L01.018, neph.L01.020]
-    recap:
-      - "أخطاء الـ ABG غالبًا preanalytic: nonarterial، air bubbles، anticoagulant، تأخير."
-      - "الـ venous قريب من الـ arterial في الطبيعي، ويبعد في الـ low cardiac output."
-      - "pH 7.35–7.45، pCO2 35–45، HCO3 22–26."
-      - "ROME: Respiratory Opposite، Metabolic Equal."
-      - "H+ = 24 × pCO2/HCO3؛ 40 = 7.40؛ آخر رقمين ≈ 80 − H+."
-    practice: [neph.L01.001, neph.L01.002, neph.L01.003, neph.L01.004, neph.L01.005, neph.L01.006, neph.L01.007, neph.L01.008, neph.L01.009, neph.L01.010, neph.L01.011, neph.L01.012, neph.L01.013, neph.L01.014, neph.L01.015, neph.L01.016, neph.L01.017, neph.L01.018, neph.L01.019, neph.L01.020, neph.L01.021, neph.L01.022, neph.L01.123, neph.L01.124, neph.L01.125, neph.L01.126]
-  # ------------------------------------------------------------------
-  - id: neph.L01.lesson2
-    title: "الـ anion gap: الأنيونات اللي محدش بيقيسها"
-    hook: "المعمل بيقيس 4 أملاح بس. الباقي بنعرفه بالطرح، وده اللي بيفرق DKA عن الإسهال."
-    minutes: 10
-    pages: [5, 15]
-    topics: [anion-gap]
-    goals:
-      - "تحسب الـ AG وتعرف الطبيعي"
-      - "تعرف تستخدم الـ measured Na في الـ hyperglycemia"
-      - "تفرق high و normal و low AG بأسبابهم"
-    status: unverified
-    steps:
       - kind: explain
         page: 5
         quote: "Generally, plasma [Na+] exceeds the sum of plasma [Cl−] and [HCO3−], and the difference is called the anion gap (AG). Since the change in serum [K+] in either health or disease is minimal, this cation is not routinely included in the calculation of AG."
@@ -217,6 +268,11 @@ lessons:
           - **anion gap (AG) = Na+ − (Cl− + HCO3−)**
 
           والـ K+ مش بندخله لأن تغيّره في الصحة والمرض صغير.
+      - kind: reveal
+        page: 5
+        quote: "Generally, plasma [Na+] exceeds the sum of plasma [Cl−] and [HCO3−], and the difference is called the anion gap (AG)."
+        prompt: "Na 140، Cl 104، HCO3 24. الـ anion gap كام؟ وده معناه إيه؟"
+        answer: "AG = 140 − (104 + 24) = **12**. ده الطبيعي الكلاسيكي (12 ± 4): الـ 12 دول أنيونات موجودة فعلًا (albumin أساسًا) بس المعمل مش بيقيسها."
       - kind: figure
         page: 6
         quote: "| Unmeasured cations (mEq/L) | Unmeasured anions (mEq/L) |\n| K+: 4.5 | Albumin: 12 |\n| Ca2+: 5.0; Mg2+: 1.5 | Other proteins: 3 |\n| | PO4 3−: 2 |\n| | SO4 2−: 1 |\n| | Organic acids: 5 |\n| Total: 11 | Total: 23 |\n| AG = 23–11 = 12 ± 4 | |"
@@ -250,6 +306,21 @@ lessons:
           الـ lactic acid بيتفكك لـ **H+** و ==lactate== (anion مش بيتقاس).
 
           الـ H+ بيتعادل بالـ bicarbonate: **NaHCO3 + H+ → Na+ + CO2 + H2O**، فالـ HCO3 يقل. والـ lactate ياخد مكانه في عمود الأنيونات من غير ما حد يقيسه، فالـ **gap يكبر**.
+      - kind: check
+        page: 5
+        quote: "Since the change in serum [K+] in either health or disease is minimal, this cation is not routinely included in the calculation of AG."
+        question: "Why is potassium usually left out of the anion gap?"
+        options:
+          - "Its serum level changes very little in health or disease"
+          - "It is not measured in routine electrolytes"
+          - "It is an anion"
+          - "It is always equal to the chloride"
+        answer: 0
+        why:
+          - "صح: ده سبب الكتاب. تغيّره صغير، فإضافته مش هتفرق في التفسير."
+          - "بالعكس، الكتاب بيقول Na و K و Cl و HCO3 هما اللي بيتقاسوا."
+          - "الـ K+ cation."
+          - "مفيش علاقة بين الاتنين."
       - kind: explain
         page: 7
         quote: "With the introduction of ion-selective electrode methodology, the normal AG levels are much lower, ranging from 3 to11."
@@ -258,21 +329,98 @@ lessons:
           - الرقم الكلاسيكي ==12 ± 4== جاي من طرق قديمة (colorimetry و flame photometry).
           - بالـ **ion-selective electrodes** الطبيعي أقل: **3 to 11**، لأن الـ Cl بيطلع أعلى.
           - كل معمل وأرقامه، فامشي على أرقام معملك. وللتبسيط المحاضرة بتعتبر **10 mEq/L** طبيعي.
+      - kind: check
+        page: 7
+        quote: "With the introduction of ion-selective electrode methodology, the normal AG levels are much lower, ranging from 3 to11."
+        question: "With ion-selective electrodes, the normal anion gap is about:"
+        options:
+          - "3 to 11 mEq/L"
+          - "12 ± 4 mEq/L"
+          - "16 to 20 mEq/L"
+          - "0 mEq/L"
+        answer: 0
+        why:
+          - "صح: لأن الـ Cl بيطلع أعلى بالطريقة دي، والـ Cl بيتطرح، فالـ gap يصغر."
+          - "ده رقم الطرق القديمة (colorimetry و flame photometry)."
+          - "ده high AG."
+          - "الـ gap عمره ما يبقى صفر: فيه albumin دايمًا."
+      - kind: try
+        items: [neph.L01.018, neph.L01.020, neph.L01.025, neph.L01.017]
+    recap:
+      - "H+ = 24 × pCO2/HCO3؛ 40 = 7.40؛ آخر رقمين ≈ 80 − H+."
+      - "الـ H+ بيمشي مع النسبة pCO2/HCO3، مش مع رقم واحد."
+      - "AG = Na − (Cl + HCO3)؛ الـ K+ برّه لأن تغيّره صغير."
+      - "أكبر unmeasured anion: albumin 12."
+      - "الطبيعي 12 ± 4 (الطرق القديمة)، 3–11 بالـ ISE، وللتبسيط 10."
+    practice: [neph.L01.017, neph.L01.018, neph.L01.019, neph.L01.020, neph.L01.021, neph.L01.022, neph.L01.023, neph.L01.024, neph.L01.025, neph.L01.026, neph.L01.027, neph.L01.028, neph.L01.029, neph.L01.030, neph.L01.031, neph.L01.032, neph.L01.033, neph.L01.126]
+  # ------------------------------------------------------------------
+  - id: neph.L01.lesson7
+    title: "High و normal و low AG: مين خد مكان الـ HCO3؟"
+    hook: "الـ HCO3 ضاع. لو أنيون جديد قعد مكانه يبقى high AG، لو الـ Cl يبقى normal AG."
+    minutes: 10
+    pages: [8, 10]
+    topics: [anion-gap]
+    goals:
+      - "تستخدم الـ measured Na في الـ hyperglycemia"
+      - "تعرف سبب كل نوع من الـ AG"
+      - "تعرف الأنيون في كل سبب للـ high AG وفين بيضيع الـ HCO3 في الـ normal AG"
+      - "تصحح الـ AG للـ albumin"
+    status: unverified
+    steps:
       - kind: explain
         page: 8
         quote: "It is, thus, emphasized that only measured Na+ should be used to calculate the serum AG."
         title: "Hyperglycemia: الفخ المشهور"
         text: |
-          في السكر العالي الميه بتخرج من الخلايا وتخفف الـ Na والـ Cl والـ HCO3 **كلهم بنفس النسبة**.
+          في السكر العالي الميه بتخرج من الخلايا (لأن الجلوكوز بيشدها) وتخفف الـ Na والـ Cl والـ HCO3 **كلهم بنفس النسبة**.
 
           لو صححت الـ Na لوحده (Na بيقل **1.6** لكل **100 mg/dL** جلوكوز فوق الطبيعي) وسبت الـ Cl والـ HCO3، الـ AG هيطلع أكبر من الحقيقة، وهتشخص high AG acidosis مش موجودة.
 
           الخلاصة: احسب الـ AG بالـ ==measured Na== بس.
-      - kind: aside
-        page: 14
-        quote: "Corrected standard AG for albumin: Albumin/4 + 1.5 x Phosphate\nAnion Gap calculation: {[Na+] - [Cl− + HCO3]} = 12+/-4\nCorrected Na+ for AG in hyperglycemia: Corrected Na+ = Na + (Glucose – 5)/3\nPAO2 = [713 x FiO2] – [pCO2 x 1.25]\nA-a gradient = PAO2 – PaO2 = Age/4 + 4"
-        tone: trap
-        text: "جدول الـ arterial blood gas (ABG) في ص 14 فيه معادلة **corrected Na+ = Na + (glucose − 5)/3** (glucose بالـ mmol/L). الكلام في ص 8 واضح: الـ AG بالـ **measured Na**. لو السؤال قال \"calculate the AG\" استخدم الـ measured."
+      - kind: explain
+        page: 8
+        quote: "Low AG implies a substantial decrease in unmeasured anions, an increase in unmeasured cations, and spurious decrease in [Na+] or spurious increases in [Cl−] or [HCO3−]."
+        title: "تلات أنواع، وكل نوع ليه سبب"
+        text: |
+          الـ AG بيقسم الـ metabolic acidosis تلاتة. الفكرة كلها: **مين خد مكان الـ HCO3 اللي ضاع؟**
+
+          - **High AG**: الحمض جه ومعاه ==anion== بتاعه (lactate، ketones، formate). الـ H+ أكل HCO3، والأنيون الجديد اللي محدش بيقيسه قعد مكانه، فالـ gap كبر.
+          - **Normal AG**: الـ HCO3 ضاع من غير أنيون جديد، والـ ==Cl== هو اللي طلع مكانه علشان الدم يفضل electroneutral. فالـ gap ثابت والمريض hyperchloremic.
+          - **Low AG**: يا الأنيونات اللي مش بتتقاس قلّت (albumin)، يا الكاتيونات اللي مش بتتقاس زادت، يا المعمل غلط في الـ Na أو الـ Cl أو الـ HCO3.
+
+          الحتة الأولى والتانية من الكتاب. شرح "مين خد المكان" هو التفسير المقبول (مش في الكتاب).
+      - kind: figure
+        page: 8
+        quote: "High AG is due to accumulation of unmeasured anions, whereas normal AG is usually related to high Cl− level."
+        title: "الـ HCO3 ضاع: مين قعد مكانه؟"
+        alt: "Three anion columns of equal height. Normal: chloride, bicarbonate and a small gap. High anion gap: bicarbonate shrinks and a new unmeasured anion fills the space, so the gap grows. Normal anion gap: bicarbonate shrinks and chloride grows, so the gap stays the same."
+        caption: "**High AG**: أنيون جديد مكان الـ HCO3، فالـ gap يكبر. **Normal AG**: الـ Cl مكان الـ HCO3، فالـ gap ثابت."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="55" y="18" text-anchor="middle" class="t-sm t-b">Normal</text>
+            <text x="165" y="18" text-anchor="middle" class="t-sm t-b">High AG</text>
+            <text x="275" y="18" text-anchor="middle" class="t-sm t-b">Normal AG</text>
+            <rect x="20" y="28" width="70" height="120" class="fg-good"/>
+            <text x="55" y="92" text-anchor="middle" class="t-sm">Cl-</text>
+            <rect x="20" y="148" width="70" height="50" class="fg-acc"/>
+            <text x="55" y="178" text-anchor="middle" class="t-sm">HCO3-</text>
+            <rect x="20" y="198" width="70" height="24" class="fg-thin"/>
+            <text x="55" y="215" text-anchor="middle" class="t-sm">gap</text>
+            <rect x="130" y="28" width="70" height="120" class="fg-good"/>
+            <text x="165" y="92" text-anchor="middle" class="t-sm">Cl-</text>
+            <rect x="130" y="148" width="70" height="20" class="fg-acc"/>
+            <text x="165" y="162" text-anchor="middle" class="t-sm">HCO3-</text>
+            <rect x="130" y="168" width="70" height="54" class="fg-bad"/>
+            <text x="165" y="192" text-anchor="middle" class="t-sm">gap +</text>
+            <text x="165" y="208" text-anchor="middle" class="t-sm">new anion</text>
+            <rect x="240" y="28" width="70" height="150" class="fg-good"/>
+            <text x="275" y="100" text-anchor="middle" class="t-sm">Cl- up</text>
+            <rect x="240" y="178" width="70" height="20" class="fg-acc"/>
+            <text x="275" y="192" text-anchor="middle" class="t-sm">HCO3-</text>
+            <rect x="240" y="198" width="70" height="24" class="fg-thin"/>
+            <text x="275" y="215" text-anchor="middle" class="t-sm">gap</text>
+            <text x="165" y="244" text-anchor="middle" class="t-sm t-mut">Columns have the same height: electroneutrality</text>
+          </svg>
       - kind: check
         page: 8
         quote: "High AG is due to accumulation of unmeasured anions, whereas normal AG is usually related to high Cl− level."
@@ -288,6 +436,31 @@ lessons:
           - "ده سبب الـ **high** AG."
           - "دي أشهر سبب للـ **low** AG."
           - "الـ low AG فيه spurious **decrease** في الـ Na، مش زيادة."
+      - kind: table
+        page: 8
+        quote: "Table 4.4: Most common causes of high AG metabolic acidosis\n| Cause | Unmeasured anions causing high AG |\n| Uremic acidosis (renal failure) | Sulfate, phosphate, urate |\n| Ketoacidosis (diabetes, starvation, alcohol) | Acetoacetate, β-hydroxybutyrate |\n| Lactic acidosis | L-lactate |\n| Small bowl resection | D-lactate |\n| Intoxicants | |\n| Methanol | Formate |\n| Ethylene glycol | Glycolate, oxalate |\n| Aspirin | Salicylate, L-lactate, ketoacids |\n| Acetaminophen (Tylenol) | Pyroglutamate |\n| Paraldehyde | Acetaldehyde or acetic acid |\n| Toluene | Hippurate, benzoate |"
+        title: "مين الأنيون في كل سبب؟"
+        columns: [Cause, Unmeasured anion]
+        rows:
+          - ["Uremia", "Sulfate, phosphate, urate"]
+          - ["Ketoacidosis", "Acetoacetate, β-hydroxybutyrate"]
+          - ["Small bowel resection", "D-lactate"]
+          - ["Methanol", "Formate"]
+          - ["Ethylene glycol", "Glycolate, oxalate"]
+          - ["Acetaminophen", "Pyroglutamate"]
+        hide: [[2, 1], [3, 1], [5, 1]]
+      - kind: explain
+        page: 8
+        quote: "Uremic acidosis (renal failure) Sulfate, phosphate, urate"
+        title: "ليه كل سبب بيطلّع الأنيون ده؟"
+        text: |
+          الجدول بيقولك الأنيون، والتفسير المقبول (مش في الكتاب) بيقولك جه منين:
+
+          - **Uremia**: الكلية هي اللي بترمي ==sulfate== و phosphate و urate اللي جايين من تكسير البروتين. لما تفشل، بيتحجزوا في الدم.
+          - **Ketoacidosis**: من غير insulin (أو في الجوع أو الكحول) الكبد بيحرق دهون، فيطلّع acetoacetate و β-hydroxybutyrate.
+          - **Small bowel resection**: السكريات اللي مش بتتمتص بتوصل القولون، والبكتيريا تخمّرها لـ ==D-lactate==.
+          - **Methanol ← formate** و **ethylene glycol ← glycolate و oxalate**: الكبد هو اللي بيحوّل الكحول لأحماض.
+          - **Acetaminophen ← pyroglutamate**: الجرعات الكبيرة بتستهلك الـ glutathione، فالـ pyroglutamate يتجمع.
       - kind: mnemonic
         page: 9
         quote: "Box 2: Causes of elevated anion gap metabolic acidosis\nMnemonic: MUDPILES\nMethanol\nUraemia (renal failure)\nDiabetic, alcoholic, or starvation ketoacidosis\nParacetamol; propylene glycol; paregoric\nInborn errors of metabolism; iron; ibuprofen; isoniazid\nLactic acid\nEthylene glycol\nSalicylates (aspirin)"
@@ -302,32 +475,22 @@ lessons:
           - { key: "E", text: "Ethylene glycol" }
           - { key: "S", text: "Salicylates (aspirin)" }
         hook: "**MUD PILES**: كومة طين من الأنيونات اللي محدش قاسها. كل واحد فيهم بيرمي anion في الدم."
-      - kind: table
-        page: 8
-        quote: "Table 4.4: Most common causes of high AG metabolic acidosis\n| Cause | Unmeasured anions causing high AG |\n| Uremic acidosis (renal failure) | Sulfate, phosphate, urate |\n| Ketoacidosis (diabetes, starvation, alcohol) | Acetoacetate, β-hydroxybutyrate |\n| Lactic acidosis | L-lactate |\n| Small bowl resection | D-lactate |\n| Intoxicants | |\n| Methanol | Formate |\n| Ethylene glycol | Glycolate, oxalate |\n| Aspirin | Salicylate, L-lactate, ketoacids |\n| Acetaminophen (Tylenol) | Pyroglutamate |\n| Paraldehyde | Acetaldehyde or acetic acid |\n| Toluene | Hippurate, benzoate |"
-        title: "مين الأنيون في كل سبب؟"
-        columns: [Cause, Unmeasured anion]
-        rows:
-          - ["Uremia", "Sulfate, phosphate, urate"]
-          - ["Ketoacidosis", "Acetoacetate, β-hydroxybutyrate"]
-          - ["Small bowel resection", "D-lactate"]
-          - ["Methanol", "Formate"]
-          - ["Ethylene glycol", "Glycolate, oxalate"]
-          - ["Acetaminophen", "Pyroglutamate"]
-        hide: [[2, 1], [3, 1], [5, 1]]
-      - kind: mnemonic
-        page: 15
-        quote: "Arterial blood gas analysis\n  pH < 7.35: Acidosis\n    PaCO2 > 45 mmHg: Respiratory acidosis\n      Additional ↑ HCO3−: Metabolic compensation\n    PaCO2 ≤ 45 mmHg (or ↓ HCO3−): Metabolic acidosis\n      Additional ↓ PaCO2: Respiratory compensation\n      Check anion gap: Na+ − (Cl− + HCO3−)\n        ↑ Anion gap > 12 mEq/L: MUDPILES\n          Methanol (formid acid)\n          Uremia\n          Diabetic ketoacidosis\n          Propylene glycol\n          Iron tablets/Isoniazid\n          Lactic acidosis\n          Ethylene glycol (oxalic acid)\n          Salicylates (late)\n        Normal anion gap ~ 6–12 mEq/L: HARD-ASS\n          Hyperalimentation\n          Addison disease\n          Renal tubular acidosis\n          Diarrhea\n          Acetazolamide\n          Spironolactone\n          Saline infusion\n  pH > 7.45: Alkalosis\n    PaCO2 < 32 mmHg: Respiratory alkalosis\n      Additional ↓ HCO3−: Metabolic compensation\n    PaCO2 ≥ 32 mmHg (or ↑ HCO3−): Metabolic alkalosis\n      Additional ↑ PaCO2: Respiratory compensation"
-        word: "HARD-ASS"
-        parts:
-          - { key: "H", text: "Hyperalimentation" }
-          - { key: "A", text: "Addison disease" }
-          - { key: "R", text: "Renal tubular acidosis" }
-          - { key: "D", text: "Diarrhea" }
-          - { key: "A", text: "Acetazolamide" }
-          - { key: "S", text: "Spironolactone" }
-          - { key: "S", text: "Saline infusion" }
-        hook: "الـ normal AG \"دماغه ناشفة\": الـ gap مش بيتحرك، والـ Cl هو اللي بيعلى. 😄"
+      - kind: explain
+        page: 9
+        quote: "Table 4.5: Most common causes of normal AG metabolic acidosis\n| Cause | Mechanism |\n| Diarrhea | Loss of HCO3− in stool |\n| Ureterosigmoidostomy, ileal conduit | Loss of HCO3− in stool |\n| Carbonic anhydrase inhibitors | Loss of HCO3− in urine |\n| Recovery phase of ketoacidosis | Less HCO3− synthesis from decreased availability of ketones |\n| Chronic kidney diseases (stages 4–5) | Decrease in NH3 excretion |\n| Proximal renal tubular acidosis (type II) | Loss of HCO3− in urine |\n| Distal renal tubular acidosis (type I) | Decreased renal acid secretion |\n| Distal renal tubular acidosis (type IV) | Decreased acid secretion and low NH3 production |\n| Dilutional acidosis | Increased Cl− due to normal saline administration |\n| Cholestyramine | Release of Cl− in exchange for HCO3− |"
+        title: "Normal AG: الـ HCO3 بيضيع فين؟"
+        text: |
+          جدول 4.5 بيدّيك الـ mechanism. ولكل واحد التفسير المقبول (مش في الكتاب) في سطر:
+
+          - **Diarrhea**: عصارة الأمعاء والبنكرياس غنية بالـ HCO3، فالإسهال بيرميه في البراز.
+          - **Ureterosigmoidostomy، ileal conduit**: البول قاعد في الأمعاء، والأمعاء بتاخد Cl وتدّي HCO3 مكانه.
+          - **Carbonic anhydrase inhibitors** و **proximal RTA (type II)**: الـ proximal tubule هو اللي بيرجّع أغلب الـ HCO3، فلما يقفل، الـ HCO3 بينزل في البول.
+          - **Distal RTA (type I)** و **type IV**: الـ distal tubule مش بيعرف يفرز H+ (و type IV كمان الـ NH3 قليل).
+          - **CKD stage 4–5**: الـ ==NH3== قليل، والـ NH3 هو اللي بيشيل الحمض في البول.
+          - **Recovery من الـ ketoacidosis**: الـ ketones لو اتحرقت كانت هترجّع HCO3، بس جزء كبير منها بيضيع في البول.
+          - **Normal saline**: Cl كتير بيدخل الدم. و **cholestyramine** بيدّي Cl وياخد HCO3.
+
+          يعني في كل دول الـ HCO3 بيضيع من غير أنيون جديد، فالـ Cl يطلع مكانه.
       - kind: sort
         page: 9
         quote: "Table 4.5: Most common causes of normal AG metabolic acidosis\n| Cause | Mechanism |\n| Diarrhea | Loss of HCO3− in stool |\n| Ureterosigmoidostomy, ileal conduit | Loss of HCO3− in stool |\n| Carbonic anhydrase inhibitors | Loss of HCO3− in urine |\n| Recovery phase of ketoacidosis | Less HCO3− synthesis from decreased availability of ketones |\n| Chronic kidney diseases (stages 4–5) | Decrease in NH3 excretion |\n| Proximal renal tubular acidosis (type II) | Loss of HCO3− in urine |\n| Distal renal tubular acidosis (type I) | Decreased renal acid secretion |\n| Distal renal tubular acidosis (type IV) | Decreased acid secretion and low NH3 production |\n| Dilutional acidosis | Increased Cl− due to normal saline administration |\n| Cholestyramine | Release of Cl− in exchange for HCO3− |"
@@ -373,25 +536,41 @@ lessons:
             options: ["18", "13", "15.5", "8"]
             answer: 0
             why: "الـ albumin واطي 2 g/dL × 2.5 = 5، فالـ AG المصحح = 13 + 5 = **18**، يعني فوق الـ 16: high AG مستخبي (lactic acidosis)."
+      - kind: check
+        page: 10
+        quote: "Bromide measured as chloride"
+        question: "Bromide intoxication lowers the measured anion gap because:"
+        options:
+          - "Bromide is measured as chloride"
+          - "Bromide lowers serum albumin"
+          - "Bromide adds unmeasured cations"
+          - "Bromide is lost in the stool with bicarbonate"
+        answer: 0
+        why:
+          - "صح: الجهاز بيقرا البروميد كأنه Cl، فالـ Cl يطلع أعلى من الحقيقة والـ gap يصغر. ونفس الكلام في الـ salicylate overdose في الجدول ده."
+          - "ده mechanism الـ hypoalbuminemia."
+          - "ده mechanism الـ IgG myeloma والـ lithium والـ Ca والـ Mg."
+          - "ده الإسهال، وده normal AG."
       - kind: try
-        items: [neph.L01.025, neph.L01.034, neph.L01.043, neph.L01.044, neph.L01.049]
+        items: [neph.L01.034, neph.L01.043, neph.L01.044, neph.L01.049]
     recap:
-      - "AG = Na − (Cl + HCO3)؛ 12 ± 4 (ISE: 3–11؛ للتبسيط 10)."
-      - "في الـ hyperglycemia: measured Na بس."
-      - "High AG = unmeasured anions (MUDPILES)؛ normal AG = Cl عالي (HARD-ASS)."
+      - "في الـ hyperglycemia: الـ AG بالـ measured Na بس."
+      - "High AG = أنيون جديد مكان الـ HCO3 (MUDPILES)."
+      - "Normal AG = الـ Cl مكان الـ HCO3: إسهال، RTA، CAI، saline، CKD 4–5."
       - "Low AG: أشهره hypoalbuminemia؛ AG يقل 2.5 لكل 1 g/dL albumin."
-    practice: [neph.L01.023, neph.L01.024, neph.L01.025, neph.L01.026, neph.L01.027, neph.L01.028, neph.L01.029, neph.L01.030, neph.L01.031, neph.L01.032, neph.L01.033, neph.L01.034, neph.L01.035, neph.L01.036, neph.L01.037, neph.L01.038, neph.L01.039, neph.L01.040, neph.L01.041, neph.L01.042, neph.L01.043, neph.L01.044, neph.L01.045, neph.L01.046, neph.L01.047, neph.L01.048, neph.L01.049, neph.L01.050, neph.L01.051, neph.L01.052, neph.L01.085, neph.L01.090, neph.L01.127, neph.L01.128, neph.L01.129, neph.L01.130, neph.L01.147, neph.L01.153, neph.L01.154]
+      - "Bromide و salicylate بيتقاسوا كأنهم Cl."
+    practice: [neph.L01.034, neph.L01.035, neph.L01.036, neph.L01.037, neph.L01.038, neph.L01.039, neph.L01.040, neph.L01.041, neph.L01.042, neph.L01.043, neph.L01.044, neph.L01.045, neph.L01.046, neph.L01.047, neph.L01.048, neph.L01.049, neph.L01.050, neph.L01.051, neph.L01.052, neph.L01.127, neph.L01.128, neph.L01.129, neph.L01.130, neph.L01.147]
   # ------------------------------------------------------------------
   - id: neph.L01.lesson3
-    title: "Delta ratio و compensation: المشكلة المستخبية"
-    hook: "مريض ممكن يكون عنده اتنين أو تلاتة acid–base disorders مع بعض. الحسبة الصغيرة دي بتكشفهم."
-    minutes: 10
-    pages: [10, 14]
-    topics: [delta, compensation]
+    title: "الـ delta ratio: المشكلة المستخبية"
+    hook: "مريض ممكن يكون عنده اتنين acid–base disorders مع بعض. نسبة واحدة بتكشفهم."
+    minutes: 8
+    pages: [10, 12]
+    topics: [delta]
     goals:
       - "تحسب الـ delta ratio وتقرا الـ bands"
-      - "تعرف مين بيعوّض مين"
-      - "تحسب الـ expected pCO2 والـ expected HCO3"
+      - "تفهم ليه البُعد عن 1 بيكشف disorder تاني"
+      - "تعرف الـ pitfalls في الـ lactic acidosis والـ DKA"
     status: unverified
     steps:
       - kind: explain
@@ -402,6 +581,11 @@ lessons:
           في ==high anion gap (AG) metabolic acidosis== البسيطة: كل **1 mEq/L** زيادة في الـ AG بيقابلها **1 mEq/L** نقص في الـ HCO3، لأن كل H+ جه مع الأنيون اتعادل بـ HCO3 واحد.
 
           يعني **change in anion gap (ΔAG) = change in bicarbonate (ΔHCO3)** والنسبة = **1**. أي بُعد كبير عن الـ 1 = **mixed disorder**.
+      - kind: aside
+        page: 10
+        quote: "In other words, for every 1 mEq/L rise in the AG, there is a concomitant fall of 1 mEq/L in HCO3−."
+        tone: analogy
+        text: "تخيّل الـ HCO3 فلوس في جيبك، وكل H+ جاي بياخد جنيه ويسيب مكانه **إيصال** (الأنيون). لو عدّيت الإيصالات (ΔAG) لازم تساوي الجنيهات اللي راحت (ΔHCO3). لو الفلوس الناقصة **أكتر** من الإيصالات، حد تاني سرق (normal AG acidosis). لو **أقل**، حد حط فلوس في جيبك (metabolic alkalosis)."
       - kind: explain
         page: 12
         quote: "Used to assess elevated anion gap metabolic acidosis and to evaluate whether a mixed acid base disorder is present\n1. Anion gap = Na+ - [Cl- + HCO3-]\n2. Delta ratio = Δ Anion gap / Δ HCO3-\n  Δ Anion gap = measured anion gap - Normal anion gap\n  Δ HCO3- = Normal [HCO3-] - Measured [HCO3-]\n  Normal anion gap = 12\n  Normal [HCO3-] = 24\n3. Delta ratio = (Measured anion gap - 12) / (24 - Measured [HCO3-])\n| Delta ratio | Assessment |\n| < 0.4 | Normal anion gap metabolic acidosis |\n| 0.4 - 0.8 | Mixed normal anion gap metabolic acidosis + high anion gap metabolic acidosis |\n| 0.8 - 2.0 | Pure high anion gap metabolic acidosis |\n| > 2.0 | Mixed high anion gap metabolic acidosis + metabolic alkalosis (or pre-existing compensated respiratory acidosis) |"
@@ -411,6 +595,7 @@ lessons:
 
           - البسط: الـ AG زاد قد إيه عن 12.
           - المقام: الـ HCO3 قل قد إيه عن 24.
+          - يعني النسبة بتقارن الحمض اللي **دخل** (البسط) بالـ HCO3 اللي **راح** (المقام).
 
           بيستخدموه لتقييم الـ elevated AG metabolic acidosis، ولكشف هل فيه ==mixed disorder==.
       - kind: figure
@@ -435,6 +620,15 @@ lessons:
             <text x="20" y="229" class="t-sm">High AG acidosis + metabolic alkalosis</text>
             <text x="20" y="244" class="t-sm t-mut">(or old compensated respiratory acidosis)</text>
           </svg>
+      - kind: explain
+        page: 11
+        quote: "In a mixed high AG metabolic acidosis and metabolic alkalosis, the HCO3− level is inappropriately high relative to the increase in AG. As a result, the ∆AG/∆HCO3−ratio is >2."
+        title: "ليه البُعد عن 1 بيكشف disorder تاني؟"
+        text: |
+          - **النسبة أقل من 1**: الـ HCO3 نزل **أكتر** من اللي الأنيون الجديد يفسّره. يعني فيه HCO3 بيضيع من سكة تانية من غير أنيون: ==normal AG acidosis== كمان (الكتاب). مثال من عندنا: DKA مع إسهال.
+          - **النسبة أكبر من 2**: الـ HCO3 **أعلى** من المتوقع. يعني حاجة بتضيف HCO3: ==metabolic alkalosis== (الكتاب)، زي الترجيع اللي بيرمي HCl، أو كلية كانت شايلة HCO3 زيادة من respiratory acidosis قديمة (ص 12).
+
+          الفكرة (التفسير المقبول، مش في الكتاب): الـ AG بيقيس الحمض اللي **دخل**، والـ HCO3 بيقيس **صافي** اللي حصل. الفرق بينهم هو الـ disorder التاني.
       - kind: check
         page: 11
         quote: "In a mixed high AG metabolic acidosis and metabolic alkalosis, the HCO3− level is inappropriately high relative to the increase in AG. As a result, the ∆AG/∆HCO3−ratio is >2."
@@ -450,11 +644,53 @@ lessons:
           - "ده لو الـ HCO3 كان نزل 20 كمان."
           - "ده لو الـ HCO3 نزل أكتر من الـ AG."
           - "الـ AG هنا عالي جدًا."
+      - kind: reveal
+        page: 12
+        quote: "Delta ratio = (Measured anion gap - 12) / (24 - Measured [HCO3-])"
+        prompt: "مريض DKA عنده إسهال كمان: AG 20، HCO3 8. الـ delta ratio كام؟ ومعناه؟"
+        answer: "(20 − 12) / (24 − 8) = 8 / 16 = **0.5**. ده في band الـ **0.4–0.8**: mixed **normal AG + high AG** metabolic acidosis. الإسهال رمى HCO3 من غير ما يزوّد الـ gap."
       - kind: aside
         page: 11
         quote: "Pitfalls in interpretation of the Δ/Δ\n  Average Δ/Δ of lactic acidosis is 1.6\n    Up to half of acid load is buffered intracellularly and not by serum HCO3−\n  Δ/Δ in DKA varies from 2 (early) to 0 (late)\n    Many unmeasured acid anions are rapidly renally excreted"
         tone: trap
         text: "**Pitfalls**: الـ lactic acidosis متوسطها **1.6** مش 1 (نص الحمض بيتعادل جوه الخلايا). والـ diabetic ketoacidosis (DKA) بتبدأ حوالي **2** وتنزل لـ **0** متأخر، لأن الـ ketones بتطلع في البول. فمتتسرعش تقول mixed عند 1.6."
+      - kind: check
+        page: 12
+        quote: "Delta ratio = (Measured anion gap - 12) / (24 - Measured [HCO3-])"
+        question: "AG 14, HCO3 12 mEq/L. Delta ratio and meaning?"
+        options:
+          - "About 0.17: normal anion gap metabolic acidosis"
+          - "About 1: pure high anion gap acidosis"
+          - "About 2.5: high anion gap acidosis with metabolic alkalosis"
+          - "About 0.6: mixed normal and high anion gap acidosis"
+        answer: 0
+        why:
+          - "صح: (14 − 12)/(24 − 12) = 2/12 ≈ 0.17، أقل من 0.4: الـ HCO3 نزل تقريبًا من غير أنيون جديد."
+          - "ده محتاج الـ AG يطلع قد ما الـ HCO3 نزل."
+          - "ده محتاج HCO3 أعلى بكتير."
+          - "المقام هنا 12 والبسط 2 بس."
+      - kind: try
+        items: [neph.L01.060, neph.L01.062, neph.L01.053, neph.L01.054]
+    recap:
+      - "في الـ high AG البسيطة: ΔAG = ΔHCO3، والنسبة 1."
+      - "Delta ratio = (AG − 12)/(24 − HCO3)."
+      - "< 0.4 normal AG؛ 0.4–0.8 mixed؛ 0.8–2 pure high AG؛ > 2 + metabolic alkalosis."
+      - "أقل من 1: HCO3 ضاع من سكة تانية؛ أكبر من 2: حد ضاف HCO3."
+      - "Lactic متوسطها 1.6؛ DKA من 2 لـ 0."
+    practice: [neph.L01.053, neph.L01.054, neph.L01.055, neph.L01.056, neph.L01.057, neph.L01.058, neph.L01.059, neph.L01.060, neph.L01.061, neph.L01.062, neph.L01.063, neph.L01.131, neph.L01.132, neph.L01.133, neph.L01.155, neph.L01.156, neph.L01.157]
+  # ------------------------------------------------------------------
+  - id: neph.L01.lesson8
+    title: "الـ compensation: مين بيعوّض مين وبكام"
+    hook: "الرئة بتعوّض في دقايق والكلية في أيام. الأرقام دي بتقولك لو فيه disorder تاني."
+    minutes: 9
+    pages: [12, 14]
+    topics: [compensation]
+    goals:
+      - "تعرف مين بيعوّض مين"
+      - "تفهم ليه الـ acute والـ chronic أرقامهم مختلفة"
+      - "تحسب الـ expected pCO2 والـ expected HCO3"
+    status: unverified
+    steps:
       - kind: explain
         page: 12
         quote: "In a metabolic acid–base disorder, the compensatory response is respiratory. For example, in metabolic acidosis, the primary change is a decrease in plasma [HCO3−] and an increase in [H+]. The compensatory response is a decrease in pCO2 due to hyper ventilation. This decrease in pCO2 limits the rise in [H+], and thus the pH is returned to normal. The observed hyper ventilation represents the normal physiologic response to an increase in [H+]."
@@ -465,7 +701,38 @@ lessons:
           - **Metabolic** disorder: الرئة بتعوّض. Acidosis = **hyperventilation** (pCO2 ينزل). Alkalosis = **hypoventilation** (pCO2 يطلع).
           - **Respiratory** disorder: الكلية بتعوّض بتعديل الـ **HCO3 reabsorption**.
 
-          والكتاب بيأكد: الـ compensation **بترجّع** الـ pH ناحية الطبيعي، مش بتعلّيه لفوق الطبيعي.
+          والسبب إن الـ H+ بيمشي مع النسبة pCO2/HCO3، فلازم الرقمين يتحركوا في نفس الاتجاه. والكتاب بيأكد: الـ compensation **بترجّع** الـ pH ناحية الطبيعي، مش بتعلّيه لفوق الطبيعي.
+      - kind: figure
+        page: 12
+        quote: "It is a physiologic process that minimizes changes in [H+] brought about by a primary change."
+        title: "الـ primary والـ compensation في نفس الاتجاه"
+        alt: "Two rows. Metabolic acidosis: HCO3 falls (primary), the lung lowers pCO2 (secondary), the pCO2 over HCO3 ratio moves back toward normal. Respiratory acidosis: pCO2 rises (primary), the kidney raises HCO3 (secondary), the ratio moves back toward normal."
+        caption: "الـ compensation بتحرّك الرقم التاني **في نفس اتجاه** الرقم الأولاني، علشان النسبة pCO2/HCO3 ترجع ناحية الطبيعي."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="N1e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+              <marker id="N1f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="10" y="10" width="310" height="95" rx="10" class="fg-box"/>
+            <text x="165" y="30" text-anchor="middle" class="t-b">Metabolic acidosis</text>
+            <text x="30" y="70" class="t-sm">HCO3</text>
+            <line x1="80" y1="52" x2="80" y2="84" class="fg-arrow-bad" marker-end="url(#N1e)"/>
+            <text x="95" y="72" class="t-sm t-bad">primary</text>
+            <text x="170" y="70" class="t-sm">pCO2</text>
+            <line x1="215" y1="52" x2="215" y2="84" class="fg-arrow-acc" marker-end="url(#N1f)"/>
+            <text x="230" y="64" class="t-sm t-acc">lung</text>
+            <text x="230" y="80" class="t-sm t-acc">hyperventilates</text>
+            <rect x="10" y="115" width="310" height="95" rx="10" class="fg-box"/>
+            <text x="165" y="135" text-anchor="middle" class="t-b">Respiratory acidosis</text>
+            <text x="30" y="175" class="t-sm">pCO2</text>
+            <line x1="80" y1="189" x2="80" y2="157" class="fg-arrow-bad" marker-end="url(#N1e)"/>
+            <text x="95" y="177" class="t-sm t-bad">primary</text>
+            <text x="170" y="175" class="t-sm">HCO3</text>
+            <line x1="215" y1="189" x2="215" y2="157" class="fg-arrow-acc" marker-end="url(#N1f)"/>
+            <text x="230" y="169" class="t-sm t-acc">kidney</text>
+            <text x="230" y="185" class="t-sm t-acc">keeps HCO3</text>
+          </svg>
       - kind: table
         page: 13
         quote: "Table 4.1: Primary acid–base disturbances and their secondary response\n| Acid–base disorder | pH | Primary change | Secondary change | Mechanism of secondary change |\n| Metabolic acidosis | <7.40 | ↓ HCO3− | ↓ pCO2 | Hyperventilation |\n| Metabolic alkalosis | >7.40 | ↑ HCO3− | ↑ pCO2 | Hypoventilation |\n| Respiratory acidosis | <7.40 | ↑ pCO2 | ↑ HCO3− | ↑ HCO3− reabsorption |\n| Respiratory alkalosis | >7.40 | ↓ pCO2 | ↓ HCO3− | ↓ HCO3− reabsorption |"
@@ -483,6 +750,19 @@ lessons:
         tone: analogy
         text: "الـ compensation زي الفرامل، مش زي الريوس: بتهدّي العربية ناحية الطبيعي، عمرها ما ترجّعك لورا. لو لقيت الـ pH **عدّى** الطبيعي للناحية التانية، يبقى فيه disorder تاني."
       - kind: explain
+        page: 13
+        quote: "In a respiratory acid–base disorder, the compensatory response is renal."
+        title: "ليه acute و chronic أرقامهم مختلفة؟"
+        text: |
+          في الـ **metabolic** disorders الكتاب بيدّي معادلة للـ pCO2، لأن الرئة بتستجيب في دقايق.
+
+          في الـ **respiratory** disorders الكلية هي اللي بتعوّض، والكلية **بطيئة**. التفسير المقبول (مش في الكتاب): بتاخد حوالي 3–5 أيام علشان تزوّد إفراز الحمض وتصنيع الـ HCO3.
+
+          - **Acute** (ساعات): الكلية لسه ما اشتغلتش. الـ HCO3 بيتحرك شوية بس من الـ buffers جوه الجسم: **1 لكل 10** في الـ acidosis و **2 لكل 10** في الـ alkalosis.
+          - **Chronic** (أيام): الكلية اشتغلت، فالحركة أكبر: **3.5 لكل 10** في الـ acidosis و **4–5 لكل 10** في الـ alkalosis.
+
+          علشان كده ==HCO3== عالي جدًا مع pCO2 عالي في مريض COPD مش غريب: ده ==chronic== compensation.
+      - kind: explain
         page: 14
         quote: "Compensation rules for\n| Disorder | Expected | Calculation |\n| Metabolic acidosis | PCO2 | 1.5 X [HCO3] + 8 (+/- 2) |\n| Metabolic alkalosis | PCO2 | 0.7 X [HCO3] + 20 (+/- 5) |\n| Respiratory acidosis, Acute | HCO3 | 24 + (pCO2 – 40)/10 X 1 |\n| Respiratory acidosis, Chronic | HCO3 | 24 + (pCO2 – 40)/10 X 4 |\n| Respiratory alkalosis, Acute | HCO3 | 24 - (40 - pCO2)/10 X 2 |\n| Respiratory alkalosis, Chronic | HCO3 | 24 – (40 – pCO2)/10 X 5 |"
         title: "الأرقام اللي لازم تتحفظ"
@@ -492,7 +772,7 @@ lessons:
           - **Metabolic acidosis: pCO2 = 1.5 × HCO3 + 8 (± 2)** (Winter)
           - **Metabolic alkalosis: pCO2 = 0.7 × HCO3 + 20 (± 5)**
 
-          **Respiratory** (الكلية بتعوّض، لكل 10 mmHg تغيير في الـ pCO2):
+          **Respiratory** (الكلية بتعوّض، لكل 10 mmHg تغيير في الـ pCO2؛ والـ chronic أكبر لأن الكلية بتاخد أيام):
 
           - **Acidosis: HCO3 ↑ 1 acute, ↑ 3.5 chronic** (ص 14 بتقرّبها × 4)
           - **Alkalosis: HCO3 ↓ 2 acute, ↓ 4–5 chronic** (ص 14 × 5)
@@ -511,6 +791,11 @@ lessons:
           - ["Respiratory acidosis, HCO3 below expected", "Added metabolic acidosis"]
           - ["Respiratory acidosis, HCO3 above expected", "Added metabolic alkalosis"]
         why: "القاعدة: الرقم اللي **مقصّر** أو **زايد** عن المتوقع بيكشف disorder من النوع التاني في نفس الاتجاه بتاعه."
+      - kind: reveal
+        page: 14
+        quote: "Compensation rules for\n| Disorder | Expected | Calculation |\n| Metabolic acidosis | PCO2 | 1.5 X [HCO3] + 8 (+/- 2) |\n| Metabolic alkalosis | PCO2 | 0.7 X [HCO3] + 20 (+/- 5) |\n| Respiratory acidosis, Acute | HCO3 | 24 + (pCO2 – 40)/10 X 1 |\n| Respiratory acidosis, Chronic | HCO3 | 24 + (pCO2 – 40)/10 X 4 |\n| Respiratory alkalosis, Acute | HCO3 | 24 - (40 - pCO2)/10 X 2 |\n| Respiratory alkalosis, Chronic | HCO3 | 24 – (40 – pCO2)/10 X 5 |"
+        prompt: "مريض COPD مستقر، pCO2 60. الـ HCO3 المتوقع كام بمعادلة ص 14؟ ولو طلع 26 معناه إيه؟"
+        answer: "24 + (60 − 40)/10 × 4 = 24 + 8 = **32**. لو طلع **26** يبقى الـ HCO3 أقل من المتوقع، يعني فيه **metabolic acidosis** كمان راكبة على الـ respiratory acidosis."
       - kind: check
         page: 14
         quote: "Compensation rules for\n| Disorder | Expected | Calculation |\n| Metabolic acidosis | PCO2 | 1.5 X [HCO3] + 8 (+/- 2) |\n| Metabolic alkalosis | PCO2 | 0.7 X [HCO3] + 20 (+/- 5) |\n| Respiratory acidosis, Acute | HCO3 | 24 + (pCO2 – 40)/10 X 1 |\n| Respiratory acidosis, Chronic | HCO3 | 24 + (pCO2 – 40)/10 X 4 |\n| Respiratory alkalosis, Acute | HCO3 | 24 - (40 - pCO2)/10 X 2 |\n| Respiratory alkalosis, Chronic | HCO3 | 24 – (40 – pCO2)/10 X 5 |"
@@ -526,25 +811,41 @@ lessons:
           - "15 مش جوه 21–25."
           - "ده لو الـ pCO2 أعلى من 25."
           - "الـ pCO2 هو اللي بيحكم على الجزء التنفسي هنا."
+      - kind: check
+        page: 13
+        quote: "It should be pointed out that these compensatory mechanisms do not increase the pH to normal but rather return the pH to normal."
+        question: "Acute hyperventilation drops pCO2 from 40 to 30 mmHg. Expected HCO3?"
+        options:
+          - "About 22 mEq/L"
+          - "About 24 mEq/L"
+          - "About 19 mEq/L"
+          - "About 28 mEq/L"
+        answer: 0
+        why:
+          - "صح: الـ acute respiratory alkalosis = الـ HCO3 بيقل **2 لكل 10**، يعني 24 − 2 = 22."
+          - "ده لو مفيش compensation خالص."
+          - "ده أقرب للـ chronic (4–5 لكل 10)."
+          - "الـ HCO3 بينزل في الـ alkalosis، مش بيطلع."
       - kind: try
-        items: [neph.L01.060, neph.L01.062, neph.L01.070, neph.L01.072, neph.L01.076]
+        items: [neph.L01.070, neph.L01.072, neph.L01.076, neph.L01.064]
     recap:
-      - "Delta ratio = (AG − 12)/(24 − HCO3)."
-      - "< 0.4 normal AG؛ 0.4–0.8 mixed؛ 0.8–2 pure high AG؛ > 2 + metabolic alkalosis."
       - "Metabolic ← الرئة؛ respiratory ← الكلية؛ الـ compensation عمرها ما تعدّي الطبيعي."
+      - "الـ compensation في نفس اتجاه الـ primary."
       - "Winter: 1.5 × HCO3 + 8 ± 2؛ alkalosis: 0.7 × HCO3 + 20 ± 5."
       - "Resp acidosis 1 / 3.5 لكل 10؛ resp alkalosis 2 / 4–5 لكل 10."
-    practice: [neph.L01.053, neph.L01.054, neph.L01.055, neph.L01.056, neph.L01.057, neph.L01.058, neph.L01.059, neph.L01.060, neph.L01.061, neph.L01.062, neph.L01.063, neph.L01.064, neph.L01.065, neph.L01.066, neph.L01.067, neph.L01.068, neph.L01.069, neph.L01.070, neph.L01.071, neph.L01.072, neph.L01.073, neph.L01.074, neph.L01.075, neph.L01.076, neph.L01.077, neph.L01.078, neph.L01.079, neph.L01.080, neph.L01.131, neph.L01.132, neph.L01.133, neph.L01.134, neph.L01.135, neph.L01.136, neph.L01.137, neph.L01.148, neph.L01.152, neph.L01.155, neph.L01.156, neph.L01.157, neph.L01.158, neph.L01.159, neph.L01.160]
+      - "الرقم المقصّر أو الزايد عن المتوقع = disorder تاني."
+    practice: [neph.L01.064, neph.L01.065, neph.L01.066, neph.L01.067, neph.L01.068, neph.L01.069, neph.L01.070, neph.L01.071, neph.L01.072, neph.L01.073, neph.L01.074, neph.L01.075, neph.L01.076, neph.L01.077, neph.L01.078, neph.L01.079, neph.L01.080, neph.L01.134, neph.L01.135, neph.L01.136, neph.L01.137, neph.L01.148, neph.L01.152, neph.L01.158, neph.L01.159, neph.L01.160]
   # ------------------------------------------------------------------
   - id: neph.L01.lesson4
     title: "الـ ABG في 7 خطوات"
     hook: "نفس الخطوات كل مرة، بنفس الترتيب. كده عمرك ما تنسى disorder."
-    minutes: 8
+    minutes: 9
     pages: [14, 20]
     topics: [algorithm]
     goals:
       - "تمشي على الـ 7 خطوات من غير ما تنسى واحدة"
-      - "تستخدم الجدول والـ algorithm"
+      - "تستخدم الجدول والـ algorithm وتعرف حدوده"
+      - "تحسب الـ A–a gradient"
     status: unverified
     steps:
       - kind: order
@@ -560,6 +861,40 @@ lessons:
           - "Delta gap (if AG high)"
           - "Differential diagnosis"
         why: "Henderson الأول (valid؟)، بعدين ROME، بعدين compensation، والـ anion gap (AG) والـ delta للـ metabolic acidosis بس، وفي الآخر الأسباب."
+      - kind: table
+        page: 14
+        quote: "Arterial Blood Gas Analysis\n| ABG Parameter | | |\n| pH | >7.45 | Alkalaemia |\n| | 7.36-44 | Normal |\n| | <7.35 | Acidaemia |\n| pCO2 | >45 | High |\n| | 35-45 | Normal |\n| | <35 | Low |\n| HCO3 | >26 | High |\n| | 24+/- 2 | Normal |\n| | <22 | Low |\n| AG | > 16 | High |\n| | 12+/-4 | Normal |\n| | < 8 | Low |\n| Glucose | >10 | High |\n| | < 2 | Low |\n| Gap: Gap | ΔAG / ΔHCO3 = (AG - 12) / (24 - HCO3) | |\n| Lactate | <1.9 | Normal |\n| | >2.0 | High |\n| pO2 | 80-100 | Normal |\n| | < 80 | Hypoxia |"
+        title: "جدول الـ ABG (ص 14)"
+        columns: [Parameter, High, Low]
+        rows:
+          - ["pH", "> 7.45", "< 7.35"]
+          - ["pCO2", "> 45", "< 35"]
+          - ["HCO3", "> 26", "< 22"]
+          - ["Anion gap", "> 16", "< 8"]
+          - ["Lactate", "> 2.0", "normal < 1.9"]
+          - ["pO2", "normal 80–100", "< 80 hypoxia"]
+        hide: [[2, 1], [3, 1], [3, 2], [4, 1]]
+      - kind: aside
+        page: 14
+        quote: "Corrected standard AG for albumin: Albumin/4 + 1.5 x Phosphate\nAnion Gap calculation: {[Na+] - [Cl− + HCO3]} = 12+/-4\nCorrected Na+ for AG in hyperglycemia: Corrected Na+ = Na + (Glucose – 5)/3\nPAO2 = [713 x FiO2] – [pCO2 x 1.25]\nA-a gradient = PAO2 – PaO2 = Age/4 + 4"
+        tone: trap
+        text: "جدول الـ arterial blood gas (ABG) في ص 14 فيه معادلة **corrected Na+ = Na + (glucose − 5)/3** (glucose بالـ mmol/L). الكلام في ص 8 واضح: الـ AG بالـ **measured Na**. لو السؤال قال \"calculate the AG\" استخدم الـ measured."
+      - kind: explain
+        page: 14
+        quote: "Corrected standard AG for albumin: Albumin/4 + 1.5 x Phosphate\nAnion Gap calculation: {[Na+] - [Cl− + HCO3]} = 12+/-4\nCorrected Na+ for AG in hyperglycemia: Corrected Na+ = Na + (Glucose – 5)/3\nPAO2 = [713 x FiO2] – [pCO2 x 1.25]\nA-a gradient = PAO2 – PaO2 = Age/4 + 4"
+        title: "وكمان الأكسجين"
+        text: |
+          الجدول بيضيف الـ ==A–a gradient== للـ hypoxia:
+
+          - **alveolar partial pressure of oxygen (PAO2) = (713 × fraction of inspired oxygen (FiO2)) − (pCO2 × 1.25)**
+          - **A–a gradient = PAO2 − arterial partial pressure of oxygen (PaO2)**، والمتوقع حوالي **age/4 + 4**
+
+          لو الـ gradient أعلى من المتوقع، المشكلة في الرئة نفسها مش بس في التهوية، لأن الـ hypoventilation لوحدها بتنزّل الـ PAO2 والـ PaO2 مع بعض والفرق بينهم يفضل طبيعي (التفسير المقبول، مش في الكتاب).
+      - kind: reveal
+        page: 14
+        quote: "Corrected standard AG for albumin: Albumin/4 + 1.5 x Phosphate\nAnion Gap calculation: {[Na+] - [Cl− + HCO3]} = 12+/-4\nCorrected Na+ for AG in hyperglycemia: Corrected Na+ = Na + (Glucose – 5)/3\nPAO2 = [713 x FiO2] – [pCO2 x 1.25]\nA-a gradient = PAO2 – PaO2 = Age/4 + 4"
+        prompt: "مريض 40 سنة على room air (FiO2 0.21): PaCO2 40، PaO2 60. الـ A–a gradient كام؟ طبيعي؟"
+        answer: "PAO2 = 713 × 0.21 − 40 × 1.25 = 150 − 50 = **100**. الـ gradient = 100 − 60 = **40**. المتوقع 40/4 + 4 = **14**، فده **عالي**: مشكلة رئوية (V/Q أو shunt)."
       - kind: figure
         page: 15
         quote: "Arterial blood gas analysis\n  pH < 7.35: Acidosis\n    PaCO2 > 45 mmHg: Respiratory acidosis\n      Additional ↑ HCO3−: Metabolic compensation\n    PaCO2 ≤ 45 mmHg (or ↓ HCO3−): Metabolic acidosis\n      Additional ↓ PaCO2: Respiratory compensation\n      Check anion gap: Na+ − (Cl− + HCO3−)\n        ↑ Anion gap > 12 mEq/L: MUDPILES\n          Methanol (formid acid)\n          Uremia\n          Diabetic ketoacidosis\n          Propylene glycol\n          Iron tablets/Isoniazid\n          Lactic acidosis\n          Ethylene glycol (oxalic acid)\n          Salicylates (late)\n        Normal anion gap ~ 6–12 mEq/L: HARD-ASS\n          Hyperalimentation\n          Addison disease\n          Renal tubular acidosis\n          Diarrhea\n          Acetazolamide\n          Spironolactone\n          Saline infusion\n  pH > 7.45: Alkalosis\n    PaCO2 < 32 mmHg: Respiratory alkalosis\n      Additional ↓ HCO3−: Metabolic compensation\n    PaCO2 ≥ 32 mmHg (or ↑ HCO3−): Metabolic alkalosis\n      Additional ↑ PaCO2: Respiratory compensation"
@@ -613,40 +948,50 @@ lessons:
             <text x="230" y="274" text-anchor="middle" class="t-sm">AG about 6-12</text>
             <text x="230" y="296" text-anchor="middle" class="t-b">HARD-ASS</text>
           </svg>
+      - kind: explain
+        page: 15
+        quote: "Arterial blood gas analysis\n  pH < 7.35: Acidosis\n    PaCO2 > 45 mmHg: Respiratory acidosis\n      Additional ↑ HCO3−: Metabolic compensation\n    PaCO2 ≤ 45 mmHg (or ↓ HCO3−): Metabolic acidosis\n      Additional ↓ PaCO2: Respiratory compensation\n      Check anion gap: Na+ − (Cl− + HCO3−)\n        ↑ Anion gap > 12 mEq/L: MUDPILES\n          Methanol (formid acid)\n          Uremia\n          Diabetic ketoacidosis\n          Propylene glycol\n          Iron tablets/Isoniazid\n          Lactic acidosis\n          Ethylene glycol (oxalic acid)\n          Salicylates (late)\n        Normal anion gap ~ 6–12 mEq/L: HARD-ASS\n          Hyperalimentation\n          Addison disease\n          Renal tubular acidosis\n          Diarrhea\n          Acetazolamide\n          Spironolactone\n          Saline infusion\n  pH > 7.45: Alkalosis\n    PaCO2 < 32 mmHg: Respiratory alkalosis\n      Additional ↓ HCO3−: Metabolic compensation\n    PaCO2 ≥ 32 mmHg (or ↑ HCO3−): Metabolic alkalosis\n      Additional ↑ PaCO2: Respiratory compensation"
+        title: "ليه الـ algorithm بيبدأ بالـ pH؟"
+        text: |
+          التفسير المقبول (مش في الكتاب) لترتيب الرسمة:
+
+          - الـ **pH الأول** لأنه بيقولك مين **الكسبان**: acidosis ولا alkalosis. الـ compensation عمرها ما بتقلب الـ pH للناحية التانية.
+          - بعدين بتدوّر على الرقم اللي ماشي **مع** الـ pH: لو الـ pH واطي والـ ==PaCO2== عالي، الرئة هي السبب. لو الـ pH واطي والـ HCO3 واطي، الـ metabolism هو السبب.
+          - الـ **AG** بييجي بعد الـ metabolic acidosis بس، لأنه بيصنّف أسبابها.
+
+          الرسمة بتدّيك disorder **واحد**. علشان كده الخطوة 4 (الـ compensation) والخطوة 6 (الـ delta) هما اللي بيلقطوا الـ ==mixed== disorders.
       - kind: aside
         page: 15
         quote: "Arterial blood gas analysis\n  pH < 7.35: Acidosis\n    PaCO2 > 45 mmHg: Respiratory acidosis\n      Additional ↑ HCO3−: Metabolic compensation\n    PaCO2 ≤ 45 mmHg (or ↓ HCO3−): Metabolic acidosis\n      Additional ↓ PaCO2: Respiratory compensation\n      Check anion gap: Na+ − (Cl− + HCO3−)\n        ↑ Anion gap > 12 mEq/L: MUDPILES\n          Methanol (formid acid)\n          Uremia\n          Diabetic ketoacidosis\n          Propylene glycol\n          Iron tablets/Isoniazid\n          Lactic acidosis\n          Ethylene glycol (oxalic acid)\n          Salicylates (late)\n        Normal anion gap ~ 6–12 mEq/L: HARD-ASS\n          Hyperalimentation\n          Addison disease\n          Renal tubular acidosis\n          Diarrhea\n          Acetazolamide\n          Spironolactone\n          Saline infusion\n  pH > 7.45: Alkalosis\n    PaCO2 < 32 mmHg: Respiratory alkalosis\n      Additional ↓ HCO3−: Metabolic compensation\n    PaCO2 ≥ 32 mmHg (or ↑ HCO3−): Metabolic alkalosis\n      Additional ↑ PaCO2: Respiratory compensation"
         tone: exam
         text: "الـ algorithm في الكتاب بيقسم الـ alkalosis على PaCO2 **32 mmHg** مش 35. ده رقم الكتاب في الرسمة، فلو اتسأل عن الرسمة دي جاوب بيه."
-      - kind: table
-        page: 14
-        quote: "Arterial Blood Gas Analysis\n| ABG Parameter | | |\n| pH | >7.45 | Alkalaemia |\n| | 7.36-44 | Normal |\n| | <7.35 | Acidaemia |\n| pCO2 | >45 | High |\n| | 35-45 | Normal |\n| | <35 | Low |\n| HCO3 | >26 | High |\n| | 24+/- 2 | Normal |\n| | <22 | Low |\n| AG | > 16 | High |\n| | 12+/-4 | Normal |\n| | < 8 | Low |\n| Glucose | >10 | High |\n| | < 2 | Low |\n| Gap: Gap | ΔAG / ΔHCO3 = (AG - 12) / (24 - HCO3) | |\n| Lactate | <1.9 | Normal |\n| | >2.0 | High |\n| pO2 | 80-100 | Normal |\n| | < 80 | Hypoxia |"
-        title: "جدول الـ ABG (ص 14)"
-        columns: [Parameter, High, Low]
-        rows:
-          - ["pH", "> 7.45", "< 7.35"]
-          - ["pCO2", "> 45", "< 35"]
-          - ["HCO3", "> 26", "< 22"]
-          - ["Anion gap", "> 16", "< 8"]
-          - ["Lactate", "> 2.0", "normal < 1.9"]
-          - ["pO2", "normal 80–100", "< 80 hypoxia"]
-        hide: [[2, 1], [3, 1], [3, 2], [4, 1]]
+      - kind: mnemonic
+        page: 15
+        quote: "Arterial blood gas analysis\n  pH < 7.35: Acidosis\n    PaCO2 > 45 mmHg: Respiratory acidosis\n      Additional ↑ HCO3−: Metabolic compensation\n    PaCO2 ≤ 45 mmHg (or ↓ HCO3−): Metabolic acidosis\n      Additional ↓ PaCO2: Respiratory compensation\n      Check anion gap: Na+ − (Cl− + HCO3−)\n        ↑ Anion gap > 12 mEq/L: MUDPILES\n          Methanol (formid acid)\n          Uremia\n          Diabetic ketoacidosis\n          Propylene glycol\n          Iron tablets/Isoniazid\n          Lactic acidosis\n          Ethylene glycol (oxalic acid)\n          Salicylates (late)\n        Normal anion gap ~ 6–12 mEq/L: HARD-ASS\n          Hyperalimentation\n          Addison disease\n          Renal tubular acidosis\n          Diarrhea\n          Acetazolamide\n          Spironolactone\n          Saline infusion\n  pH > 7.45: Alkalosis\n    PaCO2 < 32 mmHg: Respiratory alkalosis\n      Additional ↓ HCO3−: Metabolic compensation\n    PaCO2 ≥ 32 mmHg (or ↑ HCO3−): Metabolic alkalosis\n      Additional ↑ PaCO2: Respiratory compensation"
+        word: "HARD-ASS"
+        parts:
+          - { key: "H", text: "Hyperalimentation" }
+          - { key: "A", text: "Addison disease" }
+          - { key: "R", text: "Renal tubular acidosis" }
+          - { key: "D", text: "Diarrhea" }
+          - { key: "A", text: "Acetazolamide" }
+          - { key: "S", text: "Spironolactone" }
+          - { key: "S", text: "Saline infusion" }
+        hook: "الـ normal AG \"دماغه ناشفة\": الـ gap مش بيتحرك، والـ Cl هو اللي بيعلى. 😄"
       - kind: explain
-        page: 14
-        quote: "Corrected standard AG for albumin: Albumin/4 + 1.5 x Phosphate\nAnion Gap calculation: {[Na+] - [Cl− + HCO3]} = 12+/-4\nCorrected Na+ for AG in hyperglycemia: Corrected Na+ = Na + (Glucose – 5)/3\nPAO2 = [713 x FiO2] – [pCO2 x 1.25]\nA-a gradient = PAO2 – PaO2 = Age/4 + 4"
-        title: "وكمان الأكسجين"
+        page: 15
+        quote: "Arterial blood gas analysis\n  pH < 7.35: Acidosis\n    PaCO2 > 45 mmHg: Respiratory acidosis\n      Additional ↑ HCO3−: Metabolic compensation\n    PaCO2 ≤ 45 mmHg (or ↓ HCO3−): Metabolic acidosis\n      Additional ↓ PaCO2: Respiratory compensation\n      Check anion gap: Na+ − (Cl− + HCO3−)\n        ↑ Anion gap > 12 mEq/L: MUDPILES\n          Methanol (formid acid)\n          Uremia\n          Diabetic ketoacidosis\n          Propylene glycol\n          Iron tablets/Isoniazid\n          Lactic acidosis\n          Ethylene glycol (oxalic acid)\n          Salicylates (late)\n        Normal anion gap ~ 6–12 mEq/L: HARD-ASS\n          Hyperalimentation\n          Addison disease\n          Renal tubular acidosis\n          Diarrhea\n          Acetazolamide\n          Spironolactone\n          Saline infusion\n  pH > 7.45: Alkalosis\n    PaCO2 < 32 mmHg: Respiratory alkalosis\n      Additional ↓ HCO3−: Metabolic compensation\n    PaCO2 ≥ 32 mmHg (or ↑ HCO3−): Metabolic alkalosis\n      Additional ↑ PaCO2: Respiratory compensation"
+        title: "HARD-ASS: ليه كل حرف بيعمل normal AG؟"
         text: |
-          الجدول بيضيف الـ ==A–a gradient== للـ hypoxia:
+          الحروف من رسمة الكتاب. السبب لكل واحد هو التفسير المقبول (مش في الكتاب)، وأغلبه رجوع لجدول 4.5:
 
-          - **alveolar partial pressure of oxygen (PAO2) = (713 × fraction of inspired oxygen (FiO2)) − (pCO2 × 1.25)**
-          - **A–a gradient = PAO2 − arterial partial pressure of oxygen (PaO2)**، والمتوقع حوالي **age/4 + 4**
+          - **Hyperalimentation**: محاليل الـ amino acids فيها Cl كتير.
+          - **Addison** و **Spironolactone**: من غير ==aldosterone== الـ distal tubule مش بيفرز H+ و K+ كويس (زي الـ type IV RTA).
+          - **RTA** و **Acetazolamide**: الكلية بترمي HCO3 أو مش بتفرز حمض.
+          - **Diarrhea**: الـ HCO3 بيضيع في البراز.
+          - **Saline infusion**: Cl داخل الدم مكان الـ HCO3.
 
-          لو الـ gradient أعلى من المتوقع، المشكلة في الرئة نفسها مش بس في التهوية.
-      - kind: reveal
-        page: 14
-        quote: "Corrected standard AG for albumin: Albumin/4 + 1.5 x Phosphate\nAnion Gap calculation: {[Na+] - [Cl− + HCO3]} = 12+/-4\nCorrected Na+ for AG in hyperglycemia: Corrected Na+ = Na + (Glucose – 5)/3\nPAO2 = [713 x FiO2] – [pCO2 x 1.25]\nA-a gradient = PAO2 – PaO2 = Age/4 + 4"
-        prompt: "مريض 40 سنة على room air (FiO2 0.21): PaCO2 40، PaO2 60. الـ A–a gradient كام؟ طبيعي؟"
-        answer: "PAO2 = 713 × 0.21 − 40 × 1.25 = 150 − 50 = **100**. الـ gradient = 100 − 60 = **40**. المتوقع 40/4 + 4 = **14**، فده **عالي**: مشكلة رئوية (V/Q أو shunt)."
+          يعني القاسم المشترك: مفيش أنيون جديد، والـ Cl هو اللي بيطلع.
       - kind: case
         page: 20
         quote: "Steps for ABG analysis:\n1. Check for validity\n2. What is the pH? Acidemia or Alkalemia?\n3. What is the primary disorder present Respiratory or Metabolic?\n4. Is there appropriate compensation?\n5. Calculate the anion gap (if a metabolic acidosis exists)\n6. If there is an increased AG check the delta gap.\n7. What is the differential for the clinical processes."
@@ -668,25 +1013,41 @@ lessons:
             options: ["AG 28, delta 16/14 ≈ 1.1: pure high AG", "AG 10: normal AG", "AG 28, delta 0.5: mixed", "AG 28, delta 3: with alkalosis"]
             answer: 0
             why: "140 − 112 = **28**؛ (28 − 12)/(24 − 10) = 16/14 ≈ **1.1**: pure high AG (lactic)."
+      - kind: check
+        page: 20
+        quote: "5. Calculate the anion gap (if a metabolic acidosis exists)"
+        question: "In the book's seven steps, when do you calculate the anion gap?"
+        options:
+          - "Only if a metabolic acidosis exists"
+          - "Before checking validity"
+          - "Only in respiratory disorders"
+          - "Only when the pH is normal"
+        answer: 0
+        why:
+          - "صح: الخطوة 5، وبعدها الـ delta لو الـ AG عالي."
+          - "الـ validity (Henderson) هي الخطوة الأولى دايمًا."
+          - "الـ AG أداة للـ metabolic acidosis."
+          - "الكتاب ربطه بوجود metabolic acidosis، مش بالـ pH."
       - kind: try
-        items: [neph.L01.081, neph.L01.086, neph.L01.090, neph.L01.149]
+        items: [neph.L01.081, neph.L01.086, neph.L01.090, neph.L01.082]
     recap:
       - "7 خطوات: validity، pH، primary، compensation، AG، delta، differential."
+      - "الـ pH بيقولك الكسبان؛ الرقم اللي ماشي معاه هو السبب."
       - "الـ algorithm: acidosis CO2 > 45 respiratory؛ alkalosis CO2 < 32 respiratory."
       - "AG > 12 MUDPILES؛ ~6–12 HARD-ASS."
       - "PAO2 = 713 × FiO2 − pCO2 × 1.25؛ A–a المتوقع ≈ age/4 + 4."
-    practice: [neph.L01.081, neph.L01.082, neph.L01.083, neph.L01.084, neph.L01.086, neph.L01.087, neph.L01.088, neph.L01.089, neph.L01.090, neph.L01.091, neph.L01.092, neph.L01.149]
+    practice: [neph.L01.081, neph.L01.082, neph.L01.083, neph.L01.084, neph.L01.085, neph.L01.086, neph.L01.087, neph.L01.088, neph.L01.089, neph.L01.090, neph.L01.091, neph.L01.092, neph.L01.149, neph.L01.153, neph.L01.154]
   # ------------------------------------------------------------------
   - id: neph.L01.lesson5
-    title: "Metabolic alkalosis والأسباب التنفسية"
-    hook: "تحليل بول واحد (urine Cl) بيقسم أسباب الـ alkalosis نصين. وبعده الضغط والـ renin يكمّلوا."
+    title: "Metabolic alkalosis: الـ urine Cl بيقسمها نصين"
+    hook: "تحليل بول واحد (urine Cl) بيقسم أسباب الـ alkalosis نصين. وبعده الـ K والضغط والـ renin يكمّلوا."
     minutes: 9
-    pages: [16, 19]
-    topics: [met-alkalosis, resp-acidosis, resp-alkalosis]
+    pages: [16, 17]
+    topics: [met-alkalosis]
     goals:
-      - "تقسم الـ metabolic alkalosis لـ chloride-responsive و resistant"
+      - "تقسم الـ metabolic alkalosis لـ chloride-responsive و resistant وتعرف ليه"
       - "تمشي على الـ urine Cl algorithm"
-      - "تعرف أسباب الـ respiratory acidosis والـ alkalosis"
+      - "تعرف ليه الأدوية وأسباب الضغط العالي بتعمل alkalosis"
     status: unverified
     steps:
       - kind: explain
@@ -694,10 +1055,44 @@ lessons:
         quote: "Causes of metabolic alkalosis\nChloride-responsive alkalosis\n  Gastrointestinal (GI) and renal-associated\n    Vomiting\n    Nasogastric suction\n    Congenital chloride diarrhea\n    Villous adenoma\n    Posthypercapnia\n    Contraction alkalosis\n    Cystic fibrosis\n    Severe K+ deficiency\n    Milk–alkali syndrome\n    Gastrocystoplasty\n    Zollinger–Ellison syndrome\n  Drug-associated\n    Loop diuretics\n    Thiazide diuretics\n    Poorly reabsorbable anions (carbenicillin, penicillin, phosphate, sulfate)\n    NaHCO3 (baking soda)\n    Sodium citrate, lactate, gluconate, and acetate\n    Antacids\n    Transfusions\nChloride-resistant alkalosis\n  Hypertension-associated\n    Primary aldosteronism\n    11β-hydroxysteroid dehydrogenase type 2 deficiency\n    Licorice, chewing tobacco, and carbenoxolone\n    Fludrocortisone administration\n    Cushing syndrome\n    Glucocorticoid-remediable aldosteronism\n    Hyperreninism and hyperaldosteronism (malignant and renovascular hypertension, renin-secreting tumors)\n    Liddle syndrome\n  Normotension-associated\n    Bartter syndrome\n    Gitelman syndrome\n  Others\n    Hypercalcemia\n    Hypoparathyroidism\n    Post-feeding alkalosis"
         title: "نصين"
         text: |
-          الـ ==metabolic alkalosis== في الكتاب نوعين:
+          الـ ==metabolic alkalosis== في الكتاب نوعين، والفرق بينهم هو السبب اللي مخلّي الكلية ماسكة الـ HCO3:
 
           - **Chloride-responsive**: gastrointestinal (GI) و renal (vomiting، nasogastric (NG) suction، villous adenoma، congenital chloride diarrhea، posthypercapnia، contraction alkalosis، cystic fibrosis...) وأدوية (loop و thiazide diuretics، NaHCO3، citrate، antacids، transfusions).
           - **Chloride-resistant**: مع **high blood pressure (BP)** (primary aldosteronism، Cushing، licorice، Liddle، 11β-HSD2 deficiency...) أو **normal BP** (Bartter و Gitelman) أو غيرهم (hypercalcemia، hypoparathyroidism، post-feeding).
+      - kind: explain
+        page: 16
+        quote: "Chloride-responsive alkalosis"
+        title: "ليه اسمه chloride-responsive؟"
+        text: |
+          التقسيم من الكتاب. والتفسير المقبول (مش في الكتاب):
+
+          - في الـ **chloride-responsive** المريض فقد **Cl وسوايل** (ترجيع، NG suction، diuretics). الكلية عايزة تمسك Na علشان الـ volume، ومفيش Cl كفاية يمشي معاه، فبتمسك ==HCO3== مكانه. النتيجة: alkalosis تفضل مستمرة، و ==urine Cl== واطي لأن الكلية ماسكة كل ذرة Cl.
+          - لما تدّيه **normal saline**، الـ Cl يرجع، فالكلية تقدر ترمي الـ HCO3 الزيادة، والـ alkalosis تتصلح. علشان كده "responsive".
+          - في الـ **chloride-resistant** المشكلة مش نقص Cl: فيه mineralocorticoid (أو حاجة شبهه) بيخلّي الـ distal tubule يرمي H+ و K+ غصب عنه. الـ saline مش هيوقف ده، والـ urine Cl عالي.
+      - kind: explain
+        page: 16
+        quote: "Poorly reabsorbable anions"
+        title: "الأدوية: ليه بتعمل alkalosis؟"
+        text: |
+          الكتاب بيعدّها. التفسير المقبول (مش في الكتاب):
+
+          - **Loop و thiazide diuretics**: بيرموا Na و Cl، فالـ volume يقل والـ aldosterone يعلى، والـ aldosterone بيرمي H+ و K+.
+          - **Poorly reabsorbable anions** (carbenicillin، penicillin، phosphate، sulfate): أنيونات بتفضل في البول ومش بترجع، فبتشد H+ و K+ معاها لبرّه.
+          - **NaHCO3، citrate، lactate، gluconate، acetate**: إما HCO3 جاهز، أو أنيونات الكبد بيحوّلها HCO3. والـ **transfusions** فيها citrate، والـ **antacids** قلويات.
+
+          يعني يا قلوي داخل، يا حمض خارج.
+      - kind: explain
+        page: 16
+        quote: "Hypertension-associated"
+        title: "الضغط العالي: كلهم بيقلّدوا الـ aldosterone"
+        text: |
+          أسباب الـ chloride-resistant مع **ضغط عالي** (hypertension-associated) في الكتاب ليها نفس الطريقة: حاجة بتشغّل الـ **mineralocorticoid receptor** أو الـ ==ENaC== في الـ distal tubule. يمسك Na (والضغط يعلى) ويرمي H+ و K+ (فتيجي alkalosis و hypokalemia). التفسير المقبول (مش في الكتاب) لكل واحد:
+
+          - **Primary aldosteronism** و **fludrocortisone**: aldosterone أو شبهه، من غير ما الـ renin يطلبه.
+          - **11β-hydroxysteroid dehydrogenase type 2 deficiency** و **licorice** و **carbenoxolone**: الإنزيم ده بيحمي الـ receptor من الـ cortisol. لما يقف، الـ cortisol نفسه يشتغل aldosterone.
+          - **Cushing**: cortisol كتير يغرق الإنزيم.
+          - **Liddle**: الـ ENaC نفسه مفتوح على طول.
+          - **Renovascular** و **malignant HTN** و **renin-secreting tumors**: الـ renin عالي، فالـ aldosterone يعلى وراه.
       - kind: figure
         page: 17
         quote: "Urine Cl−\n  <10-20 mEq\n    Vomiting (common)\n    Chloruretic diuretics (common)\n    Villous adenoma (rare)\n    Cystic fibrosis (rare)\n    Exogenous alkali ingestion (common)\n    Posthypercapnia\n  >10-20 mEq\n    Urine K+\n      <20 mEq\n        Laxative abuse\n        Severe K depletion\n      >20 mEq\n        Check BP\n          Low\n            Bartier syndrome\n            Gitelman syndrome\n            Urine Ca+\n              Low (Gitleman syndrome)\n              High (Bartter syndrome)\n          High\n            Plasma renin\n              Low\n                1° aldosteronism\n                Licorice ingestion\n                Liddle syndrome\n              High\n                Renovascular HTN\n                Malignant HTN\n                Cushing syndrome"
@@ -757,6 +1152,15 @@ lessons:
             <text x="192" y="379" class="t-sm">malignant HTN, Cushing</text>
             <line x1="255" y1="259" x2="255" y2="283" class="fg-arrow" marker-end="url(#N1d)"/>
           </svg>
+      - kind: explain
+        page: 17
+        quote: "Laxative abuse"
+        title: "ليه الـ urine K بيفرق؟"
+        text: |
+          لو الـ urine Cl عالي، الرسمة بتبص على الـ **urine K**. التفسير المقبول (مش في الكتاب):
+
+          - **Urine K < 20**: الكلية **ماسكة** البوتاسيوم، يعني الكلية سليمة والـ K ضاع من بره: ==laxative abuse==، أو **severe K depletion** لدرجة إن الكلية بتلم كل اللي تقدر عليه.
+          - **Urine K > 20**: الكلية هي اللي **بترمي** الـ K. يا tubulopathy (Bartter و Gitelman، والضغط مش عالي)، يا mineralocorticoid زيادة (والضغط عالي). وهنا الـ **renin** يفرق: واطي لو المصدر مستقل، عالي لو الكلية نفسها شايفة ضغط واطي.
       - kind: aside
         page: 17
         quote: "Urine Cl−\n  <10-20 mEq\n    Vomiting (common)\n    Chloruretic diuretics (common)\n    Villous adenoma (rare)\n    Cystic fibrosis (rare)\n    Exogenous alkali ingestion (common)\n    Posthypercapnia\n  >10-20 mEq\n    Urine K+\n      <20 mEq\n        Laxative abuse\n        Severe K depletion\n      >20 mEq\n        Check BP\n          Low\n            Bartier syndrome\n            Gitelman syndrome\n            Urine Ca+\n              Low (Gitleman syndrome)\n              High (Bartter syndrome)\n          High\n            Plasma renin\n              Low\n                1° aldosteronism\n                Licorice ingestion\n                Liddle syndrome\n              High\n                Renovascular HTN\n                Malignant HTN\n                Cushing syndrome"
@@ -790,12 +1194,78 @@ lessons:
           - { text: "Malignant HTN", bin: 1 }
           - { text: "Cushing syndrome", bin: 1 }
         why: "الـ low renin: الـ mineralocorticoid (أو الـ channel في Liddle) شغال لوحده والـ renin مكبوت. الـ high renin: الكلية نفسها شايفة ضغط واطي (renovascular) فبتعلّي الـ renin. والكتاب حاطط Cushing في الـ high."
+      - kind: check
+        page: 17
+        quote: "High (Bartter syndrome)"
+        question: "Metabolic alkalosis, high urine Cl and K, normal blood pressure, high urine calcium. Most likely?"
+        options:
+          - "Bartter syndrome"
+          - "Gitelman syndrome"
+          - "Liddle syndrome"
+          - "Laxative abuse"
+        answer: 0
+        why:
+          - "صح: الضغط مش عالي، والـ urine Ca **عالي** = Bartter (زي الـ loop diuretic)."
+          - "Gitelman الـ urine Ca فيه **واطي** (زي الـ thiazide)."
+          - "Liddle بيعمل ضغط عالي."
+          - "الـ laxatives بتعمل urine K **أقل** من 20."
+      - kind: try
+        items: [neph.L01.093, neph.L01.099, neph.L01.100, neph.L01.094]
+    recap:
+      - "Chloride-responsive: Cl وسوايل ضاعوا، الـ urine Cl واطي، والـ saline بيصلّح."
+      - "Chloride-resistant: mineralocorticoid أو شبهه، الـ urine Cl عالي."
+      - "Urine K < 20: laxatives أو severe K depletion."
+      - "BP مش عالي: Gitelman (urine Ca واطي) أو Bartter (عالي)."
+      - "BP عالي: renin واطي (1° aldo، licorice، Liddle) أو عالي (renovascular، malignant، Cushing)."
+    practice: [neph.L01.093, neph.L01.094, neph.L01.095, neph.L01.096, neph.L01.097, neph.L01.098, neph.L01.099, neph.L01.100, neph.L01.101, neph.L01.138, neph.L01.139, neph.L01.140, neph.L01.151]
+  # ------------------------------------------------------------------
+  - id: neph.L01.lesson9
+    title: "الأسباب التنفسية: الـ CO2 محبوس ولا بيطير؟"
+    hook: "أربع محطات بين المخ والرئة. أي محطة تقف = acidosis. أي حد يزق المركز = alkalosis."
+    minutes: 8
+    pages: [18, 19]
+    topics: [resp-acidosis, resp-alkalosis]
+    goals:
+      - "تعرف أسباب الـ respiratory acidosis على المحطات الأربعة"
+      - "تعرف أشهر سبب للـ chronic"
+      - "تفهم ليه أسباب الـ respiratory alkalosis بتزق المركز"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 18
+        quote: "Depression of medullary respiratory center"
+        title: "الـ CO2 بيطلع إزاي؟ أربع محطات"
+        alt: "A chain of four boxes from left to right: medullary respiratory centre, respiratory muscles and chest wall, airway, lung and pleura (ventilation). A failure at any box retains CO2 and causes respiratory acidosis; overdriving the centre causes respiratory alkalosis."
+        caption: "أي محطة تقف = ==CO2== يتحجز = respiratory acidosis. ولو حد **زقّ** المركز = respiratory alkalosis."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="N1g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="10" y="20" width="140" height="44" rx="8" class="fg-acc"/>
+            <text x="80" y="38" text-anchor="middle" class="t-sm t-b">1. Medulla</text>
+            <text x="80" y="55" text-anchor="middle" class="t-sm">respiratory centre</text>
+            <rect x="180" y="20" width="140" height="44" rx="8" class="fg-acc"/>
+            <text x="250" y="38" text-anchor="middle" class="t-sm t-b">2. Muscles</text>
+            <text x="250" y="55" text-anchor="middle" class="t-sm">and chest wall</text>
+            <rect x="10" y="100" width="140" height="44" rx="8" class="fg-acc"/>
+            <text x="80" y="118" text-anchor="middle" class="t-sm t-b">3. Airway</text>
+            <text x="80" y="135" text-anchor="middle" class="t-sm">obstruction</text>
+            <rect x="180" y="100" width="140" height="44" rx="8" class="fg-acc"/>
+            <text x="250" y="118" text-anchor="middle" class="t-sm t-b">4. Lung, pleura</text>
+            <text x="250" y="135" text-anchor="middle" class="t-sm">ventilatory defects</text>
+            <line x1="150" y1="42" x2="176" y2="42" class="fg-arrow" marker-end="url(#N1g)"/>
+            <line x1="250" y1="64" x2="90" y2="98" class="fg-arrow" marker-end="url(#N1g)"/>
+            <line x1="150" y1="122" x2="176" y2="122" class="fg-arrow" marker-end="url(#N1g)"/>
+            <text x="165" y="172" text-anchor="middle" class="t-sm t-bad">Any box fails: CO2 retained, respiratory acidosis</text>
+            <text x="165" y="192" text-anchor="middle" class="t-sm t-good">Centre overdriven: respiratory alkalosis</text>
+          </svg>
       - kind: explain
         page: 18
         quote: "Table 32.2: Causes of acute respiratory acidosis\nDepression of medullary respiratory center:\n  Drugs: anesthetics, sedatives, opiates\n  Cerebral trauma or infarct\n  Central sleep apnea\n  Cardiac arrest\nFailure of motor functions of respiratory muscles and chest wall:\n  Drugs: succinylcholine, curare, aminoglycosides\n  High cervical cordotomy\n  Myasthenia crisis\n  Guillain–Barrè syndrome\n  Status epilepticus\n  Tetanus\n  Acute botulism poisoning\n  Familial hypokalemic periodic paralysis\n  Severe hypophosphatemia\nAirway obstruction:\n  Aspiration\n  Laryngospasm\n  Severe bronchospasm\n  Obstructive sleep apnea\nVentilatory defects:\n  Flail chest\n  Pneumothorax\n  Hydrothorax\n  Adult respiratory distress syndrome\n  Acute pulmonary embolism\n  Acute pulmonary edema\n  Severe asthma\n  Severe pneumonia\n  Mechanical ventilation: increased production of CO2 due to high carbohydrate feedings and fixed minute ventilation"
         title: "Respiratory acidosis: 4 أماكن ممكن الهوا يتزنق فيها"
         text: |
-          الـ ==respiratory acidosis== = الـ CO2 مش بيطلع. فكّر في الطريق من المخ للرئة:
+          الـ ==respiratory acidosis== = الـ CO2 مش بيطلع. فكّر في الطريق من المخ للرئة، لأن الـ CO2 مش هيطلع إلا لو كل محطة فيه شغالة:
 
           1. **المركز في الـ medulla**: anesthetics، sedatives، opiates، cerebral trauma أو infarct، central sleep apnea، cardiac arrest.
           2. **العضلات والـ chest wall**: succinylcholine، curare، aminoglycosides، myasthenia crisis، Guillain–Barré، tetanus، botulism، severe hypophosphatemia.
@@ -804,26 +1274,86 @@ lessons:
 
           وعلى الـ ventilator: **أكل carbohydrate كتير** مع minute ventilation ثابتة = CO2 أكتر.
       - kind: explain
+        page: 18
+        quote: "Familial hypokalemic periodic paralysis"
+        title: "الأسباب الغريبة في القايمة"
+        text: |
+          شوية أسباب في جدول الـ acute ممكن تستغربها. التفسير المقبول (مش في الكتاب):
+
+          - **Aminoglycosides**: بتضعف الـ neuromuscular junction، فعضلات التنفس تتعب.
+          - **Familial hypokalemic periodic paralysis** و **severe hypophosphatemia**: العضلة محتاجة K طبيعي علشان تنقبض، ومحتاجة phosphate علشان تعمل ATP. الاتنين لو نقصوا، الـ ==diaphragm== يضعف.
+          - **Status epilepticus** و **tetanus**: العضلات متشنجة ومش بتتنفس صح، وكمان بتطلّع CO2 أكتر.
+          - **Mechanical ventilation مع carbohydrate كتير** (من الكتاب): الكربوهيدرات بتطلّع ==CO2== أكتر من الدهون لنفس الأكسجين، والـ minute ventilation ثابتة، فالـ CO2 الزيادة مالوش مخرج.
+      - kind: check
+        page: 18
+        quote: "Mechanical ventilation: increased production of CO, due to high carbohydrate feedings and fixed minute ventilation"
+        question: "A ventilated patient on fixed minute ventilation develops respiratory acidosis after starting high-carbohydrate feeds. Why?"
+        options:
+          - "More CO2 is produced while ventilation cannot rise"
+          - "Carbohydrates depress the respiratory centre"
+          - "Feeds cause airway obstruction"
+          - "Carbohydrates lower serum bicarbonate"
+        answer: 0
+        why:
+          - "صح: إنتاج CO2 زاد والجهاز مثبّت على نفس الـ ventilation."
+          - "الكتاب مش بيقول كده؛ المشكلة إنتاج مش مركز."
+          - "مفيش obstruction هنا."
+          - "ده يعمل metabolic acidosis، مش respiratory."
+      - kind: explain
         page: 19
         quote: "Depression of medullary respiratory center:\n  Chronic sedative and opiate addiction\n  Brain tumors\n  Primary alveolar hypoventilation\n  Obesity-hypoventilation syndrome\n  Bulbar poliomyelitis\nFailure of motor functions of respiratory muscles and chest wall:\n  Spinal cord injury\n  Multiple sclerosis\n  Muscular dystrophy\n  Amyotrophic lateral sclerosis\n  Myxedema\n  Poliomyelitis\n  Diaphragmatic paralysis\nAirway obstruction:\n  Chronic obstructive pulmonary disease (COPD) (most common cause)\nVentilatory defects:\n  Hydrothorax\n  Fibrothorax\n  Kyphoscoliosis\n  Interstitial lung fibrosis\n  Severe chronic pneumonia\n  Extreme obesity"
         title: "الـ chronic"
         text: |
-          نفس الأربع أماكن، بس أمراض مزمنة:
+          نفس الأربع أماكن، بس أمراض مزمنة، فالكلية لحقت تعوّض، يعني الـ HCO3 بيبقى عالي:
 
           - **المركز**: chronic sedative/opiate addiction، brain tumors، obesity-hypoventilation
           - **العضلات**: spinal cord injury، MS، muscular dystrophy، amyotrophic lateral sclerosis، myxedema، diaphragmatic paralysis
           - **الـ airway**: ==chronic obstructive pulmonary disease (COPD)==، وده **أشهر سبب**
           - **الـ ventilation**: kyphoscoliosis، fibrothorax، interstitial fibrosis، extreme obesity
+      - kind: check
+        page: 19
+        quote: "Chronic obstructive pulmonary disease (COPD) (most"
+        question: "The most common cause of chronic respiratory acidosis in the book is:"
+        options:
+          - "COPD"
+          - "Kyphoscoliosis"
+          - "Obesity-hypoventilation syndrome"
+          - "Myxedema"
+        answer: 0
+        why:
+          - "صح: الكتاب كاتب جنبها most common cause."
+          - "موجودة تحت ventilatory defects، بس مش الأشهر."
+          - "موجودة تحت depression of the respiratory centre."
+          - "موجودة تحت failure of motor functions."
       - kind: explain
         page: 19
         quote: "Table 33.2: Causes of respiratory alkalosis\nDirect stimulation of medullary respiratory center:\n  Voluntary or psychogenic hyperventilation\n  Stroke\n  CNS infection, tumor, or trauma\n  Gram-negative sepsis\n  Liver failure\n  Pregnancy\n  Hypermetabolic state (fever, thyrotoxicosis)\n  Drugs (salicylates, progesterone, nicotine, xanthine derivatives, catecholamines, antipsychotic drug quetiapine)\n  Pain\nHypoxemic stimulation of medullary respiratory center:\n  Pulmonary diseases (pneumonia, asthma, pulmonary edema, pulmonary embolus, interstitial lung disease, high altitude, hypotension, severe anemia)\nMechanical ventilation:\n  High minute ventilation"
         title: "Respiratory alkalosis: حد بيزق المركز"
         text: |
-          هنا العكس: النفس **زيادة**.
+          هنا العكس: النفس **زيادة**، يعني الـ CO2 بيطير أسرع ما الجسم بيعمله.
 
           - **Direct stimulation** للمركز: anxiety (psychogenic)، stroke، central nervous system (CNS) infection أو tumor، ==Gram-negative sepsis==، **liver failure**، **pregnancy** (progesterone)، fever، thyrotoxicosis، وأدوية (salicylates، progesterone، nicotine، xanthines، catecholamines).
           - **Pulmonary**: pneumonia، asthma، pulmonary edema، PE، interstitial lung disease، high altitude (و hypotension و severe anemia).
           - **Mechanical ventilation** بـ high minute ventilation.
+      - kind: explain
+        page: 19
+        quote: "Direct stimulation of medullary respiratory center"
+        title: "ليه دول بيزقّوا المركز؟"
+        text: |
+          الكتاب بيقسمهم: **direct stimulation** للمركز، و **pulmonary diseases**، و **mechanical ventilation**. التفسير المقبول (مش في الكتاب):
+
+          - **Pregnancy**: الـ ==progesterone== بيزوّد حساسية المركز للـ CO2 (وهو كمان في قايمة الأدوية).
+          - **Gram-negative sepsis** و **fever** و **thyrotoxicosis**: الالتهاب والحرارة والـ metabolism العالي بيزقوا المركز.
+          - **Liver failure**: سموم الكبد (زي الـ ammonia) بتنبّه المركز.
+          - **Salicylates**: بتنبّه المركز مباشرة، وده أول disorder في الـ salicylate toxicity.
+          - **Pulmonary diseases** و **high altitude** و **severe anemia**: الـ ==hypoxia== بتنبّه الـ chemoreceptors، فالمريض ينهج ويرمي CO2 أكتر من اللازم.
+
+          يعني القاسم المشترك: حاجة بتنبّه المركز أو الـ chemoreceptors.
+      - kind: aside
+        page: 19
+        quote: "Voluntary or psychogenic hyperventilation"
+        tone: joke
+        text: "الـ **psychogenic hyperventilation** هو اللي بيحصل قبل امتحان الماجستير بليلة: بتنهج من القلق، الـ CO2 بينزل، وصوابعك تنمّل. 😅 اتنفس على مهلك، الـ ABG بتاعك هيشكرك."
       - kind: sort
         page: 19
         quote: "Table 33.2: Causes of respiratory alkalosis\nDirect stimulation of medullary respiratory center:\n  Voluntary or psychogenic hyperventilation\n  Stroke\n  CNS infection, tumor, or trauma\n  Gram-negative sepsis\n  Liver failure\n  Pregnancy\n  Hypermetabolic state (fever, thyrotoxicosis)\n  Drugs (salicylates, progesterone, nicotine, xanthine derivatives, catecholamines, antipsychotic drug quetiapine)\n  Pain\nHypoxemic stimulation of medullary respiratory center:\n  Pulmonary diseases (pneumonia, asthma, pulmonary edema, pulmonary embolus, interstitial lung disease, high altitude, hypotension, severe anemia)\nMechanical ventilation:\n  High minute ventilation"
@@ -839,25 +1369,25 @@ lessons:
           - { text: "Anxiety hyperventilation", bin: 1 }
         why: "اللي بيكبت المركز أو العضلات أو الـ airway = acidosis. اللي بيزق المركز (sepsis، الكبد، الحمل، القلق) = alkalosis."
       - kind: try
-        items: [neph.L01.093, neph.L01.099, neph.L01.100, neph.L01.105, neph.L01.107]
+        items: [neph.L01.105, neph.L01.107, neph.L01.102, neph.L01.103]
     recap:
-      - "Urine Cl < 10–20: vomiting، diuretics، villous adenoma، CF، alkali، posthypercapnia."
-      - "Urine Cl عالي و urine K < 20: laxatives أو severe K depletion."
-      - "BP واطي: Gitelman (urine Ca واطي) أو Bartter (عالي). BP عالي: renin واطي (1° aldo، licorice، Liddle) أو عالي (renovascular، malignant، Cushing)."
-      - "Resp acidosis: المركز، العضلات، الـ airway، الـ ventilation؛ COPD أشهر chronic."
-      - "Resp alkalosis: sepsis، liver failure، pregnancy، salicylates، pulmonary، ventilator."
-    practice: [neph.L01.093, neph.L01.094, neph.L01.095, neph.L01.096, neph.L01.097, neph.L01.098, neph.L01.099, neph.L01.100, neph.L01.101, neph.L01.102, neph.L01.103, neph.L01.104, neph.L01.105, neph.L01.106, neph.L01.107, neph.L01.108, neph.L01.109, neph.L01.138, neph.L01.139, neph.L01.140, neph.L01.141, neph.L01.142, neph.L01.151]
+      - "Resp acidosis: المركز، العضلات، الـ airway، الـ ventilation."
+      - "K و phosphate الواطيين بيضعّفوا الـ diaphragm."
+      - "على الـ ventilator: carbohydrate كتير = CO2 أكتر."
+      - "COPD أشهر سبب للـ chronic."
+      - "Resp alkalosis: sepsis، liver failure، pregnancy، salicylates، hypoxia، ventilator."
+    practice: [neph.L01.102, neph.L01.103, neph.L01.104, neph.L01.105, neph.L01.106, neph.L01.107, neph.L01.108, neph.L01.109, neph.L01.141, neph.L01.142]
   # ------------------------------------------------------------------
   - id: neph.L01.lesson6
     title: "السموم: الـ osmolal gap والكحوليات"
     hook: "مريض شرب \"سبيرتو\" ومش شايف. رقمين بس (الـ AG والـ osmolal gap) هيقولولك شرب إيه."
-    minutes: 8
+    minutes: 10
     pages: [20, 22]
     topics: [toxins]
     goals:
       - "تحسب الـ osmolal gap"
-      - "تفرق الكحوليات الأربعة"
-      - "تعرف مراحل الـ salicylate toxicity"
+      - "تفرق الكحوليات الأربعة وتعرف ليه كل واحد بيعمل أعراضه"
+      - "تعرف مراحل الـ salicylate toxicity وليه بنقلّي البول"
     status: unverified
     steps:
       - kind: explain
@@ -867,7 +1397,7 @@ lessons:
         text: |
           الكحوليات (ethanol، methanol، ethylene glycol، propylene glycol) بتعمل حاجتين: **hyperosmolality** و **high anion gap (AG) metabolic acidosis**.
 
-          الجهاز بيقيس كل الـ osmoles، لكن المعادلة بتحسب Na و glucose و urea بس. الفرق هو ==osmolal gap==، ولو كبير يبقى فيه حاجة متقاسة ومش محسوبة، زي الكحول.
+          الجهاز بيقيس كل الـ osmoles، لكن المعادلة بتحسب Na و glucose و urea بس. الفرق هو ==osmolal gap==، ولو كبير يبقى فيه حاجة متقاسة ومش محسوبة، زي الكحول. علشان كده الكتاب بيقول احسبه كل ما تشك في شرب كحول.
       - kind: explain
         page: 20
         quote: "Calculated Serum Osmolality = (2 x [Na]) + [glucose, in mg/dL]/18 + [blood urea nitrogen in mg/dL]/2.8"
@@ -877,7 +1407,31 @@ lessons:
           - **SI: 2 × Na + glucose + urea** (mmol/L)
           - **Osmolal gap = measured − calculated**
 
-          الطبيعي: الـ measured أعلى بحوالي **10 mOsm**. أكتر من **10** = فيه ==osmolal gap==.
+          الطبيعي: الـ measured أعلى بحوالي **10 mOsm**، يعني فيه osmoles صغيرة طبيعية المعادلة مش بتعدّها (التفسير المقبول، مش في الكتاب). أكتر من **10** = فيه ==osmolal gap==.
+      - kind: figure
+        page: 20
+        quote: "Osmolal gap is defined as the difference between the measured and calculated serum osmolality."
+        title: "الـ osmolal gap بالشكل"
+        alt: "Two bars. Measured osmolality includes sodium salts, glucose, urea and an extra block of unmeasured osmoles such as alcohol. Calculated osmolality includes only sodium, glucose and urea. The difference is the osmolal gap; normally about 10, more than 10 is a gap."
+        caption: "الجهاز بيعد **كل** الـ osmoles. المعادلة بتعد Na و glucose و urea بس. اللي زيادة (زي الكحول) هو الـ **gap**."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <text x="90" y="20" text-anchor="middle" class="t-b">Measured</text>
+            <text x="240" y="20" text-anchor="middle" class="t-b">Calculated</text>
+            <rect x="40" y="30" width="100" height="120" class="fg-acc"/>
+            <text x="90" y="95" text-anchor="middle" class="t-sm">2 x Na</text>
+            <rect x="40" y="150" width="100" height="22" class="fg-good"/>
+            <text x="90" y="165" text-anchor="middle" class="t-sm">glucose, urea</text>
+            <rect x="40" y="172" width="100" height="40" class="fg-bad"/>
+            <text x="90" y="190" text-anchor="middle" class="t-sm">alcohol etc.</text>
+            <text x="90" y="205" text-anchor="middle" class="t-sm">unmeasured</text>
+            <rect x="190" y="30" width="100" height="120" class="fg-acc"/>
+            <text x="240" y="95" text-anchor="middle" class="t-sm">2 x Na</text>
+            <rect x="190" y="150" width="100" height="22" class="fg-good"/>
+            <text x="240" y="165" text-anchor="middle" class="t-sm">glucose, urea</text>
+            <line x1="190" y1="212" x2="290" y2="212" class="fg-thin"/>
+            <text x="240" y="200" text-anchor="middle" class="t-sm t-bad">gap &gt; 10</text>
+          </svg>
       - kind: reveal
         page: 20
         quote: "Osmolal gap is defined as the difference between the measured and calculated serum osmolality. Generally, the measured osmolality is 10 mOsm higher than the calculated osmolality. Values >10 mOsm represent the presence of an osmolal gap."
@@ -889,7 +1443,7 @@ lessons:
         quote: "Causes of significantly high osmolal gap Ethylene glycol ingestion Methanol ingestion"
         title: "مين تاني بيعمل gap؟"
         text: |
-          مش الكحول بس:
+          مش الكحول بس. القاعدة: أي مادة الجهاز بيقيسها والمعادلة مش بتعدّها، يعني:
 
           - **Alcohols**: ethylene glycol، methanol، ethanol، isopropyl alcohol
           - **end-stage renal disease (ESRD)** من غير dialysis منتظم
@@ -897,6 +1451,21 @@ lessons:
           - formaldehyde، paraldehyde، diethyl ether
           - محاليل **glycine، sorbitol، mannitol** (زي غسيل الـ transurethral resection of the prostate)
           - **severe hyperproteinemia** أو **hyperlipidemia**، و **lab error**
+      - kind: check
+        page: 21
+        quote: "Infusion of nonconductive glycine, sorbitol, or mannitol solutions"
+        question: "Which of these raises the osmolal gap without any alcohol?"
+        options:
+          - "Glycine or mannitol irrigation solutions"
+          - "Hyponatremia alone"
+          - "Normal saline infusion"
+          - "Respiratory alkalosis"
+        answer: 0
+        why:
+          - "صح: مواد بتتقاس بالجهاز ومش موجودة في المعادلة."
+          - "الـ Na داخل في المعادلة نفسها."
+          - "الـ saline Na و Cl، والمعادلة بتحسبهم."
+          - "مالهاش علاقة بالـ osmolality."
       - kind: table
         page: 22
         quote: "| | Ethanol | Methanol | Isoropanol | Ethylene Glycol |\n| Common sources | Beer, Wine, hand sanitizers | Windshield washer fluid, cheap alcohols | Hand sanitizers; Rubbing alcolohol | Antifreeze |\n| Toxic metabolites | Acetoacetic acid; Bhydroxy butyric acid | Formic acid | Acetone | Glycolic acid; Oxalic acid |\n| Osmolal gap | Present (lactate) | Present | Present | Present |\n| High anion gap metabolic acidosis | Present | Present | Absent | Present |\n| Clinical clues | Confusion | Visual disturbance; Blindness | GI irritation; Fruity breath odour; Coma | AKI , heart failure; Calcium oxalate crystals in urine |\n| Treatment | Supportive; Low mortality | Fomepizole; Or ethanol; ± Dialysis | Supportive | Fomepizole; Or ethanol; ± Dialysis |"
@@ -908,6 +1477,18 @@ lessons:
           - ["Isopropanol", "Acetone", "Fruity breath, GI irritation, coma; NO high AG"]
           - ["Ethylene glycol", "Glycolic, oxalic acid", "AKI, heart failure, oxalate crystals"]
         hide: [[1, 1], [1, 2], [2, 2], [3, 1], [3, 2]]
+      - kind: explain
+        page: 22
+        quote: "Fomepizole"
+        title: "ليه الأعراض والعلاج كده؟"
+        text: |
+          الجدول من الكتاب. التفسير المقبول (مش في الكتاب) للي وراه:
+
+          - الكحول نفسه مش هو اللي بيموّت، **الـ metabolite** هو السم. والكبد بيعمل الـ metabolite بإنزيم اسمه ==alcohol dehydrogenase==.
+          - **Fomepizole أو ethanol** بيشغلوا الإنزيم ده، فالـ methanol والـ ethylene glycol يفضلوا من غير تحويل لحد ما يطلعوا. والـ **dialysis** بيشيل الكحول والأحماض من الدم.
+          - **Methanol ← formic acid**: الـ formic acid سام للـ optic nerve والـ retina، علشان كده visual disturbance وعمى.
+          - **Ethylene glycol ← oxalic acid**: الـ oxalate بيمسك الكالسيوم ويترسب ==calcium oxalate crystals== في الكلية، فيعمل AKI.
+          - **Isopropanol ← acetone**: الـ acetone مش acid، فمفيش high AG. ورائحة الـ acetone هي الـ fruity breath.
       - kind: aside
         page: 22
         quote: "| | Ethanol | Methanol | Isoropanol | Ethylene Glycol |\n| Common sources | Beer, Wine, hand sanitizers | Windshield washer fluid, cheap alcohols | Hand sanitizers; Rubbing alcolohol | Antifreeze |\n| Toxic metabolites | Acetoacetic acid; Bhydroxy butyric acid | Formic acid | Acetone | Glycolic acid; Oxalic acid |\n| Osmolal gap | Present (lactate) | Present | Present | Present |\n| High anion gap metabolic acidosis | Present | Present | Absent | Present |\n| Clinical clues | Confusion | Visual disturbance; Blindness | GI irritation; Fruity breath odour; Coma | AKI , heart failure; Calcium oxalate crystals in urine |\n| Treatment | Supportive; Low mortality | Fomepizole; Or ethanol; ± Dialysis | Supportive | Fomepizole; Or ethanol; ± Dialysis |"
@@ -941,7 +1522,19 @@ lessons:
           1. **الأول**: ==respiratory alkalosis==، الـ salicylate بيزق مركز التنفس في الـ medulla مباشرة.
           2. **بعدين**: **high AG metabolic acidosis** من الـ lactic acid والـ ketoacids.
 
-          الأعراض أساسًا **gastrointestinal tract (GIT) و central nervous system (CNS)**. والعلاج: **urinary alkalinization** و **hemodialysis**.
+          الأعراض أساسًا **gastrointestinal tract (GIT) و central nervous system (CNS)**. والعلاج: **urinary alkalinization** و **hemodialysis**. وده السبب إن الـ ABG بدري ممكن يبان respiratory alkalosis لوحدها.
+      - kind: explain
+        page: 22
+        quote: "Treatment includes urinary alkalinization and HD."
+        title: "ليه بنقلّي البول؟"
+        text: |
+          العلاج من الكتاب: **urinary alkalinization** و **HD**. التفسير المقبول (مش في الكتاب):
+
+          - الـ salicylate حمض ضعيف. في البول القلوي بيتحول للشكل المشحون (ionized)، والشكل المشحون **مش بيعدّي** جدار الـ tubule راجع للدم. فبيتحبس في البول ويطلع. ده اسمه ==ion trapping==.
+          - نفس الفكرة في الدم: لما الـ pH يبقى أعلى، salicylate أقل بيدخل المخ.
+          - الـ **hemodialysis** بيشيله مباشرة، وكمان بيصلّح الـ acidosis.
+
+          وليه الأعراض **GIT و CNS**؟ الـ salicylate مهيّج للمعدة، وبيوصل المخ ويعمل tinnitus ولخبطة.
       - kind: case
         page: 22
         quote: "Initially respiratory alkalosis due to stimulation of medullary respiratory center by salicylate and hyperventilation."
@@ -967,8 +1560,8 @@ lessons:
         items: [neph.L01.111, neph.L01.113, neph.L01.116, neph.L01.121]
     recap:
       - "Calculated Osm = 2Na + glucose/18 + BUN/2.8؛ gap > 10 = موجود."
+      - "الـ metabolite هو السم؛ fomepizole أو ethanol بيوقفوا alcohol dehydrogenase."
       - "Methanol ← formic acid ← العمى؛ ethylene glycol ← oxalate ← AKI."
       - "Isopropanol: osmolal gap من غير high AG (acetone)."
-      - "Methanol و EG: fomepizole أو ethanol ± dialysis."
-      - "Salicylate: respiratory alkalosis الأول، بعدين high AG acidosis؛ alkalinization و HD."
+      - "Salicylate: respiratory alkalosis الأول، بعدين high AG acidosis؛ alkalinization (ion trapping) و HD."
     practice: [neph.L01.110, neph.L01.111, neph.L01.112, neph.L01.113, neph.L01.114, neph.L01.115, neph.L01.116, neph.L01.117, neph.L01.118, neph.L01.119, neph.L01.120, neph.L01.121, neph.L01.122, neph.L01.143, neph.L01.144, neph.L01.145, neph.L01.146, neph.L01.150, neph.L01.161]

@@ -528,6 +528,19 @@ pub(crate) fn BookPages(id: String, pages: [u32; 2]) -> Element {
     }
 }
 
+/// The book sections a lesson teaches: its lecture's titles for the lesson's
+/// `topics`, in the lesson's order, joined with " · " (empty when unknown).
+pub(crate) fn section_titles(lesson: &Lesson) -> String {
+    let lib = Library::get();
+    let Some(lecture) = lib.lectures.get(lecture_of(&lesson.id)) else { return String::new() };
+    lesson
+        .topics
+        .iter()
+        .filter_map(|t| lecture.topics.iter().find(|x| &x.id == t).map(|x| x.title.as_str()))
+        .collect::<Vec<_>>()
+        .join(" · ")
+}
+
 /// A thin progress line, `done` of `total`.
 #[component]
 fn Meter(done: usize, total: usize) -> Element {
@@ -724,6 +737,7 @@ fn LessonRow(n: usize, lesson: Lesson, next: Option<String>) -> Element {
     let st = state(&lesson, next.as_deref());
     let steps = lesson.steps.len();
     let id = lesson.id.clone();
+    let sections = section_titles(&lesson);
     let key = match st {
         State::Done(_) => "done",
         State::Current { .. } => "current",
@@ -746,6 +760,13 @@ fn LessonRow(n: usize, lesson: Lesson, next: Option<String>) -> Element {
                 span { class: "coll-main",
                     strong { class: "coll-title", text::Line { text: lesson.title.clone() } }
                     span { class: "coll-sub", text::Line { text: lesson.hook.clone() } }
+                    // Where it sits in the book (#830): pages, then the book's section titles.
+                    span { class: "coll-extra ls-row-map small",
+                        BookPages { id: lesson.id.clone(), pages: lesson.pages }
+                        if !sections.is_empty() {
+                            bdi { dir: "ltr", lang: "en", class: "ls-sections", "{sections}" }
+                        }
+                    }
                 }
                 span { class: "coll-end",
                     match st {

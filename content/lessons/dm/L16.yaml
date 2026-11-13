@@ -5,15 +5,65 @@ lessons:
   - id: dm.L16.lesson1
     title: "DKA والسكر 105؟ أيوه ممكن"
     hook: "مريض T1DM بيرجّع، والسكر طبيعي. لو بصيت على السكر بس، هتروّحه وهو في DKA."
-    minutes: 7
-    pages: [198, 200]
+    minutes: 9
+    pages: [196, 200]
     topics: [eudka]
     goals:
-      - "تعرف الـ euglycemic DKA من غير ما السكر يضحك عليك"
+      - "تقرا Case 1 رقم رقم وتعرف كل رقم بيقول إيه"
       - "تشرح ليه الصيام بيعمل كيتونات والسكر طبيعي"
-      - "تعدّ أسباب الـ euglycemic ketoacidosis والـ differential"
+      - "تعدّ أسباب الـ euglycemic ketoacidosis والـ differential وتعرف ليه كل سبب في القايمة"
     status: unverified
     steps:
+      - kind: explain
+        page: 196
+        title: "Case 1: راجل زوّد الإنسولين ومقاسش"
+        quote: "He did, however, empirically increase his insulin doses during times of illness & had increased his NPH insulin to 15 units during the 3 days prior to presentation."
+        text: |
+          راجل 34 سنة، **T1DM** من 19 سنة، جاي طوارئ بـ 4 أيام **nausea** و **vomiting** وأعراض زي الـ flu.
+
+          - نظامه **basal-bolus**: 8 units **lispro** مع كل وجبة، و 12 units **NPH** بالليل.
+          - ==مش بيقيس السكر== خالص، بس وهو عيّان بيزوّد الجرعة "بالإحساس"، وفعلًا رفع الـ NPH لـ ==15 units== آخر 3 أيام.
+
+          ليه التفصيلة دي مهمة؟ عشان هي اللي هتفسّر اللغز بعدين: الراجل **عمره ما وقّف الإنسولين**، فالإنسولين اللي واخده كفاية يمسك السكر، بس مش كفاية يوقف الكيتونات وهو مش بياكل (ص 198).
+      - kind: explain
+        page: 197
+        title: "ليه الكتاب بيعدّ حاجات مش موجودة؟"
+        quote: "He denied any salicylate consumption"
+        text: |
+          الكتاب بيقولك إن مفيش **family history**، ولا **alcohol**، ولا تاريخ نفسي، ولا أمراض تانية، وإنه ==نفى أي salicylate==.
+
+          الـ negatives دي مش حشو: كل واحدة بتشطب سبب من أسباب الـ **acidosis** في مريض سكر اللي هتشوفها في ص 199 (alcohol، salicylate). يعني الكتاب بيجهّزك للـ differential من أول الحكاية.
+
+          وفيه تفصيلة صغيرة هتفرق بعدين: اعترف إنه ==خسّ في الوزن== من غير ما يعرف قد إيه. خلّيها في دماغك.
+      - kind: explain
+        page: 197
+        title: "الفحص: الجسم بيقولك إيه؟"
+        quote: "Respiratory rate =30 breaths per minute."
+        text: |
+          - **RR 30** والـ oxygen saturation ==99%==: بينهج والرئة سليمة. التفسير المقبول (مش في الكتاب): ده نَفَس الـ acidosis؛ الجسم بيطلّع CO2 عشان يعوّض الـ acid.
+          - **HR 106** و **dry oral mucosa**: dehydration.
+          - الـ BP نزل شوية وهو قاعد (131/85 ← 122/80)، وده برضه بيقول إن السوائل ناقصة.
+          - **BMI 19**: نحيف، ومع الوزن اللي نزل ده بيلمّح إنه مش بياكل من زمان.
+      - kind: explain
+        page: 197
+        title: "التحاليل: سكر طبيعي وجسم حامض"
+        quote: "Plasma Glucose = 105 mg/dl"
+        text: |
+          - **Glucose 105** mg/dL: طبيعي.
+          - **pH 7.3** و **HCO3 10**: metabolic acidosis واضحة.
+          - **Anion gap 29**: الـ acid ده مش chloride، ده anion غريب (كيتونات).
+          - **Urine ketones 4+** و ==no glucosuria==. التفسير المقبول (مش في الكتاب): الكلية مش بتطلّع سكر غير لما يعدّي عتبة الـ renal threshold، والسكر هنا 105 بس، فالبول فيه كيتونات من غير سكر.
+          - **Lactate 1.1** طبيعي، و **amylase** طبيعي، و salicylate و alcohol و methanol ==مش موجودين==.
+
+          النتيجة: كل الأسباب التانية للـ high anion gap اتشطبت، وفضلت الكيتونات.
+      - kind: reveal
+        page: 197
+        quote: "Anion gap = 29 mEq/l"
+        prompt: "Na 134، Cl 101، HCO3 10، K 5.7. احسب الـ anion gap. ليه الكتاب كاتب 29؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب، الحساب نفسه): **Na − (Cl + HCO3)** = 134 − 111 = ==23==. لو دخّلت الـ K: 134 + 5.7 − 111 = ==28.7==، يعني الـ 29 اللي في الكتاب.
+
+          أي رقم فيهم عالي، فالمعنى واحد: **high anion gap acidosis**. لو السؤال عن Case 1 بالذات، الكتاب كاتب 29.
       - kind: case
         page: 198
         quote: "Euglycemic ketoacidosis\n  1. He was treated with 0.9% saline rehydration, 10% dextrose, & intravenous insulin\n  2. His acidosis gradually improved.\n  3. Later, his HbA1C was found to be 11.5%, suggesting poor control.\n  4. Upon further assessment it was noticed that he had anhedonia, & he appeared to have no interest in his food or the management of his DM despite having insight into the complications.\n  5. He also admitted to not having eaten for nearly 2 to 3 weeks prior to his presentation."
@@ -41,6 +91,8 @@ lessons:
           - المريض بياخد إنسولين **كفاية يمسك السكر**، بس ==مش كفاية يوقف الكيتونات==.
           - الصيام الطويل: ==glycogen depletion== شبه كامل، فالسكر مش لاقي مصدر يطلع منه.
           - في نفس الوقت الصيام بيزوّد **lipolysis** و **free fatty acids (FFA)**، والإنسولين بيبقى أضعف في إنه يوقف الـ ketogenesis.
+
+          التفسير المقبول (مش في الكتاب) للنقطة الأخيرة: في الصيام الـ **glucagon** بيعلى والـ insulin بيقل، والكبد بيسمع للنسبة بينهم مش للإنسولين لوحده. فنفس جرعة الإنسولين اللي كانت بتوقف الكيتونات وهو بياكل، ما بقتش كفاية وهو صايم.
       - kind: figure
         page: 198
         quote: "In cases of prolonged fasting, near-total glycogen depletion contributes to the normoglycemia as metabolic acidosis continues to develop."
@@ -65,6 +117,29 @@ lessons:
             <rect x="75" y="198" width="180" height="40" rx="8" class="fg-bad"/>
             <text x="165" y="223" text-anchor="middle" class="t-b">Euglycemic DKA</text>
           </svg>
+      - kind: reveal
+        page: 198
+        quote: "A decrease in caloric intake is frequently associated with the development of DKA, usually due to nausea or vomiting caused by a precipitating illness or by worsening ketoacidosis itself."
+        prompt: "ليه قلة الأكل بتمشي إيد في إيد مع الـ DKA؟"
+        answer: |
+          الكتاب بيدّيك السببين: الـ **nausea** والـ **vomiting** جايين يا من ==المرض اللي فجّر الأزمة== (زي الـ flu عند Case 1)، يا من ==الـ ketoacidosis نفسها==.
+
+          يعني دي **vicious cycle**: الكيتونات بترجّع ← المريض مش بياكل ← الصيام بيزوّد الكيتونات ← بيرجّع أكتر. عشان كده المريض اللي بيرجّع مش هيخف لوحده في البيت.
+      - kind: check
+        page: 198
+        quote: "In cases of prolonged fasting, near-total glycogen depletion contributes to the normoglycemia as metabolic acidosis continues to develop."
+        question: "In Case 1, what mainly kept glucose near 105 mg/dL despite ketoacidosis?"
+        options:
+          - "Ongoing insulin plus near-total glycogen depletion from weeks of not eating"
+          - "Excess insulin caused true hypoglycaemia"
+          - "Ketones directly lower blood glucose"
+          - "Glucose was lost in the urine"
+        answer: 0
+        why:
+          - "صح: إنسولين مستمر + مخزن glycogen فاضي = سكر هادي والكيتونات شغالة."
+          - "السكر كان 105، مش hypoglycaemia."
+          - "الكيتونات مش بتنزّل السكر؛ هي بديل وقود."
+          - "مكانش فيه glucosuria أصلًا."
       - kind: table
         page: 199
         quote: "Causes of Euglycemic Ketoacidosis *As a result of decreased circulating glucose concentration"
@@ -75,6 +150,21 @@ lessons:
           - ["Endogenous H+", "Lactic acidosis، pancreatitis، sepsis، RTA"]
           - ["Exogenous H+", "Salicylate، methanol"]
         hide: [[0, 1], [2, 1]]
+      - kind: explain
+        page: 199
+        title: "ليه كل سبب في القايمة؟"
+        quote: "Causes of Euglycemic Ketoacidosis\n   *As a result of decreased circulating glucose concentration\n      1. Starvation\n      2. Vomiting (ketoacidosis, gastroparesis)\n      3. Intentional dieting\n      4. Depression, anhedonia\n      5. Pregnancy\n      6. Glycogen storage disorders\n      7. Cirrhosis"
+        text: |
+          الكتاب بيقسّمها نصّين. التفسير المقبول (مش في الكتاب) لكل بند:
+
+          **سكر قليل في الدم** (الكيتونات طالعة والسكر مش لاقي يرتفع):
+          - **Starvation، vomiting، dieting، depression**: ==مفيش carbohydrate داخل==. الـ depression هنا بالظبط زي Case 1: مش عايز ياكل.
+          - **Pregnancy**: الجنين بيسحب glucose طول الوقت، فالأم بتوصل لصورة الصيام أسرع.
+          - **Glycogen storage disorders** و **cirrhosis**: الكبد ==مش قادر يخزّن أو يطلّع== سكر.
+
+          **H+ زيادة** (الـ acid جاي من حتة تانية مع الكيتونات):
+          - **Endogenous**: الـ lactic acidosis والـ sepsis (lactate)، الـ pancreatitis، والـ **RTA** (الكلية مش بتطلّع الـ acid).
+          - **Exogenous**: الـ **salicylate** والـ **methanol** نفسهم acids.
       - kind: mnemonic
         page: 199
         quote: "Differential diagnoses include: prolonged starvation, excess alcohol consumption, salicylate overdose, lactic acidosis, tricyclic antidepressant overdose, & renal tubular acidosis."
@@ -114,21 +204,48 @@ lessons:
       - "Euglycemic DKA: كيتونات و acidosis والسكر شبه طبيعي."
       - "السبب: إنسولين كفاية للسكر بس مش للكيتونات + صيام فرّغ الـ glycogen."
       - "Case 1: depression وأسابيع من غير أكل في T1DM؛ العلاج saline + 10% dextrose + IV insulin."
+      - "الأسباب نصّين: سكر قليل داخل (جوع، حمل، كبد) أو H+ زيادة (lactate، RTA، salicylate، methanol)."
       - "T1DM + vomiting + سكر طبيعي = لازم blood gas."
     practice: [dm.L16.001, dm.L16.002, dm.L16.003, dm.L16.004, dm.L16.005, dm.L16.006, dm.L16.007, dm.L16.008, dm.L16.009, dm.L16.010, dm.L16.046, dm.L16.048, dm.L16.049]
   # ------------------------------------------------------------------
+  # Split on 2026-11-13 (#828): lesson2 keeps Case 2 (excipients); Case 3
+  # (HHS in a child) moved to lesson5.
   - id: dm.L16.lesson2
-    title: "شربات الدوا و HHS في طفل"
-    hook: "تلات أدوية برد عادية ودّت طفل الـ DKA. وطفل تاني جاله HHS، اللي المفروض مرض كبار."
+    title: "شربات الدوا عملت DKA"
+    hook: "تلات أدوية برد عادية في طفل عنده T1DM، ويوم 3 جه الطوارئ في DKA. السكر كان متخبي في الشراب."
     minutes: 7
-    pages: [201, 205]
-    topics: [excipients, child-hhs]
+    pages: [200, 202]
+    topics: [excipients]
     goals:
-      - "تفتكر إن الـ excipients ممكن تبوّظ السكر"
-      - "تعرف الـ HHS في الأطفال وقد إيه خطير"
-      - "تعالج pediatric HHS: الإنسولين والسوائل والـ dextrose"
+      - "تقرا Case 2 وتعرف ليه ده DKA"
+      - "تعرف يعني إيه excipients وليه كل نوع موجود"
+      - "تفتكر إن الـ sinusitis نفسها ممكن تكون ساعدت"
     status: unverified
     steps:
+      - kind: explain
+        page: 200
+        title: "Case 2: طفل وبرد عادي"
+        quote: "On the 3rd day of his treatment, the child was brought to a local hospital‘s emergency department with symptoms of nausea, vomiting, weak & rapid pulse, deep sighing breaths, drowsiness, and unsteady gait."
+        text: |
+          طفل 6 سنين عنده **T1DM** وماشي على إنسولين يومي. جاله برد: رشح وأنف مسدودة وسخونية خفيفة. الـ GP قال **acute sinusitis** وكتب تلات أدوية **شراب**: paracetamol و chlorpheniramine و amoxicillin/clavulanate.
+
+          يوم 3 جه الطوارئ بـ nausea و vomiting ونبض ==ضعيف وسريع== و ==deep sighing breaths== ونعاس ومشية مش ثابتة. التفسير المقبول (مش في الكتاب) لكل علامة:
+          - **Deep sighing breaths**: ده نَفَس الـ **Kussmaul**، الجسم بيطلّع CO2 عشان يعوّض الـ acid.
+          - **نبض ضعيف وسريع**: dehydration من الـ osmotic diuresis والترجيع.
+          - **النعاس والمشية**: المخ بيتأثر بالـ acidosis والجفاف.
+      - kind: explain
+        page: 200
+        title: "التحاليل: ده DKA ولا سكر عالي بس؟"
+        quote: "ABG: pH=7.12, base excess of 7 mmol/L, bicarbonate=12.6 mEq/L."
+        text: |
+          - **BG 440** mg/dL: عالي.
+          - **pH 7.12** و **HCO3 12.6**: ==acidosis==.
+          - **Ketones** موجودة في البول.
+
+          سكر عالي + acidosis + كيتونات = DKA، وعشان كده دخل طوارئ واتعالج بـ fluids و insulin.
+
+          - **WBC 15.2**: عالي. التفسير المقبول (مش في الكتاب): يا من العدوى، يا من الـ stress بتاع الـ DKA نفسها، فالرقم ده لوحده مش بيفرّق.
+          - **Na 134**: واطي شوية. التفسير المقبول (مش في الكتاب): السكر العالي بيسحب مية من الخلايا للدم فبيخفّف الصوديوم.
       - kind: reveal
         page: 201
         quote: "High sugar base in all 3 formulations went unnoticed by the practitioner & the dispensing pharmacist."
@@ -136,18 +253,163 @@ lessons:
         answer: "الشربات التلاتة فيهم ==sucrose== كـ syrup base، حوالي ==90 g/day== سكر. لا الدكتور ولا الصيدلي خدوا بالهم. والـ **sinusitis** نفسها ممكن تكون ساعدت."
       - kind: explain
         page: 201
-        quote: "It is well known that most medicines contain both pharmacologically active & inactive ingredients. Therapeutically inactive ingredients of a medicine are known as excipients."
-        title: "الـ excipients: مش دايمًا بريئة"
+        title: "الـ 90 جرام جم منين؟"
+        quote: "In the present case, 3 different medications to treat the symptoms of acute sinusitis – paracetamol, chlorpheniramine, & a combination of amoxicillin/clavulanate were given at a dose of 15 mg/kg per dose qid, 0.1 mg/kg per dose qid, & 22.5 mg/kg per dose bid, respectively."
         text: |
-          - الـ **excipients** هي المكونات ==therapeutically inactive== في الدوا: binders، fillers، preservatives، و ==sweeteners==.
-          - المفروض إنها آمنة، بس ده **مش صح دايمًا**.
-          - مع مريض سكر: خد history كويس وبص على مكونات الدوا، خصوصًا ==الشربات==.
+          - **Paracetamol**: 15 mg/kg، ==4 مرات== في اليوم.
+          - **Chlorpheniramine**: 0.1 mg/kg، ==4 مرات==.
+          - **Amoxicillin/clavulanate**: 22.5 mg/kg، مرتين.
+
+          يعني 10 جرعات شراب في اليوم. الجرعة نفسها مش غلط، الغلط في ==اللي شايل الجرعة==. التفسير المقبول (مش في الكتاب): شربات الأطفال بتتحلّى بالسكر عشان الطفل يرضى ياخدها، وكل معلقة فيها سكر. اجمع 10 معالق في اليوم من تلات أدوية توصل لحوالي 90 g.
       - kind: aside
         tone: joke
         page: 201
         quote: "Total sucrose content (including relative sugars) of ~90 g/day in the form of syrup base."
         text: |
           90 جرام سكر في اليوم؟ ده تقريبًا ==كيس حلاوة كامل== متخبي في "ملعقة كل 8 ساعات". الدوا بيعالج البرد وبيعمل diabetic ketoacidosis (DKA) ببلاش.
+      - kind: figure
+        page: 201
+        quote: "This led to the rise in BG level of the child & subsequent DKA state."
+        title: "من الشراب للـ DKA"
+        alt: "Three syrup bottles, paracetamol, chlorpheniramine and amoxicillin-clavulanate, feed into about 90 g of sucrose a day, which raises blood glucose to 440 and leads to DKA. A dashed arrow from acute sinusitis also points to DKA, labelled cannot be ruled out."
+        caption: "السكر الأساسي جه من الشراب؛ والـ sinusitis خط منقّط لأن الكتاب مش قادر يستبعدها."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L16c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="8" y="10" width="100" height="36" rx="8" class="fg-box"/>
+            <text x="58" y="33" text-anchor="middle" class="t-sm">Paracetamol</text>
+            <rect x="115" y="10" width="100" height="36" rx="8" class="fg-box"/>
+            <text x="165" y="33" text-anchor="middle" class="t-sm">Chlorpheniramine</text>
+            <rect x="222" y="10" width="100" height="36" rx="8" class="fg-box"/>
+            <text x="272" y="33" text-anchor="middle" class="t-sm">Amox/clav</text>
+            <path d="M58 46L140 80" class="fg-arrow" marker-end="url(#L16c)"/>
+            <path d="M165 46L165 78" class="fg-arrow" marker-end="url(#L16c)"/>
+            <path d="M272 46L190 80" class="fg-arrow" marker-end="url(#L16c)"/>
+            <rect x="85" y="82" width="160" height="40" rx="8" class="fg-acc"/>
+            <text x="165" y="107" text-anchor="middle" class="t-b t-acc">Sucrose ~90 g/day</text>
+            <path d="M165 122L165 146" class="fg-arrow" marker-end="url(#L16c)"/>
+            <rect x="95" y="148" width="140" height="36" rx="8" class="fg-box"/>
+            <text x="165" y="171" text-anchor="middle" class="t-sm">BG 440 mg/dL</text>
+            <path d="M165 184L165 206" class="fg-arrow" marker-end="url(#L16c)"/>
+            <rect x="115" y="208" width="100" height="40" rx="8" class="fg-bad"/>
+            <text x="165" y="233" text-anchor="middle" class="t-b">DKA</text>
+            <rect x="240" y="150" width="84" height="40" rx="8" class="fg-thin"/>
+            <text x="282" y="168" text-anchor="middle" class="t-sm">Sinusitis</text>
+            <text x="282" y="183" text-anchor="middle" class="t-sm t-mut">not ruled out</text>
+            <path d="M270 190L218 222" class="fg-arrow" stroke-dasharray="4 3" marker-end="url(#L16c)"/>
+          </svg>
+      - kind: explain
+        page: 201
+        quote: "It is well known that most medicines contain both pharmacologically active & inactive ingredients. Therapeutically inactive ingredients of a medicine are known as excipients."
+        title: "الـ excipients: مش دايمًا بريئة"
+        text: |
+          - الـ **excipients** هي المكونات ==therapeutically inactive== في الدوا: binders، fillers، preservatives، و ==sweeteners==.
+          - دورها إنها تحوّل المادة الفعالة لـ "elegant pharmaceutical product": حباية تتمسك، شراب يتشرب، دوا يعيش على الرف.
+          - المفروض إنها آمنة، بس الكتاب بيقول ==مش صح دايمًا== ومحتاجة ملاحظة.
+
+          يعني الدوا الواحد فيه حاجتين: اللي بيعالج، واللي بيشيل العلاج. ومريض السكر ممكن يتأذي من التاني.
+      - kind: match
+        page: 201
+        quote: "The excipients are divided into various functional classifications, depending on the purpose of use, such as binders, diluents, disintegrants, lubricants, wetting agents, solvents, fillers, emulsifiers, absorption enhancers, sustained release matrices, preservatives, sweeteners, & stabilizing, coloring, or flavoring agents."
+        prompt: "وصّل كل excipient بشغلته (الشغلة: التفسير المقبول، مش في الكتاب)"
+        pairs:
+          - ["Binder", "يمسك مكونات الحباية في بعض"]
+          - ["Disintegrant", "يفكّك الحباية في المعدة"]
+          - ["Preservative", "يمنع الميكروبات في الشراب"]
+          - ["Sweetener", "يخلّي الطفل يرضى يشرب"]
+          - ["Sustained release matrix", "يطلّع الدوا بالراحة على ساعات"]
+        why: "الكتاب بيدّيك الأسماء والتصنيف حسب الـ purpose؛ الاسم نفسه بيقولك الشغلة. واللي يهم مريض السكر في القايمة هو الـ **sweetener**."
+      - kind: explain
+        page: 202
+        title: "الدرس للعيادة"
+        quote: "It becomes crucial while dealing with a patient/guardian to collect a proper patient history for choosing the appropriate drug along with its therapeutic ingredient & pharmaceutical excipient."
+        text: |
+          الكتاب بيطلع بنقطتين:
+
+          - خد ==history كويس== من المريض أو أهله، واختار الدوا بـ **مادته الفعالة** و **الـ excipient** بتاعه مع بعض.
+          - راجع ==شكل الدوا== (dosage formulation) ومكوناته؛ ده جزء من إن العلاج يجيب نتيجة.
+
+          ليه؟ عشان في Case 2 الدكتور والصيدلي بصّوا على الـ active ingredient بس، والسكر عدّى من وراهم.
+      - kind: check
+        page: 202
+        quote: "Although this case highlights the significance of pharmaceutical excipients in therapeutic outcomes, the possibility of involvement of the current underlying disease state (acute infective sinusitis) as a precipitating factor for DKA cannot be ruled out."
+        question: "What does the book say about the sinusitis in Case 2?"
+        options:
+          - "It may also have precipitated the DKA; it cannot be ruled out"
+          - "It was the proven sole cause of the DKA"
+          - "It played no role; the syrups alone explain everything"
+          - "It was misdiagnosed and was really meningitis"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول الـ excipients مهمة، بس الـ acute infective sinusitis ممكن تكون ساعدت ومش ممكن نستبعدها."
+          - "الكتاب ركّز على الشراب، ومقالش إن العدوى لوحدها السبب."
+          - "الكتاب صريح إن العدوى مش ممكن تتشال من الحساب."
+          - "مفيش أي كلام عن meningitis."
+      - kind: aside
+        tone: exam
+        page: 202
+        quote: "Evaluation of medication dosage formulation for its key ingredients is an essential component for improving the efficacy of pharmacologic agents and, hence, achieving therapeutic outcomes in a given clinical condition"
+        text: |
+          سؤال "What is the cause of DKA in this patient?" جوابه في الكتاب: ==sugar-containing syrup excipients== (~90 g sucrose/day)، والعدوى ممكن تكون عامل مساعد. التفسير المقبول (مش في الكتاب) في الممارسة: لما تكتب لطفل عنده سكر، اسأل عن ==sugar-free== formulation أو حباية لو يقدر يبلعها.
+      - kind: try
+        items: [dm.L16.011, dm.L16.012, dm.L16.013, dm.L16.014, dm.L16.015]
+    recap:
+      - "Case 2: طفل T1DM، تلات شربات للـ sinusitis = ~90 g sucrose/day ← DKA يوم 3."
+      - "Excipients = المكونات therapeutically inactive (binders، fillers، preservatives، sweeteners…)، ومش دايمًا آمنة."
+      - "خد history وراجع الـ formulation: المادة الفعالة والـ excipient مع بعض."
+      - "الـ sinusitis نفسها ممكن تكون ساعدت؛ مش ممكن تتستبعد."
+    practice: [dm.L16.011, dm.L16.012, dm.L16.013, dm.L16.014, dm.L16.015]
+  # ------------------------------------------------------------------
+  # Split from lesson2 on 2026-11-13 (#828): Case 3, HHS in a child.
+  - id: dm.L16.lesson5
+    title: "HHS في طفل عنده 7 سنين"
+    hook: "الـ HHS المفروض مرض كبار عندهم T2DM. الطفل ده نحيف، ومفيش سكر في العيلة، وجه بسكر 954."
+    minutes: 9
+    pages: [202, 205]
+    topics: [child-hhs]
+    goals:
+      - "تقرا Case 3 وتعرف ليه ده HHS مش DKA"
+      - "تفهم ليه الـ HHS من غير كيتونات ومع جفاف شديد"
+      - "تعالج pediatric HHS وتعرف تراقب إيه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 202
+        title: "Case 3: أسبوع من العطش والبول"
+        quote: "A 7-year-old male patient presented to the emergency room with polyuria, polydipsia, weight loss, nocturnal enuresis & decreased activity for 7 7-day duration & history of viral infection 4 weeks prior to the presentation."
+        text: |
+          ولد 7 سنين، أسبوع من **polyuria** و **polydipsia** ووزن نازل و ==nocturnal enuresis== ونشاط قليل، وكان عنده viral infection من 4 أسابيع. ومفيش T1DM ولا T2DM في العيلة.
+
+          اقرا كل عرض بسببه (التفسير المقبول، مش في الكتاب):
+          - **Polyuria**: السكر بيعدّي في البول وبيشدّ مية معاه (osmotic diuresis).
+          - **Polydipsia**: الجسم بيعوّض المية اللي راحت.
+          - **Enuresis** في طفل كان ناشف بالليل: البول بقى كتير لدرجة إن المثانة مش ملحقة، وده من أشهر أول علامات السكر في الأطفال.
+          - **Weight loss**: مية وسعرات خارجين في البول.
+      - kind: explain
+        page: 203
+        title: "الفحص: طفل ناشف خالص"
+        quote: "Both weight and height were below the 5th percentile. BMI was 10 kg/m2 ."
+        text: |
+          - **GCS 13/15**: المخ متأثر.
+          - **HR 150** و **BP 105/85**: قلب بيجري يعوّض حجم دم ناقص.
+          - **Severely dehydrated**.
+          - الوزن والطول تحت ==5th percentile== و **BMI 10**: طفل رفيع جدًا.
+          - ==No acanthosis nigricans==.
+
+          ليه الكتاب كتب الـ acanthosis؟ عشان في ص 204 هيقولك إن أغلب الأطفال اللي بيجيلهم HHS **تخان** وعندهم acanthosis و T2DM. الطفل ده عكس الصورة دي في كل حاجة، وده اللي مخلّي الحالة تتنشر.
+      - kind: explain
+        page: 203
+        title: "التحاليل: سكر 954 ومفيش كيتونات"
+        quote: "Serum osmolality 412 mOsm/kg (N: 282-295)"
+        text: |
+          - **Glucose 954** mg/dL.
+          - **Osmolality 412** (الطبيعي 282–295).
+          - **Corrected Na 152**: hypernatraemia. التفسير المقبول (مش في الكتاب): المية اللي خرجت في البول أكتر من الصوديوم.
+          - **BUN 62** و **creatinine 2.3**: الكلية متضايقة من الجفاف.
+          - **pH 7.21** و **HCO3 19.8**: acidosis ==خفيفة==.
+          - البول: **glucose 3+** و ==no ketones==.
+
+          سكر فوق 600 + osmolality عالية + مفيش كيتونات + acidosis خفيفة: ده **HHS** مش DKA.
       - kind: case
         page: 205
         quote: "Management of HHS in pediatrics is the same for DKA; exogenous insulin infusion at a rate of 0.1 U/kg/h is recommended."
@@ -175,10 +437,44 @@ lessons:
           - Osmolality ==>330== mOsm/L
           - Mild acidosis، pH ==>7.2==
 
-          خلي بالك: **L15** كانت بتقول effective osmolality >300 و pH ≥7.3. الحالة دي بتستخدم أرقام تانية.
+          خلي بالك: **L15** كانت بتقول effective osmolality >300 و pH ≥7.3. الحالة دي بتستخدم أرقام تانية، فلو السؤال عن Case 3 جاوب بأرقامها.
       - kind: update
         ref: "ADA/EASD/JBDS/AACE/DTS hyperglycemic crises consensus 2024"
         text: "الـ consensus الجديد بيعرّف HHS بـ glucose ≥600 و effective osmolality >300 و pH ≥7.3 (زي L15). لو السؤال عن Case 3، جاوب بأرقام الحالة."
+      - kind: explain
+        page: 204
+        title: "ليه مفيش كيتونات، وليه الجفاف بالشكل ده؟"
+        quote: "In HHS, insulin action may be inadequate to facilitate glucose utilization by insulin-sensitive tissues but sufficient for the prevention of lipolysis & ketogenesis"
+        text: |
+          الكتاب بيدّيك السر في جملة: الإنسولين ==مش كفاية يدخّل السكر الخلايا==، بس ==كفاية يوقف الـ lipolysis والـ ketogenesis==. عشان كده HHS من غير كيتونات.
+
+          وليه الجفاف أشد من الـ DKA؟ الكتاب بيقول الـ polyuria والـ polydipsia ==طويلة وبتزيد بالتدريج==، فالـ **osmotic diuresis** بتشتغل أيام، وده بيعمل جفاف شديد و electrolyte loss شديد.
+
+          التفسير المقبول (مش في الكتاب) للفرق في المدة: الـ DKA بتعمل acidosis وترجيع ونَفَس سريع بدري فالمريض بيجي بسرعة، لكن الـ HHS مفيهاش الإنذار ده، فبتفضل ساكتة لحد ما السكر يوصل لـ 954.
+      - kind: figure
+        page: 204
+        quote: "In HHS, insulin action may be inadequate to facilitate glucose utilization by insulin-sensitive tissues but sufficient for the prevention of lipolysis & ketogenesis"
+        title: "كمية إنسولين قليلة بتعمل شغلة وتسيب شغلة"
+        alt: "A vertical insulin scale. At the low mark the label reads stops lipolysis and ketogenesis, ticked. Higher up the label reads glucose uptake by tissues, crossed. An arrow marks HHS between the two marks; DKA sits below the lower mark."
+        caption: "الـ HHS قاعد في النص: الإنسولين عدّى عتبة الكيتونات ولسه ما وصلش عتبة السكر."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L16d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="40" y="20" width="36" height="210" rx="6" class="fg-box"/>
+            <text x="58" y="14" text-anchor="middle" class="t-sm t-b">Insulin</text>
+            <path d="M30 70H86" class="fg-ink" stroke-width="2"/>
+            <path d="M30 170H86" class="fg-ink" stroke-width="2"/>
+            <text x="96" y="66" class="t-sm">Enough for glucose uptake</text>
+            <text x="96" y="82" class="t-sm t-bad">✗ not reached in HHS</text>
+            <text x="96" y="166" class="t-sm">Enough to stop lipolysis</text>
+            <text x="96" y="182" class="t-sm t-good">✓ reached in HHS</text>
+            <rect x="96" y="104" width="120" height="34" rx="8" class="fg-acc"/>
+            <text x="156" y="126" text-anchor="middle" class="t-b t-acc">HHS here</text>
+            <path d="M96 121L80 121" class="fg-arrow-acc" marker-end="url(#L16d)"/>
+            <rect x="96" y="196" width="120" height="34" rx="8" class="fg-bad"/>
+            <text x="156" y="218" text-anchor="middle" class="t-b">DKA here</text>
+            <path d="M96 213L80 213" class="fg-arrow-bad" marker-end="url(#L16d)"/>
+          </svg>
       - kind: table
         page: 204
         quote: "Recent reports suggest high mortality rates in children with HHS (~10-35%)."
@@ -189,6 +485,57 @@ lessons:
           - ["Ketones", "عالية", "قليلة أو مفيش"]
           - ["أخطر مضاعفات", "Cerebral edema، ARDS", "Cerebral edema، ARDS"]
         hide: [[0, 2], [2, 2]]
+      - kind: explain
+        page: 204
+        title: "مين بيجيله HHS من الأطفال، وليه الحالة دي غريبة؟"
+        quote: "Children with HHS share common features; the majority of children are obese males of African-American ethnicity."
+        text: |
+          الصورة المعتادة في الكتاب:
+          - أغلبهم ==ولاد تخان== من أصل African-American.
+          - عندهم ==family history of T2DM== و **acanthosis nigricans**.
+          - وأغلبهم اتشخّصوا بعدين **T2DM**.
+
+          عشان كده الكتاب بيفسّر زيادة الحالات بزيادة الـ **obesity** والـ T2DM في الأطفال. الـ acanthosis علامة الـ insulin resistance، وده اللي بيربطها بالصورة.
+
+          بس Case 3 عكس كل ده: رفيع، ومفيش عيلة، ومفيش acanthosis. والكتاب بيقفل الباب: الـ HHS ==ممكن تحصل في T1DM==، و الـ pathophysiology واحدة في النوعين.
+      - kind: explain
+        page: 204
+        title: "إيه اللي بيفجّر الـ HHS؟"
+        quote: "Infections (pneumonia caused by gram-negative bacteria, UTI & sepsis), medications, poor compliance, undiagnosed DM, substance abuse, & coexisting diseases are precipitating factors for HHS"
+        text: |
+          - **Infections**: ==gram-negative pneumonia==، UTI، sepsis.
+          - **Medications**.
+          - **Poor compliance**.
+          - **Undiagnosed DM** (زي Case 3).
+          - **Substance abuse**.
+          - **Coexisting diseases**.
+
+          التفسير المقبول (مش في الكتاب) اللي يلم القايمة: أي حاجة بتزوّد الـ stress hormones (العدوى والأمراض)، أو بتقلّل الإنسولين (مش بياخده أو مش متشخّص أصلًا)، أو بتمنع المريض يشرب مية، بتزقّ السكر لفوق.
+      - kind: explain
+        page: 204
+        title: "العلاج بيعمل مشاكل كمان: راقب إيه؟"
+        quote: "Massive osmotic diuresis in the early hours of therapy needs aggressive fluid management to prevent shock & avoid the complications of vascular collapse (lactic acidosis, rhabdomyolysis, renal failure, thrombosis)."
+        text: |
+          أول ساعات العلاج فيها ==massive osmotic diuresis==، فالسوائل لازم تبقى ==aggressive== عشان تمنع الـ shock و الـ **vascular collapse** ومضاعفاته: lactic acidosis، rhabdomyolysis، renal failure، thrombosis.
+
+          وبعدها راقب: **hypernatraemia** مستمرة، **hypokalaemia**، **hypophosphataemia**، rhabdomyolysis، pancreatitis، thrombosis.
+
+          التفسير المقبول (مش في الكتاب): الدم التقيل والناشف بيمشي بالراحة فبيجلّط (thrombosis)، والعضلة اللي مش واخدة دم كفاية بتتكسّر (rhabdomyolysis). والـ K والـ phosphate بينزلوا لأن الإنسولين بيدخّلهم الخلايا.
+      - kind: check
+        page: 204
+        quote: "The most serious complications of both HHS & DKA are cerebral edema & ARDS."
+        question: "According to Case 3's discussion, what are the most serious complications of both HHS and DKA?"
+        options:
+          - "Cerebral edema and ARDS"
+          - "Hypoglycaemia and seizures"
+          - "Pancreatitis and gallstones"
+          - "Diabetes insipidus and SIADH"
+        answer: 0
+        why:
+          - "صح: cerebral edema و ARDS هما الأخطر في الاتنين."
+          - "دي ممكن تحصل من العلاج، بس الكتاب مقالهاش كأخطر مضاعفات."
+          - "الـ pancreatitis في قايمة المراقبة، مش الأخطر."
+          - "مش مذكورين في الحالة."
       - kind: mnemonic
         page: 205
         quote: "Dextrose is added to intravenous fluids when serum glucose drops to 300 mg/dl to avoid overly precipitous drops in glucose levels."
@@ -198,27 +545,58 @@ lessons:
           - { key: "I", text: "Insulin 0.1 U/kg/h" }
           - { key: "S", text: "Saline 0.9%، بعدين 0.45-0.75%" }
           - { key: "D", text: "Dextrose لما السكر ينزل 300" }
+      - kind: reveal
+        page: 205
+        quote: "Fluid resuscitation is best accomplished initially with isotonic fluid (0.9% saline), which will be hypotonic for these patients, followed by 0.45% to 0.75% saline."
+        prompt: "إزاي الـ 0.9% saline يبقى hypotonic؟ وليه الـ dextrose عند 300 مش لما السكر يبقى طبيعي؟"
+        answer: |
+          - الـ 0.9% saline حوالي 308 mOsm، والطفل ده osmolality بتاعته ==412==، فبالنسبة له المحلول ==أخف== منه (التفسير المقبول، مش في الكتاب: الحساب نفسه).
+          - الـ **dextrose** بيدخل عند ==300== عشان السكر ما ينزلش بسرعة زيادة؛ الكتاب بيقول كده بالنص. التفسير المقبول (مش في الكتاب): النزول السريع بيسحب مية للمخ، وده طريق الـ **cerebral edema**.
       - kind: try
-        items: [dm.L16.011, dm.L16.016, dm.L16.018, dm.L16.026, dm.L16.050]
+        items: [dm.L16.016, dm.L16.017, dm.L16.018, dm.L16.022, dm.L16.026]
     recap:
-      - "الـ excipients (زي سكر الشربات) ممكن تعمل DKA: بص على مكونات الدوا."
-      - "Case 3 HHS: glucose >600، osmolality >330، pH >7.2."
-      - "Mortality في الأطفال: DKA <1%، HHS ~10-35%."
-      - "العلاج: insulin 0.1 U/kg/h، saline، و dextrose عند 300."
-    practice: [dm.L16.011, dm.L16.012, dm.L16.013, dm.L16.014, dm.L16.015, dm.L16.016, dm.L16.017, dm.L16.018, dm.L16.019, dm.L16.020, dm.L16.021, dm.L16.022, dm.L16.023, dm.L16.024, dm.L16.025, dm.L16.026, dm.L16.027, dm.L16.047, dm.L16.050]
+      - "Case 3: ولد 7 سنين نحيف، سكر 954، osmolality 412، مفيش كيتونات = HHS."
+      - "تعريف الحالة: glucose >600، osmolality >330، pH >7.2 (L15: >300 و ≥7.3)."
+      - "إنسولين كفاية يوقف الكيتونات ومش كفاية يدخّل السكر؛ osmotic diuresis طويلة = جفاف شديد."
+      - "Mortality: DKA <1%، HHS ~10-35%؛ الأخطر cerebral edema و ARDS."
+      - "العلاج: insulin 0.1 U/kg/h، 0.9% ثم 0.45-0.75%، dextrose عند 300."
+    practice: [dm.L16.016, dm.L16.017, dm.L16.018, dm.L16.019, dm.L16.020, dm.L16.021, dm.L16.022, dm.L16.023, dm.L16.024, dm.L16.025, dm.L16.026, dm.L16.027, dm.L16.047, dm.L16.050]
   # ------------------------------------------------------------------
   - id: dm.L16.lesson3
     title: "DKA بالشلل: لما البوتاسيوم 1.3"
     hook: "ست جت مشلولة الأربع أطراف وبتنهج. مش Guillain-Barré: ده بوتاسيوم ودّع."
-    minutes: 6
-    pages: [206, 208]
+    minutes: 9
+    pages: [205, 208]
     topics: [hypokalemia]
     goals:
       - "تربط الشلل الـ flaccid مع hypokalemia في DKA"
       - "تفتكر ليه الإنسولين يستنى"
-      - "تعدّ الحالات اللي فيها hypokalemia + metabolic acidosis"
+      - "تعدّ الحالات اللي فيها hypokalemia + metabolic acidosis وتعرف ليه كل واحدة"
     status: unverified
     steps:
+      - kind: explain
+        page: 205
+        title: "Case 4: سخونية، بعدين الأطراف وقعت"
+        quote: "She did not complain of any abnormal sensation, blurring of vision, or any difficulty in swallowing. There was no history of intake of heavy meals on the previous night, no history of physical/emotional trauma, alcohol intake, or starvation."
+        text: |
+          ست 45 سنة: سخونية يومين، بعدين ==ضعف مفاجئ في الأربع أطراف== بيزيد من 8 ساعات، وصعوبة في النَفَس من ساعة. ومعاها كحة ببلغم.
+
+          الكتاب بيعدّ الـ negatives، والتفسير المقبول (مش في الكتاب) لكل واحدة:
+          - ==مفيش تنميل== ولا زغللة ولا صعوبة بلع: يبعدنا عن الأعصاب والـ neuromuscular junction (Guillain-Barré، botulism، myasthenia).
+          - ==مفيش وجبة تقيلة== ولا trauma ولا alcohol ولا جوع: دي حاجات معروفة بتفجّر شلل الـ hypokalaemia من غير سكر.
+          - مش واخدة أدوية: يعني الـ K ما نزلش من diuretic مثلًا.
+      - kind: explain
+        page: 205
+        title: "الكشف: صدر وقلب"
+        quote: "Respiratory examination: no abnormality except for rales localized to the left infra-scapular area."
+        text: |
+          - **Alert & oriented**: المخ تمام، المشكلة في العضلات.
+          - **RR 28**: بتنهج.
+          - **Pulse 118 irregular**: هيطلع **AF** في الـ ECG.
+          - **BP 100/94**.
+          - ==Rales== في الـ left infra-scapular area.
+
+          ليه الـ rales مهمة؟ مع السخونية والكحة بالبلغم، دي ==pneumonia==، وهي غالبًا اللي فجّرت الـ DKA، وعشان كده هتاخد broad-spectrum antibiotic.
       - kind: case
         page: 207
         quote: "Due to severe hypokalemia, treatment with insulin had to be withheld temporarily till her serum potassium levels were corrected."
@@ -238,6 +616,29 @@ lessons:
             options: ["Withhold until K is corrected", "0.1 units/kg/h now", "Bolus now", "s.c. only"]
             answer: 0
             why: "الإنسولين يدخّل الـ K الخلايا فينزل أكتر: يستنى."
+      - kind: explain
+        page: 206
+        title: "الشلل ده عضلة مش عصب"
+        quote: "Although the muscles of the face, eyes, larynx, pharynx & sphincters were not involved, involvement of the diaphragm was evident by her labored effort to breathe."
+        text: |
+          - الأربع أطراف ==0/5== والـ reflexes كلها ==غايبة== (deep و superficial).
+          - الوش والعين والحنجرة والبلعوم والـ sphincters ==سليمين==.
+          - الـ **diaphragm** واقع: بتتنفس بالعافية.
+          - الإحساس طبيعي.
+
+          التفسير المقبول (مش في الكتاب): الـ K هو اللي ماسك الـ resting membrane potential بتاع العضلة؛ لما ينزل جامد العضلة ما بتعرفش تشتغل فبتبقى flaccid. والإحساس السليم والـ sphincters السليمة بيقولوا إن العصب نفسه تمام.
+      - kind: explain
+        page: 206
+        title: "التحاليل: كل رقم بيشطب حاجة"
+        quote: "ABG: mixed picture of metabolic acidosis & respiratory acidosis."
+        text: |
+          - **Glucose 474**، **ketones** في البول، **anion gap** عالي: ==DKA==.
+          - **K 1.3** و **phosphorus 2.1**: الاتنين واطيين.
+          - **ABG**: ==mixed== metabolic + respiratory acidosis. ليه respiratory؟ التفسير المقبول (مش في الكتاب): الـ diaphragm الضعيف مش قادر يطلّع الـ CO2.
+          - **Osmolality 320**، و **HbA1c 9%**: السكر عالي من شهور، يعني ==T2DM ما كانش متشخّص==.
+          - طبيعي: الكبد والكلى والغدة الدرقية والـ parathormone والـ creatine phosphokinase، وأشعة الصدر والرقبة والـ MRI.
+
+          الطبيعي هنا بيشطب: الـ thyrotoxic periodic paralysis (الغدة)، و rhabdomyolysis (الـ CPK)، ومشكلة في الحبل الشوكي (الـ MRI).
       - kind: figure
         page: 206
         quote: "ECG showed atrial fibrillation with features of hypokalemia manifesting as ST segment depression, T-wave flattening & prominent U-waves."
@@ -256,21 +657,29 @@ lessons:
             <text x="275" y="52" text-anchor="middle" class="t-b t-bad">U wave</text>
           </svg>
       - kind: explain
-        page: 208
-        quote: "The most characteristic abnormality associated with DKA is loss of total body potassium."
-        title: "البوتاسيوم في الـ DKA"
+        page: 207
+        title: "العلاج: بالترتيب ده بالظبط"
+        quote: "Subsequently, she was treated with regular insulin preparation to normalize her BG levels."
         text: |
-          - أشهر حاجة في الـ diabetic ketoacidosis (DKA): ==total body K loss==، حوالي ==300-600 mEq==.
-          - بس الـ **serum K** بيبان طبيعي أو عالي، لأن الـ acidosis بتطلّع الـ K من الخلايا (مقابل H+).
-          - أول ما تبدأ insulin وسوائل، الـ K ممكن ==ينزل فجأة==.
-      - kind: reveal
-        page: 208
-        quote: "In such cases, potassium replacement should begin with fluid therapy, & insulin treatment should be delayed until K+ concentration is restored to >3.3 mEq/L."
-        prompt: "DKA والـ K جاي 2.9. تبدأ إيه الأول؟"
-        answer: "الـ **K مع السوائل** الأول، والإنسولين ==يستنى== لحد ما الـ K يبقى ==>3.3== (حسب الحالة دي)."
-      - kind: update
-        ref: "ADA/EASD/JBDS/AACE/DTS hyperglycemic crises consensus 2024"
-        text: "الـ algorithm في L15 (p190) بيستنى لحد 3.5. الكتاب نفسه فيه الرقمين: 3.3 في Case 4 و 3.5 في L15."
+          1. ==Slow IV potassium chloride== على طول + **broad-spectrum antibiotic**.
+          2. التنفس بيسوء: ==ICU== و intubation و ventilation.
+          3. الإنسولين ==اتأجّل== لحد ما الـ K يتصلّح.
+          4. بعدين **regular insulin** للسكر.
+          5. في 36 ساعة العضلات رجعت والـ reflexes ظهرت.
+          6. فطمت من الجهاز، و K بالبُق + **long-acting insulin**.
+          7. خرجت بعد أسبوعين بأكل غني بالـ K، وبعد 6 شهور كل حاجة طبيعية.
+
+          ليه الـ K "slow"؟ التفسير المقبول (مش في الكتاب): الـ K السريع في الوريد نفسه بيعمل arrhythmia، وهي أصلًا عندها AF.
+      - kind: explain
+        page: 207
+        title: "الـ hypokalaemia بتعمل إيه؟"
+        quote: "The clinical features of hypokalemia may vary with involvement of neuromuscular, CV & GIT systems, the most common manifestation being mild weakness of lower extremities & easy fatigability."
+        text: |
+          - الأشهر: ==ضعف خفيف في الرجلين== و **easy fatigability**.
+          - الأشد: ضعف واضح في العضلات، وفي الحالات المتطرفة ==شلل كامل== بيشمل عضلات التنفس والـ cranial والـ bulbar، وممكن يموّت.
+          - و ==cardiac arrhythmia== ممكن تموّت برضه.
+
+          ليه الأجهزة دي بالذات (neuromuscular و CV و GIT)؟ التفسير المقبول (مش في الكتاب): التلاتة شغلهم عضلات بتنقبض بالكهربا، والكهربا دي محتاجة K. عشان كده الأمعاء كمان بتكسل (ileus).
       - kind: mnemonic
         page: 207
         quote: "Discussion\n  1. The clinical features of hypokalemia may vary with involvement of neuromuscular, CV & GIT systems, the most common manifestation being mild weakness of lower extremities & easy fatigability.\n  2. Patients with more severe hypokalemia may complain of marked weakness of skeletal muscles & in extreme cases, total paralysis involving respiratory, cranial & bulbar muscles has been reported with fatal outcome.\n  3. Deaths due to cardiac arrhythmia can also occur.\n  4. The coexistence of hypokalemia with metabolic acidosis is encountered in very few conditions, including proximal & distal renal tubular acidosis, DKA, amphotericin toxicity & acetazolamide overdose."
@@ -282,17 +691,59 @@ lessons:
           - { key: "D", text: "DKA" }
           - { key: "A", text: "Amphotericin toxicity" }
           - { key: "A", text: "Acetazolamide overdose" }
+      - kind: reveal
+        page: 207
+        quote: "The coexistence of hypokalemia with metabolic acidosis is encountered in very few conditions, including proximal & distal renal tubular acidosis, DKA, amphotericin toxicity & acetazolamide overdose."
+        prompt: "عادةً الـ acidosis بتعلّي الـ K. ليه الخمسة دول بيعملوا العكس؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الخمسة بيخلّوا الكلية ==تسيب K يهرب== وهي بتتعامل مع الـ acid.
+          - **Proximal RTA** و **acetazolamide**: الـ bicarbonate بيهرب في البول، ومعاه K.
+          - **Distal RTA** و **amphotericin**: الـ tubule مش قادر يطلّع H+، فبيطلّع K بداله.
+          - **DKA**: الـ osmotic diuresis بتغسل الـ K (الكتاب بيقولها في ص 208).
+      - kind: explain
+        page: 208
+        quote: "The most characteristic abnormality associated with DKA is loss of total body potassium."
+        title: "البوتاسيوم في الـ DKA"
+        text: |
+          - أشهر حاجة في الـ diabetic ketoacidosis (DKA): ==total body K loss==، حوالي ==300-600 mEq==.
+          - إزاي بيضيع؟ الـ **H+** بيتجمع برة الخلايا في الـ acidosis، فالـ K بيطلع من الخلايا ==مقابله==، وبعدين بيضيع في البول مع الـ osmotic diuresis.
+          - بس الـ **serum K** بيبان طبيعي أو عالي، لأن الـ acidosis لسه ماسكة الـ K برة الخلايا.
+          - أول ما تبدأ insulin وسوائل، الـ K ممكن ينزل فجأة، فلازم مراقبة وتعويض طول العلاج.
+      - kind: reveal
+        page: 208
+        quote: "In such cases, potassium replacement should begin with fluid therapy, & insulin treatment should be delayed until K+ concentration is restored to >3.3 mEq/L."
+        prompt: "DKA والـ K جاي 2.9. تبدأ إيه الأول؟"
+        answer: "الـ **K مع السوائل** الأول، والإنسولين ==يستنى== لحد ما الـ K يبقى ==>3.3== (حسب الحالة دي). عشان الإنسولين بيدخّل الـ K الخلايا، فلو بدأته على 2.9 هتوصل للي حصل في Case 4."
+      - kind: update
+        ref: "ADA/EASD/JBDS/AACE/DTS hyperglycemic crises consensus 2024"
+        text: "الـ algorithm في L15 (p190) بيستنى لحد 3.5. الكتاب نفسه فيه الرقمين: 3.3 في Case 4 و 3.5 في L15."
       - kind: aside
         tone: analogy
         page: 208
         quote: "Serum K+ levels can fall precipitously upon the initiation of insulin treatment & volume replacement, & hence, great caution must be exercised in monitoring serum K+ levels with adequate replacement during the course of treatment for DKA."
         text: |
           الـ **serum K** في الـ DKA زي حساب بنكي فاضي بس الـ **ATM** لسه بيطلّع فلوس من "الخزنة الجوانية". أول ما الـ **insulin treatment** يقفل الخزنة، هتكتشف إنك ==مفلس==.
+      - kind: check
+        page: 208
+        quote: "In the study by Arora et al., hypokalemia was observed in just 5.6% of patients with DKA & none of them presented with any complications, which could be attributed to hypokalemia itself."
+        question: "Why does the book call Case 4 one of the rarest DKA presentations?"
+        options:
+          - "Hypokalaemia at presentation is uncommon (5.6% in Arora et al.) and paralysis with respiratory failure is seldom described, here in undiagnosed T2DM"
+          - "DKA never occurs in T2DM"
+          - "Hypokalaemia is the usual DKA presentation, but AF is rare"
+          - "She had normal ketones"
+        answer: 0
+        why:
+          - "صح: الـ hypokalaemia في 5.6% بس ومن غير مضاعفات، والشلل مع فشل تنفس نادر، وكمان كأول ظهور لـ T2DM."
+          - "هي نفسها T2DM وجالها DKA."
+          - "الـ serum K في الـ DKA غالبًا طبيعي أو عالي."
+          - "البول كان فيه ketones."
       - kind: try
         items: [dm.L16.028, dm.L16.030, dm.L16.031, dm.L16.034, dm.L16.036]
     recap:
-      - "Flaccid quadriparesis + ketoacidosis + K 1.3 = DKA مع hypokalemic paralysis."
-      - "DKA: total body K ناقص 300-600 mEq رغم إن الـ serum K طبيعي."
+      - "Flaccid quadriparesis + ketoacidosis + K 1.3 = DKA مع hypokalemic paralysis، أول ظهور لـ T2DM."
+      - "عضلة مش عصب: إحساس و sphincters سليمين، والـ diaphragm واقع."
+      - "DKA: total body K ناقص 300-600 mEq رغم إن الـ serum K طبيعي؛ بيضيع في البول."
       - "K قليل: ابدأ K مع السوائل، والإنسولين يستنى (>3.3 هنا، 3.5 في L15)."
       - "Hypokalemia + acidosis: RTA (proximal/distal)، DKA، amphotericin، acetazolamide."
     practice: [dm.L16.028, dm.L16.029, dm.L16.030, dm.L16.031, dm.L16.032, dm.L16.033, dm.L16.034, dm.L16.035, dm.L16.036, dm.L16.037]
@@ -300,8 +751,8 @@ lessons:
   - id: dm.L16.lesson4
     title: "الحمل: تلات حالات، تلات تشخيصات"
     hook: "واحدة جالها T1DM جديد في الشهر الثامن، وواحدة سكر حمل من الأسبوع السادس، وواحدة كيتونات من الجوع."
-    minutes: 7
-    pages: [210, 213]
+    minutes: 10
+    pages: [209, 213]
     topics: [pregnancy]
     goals:
       - "تفرق بين new T1DM و early GDM و starvation ketoacidosis في الحمل"
@@ -309,6 +760,30 @@ lessons:
       - "تفتكر الـ euglycemic DKA كـ differential"
     status: unverified
     steps:
+      - kind: explain
+        page: 209
+        title: "Case 5: حامل 32 أسبوع وبتنهج"
+        quote: "Further history revealed that she had been having increased thirst & polyuria during the previous weeks, whose significance she failed to appreciate."
+        text: |
+          بنت 20 سنة، 32 أسبوع، داخلة بـ ==preterm labour== وحركة الجنين قلّت من 24 ساعة.
+
+          - مفيش سكر قبل كده، ولا في العيلة، ولا أي risk factor لـ GDM.
+          - **50 g glucose challenge** في أسبوع 28 كان طبيعي، والبول من 30 يوم مفيهوش سكر.
+          - دلوقتي: ==hyperventilating== و ketotic، نبض 100، BP 100/60، سكر ==618== و glycosuria و ketonuria تقيلة.
+          - وبالسؤال: عطش و polyuria من أسابيع ما خدتش بالها منهم.
+
+          ليه الـ screening الطبيعي ما ينفيش؟ لأن الاختبار والبول اتعملوا قبل ما المرض يبدأ؛ التفسير المقبول (مش في الكتاب): الـ T1DM ممكن يطلع في أسابيع قليلة.
+      - kind: explain
+        page: 209
+        title: "الجنين بيقول إيه؟"
+        quote: "Ultrasound scan showed a fetus without malformations, with abdominal circumference above the 90th percentile (LGA baby) & a normal biophysical profile."
+        text: |
+          - **Non-stress test**: ==non-reassuring== ومعاه انقباضات منتظمة.
+          - **Ultrasound**: مفيش تشوهات، بس الـ abdominal circumference فوق ==90th percentile== (LGA).
+
+          ليه البطن كبيرة؟ التفسير المقبول (مش في الكتاب): سكر الأم بيعدّي للجنين، والبنكرياس بتاعه بيطلّع إنسولين كتير، والإنسولين هرمون نمو بيخزّن دهن في البطن والكبد.
+
+          البداية: **tocolytics** و **corticoids** (للرئة)، و IV insulin، وسوائل وأملاح.
       - kind: case
         page: 210
         quote: "Other investigation\n  1. Serum insulin: Zero\n  2. Islet cells antibodies (ICA), antibodies to glutamate decarboxylase (anti- GAD) & IA2 antibodies: Positive.\n  3. HbA1c: 8%."
@@ -330,20 +805,98 @@ lessons:
             answer: 0
             why: "إنسولين صفر + antibodies = type 1 diabetes mellitus (T1DM) جديد."
       - kind: explain
+        page: 210
+        title: "ليه cesarean، وليه T1DM؟"
+        quote: "Combining the severity of the mother‘s condition with the non-reassuring fetal well-being & the unfavorable cervical score, a cesarean section was performed."
+        text: |
+          **ليه cesarean؟** الكتاب بيجمع تلات حاجات:
+          - الأم ==حالتها شديدة== (السكر 494–569 رغم الـ IV insulin).
+          - الجنين ==مش مطمّن==: null variability، و oedema تحت الجلد، ومفيش حركات تنفس، بس الـ umbilical Doppler لسه طبيعي.
+          - الـ cervix ==مش جاهز== للولادة الطبيعي.
+
+          **ليه T1DM؟** serum insulin صفر (البنكرياس مش بيطلّع) + **ICA** و **anti-GAD** و **IA2** موجبة (autoimmune). الـ HbA1c 8% والـ fructosamine 380.
+
+          والبنت اتولدت 2410 g من غير hypoglycaemia.
+      - kind: explain
+        page: 211
+        title: "Case 6: ممرضة خايفة، وكان عندها حق"
+        quote: "She was worried about her glycemic status & to allay her fears, a 75 g OGTT was performed."
+        text: |
+          ممرضة 29 سنة، أول حمل، أسبوع 6، BMI 23. أبوها وأمها **T2DM** وأختها كان عندها **GDM** وبعدين T2DM.
+
+          - عشان تطمن عملوا **75 g OGTT** في أسبوع 6: fasting ==113== و 2-hour 146، فاتشخّصت **GDM** وأخدت نصايح أكل.
+          - الحمل ==أجهض== في أسبوع 10، والـ OGTT بعد 8 أسابيع ==طبيعي==.
+          - النصيحة: OGTT أول ما الحمل الجاي يتعرف.
+
+          ليه الـ family history تخلّيك تعمل OGTT بدري كده؟ لأن العيلة كلها T2DM و GDM، يعني الاستعداد للـ insulin resistance موجود، والحمل هيكشفه بدري.
+      - kind: explain
+        page: 211
+        title: "الحمل التاني: إنسولين بيزيد مع الحمل"
+        quote: "The insulin doses needed increase with advancing pregnancy. At the end of the pregnancy, the daily insulin dose was 30 units."
+        text: |
+          - حملت تاني بعد 6 شهور. OGTT في أسبوع 6: fasting 102 و 2-hour ==180==، و HbA1c ==6.6%==.
+          - اتشخّصت GDM وبدأت **basal-bolus insulin**، ومتابعة كل 2–4 أسابيع حسب السيطرة.
+          - المتوسط: fasting 77 و 2-hour 122، و HbA1c أقل من 6.5%.
+          - الجرعة ==بتزيد مع الحمل==، ووصلت 30 unit في اليوم في الآخر. ووزنها زاد 13 kg.
+          - في 37 أسبوع: premature rupture of the membranes، والـ induction عمل fetal bradycardia، فـ emergency CS، وبنت 2850 g كويسة.
+          - السكر رجع طبيعي تاني يوم، فوقفوا الإنسولين.
+
+          التفسير المقبول (مش في الكتاب) للنقطتين: الـ **placenta** بتطلّع هرمونات بتعمل insulin resistance وبتكبر مع الحمل، فالجرعة بتزيد. وأول ما الـ placenta تخرج، المقاومة بتروح، فالسكر بينزل في يوم.
+      - kind: explain
         page: 212
         quote: "She underwent a 75 g OGTT at 6 weeks postpartum, which was normal."
-        title: "Case 6: سكر حمل بدري"
+        title: "Case 6: بعد الولادة"
         text: |
-          - ممرضة 29 سنة، body mass index (BMI) 23، أبوها وأمها type 2 diabetes mellitus (T2DM) وأختها gestational diabetes mellitus (GDM).
-          - **Oral glucose tolerance test (OGTT) في أسبوع 6** غير طبيعي، والحمل الأول ==أجهض==.
-          - الحمل التاني: OGTT ==بدري أول ما يتعرف الحمل==، وبرضه غير طبيعي، فاتعالجت بـ **basal-bolus insulin**.
-          - بعد الولادة السكر رجع طبيعي، و OGTT بعد 6 أسابيع ==طبيعي==، ونصحوها عن خطر T2DM بعدين.
+          - **OGTT** بعد ==6 أسابيع== من الولادة: طبيعي.
+          - عرّفوها إنها ==high risk لـ T2DM== بعدين، ونصحوها إزاي تمنعه.
+
+          ليه الـ OGTT بعد الولادة لازم؟ عشان يتأكد إن ده كان سكر حمل وراح، مش سكر قبل الحمل. والتشخيص النهائي في الكتاب: ==Early-onset gestational diabetes==.
       - kind: aside
-        tone: analogy
+        tone: exam
         page: 212
         quote: "Early-onset gestational diabetes"
         text: |
           الكتاب سمّاها **early-onset GDM** رغم إن الـ glycated haemoglobin (HbA1c) كان 6.6% في أسبوع 6. في L13 الرقم ده بدري كان ممكن يتحسب ==overt diabetes==. في الامتحان عن Case 6: جاوب بتشخيص الكتاب.
+      - kind: check
+        page: 211
+        quote: "The patient‘s plasma glucose values returned to normal by the next morning & insulin injections were stopped."
+        question: "Case 6: glucose was normal the morning after delivery and insulin was stopped. What does this best support?"
+        options:
+          - "The hyperglycaemia was driven by the pregnancy (GDM), not pre-existing diabetes"
+          - "She had new-onset T1DM"
+          - "She needed a higher insulin dose"
+          - "The baby took up her glucose"
+        answer: 0
+        why:
+          - "صح: السكر راح مع الولادة، والـ OGTT بعد 6 أسابيع طبيعي: ده GDM."
+          - "الـ T1DM مش بيخف بعد الولادة؛ وده كان Case 5."
+          - "السكر بقى طبيعي من غير إنسولين خالص."
+          - "الطفل اتولد خلاص؛ مش هو اللي بينزّل سكرها."
+      - kind: explain
+        page: 212
+        title: "Case 7: زور ورجيع في 35 أسبوع"
+        quote: "Complaint: 3-day history of a sore throat & 24-hour history of vomiting, epigastric pain & no oral intake."
+        text: |
+          ست 40 سنة، 35 أسبوع، **GDM** اتشخّص في أسبوع 28 (fasting 100، 2-hour 190) وماشية على أكل + إنسولين وسكرها مظبوط.
+
+          - 3 أيام **sore throat**، بعدين 24 ساعة ==ترجيع== و epigastric pain و ==مفيش أكل خالص==.
+          - الكشف: tonsils حمرا و submandibular lymph nodes، و tenderness في الـ epigastrium والـ RUQ.
+          - البول: ==ketones 4+ بس==.
+          - **ALT 59** و **AST 105** عاليين شوية، و **CRP 154** والـ WBC 16.7.
+
+          ليه فكروا في **cholecystitis** وادّوا antibiotics؟ عشان الألم في الـ RUQ مع الإنزيمات والالتهاب؛ بس الـ ultrasound طلع طبيعي.
+      - kind: explain
+        page: 213
+        title: "ساءت، والسكر واطي"
+        quote: "She became progressively more unwell & tachycardic with cool peripheries."
+        text: |
+          - فضلت ترجّع 24 ساعة، وخدت **betamethasone** IM.
+          - بقت ==tachycardic وأطرافها ساقعة==: ده shock.
+          - **Glucose 53–85**، ketones 4+، و ABG: pH 7.29، HCO3 13.7، anion gap 18.9، lactate طبيعي.
+          - السوائل (compound sodium lactate) ==ما غيّرتش حاجة==، فـ emergency CS.
+          - البنت 2.6 kg، Apgar 5، والـ cord pH 7.15 و 7.17. والأم خرجت من الـ ICU بعد 12 ساعة لأن الـ acidosis ==اتحلت بسرعة بعد الولادة==.
+
+          التفسير المقبول (مش في الكتاب): آخر الحمل الجنين بيسحب glucose طول الوقت، فالأم بتدخل صورة الجوع في ساعات مش أيام ("accelerated starvation")، والـ acid بيعدّي للجنين، وعشان كده الولادة حلّت المشكلة.
       - kind: case
         page: 213
         quote: "Starvation ketoacidosis in pregnancy"
@@ -361,8 +914,31 @@ lessons:
       - kind: reveal
         page: 213
         quote: "Euglycaemic diabetic ketoacidosis\n  1. The differential diagnosis for our case included euglycaemic DKA.\n  2. The definition of euglycaemic DKA is a glucose concentration of less than 180 mg/dl in association with a bicarbonate concentration less than 10 mmol/L."
-        prompt: "إيه تعريف الـ euglycemic DKA في الحالة دي؟"
-        answer: "Glucose ==<180== mg/dL مع bicarbonate ==<10== mmol/L. (L15 كانت بتقول <200 للـ euDKA، فخلي بالك من الرقمين.)"
+        prompt: "إيه تعريف الـ euglycemic DKA في الحالة دي؟ وليه Case 7 مش داخلة فيه؟"
+        answer: "Glucose ==<180== mg/dL مع bicarbonate ==<10== mmol/L. الـ HCO3 بتاعها 13.7، يعني فوق الـ 10، فالكتاب سمّاها **starvation ketoacidosis**. (L15 كانت بتقول <200 للـ euDKA، فخلي بالك من الرقمين.)"
+      - kind: figure
+        page: 213
+        quote: "Starvation ketoacidosis in pregnancy"
+        title: "التلات حالات على خريطة واحدة"
+        alt: "A chart with blood glucose on the horizontal axis and ketones on the vertical axis. Case 5 sits at high glucose and high ketones (new T1DM with DKA). Case 6 sits at mildly raised glucose and no ketones (early GDM). Case 7 sits at low glucose and high ketones (starvation ketoacidosis)."
+        caption: "السكر والكيتونات مع بعض بيفرّقوا التلاتة: Case 5 فوق ويمين، Case 6 تحت، Case 7 فوق وشمال."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L16e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <path d="M40 215H320" class="fg-arrow" marker-end="url(#L16e)"/>
+            <path d="M40 215V15" class="fg-arrow" marker-end="url(#L16e)"/>
+            <text x="180" y="240" text-anchor="middle" class="t-sm">Blood glucose →</text>
+            <text x="20" y="120" text-anchor="middle" class="t-sm" transform="rotate(-90 20 120)">Ketones →</text>
+            <circle cx="270" cy="50" r="9" class="fg-dot-bad"/>
+            <text x="270" y="78" text-anchor="middle" class="t-sm t-b">Case 5</text>
+            <text x="270" y="93" text-anchor="middle" class="t-sm t-mut">618, DKA</text>
+            <circle cx="160" cy="195" r="9" class="fg-dot-acc"/>
+            <text x="160" y="180" text-anchor="middle" class="t-sm t-b">Case 6</text>
+            <text x="225" y="199" text-anchor="middle" class="t-sm t-mut">GDM</text>
+            <circle cx="75" cy="50" r="9" class="fg-dot-good"/>
+            <text x="75" y="78" text-anchor="middle" class="t-sm t-b">Case 7</text>
+            <text x="75" y="93" text-anchor="middle" class="t-sm t-mut">53-85</text>
+          </svg>
       - kind: sort
         page: 213
         quote: "Starvation ketoacidosis in pregnancy"
@@ -379,8 +955,8 @@ lessons:
       - kind: try
         items: [dm.L16.038, dm.L16.040, dm.L16.042, dm.L16.044, dm.L16.045]
     recap:
-      - "Case 5: DKA في 32 أسبوع، إنسولين صفر و antibodies: new T1DM."
-      - "Case 6: family history قوي: OGTT أول ما الحمل يتعرف؛ early GDM اتعالج بـ basal-bolus."
-      - "Case 7: جوع في 35 أسبوع: starvation ketoacidosis، والـ differential euglycemic DKA."
+      - "Case 5: DKA في 32 أسبوع، إنسولين صفر و antibodies: new T1DM؛ الـ screening الطبيعي بدري ما بينفيش."
+      - "Case 6: family history قوي: OGTT أول ما الحمل يتعرف؛ early GDM بـ basal-bolus، والجرعة بتزيد مع الحمل وتقف بعد الولادة."
+      - "Case 7: جوع في 35 أسبوع: starvation ketoacidosis، السكر 53-85، والولادة حلّت الـ acidosis."
       - "euDKA في Case 7: glucose <180 و HCO3 <10."
     practice: [dm.L16.038, dm.L16.039, dm.L16.040, dm.L16.041, dm.L16.042, dm.L16.043, dm.L16.044, dm.L16.045]

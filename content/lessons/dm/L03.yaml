@@ -4,14 +4,14 @@ lessons:
   # ------------------------------------------------------------------
   - id: dm.L03.lesson1
     title: "الكلية بتتكلم بالـ albumin"
-    hook: "قبل ما الـ creatinine يعلى بسنين، الكلية بتسرّب albumin. لو قسته صح، تمسك الـ DKD بدري."
-    minutes: 9
-    pages: [27, 29]
-    topics: [control, dkd, dkd-screening]
+    hook: "قبل ما الـ creatinine يعلى بسنين، الكلية بتسرّب albumin. والمفاجأة: أغلبهم ما بيوصلوش للـ dialysis."
+    minutes: 8
+    pages: [27, 28]
+    topics: [control, dkd]
     goals:
       - "تحفظ أهداف الـ tight control"
       - "تعرّف الـ DKD وتعرف مين بيموت منها إزاي"
-      - "تعمل screening صح وتعرف امتى تحوّل للـ nephrologist"
+      - "تعرف الـ risk factors وليه السكر أقواهم"
     status: unverified
     steps:
       - kind: explain
@@ -24,6 +24,19 @@ lessons:
           - **Haemoglobin A1c (A1C)** حوالين أو أقل من **7%**
           - **Fasting plasma glucose (FPG) (preprandial):** **80–130 mg/dl**
           - **2-h postprandial glucose (PPG) (peak):** حوالين أو أقل من **180 mg/dl**
+
+          ليه السكر بالذات هو اللي بيحمي الـ microvessels؟ زي ما شفنا في المحاضرة الأولى، الشبكية والكلية والأعصاب بتدخّل السكر **من غير insulin**، فسكر الدم العالي بيبقى سكر عالي جوه خلاياها. يعني كل ما تنزّل السكر، الضرر جوه الخلايا دي يقل. وعشان كده الأرقام هنا هي نفسها اللي هتشوفها في علاج الـ DKD.
+      - kind: check
+        page: 27
+        quote: "8- FPG (preprandial) should be lowered to (80-130 mg/dl)."
+        question: "Which preprandial glucose target does the lecture set for tight control?"
+        options: ["80–130 mg/dl", "Below 100 mg/dl", "100–180 mg/dl", "Below 70 mg/dl"]
+        answer: 0
+        why:
+          - "صح: **80–130 mg/dl** قبل الأكل، ومعاه A1C حوالين 7% و peak PPG حوالين 180."
+          - "ده رقم الـ normal fasting في التشخيص، مش هدف العلاج."
+          - "الـ 180 هو سقف الـ postprandial."
+          - "تحت 70 ده hypoglycemia."
       - kind: explain
         page: 27
         title: "يعني إيه DKD؟"
@@ -34,11 +47,51 @@ lessons:
           - بتحصل في **20–40%** من مرضى السكر.
           - **the leading cause of end-stage renal disease (ESRD)**.
           - الـ risk في type 2 **زي** type 1 تقريبًا.
+
+          ليه **persistent**؟ لأن الـ albumin في البول بيتغير من يوم ليوم (الدرس الجاي)، فرقم واحد مش كفاية. وليه «في غياب أسباب تانية»؟ لأن مريض السكر ممكن يجيله أي مرض كلى، والتشخيص ده بيفترض إن السكر هو السبب. ونسبة type 2 زي type 1 معناها إن مفيش نوع «أأمن» على الكلية.
+      - kind: figure
+        page: 27
+        quote: "Although ESRD may be the most recognizable consequence of DKD, the majority of patients actually die from CVD before needing kidney replacement therapy."
+        title: "طريق الـ DKD: مين بيوصل لآخره؟"
+        alt: "A road from diabetes to albuminuria over 30 mg/g, then GFR under 60, then ESRD. A large branch leaves the road before ESRD towards cardiovascular death, labelled: most patients die of CVD before kidney replacement therapy."
+        caption: "الـ ESRD هو آخر الطريق، بس ==أغلب العيانين== بيخرجوا قبله بالـ **CVD**."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L03k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker><marker id="L03kb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker></defs>
+            <rect x="5" y="20" width="70" height="44" rx="8" class="fg-box"/>
+            <text x="40" y="47" text-anchor="middle" class="t-sm t-b">Diabetes</text>
+            <path d="M75 42 H90" class="fg-arrow" marker-end="url(#L03k)"/>
+            <rect x="92" y="20" width="76" height="44" rx="8" class="fg-acc"/>
+            <text x="130" y="38" text-anchor="middle" class="t-sm t-b">Albumin</text>
+            <text x="130" y="54" text-anchor="middle" class="t-sm">&gt;30 mg/g</text>
+            <path d="M168 42 H182" class="fg-arrow" marker-end="url(#L03k)"/>
+            <rect x="184" y="20" width="66" height="44" rx="8" class="fg-acc"/>
+            <text x="217" y="38" text-anchor="middle" class="t-sm t-b">GFR</text>
+            <text x="217" y="54" text-anchor="middle" class="t-sm">&lt;60</text>
+            <path d="M250 42 H262" class="fg-arrow" marker-end="url(#L03k)"/>
+            <rect x="264" y="20" width="60" height="44" rx="8" class="fg-ink"/>
+            <text x="294" y="47" text-anchor="middle" class="t-sm t-b">ESRD</text>
+            <path d="M175 64 C175 110 150 130 150 150" class="fg-arrow-bad" stroke-width="4" marker-end="url(#L03kb)"/>
+            <rect x="60" y="152" width="180" height="50" rx="10" class="fg-bad"/>
+            <text x="150" y="174" text-anchor="middle" class="t-b">CVD death</text>
+            <text x="150" y="192" text-anchor="middle" class="t-sm">most, before dialysis</text>
+          </svg>
       - kind: aside
         tone: trap
         page: 27
         quote: "Diabetic Kidney Disease\n  Persistent albuminuria >30 mg/ g creatinine and/or decrease in GFR < 60 ml/min/1.73m2 in the absence of signs or symptoms of other primary causes of kidney damage.\n  DKD occurs in 20–40% of patients with diabetes and is the leading cause of ESRD.\n  The risk of DKD in type 2 diabetes seems to be similar to that in type 1 diabetes.\n  Although ESRD may be the most recognizable consequence of DKD, the majority of patients actually die from CVD before needing kidney replacement therapy."
         text: "فخ: الـ ESRD هو أشهر نهاية للـ diabetic kidney disease (DKD)، بس **أغلب العيانين بيموتوا بالـ cardiovascular disease (CVD)** قبل ما يوصلوا للـ dialysis. يعني علاج الـ DKD هو علاج القلب كمان."
+      - kind: check
+        page: 27
+        quote: "Although ESRD may be the most recognizable consequence of DKD, the majority of patients actually die from CVD before needing kidney replacement therapy."
+        question: "What do most patients with diabetic kidney disease actually die of?"
+        options: ["Cardiovascular disease, before needing dialysis", "End-stage renal disease on dialysis", "Hyperkalaemia", "Infection of the urinary tract"]
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول **the majority** بيموتوا بالـ **CVD** قبل الـ kidney replacement therapy."
+          - "الـ ESRD أشهر نتيجة، بس مش أشهر سبب وفاة."
+          - "مش مذكور كسبب وفاة في الكتاب."
+          - "مش مذكور في الكتاب."
       - kind: explain
         remind: [dm.L03.008]
         page: 28
@@ -48,6 +101,30 @@ lessons:
           أقوى عامل لبداية الـ albuminuria: ==مستوى السكر والـ A1C==.
 
           وبجانبه: **hypertension**، **smoking**، **hyperlipidemia**، **genetic susceptibility**.
+
+          ليه السكر الأقوى؟ لأنه هو اللي بيبدأ الضرر في الـ glomerulus، والباقيين بيسرّعوه. والتفسير المقبول (مش في الكتاب): الـ **hypertension** بتزوّد الضغط جوه الـ glomerulus فيسرّب أكتر، والتدخين والـ hyperlipidemia بيأذوا الأوعية الصغيرة نفسها، والجينات بتفسر ليه مش كل مريض سكر بيجيله DKD حتى مع نفس السكر. يعني كل risk factor هو حاجة تقدر **تعالجها** ما عدا الجينات.
+      - kind: try
+        items: [dm.L03.001, dm.L03.002, dm.L03.003, dm.L03.006, dm.L03.008]
+    recap:
+      - "Tight control: A1C ~7، FPG 80–130، peak PPG ~180؛ بيمنع أو يبطّأ الـ microvascular في النوعين."
+      - "DKD: albuminuria >30 mg/g (persistent) و/أو GFR <60، من غير سبب كلوي تاني؛ 20–40%؛ أول سبب للـ ESRD؛ type 2 زي type 1."
+      - "أغلبهم بيموتوا CVD قبل الـ dialysis."
+      - "أقوى risk factor: السكر والـ A1C؛ وبعده hypertension، smoking، hyperlipidemia، genes."
+    practice: [dm.L03.001, dm.L03.002, dm.L03.003, dm.L03.004, dm.L03.005, dm.L03.006, dm.L03.007, dm.L03.008, dm.L03.069, dm.L03.080]
+  # ------------------------------------------------------------------
+  # Split from lesson1 on 2026-11-13 (#828): DKD screening and referral.
+  - id: dm.L03.lesson5
+    title: "قيس الكلية صح: ACR و eGFR وامتى تحوّل"
+    hook: "عينة بول واحدة بعد ماتش كورة ممكن تشخّص غلط. اعرف تقيس إمتى وإزاي، وامتى الكلية مش بتاعة السكر."
+    minutes: 9
+    pages: [28, 29]
+    topics: [dkd-screening]
+    goals:
+      - "تعمل screening صح: مين، كل قد إيه، وبإيه"
+      - "تعرف ليه 2 من 3 عينات، وإيه اللي بيعلّي الـ albumin مؤقتًا"
+      - "تختار معادلة الـ GFR وتعرف امتى تحوّل للـ nephrologist"
+    status: unverified
+    steps:
       - kind: explain
         page: 28
         title: "الـ Screening"
@@ -58,6 +135,8 @@ lessons:
           - **Type 2:** **كلهم** من التشخيص، أيًّا كان العلاج.
 
           **الـ albuminuria بتتأكد** لما **2 من 3** عينات في **3–6 شهور** يطلعوا abnormal، لأن الـ urinary albumin excretion (UAE) متقلّب.
+
+          ليه type 1 بعد 5 سنين و type 2 من أول يوم؟ نفس منطق العين: type 1 بيتشخّص يوم ما بيبدأ، والكلية محتاجة سنين عشان تتأذي. type 2 بيبقى موجود في السر سنين قبل التشخيص، فممكن الكلية تكون اتأذت خلاص. وليه **الاتنين** (ACR و eGFR)؟ لأن الـ albuminuria بتبان بدري، بس فيه عيانين الـ GFR بيقع عندهم من غير albumin، فلو قست واحد بس هتفوّتهم.
       - kind: sort
         page: 28
         quote: "4- Urinary Albumin Excretion (UAE):\n  4- Because of variability in the UAE, two of three specimens collected within a 3- to 6- month period should be abnormal before considering a patient to have developed albuminuria.\n  5- Exercise within 24 h, infection, fever, congestive heart failure, marked hyperglycemia, and marked hypertension may elevate UAE over baseline values."
@@ -73,6 +152,17 @@ lessons:
           - { text: "Fasting overnight", bin: 1 }
           - { text: "Taking metformin", bin: 1 }
         why: "كلهم بيزوّدوا الضغط أو الـ permeability في الـ glomerulus مؤقتًا. علشان كده ما تشخّصش من عينة واحدة بعد ماتش كورة أو وهو سخن."
+      - kind: check
+        page: 28
+        quote: "4- Urinary Albumin Excretion (UAE):\n  4- Because of variability in the UAE, two of three specimens collected within a 3- to 6- month period should be abnormal before considering a patient to have developed albuminuria.\n  5- Exercise within 24 h, infection, fever, congestive heart failure, marked hyperglycemia, and marked hypertension may elevate UAE over baseline values."
+        question: "ACR 70 mg/g once, the morning after a long run. Next?"
+        options: ["Repeat: 2 of 3 abnormal in 3–6 months", "Diagnose DKD from this single result", "Start an ACEi today for albuminuria", "Refer for a kidney biopsy this week"]
+        answer: 0
+        why:
+          - "صح: عينة واحدة مش كفاية، وكمان الـ exercise بيعلّيها."
+          - "لازم تأكيد الأول."
+          - "مش قبل التأكيد."
+          - "مفيش أي referral criterion."
       - kind: table
         page: 29
         quote: "Cockcroft-Gault formula: overestimate.\nMDRD: underestimate.\nCKD-EPI: more accurate. GFR> 60ml/min."
@@ -83,6 +173,14 @@ lessons:
           - ["MDRD", "Underestimates"]
           - ["CKD-EPI", "More accurate; preferred"]
         hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: reveal
+        page: 29
+        quote: "Cockcroft-Gault formula: overestimate."
+        prompt: "ليه الـ Cockcroft-Gault بيزوّد الـ GFR عند مريض السكر؟"
+        answer: |
+          الكتاب بيقول: Cockcroft-Gault **overestimate**، و MDRD **underestimate**، و **CKD-EPI** أدق وهو المفضّل.
+
+          التفسير المقبول (مش في الكتاب): الـ Cockcroft-Gault فيها **الوزن**، ومريض type 2 غالبًا وزنه عالي من الدهون مش من العضل، فالمعادلة تحسب كلية أكبر من الحقيقة. أما الـ MDRD فاتعملت على ناس عندهم CKD أصلًا، فبتطلّع أرقام أوطى في الناس اللي كليتهم قريبة من الطبيعي. عشان كده الـ CKD-EPI أدق خصوصًا فوق **60**.
       - kind: figure
         page: 29
         title: "الـ heat map: GFR × albuminuria"
@@ -100,6 +198,8 @@ lessons:
           2. **Rapidly increasing albuminuria** أو **nephrotic syndrome**
           3. **Rapidly decreasing eGFR**
           4. ==Absence of retinopathy== في **type 1**
+
+          الأربعة بيقولوا نفس الحاجة: الصورة **مش شبه الـ DKD العادي**. الـ DKD بيمشي ببطء ومن غير دم ولا casts في البول، فأي **active sediment** أو تدهور **سريع** معناه glomerulonephritis أو سبب تاني ممكن يتعالج، وده اللي الـ biopsy بتلاقيه.
       - kind: reveal
         page: 29
         quote: "Absence of retinopathy (in type 1 diabetes)."
@@ -108,26 +208,15 @@ lessons:
           الـ retinopathy والـ nephropathy أولاد نفس المرض: **microangiopathy** بنفس الـ duration ونفس الـ control. في type 1 بالذات، الاتنين بيمشوا مع بعض تقريبًا.
 
           لو الكلية بايظة والعين سليمة، يبقى غالبًا في **سبب تاني** للكلية (glomerulonephritis مثلًا)، ومحتاج nephrologist. (التفسير فسيولوجي؛ القاعدة من الكتاب.)
-      - kind: check
-        page: 28
-        quote: "4- Urinary Albumin Excretion (UAE):\n  4- Because of variability in the UAE, two of three specimens collected within a 3- to 6- month period should be abnormal before considering a patient to have developed albuminuria.\n  5- Exercise within 24 h, infection, fever, congestive heart failure, marked hyperglycemia, and marked hypertension may elevate UAE over baseline values."
-        question: "ACR 70 mg/g once, the morning after a long run. Next?"
-        options: ["Repeat: 2 of 3 abnormal in 3–6 months", "Diagnose DKD from this single result", "Start an ACEi today for albuminuria", "Refer for a kidney biopsy this week"]
-        answer: 0
-        why:
-          - "صح: عينة واحدة مش كفاية، وكمان الـ exercise بيعلّيها."
-          - "لازم تأكيد الأول."
-          - "مش قبل التأكيد."
-          - "مفيش أي referral criterion."
       - kind: try
-        items: [dm.L03.002, dm.L03.003, dm.L03.009, dm.L03.011, dm.L03.014]
+        items: [dm.L03.009, dm.L03.010, dm.L03.011, dm.L03.013, dm.L03.014]
     recap:
-      - "Tight control: A1C ~7، FPG 80–130، peak PPG ~180."
-      - "DKD: albuminuria >30 mg/g و/أو GFR <60؛ 20–40%؛ أول سبب للـ ESRD؛ أغلبهم بيموتوا CVD."
-      - "Screen سنويًا (ACR + eGFR): type 1 بعد 5 سنين، type 2 من التشخيص. Albuminuria = 2 من 3 في 3–6 شهور."
-      - "CKD-EPI أدق؛ Cockcroft-Gault بيزوّد؛ MDRD بيقلل."
+      - "Screen سنويًا (ACR + eGFR): type 1 بعد 5 سنين، type 2 من التشخيص أيًا كان العلاج."
+      - "Albuminuria = 2 من 3 في 3–6 شهور؛ exercise خلال 24 ساعة، infection، fever، CHF، سكر أو ضغط عالي جدًا بيعلّوها مؤقتًا."
+      - "CKD-EPI أدق؛ Cockcroft-Gault بيزوّد (الوزن)؛ MDRD بيقلل."
+      - "Heat map: GFR × albuminuria؛ A3 أو G4–G5 = refer."
       - "Refer: active sediment، nephrotic/albuminuria بتزيد بسرعة، eGFR بيقع بسرعة، type 1 من غير retinopathy."
-    practice: [dm.L03.001, dm.L03.002, dm.L03.003, dm.L03.004, dm.L03.005, dm.L03.006, dm.L03.007, dm.L03.008, dm.L03.009, dm.L03.010, dm.L03.011, dm.L03.012, dm.L03.013, dm.L03.014, dm.L03.015, dm.L03.016, dm.L03.017, dm.L03.018, dm.L03.019, dm.L03.061, dm.L03.062, dm.L03.063, dm.L03.064, dm.L03.069, dm.L03.080, dm.L03.084]
+    practice: [dm.L03.009, dm.L03.010, dm.L03.011, dm.L03.012, dm.L03.013, dm.L03.014, dm.L03.015, dm.L03.016, dm.L03.017, dm.L03.018, dm.L03.019, dm.L03.061, dm.L03.062, dm.L03.063, dm.L03.064, dm.L03.084]
   # ------------------------------------------------------------------
   - id: dm.L03.lesson2
     title: "نحمي الكلية: أكل وسكر وضغط و ACEi"
@@ -149,6 +238,8 @@ lessons:
           - **Protein:** حوالي ==0.8 g/kg/day== (الـ recommended dietary allowance) في الـ non-dialysis. على الـ **dialysis** أكتر، لأن الـ malnutrition مشكلة كبيرة هناك.
           - **Sodium:** أقل من **2,300 mg/day** للضغط والـ cardiovascular (CV) risk.
           - **Potassium:** ممكن تقلله لو البوتاسيوم عالي.
+
+          ليه 0.8 بالظبط ومش أقل؟ لأنها الـ recommended daily allowance، يعني الكمية اللي الشخص الطبيعي محتاجها. التفسير المقبول (مش في الكتاب): بروتين زيادة بيزوّد شغل الـ glomerulus (hyperfiltration)، وبروتين أقل من اللازم بيعمل malnutrition. وعلى الـ dialysis البروتين بيتشال مع الغسيل، فالعيان محتاج أكتر.
       - kind: explain
         page: 30
         title: "السكر والأدوية"
@@ -158,6 +249,8 @@ lessons:
           - **Direct renal effect:** في type 2 + diabetic kidney disease (DKD)، فكّر في ==SGLT2 inhibitor (SGLT2i)== لو **eGFR ≥20** و **albumin >300 mg/g**.
           - **عدّل جرعات** أدوية السكر على حسب الكلية.
           - **Blood pressure (BP):** أقل من **130/80** حسب الفايدة والخطر لكل عيان.
+
+          ليه الـ SGLT2i بالذات مع albumin **>300**؟ لأن دي الكلية اللي بتتدهور أسرع، والتفسير المقبول (مش في الكتاب) إن الـ SGLT2i بيقلل الضغط جوه الـ glomerulus زي الـ ACEi بطريقة تانية، فبيبطّأ الـ progression حتى لو أثره على السكر قليل مع الـ eGFR الواطي. وتعديل الجرعات لأن أدوية كتير بتطلع من الكلية، فلما الكلية تضعف بتتراكم.
       - kind: explain
         page: 30
         title: "الـ Renoprotection: ACEi أو ARB"
@@ -168,6 +261,8 @@ lessons:
           - "لو الـ albumin **≥300**: الهدف تقلّله **30% أو أكتر**."
           - ما توقفوش لو الـ creatinine زاد **أقل من 30%** من غير volume depletion.
           - **مش** للـ primary prevention لو الضغط والـ ACR والـ eGFR طبيعيين.
+
+          ليه أقوى كل ما الـ albumin يعلى؟ لأن الـ ACEi/ARB بيحمي الكلية بإنه يقلل الـ albuminuria نفسها، فكل ما فيه albumin أكتر، الفايدة أكبر. وليه مش للـ primary prevention؟ يعني لو الكلية سليمة والضغط طبيعي، مفيش حاجة الدوا يقللها، فإنت بتدّي آثار جانبية (potassium، creatinine) من غير مقابل.
       - kind: figure
         page: 31
         quote: "Do not discontinue renin-angiotensin system blockade for minor increases in serum creatinine (<30%) in the absence of volume depletion."
@@ -248,6 +343,8 @@ lessons:
           2. لحد **50%** من الـ peripheral neuropathy **asymptomatic**، ومن غير foot care الرجل الـ insensate بتتعوّر.
           3. علاج الـ **autonomic neuropathy** بيحسّن الأعراض وجودة الحياة.
           4. أشهر syndrome: **distal symmetric sensorimotor polyneuropathy**، بتحب أطراف الرجلين والإيدين.
+
+          ليه **diagnosis of exclusion**؟ لأن مريض السكر ممكن يكون عنده B12 deficiency (خصوصًا على metformin) أو hypothyroidism أو alcohol، ودول بيتعالجوا، فلو قلت «ده السكر» وسكتّ هتفوّت حاجة ممكن ترجع (التفسير مقبول، مش في الكتاب). وليه الأطراف؟ لأن أطول الأعصاب هي اللي بتتأذي الأول، فالرجل قبل الإيد.
       - kind: figure
         remind: [dm.L03.033]
         page: 31
@@ -295,6 +392,8 @@ lessons:
           1. ==Charcot joint== (neuropathic arthropathy): متأخر مع sensory loss شديد، في الـ **knee** والـ **ankle**، **painless swelling** مع **abnormal mobility**.
           2. **Foot ulcers:** في أي stage بس أكتر مع الـ anesthesia المتقدمة؛ عند **pressure sites** (تحت الكعب، وتحت رأس أول وآخر metatarsal)؛ **painless** وصعب يلم.
           3. **Repeated minor injuries.**
+
+          التلاتة ليهم نفس السبب: الرجل **مش حاسة**. التفسير المقبول (مش في الكتاب): المفصل اللي مش حاسس بيتحمّل ضغط ولفّات غلط كل يوم من غير ما يوجع، فبيتكسر ويتشوّه ببطء (Charcot). والـ ulcer بتطلع في أماكن الضغط (الكعب ورؤوس الـ metatarsals) لأن الجلد هناك بيتهرس مع كل خطوة وصاحبه مش حاسس.
       - kind: aside
         tone: analogy
         page: 32
@@ -309,6 +408,8 @@ lessons:
           - **History** + **temperature أو pinprick** (small fiber) + **vibration بـ 128-Hz tuning fork** (large fiber).
           - **10-g monofilament** كل سنة، علشان تمسك الرجل المعرّضة لـ ulcer و amputation.
           - علامات الـ **autonomic neuropathy** في اللي عنده microvascular complications.
+
+          ليه الـ tests التلاتة مع بعض؟ لأن كل نوع fiber بيشيل إحساس مختلف: الـ small للألم والحرارة، والـ large للاهتزاز. ممكن واحد يتأذي والتاني سليم، فلو قست واحد بس هتفوّت نص المرض. والـ monofilament بيجاوب على السؤال العملي: الرجل دي هتحس لو اتعوّرت ولا لأ؟
       - kind: match
         page: 33
         quote: "Small-fiber function: pinprick and temperature sensation. Large-fiber function: vibration perception. Protective sensation: 10-g monofilament."
@@ -329,6 +430,8 @@ lessons:
           **العلاج:**
           - **Glucose control:** في type 1 يمنع أو يأخّر، وفي type 2 يبطّأ. **ما بيرجّعش** الأعصاب اللي ماتت.
           - **Neuropathic pain:** ==pregabalin== أو **duloxetine** كبداية.
+
+          ليه الـ small fibers أول ما تبان؟ التفسير المقبول (مش في الكتاب): لأنها رفيعة ومن غير myelin تقريبًا، فبتتأذي بسرعة، وأذيتها بتطلّع ألم و burning قبل ما الإحساس يروح. وليه الـ control ما بيرجّعش الأعصاب؟ الكتاب بيقول **does not reverse neuronal loss**، فالسكر الكويس بيحمي اللي فاضل بس. عشان كده الـ screening بدري مهم.
       - kind: update
         page: 33
         quote: "Treatment of diabetic neuropathy:\n  Optimize glucose control to prevent or delay the development of neuropathy in patients with type 1 diabetes A and to slow the progression of neuropathy in patients with type 2 diabetes. B (( does not reverse neuronal loss))\n  Pregabalin, duloxetine, are recommended as initial pharmacologic treatments for neuropathic pain in diabetes."
@@ -374,6 +477,8 @@ lessons:
         text: |
           - الـ prevalence مرتبطة بـ ==duration== السكر و **level of control**.
           - السكر **أول سبب** للعمى الجديد في سن **20–74** في الدول المتقدمة.
+
+          يعني العين ساعة بتعدّ: كل سنة سكر، وكل نقطة A1C زيادة، بتقرّب الـ retinopathy. وعشان كده الـ screening بيتعمل حسب المدة، والعلاج بيبدأ بضبط السكر. والسن 20–74 مهم: ده سن الشغل، يعني العمى هنا بيقطع رزق، مش بس نظر.
       - kind: figure
         page: 34
         quote: "At 5 years; mild, moderate and severe NPDR are associated with 15%, 30% and 60% risk of progression to PDR."
@@ -411,6 +516,8 @@ lessons:
           **Moderate:** **venous beading** وتغير في عرض الأوردة، و capillary dilatation و permeability أكتر.
 
           **Severe:** **progressive ischemia** و hemorrhages و exudates و microaneurysms منتشرة.
+
+          التفسير المقبول (مش في الكتاب) للترتيب ده: السكر بيضعّف حيطة الـ capillary فتنفخ (**microaneurysm**)، والضعيف بيسرّب دم (hemorrhage) و lipid (hard exudate)، ولما الـ capillaries تتقفل الشبكية تجوع (soft exudate، ischemia). عشان كده النظر سليم في الأول: الضرر لسه في الأطراف مش في الـ macula.
       - kind: reveal
         page: 34
         quote: "Mild non proliferative diabetic retinopathy (Mild NPDR):\n  These changes begin 3 to 5 years after diagnosis in type 1 diabetics.\n  First signs are microaneurysms with subsequent retinal haemorrhages and hard exudates.\n  Infarctions of nerve fiber layer, known as soft exudates.\n  Visual acuity is generally unaffected."
@@ -429,6 +536,8 @@ lessons:
           - **Early proliferative diabetic retinopathy (PDR):** neovascularization في الـ **retina**.
           - "==High-risk PDR==: neovascularization في الـ **vitreous** ← **retinal detachment**، **hemorrhage**، **blindness**."
           - أحيانًا تدخل الـ **iris** والـ anterior chamber ← **closed-angle glaucoma**.
+
+          ليه الأوعية الجديدة خطر مع إنها «تعويض»؟ التفسير المقبول (مش في الكتاب): لأنها هشة، بتنزف في الـ vitreous، ومعاها نسيج ليفي بيشد الشبكية فيعمل **detachment**. ولما تدخل الـ iris بتقفل الزاوية اللي الـ aqueous بيخرج منها، فالضغط يعلى (glaucoma).
       - kind: check
         page: 34
         quote: "At 5 years; mild, moderate and severe NPDR are associated with 15%, 30% and 60% risk of progression to PDR."
@@ -468,6 +577,8 @@ lessons:
           - ==Panretinal laser== للـ **high-risk PDR** وأحيانًا الـ **severe non-proliferative diabetic retinopathy (NPDR)**.
           - "**Anti-VEGF** حقن في الـ vitreous: **بديل** معقول للـ laser في بعض الـ PDR، و ==first-line== لأغلب الـ **diabetic macular edema**."
           - الـ retinopathy **مش** contraindication للـ **aspirin**؛ ما بيزوّدش الـ retinal hemorrhage.
+
+          ليه الـ laser بيشتغل؟ التفسير المقبول (مش في الكتاب): بيحرق أجزاء من الشبكية الطرفية الجعانة، فطلبها للأكسجين يقل، فالـ **VEGF** يقل والأوعية الجديدة تنكمش. والـ anti-VEGF بيوصل لنفس النتيجة بإنه يمسك الـ VEGF نفسه، وعشان كده بديل.
       - kind: aside
         tone: trap
         page: 35

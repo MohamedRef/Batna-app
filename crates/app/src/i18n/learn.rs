@@ -158,6 +158,11 @@ pub const STATE_NEXT: &str = "الجاي";
 pub const STATE_NEW: &str = "جديد";
 pub const STATE_DONE: &str = "خلّصته";
 /// "خطوة 3 من 9".
+/// A lesson step by its number, «خطوة 4».
+pub fn step_n(at: usize) -> String {
+    format!("خطوة {at}")
+}
+
 pub fn step_of(at: usize, n: usize) -> String {
     format!("خطوة {at} من {n}")
 }

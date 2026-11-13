@@ -15,3 +15,7 @@ pub const MCQS: &str = "سؤال اختيارات في البنك";
 pub const CASES: &str = "حالة";
 pub const TOPICS: &str = "المواضيع";
 pub const CHECKED: &str = "صحة المحتوى: راجعت";
+/// The lecture laid out page by page, as the book is (#831).
+pub const BOOK_ORDER: &str = "بترتيب الكتاب";
+pub const BOOK_ORDER_HINT: &str = "صفحة صفحة، وفيها أنهي خطوة في الدروس بتشرحها";
+pub const NO_STEP: &str = "مفيش شرح في الدروس لسه";

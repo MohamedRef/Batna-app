@@ -11,7 +11,7 @@ lessons:
     goals:
       - "تعرّف الـ CML وتحفظ أرقامها"
       - "تشرح الـ Ph1 والـ BCR/ABL والـ P210"
-      - "تعرف دور الـ PP2A في الـ blast crisis"
+      - "تعرف دور الـ PP2A في الـ blast crisis وليه ممكن يبقى علاج"
     status: unverified
     steps:
       - kind: explain
@@ -25,6 +25,10 @@ lessons:
           - **Marked splenomegaly**
           - **White blood cell (WBC) عالي جدًا**
           - **Basophilia** و **thrombocytosis** شائعين
+
+          ليه الطحال بيكبر كده؟ التفسير المقبول (مش في الكتاب): الطحال بيفلتر الدم، فلما الدم يبقى مليان granulocytes بالآلاف بتتحجز فيه، وكمان بيرجع يعمل دم زي ما كان بيعمل في الجنين (extramedullary haematopoiesis). فالحجم بيكبر مع حجم المرض.
+
+          والسبب؟ غالبًا **مفيش سبب** معروف. الوحيد اللي الكتاب بيذكره: ==ionizing radiation== (اللي نجيوا من القنبلة الذرية سنة 1945).
       - kind: table
         page: 116
         quote: "CML is diagnosed in 1 or 2 persons per 100,000 per year with slight male preponderance. The median age at diagnosis is approximately 45 to 50 years. The Ph1 chromosome results from a balanced translocation of material between the long arms of chromosomes 9 and 22. As more chromosomal material is lost from chromosome 22 than is gained from chromosome 9. the Ph1 chromosome is a shortened long arm of chromosome 22. The break, which occurs at band q34 of"
@@ -76,6 +80,8 @@ lessons:
           - الكسر في **9q34** بينقل الـ oncogene ==c-ABL== لمكان على 22 اسمه **breakpoint cluster region (bcr)**.
           - الاتنين جنب بعض بيعملوا **hybrid gene BCR/ABL**.
           - الجين ده بيعمل بروتين جديد **210 kDa** اسمه ==P210==: **tyrosine kinase** بيشغّل الانقسام من غير كنترول.
+
+          ليه kinase بالذات خطير؟ التفسير المقبول (مش في الكتاب): الـ tyrosine kinase زي مفتاح الكهربا بتاع رسالة «اتقسمي». الطبيعي إنه يشتغل لما يجيله growth factor ويطفي بعدها. الـ BCR بيلزق في الـ ABL فيخليه ==شغال على طول==، فالخلية بتسمع «اتقسمي» من غير ما حد يطلب. وعشان كده العلاج بعدين (الـ TKI) بيقفل المفتاح ده نفسه.
       - kind: reveal
         page: 116
         quote: "It is an acquired malignant disease characterized by over production of cells of the granulocytic series, especially the neutrophilic series, leading to marked splenomegaly and very high white blood cell counts. Basophilia and thrombocytosis are common. A characteristic cytogenetic abnormality, the Philadelphia (Ph1) chromosome, is present in the bone marrow cells in more than 95% of cases. The Ph1 chromosome occurs in erythroid, myeloid, monocytes, rarely T lypmphocytes cells, but not in marrow fibroblasts. This distribution places the abnormality in CML close to the plaripotent stem cells."
@@ -110,11 +116,28 @@ lessons:
           - في الـ **blast crisis** (مش الـ chronic phase) الـ BCR/ABL بيزوّد الـ inhibitor بتاعه **SET**، فالـ PP2A يقف.
           - لو رجعنا الـ PP2A ← الـ BCR/ABL يتكتم، حتى الـ **T315I**.
           - **Forskolin** بيشغّل PP2A: فكرة علاج للـ blast crisis والـ imatinib-resistant CML.
+
+          ليه ده مهم؟ لأن الـ kinase بيحط phosphate والـ phosphatase بيشيله. يعني لو مش قادر تقفل الـ kinase (زي في الـ T315I)، ممكن ==تقوّي اللي بيشيل== الـ phosphate بداله.
       - kind: aside
         tone: analogy
         page: 117
         quote: "Restoration of PP2A activity inhibits BCR/ABL expression/activity, hence impairing wild type and T315, BCR/ABL leukemogenesis."
         text: "تخيل عربية دواسة البنزين فيها لزقت (**BCR/ABL**). الـ chronic phase لسه فيها فرامل (**PP2A**). في الـ blast crisis الـ **SET** قطع سلك الفرامل. الـ forskolin بيحاول يرجّع السلك."
+      - kind: check
+        page: 117
+        quote: "enhanced PP2A activity, a bolished BCR/ABL phosphorylation and induced down regulation of BCR/ABL in imatinib-sensitive and resistant cells."
+        question: "In CML blast cells, what did forskolin do in the book?"
+        options:
+          - "Raised PP2A activity and lowered BCR/ABL"
+          - "Blocked the SET gene directly"
+          - "Worked only in imatinib-sensitive cells"
+          - "Raised BCR/ABL phosphorylation"
+        answer: 0
+        why:
+          - "صح: الـ forskolin شغّل الـ PP2A، فالـ BCR/ABL phosphorylation راح والـ BCR/ABL نفسه قلّ."
+          - "الكتاب بيقول إنه activator للـ PP2A، مش إنه بيوقف الـ SET."
+          - "اشتغل في الـ sensitive والـ resistant الاتنين، وده سبب الأمل."
+          - "العكس: الـ phosphorylation اتلغى."
       - kind: aside
         tone: exam
         page: 117
@@ -124,22 +147,22 @@ lessons:
         items: [hem.L08.003, hem.L08.008, hem.L08.010, hem.L08.012, hem.L08.015]
     recap:
       - "CML = overproduction granulocytes، splenomegaly، WBC عالي، basophilia وthrombocytosis."
-      - "1–2/100,000، رجالة أكتر شوية، median 45–50 سنة. السبب المعروف: radiation."
+      - "1–2/100,000، رجالة أكتر شوية، median 45–50 سنة. السبب المعروف الوحيد: radiation."
       - "Ph1 = t(9;22) balanced، 22 قصير، في >95%، stem cell disease."
-      - "BCR/ABL ← P210 tyrosine kinase."
-      - "PP2A بيتكتم بالـ SET في الـ blast crisis؛ forskolin فكرة علاج."
+      - "BCR/ABL ← P210 tyrosine kinase شغال على طول."
+      - "PP2A بيتكتم بالـ SET في الـ blast crisis؛ forskolin بيرجّعه حتى في الـ resistant cells."
     practice: [hem.L08.001, hem.L08.002, hem.L08.003, hem.L08.004, hem.L08.005, hem.L08.006, hem.L08.007, hem.L08.008, hem.L08.009, hem.L08.010, hem.L08.011, hem.L08.012, hem.L08.013, hem.L08.014, hem.L08.015, hem.L08.100, hem.L08.121]
   # ------------------------------------------------------------------
   - id: hem.L08.lesson2
     title: "CML: الطحال العملاق والمراحل التلاتة"
     hook: "طحال واصل للحوض، وWBC بالمية ألف، وساعات العيان ما يحسش بحاجة."
     minutes: 10
-    pages: [118, 121]
-    topics: [cml-clinical, cml-course, cml-diagnosis, cml-variants]
+    pages: [118, 122]
+    topics: [cml-clinical, cml-course]
     goals:
-      - "تربط كل عرض بسببه"
-      - "تفرّق الـ chronic والـ accelerated والـ blast crisis"
-      - "تفرّق الـ CML عن الـ leukemoid reaction وتعرف الـ variants"
+      - "تربط كل عرض وعلامة بسببها"
+      - "تفرّق الـ chronic والـ accelerated والـ blast crisis وتعرف ليه المرض بيتغير"
+      - "تعرف نوع الـ blasts في الأزمة وليه بيفرق"
     status: unverified
     steps:
       - kind: explain
@@ -154,6 +177,8 @@ lessons:
           - **↑ basal metabolic rate**: weight loss
 
           ونادرًا: نزيف من low platelets أو thrombosis من الـ thrombocytosis.
+
+          ليه الـ metabolic rate بيعلى؟ التفسير المقبول (مش في الكتاب): ملايين الخلايا بتتولد وتموت كل يوم، وده شغل بياكل طاقة، فالعيان بيخس ويعرق وهو قاعد. ولما العلاج يكسّر الخلايا دي فجأة، الـ purines بتتحول uric acid، وعشان كده **acute gout** ممكن ييجي بعد العلاج.
       - kind: sort
         page: 118
         quote: "CML is diagnosed in many asymptomatic patients during routine investigations. Symptomatology of CML usually nonspecific, is secondary to anaemia, spleen size or an increase basal metabolic rate. Fatigue, weigh loss, malaise, easy satiety and a sense of left upper quadrant fullness are the major symptoms of CML. Rarely bleeding due to low platelet count or thrombosis due to thrombocytosis and/or marked leukocytosis. An elevated blood histamine level (related to the hasophil cell mass) can cause upper GIT bleeding. Acute gouty arthritis may follow treatment."
@@ -178,11 +203,35 @@ lessons:
           - **Lymphadenopathy** و skin infiltration ==نادرين جدًا==.
           - الـ neutrophil function عادةً **طبيعية**.
           - **Acute gout** ممكن ييجي بعد العلاج.
+
+          ليه الغدد نادرة؟ التفسير المقبول (مش في الكتاب): الـ CML مرض **myeloid** بيعيش في النخاع والطحال، والغدد بيت الـ lymphocytes. فلو ظهرت غدد، معناه إن الخلايا اتغيرت وبقت بتنتشر في أماكن مش بتاعتها، وده اللي الصفحة الجاية بتقوله.
       - kind: aside
         tone: trap
         page: 119
         quote: "to the pelvic brim. Hepatomegaly is less common., lymphadenopathy is very uncommon as is infiltration of skin and other tissues. If present, these findings suggest Ph1-negative CML, or accelerated or blastic transformation."
         text: "عيان chronic myeloid leukaemia (CML) عنده **lymph nodes** أو **skin infiltration**؟ ده مش typical. فكّر في ==Ph1-negative CML== أو إنه دخل **accelerated** أو **blastic transformation**."
+      - kind: reveal
+        page: 118
+        quote: "Acute gouty arthritis may follow treatment."
+        prompt: "عيان CML بدأ hydroxyurea، وبعد أسبوع صباعه الكبير ورم واحمر. إيه اللي حصل وكان ممكن نمنعه إزاي؟"
+        answer: |
+          ده ==acute gouty arthritis==، والكتاب بيقول إنه ممكن ييجي **بعد العلاج**.
+
+          التفسير المقبول (مش في الكتاب): العلاج بيكسّر كمية ضخمة من الخلايا، والـ DNA بتاعها بيتحول **uric acid**. علشان كده الكتاب في الـ supportive treatment بيدي **overhydration + allopurinol** من الأول.
+      - kind: explain
+        page: 120
+        title: "المرض بيتغير مع الوقت"
+        quote: "All patients eventually develop a variety of changes in the behavior of the disease"
+        text: |
+          الكتاب واضح: ==كل== العيانين في الآخر سلوك المرض (the behavior of the disease) عندهم بيتغير. الأشهر **blast crisis** شكلها زي الـ acute leukemia.
+
+          إزاي تعرف إنه داخل على الـ **accelerated phase**؟
+          - صعب تخلي الـ WBC **تحت 20,000**
+          - الطحال والكبد بيكبروا، و infiltration في الغدد والجلد والعضم
+          - **Blasts 15–19%** في الدم أو النخاع
+          - **Basophils 20%** أو أكتر
+
+          ليه بيحصل كده؟ التفسير المقبول (مش في الكتاب): الـ BCR/ABL بيخلي الخلية تتقسم كتير، وكل انقسام فرصة لغلطة جينية جديدة. مع الوقت الـ clone بياخد غلطات زيادة، فيبطّل يكبر ويبقى زي الـ blasts، ويبطّل يسمع كلام الدوا.
       - kind: figure
         page: 120
         quote: "\"All patients eventually develop a variety of changes in the behavior of the disease, most frequently there is \"\"a blast crisis\"\" a clinical picture resembling that of acute leukemia. This change can be abrupt, but more frequently it is preceded by a period of progressively greater difficulty in maintaining the WBC count at a level of less than 20,000/dl, increasing splenomegaly, hepatomegaly, and infilteration of nodes, skin, bones, or other tissues, the appearance of blast cells (15 to 19%) in blood or BM, basophilia 20% or more. This last group of features, termed the accelerated phase of CML.\""
@@ -212,6 +261,21 @@ lessons:
             <text x="30" y="304" class="t-sm t-b">Median survival 3 months</text>
           </svg>
       - kind: check
+        page: 120
+        quote: "the appearance of blast cells (15 to 19%) in blood or BM, basophilia 20% or more. This last group of features, termed the accelerated phase of CML."
+        question: "Which finding fits the accelerated phase of CML in the book?"
+        options:
+          - "Basophils 20% or more in the blood"
+          - "Blasts above 30% with a clinical picture of acute leukemia"
+          - "WBC easily kept below 20,000"
+          - "A shrinking spleen"
+        answer: 0
+        why:
+          - "صح: basophilia 20% أو أكتر من علامات الـ accelerated phase."
+          - "ده شكل الـ blast crisis، مش الـ accelerated."
+          - "العكس: الـ accelerated بيبدأ لما يبقى صعب تخلي الـ WBC تحت 20,000."
+          - "الطحال بيكبر في الـ accelerated phase."
+      - kind: check
         page: 121
         quote: "One third of patients abrupthy develop an acute transformation (blast crisis); the other two thirds respond progressively less well in the control of the WBC count and spleen size. This loss of control (Accelerated phase). The median survival after developing a blast crisis of CML is only 3 months. The survival after development of the accelerated phase of CML is 12 months. In"
         question: "Median survival after CML blast crisis, per the book?"
@@ -227,6 +291,41 @@ lessons:
           - "3 سنين مش رقم الكتاب."
           - "5–12 سنة دي ذروة الـ CML بعد القنبلة الذرية."
       - kind: explain
+        page: 122
+        title: "الـ blasts في الأزمة من أنهي نوع؟"
+        quote: "70% of cases the blast cells are myeloblasts, in 20% of cases the blast cells are lymphoblasts and in 10% of cases the blast cells are undifferentiated."
+        text: |
+          في الـ blast crisis:
+          - **70%** ==myeloblasts==
+          - **20%** ==lymphoblasts==
+          - **10%** undifferentiated
+
+          ليه ممكن تبقى lymphoblasts في مرض اسمه myeloid؟ لأن الـ Ph1 أصلًا في خلية **قبل** ما الـ myeloid والـ lymphoid يتفرقوا (فاكر الـ stem cell من الدرس الأول؟). يعني الـ clone يقدر يطلع أي سلالة.
+
+          وده بيفرق في العلاج: الكتاب بيقول الـ blast crisis تتعالج **حسب نوع الـ acute leukemia**.
+      - kind: try
+        items: [hem.L08.017, hem.L08.024, hem.L08.027, hem.L08.040, hem.L08.103]
+    recap:
+      - "الأعراض: anemia، الطحال، الـ BMR. Leukostasis: dyspnea، drowsiness، TIA، priapism. Gout بعد العلاج."
+      - "Splenomegaly أثبت علامة (>60%). Nodes أو skin = Ph-negative أو transformation."
+      - "Accelerated: WBC صعب تحت 20,000، blasts 15–19%، basophils ≥20%، 12 شهر."
+      - "Blast crisis: تلت فجأة، 3 شهور؛ myeloid 70%، lymphoid 20%، undifferentiated 10%."
+    practice: [hem.L08.016, hem.L08.017, hem.L08.018, hem.L08.019, hem.L08.020, hem.L08.021, hem.L08.022, hem.L08.023, hem.L08.024, hem.L08.025, hem.L08.026, hem.L08.027, hem.L08.028, hem.L08.040, hem.L08.041, hem.L08.042, hem.L08.101, hem.L08.102, hem.L08.103]
+  # ------------------------------------------------------------------
+  # Split from lesson2 on 2026-11-13 (#828): diagnosis and variants.
+  - id: hem.L08.lesson6
+    title: "CML ولا حاجة شبهها؟"
+    hook: "مش كل WBC عالي CML: الـ LAP والـ Ph1 بيفرقوا، وفيه أقارب ليها شكلهم مختلف."
+    minutes: 8
+    pages: [120, 121]
+    topics: [cml-diagnosis, cml-variants]
+    goals:
+      - "تمشي طريق تشخيص الـ CML خطوة خطوة وتعرف ليه كل خطوة"
+      - "تفرّق الـ CML عن الـ leukemoid reaction والأمراض اللي بتقلّدها"
+      - "تعرف الـ variants بعلامة كل واحد"
+    status: unverified
+    steps:
+      - kind: explain
         page: 120
         title: "التشخيص"
         quote: "The presence of unexplained myeloid leukocytosis with splenomegely should lead to a leukocyte alkaline phosphotase (LAP) test and bone marrow examination with a cytogenetic analysis. The presence of Ph 1 chromosome establish the diagnosis. When Ph1 chromosome is not found, molecular evidence for the presence of the hybrid BCR/AB/gene should be sought."
@@ -236,6 +335,8 @@ lessons:
           2. **Bone marrow** + **cytogenetics**
 
           الـ **Ph1** بيأكد التشخيص. لو مش موجود ← دوّر على ==BCR/ABL== بالـ molecular tests.
+
+          ليه نكمّل لو الـ Ph1 مش باين؟ التفسير المقبول (مش في الكتاب): الـ cytogenetics بتشوف الكروموزوم تحت الميكروسكوب، فلو الحتة اللي اتنقلت صغيرة أو مستخبية، الكروموزوم يبان طبيعي والجين الهجين موجود. الـ molecular test بيدوّر على الجين نفسه، فبيلقطه.
       - kind: table
         page: 120
         quote: "| | CML | Neutrophilic leukemoid reaction |\n| WBC | > 50,000/dl | < 50.000/dl |\n| Toxic granulation | -ve | +ve |\n| Baesophilia | + | -ve |\n| LAP | weak or abscent | normal |\n| BM | ↑ blast cell | normal |\n| Effect of antibiotics | No response | good response |"
@@ -257,6 +358,73 @@ lessons:
           في الـ **leukemoid reaction** الـ neutrophils طبيعية ومتنشّطة بالـ infection، فالـ enzyme بتاعها شغال.
 
           في الـ **CML** الـ neutrophils جاية من ==clone== خبيث، شكلها ناضج بس وظيفيًا ناقصها الـ **alkaline phosphatase**. علشان كده الـ LAP **weak or absent**. (تفسير فسيولوجي؛ الجدول من الكتاب.)
+      - kind: check
+        page: 120
+        quote: "| | CML | Neutrophilic leukemoid reaction |\n| WBC | > 50,000/dl | < 50.000/dl |\n| Toxic granulation | -ve | +ve |\n| Baesophilia | + | -ve |\n| LAP | weak or abscent | normal |\n| BM | ↑ blast cell | normal |\n| Effect of antibiotics | No response | good response |"
+        question: "WBC 38,000 with toxic granulation, no basophils, normal LAP, during pneumonia. Most likely?"
+        options:
+          - "Neutrophilic leukemoid reaction"
+          - "CML in chronic phase"
+          - "CML in accelerated phase"
+          - "Chronic neutrophilic leukaemia"
+        answer: 0
+        why:
+          - "صح: أقل من 50,000، toxic granules، LAP طبيعي، ومفيش basophilia: كله leukemoid، وهيتحسن بالـ antibiotics."
+          - "الـ CML: LAP واطي وbasophilia ومفيش toxic granules."
+          - "الـ accelerated فيه basophils 20% أو أكتر."
+          - "الـ CNL نادرة جدًا وتشخيصها بالاستبعاد، والـ infection هنا بيفسّر الصورة."
+      - kind: explain
+        page: 120
+        title: "تقلّد الـ CML مين كمان؟"
+        quote: "Polycythemia rubra vera with associate iron deficiency."
+        text: |
+          الكتاب بيقول الـ CML لازم تتفرق عن:
+          - الـ **neutrophilic leukemoid reaction** (الجدول)
+          - **Prolonged corticosteroid therapy**
+          - **Agnogenic myeloid metaplasia**
+          - **Polycythemia rubra vera** مع ==iron deficiency==
+
+          ليه دول بالذات؟ التفسير المقبول (مش في الكتاب):
+          - الـ **steroids** بتفك الـ neutrophils اللي لازقة في جدار الأوعية، فالعدد في التحليل بيعلى من غير أي leukemia.
+          - الـ **agnogenic myeloid metaplasia** (myelofibrosis) فيها طحال كبير وخلايا immature في الدم، فشكلها قريب.
+          - الـ **polycythemia vera** مرض myeloproliferative زي الـ CML، والـ iron deficiency بتنزّل الـ Hb فتخبي كترة الكرات الحمرا، فيفضل قدامك WBC عالي وطحال.
+
+          والفيصل في الكل: ==Ph1== أو BCR/ABL.
+      - kind: figure
+        page: 120
+        quote: "The presence of unexplained myeloid leukocytosis with splenomegely should lead to a leukocyte alkaline phosphotase (LAP) test and bone marrow examination with a cytogenetic analysis. The presence of Ph 1 chromosome establish the diagnosis. When Ph1 chromosome is not found, molecular evidence for the presence of the hybrid BCR/AB/gene should be sought."
+        title: "طريق التشخيص"
+        alt: "A decision path: unexplained myeloid leukocytosis with a big spleen leads to an LAP test and marrow with cytogenetics. If Ph1 is found it is CML. If not, look for BCR/ABL by molecular tests: positive means CML, negative points to the variants, a leukemoid reaction or a mimic."
+        caption: "الـ ==Ph1== بيقفل الموضوع. لو مش موجود، الـ **BCR/ABL** هو الخطوة التانية قبل ما تقول variant."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L08d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="35" y="8" width="260" height="44" rx="10" class="fg-box"/>
+            <text x="165" y="27" text-anchor="middle" class="t-sm t-b">Unexplained myeloid</text>
+            <text x="165" y="44" text-anchor="middle" class="t-sm t-b">leukocytosis + big spleen</text>
+            <path d="M165 52 L165 74" class="fg-arrow" marker-end="url(#L08d)"/>
+            <rect x="35" y="76" width="260" height="44" rx="10" class="fg-acc"/>
+            <text x="165" y="95" text-anchor="middle" class="t-sm">LAP + marrow with</text>
+            <text x="165" y="112" text-anchor="middle" class="t-sm">cytogenetics</text>
+            <path d="M110 120 L75 150" class="fg-arrow" marker-end="url(#L08d)"/>
+            <path d="M220 120 L255 150" class="fg-arrow" marker-end="url(#L08d)"/>
+            <rect x="10" y="152" width="130" height="44" rx="10" class="fg-good"/>
+            <text x="75" y="171" text-anchor="middle" class="t-sm t-b">Ph1 found</text>
+            <text x="75" y="188" text-anchor="middle" class="t-sm">= CML</text>
+            <rect x="190" y="152" width="130" height="44" rx="10" class="fg-thin"/>
+            <text x="255" y="171" text-anchor="middle" class="t-sm t-b">No Ph1</text>
+            <text x="255" y="188" text-anchor="middle" class="t-sm">look for BCR/ABL</text>
+            <path d="M225 196 L195 226" class="fg-arrow" marker-end="url(#L08d)"/>
+            <path d="M285 196 L290 226" class="fg-arrow" marker-end="url(#L08d)"/>
+            <rect x="120" y="228" width="110" height="44" rx="10" class="fg-good"/>
+            <text x="175" y="247" text-anchor="middle" class="t-sm t-b">BCR/ABL +</text>
+            <text x="175" y="264" text-anchor="middle" class="t-sm">= CML</text>
+            <rect x="240" y="228" width="85" height="92" rx="10" class="fg-bad"/>
+            <text x="282" y="247" text-anchor="middle" class="t-sm t-b">BCR/ABL −</text>
+            <text x="282" y="266" text-anchor="middle" class="t-sm">variants,</text>
+            <text x="282" y="283" text-anchor="middle" class="t-sm">leukemoid,</text>
+            <text x="282" y="300" text-anchor="middle" class="t-sm">mimics</text>
+          </svg>
       - kind: table
         page: 121
         quote: "It occurs in elderly men, monocytosis is prominent, thrombocytopenia is common, basophilia and eosinophilia are absent, dysplatic changes are usually present. Very rare patients have been described with chronic myelomonocytic leukaemia like blood picture with cytogenetic abnormalities as t(5:12) with fusion of ETV and PDGFRV. T(5-12) and t(8:13) are both characterized by prominent eosinophila but basophilia is absent the t(5:12) leukaemias respond extremely well to low dose of imatinib."
@@ -268,26 +436,59 @@ lessons:
           - ["t(5;12)", "Eosinophilia, no basophilia, great on low-dose imatinib"]
           - ["CNL", "Rare, mature neutrophils, no basophilia, by exclusion"]
         hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: explain
+        page: 121
+        title: "الـ variants: كل واحد وعلامته"
+        quote: "It may lack basophilia, lack blast cells and it show dysplastic features. The survival is inferior to that of ph +ve."
+        text: |
+          - **Ph-negative CML**: مفيهاش basophilia ولا blasts، فيها **dysplasia**، والـ survival ==أوحش== من الـ Ph-positive.
+          - **Chronic myelomonocytic leukaemia (CMML)**: رجالة كبار، **monocytosis**، platelets واطية، ومفيش basophils ولا eosinophils.
+          - **t(5;12)** و **t(8;13)**: ==eosinophilia== واضحة ومفيش basophilia.
+          - **Chronic neutrophilic leukaemia (CNL)**: نادرة جدًا، neutrophils ناضجة من غير immature ولا basophilia، وتشخيصها **بالاستبعاد**، وممكن ما تحتاجش علاج.
+
+          ليه الـ Ph-negative أوحش؟ التفسير المقبول (مش في الكتاب): مفيش BCR/ABL، يعني مفيش هدف واحد واضح للـ TKI يقفله، والـ dysplasia معناها إن الخلايا نفسها مش سليمة.
+      - kind: reveal
+        page: 121
+        quote: "the t(5:12) leukaemias respond extremely well to low dose of imatinib."
+        prompt: "الـ t(5;12) مفيهاش BCR/ABL أصلًا. ليه بتستجيب للـ imatinib بجرعة صغيرة؟"
+        answer: |
+          الكتاب بيقول الـ t(5;12) بتعمل fusion فيها **PDGFR** وبتستجيب ==extremely well== لجرعة **low dose imatinib**.
+
+          التفسير المقبول (مش في الكتاب): الـ PDGFR (platelet-derived growth factor receptor) هو كمان ==tyrosine kinase==، والـ imatinib بيقفله زي ما بيقفل الـ ABL. فالدوا لاقي نفس نوع القفل في مرض تاني.
+      - kind: check
+        page: 121
+        quote: "This is an exceedingly rare disorder that is usually diagnosed incidentally."
+        question: "Raised mature neutrophils, no immature granulocytes, no basophilia, other causes excluded. Diagnosis?"
+        options:
+          - "Chronic neutrophilic leukaemia"
+          - "Ph-negative CML"
+          - "Chronic myelomonocytic leukaemia"
+          - "t(5;12) leukaemia"
+        answer: 0
+        why:
+          - "صح: neutrophils ناضجة من غير immature ولا basophilia، وبالاستبعاد: CNL."
+          - "الـ Ph-negative فيها dysplasia وممكن تبقى من غير basophilia، بس مش الصورة النظيفة دي."
+          - "الـ CMML علامتها الـ monocytosis."
+          - "الـ t(5;12) علامتها الـ eosinophilia."
       - kind: try
-        items: [hem.L08.017, hem.L08.024, hem.L08.027, hem.L08.031, hem.L08.039]
+        items: [hem.L08.029, hem.L08.031, hem.L08.033, hem.L08.036, hem.L08.039]
     recap:
-      - "الأعراض: anemia، الطحال، الـ BMR. Leukostasis: dyspnea، drowsiness، TIA، priapism."
-      - "Splenomegaly أثبت علامة (>60%). Nodes أو skin = Ph-negative أو transformation."
-      - "Accelerated: blasts 15–19%، basophils ≥20%، 12 شهر. Blast crisis: 3 شهور، myeloid 70%."
-      - "التشخيص: LAP + marrow cytogenetics؛ Ph1 بيأكد. CML: LAP واطي، basophilia، مفيش toxic granules."
-      - "Variants: Ph-negative، CMML، t(5;12)، CNL."
-    practice: [hem.L08.016, hem.L08.017, hem.L08.018, hem.L08.019, hem.L08.020, hem.L08.021, hem.L08.022, hem.L08.023, hem.L08.024, hem.L08.025, hem.L08.026, hem.L08.027, hem.L08.028, hem.L08.029, hem.L08.030, hem.L08.031, hem.L08.032, hem.L08.033, hem.L08.034, hem.L08.035, hem.L08.036, hem.L08.037, hem.L08.038, hem.L08.039, hem.L08.040, hem.L08.041, hem.L08.042, hem.L08.101, hem.L08.102, hem.L08.103, hem.L08.116, hem.L08.117]
+      - "Myeloid leukocytosis + طحال ← LAP + marrow cytogenetics. Ph1 بيأكد؛ لو مش موجود دوّر على BCR/ABL."
+      - "CML: WBC >50,000، basophilia، LAP واطي، مفيش toxic granules، ما بتستجيبش للـ antibiotics."
+      - "Mimics: leukemoid، steroids، agnogenic myeloid metaplasia، PV مع iron deficiency."
+      - "Variants: Ph-negative (أوحش)، CMML (monocytes)، t(5;12) (eosinophils، imatinib)، CNL (بالاستبعاد)."
+    practice: [hem.L08.029, hem.L08.030, hem.L08.031, hem.L08.032, hem.L08.033, hem.L08.034, hem.L08.035, hem.L08.036, hem.L08.037, hem.L08.038, hem.L08.039, hem.L08.116, hem.L08.117]
   # ------------------------------------------------------------------
   - id: hem.L08.lesson3
-    title: "علاج الـ CML: من busulfan لحد الـ TKIs"
-    hook: "دوا واحد بيقفل الـ kinase اللي غلطان، وغيّر حياة العيانين دول."
-    minutes: 10
-    pages: [122, 125]
-    topics: [cml-treatment, tki, cml-phases-tx]
+    title: "علاج الـ CML: امتى نجري، وbusulfan ولا hydroxyurea"
+    hook: "مش كل WBC عالي طوارئ، والدوا القديم لازم توقفه قبل ما توصل للطبيعي."
+    minutes: 8
+    pages: [122, 123]
+    topics: [cml-treatment]
     goals:
-      - "تعرف امتى العلاج لازم يبقى فوري"
+      - "تعرف امتى العلاج لازم يبقى فوري وليه"
       - "تحفظ busulfan وhydroxyurea بجرعاتهم وآثارهم"
-      - "تعرف الـ TKIs والـ resistance والـ T315I"
+      - "تفهم ليه كل واحد بيتوقف عند رقم مختلف"
     status: unverified
     steps:
       - kind: explain
@@ -302,6 +503,23 @@ lessons:
           3. **Painful splenomegaly** (شك في splenic infarction)
 
           **Supportive**: overhydration + **allopurinol**، blood transfusion، platelets لو محتاج.
+
+          ليه التلاتة دول بالذات؟ التفسير المقبول (مش في الكتاب): كلهم خطر على **الأوعية** دلوقتي مش بعدين. الخلايا الكتير بتتقل الدم وتسد الأوعية الصغيرة (leukostasis)، والطحال اللي بيوجع معناه إن جزء منه مات من قلة الدم. أما الـ allopurinol فبيوقف تحويل الـ purines لـ uric acid قبل ما العلاج يكسّر الخلايا.
+      - kind: check
+        page: 122
+        quote: "Immediate treatment of CML is not necessary unless the WBC count exceeds 200,000/dl or there is evidence of leukostasis (priapism, dyspnea, venous thrombosis or unless painful splenomegaly suggests splenic infarction."
+        question: "New CML, WBC 140,000, no symptoms, painless spleen. Per the book, is treatment urgent?"
+        options:
+          - "No, none of the three urgent triggers is present"
+          - "Yes, any WBC above 100,000 is urgent"
+          - "Yes, because basophilia is present"
+          - "Yes, splenomegaly alone makes it urgent"
+        answer: 0
+        why:
+          - "صح: مفيش WBC فوق 200,000، ولا leukostasis، ولا طحال بيوجع."
+          - "الحد في الكتاب 200,000 مش 100,000."
+          - "الـ basophilia مش من الحالات التلاتة."
+          - "لازم الطحال يكون **بيوجع** (شك في infarction)."
       - kind: table
         page: 122
         quote: "b) Hydroxyurea: is given at a dose of 1 to 4 grams per day. The dose is decreased when the WBC count decreases and can be discontinued when WBC count is 5000/dl."
@@ -321,6 +539,27 @@ lessons:
           لأن الـ WBC ==بيكمّل ينزل 2–4 أسابيع== بعد ما توقفه.
 
           لو استنيت لحد الطبيعي، هيكمّل ينزل وتقع في **severe pancytopenia**.
+      - kind: figure
+        page: 122
+        quote: "Since the WBC count continues to fall for 2 to 4 weeks after cessation of busulfan the drug should be discontinued when the WBC count reashes 20,000/dl to prevent sever pancytopnea."
+        title: "الـ busulfan بيكمّل بعد ما توقفه"
+        alt: "A line graph of WBC against weeks. The count falls on busulfan until 20,000, where the drug is stopped, then keeps falling for 2 to 4 weeks toward normal."
+        caption: "وقّف عند ==20,000==، والعدد هيكمّل ينزل لوحده **2–4 أسابيع**."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 20 L40 220 L315 220" class="fg-line"/>
+            <text x="12" y="16" class="t-sm t-mut">WBC</text>
+            <text x="290" y="244" class="t-sm t-mut">weeks</text>
+            <path d="M45 40 C90 60 120 110 150 135" class="fg-line-acc"/>
+            <path d="M150 135 C185 160 215 190 255 205" class="fg-line-bad"/>
+            <path d="M40 135 L310 135" class="fg-thin"/>
+            <text x="300" y="129" text-anchor="end" class="t-sm">20,000: stop</text>
+            <path d="M150 120 L150 220" class="fg-thin"/>
+            <text x="80" y="50" class="t-sm t-acc t-b">on busulfan</text>
+            <text x="55" y="185" class="t-sm t-bad t-b">keeps falling</text>
+            <text x="55" y="201" class="t-sm t-bad">2–4 weeks after stop</text>
+            <text x="262" y="209" class="t-sm t-mut">normal</text>
+          </svg>
       - kind: mnemonic
         page: 122
         quote: "Side effects are:\n  1. Premature menopause.\n  2. Sterelity\n  3. Hyperpigmentaiton\n  4. Weight loss and fatigue.\n  5. Pulmonary fibrosis"
@@ -334,12 +573,61 @@ lessons:
         hook: "**BUSLF** = **BUS**ulfan بأول حروف آثاره الجانبية."
       - kind: explain
         page: 123
+        title: "busulfan ولا hydroxyurea؟"
+        quote: "Side effects are uncommon, although rash, mucositis and diarrhea can occur."
+        text: |
+          الاتنين **palliative**: بيظبطوا العدد وما بيشيلوش الـ Ph1.
+
+          - ==Hydroxyurea==: آثاره الجانبية **قليلة** (rash، mucositis، diarrhea)، وبتوقفه لما الـ WBC يوصل **5,000**.
+          - **Busulfan**: آثاره كتير (**BUSLF**)، وبتوقفه بدري عند **20,000**.
+
+          ليه الفرق في رقم الوقف؟ التفسير المقبول (مش في الكتاب): الـ hydroxyurea تأثيره **قصير**: توقفه، والنخاع يرجع يشتغل في أيام. الـ busulfan alkylating agent تأثيره على النخاع **طويل**، فبيكمّل يكتم بعد ما توقفه، فلازم تسيب مسافة أمان.
+      - kind: check
+        page: 122
+        quote: "b) Hydroxyurea: is given at a dose of 1 to 4 grams per day. The dose is decreased when the WBC count decreases and can be discontinued when WBC count is 5000/dl."
+        question: "Hydroxyurea for CML can be stopped when WBC reaches:"
+        options:
+          - "5,000"
+          - "20,000"
+          - "50,000"
+          - "200,000"
+        answer: 0
+        why:
+          - "صح: الـ hydroxyurea بيتوقف عند 5,000."
+          - "الـ 20,000 رقم الـ busulfan."
+          - "50,000 الحد بين CML والـ leukemoid في الجدول."
+          - "200,000 حد العلاج الفوري."
+      - kind: try
+        items: [hem.L08.043, hem.L08.045, hem.L08.046, hem.L08.047, hem.L08.104]
+    recap:
+      - "فوري بس لو WBC >200,000، leukostasis، أو طحال بيوجع. Supportive: overhydration + allopurinol، دم وplatelets."
+      - "Busulfan 4–8 mg، نص الجرعة لما العدد ينص، وقّف عند 20,000 لأنه بيكمّل 2–4 أسابيع (**BUSLF**)."
+      - "Hydroxyurea 1–4 g، آثار قليلة (rash، mucositis، diarrhea)، وقّف عند 5,000."
+    practice: [hem.L08.043, hem.L08.044, hem.L08.045, hem.L08.046, hem.L08.047, hem.L08.048, hem.L08.049, hem.L08.104, hem.L08.107, hem.L08.120]
+  # ------------------------------------------------------------------
+  # Split from lesson3 on 2026-11-13 (#828): TKIs and late phases.
+  - id: hem.L08.lesson7
+    title: "الـ TKIs والمراحل المتأخرة"
+    hook: "دوا بيقفل الـ kinase الغلطان، ولما الخلية تتعلم تهرب منه بنعمل إيه."
+    minutes: 10
+    pages: [123, 125]
+    topics: [tki, cml-phases-tx]
+    goals:
+      - "تفهم الـ TKI بيشتغل إزاي وليه بيفشل"
+      - "تعرف الجيل التاني وأهم سُمّية لكل واحد"
+      - "تعرف علاج الـ accelerated phase والـ blast crisis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 123
         title: "الـ TKI: المفتاح في القفل"
         quote: "There is now general agreement that patients with CML in chronic phase should be treated with a TKI. If the patient had a suitable donor. SCT can be made as initial therapy in patients for whom the cost of TKI over many years would be totally prohibitive."
         text: |
           الـ **chronic phase** بيتعالج بـ ==TKI== (tyrosine kinase inhibitor): بيقعد في جيب الـ BCR/ABL kinase ويقفله.
 
           لو فيه **donor** مناسب، ممكن **stem cell transplantation (SCT)** كأول علاج لو تمن الـ TKI لسنين **مستحيل**.
+
+          ليه الـ TKI غيّر كل حاجة؟ التفسير المقبول (مش في الكتاب): الـ busulfan والـ hydroxyurea بيضربوا كل خلية بتتقسم، فبيظبطوا العدد بس الـ clone فاضل. الـ TKI بيضرب ==السبب نفسه== (الـ kinase اللي اتلزق)، فالخلايا اللي فيها Ph1 بتقل والطبيعية بترجع.
       - kind: figure
         page: 123
         quote: "It may be primary or secondary, primary resistance may be due to overexpression of the BCR/ABL oncoprotein and overexpression of P- Glycoprotein which lead to effux of the drug from individual cells, and point mutation in ABL kinase domain, different point mutations have been identified in leukaemia cells, the replacement of threonine by isoleucine at position 315 (referred to as the T3151 mutation), seem to be especially resistant to the inhibitory action of imatinib and all other TKIs."
@@ -374,12 +662,40 @@ lessons:
           - **Overexpression** للـ ==P-glycoprotein== (بيطرد الدوا بره الخلية)
           - **Point mutations** في الـ ABL kinase domain، وأخطرها ==T315I==
 
-          ويتوقع الاستجابة الأحسن: **low half-maximal inhibitory concentration (IC50)** للـ imatinib، و **hOCT-1** طبيعي أو عالي (هو اللي بيدخّل الدوا).
+          ليه كل سبب بيعمل resistance؟ التفسير المقبول (مش في الكتاب):
+          - BCR/ABL كتير: نفس كمية الدوا مش مكفية تقفل كل الأقفال.
+          - P-glycoprotein: مضخة بترمي الدوا بره قبل ما يوصل للـ kinase.
+          - Mutation: شكل الجيب اتغير فالمفتاح مش داخل.
       - kind: update
         page: 123
         quote: "It may be primary or secondary, primary resistance may be due to overexpression of the BCR/ABL oncoprotein and overexpression of P- Glycoprotein which lead to effux of the drug from individual cells, and point mutation in ABL kinase domain, different point mutations have been identified in leukaemia cells, the replacement of threonine by isoleucine at position 315 (referred to as the T3151 mutation), seem to be especially resistant to the inhibitory action of imatinib and all other TKIs."
         text: "النهارده الـ **ponatinib** والـ **asciminib** شغالين على الـ T315I. في الامتحان: الكتاب بيقول بيقاوم كل الـ TKIs."
         ref: "ELN CML recommendations 2020; FDA approval of asciminib 2021"
+      - kind: check
+        page: 123
+        quote: "It may be primary or secondary, primary resistance may be due to overexpression of the BCR/ABL oncoprotein and overexpression of P- Glycoprotein which lead to effux of the drug from individual cells, and point mutation in ABL kinase domain, different point mutations have been identified in leukaemia cells, the replacement of threonine by isoleucine at position 315 (referred to as the T3151 mutation), seem to be especially resistant to the inhibitory action of imatinib and all other TKIs."
+        question: "Which is NOT a cause of imatinib resistance in the book?"
+        options:
+          - "Overexpression of hOCT-1"
+          - "Overexpression of P-glycoprotein"
+          - "Overexpression of BCR/ABL"
+          - "Point mutation in the ABL kinase domain"
+        answer: 0
+        why:
+          - "صح: الـ hOCT-1 العالي بيدخّل الدوا، فبيحسّن الاستجابة مش العكس."
+          - "الـ P-glycoprotein بيطرد الدوا: سبب resistance."
+          - "BCR/ABL كتير: سبب resistance."
+          - "الـ mutations زي T315I: سبب resistance."
+      - kind: explain
+        page: 123
+        title: "الجيل التاني"
+        quote: "These include dasatinib, nilotenib and bosutinib. All are now being tested as up-front treatment for newly diagnosed individuals with promising early results."
+        text: |
+          الـ **second-generation TKIs**: ==dasatinib== و **nilotinib** و **bosutinib**. الكتاب بيقول بيتجرّبوا كأول علاج للحالات الجديدة ونتايجهم الأولى مبشّرة.
+
+          **Dasatinib (Sprycel)**: بيقفل ==مجموعة كبيرة== من الـ tyrosine kinases غير الـ ABL1، الجرعة **100 mg مرة يوميًا**، وبيكتم النخاع **أكتر** من الـ imatinib. وكمان nausea، rash، و **pleural effusion**.
+
+          ليه أكتر myelosuppression؟ التفسير المقبول (مش في الكتاب): لأنه مش بيقفل الـ ABL بس؛ بيقفل kinases تانية الخلايا الطبيعية في النخاع محتاجاها.
       - kind: match
         page: 124
         quote: "It is about 30 times more active than imatinib, the recommended dose, 400 mg twice daily, side effects have included headaches, nausea, GIT disturbance, pancreatitis raised bilirubin level, prolonged QT intered."
@@ -396,6 +712,20 @@ lessons:
         quote: "It is about 30 times more active than imatinib, the recommended dose, 400 mg twice daily, side effects have included headaches, nausea, GIT disturbance, pancreatitis raised bilirubin level, prolonged QT intered."
         text: "الـ **nilotinib** أقوى من الـ imatinib **30 مرة**، بس زي الأخ الكبير اللي بيتعصب بسرعة: ==QT== طويل وpancreatitis. خليك جنبه بـ electrocardiogram (ECG)."
       - kind: explain
+        page: 124
+        title: "مين هيستجيب للـ imatinib؟"
+        quote: "Patients with normal or high levels of human organic cation transporter (hOCT)-1 which is responsible for cellular influx of imatinib respond better than those with lower levels."
+        text: |
+          الكتاب بيدي علامتين:
+          - **IC50 واطي** للـ imatinib ← استجابة أحسن
+          - **hOCT-1** طبيعي أو عالي ← استجابة أحسن
+
+          ليه؟ التفسير المقبول (مش في الكتاب):
+          - الـ **half-maximal inhibitory concentration (IC50)** = التركيز اللي بيقفل نص الـ kinase. لو صغير، يعني ==كمية قليلة== من الدوا كفاية.
+          - الـ **human organic cation transporter 1 (hOCT-1)** هو ==الباب== اللي الـ imatinib بيدخل منه الخلية. باب واسع = دوا أكتر جوه.
+
+          ده عكس الـ P-glycoprotein اللي بيطلّع الدوا بره.
+      - kind: explain
         remind: [hem.L08.060]
         page: 125
         title: "باقي الأدوية والمراحل المتأخرة"
@@ -405,26 +735,43 @@ lessons:
 
           - **Accelerated phase**: بدّل ==busulfan ↔ hydroxyurea== (ينجح في 10–25%)، أو aggressive chemo، أو signal transduction inhibitor.
           - **Blast crisis**: عالجها **حسب نوع الـ acute leukemia** (myeloid ولا lymphoid).
+
+          ليه التبديل بين busulfan وhydroxyurea ممكن ينفع؟ التفسير المقبول (مش في الكتاب): الاتنين بيشتغلوا بطريقة مختلفة، فالخلايا اللي اتعودت على واحد ممكن لسه تتأثر بالتاني. وليه الـ blast crisis حسب النوع؟ لأن الـ lymphoblasts بتستجيب لعلاج الـ acute lymphoblastic leukaemia (ALL)، والـ myeloblasts لعلاج الـ acute myeloid leukaemia (AML).
+      - kind: check
+        page: 125
+        quote: "Change of therapy from busulfan to hydroxyurea or vice versa is successful in 10 to 25% of patients."
+        question: "A patient on busulfan enters the accelerated phase. Which option does the book list first?"
+        options:
+          - "Switch to hydroxyurea, which works in 10–25%"
+          - "Treat as acute leukemia by blast type"
+          - "Stop all treatment and observe"
+          - "Add α-interferon only"
+        answer: 0
+        why:
+          - "صح: التبديل busulfan ↔ hydroxyurea بينجح في 10–25%."
+          - "ده علاج الـ blast crisis."
+          - "الـ accelerated phase محتاج علاج."
+          - "الـ α-interferon من الـ cytogenetic directed therapy مش أول اختيار هنا."
       - kind: try
-        items: [hem.L08.043, hem.L08.045, hem.L08.046, hem.L08.052, hem.L08.057]
+        items: [hem.L08.050, hem.L08.052, hem.L08.057, hem.L08.060, hem.L08.105]
     recap:
-      - "فوري بس لو WBC >200,000، leukostasis، أو طحال بيوجع."
-      - "Busulfan 4–8 mg، وقّف عند 20,000 (**BUSLF**). Hydroxyurea 1–4 g، وقّف عند 5,000."
-      - "Chronic phase = TKI. Resistance: BCR/ABL أو P-gp كتير، mutations؛ T315I بيقاوم الكل."
-      - "Dasatinib 100 مرة (effusion)، nilotinib 400 مرتين (QT)، bosutinib (diarrhea)."
-      - "Accelerated: بدّل busulfan/hydroxyurea. Blast crisis: حسب نوع الـ acute leukemia."
-    practice: [hem.L08.043, hem.L08.044, hem.L08.045, hem.L08.046, hem.L08.047, hem.L08.048, hem.L08.049, hem.L08.050, hem.L08.051, hem.L08.052, hem.L08.053, hem.L08.054, hem.L08.055, hem.L08.056, hem.L08.057, hem.L08.058, hem.L08.059, hem.L08.060, hem.L08.061, hem.L08.062, hem.L08.063, hem.L08.104, hem.L08.105, hem.L08.106, hem.L08.107, hem.L08.119, hem.L08.120]
+      - "Chronic phase = TKI؛ SCT أول علاج لو فيه donor والـ TKI غالي جدًا."
+      - "Resistance: BCR/ABL أو P-gp كتير، mutations؛ T315I بيقاوم الكل (في الكتاب)."
+      - "Dasatinib 100 مرة (wide kinases، effusion)، nilotinib 400 مرتين (×30، QT)، bosutinib (diarrhea)."
+      - "استجابة أحسن: IC50 واطي، hOCT-1 عالي."
+      - "Accelerated: بدّل busulfan/hydroxyurea (10–25%). Blast crisis: حسب نوع الـ acute leukemia."
+    practice: [hem.L08.050, hem.L08.051, hem.L08.052, hem.L08.053, hem.L08.054, hem.L08.055, hem.L08.056, hem.L08.057, hem.L08.058, hem.L08.059, hem.L08.060, hem.L08.061, hem.L08.062, hem.L08.063, hem.L08.105, hem.L08.106, hem.L08.119]
   # ------------------------------------------------------------------
   - id: hem.L08.lesson4
     title: "الـ CLL: lymphocytes كبرت ونسيت تموت"
     hook: "عيان فوق الستين، تحليل روتيني، lymphocytes كتير وغدد rubbery: كده بدأت الحكاية."
-    minutes: 10
-    pages: [125, 129]
-    topics: [cll-definition, cll-clinical, cll-diagnosis, staging, cll-ddx]
+    minutes: 9
+    pages: [125, 127]
+    topics: [cll-definition, cll-clinical]
     goals:
-      - "تعرّف الـ CLL وتعرف شكلها الإكلينيكي"
-      - "تحفظ أرقام التشخيص وأسباب الأنيميا"
-      - "تعمل Rai وBinet staging"
+      - "تعرّف الـ CLL وتفهم ليه بتمشي ببطء"
+      - "تعرف شكلها الإكلينيكي وتشوفه في صور الكتاب"
+      - "ترتّب الـ infections وتعرف ليه بتيجي بالترتيب ده"
     status: unverified
     steps:
       - kind: explain
@@ -437,6 +784,23 @@ lessons:
           بيتراكموا في الـ **marrow** والـ **nodes** والـ **liver** والـ **spleen**. أغلب العيانين **فوق 60**.
 
           السبب مش معروف، بس الـ ==familial clustering== أكتر من أي leukemia تانية، والـ **farmers** عندهم incidence أعلى (herbicides؟ pesticides؟).
+
+          ليه اسمها **chronic** وبتمشي ببطء؟ التفسير المقبول (مش في الكتاب): المشكلة الأساسية مش إن الخلايا بتتقسم بسرعة؛ المشكلة إنها ==ما بتموتش== في ميعادها. خلايا ناضجة شكلًا بتتراكم شوية شوية على سنين، فالعيان ممكن يعيش معاها كتير من غير ما يحس. وده هتشوف سببه الجيني في درس الـ prognosis (الـ BCL2).
+      - kind: check
+        page: 125
+        quote: "The cause of CLL is unknown. Familial clustering in CLL is more common than in other leukemia."
+        question: "Which statement about CLL causes fits the book?"
+        options:
+          - "Familial clustering is more common than in other leukemias"
+          - "Ionizing radiation is the main known cause"
+          - "HTLV-1 causes most cases"
+          - "Benzene exposure is the classic cause"
+        answer: 0
+        why:
+          - "صح: السبب مش معروف، بس الـ familial clustering أكتر من أي leukemia تانية، والـ farmers عندهم incidence أعلى."
+          - "الـ radiation هو السبب المعروف للـ CML، مش الـ CLL."
+          - "الـ HTLV-1 سبب الـ adult T-cell leukemia."
+          - "الـ benzene مع الـ marrow hypoplasia والـ acute leukemia في الدرس اللي فات."
       - kind: explain
         page: 126
         title: "شكل العيان"
@@ -447,6 +811,29 @@ lessons:
           - ==Lymph nodes== **discrete, rubbery, mobile** في **تلتين** العيانين.
           - الكبد والطحال أقل وقت التشخيص.
           - Infiltration ممكن في الجلد، **الجفون**، القلب، الرئة، الـ pleura، الـ gastrointestinal tract (GIT).
+
+          ليه الغدد هنا من الأول، عكس الـ CML؟ لأن الـ CLL مرض **lymphocytes**، والغدد بيتها الطبيعي. وليه rubbery ومتحركة؟ التفسير المقبول (مش في الكتاب): الخلايا بتملا الغدة من جوه من غير ما تكسر الكبسولة أو تلزق في اللي حواليها، عكس الـ carcinoma اللي بتعمل غدد ناشفة وثابتة.
+      - kind: figure
+        page: 127
+        title: "صورة الكتاب: غدد الـ CLL"
+        image: { file: hem/L08-cll-nodes.webp, book: true }
+        alt: "Book photographs of chronic lymphocytic leukaemia: an older man with large symmetrical swellings on both sides of the neck, and two views of large rounded swellings in the armpits."
+        caption: "غدد في الرقبة والـ axilla. الكتاب في صفحة 126 بيقول الغدد **discrete, rubbery, mobile** وموجودة في ==تلتين== العيانين وقت التشخيص."
+      - kind: check
+        page: 126
+        quote: "Lymphadenopathy with discrete, rubbery, mobile lymph nodes is present in two thirds of patients at diagnosis."
+        question: "Lymph nodes in CLL at diagnosis are typically:"
+        options:
+          - "Discrete, rubbery and mobile, in about two thirds"
+          - "Hard and fixed, in most patients"
+          - "Matted and tender, in a third"
+          - "Absent in nearly all patients"
+        answer: 0
+        why:
+          - "صح: discrete، rubbery، mobile، في تلتين العيانين."
+          - "الناشفة الثابتة أقرب للـ carcinoma."
+          - "الـ matted مش وصف الكتاب للـ CLL."
+          - "موجودة في تلتين العيانين."
       - kind: order
         page: 126
         quote: "Sinopulmonary infection are most common during the early phase, but as the disease progress, the frequency of neutropnia, T cell deficiency, and hypogammaglobulinaemia increases, resulting in gram-negative bacterial, fungal and viral infections, Herpes zoster and cytomegalovirus infection usually occur later in the disease."
@@ -456,6 +843,47 @@ lessons:
           - "Gram-negative, fungal and viral infections as neutropenia, T-cell deficiency and hypogammaglobulinemia grow"
           - "Herpes zoster and CMV"
         why: "في الأول الـ sinopulmonary هي الأشهر. ومع زيادة الـ neutropenia والـ T-cell deficiency والـ hypogammaglobulinemia بييجي gram-negative وfungal وviral، والـ zoster والـ cytomegalovirus (CMV) بيظهروا متأخر."
+      - kind: reveal
+        page: 126
+        quote: "Herpes zoster and cytomegalovirus infection usually occur later in the disease."
+        prompt: "ليه الـ herpes zoster والـ CMV بييجوا متأخر مش من الأول؟"
+        answer: |
+          الكتاب بيقول الـ **T cell deficiency** بتزيد مع تقدم المرض، والـ zoster والـ cytomegalovirus (CMV) بييجوا ==later==.
+
+          التفسير المقبول (مش في الكتاب): الفيروسين دول ساكنين في الجسم من زمان، والـ ==T cells== هي اللي ماسكاهم. طول ما الـ T cells كويسة الفيروس نايم؛ لما تضعف مع المرض والعلاج، الفيروس يصحى.
+      - kind: figure
+        page: 127
+        title: "صورة الكتاب: herpes zoster"
+        image: { file: hem/L08-cll-zoster.webp, book: true }
+        alt: "Book photograph of a band-shaped crusted rash across one side of the trunk, the pattern of herpes zoster along one dermatome."
+        caption: "طفح على شكل حزام في ناحية واحدة من الجسم، ماشي مع dermatome واحد: ده شكل ==herpes zoster==، اللي الكتاب بيقول بييجي **متأخر** في الـ CLL."
+      - kind: figure
+        page: 127
+        title: "صورة الكتاب: الـ blood film"
+        image: { file: hem/L08-cll-film.webp, book: true }
+        alt: "Book photomicrographs of peripheral blood in chronic lymphocytic leukaemia: many small round lymphocytes with dense dark nuclei and very little cytoplasm among red cells, and one broken, spread-out cell near the top."
+        caption: "lymphocytes صغيرة ناضجة كتير، النواة غامقة والـ cytoplasm قليل. التفسير المقبول (مش في الكتاب): الخلية المفرودة المكسورة فوق في النص اسمها **smudge cell**، lymphocyte هشة اتكسرت وهي بتتفرد على الشريحة."
+      - kind: try
+        items: [hem.L08.064, hem.L08.066, hem.L08.068, hem.L08.115, hem.L08.122]
+    recap:
+      - "CLL: monoclonal B cells (>95%)، فوق 60، familial clustering، farmers. الخلايا ما بتموتش، فبتتراكم ببطء."
+      - "أغلبهم asymptomatic. Nodes discrete rubbery mobile في تلتين العيانين؛ الكبد والطحال أقل."
+      - "Infections: sinopulmonary الأول، بعدين gram-negative وfungal وviral، والـ zoster والـ CMV متأخر (الـ T cells)."
+    practice: [hem.L08.064, hem.L08.065, hem.L08.066, hem.L08.067, hem.L08.068, hem.L08.069, hem.L08.115, hem.L08.122]
+  # ------------------------------------------------------------------
+  # Split from lesson4 on 2026-11-13 (#828): diagnosis and staging.
+  - id: hem.L08.lesson8
+    title: "الـ CLL: التشخيص والـ staging"
+    hook: "أرقام قليلة بتأكد التشخيص، وسلّمين بيقولولك العيان فين."
+    minutes: 10
+    pages: [128, 129]
+    topics: [cll-diagnosis, staging]
+    goals:
+      - "تحفظ أرقام التشخيص وتفهم ليه بنطلب clonality"
+      - "تعرف أسباب الأنيميا والـ infections وليه"
+      - "تعمل Rai وBinet staging وتعرف ليه الـ cytopenias أعلى stage"
+    status: unverified
+    steps:
       - kind: table
         page: 128
         quote: "CLL is characterized by lymphocytosis in the peripheral blood, > 5000/dl. Extreme leukocytosis approaching 1x106 /dl occurs only late in the disease, and hyperviscosety symptoms can occur if the WBC count is higher than 500,000 per/dl. If the lymphocyte count is 5000 to 15.000/dl supportive evidence for clonality (Kappa or Lambda light-chain) should be present. B.M lymphocytosis > 30%, Anaemia <11 gm/dl is present in 15 to 20% of patients at diagnosis. The anaemia is usually normochromic and normocytic and the reticulocyte count is normal unless the patient has autoimmune hemolytic anaemia which is confirmed by a positive direct coombs test and reticulocytosis. Pure red cell a plasia is an additional reported cause of anemia in CLL."
@@ -470,6 +898,16 @@ lessons:
         hide: [[0, 1], [1, 1], [3, 1], [4, 1]]
       - kind: explain
         page: 128
+        title: "ليه نطلب دليل clonality؟"
+        quote: "If the lymphocyte count is 5000 to 15.000/dl supportive evidence for clonality (Kappa or Lambda light-chain) should be present."
+        text: |
+          الـ lymphocytes **فوق 5,000** في الدم. لو العدد بين ==5,000 و15,000== لازم دليل إنهم **clone واحد**: كلهم **kappa** أو كلهم **lambda** light chain.
+
+          ليه؟ التفسير المقبول (مش في الكتاب): الـ lymphocytes الطبيعية جاية من آلاف الخلايا المختلفة، فنصهم تقريبًا kappa ونصهم lambda. لو كلهم نوع واحد، يعني ==خلية واحدة== اتكاثرت: ده الـ CLL. والعدد الصغير ده ممكن يبقى infection عادي، فالـ clonality هي اللي بتفرق.
+
+          وليه الـ hyperviscosity فوق **500,000**؟ لأن الخلايا الكتير بتتقل الدم وتبطّأه في الأوعية الصغيرة.
+      - kind: explain
+        page: 128
         title: "الأنيميا في الـ CLL: تلات أسباب"
         quote: "CLL is characterized by lymphocytosis in the peripheral blood, > 5000/dl. Extreme leukocytosis approaching 1x106 /dl occurs only late in the disease, and hyperviscosety symptoms can occur if the WBC count is higher than 500,000 per/dl. If the lymphocyte count is 5000 to 15.000/dl supportive evidence for clonality (Kappa or Lambda light-chain) should be present. B.M lymphocytosis > 30%, Anaemia <11 gm/dl is present in 15 to 20% of patients at diagnosis. The anaemia is usually normochromic and normocytic and the reticulocyte count is normal unless the patient has autoimmune hemolytic anaemia which is confirmed by a positive direct coombs test and reticulocytosis. Pure red cell a plasia is an additional reported cause of anemia in CLL."
         text: |
@@ -477,7 +915,25 @@ lessons:
           2. ==Autoimmune haemolytic anaemia (AIHA)==: **direct Coombs موجب** + **reticulocytosis**.
           3. **Pure red cell aplasia**.
 
-          وكمان ==hypogammaglobulinemia== شائعة، فالعيان معرض للـ **encapsulated organisms**، والـ T cells ردها ضعيف.
+          ليه كل سبب شكله كده؟ التفسير المقبول (مش في الكتاب):
+          - **Infiltration**: النخاع مليان lymphocytes ومفيش مكان، فالـ reticulocytes طبيعية أو قليلة.
+          - **AIHA**: الـ CLL بتلخبط الـ immune system فيعمل antibodies ضد الكرات الحمرا؛ النخاع سليم فبيعوّض بـ **reticulocytosis**.
+          - **Pure red cell aplasia**: النخاع بيبطّل يعمل كرات حمرا بس، فالـ reticulocytes بتختفي.
+      - kind: check
+        page: 128
+        quote: "The anaemia is usually normochromic and normocytic and the reticulocyte count is normal unless the patient has autoimmune hemolytic anaemia which is confirmed by a positive direct coombs test and reticulocytosis."
+        question: "CLL with Hb 8, reticulocytes 10%, spherocytes. Which test confirms the cause?"
+        options:
+          - "Direct Coombs test"
+          - "Bone marrow biopsy pattern"
+          - "Serum β2-microglobulin"
+          - "Kappa/lambda light chains"
+        answer: 0
+        why:
+          - "صح: الـ AIHA بتتأكد بالـ direct Coombs الموجب مع الـ reticulocytosis."
+          - "الـ pattern بيفيد في الـ prognosis، مش في تأكيد الـ haemolysis."
+          - "الـ β2-microglobulin prognostic factor."
+          - "الـ light chains بتثبت الـ clonality، مش سبب الأنيميا."
       - kind: table
         page: 128
         quote: "Four patterns of lymphocyte infilteration on bone marrow biopsy occur and have prognostic value in CLL\n  1. Nodular 15%\n  2. Infilterative 30%\n  3. Mixed nodular and infilterative 30% and\n  4. Diffuse 35%"
@@ -489,6 +945,15 @@ lessons:
           - [Mixed, "30%"]
           - [Diffuse, "35% (advanced stage)"]
         hide: [[0, 1], [3, 1]]
+      - kind: explain
+        page: 128
+        title: "المناعة الضعيفة"
+        quote: "Hypogammaglobulinaemia is common in CLL and predisposes to infection especially with encapsulated micro organisms."
+        text: |
+          - ==Hypogammaglobulinaemia== شائعة، فالعيان معرض للـ infection، خصوصًا ==encapsulated organisms==.
+          - الـ **T cells** ردها ضعيف على الـ mitogens، والـ delayed hypersensitivity للـ recall antigens قليلة.
+
+          ليه الـ encapsulated بالذات؟ التفسير المقبول (مش في الكتاب): الكبسولة بتخبي البكتيريا من الـ phagocytes، والطريقة الأساسية إن الـ phagocyte يمسكها هي إن **antibody** يلزق عليها الأول (opsonization). الـ CLL B cells ما بتعملش antibodies كويسة، فالبكتيريا دي بتعدّي.
       - kind: figure
         page: 129
         quote: "Table 1: Rai and Binet staging systems in chronic lymphocytic leukemia (CLL)\n| Stage | Lymphocytosis | Lymphadenopathy | Hepatomegaly or splenomegaly | Hemoglobin (gram/dl) | Platelets X 10³/μl |\n| Rai 0 | + | - | - | ≥ 11 | ≥ 100 |\n| Rai I | + | + | - | ≥ 11 | ≥ 100 |\n| Rai II | + | ± | + | ≥ 11 | ≥ 100 |\n| Rai III | + | ± | ± | < 11 | ≥ 100 |\n| Rai IV | + | ± | ± | Any | < 100 |\n| Binet A | + | ± | ± (<3 Lymphatic groups* positive) | ≥ 10 | ≥ 100 |\n| Binet B | + | ± | ± (<3 Lymphatic groups* positive) | ≥ 10 | ≥ 100 |\n| Binet C | + | ± | ± | < 10 | ≤ 100 |"
@@ -527,6 +992,8 @@ lessons:
           - **A**: أقل من 3 مناطق، **Hb ≥10** و platelets ≥100
           - **B**: ==3 مناطق أو أكتر==، Hb ≥10 و platelets ≥100
           - **C**: ==Hb <10 أو platelets <100== مهما كانت الغدد
+
+          ليه الأنيميا والـ platelets بيعملوا أعلى stage في الاتنين؟ التفسير المقبول (مش في الكتاب): الغدد والطحال معناهم حجم مرض كبير، لكن الـ cytopenias معناها إن ==النخاع نفسه بيقع==، وده اللي بيموّت العيان. وعشان كده الكتاب بيقول نعالج Rai III و IV.
       - kind: aside
         tone: trap
         page: 129
@@ -547,6 +1014,28 @@ lessons:
           - "الـ A محتاجة Hb ≥10."
           - "الـ B محتاجة Hb ≥10 و3 مناطق أو أكتر."
           - "السؤال عن Binet؛ وفي Rai هتبقى III لأن Hb أقل من 11."
+      - kind: try
+        items: [hem.L08.070, hem.L08.073, hem.L08.074, hem.L08.078, hem.L08.079]
+    recap:
+      - "Lymphs >5,000 (clonality kappa أو lambda لو 5,000–15,000)، marrow >30%، hyperviscosity فوق 500,000."
+      - "Anemia: infiltration، AIHA (Coombs + retics)، pure red cell aplasia. Diffuse marrow = advanced."
+      - "Hypogammaglobulinaemia ← encapsulated organisms (مفيش opsonization)."
+      - "Rai 0–IV (Hb 11، plt 100). Binet A/B/C (Hb 10، plt 100، 3 مناطق). الـ cytopenias = أعلى stage."
+    practice: [hem.L08.070, hem.L08.071, hem.L08.072, hem.L08.073, hem.L08.074, hem.L08.075, hem.L08.076, hem.L08.077, hem.L08.078, hem.L08.079, hem.L08.080, hem.L08.108, hem.L08.109, hem.L08.113]
+  # ------------------------------------------------------------------
+  # Split from lesson4 and lesson5 on 2026-11-13 (#828): differential diagnosis and prognosis.
+  - id: hem.L08.lesson5
+    title: "CLL: مين هيعيش أطول؟"
+    hook: "عيانين نفس الـ stage، واحد مستقر عشرين سنة والتاني بيتدهور. الفرق في الجينات."
+    minutes: 10
+    pages: [129, 131]
+    topics: [cll-ddx, cll-prognosis]
+    goals:
+      - "تفرّق الـ CLL عن الـ reactive lymphocytosis والـ PLL"
+      - "تعدّ الـ prognostic factors وتعرف ليه كل واحد"
+      - "تفهم الـ IGHV والـ CD38 والـ micro RNAs والـ IRF4"
+    status: unverified
+    steps:
       - kind: explain
         remind: [hem.L08.081]
         page: 129
@@ -556,29 +1045,23 @@ lessons:
           **Lymphocytosis تانية**: pertussis، infectious mononucleosis، tuberculosis (TB)، toxoplasmosis، autoimmune. دول **أصغر سنًا**، عندهم حرارة أو rash أو مفاصل، والـ lymphocytes عادةً **أقل من 15,000** و ==not sustained==. لو شاكك: **monoclonal antibodies**.
 
           ==Prolymphocytic leukemia (PLL)==: حوالي 10% من الـ CLL، **massive splenomegaly** مع غدد **قليلة**، white blood cell (WBC) غالبًا **فوق 100,000** فيه 10–90% prolymphocytes، و t(6;12).
-      - kind: try
-        items: [hem.L08.068, hem.L08.070, hem.L08.073, hem.L08.078, hem.L08.079]
-    recap:
-      - "CLL: monoclonal B cells (>95%)، فوق 60، familial clustering، farmers."
-      - "Nodes rubbery mobile في تلتين العيانين. Infections: sinopulmonary الأول، zoster وCMV متأخر."
-      - "Lymphs >5,000 (clonality لو 5,000–15,000)، marrow >30%، hyperviscosity فوق 500,000."
-      - "Anemia: infiltration، AIHA (Coombs)، pure red cell aplasia. Diffuse marrow = advanced."
-      - "Rai 0–IV (Hb 11، plt 100). Binet A/B/C (Hb 10، plt 100، 3 مناطق)."
-      - "PLL: طحال ضخم، غدد قليلة، WBC >100,000، prolymphocytes."
-    practice: [hem.L08.064, hem.L08.065, hem.L08.066, hem.L08.067, hem.L08.068, hem.L08.069, hem.L08.070, hem.L08.071, hem.L08.072, hem.L08.073, hem.L08.074, hem.L08.075, hem.L08.076, hem.L08.077, hem.L08.078, hem.L08.079, hem.L08.080, hem.L08.081, hem.L08.082, hem.L08.083, hem.L08.108, hem.L08.109, hem.L08.110, hem.L08.113, hem.L08.115]
-  # ------------------------------------------------------------------
-  - id: hem.L08.lesson5
-    title: "CLL: مين هيعيش أطول ومين نعالجه؟"
-    hook: "عيانين نفس الـ stage، واحد مستقر عشرين سنة والتاني بيتدهور. الفرق في الجينات."
-    minutes: 9
-    pages: [129, 131]
-    topics: [cll-prognosis, mbl, cll-treatment]
-    goals:
-      - "تعدّ الـ prognostic factors الكلينيكية"
-      - "تفهم الـ IGHV والـ CD38 والـ micro RNAs"
-      - "تعرّف الـ MBL وتعرف امتى وإزاي نعالج"
-    status: unverified
-    steps:
+
+          ليه الـ monoclonal antibodies بتحسم؟ التفسير المقبول (مش في الكتاب): الـ infection بيصحّي lymphocytes كتير مختلفة (polyclonal)، وبتختفي لما العدوى تخلص. الـ CLL خلية واحدة متكررة، فالـ markers بتاعتها كلها شبه بعض وما بتمشيش.
+      - kind: check
+        page: 129
+        quote: "Many of these patients are younger and have fever or other acute symptoms such as rash and joint symptoms."
+        question: "A 22-year-old with fever, sore throat and lymphocytes 9,000 that fall over 3 weeks. Most likely?"
+        options:
+          - "Reactive lymphocytosis, such as infectious mononucleosis"
+          - "Early CLL"
+          - "Prolymphocytic leukemia"
+          - "Monoclonal B-cell lymphocytosis"
+        answer: 0
+        why:
+          - "صح: صغير، حرارة، أقل من 15,000، ومش sustained: صورة reactive."
+          - "الـ CLL أغلبها فوق 60 والعدد sustained."
+          - "الـ PLL: طحال ضخم وWBC فوق 100,000."
+          - "الـ MBL monoclonal ومش بيروح لوحده."
       - kind: explain
         page: 129
         title: "علامات الخطر"
@@ -590,6 +1073,8 @@ lessons:
           - **β2-microglobulin**، uric acid، **lactate dehydrogenase (LDH)**، alkaline phosphatase عالية
           - تحوّل لـ **prolymphocytic leukaemia (PLL)**
           - **Multiple chromosomal abnormalities** ← خطر ==Richter syndrome== (large cell lymphoma)
+
+          ليه الـ β2-microglobulin والـ LDH والـ uric acid؟ التفسير المقبول (مش في الكتاب): كلهم بيطلعوا من الخلايا لما تتقلب وتموت، فكل ما يعلوا، حجم المرض وسرعة دورانه أكبر. وليه الـ chromosomal abnormalities الكتير؟ لأن clone بيجمع غلطات أكتر أقرب إنه يتحول لـ lymphoma شرس.
       - kind: explain
         page: 130
         title: "الـ IGHV: الـ B cell اتعلمت ولا لأ؟"
@@ -599,6 +1084,8 @@ lessons:
 
           - ==Mutated immunoglobulin heavy-chain variable region (IGHV)==: مستقر، **good prognosis**.
           - ==Unmutated IGHV==: كل صفات الـ **poor prognosis**.
+
+          ليه الـ mutation هنا علامة كويسة؟ التفسير المقبول (مش في الكتاب): الـ mutated يعني الخلية الأصلية عدّت على الـ germinal centre واتعلمت (أقرب للـ memory B cell الهادية). الـ unmutated جاية من خلية أصغر ما اتعلمتش، وبتستجيب لإشارات النمو أكتر، فبتمشي أسرع.
       - kind: reveal
         page: 130
         quote: "CD38 is a transmembrane glycoprotein which is highly expressed in unmutated cases, low percentages correlate with stable disease while, a high percentage of CD38 positive cells predicts a short time to disease progression and bad outcome."
@@ -630,8 +1117,8 @@ lessons:
           الـ **micro ribonucleic acids (RNAs)** جزيئات قصيرة non-coding بتنظّم حوالي **تلت** جينات الإنسان.
 
           - ==MIR-15 و MIR-16== على **13q14** (بتتمسح كتير في الـ chronic lymphocytic leukaemia (CLL))، وبيكتموا ==b-cell lymphoma 2 (BCL2)==. يعني لو اتمسحوا ← BCL2 يعلى ← الخلية ما تموتش.
-          - **MIR-34a** واطي جدًا في الحالات الـ **refractory**.
-          - أهم risk locus: **6p25.3** = جين **interferon regulatory factor 4 (IRF4)** (اسمه القديم multiple myeloma oncogene 1 (MUM1)).
+
+          الـ 13q14 deletion نفسها بتشوفها في الحالات الـ **benign** وفي الـ MBL، لأن الخلية لسه ما جمعتش غلطات تانية.
       - kind: figure
         page: 130
         quote: "Two micro RNAs, MIR 15 and MR16 are located at 13q 14, a region frequently deleted in CLL, both micro RNAs target BCL2 which is overexpressed in CLL."
@@ -670,6 +1157,38 @@ lessons:
         text: "الـ **BCL2** زي درع ضد الموت (apoptosis). الـ MIR-15/16 كانوا الإيد اللي بتشيل الدرع. لما الـ 13q14 يتمسح، الإيد تختفي، والخلايا تعيش وتتراكم. ده بالظبط معنى «CLL = خلايا نسيت تموت»."
       - kind: explain
         page: 131
+        title: "micro RNA تالت والجينات اللي بتتورث"
+        quote: "Another micro RNA that may be important in CLL is MIR 34 a which has very low expression in cases refractory to chemotherapy."
+        text: |
+          - **MIR-34a**: ==very low== في الحالات الـ **refractory** للـ chemotherapy.
+          - **Genetic predisposition**: ست risk loci، أهمها **6p25.3** = جين **interferon regulatory factor 4 (IRF4)** (اسمه القديم multiple myeloma oncogene 1 (MUM1)). ده ==transcription factor== مهم في نمو الـ lymphocytes وتكاثرها وتنظيم المناعة.
+
+          ليه ده بيفسّر الـ familial clustering؟ التفسير المقبول (مش في الكتاب): لو العيلة بتورّث نسخة من IRF4 بتشتغل غلط، الـ lymphocytes عندهم كلهم بتبدأ من نقطة أضعف، فالـ CLL بتتكرر في العيلة.
+      - kind: try
+        items: [hem.L08.081, hem.L08.084, hem.L08.087, hem.L08.091, hem.L08.111]
+    recap:
+      - "Lymphocytosis تانية: أصغر، حرارة، أقل من 15,000، مش sustained؛ monoclonal antibodies بتحسم."
+      - "PLL: طحال ضخم، غدد قليلة، WBC >100,000، prolymphocytes، t(6;12)."
+      - "خطر: late stage، diffuse marrow، سن، ذكر، β2M وLDH، PLL، Richter."
+      - "Mutated IGHV = مستقر؛ unmutated + CD38 عالي = وحش. ZAP-70 marker."
+      - "MIR-15/16 على 13q14 بيكتموا BCL2. MIR-34a واطي في الـ refractory. IRF4 على 6p25.3."
+    practice: [hem.L08.081, hem.L08.082, hem.L08.083, hem.L08.084, hem.L08.085, hem.L08.086, hem.L08.087, hem.L08.088, hem.L08.089, hem.L08.090, hem.L08.091, hem.L08.092, hem.L08.093, hem.L08.110, hem.L08.111]
+  # ------------------------------------------------------------------
+  # Split from lesson5 on 2026-11-13 (#828): MBL and treatment.
+  - id: hem.L08.lesson9
+    title: "الـ MBL وعلاج الـ CLL"
+    hook: "مش كل clone محتاج اسم مرض، ومش كل CLL محتاج علاج النهارده."
+    minutes: 8
+    pages: [131, 132]
+    topics: [mbl, cll-treatment]
+    goals:
+      - "تعرّف الـ MBL وتفرّقه عن الـ CLL"
+      - "تعرف امتى نراقب وامتى نعالج وليه"
+      - "تحفظ اختيارات العلاج والمضاعفات بالترتيب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 131
         title: "الـ MBL: قبل الـ CLL"
         quote: "Is defined as the presence of less than 5000/dl of monoclonal B-lymphocytes in the peripheral blood, in the absence of lymphadenopathy, splenomegaly, cytopenias or disease, related symptoms. MBL, represents either a precursor state for CLL, or a distinct entity. MBL could be detected in 5% of subjects (Aged 60-80years) with normal WBC count, MBL may progress to frank CLL, at a rate of 1-2% per year of interest too is that the 13q14 deletion, which characterizes benign cases of CLL is often seen in MBL."
         text: |
@@ -678,6 +1197,23 @@ lessons:
           - موجود في **5%** من الناس 60–80 سنة بـ white blood cell (WBC) طبيعي.
           - بيتحول CLL بمعدل **1–2% في السنة**.
           - غالبًا فيه ==13q14 deletion== (اللي بتميّز الحالات الـ benign).
+
+          ليه ده مهم في العيادة؟ التفسير المقبول (مش في الكتاب): عيان كبير عنده monoclonal B cells قليلة ومفيش أي حاجة تانية، لو سميته CLL هتقلقه على الفاضي. الأغلبية الكبيرة (98–99% في السنة) ما بتتحولش، فالمتابعة بالتحاليل كفاية.
+      - kind: check
+        page: 131
+        quote: "MBL may progress to frank CLL, at a rate of 1-2% per year"
+        question: "A 70-year-old has 3,000/µL monoclonal B cells, no nodes, no spleen, normal counts. Best label?"
+        options:
+          - "Monoclonal B-cell lymphocytosis"
+          - "CLL Rai stage 0"
+          - "Prolymphocytic leukemia"
+          - "Reactive lymphocytosis"
+        answer: 0
+        why:
+          - "صح: أقل من 5,000 monoclonal B cells من غير غدد ولا طحال ولا cytopenias."
+          - "الـ CLL محتاجة أكتر من 5,000."
+          - "الـ PLL WBC فوق 100,000 وطحال ضخم."
+          - "الخلايا monoclonal، فمش reactive."
       - kind: check
         page: 131
         quote: "It is traditional to delay treatment of early-stage CLL until the disease progresses. Early treatment does not prolong survival , treatment of Rai stages III and IV is recommended because of the poor survival of these patients."
@@ -693,6 +1229,35 @@ lessons:
           - "الـ chlorambucil لما المرض يتقدم أو Rai III–IV."
           - "الـ fludarabine برضه للي محتاج علاج."
           - "الـ intravenous immunoglobulin (IVIG) للـ infections، مش وقاية روتينية."
+      - kind: figure
+        page: 131
+        quote: "It is traditional to delay treatment of early-stage CLL until the disease progresses. Early treatment does not prolong survival , treatment of Rai stages III and IV is recommended because of the poor survival of these patients."
+        title: "تراقب ولا تعالج؟"
+        alt: "A decision diagram: after CLL is diagnosed, early stage is watched until it progresses, while Rai stage III or IV is treated because of poor survival, with chlorambucil first, steroids if autoimmune haemolysis, then COP, fludarabine, pentostatin, plus antibiotics and immunoglobulin for complications."
+        caption: "الـ ==early stage== بيتراقب. الـ **Rai III و IV** بيتعالجوا، والـ chlorambucil أول دوا."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L08e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="85" y="8" width="160" height="40" rx="10" class="fg-box"/>
+            <text x="165" y="33" text-anchor="middle" class="t-sm t-b">CLL diagnosed</text>
+            <path d="M130 48 L85 80" class="fg-arrow" marker-end="url(#L08e)"/>
+            <path d="M200 48 L245 80" class="fg-arrow" marker-end="url(#L08e)"/>
+            <rect x="10" y="82" width="150" height="70" rx="10" class="fg-good"/>
+            <text x="85" y="104" text-anchor="middle" class="t-sm t-b">Early stage</text>
+            <text x="85" y="124" text-anchor="middle" class="t-sm">watch until</text>
+            <text x="85" y="142" text-anchor="middle" class="t-sm">it progresses</text>
+            <rect x="170" y="82" width="150" height="70" rx="10" class="fg-bad"/>
+            <text x="245" y="104" text-anchor="middle" class="t-sm t-b">Rai III or IV</text>
+            <text x="245" y="124" text-anchor="middle" class="t-sm">treat</text>
+            <text x="245" y="142" text-anchor="middle" class="t-sm">(poor survival)</text>
+            <path d="M245 152 L245 176" class="fg-arrow" marker-end="url(#L08e)"/>
+            <rect x="120" y="178" width="200" height="94" rx="10" class="fg-acc"/>
+            <text x="135" y="198" class="t-sm">1. Chlorambucil first</text>
+            <text x="135" y="216" class="t-sm">2. Steroids if AIHA</text>
+            <text x="135" y="234" class="t-sm">3. COP · 4. Fludarabine</text>
+            <text x="135" y="252" class="t-sm">5. Pentostatin</text>
+            <text x="135" y="268" class="t-sm t-mut">+ antibiotics, IVIG</text>
+          </svg>
       - kind: explain
         page: 131
         title: "العلاج في الكتاب"
@@ -701,21 +1266,44 @@ lessons:
           بنعالج **Rai III و IV** (survival وحش). الاختيارات:
           1. ==Chlorambucil== (أقل: cyclophosphamide) **0.1 mg/kg** يوميًا، وبعدين maintenance **6–12 شهر**
           2. **Corticosteroids** لو فيه **autoimmune haemolytic anaemia (AIHA)**
+
+          ليه نستنى في الـ early stage؟ التفسير المقبول (مش في الكتاب): كتير من العيانين بيفضلوا مستقرين سنين، والعلاج المبكر في الكتاب ما بيطوّلش العمر، فهتدّي سُمّية من غير مكسب. وليه الـ steroids للـ AIHA؟ لأنها بتكتم الـ autoantibodies اللي بتكسّر الكرات.
+      - kind: explain
+        page: 132
+        title: "باقي الاختيارات والمضاعفات"
+        quote: "Treatment of complications as infections by using prepare antibiotics and intravenous immunoglobulin (400 mg/kg every 3-4 days)."
+        text: |
           3. **COP** regimen (cyclophosphamide، vincristine [Oncovin]، prednisone)
-          4. **Fludarabine**
+          4. ==Fludarabine==
           5. **Pentostatin**
-          6. المضاعفات: antibiotics و ==intravenous immunoglobulin (IVIG) 400 mg/kg كل 3–4 أيام==
+          6. المضاعفات زي الـ infections: **antibiotics** و ==intravenous immunoglobulin (IVIG) 400 mg/kg كل 3–4 أيام==
+
+          ليه الـ IVIG؟ التفسير المقبول (مش في الكتاب): العيان عنده **hypogammaglobulinaemia** (من درس التشخيص)، فالـ IVIG بيدّيله الـ antibodies اللي الـ B cells بتاعته مش قادرة تعملها. وخلي بالك إن الـ fludarabine نفسه بيكتم الـ T cells، فالـ infections بتبقى أكتر بعده.
       - kind: update
         page: 131
         quote: "Chemotherapy\n  1. Chlorambucil (less commonly, cyclophosphamide) is usually the first chemotherapeutic agent used. 0.1 mg/kg daily until the desired effect is obtained, then the dose is adjusted for maintenance and is continued for 6 to 12 months.\n  2. Corticosteroid if autoimmune haemalytic anaemia is present."
         text: "النهارده أول علاج للـ CLL بدل الـ **chlorambucil** هو **Bruton's tyrosine kinase (BTK) inhibitor** (ibrutinib، acalabrutinib، zanubrutinib) أو **venetoclax + obinutuzumab**، وبنعالج المرض الـ active مش الـ stage لوحده (iwCLL 2018). في الامتحان: الكتاب."
         ref: "iwCLL 2018; NCCN CLL/SLL guideline 2024"
+      - kind: check
+        page: 132
+        quote: "Treatment of complications as infections by using prepare antibiotics and intravenous immunoglobulin (400 mg/kg every 3-4 days)."
+        question: "The book's IVIG dose for infections in CLL is:"
+        options:
+          - "400 mg/kg every 3–4 days"
+          - "1 g/kg once"
+          - "400 mg/kg once a month"
+          - "0.1 mg/kg daily"
+        answer: 0
+        why:
+          - "صح: 400 mg/kg كل 3–4 أيام."
+          - "ده مش رقم الكتاب."
+          - "الكتاب بيقول كل 3–4 أيام مش شهري."
+          - "0.1 mg/kg يوميًا جرعة الـ chlorambucil."
       - kind: try
-        items: [hem.L08.084, hem.L08.087, hem.L08.091, hem.L08.094, hem.L08.098]
+        items: [hem.L08.094, hem.L08.096, hem.L08.098, hem.L08.099, hem.L08.114]
     recap:
-      - "خطر: late stage، diffuse marrow، سن، ذكر، β2M وLDH، PLL، Richter."
-      - "Mutated IGHV = مستقر؛ unmutated + CD38 عالي = وحش. ZAP-70 marker."
-      - "MIR-15/16 على 13q14 بيكتموا BCL2. MIR-34a واطي في الـ refractory. IRF4 على 6p25.3."
-      - "MBL: <5,000 monoclonal B، 5% من 60–80 سنة، 1–2%/سنة لـ CLL."
-      - "راقب الـ early stage؛ عالج Rai III–IV: chlorambucil، steroids للـ AIHA، COP، fludarabine، pentostatin، IVIG."
-    practice: [hem.L08.084, hem.L08.085, hem.L08.086, hem.L08.087, hem.L08.088, hem.L08.089, hem.L08.090, hem.L08.091, hem.L08.092, hem.L08.093, hem.L08.094, hem.L08.095, hem.L08.096, hem.L08.097, hem.L08.098, hem.L08.099, hem.L08.111, hem.L08.112, hem.L08.114, hem.L08.118, hem.L08.122]
+      - "MBL: <5,000 monoclonal B من غير غدد ولا طحال ولا cytopenias، 5% من 60–80 سنة، 1–2%/سنة لـ CLL، فيها 13q14 deletion."
+      - "راقب الـ early stage (العلاج المبكر ما بيطوّلش العمر)؛ عالج Rai III–IV."
+      - "Chlorambucil 0.1 mg/kg، steroids للـ AIHA، COP، fludarabine، pentostatin."
+      - "Infections: antibiotics + IVIG 400 mg/kg كل 3–4 أيام."
+    practice: [hem.L08.094, hem.L08.095, hem.L08.096, hem.L08.097, hem.L08.098, hem.L08.099, hem.L08.112, hem.L08.114, hem.L08.118]

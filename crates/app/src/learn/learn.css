@@ -152,6 +152,12 @@ mark {
 /* The lecture page's lessons (lecture/mod.rs): the shared .coll layouts;
    its meta line keeps each part whole. */
 .ls-card-meta { color: var(--muted); font-size: var(--fs-sm); }
+/* A lesson row's book map (#830): pages, then the section titles on one
+   clipped line, so a phone row never grows past three lines. */
+.ls-row-map { color: var(--muted); flex-wrap: nowrap; min-inline-size: 0; }
+.ls-row-map .ls-sections { flex: 1 1 auto; min-inline-size: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-latin); }
+.coll[data-layout="cards"] .ls-row-map { flex-wrap: wrap; }
+.coll[data-layout="cards"] .ls-row-map .ls-sections { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .chip.ls-done { background: var(--good-soft); color: var(--good); border-color: transparent; font-weight: 700; }
 
 /* Today's card: the lesson to go on with. */

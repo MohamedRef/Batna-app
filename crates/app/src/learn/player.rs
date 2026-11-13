@@ -54,7 +54,12 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
             return Attempt { at: s.saturating_sub(1).min(n), ..Attempt::new(n, now) };
         }
         let saved: Option<Attempt> = crate::store::shared().place(&pos_key(&id));
-        Attempt::restore(&lesson, saved, mark(&id).map(|m| m.done_ms), now)
+        let restored = Attempt::restore(&lesson, saved, mark(&id).map(|m| m.done_ms), now);
+        // Opened at a step (a book page, «اشرحهولي»): show it without saving.
+        match super::take_at() {
+            Some(k) if n > 0 => Attempt { at: k.min(n - 1), ..restored },
+            _ => restored,
+        }
     });
     let sigs = use_hook(|| lesson.steps.iter().map(|s| sig(&s.body)).collect::<Vec<_>>());
     let mut attempt = use_signal(|| start.clone());
@@ -214,6 +219,8 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 h1 { class: "ls-context-title", Line { text: lesson.title.clone() } }
                 p { class: "ls-context-lecture muted small",
                     bdi { dir: "ltr", lang: "en", "{lecture_title}" }
+                    " · "
+                    super::BookPages { id: lesson.id.clone(), pages: lesson.pages }
                 }
             }
             for (k , st) in lesson.steps.iter().enumerate().filter(|(k, _)| seen.read()[*k]) {
@@ -276,7 +283,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         {tx::SKIP}
                     }
                 } else if pages {
-                    span { class: "ls-page-of muted small", "{tx::PAGE_OF} {i + 1} {tx::OF_N} {n}" }
+                    span { class: "ls-page-of muted small", {tx::step_of(i + 1, n)} }
                 }
                 if let Some(run) = ready {
                     button {

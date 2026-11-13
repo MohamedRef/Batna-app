@@ -10,3 +10,6 @@ pub const OPEN_LECTURE: &str = "افتح المحاضرة";
 pub const CHIP_HINT: &str = "افتح صفحة الكتاب";
 pub const SLIDE_TITLE: &str = "سلايد";
 pub const SLIDE_HINT: &str = "افتح سلايد المحاضرة";
+/// Above the lesson steps that explain the open page (#831).
+pub const EXPLAINED: &str = "الشرح في الدروس";
+pub const NOT_EXPLAINED: &str = "مفيش شرح للصفحة دي في الدروس لسه.";

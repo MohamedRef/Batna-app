@@ -16,7 +16,7 @@ mod remind;
 mod steps;
 #[cfg(test)]
 pub(crate) mod tests;
-mod text;
+pub(crate) mod text;
 pub use text::Rich;
 
 use batna_core::lesson::Lesson;
@@ -50,6 +50,31 @@ pub fn open(mut ui: Ui, id: &str) {
     *FROM.write() = origin;
     *OPEN.write() = Some(id.to_string());
     ui.screen.set(Screen::Learn);
+}
+
+/// A step to open the next lesson at, taken once by the player (#831).
+static AT: GlobalSignal<Option<usize>> = Signal::global(|| None);
+/// Bumped by [`open_at`] so the player remounts even when that lesson is
+/// already open (a page chip inside the lesson pointing at another step).
+static JUMP: GlobalSignal<u64> = Signal::global(|| 0);
+
+/// Opens lesson `id` at step `step` (0-based), from a book page or a card's
+/// «اشرحهولي». His saved place and first results stay as they are until he
+/// answers or moves on from there; Back reaches the steps before it.
+pub fn open_at(ui: Ui, id: &str, step: usize) {
+    *AT.write() = Some(step);
+    *JUMP.write() += 1;
+    open(ui, id);
+}
+
+/// The step `open_at` asked for, once.
+fn take_at() -> Option<usize> {
+    AT.write().take()
+}
+
+/// The first step of `lesson` that cites `page`, if any.
+pub fn step_on_page(lesson: &Lesson, page: u32) -> Option<usize> {
+    lesson.steps.iter().position(|s| s.page == Some(page))
 }
 
 /// Closes the player, back to where the lesson was opened from.
@@ -223,7 +248,7 @@ pub fn Learn() -> Element {
         style { {CSS.text()} }
         match open.and_then(|id| Library::get().lesson(&id).map(|(lec, l)| (lec, l.clone()))) {
             Some((lecture, lesson)) => rsx! {
-                player::Player { key: "{lesson.id}", lesson, lecture_title: Library::get().title(&lecture.lecture).to_string() }
+                player::Player { key: "{lesson.id}#{JUMP()}", lesson, lecture_title: Library::get().title(&lecture.lecture).to_string() }
             },
             None => rsx! { LessonList {} },
         }
@@ -528,6 +553,19 @@ pub(crate) fn BookPages(id: String, pages: [u32; 2]) -> Element {
     }
 }
 
+/// The book sections a lesson teaches: its lecture's titles for the lesson's
+/// `topics`, in the lesson's order, joined with " · " (empty when unknown).
+pub(crate) fn section_titles(lesson: &Lesson) -> String {
+    let lib = Library::get();
+    let Some(lecture) = lib.lectures.get(lecture_of(&lesson.id)) else { return String::new() };
+    lesson
+        .topics
+        .iter()
+        .filter_map(|t| lecture.topics.iter().find(|x| &x.id == t).map(|x| x.title.as_str()))
+        .collect::<Vec<_>>()
+        .join(" · ")
+}
+
 /// A thin progress line, `done` of `total`.
 #[component]
 fn Meter(done: usize, total: usize) -> Element {
@@ -724,6 +762,7 @@ fn LessonRow(n: usize, lesson: Lesson, next: Option<String>) -> Element {
     let st = state(&lesson, next.as_deref());
     let steps = lesson.steps.len();
     let id = lesson.id.clone();
+    let sections = section_titles(&lesson);
     let key = match st {
         State::Done(_) => "done",
         State::Current { .. } => "current",
@@ -746,6 +785,13 @@ fn LessonRow(n: usize, lesson: Lesson, next: Option<String>) -> Element {
                 span { class: "coll-main",
                     strong { class: "coll-title", text::Line { text: lesson.title.clone() } }
                     span { class: "coll-sub", text::Line { text: lesson.hook.clone() } }
+                    // Where it sits in the book (#830): pages, then the book's section titles.
+                    span { class: "coll-extra ls-row-map small",
+                        BookPages { id: lesson.id.clone(), pages: lesson.pages }
+                        if !sections.is_empty() {
+                            bdi { dir: "ltr", lang: "en", class: "ls-sections", "{sections}" }
+                        }
+                    }
                 }
                 span { class: "coll-end",
                     match st {
@@ -866,8 +912,15 @@ pub fn ExplainLink(item_id: String) -> Element {
         return rsx! {};
     };
     let id = l.id.clone();
+    // The step that explains the card's own page, else the lesson start (#831).
+    let page = practice::find(&item_id).map(|(_, i)| i.src.page);
+    let at = page.and_then(|p| step_on_page(l, p));
     rsx! {
-        button { class: "st-link ls-explain", title: tx::EXPLAIN_HINT, onclick: move |_| open(ui, &id),
+        button { class: "st-link ls-explain", title: tx::EXPLAIN_HINT,
+            onclick: move |_| match at {
+                Some(k) => open_at(ui, &id, k),
+                None => open(ui, &id),
+            },
             "📖 {tx::EXPLAIN} · "
             text::Line { text: l.title.clone() }
         }

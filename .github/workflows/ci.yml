@@ -105,6 +105,9 @@ jobs:
         run: python3 scripts/content_impact.py --base HEAD^1 --head HEAD >> "$GITHUB_STEP_SUMMARY"
       - name: Content checks (schema, ids, pages, approvals)
         run: cargo run -q -p batna-tools -- validate
+      # Lessons against the book's pages (#833): the course table, no gate.
+      - name: Lesson coverage table
+        run: cargo run -q -p batna-tools -- lessons --summary >> "$GITHUB_STEP_SUMMARY"
       - name: Offline content pack builds and round-trips
         run: cargo run -q -p batna-tools -- packs build --check
       # His review history, lesson progress and plan point at content ids.

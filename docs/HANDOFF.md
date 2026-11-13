@@ -104,6 +104,7 @@ usually missing, so run the recipe lines by hand). `.env` (git-ignored, from
 |---|---|
 | Full gate before every commit | `just check` = `scripts/check-tracked-files.sh`, `scripts/check-file-sizes.sh` (warns only), `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, `batna-tools validate`, `batna-tools packs build --check` |
 | Content only | `cargo run -q -p batna-tools -- validate`; `just content-preflight` |
+| Lesson coverage (#833) | `batna-tools lessons --summary` (course table) · `--report <course>` (TSV per lesson) · `--warnings [<course>]` |
 | Mac / Linux desktop | `just run` (`BATNA_DATA_DIR=<dir>` for a throwaway profile) |
 | Android | `just android-keystore` (once), `just apk`, `just devices`, install with adb ([RUN.md](RUN.md)) |
 | Mac app bundle | `just bundle-mac` (self-signed; first install `xattr -dr com.apple.quarantine /Applications/Batna.app`) |
@@ -303,6 +304,13 @@ quote cap there is outdated), course briefs in [courses/](courses/).
     titles containing `: `; deleting an item also removes it from lesson
     `practice` lists.
 13. No real patient data to any AI engine; tests never call live APIs.
+14. **Lesson count follows the lecture** (Mohamed, 2026-11-13, #828): about
+    one lesson per four book pages with cards, at most about 25 cards and two
+    book topics per lesson, each still 6–10 minutes and 8–16 steps
+    ([LESSONS.md](LESSONS.md) rule 8). Lesson order stays as it is. A page
+    with nothing to teach goes in `content/lesson-skips.yaml` with a reason
+    (default until he says otherwise), not a filler step. Hepatology is the
+    depth bar (#827); additions are labelled as not from the book.
 
 ## 8. Sources outside git (important)
 
@@ -369,6 +377,24 @@ Add a bullet here when a PR adds something a later agent must know.
   the card (sticky while a long step scrolls). Phones keep the bottom nav.
   `crates/app/src/learn/learn.css`; `screens-browser.cjs` asserts it at
   840/1280/1600px. Research basis: [LESSONS.md](LESSONS.md) § Reading layout.
+- **Book map on lesson rows** (#830): each Lessons-screen row has a third
+  line with the page range (`BookPages`, «سلايد» for slide courses) and the
+  lecture's `topics` titles for the lesson's topics (`learn::section_titles`),
+  one clipped line in list view, hidden in compact view; the player header
+  shows the same range beside the lecture title.
+- **Book page → lesson step** (#831): the page sheet lists the lesson
+  steps citing the page in that book («الشرح في الدروس», rows «<lesson> ·
+  خطوة N», `pagesheet::explain::explains`) or says none does; a row calls
+  `learn::open_at(ui, lesson, step)`, which opens the player at that step
+  without saving (the saved place and first results change only once he
+  answers or moves; Back reaches earlier steps). «اشرحهولي» opens at the first
+  step citing the card's `src.page` (`learn::step_on_page`). The lecture page
+  has a collapsible «بترتيب الكتاب» outline (`lecture/outline.rs`): one row per
+  page with the section (majority topic of its cards), the steps and the card
+  count; a row opens the page sheet.
+- **«صفحة» is the book's word** (#832): the lesson's flip view is «تقليب»
+  and counts «خطوة 3 من 12» like the steps view; «صفحة»/«ص» only ever mean a
+  book page.
 - **Reading settings** («Aa» in the lesson bar, and Settings › Look; adapted
   from Steps-app main: `crates/app/src/learn/reading.rs`): text size
   (×0.9/1/1.15/1.3 on step text only, the bar and buttons stay), line spacing
@@ -641,6 +667,11 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-13: web deploy fixed after Rust 1.100: `scripts/web/build.sh` finds the content pack by package id, since cargo now writes build output to `build/batna-app/<hash>/` (deploys had failed since #821).
+- 2026-11-13: hem.L01 to the Hepatology bar: 3 → 5 lessons (lesson1 split → lesson4, lesson3 split → lesson5), reasons labelled «التفسير المقبول (مش في الكتاب)», book marrow figure p5, words per page 186 → 323 on the `lessons --report` count; first lecture in `content/lesson-skips.yaml` (#827–#829).
+- 2026-11-13: `validate` checks lesson coverage against the book (`coverage.rs`, `content/lesson-skips.yaml`, `batna-tools lessons`); 204 lessons' `pages` narrowed to the pages their steps cite; LESSONS.md rule 8 rewritten for Mohamed's lesson-count rule (#833, part of #828/#829).
+- 2026-11-13: lesson flip view renamed «تقليب» and counts steps, not «صفحة» (#832).
+- 2026-11-13: a book page lists and opens the lesson steps that explain it; «اشرحهولي» opens at the card's page step; lecture page «بترتيب الكتاب» outline (#831).
+- 2026-11-13: lesson rows show their book pages and book sections; the lesson header shows the page range (#830).
 - 2026-11-13: 52 cut quotes completed from the book pages (sentence continues on the next page or in the list below); four trailing fragments where the book itself breaks off were dropped and logged in `medstudy/book-issues.md` (#804, #805, #807–#812).
 - 2026-11-13: res.L15.113, res.L15.117, res.L17.001 and their lesson steps get `update:` notes (n vs n − 1, 152.16 unrounded, p-value meaning); slide answers unchanged (#802).
 - 2026-11-13: stray root file from a mistyped command removed; `check-tracked-files.sh` now fails on tracked paths with shell characters or root names with spaces (#817).

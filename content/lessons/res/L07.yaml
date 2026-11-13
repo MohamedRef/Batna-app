@@ -3,10 +3,10 @@ lecture: res.L07
 lessons:
   # ------------------------------------------------------------------
   - id: res.L07.lesson1
-    title: "حجم العينة: كام عيان يكفي؟"
+    title: "Type I وType II والـ power"
     hook: "عيّنة صغيرة تضيّع مجهودك، وعيّنة كبيرة تضيّع فلوسك. الرقم الصح بيطلع من ٥ حاجات بس."
     minutes: 8
-    pages: [1, 18]
+    pages: [1, 21]
     topics: [sample-size]
     goals:
       - "تفرّق بين type I و type II error ومعنى الـ power"
@@ -34,6 +34,16 @@ lessons:
             بالبلدي: **نزّلت دوا ملوش لازمة السوق**.
           - ==Type II error (beta)==: فاتك **فرق موجود فعلًا**. فشلت ترفض null hypothesis غلط. ده **false negative**.
             بالبلدي: **خبّيت دوا كويس عن العيانين**.
+      - kind: explain
+        page: 3
+        quote: "What is α (Type I error)?\n  describes the phenomenon of detecting a difference that is not really present\n  The probability of wrong rejection of the null hypothesis\n  (Put an useless medicine into the market!)"
+        title: "Type I error (α)"
+        text: |
+          ==Type I error== = إنك **تلاقي فرق مش موجود فعلًا**: ترفض الـ null hypothesis وهي صح.
+
+          وبلغة المحاضرة: «put an useless medicine into the market»، يعني دوا مالوش لازمة ينزل السوق.
+
+          ليه بنثبّته عند 5%؟ لأن ده الخطر اللي بنقبله إننا نصدّق فرق وهمي؛ كل ما نقلّله، محتاجين عيّنة أكبر علشان نلاقي الفرق الحقيقي. التفسير المقبول (مش في الكتاب).
       - kind: figure
         page: 5
         quote: "Possible trial outcomes\n| Reality | Trial Results |\n|---|---|\n| Treatments do NOT differ | Treatments do NOT differ (correct); Treatment do differ (α = Type 1 error) |\n| Treatments do differ | Treatments do NOT differ (β = Type 2 error); Treatment do differ (correct) |"
@@ -78,6 +88,18 @@ lessons:
           - { key: "P", text: "Type I = false Positive: شفت فرق مش موجود. دوا فاشل نزل السوق." }
           - { key: "N", text: "Type II = false Negative: فاتك فرق حقيقي. دوا كويس اتحرم منه العيانين." }
         hook: "زي ترتيب الحروف: **P** الأول (type I)، و **N** بعده (type II). والـ **power = 1 - beta**: فرصتك ماتفوتكش الفرق."
+      - kind: explain
+        page: 6
+        quote: "What is Power?\n  Power quantifies the ability of the study to find true differences of various values of δ.\n  Power = 1 - β = P (accept H1 | H1 is true)\n  the chance of correctly identify H1 (correctly identify a better medicine)"
+        title: "Power = 1 − β"
+        text: |
+          الـ ==power== = قدرة الدراسة إنها تلاقي فرق **حقيقي** بحجم معين (δ): الفرصة إنك **تعرف إن الدوا الأحسن أحسن فعلًا**.
+
+          - **Power = 1 − β**.
+          - لو β = 20% ← power = **80%**. لو β = 10% ← power = **90%**.
+          - power أعلى = عيّنة **أكبر**.
+
+          ليه؟ لأن علشان تشوف فرق صغير وسط الـ variation الطبيعية بين الناس، محتاج ناس أكتر. التفسير المقبول (مش في الكتاب).
       - kind: check
         page: 13
         quote: "QUESTION 3: A RCT comparing the efficacy of 2 drugs showed a difference between the two (p<0.05). Assume in reality, however, the 2 groups do not differ. This is therefore an example of:\n  a. Type 1 error (α error)\n  b. Type 2 error (β error)\n  c. 1- α\n  d. 1- β\nAnswer: a"
@@ -93,6 +115,84 @@ lessons:
           - "الـ type 2 هو إن يفوتك فرق موجود، وهنا مفيش فرق أصلًا."
           - "الـ power هو إنك تلاقي فرق موجود فعلًا."
           - "الـ 1 - alpha هو إنك صح تقول مفيش فرق."
+      - kind: check
+        page: 14
+        quote: "Which of the following best describes a Type I error?\na. The null is true, but we mistakenly reject it.\nb. The null is false and we reject it.\nc. The null is false, but we fail to reject it.\na"
+        question: "Which of the following best describes a type I error?"
+        options:
+          - "The null is true, but we mistakenly reject it"
+          - "The null is false and we reject it"
+          - "The null is false, but we fail to reject it"
+        answer: 0
+        why:
+          - "صح (a في السلايد): رفضنا null صح = لقينا فرق مش موجود."
+          - "ده القرار الصح، مش error."
+          - "ده type II error."
+      - kind: check
+        page: 15
+        quote: "In a statistical test of hypotheses, a Type II error is committed if:\n  a. We reject the null hypothesis when, in fact, the null hypothesis is valid.\n  b. We fail to reject the null hypothesis when, in fact, the null hypothesis is invalid.\n  c. We reject the null hypothesis when, in fact, the null hypothesis is invalid.\n  d. We fail to reject the null hypothesis when, in fact, the null hypothesis is valid."
+        question: "In a test of hypotheses, a type II error is committed if:"
+        options:
+          - "We fail to reject the null hypothesis when it is in fact invalid"
+          - "We reject the null hypothesis when it is valid"
+          - "We reject the null hypothesis when it is invalid"
+          - "We fail to reject the null hypothesis when it is valid"
+        answer: 0
+        why:
+          - "صح: الفرق موجود وإحنا مالقيناهوش (false negative، β)."
+          - "ده type I."
+          - "ده القرار الصح."
+          - "ده القرار الصح برضه."
+      - kind: check
+        page: 16
+        quote: "Which alpha level provides the smallest chance of committing a Type I error?\na. α = .025\nb. α = .10\nc. α = .01\nd. α = .05\nc"
+        question: "Which alpha level gives the smallest chance of a type I error?"
+        options:
+          - "α = .01"
+          - "α = .025"
+          - "α = .05"
+          - "α = .10"
+        answer: 0
+        why:
+          - "صح (c في السلايد): α هي نفسها احتمال الـ type I، فأصغر α = أصغر احتمال."
+          - "أكبر من .01."
+          - "ده المعتاد، بس مش الأصغر."
+          - "الأكبر هنا."
+      - kind: check
+        page: 21
+        quote: "A significance test based on a small sample may not produce a statistically significant result even if the true value differs substantially from the null value. This type of result is known as\nA. the significance level of the test.\nB. the power of the study.\nC. a Type 1 error.\nD. a Type 2 error.\nD"
+        question: "A test on a small sample is not significant even though the true value differs substantially from the null. This is:"
+        options:
+          - "A type 2 error"
+          - "A type 1 error"
+          - "The power of the study"
+          - "The significance level of the test"
+        answer: 0
+        why:
+          - "صح (D في السلايد): الفرق موجود ومالقيناهوش، والسبب عيّنة صغيرة = power ضعيف."
+          - "الـ type 1 فرق وهمي، هنا العكس."
+          - "الـ power هو فرصة إننا نلاقيه؛ هنا الفرصة ضاعت، بس النتيجة نفسها اسمها type 2."
+          - "ده α، رقم بنختاره قبل الدراسة."
+      - kind: try
+        items: [res.L07.002, res.L07.005, res.L07.014, res.L07.015, res.L07.115]
+    recap:
+      - "Type I (alpha) = false positive، دوا فاشل نزل السوق. Type II (beta) = false negative، دوا كويس اتحرم منه الناس."
+      - "Power = 1 - beta: فرصة إنك تلاقي الفرق الحقيقي."
+      - "الـ 5 factors: alpha، beta، power، MCRD، variance. Power و variance أكبر = عيّنة أكبر. Alpha و MCRD أكبر = عيّنة أصغر."
+      - "المعادلة: Zβ = 0.84 لـ 80% power، Zα/2 = 1.96."
+    practice: [res.L07.001, res.L07.002, res.L07.003, res.L07.004, res.L07.005, res.L07.012, res.L07.013, res.L07.014, res.L07.015, res.L07.115]
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson9
+    title: "حجم العينة: كام عيان يكفي؟"
+    hook: "5 حاجات بتحدد العدد، وكل واحدة لو اتحركت العيّنة بتكبر أو تصغر."
+    minutes: 8
+    pages: [7, 20]
+    topics: [sample-size]
+    goals:
+      - "تعرف الـ 5 factors اللي بتحدد الـ sample size واتجاه كل واحد"
+      - "تفهم معادلة الفرق بين نسبتين من غير ما تحفظها"
+    status: unverified
+    steps:
       - kind: explain
         page: 7
         quote: "Minimal clinically relevant difference (MCRD) δ:\n  For continuous outcome (body weight) the MCRD may be 5 Kg\n  For a trial with a binary outcome, for example the effect of a drug on the development of a myocardial infarction (yes/no), an investigator could choose a difference of 10% between the treatment group and the control group as MCRD"
@@ -125,6 +225,28 @@ lessons:
           - لو صوته **عالي** (delta كبيرة) هتسمعه من أول كلمة: عيّنة صغيرة تكفي.
           - لو **الدوشة** حواليك عالية (variability أو variance كبيرة) محتاج تقرّب أكتر: عيّنة أكبر.
           - ولو عايز تبقى **متأكد** إنك مش هتفوّت ولا كلمة (power أعلى): برضه عيّنة أكبر.
+      - kind: explain
+        page: 9
+        quote: "Sometimes, if δ is too large, several inefficacious drugs will appear in the market for they can be judged as non-inferiority/equivalence; On the contrary, if δ is too small, some potential useful drugs will be neglected."
+        title: "الـ δ: لا كبيرة قوي ولا صغيرة قوي"
+        text: |
+          - لو ==δ كبيرة زيادة==: أدوية كتير مالهاش فعالية هتنزل السوق، لأنها هتتحكم عليها **non-inferior** أو **equivalent**.
+          - لو ==δ صغيرة زيادة==: أدوية مفيدة ممكن **تتهمل**.
+
+          ليه؟ لأن δ هي الحد اللي بنقول تحته «مفيش فرق يفرق». حد واسع بيعدّي أي دوا، وحد ضيق بيطلب فرق ماحدش يقدر يثبته. التفسير المقبول (مش في الكتاب).
+      - kind: explain
+        page: 10
+        quote: "Simple formula for difference in proportions: n = 2 × (p̄)(1 - p̄)(Zβ + Zα/2)² / (p1 - p2)²\n  n: Sample size in each group (assumes equal sized groups)\n  (p̄)(1 - p̄): A measure of variability (similar to standard deviation)\n  Zβ: Represents the desired power (typically .84 for 80% power).\n  Zα/2: Represents the desired level of statistical significance (typically 1.96).\n  (p1 - p2): Effect Size (the difference in proportions)"
+        title: "معادلة الفرق بين نسبتين"
+        text: |
+          **n (لكل جروب) = 2 × p̄(1 − p̄) × (Zβ + Zα/2)² ÷ (p1 − p2)²**، وبتفترض إن الجروبين نفس الحجم.
+
+          - **p̄(1 − p̄)**: الـ variability (زي الـ SD).
+          - **Zβ**: الـ power (0.84 لـ 80%).
+          - **Zα/2**: الـ significance (1.96).
+          - **(p1 − p2)**: الـ ==effect size==، وهو في **المقام**.
+
+          علشان كده الفرق الصغير بيكبّر العيّنة جامد: المقام متربّع، فلو الفرق اتقسم نصين العيّنة بتتضرب في 4. التفسير المقبول (مش في الكتاب).
       - kind: aside
         tone: exam
         page: 8
@@ -161,6 +283,14 @@ lessons:
             <text x="165" y="200" text-anchor="middle" class="t-sm t-bad">Top grows → more patients</text>
             <text x="165" y="220" text-anchor="middle" class="t-sm t-good">Bottom grows → fewer patients</text>
           </svg>
+      - kind: aside
+        tone: trap
+        page: 17
+        quote: "In a well designed clinical trial of treatment of ovarian cancer, remission rate at one year is similar for new drug and usual care, p = 0.4. This means that:\n  a. Both treatment are effective\n  b. Neither treatment is effective\n  c. The statistical power of this study is 60%\n  d. The best estimate of treatment effect is 0.4\n  e. It is not possible to decide which treatment is better based on these information\nAnswer: e"
+        text: |
+          سؤال الـ ovarian cancer: remission متشابه، **p = 0.4**. الإجابة: **مش ممكن نحكم أنهي treatment أحسن من المعلومات دي**.
+
+          الفخاخ: الـ p مش «الـ power = 60%» ولا «الـ effect = 0.4». والـ p الكبيرة مش معناها إن الاتنين فاشلين أو الاتنين شغالين؛ مفيش placebo أصلًا.
       - kind: check
         page: 18
         quote: "All of the followings can be increased to get smaller sample size in RCT EXCEPT?\n  a. α error\n  b. Power\n  c. (MCRD) δ"
@@ -176,27 +306,50 @@ lessons:
           - "صح: power أعلى يعني Z beta أكبر فوق الكسر، يعني عيّانين أكتر."
           - "الـ delta تحت الكسر؛ لما تكبر العيّنة تصغر."
           - "beta أكبر يعني power أقل، يعني عيّنة أصغر."
-      - kind: aside
-        tone: trap
-        page: 17
-        quote: "In a well designed clinical trial of treatment of ovarian cancer, remission rate at one year is similar for new drug and usual care, p = 0.4. This means that:\n  a. Both treatment are effective\n  b. Neither treatment is effective\n  c. The statistical power of this study is 60%\n  d. The best estimate of treatment effect is 0.4\n  e. It is not possible to decide which treatment is better based on these information\nAnswer: e"
-        text: |
-          سؤال الـ ovarian cancer: remission متشابه، **p = 0.4**. الإجابة: **مش ممكن نحكم أنهي treatment أحسن من المعلومات دي**.
-
-          الفخاخ: الـ p مش «الـ power = 60%» ولا «الـ effect = 0.4». والـ p الكبيرة مش معناها إن الاتنين فاشلين أو الاتنين شغالين؛ مفيش placebo أصلًا.
+      - kind: check
+        page: 19
+        quote: "Question 5: In a RCT, a planned crossover design:\n  a. Requires standardization\n  b. Must take into account possible residual effects\n  c. Enhances generalisability of the study\n  d. Eliminates need for monitoring compliance/non compliance"
+        question: "In an RCT, a planned crossover design:"
+        options:
+          - "Must take into account possible residual effects"
+          - "Requires standardization"
+          - "Enhances generalisability of the study"
+          - "Eliminates the need for monitoring compliance"
+        answer: 0
+        why:
+          - "صح: العلاج الأول ممكن يسيب أثر (carry-over) في الفترة التانية، وده سبب الـ washout."
+          - "مش ميزة خاصة بالـ crossover."
+          - "الـ crossover مابيوسّعش التعميم."
+          - "الـ compliance لازم تتتابع في أي trial."
+      - kind: check
+        page: 20
+        quote: "For your RCT, you want 80% power to detect a reduction of 10 points or more in the treatment group relative to placebo. What is 10 in your sample size formula?\na. Standard deviation\nb. mean change\nc. Effect size\nd. Standard error\ne. Significance level\nc"
+        question: "You want 80% power to detect a reduction of 10 points or more versus placebo. What is 10 in the sample size formula?"
+        options:
+          - "Effect size"
+          - "Standard deviation"
+          - "Mean change"
+          - "Standard error"
+          - "Significance level"
+        answer: 0
+        why:
+          - "صح (c في السلايد): الفرق اللي عايز تلاقيه = effect size (δ)، المقام في المعادلة."
+          - "الـ SD هو الـ variability، رقم تاني."
+          - "قريبة في المعنى بس السلايد بيسميها effect size."
+          - "الـ standard error بيتحسب من الـ SD والعيّنة."
+          - "ده α (عادة 0.05)."
       - kind: try
-        items: [res.L07.004, res.L07.008, res.L07.011]
+        items: [res.L07.009, res.L07.010, res.L07.004, res.L07.099]
     recap:
-      - "Type I (alpha) = false positive، دوا فاشل نزل السوق. Type II (beta) = false negative، دوا كويس اتحرم منه الناس."
-      - "Power = 1 - beta: فرصة إنك تلاقي الفرق الحقيقي."
-      - "الـ 5 factors: alpha، beta، power، MCRD، variance. Power و variance أكبر = عيّنة أكبر. Alpha و MCRD أكبر = عيّنة أصغر."
-      - "المعادلة: Zβ = 0.84 لـ 80% power، Zα/2 = 1.96."
-    practice: [res.L07.001, res.L07.002, res.L07.003, res.L07.004, res.L07.005, res.L07.006, res.L07.007, res.L07.008, res.L07.009, res.L07.010, res.L07.011, res.L07.012, res.L07.013, res.L07.014, res.L07.015, res.L07.016, res.L07.017, res.L07.018, res.L07.019, res.L07.020, res.L07.115]
+      - "δ (الـ MCRD) = أقل فرق يفرق مع العيان؛ كبير زيادة يعدّي أدوية ضعيفة، وصغير زيادة يضيّع أدوية مفيدة."
+      - "n لكل جروب = 2 p(1 − p)(Zβ + Zα/2)² ÷ (p1 − p2)²."
+      - "فرق أصغر، power أعلى، α أصغر، variability أكبر = عيّنة أكبر."
+    practice: [res.L07.006, res.L07.007, res.L07.008, res.L07.009, res.L07.010, res.L07.011, res.L07.016, res.L07.017, res.L07.018, res.L07.019, res.L07.020, res.L07.099]
   # ------------------------------------------------------------------
   - id: res.L07.lesson2
     title: "القرعة: simple و block و stratified"
     hook: "إزاي توزّع ١٠٠٠ عيان على علاجين وتضمن إن الستات والكبار متقسّمين بالعدل؟"
-    minutes: 8
+    minutes: 10
     pages: [22, 34]
     topics: [conduct, randomization]
     goals:
@@ -215,6 +368,20 @@ lessons:
           - **مين** هيقيس؟ و**إمتى**؟
           - بأنهي **equipment** وأنهي **technique**؟
           - إزاي الأجهزة والطرق والناس هيكونوا ==standardized and validated==؟
+      - kind: explain
+        remind: [res.L07.022]
+        page: 23
+        quote: "Who will make the measurement? When will it be made?\nWhat equipment / instrument will be used?\nWhat technique will be used?\nHow the equipment, techniques and personnel be standardized and validated?"
+        title: "كل variable: 5 أسئلة"
+        text: |
+          لكل variable في البروتوكول اكتب:
+
+          - **مين** هيقيس؟ و**إمتى**؟
+          - بأنهي **equipment / instrument**؟
+          - بأنهي **technique**؟
+          - إزاي الأجهزة والطرق والناس ==standardized and validated==؟
+
+          ليه كل ده؟ لأن لو جروب اتقاس بجهاز وجروب بجهاز تاني، الفرق اللي هيطلع ممكن يكون فرق الأجهزة مش فرق العلاج. التفسير المقبول (مش في الكتاب).
       - kind: explain
         page: 24
         quote: "Step 7 - Enrolling the Participants: It is important to present the \"Recruitment and Participation Flow Chart\" giving the numbers ('n') at each step"
@@ -252,6 +419,14 @@ lessons:
           AABB، BBAA، ABAB، BABA، ABBA، BAAB.
 
           تختار البلوكات **عشوائيًا**: 20 عيان = **5 blocks** كل واحد فيه 4. وفي آخر كل بلوك، الجروبين متساويين.
+      - kind: reveal
+        page: 30
+        quote: "Blocked Randomization\nBlocks containing specific number of participants are generated (5 blocks each containing 4 participants for a study with total of 20 participants).\nWithin each block, participants are randomly allocated to either arms."
+        prompt: "دراسة فيها 20 عيان بـ block randomization. البلوكات شكلها إيه؟"
+        answer: |
+          مثال slide 30: ==5 blocks كل واحد فيه 4== (زي: C ثم T ثم C ثم T، أو T ثم T ثم C ثم C). جوه كل بلوك العيانين بيتوزّعوا random على الـ C والـ T، بس كل بلوك فيه 2 من كل واحد.
+
+          النتيجة: بعد كل 4 عيانين الجروبين بيبقوا متساويين، حتى لو الدراسة وقفت في النص.
       - kind: aside
         tone: trap
         page: 29
@@ -316,6 +491,14 @@ lessons:
             <text x="82" y="288" text-anchor="middle" class="t-sm t-b">= 500</text>
             <text x="247" y="288" text-anchor="middle" class="t-sm t-b">= 500</text>
           </svg>
+      - kind: explain
+        page: 33
+        quote: "Eligible women, Stratified according to gestational age at entry:\n  14–26 Weeks: Randomized to Zidovudine or Placebo\n  >26 Weeks: Randomized to Zidovudine or Placebo"
+        title: "مثال stratified: zidovudine في الحوامل"
+        text: |
+          الستات المؤهلات اتقسموا الأول حسب ==gestational age at entry==: **14-26 أسبوع** و**أكتر من 26**. وجوه كل stratum اتعملت قرعة: zidovudine أو placebo.
+
+          ليه عمر الحمل بالذات؟ لأنه ممكن يأثر على الانتقال للجنين، فلو جروب جاله ستات أبعد في الحمل بالصدفة، الفرق هيتلخبط. الـ stratification بتضمن إن كل فئة متوزعة بالتساوي. التفسير المقبول (مش في الكتاب).
       - kind: match
         page: 28
         quote: "How to Do Random Allocation of subjects:\n  Simple randomization\n  Block randomization: to randomize subjects into groups that result in equal sample sizes\n  Stratified randomization"
@@ -347,14 +530,14 @@ lessons:
       - "Step 7: flow chart فيه n عند كل خطوة."
       - "الـ randomization: الـ assignment مش متوقع، الـ baseline متوازن، والطريقة الوحيدة للـ unknown confounders."
       - "Block = عدد متساوي (block of 4 = 6 ترتيبات). Stratified = block لكل combination من الـ covariates وقرعة جوّاه."
-    practice: [res.L07.021, res.L07.022, res.L07.023, res.L07.030, res.L07.031, res.L07.032, res.L07.033, res.L07.034, res.L07.035, res.L07.036, res.L07.037, res.L07.038, res.L07.039, res.L07.040]
+    practice: [res.L07.021, res.L07.022, res.L07.023, res.L07.030, res.L07.031, res.L07.032, res.L07.033, res.L07.034, res.L07.035, res.L07.036, res.L07.037, res.L07.038, res.L07.039, res.L07.040, res.L07.050, res.L07.112]
   # ------------------------------------------------------------------
   - id: res.L07.lesson3
     title: "الظرف المقفول: concealment ضد blinding"
     hook: "الدكتور شاف إن الظرف الجاي فيه الدوا الجديد، فاختار له عيان شكله هيتحسّن. ده اسمه إيه؟"
     minutes: 8
-    pages: [35, 50]
-    topics: [concealment, conduct]
+    pages: [35, 44]
+    topics: [concealment]
     goals:
       - "تعدّ طرق الـ allocation concealment"
       - "تفرّق بين concealment و blinding: التوقيت، الـ bias، وإمكانية التنفيذ"
@@ -373,6 +556,15 @@ lessons:
           - مركز بعيد يقولك رقم العلبة: **central randomization**
 
           والـ SNOSE اختصار: Sequentially Numbered, Opaque, Sealed Envelopes.
+      - kind: explain
+        page: 36
+        quote: "Concealment of allocation vs. blinding\nConcealment of allocation:\n  Procedure to protect the randomization process before the subject enters the trial\n  Concealment of allocation is ALWAYS feasible\n  If not done, results in selection bias (randomization benefits are lost, and treatment assignment is no longer truly random)\nBlinding:\n  Masking of the treatments after randomization (once trial begins)\n  Blinding is not always feasible\n  If not done, can result in patients biasing their responses because of their knowledge of treatment; can also lead to biased outcome assessment because investigators have knowledge of treatment"
+        title: "لو ماعملتش واحد منهم؟"
+        text: |
+          - **Concealment of allocation**: بيحمي القرعة ==قبل== ما العيان يدخل، وهو **always feasible** (ممكن دايمًا). لو ماتعملش ← ==selection bias==: فوايد القرعة بتضيع، والتوزيع مابقاش random فعلًا.
+          - **Blinding**: إخفاء العلاج ==بعد== القرعة. لو ماتعملش ← العيان ممكن يحيّز إجاباته، والباحث ممكن يقيّم النتيجة بتحيّز.
+
+          الفرق في سطر: الـ concealment بيحمي **مين يدخل أنهي جروب**، والـ blinding بيحمي **إزاي بنقيس اللي حصل**.
       - kind: figure
         page: 38
         quote: "Allocation concealment vs. blinding, along time:\n  Before randomisation: Concealment of allocation, against Selection bias\n  After randomisation: Blinding, against Performance bias"
@@ -433,6 +625,40 @@ lessons:
           - "ده blinding، وبيحصل بعد الـ allocation."
           - "الـ placebo المتطابق جزء من الـ blinding."
           - "الـ power بيعتمد على الـ sample size والـ alpha والـ effect size."
+      - kind: aside
+        tone: tip
+        page: 41
+        quote: "Which is not an issue with RCTs?\n  a. Contamination\n  b. Losses to follow up\n  c. Recall bias\n  d. Bias in assessment of outcome"
+        text: |
+          ==Contamination==: جزء من الـ intervention يوصل للـ control group، فالفرق الحقيقي بين الجروبين يصغر.
+
+          مثال الدكتورة في المحاضرة: **برنامج تثقيف صحي** معمول للجروب التجريبي، وبعض الناس في الـ control سمعوه أو اتعرضوا له. خطّط تمنع التسريب ده، وسجّل أي co-interventions.
+      - kind: check
+        page: 42
+        quote: "Difference between groups at the start e.g. more severe illness is:\n  a. Bias\n  b. Chance\n  c. Random error"
+        question: "A difference between groups at the start, e.g. more severe illness in one group, is:"
+        options:
+          - "Bias"
+          - "Chance"
+          - "Random error"
+        answer: 0
+        why:
+          - "صح (slide 42): فرق في البداية بيتلخبط مع أثر العلاج = bias. ودي الحاجة اللي القرعة والـ concealment بيمنعوها."
+          - "ممكن يحصل بالصدفة في عيّنة صغيرة، بس الإجابة في السلايد bias."
+          - "الـ random error بيتوزع في الاتجاهين، مش في جروب واحد."
+      - kind: check
+        page: 43
+        quote: "When people are asked to take part in a trial based on knowledge of which study group they will be allocated:\n  a. Detection bias\n  b. Sampling bias\n  c. Selection bias"
+        question: "People are asked to take part based on knowledge of which group they will be allocated to. This is:"
+        options:
+          - "Selection bias"
+          - "Detection bias"
+          - "Sampling bias"
+        answer: 0
+        why:
+          - "صح: لما اللي بيضمّ العيانين عارف الجروب، بيختار مين يدخل = selection bias. علاجه concealment."
+          - "الـ detection bias في قياس الـ outcome، والعلاج blinding."
+          - "الـ sampling bias في اختيار العيّنة من الـ population، مش في التوزيع."
       - kind: sort
         page: 44
         quote: "6. In a randomized controlled trial, the following types of biases are reduced by randomization:\n  a. Ascertainment bias\n  b. Selection bias\n  c. Recall bias\n  d. Publication bias\n  e. Bias in handling dropout\nAnswer: b"
@@ -445,6 +671,26 @@ lessons:
           - { text: "Patients bias their answers because they know their drug", bin: 1 }
           - { text: "Bias from dropouts and non-compliers", bin: 2 }
         why: "القرعة والظرف المقفول بيخلّوا الجروبين شبه بعض في البداية. الـ blinding بيحمي القياس بعد كده. والـ intention to treat بيحمي التحليل من اللي وقفوا العلاج."
+      - kind: try
+        items: [res.L07.042, res.L07.041, res.L07.028]
+    recap:
+      - "Concealment: SNOSE، pharmacy، central. بيحمي القرعة قبل الإعطاء، دايمًا ممكن، وبيمنع الـ selection bias."
+      - "Blinding: بعد الـ allocation، مش دايمًا ممكن، وبيمنع الـ ascertainment والـ performance bias."
+      - "الـ placebo: نفس الشكل واللون والحجم والطعم. والـ data بنفس الجودة في الجروبين، وإلا observer bias."
+      - "Stopping rules: benefit أو harm أكبر من المتوقع، مفيش فرق، أو mortality عالية."
+    practice: [res.L07.041, res.L07.042, res.L07.043, res.L07.044, res.L07.045, res.L07.046, res.L07.047, res.L07.048, res.L07.049, res.L07.116, res.L07.118]
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson10
+    title: "الـ placebo والـ blinding وجمع الداتا"
+    hook: "نفس الجودة للجروبين، ومحدش يعرف مين خد إيه، وقواعد للوقف قبل ما تبدأ."
+    minutes: 6
+    pages: [45, 50]
+    topics: [conduct]
+    goals:
+      - "تعرف ليه داتا الجروبين لازم تبقى نفس الجودة"
+      - "تعرف مين ممكن يتعمّى وليه"
+    status: unverified
+    steps:
       - kind: explain
         page: 45
         quote: "Step 9 - Introduce the Intervention and Placebo Control Modalities:\n  Develop procedures for checking compliance\n  Ensure that they get the placebo drug in the same shape, colour, size and taste and is also administered using similar procedures."
@@ -453,6 +699,63 @@ lessons:
           - **Step 9**: الـ placebo لازم يبقى ==same shape, colour, size and taste== ويتدّى بنفس الطريقة. واعمل procedures لمراجعة الـ **compliance**.
           - الـ **data collection** لازم تبقى **same quality** في الجروبين: الـ treatment (assigned و received)، والـ outcome بمعايير واضحة ومتقاسة بنفس الطريقة. غير كده: **observer bias**.
           - **Step 10**: الناس لو عرفت هي في أنهي جروب، سلوكها بيتغيّر. الحل: blinding للـ participants و/أو الـ observer و/أو الـ data reviewer.
+      - kind: figure
+        page: 45
+        quote: "Step 9 - Introduce the Intervention and Placebo Control Modalities:\n  Develop procedures for checking compliance\n  Ensure that they get the placebo drug in the same shape, colour, size and taste and is also administered using similar procedures."
+        title: "Steps 9 لـ 12"
+        svg: |
+          <svg viewBox="0 0 330 252" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L07s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="20" y="8" width="290" height="44" rx="8" class="fg-box"/>
+            <text x="165" y="27" text-anchor="middle" class="t-sm t-b">Step 9: placebo</text>
+            <text x="165" y="43" text-anchor="middle" class="t-sm t-mut">same look, no active drug</text>
+            <path d="M165 54v14" class="fg-arrow" marker-end="url(#L07s)"/>
+            <rect x="20" y="72" width="290" height="44" rx="8" class="fg-acc"/>
+            <text x="165" y="91" text-anchor="middle" class="t-sm t-b">Step 10: blinding</text>
+            <text x="165" y="107" text-anchor="middle" class="t-sm t-mut">participants, observer, data reviewer</text>
+            <path d="M165 118v14" class="fg-arrow" marker-end="url(#L07s)"/>
+            <rect x="20" y="136" width="290" height="44" rx="8" class="fg-box"/>
+            <text x="165" y="155" text-anchor="middle" class="t-sm t-b">Step 11: follow-up + stopping rules</text>
+            <text x="165" y="171" text-anchor="middle" class="t-sm t-mut">losses as few as possible</text>
+            <path d="M165 182v14" class="fg-arrow" marker-end="url(#L07s)"/>
+            <rect x="20" y="200" width="290" height="44" rx="8" class="fg-box"/>
+            <text x="165" y="219" text-anchor="middle" class="t-sm t-b">Step 12: statistical analysis</text>
+            <text x="165" y="235" text-anchor="middle" class="t-sm t-mut">baseline table, then 2x2</text>
+          </svg>
+        caption: "آخر 4 خطوات في الـ RCT بالترتيب. الـ blinding في النص لأنه بيحمي كل اللي بعده من القياس للتحليل."
+        alt: "Four stacked steps of a randomized controlled trial: placebo, blinding, follow-up with stopping rules, statistical analysis."
+      - kind: explain
+        page: 46
+        quote: "Data collection: It is essential that data collected for each of the study groups be of the same quality\n  Treatment (assigned and received)\n  Outcome: criteria explicitly stated and measured comparably in all groups\nOtherwise → observer bias"
+        title: "جمع الداتا: نفس الجودة"
+        text: |
+          الداتا لكل جروب لازم تبقى ==same quality==:
+
+          - **Treatment**: اللي اتخصص واللي اتاخد فعلًا.
+          - **Outcome**: معايير مكتوبة صريحة، ومتقاسة بنفس الطريقة في كل الجروبات.
+
+          غير كده ← ==observer bias==. لو بتدوّر على المضاعفات في جروب العلاج الجديد بعناية أكتر، هتلاقي أكتر، والفرق هيبان من غير ما يكون موجود. التفسير المقبول (مش في الكتاب).
+      - kind: check
+        page: 47
+        quote: "Step 10 - Ensure Blinding:\n  Knowledge of whether the participant is in a treatment or control group can influence behaviour\n  Overcome through blinding the participants and/or observer and/or data reviewer"
+        question: "The purpose of a double-blind (double-masked) study is to:"
+        options:
+          - "Avoid observer and subject bias"
+          - "Achieve comparability of treated and untreated subjects"
+          - "Reduce the effects of sampling variation"
+          - "Avoid selection bias at enrolment"
+        answer: 0
+        why:
+          - "صح: step 10، معرفة الجروب بتأثر على سلوك المشارك وعلى حكم الـ observer؛ التعمية للاتنين بتمنع ده."
+          - "ده شغل الـ randomization."
+          - "ده بيتحل بعيّنة أكبر."
+          - "ده شغل الـ concealment قبل القرعة."
+      - kind: aside
+        tone: exam
+        page: 48
+        quote: "Step 11 - Follow Up and Assessment:\n  Follow up the subjects till the end point, or the period of trial, whichever is earlier\n  Avoid losses to follow up, which may otherwise seriously bias the study results"
+        text: |
+          الدكتورة قالت في الشرح: الـ ==losses to follow up== لازم تبقى أقل ما يمكن، و**ماتعدّيش 20%**. وحتى لو أقل من كده، ممكن تعمل bias لو مرتبطة بالعلاج أو بالـ outcome، وبتقلل الـ power.
       - kind: explain
         page: 49
         quote: "When to stop RCT (\"Stoppage Rules\"):\n  RCTs may be stopped early if an intervention produces \"larger than expected benefit or harm,\" or\n  If \"investigators find evidence of no important difference\"\n  Evidence of clearly high mortality or complication in the intervention group comes up."
@@ -466,20 +769,6 @@ lessons:
           - مفيش **important difference** خالص (futility).
           - **Mortality** أو complications عالية بوضوح في جروب الـ intervention.
       - kind: aside
-        tone: exam
-        page: 48
-        quote: "Step 11 - Follow Up and Assessment:\n  Follow up the subjects till the end point, or the period of trial, whichever is earlier\n  Avoid losses to follow up, which may otherwise seriously bias the study results"
-        text: |
-          الدكتورة قالت في الشرح: الـ ==losses to follow up== لازم تبقى أقل ما يمكن، و**ماتعدّيش 20%**. وحتى لو أقل من كده، ممكن تعمل bias لو مرتبطة بالعلاج أو بالـ outcome، وبتقلل الـ power.
-      - kind: aside
-        tone: tip
-        page: 41
-        quote: "Which is not an issue with RCTs?\n  a. Contamination\n  b. Losses to follow up\n  c. Recall bias\n  d. Bias in assessment of outcome"
-        text: |
-          ==Contamination==: جزء من الـ intervention يوصل للـ control group، فالفرق الحقيقي بين الجروبين يصغر.
-
-          مثال الدكتورة في المحاضرة: **برنامج تثقيف صحي** معمول للجروب التجريبي، وبعض الناس في الـ control سمعوه أو اتعرضوا له. خطّط تمنع التسريب ده، وسجّل أي co-interventions.
-      - kind: aside
         tone: trap
         page: 50
         quote: "Suppose that a randomized single masked experimental study is conducted. Which of the following problems are surely avoided in this study?\n  a. Noncompliance\n  b. Confounding\n  c. Biased assessment of the disease outcome\n  d. Loss to follow up"
@@ -488,19 +777,18 @@ lessons:
 
           ممكن تعترض إن الـ single masking بيخبّي عن طرف واحد بس، وإن القرعة بتقلل الـ confounding. لكن إجابة الامتحان هي إجابة الشريحة: الـ **masking** = سلاح ضد الـ **biased assessment**. والـ noncompliance والـ loss to follow-up مفيش حاجة بتمنعهم.
       - kind: try
-        items: [res.L07.042, res.L07.041, res.L07.028]
+        items: [res.L07.025, res.L07.026, res.L07.102]
     recap:
-      - "Concealment: SNOSE، pharmacy، central. بيحمي القرعة قبل الإعطاء، دايمًا ممكن، وبيمنع الـ selection bias."
-      - "Blinding: بعد الـ allocation، مش دايمًا ممكن، وبيمنع الـ ascertainment والـ performance bias."
-      - "الـ placebo: نفس الشكل واللون والحجم والطعم. والـ data بنفس الجودة في الجروبين، وإلا observer bias."
-      - "Stopping rules: benefit أو harm أكبر من المتوقع، مفيش فرق، أو mortality عالية."
-    practice: [res.L07.024, res.L07.025, res.L07.026, res.L07.027, res.L07.028, res.L07.029, res.L07.041, res.L07.042, res.L07.043, res.L07.044, res.L07.045, res.L07.046, res.L07.047, res.L07.048, res.L07.049, res.L07.050, res.L07.116, res.L07.117, res.L07.118]
+      - "الداتا للجروبين بنفس الجودة: العلاج المتخصص والمستلم، والـ outcome بمعايير واضحة؛ غير كده observer bias."
+      - "Blinding: المشاركين، الـ observer، و/أو الـ data reviewer."
+      - "الـ losses to follow-up أقل ما يمكن، والـ stopping rules مكتوبة من الأول."
+    practice: [res.L07.024, res.L07.025, res.L07.026, res.L07.027, res.L07.028, res.L07.029, res.L07.117, res.L07.102]
   # ------------------------------------------------------------------
   - id: res.L07.lesson4
     title: "NNT: كام عيان نعالج علشان ننقذ واحد؟"
     hook: "دوا بيقلل الوفيات 50%... بس ده ممكن يعني ٤ عيانين أو ٤٠٠٠ عيان. الفرق كله في الـ NNT."
-    minutes: 9
-    pages: [52, 63]
+    minutes: 8
+    pages: [51, 63]
     topics: [effect-measures]
     goals:
       - "تحسب control event rate (CER) و experimental event rate (EER) و relative risk reduction (RRR) و absolute risk reduction (ARR) و number needed to treat (NNT) من 2x2 table"
@@ -508,6 +796,15 @@ lessons:
       - "تحل تمرين الـ INH وتمرين الـ zidovudine وتلاقي غلطة الشريحة"
     status: unverified
     steps:
+      - kind: explain
+        page: 51
+        quote: "Step 12 - Statistical Analysis:\n  A table showing baseline comparison between the interventional group and the placebo group\n  make a 2X2 table and place your data in the 2X2 table exactly as per the specifications for cells a, b, c and d"
+        title: "Step 12: أول حاجتين في التحليل"
+        text: |
+          1. ==Baseline table==: مقارنة خصائص الجروبين في البداية.
+          2. **2×2 table**: حط الداتا في الخانات a وb وc وd بالظبط زي التعريف.
+
+          ليه الـ baseline الأول؟ لأنه بيقولك القرعة نجحت ولا لأ: لو الجروبين مختلفين من الأول، أي فرق في الآخر محتاج حذر. التفسير المقبول (مش في الكتاب).
       - kind: explain
         remind: [res.L07.052]
         page: 52
@@ -572,6 +869,21 @@ lessons:
           إعلان: «خصم 50%!» على إيه؟ لو على عربية، ده فرق مهول. لو على باكو لبان، فرقت معاك نص جنيه.
 
           الـ **RRR** هو الـ «50%» اللي في الإعلان. الـ **ARR** هو الفرق الـ absolute: الفلوس اللي وفّرتها فعلًا. وشركات الأدوية بتحب تكتب الـ RRR بخط كبير.
+      - kind: check
+        page: 61
+        quote: "In a randomized trial, the event rate (or risk) in the treatment group was 1%, compared to 5% to the control group. The measure that best describes by how much in relative terms the event rate was decreased by the treatment is:\na. the control event rate\nb. the relative risk reduction\nc. the absolute risk reduction\nd. the number needed to treat\nb"
+        question: "Event rate 1% with treatment vs 5% in controls. Which measure says by how much, in relative terms, the treatment decreased the event rate?"
+        options:
+          - "The relative risk reduction"
+          - "The absolute risk reduction"
+          - "The number needed to treat"
+          - "The control event rate"
+        answer: 0
+        why:
+          - "صح (b في السلايد): «relative terms» = RRR = (5 − 1) ÷ 5 = 80%."
+          - "الـ ARR فرق مطلق: 5% − 1% = 4%."
+          - "الـ NNT = 1 ÷ ARR = 25، عدد مش نسبة."
+          - "ده 5% بس، مش مقياس للتخفيض."
       - kind: check
         page: 62
         quote: "With respect to the influence of the relative risk reduction (RRR) and baseline risk on the NNT, which scenario results in the lowest NNT?\n  a. A greater RRR and higher base-line risk\n  b. A lower RRR and lower base-line risk\n  c. A lower RRR and higher base-line risk\n  d. A lower RRR regardless of base-line risk\n  e. A greater RRR and lower base-line risk\nAnswer: a"
@@ -646,7 +958,7 @@ lessons:
   - id: res.L07.lesson5
     title: "صدفة ولا حقيقة؟ وحلّل زي ما قرعت"
     hook: "فيه عيانين ماتوا قبل العملية. تشيلهم من الحسبة؟ لو شلتهم، العملية هتبان معجزة وهي مالهاش أي لازمة."
-    minutes: 9
+    minutes: 10
     pages: [64, 78]
     topics: [chance, itt]
     goals:
@@ -668,6 +980,16 @@ lessons:
           والعلاقة بينهم: لو قيمة الـ **no effect** **برّه** الـ confidence interval (CI)، النتيجة significant.
 
           وقيمة الـ no effect في الـ relative risk (RR) هي **1**، وفي الـ risk difference هي **صفر**.
+      - kind: explain
+        page: 65
+        quote: "Confidence intervals:\n  show a range within which the true effect of the intervention is likely to be.\n  a confidence interval that includes the value of no effect (e.g. RR=1 or RRR=0) shows that the intervention group is not statistically significantly different from the control."
+        title: "الـ CI بيقولك significant ولا لأ"
+        text: |
+          الـ **confidence interval** = المدى اللي الأثر الحقيقي غالبًا جواه.
+
+          ولو الـ CI ==فيه قيمة «مفيش أثر»== (RR = 1 أو RRR = 0)، يبقى الفرق **مش significant**. ولو برّاها، يبقى significant.
+
+          مثال: RR 0.77 (95% CI 0.59-0.98): الـ 1 برّه المدى ← significant، والـ p غالبًا حوالين 0.03.
       - kind: figure
         page: 67
         quote: "| Relative Risk | Confidence Interval | Interpretation |\n|---|---|---|\n| 1.77 | (1.22 – 2.45) | Statistically significant (increased risk) |\n| 1.63 | (0.85 – 2.46) | NOT statistically significant (risk is the same) |\n| 0.78 | (0.56 – 0.94) | Statistically significant (decreased risk) |"
@@ -748,6 +1070,40 @@ lessons:
             options: ["Intention to treat", "Per protocol"]
             answer: 0
             why: "الـ ITT بيقول الأثر الحقيقي صفر. الـ per protocol خلّى العملية تبان كويسة لأنه شال أسوأ العيانين (Montori, Canadian Medical Association Journal (CMAJ) 2001)."
+      - kind: table
+        page: 72
+        quote: "Treatment group\nIntensive Conventional Total\ninsulin insulin\nDrug A 72 83 155\nDrug B 194 184 378\nTotal 266 267 523"
+        title: "جدول slide 72: 523 عيان"
+        columns: ["", "Intensive insulin", "Conventional insulin", "Total"]
+        rows:
+          - ["Drug A", "72", "83", "155"]
+          - ["Drug B", "194", "184", "378"]
+          - ["Total", "266", "267", "523"]
+        hide: [[2, 3], [0, 3]]
+      - kind: explain
+        page: 73
+        quote: "Intention to treat:\n  Performing the analysis of RCTs according to original randomised assignment\n  Not according to whether they comply with treatment or not\n  Optimal estimate of the true benefit of the intervention\n  Not optimal for measuring harm of the intervention"
+        title: "ITT: كويس في الفايدة، مش في الضرر"
+        text: |
+          الـ **intention to treat** = حلّل كل واحد ==في الجروب اللي اتقرعله==، مش حسب التزامه.
+
+          - **Optimal estimate of the true benefit**: لأنه بيعكس اللي هيحصل في الحقيقة لما ناس مش ملتزمة تاخد العلاج.
+          - **Not optimal for measuring harm**: اللي ماخدش الدوا اتحسب في جروبه، فالـ side effects بتتخفف في الأرقام.
+      - kind: check
+        page: 74
+        quote: "Intention-to-Treat analysis of a clinical trial means which of the following?\nB. Anyone randomized into one of the study groups must be included in the final analysis in the group to which they were originally randomized, regardless of whether they adhered to the protocol or not.\nB"
+        question: "Intention-to-treat analysis means:"
+        options:
+          - "Anyone randomized is analysed in the group they were randomized to, whether they adhered or not"
+          - "Only subjects who really intend to take the treatment are enrolled (run-in period)"
+          - "Randomized subjects are analysed only if they took the assigned drug throughout"
+          - "All subjects must agree to be randomized and to take the assigned treatment"
+        answer: 0
+        why:
+          - "صح (B في السلايد)."
+          - "ده run-in، حاجة تانية خالص رغم الاسم."
+          - "ده per protocol."
+          - "ده consent، مش طريقة تحليل."
       - kind: aside
         tone: analogy
         page: 75
@@ -756,6 +1112,21 @@ lessons:
           مثال الـ diet: تجربة **cancer-prevention diet** ضد placebo diet. ناس في جروب الـ diet جالهم أعراض gastrointestinal (GI) ووقفوا الـ diet، والأعراض دي كانت **أول علامات الـ cancer**.
 
           لو عملتلهم exclude من الـ analysis لأنهم مش compliant، شلت الـ cancers من جروب الـ diet، فالـ diet هيبان **أقوى من الحقيقة**. زي مدرس يقول «فصلي كله نجح» بعد ما طرد الضعاف قبل الامتحان.
+      - kind: check
+        page: 76
+        quote: "Investigators worry about lost-to-follow-up:\n  a. Because it reduces the power of the study.\n  b. Because it often has a negative influence on internal validity.\n  c. Because subjects lost-to-follow-up may have a higher rate of side effects than those that remain in the study resulting in biased conclusions.\n  d. All of the above\nAnswer: d"
+        question: "Investigators worry about loss to follow-up because:"
+        options:
+          - "All of these"
+          - "It reduces the power of the study"
+          - "It often harms internal validity"
+          - "Those lost may have more side effects, biasing conclusions"
+        answer: 0
+        why:
+          - "صح (d في السلايد): التلاتة."
+          - "صح، بس مش لوحده."
+          - "صح، بس مش لوحده."
+          - "صح، بس مش لوحده."
       - kind: check
         page: 78
         quote: "Which of the followings is CORRECT about Intention to treat?\n  a. Analysis is according to whether they comply with treatment or not\n  b. Optimal estimate of the true harm of the intervention\n  c. Performing the analysis of RCTs according to original randomised assignment\n  d. Not optimal for measuring benefit of the intervention"
@@ -791,7 +1162,7 @@ lessons:
   - id: res.L07.lesson6
     title: "أخلاقيات التجربة: Helsinki و equipoise والموافقة"
     hook: "إمتى يبقى من حقك تدّي نص العيانين placebo؟ بس لما تكون فعلًا مش عارف مين الأحسن."
-    minutes: 7
+    minutes: 8
     pages: [79, 102]
     topics: [ethics]
     goals:
@@ -900,6 +1271,14 @@ lessons:
           - الحكومات توفّر الإمكانيات علشان كل الـ RCTs تتسجّل prospectively.
 
           مثال: **International Standard Randomised Controlled Trial Number (ISRCTN)**، registry معترف بيه من **World Health Organization (WHO)**، بيدّي الرقم اللي محتاجه علشان تنشر، ومفتوح للبحث مجانًا. وده بيقلّل الـ **selective reporting**.
+      - kind: explain
+        page: 85
+        quote: "ISRCTN registry (International Standard Randomised Controlled Trial Number):\n  The ISRCTN registry is a primary clinical trial registry recognized by WHO that accepts all clinical research studies (whether proposed, ongoing or completed), providing content validation and the unique identification number necessary for publication.\n  All study records in the database are freely accessible and searchable.\n  ISRCTN supports transparency in clinical research, helps reduce selective reporting of results and ensures an unbiased and complete evidence base.\n  ISRCTN accepts all studies involving human subjects including studies in healthcare, social care, education, workplace safety and economic development.\n  The registry welcomes submissions in English from any location.\n  Studies should ideally be registered prospectively (before recruitment starts). ISRCTN also accepts studies registered retrospectively once they are underway or after completion."
+        title: "الـ ISRCTN registry"
+        text: |
+          **International Standard Randomised Controlled Trial Number**: ==primary registry معترف بيه من WHO==، بيقبل كل الدراسات الإكلينيكية (proposed، ongoing، completed)، وبيدّي الـ **unique number** اللي محتاجه علشان تنشر. والسجلات مفتوحة لأي حد.
+
+          ليه التسجيل مهم؟ لأنه بيقلل الـ **selective reporting**: لو سجّلت إنك هتقيس X، مش هتقدر تنشر Y بس علشان طلع أحلى.
       - kind: match
         page: 80
         quote: "Ethical issues:\n  Competence\n  Stage of Research\n  Research with special populations such as women, children, prisoners, HIV and suicidal individuals\n  Institutional approval\n  Conflict of interest"
@@ -923,7 +1302,7 @@ lessons:
   - id: res.L07.lesson7
     title: "تقييم الـ RCT والـ quasi-experimental"
     hook: "الـ RCT أقوى دليل... بس غالي وصعب ومش دايمًا ينفع يتعمم. وإزاي تحكم على جودته؟"
-    minutes: 8
+    minutes: 9
     pages: [86, 100]
     topics: [appraisal, quasi]
     goals:
@@ -962,6 +1341,23 @@ lessons:
           - الـ **CONSORT 2010**: ==25 items== في checklist، ومعاه **flow diagram**.
           - بيركّز على الـ **individually randomised, two-group, parallel trials**، أشهر نوع RCT.
           - مدعوم من مجلات زي **The Lancet** و **journal of the American Medical Association (JAMA)** و **Annals of Internal Medicine**.
+      - kind: explain
+        page: 87
+        quote: "CONSORT (Consolidated Standards of Reporting Trials) statement:\n  First published in 1996\n  Aim: improve quality of conduct & reporting of RCTs\n  Developed by: international group of clinical trialists, statisticians, epidemiologists and biomedical editors"
+        title: "الـ CONSORT statement"
+        text: |
+          **Consolidated Standards of Reporting Trials**: اتنشر أول مرة ==1996==، هدفه يحسّن **conduct and reporting** للـ RCTs، وعمله فريق دولي من الـ trialists والـ statisticians والـ epidemiologists والـ biomedical editors.
+
+          ليه محررين المجلات معاهم؟ لأنهم اللي بيطلبوا من الباحث يملا الـ checklist قبل النشر. التفسير المقبول (مش في الكتاب).
+      - kind: reveal
+        page: 89
+        quote: "Supported by a growing number of medical and health care journals, and editorial groups\nEndorsed by The Lancet, JAMA, Annals of Internal Medicine\nComprises checklist & flow diagram"
+        prompt: "الـ CONSORT بيتكوّن من إيه، ومين بيدعمه؟"
+        answer: |
+          - ==Checklist + flow diagram==.
+          - مدعوم من مجلات كتير، ومعتمد من **The Lancet** و**JAMA** و**Annals of Internal Medicine**.
+
+          الـ flow diagram هو اللي بيوريك كل عيان راح فين من القرعة للتحليل.
       - kind: order
         page: 92
         quote: "CONSORT 2010 Flow Diagram:\n  Enrollment: Assessed for eligibility (n=); Excluded (n=): Not meeting inclusion criteria, Declined to participate, Other reasons; Randomized (n=)\n  Allocation (each arm): Allocated to intervention (n=); Received allocated intervention (n=); Did not receive allocated intervention (give reasons) (n=)\n  Follow-Up (each arm): Lost to follow-up (give reasons) (n=); Discontinued intervention (give reasons) (n=)\n  Analysis (each arm): Analysed (n=); Excluded from analysis (give reasons) (n=)"
@@ -984,6 +1380,18 @@ lessons:
           - **Quality score approach**: زي **Jadad**: randomised؟ double blind؟ اتوصف الـ withdrawals والـ dropouts؟ نقطة لكل «yes». الشريحة بتقول range **0-5**، و **أقل من 3 = poor quality**.
 
           بس الـ quality scores **complicated** وبتختلف حسب الأداة، **فمش مُشجَّعة**.
+      - kind: explain
+        page: 95
+        quote: "Quality Score Approach (Figure 4.1, Validated quality scale, from Jadad et al.):\n  1. Was the study described as randomised?\n  2. Was the study described as double blind?\n  3. Was there a description of withdrawals and drop outs?\nGive a score of 1 point for each \"yes\" or 0 points for each \"no\". Give 1 additional point each if randomisation/blinding appropriate; deduct 1 point each if randomisation/blinding inappropriate.\nScoring range: 0-5. Poor quality <3\nJadad AR, et al. Assessing the quality of reports on randomized clinical trials: Is blinding necessary? Controlled Clin Trials 1996;17:1-12."
+        title: "الـ Jadad quality score"
+        text: |
+          3 أسئلة، كل «أيوه» = 1:
+
+          1. الدراسة اتوصفت إنها **randomised**؟
+          2. اتوصفت إنها **double blind**؟
+          3. فيه وصف للـ **withdrawals and drop outs**؟
+
+          وفيه نقطة زيادة لو الـ randomisation أو الـ blinding مناسبين، ونقطة تتخصم لو مش مناسبين. المدى 0-5، وأقل من 3 = ==poor quality==.
       - kind: reveal
         page: 96
         quote: "Checklist approach, Users' Guides for an Article About Therapy:\n  Are the results valid?\n    Did experimental and control groups begin the study with a similar prognosis? Were patients randomized? Was randomization concealed (blinded or masked)? Were patients analyzed in the groups to which they were randomized? Were patients in the treatment and control groups similar with respect to known prognostic factors?\n    Did experimental and control groups retain a similar prognosis after the study started? Were patients aware of group allocation? Were clinicians aware of group allocation? Were outcome assessors aware of group allocation? Was follow-up complete?\n  What are the results?\n    How large was the treatment effect?\n    How precise was the estimate of the treatment effect?\n  How can I apply the results to patient care?\n    Were the study patients similar to my patient?\n    Were all clinically important outcomes considered?\n    Are the likely treatment benefits worth the potential harm and costs?"
@@ -1072,7 +1480,7 @@ lessons:
   - id: res.L07.lesson8
     title: "تمارين المحاضرة: جولة سريعة"
     hook: "١٧ سؤال من آخر المحاضرة. تعال نحل أشهرهم ونشوف الفخاخ."
-    minutes: 8
+    minutes: 10
     pages: [107, 121]
     topics: [practice]
     goals:
@@ -1108,6 +1516,21 @@ lessons:
           - "القياس بيعتمد على الـ protocols."
           - "صح: القرعة بتخلي الجروبين شبه بعض في البداية، حتى في الحاجات اللي مش بنقيسها."
           - "الـ ascertainment bias بيتمنع بالـ blinding."
+      - kind: check
+        page: 108
+        quote: "When comparing randomized controlled trials (RCT) to cohort studies, which of the following is generally true?\n  a. Both are prospective\n  b. The results of the RCT are less likely to be generalisable than the results of the cohort study.\n  c. The results of the RCT are less likely to be affected by confounding\n  d. A, B and C are all true\n  e. None of the above statements is true"
+        question: "Comparing RCTs with cohort studies, which is generally true?"
+        options:
+          - "RCT results are less likely to be affected by confounding"
+          - "Both are prospective, and that is all"
+          - "RCT results are more generalisable than cohort results"
+          - "None of the statements is true"
+        answer: 0
+        why:
+          - "صح: القرعة بتوزّع الـ confounders المعروفة والمجهولة بالتساوي."
+          - "الاتنين prospective فعلًا، بس الفرق الأهم الـ confounding."
+          - "بالعكس: الـ RCT بمعاييره الضيقة غالبًا أقل generalisable."
+          - "فيه جملة صح."
       - kind: sort
         page: 117
         quote: "In single blinding, … is unaware of the status of the subject?\n  (a) Analyzer\n  (b) Observer\n  (c) Subject\n  (d) All of the above"
@@ -1145,6 +1568,51 @@ lessons:
           - "التجربة لازم الباحث يدّي الـ exposure بإيده."
           - "صح: الباحثين اتفرجوا على سجلات اللي الناس عملوه، يعني observational."
           - "الـ simple random sample طريقة sampling، مش design."
+      - kind: check
+        page: 111
+        quote: "Phase 1 trials are:\n  a. Trials with large number of subjects are recruited\n  b. Done for post marketing surveillance\n  c. Multi-centered\n  d. Small studies with 20-80 patients looking at toxic & pharmacological effects of drugs\nAnswer: d"
+        question: "Phase 1 trials are:"
+        options:
+          - "Small studies of 20-80 patients looking at toxic and pharmacological effects"
+          - "Trials with a large number of subjects"
+          - "Done for post-marketing surveillance"
+          - "Multi-centered"
+        answer: 0
+        why:
+          - "صح (d في السلايد)."
+          - "ده phase III."
+          - "ده phase IV."
+          - "مش صفة الـ phase 1."
+      - kind: check
+        page: 113
+        quote: "8. Experimental study can be used in the following setting except:\n  (a) Study of risk factors\n  (b) Preventive trial\n  (c) Therapeutic trial\n  (d) Health system evaluation trial\nAnswer: a"
+        question: "An experimental study can be used in all of the following EXCEPT:"
+        options:
+          - "Study of risk factors"
+          - "Preventive trial"
+          - "Therapeutic trial"
+          - "Health system evaluation trial"
+        answer: 0
+        why:
+          - "صح: مينفعش نعرّض ناس لـ risk factor بقصد؛ ده شغل الـ observational."
+          - "مستخدم."
+          - "مستخدم."
+          - "مستخدم."
+      - kind: check
+        page: 115
+        quote: "Phase IV of clinical trial is:\n  (a) Post marketing surveillance\n  (b) Clinical trial\n  (c) Animal studies\n  (d) None of the above\nAnswer: a"
+        question: "Phase IV of a clinical trial is:"
+        options:
+          - "Post-marketing surveillance"
+          - "Animal studies"
+          - "A clinical trial before approval"
+          - "None of the above"
+        answer: 0
+        why:
+          - "صح."
+          - "ده preclinical."
+          - "قبل الـ approval = phases I-III."
+          - "فيه إجابة صح."
       - kind: order
         page: 116
         quote: "Arrange the followings ascending according to the level of evidence.\n  A. Cohort study\n  B. Randomized controlled study\n  C. Case control study\n  D. Case series\n  E. Expert opinion\nAnswer: E, D, C, A, B"
@@ -1166,6 +1634,21 @@ lessons:
           - "Blinding"
           - "Statistical analysis"
         why: "خطوات الـ experimental study بالترتيب: الـ criteria الأول (step 3)، بعدين القرعة (step 8)، بعدين الـ blinding (step 10)، وآخر حاجة التحليل (step 12)."
+      - kind: check
+        page: 119
+        quote: "What is the tool for control of confounders in experimental design?\n(a) Blinding\n(b) Statistical analysis\n(c) Randomization\n(d) None of the above\nc"
+        question: "What is the tool for controlling confounders in an experimental design?"
+        options:
+          - "Randomization"
+          - "Blinding"
+          - "Statistical analysis"
+          - "None of the above"
+        answer: 0
+        why:
+          - "صح (c في السلايد): بتوزّع الـ confounders بالتساوي حتى اللي مانعرفهاش."
+          - "الـ blinding بيمنع bias في القياس."
+          - "التحليل بيعدّل للـ confounders المعروفة بس."
+          - "فيه إجابة."
       - kind: check
         page: 121
         quote: "Which of the following research methods is best suited to comparing cognitive behavioural therapy with a selective reuptake inhibitor in anxiety disorder:\n  a. Double blind and placebo controlled\n  b. Randomization and open label\n  c. Randomization and placebo controlled (un blinded)\n  d. Randomization and triple blind"
@@ -1200,4 +1683,4 @@ lessons:
       - "هدف القرعة الأساسي: جروبين متشابهين في الـ baseline. وهي أداة الـ confounders."
       - "Single = العيان. Double = + observer. Triple = + analyzer. CBT ضد SSRI = randomized open label."
       - "Phase 1 = 20-80، toxicity. Phase 2 = single dose من phase 1. Phase 4 = post marketing."
-    practice: [res.L07.099, res.L07.100, res.L07.101, res.L07.102, res.L07.103, res.L07.104, res.L07.105, res.L07.106, res.L07.107, res.L07.108, res.L07.109, res.L07.110, res.L07.111, res.L07.112, res.L07.113, res.L07.114]
+    practice: [res.L07.100, res.L07.101, res.L07.103, res.L07.104, res.L07.105, res.L07.106, res.L07.107, res.L07.108, res.L07.109, res.L07.110, res.L07.111, res.L07.113, res.L07.114]

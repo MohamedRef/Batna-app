@@ -641,6 +641,7 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-13: 52 cut quotes completed from the book pages (sentence continues on the next page or in the list below); four trailing fragments where the book itself breaks off were dropped and logged in `medstudy/book-issues.md` (#804, #805, #807–#812).
+- 2026-11-13: stray root file from a mistyped command removed; `check-tracked-files.sh` now fails on tracked paths with shell characters or root names with spaces (#817).
 - 2026-11-13: README content table (141 lectures, courses not written yet) and calculator count (102) corrected; `batna-tools` tests `readme_tests.rs` now fail when README's lecture or calculator numbers drift (#803, #818).
 - 2026-11-13: `no-key` book questions whose key comes from outside the book now carry `update:` with a named reference (12 items); geri.L01.010/.011 tagged `no-key` (#815).
 - 2026-11-13: catch-up plan and weak-fact lines count by `i18n::count` (#801); `grammar_tests.rs` covers `catchup::*` and `weak::*`.

@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: geri.L12 to the Hepatology bar: 3 → 4 lessons (lesson1 split → lesson4: EASI and barriers), reasons labelled «التفسير المقبول (مش في الكتاب)», the six EASI questions, words per page 139 → 286 on the `lessons --report` count; in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: hem.L01 to the Hepatology bar: 3 → 5 lessons (lesson1 split → lesson4, lesson3 split → lesson5), reasons labelled «التفسير المقبول (مش في الكتاب)», book marrow figure p5, words per page 186 → 323 on the `lessons --report` count; first lecture in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: `validate` checks lesson coverage against the book (`coverage.rs`, `content/lesson-skips.yaml`, `batna-tools lessons`); 204 lessons' `pages` narrowed to the pages their steps cite; LESSONS.md rule 8 rewritten for Mohamed's lesson-count rule (#833, part of #828/#829).
 - 2026-11-13: lesson flip view renamed «تقليب» and counts steps, not «صفحة» (#832).

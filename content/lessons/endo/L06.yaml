@@ -3,15 +3,15 @@ lecture: endo.L06
 lessons:
   # ------------------------------------------------------------------
   - id: endo.L06.lesson1
-    title: "الـ TSH مش دايمًا بيقول الحقيقة"
-    hook: "التحليل الأشهر في الغدد، وبرضه أسهل تحليل تتلخبط فيه."
+    title: "الـ TFTs بتلخبط إمتى؟ والمحور شغال إزاي"
+    hook: "التحليل الأشهر في الغدد، وبرضه أسهل تحليل تتلخبط فيه. قبل ما نعرف المطبات، لازم نعرف الطريق."
     minutes: 8
-    pages: [99, 102]
-    topics: [intro, physiology, screening]
+    pages: [99, 101]
+    topics: [intro, physiology]
     goals:
       - "تعرف الـ confounders اللي بتلخبط الـ TFTs"
-      - "تفهم الـ HPT axis والـ deiodinases"
-      - "تعرف إمتى الـ TSH لوحده يضحك عليك"
+      - "تفهم الـ HPT axis والـ binding proteins والـ deiodinases"
+      - "تعرف ليه الـ T3 والـ THRB مهمين للمطبات اللي جاية"
     status: unverified
     steps:
       - kind: explain
@@ -26,6 +26,8 @@ lessons:
           - التحاليل **incongruent** مع بعض.
 
           ساعتها دوّر على ==confounders==: pregnancy، non-thyroidal illness، أدوية، laboratory artifact، وحاجة genetic نادرة زي **resistance to thyroid hormone**.
+
+          يعني لما التحليل يخالف المريض، ما تصدّقش التحليل على طول. الخمسة دول هم خريطة المحاضرة كلها، وكل واحد منهم ليه درس.
       - kind: mnemonic
         page: 99
         quote: "In such cases, certain confounding factors are considered:\n  Pregnancy.\n  Non-thyroidal illness.\n  Medication usage.\n  Laboratory artifact.\n  Rare genetic disorder e.g: resistance to thyroid hormone."
@@ -46,7 +48,12 @@ lessons:
           - الـ T4 والـ T3 عند كل واحد ثابتين طول عمره تقريبًا: ده الـ **set-point** بتاعه.
           - الغدة بتفرز ==85-90% T4== و 10-15% T3.
           - أكتر من **99.5%** متشال على بروتينات: **thyroxine-binding globulin (TBG)**، albumin، transthyretin (prealbumin).
-          - الدخول للخلايا (زي المخ) محتاج **monocarboxylate transporter 8 (MCT8)**.
+          - الدخول للخلايا (زي المخ) محتاج **monocarboxylate transporter 8 (MCT8)**، وهو كمان اللي بيطلّع الهرمون من الغدة. علشان كده الكتاب بيعدّ «disorders of TH transport» ضمن الحاجات اللي بتلخبط الـ TSH: لو الناقل بايظ، الدم ممكن يبان طبيعي والخلية جعانة.
+      - kind: reveal
+        page: 100
+        quote: "Both of which are heavily (>99.5%) protein bound to:\n  TBG.\n  Albumin\n  Transthyretin (prealbumin)."
+        prompt: "أكتر من 99.5% من الهرمون متشال على بروتينات. ليه ده بيعمل مطبات في التحليل؟"
+        answer: "لأن الشغال فعلًا هو الـ **free** (أقل من 0.5%)، بس الـ **total** بيتحرك مع كمية البروتين. فلو الـ TBG علي (حمل، oral oestrogen) الـ total يعلى والمريض euthyroid، ولو البروتين قل (عيان، NTI) الـ total يقع. وكمان أي دوا بيزاحم الهرمون على البروتين (heparin، furosemide) بيلخبط قياس الـ free نفسه. كل ده هتشوفه في الدرس الأخير. التفسير المقبول (مش في الكتاب): البروتين ده مخزن بيحمي من التقلبات، علشان كده الـ set-point بتاع كل واحد ثابت طول عمره."
       - kind: figure
         page: 100
         quote: "A further regulation of TH action is provided at a pre-receptor level by a family of intra cellular deiodinases (DIOs)"
@@ -77,6 +84,17 @@ lessons:
             <text x="170" y="220" class="t-sm t-mut">limits TH action</text>
           </svg>
       - kind: explain
+        page: 100
+        quote: "A further regulation of TH action is provided at a pre-receptor level by a family of intracellular deiodinases (DIOs)"
+        title: "ليه الـ deiodinases مهمة للتحليل؟"
+        text: |
+          الـ deiodinases بتظبط شغل الهرمون **قبل الـ receptor** (pre-receptor)، يعني جوه الخلية نفسها:
+          - **DIO1** في الكبد: بيحوّل T4 لـ T3 في الأطراف.
+          - **DIO2**: بيحوّل T4 لـ T3 في الـ **hypothalamus والـ pituitary**. علشان كده الـ pituitary بيحس بالـ T4 اللي في الدم عن طريق الـ T3 اللي بيعمله لنفسه.
+          - **DIO3**: بيحوّل T4 لـ **reverse T3** و T3 لـ T2، يعني بيطفّي الهرمون (limitation of TH action).
+
+          ده بيفسّر حاجات جاية: الـ **amiodarone** بيقفل الـ DIO1 فالـ FT4 يعلى والـ FT3 طبيعي، والـ **NTI** بيغيّر الـ deiodinases فالـ rT3 يعلى، والـ **placenta** فيها DIO3 كتير في الحمل.
+      - kind: explain
         page: 101
         quote: "2 thyroid hormone receptor genes (THRA, THRB) exist on chromosomes 17 and 3 respectively."
         title: "الـ receptor"
@@ -86,6 +104,39 @@ lessons:
           - جينين: **THRA** على chromosome 17 و **THRB** على chromosome 3.
           - الـ splicing بيدّي thyroid hormone receptor alpha-1 (TRα1)، thyroid hormone receptor alpha-2 (TRα2)، thyroid hormone receptor beta-1 (TRβ1)، thyroid hormone receptor beta-2 (TRβ2)، وكل واحد في أنسجة مختلفة.
           - الـ **THRB** هو اللي بيتغيّر في الـ resistance to thyroid hormone.
+      - kind: check
+        page: 101
+        quote: "2 thyroid hormone receptor genes (THRA, THRB) exist on chromosomes 17 and 3 respectively."
+        question: "Which thyroid hormone receptor gene is mutated in resistance to thyroid hormone, and on which chromosome?"
+        options: ["THRB, chromosome 3", "THRA, chromosome 17", "THRB, chromosome 17", "MCT8, chromosome 3"]
+        answer: 0
+        why:
+          - "صح: THRB على chromosome 3، وده اللي بيتدور عليه في الـ RTH (ص 106 و 109)."
+          - "الـ THRA على 17، بس مش هو جين الـ RTH في الكتاب."
+          - "الـ THRB على 3 مش 17."
+          - "الـ MCT8 transporter مش receptor."
+      - kind: try
+        items: [endo.L06.002, endo.L06.004, endo.L06.005, endo.L06.007, endo.L06.075]
+    recap:
+      - "الـ confounders: pregnancy، NTI، أدوية، lab artifact، RTH."
+      - "85-90% T4، وأكتر من 99.5% bound على TBG و albumin و transthyretin؛ الـ free هو الشغال."
+      - "MCT8 بيدخّل الهرمون الخلية وبيطلّعه من الغدة."
+      - "DIO1 و DIO2: T4 → T3. DIO3: T4 → rT3 و T3 → T2."
+      - "T3 = الهرمون الفعّال على الـ nuclear TR؛ THRA (17) و THRB (3)."
+    practice: [endo.L06.001, endo.L06.002, endo.L06.003, endo.L06.004, endo.L06.005, endo.L06.006, endo.L06.007, endo.L06.008, endo.L06.009, endo.L06.075]
+  # ------------------------------------------------------------------
+  - id: endo.L06.lesson5
+    title: "الـ TSH مش دايمًا بيقول الحقيقة: السكريننج والأنماط"
+    hook: "مريضة اتعالجت من Graves'، الـ FT4 بقى طبيعي والـ TSH لسه صفر. نزوّد الجرعة؟"
+    minutes: 8
+    pages: [102, 103]
+    topics: [screening, patterns]
+    goals:
+      - "تعرف ليه الـ TSH حساس وإمتى لوحده يضللك"
+      - "تعرف ليه الـ screening بقى FT4 + TSH"
+      - "تقرا الـ TFTs بالأنماط السبعة"
+    status: unverified
+    steps:
       - kind: reveal
         page: 102
         quote: "TSH has been recommended as a frontline screening test for thyroid dysfunction, as a modest changes in TH concentrations are associated with marked excursions in TSH."
@@ -122,28 +173,16 @@ lessons:
         page: 102
         quote: "Some patients on thyroid hormone replacement therapy report ongoing symptoms despite optimal thyroid function tests; in these patients restoring euthyroidism in the HPTaxis does not equate with resolution of hypothyroidism in other target tissues & for these patients tissue markers of TH action are required."
         text: "الـ TSH زي ترموستات في الصالة: ممكن الصالة تبقى مظبوطة والأوضة التانية لسه ساقعة. عشان كده مريض على thyroxine بـ TFTs ممتازة وبرضه تعبان محتاج **tissue markers** of TH action."
-      - kind: try
-        items: [endo.L06.002, endo.L06.004, endo.L06.007, endo.L06.011, endo.L06.012]
-    recap:
-      - "الـ confounders: pregnancy، NTI، أدوية، lab artifact، RTH."
-      - "85-90% T4، وأكتر من 99.5% bound على TBG و albumin و transthyretin."
-      - "DIO1 و DIO2: T4 → T3. DIO3: T4 → rT3 و T3 → T2."
-      - "THRA (17) و THRB (3)."
-      - "Screening = FT4 + TSH، مش TSH لوحده."
-    practice: [endo.L06.001, endo.L06.002, endo.L06.003, endo.L06.004, endo.L06.005, endo.L06.006, endo.L06.007, endo.L06.008, endo.L06.009, endo.L06.010, endo.L06.011, endo.L06.012, endo.L06.013, endo.L06.014, endo.L06.075]
-  # ------------------------------------------------------------------
-  - id: endo.L06.lesson2
-    title: "سبع أنماط، وعيّان مش عنده غدة"
-    hook: "مريض في الـ ICU بـ T4 واطي وT3 واطي. هل تديله thyroxine؟ لأ، وهنعرف ليه."
-    minutes: 9
-    pages: [103, 105]
-    topics: [patterns, nti]
-    goals:
-      - "تقرا الـ TFTs بالأنماط السبعة"
-      - "تعرف الـ NTI: النمط، الأسباب والـ mechanisms"
-      - "متتخضّش من الـ TSH العالي في فترة النقاهة"
-    status: unverified
-    steps:
+      - kind: explain
+        page: 103
+        quote: "1. Clinical thyroid status\nThyroid function tests should only be requested when there are clinical features of thyroid problem."
+        title: "أول اعتبار: اسأل ليه بتطلب التحليل"
+        text: |
+          الكتاب بيقول: اطلب الـ TFTs **بس لو فيه clinical features** لمشكلة في الغدة.
+
+          ليه؟ لأن كل النتيجة بتتقرا على الصورة الإكلينيكية. لو طلبته لأي حد (مريض ICU، ست حامل، حد على أدوية)، هتلاقي أرقام غريبة كتير من غير مرض في الغدة، وهتعالج أرقام مش مرضى. يعني الـ «discordant with the clinical picture» محتاجة clinical picture من الأول.
+
+          وبعدين اقرا النتيجة على **سبع أنماط** (الرسمة تحت)، وكل نمط ليه قايمة أسباب.
       - kind: figure
         page: 103
         quote: "When interpreting TFTs seven major patterns should be considered:"
@@ -201,6 +240,27 @@ lessons:
           - { text: "Resistance to thyroid hormone", bin: 2 }
           - { text: "Heparin", bin: 2 }
         why: "الـ TSH-secreting pituitary adenoma (TSHoma) والـ resistance to thyroid hormone (RTH) والـ heparin كلهم بيدّوا هرمون عالي من غير ما الـ TSH يقع. والـ central بيدّي هرمون واطي بـ TSH مش عالي."
+      - kind: try
+        items: [endo.L06.011, endo.L06.012, endo.L06.014, endo.L06.015, endo.L06.017]
+    recap:
+      - "الـ TSH حساس: تغيير صغير في الـ TH = تغيير كبير في الـ TSH."
+      - "بيضللك في: علاج thyrotoxicosis قريب، NTI، interference، central، TSHoma، RTH، transport disorders."
+      - "Screening = FT4 + TSH؛ ومرضى الـ replacement بأعراض محتاجين tissue markers."
+      - "اطلب TFTs بس لو فيه clinical features؛ سبع أنماط؛ FT4 عالي بـ TSH مش واطي = منطقة المطبات."
+    practice: [endo.L06.010, endo.L06.011, endo.L06.012, endo.L06.013, endo.L06.014, endo.L06.015, endo.L06.016, endo.L06.017, endo.L06.018]
+  # ------------------------------------------------------------------
+  - id: endo.L06.lesson2
+    title: "عيّان مش عنده غدة: الـ non-thyroidal illness"
+    hook: "مريض في الـ ICU بـ T4 واطي وT3 واطي. هل تديله thyroxine؟ لأ، وهنعرف ليه."
+    minutes: 8
+    pages: [103, 105]
+    topics: [nti]
+    goals:
+      - "تعرف الـ NTI: النمط والأسباب"
+      - "تشرح الـ mechanisms وليه هو تكيّف مفيد"
+      - "متتخضّش من الـ TSH العالي في فترة النقاهة"
+    status: unverified
+    steps:
       - kind: explain
         page: 103
         quote: "2. Non-thyroidal illness (sick euthyroid syndrome) A common pitfall is to overlook the confounding effects of NTI. NTI is a common finding following any acute or chronic illness defined by the absence of an intrinsic abnormality of HPT function."
@@ -236,6 +296,11 @@ lessons:
           - ↓leptin في الـ malnutrition.
           - Cytokines: IL-1، IL-6، TNF-α.
           - Excess endogenous **glucocorticoids**.
+      - kind: reveal
+        page: 104
+        quote: "The reduction in total hormone is due to reduced TH binding capacity secondary to a fall in TH binding protein concentrations."
+        prompt: "الـ total T4 واطي في الـ NTI. ليه ده مش معناه إن المريض hypothyroid؟"
+        answer: "الكتاب بيدّي السبب: الـ total بيقع عشان **الـ binding proteins نفسها قلت**، مش عشان الغدة بطّلت. ارجع للدرس الأول: الـ total بيتحرك مع البروتين، والـ free ممكن يفضل قريب من الطبيعي. وكمان الـ TSH مش عالي (واطي أو طبيعي)، يعني الـ pituitary مش شايف نقص يستاهل يعوّضه. علشان كده إدّي thyroxine هنا بتعالج رقم، وممكن تشيل من الجسم تكيّف مفيد."
       - kind: aside
         tone: joke
         page: 103
@@ -252,6 +317,19 @@ lessons:
           - "الـ TSH ممكن يبقى واطي أو طبيعي في الاتنين."
           - "الـ total thyroxine (TT4) واطي في الاتنين."
           - "الـ total triiodothyronine (TT3) واطي في الاتنين."
+      - kind: explain
+        page: 104
+        quote: "Pro-inflammatory cytokines (IL-1, IL-6, TNF-a) in infectious, inflammatory and neoplastic states.\n  Excess endogenous glucocorticoids."
+        title: "كل ميكانيزم ليه منطق"
+        text: |
+          الكتاب بيقول إن الميكانيزم الدقيق لسه «debatable». بس كل واحد بيوصّل لنفس النتيجة: **metabolic rate أقل**.
+          - **↓TRH و ↓TSH**: المخ نفسه بيوطّي الطلب على الهرمون، علشان كده الـ TSH مش بيعلى رغم الـ T4 الواطي.
+          - **↓binding و ↓cellular uptake**: هرمون أقل بيوصل جوه الخلية.
+          - **Altered deiodinase**: T4 أقل بيتحول T3 (الفعّال) وأكتر بيروح rT3 (الطافي).
+          - **↓leptin** في الـ malnutrition: الجسم بيقرا إن مفيش أكل، فبيوفّر.
+          - **Cytokines** (IL-1، IL-6، TNF-α) في العدوى والالتهاب والأورام، و **glucocorticoids** زيادة من الـ stress، والاتنين بيكبتوا المحور.
+
+          يعني كله رسالة واحدة: «الجسم في أزمة، وفّر طاقة».
       - kind: case
         page: 105
         quote: "During recovery from intercurrent illness, TH and TSH return to normal, although in some patients TSH may become overtly elevated for a short period of time, it is important to be aware of this transient phenomenon in order to avoid inappropriate diagnosis and treatment."
@@ -266,14 +344,13 @@ lessons:
             answer: 0
             why: "الكتاب بيحذّر من inappropriate diagnosis and treatment. استنى وكرر."
       - kind: try
-        items: [endo.L06.015, endo.L06.019, endo.L06.022, endo.L06.024, endo.L06.025]
+        items: [endo.L06.019, endo.L06.021, endo.L06.022, endo.L06.024, endo.L06.025]
     recap:
-      - "اطلب TFTs بس لو فيه clinical features."
-      - "سبع أنماط؛ FT4 عالي بـ TSH مش واطي = منطقة المطبات."
-      - "NTI: ↓TT4، ↓TT3، ↑rT3، TSH ↓ أو طبيعي؛ adaptive."
-      - "بيبدأ بعد 24 ساعة؛ cytokines، deiodinase، steroids، leptin."
-      - "في النقاهة الـ TSH ممكن يعلى مؤقتًا: متعالجش."
-    practice: [endo.L06.015, endo.L06.016, endo.L06.017, endo.L06.018, endo.L06.019, endo.L06.020, endo.L06.021, endo.L06.022, endo.L06.023, endo.L06.024, endo.L06.025, endo.L06.026, endo.L06.027]
+      - "NTI: بعد أي مرض acute أو chronic، من غير عيب في الـ HPT axis؛ adaptive بيقلل الـ metabolic rate."
+      - "↓TT4، ↓TT3، ↑rT3، TSH ↓ أو طبيعي؛ الـ total بيقع من قلة الـ binding proteins."
+      - "بيبدأ بعد 24 ساعة؛ ↓TRH/TSH، deiodinase، cytokines، steroids، leptin."
+      - "في النقاهة الـ TSH ممكن يعلى مؤقتًا: متعالجش، كرر."
+    practice: [endo.L06.019, endo.L06.020, endo.L06.021, endo.L06.022, endo.L06.023, endo.L06.024, endo.L06.025, endo.L06.026, endo.L06.027]
   # ------------------------------------------------------------------
   - id: endo.L06.lesson3
     title: "الحمل والـ thyroxine: لما المريضة نفسها تلخبط التحليل"
@@ -296,6 +373,8 @@ lessons:
           - **Total T4 و T3** بيوصلوا **150%** في النص الأول من الحمل ويفضلوا كده للولادة.
           - **free thyroxine (FT4)** بيعلى مؤقتًا في الـ first trimester عشان الـ **human chorionic gonadotropin (hCG)** بيشتغل على الـ thyroid-stimulating hormone (TSH) receptor.
           - كمان: زيادة الـ plasma volume، وزيادة الـ **type 3 deiodinase (DIO3)** من الـ placenta، و زيادة الـ urinary iodine clearance، ودي بتعمل goitre في المناطق الفقيرة في اليود.
+
+          يعني الـ total العالي في الحمل سببه البروتين مش الغدة، علشان كده ما تشخّصش thyrotoxicosis من الـ total T4. وفي الـ **hyperemesis gravidarum** الست بتبقى thyrotoxic فعلًا بـ TSH suppressed خالص، وهنا لازم تفرّق الـ gestational من Graves' بالـ TRAb.
       - kind: figure
         page: 105
         quote: "3. Pregnancy:\n  Pregnancy has a significant impact on hpt physiology.\n  Tbg ↑as a consequence of oestrogen-induced increased hepatic synthesis, together with reduced degradation.\n  Total t4 and t3 ↑ to 150% of non-pregnant values during the first half of pregnancy and maintained until parturition.\n  Transient ↑ in ft4 in first trimester is due to the stimulatory effects of ↑ hcg acting on the tsh receptor.\n  In hyperemesis gravidarum women become overtly thyrotoxic with a fully suppressed tsh.\n  In this setting, it is important to distinguish gestational hyperthyroidism from other causes of thyrotoxicosis (e.g. Graves' disease) & (trab) measurement is helpful."
@@ -386,7 +465,9 @@ lessons:
 
           - **الكبار في السن** محتاجين أقل.
           - خد بالك مع **ischaemic heart disease** أو arrhythmias.
-          - تغيير الـ brand: تجنّبه، ولو حصل كتّر الـ TFTs.
+          - تغيير الـ brand: تجنّبه، ولو حصل كتّر الـ TFTs، لأن مش كل المستحضرات نفس الـ potency والـ bioavailability.
+
+          ليه الكبار والقلب أقل؟ التفسير المقبول (مش في الكتاب): الـ thyroxine بيزوّد سرعة القلب واستهلاكه للأكسجين، فالقلب الضعيف ممكن يجيله angina أو arrhythmia لو الجرعة الكاملة نزلت مرة واحدة.
       - kind: try
         items: [endo.L06.029, endo.L06.030, endo.L06.034, endo.L06.036, endo.L06.040]
     recap:
@@ -398,17 +479,27 @@ lessons:
     practice: [endo.L06.028, endo.L06.029, endo.L06.030, endo.L06.031, endo.L06.032, endo.L06.033, endo.L06.034, endo.L06.035, endo.L06.036, endo.L06.037, endo.L06.038, endo.L06.039, endo.L06.040, endo.L06.041, endo.L06.042, endo.L06.043, endo.L06.044, endo.L06.045, endo.L06.046, endo.L06.047, endo.L06.073]
   # ------------------------------------------------------------------
   - id: endo.L06.lesson4
-    title: "الأدوية، الـ binding proteins، والخطوات الخمسة"
-    hook: "الـ amiodarone لوحده ممكن يعمل تلات أنماط مختلفة. وبعدين نختم بالـ algorithm اللي بيحل أي لغز."
-    minutes: 10
-    pages: [107, 110]
-    topics: [drugs, binding, rth]
+    title: "الأدوية اللي بتلعب في الغدة"
+    hook: "الـ amiodarone لوحده ممكن يعمل تلات أنماط مختلفة. والـ lithium والـ interferon والـ sunitinib ليهم وشوش تانية."
+    minutes: 9
+    pages: [107, 108]
+    topics: [drugs]
     goals:
-      - "تعرف أنماط الـ iodide والـ amiodarone والـ lithium والـ TKIs"
-      - "تعرف الأدوية اللي بتغير الـ TBG أو بتزاحم عليه"
-      - "تفرّق RTH من TSHoma وتمشي في الخطوات الخمسة"
+      - "تعرف الطريقتين اللي الأدوية بتلعب بيهم في الـ TFTs"
+      - "تعرف أنماط الـ iodide والـ amiodarone والـ lithium والـ TKIs والـ immune modulators"
+      - "تعرف الأدوية اللي بتوطّي الـ TSH وليه نادرًا بتعمل مرض"
     status: unverified
     steps:
+      - kind: explain
+        page: 107
+        quote: "A lot of commonly prescribed drugs may result in altered thyroid function/status, either by – modulating the HPT axis itself, – or through downstream effects on thyroid hormone transport or metabolism."
+        title: "الأدوية بتلعب بطريقتين"
+        text: |
+          الكتاب بيقسم الأدوية لنوعين:
+          1. **بتغيّر الـ HPT axis نفسه**: يا إما بتأثر على الـ TSH من الـ pituitary، يا إما على إفراز T4 و T3 من الغدة. دول بيعملوا **مرض حقيقي** أحيانًا (hypo أو hyper).
+          2. **بتأثر downstream** على الـ transport أو الـ metabolism: زي الأدوية اللي بتغيّر الـ TBG أو بتزاحم عليه (الدرس الجاي). دول غالبًا بيغيّروا **الرقم** مش حالة المريض.
+
+          ليه التفريق ده مهم؟ لأن النوع الأول ممكن يحتاج علاج، والتاني محتاج بس تقرا التحليل صح. فلما تلاقي TFTs غريبة على دوا، اسأل: الدوا ده بيلعب في الغدة، ولا في التحليل؟
       - kind: explain
         page: 107
         quote: "Examples of drugs directly affecting pituitary TSH or thyroidal T4 & T3 secretion in previously euthyroid subjects.\n| Drugs | Drug | TFT patterns | Comments |\n|---|---|---|---|\n| Drugs affecting thyroid hormone secretion | Iodide | 1. ↑TSH, ↓FT4 | Inorganic iodide (dietary/supplements) as well as iodine containing organic compounds (e.g. radiological contrast agents) can cause a transient disturbance of thyroid function; patients with diminished thyroid reserve (e.g. chronic autoimmune thyroiditis) are at risk of developing persistent hypothyroidism. |\n|  |  | 2. ↓TSH, ↑FT4 | Individuals with latent/low-grade thyroid autonomy (e.g. in a pre-existing MNG) may develop overt hyperthyroidism following exposure to iodine-containing compounds (Jod-Basedow effect), which may persist for months |\n|  | Amiodarone | 1. Transient ↑TSH; ↑FT4, normal FT3 | Short-lived rises in TSH are common during the first few months of treatment with amiodarone; inhibition of type 1 DIO leads to persistent elevation of FT4, but normal FT3 |\n|  |  | 2. ↓TSH, ↑FT4 | Two main types of thyrotoxicosis are recognised: type 1 (large iodine load precipitating latent thyroid autonomy); type 2 (destructive thyroiditis); amiodarone inhibits T4 → T3 conversion such that T4 is typically more markedly elevated than T3 |\n|  |  | 3. ↑TSH, ↓FT4 | Hypothyroidism occurs in up to 15% of patients (particularly women and those with positive antithyroid antibodies); it may reflect failure to escape from the Wolff-Chaikoff effect |\n|  | Lithium | 1. ↑TSH, ↓ or normal FT4 | Overt or subclinical hypothyroidism |\n|  |  | 2. ↓TSH, ↑FT4 | Thyroiditis occurs in a small number of patients and is typically self-limiting |\n|  | TKIs | 1. ↑TSH, ↓FT4 | Primary hypothyroidism (possibly due to a direct toxic effect on the thyroid gland) has been observed with some TKIs, e.g. Sunitinib, Sorafenib |\n|  |  | 2. ↓TSH, ↑FT4 | A prodromal thyrotoxic phase is occasionally seen in patients receiving Sunitinib |\n|  | Immune modulators | 1. ↓TSH, ↑FT4 | Graves' disease has been reported in patients receiving: (i) Alemtuzumab (a humanised monoclonal antibody directed against CD52) for multiple sclerosis; (ii) HAART for HIV infection; (iii) INFα for chronic hepatitis C |\n|  |  | 2. ↑TSH, ↓FT4 | Hashimoto's thyroiditis may complicate INFα therapy (± prodromal thyrotoxic phase) |"
@@ -463,6 +554,33 @@ lessons:
           - **Metformin**: TSH بيقل ظاهريًا، و FT4 طبيعي.
 
           كلهم عادةً ==transient== ومن غير central hypothyroidism مهم.
+      - kind: reveal
+        page: 107
+        quote: "Hypothyroidism occurs in up to 15% of patients (particularly women and those with positive antithyroid antibodies); it may reflect failure to escape from the Wolff-Chaikoff effect"
+        prompt: "ليه الـ hypothyroidism من الـ amiodarone أكتر في اللي عندهم antithyroid antibodies؟"
+        answer: "الـ amiodarone فيه يود كتير. الغدة الطبيعية بتقفل التصنيع مؤقتًا (**Wolff-Chaikoff**) وبعدين «بتهرب» من القفلة وترجع تشتغل. الكتاب بيقول إن الـ hypothyroidism ممكن يكون **failure to escape**. التفسير المقبول (مش في الكتاب): الغدة اللي فيها autoimmune thyroiditis احتياطيها قليل أصلًا، فما بتقدرش تهرب، وتفضل مقفولة. ونفس الفكرة في الـ iodide: الـ chronic autoimmune thyroiditis = خطر hypothyroidism دايم."
+      - kind: try
+        items: [endo.L06.049, endo.L06.050, endo.L06.053, endo.L06.055, endo.L06.058]
+    recap:
+      - "الأدوية: يا بتغيّر المحور (مرض حقيقي)، يا بتغيّر الـ transport/metabolism (رقم بس)."
+      - "Iodide: hypothyroid (low reserve) أو Jod-Basedow (MNG)."
+      - "Amiodarone: ↑FT4 بـ FT3 طبيعي (DIO1)، thyrotoxicosis type 1/2، hypothyroid 15% (failure to escape)."
+      - "Lithium، TKIs، alemtuzumab، HAART، IFN: hypo أو Graves'."
+      - "TSH suppressors: dopamine، steroids، SSA، metformin؛ bexarotene بيعمل hypothyroidism حقيقي."
+    practice: [endo.L06.048, endo.L06.049, endo.L06.050, endo.L06.051, endo.L06.052, endo.L06.053, endo.L06.054, endo.L06.055, endo.L06.056, endo.L06.057, endo.L06.058, endo.L06.059, endo.L06.060, endo.L06.078]
+  # ------------------------------------------------------------------
+  - id: endo.L06.lesson6
+    title: "الـ binding proteins والـ RTH والخطوات الخمسة"
+    hook: "مريض على heparin، الـ FT4 طالع عالي جدًا وهو مش thyrotoxic. الهرمون جه منين؟"
+    minutes: 9
+    pages: [108, 110]
+    topics: [binding, rth]
+    goals:
+      - "تعرف الأدوية اللي بتغير الـ TBG أو بتزاحم عليه"
+      - "تفرّق RTH من TSHoma"
+      - "تمشي في الخطوات الخمسة للـ discordant TFTs"
+    status: unverified
+    steps:
       - kind: table
         page: 108
         quote: "6. Altered TBG concentrations: Drugs that are recognised to increase serum TBG concentrations include oral (but not transdermal) oestrogen, Raloxifene, Tamoxifen, Mitotane Fluorouracil, methadone, heroin. Drugs that inhibit TBG synthesis: androgens, chronic glucocorticoid therapy, nicotinic acid."
@@ -488,6 +606,22 @@ lessons:
           - **Furosemide** (أكتر من 80 mg/day و intravenous (IV)).
           - **Aspirin**، **non-steroidal anti-inflammatory drugs (NSAIDs)**، **phenytoin**.
           - ==Heparin==: متقيسش FT4 أصلًا لو تقدر؛ ولو لازم، خد العينة **بعد 10 ساعات على الأقل** من آخر حقنة وحللها على طول.
+      - kind: reveal
+        page: 109
+        quote: "Measurement of FT4 and FT3 is best avoided in patients receiving heparin therapy, However, when indicated, taking a blood sample ≥ 10 h after the last injection of heparin, and analysing it without delay, can help reduce the risk of artifactual hyperthyroxinaemia."
+        prompt: "ارجع للـ hook: الـ FT4 العالي على الـ heparin جه منين؟ وليه «حلله على طول»؟"
+        answer: "الكتاب بيسميه **artifactual hyperthyroxinaemia**، يعني رقم مش مرض. والـ heparin واحد من الأدوية اللي بتزاحم على الـ binding sites. التفسير المقبول (مش في الكتاب): الـ heparin بيشغّل إنزيم (lipase) بيطلّع free fatty acids، وهي اللي بتطرد الـ T4 من البروتين، والإنزيم بيفضل شغال **جوه الأنبوبة** بعد السحب. علشان كده الكتاب بيقول: اسحب بعد 10 ساعات على الأقل من الحقنة، وحلل العينة من غير تأخير."
+      - kind: explain
+        page: 109
+        quote: "9. Distinguishing resistance to thyroid hormone (TRb RTH) from a TSH-secreting pituitary tumour (TSHoma).\nSomatostatin receptor ligand therapy →Most TSHomas respond."
+        title: "RTH ولا TSHoma: ليه كل علامة بتفرق"
+        text: |
+          الاتنين بيدّوا **FT4 و FT3 عاليين مع TSH مش واطي**، فالتحليل لوحده مش هيفرّق. الكتاب بيدّي تلات علامات:
+          - **Somatostatin receptor ligand (SRL)**: أغلب الـ TSHomas بتستجيب، لأن الورم عليه somatostatin receptors (زي ما شفنا في الـ NETs)، فالـ TSH يقع والهرمونات تنزل. في الـ RTH **مفيش تغيير مهم**.
+          - **الأقارب من الدرجة الأولى** عندهم نفس الـ TFTs في الـ RTH، لأنه **وراثي**. الـ TSHoma ورم مش بيتورث كده.
+          - **جين THRB**: موجود في الـ RTH، يعني الـ receptor بايظ والـ pituitary مش حاسس بالهرمون فبيفضل يفرز TSH.
+
+          وده إجابة جزء من سؤال 2 في ص 110 عن الـ discordant TFTs.
       - kind: table
         page: 109
         quote: "9. Distinguishing resistance to thyroid hormone (TRb RTH) from a TSH- secreting pituitary tumour (TSHoma).\nSomatostatin receptor ligand therapy →Most TSHomas respond.\nResistance to thyroid hormone →\n  No significant change in FT4 and FT3.\n  Similar abnormal TFTs in first-degree relatives.\n  The presence THRB gene in hormone resistance."
@@ -537,12 +671,17 @@ lessons:
         quote: "3. Explain the mechanisms and clinical implications of assay interference in thyroid function testing, including the role of biotin, heterophile antibodies, and macro-TSH."
         text: "الـ biotin بجرعات كبيرة في supplements الشعر والضوافر بيدّي TSH واطي كذب و FT4 عالي كذب في الـ streptavidin-biotin assays، فيقلّد Graves'. وقّفه يومين على الأقل قبل التحليل. الـ macro-TSH بيدّي TSH عالي كذب."
         ref: "ATA/ETA assay interference statements; FDA safety communication 2019"
+      - kind: aside
+        tone: exam
+        page: 110
+        quote: "1. Discuss the common pitfalls in interpreting thyroid function tests (TFTs).\nInclude pre-analytical, analytical, and post-analytical factors."
+        text: "السؤال الأول بيطلب pre-analytical و analytical و post-analytical. رتّب اللي اتعلمته عليهم: **pre-analytical** = حاجات في المريض قبل السحب (حمل، NTI، أدوية، compliance، توقيت الـ heparin والـ biotin). **analytical** = جوه المعمل (heterophilic antibodies، biotin، macro-TSH). **post-analytical** = قراية النتيجة غلط (TSH لوحده، نسيان النقاهة). كده الإجابة منظمة وكلها من الكتاب."
       - kind: try
-        items: [endo.L06.050, endo.L06.061, endo.L06.064, endo.L06.067, endo.L06.069]
+        items: [endo.L06.061, endo.L06.064, endo.L06.067, endo.L06.069, endo.L06.074]
     recap:
-      - "Iodide: hypothyroid (low reserve) أو Jod-Basedow (MNG)."
-      - "Amiodarone: ↑FT4 بـ FT3 طبيعي (DIO1)، thyrotoxicosis type 1/2، hypothyroid 15%."
-      - "TSH suppressors: dopamine، steroids، SSA، metformin؛ bexarotene بيعمل hypothyroidism حقيقي."
-      - "الـ oral oestrogen بيعلّي الـ TBG، والـ transdermal لأ. Heparin: عينة بعد 10 ساعات."
-      - "TSHoma بيستجيب للـ SRL؛ RTH: الأقارب و THRB. خمس خطوات للـ discordant TFTs."
-    practice: [endo.L06.048, endo.L06.049, endo.L06.050, endo.L06.051, endo.L06.052, endo.L06.053, endo.L06.054, endo.L06.055, endo.L06.056, endo.L06.057, endo.L06.058, endo.L06.059, endo.L06.060, endo.L06.061, endo.L06.062, endo.L06.063, endo.L06.064, endo.L06.065, endo.L06.066, endo.L06.067, endo.L06.068, endo.L06.069, endo.L06.070, endo.L06.071, endo.L06.072, endo.L06.074, endo.L06.076, endo.L06.077, endo.L06.078]
+      - "↑TBG: oral oestrogen (مش transdermal)، raloxifene، tamoxifen، mitotane، 5-FU، methadone، heroin؛ ↓TBG: androgens، steroids، nicotinic acid."
+      - "بيزاحموا على الـ binding: furosemide (>80 mg IV)، aspirin، NSAIDs، phenytoin، heparin."
+      - "Heparin: متقيسش لو تقدر؛ لو لازم، بعد 10 ساعات وحلل على طول."
+      - "TSHoma بيستجيب للـ SRL؛ RTH: الأقارب و THRB."
+      - "خمس خطوات: القصة، الحالة، أنهي تحليل غلط، interference، أمراض نادرة."
+    practice: [endo.L06.061, endo.L06.062, endo.L06.063, endo.L06.064, endo.L06.065, endo.L06.066, endo.L06.067, endo.L06.068, endo.L06.069, endo.L06.070, endo.L06.071, endo.L06.072, endo.L06.074, endo.L06.076, endo.L06.077]

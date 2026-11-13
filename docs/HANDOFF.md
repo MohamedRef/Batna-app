@@ -640,6 +640,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: res.L15.113, res.L15.117, res.L17.001 and their lesson steps get `update:` notes (n vs n − 1, 152.16 unrounded, p-value meaning); slide answers unchanged (#802).
 - 2026-11-13: stray root file from a mistyped command removed; `check-tracked-files.sh` now fails on tracked paths with shell characters or root names with spaces (#817).
 - 2026-11-13: README content table (141 lectures, courses not written yet) and calculator count (102) corrected; `batna-tools` tests `readme_tests.rs` now fail when README's lecture or calculator numbers drift (#803, #818).
 - 2026-11-13: `no-key` book questions whose key comes from outside the book now carry `update:` with a named reference (12 items); geri.L01.010/.011 tagged `no-key` (#815).

@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: dm.L06 to the Hepatology bar: 3 → 4 lessons (stages and neuro exam split → lesson4), reasons labelled «التفسير المقبول (مش في الكتاب)», words per page 127 → 242; in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: geri.L13 to the Hepatology bar: 5 → 6 lessons (goals move from lesson1 to lesson2, lesson5 split → lesson6 for the markers), reasons labelled «التفسير المقبول (مش في الكتاب)», tricyclic side effects now include constipation as the book lists, words per page 161 → 328 on the `lessons --report` count; in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: neph.L06 to the Hepatology bar: 5 → 9 lessons (lesson1 split → lesson6, lesson2 → lesson7, lesson4 → lesson8, lesson5 → lesson9), reasons labelled «التفسير المقبول (مش في الكتاب)», four new drawings, words per page 159 → 425 on the `lessons --report` count; in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: geri.L12 to the Hepatology bar: 3 → 4 lessons (lesson1 split → lesson4: EASI and barriers), reasons labelled «التفسير المقبول (مش في الكتاب)», the six EASI questions, words per page 139 → 286 on the `lessons --report` count; in `content/lesson-skips.yaml` (#827–#829).

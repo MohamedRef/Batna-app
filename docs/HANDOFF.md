@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: hem.L02 to the Hepatology bar: 4 → 5 lessons (lesson3 split → lesson5: MCV table + aplastic anaemia, p15), onset step moved to lesson2, new RI and haemolysis reveals, MCV ruler figure; words per page 204 → 280; listed in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: geri.L06 to the Hepatology bar: 5 → 6 lessons (lesson5 split → lesson6), reasons labelled «التفسير المقبول (مش في الكتاب)», 3 new SVG figures, words per page 129 → 302 on the `lessons --report` count; in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: geri.L01 to the Hepatology bar: 6 → 7 lessons (lesson5 split → lesson7), reasons labelled «التفسير المقبول (مش في الكتاب)», systolic/diastolic SVG, PS (5) case on p24, words per page 144 → 243 on the `lessons --report` count; added to `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: web deploy fixed after Rust 1.100: `scripts/web/build.sh` finds the content pack by package id, since cargo now writes build output to `build/batna-app/<hash>/` (deploys had failed since #821).

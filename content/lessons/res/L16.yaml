@@ -5,7 +5,7 @@ lessons:
   title: 'منحنى الجرس: الـ normal distribution'
   hook: 'قيس طول 1,000 طالب في الكلية: هتلاقي أغلبهم حوالين المتوسط، وقليلين جدًا قصيرين أوي أو طوال أوي. الشكل ده اسمه إيه؟'
   minutes: 9
-  pages: [2, 11]
+  pages: [2, 28]
   topics: [normal]
   goals:
   - تعرّف الـ normal distribution وتعرف بيوصف أنهي نوع variables
@@ -69,6 +69,18 @@ lessons:
       وزي ما في السلايد 6: الـ sample الكويسة شكلها نسخة صغيرة من الـ population.
 
       والسلايد 4 بيدي أمثلة: **intelligence** و**attitudes** و**personality** بيتوزعوا تقريبًا normal في الناس.
+  - kind: explain
+    page: 6
+    quote: |-
+      POPULATION
+      SAMPLE
+    title: العيّنة صورة مصغّرة من الـ population
+    text: |
+      السلايد بترسم ==population== و==sample== جنب بعض بنفس الشكل.
+
+      العيّنة الممثّلة من population ==normally distributed== بتاخد نفس شكل الجرس، بس أصغر.
+
+      ليه ده مهم؟ لأنه بيسمحلنا نستخدم شكل العيّنة علشان نستنتج حاجات عن الـ population كلها. التفسير المقبول (مش في الكتاب).
   - kind: figure
     page: 4
     quote: |-
@@ -157,6 +169,26 @@ lessons:
     - الـ 95% من −2 لـ +2 SD.
     - الـ 68% من −1 لـ +1 SD بس.
     - 47.7% من الـ mean لـ +2 SD بس (ناحية واحدة).
+  - kind: check
+    page: 9
+    quote: |-
+      2.2% | 13.6% | 34.1% | 34.1% | 13.6% | 2.2%
+      X- 3SD | X-2SD | X - 1SD | X | X+1SD | X+2SD | X+3SD
+      68%
+      95%
+      99%
+    question: In a normal distribution, what share of values lies between +1 SD and +2 SD?
+    options:
+    - 13.6%
+    - 34.1%
+    - 27.2%
+    - 2.2%
+    answer: 0
+    why:
+    - 'صح: بين 1 و 2 SD في كل ناحية 13.6%.'
+    - 34.1% بين الـ mean و 1 SD.
+    - 27.2% ده الشريطين مع بعض (الناحيتين).
+    - 2.2% بعد 2 SD في ناحية واحدة.
   - kind: explain
     page: 11
     quote: |-
@@ -188,6 +220,27 @@ lessons:
       - سلايد 15 و28: ±3 SD = **99.7%** (بالتفصيل 99.74%)، والـ tail = **2.15%**، وبعد 3 SD = **0.13%**.
 
       في الامتحان: الرقم المعروف هو **99.7%**. لو الاختيارات فيها 99 بس من غير 99.7، يبقى هو ده.
+  - kind: explain
+    page: 28
+    quote: |-
+      .13% | 2.15% | 13.59% | 34.13% | 34.13% | 13.59% | 2.15% | .13%
+      68.26%
+      95.44%
+      99.74%
+    title: الأرقام الأدق تحت المنحنى
+    text: |
+      سلايد 28 بتدّي الأرقام بدقة أكتر (في كل ناحية):
+
+      | المسافة | النسبة |
+      |---|---|
+      | mean لـ 1 SD | ==34.13%== |
+      | 1 لـ 2 SD | ==13.59%== |
+      | 2 لـ 3 SD | 2.15% |
+      | بعد 3 SD | 0.13% |
+
+      فالـ ±1 SD = ==68.26%==، ±2 SD = 95.44%، ±3 SD = 99.74%.
+
+      ليه الأرقام بتقل بسرعة كده؟ لأن أغلب القيم متجمعة حوالين المتوسط، وكل ما تبعد القيم بتبقى نادرة أكتر. التفسير المقبول (مش في الكتاب).
   - kind: try
     page: null
     quote: null
@@ -558,7 +611,7 @@ lessons:
 - id: res.L16.lesson4
   title: 'شكل البيانات: الانتشار والـ skew'
   hook: 'مدة القعدة في المستشفى: أغلب العيانين 3–4 أيام، وكام واحد قعد شهرين. ينفع تلخصها بالـ mean؟'
-  minutes: 9
+  minutes: 8
   pages: [24, 32]
   topics: [shape]
   goals:
@@ -782,6 +835,20 @@ lessons:
       - بيانات ==skewed== ← لخّصها بالـ **median** والـ ==IQR== (interquartile range)، لأن الـ mean بيتشد ناحية الذيل.
 
       ولما تقارن **sample 1** و**sample 2** (سلايد 30–31): لو الاتنين normal ← **parametric tests**، ولو فيه skew ← **non-parametric tests**. التفاصيل في المحاضرات الجاية.
+  - kind: explain
+    page: 31
+    quote: |-
+      Sample 1
+      Sample 2
+      Positive, right-hand skew
+    title: ليه شكل كل عيّنة مهم وانت بتقارن؟
+    text: |
+      السلايد بترسم Sample 1 و Sample 2، وشكل واحدة فيهم ==positive, right-hand skew==. لما تقارن عيّنتين، شكل البيانات في كل واحدة بيحدد الـ test:
+
+      - بيانات ==normal== ← ==parametric tests== (مبنية على الـ mean والـ SD).
+      - بيانات skewed ← non-parametric tests.
+
+      ده شرح المحاضِرة لسلايد 30 و 31، والـ tests نفسها جاية في المحاضرات الجاية. ليه؟ لأن الـ mean والـ SD مش بيوصفوا البيانات المايلة كويس، فالـ test اللي مبني عليهم يضلّل.
   - kind: explain
     page: 32
     quote: |-

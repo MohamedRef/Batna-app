@@ -5,7 +5,7 @@ lessons:
   - id: res.L05.lesson1
     title: "الـ case-control: نبدأ من العيان ونرجع لورا"
     hook: "عندك 100 عيان cancer larynx في المعهد. إزاي تعرف إن الكحول ليه دعوة من غير ما تستنى 20 سنة؟"
-    minutes: 8
+    minutes: 10
     pages: [4, 18]
     topics: [analytic, case-control]
     goals:
@@ -48,6 +48,38 @@ lessons:
           - "الـ **controls** هم الـ comparison group."
           - "الـ unexposed cohort هو الـ comparison group."
           - "الـ randomized controlled trial (RCT) ليه control arm دايمًا."
+      - kind: figure
+        page: 7
+        quote: "Hierarchy of study designs in determining causality (Strength of evidence), from strongest to weakest evidence:\n  Meta-analysis, Systematic review\n  Randomized controlled trial, Non-randomized controlled trial\n  Prospective cohort, Retrospective cohort\n  Cross-sectional\n  Case series, Case report\n  Opinionated review, Expert opinion"
+        title: "هرم الأدلة على السببية"
+        svg: |
+          <svg viewBox="0 0 330 384" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="20" y="8" width="290" height="32" rx="8" class="fg-acc"/>
+            <text x="165" y="29" text-anchor="middle" class="t-sm t-b">Meta-analysis, systematic review</text>
+            <path d="M165 42v14" class="fg-arrow" marker-end="url(#L05p)"/>
+            <rect x="20" y="60" width="290" height="44" rx="8" class="fg-box"/>
+            <text x="165" y="79" text-anchor="middle" class="t-sm t-b">Randomized controlled trial</text>
+            <text x="165" y="95" text-anchor="middle" class="t-sm t-mut">then non-randomized trial</text>
+            <path d="M165 106v14" class="fg-arrow" marker-end="url(#L05p)"/>
+            <rect x="20" y="124" width="290" height="44" rx="8" class="fg-acc"/>
+            <text x="165" y="143" text-anchor="middle" class="t-sm t-b">Prospective cohort</text>
+            <text x="165" y="159" text-anchor="middle" class="t-sm t-mut">then retrospective cohort</text>
+            <path d="M165 170v14" class="fg-arrow" marker-end="url(#L05p)"/>
+            <rect x="20" y="188" width="290" height="32" rx="8" class="fg-box"/>
+            <text x="165" y="209" text-anchor="middle" class="t-sm t-b">Case-control</text>
+            <path d="M165 222v14" class="fg-arrow" marker-end="url(#L05p)"/>
+            <rect x="20" y="240" width="290" height="32" rx="8" class="fg-box"/>
+            <text x="165" y="261" text-anchor="middle" class="t-sm t-b">Cross-sectional</text>
+            <path d="M165 274v14" class="fg-arrow" marker-end="url(#L05p)"/>
+            <rect x="20" y="292" width="290" height="32" rx="8" class="fg-box"/>
+            <text x="165" y="313" text-anchor="middle" class="t-sm t-b">Case series, case report</text>
+            <path d="M165 326v14" class="fg-arrow" marker-end="url(#L05p)"/>
+            <rect x="20" y="344" width="290" height="32" rx="8" class="fg-box"/>
+            <text x="165" y="365" text-anchor="middle" class="t-sm t-b">Opinionated review, expert opinion</text>
+          </svg>
+        caption: "من فوق لتحت = من أقوى دليل على السببية لأضعفه (slide 7). الـ cohort فوق الـ case-control لأنه بيبدأ من الـ exposure فبيثبت إن السبب جه قبل النتيجة. التفسير المقبول (مش في الكتاب)."
+        alt: "Seven stacked levels from meta-analysis at the top to expert opinion at the bottom."
       - kind: explain
         page: 8
         quote: "Definitions of terms:\n  EXPOSED: Having, or being exposed to, a potential cause or risk factor for disease or other outcome (Independent variable)\n  OUTCOME: Disease or other health-related event under study (Dependent variable)\n  PREVALENCE: A measure of the burden of disease in a population, calculated as the number of individuals with a disease or outcome divided by the total number of individuals in a defined population at a given time. Prevalence is expressed as a proportion (%)\n  INCIDENCE: A measure of the rate at which new cases of a disease occur in a population, calculated as the number of new cases divided by the population at risk over time. Incidence is expressed as a rate per unit time (for example, annual rate)"
@@ -57,6 +89,17 @@ lessons:
           - **Outcome** = ==dependent variable== (المرض).
 
           الـ outcome «dependent» لأنه بيعتمد على الـ exposure. سهلة.
+      - kind: explain
+        page: 10
+        quote: "Two commonly used types of analytical studies:\n  Case-control\n  Cohort\nFIGURE 2:\n  a: Direction of data collection (forward in time): Sample of healthy subjects, then Exposure (Exposed / Not exposed), then Illness (Yes / No)\n  b: Direction of data collection (backward in time): Population, then Illness (Yes / No), then Exposure (Exposed / Not exposed)\nGraphical depiction of a prospective cohort study (simplest case (2a)) and a retrospective case control study (2b)"
+        title: "النوعين: case-control وcohort"
+        text: |
+          أشهر نوعين analytic: ==case-control== و==cohort==. الفرق في **اتجاه جمع الداتا**:
+
+          - **Cohort**: forward in time. بتبدأ بـ **sample of healthy subjects** (خاليين من الـ outcome اللي بتدرسه)، تقسّمهم exposed وnon-exposed، وتستنى مين يجيله المرض.
+          - **Case-control**: backward. بتبدأ بالمرض وترجع تدوّر على الـ exposure.
+
+          خلي بالك: «healthy» معناها **خاليين من الـ outcome المدروس**، مش من كل الأمراض. في مثال الـ HIV والـ cerebral toxoplasmosis، الـ HIV هو الـ exposure، والـ toxoplasmosis هو اللي لازم مايكونش موجود في الأول.
       - kind: explain
         page: 12
         quote: "Case Control Study, Definition: The selection of individuals on the basis of whether they do (cases) or they do not (control) have a particular disease then compared in respect to the proportion having a history of an exposure or certain characteristic of illness"
@@ -128,6 +171,14 @@ lessons:
 
           مثال المحاضرة: hypertension in pregnancy حسب American College of Obstetricians and Gynecologists (ACOG): diastolic ≥ 90 أو systolic ≥ 140 بعد 20 أسبوع، في ست كان ضغطها طبيعي، متسجل مرتين بينهم 4 ساعات.
       - kind: reveal
+        page: 17
+        quote: "Hypertension In Pregnancy\nDefinition (ACOG): Diastolic BP of 90mm Hg or higher or systolic BP of 140mm Hg or higher after 20wks of gestation in a woman with previously normal BP. It should be documented on atleast 2 occasions measured 4hrs apart.\nProteinuria: It is defined as the urinary excretion of 300mg/L or more of protein in a 24hr urine collection. (correlates with reagent strip >1+ i.e. >30mg/dl)"
+        prompt: "عايز تعمل case-control على hypertension in pregnancy. ليه slide 17 بيحط تعريف بالأرقام بالظبط (ACOG)؟"
+        answer: |
+          لأن الـ ==case definition== لازم تبقى واضحة وثابتة قبل ما تختار أي case. التعريف هنا: diastolic ≥ 90 أو systolic ≥ 140 mm Hg **بعد 20 أسبوع** في ست كان ضغطها طبيعي، ومتسجّل ==مرتين على الأقل بينهم 4 ساعات==.
+
+          ليه مرتين؟ علشان قراية واحدة عالية ممكن تكون توتر أو غلط قياس، وأي case مش حقيقي بيدخل الـ cases بيخفّف الفرق اللي بتدوّر عليه. التفسير المقبول (مش في الكتاب).
+      - kind: reveal
         page: 18
         quote: "Selection of Cases:\n  Preferably new cases or incident cases\n  Prevalent cases (cases already present)"
         prompt: "تاخد cases جديدة (incident) ولا قديمة (prevalent)؟ وليه؟"
@@ -158,14 +209,14 @@ lessons:
       - "Case-control: نختار على أساس **المرض** (cases vs controls) ونقارن الـ exposure في الماضي. **Backwards** (effect → cause)."
       - "الخطوات: define cases ← select cases ← select controls ← exposure ← analysis ← conclusion."
       - "Case definition موحّد، والأفضل **incident cases**."
-    practice: [res.L05.001, res.L05.002, res.L05.003, res.L05.004, res.L05.005, res.L05.006, res.L05.007, res.L05.008, res.L05.009, res.L05.010, res.L05.011]
+    practice: [res.L05.001, res.L05.002, res.L05.003, res.L05.004, res.L05.005, res.L05.006, res.L05.007, res.L05.008, res.L05.009, res.L05.010, res.L05.011, res.L05.073]
 
   # ------------------------------------------------------------------
   - id: res.L05.lesson2
     title: "الـ controls والـ confounding"
     hook: "القهوة بتعمل cancer pancreas؟ ولا السيجارة اللي في الإيد التانية هي اللي بتعملها؟"
-    minutes: 8
-    pages: [19, 27]
+    minutes: 9
+    pages: [19, 28]
     topics: [controls]
     goals:
       - "تعرف الـ control المثالي"
@@ -183,6 +234,16 @@ lessons:
           الفكرة: لو المجموعتين شبه بعض في كل حاجة، أي فرق في الـ exposure يبقى له معنى.
 
           الدكتورة قالت في الشرح: الـ controls لازم يمثلوا نفس المجتمع اللي جت منه الـ cases، ويبقوا ناس لو جالهم المرض كانوا هيبقوا cases في الدراسة. سهولة الوصول لهم مش كفاية. مثالها: لو وحدة العلاج الإشعاعي الوحيدة في البلد بتستقبل كل المستويات الاجتماعية، controls من مستشفى مجاني بس مش هيمثلوا الطيف ده. والـ control ممكن يكون عنده مرض **تاني**؛ المهم إنه ما عندوش المرض اللي بندرسه.
+      - kind: explain
+        page: 20
+        quote: "Criteria for control\nMatching by all respect with cases except not having disease\nHospital controls\nNeighborhoods controls\nFriends and relatives\nControls from general population"
+        title: "الـ control بيتجاب منين؟"
+        text: |
+          القاعدة الأولى: ==matching by all respect with cases except not having disease==: الـ control شبه الـ case في كل حاجة، إلا المرض.
+
+          والمصادر: **hospital**، **neighborhood**، **friends and relatives**، و**general population**.
+
+          ليه «في كل حاجة إلا المرض»؟ لأن أي فرق تاني بين المجموعتين ممكن يبان كأنه سبب، وهو مجرد اختلاف في الناس. التفسير المقبول (مش في الكتاب).
       - kind: explain
         page: 22
         quote: "Confounding factors: These are factors other than the studied exposure that disturb the relation between the studied exposure and the disease"
@@ -302,6 +363,21 @@ lessons:
           - في الشرح: الفايدة من زيادة الـ controls بتقل بعد حوالي 4 لكل case.
 
           والـ **exposure** بنعرفه بـ: observation، interviews، questionnaire، أو examination of records. والدكتورة أكدت: بنفس الطريقة للمجموعتين على قد ما نقدر.
+      - kind: check
+        page: 28
+        quote: "Ascertainment of Exposure:\n  1. Setting the criteria for exposure\n  2. Methods of exposures: Observation; Interviews; Questionnaire; Examination of records"
+        question: "Which is NOT one of the methods for ascertaining exposure in a case-control study (slide 28)?"
+        options:
+          - "Following controls forward until they develop the disease"
+          - "Interviews"
+          - "Questionnaire"
+          - "Examination of records"
+        answer: 0
+        why:
+          - "صح: الـ case-control مابيتابعش حد لقدّام؛ المرض حصل خلاص، وإحنا بنرجع ندوّر على الـ exposure."
+          - "موجودة، ومعاها observation."
+          - "موجودة."
+          - "موجودة، وأأمنها من الـ recall bias لأن الورق اتكتب قبل المرض. التفسير المقبول (مش في الكتاب) للسبب."
       - kind: try
         items: [res.L05.012, res.L05.013, res.L05.014, res.L05.017, res.L05.019]
     recap:
@@ -317,7 +393,7 @@ lessons:
     title: "الـ odds ratio: ad على bc"
     hook: "رقم واحد بيقولك الكحول ليه علاقة بـ cancer larynx قد إيه. وهتحسبه في 10 ثواني."
     minutes: 9
-    pages: [31, 36]
+    pages: [30, 36]
     topics: [odds-ratio, cc-merits]
     goals:
       - "تحسب الـ odds ratio (OR) من أي 2×2 table"
@@ -325,6 +401,16 @@ lessons:
       - "تعرف مزايا وعيوب الـ case-control"
     status: unverified
     steps:
+      - kind: explain
+        page: 30
+        quote: "Analysis\n1. Exposure Rates among the disease (Cases)\n2. Exposure Rates among the non-disease (Control)\n3. Odd's Ratio"
+        title: "التحليل في 3 خطوات"
+        text: |
+          1. ==Exposure rate among cases==.
+          2. **Exposure rate among controls**.
+          3. **Odds ratio**.
+
+          لاحظ إن الحساب كله على الـ **exposure** مش على المرض. ليه؟ لأنك اخترت عدد العيانين والأصحاء بنفسك، فنسبة المرض في الدراسة مصطنعة ومينفعش تتحسب. التفسير المقبول (مش في الكتاب).
       - kind: explain
         page: 32
         quote: "ODDS: the probability of an event (exposure) occurring to the probability of the event not occurring\n  CASES: a/a+c divided by c/a+c = a/c\n  CONTROLS: b/b+d divided by d/b+d = b/d\nODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc"
@@ -468,11 +554,11 @@ lessons:
 
   # ------------------------------------------------------------------
   - id: res.L05.lesson4
-    title: "الـ cohort والـ RR والـ AR"
+    title: "الـ cohort: نبدأ من الـ exposure"
     hook: "تابع 200 مدخن و200 مش مدخن. كام واحد هيجيله cancer؟ ومن كل اللي جالهم، كام في المية بسبب السيجارة؟"
-    minutes: 10
-    pages: [38, 61]
-    topics: [cohort, risk]
+    minutes: 8
+    pages: [38, 48]
+    topics: [cohort]
     goals:
       - "تعرّف الـ cohort وترتب خطواته"
       - "تحسب Ie و Io و relative risk (RR) و attributable risk (AR) و attributable risk percent (ARP)"
@@ -492,6 +578,14 @@ lessons:
           ونتابعهم ==over time== ونقارن مين بيجيله المرض أكتر. يعني **forward**: من الـ cause للـ effect.
 
           في الشرح: المجموعتين لازم يبدأوا خاليين من الـ outcome اللي بندرسه (مش من كل الأمراض). ومدة المتابعة على حسب الوقت اللي المرض محتاجه يظهر: شهور في الحمل، وسنين في مرض ليه latency طويلة.
+      - kind: explain
+        page: 39
+        quote: "Timeframe of Studies: Prospective Study - looks forward, looks to the future, examines future events, follows a condition, concern or disease into the future (Study begins here, then time runs forward)"
+        title: "Prospective = بنبص لقدّام"
+        text: |
+          الـ ==prospective study== بيبدأ النهارده ويبص للمستقبل: بيتابع الـ condition أو المرض لقدّام.
+
+          والدراسة بتبدأ **قبل** ما الـ outcome يحصل، وده بالظبط اللي بيخليها تقدر تقول إن الـ exposure جه الأول.
       - kind: figure
         page: 40
         quote: "Diagram of a cohort study:\n  Group of interest (e.g. smokers): Follow over time\n  Comparison group (e.g. non-smokers): Follow over time\n  Compare outcomes"
@@ -545,6 +639,43 @@ lessons:
 
           الـ **exposure data** بتيجي من: الناس نفسهم، records، medical exam أو special tests، environmental surveys.
           والـ **follow-up**: periodic medical exam، records، death records، mailed questionnaires، تليفونات، زيارات بيت.
+      - kind: explain
+        remind: [res.L05.035, res.L05.036]
+        page: 43
+        quote: "Obtaining data on exposure: To know whether they are exposed or not, and also the degree of exposure. Various methods used are:\n  Directly from cohort members\n  Review of records\n  Medical examination or special tests\n  Environmental surveys"
+        title: "نعرف الـ exposure إزاي؟"
+        text: |
+          عايز تعرف مين ==exposed ومين لأ، وكمان درجة الـ exposure==. الطرق:
+
+          - **directly from cohort members** (تسألهم).
+          - **review of records**.
+          - **medical examination or special tests**.
+          - **environmental surveys**.
+
+          ليه «درجة» مش بس أيوه أو لأ؟ علشان تقدر تشوف هل الـ risk بيزيد كل ما الـ exposure يزيد، ودي من أقوى العلامات على السببية. التفسير المقبول (مش في الكتاب).
+      - kind: check
+        page: 44
+        quote: "Follow-up: Regular follow up of all participants to obtain data for assessing the outcome. Few methods are:\n  Periodic medical examination\n  Review records\n  Routine surveillance of death records\n  Mailed questionnaires, telephone calls, home visits."
+        question: "Which is NOT a follow-up method listed for a cohort study?"
+        options:
+          - "Choosing controls from hospital patients"
+          - "Periodic medical examination"
+          - "Routine surveillance of death records"
+          - "Mailed questionnaires, telephone calls, home visits"
+        answer: 0
+        why:
+          - "صح: ده اختيار controls في الـ case-control، مش follow-up."
+          - "موجودة: periodic medical examination."
+          - "موجودة، ومعاها review of records."
+          - "موجودة."
+      - kind: explain
+        page: 45
+        quote: "Example of a cohort study\nObjective of the study:\nto study the relation between\nmaternal smoking and low birth\nweight"
+        title: "مثال: تدخين الأم ووزن المولود"
+        text: |
+          الهدف: ==the relation between maternal smoking and low birth weight==.
+
+          في الـ cohort: تبدأ بستات حوامل **مدخنات** و**مش مدخنات** (الـ exposure)، وتستنى الولادة وتقيس الوزن (الـ outcome). السؤال الجاي بيوريك ليه ده cohort مش case-control.
       - kind: check
         page: 46
         quote: "The association between low birth weight and maternal smoking during pregnancy can be studied by obtaining smoking histories from women at the time of the prenatal visit, and then correlating birth weight (outcome) with smoking histories (exposure). What type of study is this?\n  A. Clinical trial\n  B. Cross-sectional\n  C. Prospective cohort\n  D. Case-control\n  E. Correlation"
@@ -556,6 +687,52 @@ lessons:
           - "الـ outcome (الولادة) بييجي **بعدين**، مش في نفس اللحظة."
           - "صح: الـ exposure اتسجل الأول، وبعدين تابعنا لقدّام لحد الوزن."
           - "الـ case-control كان هيبدأ من الأطفال اللي وزنهم قليل ويرجع لورا."
+      - kind: explain
+        page: 47
+        quote: "Analysis\n| Cohort | Disease + | Disease - | Total |\n|---|---|---|---|\n| Exposed | a | b | a+b |\n| Not exposed | c | d | c+d |\n  Whether any association exists between the suspected factor and the disease under study\n  If so, what is the strength of association"
+        title: "التحليل بيجاوب على سؤالين"
+        text: |
+          1. ==Whether any association exists== بين الـ suspected factor والمرض.
+          2. لو موجودة: **what is the strength of association**؟
+
+          الترتيب مهم: الأول نشوف فيه علاقة أصلًا، وبعدين نقيس قوتها بالـ relative risk.
+      - kind: table
+        page: 48
+        quote: "Tabulation\nDisease Status: Yes, No, Total\nExposure Status Yes (Study cohort): a, b, a+b\nExposure Status No (Comparison cohort): c, d, c+d"
+        title: "جدول الـ cohort"
+        columns: ["Exposure", "Disease yes", "Disease no", "Total"]
+        rows:
+          - ["Yes (study cohort)", "a", "b", "a+b"]
+          - ["No (comparison cohort)", "c", "d", "c+d"]
+        hide: [[0, 3], [1, 3]]
+      - kind: try
+        items: [res.L05.031, res.L05.032, res.L05.035, res.L05.036, res.L05.038]
+    recap:
+      - "Cohort: exposed vs not exposed، نتابعهم **forward** ونقارن المرض (cause → effect)."
+      - "الخطوات: subjects ← exposure data ← comparison group ← follow up ← analysis."
+      - "الـ exposure: من الناس، الـ records، الكشف، والـ environmental surveys. والـ follow-up: كشف دوري، records، death records، وبريد وتليفون وزيارات."
+    practice: [res.L05.031, res.L05.032, res.L05.033, res.L05.034, res.L05.035, res.L05.036, res.L05.037, res.L05.038]
+
+  # ------------------------------------------------------------------
+  - id: res.L05.lesson6
+    title: "الـ RR والـ AR والـ ARP"
+    hook: "الـ RR بيقولك الخطر قد إيه أقوى، والـ AR بيقولك قد إيه زيادة، والـ ARP بيقولك قد إيه منه تقدر تمنعه."
+    minutes: 10
+    pages: [49, 61]
+    topics: [risk]
+    goals:
+      - "تحسب الـ incidence في الـ exposed والـ non-exposed"
+      - "تحسب وتفسّر الـ RR والـ AR والـ ARP"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 49
+        quote: "1. Incidence Rate = The no. of persons developing a disease (new cases) in a specific time & locality / Total population at risk * 1000"
+        title: "1. Incidence rate"
+        text: |
+          **Incidence rate = new cases in a specific time and locality ÷ ==total population at risk== × 1000**
+
+          في الـ cohort بتحسبه مرتين: في الـ exposed (**Ie**) وفي الـ non-exposed (**Io**). وكل المقاييس اللي جاية مبنية على الرقمين دول.
       - kind: explain
         page: 50
         quote: "Incidence rate:\n  Incidence among exposed = Ie = a / a+b\n  Incidence among non-exposed = Io = c / c+d"
@@ -577,6 +754,25 @@ lessons:
           - ==ARP== (attributable risk percent) = (Ie − Io)/Ie × 100: كام في المية من مرض الـ exposed **هيختفي لو شلنا الـ exposure**.
 
           مثال الشرح: 20 من 200 exposed (10%) و2 من 200 unexposed (1%): RR = 10، والـ AR = 9 percentage points، والـ ARP = 90%. ما تخلطش الفرق بالنسبة. والدكتورة نبّهت إن تفسير الـ ARP على إنه «اللي هيختفي» بيفترض إن العلاقة causal ومفيش bias أو confounding مؤثر، وإنه بيخص **الـ exposed** مش كل حالات المجتمع.
+      - kind: mnemonic
+        page: 51
+        quote: "Relative risk: RR = Incidence among exposed / Incidence among non-exposed = Ie / Io\nAttributable risk percent: ARP = (Ie) - (Io) / (Ie) X 100"
+        word: "RAD"
+        parts:
+          - { key: "R", text: "Ratio: RR = Ie ÷ Io" }
+          - { key: "A", text: "Attributable: AR = Ie − Io (excess risk)" }
+          - { key: "D", text: "Divide the excess by Ie × 100 = ARP" }
+        hook: "**RAD**: قسمة، طرح، وبعدين الطرح ÷ Ie. ترتيب الأسئلة في الامتحان نفسه."
+      - kind: explain
+        page: 52
+        quote: "Measures of Association in Cohort Study: Risk Ratio (Relative risk), Ratio of the incidence among exposed to the incidence among unexposed. Indicates the likelihood of developing the disease in the exposed group relative to those who are not exposed"
+        title: "Risk ratio (relative risk)"
+        text: |
+          **RR = incidence among exposed ÷ incidence among unexposed**
+
+          بيقول ==likelihood== إن الـ exposed يجيلهم المرض مقارنة باللي مش exposed.
+
+          ليه قسمة؟ لأن القسمة بتقول «كام مرة»، فبتقيس **قوة** العلاقة، مش حجم المشكلة. التفسير المقبول (مش في الكتاب).
       - kind: table
         page: 53
         quote: "Interpreting the value of RR\n| Relative risk | Meaning |\n|---|---|\n| > 1 | Risk factor |\n| = 1 | No association |\n| < 1 | Protective factor |"
@@ -608,6 +804,21 @@ lessons:
             options: ["9%", "50%", "90%", "100%"]
             answer: 2
             why: "ARP = 0.09/0.10 × 100 = **90%** من حالات المدخنين سببها التدخين."
+      - kind: check
+        page: 55
+        quote: "In a cohort study, if the relative\nrisk is greater than 1.0. This\ndenotes that:\nA. The incidence rate of the disease is lower\namong the group with the suspected risk factor\nB. The incidence rate of the disease is higher\namong the group with the suspected risk factor\nC. The disease has no relationship with the risk\nfactor.\nD. None of the above"
+        question: "In a cohort study, a relative risk greater than 1.0 denotes that:"
+        options:
+          - "The incidence is higher among the group with the suspected risk factor"
+          - "The incidence is lower among the group with the suspected risk factor"
+          - "The disease has no relationship with the risk factor"
+          - "None of the above"
+        answer: 0
+        why:
+          - "صح: RR = Ie ÷ Io، ولو أكبر من 1 يبقى Ie أكبر."
+          - "ده RR أقل من 1 (protective)."
+          - "ده RR = 1."
+          - "فيه إجابة صح."
       - kind: explain
         page: 56
         quote: "Example: Risk of hip fracture among those with low BMD in 5 years of follow-up\n| Low BMD | Hip Fracture: Yes | Hip Fracture: No | Total |\n|---|---|---|---|\n| Yes | 230 | 400 | 630 |\n| No | 110 | 369 | 479 |\n| Total | 340 | 769 | 1,109 |\nRisk Ratio (Relative Risk) = CIe / CIu = (230/630) / (110/479) = 1.59\nThe risk of developing hip fractures was 1.59 times higher in those with low bone mineral density compared to those with normal bone mineral density during this 5-year follow-up study."
@@ -616,23 +827,52 @@ lessons:
           - **RR**: «The risk of developing hip fractures was ==1.59 times higher== in those with low bone mineral density (BMD)... during this 5-year follow-up.» (230/630 ÷ 110/479)
           - **AR**: «The risk of stroke is ==increased by 0.20== for smokers compared to non-smokers.» (0.30 − 0.10)
           - **ARP**: Apgar 0–3 vs 4–6: (34.4 − 12.5)/34.4 = ==63.7%==، يعني تقريبًا تلتين الوفيات في المجموعة دي بسبب الـ Apgar الواطي. الـ asphyxia **major contributor** بس مش السبب الوحيد.
-      - kind: aside
-        tone: exam
-        page: 61
-        quote: "For the Apgar score–infant mortality data, the attributable risk percent is ARP = (0.344 - 0.125) / 0.344 X 100 = 63.7%\nAlmost two thirds of the total risk of infant mortality for newborns who weigh more than 2500 g and have 10-minute Apgar scores of 0–3 (exposed) is related to an Apgar score below the 4–6 level.\nThe attributable risk percent typically is used as an indicator of the public health impact of exposure.\nThese data suggest that birth asphyxia is a major contributor (63.7%) to, but not the sole cause of, infant mortality among severely asphyxiated children."
+      - kind: explain
+        page: 57
+        quote: "Attributable Risk (AR):\n  AR is the difference in the incidence of a disease between an exposed population and an unexposed population.\n  AR is calculated as follows: AR = I exp – I unexp\n  AR is used to quantify \"excess risk\" in the exposed group that is attributable to the exposure."
+        title: "Attributable risk (AR)"
         text: |
-          الـ **ARP** هو اللي بيقيس **public health impact**: لو منعنا الـ exposure، قد إيه من المرض هيختفي؟
+          **AR = I exp − I unexp**: ==الفرق== في الـ incidence بين الـ exposed والـ unexposed.
 
-          وخلي بالك من الفرق: **RR** نسبة (قسمة)، **AR** فرق (طرح)، **ARP** الفرق ÷ Ie × 100.
-      - kind: mnemonic
-        page: 51
-        quote: "Relative risk: RR = Incidence among exposed / Incidence among non-exposed = Ie / Io\nAttributable risk percent: ARP = (Ie) - (Io) / (Ie) X 100"
-        word: "RAD"
-        parts:
-          - { key: "R", text: "Ratio: RR = Ie ÷ Io" }
-          - { key: "A", text: "Attributable: AR = Ie − Io (excess risk)" }
-          - { key: "D", text: "Divide the excess by Ie × 100 = ARP" }
-        hook: "**RAD**: قسمة، طرح، وبعدين الطرح ÷ Ie. ترتيب الأسئلة في الامتحان نفسه."
+          بيقيس الـ **excess risk** في الـ exposed اللي يتنسب للـ exposure.
+
+          الفرق بينه وبين الـ RR: الـ RR قسمة (كام مرة)، والـ AR طرح (قد إيه زيادة بالأرقام). ودا اللي يهم اللي بيخطط خدمات. التفسير المقبول (مش في الكتاب).
+      - kind: check
+        page: 58
+        quote: "Example: In a cohort study that investigated the association between smoking and stroke\n  AR = I exp (smokers) – I unexp (non-smokers) = 0.30 – 0.10 = 0.20\nInterpretation: The risk of stroke is increased by 0.20 for smokers compared to non-smokers."
+        question: "Smoking and stroke cohort: incidence 0.30 in smokers and 0.10 in non-smokers. What is the AR and its meaning?"
+        options:
+          - "0.20: the risk of stroke is increased by 0.20 for smokers compared with non-smokers"
+          - "3: smokers have three times the risk"
+          - "0.40: the total risk in both groups"
+          - "66.7%: the share of smokers' strokes due to smoking"
+        answer: 0
+        why:
+          - "صح: 0.30 − 0.10 = 0.20، وده تفسير slide 58 بالحرف."
+          - "3 = 0.30 ÷ 0.10 ده الـ RR، مش الـ AR."
+          - "الجمع مالوش معنى هنا."
+          - "ده الـ ARP: 0.20 ÷ 0.30، المقياس اللي جاي."
+      - kind: explain
+        page: 59
+        quote: "Attributable Risk Percent (ARP):\n  AR% is the percent of the incidence of a disease in the exposed that is due to the exposure.\n  It is the % of the incidence of a disease in the exposed that would be eliminated if exposure were eliminated.\n  The risk difference is expressed as a percentage of the total risk experienced by the exposed group: AR% = (Ie – Iu) / Ie × 100, or AR% = AR / Ie × 100"
+        title: "Attributable risk percent (ARP)"
+        text: |
+          **ARP = (Ie − Io) ÷ Ie × 100**
+
+          = ==نسبة الـ incidence في الـ exposed اللي سببها الـ exposure==، يعني اللي هيختفي لو الـ exposure اختفى.
+
+          ليه المقام Ie بالذات؟ لأن السؤال عن المرض **عند الـ exposed**: من كل اللي جالهم، قد إيه بسبب الـ exposure. التفسير المقبول (مش في الكتاب).
+      - kind: reveal
+        page: 60
+        quote: "Example\nIn a cohort study investigating the\nrelationship between 10-Minute Apgar Scores\n(as an indictor for asphyxia) and Risk of\nDeath in the First Year of Life among Infants\nwith Birth Weights of at Least 2500 G.\nIexp:\nDeath rate among those with very low Apgar score (0-3) = 34.4%\nI unexp:\nDeath rate among those with higher Apgar score(4-6) = 12.5%"
+        prompt: "مثال الـ Apgar (slide 60): مين الـ exposed، وإيه Ie وIo؟"
+        answer: |
+          الـ exposure = **10-minute Apgar score واطي جدًا (0-3)**، كمؤشر للـ asphyxia، في أطفال وزنهم 2500 g على الأقل. والـ outcome = الوفاة في أول سنة.
+
+          - **Ie** = death rate مع Apgar 0-3 = ==34.4%==.
+          - **Io** = death rate مع Apgar أعلى (4-6) = ==12.5%==.
+
+          بالرقمين دول هتحسب الـ ARP في السؤال الجاي.
       - kind: check
         page: 61
         quote: "For the Apgar score–infant mortality data, the attributable risk percent is ARP = (0.344 - 0.125) / 0.344 X 100 = 63.7%\nAlmost two thirds of the total risk of infant mortality for newborns who weigh more than 2500 g and have 10-minute Apgar scores of 0–3 (exposed) is related to an Apgar score below the 4–6 level.\nThe attributable risk percent typically is used as an indicator of the public health impact of exposure.\nThese data suggest that birth asphyxia is a major contributor (63.7%) to, but not the sole cause of, infant mortality among severely asphyxiated children."
@@ -644,16 +884,22 @@ lessons:
           - "36.3% = Io/Ie، الجزء اللي **مش** من الـ exposure."
           - "صح: (0.344 − 0.125)/0.344 × 100 = **63.7%**."
           - "ده الـ RR (2.75) مكتوب كنسبة."
-      - kind: try
-        items: [res.L05.031, res.L05.039, res.L05.041, res.L05.046, res.L05.048]
-    recap:
-      - "Cohort: exposed vs not exposed، نتابعهم **forward** ونقارن المرض (cause → effect)."
-      - "الخطوات: subjects ← exposure data ← comparison group ← follow up ← analysis."
-      - "**Ie = a/(a+b)، Io = c/(c+d)**."
-      - "**RR = Ie/Io** (>1 risk، =1 none، <1 protective). **AR = Ie − Io** (excess risk). **ARP = (Ie − Io)/Ie × 100** (public health impact)."
-      - "مدخنين 20/200 ومش مدخنين 2/200: RR 10، AR 0.09، ARP 90%."
-    practice: [res.L05.031, res.L05.032, res.L05.033, res.L05.034, res.L05.035, res.L05.036, res.L05.037, res.L05.038, res.L05.039, res.L05.040, res.L05.041, res.L05.042, res.L05.043, res.L05.044, res.L05.045, res.L05.046, res.L05.047, res.L05.048, res.L05.049, res.L05.050, res.L05.064, res.L05.065, res.L05.066, res.L05.067, res.L05.072, res.L05.073]
+      - kind: aside
+        tone: exam
+        page: 61
+        quote: "For the Apgar score–infant mortality data, the attributable risk percent is ARP = (0.344 - 0.125) / 0.344 X 100 = 63.7%\nAlmost two thirds of the total risk of infant mortality for newborns who weigh more than 2500 g and have 10-minute Apgar scores of 0–3 (exposed) is related to an Apgar score below the 4–6 level.\nThe attributable risk percent typically is used as an indicator of the public health impact of exposure.\nThese data suggest that birth asphyxia is a major contributor (63.7%) to, but not the sole cause of, infant mortality among severely asphyxiated children."
+        text: |
+          الـ **ARP** هو اللي بيقيس **public health impact**: لو منعنا الـ exposure، قد إيه من المرض هيختفي؟
 
+          وخلي بالك من الفرق: **RR** نسبة (قسمة)، **AR** فرق (طرح)، **ARP** الفرق ÷ Ie × 100.
+      - kind: try
+        items: [res.L05.040, res.L05.041, res.L05.046, res.L05.048, res.L05.072]
+    recap:
+      - "Incidence = new cases ÷ population at risk × 1000."
+      - "RR = Ie ÷ Io: أكبر من 1 = الـ exposure بيزوّد الخطر."
+      - "AR = Ie − Io: الـ excess risk في الـ exposed."
+      - "ARP = (Ie − Io) ÷ Ie × 100: قد إيه من المرض في الـ exposed هيختفي لو الـ exposure اختفى."
+    practice: [res.L05.039, res.L05.040, res.L05.041, res.L05.042, res.L05.043, res.L05.044, res.L05.045, res.L05.046, res.L05.047, res.L05.048, res.L05.049, res.L05.050, res.L05.064, res.L05.065, res.L05.066, res.L05.067, res.L05.072]
   # ------------------------------------------------------------------
   - id: res.L05.lesson5
     title: "Case-control ولا cohort؟ والـ cohort اللي بيرجع لورا"
@@ -741,6 +987,23 @@ lessons:
           - "الـ long latency أحسن بـ **case-control**."
           - "صح: الـ exposure النادر (زي كيماوي في مصنع) نبدأ منه، فـ **cohort**."
           - "عوامل كتير لمرض واحد = **case-control**."
+      - kind: check
+        page: 71
+        quote: "All of the following are advantages of\ncase-control studies EXCEPT:\nA. Cheap, easy and quick studies\nB. Multiple exposures can be examined\nC. Rare diseases and diseases with long\nlatency can be studied\nD. Accurate relative risk (risk ratio)\nestimation\nE. Suitable when randomization is unethical"
+        question: "All of the following are advantages of case-control studies EXCEPT:"
+        options:
+          - "Accurate relative risk (risk ratio) estimation"
+          - "Cheap, easy and quick"
+          - "Multiple exposures can be examined"
+          - "Rare diseases and diseases with long latency can be studied"
+          - "Suitable when randomization is unethical"
+        answer: 0
+        why:
+          - "صح: الـ case-control مابيحسبش incidence، فمفيش RR دقيق؛ بيطلّع odds ratio بداله."
+          - "ميزة: مفيش متابعة."
+          - "ميزة: بترجع تسأل عن exposures كتير."
+          - "ميزة: بتبدأ بالعيانين نفسهم، فمش محتاج تستنى المرض النادر."
+          - "ميزة: زي الـ alcohol والـ pregnancy."
       - kind: explain
         page: 66
         quote: "Retrospective Cohort Study:\n  A retrospective cohort study is one in which the outcome have all occurred before the start of investigation.\n  Investigator goes back to the past to select study group from existing records of the past employment, medical and other records and traces them forward through time from the past date fixed on the records usually to the present.\n  Known with the name of Historical Cohort and noncurrent cohort"
@@ -781,6 +1044,14 @@ lessons:
           محتاج ==good records of past exposure== لمجموعة نقدر نوصلهم ونعرف صحتهم دلوقتي.
 
           ممتاز لـ ==unusual or occupational exposures==: industrial hazards والكيماويات، مع outcomes زي الـ mortality والـ cancer.
+      - kind: explain
+        page: 69
+        quote: "Retrospective cohort studies are particularly useful for\nunusual exposures or occupational exposures\nExposure to\nchemicals"
+        title: "Retrospective cohort: للـ exposures الغريبة"
+        text: |
+          الـ retrospective cohort ==مفيد جدًا للـ unusual exposures أو الـ occupational exposures==، زي التعرض للـ chemicals.
+
+          ليه؟ لأن عدد المتعرضين قليل ومتجمعين في مكان شغل واحد، وسجلات الشغل القديمة بتقولك مين اتعرض من سنين، فمش محتاج تستنى عشرين سنة. التفسير المقبول (مش في الكتاب).
       - kind: check
         page: 66
         quote: "Retrospective Cohort Study:\n  A retrospective cohort study is one in which the outcome have all occurred before the start of investigation.\n  Investigator goes back to the past to select study group from existing records of the past employment, medical and other records and traces them forward through time from the past date fixed on the records usually to the present.\n  Known with the name of Historical Cohort and noncurrent cohort"
@@ -792,6 +1063,21 @@ lessons:
           - "صح: اخترنا على أساس الـ **exposure** من records قديمة وتتبعناهم لحد النهارده."
           - "في الـ prospective الـ exposure بيتقاس دلوقتي والـ outcome في المستقبل."
           - "مش مقاسين في لحظة واحدة."
+      - kind: check
+        page: 70
+        quote: "In a cohort study, which of the\nfollowing is INCORRECT?\nA. Proceeds from outcome (disease) to\nexposure (cause/risk factor)\nB. Starts with people exposed to risk\nfactor or suspected cause\nC. Incidence rates and relative risk can be\ncalculated\nD. Time consuming and expensive"
+        question: "In a cohort study, which of the following is INCORRECT?"
+        options:
+          - "Proceeds from outcome (disease) to exposure (cause/risk factor)"
+          - "Starts with people exposed to a risk factor or suspected cause"
+          - "Incidence rates and relative risk can be calculated"
+          - "Time consuming and expensive"
+        answer: 0
+        why:
+          - "صح (غلط في الـ cohort): من الـ outcome للـ exposure ده اتجاه الـ case-control."
+          - "صح عن الـ cohort: بيبدأ بالـ exposure."
+          - "صح: علشان بيتابع ناس أصحاء لقدّام، فيقدر يحسب incidence وRR."
+          - "صح: متابعة طويلة لناس كتير."
       - kind: case
         page: 72
         quote: "Qs 1-4: In a community-based study, the incidence rate of lung cancer was 120/100,000 for smokers and 10/100,000 for nonsmokers.\n1. What is the Relative Risk (Risk Ratio) of developing lung cancer for smokers compared with nonsmokers?\n  A. 5\n  B. 12\n  C. 50\n  D. 100\n  E. 120\n2. The above calculated Relative Risk is interpreted as follows:\n  A. The risk of developing lung cancer is 'x' times higher in smokers compared to nonsmokers.\n  B. The probability of being a smoker is 'x' times greater among those with lung cancer compared to those without lung cancer."

@@ -3,15 +3,15 @@ lecture: rheum.L16
 lessons:
   # ------------------------------------------------------------------
   - id: rheum.L16.lesson1
-    title: "الـ RA بيبدأ إزاي؟ من الـ gene للـ pannus"
+    title: "الـ RA بيبدأ إزاي؟ الـ gene والشرارة والـ cytokines"
     hook: "مفصل بيتاكل من جوّه بإيد الجهاز المناعي نفسه. تعالى نشوف مين بيدّي الأوامر ومين بينفّذ."
-    minutes: 8
-    pages: [241, 244]
-    topics: [intro, pathogenesis, pathology]
+    minutes: 9
+    pages: [241, 242]
+    topics: [intro, pathogenesis]
     goals:
       - "تعرّف الـ RA وتحفظ أرقامه (1%، 2:1)"
-      - "ترسم خريطة الـ cytokines: مين بيعمل إيه في مين"
-      - "ترتّب مراحل الـ pathology لحد الـ ankylosis"
+      - "تفهم ليه الـ shared epitope والستات"
+      - "ترسم خريطة الـ cytokines: مين بيعمل إيه في مين وليه"
     status: unverified
     steps:
       - kind: explain
@@ -26,6 +26,8 @@ lessons:
           - ومعاه غالبًا أعراض systemic و **extra-articular features**.
 
           منتشر: **1%** من الناس في العالم، والستات ضعف الرجالة (**F:M = 2:1**).
+
+          الكلمة المهمة في التعريف **deforming**: ده مش التهاب بييجي ويروح، ده التهاب بيهدّ المفصل لو سبته، علشان كده العلاج لازم يبدأ بدري (درس العلاج).
       - kind: explain
         remind: [rheum.L16.003, rheum.L16.005, rheum.L16.006]
         page: 241
@@ -36,11 +38,36 @@ lessons:
           1. **Genetic background**: HLA-DR1 و DR4 و DRw14. والأهم ==shared epitope==: تسلسل amino acids معيّن على الـ **beta chain** بتاع DR1 و DR4. وبيزيد في الـ first-degree relatives.
           2. **Environmental antigen** محتمل: viruses (parvovirus، Epstein–Barr virus (EBV))، retroviruses، mycoplasma، mycobacteria.
           3. **Self-perpetuation** بالـ autoimmunity: الشرارة تولّع، والمناعة تكمّل لوحدها.
+
+          ولازم التلاتة مع بعض، علشان كده مش كل اللي عنده DR4 بيجيله RA، ومش كل اللي خد parvovirus بيجيله.
+      - kind: explain
+        page: 241
+        title: "ليه الستات؟ وليه الـ shared epitope؟"
+        quote: "Shared epitope: Increased susceptibility with a specific aminoacid sequence on B chain of HLA DR1. DR4."
+        text: |
+          الكتاب بيقول إن الخطر بيزيد مع **تسلسل amino acids معيّن** على الـ beta chain بتاع HLA-DR1 و DR4، وبيزيد في الـ **first-degree relatives**. ده معناه إن الـ gene لوحده مش كفاية، بس بيجهّز الأرض.
+
+          التفسير المقبول (مش في الكتاب):
+          - الـ **HLA-DR** هو "الصينية" اللي الـ antigen-presenting cell بتقدّم عليها الـ peptides للـ T cell. الـ ==shared epitope== بيغيّر شكل الجيب اللي الـ peptide بيقعد فيه، فبيمسك peptides معيّنة (زي اللي فيها citrulline، هتقابلها في الـ anti-CCP) أحسن، ويقدّمها للـ T cells كأنها غريبة.
+          - الستات ضعف الرجالة لأن الـ **oestrogen** بيقوّي الـ B-cell والـ antibody responses، وده نفس السبب اللي بيخلّي أغلب الـ autoimmune diseases في الستات أكتر.
+
+          وده بيشرح ليه الـ RA مش بيتورث زي mendelian: انت بتورث **استعداد**، والشرارة لازم تيجي من برّه.
       - kind: aside
         tone: analogy
         page: 241
         quote: "Self perpetuation through autoimmunity."
         text: "تخيّل الـ gene هو البنزين، والفيروس هو الكبريتة، والـ **autoimmunity** هي النار اللي بتفضل والعة حتى بعد ما الكبريتة تطفي."
+      - kind: check
+        page: 241
+        quote: "2- Possible environmental factor antigen\n  Virus (parvovirus, Epstien barr).\n  Retrovirus.\n  Mycoplasma.\n  Mycobacteria.\n 3- Self perpetuation through autoimmunity."
+        question: "In the book's aetiology of RA, which is NOT listed as a possible environmental antigen?"
+        options: ["Streptococcus", "Parvovirus", "Mycoplasma", "Mycobacteria"]
+        answer: 0
+        why:
+          - "صح: الكتاب ما ذكرش الـ streptococcus هنا (ده بتاع الـ rheumatic fever)."
+          - "الـ parvovirus و Epstein–Barr في القايمة."
+          - "الـ mycoplasma في القايمة."
+          - "الـ mycobacteria في القايمة."
       - kind: figure
         page: 242
         quote: "Macrophage present processed antigen to TH1."
@@ -97,11 +124,34 @@ lessons:
           - "IL-2 من الـ Th1 بيشغّل الـ lymphocytes."
           - "IL-8 بينادي على الـ polymorphs."
           - "IFN-γ بيشغّل الـ macrophage."
+      - kind: explain
+        page: 242
+        title: "IL-1 و TNF: الاتنين اللي بيهدّوا"
+        quote: "IL1—TNF\n I. Activate synovial fibroblasts and chondrocytes\n a) Metalloproteinases  cartilage destruction.\n b) PGE2  demineralization and destruction of bone."
+        text: |
+          الكتاب بيدّي الـ **IL-1** والـ **TNF** تلات شغلانات، وكل واحدة ليها سبب واضح:
+
+          - **بيشغّلوا الـ synovial fibroblasts والـ chondrocytes**: يطلّعوا ==metalloproteinases== تاكل الغضروف، و **PGE2** يعمل demineralization للعضم. التفسير المقبول (مش في الكتاب): الـ metalloproteinases إنزيمات بتقطّع الـ collagen والـ proteoglycans اللي الغضروف معمول منها، والـ PGE2 بيشغّل الـ osteoclasts اللي بتاكل العضم. يعني الغضروف بيتهدّ **من جوّه** بإيد خلاياه هو.
+          - **Adhesion molecules**: الأوعية تبقى "لزقة" فخلايا الالتهاب تمسك فيها وتعدّي للمفصل.
+          - **Angiogenesis**: أوعية جديدة تغذّي الـ synovium اللي بيتكاثر.
+
+          وعلشان كده لما نوصل للعلاج، أقوى دوا بيوقف حاجة واحدة هو الـ ==anti-TNF==: انت بتقطع الراس اللي بتشغّل التلات حاجات دول مرة واحدة. والـ **IL-17** من الـ Th17 بيزوّد النار.
       - kind: reveal
         page: 242
         quote: "II. Upregulation of adhestion molecules with cell recruitement. III. Stimulation of angiogenesis to supply the proliferating synovium."
         prompt: "ليه الـ IL-1 و TNF بيعملوا angiogenesis؟ إيه فايدة الأوعية الجديدة للمرض؟"
         answer: "الـ **synovium** بيتكاثر وبيتحوّل لنسيج تخين، ومحتاج دم يغذّيه. الأوعية الجديدة هي خط الإمداد بتاع الـ pannus. ومع **adhesion molecules** زيادة، خلايا التهاب أكتر بتدخل."
+      - kind: check
+        page: 242
+        quote: "Th1 produce:\n - IL2,  stimulates lymphocytes.\n  IFN : stimulate macrophage."
+        question: "مين اللي بيرجع يشغّل الـ macrophage في الحلقة المفرغة بتاعة الـ RA؟"
+        options: ["IFN-γ من الـ Th1", "IL-6 من الـ macrophage", "IL-8 من الـ macrophage", "PGE2 من الـ fibroblasts"]
+        answer: 0
+        why:
+          - "صح: الـ macrophage يقدّم antigen للـ Th1، والـ Th1 يرد بـ IFN-γ يشغّله أكتر. دي الحلقة اللي بتخلّي المرض يكمّل لوحده."
+          - "الـ IL-6 بيروح للكبد يعمل acute phase response (ESR و CRP)."
+          - "الـ IL-8 بينادي الـ polymorphs."
+          - "الـ PGE2 بيعمل demineralization للعضم."
       - kind: explain
         page: 242
         title: "والـ B cells؟"
@@ -110,6 +160,47 @@ lessons:
           الأساس **cell-mediated** (macrophage + Th1).
 
           بس الـ **B cells** ليها دور: بتبقى plasma cells تعمل antibodies و ==immune complexes==، ودي ممكن تكون سبب جزء من الـ **extra-articular features**.
+      - kind: try
+        items: [rheum.L16.004, rheum.L16.006, rheum.L16.010, rheum.L16.011, rheum.L16.013]
+    recap:
+      - "RA: symmetrical deforming polyarthritis؛ 1%؛ F:M = 2:1."
+      - "Gene (DR1، DR4، shared epitope) = استعداد؛ antigen محتمل = شرارة؛ autoimmunity بتكمّل لوحدها."
+      - "Macrophage ↔ Th1 (IL-2، IFN-γ) حلقة مفرغة. Macrophage: IL-6 (ESR/CRP)، IL-8 (polymorphs)."
+      - "IL-1 + TNF: metalloproteinases (غضروف)، PGE2 (عضم)، adhesion، angiogenesis. IL-17 من Th17."
+      - "B cells → immune complexes → جزء من الـ extra-articular features."
+    practice: [rheum.L16.001, rheum.L16.002, rheum.L16.003, rheum.L16.004, rheum.L16.005, rheum.L16.006, rheum.L16.007, rheum.L16.008, rheum.L16.009, rheum.L16.010, rheum.L16.011, rheum.L16.012, rheum.L16.013, rheum.L16.014, rheum.L16.015]
+  # ------------------------------------------------------------------
+  # Split from lesson1 on 2026-11-13 (#828): joint pathology and nodules.
+  - id: rheum.L16.lesson8
+    title: "جوّه المفصل: من الأوعية للـ pannus للـ ankylosis"
+    hook: "المفصل بيتهدّ على مراحل، وكل مرحلة بتجيب اللي بعدها. لو فهمت السلسلة، الـ X-ray والتشوّهات هيبقوا منطقيين."
+    minutes: 8
+    pages: [243, 244]
+    topics: [pathology]
+    goals:
+      - "ترتّب مراحل الـ pathology وتعرف ليه كل مرحلة بتجيب اللي بعدها"
+      - "تعرف التشوّه والـ muscle atrophy جايين منين"
+      - "توصف الـ rheumatoid nodule تحت الميكروسكوب"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 243
+        title: "مفصل سليم جنب مفصل RA في الكتاب"
+        image: { file: rheum/L16-normal-vs-rheumatoid-joint.webp, book: true }
+        alt: "Book diagram comparing a normal joint (thin synovial membrane, smooth cartilage) with a rheumatoid joint: inflamed synovial membrane full of lymphocytes, macrophages, plasma cells and new vessels, and pannus creeping over the cartilage edge, with neutrophils and immune complexes in the joint space."
+        caption: "على الشمال مفصل سليم: غشاء رفيع وغضروف أملس. على اليمين: غشاء ملتهب مليان خلايا وأوعية جديدة (**angiogenesis**)، و ==pannus== بيزحف على حرف الغضروف."
+      - kind: explain
+        page: 243
+        title: "كل مرحلة بتجيب اللي بعدها"
+        quote: "Swelling and congestion of synovial membrane - infiltration with TH1 lymphocytes, macrophages and some plasma cells. Effusion of synovial fluid rich in polymorphs."
+        text: |
+          المراحل في الكتاب مش قايمة تتحفظ، دي **سلسلة**، وكل حلقة بتفسّر اللي بعدها:
+
+          - **أول حاجة الـ microvasculature بتتأذى**: الأوعية تبقى بتسرّب، فالمية والخلايا تعدّي. علشان كده المفصل **يورم ويحتقن**، ويتملي **Th1 lymphocytes** و **macrophages** وشوية plasma cells.
+          - الـ **effusion غني بالـ polymorphs**: دول اللي الـ IL-8 ندهلهم في الدرس اللي فات.
+          - الغشاء **يتضخّم ويعمل villi**، وممكن **lymphoid follicles**. التفسير المقبول (مش في الكتاب): الـ villi بتكبّر مساحة النسيج الملتهب، والـ follicles دي مصنع antibodies جوّه المفصل نفسه.
+          - الـ ==pannus== = granulation tissue ملتهب بيفرش **فوق وتحت** الغضروف فيتآكل.
+          - في الآخر ممكن **fibrous أو bony ankylosis**: التفسير المقبول (مش في الكتاب) إن المفصل بيحاول "يلم الجرح" بنسيج ليفي أو عضم، فيلحم.
       - kind: order
         page: 243
         quote: "Formation of inflammatory granulation tissue (pannus) spreading over and under the articular cartilage which becomes eroded."
@@ -121,6 +212,22 @@ lessons:
           - "Pannus erodes cartilage"
           - "Fibrous or bony ankylosis"
         why: "البداية في الأوعية الصغيرة، بعدين الغشاء يورم ويتملي خلايا، يتضخّم بـ villi، يطلع الـ **pannus** ياكل الغضروف، وفي الآخر المفصل ممكن يلحم (ankylosis)."
+      - kind: aside
+        tone: exam
+        page: 243
+        quote: "Early change: injury to synovial microvasculature."
+        text: "لو اتسألت عن **أول** تغيير في الـ RA: هو **injury to synovial microvasculature**، مش الـ pannus. الـ pannus بييجي بعدين."
+      - kind: check
+        page: 243
+        quote: "Formation of inflammatory granulation tissue (pannus) spreading over and under the articular cartilage which becomes eroded."
+        question: "Which tissue spreads over and under the articular cartilage and erodes it?"
+        options: ["Pannus", "Villous synovium", "Lymphoid follicle", "Fibrous ankylosis"]
+        answer: 0
+        why:
+          - "صح: الـ pannus = inflammatory granulation tissue بياكل الغضروف من فوق ومن تحت."
+          - "الـ villi تضخّم في الغشاء نفسه، قبل الـ pannus."
+          - "الـ lymphoid follicles بتتكوّن جوّه الغشاء المتضخّم."
+          - "الـ ankylosis آخر مرحلة، مش اللي بياكل الغضروف."
       - kind: explain
         page: 243
         title: "التشوّه جاي منين؟"
@@ -129,6 +236,16 @@ lessons:
           الالتهاب مش بياكل الغضروف بس. بيهدّ الـ **soft tissues** كمان، فالـ **ligaments** والـ tendons ترتخي، والمفصل يزوغ عن مكانه: دي ==deformities==.
 
           وكمان العضلات اللي جنب المفصل الملتهب بتضمر (**muscle atrophy**).
+
+          يعني التشوّه في الـ RA سببه الأربطة اللي ارتخت أكتر من العضم نفسه، وده اللي هتفهم بيه الـ swan neck والـ boutonniere في درس الإيد.
+      - kind: reveal
+        page: 243
+        quote: "Atrophy of muscles adjacent to inflamed joints."
+        prompt: "ليه العضلات اللي جنب المفصل الملتهب بتضمر، مع إن الالتهاب مش فيها؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): العيان **مابيحرّكش** المفصل اللي بيوجعه، والعضلة اللي ما بتشتغلش بتضمر (disuse). وكمان الألم والورم بيبعتوا إشارة عصبية **بتطفّي** العضلة اللي حوالين المفصل (reflex inhibition).
+
+          علشان كده هتقابل في الكتاب بعد كده **quadriceps atrophy** في الركبة، و **muscle atrophy with weak grip** في الإيد، وعلشان كده العلاج الطبيعي جزء من العلاج.
       - kind: explain
         page: 244
         title: "الـ nodule تحت الميكروسكوب"
@@ -137,21 +254,33 @@ lessons:
           الـ **rheumatoid nodule**: في النص ==fibrinoid necrosis==، وحواليها ==palisade== من الـ mononuclear cells (صف خلايا واقفة جنب بعض زي السور).
 
           ونفس الفكرة في الأنسجة التانية: mononuclear infiltrate مع fibrinoid necrosis بدرجات و nodules.
-      - kind: aside
-        tone: exam
-        page: 243
-        quote: "Early change: injury to synovial microvasculature."
-        text: "لو اتسألت عن **أول** تغيير في الـ RA: هو **injury to synovial microvasculature**، مش الـ pannus. الـ pannus بييجي بعدين."
+      - kind: reveal
+        page: 244
+        quote: "Extra-articular tissues\n Mononuclear cell infiltrate with varying degrees of fibrinoid necrosis and nodule formation."
+        prompt: "الكتاب بيقول الأنسجة برّه المفصل فيها نفس الـ mononuclear infiltrate والـ fibrinoid necrosis. ده بيقولك إيه عن الـ RA؟"
+        answer: |
+          إن الـ RA **مرض جسم كله** بنفس الآلية، مش مرض مفاصل وبس. نفس الخلايا (mononuclear) ونفس الضرر (fibrinoid necrosis) بيروحوا الجلد والرئة والقلب والأوعية.
+
+          وده اللي هيخلّي الـ **extra-articular features** (الدرس الجاي) منطقية: الـ nodule في الكوع، والـ nodule في الرئة، والـ vasculitis، كلهم نفس الحكاية في مكان تاني.
+      - kind: check
+        page: 244
+        quote: "Subcutaneous nodules\n  Central area of fibrinoid necrosis.\n  Palisade of mononuclear cells."
+        question: "A biopsy of an elbow nodule in RA shows what?"
+        options: ["Central fibrinoid necrosis with a palisade of mononuclear cells", "Caseating granuloma with giant cells", "Urate crystals with foreign body reaction", "Lipid-laden macrophages"]
+        answer: 0
+        why:
+          - "صح: نص ميّت (fibrinoid necrosis) وسور خلايا (palisade) حواليه."
+          - "الـ caseation بتاع الـ TB، مش الـ RA."
+          - "الـ urate في الـ gouty tophus."
+          - "الـ lipid-laden macrophages في الـ xanthoma."
       - kind: try
-        items: [rheum.L16.004, rheum.L16.010, rheum.L16.011, rheum.L16.016, rheum.L16.021]
+        items: [rheum.L16.016, rheum.L16.017, rheum.L16.019, rheum.L16.021, rheum.L16.023]
     recap:
-      - "RA: symmetrical deforming polyarthritis؛ 1%؛ F:M = 2:1."
-      - "Gene (DR1، DR4، shared epitope) + antigen محتمل + autoimmunity بتكمّل لوحدها."
-      - "Macrophage ↔ Th1 (IL-2، IFN-γ). Macrophage: IL-6 (ESR/CRP)، IL-8 (polymorphs)."
-      - "IL-1 + TNF: metalloproteinases (غضروف)، PGE2 (عضم)، adhesion، angiogenesis. IL-17 من Th17."
-      - "Microvascular injury ← synovitis ← villi ← pannus ← ankylosis."
-      - "Nodule: fibrinoid necrosis في النص + palisade."
-    practice: [rheum.L16.001, rheum.L16.002, rheum.L16.003, rheum.L16.004, rheum.L16.005, rheum.L16.006, rheum.L16.007, rheum.L16.008, rheum.L16.009, rheum.L16.010, rheum.L16.011, rheum.L16.012, rheum.L16.013, rheum.L16.014, rheum.L16.015, rheum.L16.016, rheum.L16.017, rheum.L16.018, rheum.L16.019, rheum.L16.020, rheum.L16.021, rheum.L16.022, rheum.L16.023]
+      - "أول تغيير: injury to synovial microvasculature، مش الـ pannus."
+      - "Microvascular injury ← synovitis (Th1، macrophages، effusion polymorphs) ← villi و lymphoid follicles ← pannus ← ankylosis."
+      - "Soft tissue destruction ← ligaments و tendons ترتخي ← deformities. والعضلات جنب المفصل بتضمر."
+      - "Nodule: fibrinoid necrosis في النص + palisade من الـ mononuclear cells؛ ونفس الآلية برّه المفصل."
+    practice: [rheum.L16.016, rheum.L16.017, rheum.L16.018, rheum.L16.019, rheum.L16.020, rheum.L16.021, rheum.L16.022, rheum.L16.023]
   # ------------------------------------------------------------------
   - id: rheum.L16.lesson2
     title: "شكله إيه في العيادة؟ والـ criteria بالنقط"
@@ -173,6 +302,8 @@ lessons:
           الـ onset غالبًا ==gradual==، وأحيانًا acute، ونادرًا **palindromic**: نوبات ألم وورم واحمرار تروح وترجع، و **50%** منهم يطلع عندهم rheumatoid arthritis (RA).
 
           ومعاه أعراض systemic: fatigue، malaise، weakness، low-grade fever، نقص وزن.
+
+          الأعراض العامة دي سببها إن الـ cytokines (IL-1، TNF، IL-6) بتطلع من المفصل للدم، فالمرض من أوله systemic مش موضعي.
       - kind: reveal
         page: 244
         quote: "Morning stiffness: due to edema and inflammatory mediator accumulation during sleep or inactivity."
@@ -187,6 +318,16 @@ lessons:
           - **كمان**: الكتف، الـ hip، الكاحل، الـ sternoclavicular.
           - **أقل**: الـ temporomandibular والـ **cricoarytenoid**.
           - **العمود الفقري**: الـ upper cervical بس، والـ ==sacroiliac سليم==.
+
+          التفسير المقبول (مش في الكتاب): الـ RA مرض synovium، علشان كده بيختار المفاصل الـ synovial الصغيرة الكتير الحركة في الإيد والقدم. والكتاب بيقولك إن الـ **symmetry** وإن الـ DIP سليم هما اللي بيميّزوه، يعني لو شفت الاتنين دول فكّر في RA.
+      - kind: reveal
+        page: 244
+        quote: "Less commonly: Tempromandibular and cricoarytenoid joint."
+        prompt: "إيه اللي يجمع الـ temporomandibular والـ cricoarytenoid مع مفاصل الإيد؟ وليه الصوت بيتأثر؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): التلاتة **synovial joints**، والـ RA مرض الـ **synovium**، فأي مفصل فيه synovium ممكن يتصاب مهما كان صغير أو بعيد.
+
+          الـ **cricoarytenoid** هو المفصل اللي بيحرّك الأحبال الصوتية، فالتهابه يعمل **dysphonia** وألم في البلع (الكتاب بيرجع له في الـ respiratory features ص 253). والـ temporomandibular = ألم في المضغ.
       - kind: aside
         tone: trap
         page: 244
@@ -221,11 +362,41 @@ lessons:
           7. Rheumatoid factor (RF) موجب (بطريقة موجبة في أقل من 5% من الأصحّاء)
 
           لازم ==4 أو أكتر==، والأعراض **6 أسابيع**.
+
+          يعني criterion واحد لوحده ما يكفيش، لازم الصورة تتجمع.
+      - kind: explain
+        page: 245
+        title: "كل criterion بيرجع لحاجة فهمناها"
+        quote: "Serum RF by a method positive in less than 5% of normal."
+        text: |
+          الـ 7 criteria مش عشوائية، كل واحد فيهم صدى لحاجة في الـ pathology:
+
+          - **Morning stiffness ساعة**: الـ edema والـ mediators اللي اتجمعوا بالليل (ص 244).
+          - **3 مفاصل أو أكتر** و **symmetric**: الـ RA polyarthritis متماثل بالتعريف.
+          - **Wrist أو MCP أو PIP**: دي المفاصل المفضّلة عنده.
+          - **X-ray: erosions أو decalcification**: أثر الـ pannus والـ PGE2.
+          - **Nodules**: نفس الـ fibrinoid necrosis برّه المفصل.
+          - **RF بطريقة موجبة في أقل من 5% من الأصحّاء**: يعني اخترنا طريقة ==specific==؛ لو الطريقة بتطلع موجبة في ناس كتير سليمة، الـ criterion هيخسر قيمته.
+
+          والـ 4 من 7 لمدة **6 أسابيع** علشان نستبعد اللي هيخف لوحده.
       - kind: reveal
         page: 245
         quote: "It prevents self limiting or vial arthritis to be labelled as RA."
         prompt: "ليه الـ 6 أسابيع مهمين أوي؟"
         answer: "علشان الـ **viral arthritis** والحاجات الـ **self-limiting** بتخف لوحدها في أسابيع. لو ما استنيتش، هتلزّق تشخيص RA لعيان كان عنده parvovirus. العيب: الـ criteria دي **مش sensitive للـ early RA**."
+      - kind: explain
+        page: 246
+        title: "ليه الـ 2010 بيدّي نقط أكتر للمفاصل الصغيرة والـ serology؟"
+        quote: "Patients are definitively diagnosed with RA if they score 6 or more points according to the following criteria"
+        text: |
+          الكتاب قالك في ص 245 إن الـ 1987 ==مش sensitive للـ early RA==. الـ 2010 اتعمل علشان يمسك العيان **بدري**، قبل الـ erosions والـ nodules (اللي بتيجي متأخر).
+
+          التفسير المقبول (مش في الكتاب) لتوزيع النقط:
+          - **المفاصل الصغيرة** بتاخد أكتر من الكبيرة (لحد **5**) لأنها اللي بتفرّق الـ RA عن أمراض تانية بتمسك الركبة أو الكاحل.
+          - **الـ serology** (RF أو ACPA) لحد **3** لأنها بتقول "ده RA" قبل ما الـ X-ray يتكلّم، و **high titre** (أكتر من 3 مرات الـ ULN) أوثق من الـ low.
+          - **Duration** و **acute phase reactants** نقطة واحدة بس: مهمين، بس مش خاصين بالـ RA.
+
+          فالـ **6 من 10** ممكن تتجمع من المفاصل والـ serology من غير أي X-ray، وده بالظبط الهدف.
       - kind: figure
         page: 246
         quote: "Patients are definitively diagnosed with RA if they score 6 or more points according to the following criteria: Domain: Joint involvement:\n  – 1 medium-large joint (0 points).\n  – 2-10 medium-large joints (1 point).\n  – 1-3 small joints (2 points).\n  – 4-10 small joints (3 points).\n  – More than 10 small joints (5 points)."
@@ -283,7 +454,7 @@ lessons:
       - "MCP، PIP، wrist، قدم، ركبة. Upper cervical بس، sacroiliac سليم، DIP سليم."
       - "ACR 1987: 7 criteria، 4 أو أكتر، 6 أسابيع (تطلّع الـ viral). مش sensitive للـ early."
       - "ACR/EULAR 2010: joints 0–5، serology 0/2/3، duration 0/1، APR 0/1. 6 أو أكتر = RA."
-    practice: [rheum.L16.024, rheum.L16.025, rheum.L16.026, rheum.L16.027, rheum.L16.028, rheum.L16.029, rheum.L16.030, rheum.L16.031, rheum.L16.032, rheum.L16.033, rheum.L16.034, rheum.L16.035, rheum.L16.036, rheum.L16.037, rheum.L16.038, rheum.L16.039, rheum.L16.040, rheum.L16.041, rheum.L16.042, rheum.L16.043, rheum.L16.202, rheum.L16.208, rheum.L16.209]
+    practice: [rheum.L16.024, rheum.L16.025, rheum.L16.026, rheum.L16.027, rheum.L16.028, rheum.L16.029, rheum.L16.030, rheum.L16.031, rheum.L16.033, rheum.L16.034, rheum.L16.035, rheum.L16.036, rheum.L16.037, rheum.L16.038, rheum.L16.039, rheum.L16.040, rheum.L16.041, rheum.L16.042, rheum.L16.043, rheum.L16.202, rheum.L16.208, rheum.L16.209]
   # ------------------------------------------------------------------
   - id: rheum.L16.lesson3
     title: "إيد الـ RA: swan neck ولا boutonniere؟"
@@ -305,6 +476,8 @@ lessons:
           أول حاجة: الصوابع شكلها ==fusiform== (مغزلي): تخين في النص عند الـ **proximal interphalangeal (PIP)** ورفيع فوق وتحت.
 
           ومعاه ورم **MCP** على الناحيتين.
+
+          ليه الـ PIP بالذات؟ لأن الـ synovium اللي حوالين المفصل هو اللي بيورم، فالصباع يتنفخ عند المفصل ويفضل رفيع فوقه وتحته.
       - kind: figure
         page: 247
         quote: "Swan neck deformity: Hyper extension at PIP with flexion at DIP.\nBoutonniere deformity: Flexion at the PIP with extension at DIP."
@@ -357,6 +530,25 @@ lessons:
           - **Z-shaped thumb** و **MCP subluxation**.
           - **Piano-key (caput) ulna**: الـ ulnar styloid بيطلع لفوق (dorsal subluxation)، تدوس عليه ينزل ويطلع زي زرار البيانو.
           - **Trigger finger**: tendon sheath ملتهب فيه nodule، الصباع يقفل وهو مثني.
+      - kind: explain
+        page: 247
+        title: "التشوّه بيحصل إزاي؟"
+        quote: "Ulnar deviation of fingers at MCP joint associated with deviation at radiocarpal Joints  Zig Zag deformity of the hand."
+        text: |
+          القاعدة جات في ص 243: ==inflammatory destruction of soft tissues== ← الـ ligaments والـ tendons ترتخي ← deformities. الـ capsule والأربطة هما اللي ماسكين العضم في خط مستقيم؛ علشان كده لما يرتخوا، الشد بتاع العضلات يسحب الصباع لأي اتجاه أقوى.
+
+          التفسير المقبول (مش في الكتاب) لكل شكل:
+          - **Zig-zag**: الـ wrist يميل ناحية الـ radius، والصوابع تتعوّض وتزوغ ناحية الـ ==ulna== عند الـ MCP (الـ extensor tendons بتزحلق من على راس الـ MCP)، فالإيد تبقى زي حرف Z.
+          - **Swan neck**: الـ PIP بيرتخي من قدّام فيتفرد زيادة (hyperextension)، والـ DIP يتشد لتحت.
+          - **Boutonniere**: الوتر اللي فوق الـ PIP يتقطع أو يرتخي، فالـ PIP "يخرم" بين الشريطين الجانبيين زي الزرار في العروة (boutonnière = عروة)، فيتثني، والـ DIP يتفرد.
+      - kind: reveal
+        page: 247
+        quote: "Trigger finger: Inflamed flexor tendon sheath that prevents extension of finger from a flexed position. A nodule formed in the tendon sheath  locking"
+        prompt: "ليه الـ trigger finger بيقفل وهو مثني ومش بيقفل وهو مفرود؟"
+        answer: |
+          الكتاب بيقولك السبب: ==nodule== في الـ flexor tendon sheath الملتهب.
+
+          التفسير المقبول (مش في الكتاب): لما تقفل إيدك، الـ nodule بيعدّي من النفق الضيق بالعافية (الـ flexors قوية)، بس وانت بتفرد الـ extensors أضعف ومش قادرة ترجّعه، فالصباع **يتمسك** مثني، ولما تزقه يفلت فجأة زي زناد المسدس (trigger).
       - kind: figure
         page: 248
         title: "إيد الـ RA في الكتاب"
@@ -381,6 +573,16 @@ lessons:
           **القدم**: زي الإيد. **Metatarsophalangeal (MTP) subluxation** + flexion عند الـ PIP = ==cock-up (hammer) toe== مع callosities، و hallux valgus، و fibular deviation للصوابع، والـ arch بيفطس، و valgus في الكاحل.
 
           **الركبة**: ورم (synovial hypertrophy + effusion)، و quadriceps atrophy.
+
+          والـ quadriceps بيضمر، والتفسير المقبول (مش في الكتاب) لأن العيان بيبطّل يفرد ركبته اللي بتوجعه، زي العضلات جنب أي مفصل ملتهب (ص 243).
+      - kind: reveal
+        page: 249
+        quote: "MTP subluxation and flexion at PIP  cock-up deformity of toe (hammer toe)\n  callosities."
+        prompt: "ليه عيان RA بيشتكي إنه ماشي على \"زلط\" وعنده callosities تحت القدم؟"
+        answer: |
+          الكتاب: **MTP subluxation** مع flexion عند الـ PIP = ==cock-up (hammer) toe== ومعاها **callosities**.
+
+          التفسير المقبول (مش في الكتاب): لما الصباع يطلع لفوق عند الـ MTP، راس الـ metatarsal تنزل وتبرز تحت باطن القدم من غير الوسادة الدهنية اللي كانت بتحميها، فيمشي على عضم، والجلد يدافع عن نفسه بـ **callus**. ونفس الضغط فوق الصباع المرفوع مع الجزمة يعمل callus تاني.
       - kind: explain
         page: 249
         title: "الـ Baker's cyst"
@@ -391,6 +593,8 @@ lessons:
           ممكن يزحف في الـ calf **وينفجر**، فالسمانة تورم وتوجع: شبه الـ ==deep vein thrombosis (DVT)== بالظبط.
 
           التشخيص: **Doppler ultrasound (US)** أو arthrography، ودلوقتي الـ **US أو MRI** (non-invasive) بيغنوا عن الـ arthrography.
+
+          علشان كده أي عيان RA بسمانة وارمة لازم تتأكد بالتصوير قبل ما تحكم إنها DVT.
       - kind: aside
         tone: joke
         page: 249
@@ -419,15 +623,15 @@ lessons:
     practice: [rheum.L16.044, rheum.L16.045, rheum.L16.046, rheum.L16.047, rheum.L16.048, rheum.L16.049, rheum.L16.050, rheum.L16.051, rheum.L16.052, rheum.L16.053, rheum.L16.054, rheum.L16.055, rheum.L16.056, rheum.L16.057, rheum.L16.058]
   # ------------------------------------------------------------------
   - id: rheum.L16.lesson4
-    title: "الـ RA برّه المفصل: من العين لحد الرقبة"
-    hook: "الـ RA مش مرض مفاصل وبس. ده بيلف على الجسم كله، وأخطر محطة فيه الرقبة."
+    title: "الـ RA برّه المفصل: الجسم والدم والجلد والعين"
+    hook: "الـ RA مش مرض مفاصل وبس. نفس الـ cytokines ونفس الـ immune complexes بيلفوا الجسم كله."
     minutes: 9
-    pages: [250, 256]
-    topics: [extra-general, vasculitis-eye, heart-lung, neuro]
+    pages: [250, 253]
+    topics: [extra-general, vasculitis-eye]
     goals:
-      - "تعدّ الـ extra-articular features بالترتيب"
-      - "تفرّق episcleritis من scleritis"
-      - "تعرف الـ RA effusion و Caplan و الـ atlantoaxial subluxation"
+      - "تعدّ الـ systemic والـ musculoskeletal والـ blood features وتعرف سبب كل واحدة"
+      - "تفهم الـ nodules والـ vasculitis جايين منين"
+      - "تفرّق episcleritis من scleritis وتعرف ليه"
     status: unverified
     steps:
       - kind: figure
@@ -459,6 +663,16 @@ lessons:
             <text x="20" y="362" class="t-sm"><tspan class="t-b">Nerves:</tspan> entrapment, neuropathy, MNM</text>
           </svg>
       - kind: explain
+        page: 250
+        title: "الـ systemic والـ musculoskeletal: ليه؟"
+        quote: "Systemic\n Fever, fatigue, weight loss, susceptibility to infection.\n Musculoskeletal\n - Muscle wasting.\n - Tenosynovitis.\n - Bursitis.\n - Osteoporosis."
+        text: |
+          - **Fever، fatigue، weight loss**: الـ cytokines اللي اتعلمناها (IL-1، TNF، IL-6) مش بتفضل في المفصل، بتلف في الدم، علشان كده العيان تعبان كله مش مفاصله بس. التفسير المقبول (مش في الكتاب): بتشغّل مركز الحرارة في المخ، وبتكسّر العضلات والدهون، فالعيان سخن وهلكان وبيخس.
+          - **Susceptibility to infection**: المرض نفسه بيلخبط المناعة، وفوقه العلاج المثبّط.
+          - **Muscle wasting**: نفس الـ atrophy جنب المفاصل (ص 243).
+          - **Tenosynovitis** و **bursitis**: التفسير المقبول (مش في الكتاب) إن الـ tendon sheaths والـ bursae مبطّنة بـ ==synovium== زي المفصل، فالـ RA بيضربها برضه.
+          - **Osteoporosis**: الـ **PGE2** بيعمل demineralization (ص 242)، ومعاه قلة الحركة والـ steroids.
+      - kind: explain
         remind: [rheum.L16.060]
         page: 251
         title: "الدم"
@@ -468,6 +682,15 @@ lessons:
           - **Iron deficiency**: من erosions في الـ gastrointestinal tract (GIT) بسبب الـ ==non-steroidal anti-inflammatory drugs (NSAIDs)== والـ steroids.
           - **Thrombocytosis** = المرض ==active==.
           - **Splenomegaly** و **Felty's syndrome**.
+      - kind: reveal
+        page: 251
+        quote: "Anaemia\n - Normochromic normocytic anaemia, of chronic disease.\n - Fe-deficiency anaemia: GIT erosions from NSAIDs – steroids eosinophilia.\n - Thrombocytosis: Active disease."
+        prompt: "عيانة RA عندها anaemia. إزاي تعرف هي من المرض ولا من الدوا؟"
+        answer: |
+          - **Normochromic normocytic** = ==anaemia of chronic disease== من المرض نفسه. السبب بيجي في الكتاب في ص 272: الـ **IL-6** بيعمل **hepcidin**، والـ hepcidin بيقفل الـ ferroportin فالحديد يتحبس في المخازن والنخاع ما يلاقيش.
+          - **Iron deficiency** (microcytic) = نزيف من **GIT erosions** بسبب الـ NSAIDs والـ steroids. يعني الدوا.
+
+          و **thrombocytosis** = المرض ==active==. التفسير المقبول (مش في الكتاب): الـ IL-6 نفسه بيحفّز الـ megakaryocytes، فالـ platelets بتعلى مع الالتهاب وتنزل لما يهدى.
       - kind: explain
         page: 251
         title: "الـ nodules"
@@ -476,6 +699,16 @@ lessons:
           الـ ==rheumatoid nodules== في الـ **seropositive**. ممكن تكون طرية ومتحركة أو ناشفة وثابتة.
 
           مكانها: أماكن **الضغط والاحتكاك**: extensor forearm (الكوع)، الـ sacrum، الـ Achilles، الصوابع.
+
+          يعني لو لقيت nodule، العيان غالبًا **RF موجب**، وده بيقولك إن مرضه أشد (هتقابل الـ RF في الـ poor prognostic features ص 260).
+      - kind: reveal
+        page: 251
+        quote: "Subcutanous nodules: in seropositive-soft and mobile or firm and fixed found at sites of pressure or friction sites such as extensor surface of forearm, sacrum, Achilles tendon and toes."
+        prompt: "ليه الـ nodules بتطلع في الكوع والـ sacrum والـ Achilles بالذات؟"
+        answer: |
+          الكتاب بيقول: أماكن ==pressure or friction==.
+
+          التفسير المقبول (مش في الكتاب): الضغط المتكرر بيعمل إصابات صغيرة في الأوعية الدقيقة، وفي عيان **seropositive** (immune complexes كتير) الإصابة دي بتولّع نفس الالتهاب: fibrinoid necrosis في النص وسور من الـ mononuclear cells حواليها. علشان كده العيان اللي نايم على ضهره يعمل nodule على الـ sacrum، واللي ساند على كوعه يعمله على الـ forearm.
       - kind: explain
         remind: [rheum.L16.064]
         page: 252
@@ -486,6 +719,27 @@ lessons:
           - Palpable purpura، ulcers، pyoderma gangrenosum
           - **Mononeuritis multiplex**
           - نادرًا medium arteries: mesenteric، renal، coronary occlusion.
+
+          كلها نفس الآلية: الوعاء الملتهب بيقفل، فاللي بعده يموت. السبب بالتفصيل في الخطوة الجاية.
+      - kind: reveal
+        page: 252
+        quote: "Digital arteries: nailfold infarcts."
+        prompt: "الـ vasculitis في الـ RA جاي منين؟ وليه بيبدأ بالـ nailfold infarcts؟"
+        answer: |
+          الكتاب قالك في ص 242 إن الـ B cells بتعمل antibodies و ==immune complexes== ممكن تكون سبب جزء من الـ extra-articular features. التفسير المقبول (مش في الكتاب): الـ complexes دي بتترسّب في جدار الأوعية وتولّعها.
+
+          الـ **digital arteries** صغيرة وفي آخر الدورة، فأول ما تقفل الجلد اللي بتغذّيه يموت نقط صغيرة جنب الضافر: **nailfold infarcts**. ولو الأوعية اللي بتغذّي الأعصاب قفلت، العصب يموت حتة حتة: **mononeuritis multiplex**.
+      - kind: check
+        page: 252
+        quote: "Medium sized arteries with mesentenic, renal, or coronary occlusion (Uncommon)."
+        question: "Which vasculitic feature of RA does the book call uncommon?"
+        options: ["Mesenteric, renal or coronary occlusion", "Nailfold infarcts", "Palpable purpura", "Mononeuritis multiplex"]
+        answer: 0
+        why:
+          - "صح: الـ medium-sized arteries (mesenteric، renal، coronary) uncommon."
+          - "الـ nailfold infarcts من الـ digital arteries، أول الـ vasculitis."
+          - "الـ palpable purpura في القايمة من غير uncommon."
+          - "الـ mononeuritis multiplex في القايمة من غير uncommon."
       - kind: table
         page: 253
         quote: "Ocular\n  Episcleritis: red- painless-begnin-no discharge.\n  Scleritis: red- painful may lead to uveitis-secondary glaucoma –visual impairment.\n  Scleromalacia: painless bilateral thinning-blue colour of underling choroid.\n  Corneal melting; pain - redness - blurred vision - thining -perforation.\n  Sjogren's syndrome."
@@ -497,11 +751,43 @@ lessons:
           - ["Sclero\u00admalacia", "Painless", "Thin sclera, blue choroid"]
           - ["Corneal melt", "Painful", "Thinning, perforation"]
         hide: [[0, 1], [1, 1], [2, 2], [3, 2]]
+      - kind: reveal
+        page: 253
+        quote: "Scleritis: red- painful may lead to uveitis-secondary glaucoma –visual impairment."
+        prompt: "ليه الـ scleritis بيوجع وممكن ياخد النظر، والـ episcleritis لأ؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ **episclera** طبقة رقيقة سطحية فوق الـ sclera، التهابها احمرار من غير ضرر، فالكتاب بيقولها **benign**. الـ ==sclera== نفسها هي جدار العين، أعمق ومليانة أعصاب، فالتهابها يوجع، ولو امتد للجوّه يعمل **uveitis** و **secondary glaucoma** والنظر يقل.
+
+          والـ **scleromalacia** هي الـ sclera اللي اترفعت لدرجة إن الـ choroid الأزرق اللي تحتها بان، ومن غير ألم.
       - kind: aside
         tone: tip
         page: 253
         quote: "Ocular\n  Episcleritis: red- painless-begnin-no discharge.\n  Scleritis: red- painful may lead to uveitis-secondary glaucoma –visual impairment.\n  Scleromalacia: painless bilateral thinning-blue colour of underling choroid.\n  Corneal melting; pain - redness - blurred vision - thining -perforation.\n  Sjogren's syndrome."
         text: "قاعدة سريعة: عين حمرا **مش بتوجع** = episcleritis (اطمّن). عين حمرا **بتوجع** = **scleritis**، ودي ممكن تاخد النظر (uveitis، glaucoma)."
+      - kind: try
+        items: [rheum.L16.059, rheum.L16.060, rheum.L16.062, rheum.L16.064, rheum.L16.067]
+    recap:
+      - "Systemic: fever، fatigue، weight loss = cytokines في الدم؛ و infection أسهل."
+      - "Musculoskeletal: wasting، tenosynovitis، bursitis (synovium برضه)، osteoporosis (PGE2)."
+      - "Blood: ACD (IL-6 → hepcidin)، iron deficiency (NSAIDs)، thrombocytosis = active، Felty."
+      - "Nodules في الـ seropositive عند أماكن الضغط والاحتكاك."
+      - "Vasculitis (immune complexes): nailfold infarcts، purpura، ulcers، pyoderma، MNM؛ الشرايين المتوسطة uncommon."
+      - "Episcleritis مش بتوجع؛ scleritis بتوجع وخطيرة؛ scleromalacia زرقا."
+    practice: [rheum.L16.032, rheum.L16.059, rheum.L16.060, rheum.L16.061, rheum.L16.062, rheum.L16.063, rheum.L16.064, rheum.L16.065, rheum.L16.066, rheum.L16.067]
+  # ------------------------------------------------------------------
+  # Split from lesson4 on 2026-11-13 (#828): heart, lung, nerves and the neck.
+  - id: rheum.L16.lesson9
+    title: "القلب والرئة والأعصاب والرقبة"
+    hook: "Pericarditis صامت، effusion سكره واطي، وصباع بيتنمّل بالليل. وأخطر محطة: الرقبة."
+    minutes: 9
+    pages: [253, 256]
+    topics: [heart-lung, neuro]
+    goals:
+      - "تعرف الـ RA effusion و Caplan و الـ interstitial fibrosis وليه"
+      - "تفرّق الـ entrapment من الـ mononeuritis multiplex"
+      - "تعرف الـ atlantoaxial subluxation وتشخيصه"
+    status: unverified
+    steps:
       - kind: explain
         remind: [rheum.L16.070]
         page: 253
@@ -516,6 +802,31 @@ lessons:
           - ==Interstitial fibrosis==: **الأشهر**، صامت، في الـ lower lobes
           - Nodules (ممكن تعمل cavity) + pneumoconiosis = **Caplan**
           - Bronchiolitis obliterans: ضيق نفس و hyperinflation، ممكن يموّت.
+
+          والـ cricoarytenoid في القايمة لأنه (مش في الكتاب) synovial joint صغير في الحنجرة، فبيلتهب زي أي مفصل تاني.
+      - kind: explain
+        page: 253
+        title: "الـ RA effusion: ليه السكر واطي؟"
+        quote: "Pleural effusion with low glucose level - Elevated LDH."
+        text: |
+          الكتاب بيوصف الـ rheumatoid pleural effusion: ==low glucose== و **LDH عالي**، في **الرجالة seropositive**، صغير و **unilateral**، يخف لوحده أو يحتاج steroids.
+
+          التفسير المقبول (مش في الكتاب):
+          - **السكر واطي** لأن الـ pleura الملتهبة التخينة بتعطّل دخول الـ glucose، والخلايا الملتهبة جوّه بتاكله.
+          - **الـ LDH عالي** لأن الخلايا بتموت وتتجدّد بسرعة، والـ LDH بيخرج منها.
+
+          ونفس الفكرة في الـ **pericarditis**: موجود في **30%** بس **asymptomatic**، فمش هتعرفه غير بالـ echo. ده سبب إن الـ RA بيزوّد الـ cardiovascular risk من غير ما العيان يحس.
+      - kind: check
+        page: 253
+        quote: "Males - seropositive - small and unilateral resolve spontaneously or require steroids."
+        question: "A 58-year-old seropositive man with RA has a small right pleural effusion. Which fluid fits the book's description?"
+        options: ["Low glucose, high LDH", "High glucose, low LDH", "Chylous, high triglyceride", "Transudate, normal LDH"]
+        answer: 0
+        why:
+          - "صح: الكتاب: low glucose و elevated LDH."
+          - "العكس تمامًا."
+          - "الـ chylous effusion مالوش علاقة بالـ RA في الكتاب."
+          - "الـ RA effusion التهابي، مش transudate."
       - kind: match
         page: 253
         quote: "Nodules : solitary or multiple - can cavitate\n  Rheumatoid nodule + pneumoconiosis → Caplan's syndrome."
@@ -539,6 +850,26 @@ lessons:
           - Peroneal عند رأس الـ fibula
 
           وكمان peripheral neuropathy و mononeuritis multiplex.
+
+          يعني نفس الصباع ممكن يتنمّل في عيان RA لسببين مختلفين: ضغط من برّه (entrapment) أو وعاء مقفول (mononeuritis)، والخطوة الجاية بتفرّقهم.
+      - kind: reveal
+        page: 254
+        quote: "1- Entrapment neuropathy:\n - Median nerve: carpal tunnel syndrome (C.T.S).\n - Posterior tibial: tarsal tunnel syndrome (T.T.S).\n - Ulnar at elbow.\n - Peroneal at head of fibula.\n 2- Peripheral neuropathy.\n 3- Mononeuritis multiplex."
+        prompt: "الكتاب بيدّيك 3 أنواع أعصاب. إيه الفرق في السبب بين الـ entrapment والـ mononeuritis multiplex؟"
+        answer: |
+          - **Entrapment**: العصب سليم بس **مخنوق** من برّه. التفسير المقبول (مش في الكتاب): الـ synovium والـ tenosynovitis المنفوخين جوّه نفق ضيق مش بيتمد (carpal tunnel، tarsal tunnel، الكوع، رأس الـ fibula) بيدوسوا على العصب. يتحسن لما الالتهاب يهدى أو بالتسليك.
+          - **Mononeuritis multiplex**: العصب **بيموت** من جوّه، لأن الأوعية اللي بتغذّيه اتقفلت بالـ **vasculitis** (هو كمان في قايمة الـ vasculitis ص 252). أعصاب متفرقة واحد ورا التاني، وده معناه مرض نشيط ومحتاج علاج أقوى.
+      - kind: check
+        page: 254
+        quote: "Median nerve: carpal tunnel syndrome (C.T.S)."
+        question: "RA patient: night tingling in the thumb, index and middle fingers. Which nerve and where?"
+        options: ["Median nerve at the carpal tunnel", "Ulnar nerve at the elbow", "Posterior tibial at the tarsal tunnel", "Peroneal at the head of the fibula"]
+        answer: 0
+        why:
+          - "صح: الـ median في الـ carpal tunnel، والـ wrist synovitis بيضيّق النفق."
+          - "الـ ulnar بيدّي الصباع الصغير والبنصر."
+          - "الـ posterior tibial في القدم (tarsal tunnel)."
+          - "الـ peroneal عند الركبة: foot drop."
       - kind: explain
         page: 255
         title: "أخطر محطة: الرقبة"
@@ -552,6 +883,16 @@ lessons:
           - ضعف لحد **quadriparesis**.
 
           التشخيص: lateral X-ray في flexion و extension. المسافة بين الـ peg والـ atlas **أكتر من 3 mm** في الـ flexion = ==subluxation==.
+
+          ليه flexion و extension الاتنين؟ لأن الـ peg بيرجع لورا **في الـ flexion**، فالصورة وهو مفرود ممكن تبان سليمة.
+      - kind: reveal
+        page: 255
+        quote: "Symptoms occipital headache, parathesia, electric shock in the arm, motor weakness (Quadreparesis)."
+        prompt: "ليه الضعف هنا quadriparesis (الأربع أطراف) مش paraplegia؟ وليه الـ occipital headache؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الضغط عند **C1-C2**، يعني فوق كل الأعصاب اللي رايحة للدراعين والرجلين، فالأربعة يضعفوا. لو الضغط كان في الـ thoracic كانت الرجلين بس (paraplegia).
+
+          والـ **occipital headache** لأن الجذور العصبية العليا (C2) هي اللي بتغذّي جلد ورا الراس، فلما تتشد أو تتضغط الوجع يطلع هناك.
       - kind: figure
         page: 256
         title: "Atlantoaxial subluxation في الكتاب"
@@ -577,26 +918,25 @@ lessons:
         quote: "Cervical cord compression due to atlantoaxial subluxation due to erosion of transverse ligament around the posterior aspect of the odontoid peg. On neck flexion, peg moves posteriorly indenting the cord. Symptoms occipital headache, parathesia, electric shock in the arm, motor weakness (Quadreparesis).\n  Lateral x ray in flexion and in extention if in flexion distance between odontoid peg and atlas > 3mm → subluxation."
         text: "عيان RA قديم داخل عملية؟ اسأل عن الرقبة: **occipital headache**، paraesthesia، كهربا في الدراع. الـ **intubation** فيها neck flexion، وده بالظبط اللي بيخلي الـ peg يدوس على الـ cord."
       - kind: try
-        items: [rheum.L16.060, rheum.L16.065, rheum.L16.070, rheum.L16.077, rheum.L16.081]
+        items: [rheum.L16.070, rheum.L16.072, rheum.L16.074, rheum.L16.077, rheum.L16.080]
     recap:
-      - "Blood: ACD، iron deficiency (NSAIDs)، thrombocytosis = active، Felty."
-      - "Nodules في الـ seropositive عند أماكن الضغط."
-      - "Vasculitis: nailfold infarcts، purpura، ulcers، pyoderma، MNM."
-      - "Episcleritis مش بتوجع؛ scleritis بتوجع وخطيرة؛ scleromalacia زرقا."
-      - "Pericarditis 30% صامت. Effusion: low glucose، LDH عالي. Fibrosis الأشهر. Caplan = nodules + pneumoconiosis."
-      - "Atlantoaxial: transverse ligament اتاكل؛ أكتر من 3 mm في الـ flexion."
-    practice: [rheum.L16.059, rheum.L16.060, rheum.L16.061, rheum.L16.062, rheum.L16.063, rheum.L16.064, rheum.L16.065, rheum.L16.066, rheum.L16.067, rheum.L16.068, rheum.L16.069, rheum.L16.070, rheum.L16.071, rheum.L16.072, rheum.L16.073, rheum.L16.074, rheum.L16.075, rheum.L16.076, rheum.L16.077, rheum.L16.078, rheum.L16.079, rheum.L16.080, rheum.L16.081, rheum.L16.082, rheum.L16.203, rheum.L16.205]
+      - "Pericarditis 30% صامت (echo). Myocarditis، heart block، AR و MR، coronary vasculitis."
+      - "Effusion: low glucose، LDH عالي، رجالة seropositive، صغير و unilateral."
+      - "Fibrosis الأشهر (lower lobes). Caplan = nodules + pneumoconiosis. Bronchiolitis obliterans ممكن يموّت."
+      - "Entrapment = نفق ضيق (CTS، TTS، ulnar، peroneal). MNM = vasculitis للعصب."
+      - "Atlantoaxial: transverse ligament اتاكل؛ أكتر من 3 mm في الـ flexion؛ quadriparesis."
+    practice: [rheum.L16.068, rheum.L16.069, rheum.L16.070, rheum.L16.071, rheum.L16.072, rheum.L16.073, rheum.L16.074, rheum.L16.075, rheum.L16.076, rheum.L16.077, rheum.L16.078, rheum.L16.079, rheum.L16.080, rheum.L16.081, rheum.L16.082, rheum.L16.203, rheum.L16.205]
   # ------------------------------------------------------------------
   - id: rheum.L16.lesson5
-    title: "التحاليل: RF، anti-CCP والـ synovial fluid"
+    title: "التحاليل: ليه كل تحليل، والـ RF ضد الـ anti-CCP"
     hook: "الـ RF مشهور بس بيتلكّك في أمراض كتير. الـ anti-CCP هو الشاهد اللي ما بيكدبش."
-    minutes: 7
+    minutes: 8
     pages: [257, 259]
-    topics: [monitoring, serology, xray-fluid]
+    topics: [monitoring, serology]
     goals:
-      - "تقسّم التحاليل حسب الهدف: تشخيص، activity، damage، safety"
-      - "تقارن الـ RF بالـ anti-CCP بالأرقام"
-      - "تقرا الـ X-ray والـ synovial fluid بتاع الـ RA"
+      - "تقسّم التحاليل حسب الهدف وتعرف ليه"
+      - "تفهم ليه الـ RF بيطلع في أمراض تانية"
+      - "تقارن الـ RF بالـ anti-CCP بالأرقام والسبب"
     status: unverified
     steps:
       - kind: explain
@@ -608,6 +948,16 @@ lessons:
           - **الـ activity والدوا شغّال؟**: pain (VAS)، morning stiffness بالدقايق، عدد المفاصل الملتهبة، الـ acute phase reaction (APR)، و ==Disease Activity Score (DAS) 28/44==.
           - **الـ damage**: X-rays و **Health Assessment Questionnaire (HAQ)** (Health Assessment Questionnaire).
           - **أمان الدوا**: urine، biochemistry، complete blood count (CBC).
+
+          يعني كل تحليل بتطلبه لازم تعرف هو بيجاوب على أنهي سؤال من الأربعة.
+      - kind: reveal
+        page: 257
+        quote: "To monitor drug safety.\n  Urine analysis Biochemistry Haematology."
+        prompt: "ليه بنعمل CBC و LFT و urine لعيان حاسس إنه كويس؟"
+        answer: |
+          لأن الهدف هنا **drug safety** مش المرض. الأدوية اللي هتتعلمها في الـ csDMARDs بتأذي حاجات بعينها: الـ methotrexate الـ **marrow** والكبد، والـ ciclosporin الكلى. التفسير المقبول (مش في الكتاب): الضرر ده بيبدأ **صامت**، فلو استنيت الأعراض هتلاقيه متأخر.
+
+          ونفس المنطق للـ **damage**: الـ erosions ما بترجعش، فبتتابعها بالـ X-ray والـ **health assessment questionnaire** علشان تغيّر العلاج قبل ما تزيد.
       - kind: aside
         tone: trap
         page: 257
@@ -632,6 +982,27 @@ lessons:
           - موجب في **85%** من الـ rheumatoid arthritis (RA)، بس في الأول **70%** بس.
           - الـ titre ==مالوش prognostic significance==.
           - وموجب كمان في: **Sjogren**، connective tissue diseases، **chronic liver disease**، sarcoidosis، multiple myeloma، و chronic infections (TB، leprosy، syphilis).
+
+          يعني RF سالب في أول المرض ما يستبعدش الـ RA، و RF موجب لوحده ما يثبتهوش.
+      - kind: reveal
+        page: 258
+        quote: "Chronic infections: TB, leprosy syphilis."
+        prompt: "ليه الـ RF بيطلع موجب في الـ TB والـ chronic liver disease والـ myeloma؟ وده بيعمل إيه في قيمته؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ RF = antibody ضد الـ **Fc بتاع الـ IgG**. أي مرض فيه **تحفيز مزمن للمناعة** (infection مزمنة، كبد ملتهب، sarcoidosis، Sjogren) بيعمل IgG كتير و immune complexes، والجسم يرد بـ antibodies ضدهم. والـ **multiple myeloma** بيطلّع antibody من clone واحد ممكن يكون هو RF.
+
+          فالـ RF موجب **مش** معناه RA. ده اللي بيخلّي الـ anti-CCP (ص 259) أهم في التشخيص، وبيخلّي الكتاب يقول إن الـ RF titre ==مالوش prognostic significance==.
+      - kind: check
+        page: 258
+        quote: "RF titer has no prognostic significance."
+        question: "Per the book, what does a very high RF titre tell you about prognosis?"
+        options: ["Nothing: RF titre has no prognostic significance", "Erosions will be severe", "Extra-articular disease is certain", "Remission is unlikely"]
+        answer: 0
+        why:
+          - "صح: الكتاب صريح: RF titer has no prognostic significance."
+          - "الـ anti-CCP هو اللي بيتنبأ بالشدّة، مش رقم الـ RF."
+          - "الكتاب ما ربطش رقم الـ RF بالـ extra-articular."
+          - "الكتاب ما ربطش رقم الـ RF بالـ remission."
       - kind: explain
         page: 258
         title: "من antikeratin لـ anti-CCP"
@@ -640,6 +1011,8 @@ lessons:
           الـ **antikeratin antibodies** (1970) هدفها الحقيقي ==filaggrin==. واتكشفت بـ immunofluorescence على rat oesophagus.
 
           اكتشفوا إنها بتمسك أجزاء فيها **citrulline** (arginine اتعدّل بعد الـ translation). فدلوقتي بنعمل enzyme-linked immunosorbent assay (ELISA) للـ ==anti-CCP== (cyclic citrullinated peptides). والـ **anti-citrullinated protein antibodies (ACPA)** تقدير أوسع.
+
+          يعني الـ antikeratin والـ anti-CCP بيدوّروا على نفس الهدف (الـ citrulline)؛ اللي اتغيّر هو طريقة القياس: ELISA أسهل وأدق من الـ immunofluorescence على نسيج فار.
       - kind: figure
         page: 259
         quote: "Anti CCP antibodies are found in:\n  Early RA as well as in preclinical phase.\n  Some RF negative RA cases.\n  Anti CCP are predictors of severity of RA.\n  Sensitivity in RA is 40% to 70%.\n  Specificity may be 98%.\n    ACPA (anti citrullinated protein antibody) a broader estimation."
@@ -666,6 +1039,14 @@ lessons:
             <text x="180" y="185" class="t-sm t-b">Predicts</text>
             <text x="180" y="203" class="t-sm t-b">severity</text>
           </svg>
+      - kind: reveal
+        page: 259
+        quote: "Anti CCP are predictors of severity of RA."
+        prompt: "ليه الـ anti-CCP بيظهر قبل المرض نفسه، وليه بيتنبأ بالشدّة؟"
+        answer: |
+          الكتاب: موجود في الـ **early RA** وفي الـ ==preclinical phase==، وبيتنبأ بالـ **severity**، و **specificity لحد 98%**.
+
+          التفسير المقبول (مش في الكتاب): الـ **citrullination** (تحويل arginine لـ citrulline، ص 258) بتحصل في الأنسجة الملتهبة، والـ shared epitope بيقدّم الـ peptides دي للمناعة. يعني الـ anti-CCP **جزء من آلية المرض** نفسه، مش أثر جانبي، علشان كده بيبان بدري، ونادر في أمراض تانية، وكل ما المناعة ضد الـ citrulline أقوى، الـ erosions أشد.
       - kind: check
         page: 259
         quote: "Anti CCP antibodies are found in:\n  Early RA as well as in preclinical phase.\n  Some RF negative RA cases.\n  Anti CCP are predictors of severity of RA.\n  Sensitivity in RA is 40% to 70%.\n  Specificity may be 98%.\n    ACPA (anti citrullinated protein antibody) a broader estimation."
@@ -677,6 +1058,28 @@ lessons:
           - "تكرار الـ RF مش هيفرق كتير، وهو موجب في 70% بس في الأول."
           - "الـ ESR بيقيس الـ activity مش التشخيص."
           - "الـ Rose-Waaler برضه RF، وأقل sensitive."
+      - kind: try
+        items: [rheum.L16.083, rheum.L16.087, rheum.L16.088, rheum.L16.089, rheum.L16.093]
+    recap:
+      - "تشخيص / activity (DAS28، VAS، stiffness) / damage (X-ray، HAQ) / safety (urine، biochemistry، CBC)."
+      - "CRP ممكن يبقى طبيعي في synovitis مفاصل صغيرة."
+      - "RF = antibody ضد Fc الـ IgG. 85% (70% early). titre مالوش prognosis. Rose-Waaler أكتر specific."
+      - "RF موجب في أي تحفيز مزمن للمناعة: Sjogren، CTD، كبد، sarcoid، myeloma، TB/leprosy/syphilis."
+      - "Anti-CCP: filaggrin/citrulline؛ sensitivity 40–70%، specificity 98%؛ preclinical، RF-negative، severity."
+    practice: [rheum.L16.083, rheum.L16.084, rheum.L16.085, rheum.L16.086, rheum.L16.087, rheum.L16.088, rheum.L16.089, rheum.L16.090, rheum.L16.091, rheum.L16.092, rheum.L16.093, rheum.L16.094, rheum.L16.095, rheum.L16.096]
+  # ------------------------------------------------------------------
+  # Split from lesson5 on 2026-11-13 (#828): X-ray and synovial fluid.
+  - id: rheum.L16.lesson10
+    title: "الـ X-ray والـ synovial fluid: اقرا الصورة والسائل"
+    hook: "الـ X-ray بيحكي نفس قصة الـ pathology بالترتيب، والسائل بيقولك التهاب ولا تآكل ولا صديد."
+    minutes: 7
+    pages: [259, 259]
+    topics: [xray-fluid]
+    goals:
+      - "ترتّب تغيّرات الـ X-ray من بدري لمتأخر وتعرف ليه"
+      - "تقرا جدول الـ synovial fluid وتعرف كل خانة بتقول إيه"
+    status: unverified
+    steps:
       - kind: explain
         page: 259
         title: "الـ X-ray"
@@ -684,6 +1087,58 @@ lessons:
         text: |
           - **بدري**: soft tissue swelling و ==periarticular osteoporosis==.
           - **بعدين**: joint space يضيق، ==marginal erosions==، subluxation، deformities.
+
+          يعني البدري لسه التهاب ممكن يهدى، والمتقدّم ضرر دايم، علشان كده بنتابع الـ damage بالـ X-ray.
+      - kind: figure
+        page: 259
+        quote: "More advanced:\n - Narrowing of joint spaces.\n - Marginal erosions.\n - Subluxations (malalignment).\n - Deformities."
+        title: "الـ X-ray بيتغيّر إزاي"
+        alt: "Two joints side by side. Early: soft tissue swelling around the joint and paler (osteoporotic) bone next to the joint, joint space normal. Advanced: narrowed joint space, bites taken out of the bone margins (marginal erosions) and the bones out of line (subluxation)."
+        caption: "**بدري**: ورم في الـ soft tissue وعضم فاتح جنب المفصل (==periarticular osteoporosis==). **متأخر**: المسافة تضيق، والحواف تتاكل (**marginal erosions**)، والعضم يزوغ."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <text x="80" y="20" text-anchor="middle" class="t-b">Early</text>
+            <text x="250" y="20" text-anchor="middle" class="t-b">Advanced</text>
+            <ellipse cx="80" cy="115" rx="62" ry="78" class="fg-thin"/>
+            <rect x="55" y="35" width="50" height="62" rx="10" class="fg-box"/>
+            <rect x="55" y="133" width="50" height="62" rx="10" class="fg-box"/>
+            <rect x="55" y="80" width="50" height="17" class="fg-acc"/>
+            <rect x="55" y="133" width="50" height="17" class="fg-acc"/>
+            <text x="80" y="122" text-anchor="middle" class="t-sm t-mut">normal gap</text>
+            <rect x="225" y="38" width="50" height="70" rx="10" class="fg-box"/>
+            <rect x="235" y="120" width="50" height="70" rx="10" class="fg-box"/>
+            <circle cx="225" cy="104" r="7" class="fg-dot-bad"/>
+            <circle cx="275" cy="104" r="7" class="fg-dot-bad"/>
+            <circle cx="235" cy="124" r="7" class="fg-dot-bad"/>
+            <text x="290" y="117" class="t-sm t-bad">narrow</text>
+            <text x="16" y="215" class="t-sm">swelling + periarticular osteoporosis</text>
+            <text x="180" y="215" class="t-sm t-bad">erosions, subluxation</text>
+          </svg>
+      - kind: explain
+        page: 259
+        title: "ليه الـ osteoporosis جنب المفصل الأول؟"
+        quote: "Early: soft tissue swelling.\n - Periarticular osteoporosis."
+        text: |
+          الـ X-ray بيحكي نفس قصة الـ pathology بالترتيب، يعني لو فاكر المراحل مش محتاج تحفظ:
+
+          - **Soft tissue swelling**: الـ synovium الملتهب والـ effusion (أول مراحل ص 243).
+          - ==Periarticular osteoporosis==: الـ **PGE2** اللي بيعمل demineralization (ص 242) شغال في المنطقة اللي حوالين المفصل. التفسير المقبول (مش في الكتاب): الدم الزايد حوالين المفصل الملتهب وقلة الحركة بيسحبوا الكالسيوم من العضم القريب الأول.
+          - **Joint space narrowing**: الغضروف (اللي بيبان مسافة فاضية في الصورة) اتاكل بالـ metalloproteinases.
+          - ==Marginal erosions==: التفسير المقبول (مش في الكتاب): الـ pannus بيبدأ من **حرف** المفصل، في الحتة اللي العضم فيها مكشوف ومفيش غضروف يحميه، فالعضة الأولى بتبان على الحافة.
+          - **Subluxation** و **deformities**: الأربطة ارتخت.
+      - kind: sort
+        page: 259
+        quote: "Early: soft tissue swelling.\n - Periarticular osteoporosis.\n More advanced:\n - Narrowing of joint spaces.\n - Marginal erosions.\n - Subluxations (malalignment).\n - Deformities."
+        prompt: "حط كل علامة X-ray في مرحلتها:"
+        bins: ["Early", "More advanced"]
+        cards:
+          - { text: "Soft tissue swelling", bin: 0 }
+          - { text: "Periarticular osteoporosis", bin: 0 }
+          - { text: "Joint space narrowing", bin: 1 }
+          - { text: "Marginal erosions", bin: 1 }
+          - { text: "Subluxation", bin: 1 }
+          - { text: "Deformities", bin: 1 }
+        why: "البدري = التهاب بس (ورم وعضم فاتح). المتقدّم = ضرر: غضروف راح (narrowing)، عضم اتاكل (erosions)، وأربطة ارتخت (subluxation، deformities)."
       - kind: table
         page: 259
         quote: "In inflammatory arthritis:\n  Turbid.\n  WBC's 2000 - 50.000 % polymorph 20-70%.\n  Mucin. clot is poor: hyaluronic acid is degraded.\n  Synovial fluid / blood glucose difference: 30.\n  No crystals.\n  Decreased complement."
@@ -703,27 +1158,47 @@ lessons:
         quote: "In inflammatory arthritis:\n  Turbid.\n  WBC's 2000 - 50.000 % polymorph 20-70%.\n  Mucin. clot is poor: hyaluronic acid is degraded.\n  Synovial fluid / blood glucose difference: 30.\n  No crystals.\n  Decreased complement."
         prompt: "ليه الـ mucin clot ضعيف؟"
         answer: "الـ mucin clot معمول من الـ **hyaluronic acid**. الالتهاب والإنزيمات بيكسّروه، فالسائل يبقى أخف ومابيعملش clot كويس."
+      - kind: explain
+        page: 259
+        title: "اقرا السائل: كل رقم بيقول حاجة"
+        quote: "Differentiates inflammatory arthritis (as RA) from degenerative as (O.A) or septic arthritis."
+        text: |
+          الكتاب بيقول تحليل الـ synovial fluid هدفه يفرّق ==inflammatory== (زي الـ RA) من **degenerative** (OA) ومن **septic**. يعني كل خانة في الجدول بتجاوب على سؤال:
+
+          - **Turbid** و **WBC 2,000–50,000** و **polymorphs 20–70%**: فيه التهاب (خلايا كتير تعكّر السائل). التفسير المقبول (مش في الكتاب): الـ OA أقل من كده بكتير، والـ septic غالبًا أعلى بكتير ومعظمه polymorphs.
+          - **Glucose gap حوالي 30**: الخلايا الملتهبة بتاكل السكر.
+          - **No crystals**: يستبعد الـ gout والـ pseudogout.
+          - **Complement واطي**: التفسير المقبول (مش في الكتاب): الـ immune complexes جوّه المفصل بتستهلك الـ complement.
+      - kind: check
+        page: 259
+        quote: "In inflammatory arthritis:\n - Turbid.\n - WBC‘s 2000 - 50.000 % polymorph 20-70%."
+        question: "Knee aspirate: turbid, WBC 18,000 with 50% polymorphs, poor mucin clot, no crystals, low complement. Best reading?"
+        options: ["Inflammatory arthritis such as RA", "Osteoarthritis", "Gout", "Normal fluid"]
+        answer: 0
+        why:
+          - "صح: كل خانة في جدول الـ inflammatory arthritis بتاع الكتاب."
+          - "الـ OA degenerative، السائل مش turbid ومافيهوش العدد ده."
+          - "الـ gout لازم crystals."
+          - "السائل الطبيعي رايق ومافيهوش خلايا كتير."
       - kind: try
-        items: [rheum.L16.083, rheum.L16.088, rheum.L16.089, rheum.L16.093, rheum.L16.098]
+        items: [rheum.L16.097, rheum.L16.098, rheum.L16.099, rheum.L16.101, rheum.L16.103]
     recap:
-      - "تشخيص / activity (DAS28، VAS، stiffness) / damage (X-ray، HAQ) / safety."
-      - "CRP ممكن يبقى طبيعي في synovitis مفاصل صغيرة."
-      - "RF = antibody ضد Fc الـ IgG. 85% (70% early). titre مالوش prognosis. Rose-Waaler أكتر specific."
-      - "Anti-CCP: filaggrin/citrulline؛ sensitivity 40–70%، specificity 98%؛ early، RF-negative، severity."
-      - "X-ray: periarticular osteoporosis بدري؛ erosions بعدين."
-      - "Fluid: turbid، 2,000–50,000، mucin ضعيف، مفيش crystals، complement واطي."
-    practice: [rheum.L16.083, rheum.L16.084, rheum.L16.085, rheum.L16.086, rheum.L16.087, rheum.L16.088, rheum.L16.089, rheum.L16.090, rheum.L16.091, rheum.L16.092, rheum.L16.093, rheum.L16.094, rheum.L16.095, rheum.L16.096, rheum.L16.097, rheum.L16.098, rheum.L16.099, rheum.L16.100, rheum.L16.101, rheum.L16.102, rheum.L16.103]
+      - "X-ray بدري: soft tissue swelling، periarticular osteoporosis."
+      - "متقدّم: narrowing (غضروف راح)، marginal erosions (pannus من الحرف)، subluxation، deformities."
+      - "Fluid: turbid، WBC 2,000–50,000، polymorphs 20–70%، mucin ضعيف، gap 30، مفيش crystals، complement واطي."
+      - "السائل بيفرّق inflammatory من degenerative (OA) ومن septic."
+    practice: [rheum.L16.097, rheum.L16.098, rheum.L16.099, rheum.L16.100, rheum.L16.101, rheum.L16.102, rheum.L16.103]
   # ------------------------------------------------------------------
   - id: rheum.L16.lesson6
-    title: "العلاج: treat to target بالـ methotrexate"
+    title: "العلاج: بدري، treat to target، والـ NSAIDs"
     hook: "سنتين أول المرض هما اللي بيتهدّ فيهم المفصل. يعني الوقت هنا عضم وغضروف."
     minutes: 10
-    pages: [260, 266]
-    topics: [strategy, nsaids, steroids, csdmards]
+    pages: [260, 263]
+    topics: [strategy, nsaids]
     goals:
+      - "تعرف ليه العلاج بدري ومين يستاهل aggressive"
       - "تمشي في الـ EULAR algorithm بمراحله التلاتة"
-      - "تعرف دور الـ NSAIDs والـ steroids وحدودهم"
-      - "تحفظ جدول الـ csDMARDs: الجرعة، الأعراض، المتابعة"
+      - "تعرف الـ NSAIDs بتعمل إيه وما بتعملش إيه وليه"
     status: unverified
     steps:
       - kind: explain
@@ -745,6 +1220,19 @@ lessons:
           - { key: "R", text: "RF positive" }
           - { key: "S", text: "Systemic (extra-articular) features" }
         hook: "الـ poor prognostic features هي الحاجات اللي بتخلّي الروماتولوجيست عنده **FEARS**، فيضرب بعلاج أقوى."
+      - kind: reveal
+        page: 260
+        quote: "Aggressive treatment for patients with poor prognostic features as:"
+        prompt: "ليه كل حاجة في FEARS بتقول إن المرض هيبقى وحش؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب)، والفكرة كلها إن كل feature دليل إن المناعة **شغالة بقوة**:
+          - **Erosions بدري**: الـ pannus وصل للعضم في وقت قصير، يعني سرعة الهدم عالية.
+          - **Activity عالية** مع functional limitation: التهاب أكتر = ضرر أكتر.
+          - **RF موجب**: مناعة بتعمل antibodies و immune complexes، وده اللي بيعمل الـ nodules والـ vasculitis.
+          - **Extra-articular**: المرض خرج من المفصل، يعني systemic وأقوى.
+          - **Family history of severe RA**: الـ genetic background الشديد (shared epitope).
+
+          والنتيجة اللي الكتاب عايزها: العيان ده ياخد **aggressive treatment** من الأول.
       - kind: figure
         page: 261
         quote: "Phase I: Clinical diagnosis of Rheumatoid Arthritis\n  No contraindication for methotrexate: Start methotrexate\n  + Combine with short-term glucocorticoids (reduce and stop as rapidly as possible)\n  Contraindication for methotrexate: Start leflunomide or sulfasalazine\n  Improved at 3 months and achieved target at 6 months? Yes: Continue → Dose reduction in sustained remission\nPhase II (No):\n  Poor prognostic factors present (RF/ACPA, esp. at high levels; high disease activity; early joint damage; failure of ≥ 2 csDMARDs): Add a bDMARD; Consider use of a JAK-inhibitor only after risk assessment\n  Poor prognostic factors absent: Change to or add a second conventional synthetic DMARD (Leflunomide, sulfasalazine, alone or csDMARD combination (plus glucocorticoids)), then back to Phase I assessment\n  Improved at 3 months and achieved target at 6 months? Yes: Continue → Dose reduction / interval increase in sustained remission; No: Phase III"
@@ -782,20 +1270,6 @@ lessons:
             <text x="20" y="352" class="t-b">Phase III</text>
             <text x="20" y="372" class="t-sm">change the bDMARD or JAKi (same or other class)</text>
           </svg>
-      - kind: explain
-        page: 262
-        title: "الـ footnotes اللي بتيجي في الامتحان"
-        quote: "Phase III:\n  Change the bDMARD or JAK-inhibitor\n  Improved at 3 months and achieved target at 6 months? Yes: Continue → Dose reduction / interval increase in sustained remission; No: change again\nNotes:\n  1. 2010 ACR-EULAR classification criteria can support early diagnosis.\n  2. \"Methotrexate should be part of the first treatment strategy\". While combination therapy of csDMARDs is not preferred by the Task Force, starting with methotrexate does not exclude its use in combination with other csDMARDs although more adverse events without added benefit are to be expected, especially if MTX is combined with glucocorticoids.\n  3. The treatment target is clinical remission according to ACR-EULAR definitions or, if remission is unlikely to be achievable, at least low disease activity; the target should be reached after 6 months, but therapy should be adapted or changed if insufficient improvement (less than 50% of disease activity) is seen after 3 months.\n  4. Sustained remission: ≥ 6 months ACR/EULAR index based or Boolean remission.\n  5. Consider contraindications and risks. TNF-inhibitors (adalimumab, certolizumab, etanercept, golimumab, infliximab, including EMA/FDA approved bsDMARDs), abatacept, IL-6R inhibitors, or rituximab (under certain conditions); in patients who cannot use csDMARDs as comedication IL6-inhibitors and tsDMARDs have some advantages.\n  6. The following risk factors for cardiovascular events and malignancies must be considered when intending to prescribe a JAK-inhibitor: Age over 65 years, history of current or past smoking, other cardiovascular risk factors, other risk factors for malignancy, risk factors for thromboembolic events.\n  7. The most frequently used combination comprises methotrexate, sulfasalazine and hydroxychloroquine.\n  8. Dose reduction or interval increase can be safely done with all bDMARDs and tsDMARDs with little risk of flares; stopping is associated with high flare rates; most but not all patients can recapture their good state upon re-institution of the same bDMARD/tsDMARD, but before all this glucocorticoids must have been discontinued.\n  9. From a different or the same class."
-        text: |
-          - الـ **target**: clinical remission، ولو صعب يبقى على الأقل low disease activity، في **6 شهور**. لو التحسّن ==أقل من 50%== في 3 شهور غيّر.
-          - **Sustained remission** = 6 شهور أو أكتر.
-          - أشهر combination: **Methotrexate (MTX) + sulfasalazine + hydroxychloroquine**.
-          - الـ biologic disease-modifying antirheumatic drug (bDMARD)/tsDMARD ممكن تقلّل جرعته أو تبعّد المسافة بأمان، بس **الإيقاف** بيعمل flares كتير، والـ steroids لازم تقف الأول.
-      - kind: aside
-        tone: exam
-        page: 262
-        quote: "Phase III:\n  Change the bDMARD or JAK-inhibitor\n  Improved at 3 months and achieved target at 6 months? Yes: Continue → Dose reduction / interval increase in sustained remission; No: change again\nNotes:\n  1. 2010 ACR-EULAR classification criteria can support early diagnosis.\n  2. \"Methotrexate should be part of the first treatment strategy\". While combination therapy of csDMARDs is not preferred by the Task Force, starting with methotrexate does not exclude its use in combination with other csDMARDs although more adverse events without added benefit are to be expected, especially if MTX is combined with glucocorticoids.\n  3. The treatment target is clinical remission according to ACR-EULAR definitions or, if remission is unlikely to be achievable, at least low disease activity; the target should be reached after 6 months, but therapy should be adapted or changed if insufficient improvement (less than 50% of disease activity) is seen after 3 months.\n  4. Sustained remission: ≥ 6 months ACR/EULAR index based or Boolean remission.\n  5. Consider contraindications and risks. TNF-inhibitors (adalimumab, certolizumab, etanercept, golimumab, infliximab, including EMA/FDA approved bsDMARDs), abatacept, IL-6R inhibitors, or rituximab (under certain conditions); in patients who cannot use csDMARDs as comedication IL6-inhibitors and tsDMARDs have some advantages.\n  6. The following risk factors for cardiovascular events and malignancies must be considered when intending to prescribe a JAK-inhibitor: Age over 65 years, history of current or past smoking, other cardiovascular risk factors, other risk factors for malignancy, risk factors for thromboembolic events.\n  7. The most frequently used combination comprises methotrexate, sulfasalazine and hydroxychloroquine.\n  8. Dose reduction or interval increase can be safely done with all bDMARDs and tsDMARDs with little risk of flares; stopping is associated with high flare rates; most but not all patients can recapture their good state upon re-institution of the same bDMARD/tsDMARD, but before all this glucocorticoids must have been discontinued.\n  9. From a different or the same class."
-        text: "قبل الـ **Janus kinase (JAK) inhibitor** اسأل عن: سن **فوق 65**، **التدخين** (حالي أو قديم)، cardiovascular (CV) risk، malignancy risk، و thromboembolic risk. ده سؤال امتحان أكيد."
       - kind: check
         page: 261
         quote: "Phase I: Clinical diagnosis of Rheumatoid Arthritis\n  No contraindication for methotrexate: Start methotrexate\n  + Combine with short-term glucocorticoids (reduce and stop as rapidly as possible)\n  Contraindication for methotrexate: Start leflunomide or sulfasalazine\n  Improved at 3 months and achieved target at 6 months? Yes: Continue → Dose reduction in sustained remission\nPhase II (No):\n  Poor prognostic factors present (RF/ACPA, esp. at high levels; high disease activity; early joint damage; failure of ≥ 2 csDMARDs): Add a bDMARD; Consider use of a JAK-inhibitor only after risk assessment\n  Poor prognostic factors absent: Change to or add a second conventional synthetic DMARD (Leflunomide, sulfasalazine, alone or csDMARD combination (plus glucocorticoids)), then back to Phase I assessment\n  Improved at 3 months and achieved target at 6 months? Yes: Continue → Dose reduction / interval increase in sustained remission; No: Phase III"
@@ -808,6 +1282,34 @@ lessons:
           - "فشل الـ target في 6 شهور = غيّر، متكمّلش."
           - "الـ steroids الطويلة أعراضها الجانبية مش مقبولة."
       - kind: explain
+        page: 262
+        title: "الـ footnotes اللي بتيجي في الامتحان"
+        quote: "Phase III:\n  Change the bDMARD or JAK-inhibitor\n  Improved at 3 months and achieved target at 6 months? Yes: Continue → Dose reduction / interval increase in sustained remission; No: change again\nNotes:\n  1. 2010 ACR-EULAR classification criteria can support early diagnosis.\n  2. \"Methotrexate should be part of the first treatment strategy\". While combination therapy of csDMARDs is not preferred by the Task Force, starting with methotrexate does not exclude its use in combination with other csDMARDs although more adverse events without added benefit are to be expected, especially if MTX is combined with glucocorticoids.\n  3. The treatment target is clinical remission according to ACR-EULAR definitions or, if remission is unlikely to be achievable, at least low disease activity; the target should be reached after 6 months, but therapy should be adapted or changed if insufficient improvement (less than 50% of disease activity) is seen after 3 months.\n  4. Sustained remission: ≥ 6 months ACR/EULAR index based or Boolean remission.\n  5. Consider contraindications and risks. TNF-inhibitors (adalimumab, certolizumab, etanercept, golimumab, infliximab, including EMA/FDA approved bsDMARDs), abatacept, IL-6R inhibitors, or rituximab (under certain conditions); in patients who cannot use csDMARDs as comedication IL6-inhibitors and tsDMARDs have some advantages.\n  6. The following risk factors for cardiovascular events and malignancies must be considered when intending to prescribe a JAK-inhibitor: Age over 65 years, history of current or past smoking, other cardiovascular risk factors, other risk factors for malignancy, risk factors for thromboembolic events.\n  7. The most frequently used combination comprises methotrexate, sulfasalazine and hydroxychloroquine.\n  8. Dose reduction or interval increase can be safely done with all bDMARDs and tsDMARDs with little risk of flares; stopping is associated with high flare rates; most but not all patients can recapture their good state upon re-institution of the same bDMARD/tsDMARD, but before all this glucocorticoids must have been discontinued.\n  9. From a different or the same class."
+        text: |
+          - الـ **target**: clinical remission، ولو صعب يبقى على الأقل low disease activity، في **6 شهور**. لو التحسّن ==أقل من 50%== في 3 شهور غيّر.
+          - **Sustained remission** = 6 شهور أو أكتر.
+          - أشهر combination: **Methotrexate (MTX) + sulfasalazine + hydroxychloroquine**.
+          - الـ biologic disease-modifying antirheumatic drug (bDMARD)/tsDMARD ممكن تقلّل جرعته أو تبعّد المسافة بأمان، بس **الإيقاف** بيعمل flares كتير، والـ steroids لازم تقف الأول.
+
+          والـ steroids بتقف الأول لأن أعراضها الجانبية على المدى الطويل مش مقبولة (ص 264).
+      - kind: aside
+        tone: exam
+        page: 262
+        quote: "Phase III:\n  Change the bDMARD or JAK-inhibitor\n  Improved at 3 months and achieved target at 6 months? Yes: Continue → Dose reduction / interval increase in sustained remission; No: change again\nNotes:\n  1. 2010 ACR-EULAR classification criteria can support early diagnosis.\n  2. \"Methotrexate should be part of the first treatment strategy\". While combination therapy of csDMARDs is not preferred by the Task Force, starting with methotrexate does not exclude its use in combination with other csDMARDs although more adverse events without added benefit are to be expected, especially if MTX is combined with glucocorticoids.\n  3. The treatment target is clinical remission according to ACR-EULAR definitions or, if remission is unlikely to be achievable, at least low disease activity; the target should be reached after 6 months, but therapy should be adapted or changed if insufficient improvement (less than 50% of disease activity) is seen after 3 months.\n  4. Sustained remission: ≥ 6 months ACR/EULAR index based or Boolean remission.\n  5. Consider contraindications and risks. TNF-inhibitors (adalimumab, certolizumab, etanercept, golimumab, infliximab, including EMA/FDA approved bsDMARDs), abatacept, IL-6R inhibitors, or rituximab (under certain conditions); in patients who cannot use csDMARDs as comedication IL6-inhibitors and tsDMARDs have some advantages.\n  6. The following risk factors for cardiovascular events and malignancies must be considered when intending to prescribe a JAK-inhibitor: Age over 65 years, history of current or past smoking, other cardiovascular risk factors, other risk factors for malignancy, risk factors for thromboembolic events.\n  7. The most frequently used combination comprises methotrexate, sulfasalazine and hydroxychloroquine.\n  8. Dose reduction or interval increase can be safely done with all bDMARDs and tsDMARDs with little risk of flares; stopping is associated with high flare rates; most but not all patients can recapture their good state upon re-institution of the same bDMARD/tsDMARD, but before all this glucocorticoids must have been discontinued.\n  9. From a different or the same class."
+        text: "قبل الـ **Janus kinase (JAK) inhibitor** اسأل عن: سن **فوق 65**، **التدخين** (حالي أو قديم)، cardiovascular (CV) risk، malignancy risk، و thromboembolic risk. ده سؤال امتحان أكيد."
+      - kind: explain
+        page: 262
+        title: "العلاج الطبيعي: مش رفاهية"
+        quote: "Physical therapy is important\n 1- Passive movement to maintain full range of movement.\n 2- Graded exercise program.\n 3- Heat therapy: Warm pools — paraffin bath.\n 4- Rest splints for v. painful joints.\n 5- Surgery and rehabilitation may be needed."
+        text: |
+          الكتاب بيقول ==physical therapy is important==، وكل بند فيه بيرد على مشكلة شفناها:
+
+          - **Passive movement** يحافظ على الـ full range. التفسير المقبول (مش في الكتاب): المفصل اللي ما بيتحركش يتلم بـ fibrous tissue ويتيبّس (افتكر الـ ankylosis).
+          - **Graded exercise**: ضد الـ **muscle atrophy** جنب المفاصل (ص 243). Graded يعني بالتدريج علشان ما تولّعش الالتهاب.
+          - **Heat** (warm pools، paraffin bath): التفسير المقبول (مش في الكتاب): الحرارة بترخّي العضلات وبتقلّل التيبّس فالحركة تبقى أسهل.
+          - **Rest splints** للمفاصل اللي **بتوجع جدًا**: راحة مؤقتة تهدّي الالتهاب وتسند المفصل في وضع سليم.
+          - **Surgery and rehabilitation** للي حصله ضرر خلاص.
+      - kind: explain
         page: 263
         title: "الـ NSAIDs: مسكّن مش علاج"
         quote: "They control inflammation and pain (analgesic effect).\nThey do not prevent the structural damage."
@@ -817,6 +1319,19 @@ lessons:
           - **COX-1** constitutive: بيحمي الـ gastric mucosa، والـ renal blood flow، والـ platelets.
           - **COX-2** induced في الالتهاب: وقفه هو اللي بيدّي الـ analgesic و anti-inflammatory و antipyretic.
           - الـ selective COX-2 (celecoxib، rofecoxib): مفيش ulcer risk زيادة، بس باقي الأعراض موجودة.
+
+          علشان كده عمرها ما تبقى العلاج الأساسي: بتريّح العيان، بس الـ DMARD هو اللي بيحمي المفصل.
+      - kind: check
+        page: 263
+        quote: "COX -1 is constitutively expressed and produces PG necessary for integrity of gastric mucosa, maintenance renal blood flow and platelet aggregation."
+        question: "Why do selective COX-2 inhibitors cause fewer gastroduodenal ulcers?"
+        options: ["They spare COX-1, which keeps the gastric mucosa intact", "They block COX-1 more strongly", "They raise gastric prostaglandins above normal", "They are not anti-inflammatory"]
+        answer: 0
+        why:
+          - "صح: الـ COX-1 constitutive وبيحمي الـ gastric mucosa؛ الـ selective بيسيبه."
+          - "العكس: لو وقفوا COX-1 كانوا هيعملوا ulcers."
+          - "مش بيعلّوا الـ prostaglandins، بس مش بيمسّوا اللي بيحمي المعدة."
+          - "الـ COX-2 inhibition هو مصدر الـ anti-inflammatory effect أصلًا."
       - kind: update
         page: 263
         quote: "Selective COX-2 inhibitors (Celecoxib and rofecoxib)"
@@ -847,6 +1362,40 @@ lessons:
           4. **Central nervous system (CNS)**: دوخة، صداع، confusion
           5. Asthma و anaphylaxis نادر
           6. الاستخدام الطويل ممكن يسرّع تلف الغضروف والعضم.
+
+          أغلبها سببه إن الـ prostaglandins اللي بتحمي المعدة والكلى اتوقفت مع اللي بتعمل الالتهاب.
+      - kind: reveal
+        page: 263
+        quote: "3- May affect renal function by suppressing vasodilator PGE2 or induce interstitial nephritis."
+        prompt: "ليه الـ NSAIDs ممكن تتعب الكلى والقلب في عيان كبير؟"
+        answer: |
+          الكتاب بيدّيك السبب: بتوقف الـ ==vasodilator PGE2==. التفسير المقبول (مش في الكتاب): الـ PGE2 بيوسّع الشريان الداخل للـ glomerulus، وده مهم جدًا لما الكلية تكون تعبانة أو العيان ناشف أو عنده heart failure. توقفه، الدم الداخل للكلية يقل.
+
+          ومن نفس الطريق تيجي الـ **fluid retention**: الكلية بتمسك ملح ومية ← **circulatory overload** ← القلب يتعب (البند التاني في الكتاب). وكمان ممكن **interstitial nephritis** (حساسية في الكلية).
+      - kind: try
+        items: [rheum.L16.105, rheum.L16.110, rheum.L16.117, rheum.L16.121, rheum.L16.125]
+    recap:
+      - "الـ destruction في أول سنتين."
+      - "FEARS: family history، erosions، activity عالي، RF، systemic features = aggressive treatment."
+      - "EULAR: MTX + steroids قصيرة ← (3 و 6 شهور) ← bDMARD/JAKi لو poor prognosis، أو csDMARD تاني ← غيّر الـ biologic."
+      - "JAKi: افتكر سن فوق 65، تدخين، CV، cancer، VTE."
+      - "Physical therapy: passive movement، graded exercise، heat، rest splints، surgery."
+      - "NSAIDs: مسكّن مش DMARD. COX-1 بيحمي المعدة والكلى والـ platelets. piroxicam و indomethacin أعلى GI risk."
+    practice: [rheum.L16.104, rheum.L16.105, rheum.L16.106, rheum.L16.107, rheum.L16.108, rheum.L16.109, rheum.L16.110, rheum.L16.111, rheum.L16.112, rheum.L16.113, rheum.L16.114, rheum.L16.115, rheum.L16.116, rheum.L16.117, rheum.L16.118, rheum.L16.119, rheum.L16.120, rheum.L16.121, rheum.L16.122, rheum.L16.123, rheum.L16.124, rheum.L16.125, rheum.L16.126, rheum.L16.127, rheum.L16.128]
+  # ------------------------------------------------------------------
+  # Split from lesson6 on 2026-11-13 (#828): steroids and csDMARDs.
+  - id: rheum.L16.lesson11
+    title: "الـ steroids والـ csDMARDs: كوبري ودوا بيغيّر المرض"
+    hook: "الـ steroids بتطفّي النار في يومين، بس الـ DMARD هو اللي بيحمي العضم. اعرف كل دوا ومتابعته ليه."
+    minutes: 9
+    pages: [264, 266]
+    topics: [steroids, csdmards]
+    goals:
+      - "تعرف الـ steroids كـ bridge وليه مش أكتر"
+      - "تقسّم الـ DMARDs وتعرف ليه في أول 12 أسبوع"
+      - "تحفظ جدول الـ csDMARDs: الجرعة، الأعراض، والمتابعة وسببها"
+    status: unverified
+    steps:
       - kind: explain
         page: 264
         title: "الـ steroids: كوبري مش بيت"
@@ -860,6 +1409,68 @@ lessons:
           3. الحمل لما الـ DMARDs ممنوعة.
 
           **Intra-articular**: لمفصل أو اتنين، بتقعد **2-8 أسابيع**، ومش أكتر من **4 في السنة** في المفصل الكبير، و asepsis صارم.
+
+          والـ intra-articular ما يتكرّرش كتير لأن الكتاب بيقول إن الحقن المتكرر بيعمل joint damage.
+      - kind: reveal
+        page: 264
+        quote: "Rapid, short term (1-3m) in control of marked synovitis while awaiting efficacy from DMARDs (Bridge therapy) Use low dose (7.5 mg) of prednisolone or equivalent."
+        prompt: "الـ steroids بتهدّي الالتهاب في يومين. ليه ما نكمّلش عليها وخلاص؟"
+        answer: |
+          الكتاب: الجرعات اللي ==تكفي على المدى الطويل== أعراضها الجانبية **مش مقبولة**: Cushingoid، osteoporosis، سكر، IHD، ضغط، ulcer، glaucoma، cataract.
+
+          فالحل: **كوبري** (bridge). الـ DMARD بياخد أسابيع لحد ما يشتغل، والـ **7.5 mg prednisolone** لمدة **1–3 شهور** بتشيل العيان لحد ما يوصل. التفسير المقبول (مش في الكتاب): الـ steroids بتطفّي النار بس ما بتمنعش الـ erosions زي الـ DMARD، فلو اعتمدت عليها هتدفع تمن أعراضها والمفصل برضه بيتهدّ.
+      - kind: explain
+        page: 264
+        title: "الـ DMARDs: ليه في أول 12 أسبوع؟"
+        quote: "Should be used within 12 w of onset, as joint damage occurs early in disease course."
+        text: |
+          الـ ==DMARDs== بتعمل حاجتين الـ NSAIDs والـ steroids ما بيعملوهمش مع بعض: بتقلّل الـ synovitis **و** بتمنع أو تأخّر الـ **erosion والـ destruction**.
+
+          والسبب في الـ **12 أسبوع** مكتوب: الـ joint damage بيحصل **بدري**. افتكر ص 260: الهدم في أول سنتين.
+
+          الـ DMARDs قسمين:
+          - **Synthetic**: منهم **conventional (csDMARDs)** زي الـ methotrexate، و **targeted (tsDMARDs)** وهم الـ ==JAK inhibitors==.
+          - **Biological (bDMARDs)**: الـ antibodies والـ fusion proteins.
+
+          وبتتاخد لوحدها أو **combination** في المرض الشديد.
+      - kind: figure
+        page: 265
+        quote: "sDMARDS are classified to\n  Conventional sDMARDs (csDMARDs).\n  Targeted sDMARDs (tsDMARDs) to include a new sDMARD janus kinases (JAKi)."
+        title: "شجرة الـ DMARDs"
+        alt: "Tree diagram. DMARDs split into synthetic and biological. Synthetic splits into conventional (methotrexate, sulfasalazine, leflunomide, hydroxychloroquine, azathioprine, ciclosporin) and targeted (JAK inhibitors). Biological: anti-TNF, anakinra, abatacept, rituximab, tocilizumab."
+        caption: "**Synthetic** = جزيئات كيميا (منها الـ conventional والـ targeted). **Biological** = proteins بتتعمل في خلايا حية. الـ JAK inhibitors synthetic بس **targeted**."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="R16t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="120" y="8" width="90" height="30" rx="8" class="fg-acc"/>
+            <text x="165" y="28" text-anchor="middle" class="t-b">DMARDs</text>
+            <path d="M150 38 L80 62" class="fg-arrow" marker-end="url(#R16t)"/>
+            <path d="M180 38 L250 62" class="fg-arrow" marker-end="url(#R16t)"/>
+            <rect x="20" y="64" width="120" height="30" rx="8" class="fg-box"/>
+            <text x="80" y="84" text-anchor="middle" class="t-b">Synthetic</text>
+            <rect x="190" y="64" width="130" height="30" rx="8" class="fg-box"/>
+            <text x="255" y="84" text-anchor="middle" class="t-b">Biological</text>
+            <path d="M60 94 L45 118" class="fg-arrow" marker-end="url(#R16t)"/>
+            <path d="M100 94 L125 118" class="fg-arrow" marker-end="url(#R16t)"/>
+            <rect x="8" y="120" width="92" height="120" rx="8" class="fg-good"/>
+            <text x="54" y="138" text-anchor="middle" class="t-sm t-b">conventional</text>
+            <text x="16" y="158" class="t-sm">MTX</text>
+            <text x="16" y="174" class="t-sm">SSZ</text>
+            <text x="16" y="190" class="t-sm">LEF</text>
+            <text x="16" y="206" class="t-sm">HCQ</text>
+            <text x="16" y="222" class="t-sm">AZA, CsA</text>
+            <rect x="106" y="120" width="76" height="60" rx="8" class="fg-acc"/>
+            <text x="144" y="138" text-anchor="middle" class="t-sm t-b">targeted</text>
+            <text x="144" y="156" text-anchor="middle" class="t-sm">JAK</text>
+            <text x="144" y="171" text-anchor="middle" class="t-sm">inhibitors</text>
+            <path d="M255 94 L255 118" class="fg-arrow" marker-end="url(#R16t)"/>
+            <rect x="192" y="120" width="128" height="120" rx="8" class="fg-bad"/>
+            <text x="202" y="140" class="t-sm">anti-TNF (5)</text>
+            <text x="202" y="160" class="t-sm">anakinra</text>
+            <text x="202" y="180" class="t-sm">abatacept</text>
+            <text x="202" y="200" class="t-sm">rituximab</text>
+            <text x="202" y="220" class="t-sm">tocilizumab</text>
+          </svg>
       - kind: table
         page: 265
         quote: "| Drug | Use and action | dose | Principal side effects | Monitoring | Frequency of monitoring |\n|---|---|---|---|---|---|\n| Methotexate (MTX) | 1st choice drug methotretate inhibits purine synthesis through inhibition of dihydrofolate reductase. It also inhibits AICAR transformylase leading to increases in its substrate AICAR which stimulate the release of adenosine. Adenosine is a potent inhibitor of neutrophil function and has potent anti inflammatory properties. | 5-25 mg-week | GI upset, stomatitis, rash, alopecia, hepatotoxicity, acute pneumonitis, Bone marrow toxicity. Folic acid (1mg/d) reduce side effects. | CBC, LFT | Monthly |\n| Sulphasalazine | First choice drug (almost as effective as methotrexate) Immunomodulator | 2-3 gm/day | Nausea, GI diarrhea upset, rash, hepatitis, Neutropenia, pancytopenia. | CBC, LFT | Monthly for 3 months and then every 3 months |\n| Leflunomide | As effective as the first two but expensive. Used when methotrexate is not tolerated, contraindicated or in addition to MTX. Immunosuppressive leflunomide inhibits dihydroorotate dehydrogenase leading to decrease in de novo. Synthesis of pyrimidines and arrest activated lymphocyte cell division in G1 stage | 20 mg/day often a loading dose of 100 mg/d for 3 days. | Nausea, GI upset, rash, alopecia, hepatitis, hypertension | CBC, LFT, Blood pressure | 6-12 month |\n| Hydroxychloroquine | Weak antirheumatic drug for mild RA or combination therapy. Slower onset of action. They inhibit antigen presentation by HLA. They inhibit platelet aggre gation and adhesion | 200-400 mg/d | Rash, nausea, diarrhea, headache, corneal deposits, and retinopathy | Visual acuity, Amsler chart, Fundoscopy | |"
@@ -884,6 +1495,27 @@ lessons:
           وكمان بيوقف الـ **aminoimidazole carboxamide ribonucleotide (AICAR) transformylase**، فالـ AICAR يتجمع ويطلّع ==adenosine==، وده anti-inflammatory جامد وبيوقف الـ neutrophils.
 
           **Folic acid 1 mg/day** بيقلّل الأعراض الجانبية.
+
+          التفسير المقبول (مش في الكتاب): أعراض زي الـ stomatitis والـ marrow toxicity سببها نقص الـ folate في الخلايا اللي بتتقسم بسرعة، فالـ folic acid بيعوّضها من غير ما يلغي الـ adenosine اللي بيعمل الـ anti-inflammatory effect.
+      - kind: explain
+        page: 265
+        title: "باقي الـ csDMARDs: كل متابعة ليها سبب"
+        quote: "leflunomide inhibits dihydroorotate dehydrogenase leading to decrease in de novo. Synthesis of pyrimidines and arrest activated lymphocyte cell division in G1 stage"
+        text: |
+          - **Sulfasalazine**: first choice، **almost as effective as methotrexate**، immunomodulator. ممكن يعمل **neutropenia و pancytopenia** و hepatitis، فالمتابعة CBC و LFT كل شهر لـ 3 شهور وبعدين كل 3.
+          - **Leflunomide**: زي الاتنين في الفعالية بس غالي؛ لما الـ MTX ما ينفعش أو معاه. بيوقف ==dihydroorotate dehydrogenase== فالـ **de novo pyrimidines** تقل والـ lymphocyte المتنشّط يقف في **G1**. التفسير المقبول (مش في الكتاب): الخلية الهادية تكفيها الـ pyrimidines المعاد استخدامها، بس الـ lymphocyte اللي بيتكاثر بسرعة محتاج يصنع جديد، فهو اللي بيقع. وبيعمل **hypertension**، علشان كده الـ **BP** في متابعته.
+          - **Hydroxychloroquine**: weak، للـ **mild RA** أو combination، و slower onset. بيوقف الـ antigen presentation بالـ HLA وكمان الـ platelet aggregation. وبيعمل **corneal deposits و retinopathy**، علشان كده متابعته ==visual acuity و Amsler chart و fundoscopy== مش تحاليل دم.
+      - kind: check
+        page: 265
+        quote: "Hydroxychloroquine Weak antirheumatic drug 200-400 Rash, nausea, Visual for mild RA or mg/d diarrhea, acuity combination therapy headache, corneal Amsler"
+        question: "Which csDMARD is monitored with visual acuity, an Amsler chart and fundoscopy?"
+        options: ["Hydroxychloroquine", "Methotrexate", "Leflunomide", "Sulfasalazine"]
+        answer: 0
+        why:
+          - "صح: الـ HCQ بيعمل corneal deposits و retinopathy، فبتتابع العين."
+          - "الـ MTX متابعته CBC و LFT شهري (marrow، كبد)."
+          - "الـ LEF متابعته CBC و LFT و BP."
+          - "الـ SSZ متابعته CBC و LFT."
       - kind: match
         page: 265
         quote: "Immunosuppressive leflunomide inhibits dihydroorotate dehydrogenase leading to decrease in de novo."
@@ -900,28 +1532,37 @@ lessons:
         page: 266
         quote: "| Drug | Use and action | dose | Principal side effects | Monitoring | Frequency of monitoring |\n|---|---|---|---|---|---|\n| D-penicillamine and Gold | Now not first choice for RA because of toxicity and very slow onset of action. | | | Bone marrow suppression, nephritis, rash, mouth ulcers. | |\n| Azathioprine (Immuran) | 2nd choice in RA used for steroid spraring effect. Immunosuppressive. Inhibit purine metabolism | 50-150mg/d | GI upset stomatitis, heaptitis, myelosuppression | CBC-LFT | Initially weekly then monthly. |\n| Cyclosporine | 2nd choice in RA. Immunosuppressive blocks resting lymphocytes in Go or G1 phase of cell cycle, inhibiting lymphokine production and release. | 2.5-4/mg/kg/d | Nausea, GI upset, Hypatotoxicity, Renal impairment, Hypertension. | CBC-LFT, creatinine, blood pressure. | 2-4 weekly. |"
         text: "الـ **gold** والـ **D-penicillamine** خلاص اتقاعدوا: toxic (marrow، nephritis، rash، mouth ulcers) وبطيئين جدًا. الـ **azathioprine** والـ **cyclosporine** = 2nd choice."
+      - kind: check
+        page: 266
+        quote: "Renal impairment, blood"
+        question: "Your RA patient starts ciclosporin. What do you add to CBC and LFT, and why?"
+        options: ["Creatinine and blood pressure: renal impairment and hypertension", "Amsler chart: retinopathy", "Chest X-ray: pneumonitis", "Lipid profile: hypercholesterolaemia"]
+        answer: 0
+        why:
+          - "صح: الكتاب: الـ ciclosporin بيعمل renal impairment و hypertension، فبتتابع الـ creatinine والضغط."
+          - "الـ Amsler للـ hydroxychloroquine."
+          - "الـ acute pneumonitis في الكتاب مع الـ methotrexate."
+          - "الـ lipids اتذكرت مع الـ tocilizumab مش الـ ciclosporin."
       - kind: try
-        items: [rheum.L16.105, rheum.L16.110, rheum.L16.125, rheum.L16.129, rheum.L16.137]
+        items: [rheum.L16.127, rheum.L16.129, rheum.L16.133, rheum.L16.137, rheum.L16.141]
     recap:
-      - "الـ destruction في أول سنتين؛ DMARD في أول 12 أسبوع."
-      - "FEARS: family history، erosions، activity عالي، RF، systemic features."
-      - "EULAR: MTX + steroids قصيرة ← (3 و 6 شهور) ← bDMARD/JAKi لو poor prognosis، أو csDMARD تاني ← غيّر الـ biologic."
-      - "JAKi: افتكر سن فوق 65، تدخين، CV، cancer، VTE."
-      - "NSAIDs: مسكّن مش DMARD. piroxicam و indomethacin أعلى GI risk."
-      - "Steroids: bridge 7.5 mg لمدة 1–3 شهور؛ IA مش أكتر من 4 في السنة."
-      - "MTX 5–25 mg/أسبوع + folic acid؛ LEF 20 mg (BP)؛ HCQ (العين)؛ CsA (الكلى، الضغط)."
-    practice: [rheum.L16.104, rheum.L16.105, rheum.L16.106, rheum.L16.107, rheum.L16.108, rheum.L16.109, rheum.L16.110, rheum.L16.111, rheum.L16.112, rheum.L16.113, rheum.L16.114, rheum.L16.115, rheum.L16.116, rheum.L16.117, rheum.L16.118, rheum.L16.119, rheum.L16.120, rheum.L16.121, rheum.L16.122, rheum.L16.123, rheum.L16.124, rheum.L16.125, rheum.L16.126, rheum.L16.127, rheum.L16.128, rheum.L16.129, rheum.L16.130, rheum.L16.131, rheum.L16.132, rheum.L16.133, rheum.L16.134, rheum.L16.135, rheum.L16.136, rheum.L16.137, rheum.L16.138, rheum.L16.139, rheum.L16.140, rheum.L16.141, rheum.L16.142, rheum.L16.143, rheum.L16.144, rheum.L16.145, rheum.L16.146, rheum.L16.147, rheum.L16.148, rheum.L16.149]
+      - "Steroids: bridge 7.5 mg لمدة 1–3 شهور؛ vasculitis، عين، رئة؛ الحمل. IA مش أكتر من 4 في السنة."
+      - "DMARDs: تقلّل الـ synovitis وتمنع الـ erosions؛ في أول 12 أسبوع."
+      - "sDMARDs (cs + ts = JAKi) و bDMARDs."
+      - "MTX 5–25 mg/أسبوع + folic acid؛ DHFR و adenosine."
+      - "SSZ (CBC، LFT)؛ LEF 20 mg (pyrimidines، BP)؛ HCQ (العين)؛ AZA (purines)؛ CsA (الكلى، الضغط)."
+    practice: [rheum.L16.129, rheum.L16.130, rheum.L16.131, rheum.L16.132, rheum.L16.133, rheum.L16.134, rheum.L16.135, rheum.L16.136, rheum.L16.137, rheum.L16.138, rheum.L16.139, rheum.L16.140, rheum.L16.141, rheum.L16.142, rheum.L16.143, rheum.L16.144, rheum.L16.145, rheum.L16.146, rheum.L16.147, rheum.L16.148, rheum.L16.149]
   # ------------------------------------------------------------------
   - id: rheum.L16.lesson7
-    title: "الـ biologics والـ JAK: منيو الأهداف"
-    hook: "كل biologic بيضرب نقطة واحدة في خريطة الـ cytokines اللي رسمناها في أول درس. اختار طبقك."
-    minutes: 10
-    pages: [266, 277]
-    topics: [anti-tnf, other-biologics, jak, biosimilars]
+    title: "الـ anti-TNF: خمسة على هدف واحد"
+    hook: "الـ TNF هو الراس اللي بتشغّل الهدم. خمس أدوية بتقطعه، واسم كل واحد بيقولك هو معمول من إيه."
+    minutes: 9
+    pages: [266, 269]
+    topics: [anti-tnf]
     goals:
-      - "تربط كل biologic بهدفه وتركيبه"
-      - "تحفظ الأعراض الجانبية للـ anti-TNF وإزاي تعمل TB screening"
-      - "تعرف الـ JAK inhibitors وتحذيرات ORAL Surveillance، وتعرّف الـ biosimilar"
+      - "تعرف تركيب كل anti-TNF من اسمه وليه الـ infliximab محتاج MTX"
+      - "تحفظ جرعات الـ anti-TNF"
+      - "تحفظ الأعراض الجانبية وإزاي تعمل TB screening وليه"
     status: unverified
     steps:
       - kind: figure
@@ -968,6 +1609,29 @@ lessons:
           بياخد **3 mg/kg** IV على ساعتين: أسبوع 0 و 2 و 6، وبعدين كل **8 أسابيع**. ممكن يوصل 10 mg/kg كل 4 أسابيع.
 
           وبيموّت الخلايا اللي عليها tumour necrosis factor (TNF) بالـ antibody-dependent cell-mediated cytotoxicity (ADCC) والـ complement.
+      - kind: explain
+        page: 268
+        title: "اقرا الاسم تعرف التركيب"
+        quote: "Chimeric IgG1 anti TNF antibody containing the antigen-binding region of the mouse antibody (one fourth of the molecule) and the constant region of the human antibody."
+        text: |
+          الكتاب بيوصف تركيب كل واحد، والاسم بيساعدك تفتكره. التفسير المقبول (مش في الكتاب): آخر الاسم بيقول قد إيه الجزيء "فار":
+
+          - **-ximab** = ==chimeric==: الـ **infliximab** (ربعه فار)، والـ rituximab كمان.
+          - **-zumab** = **humanized**: حتة صغيرة جدًا بس من الفار. الـ **certolizumab** (Fab' fragment عليه polyethylene glycol) والـ tocilizumab.
+          - **-umab** = **human** بالكامل: الـ **adalimumab** والـ **golimumab**.
+          - **-cept** = **receptor** ملزوق في Fc: الـ ==etanercept== (TNF receptor type II، p75، على Fc بتاع IgG1)، والـ abatacept.
+
+          وكل ما الجزيء "إنساني" أكتر، الجسم أقل يعمل antibodies ضده. علشان كده الـ infliximab بالذات هو اللي محتاج methotrexate.
+      - kind: match
+        page: 268
+        quote: "Soluble TNF receptor fusion protein."
+        prompt: "وصّل كل anti-TNF بتركيبه:"
+        pairs:
+          - ["Infliximab", "Chimeric IgG1 antibody"]
+          - ["Etanercept", "Soluble TNF receptor fusion protein"]
+          - ["Adalimumab", "Recombinant human IgG1 antibody"]
+          - ["Certolizumab pegol", "Humanized Fab' with polyethylene glycol"]
+        why: "Infliximab = -ximab (chimeric). Etanercept = -cept (receptor). Adalimumab = -umab (human). Certolizumab = -zumab (humanized) و pegol = الـ polyethylene glycol."
       - kind: table
         page: 268
         quote: "C- Adalimumab (Humira)\n  Recombinant human IgG1 monoclonal antibody.\n  Subcut 40 mg every other week."
@@ -979,6 +1643,14 @@ lessons:
           - ["Golimumab", "50 mg SC monthly"]
           - ["Certoli\u00adzumab", "400 mg wk 0, 2, 4; then 200 mg every 2 wk"]
         hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: reveal
+        page: 268
+        quote: "This fusion protein binds both TNF- and TNFB preventing interaction with receptors."
+        prompt: "الـ etanercept ينفع لوحده (monotherapy)، والـ infliximab لأ. ليه؟ وإيه اللي بيعمله الـ etanercept زيادة؟"
+        answer: |
+          الـ **infliximab** فيه ==ربع فار== (mouse antigen-binding region)، فالكتاب بيقول لازم methotrexate يمنع الـ antibodies ضده. الـ **etanercept** معمول من receptor إنساني على Fc إنساني، فممكن **monotherapy أو مع MTX**.
+
+          والـ etanercept **receptor عايم** (decoy): بيمسك ==TNF-α و TNF-β== الاتنين قبل ما يوصلوا للـ receptor الحقيقي. الـ infliximab بيمسك الـ TNF-α، وكمان **بيقتل** الخلايا اللي عليها TNF بالـ ADCC والـ complement.
       - kind: mnemonic
         page: 269
         quote: "Infections:\n  Serious bacterial infections, TB, fungal, atypical mycobacteria."
@@ -1001,11 +1673,21 @@ lessons:
           2. موجب والـ Chest X-ray (CXR) طبيعي ← ==isoniazid 300 mg + B6 50 mg لمدة 9 شهور== مع الـ anti-TNF.
 
           وكمان: وقّفه **1-2 أسبوع قبل العملية** وارجعله بعدها بأسبوعين. ووقّفه في الـ upper respiratory tract infection (URTI) أو skin infection وارجعله.
+
+          يعني الـ screening مش روتين: الدوا نفسه هو اللي ممكن يصحّي الـ TB.
       - kind: update
         page: 269
         quote: "If positive and chest X-ray normal: isonazid (300 mg) and vit B6 (50mg) for 9 month with anti TNF.\n  Upper Resp tract infection or skin infections and ulcer with held then restart.\n  Withheld 1 or 2 weeks before surgery restarted 2 weeks later."
         text: "الـ guidelines الحالية بتفضّل regimens أقصر للـ latent TB: 3HP (isoniazid + rifapentine أسبوعي 3 شهور)، أو 4R (rifampicin 4 شهور)، أو three months of daily isoniazid plus rifampicin (3HR). في الامتحان: الكتاب = isoniazid (INH) 9 شهور."
         ref: "NTCA/CDC latent TB treatment guidelines, 2020"
+      - kind: reveal
+        page: 269
+        quote: "Withheld 1 or 2 weeks before surgery restarted 2 weeks later."
+        prompt: "ليه بنوقف الـ anti-TNF قبل العملية بأسبوع أو اتنين، ونرجع بعدها بأسبوعين؟ (withheld before surgery)"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ TNF جزء أساسي من دفاع الجسم ضد البكتيريا ومن التئام الجرح. العملية = جرح مفتوح وخطر infection، فبنستنى الدوا يقل في الدم قبل العملية، ونرجع بعد ما الجرح يقفل.
+
+          ونفس المنطق في الكتاب مع **upper respiratory tract infection أو skin infection**: وقّف، عالج، ارجع. لأن البند الأول في أعراضه الجانبية **serious infections**.
       - kind: check
         page: 269
         quote: "Multiple sclerosis:\n  Exacerbation and development of new DS has been reported.\n  Should be avoided in D.S."
@@ -1017,6 +1699,56 @@ lessons:
           - "الكتاب ما ذكرش demyelination مع الـ rituximab."
           - "الكتاب ما ذكرش demyelination مع الـ abatacept."
           - "الكتاب ما ذكرش demyelination مع الـ tocilizumab."
+      - kind: try
+        items: [rheum.L16.151, rheum.L16.155, rheum.L16.159, rheum.L16.162, rheum.L16.165]
+    recap:
+      - "5 anti-TNF: infliximab (chimeric، لازم MTX)، etanercept (receptor، TNF-α و β)، adalimumab و golimumab (human)، certolizumab (pegylated Fab')."
+      - "Anti-TNF: LAMPS + LFT و cytopenia."
+      - "TB: QuantiFERON أو PPD؛ موجب + CXR طبيعي = INH + B6 9 شهور."
+      - "وقّفه 1–2 أسبوع قبل العملية وارجع بعد أسبوعين؛ ممنوع في MS."
+    practice: [rheum.L16.150, rheum.L16.151, rheum.L16.152, rheum.L16.153, rheum.L16.154, rheum.L16.155, rheum.L16.156, rheum.L16.157, rheum.L16.158, rheum.L16.159, rheum.L16.160, rheum.L16.161, rheum.L16.162, rheum.L16.163, rheum.L16.164, rheum.L16.165, rheum.L16.166, rheum.L16.204]
+  # ------------------------------------------------------------------
+  # Split from lesson7 on 2026-11-13 (#828): anakinra, abatacept, rituximab, tocilizumab.
+  - id: rheum.L16.lesson12
+    title: "باقي الـ biologics: IL-1 و CD80/86 و CD20 و IL-6"
+    hook: "كل biologic بيقفل باب واحد. اعرف الباب، تعرف هو بيفيد في إيه وبيأذي في إيه."
+    minutes: 9
+    pages: [270, 272]
+    topics: [other-biologics]
+    goals:
+      - "تربط كل biologic بهدفه"
+      - "تفهم ليه ما بنجمعش الـ biologics، وليه الـ rituximab مالوش TB"
+      - "تعرف فوايد الـ tocilizumab وأعراضه، وليه الـ CRP بيضحك عليك"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 270
+        quote: "Blocks activation of T lymphocytes by competing with binding of costimulatroy molecule CD28 on surface of T cells to CD80/CD86 on antigen presenting cells."
+        title: "كل biologic بيقفل باب"
+        alt: "Diagram of four targets. An antigen-presenting cell touches a T cell: CD80/86 on the APC binds CD28 on the T cell, and abatacept sits in between. A B cell carries CD20, which rituximab binds. An IL-1 receptor is blocked by anakinra. An IL-6 receptor is blocked by tocilizumab."
+        caption: "**Abatacept** بيقعد بين الـ CD80/86 والـ CD28 فالـ T cell ما ياخدش الإشارة التانية. **Rituximab** على الـ ==CD20==. **Anakinra** على الـ IL-1 receptor، و **tocilizumab** على الـ IL-6 receptor."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="70" r="45" class="fg-acc"/>
+            <text x="60" y="66" text-anchor="middle" class="t-b">APC</text>
+            <text x="60" y="84" text-anchor="middle" class="t-sm">CD80/86</text>
+            <circle cx="210" cy="70" r="45" class="fg-acc"/>
+            <text x="210" y="66" text-anchor="middle" class="t-b">T cell</text>
+            <text x="210" y="84" text-anchor="middle" class="t-sm">CD28</text>
+            <rect x="105" y="55" width="62" height="30" rx="6" class="fg-bad"/>
+            <text x="136" y="75" text-anchor="middle" class="t-sm t-b">abatacept</text>
+            <circle cx="60" cy="185" r="40" class="fg-good"/>
+            <text x="60" y="182" text-anchor="middle" class="t-b">B cell</text>
+            <text x="60" y="199" text-anchor="middle" class="t-sm">CD20</text>
+            <rect x="104" y="170" width="70" height="30" rx="6" class="fg-bad"/>
+            <text x="139" y="190" text-anchor="middle" class="t-sm t-b">rituximab</text>
+            <rect x="190" y="140" width="130" height="40" rx="8" class="fg-box"/>
+            <text x="200" y="157" class="t-sm t-b">IL-1 receptor</text>
+            <text x="200" y="173" class="t-sm t-bad">anakinra</text>
+            <rect x="190" y="195" width="130" height="40" rx="8" class="fg-box"/>
+            <text x="200" y="212" class="t-sm t-b">IL-6 receptor</text>
+            <text x="200" y="228" class="t-sm t-bad">tocilizumab</text>
+          </svg>
       - kind: explain
         page: 270
         title: "Anakinra و abatacept"
@@ -1025,6 +1757,16 @@ lessons:
           **Anakinra** (IL-1Ra): بينافس الـ IL-1 على الـ receptor. **أضعف من الـ anti-TNF** وحقنة **كل يوم**. infections بكتيرية (مش opportunistic)، injection site، neutropenia و thrombocytopenia قابلين للرجوع، ومع الـ anti-TNF infections شديدة.
 
           **Abatacept** (CTLA4-Ig): بيمسك ==CD80/CD86== على الـ antigen-presenting cell (APC) قبل الـ **CD28** ما يمسكها، فالـ T cell ما بيشتغلش (costimulation blockade). **10 mg/kg** IV: 3 مرات كل أسبوعين وبعدين كل شهر. آمن لوحده أو مع methotrexate (MTX)، بس **مع الـ anti-TNF infections كتير**.
+
+          يعني الـ abatacept بيوقف الـ T cell **قبل** ما يشتغل، مش بيضرب cytokine بعد ما يطلع.
+      - kind: reveal
+        page: 270
+        quote: "Alone or with methotrexate-good safety profile but with anti TNF high level of infections."
+        prompt: "الكتاب بيقول الـ anakinra والـ abatacept مع الـ anti-TNF = infections شديدة. ليه ما نجمعش الـ biologics عشان نضرب المرض أقوى؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): كل biologic بيقفل باب من أبواب المناعة. لو قفلت بابين في نفس الوقت، الجسم بيفقد خطّين دفاع ضد البكتيريا مع بعض، والفايدة على المفصل ما بتزيدش قد الخطر.
+
+          علشان كده القاعدة: biologic **واحد** + methotrexate. والـ **anakinra** كمان ==أضعف من الـ anti-TNF== وبيحتاج حقنة **كل يوم**، فمكانه محدود في الـ RA.
       - kind: explain
         page: 271
         title: "Rituximab: امسح الـ B cells"
@@ -1037,6 +1779,25 @@ lessons:
           الـ **pro-B** والـ **plasma cells** ما عليهمش CD20، فالـ Ig بيقل (خصوصًا Immunoglobulin M (IgM)) بس ==يفضل طبيعي==.
 
           الكورس: **2 infusions × 1 g**، بينهم أسبوعين؛ وتعيد بعد 7-23 شهر. infusion reactions (premedicate بـ steroids)، ومفيش TB ولا opportunistic.
+      - kind: reveal
+        page: 271
+        quote: "Infection rates within range reported in RA. Common infections – No TB-no opportunistic infections."
+        prompt: "ليه الـ rituximab مش بيصحّي الـ TB زي الـ anti-TNF؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ TB محبوسة جوّه **granuloma** معمولة من macrophages و T cells، والـ **TNF** هو الأسمنت اللي ماسكها (افتكر الـ TB screening قبل الـ anti-TNF ص 269). الـ rituximab بيمسح الـ ==B cells== بس، والـ granuloma ما بتعتمدش عليهم، فتفضل قافلة.
+
+          علشان كده الكتاب بيقول infections الـ rituximab **في حدود اللي في الـ RA نفسه**: common infections، **no TB، no opportunistic**.
+      - kind: check
+        page: 271
+        quote: "Single course of 2 IV infusions.\n - 1 g each- 2 weeks apart.\n - Further courses after 7 to 23 months according to disease activity."
+        question: "What is one course of rituximab for refractory RA in the book?"
+        options: ["2 IV infusions of 1 g, 2 weeks apart", "1 g IV every month", "40 mg SC every other week", "8 mg/kg IV monthly"]
+        answer: 0
+        why:
+          - "صح: كورس واحد = 2 × 1 g بينهم أسبوعين، وتعيد بعد 7–23 شهر حسب الـ activity."
+          - "مش شهري: الـ B cell depletion بيقعد أكتر من 6 شهور."
+          - "ده الـ adalimumab."
+          - "ده الـ tocilizumab."
       - kind: explain
         page: 272
         title: "Tocilizumab: اقفل الـ IL-6"
@@ -1050,6 +1811,14 @@ lessons:
           - الـ osteoporosis (يوقف الـ osteoclasts).
 
           **8 mg/kg** IV كل شهر، والاستجابة في **أسبوعين**.
+      - kind: reveal
+        page: 272
+        quote: "Induction of acute phase protein synthesis."
+        prompt: "عيان على tocilizumab عنده سخونية والـ CRP طبيعي. تطمّن؟"
+        answer: |
+          لأ. الكتاب بيقولك إن الـ tocilizumab بيمنع الـ ==IL-6 induced acute phase protein synthesis==، والـ CRP واحد منهم (افتكر الـ IL-6 → ESR و CRP من أول درس).
+
+          التفسير المقبول (مش في الكتاب): يعني الـ CRP **مش هيعلى** حتى لو فيه infection، وده خطر لأن الـ infections (ومنها **TB**) أول أعراضه الجانبية. افحص العيان نفسه، ما تعتمدش على الرقم.
       - kind: sort
         page: 272
         quote: "Side Effects\n  Infections including TB.\n  As immunomodulator may increase the risk of malignancy.\n  Hypersensitivity reactions.\n  Hepatic transaminase elevation.\n  Hematological: neutropenia and thrombocytopenia.\n  Lipids: elevation chol an TG.\n  Complication of diverticulitis: perforations."
@@ -1063,6 +1832,81 @@ lessons:
           - { text: "No TB, no opportunistic infection", bin: 2 }
           - { text: "Infusion reactions, steroid premedication", bin: 2 }
         why: "Tocilizumab: lipids و diverticular perforation (وكمان transaminases و cytopenias). Anti-TNF: MS و autoantibodies. Rituximab: infections في حدود الـ RA من غير TB، و infusion reactions."
+      - kind: check
+        page: 272
+        quote: "Complication of diverticulitis: perforations."
+        question: "Which side effect is listed for tocilizumab in the book?"
+        options: ["Perforation complicating diverticulitis", "Worsening multiple sclerosis", "Drug-induced lupus", "Retinopathy"]
+        answer: 0
+        why:
+          - "صح: وكمان lipids و transaminases و neutropenia و thrombocytopenia."
+          - "الـ MS مع الـ anti-TNF."
+          - "الـ autoantibodies (و lupus نادر) مع الـ anti-TNF."
+          - "الـ retinopathy مع الـ hydroxychloroquine."
+      - kind: try
+        items: [rheum.L16.168, rheum.L16.171, rheum.L16.174, rheum.L16.179, rheum.L16.183]
+    recap:
+      - "Anakinra = IL-1Ra يومي وأضعف من الـ anti-TNF."
+      - "Abatacept = CTLA4-Ig ضد CD80/86 (costimulation)؛ مع anti-TNF infections كتير."
+      - "Rituximab = anti-CD20؛ 2 × 1 g بينهم أسبوعين؛ الـ plasma cells سليمة؛ مفيش TB ولا opportunistic."
+      - "Tocilizumab = anti-IL-6R: الأنيميا تتحسّن (hepcidin)؛ CRP مش هيعلى؛ lipids، diverticular perforation."
+    practice: [rheum.L16.167, rheum.L16.168, rheum.L16.169, rheum.L16.170, rheum.L16.171, rheum.L16.172, rheum.L16.173, rheum.L16.174, rheum.L16.175, rheum.L16.176, rheum.L16.177, rheum.L16.178, rheum.L16.179, rheum.L16.180, rheum.L16.181, rheum.L16.182, rheum.L16.183, rheum.L16.184]
+  # ------------------------------------------------------------------
+  # Split from lesson7 on 2026-11-13 (#828): JAK inhibitors and biosimilars.
+  - id: rheum.L16.lesson13
+    title: "الـ JAK inhibitors والـ biosimilars"
+    hook: "بدل ما تقفل cytokine واحد من برّه، ادخل جوّه الخلية واقفل الكابل اللي كلهم بيمشوا فيه. بس اقرا التحذيرات."
+    minutes: 9
+    pages: [273, 277]
+    topics: [jak, biosimilars]
+    goals:
+      - "تشرح الـ JAK-STAT وليه الـ JAKi oral ومن غير antibodies"
+      - "تعرف الـ JAK inhibitors وأعراضهم وسببها"
+      - "تعرّف الـ biosimilar وليه مش generic"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 273
+        title: "ليه ندخل جوّه الخلية؟"
+        quote: "Our knowledge of the intracellular pathways downstream of cytokine receptors has greatly increased, and the inhibition of intracellular enzymes such as receptor-associated kinases is a novel way to simultaneously inhibit multiple cytokines."
+        text: |
+          كل biologic في الدرس اللي فات بيقفل **cytokine واحد** أو receptor واحد من برّه. الكتاب بيقول إن فهمنا للي بيحصل **جوّه** الخلية بعد الـ receptor زاد، وإن وقف الـ ==receptor-associated kinases== طريقة جديدة توقف **cytokines كتير في نفس الوقت**.
+
+          وميزتين تانيين من الكتاب، وكل واحدة ليها سبب:
+          - **Non-protein molecule**: مفيش **neutralizing antibodies**. التفسير المقبول (مش في الكتاب): الجسم بيعمل antibodies ضد الـ proteins الغريبة (زي الحتة الفار في الـ infliximab)، مش ضد جزيء كيميا صغير.
+          - **Oral**: مفيش حقن، ومفيش **allergic reactions** زي الـ infusion reactions.
+
+          إزاي الـ cytokine بيوصّل رسالته: بيمسك الـ receptor ← الـ **JAK** يتفعّل بالـ phosphorylation ويعمل phosphorylation للـ receptor.
+      - kind: figure
+        page: 274
+        quote: "JAK inhibitors are small molecules that bind to JAKs preventing ATP binding and subsequent intracellular signalling"
+        title: "الـ JAK-STAT والقفل"
+        alt: "A cytokine binds its receptor on the cell membrane. Two JAKs sit on the inside of the receptor and phosphorylate it. STAT proteins are phosphorylated, pair up as a dimer and enter the nucleus to switch on genes. A JAK inhibitor sits in the ATP pocket of the JAK, so the chain stops."
+        caption: "الـ cytokine برّه ← الـ **JAK** جوّه يشتغل بالـ ATP ← **STAT** يتعمل dimer ويدخل النواة. الـ ==JAK inhibitor== بياخد مكان الـ **ATP**، فالسلسلة كلها تقف."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="R16j" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <circle cx="165" cy="22" r="14" class="fg-dot-acc"/>
+            <text x="190" y="27" class="t-sm">cytokine</text>
+            <path d="M10 60 L320 60" class="fg-ink"/>
+            <path d="M10 70 L320 70" class="fg-ink"/>
+            <text x="16" y="54" class="t-sm t-mut">membrane</text>
+            <rect x="150" y="38" width="30" height="60" rx="6" class="fg-acc"/>
+            <rect x="100" y="82" width="46" height="30" rx="8" class="fg-box"/>
+            <text x="123" y="102" text-anchor="middle" class="t-sm t-b">JAK</text>
+            <rect x="184" y="82" width="46" height="30" rx="8" class="fg-box"/>
+            <text x="207" y="102" text-anchor="middle" class="t-sm t-b">JAK</text>
+            <rect x="240" y="80" width="84" height="38" rx="8" class="fg-bad"/>
+            <text x="282" y="96" text-anchor="middle" class="t-sm t-b">JAKi</text>
+            <text x="282" y="111" text-anchor="middle" class="t-sm">in ATP site</text>
+            <path d="M165 115 L165 145" class="fg-arrow" marker-end="url(#R16j)"/>
+            <rect x="110" y="148" width="110" height="30" rx="8" class="fg-good"/>
+            <text x="165" y="168" text-anchor="middle" class="t-sm t-b">STAT-P dimer</text>
+            <path d="M165 178 L165 205" class="fg-arrow" marker-end="url(#R16j)"/>
+            <ellipse cx="165" cy="235" rx="110" ry="28" class="fg-thin"/>
+            <text x="165" y="232" text-anchor="middle" class="t-sm t-b">Nucleus</text>
+            <text x="165" y="248" text-anchor="middle" class="t-sm">gene transcription</text>
+          </svg>
       - kind: explain
         remind: [rheum.L16.188]
         page: 274
@@ -1077,6 +1921,8 @@ lessons:
           الـ ==JAK inhibitors== جزيئات صغيرة بتقعد مكان الـ **adenosine triphosphate (ATP)** في الـ JAK، فالسلسلة كلها تقف. 4 janus kinases (JAKs): **JAK1، JAK2، JAK3، tyrosine kinase 2 (TYK2)**.
 
           ميزتهم: **oral**، مش protein فمفيش neutralizing antibodies ولا allergy، وبيوقفوا cytokines كتير مرّة واحدة.
+
+          يعني دوا واحد بيقفل الطريق اللي cytokines كتير بتمشي فيه، علشان كده تأثيره واسع وأعراضه كمان واسعة.
       - kind: match
         page: 275
         quote: "Xeljanz (tofacitinib) JAK1/JAK2/JAK3 is indicated for the treatment of rheumatoid arthritis, psoriatic arthritis, ankylosing spondylitis, ulcerative colitis and juvenile idiopathic arthritis."
@@ -1087,6 +1933,14 @@ lessons:
           - ["Upadacitinib (Rinvoq)", "JAK1 (with PsA, AS)"]
           - ["Filgotinib (Jyseleca)", "JAK1 (with UC)"]
         why: "Tofacitinib الأوسع (1/2/3). Baricitinib 1/2 (و atopic dermatitis و alopecia). Upadacitinib و filgotinib JAK1. الـ US Food and Drug Administration (FDA) وافقت لـ RA على tofacitinib و baricitinib و upadacitinib."
+      - kind: reveal
+        page: 275
+        quote: "Key cytokines involved in RA pathophysiology signal through JAKs"
+        prompt: "ليه الـ JAK inhibitors ممكن تغيّر الـ haemoglobin والـ neutrophils والـ lymphocytes؟"
+        answer: |
+          بص على جدول الكتاب في ص 275: كل receptor بيشتغل بـ JAKs معيّنة. الـ **EPO** والـ **TPO** والـ **GM-CSF** والـ IL-3 والـ IL-5 بيشتغلوا على ==JAK2==، وشغلتهم erythropoiesis و myelopoiesis و platelets. والـ γ-chain cytokines (IL-2، IL-7، IL-15…) على **JAK1/JAK3**، وشغلتهم نمو الـ lymphocytes.
+
+          فلما تقفل الـ JAK علشان توقف الـ cytokines بتاعة الالتهاب، بتلمس كمان الإشارات اللي بتعمل الدم. علشان كده الكتاب بيكتب في الأعراض: **potential changes in lymphocytes, neutrophils, hemoglobin**.
       - kind: explain
         remind: [rheum.L16.191]
         page: 276
@@ -1103,6 +1957,16 @@ lessons:
           والـ **baricitinib** (دراسة B023 observational): MACE و VTE أكتر.
 
           غير كده: URTI، صداع، إسهال، **herpes zoster** زيادة، lipids و liver enzymes، تغيّرات في الـ lymphocytes والـ neutrophils والـ Hb، gastrointestinal (GI) perforation، و **ممنوع live vaccines**.
+
+          علشان كده قبل أي JAK inhibitor بتسأل عن السن والتدخين والـ CV risk (الـ EULAR footnote ص 262).
+      - kind: reveal
+        page: 276
+        quote: "Increased incidence of herpes Zooster is reported."
+        prompt: "ليه الـ herpes zoster بالذات بيزيد مع الـ JAK inhibitors؟ وليه ممنوع live vaccines؟"
+        answer: |
+          في جدول ص 275 الـ **type 1 IFNs** والـ IFN-γ بيشتغلوا على JAK1 و TYK2 و JAK2، وشغلتهم **antiviral**.
+
+          التفسير المقبول (مش في الكتاب): الـ varicella zoster virus نايم في العقد العصبية من وانت صغير، والـ interferons هي اللي ماسكاه. اقفلها، يصحى ويطلع ==zoster==. ونفس المنطق مع الـ **live vaccines**: الفيروس المضعّف في اللقاح ممكن يعمل عدوى حقيقية لما الـ antiviral defence يقل.
       - kind: aside
         tone: joke
         page: 276
@@ -1121,6 +1985,14 @@ lessons:
           - ==مش generic== ولا biomimetic ولا biocopy.
           - موجود لـ infliximab و adalimumab و etanercept و rituximab.
           - تجربة واحدة في indication واحد تكفي للـ **extrapolation** للباقي، وبيرخّص العلاج.
+      - kind: reveal
+        page: 277
+        quote: "A Biosimilar is not a biomimetic a biocopy or a generic."
+        prompt: "ليه الـ biosimilar مش generic، مع إنه نسخة؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ **generic** جزيء كيميا صغير، تقدر تصنعه **مطابق** ذرّة بذرّة. الـ biological protein كبير ومعمول جوّه **خلايا حية**، وكل مصنع وكل batch بيطلع فيه فروق صغيرة (السكريات اللي عليه مثلًا)، فمستحيل تعمله "نفس الشيء" بالظبط.
+
+          علشان كده الكتاب بيطلب **stepwise approach** و ==totality of the evidence==: تثبت إن مفيش **clinically meaningful differences**، مش إنه مطابق. ولما يثبت، الكتاب بيقول إنه بيرخّص العلاج ويوسّع الوصول له.
       - kind: check
         page: 277
         quote: "A Biosimilar is not a biomimetic a biocopy or a generic."
@@ -1137,13 +2009,11 @@ lessons:
           - "لا أحسن ولا أوحش في الـ efficacy."
           - "مش محتاج، الـ extrapolation مسموح."
       - kind: try
-        items: [rheum.L16.151, rheum.L16.159, rheum.L16.172, rheum.L16.189, rheum.L16.206]
+        items: [rheum.L16.186, rheum.L16.189, rheum.L16.191, rheum.L16.196, rheum.L16.199]
     recap:
-      - "5 anti-TNF؛ infliximab chimeric لازم MTX؛ etanercept fusion protein (TNF-α و β)."
-      - "Anti-TNF: LAMPS + LFT و cytopenia. TB: QuantiFERON؛ موجب + CXR طبيعي = INH + B6 9 شهور."
-      - "وقّفه 1–2 أسبوع قبل العملية؛ ممنوع في MS."
-      - "Anakinra = IL-1Ra يومي وأضعف. Abatacept = CTLA4-Ig ضد CD80/86. Rituximab = anti-CD20، الـ plasma cells سليمة."
-      - "Tocilizumab = anti-IL-6R: الأنيميا تتحسّن (hepcidin)؛ lipids، diverticular perforation."
-      - "JAKi: tofacitinib، baricitinib، upadacitinib (FDA لـ RA)؛ ORAL Surveillance: MACE، cancer، VTE، وفيات، infections."
+      - "JAKi: بيوقف cytokines كتير مرة واحدة؛ non-protein (مفيش antibodies)، oral (مفيش allergy)."
+      - "Cytokine ← JAK ← STAT dimer ← النواة. الـ JAKi مكان الـ ATP. JAK1، JAK2، JAK3، TYK2."
+      - "Tofacitinib 1/2/3، baricitinib 1/2، upadacitinib و filgotinib JAK1."
+      - "ORAL Surveillance: MACE، cancer، VTE، وفيات، infections. Zoster، ممنوع live vaccines."
       - "Biosimilar: نسخة من biological، لا أحسن ولا أوحش، مش generic، extrapolation مسموح."
-    practice: [rheum.L16.150, rheum.L16.151, rheum.L16.152, rheum.L16.153, rheum.L16.154, rheum.L16.155, rheum.L16.156, rheum.L16.157, rheum.L16.158, rheum.L16.159, rheum.L16.160, rheum.L16.161, rheum.L16.162, rheum.L16.163, rheum.L16.164, rheum.L16.165, rheum.L16.166, rheum.L16.167, rheum.L16.168, rheum.L16.169, rheum.L16.170, rheum.L16.171, rheum.L16.172, rheum.L16.173, rheum.L16.174, rheum.L16.175, rheum.L16.176, rheum.L16.177, rheum.L16.178, rheum.L16.179, rheum.L16.180, rheum.L16.181, rheum.L16.182, rheum.L16.183, rheum.L16.184, rheum.L16.185, rheum.L16.186, rheum.L16.187, rheum.L16.188, rheum.L16.189, rheum.L16.190, rheum.L16.191, rheum.L16.192, rheum.L16.193, rheum.L16.194, rheum.L16.195, rheum.L16.196, rheum.L16.197, rheum.L16.198, rheum.L16.199, rheum.L16.200, rheum.L16.201, rheum.L16.204, rheum.L16.206, rheum.L16.207]
+    practice: [rheum.L16.185, rheum.L16.186, rheum.L16.187, rheum.L16.188, rheum.L16.189, rheum.L16.190, rheum.L16.191, rheum.L16.192, rheum.L16.193, rheum.L16.194, rheum.L16.195, rheum.L16.196, rheum.L16.197, rheum.L16.198, rheum.L16.199, rheum.L16.200, rheum.L16.201, rheum.L16.206, rheum.L16.207]

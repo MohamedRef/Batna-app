@@ -30,5 +30,14 @@ if [ -n "$book" ]; then
   bad=1
 fi
 
+# A stray file from a mistyped shell command (#817): no tracked path may
+# contain shell characters (| ; { } ` $ < >), and no root file a space.
+odd="$(git ls-files | grep -E '[|;{}`$<>]|^[^/]* ' || true)"
+if [ -n "$odd" ]; then
+  echo "A tracked path contains shell characters or a root file name has a space (a mistyped command's leftover?):"
+  head -5 <<<"$odd"
+  bad=1
+fi
+
 [ "$bad" -eq 0 ] || { echo "Remove them with git rm --cached and add them to .gitignore."; exit 1; }
 echo "Tracked files: no build output, no book text, nothing over 5 MB"

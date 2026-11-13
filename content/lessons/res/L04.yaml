@@ -5,15 +5,28 @@ lessons:
   - id: res.L04.lesson1
     title: "تختار الـ study design إزاي؟"
     hook: "نفس السؤال ممكن تجاوبه بـ case report أو بـ randomized controlled trial (RCT). الفرق بينهم هو الفرق بين «حكاية» و«دليل»."
-    minutes: 11
-    pages: [3, 15]
-    topics: [designs, hierarchy]
+    minutes: 9
+    pages: [3, 11]
+    topics: [designs]
     goals:
       - "تفرّق بين prevalence و incidence من غير تفكير"
       - "تعرف الـ 6 عوامل اللي بتحدد الـ design"
       - "ترسم شجرة الـ designs: experimental ولا observational، وبعدين descriptive ولا analytic"
     status: unverified
     steps:
+      - kind: explain
+        page: 3
+        quote: "Different study types in medical research\nMedical research:\n  Primary research:\n    Basic research: Theoretical (method development: physics, chemistry, biology, bioinformatics, biometrics, psychology; analytical measurement procedure; imaging procedure; biometric procedure; test development, assessment procedure); Applied (animal study, cell study, genetic engineering/gene sequencing, biochemistry, material development, genetic studies)\n    Clinical research: Experimental (clinical study; phase I, II, III and IV study); Observational (therapy study without intervention, prognostic study, diagnostic study, observational study with drugs, secondary data analysis, case series, single case report)\n    Epidemiological research: Experimental (intervention study, field study, group study); Observational (cohort study: prospective, historical; case control study; cross-sectional study; ecological study; monitoring, surveillance; description with registry data)\n  Secondary research: Meta-analysis; Review (systematic, simple (narrative))\nClassification of different study types"
+        title: "Primary ولا secondary؟"
+        text: |
+          قبل الـ designs، المحاضرة بتقسم **medical research** نصين:
+
+          - ==Primary research==: الباحث بيجمع الداتا بتاعته. وليه 3 فروع: **basic** (theoretical و applied زي animal و cell studies)، و**clinical** (experimental زي phase I–IV، و observational زي case series و single case report)، و**epidemiological** (experimental: intervention و field و group studies؛ و observational: ==cohort و case-control و cross-sectional و ecological== و surveillance).
+          - ==Secondary research==: بتلخّص دراسات اتعملت قبل كده: **meta-analysis** و**review** (systematic أو simple narrative).
+
+          الدكتورة قالت في الشرح: الدراسة الأصلية ممكن تستخدم سجلات موجودة وتفضل primary؛ اللي بيخليها secondary إنها بتجمع **دراسات** تانية.
+
+          وفي الشرح كمان: الفرق بين observational و experimental هو **دور الباحث**. لو هو اللي حدد مين ياخد الـ exposure يبقى experimental. وجود دوا في عنوان البحث لوحده ما يخليهوش trial. ودكتورة سحر في المراجعة شبّهتها بنبتتين: واحدة حطّتها في الشمس والتانية في الضل، هي اللي حددت الـ exposure، فده intervention. والـ intervention مش لازم يبقى دوا: برنامج تثقيف صحي أو طريقة تعليم الباحث هو اللي وزّعها برضه intervention.
       - kind: explain
         page: 7
         quote: "Introduction:\n  The scientific value and quality of information provided by a medical research are determined to a major extent by the study design.\n  Health researchers use both observational (descriptive and analytic) and experimental study designs to answer research questions.\n  Each type of design represents a different way of collecting the necessary information."
@@ -84,6 +97,16 @@ lessons:
           - { key: "T", text: "Talent: skills and creativity of the researcher" }
           - { key: "S", text: "Safety: ethical considerations" }
         hook: "قبل ما تختار design اسأل نفسك: أنا **KNOWTS** إيه؟ (knows بلكنة صعيدي 😄)"
+      - kind: reveal
+        page: 9
+        quote: "Depending on the existing state of knowledge about a\nproblem that is being studied, different types of questions\nmay be asked which require different study designs."
+        prompt: "ليه مفيش design واحد «أحسن» لكل الأبحاث؟"
+        answer: |
+          لأن ==حالة المعرفة الحالية== عن المشكلة بتحدد نوع السؤال اللي ينفع يتسأل، وكل نوع سؤال محتاج design مختلف (slide 9).
+
+          بالإنجليزي: depending on the existing state of knowledge، different types of questions require different study designs.
+
+          لو مش عارفين حاجة عن المشكلة، السؤال «إيه اللي بيحصل؟» ← descriptive. لو عندنا فرضية، السؤال «ده سبب ده؟» ← analytic. ولو عارفين السبب وعايزين نجرّب علاج ← experimental. التفسير المقبول (مش في الكتاب) للأمثلة.
       - kind: explain
         page: 10
         quote: "Research questions and study types\n| State of knowledge of the problem | Type of research questions | Type of study |\n|---|---|---|\n| Knowing that a problem exists but knowing little about its characteristics or possible causes. | What is the nature/magnitude of the problem? Who is affected? How do the affected people behave? What do they know, believe, think about the problem and its causes? | Exploratory studies, or Descriptive studies: Descriptive case studies; Cross-sectional surveys |\n| Suspecting that certain factors contribute to the problem. | Are certain factors indeed associated with the problem? (e.g., Is lack of pre-school education related to low school performance? Is low fibre diet related to carcinoma of the large intestine?) | Analytical (comparative) studies: Cross-sectional comparative studies; Case-control studies; Cohort studies |\n| Having established that certain factors are associated with the problem: desiring to establish the extent to which a particular factor causes or contributes to the problem. | What is the cause of the problem? Will the removal of a particular factor prevent or reduce the problem? (e.g., stopping smoking, providing safe water) | Cohort studies; Experimental or quasi-experimental studies |\n| Having sufficient knowledge about cause(s) to develop and assess an intervention that would prevent, control or solve the problem. | What is the effect of a particular intervention/strategy? (e.g., treating with a particular drug; being exposed to a certain type of health education) Which of two alternate strategies gives better results? Which strategy is most cost-effective? | Experimental or quasi-experimental studies |"
@@ -136,6 +159,27 @@ lessons:
           الدكتورة سألت: «عايزين نعرف **burden** المرض علشان resource allocation، نعمل إيه؟» الإجابة **cross-sectional**.
 
           كلمة **burden** = **prevalence** = cross-sectional. اربطهم في دماغك سلسلة واحدة، دي أول سطر في جدول الـ **ideal study designs according to purpose**.
+      - kind: try
+        items: [res.L04.005, res.L04.008, res.L04.009, res.L04.010]
+    recap:
+      - "**Prevalence** = كل الحالات ÷ الكل في وقت معين (proportion). **Incidence** = الجديد ÷ الـ at risk على مدة (rate)."
+      - "الـ design بيحدده: **KNOWTS** (knowledge، nature، objectives، time/resources، talent، safety/ethics)."
+      - "معرفة قليلة ← descriptive. عوامل مشكوك فيها ← analytic. سبب معروف ← experimental."
+      - "**Burden/prevalence ← cross-sectional**. Natural history ← cohort. Prevent / alter course ← randomised trial."
+    practice: [res.L04.001, res.L04.002, res.L04.003, res.L04.004, res.L04.005, res.L04.006, res.L04.007, res.L04.008, res.L04.009, res.L04.059, res.L04.060]
+
+  # ------------------------------------------------------------------
+  - id: res.L04.lesson5
+    title: "شجرة الـ designs وهرم الأدلة"
+    hook: "سؤال واحد بيفرز أي دراسة: الباحث هو اللي اختار مين يتعرض؟ وبعدها: فيه comparison group؟"
+    minutes: 6
+    pages: [12, 15]
+    topics: [designs, hierarchy]
+    goals:
+      - "تفرز أي دراسة: experimental ولا observational، descriptive ولا analytic"
+      - "ترتّب الأدلة من الأقوى للأضعف"
+    status: unverified
+    steps:
       - kind: figure
         page: 13
         quote: "Overview of Epidemiologic Study Designs:\n  EXPERIMENTAL: Random allocation of study subjects; Investigator assigns treatment or exposure:\n    Randomized Control Trials\n    Community Trials\n    Laboratory Trials\n  OBSERVATIONAL: Investigators study people and exposures \"in nature\". Comparison Group?\n    NO, DESCRIPTIVE: Correlational; Case Series; Case Reports; Cross-Sectional\n    YES, ANALYTIC: Case-Control; Cohort"
@@ -182,6 +226,17 @@ lessons:
             <text x="267" y="302" text-anchor="middle" class="t-sm">Cohort</text>
             <text x="267" y="342" text-anchor="middle" class="t-sm t-mut">test hypotheses</text>
           </svg>
+      - kind: check
+        page: 13
+        quote: "Overview of Epidemiologic Study Designs:\n  EXPERIMENTAL: Random allocation of study subjects; Investigator assigns treatment or exposure:\n    Randomized Control Trials\n    Community Trials\n    Laboratory Trials\n  OBSERVATIONAL: Investigators study people and exposures \"in nature\". Comparison Group?\n    NO, DESCRIPTIVE: Correlational; Case Series; Case Reports; Cross-Sectional\n    YES, ANALYTIC: Case-Control; Cohort"
+        question: "A cross-sectional survey with no comparison group belongs to which branch?"
+        options: ["Experimental", "Observational, analytic", "Observational, descriptive", "Secondary research"]
+        answer: 2
+        why:
+          - "الباحث ما حددش الـ exposure لحد، فهو مش experimental."
+          - "الـ analytic محتاج **comparison group**."
+          - "صح: observational ومفيش comparison group = **descriptive**."
+          - "الـ secondary زي systematic review و meta-analysis، بتجمع دراسات تانية."
       - kind: explain
         page: 12
         quote: "Hierarchy of Scientific Evidence (levels of evidence, top to bottom):\n  Secondary, pre-appraised or filtered studies:\n    Clinical Practice Guidelines\n    Meta-Analysis, Systematic Reviews\n  Primary studies:\n    Level 1, Experimental: Randomized Controlled Trial. Prospective: tests treatment\n    Level 2, Nonexperimental observational: Cohort Studies. Prospective: cohort has been exposed to a risk; observe for outcome of interest\n    Level 3, Nonexperimental observational: Case Control Studies. Retrospective: subjects have the outcome of interest; looking for risk factor\n  Level 4, No design: Case Report or Case Series; Narrative reviews, expert opinions, or editorials\n  Level 5, Not involved with humans: Animal and Laboratory Studies\n(©2016 Forrest & Miller, EBDM in Action; Developing Competence in EB Practice)"
@@ -197,6 +252,14 @@ lessons:
           - تحت خالص: narrative reviews و expert opinions و editorials.
 
           الدكتورة نبّهت في الشرح: قوة الاستنتاج مش بالاسم بس. **جودة التنفيذ** ونوع السؤال بيفرقوا، ومش أي حاجة اسمها systematic review تبقى قوية أوتوماتيك.
+      - kind: reveal
+        page: 12
+        quote: "Hierarchy of Scientific Evidence (levels of evidence, top to bottom):\n  Secondary, pre-appraised or filtered studies:\n    Clinical Practice Guidelines\n    Meta-Analysis, Systematic Reviews\n  Primary studies:\n    Level 1, Experimental: Randomized Controlled Trial. Prospective: tests treatment\n    Level 2, Nonexperimental observational: Cohort Studies. Prospective: cohort has been exposed to a risk; observe for outcome of interest\n    Level 3, Nonexperimental observational: Case Control Studies. Retrospective: subjects have the outcome of interest; looking for risk factor\n  Level 4, No design: Case Report or Case Series; Narrative reviews, expert opinions, or editorials\n  Level 5, Not involved with humans: Animal and Laboratory Studies\n(©2016 Forrest & Miller, EBDM in Action; Developing Competence in EB Practice)"
+        prompt: "ليه الـ randomized controlled trial فوق الـ case report في الهرم؟"
+        answer: |
+          كل ما تطلع لفوق، الـ design بيقفل باب أكتر من أبواب الغلط: الـ case report عيان واحد من غير مقارنة، الـ observational analytic فيه comparison group بس الناس اختاروا الـ exposure بنفسهم، والـ RCT الباحث بيوزّع الـ exposure بالـ random allocation فالمجموعتين شبه بعض في كل حاجة تانية.
+
+          علشان كده الدليل الأعلى هو اللي أقل احتمال إن حاجة تانية غير الـ exposure تكون هي السبب. التفسير المقبول (مش في الكتاب).
       - kind: order
         page: 12
         quote: "Hierarchy of Scientific Evidence (levels of evidence, top to bottom):\n  Secondary, pre-appraised or filtered studies:\n    Clinical Practice Guidelines\n    Meta-Analysis, Systematic Reviews\n  Primary studies:\n    Level 1, Experimental: Randomized Controlled Trial. Prospective: tests treatment\n    Level 2, Nonexperimental observational: Cohort Studies. Prospective: cohort has been exposed to a risk; observe for outcome of interest\n    Level 3, Nonexperimental observational: Case Control Studies. Retrospective: subjects have the outcome of interest; looking for risk factor\n  Level 4, No design: Case Report or Case Series; Narrative reviews, expert opinions, or editorials\n  Level 5, Not involved with humans: Animal and Laboratory Studies\n(©2016 Forrest & Miller, EBDM in Action; Developing Competence in EB Practice)"
@@ -209,30 +272,6 @@ lessons:
           - "Case report or case series"
           - "Expert opinion"
         why: "الـ secondary فوق، وبعدين الـ RCT (experimental)، وبعدين cohort قبل case-control، والـ case report بلا design، والرأي تحت الكل."
-      - kind: check
-        page: 13
-        quote: "Overview of Epidemiologic Study Designs:\n  EXPERIMENTAL: Random allocation of study subjects; Investigator assigns treatment or exposure:\n    Randomized Control Trials\n    Community Trials\n    Laboratory Trials\n  OBSERVATIONAL: Investigators study people and exposures \"in nature\". Comparison Group?\n    NO, DESCRIPTIVE: Correlational; Case Series; Case Reports; Cross-Sectional\n    YES, ANALYTIC: Case-Control; Cohort"
-        question: "A cross-sectional survey with no comparison group belongs to which branch?"
-        options: ["Experimental", "Observational, analytic", "Observational, descriptive", "Secondary research"]
-        answer: 2
-        why:
-          - "الباحث ما حددش الـ exposure لحد، فهو مش experimental."
-          - "الـ analytic محتاج **comparison group**."
-          - "صح: observational ومفيش comparison group = **descriptive**."
-          - "الـ secondary زي systematic review و meta-analysis، بتجمع دراسات تانية."
-      - kind: explain
-        page: 3
-        quote: "Different study types in medical research\nMedical research:\n  Primary research:\n    Basic research: Theoretical (method development: physics, chemistry, biology, bioinformatics, biometrics, psychology; analytical measurement procedure; imaging procedure; biometric procedure; test development, assessment procedure); Applied (animal study, cell study, genetic engineering/gene sequencing, biochemistry, material development, genetic studies)\n    Clinical research: Experimental (clinical study; phase I, II, III and IV study); Observational (therapy study without intervention, prognostic study, diagnostic study, observational study with drugs, secondary data analysis, case series, single case report)\n    Epidemiological research: Experimental (intervention study, field study, group study); Observational (cohort study: prospective, historical; case control study; cross-sectional study; ecological study; monitoring, surveillance; description with registry data)\n  Secondary research: Meta-analysis; Review (systematic, simple (narrative))\nClassification of different study types"
-        title: "Primary ولا secondary؟"
-        text: |
-          قبل الـ designs، المحاضرة بتقسم **medical research** نصين:
-
-          - ==Primary research==: الباحث بيجمع الداتا بتاعته. وليه 3 فروع: **basic** (theoretical و applied زي animal و cell studies)، و**clinical** (experimental زي phase I–IV، و observational زي case series و single case report)، و**epidemiological** (experimental: intervention و field و group studies؛ و observational: ==cohort و case-control و cross-sectional و ecological== و surveillance).
-          - ==Secondary research==: بتلخّص دراسات اتعملت قبل كده: **meta-analysis** و**review** (systematic أو simple narrative).
-
-          الدكتورة قالت في الشرح: الدراسة الأصلية ممكن تستخدم سجلات موجودة وتفضل primary؛ اللي بيخليها secondary إنها بتجمع **دراسات** تانية.
-
-          وفي الشرح كمان: الفرق بين observational و experimental هو **دور الباحث**. لو هو اللي حدد مين ياخد الـ exposure يبقى experimental. وجود دوا في عنوان البحث لوحده ما يخليهوش trial. ودكتورة سحر في المراجعة شبّهتها بنبتتين: واحدة حطّتها في الشمس والتانية في الضل، هي اللي حددت الـ exposure، فده intervention. والـ intervention مش لازم يبقى دوا: برنامج تثقيف صحي أو طريقة تعليم الباحث هو اللي وزّعها برضه intervention.
       - kind: table
         page: 15
         quote: "Epidemiologic studies ask five questions (5 Ws): what, who, where, when, and why.\nThe Five Ws of Epidemiology Studies:\n  What = Clinical\n  Who = Person\n  Where = Place\n  When = Time\n  (Who, Where, When: Disease pattern)\n  What, Who, Where, When: Descriptive Epidemiology\n  Why / How = Causes, Risk factors, Modes of transmission: Analytic Epidemiology"
@@ -254,20 +293,17 @@ lessons:
 
           الوصف بيولّد hypothesis، بس لوحده ما يثبتش causation.
       - kind: try
-        items: [res.L04.005, res.L04.008, res.L04.010, res.L04.060, res.L04.062]
+        items: [res.L04.060, res.L04.062, res.L04.012]
     recap:
-      - "**Prevalence** = كل الحالات ÷ الكل في وقت معين (proportion). **Incidence** = الجديد ÷ الـ at risk على مدة (rate)."
-      - "الـ design بيحدده: **KNOWTS** (knowledge، nature، objectives، time/resources، talent، safety/ethics)."
-      - "معرفة قليلة ← descriptive. عوامل مشكوك فيها ← analytic. سبب معروف ← experimental."
-      - "**Burden/prevalence ← cross-sectional**. Natural history ← cohort. Prevent / alter course ← randomised trial."
-      - "سؤالين بيصنفوا أي study: الباحث حدد الـ exposure؟ وفي comparison group؟"
-    practice: [res.L04.001, res.L04.002, res.L04.003, res.L04.004, res.L04.005, res.L04.006, res.L04.007, res.L04.008, res.L04.009, res.L04.010, res.L04.011, res.L04.012, res.L04.013, res.L04.014, res.L04.015, res.L04.059, res.L04.060, res.L04.061, res.L04.062]
-
+      - "Experimental: الباحث بيوزّع الـ exposure. Observational: الناس «in nature»."
+      - "Observational من غير comparison group = descriptive؛ بيها = analytic."
+      - "الـ descriptive بيجاوب: what، who، where، when (person، place، time)."
+    practice: [res.L04.010, res.L04.011, res.L04.012, res.L04.013, res.L04.014, res.L04.015, res.L04.061, res.L04.062]
   # ------------------------------------------------------------------
   - id: res.L04.lesson2
     title: "الـ ecological study وفخ الـ fallacy"
     hook: "البلاد اللي بتاكل دهون أكتر عندها breast cancer أكتر. يبقى جارتك اللي بتحب الفطير المشلتت في خطر؟ مش بالضرورة!"
-    minutes: 8
+    minutes: 10
     pages: [16, 33]
     topics: [descriptive, ecological]
     goals:
@@ -333,6 +369,29 @@ lessons:
           - { text: "Cigarette manufacture vs lung cancer deaths (35-44 y) across countries", bin: 0 }
           - { text: "Non-steroidal anti-inflammatory drug (NSAID) use vs colorectal cancer over the years", bin: 1 }
         why: "مقارنة **بلاد** في نفس الوقت = geographical. نفس المكان على مر **السنين** = time trend. وخلي بالك: الـ non-steroidal anti-inflammatory drugs (NSAIDs) **negative** correlation، والاتنين التانيين **positive**."
+      - kind: check
+        page: 20
+        quote: "Correlation between fat intake and breast cancer by country:\n  Countries with high fat calories intake are associated with higher incidence of breast cancer\n  +ve correlation\n  Geographical study"
+        question: "Countries with high fat calorie intake have higher breast cancer incidence. What type of study is this?"
+        options:
+          - "Geographical (ecological) study, positive correlation"
+          - "Time-trend ecological study"
+          - "Cross-sectional survey"
+          - "Case series"
+        answer: 0
+        why:
+          - "صح: slide 20، مقارنة بلاد ببعض في نفس الوقت بداتا على مستوى البلد = geographical، والاتنين بيزيدوا مع بعض = +ve correlation."
+          - "الـ time-trend بيتابع منطقة واحدة على سنين، مش بلاد كتير."
+          - "الـ cross-sectional بيقيس الـ exposure والمرض في الأفراد."
+          - "الـ case series بيوصف عيانين، مش بلاد."
+      - kind: reveal
+        page: 21
+        quote: "Countries with higher\ncigarettes manufacture\nrates are associated with\nhigher lung cancer deaths\nof middle age 35-44 years\nPositive correlation\nGeographical study"
+        prompt: "بلاد فيها cigarettes manufacture أعلى عندها lung cancer deaths أعلى في سن 35-44. نقدر نقول إن الراجل اللي بيدخّن هيجيله cancer؟"
+        answer: |
+          لأ، مش من الدراسة دي. ده ==geographical study== بـ **positive correlation** (slide 21): الوحدة اللي اتقاست هي **البلد**، مش الشخص.
+
+          مانعرفش اللي ماتوا هما نفس اللي دخّنوا. وده بالظبط المدخل للـ **ecological fallacy** اللي جاي.
       - kind: explain
         page: 23
         quote: "The data on exposure (independent) and the outcome (dependent) variables should be at the same level of aggregation (e.g time period, city, region, country, continent)\nThe studies often use data previously collected for alternative purpose (secondary data source). These data are either from records of primary care, secondary care (hospitals), mortality or census data, infectious disease notification data, or national survey data\nWhile using routinely collected data makes ecological studies less time consuming and less expensive than if the data was systematically collected, however the data is less accurate and may be of poor quality"
@@ -353,6 +412,16 @@ lessons:
           - ==Resource allocation== وبرامج الـ health promotion.
           - ==Generate hypotheses== عن عوامل بيئية.
           - خصائص المكان: تلوث الهوا، الحرارة، المناخ.
+      - kind: explain
+        page: 24
+        quote: "Despite having many advantages, there are several\nmethodological issues in the design of an ecological study.\nThese issues may have an impact on the causal inferences we\ncan draw from our data.\nThe major source of error in ecological studies is the\necological fallacy."
+        title: "مشاكل الـ design"
+        text: |
+          الـ ecological study ليه مزايا كتير، بس فيه ==methodological issues== في تصميمه، وبتأثر على الـ **causal inferences** اللي نقدر نطلعها.
+
+          وأكبر مصدر للغلط فيه: ==ecological fallacy==.
+
+          ليه هو بالذات؟ لأن كل الداتا متوسطات مجموعات، فأي استنتاج عن الفرد بيبني على معلومة ماتقاستش أصلًا. التفسير المقبول (مش في الكتاب).
       - kind: explain
         page: 25
         quote: "The weakness of ecological approach is that exposure and disease are measured at the population (group) level.\nEcological fallacy (Definition) is a logic error in the interpretation of statistical data. Drawing conclusions about specific individuals based on the analysis of aggregate data on the larger group.\nThere is assumption that all members of a given population share the same exposure and same risk of disease. Hence caution must be exercised in drawing causal inferences/conclusions for the individual based on the results of an ecological study.\nThe term \"ecological fallacy\" is applied to such conclusions, since the true relation between exposure and disease is distorted by the inability to control for the confounding variables."
@@ -432,17 +501,26 @@ lessons:
 
   # ------------------------------------------------------------------
   - id: res.L04.lesson3
-    title: "الـ r، والـ case report، والـ exploratory"
+    title: "الـ correlation coefficient (r)"
     hook: "r = −1 أقوى ولا +0.9؟ وليه عم الحاج اللي بياكل 25 بيضة في اليوم يستاهل case report؟"
-    minutes: 9
-    pages: [29, 41]
-    topics: [correlation, case-reports, exploratory]
+    minutes: 6
+    pages: [28, 32]
+    topics: [correlation]
     goals:
       - "تقرا قيمة r وتعرف إنها مش causation"
       - "تفرّق بين case report و case series"
       - "تعرف الـ merits والـ limitations والـ publication bias"
     status: unverified
     steps:
+      - kind: explain
+        page: 28
+        quote: "Correlation: The strength and direction of the association between two variables. Correlation DOES NOT mean causation.\nCorrelation coefficient (r): A statistic designed to measure the direction and strength of association between two variables."
+        title: "يعني إيه correlation؟"
+        text: |
+          - **Correlation**: ==strength and direction== of the association بين متغيرين. وCorrelation **does not mean causation**.
+          - **Correlation coefficient (r)**: الـ statistic اللي بيقيس الاتجاه والقوة دول.
+
+          ليه بنقول «strength and direction» مع بعض؟ لأن رقم واحد بيقول الاتنين: الإشارة (+ أو −) هي الاتجاه، وقربه من 1 هو القوة. التفسير المقبول (مش في الكتاب).
       - kind: explain
         page: 29
         quote: "Correlation Coefficient: The correlation coefficient (r) measures the strength of the association between two variables (Pearson correlation). The value of r ranges between +1 and -1.\n  +1 = A positive or direct correlation, eg, smoking and lung cancer\n  -1 = A negative or inverse correlation, eg, exercise and the risk of heart disease\n  0 = A zero correlation (no relationship), eg, color of the skin and intelligence\nNOTE: Even with a perfect correlation (r) of +1 or -1, a causal relationship may not necessarily exist between the two variables."
@@ -494,6 +572,21 @@ lessons:
           - "قوي، بس 0.95 أقل من 1."
           - "قوي، بس أضعف من 0.95 ومن 1."
           - "صح: القوة بالحجم، و **1.00** = perfect correlation. الإشارة السالبة اتجاه بس."
+      - kind: check
+        page: 32
+        quote: "In what range does correlation coefficient lie?\nA. 0 to +1\nB. -1 to 0\nC. -1 to +1\nD. > 1"
+        question: "In what range does the correlation coefficient lie? (slide 32)"
+        options:
+          - "-1 to +1"
+          - "0 to +1"
+          - "-1 to 0"
+          - "> 1"
+        answer: 0
+        why:
+          - "صح: من −1 (عكسي تام) لـ +1 (طردي تام)، والـ 0 = مفيش علاقة خطية."
+          - "ده بينسى العلاقة العكسية: r ممكن يبقى سالب."
+          - "ده بينسى العلاقة الطردية."
+          - "الـ r عمره ما يعدّي 1 في القيمة المطلقة."
       - kind: aside
         tone: trap
         page: 29
@@ -512,6 +605,26 @@ lessons:
           لما الـ observations تكون قليلة: المحاضرة بتقول ==n < 80==.
 
           في العينة الصغيرة نقطة شاذة واحدة (**outlier**) بتشد الخط كله وتطلع r مضلّل.
+      - kind: try
+        items: [res.L04.029, res.L04.030, res.L04.033]
+    recap:
+      - "**r** من −1 لـ +1. القوة = حجم الرقم، والإشارة = الاتجاه. −1.00 أقوى من +0.90."
+      - "**Correlation ≠ causation** حتى لو r = ±1. والـ r بيضلل لو n < 80 (outliers)."
+    practice: [res.L04.029, res.L04.030, res.L04.031, res.L04.032, res.L04.033, res.L04.034, res.L04.035, res.L04.063]
+
+  # ------------------------------------------------------------------
+  - id: res.L04.lesson6
+    title: "الـ case report والـ case series والـ exploratory"
+    hook: "عيان واحد غريب ممكن يفتح باب مرض جديد، بس عمره ما يثبت سبب."
+    minutes: 8
+    pages: [34, 50]
+    topics: [case-reports, exploratory]
+    goals:
+      - "تفرق بين case report وcase series"
+      - "تعرف مزايا وعيوب الـ case report"
+      - "تعرف إمتى نعمل exploratory study"
+    status: unverified
+    steps:
       - kind: explain
         page: 34
         quote: "Case reports and case series are near the bottom of the hierarchy of what counts as reliable evidence for clinical decision-making.\nA case report (or case study) usually describes a single unique case or finding of interest (unusual finding)."
@@ -586,6 +699,14 @@ lessons:
           مثال: كل حالات **bone marrow depression** في مستشفى، والأدوية والـ risk factors عندهم. ده وصف مجموعة، مفيش مقارنة.
 
           الدكتورة قالت في الشرح: إن دوا معين طالع كتير بين الحالات ده لوحده ما يكفيش نقيس أثره، لأننا مش عارفين نسبته عند الناس اللي ما عندهمش المرض. الخطوة الجاية: **case-control** يختبر الـ hypothesis. ونفس السبب بيخلّي الـ case series ما تثبتش إن علاج نافع: مش عارفين كان هيحصل إيه من غير العلاج.
+      - kind: reveal
+        page: 39
+        quote: "Example of case series study\nData were collected on patients who had bone marrow\ndepression at one hospital. Potential risk factors including\ndrugs known to induce bone marrow depression were\nassessed for all patients. The description of all patients with\nbone marrow depression and the frequency of potential risk\nfactors for bone marrow depression is case series study"
+        prompt: "اتجمعت داتا عن كل العيانين اللي عندهم bone marrow depression في مستشفى واحد، ومعاها الأدوية اللي ممكن تعمله. ده نوعه إيه، وليه؟"
+        answer: |
+          ==Case series== (slide 39): وصف لكل العيانين اللي عندهم نفس الحالة، ومعاه **frequency** الـ risk factors المحتملة.
+
+          ليه مش analytic؟ لأن مفيش مجموعة مقارنة من غير bone marrow depression، فمانقدرش نقول الدوا ده أكتر عندهم من غيرهم. التفسير المقبول (مش في الكتاب).
       - kind: sort
         page: 40
         quote: "Merits and limitations of case report\n| Merits | Limitations |\n|---|---|\n| Detecting novelties (emerging/new disease) | Lack of ability to generalize |\n| Generating hypotheses | No possibility to establish cause-effect relationship |\n| Unexplained outcome of treatment | Difficult to replicate |\n| High applicability: allows detailed investigation into situations which would be unethical or impractical to perform using another study design | Publication bias: tendency of investigators (to submit) or reviewers or editors (to accept) manuscripts for publication based on the direction or strengths of study findings |\n| Provide very detailed information | Retrospective design |\n| Educational value (present a scenario to help clinician to improve clinical skills). | distraction of reader when focusing on the unusual. |"
@@ -616,6 +737,21 @@ lessons:
           - "مايقدرش يثبت **cause-effect**."
           - "الـ guidelines فوق الهرم ومحتاجة أدلة أقوى."
           - "صح: **detecting novelties** هو أكبر ميزة."
+      - kind: check
+        page: 50
+        quote: "Which of the following is/are consistent with case series study?\nA. An observational study used to identify similar or differing characteristics between selected cases.\nB. Can be prospective or retrospective and usually involves only a small number of individuals.\nC. Is a descriptive study that reports on data from a group of individuals who have a similar disease or condition.\nD. A and C only.\nE. A, B and C."
+        question: "Which is/are consistent with a case series study? (A) observational, compares characteristics between selected cases; (B) prospective or retrospective, usually a small number; (C) descriptive, reports a group with a similar disease."
+        options:
+          - "A, B and C"
+          - "A and C only"
+          - "C only"
+          - "B only"
+        answer: 0
+        why:
+          - "صح: التلاتة بيوصفوا الـ case series: observational، ممكن prospective أو retrospective بعدد صغير، وdescriptive لمجموعة بنفس الحالة."
+          - "B كمان صح: الـ case series ممكن تتجمع لقدّام أو لورا."
+          - "A وB صح كمان."
+          - "A وC صح كمان."
       - kind: explain
         page: 41
         quote: "An EXPLORATORY STUDY is a small-scale study of relatively short duration, which is carried out when little is known about a situation or a problem. It may include description as well as comparison.\nFor example: A national Acquired Immunodeficiency Syndrome (AIDS) Control Program wishes to establish counseling services for Human Immunodeficiency Virus (HIV) positive and AIDS patients, but lacks information on specific needs, patients have for support. To explore these needs, a number of in-depth interviews (qualitative research) are held with various categories of patients (males, females, married, single) and with some counselors working on a program that is already under way."
@@ -626,16 +762,23 @@ lessons:
           مثال المحاضرة: برنامج الإيدز عايز يعمل counselling لمرضى human immunodeficiency virus (HIV)/AIDS ومش عارف احتياجاتهم. فبيعمل **in-depth interviews** (qualitative research) مع فئات مختلفة (رجالة، ستات، متجوزين، سناجل) ومع counsellors.
 
           ولو عايز تفسر الفروق (ليه احتياجات الستات غير الرجالة؟) أو تلاقي أسباب، لازم ==تقارن مجموعات==.
-      - kind: try
-        items: [res.L04.030, res.L04.033, res.L04.039, res.L04.043, res.L04.046]
-    recap:
-      - "**r** من −1 لـ +1. القوة = حجم الرقم، والإشارة = الاتجاه. −1.00 أقوى من +0.90."
-      - "**Correlation ≠ causation** حتى لو r = ±1. والـ r بيضلل لو n < 80 (outliers)."
-      - "**Case report** = حالة واحدة غريبة. **Case series** = مجموعة بنفس المرض، من غير control، بتولّد hypotheses."
-      - "Case report: يكتشف الجديد، بس مايعممش ولا يثبت سبب، وفيه **publication bias**."
-      - "**Exploratory** = small-scale، قصير، لما المعرفة قليلة؛ غالبًا in-depth interviews."
-    practice: [res.L04.029, res.L04.030, res.L04.031, res.L04.032, res.L04.033, res.L04.034, res.L04.035, res.L04.036, res.L04.037, res.L04.038, res.L04.039, res.L04.040, res.L04.041, res.L04.042, res.L04.043, res.L04.044, res.L04.045, res.L04.046, res.L04.047, res.L04.063]
+      - kind: explain
+        page: 42
+        quote: "Exploratory studies (Cont.)\nWhen doing exploratory studies we describe the needs of\nvarious categories of patients and the possibilities for action.\nWe may want to go further and try to explain the differences\nwe observe (e.g., in the needs of male and female AIDS\npatients), or to identify causes of problems. Then we will\nneed to compare groups."
+        title: "الـ exploratory: وصف، وبعدين مقارنة"
+        text: |
+          في الـ exploratory study بنوصف ==احتياجات الفئات المختلفة من العيانين== وإيه اللي ممكن يتعمل.
 
+          ولو عايزين نروح أبعد ونفسّر الفروق (زي احتياجات الرجالة والستات من عيانين الـ AIDS) أو نعرف أسباب المشاكل، ساعتها ==لازم نقارن مجموعات==.
+
+          ليه؟ لأن الوصف بيقولك «الستات محتاجين كذا»، بس السبب مايبانش غير لما تحطهم جنب الرجالة وتشوف إيه اللي مختلف. التفسير المقبول (مش في الكتاب).
+      - kind: try
+        items: [res.L04.039, res.L04.043, res.L04.045, res.L04.046]
+    recap:
+      - "Case report = عيان واحد غريب؛ case series = مجموعة عندهم نفس الحالة."
+      - "مفيدة لاكتشاف الجديد وتوليد hypotheses، ومش بتثبت cause-effect."
+      - "Exploratory = small-scale، short، لما نعرف حاجة قليلة عن المشكلة؛ لو عايزين نفسّر الفروق محتاجين نقارن."
+    practice: [res.L04.036, res.L04.037, res.L04.038, res.L04.039, res.L04.040, res.L04.041, res.L04.042, res.L04.043, res.L04.044, res.L04.045, res.L04.046, res.L04.047]
   # ------------------------------------------------------------------
   - id: res.L04.lesson4
     title: "الـ cross-sectional: صورة في لحظة"
@@ -824,4 +967,4 @@ lessons:
       - "Prevalence = (a+c)/(a+b+c+d) × 100. بين الـ exposed a/(a+b)، بين العيانين a/(a+c). الـ test: **chi-squared**."
       - "عيوبه: one-time measurement، مش للنادر، **survival/refusal bias**."
       - "أهم criterion للسببية: **temporal relationship**."
-    practice: [res.L04.048, res.L04.049, res.L04.050, res.L04.051, res.L04.052, res.L04.053, res.L04.054, res.L04.055, res.L04.056, res.L04.009, res.L04.045, res.L04.057, res.L04.058, res.L04.064, res.L04.065, res.L04.066]
+    practice: [res.L04.048, res.L04.049, res.L04.050, res.L04.051, res.L04.052, res.L04.053, res.L04.054, res.L04.055, res.L04.056, res.L04.057, res.L04.058, res.L04.064, res.L04.065, res.L04.066]

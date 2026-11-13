@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: rheum.L01 to the Hepatology bar: 5 → 8 lessons (lesson1 split → lesson6, lesson2 → lesson7, lesson5 → lesson8), reasons labelled «التفسير المقبول (مش في الكتاب)», three new SVG figures, words per page 96 → 238 on the `lessons --report` count; p22 (book MCQs) skipped in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: hem.L03 to the Hepatology bar: 7 → 12 lessons (lesson3 → lesson8 thalassaemia treatment, lesson4 → lesson9 sickle labs/treatment, lesson5 → lesson10 AIHA, lesson6 → lesson11 HUS, lesson7 → lesson12 PNH DD/treatment), pages 44 and 49 now taught, 9 new figures and 4 cases; words per page 95 → 226; listed in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: dm.L19 to the Hepatology bar: 3 → 5 lessons (lesson1 split → lesson4 metabolism and reverse transport, lesson2 split → lesson5 HDL and Lp(a)), reasons labelled «التفسير المقبول (مش في الكتاب)», a new Lp(a) figure, words per page 198 → 356 on the `lessons --report` count; listed in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: dm.L17 to the Hepatology bar: 6 → 8 lessons (lesson2 split → lesson7 risk factors and symptoms, lesson6 split → lesson8 monitoring), reasons labelled «التفسير المقبول (مش في الكتاب)», two new figures, every page 214–232 cited, words per page 150 → 274 on the `lessons --report` count; listed in `content/lesson-skips.yaml` (#827–#829).

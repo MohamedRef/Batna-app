@@ -223,7 +223,9 @@ fn preflight(root: &Path, base: &str) -> Res<String> {
         }
         format!("{} problem(s)", p.len())
     };
-    rows.push(("content checks (validate)", crate::validate_all(root).map_err(joined)));
+    // The first line is the verdict; the cue share follows it.
+    let validated = crate::validate_all(root).map(|r| r.lines().next().unwrap_or_default().to_owned());
+    rows.push(("content checks (validate)", validated.map_err(joined)));
     rows.push((
         "pack devices take (packs build --check)",
         crate::packs::run(root, &["build".into(), "--check".into()]).map_err(joined),

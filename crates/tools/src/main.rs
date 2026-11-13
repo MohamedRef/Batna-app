@@ -22,9 +22,9 @@ mod content;
 mod ids;
 mod lessons;
 mod packs;
-mod refs;
 #[cfg(test)]
 mod readme_tests;
+mod refs;
 #[cfg(test)]
 mod testkit;
 mod update;

@@ -36,7 +36,8 @@ fn content_rows(readme: &str) -> Vec<(String, usize, usize)> {
         .map(|l| {
             let cells: Vec<&str> = l.trim_matches('|').split('|').map(str::trim).collect();
             let id = cells[0].split('`').nth(1).unwrap_or("").to_owned();
-            let num = |s: &str| s.trim_matches('*').parse::<usize>().unwrap_or_else(|_| panic!("README row {l}"));
+            let num =
+                |s: &str| s.trim_matches('*').parse::<usize>().unwrap_or_else(|_| panic!("README row {l}"));
             (id, num(cells[1]), num(cells[2]))
         })
         .collect()

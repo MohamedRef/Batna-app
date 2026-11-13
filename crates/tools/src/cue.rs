@@ -20,7 +20,7 @@ pub const PRINTED: &[&str] = &["book-question", "slide-question", "past-paper", 
 /// The bank-wide share may not rise above this (per cent, one decimal).
 /// Lower it as the rewrites in #816 land; never raise it.
 #[cfg(test)]
-pub const CEILING_PERCENT: f64 = 31.5;
+pub const CEILING_PERCENT: f64 = 29.0;
 
 /// Lectures with fewer authored MCQs than this are not ranked in the summary.
 const MIN_RANKED: usize = 5;

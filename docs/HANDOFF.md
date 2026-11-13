@@ -675,6 +675,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: longest-option cue, research (#816): 60 distractors made as long as their keys, every res lecture at or under 25%; bank share 31.1% → 28.4%, ceiling 29%.
 - 2026-11-13: longest-option cue, diabetes and metabolism (#816): 67 distractors made as long as their keys, every dm lecture at or under 25%; bank share 34.0% → 31.1%, ceiling 31.5%.
 - 2026-11-13: longest-option cue, endocrinology (#816): 29 distractors made as long as their keys, every endo lecture at or under 25%; bank share 35.3% → 34.0%, ceiling 34.5%.
 - 2026-11-13: longest-option cue, gastroenterology (#816): 47 distractors made as long as their keys, every git lecture at or under 25%; bank share 37.4% → 35.3%, ceiling 36%.

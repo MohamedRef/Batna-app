@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: hb.L13 to the depth bar: 8 → 13 lessons (lesson3 → lesson9 AIH regimens; lesson4 → lesson10 PBC clinical + lesson11 PBC treatment; lesson6 → lesson12 PSC emerging drugs; lesson8 → lesson13 IgG4 mimics and treatment), pp. 233–239 and 248 taught, p251 (essay questions) skipped, words per page 142 → 225; glossary gains MAdCAM; in `content/lesson-skips.yaml` (#828, #829).
 - 2026-11-13: rheum.L03 to the Hepatology bar: 5 → 7 lessons (lesson3 split → lesson6 for type I treatment, lesson5 → lesson7 for type IV), reasons labelled «التفسير المقبول (مش في الكتاب)», two new SVG figures, words per page 105 → 266 on the `lessons --report` count; p67 (book MCQs) skipped in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: rheum.L20 to the Hepatology bar: 6 → 8 lessons (lesson1 → 7, lesson5 → 8; imaging moved from lesson3 to lesson4), reasons labelled «التفسير المقبول (مش في الكتاب)», five new SVGs, words per page 105 → 236, explain steps without a reason 18/21 → 0/26; fixed "PT" expanded as prothrombin time in the non-drug step (#827–#829).
 - 2026-11-13: rheum.L19 to the Hepatology bar: 5 → 8 lessons (lesson1 → 6, lesson2 pathology → lesson4, lesson4 → 7, lesson5 → 8), reasons labelled «التفسير المقبول (مش في الكتاب)», five new SVGs, words per page 130 → 269, explain steps without a reason 18/20 → 0/23; p325 (review MCQs) skipped (#827–#829).

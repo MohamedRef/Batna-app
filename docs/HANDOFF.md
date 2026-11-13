@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: git.L08 to the Hepatology bar: 4 → 6 lessons (lesson1 split → lesson5 takes the clinical picture; lesson4 split → lesson6 takes bacterial overgrowth, tropical sprue and short bowel), reasons labelled «التفسير المقبول (مش في الكتاب)», Whipple and short-bowel figures, words per page 161 → 288; every page cited (#827–#829).
 - 2026-11-13: git.L07 to the Hepatology bar: 3 → 4 lessons (lesson1 split → lesson4; Table 2 moved to lesson3), reasons labelled «التفسير المقبول (مش في الكتاب)», Treitz figure, words per page 196 → 354; p233 (review questions) skipped (#827–#829).
 - 2026-11-13: geri.L10 to the Hepatology bar: 4 → 7 lessons (lesson1 → lesson2 takes the classification, lesson2 split → lesson5, lesson3 split → lesson6, lesson4 split → lesson7), reasons labelled «التفسير المقبول (مش في الكتاب)», alveolar wall and nintedanib figures, p185 now taught, words per page 113 → 271 on the `lessons --report` count; in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: dm.L01 to the Hepatology bar: 6 → 9 lessons (lesson1 split → lesson7 classification, lesson4 → lesson8 A1C, lesson5 → lesson9 glycosuria/polyuria), reasons labelled «التفسير المقبول (مش في الكتاب)», three new drawings; words per page 154 → 317 on the `lessons --report` count; in `content/lesson-skips.yaml` (#827–#829).

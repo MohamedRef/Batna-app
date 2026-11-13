@@ -782,6 +782,7 @@ state; details live in the PR and in § 10.
 - 2026-11-13: catch-up plan and weak-fact lines count by `i18n::count` (#801); `grammar_tests.rs` covers `catchup::*` and `weak::*`.
 - 2026-11-13: hb.L05 lessons for #828/#829: stay 5; diagnosis moved from lesson2 (now natural history + clinical) to open lesson3 (diagnosis + DAAs), practice cards follow the pages each lesson cites; words per page 472.
 - 2026-11-13: hb.L06 lessons for #828/#829: stay 7; the two p112 conclusion reveals move from lesson1 and lesson5 to close lesson7 (spans now 97-98 and 105-106), lesson7 topics 3 → 2, off-page practice cards follow their pages; words per page 318.
+- 2026-11-13: hb.L07 lessons for #828/#829: 7 → 8 (lesson7 → +lesson8 needlestick PEP with two reveals, a timing check and the p124 short-account questions), lesson7 topics 3 → 2, hb.L07.081 to lesson5; words per page 432 → 462.
 - 2026-11-11: res.L07.121 covers the slide 72 table (Drug A/B × insulin, 523 patients) the lecturer showed without explaining; open L03–L11 questions (L11 quiz 92–94 keys, L09 video-only plagiarism slides) kept as they are, unverified.
 - 2026-11-11: Settings and Screens browser runs point apt at a resolving mirror (`scripts/ci-apt-install.sh`) before `playwright install --with-deps`.
 - 2026-11-11: journey test (launch → grade → restart → restore → two-device sync), native QA matrix `docs/NATIVE_QA.md`, weekly `cargo audit`, and the shared `docs/INFRA_PARITY.md` checklist (engineering audit F23, F24, § 9).

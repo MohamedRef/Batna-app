@@ -3,15 +3,15 @@ lecture: dm.L22
 lessons:
   # ------------------------------------------------------------------
   - id: dm.L22.lesson1
-    title: "السكر بيأذي الشريان إزاي؟ والـ statin بيحميه إزاي؟"
+    title: "السكر بيأذي الشريان إزاي؟"
     hook: "عيان سكر، ضغطه مظبوط والـ ECG سليم. ليه لازم statin؟ الإجابة في الـ endothelium."
     minutes: 8
-    pages: [271, 273]
-    topics: [case, cvrisk, pleiotropic, jupiter]
+    pages: [271, 272]
+    topics: [case, cvrisk]
     goals:
-      - "تقابل عيان الكتاب وتعرف بياناته"
-      - "تفهم 3 طرق السكر بيوصل بيها للـ atherogenesis"
-      - "تعرف الـ pleiotropic effects ونتايج JUPITER"
+      - "تقابل عيان الكتاب وتقرا أرقامه بعين الدهون"
+      - "تفهم إزاي hyperglycemia و FFA و insulin resistance بيوصلوا للـ endothelium"
+      - "تعرف الـ 3 أذرع: vasoconstriction و inflammation و thrombosis"
     status: unverified
     steps:
       - kind: explain
@@ -26,7 +26,7 @@ lessons:
           - الدهون: total cholesterol (TC) **209**، low-density lipoprotein cholesterol (LDL-C) **128**، high-density lipoprotein cholesterol (HDL-C) **35**، triglycerides (TG) **230** mg/dL.
           - eGFR **88**، urine albumin-to-creatinine ratio (UACR) **16** mg/g.
 
-          شكله "كويس"، صح؟ هنشوف آخر الدرس الجاي إن خطره **27.6%**.
+          اقرا الأرقام بعين الدهون: ==HDL 35 و TG 230== مع LDL "مقبول"، ده نفس الـ pattern اللي جدول الـ secondary hyperlipidemia قاله عن السكر (↑ TG و ↓ HDL). والـ vibration القليل يعني إن السكر بدأ يأذي الأعصاب. يعني عيان "هادي" من برّه وشغّال من جوّه.
       - kind: figure
         remind: [dm.L22.004, dm.L22.005]
         page: 272
@@ -68,6 +68,17 @@ lessons:
             <rect x="60" y="286" width="210" height="34" rx="8" class="fg-bad"/>
             <text x="165" y="308" text-anchor="middle" class="t-b">Atherogenesis</text>
           </svg>
+      - kind: explain
+        page: 272
+        title: "إزاي السكر بيوصل للـ endothelium؟"
+        quote: "Cardiovascular Risk in Diabetes\n  Diabetes Mellitus → Hyperglycemia, Excess Free Fatty Acids, Insulin Resistance\n  → Oxidative Stress, Protein Kinase C Activation, Receptor for Advanced Glycation End Product (RAGE) Activation\n  → Endothelium\n    ↓ Nitric Oxide, ↑ Endothelin-1, ↑ Angiotensin II → Vasoconstriction: Hypertension, Vascular Smooth Muscle Cell Growth\n    ↓ Nitric Oxide, ↑ Activation of NF-κB, ↑ Angiotensin II, ↑ Activation of Activator Protein-1 → Inflammation: Release of Chemokines, Release of Cytokines, Expression of Cellular Adhesion Molecules\n    ↓ Nitric Oxide, ↑ Tissue Factor, ↑ Plasminogen Activator Inhibitor-1, ↓ Prostacyclin → Thrombosis: Hypercoagulation, Platelet Activation, Decreased Fibrinolysis\n  → Atherogenesis"
+        text: |
+          الرسمة بتقول **إيه**: 3 مداخل (**hyperglycemia**، **excess free fatty acids**، **insulin resistance**) بيشغّلوا **oxidative stress** و **protein kinase C activation** و **RAGE activation**. التفسير المقبول (مش في الكتاب) بيقول **إزاي**:
+          - **Hyperglycemia**: السكر بيلزق في البروتينات ويعمل **advanced glycation end products**؛ لما تمسك في الـ ==RAGE== على الخلية، تولّع oxidative stress والتهاب.
+          - **Free fatty acids** و **insulin resistance**: بيشغّلوا الـ **PKC** جوّه الخلية، وده بيقلل تصنيع الـ NO ويزوّد الـ endothelin-1.
+          - والـ oxidative stress نفسه بيكسّر الـ **nitric oxide (NO)** أول ما يتعمل.
+
+          عشان كده ==↓ NO== مكتوب في رأس الـ 3 أذرع: الـ NO عادة بيوسّع، وبيهدّي الالتهاب، وبيمنع الصفايح. لما يقل، التلاتة يفلتوا مع بعض.
       - kind: check
         page: 272
         quote: "Cardiovascular Risk in Diabetes\n  Diabetes Mellitus → Hyperglycemia, Excess Free Fatty Acids, Insulin Resistance\n  → Oxidative Stress, Protein Kinase C Activation, Receptor for Advanced Glycation End Product (RAGE) Activation\n  → Endothelium\n    ↓ Nitric Oxide, ↑ Endothelin-1, ↑ Angiotensin II → Vasoconstriction: Hypertension, Vascular Smooth Muscle Cell Growth\n    ↓ Nitric Oxide, ↑ Activation of NF-κB, ↑ Angiotensin II, ↑ Activation of Activator Protein-1 → Inflammation: Release of Chemokines, Release of Cytokines, Expression of Cellular Adhesion Molecules\n    ↓ Nitric Oxide, ↑ Tissue Factor, ↑ Plasminogen Activator Inhibitor-1, ↓ Prostacyclin → Thrombosis: Hypercoagulation, Platelet Activation, Decreased Fibrinolysis\n  → Atherogenesis"
@@ -84,6 +95,56 @@ lessons:
           - "الـ NO بيقل في التلات أذرع."
           - "الـ TF بيزيد مش بيقل."
       - kind: explain
+        page: 272
+        title: "الـ 3 أذرع، وكل دراع بيعمل إيه"
+        quote: "Cardiovascular Risk in Diabetes\n  Diabetes Mellitus → Hyperglycemia, Excess Free Fatty Acids, Insulin Resistance\n  → Oxidative Stress, Protein Kinase C Activation, Receptor for Advanced Glycation End Product (RAGE) Activation\n  → Endothelium\n    ↓ Nitric Oxide, ↑ Endothelin-1, ↑ Angiotensin II → Vasoconstriction: Hypertension, Vascular Smooth Muscle Cell Growth\n    ↓ Nitric Oxide, ↑ Activation of NF-κB, ↑ Angiotensin II, ↑ Activation of Activator Protein-1 → Inflammation: Release of Chemokines, Release of Cytokines, Expression of Cellular Adhesion Molecules\n    ↓ Nitric Oxide, ↑ Tissue Factor, ↑ Plasminogen Activator Inhibitor-1, ↓ Prostacyclin → Thrombosis: Hypercoagulation, Platelet Activation, Decreased Fibrinolysis\n  → Atherogenesis"
+        text: |
+          - ==Vasoconstriction==: ↓ NO، ↑ **endothelin-1**، ↑ **angiotensin II** ← **hypertension** ونمو الـ vascular smooth muscle cells.
+          - **Inflammation**: ↑ **NF-κB** و ↑ **activator protein-1** ← chemokines و cytokines و **cellular adhesion molecules**.
+          - **Thrombosis**: ↑ **tissue factor**، ↑ **plasminogen activator inhibitor-1 (PAI-1)**، ↓ **prostacyclin** ← hypercoagulation، platelet activation، و **decreased fibrinolysis**.
+
+          ليه الـ PAI-1 خطير بالذات؟ اسمه بيقول: بيقفل الـ plasminogen activator، يعني الجسم مش بيعرف يدوّب الجلطة الصغيرة فتكبر (التفسير المقبول، مش في الكتاب). والـ 3 أذرع نهايتهم واحدة: **atherogenesis**. وده بيشرح ليه السكري بيجيله MI أكتر حتى لو الـ LDL مش عالي جدًا.
+      - kind: match
+        page: 272
+        quote: "Cardiovascular Risk in Diabetes\n  Diabetes Mellitus → Hyperglycemia, Excess Free Fatty Acids, Insulin Resistance\n  → Oxidative Stress, Protein Kinase C Activation, Receptor for Advanced Glycation End Product (RAGE) Activation\n  → Endothelium\n    ↓ Nitric Oxide, ↑ Endothelin-1, ↑ Angiotensin II → Vasoconstriction: Hypertension, Vascular Smooth Muscle Cell Growth\n    ↓ Nitric Oxide, ↑ Activation of NF-κB, ↑ Angiotensin II, ↑ Activation of Activator Protein-1 → Inflammation: Release of Chemokines, Release of Cytokines, Expression of Cellular Adhesion Molecules\n    ↓ Nitric Oxide, ↑ Tissue Factor, ↑ Plasminogen Activator Inhibitor-1, ↓ Prostacyclin → Thrombosis: Hypercoagulation, Platelet Activation, Decreased Fibrinolysis\n  → Atherogenesis"
+        prompt: "وصّل كل تغيير بنتيجته في رسمة الكتاب:"
+        pairs:
+          - ["↑ Endothelin-1", "Vasoconstriction"]
+          - ["↑ NF-κB", "Inflammation"]
+          - ["↑ PAI-1", "Decreased fibrinolysis"]
+          - ["Hyperglycemia", "RAGE activation"]
+        why: "الـ endothelin-1 مضيّق؛ الـ NF-κB مفتاح الالتهاب؛ الـ PAI-1 بيقفل تدويب الجلطة؛ والسكر العالي بيعمل glycation products بتمسك في الـ RAGE."
+      - kind: reveal
+        page: 271
+        quote: "Lab Investigations :\n  1. FBG: 112 mg/dl, PPBG: 163 mg/dl, HbA1C: 6.9%.\n  2. Lipid panel: TC: 209 mg/dl, LDL-C: 128 mg/dl, HDL-C: 35 mg/dl, TG: 230 mg/dl.\n  3. Serum Creatinine: 0.9 mg/dl [eGFR: 88]- UACR: 16 mg/g."
+        prompt: "الـ stress ECG والـ echo طبيعيين، والـ HbA1c 6.9%. يبقى العيان ده مش محتاج statin؟"
+        answer: "لأ. الـ ECG الطبيعي بيقول إن مفيش **ischaemia دلوقتي**، مش إن الشريان سليم. الرسمة بتقول إن السكر شغّال على الـ endothelium من سنين، وعنده كمان تدخين وضغط و HDL 35 و TG 230. ولما نحسب خطره في درس الـ ESC هيطلع **27.6%** في 10 سنين، يعني very high."
+      - kind: aside
+        tone: exam
+        page: 271
+        quote: "Lab Investigations :\n  1. FBG: 112 mg/dl, PPBG: 163 mg/dl, HbA1C: 6.9%.\n  2. Lipid panel: TC: 209 mg/dl, LDL-C: 128 mg/dl, HDL-C: 35 mg/dl, TG: 230 mg/dl.\n  3. Serum Creatinine: 0.9 mg/dl [eGFR: 88]- UACR: 16 mg/g."
+        text: "شكل الـ **diabetic dyslipidemia** في عيان الكتاب: **TG عالي** (230)، **HDL واطي** (35)، و **LDL مش بعيد عن الطبيعي** (128). التفسير المقبول (مش في الكتاب): الـ LDL في السكري بيبقى **صغير وكثيف** (small dense LDL)، فبيدخل الجدار ويتأكسد أسهل، ورقمه بيخدعك. عشان كده ما تستناش الـ LDL يبقى 190 عشان تقلق."
+      - kind: try
+        items: [dm.L22.001, dm.L22.004, dm.L22.005, dm.L22.006, dm.L22.040]
+    recap:
+      - "عيان الكتاب: 55 سنة، T2DM، HTN، مدخن، LDL 128، HDL 35، TG 230."
+      - "السكر: hyperglycemia و FFA و insulin resistance ← oxidative stress و PKC و RAGE ← ↓NO."
+      - "3 أذرع: vasoconstriction (↑ET-1 ↑Ang II)، inflammation (↑NF-κB)، thrombosis (↑TF ↑PAI-1 ↓PGI2) ← atherogenesis."
+      - "ECG طبيعي مش معناه شريان سليم."
+    practice: [dm.L22.001, dm.L22.004, dm.L22.005, dm.L22.006, dm.L22.007, dm.L22.040]
+  # ------------------------------------------------------------------
+  - id: dm.L22.lesson4
+    title: "الـ statin أكتر من LDL: pleiotropic و JUPITER"
+    hook: "ناس الـ LDL بتاعهم طبيعي، أخدوا statin، والـ MI قل للنص. إزاي؟"
+    minutes: 8
+    pages: [272, 273]
+    topics: [pleiotropic, jupiter]
+    goals:
+      - "تعرف الـ pleiotropic effects وليه الـ statin بيعملها"
+      - "تحفظ تصميم JUPITER ونتايجه وتعرف تقرا الـ HR"
+    status: unverified
+    steps:
+      - kind: explain
         remind: [dm.L22.008]
         page: 272
         title: "الـ statin أكتر من مجرد LDL"
@@ -97,20 +158,38 @@ lessons:
           - ↓ collagen و ↓ **matrix metalloproteinases (MMPs)**، ↓ Angiotensin II type 1 receptor (AT1) receptor و ↓ proliferation.
           - والدهون: ↓ LDL، ↑ high-density lipoprotein (HDL)، ↓ TG.
 
-          لاحظ: الـ statin بيعكس **تقريبًا كل سهم** في رسمة السكر.
+          لاحظ: الـ statin بيعكس **تقريبًا كل سهم** في رسمة السكر. ليه؟ التفسير المقبول (مش في الكتاب): الـ statin بيقفل أول خطوة في طريق الـ mevalonate، والطريق ده مش بيعمل كوليسترول بس؛ بيعمل كمان جزيئات صغيرة بتشغّل بروتينات إشارة جوّه خلايا الجدار. قفلها بيرفع الـ NO ويهدّي الالتهاب، فالفوايد الإضافية جاية من **نفس القفلة**.
       - kind: aside
         tone: analogy
         page: 272
         quote: "Pleiotropic effects of statins on the vessel wall\n  ↓ Coagulation\n  ↓ Platelet activation\n  ↑ Endothelial progenitor cells\n  ↑ Endothelial function, ↑ NO bioactivity, ↓ Free radicals\n  ↓ Collagen, ↓ MMPs\n  ↓ Endothelin\n  ↓ AT1 receptor, ↓ Proliferation\n  ↓ Macrophages, ↓ Inflammation, ↓ Immunomodulation\n  ↓ LDL cholesterol, ↑ HDL cholesterol, ↓ Triglycerides\nMMPs = matrix metalloproteinases"
         text: "السكر بيعمل في الشريان زي **مية مالحة على حديد**: صدا من كل حتة. الـ statin مش بس بيمسح الصدا (LDL)، ده **بيدهن** الحديد كمان (endothelium، inflammation، platelets)."
+      - kind: check
+        page: 272
+        quote: "Pleiotropic effects of statins on the vessel wall\n  ↓ Coagulation\n  ↓ Platelet activation\n  ↑ Endothelial progenitor cells\n  ↑ Endothelial function, ↑ NO bioactivity, ↓ Free radicals\n  ↓ Collagen, ↓ MMPs\n  ↓ Endothelin\n  ↓ AT1 receptor, ↓ Proliferation\n  ↓ Macrophages, ↓ Inflammation, ↓ Immunomodulation\n  ↓ LDL cholesterol, ↑ HDL cholesterol, ↓ Triglycerides\nMMPs = matrix metalloproteinases"
+        question: "Which of these is a pleiotropic effect of statins in the book's figure?"
+        options:
+          - "Increased endothelial progenitor cells"
+          - "Increased endothelin"
+          - "Increased matrix metalloproteinases"
+          - "Increased platelet activation"
+        answer: 0
+        why:
+          - "صح: ↑ endothelial progenitor cells، يعني تصليح أسرع للبطانة."
+          - "بالعكس: الـ statin بيقلل الـ endothelin (مضيّق)."
+          - "بالعكس: بيقلل الـ MMPs، فالـ plaque تفضل متماسكة."
+          - "بالعكس: بيقلل الـ platelet activation."
       - kind: explain
+        remind: [dm.L22.011]
         page: 273
-        title: "JUPITER"
+        title: "JUPITER: مين دخل وليه"
         quote: "JUPITER Study: Study design\n  Inclusion: No history of CAD; men ≥50 yrs; women ≥60 yrs; LDL-C <130 mg/dl; CRP ≥2.0 mg/L\n  Placebo run-in, then randomisation to Rosuvastatin 20 mg (n=8901) or Placebo (n=8901)\n  Median follow-up 1.9 years\nJUPITER Study: Myocardial Infarction\n| | Rosuvastatin | Placebo |\n|---|---|---|\n| Number of events | 31 | 68 |\nFatal or Nonfatal Myocardial Infarction: HR 0.46 (95% CI 0.30-0.70), P<0.0002, - 54 %"
         text: |
           ناس **مفيش عندهم coronary artery disease (CAD)**، رجالة **≥ 50** وستات **≥ 60**، الـ LDL-C **أقل من 130** (طبيعي!) بس ==C-reactive protein (CRP) ≥ 2.0 mg/L==.
 
-          **Rosuvastatin 20 mg** ضد placebo (8901 في كل جروب)، median follow-up **1.9 سنة**.
+          **Rosuvastatin 20 mg** ضد placebo (8901 في كل جروب)، بعد placebo run-in، و median follow-up **1.9 سنة**.
+
+          ليه الـ CRP بالذات؟ لأن الـ CRP علامة **inflammation**، وفاكر دراع الالتهاب في رسمة السكر وفي الـ pleiotropic effects؟ الفكرة اللي التجربة اختبرتها: لو الالتهاب بيولّع الـ plaque، يبقى ناس الـ LDL بتاعهم طبيعي بس الـ CRP عالي يستفيدوا من statin.
       - kind: table
         page: 273
         quote: "JUPITER Study: Study design\n  Inclusion: No history of CAD; men ≥50 yrs; women ≥60 yrs; LDL-C <130 mg/dl; CRP ≥2.0 mg/L\n  Placebo run-in, then randomisation to Rosuvastatin 20 mg (n=8901) or Placebo (n=8901)\n  Median follow-up 1.9 years\nJUPITER Study: Myocardial Infarction\n| | Rosuvastatin | Placebo |\n|---|---|---|\n| Number of events | 31 | 68 |\nFatal or Nonfatal Myocardial Infarction: HR 0.46 (95% CI 0.30-0.70), P<0.0002, - 54 %"
@@ -120,6 +199,16 @@ lessons:
           - ["MI", "54%", "0.46"]
           - ["Stroke", "48%", "0.52"]
         hide: [[0, 1], [1, 1]]
+      - kind: explain
+        page: 273
+        title: "إزاي تقرا رقم الـ HR"
+        quote: "JUPITER Study: Study design\n  Inclusion: No history of CAD; men ≥50 yrs; women ≥60 yrs; LDL-C <130 mg/dl; CRP ≥2.0 mg/L\n  Placebo run-in, then randomisation to Rosuvastatin 20 mg (n=8901) or Placebo (n=8901)\n  Median follow-up 1.9 years\nJUPITER Study: Myocardial Infarction\n| | Rosuvastatin | Placebo |\n|---|---|---|\n| Number of events | 31 | 68 |\nFatal or Nonfatal Myocardial Infarction: HR 0.46 (95% CI 0.30-0.70), P<0.0002, - 54 %"
+        text: |
+          الـ fatal أو nonfatal **myocardial infarction**: **31 event** على rosuvastatin ضد **68** على placebo.
+          - ==HR 0.46== (95% CI 0.30-0.70)، P أقل من 0.0002.
+          - يعني الخطر بقى 46% من خطر الـ placebo، فالنزول **1 − 0.46 = 54%**.
+
+          نفس الحساب في الـ stroke: HR **0.52** ← **−48%**. وليه الـ CI مهم؟ لأن المدى كله (0.30 لحد 0.70) تحت 1، يعني حتى أسوأ تقدير لسه فايدة حقيقية.
       - kind: reveal
         page: 273
         quote: "JUPITER Study: Study design\n  Inclusion: No history of CAD; men ≥50 yrs; women ≥60 yrs; LDL-C <130 mg/dl; CRP ≥2.0 mg/L\n  Placebo run-in, then randomisation to Rosuvastatin 20 mg (n=8901) or Placebo (n=8901)\n  Median follow-up 1.9 years\nJUPITER Study: Myocardial Infarction\n| | Rosuvastatin | Placebo |\n|---|---|---|\n| Number of events | 31 | 68 |\nFatal or Nonfatal Myocardial Infarction: HR 0.46 (95% CI 0.30-0.70), P<0.0002, - 54 %"
@@ -130,26 +219,30 @@ lessons:
         quote: "Ridker P et al. N Eng J Med 2018;359: 2195-2207"
         text: "الكتاب كاتب المرجع **2018**، والصح **2008** (N Engl J Med 2008;359:2195-2207)، زي ما مكتوب تحت رسمة الـ stroke في ص 274."
         ref: "Ridker PM et al. JUPITER, N Engl J Med 2008"
+      - kind: reveal
+        page: 273
+        quote: "JUPITER Study: Study design\n  Inclusion: No history of CAD; men ≥50 yrs; women ≥60 yrs; LDL-C <130 mg/dl; CRP ≥2.0 mg/L\n  Placebo run-in, then randomisation to Rosuvastatin 20 mg (n=8901) or Placebo (n=8901)\n  Median follow-up 1.9 years\nJUPITER Study: Myocardial Infarction\n| | Rosuvastatin | Placebo |\n|---|---|---|\n| Number of events | 31 | 68 |\nFatal or Nonfatal Myocardial Infarction: HR 0.46 (95% CI 0.30-0.70), P<0.0002, - 54 %"
+        prompt: "ناس JUPITER: مفيش CAD، LDL أقل من 130، بس الـ CRP عالي. مين في عيادتك شبههم؟"
+        answer: "عيان السكر بالظبط: الـ LDL بتاعه \"مقبول\" والـ ECG سليم، بس رسمة ص 272 بتقول إن عنده **inflammation** شغّالة في الـ endothelium (↑ NF-κB، cytokines). JUPITER بيقول إن الـ statin بيفيد الناس دي حتى لو الـ LDL مش عالي، وده نفس منطق الـ home message: كل سكري فوق 40 ياخد statin."
       - kind: try
-        items: [dm.L22.004, dm.L22.006, dm.L22.008, dm.L22.011, dm.L22.013]
+        items: [dm.L22.008, dm.L22.009, dm.L22.011, dm.L22.013, dm.L22.014]
     recap:
-      - "عيان الكتاب: 55 سنة، T2DM، HTN، مدخن، LDL 128، HDL 35، TG 230."
-      - "السكر: hyperglycemia و FFA و insulin resistance ← oxidative stress و PKC و RAGE ← ↓NO."
-      - "3 أذرع: vasoconstriction، inflammation، thrombosis (↑TF ↑PAI-1 ↓PGI2) ← atherogenesis."
-      - "Pleiotropic: endothelium أحسن، inflammation و platelets أقل، و ↓LDL ↑HDL ↓TG."
-      - "JUPITER: LDL أقل من 130 و CRP ≥ 2، rosuvastatin 20: MI −54%، stroke −48%."
-    practice: [dm.L22.001, dm.L22.004, dm.L22.005, dm.L22.006, dm.L22.007, dm.L22.008, dm.L22.009, dm.L22.010, dm.L22.011, dm.L22.012, dm.L22.013, dm.L22.014, dm.L22.015]
+      - "Pleiotropic: endothelium أحسن، NO أكتر، inflammation و platelets و MMPs أقل، و ↓LDL ↑HDL ↓TG."
+      - "JUPITER: مفيش CAD، LDL أقل من 130، CRP ≥ 2؛ rosuvastatin 20 ضد placebo، 1.9 سنة."
+      - "MI: 31 ضد 68، HR 0.46 = −54%؛ stroke HR 0.52 = −48%."
+      - "الفايدة مش بس من الـ LDL: الـ statin بيهدّي الالتهاب."
+    practice: [dm.L22.008, dm.L22.009, dm.L22.010, dm.L22.011, dm.L22.012, dm.L22.013, dm.L22.014, dm.L22.015]
   # ------------------------------------------------------------------
   - id: dm.L22.lesson2
     title: "ESC 2023: صنّف، حدد الـ target، واختار الجرعة"
     hook: "3 أسئلة بس: خطره قد إيه؟ الـ LDL لازم يوصل لكام؟ ومحتاج ينزل كام في المية؟"
-    minutes: 9
+    minutes: 10
     pages: [274, 276]
-    topics: [case, esc, intensity]
+    topics: [esc, intensity]
     goals:
-      - "تصنّف عيان السكر بالـ SCORE2-Diabetes"
-      - "تحفظ الـ LDL targets"
-      - "تختار العلاج من جدول الـ intensity"
+      - "تصنّف عيان السكر بالـ SCORE2-Diabetes وتعرف ليه الـ inputs دي"
+      - "تحفظ الـ LDL targets وتفهم ليه بتنزل مع الخطر"
+      - "تختار العلاج من جدول الـ intensity وتعرف كل دوا بيشتغل إزاي"
     status: unverified
     steps:
       - kind: explain
@@ -157,10 +250,25 @@ lessons:
         title: "التصنيف (ESC 2023)"
         quote: "Table 7: Cardiovascular risk categories in type 2 diabetes\n| Risk category | Patients with T2DM |\n|---|---|\n| Very high CV risk | Clinically established ASCVD or Severe TOD or 10-year CVD risk ≥20% using SCORE2-Diabetes |\n| High CV risk | Not fulfilling the very high-risk criteria and a 10-year CVD risk 10 to <20% using SCORE2-Diabetes |\n| Moderate CV risk | Not fulfilling the very high-risk criteria and a 10-year CVD risk 5 to <10% using SCORE2-Diabetes |\n| Low CV risk | Not fulfilling the very high-risk criteria and a 10-year CVD risk <5% using SCORE2-Diabetes |\nEuropean Heart Journal (2023) 44, 4043–4140 (2023 ESC Guidelines for the management of cardiovascular disease in patients with diabetes)"
         text: |
-          - ==Very high==: **Atherosclerotic cardiovascular disease (ASCVD)** واضح، أو **severe target-organ damage**، أو 10-year risk **≥ 20%** بالـ **SCORE2-Diabetes**.
+          - ==Very high==: **atherosclerotic cardiovascular disease (ASCVD)** واضح، أو **severe target-organ damage**، أو 10-year risk **≥ 20%** بالـ **SCORE2-Diabetes**.
           - **High**: 10 لـ أقل من 20%.
           - **Moderate**: 5 لـ أقل من 10%.
           - **Low**: أقل من 5%.
+
+          ليه الـ ASCVD لوحده يكفّي very high من غير score؟ التفسير المقبول (مش في الكتاب): اللي جاله event قبل كده الـ plaque عنده **مثبتة**، والـ score معمول يتنبأ بأول event، مش بالتاني. وده سبب إن كل فئة تحت بتبدأ بـ "not fulfilling the very high-risk criteria".
+      - kind: explain
+        remind: [dm.L22.003]
+        page: 275
+        title: "SCORE2-Diabetes على عيان الكتاب"
+        quote: "ESC CVD Risk Calculator example:\n| Input | Value |\n|---|---|\n| Gender | male |\n| Age | 55 ys |\n| Age at Diabetes Diagnosis | 48ys |\n| Current smoking | yes |\n| Systolic blood pressure | 130 |\n| Total cholesterol | 209 mg/dl |\n| HDL cholesterol | 35 mg/dl |\n| HbA1c | 6.9 % |\n| eGFR | 88 ml/min |\nResult: 27.6% 10-year CV Risk"
+        text: |
+          الكتاب بيحط عيانه في الـ ESC CVD risk calculator:
+          - gender **male**، age **55**، age at diabetes diagnosis **48**، current smoking **yes**.
+          - systolic BP **130**، total cholesterol **209**، HDL cholesterol **35**.
+          - **HbA1c 6.9%** و **eGFR 88**.
+          - النتيجة: ==27.6%== 10-year CV risk، يعني **very high**.
+
+          ليه الـ inputs دي؟ التفسير المقبول (مش في الكتاب): الأولانيين هم الـ risk factors العادية، والتلاتة الزيادة خاصة بالسكر: **سن التشخيص** (كل ما بدأ بدري، سنين تعرّض أطول)، **HbA1c** (شدة السكر)، و **eGFR** (الكلية أوعية كمان، وتعبها بيعكس تعب الشرايين).
       - kind: figure
         page: 275
         quote: "| Risk | LDL-C target |\n|---|---|\n| Very high risk | LDL-C <1.4 mmol/L (<55 mg/dL) (Class I) |\n| High risk | LDL-C <1.8 mmol/L (<70 mg/dL) (Class I) |\n| Moderate risk | LDL-C <2.6 mmol/L (<100 mg/dL) (Class I) |"
@@ -214,12 +322,22 @@ lessons:
           - "الـ ASCVD مش شرط؛ الـ score لوحده كفاية."
       - kind: explain
         page: 275
-        title: "العلاج بالترتيب"
+        title: "ليه الـ target بينزل كل ما الخطر يعلى؟"
+        quote: "| Risk | LDL-C target |\n|---|---|\n| Very high risk | LDL-C <1.4 mmol/L (<55 mg/dL) (Class I) |\n| High risk | LDL-C <1.8 mmol/L (<70 mg/dL) (Class I) |\n| Moderate risk | LDL-C <2.6 mmol/L (<100 mg/dL) (Class I) |"
+        text: |
+          الـ LDL-C targets كلها **Class I**: very high أقل من **55** (1.4 mmol/L)، high أقل من **70** (1.8)، moderate أقل من **100** (2.6).
+
+          ليه مش رقم واحد للكل؟ التفسير المقبول (مش في الكتاب): نفس النزول في الـ LDL بيشيل **نسبة** ثابتة تقريبًا من الخطر. لو خطرك 30% وشلت ربعه، كسبت 7.5 من كل 100؛ لو خطرك 5% وشلت ربعه، كسبت 1.25 بس. يعني العيان العالي بيكسب أكتر من كل mg/dL، فيستاهل ==target أوطى==.
+      - kind: explain
+        page: 275
+        title: "العلاج بالترتيب، وكل دوا بيشتغل إزاي"
         quote: "Lipid-lowering treatment\n| Recommendation | Class | Level |\n|---|---|---|\n| Statins are recommended as the first-choice LDL-C-lowering treatment in patients with diabetes and above-target LDL-C levels. Administration of statins is defined based on the CV risk profile of the patients and the recommended LDL-C (or non-HDL-C) target levels. | I | A |\n| If the target LDL-C is not reached with statins, combination therapy with ezetimibe is recommended. | I | B |\n| A PCSK9 inhibitor is recommended in patients at very high CV risk, with persistently high LDL-C levels above target despite treatment with a maximum tolerated statin dose, in combination with ezetimibe, or in patients with statin intolerance. | I | A |"
         text: |
           1. ==Statin== أول اختيار (**I A**)، والجرعة على حسب الخطر والـ target.
           2. الـ target ما اتحققش؟ ضيف **ezetimibe** (**I B**).
           3. Very high risk ولسه فوق الـ target على أعلى statin + ezetimibe، أو مش بيستحمل الـ statin؟ ==proprotein convertase subtilisin/kexin type 9 (PCSK9) inhibitor== (**I A**).
+
+          ليه الترتيب ده بيكمّل بعضه؟ التفسير المقبول (مش في الكتاب): الـ statin بيقلل **تصنيع** الكوليسترول في الكبد؛ الـ ezetimibe بيقفل **امتصاصه** من الأمعاء؛ والـ PCSK9 inhibitor بيمنع **تكسير** الـ LDL receptors فتلف وترجع تشيل LDL تاني. 3 حنفيات مختلفة، فالأثر بيتجمع.
       - kind: table
         page: 276
         quote: "Intensity of lipid-lowering treatment\n| Treatment | Average LDL-C reduction |\n|---|---|\n| Moderate-intensity statin | ≈30% |\n| High-intensity statin | ≈50% |\n| High-intensity statin plus ezetimibe | ≈65% |\n| PCSK9 inhibitor | ≈60% |\n| PCSK9 inhibitor plus high-intensity statin | ≈75% |\n| PCSK9 inhibitor plus high-intensity statin plus ezetimibe | ≈85% |"
@@ -252,7 +370,7 @@ lessons:
           - المجموع: **−57%** ضد **−44.4%**.
           - Rosuvastatin 20 mg: **−62.2%** ضد **−47.1%**.
 
-          الإضافة كسبت في كل جرعة (5 و 10 و 20 mg).
+          الإضافة كسبت في كل جرعة (5 و 10 و 20 mg). ليه الإضافة بتفرق أكتر من مضاعفة الـ statin؟ التفسير المقبول (مش في الكتاب): الـ ezetimibe بيقفل مصدر **تاني** (الامتصاص)، أما مضاعفة جرعة الـ statin فبتزوّد النزول حوالي 6% بس.
       - kind: check
         page: 275
         quote: "Lipid-lowering treatment\n| Recommendation | Class | Level |\n|---|---|---|\n| Statins are recommended as the first-choice LDL-C-lowering treatment in patients with diabetes and above-target LDL-C levels. Administration of statins is defined based on the CV risk profile of the patients and the recommended LDL-C (or non-HDL-C) target levels. | I | A |\n| If the target LDL-C is not reached with statins, combination therapy with ezetimibe is recommended. | I | B |\n| A PCSK9 inhibitor is recommended in patients at very high CV risk, with persistently high LDL-C levels above target despite treatment with a maximum tolerated statin dose, in combination with ezetimibe, or in patients with statin intolerance. | I | A |"
@@ -277,18 +395,18 @@ lessons:
       - "Moderate 30%، high 50%، +ezetimibe 65%، PCSK9i 60%، +high 75%، الكل 85%."
       - "عيان الكتاب: 27.6% = very high، محتاج 57%: high statin + ezetimibe."
       - "I-ROSETTE: rosuvastatin + ezetimibe أحسن من rosuvastatin لوحده في كل جرعة."
-    practice: [dm.L22.002, dm.L22.003, dm.L22.016, dm.L22.017, dm.L22.018, dm.L22.019, dm.L22.020, dm.L22.021, dm.L22.022, dm.L22.023, dm.L22.024, dm.L22.025, dm.L22.026, dm.L22.040, dm.L22.041, dm.L22.042, dm.L22.043]
+    practice: [dm.L22.002, dm.L22.003, dm.L22.016, dm.L22.017, dm.L22.018, dm.L22.019, dm.L22.020, dm.L22.021, dm.L22.022, dm.L22.023, dm.L22.024, dm.L22.025, dm.L22.026, dm.L22.041, dm.L22.042, dm.L22.043, dm.L22.044]
   # ------------------------------------------------------------------
   - id: dm.L22.lesson3
     title: "الـ LDL اتظبط والخطر لسه موجود: الـ TG"
     hook: "وصلت للـ target، والعيان لسه بيجيله MI. الكتاب بيقولك مين المتهم، وإيه الدوا اللي الـ FDA وافقت عليه في 4 شهور."
-    minutes: 8
+    minutes: 10
     pages: [277, 280]
     topics: [residual, icosapent]
     goals:
-      - "تعرف دليل الـ residual risk من الـ TG"
-      - "تعرف icosapent ethyl: ESC و ADA و REDUCE-IT"
-      - "تحفظ الـ home message"
+      - "تعرف دليل الـ residual risk من الـ TG وتفهم ليه الـ TG بيضر"
+      - "تعرف icosapent ethyl: ESC و ADA و REDUCE-IT، وتقرا الـ NNT"
+      - "تحفظ الـ home message وتعرف ليه"
     status: unverified
     steps:
       - kind: explain
@@ -299,6 +417,8 @@ lessons:
           دراسة **real-world** (Diabetes, Obesity and Metabolism، فبراير 2019): هل الـ ==high triglycerides (TG)== بيزوّد الـ cardiovascular disease (CVD) عند السكريين اللي الـ **low-density lipoprotein (LDL) بتاعهم مظبوط على statin**؟
           - LDL **40-100 mg/dL**، atherosclerotic cardiovascular disease (ASCVD) أو risk factor واحد على الأقل، **n = 27,953**.
           - TG **200-499** ضد TG **أقل من 150**، لمدة **7 سنين**.
+
+          ليه السؤال ده مهم؟ لأن السكري نمطه TG عالي و HDL واطي (افتكر عيان الكتاب: TG 230)، والـ statin شغله الأساسي الـ LDL. فلو فيه خطر **فاضل** بعد ما الـ LDL يتظبط، غالبًا هيكون في الـ TG.
       - kind: table
         page: 278
         quote: "Results: Group 1 = Patients with moderately high TGs (200 – 499 mg/dl); Group 2 = Patients with normal (< 150 mg/dl)\n| End Point | Group 1 vs Group 2 |\n|---|---|\n| Non Fatal MI | 30 %* Higher in Gp 1 with ↑ TGs (P = 0.006) |\n| Non Fatal Stroke | 23 %* Higher in Gp 1 with ↑ TGs (P = 0.037) |\n| Coronary Revascularization | 21 %* Higher in Gp 1 with ↑ TGs (P = 0.027) |\n| Unstable Angina | 33% Higher in Gp 1 with ↑ TGs (P = 0.185) |"
@@ -317,12 +437,20 @@ lessons:
         text: "فخ: الـ **unstable angina** أعلى رقم (33%) بس **مش significant** (P = 0.185). التلاتة التانيين (MI و stroke و revasc) هما اللي significant."
       - kind: explain
         page: 278
-        title: "الخلاصة والـ ESC"
+        title: "الخلاصة: الـ TG هو المتهم"
         quote: "Conclusion:\n  1. Despite statin-controlled LDL-C levels; CV events were greater among patients with high TG levels (200 – 499 mg/ dl) Vs In patients with normal TGs < 150 mg/dl.\n  2. The Increase of Residual CV Risk in Statin controlled patients is explained by elevated TGs."
         text: |
-          رغم إن الـ LDL مظبوط، الـ cardiovascular (CV) events أكتر مع TG 200-499. يعني ==الـ residual CV risk== سببه **الـ TG العالي**.
+          رغم إن الـ LDL مظبوط، الـ cardiovascular (CV) events أكتر مع TG **200-499** عن TG **أقل من 150**. يعني ==الـ residual CV risk== في المظبوطين على statin سببه **الـ TG العالي**.
 
-          **European Society of Cardiology (ESC) 2023**: ==icosapent ethyl== بجرعة عالية (**2 g مرتين يوميًا**) ممكن يتضاف للـ statin في الـ hypertriglyceridaemia (TG **150-499** زي REDUCE-IT): **IIb B**.
+          إزاي الـ TG بيأذي وهو مش بيدخل الجدار لوحده؟ التفسير المقبول (مش في الكتاب): الـ particles الغنية بالـ TG (الـ VLDL وبواقيها) شايلة كوليسترول برضه، وصغيرة كفاية تدخل الـ intima زي الـ LDL. عشان كده الـ **non-HDL-C** بيعبّر عن الخطر ده أحسن من الـ LDL لوحده.
+      - kind: explain
+        page: 278
+        title: "ESC 2023: icosapent ethyl"
+        quote: "2023 ESC Guidelines for the management of cardiovascular disease in patients with diabetes\n| Recommendation | Class | Level |\n|---|---|---|\n| High-dose icosapent ethyl (2 g b.i.d.) may be considered in combination with a statin in patients with hypertriglyceridaemia | IIb | B |\nHypertriglyceridaemia: triglycerides 150–499 mg/dL, according to the inclusion of the REDUCE-IT trial."
+        text: |
+          **European Society of Cardiology (ESC) 2023**: ==high-dose icosapent ethyl== (**2 g مرتين يوميًا**) **may be considered** مع الـ statin في الـ hypertriglyceridaemia: **IIb B**.
+
+          الـ hypertriglyceridaemia هنا = TG **150-499 mg/dL**، لأن ده اللي REDUCE-IT دخّلهم. يعني الـ guideline بيوصّي على قد الناس اللي اتجرّب عليهم الدوا بالظبط، وده سبب الأرقام دي.
       - kind: explain
         page: 279
         title: "ADA 2024 و REDUCE-IT"
@@ -370,6 +498,17 @@ lessons:
           - "ده TG طبيعي."
           - "الـ recommendation بتقول على statin."
       - kind: explain
+        page: 279
+        title: "إزاي تقرا الـ NNT"
+        quote: "Reduction of Cardiovascular Events with Icosapent Ethyl–Intervention Trial (REDUCE-IT): 2 g of Icosapent Ethyl twice daily (total 4 g daily) vs Placebo, 4.9 years; Phase 3b, multi-center, randomized, double-blind, placebo controlled trial\n| | Primary endpoint | Secondary endpoint |\n|---|---|---|\n| Outcome | CV Death, MI, Stroke, Coronary Revasc, Unstable Angina | CV Death, MI, Stroke |\n| Relative reduction | 25 % | 26 % |\n| Hazard Ratio | 0.75 (95% CI 0.68–0.83) | 0.74 (95% CI 0.65–0.83) |\n| RRR | 24.8% | 26.5% |\n| ARR | 4.8% | 3.6% |\n| NNT | 21 (95% CI 15–33) | 28 (95% CI 20–47) |\n| P | 0.00000001 | 0.0000006 |"
+        text: |
+          الجدول فيه رقمين بيتلخبطوا: الـ **relative risk reduction (RRR)** 24.8% والـ ==absolute risk reduction (ARR)== 4.8%.
+          - الـ RRR: الخطر نزل **ربعه** تقريبًا.
+          - الـ ARR: من كل 100 عيان، **4.8** عيان أقل جالهم event.
+          - الـ **number needed to treat (NNT)** = 1 ÷ ARR: 1 ÷ 0.048 ≈ **21**. وفي الـ key secondary: 1 ÷ 0.036 ≈ **28**.
+
+          يعني تعالج 21 عيان **4.9 سنة** عشان تمنع event واحد. الـ RRR بيبان كبير دايمًا؛ الـ NNT هو اللي بيقولك الدوا بيفرق قد إيه في العيادة.
+      - kind: explain
         page: 280
         title: "الـ FDA"
         quote: "The FDA approved use of Icosapent ethyl ( EPA ) as an adjunctive therapy to reduce CV risk of among adults with elevated triglyceride > 150 mg/dl."
@@ -377,6 +516,24 @@ lessons:
           الـ US Food and Drug Administration (FDA) وافقت على ==icosapent ethyl (EPA)== كـ **add-on** يقلل الـ CV risk في الكبار اللي الـ TG عندهم **فوق 150 mg/dL** ومعاهم **CVD** أو **سكر + risk factors**.
 
           أول دوا يستهدف الـ **residual CV risk** فوق أعلى جرعة statin، واتوافق عليه في **4 شهور** بناءً على REDUCE-IT.
+
+          ليه الموافقة كانت بالسرعة دي؟ لأن REDUCE-IT كانت **outcome trial** (أحداث حقيقية، مش رقم في التحليل)، وعلى ناس واخدين statin أصلًا، فالسؤال "هل فيه فايدة **فوق** الـ statin؟" اتجاوب مباشرة.
+      - kind: update
+        page: 279
+        quote: "Reduction of Cardiovascular Events with Icosapent Ethyl–Intervention Trial (REDUCE-IT): 2 g of Icosapent Ethyl twice daily (total 4 g daily) vs Placebo, 4.9 years; Phase 3b, multi-center, randomized, double-blind, placebo controlled trial\n| | Primary endpoint | Secondary endpoint |\n|---|---|---|\n| Outcome | CV Death, MI, Stroke, Coronary Revasc, Unstable Angina | CV Death, MI, Stroke |\n| Relative reduction | 25 % | 26 % |\n| Hazard Ratio | 0.75 (95% CI 0.68–0.83) | 0.74 (95% CI 0.65–0.83) |\n| RRR | 24.8% | 26.5% |\n| ARR | 4.8% | 3.6% |\n| NNT | 21 (95% CI 15–33) | 28 (95% CI 20–47) |\n| P | 0.00000001 | 0.0000006 |"
+        text: "الـ icosapent ethyl ده **EPA نقي** بجرعة عالية، مش أي omega-3. تجربة **STRENGTH (2020)** بخليط EPA + DHA بـ 4 g ما قللتش الأحداث، فالنتيجة ما بتتعممش على مكمّلات الـ fish oil. وفيه نقاش إن الـ placebo في REDUCE-IT (mineral oil) ممكن يكون كبّر الفرق شوية. الامتحان: أرقام الكتاب."
+        ref: "STRENGTH trial, JAMA 2020"
+      - kind: explain
+        page: 280
+        title: "ليه كل سكري فوق 40؟"
+        quote: "Take a Home Message:\n  1. Unless contra-indicated, and if tolerated, ALL Diabetic patients above 40 years, Should be STATINIZED!!"
+        text: |
+          الـ home message مش جاية من فراغ؛ المحاضرة كلها بتبنيها:
+          1. السكر بيأذي الـ endothelium من 3 أذرع (رسمة ص 272).
+          2. الـ statin بيعكس الأذى ده (**pleiotropic effects**)، حتى لو الـ LDL مش عالي (**JUPITER**).
+          3. عيان "كويس" زي عيان الكتاب طلع خطره **27.6%**.
+
+          النتيجة: ==all diabetic patients above 40== ياخدوا statin، **unless contra-indicated** و **if tolerated**. والـ TG العالي بعد كده له إضافته (icosapent ethyl)، بس الـ statin الأول.
       - kind: aside
         tone: exam
         page: 280
@@ -408,4 +565,4 @@ lessons:
       - "REDUCE-IT: 8179، 4.9 سنة، primary −25% (NNT 21)، secondary −26% (NNT 28)."
       - "FDA: add-on لـ TG فوق 150 مع CVD أو سكر + risk factors."
       - "كل سكري فوق 40 ياخد statin إلا لو فيه مانع."
-    practice: [dm.L22.027, dm.L22.028, dm.L22.029, dm.L22.030, dm.L22.031, dm.L22.032, dm.L22.033, dm.L22.034, dm.L22.035, dm.L22.036, dm.L22.037, dm.L22.038, dm.L22.039, dm.L22.044]
+    practice: [dm.L22.027, dm.L22.028, dm.L22.029, dm.L22.030, dm.L22.031, dm.L22.032, dm.L22.033, dm.L22.034, dm.L22.035, dm.L22.036, dm.L22.037, dm.L22.038, dm.L22.039]

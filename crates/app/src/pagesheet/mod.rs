@@ -18,6 +18,8 @@ use crate::{Screen, Ui};
 
 const CSS: Css = css!("src/pagesheet/pagesheet.css");
 
+pub mod explain;
+
 /// The open page, where its number counts ([`Scope`]), the quote its chip
 /// carried, whether a quote is held back until he answers (it would give
 /// the answer away), and the تحشيشة of the list it cites.
@@ -85,6 +87,12 @@ pub fn scope(lib: &Library, of: &str) -> Scope {
 
 pub fn close() {
     *OPEN.write() = None;
+}
+
+/// The open page's number (tests).
+#[cfg(test)]
+pub fn open_page() -> Option<u32> {
+    OPEN.peek().as_ref().map(|o| o.0)
 }
 
 /// Whether lecture `id` numbers its pages in `scope`'s book.
@@ -176,6 +184,7 @@ pub fn BookSheet() -> Element {
         weak.as_ref().map(|w| weak_on_page(lib, page, &scope, w)).unwrap_or_default();
     let weak_ids: Vec<String> = weak_facts.iter().map(|i| i.id.clone()).collect();
     let book = scope.book().to_string();
+    let explained = explain::explains(lib, page, &scope);
 
     rsx! {
         style { {CSS.text()} }
@@ -224,6 +233,35 @@ pub fn BookSheet() -> Element {
                     }
                 } else {
                     p { class: "muted", {tx::NOTHING_YET} }
+                }
+                // The lesson steps that explain this page (#831).
+                section { class: "bk-explain", aria_labelledby: "bk-explain-title",
+                    h3 { id: "bk-explain-title", class: "bk-explain-title", {tx::EXPLAINED} }
+                    if explained.is_empty() {
+                        p { class: "muted small", {tx::NOT_EXPLAINED} }
+                    } else {
+                        ul { class: "tap-list bk-explain-list",
+                            for e in explained.iter() {
+                                li { key: "{e.lesson}#{e.step}",
+                                    button {
+                                        class: "tap tap-row bk-explain-row",
+                                        onclick: {
+                                            let (lesson, step) = (e.lesson.clone(), e.step);
+                                            move |_| {
+                                                close();
+                                                crate::learn::open_at(ui, &lesson, step);
+                                            }
+                                        },
+                                        span { class: "tap-row-main",
+                                            crate::learn::text::Line { text: e.title.clone() }
+                                            span { class: "muted small", {crate::i18n::learn::step_n(e.step + 1)} }
+                                        }
+                                        span { class: "chev", aria_hidden: "true" }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 if !weak_facts.is_empty() || weak_questions > 0 {
                     style { {crate::weak::CSS.text()} }
@@ -493,6 +531,26 @@ mod render_tests {
         let mut dom = VirtualDom::new_with_props(app, P { open });
         dom.rebuild_in_place();
         dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn a_page_lists_the_lesson_steps_that_explain_it_and_opens_one() {
+        use crate::test_dom::Screen as Dom;
+        let lib = Library::get();
+        let (lec, l) = lib.all_lessons().find(|(lec, _)| lec.starts_with("hem.")).unwrap();
+        let (k, page) = l.steps.iter().enumerate().find_map(|(k, s)| s.page.map(|p| (k, p))).unwrap();
+        let scope = scope(lib, lec);
+        crate::store::use_memory_store();
+        let mut d = Dom::with_props(app, P { open: Some((page, scope.clone(), None, false, None)) });
+        let html = d.html();
+        assert!(html.contains(tx::EXPLAINED), "{html}");
+        assert!(html.contains(&crate::i18n::learn::step_n(k + 1)), "{html}");
+        d.click(|e| e.has_class("bk-explain-row") && e.text.contains(&crate::i18n::learn::step_n(k + 1)));
+        assert_eq!(d.read(|| crate::learn::OPEN.peek().clone()), Some(l.id.clone()));
+        assert_eq!(d.read(open_page), None, "the sheet closes");
+        // A page no step cites says so.
+        let none = render(Some((9_999, scope, None, false, None)));
+        assert!(none.contains(tx::NOT_EXPLAINED), "{none}");
     }
 
     #[test]

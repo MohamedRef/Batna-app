@@ -54,7 +54,12 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
             return Attempt { at: s.saturating_sub(1).min(n), ..Attempt::new(n, now) };
         }
         let saved: Option<Attempt> = crate::store::shared().place(&pos_key(&id));
-        Attempt::restore(&lesson, saved, mark(&id).map(|m| m.done_ms), now)
+        let restored = Attempt::restore(&lesson, saved, mark(&id).map(|m| m.done_ms), now);
+        // Opened at a step (a book page, «اشرحهولي»): show it without saving.
+        match super::take_at() {
+            Some(k) if n > 0 => Attempt { at: k.min(n - 1), ..restored },
+            _ => restored,
+        }
     });
     let sigs = use_hook(|| lesson.steps.iter().map(|s| sig(&s.body)).collect::<Vec<_>>());
     let mut attempt = use_signal(|| start.clone());

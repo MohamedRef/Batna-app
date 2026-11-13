@@ -34,3 +34,12 @@
 }
 .lec-way-n { font-size: var(--fs-lg); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--accent); }
 .lec-check { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1); margin: 0; }
+/* «بترتيب الكتاب» (#831): the lecture page by page. */
+.lec-outline > summary { list-style: none; cursor: pointer; display: flex; flex-direction: column; gap: 2px; min-block-size: var(--target, 48px); justify-content: center; }
+.lec-outline > summary::-webkit-details-marker { display: none; }
+.lec-outline > summary h2 { margin: 0; }
+.lec-outline > summary h2::after { content: " ▾"; color: var(--muted); font-size: var(--fs-sm); }
+.lec-outline[open] > summary h2::after { content: " ▴"; }
+.lec-outline-rows { margin: 0; padding: 0; list-style: none; }
+.lec-outline-page { flex: none; min-inline-size: 2.6rem; font-weight: 700; color: var(--accent); text-align: center; }
+.lec-outline-row[data-explained="no"] .lec-outline-page { color: var(--muted); }

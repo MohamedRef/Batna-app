@@ -7,6 +7,7 @@
 //! page's own back button, or any move to another screen. Pages stack: a
 //! lecture opened from the references list ([`refs`]) goes back to it.
 
+pub mod outline;
 pub mod refs;
 
 use batna_core::review::StudyStore;
@@ -267,6 +268,10 @@ pub fn LecturePage(id: String) -> Element {
                         }
                     }
                 }
+            }
+
+            if lessons.is_some() {
+                outline::BookOrder { id: id.clone() }
             }
 
             if mcqs > 0 || cases > 0 {

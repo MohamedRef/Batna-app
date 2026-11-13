@@ -64,6 +64,9 @@ struct Open {
     /// Where the lesson was opened from.
     #[props(default = crate::Screen::Today)]
     from: crate::Screen,
+    /// Opened at this step (`open_at`), over the saved place `at`.
+    #[props(default)]
+    jump: Option<usize>,
 }
 
 /// The app's frame around Learn: the Ui and review contexts, the lesson's
@@ -91,6 +94,7 @@ fn root(o: Open) -> Element {
             crate::store::shared().put_place(&player::pos_key(id), &a).unwrap();
         }
         *FROM.write() = o.from;
+        *AT.write() = o.jump;
         *OPEN.write() = o.lesson.clone();
         *VIEW.write() = o.view;
     });
@@ -110,6 +114,7 @@ fn open(lesson: &Lesson, at: usize) -> Dom {
             draft: None,
             answered: None,
             from: crate::Screen::Today,
+            jump: None,
         },
     )
 }
@@ -610,6 +615,7 @@ fn a_question_answered_in_an_older_app_shows_its_key_and_can_be_retried() {
                 draft: None,
                 answered: Some(true),
                 from: crate::Screen::Learn,
+                jump: None,
             },
         );
         assert!(shows(&d, "ls-before"), "{k}: {}", d.html());
@@ -636,6 +642,7 @@ fn the_pages_view_turns_with_arrows_and_the_view_switch_is_kept() {
             draft: None,
             answered: None,
             from: crate::Screen::Learn,
+            jump: None,
         },
     );
     let html = d.html();
@@ -701,6 +708,7 @@ fn list() -> Dom {
             draft: None,
             answered: None,
             from: crate::Screen::Learn,
+            jump: None,
         },
     )
 }
@@ -867,6 +875,9 @@ fn a_study_item_links_to_the_lesson_that_teaches_it() {
     assert!(norm(&link.text).contains(&norm(&taught.title)));
     d.click(is("ls-explain"));
     assert_eq!(d.read(|| OPEN.peek().clone()), Some(taught.id.clone()));
+    // It asks for the step that cites the card's own page (#831).
+    let page = practice::find(&l.practice[0]).unwrap().1.src.page;
+    assert_eq!(d.read(|| *AT.peek()), step_on_page(taught, page));
     // An item no lesson covers shows no link.
     assert!(lesson_for_item("nope.L99.001").is_none());
     let d = Dom::with_props(card_root, Card { prefer: vec![], item: Some("nope.L99.001".into()) });
@@ -949,4 +960,28 @@ fn reading_css_scales_the_step_text_and_moves_the_reading_column() {
     ] {
         assert!(reading.contains(want), "reading.css lacks {want}");
     }
+}
+
+#[test]
+fn opening_at_a_step_shows_it_keeps_the_saved_place_and_back_reaches_earlier_steps() {
+    // #831: a book page or «اشرحهولي» opens the step that explains it.
+    let (l, _) = claim(|l, k, _| k == 0 && l.steps.len() > 4 && reading(&l.steps[2].body));
+    let n = l.steps.len();
+    let mut d = Dom::with_props(
+        root,
+        Open {
+            lesson: Some(l.id.clone()),
+            at: 1,
+            view: View::Steps,
+            draft: None,
+            answered: None,
+            from: crate::Screen::Today,
+            jump: Some(3),
+        },
+    );
+    assert_eq!(count(&d), format!("4/{n}"));
+    assert_eq!(saved(&l.id).unwrap().at, 1, "opening there saves nothing");
+    d.click(|e| e.attr("data-nav") == Some("back"));
+    assert_eq!(count(&d), format!("3/{n}"));
+    assert!(d.read(|| AT.peek().is_none()), "the jump is used once");
 }

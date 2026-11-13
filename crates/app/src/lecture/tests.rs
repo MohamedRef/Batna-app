@@ -112,7 +112,7 @@ fn practice_ways_lead_to_the_bank_and_cases() {
     let lec = with("card").expect("a lecture with cards");
     let mut d = page(&lec);
     assert!(d.html().contains(tx::TOPICS));
-    d.click(|e| e.has_class("tap-row"));
+    d.click(|e| e.has_class("tap-row") && !e.has_class("lec-outline-row"));
     assert!(["Study", "Bank"].contains(&screen(&d).as_str()));
 }
 
@@ -230,4 +230,17 @@ fn a_page_left_on_another_screen_closes_and_odd_ids_show_their_pages() {
     assert!(d.html().len() > 200, "the dictionary renders");
     let d = page("nope.L99");
     assert!(!shows(&d, "lec-page"));
+}
+
+#[test]
+fn the_book_order_outline_opens_each_pages_sheet() {
+    // #831: the lecture page by page; a row opens that page's sheet.
+    let lec = "hem.L09";
+    let first = Library::get().index.lectures.iter().find(|e| e.id == lec).unwrap().pages[0];
+    let mut d = page(lec);
+    assert!(d.html().contains(tx::BOOK_ORDER));
+    let rows = d.find(is("lec-outline-row"));
+    assert!(rows.len() > 5);
+    d.click(|e| e.has_class("lec-outline-row"));
+    assert_eq!(d.read(crate::pagesheet::open_page), Some(first));
 }

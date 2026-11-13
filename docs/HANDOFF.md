@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: rheum.L19 to the Hepatology bar: 5 → 8 lessons (lesson1 → 6, lesson2 pathology → lesson4, lesson4 → 7, lesson5 → 8), reasons labelled «التفسير المقبول (مش في الكتاب)», five new SVGs, words per page 130 → 269, explain steps without a reason 18/20 → 0/23; p325 (review MCQs) skipped (#827–#829).
 - 2026-11-13: git.L01 to the Hepatology bar: 6 → 12 lessons (lesson1 → 7, lesson3 → 8, lesson4 → 9 and 11, lesson5 → 10, lesson6 → 12), reasons labelled «التفسير المقبول (مش في الكتاب)», 6 book figures + 3 drawings, every page cited, words per page 88 → 227 on the `lessons --report` count; `git.L01` in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: rheum.L18 to the Hepatology bar: 3 → 5 lessons (lesson2 → 4, lesson3 → 5), reasons labelled «التفسير المقبول (مش في الكتاب)», two new SVGs, words per page 172 → 298, explain steps without a reason 7/13 → 0/13 (#827–#829).
 - 2026-11-13: geri.L11 to the Hepatology bar: 5 → 7 lessons (lesson4 split → lesson6, lesson5 split → lesson7), reasons labelled «التفسير المقبول (مش في الكتاب)», four new figures, p189 now taught, words per page 113 → 235 on the `lessons --report` count; in `content/lesson-skips.yaml` (#827–#829).

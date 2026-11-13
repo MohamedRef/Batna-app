@@ -6,12 +6,12 @@ lessons:
     title: "القلب لما أعصابه تتقطع: CAN"
     hook: "مريض سكر نبضه 95 وثابت، ومش بيتغير لا بالنفس ولا بالوقوف: ده مش «قلق»، ده CAN."
     minutes: 8
-    pages: [76, 78]
-    topics: [definition, prevalence, risk, pathogenesis]
+    pages: [76, 77]
+    topics: [definition, prevalence]
     goals:
-      - "تعرّف الـ CAN وتعرف قاعدة الـ two tests"
-      - "تحفظ النوعين والـ prevalence"
-      - "تعرف ليه الـ mortality عالية"
+      - "تعرّف الـ CAN وتعرف قاعدة الـ two tests وليه اتنين"
+      - "تفرّق الـ transient من الـ symptomatic"
+      - "تحفظ الـ prevalence"
     status: unverified
     steps:
       - kind: explain
@@ -24,6 +24,34 @@ lessons:
           - **central and peripheral vascular dynamics** (الضغط وتوزيع الدم)
 
           القلب عنده دواسة بنزين (**sympathetic**) وفرامل (**vagus**). الـ cardiovascular autonomic neuropathy (CAN) بيقطع السلكين.
+
+          ليه الاتنين (القلب والأوعية) بيتأثروا مع بعض؟ لأن نفس الأسلاك اللي بتسرّع وتبطّأ القلب هي اللي بتضيّق وتوسّع الأوعية. السلك لما يتقطع، الاتنين يفقدوا التحكم في نفس الوقت.
+      - kind: figure
+        page: 76
+        quote: "Definition Cardiovascular autonomic neuropathy is a common form of autonomic neuropathy, causing abnormalities in heart rate control and central and peripheral vascular dynamics."
+        title: "دواسة البنزين والفرامل"
+        alt: "Diagram. The brainstem sends two wires: the vagus (parasympathetic, brake) to the heart and the sympathetic (accelerator) to the heart and the blood vessels. In CAN both wires are cut, shown by red crosses, so heart rate control and vascular dynamics are lost."
+        caption: "التفسير المقبول (مش في الكتاب): الـ ==vagus== فرامل للقلب، والـ **sympathetic** بنزين للقلب وللأوعية. الـ CAN بيقطع الاتنين، فيبوّظ الـ **heart rate control** والـ **vascular dynamics** زي ما الكتاب بيقول."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L07a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" class="fg-head"/></marker></defs>
+            <rect x="110" y="10" width="110" height="34" rx="8" class="fg-ink"/>
+            <text x="165" y="32" text-anchor="middle" class="t-sm t-b">Brainstem</text>
+            <path d="M130 44 L60 150" class="fg-arrow" marker-end="url(#L07a)"/>
+            <path d="M200 44 L250 150" class="fg-arrow-acc" marker-end="url(#L07a)"/>
+            <path d="M200 44 L110 150" class="fg-arrow-acc" marker-end="url(#L07a)"/>
+            <text x="20" y="90" class="t-sm t-b">Vagus</text>
+            <text x="20" y="105" class="t-sm t-mut">brake</text>
+            <text x="245" y="90" class="t-sm t-b t-acc">Sympathetic</text>
+            <text x="245" y="105" class="t-sm t-mut">accelerator</text>
+            <text x="82" y="102" class="t-lg t-bad t-b">×</text>
+            <text x="216" y="92" class="t-lg t-bad t-b">×</text>
+            <rect x="30" y="152" width="110" height="34" rx="8" class="fg-bad"/>
+            <text x="85" y="174" text-anchor="middle" class="t-sm t-b">Heart rate</text>
+            <rect x="195" y="152" width="120" height="34" rx="8" class="fg-bad"/>
+            <text x="255" y="174" text-anchor="middle" class="t-sm t-b">Blood vessels</text>
+            <text x="165" y="215" text-anchor="middle" class="t-sm t-mut">CAN: both wires cut</text>
+          </svg>
       - kind: explain
         remind: [dm.L07.003]
         page: 76
@@ -48,6 +76,14 @@ lessons:
           - "واحد بس مش كفاية حسب الكتاب."
           - "مش لازم الأربعة."
           - "الكتاب قال اتنين."
+      - kind: reveal
+        page: 76
+        quote: "Studies have shown that patients with two or more positive tests have more severe autonomic dysfunction and a higher frequency of other co-morbid complications that contribute to their higher mortality risk."
+        prompt: "ليه الكتاب بيطلب اتنين من أربعة، مش اختبار واحد abnormal؟"
+        answer: |
+          الكتاب بيدّيك نص الإجابة: اللي عندهم **two or more positive tests** عندهم **more severe autonomic dysfunction** و co-morbid complications أكتر و **higher mortality risk**. يعني الاتنين بيفرزوا اللي فعلًا في خطر.
+
+          والتفسير المقبول (مش في الكتاب) للنص التاني: كل اختبار لوحده بيتأثر بحاجات ملهاش علاقة بالعصب، زي السن، والعيان ما نفخش كويس في الـ Valsalva، أو دوا بيبطّأ القلب. اختبار واحد ممكن يكون صدفة؛ اتنين بيتفقوا يبقى العصب نفسه هو اللي تعبان.
       - kind: explain
         page: 77
         title: "نوعين"
@@ -55,6 +91,8 @@ lessons:
         text: |
           - ==Transient==: في **newly diagnosed type 1**، أعراض بسيطة **بتروح** لما السكر يتظبط (**euglycemia**).
           - **Symptomatic**: عادة بيمشي مع الـ **somatic neuropathy** (يعني لو الرجل فيها neuropathy، دوّر على القلب).
+
+          ليه الـ transient بيخف؟ التفسير المقبول (مش في الكتاب): في الأول العصب **متسمم** من السكر العالي بس لسه **سليم في تركيبه**، فلما السكر يتظبط الشغل يرجع. مع السنين الألياف نفسها بتموت، وده اللي بيخلي الـ symptomatic مش بيرجع بسهولة. وعشان نفس العملية بتضرب أعصاب الرجل، الـ symptomatic غالبًا بيمشي مع الـ **somatic neuropathy**.
       - kind: table
         page: 77
         quote: "Cardiovascular autonomic neuropathy occurs in ~17% of patients with type 1 diabetes and 22% of those with type 2."
@@ -69,6 +107,43 @@ lessons:
         page: 77
         quote: "Cardiovascular autonomic neuropathy occurs in ~17% of patients with type 1 diabetes and 22% of those with type 2."
         text: "افتكرها كده: **type 1 = 17**، و **type 2 = 22** (2 و 2). والـ borderline: **9 و 12**."
+      - kind: check
+        page: 77
+        quote: "Transient: occurs in newly diagnosed type1diabetic patients, minor symptoms that recover with the establishment of euglycemia."
+        question: "Newly diagnosed type 1 diabetic, mild autonomic symptoms that disappear once glucose is controlled. Type of CAN?"
+        options:
+          - "Transient"
+          - "Symptomatic autonomic neuropathy"
+          - "Borderline dysfunction"
+          - "Autonomic cardiopathy"
+        answer: 0
+        why:
+          - "صح: newly diagnosed type 1 + أعراض بسيطة بتروح مع الـ euglycemia = transient."
+          - "الـ symptomatic بيمشي مع الـ somatic neuropathy ومش بيروح بظبط السكر."
+          - "الـ borderline رقم في الـ prevalence (9% و 12%)، مش نوع إكلينيكي."
+          - "الـ autonomic cardiopathy خلل في وظيفة الـ LV، مش أعراض بتختفي."
+      - kind: try
+        items: [dm.L07.001, dm.L07.002, dm.L07.003, dm.L07.005, dm.L07.007]
+    recap:
+      - "CAN = خلل في التحكم في الـ HR والـ vascular dynamics: الفرامل والبنزين اتقطعوا."
+      - "التشخيص: two of four autonomic tests abnormal؛ اتنين بيفرزوا الأشد والأخطر."
+      - "Transient في T1 الجديد ويروح مع euglycemia؛ symptomatic مع الـ somatic neuropathy."
+      - "T1 17%، T2 22%، والـ borderline 9% و 12%."
+    practice: [dm.L07.001, dm.L07.002, dm.L07.003, dm.L07.004, dm.L07.005, dm.L07.006, dm.L07.007, dm.L07.008]
+  # ------------------------------------------------------------------
+  # Split from lesson1 on 2026-11-13 (#828): mortality and pathogenesis.
+  - id: dm.L07.lesson5
+    title: "ليه الـ CAN بيموّت؟ وجه منين؟"
+    hook: "خمس أضعاف الـ mortality في خمس سنين. ست أسباب، وأربع فرضيات للي قطع السلك."
+    minutes: 7
+    pages: [77, 78]
+    topics: [risk, pathogenesis]
+    goals:
+      - "تحفظ أرقام الـ mortality وأسبابها الستة"
+      - "تفهم كل سبب بيموّت إزاي"
+      - "تعدّ فرضيات الـ pathogenesis الأربعة"
+    status: unverified
+    steps:
       - kind: explain
         remind: [dm.L07.011]
         page: 77
@@ -93,6 +168,38 @@ lessons:
           - { key: "P", text: "Platelet stickiness" }
         hook: "**SASHAP** (ساشاب): ست أسباب للـ mortality في الـ CAN."
       - kind: explain
+        page: 77
+        title: "كل سبب بيموّت إزاي؟"
+        quote: "e- Causes:\n  a. Silent Cardiac Ischemia\n  b. Arrhythmia's\n  c. Sudden Cardiac Death\n  d. Increased LV Hypertrophy\n  e. Altered Coronary Vasomotor Dynamics\n  f. Platelet Stickiness"
+        text: |
+          القايمة من الكتاب، والربط ده التفسير المقبول (مش في الكتاب):
+
+          - **Silent cardiac ischemia**: مفيش وجع يجيبه المستشفى، فالـ MI بيعدّي من غير علاج. عشان كده ==decreased likelihood of survival== بعد الـ MI.
+          - **Arrhythmias** و **sudden cardiac death**: الـ vagus كان بيحمي القلب من الكهربا العشوائية؛ لما يقع والـ sympathetic يبقى متلخبط، القلب يبقى أسهل يدخل في arrhythmia قاتلة.
+          - **LV hypertrophy**: النبض العالي طول اليوم والضغط اللي مش متظبط بيتعبوا العضلة فتتخن.
+          - **Altered coronary vasomotor dynamics**: الشريان التاجي مش بيوسّع وقت المجهود، فالعضلة تجوع بدري.
+          - **Platelet stickiness**: صفايح لزجة يعني جلطة أسهل في شريان أصلًا ضيق.
+      - kind: check
+        page: 77
+        quote: "The 5-year mortality rate is five times higher"
+        question: "Compared with diabetics without CAN, the 5-year mortality of patients with CAN is:"
+        options:
+          - "Five times higher"
+          - "Twice as high"
+          - "Ten times higher"
+          - "The same"
+        answer: 0
+        why:
+          - "صح: الكتاب: the 5-year mortality rate is five times higher، و 27% في 10 سنين."
+          - "الـ 2–3 أضعاف رقم الـ perioperative morbidity والـ mortality، مش الـ 5 سنين."
+          - "مش عشرة؛ الـ 10 في الكتاب هي الـ 10 سنين (27%)."
+          - "الـ CAN من أقوى علامات الخطر في السكر."
+      - kind: aside
+        tone: analogy
+        page: 77
+        quote: "increased incidence of asymptomatic ischemia, myocardial infarction, and decreased likelihood of survival after myocardial infarction"
+        text: "زي عربية لمبة الزيت فيها محروقة: الموتور بيسخن ومفيش حاجة بتنوّر في التابلوه. السواق مش هيقف غير لما العربية تقف لوحدها. الـ **asymptomatic ischemia** هي اللمبة المحروقة."
+      - kind: explain
         remind: [dm.L07.012]
         page: 78
         title: "الأعصاب بتموت ليه؟"
@@ -103,37 +210,78 @@ lessons:
           - **Neurovascular insufficiency** (الأوعية اللي بتغذي العصب)
           - **Autoimmune damage**
           - **Neurohormonal growth factor deficiency**
+
+          والتفسير المقبول (مش في الكتاب) لكل فرضية:
+          - **Metabolic**: السكر العالي بيدخل العصب ويتحول لمواد بتأذيه (sorbitol و AGEs).
+          - **Neurovascular**: الأوعية الصغيرة اللي بتغذي العصب بتضيق، فالعصب يجوع.
+          - **Autoimmune**: أجسام مضادة بتهاجم الـ autonomic ganglia في بعض العيانين.
+          - **Growth factor deficiency**: العصب محتاج growth factors عشان يصلّح نفسه، ولما تقل التصليح يقف.
+      - kind: figure
+        page: 78
+        quote: "Hypotheses concerning the multiple etiologies\na. Metabolic insult to nerve fibers,\nb. Neurovascular insufficiency,\nc. Autoimmune damage,\nd. Neurohormonal growth factor deficiency"
+        title: "أربع ضربات على نفس العصب"
+        alt: "Four boxes, metabolic insult, neurovascular insufficiency, autoimmune damage and growth factor deficiency, each with an arrow to one autonomic nerve fibre in the centre, which leads to CAN."
+        caption: "الكتاب بيقول ==hypotheses==: مفيش سبب واحد متأكدين منه، والأربعة ممكن يشتغلوا مع بعض على نفس الـ nerve fiber."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L07h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" class="fg-head"/></marker></defs>
+            <rect x="8" y="10" width="140" height="40" rx="8" class="fg-acc"/>
+            <text x="78" y="35" text-anchor="middle" class="t-sm t-b">Metabolic insult</text>
+            <rect x="182" y="10" width="140" height="40" rx="8" class="fg-acc"/>
+            <text x="252" y="28" text-anchor="middle" class="t-sm t-b">Neurovascular</text>
+            <text x="252" y="43" text-anchor="middle" class="t-sm t-b">insufficiency</text>
+            <rect x="8" y="190" width="140" height="40" rx="8" class="fg-acc"/>
+            <text x="78" y="215" text-anchor="middle" class="t-sm t-b">Autoimmune damage</text>
+            <rect x="182" y="190" width="140" height="40" rx="8" class="fg-acc"/>
+            <text x="252" y="208" text-anchor="middle" class="t-sm t-b">Growth factor</text>
+            <text x="252" y="223" text-anchor="middle" class="t-sm t-b">deficiency</text>
+            <rect x="105" y="100" width="120" height="40" rx="20" class="fg-bad"/>
+            <text x="165" y="118" text-anchor="middle" class="t-sm t-b">Autonomic</text>
+            <text x="165" y="132" text-anchor="middle" class="t-sm t-b">nerve fibre</text>
+            <path d="M90 50 L130 98" class="fg-arrow" marker-end="url(#L07h)"/>
+            <path d="M240 50 L200 98" class="fg-arrow" marker-end="url(#L07h)"/>
+            <path d="M90 190 L130 142" class="fg-arrow" marker-end="url(#L07h)"/>
+            <path d="M240 190 L200 142" class="fg-arrow" marker-end="url(#L07h)"/>
+          </svg>
+      - kind: reveal
+        page: 78
+        quote: "Hypotheses concerning the multiple etiologies"
+        prompt: "لو السبب مش واحد، ده بيأثر على العلاج إزاي؟"
+        answer: |
+          الكتاب بيقول **multiple etiologies**، يعني مفيش دوا واحد يقفل الحنفية.
+
+          عشان كده هتلاقي في آخر المحاضرة محاولات الـ **reversal** بتضرب من كذا ناحية: ظبط السكر والـ **lifestyle** ونزول الوزن للـ metabolic، و **aldose reductase inhibitor** (التفسير المقبول، مش في الكتاب: ده بيقفل الطريق اللي بيحوّل الـ glucose لـ sorbitol جوه العصب).
+      - kind: try
+        items: [dm.L07.009, dm.L07.010, dm.L07.011, dm.L07.012]
+    recap:
+      - "5-year mortality ×5، و27% في 10 سنين؛ survival بعد الـ MI أقل."
+      - "SASHAP: silent ischemia، arrhythmias، sudden death، LV hypertrophy، altered vasomotor، platelet stickiness."
+      - "الـ silent ischemia بتموّت عشان مفيش وجع يجيب العيان بدري."
+      - "Pathogenesis = hypotheses: metabolic، neurovascular، autoimmune، growth factor deficiency."
+    practice: [dm.L07.009, dm.L07.010, dm.L07.011, dm.L07.012]
+  # ------------------------------------------------------------------
+  - id: dm.L07.lesson2
+    title: "وشوش الـ CAN: النبض والضغط والمجهود"
+    hook: "نبض ثابت، ضغط بيقع، تخدير بيقلب، ودوخة من غير ما الضغط يقع: كله نفس المرض."
+    minutes: 10
+    pages: [78, 80]
+    topics: [clinical]
+    goals:
+      - "تحفظ الـ clinical manifestations"
+      - "تعرف أرقام الـ resting tachycardia والـ orthostatic hypotension وليه بتحصل"
+      - "تفرّق الـ orthostatic hypotension عن الـ orthostatic tachycardia"
+    status: unverified
+    steps:
       - kind: explain
-        remind: [dm.L07.013]
         page: 78
         title: "بيظهر إزاي؟"
         quote: "Rare and relatively late in the course of the diabetes."
         text: |
           الأعراض الصريحة (**tachycardia**، **postural hypotension**، **low cardiac output**) ==rare and late==. علشان كده الـ standard diagnosis هو الـ **noninvasive cardiovascular reflex tests**، مش الأعراض.
-      - kind: try
-        items: [dm.L07.002, dm.L07.007, dm.L07.009, dm.L07.011, dm.L07.012]
-    recap:
-      - "CAN = خلل في التحكم في الـ HR والـ vascular dynamics."
-      - "التشخيص: two of four autonomic tests abnormal."
-      - "Transient في T1 الجديد ويروح مع euglycemia؛ symptomatic مع الـ somatic neuropathy."
-      - "T1 17%، T2 22%. 5-year mortality ×5، و27% في 10 سنين (SASHAP)."
-    practice: [dm.L07.001, dm.L07.002, dm.L07.003, dm.L07.004, dm.L07.005, dm.L07.006, dm.L07.007, dm.L07.008, dm.L07.009, dm.L07.010, dm.L07.011, dm.L07.012, dm.L07.013, dm.L07.014, dm.L07.015]
-  # ------------------------------------------------------------------
-  - id: dm.L07.lesson2
-    title: "8 وشوش للـ CAN"
-    hook: "نبض ثابت، ضغط بيقع، MI من غير وجع، وتخدير بيقلب: كله نفس المرض."
-    minutes: 10
-    pages: [78, 81]
-    topics: [clinical, silent]
-    goals:
-      - "تحفظ الـ clinical manifestations"
-      - "تعرف أرقام الـ resting tachycardia والـ orthostatic hypotension"
-      - "تعرف شكل الـ MI في الـ CAN"
-      - "تعرف الـ autonomic cardiopathy"
-    status: unverified
-    steps:
+
+          ليه متأخرة؟ لأن الجسم عنده احتياطي: طول ما فيه ألياف كفاية شغالة، العيان مش هيحس. الـ reflex tests بتقيس الاحتياطي ده نفسه، فبتكشف المرض **قبل** ما الأعراض تبان.
       - kind: explain
-        remind: [dm.L07.016]
+        remind: [dm.L07.016, dm.L07.013]
         page: 78
         title: "القائمة"
         quote: "Intra and postoperative CV instability"
@@ -146,6 +294,8 @@ lessons:
           6. ==Silent myocardial ischemia== / infarction
           7. **Sudden death**
           8. **Autonomic cardiopathy**
+
+          الـ 8 مش حفظ عشوائي: كل واحدة **وظيفة autonomic** وقعت. الفرامل وقعت ← نبض عالي ثابت. البنزين للأوعية وقع ← الضغط يقع وهو واقف. الاتنين مش بيستجيبوا ← المجهود والتخدير. السلك الحسي وقع ← MI ساكت.
       - kind: explain
         page: 79
         title: "1. النبض الثابت"
@@ -160,9 +310,9 @@ lessons:
         quote: "A heart rate of 90-100 bpm unresponsive to variation in breathing, posture, or mild exercise is the characteristic finding in diabetic CAN."
         prompt: "ليه النبض بيعلى (90–100) بدل ما يفضل 70؟"
         answer: |
-          الـ **vagus** (parasympathetic) هو اللي بيهدّي القلب طول الوقت، وأليافه طويلة فبتتأثر **الأول**. لما يقع، القلب يرجع لسرعته الذاتية من الـ SA node (حوالي 90–100).
+          التفسير المقبول (مش في الكتاب): الـ **vagus** (parasympathetic) هو اللي بيهدّي القلب طول الوقت، وأليافه طويلة فبتتأثر **الأول**. لما يقع، القلب يرجع لسرعته الذاتية من الـ SA node (حوالي 90–100).
 
-          ولما الـ sympathetic كمان يقع، القلب يبقى زي **transplanted heart**: ==fixed heart rate==. (تفسير فسيولوجي.)
+          ولما الـ sympathetic كمان يقع، القلب يبقى زي **transplanted heart**: ==fixed heart rate==.
       - kind: explain
         page: 79
         title: "2. الضغط بيقع"
@@ -172,6 +322,8 @@ lessons:
 
           - الأعراض: **lightheadedness**، presyncope، dizziness، weakness، fatigue، visual blurring، و **neck pain** (coat-hanger pain)
           - بس **كتير asymptomatic** رغم نزول كبير
+
+          ليه بيقع؟ التفسير المقبول (مش في الكتاب): لما تقف، نص لتر دم تقريبًا بينزل في الرجلين والبطن. الطبيعي إن الـ baroreceptors تحس وتبعت **sympathetic** يضيّق الأوعية في ثواني. في الـ CAN السلك ده مقطوع، فالدم يفضل تحت والمخ يجوع: ده الـ lightheadedness. والـ **neck pain** عضلات الرقبة والكتف هي كمان مش واصلها دم كفاية.
       - kind: update
         page: 79
         quote: "A fall in systolic blood pressure of greater than 30 mm Hg upon standing."
@@ -185,9 +337,11 @@ lessons:
         text: |
           **Exercise intolerance** بسبب: ضعف الـ sympathetic والـ parasympathetic responses، **reduced ejection fraction**، systolic dysfunction وقلة الـ diastolic filling.
 
-          ← العيان يعتمد على ==perceived exertion== مش على الـ heart rate.
+          ← العيان يعتمد على ==perceived exertion== مش على الـ heart rate. ليه؟ لأن النبض نفسه مش بيطلع مع المجهود، فلو استنى يوصل لرقم معين هيتعب قبله بكتير أو يزوّدها من غير ما يحس.
 
           **العمليات:** الـ perioperative morbidity والـ mortality **2–3 أضعاف** في السكر. في التخدير: الـ HR والـ blood pressure (BP) ينزلوا أكتر عند الـ induction، ويعلوا أقل بعد الـ intubation، ومحتاجين **vasopressors** أكتر.
+
+          وليه التخدير خطير؟ أدوية التخدير بتوسّع الأوعية وبتهدّي القلب، والطبيعي إن الـ reflexes تعوّض. في الـ CAN مفيش تعويض، فالضغط يقع أكتر، ولما الأنبوبة تدخل (أكبر stimulus في العملية) القلب مش بيرد.
       - kind: check
         page: 79
         quote: "Diabetic patients undergoing general anesthesia show a greater decline in heart rate and BP during induction of anesthesia and less increase after tracheal intubation and extubation."
@@ -208,6 +362,8 @@ lessons:
           أعراض orthostasis (faint، dizzy، **circumoral paresthesia**، headache) لما يقف، بس ==BP ما بيقعش==. اللي بيتغير هو الـ **heart rate** (tachy أو brady).
 
           الأسباب: **Postural orthostatic tachycardia syndrome (POTS)**، inappropriate sinus tachycardia، **neurocardiogenic syncope**، baroreceptor abnormalities.
+
+          يعني الفرق المهم: هنا الـ **vasoconstriction** شغالة فالضغط ماسك، بس **التحكم في القلب** هو اللي متلخبط، فبيرد بزيادة (tachycardia) أو بنقص (bradycardia).
       - kind: sort
         page: 80
         quote: "The hallmark of these abnormalities is the absence of a fall in BP with standing, but a tachycardia or bradycardia with the change in posture"
@@ -219,6 +375,30 @@ lessons:
           - { text: "BP 120/78 → 118/80, HR 76 → 124", bin: 1 }
           - { text: "No BP fall, HR rises 40 bpm, circumoral tingling", bin: 1 }
         why: "الـ orthostatic hypotension = الـ SBP بينزل أكتر من 30. الـ orthostatic tachycardia = الضغط ثابت والـ HR هو اللي بيتغير."
+      - kind: try
+        items: [dm.L07.016, dm.L07.017, dm.L07.020, dm.L07.024, dm.L07.029]
+    recap:
+      - "الأعراض rare and late؛ التشخيص بالـ reflex tests مش بالأعراض."
+      - "Resting HR 90–100 ثابت لأن الـ vagus وقع؛ الـ HRV أول علامة؛ denervation كامل = fixed rate."
+      - "Orthostatic hypotension: SBP ينزل >30 mmHg لأن الـ sympathetic مش بيضيّق الأوعية؛ كتير asymptomatic."
+      - "Perceived exertion مش HR. العمليات: induction drop و vasopressors."
+      - "Orthostatic tachycardia: الضغط ثابت والـ HR بيتغير."
+    practice: [dm.L07.013, dm.L07.014, dm.L07.015, dm.L07.016, dm.L07.017, dm.L07.018, dm.L07.019, dm.L07.020, dm.L07.021, dm.L07.022, dm.L07.023, dm.L07.024, dm.L07.025, dm.L07.026, dm.L07.027, dm.L07.028, dm.L07.029, dm.L07.030, dm.L07.031, dm.L07.035, dm.L07.079, dm.L07.080, dm.L07.085]
+  # ------------------------------------------------------------------
+  # Split from lesson2 on 2026-11-13 (#828): silent ischemia, mortality
+  # mechanisms and autonomic cardiopathy.
+  - id: dm.L07.lesson6
+    title: "MI ساكت وقلب بيتخشّب"
+    hook: "الجلطة جت ومحدش اتوجع، والبطين مش عارف يرتاح. آخر وشوش الـ CAN وأخطرها."
+    minutes: 8
+    pages: [80, 81]
+    topics: [silent]
+    goals:
+      - "تعرف ليه الـ ischemia مش بتوجع وشكل الـ MI في الـ CAN"
+      - "تعدّ أسباب الـ mortality في الـ CAN"
+      - "تفهم الـ autonomic cardiopathy والـ diastolic dysfunction"
+    status: unverified
+    steps:
       - kind: explain
         remind: [dm.L07.032, dm.L07.033]
         page: 80
@@ -231,11 +411,47 @@ lessons:
           - ==Dysfunction of afferent cardiac autonomic fibers== (السلك اللي بيوصل الوجع للمخ مقطوع)
 
           شكل الـ myocardial infarction (MI) في الـ cardiovascular autonomic neuropathy (CAN): **silence**، **cough**، **nausea و vomiting**، **dyspnea**، tiredness، و **electrocardiogram (ECG) changes**.
+
+          يعني المريض ممكن يجي بـ **cough** أو **nausea** بس. التفسير المقبول (مش في الكتاب): الـ ischemia لسه بتعمل نهجان لأن البطين مش بيضخ كويس فالرئة تحتقن، وبتعمل ترجيع لأن العصب الحاير للمعدة قريب، بس الوجع نفسه سلكه مقطوع.
+      - kind: figure
+        page: 80
+        quote: "c. Dysfunction of the afferent cardiac autonomic nerve fibers"
+        title: "السلك اللي بيوصل الوجع"
+        alt: "Diagram. An ischaemic heart sends a pain signal along an afferent cardiac autonomic fibre to the brain. The fibre is cut with a red cross, so the brain feels no pain."
+        caption: "الـ ischemia موجودة، والإشارة طالعة، بس ==afferent fibre== مقطوع: المخ مش بيعرف. ده السبب التالت في الكتاب."
+        svg: |
+          <svg viewBox="0 0 330 180" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L07m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" class="fg-head"/></marker></defs>
+            <rect x="10" y="70" width="100" height="44" rx="10" class="fg-bad"/>
+            <text x="60" y="90" text-anchor="middle" class="t-sm t-b">Ischaemic</text>
+            <text x="60" y="105" text-anchor="middle" class="t-sm t-b">heart</text>
+            <path d="M110 92 L215 92" class="fg-arrow" marker-end="url(#L07m)"/>
+            <text x="120" y="80" class="t-sm">afferent fibre</text>
+            <text x="152" y="100" class="t-lg t-bad t-b">×</text>
+            <rect x="220" y="70" width="100" height="44" rx="10" class="fg-box"/>
+            <text x="270" y="97" text-anchor="middle" class="t-sm t-b">Brain</text>
+            <text x="270" y="140" text-anchor="middle" class="t-sm t-mut">no chest pain</text>
+          </svg>
       - kind: aside
         tone: trap
         page: 80
         quote: "6- Silent Myocardial Ischemia/Cardiac Denervation Syndrome: The possible mechanisms of painless myocardial ischemia:\n  a. Altered pain thresholds,\n  b. Subthreshold ischemia not sufficient to induce pain,\n  c. Dysfunction of the afferent cardiac autonomic nerve fibers *Features of MI in patients with CAN are:\n  d. Silence,\n  e. Cough,\n  f. Nausea and vomiting,\n  g. Dyspnea, tiredness,\n  h. ECG changes."
         text: "مريض سكر قديم جاي بـ **كحة وترجيع ونهجان** (cough, nausea and vomiting, dyspnea) ومن غير وجع صدر: اعمل **ECG** قبل ما تكتب antiemetic وتروّحه."
+      - kind: check
+        page: 80
+        quote: "*Features of MI in patients with CAN are:\n  d. Silence,\n  e. Cough,\n  f. Nausea and vomiting,\n  g. Dyspnea, tiredness,\n  h. ECG changes."
+        question: "A 68-year-old with 20 years of diabetes has sudden dyspnoea, vomiting and tiredness, with no chest pain. Next step?"
+        options:
+          - "ECG now"
+          - "Antiemetic and discharge"
+          - "Chest X-ray only"
+          - "Wait for chest pain before cardiac tests"
+        answer: 0
+        why:
+          - "صح: في الـ CAN الـ MI بيجي بـ dyspnea و nausea و vomiting و tiredness، والـ ECG changes هي اللي هتكشفه."
+          - "ده بالظبط الفخ: هتروّح MI."
+          - "الـ X-ray ممكن يفيد بعدين، بس مش هيقولك فيه MI ولا لأ."
+          - "في الـ CAN الوجع ممكن ما يجيش أبدًا (silence)."
       - kind: explain
         remind: [dm.L07.039, dm.L07.036]
         page: 81
@@ -248,16 +464,34 @@ lessons:
           - **delayed relaxation**، **impaired LV filling**، **increased stiffness**
           - ممكن يوصل لـ **diastolic heart failure**
           - والسكر لوحده ممكن يعمل **heart failure (HF) with normal LV systolic function**
+
+          ليه كده؟ التفسير المقبول (مش في الكتاب): الـ **maldistribution of sympathetic innervation** معناها إن حتت من القلب واصلها sympathetic وحتت لأ، فالكهربا بتخلص في أوقات مختلفة؛ ده بيطوّل الـ QT ويفتح الباب للـ torsades. والـ **relaxation** نفسه شغل محتاج طاقة، فهو أول حاجة تتعب في عضلة تعبانة؛ ده ليه الـ diastolic بيقع قبل الـ systolic.
+      - kind: match
+        page: 81
+        quote: "The pathophysiology of LVDD includes\n  a. Delayed relaxation,\n  b. Impaired LV filling,\n  c. Increased stiffness."
+        prompt: "وصّل كل مشكلة بمعناها:"
+        pairs:
+          - ["Delayed relaxation", "البطين بياخد وقت أطول عشان يرتاح بعد الانقباضة"]
+          - ["Impaired LV filling", "الدم بيدخل البطين أقل في الـ diastole"]
+          - ["Increased stiffness", "الجدار ناشف ومش بيتمدد"]
+          - ["Prolonged QT", "Torsades de pointes"]
+        why: "التلاتة الأولانيين هما الـ pathophysiology بتاع الـ LV diastolic dysfunction في الكتاب، وممكن توصل لـ diastolic heart failure. الـ prolonged QT من أسباب الـ mortality، وبيعمل malignant ventricular arrhythmias زي الـ torsades de pointes."
+      - kind: reveal
+        page: 81
+        quote: "c. Increased mortality from renal failure and a variety of other causes."
+        prompt: "ليه عيان الـ CAN بيموت أكتر حتى من renal failure، مش من القلب بس؟"
+        answer: |
+          الكتاب بيعدّ **coexistence of CVD** و **increased mortality from renal failure and a variety of other causes** ضمن الأسباب.
+
+          التفسير المقبول (مش في الكتاب): الـ CAN مش بيحصل لوحده. العصب اللي اتأذى ده اتأذى من نفس السكر العالي سنين اللي أذى الكلية والشبكية والشرايين. يعني الـ CAN **مراية**: لو ظاهر في القلب، غالبًا الضرر موجود في كل حتة تانية.
       - kind: try
-        items: [dm.L07.016, dm.L07.017, dm.L07.020, dm.L07.033, dm.L07.039]
+        items: [dm.L07.032, dm.L07.033, dm.L07.036, dm.L07.039, dm.L07.040]
     recap:
-      - "Resting HR 90–100 ثابت؛ الـ HRV أول علامة؛ denervation كامل = fixed rate."
-      - "Orthostatic hypotension: SBP ينزل >30 mmHg؛ كتير asymptomatic."
-      - "Perceived exertion مش HR. العمليات: induction drop و vasopressors."
-      - "Orthostatic tachycardia: الضغط ثابت والـ HR بيتغير."
-      - "Silent MI: cough، nausea، dyspnea، ECG. Cardiopathy = diastolic dysfunction ← diastolic HF."
-    practice: [dm.L07.016, dm.L07.017, dm.L07.018, dm.L07.019, dm.L07.020, dm.L07.021, dm.L07.022, dm.L07.023, dm.L07.024, dm.L07.025, dm.L07.026, dm.L07.027, dm.L07.028, dm.L07.029, dm.L07.030, dm.L07.031, dm.L07.032, dm.L07.033, dm.L07.034, dm.L07.035, dm.L07.036, dm.L07.037, dm.L07.038, dm.L07.039, dm.L07.040, dm.L07.041, dm.L07.079, dm.L07.082, dm.L07.085]
-  # ------------------------------------------------------------------
+      - "Painless ischemia: altered pain thresholds، subthreshold ischemia، afferent fibres مقطوعة."
+      - "MI في الـ CAN: silence، cough، nausea و vomiting، dyspnea، ECG changes. اعمل ECG."
+      - "Mortality: prolonged QT و torsades، CVD مصاحب، renal failure، maldistribution of sympathetic innervation."
+      - "Autonomic cardiopathy: delayed relaxation، impaired filling، stiffness ← diastolic HF."
+    practice: [dm.L07.032, dm.L07.033, dm.L07.034, dm.L07.036, dm.L07.037, dm.L07.038, dm.L07.039, dm.L07.040, dm.L07.041]
   - id: dm.L07.lesson3
     title: "الاختبارات الخمسة على السرير"
     hook: "ECG وجهاز ضغط ومانومتر وقبضة إيد: كل الأرقام اللي بيسألوا عليها في صفحة واحدة."
@@ -284,6 +518,8 @@ lessons:
           5. **BP response to sustained handgrip**
 
           والـ **heart rate variability (HRV)** بيتحلل بطريقتين: ==time-domain== (إحصاء الـ R-R intervals) أو ==frequency-domain== (spectral analysis).
+
+          افتكر التقسيمة دي (التفسير المقبول، مش في الكتاب): اختبارات **النبض** (deep breathing و standing و Valsalva) بتقيس أساسًا الـ **vagus**، واختبارات **الضغط** (standing و handgrip) بتقيس الـ **sympathetic**. الـ vagus بيقع الأول، فاختبارات النبض بتطلع abnormal بدري.
       - kind: mnemonic
         page: 82
         quote: "Five simple noninvasive cardiovascular reflex tests:\n  5- Valsalva maneuver,\n  6- Heart rate response to deep breathing,\n  7- Heart rate response to standing up,\n  8- Blood pressure response to standing up\n  9- Blood pressure response to sustained handgrip\n  10- HRV can be assessed either by calculation of indices based on statistical analysis of R-R intervals (time-domain analysis) or by spectral analysis (frequency-domain analysis) of an array."
@@ -322,6 +558,8 @@ lessons:
           الطبيعي: **tachycardia** الأول (R-R قصير عند 15)، وبعدين **reflex bradycardia** (R-R أطول عند 30).
 
           ==30:15 ratio >1.03== = normal.
+
+          ليه الشكل ده؟ التفسير المقبول (مش في الكتاب): لما تقف الدم بينزل لتحت، فالـ vagus يسيب القلب فورًا ويسرع (عند الضربة 15). بعدها الضغط يرجع والـ vagus يمسك تاني فيبطّأ (عند الضربة 30). من غير vagus مفيش حركة، والنسبة تبقى حوالي 1.
       - kind: explain
         page: 83
         title: "Valsalva"
@@ -332,6 +570,8 @@ lessons:
           الطبيعي: **tachycardia** و vasoconstriction أثناء النفخ، وبعد ما يسيب **overshoot bradycardia** والضغط يعلى.
 
           ==Longest R-R ÷ shortest R-R >1.2==.
+
+          الفكرة (التفسير المقبول، مش في الكتاب): النفخ بيقيس الـ baroreflex كله، لأن النفخ بيرفع الضغط جوه الصدر فالدم الراجع للقلب يقل والضغط يقع، فالقلب يسرع. لما يسيب، الدم يرجع مرة واحدة والضغط يعلى زيادة، فالـ baroreflex يفرمل القلب. أطول R-R (بعد ما يسيب) على أقصر R-R (وهو بينفخ) بيقيس قد إيه الـ reflex ده شغال.
       - kind: table
         page: 83
         quote: "Systolic blood pressure is measured in the supine subject. The patient stands, and the systolic blood pressure is measured after 2 min. Typical response is a fall of < 10 mmHg, borderline is a fall of 10-29 mmHg, and abnormal is a fall of > 30 mmHg with symptoms."
@@ -350,6 +590,8 @@ lessons:
           **Handgrip:** يحدد أقصى قبضة، وبعدين يقبض على **30%** منها لمدة **5 min**. الطبيعي إن الـ ==diastolic BP يعلى >16 mmHg== في الدراع التاني.
 
           **Corrected QT interval (QTc)** لازم يكون ==<440 ms==.
+
+          ليه الـ handgrip؟ التفسير المقبول (مش في الكتاب): العضلة المنقبضة مدة طويلة بتبعت إشارة للمخ، والمخ يرد بـ **sympathetic** يضيّق الأوعية فالـ diastolic يعلى. لو مش بيعلى كفاية، يبقى السلك الـ sympathetic هو اللي واقع.
       - kind: table
         page: 84
         quote: "After standing R-R 30:15→>1.03"
@@ -400,7 +642,7 @@ lessons:
       - "Rest HR >100 abnormal. Deep breathing: >15 normal، <10 abnormal، I/E >1.17."
       - "30:15 >1.03. Valsalva 40 mmHg × 15 s: >1.2."
       - "SBP بعد 2 min: <10 normal، 10–29 borderline، >30 abnormal. Handgrip 30% × 5 min: DBP >16. QTc <440."
-    practice: [dm.L07.042, dm.L07.043, dm.L07.044, dm.L07.045, dm.L07.046, dm.L07.047, dm.L07.048, dm.L07.049, dm.L07.050, dm.L07.051, dm.L07.052, dm.L07.053, dm.L07.054, dm.L07.055, dm.L07.056, dm.L07.057, dm.L07.058, dm.L07.059, dm.L07.060, dm.L07.061, dm.L07.080, dm.L07.083, dm.L07.084]
+    practice: [dm.L07.042, dm.L07.043, dm.L07.044, dm.L07.045, dm.L07.046, dm.L07.047, dm.L07.048, dm.L07.049, dm.L07.050, dm.L07.051, dm.L07.052, dm.L07.053, dm.L07.054, dm.L07.055, dm.L07.056, dm.L07.057, dm.L07.058, dm.L07.059, dm.L07.060, dm.L07.061, dm.L07.083, dm.L07.084]
   # ------------------------------------------------------------------
   - id: dm.L07.lesson4
     title: "الطيف والعلاج: نرجّع الأعصاب؟"
@@ -423,7 +665,9 @@ lessons:
           الـ **power spectrum** بيوريك ==amplitude== تذبذب الـ heart rate (HR) عند كل **frequency**:
           - **Very low frequency (VLF)**: vasomotor tone (**thermoregulation**)
           - **Low frequency (LF) ~0.1 Hz**: **baroreceptor reflex**
-          - **Heart failure (HF) ~0.25 Hz**: **respiratory activity**
+          - **High frequency (HF) ~0.25 Hz**: **respiratory activity**
+
+          ليه الـ HF بالذات هو الـ vagus؟ التفسير المقبول (مش في الكتاب): الـ vagus سريع جدًا، يقدر يغيّر النبض من ضربة للضربة اللي بعدها، فيتبع النَفَس (حوالي 15 نفس في الدقيقة = 0.25 Hz). الـ sympathetic بطيء، بياخد ثواني، فما يقدرش يعمل غير التموجات البطيئة.
       - kind: figure
         page: 85
         quote: "(3) High-frequency (HF) component (around 0.25 Hz), which is related to respiratory activity k."
@@ -477,6 +721,8 @@ lessons:
           2. ==Trial to reverse the cardiovascular autonomic neuropathy (CAN)==
 
           **Orthostatic hypotension، من غير أدوية:** **مية أكتر**، و **lower-extremity stockings**.
+
+          ليه دول؟ التفسير المقبول (مش في الكتاب): المية بتزوّد حجم الدم، فلما ينزل جزء منه لتحت يفضل كفاية للمخ. والـ **stockings** بتضغط على أوردة الرجل فتمنع الدم يتجمع فيها، وده بالظبط الشغل اللي الـ sympathetic كان بيعمله.
       - kind: explain
         page: 87
         title: "الأدوية"
@@ -485,14 +731,16 @@ lessons:
           - ==Pyridostigmine== (acetylcholinesterase inhibitor) بيقوّي الـ **ganglionic transmission**: الأعراض والـ **orthostatic blood pressure (BP)** يتحسنوا، وتأثيره على الـ **supine BP** بسيط.
           - **Adrenergic blockers** للـ **tachycardia**.
           - **Anticholinergics** للـ **orthostatic bradycardia**.
+
+          الـ adrenergic blocker بيهدّي القلب اللي بيسرع، والـ anticholinergic بيشيل أثر الـ vagus اللي بيبطّأه. يعني كل دوا بيعكس الاتجاه الغلط.
       - kind: reveal
         page: 87
         quote: "Enhancement of ganglionic transmission via the use of pyridostigmine (inhibitor of acetylcholinesterase) improved symptoms and orthostatic BP, with only modest effects in supine BP"
         prompt: "ليه pyridostigmine ما بيعليش الضغط وهو نايم زي باقي أدوية الضغط؟"
         answer: |
-          هو بيقوّي الإشارة في الـ **sympathetic ganglia** بس لما يكون فيه إشارة أصلًا. الإشارة دي بتطلع **لما يقف** (الـ baroreflex بيشتغل)، فالتقوية بتحصل وقت الوقوف.
+          التفسير المقبول (مش في الكتاب): هو بيقوّي الإشارة في الـ **sympathetic ganglia** بس لما يكون فيه إشارة أصلًا. الإشارة دي بتطلع **لما يقف** (الـ baroreflex بيشتغل)، فالتقوية بتحصل وقت الوقوف.
 
-          وهو نايم مفيش طلب، فمفيش تقوية، فالـ **supine hypertension** بتبقى بسيطة. (تفسير فسيولوجي.)
+          وهو نايم مفيش طلب، فمفيش تقوية، فالـ **supine hypertension** بتبقى بسيطة.
       - kind: explain
         page: 87
         title: "المجهود والعمليات"
@@ -500,6 +748,8 @@ lessons:
         text: |
           - **Exercise intolerance** ← **exercise programs**
           - **Perioperative:** BP support، وانتبه إن ==hypothermia== مرتبطة بالـ CAN. الاختبارات قبل العملية بتحدد المعرضين وتجهّز الـ **anesthesiologist**.
+
+          ليه الـ hypothermia؟ التفسير المقبول (مش في الكتاب): الجسم بيحافظ على حرارته بإنه يضيّق أوعية الجلد، وده شغل sympathetic. في الـ CAN الأوعية تفضل مفتوحة في أوضة العمليات الباردة، فالحرارة تهرب.
       - kind: explain
         remind: [dm.L07.076]
         page: 87
@@ -511,6 +761,8 @@ lessons:
           - **Beta blockers** (bisoprolol) ← HRV في الـ heart failure
           - **Spironolactone** ← sympathetic balance
           - ==Angiotensin-converting enzyme (ACE) inhibitors== ← HRV والتوازن، بس في الـ **mild** مش الـ advanced
+
+          ليه الـ ACE inhibitor بيفيد الـ mild بس؟ التفسير المقبول (مش في الكتاب): التحسين محتاج ألياف لسه موجودة تتظبط. في الـ advanced الألياف ماتت، ومفيش دوا بيرجّع عصب ميت. عشان كده الكشف بدري بالـ reflex tests هو اللي بيفرق.
       - kind: check
         page: 87
         quote: "Adrenergic blockers may benefit the tachycardia, and anticholinergics, the orthostatic bradycardia."
@@ -541,4 +793,4 @@ lessons:
       - "OH: مية و stockings، وبعدين pyridostigmine. Tachycardia ← adrenergic blockers، bradycardia ← anticholinergics."
       - "Hypothermia مرتبطة بالـ CAN في العمليات."
       - "Reversal: lifestyle، aldose reductase inhibitor، bisoprolol، spironolactone، ACEi (mild بس)."
-    practice: [dm.L07.062, dm.L07.063, dm.L07.064, dm.L07.065, dm.L07.066, dm.L07.067, dm.L07.068, dm.L07.069, dm.L07.070, dm.L07.071, dm.L07.072, dm.L07.073, dm.L07.074, dm.L07.075, dm.L07.076, dm.L07.077, dm.L07.078, dm.L07.081]
+    practice: [dm.L07.062, dm.L07.063, dm.L07.064, dm.L07.065, dm.L07.066, dm.L07.067, dm.L07.068, dm.L07.069, dm.L07.070, dm.L07.071, dm.L07.072, dm.L07.073, dm.L07.074, dm.L07.075, dm.L07.076, dm.L07.077, dm.L07.078, dm.L07.081, dm.L07.082]

@@ -3,15 +3,15 @@ lecture: dm.L08
 lessons:
   # ------------------------------------------------------------------
   - id: dm.L08.lesson1
-    title: "الهرم الغذائي: كام سعر وكام حصة؟"
+    title: "الهرم الغذائي: كام سعر وليه الهرم؟"
     hook: "قبل ما تقول لمريض السكر «ما تاكلش»، قوله ياكل إيه وقد إيه."
-    minutes: 9
-    pages: [89, 94]
+    minutes: 8
+    pages: [89, 91]
     topics: [calories, pyramid]
     goals:
-      - "تعرف الـ calorie categories"
-      - "تحفظ الـ 6 food groups وحصصهم"
-      - "تعرف مغذيات كل مجموعة"
+      - "تعرف الـ guiding principles والـ calorie categories"
+      - "تفهم ليه الناس احتياجها مختلف"
+      - "تعرف الهرم بيوري إيه وليه مهم، وتعدّ الـ 6 food groups"
     status: unverified
     steps:
       - kind: explain
@@ -23,6 +23,8 @@ lessons:
           الـ **US Department of Agriculture (USDA) food guidance** اتغيرت كتير، بس الـ **guiding principles** ثابتة: evolutionary، ==flexible==، **practical**، useful، ==realistic==، overall health، up-to-date research، و **total diet**.
 
           يعني الأكل مش قايمة ممنوعات، ده نظام كامل مرن وواقعي.
+
+          ليه المبادئ دي مهمة لمريض السكر بالذات؟ لأن الـ diet اللي مش **realistic** ولا **flexible** العيان بيسيبه بعد أسبوعين. الـ **total diet** معناها إننا بنبص على الأكل كله على مدار اليوم والأسبوع، مش على أكلة واحدة غلط.
       - kind: table
         page: 90
         quote: "1,600 calories - Many sedentary women and some older adults."
@@ -33,6 +35,45 @@ lessons:
           - ["2,200", "Kids, teen girls, active women, sedentary men"]
           - ["2,800", "Teen boys, active men, very active women"]
         hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: reveal
+        page: 90
+        quote: "2,800 calories - Teenage boys, active men, and very active women."
+        prompt: "ليه المراهق والراجل النشيط محتاجين 2,800 والست القاعدة 1,600؟"
+        answer: |
+          الكتاب بيقسّم حسب **السن والجنس والنشاط**، والرسم بتاع الـ estimated energy requirements بيوري خطين: **active** فوق و **sedentary** تحت.
+
+          التفسير المقبول (مش في الكتاب): السعرات بتتصرف في تلات حاجات: الجسم وهو مرتاح، والحركة، والنمو. العضلات بتحرق حتى وهي مرتاحة، والرجالة عادة عضلاتهم أكتر، والمراهق لسه بيبني جسمه، والنشاط بيزوّد الحرق. ومع السن العضلات بتقل، عشان كده الكبار في الـ 1,600.
+      - kind: explain
+        page: 90
+        title: "اقرا رسم الـ energy requirements"
+        quote: "Determine Calorie Needs:\nEstimated Energy Requirements* for males"
+        text: |
+          الكتاب بيدّيك رسم اسمه **estimated energy requirements** للرجالة: السعرات على المحور الرأسي، والسن على الأفقي من 3 لـ 80 سنة، وفيه خطين: ==active== فوق و **sedentary** تحت.
+
+          اللي محتاج تطلع بيه من الرسم: عند **نفس السن**، الفرق بين الخطين هو تمن الحركة. يعني لما تحسب احتياج عيان، اسأله الأول بيتحرك قد إيه، مش بس عنده كام سنة. والرقم ده هو الأساس اللي هتبني عليه حدود الكارب والسكر المضاف بعد كده في المحاضرة.
+      - kind: figure
+        page: 90
+        quote: "1,600 calories - Many sedentary women and some older adults.\n2,200 calories - Children, teenage girls, active women, and many sedentary men.\nWomen who are pregnant may need around 500 calories more per day and an additional 300 calories for breastfeeding.\n2,800 calories - Teenage boys, active men, and very active women."
+        title: "التلات سلالم"
+        alt: "Bar chart of the three calorie categories: 1,600 for sedentary women and older adults, 2,200 for children, teenage girls, active women and sedentary men, 2,800 for teenage boys, active men and very active women. Two small bars show pregnancy plus 500 and breastfeeding plus 300."
+        caption: "كل سلمة **600** سعر. الحمل ==+500==، والرضاعة **+300** زيادة."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 190 H315" class="fg-thin"/>
+            <rect x="40" y="110" width="60" height="80" class="fg-good"/>
+            <text x="70" y="102" text-anchor="middle" class="t-sm t-b">1,600</text>
+            <text x="70" y="208" text-anchor="middle" class="t-sm">sedentary</text>
+            <rect x="120" y="80" width="60" height="110" class="fg-acc"/>
+            <text x="150" y="72" text-anchor="middle" class="t-sm t-b">2,200</text>
+            <text x="150" y="208" text-anchor="middle" class="t-sm">active women</text>
+            <rect x="200" y="50" width="60" height="140" class="fg-bad"/>
+            <text x="230" y="42" text-anchor="middle" class="t-sm t-b">2,800</text>
+            <text x="230" y="208" text-anchor="middle" class="t-sm">active men</text>
+            <text x="270" y="130" class="t-sm t-b">+500</text>
+            <text x="270" y="146" class="t-sm t-mut">pregnancy</text>
+            <text x="270" y="166" class="t-sm t-b">+300</text>
+            <text x="270" y="182" class="t-sm t-mut">breastfeeding</text>
+          </svg>
       - kind: aside
         tone: tip
         page: 90
@@ -49,11 +90,67 @@ lessons:
           - **examples of food**
 
           وبيقسّم الأكل لـ **6 food groups**. الكتاب بيقول اتعمل سنة **1974**.
+
+          ليه الهرم بيتكلم بـ **servings** مش جرامات؟ لأن الحصة وحدة سهلة يفهمها أي حد من غير ميزان: رغيف، فاكهة، كوباية لبن. يعني العيان يقدر يطبّقه في البيت وفي المطعم، وده بالظبط مبدأ **practical** اللي فوق.
       - kind: update
         page: 90
         quote: "It shows recommended servings for food products."
         text: "الـ USDA بدّلت الهرم (recommended servings) بـ **MyPlate** سنة 2011، والـ American Diabetes Association (ADA) بتستخدم الـ plate method وأنظمة أكل فردية. في الامتحان: الهرم بتاع الكتاب."
         ref: "USDA MyPlate 2011; ADA nutrition therapy consensus report 2019"
+      - kind: explain
+        remind: [dm.L08.010]
+        page: 91
+        title: "ليه الهرم مهم؟ والـ 6 groups"
+        quote: "It helps people feel and do their best.\nThe food pyramid helps us with proper food selection for the most balanced, nutritious meals.\nFood Groups\n  Cereal and grains\n  Vegetables\n  Fruit\n  Milk, yogurt, cheese\n  Meat, fish, poultry\n  Fats, oils, sweets"
+        text: |
+          الكتاب بيقول الهرم مهم عشان الأكل الصحي بيساعد الأطفال **يكبروا صح**، وبيخلي الناس **feel and do their best**، وبيساعد في ==proper food selection== لوجبات **balanced** و **nutritious**.
+
+          والـ **6 food groups** من تحت لفوق:
+          - **Cereal and grains**
+          - **Vegetables**
+          - **Fruit**
+          - **Milk, yogurt, cheese**
+          - **Meat, fish, poultry**
+          - **Fats, oils, sweets**
+
+          ليه الترتيب ده؟ التفسير المقبول (مش في الكتاب): اللي تحت هو الوقود الأساسي اللي محتاجه كتير، واللي فوق سعرات كتير في حجم صغير ومغذيات قليلة، فبيتاكل **أقل**. يعني الشكل نفسه هو الرسالة: القاعدة عريضة والسن رفيع.
+      - kind: check
+        page: 91
+        quote: "The food pyramid helps us with proper food selection for the most balanced, nutritious meals."
+        question: "According to the lecture, why is the food pyramid important?"
+        options:
+          - "It helps proper food selection for balanced, nutritious meals"
+          - "It bans sweets completely"
+          - "It replaces carbohydrate counting in diabetes"
+          - "It sets drug doses by calorie category"
+        answer: 0
+        why:
+          - "صح: الكتاب: proper food selection for the most balanced, nutritious meals، ونمو الأطفال، وإن الناس يحسوا ويشتغلوا أحسن."
+          - "الـ fats و sweets بتتاكل sparingly، مش ممنوعة خالص."
+          - "الـ carb counting أداة تانية في نفس المحاضرة، مش بديل."
+          - "مفيش أدوية في الهرم."
+      - kind: try
+        items: [dm.L08.001, dm.L08.002, dm.L08.003, dm.L08.008, dm.L08.010]
+    recap:
+      - "المبادئ: flexible، realistic، practical، total diet: نظام مرن مش قايمة ممنوعات."
+      - "1,600 sedentary women، 2,200 active women و sedentary men، 2,800 active men. حامل +500، رضاعة +300."
+      - "الاحتياج بيختلف بالسن والجنس والنشاط."
+      - "الهرم (1974): levels، servings، examples؛ 6 groups من الـ grains تحت للـ fats فوق."
+    practice: [dm.L08.001, dm.L08.002, dm.L08.003, dm.L08.004, dm.L08.005, dm.L08.006, dm.L08.007, dm.L08.008, dm.L08.009, dm.L08.010]
+  # ------------------------------------------------------------------
+  # Split from lesson1 on 2026-11-13 (#828): the food groups one by one.
+  - id: dm.L08.lesson4
+    title: "الهرم دور دور: نشويات وخضار وفاكهة ولبن ولحمة"
+    hook: "كل دور في الهرم ليه عدد حصص، وكل رقم ليه سبب."
+    minutes: 9
+    pages: [92, 94]
+    topics: [pyramid]
+    goals:
+      - "تحفظ حصص كل مجموعة"
+      - "تعرف مغذيات كل مجموعة وليه بنفضّل الـ whole grain والـ skimmed"
+      - "تحسب حصص اللحمة"
+    status: unverified
+    steps:
       - kind: figure
         page: 92
         quote: "Cereal and Grains\n  The base of the food pyramid.\n  6 – 11 servings per day.\n  Grain group foods come from plants.\n  Examples: Bread, cereal, rice, pasta, crackers, tortillas."
@@ -100,11 +197,22 @@ lessons:
           - الخضرا ← **vitamin A**
           - البرتقالي الغامق والأخضر الغامق ← **vitamin C**
           - **Broccoli** وقرايبه ← **iron و calcium**
+
+          ليه الـ whole grain أحسن لمريض السكر بالذات؟ التفسير المقبول (مش في الكتاب): الـ **fiber** بيعمل زي شبكة في المعدة والمصارين، فالـ glucose بيدخل الدم بالراحة بدل ما يقفز مرة واحدة. ده نفس الكلام اللي هيرجع في الـ glycemic index آخر المحاضرة.
       - kind: aside
         tone: trap
         page: 92
         quote: "Vegetables like broccoli and related plants contain iron and calcium."
         text: "المعروف إن الخضار (vegetables) **البرتقالي الغامق** (جزر) غني بـ **vitamin A (beta-carotene)**. الكتاب كاتب العكس تقريبًا؛ في الامتحان اكتب جملة الكتاب لو اتسألت عليها نصًا."
+      - kind: reveal
+        page: 92
+        quote: "Vegetables contain many vitamins and minerals; however, different vegetables contain different nutrients, so it is essential to eat a wide variety of types."
+        prompt: "ليه «Vary your veggies» مش «كُل خضار وخلاص»؟"
+        answer: |
+          الكتاب بيقول كل نوع خضار فيه **different nutrients**، فلازم **wide variety**. الأخضر حاجة، والبرتقالي الغامق حاجة، والـ broccoli حاجة.
+
+          وفيه فخ تاني في نفس الصفحة: الخضار **very low in fats and calories**، بس **cooking can often add these**. يعني الكوسة المحشية بالسمنة مش هي الكوسة المسلوقة. لمريض السكر: نوّع، واطبخ بزيت قليل.
+
       - kind: explain
         page: 93
         title: "فاكهة ولبن"
@@ -113,6 +221,10 @@ lessons:
           **Fruit (2–4):** قليلة سعرات ودهون، فيها natural sugars و **fiber** و vitamins. ==Canning أو juicing== ممكن يزوّد سكر ويشيل مغذيات.
 
           **Milk, yogurt, cheese (2–3):** **calcium** أساسًا، ومعاه protein و phosphorus و vitamin A و D. بس كتير منها عالي **saturated fat**، فالـ **skimmed** بديل. للكبار: **3 cups** في اليوم.
+
+          والفاكهة ممكن تتاكل **fresh, frozen, canned, dried, pureed, or juiced**، بس افتكر إن الـ canning والعصير بيزوّدوا سكر ويشيلوا مغذيات، فالطازة أو المجمّدة من غير سكر أحسن لمريض السكر.
+
+          ليه الـ skimmed؟ لأن الـ calcium والـ protein في الجزء المايّة من اللبن، والدهن هو اللي فيه الـ saturated fat والـ cholesterol. لما تشيل الدهن بتشيل المشكلة وتسيب الفايدة.
       - kind: reveal
         page: 93
         quote: "These include apples, oranges, plums, bananas, etc. Processing fruits when canning or making them into juices may add sugars and remove nutrients."
@@ -121,6 +233,22 @@ lessons:
           العصير بيشيل الـ **fiber** اللي بيبطّأ امتصاص السكر، وبتشرب سكر 3–4 برتقانات في دقيقة، وأحيانًا بيتزود سكر.
 
           علشان كده الـ **orange juice** على جدول الـ GI (57) أعلى من الـ **apple** الكاملة (36)، والكتاب بيقول الـ processing بيزوّد سكر ويشيل مغذيات.
+      - kind: check
+        page: 93
+        quote: "However, many dairy products are high in saturated fat and cholesterol compared to vegetables, fruits, and whole grains; skimmed products are available as an alternative."
+        question: "A diabetic with high LDL asks how to keep his three cups of dairy a day. Best advice from the lecture?"
+        options:
+          - "Choose skimmed products"
+          - "Stop all dairy"
+          - "Switch to ice cream and chocolate milk"
+          - "Replace dairy with fruit juice"
+        answer: 0
+        why:
+          - "صح: الـ skimmed بيشيل الـ saturated fat والـ cholesterol ويسيب الـ calcium والـ protein."
+          - "الكتاب بيقول 3 cups للكبار؛ اللبن مصدر الـ calcium الأساسي."
+          - "دول في المجموعة بس عاليين دهن وسكر."
+          - "العصير مش فيه calcium اللبن، وبيزوّد سكر."
+
       - kind: explain
         page: 94
         title: "اللحمة"
@@ -131,6 +259,8 @@ lessons:
           - **2–3 servings** في اليوم، و ==الحصة 4 oz (110 g)==
           - **Alternatives:** eggs، dry beans، nuts، tofu، lentils، chick peas
           - بس اللحمة ممكن تبقى عالية **fat و cholesterol و sodium**: شيل الدهن الظاهر.
+
+          ليه البقول والمكسرات مع اللحمة؟ لأن الكتاب بيقول فيها **many of the same nutrients**، يعني protein وحديد. والفرق إنها مش شايلة نفس الـ saturated fat، فهي بديل كويس لمريض السكر اللي أصلًا الـ cholesterol عنده مشكلة.
       - kind: check
         page: 94
         quote: "The food guide pyramid suggests that adults eat 2–3 servings per day. One serving of meat is 4 oz (110 g)."
@@ -142,14 +272,29 @@ lessons:
           - "ده لو الحصة 225 g."
           - "ده لو الحصة 50 g."
           - "ده لو الحصة 450 g."
+      - kind: check
+        page: 94
+        quote: "Fats, oils, and sweets\n  Top of the pyramid.\n  To be used sparingly.\n  Examples of group: Candy, Soda, Cookies, Mayonnaise, Chips. Doughnuts"
+        question: "Where are fats, oils and sweets in the pyramid, and how much should be eaten?"
+        options:
+          - "Top of the pyramid, used sparingly"
+          - "Base of the pyramid, 6–11 servings"
+          - "Middle, 2–3 servings"
+          - "Not part of the pyramid"
+        answer: 0
+        why:
+          - "صح: top of the pyramid، to be used sparingly: candy و soda و cookies و chips."
+          - "دي الـ cereal and grains."
+          - "دي الـ milk أو الـ meat."
+          - "هي المجموعة السادسة في الهرم."
       - kind: try
-        items: [dm.L08.002, dm.L08.010, dm.L08.011, dm.L08.013, dm.L08.026]
+        items: [dm.L08.011, dm.L08.013, dm.L08.022, dm.L08.024, dm.L08.026]
     recap:
-      - "1,600 sedentary women، 2,200 active women و sedentary men، 2,800 active men. حامل +500، رضاعة +300."
-      - "6 groups: grains 6–11، veg 3–5، fruit 2–4، milk 2–3، meat 2–3، fats sparingly."
-      - "Whole grain أحسن من الأبيض. العصير بيزوّد سكر ويشيل fiber."
-      - "Meat = protein، iron، zinc، B12؛ الحصة 110 g."
-    practice: [dm.L08.001, dm.L08.002, dm.L08.003, dm.L08.004, dm.L08.005, dm.L08.006, dm.L08.007, dm.L08.008, dm.L08.009, dm.L08.010, dm.L08.011, dm.L08.012, dm.L08.013, dm.L08.014, dm.L08.015, dm.L08.016, dm.L08.017, dm.L08.018, dm.L08.019, dm.L08.020, dm.L08.021, dm.L08.022, dm.L08.023, dm.L08.024, dm.L08.025, dm.L08.026, dm.L08.027, dm.L08.028]
+      - "Grains 6–11 (قاعدة)، veg 3–5، fruit 2–4، milk 2–3، meat 2–3، fats sparingly (السن)."
+      - "Whole grain فيه fiber بيبطّأ السكر؛ العصير بيشيل الـ fiber ويزوّد سكر."
+      - "Dairy = calcium؛ الـ skimmed بيشيل الـ saturated fat. 3 cups للكبار."
+      - "Meat = protein، iron، zinc، B12؛ الحصة 110 g؛ البقول والمكسرات بدايل."
+    practice: [dm.L08.011, dm.L08.012, dm.L08.013, dm.L08.014, dm.L08.015, dm.L08.016, dm.L08.017, dm.L08.018, dm.L08.019, dm.L08.020, dm.L08.021, dm.L08.022, dm.L08.023, dm.L08.024, dm.L08.025, dm.L08.026, dm.L08.027, dm.L08.028]
   # ------------------------------------------------------------------
   - id: dm.L08.lesson2
     title: "الدهون والسكر والطبق المقسوم"
@@ -171,6 +316,8 @@ lessons:
           الهرم بيقول الـ **fats** تتاكل ==sparingly== لأنها عالية السعرات.
 
           الدهون الكويسة: **fish**، **nuts**، و **avocado**.
+
+          ليه sparingly حتى لو صحية؟ الجرام الدهن فيه سعرات أكتر من ضعف الجرام النشويات (التفسير المقبول، مش في الكتاب)، والكتاب بيقول **fatty foods are also high in calories**، والأكل الكتير منها بيعمل مشاكل. يعني حتى الزيت الكويس بيتحسب.
       - kind: explain
         page: 95
         title: "الـ trans fat: الشرير الحقيقي"
@@ -181,6 +328,8 @@ lessons:
           - فيه كميات صغيرة طبيعية في beef و lamb و full-fat dairy.
           - بتعلّي الـ **low-density lipoprotein (LDL)** زي الـ saturated fat.
           - بس كمان بتنزّل الـ ==high-density lipoprotein (HDL)==، فضررها أكبر.
+
+          ليه الصناعة بتعملها أصلًا؟ التفسير المقبول (مش في الكتاب): الزيت المهدرج بيعيش على الرف أكتر ومش بيزنّخ، وبيدّي قرمشة للبسكوت والمقليات. يعني المكسب للمصنع، والخسارة لشرايينك. عشان كده الكتاب بيقولك **اقرا الـ ingredient list**.
       - kind: aside
         tone: analogy
         page: 95
@@ -208,6 +357,14 @@ lessons:
         page: 95
         quote: "1,600 calories - Limit sugar to 6 teaspoons per day or 22 grams per day"
         text: "السكر المضاف: **6 / 12 / 18** معلقة لـ **1600 / 2200 / 2800** سعر. كل 600 سعر زيادة = 6 معالق زيادة (حوالي 22 g)."
+      - kind: reveal
+        page: 95
+        quote: "Here are some guidelines for added sugar based on calories in the daily food choices:"
+        prompt: "ليه حد السكر المضاف بيكبر مع السعرات بدل ما يبقى رقم واحد للكل؟"
+        answer: |
+          الكتاب بيربط الحد بـ **calories in the daily food choices**. التفسير المقبول (مش في الكتاب): الفكرة إن السكر المضاف **نسبة صغيرة ثابتة** من اليوم، مش رقم مطلق. 22 جرام سكر = حوالي 88 سعر، يعني حوالي 5% من الـ 1,600. اللي بياكل أكتر عنده مساحة أكبر، بس النسبة نفسها صغيرة.
+
+          ولمريض السكر الرسالة أوضح: السكر المضاف ده **سعرات فاضية** بتعلّي الـ glucose بسرعة من غير ما تشبّع.
       - kind: check
         page: 95
         quote: "The American Heart Association (AHA) advises limiting saturated fat consumption to less than 7% of daily calories and transfat consumption to less than 1%."
@@ -219,6 +376,12 @@ lessons:
           - "دي حدود الـ trans fat (1%)."
           - "ده 35%."
           - "فيه limit."
+      - kind: aside
+        tone: exam
+        page: 95
+        quote: "The American Heart Association (AHA) advises limiting saturated fat consumption to less than 7% of daily calories and transfat consumption to less than 1%."
+        text: "لو السؤال جالك بالجرامات: احسب السعرات الأول (7% أو 1% من اليوم)، وبعدين اقسم على **9** عشان الجرام دهن فيه حوالي 9 سعرات (التفسير المقبول، مش في الكتاب). يعني 2,000 سعر ← 140 سعر saturated ← حوالي **15 g**، والـ trans أقل من **2 g**: تقريبًا ولا حاجة."
+
       - kind: explain
         remind: [dm.L08.037]
         page: 96
@@ -231,6 +394,8 @@ lessons:
           - ==Make half your grains whole==
           - **Go lean with protein**
           - **Know the limits** on fats و salt و sugars
+
+          الرسايل دي هي الهرم نفسه بس في جمل: كل واحدة بتقولك **تزوّد** إيه (فاكهة، خضار متنوع، calcium، whole grains، lean protein) و**تقلل** إيه (fats، salt، sugars). يعني بدل ما تحفظ أرقام، احفظ الاتجاه.
       - kind: figure
         page: 96
         quote: "The big message\n  The big message is that fruits and vegetables take up half the plate, with the vegetable portion being a little bigger than the fruit section.\n  Nutrition experts recommend you eat more vegetables than fruit and more grains than protein foods.\n  The divided plate also aims to discourage super-big portions, which can cause weight gain."
@@ -250,6 +415,14 @@ lessons:
             <circle cx="285" cy="55" r="28" class="fg-acc"/>
             <text x="285" y="60" text-anchor="middle" class="t-sm t-b">Dairy</text>
           </svg>
+      - kind: reveal
+        page: 96
+        quote: "Nutrition experts recommend you eat more vegetables than fruit and more grains than protein foods."
+        prompt: "ليه الخضار أكبر من الفاكهة في الطبق، مع إن الاتنين صحيين؟"
+        answer: |
+          الكتاب بيقول **more vegetables than fruit** و **more grains than protein foods**.
+
+          التفسير المقبول (مش في الكتاب): الفاكهة فيها **natural sugars** (الكتاب قالها في صفحة 93)، فلو كترت السكر يعلى، أما الخضار فالكتاب بيقول **very low in fats and calories**. فلو هتكبّر حاجة، كبّر اللي مش بيعلّي السكر. والطبق المقسوم نفسه بيحط **سقف** للكمية، فبيمنع الـ super-big portions اللي بتعمل weight gain.
       - kind: check
         page: 96
         quote: "The big message\n  The big message is that fruits and vegetables take up half the plate, with the vegetable portion being a little bigger than the fruit section.\n  Nutrition experts recommend you eat more vegetables than fruit and more grains than protein foods.\n  The divided plate also aims to discourage super-big portions, which can cause weight gain."
@@ -270,15 +443,15 @@ lessons:
     practice: [dm.L08.029, dm.L08.030, dm.L08.031, dm.L08.032, dm.L08.033, dm.L08.034, dm.L08.035, dm.L08.036, dm.L08.037, dm.L08.038, dm.L08.039, dm.L08.040, dm.L08.066]
   # ------------------------------------------------------------------
   - id: dm.L08.lesson3
-    title: "عدّ الكارب و GI و GL"
-    hook: "البطيخ GI بتاعه 72، يعني ممنوع؟ لأ: الـ GL بتاعه 3.6. تعالى نفهم ليه."
-    minutes: 10
-    pages: [96, 102]
-    topics: [carbs, gi]
+    title: "عدّ الكارب: الحصة 15 جرام"
+    hook: "رغيف عيش صغير = فاكهة صغيرة = كوز ذرة. اعرف الوحدة، وتحسب أي وجبة."
+    minutes: 9
+    pages: [96, 99]
+    topics: [carbs]
     goals:
-      - "تعرّف الـ carb counting وتحسب حصص"
+      - "تعرّف الـ carb counting وتعرف ليه الكارب بالذات"
+      - "تحسب حصص الوجبة بوحدة الـ 15 g"
       - "تحفظ حدود الوجبة للرجالة والستات"
-      - "تفرّق GI عن GL وتحسب GL"
     status: unverified
     steps:
       - kind: explain
@@ -290,6 +463,8 @@ lessons:
           - تتابع قد إيه **carbohydrate** بتاكل
           - تحدد **maximum** لكل وجبة
           - ومع الـ **physical activity** والدوا (لو محتاج) السكر يفضل في الـ target
+
+          ليه الـ carbohydrate بالذات اللي بنعدّه؟ التفسير المقبول (مش في الكتاب): الكارب هو اللي بيتحول glucose بسرعة وبيعلّي السكر بعد الأكل أكتر من الـ protein والدهون. فلو عرفت كميته، تقدر تتوقع السكر، وتظبط الحركة أو جرعة الإنسولين عليه. وده ليه الكتاب بيقول **with the right balance of physical activity and medication**.
       - kind: explain
         page: 97
         title: "الوحدة: 15 جرام"
@@ -300,6 +475,29 @@ lessons:
           يعني **slice of bread** = **small fruit** = **ear of corn**: كل واحد حوالي 15 g.
 
           الـ **starches** في: starchy vegetables (بطاطس، ذرة، بسلة)، legumes، grains، ومنتجات الدقيق (مكرونة، عيش، بسكوت).
+
+          ليه وحدة؟ عشان العيان ما يحسبش جرامات في كل لقمة. لو حفظ إن كل حاجة من دول = **1 serving**، يقدر يبدّل: رغيف بدل فاكهة، أو ذرة بدل رغيف، والسكر يفضل في نفس المكان.
+      - kind: figure
+        page: 97
+        quote: "One serving of carbohydrate is measured as 15 grams. A food that contains 15 grams of carbohydrate is called \"one carb serving\".\nFor example, one slice of bread, a small piece of fruit, or a ear of corn each have around 15 grams of carb. Each of these equals one carb serving."
+        title: "حصة واحدة = 15 g"
+        alt: "Three boxes with equals signs between them: one slice of bread, a small piece of fruit and an ear of corn, each about 15 grams of carbohydrate, so each is one carb serving."
+        caption: "التلاتة **بيتبادلوا**: كل واحد ==one carb serving== تقريبًا."
+        svg: |
+          <svg viewBox="0 0 330 140" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="30" width="90" height="60" rx="10" class="fg-acc"/>
+            <text x="55" y="56" text-anchor="middle" class="t-sm t-b">1 slice</text>
+            <text x="55" y="72" text-anchor="middle" class="t-sm t-b">bread</text>
+            <text x="110" y="66" class="t-lg t-b">=</text>
+            <rect x="125" y="30" width="90" height="60" rx="10" class="fg-good"/>
+            <text x="170" y="56" text-anchor="middle" class="t-sm t-b">small</text>
+            <text x="170" y="72" text-anchor="middle" class="t-sm t-b">fruit</text>
+            <text x="225" y="66" class="t-lg t-b">=</text>
+            <rect x="240" y="30" width="80" height="60" rx="10" class="fg-acc"/>
+            <text x="280" y="56" text-anchor="middle" class="t-sm t-b">ear of</text>
+            <text x="280" y="72" text-anchor="middle" class="t-sm t-b">corn</text>
+            <text x="165" y="122" text-anchor="middle" class="t-sm t-mut">each about 15 g carbohydrate</text>
+          </svg>
       - kind: table
         page: 98
         quote: "Here are examples of the carb amounts in specific foods:\n| Food | Carbohydrate |\n|---|---|\n| 1 cup cooked pasta or 1 cup cooked rice | 45g carbohydrate |\n| Whole English muffin | 30g carbohydrate |\n| 3 cups popped popcorn | 15g carbohydrate |\n| Medium potato | 30g carbohydrate |\n| 1 cup corn or peas | 30g carbohydrate |\n| 1½ cups veggies (green beans, broccoli, or carrots, cooked) | 15g carbohydrate |\n| Small fruit (apple, orange, nectarine) | 15g carbohydrate |\n| 17 grapes, 12 cherries, ½ cup applesauce | 15g carbohydrate |\n| 1 cup milk | 12g carbohydrate |\n| 1 container (6oz.) yogurt, flavored, artificially sweetened | 12g carbohydrate |\n| ½ cup vanilla ice cream | 15g carbohydrate |\n| ½ cup sherbet | 30g carbohydrate |\n| 2 small cookies | 15g carbohydrate |"
@@ -313,6 +511,27 @@ lessons:
           - ["1 cup milk", "12 g"]
           - ["2 small cookies", "15 g"]
         hide: [[0, 1], [1, 1], [3, 1], [4, 1]]
+      - kind: table
+        page: 98
+        quote: "For example, if you need to eat around 45 grams of carb for breakfast, here are two different breakfasts that each total around 45 grams of carb:\n| Breakfast #1 | Grams | Breakfast #2 | Grams |\n|---|---|---|---|\n| 2 slices of whole wheat toast | 30 grams | ¾ cup of bran cereal | 23 grams |\n| 1 tablespoon jam | 15 | ½ cup of milk | 6 |\n| Egg substitute or egg whites | 0 | ½ banana | 15 |\n| Black coffee with sugar substitute | 0 | Black coffee with sugar substitute | 0 |\n| Total grams of carbohydrate: | 45 grams | Total grams of carbohydrate: | 44 grams |"
+        title: "فطارين، نفس الـ 45 جرام"
+        columns: [Breakfast 1, g, Breakfast 2, g]
+        rows:
+          - ["2 slices whole wheat toast", "30", "¾ cup bran cereal", "23"]
+          - ["1 tablespoon jam", "15", "½ cup milk", "6"]
+          - ["Egg whites", "0", "½ banana", "15"]
+          - ["Black coffee, sweetener", "0", "Black coffee, sweetener", "0"]
+          - ["Total", "45", "Total", "44"]
+        hide: [[0, 1], [1, 1], [2, 3], [4, 1]]
+      - kind: reveal
+        page: 98
+        quote: "For example, if you need to eat around 45 grams of carb for breakfast, here are two different breakfasts that each total around 45 grams of carb:"
+        prompt: "ليه الكتاب بيدّيك فطارين مختلفين بنفس الرقم؟"
+        answer: |
+          عشان يوريك إن الـ carb counting **مش diet واحد**: العدد ثابت (حوالي 45 g)، والأكل بيتغير حسب ذوق العيان. ده نفس مبدأ **flexible** و **realistic** من أول المحاضرة.
+
+          ولاحظ إن الحاجات اللي مالهاش كارب (بياض البيض، القهوة السادة بالـ sugar substitute) بتتحسب **صفر**، فالعيان يقدر يشبع بيها من غير ما يعدّي الحد. والـ **½ cup of milk** = 6 g، يعني نص الكوباية اللي فيها 12 g.
+
       - kind: aside
         tone: joke
         page: 98
@@ -328,6 +547,8 @@ lessons:
           - عايز تخس (lose weight)؟ استخدم **الأرقام الأقل**.
 
           وعلى الـ **Nutrition Facts label**: بص على الـ **serving size** و الـ **total carbohydrate per serving**.
+
+          ليه الرجالة أعلى؟ نفس منطق الـ calorie categories في أول المحاضرة: الرجالة عادة أكبر حجمًا وعضلاتهم أكتر فبيحرقوا أكتر. وليه الـ serving size مهم؟ لأن كل الأرقام على العلبة محسوبة **للحصة الواحدة**، ولو العلبة فيها 3 حصص وأكلتها كلها، اضرب في 3.
       - kind: case
         page: 99
         quote: "If you are trying to lose weight, use the lower numbers in these ranges for your carb counts by meal."
@@ -346,6 +567,43 @@ lessons:
             options: ["Half a cup of rice (about 22 g) instead of a full cup", "Add a glass of juice to the same lunch", "Swap the milk for a cup of ice cream", "Skip lunch and eat a bigger dinner"]
             answer: 0
             why: "نص كوباية رز تنزّل حوالي 22 g فالمجموع حوالي 50 g، وعايزة تقرب من الحد الأقل. الـ juice والـ ice cream بيزوّدوا كارب."
+      - kind: check
+        page: 99
+        quote: "If you are trying to lose weight, use the lower numbers in these ranges for your carb counts by meal."
+        question: "A man with type 2 diabetes wants to lose weight. Which carbohydrate target per meal fits the lecture?"
+        options:
+          - "About 45 g (the lower end of 45–75 g)"
+          - "About 75 g (the upper end of 45–75 g)"
+          - "About 30 g, as for a snack"
+          - "No limit while on metformin"
+        answer: 0
+        why:
+          - "صح: الرجالة 45–75 g في الوجبة، واللي عايز يخس ياخد الأرقام الأقل."
+          - "الرقم الأعلى لمن مش محتاج يخس."
+          - "الـ 15–30 g دي للـ snack."
+          - "الكتاب بيحط حد لكل وجبة، بدوا أو من غير."
+      - kind: try
+        items: [dm.L08.041, dm.L08.043, dm.L08.045, dm.L08.047, dm.L08.067]
+    recap:
+      - "Carb counting = تتابع الكارب وتحدد max لكل وجبة، لأن الكارب هو اللي بيعلّي السكر أكتر."
+      - "الحصة 15 g: slice of bread = small fruit = ear of corn."
+      - "كوباية رز أو مكرونة 45 g. ستات 30–60 g، رجالة 45–75 g، snack 15–30؛ للتخسيس الأقل."
+      - "على الـ label: serving size الأول، وبعدين total carbohydrate per serving."
+    practice: [dm.L08.041, dm.L08.042, dm.L08.043, dm.L08.044, dm.L08.045, dm.L08.046, dm.L08.047, dm.L08.048, dm.L08.049, dm.L08.050, dm.L08.051, dm.L08.065, dm.L08.067]
+  # ------------------------------------------------------------------
+  # Split from lesson3 on 2026-11-13 (#828): glycemic index and load.
+  - id: dm.L08.lesson5
+    title: "GI و GL: البطيخ مش عدو"
+    hook: "البطيخ GI بتاعه 72، يعني ممنوع؟ لأ: الـ GL بتاعه 3.6. تعالى نفهم ليه."
+    minutes: 8
+    pages: [100, 102]
+    topics: [gi]
+    goals:
+      - "تعرّف الـ GI وتعرف إيه اللي بيعلّيه"
+      - "تفرّق GI عن GL وتحسب GL"
+      - "تعرف رأي الـ ADA في الـ GI"
+    status: unverified
+    steps:
       - kind: explain
         page: 100
         title: "Glycemic index"
@@ -355,6 +613,8 @@ lessons:
 
           - كارب بيتهضم **بسرعة** ويطلق glucose بسرعة ← **high GI**
           - كارب بيتهضم **ببطء** ← **low GI**
+
+          إيه اللي بيخلي الكارب يتهضم بسرعة أو ببطء؟ التفسير المقبول (مش في الكتاب): الـ **fiber** والـ protein والدهن اللي معاه بيبطّأوه، والطبخ الكتير والطحن (processing) بيسرّعوه لأنهم بيفتحوا النشا للإنزيمات. عشان كده العدس واطي، والبطاطس المشوية عالية، والعصير أعلى من الفاكهة نفسها.
       - kind: table
         page: 101
         quote: "Glycemic Index classification\n| HIGH GI ≥70 | MEDIUM GI 56 - 69 | LOW GI ≤55 |\n|---|---|---|\n| Glucose 100 | Brown bread 69 | Banana 52 |\n| Sports drink 95 | Muesli 68 | Brown rice 50 |\n| Baked potato 85 | Soft drinks 68 | Porridge 49 |\n| Cornflakes 84 | Quick oats 66 | All-bran 42 |\n| Jelly beans 80 | White rice 65 | Pasta 41 |\n| Coco-pops 77 | Muffins 62 | Baked beans 40 |\n| Honey 73 | Ice cream 61 | Apple 36 |\n| White bread 70 | Orange juice 57 | Yoghurt 33 |\n| Weetabix 70 | Mango 55 | Red lentils 26 |"
@@ -391,6 +651,17 @@ lessons:
           - **Low ≤10**، **medium 11–19**، **high ≥20**
 
           والـ **American Diabetes Association (ADA)** بتدعم الـ GI، بس بتقول إن ==total carbohydrate== هو أقوى مؤشر.
+
+          ليه الـ GI لوحده ممكن يضلّلك؟ لأنه بيتقاس على **كمية ثابتة من الكارب**، مش على الحصة اللي بتاكلها فعلًا. حاجة GI بتاعها عالي بس الحصة فيها كارب قليل (زي البطيخ) مش هتعمل حاجة كبيرة، وحاجة GI متوسط بس بتاكل منها طبق كبير هتعلّي السكر جامد. الـ GL بيصحّح ده.
+      - kind: reveal
+        page: 101
+        quote: "GL = GI / 100 × Net Carbs (Net Carbs are equal to the Total Carbohydrates minus Dietary Fiber)"
+        prompt: "ليه بنطرح الـ dietary fiber قبل ما نحسب الـ GL؟"
+        answer: |
+          الكتاب بيعرّف **net carbs = total carbohydrates − dietary fiber**.
+
+          التفسير المقبول (مش في الكتاب): الـ fiber كارب على الورق، بس الأمعاء ما عندهاش إنزيم يكسّره لـ glucose، فبيعدّي من غير ما يعلّي السكر. لو سبته في الحساب هتظلم الأكل الغني بالـ fiber (العيش الأسمر، البقول) وتطلّعه أوحش من حقيقته. وده نفس السبب إن الـ whole grain اتفضّل في الهرم.
+
       - kind: figure
         page: 102
         quote: "For example, watermelon has a GI of 72. A 100 g serving of watermelon has 5 g of available carbohydrates (it contains a lot of water), making the calculation 5 × 72 / 100 = 3.6, so the GL is 3.6."
@@ -427,12 +698,40 @@ lessons:
           - "نسيت تطرح الـ fiber."
           - "ده الـ net carbs مش الـ GL."
           - "قسمت غلط."
+      - kind: aside
+        tone: trap
+        page: 101
+        quote: "Similar to the glycemic index, the glycemic load of a food can be classified as low, medium, or high:\n  Low: 10 or less.\n  Medium: 11 – 19.\n  High: 20or more."
+        text: "ما تخلطش الحدود: الـ **GI** حدوده **55 و 70** (low ≤55، high ≥70)، والـ **GL** حدوده **10 و 20** (low ≤10، high ≥20). أرقام الـ GL أصغر لأنها مضروبة في كمية الكارب في الحصة ومقسومة على 100. لو شفت رقم زي 15، اسأل نفسك الأول: ده GI ولا GL؟"
+
+      - kind: reveal
+        page: 101
+        quote: "The American Diabetes Association supports the glycemic index. However, it warns that the total amount of carbohydrate in the food is still the strongest and most important indicator, and that everyone should make their own custom method that works best for them."
+        prompt: "لو الـ GI مفيد، ليه الـ ADA بتقول الـ total carbohydrate لسه أهم؟"
+        answer: |
+          الكتاب بيقول الـ ADA بتدعم الـ GI، بس الـ **total amount of carbohydrate** هو ==the strongest and most important indicator==، وكل واحد يعمل **custom method** تناسبه.
+
+          التفسير المقبول (مش في الكتاب): الـ GI بيتغير مع الطبخ ونضج الفاكهة واللي بتاكله معاها، فرقمه في الجدول تقريبي. أما الكمية فدايمًا هي اللي بتحدد قد إيه glucose هيدخل في الآخر. يعني ابدأ بالعدّ (carb counting)، وبعدين استخدم الـ GI عشان تختار الأحسن جوه نفس العدد.
+      - kind: check
+        page: 102
+        quote: "For example, watermelon has a GI of 72. A 100 g serving of watermelon has 5 g of available carbohydrates (it contains a lot of water), making the calculation 5 × 72 / 100 = 3.6, so the GL is 3.6."
+        question: "Why does watermelon have a low glycemic load despite a GI of 72?"
+        options:
+          - "A 100 g serving holds only 5 g of carbohydrate"
+          - "Its fibre cancels the GI"
+          - "Its GI is measured against white bread"
+          - "Fruit sugar does not raise glucose"
+        answer: 0
+        why:
+          - "صح: البطيخ معظمه مية، 5 g carbs بس في الـ 100 g، فالـ GL = 5 × 72 ÷ 100 = 3.6."
+          - "الحساب في الكتاب على الـ available carbohydrates، والسبب الكمية مش الـ fiber."
+          - "المرجع في الكتاب الـ pure glucose = 100."
+          - "الـ natural sugars بتعلّي السكر؛ ده سبب إن الفاكهة 2–4 حصص بس."
       - kind: try
-        items: [dm.L08.043, dm.L08.047, dm.L08.055, dm.L08.058, dm.L08.069]
+        items: [dm.L08.053, dm.L08.055, dm.L08.058, dm.L08.061, dm.L08.069]
     recap:
-      - "Carb counting = تتابع الكارب وتحدد max لكل وجبة. الحصة 15 g."
-      - "كوباية رز أو مكرونة 45 g. ستات 30–60 g، رجالة 45–75 g، snack 15–30؛ للتخسيس الأقل."
-      - "GI: glucose = 100؛ high ≥70، medium 56–69، low ≤55."
+      - "GI: glucose = 100؛ high ≥70، medium 56–69، low ≤55. الـ fiber والـ protein بيبطّأوا، والـ processing بيسرّع."
       - "GL = GI/100 × (carbs − fiber)؛ ≤10 low، 11–19 medium، ≥20 high. البطيخ 3.6."
-      - "الـ ADA: الـ total carbohydrate أقوى مؤشر."
-    practice: [dm.L08.041, dm.L08.042, dm.L08.043, dm.L08.044, dm.L08.045, dm.L08.046, dm.L08.047, dm.L08.048, dm.L08.049, dm.L08.050, dm.L08.051, dm.L08.052, dm.L08.053, dm.L08.054, dm.L08.055, dm.L08.056, dm.L08.057, dm.L08.058, dm.L08.059, dm.L08.060, dm.L08.061, dm.L08.062, dm.L08.063, dm.L08.064, dm.L08.065, dm.L08.067, dm.L08.068, dm.L08.069]
+      - "الـ GI بيقول النوع، والـ GL بيضيف الكمية."
+      - "الـ ADA: الـ total carbohydrate أقوى مؤشر؛ الـ GI يساعدك تختار جوه نفس العدد."
+    practice: [dm.L08.052, dm.L08.053, dm.L08.054, dm.L08.055, dm.L08.056, dm.L08.057, dm.L08.058, dm.L08.059, dm.L08.060, dm.L08.061, dm.L08.062, dm.L08.063, dm.L08.064, dm.L08.068, dm.L08.069]

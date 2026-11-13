@@ -666,6 +666,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: hb.L14 to the depth bar: 5 → 6 lessons (lesson3 → lesson3 blood and sepsis + lesson6 IBD and granulomas), p267 (pregnancy imaging, six pregnancy-only diseases) and p260 coagulation taught, p273 (essay questions) skipped, words per page 182 → 222; in `content/lesson-skips.yaml` (#828, #829).
 - 2026-11-13: hb.L13 to the depth bar: 8 → 13 lessons (lesson3 → lesson9 AIH regimens; lesson4 → lesson10 PBC clinical + lesson11 PBC treatment; lesson6 → lesson12 PSC emerging drugs; lesson8 → lesson13 IgG4 mimics and treatment), pp. 233–239 and 248 taught, p251 (essay questions) skipped, words per page 142 → 225; glossary gains MAdCAM; in `content/lesson-skips.yaml` (#828, #829).
 - 2026-11-13: neph.L07 to the Hepatology bar: 7 → 13 lessons (lesson1 → lesson8, lesson2 → lesson9, lesson3 → lesson10, lesson5 → lesson11, lesson6 → lesson12, lesson7 → lesson13), reasons labelled «التفسير المقبول (مش في الكتاب)», seven new drawings, words per page 75 → 225 on the `lessons --report` count, the 10 pages without a step now taught; in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: dm.L08 to the Hepatology bar: 3 → 5 lessons (food groups split → lesson4, glycaemic index split → lesson5), reasons labelled «التفسير المقبول (مش في الكتاب)», p91 now taught, words per page 101 → 228; in `content/lesson-skips.yaml` (#827–#829).

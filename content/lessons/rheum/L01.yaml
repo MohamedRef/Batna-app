@@ -2,16 +2,19 @@ schema: batna.lesson/v1
 lecture: rheum.L01
 lessons:
   # ------------------------------------------------------------------
+  # Book order. Ids are never reused: lesson6 (pp 4-5) was split out of
+  # lesson1, lesson7 (pp 8-10) out of lesson2, lesson8 (pp 19-21) out of
+  # lesson5 (#828, 2026-11-13).
   - id: rheum.L01.lesson1
     title: "الـ cytokines: واتساب جهاز المناعة"
     hook: "الخلايا المناعية مش بتتكلم، بتبعت رسايل. الرسالة دي اسمها cytokine."
     minutes: 8
-    pages: [1, 5]
-    topics: [intro, naming, attributes]
+    pages: [1, 3]
+    topics: [intro]
     goals:
-      - "تعرّف الـ cytokine ومين أكتر حد بيعمله"
-      - "تفرّق autocrine و paracrine و endocrine"
-      - "تحفظ الخمس functional attributes بمثال لكل واحدة"
+      - "تعرّف الـ cytokine ومين أكتر حد بيعمله، وليه"
+      - "تفرّق autocrine و paracrine و endocrine، وتعرف ليه الـ endocrine مش الطبيعي"
+      - "تمشي سلسلة الـ cytokine من المنبّه لحد التأثير"
     status: unverified
     steps:
       - kind: explain
@@ -26,12 +29,36 @@ lessons:
           - غير المناعة، ليها دور في الـ development: cell differentiation و directed migration.
       - kind: explain
         page: 1
+        quote: "In order to mount and coordinate an effective immune response, a mechanism by which lymphocytes, inflammatory cells and haematopoietic cells can communicate with each other is required."
+        title: "ليه محتاجين رسايل أصلًا؟"
+        text: |
+          الكتاب بيبدأ بالسبب: عشان المناعة تعمل response **effective** ومتنظّم، الـ lymphocytes والـ inflammatory cells والـ haematopoietic cells لازم يكون عندهم طريقة **يكلموا بيها بعض**.
+
+          التفسير المقبول (مش في الكتاب): الخلايا دي متفرقة في الجسم كله، في الدم والـ lymph nodes والنسيج الملتهب. مفيش "مدير" واحد بيشوف كل حاجة، فكل خلية بتعرف اللي بيحصل من الرسايل اللي بتوصلها.
+
+          - الخلية اللي شافت الميكروب ==بتبلّغ==.
+          - الخلية اللي بعيد شوية **بتيجي** أو **بتتكاثر** أو **بتهدى** على حسب الرسالة.
+
+          عشان كده الـ cytokines هي "الوسيط" مش "السلاح": هي مش بتقتل الميكروب بنفسها في الغالب، هي بتنظّم مين يقتله وإمتى.
+      - kind: explain
+        page: 1
         quote: "Influencing both innate and adaptive immune responses, the two principal producers of cytokines are T helper cells (Th cells) and macrophages, although they can be transiently induced and secreted by all nucleated cells."
         title: "مين بيبعت الرسايل؟"
         text: |
           أكبر اتنين بيعملوا cytokines هم ==Th cells== و ==macrophages==.
 
           بس أي **nucleated cell** ممكن تعمل cytokines لفترة قصيرة لو اتحفزت. يعني كل الخلايا معاها موبايل، بس الـ Th والـ macrophage هم اللي عاملين الجروبات.
+      - kind: reveal
+        page: 1
+        quote: "Influencing both innate and adaptive immune responses, the two principal producers of cytokines are T helper cells (Th cells) and macrophages, although they can be transiently induced and secreted by all nucleated cells."
+        prompt: "ليه الـ Th cell والـ macrophage بالذات هم أكبر منتجين؟"
+        answer: |
+          الكتاب بيقول إن الـ cytokines بتأثر على الـ **innate** والـ **adaptive** الاتنين. التفسير المقبول (مش في الكتاب): كل واحد فيهم قائد في ناحية:
+
+          - الـ **macrophage** أول واحد بيقابل الميكروب في النسيج، فهو اللي بيدّي **الإنذار الأول** (innate).
+          - الـ **Th cell** هو "المايسترو" بتاع الـ adaptive: مش بيقتل، شغلته كلها إنه يقول للـ B و CD8 والـ macrophage يعملوا إيه، وده كله بالـ cytokines.
+
+          وفي صفحة 6 هتلاقي الكتاب بيربطهم: الـ antigen بيقابل الـ macrophage، وبعدها الـ resting Th cells بتتنشّط.
       - kind: figure
         page: 2
         quote: "Autocrine (acts on same cell) manner.\nParacrine (acts on nearby cell) manner."
@@ -60,6 +87,18 @@ lessons:
             <path d="M74 255h190" class="fg-arrow-acc" marker-end="url(#R01a)"/>
             <text x="110" y="292" class="t-sm t-bad">distant: not the normal manner</text>
           </svg>
+      - kind: explain
+        page: 2
+        quote: "Cytokines aid cell to cell communication in immune responses and stimulate the movement of cells towards sites of inflammation, infection and trauma."
+        title: "ليه الـ cytokines بتشتغل قريب؟"
+        text: |
+          الكتاب بيدّي الـ cytokines دورين في صفحة 2:
+          - **Cell to cell communication** في الـ immune response.
+          - تحريك الخلايا ناحية أماكن الـ ==inflammation== والـ infection والـ trauma.
+
+          التفسير المقبول (مش في الكتاب) لإن الـ endocrine "مش الطريقة المعتادة": الـ cytokine بيتفرز بكميات صغيرة جدًا، وعمره في الدم قصير، فتركيزه بيبقى عالي **جنب الخلية اللي عملته** بس. يعني الرسالة بتوصل للجار وللخلية نفسها، ونادرًا لعضو بعيد.
+
+          ولما الرسالة **توصل للدم كله** فعلًا، ده غالبًا علامة إن الإنتاج زاد عن حدّه، وده اللي هتشوفه في الـ cytokine storm (صفحة 15).
       - kind: check
         page: 2
         quote: "Endocrine (acts on distant cell; not the normal manner for cytokine responses) manner."
@@ -70,6 +109,16 @@ lessons:
           - "صح: الكتاب كاتبها صريحة، الـ cytokines عادة بتشتغل قريب."
           - "الـ autocrine طبيعي جدًا: الخلية بتكلم نفسها (زي IL-2 على الـ T cell)."
           - "الـ paracrine هو الشائع: الخلية بتكلم جارتها."
+      - kind: check
+        page: 2
+        quote: "When cytokine binds to receptors on the membrane of the same cells that secreted it."
+        question: "Activated T cells secrete IL-2, which binds IL-2 receptors on the same T cells and drives their proliferation. Which action mode is this?"
+        options: ["Autocrine", "Paracrine", "Endocrine"]
+        answer: 0
+        why:
+          - "صح: نفس الخلية اللي فرزت هي اللي استقبلت، يعني autocrine."
+          - "الـ paracrine يبقى لو IL-2 راح لخلية جارة، زي NK cell أو B cell جنبه."
+          - "الـ endocrine لخلية بعيدة عن طريق الدم، ومش الطريقة المعتادة للـ cytokines."
       - kind: explain
         page: 3
         quote: "The susceptibility of a target cell to a particular cytokine is determined by the presence of specific membrane receptors and exhibit very high affinity for one another."
@@ -81,6 +130,56 @@ lessons:
 
           السلسلة في رسمة الكتاب: inducing stimulus ← stimulated cell produces cytokine ← secreted ← receptor on target cell bound ← cell activation ← biological effect.
       - kind: explain
+        page: 3
+        quote: "Cytokines bind to specific receptors on the membranes of target cells, triggering signal transduction pathways that ultimately alter enzyme activity and gene expression."
+        title: "ليه الـ receptor هو اللي بيقرر؟"
+        text: |
+          الـ cytokine نفسه بيلف في المكان كله، بس **مش كل خلية بتسمعه**. اللي بيفرق: هل الخلية دي عندها الـ ==specific receptor== ولا لأ.
+
+          النتيجة اللي لازم تفهمها من الجملة دي:
+          - **نفس الـ cytokine** ممكن يعمل حاجات مختلفة في خلايا مختلفة، عشان كل خلية بتترجم الإشارة بالـ genes بتاعتها (ده الـ pleiotropy في الدرس الجاي).
+          - الخلية ممكن **تبطّل تسمع** لو قللت الـ receptor بتاعها.
+
+          التفسير المقبول (مش في الكتاب) للـ **very high affinity**: عشان الـ cytokine بيتفرز بكميات قليلة جدًا، الـ receptor لازم يمسكه حتى وهو تركيزه ضعيف. كمية صغيرة تكفي تغيّر الـ gene expression.
+      - kind: order
+        page: 3
+        quote: "The susceptibility of a target cell to a particular cytokine is determined by the presence of specific membrane receptors and exhibit very high affinity for one another."
+        prompt: "رتّب سلسلة الـ cytokine زي رسمة الكتاب في صفحة 3:"
+        steps:
+          - "Inducing stimulus"
+          - "Stimulated cell produces cytokine"
+          - "Cytokine secreted"
+          - "Binds receptor on target cell"
+          - "Target cell activated"
+          - "Biological effect"
+        why: "المنطق بسيط: لازم حاجة تنبّه الخلية الأول، بعدين تعمل الـ cytokine وتفرزه، وبعدين يمسك الـ receptor، وده يشغّل الخلية التانية، والنتيجة تأثير بيولوجي. لو شلت الـ receptor من السلسلة، الخلية مش هتتأثر مهما زاد الـ cytokine."
+      - kind: aside
+        tone: analogy
+        page: 3
+        quote: "The susceptibility of a target cell to a particular cytokine is determined by the presence of specific membrane receptors and exhibit very high affinity for one another."
+        text: "الـ cytokine زي رسالة على جروب واتساب كبير: كل الناس استلمتها، بس اللي **فاتح الإشعارات** (عنده الـ receptor) هو بس اللي بيتحرك. والـ affinity العالية زي إن الموبايل بيرن حتى لو الرسالة كلمة واحدة."
+      - kind: try
+        items: [rheum.L01.002, rheum.L01.005, rheum.L01.008, rheum.L01.012, rheum.L01.013]
+    recap:
+      - "Cytokines = proteins صغيرة (أقل من 30 kDa) بتشتغل على surface receptors، وبتنظّم المناعة مش بتقتل بنفسها."
+      - "أكبر منتجين: Th cells و macrophages، وأي nucleated cell ممكن لفترة قصيرة."
+      - "Autocrine لنفسها، paracrine للجار؛ endocrine مش الطبيعي عشان الكمية صغيرة والعمر قصير."
+      - "الخلية بتسمع بس لو عندها الـ receptor، والـ affinity عالية جدًا."
+    practice: [rheum.L01.001, rheum.L01.002, rheum.L01.003, rheum.L01.004, rheum.L01.005, rheum.L01.006, rheum.L01.007, rheum.L01.008, rheum.L01.009, rheum.L01.010, rheum.L01.011, rheum.L01.012, rheum.L01.013]
+  # ------------------------------------------------------------------
+  - id: rheum.L01.lesson6
+    title: "أسامي الـ cytokines وطباعهم الخمسة"
+    hook: "ليه اسم TNF «بيموّت الأورام» وهو أكتر حاجة بتهد مفصل الـ RA؟ الأسامي قديمة، والطباع هي اللي بتهم."
+    minutes: 8
+    pages: [4, 5]
+    topics: [naming, attributes]
+    goals:
+      - "تعرف الـ cytokines اتسمّت إزاي، وليه الأسامي مُضلّلة"
+      - "تحفظ الخمس functional attributes بمثال من رسمة الكتاب"
+      - "تفهم ليه الـ redundancy والـ pleiotropy بيفرقوا في العلاج"
+    status: unverified
+    steps:
+      - kind: explain
         remind: [rheum.L01.014]
         page: 4
         quote: "Lymphokines – Cytokines such as interleukin-2 (IL-2) and interferon-γ (IFN- γ), produced by lymphocytes."
@@ -90,6 +189,28 @@ lessons:
 
           - **على حسب الخلية اللي عملتها**: ==lymphokines== من الـ lymphocytes (IL-2، IFN-γ)، و **monokines** من الـ monocytes (TNF-α).
           - **على حسب أول حاجة اتشافت بيها**: **TNF** عشان قتلت cancer cell lines، و **CSF** عشان خلت الـ leukocytes تكبر in vitro في colonies.
+      - kind: explain
+        page: 4
+        quote: "Tumor necrosis factor (TNF) – Cytokines exhibited cytotoxic effects on some cancer cell lines."
+        title: "ليه الأسامي مُضلّلة؟"
+        text: |
+          الكتاب بيقسم الأسامي لطريقتين، والاتنين **تاريخيين**:
+
+          - **على حسب الخلية اللي عملته**: lymphokine و monokine. المشكلة إن نفس الـ cytokine بيتعمل من خلايا كتير (صفحة 1: أي nucleated cell)، فالاسم بيوصف أول خلية اتشاف منها بس.
+          - **على حسب أول تأثير اتشاف**: ==TNF== اتسمى كده عشان قتل cancer cell lines في المعمل، و **CSF** عشان خلّى الـ leukocytes تكبر في **colonies** على الطبق.
+
+          يعني الاسم بيحكيلك **قصة الاكتشاف**، مش الشغلانة الأساسية. عشان كده TNF-α في الكتاب ده أشهر دوره الالتهاب في الـ RA (صفحة 20)، مش قتل الأورام.
+      - kind: check
+        page: 4
+        quote: "Monokines – Cytokines such as tumor necrosis factor-α (TNF-α) produced by monocytes."
+        question: "Per the book, a monokine is a cytokine named for which feature?"
+        options: ["The cell that produces it (monocytes)", "The first biological effect discovered", "Its molecular weight", "The receptor family it binds"]
+        answer: 0
+        why:
+          - "صح: monokine = من الـ monocytes، ومثال الكتاب TNF-α."
+          - "التسمية بأول تأثير اتشاف هي TNF و CSF، مش monokine."
+          - "الوزن الجزيئي مش أساس أي اسم من الأسامي التمانية."
+          - "تصنيف الـ receptors ده موضوع صفحة 12، مش الأسامي."
       - kind: mnemonic
         page: 5
         quote: "Pleiotropic action: A given cytokine that has different biological effects on different target cells."
@@ -101,6 +222,74 @@ lessons:
           - { key: "S", text: "Synergism: الاتنين مع بعض أقوى من مجموعهم" }
           - { key: "A", text: "Antagonism: واحد بيلغي تأثير التاني" }
           - { key: "C", text: "Cascade induction: cytokine يخلي الخلية تطلع cytokines تانية، وهكذا" }
+      - kind: figure
+        page: 5
+        quote: "Pleiotropic action: A given cytokine that has different biological effects on different target cells."
+        title: "الخمس طباع في رسمة واحدة"
+        alt: "Five small panels. Pleiotropy: one cytokine with arrows to three different cells. Redundancy: three cytokines with arrows to one effect. Synergy: two cytokines joining into one large effect. Antagonism: one cytokine arrow blocked by a bar from another. Cascade: a chain of cells each releasing a new cytokine."
+        caption: "Pleiotropy = واحد لكتير. Redundancy = كتير لواحد. Synergy = اتنين بيكبّروا بعض. Antagonism = واحد بيقفل التاني. Cascade = كل خلية بتسلّم اللي بعدها."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R01f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <text x="8" y="18" class="t-sm t-b">Pleiotropy</text>
+            <circle cx="30" cy="45" r="10" class="fg-dot-acc"/>
+            <path d="M42 45L95 25" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <path d="M42 45H95" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <path d="M42 45L95 65" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <rect x="100" y="17" width="50" height="14" rx="4" class="fg-box"/>
+            <rect x="100" y="38" width="50" height="14" rx="4" class="fg-box"/>
+            <rect x="100" y="59" width="50" height="14" rx="4" class="fg-box"/>
+            <text x="175" y="18" class="t-sm t-b">Redundancy</text>
+            <circle cx="190" cy="30" r="7" class="fg-dot-acc"/>
+            <circle cx="190" cy="48" r="7" class="fg-dot-good"/>
+            <circle cx="190" cy="66" r="7" class="fg-dot-bad"/>
+            <path d="M199 30L255 46" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <path d="M199 48H255" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <path d="M199 66L255 50" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <rect x="260" y="40" width="60" height="16" rx="4" class="fg-acc"/>
+            <text x="290" y="52" text-anchor="middle" class="t-sm">same</text>
+            <text x="8" y="115" class="t-sm t-b">Synergy</text>
+            <circle cx="25" cy="140" r="8" class="fg-dot-acc"/>
+            <text x="42" y="145" class="t-b">+</text>
+            <circle cx="62" cy="140" r="8" class="fg-dot-good"/>
+            <path d="M75 140H105" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <rect x="110" y="122" width="50" height="36" rx="6" class="fg-acc"/>
+            <text x="135" y="145" text-anchor="middle" class="t-b">×</text>
+            <text x="175" y="115" class="t-sm t-b">Antagonism</text>
+            <circle cx="190" cy="140" r="8" class="fg-dot-acc"/>
+            <path d="M200 140H250" class="fg-arrow-acc"/>
+            <path d="M252 125V155" class="fg-ink" stroke-width="3"/>
+            <circle cx="290" cy="140" r="8" class="fg-dot-bad"/>
+            <path d="M280 140H258" class="fg-arrow"/>
+            <text x="8" y="205" class="t-sm t-b">Cascade induction</text>
+            <circle cx="30" cy="245" r="16" class="fg-box"/>
+            <circle cx="120" cy="245" r="16" class="fg-box"/>
+            <circle cx="210" cy="245" r="16" class="fg-box"/>
+            <circle cx="300" cy="245" r="16" class="fg-box"/>
+            <path d="M48 245H100" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <path d="M138 245H190" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <path d="M228 245H280" class="fg-arrow-acc" marker-end="url(#R01f)"/>
+            <text x="74" y="236" text-anchor="middle" class="t-sm">IFN-γ</text>
+            <text x="164" y="236" text-anchor="middle" class="t-sm">IL-12</text>
+            <text x="254" y="236" text-anchor="middle" class="t-sm">more</text>
+            <text x="30" y="285" text-anchor="middle" class="t-sm t-mut">TH</text>
+            <text x="120" y="285" text-anchor="middle" class="t-sm t-mut">Mφ</text>
+            <text x="210" y="285" text-anchor="middle" class="t-sm t-mut">TH</text>
+          </svg>
+      - kind: explain
+        page: 5
+        quote: "Synergism: when the combined effects of two cytokines on cellular activity is greater than the additive effects of the individual cytokines."
+        title: "الطباع الخمسة، وليه بتحصل"
+        text: |
+          - **Pleiotropy**: cytokine واحد وتأثيرات مختلفة. السبب في صفحة 3: كل خلية عندها الـ receptor بتترجم الإشارة بطريقتها.
+          - **Redundancy**: أكتر من cytokine بيعملوا نفس الحاجة. التفسير المقبول (مش في الكتاب): كذا cytokine بيتشاركوا **نفس سلسلة الـ receptor** (هتشوف الـ common γ chain في صفحة 11)، فبيوصلوا لنفس الإشارة جوه الخلية.
+          - ==Synergism==: الاتنين مع بعض **أكبر من مجموعهم**، يعني 1 + 1 = 5 مش 2.
+          - **Antagonism**: واحد بيلغي أو بيعادل تأثير التاني.
+          - ==Cascade induction==: الـ cytokine يخلي الخلية تفرز cytokines تانية، واللي بدوره يشغّل خلايا تانية.
+
+          الخمسة دول هم اللي بيخلوا الـ cytokines "شبكة" مش خطوط منفصلة.
       - kind: match
         page: 5
         quote: "| Attribute | Producing cell | Cytokine | Target cell | Effect |\n|---|---|---|---|---|\n| PLEIOTROPY | Activated TH cells | IL-4 | B cell | Activation, Proliferation, Differentiation |\n| PLEIOTROPY | Activated TH cells | IL-4 | Thymocyte | Proliferation |\n| PLEIOTROPY | Activated TH cells | IL-4 | Mast cell | Proliferation |\n| REDUNDANCY | Activated TH cells | IL-2, IL-4, IL-5 | B cell | Proliferation |\n| SYNERGY | Activated TH cells | IL-4 + IL-5 | B cell | Induces class switch to IgE |\n| ANTAGONISM | Activated TH cells | IL-4, IFN-γ | B cell | Blocks class switch to IgE induced by IL-4 |\nCASCADE INDUCTION\n  Activated TH cells\n  IFN-γ\n  Macrophage\n  IL-12\n  Activated TH cells\n  IFN-γ, TNF, IL-2, and other cytokines"
@@ -112,28 +301,50 @@ lessons:
           - ["IFN-γ blocks the IgE switch induced by IL-4", "Antagonism"]
           - ["IFN-γ → macrophage → IL-12 → Th → more cytokines", "Cascade induction"]
         why: "ده بالظبط Figure 12-2 في صفحة 5. لاحظ إن IFN-γ لوحده بيعمل cascade و synergy (مع TNF-α على الـ macrophage) و antagonism (ضد IL-4)."
+      - kind: check
+        page: 5
+        quote: "Antagonism: the effects of one cytokine inhibit or offset the effects of another cytokine."
+        question: "IL-4 and IL-5 together switch B cells to IgE more than either alone could. Which attribute is this?"
+        options: ["Synergism", "Redundancy", "Pleiotropy", "Cascade induction"]
+        answer: 0
+        why:
+          - "صح: التأثير المشترك أكبر من مجموع كل واحد لوحده."
+          - "الـ redundancy إن كل واحد لوحده يعمل نفس الشغل (زي IL-2 و IL-4 و IL-5 على تكاثر الـ B cell)."
+          - "الـ pleiotropy cytokine واحد على خلايا كتير، زي IL-4 على B cell و thymocyte و mast cell."
+          - "الـ cascade إن cytokine يخلي خلية تطلّع cytokine تاني، زي IFN-γ ← macrophage ← IL-12."
       - kind: aside
         tone: analogy
         page: 5
         quote: "Redundancy: two or more cytokines that mediate similar functions. Redundancy makes it difficult to ascribe a particular activity to a single cytokine."
         text: "الـ redundancy زي إن خمس أشخاص في الشغل بيعملوا نفس المهمة: لو حصلت غلطة مش هتعرف تلبسها لمين. عشان كده صعب تنسب activity لـ cytokine واحد."
+      - kind: explain
+        page: 5
+        quote: "Cascade induction: Occurs when the action of one cytokine on target cell induces that cell to produce one or more other cytokines, which in turn may induce other target cells to produce other cytokines."
+        title: "ليه ده يهمك كدكتور؟"
+        text: |
+          التفسير المقبول (مش في الكتاب)، ودي نتايج منطقية للطباع اللي في الكتاب:
+
+          - **عشان الـ redundancy**: لو قفلت cytokine واحد، ممكن غيره يعوّض. ده سبب إن مش كل مريض بيستجيب لنفس الـ biologic.
+          - **عشان الـ pleiotropy**: الدوا اللي بيقفل cytokine في المفصل بيقفله في كل مكان تاني، فتظهر side effects زي العدوى.
+          - **عشان الـ cascade**: لو قفلت cytokine بدري في السلسلة، بتقطع كل اللي بعده. ده اللي بيخلي قفل ==TNF== لوحده ينفع في الـ RA.
+          - **عشان الـ cascade برضه**: من غير فرامل، السلسلة ممكن تكبر لحد ما تبقى ==cytokine storm== (صفحة 15).
       - kind: try
-        items: [rheum.L01.002, rheum.L01.005, rheum.L01.007, rheum.L01.014, rheum.L01.020]
+        items: [rheum.L01.014, rheum.L01.017, rheum.L01.021, rheum.L01.022, rheum.L01.025]
     recap:
-      - "Cytokines = proteins صغيرة (أقل من 30 kDa) بتشتغل على surface receptors."
-      - "أكبر منتجين: Th cells و macrophages، وأي nucleated cell ممكن."
-      - "Autocrine لنفسها، paracrine للجار؛ endocrine مش الطبيعي."
+      - "8 أسامي: monokine، lymphokine، CSF، interleukin، interferon، TNF، growth factor، chemokine."
+      - "الاسم إما من الخلية (lymphokine، monokine) أو من أول تأثير اتشاف (TNF، CSF)، يعني قصة الاكتشاف مش الوظيفة."
       - "PRSAC: pleiotropy، redundancy، synergism، antagonism، cascade induction."
-    practice: [rheum.L01.001, rheum.L01.002, rheum.L01.003, rheum.L01.004, rheum.L01.005, rheum.L01.006, rheum.L01.007, rheum.L01.008, rheum.L01.009, rheum.L01.010, rheum.L01.011, rheum.L01.012, rheum.L01.013, rheum.L01.014, rheum.L01.015, rheum.L01.016, rheum.L01.017, rheum.L01.018, rheum.L01.019, rheum.L01.020, rheum.L01.021, rheum.L01.022, rheum.L01.023, rheum.L01.024, rheum.L01.025, rheum.L01.026, rheum.L01.027, rheum.L01.028, rheum.L01.029]
+      - "Redundancy بتصعّب نسب أي activity لـ cytokine واحد، وبتفسّر ليه مش كل مريض بيستجيب لنفس الـ biologic."
+    practice: [rheum.L01.014, rheum.L01.015, rheum.L01.016, rheum.L01.017, rheum.L01.018, rheum.L01.019, rheum.L01.020, rheum.L01.021, rheum.L01.022, rheum.L01.023, rheum.L01.024, rheum.L01.025, rheum.L01.026, rheum.L01.027, rheum.L01.028, rheum.L01.029]
   # ------------------------------------------------------------------
   - id: rheum.L01.lesson2
-    title: "مين بيعمل إيه: الوظايف والست عائلات"
+    title: "الخمس وظايف والست عائلات"
     hook: "IL-1 بيسخّن، IL-5 بينادي الـ eosinophils، TGF-β بيهدّي. كل واحد ليه شخصية."
-    minutes: 10
-    pages: [6, 10]
+    minutes: 9
+    pages: [6, 7]
     topics: [functions, families]
     goals:
-      - "تحفظ الخمس وظايف بمثال لكل وظيفة"
+      - "تحفظ الخمس وظايف بمثال لكل وظيفة، وتعرف ليه المثال ده بالذات"
       - "تقرا Table 12-1: مين بيفرز إيه وبيأثر على مين"
       - "تعدّ الست عائلات وتعرف أعضاء كل عيلة"
     status: unverified
@@ -150,11 +361,34 @@ lessons:
           - ["Proliferation and differentiation", "IL-2"]
           - ["Wound repair", "TGF-β"]
         hide: [[1, 1], [2, 1], [4, 1]]
+      - kind: explain
+        page: 6
+        quote: "Regulation of cellular proliferation and differentiation (IL-2)."
+        title: "ليه كل وظيفة ليها المثال ده؟"
+        text: |
+          الكتاب بيدّي مثال واحد أو اتنين لكل وظيفة. افتكرهم بالمنطق، والتفسير المقبول (مش في الكتاب) هنا مربوط بالجدول اللي جاي:
+
+          - **Immunity (IL-2 و IL-4)**: IL-2 بيكبّر الـ T cells (cellular)، و IL-4 بيوجّه للـ Th2 والـ antibodies (humoral). واحد لكل ناحية.
+          - **Inflammation (IL-1 و IL-6 و TNF-α)**: التلاتة بيكلموا الـ hypothalamus والكبد، فبيطلّعوا fever والـ acute phase proteins.
+          - **Hematopoiesis (GM-CSF)**: الاسم نفسه بيقول: colony-stimulating factor للـ granulocytes والـ macrophages.
+          - **Proliferation (IL-2)**: نفس IL-2، عشان شغلته الأساسية إنه يخلّي الـ T cell ==تتكاثر==.
+          - **Wound repair (TGF-β)**: هو "الفرامل" اللي بتوقف الالتهاب، وبعد الالتهاب بييجي الإصلاح.
       - kind: aside
         tone: exam
         page: 6
         quote: "Induction of inflammatory response (IL-1, IL-6 and TNF-a)."
         text: "التلاتي IL-1 و IL-6 و TNF-α هم «تلاتي الحرارة والـ acute phase». هتقابلهم في كل محاضرة روماتيزم: C-reactive protein (CRP) عالي = غالبًا IL-6 شغال."
+      - kind: explain
+        page: 6
+        quote: "Cytokines released from these cells activate an entire network of interacting cells in the immune response."
+        title: "الشبكة بتبدأ منين؟"
+        text: |
+          الكتاب بيرسم البداية في سطرين:
+          1. الـ **antigen** بيقابل الـ ==macrophage==.
+          2. بعدها الـ **resting Th cells** بتتنشّط.
+          3. الـ cytokines اللي بتخرج من الاتنين بتشغّل **network كاملة** من الخلايا.
+
+          ليه البداية من الـ macrophage؟ التفسير المقبول (مش في الكتاب): الـ macrophage بياكل الميكروب ويعرض أجزاء منه للـ Th cell، فهو اللي بيصحّي الـ Th. ولما الـ Th يصحى، يبدأ يوزّع الأوامر. عشان كده أي خلل في الخطوة الأولى بيأثر على كل اللي بعدها.
       - kind: figure
         page: 6
         quote: "TABLE 12-1: Functional groups of selected cytokines\n| Cytokine | Secreted by | Targets and effects |\n|---|---|---|\n| SOME CYTOKINES OF INNATE IMMUNITY | | |\n| Interleukin 1 (IL-1) | Monocytes, macrophages, endothelial cells, epithelial cells | Vasculature (inflammation); hypothalamus (fever); liver (induction of acute phase proteins) |\n| Tumor necrosis factor-α (TNF-α) | Macrophages | Vasculature (inflammation); liver (induction of acute phase proteins); loss of muscle, body fat (cachexia); induction of death in many cell types; neutrophil activation |\n| Interleukin 12 (IL-12) | Macrophages, dendritic cells | NK cells; influences adaptive immunity (promotes TH1 subset) |\n| Interleukin 6 (IL-6) | Macrophages, endothelial cells | Liver (induces acute phase proteins); influences adaptive immunity (proliferation and antibody secretion of B cell lineage) |\n| Interferon α (IFN-α) (this is a family of molecules) | Macrophages | Induces an antiviral state in most nucleated cells; increases MHC class I expression; activates NK cells |\n| Interferon β (IFN-β) | Fibroblasts | Induces an antiviral state in most nucleated cells; increases MHC class I expression; activates NK cells |\n| SOME CYTOKINES OF ADAPTIVE IMMUNITY | | |\n| Interleukin 2 (IL-2) | T cells | T-cell proliferation; can promote AICD. NK cell activation and proliferation; B-cell proliferation |\n| Interleukin 4 (IL-4) | TH2 cells, mast cells | Promotes TH2 differentiation; isotype switch to IgE |\n| Interleukin 5 (IL-5) | TH2 cells | Eosinophil activation and generation |\n| Transforming growth factor β (TGF-β) | T cells, macrophages, other cell types | Inhibits T-cell proliferation and effector functions; inhibits B-cell proliferation; promotes isotype switch to IgA; inhibits macrophages |\n| Interferon γ (IFN-γ) | TH1 cells, CD8+ cells, NK cells | Activates macrophages; increases expression MHC class I and class II molecules; increases antigen presentation |"
@@ -199,6 +433,17 @@ lessons:
         page: 6
         quote: "TABLE 12-1: Functional groups of selected cytokines\n| Cytokine | Secreted by | Targets and effects |\n|---|---|---|\n| SOME CYTOKINES OF INNATE IMMUNITY | | |\n| Interleukin 1 (IL-1) | Monocytes, macrophages, endothelial cells, epithelial cells | Vasculature (inflammation); hypothalamus (fever); liver (induction of acute phase proteins) |\n| Tumor necrosis factor-α (TNF-α) | Macrophages | Vasculature (inflammation); liver (induction of acute phase proteins); loss of muscle, body fat (cachexia); induction of death in many cell types; neutrophil activation |\n| Interleukin 12 (IL-12) | Macrophages, dendritic cells | NK cells; influences adaptive immunity (promotes TH1 subset) |\n| Interleukin 6 (IL-6) | Macrophages, endothelial cells | Liver (induces acute phase proteins); influences adaptive immunity (proliferation and antibody secretion of B cell lineage) |\n| Interferon α (IFN-α) (this is a family of molecules) | Macrophages | Induces an antiviral state in most nucleated cells; increases MHC class I expression; activates NK cells |\n| Interferon β (IFN-β) | Fibroblasts | Induces an antiviral state in most nucleated cells; increases MHC class I expression; activates NK cells |\n| SOME CYTOKINES OF ADAPTIVE IMMUNITY | | |\n| Interleukin 2 (IL-2) | T cells | T-cell proliferation; can promote AICD. NK cell activation and proliferation; B-cell proliferation |\n| Interleukin 4 (IL-4) | TH2 cells, mast cells | Promotes TH2 differentiation; isotype switch to IgE |\n| Interleukin 5 (IL-5) | TH2 cells | Eosinophil activation and generation |\n| Transforming growth factor β (TGF-β) | T cells, macrophages, other cell types | Inhibits T-cell proliferation and effector functions; inhibits B-cell proliferation; promotes isotype switch to IgA; inhibits macrophages |\n| Interferon γ (IFN-γ) | TH1 cells, CD8+ cells, NK cells | Activates macrophages; increases expression MHC class I and class II molecules; increases antigen presentation |"
         text: "TGF-β = «A» زي «Anti» و «Immunoglobulin A (IgA)»: Anti-proliferation للـ T والـ B والـ macrophage، وفي نفس الوقت IgA switch."
+      - kind: check
+        page: 6
+        quote: "TABLE 12-1: Functional groups of selected cytokines"
+        question: "A patient with chronic infection loses muscle and body fat. Per Table 12-1, which cytokine causes this cachexia?"
+        options: ["TNF-α", "IL-5", "IFN-β", "IL-12"]
+        answer: 0
+        why:
+          - "صح: TNF-α في الجدول: loss of muscle, body fat (cachexia)، وده سبب إن مرضى الالتهاب المزمن بيخسّوا."
+          - "IL-5 بس للـ eosinophils."
+          - "IFN-β من الـ fibroblasts، antiviral."
+          - "IL-12 بيشغّل الـ NK cells والـ TH1."
       - kind: explain
         page: 7
         quote: "Cytokines belong to 6 families\n  Interleukin 1 (IL-1).\n  Hematopoietin family (Class I).\n  Interferon family (Class II).\n  Chemokine family.\n  Tumor necrosis family.\n  Interleukin 17 (IL-17)."
@@ -212,6 +457,18 @@ lessons:
           6. **Chemokines**: IL-8، chemokine ligand 19 (CCL19)، chemokine ligand 21 (CCL21)، chemokine ligand 2 (CCL2)، chemokine ligand 3 (CCL3).
 
           كلهم ==أقل من 30 kDa==، وقليل جدًا منهم بيشتغل لوحده.
+      - kind: explain
+        page: 7
+        quote: "All have similarities and few rarely act alone."
+        title: "ليه نقسّمهم عائلات؟"
+        text: |
+          الكتاب بيقول التقسيم ده **based on structural studies**، يعني على حسب **شكل الجزيء**، مش على حسب الوظيفة.
+
+          التفسير المقبول (مش في الكتاب) لفايدة ده: الجزيئات اللي شكلها شبه بعض غالبًا بتمسك **receptors من نفس العيلة** (صفحة 12)، فبتشتغل بنفس الطريقة جوه الخلية. عشان كده:
+          - اللي في نفس العيلة كتير بيبقوا ==redundant== (صفحة 5).
+          - الدوا اللي بيقفل receptor مشترك ممكن يقفل أكتر من cytokine مرة واحدة.
+
+          والكتاب بيقفل الصفحة بجملتين: كلهم **أقل من 30 kDa**، و **few rarely act alone**: نادرًا ما cytokine بيشتغل لوحده.
       - kind: sort
         page: 7
         quote: "Six major cytokine families\n| NAME | MEMBERS |\n|---|---|\n| Interleukin 1 family | IL-1α, IL-1β, IL-Ra, IL-18, IL-33 |\n| Hematopoetin family (class I cytokines) | IL2, IL3, IL4, IL5, IL6, IL7, IL12, IL13, IL15, IL21, GM-CSF, G-CSF |\n| Interferon family (class II cytokines) | IFNα, IFNβ, INFγ, IL10, IL19, IL20, IL22, IL24 |\n| Tumor necrosis family | TNFα, TNFβ, CD40L, Fas, BAFF |\n| Interleukin 17 family | IL17 A, B, C, D, E, F |\n| Chemokines | IL-8, CCL19, CCL21, CCL2, CCL3 |"
@@ -228,6 +485,27 @@ lessons:
           - { text: "IL-8", bin: 3 }
           - { text: "CCL2", bin: 3 }
         why: "الفخ الكبير: IL-10 مش في الـ class I مع باقي الـ interleukins (ILs)، ده في عيلة الـ interferons. و IL-8 chemokine مش interleukin بالمعنى العائلي."
+      - kind: try
+        items: [rheum.L01.030, rheum.L01.036, rheum.L01.037, rheum.L01.040, rheum.L01.042]
+    recap:
+      - "Immunity: IL-2، IL-4. Inflammation: IL-1، IL-6، TNF-α. Hematopoiesis: GM-CSF. Proliferation: IL-2. Wound repair: TGF-β."
+      - "الشبكة: antigen ← macrophage ← resting Th ← network كاملة."
+      - "IL-4 ← IgE، IL-5 ← eosinophils، TGF-β ← IgA والفرامل، TNF-α ← cachexia."
+      - "6 عائلات على أساس الشكل: IL-1، class I، class II (IFN + IL-10)، TNF، IL-17، chemokines."
+    practice: [rheum.L01.030, rheum.L01.031, rheum.L01.032, rheum.L01.033, rheum.L01.034, rheum.L01.035, rheum.L01.036, rheum.L01.037, rheum.L01.038, rheum.L01.039, rheum.L01.040, rheum.L01.041, rheum.L01.042, rheum.L01.043, rheum.L01.044, rheum.L01.045]
+  # ------------------------------------------------------------------
+  - id: rheum.L01.lesson7
+    title: "العائلات من جوه: مين أول واحد يوصل، ومين الأحدث"
+    hook: "IL-1 بيوصل الأول ويولّع الحرارة، والـ interferons بتحمي من الفيروسات، والـ chemokines بتشاور على الطريق."
+    minutes: 10
+    pages: [8, 10]
+    topics: [families]
+    goals:
+      - "تعرف IL-1 بيعمل إيه في الجسم كله، وليه الحرارة مفيدة"
+      - "تفرّق تلات أنواع الـ interferons ومين بيعمل كل نوع"
+      - "تعرف TNF-α من TNF-β، وشغل IL-17 والـ chemokines"
+    status: unverified
+    steps:
       - kind: explain
         page: 8
         quote: "Cytokines of the interleukin 1 (IL-1) family are typically secreted very early in the immune response by dendritic cells, monocytes, and macrophages following recognition by innate receptors of viral, parasitic, or bacterial antigens."
@@ -239,6 +517,27 @@ lessons:
           - **Systemic**: بيخلي الكبد يعمل type I interferons (IFNs) و IL-6 و chemokine ligand 8 (CXCL8) ← بيكسروا الـ viral RNA ويعملوا **fever**.
           - الحرارة مفيدة: بتقتل الـ temperature-sensitive bacteria.
           - **Bridge**: بيساعد ينشّط الـ T والـ B cells.
+      - kind: reveal
+        page: 8
+        quote: "In addition, IL-1 serves as an intermediary between the innate and adaptive immune systems by helping to activate both T and B cells."
+        prompt: "ليه بيقولوا على IL-1 إنه «كوبري»؟"
+        answer: |
+          عشان بيتفرز من خلايا **innate** (dendritic cells و monocytes و macrophages) بعد ما تشوف الميكروب، وفي نفس الوقت بيساعد ينشّط الـ **T والـ B cells** (adaptive).
+
+          يعني نفس الرسالة اللي بتعلن الخطر في الأول، هي اللي بتصحّي الجيش المتخصص بعدها.
+      - kind: explain
+        page: 8
+        quote: "The cellular origins and target cells of class 1 cytokines are extremely diverse."
+        title: "Class 1: أكبر عيلة، وأكتر عيلة متنوعة"
+        text: |
+          الكتاب بيقول إن مصادر الـ class 1 والخلايا اللي بتأثر عليها **متنوعة جدًا**، وبيدّي أمثلة:
+
+          - **IL-2**: بداية تكاثر الـ T والـ B cells.
+          - **IL-4**: بينظّم شغل الـ helper T cells.
+          - **IL-6**: بيحوّل الـ B cell لـ ==plasma cell== تفرز antibodies.
+          - **GM-CSF و G-CSF**: بيبدأوا تمايز lineages معينة من الـ leukocytes.
+
+          ليه هي الأكبر؟ التفسير المقبول (مش في الكتاب): اسمها التاني **hematopoietin**، يعني شغلتها الأساسية "تكبير وتمايز" الخلايا، ودي حاجة كل lineage محتاجها، فكل lineage ليه cytokine أو أكتر من العيلة دي.
       - kind: reveal
         page: 9
         quote: "{The class 1 cytokine family is the largest family of cytokines, and members mediate diverse effects, including proliferation, differentiation, and antibody secretion}."
@@ -255,6 +554,29 @@ lessons:
           - ["III", "IFN-λ", "From pDCs; viral replication, host proliferation"]
         hide: [[0, 1], [1, 1], [2, 1]]
       - kind: explain
+        page: 9
+        quote: "Type I interferons (IFN-α and IFN-β), which mediate early antiviral response."
+        title: "ليه تلات أنواع interferons؟"
+        text: |
+          كل نوع ليه وقت ومكان. التفسير المقبول (مش في الكتاب) هنا مبني على اللي في الجدول:
+
+          - **Type I (α و β)**: ==early antiviral==. أي خلية بيدخلها فيروس تقدر تطلّعه، وده بيخلّي الخلايا اللي جنبها تجهز نفسها قبل ما الفيروس يوصلها.
+          - **Type II (γ)**: ده مش antiviral أساسًا، ده "منشّط الـ ==macrophage==" وبيدعم الـ TH1. عشان كده بتلاقيه من الـ TH1 والـ NK cells.
+          - **Type III (λ)**: من الـ ==plasmacytoid dendritic cells== (pDCs)، وبينظّم تكاثر الفيروس وتكاثر خلايا الجسم.
+
+          فخ: IFN-γ هو الوحيد في العيلة اللي بتطلّعه الخلايا المناعية المتخصصة بشكل أساسي، والباقي أقرب للـ innate.
+      - kind: explain
+        page: 9
+        quote: "TNF-α: is a proinflammatory cytokine, produced in response to infection, inflammation, and environmental stressors by activated macrophages, and also by lymphocytes, fibroblasts, and keratinocytes."
+        title: "TNF-α: مين بيعمله وإمتى"
+        text: |
+          الـ ==TNF-α== **proinflammatory**، وبيتعمل كرد فعل على 3 حاجات: infection، inflammation، و environmental stressors.
+
+          - المصدر الأساسي: **activated macrophages**.
+          - وكمان: lymphocytes و fibroblasts و keratinocytes.
+
+          ليه ده مهم في الروماتيزم؟ عشان الـ fibroblasts موجودة في الـ synovium، والـ keratinocytes في الجلد. يعني التفسير المقبول (مش في الكتاب) إن الالتهاب مش محتاج macrophage بس عشان يكمّل: خلايا النسيج نفسه بتشارك، وده يفسّر ليه الـ anti-TNF بيفيد في المفصل (RA) والجلد (psoriasis) الاتنين.
+      - kind: explain
         page: 10
         quote: "TNF-β is produced by activated lymphocytes and can deliver a variety of signals. On binding to neutrophils, endothelial cells lead to increased expression of MHC and adhesion molecules."
         title: "TNF و IL-17 والـ chemokines"
@@ -262,23 +584,78 @@ lessons:
           - **TNF family**: soluble أو membrane-bound (وأحيانًا الاتنين). بتنظّم الـ skeletal والـ neuronal والـ immune systems. ==TNF-α== من الـ activated macrophages أساسًا؛ **TNF-β** من الـ activated lymphocytes. ومساراتها هدف لأقوى الأدوية.
           - **IL-17**: من الـ **T helper 17 (TH17)** cells، receptors على الـ neutrophils والـ keratinocytes، ونتيجتها inflammation.
           - **Chemokines**: بتسحب الـ leukocytes على الـ gradient ناحية المصدر (**chemotaxis**).
+      - kind: explain
+        page: 10
+        quote: "Leukocytes change their pattern of expression of chemokine receptors during the course of an immune response."
+        title: "ليه الـ leukocytes بتغيّر الـ receptors بتاعتها؟"
+        text: |
+          الكتاب بيقول إن الـ leukocytes **بتغيّر نمط الـ chemokine receptors** خلال الـ immune response.
+
+          التفسير المقبول (مش في الكتاب): الـ chemokine receptor هو "الخريطة" بتاعة الخلية. لو غيّرت الـ receptor، بتغيّر **العنوان** اللي هتمشي له:
+          - خلية لسه naive بتروح الـ lymph node عشان تقابل الـ antigen.
+          - بعد ما تتنشّط، بتغيّر الـ receptors فتطلع وتروح **مكان الالتهاب**.
+
+          وده بيكمّل كلام صفحة 10: الـ chemokines بتسحب الخلية **لفوق الـ gradient**، ناحية المصدر، وده اسمه ==chemotaxis==.
+      - kind: figure
+        page: 10
+        quote: "Structurally related family of small cytokines that bind to cell surface receptors and induce the movement of leukocytes up a chemokine concentration gradient and toward the chemokine source."
+        title: "الـ chemotaxis: امشي ناحية الريحة"
+        alt: "A source cell on the right releases chemokine dots that are dense near it and sparse to the left. A leukocyte on the left with receptors moves along an arrow toward the source, up the gradient."
+        caption: "الـ chemokine تركيزه أعلى جنب المصدر. الـ leukocyte اللي عنده الـ receptor بيمشي ناحية التركيز الأعلى، زي ما بتمشي ناحية ريحة الأكل."
+        svg: |
+          <svg viewBox="0 0 330 170" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R01e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <circle cx="285" cy="80" r="30" class="fg-bad"/>
+            <text x="285" y="84" text-anchor="middle" class="t-sm t-b">source</text>
+            <circle cx="245" cy="60" r="4" class="fg-dot-acc"/>
+            <circle cx="248" cy="95" r="4" class="fg-dot-acc"/>
+            <circle cx="235" cy="78" r="4" class="fg-dot-acc"/>
+            <circle cx="225" cy="105" r="4" class="fg-dot-acc"/>
+            <circle cx="222" cy="55" r="4" class="fg-dot-acc"/>
+            <circle cx="200" cy="85" r="4" class="fg-dot-acc"/>
+            <circle cx="190" cy="60" r="4" class="fg-dot-acc"/>
+            <circle cx="170" cy="100" r="4" class="fg-dot-acc"/>
+            <circle cx="150" cy="70" r="4" class="fg-dot-acc"/>
+            <circle cx="120" cy="95" r="4" class="fg-dot-acc"/>
+            <circle cx="95" cy="62" r="4" class="fg-dot-acc"/>
+            <circle cx="50" cy="80" r="24" class="fg-good"/>
+            <text x="50" y="84" text-anchor="middle" class="t-sm t-b">WBC</text>
+            <path d="M78 130H250" class="fg-arrow-acc" marker-end="url(#R01e)"/>
+            <text x="165" y="152" text-anchor="middle" class="t-sm">up the gradient</text>
+            <text x="50" y="20" text-anchor="middle" class="t-sm t-mut">low</text>
+            <text x="285" y="20" text-anchor="middle" class="t-sm t-mut">high</text>
+          </svg>
+      - kind: check
+        page: 10
+        quote: "IL-17A, the first member of the IL-17 family to be detected, is released by activated T cells and its receptors are found on neutrophils, keratinocytes, and other nonlymphoid cells."
+        question: "Where are IL-17A receptors found, per the book?"
+        options: ["Neutrophils, keratinocytes and other nonlymphoid cells", "Only on B cells", "Only on naive T cells", "Only on red cells"]
+        answer: 0
+        why:
+          - "صح: والنتيجة إن الخلايا دي تفرز cytokines تعمل proinflammatory state."
+          - "الـ IL-17 receptors على خلايا مش lymphoid أساسًا، مش الـ B cells."
+          - "اللي بيفرز IL-17A هو الـ activated T cell (TH17)، مش اللي بيستقبله."
+          - "مفيش ذكر للـ red cells هنا خالص."
       - kind: try
-        items: [rheum.L01.031, rheum.L01.035, rheum.L01.040, rheum.L01.041, rheum.L01.053]
+        items: [rheum.L01.047, rheum.L01.050, rheum.L01.054, rheum.L01.060, rheum.L01.064]
     recap:
-      - "Inflammation: IL-1، IL-6، TNF-α. Hematopoiesis: GM-CSF. Wound repair: TGF-β."
-      - "IL-4 ← IgE، IL-5 ← eosinophils، TGF-β ← IgA والفرامل."
-      - "6 عائلات: IL-1، class I (الأكبر)، class II (IFN + IL-10)، TNF، IL-17 (الأحدث)، chemokines."
-      - "IFN type I antiviral، type II = γ للـ macrophage، type III = λ من الـ pDC."
-    practice: [rheum.L01.030, rheum.L01.031, rheum.L01.032, rheum.L01.033, rheum.L01.034, rheum.L01.035, rheum.L01.036, rheum.L01.037, rheum.L01.038, rheum.L01.039, rheum.L01.040, rheum.L01.041, rheum.L01.042, rheum.L01.043, rheum.L01.044, rheum.L01.045, rheum.L01.046, rheum.L01.047, rheum.L01.048, rheum.L01.049, rheum.L01.050, rheum.L01.051, rheum.L01.052, rheum.L01.053, rheum.L01.054, rheum.L01.055, rheum.L01.056, rheum.L01.057, rheum.L01.058, rheum.L01.059, rheum.L01.060, rheum.L01.061, rheum.L01.062, rheum.L01.063, rheum.L01.064, rheum.L01.065, rheum.L01.066]
+      - "IL-1: بدري جدًا، proinflammatory، fever، وكوبري بين الـ innate والـ adaptive. أعضاؤه IL-1α و β و IL-18 و IL-33."
+      - "Class 1 الأكبر والأكثر تنوعًا: IL-2، IL-4، IL-6، GM-CSF، G-CSF."
+      - "IFN type I antiviral بدري، type II = γ للـ macrophage، type III = λ من الـ pDC."
+      - "TNF-α من الـ macrophage (و fibroblasts و keratinocytes)، TNF-β من الـ lymphocytes."
+      - "IL-17 الأحدث، من TH17، receptors على neutrophils و keratinocytes. Chemokines = chemotaxis لفوق الـ gradient."
+    practice: [rheum.L01.046, rheum.L01.047, rheum.L01.048, rheum.L01.049, rheum.L01.050, rheum.L01.051, rheum.L01.052, rheum.L01.053, rheum.L01.054, rheum.L01.055, rheum.L01.056, rheum.L01.057, rheum.L01.058, rheum.L01.059, rheum.L01.060, rheum.L01.061, rheum.L01.062, rheum.L01.063, rheum.L01.064, rheum.L01.065, rheum.L01.066]
   # ------------------------------------------------------------------
   - id: rheum.L01.lesson3
     title: "Th1 ضد Th2، والـ receptors اللي بتسمع"
     hook: "الـ naive CD4 cell زي طالب ثانوية عامة: الـ cytokine اللي حواليه هو اللي بيحدد هيدخل أنهي كلية."
-    minutes: 9
+    minutes: 10
     pages: [11, 14]
     topics: [th-subsets, receptors]
     goals:
-      - "تعرف مين بيوجّه الـ naive CD4 لـ Th1 و Th2 و Th17"
+      - "تعرف مين بيوجّه الـ naive CD4 لـ Th1 و Th2 و Th17، وليه"
       - "تفرّق شغل Th1 عن Th2 من جدول الكتاب"
       - "تعدّ الخمس receptor families وتمشي مسار JAK-STAT"
     status: unverified
@@ -311,6 +688,19 @@ lessons:
             <rect x="15" y="200" width="300" height="38" rx="8" class="fg-box"/>
             <text x="28" y="224" class="t-sm">IL-6 also: antibodies from activated B cells</text>
           </svg>
+      - kind: explain
+        page: 11
+        quote: "IL-12 stimulates the differentiation of naive CD4+ T cells to the Th1 subset of effector cells."
+        title: "ليه الـ cytokine هو اللي بيختار الطريق؟"
+        text: |
+          الـ naive CD4+ T cell ممكن يبقى أكتر من نوع، واللي بيحدد هو **الـ cytokine اللي حواليه** وقت ما بيتنشّط.
+
+          التفسير المقبول (مش في الكتاب) للمنطق:
+          - ==IL-12== بييجي من macrophages و dendritic cells شافت ميكروب **جوه الخلايا**، فالرد المناسب Th1 اللي بينشّط الـ macrophage يقتل اللي جواه.
+          - **IL-1 + IL-6** إشارة التهاب حاد من الـ innate، فالرد Th17 اللي بيجيب الـ neutrophils.
+          - **IL-33** من عيلة IL-1، والرد Th2 اللي بيجيب الـ antibodies والـ eosinophils.
+
+          يعني الـ innate بيشوف نوع الخطر، وبيبعت الـ cytokine اللي يختار الـ Th المناسب ليه.
       - kind: check
         page: 11
         quote: "IL-33 stimulates the differentiation of naive CD4+ T cells to the Th2 subset of effector cells."
@@ -335,6 +725,18 @@ lessons:
           - ["Delayed-type hypersensitivity", "++", "-"]
           - ["Tc-cell activation", "++", "-"]
         hide: [[1, 2], [3, 1], [4, 1]]
+      - kind: explain
+        page: 14
+        quote: "CD8 CTLs also secrete cytokines but their array is more restricted (cytotoxic T lymphocytes)."
+        title: "ليه نوع الـ Th بيحدد شكل المناعة؟"
+        text: |
+          الكتاب واضح: الفرق في الـ cytokines اللي كل subset بيفرزها هو اللي بيحدد **نوع الـ immune response** ضد الـ antigen.
+
+          - الـ **CD4 Th cells** بيعملوا أغلب شغلهم كـ helpers عن طريق الـ ==secreted cytokines==، مش بالقتل المباشر.
+          - الـ **Th1 و Th2** بنفرّقهم بالـ cytokines اللي بيفرزوها.
+          - الـ **CD8 CTLs** كمان بيفرزوا cytokines، بس المجموعة **محدودة أكتر**.
+
+          ليه الـ CD8 محدود؟ التفسير المقبول (مش في الكتاب): شغلته الأساسية إنه يقتل الخلية المصابة بنفسه، فمش محتاج يوجّه الجيش كله زي الـ CD4.
       - kind: aside
         tone: analogy
         page: 14
@@ -372,6 +774,17 @@ lessons:
           - { key: "4", text: "IL-4" }
           - { key: "7", text: "IL-7" }
           - { key: "9", text: "IL-9، وبعدها IL-15 و IL-21" }
+      - kind: explain
+        page: 11
+        quote: "It has been recognized more recently that unrelated cytokine receptor systems exhibit close cross-communication on the cell membrane, allowing a cell to integrate a variety of external stimuli to optimize signaling pathways and the cellular response in real time in a changing environment."
+        title: "الـ receptors بتكلم بعض كمان"
+        text: |
+          الكتاب بيضيف فكرة أحدث: receptors من أنظمة **مالهاش علاقة ببعض** بتعمل ==cross-communication== على غشاء الخلية.
+
+          ليه ده مفيد؟ عشان الخلية تقدر **تجمع** إشارات كتير من برّه وتطلّع رد واحد مظبوط **في الوقت الحقيقي** في بيئة بتتغير.
+
+          - أوضح مثال: الـ **epidermal growth factor receptor** system.
+          - واتلاقى كمان في عيلة الـ **common γ chain**.
       - kind: explain
         page: 12
         quote: "Cytokine receptors can operate via several mechanisms. Membrane receptors, with intra cellular signaling domains intact, can transmit signals to the target cell nucleus after soluble cytokine binding and promote effect or function (Figure 26-2). Membrane receptors may bind cell membrane cytokines assisting cross-talk between adjacent cells. Membrane-bound and soluble cytokines may promote distinct receptor function. Useful exemplars exist relevant to the rheumatic diseases. Thus TNF binds TNF-RI and TNF-RII with similar affinity, but it has a slower rate of dissociation from TNF-RI. Soluble TNF may dissociate rapidly from TNF-RII to bind TNF-RI, promoting preferential signaling by the latter (ligand passing).1 In contrast, during cell- cell contact, stable TNF/TNF-RI and TNF/TNF-RII complexes form, allowing for differential signaling contribution by TNF-RI and TNF-RII."
@@ -414,23 +827,23 @@ lessons:
       - kind: try
         items: [rheum.L01.067, rheum.L01.074, rheum.L01.080, rheum.L01.086, rheum.L01.089]
     recap:
-      - "IL-12 ← Th1، IL-1 + IL-6 ← Th17، IL-33 ← Th2."
-      - "Th1: macrophage و Tc و DTH. Th2: antibodies و IgE و eosinophils و mast cells."
+      - "IL-12 ← Th1، IL-1 + IL-6 ← Th17، IL-33 ← Th2: الـ innate بيختار الـ Th على حسب الخطر."
+      - "Th1: macrophage و Tc و DTH. Th2: antibodies و IgE و eosinophils و mast cells. CD8 مجموعته محدودة."
       - "IFN-γ و IL-10 بيكبتوا بعض."
-      - "Common γ chain: 2، 4، 7، 9، 15، 21. gp130 لعيلة IL-6."
+      - "Common γ chain: 2، 4، 7، 9، 15، 21. gp130 لعيلة IL-6. والـ receptors بتعمل cross-communication."
       - "5 receptor families، والمسار JAK/SYK ← STAT/MAPK ← nucleus."
     practice: [rheum.L01.067, rheum.L01.068, rheum.L01.069, rheum.L01.070, rheum.L01.071, rheum.L01.072, rheum.L01.073, rheum.L01.074, rheum.L01.075, rheum.L01.076, rheum.L01.077, rheum.L01.078, rheum.L01.079, rheum.L01.080, rheum.L01.081, rheum.L01.082, rheum.L01.083, rheum.L01.084, rheum.L01.085, rheum.L01.086, rheum.L01.087, rheum.L01.088, rheum.L01.089, rheum.L01.090, rheum.L01.091, rheum.L01.092]
   # ------------------------------------------------------------------
   - id: rheum.L01.lesson4
     title: "لما الرسايل تبقى spam: الـ cytokine storm"
     hook: "رسالة واحدة مفيدة. مليون رسالة في ثانية؟ الجروب كله يهنج، والمريض كمان."
-    minutes: 9
+    minutes: 10
     pages: [15, 17]
     topics: [storm, diseases]
     goals:
-      - "تعرّف الـ cytokine storm وتعدّ أسبابه"
-      - "تعرف الصورة الإكلينيكية والمعملية"
-      - "تفرّق septic shock عن toxic shock"
+      - "تعرّف الـ cytokine storm وتعدّ أسبابه، وتفهم ليه بيحصل"
+      - "تعرف الصورة الإكلينيكية والمعملية، وتفسّر كل علامة"
+      - "تفرّق septic shock عن toxic shock، وتعرف الـ cytokine antagonists بتشتغل إزاي"
     status: unverified
     steps:
       - kind: explain
@@ -441,6 +854,16 @@ lessons:
           الـ ==cytokine storm== (hypercytokinemia) = **too many cytokines, too quickly**.
 
           بدل ما المناعة تنظّم هجوم على الميكروب، بتعمل **shock** و **multiorgan failure** وممكن موت.
+      - kind: explain
+        page: 15
+        quote: "Cytokine interactions are powerful determinants of immunity, and the pattern of cytokines produced in response to a particular infection can spell the difference between an effective or inappropriate immune response."
+        title: "ليه نفس الرسايل تنفع مرة وتضر مرة؟"
+        text: |
+          الكتاب بيقول إن **نمط** الـ cytokines اللي بتطلع مع العدوى هو اللي بيفرق بين response **effective** و response **inappropriate**.
+
+          في الحالات المتطرفة: ==overproduction== و **dysregulation** ← hyperstimulation للمناعة ← ده الـ storm.
+
+          ليه بيخرج عن السيطرة؟ التفسير المقبول (مش في الكتاب)، مبني على اللي اتعلمته في صفحة 5: الـ **cascade induction** بيخلّي كل cytokine يطلّع cytokines تانية، والـ **synergism** بيخلّي الاتنين مع بعض أقوى. لو الفرامل (زي TGF-β و IL-10) ماشتغلتش، الدايرة بتكبر لوحدها بدل ما تقف.
       - kind: reveal
         page: 15
         quote: "A cytokine storm can occur as a result of an infection, autoimmune condition, or some drugs (CAR T-cell therapy–induced cytokine storm) ."
@@ -450,6 +873,33 @@ lessons:
           - **Autoimmune condition**.
           - **Drugs**: CAR T-cell therapy.
           - **Immunotherapy**: high-dose IL-2 لمرضى السرطان.
+      - kind: case
+        page: 15
+        quote: "A cytokine storm can occur as a result of an infection, autoimmune condition, or some drugs (CAR T-cell therapy–induced cytokine storm) ."
+        stem: "A 24-year-old man with lymphoma gets CAR T-cell therapy. On day 3: fever 40 °C, BP 80/50, SpO2 88%."
+        steps:
+          - question: "What is the most likely diagnosis?"
+            options: ["Cytokine storm", "Toxic shock syndrome", "Anaphylaxis"]
+            answer: 0
+            why: "CAR T-cell therapy مذكور بالاسم كسبب. Toxic shock محتاج superantigen toxin، والـ anaphylaxis فورية مش بعد 3 أيام."
+          - reveal: "CRP 300 mg/L, ferritin very high, platelets 50 × 10^9/L."
+            question: "Which finding tracks severity best, per the book?"
+            options: ["CRP", "IgE", "Eosinophil count"]
+            answer: 0
+            why: "الكتاب: CRP universally elevated and correlates with severity."
+      - kind: explain
+        page: 16
+        quote: "In addition, patients may have fatigue, anorexia, headache, rash, diarrhea, arthralgia, myalgia, and neuropsychiatric findings."
+        title: "ليه المريض تعبان في كل حتة؟"
+        text: |
+          الكتاب: تقريبًا **كل** المرضى عندهم fever، وممكن تكون عالية في الحالات الشديدة. وكمان: fatigue و anorexia و headache و rash و diarrhea و arthralgia و myalgia وأعراض neuropsychiatric.
+
+          ليه الأعراض منتشرة كده؟ ارجع لـ Table 12-1 في صفحة 6:
+          - **IL-1** بيكلم الـ ==hypothalamus== ← fever.
+          - **TNF-α** بيعمل loss of muscle و body fat ← الإرهاق وفقدان الشهية.
+          - **IL-1 و IL-6 و TNF-α** بيكلموا الكبد ← acute phase proteins، وده اللي هتشوفه في الـ CRP.
+
+          يعني الـ cytokines اللي المفروض تشتغل **جنب** المصدر (paracrine)، بقت في الدم كله (endocrine)، فكل عضو بيستقبلها.
       - kind: figure
         page: 16
         quote: "The combination of renal dysfunction, endothelial-cell death, and acute-phase hypoalbuminemia can lead to capillary leak syndrome and anasarca."
@@ -493,6 +943,18 @@ lessons:
         answer: "تلاتة مع بعض: **hyperinflammation** + **coagulopathy** + **low platelets**. وممكن الـ DIC يروح ناحية vascular occlusion أو catastrophic hemorrhage."
       - kind: explain
         page: 16
+        quote: "The combination of renal dysfunction, endothelial-cell death, and acute-phase hypoalbuminemia can lead to capillary leak syndrome and anasarca."
+        title: "ليه بيورم كله (anasarca)؟"
+        text: |
+          الكتاب بيدّيك تلات أسباب مع بعض، وكل واحد بيزوّد التاني:
+
+          - **Renal dysfunction**: الكلية مش بتطلّع الميه والملح كويس.
+          - **Endothelial-cell death**: جدار الشعيرات بيبقى فيه خروم، فالسوايل بتخرج للأنسجة.
+          - **Acute-phase hypoalbuminemia**: الكبد مشغول بالـ acute phase proteins، فالـ albumin بيقل، والسوايل مش لاقية حاجة تشدّها جوه الأوعية.
+
+          النتيجة: ==capillary leak syndrome== و **anasarca**. وده كمان سبب من أسباب الـ hypotension والـ shock، عشان السوايل خرجت من الأوعية.
+      - kind: explain
+        page: 16
         quote: "Many patients have hypertriglyceridemia and various blood-count abnormalities, such as leukocytosis, leukopenia, anemia, thrombocytopenia, and elevated ferritin and d-dimer levels."
         title: "المعمل بيقول إيه؟"
         text: |
@@ -501,20 +963,6 @@ lessons:
           - Complete blood count (CBC): leukocytosis أو leukopenia، anemia، thrombocytopenia.
           - **Ferritin** و **D-dimer** عاليين.
           - Cytokines: IFN-γ، IL-6، IL-10، soluble IL-2Rα. الأهم فيها الـ **trend** من الـ baseline.
-      - kind: case
-        page: 15
-        quote: "A cytokine storm can occur as a result of an infection, autoimmune condition, or some drugs (CAR T-cell therapy–induced cytokine storm) ."
-        stem: "A 24-year-old man with lymphoma gets CAR T-cell therapy. On day 3: fever 40 °C, BP 80/50, SpO2 88%."
-        steps:
-          - question: "What is the most likely diagnosis?"
-            options: ["Cytokine storm", "Toxic shock syndrome", "Anaphylaxis"]
-            answer: 0
-            why: "CAR T-cell therapy مذكور بالاسم كسبب. Toxic shock محتاج superantigen toxin، والـ anaphylaxis فورية مش بعد 3 أيام."
-          - reveal: "CRP 300 mg/L, ferritin very high, platelets 50 × 10^9/L."
-            question: "Which finding tracks severity best, per the book?"
-            options: ["CRP", "IgE", "Eosinophil count"]
-            answer: 0
-            why: "الكتاب: CRP universally elevated and correlates with severity."
       - kind: explain
         page: 17
         quote: "Endotoxins (cell wall) bind TLRs on dendritic cells and macrophages leading them to produce."
@@ -539,6 +987,17 @@ lessons:
           - { text: "T cells activated despite specificity", bin: 1 }
           - { text: "Huge TNF-α and IL-1β", bin: 2 }
         why: "اللي بيفرق هو الـ trigger والخلية: endotoxin على macrophage، ولا superantigen على T cell. الـ cytokines في الآخر نفسها."
+      - kind: explain
+        page: 17
+        quote: "Number of proteins can inhibit cytokine activity:"
+        title: "الـ cytokine antagonists: فرامل طبيعية"
+        text: |
+          في بروتينات بتوقف شغل الـ cytokines بطريقتين:
+
+          1. **تقعد على الـ receptor من غير ما تشغّله**: فالـ cytokine الحقيقي مش لاقي مكان.
+          2. **تمسك الـ cytokine نفسه** فيعجز يوصل للـ ==cognate receptor== بتاعه.
+
+          ليه ده مهم؟ عشان دي نفس الفكرة اللي الأدوية اتبنت عليها في الدرس الجاي: الـ **soluble TNF receptor** بيمسك الـ TNF (الطريقة التانية)، والـ antibodies ضد الـ receptor بتقفله (قريبة من الطريقة الأولى). الطبيعة عملتها الأول، والدوا قلّدها.
       - kind: aside
         tone: joke
         page: 17
@@ -547,22 +1006,23 @@ lessons:
       - kind: try
         items: [rheum.L01.093, rheum.L01.096, rheum.L01.104, rheum.L01.109, rheum.L01.112]
     recap:
-      - "Storm = too many cytokines too quickly ← shock و MOF."
-      - "أسباب: infection (flu A، COVID)، autoimmune، CAR T، high-dose IL-2."
-      - "Fever تقريبًا في الكل؛ CRP عالي دايمًا ومع الـ severity."
-      - "Septic = endotoxin + TLR. Toxic = superantigen + MHC II/TCR. الاتنين TNF-α و IL-1β."
-    practice: [rheum.L01.093, rheum.L01.094, rheum.L01.095, rheum.L01.096, rheum.L01.097, rheum.L01.098, rheum.L01.099, rheum.L01.100, rheum.L01.101, rheum.L01.102, rheum.L01.103, rheum.L01.104, rheum.L01.105, rheum.L01.106, rheum.L01.107, rheum.L01.108, rheum.L01.109, rheum.L01.110, rheum.L01.111, rheum.L01.112, rheum.L01.113, rheum.L01.114, rheum.L01.115, rheum.L01.146, rheum.L01.148]
+      - "Storm = too many cytokines too quickly ← shock و MOF. الـ cascade والـ synergism من غير فرامل بيكبّروا الدايرة."
+      - "أسباب: infection (flu A، COVID، بكتيريا)، autoimmune، CAR T، high-dose IL-2."
+      - "Fever تقريبًا في الكل؛ CRP عالي دايمًا ومع الـ severity؛ ferritin و D-dimer عاليين."
+      - "Capillary leak = renal dysfunction + endothelial death + hypoalbuminemia."
+      - "Septic = endotoxin + TLR. Toxic = superantigen + MHC II/TCR. الاتنين TNF-α و IL-1β. والـ antagonists بتقعد على الـ receptor أو بتمسك الـ cytokine."
+    practice: [rheum.L01.093, rheum.L01.094, rheum.L01.095, rheum.L01.096, rheum.L01.097, rheum.L01.098, rheum.L01.099, rheum.L01.100, rheum.L01.101, rheum.L01.102, rheum.L01.103, rheum.L01.104, rheum.L01.105, rheum.L01.106, rheum.L01.107, rheum.L01.108, rheum.L01.109, rheum.L01.110, rheum.L01.111, rheum.L01.112, rheum.L01.113, rheum.L01.114, rheum.L01.144, rheum.L01.146, rheum.L01.148]
   # ------------------------------------------------------------------
   - id: rheum.L01.lesson5
-    title: "الـ cytokines كدوا، ودورها في الـ RA"
-    hook: "اللي بيهد مفصل الـ RA هو نفسه اللي بنعالجه: TNF. ولو عرفت مين بيعمل إيه، هتعرف الدوا بيقفل إيه."
-    minutes: 10
-    pages: [18, 21]
-    topics: [therapy, ra, classification]
+    title: "الـ cytokines كدوا"
+    hook: "لو عرفت الـ cytokine بيعمل إيه، هتعرف لوحدك ندّيه لمين ونقفله عند مين."
+    minutes: 9
+    pages: [18, 19]
+    topics: [therapy]
     goals:
-      - "تحفظ الـ cytokines المستخدمة كأدوية ودواعيها"
+      - "تحفظ الـ biologics اللي بتقفل الـ cytokines ودواعيها"
       - "تعدّ الخمس anti-TNF"
-      - "تشرح دور TNF-α و IL-1 والـ Th subsets في الـ RA"
+      - "تحفظ الـ cytokines اللي بنديها كدوا، وتستنتج الداعي من وظيفة الـ cytokine"
     status: unverified
     steps:
       - kind: explain
@@ -575,6 +1035,17 @@ lessons:
           - Antagonists لـ **IL-1** و ==p40== (المشترك بين IL-12 و IL-23) و **IL-17**.
           - **Type I interferons (IFNs)** ← hepatitis.
           - **IFN-γ** ← leprosy و toxoplasmosis، عشان يوجّه المناعة لـ cytotoxic response.
+      - kind: explain
+        page: 18
+        quote: "IFN-γ is used clinically to bias the adaptive immune system toward a cytotoxic response in diseases such as leprosy and toxoplasmosis, in which antibody responses are less effective than those that destroy infected cells."
+        title: "ليه نقفل ساعات ونِدّي ساعات؟"
+        text: |
+          فيه اتجاهين في العلاج، والسبب في الاتنين هو وظيفة الـ cytokine:
+
+          - **نقفل** الـ cytokine لما هو اللي عامل المرض: TNF في الـ RA و Crohn's و psoriasis، و IL-6 receptor في الـ arthritis. منطقي، عشان الالتهاب نفسه هو المشكلة.
+          - **نِدّي** الـ cytokine لما محتاجين شغلته: الكتاب بيشرح IFN-γ بالظبط. في الـ ==leprosy== والـ toxoplasmosis الميكروب **جوه الخلايا**، فالـ antibodies مش بتوصله. محتاجين response يقتل **الخلية المصابة** نفسها، و IFN-γ بيميّل المناعة للـ cytotoxic response ده.
+
+          وعلى نفس المنطق: الـ **p40** مشترك بين IL-12 و IL-23، فقفله بيقفل الاتنين مرة واحدة.
       - kind: mnemonic
         page: 18
         quote: "Anti-TNF therapies used to treat rheumatological diseases. These include: 1. Adalimumab. 2. Certolizumab pegol. 3. Etanercept."
@@ -586,6 +1057,34 @@ lessons:
           - { key: "E", text: "Etanercept (الـ soluble receptor)" }
           - { key: "G", text: "Golimumab" }
           - { key: "I", text: "Infliximab" }
+      - kind: figure
+        page: 18
+        quote: "This class of biological agents first succeeded with a soluble form of the TNF receptor and anti-TNF antibodies, which bind to and neutralize TNF."
+        title: "طريقتين نقفل بيهم الـ TNF"
+        alt: "Left: a soluble TNF receptor floating free catches a TNF molecule before it reaches the cell. Right: an anti-TNF antibody, drawn as a Y, binds a TNF molecule. Below both, a cell with an empty TNF receptor stays quiet."
+        caption: "الـ soluble receptor (etanercept) بيمسك الـ TNF في السايل زي طُعم، والـ antibody (الـ -mab) بيلزق فيه. في الحالتين الـ receptor اللي على الخلية مش بيلاقي TNF يمسكه."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="80" y="20" text-anchor="middle" class="t-sm t-b">Soluble receptor</text>
+            <text x="250" y="20" text-anchor="middle" class="t-sm t-b">Anti-TNF antibody</text>
+            <circle cx="80" cy="70" r="12" class="fg-dot-bad"/>
+            <text x="80" y="74" text-anchor="middle" class="t-sm">TNF</text>
+            <path d="M60 95Q80 80 100 95" class="fg-arrow-acc" stroke-width="4"/>
+            <rect x="72" y="95" width="16" height="30" rx="4" class="fg-acc"/>
+            <text x="80" y="145" text-anchor="middle" class="t-sm t-mut">etanercept</text>
+            <circle cx="250" cy="60" r="12" class="fg-dot-bad"/>
+            <text x="250" y="64" text-anchor="middle" class="t-sm">TNF</text>
+            <path d="M235 75L250 95L265 75M250 95V130" class="fg-arrow-acc" stroke-width="4"/>
+            <text x="250" y="148" text-anchor="middle" class="t-sm t-mut">-mab</text>
+            <rect x="5" y="185" width="320" height="50" rx="10" class="fg-box"/>
+            <path d="M150 185V165M180 185V165M150 165H180" class="fg-ink" stroke-width="3"/>
+            <text x="165" y="215" text-anchor="middle" class="t-sm">cell: receptor empty, no signal</text>
+          </svg>
+      - kind: aside
+        tone: tip
+        page: 18
+        quote: "This class of biological agents first succeeded with a soluble form of the TNF receptor and anti-TNF antibodies, which bind to and neutralize TNF."
+        text: "الكتاب قال أول نجاح كان بنوعين: **soluble TNF receptor** و **anti-TNF antibodies**. في الخمسة: **etanercept** هو الـ soluble receptor، والأربعة التانيين antibodies. التفسير المقبول (مش في الكتاب) عشان تفتكر: آخر الاسم **-cept** = receptor، و **-mab** = monoclonal antibody."
       - kind: table
         page: 19
         quote: "Interleukin 11 (IL-11), used to treat thrombocytopenia in cancer patients."
@@ -602,6 +1101,19 @@ lessons:
           - ["IL-11", "Thrombocytopenia in cancer"]
           - ["IFN-γ", "CGD and osteopetrosis"]
         hide: [[6, 1], [7, 1], [8, 1]]
+      - kind: explain
+        page: 19
+        quote: "Interleukin 11 (IL-11), used to treat thrombocytopenia in cancer patients."
+        title: "استنتج الداعي من الوظيفة"
+        text: |
+          ماتحفظش الجدول صمّ. التفسير المقبول (مش في الكتاب) لكل سطر:
+
+          - **EPO** ← anemia: عشان هو اللي بيكبّر خط الـ red cells.
+          - **G-CSF** ← neutropenia: الـ chemotherapy بتقتل الـ neutrophils، و G-CSF بيكبّر خطهم.
+          - **GM-CSF** ← neutropenia **و fungal infection**: بيكبّر الـ granulocytes **والـ macrophages** الاتنين، وده اللي محتاجينه ضد الفطريات.
+          - **IL-11** ← ==thrombocytopenia==: بيكبّر خط الـ platelets.
+          - **IL-2** ← cancer: بيكبّر الـ T والـ NK cells اللي بتقتل الورم، وده نفس السبب اللي بيخليه يعمل storm بجرعة عالية (صفحة 15).
+          - **IFN-γ** ← CGD: الـ phagocytes هناك مش عارفة تقتل، و IFN-γ بينشّط الـ macrophages.
       - kind: check
         page: 19
         quote: "Interferon gamma is used to treat chronic granulomatous disease and osteopetrosis."
@@ -613,11 +1125,43 @@ lessons:
           - "IFN-α لـ hepatitis C و MS."
           - "IFN-β لـ MS."
           - "IL-11 للـ thrombocytopenia."
+      - kind: check
+        page: 19
+        quote: "Interleukin 2 (IL-2), used to treat cancer."
+        question: "Which of the following cytokines is used for the treatment of cancer? (book question)"
+        options: ["Interleukin 2 (IL-2)", "Granulocyte colony-stimulating factor (G-CSF)", "Interferon gamma", "Interleukin 11 (IL-11)"]
+        answer: 0
+        why:
+          - "صح: IL-2 بيكبّر الـ T cells والـ NK cells اللي بتهاجم الورم."
+          - "G-CSF بيتدّي لمرضى السرطان، بس علاجه للـ neutropenia، مش للورم نفسه."
+          - "IFN-γ للـ CGD و osteopetrosis."
+          - "IL-11 للـ thrombocytopenia في مرضى السرطان، مش للسرطان."
       - kind: update
         page: 19
         quote: "Interferon α, used to treat hepatitis C and multiple sclerosis."
         text: "علاج hepatitis C النهارده بالـ direct-acting antivirals، والـ interferon α مابقاش مستخدم له. في الامتحان اكتب إجابة الكتاب."
         ref: "AASLD/IDSA HCV Guidance, 2023"
+      - kind: try
+        items: [rheum.L01.115, rheum.L01.120, rheum.L01.122, rheum.L01.123, rheum.L01.143]
+    recap:
+      - "أول نجاح: soluble TNF receptor و anti-TNF antibodies ← RA و Crohn's و psoriasis. Anti-IL-6R ← arthritis."
+      - "Anti-TNF: ACEGI (adalimumab، certolizumab، etanercept، golimumab، infliximab). Etanercept هو الـ receptor."
+      - "IFN-γ للـ leprosy و toxoplasmosis (cytotoxic response)، و CGD و osteopetrosis."
+      - "EPO ← anemia، G-CSF ← neutropenia، GM-CSF ← neutropenia و fungi، IL-11 ← platelets، IL-2 ← cancer."
+    practice: [rheum.L01.115, rheum.L01.116, rheum.L01.117, rheum.L01.118, rheum.L01.119, rheum.L01.120, rheum.L01.121, rheum.L01.122, rheum.L01.123, rheum.L01.124, rheum.L01.142, rheum.L01.143, rheum.L01.147]
+  # ------------------------------------------------------------------
+  - id: rheum.L01.lesson8
+    title: "الـ cytokines جوه مفصل الـ RA"
+    hook: "اللي بيهد مفصل الـ RA هو نفسه اللي بنعالجه: TNF. ولو عرفت مين بيعمل إيه، هتعرف الدوا بيقفل إيه."
+    minutes: 10
+    pages: [19, 21]
+    topics: [ra, classification]
+    goals:
+      - "تشرح دور TNF-α و IL-1 والـ Th subsets في الـ RA"
+      - "تعرف مين بيبني الـ osteoclast ومين بيوقفه"
+      - "تعدّ تصنيفات الـ cytokines في صفحة 21"
+    status: unverified
+    steps:
       - kind: explain
         page: 20
         quote: "In RA, the inflammatory response is mainly mediated by TNFα, whereas cartilage and bone destruction is mostly directed by IL-1."
@@ -629,11 +1173,34 @@ lessons:
           - الـ **imbalance** بين Th1/Th2/Th17 هو المفتاح.
 
           Th1 cytokines (IL-2، IFN-γ) ← cellular immunity. Th2 (IL-4، 5، 6، 10، 13) ← antibodies. Th17 ← fungi و extracellular pathogens.
+      - kind: explain
+        page: 20
+        quote: "Th1 cytokines are defined as the cytokines that favor T-cell mediated cellular immunity, cytotoxicity and monocyte activation, leading to the amplified production of pro-inflammatory cytokines."
+        title: "ليه سيطرة Th1 بتولّع المفصل؟"
+        text: |
+          الكتاب بيعرّف الـ **Th1 cytokines** إنها بتشجّع:
+          - **T-cell mediated cellular immunity**.
+          - **Cytotoxicity**.
+          - **Monocyte activation**، وده اللي بيعمل ==amplified production== للـ pro-inflammatory cytokines.
+
+          والـ **pro-inflammatory cytokines** بتبدأ الـ inflammation cascade بإنها تشغّل genes بتصنّع **small inflammatory mediator molecules**.
+
+          يعني الدايرة: Th1 ← monocyte/macrophage يتنشّط ← TNF-α و IL-1 أكتر ← التهاب أكتر ← Th1 أكتر. عشان كده سيطرة Th1 في الـ synovial fluid مش تفصيلة، دي **الموتور**.
       - kind: aside
         tone: exam
         page: 20
         quote: "In RA, the inflammatory response is mainly mediated by TNFα, whereas cartilage and bone destruction is mostly directed by IL-1."
         text: "فخ امتحان مشهور: «inflammation في الـ RA سببها الرئيسي؟» TNF-α. «تآكل الغضروف والعضم؟» IL-1. ماتبدّلهمش."
+      - kind: reveal
+        page: 20
+        quote: "Synovial T cells may be activated by T-cell receptor (TCR) and co- stimulation pathways and by cytokine- or Toll-like receptor-driven stimuli."
+        prompt: "الـ T cell في الـ synovium بيتنشّط إزاي؟"
+        answer: |
+          الكتاب بيقول بطريقتين:
+          - **TCR + co-stimulation**: الطريقة الكلاسيكية، يعني antigen بيتعرض عليه.
+          - **Cytokines أو Toll-like receptors (TLRs)**: من غير antigen محدد.
+
+          التفسير المقبول (مش في الكتاب): الطريقة التانية بتفسّر ليه الالتهاب ممكن يكمّل حتى لو الـ antigen الأصلي مش واضح، عشان الـ cytokines اللي في المفصل نفسها بتنشّط T cells جديدة.
       - kind: figure
         page: 19
         quote: "Cytokines and the osteoclast (figure)\nTH17 cells:\n  IL-17, IL-1, TNF → RANKL, M-CSF → Osteoclast precursor cell → Osteoclast\nSynovial fibroblast:\n  IL-7, RANKL, M-CSF → Osteoclast precursor cell → Osteoclast\nTH1 cells:\n  RANKL, M-CSF (promote)\n  IFNγ, GM-CSF (inhibit), induced by IL-18\nTH2 cells:\n  IL-4, IL-10 (inhibit)"
@@ -670,6 +1237,17 @@ lessons:
             <text x="15" y="312" class="t-sm t-mut">red = promote, green = block</text>
           </svg>
       - kind: explain
+        page: 19
+        quote: "Cytokines and the osteoclast (figure)\nTH17 cells:\n  IL-17, IL-1, TNF → RANKL, M-CSF → Osteoclast precursor cell → Osteoclast\nSynovial fibroblast:\n  IL-7, RANKL, M-CSF → Osteoclast precursor cell → Osteoclast\nTH1 cells:\n  RANKL, M-CSF (promote)\n  IFNγ, GM-CSF (inhibit), induced by IL-18\nTH2 cells:\n  IL-4, IL-10 (inhibit)"
+        title: "ليه العضم بيتآكل في الـ RA؟"
+        text: |
+          الرسمة في صفحة 19 بتقول مين بيدفع الـ **osteoclast precursor** يبقى osteoclast، ومين بيوقفه:
+
+          - **بيدفعوا**: الـ TH17 (IL-17 و IL-1 و TNF) والـ synovial fibroblast (IL-7). كلهم بيزوّدوا ==RANKL== و M-CSF.
+          - **بيوقفوا**: TH2 (IL-4 و IL-10)، و TH1 بـ IFN-γ و GM-CSF (اللي IL-18 بيحفّزهم).
+
+          التفسير المقبول (مش في الكتاب): الـ osteoclast هو الخلية الوحيدة اللي **بتاكل العضم**، و RANKL هو "الإذن" اللي بيخليها تتكوّن. فلما الـ TH17 والـ fibroblasts يزوّدوه، العضم جنب المفصل بيتآكل، وده اللي بيظهر في الأشعة كـ **erosions**.
+      - kind: explain
         page: 21
         quote: "The synovial milieu contains IL-12, IL-23, IL-6 and TGFβ, and as such promotes the differentiation of TH1 and TH17 cells."
         title: "جوه المفصل"
@@ -694,6 +1272,20 @@ lessons:
           - "الكتاب بيقول although present، يعني موجودين."
           - "المشكلة إنهم أضعف من اللازم مش أقوى."
           - "الـ milieu بيدفع ناحية Th1 و Th17، مش Th2."
+      - kind: explain
+        page: 21
+        quote: "CLASSIFICATIONS OF CYTOKINES\nACCORDING TO DIVISION OF LABOR\n  T- helper 1 type of cytokines e.g IL-2, IL-12, TNF-α, IFN-γ\n  T- helper 2 type of cytokines e.g IL-3, IL-4, IL-5, IL-13\n  T- helper 3 type of cytokines e.g IL-10, TGF-β\nSTRUCTURAL CLASSIFICATION OF CYTOKINES\n  IL-2/IL-4 family e.g IL-2, IL-4, IL-5, granulocyte-macrophage colony stimulating factor\n  TNF family TNF-α, lymphotoxin-α, LT-β, FasL, CD40L, TRAIL, LIGHT\n  IL-1 family IL-1α, IL-1β, IL-1, IL-18\nSTRUCTURAL CLASSIFICATION BASED ON RECEPTORS\n  Heamatopoitin family receptors (class I receptors): Growth hormone, Prolactin, Erythropoitin, Interleukin (2, 3, 4, 5, 6, 7, 9, 11, 12, 13, 15, 16, 17, 25), Granulocyte macrophage colony stimulating factor, Granulocyte colony stimulating factor\n  Interferon/ IL-10family receptors (class II receptors): Type I interferons (IFNα, β, δ, κ, ω, I, IL-28A, IL-28), Interferons γ, Interleukin (10, 19, 20, 22, 24)\nRECEPTOR CLASSIFICATION BASED ON POSITION OF CYSTEINE RESIDUES NEAR THE N-TERMINUS\n  CC\n  CXC\n  C\n  CX3C\nFUNCTIONAL CLASSIFICATION\n  Those produced after inflammatory stimuli (inflammatory chemokines)\n  Those produced consecutively in tissues (homing chemokines)"
+        title: "أربع طرق تصنّف بيها، وكل طريقة بتسأل سؤال"
+        text: |
+          صفحة 21 فيها كذا تصنيف. افتكر كل واحد بالسؤال اللي بيجاوبه:
+
+          - **Division of labor**: مين بيعمله؟ TH1 و TH2 و TH3.
+          - **Structural**: شكله إيه؟ IL-2/IL-4 family، TNF family، IL-1 family.
+          - **Based on receptors**: بيمسك أنهي receptor؟ **class I** (hematopoietin: GH و prolactin و EPO وكتير من الـ ILs و GM-CSF و G-CSF) و **class II** (interferons و IL-10 family).
+          - **Cysteine residues near the N-terminus** (للـ chemokines): CC و CXC و C و CX3C.
+          - **Functional** (للـ chemokines): ==inflammatory chemokines== بتطلع بعد منبّه التهابي، و **homing chemokines** بتطلع على طول في الأنسجة.
+
+          التفسير المقبول (مش في الكتاب) لفرق آخر نوعين: الـ inflammatory بتنادي الخلايا للالتهاب لما يحصل، والـ homing بترجّع الخلايا لبيوتها (زي الـ lymph node) طول الوقت.
       - kind: table
         page: 21
         quote: "CLASSIFICATIONS OF CYTOKINES\nACCORDING TO DIVISION OF LABOR\n  T- helper 1 type of cytokines e.g IL-2, IL-12, TNF-α, IFN-γ\n  T- helper 2 type of cytokines e.g IL-3, IL-4, IL-5, IL-13\n  T- helper 3 type of cytokines e.g IL-10, TGF-β\nSTRUCTURAL CLASSIFICATION OF CYTOKINES\n  IL-2/IL-4 family e.g IL-2, IL-4, IL-5, granulocyte-macrophage colony stimulating factor\n  TNF family TNF-α, lymphotoxin-α, LT-β, FasL, CD40L, TRAIL, LIGHT\n  IL-1 family IL-1α, IL-1β, IL-1, IL-18\nSTRUCTURAL CLASSIFICATION BASED ON RECEPTORS\n  Heamatopoitin family receptors (class I receptors): Growth hormone, Prolactin, Erythropoitin, Interleukin (2, 3, 4, 5, 6, 7, 9, 11, 12, 13, 15, 16, 17, 25), Granulocyte macrophage colony stimulating factor, Granulocyte colony stimulating factor\n  Interferon/ IL-10family receptors (class II receptors): Type I interferons (IFNα, β, δ, κ, ω, I, IL-28A, IL-28), Interferons γ, Interleukin (10, 19, 20, 22, 24)\nRECEPTOR CLASSIFICATION BASED ON POSITION OF CYSTEINE RESIDUES NEAR THE N-TERMINUS\n  CC\n  CXC\n  C\n  CX3C\nFUNCTIONAL CLASSIFICATION\n  Those produced after inflammatory stimuli (inflammatory chemokines)\n  Those produced consecutively in tissues (homing chemokines)"
@@ -705,11 +1297,11 @@ lessons:
           - ["T-helper 3", "IL-10, TGF-β"]
         hide: [[2, 1]]
       - kind: try
-        items: [rheum.L01.120, rheum.L01.121, rheum.L01.122, rheum.L01.125, rheum.L01.129]
+        items: [rheum.L01.125, rheum.L01.129, rheum.L01.133, rheum.L01.134, rheum.L01.137]
     recap:
-      - "Anti-TNF: ACEGI (adalimumab، certolizumab، etanercept، golimumab، infliximab)."
-      - "IFN-γ: CGD و osteopetrosis. IL-11: thrombocytopenia. IL-2: cancer."
       - "RA: TNF-α للالتهاب، IL-1 لتآكل الغضروف والعضم."
-      - "Th1 predominance + Th17 زايد + Tregs ضعيفة."
-      - "IL-17 و IL-1 و TNF ← RANKL ← osteoclast."
-    practice: [rheum.L01.115, rheum.L01.116, rheum.L01.117, rheum.L01.118, rheum.L01.119, rheum.L01.120, rheum.L01.121, rheum.L01.122, rheum.L01.123, rheum.L01.124, rheum.L01.125, rheum.L01.126, rheum.L01.127, rheum.L01.128, rheum.L01.129, rheum.L01.130, rheum.L01.131, rheum.L01.132, rheum.L01.133, rheum.L01.134, rheum.L01.135, rheum.L01.136, rheum.L01.137, rheum.L01.138, rheum.L01.139, rheum.L01.140, rheum.L01.141, rheum.L01.142, rheum.L01.143, rheum.L01.144, rheum.L01.145, rheum.L01.147]
+      - "Th1 predominance (الموتور) + Th17 زايد + Tregs ضعيفة؛ والـ imbalance هو المفتاح."
+      - "T cells بتتنشّط بالـ TCR والـ co-stimulation، أو بالـ cytokines والـ TLRs."
+      - "IL-17 و IL-1 و TNF و IL-7 ← RANKL ← osteoclast ← erosions. IL-4 و IL-10 و IFN-γ بيوقفوه."
+      - "تصنيفات: division of labor (TH1/2/3)، structural، receptors (class I/II)، cysteine (CC، CXC، C، CX3C)، functional (inflammatory، homing)."
+    practice: [rheum.L01.125, rheum.L01.126, rheum.L01.127, rheum.L01.128, rheum.L01.129, rheum.L01.130, rheum.L01.131, rheum.L01.132, rheum.L01.133, rheum.L01.134, rheum.L01.135, rheum.L01.136, rheum.L01.137, rheum.L01.138, rheum.L01.139, rheum.L01.140, rheum.L01.141, rheum.L01.145]

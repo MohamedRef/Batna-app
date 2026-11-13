@@ -311,6 +311,15 @@ quote cap there is outdated), course briefs in [courses/](courses/).
     with nothing to teach goes in `content/lesson-skips.yaml` with a reason
     (default until he says otherwise), not a filler step. Hepatology is the
     depth bar (#827); additions are labelled as not from the book.
+15. **The key is not the longest option** (Mohamed, 2026-11-13, #816).
+    Test-wise learners pick the longest option, so in authored MCQs make a
+    distractor as long as the key (or trim the key) without making it less
+    wrong. `batna-tools cue` lists the share per lecture; `validate` prints
+    the bank share and the five highest lectures; the test
+    `the_bank_stays_under_the_ceiling` (`crates/tools/src/cue.rs`) fails above
+    `CEILING_PERCENT`, which each rewrite PR lowers, never raises. Options
+    printed in a source (`book-question`, `slide-question`, `past-paper`,
+    `lecture-quiz`) stay as printed and are not counted.
 
 ## 8. Sources outside git (important)
 
@@ -666,6 +675,13 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: longest-option cue, nephrology (#816): 43 distractors made as long as their keys, every neph lecture at or under 25%; bank share 26.3% → 24.4%, ceiling 25%. Hepatology (32%) and geriatrics (33%) were already lower and are left for now.
+- 2026-11-13: longest-option cue, rheumatology (#816): 47 distractors made as long as their keys, every rheum lecture but L03 (27%) at or under 25%; bank share 28.4% → 26.3%, ceiling 27%.
+- 2026-11-13: longest-option cue, research (#816): 60 distractors made as long as their keys, every res lecture at or under 25%; bank share 31.1% → 28.4%, ceiling 29%.
+- 2026-11-13: longest-option cue, diabetes and metabolism (#816): 67 distractors made as long as their keys, every dm lecture at or under 25%; bank share 34.0% → 31.1%, ceiling 31.5%.
+- 2026-11-13: longest-option cue, endocrinology (#816): 29 distractors made as long as their keys, every endo lecture at or under 25%; bank share 35.3% → 34.0%, ceiling 34.5%.
+- 2026-11-13: longest-option cue, gastroenterology (#816): 47 distractors made as long as their keys, every git lecture at or under 25%; bank share 37.4% → 35.3%, ceiling 36%.
+- 2026-11-13: longest-option cue (#816): `batna-tools cue` and a line in `validate`; bank share 39.3% → 37.4% after rewriting 42 hematology distractors (every hem lecture at or under 25%); ceiling test at 38% (content rule 15).
 - 2026-11-13: neph.L10 to the Hepatology bar: 4 → 5 lessons (UTI treatment and special groups → lesson5), reasons labelled «التفسير المقبول (مش في الكتاب)», words per page 152 → 225 on the `lessons --report` count, every page taught; p351 (review questions) skipped in `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: endo.L07 to the Hepatology bar: 6 → 10 lessons (lesson4 → lesson7 hypercalcaemia causes, lesson8 crisis; lesson5 → lesson9 maintenance; lesson6 → lesson10 pheo treatment), every list with its reason, every page cited, words per page 79 → 256; added to `content/lesson-skips.yaml` (#827–#829).
 - 2026-11-13: neph.L09 to the Hepatology bar: 7 → 11 lessons (lesson4 → lesson8, lesson5 → lesson9, lesson6 → lesson10, lesson7 → lesson11), reasons labelled «التفسير المقبول (مش في الكتاب)», six new book-figure crops (dialysis, HLA, cross-match, three-signal), words per page 83 → 225 on the `lessons --report` count, the 9 pages without a step now taught; `neph.L09: {}` in `content/lesson-skips.yaml` (#827–#829).

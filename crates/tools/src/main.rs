@@ -7,6 +7,7 @@
 //! batna-tools verdicts FILE [--approve]   fix list from the app's ✎/✗ export
 //! batna-tools update <keygen | manifest | sign | verify>   update feeds (docs/RELEASE.md §5)
 //! batna-tools refs [--lecture hb.L01] [--write]   page references against the book (refs.rs)
+//! batna-tools cue [--all]   how often the key is the longest option, per lecture (cue.rs)
 //! batna-tools lessons --summary | --report <course> | --warnings [<course>]   lesson coverage (coverage.rs)
 //! ```
 
@@ -21,6 +22,7 @@ mod anki;
 mod changes;
 mod content;
 mod coverage;
+mod cue;
 mod ids;
 mod lessons;
 mod packs;
@@ -70,6 +72,7 @@ fn cli(args: &[String]) -> (ExitCode, Option<String>, Vec<String>) {
         Some("ids") => report(ids::run(&root, &args[1..])),
         Some("content") => report(content::run(&root, &args[1..])),
         Some("lessons") => report(coverage::run(&root, &args[1..])),
+        Some("cue") => report(cue::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -87,7 +90,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 }
 
 fn usage() -> (ExitCode, Option<String>, Vec<String>) {
-    let text = "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | lessons --summary | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)";
+    let text = "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | lessons --summary | cue | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)";
     (ExitCode::from(2), None, vec![text.to_owned()])
 }
 
@@ -116,6 +119,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
 
     let mut items = 0;
     let mut files = 0;
+    let mut cue = cue::Tally::default();
     let mut listed = BTreeSet::new();
     for entry in &index.lectures {
         listed.insert(entry.id.clone());
@@ -160,6 +164,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
         for p in validate::lecture(&lec, &cx) {
             problems.push(format!("{}: {p}", rel(root, &path)));
         }
+        cue.add(&lec);
         items += lec.items.len();
     }
     // Lecture files that the index doesn't list.
@@ -216,8 +221,9 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms; lesson coverage: {coverage_warnings} warning(s), see `batna-tools lessons --warnings`",
-            index.lectures.len()
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms; lesson coverage: {coverage_warnings} warning(s), see `batna-tools lessons --warnings`{}",
+            index.lectures.len(),
+            cue.line()
         ))
     } else {
         Err(problems)

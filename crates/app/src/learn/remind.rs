@@ -111,7 +111,7 @@ mod tests {
         let item = resolve("hb.L01.033").expect("ACLF precipitants");
         assert!(item.text.contains("ACLF"), "{item:?}");
         assert!(item.parts.is_empty());
-        assert_eq!(item.from.as_ref().map(|f| f.0.as_str()), Some("hb.L01.lesson3"));
+        assert_eq!(item.from.as_ref().map(|f| f.0.as_str()), Some("hb.L01.lesson8"));
 
         let shibs = resolve("hb.L01.lesson2:SHIBS").expect("SHIBS");
         assert_eq!(shibs.what, "SHIBS");

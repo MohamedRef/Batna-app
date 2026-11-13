@@ -640,6 +640,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-13: web deploy fixed after Rust 1.100: `scripts/web/build.sh` finds the content pack by package id, since cargo now writes build output to `build/batna-app/<hash>/` (deploys had failed since #821).
 - 2026-11-13: 52 cut quotes completed from the book pages (sentence continues on the next page or in the list below); four trailing fragments where the book itself breaks off were dropped and logged in `medstudy/book-issues.md` (#804, #805, #807–#812).
 - 2026-11-13: res.L15.113, res.L15.117, res.L17.001 and their lesson steps get `update:` notes (n vs n − 1, 152.16 unrounded, p-value meaning); slide answers unchanged (#802).
 - 2026-11-13: stray root file from a mistyped command removed; `check-tracked-files.sh` now fails on tracked paths with shell characters or root names with spaces (#817).

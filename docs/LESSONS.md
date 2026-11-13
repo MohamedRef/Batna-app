@@ -34,8 +34,18 @@ The model to copy is `content/lessons/hb/L01.yaml`.
 7. **Interactive every 2–3 screens.** A lesson needs at least one question
    step; aim for one every two or three steps. Feedback explains *why*
    each wrong option is wrong.
-8. **Short.** 6–10 minutes, 8–16 steps. A lecture usually needs 3–7 lessons
-   that follow the book's order and together cover every page.
+8. **Short, and as many as the lecture needs** (Mohamed, 2026-11-13). Each
+   lesson is 6–10 minutes and 8–16 steps, teaches at most about **25 cards**
+   and **two book topics** (headings), and its `pages` are exactly the first
+   and last page its steps cite. The number of lessons follows the lecture:
+   about **one lesson per four book pages that carry cards**, so a long
+   lecture gets more lessons, never thinner ones. They follow the book's
+   order and together cover every page. A page with nothing to teach
+   (blank, references, a figure already shown, review questions) is listed
+   with its reason in `content/lesson-skips.yaml`, never given a filler
+   step. When a lesson is split, the first part keeps its id (his done mark
+   and place), the new part takes the lecture's next free `.lessonN`, and
+   `practice` ids move to the part that teaches them.
 9. **Link to the cards.** End with a `try` step (1–5 playable items: card,
    cloze, enumerate, essay, table, order) and list the lecture items the
    lesson teaches in `practice:`.
@@ -202,7 +212,21 @@ Mohamed can highlight any words in a step himself (`learn/highlight.js`, `batna_
 
 `cargo run -p batna-tools -- validate` checks schema, ids, pages, quotes,
 item links, SVG safety, image files, sizes and licences, key-term counts,
-mnemonic spelling, option counts and abbreviations (rule 12). Then run the
+mnemonic spelling, option counts and abbreviations (rule 12). It also
+checks coverage against the book (`crates/tools/src/coverage.rs`, #833):
+`pages` wider than the steps fail; pages no step cites warn, and fail once
+the lecture is listed in `content/lesson-skips.yaml` (its coverage was
+reviewed); `practice` cards from pages the lesson never cites and lessons
+over 30 cards, 8 pages or 2 topics warn. `batna-tools lessons --warnings
+<course>` lists the warnings, `lessons --report <course>` prints one TSV row
+per lesson (pages, cited pages, cards, steps, words, explain steps with no
+reason word, the lecture's words per page and uncited pages), and
+`lessons --summary` the course table CI puts in the job summary.
+
+**Depth bar** (#827): Hepatology. On the `lessons --report` count (all text
+a learner reads in the steps, without quotes and SVG) Hepatology has about
+225 words per book page and about 3 explain steps in 10 without a reason
+word; bring other courses to that, never by padding. Then run the
 app (`just run`, or `BATNA_OPEN_SCREEN=learn`) and play every lesson once.
 
 ## Saved responses

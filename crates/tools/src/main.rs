@@ -7,6 +7,7 @@
 //! batna-tools verdicts FILE [--approve]   fix list from the app's ✎/✗ export
 //! batna-tools update <keygen | manifest | sign | verify>   update feeds (docs/RELEASE.md §5)
 //! batna-tools refs [--lecture hb.L01] [--write]   page references against the book (refs.rs)
+//! batna-tools lessons --summary | --report <course> | --warnings [<course>]   lesson coverage (coverage.rs)
 //! ```
 
 use std::collections::BTreeSet;
@@ -19,6 +20,7 @@ use batna_core::validate::{self, Context};
 mod anki;
 mod changes;
 mod content;
+mod coverage;
 mod ids;
 mod lessons;
 mod packs;
@@ -67,6 +69,7 @@ fn cli(args: &[String]) -> (ExitCode, Option<String>, Vec<String>) {
         Some("refs") => report(refs::run(&root, &args[1..])),
         Some("ids") => report(ids::run(&root, &args[1..])),
         Some("content") => report(content::run(&root, &args[1..])),
+        Some("lessons") => report(coverage::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -84,7 +87,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 }
 
 fn usage() -> (ExitCode, Option<String>, Vec<String>) {
-    let text = "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)";
+    let text = "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | lessons --summary | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)";
     (ExitCode::from(2), None, vec![text.to_owned()])
 }
 
@@ -204,13 +207,16 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     }
     // Lessons (docs/LESSONS.md), with every abbreviation in the glossary.
     let (_, lessons) = lessons::validate_all(root, &approved, glossary.as_ref(), &mut problems);
+    // Lessons against the book's pages (#833): hard rules fail, the rest warn.
+    let (coverage_errors, coverage_warnings) = coverage::check(root);
+    problems.extend(coverage_errors);
     // Nothing left from a template (`batna-tools content new-item`).
     problems.extend(content::unfinished(root));
     // Page references checked against the book (refs.rs).
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms; lesson coverage: {coverage_warnings} warning(s), see `batna-tools lessons --warnings`",
             index.lectures.len()
         ))
     } else {
@@ -321,7 +327,7 @@ mod tests {
             (code, out.as_str(), err.len()),
             (
                 ExitCode::SUCCESS,
-                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms",
+                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 1 warning(s), see `batna-tools lessons --warnings`",
                 0
             )
         );
@@ -412,7 +418,7 @@ mod tests {
             "schema: batna.glossary/v1\nentries:\n  - { term: HSC, kind: abbr, text: Hepatic stellate cell, status: unverified }\n",
         );
         let ok = validate_all(root).unwrap();
-        assert!(ok.ends_with("1 lessons, 1 glossary terms"), "{ok}");
+        assert!(ok.contains("1 lessons, 1 glossary terms;"), "{ok}");
     }
 
     const INDEX_V0: &str = "schema: batna.content/v0\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n";

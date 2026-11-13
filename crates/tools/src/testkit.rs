@@ -42,7 +42,7 @@ lessons:
     title: "يعني إيه cirrhosis؟"
     hook: "حكاية الـ cirrhosis من أولها."
     minutes: 3
-    pages: [1, 2]
+    pages: [1, 1]
     topics: [definition]
     goals: ["تعرّف الـ cirrhosis بالكلمتين"]
     status: unverified

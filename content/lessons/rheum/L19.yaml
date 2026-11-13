@@ -3,15 +3,15 @@ lecture: rheum.L19
 lessons:
   # ------------------------------------------------------------------
   - id: rheum.L19.lesson1
-    title: "مين بيجيله lupus وليه؟"
-    hook: "ست في العشرينات، شمس، دوا ضغط، وكروموسوم X زيادة: كل واحد فيهم بيزوّد الحكاية."
-    minutes: 9
-    pages: [309, 312]
-    topics: [definition, genetics, environment]
+    title: "مين بيجيله lupus؟ الأرقام والجينات"
+    hook: "ست في العشرينات، X زيادة، و complement ناقص: الجينات بتحمّل المسدس."
+    minutes: 8
+    pages: [309, 311]
+    topics: [definition, genetics]
     goals:
       - "تعرّف SLE وتحفظ أرقام الـ epidemiology"
       - "تفهم ليه الستات أكتر: الـ X chromosome مش الهرمونات بس"
-      - "تعدّ الـ environmental triggers والأدوية"
+      - "تعرف ليه نقص الـ complement المبكر يعمل lupus"
     status: unverified
     steps:
       - kind: explain
@@ -22,6 +22,8 @@ lessons:
           الـ **systemic lupus erythematosus (SLE)** مرض ==chronic relapsing== inflammatory، **multisystem autoimmune** في الـ connective tissue.
 
           التلات أماكن اللي بتميّزه: **skin**، **joints**، و **serosal membranes** (pleura و pericardium).
+
+          ليه التلاتة دول بالذات؟ لأنهم أنسجة فيها connective tissue وأغشية كتير، والـ immune complexes بتترسب فيها (درس الـ pathology). وكلمة **relapsing** معناها إن المرض بيروح ويرجع، علشان كده المتابعة طول العمر.
       - kind: table
         page: 309
         quote: "Female: Male ratio:\n  > 90% cases of SLE occur in women 9:1.\n  Frequently during childbearing age (20-40years).\n  20% of cases diagnosed during 1st 2 decades of life."
@@ -41,6 +43,14 @@ lessons:
           نفس الجينات، بيئة مختلفة، نتيجة مختلفة. يبقى فيه ==environmental trigger== جنب الـ **genetic basis**.
 
           الجينات بتحمّل المسدس، والبيئة بتدوس على الزناد.
+      - kind: reveal
+        page: 310
+        quote: "Risk of men is similar to pre-pubertal / postmenopausal women."
+        prompt: "ليه الراجل عنده نفس risk الست اللي قبل البلوغ أو بعد سن اليأس؟"
+        answer: |
+          الكتاب بيدّينا معلومتين: الـ risk بيعلى في الـ **reproductive years**، والراجل عنده نفس risk الست اللي ==مفيهاش estrogen كتير== (قبل البلوغ أو بعد اليأس).
+
+          يعني الهرمونات بتزوّد الـ risk، بس مش هي كل الحكاية. علشان كده الكتاب بيكمّل بـ **Klinefelter (XXY)**: الراجل اللي عنده X زيادة الـ risk بتاعه يبقى زي الست. الخطوات الجاية بتفصّل الجينات دي واحدة واحدة.
       - kind: explain
         page: 310
         title: "الجينات: HLA والـ complement"
@@ -49,6 +59,30 @@ lessons:
           - **HLA** (الـ major histocompatibility complex (MHC) على chromosome 6): أول genetic link، بيدي **~2-fold risk**. أثبتهم في الـ Caucasians: ==HLA-DR2 و DR3==. والـ DQ/DR مرتبطين بالـ autoantibodies.
           - **Complement:** الـ complete deficiency نادر، بس لما يحصل: **C1q 90%**، **C2 75%**، **C4 10%** (أرقام الكتاب).
           - الأشيع: **low C4 copy number** = risk، و high copy number = protective.
+
+          يعني الـ HLA بيحدد إزاي الـ antigens بتتعرض للـ T cells، فالـ alleles دي بتسهّل إن المناعة تشوف «نفسها» كعدو؛ وده سبب ارتباط الـ DQ/DR بالـ autoantibodies (التفسير المقبول، مش في الكتاب).
+      - kind: figure
+        page: 310
+        quote: "Complete deficiency of the early complement components C2, C4, and C1q results in SLE in 75%, 10%, and 90% of cases, respectively."
+        title: "الـ complement deficiency: كام في المية يعملوا lupus؟"
+        alt: "Horizontal bar chart of the book's figures for complete early complement deficiency causing SLE: C1q 90%, C2 75%, C4 10%. A note below says complete deficiencies are rare; a low C4 gene copy number is the common risk and a high copy number protects."
+        caption: "أرقام **الكتاب**: ==C1q 90%==، C2 75%، C4 10%. الـ complete deficiency نادر جدًا، علشان كده الأشيع في الواقع هو الـ **low C4 copy number**."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="22" class="t-sm t-b">Complete deficiency → SLE (book)</text>
+            <text x="10" y="58" class="t-sm t-b">C1q</text>
+            <rect x="60" y="42" width="225" height="24" rx="4" class="fg-bad"/>
+            <text x="292" y="58" class="t-sm">90%</text>
+            <text x="10" y="98" class="t-sm t-b">C2</text>
+            <rect x="60" y="82" width="188" height="24" rx="4" class="fg-acc"/>
+            <text x="255" y="98" class="t-sm">75%</text>
+            <text x="10" y="138" class="t-sm t-b">C4</text>
+            <rect x="60" y="122" width="25" height="24" rx="4" class="fg-box"/>
+            <text x="92" y="138" class="t-sm">10%</text>
+            <rect x="10" y="164" width="310" height="56" rx="8" class="fg-box"/>
+            <text x="165" y="186" text-anchor="middle" class="t-sm">Rare. Common risk: low C4 copy number</text>
+            <text x="165" y="206" text-anchor="middle" class="t-sm t-mut">high C4 copy number protects</text>
+          </svg>
       - kind: update
         page: 310
         quote: "Complete deficiency of the early complement components C2, C4, and C1q results in SLE in 75%, 10%, and 90% of cases, respectively."
@@ -72,6 +106,8 @@ lessons:
           - الخلاصة: ==X chromosome copy number==، مش الجنس ولا الهرمونات لوحدها.
 
           **Twins:** monozygotic **24–35%** مقابل dizygotic **2–5%**. و **10–12%** عندهم قريب درجة أولى أو تانية.
+
+          ليه الـ twins مهمين؟ لأن الـ monozygotic نفس الجينات بالظبط، ولو المرض جيني بس كانت النسبة هتبقى قريبة من 100%. الفرق بين 24–35% و 2–5% بيقول الجينات مهمة، والباقي بيئة (الدرس الجاي).
       - kind: check
         page: 311
         quote: "Twin studies estimated that the rate of SLE concordance in monozygotic twins is 24%-35%, compared to 2%–5% in dizygotic twin pairs."
@@ -87,6 +123,49 @@ lessons:
           - "الـ identical twins نفس الجينات، ومع ذلك أغلبهم مش بيتصابوا."
           - "الفرق الكبير بين monozygotic (MZ) و dizygotic (DZ) بيقول إن الجينات ليها دور."
           - "مش single-gene X-linked؛ الكتاب بيتكلم عن X dose."
+      - kind: try
+        items: [rheum.L19.001, rheum.L19.005, rheum.L19.008, rheum.L19.012, rheum.L19.016]
+    recap:
+      - "SLE: chronic relapsing multisystem autoimmune؛ skin، joints، serosa."
+      - "F:M 9:1، سن 20–40، 1:250 في الـ African/Caribbean women؛ 20% في أول عقدين."
+      - "HLA-DR2/DR3 (~2-fold)؛ complement: C1q 90%، C2 75%، C4 10% (الكتاب)؛ low C4 copy = risk."
+      - "X dose: XXY risk زي الستات. MZ 24–35% مقابل DZ 2–5%؛ 10–12% عندهم قريب."
+    practice: [rheum.L19.001, rheum.L19.002, rheum.L19.003, rheum.L19.004, rheum.L19.005, rheum.L19.006, rheum.L19.007, rheum.L19.008, rheum.L19.009, rheum.L19.010, rheum.L19.011, rheum.L19.012, rheum.L19.013, rheum.L19.014, rheum.L19.015, rheum.L19.016, rheum.L19.105]
+  # ------------------------------------------------------------------
+  # Split from lesson1 on 2026-11-13 (#828): environmental and hormonal triggers.
+  - id: rheum.L19.lesson6
+    title: "الشمس والفيروس والدوا: الـ triggers"
+    hook: "الجينات جهزت، والشمس أو الدوا أو الفيروس بيدوسوا على الزناد."
+    minutes: 8
+    pages: [311, 312]
+    topics: [environment]
+    goals:
+      - "تفهم إزاي الـ UV بيزوّد الـ autoantibodies"
+      - "تحفظ أدوية الـ drug-induced lupus بالمجموعات"
+      - "تعرف دور الأكل والسجاير والـ estrogen"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 311
+        quote: "Ultraviolet light stimulates keratinocytes, which leads to the secretion of cytokines that simulate increased autoantibody production."
+        title: "إزاي الشمس بتولّع الـ lupus"
+        alt: "Three boxes joined by arrows: ultraviolet light hits skin keratinocytes; keratinocytes secrete cytokines; cytokines increase autoantibody production. A side note says about two-thirds of lupus patients are UV sensitive."
+        caption: "الـ UV مش بيأذي الجلد بس: بيخلّي الـ ==keratinocytes== تطلّع cytokines، والـ cytokines تزوّد الـ **autoantibodies**. علشان كده تلتين العيانين **UV sensitive**."
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L19u" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="45" y="10" width="240" height="50" rx="10" class="fg-acc"/>
+            <text x="165" y="41" text-anchor="middle" class="t-b">Ultraviolet light</text>
+            <path d="M165 60 V84" class="fg-arrow" marker-end="url(#L19u)"/>
+            <rect x="45" y="86" width="240" height="50" rx="10" class="fg-box"/>
+            <text x="165" y="108" text-anchor="middle" class="t-sm t-b">Keratinocytes stimulated</text>
+            <text x="165" y="126" text-anchor="middle" class="t-sm">secrete cytokines</text>
+            <path d="M165 136 V160" class="fg-arrow" marker-end="url(#L19u)"/>
+            <rect x="45" y="162" width="240" height="50" rx="10" class="fg-bad"/>
+            <text x="165" y="193" text-anchor="middle" class="t-sm t-b t-bad">More autoantibodies</text>
+            <rect x="45" y="226" width="240" height="50" rx="10" class="fg-thin"/>
+            <text x="165" y="257" text-anchor="middle" class="t-sm">2/3 of patients are UV sensitive</text>
+          </svg>
       - kind: explain
         remind: [rheum.L19.019, rheum.L19.017]
         page: 311
@@ -98,6 +177,16 @@ lessons:
           - **Silica dust**، **stress**، **smoking**.
           - **Diet:** high caloric؛ الستات بـ **body mass index (BMI) > 21** risk أعلى.
           - **Hormones:** بيزيد في الـ reproductive years، ويتعب مع الحمل والدورة ← **estrogen**.
+
+          الكتاب نفسه بيقول إن الـ triggers دي «not fully known»، يعني دي عوامل بتزوّد الـ risk أو بتعمل flare، مش أسباب أكيدة. علشان كده النصيحة العملية: sunscreen، بطّل سجاير، وراجع الأدوية.
+      - kind: reveal
+        page: 311
+        quote: "Viral infection\n  EBV.\n  Cytomegalovirus.\n  Parvovirus B19.\n  Hepatitis B virus.\n  Human endogenous retroviruses."
+        prompt: "الكتاب بيعدّ خمس فيروسات (EBV، CMV، parvovirus B19، HBV، endogenous retroviruses). إزاي فيروس يعمل مرض autoimmune؟"
+        answer: |
+          الكتاب بيقول بس إن الـ triggers دي ممكن **تبدأ المرض أو تعمل flare**، ومش بيشرح الآلية.
+
+          التفسير المقبول (مش في الكتاب): العدوى بتنشّط المناعة جامد وبتموّت خلايا كتير، فالـ **apoptotic debris** والـ nuclear antigens تزيد في وقت المناعة فيه صاحية. وده نفس الخيط اللي هتشوفه في الـ pathogenesis: ==apoptosis زيادة + clearance ضعيف==. وبعض الفيروسات (زي الـ EBV) بتعيش جوه الـ **B cells** نفسها، فبتلعب في الخلية اللي بتعمل الـ antibodies.
       - kind: mnemonic
         page: 312
         quote: "Drugs\n  Anti hypertension - Hydralazine, methyldopa, and captopril.\n  Anti arrhythmics - Procainamide and quinidine.\n  Anti-inflammatories - Penicilamine and sulfasalazine."
@@ -111,31 +200,60 @@ lessons:
           - { key: "P", text: "Penicillamine (anti-inflammatory)" }
           - { key: "S", text: "Sulfasalazine (anti-inflammatory)" }
         hook: "تلات مجموعات: **ضغط** (HMC)، **قلب** (PQ)، **التهاب** (PS). وفي قايمة الـ triggers كمان **chlorpromazine** و **isoniazid**."
+      - kind: check
+        page: 312
+        quote: "Drugs\n  Anti hypertension - Hydralazine, methyldopa, and captopril.\n  Anti arrhythmics - Procainamide and quinidine.\n  Anti-inflammatories - Penicilamine and sulfasalazine."
+        question: "Which of the following is NOT related to drug-induced lupus?"
+        options: ["Methyl folate", "Methyldopa", "Hydralazine", "Procainamide"]
+        answer: 0
+        why:
+          - "صح: الـ methyl folate فيتامين، مش في قايمة الكتاب. الفخ إن اسمه شبه methyldopa."
+          - "الـ methyldopa من الـ antihypertensives في القايمة (H M C)."
+          - "الـ hydralazine أول دوا في الـ antihypertensives."
+          - "الـ procainamide من الـ antiarrhythmics (P Q)."
+      - kind: reveal
+        page: 312
+        quote: "Women experience worsening of symptoms during pregnancy and with their menstrual periods."
+        prompt: "إيه الملاحظتين اللي خلّوا الدكاترة يشكّوا في الـ estrogen؟"
+        answer: |
+          1. الـ SLE أكتر في الستات في الـ ==reproductive years==.
+          2. الأعراض بتتعب **during pregnancy** (مع الحمل) و**with menstrual periods** (مع الدورة)، يعني لما الـ estrogen يعلى.
+
+          بس خلي بالك: الكتاب بيقول «may play a role». السبب إن بيانات الـ X chromosome (الدرس اللي فات) بتقول إن الـ **X copy number** أهم من الهرمونات. الاتنين مع بعض: الـ X بيحدد مين معرّض، والـ estrogen بيزوّد النشاط. وده كمان سبب إن حبوب الـ **estrogen** بتتحسب بحذر في الـ APS (هتشوفها بعدين).
       - kind: aside
         tone: joke
         page: 311
         quote: "Ultraviolet light\n  Ultraviolet light stimulates keratinocytes, which leads to the secretion of cytokines that simulate increased autoantibody production.\n  About two-thirds of the people with lupus are UV light sensitive."
         text: "عيانة الـ lupus في مصر في أغسطس: «الشمس مش بتحبني يا دكتور». معاها حق: **تلتين** العيانين UV sensitive. الـ sunscreen هنا مش رفاهية. ☀️🧴"
+      - kind: explain
+        page: 312
+        title: "الأكل والسجاير والضغط النفسي"
+        quote: "Women with a body mass index (BMI) greater than 21 kg/m2 tended to have a greater risk of SLE compared with women with lower BMI."
+        text: |
+          - **Diet:** الـ ==high caloric diet==، والستات اللي الـ BMI بتاعهم **فوق 21 kg/m²** عندهم risk أعلى من اللي أقل.
+          - **Smoking:** المدخنين risk أعلى من غير المدخنين.
+          - **Stress:** الستات أكتر تأثرًا بيه.
+
+          ليه ده مهم في الامتحان؟ لأن سؤال الكتاب «All are risk factors except» بيحط **obesity** كـ risk factor صح، وبيحط حاجة غريبة (زي **HCV**) هي اللي مش في القايمة. الفيروسات اللي في الكتاب هي EBV، CMV، parvovirus B19، **HBV**، والـ retroviruses بس.
       - kind: try
-        items: [rheum.L19.005, rheum.L19.011, rheum.L19.014, rheum.L19.021, rheum.L19.017]
+        items: [rheum.L19.017, rheum.L19.018, rheum.L19.021, rheum.L19.025, rheum.L19.026]
     recap:
-      - "SLE: chronic relapsing multisystem autoimmune؛ skin، joints، serosa."
-      - "F:M 9:1، سن 20–40، 1:250 في الـ African/Caribbean women."
-      - "HLA-DR2/DR3؛ complement: C1q 90%، C2 75%، C4 10% (الكتاب)؛ low C4 copy = risk."
-      - "X dose: XXY risk زي الستات. MZ 24–35% مقابل DZ 2–5%."
-      - "UV (تلتين)، viruses، silica، BMI > 21، smoking، estrogen. أدوية: HMC PQ PS."
-    practice: [rheum.L19.001, rheum.L19.002, rheum.L19.003, rheum.L19.004, rheum.L19.005, rheum.L19.006, rheum.L19.007, rheum.L19.008, rheum.L19.009, rheum.L19.010, rheum.L19.011, rheum.L19.012, rheum.L19.013, rheum.L19.014, rheum.L19.015, rheum.L19.016, rheum.L19.017, rheum.L19.018, rheum.L19.019, rheum.L19.020, rheum.L19.021, rheum.L19.022, rheum.L19.023, rheum.L19.024, rheum.L19.025, rheum.L19.026, rheum.L19.027, rheum.L19.105]
+      - "UV ← keratinocytes ← cytokines ← autoantibodies؛ تلتين العيانين UV sensitive."
+      - "Viruses: EBV، CMV، parvovirus B19، HBV، endogenous retroviruses. و silica."
+      - "أدوية: HMC (ضغط) PQ (قلب) PS (التهاب)، و chlorpromazine و isoniazid."
+      - "BMI > 21، high caloric، smoking، stress؛ estrogen: reproductive years، الحمل والدورة."
+    practice: [rheum.L19.017, rheum.L19.018, rheum.L19.019, rheum.L19.020, rheum.L19.021, rheum.L19.022, rheum.L19.023, rheum.L19.024, rheum.L19.025, rheum.L19.026, rheum.L19.027]
   # ------------------------------------------------------------------
   - id: rheum.L19.lesson2
     title: "الحطام النووي والأجسام المضادة"
     hook: "الخلايا بتموت كتير والزبالة مش بتتشال، فالجسم يعمل antibodies ضد الـ DNA بتاعه."
     minutes: 9
-    pages: [312, 316]
-    topics: [immunology, antibodies, pathology]
+    pages: [312, 315]
+    topics: [immunology, antibodies]
     goals:
       - "تفهم دور الـ B cells والـ T cells والـ apoptosis"
       - "توصّل كل antibody بمرضه ونسبته"
-      - "تعرف الـ pathology، والكلية أوضح مثال"
+      - "تعرف ليه الـ anti-Ro خطر على قلب الجنين"
     status: unverified
     steps:
       - kind: explain
@@ -148,6 +266,8 @@ lessons:
           الـ immune stimulation + impaired regulation ← **polyclonal activation** للـ B cells ← autoantibodies كتير ضد **nuclear self antigens**.
 
           الـ antibodies دي بتعمل **immune complexes** مع الـ nuclear antigens، تترسب في الأنسجة، وتعمل **inflammation**.
+
+          يعني الـ antibody لوحده مش هو الضرر؛ الضرر بييجي لما يمسك الـ antigen ويترسب.
       - kind: explain
         page: 313
         title: "والـ T cells كمان"
@@ -158,6 +278,30 @@ lessons:
           - الـ **cytotoxic** والـ **suppressor T cells** (اللي المفروض تهدّي المناعة) قليلة.
 
           يعني الفرامل بايظة والبنزين زيادة.
+
+          علشان كده الكتاب بيقول إن الـ T-cell dysregulation «critical aspect» زي الـ B cells: الـ T cells هي اللي بتساعد الـ B cells تعمل الـ autoantibodies (الـ figure الجاية).
+      - kind: check
+        page: 313
+        quote: "Regulatory T cells have been shown to be low in SLE and their suppressive function impaired."
+        question: "Which T-cell change does the lecture describe in SLE?"
+        options: ["Regulatory T cells are low and their suppressive function is impaired", "Regulatory T cells are increased", "T cells are normal; only B cells are abnormal", "Cytotoxic T cells are increased"]
+        answer: 0
+        why:
+          - "صح: الفرامل (Treg) قليلة وضعيفة، فالالتهاب ما بيتهداش."
+          - "العكس: الكتاب بيقول low."
+          - "الكتاب بيقول إن الـ T-cell dysregulation «critical aspect» زي الـ B cells."
+          - "الـ cytotoxic والـ suppressor T cells الاتنين decreased."
+      - kind: explain
+        page: 314
+        title: "الـ apoptosis: الزبالة اللي ما بتتشالش"
+        quote: "Autoantigens typical of lupus cluster in surface blebs of apoptotic cells, increasing their immune-exposure."
+        text: |
+          - ==Increased apoptosis== و **defective clearance** للحطام: ده موجود في الـ mouse model وفي الإنسان.
+          - الـ autoantigens بتاعة الـ lupus بتتجمع في الـ **surface blebs** للخلايا اللي بتموت، فبتبقى قدام المناعة.
+          - لما طرق التنضيف الطبيعية **تتشبّع** (saturation)، الـ autoantigen exposure يزيد أكتر.
+          - الـ triggers بتزوّد الـ **oxidative stress** ← apoptosis ← antigens كانت **مستخبية** تطلع على سطح الخلية وتبقى **immunogenic**.
+
+          يعني المشكلة مش إن المناعة بتخترع هدف جديد؛ المشكلة إن حاجات المفروض تتشال بهدوء بتفضل متاحة، والـ B cells اللي فقدت الـ tolerance بتعمل ضدها antibodies. وده سبب إن أشهر antibodies الـ lupus ضد مكوّنات **النواة** (DNA، histone، Sm).
       - kind: figure
         page: 314
         quote: "Apoptosis (programmed cell death) of lymphoid cells leads to release of DNA constituents"
@@ -226,17 +370,14 @@ lessons:
         page: 315
         quote: "1ry Biliary Sclerosis Systemic Sclerosis Primary Sjogren 40-60% Also found in Anti-Ro (SS-A) 60-90% coeliac disease, polymyositis Anti-La (SS-B) 15% cardiac neonatal lupus erythematosus, 35-85% Systemic Sclerosis Primary Sjogren SLE Anti-Sm 10-25% *associated with CNS and kidney diseases SLE Anti-U1-RNP mixed CT diseases 30% Overlap Syndrome Anti-topoisomerase-1 Diffuse Cutaneous Systemic Sclerosis 30% Antipospholipid SLE, Antiphospholipid Syndrome, Abortions 10-30% Antibody"
         text: "فخ متكرر: الـ **anti-dsDNA** أشيع (70%) ومرتبط بالـ nephritis، أما الـ **anti-Sm** أقل (10–25%) ومرتبط بالـ **central nervous system (CNS) والكلية**. الـ anti-Ro/La في الجدول مع **Sjögren** و **systemic sclerosis (SSc)** و **cardiac neonatal lupus**."
-      - kind: explain
-        remind: [rheum.L19.043]
-        page: 316
-        title: "الـ pathology والكلية"
-        quote: "Immune complex deposition seen in mesangium & subendothelial/subepithelial surface of basement membrane."
-        text: |
-          **الأساسيات (p315):** inflammation، **band or occlusive vasculopathy**، vasculitis، immune complex deposition. والـ **fibrinoid** (مادة eosinophilic) على الأوعية والألياف.
+      - kind: reveal
+        page: 315
+        quote: "cardiac neonatal lupus erythematosus,"
+        prompt: "الجدول بيربط الـ anti-Ro/La بالـ cardiac neonatal lupus. إزاي antibody عند الأم يأذي قلب الجنين؟"
+        answer: |
+          الكتاب بيدّي الربط بس: anti-Ro (SS-A) و anti-La (SS-B) مع **cardiac neonatal lupus erythematosus**، وبعدين في الحمل (p324) بيقول إن الـ anti-Ro/La بيزوّدوا risk الـ ==fetal congenital heart block==.
 
-          **الكلية** أوضح organ:
-          - **Light/immunofluorescence (IF):** mesangial proliferation، **fibrinoid necrosis**، inflammation، Ig أو complement deposits.
-          - **EM:** deposits في الـ ==mesangium== والـ **subendothelial / subepithelial** surfaces.
+          التفسير المقبول (مش في الكتاب): الـ antibodies دي **IgG** بتعدّي الـ placenta، وبتوصل لنسيج التوصيل في قلب الجنين وتعمل التهاب وتليّف. علشان كده الأم ممكن تبقى من غير أعراض خالص والطفل يتولد بـ heart block. وده سبب إن الـ anti-Ro بيتسأل عنه في أي ست lupus عايزة تحمل.
       - kind: check
         page: 315
         quote: "Anti dsDNA 70 % Increased risk for Lupus Nephritis Anti-histone Drug Induced LE"
@@ -249,14 +390,13 @@ lessons:
           - "الـ anti-centromere للـ limited SSc."
           - "الـ anti-topo-1 للـ diffuse SSc."
       - kind: try
-        items: [rheum.L19.029, rheum.L19.031, rheum.L19.035, rheum.L19.032, rheum.L19.043]
+        items: [rheum.L19.028, rheum.L19.031, rheum.L19.035, rheum.L19.037, rheum.L19.041]
     recap:
       - "Loss of B-cell tolerance ← polyclonal B cells ← immune complexes ← inflammation."
       - "T cells: abnormal signaling، Treg قليلة، cytotoxic و suppressor قليلين."
-      - "Apoptosis زيادة + clearance ضعيف؛ الـ antigens في الـ blebs."
-      - "dsDNA 70% nephritis؛ Sm 10–25% CNS/kidney؛ histone drug؛ U1-RNP MCTD؛ centromere limited، topo diffuse."
-      - "الكلية: mesangial proliferation، fibrinoid؛ EM: mesangium + subendothelial/subepithelial."
-    practice: [rheum.L19.028, rheum.L19.029, rheum.L19.030, rheum.L19.031, rheum.L19.032, rheum.L19.033, rheum.L19.034, rheum.L19.035, rheum.L19.036, rheum.L19.037, rheum.L19.038, rheum.L19.039, rheum.L19.040, rheum.L19.041, rheum.L19.042, rheum.L19.043, rheum.L19.044, rheum.L19.045]
+      - "Apoptosis زيادة + clearance ضعيف؛ الـ antigens في الـ blebs؛ oxidative stress بيكشف antigens مستخبية."
+      - "dsDNA 70% nephritis؛ Sm 10–25% CNS/kidney؛ histone drug؛ U1-RNP MCTD؛ centromere limited، topo diffuse؛ Ro/La neonatal heart."
+    practice: [rheum.L19.028, rheum.L19.029, rheum.L19.030, rheum.L19.031, rheum.L19.032, rheum.L19.033, rheum.L19.035, rheum.L19.036, rheum.L19.037, rheum.L19.038, rheum.L19.039, rheum.L19.040, rheum.L19.041, rheum.L19.042]
   # ------------------------------------------------------------------
   - id: rheum.L19.lesson3
     title: "الجلد والمفاصل والصدر"
@@ -277,6 +417,8 @@ lessons:
         quote: "Dermatologic\n  Cutaneous vascular lesions.\n  Photosensitivity.\n  Butterfly rash (Malar Rash).\n  Oral/nasopharyngeal ulcers.\n  Alopecia."
         text: |
           الـ dermatologic: **cutaneous vascular lesions**، ==photosensitivity==، **butterfly (malar) rash**، **oral/nasopharyngeal ulcers**، **alopecia**.
+
+          ليه الجلد أشيع مكان؟ لأن الـ UV بيضرب الـ keratinocytes مباشرة (الدرس التاني)، فالجلد المكشوف للشمس هو أول حتة تولّع. علشان كده الـ photosensitivity والـ malar rash على الوش.
       - kind: figure
         page: 316
         quote: "| Criterion | Definition |\n|---|---|\n| 1. Malar rash | A constant red, rash over the cheek bones that spares the natural crease between the nose and corner of the mouth (nasolabial fold). This rash is often called a \"butterfly rash\" because of its mask-like shape. |\n| 2. Discoid rash | Red to violaceous raised patches that can occur anywhere on the skin. Lesions can be acute or chronic, and in some chronic cases may produce decreased pigmentation and even scarring. Skin lesions are usually painless. |\n| 3. Photosensitivity | Skin reaction to sunlight, manifested as a rash, demonstrated either by history or physician observation. |\n| 4. Oral ulcers | Physician-observed mouth (oral) or throat (nasopharyngeal) ulcers. Such ulcers are usually painless. |"
@@ -318,6 +460,17 @@ lessons:
           - ["Photosensitive", "Rash after sun, by history or exam"]
           - ["Oral ulcers", "Physician-observed, usually painless"]
         hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: check
+        page: 316
+        quote: "A constant red, rash over the cheek bones that spares the natural srease between the nose and corner of the mouth (nasolabial fold)."
+        question: "A red rash on both cheeks also fills the nasolabial folds. Does it fit the book's malar rash?"
+        options: ["No: the malar rash spares the nasolabial folds", "Yes: the malar rash always covers the folds", "Yes, if it scars", "No: malar rash is on the trunk"]
+        answer: 0
+        why:
+          - "صح: التعريف بيقول spares the nasolabial fold. لو الطيّة نفسها حمرا فكّر في حاجة تانية."
+          - "العكس بالظبط."
+          - "الـ scar للـ discoid مش للـ malar."
+          - "الـ malar على الـ cheek bones والأنف (شكل الفراشة)."
       - kind: aside
         tone: trap
         page: 316
@@ -333,6 +486,8 @@ lessons:
           - **Avascular necrosis**
           - Arthritis **bilateral**: hands، wrists، knees
           - **Swan neck**، **ulnar deviation**، و ==subluxation with hyperlaxity==
+
+          ليه الاسم Jaccoud؟ لأنها arthropathy من غير erosions: التشوّه من الأربطة السايبة (hyperlaxity) مش من العضم. والـ avascular necrosis في القايمة بسبب الـ vasculopathy (والـ steroids، التفسير المقبول مش في الكتاب).
       - kind: reveal
         page: 317
         quote: "Subluxation with hyperlaxity of joints."
@@ -350,6 +505,19 @@ lessons:
           - ==Pleurisy== = **أشيع** حاجة في الرئة. الـ effusion **small to moderate**، uni أو bilateral، **exudative**. الـ large نادر. (وممكن الـ effusion يكون من nephrotic أو infection أو heart failure.)
           - **Acute lupus pneumonitis:** fever، dyspnea، cough بـ scanty sputum، **hemoptysis**، tachypnea، pleuritic pain.
           - **Pulmonary hemorrhage** و **chronic interstitial lung disease**.
+
+          ليه الـ pleura أشيع؟ لأنها serosal membrane، والـ serosa من التلات أماكن اللي بتميّز الـ lupus من التعريف.
+      - kind: reveal
+        page: 317
+        quote: "Pleural effusions may also occur in SLE patients with nephrotic syndrome, infection, cardiac failure."
+        prompt: "عيانة SLE عندها pleural effusion. ليه ماتقولش على طول «lupus pleurisy»؟"
+        answer: |
+          لأن الكتاب بيدّيك تلات أسباب تانية لنفس الـ effusion في نفس العيانة:
+          - **Nephrotic syndrome** (من الـ lupus nephritis): الـ albumin يقل فالسوائل تطلع، وده **transudate**.
+          - **Infection**: العيانة غالبًا على immunosuppression.
+          - **Cardiac failure**: من الـ myocarditis أو الـ hypertension.
+
+          الـ lupus pleurisy نفسه ==exudative== و small to moderate. فلو الـ effusion كبير أو transudate، ده يخلّيك تدوّر على سبب من التلاتة. ونفس المنطق بيتكرر في الـ pneumonitis: **استبعد العدوى الأول**.
       - kind: aside
         tone: exam
         page: 318
@@ -365,6 +533,16 @@ lessons:
           - **Myocarditis** شبه الـ viral myocarditis.
           - **Libman-Sacks endocarditis**: vegetations **flat, reddish-tan** على الـ **mitral valve** والـ chordae.
           - **Hypertension**، heart failure، **accelerated coronary artery disease (CAD)**، dysrhythmias.
+
+          نفس المنطق: الـ pericardium غشاء serosal، علشان كده الـ pericarditis أشيع حاجة في القلب.
+      - kind: reveal
+        page: 318
+        quote: "Shown here is Libman-Sacks endocarditis in which there are many flat, reddish-tan vegetations spreading over the mitral valve and chordae."
+        prompt: "ليه القلب في الـ lupus بيتأذي في كل طبقاته (pericardium، myocardium، endocardium، coronaries)؟"
+        answer: |
+          ارجع لتعريف المرض: **multisystem** و **serosal membranes**. الـ pericardium غشاء serosal زي الـ pleura، علشان كده ==pericarditis== أشيع حاجة في القلب زي ما الـ pleurisy أشيع حاجة في الرئة.
+
+          والباقي من الـ **immune complexes** والالتهاب: myocarditis شبه الـ viral، و **Libman-Sacks**: vegetations **flat, reddish-tan** على الـ mitral والـ chordae (sterile، مش بكتيريا). والـ **accelerated CAD** بيكمّل الصورة: التهاب مزمن في الأوعية (والـ steroids كمان، التفسير المقبول مش في الكتاب).
       - kind: check
         page: 318
         quote: "Libman-Sacks endocarditis and valvular disease."
@@ -387,17 +565,61 @@ lessons:
     practice: [rheum.L19.046, rheum.L19.047, rheum.L19.048, rheum.L19.049, rheum.L19.050, rheum.L19.051, rheum.L19.052, rheum.L19.053, rheum.L19.054, rheum.L19.055, rheum.L19.056, rheum.L19.057, rheum.L19.058, rheum.L19.059, rheum.L19.060, rheum.L19.061, rheum.L19.062, rheum.L19.063, rheum.L19.104]
   # ------------------------------------------------------------------
   - id: rheum.L19.lesson4
-    title: "الكلية والمخ والدم والـ APS"
-    hook: "ست كلاسات للكلية، وأربع خطط للحمل حسب التاريخ."
-    minutes: 10
-    pages: [319, 322]
-    topics: [renal, neuro-heme, aps]
+    title: "الـ pathology والكلية"
+    hook: "Immune complexes في كل حتة، والكلية أوضح مثال: ست كلاسات من الـ minimal للـ sclerosis."
+    minutes: 8
+    pages: [314, 319]
+    topics: [pathology, renal]
     goals:
-      - "تحفظ الـ 6 classes للـ lupus nephritis"
-      - "تعرف أرقام الدم"
-      - "تختار علاج الـ APS في الحمل حسب التاريخ"
+      - "تعدّ الـ basic pathological features وتعرف جت منين"
+      - "تعرف شكل الكلية تحت الـ light والـ EM"
+      - "تفسّر علامات الـ lupus nephritis وتحفظ الـ 6 classes"
     status: unverified
     steps:
+      - kind: explain
+        remind: [rheum.L19.043]
+        page: 316
+        title: "الـ pathology والكلية"
+        quote: "Immune complex deposition seen in mesangium & subendothelial/subepithelial surface of basement membrane."
+        text: |
+          **الأساسيات (p315):** inflammation، **band or occlusive vasculopathy**، vasculitis، immune complex deposition. والـ **fibrinoid** (مادة eosinophilic) على الأوعية والألياف.
+
+          **الكلية** أوضح organ:
+          - **Light/immunofluorescence (IF):** mesangial proliferation، **fibrinoid necrosis**، inflammation، Ig أو complement deposits.
+          - **EM:** deposits في الـ ==mesangium== والـ **subendothelial / subepithelial** surfaces.
+
+          ليه الكلية بالذات «best characterized»؟ لأن الـ glomerulus فلتر بيعدّي عليه دم كتير، فالـ immune complexes بتتحجز فيه، وكمان الـ biopsy سهل نسبيًا فبقت أكتر عضو اتدرس.
+      - kind: explain
+        page: 315
+        title: "الـ pathology: أربع حاجات أساسية"
+        quote: "Basic Pathological Features of SLE\n  a. Inflammation.\n  b. Band or Occlusive Vasculopathy.\n  c. Vasculitis.\n  d. Immune complex deposition."
+        text: |
+          الكتاب بيلخّص الـ immunopathology في أربع نقط:
+          1. **Inflammation**
+          2. **Band or occlusive vasculopathy**
+          3. **Vasculitis**
+          4. ==Immune complex deposition==
+
+          ليه الأربعة دول؟ لأنهم نتيجة الـ pathogenesis اللي اتعلمناه: الـ autoantibodies بتعمل **immune complexes** مع الـ nuclear antigens، تترسب في جدار الأوعية والأنسجة، فتعمل **inflammation** و **vasculitis**. ولما الوعاء يتأذي ويقفل يبقى **occlusive vasculopathy**. ده بيفسّر ليه المرض بيلمس أي عضو فيه أوعية: الجلد، الكلى، المخ، الـ serosa.
+      - kind: reveal
+        page: 314
+        quote: "Pathology: SLE characterized by wide-spread immune complex deposition, inflammation and vasculitis. Fibrinoid (eosinophilic material) is found along blood vessels and tissue fibres."
+        prompt: "إيه الـ fibrinoid اللي بيتشاف تحت الميكروسكوب في الـ lupus، وفين؟"
+        answer: |
+          مادة ==eosinophilic== (لونها وردي بالـ H&E) بتتشاف **على طول الأوعية الدموية وألياف الأنسجة**.
+
+          الكتاب بيحطها جنب الـ **wide-spread immune complex deposition** والـ vasculitis. التفسير المقبول (مش في الكتاب): الـ fibrinoid هو خليط من الـ immune complexes والـ fibrin والبروتينات اللي خرجت من جدار وعاء ملتهب، يعني «بصمة» الضرر. وهتلاقيها تاني في الكلية تحت اسم **fibrinoid necrosis**.
+      - kind: check
+        page: 316
+        quote: "Immune complex deposition seen in mesangium & subendothelial/subepithelial surface of basement membrane."
+        question: "Where does electron microscopy show immune complexes in lupus kidney?"
+        options: ["Mesangium and subendothelial/subepithelial surfaces of the basement membrane", "Only in the tubules", "Only in the interstitium", "Only in the arterioles"]
+        answer: 0
+        why:
+          - "صح: الـ mesangium + الناحيتين بتوع الـ basement membrane."
+          - "الكتاب ما ذكرش الـ tubules في الـ EM."
+          - "الـ interstitium مش في جملة الكتاب."
+          - "الترسيب في الـ glomerulus نفسه."
       - kind: explain
         page: 319
         title: "Lupus nephritis"
@@ -410,6 +632,20 @@ lessons:
           - **Hematuria**
           - **Proteinuria > 0.5 g/day** أو **3+**
           - **Casts**
+
+          ليه الهدف «slowing the progression» مش الشفا؟ لأن الـ LN مزمن وبيرجع، والخطر الحقيقي إنه يوصل ESRD (درس العلاج).
+      - kind: reveal
+        page: 319
+        quote: "Proteinure (>0.5g protein/d or 3+)."
+        prompt: "ليه كل علامة من علامات الـ lupus nephritis بتحصل؟ (new HTN، edema، hematuria، proteinuria، casts)"
+        answer: |
+          كله من الـ ==glomerulus الملتهب==:
+          - **Proteinuria > 0.5 g/day أو 3+**: الـ filter باظ فالبروتين بيعدّي. لو كتير يوصل nephrotic.
+          - **Edema و weight gain**: البروتين بيضيع والملح والمية بيتحجزوا.
+          - **Hematuria** و **casts**: كرات دم بتعدّي من glomerulus ملتهب وتتقولب في الـ tubules (الـ cast دليل إن المصدر الكلية نفسها).
+          - **New-onset hypertension**: الكلية الملتهبة بتحجز ملح ومية.
+
+          التفسير المقبول (مش في الكتاب) في الـ edema والـ HTN. والرقم **0.5 g** هو نفسه اللي في الـ **renal criterion** في الـ 11 criteria، فاحفظه مرة واحدة.
       - kind: figure
         remind: [neph.L14.lesson2:MM FD MS]
         page: 319
@@ -457,6 +693,37 @@ lessons:
           - "الـ IV فوق 50%."
           - "الـ II mesangial hypercellularity بس."
           - "الـ V membranous، nephrotic."
+      - kind: reveal
+        page: 319
+        quote: "Class IV     Diffuse proliferative         >50% glomeruli involved; segmental/global"
+        prompt: "ليه الـ class III والـ IV بالذات هما اللي بنقلق منهم؟"
+        answer: |
+          لأنهم الـ ==proliferative==: الخلايا بتتكاثر جوه الـ glomeruli وتقفلها. الفرق بينهم الـ extent: III **أقل من 50%** من الـ glomeruli، و IV **أكتر من 50%** (segmental أو global).
+
+          وعلشان كده درس العلاج هيقولك إن الـ **proliferative LN** هو اللي بياخد ==glucocorticoids + immunosuppressant== علشان يمنع الـ ESRD. أما الـ **V** فهو الـ **membranous**: الصورة nephrotic في الأساس. والـ **VI** sclerosis مزمن، يعني ضرر قديم مش التهاب نشط.
+      - kind: try
+        items: [rheum.L19.034, rheum.L19.045, rheum.L19.064, rheum.L19.066, rheum.L19.067]
+    recap:
+      - "Inflammation، band/occlusive vasculopathy، vasculitis، immune complex deposition."
+      - "Fibrinoid: eosinophilic على الأوعية والألياف."
+      - "الكلية: mesangial proliferation، fibrinoid necrosis؛ EM: mesangium + subendothelial/subepithelial."
+      - "LN: new HTN، hematuria، proteinuria > 0.5 g/day أو 3+، casts. الهدف: إبطاء التدهور."
+      - "Classes: I minimal، II mesangial، III focal < 50%، IV diffuse > 50%، V membranous nephrotic، VI sclerosing."
+    practice: [rheum.L19.034, rheum.L19.043, rheum.L19.044, rheum.L19.045, rheum.L19.064, rheum.L19.065, rheum.L19.066, rheum.L19.067, rheum.L19.068]
+  # ------------------------------------------------------------------
+  # Split from lesson4 on 2026-11-13 (#828): nervous system, blood and APS.
+  - id: rheum.L19.lesson7
+    title: "المخ والدم والـ APS"
+    hook: "Coombs-positive anemia، و aPL عند 40%: النص بس بيعملوا جلطة أو إجهاض."
+    minutes: 9
+    pages: [319, 322]
+    topics: [neuro-heme, aps]
+    goals:
+      - "تعرف مظاهر الأعصاب وأرقام الدم وسبب كل واحد"
+      - "تحفظ الـ Sapporo criteria"
+      - "تختار علاج الـ APS حسب التاريخ"
+    status: unverified
+    steps:
       - kind: explain
         remind: [rheum.L19.069]
         page: 319
@@ -469,6 +736,27 @@ lessons:
           - **Normochromic normocytic** anemia شائعة (chronic inflammation، drug-related bleeding)، بس الـ ==Coombs-positive hemolytic anemia== هي الـ feature.
           - **Thrombocytopenia < 100×10⁹/L**: anti-platelet أو antiphospholipid antibodies.
           - **Leucopenia < 4.0×10⁹/L**: autoantibodies، marrow، splenic pooling، complement. والـ immunosuppressants نفسها ممكن تعملها.
+
+          ليه الـ Coombs-positive بالذات؟ لأنه دليل مباشر إن فيه antibody على كرات الدم الحمرا، يعني المرض نفسه هو اللي بيكسّرها، مش مجرد التهاب مزمن. وده سبب إنه هو اللي في الـ haematologic criterion.
+      - kind: check
+        page: 319
+        quote: "Haemolytic anemia as detected by the Coombs‘ test is the feature of SLE."
+        question: "A woman with SLE has anemia. Which type does the book call 'the feature of SLE'?"
+        options: ["Coombs-positive haemolytic anemia", "Normochromic normocytic anemia of chronic inflammation", "Iron deficiency from drugs", "Pure red cell aplasia"]
+        answer: 0
+        why:
+          - "صح: الشائع normocytic، بس اللي «feature» ومن الـ criteria هو الـ hemolytic اللي الـ Coombs بيكشفه."
+          - "دي الأشيع (frequently found) بس مش الـ feature."
+          - "الـ drug-related haemorrhage سبب للـ normocytic في الكتاب، مش الـ feature."
+          - "الكتاب بيقول on rare occasion بس."
+      - kind: reveal
+        page: 320
+        quote: "It should also noted that the immunosuppressive drugs used in the treatment of SLE may cause a marked leucopenia."
+        prompt: "عيانة SLE على azathioprine، الـ WBC بقى 2.5. هل ده lupus نشط؟"
+        answer: |
+          مش لازم. الكتاب بيدّي **أربع أسباب للـ leucopenia من المرض نفسه**: autoantibodies بتكسّر الخلايا، **decreased marrow production**، **splenic pooling**، و **complement activation**.
+
+          وبعدين بيحذّر: ==الـ immunosuppressive drugs نفسها== ممكن تعمل **marked leucopenia**. يعني نفس الرقم ممكن يكون المرض أو العلاج، والقرار مختلف تمامًا: في الأولى ممكن تزوّد العلاج، وفي التانية تقلله. علشان كده لازم تسأل على الأدوية قبل ما تفسّر الـ CBC.
       - kind: explain
         remind: [rheum.L19.076]
         page: 320
@@ -482,6 +770,34 @@ lessons:
           1. **Vascular thrombosis** (arterial، venous، small vessel)
           2. **Pregnancy morbidity:** loss بعد **10 أسابيع**، أو preterm قبل **34 أسبوع**، أو **3+** abortions متتالية
           3. **Lab:** Lupus anticoagulant (LA) أو anticardiolipin antibodies (aCL) medium titre، positive **over 6 weeks**
+
+          ليه لازم clinical + lab مع بعض؟ لأن 40% عندهم الـ antibody ونصهم بس بيتعبوا، فالـ antibody لوحده مش تشخيص. والـ 6 weeks علشان تتأكد إنه ثابت مش transient (التفسير المقبول، مش في الكتاب).
+      - kind: figure
+        page: 320
+        quote: "APS (Sapporo classification)\n  1- Vascular thrombosis (arterial, venous, small vessels).\n  2- Pregnancy morbidity (one or more fetal losses after 10 wk, one or more premature births before 34wk (pre-eclampsia or placental insufficiency), or three or more successive spontaneous abortions."
+        title: "Sapporo: clinical + lab"
+        alt: "Two clinical boxes, vascular thrombosis (arterial, venous, small vessel) and pregnancy morbidity (loss after 10 weeks, premature birth before 34 weeks, 3 or more successive abortions), joined by an OR, then a plus sign to a laboratory box: lupus anticoagulant or anticardiolipin medium titre, positive over 6 weeks."
+        caption: "واحدة **clinical** على الأقل (==thrombosis== أو pregnancy morbidity) + **lab** إيجابي ومتكرر. الـ antibody لوحده من غير حدث مش APS: نص الـ aPL positive بس هما اللي بيتعبوا."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="148" height="128" rx="10" class="fg-bad"/>
+            <text x="84" y="34" text-anchor="middle" class="t-sm t-b">Thrombosis</text>
+            <text x="84" y="62" text-anchor="middle" class="t-sm">arterial</text>
+            <text x="84" y="84" text-anchor="middle" class="t-sm">venous</text>
+            <text x="84" y="106" text-anchor="middle" class="t-sm">small vessel</text>
+            <text x="165" y="80" text-anchor="middle" class="t-sm t-b">or</text>
+            <rect x="172" y="10" width="148" height="128" rx="10" class="fg-acc"/>
+            <text x="246" y="34" text-anchor="middle" class="t-sm t-b">Pregnancy</text>
+            <text x="246" y="62" text-anchor="middle" class="t-sm">loss after 10 wk</text>
+            <text x="246" y="84" text-anchor="middle" class="t-sm">birth before 34 wk</text>
+            <text x="246" y="106" text-anchor="middle" class="t-sm">3+ abortions</text>
+            <text x="165" y="172" text-anchor="middle" class="t-lg t-b">+</text>
+            <rect x="40" y="192" width="250" height="90" rx="10" class="fg-box"/>
+            <text x="165" y="216" text-anchor="middle" class="t-sm t-b">Laboratory</text>
+            <text x="165" y="242" text-anchor="middle" class="t-sm">LA or aCL, medium titre</text>
+            <text x="165" y="266" text-anchor="middle" class="t-sm">positive over 6 weeks</text>
+            <text x="165" y="310" text-anchor="middle" class="t-sm t-mut">SLE: 40% have aPL, half get events</text>
+          </svg>
       - kind: update
         page: 321
         quote: "3- Laboratory: A- LA or aCL medium titre. B- Positive over 6 wks."
@@ -495,6 +811,8 @@ lessons:
           - **Primary prevention:** ==low-dose aspirin== + قيّم باقي الـ risk factors. الـ **estrogen** بيزوّد الجلطات.
           - **بعد thrombosis (مش حامل):** **long-term oral anticoagulation**.
           - **حامل:** **heparin (UFH أو low-molecular-weight heparin (LMWH)) + aspirin**.
+
+          يعني العلاج على قد الحدث: مفيش حدث ← aspirin؛ جلطة ← anticoagulation طويل؛ حمل ← heparin لأن الـ warfarin مش بيتاخد في الحمل (التفسير المقبول، مش في الكتاب).
       - kind: table
         page: 321
         quote: "Past thrombosis: Low dose Aspirin + therapeutic Heparin."
@@ -534,27 +852,27 @@ lessons:
           **Clinical:** recurrent abortion، thrombosis متكررة في **أماكن غريبة**، hemolytic anemia، thrombocytopenia.
 
           **Lab:** ==anticardiolipin==، **lupus anticoagulant**، **anti-β2 glycoprotein 1**.
+
+          ليه «أماكن غريبة»؟ لأن الجلطة في مكان مش معتاد في شاب من غير سبب واضح هي اللي بتخليك تدوّر على الـ antiphospholipid antibodies.
       - kind: try
-        items: [rheum.L19.066, rheum.L19.064, rheum.L19.075, rheum.L19.080, rheum.L19.081]
+        items: [rheum.L19.070, rheum.L19.072, rheum.L19.075, rheum.L19.080, rheum.L19.082]
     recap:
-      - "LN: new HTN، hematuria، proteinuria > 0.5 g/day أو 3+، casts. الهدف: إبطاء التدهور."
-      - "Classes: I minimal، II mesangial، III focal < 50%، IV diffuse > 50%، V membranous nephrotic، VI sclerosing."
-      - "Coombs hemolytic anemia = الـ feature. Platelets < 100، WBC < 4."
-      - "40% aPL، النص بس يتعبوا. Sapporo: thrombosis، pregnancy (10 wk، 34 wk، 3 abortions)، lab 6 wk."
+      - "Neuro: seizures، neuropathy، cognitive، psychosis/depression."
+      - "Coombs hemolytic anemia = الـ feature. Platelets < 100، WBC < 4 (والأدوية كمان)."
+      - "40% aPL، النص بس يتعبوا. Sapporo: thrombosis أو pregnancy (10 wk، 34 wk، 3 abortions) + lab 6 wk."
       - "Aspirin للكل؛ losses كتير ← + prophylactic heparin؛ thrombosis ← + therapeutic heparin."
-    practice: [rheum.L19.064, rheum.L19.065, rheum.L19.066, rheum.L19.067, rheum.L19.068, rheum.L19.069, rheum.L19.070, rheum.L19.071, rheum.L19.072, rheum.L19.073, rheum.L19.074, rheum.L19.075, rheum.L19.076, rheum.L19.077, rheum.L19.078, rheum.L19.079, rheum.L19.080, rheum.L19.081, rheum.L19.082, rheum.L19.083, rheum.L19.106]
+    practice: [rheum.L19.069, rheum.L19.070, rheum.L19.071, rheum.L19.072, rheum.L19.073, rheum.L19.074, rheum.L19.075, rheum.L19.076, rheum.L19.077, rheum.L19.078, rheum.L19.079, rheum.L19.080, rheum.L19.081, rheum.L19.082, rheum.L19.083, rheum.L19.106]
   # ------------------------------------------------------------------
   - id: rheum.L19.lesson5
-    title: "التشخيص والعلاج والحمل"
-    hook: "4 من 11، MMF مكان الـ cyclophosphamide، وأدوية مسموحة وممنوعة في الحمل."
-    minutes: 10
-    pages: [322, 324]
-    topics: [criteria, ln-treatment, pregnancy, nonrenal]
+    title: "الـ criteria وعلاج الـ lupus nephritis"
+    hook: "4 من 11، و MMF بنفس كفاءة الـ cyclophosphamide وأأمن."
+    minutes: 8
+    pages: [322, 323]
+    topics: [criteria, ln-treatment]
     goals:
       - "تعدّ الـ 11 criteria"
-      - "تعرف علاج ومتابعة الـ lupus nephritis"
-      - "تفرّق الأدوية المسموحة والممنوعة في الحمل"
-      - "تدرّج الـ non-renal SLE: mild، moderate، severe"
+      - "تعرف متابعة الـ lupus nephritis وليه الـ dsDNA و C3 supplemental"
+      - "تختار بين cyclophosphamide و MMF وتعرف مكان الـ transplant"
     status: unverified
     steps:
       - kind: explain
@@ -576,6 +894,8 @@ lessons:
           9. **Haematologic:** hemolytic anemia، leukopenia/lymphopenia، thrombocytopenia
           10. **Immunological:** anti-DNA، anti-Sm، anticardiolipin
           11. **Antinuclear antibodies (ANA)**
+
+          ليه 4 مش واحدة؟ لأن ولا criterion لوحده specific؛ الـ ANA نفسه موجود في أمراض تانية. التجميع هو اللي بيدّي الثقة.
       - kind: mnemonic
         page: 322
         quote: "Classification criteria for diagnosis of SLE (>4 of 11)\nMalar rash.\nDiscoid rash.\nPhotosensitivity.\nOral ulcers.\nArthritis.\nSerositis."
@@ -593,6 +913,17 @@ lessons:
           - { key: "M", text: "Malar rash" }
           - { key: "D", text: "Discoid rash" }
         hook: "الـ mnemonic المشهور: **SOAP BRAIN MD**، صابونة للمخ يا دكتور. 11 حرف = 11 criteria."
+      - kind: check
+        page: 322
+        quote: "Classification criteria for diagnosis of SLE (>4 of 11)"
+        question: "A woman has a malar rash, oral ulcers and a positive ANA. Which single new finding brings her to 4 of the 11 criteria?"
+        options: ["Proteinuria above 0.5 g per day", "Raynaud phenomenon", "Alopecia", "Normocytic anemia"]
+        answer: 0
+        why:
+          - "صح: الـ renal disorder criterion هو proteinuria > 0.5 g أو cells/casts."
+          - "الـ Raynaud شائع بس مش من الـ 11 (ومش specific)."
+          - "الـ alopecia في قايمة الجلد بس مش criterion."
+          - "الـ haematologic criterion هو hemolytic anemia، مش الـ normocytic."
       - kind: update
         page: 322
         quote: "Classification criteria for diagnosis of SLE (>4 of 11)"
@@ -611,6 +942,38 @@ lessons:
           - ==Mycophenolate mofetil== نفس كفاءة الـ pulse cyclophosphamide وأأمن.
           - الـ **flares** بعد الـ remission مش نادرة ← follow-up.
           - **ESRD:** dialysis و transplant نتايجهم زي غير الـ systemic lupus erythematosus (SLE)؛ الـ **transplant** هو الـ method of choice.
+
+          ليه الـ proliferative بالذات بياخد immunosuppression؟ لأن الـ class III و IV هما اللي الخلايا فيهم بتتكاثر وتقفل الـ glomeruli، فلو ماتهدّاش يوصل ESRD.
+      - kind: figure
+        page: 323
+        quote: "Mycophenolate mofetil has demonstrated similar efficacy compared with pulse cyclophosphamide and a more favourable toxicity profile."
+        title: "طريق الـ proliferative LN"
+        alt: "Flow from proliferative lupus nephritis to glucocorticoids plus an immunosuppressant, which branches into cyclophosphamide (long-term efficacy proven, considerable adverse effects) and mycophenolate mofetil (similar efficacy to pulse cyclophosphamide, better toxicity). Below: flares after remission need follow-up; end-stage renal disease is treated by dialysis or transplantation, transplantation preferred."
+        caption: "الاتنين شغالين: ==cyclophosphamide== عنده الدليل الـ long-term، والـ **MMF** نفس الكفاءة بـ toxicity أقل. ولو وصلت ESRD، الـ **transplant** هو الاختيار."
+        svg: |
+          <svg viewBox="0 0 330 350" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L19t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="45" y="10" width="240" height="44" rx="10" class="fg-bad"/>
+            <text x="165" y="37" text-anchor="middle" class="t-sm t-b">Proliferative LN</text>
+            <path d="M165 54 V74" class="fg-arrow" marker-end="url(#L19t)"/>
+            <rect x="45" y="76" width="240" height="44" rx="10" class="fg-acc"/>
+            <text x="165" y="103" text-anchor="middle" class="t-sm t-b">Glucocorticoids + immunosuppressant</text>
+            <path d="M110 120 L85 142" class="fg-arrow" marker-end="url(#L19t)"/>
+            <path d="M220 120 L245 142" class="fg-arrow" marker-end="url(#L19t)"/>
+            <rect x="10" y="144" width="150" height="80" rx="10" class="fg-box"/>
+            <text x="85" y="166" text-anchor="middle" class="t-sm t-b">Cyclophosphamide</text>
+            <text x="85" y="188" text-anchor="middle" class="t-sm">long-term proof</text>
+            <text x="85" y="208" text-anchor="middle" class="t-sm t-bad">many side effects</text>
+            <rect x="170" y="144" width="150" height="80" rx="10" class="fg-box"/>
+            <text x="245" y="166" text-anchor="middle" class="t-sm t-b">Mycophenolate</text>
+            <text x="245" y="188" text-anchor="middle" class="t-sm">similar efficacy</text>
+            <text x="245" y="208" text-anchor="middle" class="t-sm t-good">safer profile</text>
+            <rect x="10" y="240" width="310" height="40" rx="8" class="fg-thin"/>
+            <text x="165" y="265" text-anchor="middle" class="t-sm">Flares after remission: follow up</text>
+            <rect x="10" y="292" width="310" height="48" rx="8" class="fg-box"/>
+            <text x="165" y="313" text-anchor="middle" class="t-sm t-b">ESRD: dialysis or transplant</text>
+            <text x="165" y="331" text-anchor="middle" class="t-sm t-mut">transplant = method of choice</text>
+          </svg>
       - kind: check
         page: 323
         quote: "Changes in immunological tests (anti-dsDNA, serum C3) have only limited ability to predict the response to treatment and may be used only as supplemental information."
@@ -626,6 +989,35 @@ lessons:
           - "الـ anti-dsDNA دوره محدود، supplemental."
           - "الـ C3 كمان محدود."
           - "الـ ANA مش أداة متابعة."
+      - kind: reveal
+        page: 323
+        quote: "Dialysis and transplantation in SLE have rates for long-term patient and graft-survival comparable with those observed in non-diabetic non-SLE patients, with transplantation being the method of choice."
+        prompt: "ليه الكتاب بيقول إن الـ anti-dsDNA والـ C3 «supplemental» بس، وليه الـ transplant مقبول في عيان lupus؟"
+        answer: |
+          **المتابعة:** الـ biopsy والـ sediment والـ proteinuria والـ kidney function بيقيسوا **الكلية نفسها**، فليهم ==independent predictive ability==. أما الـ anti-dsDNA والـ C3 بيقيسوا **نشاط المناعة** بشكل عام، فتغيّرهم ما بيتنبأش كويس بالـ response. يعني بتبص على العضو مش على الدم بس.
+
+          **الـ ESRD:** نتايج الـ dialysis والـ transplant في الـ SLE **زي** غير الـ diabetic غير الـ SLE، علشان كده مفيش سبب تحرم العيان من الـ transplant، وهو ==method of choice==. وبما إن الـ **flares** بعد الـ remission مش نادرة، المتابعة لازم تفضل مستمرة.
+      - kind: try
+        items: [rheum.L19.084, rheum.L19.086, rheum.L19.088, rheum.L19.090, rheum.L19.092]
+    recap:
+      - "4 من 11: SOAP BRAIN MD. الأحدث: ANA ≥ 1:80 ثم ≥ 10 نقط."
+      - "LN: biopsy + sediment + proteinuria + function؛ dsDNA و C3 supplemental."
+      - "Proliferative: GCs + immunosuppressant؛ MMF زي الـ CYC وأأمن؛ flares ← follow-up؛ transplant للـ ESRD."
+    practice: [rheum.L19.084, rheum.L19.085, rheum.L19.086, rheum.L19.087, rheum.L19.088, rheum.L19.089, rheum.L19.090, rheum.L19.091, rheum.L19.092, rheum.L19.102, rheum.L19.107]
+  # ------------------------------------------------------------------
+  # Split from lesson5 on 2026-11-13 (#828): pregnancy and non-renal treatment.
+  - id: rheum.L19.lesson8
+    title: "الحمل وعلاج الـ non-renal SLE"
+    hook: "الخصوبة زي الطبيعي، بس الـ M والـ C بره الحمل. والشدة بالأرقام: 9/18، 100/50/20."
+    minutes: 8
+    pages: [323, 324]
+    topics: [pregnancy, nonrenal]
+    goals:
+      - "تعرف مخاطر الحمل على الأم والجنين ومين أكتر عرضة"
+      - "تفرّق الأدوية المسموحة والممنوعة في الحمل"
+      - "تدرّج الـ non-renal SLE وتختار العلاج"
+    status: unverified
+    steps:
       - kind: explain
         remind: [rheum.L19.095]
         page: 323
@@ -636,6 +1028,34 @@ lessons:
           - الحمل ممكن يزوّد النشاط، بس الـ flares غالبًا ==mild==.
           - **LN + aPL** ← risk أعلى لـ **pre-eclampsia** ← متابعة أقرب.
           - **الجنين** (لو LN أو aPL أو anti-Ro/La): miscarriage، stillbirth، preterm، **intrauterine growth restriction (IUGR)**، و **congenital heart block**.
+
+          ليه الـ LN والـ aPL بالذات؟ لأن الاتنين بيأذوا الأوعية: الكلية المريضة بتعلّي الضغط، والـ aPL بيعمل جلطات في الـ placenta، فالـ pre-eclampsia والـ fetal loss يزيدوا.
+      - kind: figure
+        page: 324
+        quote: "SLE may affect the fetus in several ways, especially if the mother has a history of lupus nephritis, antiphospholipid, anti-Ro and/or anti-La antibodies."
+        title: "مين الأم اللي في خطر، وإيه اللي يحصل للجنين؟"
+        alt: "Left column: maternal risk markers, lupus nephritis, antiphospholipid antibodies, anti-Ro or anti-La. Arrow to the right column: fetal risks, miscarriage, stillbirth, premature delivery, intrauterine growth restriction, congenital heart block. A bottom bar notes that lupus nephritis plus antiphospholipid antibodies also raise the mother's pre-eclampsia risk."
+        caption: "تلات علامات عند الأم (==LN، aPL، anti-Ro/La==) بتزوّد خمس مخاطر للجنين. والـ **LN + aPL** كمان بيزوّدوا الـ pre-eclampsia عند الأم نفسها."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L19p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="8" y="10" width="128" height="200" rx="10" class="fg-acc"/>
+            <text x="72" y="34" text-anchor="middle" class="t-sm t-b">Mother</text>
+            <text x="72" y="72" text-anchor="middle" class="t-sm">Lupus nephritis</text>
+            <text x="72" y="112" text-anchor="middle" class="t-sm">aPL</text>
+            <text x="72" y="152" text-anchor="middle" class="t-sm">anti-Ro / La</text>
+            <path d="M138 110 H170" class="fg-arrow" marker-end="url(#L19p)"/>
+            <rect x="174" y="10" width="148" height="200" rx="10" class="fg-bad"/>
+            <text x="248" y="34" text-anchor="middle" class="t-sm t-b">Fetus</text>
+            <text x="248" y="64" text-anchor="middle" class="t-sm">miscarriage</text>
+            <text x="248" y="92" text-anchor="middle" class="t-sm">stillbirth</text>
+            <text x="248" y="120" text-anchor="middle" class="t-sm">premature delivery</text>
+            <text x="248" y="148" text-anchor="middle" class="t-sm">IUGR</text>
+            <text x="248" y="176" text-anchor="middle" class="t-sm">heart block</text>
+            <rect x="8" y="226" width="314" height="60" rx="10" class="fg-box"/>
+            <text x="165" y="250" text-anchor="middle" class="t-sm t-b">LN + aPL: pre-eclampsia risk</text>
+            <text x="165" y="272" text-anchor="middle" class="t-sm t-mut">monitor more closely</text>
+          </svg>
       - kind: sort
         page: 324
         quote: "These conditions are associated with:\n  An increase in the risk of miscarriage, still birth, premature delivery, intrauterine growth restriction and fetal congenital heart block.\n  Prednisolone, azathioprine, hydroxychloroquine and low-dose aspirin may be used in lupus pregnancies.\n  At present, evidence suggests that mycophenolate mofetil, cyclophosphamide and methotrexate must be avoided."
@@ -650,6 +1070,16 @@ lessons:
           - { text: "Cyclophosphamide", bin: 1 }
           - { text: "Methotrexate", bin: 1 }
         why: "المسموح: **pred، AZA، hydroxychloroquine (HCQ)، aspirin**. الممنوع: **mycophenolate mofetil (MMF)، CYC، MTX** (كلهم teratogenic). خليها: «الـ M والـ C بره الحمل»."
+      - kind: reveal
+        page: 324
+        quote: "At present, evidence suggests that mycophenolate mofetil, cyclophosphamide and methotrexate must be avoided."
+        prompt: "عيانة lupus nephritis مستقرة على mycophenolate وعايزة تحمل. تعمل إيه وليه؟"
+        answer: |
+          الـ **MMF** من التلاتة اللي الكتاب بيقول ==must be avoided== في الحمل (MMF، cyclophosphamide، methotrexate). يعني لازم يتغيّر **قبل** الحمل لدوا من المسموحين: **azathioprine** (مع **prednisolone** و **hydroxychloroquine** لو محتاجة).
+
+          ليه مانوقفش العلاج خالص؟ لأن الكتاب بيقول إن الحمل ممكن يزوّد نشاط المرض، والـ LN بالذات بيزوّد risk الـ pre-eclampsia. فالهدف: تحمل وهي مستقرة، على دوا آمن.
+
+          التفسير المقبول (مش في الكتاب): التلاتة الممنوعين teratogenic، وعادة بيتوقفوا قبل الحمل بفترة كافية.
       - kind: table
         page: 324
         quote: "Treatment of non-renal SLE. Top-to bottom sequence does not imply order of preference (eg, MTX, AZA and MMF are equal options for second-line therapy in mild disease or first-line therapy in moderate disease). *Mild disease: constitutional symptoms; mild arthritis; rash ≤9% body surface area; PLT 50– 100 × 109/L; SLEDAI ≤6; BILAG C or ≤1 BILAG B manifestation. *Moderate disease: moderate-severe arthritis 'RA-like'; rash 9%-18% BSA; PLTs 20-50×109/L; serositis; SLEDAI 7–12; ≥2 BILAG B manifestations. *Severe disease: major organ threatening disease (cerebritis, myelitis, pneumonitis, mesenteric vasculitis); thrombocytopenia with PLTs <20 × 109/L;TTP-like disease or acute hemophagocytic syndrome; rash>18% BSA; SLEDAI >12; ≥1 BILAG A manifestations. †Recommendation of belimumab and anifrolumab as first-line therapy in severe disease refers to cases of extra renal SLE with non-major organ involvement, but extensive disease from skin, joints, and so on. The use of anifrolumab as add-on therapy in severe disease refers mainly to severe skin disease. For patients with severe neuropsychiatric disease, anifrolumab and belimumab are not recommended."
@@ -676,6 +1106,8 @@ lessons:
           - **Methotrexate (MTX)، azathioprine (AZA)، mycophenolate mofetil (MMF)** متساويين: second-line في الـ mild، first-line في الـ moderate.
           - **Belimumab و anifrolumab** first-line في الـ severe **extrarenal** من غير major organ (جلد ومفاصل كتير). الـ anifrolumab add-on غالبًا للجلد.
           - في الـ ==severe neuropsychiatric==: **مش recommended**.
+
+          ليه التدرج ده؟ لأن العلاج على قد الخطر: الـ mild ممكن يكفيه أدوية أخف، والـ severe اللي بيهدد عضو محتاج علاج أقوى بسرعة. والـ biologics مش recommended في الـ severe neuropsychiatric والكتاب بيستثني الحالة دي صراحة.
       - kind: aside
         tone: tip
         page: 324
@@ -696,11 +1128,10 @@ lessons:
             answer: 0
             why: "في الـ severe neuropsychiatric disease الاتنين **not recommended**."
       - kind: try
-        items: [rheum.L19.084, rheum.L19.090, rheum.L19.096, rheum.L19.098, rheum.L19.107]
+        items: [rheum.L19.093, rheum.L19.096, rheum.L19.097, rheum.L19.099, rheum.L19.101]
     recap:
-      - "4 من 11: SOAP BRAIN MD. الأحدث: ANA ≥ 1:80 ثم ≥ 10 نقط."
-      - "LN: biopsy + sediment + proteinuria + function؛ dsDNA و C3 supplemental."
-      - "Proliferative: GCs + immunosuppressant؛ MMF زي الـ CYC وأأمن؛ transplant للـ ESRD."
-      - "حمل: flares mild، LN + aPL ← pre-eclampsia. مسموح pred/AZA/HCQ/aspirin؛ ممنوع MMF/CYC/MTX."
+      - "حمل: الخصوبة زي الطبيعي، flares mild، LN + aPL ← pre-eclampsia."
+      - "الجنين: miscarriage، stillbirth، preterm، IUGR، heart block (LN، aPL، anti-Ro/La)."
+      - "مسموح pred/AZA/HCQ/aspirin؛ ممنوع MMF/CYC/MTX."
       - "Severity: rash 9/18، platelets 100/50/20، SLEDAI 6/12. لا biologics في الـ severe NPSLE."
-    practice: [rheum.L19.084, rheum.L19.085, rheum.L19.086, rheum.L19.087, rheum.L19.088, rheum.L19.089, rheum.L19.090, rheum.L19.091, rheum.L19.092, rheum.L19.093, rheum.L19.094, rheum.L19.095, rheum.L19.096, rheum.L19.097, rheum.L19.098, rheum.L19.099, rheum.L19.100, rheum.L19.101, rheum.L19.102, rheum.L19.103, rheum.L19.107]
+    practice: [rheum.L19.093, rheum.L19.094, rheum.L19.095, rheum.L19.096, rheum.L19.097, rheum.L19.098, rheum.L19.099, rheum.L19.100, rheum.L19.101, rheum.L19.103]

@@ -2,18 +2,31 @@ schema: batna.lesson/v1
 lecture: rheum.L05
 lessons:
   # ------------------------------------------------------------------
+  # Book order. Ids are never reused: lesson3 (pp 79-82, T and B cell
+  # tolerance) was split out of lesson1; the two principal factors (p79)
+  # moved from lesson2 into lesson1 beside the definition (#828, 2026-11-13).
   - id: rheum.L05.lesson1
     title: "الجهاز المناعي بيعرف أهله إزاي؟"
     hook: "كل يوم جسمك بيصنع ملايين خلايا ممكن تهاجمه. السؤال مش ليه بيحصل autoimmunity، السؤال ليه مش بيحصل دايمًا."
-    minutes: 9
-    pages: [78, 80]
-    topics: [tolerance, principles, t-tolerance, b-tolerance]
+    minutes: 8
+    pages: [77, 79]
+    topics: [tolerance, principles]
     goals:
       - "تفرّق بين activation و tolerance و ignorance"
-      - "تشرح الـ central و peripheral tolerance للـ T و B cells"
-      - "تعرّف الـ anergy (سؤال كتاب)"
+      - "تشرح ليه فيه خطين دفاع: central و peripheral"
+      - "تعرف العاملين الأساسيين في الـ autoimmunity"
     status: unverified
     steps:
+      - kind: explain
+        page: 77
+        title: "خريطة المحاضرة"
+        quote: "One of the cardinal features of the immune system, namely, is ability of discrimination between self and non self antigens."
+        text: |
+          الكتاب بيفتح بجملة واحدة هي المحاضرة كلها: أهم ميزة في الجهاز المناعي إنه ==يفرّق بين self و non-self==.
+
+          والـ agenda ماشية بالترتيب ده: الـ **tolerance** (يعني إيه وليه مهمة)، بعدين الـ **central T tolerance**، بعدين الـ **peripheral T tolerance** بتلات طرق (**anergy** و **deletion** و **immune suppression**)، بعدين الـ **B cell tolerance**، وفي الآخر **الجينات** و **العدوى**.
+
+          ليه الترتيب ده؟ عشان المحاضرة بتبني المرض من الطبيعي: الأول تعرف إزاي الجسم بيحمي نفسه، وبعدين تفهم الـ autoimmunity على إنها **الحماية دي لما تقع**. يعني كل mechanism هتذاكره دلوقتي هو مكان ممكن يحصل فيه عطل.
       - kind: explain
         page: 78
         title: "self ولا non-self؟"
@@ -22,6 +35,8 @@ lessons:
           أهم ميزة في الجهاز المناعي إنه **يفرّق بين self و non-self**.
 
           لو التفريق ده باظ، المناعة تهاجم خلايا الجسم نفسه. ده اسمه ==autoimmunity==، والأمراض اللي بتطلع منه هي **autoimmune diseases**.
+
+          التفسير المقبول (مش في الكتاب): ليه التفريق ده صعب أصلًا؟ عشان الـ lymphocyte receptors بتتعمل **عشوائي** عشان تقدر تمسك أي ميكروب ممكن يظهر، فلازم بعض الـ receptors تطلع بتمسك أنسجتنا إحنا. يعني الـ self-reactive cells مش غلطة نادرة، دي ثمن التنوع، والـ tolerance هي اللي بتنضّف وراه.
       - kind: table
         page: 78
         quote: "Tolerance: The lymphocytes may be functionally inactivated or killed resulting in tolerance; antigens that induce tolerance are said to be tolerogenic"
@@ -42,6 +57,16 @@ lessons:
           ساكن العمارة (**self antigen**) يا إما الأمن عارفه وبيسلّم عليه (**tolerogenic**)، يا إما ساكن في الدور الأخير وعمره ما نزل فالأمن **ignoring** وجوده خالص.
       - kind: explain
         page: 78
+        title: "ليه الـ ignorance مش أمان كامل؟"
+        quote: "Ignorance: In some situations the antigen specific lymphocytes may not react in any way, implying that the lymphocytes simply ignore the presence of the antigen"
+        text: |
+          الكتاب بيقول الـ lymphocyte ممكن **simply ignore** الـ antigen وماتعملش أي حاجة.
+
+          التفسير المقبول (مش في الكتاب): ده بيحصل غالبًا لما الـ antigen **مستخبي** عن المناعة، في مكان الـ lymphocytes مش بتوصله، أو بكمية صغيرة جدًا. الخلية الـ self-reactive لسه **عايشة وسليمة**، هي بس ماشافتش الـ antigen.
+
+          يعني الـ ignorance هدنة مش سلام. لو حاجة كشفت الـ antigen فجأة (جرح، عدوى)، الخلية اللي كانت متجاهلاه ممكن تهاجمه. وده بالظبط اللي هتشوفه في صفحة 81 مع الـ **sequestered antigens** زي العين والـ testis.
+      - kind: explain
+        page: 78
         title: "ليه الـ tolerance مهمة؟"
         quote: "Strategies for inducing tolerance are being tested to treat allergic and autoimmune diseases and to prevent the rejection of organ transplantation."
         text: |
@@ -49,6 +74,21 @@ lessons:
           2. لو عرفنا **نعمل tolerance** لـ antigen معيّن، نقدر نمنع أي immune reaction مش عايزينها.
 
           علشان كده بيجرّبوا ==tolerance induction== في علاج الـ **allergy** والـ **autoimmune diseases** ومنع **transplant rejection**.
+      - kind: check
+        page: 78
+        quote: "Normally microbes are immunogenic and self antigens are either tolerogenic or are ignored"
+        question: "According to the lecture, how do self antigens normally behave?"
+        options:
+          - "Tolerogenic or ignored"
+          - "Immunogenic"
+          - "Always ignored"
+          - "Always immunogenic but suppressed by antibodies"
+        answer: 0
+        why:
+          - "صح: الـ self antigens يا tolerogenic يا ignored، والـ microbes هي اللي immunogenic."
+          - "الـ immunogenic ده وصف الـ microbes، ولو self antigen بقى immunogenic يبقى ده autoimmunity."
+          - "الـ ignorance احتمال واحد بس، والـ tolerance هو الأساس."
+          - "مفيش antibodies في المعادلة دي؛ الـ tolerance بتحصل في الـ lymphocytes نفسها."
       - kind: figure
         page: 79
         quote: "Immunologic tolerance to different self antigens may be induced when developing lymphocytes encounter these antigens in the generative lymphoid organs, called central tolerance, or when mature lymphocytes encounter self antigens in peripheral tissues, called peripheral tolerance"
@@ -88,12 +128,68 @@ lessons:
           </svg>
       - kind: explain
         page: 79
+        title: "العاملين الأساسيين"
+        quote: "The inheritance of susceptibility genes which may contribute to failure of self tolerance."
+        text: |
+          الـ **autoimmunity** = immune response ضد الـ **self antigens**، أو autologous. وأهم عاملين:
+
+          1. وراثة ==susceptibility genes== بتساعد إن الـ self tolerance تفشل.
+          2. **Environmental triggers** زي الـ **infections** بتنشّط الـ self-reactive lymphocytes.
+
+          يعني الجينات بتجهّز الأرض والعدوى بتولّع الكبريت. التفسير المقبول (مش في الكتاب): ده سبب إن توأم متطابق ممكن يجيله المرض وأخوه لأ، رغم إن جيناتهم واحدة (هتشوف التوائم في صفحة 80).
+      - kind: explain
+        page: 79
+        title: "ليه خطين دفاع مش واحد؟"
+        quote: "Immunologic tolerance to different self antigens may be induced when developing lymphocytes encounter these antigens in the generative lymphoid organs, called central tolerance, or when mature lymphocytes encounter self antigens in peripheral tissues, called peripheral tolerance"
+        text: |
+          الكتاب بيقسم الـ tolerance حسب **فين** الـ lymphocyte قابلت الـ self antigen: في الـ **generative organs** وهي لسه صغيرة (==central==)، ولا في الأنسجة وهي ناضجة (==peripheral==).
+
+          التفسير المقبول (مش في الكتاب): ليه محتاجين الاتنين؟ عشان الـ thymus والـ bone marrow مش بيشوفوا **كل** الـ self antigens. فيه antigens موجودة بس في أنسجة معينة أو بتظهر في سن معين. فالفلتر الأول بيشيل أخطر الخلايا، وأي خلية عدّت منه بيستناها الفلتر التاني في الشارع.
+
+          يعني الـ autoimmunity محتاجة **الاتنين يقعوا**، وده سبب إنها مش بتحصل كل يوم رغم إن الخلايا الـ self-reactive موجودة عند كل الناس.
+      - kind: try
+        items: [rheum.L05.001, rheum.L05.005, rheum.L05.007, rheum.L05.009, rheum.L05.011]
+    recap:
+      - "Activation = immunogenic، tolerance = tolerogenic، ignorance = ولا رد فعل."
+      - "الـ microbes immunogenic؛ الـ self antigens يا tolerogenic يا ignored."
+      - "Central في الـ thymus والـ bone marrow؛ peripheral في الأنسجة للخلايا الناضجة."
+      - "Autoimmunity = susceptibility genes + environmental triggers زي العدوى."
+    practice: [rheum.L05.001, rheum.L05.002, rheum.L05.003, rheum.L05.004, rheum.L05.005, rheum.L05.006, rheum.L05.007, rheum.L05.008, rheum.L05.009, rheum.L05.010, rheum.L05.011]
+  # ------------------------------------------------------------------
+  - id: rheum.L05.lesson3
+    title: "الـ T والـ B: مين بيتقتل ومين بيتقفل"
+    hook: "خلية T شافت self antigen من غير ختم النسر: هتموت؟ هتنام؟ ولا حد هيكبتها؟"
+    minutes: 9
+    pages: [79, 82]
+    topics: [t-tolerance, b-tolerance]
+    goals:
+      - "تشرح الـ negative selection في الـ thymus"
+      - "تعرّف الـ anergy (سؤال كتاب) وتعدّ باقي الـ peripheral mechanisms"
+      - "تفرّق الـ B cell tolerance عن الـ T"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 79
         title: "Central T tolerance"
         quote: "This process is also termed negative selection and it is the principal mechanism of central tolerance."
         text: |
           الـ **immature T cell** في الـ **thymus** لو شافت self antigen بـ **high avidity** ← بتموت بـ **apoptosis**.
 
           ده اسمه ==negative selection==، وهو **the principal mechanism of central tolerance**.
+
+          التفسير المقبول (مش في الكتاب): ليه الـ avidity العالية بالذات؟ عشان الخلية اللي بتمسك الـ self antigen جامد هي الأخطر لو خرجت. والخلايا اللي بتمسكه ضعيف بتعدّي، وده سبب إن الـ central tolerance لوحدها مش كفاية، ومحتاجين الـ peripheral بعدها.
+      - kind: explain
+        page: 79
+        title: "Peripheral T tolerance: تلات طرق"
+        quote: "Peripheral tolerance is induced when mature T cells recognize self antigens in peripheral tissues leading to functional inactivation (anergy) or death, or when the self reactive lymphocytes are suppressed by regulatory T cells."
+        text: |
+          الـ mature T cell لما تشوف self antigen في الأنسجة، الكتاب بيدّيها تلات مصاير:
+
+          1. ==Anergy==: تتقفل وهي عايشة (functional inactivation).
+          2. **Death**: تموت (deletion).
+          3. **Suppression**: خلية تانية، الـ **regulatory T cell**، تكبتها.
+
+          التفسير المقبول (مش في الكتاب): ليه تلاتة؟ عشان كل واحدة بتغطي ثغرة في التانية. الـ anergy سريعة بس ممكن ترجع، فالـ deletion بتقفل الملف نهائي. والاتنين بيشتغلوا على الخلية اللي شافت الـ antigen بس، أما الـ Tregs فبتكبت أي خلية قريبة حتى لو ماحدش لحق يقفلها.
       - kind: explain
         page: 79
         title: "Anergy: من غير signal 2 مفيش شغل"
@@ -104,12 +200,59 @@ lessons:
           الـ T cell محتاجة إشارتين: **signal 1** هو الـ antigen، و **signal 2** هو الـ costimulator. إشارة واحدة لوحدها = الخلية تتقفل.
 
           وكمان ممكن تحصل لما الـ T cell تستخدم **inhibitory receptors** تشوف بيها الـ costimulators.
+
+          التفسير المقبول (مش في الكتاب): ليه الجسم عامل الشرط ده؟ عشان الـ costimulators بتظهر لما يكون فيه خطر، فالـ T cell بتتأكد إن الـ antigen ده جاي مع ميكروب قبل ما تشتغل. يعني الإشارتين زي مفتاحين لخزنة واحدة: مفتاح واحد مابيفتحش.
       - kind: aside
         tone: joke
         page: 79
         quote: "Anergy is the functional inactivation of T lymphocytes that occurs when these cells recognize antigens with out adequate levels of the co stimulators that are needed for T cell activation."
         text: |
           الـ T cell زي موظف حكومي: لو جاله الطلب، ده **signal 1**، من غير ختم النسر، ده **signal 2**، مش بس مش هيمضي، ده هيقفل الشباك خالص. ده الـ **anergy**.
+      - kind: reveal
+        page: 79
+        quote: "Anergy is the functional inactivation of T lymphocytes that occurs when these cells recognize antigens with out adequate levels of the co stimulators that are needed for T cell activation."
+        prompt: "ليه الـ signal 2 هو اللي بيحمي الـ self؟"
+        answer: |
+          التفسير المقبول (مش في الكتاب): الـ costimulators بتظهر على الـ antigen-presenting cells غالبًا لما يكون فيه **ميكروب أو التهاب**. في نسيج هادي، الـ self antigen بيتعرض **من غير** signal 2، فالـ T cell اللي تشوفه تتقفل (anergy).
+
+          يعني signal 2 هو الطريقة اللي الجسم بيقول بيها "ده خطر حقيقي". ولهنا تفهم الـ take-home message في صفحة 82: العدوى بتعمل ==aberrant expression of costimulators==، فالـ self antigen يتعرض **مع** signal 2 بالغلط، والخلية اللي كان المفروض تنام تتنشّط.
+      - kind: figure
+        page: 79
+        quote: "Anergy is the functional inactivation of T lymphocytes that occurs when these cells recognize antigens with out adequate levels of the co stimulators that are needed for T cell activation."
+        title: "إشارتين ولا واحدة؟"
+        alt: "Three rows, each a T cell facing an antigen-presenting cell. Row one: antigen plus costimulator, two signals, the T cell is activated. Row two: antigen without costimulator, one signal, the T cell becomes anergic. Row three: antigen with costimulator read through an inhibitory receptor, the T cell becomes anergic."
+        caption: "signal 1 لوحده = ==anergy==. ونفس الـ costimulator لو اتقرا بـ inhibitory receptor بيقفل الخلية برضه (صفحة 82)."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fg-head"/></marker></defs>
+            <text x="10" y="18" class="t-sm t-mut">APC</text>
+            <text x="120" y="18" class="t-sm t-mut">T cell</text>
+            <text x="230" y="18" class="t-sm t-mut">Result</text>
+            <rect x="10" y="30" width="80" height="50" rx="10" class="fg-box"/>
+            <text x="18" y="50" class="t-sm">antigen</text>
+            <text x="18" y="68" class="t-sm">+ costim.</text>
+            <path d="M90 55 H118" class="fg-arrow" marker-end="url(#L05c)"/>
+            <rect x="120" y="30" width="90" height="50" rx="10" class="fg-acc"/>
+            <text x="128" y="60" class="t-sm">signal 1 + 2</text>
+            <rect x="230" y="30" width="90" height="50" rx="10" class="fg-good"/>
+            <text x="238" y="60" class="t-sm t-b">Activated</text>
+            <rect x="10" y="105" width="80" height="50" rx="10" class="fg-box"/>
+            <text x="18" y="135" class="t-sm">antigen only</text>
+            <path d="M90 130 H118" class="fg-arrow" marker-end="url(#L05c)"/>
+            <rect x="120" y="105" width="90" height="50" rx="10" class="fg-acc"/>
+            <text x="128" y="135" class="t-sm">signal 1 only</text>
+            <rect x="230" y="105" width="90" height="50" rx="10" class="fg-bad"/>
+            <text x="238" y="135" class="t-sm t-b">Anergy</text>
+            <rect x="10" y="180" width="80" height="50" rx="10" class="fg-box"/>
+            <text x="18" y="200" class="t-sm">antigen</text>
+            <text x="18" y="218" class="t-sm">+ costim.</text>
+            <path d="M90 205 H118" class="fg-arrow" marker-end="url(#L05c)"/>
+            <rect x="120" y="180" width="90" height="50" rx="10" class="fg-acc"/>
+            <text x="128" y="200" class="t-sm">inhibitory</text>
+            <text x="128" y="218" class="t-sm">receptor</text>
+            <rect x="230" y="180" width="90" height="50" rx="10" class="fg-bad"/>
+            <text x="238" y="210" class="t-sm t-b">Anergy</text>
+          </svg>
       - kind: explain
         page: 80
         title: "Deletion و Tregs"
@@ -117,6 +260,8 @@ lessons:
         text: |
           - **Deletion:** الـ mature T cell لو اتنشّطت **بشكل متكرر** بالـ self antigen، أو شافته من غير second signal ← apoptosis. ده اسمه ==activation-induced cell death==.
           - **Regulatory T cells:** بعض الـ self-reactive T cells بتتحوّل لـ **Tregs** بتمنع أو تكبت تنشيط الخلايا الـ self-reactive التانية. بتتكوّن في الـ **thymus** أو الـ **peripheral lymphoid organs**.
+
+          التفسير المقبول (مش في الكتاب): ليه التنشيط المتكرر يموّت الخلية؟ عشان الـ antigen الغريب بيروح مع الوقت لما الميكروب يتشال، أما الـ self antigen موجود على طول. يعني الخلية اللي بتتنشّط تاني وتالت من غير ما الـ antigen يخلص، غالبًا بتهاجم حاجة من الجسم، فالجسم بيشيلها.
       - kind: match
         page: 80
         quote: "Regulatory T cells may develop in the thymus or in peripheral lymphoid organ."
@@ -134,6 +279,16 @@ lessons:
         text: |
           - **Central:** الـ immature B cell في الـ **bone marrow** لو مسكت self antigen جامد ← يا **تتقتل**، ودي negative selection، يا ==change receptor specificity==.
           - **Peripheral:** الـ mature B cell لو قابلت **تركيز عالي** من الـ self antigen في الـ peripheral lymphoid tissues ← تبقى **anergic** وما تردش عليه تاني.
+      - kind: explain
+        page: 80
+        title: "ليه الـ B cell عندها فرصة تانية؟"
+        quote: "When immature B lymphocytes interact strongly with self antigens in the bone marrow, the B cells are either killed (negative selection) or they change receptor specificity."
+        text: |
+          الفرق الوحيد في الكتاب بين الـ T والـ B في الـ central tolerance: الـ B cell ممكن ==change receptor specificity== بدل ما تموت.
+
+          التفسير المقبول (مش في الكتاب): الـ B cell بتعيد ترتيب جينات الـ receptor بتاعها وتجرّب receptor جديد، ولو الجديد مابقاش بيمسك الـ self antigen تعيش. يعني الجسم مابيرميش خلية كلّفته كتير لو ممكن **يصلّحها**.
+
+          وليه الـ T tolerance أهم؟ عشان أغلب الـ B cells محتاجة **مساعدة من T helper** عشان تعمل antibodies قوية. فلو الـ T cell اتقفلت، الـ B cell الـ self-reactive غالبًا مش هتلاقي حد يشغّلها.
       - kind: check
         page: 80
         quote: "When immature B lymphocytes interact strongly with self antigens in the bone marrow, the B cells are either killed (negative selection) or they change receptor specificity."
@@ -149,36 +304,41 @@ lessons:
           - "الـ negative selection موجودة في الاتنين: thymus و bone marrow."
           - "الـ anergy برضه في الاتنين في الـ periphery."
           - "الـ AICD اتشرحت للـ mature T cells."
+      - kind: explain
+        page: 82
+        title: "الخلاصة: طريقين للـ anergy"
+        quote: "Anergy result from the recognition of antigens without co stimulators or when T cells use inhibitory receptors to recognize co stimulators. Some self reactive T cells suppress potentially pathogenic T cells."
+        text: |
+          الـ take-home message بيضيف طريق تاني للـ anergy:
+
+          1. الـ antigen **من غير costimulators** (اللي فات).
+          2. الـ T cell تستخدم ==inhibitory receptors== تشوف بيها الـ costimulators.
+
+          التفسير المقبول (مش في الكتاب): الـ inhibitory receptors زي **فرامل** بتمسك نفس الإشارة اللي كانت هتشغّل الخلية، فالإشارة تتحوّل من "اشتغل" لـ "اقف". وده سبب إن أدوية السرطان اللي بتشيل الفرامل دي ممكن تعمل autoimmunity كـ side effect.
+
+          والسطر التاني هو الـ **Tregs**: بعض الـ self-reactive T cells بتكبت الـ pathogenic T cells.
+
+          يعني في الآخر الـ anergy ليها بابين: إشارة ناقصة، أو فرامل شغالة.
       - kind: try
-        items: [rheum.L05.003, rheum.L05.009, rheum.L05.014, rheum.L05.015, rheum.L05.023]
+        items: [rheum.L05.012, rheum.L05.015, rheum.L05.016, rheum.L05.021, rheum.L05.038]
     recap:
-      - "Activation = immunogenic، tolerance = tolerogenic، ignorance = ولا رد فعل."
-      - "Central: thymus ← negative selection؛ bone marrow ← تموت أو تغيّر الـ receptor."
-      - "Peripheral T: anergy (من غير costimulators)، deletion (AICD)، و Tregs."
-      - "Peripheral B: anergy بعد تركيز عالي من الـ self antigen."
-    practice: [rheum.L05.001, rheum.L05.002, rheum.L05.003, rheum.L05.004, rheum.L05.005, rheum.L05.006, rheum.L05.007, rheum.L05.008, rheum.L05.009, rheum.L05.010, rheum.L05.011, rheum.L05.012, rheum.L05.013, rheum.L05.014, rheum.L05.015, rheum.L05.016, rheum.L05.017, rheum.L05.018, rheum.L05.019, rheum.L05.020, rheum.L05.021, rheum.L05.022, rheum.L05.023, rheum.L05.024, rheum.L05.038]
+      - "Central T: negative selection في الـ thymus = الـ principal mechanism."
+      - "Peripheral T: anergy (من غير costimulators أو بـ inhibitory receptors)، deletion (AICD)، و Tregs."
+      - "Central B: تموت أو تغيّر الـ receptor؛ peripheral B: anergy بعد تركيز عالي."
+    practice: [rheum.L05.012, rheum.L05.013, rheum.L05.014, rheum.L05.015, rheum.L05.016, rheum.L05.017, rheum.L05.018, rheum.L05.019, rheum.L05.020, rheum.L05.021, rheum.L05.022, rheum.L05.023, rheum.L05.024, rheum.L05.038, rheum.L05.039]
   # ------------------------------------------------------------------
   - id: rheum.L05.lesson2
     title: "جينات وعدوى: ليه الـ tolerance بتقع؟"
     hook: "التوأم المتطابق، الـ B27 بـ relative risk 90، وعين اتعورت فالتانية ولّعت."
-    minutes: 7
-    pages: [79, 82]
-    topics: [principles, genetics, infections, tolerance]
+    minutes: 9
+    pages: [80, 82]
+    topics: [genetics, infections]
     goals:
-      - "تعرف العاملين الأساسيين: susceptibility genes و infections"
-      - "تحفظ جدول الـ HLA والـ relative risk"
+      - "تشرح دليل التوائم وليه الـ MHC أهم الجينات"
+      - "تحفظ جدول الـ HLA والـ relative risk وتفهم ليه الـ risk مش يقين"
       - "تشرح إزاي العدوى بتعمل autoimmunity"
     status: unverified
     steps:
-      - kind: explain
-        page: 79
-        title: "العاملين الأساسيين"
-        quote: "The inheritance of susceptibility genes which may contribute to failure of self tolerance."
-        text: |
-          الـ **autoimmunity** = immune response ضد الـ **self antigens**، أو autologous. وأهم عاملين:
-
-          1. وراثة ==susceptibility genes== بتساعد إن الـ self tolerance تفشل.
-          2. **Environmental triggers** زي الـ **infections** بتنشّط الـ self-reactive lymphocytes.
       - kind: explain
         page: 80
         title: "الجينات"
@@ -187,6 +347,8 @@ lessons:
           - جينات كتير بتهيّئ للمرض، و ==major histocompatibility complex (MHC) genes== أهمهم.
           - لو توأم متطابق جاله autoimmune disease، أخوه أقرب يجيله من أي حد غريب.
           - الـ incidence أعلى في الـ **monozygotic** عن الـ **dizygotic** twins.
+
+          التفسير المقبول (مش في الكتاب): ليه التوائم دليل قوي؟ عشان الـ monozygotic شايلين نفس الجينات بالظبط، فلو المرض بيمشي معاهم أكتر من الـ dizygotic اللي اتربّوا في نفس البيت، يبقى الفرق من الجينات. وبرضه إن التوأم المتطابق مش دايمًا بيجيله المرض بيقولك إن الجينات لوحدها مش كفاية.
       - kind: reveal
         page: 80
         quote: "Increased incidence among monozygotic twins than among dizygotic twins."
@@ -195,6 +357,16 @@ lessons:
           الاتنين اتربّوا في نفس البيت ونفس البيئة تقريبًا. الفرق الوحيد إن الـ **monozygotic** شايلين **نفس الجينات 100%** والـ dizygotic زي أي أخوات.
 
           فلو المرض أكتر في الـ monozygotic، يبقى الفرق ده جاي من ==الجينات== مش من البيئة. ده منطق الـ twin studies، والملاحظة نفسها من الكتاب.
+      - kind: explain
+        page: 80
+        title: "ليه الـ MHC بالذات؟"
+        quote: "Multiple genes predispose to autoimmune diseases, the most important of these being MHC genes."
+        text: |
+          الكتاب بيقول جينات كتير بتهيّئ للـ autoimmunity، و ==أهمهم الـ MHC genes==.
+
+          التفسير المقبول (مش في الكتاب): الـ MHC هو الطبق اللي الخلية بتقدّم عليه الـ peptides للـ T cell. كل allele شكل الطبق بتاعه مختلف، فبيمسك peptides معينة أحسن من غيرها. فلو allele معيّن بيعرض self peptide بطريقة تنشّط الـ T cells، الشخص اللي ورثه يبقى أقرب للمرض.
+
+          وده يربط بالـ take-home message في صفحة 82: أقوى ارتباط بين الـ HLA والأمراض **T cell–mediated**، عشان الـ MHC أصلًا شغلته مع الـ T cells.
       - kind: table
         page: 81
         quote: "The incidence of a particular autoimmune disease is often greater in individuals who inherit a particular HLA allele(s) than in the general population. This increased incidence is called relative risk of HLA disease association."
@@ -230,6 +402,16 @@ lessons:
           - "الـ IDDM مع DR3/DR4 = 25."
           - "الـ pemphigus مع DR4 = 14."
           - "الـ RA = 4 بس."
+      - kind: explain
+        page: 81
+        title: "ليه الـ relative risk مش يقين؟"
+        quote: "The incidence of a particular autoimmune disease is often greater in individuals who inherit a particular HLA allele(s) than in the general population. This increased incidence is called relative risk of HLA disease association."
+        text: |
+          الكتاب بيعرّف الـ relative risk إنها **incidence أعلى** في اللي ورثوا الـ allele، مش إن كلهم هيجيلهم المرض.
+
+          التفسير المقبول (مش في الكتاب): حتى الـ B27 بـ RR 90، أغلب اللي شايلين الـ B27 عمرهم ما بيجيلهم ankylosing spondylitis. يعني الجين بيفتح الباب بس، ومحتاج حاجة تزقّك منه. وده بالظبط اللي الكتاب قاله في صفحة 79: **susceptibility genes** + **environmental triggers** مع بعض.
+
+          وعشان كده الـ HLA test لوحده مايشخّصش، هو بيرجّح تشخيص في مريض عنده الصورة الإكلينيكية.
       - kind: explain
         remind: [rheum.L05.033]
         page: 81
@@ -290,11 +472,13 @@ lessons:
           - ممكن نعمل tolerance بإعطاء الـ antigen بطريقة معيّنة: علاج immunologic diseases ومنع الـ transplant rejection.
           - الـ **autoimmune diseases** = **failure of self tolerance**، وعواملها: immunologic abnormalities و susceptibility genes و infections.
           - أقوى ارتباط بين الـ **human leukocyte antigen (HLA) genes** والـ **T cell–mediated** autoimmune diseases.
+
+          التفسير المقبول (مش في الكتاب): ليه الرسالة دي مهمة للعلاج؟ عشان لو الـ autoimmunity هي **فشل الـ tolerance**، يبقى العلاج المثالي إنك **ترجّع الـ tolerance** لـ antigen معيّن بدل ما تكبت المناعة كلها. وده سبب إن الكتاب بيقول الـ tolerance induction بتتجرّب في الـ allergy والـ transplant.
       - kind: try
-        items: [rheum.L05.011, rheum.L05.028, rheum.L05.033, rheum.L05.034, rheum.L05.039]
+        items: [rheum.L05.025, rheum.L05.027, rheum.L05.032, rheum.L05.033, rheum.L05.035]
     recap:
-      - "Autoimmunity = failure of self tolerance: genes + infections + immunologic abnormalities."
       - "MHC/HLA أهم الجينات. MZ twins أكتر من DZ."
       - "B27 ← AS بـ RR 90؛ DR3/DR4 ← IDDM 25؛ DR4 ← pemphigus 14؛ RA ← 4 (الكتاب DR2، المراجع DR4)."
+      - "الـ relative risk استعداد مش حكم: الجين + trigger."
       - "العدوى: تنشيط، sequestered antigens، costimulators، cross-reaction."
-    practice: [rheum.L05.010, rheum.L05.011, rheum.L05.025, rheum.L05.026, rheum.L05.027, rheum.L05.028, rheum.L05.029, rheum.L05.030, rheum.L05.031, rheum.L05.032, rheum.L05.033, rheum.L05.034, rheum.L05.035, rheum.L05.036, rheum.L05.037, rheum.L05.039]
+    practice: [rheum.L05.025, rheum.L05.026, rheum.L05.027, rheum.L05.028, rheum.L05.029, rheum.L05.030, rheum.L05.031, rheum.L05.032, rheum.L05.033, rheum.L05.034, rheum.L05.035, rheum.L05.036, rheum.L05.037]

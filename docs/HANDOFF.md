@@ -719,6 +719,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-14: `batna-tools validate` warns (never fails) on a diagram, algorithm or chart whose skip reason says it "restates" the lesson's text, and prints the count with the other warnings; `batna-tools figures` lists them under its table (#1156).
 - 2026-11-14: cards, MCQs and cases can carry a book picture (#1154): `image:` + `marks:` on the item, shown above the question in study, bank, cases and oral (marks after the answer), bank filter «اللي فيها صورة بس», pictures in the Anki export; `pack::SCHEMA` 4 → 5. Recognition items follow per lecture.
 - 2026-11-14: `batna-tools lessons --warnings` lists lessons with no figure step (rule 10, #981: 131 of 1,059 on this date), and `--report`/`--summary` count them; hb.L12, hb.L16 and rheum.L05 recorded in `content/lesson-skips.yaml` (coverage reviewed, nothing uncited).
 - 2026-11-14: book figures placed in every lecture (#983): 141 of 141 inventoried, 930 figures shown (book crops at WebP quality 50, a few marked or redrawn) and 1,415 skipped with reasons, one PR per lecture (#987–#1131). git.L11 TIPS and dm.L12 statin notes aligned with the book in #1132.

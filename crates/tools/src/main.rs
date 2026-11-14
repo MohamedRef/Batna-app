@@ -340,7 +340,7 @@ mod tests {
             (code, out.as_str(), err.len()),
             (
                 ExitCode::SUCCESS,
-                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 1 warning(s), see `batna-tools lessons --warnings`; book figures: 1 lecture(s) not inventoried yet, see `batna-tools figures`",
+                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 2 warning(s), see `batna-tools lessons --warnings`; book figures: 1 lecture(s) not inventoried yet, see `batna-tools figures`",
                 0
             )
         );

@@ -82,40 +82,17 @@ lessons:
       - kind: figure
         page: 146
         quote: "Signal Pathway"
-        title: "الـ signal pathway في كلمتين"
-        alt: "Simplified ADPKD cell signalling: vasopressin on the V2 receptor stimulates adenylyl cyclase, raising cAMP; somatostatin on its receptor inhibits it. cAMP activates PKA, which drives CFTR chloride and fluid secretion into the cyst and, through Src, MAPK and mTOR, cell proliferation. Low calcium from failed polycystin-2 removes a brake on cAMP."
-        caption: "الـ ==cyclic adenosine monophosphate (cAMP)== هو البنزين: الـ **vasopressin** (V2) بيزوّده والـ **somatostatin** بيقلّله. علشان كده الأدوية الجديدة: **tolvaptan** و **octreotide**."
-        svg: |
-          <svg viewBox="0 0 330 310" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="L07a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
-              <marker id="L07b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
-            </defs>
-            <rect x="5" y="5" width="150" height="44" rx="8" class="fg-bad"/>
-            <text x="80" y="24" text-anchor="middle" class="t-sm t-b">Vasopressin → V2R</text>
-            <text x="80" y="40" text-anchor="middle" class="t-sm">(tolvaptan blocks)</text>
-            <rect x="175" y="5" width="150" height="44" rx="8" class="fg-good"/>
-            <text x="250" y="24" text-anchor="middle" class="t-sm t-b">Somatostatin → SSTR</text>
-            <text x="250" y="40" text-anchor="middle" class="t-sm">(octreotide mimics)</text>
-            <path d="M80 50 L150 82" class="fg-arrow-bad" marker-end="url(#L07b)"/>
-            <path d="M250 50 L180 82" class="fg-arrow" marker-end="url(#L07a)"/>
-            <text x="225" y="74" class="t-sm t-good">inhibits</text>
-            <rect x="85" y="84" width="160" height="36" rx="8" class="fg-ink"/>
-            <text x="165" y="107" text-anchor="middle" class="t-b">cAMP ↑ (Ca²⁺ low)</text>
-            <path d="M165 120 L165 140" class="fg-arrow" marker-end="url(#L07a)"/>
-            <rect x="115" y="142" width="100" height="32" rx="16" class="fg-acc"/>
-            <text x="165" y="163" text-anchor="middle" class="t-b">PKA</text>
-            <path d="M140 174 L80 204" class="fg-arrow" marker-end="url(#L07a)"/>
-            <path d="M190 174 L250 204" class="fg-arrow" marker-end="url(#L07a)"/>
-            <rect x="5" y="206" width="150" height="58" rx="8" class="fg-box"/>
-            <text x="80" y="228" text-anchor="middle" class="t-sm t-b">CFTR Cl⁻ secretion</text>
-            <text x="80" y="248" text-anchor="middle" class="t-sm">cyst fills with fluid</text>
-            <rect x="175" y="206" width="150" height="58" rx="8" class="fg-box"/>
-            <text x="250" y="228" text-anchor="middle" class="t-sm t-b">Src → MAPK → mTOR</text>
-            <text x="250" y="248" text-anchor="middle" class="t-sm">cell proliferation</text>
-            <rect x="60" y="274" width="210" height="30" rx="8" class="fg-bad"/>
-            <text x="165" y="294" text-anchor="middle" class="t-b">Cyst grows</text>
-          </svg>
+        title: "الـ signal pathway: رسمة الكتاب"
+        image: { file: neph/L07-signal-pathway.webp, book: true }
+        alt: "Book diagram of a collecting duct cell in polycystic kidney disease. On the apical cilium, PC1 and PC2 sense flow and let calcium in. Vasopressin (AVP) on the V2 receptor activates Gs and adenylyl cyclase, turning ATP into cAMP; somatostatin (SST) on its receptor (SSTR) acts through Gi to inhibit it, and PDE1, driven by calcium, breaks cAMP down to AMP. cAMP activates PKA, which drives the CFTR chloride channel (fluid secretion) and, through Src, MAPK and mTOR, cell proliferation. A key marks steps reduced and increased in PKD."
+        caption: |
+          خلية من الـ collecting duct، والـ cilium طالع من فوق:
+
+          - **فوق، الـ cilium**: عليه **PC1 و PC2** (polycystin-1 و -2) بيحسّوا بسريان البول ويدخّلوا **Ca²⁺**. الـ Ca بيشغّل **PDE1** اللي بيكسّر الـ cAMP لـ AMP. في الـ PKD الـ Ca ده ==بيقل==، فالكسر بيقل.
+          - **تحت يمين، المستقبلات**: الـ vasopressin (**AVP**) على الـ **V2R** ← **Gs** ← **AC6** يحوّل ATP لـ **cAMP** (بيزوّده). والـ somatostatin (**SST**) على الـ **SSTR** ← **Gi** ← بيقفل الـ AC6 (بيقلّله).
+          - **النص، PKA**: الـ cAMP بيشغّل الـ **PKA**، ومنه سهمين: لفوق شمال على الـ **CFTR** (Cl⁻ بيطلع) = **Fluid secretion** جوّه الكيس، ولتحت عن طريق **Src ← MAPK ← mTOR** = **Cell proliferation**.
+
+          يعني الـ ==cyclic adenosine monophosphate (cAMP) هو البنزين== اللي بيكبّر الكيس بالميه والخلايا مع بعض، وعشان كده الأدوية بتقفل مدخله: **tolvaptan** على الـ V2R، و **octreotide** على الـ SSTR، والـ ==mTOR inhibitors== على فرع الـ proliferation.
       - kind: order
         page: 146
         quote: "Failure of normal polycystin complex formation results in dysregulated cell turnover and uncontrolled cell proliferation in response to growth factors. Proliferating tubular cells form tubular cysts that close off the associated nephron and expand in size over time."
@@ -1049,6 +1026,28 @@ lessons:
           ليه stones؟ التفسير المقبول (مش في الكتاب): الـ collecting ducts الواسعة زي الإسفنجة بتخلّي البول يقف ويركد، والبول الراكد بيترسّب فيه الـ calcium، وكمان العدوى بتلاقي مكان. وليه الـ "paintbrush" على الـ IVU؟ لأن الصبغة بتدخل الأكياس الصغيرة الممدودة في الـ papillae فتبان زي شعر الفرشة. وليه الوظيفة غالبًا سليمة؟ لأن الـ cortex والـ glomeruli مش متأثرين.
 
           إزاي تطمّن المريض؟ التفسير المقبول (مش في الكتاب): الشاب اللي عنده حصوات متكررة وسمع كلمة "أكياس في الكلية" غالبًا هيفتكر إنه رايح للـ dialysis. هنا الفرق المهم: الـ medullary sponge kidney مش وراثي ومش بيبوّظ الوظيفة، فالخطة هي نفس خطة الحصوات: ميه كتير، علاج الـ UTI بسرعة، ودوّر على سبب للـ hypercalciuria. يعني مشكلته الحصوات، مش الكلية نفسها.
+      - kind: figure
+        page: 167
+        quote: "Paintbrush Appearance"
+        title: "الـ paintbrush على الـ IVU"
+        image: { file: neph/L07-paintbrush-ivu.webp, book: true }
+        alt: "Book intravenous urogram of medullary sponge kidney: contrast fills dilated collecting ducts in the papillae as fine streaks fanning out from the calyx, the 'paintbrush' appearance."
+        caption: |
+          صورة intravenous urogram (IVU) قريبة على كلية: الصبغة البيضا في الـ calyx، وطالع منها ==خطوط بيضا رفيعة== على شكل مروحة في الـ papillae، زي شعر الفرشة.
+
+          دي الـ collecting ducts الواسعة اللي الصبغة دخلتها، وده الشكل الكلاسيكي للـ ==medullary sponge kidney== (**calyceal brush**).
+      - kind: figure
+        page: 167
+        quote: "Medullary calcification"
+        title: "الـ medullary calcification على الـ CT"
+        image: { file: neph/L07-medullary-calcification-ct.webp, book: true }
+        alt: "Book axial contrast CT of the abdomen at the level of the kidneys: small bright calcific foci lie in the medullary pyramids of both kidneys, more on the left of the image."
+        caption: |
+          مقطع computed tomography (CT) عرضي في البطن: الكليتين على جنبي العمود الفقري تحت النص.
+
+          جوّه الـ **medulla** (الهرم الغامق جوّه كل كلية) فيه ==نقط بيضا صغيرة== = **calcification** في الأكياس، أوضح في الكلية اللي على يمين الصورة.
+
+          يعني الـ CT بقى بديل الـ intravenous urogram (IVU)، وبيورّي الـ ==calcium stones جوّه الأكياس== اللي بتميّز المرض.
       - kind: reveal
         page: 167
         quote: "Impaired calcium handling in the collecting ducts predisposes to formation of calcium-containing stones (often in cysts)."
@@ -1215,6 +1214,46 @@ lessons:
           الجلد بعد 5 سنين: ==facial angiofibromas==، **hypomelanotic macules** (ash leaf)، **ungual fibromas**، و **shagreen patch**.
 
           ليه المخ والجلد مع بعض؟ التفسير المقبول (مش في الكتاب): المخ والجلد جايين من نفس طبقة الجنين (ectoderm)، فالـ hamartomas بتطلع في الاتنين. الـ tubers في المخ هي اللي بتعمل seizures والـ autism. وليه الـ ash leaf بيضا؟ لأن الـ melanocytes في المكان ده ما بتطلعش pigment كفاية، وعلشان كده بتبان أوضح تحت الـ Wood's lamp. يعني بقعة بيضا في طفل عنده تشنجات = فكّر TSC.
+      - kind: figure
+        page: 170
+        quote: "Facial Angiofibroma"
+        title: "Facial angiofibroma"
+        image: { file: neph/L07-facial-angiofibroma.webp, book: true }
+        alt: "Book photograph of the nose and cheeks with many small red papules spread over both nasolabial folds and cheeks: facial angiofibromas."
+        caption: |
+          صورة للمناخير والخدّين: ==حبوب حمرا صغيرة كتير== على الخدّين وجنب المناخير، على الجنبين بشكل متماثل.
+
+          دي الـ **facial angiofibromas**، أشهر علامة جلد في الـ ==tuberous sclerosis complex (TSC)== بعد سن 5، وهي major criterion.
+      - kind: figure
+        page: 170
+        quote: "Periungual Fibroma"
+        title: "Periungual fibroma"
+        image: { file: neph/L07-periungual-fibroma.webp, book: true }
+        alt: "Book photograph of a toenail with a small pink fleshy growth emerging from under the proximal nail fold, with a groove in the nail plate below it."
+        caption: |
+          صورة ضافر صباع رجل: ==ورم لحمي صغير وردي== طالع من تحت الجلد اللي عند أول الضافر، وتحته خط محفور في الضافر نفسه.
+
+          ده الـ **periungual (ungual) fibroma**، major criterion في الـ ==TSC==.
+      - kind: figure
+        page: 171
+        quote: "Shagreen patch"
+        title: "Shagreen patch"
+        image: { file: neph/L07-shagreen-patch.webp, book: true }
+        alt: "Book photograph of the skin of the lower back with a raised, slightly orange-red, rough patch made of clustered papules: a shagreen patch."
+        caption: |
+          جلد الضهر من تحت: ==رقعة بارزة خشنة== لونها أحمر مايل للبرتقاني، مكونة من حبوب متجمعة، وملمسها زي قشر البرتقان.
+
+          دي الـ **shagreen patch** (connective tissue nevus)، major criterion في الـ ==TSC==.
+      - kind: figure
+        page: 171
+        quote: "Ash leaf marks"
+        title: "Ash leaf marks"
+        image: { file: neph/L07-ash-leaf.webp, book: true }
+        alt: "Book photograph of the skin of both legs, separated by a dark blue cloth, with pale oval hypopigmented macules: ash leaf marks."
+        caption: |
+          رجلين جنب بعض وبينهم قماشة زرقا: على الجلد ==بقع فاتحة بيضاوي== أفتح من الجلد اللي حواليها.
+
+          دي الـ **ash leaf marks** (hypomelanotic macules)، وأكتر من 3 = major criterion في الـ ==TSC==، وبتبان أوضح تحت الـ Wood's lamp.
       - kind: explain
         page: 171
         title: "الكلية: AML ثم cysts ثم RCC"
@@ -1520,6 +1559,26 @@ lessons:
           - نادرًا: **leiomyomatosis** في المريء والـ trachea.
 
           ليه الولد أشد من البنت؟ التفسير المقبول (مش في الكتاب): الجين (COL4A5) على الـ X chromosome، والولد عنده X واحدة بس، فكل خلاياه بايظة. البنت عندها X تانية سليمة، وفي كل خلية واحدة من الاتنين بتتقفل بالصدفة (lyonisation)، فجزء من الغشاء سليم. علشان كده أغلبهم hematuria بس، والقليل اللي الـ X السليمة اتقفلت عندهم أكتر هم اللي بيوصلوا ESRD.
+      - kind: figure
+        page: 180
+        quote: "Anterior lenticonus"
+        title: "Anterior lenticonus"
+        image: { file: neph/L07-anterior-lenticonus.webp, book: true }
+        alt: "Book slit-lamp photograph of the eye: a white arrow points to the anterior surface of the lens bulging forward in a cone instead of a smooth curve."
+        caption: |
+          صورة بالـ slit lamp للعين: النور عامل خط رفيع على العدسة، و==السهم الأبيض== بيشاور على الوش القدامي بتاعها: ==بارز لقدام زي المخروط== مش مدوّر ناعم.
+
+          ده الـ **anterior lenticonus** في الـ ==Alport syndrome== (حوالي 20%)، والعدسة المخروطية دي بتعمل distorted vision.
+      - kind: figure
+        page: 180
+        quote: "Maculopathy (flecks)"
+        title: "Maculopathy (flecks)"
+        image: { file: neph/L07-macular-flecks.webp, book: true }
+        alt: "Book fundus photograph: the macula, marked M, is surrounded by faint pale yellowish dots (flecks)."
+        caption: |
+          صورة قاع عين: الـ **macula** في النص مكتوب عليها **M**، وحواليها ==نقط صغيرة فاتحة صفرا== (flecks) باهتة.
+
+          دي الـ **dot-and-fleck retinopathy** في الـ ==Alport syndrome==: ما بتأثرش على النظر، بس وجودها بيساعد في التشخيص.
       - kind: explain
         page: 180
         title: "البنت الـ carrier، والـ AR والـ AD"
@@ -1641,6 +1700,19 @@ lessons:
           - ["X-linked female", "Mosaic", "Mosaic"]
           - ["AR (both sexes)", "Absent", "Present"]
         hide: [[1, 2], [2, 2], [3, 2]]
+      - kind: figure
+        page: 182
+        quote: "Fig. 46.4 Immunohistochemistry of kidney in patient with autosomal recessive Alport syndrome."
+        title: "شكل 46.4 في الكتاب: α3 و α4 و α5 تحت الـ IF"
+        image: { file: neph/L07-alport-ihc.webp, book: true }
+        alt: "Book immunofluorescence panels for the alpha-3, alpha-4 and alpha-5 chains of type IV collagen. Row A, normal kidney: bright green staining of all three chains along the glomerular basement membranes. Row B, autosomal recessive Alport syndrome: alpha-3 and alpha-4 are absent; alpha-5 is absent from the glomerulus but still stains Bowman's capsule (arrowheads) and a distal tubular basement membrane (arrow)."
+        caption: |
+          3 أعمدة (**α3(IV)** و **α4(IV)** و **α5(IV)**) وصفّين:
+
+          - **صف A، الطبيعي**: الـ glomerulus كله ==أخضر منوّر== في التلات أعمدة: السلاسل التلاتة موجودة في الـ glomerular basement membrane.
+          - **صف B، الـ autosomal recessive Alport**: الـ α3 والـ α4 ==ضلمة خالص==. والـ α5 غايب من الـ glomerulus، بس فيه خط أخضر حوالين الـ **Bowman's capsule** (رؤوس الأسهم) وحوالين **distal tubule** (السهم).
+
+          يعني في الـ AR الـ α5 ==بيفضل موجود برّه الـ GBM== (زي ما الجدول بيقول)، فالـ skin biopsy ممكن يطلع طبيعي.
       - kind: reveal
         page: 181
         quote: "Evaluation of Patient with Hematuria and a Positive Family History\n  No proteinuria; No family history of ESRD\n    Audiogram: Yes – if any clinical suspicion of deafness\n    Ophthalmic examination: No\n    Skin biopsy with IHC for α5(IV) chain: Normal – Supports diagnosis of TBMN; Abnormal – Diagnostic of XLAS\n    Kidney biopsy with EM + IHC for α3, α4, and α5(IV) chains: Often unnecessary\n    Molecular genetics: Often unnecessary\n  No proteinuria; Family history of ESRD\n    Audiogram: Yes\n    Ophthalmic examination: May be helpful\n    Skin biopsy with IHC for α5(IV) chain: Abnormal – Diagnostic of XLAS; Normal – Does not rule out XLAS, ARAS, ADAS\n    Kidney biopsy with EM + IHC for α3, α4, and α5(IV) chains: Often diagnostic; May not be needed if affected relative has biopsy-proven AS; If patient very young, biopsy of older relative may be more informative\n    Molecular genetics: May be helpful when full clinical and tissue evaluation fails to provide firm diagnosis or\n  Proteinuria; Family history of hematuria and/or ESRD\n    Audiogram: Yes\n    Ophthalmic examination: May be helpful\n    Skin biopsy with IHC for α5(IV) chain: Abnormal – Diagnostic of XLAS; Normal – Does not rule out XLAS, ARAS, ADAS\n    Kidney biopsy with EM + IHC for α3, α4, and α5(IV) chains: Often diagnostic; May not be needed if affected relative has biopsy-proven AS; If patient very young, biopsy of older relative may be more informative\n    Molecular genetics: May be helpful when full clinical and tissue evaluation fails to provide firm diagnosis or"
@@ -1700,6 +1772,32 @@ lessons:
             <path d="M30 180 L60 204 M90 186 L120 196 M170 172 L200 212 M240 186 L280 198" class="fg-thin"/>
             <text x="165" y="240" text-anchor="middle" class="t-sm">thick + thin + basket weaving</text>
           </svg>
+      - kind: figure
+        page: 183
+        quote: "Normal GBM"
+        title: "الـ GBM الطبيعي تحت الـ EM"
+        image: { file: neph/L07-normal-gbm-em.webp, book: true }
+        alt: "Book electron micrograph of a normal glomerular capillary wall: a thin, even, uniformly dense basement membrane between the capillary lumen (CL) and Bowman's space (BS), with regular podocyte foot processes on its outer side."
+        caption: |
+          صورة electron microscopy (EM) لجدار capillary طبيعي:
+
+          - فوق شمال **CL** = الـ capillary lumen، وفي النص **BS** = Bowman's space.
+          - بينهم ==الشريط الغامق الرفيع== = الـ GBM: ==سُمكه واحد وحوافه ناعمة==، وعليه من برّه الـ foot processes متراصّة بانتظام.
+
+          ده المرجع اللي هنقارن بيه الـ Alport والـ thin basement membrane.
+      - kind: figure
+        page: 183
+        quote: "Alport syndrome"
+        title: "الـ GBM في الـ Alport تحت الـ EM"
+        image: { file: neph/L07-alport-gbm-em.webp, book: true }
+        alt: "Book electron micrograph in Alport syndrome: beneath a capillary lumen (CL) containing a red cell, the glomerular basement membrane is thick and split into many layers with a basket-weave pattern and irregular contours."
+        caption: |
+          نفس التكبير تقريبًا، بس في الـ Alport:
+
+          - فوق **CL** (capillary lumen) وجواه كرة دم حمرا غامقة.
+          - تحتها الـ GBM: ==سميك جدًا ومقسوم طبقات== زي السبت المنسوج، وحوافه مش منتظمة.
+
+          يعني ==basket weaving و lamellation==، عكس الشريط الرفيع المنتظم في الصورة اللي فاتت. والسميك ده ممكن يوصل 1200 nm.
       - kind: explain
         page: 184
         title: "الـ TBMN تحت الـ EM: رقم 250"
@@ -1714,6 +1812,16 @@ lessons:
           ليه الأطفال أقل؟ التفسير المقبول (مش في الكتاب): الـ GBM بيتخن مع النمو لحد البلوغ، فالطفل الطبيعي أصلًا GBM بتاعه أرفع من الكبير.
 
           والفرق المهم عن الـ Alport: الـ TBMN **رفيع ومنتظم**، والـ Alport **سميك ورفيع ومنسوج** (basket weaving).
+      - kind: figure
+        page: 184
+        quote: "TBM"
+        title: "الـ TBMN تحت الـ EM"
+        image: { file: neph/L07-tbmn-em.webp, book: true }
+        alt: "Book electron micrograph in thin basement membrane nephropathy: the glomerular basement membrane runs as a uniformly thin but otherwise regular dark line with foot processes on its outer side."
+        caption: |
+          الـ GBM هنا ==خط غامق رفيع جدًا== بس منتظم وناعم، والـ foot processes عليه من برّه عادي.
+
+          قارن بالصورتين اللي فاتوا: الطبيعي منتظم وتخين كفاية، والـ Alport سميك ومنسوج، والـ **thin basement membrane nephropathy (TBMN)** (الكتاب كاتبها **TBM**) ==رفيع ومنتظم== (أقل من 250 nm في الكبار).
       - kind: explain
         page: 185
         title: "العلاج والزرع"
@@ -1823,6 +1931,37 @@ lessons:
           ليه zebra bodies؟ التفسير المقبول (مش في الكتاب): الإنزيم الناقص (α-Gal A) شغلته يكسّر الـ Gb3 جوّه الـ lysosome. لما يغيب، الـ Gb3 (وهو دهون) يتراكم طبقات فوق طبقات جوّه الـ lysosome، فيبان تحت الـ EM زي خطوط الحمار الوحشي. والـ podocytes بتتأثر الأول لأنها خلايا ما بتتجددش، فالدهون بتتجمع فيها سنين، والنتيجة proteinuria.
 
           ليه البروتين بييجي من العقد التالت؟ التفسير المقبول (مش في الكتاب): الـ Gb3 بيتراكم ببطء في الـ podocytes من الطفولة، بس الخلية بتستحمل لحد ما تتملي. لما تتعب، الـ filtration barrier يضعف ويبان protein. يعني الـ proteinuria علامة متأخرة نسبيًا، وعلشان كده منطقي إن الإنزيم يبقى أفيد قبل ما الـ podocytes تموت، مش بعدها.
+      - kind: figure
+        page: 188
+        quote: "Glomerular visceral epithelial cells are enlarged and packed with small, clear vacuoles that represent glycosphingolipid material"
+        title: "Vacuolation في الـ Fabry"
+        image: { file: neph/L07-fabry-vacuolation.webp, book: true }
+        alt: "Book H and E light micrograph of a glomerulus in Fabry disease: the visceral epithelial cells (podocytes) are swollen with pale, foamy, clear vacuoles around the capillary loops."
+        caption: |
+          glomerulus بصبغة hematoxylin and eosin: الخلايا اللي على برّه الـ capillaries (الـ podocytes) ==منفوخة وفاتحة ومليانة فقاعات صافية==.
+
+          الفقاعات دي مكان الـ ==glycosphingolipid== اللي اتشال أثناء تحضير العيّنة، فبتبان فاضية.
+      - kind: figure
+        page: 189
+        quote: "Oil red O stain"
+        title: "Oil red O في الـ Fabry"
+        image: { file: neph/L07-fabry-oil-red-o.webp, book: true }
+        alt: "Book light micrograph of a glomerulus stained with oil red O: orange-red lipid deposits fill the cells of the glomerulus."
+        caption: |
+          نفس الـ glomerulus تقريبًا بس بصبغة **oil red O** اللي بتلوّن الدهون: الفقاعات اللي كانت فاضية بقت ==برتقاني محمّر==.
+
+          يعني اللي جوّه الـ vacuoles ==دهون== (الـ Gb3)، وده اللي بيأكّد إنه مرض تخزين.
+      - kind: figure
+        page: 189
+        quote: "(EM) On EM, there are abundant inclusions within lysosomes, particularly within visceral epithelial cells (Fig. 46.12). The inclusions (myelin figures) are typically round, comprising concentric layers of dense material separated by clear spaces. The layers may be arranged in parallel (zebra bodies). Detachment of visceral epithelial cells from the underlying basement membrane may be observed. Inclusions are also observed in"
+        title: "الـ zebra bodies تحت الـ EM"
+        image: { file: neph/L07-fabry-zebra-em.webp, book: true }
+        alt: "Book electron micrograph of a glomerulus in Fabry disease: many round dark inclusions made of concentric layers fill the podocytes; an inset at the lower left magnifies one inclusion showing parallel lamellae."
+        caption: |
+          - **الصورة الكبيرة**: الـ podocytes مليانة ==دواير غامقة كتير== جوّاها حلقات، زي البصلة المقطوعة.
+          - **المربع تحت شمال** (تكبير أعلى): واحدة منهم: طبقات غامقة ورا بعض بينهم مسافات فاتحة.
+
+          دي الـ **myelin figures**، ولما الطبقات تبقى متوازية اسمها ==zebra bodies==: الـ Gb3 متكوّم طبقات جوّه الـ lysosome.
       - kind: reveal
         page: 188
         quote: "Urinary oval fat bodies, with a Maltese cross configuration when viewed with a polarizing microscope, are a result of the large amounts of glycosphingolipid in the urine"
@@ -1888,6 +2027,16 @@ lessons:
           - **Cataract** في 23% من الرجالة و 10% من الستات، وأوعية موسّعة في الـ conjunctiva أو الـ retina.
 
           ومعنى إن الـ verticillata موجودة في الستات كمان: الـ slit lamp مفيد جدًا لما الإنزيم مش حاسم.
+      - kind: figure
+        page: 191
+        quote: "On his-tologic examination, angiokeratomas consist of dilated small veins in the upper dermis, covered by hyperkeratotic epidermis."
+        title: "Angiokeratoma في الـ Fabry"
+        image: { file: neph/L07-angiokeratoma.webp, book: true }
+        alt: "Book photograph of skin with a cluster of dark red pinpoint papules and a larger dark red lesion in the centre: angiokeratomas."
+        caption: |
+          جلد فيه ==نقط حمرا غامقة صغيرة كتير== حوالين بقعة أكبر غامقة في النص.
+
+          دي الـ **angiokeratomas**: أوردة صغيرة موسّعة تحت epidermis سميك، وممكن تبقى ==أول علامة== في الـ Fabry، في الـ lower trunk والأرداف والفخدين.
       - kind: explain
         page: 192
         title: "التشخيص والعلاج"
@@ -2044,6 +2193,26 @@ lessons:
           **العلاج**: مفيش خاص. **مش بيرجع في الكلية المزروعة**، بس افحص المتبرع القريب كويس لأنه autosomal dominant (AD).
 
           ليه المرض ما بيرجعش في الكلية المزروعة؟ التفسير المقبول (مش في الكتاب): العيب في جين الـ podocyte نفسه (LMX1B)، والكلية المزروعة جايّة بـ podocytes من المتبرع وجيناتها سليمة. يعني مفيش حاجة في دم المريض بتهاجم الكلية الجديدة، عكس أمراض زي الـ FSGS اللي فيها factor في الدم. وليه نفحص المتبرع القريب؟ لأنه AD، فاحتمال إنه شايل المرض 50%.
+      - kind: figure
+        page: 195
+        quote: "(EM) EM is required to make the diagnosis. EM shows multiple irregular lucencies of the GBM, giving it a moth-eaten appearance (Fig. 46.16). Such lucencies also may be observed in the mesangium. These lucent areas sometimes contain cross-banded collagen fibrils, which are more easily observed after staining with phosphotungstic acid (Fig. 46.17)."
+        title: "الـ moth-eaten GBM في الـ NPS"
+        image: { file: neph/L07-nps-moth-eaten-em.webp, book: true }
+        alt: "Book electron micrograph in nail-patella syndrome: a double-headed arrow labelled GBM spans a thickened glomerular basement membrane full of irregular pale lucencies, between the urinary space (US) above and the capillary lumen (CL) below."
+        caption: |
+          - **فوق**: **US** = urinary space، و**تحت**: **CL** = capillary lumen.
+          - **السهم الرأسي (GBM)**: بيقيس الـ GBM بينهم: تخين ومليان ==فراغات فاتحة مش منتظمة==.
+
+          ده الـ **moth-eaten** GBM (زي القماش اللي العتة أكلته)، وده اللي بيعمل التشخيص في الـ ==nail-patella syndrome== لأن الـ light microscopy مش بيقول حاجة.
+      - kind: figure
+        page: 196
+        title: "الـ collagen fibrils في الـ NPS"
+        image: { file: neph/L07-nps-collagen-fibrils-em.webp, book: true }
+        alt: "Book electron micrograph after phosphotungstic acid staining in nail-patella syndrome: black and white arrows point to dark cross-banded collagen fibrils inside the lucent areas of the glomerular basement membrane, next to the urinary space (US)."
+        caption: |
+          صورة EM بعد صبغة **phosphotungstic acid**: الأسهم السودا والبيضا بتشاور على ==خيوط غامقة مخططة== جوّه فراغات الـ GBM، وتحت يمين **US** (urinary space).
+
+          دي الـ **cross-banded collagen fibrils**: ==علامة الـ NPS== تحت الـ EM.
       - kind: reveal
         page: 195
         quote: "Light microscopy findings in NPS are nonspecific and may demonstrate FSGS, mild mesangial hypercellularity, or no changes, in which case EM is required to make the diagnosis."
@@ -2067,6 +2236,26 @@ lessons:
         page: 196
         quote: "The patellae are absent or hypoplastic in more than 90% of patients with NPS, which may be associated with knee joint effusions and osteo-arthritis (Fig. 46.14).49,50 In about 80% of patients, osseous processes project posteriorly from the iliac wings (iliac horns), which is pathog-nomonic (Fig. 46.15). Anomalies of the elbows include aplasia, hypo-plasia, and posterior processes at the distal end of the humeri."
         text: "العيان الوحيد اللي عنده **قرون** ومن غير **صابونة رُكبة** في نفس الوقت. لو شفت **iliac horns** على الـ X-ray، خلاص قول ==nail-patella== وانت مطمّن."
+      - kind: figure
+        page: 196
+        quote: "In about 80% of patients, osseous processes project posteriorly from the iliac wings (iliac horns), which is pathog-nomonic"
+        title: "الـ iliac horns على الـ X-ray"
+        image: { file: neph/L07-iliac-horns.webp, book: true }
+        alt: "Book anteroposterior radiograph of the pelvis: two white arrows point to bony projections arising from the outer surface of both iliac wings, the iliac horns."
+        caption: |
+          X-ray للحوض من قدام: ==السهمين البيض== على الجنبين بيشاوروا على ==بروز عضمي== طالع من الـ iliac wing في كل ناحية.
+
+          دي الـ **iliac horns**: موجودة في حوالي 80% وهي ==pathognomonic== للـ nail-patella syndrome.
+      - kind: figure
+        page: 197
+        title: "الرضفة الغايبة"
+        image: { file: neph/L07-absent-patellae.webp, book: true }
+        alt: "Book figure in two panels. A: photograph of both knees, which look flat in front with no visible kneecaps. B: anteroposterior and lateral radiographs of the knee showing no patella."
+        caption: |
+          - **A، فوق**: صورة الركبتين: ==مفلطحين من قدام== ومفيش بروز الصابونة.
+          - **B، تحت**: X-ray للركبة من قدام ومن الجنب: ==مفيش patella== خالص.
+
+          ده الـ absent patella في أكتر من 90% من عيانين الـ nail-patella syndrome، ومع الـ iliac horns و==الضوافر== بيكمّلوا الصورة.
       - kind: explain
         page: 197
         title: "الضوافر والعلاج"

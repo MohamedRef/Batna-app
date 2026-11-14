@@ -6,6 +6,8 @@ use std::collections::BTreeMap;
 
 use serde::{Deserialize, Serialize};
 
+use crate::lesson::{FigureMark, Picture};
+
 pub const SCHEMA: &str = "batna.content/v1";
 
 /// One lecture of the book, with every study item made from it.
@@ -57,7 +59,18 @@ pub struct Item {
     pub update: Option<Update>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub tags: Vec<String>,
+    /// A book figure shown above the question (#1154): the same file as one
+    /// of the lecture's lesson figures (no new crops), so the pack carries it
+    /// once and the app looks its data up there. Only on a card, mcq or case.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub image: Option<Picture>,
+    /// Numbered places on that picture, hidden until the answer is out.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub marks: Vec<FigureMark>,
 }
+
+/// Item kinds that may carry an `image` (#1154).
+pub const PICTURE_KINDS: &[&str] = &["card", "mcq", "case"];
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case")]
@@ -157,7 +170,8 @@ pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
     })
 }
 
-pub const SHARED_KEYS: &[&str] = &["id", "kind", "topic", "src", "status", "update", "tags"];
+pub const SHARED_KEYS: &[&str] =
+    &["id", "kind", "topic", "src", "status", "update", "tags", "image", "marks"];
 
 /// The calculators the app knows, as written in `calculator:`. Implemented in
 /// [`crate::calc`] (chunk 5); a test there keeps the two lists equal.

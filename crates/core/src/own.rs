@@ -86,6 +86,8 @@ impl OwnCard {
             status: Status::Approved,
             update: None,
             tags,
+            image: None,
+            marks: Vec::new(),
         }
     }
 }

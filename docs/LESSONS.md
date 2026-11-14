@@ -66,8 +66,10 @@ The model to copy is `content/lessons/hb/L01.yaml`.
     Where the caption would have to say where to look («أعلى اليمين»), put
     numbered `marks:` on the picture instead ([Marks on a
     picture](#marks-on-a-picture), #984) and name the numbers in the
-    caption. A figure with nothing to teach (author photo, logo, decoration,
-    a repeat of one already shown) is skipped with its reason. Each lecture's
+    caption. Only figures that add meaning go in (Mohamed, 2026-11-14): a
+    figure with nothing to teach (author photo, logo, decoration, a repeat of
+    one already shown, a slide or box that only restates text a step already
+    gives, a faded or near-repeat slide) is skipped with its reason. Each lecture's
     figures are listed in `content/book-figures/<course>/LNN.yaml` (see
     [Book figures](#book-figures)); `validate` fails when a listed figure is
     neither shown nor skipped. Lessons may still add drawings of their own
@@ -176,7 +178,9 @@ English words `→`.
 
 A figure takes `image:` instead of `svg:`. The file goes in
 **`content/lessons/img/hb/`** (name it `L05-ascites-us.webp`: lecture,
-then what it shows). WebP, about 800 px wide, under 150 KB.
+then what it shows). WebP, about 800 px wide, as small as it stays readable (Mohamed,
+2026-11-14): quality about 50, aim under 60 KB; `validate` fails over
+150 KB.
 
 From the book (Mohamed allowed book figures in the repo, 2026-10-28; the
 book's *text* still never goes in git). The step's `page:` cites it:
@@ -301,7 +305,8 @@ How to do one lecture:
    or `--box x0,y0,x1,y1` (fractions of the page; drawn diagrams and the
    labels around a picture need a box). Keep the panel letters, arrows and
    labels, leave out the printed caption, and look at the result. It
-   renders at 300 dpi and saves WebP at most 800 px wide, under 150 KB.
+   renders at 300 dpi and saves WebP at most 800 px wide, at quality 50
+   (lower until it is under 60 KB).
    Research slides: crop from `courses/res/slides/res-LNN.pdf` the same way
    with Pillow, cited by slide number.
 4. Place it after the step that refers to it and write the caption (rule 10):

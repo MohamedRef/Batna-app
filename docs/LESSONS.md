@@ -229,6 +229,11 @@ figures:
     label: "Figure 3: activated hepatic stellate cells"
     kind: diagram
     drawn: true          # an SVG step on p3 whose title says «في الكتاب»
+  - page: 10           # the picture's page, or its printed caption's page
+                         # when the caption runs onto the next one
+    label: "Figure 4: ultrasound of liver cirrhosis"
+    kind: imaging
+    file: hb/L01-cirrhosis-us.webp
   - page: 1
     label: "author photo"
     kind: other
@@ -245,10 +250,23 @@ How to do one lecture:
    a table printed as a picture is (`kind: table`; a `table` step that
    rebuilds it also counts as shown, so skip it with "rebuilt as table step
    N" only when that step is on the same page).
-3. Crop each one from a fresh 200 dpi render (`pdftoppm -r 200 -f P -l P`),
-   with its panel letters and arrows but without the printed caption, and
-   save WebP about 800 px wide, under 150 KB (see [Images](#images)).
-4. Place it after the step that refers to it and write the caption (rule 10).
+3. Crop each one with
+   `python3 -I scripts/content-tools/figure-crop.py <course> <page> --list`
+   (the pictures' boxes on the page), then
+   `... <course> <page> content/lessons/img/<course>/LNN-what.webp --image N`
+   or `--box x0,y0,x1,y1` (fractions of the page; drawn diagrams and the
+   labels around a picture need a box). Keep the panel letters, arrows and
+   labels, leave out the printed caption, and look at the result. It
+   renders at 300 dpi and saves WebP at most 800 px wide, under 150 KB.
+   Research slides: crop from `courses/res/slides/res-LNN.pdf` the same way
+   with Pillow, cited by slide number.
+4. Place it after the step that refers to it and write the caption (rule 10):
+   title «شكل N في الكتاب: …» for a numbered figure, `quote:` the printed
+   caption, `alt:` in English for a screen reader, caption in Egyptian
+   Arabic going through each panel, arrow and label in order and ending with
+   what it proves for the lesson's point. Then
+   `batna-tools refs --lecture <id> --write` (inserted steps shift the
+   checked quote locks).
    Replace an SVG that only approximates a book figure with the crop; keep
    a drawing that teaches something the book's picture does not.
 5. `batna-tools validate`, then `batna-tools figures` for the progress

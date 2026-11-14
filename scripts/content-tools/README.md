@@ -16,6 +16,7 @@ Run with `python3 -I` from the repo root; they need `pyyaml`.
 | `fixcuts.py <repo> <course> <cuts.tsv>` | Widens the listed quotes to the whole sentence. |
 | `abbrfix.py <repo> <course>...` | Spells out each abbreviation at its first mention per lecture (text/why/caption) from `content/glossary.yaml`. It can hit a quote line first; revert those (validate flags changed quotes). |
 | `figure-candidates.py <lecture> [--sheets DIR]` | Worklist for a lecture's book-figure inventory (#983): per page, embedded pictures and "Figure N" words, plus contact sheets of the page images to look through. See docs/LESSONS.md § Book figures. |
+| `figure-crop.py <course> <page> [out.webp] [--list] [--image N] [--box x0,y0,x1,y1]` | Crops one book figure from a 300 dpi render of the printed page into a lesson WebP (≤800 px wide, ≤150 KB). `--list` prints the embedded pictures' boxes. |
 | `pagerefs_lib.py` | Book page parsing shared by the page-reference audit. |
 
 After any of them: `cargo run -q -p batna-tools -- validate`, review the diff by

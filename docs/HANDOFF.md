@@ -704,6 +704,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-14: `batna-tools validate` warns (never fails) on a diagram, algorithm or chart whose skip reason says it "restates" the lesson's text, and prints the count with the other warnings; `batna-tools figures` lists them under its table (#1156).
 - 2026-11-14: `batna-tools lessons --warnings` lists lessons with no figure step (rule 10, #981: 131 of 1,059 on this date), and `--report`/`--summary` count them; hb.L12, hb.L16 and rheum.L05 recorded in `content/lesson-skips.yaml` (coverage reviewed, nothing uncited).
 - 2026-11-14: book figures placed in every lecture (#983): 141 of 141 inventoried, 930 figures shown (book crops at WebP quality 50, a few marked or redrawn) and 1,415 skipped with reasons, one PR per lecture (#987–#1131). git.L11 TIPS and dm.L12 statin notes aligned with the book in #1132.
 - 2026-11-14: marks on a lesson picture (#984): `marks:` on image figures (point, arrow, box, bracket; up to 8), drawn numbered over the picture with the labels listed under it, toggle «ورّيني العلامات» (key M, hidden before a question); `pack::SCHEMA` 3 → 4; `marks-browser.cjs` in the screens browser job.

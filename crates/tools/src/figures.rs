@@ -26,7 +26,9 @@
 //!
 //! A lecture with a file has had its figures inventoried, so `validate`
 //! fails when one of them is not shown or skipped with a reason. Lectures
-//! without one are counted as not done yet (a warning).
+//! without one are counted as not done yet (a warning). A diagram,
+//! algorithm or chart skipped because the lesson "restates" it in words is
+//! warned about too (#1156): its boxes and arrows are what words lose.
 //! `batna-tools figures --summary` prints the progress table kept on #983.
 
 use std::collections::BTreeMap;
@@ -57,6 +59,10 @@ pub const CROP_ONLY: &[&str] = &["photo", "histology", "imaging", "endoscopy", "
 
 /// The words a redrawn figure's title carries («شكل 3 في الكتاب، ص 9»).
 pub const DRAWN_MARK: &str = "في الكتاب";
+
+/// Kinds whose picture carries structure (boxes, arrows, axes) that words
+/// alone lose, so "the lesson restates it" is a weak reason to skip (#1156).
+pub const STRUCTURED: &[&str] = &["diagram", "algorithm", "chart"];
 
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -147,6 +153,24 @@ fn book_crops(file: &LessonFile) -> Vec<(u32, String)> {
         .collect()
 }
 
+/// Warnings (never failures) for one lecture's inventory: a diagram,
+/// algorithm or chart skipped because the lesson restates it in words
+/// (#1156). Show it as the crop or a redrawn SVG instead, or say in the
+/// reason that it is plain text in boxes.
+pub fn warnings(inv: &Inventory) -> Vec<String> {
+    inv.figures
+        .iter()
+        .filter(|f| STRUCTURED.contains(&f.kind.as_str()))
+        .filter(|f| f.skip.as_deref().is_some_and(|why| why.to_lowercase().contains("restates")))
+        .map(|f| {
+            format!(
+                "{} p{} \"{}\": {} skipped as restated in words; show it (crop or redrawn SVG)",
+                inv.lecture, f.page, f.label, f.kind
+            )
+        })
+        .collect()
+}
+
 /// Problems with one lecture's inventory.
 pub fn problems(inv: &Inventory, pages: [u32; 2], file: &LessonFile) -> Vec<String> {
     let id = &inv.lecture;
@@ -213,8 +237,18 @@ pub struct CourseRow {
     pub skipped: usize,
 }
 
-/// (errors, rows, lectures not inventoried yet).
-pub fn scan(root: &Path) -> Result<(Vec<String>, Vec<CourseRow>, usize), Vec<String>> {
+/// What [`scan`] finds across the repo.
+#[derive(Debug, Default)]
+pub struct Scan {
+    pub errors: Vec<String>,
+    pub rows: Vec<CourseRow>,
+    /// Lectures not inventoried yet.
+    pub pending: usize,
+    /// [`warnings`] of every inventory.
+    pub warnings: Vec<String>,
+}
+
+pub fn scan(root: &Path) -> Result<Scan, Vec<String>> {
     let content = root.join("content");
     let index: Index = crate::read_yaml(&content.join("index.yaml")).map_err(|e| vec![e])?;
     let inventories = read_all(root)?;
@@ -223,6 +257,7 @@ pub fn scan(root: &Path) -> Result<(Vec<String>, Vec<CourseRow>, usize), Vec<Str
     let mut errors = Vec::new();
     let mut rows: Vec<CourseRow> = Vec::new();
     let mut pending = 0;
+    let mut warned = Vec::new();
     for e in &index.lectures {
         let Some(file) = files.get(&e.id) else { continue };
         let course = batna_core::program::course_of(&e.id).to_owned();
@@ -237,6 +272,7 @@ pub fn scan(root: &Path) -> Result<(Vec<String>, Vec<CourseRow>, usize), Vec<Str
                 row.skipped += inv.figures.iter().filter(|f| f.skipped()).count();
                 row.placed += inv.figures.iter().filter(|f| !f.skipped()).count();
                 errors.extend(problems(inv, e.pages, file).into_iter().map(|p| format!("book figures: {p}")));
+                warned.extend(warnings(inv));
             }
             None => pending += 1,
         }
@@ -246,14 +282,15 @@ pub fn scan(root: &Path) -> Result<(Vec<String>, Vec<CourseRow>, usize), Vec<Str
             errors.push(format!("book figures: content/book-figures lists {k}, which has no lessons"));
         }
     }
-    Ok((errors, rows, pending))
+    Ok(Scan { errors, rows, pending, warnings: warned })
 }
 
-/// For `validate`: the errors, and how many lectures are not inventoried.
-pub fn check(root: &Path) -> (Vec<String>, usize) {
+/// For `validate`: the errors, how many lectures are not inventoried, and
+/// how many figures [`warnings`] flags.
+pub fn check(root: &Path) -> (Vec<String>, usize, usize) {
     match scan(root) {
-        Ok((errors, _, pending)) => (errors, pending),
-        Err(e) => (e, 0),
+        Ok(s) => (s.errors, s.pending, s.warnings.len()),
+        Err(e) => (e, 0, 0),
     }
 }
 
@@ -273,13 +310,20 @@ pub fn summary(rows: &[CourseRow]) -> String {
     out
 }
 
-/// `batna-tools figures [--summary]`.
+/// `batna-tools figures [--summary]`: the table, then each warning.
 pub fn run(root: &Path, _args: &[String]) -> Result<String, Vec<String>> {
-    let (errors, rows, _) = scan(root)?;
-    if !errors.is_empty() {
-        return Err(errors);
+    let s = scan(root)?;
+    if !s.errors.is_empty() {
+        return Err(s.errors);
     }
-    Ok(summary(&rows))
+    let mut out = summary(&s.rows);
+    if !s.warnings.is_empty() {
+        out.push_str(&format!("\n{} warning(s):\n", s.warnings.len()));
+        for w in &s.warnings {
+            out.push_str(&format!("- {w}\n"));
+        }
+    }
+    Ok(out)
 }
 
 #[cfg(test)]
@@ -357,6 +401,25 @@ figures:
     }
 
     #[test]
+    fn a_structured_figure_skipped_as_restated_warns() {
+        let i = inv(r#"
+lecture: hb.L01
+figures:
+  - { page: 2, label: "Figure 2", kind: algorithm, skip: "Restates step text on p2" }
+  - { page: 3, label: "Figure 3", kind: chart, skip: "the lesson restates it" }
+  - { page: 3, label: "Figure 4", kind: diagram, skip: "plain text in boxes, no arrows or structure" }
+  - { page: 4, label: "slide", kind: other, skip: "restates step text" }
+  - { page: 4, label: "Figure 5", kind: diagram, drawn: true }
+"#);
+        let w = warnings(&i);
+        assert_eq!(w.len(), 2, "{w:#?}");
+        assert!(w[0].starts_with("hb.L01 p2 \"Figure 2\": algorithm skipped as restated"), "{}", w[0]);
+        assert!(w[1].contains("p3 \"Figure 3\": chart skipped"), "{}", w[1]);
+        // A warning never fails the inventory.
+        assert!(problems(&i, [1, 4], &lesson_file(LESSONS)).iter().all(|p| !p.contains("restated")));
+    }
+
+    #[test]
     fn summary_totals_the_courses() {
         let rows = vec![
             CourseRow { course: "hb".into(), lectures: 20, done: 2, placed: 9, skipped: 1 },
@@ -370,8 +433,8 @@ figures:
     #[test]
     fn the_repo_inventories_are_valid() {
         let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
-        let (errors, rows, _) = scan(&root).unwrap();
-        assert_eq!(errors, Vec::<String>::new());
-        assert!(rows.iter().any(|r| r.course == "hb"));
+        let s = scan(&root).unwrap();
+        assert_eq!(s.errors, Vec::<String>::new());
+        assert!(s.rows.iter().any(|r| r.course == "hb"));
     }
 }

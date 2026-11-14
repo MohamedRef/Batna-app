@@ -5,7 +5,7 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 
-use crate::content::{self, Body, Lecture, Status};
+use crate::content::{self, Body, Item, Lecture, Status};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Problem {
@@ -92,7 +92,32 @@ pub fn lecture(lec: &Lecture, cx: &Context<'_>) -> Vec<Problem> {
         for message in body_problems(&item.body) {
             bad(at, message);
         }
+        for message in item_picture_problems(item) {
+            bad(at, message);
+        }
     }
+    out
+}
+
+/// An item's own picture (#1154): a book figure on a card, mcq or case, with
+/// sound marks. Whether the file is one of the lecture's lesson figures is
+/// checked with the lessons ([`crate::lesson::validate`]).
+pub fn item_picture_problems(item: &Item) -> Vec<String> {
+    let mut out = Vec::new();
+    let Some(p) = &item.image else {
+        if !item.marks.is_empty() {
+            out.push("marks need an image".into());
+        }
+        return out;
+    };
+    if !content::PICTURE_KINDS.contains(&item.body.kind()) {
+        out.push(format!("only a card, mcq or case carries an image, not a {}", item.body.kind()));
+    }
+    if !p.book {
+        out.push("an item's image is a book figure (book: true), the same file as a lesson figure".into());
+    }
+    out.extend(crate::lesson::picture_problems(p));
+    out.extend(crate::lesson::mark_problems(&item.marks, true));
     out
 }
 
@@ -354,6 +379,30 @@ mod tests {
         assert!(problems.is_empty(), "{problems:#?}");
         let kinds: BTreeSet<_> = l.items.iter().map(|i| i.body.kind()).collect();
         assert_eq!(kinds.len(), 9, "the fixture should show every kind");
+    }
+
+    #[test]
+    fn a_picture_goes_on_a_card_mcq_or_case_as_a_book_figure() {
+        let l = lec(&format!(
+            "{HEAD}items:
+  - {{ id: hb.L01.001, kind: card, front: Sign?, back: b, image: {{ file: hb/a.webp, book: true }}, marks: [{{ at: [0.5, 0.5], label: here }}], src: {{ page: 2 }}, status: unverified }}
+  - {{ id: hb.L01.002, kind: cloze, text: '{{{{c1::x}}}}', image: {{ file: hb/a.webp, book: true }}, src: {{ page: 2 }}, status: unverified }}
+  - {{ id: hb.L01.003, kind: card, front: a, back: b, image: {{ file: hb/a.gif }}, src: {{ page: 2 }}, status: unverified }}
+  - {{ id: hb.L01.004, kind: card, front: a, back: b, marks: [{{ at: [0.5, 0.5], label: x }}], src: {{ page: 2 }}, status: unverified }}
+  - {{ id: hb.L01.005, kind: mcq, stem: s, options: [a, b, c, d], answer: 0, why: [w, x, y, z], image: {{ file: hb/a.webp, book: true }}, marks: [{{ at: [1.5, 0.5], label: x }}], src: {{ page: 2 }}, status: unverified }}
+"
+        ));
+        let msgs: Vec<String> = lecture(&l, &Context::default()).iter().map(|p| p.to_string()).collect();
+        let at = |id: &str| msgs.iter().filter(|m| m.starts_with(id)).count();
+        assert_eq!(at("hb.L01.001"), 0, "{msgs:#?}");
+        assert!(msgs.iter().any(|m| m.starts_with("hb.L01.002") && m.contains("not a cloze")), "{msgs:#?}");
+        assert!(msgs.iter().any(|m| m.starts_with("hb.L01.003") && m.contains("book: true")), "{msgs:#?}");
+        assert!(msgs.iter().any(|m| m.starts_with("hb.L01.003") && m.contains(".webp, .jpg or .png")));
+        assert!(msgs.iter().any(|m| m.starts_with("hb.L01.004") && m.contains("marks need an image")));
+        assert!(msgs.iter().any(|m| m.starts_with("hb.L01.005") && m.contains("fractions of the picture")));
+        // It reads back as written.
+        let back: Lecture = serde_yaml_ng::from_str(&serde_yaml_ng::to_string(&l).unwrap()).unwrap();
+        assert_eq!(back, l);
     }
 
     #[test]

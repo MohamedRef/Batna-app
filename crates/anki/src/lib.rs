@@ -39,6 +39,9 @@ const BACK_TAIL: &str = r#"<div class="src">{{Source}}</div>{{#Update}}<div clas
 
 const LETTERS: &[u8] = b"ABCDEFGH";
 
+/// Reads a lesson picture's bytes by its file under `content/lessons/img/`.
+pub type ReadPicture<'a> = dyn Fn(&str) -> Option<Vec<u8>> + 'a;
+
 /// What decides which items go in, and how they are tagged.
 #[derive(Default)]
 pub struct Options<'a> {
@@ -57,6 +60,10 @@ pub struct Options<'a> {
     pub program: Option<&'a batna_core::program::Program>,
     /// His notes by item id: each goes in the `Notes` field of the item's notes.
     pub notes: Option<&'a BTreeMap<String, String>>,
+    /// An item's picture file (`hem/L08-cml-film.webp`, under
+    /// `content/lessons/img/`) as bytes (#1154). Without it, or when it gives
+    /// nothing, the item's notes go without the picture.
+    pub pictures: Option<&'a ReadPicture<'a>>,
 }
 
 fn has(set: Option<&BTreeSet<String>>, id: &str) -> bool {
@@ -114,6 +121,8 @@ pub struct Deck {
     pub per_lecture: Vec<(String, usize)>,
     /// Items left out: rejected or marked ✗.
     pub skipped: usize,
+    /// Pictures the notes show, by their name in the collection's media.
+    pub media: BTreeMap<String, Vec<u8>>,
 }
 
 impl Deck {
@@ -150,6 +159,7 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Deck {
         notes: Vec::new(),
         per_lecture: Vec::new(),
         skipped: 0,
+        media: BTreeMap::new(),
     };
     for lec in lectures {
         let did = stable_id(&format!("batna-deck-{}", lec.lecture));
@@ -188,6 +198,15 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Deck {
                 None => (item, item.status == Status::Approved || has(opts.approved, &item.id)),
             };
             let mut notes = notes_for(item, lec, did, approved);
+            // A picture item (#1154): the picture heads every note's front.
+            if let Some(p) = &item.image
+                && let Some(bytes) = opts.pictures.and_then(|f| f(&p.file))
+            {
+                let name = media_name(&p.file);
+                let img = format!(r#"<img src="{}"><br>"#, esc(&name));
+                notes.iter_mut().for_each(|n| n.fields[0].insert_str(0, &img));
+                deck.media.insert(name, bytes);
+            }
             if let Some(mine) = opts.notes.and_then(|n| n.get(&item.id)) {
                 notes.iter_mut().for_each(|n| n.fields[5] = esc(mine));
             }
@@ -354,6 +373,12 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
             "",
         )],
     }
+}
+
+/// A picture's name in the collection's media: Anki keeps media in one flat
+/// folder, so `hem/L08-cml-film.webp` becomes `batna-hem-L08-cml-film.webp`.
+pub fn media_name(file: &str) -> String {
+    format!("batna-{}", file.replace(['/', '\\'], "-"))
 }
 
 /// Python's `html.escape`, then newlines as `<br>` (make_apkg.py's `esc`).
@@ -581,8 +606,16 @@ pub fn to_apkg(deck: &Deck, now_ms: i64) -> Result<Vec<u8>, String> {
         zip::write::SimpleFileOptions::default().compression_method(zip::CompressionMethod::Deflated);
     zip.start_file("collection.anki2", deflated).map_err(|e| s(&e))?;
     zip.write_all(&collection).map_err(|e| s(&e))?;
+    // Media files are stored as `0`, `1`, …; the `media` index names them.
+    let stored = zip::write::SimpleFileOptions::default().compression_method(zip::CompressionMethod::Stored);
+    let mut index = serde_json::Map::new();
+    for (n, (name, bytes)) in deck.media.iter().enumerate() {
+        zip.start_file(n.to_string(), stored).map_err(|e| s(&e))?;
+        zip.write_all(bytes).map_err(|e| s(&e))?;
+        index.insert(n.to_string(), Value::String(name.clone()));
+    }
     zip.start_file("media", deflated).map_err(|e| s(&e))?;
-    zip.write_all(b"{}").map_err(|e| s(&e))?;
+    zip.write_all(serde_json::to_string(&index).unwrap().as_bytes()).map_err(|e| s(&e))?;
     Ok(zip.finish().map_err(|e| s(&e))?.into_inner())
 }
 
@@ -734,6 +767,7 @@ mod tests {
             drafts: Some(&drafts),
             program: None,
             notes: None,
+            pictures: None,
         };
         let deck = build(&[lec], &opts);
         assert_eq!(deck.skipped, 1);
@@ -742,6 +776,31 @@ mod tests {
         assert!(deck.notes[0].tags.contains(&"unverified".to_string()));
         let order = deck.notes.iter().find(|n| n.fields[4] == "hb.L01.008").unwrap();
         assert_eq!(order.tags, ["hb::L01", "topic::management", "approved", "draft"]);
+    }
+
+    #[test]
+    fn a_picture_item_carries_its_picture_into_the_media() {
+        let mut lec = fixture();
+        lec.items[0].image = Some(batna_core::lesson::Picture {
+            file: "hem/L08-film.webp".into(),
+            book: true,
+            ..Default::default()
+        });
+        let read = |f: &str| (f == "hem/L08-film.webp").then(|| b"RIFF-webp".to_vec());
+        let deck = build(&[lec.clone()], &Options { pictures: Some(&read), ..Options::default() });
+        assert!(deck.notes[0].fields[0].starts_with(r#"<img src="batna-hem-L08-film.webp"><br>"#));
+        assert!(!deck.notes[1].fields[0].contains("<img"));
+        let bytes = to_apkg(&deck, 1_800_000_000_000).unwrap();
+        let mut zip = zip::ZipArchive::new(std::io::Cursor::new(bytes)).unwrap();
+        let mut media = String::new();
+        zip.by_name("media").unwrap().read_to_string(&mut media).unwrap();
+        assert_eq!(media, r#"{"0":"batna-hem-L08-film.webp"}"#);
+        let mut file = Vec::new();
+        zip.by_name("0").unwrap().read_to_end(&mut file).unwrap();
+        assert_eq!(file, b"RIFF-webp");
+        // No reader, or a missing file: the note goes without the picture.
+        let deck = build(&[lec], &Options::default());
+        assert!(!deck.notes[0].fields[0].contains("<img") && deck.media.is_empty());
     }
 
     #[test]

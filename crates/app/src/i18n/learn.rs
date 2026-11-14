@@ -34,6 +34,11 @@ pub const REVEAL: &str = "اكشف";
 pub const SHOW_ALL: &str = "اكشف الكل";
 pub const MNEMONIC: &str = "احفظها كده";
 pub const ZOOM_IN: &str = "كبّر الرسمة";
+/// What a screen reader hears for a question's picture: the lesson's own
+/// description of it would give the answer away.
+pub const ITEM_PICTURE: &str = "صورة السؤال";
+/// Under a question's picture before the answer: the marks come with it.
+pub const ITEM_PICTURE_HINT: &str = "دوس على الصورة علشان تكبّرها. العلامات بتظهر مع الإجابة.";
 pub const ZOOM_OUT: &str = "صغّر الرسمة";
 pub const ZOOM_FIT: &str = "على قد الشاشة";
 pub const ZOOM_CLOSE: &str = "اقفل الصورة";

@@ -22,6 +22,7 @@ mod check;
 use check::*;
 
 mod presentation;
+pub(crate) use presentation::Figure;
 use presentation::*;
 
 mod marks;

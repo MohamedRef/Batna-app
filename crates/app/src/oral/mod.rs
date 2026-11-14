@@ -454,6 +454,10 @@ fn Runner() -> Element {
                 primary: rsx! {
                     crate::ui::Card { class: "oral-question",
                         h2 { class: "muted small", {tx::LISTEN} }
+                        // A picture question (#1154): the examiner hands him the picture.
+                        if let Some((_, item)) = crate::bank::lookup(&p.item_id) {
+                            crate::learn::ItemPicture { item, answered: revealed }
+                        }
                         div { class: "en", dir: "ltr", lang: "en",
                             for (i, line) in p.question.iter().enumerate() {
                                 p { key: "{i}", class: if i + 1 == p.question.len() { "oral-ask" } else { "" }, "{line}" }

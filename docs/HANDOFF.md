@@ -295,6 +295,13 @@ quote cap there is outdated), course briefs in [courses/](courses/).
 9. **Images**: no generated images. Crops of the book's own figures
    (`book: true`, page cited) or open-licence images with credit, in
    `content/lessons/img/`, small WebP. Code-drawn SVG where clearer.
+   **Every figure of the book goes in its lesson** (Mohamed, 2026-11-14,
+   #983): at its page, right after the step that refers to it, explained in
+   the lesson's context; inventoried per lecture in
+   `content/book-figures/<course>/LNN.yaml` and checked by `validate`
+   (LESSONS.md rule 10 and § Book figures). All nine courses, Hematology and
+   Hepatology first, one PR per lecture; `batna-tools figures` prints the
+   progress table kept on #983.
 10. **Arabic number agreement** in UI: 1 singular, 2 dual, 3–10 plural,
     0 and 11+ singular. Use `i18n::count::count(n, &NOUN)` / `count_text` /
     `word`; never `format!("{n} درس")`.
@@ -678,6 +685,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-14: book figures rule (#983, Mohamed): every picture and diagram of the book in its lesson at its page, explained there (LESSONS.md rule 10 rewritten, § Book figures); `content/book-figures/` inventories checked by `validate` (`figures.rs`), `batna-tools figures` progress table, `scripts/content-tools/figure-candidates.py` worklist and contact sheets. No lecture inventoried yet.
 - 2026-11-14: wide lessons (#828): width now counts the pages a lesson's steps cite (research: slides, limit 16), and `content/lesson-wide.yaml` lists 13 lessons wide on purpose with their reasons; res.L05.lesson5 split (retrospective cohort → lesson7), res.L12.lesson6 and res.L03.lesson4 topics corrected. Wide-lesson warnings 140 → 0.
 - 2026-11-13: longest-option cue, nephrology (#816): 43 distractors made as long as their keys, every neph lecture at or under 25%; bank share 26.3% → 24.4%, ceiling 25%. Hepatology (32%) and geriatrics (33%) were already lower and are left for now.
 - 2026-11-13: longest-option cue, rheumatology (#816): 47 distractors made as long as their keys, every rheum lecture but L03 (27%) at or under 25%; bank share 28.4% → 26.3%, ceiling 27%.

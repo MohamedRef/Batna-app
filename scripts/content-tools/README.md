@@ -15,6 +15,7 @@ Run with `python3 -I` from the repo root; they need `pyyaml`.
 | `cuts.py <repo> <course>...` | Lists quotes that stop mid-sentence. |
 | `fixcuts.py <repo> <course> <cuts.tsv>` | Widens the listed quotes to the whole sentence. |
 | `abbrfix.py <repo> <course>...` | Spells out each abbreviation at its first mention per lecture (text/why/caption) from `content/glossary.yaml`. It can hit a quote line first; revert those (validate flags changed quotes). |
+| `figure-candidates.py <lecture> [--sheets DIR]` | Worklist for a lecture's book-figure inventory (#983): per page, embedded pictures and "Figure N" words, plus contact sheets of the page images to look through. See docs/LESSONS.md § Book figures. |
 | `pagerefs_lib.py` | Book page parsing shared by the page-reference audit. |
 
 After any of them: `cargo run -q -p batna-tools -- validate`, review the diff by

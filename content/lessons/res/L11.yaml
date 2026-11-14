@@ -425,6 +425,40 @@ lessons:
             options: ["Weighting, so the males count proportionally more", "Nothing, randomization fixes it", "Dropping 40 females"]
             answer: 0
             why: "كل ست فرصتها أعلى، فالستات **overrepresented**؛ الـ **weighting** بيرجّع النسب الحقيقية."
+      - kind: figure
+        page: 35
+        quote: "In a population of 1000, sample of 200 is to be drawn based on the proportion of each category in the study population"
+        title: "Proportional ولا equal: نفس الـ 200 مقسومين إزاي"
+        alt: "Three bars. Population of 1000 staff: 700 males, 70 percent, and 300 females, 30 percent. Proportional sample of 200: 140 males and 60 females, the same shares as the population. Equal or disproportional sample of 200: 100 males and 100 females, enough of each group but females overrepresented, so the data are weighted."
+        caption: |
+          التلات شرايط نفس الطول (الكل)، والفرق في مكان الخط اللي بيقسمهم:
+
+          - **فوق**: الكلية نفسها، 70% رجالة و30% ستات.
+          - **النص**: الـ ==proportional allocation== بيحافظ على نفس الخط بالظبط: 140 و60 (slide 35).
+          - **تحت**: الـ ==equal allocation== بيحط الخط في النص: 100 و100. الستات اتضاعف نصيبهم، فكل مجموعة حجمها كافي للتحليل لوحدها، بس لازم ==weighting== لما تجمعهم.
+
+          يعني الاتنين stratified وعشوائي من جوه كل طبقة؛ الاختلاف بس في نصيب كل طبقة.
+        svg: |
+          <svg viewBox="0 0 330 266" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">Population: 1000 staff</text>
+            <rect x="10" y="26" width="217" height="30" rx="4" class="fg-box"/>
+            <rect x="227" y="26" width="93" height="30" rx="4" class="fg-acc"/>
+            <text x="118" y="46" text-anchor="middle" class="t-sm">700 males (70%)</text>
+            <text x="273" y="46" text-anchor="middle" class="t-sm t-b">300 F (30%)</text>
+            <text x="10" y="92" class="t-sm t-b">Proportional, n = 200</text>
+            <rect x="10" y="100" width="217" height="30" rx="4" class="fg-box"/>
+            <rect x="227" y="100" width="93" height="30" rx="4" class="fg-acc"/>
+            <text x="118" y="120" text-anchor="middle" class="t-sm">140 males</text>
+            <text x="273" y="120" text-anchor="middle" class="t-sm t-b">60 females</text>
+            <text x="10" y="148" class="t-sm t-mut">same shares as the population</text>
+            <text x="10" y="184" class="t-sm t-b">Equal (disproportional), n = 200</text>
+            <rect x="10" y="192" width="155" height="30" rx="4" class="fg-box"/>
+            <rect x="165" y="192" width="155" height="30" rx="4" class="fg-acc"/>
+            <text x="88" y="212" text-anchor="middle" class="t-sm">100 males</text>
+            <text x="243" y="212" text-anchor="middle" class="t-sm t-b">100 females</text>
+            <text x="10" y="242" class="t-sm t-mut">enough of each group, but females</text>
+            <text x="10" y="258" class="t-sm t-mut">are overrepresented: weight the data</text>
+          </svg>
       - kind: table
         page: 36
         quote: "Table 1 Proportional allocation of 1,600 students to four strata defined by college year\n| Year | Population Size: Total Enrollment | Sample Size: nh = nNh/N | Sample Size: Rounded Values |\n|---|---|---|---|\n| First | 5,000 | 399.4 | 399 |\n| Second | 4,058 | 324.1 | 324 |\n| Third | 4,677 | 373.6 | 374 |\n| Fourth | 6,296 | 502.9 | 503 |\n| Total | 20,031 | 1,600.0 | 1,600 |"
@@ -1078,6 +1112,39 @@ lessons:
           - "الـ effect size الكبير بيصغّر العينة، مش بيكبّرها."
           - "العينة بتتغير مع الـ effect size."
           - "الرقم ده مش من الجدول؛ Kelsey 93 و Fleiss 92."
+      - kind: figure
+        page: 72
+        quote: "Accepted margin of error (Alpha) 4. Confidence level (always 95%)"
+        title: "إيه اللي بيكبّر العيّنة وإيه اللي بيصغّرها"
+        alt: "Two bar charts. Survey with 30 percent expected and 95 percent confidence: margin of plus or minus 5 percent needs 322, plus or minus 3 percent needs 888; more precision costs a much bigger sample. Cohort with 95 percent confidence and 80 percent power, per group by Kelsey: 25 versus 38 percent needs 201, 4.9 versus 18 percent needs 93; a bigger effect needs a smaller sample, risk ratio 1.52 versus 3.67."
+        caption: |
+          أرقام Epi Info اللي في الدرس، مرسومة جنب بعض علشان تشوف الاتجاه من غير حفظ:
+
+          - **فوق**: نفس الـ survey، بس لما ضيّقت الـ ==margin of error== من 5% لـ 3% العيّنة قفزت من 322 لـ 888 (تقريبًا 3 أضعاف، لأن n ماشية مع 1/d²).
+          - **تحت**: دراستين cohort. الفرق الصغير (25% ضد 38%) محتاج 201 في كل group، والفرق الكبير (4.9% ضد 18%) كفاية عليه 93. الـ ==effect size== الكبير سهل تلاقيه بعيّنة صغيرة.
+
+          القاعدة: دقة أعلى أو effect أصغر = عيّنة أكبر. وبعدها زوّد للـ ==loss to follow-up==.
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">Survey, 30% expected, 95% confidence</text>
+            <text x="10" y="44" class="t-sm">margin ±5%</text>
+            <rect x="100" y="30" width="78" height="22" rx="4" class="fg-box"/>
+            <text x="186" y="46" class="t-sm t-b">322</text>
+            <text x="10" y="76" class="t-sm">margin ±3%</text>
+            <rect x="100" y="62" width="214" height="22" rx="4" class="fg-acc"/>
+            <text x="300" y="78" text-anchor="end" class="t-sm t-b">888</text>
+            <text x="10" y="106" class="t-sm t-mut">more precision costs a much bigger sample</text>
+            <text x="10" y="150" class="t-sm t-b">Cohort, 95% confidence, 80% power</text>
+            <text x="10" y="166" class="t-sm t-mut">per group (Kelsey)</text>
+            <text x="10" y="194" class="t-sm">25% vs 38%</text>
+            <rect x="100" y="180" width="214" height="22" rx="4" class="fg-acc"/>
+            <text x="300" y="196" text-anchor="end" class="t-sm t-b">201</text>
+            <text x="10" y="226" class="t-sm">4.9% vs 18%</text>
+            <rect x="100" y="212" width="99" height="22" rx="4" class="fg-box"/>
+            <text x="207" y="228" class="t-sm t-b">93</text>
+            <text x="10" y="256" class="t-sm t-mut">a bigger effect needs a smaller sample</text>
+            <text x="10" y="280" class="t-sm t-mut">(risk ratio 1.52 vs 3.67)</text>
+          </svg>
       - kind: explain
         page: 88
         quote: "N.B: in the previous examples the outcome is qualitative and the effect size is the difference between two proportions\nTo calculate the sample size if the outcome is quantitative and the effect size is the mean difference and SD difference it is better to use G*Power software to estimate the minimum sample size"

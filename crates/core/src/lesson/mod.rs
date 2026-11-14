@@ -58,6 +58,15 @@ pub struct Lesson {
     pub status: Status,
 }
 
+impl Lesson {
+    /// Whether a figure's marks start shown at step `k`: off when the next
+    /// step is a question, so he looks at the picture first and checks
+    /// after (#984); on otherwise.
+    pub fn marks_start_shown(&self, k: usize) -> bool {
+        !self.steps.get(k + 1).is_some_and(|s| s.body.is_question())
+    }
+}
+
 /// One screen of a lesson.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Step {
@@ -148,8 +157,13 @@ pub enum StepBody {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         image: Option<Picture>,
         caption: String,
-        /// What the figure shows, for a screen reader.
+        /// What the figure shows, for a screen reader: the whole picture,
+        /// the marks' labels are read as their own list.
         alt: String,
+        /// Numbered places on the picture the lesson points at (#984).
+        /// Only on an image figure.
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        marks: Vec<FigureMark>,
     },
     /// A question to think about first; the answer opens on a tap.
     Reveal { prompt: String, answer: String },
@@ -257,9 +271,10 @@ impl Step {
                 title.iter().for_each(|t| add(t));
                 add(text);
             }
-            StepBody::Figure { title, svg, caption, .. } => {
+            StepBody::Figure { title, svg, caption, marks, .. } => {
                 title.iter().for_each(|t| add(t));
                 add(&svg_text(svg));
+                marks.iter().for_each(|m| add(&m.label));
                 add(caption);
             }
             StepBody::Reveal { prompt, answer } => {
@@ -337,7 +352,7 @@ pub fn svg_text(svg: &str) -> String {
 pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
     Some(match kind {
         "explain" => &["title", "text"],
-        "figure" => &["title", "svg", "image", "caption", "alt"],
+        "figure" => &["title", "svg", "image", "caption", "alt", "marks"],
         "reveal" => &["prompt", "answer"],
         "mnemonic" => &["word", "parts", "hook"],
         "aside" => &["tone", "text"],
@@ -389,6 +404,9 @@ pub enum Tone {
 mod markup;
 pub use markup::*;
 
+mod marks;
+pub use marks::*;
+
 mod check;
 pub use check::*;
 
@@ -397,3 +415,6 @@ mod tests;
 
 #[cfg(test)]
 mod validate_tests;
+
+#[cfg(test)]
+mod marks_tests;

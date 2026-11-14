@@ -16,3 +16,4 @@ pub const ESC: &str = "تقفل أي حاجة مفتوحة";
 pub const HELP: &str = "القايمة دي";
 pub const PALETTE: &str = "الانتقال السريع للأقسام والدروس والمحاضرات";
 pub const PAGE: &str = "تروح لصفحة في كتاب المادة";
+pub const MARKS: &str = "تظهّر أو تخبّي العلامات اللي على صورة الدرس";

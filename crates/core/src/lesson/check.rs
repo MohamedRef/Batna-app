@@ -296,7 +296,8 @@ pub(super) fn step_problems(body: &StepBody, items: &BTreeSet<&str>) -> Vec<Stri
                 out.push("text is empty".into());
             }
         }
-        StepBody::Figure { svg, image, caption, alt, .. } => {
+        StepBody::Figure { svg, image, caption, alt, marks, .. } => {
+            out.extend(mark_problems(marks, image.is_some()));
             match image {
                 None => out.extend(svg_problems(svg)),
                 Some(_) if !svg.trim().is_empty() => {

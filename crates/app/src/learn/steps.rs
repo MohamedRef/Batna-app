@@ -24,8 +24,14 @@ use check::*;
 mod presentation;
 use presentation::*;
 
+mod marks;
+pub use marks::MarksStart;
+#[cfg(test)]
+pub(crate) use marks::fixture as marks_fixture;
+use marks::*;
+
 use batna_core::content::CaseStep;
-use batna_core::lesson::{MnemonicPart, Picture, SortCard, StepBody, Tone};
+use batna_core::lesson::{FigureMark, MnemonicPart, Picture, SortCard, StepBody, Tone};
 use batna_core::response::{Attempt, Draft};
 use dioxus::prelude::*;
 
@@ -105,8 +111,8 @@ pub fn StepView(body: StepBody, seed: String, on_answer: EventHandler<bool>) -> 
             if let Some(t) = title { h2 { class: "ls-h", Line { text: t } } }
             Rich { text }
         },
-        StepBody::Figure { title, svg, image, caption, alt } => rsx! {
-            Figure { title, svg, image, caption, alt }
+        StepBody::Figure { title, svg, image, caption, alt, marks } => rsx! {
+            Figure { title, svg, image, caption, alt, marks }
         },
         StepBody::Reveal { prompt, answer } => rsx! { Reveal { prompt, answer, on_answer } },
         StepBody::Mnemonic { word, parts, hook } => rsx! { Mnemonic { word, parts, hook } },

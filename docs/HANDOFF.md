@@ -719,6 +719,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-14: res.L15 slide 90 pie: caption gives the slide 89 table shares (24/40/20/16%); the printed labels (17/29/43/11%) match Oxyuris keyed as 15 instead of 5, so the table wins.
 - 2026-11-14: dm.L03 lesson5 gains a Table 9.1 step, a micro/macroalbuminuria explain step and a check (p28; quote-ok lines in the dm verdicts).
 - 2026-11-14: `batna-tools validate` warns (never fails) on a diagram, algorithm or chart whose skip reason says it "restates" the lesson's text, and prints the count with the other warnings; `batna-tools figures` lists them under its table (#1156).
 - 2026-11-14: cards, MCQs and cases can carry a book picture (#1154): `image:` + `marks:` on the item, shown above the question in study, bank, cases and oral (marks after the answer), bank filter «اللي فيها صورة بس», pictures in the Anki export; `pack::SCHEMA` 4 → 5. Recognition items follow per lecture.

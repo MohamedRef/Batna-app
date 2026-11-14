@@ -22,6 +22,21 @@ lessons:
           في 2017 كان فيه حوالي **843.6 مليون** إنسان عندهم chronic kidney disease (CKD)، يعني تقريبًا **1 من كل 10**. الوفيات زادت **41.5%** من 1990، ومتوقع يبقى **السبب الخامس** للوفاة.
 
           والمهم للامتحان: مريض الـ CKD غالبًا **مش بيموت من الكلى**. ==cardiovascular disease (CVD)== هو السبب الأول للوفاة.
+      - kind: figure
+        page: 23
+        quote: "CVD Main cause of death in CKD"
+        title: "الـ CVD هو اللي بيموّت مريض الـ CKD"
+        image: { file: neph/L02-cvd-death-chart.webp, book: true }
+        alt: "Book bar chart, adjusted percentages of cardiovascular disease by CKD status: five bars per disease (no CKD, any CKD, stages 1-2, stage 3, stages 4-5). Diseases on the x axis: any CVD, HF, CAD, AMI, VHD, PAD, CVA/TIA, AF, SCA, VTE/PE. Any CVD, HF and CAD are boxed in red; the bars rise from no CKD to stages 4-5. Text on the right: CVD main cause of death in CKD."
+        caption: |
+          رسم أعمدة، وكل مرض قلب ليه 5 أعمدة ملوّنة: **No CKD** (كحلي)، **Any CKD** (أحمر)، **Stages 1-2** (رمادي)، **Stage 3** (أخضر)، **Stages 4-5** (أزرق فاتح).
+
+          - **شمال في المربع الأحمر: Any CVD**: من حوالي 35% من غير CKD لحوالي 75% في stages 4-5.
+          - **المربع الأحمر التاني: HF** (heart failure) و **CAD** (coronary artery disease): نفس السلّم، كل ما الـ stage يزيد العمود يطول.
+          - **باقي الأمراض يمين** (AMI، PAD، AF...): نفس الاتجاه بس أرقام أصغر.
+          - **فوق يمين**: **CVD Main cause of death in CKD**.
+
+          الرسمة بتثبت إن ==الخطر على القلب بيزيد مع كل stage==، فمريض الـ CKD غالبًا بيموت من ==قلبه قبل كليته==.
       - kind: explain
         page: 24
         quote: "CKD is defined as abnormalities of kidney structure or function, present for > 3 months, with implications for health and CKD is classified based on cause, GFR category, and albuminuria category (CGA)."
@@ -163,36 +178,17 @@ lessons:
     steps:
       - kind: figure
         page: 24
-        quote: "Causes of Renal Hyperfiltration\n  Increased sympathetic activity\n  Increased renin-angiotensin-aldesterone activity\n  Hyperglycaemia and insulin resistance\n  Obesity\n  Increased autoimmune activation\n  Impaired glomerular haemodynamics\n  Inhibition of tubuloglomerular feedback (macula densa signals)\nGlomerular Hyperfiltration\n  Afferent ateriole: Reduced arterial resistance\n  Efferent ateriole: Increased arterial resistance\n  Increased glomerular permeability to macromolecules: Proteinuria, Albuminuria\n  Increased oxdative stress; Increased inflammation\n  Endothelial dysfunction: Increased arterial stiffness; Increased blood pressure; Impaired blood pressure variation\n  Increased Sodium Uptake\n  Increased cardiovascular disease and mortality"
-        title: "الـ hyperfiltration: النفرونات الباقية بتشتغل زيادة"
-        alt: "A glomerulus drawn as a circle with a wide afferent arteriole entering on the left labelled reduced resistance, and a narrow efferent arteriole leaving on the right labelled increased resistance. Inside, high pressure. Below, the chain: high single-nephron GFR, proteinuria and RAAS, fibrosis, fewer nephrons, which loops back."
-        caption: "الـ **afferent** بيتوسّع والـ **efferent** بيضيق ← الضغط جوه الـ glomerulus يعلى ← proteinuria وfibrosis ← نفرونات أقل ← hyperfiltration أكتر. دايرة مقفولة."
-        svg: |
-          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="N2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
-              <marker id="N2b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
-            </defs>
-            <rect x="10" y="62" width="110" height="26" rx="6" class="fg-good"/>
-            <text x="65" y="80" text-anchor="middle" class="t-sm">Afferent wide</text>
-            <circle cx="165" cy="75" r="40" class="fg-bad"/>
-            <text x="165" y="72" text-anchor="middle" class="t-sm t-b">High</text>
-            <text x="165" y="88" text-anchor="middle" class="t-sm t-b">pressure</text>
-            <rect x="215" y="68" width="105" height="14" rx="5" class="fg-acc"/>
-            <text x="267" y="104" text-anchor="middle" class="t-sm">Efferent narrow</text>
-            <text x="65" y="108" text-anchor="middle" class="t-sm t-mut">↓ resistance</text>
-            <text x="267" y="62" text-anchor="middle" class="t-sm t-mut">↑ resistance</text>
-            <rect x="40" y="140" width="250" height="28" rx="8" class="fg-box"/>
-            <text x="165" y="159" text-anchor="middle" class="t-sm">↑ single-nephron GFR</text>
-            <line x1="165" y1="168" x2="165" y2="186" class="fg-arrow-bad" marker-end="url(#N2b)"/>
-            <rect x="40" y="188" width="250" height="28" rx="8" class="fg-box"/>
-            <text x="165" y="207" text-anchor="middle" class="t-sm">Proteinuria + RAAS + angiotensin II</text>
-            <line x1="165" y1="216" x2="165" y2="234" class="fg-arrow-bad" marker-end="url(#N2b)"/>
-            <rect x="40" y="236" width="250" height="28" rx="8" class="fg-bad"/>
-            <text x="165" y="255" text-anchor="middle" class="t-sm">Fibrosis → fewer nephrons</text>
-            <path d="M290 250 Q320 200 290 154" class="fg-arrow-acc" fill="none" marker-end="url(#N2a)"/>
-            <text x="165" y="290" text-anchor="middle" class="t-sm t-mut">once half are lost, CKD progresses whatever the cause</text>
-          </svg>
+        title: "الـ hyperfiltration في الكتاب"
+        image: { file: neph/L02-hyperfiltration.webp, book: true }
+        alt: "Book diagram. Top grey box: causes of renal hyperfiltration (increased sympathetic activity, increased renin-angiotensin-aldosterone activity, hyperglycaemia and insulin resistance, obesity, increased autoimmune activation, impaired glomerular haemodynamics, inhibition of tubuloglomerular feedback). Centre: a drawn glomerulus labelled glomerular hyperfiltration, with afferent arteriole (reduced arterial resistance) on the left and efferent arteriole (increased arterial resistance) on the right, increased glomerular permeability to macromolecules, and a tubule labelled proteinuria/albuminuria. Around it: increased oxidative stress and inflammation; endothelial dysfunction (arterial stiffness, high blood pressure, impaired variation); increased sodium uptake. All arrows end at increased cardiovascular disease and mortality."
+        caption: |
+          - **الصندوق الرمادي فوق**: أسباب الـ hyperfiltration: sympathetic، الـ **renin-angiotensin-aldosterone** system، **hyperglycaemia** و insulin resistance، **obesity**، autoimmune، وتعطيل الـ **tubuloglomerular feedback** (الـ macula densa).
+          - **في النص: الـ glomerulus**: شمال **Afferent arteriole** مكتوب تحته **reduced arterial resistance** (متوسّع)، ويمين **Efferent arteriole** و **increased arterial resistance** (ضيق). يعني الدم داخل كتير وخارج بالعافية، فالضغط جوه ==يعلى==.
+          - **الأنبوبة تحت**: **Proteinuria/Albuminuria**: الفلتر المضغوط بيعدّي بروتين.
+          - **حواليه**: oxidative stress و inflammation (يمين فوق)، **Endothelial dysfunction** (يمين تحت: arterial stiffness وضغط عالي)، و **Increased sodium uptake** (شمال).
+          - **كل الأسهم تحت**: **Increased cardiovascular disease and mortality**.
+
+          الرسمة بتربط حاجتين: نفس الـ hyperfiltration اللي بيبوّظ الكلية ==هو اللي بيضرب القلب==.
       - kind: explain
         page: 24
         quote: "Causes of Renal Hyperfiltration"
@@ -217,6 +213,20 @@ lessons:
           التفسير المقبول (مش في الكتاب) لليه البروتين مؤذي: خلايا الـ tubule مش متعودة تمص كميات بروتين كبيرة، فبتتعب وتطلّع مواد التهابية بتشد الـ fibroblasts.
 
           والنتيجة: كل nephron يموت بيزوّد الحمل على الباقي، فيموتوا أسرع. علشان كده الكتاب بيقول إن بعد ما ==نص النفرونات== يروح، المرض بيكمّل بنفس الطريقة أيًا كان السبب.
+      - kind: figure
+        page: 25
+        quote: "Pathogenesis of chronic kidney disease"
+        title: "الدايرة المقفولة: رسمة الكتاب"
+        image: { file: neph/L02-pathogenesis.webp, book: true }
+        alt: "Book flowchart 'Pathogenesis of chronic kidney disease' with a note on the left. Down the centre: fewer nephrons, adaptive hyperfiltration at the glomerulus, which splits into raised glomerular permeability and raised RAAS. Raised RAAS raises single-nephron GFR (SNGFR) in a purple 'early in course' box, which feeds back to hyperfiltration, and causes hypertension. Raised permeability leads to more filtration of proteins and macromolecules, then proteinuria and dyslipidemia. Both paths lead to nephrotoxic inflammation/remodelling, then tubulointerstitial fibrosis and secondary FSGS, then lower GFR, lower urine output and systemic complications, in an orange 'late in course' box."
+        caption: |
+          - **فوق**: **↓ nephron number** ← **Adaptive hyperfiltration at glomerulus**.
+          - **يمين، المربع البنفسجي (Early in course)**: **↑ RAAS** ← **↑ SNGFR** (single-nephron GFR)، وسهم راجع لفوق للـ hyperfiltration: دي ==الدايرة المقفولة==. ومن الـ RAAS سهم لـ **Hypertension**.
+          - **شمال**: **↑ glomerular permeability** ← **↑ filtration of proteins** ← **Proteinuria** ← **Dyslipidemia**.
+          - **في النص**: الطريقين بيتقابلوا في **Nephrotoxic inflammation/remodelling**.
+          - **تحت، المربع البرتقاني (Late in course)**: **Tubulointerstitial fibrosis and 2° FSGS** (focal segmental glomerulosclerosis) ← **↓ GFR**، **↓ Urine output**، **Systemic complications**.
+
+          الرسمة بتوضح ليه بعد ما نص النفرونات يروح المرض بيكمّل لوحده: ==الـ RAAS والبروتين== هما الماتور، ودول بالظبط اللي العلاج بيستهدفهم.
       - kind: aside
         page: 25
         quote: "Once half of the total nephrons are lost, CKD progresses similarly regardless of etiology. Initial hyperfiltration activates RAAS and causes proteinuria. Angiotensin II and protein uptake at the tubules causes inflammation and fibrosis of the glomerulus and tubules. Progressive decline in GFR and systemic complications occurs."
@@ -279,6 +289,24 @@ lessons:
           - **Nephrotoxic drugs** و **environmental exposures** و **SLE**: بيأذوا الكلية مباشرة.
 
           يعني بندوّر في المكان اللي احتمال نلاقي فيه حاجة عالي، بدل ما نحلل للناس كلها.
+      - kind: figure
+        page: 26
+        quote: "Figure 2: Screening algorithm for diagnosis and staging of chronic kidney disease (CKD)."
+        title: "شكل 2 في الكتاب: الـ screening خطوة بخطوة"
+        image: { file: neph/L02-screening-algorithm.webp, book: true }
+        alt: "Book flowchart: identify adults at risk for CKD; test for GFR and ACR with or without other markers of kidney damage; GFR under 60 or ACR 30 mg/g or more and/or other markers present; test for GFR or ACR if not done and exclude AKI. Three branches: GFR under 60 and/or ACR 30 or more after 3 months or earlier if evidence of chronicity, then measure eGFRcr-cys if not done and available, then stage according to GFR and ACR, establish the cause, estimate risk of progression, initiate treatment; AKI present, follow AKI guidance; GFR 60 or more and ACR under 30, CKD not present, retest based on individual characteristics, with an arrow back to the top (timing of retesting based on individual characteristics)."
+        caption: |
+          الشجرة بتنزل من فوق:
+
+          1. **Identify adults at risk for CKD** (الناس اللي في الخطوة اللي فاتت).
+          2. **Test for GFR and ACR** (albumin-to-creatinine ratio) ± markers تانية.
+          3. لو فيه حاجة غلط ← اتأكد واستبعد **AKI** (acute kidney injury).
+          4. **3 فروع تحت**:
+             - **شمال (أخضر)**: GFR <60 أو ACR ≥30 ==بعد 3 شهور== ← قيس **eGFRcr-cys** لو متاح ← **Stage، دوّر على السبب، قدّر الـ risk، ابدأ علاج**.
+             - **النص (بنفسجي)**: **AKI present** ← امشي على الـ AKI guidance.
+             - **يمين (برتقاني)**: GFR ≥60 و ACR <30 ← **CKD not present**، والسهم يرجع لفوق: **أعد الفحص** حسب كل مريض.
+
+          الرسمة بتثبت إن التشخيص محتاج ==رقمين (GFR و ACR) ومدة 3 شهور==، وإن الطبيعي النهارده مش نهاية المتابعة.
       - kind: order
         page: 26
         quote: "Figure 2: Screening algorithm for diagnosis and staging of chronic kidney disease (CKD)."
@@ -350,6 +378,21 @@ lessons:
 
           يعني الاتنين مع بعض بيغطّوا عيوب بعض، وده اللي بيخلّي الرقم أقرب للحقيقة.
       - kind: figure
+        page: 27
+        quote: "Figure 8: Approach to glomerular filtration rate (GFR) evaluation using initial and supportive tests."
+        title: "شكل 8 في الكتاب: إمتى نزود cystatin C؟"
+        image: { file: neph/L02-gfr-evaluation.webp, book: true }
+        alt: "Book flowchart: initial test eGFRcr. Consider sources of error; is eGFR thought to be accurate? Yes: use eGFRcr. No: measure cystatin C. Then: consider potential sources of error in eGFRcr-cys; is a more accurate assessment needed? No: use eGFRcr-cys. Yes: measure GFR. All paths end at a coloured bar, evaluation of GFR for clinical application, from 15 (red) to 120 (green)."
+        caption: |
+          3 أدوار:
+
+          1. **فوق**: **Initial test – eGFRcr** (الـ creatinine).
+          2. **السؤال الأول**: الرقم ده **accurate**؟ (فكّر في الحاجات اللي بتخدع الـ creatinine: عضلات، أكل، أدوية). **Yes** ← استخدم **eGFRcr**. **No** ← **Measure cystatin C**.
+          3. **السؤال التاني**: حتى الـ **eGFRcr-cys** فيه مصادر غلط؟ **No** ← استخدمه. **Yes** ← **Measure GFR** (قياس مباشر).
+          - **تحت**: الشريط الملوّن **Evaluation of GFR for clinical application** من 15 (أحمر) لـ 120 (أخضر).
+
+          يعني ==الـ cystatin C خطوة تانية== مش أول test، و==الـ measured GFR آخر حل== لما الاتنين مايتوثقش فيهم.
+      - kind: figure
         page: 28
         quote: "Spinal cord injury"
         title: "الـ creatinine جاي منين؟"
@@ -380,6 +423,18 @@ lessons:
             <text x="165" y="208" text-anchor="middle" class="t-sm">more creatinine in blood</text>
             <text x="165" y="224" text-anchor="middle" class="t-sm t-bad">eGFR looks too LOW</text>
           </svg>
+      - kind: figure
+        page: 28
+        title: "عضلات كتير أو قليلة: الـ creatinine بيكدب"
+        image: { file: neph/L02-muscle-mass-photos.webp, book: true }
+        alt: "Two book photos. Left: a very muscular bodybuilder posing with his arms flexed. Right: an elderly man walking with a cane beside another man, illustrating low muscle mass or limb loss."
+        caption: |
+          صورتين:
+
+          - **الشمال**: لاعب **bodybuilding** عضلاته ضخمة جدًا: الـ creatinine بتاعه ==عالي من غير ما كليته تعبانة==، فالـ eGFR يطلع أقل من الحقيقة.
+          - **اليمين**: راجل كبير ماشي على عكاز (عضلات قليلة أو **amputation**): الـ creatinine ==واطي==، فالـ eGFR يطلع أحسن من الحقيقة.
+
+          الصورتين هما أول سطر في الجدول اللي تحتهم (**Body habitus and changes in muscle mass**): الـ creatinine جاي من العضلات، فأي حد عضلاته بعيدة عن المتوسط محتاج **cystatin C**.
       - kind: sort
         page: 28
         quote: "| Domain | Specific clinical condition |\n| Body habitus and changes in muscle mass | Anorexia nervosa |\n| | Extreme sport/exercise/body builder |\n| | Above knee amputation |\n| | Spinal cord injury with paraplegia/paraparesis or quadriplegia/quadriparesis |\n| | Class III obesity (BMI>40 kg/m2) |\n| Lifestyle | Smoking |\n| Diet | Low protein diet |\n| | Keto-diets |\n| | Vegetarian |\n| | High protein diets and creatine supplements |\n| Illness other than CKD | Malnutrition |\n| | Cancer |\n| | Heart failure |\n| | Cirrhosis |\n| | Catabolic consuming diseases |\n| | Muscle wasting diseases |\n| Medication effects | Steroids (anabolic, hormone) |\n| | Decreases in tubular secretion |\n| | Broad spectrum antibiotics that decrease extrarenal elimination |"
@@ -491,42 +546,16 @@ lessons:
       - kind: figure
         page: 31
         quote: "CKD heat map"
-        title: "الـ heat map"
-        alt: "A six by three grid. Rows G1 (90 or more), G2 (60 to 89), G3a (45 to 59), G3b (30 to 44), G4 (15 to 29), G5 (under 15). Columns A1 (under 30 mg/g), A2 (30 to 300), A3 (over 300). Cells are coloured green, yellow, orange or red by risk, and each shows how many times a year to monitor."
-        caption: "كل خانة فيها **عدد مرات المتابعة في السنة**. أخضر = low risk (ولو مفيش marker تاني يبقى **مش chronic kidney disease (CKD)**)، وكل ما تنزل أو تروح يمين الخطر يزيد."
-        svg: |
-          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
-            <text x="135" y="18" text-anchor="middle" class="t-sm t-b">A1</text>
-            <text x="205" y="18" text-anchor="middle" class="t-sm t-b">A2</text>
-            <text x="275" y="18" text-anchor="middle" class="t-sm t-b">A3</text>
-            <text x="135" y="32" text-anchor="middle" class="t-sm t-mut">&lt;30</text>
-            <text x="205" y="32" text-anchor="middle" class="t-sm t-mut">30–300</text>
-            <text x="275" y="32" text-anchor="middle" class="t-sm t-mut">&gt;300</text>
-            <text x="10" y="62" class="t-sm t-b">G1 ≥90</text>
-            <text x="10" y="102" class="t-sm t-b">G2 60–89</text>
-            <text x="10" y="142" class="t-sm t-b">G3a 45–59</text>
-            <text x="10" y="182" class="t-sm t-b">G3b 30–44</text>
-            <text x="10" y="222" class="t-sm t-b">G4 15–29</text>
-            <text x="10" y="262" class="t-sm t-b">G5 &lt;15</text>
-            <rect x="102" y="40" width="66" height="36" rx="5" class="fg-good"/><text x="135" y="63" text-anchor="middle" class="t-sm">1</text>
-            <rect x="172" y="40" width="66" height="36" rx="5" class="fg-acc"/><text x="205" y="63" text-anchor="middle" class="t-sm">1</text>
-            <rect x="242" y="40" width="66" height="36" rx="5" class="fg-bad"/><text x="275" y="63" text-anchor="middle" class="t-sm">3</text>
-            <rect x="102" y="80" width="66" height="36" rx="5" class="fg-good"/><text x="135" y="103" text-anchor="middle" class="t-sm">1</text>
-            <rect x="172" y="80" width="66" height="36" rx="5" class="fg-acc"/><text x="205" y="103" text-anchor="middle" class="t-sm">1</text>
-            <rect x="242" y="80" width="66" height="36" rx="5" class="fg-bad"/><text x="275" y="103" text-anchor="middle" class="t-sm">3</text>
-            <rect x="102" y="120" width="66" height="36" rx="5" class="fg-acc"/><text x="135" y="143" text-anchor="middle" class="t-sm">1</text>
-            <rect x="172" y="120" width="66" height="36" rx="5" class="fg-bad"/><text x="205" y="143" text-anchor="middle" class="t-sm">2</text>
-            <rect x="242" y="120" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="275" y="143" text-anchor="middle" class="t-sm t-b">3</text>
-            <rect x="102" y="160" width="66" height="36" rx="5" class="fg-bad"/><text x="135" y="183" text-anchor="middle" class="t-sm">2</text>
-            <rect x="172" y="160" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="205" y="183" text-anchor="middle" class="t-sm t-b">3</text>
-            <rect x="242" y="160" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="275" y="183" text-anchor="middle" class="t-sm t-b">3</text>
-            <rect x="102" y="200" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="135" y="223" text-anchor="middle" class="t-sm t-b">3</text>
-            <rect x="172" y="200" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="205" y="223" text-anchor="middle" class="t-sm t-b">3</text>
-            <rect x="242" y="200" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="275" y="223" text-anchor="middle" class="t-sm t-b">4+</text>
-            <rect x="102" y="240" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="135" y="263" text-anchor="middle" class="t-sm t-b">4+</text>
-            <rect x="172" y="240" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="205" y="263" text-anchor="middle" class="t-sm t-b">4+</text>
-            <rect x="242" y="240" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="275" y="263" text-anchor="middle" class="t-sm t-b">4+</text>
-          </svg>
+        title: "الـ heat map: صورة الكتاب"
+        image: { file: neph/L02-heat-map.webp, book: true }
+        alt: "Book heat map 'Prognosis of CKD by GFR and albuminuria categories'. Rows G1 to G5 (normal or high 90 or more; mildly decreased 60-89; mildly to moderately decreased 45-59; moderately to severely decreased 30-44; severely decreased 15-29; kidney failure under 15). Columns A1 (under 30 mg/g), A2 (30-300), A3 (over 300). Cells go from green (top left) through yellow and orange to red (bottom right). A green-to-red arrow along the bottom and right side reads increasing risk."
+        caption: |
+          - **الصفوف (شمال)**: الـ **GFR categories** من **G1** (≥90) لـ **G5** (<15، Kidney failure)، وفي النص **G3a** (45–59) و **G3b** (30–44).
+          - **الأعمدة (فوق)**: الـ **Albuminuria categories**: **A1** (<30 mg/g)، **A2** (30–300)، **A3** (>300).
+          - **الألوان**: أخضر فوق شمال (G1–G2 مع A1) ← أصفر ← برتقاني ← أحمر تحت يمين.
+          - **السهمين** (تحت ويمين): **Increasing risk**.
+
+          الخطر بيزيد ==لما تنزل وكمان لما تروح يمين==: يعني G2 مع A3 (برتقاني) أخطر من G3a مع A1 (أصفر). علشان كده الـ CKD بيتصنّف بـ ==G و A مع بعض== مش بالـ GFR لوحده.
       - kind: explain
         page: 31
         quote: "ERA statement on CVD in CKD 2023"
@@ -537,6 +566,17 @@ lessons:
           التفسير المقبول (مش في الكتاب): الـ G والـ A بيقيسوا حاجتين مختلفين. الـ GFR بيقيس الشغل اللي **فاضل**، والـ albuminuria بتقيس الأذى **الشغّال دلوقتي**. واحد G3a بـ A1 ممكن يعيش عمره كله كده، وواحد G3a بـ A3 ماشي بسرعة. علشان كده الخانة هي اللي بتتكلم مش الرقم لوحده.
 
           وفي نفس الصفحة الـ **ERA statement on CVD in CKD 2023**: الـ ==moderate CKD== = **high** CVD risk، والـ ==severe CKD== = **very high** CVD risk (زي تصنيف الـ ESC 2021). يعني الخانة كمان بتقولك الدهون والضغط هيتعالجوا بقوة قد إيه.
+      - kind: figure
+        page: 31
+        quote: "ERA statement on CVD in CKD 2023"
+        title: "الـ heat map ومخاطر القلب (ERA 2023)"
+        image: { file: neph/L02-era-cvd-prevalence.webp, book: true }
+        alt: "Book figure: a heat-map grid of GFR categories G1-G5 against albuminuria A1-A3, each cell holding the prevalence in the general population (for example G1 A1 55.6%, G2 A1 32.9%, G3a A1 3.6%, G5 under 0.1%). A box on the right: what is known, CKD severity (mild, moderate, severe CKD); what is new, ESC 2021 CVD risk class (high CVD risk, very high CVD risk)."
+        caption: |
+          - **الشبكة شمال**: نفس الـ G في الصفوف والـ A في الأعمدة، بس كل خانة فيها **النسبة في عموم الناس**: G1 A1 **55.6%**، G2 A1 **32.9%**، G3a A1 **3.6%**، وتحت خالص <0.1%.
+          - **الصندوق يمين**: **What is known?** الألوان = **Mild / Moderate / Severe CKD**. **What is new?** نفس الألوان = **ESC 2021 CVD risk class**: البرتقاني = **High CVD risk**، والأحمر = **Very high CVD risk**.
+
+          يعني الخانة اللي المريض فيها بتقولك حاجتين: ==شدة الـ CKD== وكمان ==درجة خطر القلب== اللي على أساسها بتعالج الدهون والضغط. والنسب بتفكّرك إن أغلب الناس في الأخضر، والخانات الحمرا قليلة بس خطيرة.
       - kind: aside
         page: 32
         quote: "2.1. Monitoring/yr for progression of CKD\nCKD is classified based on: Cause (C); GFR (G); Albuminuria (A)\n| GFR categories (ml/min/1.73 m2) | Description and range | | A1: Normal to mildly increased (< 30 mg/g; < 3 mg/mmol) | A2: Moderately increased (30–299 mg/g; 3–29 mg/mmol) | A3: Severely increased (≥ 300 mg/g; ≥ 30 mg/mmol) |\n| G1 | Normal or high | ≥ 90 | Screen 1 | Treat 1 | Treat 3 |\n| G2 | Mildly decreased | 60–89 | Screen 1 | Treat 1 | Treat 3 |\n| G3a | Mildly to moderately decreased | 45–59 | Treat 1 | Treat 2 | Treat 3 |\n| G3b | Moderately to severely decreased | 30–44 | Treat 2 | Treat 3 | Treat 3 |\n| G4 | Severely decreased | 15–29 | Treat* 3 | Treat* 3 | Treat 4+ |\n| G5 | Kidney failure | < 15 | Treat 4+ | Treat 4+ | Treat 4+ |\nGreen: Low risk (if no other markers of kidney disease, no CKD); Yellow: Moderately increased risk; Orange: High risk; Red: Very high risk"
@@ -741,6 +781,20 @@ lessons:
           - { key: "I", text: "Interstitial fibrosis" }
           - { key: "V", text: "Vascular sclerosis" }
         hook: "**جي تي آي في**: الكلى المتليّفة اتقفلت زي **TV** قديم. 📺"
+      - kind: figure
+        page: 35
+        title: "الـ CKD تحت الميكروسكوب"
+        image: { file: neph/L02-ckd-histology.webp, book: true }
+        alt: "Book histology photomicrograph of chronic kidney damage with three labels: vascular sclerosis (top right, a thick-walled artery), tubulointerstitial fibrosis (right, scarred tissue between atrophic tubules), and glomerulosclerosis (bottom left, a scarred glomerulus). Pink tubules fill the background."
+        caption: |
+          عينة كلية فيها الـ 4 حاجات اللي الـ mnemonic بتقولها، و3 منها عليها لافتات:
+
+          - **فوق يمين: Vascular sclerosis**: شريان جداره **سميك** والتجويف صغير.
+          - **يمين: Tubulointerstitial Fibrosis**: النسيج اللي **بين** الأنابيب متليّف (غامق ومليان ألياف)، والأنابيب حواليه صغيرة: ده الـ **tubular atrophy**.
+          - **تحت شمال: Glomerulosclerosis**: glomerulus اتحوّل لكورة ندبة.
+          - **الخلفية**: أنابيب وردي (tubules) لسه شغالة.
+
+          الصورة بتثبت إن الـ CKD المتقدم ==بيتشابه أيًا كان السبب==: كل الأماكن (glomerulus، tubules، interstitium، vessels) ==متليّفة في نفس الوقت==.
       - kind: explain
         page: 35
         quote: "KIDNEY FAILURE RISK EQUATION\nUsing the patient's Urine, Sex, Age and GFR, the kidney failure risk equation provides the 2 and 5 year probability of treated kidney failure for a potential patient with CKD stage 3 to 5.\nUrine + Sex + Age + GFR (Glomerular filtration rate) = The projected risk of kidney failure"
@@ -899,6 +953,23 @@ lessons:
             <line x1="135" y1="142" x2="100" y2="172" class="fg-arrow-bad" marker-end="url(#N2f)"/>
             <line x1="195" y1="142" x2="230" y2="172" class="fg-arrow-bad" marker-end="url(#N2f)"/>
           </svg>
+      - kind: figure
+        page: 36
+        title: "كل وظيفة ضاعت وعرضها: رسمة الكتاب"
+        image: { file: neph/L02-lost-functions.webp, book: true }
+        alt: "Book diagram: chronic kidney disease at the top branches into seven lost functions: sodium and water balance (hypertension, increased vascular volume, edema, heart failure), potassium balance (hyperkalemia), elimination of nitrogenous wastes (uremia, coagulopathies, bleeding, pericarditis), erythropoietin production (anemia), acid-base balance (acidosis, skeletal buffering), activation of vitamin D (hypocalcemia, hyperparathyroidism) and phosphate elimination. The bottom row lists the results: impaired immune function, skin disorders, gastrointestinal, neurologic manifestations, sexual dysfunction and osteodystrophies."
+        caption: |
+          فوق: **Chronic kidney disease**، ومنها 7 صناديق وردي، كل واحد = وظيفة ضاعت، وتحت كل واحد اللي بيحصل:
+
+          - **Sodium and water balance** ← **Hypertension** و **increased vascular volume** ← **Edema** و **Heart failure**.
+          - **Potassium balance** ← **Hyperkalemia**.
+          - **Elimination of nitrogenous wastes** ← **Uremia** ← **Coagulopathies/Bleeding** و **Pericarditis**.
+          - **Erythropoietin production** ← **Anemia**.
+          - **Acid-base balance** ← **Acidosis**، و**Skeletal buffering** (العضم بيدفع التمن).
+          - **Activation of vitamin D** و **Phosphate elimination** (يمين) ← **Hypocalcemia** ← **Hyperparathyroidism** ← **Osteodystrophies**.
+          - **الصف اللي تحت**: immune، skin، GI، neurologic، sexual dysfunction.
+
+          يعني كل عرض في الجدول اللي تحتها ليه ==وظيفة كلية ضاعت== وراه، ودي طريقة تحفظ بيها الأعراض بالمنطق مش بالرص.
       - kind: explain
         page: 37
         quote: "PREDICTORS OF PROGRESSION\nCause of CKD\nLevel of GFR\nLevel of albuminuria\nAge\nSex\nRace/ethnicity\nElevated BP\nFASTING\nHyperglycemia\nDyslipidemia\nAcidosis\nSmoking\nObesity\nHistory of cardiovascular disease\nOngoing exposure to nephrotoxic agents\nAnemia"
@@ -954,6 +1025,22 @@ lessons:
           الكتاب بيقول إن علاج الـ CKD **comprehensive treatment strategy** هدفها تقلّل خطر الـ **progression** وخطر **المضاعفات** مع بعض. و Figure 46 بتوري الـ **optimal care model** حسب شدة الـ CKD: من primary care في الأول، لحد nephrology و kidney replacement therapy (KRT) في الآخر.
 
           التفسير المقبول (مش في الكتاب): لأن المريض ممكن يموت بالقلب قبل ما الكلية تفشل، فعلاج الكلية لوحدها مش كفاية. الـ care بيكبر مع الـ stage: كل ما الـ GFR ينزل، مضاعفات أكتر محتاجة متابعة، وناس أكتر في الفريق.
+      - kind: figure
+        page: 37
+        quote: "Figure 46. Optimal care model by severity of chronic kidney disease (CKD). CV, cardiovascular; KF, kidney failure; KRT, kidney replacement therapy"
+        title: "شكل 46 في الكتاب: الرعاية حسب الـ stage"
+        image: { file: neph/L02-care-pyramid.webp, book: true }
+        alt: "Book pyramid with five layers from CKD G1-G2 at the green base to CKD G5 at the red top. Left labels: primary care (base), nephrologist with multidisciplinary care team (middle), KRT preparation team/comprehensive conservative care team (top). Inside: kidney failure risk under 3-5% in 5 years (G1-G2), 3-5% in 5 years (G3), 10% or more in 2 years (G4), 40% or more in 2 years (G5). Right face: CV risk reduction, identify patients at high risk (base); prevention and management of complications, promote self-management; KRT options, education; preparing for KRT (top). An arrow along the side: delaying progression."
+        caption: |
+          الهرم من تحت لفوق = الـ CKD بيتقدم:
+
+          - **القاعدة الخضرا (CKD G1–G2)**: **Kidney failure risk <3–5% in 5 years**. مين يتابع؟ **Primary care**. بيعمل إيه؟ **CV risk reduction** واكتشاف الـ high risk.
+          - **الأصفر (G3)**: risk **3–5% in 5 years**: **Prevention and management of complications** و **self-management**.
+          - **البرتقاني (G4)**: risk **≥10% in 2 years**: **Nephrologist** وفريق متعدد التخصصات، و**KRT options/Education**.
+          - **القمة الحمرا (G5)**: risk **≥40% in 2 years**: **KRT preparation team** أو **comprehensive conservative care**، و **Preparing for KRT** (kidney replacement therapy).
+          - **السهم على الجنب**: **Delaying progression** في كل الأدوار.
+
+          الرسمة بتقول إن ==مين بيتابع وبيعمل إيه== بيتحدد بالـ stage والـ ==kidney failure risk==، والهدف في كل دور واحد: نأخر الـ progression.
       - kind: explain
         page: 38
         quote: "Low birth weight"
@@ -964,6 +1051,23 @@ lessons:
           التفسير المقبول (مش في الكتاب) للـ low birth weight: الـ nephrons بتتكوّن قبل الولادة ومش بتزيد بعدها. الطفل اللي اتولد صغير بيبدأ بعدد أقل، فكل nephron شايل أكتر من الأول، يعني hyperfiltration من يوم 1.
 
           وده نفس السبب اللي خلّاه في قايمة الـ screening في ص 26.
+      - kind: figure
+        page: 38
+        quote: "Figure 15: Holistic approach to chronic kidney disease (CKD) treatment and risk modification."
+        title: "شكل 15 في الكتاب: العلاج الشامل"
+        image: { file: neph/L02-holistic-approach.webp, book: true }
+        alt: "Book figure in three rows. Lifestyle: healthy diet, physical activity, stop use of tobacco products, weight management, with a yellow circle: regular risk factor reassessment every 3-6 months. First-line drug therapy for most patients: SGLT2i (continue until dialysis or transplant), plus a RAS inhibitor at maximum tolerated dose if hypertension (aim for SBP under 120 mmHg), and statin-based therapy. Targeted therapies for complications: manage hyperglycemia per the KDIGO diabetes guideline including GLP-1 RA where indicated; non-steroidal MRA in people with diabetes and an indication; dihydropyridine CCB and/or diuretic if needed for BP target; steroidal MRA for resistant hypertension if eGFR 45 or more; antiplatelet agent for clinical ASCVD; ezetimibe, PCSK9i based on ASCVD risk and lipids; manage anemia, CKD-MBD, acidosis and potassium where indicated."
+        caption: |
+          3 أدوار، والصورة صغيرة فكبّرها:
+
+          1. **فوق: Lifestyle**: Healthy diet، Physical activity، Stop tobacco، Weight management. وفي الدايرة الصفرا يمين: **Regular risk factor reassessment (every 3–6 months)**.
+          2. **النص: First-line drug therapy for most patients** (3 صناديق):
+             - **SGLT2i**: كمّل لحد الغسيل أو الزرع.
+             - **+ RAS inhibitor** بأعلى جرعة متحمّلة (لو فيه ضغط)، والهدف ==SBP <120==.
+             - **Statin-based therapy**.
+          3. **تحت: Targeted therapies for complications**: سكر (GLP-1 RA)، **ns-MRA** لمرضى السكر، **CCB أو diuretic** للضغط، **steroidal MRA** للـ resistant hypertension لو eGFR ≥45، **antiplatelet** لو فيه ASCVD، **ezetimibe/PCSK9i** للدهون، وعلاج الأنيميا والـ CKD-MBD والحمض والبوتاسيوم.
+
+          الرسمة هي خريطة الدرس اللي جاي كله: ==أساس lifestyle + 3 أدوية لكل مريض==، وبعدين علاج كل مضاعفة لوحدها.
       - kind: try
         items: [neph.L02.052, neph.L02.056, neph.L02.053, neph.L02.054]
     recap:
@@ -1020,32 +1124,17 @@ lessons:
           باختصار: الملح **بيعلّي** الضغط والـ albuminuria، والنبات بيعمل حمض أقل، **فـ** الكلية بتتعب أقل.
       - kind: figure
         page: 40
-        quote: "Your plate"
-        title: "الطبق"
-        alt: "A round plate divided into four labelled parts: fruit and vegetables, whole grains, starchy vegetables, and protein from animal or plant sources. A note says buy fresh food, cook at home and read labels for sodium."
-        caption: "الطبق في ص 40 فيه أربع مجموعات: **fruit and vegetables**، **whole grains**، **starchy vegetables**، و**protein** (حيواني أو نباتي). الرسمة بتوري المجموعات مش الكميات بالظبط."
-        svg: |
-          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="120" cy="110" r="95" class="fg-box"/>
-            <circle cx="120" cy="110" r="80" class="fg-thin"/>
-            <line x1="120" y1="30" x2="120" y2="190" class="fg-ink"/>
-            <line x1="40" y1="110" x2="200" y2="110" class="fg-ink"/>
-            <text x="80" y="75" text-anchor="middle" class="t-sm">Fruit and</text>
-            <text x="80" y="90" text-anchor="middle" class="t-sm">vegetables</text>
-            <text x="160" y="80" text-anchor="middle" class="t-sm">Whole</text>
-            <text x="160" y="95" text-anchor="middle" class="t-sm">grains</text>
-            <text x="80" y="140" text-anchor="middle" class="t-sm">Starchy</text>
-            <text x="80" y="155" text-anchor="middle" class="t-sm">vegetables</text>
-            <text x="160" y="140" text-anchor="middle" class="t-sm">Protein</text>
-            <text x="160" y="155" text-anchor="middle" class="t-sm">animal or plant</text>
-            <rect x="225" y="40" width="100" height="140" rx="8" class="fg-acc"/>
-            <text x="275" y="64" text-anchor="middle" class="t-sm t-b">Sodium</text>
-            <text x="275" y="84" text-anchor="middle" class="t-sm">under 2 g/day</text>
-            <text x="275" y="108" text-anchor="middle" class="t-sm">read labels</text>
-            <text x="275" y="128" text-anchor="middle" class="t-sm">cook at home</text>
-            <text x="275" y="148" text-anchor="middle" class="t-sm">no 400 mg+</text>
-            <text x="275" y="164" text-anchor="middle" class="t-sm">per serving</text>
-          </svg>
+        title: "الطبق: صورة الكتاب"
+        image: { file: neph/L02-your-plate.webp, book: true }
+        alt: "Book picture of a plate between a fork and a knife, labelled 'Your plate'. Half the plate: fruit and vegetables. One quarter: protein, animal or plant. One quarter: whole grains, starchy vegetables."
+        caption: |
+          طبق بين شوكة وسكينة، ومتقسم 3:
+
+          - **النص الشمال كله**: **Fruit and vegetables**.
+          - **ربع فوق يمين**: **Protein: animal or plant**.
+          - **ربع تحت يمين**: **Whole grains / Starchy vegetables**.
+
+          الرسمة بتترجم توصية الكتاب لشكل تقدر تشرحه للمريض: ==نص الطبق نبات==، و==البروتين ربع بس== (مش كتير ومش معدوم)، وده بيخدم الـ plant-based diet وتقليل الملح والبروتين مع بعض.
       - kind: aside
         page: 40
         quote: "10 ways to cut out salt\nBuy fresh foods and cook at home\nAvoid foods with more than 400 mg sodium per serving\nAvoid salty processed meats. Use fresh meat, poultry and eggs or plant proteins instead\nKeep healthy unsalted snacks on hand, including fresh fruit\nWhen eating out in restaurants, order sauces, dressings and gravies in a separate dish and use less\nCut salty sauces like soy sauce (e.g., replace with pineapple juice or unseasoned rice vinegar)\nUse unsalted butter, unsalted margarine, cooking oil or other unsalted fats when possible\nUse sweet, sour, bitter and spicy or hot flavours to season food instead of salt\nRead labels: choose lower-salt brands when possible. The goal is less than 2 g of sodium per day\nUse salt-free spices and fresh herbs to add flavor"
@@ -1260,6 +1349,19 @@ lessons:
           - الـ ==standardized== measurement (قعدة هادية، دقايق راحة، كذا قراية) هو اللي الدراسات استخدمته. القياس العادي في العيادة بيطلع **أعلى**، فلو هدفت 120 بقياس عادي، هتنزّل الضغط الحقيقي أوطى من اللازم.
 
           **يعني** الرقم 120 ميتقارنش برقم عيادة عادي: لو قسته وانت مستعجل هيطلع أعلى، وهتزوّد دوا مش محتاجه.
+      - kind: figure
+        page: 47
+        title: "هدف الضغط: صورة الكتاب"
+        image: { file: neph/L02-bp-targets.webp, book: true }
+        alt: "Book chart of two vertical bars. Systolic BP target: 120 to 150 mmHg, with red below 120, green 120 to about 139 (target), and orange-brown 140 and above (avoid). Diastolic BP target: 70 to 100 mmHg, with red below 70, green 70 to about 79, orange-brown 80 and above. Both labelled 'most patients'; a legend shows green = target and red = avoid."
+        caption: |
+          عمودين، **الشمال Systolic** و **اليمين Diastolic**، والألوان: **أخضر = Target** و **أحمر = Avoid** (المفتاح تحت يمين):
+
+          - **Systolic**: الأخضر من **120 لـ 139**، والأحمر **تحت 120**، والبني فوق 140 (عالي).
+          - **Diastolic**: الأخضر من **70 لـ 79**، والأحمر **تحت 70**.
+          - تحت كل عمود: **Most patients**.
+
+          الرسمة دي من الـ ESH 2023 للـ general hypertensive population: ==130–139 / 70–79== لمعظم الناس، ومانزلش تحت 120/70. خد بالك إن الـ KDIGO للـ CKD أشد: ==SBP <120== لو المريض مستحمل (الخطوة اللي فاتت).
       - kind: explain
         page: 46
         quote: "Less intensive BP -lowering therapy in people with frailty, high risk of"
@@ -1333,40 +1435,18 @@ lessons:
           - **وقّف أو قلّل** في الـ hypotension بأعراض، أو hyperkalemia مش متحكم فيها، أو eGFR < 15 علشان الـ uremic symptoms: هنا الضرر بقى أكبر من الفايدة.
       - kind: figure
         page: 48
-        quote: "Optimizing Renin-Angiotensin System Inhibitor Use in CKD\nInitiate ACEi or ARB\n  Monitor serum creatinine and potassium (within 2–4 weeks after starting or changing dose)\n    Normokalemia, < 30% increase in creatinine\n      Increase dose of ACEi or ARB or continue on maximally tolerated dose (then monitor again)\n    Hyperkalemia\n      Review concurrent drugs\n      Moderate potassium intake\n      Consider: diuretics; sodium bicarbonate; GI cation exchangers\n      Reduce dose or stop ACEi or ARB as last resort\n    > 30% increase in creatinine\n      Review for causes of AKI\n      Correct volume depletion\n      Reassess concomitant medications (e.g., diuretics, NSAIDs)\n      Consider renal artery stenosis\n      Reduce dose or stop ACEi or ARB as last resort"
-        title: "بعد ما تبدأ ACEi/ARB"
-        alt: "Flowchart. Start ACEi or ARB. Three branches: normokalemia with creatinine rise under 30 percent leads to increase or continue the dose; hyperkalemia leads to review drugs, moderate potassium intake, diuretics, bicarbonate and cation exchangers; creatinine rise over 30 percent leads to look for AKI causes, volume, NSAIDs and renal artery stenosis. Bottom: reduce or stop only as a last resort."
-        caption: "الـ creatinine يعلى **أقل من 30%** = عادي، كمّل. **أكتر من 30%** = دوّر على سبب acute kidney injury (AKI). والإيقاف **آخر حل**."
-        svg: |
-          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="N2c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
-            </defs>
-            <rect x="105" y="8" width="120" height="28" rx="8" class="fg-ink"/>
-            <text x="165" y="27" text-anchor="middle" class="t-b">ACEi / ARB</text>
-            <line x1="130" y1="36" x2="55" y2="70" class="fg-arrow" marker-end="url(#N2c)"/>
-            <line x1="165" y1="36" x2="165" y2="70" class="fg-arrow" marker-end="url(#N2c)"/>
-            <line x1="200" y1="36" x2="275" y2="70" class="fg-arrow" marker-end="url(#N2c)"/>
-            <rect x="5" y="72" width="100" height="40" rx="6" class="fg-good"/>
-            <text x="55" y="89" text-anchor="middle" class="t-sm">Normal K</text>
-            <text x="55" y="105" text-anchor="middle" class="t-sm">Cr ↑ &lt; 30%</text>
-            <rect x="115" y="72" width="100" height="40" rx="6" class="fg-acc"/>
-            <text x="165" y="96" text-anchor="middle" class="t-sm">High K</text>
-            <rect x="225" y="72" width="100" height="40" rx="6" class="fg-bad"/>
-            <text x="275" y="96" text-anchor="middle" class="t-sm">Cr ↑ &gt; 30%</text>
-            <text x="55" y="135" text-anchor="middle" class="t-sm">↑ dose or</text>
-            <text x="55" y="151" text-anchor="middle" class="t-sm">keep max</text>
-            <text x="165" y="135" text-anchor="middle" class="t-sm">Review drugs</text>
-            <text x="165" y="151" text-anchor="middle" class="t-sm">Less dietary K</text>
-            <text x="165" y="167" text-anchor="middle" class="t-sm">Diuretic, HCO3</text>
-            <text x="165" y="183" text-anchor="middle" class="t-sm">K binder</text>
-            <text x="275" y="135" text-anchor="middle" class="t-sm">AKI causes?</text>
-            <text x="275" y="151" text-anchor="middle" class="t-sm">Volume, NSAIDs</text>
-            <text x="275" y="167" text-anchor="middle" class="t-sm">Renal artery</text>
-            <text x="275" y="183" text-anchor="middle" class="t-sm">stenosis?</text>
-            <rect x="45" y="215" width="240" height="32" rx="8" class="fg-thin"/>
-            <text x="165" y="236" text-anchor="middle" class="t-sm t-b">Reduce / stop = last resort</text>
-          </svg>
+        title: "بعد ما تبدأ ACEi/ARB: رسمة الكتاب"
+        image: { file: neph/L02-raasi-optimizing.webp, book: true }
+        alt: "Book flowchart: initiate ACEi or ARB; monitor serum creatinine and potassium within 2-4 weeks after starting or changing dose. Three branches: normokalemia with under 30% increase in creatinine, increase dose or continue at maximally tolerated dose (loop back to monitoring); hyperkalemia, review concurrent drugs, moderate potassium intake, consider diuretics, sodium bicarbonate, GI cation exchangers; over 30% increase in creatinine, review for causes of AKI, correct volume depletion, reassess concomitant medications (diuretics, NSAIDs), consider renal artery stenosis. Both lower branches end at 'reduce dose or stop ACEi or ARB as last resort', which loops back to monitoring."
+        caption: |
+          1. **فوق**: **Initiate ACEi or ARB** ← **Monitor creatinine and potassium** خلال **2–4 أسابيع** من البداية أو تغيير الجرعة.
+          2. **3 فروع**:
+             - **شمال: Normokalemia و creatinine زاد <30%** ← **زوّد الجرعة** أو كمّل على أعلى جرعة، والسهم الأحمر يرجع للمتابعة.
+             - **النص: Hyperkalemia** ← راجع الأدوية التانية، قلّل البوتاسيوم في الأكل، وفكّر في diuretics، sodium bicarbonate، أو GI cation exchangers.
+             - **يمين: creatinine زاد >30%** ← دوّر على سبب **AKI**، صحّح الـ volume depletion، راجع الـ diuretics والـ NSAIDs، وفكّر في **renal artery stenosis**.
+          3. **تحت**: الفرعين بيوصلوا لـ **Reduce dose or stop ACEi or ARB ==as last resort==**.
+
+          الرسمة بتثبت إن ارتفاع الـ creatinine ==لحد 30%== متوقع ومش سبب توقف، وإن حتى الـ hyperkalemia بتتعالج الأول قبل ما نوقف الدوا.
       - kind: check
         page: 48
         quote: "Reduce dose or stop ACEI or ARB as last resort"
@@ -1498,24 +1578,32 @@ lessons:
           **يعني** كل دوا بيقلّل الضغط جوه الـ glomerulus من ناحية: واحد بيوسّع اللي خارج، والتاني بيضيّق اللي داخل، **فـ** الأثر بيتجمع.
       - kind: figure
         page: 51
-        quote: "SGLT2 vs RAAS Inhibition or Combined Therapy\nComparative Effect on Renal Segmental Resistances\n| Pharmacological actions | Hemodynamic effects and clinical implications |\n| RAAS blockade: Efferent dilation | Decreased intraglomerular pressure due to increased efferent resistance; Decreased hyperfiltration; Proven renal protection in clinical trials |\n| SGLT2 inhibition: Afferent constriction | Decreased intraglomerular pressure due to increased afferent resistance in T1D-H patients; Decreased hyperfiltration |\n| RAAS blockade and SGLT2 inhibition: Efferent dilation and Afferent constriction | Normalization of intraglomerular pressure due to increased afferent and decreased efferent resistance?; Potential for additive intraglomerular pressure reduction?; Potential for long-term renal protection? |"
-        title: "الحنفية من الناحيتين"
-        alt: "A glomerulus with an afferent arteriole on the left and an efferent arteriole on the right. An SGLT2i label points to the afferent side: constriction. A RAASi label points to the efferent side: dilation. Both lower the pressure inside the glomerulus."
-        caption: "الـ **SGLT2 inhibitor (SGLT2i)** بيضيّق الـ **afferent** (الداخل)، والـ **RAAS inhibitor (RAASi)** بيوسّع الـ **efferent** (الخارج). الاتنين بيقللوا الضغط جوه الـ glomerulus، ومع بعض بيأخروا الـ end-stage kidney disease (ESKD) حوالي **15 سنة**."
-        svg: |
-          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="88" width="100" height="10" rx="4" class="fg-good"/>
-            <text x="60" y="80" text-anchor="middle" class="t-sm t-b">Afferent</text>
-            <text x="60" y="122" text-anchor="middle" class="t-sm t-good">SGLT2i: constrict</text>
-            <circle cx="165" cy="93" r="40" class="fg-acc"/>
-            <text x="165" y="89" text-anchor="middle" class="t-sm">↓ glomerular</text>
-            <text x="165" y="104" text-anchor="middle" class="t-sm">pressure</text>
-            <rect x="215" y="80" width="105" height="26" rx="6" class="fg-good"/>
-            <text x="267" y="72" text-anchor="middle" class="t-sm t-b">Efferent</text>
-            <text x="267" y="128" text-anchor="middle" class="t-sm t-good">RAASi: dilate</text>
-            <rect x="40" y="152" width="250" height="34" rx="8" class="fg-thin"/>
-            <text x="165" y="174" text-anchor="middle" class="t-sm t-b">Together: ESKD delayed ≈ 15 years</text>
-          </svg>
+        title: "الـ eGFR مع RAASi لوحده أو مع SGLT2i"
+        image: { file: neph/L02-sglt2-raasi-egfr.webp, book: true }
+        alt: "Book chart 'SGLT2i and RAASi in CKD', eGFR (y axis, 10 to 60) against years (1 to 25). Three lines fall from an initial eGFR dip: untreated, grey, -12 mL/min per year; RAAS-i only, orange, -4.6 mL/min per year, reaching eGFR under 10 at about 10 years; SGLT2-i + RAAS-i, teal, -1.85 mL/min per year, reaching it at about 25 years. A double arrow between 10 and 25 years: delays ESKD by 15 years. Boxes on top: RAAs kidney failure 10 y; RAASi + SGLT2i kidney failure 25 y."
+        caption: |
+          - **المحور الرأسي**: الـ **eGFR**، و**الأفقي**: السنين لحد 25. والشريط البرتقاني تحت = **eGFR <10** (kidney failure).
+          - **الخط الرمادي (Untreated)**: بينزل **12 mL/min في السنة**، فيوصل للفشل في كام سنة.
+          - **الخط البرتقاني (RAAS-i only)**: **-4.6 في السنة** ← فشل بعد حوالي **10 سنين**.
+          - **الخط الأزرق (SGLT2-i + RAAS-i)**: **-1.85 في السنة** ← فشل بعد حوالي **25 سنة**.
+          - **السهم بين 10 و 25**: **Delays ESKD by 15 years**.
+          - **فوق شمال: Initial eGFR dip**: نزلة صغيرة في الأول مع الدوا، وبعدها الخط بيبقى أهدى.
+
+          الرسمة بتثبت إن ==الـ dip الأول مش ضرر== وإن الجمع بين الاتنين ==بيكسب سنين== قبل الغسيل.
+      - kind: figure
+        page: 51
+        quote: "SGLT2 vs RAAS Inhibition or Combined Therapy"
+        title: "SGLT2 vs RAAS: رسمة الكتاب"
+        image: { file: neph/L02-sglt2-raas-resistances.webp, book: true }
+        alt: "Book figure 'SGLT2 vs RAAS inhibition or combined therapy: comparative effect on renal segmental resistances'. Three rows of glomerulus drawings with afferent (blue) and efferent (orange) arterioles. Row 1, RAAS blockade, efferent dilation: decreased intraglomerular pressure due to increased efferent resistance, decreased hyperfiltration, proven renal protection in clinical trials. Row 2, SGLT2 inhibition, afferent constriction: decreased intraglomerular pressure due to increased afferent resistance in T1D-H patients, decreased hyperfiltration. Row 3, RAAS blockade and SGLT2 inhibition, efferent dilation and afferent constriction: normalization of intraglomerular pressure, potential additive pressure reduction, potential long-term renal protection (with question marks)."
+        caption: |
+          3 صفوف، وكل صف فيه glomerulus قبل وبعد. السهم الأزرق فوق = **Afferent** (الداخل) والبرتقاني = **Efferent** (الخارج):
+
+          - **الصف الأول: RAAS blockade** ← **Efferent dilation** (الخارج يتوسّع) ← الضغط جوه ينزل، hyperfiltration أقل، و**Proven renal protection**.
+          - **الصف التاني: SGLT2 inhibition** ← **Afferent constriction** (الداخل يضيق) ← نفس النتيجة من الناحية التانية.
+          - **الصف التالت: الاتنين مع بعض** ← efferent dilation + afferent constriction ← **Potential for additive** reduction، وجنب الكلام **علامات استفهام**: لسه مفترض مش مثبت بالكامل.
+
+          يعني كل دوا بيقفل ==حنفية من ناحية==، والاتنين مع بعض ==بيقللوا الضغط جوه الـ glomerulus== أكتر.
       - kind: explain
         page: 52
         quote: "Nephroprotective effects of SGLT2is"
@@ -1530,6 +1618,44 @@ lessons:
           - الـ **uric acid** بيقل لأن الدوا بيزوّد خروجه في البول.
 
           وفي نفس الصفحة الـ **practical provider guide**: قيّم الـ **volume** قبل ما تبدأ، و**توقّع** نزول حاد في الـ eGFR.
+      - kind: figure
+        page: 52
+        quote: "Nephroprotective effects of SGLT2is"
+        title: "فوايد الـ SGLT2i: صورتين من الكتاب"
+        image: { file: neph/L02-sglt2-nephroprotection.webp, book: true }
+        alt: "Book wheel: a red centre 'Reduced CKD progression' surrounded by eight pictures with labels: direct cardiovascular effects, improved cardiac function and renal perfusion (top); lower intraglomerular pressure through tubuloglomerular feedback (top right); loop-diuretic-sparing effect with less volume overload (right); less albuminuria and fewer direct toxic effects on tubules (bottom right); lower demand for solute transport, raised haematocrit and oxygen delivery to tubular cells (bottom); less pro-inflammatory/pro-fibrotic pathways (bottom left); improved energy substrate utilization (left); lower blood pressure, endothelial dysfunction and arterial stiffness (top left). Below left: reduce hyperkalemia, improve anemia, decrease uric acid."
+        caption: |
+          الدايرة الحمرا في النص: **Reduced CKD Progression**، وحواليها 8 صور، كل واحدة طريقة:
+
+          - **فوق**: القلب: **cardioprotection** وتحسين الـ perfusion للكلية.
+          - **فوق يمين**: ↓ **intraglomerular pressure** عن طريق الـ **tubuloglomerular feedback** (الحنفية اللي اتكلمنا عليها).
+          - **يمين**: تأثير زي الـ diuretic: volume overload أقل.
+          - **تحت يمين**: ↓ **albuminuria** وأذى أقل للـ tubules.
+          - **تحت**: الـ tubule بيشتغل أقل ← oxygen أحسن وhematocrit أعلى.
+          - **تحت شمال**: ↓ inflammation و fibrosis.
+          - **شمال**: energy أحسن للخلايا.
+          - **فوق شمال**: ↓ الضغط و arterial stiffness.
+          - **تحت شمال برة الدايرة**: **Reduce hyperkalemia، Improve anemia، Decrease uric acid**.
+
+          يعني الـ SGLT2i ==مش دوا سكر وبس==: فايدته على الكلية جاية من طرق كتير مع بعض.
+      - kind: figure
+        page: 52
+        quote: "Practical provider guide to initiating SGLT2 inhibitors in patients with type 2 diabetes and CKD"
+        title: "إزاي تبدأ SGLT2i في T2D مع CKD"
+        image: { file: neph/L02-sglt2-provider-guide.webp, book: true }
+        alt: "Book table-picture 'Practical provider guide to initiating SGLT2 inhibitors in patients with type 2 diabetes and CKD', with columns assessment, intervention and follow-up, in three rows. Patient selection: eligible eGFR 20 or more; high priority ACR 200 mg/g or more, heart failure; potential contraindications genital infection risk, diabetic ketoacidosis, foot ulcers, immunosuppression; intervention SGLT2 inhibitor with proven benefits (canagliflozin 100 mg, dapagliflozin 10 mg, empagliflozin 10 mg) with education on sick day protocol, perioperative care and foot care; follow-up assess adverse effects, anticipate an acute eGFR drop that is generally not a reason to stop. Glycemia: hypoglycemia risk (insulin or sulfonylurea, history of severe hypoglycemia, HbA1c at or below goal); if high, educate and consider reducing insulin or sulfonylurea; follow-up ask about hypoglycemia. Volume: depletion risk (diuretics, tenuous volume, history of AKI); if high, educate and consider reducing the diuretic; follow-up reassess volume."
+        caption: |
+          جدول على شكل أسهم، 3 أعمدة: **Assessment** ← **Intervention** ← **Follow-up**، و3 صفوف:
+
+          - **الصف الأزرق: Patient selection**:
+            - مين يستاهل: **eGFR ≥20**، وأولوية لو **ACR ≥200 mg/g** أو **heart failure**.
+            - خلي بالك من: genital infection، **diabetic ketoacidosis**، foot ulcers، immunosuppression.
+            - الدوا: **Canagliflozin 100**، **Dapagliflozin 10**، **Empagliflozin 10 mg**، مع تعليم المريض الـ **sick day protocol** والـ perioperative care.
+            - المتابعة: ==نزول الـ eGFR الأول مش سبب نوقف==.
+          - **الصف الأحمر: Glycemia**: لو بياخد **insulin أو sulfonylurea** أو الـ HbA1c عند الهدف ← خطر **hypoglycemia** عالي ← قلّل جرعتهم.
+          - **الصف البرتقاني: Volume**: لو على **diuretic** أو عنده AKI قبل كده ← خطر **volume depletion** ← قلّل الـ diuretic.
+
+          الجدول بيحوّل القرار لـ checklist: مين، ==وإيه اللي تقلّله معاه==، وتتابع إيه.
       - kind: check
         page: 52
         quote: "Nephroprotective effects of SGLT2is"
@@ -1643,32 +1769,18 @@ lessons:
       - kind: figure
         page: 54
         quote: "Mechanisms of acid-mediated tubulointerstitial fibrosis in chronic kidney"
-        title: "دايرة الحمض"
-        alt: "A loop: fewer nephrons, acid retained, each remaining nephron makes more ammonium and raises endothelin and the renin-angiotensin system, which cause interstitial fibrosis, which loses more nephrons. A side arrow: acid also breaks down muscle."
-        caption: "nephrons أقل ← كل واحد يعمل NH4+ أكتر ← endothelin و RAS ← fibrosis ← nephrons أقل. والـ bicarbonate بيكسر الدايرة."
-        svg: |
-          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="N2g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
-            </defs>
-            <rect x="110" y="10" width="110" height="40" rx="8" class="fg-box"/>
-            <text x="165" y="35" text-anchor="middle" class="t-sm t-b">Fewer nephrons</text>
-            <rect x="225" y="95" width="100" height="40" rx="8" class="fg-acc"/>
-            <text x="275" y="112" text-anchor="middle" class="t-sm">More NH4+</text>
-            <text x="275" y="127" text-anchor="middle" class="t-sm">per nephron</text>
-            <rect x="110" y="180" width="110" height="40" rx="8" class="fg-acc"/>
-            <text x="165" y="198" text-anchor="middle" class="t-sm">Endothelin,</text>
-            <text x="165" y="213" text-anchor="middle" class="t-sm">RAS</text>
-            <rect x="5" y="95" width="100" height="40" rx="8" class="fg-bad"/>
-            <text x="55" y="112" text-anchor="middle" class="t-sm t-b">Interstitial</text>
-            <text x="55" y="127" text-anchor="middle" class="t-sm t-b">fibrosis</text>
-            <line x1="220" y1="40" x2="265" y2="92" class="fg-arrow-bad" marker-end="url(#N2g)"/>
-            <line x1="265" y1="135" x2="220" y2="182" class="fg-arrow-bad" marker-end="url(#N2g)"/>
-            <line x1="110" y1="190" x2="65" y2="138" class="fg-arrow-bad" marker-end="url(#N2g)"/>
-            <line x1="65" y1="95" x2="110" y2="42" class="fg-arrow-bad" marker-end="url(#N2g)"/>
-            <text x="165" y="110" text-anchor="middle" class="t-sm t-good">Bicarbonate</text>
-            <text x="165" y="126" text-anchor="middle" class="t-sm t-good">breaks the loop</text>
-          </svg>
+        title: "شكل 4 في الكتاب: دايرة الحمض"
+        image: { file: neph/L02-acid-fibrosis.webp, book: true }
+        alt: "Book flowchart, Figure 4: CKD at the top leads to acidemia. Acidemia and muscle catabolism (amino acids) feed renal NH4+, which leads to complement activation; acidemia also leads to RAS activation and endothelin, which acts on ET-A and ET-B receptors. Bone resorption feeds acidemia. Complement activation, RAS activation and ET-A receptors lead to interstitial fibrosis; ET-B receptors and RAS lead to H+ secretion, which feeds back negatively on acidemia. A long arrow from interstitial fibrosis back to CKD is marked plus."
+        caption: |
+          - **فوق**: **CKD** (الدايرة) ← **Acidemia**.
+          - **شمال**: **Muscle catabolism** بيطلّع **amino acids**، ومع الحمض كل nephron باقي يعمل **Renal NH4+** (ammonium) أكتر ← **Complement activation**.
+          - **النص**: الحمض ← **RAS activation**.
+          - **يمين**: الحمض ← **Endothelin** ← **ET-A receptors** و **ET-B receptors** ← **H+ secretion** (بيطلّع الحمض، والخط بعلامة **-** راجع للحمض: تعويض).
+          - **فوق يمين**: **Bone resorption**: العضم بيدّي buffer للحمض.
+          - **تحت**: الـ complement والـ RAS والـ ET-A كلهم بيوصلوا لـ **Interstitial fibrosis**، والخط الطويل شمال بعلامة **+** راجع للـ CKD.
+
+          يعني نفس الحاجات اللي الكلية بتعملها ==علشان تطلّع الحمض== (NH4+، endothelin، RAS) هي اللي ==بتليّفها==، وده ليه الـ bicarbonate بيبطّأ المرض.
       - kind: order
         page: 54
         quote: "Figure 27: Actions to manage hyperkalemia (potassium >5.5 mmol/l) in chronic kidney disease\n1st line: Correctable factors\n  Optimize serum bicarbonate levels\n  Optimize glycemic control\n  Consider loop diuretics and SGLT-2i as adjuncts\n2nd line: Dietary restriction\n  Assess dietary K+ intake and consider lowering (dietetic referral)\n3rd line: Medications\n  Dose adjust (or stop) K+ elevating or K+ sparing medication if necessary (signpost to restart disease modifying therapy, such as RAASi/MRA, at a later date if possible)\n  Licensed exchange resins are available to lower potassium"
@@ -1813,6 +1925,23 @@ lessons:
             <text x="272" y="134" text-anchor="middle" class="t-sm">or steroids</text>
             <text x="272" y="158" text-anchor="middle" class="t-sm t-bad">not NSAIDs</text>
           </svg>
+      - kind: figure
+        page: 56
+        title: "Hyperuricemia في الـ CKD: رسمة الكتاب"
+        image: { file: neph/L02-hyperuricemia-evaluation.webp, book: true }
+        alt: "Book flowchart: patient presenting to nephrology service for CKD evaluation; history, physical exam, serum urate testing, urine testing for pH and urate crystalluria. Three branches. No history of gout, normouricemia (SU under 6 mg/dl in women, under 7 in men): follow, or if low urine pH (under 6) with urate crystalluria, consider urinary alkalinization with bicarbonate or citrate. Asymptomatic hyperuricemia: diet (reduce alcohol, sugar and HFCS, purine-rich foods), adjust meds (consider reducing thiazide/loop diuretics, consider losartan as ARB, consider SGLT2 inhibitors, consider weight loss drug), other (exercise, good hydration, vitamin C, supplements); if hyperuricemia remains severe and persistent (for example over 9 mg/dl), more testing for crystals (DECT, US, urinalysis) and consider drug treatment after discussion with the patient. History of gout or tophi: gout management."
+        caption: |
+          فوق: مريض CKD جه للنفرولوجي ← history، exam، **serum urate**، و**urine pH** وبلورات اليوريك. وبعدين 3 فروع:
+
+          - **شمال: No history of gout و normouricemia** ← **Follow**، ولو البول حمضي (pH <6) وفيه بلورات ← **urinary alkalinization** بالـ bicarbonate أو citrate.
+          - **النص: Asymptomatic hyperuricemia** ← 3 صناديق:
+            - **Diet**: قلّل الكحول، السكر والـ **high-fructose corn syrup**، والأكل الغني بالـ purines.
+            - **Adjust meds**: قلّل الـ thiazide/loop diuretics، **losartan** كـ ARB، **SGLT2 inhibitors**.
+            - **Other**: رياضة، مية، vitamin C.
+            - ولو فضل عالي **>9 mg/dl** ← دوّر على بلورات (DECT، US) و==ناقش== العلاج بالدوا مع المريض.
+          - **يمين: History of gout أو tophi** ← **Gout management**.
+
+          الرسمة بتوضح إن ==الـ asymptomatic hyperuricemia مابتتعالجش بالدوا على طول==: أكل وتعديل أدوية الأول.
       - kind: explain
         page: 56
         quote: "Acute gout flare in a patient with CKD\n  Classical or atypical presentation?\n    Classical: Clinical diagnosis\n      Acute treatment\n        Colchicine (1.2 mg orally followed by 0.6 mg 1 h later; if subsequent dosing required, adjust per kidney function)\n        or Prednisone 30 mg with taper (10–14 d)\n        or Intra-articular steroids (only if few joints involved)\n        or Consider anakinra or canakinumab (if above treatment fails)\n    Atypical\n      Diagnostic testing\n        Aspirate joint to look for urate crystals and to rule out infection or other causes such as pseudogout from calcium pyrophosphate crystals\n        Consider DECT imaging if available\n      Gout is diagnosed: Acute treatment"
@@ -1830,6 +1959,23 @@ lessons:
           - أو **pegloticase + mycophenolate** لو الـ eGFR تحت 40
 
           التفسير المقبول (مش في الكتاب): مش NSAIDs **لأن** بيقللوا الدم الواصل للكلية وممكن يعملوا AKI. وبنبدأ الـ allopurinol بجرعة صغيرة **عشان** نقلل خطر الـ hypersensitivity والـ flare.
+      - kind: figure
+        page: 56
+        quote: "Acute gout flare in a patient with CKD"
+        title: "Acute gout flare في مريض CKD"
+        image: { file: neph/L02-acute-gout-flare.webp, book: true }
+        alt: "Book flowchart: acute gout flare in a patient with CKD; classical or atypical presentation? Classical: clinical diagnosis, then acute treatment: colchicine 1.2 mg orally followed by 0.6 mg 1 h later, subsequent dosing adjusted per kidney function; or prednisone 30 mg with taper (10-14 d); or intra-articular steroids if few joints; or anakinra or canakinumab if the above fail. Atypical: diagnostic testing (aspirate the joint to look for urate crystals and rule out infection or other causes such as pseudogout; consider DECT imaging), with an arrow 'gout is diagnosed' to acute treatment."
+        caption: |
+          فوق: **Acute gout flare** في مريض CKD ← السؤال: **Classical** ولا **Atypical**؟
+
+          - **شمال: Classical** ← **Clinical diagnosis** ← **Acute treatment** (الصندوق الكبير):
+            - **Colchicine 1.2 mg** وبعد ساعة **0.6 mg**، وباقي الجرعات ==حسب وظيفة الكلية==.
+            - أو **Prednisone 30 mg** وتنزل في 10–14 يوم.
+            - أو **intra-articular steroids** لو مفاصل قليلة.
+            - أو **anakinra/canakinumab** لو اللي فات فشل.
+          - **يمين: Atypical** ← **Diagnostic testing**: ==اسحب من المفصل== تدوّر على بلورات اليوريك وتستبعد infection أو pseudogout، و**DECT** لو متاح. ولما يتأكد ← السهم شمال للعلاج.
+
+          لاحظ إن ==الـ NSAIDs مش موجودة== في القايمة خالص: ده بالظبط كلام الكتاب إن الـ colchicine والـ steroids أحسن منها في الـ CKD.
       - kind: explain
         page: 56
         quote: "and to rule out infection or other causes"
@@ -1842,6 +1988,22 @@ lessons:
           وفي ص 57: الـ ==allopurinol== بيبدأ **50 mg** ويزيد بالراحة، وقبله **HLA-B*5801** في الآسيويين والأفارقة. التفسير المقبول (مش في الكتاب): الـ metabolite بتاعه بيطلع من الكلية وبيتجمع في الـ CKD، والجرعة العالية بدري و الـ ==HLA-B*5801== مرتبطين بـ hypersensitivity خطيرة على الجلد.
 
           **يعني** البزل بيحدد التشخيص، والبداية الهادية بتحمي المريض.
+      - kind: figure
+        page: 57
+        title: "تنزيل اليوريك على المدى الطويل: رسمة الكتاب"
+        image: { file: neph/L02-gout-urate-lowering.webp, book: true }
+        alt: "Book flowchart: positive history for gout; address diet, lifestyle, medications (left) and address comorbidities (right: uncontrolled gout as a major risk factor, evaluate for CAD and chronic inflammation). Goal to reduce SU to under 6 mg/dl. Usual first-line: allopurinol (test HLA-B*5801 is negative for Asians and African Americans), initiate at 50 mg/d and slowly escalate to 800 mg/d if needed. Alternative first-line: febuxostat (could include HLA-B58-positive subjects), initiate at 20-40 mg daily and escalate to 120 mg/d. With or without colchicine prophylaxis. Failure to reach target or other complications (draining joints, tophaceous gout): pegloticase + methotrexate if eGFR over 40, pegloticase + mycophenolate if eGFR under 40. Once the goal is reached: XOI to maintain SU under 6 mg/dl."
+        caption: |
+          - **فوق**: **Positive history for gout** ← شمال: الأكل والـ lifestyle والأدوية، ويمين: الأمراض المصاحبة (CAD، inflammation).
+          - **الهدف في النص**: **SU (serum urate) <6 mg/dl**.
+          - **فرعين**:
+            - **شمال: Allopurinol** (الأول عادةً): اعمل **HLA-B*5801** للآسيويين والأفارقة، وابدأ ==50 mg/d== وزوّد بالراحة لحد 800.
+            - **يمين: Febuxostat** (البديل، ينفع لو HLA-B58 positive): ابدأ 20–40 mg ولحد 120.
+            - بينهم: **with/without colchicine prophylaxis**.
+          - **لو فشل** (أو tophi): **Pegloticase + methotrexate** (eGFR >40) أو **+ mycophenolate** (eGFR <40).
+          - **تحت**: بعد الهدف ← **XOI** (xanthine oxidase inhibitor) يفضل يمسك اليوريك <6.
+
+          يعني في الـ CKD ==الـ xanthine oxidase inhibitor هو الأساس== وبنبدأه بجرعة صغيرة ونطلع بالراحة.
       - kind: check
         page: 57
         quote: "Alternative first-line treatment (Could include HLA-B58–positive subjects): Febuxostat\n  Initiate at 20 to 40 mg daily; Slowly escalate to 120 mg/d to reach target"
@@ -1895,6 +2057,19 @@ lessons:
           - Statin: كل chronic kidney disease (CKD) + diabetes من 18 سنة، وكل CKD فوق 50
 
           التفسير المقبول (مش في الكتاب): مريض الـ CKD بيموت بالقلب أكتر ما بيوصل للغسيل، **عشان** كده الـ statin والـ CV risk جزء من علاج الكلى نفسه.
+      - kind: figure
+        page: 58
+        title: "مين ياخد statin؟ (KDIGO)"
+        image: { file: neph/L02-statin-indications.webp, book: true }
+        alt: "Book figure 'The KDIGO CKD lipid guidelines for management of hyperlipidemia': three red boxes with arrows to one box 'Treat with a statin'. Left: patient has CKD and DM and is age 18 years or more. Middle: patient has CKD, does not have DM, and is age 50 years or more. Right: patient has CKD, does not have DM, is age 18-49 years, and has known CAD, previous stroke, or a 10-year Framingham risk over 10%."
+        caption: |
+          3 صناديق حمرا فوق، وكلهم بيشاوروا على صندوق واحد تحت: **Treat with a statin**:
+
+          - **شمال**: CKD **+ DM** وسنه **≥18**.
+          - **النص**: CKD **من غير DM** وسنه **≥50**.
+          - **يمين**: CKD من غير DM وسنه **18–49** بس عنده **CAD** معروف، أو **stroke** قبل كده، أو **Framingham risk >10%** في 10 سنين.
+
+          يعني في الـ CKD ==السن والسكر هما المفتاح==: أي مريض CKD فوق 50 ياخد statin، وتحت 50 محتاج سبب تاني.
       - kind: explain
         page: 58
         quote: "Recommend oral low-dose aspirin for prevention of recurrent ischemic"
@@ -1933,7 +2108,7 @@ lessons:
     title: "الأدوية والأعشاب والصبغة"
     hook: "مسكّن من الصيدلية، أعشاب تخسيس، أو صبغة CT: كل واحدة ممكن تكون الضربة الأخيرة."
     minutes: 10
-    pages: [59, 61]
+    pages: [59, 62]
     topics: [drugs]
     goals:
       - "تعرف إزاي كل دوا nephrotoxic بيأذي وبديله"
@@ -1978,6 +2153,22 @@ lessons:
           الكتاب: راقب الـ eGFR والأملاح و**مستوى الدوا** مع الأدوية اللي ليها **narrow therapeutic window** أو آثار جانبية أو nephrotoxicity، وعدّل الجرعة حسب الـ eGFR.
 
           التفسير المقبول (مش في الكتاب): الأدوية اللي بتطلع من الكلية بتتجمع لما الـ GFR يقل، فنفس الجرعة بتدّي مستوى أعلى. ومع دوا زي الـ vancomycin أو الـ aminoglycosides أو الـ lithium، الفرق بين الجرعة اللي بتعالج واللي بتسمّم صغير. يعني الـ eGFR بيحدد **الجرعة**، والـ ==level== بيأكّد إنك صح.
+      - kind: figure
+        page: 60
+        quote: "Figure 41: Suggested steps in the process of medication review and reconciliation."
+        title: "شكل 41 في الكتاب: مراجعة الأدوية"
+        image: { file: neph/L02-medication-review.webp, book: true }
+        alt: "Book wheel, Figure 41, with 'CKD patient' at the centre and three segments: optimizing the medication impact (green, left), minimizing medication-related problems (blue, right), medication agreement (bottom). Yellow boxes: assessing that the dosage and regimen are correct (top); evaluating whether each medication is necessary; determining whether each medication is the preferred one for its indication; resolving discrepancies between the actual medication list and the medical record (left); reviewing the list for interactions or adverse effects; ensuring that proper monitoring takes place; assessing adherence and causes of nonadherence; obtaining an accurate medication list (right); communication with other physicians (bottom). Outer rings: medication review and medication reconciliation."
+        caption: |
+          في النص **CKD patient**، وحواليه 3 أقسام، وكل قسم ليه صناديق صفرا:
+
+          - **الأخضر شمال: Optimizing the medication impact**: كل دوا **لازم**؟ هو **الأفضل** لدواعيه؟ والقايمة اللي المريض بياخدها **مطابقة** للملف؟
+          - **الأزرق يمين: Minimizing medication-related problems**: راجع الـ **interactions** والأعراض الجانبية، اتأكد إن الـ **monitoring** بيحصل، وشوف الـ **adherence**، وخد **قايمة أدوية دقيقة**.
+          - **تحت: Medication agreement** و **Communication with other physicians**.
+          - **فوق**: الجرعة والنظام **صح** (لازم تتظبط على الـ eGFR).
+          - **الحلقات برة**: **Medication review** و **Medication reconciliation**.
+
+          يعني مريض الـ CKD محتاج ==مراجعة أدوية منظمة كل زيارة==، مش بس تظبيط جرعة.
       - kind: check
         page: 59
         quote: "Table 32: Key examples of common medications with documented nephrotoxicity and, where available, selected non-nephrotoxic alternatives. CKD, chronic kidney disease; GFR, glomerular filtration rate; i.v., intravenous; NSAID, nonsteroidal anti-inflammatory drugs.\n| Nephrotoxic medication | Potential non-nephrotoxic alternatives |\n| Analgesics | |\n| NSAIDs: Nephrotoxic effects include decrease in GFR through reduction in prostaglandin dependent kidney blood flow, allergic interstitial nephritis (AIN), and nephrotic syndrome | Acetaminophen |\n| Antimicrobials | |\n| Aminoglycosides: accumulates in the proximal tubular cells and disrupts phospholipid metabolism, resulting in cell apoptosis and acute tubular necrosis (ATN) | Cephalosporins; Carbapenems |\n| Vancomycin: unclear cause of nephrotoxicity, but likely related to ATN and possible AIN | Linezolid; Daptomycin |\n| Sulfamethoxazole-trimethoprim: AIN, ATN, crystalluria within the distal convoluted tubule and reversible inhibition of the tubular creatinine secretion | Clindamycin + Primaquine; Pentamidine; Atovaquone |\n| Gastrointestinal medications | |\n| Proton pump inhibitors: may result in AKI and CKD due to tubulointerstitial nephritis and AIN | H2-receptor antagonists |\n| Cardiovascular medications | |\n| Warfarin: glomerular hemorrhage, oxidative stress causing kidney tubular damage, and direct effects on kidney vascular calcification by vitamin K–dependent alterations of matrix Gla protein | Non-vitamin K antagonist oral anticoagulants (NOAC) |\n| Other | |\n| Lithium: NDI as well as CKD from chronic tubulointerstitial nephropathy | Aripiprazole; Lamotrigine; Quetiapine; Valproate |"
@@ -2039,31 +2230,20 @@ lessons:
           وليه خطة الرجوع مهمة؟ لأن أدوية زي الـ RAASi والـ SGLT2i هي اللي بتحمي الكلية، ولو ماحدش رجّعها، المريض يخسر الحماية للأبد.
       - kind: figure
         page: 61
-        quote: "Sick day rule implementation"
-        title: "الـ sick-day rule في 4 خطوات"
-        alt: "Four boxes in a row with arrows: the patient identifies a dehydrating illness, recalls or retrieves the list of pills to stop, identifies and stops the pills, then recovers and resumes the pills."
-        caption: "Figure 42: المريض **يعرف** إنه تعبان ← **يفتكر** القايمة ← **يوقف** ← لما يخف **يرجّع**. الخطوة الأخيرة أهم واحدة تتنسي."
-        svg: |
-          <svg viewBox="0 0 330 160" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="N2i" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
-            </defs>
-            <rect x="5" y="20" width="150" height="50" rx="8" class="fg-bad"/>
-            <text x="80" y="42" text-anchor="middle" class="t-sm t-b">1. Identifies</text>
-            <text x="80" y="60" text-anchor="middle" class="t-sm">dehydrating illness</text>
-            <rect x="175" y="20" width="150" height="50" rx="8" class="fg-acc"/>
-            <text x="250" y="42" text-anchor="middle" class="t-sm t-b">2. Recalls</text>
-            <text x="250" y="60" text-anchor="middle" class="t-sm">list of pills to stop</text>
-            <rect x="175" y="95" width="150" height="50" rx="8" class="fg-acc"/>
-            <text x="250" y="117" text-anchor="middle" class="t-sm t-b">3. Stops</text>
-            <text x="250" y="135" text-anchor="middle" class="t-sm">the pills</text>
-            <rect x="5" y="95" width="150" height="50" rx="8" class="fg-good"/>
-            <text x="80" y="117" text-anchor="middle" class="t-sm t-b">4. Recovers</text>
-            <text x="80" y="135" text-anchor="middle" class="t-sm">and resumes pills</text>
-            <line x1="155" y1="45" x2="171" y2="45" class="fg-arrow" marker-end="url(#N2i)"/>
-            <line x1="250" y1="70" x2="250" y2="91" class="fg-arrow" marker-end="url(#N2i)"/>
-            <line x1="175" y1="120" x2="159" y2="120" class="fg-arrow" marker-end="url(#N2i)"/>
-          </svg>
+        quote: "Figure 42: Essential steps for appropriate sick day rule implementation. From Hall RK et al. Nature Rev Nephrol (submitted)."
+        title: "شكل 42 في الكتاب: الـ sick day rule"
+        image: { file: neph/L02-sick-day-steps.webp, book: true }
+        alt: "Book strip, Figure 42, of five steps with icons: sick (a person in bed); identifies dehydrating illness (a glass of water); recalls or retrieves the list of pills to stop (a head); identifies and stops pills (a pill bottle); recovers and resumes pills (a green tick)."
+        caption: |
+          5 صور من الشمال لليمين، وتحت كل واحدة خطوة:
+
+          1. **Sick** (واحد في السرير).
+          2. **Identifies dehydrating illness** (كوباية مية): يعرف إن ده مرض بيجفّف (إسهال، ترجيع، حرارة).
+          3. **Recalls or retrieves list of pills to stop** (دماغ): يفتكر القايمة.
+          4. **Identifies and stops pills** (علبة دوا): يوقف الأدوية دي.
+          5. **Recovers and resumes pills** (علامة صح خضرا): لما يخف ==يرجّعها==.
+
+          الخطوة الأخيرة هي اللي بتتنسي، ومن غيرها المريض يفضل من غير ==RAASi و SGLT2i== اللي بيحموا كليته.
       - kind: explain
         page: 61
         quote: "Consider planned discontinuation of medications (such as metformin, ACEi, ARBs, diuretics and SGLT2i) in the 48–72 hours prior to elective surgery or during the acute management of adverse effects."
@@ -2095,6 +2275,20 @@ lessons:
           التفسير المقبول (مش في الكتاب): الـ gadolinium بيطلع من الكلية. لما الـ GFR يبقى واطي جدًا بيقعد في الجسم أطول، والأنواع القديمة (group I) كانت مرتبطة بمرض خطير في الجلد والأعضاء اسمه **nephrogenic systemic fibrosis**. الـ group II و III أكثر ثباتًا فالخطر أقل بكتير.
 
           وفي ص 62 للصبغة اليودية: الـ risk factors هي السن والسكر والضغط والـ volume depletion والـ nephrotoxins، والـ **eGFR < 30** = خطر عالي. والـ **hydration** ماتتعملش لو المريض hypervolemic أو عنده heart failure.
+      - kind: figure
+        page: 62
+        title: "الصبغة والـ AKI: رسمة الكتاب"
+        image: { file: neph/L02-contrast-aki.webp, book: true }
+        alt: "Book flowchart: high risk of contrast-associated acute kidney injury? (eGFR under 30, or eGFR 30-44 with additional risk factors). Left note: use validated tools to estimate risk. Right note: risk factors include age, diabetes, hypertension, volume depletion and concomitant nephrotoxins. No: proceed with planned intervention, no need for prophylactic measures, consider holding diuretics and nephrotoxic medications. Yes: discuss whether an equivalent alternative to the planned study is available. Yes: proceed with alternative study. No: hold diuretics and nephrotoxic agents, administer prophylactic isotonic saline, use the lowest necessary dose of iodinated contrast media. Note: hydration is not indicated in cases of hypervolemia or decompensated heart failure."
+        caption: |
+          - **فوق**: **High risk of contrast-associated AKI؟** يعني **eGFR <30**، أو **30–44** مع risk factors (يمين: السن، السكر، الضغط، الجفاف، أدوية nephrotoxic).
+          - **No (يمين)** ← اعمل الأشعة عادي، ==مفيش prophylaxis==، وفكّر توقف الـ diuretics والأدوية الضارة.
+          - **Yes (شمال)** ← فيه **بديل** يدّي نفس المعلومة من غير صبغة؟
+            - **Yes** ← **Proceed with alternative study**.
+            - **No** ← وقّف الـ diuretics والـ nephrotoxins، **isotonic saline** وقاية، و==أقل جرعة== iodinated contrast.
+          - **تحت يمين**: **Hydration is not indicated** في الـ hypervolemia أو الـ decompensated heart failure.
+
+          الرسمة بتقول إن ==الـ eGFR <30== هو الحد اللي يخليك تفكر، وإن المية مش للكل.
       - kind: reveal
         page: 61
         quote: "In MRI → American Colleague of Radiology group II and III Gadolinium- Based Contrast agents if GFR <30 ml/min per 1.73 m2 (CKD G4–G5)."
@@ -2185,6 +2379,19 @@ lessons:
           الكتاب: في G4–G5 اسأل عن الـ **uremic symptoms** كل زيارة بطريقة **standardized**، واعمل **malnutrition screen مرتين في السنة**. و Figure 45 بتوري أشهر الأعراض: **fatigue 70%**، poor mobility 56%، drowsiness و pain 53%، poor sleep 49%، sexual dysfunction 48%، leg swelling 45%، و shortness of breath و decreased appetite 42%.
 
           التفسير المقبول (مش في الكتاب): قرار الغسيل في ص 63 قائم على **الأعراض وجودة الحياة**، مش الرقم بس. فلو ماسألتش بانتظام، مش هتعرف إمتى الميزان مال. وسوء التغذية بييجي بالراحة من قلة الشهية والـ uremia، وبيموّت أكتر من أي حاجة تانية في المرحلة دي، علشان كده بيتعمله screen منتظم.
+      - kind: figure
+        page: 63
+        title: "شكل 45 في الكتاب: أعراض الـ CKD المتقدم"
+        image: { file: neph/L02-uremic-symptoms.webp, book: true }
+        alt: "Book figure 45: a family of figures in the centre with arrows to 14 symptom boxes, each with prevalence and severity score: fatigue 70% (22.8), shortness of breath 42% (15), decreased appetite 42% (19.8), leg swelling 45%, muscle cramps 46%, heartburn 46%, itching 46% (25), sexual dysfunction 48% (56.4), poor sleep 49% (23.8), pain 53% (22.5), drowsiness 53% (22.5), bone/joint pain 55%, poor mobility 56% (19)."
+        caption: |
+          في النص صورة ناس، ومنها أسهم لـ 14 صندوق، كل واحد فيه **Prevalence** و **Severity score** (من 100):
+
+          - **فوق شمال: Fatigue** ==70%==: أشهر عرض.
+          - **حوالين الدايرة**: Poor mobility 56%، Bone/joint pain 55%، Drowsiness 53%، Pain 53%، Poor sleep 49%، Itching 46%، Muscle cramps 46%، Heartburn 46%، Leg swelling 45%، Shortness of breath 42%، Decreased appetite 42%.
+          - **تحت: Sexual dysfunction 48%** وعليه أعلى **severity score: 56.4**.
+
+          الرسمة بتبرر ليه الكتاب بيقول ==اسأل عن الـ uremic symptoms كل زيارة== بطريقة standardized: الأعراض كتير وشايعة، والمريض مش هيقولها لوحده (خصوصًا الـ sexual dysfunction).
       - kind: explain
         page: 64
         quote: "Consider planning for preemptive kidney transplantation and/or dialysis"
@@ -2315,6 +2522,19 @@ lessons:
           - **Pegylated epoetin beta**: 60 µg كل أسبوعين أو 120 µg كل 4 أسابيع
 
           التفسير المقبول (مش في الكتاب): بنستبعد الأسباب دي الأول **لأن** الـ ESA مش هيشتغل كويس لو فيه نقص حديد أو التهاب أو نزيف، والحديد هو الخامة اللي الـ EPO بيحتاجها.
+      - kind: figure
+        page: 64
+        title: "أنيميا الـ CKD خطوة بخطوة: رسمة الكتاب"
+        image: { file: neph/L02-anemia-workup.webp, book: true }
+        alt: "Book flowchart of three numbered steps. 1, exclude other causes of anaemia: inflammation (CRP/IL-6), blood loss (endoscopy/colonoscopy), haemolysis (Coombs test, bilirubin, LDH, haptoglobin), haematological disorder (bone marrow), other (B12/folate levels, PTH, Hb electrophoresis). 2, iron deficiency?: ferritin, TSAT, %HRC (percentage of hypochromic red cells), CHr (reticulocyte haemoglobin content), leading to iron supplementation. 3, ESA therapy: epoetin IV or SC 2000-3000 units 2-3 times a week; darbepoetin alfa IV or SC 30 micrograms once a week or 60 every 2 weeks; pegylated epoetin beta IV or SC 60 micrograms every 2 weeks or 120 every 4 weeks; HIF-PHIs oral, variable dose."
+        caption: |
+          3 خطوات بالترتيب (الأرقام في الدواير شمال):
+
+          1. **Exclude other causes of anaemia** (وردي): **Inflammation** (CRP/IL-6)، **Blood loss** (منظار)، **Haemolysis** (Coombs، LDH، haptoglobin)، **Haematological disorder** (bone marrow)، وغيرهم (B12/folate، PTH).
+          2. **Iron deficiency?** (برتقاني فاتح): **Ferritin**، **TSAT** (transferrin saturation)، نسبة الـ **hypochromic red cells** والـ **reticulocyte haemoglobin content** (شرحهم مكتوب يمين) ← **Iron supplementation**.
+          3. **ESA therapy** (أصفر): **Epoetin** 2000–3000 وحدة 2–3 مرات في الأسبوع، **Darbepoetin** 30 µg أسبوعيًا، **Pegylated epoetin beta** 60 µg كل أسبوعين، و الـ **hypoxia-inducible factor prolyl hydroxylase inhibitors** بالبُق.
+
+          الترتيب نفسه هو الرسالة: ==استبعد الأسباب التانية==، و==صلّح الحديد الأول==، وبعدين الـ ESA.
       - kind: explain
         page: 64
         quote: "HIF stabilizers"
@@ -2373,6 +2593,20 @@ lessons:
           علشان كده الكتاب بيقول ==too high and too low PTH== الاتنين وحشين.
       - kind: figure
         page: 65
+        title: "الـ CKD-MBD: 3 دواير"
+        image: { file: neph/L02-ckd-mbd-venn.webp, book: true }
+        alt: "Book Venn diagram titled 'Chronic kidney disease-mineral and bone disorder' (CKD-MBD): three overlapping circles, laboratory abnormalities (red, left), bone abnormalities (yellow, right) and vascular calcification (orange, bottom), with CVD, fractures and mortality written in the centre."
+        caption: |
+          3 دواير متداخلة تحت عنوان **Chronic Kidney Disease–Mineral and Bone Disorder**:
+
+          - **الأحمر شمال: Laboratory abnormalities** (Ca، phosphate، PTH، vitamin D).
+          - **الأصفر يمين: Bone abnormalities** (الـ turnover).
+          - **البرتقاني تحت: Vascular calcification**.
+          - **في النص حيث الثلاثة يتقابلوا**: **CVD، Fractures، Mortality**.
+
+          يعني الـ CKD-MBD ==مش مرض عضم وبس==: نفس اختلال الأملاح بيكلّس الشرايين، والنتيجة ==قلب وكسور ووفاة==.
+      - kind: figure
+        page: 65
         quote: "Adynamic bone, Osteomalacia; Normal; Mild; Osteitis fibrosa; Mixed\nLow turnover: Low PTH; Low alkaline phosphatase; High calcium; Normal or high phosphate\n  Low bone resorption AND formation\nHigh turnover: High PTH; High alkaline phosphatase; Low calcium; High phosphate\n  High bone resorption with some bone formation\nToward high turnover: Low dialysate calcium, negative or zero Ca balance; Hyperparathyroidism\nToward low turnover: Calcium, calcitriol; Aluminum; High dialysate calcium"
         title: "مسطرة الـ turnover"
         alt: "A horizontal scale from low to high bone turnover. Left: adynamic bone and osteomalacia with low PTH, low alkaline phosphatase, often from too much calcium, calcitriol, aluminium or high dialysate calcium. Middle: normal. Right: osteitis fibrosa with high PTH, high alkaline phosphatase, high phosphate and low calcium."
@@ -2415,6 +2649,26 @@ lessons:
           رسمة ص 66 (in pre-dialysis CKD): ابدأ المتابعة في **CKD G3a** في الكبار (و G2 في الأطفال). الـ PTH المثالي **مش معروف**، فلو عالي أو بيزيد دوّر على **modifiable factors**. **Correction of underlying causes**: ==hyperphosphatemia==، **hypocalcemia**، و ==vitamin D deficiency==. **Avoid hypercalcemia**. والـ phosphate العالي: restriction و binders. وتجنّب الـ calcitriol والـ VDRAs **إلا في G4–5** مع PTH بيزيد باستمرار.
 
           التفسير المقبول (مش في الكتاب): الـ PTH بيعلى **كرد فعل** على phosphate عالي وكالسيوم واطي و vitamin D قليل. لو صلّحت الأسباب، الـ PTH بينزل لوحده. أما الـ calcitriol بدري فبيعلّي الكالسيوم والـ phosphate ويكلّس الشرايين، وده نفس السبب اللي خلّى الكتاب يقول avoid hypercalcemia.
+      - kind: figure
+        page: 66
+        quote: "In pre-dialysis CKD"
+        title: "الـ CKD-MBD قبل الغسيل: رسمة الكتاب"
+        image: { file: neph/L02-predialysis-mbd.webp, book: true }
+        alt: "Book tree 'In pre-dialysis CKD' with four columns: start monitoring for CKD-MBD (CKD G3a in adults, CKD G2 in children, treatment based on trends); PTH (optimal level unknown; if high or rising look for modifiable factors including vitamin D deficiency; avoid calcitriol and VDRAs except in CKD G4-5 with progressive rise); calcium (avoid hypercalcemia, evaluate with phosphate); phosphate (lower elevated levels, phosphate restriction, phosphate binders). Below, 'High PTH' splits into: low calcium and low to normal phosphorus, calcitriol or VDRAs; normal calcium and high phosphorus, calcimimetics; no response to treatment, parathyroidectomy; with a note: discontinue if PTH falls below 100-150 pg/mL."
+        caption: |
+          **فوق: In pre-dialysis CKD**، و4 أعمدة:
+
+          - **Start monitoring**: من **G3a** في الكبار (G2 في الأطفال)، والعلاج حسب ==الـ trends مش رقم واحد==.
+          - **PTH**: الرقم المثالي **مش معروف**؛ لو عالي أو بيزيد دوّر على أسباب تتصلّح (زي **vitamin D deficiency**)، و==ماتديش calcitriol== إلا في G4–G5 مع ارتفاع مستمر.
+          - **Calcium**: **Avoid hypercalcemia**.
+          - **Phosphate**: نزّل العالي: **restriction** وبعدين **phosphate binders**.
+
+          **تحت: High PTH** و3 فروع:
+          - Ca واطي و phosphate طبيعي/واطي ← **Calcitriol or VDRAs** (vitamin D receptor activators)، ووقّف لو الـ PTH نزل تحت **100–150 pg/mL**.
+          - Ca طبيعي و phosphate عالي ← **Calcimimetics**.
+          - **No response** ← **Parathyroidectomy**.
+
+          الشجرة بتختصر قاعدة الدرس: صلّح الأسباب الأول، وبعدين اختار الدوا حسب ==الـ Ca والـ phosphate== مع الـ PTH.
       - kind: check
         page: 66
         quote: "Vitamin D deficiency"

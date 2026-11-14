@@ -62,9 +62,11 @@ The model to copy is `content/lessons/hb/L01.yaml`.
     («شكل 3 في الكتاب، ص 9»). The caption explains it **in the lesson's
     context**: what the picture is, what to look at in each panel, arrow and
     label the book prints, and what that proves for the point the lesson is
-    making; a figure the cards ask about gets a question step after it. Until
-    marks on pictures land (#984), say where to look in words («أعلى
-    اليمين»). A figure with nothing to teach (author photo, logo, decoration,
+    making; a figure the cards ask about gets a question step after it.
+    Where the caption would have to say where to look («أعلى اليمين»), put
+    numbered `marks:` on the picture instead ([Marks on a
+    picture](#marks-on-a-picture), #984) and name the numbers in the
+    caption. A figure with nothing to teach (author photo, logo, decoration,
     a repeat of one already shown) is skipped with its reason. Each lecture's
     figures are listed in `content/book-figures/<course>/LNN.yaml` (see
     [Book figures](#book-figures)); `validate` fails when a listed figure is

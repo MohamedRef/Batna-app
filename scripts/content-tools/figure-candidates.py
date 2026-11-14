@@ -101,6 +101,33 @@ def sheets(course, pages, out):
         print("sheet", name)
 
 
+def research(num, first, last):
+    """Research decks: pictures per slide and contact sheets of the slide images."""
+    pdf = os.path.join(SOURCES, "courses", "res", "slides", f"res-{num}.pdf")
+    pics = embedded(pdf, first, last)
+    for p in range(first, last + 1):
+        imgs = pics.get(p, [])
+        print(f"slide {p}\t{len(imgs)} pic(s) {' '.join(f'{w}x{h}' for w, h, _ in imgs)}")
+    if "--sheets" in sys.argv:
+        from PIL import Image
+
+        out = sys.argv[sys.argv.index("--sheets") + 1]
+        os.makedirs(out, exist_ok=True)
+        img_dir = os.path.join(SOURCES, "courses", "res", "img")
+        for start in range(first, last + 1, 9):
+            group = [p for p in range(start, min(start + 9, last + 1))]
+            sheet = Image.new("RGB", (3 * 640, 3 * 490), "white")
+            for k, p in enumerate(group):
+                f = os.path.join(img_dir, f"{num}-s-{p:02d}.jpg")
+                if os.path.exists(f):
+                    im = Image.open(f)
+                    im.thumbnail((630, 480))
+                    sheet.paste(im, ((k % 3) * 640, (k // 3) * 490))
+            name = os.path.join(out, f"s{group[0]:03d}-s{group[-1]:03d}.jpg")
+            sheet.save(name, quality=70)
+            print("sheet", name)
+
+
 def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
@@ -109,6 +136,8 @@ def main():
     index = yaml.safe_load(open("content/index.yaml"))
     entry = next(e for e in index["lectures"] if e["id"] == lecture)
     first, last = entry["pages"]
+    if course == "res":
+        return research(num, first, last)
     pages = pages_of(open(text_path(course, num), encoding="utf-8").read())
     pdf_pages = [pages[p][0] for p in range(first, last + 1) if p in pages]
     pics = {}

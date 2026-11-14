@@ -5,6 +5,9 @@
     python3 -I scripts/content-tools/figure-crop.py hb 3 content/lessons/img/hb/L01-stellate-cells.webp --image 0
     python3 -I scripts/content-tools/figure-crop.py hb 3 out.webp --box 0.30,0.60,0.70,0.80
 
+Research (`res`) crops from the lecture's slide deck: pass `--lecture LNN`
+and the slide number as the page.
+
 `--list` prints the pictures embedded on the printed page with their boxes as
 fractions of the page (x0,y0,x1,y1, top-left origin), plus the page's size.
 `--image N` crops picture N of that list, `--box` any region (use it for
@@ -66,11 +69,20 @@ def main():
     ap.add_argument("--box")
     ap.add_argument("--pad", type=float, default=0.006)
     ap.add_argument("--dpi", type=int, default=300)
+    ap.add_argument("--lecture", help="research only: the deck, e.g. L05")
     a = ap.parse_args()
-    if a.course not in PDF:
-        sys.exit(f"no book PDF for {a.course} (research slides: crop from courses/res/slides)")
-    path = os.path.join(SOURCES, PDF[a.course])
-    n = pdf_page(a.course, a.page)
+    if a.course == "res":
+        # Research is taught from slides: `page` is the slide number of the
+        # lecture's merged deck, given as --lecture LNN.
+        if not a.lecture:
+            sys.exit("research: give --lecture LNN (the deck), page = slide number")
+        path = os.path.join(SOURCES, "courses", "res", "slides", f"res-{a.lecture}.pdf")
+        n = a.page
+    elif a.course not in PDF:
+        sys.exit(f"no book PDF for {a.course}")
+    else:
+        path = os.path.join(SOURCES, PDF[a.course])
+        n = pdf_page(a.course, a.page)
     with pdfplumber.open(path) as pdf:
         pg = pdf.pages[n - 1]
         W, H = float(pg.width), float(pg.height)

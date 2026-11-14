@@ -861,6 +861,20 @@ lessons:
           - CER 0.05%، EER 0.025%: ARR 0.025%، **NNT = 4000**.
 
           نفس الـ 50%، بس التالت محتاج تعالج **4000 واحد** علشان تنفع واحد. القاعدة: ==ARR = RRR × baseline risk==، فكل ما الـ baseline risk يقل، الـ NNT يكبر.
+      - kind: figure
+        page: 57
+        title: "شريحة 57: أمثلة NNT حقيقية"
+        image: { file: res/L07-s57-nnt-examples.webp, book: true }
+        alt: "Table titled Examples of NNT with columns condition or disorder, intervention vs control, outcome, follow-up duration, event rates CER and EER in percent, and NNT with 95% CI. Row 1: acute myocardial infarction, angiotensin-converting enzyme (ACE) inhibitors vs placebo, mortality, 30 days, CER 7.6, EER 7.1, NNT 210 (125 to 662). Row 2: acute myocardial infarction, ACE inhibitors vs placebo, nonfatal heart failure, 30 days, 15.2 and 14.6, NNT 165 (111 to 488). Row 3: chronic heart failure (CHF), beta-blockers vs placebo, hospitalisation for CHF, 7 months, 17 and 13, NNT 24 (16 to 51)."
+        caption: |
+          الشريحة دي بتحط القاعدة اللي فوق على أدوية حقيقية:
+
+          - **الصف الأول**: **ACE inhibitors** بعد الـ MI، الـ mortality في 30 يوم: **7.6% ضد 7.1%** → **NNT = 210**.
+          - **الصف التاني**: نفس الدوا، الـ nonfatal heart failure: **15.2% ضد 14.6%** → **NNT = 165**.
+          - **الصف التالت**: **β-blockers** في الـ CHF، الـ hospitalisation في 7 شهور: **17% ضد 13%** → **NNT = 24**.
+          - **العمود الأخير**: الـ NNT ومعاه الـ 95% CI بين قوسين.
+
+          اللي تاخده: ==الـ NNT بيتبع الـ ARR==: فرق نص في المية بس (7.6 لـ 7.1) يدّي NNT 210، وفرق 4% (17 لـ 13) يدّي 24.
       - kind: aside
         tone: analogy
         page: 55
@@ -1027,6 +1041,19 @@ lessons:
           - **Cereal fibre** 0.6-0.7: ضيّق وتحت الـ 1، يعني ==significant and precise==.
 
           وكل ما الـ sample size يكبر، الـ CI **يضيق** (precision أعلى).
+      - kind: figure
+        page: 68
+        title: "شريحة 68: الـ CI بتاع 3 أنواع ألياف"
+        image: { file: res/L07-s68-fibre-ci.webp, book: true }
+        alt: "Forest plot. Horizontal axis: relative risk (95% CI) from 0.5 to 1.5, with a dotted vertical line at 1.0. Vegetable fiber: a point just above 1 with a wide bar crossing the line, labelled insignificant, less precised (0.9-1.4). Fruit fiber: a point just below 1 with a bar crossing the line, labelled insignificant less precised (0.8-1.2). Cereal fiber: a point near 0.65 with a short bar entirely left of the line, labelled significant and precise (0.6-0.7)."
+        caption: |
+          دي الرسمة اللي الخطوة فوق بتشرحها:
+
+          - **المحور الأفقي**: **Relative Risk (95% CI)**، والخط المنقّط عند **1.0** = مفيش أثر.
+          - **Vegetable Fiber** و**Fruit Fiber**: الخط بتاعهم ==بيعدّي الخط المنقّط== وعريض → insignificant و less precise.
+          - **Cereal Fiber**: خط قصير **كله شمال الـ 1** → significant و precise.
+
+          اللي تاخده: بص على حاجتين في أي CI: ==بيلمس الـ 1 ولا لأ== (significance)، وعرضه قد إيه (precision).
       - kind: check
         page: 66
         quote: "P-values (Hypothesis Testing) in DVT study:\n  Confidence interval of Relative risk = 0.12 - 0.18 (P=0.001)\n  Confidence interval does not include 1: statistically significant\n  If the confidence interval is 0.12 - 1.5 (includes 1) this is not statistically significant (P=0.6)"
@@ -1070,6 +1097,21 @@ lessons:
             options: ["Intention to treat", "Per protocol"]
             answer: 0
             why: "الـ ITT بيقول الأثر الحقيقي صفر. الـ per protocol خلّى العملية تبان كويسة لأنه شال أسوأ العيانين (Montori, Canadian Medical Association Journal (CMAJ) 2001)."
+      - kind: figure
+        page: 70
+        title: "شريحة 70: per protocol ضد intention to treat"
+        image: { file: res/L07-s70-itt.webp, book: true }
+        alt: "Diagram from Montori et al., CMAJ 2001. Patients with cerebrovascular disease are randomised (R) to surgery plus ASA or ASA alone, 100 each, on a time line of 1 month then 1 year. In the surgery plus ASA arm, 10 strokes happen before surgery and 10 after it; in the ASA arm 10 and 10. Right columns: per protocol 10/90 = 0.11 vs 20/100 = 0.20, circled RRR = 0.45 in red; intention-to-treat 20/100 = 0.20 vs 20/100 = 0.20, circled RRR = 0 in blue."
+        caption: |
+          دي الرسمة اللي الـ case فوق جاي منها:
+
+          - **شمال**: **Patients with cerebro-vascular disease** → **R** (القرعة) → فوق **Surgery + ASA** وتحت **ASA** بس، 100 في كل واحد.
+          - **الجروب اللي فوق**: **10 Stroke** قبل ما العملية تحصل (السهم **Surgery** عند الشهر)، و**10** بعدها.
+          - **الجروب اللي تحت**: 10 و10 برضه.
+          - **عمود Per protocol**: 10/90 ضد 20/100 → **RRR = 0.45** (الدايرة الحمرا).
+          - **عمود Intention-to-treat**: 20/100 ضد 20/100 → **RRR = 0** (الدايرة الزرقا).
+
+          اللي تاخده: الفرق كله جاي من ==الـ 10 اللي جالهم stroke قبل العملية==: الـ per protocol شالهم، والـ ITT خلّاهم في جروبهم، وده ==الأثر الحقيقي: صفر==.
       - kind: table
         page: 72
         quote: "Treatment group\nIntensive Conventional Total\ninsulin insulin\nDrug A 72 83 155\nDrug B 194 184 378\nTotal 266 267 523"
@@ -1369,6 +1411,20 @@ lessons:
           - "Lost to follow-up or discontinued"
           - "Analysed"
         why: "الترتيب: **enrolment** (assessed، والـ excluded بأسبابهم)، ثم **randomized**، ثم **allocation** (خد أو ماخدش)، ثم **follow-up** (ضاع أو وقف)، ثم **analysis**. ونفس الترتيب في كل جروب."
+      - kind: figure
+        page: 92
+        title: "شريحة 92: الـ CONSORT 2010 flow diagram"
+        image: { file: res/L07-s92-consort-flow.webp, book: true }
+        alt: "CONSORT 2010 Flow Diagram. Enrollment: assessed for eligibility (n=), with a side box excluded (n=): not meeting inclusion criteria, declined to participate, other reasons; then randomized (n=). The flow splits into two identical arms. Allocation: allocated to intervention (n=), received allocated intervention, did not receive allocated intervention (give reasons). Follow-up: lost to follow-up (give reasons), discontinued intervention (give reasons). Analysis: analysed (n=), excluded from analysis (give reasons)."
+        caption: |
+          دي الرسمة اللي الترتيب فوق ماشي عليها:
+
+          - **فوق (Enrollment)**: **Assessed for eligibility**، وجنبه مربع **Excluded** بأسبابه، وبعدين **Randomized**.
+          - **الشريط الأزرق Allocation**: الخط بيتقسم ==دراعين متطابقين==: اتوزّع على الـ intervention، خده ولا ماخدوش.
+          - **Follow-Up**: **Lost to follow-up** و**Discontinued intervention**، بالأسباب.
+          - **Analysis**: **Analysed** و**Excluded from analysis**.
+
+          اللي تاخده: كل مربع فيه **(n= )**: الـ CONSORT عايزك تكتب ==العدد في كل خطوة==، علشان القارئ يشوف مين ضاع وفين.
       - kind: explain
         remind: [res.L07.094]
         page: 94

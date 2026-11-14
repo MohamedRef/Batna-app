@@ -482,6 +482,49 @@ lessons:
           - { key: "S", text: "Second diagonal below: b × c" }
           - { key: "S", text: "So OR = ad/bc (cross-product ratio)" }
         hook: "الـ OR اسمه كمان **cross-product ratio**: اعمل **X** على الجدول."
+      - kind: figure
+        page: 34
+        quote: "Example: Alcohol Consumption and Laryngeal Cancer"
+        title: "الـ X على الجدول: مثال الكحول"
+        alt: "A 2 by 2 table, cases and controls in columns, alcohol and no alcohol in rows: a 160, b 90, c 40, d 110. A bold diagonal joins a and d, a thin one joins b and c. Odds in cases a over c equals 4, odds in controls b over d equals 0.82. Below: a times d over b times c, 160 times 110 over 90 times 40, OR equals 4.89."
+        caption: |
+          ده جدول slide 34 مرسوم بالـ X بتاع الـ cross-product ratio:
+
+          - الأعمدة **cases** و**controls** (اخترتهم على أساس المرض)، والصفوف الـ exposure.
+          - على الشمال الـ odds في كل عمود: **4** في الـ cases و**0.82** في الـ controls. قسمتهم على بعض = الـ OR.
+          - نفس الرقم أسرع بالـ X: ==القطر التقيل== (a × d = 160 × 110) فوق، و**القطر الخفيف** (b × c = 90 × 40) تحت.
+
+          النتيجة **4.89**: الـ odds بتاعة الكحول عند العيانين قد اللي عند السليمين ==4.89 مرة==. ولو الجدول جالك مقلوب (المرض في الصفوف) حدّد a الأول قبل ما ترسم الـ X.
+        svg: |
+          <svg viewBox="0 0 330 262" xmlns="http://www.w3.org/2000/svg">
+            <text x="200" y="18" text-anchor="middle" class="t-sm t-b">Cases</text>
+            <text x="280" y="18" text-anchor="middle" class="t-sm t-b">Controls</text>
+            <text x="200" y="33" text-anchor="middle" class="t-sm t-mut">laryngeal cancer</text>
+            <text x="280" y="33" text-anchor="middle" class="t-sm t-mut">no cancer</text>
+            <text x="150" y="78" text-anchor="end" class="t-sm t-b">Alcohol</text>
+            <text x="150" y="138" text-anchor="end" class="t-sm t-b">No alcohol</text>
+            <rect x="160" y="44" width="80" height="56" rx="6" class="fg-acc"/>
+            <rect x="240" y="44" width="80" height="56" rx="6" class="fg-box"/>
+            <rect x="160" y="104" width="80" height="56" rx="6" class="fg-box"/>
+            <rect x="240" y="104" width="80" height="56" rx="6" class="fg-acc"/>
+            <text x="172" y="62" class="t-sm t-mut">a</text>
+            <text x="252" y="62" class="t-sm t-mut">b</text>
+            <text x="172" y="122" class="t-sm t-mut">c</text>
+            <text x="252" y="122" class="t-sm t-mut">d</text>
+            <text x="200" y="84" text-anchor="middle" class="t-lg t-b">160</text>
+            <text x="280" y="84" text-anchor="middle" class="t-lg">90</text>
+            <text x="200" y="144" text-anchor="middle" class="t-lg">40</text>
+            <text x="280" y="144" text-anchor="middle" class="t-lg t-b">110</text>
+            <path d="M220 86L260 118" class="fg-arrow-acc" stroke-width="4"/>
+            <path d="M260 86L220 118" class="fg-thin" stroke-width="2"/>
+            <text x="10" y="64" class="t-sm">odds in cases</text>
+            <text x="10" y="80" class="t-sm t-b">a/c = 4</text>
+            <text x="10" y="118" class="t-sm">odds in controls</text>
+            <text x="10" y="134" class="t-sm t-b">b/d = 0.82</text>
+            <text x="165" y="194" text-anchor="middle" class="t-b"><tspan class="t-acc">a × d</tspan> / b × c</text>
+            <text x="165" y="216" text-anchor="middle" class="t-sm">(160 × 110) / (90 × 40)</text>
+            <text x="165" y="244" text-anchor="middle" class="t-lg t-b t-acc">OR = 4.89</text>
+          </svg>
       - kind: case
         page: 34
         quote: "Example: Alcohol Consumption and Laryngeal Cancer\n| | Cases | Controls |\n|---|---|---|\n| Alcohol | 160 | 90 |\n| No Alcohol | 40 | 110 |\n| Total | 200 | 200 |\nOdds ratio = 160 x 110 / 90 x 40 = 4.89\nInterpretation: The odds of alcohol consumption are 4.89 times greater among those with laryngeal cancer than the odds of alcohol consumption among those without laryngeal cancer."
@@ -788,6 +831,38 @@ lessons:
           - { key: "A", text: "Attributable: AR = Ie − Io (excess risk)" }
           - { key: "D", text: "Divide the excess by Ie × 100 = ARP" }
         hook: "**RAD**: قسمة، طرح، وبعدين الطرح ÷ Ie. ترتيب الأسئلة في الامتحان نفسه."
+      - kind: figure
+        page: 51
+        quote: "Relative risk RR = Incidence among exposed"
+        title: "الـ RR والـ AR والـ ARP على عمودين"
+        alt: "Two bars. Smokers Ie 0.10, a tall bar; non-smokers Io 0.01, a short bar. The smokers' bar has the Io part at its base and the rest, bracketed, is AR equals Ie minus Io equals 0.09 extra risk. Below: RR equals 0.10 over 0.01 equals 10; ARP equals 0.09 over 0.10 equals 90 percent."
+        caption: |
+          مثال التدخين وسرطان الرئة (slide 54) على عمودين، وكل مقياس من الـ **RAD** بيقرا حاجة مختلفة:
+
+          - **RR**: طول العمود الكبير ÷ طول الصغير = 10. يعني «==كام مرة==».
+          - **AR**: الحتة الملوّنة اللي فوق مستوى الـ Io في عمود المدخنين = 0.09. يعني «==قد إيه زيادة==».
+          - **ARP**: الحتة دي ÷ العمود كله = 90%. يعني «==كام في المية من مرض المدخنين== سببها التدخين».
+
+          الحتة الرمادي تحت في عمود المدخنين هي الـ Io: الخطر اللي كانوا هياخدوه حتى من غير سجاير، علشان كده بتتطرح.
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">Lung cancer incidence, cohort of smokers</text>
+            <line x1="40" y1="200" x2="320" y2="200" class="fg-ink"/>
+            <rect x="70" y="40" width="70" height="160" rx="4" class="fg-acc"/>
+            <rect x="70" y="184" width="70" height="16" class="fg-box"/>
+            <rect x="200" y="184" width="70" height="16" rx="3" class="fg-box"/>
+            <text x="105" y="34" text-anchor="middle" class="t-sm t-b">Ie = 0.10</text>
+            <text x="235" y="178" text-anchor="middle" class="t-sm t-b">Io = 0.01</text>
+            <text x="105" y="218" text-anchor="middle" class="t-sm">Smokers</text>
+            <text x="235" y="218" text-anchor="middle" class="t-sm">Non-smokers</text>
+            <path d="M150 40V184" class="fg-ink"/>
+            <path d="M146 40H154M146 184H154" class="fg-ink"/>
+            <text x="160" y="104" class="t-sm t-b t-acc">AR = Ie − Io</text>
+            <text x="160" y="120" class="t-sm t-acc">= 0.09 extra risk</text>
+            <text x="105" y="196" text-anchor="middle" class="t-sm t-mut">Io</text>
+            <text x="10" y="240" class="t-sm"><tspan class="t-b">RR</tspan> = 0.10/0.01 = 10</text>
+            <text x="320" y="240" text-anchor="end" class="t-sm"><tspan class="t-b">ARP</tspan> = 0.09/0.10 = 90%</text>
+          </svg>
       - kind: explain
         page: 52
         quote: "Measures of Association in Cohort Study: Risk Ratio (Relative risk), Ratio of the incidence among exposed to the incidence among unexposed. Indicates the likelihood of developing the disease in the exposed group relative to those who are not exposed"
@@ -965,6 +1040,43 @@ lessons:
           - **المقياس**: odds ratio (OR) (تقدير لـ RR) ↔ incidence و RR و AR.
           - **الأمراض**: المرض اللي بندرسه بس ↔ أكتر من مرض.
           - **التكلفة**: رخيص ↔ غالي.
+      - kind: figure
+        page: 63
+        quote: "Proceeds from effect to cause Starts with the disease"
+        title: "الاتجاه: من النتيجة للسبب ولا العكس"
+        alt: "A time line from past to future. Case-control: the study starts at the disease on the right and the arrow points back to exposure, asked about: effect to cause. Cohort: the study starts at the exposure on the left and the arrow points forward to disease, followed up: cause to effect."
+        caption: |
+          أول سطر في مقارنة slide 63، مرسوم على خط الزمن (الماضي شمال، المستقبل يمين):
+
+          - **Case-control**: بتبدأ من ==المرض== (الصندوق الملوّن على اليمين)، وترجع ورا تسأل عن الـ exposure. علشان كده سريع ورخيص، بس الـ recall bias وارد والتسلسل الزمني مش أكيد.
+          - **Cohort**: بتبدأ من ==الـ exposure== وتستنى المرض يظهر قدام. علشان كده بيدّي incidence وRR وAR، بس طويل وغالي وفيه attrition.
+
+          كل الفروق اللي في الجدول جاية من الاتجاه ده. ابدأ دايمًا من النادر عندك (الـ **DOC**).
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker></defs>
+            <text x="10" y="18" class="t-sm t-mut">past</text>
+            <text x="320" y="18" text-anchor="end" class="t-sm t-mut">future</text>
+            <line x1="10" y1="26" x2="320" y2="26" class="fg-thin"/>
+            <text x="10" y="54" class="t-b">Case-control</text>
+            <rect x="10" y="64" width="110" height="44" rx="8" class="fg-box"/>
+            <text x="65" y="83" text-anchor="middle" class="t-sm">Exposure?</text>
+            <text x="65" y="99" text-anchor="middle" class="t-sm t-mut">asked about</text>
+            <rect x="210" y="64" width="110" height="44" rx="8" class="fg-acc"/>
+            <text x="265" y="83" text-anchor="middle" class="t-sm t-b">Starts here:</text>
+            <text x="265" y="99" text-anchor="middle" class="t-sm t-b">the disease</text>
+            <path d="M206 86H126" class="fg-arrow-acc" marker-end="url(#L05d)"/>
+            <text x="166" y="126" text-anchor="middle" class="t-sm t-acc">effect to cause</text>
+            <text x="10" y="164" class="t-b">Cohort</text>
+            <rect x="10" y="174" width="110" height="44" rx="8" class="fg-acc"/>
+            <text x="65" y="193" text-anchor="middle" class="t-sm t-b">Starts here:</text>
+            <text x="65" y="209" text-anchor="middle" class="t-sm t-b">the exposure</text>
+            <rect x="210" y="174" width="110" height="44" rx="8" class="fg-box"/>
+            <text x="265" y="193" text-anchor="middle" class="t-sm">Disease?</text>
+            <text x="265" y="209" text-anchor="middle" class="t-sm t-mut">followed up</text>
+            <path d="M124 196H204" class="fg-arrow-acc" marker-end="url(#L05d)"/>
+            <text x="166" y="236" text-anchor="middle" class="t-sm t-acc">cause to effect</text>
+          </svg>
       - kind: table
         page: 64
         quote: "Comparing case control to cohort\n| | Case control | Cohort |\n|---|---|---|\n| Logistic of the study: Time | quick | long term |\n| Cost | relatively cheap | costly |\n| Sample size | small | larger |\n| Ethical problem | - | + |\n| Type of investigation: Rare disease | best | - |\n| Disease with long LP | best | - |\n| Rare exposure | - | best |\n| Multiple outcomes | - | best |\n| Several risk factors | best | - |"

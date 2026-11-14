@@ -123,6 +123,25 @@ impl Library {
             .flat_map(|f| f.lessons.iter().map(move |l| (f.lecture.as_str(), l)))
     }
 
+    /// An item's picture (#1154) with its data filled in from the lesson
+    /// figure that shows the same file; `None` when the item has none, or
+    /// (an older lesson pack) the file isn't there.
+    pub fn item_picture(&self, item: &batna_core::content::Item) -> Option<batna_core::lesson::Picture> {
+        let p = item.image.as_ref()?;
+        let lecture = item.id.rsplit_once('.').map(|(l, _)| l)?;
+        let data = batna_core::lesson::picture_data(self.lessons.get(lecture)?, &p.file)?;
+        Some(batna_core::lesson::Picture { data: data.to_string(), ..p.clone() })
+    }
+
+    /// A lesson picture's bytes, by its file (`hem/L08-cml-film.webp`), for
+    /// the Anki export.
+    pub fn picture_bytes(&self, file: &str) -> Option<Vec<u8>> {
+        use base64::Engine;
+        let data = self.lessons.values().find_map(|f| batna_core::lesson::picture_data(f, file))?;
+        let (_, b64) = data.split_once(";base64,")?;
+        base64::engine::general_purpose::STANDARD.decode(b64).ok()
+    }
+
     pub fn lesson(&self, id: &str) -> Option<(&Lecture, &Lesson)> {
         let lecture = id.rsplit_once('.').map(|(l, _)| l)?;
         let lesson = self.lessons.get(lecture)?.lessons.iter().find(|l| l.id == id)?;

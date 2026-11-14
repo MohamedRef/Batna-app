@@ -84,6 +84,8 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                 // step, and each finished step's question and answer.
                 crate::ui::Card { class: "case-data",
                     h2 { class: "label", {tx::KNOWN} }
+                    // The marks come in with the first step's answer.
+                    crate::learn::ItemPicture { item: item.clone(), answered: !run.results.is_empty() }
                     bdi { class: "case-stem", lang: "en", crate::labs::LabText { text: stem.to_string() } }
                     for (i, s) in steps.iter().enumerate().take(k + 1) {
                         div { key: "{i}", id: "case-step-{i}", class: "case-history",

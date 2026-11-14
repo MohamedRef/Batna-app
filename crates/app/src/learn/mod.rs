@@ -9,6 +9,8 @@
 #[cfg(test)]
 mod browser;
 mod highlight;
+mod item_picture;
+pub use item_picture::ItemPicture;
 mod player;
 mod practice;
 pub mod reading;

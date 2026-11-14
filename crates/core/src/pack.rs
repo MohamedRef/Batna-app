@@ -27,8 +27,9 @@ pub const MAGIC: &[u8; 8] = b"BATNAPK1";
 /// Packs from before the field read as 0. 2: courses can cite slides
 /// (`program::Source`). 3: lesson steps can `remind` of a تحشيشة taught
 /// elsewhere (`lesson::Reminder`). 4: an image figure can carry numbered
-/// `marks` on its picture (`lesson::FigureMark`, #984).
-pub const SCHEMA: u32 = 4;
+/// `marks` on its picture (`lesson::FigureMark`, #984). 5: a card, mcq or
+/// case can carry a book `image` (`content::Item::image`, #1154).
+pub const SCHEMA: u32 = 5;
 
 /// Highest miniz level: slower to pack (only when content changes), not to unpack.
 const LEVEL: u8 = 10;

@@ -204,7 +204,40 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
             }
         }
     }
+    // An item's picture is one of these lessons' figures (#1154): the same
+    // file, so it is cropped once, listed in content/book-figures/, and the
+    // pack carries it once.
+    let files = item_picture_files(file);
+    for item in &lec.items {
+        if let Some(p) = &item.image
+            && !files.contains(p.file.as_str())
+        {
+            bad(&item.id, format!("image {} is not a picture in {lid}'s lessons", p.file));
+        }
+    }
     out
+}
+
+/// Every image file the lessons of one lecture show.
+pub fn item_picture_files(file: &LessonFile) -> BTreeSet<&str> {
+    file.lessons
+        .iter()
+        .flat_map(|l| &l.steps)
+        .filter_map(|s| match &s.body {
+            StepBody::Figure { image: Some(p), .. } => Some(p.file.as_str()),
+            _ => None,
+        })
+        .collect()
+}
+
+/// The `data:` URL of a lesson picture, for an item that shows the same file.
+pub fn picture_data<'a>(file: &'a LessonFile, picture: &str) -> Option<&'a str> {
+    file.lessons.iter().flat_map(|l| &l.steps).find_map(|s| match &s.body {
+        StepBody::Figure { image: Some(p), .. } if p.file == picture && !p.data.is_empty() => {
+            Some(p.data.as_str())
+        }
+        _ => None,
+    })
 }
 
 /// A step's `remind` list, on its own: each entry reads as a [`Reminder`],

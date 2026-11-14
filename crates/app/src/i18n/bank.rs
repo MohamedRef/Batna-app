@@ -40,6 +40,7 @@ pub const TAG_HIGH_YIELD: &str = "مهم جدًا";
 pub const TAG_BOOK: &str = "أسئلة الكتاب";
 pub const TAG_NUMBERS: &str = "أرقام";
 pub const ONLY_WRONG: &str = "الغلط واللي ما اتشافش بس";
+pub const ONLY_PICTURES: &str = "اللي فيها صورة بس";
 pub const ALL: &str = "الكل";
 pub const COUNT: &str = "عدد الأسئلة";
 pub const NONE_MATCH: &str = "مفيش أسئلة بالاختيارات دي.";

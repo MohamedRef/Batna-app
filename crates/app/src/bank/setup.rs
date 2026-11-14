@@ -157,8 +157,8 @@ pub(super) fn why_empty(filter: &Filter, pool: &[exam::Mcq], last: &exam::LastRe
     let any = |f: &Filter| pool.iter().any(|q| f.matches(q, last));
     if filter.only != Only::All && any(&Filter { only: Only::All, ..filter.clone() }) {
         Empty::AllRight
-    } else if !filter.tags.is_empty()
-        && any(&Filter { tags: BTreeSet::new(), only: Only::All, ..filter.clone() })
+    } else if (!filter.tags.is_empty() || filter.pictures)
+        && any(&Filter { tags: BTreeSet::new(), only: Only::All, pictures: false, ..filter.clone() })
     {
         Empty::Tags
     } else {
@@ -173,6 +173,7 @@ fn widen(reason: Empty) {
         Empty::AllRight => f.only = Only::All,
         Empty::Tags => {
             f.tags.clear();
+            f.pictures = false;
             f.only = Only::All;
         }
         Empty::Topics => *f = Filter::default(),
@@ -264,6 +265,10 @@ pub fn Setup() -> Element {
     if filter.only == Only::WrongOrUnseen {
         narrowing.push(tx::ONLY_WRONG);
     }
+    if filter.pictures {
+        narrowing.push(tx::ONLY_PICTURES);
+    }
+    let any_picture = pool.iter().any(|q| q.picture);
     let (title, latin) = scope_title(&filter, &lectures);
     let filtered = filter != Filter::default();
 
@@ -484,6 +489,17 @@ pub fn Setup() -> Element {
                                         f.only = if f.only == Only::All { Only::WrongOrUnseen } else { Only::All };
                                     },
                                     {tx::ONLY_WRONG}
+                                }
+                                // Questions on a book picture (#1154), once there are any.
+                                if any_picture || filter.pictures {
+                                    Chip {
+                                        on: filter.pictures,
+                                        onclick: move |_| {
+                                            let mut f = FILTER.write();
+                                            f.pictures = !f.pictures;
+                                        },
+                                        {tx::ONLY_PICTURES}
+                                    }
                                 }
                             }
                             if filtered {

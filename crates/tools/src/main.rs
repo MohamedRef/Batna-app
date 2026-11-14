@@ -220,7 +220,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(coverage_errors);
     // The book's figures in the lessons (#983): inventoried lectures must
     // show or skip every figure; the rest are counted.
-    let (figure_errors, figures_pending) = figures::check(root);
+    let (figure_errors, figures_pending, figures_restated) = figures::check(root);
     problems.extend(figure_errors);
     // Nothing left from a template (`batna-tools content new-item`).
     problems.extend(content::unfinished(root));
@@ -228,7 +228,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms; lesson coverage: {coverage_warnings} warning(s), see `batna-tools lessons --warnings`; book figures: {figures_pending} lecture(s) not inventoried yet, see `batna-tools figures`{}",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms; lesson coverage: {coverage_warnings} warning(s), see `batna-tools lessons --warnings`; book figures: {figures_pending} lecture(s) not inventoried yet, {figures_restated} warning(s) (diagram, algorithm or chart skipped as restated in words), see `batna-tools figures`{}",
             index.lectures.len(),
             cue.line()
         ))
@@ -340,7 +340,7 @@ mod tests {
             (code, out.as_str(), err.len()),
             (
                 ExitCode::SUCCESS,
-                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 2 warning(s), see `batna-tools lessons --warnings`; book figures: 1 lecture(s) not inventoried yet, see `batna-tools figures`",
+                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 2 warning(s), see `batna-tools lessons --warnings`; book figures: 1 lecture(s) not inventoried yet, 0 warning(s) (diagram, algorithm or chart skipped as restated in words), see `batna-tools figures`",
                 0
             )
         );

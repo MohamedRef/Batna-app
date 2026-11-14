@@ -320,6 +320,10 @@ How to do one lecture:
    a drawing that teaches something the book's picture does not.
 5. `batna-tools validate`, then `batna-tools figures` for the progress
    table on #983. Say in the PR how many KB the images add.
+   `validate` warns (it does not fail) on a diagram, algorithm or chart
+   skipped because the lesson "restates" it (#1156): show it, or say in the
+   reason that it is plain text in boxes with no arrows or structure.
+   `batna-tools figures` lists each one under its table.
 
 ## Reading layout
 

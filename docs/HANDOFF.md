@@ -719,6 +719,9 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-14: marks on the book's photographs where a caption points by position and the book prints no arrow (#1155): 444 pictures checked, 102 steps given marks, captions now point to the numbers; marks start hidden when a question follows (no new field). One PR per lecture (#1258–#1314).
+- 2026-11-14: diagrams and algorithms given in words only now shown (#1156 part A): crops or SVG redraws in 24 lectures (#1192–#1309); 4 kept skipped as plain text in boxes. 39 lesson readings of uncaptioned pictures labelled «التفسير المقبول (مش في الكتاب)» (#1215–#1229).
+- 2026-11-14: one recognition card/MCQ per photograph-kind book figure (#1154): 264 items from 326 pictures (62 skipped with reasons), `image:` on the same lesson file, all unverified (#1187–#1249).
 - 2026-11-14: dm.L03 lesson5 gains a Table 9.1 step, a micro/macroalbuminuria explain step and a check (p28; quote-ok lines in the dm verdicts).
 - 2026-11-14: `batna-tools validate` warns (never fails) on a diagram, algorithm or chart whose skip reason says it "restates" the lesson's text, and prints the count with the other warnings; `batna-tools figures` lists them under its table (#1156).
 - 2026-11-14: cards, MCQs and cases can carry a book picture (#1154): `image:` + `marks:` on the item, shown above the question in study, bank, cases and oral (marks after the answer), bank filter «اللي فيها صورة بس», pictures in the Anki export; `pack::SCHEMA` 4 → 5. Recognition items follow per lecture.

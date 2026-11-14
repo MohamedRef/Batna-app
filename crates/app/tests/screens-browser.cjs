@@ -179,7 +179,20 @@ async function figureChecks(page, fixtures) {
   console.log(`Checked the labels of ${r.figures} lesson figures.`);
 }
 
+// `--figures-only`: just the figure-label check, for lesson pull requests
+// (lesson-figures.yml). It needs only the figures fixture.
+async function figuresOnly(fixtures) {
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const page = await browser.newPage({ reducedMotion: 'reduce' });
+    await figureChecks(page, fixtures);
+  } finally {
+    await browser.close();
+  }
+}
+
 async function run() {
+  if (process.argv[2] === '--figures-only') return figuresOnly(path.resolve(process.argv[3]));
   const fixtures = path.resolve(process.argv[2]);
   const output = path.resolve(process.argv[3] || path.join(fixtures, 'results'));
   await fs.mkdir(output, { recursive: true });
@@ -499,14 +512,28 @@ async function run() {
         }
       }
     }
-    current = 'figures';
-    await figureChecks(page, fixtures);
-    current = 'compact touch controls';
-    await mobileControlChecks(page, fixtures);
-    await keyboardFocusChecks(browser);
-    current = 'own highlights';
-    await highlightChecks(browser, fixtures);
-    assert.deepEqual(errors, [], 'browser page errors');
+    // Each group after the layout pass runs even when one before it fails
+    // (#980: a clipped figure label hid the touch, focus and highlight
+    // results for two scheduled runs). The failures are reported together.
+    const failed = [];
+    const group = async (name, check) => {
+      current = name;
+      try {
+        await check();
+      } catch (error) {
+        console.error(`Failed at ${name}:\n${error.message}`);
+        failed.push(name);
+      }
+    };
+    await group('figures', () => figureChecks(page, fixtures));
+    await group('compact touch controls', () => mobileControlChecks(page, fixtures));
+    await group('keyboard focus', () => keyboardFocusChecks(browser));
+    await group('own highlights', () => highlightChecks(browser, fixtures));
+    await group('browser page errors', async () => assert.deepEqual(errors, [], 'browser page errors'));
+    if (failed.length) {
+      current = failed.join(', ');
+      throw new Error(`${failed.length} check group(s) failed: ${current}`);
+    }
     const stale = [...KNOWN.small, ...KNOWN.overflow, ...KNOWN.noHeading].filter(k => !seen.has(k));
     await fs.writeFile(path.join(output, 'report.json'),
       JSON.stringify({ cases: results.length, known, stale, results }, null, 2));

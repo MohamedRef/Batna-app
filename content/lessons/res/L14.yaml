@@ -1083,6 +1083,19 @@ lessons:
       - 1
     - - 4
       - 1
+  - kind: figure
+    page: 28
+    title: "شريحة 28: الـ overlap بيرسم شكل الـ ROC"
+    image: { file: res/L14-s28-overlap-roc-auc.webp, book: true }
+    alt: "Hand drawing in four rows. On the left of each row, two bell curves (healthy and patients) with a dashed red cut-off line: in the top row they are far apart, and each row down they overlap more until in the bottom row they lie on top of each other. An arrow from each row leads to its ROC curve with the area under it shaded: almost a full square at the top, then smaller bows, and a straight diagonal at the bottom. On the right, the scale AUC 0.9-1 excellent, 0.8-0.9 good, 0.7-0.8 fair, 0.6-0.7 poor, 0.5-0.6 fail."
+    caption: |
+      الرسمة دي بتربط منحنيات شريحة 23 بالـ ROC:
+
+      - **فوق**: الأصحاء والعيانين ==بعاد عن بعض== ← الـ ROC لازق في الركن ← AUC قريب من **1**.
+      - **كل صف لتحت**: الـ overlap بيزيد ← المنحنى بيقرّب من الخط القطري ← الـ AUC بيقل.
+      - **تحت خالص**: المنحنيين ==فوق بعض== ← الـ ROC خط قطري ← AUC = **0.5**، يعني الـ test مش بيفرّق.
+
+      اللي تاخده: كل ما الـ overlap يقل، الـ AUC يكبر والـ test يبقى أحسن.
   - kind: check
     page: 28
     quote: |-

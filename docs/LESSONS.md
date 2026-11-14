@@ -49,13 +49,31 @@ The model to copy is `content/lessons/hb/L01.yaml`.
 9. **Link to the cards.** End with a `try` step (1–5 playable items: card,
    cloze, enumerate, essay, table, order) and list the lecture items the
    lesson teaches in `practice:`.
-10. **A picture in every lesson.** At least one figure per lesson, more where
-    they teach. Draw diagrams, pathways, vicious cycles, algorithms, scales
-    and anatomy sketches as inline SVG, with theme classes (below) or
-    `var(--token)` colours; no scripts, links, embedded images, `<style>` or
-    fixed colours. Labels in English. Under 24 KB. Use a real image
-    (see [Images](#images)) where it teaches better than a drawing:
-    histology, US/CT/MRI, endoscopy, clinical signs, or the book's own figure.
+10. **Every figure of the book, in its place, explained** (Mohamed,
+    2026-11-14, #983). Every picture and diagram the book prints (photo,
+    histology, imaging, endoscopy, clinical sign, ECG, blood film, diagram,
+    algorithm, chart, table printed as a picture) goes into the lesson that
+    teaches its page, as a `figure` step with that `page`, **right after the
+    step whose text or quote refers to it**. If a split moved that text to
+    another lesson, the figure moves with it. Photos and the like are always
+    the book's crop (`image: { book: true }`); a diagram or algorithm is the
+    crop when it reads at phone width, otherwise a redrawn SVG that keeps the
+    book's boxes, order and wording and says which figure it is in its title
+    («شكل 3 في الكتاب، ص 9»). The caption explains it **in the lesson's
+    context**: what the picture is, what to look at in each panel, arrow and
+    label the book prints, and what that proves for the point the lesson is
+    making; a figure the cards ask about gets a question step after it. Until
+    marks on pictures land (#984), say where to look in words («أعلى
+    اليمين»). A figure with nothing to teach (author photo, logo, decoration,
+    a repeat of one already shown) is skipped with its reason. Each lecture's
+    figures are listed in `content/book-figures/<course>/LNN.yaml` (see
+    [Book figures](#book-figures)); `validate` fails when a listed figure is
+    neither shown nor skipped. Lessons may still add drawings of their own
+    (diagrams, pathways, vicious cycles, algorithms, scales, anatomy
+    sketches) as inline SVG, with theme classes (below) or `var(--token)`
+    colours; no scripts, links, embedded images, `<style>` or fixed colours.
+    Labels in English. Under 24 KB. Every drawn label stays inside its
+    picture at phone width (`lesson-figures.yml`, #980).
 11. **Rich and easy to read.** Never cut information to make a step
     shorter; add the explanation that makes it click. Readability comes from
     shape: short paragraphs (about 3 lines), bullets for lists,
@@ -189,6 +207,70 @@ a line in `ATTRIBUTION.md`:
 
 The app shows the credit under the caption. The pack build embeds the file,
 so nothing is fetched at runtime.
+
+## Book figures
+
+The inventory of a lecture's figures (#983), made from the page images in
+the private sources (`courses/<course>/img/pNNN.jpg`; Hepatology's are
+rendered from `book/internal-medicine-pg-part1.pdf`, PDF page = printed
+page + 4). Tools only, never in the content pack; the printed label or
+caption is the only book text in it.
+
+```yaml
+# content/book-figures/hb/L01.yaml
+lecture: hb.L01
+figures:
+  - page: 2
+    label: "Figure 2: macronodular and micronodular cirrhosis"
+    kind: histology      # photo histology imaging endoscopy clinical ecg film
+                         # diagram algorithm chart table other
+    file: hb/L01-macro-micronodular.webp     # a step on p2 shows this crop
+  - page: 3
+    label: "Figure 3: activated hepatic stellate cells"
+    kind: diagram
+    drawn: true          # an SVG step on p3 whose title says «في الكتاب»
+  - page: 10           # the picture's page, or its printed caption's page
+                         # when the caption runs onto the next one
+    label: "Figure 4: ultrasound of liver cirrhosis"
+    kind: imaging
+    file: hb/L01-cirrhosis-us.webp
+  - page: 1
+    label: "author photo"
+    kind: other
+    skip: "the lecturer's portrait; nothing to teach"
+```
+
+How to do one lecture:
+
+1. `python3 -I scripts/content-tools/figure-candidates.py hb.L01 --sheets /tmp/sheets`
+   lists, per page, the embedded pictures and the "Figure N" words, and
+   writes contact sheets of the page images. Look at **every** page: drawn
+   diagrams and vector tables have no embedded picture.
+2. List every figure in the inventory. Tables set as text are not figures;
+   a table printed as a picture is (`kind: table`; a `table` step that
+   rebuilds it also counts as shown, so skip it with "rebuilt as table step
+   N" only when that step is on the same page).
+3. Crop each one with
+   `python3 -I scripts/content-tools/figure-crop.py <course> <page> --list`
+   (the pictures' boxes on the page), then
+   `... <course> <page> content/lessons/img/<course>/LNN-what.webp --image N`
+   or `--box x0,y0,x1,y1` (fractions of the page; drawn diagrams and the
+   labels around a picture need a box). Keep the panel letters, arrows and
+   labels, leave out the printed caption, and look at the result. It
+   renders at 300 dpi and saves WebP at most 800 px wide, under 150 KB.
+   Research slides: crop from `courses/res/slides/res-LNN.pdf` the same way
+   with Pillow, cited by slide number.
+4. Place it after the step that refers to it and write the caption (rule 10):
+   title «شكل N في الكتاب: …» for a numbered figure, `quote:` the printed
+   caption, `alt:` in English for a screen reader, caption in Egyptian
+   Arabic going through each panel, arrow and label in order and ending with
+   what it proves for the lesson's point. Then
+   `batna-tools refs --lecture <id> --write` (inserted steps shift the
+   checked quote locks).
+   Replace an SVG that only approximates a book figure with the crop; keep
+   a drawing that teaches something the book's picture does not.
+5. `batna-tools validate`, then `batna-tools figures` for the progress
+   table on #983. Say in the PR how many KB the images add.
 
 ## Reading layout
 

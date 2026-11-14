@@ -9,6 +9,7 @@
 //! batna-tools refs [--lecture hb.L01] [--write]   page references against the book (refs.rs)
 //! batna-tools cue [--all]   how often the key is the longest option, per lecture (cue.rs)
 //! batna-tools lessons --summary | --report <course> | --warnings [<course>]   lesson coverage (coverage.rs)
+//! batna-tools figures   the book's figures in the lessons: progress table for #983 (figures.rs)
 //! ```
 
 use std::collections::BTreeSet;
@@ -23,6 +24,7 @@ mod changes;
 mod content;
 mod coverage;
 mod cue;
+mod figures;
 mod ids;
 mod lessons;
 mod packs;
@@ -73,6 +75,7 @@ fn cli(args: &[String]) -> (ExitCode, Option<String>, Vec<String>) {
         Some("content") => report(content::run(&root, &args[1..])),
         Some("lessons") => report(coverage::run(&root, &args[1..])),
         Some("cue") => report(cue::run(&root, &args[1..])),
+        Some("figures") => report(figures::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -90,7 +93,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 }
 
 fn usage() -> (ExitCode, Option<String>, Vec<String>) {
-    let text = "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | lessons --summary | cue | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)";
+    let text = "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | lessons --summary | cue | figures | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)";
     (ExitCode::from(2), None, vec![text.to_owned()])
 }
 
@@ -215,13 +218,17 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     // Lessons against the book's pages (#833): hard rules fail, the rest warn.
     let (coverage_errors, coverage_warnings) = coverage::check(root);
     problems.extend(coverage_errors);
+    // The book's figures in the lessons (#983): inventoried lectures must
+    // show or skip every figure; the rest are counted.
+    let (figure_errors, figures_pending) = figures::check(root);
+    problems.extend(figure_errors);
     // Nothing left from a template (`batna-tools content new-item`).
     problems.extend(content::unfinished(root));
     // Page references checked against the book (refs.rs).
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms; lesson coverage: {coverage_warnings} warning(s), see `batna-tools lessons --warnings`{}",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms; lesson coverage: {coverage_warnings} warning(s), see `batna-tools lessons --warnings`; book figures: {figures_pending} lecture(s) not inventoried yet, see `batna-tools figures`{}",
             index.lectures.len(),
             cue.line()
         ))
@@ -333,7 +340,7 @@ mod tests {
             (code, out.as_str(), err.len()),
             (
                 ExitCode::SUCCESS,
-                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 1 warning(s), see `batna-tools lessons --warnings`",
+                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 1 warning(s), see `batna-tools lessons --warnings`; book figures: 1 lecture(s) not inventoried yet, see `batna-tools figures`",
                 0
             )
         );

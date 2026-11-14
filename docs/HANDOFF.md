@@ -446,6 +446,22 @@ Add a bullet here when a PR adds something a later agent must know.
   needs an app build, not a content-only update. Checks:
   `lesson::remind_problems` and `batna-tools validate`
   (`lessons::remind_targets`). Rule: [LESSONS.md](LESSONS.md) rule 13.
+- **Marks on a picture** (#984, for #983's rule that the book's pictures
+  are explained in the lesson): an image figure takes up to 8 `marks:`
+  (`{ at: [x, y], label, kind?, size? }`, `at` as 0–1 fractions from the
+  picture's top left; kinds point, arrow, box, bracket; box and bracket need
+  `size`). `learn/steps/marks.rs` draws them over the picture in the accent
+  colour, numbered, positioned in percentages of the picture's own box so
+  they stay put at every width and in the zoomed viewer, and lists the
+  English labels under it in a named list. «ورّيني العلامات» (48dp, key `M`,
+  also in the viewer bar) shows and hides them; they start hidden when the
+  next step is a question (`Lesson::marks_start_shown`). Checks:
+  `lesson::mark_problems` (at most 8, `at` and the area inside 0–1, a plain
+  label, size only and always on box/bracket, image figures only); labels go
+  through the abbreviation rule via `Step::shown_text`. `pack::SCHEMA` = 4,
+  so content with marks needs an app build. Browser check:
+  `crates/app/tests/marks-browser.cjs`. How to write them:
+  [LESSONS.md](LESSONS.md) § Marks on a picture.
 
 ### Study sessions
 
@@ -678,6 +694,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-14: marks on a lesson picture (#984): `marks:` on image figures (point, arrow, box, bracket; up to 8), drawn numbered over the picture with the labels listed under it, toggle «ورّيني العلامات» (key M, hidden before a question); `pack::SCHEMA` 3 → 4; `marks-browser.cjs` in the screens browser job.
 - 2026-11-14: wide lessons (#828): width now counts the pages a lesson's steps cite (research: slides, limit 16), and `content/lesson-wide.yaml` lists 13 lessons wide on purpose with their reasons; res.L05.lesson5 split (retrospective cohort → lesson7), res.L12.lesson6 and res.L03.lesson4 topics corrected. Wide-lesson warnings 140 → 0.
 - 2026-11-13: longest-option cue, nephrology (#816): 43 distractors made as long as their keys, every neph lecture at or under 25%; bank share 26.3% → 24.4%, ceiling 25%. Hepatology (32%) and geriatrics (33%) were already lower and are left for now.
 - 2026-11-13: longest-option cue, rheumatology (#816): 47 distractors made as long as their keys, every rheum lecture but L03 (27%) at or under 25%; bank share 28.4% → 26.3%, ceiling 27%.

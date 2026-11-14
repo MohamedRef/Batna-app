@@ -23,6 +23,7 @@ pub mod keys;
 pub mod labs;
 pub mod learn;
 pub mod lecture;
+pub mod marks;
 pub mod metacog;
 pub mod nav;
 pub mod notes;

@@ -20,6 +20,7 @@ still runs it. Run it by hand on a branch that changes the screens it covers.
 |---|---|
 | Lesson player | The first step of each of the 13 step kinds in book order, opened at that step from a saved attempt (the way the app reopens a lesson), in Steps and in Pages: 26 files; plus two mixed Arabic and English steps (Liver Cirrhosis, steps 6 and 9: "label: value" bullets, arrows, English full stops), whose screenshots show the reading order: 28 files |
 | Lesson figures | Every drawn SVG figure of every lesson on one page (`export_screen_fixtures_figures`), checked once at 384px |
+| Marks on a picture | A book picture with one mark of each kind (`export_screen_fixtures_marks`, #984): marks shown, hidden (before a question) and open in the full-screen viewer; checked by `crates/app/tests/marks-browser.cjs` at 384 and 1280px, heights 900 and 500, RTL and LTR: 24 cases |
 | Study | Setup; a running session on the first item of each kind the player shows (card, cloze, enumerate, essay, table, order); an enumerate list with its points open and its تحشيشة under them; a card reopened by Undo; the summary: 10 files |
 
 The store is in memory and the review log is empty, so items are fresh.
@@ -54,6 +55,7 @@ cannot accidentally match duplicate sidebar labels.
 | Lesson | Exactly the saved step is shown, with its kind; the step meter's `progressbar` value; a visible way forward; an unanswered question offers Skip and keeps its gate note screen-reader only |
 | Study | The running item's kind and the session `progressbar` |
 | Figures | Every `<text>` label of every lesson figure stays inside its picture's `viewBox`: one past the edge is cut off on the phone |
+| Marks | Each mark within 1.5px of its spot (and a box's or bracket's size) on the picture, its number inside the picture; the same after the viewer zooms in 3 times, pans to the far corner and goes back to 1:1 (`viewer.js` run in the page); hidden marks draw and list nothing; the toggles are 48dp, named, keyed `M` and say `aria-pressed`; one `ltr` label per mark in a named list |
 | Errors | Any browser page error fails the job |
 
 Calm, Larger, 384px screenshots in both schemes, plus two 1600px Mac-width

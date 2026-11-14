@@ -9,6 +9,7 @@ const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 const { keyboardFocusChecks } = require('./keyboard-focus-browser.cjs');
 const { highlightChecks } = require('./highlight-browser.cjs');
+const { marksChecks } = require('./marks-browser.cjs');
 // The compact controls check also verifies bank scope/history touch targets.
 const { mobileControlChecks } = require('./mobile-touch-browser.cjs');
 
@@ -501,6 +502,8 @@ async function run() {
     }
     current = 'figures';
     await figureChecks(page, fixtures);
+    current = 'marks on a picture';
+    await marksChecks(page, fixtures, output);
     current = 'compact touch controls';
     await mobileControlChecks(page, fixtures);
     await keyboardFocusChecks(browser);

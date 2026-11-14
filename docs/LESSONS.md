@@ -323,6 +323,9 @@ How to do one lecture:
    `validate` warns (it does not fail) on a diagram, algorithm or chart
    skipped because the lesson "restates" it (#1156): show it, or say in the
    reason that it is plain text in boxes with no arrows or structure.
+   When an SVG, table, order, sort or match step already rebuilds it, write
+   "rebuilt in the lesson as the <kind> step «title» on pN" instead of
+   "restates", so the warning lists only figures given in words alone.
    `batna-tools figures` lists each one under its table.
 
 ## Reading layout

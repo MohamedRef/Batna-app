@@ -63,30 +63,16 @@ lessons:
         page: 2
         quote: "Autocrine (acts on same cell) manner.\nParacrine (acts on nearby cell) manner."
         title: "تلات طرق للرسالة"
-        alt: "Three panels stacked. Autocrine: a cell releases a cytokine that loops back to its own receptor. Paracrine: a cell sends a cytokine to a neighbouring cell. Endocrine: a cell sends a cytokine through a blood vessel to a distant cell, marked as not the normal manner."
-        caption: "Autocrine = لنفسك، paracrine = للجار، endocrine = لحد بعيد في الدم (ودي مش الطريقة المعتادة للـ cytokines)."
-        svg: |
-          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="R01a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
-            </defs>
-            <text x="10" y="22" class="t-b">Autocrine</text>
-            <circle cx="160" cy="55" r="26" class="fg-acc"/>
-            <path d="M184 45c40-30 40 40 4 22" class="fg-arrow-acc" marker-end="url(#R01a)"/>
-            <text x="230" y="60" class="t-sm t-mut">same cell</text>
-            <text x="10" y="118" class="t-b">Paracrine</text>
-            <circle cx="90" cy="150" r="26" class="fg-acc"/>
-            <circle cx="230" cy="150" r="26" class="fg-box"/>
-            <path d="M118 150h80" class="fg-arrow-acc" marker-end="url(#R01a)"/>
-            <text x="120" y="140" class="t-sm t-mut">nearby cell</text>
-            <text x="10" y="214" class="t-b">Endocrine</text>
-            <circle cx="50" cy="255" r="22" class="fg-acc"/>
-            <rect x="85" y="245" width="170" height="20" rx="10" class="fg-thin"/>
-            <text x="150" y="240" class="t-sm t-mut">blood</text>
-            <circle cx="290" cy="255" r="22" class="fg-box"/>
-            <path d="M74 255h190" class="fg-arrow-acc" marker-end="url(#R01a)"/>
-            <text x="110" y="292" class="t-sm t-bad">distant: not the normal manner</text>
-          </svg>
+        image: { file: rheum/L01-action-modes.webp, book: true }
+        alt: "Three rows with an Example column on the right. Top: a T cell with a curved arrow looping back to itself, labelled Autocrine, example IL-2. Middle: a macrophage with an arrow to a PMN, labelled Paracrine (local), example chemokines, leukocyte recruitment. Bottom: a macrophage, then a blood vessel, then the liver, labelled Endocrine, example IL-6, acute phase response, fever."
+        caption: |
+          رسمة الكتاب في صفحة 2: تلات صفوف، وعلى اليمين عمود **Example** فيه مثال لكل طريقة:
+
+          - **فوق**: T cell وسهم لافف راجع عليها = ==autocrine==، والمثال **IL-2** (الـ T cell بتكبّر نفسها).
+          - **في النص**: macrophage بيبعت لـ neutrophil جنبه (مكتوب PMN) = **paracrine (local)**، والمثال الـ **chemokines** اللي بتنادي الـ leukocytes.
+          - **تحت**: macrophage ← وعاء دموي ← الكبد = ==endocrine==، والمثال **IL-6** اللي بيعمل acute phase response وحرارة.
+
+          يعني أغلب شغل الـ cytokines قريب (لنفسها أو للجار)، والبعيد عن طريق الدم استثنا، زي IL-6 لما يوصل للكبد.
       - kind: explain
         page: 2
         quote: "Cytokines aid cell to cell communication in immune responses and stimulate the movement of cells towards sites of inflammation, infection and trauma."
@@ -129,6 +115,20 @@ lessons:
           بعد الـ binding: signal transduction ← يتغير الـ enzyme activity والـ ==gene expression==.
 
           السلسلة في رسمة الكتاب: inducing stimulus ← stimulated cell produces cytokine ← secreted ← receptor on target cell bound ← cell activation ← biological effect.
+      - kind: figure
+        page: 3
+        title: "من الجين للتأثير"
+        image: { file: rheum/L01-signal-path.webp, book: true }
+        alt: "A vertical flow diagram. An inducing stimulus enters a cytokine-producing cell and reaches the cytokine gene; cytokine dots leave the cell, bind a receptor on the target cell, a signal leads to gene activation inside the target cell, and biological effects come out at the bottom."
+        caption: |
+          رسمة الكتاب في صفحة 3، بتتقري من فوق لتحت:
+
+          - **فوق**: **inducing stimulus** بيدخل الخلية اللي بتعمل الـ cytokine ويشغّل الـ **cytokine gene**.
+          - **في النص**: النقط السودا = الـ cytokine نفسه طالع برّه الخلية.
+          - النقطة بتمسك ==receptor== على سطح الـ **target cell**، فيطلع **signal** (السهم الأحمر الصغير) ← **gene activation** جوه الـ target cell.
+          - **تحت خالص**: الـ **biological effects**.
+
+          الرسمة بتوضّح كلام الصفحة: الخلية اللي مفيهاش الـ receptor ده مش هتسمع الرسالة خالص، حتى لو الـ cytokine عدّى جنبها.
       - kind: explain
         page: 3
         quote: "Cytokines bind to specific receptors on the membranes of target cells, triggering signal transduction pathways that ultimately alter enzyme activity and gene expression."
@@ -211,6 +211,24 @@ lessons:
           - "التسمية بأول تأثير اتشاف هي TNF و CSF، مش monokine."
           - "الوزن الجزيئي مش أساس أي اسم من الأسامي التمانية."
           - "تصنيف الـ receptors ده موضوع صفحة 12، مش الأسامي."
+      - kind: figure
+        page: 4
+        title: "كل عيلة شغلتها إيه"
+        image: { file: rheum/L01-main-actions.webp, book: true }
+        alt: "A slide in two parts. Left: Main action, Characteristics Function: cytokines exhibit the attributes of pleiotropy, redundancy, synergy, antagonism and cascade induction, which permit them to regulate cellular activity in a coordinated interactive way. Right: a two-column table of cytokines and action: interferon family, antiviral proteins; chemokine family, direct cell migration, adhesion and activation; tumour necrosis factor family, regulate inflammatory and immune responses; interleukin family, variety of actions dependent upon interleukin and cell type; haematopoietins, promote cell proliferation and differentiation; transforming growth factor beta family, regulation of immune cells."
+        caption: |
+          جدول مطبوع كصورة في صفحة 4:
+
+          - **شمال**: الخمس طباع اللي جايين في صفحة 5 (pleiotropy و redundancy و synergy و antagonism و cascade induction)، والكتاب بيقول إنهم اللي بيخلّوا الـ cytokines تنظّم الخلايا مع بعض.
+          - **يمين**: كل عيلة وشغلتها الأساسية:
+            - interferons ← ==antiviral proteins==.
+            - chemokines ← تحريك الخلايا (migration) والتصاقها وتنشيطها.
+            - **TNF family** ← تنظيم الالتهاب والمناعة.
+            - interleukins ← شغل متنوع على حسب النوع والخلية.
+            - haematopoietins ← تكاثر الخلايا ونضجها.
+            - **transforming growth factor beta (TGF-β) family** ← تنظيم الخلايا المناعية.
+
+          يعني الاسم تاريخي، والجدول ده هو اللي بيقولك الشغلانة الحقيقية لكل عيلة.
       - kind: mnemonic
         page: 5
         quote: "Pleiotropic action: A given cytokine that has different biological effects on different target cells."
@@ -225,59 +243,21 @@ lessons:
       - kind: figure
         page: 5
         quote: "Pleiotropic action: A given cytokine that has different biological effects on different target cells."
-        title: "الخمس طباع في رسمة واحدة"
-        alt: "Five small panels. Pleiotropy: one cytokine with arrows to three different cells. Redundancy: three cytokines with arrows to one effect. Synergy: two cytokines joining into one large effect. Antagonism: one cytokine arrow blocked by a bar from another. Cascade: a chain of cells each releasing a new cytokine."
-        caption: "Pleiotropy = واحد لكتير. Redundancy = كتير لواحد. Synergy = اتنين بيكبّروا بعض. Antagonism = واحد بيقفل التاني. Cascade = كل خلية بتسلّم اللي بعدها."
-        svg: |
-          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="R01f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
-            </defs>
-            <text x="8" y="18" class="t-sm t-b">Pleiotropy</text>
-            <circle cx="30" cy="45" r="10" class="fg-dot-acc"/>
-            <path d="M42 45L95 25" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <path d="M42 45H95" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <path d="M42 45L95 65" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <rect x="100" y="17" width="50" height="14" rx="4" class="fg-box"/>
-            <rect x="100" y="38" width="50" height="14" rx="4" class="fg-box"/>
-            <rect x="100" y="59" width="50" height="14" rx="4" class="fg-box"/>
-            <text x="175" y="18" class="t-sm t-b">Redundancy</text>
-            <circle cx="190" cy="30" r="7" class="fg-dot-acc"/>
-            <circle cx="190" cy="48" r="7" class="fg-dot-good"/>
-            <circle cx="190" cy="66" r="7" class="fg-dot-bad"/>
-            <path d="M199 30L255 46" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <path d="M199 48H255" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <path d="M199 66L255 50" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <rect x="260" y="40" width="60" height="16" rx="4" class="fg-acc"/>
-            <text x="290" y="52" text-anchor="middle" class="t-sm">same</text>
-            <text x="8" y="115" class="t-sm t-b">Synergy</text>
-            <circle cx="25" cy="140" r="8" class="fg-dot-acc"/>
-            <text x="42" y="145" class="t-b">+</text>
-            <circle cx="62" cy="140" r="8" class="fg-dot-good"/>
-            <path d="M75 140H105" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <rect x="110" y="122" width="50" height="36" rx="6" class="fg-acc"/>
-            <text x="135" y="145" text-anchor="middle" class="t-b">×</text>
-            <text x="175" y="115" class="t-sm t-b">Antagonism</text>
-            <circle cx="190" cy="140" r="8" class="fg-dot-acc"/>
-            <path d="M200 140H250" class="fg-arrow-acc"/>
-            <path d="M252 125V155" class="fg-ink" stroke-width="3"/>
-            <circle cx="290" cy="140" r="8" class="fg-dot-bad"/>
-            <path d="M280 140H258" class="fg-arrow"/>
-            <text x="8" y="205" class="t-sm t-b">Cascade induction</text>
-            <circle cx="30" cy="245" r="16" class="fg-box"/>
-            <circle cx="120" cy="245" r="16" class="fg-box"/>
-            <circle cx="210" cy="245" r="16" class="fg-box"/>
-            <circle cx="300" cy="245" r="16" class="fg-box"/>
-            <path d="M48 245H100" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <path d="M138 245H190" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <path d="M228 245H280" class="fg-arrow-acc" marker-end="url(#R01f)"/>
-            <text x="74" y="236" text-anchor="middle" class="t-sm">IFN-γ</text>
-            <text x="164" y="236" text-anchor="middle" class="t-sm">IL-12</text>
-            <text x="254" y="236" text-anchor="middle" class="t-sm">more</text>
-            <text x="30" y="285" text-anchor="middle" class="t-sm t-mut">TH</text>
-            <text x="120" y="285" text-anchor="middle" class="t-sm t-mut">Mφ</text>
-            <text x="210" y="285" text-anchor="middle" class="t-sm t-mut">TH</text>
-          </svg>
+        title: "شكل 12-2 في الكتاب: الطباع الخمسة"
+        image: { file: rheum/L01-network-attributes.webp, book: true }
+        alt: "Figure 12-2 from Kuby Immunology. Panel (a) on the left, four rows starting from activated TH cells. Pleiotropy: IL-4 acts on a B cell (activation, proliferation, differentiation), a thymocyte and a mast cell (proliferation). Redundancy: IL-2, IL-4 and IL-5 each cause B-cell proliferation. Synergy: IL-4 plus IL-5 induce class switch to IgE. Antagonism: IFN-gamma blocks the class switch to IgE induced by IL-4. Panel (b) in the middle, cascade induction: activated TH cells release IFN-gamma, a macrophage then releases IL-12, and activated TH cells release IFN-gamma, TNF, IL-2 and other cytokines. On the right, three bullet notes on interferon-gamma as the example of each form."
+        caption: |
+          Figure 12-2 من **Kuby Immunology**، وفيه جزئين وملاحظات على اليمين:
+
+          - **(a) شمال**، أربع صفوف، كلها بتبدأ من T helper cell متنشّطة:
+            - **Pleiotropy**: IL-4 لوحده بيروح لـ B cell (activation و proliferation و differentiation) ولـ thymocyte ولـ mast cell (proliferation).
+            - **Redundancy**: IL-2 و IL-4 و IL-5، كل واحد فيهم بيعمل نفس الحاجة: B-cell proliferation.
+            - **Synergy**: IL-4 + IL-5 مع بعض ← ==class switch to IgE==.
+            - **Antagonism**: IFN-γ (السهم الأحمر) بيقفل الـ class switch لـ IgE اللي IL-4 بيعمله.
+          - **(b) في النص، cascade induction**: الـ T helper يطلّع IFN-γ ← الـ macrophage يطلّع IL-12 ← الـ T helper يطلّع IFN-γ و TNF و IL-2 وغيرهم.
+          - **يمين**: الكتاب بيقول إن ==IFN-γ== لوحده بيورّي الطباع كلها: بيخلّي T cells تطلّع IFN-γ و IL-2 تاني، وبيعمل **synergy** مع TNF-α في تنشيط الـ macrophages، وبيعمل **antagonism** لـ IL-4.
+
+          دي الأمثلة الحقيقية ورا الـ mnemonic اللي فوق، وكل طبع ليه مثال بالاسم ممكن يتسأل عليه.
       - kind: explain
         page: 5
         quote: "Synergism: when the combined effects of two cytokines on cellular activity is greater than the additive effects of the individual cytokines."
@@ -725,6 +705,19 @@ lessons:
           - ["Delayed-type hypersensitivity", "++", "-"]
           - ["Tc-cell activation", "++", "-"]
         hide: [[1, 2], [3, 1], [4, 1]]
+      - kind: figure
+        page: 14
+        title: "Th1 و Th2: مين بيطلّع إيه"
+        image: { file: rheum/L01-th1-th2.webp, book: true }
+        alt: "Top: two drawings. A Th1 cell releases interleukin-2 (activates T cells, B cells, NK cells and macrophages) and interferon-gamma (inhibits Th2 cells, stimulates Th1 cells, activates NK cells and macrophages). A Th2 cell releases interleukin-4 (stimulates B cell growth and differentiation, activates mast cells), interleukin-13 (stimulates B cell growth, suppresses macrophage functions), interleukin-5 (stimulates B cell growth, mobilises and activates eosinophils), interleukin-9 (T cell growth factor) and interleukin-10 (inhibits Th1 cell function, suppresses macrophage function). Bottom: a table, TH1 against TH2. Cytokine secretion: IL-2, IFN-gamma, TNF-beta and GM-CSF higher in TH1; IL-3 double plus in both; IL-4, IL-5, IL-10 and IL-13 only in TH2. Functions: help for total antibody, IgE production and eosinophil and mast cell production favour TH2; macrophage activation, delayed-type hypersensitivity and Tc-cell activation favour TH1."
+        caption: |
+          صفحة 14 فيها صورتين فوق بعض:
+
+          - **فوق شمال، Th1 cell**: بيطلّع **IL-2** (ينشّط T cells و B cells و NK cells و macrophages) و **IFN-γ** (يكبت Th2، يقوّي Th1، ينشّط NK cells و macrophages).
+          - **فوق يمين، Th2 cell**: بيطلّع IL-4 (نمو الـ B cell وتنشيط الـ mast cells)، و IL-13 (نمو الـ B cell وكبت الـ macrophages)، و IL-5 (نمو الـ B cell وتحريك الـ eosinophils)، و IL-9 (T cell growth factor)، و ==IL-10== (يكبت Th1 والـ macrophages).
+          - **تحت، الجدول**: الجزء الأول **cytokine secretion**: IL-2 و IFN-γ و TNF-β و GM-CSF أعلى في Th1، و IL-3 في الاتنين، و IL-4 و IL-5 و IL-10 و IL-13 في Th2 بس. والجزء التاني **functions** هو اللي في الجدول اللي فوق.
+
+          الخلاصة: كل subset بيكبت التاني (IFN-γ ضد Th2، و IL-10 ضد Th1)، فالرد بيميل لناحية واحدة: ==cellular immunity== مع Th1، و antibodies و IgE مع Th2.
       - kind: explain
         page: 14
         quote: "CD8 CTLs also secrete cytokines but their array is more restricted (cytotoxic T lymphocytes)."
@@ -1205,37 +1198,17 @@ lessons:
         page: 19
         quote: "Cytokines and the osteoclast (figure)\nTH17 cells:\n  IL-17, IL-1, TNF → RANKL, M-CSF → Osteoclast precursor cell → Osteoclast\nSynovial fibroblast:\n  IL-7, RANKL, M-CSF → Osteoclast precursor cell → Osteoclast\nTH1 cells:\n  RANKL, M-CSF (promote)\n  IFNγ, GM-CSF (inhibit), induced by IL-18\nTH2 cells:\n  IL-4, IL-10 (inhibit)"
         title: "مين بيبني الـ osteoclast؟"
-        alt: "An osteoclast precursor in the centre becomes an osteoclast at the bottom. From the top, TH17 releases IL-17, IL-1 and TNF; synovial fibroblasts release IL-7; these raise RANKL and M-CSF which push the precursor forward. From the sides, TH2 releases IL-4 and IL-10, and TH1 releases IFN-gamma and GM-CSF, which block the step; IL-18 also blocks it."
-        caption: "من فوق: IL-17 و IL-1 و TNF و IL-7 ← receptor activator of NF-κB ligand (RANKL) و M-CSF ← osteoclast. من الجناب: IL-4 و IL-10 و IFN-γ و GM-CSF و IL-18 بيقفلوا."
-        svg: |
-          <svg viewBox="0 0 330 320" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="R01d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
-            </defs>
-            <rect x="5" y="10" width="320" height="44" rx="8" class="fg-bad"/>
-            <text x="15" y="30" class="t-sm t-b">TH17: IL-17, IL-1, TNF</text>
-            <text x="15" y="47" class="t-sm">synovial fibroblast: IL-7</text>
-            <path d="M165 56V86" class="fg-arrow-bad" marker-end="url(#R01d)"/>
-            <rect x="105" y="90" width="120" height="34" rx="8" class="fg-bad"/>
-            <text x="120" y="112" class="t-b">RANKL, M-CSF</text>
-            <path d="M165 126V150" class="fg-arrow-bad" marker-end="url(#R01d)"/>
-            <rect x="85" y="154" width="160" height="34" rx="17" class="fg-box"/>
-            <text x="100" y="176" class="t-sm">osteoclast precursor</text>
-            <path d="M165 190V250" class="fg-arrow-bad" marker-end="url(#R01d)"/>
-            <rect x="5" y="200" width="110" height="40" rx="8" class="fg-good"/>
-            <text x="15" y="217" class="t-sm t-b">TH2</text>
-            <text x="15" y="233" class="t-sm">IL-4, IL-10</text>
-            <path d="M117 220H158" class="fg-arrow"/>
-            <path d="M158 210V230" class="fg-ink" stroke-width="3"/>
-            <rect x="215" y="200" width="110" height="40" rx="8" class="fg-good"/>
-            <text x="225" y="217" class="t-sm t-b">TH1, IL-18</text>
-            <text x="225" y="233" class="t-sm">IFN-γ, GM-CSF</text>
-            <path d="M213 220H172" class="fg-arrow"/>
-            <path d="M172 210V230" class="fg-ink" stroke-width="3"/>
-            <rect x="105" y="255" width="120" height="40" rx="12" class="fg-acc"/>
-            <text x="128" y="280" class="t-b">Osteoclast</text>
-            <text x="15" y="312" class="t-sm t-mut">red = promote, green = block</text>
-          </svg>
+        image: { file: rheum/L01-osteoclast.webp, book: true }
+        alt: "An osteoclast precursor cell in the centre becomes an osteoclast at the bottom. Top left, a TH17 cell releases IL-17, IL-1 and TNF; top right, synovial fibroblasts release IL-7; arrows from these reach two boxes of RANKL and M-CSF, which push the precursor forward. Bottom left, a TH2 cell releases IL-4 and IL-10, which block the step. Bottom right, a TH1 cell releases IFN-gamma and GM-CSF, which block the step, and also sends an arrow up to RANKL and M-CSF; IL-18 stimulates IFN-gamma and GM-CSF and also blocks the step."
+        caption: |
+          رسمة الكتاب في صفحة 19: الـ **osteoclast precursor cell** في النص، والـ osteoclast تحت خالص.
+
+          - **فوق شمال**: الـ TH17 بيطلّع IL-17 و IL-1 و TNF. **فوق يمين**: الـ synovial fibroblast بيطلّع IL-7.
+          - الأسهم دي بتنزل على صندوقين **receptor activator of NF-κB ligand (==RANKL==)** و M-CSF على الجنبين، ودول اللي بيدفعوا الـ precursor يبقى osteoclast.
+          - **تحت شمال**: الـ TH2 بيطلّع IL-4 و IL-10، والخط اللي آخره شَرطة (⊣) معناه بيقفلوا الطريق.
+          - **تحت يمين**: الـ TH1 بيطلّع IFN-γ و GM-CSF اللي بيقفلوا كمان، و IL-18 بيحفّزهم وبيقفل هو كمان. بس خلّي بالك: الـ TH1 ليه سهم لفوق لـ RANKL و M-CSF، يعني بيدفع شوية برضه.
+
+          دي الصورة اللي ورا الـ **erosions** في الـ RA: الـ TH17 والـ fibroblasts بيغلبوا الفرامل.
       - kind: explain
         page: 19
         quote: "Cytokines and the osteoclast (figure)\nTH17 cells:\n  IL-17, IL-1, TNF → RANKL, M-CSF → Osteoclast precursor cell → Osteoclast\nSynovial fibroblast:\n  IL-7, RANKL, M-CSF → Osteoclast precursor cell → Osteoclast\nTH1 cells:\n  RANKL, M-CSF (promote)\n  IFNγ, GM-CSF (inhibit), induced by IL-18\nTH2 cells:\n  IL-4, IL-10 (inhibit)"
@@ -1261,6 +1234,21 @@ lessons:
           - مساعدة الـ B cells.
           - cytotoxicity (CD8+).
           - **direct contact** مع الـ macrophages والـ fibroblasts والـ endothelium.
+      - kind: figure
+        page: 21
+        title: "الـ T cell في المفصل: بتتنشّط إزاي وبتأذي إزاي"
+        image: { file: rheum/L01-synovial-t-cell.webp, book: true }
+        alt: "A synovial naive T cell at the top left receives peptide-MHC and co-stimulation through the TCR and CD40L, a TLR ligand through a Toll-like receptor, and cytokines (IL-1, IL-6, IL-12, IL-15, IL-18, IL-23, TNF and TGF-beta) through a cytokine receptor. A dashed arrow marked IL-10, TGF-beta impaired? points to a regulatory T cell on the right. Activation turns it into a TH17 (or TH1) cell, which acts through cell-contact-mediated activation of macrophages, fibroblasts and endothelial cells, cytotoxicity by CD8+ T cells, B-cell help, and cytokine release (IL-17, IFN-gamma, IL-22, osteopontin, GM-CSF and RANKL) that activates leukocytes and mesenchymal cells. A long arrow on the left runs from cell-contact activation back up to the cytokines."
+        caption: |
+          رسمة الكتاب في صفحة 21 بتحكي اللي في الصفحة خطوة بخطوة:
+
+          - **فوق شمال**: الـ **synovial naive T cell** بتتنشّط من تلات مداخل: peptide-MHC مع co-stimulation على الـ T-cell receptor و CD40L، و TLR ligand على الـ Toll-like receptor، و cytokines (IL-1 و IL-6 و IL-12 و IL-15 و IL-18 و IL-23 و TNF و TGF-β) على الـ cytokine receptor.
+          - **فوق يمين**: سهم متقطّع للـ ==regulatory T cell== مكتوب عليه IL-10 و TGF-β **impaired?**، يعني الفرامل ضعيفة.
+          - **في النص**: بعد الـ activation الخلية بتبقى TH17 (أو TH1).
+          - **تحت**: أربع طرق للأذى: cell contact مع الـ macrophages والـ fibroblasts والـ endothelium، و cytotoxicity بالـ CD8+، و B-cell help، و ==cytokine release== (IL-17 و IFN-γ و IL-22 و osteopontin و GM-CSF و RANKL) اللي بتنشّط الـ leukocytes والـ mesenchymal cells.
+          - **السهم الطويل شمال**: طالع من الـ cell contact لفوق للـ cytokines، يعني الخلايا اللي اتنشّطت بتطلّع cytokines تنشّط T cells جديدة.
+
+          عشان كده الالتهاب في المفصل بيكمّل لوحده: دايرة بتغذّي نفسها والفرامل ضعيفة.
       - kind: check
         page: 21
         quote: "Regulatory T cells, although present, may not exhibit optimal regulatory activity."

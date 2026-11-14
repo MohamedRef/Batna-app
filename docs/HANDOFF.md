@@ -454,6 +454,22 @@ Add a bullet here when a PR adds something a later agent must know.
   needs an app build, not a content-only update. Checks:
   `lesson::remind_problems` and `batna-tools validate`
   (`lessons::remind_targets`). Rule: [LESSONS.md](LESSONS.md) rule 13.
+- **Marks on a picture** (#984, for #983's rule that the book's pictures
+  are explained in the lesson): an image figure takes up to 8 `marks:`
+  (`{ at: [x, y], label, kind?, size? }`, `at` as 0–1 fractions from the
+  picture's top left; kinds point, arrow, box, bracket; box and bracket need
+  `size`). `learn/steps/marks.rs` draws them over the picture in the accent
+  colour, numbered, positioned in percentages of the picture's own box so
+  they stay put at every width and in the zoomed viewer, and lists the
+  English labels under it in a named list. «ورّيني العلامات» (48dp, key `M`,
+  also in the viewer bar) shows and hides them; they start hidden when the
+  next step is a question (`Lesson::marks_start_shown`). Checks:
+  `lesson::mark_problems` (at most 8, `at` and the area inside 0–1, a plain
+  label, size only and always on box/bracket, image figures only); labels go
+  through the abbreviation rule via `Step::shown_text`. `pack::SCHEMA` = 4,
+  so content with marks needs an app build. Browser check:
+  `crates/app/tests/marks-browser.cjs`. How to write them:
+  [LESSONS.md](LESSONS.md) § Marks on a picture.
 
 ### Study sessions
 
@@ -686,6 +702,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-14: marks on a lesson picture (#984): `marks:` on image figures (point, arrow, box, bracket; up to 8), drawn numbered over the picture with the labels listed under it, toggle «ورّيني العلامات» (key M, hidden before a question); `pack::SCHEMA` 3 → 4; `marks-browser.cjs` in the screens browser job.
 - 2026-11-14: lesson images smaller and figures selective (Mohamed): only figures that add meaning (LESSONS.md rule 10 skip list widened); `figure-crop.py` saves WebP quality 50, aim ≤60 KB; new `shrink-images.py` re-encoded the existing images (lesson image folder about 13.0 → 8.0 MB). Research figures come from the slide decks (`figure-candidates.py res.LNN`, `figure-crop.py --lecture`).
 - 2026-11-14: book figures rule (#983, Mohamed): every picture and diagram of the book in its lesson at its page, explained there (LESSONS.md rule 10 rewritten, § Book figures); `content/book-figures/` inventories checked by `validate` (`figures.rs`), `batna-tools figures` progress table, `scripts/content-tools/figure-candidates.py` worklist and contact sheets. No lecture inventoried yet.
 - 2026-11-14: lesson browser check green again (#980): three clipped figure labels fixed (dm.L02, dm.L08, neph.L07); `screens-browser.cjs` now runs every check group after the layout pass and reports all failures together; new `lesson-figures.yml` runs the figure-label check on every PR that touches lessons.

@@ -62,9 +62,11 @@ The model to copy is `content/lessons/hb/L01.yaml`.
     («شكل 3 في الكتاب، ص 9»). The caption explains it **in the lesson's
     context**: what the picture is, what to look at in each panel, arrow and
     label the book prints, and what that proves for the point the lesson is
-    making; a figure the cards ask about gets a question step after it. Until
-    marks on pictures land (#984), say where to look in words («أعلى
-    اليمين»). Only figures that add meaning go in (Mohamed, 2026-11-14): a
+    making; a figure the cards ask about gets a question step after it.
+    Where the caption would have to say where to look («أعلى اليمين»), put
+    numbered `marks:` on the picture instead ([Marks on a
+    picture](#marks-on-a-picture), #984) and name the numbers in the
+    caption. Only figures that add meaning go in (Mohamed, 2026-11-14): a
     figure with nothing to teach (author photo, logo, decoration, a repeat of
     one already shown, a slide or box that only restates text a step already
     gives, a faded or near-repeat slide) is skipped with its reason. Each lecture's
@@ -140,7 +142,7 @@ Every step may have `page:` and `quote:`.
 | kind | fields | what he sees |
 |---|---|---|
 | `explain` | `title?`, `text` | Prose. Blank line = new paragraph, `- ` = bullet, `**bold**` = a term (weight only), `==key==` = one of the step's 1–3 key terms (marker). |
-| `figure` | `title?`, `svg` or `image`, `caption`, `alt` | A drawing or a picture; tap to zoom. |
+| `figure` | `title?`, `svg` or `image`, `caption`, `alt`, `marks?` (image only) | A drawing or a picture; tap to zoom. Marks are numbered spots on a picture ([Marks](#marks-on-a-picture)). |
 | `reveal` | `prompt`, `answer` | "فكّر الأول": think, then tap to see the answer. Use for every "why?". |
 | `mnemonic` | `word`, `parts: [{key, text}]`, `hook?` | Letter tiles that open one by one. The keys must spell the word. |
 | `aside` | `tone` (tip, exam, trap, analogy, joke), `text` | A coloured box. |
@@ -211,6 +213,48 @@ a line in `ATTRIBUTION.md`:
 
 The app shows the credit under the caption. The pack build embeds the file,
 so nothing is fetched at runtime.
+
+### Marks on a picture
+
+When the caption would have to say "the arrow at the top right", point at
+the place instead (#984). An image figure takes up to **8** `marks:`; the
+app draws each one over the picture, numbered, and lists the labels under
+it in the same numbers:
+
+```yaml
+- kind: figure
+  page: 41
+  image: { file: hb/L05-biopsy.webp, book: true }
+  marks:
+    - { at: [0.62, 0.30], label: "Mallory-Denk body" }
+    - { at: [0.20, 0.75], label: "Neutrophils", kind: arrow }
+    - { at: [0.50, 0.50], size: [0.30, 0.20], label: "Portal tract", kind: box }
+    - { at: [0.10, 0.50], size: [0.04, 0.60], label: "Fibrous septum", kind: bracket }
+  caption: "الـ ==Mallory-Denk body== (1) جوّا hepatocyte منفوخ، وحواليه neutrophils (2)…"
+  alt: "Liver biopsy, H&E: ballooned hepatocytes with Mallory-Denk bodies and neutrophils."
+```
+
+- **`at: [x, y]`**: fractions (0–1) of the picture's width and height from
+  its **top left** (left to right whatever the app's direction), so the mark
+  stays on its spot at every screen size and zoom. Find them on the crop:
+  pixel x ÷ width, pixel y ÷ height.
+- **`kind`**: `point` (the default: a ring on the spot), `arrow` (its tip on
+  the spot), `box` (an outline) or `bracket` (marks a length: down the
+  area's left side when it is taller than wide, else under it). A box or
+  bracket needs **`size: [w, h]`**, the area's width and height as fractions;
+  `at` is then its middle, and the area must stay on the picture.
+- **`label`**: what is there, in English, one plain line (no `**`/`==`).
+  Abbreviations follow rule 12. The *explanation* stays in the caption,
+  which can name the numbers ("(1)").
+- **`alt`** still describes the whole picture; a screen reader reads the
+  labels as their own list.
+- The toggle «ورّيني العلامات» (key **M**) shows and hides them. They start
+  **hidden when the next step is a question** (look first, check after),
+  otherwise shown.
+- Only on `image:` figures: a drawn SVG labels its own parts.
+
+`validate` checks all of this. Packs with marks need an app build from
+`pack::SCHEMA` 4 on; older builds keep their built-in content.
 
 ## Book figures
 

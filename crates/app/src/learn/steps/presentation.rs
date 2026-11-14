@@ -11,10 +11,19 @@ pub(super) fn Figure(
     image: Option<Picture>,
     caption: String,
     alt: String,
+    #[props(default)] marks: Vec<FigureMark>,
+    /// Starts in the full-screen viewer (browser fixtures).
+    #[props(default)]
+    zoomed: bool,
 ) -> Element {
     // A tap opens the figure full screen at every width (#337); in the
     // lesson it stays a plain picture, so a swipe on it turns the page (#338).
-    let mut open = use_signal(|| false);
+    let mut open = use_signal(|| zoomed);
+    // Marks on the picture (#984), shown or hidden for the whole figure,
+    // its full-screen view included.
+    let has_marks = image.is_some() && !marks.is_empty();
+    let start = try_use_context::<MarksStart>().is_none_or(|m| m.0);
+    let marks_on = use_signal(|| start);
     use_hook(|| {
         document::eval(VIEWER_JS);
     });
@@ -27,6 +36,12 @@ pub(super) fn Figure(
     let picture = match &image {
         // Content-made SVG, checked by the validator (no scripts, links or fixed colours).
         None => rsx! { div { class: "ls-fig-svg", dir: "ltr", dangerous_inner_html: "{svg}" } },
+        Some(p) if has_marks => rsx! {
+            span { class: "ls-marked", "data-marks": if marks_on() { "on" } else { "off" },
+                img { src: "{p.data}", alt: "{alt}", decoding: "async" }
+                if marks_on() { MarksLayer { marks: marks.clone() } }
+            }
+        },
         Some(p) => rsx! { img { src: "{p.data}", alt: "{alt}", decoding: "async" } },
     };
     rsx! {
@@ -41,6 +56,12 @@ pub(super) fn Figure(
                 onclick: move |_| open.set(true),
                 {picture.clone()}
                 span { class: "ls-zoom-hint", aria_hidden: "true", "⤢" }
+            }
+            if has_marks {
+                div { class: "ls-marks",
+                    MarksToggle { shown: marks_on }
+                    if marks_on() { MarksList { marks: marks.clone() } }
+                }
             }
             figcaption {
                 Rich { text: caption.clone() }
@@ -74,6 +95,7 @@ pub(super) fn Figure(
                         "×"
                     }
                     if let Some(t) = title { strong { class: "ls-viewer-title", Line { text: t } } }
+                    if has_marks { MarksToggle { shown: marks_on, icon: true } }
                     div { class: "ls-viewer-zoom", dir: "ltr",
                         button { class: "ls-arrow", "data-zoom": "out", aria_label: tx::ZOOM_OUT, title: tx::ZOOM_OUT, "−" }
                         button { class: "ls-arrow", "data-zoom": "fit", aria_label: tx::ZOOM_FIT, title: tx::ZOOM_FIT, "1:1" }
@@ -82,6 +104,9 @@ pub(super) fn Figure(
                 }
                 div { class: "ls-viewer-scroll", dir: "ltr",
                     div { class: "ls-viewer-inner", {picture} }
+                }
+                if has_marks && marks_on() {
+                    div { class: "ls-viewer-marks", MarksList { marks: marks.clone() } }
                 }
                 p { class: "ls-viewer-hint muted small", {tx::ZOOM_HINT} }
             }

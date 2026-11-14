@@ -232,6 +232,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     seed: format!("{}#{}", lesson.id, k),
                     before: before[k],
                     quote_held: attempt.read().quote_held(&lesson, k),
+                    marks_shown: lesson.marks_start_shown(k),
                     retry: {
                         let st_k = attempt.read().state(&lesson, k);
                         let q = st.body.is_question();
@@ -362,12 +363,15 @@ fn Stage(
     before: Option<bool>,
     /// The book quote waits until he has answered (`response::quote_held`).
     quote_held: bool,
+    /// A figure's marks start shown (off before a question about it, #984).
+    marks_shown: bool,
     /// (checked now, answered before): a question he can do again.
     retry: (bool, bool),
     on_retry: EventHandler<()>,
     on_answer: EventHandler<bool>,
 ) -> Element {
     use_context_provider(|| StepAt(k));
+    use_context_provider(|| super::steps::MarksStart(marks_shown));
     let try_done = before.is_some() && matches!(step.body, StepBody::Try { .. });
     // "حاول تاني": the step starts over as a fresh task. Practice only: the
     // first result stays the one that counts (Attempt::answer).

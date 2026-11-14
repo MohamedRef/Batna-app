@@ -8,6 +8,7 @@ fn shown_text_covers_what_the_step_shows_and_svg_words_only() {
             image: None,
             caption: "TIPS lowers it".into(),
             alt: "A gauge".into(),
+            marks: vec![],
         },
         page: Some(3),
         quote: Some("not shown".into()),

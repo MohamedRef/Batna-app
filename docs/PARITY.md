@@ -78,7 +78,7 @@ Status: ✅ in Batna · 🟡 partly · ⏳ planned (owner named) · ➖ not appl
 | 6.2 | Study Desk panes on the tablet | Two panes at ≥840: the question on one side, the explanation, `why` lines and book page on the other; bank list + question | 23 | ✅ on main |
 | 6.3 | S Pen hover peek (word meaning) | Hover peeks: over an abbreviation or drug name shows its expansion (a glossary from content tags), over "Book p. 14" shows the short quote, over an MCQ option after answering shows its `why`. Setting per device | 23 | ✅ on main (content/glossary.yaml) |
 | 6.4 | Mouse hover peek on the Mac | Same peeks with the mouse | 23 | ✅ on main |
-| 6.5 | Keyboard shortcuts (screens, reveal, rate 1–4, help list) | Same, plus A–E for MCQ options and Space to reveal | 23 | ✅ on main |
+| 6.5 | Keyboard shortcuts (screens, reveal, rate 1–4, help list) | Same, plus A–E for MCQ options, Space to reveal and M for a lesson picture's marks | 23 | ✅ on main |
 | 6.6 | Mac menu (Batna › Settings… ⌘,) | Copy `settings/menu.rs` | 23 | ✅ on main, compiled in the Mac CI job (Batna-app #44) |
 
 ## 7. Study features with a Kabar twin

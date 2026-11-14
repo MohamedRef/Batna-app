@@ -425,6 +425,94 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-svg { position: relative; }
 .ls-photo { padding: 0; overflow: hidden; }
 .ls-photo img { display: block; inline-size: 100%; block-size: auto; max-block-size: 70vh; object-fit: contain; }
+/* Marks on a picture (#984, steps/marks.rs). The box shrinks to the
+   picture so a mark's percentages land on the picture itself, never on the
+   space beside a tall one; the layer is left to right (dir on the button). */
+.ls-marked { position: relative; display: block; inline-size: fit-content; max-inline-size: 100%; margin-inline: auto; }
+.ls-photo .ls-marked img { inline-size: auto; max-inline-size: 100%; }
+.ls-viewer-inner .ls-marked { inline-size: 100%; }
+.ls-viewer-inner .ls-marked img { inline-size: 100%; max-inline-size: none; }
+.ls-marks-layer { position: absolute; inset: 0; pointer-events: none; }
+.ls-mk { position: absolute; box-sizing: border-box; inline-size: 0; block-size: 0; --mk: var(--accent); --halo: var(--glass-solid, var(--surface)); }
+.ls-mk[data-kind="box"], .ls-mk[data-kind="bracket"] { transform: translate(-50%, -50%); }
+.ls-mk[data-kind="box"] {
+  border: 3px solid var(--mk);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1.5px var(--halo), inset 0 0 0 1.5px var(--halo);
+}
+.ls-mk-n {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  min-inline-size: 22px;
+  block-size: 22px;
+  padding-inline: 4px;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--mk, var(--accent));
+  color: var(--on-accent);
+  box-shadow: 0 0 0 2px var(--halo, var(--surface));
+  font: 700 13px/1 var(--font-latin);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ls-mk[data-kind="point"] .ls-mk-n { transform: translate(calc(-50% + var(--dx) * 19px), calc(-50% + var(--dy) * 19px)); }
+.ls-mk[data-kind="arrow"] .ls-mk-n { transform: translate(calc(-50% + var(--dx) * 33px), calc(-50% + var(--dy) * 33px)); }
+.ls-mk[data-kind="box"] .ls-mk-n { inset-inline-start: 2px; inset-block-start: 2px; }
+.ls-mk[data-kind="bracket"][data-upright="yes"] .ls-mk-n { inset-block-start: 50%; transform: translate(calc(-50% + var(--dx) * 22px), -50%); }
+.ls-mk[data-kind="bracket"][data-upright="no"] .ls-mk-n { inset-inline-start: 50%; inset-block-start: 100%; transform: translate(-50%, calc(-50% + var(--dy) * 22px)); }
+.ls-mk-ring {
+  position: absolute;
+  inline-size: 20px;
+  block-size: 20px;
+  inset-inline-start: -10px;
+  inset-block-start: -10px;
+  box-sizing: border-box;
+  border: 3px solid var(--mk);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px var(--halo), inset 0 0 0 1.5px var(--halo);
+}
+/* The shaft starts at the tip and runs out to the tail (--a). */
+.ls-mk-shaft {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: -1.5px;
+  inline-size: 34px;
+  block-size: 3px;
+  background: var(--mk);
+  box-shadow: 0 0 0 1.5px var(--halo);
+  transform-origin: 0 50%;
+  transform: rotate(var(--a));
+}
+.ls-mk-shaft::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: -5.5px;
+  inline-size: 12px;
+  block-size: 14px;
+  background: var(--mk);
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+.ls-mk-br {
+  position: absolute;
+  box-sizing: border-box;
+  border: 3px solid var(--mk);
+  filter: drop-shadow(0 0 1px var(--halo)) drop-shadow(0 0 1px var(--halo));
+}
+.ls-mk[data-upright="yes"] .ls-mk-br { inset-block: 0; inset-inline-start: 0; inline-size: 10px; border-inline-end: none; }
+.ls-mk[data-upright="no"] .ls-mk-br { inset-inline: 0; inset-block-end: 0; block-size: 10px; border-block-start: none; }
+.ls-marks { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--sp-2) var(--sp-3); }
+.ls-marks-toggle { display: inline-flex; align-items: center; gap: var(--sp-2); min-block-size: var(--target); min-inline-size: var(--target); }
+.ls-marks-icon { font-size: 1.1rem; line-height: 1; }
+.ls-viewer-bar .ls-marks-toggle { inline-size: var(--target); block-size: var(--target); justify-content: center; }
+.ls-viewer-bar .ls-marks-toggle[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+.ls-marks-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-1); flex: 1 1 14rem; min-inline-size: 0; }
+.ls-marks-list li { display: flex; align-items: baseline; gap: var(--sp-2); overflow-wrap: anywhere; }
+.ls-marks-list .ls-mk-n { position: static; flex: none; transform: none; }
+.ls-viewer-marks { padding: var(--sp-2) var(--sp-3) 0; max-block-size: 30vh; overflow: auto; }
 /* A small corner badge: tap for full screen. */
 .ls-zoom-hint {
   position: absolute;

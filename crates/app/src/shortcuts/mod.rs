@@ -1,8 +1,8 @@
 //! Keyboard shortcuts for tablet keyboards and the Mac (PARITY.md §6.5):
 //! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, and on study
 //! screens Space to reveal or rate Good, 1–4 to rate, Z to undo, A–E for MCQ options, Enter to check or rate Good,
-//! ← / → between questions of a timed paper, F to flag, Esc to close, ? for
-//! the list.
+//! ← / → between questions of a timed paper, F to flag, M to show a lesson
+//! picture's marks, Esc to close, ? for the list.
 //!
 //! Screens don't register handlers: a key presses the visible, enabled button
 //! whose `aria-keyshortcuts` names it (`"Space"`, `"1"`, `"A"`, `"Enter"`,
@@ -96,7 +96,7 @@ window.__batnaKeys = (e) => {
   else if (e.key === "Escape") key = "escape";
   else if (/^(Digit|Numpad)[1-9]$/.test(e.code)) key = e.code.slice(-1);
   else if (e.key === "ArrowLeft" || e.key === "ArrowRight") key = e.key.toLowerCase();
-  else if (/^Key[A-FZ]$/.test(e.code)) key = e.code.slice(3).toLowerCase();
+  else if (/^Key[A-FMZ]$/.test(e.code)) key = e.code.slice(3).toLowerCase();
   if (!key) return;
   // Modals take precedence. A shortcut must not click behind a dialog.
   const modal = document.querySelector('[role="alertdialog"][aria-modal="true"], [role="dialog"][aria-modal="true"]');
@@ -204,7 +204,7 @@ pub fn KeysSheet() -> Element {
         return rsx! {};
     }
     let screens = format!("{} … {}", nav::TODAY, nav::STATS);
-    let rows: [(&[&str], String); 15] = [
+    let rows: [(&[&str], String); 16] = [
         (&["Ctrl", "1–7"], format!("{} ({screens})", tx::SCREENS)),
         (&["Ctrl", ","], tx::SETTINGS.into()),
         (&["Ctrl/⌘", "K"], tx::PALETTE.into()),
@@ -217,6 +217,7 @@ pub fn KeysSheet() -> Element {
         (&["Enter"], tx::NEXT.into()),
         (&["←", "→"], tx::MOVE.into()),
         (&["F"], tx::FLAG.into()),
+        (&["M"], tx::MARKS.into()),
         (&["Esc"], tx::ESC.into()),
         (&["?"], tx::HELP.into()),
         (&["⌘"], tx::NOTE.into()),
@@ -278,7 +279,7 @@ mod tests {
             "const modal =",
             "if (!hit && inStudy",
             "find(\"3\")",
-            "Key[A-FZ]",
+            "Key[A-FMZ]",
             "e.defaultPrevented",
         ] {
             assert!(KEYS_JS.contains(s), "missing keyboard safety contract: {s}");
@@ -361,8 +362,9 @@ mod tests {
         dom.rebuild_in_place();
         let html = dioxus::ssr::render(&dom);
         assert!(html.contains(tx::TITLE) && html.contains("aria-modal=\"true\""), "{html}");
-        assert_eq!(html.matches("<tr").count(), 15, "{html}");
-        for text in [tx::SCREENS, tx::REVEAL, tx::RATE, tx::FLAG, tx::HELP, nav::TODAY, nav::STATS] {
+        assert_eq!(html.matches("<tr").count(), 16, "{html}");
+        for text in [tx::SCREENS, tx::REVEAL, tx::RATE, tx::FLAG, tx::MARKS, tx::HELP, nav::TODAY, nav::STATS]
+        {
             assert!(html.contains(text), "missing {text}: {html}");
         }
         assert!(html.contains("<kbd>Space</kbd>") && html.contains("aria-keyshortcuts=\"Escape\""), "{html}");

@@ -342,3 +342,80 @@ fn export_figures(dir: &std::path::Path) -> usize {
     std::fs::write(dir.join("figures.html"), page).unwrap();
     count
 }
+
+/// A book picture with one mark of each kind (#984; no lesson carries marks
+/// yet): marks shown, marks hidden before a question, and open in the
+/// full-screen viewer, for the browser check that each mark lands on its
+/// spot at every width, in both directions, and when zoomed
+/// (tests/marks-browser.cjs).
+#[test]
+#[ignore = "exports production HTML for the screens browser CI job"]
+fn export_screen_fixtures_marks() {
+    export_marks(&out_dir("marks"));
+}
+
+#[test]
+fn the_marks_fixtures_draw_every_mark() {
+    let tmp = tempfile::tempdir().unwrap();
+    let dir = out_dir_in(tmp.path(), "marks");
+    export_marks(&dir);
+    let n = super::steps::marks_fixture::marks().len();
+    let on = std::fs::read_to_string(dir.join("figure-marks-on.html")).unwrap();
+    assert_eq!(on.matches("class=\"ls-mk\"").count(), n);
+    assert!(on.contains("aria-pressed=\"true\"") && on.contains("ls-marks-list"));
+    let off = std::fs::read_to_string(dir.join("figure-marks-off.html")).unwrap();
+    assert!(!off.contains("class=\"ls-mk\"") && off.contains("aria-pressed=\"false\""));
+    let zoomed = std::fs::read_to_string(dir.join("figure-marks-zoomed.html")).unwrap();
+    assert!(zoomed.contains("ls-viewer") && zoomed.matches("class=\"ls-mk\"").count() == 2 * n);
+    let manifest: Vec<serde_json::Value> =
+        serde_json::from_slice(&std::fs::read(dir.join("manifest.json")).unwrap()).unwrap();
+    assert_eq!(manifest.len(), 3);
+    assert_eq!(manifest[0]["marks"].as_array().unwrap().len(), n);
+}
+
+#[derive(Props, Clone, PartialEq)]
+struct MarksState {
+    image: batna_core::lesson::Picture,
+    shown: bool,
+    zoomed: bool,
+}
+
+fn marks_page(s: MarksState) -> Element {
+    use super::steps::marks_fixture::MarkedFigure;
+    rsx! {
+        Shell { screen: Screen::Learn, focus: true,
+            style { {CSS.text()} }
+            div { class: "ls-player", "data-view": "steps",
+                h1 { class: "ls-sr-only", "Marks" }
+                MarkedFigure { image: s.image, shown: s.shown, zoomed: s.zoomed }
+            }
+        }
+    }
+}
+
+fn export_marks(dir: &std::path::Path) {
+    use super::steps::marks_fixture::marks;
+    // The first book picture in the lessons, with its data embedded.
+    let image = Library::get()
+        .all_lessons()
+        .flat_map(|(_, l)| l.steps.iter())
+        .find_map(|s| match &s.body {
+            StepBody::Figure { image: Some(p), .. } if p.book && !p.data.is_empty() => Some(p.clone()),
+            _ => None,
+        })
+        .expect("a book picture in the lessons");
+    let at: Vec<_> = marks()
+        .iter()
+        .map(|m| serde_json::json!({ "at": m.at, "kind": m.kind.as_str(), "size": m.size }))
+        .collect();
+    let mut manifest = Vec::new();
+    for (name, shown, zoomed) in [("on", true, false), ("off", false, false), ("zoomed", true, true)] {
+        let mut dom =
+            VirtualDom::new_with_props(marks_page, MarksState { image: image.clone(), shown, zoomed });
+        dom.rebuild_in_place();
+        let file = format!("figure-marks-{name}.html");
+        write_page(dir, &file, &dom);
+        manifest.push(serde_json::json!({ "file": file, "shown": shown, "zoomed": zoomed, "marks": at }));
+    }
+    std::fs::write(dir.join("manifest.json"), serde_json::to_vec_pretty(&manifest).unwrap()).unwrap();
+}

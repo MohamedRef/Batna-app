@@ -134,28 +134,31 @@ lessons:
       - kind: figure
         page: 87
         quote: "| | Group A | Group B | Group AB | Group O |\n| Red blood cell type | A | B | AB | O |\n| Antibodies in Plasma | Anti-B | Anti-A | None | Anti-A and Anti-B |\n| Antigens in Red Blood Cell | A antigen | B antigen | A and B antigens | None |"
-        title: "الـ ABO في لوحة واحدة"
-        alt: "Four columns for groups A, B, AB and O. A has A antigen and anti-B; B has B antigen and anti-A; AB has both antigens and no antibodies; O has no antigens and both anti-A and anti-B."
-        caption: "الـ antibodies دايمًا ضد اللي **مش موجود**. **O** معاه anti-A و anti-B، و ==AB== مفيش antibodies خالص."
-        svg: |
-          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
-            <text x="10" y="70" class="t-sm t-mut">Antigen</text>
-            <text x="10" y="150" class="t-sm t-mut">Plasma</text>
-            <text x="10" y="166" class="t-sm t-mut">antibody</text>
-            <text x="105" y="25" text-anchor="middle" class="t-b">A</text>
-            <text x="165" y="25" text-anchor="middle" class="t-b">B</text>
-            <text x="225" y="25" text-anchor="middle" class="t-b">AB</text>
-            <text x="290" y="25" text-anchor="middle" class="t-b">O</text>
-            <circle cx="105" cy="70" r="22" class="fg-acc"/><text x="105" y="75" text-anchor="middle" class="t-sm t-b">A</text>
-            <circle cx="165" cy="70" r="22" class="fg-good"/><text x="165" y="75" text-anchor="middle" class="t-sm t-b">B</text>
-            <circle cx="225" cy="70" r="22" class="fg-bad"/><text x="225" y="75" text-anchor="middle" class="t-sm t-b">A+B</text>
-            <circle cx="290" cy="70" r="22" class="fg-box"/><text x="290" y="75" text-anchor="middle" class="t-sm t-b">none</text>
-            <rect x="75" y="130" width="60" height="40" rx="8" class="fg-box"/><text x="105" y="155" text-anchor="middle" class="t-sm">anti-B</text>
-            <rect x="135" y="130" width="60" height="40" rx="8" class="fg-box"/><text x="165" y="155" text-anchor="middle" class="t-sm">anti-A</text>
-            <rect x="195" y="130" width="60" height="40" rx="8" class="fg-thin"/><text x="225" y="155" text-anchor="middle" class="t-sm">none</text>
-            <rect x="260" y="130" width="62" height="40" rx="8" class="fg-box"/><text x="291" y="148" text-anchor="middle" class="t-sm">anti-A</text><text x="291" y="163" text-anchor="middle" class="t-sm">anti-B</text>
-            <text x="165" y="210" text-anchor="middle" class="t-sm t-mut">Components with &gt;2 ml RBC must match the plasma</text>
-          </svg>
+        title: "جدول الكتاب ص 87: الـ ABO في لوحة واحدة"
+        image: { file: hem/L06-abo-groups.webp, book: true }
+        alt: "Book table with four columns, groups A, B, AB and O, and three rows. Red blood cell type: a red cell marked A with round purple antigens, B with square green antigens, AB with both, O with plain spikes and no antigens. Antibodies in plasma: anti-B for A, anti-A for B, none for AB, anti-A and anti-B for O. Antigens in red blood cell: A antigen, B antigen, A and B antigens, none."
+        caption: |
+          الجدول ده بيتقري **عمود عمود**، وكل عمود 3 صفوف من فوق لتحت:
+
+          - **الصف الأول (Red blood cell type)**: الكرة الحمرا وعليها الـ antigen. **A** عليها كور بنفسجي، **B** مربعات خضرا، **AB** الاتنين، و **O** ما عليهاش حاجة.
+          - **الصف التاني (Antibodies in plasma)**: الـ antibodies اللي على شكل Y. لاحظ إن لونها **عكس** لون الـ antigen في نفس العمود: A معاها ==anti-B==، و B معاها anti-A، و AB **None**، و O الاتنين.
+          - **الصف التالت (Antigens)**: نفس الـ antigen لوحده بشكل صغير.
+
+          القاعدة اللي الجدول بيثبتها: الـ plasma فيها antibody ضد ==اللي مش موجود== على الكرة. عشان كده **O** بتدّي كرات لأي حد (ما عليهاش antigen)، و ==AB== بتاخد كرات من أي حد (ما عندهاش antibody)، وأي component فيه أكتر من 2 ml كرات لازم يناسب plasma العيان.
+      - kind: figure
+        page: 87
+        title: "رسمة الكتاب ص 87: الـ ABO groups بالنسبة"
+        image: { file: hem/L06-abo-pie.webp, book: true }
+        alt: "Book pie chart in shades of grey with four slices labelled O 41%, A 32%, B 22% and AB 5%."
+        caption: |
+          دايرة بالرمادي جنب كلام الـ compatibility، والأرقام مكتوبة على الشمال من فوق لتحت:
+
+          - **O 41%**: أكبر حتة.
+          - **A 32%**.
+          - **B 22%**.
+          - **AB 5%**: أصغر حتة تحت.
+
+          الكتاب ما قالش دي نسب أنهي شعب. اللي يهمك منها: ==O== هو الأكتر، فكرات الـ O هي اللي بتتطلب أكتر في الطوارئ (بتتدّي لأي حد)، و ==AB== الأقل، وبلازمته هي اللي بتتدّي لأي حد.
       - kind: explain
         page: 87
         title: "Major ولا minor؟"
@@ -246,6 +249,19 @@ lessons:
           - **Non-cellular**: plasma (FFP وغيره) و cryoprecipitate.
 
           والتعديلات (==CMV-negative==، leukoreduced، irradiated، washed) للـ **cellular بس**، و washed للـ PRBCs بس. ليه؟ التفسير المقبول (مش في الكتاب): كل التعديلات دي بتستهدف **خلايا**: الـ WBCs اللي فيها الـ CMV، والـ lymphocytes اللي بتعمل GVHD، أو الـ plasma اللي حوالين الكرات. الـ plasma والـ cryo مفيهمش خلايا تتعدّل.
+      - kind: figure
+        page: 88
+        quote: "Blood components"
+        title: "سلايد الكتاب ص 88: Blood components"
+        image: { file: hem/L06-components-slide.webp, book: true }
+        alt: "Book slide titled Blood components. Left: a drawing of blood component preparation, from a donor's whole blood bag, spun into packed red cells and platelet-rich plasma, then into plasma and platelet concentrate, with storage labels: packed red cells 1 to 6 degrees for 35 or 42 days, fresh frozen plasma below minus 18 degrees for 12 months, platelet concentrate 20 to 24 degrees for 5 days in a shaker. Right: a list. Cellular: packed red blood cells, platelets random from whole blood, platelets apheresis. Possible modifications: CMV-negative, leukoreduced, irradiated, washed (only PRBCs). Non-cellular: plasma (FFP, FP24, thawed plasma), cryoprecipitate; above specifications do not apply."
+        caption: |
+          السلايد نصين:
+
+          - **الرسمة على الشمال (Blood component preparation)**: الكيس الكامل من المتبرع بيتلف، فيطلع **packed red cells** (تتشال في التلاجة **1–6°C** لـ 35 أو 42 يوم) و **platelet-rich plasma**. البلازما دي تتلف تاني فتطلع **plasma** (تتجمّد **≤ −18°C** لـ 12 شهر) و **platelet concentrate** (في **20–24°C** على shaker لـ ==5 أيام==).
+          - **القايمة على اليمين**: **Cellular** (packed red cells، platelets random أو apheresis)، وبعدها **modifications** (CMV-negative، leukoreduced، irradiated، و washed للكرات بس)، وتحت **Non-cellular** (plasma و cryoprecipitate).
+
+          آخر سطر هو المفتاح: التعديلات دي ==ما تنفعش== على الـ non-cellular، لأنها كلها بتستهدف الخلايا (الـ WBCs اللي في الكيس). ولاحظ إن الصفايح بتتشال ==في درجة الأوضة==، وده اللي هيفسّر بعدين ليه هي أكتر component بيتلوث بالبكتيريا.
       - kind: explain
         page: 88
         title: "Whole blood و packed RBCs"
@@ -276,6 +292,20 @@ lessons:
           - ["Washed PRBC (no plasma, K, additive)", "IgA deficiency, hyperkalemia, allergy"]
           - ["Irradiated (donor lymphocytes stopped)", "TA-GVHD"]
         hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: figure
+        page: 89
+        quote: "Leukoreduction (LR)"
+        title: "سلايدات الكتاب ص 89: Leukoreduction و Washed PRBCs"
+        image: { file: hem/L06-lr-washed-slides.webp, book: true }
+        alt: "Two book slides. Top, Leukoreduction (LR): filtration with specialised filters that bind 99.9% of WBC from the donor unit; essentially eliminates febrile non-haemolytic transfusion reaction, CMV, HTLV I-II, herpesviruses, EBV and Trypanosoma cruzi; decreases risk of TRALI; universal LR is common practice; a photo of blood bags hanging from a stand on the right. Bottom, Washed PRBCs: purpose, to remove supernatant (plasma proteins, potassium, additive solution); indications, severe IgA deficiency to prevent anaphylaxis, significant hyperkalaemia, ongoing haemolysis from anti-A or anti-B, history of repetitive allergic reactions; risk, contamination while opening the bag and adding saline, 24 hours of shelf-life."
+        caption: |
+          الجدول اللي فوق ملخص السلايدين دول، وفيهم تفاصيل زيادة:
+
+          - **فوق (Leukoreduction)**: فلتر بيمسك ==99.9%== من الـ WBCs. بيمنع تقريبًا الـ febrile reaction والفيروسات اللي عايشة **جوّه الـ WBCs** (CMV، HTLV، EBV) وكمان **Trypanosoma cruzi**، وبيقلل الـ TRALI. والصورة يمين: أكياس دم متعلّقة بتعدّي على الفلاتر.
+          - **تحت (Washed PRBCs)**: بنشيل الـ **supernatant** (plasma proteins، potassium، additive). الدواعي: **IgA deficiency شديدة**، **hyperkalaemia**، haemolysis من anti-A أو anti-B، و **allergic reactions** متكررة.
+          - **آخر سطر في Washed (Risk)**: فتح الكيس وإضافة saline بيعرّضه للتلوث، فـ ==shelf-life 24 ساعة== بس.
+
+          يعني كل تعديل بيشيل حاجة معينة من الكيس: الـ leukoreduction بيشيل ==الـ WBCs==، والـ washing بيشيل البلازما.
       - kind: explain
         page: 89
         title: "ليه كل تعديل بيمنع اللي بيمنعه؟"
@@ -304,6 +334,19 @@ lessons:
           - بعض المستشفيات لكل مرضى السرطان، بس مش absolute
 
           الخيط اللي بيجمعهم: عيان **مش قادر يقتل** lymphocytes المتبرع، يا إما لأن مناعته ضعيفة (transplant، immunodeficiency، جنين وطفل صغير، والـ fludarabine اللي بيضرب الـ lymphocytes)، يا إما لأنه **شايفها شبهه** (القرايب، في الـ reveal الجاي).
+      - kind: figure
+        page: 90
+        quote: "Irradiation"
+        title: "سلايد الكتاب ص 90: Irradiation"
+        image: { file: hem/L06-irradiation-slide.webp, book: true }
+        alt: "Book slide titled Irradiation. Purpose: to prevent lymphocyte proliferation in the recipient and transfusion-associated graft-versus-host disease (TA-GVHD). Indications: stem cell transplant patients, given at least 30 days before and indefinitely after; recipients of blood products from first-degree relatives; intrauterine transfusions and babies up to 4 months; congenital immunodeficiency syndromes; recipients of fludarabine, nelarabine or clofarabine; some hospitals irradiate for all cancer patients, not an absolute indication."
+        caption: |
+          ده السلايد اللي الخطوة اللي فوق ماشية عليه، اقراه من فوق لتحت:
+
+          - **Purpose**: نوقف تكاثر lymphocytes المتبرع جوّه العيان، ونمنع ==TA-GVHD==.
+          - **Indications** (6 سطور): **stem cell transplant** (من 30 يوم قبل ولحد ما لا نهاية بعد)، دم من **first-degree relatives**، **intrauterine transfusions** والأطفال لحد 4 شهور، **congenital immunodeficiency**، اللي بياخدوا **fludarabine/nelarabine/clofarabine**، وآخر سطر: بعض المستشفيات لكل مرضى السرطان بس ==not an absolute indication==.
+
+          الإشعاع ما بيقتلش الـ lymphocytes بس بيمنعها **تتقسم**، فما تقدرش تهاجم العيان. والتفسير المقبول (مش في الكتاب): ده التعديل اللي بيمنع الـ TA-GVHD، والـ ==leukoreduction== لوحده مش كفاية.
       - kind: reveal
         page: 90
         quote: "Irradiation\n  Purpose\n    To prevent lymphocyte proliferation in recipient and transfusion-associated graft-versus-host disease (TA-GVHD)\n  Indications\n    Stem cell transplant patients: Must give at least 30 days before, and indefinitely after\n    Recipients of blood products from 1st degree relatives\n    Intrauterine transfusions & babies up to 4 months\n    Congenital Immunodeficiency Syndromes\n    Recipients of Fludarabine/Nelarabine/Clofarabine\n    Some hospitals irradiate for all cancer patients – not an absolute indication"
@@ -666,6 +709,18 @@ lessons:
           - الوقاية: أي دم بعد كده **antigen-negative** للـ antibody ده، عشان الـ memory ما تصحاش تاني.
       - kind: figure
         page: 97
+        title: "رسمة الكتاب ص 97: الـ direct antiglobulin test (DAT)"
+        image: { file: hem/L06-dat.webp, book: true }
+        alt: "Book drawing in two rows. Row A: transfused incompatible donor red cells coated with antibodies or complement; addition of Coombs' reagent (antihuman IgG or antihuman C3); in vitro clumping of the transfused incompatible red cells; a tube with clumps, positive DAT. Row B: compatible donor red cells; addition of Coombs' reagent; no clumping observed; an evenly red tube, negative DAT."
+        caption: |
+          صفين، وكل صف بيتقري **من الشمال لليمين**:
+
+          - **(A) فوق**: كرات المتبرع اللي **مش متوافقة** متغطية بـ antibodies أو complement (الحاجات الزرقا عليها). نضيف **Coombs' reagent** (anti-human IgG أو anti-human C3، الـ Y الخضرا في النص)، فيربط الكرات المتغطية ببعض: **clumping**. الأنبوبة يمين فيها كتل: ==positive DAT==.
+          - **(B) تحت**: كرات **متوافقة** ما عليهاش antibodies. نفس الـ reagent ما يلاقيش حاجة يمسكها: **no clumping**، والأنبوبة حمرا متجانسة: **negative DAT**.
+
+          ده ليه الكتاب بيقول في الـ DHTR إن الـ ==DAT is +ve==: الـ IgG اللي اتعمل بعد التعرض بيغطي كرات المتبرع، والـ Coombs بيكشفه حتى لو الكرات لسه ما اتكسرتش.
+      - kind: figure
+        page: 97
         quote: "There is no Hemoglobinuria because hemolysis is extra-vascular."
         title: "جوه الأوعية ولا في الطحال؟"
         alt: "Two columns. AHTR: IgM anti-A or anti-B, complement, red cells burst inside vessels, free haemoglobin, haemoglobinuria, minutes. DHTR: IgG from memory cells coats red cells, the spleen removes them, bilirubin rises, no haemoglobinuria, 1 to 3 weeks."
@@ -830,6 +885,21 @@ lessons:
           - الوقاية: كميات أقل وأبطأ **1–4 ml/kg/h**، وأي كيس ما يعدّيش **4 hours**.
 
           ليه دول بالذات؟ لأن الـ TACO مش مناعة، هو **حجم**: القلب الضعيف (أو الصغير في الأطفال) مش بيلحق يضخ اللي داخل، فالضغط يرجع للرئة. عشان كده العلاج diuresis، والوقاية إنك تبطّأ.
+      - kind: figure
+        page: 100
+        quote: "Transfusion Associated Circulatory Overload (TACO)"
+        title: "رسمة الكتاب ص 100: الـ TACO من السبب للعلامات"
+        image: { file: hem/L06-taco.webp, book: true }
+        alt: "Book flow chart titled Transfusion Associated Circulatory Overload (TACO): Clinical Findings, from The Calgary Guide. Top: rapid transfusion or over-transfusion gives extremely high circulating blood volume, which is TACO. Left branch: increased blood volume in peripheral circulation overwhelms the right heart, raising jugular venous pressure, and raises arterial pressure, hypertension. Right branch: the heart pumps more, tachycardia; blood overloads the heart's compensatory capacity, heart failure; backup into lung vasculature pushes fluid into the interstitium and alveoli, pulmonary congestion, orthopnoea, stiff lungs and airway compression, dyspnoea; inefficient pumping lowers tissue perfusion, hypoxia. A note lists risk factors: elderly, small body size such as infants, pre-existing cardiac disease; a warning box says stop the transfusion and keep IV access."
+        caption: |
+          الرسمة بتبدأ **فوق في النص** وبتنزل، والمربعات **الخضرا** هي العلامات اللي هتلاقيها في العيان:
+
+          - **فوق**: **rapid transfusion أو over-transfusion** ← حجم دم عالي جدًا ← ==TACO==.
+          - **الفرع الشمال**: الحجم الزيادة بيضغط على القلب اليمين ← **↑ jugular venous pressure**، وبيرفع الضغط ← **hypertension**.
+          - **الفرع اليمين**: القلب بيحاول يضخ أكتر ← **tachycardia**، وبعدين بيتعب (**heart failure**) ← الدم يرجع للرئة ← **pulmonary congestion** ← **orthopnoea** و **dyspnoea**، والـ perfusion تقل ← **hypoxia**.
+          - **فوق شمال (Note)**: الأكتر عرضة: **كبار السن**، **الأطفال**، واللي عندهم **مرض قلب**. **فوق يمين (Warning)**: ==stop the transfusion== وسيب الـ IV line.
+
+          يعني الـ TACO زي ما الكتاب بيقول ==cardiogenic==: ضغط عالي ووريد رقبة منفوخ وقلب بيجري، والعلاج إنك توقف الكيس وتخفف الحجم.
       - kind: sort
         page: 100
         quote: "There is increase in CVP and cardiac failure.\nPulm. edema is cardiogenic in origin"

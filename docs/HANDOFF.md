@@ -310,7 +310,10 @@ quote cap there is outdated), course briefs in [courses/](courses/).
     ([LESSONS.md](LESSONS.md) rule 8). Lesson order stays as it is. A page
     with nothing to teach goes in `content/lesson-skips.yaml` with a reason
     (default until he says otherwise), not a filler step. Hepatology is the
-    depth bar (#827); additions are labelled as not from the book.
+    depth bar (#827); additions are labelled as not from the book. Width
+    counts the pages a lesson's steps cite, not its `pages` span; research
+    lessons count slides, up to 16. A lesson wide on purpose is listed with
+    its reason in `content/lesson-wide.yaml` (#828).
 15. **The key is not the longest option** (Mohamed, 2026-11-13, #816).
     Test-wise learners pick the longest option, so in authored MCQs make a
     distractor as long as the key (or trim the key) without making it less
@@ -675,6 +678,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-14: wide lessons (#828): width now counts the pages a lesson's steps cite (research: slides, limit 16), and `content/lesson-wide.yaml` lists 13 lessons wide on purpose with their reasons; res.L05.lesson5 split (retrospective cohort → lesson7), res.L12.lesson6 and res.L03.lesson4 topics corrected. Wide-lesson warnings 140 → 0.
 - 2026-11-13: longest-option cue, nephrology (#816): 43 distractors made as long as their keys, every neph lecture at or under 25%; bank share 26.3% → 24.4%, ceiling 25%. Hepatology (32%) and geriatrics (33%) were already lower and are left for now.
 - 2026-11-13: longest-option cue, rheumatology (#816): 47 distractors made as long as their keys, every rheum lecture but L03 (27%) at or under 25%; bank share 28.4% → 26.3%, ceiling 27%.
 - 2026-11-13: longest-option cue, research (#816): 60 distractors made as long as their keys, every res lecture at or under 25%; bank share 31.1% → 28.4%, ceiling 29%.

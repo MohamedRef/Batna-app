@@ -902,15 +902,14 @@ lessons:
     practice: [res.L05.039, res.L05.040, res.L05.041, res.L05.042, res.L05.043, res.L05.044, res.L05.045, res.L05.046, res.L05.047, res.L05.048, res.L05.049, res.L05.050, res.L05.064, res.L05.065, res.L05.066, res.L05.067, res.L05.072]
   # ------------------------------------------------------------------
   - id: res.L05.lesson5
-    title: "Case-control ولا cohort؟ والـ cohort اللي بيرجع لورا"
-    hook: "مرض نادر؟ exposure نادر؟ عايز نتيجة بسرعة؟ كل سؤال ليه design. ونختم بأسئلة الدكتورة نفسها."
-    minutes: 10
-    pages: [62, 72]
-    topics: [cohort-merits, compare, retrospective, risk]
+    title: "Case-control ولا cohort؟ كل سؤال ليه design"
+    hook: "مرض نادر؟ exposure نادر؟ عايز نتيجة بسرعة؟ كل سؤال ليه design."
+    minutes: 7
+    pages: [62, 71]
+    topics: [cohort-merits, compare]
     goals:
       - "تعرف نقاط قوة وضعف الـ cohort"
       - "تختار بين case-control و cohort في أي سيناريو"
-      - "تعرف الـ retrospective (historical) cohort"
     status: unverified
     steps:
       - kind: sort
@@ -1004,6 +1003,25 @@ lessons:
           - "ميزة: بترجع تسأل عن exposures كتير."
           - "ميزة: بتبدأ بالعيانين نفسهم، فمش محتاج تستنى المرض النادر."
           - "ميزة: زي الـ alcohol والـ pregnancy."
+      - kind: try
+        items: [res.L05.052, res.L05.054, res.L05.055, res.L05.056, res.L05.060]
+    recap:
+      - "Cohort: incidence/RR/AR، outcomes كتير، dose-response، temporal أكيد، rare exposure. بس attrition، عينة كبيرة، وقت وفلوس، ومش للمرض النادر."
+      - "**DOC**: rare Disease ← case-control؛ many Outcomes ← cohort؛ rare Cause ← cohort."
+      - "Case-control: selection bias دايمًا و recall bias، والـ RR مجرد تقدير (OR)."
+    practice: [res.L05.052, res.L05.053, res.L05.054, res.L05.055, res.L05.056, res.L05.060]
+  - id: res.L05.lesson7
+    title: "الـ cohort اللي بيرجع لورا: retrospective cohort"
+    hook: "records مصنع من سنين، ونتتبع العمال لحد النهارده. ده cohort برضه، بس بيبدأ من الماضي. ونختم بأسئلة الدكتورة نفسها."
+    minutes: 8
+    pages: [66, 72]
+    topics: [retrospective, risk]
+    goals:
+      - "تعرف الـ retrospective (historical) cohort"
+      - "تفرّقه عن الـ case-control"
+      - "تحسب RR و AR و ARP من أرقام المحاضرة"
+    status: unverified
+    steps:
       - kind: explain
         page: 66
         quote: "Retrospective Cohort Study:\n  A retrospective cohort study is one in which the outcome have all occurred before the start of investigation.\n  Investigator goes back to the past to select study group from existing records of the past employment, medical and other records and traces them forward through time from the past date fixed on the records usually to the present.\n  Known with the name of Historical Cohort and noncurrent cohort"
@@ -1102,11 +1120,8 @@ lessons:
             answer: 2
             why: "110 ÷ 120 × 100 = 91.7% ≈ **92%**."
       - kind: try
-        items: [res.L05.052, res.L05.054, res.L05.055, res.L05.057, res.L05.051]
+        items: [res.L05.057, res.L05.058, res.L05.059, res.L05.061, res.L05.051]
     recap:
-      - "Cohort: incidence/RR/AR، outcomes كتير، dose-response، temporal أكيد، rare exposure. بس attrition، عينة كبيرة، وقت وفلوس، ومش للمرض النادر."
-      - "**DOC**: rare Disease ← case-control؛ many Outcomes ← cohort؛ rare Cause ← cohort."
-      - "Case-control: selection bias دايمًا و recall bias، والـ RR مجرد تقدير (OR)."
       - "**Retrospective = historical = non-concurrent cohort**: نختار بالـ exposure من records قديمة ونتتبع لحد النهارده؛ للـ occupational exposures."
       - "RR 120/10 = 12، AR = 110/100,000، attributable risk percent (ARP) ≈ 92%."
-    practice: [res.L05.051, res.L05.052, res.L05.053, res.L05.054, res.L05.055, res.L05.056, res.L05.057, res.L05.058, res.L05.059, res.L05.060, res.L05.061, res.L05.068]
+    practice: [res.L05.051, res.L05.057, res.L05.058, res.L05.059, res.L05.061, res.L05.068]

@@ -20,6 +20,18 @@
 //! A lecture listed there has had its coverage reviewed, so from then on a
 //! page that no step cites and that is not skipped is an error, not a
 //! warning.
+//!
+//! A lesson's width is the number of pages its steps cite, not the span of
+//! its `pages` (a table or review question a few pages on would otherwise
+//! count every page between). Slide decks ([`SLIDE_COURSES`]) count slides,
+//! with their own limit. A lesson that is wide on purpose (an end-of-deck
+//! quiz review, two short book headings on two pages that would fall under
+//! eight steps if split) is listed with its reason in
+//! `content/lesson-wide.yaml` (tools-only):
+//!
+//! ```yaml
+//! res.L12.lesson7: "the deck's closing quiz, one question per bias type"
+//! ```
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
@@ -31,6 +43,11 @@ use batna_core::lesson::{Lesson, LessonFile, StepBody};
 pub const MAX_CARDS: usize = 30;
 pub const MAX_PAGES: u32 = 8;
 pub const MAX_TOPICS: usize = 2;
+/// Slide decks: `pages` are slide numbers, and a slide carries about a
+/// quarter of a book page, so a lesson may teach up to this many slides.
+pub const MAX_SLIDES: usize = 16;
+/// Courses whose `pages` are slides (content/index.yaml).
+pub const SLIDE_COURSES: &[&str] = &["res"];
 
 /// Words that give a reason or a mechanism (#827).
 const REASON: &[&str] = &[
@@ -61,6 +78,17 @@ pub fn read_skips(root: &Path) -> Result<Skips, String> {
     crate::read_yaml(&path)
 }
 
+/// `content/lesson-wide.yaml`: lesson → why it is wide on purpose.
+pub type WideOk = BTreeMap<String, String>;
+
+pub fn read_wide(root: &Path) -> Result<WideOk, String> {
+    let path = root.join("content/lesson-wide.yaml");
+    if !path.exists() {
+        return Ok(WideOk::new());
+    }
+    crate::read_yaml(&path)
+}
+
 /// One lesson's figures.
 #[derive(Debug, Clone, PartialEq)]
 pub struct LessonRow {
@@ -68,6 +96,12 @@ pub struct LessonRow {
     pub pages: [u32; 2],
     /// First and last page its steps cite.
     pub cited: Option<[u32; 2]>,
+    /// How many different pages (or slides) its steps cite.
+    pub taught: usize,
+    /// Its course is a slide deck.
+    pub slides: bool,
+    /// Its reason in `content/lesson-wide.yaml`, if listed.
+    pub wide_ok: Option<String>,
     pub topics: usize,
     pub cards: usize,
     pub steps: usize,
@@ -76,6 +110,14 @@ pub struct LessonRow {
     pub practice_uncited: Vec<String>,
     pub explains: usize,
     pub explains_no_reason: usize,
+}
+
+impl LessonRow {
+    /// Over one of the limits (rule 8, #828).
+    pub fn is_wide(&self) -> bool {
+        let max = if self.slides { MAX_SLIDES } else { MAX_PAGES as usize };
+        self.cards > MAX_CARDS || self.taught >= max || self.topics > MAX_TOPICS
+    }
 }
 
 /// One lecture's figures.
@@ -145,6 +187,9 @@ fn lesson_row(l: &Lesson, lecture: &Lecture) -> LessonRow {
         id: l.id.clone(),
         pages: l.pages,
         cited: cited.first().zip(cited.last()).map(|(a, b)| [*a, *b]),
+        taught: cited.len(),
+        slides: SLIDE_COURSES.contains(&batna_core::program::course_of(&l.id)),
+        wide_ok: None,
         topics: l.topics.len(),
         cards: l.practice.len(),
         steps: l.steps.len(),
@@ -221,12 +266,23 @@ pub fn problems(row: &LectureRow, skips: &Skips) -> (Vec<String>, Vec<String>) {
                 l.practice_uncited.join(", ")
             ));
         }
-        let span = l.pages[1] + 1 - l.pages[0];
-        if l.cards > MAX_CARDS || span >= MAX_PAGES || l.topics > MAX_TOPICS {
-            warnings.push(format!(
-                "{}: wide lesson ({} cards, {span} pages, {} topics); split it at a topic boundary",
-                l.id, l.cards, l.topics
-            ));
+        match (l.is_wide(), &l.wide_ok) {
+            (true, None) => warnings.push(format!(
+                "{}: wide lesson ({} cards, {} {}, {} topics); split it at a topic boundary or give the reason in content/lesson-wide.yaml",
+                l.id,
+                l.cards,
+                l.taught,
+                if l.slides { "slides" } else { "pages" },
+                l.topics
+            )),
+            (false, Some(_)) => warnings.push(format!(
+                "{}: no longer wide; remove it from content/lesson-wide.yaml",
+                l.id
+            )),
+            (true, Some(why)) if why.trim().is_empty() => {
+                errors.push(format!("{}: content/lesson-wide.yaml lists it without a reason", l.id))
+            }
+            _ => {}
         }
     }
     (errors, warnings)
@@ -237,6 +293,7 @@ pub fn rows(root: &Path) -> Result<(Vec<LectureRow>, Skips), Vec<String>> {
     let content = root.join("content");
     let index: Index = crate::read_yaml(&content.join("index.yaml")).map_err(|e| vec![e])?;
     let skips = read_skips(root).map_err(|e| vec![e])?;
+    let wide = read_wide(root).map_err(|e| vec![e])?;
     let files: BTreeMap<String, LessonFile> =
         crate::lessons::load(root)?.into_iter().map(|(_, f, _)| (f.lecture.clone(), f)).collect();
     let mut out = Vec::new();
@@ -247,11 +304,20 @@ pub fn rows(root: &Path) -> Result<(Vec<LectureRow>, Skips), Vec<String>> {
         };
         out.push(lecture_row(e.pages, &lecture, file, &skips));
     }
-    let unknown: Vec<String> = skips
+    let mut unknown: Vec<String> = wide
         .keys()
-        .filter(|k| !out.iter().any(|r| &r.id == *k))
-        .map(|k| format!("content/lesson-skips.yaml: {k} is not a lecture with lessons"))
+        .filter(|k| !out.iter().any(|r| r.lessons.iter().any(|l| &l.id == *k)))
+        .map(|k| format!("content/lesson-wide.yaml: {k} is not a lesson"))
         .collect();
+    for l in out.iter_mut().flat_map(|r| r.lessons.iter_mut()) {
+        l.wide_ok = wide.get(&l.id).cloned();
+    }
+    unknown.extend(
+        skips
+            .keys()
+            .filter(|k| !out.iter().any(|r| &r.id == *k))
+            .map(|k| format!("content/lesson-skips.yaml: {k} is not a lecture with lessons")),
+    );
     if !unknown.is_empty() {
         return Err(unknown);
     }
@@ -317,12 +383,7 @@ pub fn summary(rows: &[LectureRow]) -> String {
         let skipped: usize = rs.iter().map(|r| r.skipped).sum();
         let over =
             lessons.iter().filter(|l| l.cited.is_some_and(|[a, b]| l.pages[0] < a || l.pages[1] > b)).count();
-        let wide = lessons
-            .iter()
-            .filter(|l| {
-                l.cards > MAX_CARDS || l.pages[1] + 1 - l.pages[0] >= MAX_PAGES || l.topics > MAX_TOPICS
-            })
-            .count();
+        let wide = lessons.iter().filter(|l| l.is_wide() && l.wide_ok.is_none()).count();
         let off: usize = lessons.iter().map(|l| l.practice_uncited.len()).sum();
         let words: usize = rs.iter().map(|r| r.words()).sum();
         let (nr, ex) = rs.iter().fold((0, 0), |(a, b), r| {

@@ -311,6 +311,42 @@ lessons:
           - بيتكتب غالبًا **per 100 أو per 1000** population.
           - أمثلة: birth rate، growth rate، accident rate، morbidity وmortality rates.
           - الفرق الجوهري: الـ rate ليه **time dimension**، والـ **proportion** لأ.
+      - kind: figure
+        page: 23
+        quote: "It has a time dimension, whereas a PROPORTION does not."
+        title: "عدد، نسبة، معدل: الفرق في صورة واحدة"
+        alt: "Three rows. Count: 120 malaria cases, a raw number. Proportion: a bar of 120 with 80 children shaded, 80 over 120 equals 66.7 percent, part of the whole with no time. Rate: cases over population at risk, with a time arrow from 1 January to 31 December labelled during one year."
+        caption: |
+          اقرأها من فوق لتحت، وكل سطر بيزوّد حاجة على اللي قبله:
+
+          - **Count**: رقم لوحده، 120 حالة malaria. ينفع للتخطيط بس مايقارنش.
+          - **Proportion**: الشريط كله 120، والجزء الملوّن 80 طفل منهم. الـ numerator ==جوه== الـ denominator، ومفيش زمن.
+          - **Rate**: نفس القسمة بس على الـ population اللي ممكن تتعب، و==خلال فترة== (السهم من يناير لديسمبر). الزمن هو اللي بيخليها rate.
+
+          يعني لو شفت رقم من غير «خلال سنة» أو «per 1000 per year» يبقى غالبًا proportion مش rate.
+        svg: |
+          <svg viewBox="0 0 330 262" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L02r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker></defs>
+            <text x="10" y="18" class="t-b">1. Count</text>
+            <rect x="10" y="26" width="310" height="34" rx="6" class="fg-box"/>
+            <text x="20" y="48" class="t-sm">120 malaria cases</text>
+            <text x="310" y="48" text-anchor="end" class="t-sm t-mut">a raw number</text>
+            <text x="10" y="88" class="t-b">2. Proportion</text>
+            <rect x="10" y="96" width="310" height="22" rx="4" class="fg-box"/>
+            <rect x="10" y="96" width="207" height="22" rx="4" class="fg-acc"/>
+            <text x="113" y="112" text-anchor="middle" class="t-sm t-b">80 children</text>
+            <text x="268" y="112" text-anchor="middle" class="t-sm">40</text>
+            <text x="10" y="136" class="t-sm">80 / 120 = 66.7%</text>
+            <text x="320" y="136" text-anchor="end" class="t-sm t-mut">part of the whole, no time</text>
+            <text x="10" y="166" class="t-b">3. Rate</text>
+            <rect x="10" y="174" width="310" height="34" rx="6" class="fg-acc"/>
+            <text x="165" y="196" text-anchor="middle" class="t-sm t-b">cases / population at risk</text>
+            <path d="M20 228H306" class="fg-arrow-acc" marker-end="url(#L02r)"/>
+            <circle cx="20" cy="228" r="3" class="fg-dot-acc"/>
+            <text x="20" y="248" class="t-sm t-mut">1 Jan</text>
+            <text x="310" y="248" text-anchor="end" class="t-sm t-mut">31 Dec</text>
+            <text x="165" y="248" text-anchor="middle" class="t-sm t-acc t-b">during one year</text>
+          </svg>
       - kind: aside
         tone: analogy
         page: 23
@@ -428,6 +464,128 @@ lessons:
           - سنة 3: **4** زيادة.
 
           (مفيش حد خف أو مات.)
+      - kind: figure
+        page: 34
+        quote: "Year 2, an additional 7 people developed the outcome"
+        title: "الـ 30 واحد: المقام بيصغر كل سنة"
+        alt: "Three rows of 30 dots for years 1, 2 and 3. Year 1: 5 new cases, at risk 30, incidence 5 over 30 equals 17 percent. Year 2: 5 already ill, 7 new, at risk 25, 7 over 25 equals 28 percent. Year 3: 12 already ill, 4 new, at risk 18, 4 over 18 equals 22 percent."
+        caption: |
+          دي نفس عيّنة slide 34 (30 شخص على 3 سنين)، بس مرسومة علشان تشوف المقام وهو بيتغيّر:
+
+          - كل نقطة شخص. **الأحمر** عيان من سنة قبل كده، **الملوّن** حالة جديدة السنة دي، و**الفاضي** لسه at risk.
+          - سنة 1: 5 جداد من 30 = 17%.
+          - سنة 2: الـ 5 الحمر ==خرجوا من المقام==، فالـ 7 الجداد على 25 = 28%.
+          - سنة 3: 12 خرجوا، فالـ 4 على 18 = 22%.
+
+          الـ incidence بتعدّ الملوّن بس، وتقسمه على الملوّن + الفاضي. الأحمر مكانه في الـ prevalence.
+        svg: |
+          <svg viewBox="0 0 330 268" xmlns="http://www.w3.org/2000/svg">
+            <text x="14" y="30" class="t-sm t-b">Year 1</text>
+            <text x="316" y="30" text-anchor="end" class="t-sm t-acc t-b">5 / 30 = 17%</text>
+            <circle cx="22" cy="44" r="4" class="fg-dot-acc"/>
+            <circle cx="32" cy="44" r="4" class="fg-dot-acc"/>
+            <circle cx="42" cy="44" r="4" class="fg-dot-acc"/>
+            <circle cx="52" cy="44" r="4" class="fg-dot-acc"/>
+            <circle cx="62" cy="44" r="4" class="fg-dot-acc"/>
+            <circle cx="72" cy="44" r="4" class="fg-box"/>
+            <circle cx="82" cy="44" r="4" class="fg-box"/>
+            <circle cx="92" cy="44" r="4" class="fg-box"/>
+            <circle cx="102" cy="44" r="4" class="fg-box"/>
+            <circle cx="112" cy="44" r="4" class="fg-box"/>
+            <circle cx="122" cy="44" r="4" class="fg-box"/>
+            <circle cx="132" cy="44" r="4" class="fg-box"/>
+            <circle cx="142" cy="44" r="4" class="fg-box"/>
+            <circle cx="152" cy="44" r="4" class="fg-box"/>
+            <circle cx="162" cy="44" r="4" class="fg-box"/>
+            <circle cx="172" cy="44" r="4" class="fg-box"/>
+            <circle cx="182" cy="44" r="4" class="fg-box"/>
+            <circle cx="192" cy="44" r="4" class="fg-box"/>
+            <circle cx="202" cy="44" r="4" class="fg-box"/>
+            <circle cx="212" cy="44" r="4" class="fg-box"/>
+            <circle cx="222" cy="44" r="4" class="fg-box"/>
+            <circle cx="232" cy="44" r="4" class="fg-box"/>
+            <circle cx="242" cy="44" r="4" class="fg-box"/>
+            <circle cx="252" cy="44" r="4" class="fg-box"/>
+            <circle cx="262" cy="44" r="4" class="fg-box"/>
+            <circle cx="272" cy="44" r="4" class="fg-box"/>
+            <circle cx="282" cy="44" r="4" class="fg-box"/>
+            <circle cx="292" cy="44" r="4" class="fg-box"/>
+            <circle cx="302" cy="44" r="4" class="fg-box"/>
+            <circle cx="312" cy="44" r="4" class="fg-box"/>
+            <text x="14" y="66" class="t-sm t-mut">at risk = 30</text>
+            <text x="14" y="102" class="t-sm t-b">Year 2</text>
+            <text x="316" y="102" text-anchor="end" class="t-sm t-acc t-b">7 / 25 = 28%</text>
+            <circle cx="22" cy="116" r="4" class="fg-dot-bad"/>
+            <circle cx="32" cy="116" r="4" class="fg-dot-bad"/>
+            <circle cx="42" cy="116" r="4" class="fg-dot-bad"/>
+            <circle cx="52" cy="116" r="4" class="fg-dot-bad"/>
+            <circle cx="62" cy="116" r="4" class="fg-dot-bad"/>
+            <circle cx="72" cy="116" r="4" class="fg-dot-acc"/>
+            <circle cx="82" cy="116" r="4" class="fg-dot-acc"/>
+            <circle cx="92" cy="116" r="4" class="fg-dot-acc"/>
+            <circle cx="102" cy="116" r="4" class="fg-dot-acc"/>
+            <circle cx="112" cy="116" r="4" class="fg-dot-acc"/>
+            <circle cx="122" cy="116" r="4" class="fg-dot-acc"/>
+            <circle cx="132" cy="116" r="4" class="fg-dot-acc"/>
+            <circle cx="142" cy="116" r="4" class="fg-box"/>
+            <circle cx="152" cy="116" r="4" class="fg-box"/>
+            <circle cx="162" cy="116" r="4" class="fg-box"/>
+            <circle cx="172" cy="116" r="4" class="fg-box"/>
+            <circle cx="182" cy="116" r="4" class="fg-box"/>
+            <circle cx="192" cy="116" r="4" class="fg-box"/>
+            <circle cx="202" cy="116" r="4" class="fg-box"/>
+            <circle cx="212" cy="116" r="4" class="fg-box"/>
+            <circle cx="222" cy="116" r="4" class="fg-box"/>
+            <circle cx="232" cy="116" r="4" class="fg-box"/>
+            <circle cx="242" cy="116" r="4" class="fg-box"/>
+            <circle cx="252" cy="116" r="4" class="fg-box"/>
+            <circle cx="262" cy="116" r="4" class="fg-box"/>
+            <circle cx="272" cy="116" r="4" class="fg-box"/>
+            <circle cx="282" cy="116" r="4" class="fg-box"/>
+            <circle cx="292" cy="116" r="4" class="fg-box"/>
+            <circle cx="302" cy="116" r="4" class="fg-box"/>
+            <circle cx="312" cy="116" r="4" class="fg-box"/>
+            <text x="14" y="138" class="t-sm t-mut">at risk = 25</text>
+            <text x="14" y="174" class="t-sm t-b">Year 3</text>
+            <text x="316" y="174" text-anchor="end" class="t-sm t-acc t-b">4 / 18 = 22%</text>
+            <circle cx="22" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="32" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="42" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="52" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="62" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="72" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="82" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="92" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="102" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="112" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="122" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="132" cy="188" r="4" class="fg-dot-bad"/>
+            <circle cx="142" cy="188" r="4" class="fg-dot-acc"/>
+            <circle cx="152" cy="188" r="4" class="fg-dot-acc"/>
+            <circle cx="162" cy="188" r="4" class="fg-dot-acc"/>
+            <circle cx="172" cy="188" r="4" class="fg-dot-acc"/>
+            <circle cx="182" cy="188" r="4" class="fg-box"/>
+            <circle cx="192" cy="188" r="4" class="fg-box"/>
+            <circle cx="202" cy="188" r="4" class="fg-box"/>
+            <circle cx="212" cy="188" r="4" class="fg-box"/>
+            <circle cx="222" cy="188" r="4" class="fg-box"/>
+            <circle cx="232" cy="188" r="4" class="fg-box"/>
+            <circle cx="242" cy="188" r="4" class="fg-box"/>
+            <circle cx="252" cy="188" r="4" class="fg-box"/>
+            <circle cx="262" cy="188" r="4" class="fg-box"/>
+            <circle cx="272" cy="188" r="4" class="fg-box"/>
+            <circle cx="282" cy="188" r="4" class="fg-box"/>
+            <circle cx="292" cy="188" r="4" class="fg-box"/>
+            <circle cx="302" cy="188" r="4" class="fg-box"/>
+            <circle cx="312" cy="188" r="4" class="fg-box"/>
+            <text x="14" y="210" class="t-sm t-mut">at risk = 18</text>
+            <circle cx="22" cy="246" r="4" class="fg-dot-acc"/>
+            <text x="32" y="250" class="t-sm">new case</text>
+            <circle cx="112" cy="246" r="4" class="fg-dot-bad"/>
+            <text x="122" y="250" class="t-sm">already ill</text>
+            <circle cx="212" cy="246" r="4" class="fg-box"/>
+            <text x="222" y="250" class="t-sm">still at risk</text>
+          </svg>
       - kind: reveal
         page: 36
         quote: "What is the incidence of disease in Year 2?\n  What is the numerator? 7 new cases in Year 2\n  What is the denominator? 25 people at risk (5 people already developed the disease in Year 1 and are thus not at risk)\n  Incidence = 7/25 = 0.28\nThe incidence (risk) of disease in Year 2 is 28%"
@@ -687,6 +845,46 @@ lessons:
           الـ ==immune individuals== (متطعمين أو جالهم قبل كده).
 
           المقام = **susceptibles** بس. اللي مش ممكن يتعدي مالوش مكان فيه. علشان كده slide 45 بيقول إن الـ **incubation period** والـ **state of immunity** مهمين.
+      - kind: figure
+        page: 46
+        quote: "To calculate the number of household contacts (denominator), subtract the number of primary cases from the total number living in the households. Immune individuals should also be subtracted."
+        title: "بيت واحد: مين في البسط ومين في المقام"
+        alt: "A household. The primary case is excluded from numerator and denominator. An immune contact is excluded from the denominator. Five susceptible contacts form the denominator; two fall ill within one incubation period and are the numerator, so SAR equals 2 over 5, 40 percent. Anyone ill later is from another source and not counted."
+        caption: |
+          الصورة بتطبّق slide 46 على بيت واحد:
+
+          - **الـ primary case** (الأحمر فوق): بيطلع من البسط والمقام.
+          - **الـ immune** (الأخضر): مش ممكن يتعدي، فبيطلع من المقام.
+          - الصندوق الملوّن هو ==المقام==: 5 susceptible contacts.
+          - اتنين منهم تعبوا ==within one incubation period==، دول البسط: SAR = 2/5 = 40%.
+          - اللي تعب بعد كده غالبًا اتعدى من مصدر تاني، فمايتحسبش.
+
+          أول ما تشوف سؤال SAR ارسم البيت ده في دماغك: اطرح الـ primary، اطرح الـ immune، وعدّ اللي تعب في الوقت بس.
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="314" height="196" rx="10" class="fg-thin"/>
+            <text x="165" y="28" text-anchor="middle" class="t-sm t-mut">one household</text>
+            <circle cx="44" cy="62" r="13" class="fg-dot-bad"/>
+            <text x="66" y="58" class="t-sm t-b">Primary case</text>
+            <text x="66" y="74" class="t-sm t-mut">out of top and bottom</text>
+            <circle cx="44" cy="108" r="13" class="fg-dot-good"/>
+            <text x="66" y="104" class="t-sm t-b">Immune contact</text>
+            <text x="66" y="120" class="t-sm t-mut">out of the denominator</text>
+            <rect x="20" y="138" width="290" height="58" rx="8" class="fg-acc"/>
+            <text x="165" y="156" text-anchor="middle" class="t-sm t-b">Susceptible contacts = denominator</text>
+            <circle cx="60" cy="178" r="9" class="fg-dot-acc"/>
+            <circle cx="84" cy="178" r="9" class="fg-dot-acc"/>
+            <circle cx="108" cy="178" r="9" class="fg-box"/>
+            <circle cx="132" cy="178" r="9" class="fg-box"/>
+            <circle cx="156" cy="178" r="9" class="fg-box"/>
+            <text x="176" y="182" class="t-sm">2 ill of 5</text>
+            <text x="14" y="232" class="t-sm"><tspan class="t-b t-acc">ill within one incubation period</tspan></text>
+            <text x="14" y="250" class="t-sm">= secondary case, counted on top</text>
+            <text x="14" y="276" class="t-sm"><tspan class="t-b">ill later</tspan> = another source,</text>
+            <text x="14" y="294" class="t-sm">not counted</text>
+            <text x="316" y="276" text-anchor="end" class="t-b t-acc">SAR = 2/5</text>
+            <text x="316" y="294" text-anchor="end" class="t-b t-acc">= 40%</text>
+          </svg>
       - kind: case
         page: 48
         quote: "Secondary attack rate = The no. of secondary cases / No. of susceptibles x 100\n  No. of susceptibles = 86 – 18 = 68\n  17 / 68 x 100"

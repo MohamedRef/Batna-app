@@ -237,39 +237,35 @@ lessons:
 
           التفسير المقبول (مش في الكتاب): ليه الـ IL-4 مهم؟ عشان هو المفتاح اللي بيحوّل الـ B cell من IgG لـ IgE، يعني من غيره مفيش سلاح للـ allergy. وعشان كده الـ IL-10 والـ IgG4 هما الفرامل: الـ IgG4 بيمسك الـ allergen قبل ما يوصل للـ IgE. وده نفس منطق الـ immunotherapy في صفحة 60: بتعلّم الجسم يعمل IgG4 بدل IgE.
       - kind: figure
+        page: 55
+        title: "الـ Th2 response في رسمة الكتاب"
+        image: { file: rheum/L03-th2-response.webp, book: true }
+        alt: "Diagram titled Modified TH2 response. Top: a dendritic cell presents MHC-peptide to a TH0 cell, which becomes a TH2 helper cell and a TH2 effector cell that releases IL-5 and recruits eosinophils. Middle: a B cell switches through B mu delta to B gamma 4 and B epsilon; green IL-4 arrows from the helper cell drive both switches. IL-10 promotes IgG4 (green plus) and blocks IgE (red minus). Bottom: IgE binds a mast cell, which releases leukotrienes, histamine, and IL-4, IL-5 and TNF-alpha that bring eosinophils."
+        caption: |
+          رسمة الكتاب في صفحة 55 (**Modified Th2 response**)، من فوق لتحت:
+
+          - **فوق شمال**: الـ dendritic cell بتعرض الـ antigen (MHC-peptide) على Th0 ← يبقى **Th2 helper** ← و **Th2 effector** (فوق يمين) بيطلّع IL-5 وبيجيب الـ eosinophils.
+          - **في النص**: الـ B cell بتتحوّل خطوة خطوة (Bμδ ← Bγ4 ← Bε)، والسهمين الخضر التخان هما ==IL-4== اللي بيدفع الـ switch.
+          - **تحت الـ B cells**: الـ **IL-10** عليه علامة خضرا (+) ناحية **IgG4**، وعلامة حمرا (−) ناحية **IgE**، يعني بيشجّع الأولاني ويقفل التاني.
+          - **تحت خالص**: الـ IgE بيقعد على الـ **mast cell**، فتطلّع leukotrienes و histamine و IL-4 و IL-5 و TNF-α ← eosinophils.
+
+          يعني الـ allergy محتاجة الـ Th2 والـ IL-4 عشان يتعمل IgE من الأول، وده الـ ==sensitization stage==.
+      - kind: figure
         page: 56
         quote: "Activation of mast cells by IgE produced by plasma cells binds via Fc domain to receptors on mast cell -cross linking of these receptors by Ag causing influx of calcium ions and degranulation of mast cells."
         title: "الـ mast cell بتنفجر إمتى؟"
-        alt: "A mast cell with IgE sitting on FcεRI receptors. An allergen bridges two IgE molecules. A calcium arrow enters the cell. Three outputs leave on a timeline: pre-formed granules at 5 minutes (histamine, heparin, tryptase), arachidonic acid products at 5 to 30 minutes (leukotriene D4, prostaglandin D2), and cytokines at hours (TNF-α, IL-4). A side arrow shows direct triggers without IgE: opiates, contrast, vancomycin."
-        caption: "Cross-linking ← Ca²⁺ يدخل ← degranulation. الحبيبات الجاهزة في 5 دقايق، الـ arachidonic acid في 5-30، والـ cytokines بالساعات."
-        svg: |
-          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="R03a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
-            </defs>
-            <circle cx="90" cy="110" r="48" class="fg-acc"/>
-            <text x="90" y="114" text-anchor="middle" class="t-sm t-b">Mast cell</text>
-            <path d="M74 62l-8-18M74 62l8-18M106 62l-8-18M106 62l8-18" class="fg-ink" stroke-width="2"/>
-            <circle cx="90" cy="38" r="7" class="fg-bad"/>
-            <text x="104" y="32" class="t-sm">allergen</text>
-            <text x="38" y="52" class="t-sm t-mut">IgE</text>
-            <path d="M140 80l-22 14" class="fg-arrow-acc" marker-end="url(#R03a)"/>
-            <text x="142" y="78" class="t-sm">Ca²⁺</text>
-            <text x="6" y="190" class="t-sm t-mut">direct triggers (no IgE):</text>
-            <text x="6" y="206" class="t-sm t-mut">opiates, contrast, vancomycin</text>
-            <path d="M140 116h30" class="fg-arrow-acc" marker-end="url(#R03a)"/>
-            <rect x="168" y="40" width="158" height="44" rx="8" class="fg-box"/>
-            <text x="175" y="58" class="t-sm t-b">5 min: pre-formed</text>
-            <text x="175" y="74" class="t-sm">histamine, heparin, tryptase</text>
-            <rect x="168" y="94" width="158" height="44" rx="8" class="fg-box"/>
-            <text x="175" y="112" class="t-sm t-b">5-30 min: new lipids</text>
-            <text x="175" y="128" class="t-sm">LTD4, PGD2</text>
-            <rect x="168" y="148" width="158" height="44" rx="8" class="fg-box"/>
-            <text x="175" y="166" class="t-sm t-b">hours: cytokines</text>
-            <text x="175" y="182" class="t-sm">TNF-α, IL-4</text>
-            <text x="176" y="214" class="t-sm t-good">immediate</text>
-            <text x="260" y="214" class="t-sm t-bad">late phase</text>
-          </svg>
+        image: { file: rheum/L03-mast-cell-release.webp, book: true }
+        alt: "Two panels. Left, Mast cell mediator release: triggering mechanisms are allergen plus specific IgE on the cell surface and direct triggers such as opiates, contrast media and vancomycin. Mediators leave in two groups: pre-formed granule mediators within 5 minutes (histamine, heparin, tryptase) and newly generated arachidonic acid products within 5 to 30 minutes (leukotriene D4, prostaglandin D2) and cytokines over hours (TNF-alpha, IL-4). Right: a large mast cell with IgE on Fc epsilon RI receptors; an antigen cross-links them, calcium enters, and an arrow shows degranulation."
+        caption: |
+          رسمة الكتاب في صفحة 56، جزئين:
+
+          - **شمال (mast cell mediator release)**: طريقتين يشغّلوا الخلية: **allergen + specific IgE** (السهم الأخضر فوق)، و **direct triggers** من غير IgE زي الـ opiates والـ contrast media والـ vancomycin (السهم الأخضر يمين). وتحت الـ mediators على تلات مواعيد:
+            - **pre-formed** في الحبيبات (خلال 5 دقايق): histamine و heparin و tryptase.
+            - **newly generated** من الـ arachidonic acid (5-30 دقيقة): leukotriene D4 و prostaglandin D2.
+            - **cytokines** (ساعات): TNF-α و IL-4.
+          - **يمين**: الـ IgE قاعد على الـ **FcεRI receptors**، والـ antigen بيربط اتنين ببعض (==cross-linking==)، فيدخل **Ca²⁺** (السهم في النص) ويحصل ==degranulation== (السهم تحت).
+
+          يعني الـ cross-linking هو الزرار، والـ calcium هو اللي بيفضّي الحبيبات.
       - kind: explain
         page: 56
         quote: "Activation of mast cells by IgE produced by plasma cells binds via Fc domain to receptors on mast cell -cross linking of these receptors by Ag causing influx of calcium ions and degranulation of mast cells."
@@ -320,6 +316,19 @@ lessons:
           وفي الـ electron micrograph: الخلية الساكنة مليانة حبيبات، والمتنشّطة فضيت.
 
           التفسير المقبول (مش في الكتاب): ليه موجتين؟ عشان الـ histamine جاهز في الحبيبات وبيطلع في ثواني، أما الـ cytokines لازم تتصنّع الأول وبعدين تجيب الـ eosinophils، فبتاخد ساعات. يعني مريض الـ asthma ممكن يتحسن بعد النوبة الأولى ويرجع يتعب بعد 4-8 ساعات، وده سبب إننا بنراقبه ونديله steroid للموجة التانية.
+      - kind: figure
+        page: 57
+        title: "الـ mast cell قبل وبعد"
+        image: { file: rheum/L03-mast-cell-activation.webp, book: true }
+        alt: "Six panels. A: an IgE-coated resting mast cell with IgE on Fc epsilon RI and an allergen nearby. B: an antigen-activated mast cell with cross-linked IgE releasing histamine and lipid mediators (vascular and smooth muscle response: immediate reaction) and cytokines (inflammation: late-phase reaction). C and D: light microscopy, a resting mast cell stained solid red and an activated one with scattered red granules outside it. E and F: electron micrographs, a resting mast cell packed with dark granules and an activated cell with empty granules."
+        caption: |
+          رسمة الكتاب في صفحة 57، العمود **الشمال** خلية ساكنة والعمود **اليمين** نفس الخلية بعد ما اتنشّطت:
+
+          - **(A) و (B) فوق**: الـ IgE على الـ FcεRI، والـ allergen بيربطهم ← حاجتين: histamine/lipid mediators ← ==immediate reaction==، و cytokines ← ==late-phase reaction==.
+          - **(C) و (D) في النص**، تحت الميكروسكوب العادي: الخلية الساكنة **حمرا مقفولة**، والمتنشّطة الحبيبات الحمرا **طالعة برّاها**.
+          - **(E) و (F) تحت**، electron micrograph: الساكنة **مليانة حبيبات سودا**، والمتنشّطة **الحبيبات فاضية**.
+
+          يعني الـ degranulation حاجة بتتشاف بالعين تحت الميكروسكوب، مش بس فكرة.
       - kind: aside
         tone: analogy
         page: 57
@@ -401,6 +410,18 @@ lessons:
           - في الآخر: cell infiltrate، mucus زيادة، عضلات أتخن، و chronic bronchospasm.
 
           التفسير المقبول (مش في الكتاب): ليه الـ asthma بيبقى مزمن؟ عشان الموجة المتأخرة (الـ eosinophils ومواد زي MBP) بتجرح بطانة الشُّعب كل مرة، والجرح بيلتئم بعضلات أتخن ومخاط أكتر. يعني كل نوبة بتسيب أثر، وده سبب إن الـ inhaled steroid (اللي بيطفي الالتهاب) أهم من الـ bronchodilator لوحده في العلاج الطويل.
+      - kind: figure
+        page: 59
+        title: "الـ asthma في رسمة الكتاب"
+        image: { file: rheum/L03-asthmatic-bronchi.webp, book: true }
+        alt: "Diagram titled Inflammatory response in asthmatic bronchi. A mast cell with IgE on Fc epsilon RI on the left releases mediators along two paths. Upper path: chemotactic factors (IL-5, TNF-alpha) act on cells in a blood vessel, which release histamine, cytokines, lysosomal enzymes, prostaglandins, MBP and ECP, leading to inflammation and bronchial hyperreactivity. Lower path: spasmogens (histamine, leukotrienes, prostaglandins) turn a normal bronchus into bronchoconstriction and finally a bronchus with cell infiltrate, increased mucus, increased muscle and chronic bronchospasm."
+        caption: |
+          الرسمة اللي الخطوة اللي فوق بتشرحها (صفحة 59):
+
+          - **شمال**: mast cell عليها IgE بتطلّع mediators (mediator release).
+          - **الطريق اللي فوق**: **chemotactic factors** (IL-5 و TNF-α) بتنادي خلايا من الوعاء الدموي (الدايرة فوق يمين)، تطلّع histamine و lysosomal enzymes و prostaglandins و MBP و ECP ← ==bronchial hyperreactivity==.
+          - **الطريق اللي تحت**: **spasmogens** (histamine و leukotrienes و prostaglandins) ← الشُّعبة من **normal** ← **bronchoconstriction**.
+          - **تحت يمين**: الشُّعبة في الآخر: cell infiltrate، mucus زيادة، عضلة أتخن، و ==chronic bronchospasm==.
       - kind: explain
         page: 59
         quote: "During anaphylaxis large amounts of inflammatory mediators and VDs are released into the circulation by activated mast cells and basophils causing rapid dilatation of blood vessels throughout the body."
@@ -618,6 +639,21 @@ lessons:
           3. ==Antibody-dependent cell-mediated cytotoxicity (ADCC)== (antibody-dependent cell-mediated cytotoxicity) بالـ **natural killer (NK) cells**
 
           التفسير المقبول (مش في الكتاب): ليه antigen على سطح الخلية بالذات؟ عشان الـ antibody لما يمسك في الخلية نفسها، أي حاجة بتشوف الـ antibody (complement، phagocytes، NK cells) هتضرب الخلية دي. يعني الضرر محدود في الخلايا اللي عليها الـ antigen: كرات الدم في الـ haemolysis، أو الكلى في Goodpasture.
+      - kind: figure
+        page: 61
+        quote: "The immune mechanisms of type II HS reactions. Antibody bound to cells."
+        title: "تقسيم Coombs and Gell في رسمة الكتاب"
+        image: { file: rheum/L03-coombs-gell.webp, book: true }
+        alt: "Four columns titled The Coombs and Gell classification of the four types of hypersensitivity reaction. Type I: an allergen bridges IgE on Fc receptors of a mast cell, which degranulates and releases mediators. Type II: IgG on a cell surface antigen lets a K cell kill the target cell (cytotoxic action), and antibody with complement causes complement-mediated lysis. Type III: immune complexes deposit on the basement membrane of a vessel wall, complement joins, and a cell comes from the blood vessel. Type IV: antigens are presented to a T cell, which releases cytokines that activate a macrophage releasing inflammatory mediators."
+        caption: |
+          رسمة الكتاب (مطبوعة في صفحات 55 و 61 و 64 و 66)، أربع عواميد:
+
+          - **Type I (شمال خالص)**: الـ allergen بيربط IgE على الـ Fc receptors بتاعة الـ mast cell ← degranulation و mediator release.
+          - **Type II**: ==IgG على antigen على سطح الخلية==: فوق خلية **K** بتقتل الـ target cell (cytotoxic action)، وتحت الـ complement (C) بيعمل **complement-mediated lysis**.
+          - **Type III**: **immune complexes** بتترسّب على الـ basement membrane في جدار الوعاء (يمين العمود)، والـ complement بييجي عليها.
+          - **Type IV (يمين خالص)**: الـ antigen بيتعرض على **T cell** ← cytokines ← **activated macrophage** بيطلّع inflammatory mediators. مفيش antibody خالص.
+
+          يعني اللي بيفرّق التلاتة الأولانيين: الـ antibody نوعه إيه وماسك فين. والرابع لوحده خلايا.
       - kind: explain
         page: 61
         quote: "Type II HS occurs when antibody specific for cell surface antigen is produced."
@@ -634,32 +670,16 @@ lessons:
         page: 62
         quote: "Effector mechanisms of anti-body mediated disease:\n  1. activation of complement via the classical pathway → lysis\n  2. antibody acts as opsonin for phagocytes\n  3. ADCC by NK cell\n(A) Opsonization and phagocytosis: Opsonized cell (C3b) binds Fc receptor and C3b receptor on Phagocyte (Complement activation) → Phagocytosis\n(B) Complement- and Fc receptor–mediated inflammation: Fc receptors, Complement activation → Complement by-products (C5a, C3a) → Neutrophil activation → Inflammation and tissue injury"
         title: "تلات طرق للقتل"
-        alt: "A target cell covered in antibodies in the centre. Left: complement activated by the classical pathway, arrow down to lysis. Bottom: antibody acts as opsonin, a phagocyte with Fc and C3b receptors engulfs the cell. Right: an NK cell binds the antibody and kills the cell, labelled ADCC."
-        caption: "1) complement (classical pathway) ← lysis. 2) opsonin ← phagocytosis. 3) NK cell ← ADCC."
-        svg: |
-          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="R03b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
-            </defs>
-            <circle cx="165" cy="95" r="44" class="fg-good"/>
-            <text x="165" y="92" text-anchor="middle" class="t-sm t-b">target</text>
-            <text x="165" y="108" text-anchor="middle" class="t-sm t-b">cell</text>
-            <path d="M165 51v-12M195 64l8-8M209 95h12M135 64l-8-8M121 95h-12M165 139v12" class="fg-ink" stroke-width="2"/>
-            <text x="165" y="22" text-anchor="middle" class="t-sm t-mut">IgG / IgM on surface</text>
-            <text x="8" y="72" class="t-sm t-b">1 complement</text>
-            <text x="8" y="88" class="t-sm t-mut">classical pathway</text>
-            <path d="M50 96v30" class="fg-arrow-bad" marker-end="url(#R03b)"/>
-            <text x="34" y="146" class="t-sm t-bad">lysis</text>
-            <circle cx="290" cy="95" r="22" class="fg-acc"/>
-            <text x="290" y="99" text-anchor="middle" class="t-sm">NK</text>
-            <path d="M266 95h-38" class="fg-arrow-bad" marker-end="url(#R03b)"/>
-            <text x="248" y="134" class="t-sm t-b">3 ADCC</text>
-            <circle cx="165" cy="196" r="20" class="fg-acc"/>
-            <text x="165" y="200" text-anchor="middle" class="t-sm">Mφ</text>
-            <path d="M165 174v-14" class="fg-arrow-bad" marker-end="url(#R03b)"/>
-            <text x="194" y="190" class="t-sm t-b">2 opsonin</text>
-            <text x="194" y="206" class="t-sm t-mut">Fc + C3b receptors</text>
-          </svg>
+        image: { file: rheum/L03-antibody-effectors.webp, book: true }
+        alt: "A target cell covered in antibodies in the centre. Left: 1, activation of complement via the classical pathway, arrow down to lysis. Bottom: 2, antibody acts as opsonin for phagocytes. Right: 3, an NK cell binds the antibodies and kills the cell, labelled ADCC."
+        caption: |
+          رسمة الكتاب في صفحة 62: target cell في النص، مغطّية antibodies، وتلات أرقام:
+
+          - **(1) شمال**: الـ antibody بيشغّل الـ **complement بالـ classical pathway** ← السهم لتحت = ==lysis==.
+          - **(2) تحت**: الـ antibody بيشتغل **opsonin**، يعني علامة تقول للـ phagocytes «كلوني».
+          - **(3) يمين**: الـ **NK cell** بتمسك ديل الـ antibody وتقتل الخلية = ==antibody-dependent cell-mediated cytotoxicity (ADCC)==.
+
+          يعني نفس الـ antibody بيقتل بتلات طرق، وده سبب إن الـ type II بيكسّر خلايا الدم بسرعة.
       - kind: explain
         page: 62
         quote: "Effector mechanisms of anti-body mediated disease."
@@ -671,6 +691,18 @@ lessons:
           - **Inflammation**: antibody على نسيج ← Fc receptors على الـ neutrophils + complement ← ==C5a و C3a== ← neutrophil activation ← inflammation و tissue injury.
 
           التفسير المقبول (مش في الكتاب): ليه الـ C5a و C3a بيعملوا inflammation؟ عشان دول chemotactic: بيندهوا الـ neutrophils للمكان، والـ neutrophils لما مايقدروش يبلعوا نسيج كامل بيرموا إنزيماتهم برا فيأذوا النسيج. يعني الخلية الحرة (زي كرة الدم) بتتبلع، والنسيج الثابت بيتأذي من الالتهاب حواليه.
+      - kind: figure
+        page: 62
+        title: "الـ opsonization والالتهاب"
+        image: { file: rheum/L03-opsonization-inflammation.webp, book: true }
+        alt: "Two panels. A, Opsonization and phagocytosis: an opsonized cell coated with antibody and C3b binds a phagocyte through Fc receptor and C3b receptor, with complement activation below; an arrow leads to a phagocytosed cell inside the phagocyte, labelled phagocytosis. B, Complement- and Fc receptor-mediated inflammation: antibodies on a tissue surface activate complement; complement by-products C5a and C3a and Fc receptors call neutrophils, neutrophil activation leads to inflammation and tissue injury."
+        caption: |
+          رسمة الكتاب في صفحة 62، جزئين:
+
+          - **(A) فوق، opsonization and phagocytosis**: الخلية المتغطّية (شمال) عليها antibody و **C3b**، والـ phagocyte (الأخضر) بيمسكها من الاتنين: **Fc receptor** و **C3b receptor**. السهم يمين ← الخلية بقت جوه الـ phagocyte = **phagocytosis**.
+          - **(B) تحت، complement- and Fc receptor-mediated inflammation**: antibodies قاعدة على **نسيج** (مش خلية حرة)، فبتشغّل الـ complement، وبيطلع ==C5a و C3a== (في النص) ينادوا الـ neutrophils، وكمان الـ Fc receptors بتمسكهم. السهم يمين ← **neutrophil activation** ← ==inflammation and tissue injury==.
+
+          يعني لو الـ antigen على خلية، الخلية بتتاكل. ولو على نسيج ثابت، النسيج نفسه هو اللي بيتحرق بالالتهاب.
       - kind: explain
         remind: [rheum.L03.069]
         page: 63
@@ -705,6 +737,16 @@ lessons:
           - ["Graves", "TSH receptor", "Stimulates without ligand"]
           - ["Myasthenia gravis", "ACh receptor", "Blocks ligand binding"]
         hide: [[0, 2], [1, 2]]
+      - kind: figure
+        page: 63
+        title: "antibody بيفتح أو بيقفل receptor"
+        image: { file: rheum/L03-receptor-antibodies.webp, book: true }
+        alt: "Panel C, Abnormal physiologic responses without cell or tissue injury. Left: antibodies against the TSH receptor on a thyroid epithelial cell make it release thyroid hormones, labelled antibody stimulates receptor without ligand. Right: at a nerve ending releasing acetylcholine onto muscle, antibodies to the acetylcholine receptor sit on the receptors, labelled antibody inhibits binding of ligand to receptor."
+        caption: |
+          رسمة الكتاب في صفحة 63 (**abnormal physiologic responses without cell/tissue injury**)، يعني الخلية مش بتموت:
+
+          - **شمال**: antibody ماسك الـ **TSH receptor** على خلية الـ thyroid، فالخلية بتطلّع thyroid hormones من غير TSH = ==antibody stimulates receptor without ligand== (Graves).
+          - **يمين**: الـ nerve ending بيطلّع acetylcholine (ACh)، بس الـ antibodies قاعدة على الـ **ACh receptors** في العضلة، فالـ ACh مش لاقي مكان = ==antibody inhibits binding of ligand to receptor== (myasthenia gravis).
       - kind: aside
         tone: analogy
         page: 63
@@ -777,32 +819,16 @@ lessons:
         page: 64
         quote: "(B) Immune complex–mediated tissue injury\nCirculating immune complexes → Site of deposition of immune complexes (Blood vessel)\nComplement- and Fc receptor–mediated recruitment and activation of inflammatory cells (Neutrophils)\nNeutrophil granule enzymes, reactive oxygen intermediates → Vasculitis\nThe immune responses of type III HS reactions."
         title: "من الدم لجدار الوعاء"
-        alt: "A blood vessel in cross-section on the left with small antigen-antibody complexes floating in it and some stuck to the wall. An arrow labelled complement and Fc receptor recruitment leads to the right, where the same vessel wall is inflamed, neutrophils sit on the deposits and release enzymes and oxygen radicals, labelled vasculitis."
-        caption: "Complexes بتلزق في الجدار ← complement و Fc ← neutrophils ← vasculitis."
-        svg: |
-          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="R03c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
-            </defs>
-            <circle cx="62" cy="95" r="52" class="fg-thin"/>
-            <circle cx="62" cy="95" r="40" class="fg-box"/>
-            <circle cx="50" cy="80" r="5" class="fg-bad"/>
-            <circle cx="74" cy="96" r="5" class="fg-bad"/>
-            <circle cx="58" cy="126" r="5" class="fg-bad"/>
-            <circle cx="68" cy="128" r="5" class="fg-bad"/>
-            <text x="62" y="170" text-anchor="middle" class="t-sm">immune complexes</text>
-            <path d="M126 95h44" class="fg-arrow-acc" marker-end="url(#R03c)"/>
-            <text x="160" y="80" text-anchor="middle" class="t-sm t-mut">complement</text>
-            <text x="160" y="116" text-anchor="middle" class="t-sm t-mut">Fc receptors</text>
-            <circle cx="268" cy="95" r="52" class="fg-bad"/>
-            <circle cx="268" cy="95" r="40" class="fg-box"/>
-            <circle cx="256" cy="112" r="10" class="fg-acc"/>
-            <circle cx="280" cy="112" r="10" class="fg-acc"/>
-            <circle cx="262" cy="126" r="4" class="fg-bad"/>
-            <circle cx="274" cy="126" r="4" class="fg-bad"/>
-            <text x="268" y="88" text-anchor="middle" class="t-sm">enzymes, ROS</text>
-            <text x="268" y="170" text-anchor="middle" class="t-sm t-bad t-b">vasculitis</text>
-          </svg>
+        image: { file: rheum/L03-immune-complex-injury.webp, book: true }
+        alt: "Panel B, Immune complex-mediated tissue injury. Left: a blood vessel with circulating immune complexes in its lumen and some deposited on the wall, labelled site of deposition of immune complexes. A middle arrow reads complement- and Fc receptor-mediated recruitment and activation of inflammatory cells. Right: the same vessel with neutrophils on the deposits releasing neutrophil granule enzymes and reactive oxygen intermediates, labelled vasculitis."
+        caption: |
+          رسمة الكتاب في صفحة 64:
+
+          - **شمال**: وعاء دموي، فيه **circulating immune complexes** في النص، وتحت كام واحد **اترسّب على الجدار** (site of deposition).
+          - **السهم في النص**: الـ complement والـ Fc receptors بينادوا الخلايا الالتهابية وينشّطوها.
+          - **يمين**: نفس الوعاء، والـ ==neutrophils== قاعدة على الترسيب وبتطلّع granule enzymes و reactive oxygen intermediates ← جدار الوعاء بيتحرق = ==vasculitis==.
+
+          يعني الـ antigen مش على خلية ولا على نسيج، هو متعلّق في الدم، والمكان اللي يترسّب فيه هو اللي بيتأذي.
       - kind: table
         page: 65
         quote: "Localized Type III HS: ICs involved are deposited only where antibody and antigen first encounter one another the ICs do not circulate systemically. Only local tissue damage characterized by pain, redness and swelling = Arthus reaction."
@@ -939,6 +965,19 @@ lessons:
           التفسير المقبول (مش في الكتاب): الميكروب اللي قاعد **جوه** الخلية، الـ antibody مش بيوصله. الحل الوحيد إن الـ macrophage اللي هو جواه **يتنشّط** فيقدر يقتله، وده بالظبط اللي الـ type IV بيعمله: الـ activated macrophages بتبقى **phagocytic ability أعلى** وبتدمّر الميكروب أحسن.
 
           ولو الميكروب صعب يتقتل، الـ macrophages بتتجمع حواليه في **granuloma** تحبسه. الثمن: النسيج اللي حواليه بيتأذي، وده الـ hypersensitivity.
+      - kind: figure
+        page: 66
+        title: "الـ type IV خطوة خطوة"
+        image: { file: rheum/L03-type-iv.webp, book: true }
+        alt: "Flow diagram: an antigen goes to an APC, which goes to a round cell labelled macrophage; an arrow labelled attract and activate leads to an activated macrophage, which leads to granuloma formation."
+        caption: |
+          رسمة الكتاب في صفحة 66، من الشمال لليمين وبعدين لتحت:
+
+          - **antigen** ← **antigen-presenting cell (APC)** ← خلية مدوّرة فوق يمين مكتوب عليها macrophage. الكلام في نفس الصفحة بيقول إن الـ APC بتعرض على الـ **sensitized Th cells**، وهي اللي بتطلّع cytokines تجذب الـ macrophages وتنشّطها.
+          - السهم لتحت مكتوب عليه **attract and activate** ← **macrophage** متنشّط (تحت يمين، مليان حبيبات).
+          - السهم لشمال ← ==granuloma formation==.
+
+          يعني الـ type IV بياخد وقت عشان فيه عرض على خلايا الأول، وفي الآخر الـ macrophage بيحاوط الميكروب في granuloma، زي الـ TB.
       - kind: figure
         page: 65
         quote: "In contrast to to type I, II and III which are antibody mediated type IV HS results primarily from the actions of effector T cells and macrophages."

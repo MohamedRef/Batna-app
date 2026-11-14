@@ -110,6 +110,8 @@ pub struct LessonRow {
     pub practice_uncited: Vec<String>,
     pub explains: usize,
     pub explains_no_reason: usize,
+    /// Its `figure` steps (rule 10: at least one, #981).
+    pub figures: usize,
 }
 
 impl LessonRow {
@@ -197,6 +199,7 @@ fn lesson_row(l: &Lesson, lecture: &Lecture) -> LessonRow {
         practice_uncited,
         explains: explains.len(),
         explains_no_reason: explains.iter().filter(|t| !has_reason(t)).count(),
+        figures: l.steps.iter().filter(|s| matches!(s.body, StepBody::Figure { .. })).count(),
     }
 }
 
@@ -265,6 +268,9 @@ pub fn problems(row: &LectureRow, skips: &Skips) -> (Vec<String>, Vec<String>) {
                 l.id,
                 l.practice_uncited.join(", ")
             ));
+        }
+        if l.figures == 0 {
+            warnings.push(format!("{}: no figure step (LESSONS.md rule 10, #981)", l.id));
         }
         match (l.is_wide(), &l.wide_ok) {
             (true, None) => warnings.push(format!(
@@ -374,7 +380,7 @@ pub fn summary(rows: &[LectureRow]) -> String {
         by.entry(batna_core::program::course_of(&r.id).to_string()).or_default().push(r);
     }
     let mut out = String::from(
-        "### Lesson coverage (#833)\n\n| Course | Lessons | Book pages | Pages no step cites | Skipped | Over-wide `pages` | Wide lessons | Practice cards off the lesson's pages | Words per page | Explain steps with no reason |\n|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|\n",
+        "### Lesson coverage (#833)\n\n| Course | Lessons | Book pages | Pages no step cites | Skipped | Over-wide `pages` | Wide lessons | Practice cards off the lesson's pages | Words per page | Explain steps with no reason | No figure |\n|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|\n",
     );
     for (c, rs) in by {
         let lessons: Vec<&LessonRow> = rs.iter().flat_map(|r| r.lessons.iter()).collect();
@@ -391,10 +397,11 @@ pub fn summary(rows: &[LectureRow]) -> String {
             (a + x, b + y)
         });
         out.push_str(&format!(
-            "| {c} | {} | {pages} | {uncited} | {skipped} | {over} | {wide} | {off} | {} | {}% |\n",
+            "| {c} | {} | {pages} | {uncited} | {skipped} | {over} | {wide} | {off} | {} | {}% | {} |\n",
             lessons.len(),
             words / pages.max(1) as usize,
-            (nr * 100).checked_div(ex).unwrap_or(0)
+            (nr * 100).checked_div(ex).unwrap_or(0),
+            lessons.iter().filter(|l| l.figures == 0).count()
         ));
     }
     out
@@ -403,14 +410,14 @@ pub fn summary(rows: &[LectureRow]) -> String {
 /// One TSV row per lesson, then one per lecture.
 pub fn report<'a>(rows: impl Iterator<Item = &'a LectureRow>) -> String {
     let mut out = String::from(
-        "lecture\tlesson\tpages\tcited\ttopics\tcards\tsteps\twords\tpractice_off_pages\texplain_no_reason\tlecture_words_per_page\tlecture_uncited_pages\n",
+        "lecture\tlesson\tpages\tcited\ttopics\tcards\tsteps\twords\tpractice_off_pages\texplain_no_reason\tlecture_words_per_page\tlecture_uncited_pages\tfigures\n",
     );
     for r in rows {
         let uncited = r.uncited.iter().map(|(p, _)| p.to_string()).collect::<Vec<_>>().join(",");
         for l in &r.lessons {
             let cited = l.cited.map_or("-".to_string(), |[a, b]| format!("{a}-{b}"));
             out.push_str(&format!(
-                "{}\t{}\t{}-{}\t{cited}\t{}\t{}\t{}\t{}\t{}\t{}/{}\t{}\t{uncited}\n",
+                "{}\t{}\t{}-{}\t{cited}\t{}\t{}\t{}\t{}\t{}\t{}/{}\t{}\t{uncited}\t{}\n",
                 r.id,
                 l.id,
                 l.pages[0],
@@ -423,6 +430,7 @@ pub fn report<'a>(rows: impl Iterator<Item = &'a LectureRow>) -> String {
                 l.explains_no_reason,
                 l.explains,
                 r.words_per_page(),
+                l.figures,
             ));
         }
     }

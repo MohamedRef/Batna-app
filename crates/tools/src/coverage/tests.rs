@@ -4,7 +4,20 @@
 use super::*;
 use crate::testkit::{self, LECTURE, LESSON};
 
+/// The test lesson with a figure step, so only the rule under test speaks.
+fn with_figure(lesson: &str) -> String {
+    lesson.replacen(
+        "    recap:",
+        "      - kind: figure\n        page: 1\n        svg: \"<svg viewBox='0 0 10 10'></svg>\"\n        caption: \"الكبد\"\n        alt: \"A liver\"\n    recap:",
+        1,
+    )
+}
+
 fn parsed(lesson: &str) -> (Lecture, LessonFile) {
+    parsed_as_is(&with_figure(lesson))
+}
+
+fn parsed_as_is(lesson: &str) -> (Lecture, LessonFile) {
     (serde_yaml_ng::from_str(LECTURE).unwrap(), serde_yaml_ng::from_str(lesson).unwrap())
 }
 
@@ -57,7 +70,7 @@ fn a_practice_card_from_a_page_the_lesson_never_cites_warns() {
         LECTURE.replace("src: { page: 1, quote: \"The hepatic", "src: { page: 2, quote: \"The hepatic");
     let lesson = LESSON.replace("practice: [hb.L01.001]", "practice: [hb.L01.001, hb.L01.002]");
     let lecture: Lecture = serde_yaml_ng::from_str(&lecture).unwrap();
-    let file: LessonFile = serde_yaml_ng::from_str(&lesson).unwrap();
+    let file: LessonFile = serde_yaml_ng::from_str(&with_figure(&lesson)).unwrap();
     let skips: Skips = serde_yaml_ng::from_str("hb.L01: { 2: shown elsewhere }").unwrap();
     let (e, w) = problems(&lecture_row([1, 2], &lecture, &file, &skips), &skips);
     assert!(e.is_empty(), "{e:?}");
@@ -126,6 +139,19 @@ fn a_lesson_wide_on_purpose_needs_a_reason_and_stops_warning() {
 }
 
 #[test]
+fn a_lesson_without_a_figure_warns() {
+    let (lecture, file) = parsed_as_is(LESSON);
+    let r = lecture_row([1, 1], &lecture, &file, &Skips::new());
+    assert_eq!(r.lessons[0].figures, 0);
+    assert_eq!(
+        problems(&r, &Skips::new()).1,
+        vec!["hb.L01.lesson1: no figure step (LESSONS.md rule 10, #981)"]
+    );
+    let (lecture, file) = parsed(LESSON);
+    assert_eq!(lecture_row([1, 1], &lecture, &file, &Skips::new()).lessons[0].figures, 1);
+}
+
+#[test]
 fn depth_counts_words_and_explain_steps_without_a_reason() {
     let (lecture, file) = parsed(LESSON);
     let row = lecture_row([1, 1], &lecture, &file, &Skips::new());
@@ -141,7 +167,8 @@ fn validate_fails_on_an_over_wide_lesson_and_reports_the_tree() {
     let dir = testkit::tree();
     let root = dir.path();
     let ok = crate::validate_all(root).unwrap();
-    assert!(ok.contains("lesson coverage: 1 warning(s)"), "{ok}");
+    // The uncited page and the missing figure.
+    assert!(ok.contains("lesson coverage: 2 warning(s)"), "{ok}");
     testkit::write(root, "content/lessons/hb/L01.yaml", &LESSON.replace("pages: [1, 1]", "pages: [1, 3]"));
     let err = crate::validate_all(root).unwrap_err();
     assert!(err.iter().any(|p| p.starts_with("lessons coverage: hb.L01.lesson1: pages 1–3")), "{err:?}");

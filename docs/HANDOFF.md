@@ -135,6 +135,7 @@ jobs are periodic or manual. Never re-add PR/push triggers to heavy workflows.
 | `coverage.yml` | every 4 h on main (skips if unchanged) + manual | line-coverage floor (94%). Red run → fix in its own PR. |
 | `batna-android-preview.yml` | every 4 h (skips if main unchanged) + manual | signed preview APK → `batna-preview` release + feed |
 | `settings-browser.yml`, `screens-browser.yml` | every 4 h + manual; PR only when the test file changes | Playwright checks of Settings / screens on the web build |
+| `lesson-figures.yml` | PRs that touch `content/lessons/**` (+ manual) | the `figures` group of `screens-browser.cjs` alone (`--figures-only`): no drawn label may run past its picture at phone width (#980). Every new or changed figure passes it before merging |
 | `android-webview-regression.yml` | `android/**` changes + manual | Kotlin/JVM tests |
 | `mac.yml` | nightly 02:17 UTC + manual (+ once when `mac.yml` itself changes on main), **never on PRs** | macOS build; manual runs on main also upload a signed `Batna-Mac-preview-<sha>` artifact (§ 10). Don't wait on it to merge. |
 | `cloud-e2e-regression.yml` | PR only when `crates/server/tests/e2e.mjs` or this file changes + manual | full local Worker e2e (fake Google, two devices) |
@@ -678,6 +679,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-14: lesson browser check green again (#980): three clipped figure labels fixed (dm.L02, dm.L08, neph.L07); `screens-browser.cjs` now runs every check group after the layout pass and reports all failures together; new `lesson-figures.yml` runs the figure-label check on every PR that touches lessons.
 - 2026-11-14: wide lessons (#828): width now counts the pages a lesson's steps cite (research: slides, limit 16), and `content/lesson-wide.yaml` lists 13 lessons wide on purpose with their reasons; res.L05.lesson5 split (retrospective cohort → lesson7), res.L12.lesson6 and res.L03.lesson4 topics corrected. Wide-lesson warnings 140 → 0.
 - 2026-11-13: longest-option cue, nephrology (#816): 43 distractors made as long as their keys, every neph lecture at or under 25%; bank share 26.3% → 24.4%, ceiling 25%. Hepatology (32%) and geriatrics (33%) were already lower and are left for now.
 - 2026-11-13: longest-option cue, rheumatology (#816): 47 distractors made as long as their keys, every rheum lecture but L03 (27%) at or under 25%; bank share 28.4% → 26.3%, ceiling 27%.

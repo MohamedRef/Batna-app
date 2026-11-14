@@ -1,0 +1,50 @@
+name: Lesson figure labels
+
+# #980 / #983: every new or changed lesson figure passes the label check
+# before it merges. This is the `figures` group of screens-browser.yml on its
+# own: it renders every drawn lesson figure and fails when a label runs past
+# the picture's edge at phone width. It runs only on pull requests that touch
+# lessons, and takes a few minutes with a warm cache.
+on:
+  pull_request:
+    paths:
+      - content/lessons/**
+      - crates/app/src/learn/learn.css
+      - crates/app/src/learn/browser.rs
+      - crates/app/tests/screens-browser.cjs
+      - .github/workflows/lesson-figures.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lesson-figures-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  figures:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: settings-browser
+          save-if: false
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Render every drawn lesson figure
+        env:
+          APP_BROWSER_FIXTURES: ${{ github.workspace }}/target/screen-fixtures
+        run: cargo test -p batna-app --no-default-features --locked export_screen_fixtures_figures -- --ignored
+      - name: Point apt at an Ubuntu mirror that resolves
+        run: scripts/ci-apt-install.sh
+      - name: Install the pinned test browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/browser-tools" --no-audit --no-fund playwright@1.62.1
+          "$RUNNER_TEMP/browser-tools/node_modules/.bin/playwright" install --with-deps chromium
+      - name: No label runs past its picture
+        run: NODE_PATH="$RUNNER_TEMP/browser-tools/node_modules" node crates/app/tests/screens-browser.cjs --figures-only target/screen-fixtures

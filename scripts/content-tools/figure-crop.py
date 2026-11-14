@@ -17,7 +17,7 @@ Several `--image` values crop the box around all of them (a figure in panels).
 
 The page is rendered at 300 dpi from the book PDF in the private sources
 (BATNA_SOURCES), cropped, scaled to at most 800 px wide and saved as WebP
-(quality lowered until it is under 150 KB). Look at the result before using
+(quality 50, lowered until it is under 60 KB). Look at the result before using
 it: the crop has the figure's panel letters and arrows, not the printed
 caption under it.
 """
@@ -41,7 +41,7 @@ PDF = {
     "geri": "book/internal-medicine-pg-part4-geriatrics.pdf",
     "neph": "book/internal-medicine-pg-part5-nephrology.pdf",
 }
-MAX_W, MAX_KB = 800, 150
+MAX_W, MAX_KB = 800, 60  # Mohamed 2026-11-14: as small as it stays readable
 
 
 def pdf_page(course, printed):
@@ -110,7 +110,7 @@ def main():
     crop = im.crop((round(box[0] * w), round(box[1] * h), round(box[2] * w), round(box[3] * h)))
     if crop.width > MAX_W:
         crop = crop.resize((MAX_W, round(crop.height * MAX_W / crop.width)), resample=3)
-    for q in (82, 75, 68, 60, 52, 45):
+    for q in (50, 44, 38, 32):
         buf = io.BytesIO()
         crop.save(buf, "WEBP", quality=q, method=6)
         if buf.tell() <= MAX_KB * 1024:

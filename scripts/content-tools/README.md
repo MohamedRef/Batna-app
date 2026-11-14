@@ -16,7 +16,8 @@ Run with `python3 -I` from the repo root; they need `pyyaml`.
 | `fixcuts.py <repo> <course> <cuts.tsv>` | Widens the listed quotes to the whole sentence. |
 | `abbrfix.py <repo> <course>...` | Spells out each abbreviation at its first mention per lecture (text/why/caption) from `content/glossary.yaml`. It can hit a quote line first; revert those (validate flags changed quotes). |
 | `figure-candidates.py <lecture> [--sheets DIR]` | Worklist for a lecture's book-figure inventory (#983): per page, embedded pictures and "Figure N" words, plus contact sheets of the page images to look through. See docs/LESSONS.md § Book figures. |
-| `figure-crop.py <course> <page> [out.webp] [--list] [--image N] [--box x0,y0,x1,y1]` | Crops one book figure from a 300 dpi render of the printed page into a lesson WebP (≤800 px wide, ≤150 KB). `--list` prints the embedded pictures' boxes. |
+| `figure-crop.py <course> <page> [out.webp] [--list] [--image N] [--box x0,y0,x1,y1]` | Crops one book figure from a 300 dpi render of the printed page into a lesson WebP (≤800 px wide, quality 50, aim ≤60 KB). `--list` prints the embedded pictures' boxes. |
+| `shrink-images.py [files...]` | Re-encodes lesson WebP images at quality 50 and keeps the result only when it is at least 15% smaller (default: every `content/lessons/img/**/*.webp`). |
 | `pagerefs_lib.py` | Book page parsing shared by the page-reference audit. |
 
 After any of them: `cargo run -q -p batna-tools -- validate`, review the diff by

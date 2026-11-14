@@ -205,6 +205,33 @@ lessons:
           - ==Allodynia==: حساسية لـ **normal intestinal function** نفسها، يعني الحركة الطبيعية بتوجع.
 
           ولما تنفخ البالونة كذا مرة، الألم بيزيد مؤقتًا عند الأصحاء، وبيطوّل أكتر عند مرضى الـ FGIDs.
+      - kind: figure
+        page: 81
+        quote: "These patients have a lower pain threshold with balloon distension of the bowel (visceral hyperalgesia), or they have increased sensitivity even to normal intestinal function (allodynia)."
+        title: "البالونة في المصران: إمتى توجع؟"
+        alt: "A chart of pain against balloon volume in the bowel. A dashed pain threshold line. The healthy curve crosses the threshold only at a large volume. In visceral hyperalgesia the curve crosses it at a smaller volume, a lower threshold. In allodynia even the normal range of intestinal function, shaded at the left, already hurts."
+        caption: |
+          - **الخط الأخضر (سليم)**: الألم بييجي بس مع بالونة **كبيرة**.
+          - **البرتقاني (visceral hyperalgesia)**: نفس البالونة بتوجع ==بدري== لأن الـ threshold واطي.
+          - **الأحمر (allodynia)**: حتى الـ ==normal intestinal function== (المنطقة المظللة) بتوجع.
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="70" height="180" class="fg-thin"/>
+            <text x="75" y="36" text-anchor="middle" class="t-sm t-mut">Normal</text>
+            <text x="75" y="50" text-anchor="middle" class="t-sm t-mut">gut work</text>
+            <path d="M40 10V200H320" class="fg-ink"/>
+            <text x="30" y="110" text-anchor="middle" class="t-sm" transform="rotate(-90 30 110)">Pain</text>
+            <text x="320" y="218" text-anchor="end" class="t-sm">Balloon volume →</text>
+            <path d="M40 110H320" class="fg-thin" stroke-dasharray="6 4"/>
+            <text x="234" y="126" text-anchor="end" class="t-sm t-mut">Pain threshold</text>
+            <path d="M40 195C150 190 220 150 300 60" class="fg-arrow" stroke-width="3" fill="none"/>
+            <path d="M40 195C90 185 140 140 190 50" class="fg-arrow-acc" stroke-width="3" fill="none"/>
+            <path d="M40 160C70 120 90 80 110 40" class="fg-arrow-bad" stroke-width="3" fill="none"/>
+            <text x="250" y="160" class="t-sm t-b">Healthy</text>
+            <text x="150" y="160" class="t-sm t-b t-acc">Hyperalgesia</text>
+            <text x="118" y="70" class="t-sm t-b t-bad">Allodynia</text>
+            <text x="165" y="240" text-anchor="middle" class="t-sm t-mut">Lower threshold = visceral hypersensitivity</text>
+          </svg>
       - kind: explain
         page: 81
         quote: "These motor responses only partially are correlated with symptoms, and are not sufficient to explain reports of chronic or recurrent abdominal pain."
@@ -1683,6 +1710,43 @@ lessons:
           - الـ H. pylori **مش سبب رئيسي** للـ nausea، بس علاجه لو موجود مش غلط.
 
           العلاج: ابدأ بـ ==domperidone== (antinausea + prokinetic). Metoclopramide بديل بس الـ side effects بتحدّه. Tricyclic antidepressants (TCAs)، prochlorperazine أو promethazine، والـ ondansetron غالي فبيتساب للـ refractory.
+      - kind: figure
+        page: 113
+        quote: "It is particularly important to exclude gastroesophageal reflux in this setting, which is easily treated but may be overlooked."
+        title: "قبل ما تسمّيه CIN"
+        alt: "Flowchart for chronic nausea several times a week. Three exclusions in a row: GERD by pH testing, even without heartburn; structural disease by EGD; gastroparesis by gastric scintigraphy. If all are normal: chronic idiopathic nausea, and treatment starts with domperidone."
+        caption: |
+          - **تلات حاجات تستبعدها**: الـ ==GERD== بالـ pH testing (حتى من غير heartburn)، والـ structural بالـ EGD، والـ gastroparesis بالـ scintigraphy.
+          - **لو كله سليم**: ده **CIN**، وتبدأ بـ ==domperidone==.
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03n1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="40" y="8" width="250" height="40" rx="6" class="fg-ink"/>
+            <text x="165" y="26" text-anchor="middle" class="t-sm t-b">Chronic nausea</text>
+            <text x="165" y="41" text-anchor="middle" class="t-sm">several times a week</text>
+            <path d="M165 48v12" class="fg-arrow" marker-end="url(#L03n1)"/>
+            <text x="165" y="76" text-anchor="middle" class="t-sm t-mut">Exclude</text>
+            <rect x="8" y="84" width="100" height="62" rx="6" class="fg-bad"/>
+            <text x="58" y="104" text-anchor="middle" class="t-sm t-b">GERD</text>
+            <text x="58" y="120" text-anchor="middle" class="t-sm">pH testing</text>
+            <text x="58" y="136" text-anchor="middle" class="t-sm t-mut">no heartburn</text>
+            <rect x="115" y="84" width="100" height="62" rx="6" class="fg-box"/>
+            <text x="165" y="104" text-anchor="middle" class="t-sm t-b">Structural</text>
+            <text x="165" y="120" text-anchor="middle" class="t-sm">EGD</text>
+            <rect x="222" y="84" width="100" height="62" rx="6" class="fg-box"/>
+            <text x="272" y="104" text-anchor="middle" class="t-sm t-b">Gastroparesis</text>
+            <text x="272" y="120" text-anchor="middle" class="t-sm">Scintigraphy</text>
+            <path d="M165 146v22" class="fg-arrow" marker-end="url(#L03n1)"/>
+            <text x="175" y="162" class="t-sm t-mut">all normal</text>
+            <rect x="40" y="172" width="250" height="40" rx="6" class="fg-acc"/>
+            <text x="165" y="197" text-anchor="middle" class="t-sm t-b">Chronic idiopathic nausea (CIN)</text>
+            <path d="M165 212v14" class="fg-arrow" marker-end="url(#L03n1)"/>
+            <rect x="40" y="230" width="250" height="50" rx="6" class="fg-good"/>
+            <text x="165" y="250" text-anchor="middle" class="t-sm t-b">Start with domperidone</text>
+            <text x="165" y="268" text-anchor="middle" class="t-sm">antinausea + prokinetic</text>
+          </svg>
       - kind: check
         page: 113
         quote: "A prokinetic drug such as domperidone is worth trying initially; it has antinausea as well as prokinetic properties."
@@ -2114,6 +2178,40 @@ lessons:
           ودايمًا **CBT** أو **hypnotherapy** كـ adjunct. وجديد: **ramosetron** و **ondansetron** في IBS-D (الـ ramosetron بيعمل constipation في حوالي 10%).
 
           (الـ pharmacology دي عامة، والكتاب بيدّي الـ ladder من غير ما يشرح السبب.)
+      - kind: figure
+        page: 124
+        quote: "Diarrhoea-predominant\n| | 1st | 2nd |\n|---|---|---|\n| Without pain or bloating | lifestyle and dietary modifications + antidiarrheals; 1st options: loperamide/colestyramine; 2nd options: alosetron/eluxadoline | |\n| With pain or bloating | lifestyle and dietary modifications; antidiarrheals 1st options: loperamide/colestyramine; 2nd options: alosetron/eluxadoline/rifaximin; antispasmodics Dicycloverine/hyoscyamine/peppermint oil | lifestyle and dietary modifications; tricyclic antidepressants Desipramine/amitriptyline/doxepin; adjunct cognitive behaviour therapy (CBT) or hypnotherapy |"
+        title: "الأثر الجانبي اللي بقى ميزة"
+        alt: "A gut transit dial from slow to fast. Both tricyclic antidepressants and SSRIs calm visceral pain. TCAs, being anticholinergic, push transit toward slow and constipation, which suits IBS-D. SSRIs push transit a little toward fast, which suits IBS-C."
+        caption: |
+          - **فوق**: الاتنين بيهدّوا الـ **visceral pain**.
+          - **الشمال**: الـ ==TCA== anticholinergic بيبطّأ الـ transit ← ينفع في **IBS-D** (desipramine، amitriptyline، doxepin في الكتاب).
+          - **اليمين**: الـ ==SSRI== بيسرّعه شوية ← ينفع في **IBS-C** (citalopram، paroxetine).
+          - السبب pharmacology عامة، والكتاب بيدّي الـ ladder بس.
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03t1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="60" y="8" width="210" height="30" rx="6" class="fg-good"/>
+            <text x="165" y="28" text-anchor="middle" class="t-sm t-b">Both calm visceral pain</text>
+            <rect x="20" y="70" width="290" height="16" rx="8" class="fg-thin"/>
+            <text x="20" y="62" class="t-sm t-mut">Slow transit</text>
+            <text x="310" y="62" text-anchor="end" class="t-sm t-mut">Fast transit</text>
+            <path d="M165 100H50" class="fg-arrow" marker-end="url(#L03t1)" stroke-width="3"/>
+            <path d="M165 100H260" class="fg-arrow" marker-end="url(#L03t1)" stroke-width="3"/>
+            <circle cx="165" cy="100" r="5" class="fg-dot-acc"/>
+            <rect x="8" y="118" width="150" height="92" rx="6" class="fg-acc"/>
+            <text x="83" y="138" text-anchor="middle" class="t-sm t-b">TCA</text>
+            <text x="83" y="156" text-anchor="middle" class="t-sm">Anticholinergic</text>
+            <text x="83" y="172" text-anchor="middle" class="t-sm">Slows, constipates</text>
+            <text x="83" y="196" text-anchor="middle" class="t-b t-acc">IBS-D</text>
+            <rect x="172" y="118" width="150" height="92" rx="6" class="fg-acc"/>
+            <text x="247" y="138" text-anchor="middle" class="t-sm t-b">SSRI</text>
+            <text x="247" y="156" text-anchor="middle" class="t-sm">Speeds transit</text>
+            <text x="247" y="172" text-anchor="middle" class="t-sm">a little</text>
+            <text x="247" y="196" text-anchor="middle" class="t-b t-acc">IBS-C</text>
+          </svg>
       - kind: explain
         page: 124
         quote: "alternating constipation and diarrhoea"

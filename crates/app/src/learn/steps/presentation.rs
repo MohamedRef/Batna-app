@@ -5,7 +5,7 @@ use super::*;
 /// Pinch, zoom buttons and double-tap in the full-screen figure viewer.
 pub(super) const VIEWER_JS: &str = include_str!("../viewer.js");
 #[component]
-pub(super) fn Figure(
+pub(crate) fn Figure(
     title: Option<String>,
     svg: String,
     image: Option<Picture>,

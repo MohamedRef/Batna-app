@@ -1243,6 +1243,61 @@ lessons:
       - Two way classification
     why: 'عدّ المتغيرات والـ groups: متغير واحد = simple؛ groups بمتغير واحد = comparing؛ علاقة فئات = association؛ متغيرين
       كميين لـ group واحد = two way.'
+  - kind: figure
+    page: 63
+    quote: "One group classified into 2 QUANTITATIVE related variables to find correlation between these variables"
+    title: "اسم الجدول في سؤالين"
+    alt: "A decision tree. How many variables? One variable: how many groups? One group gives a simple frequency table; two or more groups give a comparing table, using percent. Two variables: what kind? Categories give a table of association, which is 2 by 2 when each has 2 levels and c by r when more than 2; quantitative variables in one group give a two way classification table. Footer examples: blood groups, LBW by education, smoking by cancer, drugs by outcome, weight by height."
+    caption: |
+      نفس قاعدة الـ match، مرسومة شجرة تمشي فيها من فوق:
+
+      1. ==عدّ المتغيرات==: واحد ولا اتنين؟
+      2. **متغير واحد**: group واحد = **simple**؛ أكتر من group = **comparing** (وقارن بالـ %).
+      3. **متغيرين**: فئات = **association**، وتبقى ==2 × 2== لو كل واحد ليه احتمالين و**c × r** لو أكتر؛ متغيرين ==كميين== لـ group واحد = **two way** (الوزن والطول، slide 63).
+
+      السطر الرمادي تحت هو أمثلة الدرس بنفس ترتيب الصناديق الخمسة. ومتنساش في السؤال تكتب نوع المتغير كمان.
+    svg: |
+      <svg viewBox="0 0 330 340" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="L15t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+        <rect x="85" y="6" width="160" height="30" rx="8" class="fg-box"/>
+        <text x="165" y="26" text-anchor="middle" class="t-sm t-b">How many variables?</text>
+        <path d="M120 38L70 64" class="fg-arrow" marker-end="url(#L15t)"/>
+        <path d="M210 38L260 64" class="fg-arrow" marker-end="url(#L15t)"/>
+        <text x="74" y="52" text-anchor="end" class="t-sm t-mut">one</text>
+        <text x="256" y="52" class="t-sm t-mut">two</text>
+        <rect x="8" y="68" width="150" height="30" rx="8" class="fg-box"/>
+        <text x="83" y="88" text-anchor="middle" class="t-sm t-b">How many groups?</text>
+        <rect x="172" y="68" width="150" height="30" rx="8" class="fg-box"/>
+        <text x="247" y="88" text-anchor="middle" class="t-sm t-b">What kind?</text>
+        <path d="M50 100V128" class="fg-arrow" marker-end="url(#L15t)"/>
+        <path d="M116 100V128" class="fg-arrow" marker-end="url(#L15t)"/>
+        <text x="44" y="118" text-anchor="end" class="t-sm t-mut">1</text>
+        <text x="122" y="118" class="t-sm t-mut">2+</text>
+        <rect x="8" y="132" width="72" height="56" rx="8" class="fg-acc"/>
+        <text x="44" y="155" text-anchor="middle" class="t-sm t-b">Simple</text>
+        <text x="44" y="173" text-anchor="middle" class="t-sm">frequency</text>
+        <rect x="84" y="132" width="74" height="56" rx="8" class="fg-acc"/>
+        <text x="121" y="155" text-anchor="middle" class="t-sm t-b">Comparing</text>
+        <text x="121" y="173" text-anchor="middle" class="t-sm">use %</text>
+        <path d="M210 100V128" class="fg-arrow" marker-end="url(#L15t)"/>
+        <path d="M286 100V128" class="fg-arrow" marker-end="url(#L15t)"/>
+        <rect x="172" y="132" width="76" height="56" rx="8" class="fg-acc"/>
+        <text x="210" y="151" text-anchor="middle" class="t-sm t-b">Association</text>
+        <text x="210" y="169" text-anchor="middle" class="t-sm">categories</text>
+        <rect x="252" y="132" width="70" height="56" rx="8" class="fg-acc"/>
+        <text x="287" y="151" text-anchor="middle" class="t-sm t-b">Two way</text>
+        <text x="287" y="169" text-anchor="middle" class="t-sm">quantitative</text>
+        <path d="M190 190L150 226" class="fg-arrow" marker-end="url(#L15t)"/>
+        <path d="M230 190L262 226" class="fg-arrow" marker-end="url(#L15t)"/>
+        <rect x="80" y="230" width="120" height="56" rx="8" class="fg-box"/>
+        <text x="140" y="252" text-anchor="middle" class="t-sm t-b">2 × 2</text>
+        <text x="140" y="270" text-anchor="middle" class="t-sm">2 levels each</text>
+        <rect x="206" y="230" width="116" height="56" rx="8" class="fg-box"/>
+        <text x="264" y="252" text-anchor="middle" class="t-sm t-b">c × r</text>
+        <text x="264" y="270" text-anchor="middle" class="t-sm">more than 2</text>
+        <text x="10" y="314" class="t-sm t-mut">blood groups · LBW by education ·</text>
+        <text x="10" y="332" class="t-sm t-mut">smoking × cancer · drugs × outcome · wt × ht</text>
+      </svg>
   - kind: check
     page: 64
     quote: |-
@@ -1881,6 +1936,55 @@ lessons:
       العيوب: ماينفعش مع الـ nominal، مش سهل في التحليل الإحصائي، وبياخد قيمة أو اتنين بس مش كل القيم.
 
       ليه مابيتأثرش بالـ outlier؟ لأنه بيبص على الترتيب، فلو أكبر قيمة كبرت أكتر، اللي في النص لسه في النص. التفسير المقبول (مش في الكتاب).
+  - kind: figure
+    page: 111
+    quote: "Not affected by extreme values."
+    title: "قيمة واحدة متطرفة: مين يتحرك؟"
+    alt: "Two dot plots on a 0 to 60 scale. Ages 5, 7, 8, 10, 12: median 8 and mean 8.4 sit together. Same values but 12 becomes 60, shown in red: the median stays at 8 while the mean moves to 18. Footer: one outlier pulls the mean, not the median."
+    caption: |
+      مثال الـ median بتاع slide 108 (الأعمار 5، 7، 8، 10، 12) على خط أرقام:
+
+      - **فوق**: الـ ==median 8== والـ mean 8.4 تقريبًا فوق بعض، لأن القيم متوزعة بشكل متوازن.
+      - **تحت**: غيّرنا قيمة واحدة بس (12 بقت 60، النقطة الحمرا). الـ median ==لسه 8==، لأنه بيبص على الترتيب واللي في النص لسه في النص. الـ ==mean قفز لـ 18==، لأن كل قيمة داخلة في المجموع.
+
+      ده بالظبط «not affected by extreme values» اللي في slide 111، وعيب «affected by outliers» بتاع الـ mean. القيمة 60 مثال للشرح.
+    svg: |
+      <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+        <text x="10" y="18" class="t-sm t-b">Ages 5, 7, 8, 10, 12</text>
+        <circle cx="43" cy="60" r="4.5" class="fg-dot-good"/>
+        <circle cx="52" cy="60" r="4.5" class="fg-dot-good"/>
+        <circle cx="57" cy="60" r="4.5" class="fg-dot-good"/>
+        <circle cx="66" cy="60" r="4.5" class="fg-dot-good"/>
+        <circle cx="75" cy="60" r="4.5" class="fg-dot-good"/>
+        <path d="M57 48V72" class="fg-arrow" stroke-width="3"/><text x="57" y="38" text-anchor="middle" class="t-sm t-b">median 8</text>
+        <path d="M59 48V72" class="fg-arrow-acc" stroke-width="3"/>
+        <text x="120" y="66" class="t-sm t-acc t-b">mean 8.4</text>
+        <line x1="18" y1="74" x2="316" y2="74" class="fg-thin"/>
+        <text x="20" y="90" text-anchor="middle" class="t-sm t-mut">0</text>
+        <text x="66" y="90" text-anchor="middle" class="t-sm t-mut">10</text>
+        <text x="112" y="90" text-anchor="middle" class="t-sm t-mut">20</text>
+        <text x="158" y="90" text-anchor="middle" class="t-sm t-mut">30</text>
+        <text x="204" y="90" text-anchor="middle" class="t-sm t-mut">40</text>
+        <text x="250" y="90" text-anchor="middle" class="t-sm t-mut">50</text>
+        <text x="296" y="90" text-anchor="middle" class="t-sm t-mut">60</text>
+        <text x="10" y="138" class="t-sm t-b">Same, but 12 becomes 60</text>
+        <circle cx="43" cy="180" r="4.5" class="fg-dot-good"/>
+        <circle cx="52" cy="180" r="4.5" class="fg-dot-good"/>
+        <circle cx="57" cy="180" r="4.5" class="fg-dot-good"/>
+        <circle cx="66" cy="180" r="4.5" class="fg-dot-good"/>
+        <circle cx="296" cy="180" r="4.5" class="fg-dot-bad"/>
+        <path d="M57 168V192" class="fg-arrow" stroke-width="3"/><text x="57" y="158" text-anchor="middle" class="t-sm t-b">median 8</text>
+        <path d="M103 168V192" class="fg-arrow-acc" stroke-width="3"/><text x="110" y="158" class="t-sm t-b t-acc">mean 18</text>
+        <line x1="18" y1="194" x2="316" y2="194" class="fg-thin"/>
+        <text x="20" y="210" text-anchor="middle" class="t-sm t-mut">0</text>
+        <text x="66" y="210" text-anchor="middle" class="t-sm t-mut">10</text>
+        <text x="112" y="210" text-anchor="middle" class="t-sm t-mut">20</text>
+        <text x="158" y="210" text-anchor="middle" class="t-sm t-mut">30</text>
+        <text x="204" y="210" text-anchor="middle" class="t-sm t-mut">40</text>
+        <text x="250" y="210" text-anchor="middle" class="t-sm t-mut">50</text>
+        <text x="296" y="210" text-anchor="middle" class="t-sm t-mut">60</text>
+        <text x="10" y="258" class="t-sm">one outlier pulls the mean, not the median</text>
+      </svg>
   - kind: try
     items: [res.L15.086, res.L15.088, res.L15.091]
   recap:

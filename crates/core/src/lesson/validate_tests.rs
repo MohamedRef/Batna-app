@@ -350,3 +350,35 @@ fn remind_lists_parse_stay_unique_and_skip_question_steps() {
         ["remind goes on an explain, figure, aside, mnemonic or open table step, not a order step"]
     );
 }
+
+#[test]
+fn an_item_picture_is_one_of_the_lecture_lesson_figures() {
+    let mut lec = lecture();
+    lec.items[0].image = Some(Picture { file: "hb/a.webp".into(), book: true, ..Picture::default() });
+    let mut f = file();
+    let msgs = |f: &LessonFile, lec: &Lecture| -> Vec<String> {
+        let cx = LessonContext { lecture: lec, approved: None, raw_step_keys: Vec::new() };
+        validate(f, &cx).into_iter().map(|p| format!("{}: {}", p.at, p.message)).collect()
+    };
+    assert_eq!(msgs(&f, &lec), ["hb.L01.001: image hb/a.webp is not a picture in hb.L01's lessons"]);
+    f.lessons[0].steps.push(Step {
+        body: StepBody::Figure {
+            title: None,
+            svg: String::new(),
+            image: Some(Picture { file: "hb/a.webp".into(), book: true, ..Picture::default() }),
+            caption: "c".into(),
+            alt: "a".into(),
+            marks: vec![],
+        },
+        page: Some(1),
+        quote: None,
+        remind: vec![],
+    });
+    assert!(!msgs(&f, &lec).iter().any(|m| m.starts_with("hb.L01.001")), "{:?}", msgs(&f, &lec));
+    assert_eq!(item_picture_files(&f).into_iter().collect::<Vec<_>>(), ["hb/a.webp"]);
+    // The pack fills the lesson figure's data; the item reads it from there.
+    assert_eq!(picture_data(&f, "hb/a.webp"), None);
+    embed_images(std::slice::from_mut(&mut f), |_| Some(vec![1, 2, 3]));
+    assert_eq!(picture_data(&f, "hb/a.webp"), Some("data:image/webp;base64,AQID"));
+    assert_eq!(picture_data(&f, "hb/b.webp"), None);
+}

@@ -60,9 +60,24 @@ fn cases() -> Vec<(String, Case)> {
         .expect("an enumerate item with a hook");
     let open = Case { phase: "running", item: Some(hooked.id.clone()), reopened: false };
     cases.push(("item-enumerate-open".to_string(), open));
+    // A card on a book picture (#1154), once the content has one: the
+    // browser job checks it at 384 px like the rest.
+    if let Some(pictured) = picture_card() {
+        let case = Case { phase: "running", item: Some(pictured), reopened: false };
+        cases.push(("item-card-picture".to_string(), case));
+    }
     let first = cases[1].1.item.clone();
     cases.push(("summary".to_string(), Case { phase: "summary", item: first, reopened: false }));
     cases
+}
+
+/// The first card that shows a book picture.
+fn picture_card() -> Option<String> {
+    ready_lectures()
+        .into_iter()
+        .flat_map(|l| &l.items)
+        .find(|i| i.image.is_some() && i.body.kind() == "card")
+        .map(|i| i.id.clone())
 }
 
 /// One state, rendered.
@@ -78,7 +93,12 @@ fn render(state: &str, case: Case) -> VirtualDom {
 fn every_fixture_state_shows_what_its_name_says() {
     crate::store::use_memory_store();
     let all = cases();
-    assert_eq!(all.len(), item::PLAYABLE.len() + 4, "setup, kinds, reopened, open list, summary");
+    let pictured = usize::from(picture_card().is_some());
+    assert_eq!(
+        all.len(),
+        item::PLAYABLE.len() + 4 + pictured,
+        "setup, kinds, reopened, open list, picture card (once there is one), summary"
+    );
     for (state, case) in all {
         let reopened = case.reopened;
         let kind = case.item.as_deref().and_then(find).map(|(_, i)| i.body.kind());
@@ -93,6 +113,12 @@ fn every_fixture_state_shows_what_its_name_says() {
         }
         if reopened {
             assert!(html.contains(tx::UNDONE) && html.contains("st-answer"), "{state}: answer shown");
+        }
+        if state == "item-card-picture" {
+            assert!(
+                html.contains("st-picture") && html.contains("src=\"data:image/"),
+                "{state}: the picture shows"
+            );
         }
         if state == "item-enumerate-open" {
             assert!(html.contains("st-hook") && html.contains(tx::ENUM_HOOK), "the تحشيشة shows");

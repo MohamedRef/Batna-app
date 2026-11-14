@@ -202,6 +202,7 @@ fn build_deck<'a>(
         drafts: None,
         program: Some(&crate::content::Library::get().program),
         notes: Some(mine),
+        pictures: Some(&|file: &str| crate::content::Library::get().picture_bytes(file)),
     };
     let deck = batna_anki::build(&lectures, &opts);
     let now_ms = web_time::SystemTime::now()

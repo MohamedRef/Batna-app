@@ -56,6 +56,7 @@ pub fn QuestionView(
                     span { class: "chip", bdi { "{t}" } }
                 }
             }
+            crate::learn::ItemPicture { item: item.clone(), answered: reveal }
             p { class: "q-stem", lang: "en", dir: "ltr", crate::labs::LabText { text: stem.to_string() } }
             ol { class: "q-options", lang: "en", dir: "ltr",
                 for (orig, letter, text, reason, state) in rows.clone() {

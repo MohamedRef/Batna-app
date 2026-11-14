@@ -42,6 +42,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         None => None,
     };
     let (index, mut lectures) = crate::packs::load(root)?;
+    let read_picture = |f: &str| std::fs::read(root.join("content/lessons/img").join(f)).ok();
     let mut warnings = Vec::new();
     let mut drafts = BTreeSet::new();
     let medstudy = match crate::flag(args, "--drafts") {
@@ -96,6 +97,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         drafts: Some(&drafts),
         program: program.as_ref(),
         notes: Some(&mine),
+        pictures: Some(&read_picture),
     };
     let deck = build(&lectures, &opts);
 

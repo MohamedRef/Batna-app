@@ -24,6 +24,8 @@ pub struct Mcq<'a> {
     pub stem: &'a str,
     pub options: &'a [String],
     pub answer: usize,
+    /// It shows a book picture (#1154).
+    pub picture: bool,
 }
 
 /// Every askable MCQ in these lectures, in file order. Items Mohamed marked
@@ -37,6 +39,7 @@ pub fn mcqs<'a>(lectures: impl IntoIterator<Item = &'a Lecture>) -> Vec<Mcq<'a>>
             }
             if let Body::Mcq { stem, options, answer, .. } = &item.body {
                 out.push(Mcq {
+                    picture: item.image.is_some(),
                     lecture: &lecture.lecture,
                     id: &item.id,
                     topic: item.topic.as_deref(),
@@ -72,6 +75,9 @@ pub struct Filter {
     /// Any of these tags.
     pub tags: BTreeSet<String>,
     pub only: Only,
+    /// Only questions with a book picture (#1154).
+    #[serde(default)]
+    pub pictures: bool,
 }
 
 impl Filter {
@@ -84,7 +90,8 @@ impl Filter {
             Only::All => true,
             Only::WrongOrUnseen => last.get(q.id) != Some(&true),
         };
-        lecture_ok && topic_ok && tags_ok && only_ok
+        let picture_ok = !self.pictures || q.picture;
+        lecture_ok && topic_ok && tags_ok && only_ok && picture_ok
     }
 
     pub fn select<'a>(&self, pool: &[Mcq<'a>], last: &LastResults) -> Vec<Mcq<'a>> {
@@ -462,6 +469,8 @@ mod tests {
             status: Status::Unverified,
             update: None,
             tags: tags.iter().map(|s| s.to_string()).collect(),
+            image: None,
+            marks: Vec::new(),
         }
     }
 

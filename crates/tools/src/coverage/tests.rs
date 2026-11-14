@@ -70,7 +70,58 @@ fn a_wide_lesson_warns() {
     let (_, w) = check([1, 1], &wide, &Skips::new());
     assert_eq!(
         w,
-        vec!["hb.L01.lesson1: wide lesson (1 cards, 1 pages, 3 topics); split it at a topic boundary"]
+        vec![
+            "hb.L01.lesson1: wide lesson (1 cards, 1 pages, 3 topics); split it at a topic boundary or give the reason in content/lesson-wide.yaml"
+        ]
+    );
+}
+
+fn row(taught: usize, slides: bool) -> LessonRow {
+    let (lecture, file) = parsed(LESSON);
+    LessonRow { taught, slides, ..lesson_row(&file.lessons[0], &lecture) }
+}
+
+#[test]
+fn width_counts_the_pages_taught_not_the_span() {
+    // A check from a review page far on stretches `pages`, not the lesson.
+    let far = LESSON.replace("pages: [1, 1]", "pages: [1, 20]").replacen(
+        "      - kind: check\n        page: 1",
+        "      - kind: check\n        page: 20",
+        1,
+    );
+    let (lecture, file) = parsed(&far);
+    let l = lesson_row(&file.lessons[0], &lecture);
+    assert_eq!((l.cited, l.taught), (Some([1, 20]), 2));
+    assert!(!l.is_wide());
+    assert!(!row(7, false).is_wide() && row(MAX_PAGES as usize, false).is_wide());
+}
+
+#[test]
+fn slide_decks_count_slides_with_their_own_limit() {
+    assert!(row(12, true).slides && !row(12, true).is_wide());
+    assert!(row(MAX_SLIDES, true).is_wide());
+    let (lecture, file) = parsed(&LESSON.replace("hb.L01.lesson1", "res.L01.lesson1"));
+    assert!(lesson_row(&file.lessons[0], &lecture).slides);
+}
+
+#[test]
+fn a_lesson_wide_on_purpose_needs_a_reason_and_stops_warning() {
+    let (lecture, file) = parsed(&LESSON.replace("topics: [definition]", "topics: [definition, a, b]"));
+    let mut r = lecture_row([1, 1], &lecture, &file, &Skips::new());
+    r.lessons[0].wide_ok = Some("three short headings on one page".into());
+    assert_eq!(problems(&r, &Skips::new()), (vec![], vec![]));
+    r.lessons[0].wide_ok = Some(" ".into());
+    assert_eq!(
+        problems(&r, &Skips::new()).0,
+        vec!["hb.L01.lesson1: content/lesson-wide.yaml lists it without a reason"]
+    );
+    // Listed but no longer wide: take it off the list.
+    let (lecture, file) = parsed(LESSON);
+    let mut r = lecture_row([1, 1], &lecture, &file, &Skips::new());
+    r.lessons[0].wide_ok = Some("was wide".into());
+    assert_eq!(
+        problems(&r, &Skips::new()).1,
+        vec!["hb.L01.lesson1: no longer wide; remove it from content/lesson-wide.yaml"]
     );
 }
 
@@ -105,4 +156,12 @@ fn validate_fails_on_an_over_wide_lesson_and_reports_the_tree() {
     assert!(warn.starts_with("warning: hb.L01: no lesson step cites p2"), "{warn}");
     testkit::write(root, "content/lesson-skips.yaml", "hb.L99: {}\n");
     assert!(run(root, &testkit::strings(&["--summary"])).is_err());
+    // content/lesson-wide.yaml is read, and names only real lessons.
+    testkit::write(root, "content/lesson-skips.yaml", "");
+    testkit::write(root, "content/lesson-wide.yaml", "hb.L01.lesson1: was wide\n");
+    let warn = run(root, &testkit::strings(&["--warnings", "hb"])).unwrap();
+    assert!(warn.contains("hb.L01.lesson1: no longer wide"), "{warn}");
+    testkit::write(root, "content/lesson-wide.yaml", "hb.L01.lesson9: gone\n");
+    let err = run(root, &testkit::strings(&["--summary"])).unwrap_err();
+    assert_eq!(err, vec!["content/lesson-wide.yaml: hb.L01.lesson9 is not a lesson"]);
 }

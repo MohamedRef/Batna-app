@@ -217,7 +217,13 @@ checks coverage against the book (`crates/tools/src/coverage.rs`, #833):
 `pages` wider than the steps fail; pages no step cites warn, and fail once
 the lecture is listed in `content/lesson-skips.yaml` (its coverage was
 reviewed); `practice` cards from pages the lesson never cites and lessons
-over 30 cards, 8 pages or 2 topics warn. `batna-tools lessons --warnings
+over 30 cards, 8 pages or 2 topics warn. A lesson's pages are the
+different pages its steps cite (a review question a few pages on does not
+widen it); in the slide-deck course (`res`) they are slides, and the limit is
+16. A lesson that is wide on purpose (an end-of-deck quiz, three short
+headings on two pages that would fall under eight steps if split) is listed
+with its reason in `content/lesson-wide.yaml` and stops warning; a listed
+lesson that is no longer wide warns again. `batna-tools lessons --warnings
 <course>` lists the warnings, `lessons --report <course>` prints one TSV row
 per lesson (pages, cited pages, cards, steps, words, explain steps with no
 reason word, the lecture's words per page and uncited pages), and

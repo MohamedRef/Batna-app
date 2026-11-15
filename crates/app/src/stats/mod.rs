@@ -30,7 +30,11 @@ const STATS_CSS: Css = css!("src/stats/stats.css");
 #[derive(PartialEq)]
 pub struct StudyData {
     pub lectures: Vec<Lecture>,
+    /// The answers that count as progress (a reset leaves older ones out).
     pub events: Vec<ReviewEvent>,
+    /// Every answer, a reset's left-out ones too, for activity counts;
+    /// `None` when it is the same as `events`.
+    pub history: Option<Vec<ReviewEvent>>,
     pub marks: BTreeMap<String, Status>,
     /// Reviews due per study day from FSRS, today first. `None` in demo mode,
     /// where the planner falls back to `stats::rough_forecast`.
@@ -54,16 +58,32 @@ impl StudyData {
         let clock = Clock { now_ms, zone: crate::store::zone(), rollover_hour: ROLLOVER_HOUR };
         if std::env::var("BATNA_STATS_DEMO").is_ok_and(|v| v == "1") {
             let events = demo::events(&lectures, now_ms);
-            return StudyData { lectures, events, marks: demo::marks(), forecast: None, clock, demo: true };
+            return StudyData {
+                lectures,
+                events,
+                history: None,
+                marks: demo::marks(),
+                forecast: None,
+                clock,
+                demo: true,
+            };
         }
+        let events = store.log();
+        let history = store.history();
         StudyData {
             lectures,
-            events: store.log(),
+            history: (history.len() != events.len()).then_some(history),
+            events,
             marks: store.marks(),
             forecast: Some(store.forecast(FORECAST_DAYS, now_ms)),
             clock,
             demo: false,
         }
+    }
+
+    /// Every answer he gave, for activity counts (`period`).
+    pub fn history(&self) -> &[ReviewEvent] {
+        self.history.as_deref().unwrap_or(&self.events)
     }
 
     /// Reviews due per day for `days` days, today first.

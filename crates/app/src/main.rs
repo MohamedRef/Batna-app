@@ -53,6 +53,7 @@ mod platform;
 mod prefs;
 mod recap;
 mod reminders;
+mod reset;
 mod settings;
 mod sheet;
 mod shortcuts;

@@ -36,6 +36,7 @@ pub mod plan;
 pub mod recap;
 pub mod refs;
 pub mod remind;
+pub mod reset;
 pub mod saving;
 pub mod settings;
 pub mod sheet;

@@ -238,6 +238,7 @@ mod tests {
                 .filter_map(|e| Library::get().lectures.get(&e.id).cloned())
                 .collect(),
             events: Vec::new(),
+            history: None,
             marks,
             forecast: None,
             clock: batna_core::stats::Clock {

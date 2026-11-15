@@ -42,8 +42,8 @@ pub fn PeriodHead(data: Rc<StudyData>) -> Element {
     let ui = use_context::<crate::Ui>();
     let span = SPAN();
     let week = span == Span::Week;
-    let now = stats::period(&data.events, &data.marks, data.clock, span.days(), 0);
-    let before = stats::period(&data.events, &data.marks, data.clock, span.days(), 1);
+    let now = stats::period(data.history(), &data.marks, data.clock, span.days(), 0);
+    let before = stats::period(data.history(), &data.marks, data.clock, span.days(), 1);
     let pct = now.retention.percent();
     let shown = super::pct(now.retention);
     let peak = now.days.iter().map(|d| d.minutes).max().unwrap_or(0).max(1);

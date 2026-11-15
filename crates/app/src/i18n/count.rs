@@ -74,6 +74,9 @@ pub const CREDIT_HOUR: Noun =
     Noun {
         one: "ساعة معتمدة واحدة", two: "ساعتين معتمدين", few: "ساعات معتمدة", many: "ساعة معتمدة"
     };
+pub const PAPER: Noun = Noun {
+    one: "امتحان واحد", two: "امتحانين", few: "امتحانات", many: "امتحان"
+};
 pub const CALC: Noun =
     Noun { one: "حاسبة واحدة", two: "حاسبتين", few: "حاسبات", many: "حاسبة" };
 

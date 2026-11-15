@@ -40,6 +40,7 @@ fn data(n: usize) -> StudyData {
     StudyData {
         lectures,
         events,
+        history: None,
         marks: Default::default(),
         forecast: Some(vec![3, 5, 0, 8]),
         clock: clock(),

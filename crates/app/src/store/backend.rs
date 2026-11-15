@@ -6,6 +6,8 @@
 mod journey_tests;
 #[cfg(test)]
 mod replay_perf;
+#[cfg(test)]
+mod reset_tests;
 mod study;
 
 use std::cell::RefCell;
@@ -53,7 +55,14 @@ pub struct ReviewBackend {
     catalog: Catalog,
     pub settings: ReviewSettings,
     scheduler: Scheduler,
+    /// The answers that count as progress: [`ReviewBackend::history`] less
+    /// what a reset left out (`batna_core::reset`). The schedule, weak marks
+    /// and stats replay this.
     log: Vec<LoggedReview>,
+    /// Every answer logged, for activity counts (answers per day).
+    history: Vec<LoggedReview>,
+    /// The resets in force (#1341).
+    resets: batna_core::reset::Resets,
     states: BTreeMap<String, CardState>,
     judgements: BTreeMap<String, Judgement>,
     /// His notes (`batna_core::note`), every live one.
@@ -110,6 +119,8 @@ impl ReviewBackend {
             settings: ReviewSettings::default(),
             scheduler: Scheduler::default(),
             log: Vec::new(),
+            history: Vec::new(),
+            resets: Default::default(),
             states: BTreeMap::new(),
             judgements: BTreeMap::new(),
             notes: Vec::new(),
@@ -140,10 +151,11 @@ impl ReviewBackend {
         // A log or verdicts that can't be read keep the last good copy in use
         // (never an empty one that would make every item look new); Today
         // says so and offers to read again (store/health.rs).
+        self.resets = self.store.resets();
         match self.store.reviews() {
             Ok(log) => {
                 super::read_recovered(REVIEW_LOG);
-                self.log = log;
+                self.history = log;
             }
             Err(e) => super::read_failed(REVIEW_LOG, &e),
         }
@@ -154,6 +166,7 @@ impl ReviewBackend {
             }
             Err(e) => super::read_failed(VERDICTS, &e),
         }
+        self.log = self.resets.progress(&self.history);
         self.notes = self.store.notes();
         self.refresh_own();
         self.replay();
@@ -248,6 +261,12 @@ impl ReviewBackend {
     /// log changes only its item (`Scheduler::step`, audit F15); anything
     /// else (a clock set back) replays the whole log, which stays the rule.
     fn log_answer(&mut self, logged: batna_core::review::LoggedReview) {
+        self.history.push(logged.clone());
+        // An answer made here sorts after every reset this device has seen,
+        // so it always counts; the check keeps that true by construction.
+        if !self.resets.counts(&logged) {
+            return;
+        }
         let newest = batna_core::replay::newest(&self.log).cloned();
         let stepped = self.scheduler.step(&mut self.states, newest.as_ref(), &logged);
         self.log.push(logged);
@@ -352,7 +371,7 @@ impl ReviewBackend {
     pub fn answers_per_day(&self, days: usize, now_ms: i64) -> Vec<u32> {
         let today = self.scheduler.day.day(now_ms);
         let mut out = vec![0; days];
-        for l in &self.log {
+        for l in &self.history {
             let ago = today - self.scheduler.day.day(l.event.at_ms);
             if (0..days as i64).contains(&ago) {
                 out[days - 1 - ago as usize] += 1;
@@ -363,7 +382,7 @@ impl ReviewBackend {
 
     pub fn answers_today(&self, now_ms: i64) -> usize {
         let today = self.scheduler.day.day(now_ms);
-        self.log.iter().filter(|l| self.scheduler.day.day(l.event.at_ms) == today).count()
+        self.history.iter().filter(|l| self.scheduler.day.day(l.event.at_ms) == today).count()
     }
 
     /// New items started on each of the last `days` study days, oldest
@@ -381,7 +400,19 @@ impl ReviewBackend {
     }
 
     pub fn reviews_logged(&self) -> usize {
-        self.log.len()
+        self.history.len()
+    }
+
+    /// Items in `scope` that have a schedule now (seen at least once), for
+    /// the reset sheet's "N cards restart".
+    pub fn seen_in(&self, scope: &batna_core::reset::Scope) -> usize {
+        self.states.keys().filter(|id| scope.covers(id) && self.catalog.contains_key(*id)).count()
+    }
+
+    /// The schedule as replayed now, for tests that compare before and after.
+    #[cfg(test)]
+    pub fn states(&self) -> &BTreeMap<String, CardState> {
+        &self.states
     }
 
     /// The verdicts export (`batna.verdicts/v1`), every verdict on every item.
@@ -515,6 +546,13 @@ pub fn use_provide_review() {
 pub fn test_review() -> Review {
     let store: &'static Store =
         Box::leak(Box::new(Store::open_in_memory().expect("an in-memory database always opens")));
+    test_review_on(store)
+}
+
+/// Test-only: a [`Review`] over `store` (the test thread's `shared()`, for
+/// code that reads both).
+#[cfg(test)]
+pub fn test_review_on(store: &'static Store) -> Review {
     let backend = Rc::new(RefCell::new(ReviewBackend::new(store, catalog(Library::get()))));
     let mut revision = Signal::new(0);
     backend.borrow_mut().on_change = Some(Box::new(move || *revision.write() += 1));

@@ -36,6 +36,9 @@
   padding: 1rem 1.1rem 1.5rem;
 }
 .us-context-title { margin: 0 0 .875rem; font-size: .9375rem; font-weight: 650; line-height: 1.45; }
+.us-context-title[data-failed="true"] { color: var(--bad); }
+.us-stage { margin-block: -.4rem 1rem; display: grid; gap: .4rem; }
+.us-stage p, .us-stage ol { margin: 0; }
 .us-lead { margin: -.55rem 0 .875rem; font-size: .875rem; line-height: 1.5; color: var(--muted); }
 
 /* Compact update summary: the timeline, not a large hero card, is the focus. */
@@ -174,3 +177,36 @@
   .us-kind-icon, .us-pill { border: 1px solid ButtonText; }
   .us-release::after { outline: 1px solid CanvasText; }
 }
+
+/* Step views (#1339): one clear view per step in place of the notes. */
+.us-stage-view {
+  display: grid; justify-items: center; gap: .6rem; text-align: center;
+  padding: 1.25rem 1rem; margin-block-end: 1rem;
+  border-radius: 1rem; background: var(--surface-2, color-mix(in srgb, currentColor 6%, transparent));
+  animation: us-fade .22s ease-out;
+}
+.us-stage-view p, .us-stage-view ol { margin: 0; }
+.us-stage-view ol { text-align: start; }
+.us-ring { position: relative; inline-size: 5.5rem; block-size: 5.5rem; }
+.us-ring svg { inline-size: 100%; block-size: 100%; }
+.us-ring circle { fill: none; stroke-width: 6; }
+.us-ring-track { stroke: color-mix(in srgb, currentColor 14%, transparent); }
+.us-ring-fill { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset .3s linear; }
+.us-ring-pc { position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.15rem; font-weight: 700; }
+.us-stage-mark {
+  display: grid; place-items: center; inline-size: 3.5rem; block-size: 3.5rem; border-radius: 50%;
+  color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.us-stage-mark svg { inline-size: 1.75rem; block-size: 1.75rem; }
+.us-stage-mark[data-stage="done"] { color: var(--good); background: var(--good-soft, color-mix(in srgb, var(--good) 14%, transparent)); }
+.us-stage-mark[data-stage="failed"], .us-stage-mark[data-stage="permission"] { color: var(--bad); background: var(--bad-soft, color-mix(in srgb, var(--bad) 14%, transparent)); }
+.us-stage-mark[data-stage="installing"] { animation: us-pulse 1.4s ease-in-out infinite; }
+.us-notes-toggle { justify-self: center; margin-block-end: .75rem; }
+.us-foot-state { margin-inline-end: auto; align-self: center; font-weight: 650; font-variant-numeric: tabular-nums; }
+@keyframes us-fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes us-pulse { 50% { transform: scale(.92); opacity: .7; } }
+@media (prefers-reduced-motion: reduce) {
+  .us-stage-view, .us-stage-mark[data-stage="installing"] { animation: none; }
+  .us-ring-fill { transition: none; }
+}
+

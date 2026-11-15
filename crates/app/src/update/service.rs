@@ -148,7 +148,10 @@ impl Updater {
         // Automatic downloads wait for Wi-Fi (an APK on mobile data, up to
         // every push on the preview channel); the offer still shows.
         let wifi = !metered;
-        let auto = s.prefs.mode == Mode::Auto && wifi;
+        // A tap on mobile data that chose to wait for Wi-Fi counts as Auto
+        // for that one download, whatever the mode.
+        let queued = wifi && s.prefs.wifi_download.is_some();
+        let auto = (s.prefs.mode == Mode::Auto && wifi) || queued;
         if due {
             self.check_with(auto, wifi);
         } else if auto && let Phase::Available(_) = s.phase {
@@ -480,6 +483,14 @@ impl Updater {
         self.download_now();
     }
 
+    /// "Wait for Wi-Fi" on the mobile-data question: the offer downloads
+    /// at the first step on an unmetered network.
+    pub fn download_on_wifi(&self) {
+        if let Phase::Available(o) | Phase::Failed { offer: Some(o), .. } = self.status().phase {
+            self.update_prefs(|p| p.wifi_download = Some(o.key()));
+        }
+    }
+
     /// Downloads the offer still standing; the caller holds `job`.
     fn download_now(&self) {
         if let Phase::Available(offer) | Phase::Failed { offer: Some(offer), .. } = self.status().phase {
@@ -497,6 +508,9 @@ impl Updater {
             Ok(()) => {
                 if let Err(e) = save_staged(&self.dir, &offer) {
                     report!("update staged.json: {e}");
+                }
+                if self.status().prefs.wifi_download.is_some() {
+                    self.update_prefs(|p| p.wifi_download = None);
                 }
                 self.set_phase(Phase::Ready(offer));
             }

@@ -62,6 +62,7 @@ pub const DATA_IN_BROWSER: &str =
     "في المتصفح ده (IndexedDB). مسح بيانات الموقع بيمسحها، فخد نسخة احتياطية من فوق من وقت للتاني.";
 pub const DATA_GROUP_BACKUP: &str = "احفظ ورجّع";
 pub const DATA_GROUP_EXPORT: &str = "صدّر لبرّه";
+pub const DATA_GROUP_START_OVER: &str = "لفة تانية";
 pub const DATA_GROUP_DEVICE: &str = "على الجهاز ده";
 
 pub const VERSION: &str = "النسخة";

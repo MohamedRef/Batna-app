@@ -323,6 +323,12 @@ pub trait StudyStore {
     fn log(&self) -> Vec<ReviewEvent> {
         Vec::new()
     }
+    /// Every answer ever logged, a reset's left-out answers included
+    /// (`crate::reset`): what he did, for activity counts. Same as
+    /// [`StudyStore::log`] where nothing was reset.
+    fn history(&self) -> Vec<ReviewEvent> {
+        self.log()
+    }
     /// Mohamed's verdicts that still match the content: ✓ and ✎ count as
     /// `Approved`, ✗ as `Rejected`. Items he hasn't checked are absent.
     fn marks(&self) -> BTreeMap<String, Status> {

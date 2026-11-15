@@ -282,7 +282,27 @@ fn stored_papers() -> Vec<Outcome> {
     let store = crate::store::shared();
     let mut papers: Vec<Outcome> = store.setting(LEGACY_PAPERS_KEY).unwrap_or_default();
     papers.extend(store.settings_with_prefix::<Outcome>(PAPER_PREFIX).into_iter().map(|(_, o)| o));
+    // A whole-curriculum reset that took the papers too hides the older ones.
+    let resets = store.resets();
+    papers.retain(|o| resets.paper_counts(o.at_ms));
     merge_papers(papers)
+}
+
+/// Finished papers a reset of the whole curriculum would restart: every
+/// stored one still shown.
+pub fn papers_shown() -> usize {
+    stored_papers().len()
+}
+
+/// Test-only: a timed paper left open (`None` closes it again).
+#[cfg(test)]
+pub fn leave_paper_for_test(open: bool) {
+    *PAUSED.write() = open.then(|| Paper::new(Mode::Timed, Vec::new()));
+}
+
+/// A timed paper is running or was left open: a reset waits for it.
+pub fn paper_open() -> bool {
+    PAUSED.peek().is_some() || matches!(&*PHASE.peek(), Phase::Running(p) if p.mode.timed())
 }
 
 /// Oldest first, each paper once (the legacy list and the per-paper keys

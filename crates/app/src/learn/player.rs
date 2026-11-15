@@ -53,7 +53,10 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         if let Some(s) = preview {
             return Attempt { at: s.saturating_sub(1).min(n), ..Attempt::new(n, now) };
         }
-        let saved: Option<Attempt> = crate::store::shared().place(&pos_key(&id));
+        let saved: Option<Attempt> = crate::store::shared()
+            .place(&pos_key(&id))
+            // A place started before a reset of its course is left behind.
+            .filter(|a: &Attempt| crate::reset::counts_at(&id, a.started_ms));
         let restored = Attempt::restore(&lesson, saved, mark(&id).map(|m| m.done_ms), now);
         // Opened at a step (a book page, «اشرحهولي»): show it without saving.
         match super::take_at() {

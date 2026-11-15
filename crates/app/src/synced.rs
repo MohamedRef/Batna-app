@@ -9,6 +9,7 @@
 /// Re-reads every synced-setting global from the store. Each one only
 /// changes (and re-renders) when its value really did.
 pub fn reload() {
+    crate::reset::reload();
     crate::plan::reload();
     crate::catchup::reload();
     crate::sounds::reload();

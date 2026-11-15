@@ -120,7 +120,9 @@ static MARKS_REV: GlobalSignal<u64> = Signal::global(|| 0);
 
 pub fn mark(id: &str) -> Option<Mark> {
     let _ = MARKS_REV();
-    crate::store::shared().setting(&format!("{PREFIX}{id}"))
+    let m: Mark = crate::store::shared().setting(&format!("{PREFIX}{id}"))?;
+    // Finished before a reset of its course: it reads as not done (#1341).
+    crate::reset::counts_at(id, m.done_ms).then_some(m)
 }
 
 /// Marks lesson `id` done and clears its saved place, both or neither
@@ -283,7 +285,7 @@ fn part_way(id: &str) -> Option<(usize, i64)> {
     }
     crate::store::shared()
         .place::<At>(&format!("lessonpos.{id}"))
-        .filter(|p| p.at > 0)
+        .filter(|p| p.at > 0 && crate::reset::counts_at(id, p.started_ms))
         .map(|p| (p.at, p.started_ms))
 }
 

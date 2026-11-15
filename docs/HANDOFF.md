@@ -632,6 +632,36 @@ as `pagesheet::Scope::book()` / `Scope::of_book()`.
   search (`shortcuts/palette.rs`) turns «30» / «ص 30» into one hit per
   course book that has that page.
 
+### Start over («ابدأ من الأول», #1341)
+
+Mohamed can restart progress for one course or the whole curriculum
+(Settings › بياناتك › «لفة تانية», and «ابدأ المادة دي من الأول» on a course
+on the map). **Nothing is deleted.** A reset is one synced LWW setting,
+`reset.<course>` or `reset.all`, holding a `batna_core::reset::Marker` (its
+HLC, an id, `papers`, and the catch-up plan that was running). Readers leave
+out progress in scope at or before the marker:
+
+- answers by HLC (`Resets::progress`): `ReviewBackend` keeps `log` (what
+  counts: schedule, weak marks, stats, bank last results, planner) and
+  `history` (every answer: answers per day, catch-up, the Stats period
+  cards). An offline device's older answers that sync later stay out; its
+  answers after the reset count;
+- lesson marks `lesson.<id>` and places `lessonpos.<id>` by wall time
+  (`crate::reset::counts_at`, used by `learn::mark`, the player, `part_way`);
+- finished papers only when a whole-curriculum reset ticked them (`papers`);
+- own cards' schedules restart only with `reset.all` (their ids are `own.…`).
+
+Verdicts, notes, highlights, own cards, course statuses, settings and the
+review events themselves are never touched (never delete or tombstone review
+events for this). Undo = a tombstone on the marker (`Store::remove_reset`);
+the reset's catch-up plan comes back. A reset refuses while a study session
+or a timed paper is open, saves a backup first (`data_export::backup_now`;
+no backup, no reset), takes a second tap for one course and the typed word
+«ابدأ» for everything. A course reset shrinks a running catch-up plan to what
+is still due; the whole curriculum ends it. Tests: `store/backend/reset_tests.rs`
+(sync with an offline tablet, restore, exact undo, answer undo, untouched
+tables, export/import) and `reset/tests.rs` (the card by taps).
+
 ### Desktop (Mac) layout
 
 - Full-window canvas, wider labelled sidebar, 1280×820 default window (#739).
@@ -695,7 +725,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, start over per course, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
 | Content | 9 courses, 141 lectures, 141 lesson files; `res` L01–L20 written; L02–L11 checked against the enriched lecture copies, and res.L02 against its video recording (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
@@ -734,6 +764,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-15: «ابدأ من الأول» (#1341): reset progress for one course or the whole curriculum with one synced marker (`reset.<course>` / `reset.all`), nothing deleted, undo by removing it; backup first, refused under an open session or paper (§ 10 Start over).
 - 2026-11-15: #1339: update sheet step views (download ring, installing, done, failed), size on the download button (sheet, banner, Settings), and a mobile-data confirm with «استنى الواي فاي» queueing the download for the next unmetered check.
 - 2026-11-15: #1338: the "what's new" sheet shows failed downloads/installs (headline, detail, «جرّب تاني», manual steps for TooNew/KeyChanged) and «افتح الإذن» for NeedsPermission, from one shared `update::stage` used by Settings, banner and sheet; a failed update keeps its banner.
 - 2026-11-15: «نزّلها» did nothing while the content pack was downloading (the tap lost the updater's one lock to the pack and was dropped silently); the pack now has its own lock and download/install taps wait for a running job instead of being dropped; the lessons row in Settings › Updates always has a line ("same as the app" or its own build) and says when a newer pack is downloading.

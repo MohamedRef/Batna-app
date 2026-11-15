@@ -31,6 +31,7 @@ impl StudyStore for ReviewBackend {
         match self.store.retract_review(event_id) {
             Ok(_) => {
                 super::super::write_recovered(&format!("taking back the answer {event_id}"));
+                self.history.retain(|l| l.id != event_id);
                 let before = self.log.len();
                 self.log.retain(|l| l.id != event_id);
                 if self.log.len() != before {
@@ -82,6 +83,10 @@ impl StudyStore for ReviewBackend {
 
     fn log(&self) -> Vec<ReviewEvent> {
         self.log.iter().map(|l| l.event.clone()).collect()
+    }
+
+    fn history(&self) -> Vec<ReviewEvent> {
+        self.history.iter().map(|l| l.event.clone()).collect()
     }
 
     fn marks(&self) -> BTreeMap<String, Status> {

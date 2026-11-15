@@ -10,9 +10,12 @@
 .desk-footer { display: flex; flex-direction: column; gap: var(--sp-3); margin-block-start: var(--sp-4); min-width: 0; }
 
 @media (min-width: 840px) {
+  /* The side's 16rem floor gives way to 40% of the pane: at 840px with the
+     nav rail and larger text a fixed 16rem left the question 118px wide
+     (a strip picture became a 25px tap target). */
   .desk-split {
     display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(16rem, 2fr);
+    grid-template-columns: minmax(0, 3fr) minmax(min(16rem, 40%), 2fr);
     align-items: start;
     gap: var(--sp-6);
   }
@@ -26,7 +29,7 @@
   }
   /* Long answers (a 9-point list): the answer takes the wide column and the
      question with what was typed stays in view beside it. */
-  .desk-split[data-wide="side"] { grid-template-columns: minmax(16rem, 2fr) minmax(0, 3fr); }
+  .desk-split[data-wide="side"] { grid-template-columns: minmax(min(16rem, 40%), 2fr) minmax(0, 3fr); }
   .desk-split[data-wide="side"] .desk-side { position: static; max-block-size: none; overflow: visible; }
   .desk-split[data-wide="side"] .desk-main { position: sticky; top: var(--sp-4); }
   .desk-waiting {

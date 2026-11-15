@@ -423,7 +423,8 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 }
 .ls-svg .ls-fig-svg svg, .ls-svg svg { display: block; inline-size: 100%; block-size: auto; max-block-size: 70vh; }
 .ls-svg { position: relative; }
-.ls-photo { padding: 0; overflow: hidden; }
+/* A wide strip picture still makes a full tap target. */
+.ls-photo { padding: 0; overflow: hidden; min-block-size: min(var(--tap), var(--target)); align-content: center; }
 .ls-photo img { display: block; inline-size: 100%; block-size: auto; max-block-size: 70vh; object-fit: contain; }
 /* Marks on a picture (#984, steps/marks.rs). The box shrinks to the
    picture so a mark's percentages land on the picture itself, never on the

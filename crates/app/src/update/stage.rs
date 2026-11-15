@@ -3,8 +3,28 @@
 //! and the "what's new" sheet all read it from here, so a failure can no
 //! longer show in one and hide in another (#1338).
 
-use super::{Failure, Offer, Phase, Updater};
+use dioxus::prelude::*;
+
+use super::{Failure, Offer, Phase, Status, Updater};
 use crate::i18n::update as tx;
+
+/// A manual download asked for on mobile data: the question is open
+/// (`MeteredConfirm`, once in the shell, asks it).
+pub static METERED_ASK: GlobalSignal<bool> = Signal::global(|| false);
+
+#[cfg(test)]
+thread_local! {
+    /// Tests pretend to be on mobile data.
+    pub static FAKE_METERED: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+}
+
+fn metered() -> bool {
+    #[cfg(test)]
+    if FAKE_METERED.with(std::cell::Cell::get) {
+        return true;
+    }
+    crate::platform::network::metered()
+}
 
 /// A button a phase offers.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -41,6 +61,8 @@ impl Act {
     /// Does it, off the UI thread where it blocks.
     pub fn run(self) {
         match self {
+            // On mobile data he decides first: the size, now or on Wi-Fi.
+            Self::Download if metered() => *METERED_ASK.write() = true,
             Self::Download => work(Updater::download),
             Self::Install => work(Updater::install),
             Self::Restart => {
@@ -163,4 +185,75 @@ pub fn stage(phase: &Phase, android: bool) -> Option<Stage> {
         progress,
         acts,
     })
+}
+
+/// A button's text; a download names its size («نزّلها · 46.6 ميجا»), the
+/// number kept LTR.
+#[component]
+pub fn ActLabel(act: Act, phase: Phase, size: Option<u64>) -> Element {
+    let size = size.filter(|_| act == Act::Download).map(super::view::megabytes);
+    rsx! {
+        {act.label(&phase)}
+        if let Some(mb) = size {
+            " · "
+            bdi { dir: "ltr", class: "num-ltr", "{mb}" }
+        }
+    }
+}
+
+/// The mobile-data question, once in the shell.
+#[component]
+pub fn MeteredConfirm() -> Element {
+    let status = super::view::use_update_status();
+    rsx! { MeteredConfirmView { status } }
+}
+
+/// The question for a given status (what [`MeteredConfirm`] follows).
+#[component]
+pub fn MeteredConfirmView(status: Signal<Option<Status>>) -> Element {
+    if !METERED_ASK() {
+        return rsx! {};
+    }
+    let size = status
+        .read()
+        .as_ref()
+        .and_then(|s| stage(&s.phase, false))
+        .and_then(|st| st.offer)
+        .map(|o| o.asset.size);
+    let close = move || *METERED_ASK.write() = false;
+    rsx! {
+        style { {super::view::UPDATE_CSS} }
+        div { class: "um-backdrop", onclick: move |_| close() }
+        div { class: "um-dialog", role: "alertdialog", aria_modal: "true", aria_labelledby: "um-title",
+            h2 { id: "um-title", {tx::METERED_TITLE} }
+            p {
+                {tx::METERED_BODY}
+                if let Some(b) = size {
+                    " ("
+                    bdi { dir: "ltr", class: "num-ltr", "{super::view::megabytes(b)}" }
+                    ")"
+                }
+            }
+            p { class: "muted small", {tx::METERED_NOTE} }
+            div { class: "row",
+                button {
+                    class: "btn btn-primary",
+                    onclick: move |_| {
+                        close();
+                        work(Updater::download);
+                    },
+                    {tx::METERED_NOW}
+                }
+                button {
+                    class: "btn btn-secondary",
+                    "data-back": "true",
+                    onclick: move |_| {
+                        close();
+                        work(|u| u.download_on_wifi());
+                    },
+                    {tx::METERED_WAIT}
+                }
+            }
+        }
+    }
 }

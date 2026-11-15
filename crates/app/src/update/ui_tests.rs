@@ -575,6 +575,7 @@ fn pressable(which: Which, status: Status) -> crate::tap_dom::TestDom {
                 _ => rsx! {},
             }
             SheetView { status }
+            super::stage::MeteredConfirmView { status }
         }
     }
     let (which, open) = match which {
@@ -757,4 +758,75 @@ fn a_failed_download_keeps_its_banner_and_the_android_hint_is_shared() {
     assert_eq!(installing.hint, Some(tx::INSTALLING_ANDROID));
     assert_eq!(super::stage::stage(&Phase::Installing(o), false).unwrap().hint, None);
     assert!(super::stage::stage(&Phase::Idle, true).is_none());
+}
+
+fn big_offer() -> Offer {
+    let mut o =
+        with_changes(offer("0.2.0", 0), vec![build_changes(50, vec![change(ChangeKind::New, "أول")], false)]);
+    o.asset.size = 48_873_640;
+    o
+}
+
+/// #1339: past the tap, Offer mode shows one view per step instead of the
+/// notes, the footer says the step, and the notes are one tap away.
+#[test]
+fn each_step_has_its_own_view_and_the_footer_says_it() {
+    let o = big_offer();
+    let page = html(Which::Sheet(SheetMode::Offer), Some(status(Phase::Available(o.clone()), Mode::Notify)));
+    assert!(!page.contains("us-stage-view") && page.contains("us-timeline"), "notes before the tap: {page}");
+    assert!(has(&page, &format!("{} · ", tx::DOWNLOAD)) && has(&page, "46.6"), "size on the button: {page}");
+
+    let half = Phase::Downloading { offer: o.clone(), done: o.asset.size / 2 };
+    let page = html(Which::Sheet(SheetMode::Offer), Some(status(half, Mode::Notify)));
+    for text in ["data-stage=\"downloading\"", "us-ring", "50%", "23.3", "us-foot-state"] {
+        assert!(page.contains(text), "downloading: missing {text}: {page}");
+    }
+    assert!(has(&page, tx::STAGE_BACKGROUND) && has(&page, tx::STAGE_SHOW_NOTES), "{page}");
+    assert!(!page.contains("us-timeline"), "the notes wait behind a tap: {page}");
+
+    for (phase, kind) in [
+        (Phase::Installing(o.clone()), "installing"),
+        (Phase::Installed(o.clone()), "done"),
+        (Phase::NeedsPermission(o.clone()), "permission"),
+        (Phase::Failed { offer: Some(o.clone()), why: Failure::Network }, "failed"),
+    ] {
+        let page = html(Which::Sheet(SheetMode::Offer), Some(status(phase, Mode::Notify)));
+        assert!(page.contains(&format!("data-stage=\"{kind}\"")), "{kind}: {page}");
+        assert!(!page.contains("us-timeline"), "{kind}: {page}");
+    }
+    let page = html(Which::Sheet(SheetMode::Offer), Some(status(Phase::Installing(o.clone()), Mode::Notify)));
+    assert!(page.contains("us-foot-state") && has(&page, tx::INSTALLING), "{page}");
+
+    let mut t = pressable(Which::Sheet(SheetMode::Offer), status(Phase::Installed(o), Mode::Notify));
+    t.click(tx::STAGE_SHOW_NOTES);
+    assert!(t.html().contains("us-timeline") && has(&t.html(), tx::STAGE_HIDE_NOTES), "{}", t.html());
+}
+
+/// #1339: on mobile data a manual download asks first, with the size; on
+/// Wi-Fi it doesn't.
+#[test]
+fn a_download_on_mobile_data_asks_first() {
+    let o = big_offer();
+    let s = status(Phase::Available(o), Mode::Notify);
+    let mut t = pressable(Which::Sheet(SheetMode::Offer), s.clone());
+    t.click(tx::DOWNLOAD);
+    assert!(!has(&t.html(), tx::METERED_TITLE), "Wi-Fi: no question: {}", t.html());
+
+    super::stage::FAKE_METERED.with(|m| m.set(true));
+    let mut t = pressable(Which::Sheet(SheetMode::Offer), s.clone());
+    t.click(tx::DOWNLOAD);
+    let page = t.html();
+    super::stage::FAKE_METERED.with(|m| m.set(false));
+    for text in [tx::METERED_TITLE, tx::METERED_NOW, tx::METERED_WAIT, "46.6"] {
+        assert!(has(&page, text), "missing {text}: {page}");
+    }
+    t.click(tx::METERED_WAIT);
+    assert!(!has(&t.html(), tx::METERED_TITLE), "answered: {}", t.html());
+
+    // Waiting for Wi-Fi says so in Settings.
+    let mut waiting = s;
+    if let Phase::Available(o) = &waiting.phase {
+        waiting.prefs.wifi_download = Some(o.key());
+    }
+    assert!(has(&html(Which::Section, Some(waiting)), tx::WIFI_QUEUED));
 }

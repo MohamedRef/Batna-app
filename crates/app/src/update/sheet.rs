@@ -22,7 +22,7 @@ use batna_core::update::{BuildChanges, ChangeKind};
 use dioxus::prelude::*;
 
 use super::changelog::{self, between, civil, day_of, label, line, of_kind, tally};
-use super::stage::{releases_url, stage};
+use super::stage::{ActLabel, Stage, releases_url, stage};
 use super::view::{StageExtras, UPDATE_CSS, megabytes, use_update_status};
 use super::{Phase, Status};
 use crate::i18n::update as tx;
@@ -222,6 +222,9 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
     let mut open_builds = use_signal(Vec::<String>::new);
     let mut open_kinds = use_signal(Vec::<String>::new);
     let mut earlier_shown = use_signal(|| EARLIER_STEP);
+    // In a stage view (downloading, installing, done, failed) the notes
+    // wait behind one tap.
+    let mut notes_open = use_signal(|| false);
 
     use_effect(move || {
         let from = status
@@ -247,6 +250,7 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
         open_builds.set(Vec::new());
         open_kinds.set(Vec::new());
         earlier_shown.set(EARLIER_STEP);
+        notes_open.set(false);
     };
 
     let offer = match &s.phase {
@@ -316,6 +320,29 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
         _ => Vec::new(),
     };
     let failed = phase_stage.as_ref().is_some_and(|st| st.failed && m == SheetMode::Offer);
+    // Offer mode swaps its body by step, Morphe Manager style (ideas only):
+    // the notes before the tap, then one clear view per step.
+    let stage_view = phase_stage.clone().filter(|_| {
+        m == SheetMode::Offer
+            && matches!(
+                s.phase,
+                Phase::Downloading { .. }
+                    | Phase::Installing(_)
+                    | Phase::Installed(_)
+                    | Phase::NeedsPermission(_)
+                    | Phase::Failed { .. }
+            )
+    });
+    let in_stage = stage_view.is_some();
+    let show_notes = !in_stage || notes_open();
+    let size = offer.as_ref().map(|o| o.asset.size);
+    let busy_state = match &s.phase {
+        Phase::Downloading { offer, done } if m == SheetMode::Offer => {
+            Some(format!("{} {}%", tx::DOWNLOADING, percent(*done, offer.asset.size)))
+        }
+        Phase::Installing(_) if m == SheetMode::Offer => Some(tx::INSTALLING.to_owned()),
+        _ => None,
+    };
     let extras = phase_stage.clone().filter(|st| {
         m == SheetMode::Offer && (st.hint.is_some() || st.detail.is_some() || !st.steps.is_empty())
     });
@@ -388,11 +415,20 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                 if m != SheetMode::History {
                     p { class: "us-context-title", "data-failed": "{failed}", "{title}" }
                 }
-                if let Some(e) = extras {
+                if let Some(st) = stage_view {
+                    StageCard { phase: s.phase.clone(), stage: st }
+                    button {
+                        class: "us-more us-notes-toggle",
+                        aria_expanded: if show_notes { "true" } else { "false" },
+                        onclick: move |_| notes_open.toggle(),
+                        if show_notes { {tx::STAGE_HIDE_NOTES} } else { {tx::STAGE_SHOW_NOTES} }
+                    }
+                } else if let Some(e) = extras {
                     div { class: "us-stage", role: "status", aria_live: "polite",
                         StageExtras { stage: e }
                     }
                 }
+                if show_notes {
                 if m != SheetMode::History && (from_label.is_some() || !pills.is_empty() || progress.is_some()) {
                     div { class: "us-summary",
                         if let Some(c) = content_line.clone().filter(|_| m == SheetMode::Updated) {
@@ -549,6 +585,7 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                 if more_earlier {
                     button { class: "us-more", onclick: move |_| earlier_shown += EARLIER_STEP, "{tx::SHOW_OLDER}" }
                 }
+                }
             }
             div { class: "us-foot",
                 button {
@@ -562,14 +599,22 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                 match acts.first().copied() {
                     Some(first) => rsx! {
                         for act in acts.iter().copied().skip(1) {
-                            button { key: "{act:?}", class: "us-btn", onclick: move |_| act.run(), "{act.label(&s.phase)}" }
+                            button { key: "{act:?}", class: "us-btn", onclick: move |_| act.run(),
+                                ActLabel { act, phase: s.phase.clone(), size }
+                            }
                         }
                         button { class: "us-btn us-go", onclick: move |_| first.run(),
                             if matches!(s.phase, Phase::Available(_)) {
                                 {download_icon()}
                             }
-                            "{first.label(&s.phase)}"
+                            ActLabel { act: first, phase: s.phase.clone(), size }
                         }
+                    },
+                    // The footer always says the step: a download or an
+                    // install runs on with the sheet closed.
+                    None if busy_state.is_some() => rsx! {
+                        span { class: "us-foot-state", role: "status", "{busy_state.clone().unwrap_or_default()}" }
+                        button { class: "us-btn", onclick: close, "{tx::STAGE_BACKGROUND}" }
                     },
                     None if m == SheetMode::Updated => rsx! {
                         button { class: "us-btn us-go", onclick: close, "{tx::GOT_IT}" }
@@ -579,6 +624,63 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                     },
                 }
             }
+        }
+    }
+}
+
+fn percent(done: u64, total: u64) -> u64 {
+    (done.saturating_mul(100) / total.max(1)).min(100)
+}
+
+/// One step of an update, in place of the notes: a ring while it
+/// downloads, a pulsing mark while it installs, a check when done, a
+/// warning when it failed or needs the permission. Re-keyed per step, so
+/// each step fades in.
+#[component]
+fn StageCard(phase: Phase, stage: Stage) -> Element {
+    let kind = match phase {
+        Phase::Downloading { .. } => "downloading",
+        Phase::Installing(_) => "installing",
+        Phase::Installed(_) => "done",
+        Phase::NeedsPermission(_) => "permission",
+        _ => "failed",
+    };
+    // r = 26: the ring's length is 2πr.
+    const RING: f64 = 163.363;
+    let ring = stage.progress.map(|(done, total)| {
+        let p = percent(done, total);
+        (p, RING * (1.0 - p as f64 / 100.0), done, total)
+    });
+    let mark = match kind {
+        "done" => "M5 12.5l4.5 4.5L19 7.5",
+        "installing" => "M12 4v10M7.5 9.5L12 14l4.5-4.5M5 19h14",
+        "downloading" => "",
+        _ => "M12 7v6M12 16.5v.5",
+    };
+    rsx! {
+        div { key: "{kind}", class: "us-stage-view", "data-stage": "{kind}", role: "status", aria_live: "polite",
+            if let Some((p, offset, done, total)) = ring {
+                div { class: "us-ring",
+                    svg { view_box: "0 0 64 64", "aria-hidden": "true",
+                        circle { class: "us-ring-track", cx: "32", cy: "32", r: "26" }
+                        circle { class: "us-ring-fill", cx: "32", cy: "32", r: "26",
+                            stroke_dasharray: "{RING}", stroke_dashoffset: "{offset:.2}",
+                            transform: "rotate(-90 32 32)",
+                        }
+                    }
+                    span { class: "us-ring-pc num-ltr", "{p}%" }
+                }
+                progress { class: "us-sr-only", max: "{total}", value: "{done}" }
+                p { class: "us-mb num-ltr", "{megabytes(done)} / {megabytes(total)}" }
+            } else {
+                span { class: "us-stage-mark", "data-stage": "{kind}",
+                    svg { view_box: "0 0 24 24", fill: "none", stroke: "currentColor", stroke_width: "2.4",
+                        stroke_linecap: "round", stroke_linejoin: "round", "aria-hidden": "true",
+                        path { d: "{mark}" }
+                    }
+                }
+            }
+            StageExtras { stage: stage.clone() }
         }
     }
 }

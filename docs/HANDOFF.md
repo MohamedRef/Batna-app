@@ -195,6 +195,13 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   Today banner and the "what's new" sheet all render it, so a failure can't
   hide in one of them again (#1338). A failed download/install keeps its
   banner (until «بعدين») and opens the sheet in offer mode.
+- The sheet's offer mode swaps its body by step (#1339): notes while
+  available/ready, then a step view (ring + MB while downloading, installing,
+  done, failed, permission) with the notes behind «إيه الجديد فيها؟»; the
+  footer always shows the step. A download button carries the size. On a
+  metered network a manual download asks first (`stage::MeteredConfirm`,
+  mounted once in the shell); «استنى الواي فاي» sets `prefs.wifi_download`
+  and the next unmetered `step` downloads it, in any mode.
 - The content pack has its own lock (`Updater::content_job`), apart from the
   check/download/install lock (`job`): a tap on «نزّلها» or «ثبّتها» waits
   for a running job instead of being dropped, and never waits for the pack.
@@ -727,6 +734,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-15: #1339: update sheet step views (download ring, installing, done, failed), size on the download button (sheet, banner, Settings), and a mobile-data confirm with «استنى الواي فاي» queueing the download for the next unmetered check.
 - 2026-11-15: #1338: the "what's new" sheet shows failed downloads/installs (headline, detail, «جرّب تاني», manual steps for TooNew/KeyChanged) and «افتح الإذن» for NeedsPermission, from one shared `update::stage` used by Settings, banner and sheet; a failed update keeps its banner.
 - 2026-11-15: «نزّلها» did nothing while the content pack was downloading (the tap lost the updater's one lock to the pack and was dropped silently); the pack now has its own lock and download/install taps wait for a running job instead of being dropped; the lessons row in Settings › Updates always has a line ("same as the app" or its own build) and says when a newer pack is downloading.
 - 2026-11-15: every lesson has a figure step (backlog of #981 cleared on 2026-11-14), so a lesson with none now fails `validate` instead of warning; rheum.L19 lesson4 (pathology, kidney) moved before lesson3 (skin, joints) so lesson starts follow the book (#834).

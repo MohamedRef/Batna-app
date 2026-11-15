@@ -71,7 +71,7 @@ pub fn groups<'a>(b: &'a BuildChanges, rank: impl Fn(&str) -> (u8, usize)) -> Ve
 
 /// Courses he focuses on, then the ones he studies now, then the rest; in
 /// the program's order inside each.
-fn course_rank(lib: &Library) -> impl Fn(&str) -> (u8, usize) + '_ {
+pub(super) fn course_rank(lib: &Library) -> impl Fn(&str) -> (u8, usize) + '_ {
     let focus = crate::courses::focus::current();
     move |id: &str| {
         let pos = lib.program.courses.iter().position(|c| c.id == id).unwrap_or(usize::MAX);
@@ -88,7 +88,7 @@ fn course_rank(lib: &Library) -> impl Fn(&str) -> (u8, usize) + '_ {
 }
 
 /// A group's name: the course's short Arabic name (`كبد`).
-fn group_name(lib: &Library, id: &str) -> String {
+pub(super) fn group_name(lib: &Library, id: &str) -> String {
     match id {
         APP => tx::GROUP_APP.to_owned(),
         "" => tx::GROUP_OTHER.to_owned(),
@@ -180,6 +180,11 @@ pub(super) fn use_return(mut mode: Signal<Option<SheetMode>>) {
         let lesson_open = crate::learn::OPEN.read().is_some();
         let lecture_open = crate::lecture::is_open();
         let screen = ui.map(|u| *u.screen.read());
+        // A closed sheet forgets its search (not while a lesson it opened is up).
+        let parked = PARKED.peek().is_some();
+        if mode.read().is_none() && !parked {
+            super::filter::clear();
+        }
         let Some(p) = *PARKED.peek() else { return };
         // Opened before it was parked, so "not open" means closed.
         let open = if p.lesson { lesson_open && screen == Some(Screen::Learn) } else { lecture_open };
@@ -209,7 +214,7 @@ fn go_icon() -> Element {
 }
 
 /// One line: plain, or a button when it opens something.
-fn line_item(lib: &Library, c: &Change, key: usize) -> Element {
+pub(super) fn line_item(lib: &Library, c: &Change, key: usize) -> Element {
     let (text, latin) = line(c);
     let kind = kind_id(c.kind);
     let words = rsx! {
@@ -234,6 +239,84 @@ fn line_item(lib: &Library, c: &Change, key: usize) -> Element {
     }
 }
 
+/// One sentence for a release spread over several courses: how many
+/// changes, over how many courses, and where most of them are.
+pub fn digest(lib: &Library, total: usize, groups: &[Group<'_>]) -> Option<String> {
+    let courses: Vec<&Group<'_>> = groups.iter().filter(|g| g.id != APP && !g.id.is_empty()).collect();
+    if courses.len() < 2 {
+        return None;
+    }
+    let app = groups.iter().any(|g| g.id == APP);
+    let top = courses.iter().max_by_key(|g| (g.lines.len(), std::cmp::Reverse(g.id.as_str())))?;
+    let changes = crate::i18n::count::count(total, &tx::CHANGE);
+    let over = crate::i18n::count::count(courses.len(), &tx::COURSE);
+    let and_app = if app { tx::AND_APP } else { "" };
+    Some(tx::digest(&changes, &over, and_app, &group_name(lib, &top.id), top.lines.len()))
+}
+
+/// Lessons he finished before the day `b` came out that its lines open
+/// (a lesson, or every finished lesson of a lecture), in order, once each.
+/// `done` is when a lesson was finished, if it was.
+pub fn finished_changed(lib: &Library, b: &BuildChanges, done: impl Fn(&str) -> Option<i64>) -> Vec<String> {
+    let Some(day) = super::changelog::day_of(&b.published_at) else { return Vec::new() };
+    let before = |id: &str| done(id).is_some_and(|ms| ms.div_euclid(86_400_000) < day);
+    let mut out: Vec<String> = Vec::new();
+    for c in &b.changes {
+        let ids: Vec<String> = match target(lib, c) {
+            Some(Target::Lesson(id)) => vec![id],
+            Some(Target::Lecture(id)) => lib
+                .lessons
+                .get(&id)
+                .map(|f| f.lessons.iter().map(|l| l.id.clone()).collect())
+                .unwrap_or_default(),
+            _ => Vec::new(),
+        };
+        for id in ids {
+            if before(&id) && !out.contains(&id) {
+                out.push(id);
+            }
+        }
+    }
+    out
+}
+
+/// What leads an open release: lessons he finished that it changed, then
+/// the digest of a release over several courses.
+fn release_head(lib: &Library, b: &BuildChanges, groups: &[Group<'_>]) -> Element {
+    let changed = finished_changed(lib, b, |id| crate::learn::mark(id).map(|m| m.done_ms));
+    let digest = digest(lib, b.changes.len(), groups);
+    rsx! {
+        if let Some(d) = digest {
+            p { class: "us-digest", "{d}" }
+        }
+        if !changed.is_empty() {
+            section { class: "us-changed",
+                h3 { "{tx::finished_changed(changed.len())}" }
+                ul { class: "us-items",
+                    for id in changed {
+                        {
+                            let title = lib.lesson(&id).map_or(id.clone(), |(_, l)| l.title.clone());
+                            let crumb = lib.lecture_tag(&id);
+                            let t = Target::Lesson(id.clone());
+                            rsx! {
+                                li { key: "{id}", class: "us-linked",
+                                    button { class: "us-link", aria_label: "{tx::OPEN}: {title}", onclick: move |_| follow(&t),
+                                        span { class: "us-link-text",
+                                            span { class: "us-crumb", "{crumb} · " }
+                                            "{title}"
+                                        }
+                                        span { class: "us-go-icon", {go_icon()} }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 /// The open part of a release on the timeline: kind cards, or course rows
 /// when its lines span more than one group.
 #[component]
@@ -253,10 +336,12 @@ pub(super) fn ReleaseBody(release: BuildChanges) -> Element {
     };
     let groups = groups(&release, course_rank(lib));
     let start_open = release.changes.len() <= OPEN_UPTO;
+    let head = release_head(lib, &release, &groups);
 
     if groups.len() < 2 {
         return rsx! {
             style { {CSS.text()} }
+            {head}
             div { class: "us-kinds",
                 for k in ChangeKind::ALL {
                     {
@@ -297,6 +382,7 @@ pub(super) fn ReleaseBody(release: BuildChanges) -> Element {
 
     rsx! {
         style { {CSS.text()} }
+        {head}
         div { class: "us-groups",
             for g in groups {
                 {
@@ -403,6 +489,54 @@ mod tests {
         );
         let hb = groups(&b, rank).remove(2);
         assert_eq!(hb.tally(), [(New, 1), (Fixed, 1)]);
+    }
+
+    #[test]
+    fn a_release_over_several_courses_gets_one_sentence() {
+        use ChangeKind::*;
+        let lib = Library::get();
+        let b = build(vec![
+            c(New, "١", Some("hb"), None),
+            c(New, "٢", Some("hb"), None),
+            c(Fixed, "٣", Some("hem"), None),
+            c(Fixed, "٤", Some("bank"), None),
+        ]);
+        let g = groups(&b, |_| (0, 0));
+        let short = |id: &str| lib.program.course(id).unwrap().short.clone();
+        assert_eq!(
+            digest(lib, 4, &g).unwrap(),
+            format!("4 تغييرات في مادتين والتطبيق؛ الأكتر: {} (2)", short("hb"))
+        );
+        let one = build(vec![c(New, "١", Some("hb"), None), c(New, "٢", Some("bank"), None)]);
+        assert_eq!(digest(lib, 2, &groups(&one, |_| (0, 0))), None, "one course needs no summary");
+    }
+
+    #[test]
+    fn finished_lessons_a_release_changed_are_named_once() {
+        let lib = Library::get();
+        let (lecture, file) = lib.lessons.iter().find(|(_, f)| f.lessons.len() >= 2).unwrap();
+        let (first, second) = (file.lessons[0].id.clone(), file.lessons[1].id.clone());
+        let mut b = build(vec![
+            c(ChangeKind::New, "س", None, Some(&second)),
+            c(ChangeKind::New, "ص", None, Some(lecture)),
+            c(ChangeKind::New, "ع", Some("hb"), None),
+        ]);
+        b.published_at = "2026-11-15T05:00:00Z".into();
+        let day = super::super::changelog::day_of(&b.published_at).unwrap() * 86_400_000;
+        // The first was finished the day before, the second a week before;
+        // the rest of the lecture not at all.
+        let done = |id: &str| {
+            if id == first {
+                Some(day - 3_600_000)
+            } else if id == second {
+                Some(day - 7 * 86_400_000)
+            } else {
+                None
+            }
+        };
+        assert_eq!(finished_changed(lib, &b, done), [second.clone(), first.clone()]);
+        // Finished on the day it came out (maybe after): not named.
+        assert_eq!(finished_changed(lib, &b, |id| (id == first).then_some(day + 1)), Vec::<String>::new());
     }
 
     #[test]

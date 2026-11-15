@@ -15,7 +15,7 @@ mod data;
 mod look;
 #[cfg(all(feature = "desktop", not(target_os = "android")))]
 pub mod menu;
-mod search;
+pub(crate) mod search;
 
 use dioxus::prelude::*;
 

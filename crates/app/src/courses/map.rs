@@ -208,6 +208,7 @@ fn CourseTile(
                             onclick: move |_| on_lectures.call(lecture_id.clone()),
                             {tx::OPEN_LECTURES}
                         }
+                        crate::reset::CourseReset { course: s.course.id.clone() }
                     } else {
                         p { class: "muted small", {tx::NO_CONTENT} }
                     }

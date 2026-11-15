@@ -641,6 +641,7 @@ mod date_tests {
         let data = |events: Vec<ReviewEvent>| StudyData {
             lectures: vec![lecture.clone()],
             events,
+            history: None,
             marks: Default::default(),
             forecast: Some(Vec::new()),
             clock,

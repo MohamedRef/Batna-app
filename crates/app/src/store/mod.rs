@@ -20,6 +20,7 @@ mod notes;
 pub mod own;
 mod paths;
 mod places;
+mod resets;
 #[cfg(test)]
 mod revision_tests;
 pub mod sync;
@@ -36,9 +37,9 @@ use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 
-#[cfg(test)]
-pub use backend::test_review;
 pub use backend::{LectureProgress, NoteError, Overview, Review, use_provide_review, use_review};
+#[cfg(test)]
+pub use backend::{test_review, test_review_on};
 pub use contention::SYNC_BUSY;
 pub use health::{read_error, read_failed, read_recovered};
 

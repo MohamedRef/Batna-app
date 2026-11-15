@@ -20,6 +20,8 @@ pub fn DataSection() -> Element {
         div { class: "section-head", h2 { {tx::DATA_GROUP_EXPORT} } }
         crate::anki::AnkiExport {}
         crate::verify::ExportVerdicts {}
+        div { class: "section-head", h2 { {tx::DATA_GROUP_START_OVER} } }
+        crate::reset::ResetCard {}
         div { class: "section-head", h2 { {tx::DATA_GROUP_DEVICE} } }
         Card {
             h2 { {tx::DATA_FOLDER} }

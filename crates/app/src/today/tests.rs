@@ -63,6 +63,7 @@ fn target(focus: Focus) -> DailyTarget {
     let data = StudyData {
         lectures,
         events,
+        history: None,
         marks: Default::default(),
         forecast: Some(vec![4; 60]),
         clock,

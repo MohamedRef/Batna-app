@@ -24,13 +24,22 @@ fn clock() -> Clock {
 fn studied() -> StudyData {
     let lectures = lectures();
     let events = demo::events(&lectures, NOW_MS);
-    StudyData { lectures, events, marks: demo::marks(), forecast: None, clock: clock(), demo: true }
+    StudyData {
+        lectures,
+        events,
+        history: None,
+        marks: demo::marks(),
+        forecast: None,
+        clock: clock(),
+        demo: true,
+    }
 }
 
 fn fresh() -> StudyData {
     StudyData {
         lectures: lectures(),
         events: Vec::new(),
+        history: None,
         marks: Default::default(),
         forecast: Some(vec![2, 4]),
         clock: clock(),
@@ -316,7 +325,15 @@ fn sure_misses() -> StudyData {
         ..ReviewEvent::new(item, Grade::Again, Origin::Study, NOW_MS - days_ago * DAY_MS - 3_600_000, 8_000)
     };
     let events = vec![miss(&card.id, 3, ErrorReason::Misread), miss(&mcq.id, 1, ErrorReason::Knowledge)];
-    StudyData { lectures, events, marks: Default::default(), forecast: None, clock: clock(), demo: false }
+    StudyData {
+        lectures,
+        events,
+        history: None,
+        marks: Default::default(),
+        forecast: None,
+        clock: clock(),
+        demo: false,
+    }
 }
 
 #[test]

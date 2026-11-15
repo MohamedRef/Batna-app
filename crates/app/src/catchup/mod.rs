@@ -93,6 +93,16 @@ fn save(plan: Option<Plan>) {
     }
 }
 
+/// The stored plan, running or not (a reset keeps it for undo).
+pub fn stored() -> Option<Plan> {
+    load().filter(|p| p.days > 0)
+}
+
+/// Replaces the plan (`None` ends it), for a reset and its undo.
+pub fn replace(plan: Option<Plan>) {
+    save(plan);
+}
+
 /// After a sync or restore: draw the plan again.
 pub fn reload() {
     *REV.write() += 1;

@@ -51,6 +51,17 @@ pub fn save(store: &Store, dir: &Path, date: &str, now_ms: i64) -> Result<(PathB
     Ok((path, export.rows))
 }
 
+/// Writes a backup right now (a reset saves one first) and says where:
+/// the file's path, or on the web the downloaded file's name.
+pub fn backup_now(store: &Store) -> Result<String, String> {
+    #[cfg(target_arch = "wasm32")]
+    return download(store, &local_date(), store::now_ms()).map(|(name, _)| name);
+    #[cfg(not(target_arch = "wasm32"))]
+    store::export_dir()
+        .and_then(|dir| save(store, &dir, &local_date(), store::now_ms()))
+        .map(|(path, _)| path.display().to_string())
+}
+
 /// The web: the same export as a browser download; returns its name and rows.
 #[cfg(target_arch = "wasm32")]
 fn download(store: &Store, date: &str, now_ms: i64) -> Result<(String, u64), String> {

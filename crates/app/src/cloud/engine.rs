@@ -27,11 +27,33 @@ type Ws = Socket;
 
 /// Keeps NAT mappings and the Cloudflare edge from dropping an idle socket.
 /// Protocol pings are answered by the runtime, so they don't wake the hub.
-const PING_EVERY: Duration = Duration::from_secs(30);
+const PING_EVERY: Duration = quick(30_000, 300);
 /// Writes from screens that don't send [`Command::Kick`] still go up this soon.
 const OUTBOX_EVERY: Duration = Duration::from_secs(2);
 /// After the hub says this device's clock is ahead, pushes wait this long.
 const CLOCK_RETRY: Duration = Duration::from_secs(60);
+/// A connect that hasn't finished by then is given up and tried again.
+/// Android can hand an app a network that answers nothing (DNS, TCP or TLS
+/// never reply), and an unbounded connect then stalls the whole engine:
+/// no retries, no commands, and Settings stuck on «مش متصل».
+const CONNECT_TIMEOUT: Duration = quick(20_000, 3_000);
+/// A send or ping the network doesn't take by then means the socket is dead.
+const SEND_TIMEOUT: Duration = quick(10_000, 2_000);
+/// Nothing heard on an open socket for this long (pings get pongs every
+/// [`PING_EVERY`]): ask the hub directly, and drop the socket if that
+/// goes unanswered for [`PROBE_WAIT`]. Catches a connection that died
+/// without a close, which otherwise looks live forever.
+const SILENT_FOR: Duration = quick(65_000, 1_000);
+const PROBE_WAIT: Duration = quick(15_000, 600);
+/// Back in front with nothing heard for this long: reconnect at once
+/// rather than wait for the silence check.
+const STALE_ON_RESUME: Duration = quick(40_000, 1_000);
+
+/// `real_ms`, or `test_ms` in tests, so the socket checks run through in
+/// a fraction of a second.
+const fn quick(real_ms: u64, test_ms: u64) -> Duration {
+    Duration::from_millis(if cfg!(test) { test_ms } else { real_ms })
+}
 /// How long a sign-in Google already approved keeps retrying: Google's codes
 /// live about ten minutes, its ID tokens an hour.
 const CODE_LIFE: Duration = Duration::from_secs(9 * 60);
@@ -84,6 +106,10 @@ pub struct Engine {
     ws: Option<Ws>,
     backoff: Backoff,
     retry_at: Instant,
+    /// When the open socket last delivered anything (a pong counts).
+    last_heard: Instant,
+    /// When an app-level ping went out to test a silent socket.
+    probe_sent: Option<Instant>,
     /// Set after `Revoked`, `Outdated` or sign-out: no reconnects until sign-in.
     stopped: bool,
     /// The last status sent, so an unchanged one isn't sent again.
@@ -143,6 +169,8 @@ impl Engine {
             client,
             ws: None,
             backoff: Backoff::default(),
+            last_heard: Instant::now(),
+            probe_sent: None,
             retry_at: Instant::now(),
             stopped: false,
             last_status: None,
@@ -168,6 +196,8 @@ impl Engine {
                 self.emit_status();
             }
             if self.ws.is_none() && self.wants_socket() && Instant::now() >= self.retry_at {
+                // Shows «بيتصل» while it tries, not the last «مش متصل».
+                self.emit_status();
                 self.connect().await;
                 self.emit_status();
             }
@@ -207,16 +237,12 @@ impl Engine {
             }
             if now >= next_ping {
                 next_ping = now + PING_EVERY;
-                if let Some(ws) = &mut self.ws
-                    && ws.ping().await.is_err()
-                {
-                    self.drop_socket();
-                }
+                self.keep_alive().await;
             }
             self.emit_status();
         }
         if let Some(ws) = self.ws.take() {
-            ws.close().await;
+            close(ws).await;
         }
     }
 
@@ -293,13 +319,31 @@ impl Engine {
                     crate::diag::report!("sync: forgetting held ops: {e}");
                 }
             }
-            Command::Kick => {
-                // Also sent when Batna comes back to the front: a waiting
-                // sign-in tries again right away.
+            Command::Kick => self.pump().await,
+            Command::Resume => {
+                // A waiting sign-in tries again right away.
                 if let Some(p) = &mut self.pending_sign_in {
                     p.retry_at = Instant::now();
                 }
+                if self.ws.is_some() && self.last_heard.elapsed() >= STALE_ON_RESUME {
+                    // Android likely cut it while Batna was in the back.
+                    self.drop_socket();
+                }
+                self.retry_now();
                 self.pump().await
+            }
+            Command::SyncNow => {
+                if let Some(p) = &mut self.pending_sign_in {
+                    p.retry_at = Instant::now();
+                }
+                // A fresh connection pulls everything new and pushes the
+                // outbox, whatever state the old one was in.
+                if let Some(ws) = self.ws.take() {
+                    self.client.on_close();
+                    close(ws).await;
+                }
+                self.problem = self.problem.filter(|p| !matches!(p, Problem::Network | Problem::Server));
+                self.retry_now();
             }
             Command::Shutdown => {}
         }
@@ -623,9 +667,15 @@ impl Engine {
             self.schedule_retry();
             return;
         };
-        match Socket::connect(&self.api.sync_url(), &access).await {
+        let url = self.api.sync_url();
+        let connected = crate::platform::time::timeout(CONNECT_TIMEOUT, Socket::connect(&url, &access))
+            .await
+            .unwrap_or_else(|_| Err(ConnectError::Failed("timed out".into())));
+        match connected {
             Ok(ws) => {
                 self.ws = Some(ws);
+                self.last_heard = Instant::now();
+                self.probe_sent = None;
                 self.problem = None;
                 // A new connection may reach a newly deployed hub.
                 self.hub_lacks.clear();
@@ -648,6 +698,39 @@ impl Engine {
         }
     }
 
+    /// Forgets the backoff: the next loop turn connects.
+    fn retry_now(&mut self) {
+        if self.ws.is_none() && self.wants_socket() {
+            self.backoff.reset();
+            self.retry_at = Instant::now();
+        }
+    }
+
+    /// Every [`PING_EVERY`]: a ping, and the check for a silent socket.
+    async fn keep_alive(&mut self) {
+        if self.ws.is_none() {
+            return;
+        }
+        if let Some(sent) = self.probe_sent {
+            if sent.elapsed() >= PROBE_WAIT {
+                let silent = self.last_heard.elapsed().as_secs();
+                crate::diag::report!("sync socket: nothing heard for {silent}s, reconnecting");
+                self.drop_socket();
+            }
+            return;
+        }
+        if self.last_heard.elapsed() >= SILENT_FOR {
+            self.probe_sent = Some(Instant::now());
+            self.send(&ClientMsg::Ping).await;
+            return;
+        }
+        let Some(ws) = &mut self.ws else { return };
+        let pinged = crate::platform::time::timeout(SEND_TIMEOUT, ws.ping()).await;
+        if !matches!(pinged, Ok(Ok(()))) {
+            self.drop_socket();
+        }
+    }
+
     fn schedule_retry(&mut self) {
         let jitter = (now_ms() % 1000) as f64 / 1000.0;
         self.retry_at = Instant::now() + Duration::from_millis(self.backoff.next_delay_ms(jitter));
@@ -662,6 +745,8 @@ impl Engine {
     }
 
     async fn frame(&mut self, frame: Frame) {
+        self.last_heard = Instant::now();
+        self.probe_sent = None;
         let text = match frame {
             Frame::Text(text) => text,
             Frame::Closed(code) => {
@@ -746,7 +831,7 @@ impl Engine {
                 Effect::Reconnect { reason } => {
                     crate::diag::report!("sync reconnects: {reason}");
                     if let Some(ws) = self.ws.take() {
-                        ws.close().await;
+                        close(ws).await;
                     }
                     self.drop_socket();
                 }
@@ -758,7 +843,7 @@ impl Engine {
                         self.stopped = true;
                     }
                     if let Some(ws) = self.ws.take() {
-                        ws.close().await;
+                        close(ws).await;
                     }
                     self.client.on_close();
                 }
@@ -791,7 +876,8 @@ impl Engine {
     async fn send(&mut self, msg: &ClientMsg) {
         let Some(ws) = &mut self.ws else { return };
         let text = serde_json::to_string(msg).unwrap_or_default();
-        if let Err(e) = ws.send_text(text).await {
+        let sent = crate::platform::time::timeout(SEND_TIMEOUT, ws.send_text(text)).await;
+        if let Err(e) = sent.unwrap_or_else(|_| Err("timed out".into())) {
             crate::diag::report!("sync send: {e}");
             self.drop_socket();
         }
@@ -827,6 +913,11 @@ impl Engine {
             self.events.send(Event::Status(status)).ok();
         }
     }
+}
+
+/// Closes politely, but never waits long on a dead network.
+async fn close(ws: Ws) {
+    let _ = crate::platform::time::timeout(SEND_TIMEOUT, ws.close()).await;
 }
 
 async fn next_frame(ws: &mut Option<Ws>) -> Frame {

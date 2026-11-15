@@ -78,8 +78,9 @@ pub fn use_provide_cloud() {
             }
         });
     });
-    // Back in front (Android hands a backgrounded app no network): a sign-in
-    // Google approved meanwhile finishes now, and the outbox goes up.
+    // Back in front (Android hands a backgrounded app no network), or the
+    // network came back: reconnect now rather than wait out the backoff, a
+    // sign-in Google approved meanwhile finishes, and the outbox goes up.
     use_future(move || async move {
         let mut eval = document::eval(
             r#"
@@ -87,11 +88,12 @@ pub fn use_provide_cloud() {
             document.addEventListener("visibilitychange", send);
             window.addEventListener("focus", send);
             window.addEventListener("pageshow", send);
+            window.addEventListener("online", send);
             await new Promise(() => {});
             "#,
         );
         while eval.recv::<bool>().await.is_ok() {
-            cloud.send(Command::Kick);
+            cloud.send(Command::Resume);
         }
     });
     // Every answer and verdict is in the outbox: push it now.
@@ -220,7 +222,7 @@ pub fn SyncSection() -> Element {
                     p { class: "muted", aria_live: "polite", {tx::SIGNING_IN} }
                 } else if status.finishing_sign_in {
                     p { class: "muted", aria_live: "polite", {tx::FINISHING} }
-                    button { class: "btn btn-primary", onclick: move |_| cloud.send(Command::Kick), {tx::TRY_NOW} }
+                    button { class: "btn btn-primary", onclick: move |_| cloud.send(Command::SyncNow), {tx::TRY_NOW} }
                 } else {
                     button { class: "btn btn-primary", onclick: move |_| cloud.send(Command::SignInGoogle), {tx::SIGN_IN} }
                 }
@@ -464,6 +466,8 @@ fn SignedIn(status: CloudStatus) -> Element {
     let cloud = use_context::<Cloud>();
     let email = status.email.clone().unwrap_or_default();
     let last = status.last_sync_ms.map(|ms| ago(ms, now_ms()));
+    // Already on its way: pressing again would only restart it.
+    let busy = matches!(status.sync, SyncState::Connecting | SyncState::CatchingUp);
     rsx! {
         div { class: "sync-who",
             span { class: "row-icon", aria_hidden: "true", {crate::icons::section("sync")} }
@@ -487,6 +491,13 @@ fn SignedIn(status: CloudStatus) -> Element {
             }
         }
         div { class: "sync-actions",
+            button {
+                class: "btn btn-primary",
+                disabled: busy,
+                onclick: move |_| cloud.send(Command::SyncNow),
+                {crate::icons::refresh()}
+                if busy { {tx::SYNCING} } else { {tx::SYNC_NOW} }
+            }
             button { class: "btn btn-secondary", onclick: move |_| cloud.send(Command::SignOut), {tx::SIGN_OUT} }
         }
     }
@@ -874,7 +885,8 @@ mod tests {
     fn each_button_asks_the_engine_for_its_own_thing() {
         assert_eq!(press(status(SyncState::SignedOut), None, tx::SIGN_IN), ["SignInGoogle"]);
         let waiting = CloudStatus { finishing_sign_in: true, ..status(SyncState::SignedOut) };
-        assert_eq!(press(waiting, None, tx::TRY_NOW), ["Kick"]);
+        assert_eq!(press(waiting, None, tx::TRY_NOW), ["SyncNow"]);
+        assert_eq!(press(status(SyncState::Offline), None, tx::SYNC_NOW), ["SyncNow"]);
         assert_eq!(press(status(SyncState::Offline), None, tx::SIGN_OUT), ["SignOut"]);
         assert_eq!(press(status(SyncState::Offline), None, tx::REFRESH), ["LoadDevices"]);
         let tab = device("tab-1", "SM-X730", Platform::Android);

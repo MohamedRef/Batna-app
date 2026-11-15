@@ -575,6 +575,17 @@ Add a bullet here when a PR adds something a later agent must know.
   after every answer (random grades/origins/gaps; and a debug check in every
   app test). Release timings (hosted Linux, `replay_timings`): 10k answers
   3.6 ms full vs 0.05 ms step; 50k 20 ms vs 0.25 ms; 100k 43 ms vs 0.6 ms.
+- **Sync never stalls** (2026-11-15): the engine bounds every network
+  wait (`cloud/engine.rs`: connect 20 s, send/ping/close 10 s), so a network
+  that swallows packets can't freeze it on «مش متصل». An open socket that
+  delivered nothing for 65 s gets an app-level ping and is replaced if that
+  goes unanswered for 15 s. Backoff caps at 1 minute (`Backoff::MAX_MS`,
+  was 5). `Command::Resume` (the app back in front, or the WebView's
+  `online` event) skips the backoff and replaces a socket silent for 40 s;
+  `Command::SyncNow` (Settings › Sync «زامن دلوقتي», and «جرّب دلوقتي» on a
+  waiting sign-in) closes the socket and connects at once. `Kick` only
+  pushes. FakeCloud knobs `set_stalled`, `mute`, `upgrades`, `connections`
+  test these; timings are short under `cfg(test)` (`quick`).
 - **Live content switches are bounded** (audit F17): old libraries are
   leaked (screens hold `&'static`), so a run switches packs live at most
   `MAX_LIVE_RELOADS` (2) times; a later pack opens at the next start.
@@ -732,7 +743,7 @@ further; don't change FSRS or Undo speculatively.
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, start over per course, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync, password login, OTA app + content updates, web |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, start over per course, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync (with «زامن دلوقتي»), password login, OTA app + content updates, web |
 | Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
 | Content | 9 courses, 141 lectures, 141 lesson files; `res` L01–L20 written; L02–L11 checked against the enriched lecture copies, and res.L02 against its video recording (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
@@ -771,6 +782,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-15: Settings › Sync «زامن دلوقتي» forces a sync now; the sync engine bounds connect/send waits, replaces silent sockets, caps its backoff at 1 minute and retries at once when the app comes back or the network returns (§ 10 Sync never stalls).
 - 2026-11-15: What's new finishes #1340: a digest line per release (changes, courses, the busiest course), a box of lessons you had finished that the release changed (each opens), and changelog search with course and kind filters across every kept build.
 - 2026-11-15: What's new groups a release by course (#1340): `changes/*.yaml` lines take an optional `scope` (course id or app area) and `open` (lesson, lecture or screen), carried in the feed; the sheet shows the app, then one folded row per course with counts, and a line opens its lesson (closing it brings the sheet back). A one-off pass scoped 1114 of 1199 existing lines; old feed lines get theirs by their Arabic text when a manifest is built. Digest line, "changed since you did it" and search are still open in #1340.
 - 2026-11-15: «ابدأ من الأول» (#1341): reset progress for one course or the whole curriculum with one synced marker (`reset.<course>` / `reset.all`), nothing deleted, undo by removing it; backup first, refused under an open session or paper (§ 10 Start over).

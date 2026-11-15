@@ -138,6 +138,12 @@ pub enum Command {
     /// A local write landed in the outbox: push it now rather than on the
     /// next two-second tick.
     Kick,
+    /// Batna is back in front, or the network came back: reconnect now
+    /// instead of waiting out the backoff, and finish a waiting sign-in.
+    Resume,
+    /// «زامن دلوقتي»: a fresh connection right now, which pulls what the
+    /// other devices sent and pushes the outbox.
+    SyncNow,
     #[allow(dead_code)] // the app runs until the process ends
     Shutdown,
 }
@@ -185,6 +191,8 @@ impl std::fmt::Debug for Command {
             Self::SendHeldAgain => write!(f, "SendHeldAgain"),
             Self::ForgetHeld => write!(f, "ForgetHeld"),
             Self::Kick => write!(f, "Kick"),
+            Self::Resume => write!(f, "Resume"),
+            Self::SyncNow => write!(f, "SyncNow"),
             Self::Shutdown => write!(f, "Shutdown"),
         }
     }

@@ -8,6 +8,7 @@ use batna_core::update::Channel;
 use dioxus::prelude::*;
 
 use super::sheet::{SheetMode, UpdateSheetNav};
+use super::stage::{Act, Stage, stage};
 use super::{ContentCheck, Failure, Mode, Off, Offer, Phase, Status, Updater};
 use crate::i18n::update as tx;
 use crate::settings::{DeviceOnly, Section, SettingsNav};
@@ -57,12 +58,7 @@ pub fn use_update_status() -> Signal<Option<Status>> {
     status
 }
 
-/// Runs a blocking updater call off the UI thread.
-fn work(f: impl FnOnce(&'static Updater) + Send + 'static) {
-    if let Some(u) = super::get() {
-        let _ = std::thread::Builder::new().name("batna-update".into()).spawn(move || f(u));
-    }
-}
+pub(super) use super::stage::work;
 
 /// What's new in `o`: up to `max` of its changes (new things first), or
 /// the feed's notes from before the changelog.
@@ -92,32 +88,6 @@ fn mode_label(m: Mode) -> (&'static str, &'static str) {
         Mode::Auto => (tx::MODE_AUTO, tx::MODE_AUTO_SUB),
         Mode::Notify => (tx::MODE_NOTIFY, tx::MODE_NOTIFY_SUB),
         Mode::Off => (tx::MODE_OFF, tx::MODE_OFF_SUB),
-    }
-}
-
-/// The button that moves an offer forward, for the card and the banner.
-pub(super) fn primary_action(phase: &Phase) -> Option<(&'static str, fn())> {
-    fn download() {
-        work(Updater::download);
-    }
-    fn install() {
-        work(Updater::install);
-    }
-    fn restart() {
-        #[cfg(target_os = "macos")]
-        super::restart();
-    }
-    match phase {
-        Phase::Available(_) => Some((tx::DOWNLOAD, download)),
-        Phase::Ready(_) if cfg!(target_os = "macos") => Some((tx::INSTALL_RESTART, install)),
-        Phase::Ready(_) => Some((tx::INSTALL_NOW, install)),
-        Phase::NeedsPermission(_) => Some((tx::TRY_AGAIN, install)),
-        Phase::Installed(_) => Some((tx::RESTART_NOW, restart)),
-        Phase::Failed { offer: Some(_), why: Failure::Install(_) } => Some((tx::TRY_AGAIN, install)),
-        Phase::Failed { offer: Some(_), why: Failure::Network | Failure::Verify(_) } => {
-            Some((tx::TRY_AGAIN, download))
-        }
-        _ => None,
     }
 }
 
@@ -388,46 +358,12 @@ fn ContentResult(status: Status) -> Element {
 
 #[component]
 fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
-    let action = primary_action(&phase);
-    let offer: Option<Offer> = match &phase {
-        Phase::Available(o)
-        | Phase::Ready(o)
-        | Phase::Installing(o)
-        | Phase::NeedsPermission(o)
-        | Phase::Installed(o)
-        | Phase::Downloading { offer: o, .. } => Some(o.clone()),
-        Phase::Failed { offer, .. } => offer.clone(),
-        _ => None,
-    };
-    let headline = match &phase {
-        Phase::Idle => return rsx! {},
-        Phase::Checking => tx::CHECKING,
-        Phase::UpToDate => tx::UP_TO_DATE,
-        Phase::NotForThisDevice => tx::NOT_FOR_DEVICE,
-        Phase::Available(_) => tx::AVAILABLE,
-        Phase::Downloading { .. } => tx::DOWNLOADING,
-        Phase::Ready(_) => tx::READY,
-        Phase::Installing(_) => tx::INSTALLING,
-        Phase::NeedsPermission(_) => tx::NEEDS_PERMISSION,
-        Phase::Installed(_) => tx::INSTALLED,
-        Phase::Failed { why: Failure::Network, .. } => tx::FAILED_NETWORK,
-        Phase::Failed { why: Failure::Verify(_), .. } => tx::FAILED_VERIFY,
-        Phase::Failed { why: Failure::Install(_), .. } => tx::FAILED_INSTALL,
-        Phase::Failed { why: Failure::TooNew, .. } => tx::TOO_NEW,
-        Phase::Failed { why: Failure::KeyChanged, .. } => tx::KEY_CHANGED,
-    };
-    let failed = matches!(phase, Phase::Failed { .. });
-    let detail = match &phase {
-        Phase::Failed { why: Failure::Verify(d) | Failure::Install(d), .. } => Some(d.clone()),
-        _ => None,
-    };
-    let progress = match &phase {
-        Phase::Downloading { offer, done } => Some((*done, offer.asset.size.max(1))),
-        _ => None,
-    };
-    let what_new = offer.as_ref().map(|o| notes(o, 3)).filter(|n| !n.is_empty() && !failed);
+    let _ = auto;
+    let Some(st) = stage(&phase, cfg!(target_os = "android")) else { return rsx! {} };
+    let failed = st.failed;
+    let what_new = st.offer.as_ref().map(|o| notes(o, 3)).filter(|n| !n.is_empty() && !failed);
     // Changelog lines are bullets already; old notes get a "What's new:".
-    let prefix = offer.as_ref().is_some_and(|o| o.changes.is_empty());
+    let prefix = st.offer.as_ref().is_some_and(|o| o.changes.is_empty());
     rsx! {
         div { class: "update-state", role: "status", aria_live: "polite",
             p {
@@ -437,9 +373,9 @@ fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
                 }
                 strong {
                     if matches!(phase, Phase::UpToDate) { "✓ " }
-                    {headline}
+                    {st.headline}
                 }
-                if let Some(o) = offer.as_ref().filter(|_| !failed) {
+                if let Some(o) = st.offer.as_ref().filter(|_| !failed) {
                     " "
                     bdi { dir: "ltr", "{o.label()}" }
                     if matches!(phase, Phase::Available(_)) {
@@ -447,17 +383,10 @@ fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
                     }
                 }
             }
-            if let Some((done, total)) = progress {
+            if let Some((done, total)) = st.progress {
                 progress { max: "{total}", value: "{done}" }
             }
-            if matches!(phase, Phase::Installing(_)) && cfg!(target_os = "android") {
-                p { class: "muted small", {tx::INSTALLING_ANDROID} }
-            }
-            if matches!(phase, Phase::Available(_)) && auto && cfg!(target_os = "android") {
-            }
-            if matches!(phase, Phase::Installed(_)) {
-                p { class: "muted small", {tx::NEXT_LAUNCH} }
-            }
+            StageExtras { stage: st.clone() }
             if let Some(n) = what_new {
                 p { class: "update-notes",
                     if prefix {
@@ -466,50 +395,49 @@ fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
                     "{n}"
                 }
             }
-            if let Some(d) = detail {
-                p { class: "muted small", dir: "ltr", bdi { "{d}" } }
-            }
-            if matches!(phase, Phase::Failed { why: Failure::KeyChanged, .. }) {
-                ol { class: "small",
-                    for (i, step) in tx::KEY_CHANGED_STEPS.iter().enumerate() {
-                        li { key: "{i}", {*step} }
-                    }
-                }
-                div { class: "row",
-                    button {
-                        class: "btn btn-primary",
-                        onclick: move |_| {
-                            if let Err(e) = crate::cloud::open_url(&preview_apk_url()) {
-                                crate::diag::report!("{e}");
-                            }
-                        },
-                        {tx::GET_PREVIEW}
-                    }
-                }
-            }
-            if let Some((label, run)) = action {
-                div { class: "row",
-                    button { class: "btn btn-primary", onclick: move |_| run(), {label} }
-                    if matches!(phase, Phase::NeedsPermission(_)) {
-                        button { class: "btn btn-secondary", onclick: move |_| open_install_permission(), {tx::OPEN_PERMISSION} }
-                    }
+            StageButtons { phase: phase.clone(), acts: st.acts.clone(), class: "row" }
+        }
+    }
+}
+
+/// A stage's hint, the system's detail and any steps by hand: the same in
+/// Settings and in the sheet.
+#[component]
+pub(super) fn StageExtras(stage: Stage) -> Element {
+    rsx! {
+        if let Some(h) = stage.hint {
+            p { class: "muted small us-hint", {h} }
+        }
+        if let Some(d) = stage.detail {
+            p { class: "muted small", dir: "ltr", bdi { "{d}" } }
+        }
+        if !stage.steps.is_empty() {
+            ol { class: "small",
+                for (i, step) in stage.steps.iter().enumerate() {
+                    li { key: "{i}", {*step} }
                 }
             }
         }
     }
 }
 
-/// The newest preview APK, next to the preview feed.
-fn preview_apk_url() -> String {
-    let feed = Channel::Preview.feed_url();
-    let base = feed.rsplit_once('/').map_or(feed.as_str(), |(b, _)| b);
-    format!("{base}/batna-preview.apk")
-}
-
-fn open_install_permission() {
-    #[cfg(target_os = "android")]
-    if let Err(e) = crate::platform::install::open_install_permission() {
-        crate::diag::report!("{e}");
+/// A stage's buttons, the first one primary.
+#[component]
+pub(super) fn StageButtons(phase: Phase, acts: Vec<Act>, class: &'static str) -> Element {
+    if acts.is_empty() {
+        return rsx! {};
+    }
+    rsx! {
+        div { class: "{class}",
+            for (i, act) in acts.into_iter().enumerate() {
+                button {
+                    key: "{i}",
+                    class: if i == 0 { "btn btn-primary" } else { "btn btn-secondary" },
+                    onclick: move |_| act.run(),
+                    {act.label(&phase)}
+                }
+            }
+        }
     }
 }
 
@@ -526,13 +454,11 @@ pub fn UpdateBanner() -> Element {
 pub(super) fn BannerView(status: Signal<Option<Status>>) -> Element {
     let Some(s) = status.read().clone() else { return rsx! {} };
     let Some(offer) = s.banner().cloned() else { return rsx! {} };
-    let Some((label, run)) = primary_action(&s.phase) else { return rsx! {} };
-    let headline = match s.phase {
-        Phase::Available(_) => tx::AVAILABLE,
-        Phase::Installed(_) => tx::INSTALLED,
-        Phase::NeedsPermission(_) => tx::NEEDS_PERMISSION,
-        _ => tx::READY,
-    };
+    let Some(st) = stage(&s.phase, cfg!(target_os = "android")) else { return rsx! {} };
+    if st.acts.is_empty() {
+        return rsx! {};
+    }
+    let headline = st.headline;
     // The banner stays short: two lines, the sheet has the rest.
     let what_new = notes(&offer, 2);
     let sheet = try_use_context::<UpdateSheetNav>();
@@ -550,7 +476,14 @@ pub(super) fn BannerView(status: Signal<Option<Status>>) -> Element {
                 }
             }
             div { class: "row",
-                button { class: "btn btn-primary", onclick: move |_| run(), {label} }
+                for (i, act) in st.acts.iter().copied().enumerate() {
+                    button {
+                        key: "{i}",
+                        class: if i == 0 { "btn btn-primary" } else { "btn btn-secondary" },
+                        onclick: move |_| act.run(),
+                        {act.label(&s.phase)}
+                    }
+                }
                 if let Some(sheet) = sheet {
                     button { class: "btn btn-secondary", onclick: move |_| sheet.open(SheetMode::Offer), {tx::WHATS_NEW_ASK} }
                 }

@@ -8,7 +8,7 @@ use batna_core::update::Channel;
 use dioxus::prelude::*;
 
 use super::sheet::{SheetMode, UpdateSheetNav};
-use super::stage::{Act, Stage, stage};
+use super::stage::{Act, ActLabel, Stage, stage};
 use super::{ContentCheck, Failure, Mode, Off, Offer, Phase, Status, Updater};
 use crate::i18n::update as tx;
 use crate::settings::{DeviceOnly, Section, SettingsNav};
@@ -40,6 +40,15 @@ pub(super) const UPDATE_CSS: &str = r#"
 .ur-sub { color: var(--muted); font-size: var(--fs-sm); overflow-wrap: anywhere; }
 .update-toggle { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
 .update-toggle-text { display: grid; gap: var(--sp-1); }
+.um-backdrop { position: fixed; inset: 0; z-index: 70; background: rgb(0 0 0 / .45); }
+.um-dialog {
+  position: fixed; z-index: 71; inset-inline: 1rem; inset-block-end: 1rem; margin-inline: auto; max-inline-size: 26rem;
+  display: grid; gap: .6rem; padding: 1.1rem 1.1rem 1rem; border-radius: 1.1rem;
+  background: var(--bg); color: var(--text); box-shadow: 0 12px 40px rgb(0 0 0 / .25);
+}
+.um-dialog h2 { margin: 0; font-size: 1.05rem; }
+.um-dialog p { margin: 0; }
+@media (min-width: 600px) { .um-dialog { inset-block: auto 30%; } }
 "#;
 
 /// The updater's status, following its thread.
@@ -221,9 +230,9 @@ pub(super) fn UpdatesView(status: Signal<Option<Status>>) -> Element {
             } else if let Some(s) = s.clone() {
                 // The feed itself out of reach is one line, not two.
                 if feed_down {
-                    PhaseView { phase: s.phase.clone(), auto: s.prefs.mode == Mode::Auto, label: false }
+                    PhaseView { phase: s.phase.clone(), queued: queued(&s), label: false }
                 } else {
-                    PhaseView { phase: s.phase.clone(), auto: s.prefs.mode == Mode::Auto, label: true }
+                    PhaseView { phase: s.phase.clone(), queued: queued(&s), label: true }
                     ContentResult { status: s.clone() }
                 }
                 p { class: "muted small ur-last",
@@ -313,6 +322,11 @@ pub(super) fn UpdatesView(status: Signal<Option<Status>>) -> Element {
     }
 }
 
+/// He chose to wait for Wi-Fi for the offer on screen.
+pub(super) fn queued(s: &Status) -> bool {
+    matches!(&s.phase, Phase::Available(o) if s.prefs.wifi_download.as_deref() == Some(o.key().as_str()))
+}
+
 /// The Settings list's line for Updates: what is going on, or when it last
 /// looked. `None` keeps the section's own summary (updates off, never looked).
 pub fn summary(s: &Status) -> Option<String> {
@@ -357,8 +371,7 @@ fn ContentResult(status: Status) -> Element {
 }
 
 #[component]
-fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
-    let _ = auto;
+fn PhaseView(phase: Phase, queued: bool, label: bool) -> Element {
     let Some(st) = stage(&phase, cfg!(target_os = "android")) else { return rsx! {} };
     let failed = st.failed;
     let what_new = st.offer.as_ref().map(|o| notes(o, 3)).filter(|n| !n.is_empty() && !failed);
@@ -395,7 +408,10 @@ fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
                     "{n}"
                 }
             }
-            StageButtons { phase: phase.clone(), acts: st.acts.clone(), class: "row" }
+            StageButtons { phase: phase.clone(), acts: st.acts.clone(), size: st.offer.as_ref().map(|o| o.asset.size), class: "row" }
+            if queued {
+                p { class: "muted small", {tx::WIFI_QUEUED} }
+            }
         }
     }
 }
@@ -423,7 +439,7 @@ pub(super) fn StageExtras(stage: Stage) -> Element {
 
 /// A stage's buttons, the first one primary.
 #[component]
-pub(super) fn StageButtons(phase: Phase, acts: Vec<Act>, class: &'static str) -> Element {
+pub(super) fn StageButtons(phase: Phase, acts: Vec<Act>, size: Option<u64>, class: &'static str) -> Element {
     if acts.is_empty() {
         return rsx! {};
     }
@@ -434,7 +450,7 @@ pub(super) fn StageButtons(phase: Phase, acts: Vec<Act>, class: &'static str) ->
                     key: "{i}",
                     class: if i == 0 { "btn btn-primary" } else { "btn btn-secondary" },
                     onclick: move |_| act.run(),
-                    {act.label(&phase)}
+                    ActLabel { act, phase: phase.clone(), size }
                 }
             }
         }
@@ -481,7 +497,7 @@ pub(super) fn BannerView(status: Signal<Option<Status>>) -> Element {
                         key: "{i}",
                         class: if i == 0 { "btn btn-primary" } else { "btn btn-secondary" },
                         onclick: move |_| act.run(),
-                        {act.label(&s.phase)}
+                        ActLabel { act, phase: s.phase.clone(), size: Some(offer.asset.size) }
                     }
                 }
                 if let Some(sheet) = sheet {
@@ -583,7 +599,7 @@ pub fn use_update_notice_taps(nav: SettingsNav) {
                 None => nav.show(Some(Section::Updates)),
             }
             match tap_asks(&tap) {
-                Some(Asked::Download) => work(Updater::download),
+                Some(Asked::Download) => Act::Download.run(),
                 Some(Asked::Install) => work(Updater::install),
                 None => {}
             }

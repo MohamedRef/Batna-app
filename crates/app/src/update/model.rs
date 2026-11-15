@@ -54,6 +54,10 @@ pub struct Prefs {
     /// Where the content-only notes count from, until seen.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_from: Option<String>,
+    /// He tapped "download" on mobile data and chose to wait for Wi-Fi:
+    /// the offer (`version+build`) downloads at the next unmetered step.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub wifi_download: Option<String>,
 }
 pub(super) fn yes() -> bool {
     true
@@ -72,6 +76,7 @@ impl Default for Prefs {
             whats_new_from: None,
             last_content: None,
             content_from: None,
+            wifi_download: None,
         }
     }
 }

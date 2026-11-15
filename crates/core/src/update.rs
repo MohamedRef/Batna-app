@@ -243,6 +243,84 @@ pub struct Change {
     /// The line itself; Egyptian Arabic is required.
     #[serde(flatten)]
     pub text: UpdateNotes,
+    /// What it is about: a course id (`hb`) or an app area ([`AREAS`]).
+    /// The sheet groups a build's lines by it (#1340). Older apps ignore it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub scope: Option<String>,
+    /// What a tap on the line opens ([`Open`]): a lesson, a lecture or a
+    /// screen. Older apps ignore it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub open: Option<String>,
+}
+
+impl Change {
+    /// A line with no scope and nothing to open.
+    pub fn new(kind: ChangeKind, text: UpdateNotes) -> Self {
+        Self { kind, text, scope: None, open: None }
+    }
+
+    /// Where the line belongs: its scope, else the course of the lesson
+    /// or lecture it opens. An area of the app is [`APP`]; `None` is a line
+    /// nothing places (older feeds).
+    pub fn group(&self) -> Option<&str> {
+        let scope = self.scope.as_deref().map(str::trim).filter(|s| !s.is_empty());
+        let scope = scope.or_else(|| match self.open.as_deref().and_then(Open::parse) {
+            Some(Open::Lesson(id) | Open::Lecture(id)) => Some(crate::program::course_of(id)),
+            _ => None,
+        })?;
+        Some(if AREAS.contains(&scope) { APP } else { scope })
+    }
+}
+
+/// The scope of a line about the app as a whole.
+pub const APP: &str = "app";
+
+/// Scopes that name a part of the app rather than a course; the sheet puts
+/// them all under one "app" group, first.
+pub const AREAS: [&str; 16] = [
+    APP, "today", "learn", "study", "bank", "cases", "oral", "stats", "calc", "notes", "sync", "updates",
+    "settings", "anki", "web", "mac",
+];
+
+/// Screens a line can open (`open: bank`).
+pub const SCREENS: [&str; 8] = ["today", "learn", "study", "bank", "cases", "oral", "stats", "settings"];
+
+/// What a line's `open` names.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Open<'a> {
+    /// `hb.L16.lesson1`.
+    Lesson(&'a str),
+    /// `hb.L16`.
+    Lecture(&'a str),
+    /// One of [`SCREENS`].
+    Screen(&'a str),
+}
+
+impl<'a> Open<'a> {
+    pub fn parse(s: &'a str) -> Option<Self> {
+        let s = s.trim();
+        if SCREENS.contains(&s) {
+            return Some(Self::Screen(s));
+        }
+        let mut parts = s.split('.');
+        let (course, lecture, rest) = (parts.next()?, parts.next()?, parts.next());
+        let lower = |t: &str| !t.is_empty() && t.bytes().all(|b| b.is_ascii_lowercase());
+        let lecture_ok =
+            lecture.strip_prefix('L').is_some_and(|n| !n.is_empty() && n.bytes().all(|b| b.is_ascii_digit()));
+        if !lower(course) || !lecture_ok || parts.next().is_some() {
+            return None;
+        }
+        match rest {
+            None => Some(Self::Lecture(s)),
+            Some(l)
+                if l.strip_prefix("lesson")
+                    .is_some_and(|n| !n.is_empty() && n.bytes().all(|b| b.is_ascii_alphanumeric())) =>
+            {
+                Some(Self::Lesson(s))
+            }
+            Some(_) => None,
+        }
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
@@ -1055,6 +1133,37 @@ mod tests {
         assert_eq!(m.assets.len(), 2, "the unknown platform is skipped, the others stay");
         assert!(m.asset(UpdatePlatform::Content).is_some());
         assert_eq!(m.history[0].changes.len(), 3);
+    }
+
+    #[test]
+    fn a_line_names_its_course_and_what_it_opens() {
+        let line = |json: serde_json::Value| serde_json::from_value::<Change>(json).unwrap();
+        let c = line(
+            serde_json::json!({"kind": "new", "ar_eg": "صورة", "scope": "hb", "open": "hb.L16.lesson1"}),
+        );
+        assert_eq!(
+            (c.group(), c.open.as_deref().and_then(Open::parse)),
+            (Some("hb"), Some(Open::Lesson("hb.L16.lesson1")))
+        );
+        // No scope: the course of what it opens; an area is the app.
+        assert_eq!(
+            line(serde_json::json!({"kind": "new", "ar_eg": "ص", "open": "res.L03"})).group(),
+            Some("res")
+        );
+        assert_eq!(
+            line(serde_json::json!({"kind": "new", "ar_eg": "ص", "scope": "bank"})).group(),
+            Some(APP)
+        );
+        assert_eq!(line(serde_json::json!({"kind": "new", "ar_eg": "ص", "open": "bank"})).group(), None);
+        assert_eq!(line(serde_json::json!({"kind": "new", "ar_eg": "ص"})).group(), None);
+        // Absent fields stay out of the feed, so older apps read the same bytes.
+        let plain = Change::new(ChangeKind::Fixed, UpdateNotes { en: String::new(), ar_eg: "ص".into() });
+        assert_eq!(serde_json::to_string(&plain).unwrap(), r#"{"kind":"fixed","ar_eg":"ص"}"#);
+        assert_eq!(Open::parse("hb.L16"), Some(Open::Lecture("hb.L16")));
+        assert_eq!(Open::parse("stats"), Some(Open::Screen("stats")));
+        for bad in ["", "hb", "HB.L01", "hb.L", "hb.Lx1", "hb.L01.003", "hb.L01.lesson1.x", "https://x"] {
+            assert_eq!(Open::parse(bad), None, "{bad}");
+        }
     }
 
     #[test]

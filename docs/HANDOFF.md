@@ -151,9 +151,12 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 
 1. Branch from `origin/main`; PR with base `main`.
 2. Add `changes/<topic>.yaml` (every PR; CI fails without one):
-   `- {kind: new|improved|fixed, ar_eg: "...", en: "..."}`, one line per
-   change Mohamed can see, max 160 chars per text, quote lines containing
-   `:`. Housekeeping PRs add a file holding `[]`.
+   `- {kind: new|improved|fixed, ar_eg: "...", en: "...", scope: hb, open: hb.L16.lesson1}`,
+   one line per change Mohamed can see, max 160 chars per text, quote lines
+   containing `:`. Give a `scope` (course id or app area) whenever you can, and
+   an `open` (lesson, lecture or screen) when the line is about one; the
+   What's new sheet groups by scope and opens the target (RELEASE.md §5).
+   Housekeeping PRs add a file holding `[]`.
 3. Update this file if behaviour, process, commands or state changed.
 4. Before merging: merge latest `origin/main` into the branch, run the checks,
    wait for green CI on that commit, then **squash-merge yourself**.
@@ -185,6 +188,8 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   (CI skips the APK when only content/changes/docs/CSS changed). Details:
   [RELEASE.md](RELEASE.md), [COMPATIBILITY.md](COMPATIBILITY.md).
 - What's new comes from `changes/*.yaml` (Morphe-style sheet before/after an update).
+  A long release groups by course (`scope`), and a line with `open` opens its
+  lesson, lecture or screen (#1340).
 - A check shows the app's answer as soon as the feed is read; a newer
   content pack downloads after it (Settings shows «بيجيب الدروس…»), then an
   automatic build download. Every update request fails after 20 s without
@@ -764,6 +769,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-15: What's new groups a release by course (#1340): `changes/*.yaml` lines take an optional `scope` (course id or app area) and `open` (lesson, lecture or screen), carried in the feed; the sheet shows the app, then one folded row per course with counts, and a line opens its lesson (closing it brings the sheet back). A one-off pass scoped 1114 of 1199 existing lines; old feed lines get theirs by their Arabic text when a manifest is built. Digest line, "changed since you did it" and search are still open in #1340.
 - 2026-11-15: «ابدأ من الأول» (#1341): reset progress for one course or the whole curriculum with one synced marker (`reset.<course>` / `reset.all`), nothing deleted, undo by removing it; backup first, refused under an open session or paper (§ 10 Start over).
 - 2026-11-15: #1339: update sheet step views (download ring, installing, done, failed), size on the download button (sheet, banner, Settings), and a mobile-data confirm with «استنى الواي فاي» queueing the download for the next unmetered check.
 - 2026-11-15: #1338: the "what's new" sheet shows failed downloads/installs (headline, detail, «جرّب تاني», manual steps for TooNew/KeyChanged) and «افتح الإذن» for NeedsPermission, from one shared `update::stage` used by Settings, banner and sheet; a failed update keeps its banner.

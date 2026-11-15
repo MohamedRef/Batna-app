@@ -40,6 +40,7 @@ pub use model::{
 
 pub mod bundle;
 pub mod changelog;
+pub mod groups;
 pub mod sheet;
 pub mod stage;
 pub mod view;

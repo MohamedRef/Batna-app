@@ -148,7 +148,8 @@ fn run_inner(root: &Path, args: &[String], secret: Option<String>) -> Res<String
                     content_only: !carried.is_empty(),
                 });
             }
-            let history = changes::history(previous.as_ref(), entry, &changes::retro(root)?);
+            let mut history = changes::history(previous.as_ref(), entry, &changes::retro(root)?);
+            changes::label(&mut history, &changes::labels(root)?);
             let m = write_manifest(
                 &out,
                 channel,
@@ -183,6 +184,9 @@ fn run_inner(root: &Path, args: &[String], secret: Option<String>) -> Res<String
             };
             for c in found {
                 out.push_str(&format!("\n{:?}\t{}\t{}", c.kind, c.text.ar_eg, c.text.en));
+                for to in [c.scope.as_deref(), c.open.as_deref()].into_iter().flatten() {
+                    out.push_str(&format!("\t{to}"));
+                }
             }
             Ok(out)
         }

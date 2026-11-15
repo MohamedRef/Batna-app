@@ -6,7 +6,16 @@
 //! - kind: new          # new | improved | fixed
 //!   ar_eg: باطنة بتقولك إيه اتغيّر مع كل تحديث
 //!   en: Every update says what changed   # optional
+//!   scope: updates     # optional: a course id (hb) or an app area
+//!   open: hb.L16.lesson1   # optional: a lesson, a lecture or a screen
 //! ```
+//!
+//! `scope` groups the sheet by course (#1340): a course id from
+//! `content/program.yaml`, or an area of the app
+//! ([`batna_core::update::AREAS`]). `open` makes the line a link
+//! ([`batna_core::update::Open`]); a line that opens a lesson or lecture
+//! needs no scope. The pull request check refuses a scope or target the
+//! checkout doesn't know.
 //!
 //! When a feed is built, the files added since the build already on the
 //! feed are gathered (one merged pull request at a time), and that build's
@@ -26,7 +35,9 @@ use std::collections::BTreeMap;
 use std::path::Path;
 use std::process::Command;
 
-use batna_core::update::{BuildChanges, Change, ChangeKind, HISTORY_BUILDS, UpdateManifest, UpdateNotes};
+use batna_core::update::{
+    AREAS, BuildChanges, Change, ChangeKind, HISTORY_BUILDS, Open, UpdateManifest, UpdateNotes,
+};
 use serde::Deserialize;
 
 /// Where the files live, from the repository root.
@@ -48,6 +59,10 @@ struct Line {
     ar_eg: String,
     #[serde(default)]
     en: String,
+    #[serde(default)]
+    scope: Option<String>,
+    #[serde(default)]
+    open: Option<String>,
 }
 
 /// Parses and checks one `changes/*.yaml`.
@@ -89,10 +104,23 @@ fn convert(lines: Vec<Line>) -> Res<Vec<Change>> {
             if !l.ar_eg.chars().any(is_arabic) {
                 return Err(format!("ar_eg has no Arabic: {:?}", l.ar_eg));
             }
-            Ok(Change {
-                kind: l.kind,
-                text: UpdateNotes { en: l.en.trim().into(), ar_eg: l.ar_eg.trim().into() },
-            })
+            let scope = l.scope.map(|s| s.trim().to_owned());
+            if let Some(s) = scope.as_deref()
+                && (s.is_empty() || !s.bytes().all(|b| b.is_ascii_lowercase()))
+            {
+                return Err(format!(
+                    "scope {s:?}: a course id such as hb, or an app area ({})",
+                    AREAS.join(", ")
+                ));
+            }
+            let open = l.open.map(|s| s.trim().to_owned());
+            if let Some(o) = open.as_deref()
+                && Open::parse(o).is_none()
+            {
+                return Err(format!("open {o:?}: a lesson (hb.L16.lesson1), a lecture (hb.L16) or a screen"));
+            }
+            let text = UpdateNotes { en: l.en.trim().into(), ar_eg: l.ar_eg.trim().into() };
+            Ok(Change { scope, open, ..Change::new(l.kind, text) })
         })
         .collect()
 }
@@ -121,7 +149,7 @@ pub fn from_title(title: &str) -> Option<Change> {
         _ => ChangeKind::Improved,
     };
     let en: String = t.chars().take(MAX_CHARS).collect();
-    Some(Change { kind, text: UpdateNotes { en, ..UpdateNotes::default() } })
+    Some(Change::new(kind, UpdateNotes { en, ..UpdateNotes::default() }))
 }
 
 /// A pull request's title as the feed shows it: no "(#123)", "(Fixes
@@ -230,9 +258,15 @@ fn fragments(root: &Path, parent: Option<&str>, c: &str) -> Res<Fragments> {
         if status == "M" {
             before.extend(old(f));
         }
-        out.lines.extend(now.into_iter().filter(|l| !before.contains(l)));
+        // By its words: a scope or target added later doesn't make it new.
+        out.lines.extend(now.into_iter().filter(|l| !before.iter().any(|b| same_line(b, l))));
     }
     Ok(out)
+}
+
+/// The same line, whatever its scope or target.
+fn same_line(a: &Change, b: &Change) -> bool {
+    a.kind == b.kind && a.text == b.text
 }
 
 /// The pull request check (`.github/workflows/ci.yml`): `HEAD` against
@@ -242,12 +276,99 @@ fn fragments(root: &Path, parent: Option<&str>, c: &str) -> Res<Fragments> {
 pub fn gate(root: &Path, base: &str) -> Res<Vec<Change>> {
     let base = git(root, &["rev-parse", "--verify", base])?.trim().to_owned();
     let found = fragments(root, Some(&base), "HEAD")?;
+    if let Some(known) = Known::load(root)? {
+        let wrong: Vec<String> = found.lines.iter().filter_map(|c| known.problem(c)).collect();
+        if !wrong.is_empty() {
+            return Err(wrong.join("\n"));
+        }
+    }
     if found.lines.is_empty() && !found.nothing_to_tell {
         return Err(format!(
             "no new line in {DIR}/<topic>.yaml: add one line per change Mohamed can see (kind new/improved/fixed, ar_eg in Egyptian Arabic, optional en), or a new file holding [] when there is nothing to tell (docs/RELEASE.md §5)"
         ));
     }
     Ok(found.lines)
+}
+
+/// The courses, lectures and lessons of a checkout, for checking where new
+/// lines point.
+struct Known {
+    courses: Vec<String>,
+    lectures: Vec<String>,
+    lessons: Vec<String>,
+}
+
+impl Known {
+    /// `None` for a checkout without content (tests, other tools).
+    fn load(root: &Path) -> Res<Option<Self>> {
+        if !root.join("content/program.yaml").exists() {
+            return Ok(None);
+        }
+        let program: batna_core::program::Program = crate::read_yaml(&root.join("content/program.yaml"))?;
+        let index: batna_core::content::Index = crate::read_yaml(&root.join("content/index.yaml"))?;
+        let lessons = crate::lessons::load(root).map_err(|p| p.join("\n"))?;
+        Ok(Some(Self {
+            courses: program.courses.into_iter().map(|c| c.id).collect(),
+            lectures: index.lectures.into_iter().map(|l| l.id).collect(),
+            lessons: lessons.into_iter().flat_map(|(_, f, _)| f.lessons.into_iter().map(|l| l.id)).collect(),
+        }))
+    }
+
+    /// What's wrong with where `c` points, if anything.
+    fn problem(&self, c: &Change) -> Option<String> {
+        let line = &c.text.ar_eg;
+        if let Some(s) = c.scope.as_deref()
+            && !AREAS.contains(&s)
+            && !self.courses.iter().any(|k| k == s)
+        {
+            return Some(format!(
+                "{line:?}: scope {s:?} is neither a course of content/program.yaml nor an app area ({})",
+                AREAS.join(", ")
+            ));
+        }
+        let missing = match c.open.as_deref().and_then(Open::parse) {
+            Some(Open::Lesson(id)) if !self.lessons.iter().any(|k| k == id) => Some(("lesson", id)),
+            Some(Open::Lecture(id)) if !self.lectures.iter().any(|k| k == id) => Some(("lecture", id)),
+            _ => None,
+        };
+        missing.map(|(what, id)| format!("{line:?}: open {id:?}: no such {what} in content/"))
+    }
+}
+
+/// Scope and target by a line's Egyptian Arabic ([`labels`]).
+pub type Labels = BTreeMap<String, (Option<String>, Option<String>)>;
+
+/// Where each line of every file points, by its Egyptian Arabic: older
+/// feeds carry lines from before `scope` and `open`, and [`label`] gives
+/// them what the files say now.
+pub fn labels(root: &Path) -> Res<Labels> {
+    let mut out = BTreeMap::new();
+    // No folder (a feed built outside the repository): nothing to give.
+    for e in std::fs::read_dir(root.join(DIR)).into_iter().flatten().flatten() {
+        let path = e.path();
+        if path.extension().is_some_and(|x| x == "yaml") {
+            let text = std::fs::read_to_string(&path).map_err(|e| format!("{}: {e}", path.display()))?;
+            for c in parse(&text).map_err(|e| format!("{}: {e}", path.display()))? {
+                if c.scope.is_some() || c.open.is_some() {
+                    out.insert(c.text.ar_eg, (c.scope, c.open));
+                }
+            }
+        }
+    }
+    Ok(out)
+}
+
+/// Gives lines with neither a scope nor a target what [`labels`] knows.
+pub fn label(history: &mut [BuildChanges], labels: &Labels) {
+    for c in history.iter_mut().flat_map(|b| b.changes.iter_mut()) {
+        if c.scope.is_none()
+            && c.open.is_none()
+            && let Some((scope, open)) = labels.get(c.text.ar_eg.trim())
+        {
+            c.scope.clone_from(scope);
+            c.open.clone_from(open);
+        }
+    }
 }
 
 /// This build's entry on top of the previous feed's history (same channel),
@@ -453,9 +574,11 @@ mod tests {
     fn a_huge_history_is_cut_to_fit_the_feed() {
         let big = |build: u64| BuildChanges {
             changes: (0..40)
-                .map(|i| Change {
-                    kind: ChangeKind::New,
-                    text: UpdateNotes { en: "x".repeat(150), ar_eg: format!("{i} {}", "ب".repeat(150)) },
+                .map(|i| {
+                    Change::new(
+                        ChangeKind::New,
+                        UpdateNotes { en: "x".repeat(150), ar_eg: format!("{i} {}", "ب".repeat(150)) },
+                    )
                 })
                 .collect(),
             ..entry(build)
@@ -486,6 +609,71 @@ mod tests {
         assert!(parse("- kind: new\n  en: Audio\n").is_err());
         assert!(parse("- kind: moved\n  ar_eg: صوت\n").is_err());
         assert!(parse("[]").unwrap().is_empty());
+    }
+
+    #[test]
+    fn a_line_can_name_its_course_and_what_it_opens() {
+        let c = parse("- kind: new\n  ar_eg: صورة جديدة\n  scope: hb\n  open: hb.L16.lesson1\n").unwrap();
+        assert_eq!((c[0].scope.as_deref(), c[0].open.as_deref()), (Some("hb"), Some("hb.L16.lesson1")));
+        assert!(
+            parse("- kind: new\n  ar_eg: صورة\n  scope: Liver\n").unwrap_err().starts_with("scope \"Liver\"")
+        );
+        assert!(
+            parse("- kind: new\n  ar_eg: صورة\n  open: https://x\n")
+                .unwrap_err()
+                .starts_with("open \"https://x\"")
+        );
+        assert!(parse("- kind: new\n  ar_eg: صورة\n  link: hb\n").is_err(), "unknown fields still fail");
+
+        let known = Known {
+            courses: vec!["hb".into()],
+            lectures: vec!["hb.L16".into()],
+            lessons: vec!["hb.L16.lesson1".into()],
+        };
+        let line = |yaml: &str| parse(&format!("- kind: new\n  ar_eg: صورة\n{yaml}")).unwrap().remove(0);
+        for ok in [
+            "  scope: hb\n",
+            "  scope: bank\n",
+            "  open: hb.L16\n",
+            "  open: hb.L16.lesson1\n",
+            "  open: stats\n",
+            "",
+        ] {
+            assert_eq!(known.problem(&line(ok)), None, "{ok}");
+        }
+        for bad in ["  scope: cvs\n", "  open: hb.L17\n", "  open: hb.L16.lesson9\n"] {
+            assert!(known.problem(&line(bad)).is_some(), "{bad}");
+        }
+        let real = Known::load(&Path::new(env!("CARGO_MANIFEST_DIR")).join("../..")).unwrap().unwrap();
+        assert_eq!(real.problem(&line("  scope: hb\n  open: hb.L01\n")), None);
+    }
+
+    #[test]
+    fn a_scope_added_later_is_not_a_new_line() {
+        let dir = repo();
+        let root = dir.path();
+        let base = step(root, &[("changes/liver.yaml", Some(ONE))]);
+        step(root, &[("changes/liver.yaml", Some(&format!("{ONE}  scope: hb\n")))]);
+        assert!(gate(root, &base).is_err(), "only a scope was added");
+        assert!(collect(root, Some(&base)).unwrap().is_empty());
+    }
+
+    #[test]
+    fn older_feed_lines_take_the_scope_the_files_give_them() {
+        let dir = repo();
+        let root = dir.path();
+        step(root, &[("changes/liver.yaml", Some(&format!("{ONE}  scope: hb\n  open: hb.L01\n")))]);
+        let labels = labels(root).unwrap();
+        let mut h = vec![BuildChanges {
+            changes: vec![
+                parse(ONE).unwrap().remove(0),
+                parse("- kind: fixed\n  ar_eg: حاجة تانية\n").unwrap().remove(0),
+            ],
+            ..entry(1)
+        }];
+        label(&mut h, &labels);
+        let got: Vec<_> = h[0].changes.iter().map(|c| (c.scope.as_deref(), c.open.as_deref())).collect();
+        assert_eq!(got, [(Some("hb"), Some("hb.L01")), (None, None)]);
     }
 
     #[test]

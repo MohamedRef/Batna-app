@@ -11,6 +11,7 @@ pub mod book;
 pub mod calc;
 pub mod case;
 pub mod catchup;
+pub mod changelog;
 pub mod cite;
 pub mod cloud;
 pub mod count;

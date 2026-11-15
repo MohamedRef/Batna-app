@@ -54,7 +54,9 @@ mod tests {
         assert!(ui.append_review(answer()).is_err(), "the lock is held");
         let waited = t.elapsed();
         assert!(waited >= UI_BUSY.mul_f32(0.9), "it waited for the lock: {waited:?}");
-        assert!(waited < UI_BUSY * 3, "within the budget: {waited:?}");
+        // Well short of the sync side's own wait: a loaded runner (the
+        // nightly Mac job saw 2.3 s on 2026-11-14) is slow, never frozen.
+        assert!(waited < SYNC_BUSY, "within the budget: {waited:?}");
         // A write that reads first (last-writer-wins compares stamps) waits
         // too: its transaction takes the lock up front.
         let t = Instant::now();

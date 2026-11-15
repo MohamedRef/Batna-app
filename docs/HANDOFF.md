@@ -719,6 +719,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-15: Actions check: the two-pane study/bank split at 840px lets the side column shrink to 40% of the pane (`assets/desk.css`), and a book picture button is at least one tap target tall (`learn.css`), which turns the scheduled lesson and study browser check green again; the nightly Mac flake in `store::contention` now bounds the UI wait by `SYNC_BUSY` instead of 3x `UI_BUSY`.
 - 2026-11-14: figure skip reasons that said "restates" for a diagram, algorithm or chart the lesson already rebuilds now say "rebuilt in the lesson as the <kind> step «title» on pN" (68 of 98), so the `validate` warning lists only figures given in words alone: 31, all research slides (#1156 closed).
 - 2026-11-14: marks on the book's photographs where a caption points by position and the book prints no arrow (#1155): 344 pictures checked, 102 steps given marks, captions now point to the numbers; marks start hidden when a question follows (no new field). One PR per lecture (#1258–#1314).
 - 2026-11-14: diagrams and algorithms given in words only now shown (#1156 part A): crops or SVG redraws in 24 lectures (#1192–#1309); 4 kept skipped as plain text in boxes. 39 lesson readings of uncaptioned pictures labelled «التفسير المقبول (مش في الكتاب)» (#1215–#1229).

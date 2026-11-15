@@ -21,7 +21,7 @@
 use batna_core::update::{BuildChanges, ChangeKind};
 use dioxus::prelude::*;
 
-use super::changelog::{self, between, civil, day_of, label, line, of_kind, tally};
+use super::changelog::{self, between, civil, day_of, label, tally};
 use super::view::{UPDATE_CSS, megabytes, primary_action, use_update_status};
 use super::{Phase, Status};
 use crate::i18n::update as tx;
@@ -72,9 +72,6 @@ impl UpdateSheetNav {
     }
 }
 
-/// Lines a kind card shows before "Show all"; it folds only past `FOLD_AT`.
-const PREVIEW: usize = 5;
-const FOLD_AT: usize = 6;
 /// Earlier builds shown at a time.
 const EARLIER_STEP: usize = 4;
 /// Builds the changelog lists before "Earlier builds".
@@ -88,7 +85,7 @@ fn earlier_divider(shown: &[(bool, BuildChanges)], mode: SheetMode, installed_ke
         .position(|(earlier, build)| *earlier && (mode == SheetMode::History || build.key() != installed_key))
 }
 
-fn kind_label(k: ChangeKind) -> &'static str {
+pub(super) fn kind_label(k: ChangeKind) -> &'static str {
     match k {
         ChangeKind::New => tx::KIND_NEW,
         ChangeKind::Improved => tx::KIND_IMPROVED,
@@ -96,7 +93,7 @@ fn kind_label(k: ChangeKind) -> &'static str {
     }
 }
 
-fn kind_id(k: ChangeKind) -> &'static str {
+pub(super) fn kind_id(k: ChangeKind) -> &'static str {
     match k {
         ChangeKind::New => "new",
         ChangeKind::Improved => "improved",
@@ -105,7 +102,7 @@ fn kind_id(k: ChangeKind) -> &'static str {
 }
 
 /// Our own glyphs: a four-point spark, a rising line, a bug.
-fn kind_icon(k: ChangeKind) -> Element {
+pub(super) fn kind_icon(k: ChangeKind) -> Element {
     let path = match k {
         ChangeKind::New => "M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z",
         ChangeKind::Improved => "M4 16l5-5 4 4 7-7M15 8h5v5",
@@ -132,7 +129,7 @@ fn glyph(view_box: &'static str, d: &'static str, filled: bool) -> Element {
     }
 }
 
-fn chevron() -> Element {
+pub(super) fn chevron() -> Element {
     glyph("0 0 24 24", "M6 9l6 6 6-6", false)
 }
 
@@ -227,8 +224,9 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
     // another while Batna stays open).
     let mut opened_after_update = use_signal(|| None::<String>);
     let mut open_builds = use_signal(Vec::<String>::new);
-    let mut open_kinds = use_signal(Vec::<String>::new);
     let mut earlier_shown = use_signal(|| EARLIER_STEP);
+    // A line that opened a lesson or lecture brings the sheet back after it.
+    super::groups::use_return(mode);
 
     use_effect(move || {
         let from = status
@@ -252,7 +250,6 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
         }
         mode.set(None);
         open_builds.set(Vec::new());
-        open_kinds.set(Vec::new());
         earlier_shown.set(EARLIER_STEP);
     };
 
@@ -482,63 +479,7 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                                         span { class: "us-chevron", {chevron()} }
                                     }
                                     if open {
-                                        div { class: "us-kinds",
-                                            for k in ChangeKind::ALL {
-                                                {
-                                                    let items = of_kind(&b, k);
-                                                    let kkey = format!("{key}:{}", kind_id(k));
-                                                    let all = open_kinds.read().contains(&kkey);
-                                                    let folds = items.len() > FOLD_AT;
-                                                    let n = items.len();
-                                                    let all_label = tx::SHOW_ALL.replace("{n}", &n.to_string());
-                                                    let show: Vec<(String, bool)> = items
-                                                        .into_iter()
-                                                        .take(if folds && !all { PREVIEW } else { usize::MAX })
-                                                        .map(line)
-                                                        .collect();
-                                                    rsx! {
-                                                        if n > 0 {
-                                                            section { key: "{kkey}", class: "us-kind", "data-kind": "{kind_id(k)}",
-                                                                div { class: "us-kind-head",
-                                                                    span { class: "us-kind-icon", {kind_icon(k)} }
-                                                                    h3 { "{kind_label(k)}" }
-                                                                    span { class: "us-chip", "{n}" }
-                                                                }
-                                                                ul { class: "us-items",
-                                                                    for (j, (text, latin)) in show.into_iter().enumerate() {
-                                                                        li { key: "{j}",
-                                                                            if latin {
-                                                                                bdi { dir: "ltr", class: "latin", "{text}" }
-                                                                            } else {
-                                                                                "{text}"
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                                if folds {
-                                                                    button {
-                                                                        class: "us-more",
-                                                                        onclick: move |_| {
-                                                                            let mut v = open_kinds.write();
-                                                                            if let Some(i) = v.iter().position(|x| *x == kkey) {
-                                                                                v.remove(i);
-                                                                            } else {
-                                                                                v.push(kkey.clone());
-                                                                            }
-                                                                        },
-                                                                        if all {
-                                                                            "{tx::SHOW_LESS}"
-                                                                        } else {
-                                                                            "{all_label}"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
+                                        super::groups::ReleaseBody { release: b.clone() }
                                     }
                                 }
                             }

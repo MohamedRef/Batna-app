@@ -142,9 +142,8 @@ mod tests {
             changes: kinds
                 .iter()
                 .enumerate()
-                .map(|(i, k)| Change {
-                    kind: *k,
-                    text: UpdateNotes { en: format!("change {i}"), ar_eg: format!("تغيير {i}") },
+                .map(|(i, k)| {
+                    Change::new(*k, UpdateNotes { en: format!("change {i}"), ar_eg: format!("تغيير {i}") })
                 })
                 .collect(),
             content_only: false,
@@ -175,7 +174,7 @@ mod tests {
         use ChangeKind::*;
         let h = [b("0.1.0", 9, &[Fixed, New, Improved, Fixed, New])];
         assert_eq!(lines_upto(&h, |n| format!("و{n} كمان"), 3), "• تغيير 1\n• تغيير 4\n• تغيير 2\nو2 كمان");
-        let latin = Change { kind: Fixed, text: UpdateNotes { en: "Bank".into(), ar_eg: String::new() } };
+        let latin = Change::new(Fixed, UpdateNotes { en: "Bank".into(), ar_eg: String::new() });
         assert_eq!(line(&latin), ("Bank".into(), true));
     }
 

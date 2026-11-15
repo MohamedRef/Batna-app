@@ -72,7 +72,7 @@ fn has(page: &str, text: &str) -> bool {
 }
 
 fn change(kind: ChangeKind, ar: &str) -> Change {
-    Change { kind, text: UpdateNotes { en: String::new(), ar_eg: ar.into() } }
+    Change::new(kind, UpdateNotes { en: String::new(), ar_eg: ar.into() })
 }
 
 fn build_changes(build: u64, changes: Vec<Change>, content_only: bool) -> BuildChanges {
@@ -361,10 +361,7 @@ fn the_today_note_tells_the_first_content_change_only() {
     s.history = vec![build_changes(
         45,
         vec![
-            Change {
-                kind: ChangeKind::New,
-                text: UpdateNotes { en: "Renal lessons".into(), ar_eg: String::new() },
-            },
+            Change::new(ChangeKind::New, UpdateNotes { en: "Renal lessons".into(), ar_eg: String::new() }),
             change(ChangeKind::Fixed, "تاني سطر"),
         ],
         true,

@@ -76,10 +76,10 @@ fn app_and_content_notes_count_apart() {
         version: "0.1.0".into(),
         build,
         published_at: String::new(),
-        changes: vec![batna_core::update::Change {
-            kind: batna_core::update::ChangeKind::New,
-            text: UpdateNotes { en: String::new(), ar_eg: format!("بناء {build}") },
-        }],
+        changes: vec![batna_core::update::Change::new(
+            batna_core::update::ChangeKind::New,
+            UpdateNotes { en: String::new(), ar_eg: format!("بناء {build}") },
+        )],
         content_only,
     };
     // APK 38 runs content 45; the feed's app is 40 (#348).
@@ -531,10 +531,10 @@ fn a_content_only_update_needs_no_install_and_says_what_came() {
         version: "0.1.0".into(),
         build: 45,
         published_at: "2026-10-27T08:00:00Z".into(),
-        changes: vec![batna_core::update::Change {
-            kind: batna_core::update::ChangeKind::New,
-            text: UpdateNotes { en: String::new(), ar_eg: "أسئلة جديدة".into() },
-        }],
+        changes: vec![batna_core::update::Change::new(
+            batna_core::update::ChangeKind::New,
+            UpdateNotes { en: String::new(), ar_eg: "أسئلة جديدة".into() },
+        )],
         content_only: true,
     };
     let feed = pack_feed(&signer, 45, Some(40), &pack, vec![came]);

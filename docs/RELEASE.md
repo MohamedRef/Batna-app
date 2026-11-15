@@ -337,7 +337,26 @@ optional), each `new`, `improved` or `fixed`:
 - kind: fixed
   ar_eg: المؤقت في الامتحان التجريبي مبقاش بيقف
   en: The mock timer no longer stops
+  scope: bank            # optional, give it whenever you can
+  open: bank             # optional
 ```
+
+`scope` says what the line is about, so the sheet can group a release by
+course (#1340): a course id of `content/program.yaml` (`hb`, `res`…) or an
+app area (`app`, `today`, `learn`, `study`, `bank`, `cases`, `oral`,
+`stats`, `calc`, `notes`, `sync`, `updates`, `settings`, `anki`, `web`,
+`mac`; `batna_core::update::AREAS`). `open` makes the line a link: a lesson
+(`hb.L16.lesson1`), a lecture (`hb.L16`) or a screen (`today`, `learn`,
+`study`, `bank`, `cases`, `oral`, `stats`, `settings`). A line that opens a
+lesson or lecture needs no scope (its course is taken from the id). The
+pull request check refuses a scope that is neither a course nor an area,
+and an `open` lesson or lecture that isn't in `content/`. Both fields are
+optional and older apps ignore them. On 2026-11-15 a one-off pass gave 1114
+of the 1199 existing lines a scope (and 668 an `open`) from the files the
+commit that wrote each line touched; lines whose words predate the fields
+get them in the feed too, because building a manifest looks each history
+line up by its Egyptian Arabic in today's files (`changes::label`). Adding a
+scope or target to an existing line doesn't make it a new line.
 
 A file holding `[]` says there's nothing to tell (CI, refactors, docs). When
 a feed is built (CI for `batna-preview`, `just publish-update` for releases),
@@ -358,7 +377,15 @@ The app keeps every history it verifies (`updates/history.json`) and shows
 it in one sheet, laid out like Morphe Manager's update dialog (ideas only,
 none of its code): the installed build → the new one, how many builds that
 is and a count per kind, then a timeline with the newest build open and a
-card per kind ("اعرض الكل" past six lines). On a phone it fills the screen under Batna's icon; GitHub (the channel's releases page) and the download or install button stay pinned at the bottom. It opens from the banner's "إيه
+card per kind ("اعرض الكل" past six lines). A build whose lines span more
+than one group shows a row per group instead (`update/groups.rs`): the app
+first, then each course by its short name (the course in focus, then the
+active ones, then the program's order), then lines nothing places, each row
+with its count and a small chip per kind; rows start folded when the build
+has more than eight lines. A line with an `open` target this build knows is
+a button: it opens the lesson, lecture or screen, and closing the lesson or
+lecture brings the sheet (and Settings under it) back; leaving for another
+screen drops it. On a phone it fills the screen under Batna's icon; GitHub (the channel's releases page) and the download or install button stay pinned at the bottom. It opens from the banner's "إيه
 الجديد؟", from the notification, and from Settings › التحديثات (also "سجل
 التغييرات": every build so far); downloading and installing happen in it
 too. At the first launch after an update it opens once by itself, listing

@@ -118,6 +118,7 @@ fn the_section_shows_the_app_row_the_checks_and_every_choice() {
         tx::GROUP_HAVE,
         tx::ROW_APP,
         tx::ROW_CONTENT,
+        tx::CONTENT_WITH_APP,
         tx::UP_TO_DATE,
         tx::NEVER_CHECKED,
         tx::CHECK_NOW,
@@ -660,4 +661,20 @@ fn the_banner_and_the_note_open_the_sheet_or_step_aside() {
     t.click(tx::CLOSE);
     t.click(tx::WHATS_NEW_ASK);
     assert!(sheet_open(&t.html()) && has(&t.html(), tx::CONTENT_UPDATED_TITLE), "{}", t.html());
+}
+
+/// Mohamed, 2026-11-15: the lessons row showed nothing under its title. It
+/// always says where the lessons stand, and when a newer pack is coming.
+#[test]
+fn the_content_row_always_says_where_the_lessons_stand() {
+    let mut s = status(Phase::UpToDate, Mode::Auto);
+    let page = html(Which::Section, Some(s.clone()));
+    assert!(has(&page, tx::CONTENT_WITH_APP), "{page}");
+    assert!(!has(&page, tx::CONTENT_ROW_FETCHING), "{page}");
+    s.content_check = Some(ContentCheck::Fetching);
+    let page = html(Which::Section, Some(s.clone()));
+    assert!(has(&page, tx::CONTENT_ROW_FETCHING), "{page}");
+    s.content_build = s.build + 4;
+    let page = html(Which::Section, Some(s));
+    assert!(!has(&page, tx::CONTENT_WITH_APP), "a content-only update shows its own build: {page}");
 }

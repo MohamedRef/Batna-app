@@ -53,6 +53,10 @@ pub const ROW_APP: &str = "التطبيق";
 pub const ROW_CONTENT: &str = "الدروس والأسئلة والشكل";
 /// Before "من يومين": when the content in use was published.
 pub const CONTENT_PUBLISHED: &str = "اتنشر";
+/// The content row when the lessons in use are the ones built into the app.
+pub const CONTENT_WITH_APP: &str = "نفس نسخة التطبيق";
+/// The content row while a newer content pack downloads.
+pub const CONTENT_ROW_FETCHING: &str = "دروس جديدة بتنزل دلوقتي";
 pub const GROUP_CHECK: &str = "البحث عن تحديث";
 pub const LAST_CHECK: &str = "آخر مرة دوّرنا";
 /// The Settings list's Updates line.

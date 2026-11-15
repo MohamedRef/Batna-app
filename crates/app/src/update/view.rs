@@ -163,7 +163,10 @@ pub(super) fn UpdatesView(status: Signal<Option<Status>>) -> Element {
         }
     };
     let content_mode = if content_news { SheetMode::Updated } else { SheetMode::History };
-    let has_content_sub = s.as_ref().and_then(Status::content_ahead).is_some();
+    // Always a line under the content row, so he sees where the lessons
+    // stand: a content-only update ahead of the app, the app's own lessons,
+    // and a newer pack on its way.
+    let fetching = s.as_ref().is_some_and(|s| s.content_check == Some(ContentCheck::Fetching));
     let content_sub = match s.as_ref().and_then(Status::content_ahead) {
         Some(c) => {
             let when = s.as_ref().and_then(|s| s.content_at).map(|at| {
@@ -176,7 +179,7 @@ pub(super) fn UpdatesView(status: Signal<Option<Status>>) -> Element {
                 {when.unwrap_or_default()}
             }
         }
-        None => rsx! {},
+        None => rsx! { {tx::CONTENT_WITH_APP} },
     };
     let last_check = s.as_ref().and_then(|s| s.prefs.last_check_ms);
     let feed_down = s.as_ref().is_some_and(|s| {
@@ -221,8 +224,11 @@ pub(super) fn UpdatesView(status: Signal<Option<Status>>) -> Element {
                 span { class: "row-icon", aria_hidden: "true", {crate::icons::book()} }
                 span { class: "ur-text",
                     span { class: "ur-title", {tx::ROW_CONTENT} }
-                    if has_content_sub {
-                        span { class: "ur-sub", {content_sub} }
+                    span { class: "ur-sub",
+                        {content_sub}
+                        if fetching {
+                            " · " {tx::CONTENT_ROW_FETCHING}
+                        }
                     }
                 }
                 if content_news {

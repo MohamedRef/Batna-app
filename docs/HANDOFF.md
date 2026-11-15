@@ -190,6 +190,9 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   automatic build download. Every update request fails after 20 s without
   progress (lookup, connect, each read), so a connection Android cut while
   the phone was locked doesn't hold the check for minutes.
+- The content pack has its own lock (`Updater::content_job`), apart from the
+  check/download/install lock (`job`): a tap on «نزّلها» or «ثبّتها» waits
+  for a running job instead of being dropped, and never waits for the pack.
 
 ### Secrets (names only, values never in git)
 
@@ -719,6 +722,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-15: «نزّلها» did nothing while the content pack was downloading (the tap lost the updater's one lock to the pack and was dropped silently); the pack now has its own lock and download/install taps wait for a running job instead of being dropped; the lessons row in Settings › Updates always has a line ("same as the app" or its own build) and says when a newer pack is downloading.
 - 2026-11-15: every lesson has a figure step (backlog of #981 cleared on 2026-11-14), so a lesson with none now fails `validate` instead of warning; rheum.L19 lesson4 (pathology, kidney) moved before lesson3 (skin, joints) so lesson starts follow the book (#834).
 - 2026-11-15: last pass of #1155 over the 79 photograph steps whose caption still names a place with no marks: all but one point at an arrow, label or panel letter the book prints, or describe the cell rather than a place; rheum.L16 feet given the two marks its card already had.
 - 2026-11-15: dependency advisories green: `zip` 4 → 9 (`crates/anki`, RUSTSEC-2026-0367/0368/0369/0429) and `rsa` 0.9 → 0.10 + `sha2` 0.11 (`crates/server`, RUSTSEC-2023-0071; the `pkcs1v15` feature is now opt-in, keys decode with `BoxedUint`). The 6 remaining audit lines are warnings (unmaintained/unsound transitive crates, no fix upstream or GTK-only).

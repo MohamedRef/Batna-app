@@ -678,3 +678,83 @@ fn the_content_row_always_says_where_the_lessons_stand() {
     let page = html(Which::Section, Some(s));
     assert!(!has(&page, tx::CONTENT_WITH_APP), "a content-only update shows its own build: {page}");
 }
+
+/// #1338: a failed download or install says so in the sheet, with the same
+/// headline, detail and buttons as Settings, for every failure.
+#[test]
+fn the_sheet_says_what_failed_and_offers_the_way_out() {
+    let o =
+        with_changes(offer("0.2.0", 0), vec![build_changes(50, vec![change(ChangeKind::New, "أول")], false)]);
+    let cases: [(Phase, &str, Option<&str>, &[&str]); 7] = [
+        (
+            Phase::Failed { offer: Some(o.clone()), why: Failure::Network },
+            tx::FAILED_NETWORK,
+            None,
+            &[tx::TRY_AGAIN],
+        ),
+        (
+            Phase::Failed { offer: Some(o.clone()), why: Failure::Verify("sha256 mismatch".into()) },
+            tx::FAILED_VERIFY,
+            Some("sha256 mismatch"),
+            &[tx::TRY_AGAIN],
+        ),
+        (
+            Phase::Failed { offer: Some(o.clone()), why: Failure::Install("INSTALL_FAILED_ABORTED".into()) },
+            tx::FAILED_INSTALL,
+            Some("INSTALL_FAILED_ABORTED"),
+            &[tx::TRY_AGAIN],
+        ),
+        (Phase::Failed { offer: None, why: Failure::TooNew }, tx::TOO_NEW, None, &[tx::OPEN_RELEASES]),
+        (
+            Phase::Failed { offer: None, why: Failure::KeyChanged },
+            tx::KEY_CHANGED,
+            None,
+            &[tx::GET_PREVIEW, tx::KEY_CHANGED_STEPS[0]],
+        ),
+        (Phase::Failed { offer: None, why: Failure::Network }, tx::FAILED_NETWORK, None, &[]),
+        (
+            Phase::NeedsPermission(o.clone()),
+            tx::NEEDS_PERMISSION,
+            None,
+            &[tx::OPEN_PERMISSION, tx::TRY_AGAIN, tx::PERMISSION_HINT],
+        ),
+    ];
+    for (phase, headline, detail, rest) in cases {
+        let s = status(phase.clone(), Mode::Notify);
+        let sheet = html(Which::Sheet(SheetMode::Offer), Some(s.clone()));
+        let settings = html(Which::Section, Some(s));
+        for page in [&sheet, &settings] {
+            assert!(has(page, headline), "{phase:?}: no headline in {page}");
+            if let Some(d) = detail {
+                assert!(has(page, d), "{phase:?}: no detail in {page}");
+            }
+            for text in rest {
+                assert!(has(page, text), "{phase:?}: missing {text} in {page}");
+            }
+        }
+        if matches!(phase, Phase::Failed { .. }) {
+            assert!(
+                !has(&sheet, tx::AVAILABLE),
+                "{phase:?}: a failure never reads as «new version»: {sheet}"
+            );
+            assert!(sheet.contains("data-failed=\"true\""), "{sheet}");
+        }
+    }
+}
+
+#[test]
+fn a_failed_download_keeps_its_banner_and_the_android_hint_is_shared() {
+    let o =
+        with_changes(offer("0.2.0", 0), vec![build_changes(50, vec![change(ChangeKind::New, "أول")], false)]);
+    let failed = status(Phase::Failed { offer: Some(o.clone()), why: Failure::Network }, Mode::Notify);
+    let page = html(Which::Banner, Some(failed.clone()));
+    assert!(has(&page, tx::FAILED_NETWORK) && has(&page, tx::TRY_AGAIN), "{page}");
+    let mut closed = failed;
+    closed.prefs.dismissed = Some(o.key());
+    assert_eq!(html(Which::Banner, Some(closed)), "", "«later» still hides it");
+
+    let installing = super::stage::stage(&Phase::Installing(o.clone()), true).unwrap();
+    assert_eq!(installing.hint, Some(tx::INSTALLING_ANDROID));
+    assert_eq!(super::stage::stage(&Phase::Installing(o), false).unwrap().hint, None);
+    assert!(super::stage::stage(&Phase::Idle, true).is_none());
+}

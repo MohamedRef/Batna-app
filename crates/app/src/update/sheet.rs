@@ -22,7 +22,8 @@ use batna_core::update::{BuildChanges, ChangeKind};
 use dioxus::prelude::*;
 
 use super::changelog::{self, between, civil, day_of, label, line, of_kind, tally};
-use super::view::{UPDATE_CSS, megabytes, primary_action, use_update_status};
+use super::stage::{releases_url, stage};
+use super::view::{StageExtras, UPDATE_CSS, megabytes, use_update_status};
 use super::{Phase, Status};
 use crate::i18n::update as tx;
 
@@ -66,6 +67,7 @@ impl UpdateSheetNav {
                     | Phase::Installing(_)
                     | Phase::NeedsPermission(_)
                     | Phase::Installed(_)
+                    | Phase::Failed { offer: Some(_), .. }
             )
         });
         self.open(if offered { SheetMode::Offer } else { SheetMode::History });
@@ -167,15 +169,6 @@ fn app_mark() -> Element {
     }
 }
 
-/// The releases page of the channel this build follows.
-fn releases_url() -> String {
-    let base = batna_core::update::FEED_BASE.replace("/releases/download", "/releases/tag");
-    match super::get() {
-        Some(u) => format!("{base}/{}", u.installed().channel.release_tag()),
-        None => base.trim_end_matches("/tag").to_owned(),
-    }
-}
-
 /// The summary's two chips: `#165 → #190` when the version is the same
 /// (preview and alpha builds), else `v0.1.0 (12) → v0.2.0 (30)`.
 fn jump_labels(from: &str, to: &str) -> (String, String) {
@@ -266,6 +259,7 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
         Phase::Failed { offer, .. } => offer.clone(),
         _ => None,
     };
+    let phase_stage = stage(&s.phase, cfg!(target_os = "android"));
     let current = s.current();
     // The app build he runs; a content-only update on top is named apart
     // ("بناء 40 · محتوى 45"), so the sheet and Settings agree (#336).
@@ -280,14 +274,9 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
     let (title, top, from_label, to_label, earlier): (String, Vec<BuildChanges>, _, _, Vec<BuildChanges>) =
         match m {
             SheetMode::Offer => {
-                let head = match &s.phase {
-                    Phase::Downloading { .. } => tx::DOWNLOADING,
-                    Phase::Ready(_) => tx::READY,
-                    Phase::Installing(_) => tx::INSTALLING,
-                    Phase::NeedsPermission(_) => tx::NEEDS_PERMISSION,
-                    Phase::Installed(_) => tx::INSTALLED,
-                    _ => tx::AVAILABLE,
-                };
+                // The same headline as Settings and the banner, a failure
+                // included (#1338).
+                let head = phase_stage.as_ref().map_or(tx::AVAILABLE, |st| st.headline);
                 let top = offer.as_ref().map(|o| o.changes.clone()).unwrap_or_default();
                 let earlier = current
                     .map(|c| between(&s.history, None, c).into_iter().cloned().collect())
@@ -322,7 +311,14 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
         Phase::Downloading { offer, done } if m == SheetMode::Offer => Some((*done, offer.asset.size.max(1))),
         _ => None,
     };
-    let action = if m == SheetMode::Offer { primary_action(&s.phase) } else { None };
+    let acts = match (&phase_stage, m) {
+        (Some(st), SheetMode::Offer) => st.acts.clone(),
+        _ => Vec::new(),
+    };
+    let failed = phase_stage.as_ref().is_some_and(|st| st.failed && m == SheetMode::Offer);
+    let extras = phase_stage.clone().filter(|st| {
+        m == SheetMode::Offer && (st.hint.is_some() || st.detail.is_some() || !st.steps.is_empty())
+    });
     let today = today();
     let badge_of = |b: &BuildChanges| -> Option<(&'static str, &'static str)> {
         let o = changelog::order(&b.version, b.build);
@@ -390,7 +386,12 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
             }
             div { class: "us-body",
                 if m != SheetMode::History {
-                    p { class: "us-context-title", "{title}" }
+                    p { class: "us-context-title", "data-failed": "{failed}", "{title}" }
+                }
+                if let Some(e) = extras {
+                    div { class: "us-stage", role: "status", aria_live: "polite",
+                        StageExtras { stage: e }
+                    }
                 }
                 if m != SheetMode::History && (from_label.is_some() || !pills.is_empty() || progress.is_some()) {
                     div { class: "us-summary",
@@ -558,13 +559,16 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                     {github_icon()}
                     bdi { dir: "ltr", class: "latin", "GitHub" }
                 }
-                match action {
-                    Some((label, run)) => rsx! {
-                        button { class: "us-btn us-go", onclick: move |_| run(),
+                match acts.first().copied() {
+                    Some(first) => rsx! {
+                        for act in acts.iter().copied().skip(1) {
+                            button { key: "{act:?}", class: "us-btn", onclick: move |_| act.run(), "{act.label(&s.phase)}" }
+                        }
+                        button { class: "us-btn us-go", onclick: move |_| first.run(),
                             if matches!(s.phase, Phase::Available(_)) {
                                 {download_icon()}
                             }
-                            "{label}"
+                            "{first.label(&s.phase)}"
                         }
                     },
                     None if m == SheetMode::Updated => rsx! {

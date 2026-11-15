@@ -27,6 +27,10 @@ pub const INSTALLING: &str = "بيثبّت…";
 pub const INSTALLING_ANDROID: &str = "أندرويد ممكن يسألك توافق. مذاكرتك محفوظة ومش هتضيع.";
 pub const NEEDS_PERMISSION: &str = "أندرويد محتاج إذن \"تثبيت تطبيقات غير معروفة\" لباطنة";
 pub const OPEN_PERMISSION: &str = "افتح الإذن";
+/// Under the permission headline, beside its two buttons.
+pub const PERMISSION_HINT: &str = "افتح الإذن، فعّله لباطنة، وارجع دوس «جرّب تاني».";
+/// A feed this build can't read: the release page, to install once by hand.
+pub const OPEN_RELEASES: &str = "افتح صفحة النسخ";
 pub const TRY_AGAIN: &str = "جرّب تاني";
 pub const INSTALLED: &str = "اتثبّتت";
 pub const RESTART_NOW: &str = "افتح باطنة تاني";

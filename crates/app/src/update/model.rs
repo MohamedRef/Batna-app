@@ -385,6 +385,9 @@ impl Status {
         let offer = match &self.phase {
             Phase::Available(o) if self.prefs.mode == Mode::Notify => o,
             Phase::Ready(o) | Phase::NeedsPermission(o) | Phase::Installed(o) => o,
+            // A failed download or install stays in sight until it works or
+            // he closes it (#1338).
+            Phase::Failed { offer: Some(o), .. } => o,
             _ => return None,
         };
         (self.prefs.dismissed.as_deref() != Some(offer.key().as_str())).then_some(offer)

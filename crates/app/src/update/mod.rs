@@ -41,6 +41,7 @@ pub use model::{
 pub mod bundle;
 pub mod changelog;
 pub mod sheet;
+pub mod stage;
 pub mod view;
 
 use std::fs;

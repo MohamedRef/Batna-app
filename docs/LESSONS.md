@@ -362,7 +362,7 @@ widen it); in the slide-deck course (`res`) they are slides, and the limit is
 headings on two pages that would fall under eight steps if split) is listed
 with its reason in `content/lesson-wide.yaml` and stops warning; a listed
 lesson that is no longer wide warns again. A lesson with no `figure` step
-warns too (rule 10, #981); it becomes an error once the backlog is cleared. `batna-tools lessons --warnings
+fails (rule 10, #981; the backlog of 181 was cleared on 2026-11-14). `batna-tools lessons --warnings
 <course>` lists the warnings, `lessons --report <course>` prints one TSV row
 per lesson (pages, cited pages, cards, steps, words, explain steps with no
 reason word, the lecture's words per page and uncited pages), and

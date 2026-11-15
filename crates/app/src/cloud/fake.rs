@@ -56,6 +56,9 @@ enum Out {
     Text(String),
     Binary,
     Close(u16),
+    /// Goes silent without closing: reads and answers nothing, as a
+    /// connection Android cut while the app was in the back.
+    Mute,
     /// Ends the connection without a close frame.
     Cut,
 }
@@ -83,6 +86,10 @@ struct State {
     unauthorized: u32,
     /// How many times a refresh token was used.
     refreshes: u32,
+    /// Sync upgrades are taken in but never answered.
+    stalled: bool,
+    /// Sync upgrades tried, answered or not.
+    upgrades: u32,
 }
 
 impl State {
@@ -109,6 +116,8 @@ impl FakeCloud {
             drops: None,
             unauthorized: 0,
             refreshes: 0,
+            stalled: false,
+            upgrades: 0,
         }));
         let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
         listener.set_nonblocking(true).unwrap();
@@ -138,6 +147,29 @@ impl FakeCloud {
             for socket in s.sockets.drain(..) {
                 socket.tx.send(Out::Close(1001)).ok();
             }
+        }
+    }
+
+    /// Sync connections are accepted and then never answered (a network
+    /// that swallows everything).
+    pub fn set_stalled(&self, stalled: bool) {
+        self.lock().stalled = stalled;
+    }
+
+    /// Sync upgrades tried so far, including the ones dropped offline.
+    pub fn upgrades(&self) -> u32 {
+        self.lock().upgrades
+    }
+
+    /// Sync connections opened so far.
+    pub fn connections(&self) -> u64 {
+        self.lock().next_conn
+    }
+
+    /// `device`'s sockets go silent without a close.
+    pub fn mute(&self, device: &str) {
+        for s in self.lock().sockets.iter().filter(|s| s.device == device) {
+            s.tx.send(Out::Mute).ok();
         }
     }
 
@@ -399,12 +431,22 @@ fn close_device(s: &mut State, device: &str) {
 }
 
 async fn serve(mut stream: TcpStream, state: Arc<Mutex<State>>) {
-    if state.lock().unwrap().offline {
-        return;
-    }
     let mut first = [0u8; 12];
     let n = stream.peek(&mut first).await.unwrap_or(0);
-    if first[..n].starts_with(b"GET /v1/sync") {
+    let sync = first[..n].starts_with(b"GET /v1/sync");
+    let (offline, stalled) = {
+        let mut s = state.lock().unwrap();
+        s.upgrades += u32::from(sync);
+        (s.offline, sync && s.stalled)
+    };
+    if offline {
+        return;
+    }
+    if stalled {
+        let _held = stream;
+        return std::future::pending::<()>().await;
+    }
+    if sync {
         socket(stream, state).await;
         return;
     }
@@ -614,6 +656,11 @@ async fn socket(stream: TcpStream, state: Arc<Mutex<State>>) {
                 Some(Out::Text(t)) => { if sink.send(Message::Text(t.into())).await.is_err() { break } }
                 Some(Out::Binary) => { let _ = sink.send(Message::Binary(vec![1, 2].into())).await; }
                 Some(Out::Cut) => return,
+                Some(Out::Mute) => {
+                    let _held = (sink, source);
+                    std::future::pending::<()>().await;
+                    return;
+                }
                 Some(Out::Close(code)) => {
                     let frame = CloseFrame { code: code.into(), reason: "bye".into() };
                     let _ = sink.send(Message::Close(Some(frame))).await;

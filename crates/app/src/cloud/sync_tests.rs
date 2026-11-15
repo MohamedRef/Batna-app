@@ -292,6 +292,82 @@ fn answers_made_offline_go_up_when_the_line_is_back() {
     assert_eq!(items, ["hb.L02.001", "hb.L02.002", "hb.L02.003"]);
 }
 
+/// Offline long enough that the next automatic try is seconds away.
+fn backed_off(cloud: &FakeCloud, phone: &mut Device) {
+    phone.wait_live();
+    let before = cloud.upgrades();
+    cloud.set_offline(true);
+    phone.wait_status("offline", |s| s.sync == SyncState::Offline);
+    // Tries 1, 2, 4 seconds apart: the next waits 4 to 8.
+    eventually("four failed tries", || cloud.upgrades() >= before + 4);
+    cloud.set_offline(false);
+}
+
+#[test]
+fn sync_now_connects_at_once_instead_of_waiting_out_the_backoff() {
+    let cloud = FakeCloud::start();
+    let mut phone = Device::signed_in(&cloud, "phone");
+    backed_off(&cloud, &mut phone);
+    phone.store.append_review(answer("hb.L02.004")).unwrap();
+    let pressed = Instant::now();
+    phone.send(Command::SyncNow);
+    phone.wait_status("synced", |s| s.sync == SyncState::Live && s.pending == 0 && s.problem.is_none());
+    assert!(pressed.elapsed() < Duration::from_millis(1500), "took {:?}", pressed.elapsed());
+}
+
+#[test]
+fn sync_now_while_live_opens_a_fresh_connection() {
+    let cloud = FakeCloud::start();
+    let mut phone = Device::signed_in(&cloud, "phone");
+    phone.wait_live();
+    let before = cloud.connections();
+    phone.send(Command::SyncNow);
+    eventually("a new connection", || cloud.connections() > before);
+    phone.wait_live();
+}
+
+#[test]
+fn coming_back_to_the_front_or_online_skips_the_backoff() {
+    let cloud = FakeCloud::start();
+    let mut phone = Device::signed_in(&cloud, "phone");
+    backed_off(&cloud, &mut phone);
+    let resumed = Instant::now();
+    phone.send(Command::Resume);
+    phone.wait_live();
+    assert!(resumed.elapsed() < Duration::from_millis(1500), "took {:?}", resumed.elapsed());
+}
+
+#[test]
+fn a_connect_the_network_never_answers_is_given_up_and_retried() {
+    let cloud = FakeCloud::start();
+    cloud.set_stalled(true);
+    let mut phone = Device::signed_in(&cloud, "phone");
+    phone.wait_status("trying", |s| s.sync == SyncState::Connecting);
+    let s = phone.wait_status("gave up", |s| s.sync == SyncState::Offline);
+    assert_eq!(s.problem, Some(Problem::Network));
+    // The engine still answers while it waits.
+    phone.send(Command::LoadDevices);
+    cloud.set_stalled(false);
+    phone.send(Command::SyncNow);
+    phone.wait_live();
+}
+
+#[test]
+fn a_socket_gone_silent_is_noticed_and_replaced() {
+    let cloud = FakeCloud::start();
+    let mut phone = Device::signed_in(&cloud, "phone");
+    phone.wait_live();
+    let before = cloud.connections();
+    // A quiet but healthy socket stays: its pings are answered.
+    std::thread::sleep(Duration::from_millis(2500));
+    assert_eq!(cloud.connections(), before, "a healthy idle socket was dropped");
+    cloud.mute(&phone.id());
+    eventually("reconnected", || cloud.connections() > before);
+    phone.store.append_review(answer("hb.L02.005")).unwrap();
+    phone.send(Command::Kick);
+    phone.wait_status("pushed", |s| s.sync == SyncState::Live && s.pending == 0);
+}
+
 #[test]
 fn signing_out_another_device_stops_it() {
     let cloud = FakeCloud::start();
@@ -586,8 +662,8 @@ fn a_sign_in_approved_while_offline_finishes_once_the_network_is_back() {
     let mut phone = sign_in(&cloud, "ok");
     let s = phone.wait_status("waiting", |s| s.problem == Some(Problem::SignInWaiting));
     assert!(s.finishing_sign_in);
-    // Back in front: Kick retries now rather than on the timer.
-    phone.send(Command::Kick);
+    // Back in front: it retries now rather than on the timer.
+    phone.send(Command::Resume);
     let s = phone.wait_live();
     assert_eq!(s.problem, None);
     assert!(!s.finishing_sign_in);

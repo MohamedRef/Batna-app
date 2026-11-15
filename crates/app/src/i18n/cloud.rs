@@ -15,6 +15,9 @@ pub const FINISHING: &str = "بيكمّل تسجيل الدخول…";
 pub const AGO: &str = "من";
 pub const SIGNED_IN_AS: &str = "داخل بـ";
 pub const SIGN_OUT: &str = "اخرج من الجهاز ده";
+/// Settings › Sync: connect and sync right now.
+pub const SYNC_NOW: &str = "زامن دلوقتي";
+pub const SYNCING: &str = "بيزامن…";
 pub const CONNECTING: &str = "بيتصل";
 pub const CATCHING_UP: &str = "بيجيب اللي فاتك";
 pub const LIVE: &str = "متزامن";

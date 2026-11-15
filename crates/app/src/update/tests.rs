@@ -7,6 +7,8 @@ use super::*;
 /// The bytes behind the signed fixture's assets (no .apk is tracked).
 const FIXTURE_APK: &[u8] = b"fixture apk bytes";
 const FIXTURE_PACK: &[u8] = b"fixture pack bytes";
+/// The app build behind a [`pack_feed`] that offers one (9 bytes).
+const PACK_FEED_APK: &[u8] = b"apk bytes";
 
 pub(super) fn offer(version: &str, build: u64) -> Offer {
     Offer {
@@ -492,8 +494,8 @@ fn pack_feed(
         assets.push(UpdateAsset {
             platform: UpdatePlatform::AndroidArm64,
             file: format!("batna-0.1.0-b{b}-android-arm64.apk"),
-            size: 9,
-            sha256: "ab".repeat(32),
+            size: PACK_FEED_APK.len() as u64,
+            sha256: sha256_hex(PACK_FEED_APK),
             version_code: Some(100_999),
             build: Some(b),
         });
@@ -515,6 +517,9 @@ fn pack_feed(
     let sig = base64::engine::general_purpose::STANDARD.encode(signer.sign(&json).to_bytes());
     fs::write(feed.path().join(SIGNATURE_FILE), sig).unwrap();
     fs::write(feed.path().join("batna-content.pack"), pack).unwrap();
+    if let Some(b) = app_build {
+        fs::write(feed.path().join(format!("batna-0.1.0-b{b}-android-arm64.apk")), PACK_FEED_APK).unwrap();
+    }
     feed
 }
 
@@ -1133,28 +1138,34 @@ fn serve_gated(dir: PathBuf, gate: std::sync::mpsc::Receiver<()>) -> String {
     use std::io::{BufRead as _, BufReader};
     let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
     let url = format!("http://{}", listener.local_addr().unwrap());
+    let gate = std::sync::Arc::new(Mutex::new(gate));
     std::thread::spawn(move || {
         for stream in listener.incoming().flatten() {
-            let mut reader = BufReader::new(stream);
-            let mut line = String::new();
-            if reader.read_line(&mut line).is_err() {
-                continue;
-            }
-            let path = line.split_whitespace().nth(1).unwrap_or("/").trim_start_matches('/').to_owned();
-            loop {
-                let mut h = String::new();
-                if reader.read_line(&mut h).is_err() || h.trim().is_empty() {
-                    break;
+            // Each request on its own thread, so a held pack doesn't hold
+            // the app build behind it.
+            let (dir, gate) = (dir.clone(), gate.clone());
+            std::thread::spawn(move || {
+                let mut reader = BufReader::new(stream);
+                let mut line = String::new();
+                if reader.read_line(&mut line).is_err() {
+                    return;
                 }
-            }
-            if path.ends_with(".pack") {
-                let _ = gate.recv();
-            }
-            let mut stream = reader.into_inner();
-            let body = fs::read(dir.join(&path)).unwrap_or_default();
-            let head =
-                format!("HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n", body.len());
-            let _ = stream.write_all(head.as_bytes()).and_then(|()| stream.write_all(&body));
+                let path = line.split_whitespace().nth(1).unwrap_or("/").trim_start_matches('/').to_owned();
+                loop {
+                    let mut h = String::new();
+                    if reader.read_line(&mut h).is_err() || h.trim().is_empty() {
+                        break;
+                    }
+                }
+                if path.ends_with(".pack") {
+                    let _ = gate.lock().unwrap().recv();
+                }
+                let mut stream = reader.into_inner();
+                let body = fs::read(dir.join(&path)).unwrap_or_default();
+                let head =
+                    format!("HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n", body.len());
+                let _ = stream.write_all(head.as_bytes()).and_then(|()| stream.write_all(&body));
+            });
         }
     });
     url
@@ -1184,4 +1195,34 @@ fn the_app_offer_shows_before_the_content_pack_arrives() {
     check.join().unwrap();
     assert_eq!(u.status().content_check, Some(ContentCheck::New));
     assert!(matches!(u.status().phase, Phase::Available(_)));
+}
+
+/// Mohamed, 2026-11-15: "pressing download does nothing" while the screen
+/// said it was still fetching the new lessons. The tap waited on the same
+/// lock as the content pack and was dropped; now it downloads at once.
+#[test]
+fn download_starts_while_the_content_pack_is_still_coming() {
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[12; 32]);
+    let feed = pack_feed(&signer, 45, Some(41), &pack, Vec::new());
+    let (open, gate) = std::sync::mpsc::channel();
+    let url = serve_gated(feed.path().to_path_buf(), gate);
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let (u, _data) = updater(&url, info);
+    let check = std::thread::spawn(move || u.check(false));
+    let mut waited = 0;
+    while u.status().content_check != Some(ContentCheck::Fetching) {
+        assert!(waited < 500, "the pack download never started");
+        std::thread::sleep(std::time::Duration::from_millis(10));
+        waited += 1;
+    }
+    // The tap, with the pack still held by the server.
+    u.download();
+    let Phase::Ready(offer) = u.status().phase else { panic!("{:?}", u.status().phase) };
+    assert_eq!(offer.build, 41);
+    assert_eq!(u.status().content_check, Some(ContentCheck::Fetching), "the pack is still on its way");
+    open.send(()).unwrap();
+    check.join().unwrap();
+    assert_eq!(u.status().content_check, Some(ContentCheck::New));
+    assert!(matches!(u.status().phase, Phase::Ready(_)), "the finished download stays");
 }

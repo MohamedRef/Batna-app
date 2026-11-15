@@ -47,7 +47,7 @@ use std::fs;
 #[cfg_attr(target_arch = "wasm32", allow(unused_imports))] // the downloads (native only)
 use std::io::{Read as _, Write as _};
 use std::path::{Path, PathBuf};
-use std::sync::{Mutex, OnceLock};
+use std::sync::{Mutex, OnceLock, PoisonError};
 use std::time::Duration;
 use web_time::{SystemTime, UNIX_EPOCH};
 
@@ -117,6 +117,9 @@ pub struct Updater {
     tx: watch::Sender<Status>,
     /// One check, download or install at a time.
     job: Mutex<()>,
+    /// One content-pack fetch at a time. Kept apart from `job`: the pack is
+    /// tens of megabytes, and a tap on "download" must not wait for it.
+    content_job: Mutex<()>,
 }
 
 /// The one updater of this process. On Android the background job may open

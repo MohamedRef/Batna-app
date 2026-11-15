@@ -86,6 +86,7 @@ impl Updater {
             retry_after: Duration::from_secs(20),
             tx,
             job: Mutex::new(()),
+            content_job: Mutex::new(()),
         }
     }
 
@@ -151,7 +152,10 @@ impl Updater {
         if due {
             self.check_with(auto, wifi);
         } else if auto && let Phase::Available(_) = s.phase {
-            self.download();
+            // Not behind a job already running: the next step comes soon.
+            if let Ok(_job) = self.job.try_lock() {
+                self.download_now();
+            }
         }
     }
 
@@ -206,7 +210,7 @@ impl Updater {
     }
 
     pub(super) fn check_with(&self, download: bool, content: bool) {
-        let Ok(_job) = self.job.try_lock() else { return };
+        let Ok(job) = self.job.try_lock() else { return };
         if self.status().off.is_some() {
             return;
         }
@@ -250,12 +254,16 @@ impl Updater {
                 None
             }
         };
-        if content {
+        // The feed is read: the app's answer stands, and a tap on "download"
+        // may start now instead of waiting for the content pack below.
+        drop(job);
+        if content && let Ok(_content) = self.content_job.try_lock() {
             let found = self.refresh_content(&m);
             self.tx.send_modify(|s| s.content_check = Some(found));
         }
-        if let Some(offer) = to_download {
-            self.download_locked(offer);
+        if to_download.is_some() {
+            let _job = self.job.lock().unwrap_or_else(PoisonError::into_inner);
+            self.download_now();
         }
     }
 
@@ -463,8 +471,17 @@ impl Updater {
     }
 
     /// Downloads the offered build (a tap in "tell me first" mode).
+    ///
+    /// Runs on its own thread, so it waits for a check or download already
+    /// running instead of dropping the tap, then looks at the phase again
+    /// (a finished download is not fetched twice).
     pub fn download(&'static self) {
-        let Ok(_job) = self.job.try_lock() else { return };
+        let _job = self.job.lock().unwrap_or_else(PoisonError::into_inner);
+        self.download_now();
+    }
+
+    /// Downloads the offer still standing; the caller holds `job`.
+    fn download_now(&self) {
         if let Phase::Available(offer) | Phase::Failed { offer: Some(offer), .. } = self.status().phase {
             self.download_locked(offer);
         }
@@ -625,7 +642,7 @@ impl Updater {
 
     /// Installs the ready download (a tap, or a calm moment in Auto mode).
     pub fn install(&'static self) {
-        let Ok(_job) = self.job.try_lock() else { return };
+        let _job = self.job.lock().unwrap_or_else(PoisonError::into_inner);
         let offer = match self.status().phase {
             Phase::Ready(o)
             | Phase::NeedsPermission(o)

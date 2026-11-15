@@ -27,6 +27,21 @@ pub const INSTALLING: &str = "بيثبّت…";
 pub const INSTALLING_ANDROID: &str = "أندرويد ممكن يسألك توافق. مذاكرتك محفوظة ومش هتضيع.";
 pub const NEEDS_PERMISSION: &str = "أندرويد محتاج إذن \"تثبيت تطبيقات غير معروفة\" لباطنة";
 pub const OPEN_PERMISSION: &str = "افتح الإذن";
+/// Under the permission headline, beside its two buttons.
+pub const PERMISSION_HINT: &str = "افتح الإذن، فعّله لباطنة، وارجع دوس «جرّب تاني».";
+/// A manual download on mobile data asks first.
+pub const METERED_TITLE: &str = "إنت على نت الموبايل";
+pub const METERED_BODY: &str = "النسخة الجديدة هتاخد من باقتك";
+pub const METERED_NOTE: &str = "لو استنيت، هتنزل لوحدها أول ما تتوصّل بواي فاي، ومش هتحتاج تعمل حاجة.";
+pub const METERED_NOW: &str = "نزّل دلوقتي";
+pub const METERED_WAIT: &str = "استنى الواي فاي";
+/// The sheet's download view.
+pub const STAGE_BACKGROUND: &str = "كمّل في الخلفية";
+pub const STAGE_SHOW_NOTES: &str = "إيه الجديد فيها؟";
+pub const STAGE_HIDE_NOTES: &str = "اخفي التغييرات";
+pub const WIFI_QUEUED: &str = "هتنزل لوحدها أول ما تتوصّل بواي فاي";
+/// A feed this build can't read: the release page, to install once by hand.
+pub const OPEN_RELEASES: &str = "افتح صفحة النسخ";
 pub const TRY_AGAIN: &str = "جرّب تاني";
 pub const INSTALLED: &str = "اتثبّتت";
 pub const RESTART_NOW: &str = "افتح باطنة تاني";

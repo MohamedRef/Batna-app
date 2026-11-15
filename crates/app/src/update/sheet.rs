@@ -22,7 +22,8 @@ use batna_core::update::{BuildChanges, ChangeKind};
 use dioxus::prelude::*;
 
 use super::changelog::{self, between, civil, day_of, label, tally};
-use super::view::{UPDATE_CSS, megabytes, primary_action, use_update_status};
+use super::stage::{ActLabel, Stage, releases_url, stage};
+use super::view::{StageExtras, UPDATE_CSS, megabytes, use_update_status};
 use super::{Phase, Status};
 use crate::i18n::update as tx;
 
@@ -66,6 +67,7 @@ impl UpdateSheetNav {
                     | Phase::Installing(_)
                     | Phase::NeedsPermission(_)
                     | Phase::Installed(_)
+                    | Phase::Failed { offer: Some(_), .. }
             )
         });
         self.open(if offered { SheetMode::Offer } else { SheetMode::History });
@@ -164,15 +166,6 @@ fn app_mark() -> Element {
     }
 }
 
-/// The releases page of the channel this build follows.
-fn releases_url() -> String {
-    let base = batna_core::update::FEED_BASE.replace("/releases/download", "/releases/tag");
-    match super::get() {
-        Some(u) => format!("{base}/{}", u.installed().channel.release_tag()),
-        None => base.trim_end_matches("/tag").to_owned(),
-    }
-}
-
 /// The summary's two chips: `#165 → #190` when the version is the same
 /// (preview and alpha builds), else `v0.1.0 (12) → v0.2.0 (30)`.
 fn jump_labels(from: &str, to: &str) -> (String, String) {
@@ -227,6 +220,9 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
     let mut earlier_shown = use_signal(|| EARLIER_STEP);
     // A line that opened a lesson or lecture brings the sheet back after it.
     super::groups::use_return(mode);
+    // In a stage view (downloading, installing, done, failed) the notes
+    // wait behind one tap.
+    let mut notes_open = use_signal(|| false);
 
     use_effect(move || {
         let from = status
@@ -251,6 +247,7 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
         mode.set(None);
         open_builds.set(Vec::new());
         earlier_shown.set(EARLIER_STEP);
+        notes_open.set(false);
     };
 
     let offer = match &s.phase {
@@ -263,6 +260,7 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
         Phase::Failed { offer, .. } => offer.clone(),
         _ => None,
     };
+    let phase_stage = stage(&s.phase, cfg!(target_os = "android"));
     let current = s.current();
     // The app build he runs; a content-only update on top is named apart
     // ("بناء 40 · محتوى 45"), so the sheet and Settings agree (#336).
@@ -277,14 +275,9 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
     let (title, top, from_label, to_label, earlier): (String, Vec<BuildChanges>, _, _, Vec<BuildChanges>) =
         match m {
             SheetMode::Offer => {
-                let head = match &s.phase {
-                    Phase::Downloading { .. } => tx::DOWNLOADING,
-                    Phase::Ready(_) => tx::READY,
-                    Phase::Installing(_) => tx::INSTALLING,
-                    Phase::NeedsPermission(_) => tx::NEEDS_PERMISSION,
-                    Phase::Installed(_) => tx::INSTALLED,
-                    _ => tx::AVAILABLE,
-                };
+                // The same headline as Settings and the banner, a failure
+                // included (#1338).
+                let head = phase_stage.as_ref().map_or(tx::AVAILABLE, |st| st.headline);
                 let top = offer.as_ref().map(|o| o.changes.clone()).unwrap_or_default();
                 let earlier = current
                     .map(|c| between(&s.history, None, c).into_iter().cloned().collect())
@@ -319,7 +312,37 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
         Phase::Downloading { offer, done } if m == SheetMode::Offer => Some((*done, offer.asset.size.max(1))),
         _ => None,
     };
-    let action = if m == SheetMode::Offer { primary_action(&s.phase) } else { None };
+    let acts = match (&phase_stage, m) {
+        (Some(st), SheetMode::Offer) => st.acts.clone(),
+        _ => Vec::new(),
+    };
+    let failed = phase_stage.as_ref().is_some_and(|st| st.failed && m == SheetMode::Offer);
+    // Offer mode swaps its body by step, Morphe Manager style (ideas only):
+    // the notes before the tap, then one clear view per step.
+    let stage_view = phase_stage.clone().filter(|_| {
+        m == SheetMode::Offer
+            && matches!(
+                s.phase,
+                Phase::Downloading { .. }
+                    | Phase::Installing(_)
+                    | Phase::Installed(_)
+                    | Phase::NeedsPermission(_)
+                    | Phase::Failed { .. }
+            )
+    });
+    let in_stage = stage_view.is_some();
+    let show_notes = !in_stage || notes_open();
+    let size = offer.as_ref().map(|o| o.asset.size);
+    let busy_state = match &s.phase {
+        Phase::Downloading { offer, done } if m == SheetMode::Offer => {
+            Some(format!("{} {}%", tx::DOWNLOADING, percent(*done, offer.asset.size)))
+        }
+        Phase::Installing(_) if m == SheetMode::Offer => Some(tx::INSTALLING.to_owned()),
+        _ => None,
+    };
+    let extras = phase_stage.clone().filter(|st| {
+        m == SheetMode::Offer && (st.hint.is_some() || st.detail.is_some() || !st.steps.is_empty())
+    });
     let today = today();
     let badge_of = |b: &BuildChanges| -> Option<(&'static str, &'static str)> {
         let o = changelog::order(&b.version, b.build);
@@ -387,8 +410,22 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
             }
             div { class: "us-body",
                 if m != SheetMode::History {
-                    p { class: "us-context-title", "{title}" }
+                    p { class: "us-context-title", "data-failed": "{failed}", "{title}" }
                 }
+                if let Some(st) = stage_view {
+                    StageCard { phase: s.phase.clone(), stage: st }
+                    button {
+                        class: "us-more us-notes-toggle",
+                        aria_expanded: if show_notes { "true" } else { "false" },
+                        onclick: move |_| notes_open.toggle(),
+                        if show_notes { {tx::STAGE_HIDE_NOTES} } else { {tx::STAGE_SHOW_NOTES} }
+                    }
+                } else if let Some(e) = extras {
+                    div { class: "us-stage", role: "status", aria_live: "polite",
+                        StageExtras { stage: e }
+                    }
+                }
+                if show_notes {
                 if m != SheetMode::History && (from_label.is_some() || !pills.is_empty() || progress.is_some()) {
                     div { class: "us-summary",
                         if let Some(c) = content_line.clone().filter(|_| m == SheetMode::Updated) {
@@ -489,6 +526,7 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                 if more_earlier {
                     button { class: "us-more", onclick: move |_| earlier_shown += EARLIER_STEP, "{tx::SHOW_OLDER}" }
                 }
+                }
             }
             div { class: "us-foot",
                 button {
@@ -499,14 +537,25 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                     {github_icon()}
                     bdi { dir: "ltr", class: "latin", "GitHub" }
                 }
-                match action {
-                    Some((label, run)) => rsx! {
-                        button { class: "us-btn us-go", onclick: move |_| run(),
+                match acts.first().copied() {
+                    Some(first) => rsx! {
+                        for act in acts.iter().copied().skip(1) {
+                            button { key: "{act:?}", class: "us-btn", onclick: move |_| act.run(),
+                                ActLabel { act, phase: s.phase.clone(), size }
+                            }
+                        }
+                        button { class: "us-btn us-go", onclick: move |_| first.run(),
                             if matches!(s.phase, Phase::Available(_)) {
                                 {download_icon()}
                             }
-                            "{label}"
+                            ActLabel { act: first, phase: s.phase.clone(), size }
                         }
+                    },
+                    // The footer always says the step: a download or an
+                    // install runs on with the sheet closed.
+                    None if busy_state.is_some() => rsx! {
+                        span { class: "us-foot-state", role: "status", "{busy_state.clone().unwrap_or_default()}" }
+                        button { class: "us-btn", onclick: close, "{tx::STAGE_BACKGROUND}" }
                     },
                     None if m == SheetMode::Updated => rsx! {
                         button { class: "us-btn us-go", onclick: close, "{tx::GOT_IT}" }
@@ -516,6 +565,63 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                     },
                 }
             }
+        }
+    }
+}
+
+fn percent(done: u64, total: u64) -> u64 {
+    (done.saturating_mul(100) / total.max(1)).min(100)
+}
+
+/// One step of an update, in place of the notes: a ring while it
+/// downloads, a pulsing mark while it installs, a check when done, a
+/// warning when it failed or needs the permission. Re-keyed per step, so
+/// each step fades in.
+#[component]
+fn StageCard(phase: Phase, stage: Stage) -> Element {
+    let kind = match phase {
+        Phase::Downloading { .. } => "downloading",
+        Phase::Installing(_) => "installing",
+        Phase::Installed(_) => "done",
+        Phase::NeedsPermission(_) => "permission",
+        _ => "failed",
+    };
+    // r = 26: the ring's length is 2πr.
+    const RING: f64 = 163.363;
+    let ring = stage.progress.map(|(done, total)| {
+        let p = percent(done, total);
+        (p, RING * (1.0 - p as f64 / 100.0), done, total)
+    });
+    let mark = match kind {
+        "done" => "M5 12.5l4.5 4.5L19 7.5",
+        "installing" => "M12 4v10M7.5 9.5L12 14l4.5-4.5M5 19h14",
+        "downloading" => "",
+        _ => "M12 7v6M12 16.5v.5",
+    };
+    rsx! {
+        div { key: "{kind}", class: "us-stage-view", "data-stage": "{kind}", role: "status", aria_live: "polite",
+            if let Some((p, offset, done, total)) = ring {
+                div { class: "us-ring",
+                    svg { view_box: "0 0 64 64", "aria-hidden": "true",
+                        circle { class: "us-ring-track", cx: "32", cy: "32", r: "26" }
+                        circle { class: "us-ring-fill", cx: "32", cy: "32", r: "26",
+                            stroke_dasharray: "{RING}", stroke_dashoffset: "{offset:.2}",
+                            transform: "rotate(-90 32 32)",
+                        }
+                    }
+                    span { class: "us-ring-pc num-ltr", "{p}%" }
+                }
+                progress { class: "us-sr-only", max: "{total}", value: "{done}" }
+                p { class: "us-mb num-ltr", "{megabytes(done)} / {megabytes(total)}" }
+            } else {
+                span { class: "us-stage-mark", "data-stage": "{kind}",
+                    svg { view_box: "0 0 24 24", fill: "none", stroke: "currentColor", stroke_width: "2.4",
+                        stroke_linecap: "round", stroke_linejoin: "round", "aria-hidden": "true",
+                        path { d: "{mark}" }
+                    }
+                }
+            }
+            StageExtras { stage: stage.clone() }
         }
     }
 }

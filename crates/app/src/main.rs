@@ -322,6 +322,8 @@ fn App() -> Element {
             shortcuts::KeysSheet {}
             shortcuts::Palette {}
             update::sheet::UpdateSheet {}
+            // Over the sheet, whose download button can ask it.
+            update::stage::MeteredConfirm {}
             pagesheet::BookSheet {}
             gopage::GoPage {}
             abbrsheet::AbbrSheet {}

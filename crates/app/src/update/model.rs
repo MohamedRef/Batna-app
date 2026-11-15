@@ -54,6 +54,10 @@ pub struct Prefs {
     /// Where the content-only notes count from, until seen.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_from: Option<String>,
+    /// He tapped "download" on mobile data and chose to wait for Wi-Fi:
+    /// the offer (`version+build`) downloads at the next unmetered step.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub wifi_download: Option<String>,
 }
 pub(super) fn yes() -> bool {
     true
@@ -72,6 +76,7 @@ impl Default for Prefs {
             whats_new_from: None,
             last_content: None,
             content_from: None,
+            wifi_download: None,
         }
     }
 }
@@ -385,6 +390,9 @@ impl Status {
         let offer = match &self.phase {
             Phase::Available(o) if self.prefs.mode == Mode::Notify => o,
             Phase::Ready(o) | Phase::NeedsPermission(o) | Phase::Installed(o) => o,
+            // A failed download or install stays in sight until it works or
+            // he closes it (#1338).
+            Phase::Failed { offer: Some(o), .. } => o,
             _ => return None,
         };
         (self.prefs.dismissed.as_deref() != Some(offer.key().as_str())).then_some(offer)

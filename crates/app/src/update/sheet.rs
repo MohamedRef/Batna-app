@@ -381,6 +381,8 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
     let first_earlier = earlier_divider(&shown, m, &this_key);
     let more_earlier = earlier.len() > show_earlier;
     let empty = shown.is_empty();
+    // The changelog's search shows its own results in place of the timeline.
+    let searching = m == SheetMode::History && super::filter::filtering();
     let fallback_notes = offer
         .as_ref()
         .filter(|o| m == SheetMode::Offer && o.changes.is_empty())
@@ -471,10 +473,13 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                 if let Some(n) = fallback_notes {
                     p { class: "update-notes", "{n}" }
                 }
+                if m == SheetMode::History && !empty {
+                    super::filter::HistoryFilter { history: s.history.clone() }
+                }
                 if empty {
                     p { class: "muted", {if m == SheetMode::History { tx::HISTORY_EMPTY } else { tx::NO_DETAILS }} }
                 }
-                ol { class: "us-timeline",
+                ol { class: "us-timeline", hidden: searching,
                     for (i, (is_earlier, b)) in shown.into_iter().enumerate() {
                         if Some(i) == first_earlier {
                             li { key: "{i}-earlier", class: "us-divider", role: "presentation", "{tx::EARLIER}" }
@@ -523,7 +528,7 @@ pub(super) fn SheetView(status: Signal<Option<Status>>) -> Element {
                         }
                     }
                 }
-                if more_earlier {
+                if more_earlier && !searching {
                     button { class: "us-more", onclick: move |_| earlier_shown += EARLIER_STEP, "{tx::SHOW_OLDER}" }
                 }
                 }

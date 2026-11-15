@@ -358,6 +358,15 @@ get them in the feed too, because building a manifest looks each history
 line up by its Egyptian Arabic in today's files (`changes::label`). Adding a
 scope or target to an existing line doesn't make it a new line.
 
+Above the course rows, a release with lines in two or more courses opens
+with one digest line ("306 تغيير في 9 مواد والتطبيق؛ الأكتر: كبد (46)"), and
+a box lists the lessons you had finished before that build that its lines
+open (a line opening a lecture counts each of its lessons); each one opens
+the lesson. Settings › Updates › سجل التغييرات has a search box, a course
+picker and kind chips: while any is set, the matching lines of every kept
+build replace the timeline, newest first (Arabic marks and alef forms are
+ignored, as in Settings search).
+
 A file holding `[]` says there's nothing to tell (CI, refactors, docs). When
 a feed is built (CI for `batna-preview`, `just publish-update` for releases),
 `batna-tools update manifest --previous <current update.json> --changes`

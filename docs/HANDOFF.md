@@ -189,7 +189,9 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   [RELEASE.md](RELEASE.md), [COMPATIBILITY.md](COMPATIBILITY.md).
 - What's new comes from `changes/*.yaml` (Morphe-style sheet before/after an update).
   A long release groups by course (`scope`), and a line with `open` opens its
-  lesson, lecture or screen (#1340).
+  lesson, lecture or screen (#1340). A digest line, a box of finished lessons
+  the release changed, and a search/filter over the changelog sit on top
+  (`crates/app/src/update/groups.rs`, `filter.rs`).
 - A check shows the app's answer as soon as the feed is read; a newer
   content pack downloads after it (Settings shows «بيجيب الدروس…»), then an
   automatic build download. Every update request fails after 20 s without
@@ -769,6 +771,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-15: What's new finishes #1340: a digest line per release (changes, courses, the busiest course), a box of lessons you had finished that the release changed (each opens), and changelog search with course and kind filters across every kept build.
 - 2026-11-15: What's new groups a release by course (#1340): `changes/*.yaml` lines take an optional `scope` (course id or app area) and `open` (lesson, lecture or screen), carried in the feed; the sheet shows the app, then one folded row per course with counts, and a line opens its lesson (closing it brings the sheet back). A one-off pass scoped 1114 of 1199 existing lines; old feed lines get theirs by their Arabic text when a manifest is built. Digest line, "changed since you did it" and search are still open in #1340.
 - 2026-11-15: «ابدأ من الأول» (#1341): reset progress for one course or the whole curriculum with one synced marker (`reset.<course>` / `reset.all`), nothing deleted, undo by removing it; backup first, refused under an open session or paper (§ 10 Start over).
 - 2026-11-15: #1339: update sheet step views (download ring, installing, done, failed), size on the download button (sheet, banner, Settings), and a mobile-data confirm with «استنى الواي فاي» queueing the download for the next unmetered check.

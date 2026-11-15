@@ -2,22 +2,15 @@
 //! thing, exactly its line.
 
 use super::*;
-use crate::testkit::{self, LECTURE, LESSON};
+use crate::testkit::{self, LECTURE, LESSON, LESSON_FIGURE};
 
-/// The test lesson with a figure step, so only the rule under test speaks.
-fn with_figure(lesson: &str) -> String {
-    lesson.replacen(
-        "    recap:",
-        "      - kind: figure\n        page: 1\n        svg: \"<svg viewBox='0 0 10 10'></svg>\"\n        caption: \"الكبد\"\n        alt: \"A liver\"\n    recap:",
-        1,
-    )
+/// The test lesson without its figure step.
+fn without_figure(lesson: &str) -> String {
+    assert!(lesson.contains(LESSON_FIGURE));
+    lesson.replacen(LESSON_FIGURE, "", 1)
 }
 
 fn parsed(lesson: &str) -> (Lecture, LessonFile) {
-    parsed_as_is(&with_figure(lesson))
-}
-
-fn parsed_as_is(lesson: &str) -> (Lecture, LessonFile) {
     (serde_yaml_ng::from_str(LECTURE).unwrap(), serde_yaml_ng::from_str(lesson).unwrap())
 }
 
@@ -70,7 +63,7 @@ fn a_practice_card_from_a_page_the_lesson_never_cites_warns() {
         LECTURE.replace("src: { page: 1, quote: \"The hepatic", "src: { page: 2, quote: \"The hepatic");
     let lesson = LESSON.replace("practice: [hb.L01.001]", "practice: [hb.L01.001, hb.L01.002]");
     let lecture: Lecture = serde_yaml_ng::from_str(&lecture).unwrap();
-    let file: LessonFile = serde_yaml_ng::from_str(&with_figure(&lesson)).unwrap();
+    let file: LessonFile = serde_yaml_ng::from_str(&lesson).unwrap();
     let skips: Skips = serde_yaml_ng::from_str("hb.L01: { 2: shown elsewhere }").unwrap();
     let (e, w) = problems(&lecture_row([1, 2], &lecture, &file, &skips), &skips);
     assert!(e.is_empty(), "{e:?}");
@@ -139,12 +132,12 @@ fn a_lesson_wide_on_purpose_needs_a_reason_and_stops_warning() {
 }
 
 #[test]
-fn a_lesson_without_a_figure_warns() {
-    let (lecture, file) = parsed_as_is(LESSON);
+fn a_lesson_without_a_figure_fails() {
+    let (lecture, file) = parsed(&without_figure(LESSON));
     let r = lecture_row([1, 1], &lecture, &file, &Skips::new());
     assert_eq!(r.lessons[0].figures, 0);
     assert_eq!(
-        problems(&r, &Skips::new()).1,
+        problems(&r, &Skips::new()).0,
         vec!["hb.L01.lesson1: no figure step (LESSONS.md rule 10, #981)"]
     );
     let (lecture, file) = parsed(LESSON);
@@ -167,8 +160,8 @@ fn validate_fails_on_an_over_wide_lesson_and_reports_the_tree() {
     let dir = testkit::tree();
     let root = dir.path();
     let ok = crate::validate_all(root).unwrap();
-    // The uncited page and the missing figure.
-    assert!(ok.contains("lesson coverage: 2 warning(s)"), "{ok}");
+    // The uncited page.
+    assert!(ok.contains("lesson coverage: 1 warning(s)"), "{ok}");
     testkit::write(root, "content/lessons/hb/L01.yaml", &LESSON.replace("pages: [1, 1]", "pages: [1, 3]"));
     let err = crate::validate_all(root).unwrap_err();
     assert!(err.iter().any(|p| p.starts_with("lessons coverage: hb.L01.lesson1: pages 1–3")), "{err:?}");
@@ -178,7 +171,7 @@ fn validate_fails_on_an_over_wide_lesson_and_reports_the_tree() {
     assert!(table.contains("| hb | 1 | 22 | 21 | 0 | 0 | 0 | 0 |"), "{table}");
     let tsv = run(root, &testkit::strings(&["--report", "hb"])).unwrap();
     assert_eq!(tsv.lines().count(), 2, "{tsv}");
-    assert!(tsv.lines().nth(1).unwrap().starts_with("hb.L01\thb.L01.lesson1\t1-1\t1-1\t1\t1\t3\t"), "{tsv}");
+    assert!(tsv.lines().nth(1).unwrap().starts_with("hb.L01\thb.L01.lesson1\t1-1\t1-1\t1\t1\t4\t"), "{tsv}");
     let warn = run(root, &testkit::strings(&["--warnings", "hb"])).unwrap();
     assert!(warn.starts_with("warning: hb.L01: no lesson step cites p2"), "{warn}");
     testkit::write(root, "content/lesson-skips.yaml", "hb.L99: {}\n");

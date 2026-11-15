@@ -340,7 +340,7 @@ mod tests {
             (code, out.as_str(), err.len()),
             (
                 ExitCode::SUCCESS,
-                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 2 warning(s), see `batna-tools lessons --warnings`; book figures: 1 lecture(s) not inventoried yet, 0 warning(s) (diagram, algorithm or chart skipped as restated in words), see `batna-tools figures`",
+                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 1 warning(s), see `batna-tools lessons --warnings`; book figures: 1 lecture(s) not inventoried yet, 0 warning(s) (diagram, algorithm or chart skipped as restated in words), see `batna-tools figures`",
                 0
             )
         );
@@ -358,7 +358,7 @@ mod tests {
         assert_eq!(out, "alpha\nbeta");
         let book = testkit::book(tree.path()).display().to_string();
         let (_, out, _) = run(&["refs", "--root", &root, "--book", &book, "--ocr", "/x", "--checked", "/x"]);
-        assert_eq!(out, "hb.L01: 5 refs, 5 quoted, 0 book figures, 0 checked by hand, 0 to look at");
+        assert_eq!(out, "hb.L01: 6 refs, 6 quoted, 0 book figures, 0 checked by hand, 0 to look at");
         let deck = tree.path().join("deck").display().to_string();
         let (code, out, _) = run(&["anki", "--merged-only", "--out", &deck, "--root", &root]);
         assert_eq!(code, ExitCode::SUCCESS);

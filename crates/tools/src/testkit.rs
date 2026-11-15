@@ -35,6 +35,9 @@ items:
     status: unverified
 "#;
 
+/// The figure step of [`LESSON`] (every lesson needs one, LESSONS.md rule 10).
+pub const LESSON_FIGURE: &str = "      - kind: figure\n        page: 1\n        quote: \"diffuse process with fibrosis and regenerative nodule formation\"\n        svg: \"<svg viewBox='0 0 10 10'></svg>\"\n        caption: \"الـ **cirrhosis**: **fibrosis** و **regenerative nodules**.\"\n        alt: \"Cirrhosis: fibrosis and regenerative nodules\"\n";
+
 pub const LESSON: &str = r#"schema: batna.lesson/v1
 lecture: hb.L01
 lessons:
@@ -70,6 +73,12 @@ lessons:
           - "صح: الـ stellate cells هي اللي بتعمل collagen."
           - "الـ Kupffer cells دي macrophages."
           - "الـ cholangiocytes بطانة القنوات المرارية."
+      - kind: figure
+        page: 1
+        quote: "diffuse process with fibrosis and regenerative nodule formation"
+        svg: "<svg viewBox='0 0 10 10'></svg>"
+        caption: "الـ **cirrhosis**: **fibrosis** و **regenerative nodules**."
+        alt: "Cirrhosis: fibrosis and regenerative nodules"
     recap: ["fibrosis + nodules = cirrhosis"]
     practice: [hb.L01.001]
 "#;

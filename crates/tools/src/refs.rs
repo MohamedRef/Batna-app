@@ -844,7 +844,7 @@ mod tests {
         assert_eq!(
             p,
             [
-                "content/book-refs/L01.tsv: hb.L01.lesson1#4 (p1) was never checked; check it against the book again: batna-tools refs --lecture hb.L01 --write"
+                "content/book-refs/L01.tsv: hb.L01.lesson1#5 (p1) was never checked; check it against the book again: batna-tools refs --lecture hb.L01 --write"
             ]
         );
         let unquoted = testkit::LESSON.replacen(
@@ -880,9 +880,9 @@ mod tests {
         let good = std::fs::read_to_string(&lock).unwrap();
         let first = good.lines().find(|l| !l.starts_with('#')).unwrap();
         std::fs::write(&lock, format!("{good}{first}\n")).unwrap();
-        has(&check_locks(root, &l01), "L01.tsv:8: hb.L01.001 is listed twice");
+        has(&check_locks(root, &l01), "L01.tsv:9: hb.L01.001 is listed twice");
         std::fs::write(&lock, format!("{good}\nhb.L01.009\tp1\n")).unwrap();
-        has(&check_locks(root, &l01), "L01.tsv:9: expected ref, page, quote hash, basis");
+        has(&check_locks(root, &l01), "L01.tsv:10: expected ref, page, quote hash, basis");
 
         // A lock left behind by a lecture that has no content.
         write(root, "content/book-refs/L02.tsv", "# empty\n");

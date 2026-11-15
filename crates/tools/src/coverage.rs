@@ -110,7 +110,7 @@ pub struct LessonRow {
     pub practice_uncited: Vec<String>,
     pub explains: usize,
     pub explains_no_reason: usize,
-    /// Its `figure` steps (rule 10: at least one, #981).
+    /// Its `figure` steps (rule 10: at least one, #981; none fails `validate`).
     pub figures: usize,
 }
 
@@ -270,7 +270,7 @@ pub fn problems(row: &LectureRow, skips: &Skips) -> (Vec<String>, Vec<String>) {
             ));
         }
         if l.figures == 0 {
-            warnings.push(format!("{}: no figure step (LESSONS.md rule 10, #981)", l.id));
+            errors.push(format!("{}: no figure step (LESSONS.md rule 10, #981)", l.id));
         }
         match (l.is_wide(), &l.wide_ok) {
             (true, None) => warnings.push(format!(

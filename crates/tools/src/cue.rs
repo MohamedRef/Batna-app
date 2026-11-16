@@ -104,7 +104,7 @@ const PAIR_CASE: f64 = 0.5;
 #[cfg(test)]
 const PAIR_CHECK: f64 = 32.5;
 #[cfg(test)]
-const PAIR_LESSON_CASE: f64 = 41.0;
+const PAIR_LESSON_CASE: f64 = 0.5;
 
 /// Lectures with fewer counted questions than this are not ranked in the summary.
 const MIN_RANKED: usize = 5;

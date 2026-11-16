@@ -83,6 +83,8 @@ mod mac {
         let url = NSURL::fileURLWithPath(&NSString::from_str(path));
         let items: Retained<NSArray<AnyObject>> =
             NSArray::from_retained_slice(&[Retained::into_super(Retained::into_super(url))]);
+        // SAFETY: `items` holds one NSURL, the item type the picker shares as a file.
+        #[allow(unsafe_code)]
         let picker = unsafe { NSSharingServicePicker::initWithItems(mtm.alloc(), &items) };
         let mut rect = view.bounds();
         rect.origin.x += rect.size.width / 2.0;

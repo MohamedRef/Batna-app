@@ -786,6 +786,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: longest-option cue rewrites in all 9 courses (#1349), worst lectures first: about 1,260 wrong options given the key's shape and length (4 keys trimmed), every lecture at or under a third per kind; case steps 52.8% → 13.9%, lesson checks 47.3% → 19.3%, lesson mini-case steps 54.2% → 13.2%; ceilings 14 / 19.5 / 13.5%. All `status: unverified`.
 - 2026-11-16: longest-option cue for every question with options (#1349): `batna-tools cue` counts case steps (52.8%), lesson checks (47.3%) and lesson mini-case steps (54.2%) beside MCQs (24.3%), with a ceiling per kind (25 / 53 / 47.5 / 54.5%) and `--kind` / `--list`; rewrites follow, worst lectures first (content rule 15).
 - 2026-11-16: res.L09 slide 62 (blank in the deck PDF) read from the lecture video at about 37:35: the «Essential» diagram of 8 informed-consent elements; new enumerate card res.L09.123 and a lesson4 step, both checked by hand (`quote-ok`) in the res verdicts.
 - 2026-11-15: Settings › Sync «زامن دلوقتي» forces a sync now; the sync engine bounds connect/send waits, replaces silent sockets, caps its backoff at 1 minute and retries at once when the app comes back or the network returns (§ 10 Sync never stalls).

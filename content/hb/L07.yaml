@@ -862,14 +862,14 @@ items:
     steps:
       - reveal: ""
         question: Which tests come next per the book's serology algorithm?
-        options: ["Liver panel, HBeAg, anti-HBe and HBV DNA", "Anti-HAV IgM and a liver panel", "HCV RNA only, by PCR", "A liver biopsy straight away"]
+        options: ["Liver panel, HBeAg, anti-HBe and HBV DNA", "Anti-HAV IgM, anti-HEV IgM and a liver panel", "HCV RNA only, by PCR", "A liver biopsy straight away"]
         answer: 0
         why: An HBsAg-positive screen needs a liver panel, HBeAg, anti-HBe and HBV DNA.
       - reveal: IgG anti-HBc positive, anti-HBs negative. HBeAg negative. HBV DNA 12,000 IU/mL. ALT 32 IU/L.
         question: What is the next step?
-        options: ["FibroScan or biopsy since he is over 30", "Start antiviral treatment now", "Discharge to primary care", "Repeat HBsAg in 6 months"]
+        options: ["FibroScan or biopsy since he is over 30", "Start antiviral treatment now, since DNA is above 2,000", "Discharge to primary care", "Repeat HBsAg in 6 months"]
         answer: 0
-        why: DNA above 2,000 with normal ALT; over 30, so assess fibrosis.
+        why: "DNA above 2,000 with normal ALT is not yet a treatment indication; he is over 30, so assess fibrosis."
       - reveal: FibroScan is 11 kPa.
         question: What does 11 kPa mean in the book's algorithm?
         options: [Severe fibrosis (>9 kPa), No significant fibrosis, Unreliable reading; repeat it, Cirrhosis with CSPH]
@@ -877,7 +877,7 @@ items:
         why: "The p119 figure labels FibroScan >9 kPa as severe fibrosis; the figure stops there and draws no treatment arrow. Other options. No significant fibrosis: 11 kPa is above the 9 kPa cut-off. Unreliable reading: nothing in the report says so. Cirrhosis with clinically significant portal hypertension (CSPH): the algorithm does not stage CSPH from this reading."
       - reveal: His hepatologist starts tenofovir.
         question: How long will he likely be treated?
-        options: ["Long term, until HBsAg seroconversion", "A fixed course of 12 months", "48 weeks, then stop", "Until the ALT normalizes"]
+        options: ["Long term, until HBsAg seroconversion", "A fixed course of 12 months, then stop", "48 weeks, then stop", "Until the ALT normalizes"]
         answer: 0
         why: HBeAg-negative patients need long-term treatment.
     src: { page: 119, quote: "Who to treat\nChronic HBV:\n  HBV DNA < 2,000 IU/ml → No treatment\n  HBV DNA > 2,000 IU/ml:\n    ALT normal (Upper limit of normal 40 IU/L) → No treatment. Liver biopsy or Fibroscan if > 30 y old (Fibroscan > 9 KPa severe fibrosis). Observe In absence of biopsy or Fibroscan\n    ALT abnormal → Treat" }
@@ -892,12 +892,12 @@ items:
     steps:
       - reveal: ""
         question: How is rituximab classified for HBV reactivation risk?
-        options: ["High risk (B-cell depleting)", "Moderate risk category", "Low risk category", "No risk of reactivation"]
+        options: ["High risk (B-cell depleting)", "Moderate risk (like TNF-alpha inhibitors)", "Low risk category", "No risk of reactivation"]
         answer: 0
         why: B-cell-depleting therapy and stem cell transplant are high risk.
       - reveal: Her rheumatologist forgets the prophylaxis. Four months later HBsAg reappears and HBV DNA is detectable. ALT is normal.
         question: Is this reactivation, and what do you do?
-        options: [Reactivation; start antiviral now regardless of ALT, Not reactivation because ALT is normal, Reactivation; wait for ALT to rise, Give HBIG]
+        options: ["Reactivation; start antiviral now regardless of ALT", "Not reactivation because ALT is normal", "Reactivation; wait for ALT to rise before any antiviral", "Give HBIG"]
         answer: 0
         why: In HBsAg-negative anti-HBc-positive patients, detectable DNA or HBsAg reappearance is reactivation; treat early regardless of ALT.
       - reveal: Two weeks later ALT is 380 U/L (baseline 25).
@@ -914,7 +914,7 @@ items:
     steps:
       - reveal: ""
         question: Which phase is he in?
-        options: [HBeAg-positive chronic infection (immune tolerant), HBeAg-positive chronic hepatitis, HBeAg-negative chronic infection, Acute HBV]
+        options: ["HBeAg-positive chronic infection (immune tolerant)", "HBeAg-positive chronic hepatitis (immune reactive)", "HBeAg-negative chronic infection", "Acute HBV"]
         answer: 0
         why: Very high DNA, normal ALT and minimal fibrosis after perinatal infection.
       - reveal: ""
@@ -924,7 +924,7 @@ items:
         why: HBeAg-positive untreated patients are seen every 3–6 months.
       - reveal: Three years later ALT is 110 IU/L and HBV DNA 3 × 10^6 IU/mL.
         question: Which phase now, and what is the plan?
-        options: [HBeAg-positive chronic hepatitis; treat, Still immune tolerant; observe, Inactive carrier; observe, Occult HBV]
+        options: ["HBeAg-positive chronic hepatitis; treat", "Still immune tolerant; observe with 6-monthly tests", "Inactive carrier; observe", "Occult HBV"]
         answer: 0
         why: Rising ALT with DNA 10^4–10^7 is HBeAg-positive chronic hepatitis; DNA >2,000 with abnormal ALT means treat.
     src: { page: 117, quote: "| | HBeAg positive: Chronic infection | HBeAg positive: Chronic hepatitis | HBeAg negative: Chronic infection | HBeAg negative: Chronic hepatitis |\n|---|---|---|---|---|\n| HBsAg | High | High/Intermediate | Low | Intermediate |\n| HBeAg | Positive | Positive | Negative | Negative |\n| HBV DNA | >10⁷ IU/ml | 10⁴-10⁷ IU/ml | <2,000 IU/ml** | >2,000 IU/ml |\n| ALT | Normal | Elevated | Normal | Elevated* |\n| Liver disease | None/minimal | Moderate/severe | None | Moderate/severe |\n| Old terminology | Immune tolerant | Immune reactive HBeAg positive | Inactive carrier | HBeAg negative chronic hepatitis |" }

@@ -782,6 +782,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: res.L09 slide 62 (blank in the deck PDF) read from the lecture video at about 37:35: the «Essential» diagram of 8 informed-consent elements; new enumerate card res.L09.123 and a lesson4 step, both checked by hand (`quote-ok`) in the res verdicts.
 - 2026-11-15: Settings › Sync «زامن دلوقتي» forces a sync now; the sync engine bounds connect/send waits, replaces silent sockets, caps its backoff at 1 minute and retries at once when the app comes back or the network returns (§ 10 Sync never stalls).
 - 2026-11-15: What's new finishes #1340: a digest line per release (changes, courses, the busiest course), a box of lessons you had finished that the release changed (each opens), and changelog search with course and kind filters across every kept build.
 - 2026-11-15: What's new groups a release by course (#1340): `changes/*.yaml` lines take an optional `scope` (course id or app area) and `open` (lesson, lecture or screen), carried in the feed; the sheet shows the app, then one folded row per course with counts, and a line opens its lesson (closing it brings the sheet back). A one-off pass scoped 1114 of 1199 existing lines; old feed lines get theirs by their Arabic text when a manifest is built. Digest line, "changed since you did it" and search are still open in #1340.

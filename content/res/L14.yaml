@@ -587,9 +587,9 @@ items:
   stem: A student computes sensitivity from the slide's table as 80/180. What went wrong?
   options:
   - 180 is all test positives (the PPV denominator); sensitivity divides by all with the disease, 100
-  - 'Nothing: sensitivity is true positives over all positives'
-  - Sensitivity should be 800/900
-  - Sensitivity should be 80/1000
+  - "Nothing went wrong: sensitivity is the true positives divided by all of the positive test results"
+  - "Sensitivity should be 800/900, the true negatives divided by all of those without the disease"
+  - "Sensitivity should be 80/1000, the true positives divided by all of the people who were tested"
   answer: 0
   why:
   - 'Sensitivity starts from the true state, disease present (a + c = 100): 80/100 = 80%. 80/180 is the PPV.'
@@ -899,8 +899,8 @@ items:
   options:
   - PPV rises, NPV falls; sensitivity and specificity don't change
   - Sensitivity rises and specificity falls; PPV and NPV stay the same
-  - PPV falls and NPV rises
-  - All four stay the same
+  - "PPV falls and NPV rises; sensitivity and specificity don't change"
+  - "All four stay the same, since none of them depends on prevalence"
   answer: 0
   why:
   - More of the positives are real cases (PPV up) and more negatives are missed cases (NPV down); the test itself is unchanged.
@@ -1162,8 +1162,8 @@ items:
   stem: 'On an ROC curve, the x-axis shows:'
   options:
   - 1 − specificity (false positive fraction)
-  - Specificity
-  - Sensitivity
+  - Specificity (true negative fraction)
+  - Sensitivity (true positive fraction)
   - 1 − sensitivity (false negative fraction)
   answer: 0
   why:
@@ -1379,11 +1379,10 @@ items:
   topic: roc
   stem: Why was the cut-off ≥3 (sensitivity 81%, specificity 28%) chosen for the chest x-ray score?
   options:
-  - A low rate of false negatives was wanted, because infants likely to get later respiratory disease would benefit from extra
-    treatment
-  - It gives the highest specificity
-  - It gives both high sensitivity and high specificity
-  - It has the largest area under the curve
+  - "A low rate of false negatives was wanted, because infants likely to get later respiratory disease would benefit from extra treatment"
+  - "It gives the highest specificity, which was wanted because healthy infants should not be given any extra treatment needlessly"
+  - "It gives both a high sensitivity and a high specificity, which is the point on the curve nearest to the top left-hand corner"
+  - "It has the largest area under the curve of all the cut-off points, and the cut-off with the largest area is always chosen"
   answer: 0
   why:
   - Missing an infant who would benefit from treatment was the costly error, so high sensitivity was chosen.

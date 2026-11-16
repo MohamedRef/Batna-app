@@ -11,6 +11,12 @@
 //! Questions whose options are printed in a source (book, slide, past paper,
 //! lecture quiz) keep their wording and are left out of the count.
 //!
+//! A second measure, the long pair (#1366): two options that both stand out
+//! by length, with the key one of them. Making one wrong option a little
+//! longer than the key takes a question out of the first count and leaves
+//! the cue in place ("one of the two long ones"); this count still sees it.
+//! The fix is to give every wrong option the key's shape, not one of them.
+//!
 //! ```text
 //! batna-tools cue [--all]                  share per kind and lecture, highest first (--all lists every lecture)
 //! batna-tools cue --kind K [--all]         one kind: mcq, case, check or lesson-case
@@ -76,7 +82,29 @@ impl Kind {
             Kind::LessonCase => 13.5,
         }
     }
+
+    /// The long-pair share of this kind (`Pair::percent`) may not rise above
+    /// this. Lower it as questions get all their wrong options rewritten
+    /// (#1366); never raise it.
+    #[cfg(test)]
+    pub fn pair_ceiling(self) -> f64 {
+        match self {
+            Kind::Mcq => PAIR_MCQ,
+            Kind::Case => PAIR_CASE,
+            Kind::Check => PAIR_CHECK,
+            Kind::LessonCase => PAIR_LESSON_CASE,
+        }
+    }
 }
+
+#[cfg(test)]
+const PAIR_MCQ: f64 = 21.5;
+#[cfg(test)]
+const PAIR_CASE: f64 = 30.5;
+#[cfg(test)]
+const PAIR_CHECK: f64 = 32.5;
+#[cfg(test)]
+const PAIR_LESSON_CASE: f64 = 41.0;
 
 /// Lectures with fewer counted questions than this are not ranked in the summary.
 const MIN_RANKED: usize = 5;
@@ -108,10 +136,29 @@ pub struct Cued {
     pub answer: String,
 }
 
+/// Questions of one kind where two options stand out by length (#1366).
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+pub struct Pair {
+    /// The key is one of the two.
+    pub with_key: usize,
+    /// Neither of the two is the key.
+    pub without_key: usize,
+    /// Counted questions of the kind.
+    pub total: usize,
+}
+
+impl Pair {
+    /// Share of the kind's questions where the key is one of two stand-out options.
+    pub fn percent(self) -> f64 {
+        if self.total == 0 { 0.0 } else { 100.0 * self.with_key as f64 / self.total as f64 }
+    }
+}
+
 /// Per-kind, per-lecture counts, and the cued questions themselves.
 #[derive(Debug, Default)]
 pub struct Tally {
     pub counts: BTreeMap<(Kind, String), Count>,
+    pub pairs: BTreeMap<Kind, Pair>,
     pub cued: Vec<(String, Cued)>,
 }
 
@@ -127,6 +174,24 @@ pub fn key_is_longest(options: &[String], answer: usize) -> bool {
     options.iter().enumerate().all(|(i, o)| i == answer || len(o) < key)
 }
 
+/// Two options stand out when each is at least a quarter longer than every
+/// other option, and by at least this many characters (so `Above 12 g/dL`
+/// beside `Above 7` is not counted).
+const PAIR_MARGIN: usize = 8;
+
+/// When two options stand out by length, whether the key is one of them.
+/// `None`: fewer than three options, or no such pair.
+pub fn key_in_long_pair(options: &[String], answer: usize) -> Option<bool> {
+    if options.len() < 3 || answer >= options.len() {
+        return None;
+    }
+    let mut order: Vec<usize> = (0..options.len()).collect();
+    order.sort_by_key(|&i| std::cmp::Reverse(len(&options[i])));
+    let (second, third) = (len(&options[order[1]]), len(&options[order[2]]));
+    let stands_out = second * 4 >= third * 5 && second >= third + PAIR_MARGIN;
+    stands_out.then(|| order[..2].contains(&answer))
+}
+
 impl Tally {
     /// Counts one question; options shorter than two are not a question.
     fn one(
@@ -140,6 +205,13 @@ impl Tally {
     ) {
         if options.len() < 2 {
             return;
+        }
+        let pair = self.pairs.entry(kind).or_default();
+        pair.total += 1;
+        match key_in_long_pair(options, answer) {
+            Some(true) => pair.with_key += 1,
+            Some(false) => pair.without_key += 1,
+            None => {}
         }
         let count = self.counts.entry((kind, lecture.to_string())).or_default();
         count.total += 1;
@@ -232,6 +304,19 @@ impl Tally {
             .collect()
     }
 
+    /// A kind's long-pair share (#1366).
+    pub fn pair_summary(&self, kind: Kind) -> String {
+        let p = self.pairs.get(&kind).copied().unwrap_or_default();
+        format!(
+            "long-pair key: {:.1}% of {} {} (two options stand out by length in {}; the key is one of them in {})",
+            p.percent(),
+            p.total,
+            kind.label(),
+            p.with_key + p.without_key,
+            p.with_key
+        )
+    }
+
     /// A kind's share and its five highest lectures.
     pub fn summary(&self, kind: Kind) -> String {
         let all = self.overall(kind);
@@ -305,6 +390,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     let min = if args.iter().any(|a| a == "--all") { 1 } else { MIN_RANKED };
     for kind in kinds {
         out.push(tally.summary(kind));
+        out.push(tally.pair_summary(kind));
         for (l, c) in tally.ranked(kind, min) {
             out.push(format!("{}\t{l}\t{}/{}\t{:.0}%", kind.name(), c.longest, c.total, c.percent()));
         }
@@ -328,6 +414,23 @@ mod tests {
         assert!(!key_is_longest(&s(&["k"]), 3), "an answer past the options is not counted");
         // Characters, not bytes: "≥" is one character.
         assert!(!key_is_longest(&s(&["≥5", "<5"]), 0));
+    }
+
+    #[test]
+    fn a_long_pair_needs_two_options_that_stand_out() {
+        let long = "a long option with a reason attached";
+        let also = "another long option with its reason";
+        // The key is one of the two long ones.
+        assert_eq!(key_in_long_pair(&s(&[long, also, "short", "brief"]), 0), Some(true));
+        // The pair is there, but the key is a short one.
+        assert_eq!(key_in_long_pair(&s(&[long, also, "short", "brief"]), 2), Some(false));
+        // One long option only: the first measure's business, not a pair.
+        assert_eq!(key_in_long_pair(&s(&[long, "short", "brief", "small"]), 0), None);
+        // All about the same length.
+        assert_eq!(key_in_long_pair(&s(&[long, also, "a third option of the same shape"]), 0), None);
+        // Short options differ by ratio but not by enough characters to see.
+        assert_eq!(key_in_long_pair(&s(&["Above 9.5 g/dL", "Above 12 g/dL", "Above 7", "Never"]), 0), None);
+        assert_eq!(key_in_long_pair(&s(&[long, also]), 0), None, "two options are no pair");
     }
 
     const LECTURE: &str = r#"
@@ -383,6 +486,8 @@ lessons:
         );
         assert_eq!(t.overall(Kind::Check), Count { longest: 0, total: 1 });
         assert_eq!(t.overall(Kind::LessonCase), Count { longest: 1, total: 1 });
+        assert_eq!(t.pairs[&Kind::Mcq], Pair { with_key: 0, without_key: 0, total: 1 });
+        assert_eq!(t.pairs[&Kind::Case].total, 2);
         let at: Vec<&str> = t.cued.iter().map(|(_, c)| c.at.as_str()).collect();
         assert_eq!(at, ["zz.L01.001", "zz.L01.003 step 1", "zz.L01.lesson1 step 2 step 1"]);
     }
@@ -402,6 +507,26 @@ lessons:
                 all.percent(),
                 kind.label(),
                 kind.ceiling(),
+                kind.name()
+            );
+        }
+    }
+
+    #[test]
+    fn the_long_pair_stays_under_its_ceiling() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let t = tally(&root).unwrap();
+        for kind in Kind::ALL {
+            let p = t.pairs.get(&kind).copied().unwrap_or_default();
+            assert!(p.total > 0, "no {} counted", kind.label());
+            assert!(
+                p.percent() <= kind.pair_ceiling(),
+                "the key is one of two stand-out options in {:.1}% of {}, above the {}% ceiling (#1366): \
+                 give every wrong option of the question the key's shape and length, not one of them; \
+                 `batna-tools cue --kind {}` prints the share",
+                p.percent(),
+                kind.label(),
+                kind.pair_ceiling(),
                 kind.name()
             );
         }

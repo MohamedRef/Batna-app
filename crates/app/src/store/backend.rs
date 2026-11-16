@@ -291,6 +291,20 @@ impl ReviewBackend {
         self.judgements.get(item_id)
     }
 
+    /// Items he marked ✗ whose content changed since (a content update fixed
+    /// them): they are back in review and ask ✓ / ✎ / ✗ again (#1352),
+    /// with the item's fingerprint now.
+    pub fn fixed_wrong(&self) -> Vec<(String, String)> {
+        self.judgements
+            .iter()
+            .filter(|(_, j)| j.verdict == Verdict::Wrong)
+            .filter_map(|(id, j)| {
+                let e = self.entry(id)?;
+                (!j.current(&e.item)).then(|| (id.clone(), verify::fingerprint(&e.item)))
+            })
+            .collect()
+    }
+
     /// Whether to ask ✓ / ✎ / ✗ for an item. Unknown items never ask.
     pub fn check(&self, item_id: &str) -> Check {
         match self.entry(item_id) {

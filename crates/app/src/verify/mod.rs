@@ -3,6 +3,7 @@
 //! above the grade row; it renders nothing when the item needs no check.
 
 pub(crate) mod export;
+pub(crate) mod fixed;
 #[cfg(test)]
 mod flow;
 

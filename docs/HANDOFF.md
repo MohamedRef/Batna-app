@@ -750,7 +750,12 @@ has answered something since, one quiet line suggesting a new one (#1353).
   § 4.2). `batna-tools verdicts --cloud [--save FILE] [--approve]` reads with
   `BATNA_VERDICTS_KEY` (environment secret, never in git) and prints the same
   fix list as for a file; `--save` writes the export for `anki --verdicts`.
-- Not built yet: telling him when a content update fixed items he marked ✗.
+- Fixed ✗ items (`verify/fixed.rs`): a content update that changes an item
+  he marked ✗ already brings it back to review (its mark's fingerprint no
+  longer fits). Today now says so once («N … اتصلّحوا في التحديث»), with
+  «راجعهم دلوقتي» (a session of those items, which ask ✓ ✎ ✗ again) and
+  «تمام». Seen ones are kept in the synced setting `verify.fixed_seen`
+  (id → fingerprint of the fixed text), so a later fix is new again.
 
 ### Desktop (Mac) layout
 
@@ -860,6 +865,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: Today says when a content update fixed items he marked ✗ (#1352 point 4): one note, «راجعهم دلوقتي» opens them in a session, «تمام» hides it (synced `verify.fixed_seen`; § 10 Content-check file).
 - 2026-11-16: content pack in parts (#1354): `packs build` writes `batna-content-text.pack` and `batna-content-pictures.pack`; feeds list them as `content-text` / `content-pictures`; devices fetch the text and keep unchanged pictures, joined bytes checked against the signed full pack.
 - 2026-11-16: § 11 Current state refreshed (#1355): release v2026.11.13, 1,059 lessons / 15,557 items / 936 pictures, review rounds since 11-13, open work; it now says where the release and content numbers come from.
 - 2026-11-16: #1353: Settings › بياناتك shows the last backup on this device and a quiet line when it is old; lesson marks and places after a reset are stamped after the marker, so a lesson finished right after «ابدأ من الأول» reads as done even when the marker's time is ahead of this clock.

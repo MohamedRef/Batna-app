@@ -285,6 +285,51 @@ impl Verdicts {
     }
 }
 
+/// Verdicts given after the last export (`since_ms`; `None`: never
+/// exported), so the export card can say what the last file lacks and Today
+/// can mention ✗ items that have waited a while.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub struct Unsent {
+    pub approved: usize,
+    pub edited: usize,
+    pub wrong: usize,
+    /// When the oldest of the unsent ✗ was given (Unix ms).
+    pub oldest_wrong_ms: Option<i64>,
+}
+
+impl Unsent {
+    pub fn from_judgements<'a>(
+        judgements: impl IntoIterator<Item = &'a Judgement>,
+        since_ms: Option<i64>,
+    ) -> Self {
+        let mut out = Self::default();
+        for j in judgements.into_iter().filter(|j| since_ms.is_none_or(|s| j.at_ms > s)) {
+            match j.verdict {
+                Verdict::Approved => out.approved += 1,
+                Verdict::Edited => out.edited += 1,
+                Verdict::Wrong => {
+                    out.wrong += 1;
+                    out.oldest_wrong_ms = Some(out.oldest_wrong_ms.map_or(j.at_ms, |o| o.min(j.at_ms)));
+                }
+            }
+        }
+        out
+    }
+
+    pub fn total(&self) -> usize {
+        self.approved + self.edited + self.wrong
+    }
+
+    /// Unsent ✗ items, once the oldest has waited at least `wait_ms`: the
+    /// fix list is missing them and they are out of review meanwhile.
+    pub fn waiting_wrong(&self, now_ms: i64, wait_ms: i64) -> usize {
+        match self.oldest_wrong_ms {
+            Some(oldest) if now_ms - oldest >= wait_ms => self.wrong,
+            _ => 0,
+        }
+    }
+}
+
 /// Unix ms → `2026-11-02T09:00:00Z`.
 pub fn rfc3339(ms: i64) -> String {
     let secs = ms.div_euclid(1000);
@@ -310,6 +355,30 @@ pub fn civil_from_days(z: i64) -> (i64, u32, u32) {
 mod tests {
     use super::*;
     use crate::content::Lecture;
+
+    #[test]
+    fn unsent_counts_only_what_came_after_the_last_export() {
+        let j = |verdict, at_ms| Judgement {
+            verdict,
+            edit: Edit::new(),
+            note: None,
+            fingerprint: "f".into(),
+            at_ms,
+        };
+        let all =
+            [j(Verdict::Approved, 10), j(Verdict::Wrong, 20), j(Verdict::Edited, 30), j(Verdict::Wrong, 40)];
+        let never = Unsent::from_judgements(&all, None);
+        assert_eq!((never.approved, never.edited, never.wrong, never.total()), (1, 1, 2, 4));
+        assert_eq!(never.oldest_wrong_ms, Some(20));
+        let since = Unsent::from_judgements(&all, Some(20));
+        assert_eq!((since.approved, since.edited, since.wrong), (0, 1, 1));
+        assert_eq!(since.oldest_wrong_ms, Some(40));
+        assert_eq!(Unsent::from_judgements(&all, Some(40)), Unsent::default());
+        // Today mentions them only once the oldest ✗ has waited.
+        assert_eq!(since.waiting_wrong(45, 10), 0);
+        assert_eq!(since.waiting_wrong(50, 10), 1);
+        assert_eq!(Unsent::default().waiting_wrong(1_000, 10), 0);
+    }
 
     fn sample() -> Lecture {
         let text = include_str!("../../../../fixtures/content/sample.yaml");

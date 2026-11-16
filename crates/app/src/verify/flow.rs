@@ -197,3 +197,34 @@ fn his_checks_export_as_yaml_he_can_read() {
     t.click("button.save-retry");
     assert!(t.text().contains(tx::EXPORT_SAVED));
 }
+
+#[test]
+fn the_card_remembers_the_last_file_and_says_what_it_lacks() {
+    let item = unchecked("card");
+    let dir = tempfile::tempdir().unwrap();
+    crate::store::export_to_for_test(dir.path().to_path_buf());
+    // A file made yesterday with 3 marks (on another device, synced).
+    let made = export::LastExport { at_ms: crate::store::now_ms() - 86_400_000, verdicts: 3 };
+    assert!(mount(item).text().contains(tx::EXPORT_NEVER));
+    crate::store::use_thread_store().put_setting(export::EXPORTED_KEY, &made).unwrap();
+    ITEM.with(|i| *i.borrow_mut() = item.id.clone());
+    let mut t = TestDom::new(Root);
+    let (_, month, day) = crate::store::zone().calendar_day(made.at_ms).ymd();
+    assert!(t.text().contains(&tx::last_export(day, crate::i18n::plan::MONTHS[month as usize - 1], 3)));
+    // A ✗ given since is not in it yet.
+    t.click_text("button.verify-btn", tx::WRONG);
+    t.click_text("button.verify-btn", tx::WRONG_CONFIRM);
+    assert!(t.text().contains(&tx::unsent(0, 0, 1)), "{}", t.text());
+    // A new file holds everything, and the card says so.
+    t.click_text("button.btn-primary", tx::EXPORT_BUTTON);
+    assert!(t.text().contains(tx::EXPORT_ALL_IN), "{}", t.text());
+    let mark = export::last_export().unwrap();
+    assert_eq!(mark.verdicts, 1);
+    assert!(mark.at_ms > made.at_ms);
+}
+
+#[test]
+fn unsent_lists_only_the_kinds_there_are() {
+    assert_eq!(tx::unsent(20, 3, 7), "لسه مش في ملف: ✗ 7 · ✎ 3 · ✓ 20");
+    assert_eq!(tx::unsent(0, 2, 0), "لسه مش في ملف: ✎ 2");
+}

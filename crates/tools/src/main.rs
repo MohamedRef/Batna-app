@@ -4,7 +4,7 @@
 //! batna-tools validate [--root DIR]   check content/ against the rules (SPLIT.md §4–5)
 //! batna-tools anki [--lecture hb.L01] [--verdicts FILE] [--out DIR]   Anki deck (docs/ANKI.md)
 //! batna-tools packs build [--out DIR] [--check]   the offline content pack
-//! batna-tools verdicts FILE [--approve]   fix list from the app's ✎/✗ export
+//! batna-tools verdicts <FILE | --cloud [--save FILE]> [--approve]   fix list from the app's ✎/✗ export or from Batna Cloud (read key)
 //! batna-tools update <keygen | manifest | sign | verify>   update feeds (docs/RELEASE.md §5)
 //! batna-tools refs [--lecture hb.L01] [--write]   page references against the book (refs.rs)
 //! batna-tools cue [--all] [--kind K] [--list LECTURE]   how often the key is the longest option, per kind and lecture (cue.rs)
@@ -21,6 +21,7 @@ use batna_core::validate::{self, Context};
 
 mod anki;
 mod changes;
+mod cloud_verdicts;
 mod content;
 mod coverage;
 mod cue;

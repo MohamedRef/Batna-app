@@ -3,7 +3,7 @@
 // adapted from kabar-app main: crates/server/src/wasm/account.rs (no push
 // reminders, no image blobs)
 
-use batna_protocol::cloud::{DeviceList, ErrorCode};
+use batna_protocol::cloud::{DeviceList, ErrorCode, ReadKeyState, VerdictRows};
 use batna_protocol::sync::{SeqOp, ServerMsg, SyncErrorCode};
 use worker::{
     DurableObject, Env, Method, Request, Response, Result, State, WebSocket, WebSocketIncomingMessage,
@@ -14,8 +14,12 @@ use super::do_sql::DoSql;
 use super::{api_error, now_ms, random_hex};
 use crate::devices::{Devices, RefreshError};
 use crate::hub::{Conn, Hub};
-use crate::internal::{AccountLoginState, DEVICE_HEADER, Expiry, LoginName, Refresh, Register, Revoke};
+use crate::internal::{
+    AccountLoginState, DEVICE_HEADER, Expiry, LoginName, READ_KEY_HEADER, ReadKeyHash, Refresh, Register,
+    Revoke,
+};
 use crate::login::AccountLogin;
+use crate::read_key::ReadKey;
 
 /// Close code sent to a signed-out device.
 const CLOSE_REVOKED: u16 = 4001;
@@ -161,6 +165,34 @@ impl DurableObject for Account {
                 let body: LoginName = req.json().await?;
                 AccountLogin::open(&db).set_username(body.username.as_deref()).map_err(sql_err)?;
                 Response::empty()
+            }
+            // The verdicts read key (`crate::read_key`): only a signed-in
+            // device may see, make or remove it.
+            (m @ (Method::Get | Method::Post | Method::Delete), "/read-key") => {
+                let caller = Self::device_header(&req)?;
+                if !devices.is_active(&caller).map_err(sql_err)? {
+                    return api_error(ErrorCode::DeviceRevoked, "this device was signed out");
+                }
+                let keys = ReadKey::open(&db);
+                match m {
+                    Method::Post => {
+                        let body: ReadKeyHash = req.json().await?;
+                        keys.set(&body.hash, now).map_err(sql_err)?;
+                    }
+                    Method::Delete => {
+                        keys.clear().map_err(sql_err)?;
+                    }
+                    _ => {}
+                }
+                Response::from_json(&ReadKeyState { created_ms: keys.created().map_err(sql_err)? })
+            }
+            (Method::Get, "/verdicts") => {
+                let hash = req.headers().get(READ_KEY_HEADER)?.unwrap_or_default();
+                if !ReadKey::open(&db).matches(&hash).map_err(sql_err)? {
+                    return api_error(ErrorCode::Unauthorized, "this read key was replaced or removed");
+                }
+                let rows = crate::read_key::verdicts(&db).map_err(sql_err)?;
+                Response::from_json(&VerdictRows { rows })
             }
             (Method::Post, "/revoke") => {
                 let caller = Self::device_header(&req)?;

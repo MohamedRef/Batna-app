@@ -68,17 +68,34 @@ pub fn apply_edit(item: &Item, edit: &BTreeMap<String, FieldValue>) -> Result<It
 }
 
 pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
-    let Some(file) = args.first().filter(|a| !a.starts_with("--")) else {
-        return Err(vec!["usage: batna-tools verdicts FILE [--approve]".into()]);
+    let verdicts = if args.iter().any(|a| a == "--cloud") {
+        let v = crate::cloud_verdicts::fetch().map_err(|e| vec![e])?;
+        // `--save FILE`: the same marks as an app export, for `anki --verdicts`.
+        if let Some(save) = args.iter().position(|a| a == "--save").and_then(|i| args.get(i + 1)) {
+            let yaml = serde_yaml_ng::to_string(&v).map_err(|e| vec![e.to_string()])?;
+            std::fs::write(save, yaml).map_err(|e| vec![format!("{save}: {e}")])?;
+        }
+        v
+    } else {
+        let Some(file) = args.first().filter(|a| !a.starts_with("--")) else {
+            return Err(vec![
+                "usage: batna-tools verdicts <FILE | --cloud [--save FILE]> [--approve]".into(),
+            ]);
+        };
+        read(Path::new(file)).map_err(|e| vec![e])?
     };
-    let verdicts = read(Path::new(file)).map_err(|e| vec![e])?;
+    report(root, &verdicts, args)
+}
+
+/// The fix list (and with `--approve`, the approvals) for a set of verdicts.
+pub fn report(root: &Path, verdicts: &Verdicts, args: &[String]) -> Result<String, Vec<String>> {
     let (_, lectures) = crate::packs::load(root)?;
     let items: BTreeMap<&str, (&str, &Item)> = lectures
         .iter()
         .flat_map(|l| l.items.iter().map(move |i| (i.id.as_str(), (l.lecture.as_str(), i))))
         .collect();
 
-    let latest = latest(&verdicts);
+    let latest = latest(verdicts);
     let mut fixes: BTreeMap<&str, Vec<String>> = BTreeMap::new();
     let mut approved = Vec::new();
     let mut unknown = Vec::new();
@@ -301,7 +318,7 @@ verdicts:
         );
         assert_eq!(
             run(dir.path(), &["--approve".into()]).unwrap_err(),
-            ["usage: batna-tools verdicts FILE [--approve]"]
+            ["usage: batna-tools verdicts <FILE | --cloud [--save FILE]> [--approve]"]
         );
     }
 

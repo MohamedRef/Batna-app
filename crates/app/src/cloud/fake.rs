@@ -12,13 +12,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex, MutexGuard};
 
 use batna_protocol::cloud::{
-    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest,
-    RemovePassword, Session, SetPassword, normalize_username, valid_username,
+    ApiError, DeviceList, ErrorCode, GoogleSignIn, NewReadKey, PasswordLogin, PasswordSignIn, ReadKeyState,
+    RefreshRequest, RemovePassword, Session, SetPassword, VerdictRows, normalize_username, valid_username,
 };
 use batna_protocol::sync::{ServerMsg, SyncErrorCode};
 use batna_server::devices::{Devices, RefreshError};
 use batna_server::hub::{Conn, Hub};
 use batna_server::login::{self as pw, AccountLogin, Checked, Login};
+use batna_server::read_key::{self, ReadKey};
 use batna_server::sql::{Row, Sql, SqlError, Value};
 use batna_server::tokens::{self, TokenKey};
 use futures_util::{SinkExt, StreamExt};
@@ -518,6 +519,16 @@ fn bearer(headers: &[(String, String)]) -> Option<&str> {
 fn route(s: &mut State, method: &str, path: &str, headers: &[(String, String)], body: &str) -> Reply {
     let now = s.now();
     match (method, path) {
+        // The verdicts read key is its own credential (`batna_server::read_key`).
+        ("GET", "/v1/verdicts") => {
+            let Some((_, hash)) = bearer(headers).and_then(read_key::parse) else {
+                return error(ErrorCode::Unauthorized, "expected the verdicts read key");
+            };
+            if !ReadKey::open(&s.db).matches(&hash).unwrap() {
+                return error(ErrorCode::Unauthorized, "this read key was replaced or removed");
+            }
+            ok(&VerdictRows { rows: read_key::verdicts(&s.db).unwrap() })
+        }
         // Google's token endpoint: a form with the code from the redirect.
         ("POST", "/google/token") => {
             let code = body.split('&').find_map(|p| p.strip_prefix("code=")).unwrap_or_default();
@@ -603,6 +614,21 @@ fn route(s: &mut State, method: &str, path: &str, headers: &[(String, String)], 
                     devices.revoke(&claims.dev, now).unwrap();
                     close_device(s, &claims.dev);
                     (200, String::new())
+                }
+                (m @ ("GET" | "POST" | "DELETE"), "/v1/verdicts/key") if active => {
+                    let keys = ReadKey::open(&s.db);
+                    match m {
+                        "POST" => {
+                            let (key, hash) = read_key::new_key(&claims.sub, tokens::random_bytes().unwrap());
+                            keys.set(&hash, now).unwrap();
+                            return ok(&NewReadKey { key, created_ms: now });
+                        }
+                        "DELETE" => {
+                            keys.clear().unwrap();
+                        }
+                        _ => {}
+                    }
+                    ok(&ReadKeyState { created_ms: keys.created().unwrap() })
                 }
                 (m @ ("GET" | "POST" | "DELETE"), "/v1/login") if active => {
                     manage_login(s, m, &claims.sub, &claims.dev, body)

@@ -108,6 +108,10 @@ All JSON. Authenticated routes take `Authorization: Bearer <access_token>`. Erro
 | `GET /v1/devices` | `{ devices: [DeviceSummary] }` |
 | `DELETE /v1/devices/{id}` | remote sign-out |
 | `GET /v1/sync` | WebSocket; messages in `crates/protocol/src/sync.rs` |
+| `GET /v1/verdicts/key` | `{ created_ms }` (or `null`): the verdicts read key (§4.2) |
+| `POST /v1/verdicts/key` | a new read key, replacing the old: `{ key, created_ms }`, shown once |
+| `DELETE /v1/verdicts/key` | remove the read key; → `{ created_ms: null }` |
+| `GET /v1/verdicts` | **read key** as the bearer token (not an access token): `{ rows: [{ item_id, value }] }`, the account's current ✓ ✎ ✗ marks (`item_status`) |
 
 Sync in one paragraph: the device sends `hello { last_seq }`, gets the missing ops in pages and `caught_up`, then pushes its outbox as `push { batch, ops ≤ 50 }` and gets an `ack` listing what can leave the outbox. Other devices' ops arrive as `ops` the moment they're stored. Merging is idempotent, so reading the log again never doubles a review.
 
@@ -122,6 +126,14 @@ How the password is kept safe:
 - **Wrong passwords lock the username**: 5 in a row lock it for a minute, each further one doubles the lock, up to an hour (about 24 guesses a day at most). A wrong password and an unknown username get the same answer (`wrong_password`); a lock answers `too_many_tries` with `retry_after_ms`. Setting a new password lifts a lock.
 - Usernames are 3–32 of `a-z 0-9 . _ -`, matched case-insensitively. Passwords are at least 10 characters.
 - The allowlist still applies: the username carries the Google account's email, checked on every sign-in and refresh.
+
+### 4.2 Verdicts read key (#1352)
+
+So the content threads read Mohamed's ✓ ✎ ✗ marks without a file. He makes the key in Settings › المزامنة › «مفتاح قراءة علامات المحتوى» on a signed-in device; it is shown once, to copy. It goes into the content environment as the secret `BATNA_VERDICTS_KEY`, and `batna-tools verdicts --cloud [--save FILE] [--approve]` reads with it (`BATNA_CLOUD_URL` overrides the server).
+
+- **It reads the marks and nothing else.** `GET /v1/verdicts` is the only route that takes it: no sync, no writes, no other table. The answer is each current (not deleted) `item_status` row's item id and judgement JSON (`batna_server::read_key::verdicts`).
+- **The server keeps no key.** It is `bvk1.<account id>.<32 random bytes, base64url>`; the account's Durable Object keeps only `SHA-256` of the secret part (table `read_key`, one row) and compares in constant time. The account id in it routes the request to the right object.
+- **One at a time.** Making a new one replaces the old at once; removing it stops it at once. Only a signed-in device can see, make or remove it.
 
 ## 5. Local development
 

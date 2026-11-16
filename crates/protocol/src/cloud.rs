@@ -183,6 +183,37 @@ pub struct DeviceList {
     pub devices: Vec<DeviceSummary>,
 }
 
+/// The verdicts read key (#1352): lets `batna-tools verdicts --cloud` read
+/// the account's ✓ ✎ ✗ marks and nothing else. One per account; making a
+/// new one replaces the old. `GET /v1/verdicts/key`
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct ReadKeyState {
+    /// When the current key was made; `None` when there is none.
+    pub created_ms: Option<u64>,
+}
+
+/// `POST /v1/verdicts/key`: the new key, shown once. Batna Cloud keeps only
+/// its hash.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct NewReadKey {
+    pub key: String,
+    pub created_ms: u64,
+}
+
+/// One current `item_status` row. `value` is the app's judgement JSON
+/// (`batna_core::review::verify::Judgement`) as it syncs it.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct VerdictRow {
+    pub item_id: String,
+    pub value: String,
+}
+
+/// `GET /v1/verdicts` with the read key as the bearer token.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct VerdictRows {
+    pub rows: Vec<VerdictRow>,
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -226,6 +226,7 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 | Mac Keychain | `batna-update`, `batna-android`, `batna-codesign` | originals, made by `scripts/release-secrets.sh` (also `~/.batna/`) |
 | Mac `.env` | `BATNA_CLOUD_URL`, `BATNA_GOOGLE_CLIENT_ID`, `BATNA_GOOGLE_CLIENT_SECRET` | local builds |
 | Worker | `ALLOWED_EMAILS`, `TOKEN_SIGNING_KEY` | set by the deploy workflow |
+| Content environment | `BATNA_VERDICTS_KEY` | verdicts read key from Settings › Sync, for `batna-tools verdicts --cloud` (reads his ✓ ✎ ✗ marks only) |
 
 Public (not secret): Google client ids in `crates/server/wrangler.toml`
 (`GOOGLE_CLIENT_IDS`, Desktop + "Batna web"), `WEB_ORIGINS`.
@@ -698,9 +699,13 @@ tables, export/import) and `reset/tests.rs` (the card by taps).
 - Today shows one quiet line («N علامة علّمت عليها ✗ لسه ما اتبعتتش للتصليح»,
   opens Settings › Your data) once the oldest unsent ✗ is 3 days old
   (`verify::export::WAIT_MS`).
-- Not built yet: `batna-tools verdicts` pulling `item_status` from Batna Cloud
-  (plan sent to Mohamed first, per his ask), and telling him when a content
-  update fixed items he marked ✗.
+- Read key (Mohamed chose it 2026-11-16): Settings › Sync «مفتاح قراءة علامات
+  المحتوى» (`cloud/read_key.rs`) makes a key that reads only his marks from
+  Batna Cloud (`GET /v1/verdicts`, `batna_server::read_key`, docs/CLOUD.md
+  § 4.2). `batna-tools verdicts --cloud [--save FILE] [--approve]` reads with
+  `BATNA_VERDICTS_KEY` (environment secret, never in git) and prints the same
+  fix list as for a file; `--save` writes the export for `anki --verdicts`.
+- Not built yet: telling him when a content update fixed items he marked ✗.
 
 ### Desktop (Mac) layout
 
@@ -804,6 +809,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: verdicts read key (#1352 point 3): Settings › Sync makes a key that reads only his ✓ ✎ ✗ marks (`GET /v1/verdicts`); `batna-tools verdicts --cloud` builds the fix list from Batna Cloud with `BATNA_VERDICTS_KEY` (§ 10 Content-check file, docs/CLOUD.md § 4.2).
 - 2026-11-16: content-check export remembers the last file (synced `verify.exported`), shows marks not in it yet, sends it through the Android/Mac share menu in one tap, and Today mentions unsent ✗ after 3 days (#1352; § 10 Content-check file).
 - 2026-11-16: res.L09 slide 62 (blank in the deck PDF) read from the lecture video at about 37:35: the «Essential» diagram of 8 informed-consent elements; new enumerate card res.L09.123 and a lesson4 step, both checked by hand (`quote-ok`) in the res verdicts.
 - 2026-11-15: Settings › Sync «زامن دلوقتي» forces a sync now; the sync engine bounds connect/send waits, replaces silent sockets, caps its backoff at 1 minute and retries at once when the app comes back or the network returns (§ 10 Sync never stalls).

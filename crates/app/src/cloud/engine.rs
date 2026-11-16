@@ -20,7 +20,7 @@ use super::oauth::{self, OAuthError};
 use super::password::{self, Invalid};
 use super::session::{Auth, SessionVault};
 use super::socket::{ConnectError, Frame, Socket};
-use super::{CloudStatus, Command, Event, LoginStatus, Problem, SyncState};
+use super::{CloudStatus, Command, Event, LoginStatus, Problem, ReadKeyStatus, SyncState};
 use crate::store::Store;
 
 type Ws = Socket;
@@ -288,6 +288,27 @@ impl Engine {
                 };
                 let result = self.authed(call).await;
                 self.login_answer(result);
+            }
+            Command::ReadKey(op) => {
+                let result =
+                    self.authed(move |api, access| async move { api.read_key(&access, op).await }).await;
+                let answer = match result {
+                    Some(Ok((created_ms, new_key))) => {
+                        ReadKeyStatus { created_ms: Some(created_ms), new_key, ..Default::default() }
+                    }
+                    Some(Err(e)) => {
+                        self.cloud_error(&e);
+                        ReadKeyStatus {
+                            problem: Some(self.problem.unwrap_or(Problem::Server)),
+                            ..Default::default()
+                        }
+                    }
+                    None => ReadKeyStatus {
+                        problem: Some(self.problem.unwrap_or(Problem::Network)),
+                        ..Default::default()
+                    },
+                };
+                self.events.send(Event::ReadKey(answer)).ok();
             }
             Command::SignOut => {
                 let _ = self.authed(|api, access| async move { api.sign_out(&access).await }).await;

@@ -10,7 +10,8 @@ use crate::{devices, hub};
 pub fn migrate(db: &impl Sql) -> Result<(), SqlError> {
     devices::migrate(db)?;
     db.exec_batch(hub::SCHEMA)?;
-    db.exec_batch(crate::login::ACCOUNT_SCHEMA)
+    db.exec_batch(crate::login::ACCOUNT_SCHEMA)?;
+    db.exec_batch(crate::read_key::SCHEMA)
 }
 
 /// Sets up storage, then sweeps the op log once. A failed sweep only costs

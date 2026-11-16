@@ -73,3 +73,13 @@ pub struct LoginClear {
 pub struct LoginCheck {
     pub key: String,
 }
+
+/// Account object `POST /read-key` (a new key's hash) and `GET /verdicts`
+/// (the presented key's hash, in [`READ_KEY_HEADER`]).
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ReadKeyHash {
+    pub hash: String,
+}
+
+/// The presented read key's hash on `GET /verdicts`, set by the Worker.
+pub const READ_KEY_HEADER: &str = "x-batna-read-key";

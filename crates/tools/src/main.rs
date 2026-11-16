@@ -7,7 +7,7 @@
 //! batna-tools verdicts FILE [--approve]   fix list from the app's ✎/✗ export
 //! batna-tools update <keygen | manifest | sign | verify>   update feeds (docs/RELEASE.md §5)
 //! batna-tools refs [--lecture hb.L01] [--write]   page references against the book (refs.rs)
-//! batna-tools cue [--all]   how often the key is the longest option, per lecture (cue.rs)
+//! batna-tools cue [--all] [--kind K] [--list LECTURE]   how often the key is the longest option, per kind and lecture (cue.rs)
 //! batna-tools lessons --summary | --report <course> | --warnings [<course>]   lesson coverage (coverage.rs)
 //! batna-tools figures   the book's figures in the lessons: progress table for #983 (figures.rs)
 //! ```
@@ -215,6 +215,10 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     }
     // Lessons (docs/LESSONS.md), with every abbreviation in the glossary.
     let (_, lessons) = lessons::validate_all(root, &approved, glossary.as_ref(), &mut problems);
+    // Their checks and mini-cases count towards the longest-option cue (#1349).
+    for (_, file, _) in lessons::load(root).unwrap_or_default() {
+        cue.add_lessons(&file);
+    }
     // Lessons against the book's pages (#833): hard rules fail, the rest warn.
     let (coverage_errors, coverage_warnings) = coverage::check(root);
     problems.extend(coverage_errors);
@@ -340,7 +344,7 @@ mod tests {
             (code, out.as_str(), err.len()),
             (
                 ExitCode::SUCCESS,
-                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 1 warning(s), see `batna-tools lessons --warnings`; book figures: 1 lecture(s) not inventoried yet, 0 warning(s) (diagram, algorithm or chart skipped as restated in words), see `batna-tools figures`",
+                "content OK: 1 courses, 1 of 1 lectures written, 2 items, 1 lessons, 0 glossary terms; lesson coverage: 1 warning(s), see `batna-tools lessons --warnings`; book figures: 1 lecture(s) not inventoried yet, 0 warning(s) (diagram, algorithm or chart skipped as restated in words), see `batna-tools figures`\nlongest-option key: 100.0% of 1 lesson checks (`batna-tools cue --kind check` lists all)",
                 0
             )
         );

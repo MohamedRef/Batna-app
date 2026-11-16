@@ -346,15 +346,19 @@ quote cap there is outdated), course briefs in [courses/](courses/).
     counts the pages a lesson's steps cite, not its `pages` span; research
     lessons count slides, up to 16. A lesson wide on purpose is listed with
     its reason in `content/lesson-wide.yaml` (#828).
-15. **The key is not the longest option** (Mohamed, 2026-11-13, #816).
-    Test-wise learners pick the longest option, so in authored MCQs make a
-    distractor as long as the key (or trim the key) without making it less
-    wrong. `batna-tools cue` lists the share per lecture; `validate` prints
-    the bank share and the five highest lectures; the test
-    `the_bank_stays_under_the_ceiling` (`crates/tools/src/cue.rs`) fails above
-    `CEILING_PERCENT`, which each rewrite PR lowers, never raises. Options
-    printed in a source (`book-question`, `slide-question`, `past-paper`,
-    `lecture-quiz`) stay as printed and are not counted.
+15. **The key is not the longest option** (Mohamed, 2026-11-13, #816; every
+    question with options since #1349). Test-wise learners pick the longest
+    option, so in authored MCQs, case steps, lesson checks and lesson
+    mini-case steps give the wrong options the key's shape and length (a dose
+    and interval on every drug, a reason on every action) or trim the key,
+    without making them less wrong. `batna-tools cue` lists the share per kind
+    and lecture (`--kind mcq|case|check|lesson-case`, `--list <lecture>` names
+    each cued question); `validate` prints each kind's share and its five
+    highest lectures; the test `every_kind_stays_under_its_ceiling`
+    (`crates/tools/src/cue.rs`) fails above `Kind::ceiling`, which each
+    rewrite PR lowers, never raises. Options printed in a source
+    (`book-question`, `slide-question`, `past-paper`, `lecture-quiz`) stay as
+    printed and are not counted.
 
 ## 8. Sources outside git (important)
 
@@ -782,6 +786,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: longest-option cue for every question with options (#1349): `batna-tools cue` counts case steps (52.8%), lesson checks (47.3%) and lesson mini-case steps (54.2%) beside MCQs (24.3%), with a ceiling per kind (25 / 53 / 47.5 / 54.5%) and `--kind` / `--list`; rewrites follow, worst lectures first (content rule 15).
 - 2026-11-16: res.L09 slide 62 (blank in the deck PDF) read from the lecture video at about 37:35: the «Essential» diagram of 8 informed-consent elements; new enumerate card res.L09.123 and a lesson4 step, both checked by hand (`quote-ok`) in the res verdicts.
 - 2026-11-15: Settings › Sync «زامن دلوقتي» forces a sync now; the sync engine bounds connect/send waits, replaces silent sockets, caps its backoff at 1 minute and retries at once when the app comes back or the network returns (§ 10 Sync never stalls).
 - 2026-11-15: What's new finishes #1340: a digest line per release (changes, courses, the busiest course), a box of lessons you had finished that the release changed (each opens), and changelog search with course and kind filters across every kept build.

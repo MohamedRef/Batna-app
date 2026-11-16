@@ -102,7 +102,7 @@ const PAIR_MCQ: f64 = 21.5;
 #[cfg(test)]
 const PAIR_CASE: f64 = 0.5;
 #[cfg(test)]
-const PAIR_CHECK: f64 = 32.5;
+const PAIR_CHECK: f64 = 1.5;
 #[cfg(test)]
 const PAIR_LESSON_CASE: f64 = 0.5;
 

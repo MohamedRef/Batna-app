@@ -377,11 +377,11 @@ quote cap there is outdated), course briefs in [courses/](courses/).
     question passes the first count and keeps the cue, so rewrite every
     wrong option of a question. `batna-tools cue` prints it per kind;
     `the_long_pair_stays_under_its_ceiling` fails above `Kind::pair_ceiling`
-    (2026-11-16: MCQs 21.1%, case steps 17.0%, lesson checks 32.1%, lesson
+    (2026-11-16: MCQs 21.1%, case steps 14.4%, lesson checks 32.1%, lesson
     mini-cases 40.7%; in about five of six such pairs the key is one of the
-    two). Hematology, diabetes and hepatology case steps are done
+    two). Hematology, diabetes, hepatology and research case steps are done
     (`batna-tools cue` has no per-lecture list for this count yet); the
-    case steps of res, endo, geri, git, neph and rheum (231 steps) and all
+    case steps of endo, geri, git, neph and rheum (195 steps) and all
     lesson checks and mini-cases are open.
 
 ## 8. Sources outside git (important)
@@ -876,6 +876,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: long-pair cue, research (#1366): 72 wrong options in 36 res case steps rewritten the full way; case steps 17.0% → 14.4%, ceiling 14.5%. The three semester 1 courses (res, hem, hb) and dm are done.
 - 2026-11-16: long-pair cue, hepatology (#1366): 139 wrong options in 70 hb case steps rewritten the full way; case steps 22.2% → 17.0%, ceiling 17.5%.
 - 2026-11-16: long-pair cue, diabetes (#1366): 226 wrong options in 113 dm case steps rewritten the full way (every wrong option of the question, no new medical claim); case steps 30.4% → 22.2%, ceiling 22.5%.
 - 2026-11-16: long-pair cue (#1366): `batna-tools cue` also counts questions where two options stand out by length and the key is one of them, with a ceiling per kind; the #1360 rewrites had moved the key from longest to second longest. First batch done the full way: 103 wrong options in 50 hematology case steps (every wrong option of the question, no new medical claim); case steps 33.8% → 30.4%. Also `hem.L11.118` step 1 said «him» of a woman.

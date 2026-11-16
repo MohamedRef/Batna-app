@@ -148,7 +148,7 @@ items:
         answer: 0
         why: "Two independent groups with non-normal data: Mann-Whitney."
       - question: "Duration of diabetes vs creatinine, both skewed: are they related?"
-        options: ["Spearman rank correlation", "Pearson correlation coefficient (r)", "ANOVA", "Mann-Whitney test"]
+        options: ["Spearman rank correlation", "Pearson correlation coefficient (r)", "One-way ANOVA (F test)", "Mann-Whitney test of two groups"]
         answer: 0
         why: "Relationship between two quantitative variables that are not normal: Spearman."
       - question: "BMI (normal) across 4 social classes?"
@@ -572,7 +572,7 @@ items:
     stem: A cardiology MSc thesis studies % coronary artery narrowing on angiography in 300 patients, with age, sex, DM, HTN, LDL-C, smoking, obesity and uric acid recorded.
     steps:
       - question: "What kind of analysis looks at all these factors together?"
-        options: ["Multivariate analysis (multiple regression)", "Many separate Pearson correlations, one factor at a time", "Chi-square", "Mann-Whitney"]
+        options: ["Multivariate analysis (multiple regression)", "Many separate Pearson correlations, one factor at a time", "A chi-square test for each factor in turn", "A Mann-Whitney test for each factor in turn"]
         answer: 0
         why: "Multivariate analysis examines the simultaneous effect of many independent variables on one outcome."
       - question: "The outcome is % narrowing (a number). Which regression?"
@@ -584,7 +584,7 @@ items:
         answer: 0
         why: "Nominal dichotomous independents enter linear regression with 0 & 1 (dummy) coding."
       - question: "If the outcome becomes 'significant stenosis: yes/no', what changes?"
-        options: ["Multiple logistic regression, with odds ratios", "Nothing; multiple linear regression still applies, with B coefficients", "Pearson correlation", "Paired t-test"]
+        options: ["Multiple logistic regression, with odds ratios", "Nothing; multiple linear regression still applies, with B coefficients", "Pearson correlation, with the r coefficient", "A paired t-test, with the mean difference"]
         answer: 0
         why: "A dichotomous dependent variable → multiple logistic regression; coefficients are odds ratios."
     src: { page: 26, quote: "If dependent variable is numerical (quantitative) – use Multiple linear regression.\nIf nominal -Qualitative (dichotomy) --- use Multiple logistic regression." }

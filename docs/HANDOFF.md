@@ -824,7 +824,7 @@ come from `batna-tools packs build --check` (its last line).
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
 | Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
 | Critic / review rounds | Restarted at Mohamed's ask on 2026-11-13: strength reviews #820 (11-13) and #1356 (11-16), with rounds on 11-14 and 11-15 too. Each round files issues; owners fix and merge |
-| Open PRs / issues | On 2026-11-16: the #1356 round (#1349–#1355) with PRs #1360 (#1349) and #1362 (#1350) open |
+| Open PRs / issues | On 2026-11-16: the #1356 round (#1349–#1355); #1350 merged (#1362), #1349 in PR #1360, #1353 and #1355 in this PR, #1354 next |
 | Coverage | 95.05% when last measured (2026-11-04); floor 94 |
 
 ### Open work and known gaps

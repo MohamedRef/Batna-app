@@ -680,6 +680,28 @@ is still due; the whole curriculum ends it. Tests: `store/backend/reset_tests.rs
 (sync with an offline tablet, restore, exact undo, answer undo, untouched
 tables, export/import) and `reset/tests.rs` (the card by taps).
 
+### Full-text search (#1350)
+
+- `batna_core::search`: one `Index` of every lesson step's shown text
+  (`Step::shown_text` plus a figure's `alt`), each lesson's title, hook,
+  goals and recap, and every non-rejected item's text (`item_text`: front,
+  back, cloze answers without markup, stem, options, why, points, outline,
+  table cells, guideline update). Folding as the calculator search, plus
+  dashes read as spaces («Child–Pugh» = «child pugh»). Every word must be in
+  one step (else anywhere in the lesson; it then opens at the step with the
+  most). Page quotes are not searched.
+- App `search/`: the index is built off the UI thread at launch (`warm`,
+  ~0.1 s on CI; the web builds it on the first search). Queries under 3
+  letters search titles only. The Lessons screen lists, under its title
+  matches, «في شرح N درس» and «في الكروت والأسئلة» with the text around the
+  word marked, a chip per course (the course in view first), 20 rows a page.
+  A lesson opens at the step (`learn::open_at`) and `mark.js` marks the words
+  with the CSS Custom Highlight API (no DOM change). An item opens where it
+  plays (study session of one item, tutor MCQ, case or calc item) and
+  «افتح الدرس اللي بيشرحها» opens its lesson at the word.
+- Tests: the issue's 12 terms each find at least the lessons and cards
+  measured in #1350 (`search/tests.rs`).
+
 ### Desktop (Mac) layout
 
 - Full-window canvas, wider labelled sidebar, 1280×820 default window (#739).
@@ -691,8 +713,9 @@ tables, export/import) and `reset/tests.rs` (the card by taps).
 - **⌘K / Ctrl+K palette** (#743, #744): offline, searches screens, lectures,
   lessons and calculators (Arabic-aware: the calculator search's `fold` for
   hamza, ة/ه, ى/ي, tashkeel and Arabic digits; text in `i18n/palette.rs`), opens Settings sections, and
-  `questions <lecture>` starts lecture-filtered practice. Max 12 results; no
-  per-question deep links.
+  `questions <lecture>` starts lecture-filtered practice. Max 12 results:
+  title hits first, then up to 3 lessons and 2 cards whose text holds the
+  words (§ 10 Full-text search) and a «كل النتايج» row to the Lessons screen.
 
 ### Phone layout (S24 Ultra, ~384dp)
 
@@ -782,6 +805,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: full-text search (#1350): the Lessons screen and ⌘K find words inside lesson steps, cards and questions, open the lesson at the step with the word marked, and the item where it plays (§ 10 Full-text search).
 - 2026-11-16: res.L09 slide 62 (blank in the deck PDF) read from the lecture video at about 37:35: the «Essential» diagram of 8 informed-consent elements; new enumerate card res.L09.123 and a lesson4 step, both checked by hand (`quote-ok`) in the res verdicts.
 - 2026-11-15: Settings › Sync «زامن دلوقتي» forces a sync now; the sync engine bounds connect/send waits, replaces silent sockets, caps its backoff at 1 minute and retries at once when the app comes back or the network returns (§ 10 Sync never stalls).
 - 2026-11-15: What's new finishes #1340: a digest line per release (changes, courses, the busiest course), a box of lessons you had finished that the release changed (each opens), and changelog search with course and kind filters across every kept build.

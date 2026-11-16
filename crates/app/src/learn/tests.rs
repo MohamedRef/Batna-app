@@ -753,6 +753,46 @@ fn the_list_searches_lessons_and_clears_the_search() {
     assert_eq!(d.read(crate::courses::focus::current), None);
 }
 
+/// #1350: a word taught inside lessons, in no title, lists those lessons
+/// with the step's text around it and the cards that use it; a lesson
+/// opens at that step.
+#[test]
+fn the_search_finds_a_word_inside_lessons_and_cards() {
+    crate::store::use_memory_store();
+    let mut d = list();
+    d.read(|| crate::courses::focus::set(None));
+    d.settle();
+    d.input(|e| e.tag == "input" && e.attr("type") == Some("search"), "ferritin");
+    assert!(shows(&d, "sr-full"), "{}", d.html());
+    let found = d.read(|| crate::search::find("ferritin").unwrap());
+    assert!(found.lessons.len() >= 19 && found.items.len() >= 43);
+    let html = d.html();
+    assert!(html.contains(&crate::i18n::search::in_lessons(found.lessons.len())), "{html}");
+    assert!(html.contains(crate::i18n::search::OPEN_LESSON));
+    let marks = d.find(is("sr-hit"));
+    assert!(
+        !marks.is_empty() && marks.iter().all(|m| m.text.eq_ignore_ascii_case("ferritin")),
+        "{:?}",
+        marks.iter().map(|m| m.text.clone()).collect::<Vec<_>>()
+    );
+    let rows = |d: &Dom| d.find_in(is("sr-full"), |e| e.tag == "li" && !e.has_class("sr-item")).len();
+    assert_eq!(rows(&d), found.lessons.len());
+    // More than twenty page by twenty.
+    d.input(|e| e.tag == "input" && e.attr("type") == Some("search"), "rituximab");
+    let n = d.read(|| crate::search::find("rituximab").unwrap().lessons.len());
+    assert!(n > 20);
+    assert_eq!(rows(&d), 20);
+    d.click(is("sr-more"));
+    // Lessons the title search lists already are not listed twice.
+    let titled = d.find(|e| e.has_class("ls-item")).len();
+    assert_eq!(rows(&d) + titled, n.min(40));
+    d.click_in(is("sr-full"), is("sr-row"));
+    let opened = d.read(|| OPEN.peek().clone()).expect("a lesson opens");
+    assert!(d.read(|| crate::search::find("rituximab").unwrap().lessons.iter().any(|h| h.lesson == opened)));
+    // Short queries search titles only.
+    assert!(d.read(|| crate::search::find("fe")).is_none());
+}
+
 #[test]
 fn rows_show_each_lessons_state_and_open_it() {
     let (lec, lessons) = claim_lecture();

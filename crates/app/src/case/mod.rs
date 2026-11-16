@@ -48,6 +48,14 @@ pub fn open_calculators(mut ui: crate::Ui) {
     ui.screen.set(crate::Screen::Cases);
 }
 
+/// Open one case, or one calc item (`calc`), from a search result (#1350).
+pub fn open_item(mut ui: crate::Ui, id: &str, calc: bool) {
+    *START_TAB.write() = None;
+    *TAB.write() = if calc { Tab::CalcItems } else { Tab::Cases };
+    *OPEN.write() = Some(id.to_string());
+    ui.screen.set(crate::Screen::Cases);
+}
+
 /// Whether the Cases screen is showing its Calculators tab: the sidebar
 /// then marks the الحاسبات tool, not حالات, as the page on show.
 pub fn calculators_shown(ui: crate::Ui) -> bool {

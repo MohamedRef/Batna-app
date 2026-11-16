@@ -493,3 +493,50 @@ fn an_unsent_wrong_mark_gets_one_quiet_line_after_three_days() {
     store.put_setting(crate::verify::export::EXPORTED_KEY, &sent).unwrap();
     assert!(!TestDom::of(app).html().contains(&line));
 }
+
+#[test]
+fn a_fixed_wrong_mark_is_said_once_and_opens_in_a_session() {
+    use crate::i18n::verify as vx;
+    use crate::tap_dom::TestDom;
+    use batna_core::review::verify::{Judgement, Verdict, fingerprint};
+    let store = crate::store::use_thread_store();
+    let lib = Library::get();
+    let items: Vec<_> = lib
+        .lectures
+        .values()
+        .flat_map(|l| &l.items)
+        .filter(|i| crate::study::is_playable(&i.id))
+        .take(2)
+        .collect();
+    let mark = |print: String| Judgement {
+        verdict: Verdict::Wrong,
+        edit: Default::default(),
+        note: None,
+        fingerprint: print,
+        at_ms: 1,
+    };
+    let app = || {
+        shell(rsx! {
+            Spy {}
+            Today {}
+        })
+    };
+    // Still the text he marked: no note.
+    store.set_judgement(&items[0].id, Some(&mark(fingerprint(items[0])))).unwrap();
+    assert!(!TestDom::of(app).html().contains(vx::FIXED_OK));
+    // The content changed since: one note, and «تمام» puts it away for good.
+    store.set_judgement(&items[1].id, Some(&mark("before-the-fix".into()))).unwrap();
+    let mut t = TestDom::of(app);
+    assert!(t.html().contains(&vx::fixed(1)), "{}", t.html());
+    t.click("td-fixed-ok");
+    assert!(!t.html().contains(vx::FIXED_OK));
+    assert!(!TestDom::of(app).html().contains(vx::FIXED_OK), "seen stays seen");
+    // Fixed again later: new again, and it opens a session of it.
+    store.set_judgement(&items[0].id, Some(&mark("older-text".into()))).unwrap();
+    let mut t = TestDom::of(app);
+    assert!(t.html().contains(&vx::fixed(1)));
+    t.click("td-fixed-open");
+    assert_eq!(screen(&t), Screen::Study);
+    let start = t.with(|| crate::study::START.peek().clone()).expect("a session");
+    assert_eq!(start.items, Some(vec![items[0].id.clone()]));
+}

@@ -716,7 +716,12 @@ tables, export/import) and `reset/tests.rs` (the card by taps).
   § 4.2). `batna-tools verdicts --cloud [--save FILE] [--approve]` reads with
   `BATNA_VERDICTS_KEY` (environment secret, never in git) and prints the same
   fix list as for a file; `--save` writes the export for `anki --verdicts`.
-- Not built yet: telling him when a content update fixed items he marked ✗.
+- Fixed ✗ items (`verify/fixed.rs`): a content update that changes an item
+  he marked ✗ already brings it back to review (its mark's fingerprint no
+  longer fits). Today now says so once («N … اتصلّحوا في التحديث»), with
+  «راجعهم دلوقتي» (a session of those items, which ask ✓ ✎ ✗ again) and
+  «تمام». Seen ones are kept in the synced setting `verify.fixed_seen`
+  (id → fingerprint of the fixed text), so a later fix is new again.
 
 ### Desktop (Mac) layout
 
@@ -820,6 +825,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: Today says when a content update fixed items he marked ✗ (#1352 point 4): one note, «راجعهم دلوقتي» opens them in a session, «تمام» hides it (synced `verify.fixed_seen`; § 10 Content-check file).
 - 2026-11-16: verdicts read key (#1352 point 3): Settings › Sync makes a key that reads only his ✓ ✎ ✗ marks (`GET /v1/verdicts`); `batna-tools verdicts --cloud` builds the fix list from Batna Cloud with `BATNA_VERDICTS_KEY` (§ 10 Content-check file, docs/CLOUD.md § 4.2).
 - 2026-11-16: Updates: a channel with no feed (404, beta and stable today) is "nothing published here yet", not a network failure; picking one is refused with a note, and a device already on one gets one tap back to alpha (#1351).
 - 2026-11-16: longest-option cue for every question with options (#1349): `batna-tools cue` counts case steps (52.8%), lesson checks (47.3%) and lesson mini-case steps (54.2%) beside MCQs (24.3%), with a ceiling per kind (25 / 53 / 47.5 / 54.5%) and `--kind` / `--list`; rewrites follow, worst lectures first (content rule 15).

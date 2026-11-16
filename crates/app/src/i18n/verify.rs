@@ -59,3 +59,12 @@ pub fn unsent(approved: usize, edited: usize, wrong: usize) -> String {
 pub fn today_waiting(wrong: usize) -> String {
     format!("{} علّمت عليها ✗ لسه ما اتبعتتش للتصليح", super::count::count(wrong, &super::count::MARK))
 }
+/// Today, after a content update fixed items he marked ✗ (`verify/fixed.rs`).
+pub fn fixed(n: usize) -> String {
+    format!(
+        "{} من اللي علّمت عليهم ✗ اتصلّحوا في التحديث، ورجعوا للمراجعة. بص عليهم وقول رأيك تاني.",
+        super::count::count(n, &super::count::ITEM)
+    )
+}
+pub const FIXED_OPEN: &str = "راجعهم دلوقتي";
+pub const FIXED_OK: &str = "تمام";

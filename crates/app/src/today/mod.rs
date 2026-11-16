@@ -161,6 +161,7 @@ pub fn Today() -> Element {
                     }
                 }
                 crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
+                crate::verify::fixed::FixedNote {}
                 // ✗ items wait outside review until the fix list has them
                 // (#1352): one quiet line once the oldest has waited 3 days.
                 if waiting_wrong > 0 {

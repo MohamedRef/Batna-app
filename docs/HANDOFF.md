@@ -677,7 +677,10 @@ out progress in scope at or before the marker:
   cards). An offline device's older answers that sync later stay out; its
   answers after the reset count;
 - lesson marks `lesson.<id>` and places `lessonpos.<id>` by wall time
-  (`crate::reset::counts_at`, used by `learn::mark`, the player, `part_way`);
+  (`crate::reset::counts_at`, used by `learn::mark`, the player, `part_way`).
+  They are stamped with `crate::reset::stamp` (#1353): now, or just after a
+  covering marker whose time is ahead of this clock (its HLC followed a
+  faster device), so a lesson finished right after a reset reads as done;
 - finished papers only when a whole-curriculum reset ticked them (`papers`);
 - own cards' schedules restart only with `reset.all` (their ids are `own.…`).
 
@@ -692,6 +695,10 @@ is still due; the whole curriculum ends it. Tests: `store/backend/reset_tests.rs
 (sync with an offline tablet, restore, exact undo, answer undo, untouched
 tables, export/import) and `reset/tests.rs` (the card by taps).
 
+Settings › بياناتك shows the last backup saved on this device (time and
+rows, device-only `local.backup.last`, written by every export and the
+reset's backup) and, when it is over two weeks old (or none was made) and he
+has answered something since, one quiet line suggesting a new one (#1353).
 ### Full-text search (#1350)
 
 - `batna_core::search`: one `Index` of every lesson step's shown text
@@ -843,6 +850,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: #1353: Settings › بياناتك shows the last backup on this device and a quiet line when it is old; lesson marks and places after a reset are stamped after the marker, so a lesson finished right after «ابدأ من الأول» reads as done even when the marker's time is ahead of this clock.
 - 2026-11-16: full-text search (#1350): the Lessons screen and ⌘K find words inside lesson steps, cards and questions, open the lesson at the step with the word marked, and the item where it plays (§ 10 Full-text search).
 - 2026-11-16: verdicts read key (#1352 point 3): Settings › Sync makes a key that reads only his ✓ ✎ ✗ marks (`GET /v1/verdicts`); `batna-tools verdicts --cloud` builds the fix list from Batna Cloud with `BATNA_VERDICTS_KEY` (§ 10 Content-check file, docs/CLOUD.md § 4.2).
 - 2026-11-16: Updates: a channel with no feed (404, beta and stable today) is "nothing published here yet", not a network failure; picking one is refused with a note, and a device already on one gets one tap back to alpha (#1351).

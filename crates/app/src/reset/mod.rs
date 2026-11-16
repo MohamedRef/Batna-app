@@ -30,6 +30,12 @@ pub fn counts_at(id: &str, at_ms: i64) -> bool {
     RESETS.read().counts_at(id, at_ms)
 }
 
+/// The time to stamp a lesson mark or place in `id`'s course with: now, or
+/// just after a reset that carries a later time (`Resets::stamp`, #1353).
+pub fn stamp(id: &str) -> i64 {
+    RESETS.peek().stamp(id, crate::store::now_ms())
+}
+
 /// A scope's name as he reads it: «المنهج كله», or the course's short name.
 pub fn name(scope: &Scope) -> String {
     match scope {

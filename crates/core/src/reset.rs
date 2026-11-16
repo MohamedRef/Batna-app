@@ -167,6 +167,16 @@ impl Resets {
         self.cutoff(id).is_none_or(|m| at_ms > m.at_ms())
     }
 
+    /// The time to stamp something in `id`'s scope done now (a finished
+    /// lesson, a started attempt): `now_ms`, or just after the newest
+    /// marker covering it when that is later (#1353). A marker can carry a
+    /// time ahead of this device's clock (its HLC followed a faster device,
+    /// or another device wrote it), and a lesson finished right after the
+    /// reset must still read as done.
+    pub fn stamp(&self, id: &str, now_ms: i64) -> i64 {
+        self.cutoff(id).map_or(now_ms, |m| now_ms.max(m.at_ms() + 1))
+    }
+
     /// Whether a finished paper at `at_ms` still shows.
     pub fn paper_counts(&self, at_ms: i64) -> bool {
         self.all.as_ref().is_none_or(|m| !m.papers || at_ms > m.at_ms())
@@ -200,6 +210,20 @@ mod tests {
 
     fn resets(rows: &[(&str, i64)]) -> Resets {
         Resets::from_settings(rows.iter().map(|(k, at)| (k.to_string(), Marker::new(hlc(*at, "phone")))))
+    }
+
+    #[test]
+    fn a_stamp_after_a_reset_ahead_of_this_clock_still_counts() {
+        // #1353: the marker is 3 minutes ahead of this device's wall clock.
+        let r = resets(&[("reset.hb", 1_000 + 180_000)]);
+        let now = 1_000;
+        assert!(!r.counts_at("hb.L01.lesson1", now), "the plain clock reads as before the reset");
+        let stamp = r.stamp("hb.L01.lesson1", now);
+        assert_eq!(stamp, 181_001);
+        assert!(r.counts_at("hb.L01.lesson1", stamp));
+        // No marker, or one behind the clock: the clock itself.
+        assert_eq!(r.stamp("hem.L01.lesson1", now), now);
+        assert_eq!(resets(&[("reset.hb", 10)]).stamp("hb.L01.lesson1", now), now);
     }
 
     #[test]

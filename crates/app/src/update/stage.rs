@@ -5,6 +5,8 @@
 
 use dioxus::prelude::*;
 
+use batna_core::update::Channel;
+
 use super::{Failure, Offer, Phase, Status, Updater};
 use crate::i18n::update as tx;
 
@@ -39,6 +41,8 @@ pub enum Act {
     GetPreview,
     /// The channel's release page, to install one build by hand.
     OpenReleases,
+    /// Back to alpha, the release channel that always has builds.
+    FollowAlpha,
 }
 
 impl Act {
@@ -55,6 +59,7 @@ impl Act {
             Self::OpenPermission => tx::OPEN_PERMISSION,
             Self::GetPreview => tx::GET_PREVIEW,
             Self::OpenReleases => tx::OPEN_RELEASES,
+            Self::FollowAlpha => tx::FOLLOW_ALPHA,
         }
     }
 
@@ -78,6 +83,7 @@ impl Act {
             }
             Self::GetPreview => open(&preview_apk_url()),
             Self::OpenReleases => open(&releases_url()),
+            Self::FollowAlpha => work(|u| u.set_channel(Channel::Alpha)),
         }
     }
 }
@@ -164,6 +170,10 @@ pub fn stage(phase: &Phase, android: bool) -> Option<Stage> {
                 Failure::Install(_) => (tx::FAILED_INSTALL, None, &[], retry(Act::Install)),
                 Failure::TooNew => (tx::TOO_NEW, None, &[], vec![Act::OpenReleases]),
                 Failure::KeyChanged => (tx::KEY_CHANGED, None, &tx::KEY_CHANGED_STEPS, vec![Act::GetPreview]),
+                Failure::NotPublished(c) => {
+                    let back = if *c == Channel::Alpha { vec![] } else { vec![Act::FollowAlpha] };
+                    (tx::NOT_PUBLISHED, None, &[], back)
+                }
             }
         }
     };

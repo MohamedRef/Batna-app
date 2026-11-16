@@ -281,7 +281,9 @@ jobs:
           cargo run -q -p batna-tools -- update manifest --channel preview --version "$VERSION" \
             --build "$BATNA_BUILD" --commit "$BATNA_COMMIT" \
             --previous /tmp/previous-update.json --changes "${app[@]}" \
-            --asset content=dist/packs/batna-content.pack --out dist/update
+            --asset content=dist/packs/batna-content.pack \
+            --asset content-text=dist/packs/batna-content-text.pack \
+            --asset content-pictures=dist/packs/batna-content-pictures.pack --out dist/update
           BATNA_UPDATE_SECRET="$(cat ~/.batna-preview-update/secret)" \
             cargo run -q -p batna-tools -- update sign dist/update --public-key ~/.batna-preview-update/key.pub
           cargo run -q -p batna-tools -- update verify dist/update --public-key ~/.batna-preview-update/key.pub "${carried[@]}"

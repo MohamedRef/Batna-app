@@ -29,6 +29,72 @@ pub fn local_date() -> String {
     chrono::Local::now().format("%Y-%m-%d").to_string()
 }
 
+/// The last backup saved on this device (#1353): when, and how many rows.
+/// Device-only: another device's backup is not on this one.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub struct LastBackup {
+    pub at_ms: i64,
+    pub rows: u64,
+}
+
+const LAST_KEY: &str = "backup.last";
+
+/// Two weeks: an older backup with study since gets a quiet reminder line.
+const STALE_MS: i64 = 14 * 86_400_000;
+
+pub fn last_backup(store: &Store) -> Option<LastBackup> {
+    store.local_setting(LAST_KEY)
+}
+
+fn remember(store: &Store, at_ms: i64, rows: u64) {
+    // A backup that was written is not undone by failing to note it.
+    let _ = store.put_local_setting(LAST_KEY, &LastBackup { at_ms, rows });
+}
+
+/// Whether to say, quietly, that the last backup is old: older than two
+/// weeks, or never made, and he has answered something since.
+pub fn backup_is_old(last: Option<LastBackup>, newest_answer_ms: Option<i64>, now_ms: i64) -> bool {
+    let Some(answered) = newest_answer_ms else { return false };
+    match last {
+        None => true,
+        Some(b) => now_ms - b.at_ms > STALE_MS && answered > b.at_ms,
+    }
+}
+
+/// "النهارده", "امبارح", "من 3 أيام", then the date.
+fn when(at_ms: i64, now_ms: i64) -> String {
+    use chrono::TimeZone;
+    let day = |ms: i64| chrono::Local.timestamp_millis_opt(ms).single().map(|t| t.date_naive());
+    let (Some(then), Some(today)) = (day(at_ms), day(now_ms)) else { return String::new() };
+    match (today - then).num_days() {
+        ..=0 => tx::TODAY.to_string(),
+        1 => tx::YESTERDAY.to_string(),
+        n @ 2..=10 => tx::days_ago(n),
+        _ => then.format("%Y-%m-%d").to_string(),
+    }
+}
+
+/// The line under the button: the last backup, or that there is none yet.
+#[component]
+fn LastLine(rev: u32) -> Element {
+    let store = store::shared();
+    let last = last_backup(store);
+    let now = store::now_ms();
+    let newest = store.reviews().ok().and_then(|r| r.iter().map(|e| e.event.at_ms).max());
+    let _ = rev;
+    rsx! {
+        p { class: "muted small backup-last",
+            match last {
+                Some(b) => tx::last_backup(&when(b.at_ms, now), b.rows),
+                None => tx::NO_BACKUP_YET.to_string(),
+            }
+        }
+        if backup_is_old(last, newest, now) {
+            p { class: "small backup-old", {tx::BACKUP_OLD} }
+        }
+    }
+}
+
 /// Writes the export into `dir` (created if missing); returns the path and
 /// the number of rows. Written to a temporary file first, so a failure never
 /// leaves half a file behind.
@@ -48,6 +114,7 @@ pub fn save(store: &Store, dir: &Path, date: &str, now_ms: i64) -> Result<(PathB
         let _ = std::fs::remove_file(&tmp);
         format!("{}: {e}", path.display())
     })?;
+    remember(store, now_ms, export.rows);
     Ok((path, export.rows))
 }
 
@@ -69,7 +136,9 @@ fn download(store: &Store, date: &str, now_ms: i64) -> Result<(String, u64), Str
     let mut text = serde_json::to_vec_pretty(&export.document).map_err(|e| e.to_string())?;
     text.push(b'\n');
     let name = format!("batna-export-{date}.json");
-    crate::platform::web::download(&name, "application/json", &text).map(|n| (n, export.rows))
+    let saved = crate::platform::web::download(&name, "application/json", &text)?;
+    remember(store, now_ms, export.rows);
+    Ok((saved, export.rows))
 }
 
 /// Android: hands a file the app just wrote to the system "Save to" dialog
@@ -146,6 +215,7 @@ fn ExportCardIn(dir: ExportDir) -> Element {
         crate::ui::Card {
             h2 { {tx::EXPORT_TITLE} }
             button { class: "btn btn-primary", onclick: move |_| run(), {tx::EXPORT_BUTTON} }
+            LastLine { rev: attempt() }
             if let Some(result) = outcome() {
                 ExportResult { key: "{attempt}", result, on_retry: move |_| run() }
             }
@@ -201,6 +271,40 @@ mod tests {
         let err = save(&s, &base.join("inside"), "2026-10-27", 1).unwrap_err();
         assert!(err.contains("inside"), "{err}");
         let _ = std::fs::remove_file(base);
+    }
+
+    #[test]
+    fn a_backup_is_remembered_with_its_rows() {
+        let dir = std::env::temp_dir().join(format!("batna-export-last-{}", store::now_ms()));
+        let s = Store::open_in_memory().unwrap();
+        assert_eq!(last_backup(&s), None);
+        let (_, rows) = save(&s, &dir, "2026-11-16", 1234).unwrap();
+        assert_eq!(last_backup(&s), Some(LastBackup { at_ms: 1234, rows }));
+        let _ = std::fs::remove_dir_all(dir);
+    }
+
+    #[test]
+    fn an_old_backup_is_mentioned_only_when_he_studied_since() {
+        let day = 86_400_000;
+        let b = Some(LastBackup { at_ms: 0, rows: 10 });
+        assert!(!backup_is_old(b, Some(day), 3 * day), "recent");
+        assert!(backup_is_old(b, Some(day), 15 * day), "two weeks, studied since");
+        assert!(!backup_is_old(b, None, 15 * day), "nothing answered");
+        assert!(
+            !backup_is_old(Some(LastBackup { at_ms: 2 * day, rows: 1 }), Some(day), 20 * day),
+            "nothing since"
+        );
+        assert!(backup_is_old(None, Some(day), day), "never backed up");
+        assert!(!backup_is_old(None, None, day));
+    }
+
+    #[test]
+    fn when_reads_as_days() {
+        let now = store::now_ms();
+        assert_eq!(when(now, now), tx::TODAY);
+        assert_eq!(when(now - 86_400_000, now), tx::YESTERDAY);
+        assert_eq!(when(now - 3 * 86_400_000, now), "من 3 أيام");
+        assert_eq!(when(now - 40 * 86_400_000, now).len(), 10);
     }
 
     #[test]
@@ -262,6 +366,10 @@ mod tests {
         t.click(tx::EXPORT_BUTTON);
         let html = t.html();
         assert!(html.contains("role=\"status\"") && html.contains("batna-export-"), "{html}");
+        assert!(
+            html.contains(&tx::last_backup(tx::TODAY, last_backup(store::shared()).unwrap().rows)),
+            "{html}"
+        );
         let written: Vec<_> = std::fs::read_dir(scratch().unwrap()).unwrap().collect();
         assert!(!written.is_empty());
 

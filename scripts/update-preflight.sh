@@ -42,7 +42,7 @@ if curl -fsSL --retry 3 -o "$live_manifest" "https://github.com/$repo/releases/d
     base=(--base-pack "$out/live/$live_pack")
   fi
   # A content-only update keeps every build the feed has: no APK is made.
-  while read -r p; do carry+=(--carry "$p"); done < <(jq -r '.assets[] | select(.platform != "content") | .platform' "$live_manifest")
+  while read -r p; do carry+=(--carry "$p"); done < <(jq -r '.assets[] | select(.platform | startswith("content") | not) | .platform' "$live_manifest")
 else
   echo "no $channel feed yet: nothing to compare with"
   rm -f "$live_manifest"
@@ -59,7 +59,8 @@ previous=()
 build="$( [[ -f $live_manifest ]] && jq -r '.build + 1' "$live_manifest" || echo 1)"
 $tools update manifest --channel "$channel" --version "$version" --build "$build" \
   --commit "$(git rev-parse --short HEAD)" "${previous[@]}" --changes "${carry[@]}" \
-  --asset "content=$out/pack/batna-content.pack" --out "$out/feed"
+  --asset "content=$out/pack/batna-content.pack" --asset "content-text=$out/pack/batna-content-text.pack" \
+  --asset "content-pictures=$out/pack/batna-content-pictures.pack" --out "$out/feed"
 
 step "6. Sign with a throwaway key, verify like a device"
 secret="$($tools update keygen --public-out "$out/throwaway.pub" --force 2>/dev/null)"
@@ -72,7 +73,7 @@ $tools update verify "$out/feed" --public-key "$out/throwaway.pub" "${carried[@]
 step "7. Report"
 jq -r '"| Field | Value |\n|---|---|",
   "| channel | \(.channel) |", "| version | \(.version) build \(.build) |", "| ui_build (stylesheets) | \(.ui_build) |",
-  (.assets[] | "| \(.platform) | \(.file), \(.size) bytes, sha256 \(.sha256[0:16])…\(if .platform != "content" then " (carried, no APK built)" else "" end) |")' \
+  (.assets[] | "| \(.platform) | \(.file), \(.size) bytes, sha256 \(.sha256[0:16])…\(if (.platform | startswith("content") | not) then " (carried, no APK built)" else "" end) |")' \
   "$out/feed/update.json" | tee "$out/report.md"
 echo
 echo "Dry run passed. Nothing was uploaded; the real feed is published by CI (preview) or 'just publish-update'."

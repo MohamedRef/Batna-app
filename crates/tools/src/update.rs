@@ -19,7 +19,9 @@
 //!   once for the Keychain (`just update-keygen`) and never written to a file.
 //! - `manifest` hashes the builds and writes `update.json` next to copies of
 //!   them, ready to upload. PLATFORM is `android-arm64`, `macos-arm64`,
-//!   `macos-x86_64` or `content` (the pack from `batna-tools packs build`).
+//!   `macos-x86_64`, `content` (the pack from `batna-tools packs build`), or
+//!   `content-text` and `content-pictures` (its two parts, #1354; both or
+//!   neither, and `verify` checks they join into the `content` bytes).
 //! - `sign` signs `update.json` and checks the result against the public key.
 //! - `verify` runs the app's checks on a feed folder. `--carried PLATFORM`
 //!   names a row `--carry` kept: its file is on the release already, not in
@@ -321,7 +323,9 @@ pub fn write_manifest(
         }
         let bytes = io(path, fs::read(path))?;
         let stem = match platform {
-            UpdatePlatform::Content => "batna-content",
+            UpdatePlatform::Content | UpdatePlatform::ContentText | UpdatePlatform::ContentPictures => {
+                "batna-content"
+            }
             UpdatePlatform::MacosArm64 | UpdatePlatform::MacosX86_64 => "Batna",
             UpdatePlatform::AndroidArm64 => "batna",
         };
@@ -354,7 +358,7 @@ pub fn write_manifest(
     // The look in the pack fits the app this feed carries: a carried app is
     // older than the feed, and its screens are what the stylesheets style.
     let ui_build = assets.iter().any(|a| a.platform == UpdatePlatform::Content).then(|| {
-        let app = assets.iter().filter(|a| a.platform != UpdatePlatform::Content);
+        let app = assets.iter().filter(|a| !a.platform.is_content());
         app.map(|a| a.build.unwrap_or(build)).min().unwrap_or(build)
     });
     let m = UpdateManifest {
@@ -424,7 +428,28 @@ pub fn verify(dir: &Path, public: &str, carried: &[UpdatePlatform]) -> Res<Updat
             }
         }
     }
+    check_parts(dir, &m)?;
     Ok(m)
+}
+
+/// The content pack's parts (#1354), when the feed has them: both or
+/// neither, and joined they give the full pack's exact bytes, as a device
+/// checks before taking them.
+fn check_parts(dir: &Path, m: &UpdateManifest) -> Res<()> {
+    let (text, pictures) = (m.asset(UpdatePlatform::ContentText), m.asset(UpdatePlatform::ContentPictures));
+    let (Some(text), Some(pictures)) = (text, pictures) else {
+        return match text.or(pictures) {
+            Some(a) => Err(format!("{}: a content part without the other one", a.file)),
+            None => Ok(()),
+        };
+    };
+    let full = m.asset(UpdatePlatform::Content).ok_or("content parts without the full content pack")?;
+    let read = |a: &UpdateAsset| io(&dir.join(&a.file), fs::read(dir.join(&a.file)));
+    let joined = batna_core::pack::join_parts(&read(text)?, &read(pictures)?)
+        .map_err(|e| format!("{}: {e}", text.file))?;
+    check_download(full, joined.len() as u64, &sha256_hex(&joined))
+        .map_err(|_| format!("{} and {} don't join into {}", text.file, pictures.file, full.file))?;
+    Ok(())
 }
 
 fn now_rfc3339() -> String {
@@ -466,6 +491,73 @@ mod tests {
 
     fn strings(args: &[&str]) -> Vec<String> {
         args.iter().map(|s| (*s).to_owned()).collect()
+    }
+
+    /// #1354: a feed with the pack's two parts verifies only when they join
+    /// into the full pack's bytes, and both come together.
+    #[test]
+    fn content_parts_must_join_into_the_full_pack() {
+        let dir = tempfile::tempdir().unwrap();
+        let pub_file = dir.path().join("update-key.pub");
+        let (_, secret) = keygen(&pub_file, false).unwrap();
+        let public = fs::read_to_string(&pub_file).unwrap();
+        let write = |name: &str, bytes: &[u8]| {
+            let p = dir.path().join(name);
+            fs::write(&p, bytes).unwrap();
+            p
+        };
+        let pack = batna_core::pack::Pack::decode(&sample_pack("first")).unwrap();
+        let (text, pictures) = pack.split();
+        let full = write("full.pack", &pack.encode());
+        let text = write("text.pack", &text.encode());
+        let pictures = write("pictures.pack", &pictures.encode());
+        let other = write(
+            "other.pack",
+            &batna_core::pack::Pack::decode(&sample_pack("other")).unwrap().split().0.encode(),
+        );
+        let feed = |name: &str, files: &[(UpdatePlatform, &PathBuf)]| {
+            let out = dir.path().join(name);
+            let files: Vec<_> = files.iter().map(|(p, f)| (*p, (*f).clone())).collect();
+            let m = write_manifest(
+                &out,
+                Channel::Alpha,
+                "1.0.0-alpha.2",
+                0,
+                None,
+                &files,
+                &[],
+                WhatsNew::default(),
+            )
+            .unwrap();
+            sign(&out, &secret, &public).unwrap();
+            (out, m)
+        };
+        let (good, m) = feed(
+            "good",
+            &[
+                (UpdatePlatform::Content, &full),
+                (UpdatePlatform::ContentText, &text),
+                (UpdatePlatform::ContentPictures, &pictures),
+            ],
+        );
+        assert_eq!(
+            m.asset(UpdatePlatform::ContentText).unwrap().file,
+            "batna-content-1.0.0-alpha.2-content-text.pack"
+        );
+        assert_eq!(m.ui_build, Some(0), "parts are content, not an app build");
+        verify(&good, &public, &[]).unwrap();
+        let (bad, _) = feed(
+            "bad",
+            &[
+                (UpdatePlatform::Content, &full),
+                (UpdatePlatform::ContentText, &other),
+                (UpdatePlatform::ContentPictures, &pictures),
+            ],
+        );
+        assert!(verify(&bad, &public, &[]).unwrap_err().contains("don't join"));
+        let (half, _) =
+            feed("half", &[(UpdatePlatform::Content, &full), (UpdatePlatform::ContentText, &text)]);
+        assert!(verify(&half, &public, &[]).unwrap_err().contains("without the other one"));
     }
 
     #[test]

@@ -134,3 +134,28 @@ fn a_finished_lesson_reads_as_not_done_until_undo() {
     s.read(|| undo(&review, &Scope::Course("hb".into()))).unwrap();
     assert_eq!(s.read(|| crate::learn::mark(&lesson)), Some(mark));
 }
+
+/// #1353: another device's clock ran fast, so the reset carries a time 3
+/// minutes ahead of this one. A lesson finished right after it is done.
+#[test]
+fn a_lesson_finished_just_after_a_reset_ahead_of_this_clock_reads_as_done() {
+    scratch();
+    let (s, _) = mount(Some("hb"));
+    let lesson =
+        Library::get().lessons.values().find(|f| f.lecture.starts_with("hb.")).unwrap().lessons[0].id.clone();
+    let ahead = batna_protocol::hlc::Hlc {
+        wall_ms: crate::store::now_ms() + 180_000,
+        counter: 0,
+        device: "fast".into(),
+    };
+    let store = crate::store::shared();
+    store.put_setting(&Scope::Course("hb".into()).key(), &Marker::new(ahead)).unwrap();
+    s.read(reload);
+    let plain = crate::learn::Mark { done_ms: crate::store::now_ms(), right: 1, asked: 1 };
+    store.put_setting(&format!("lesson.{lesson}"), &plain).unwrap();
+    assert_eq!(s.read(|| crate::learn::mark(&lesson)), None, "the plain clock reads as before the reset");
+    let mark = crate::learn::Mark { done_ms: s.read(|| stamp(&lesson)), right: 1, asked: 1 };
+    store.put_setting(&format!("lesson.{lesson}"), &mark).unwrap();
+    assert_eq!(s.read(|| crate::learn::mark(&lesson)), Some(mark));
+    s.read(|| undo(&use_context::<Review>(), &Scope::Course("hb".into()))).unwrap();
+}

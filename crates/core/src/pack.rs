@@ -17,6 +17,10 @@ use crate::content::{Index, Lecture};
 use crate::lesson::LessonFile;
 use crate::program::Program;
 
+#[path = "pack_parts.rs"]
+pub mod parts;
+pub use parts::{PICTURES_MAGIC, Pictures, join_parts};
+
 /// The first bytes of every pack. Bump the digit when the layout changes.
 pub const MAGIC: &[u8; 8] = b"BATNAPK1";
 
@@ -239,12 +243,12 @@ impl Pack {
 mod tests {
     use super::*;
 
-    fn sample() -> Lecture {
+    pub(super) fn sample() -> Lecture {
         let text = include_str!("../../../fixtures/content/sample.yaml");
         serde_yaml_ng::from_str(text).unwrap()
     }
 
-    fn index() -> Index {
+    pub(super) fn index() -> Index {
         serde_yaml_ng::from_str(
             "schema: batna.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n  - { id: hb.L02, title: Two, pages: [23, 36], chunk: 10 }\n",
         )

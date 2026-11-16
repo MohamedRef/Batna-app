@@ -216,6 +216,11 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   metered network a manual download asks first (`stage::MeteredConfirm`,
   mounted once in the shell); «استنى الواي فاي» sets `prefs.wifi_download`
   and the next unmetered `step` downloads it, in any mode.
+- The content pack also ships in two parts (#1354, RELEASE.md § Content
+  packs): text (~7 MB) and pictures (~16 MB). A device downloads the text,
+  reuses its kept pictures part when the hash is the same, and takes the
+  joined result only if it hashes to the signed full pack; otherwise it
+  downloads the full pack. Older apps fetch the full pack as before.
 - The content pack has its own lock (`Updater::content_job`), apart from the
   check/download/install lock (`job`): a tap on «نزّلها» or «ثبّتها» waits
   for a running job instead of being dropped, and never waits for the pack.
@@ -677,7 +682,10 @@ out progress in scope at or before the marker:
   cards). An offline device's older answers that sync later stay out; its
   answers after the reset count;
 - lesson marks `lesson.<id>` and places `lessonpos.<id>` by wall time
-  (`crate::reset::counts_at`, used by `learn::mark`, the player, `part_way`);
+  (`crate::reset::counts_at`, used by `learn::mark`, the player, `part_way`).
+  They are stamped with `crate::reset::stamp` (#1353): now, or just after a
+  covering marker whose time is ahead of this clock (its HLC followed a
+  faster device), so a lesson finished right after a reset reads as done;
 - finished papers only when a whole-curriculum reset ticked them (`papers`);
 - own cards' schedules restart only with `reset.all` (their ids are `own.…`).
 
@@ -692,6 +700,10 @@ is still due; the whole curriculum ends it. Tests: `store/backend/reset_tests.rs
 (sync with an offline tablet, restore, exact undo, answer undo, untouched
 tables, export/import) and `reset/tests.rs` (the card by taps).
 
+Settings › بياناتك shows the last backup saved on this device (time and
+rows, device-only `local.backup.last`, written by every export and the
+reset's backup) and, when it is over two weeks old (or none was made) and he
+has answered something since, one quiet line suggesting a new one (#1353).
 ### Full-text search (#1350)
 
 - `batna_core::search`: one `Index` of every lesson step's shown text
@@ -805,19 +817,24 @@ further; don't change FSRS or Undo speculatively.
   `apt-mirrors.txt`) to the chosen mirror and time-boxes each try (on
   2026-11-11 both ubuntu.com names failed DNS and jobs hung for an hour).
 
-## 11. Current state (2026-11-09)
+## 11. Current state (2026-11-16)
+
+Refresh this table (and its date) in any PR that changes one of its rows.
+Releases are not in git: `gh release list -R MohamedRef/Batna-app` (or the
+repo's Releases page) is the truth for the Releases row; content numbers
+come from `batna-tools packs build --check` (its last line).
 
 | Area | State |
 |---|---|
-| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, start over per course, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync (with «زامن دلوقتي»), password login, OTA app + content updates, web |
-| Releases | `v2026.11.2` (2026-11-08, alpha; = main `d6214ce`, adds the تحشيشة reminders). `v2026.11.1` earlier that day (lesson focus layout, own highlights, brand B0). Last old-style: `batna-v1.0.0-alpha.3` (2026-11-06); the alpha.4 bump (#766) was never released. Previews every 4 h |
-| Content | 9 courses, 141 lectures, 141 lesson files; `res` L01–L20 written; L02–L11 checked against the enriched lecture copies, and res.L02 against its video recording (2026-11-11). Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
+| App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings and book figures), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, full-text search, start over per course, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync (with «زامن دلوقتي»), password login, OTA app + content updates (what's new by course), web |
+| Releases | `v2026.11.13` (2026-11-16, alpha, = main `ba56f9d`); `v2026.11.12` (2026-11-15, `5b4d024`). Alpha only when Mohamed says so; previews every 4 h. Beta and stable feeds are not published (the app reads their 404 as "nothing here yet") |
+| Content | 9 courses, 141 lectures, 1,059 lessons in 141 lesson files, 15,557 items, 936 lesson pictures (18 MB, book figures and open-licence images; 2026-11-16). 2026-11-13 to 11-15: lesson depth passes, book figures placed in lessons at their pages (#983) and on cards/MCQs/cases (#1154). `res` L01–L20 written and checked against the enriched lecture copies. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
 | Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
-| Critic loop | Final round (pass 10) finished 2026-11-04; loop closed. Don't start another unless Mohamed asks |
-| Open PRs / issues | None on 2026-11-09 |
+| Critic / review rounds | Restarted at Mohamed's ask on 2026-11-13: strength reviews #820 (11-13) and #1356 (11-16), with rounds on 11-14 and 11-15 too. Each round files issues; owners fix and merge |
+| Open PRs / issues | On 2026-11-16: the #1356 round (#1349–#1355); #1350 merged (#1362), #1349 merged (#1360), #1353 and #1355 merged (#1363), #1354 in this PR |
 | Coverage | 95.05% when last measured (2026-11-04); floor 94 |
 
 ### Open work and known gaps
@@ -849,6 +866,10 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-16: Today says when a content update fixed items he marked ✗ (#1352 point 4): one note, «راجعهم دلوقتي» opens them in a session, «تمام» hides it (synced `verify.fixed_seen`; § 10 Content-check file).
+- 2026-11-16: content pack in parts (#1354): `packs build` writes `batna-content-text.pack` and `batna-content-pictures.pack`; feeds list them as `content-text` / `content-pictures`; devices fetch the text and keep unchanged pictures, joined bytes checked against the signed full pack.
+- 2026-11-16: § 11 Current state refreshed (#1355): release v2026.11.13, 1,059 lessons / 15,557 items / 936 pictures, review rounds since 11-13, open work; it now says where the release and content numbers come from.
+- 2026-11-16: #1353: Settings › بياناتك shows the last backup on this device and a quiet line when it is old; lesson marks and places after a reset are stamped after the marker, so a lesson finished right after «ابدأ من الأول» reads as done even when the marker's time is ahead of this clock.
+- 2026-11-16: longest-option cue rewrites in all 9 courses (#1349), worst lectures first: about 1,260 wrong options given the key's shape and length (4 keys trimmed), every lecture at or under a third per kind; case steps 52.8% → 13.9%, lesson checks 47.3% → 19.3%, lesson mini-case steps 54.2% → 13.2%; ceilings 14 / 19.5 / 13.5%. All `status: unverified`.
 - 2026-11-16: full-text search (#1350): the Lessons screen and ⌘K find words inside lesson steps, cards and questions, open the lesson at the step with the word marked, and the item where it plays (§ 10 Full-text search).
 - 2026-11-16: verdicts read key (#1352 point 3): Settings › Sync makes a key that reads only his ✓ ✎ ✗ marks (`GET /v1/verdicts`); `batna-tools verdicts --cloud` builds the fix list from Batna Cloud with `BATNA_VERDICTS_KEY` (§ 10 Content-check file, docs/CLOUD.md § 4.2).
 - 2026-11-16: Updates: a channel with no feed (404, beta and stable today) is "nothing published here yet", not a network failure; picking one is refused with a note, and a device already on one gets one tap back to alpha (#1351).

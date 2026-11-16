@@ -60,3 +60,17 @@ pub const T_REVIEWS: &str = "المراجعات";
 pub const T_CHECKS: &str = "علاماتك على المحتوى";
 pub const T_SETTINGS: &str = "الإعدادات";
 pub const T_OWN: &str = "كروتك";
+
+// The last backup on this device (#1353).
+pub const TODAY: &str = "النهارده";
+pub const YESTERDAY: &str = "امبارح";
+/// "من 3 أيام".
+pub fn days_ago(n: i64) -> String {
+    format!("من {}", super::count::count(n.max(0) as u64, &super::count::DAY))
+}
+/// "آخر نسخة: امبارح · 12400 حاجة".
+pub fn last_backup(when: &str, rows: u64) -> String {
+    format!("آخر نسخة على الجهاز ده: {when} · {}", super::count::count(rows, &super::count::THING))
+}
+pub const NO_BACKUP_YET: &str = "لسه ما اتحفظتش نسخة على الجهاز ده.";
+pub const BACKUP_OLD: &str = "ذاكرت من بعد آخر نسخة. لو الجهاز ده مش متزامن مع Batna Cloud، النسخة دي هي الحفظ الوحيد لمذاكرتك، فاحفظ واحدة جديدة وقت ما يناسبك.";

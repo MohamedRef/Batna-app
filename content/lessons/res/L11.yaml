@@ -326,7 +326,7 @@ lessons:
         page: 27
         quote: "Systematic sampling is usually less time consuming and easier to perform than simple random sampling. However, there is a risk of bias, as the sampling interval may coincide with a systematic variation in the sampling frame.\nFor instance, if we want to select a random sample of days on which to count clinic attendance, systematic sampling with a sampling interval of 7 days would be inappropriate, as all study days would fall on the same day of the week, which might, for example, be market day."
         question: "Why is a 7-day interval wrong for sampling days to count clinic attendance?"
-        options: ["The interval coincides with the weekly cycle, so every study day is the same weekday", "Seven days give too small a sample", "Systematic sampling cannot be used for days", "It needs a sampling frame of patients"]
+        options: ["The interval coincides with the weekly cycle, so every study day is the same weekday", "Seven days give too small a sample", "Systematic sampling cannot be used for days, only for numbered lists of individual patients", "It needs a sampling frame of patients"]
         answer: 0
         why:
           - "صح: الـ interval طابق تكرار أسبوعي في الـ frame، فده bias."
@@ -422,7 +422,7 @@ lessons:
             answer: 0
             why: "**Equal allocation** = عدد متساوي من كل stratum: 100 + 100."
           - question: "In the equal-allocation sample, what does the analysis need?"
-            options: ["Weighting, so the males count proportionally more", "Nothing, randomization fixes it", "Dropping 40 females"]
+            options: ["Weighting, so the males count proportionally more", "Nothing, because random selection within each stratum fixes it", "Dropping 40 females"]
             answer: 0
             why: "كل ست فرصتها أعلى، فالستات **overrepresented**؛ الـ **weighting** بيرجّع النسب الحقيقية."
       - kind: figure
@@ -580,7 +580,7 @@ lessons:
         page: 43
         quote: "Advantages :\nCuts down on the cost of preparing a sampling frame.\nThis can reduce travel and other administrative costs.\nDisadvantages:\nsampling error is higher over a simple random sample of same size."
         question: "What is the main disadvantage of cluster sampling?"
-        options: ["Higher sampling error than a simple random sample of the same size", "It needs a complete list of every individual", "It raises travel costs", "It cannot be random"]
+        options: ["Higher sampling error than a simple random sample of the same size", "It needs a complete sampling frame listing every individual in the population", "It raises travel costs", "It cannot be random"]
         answer: 0
         why:
           - "صح: الناس جوه الـ cluster الواحدة شبه بعض أكتر، فالـ sampling error أعلى."
@@ -967,7 +967,7 @@ lessons:
         page: 70
         quote: "A higher power is chosen\nA smaller significance level is chosen (Alpha)\nThe data have a high SD.\nA small effect size is expected (Difference between means or proportions)"
         question: "Which change makes the required sample size smaller?"
-        options: ["Expecting a larger effect size", "Raising power to 90%", "Lowering alpha to 1%", "Data with a higher SD"]
+        options: ["Expecting a larger effect size", "Raising power to 90%", "Lowering alpha to 1%", "Data with a higher standard deviation"]
         answer: 0
         why:
           - "صح: الفرق الكبير سهل تشوفه بعدد أقل."
@@ -1090,7 +1090,7 @@ lessons:
         stem: "Cohort study: outcome in 25% of the unexposed and 38% of the exposed, equal groups, 95% confidence, 80% power."
         steps:
           - question: "Which StatCalc module do you open?"
-            options: ["Cohort or cross-sectional", "Population survey", "Unmatched case-control"]
+            options: ["Cohort or cross-sectional", "Population survey or descriptive study", "Unmatched case-control"]
             answer: 0
             why: "الـ cohort بيقارن **outcome** في exposed و unexposed؛ ده module الـ **cohort or cross-sectional**."
           - question: "What is the risk ratio you are trying to detect?"
@@ -1098,14 +1098,14 @@ lessons:
             answer: 0
             why: "RR = 38% ÷ 25% = **1.52**. الـ 1.84 ده الـ odds ratio."
           - question: "How many per group (Kelsey)?"
-            options: ["201 exposed + 201 unexposed", "200 + 200", "215 + 215"]
+            options: ["201 exposed + 201 unexposed", "200 exposed + 200 unexposed", "215 exposed + 215 unexposed"]
             answer: 0
             why: "Kelsey = **201** لكل مجموعة (402). Fleiss = 200، و Fleiss + CC = 215."
       - kind: check
         page: 87
         quote: "Unmatched Cohort and Cross-Sectional Studies (Exposed and Nonexposed)\nTwo-sided confidence level: 95%\nPower: 80%\nRatio (Unexposed : Exposed): 1\n% outcome in unexposed group: 4.9%\nRisk ratio: 3.67347\nOdds ratio: 4.26033\n% outcome in exposed group: 18%\n| | Kelsey | Fleiss | Fleiss w/ CC |\n|---|---|---|---|\n| Exposed | 93 | 92 | 107 |\n| Unexposed | 93 | 92 | 107 |\n| Total | 186 | 184 | 214 |"
         question: "The CMV example: 18% versus 4.9% (risk ratio 3.67). Compared with the 38% versus 25% cohort (201 per group), the sample is"
-        options: ["Smaller: 93 per group (Kelsey)", "Larger: 402 per group", "The same: 201 per group", "Smaller: 25 per group"]
+        options: ["Smaller: 93 per group (Kelsey)", "Larger: 402 per group", "The same: 201 per group (Kelsey)", "Smaller: 25 per group"]
         answer: 0
         why:
           - "صح: الفرق أكبر بكتير (effect size كبير)، فعينة أصغر بتكفي."

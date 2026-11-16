@@ -47,7 +47,9 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     let id = lesson.id.clone();
     // The saved attempt, restored before any step decides Check or Continue.
     let start = use_hook(|| {
-        let now = crate::store::now_ms();
+        // After a reset whose time is ahead of this clock, a new attempt
+        // still starts after it (#1353).
+        let now = crate::reset::stamp(&id);
         // BATNA_LESSON_STEP=4 opens at that step (1-based), for screenshots.
         let preview = std::env::var("BATNA_LESSON_STEP").ok().and_then(|s| s.parse::<usize>().ok());
         if let Some(s) = preview {
@@ -136,7 +138,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 // Done only once the mark and the cleared place are saved
                 // together; otherwise stay on the last step and say so.
                 let (right, asked) = attempt.peek().score(&lesson);
-                if !finish(&id, Mark { done_ms: crate::store::now_ms(), right, asked }) {
+                if !finish(&id, Mark { done_ms: crate::reset::stamp(&id), right, asked }) {
                     unsaved.set(true);
                     finishing.set(true);
                     return;

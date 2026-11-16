@@ -28,6 +28,7 @@
 //! Batna: `BATNA_*` build variables, the content pack (in place of Kabar's
 //! offline packs), and one language.
 
+mod parts;
 mod recovery;
 mod service;
 
@@ -575,6 +576,8 @@ fn write_json(dir: &Path, name: &str, value: &impl Serialize) -> Result<(), Stri
     fs::rename(&tmp, dir.join(name)).map_err(|e| e.to_string())
 }
 
+#[cfg(test)]
+mod parts_tests;
 #[cfg(test)]
 mod tests;
 #[cfg(test)]

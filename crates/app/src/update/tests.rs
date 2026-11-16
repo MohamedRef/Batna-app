@@ -61,7 +61,7 @@ fn the_settings_list_says_where_updates_stand() {
     assert_eq!(view::summary(&s), None);
 }
 
-fn build(version: &str, build: u64, preview: bool) -> BuildInfo {
+pub(super) fn build(version: &str, build: u64, preview: bool) -> BuildInfo {
     let key = include_str!("../../../../fixtures/update/test-key.pub");
     BuildInfo {
         version: Version::parse(version).unwrap(),
@@ -163,11 +163,11 @@ fn serve(dir: PathBuf) -> String {
 }
 
 /// Requests seen: (path, Range header).
-type Seen = std::sync::Arc<Mutex<Vec<(String, Option<String>)>>>;
+pub(super) type Seen = std::sync::Arc<Mutex<Vec<(String, Option<String>)>>>;
 
 /// A tiny file server that honours `Range: bytes=N-`. With `cut`, the
 /// first whole-file answer for an `.apk` stops after that many bytes.
-fn serve_logged(dir: PathBuf, cut: Option<usize>) -> (String, Seen) {
+pub(super) fn serve_logged(dir: PathBuf, cut: Option<usize>) -> (String, Seen) {
     use std::io::{BufRead as _, BufReader};
     let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
     let url = format!("http://{}", listener.local_addr().unwrap());
@@ -291,12 +291,12 @@ fn fixture_feed() -> tempfile::TempDir {
     feed
 }
 
-fn updater(feed: &str, info: BuildInfo) -> (&'static Updater, tempfile::TempDir) {
+pub(super) fn updater(feed: &str, info: BuildInfo) -> (&'static Updater, tempfile::TempDir) {
     let data = tempfile::tempdir().unwrap();
     (updater_in(data.path(), feed, info), data)
 }
 
-fn updater_in(data: &Path, feed: &str, info: BuildInfo) -> &'static Updater {
+pub(super) fn updater_in(data: &Path, feed: &str, info: BuildInfo) -> &'static Updater {
     let mut u = Updater::new(
         data.join("updates"),
         info,

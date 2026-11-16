@@ -378,8 +378,10 @@ quote cap there is outdated), course briefs in [courses/](courses/).
     wrong option of a question. `batna-tools cue` prints it per kind;
     `the_long_pair_stays_under_its_ceiling` fails above `Kind::pair_ceiling`
     (2026-11-16: MCQs 21.1%, case steps 0.0%, lesson checks 32.1%, lesson
-    mini-cases 40.7%). The case steps of all nine courses are done; lesson
-    checks, lesson mini-cases and authored MCQs are open.
+    mini-cases 0.2%). Case steps and lesson mini-cases are done for all nine
+    courses (the one mini-case left, `res.L06.lesson4`, is the book's own
+    printed question and stays as printed); lesson checks and authored MCQs
+    are open.
 
 ## 8. Sources outside git (important)
 
@@ -873,6 +875,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: long-pair cue, lesson mini-cases (#1366): 459 wrong options in 254 mini-case questions across the nine courses rewritten the full way; lesson mini-cases 40.7% → 0.2%, ceiling 0.5%. The one left is the book's printed question in `res.L06.lesson4`. Where one option clearly stands out as the longest, it is the key in 24% of mini-cases and 23% of case steps (chance 25–26%), so no reverse cue was created.
 - 2026-11-16: long-pair cue, last five courses' case steps (#1366): 400 wrong options in 196 case steps of endo, geri, git, neph and rheum (and one left in hem) rewritten the full way; case steps 14.4% → 0.0%, ceiling 0.5%. Every course's case steps are done.
 - 2026-11-16: long-pair cue, research (#1366): 72 wrong options in 36 res case steps rewritten the full way; case steps 17.0% → 14.4%, ceiling 14.5%. The three semester 1 courses (res, hem, hb) and dm are done.
 - 2026-11-16: long-pair cue, hepatology (#1366): 139 wrong options in 70 hb case steps rewritten the full way; case steps 22.2% → 17.0%, ceiling 17.5%.

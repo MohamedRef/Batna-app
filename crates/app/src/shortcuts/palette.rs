@@ -33,6 +33,16 @@ enum Destination {
     BankLecture(String),
     /// A printed page of a course's book, in this lecture (`crate::gopage`).
     Page(u32, String),
+    /// A lesson at the step that teaches the searched words (#1350).
+    LessonAt {
+        lesson: String,
+        step: usize,
+        query: String,
+    },
+    /// A card or question that holds the searched words.
+    Item(String),
+    /// Every full-text result, on the Lessons screen.
+    AllResults(String),
 }
 
 #[derive(Clone, Debug)]
@@ -179,7 +189,55 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
         }
     });
     hits.truncate(MAX_RESULTS);
+    content_hits(query, lib, &mut hits);
     hits
+}
+
+/// Lesson steps and items holding the words (#1350): a few of each after
+/// the title hits, then one row to see them all on the Lessons screen.
+fn content_hits(query: &str, lib: &Library, hits: &mut Vec<Hit>) {
+    const LESSONS: usize = 3;
+    const ITEMS: usize = 2;
+    let Some(found) = crate::search::find(query) else { return };
+    if found.is_empty() {
+        return;
+    }
+    let titled = |id: &str| hits.iter().any(|h| h.destination == Destination::Lesson(id.to_string()));
+    let lessons: Vec<_> =
+        found.lessons.iter().filter(|h| !titled(&h.lesson)).take(LESSONS).cloned().collect();
+    let room = MAX_RESULTS.saturating_sub(lessons.len() + ITEMS.min(found.items.len()) + 1);
+    hits.truncate(room);
+    for h in lessons {
+        let Some((_, l)) = lib.lesson(&h.lesson) else { continue };
+        let quote = crate::search::step_snippet(&h.lesson, h.step, query)
+            .map(|s| format!("{}{}{}", s.before, s.hit, s.after))
+            .unwrap_or_default();
+        hits.push(Hit {
+            id: format!("text-{}-{}", h.lesson, h.step),
+            name: l.title.clone(),
+            subtitle: tx::in_lesson(&lib.crumb(&h.lesson), &quote),
+            destination: Destination::LessonAt {
+                lesson: h.lesson.clone(),
+                step: h.step,
+                query: query.trim().to_string(),
+            },
+        });
+    }
+    for id in found.items.iter().take(ITEMS) {
+        let Some(quote) = crate::search::item_snippet(id, query) else { continue };
+        hits.push(Hit {
+            id: format!("item-{id}"),
+            name: format!("{}{}{}", quote.before, quote.hit, quote.after),
+            subtitle: tx::item(&lib.crumb(id)),
+            destination: Destination::Item(id.clone()),
+        });
+    }
+    hits.push(Hit {
+        id: "all-results".into(),
+        name: tx::all_results(found.lessons.len(), found.items.len()),
+        subtitle: tx::KIND_ALL_RESULTS.into(),
+        destination: Destination::AllResults(query.trim().to_string()),
+    });
 }
 
 /// Follow the same navigation code paths as tapping the existing screen,
@@ -213,6 +271,18 @@ fn activate(target: Destination, mut ui: Ui, settings: SettingsNav) {
         Destination::Page(page, lecture) => {
             settings.close();
             crate::gopage::go(page, &lecture);
+        }
+        Destination::LessonAt { lesson, step, query } => {
+            settings.close();
+            crate::search::open_step(ui, &lesson, step, &query);
+        }
+        Destination::Item(id) => {
+            settings.close();
+            crate::search::open_item(ui, &id);
+        }
+        Destination::AllResults(query) => {
+            settings.close();
+            crate::learn::search_for(ui, &query);
         }
     }
 }
@@ -401,6 +471,25 @@ mod tests {
         assert!(hits.iter().any(|h| h.destination == Destination::BankLecture(lecture.id.clone())));
         assert!(bank_query("bank").is_none());
         assert!(bank_query("questions ").is_none());
+    }
+
+    #[test]
+    fn a_word_inside_lessons_and_cards_is_offered_with_all_results() {
+        let lib = Library::get();
+        let hits = find("tolvaptan", lib);
+        assert!(hits.len() <= MAX_RESULTS);
+        let at = hits.iter().find_map(|h| match &h.destination {
+            Destination::LessonAt { lesson, step, query } => Some((lesson.clone(), *step, query.clone())),
+            _ => None,
+        });
+        let (lesson, step, query) = at.expect("a lesson that teaches it");
+        assert_eq!(query, "tolvaptan");
+        let (_, l) = lib.lesson(&lesson).unwrap();
+        assert!(batna_core::search::fold(&l.steps[step].shown_text().join(" ")).contains("tolvaptan"));
+        assert!(hits.iter().any(|h| matches!(h.destination, Destination::Item(_))));
+        assert_eq!(hits.last().map(|h| &h.destination), Some(&Destination::AllResults("tolvaptan".into())));
+        // Short or empty queries add none of these.
+        assert!(find("to", lib).iter().all(|h| !matches!(h.destination, Destination::AllResults(_))));
     }
 
     #[test]

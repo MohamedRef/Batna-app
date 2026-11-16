@@ -96,6 +96,13 @@ pub fn forget() {
     *FROM.write() = Screen::Learn;
 }
 
+/// The Lessons list searching `query` (the quick search's «كل النتايج»).
+pub fn search_for(mut ui: Ui, query: &str) {
+    forget();
+    *QUERY.write() = query.to_string();
+    ui.screen.set(Screen::Learn);
+}
+
 /// Enter a chosen course's catalogue without a stale search or selected
 /// lecture; completion data and saved list-view preferences remain intact.
 pub(crate) fn reset_course_browse() {
@@ -725,8 +732,11 @@ fn Results(q: String, next_id: Option<String>) -> Element {
         })
         .collect();
     let layout = LESSONS_VIEW.pick().layout;
+    // Lessons the titles already list; the full-text results add the rest.
+    let skip: Vec<String> = groups.iter().flat_map(|(_, _, h)| h.iter().map(|(_, l)| l.id.clone())).collect();
+    let nothing = groups.is_empty() && crate::search::find(&q).is_none_or(|f| f.is_empty());
     rsx! {
-        if groups.is_empty() {
+        if nothing {
             p { class: "note", role: "status", {tx::no_match(&q)} }
             if crate::courses::focus::current().is_some() {
                 button {
@@ -755,6 +765,7 @@ fn Results(q: String, next_id: Option<String>) -> Element {
                 }
             }
         }
+        crate::search::FullText { q: q.clone(), skip }
     }
 }
 

@@ -39,6 +39,7 @@ pub mod refs;
 pub mod remind;
 pub mod reset;
 pub mod saving;
+pub mod search;
 pub mod settings;
 pub mod sheet;
 pub mod sound;

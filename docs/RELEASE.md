@@ -196,7 +196,8 @@ file name, about 16 MB; `batna_core::pack::Pictures`). Feeds list them as
 `update verify` checks both are there and join into the full pack's exact
 bytes (`pack::join_parts`; the build refuses parts that don't). A device
 deciding to take a new pack downloads the text part, takes the pictures
-from its own copy (`updates/pictures-<sha256>.pack`, `update/parts.rs`)
+from its own copy (`updates/content.pictures-<sha256>.pack`, `update/parts.rs`;
+named `content.*` so the routine clean-up of the updates folder keeps it, #1367)
 when the feed's has the same hash, else downloads them, joins, and keeps
 the result only when it hashes to the full pack's signed SHA-256. Anything
 else (no parts, a cut download, another encoder) falls back to downloading

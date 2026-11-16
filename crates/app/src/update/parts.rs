@@ -1,7 +1,13 @@
 //! This device's copy of the content pack's pictures part (#1354): one
-//! file, `pictures-<sha256>.pack`, beside the pack in use. A feed whose
-//! pictures part has the same hash is joined with it instead of
+//! file, `content.pictures-<sha256>.pack`, beside the pack in use. A feed
+//! whose pictures part has the same hash is joined with it instead of
 //! downloading 16 MB of pictures again.
+//!
+//! The name starts with `content.` on purpose: `Updater::clear_downloads`
+//! runs on every check that finds the app up to date, when an app download
+//! starts, after an install and on a channel switch, and it removes
+//! everything in the folder except the `content.*` files. Under any other
+//! name the kept part was gone before the next content update (#1367).
 
 use std::fs;
 use std::path::Path;
@@ -11,7 +17,7 @@ use batna_core::update::UpdateAsset;
 use super::sha256_hex;
 use crate::diag::report;
 
-const PREFIX: &str = "pictures-";
+pub(super) const PREFIX: &str = "content.pictures-";
 
 fn name(sha: &str) -> String {
     format!("{PREFIX}{sha}.pack")

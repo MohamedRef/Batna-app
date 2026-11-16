@@ -59,6 +59,11 @@ pub const KEY_CHANGED_STEPS: [&str; 4] = [
     "افتحها واسترجع النسخة من الإعدادات › بياناتك.",
 ];
 pub const GET_PREVIEW: &str = "نزّل آخر نسخة تجربة";
+/// A channel whose feed was never published (404), not a network failure.
+pub const NOT_PUBLISHED: &str = "لسه مفيش ولا نسخة اتنشرت على القناة دي، فمفيش منها تحديثات ولا دروس جديدة. ارجع لألفا عشان التحديثات توصلك.";
+pub const FOLLOW_ALPHA: &str = "ارجع لألفا";
+/// Under the channel picker, after a pick of an empty channel was refused.
+pub const NOTHING_PUBLISHED_YET: &str = "لسه مفيش نسخ اتنشرت عليها، فالقناة ماتغيّرتش.";
 pub const LATER: &str = "بعدين";
 pub const WHATS_NEW: &str = "الجديد";
 

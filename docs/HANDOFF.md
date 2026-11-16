@@ -176,6 +176,13 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   `docs/RELEASE.md` §1.
 - Channels: `batna-preview` (CI, every 4 h), `batna-alpha`, `batna-beta`,
   `batna-stable` (feed tags: never rename, installed apps read them).
+- **Beta and stable are not published yet** (no `batna-beta` or
+  `batna-stable` release; starting them waits on Mohamed). A 404 feed is
+  `Failure::NotPublished`, not a network failure: picking a channel probes
+  its `update.json` first and a 404 refuses the pick (`Status::unpublished`,
+  a note under the picker); a device already on an empty channel sees
+  `NOT_PUBLISHED` with «ارجع لألفا» (`Act::FollowAlpha`). Offline, the pick
+  goes through as before. Issue #1351.
 - **Alpha only when Mohamed says so** («طلّع ألفا»). Steps: Actions ›
   Release › Run workflow (channel alpha); no bump PR.
   It builds the content pack, release APK (Linux), Batna.app (macOS), signs
@@ -787,6 +794,7 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-16: longest-option cue rewrites in all 9 courses (#1349), worst lectures first: about 1,260 wrong options given the key's shape and length (4 keys trimmed), every lecture at or under a third per kind; case steps 52.8% → 13.9%, lesson checks 47.3% → 19.3%, lesson mini-case steps 54.2% → 13.2%; ceilings 14 / 19.5 / 13.5%. All `status: unverified`.
+- 2026-11-16: Updates: a channel with no feed (404, beta and stable today) is "nothing published here yet", not a network failure; picking one is refused with a note, and a device already on one gets one tap back to alpha (#1351).
 - 2026-11-16: longest-option cue for every question with options (#1349): `batna-tools cue` counts case steps (52.8%), lesson checks (47.3%) and lesson mini-case steps (54.2%) beside MCQs (24.3%), with a ceiling per kind (25 / 53 / 47.5 / 54.5%) and `--kind` / `--list`; rewrites follow, worst lectures first (content rule 15).
 - 2026-11-16: res.L09 slide 62 (blank in the deck PDF) read from the lecture video at about 37:35: the «Essential» diagram of 8 informed-consent elements; new enumerate card res.L09.123 and a lesson4 step, both checked by hand (`quote-ok`) in the res verdicts.
 - 2026-11-15: Settings › Sync «زامن دلوقتي» forces a sync now; the sync engine bounds connect/send waits, replaces silent sockets, caps its backoff at 1 minute and retries at once when the app comes back or the network returns (§ 10 Sync never stalls).

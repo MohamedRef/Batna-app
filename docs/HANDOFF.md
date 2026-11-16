@@ -377,11 +377,11 @@ quote cap there is outdated), course briefs in [courses/](courses/).
     question passes the first count and keeps the cue, so rewrite every
     wrong option of a question. `batna-tools cue` prints it per kind;
     `the_long_pair_stays_under_its_ceiling` fails above `Kind::pair_ceiling`
-    (2026-11-16: MCQs 21.1%, case steps 0.0%, lesson checks 32.1%, lesson
-    mini-cases 0.2%). Case steps and lesson mini-cases are done for all nine
-    courses (the one mini-case left, `res.L06.lesson4`, is the book's own
-    printed question and stays as printed); lesson checks and authored MCQs
-    are open.
+    (2026-11-16: MCQs 21.1%, case steps 0.0%, lesson checks 1.4%, lesson
+    mini-cases 0.2%). Case steps, lesson mini-cases and lesson checks are
+    done for all nine courses; what is left in lessons (one mini-case, 23
+    checks) repeats a question, a list or example titles the book prints, so
+    it stays as printed. Authored MCQs are open.
 
 ## 8. Sources outside git (important)
 
@@ -875,6 +875,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: long-pair cue, lesson checks (#1366): 1,009 wrong options in 489 lesson checks across the nine courses rewritten the full way; lesson checks 32.1% → 1.4%, ceiling 1.5%. The 23 left repeat what the book prints (21 printed questions, the research steps list in `res.L01.lesson2`, the example titles in `res.L03.lesson9`). Where one option clearly stands out as the longest it is now the key in 29% of checks (was 34%; chance 25%).
 - 2026-11-16: long-pair cue, lesson mini-cases (#1366): 459 wrong options in 254 mini-case questions across the nine courses rewritten the full way; lesson mini-cases 40.7% → 0.2%, ceiling 0.5%. The one left is the book's printed question in `res.L06.lesson4`. Where one option clearly stands out as the longest, it is the key in 24% of mini-cases and 23% of case steps (chance 25–26%), so no reverse cue was created.
 - 2026-11-16: long-pair cue, last five courses' case steps (#1366): 400 wrong options in 196 case steps of endo, geri, git, neph and rheum (and one left in hem) rewritten the full way; case steps 14.4% → 0.0%, ceiling 0.5%. Every course's case steps are done.
 - 2026-11-16: long-pair cue, research (#1366): 72 wrong options in 36 res case steps rewritten the full way; case steps 17.0% → 14.4%, ceiling 14.5%. The three semester 1 courses (res, hem, hb) and dm are done.

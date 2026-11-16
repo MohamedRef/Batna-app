@@ -2,7 +2,7 @@
 //! item, [`VerifyBar`] asks ✓ صح / ✎ عدّل / ✗ غلط. The study player puts it
 //! above the grade row; it renders nothing when the item needs no check.
 
-mod export;
+pub(crate) mod export;
 #[cfg(test)]
 mod flow;
 
@@ -10,7 +10,7 @@ use batna_core::content::Body;
 use batna_core::review::verify::{self, Check, Edit, FieldValue, Verdict};
 use dioxus::prelude::*;
 
-pub use export::ExportVerdicts;
+pub use export::{ExportVerdicts, waiting_wrong};
 
 use crate::i18n::verify as tx;
 use crate::look::{Css, css};

@@ -9,6 +9,7 @@ pub mod haptics;
 pub mod install;
 pub mod network;
 pub mod reminders;
+pub mod share;
 pub mod system_bars;
 pub mod time;
 pub mod tts;

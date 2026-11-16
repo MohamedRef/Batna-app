@@ -691,6 +691,28 @@ is still due; the whole curriculum ends it. Tests: `store/backend/reset_tests.rs
 (sync with an offline tablet, restore, exact undo, answer undo, untouched
 tables, export/import) and `reset/tests.rs` (the card by taps).
 
+### Content-check file (✓ ✎ ✗ export, #1352)
+
+- Settings › Your data › «صدّر مراجعاتك للمحتوى» (`verify/export.rs`) writes
+  `batna-verdicts-<date>.yaml` and remembers the last file in the synced
+  setting `verify.exported` (`{at_ms, verdicts}`), so a file made on the Mac
+  counts on the phone too. The card says when the last file was made and how
+  many marks it held, and lists marks given since («لسه مش في ملف: ✗ 7 · ✎ 3»;
+  `batna_core::review::verify::Unsent`).
+- «ابعت الملف» (Android and Mac) writes the file and opens the system share
+  menu with it attached: `platform/share.rs`; Android `ShareFile.kt` copies it
+  to `cache/share/` and serves it read-only through `ShareFileProvider`
+  (authority `<package>.share`, one-off URI grant); Mac `NSSharingServicePicker`
+  on the key window. «احفظه بس» keeps the old save (Android "Save to"). The
+  web has no share button: its one button downloads the file.
+- Making the file counts as sent (the share menu does not say where it went).
+- Today shows one quiet line («N علامة علّمت عليها ✗ لسه ما اتبعتتش للتصليح»,
+  opens Settings › Your data) once the oldest unsent ✗ is 3 days old
+  (`verify::export::WAIT_MS`).
+- Not built yet: `batna-tools verdicts` pulling `item_status` from Batna Cloud
+  (plan sent to Mohamed first, per his ask), and telling him when a content
+  update fixed items he marked ✗.
+
 ### Desktop (Mac) layout
 
 - Full-window canvas, wider labelled sidebar, 1280×820 default window (#739).
@@ -795,6 +817,7 @@ state; details live in the PR and in § 10.
 
 - 2026-11-16: Updates: a channel with no feed (404, beta and stable today) is "nothing published here yet", not a network failure; picking one is refused with a note, and a device already on one gets one tap back to alpha (#1351).
 - 2026-11-16: longest-option cue for every question with options (#1349): `batna-tools cue` counts case steps (52.8%), lesson checks (47.3%) and lesson mini-case steps (54.2%) beside MCQs (24.3%), with a ceiling per kind (25 / 53 / 47.5 / 54.5%) and `--kind` / `--list`; rewrites follow, worst lectures first (content rule 15).
+- 2026-11-16: content-check export remembers the last file (synced `verify.exported`), shows marks not in it yet, sends it through the Android/Mac share menu in one tap, and Today mentions unsent ✗ after 3 days (#1352; § 10 Content-check file).
 - 2026-11-16: res.L09 slide 62 (blank in the deck PDF) read from the lecture video at about 37:35: the «Essential» diagram of 8 informed-consent elements; new enumerate card res.L09.123 and a lesson4 step, both checked by hand (`quote-ok`) in the res verdicts.
 - 2026-11-15: Settings › Sync «زامن دلوقتي» forces a sync now; the sync engine bounds connect/send waits, replaces silent sockets, caps its backoff at 1 minute and retries at once when the app comes back or the network returns (§ 10 Sync never stalls).
 - 2026-11-15: What's new finishes #1340: a digest line per release (changes, courses, the busiest course), a box of lessons you had finished that the release changed (each opens), and changelog search with course and kind filters across every kept build.

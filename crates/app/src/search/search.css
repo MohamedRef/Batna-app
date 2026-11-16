@@ -1,0 +1,17 @@
+/* Full-text results on the Lessons screen (#1350). */
+.sr-full { display: grid; gap: var(--sp-2); margin-block-start: var(--sp-4); }
+.sr-courses { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.sr-course { min-block-size: var(--tap); cursor: pointer; }
+.sr-course[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+.sr-head { margin-block-start: var(--sp-3); }
+.sr-main { gap: var(--sp-1); }
+.sr-title { font-weight: 600; }
+.sr-where { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sp-1); }
+.sr-kind { font-size: var(--fs-sm); }
+.sr-snip { display: block; overflow-wrap: anywhere; line-height: var(--lh); }
+.sr-hit { background-color: color-mix(in srgb, #f5c542 55%, transparent); color: inherit; border-radius: 4px; padding-inline: 1px; }
+/* Its own rule: a browser without ::highlight drops only this one. */
+::highlight(batna-find) { background-color: color-mix(in srgb, #f5c542 55%, transparent); color: inherit; }
+.sr-item { display: grid; }
+.sr-lesson { justify-self: start; margin-inline-start: var(--sp-4); margin-block-end: var(--sp-2); min-block-size: var(--tap); }
+.sr-more { justify-self: center; }

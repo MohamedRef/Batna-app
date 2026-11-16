@@ -151,7 +151,7 @@ fn render(item: &Item, on_grade: EventHandler<Grade>) -> Element {
     }
 }
 
-fn kind_label(body: &Body) -> &'static str {
+pub(crate) fn kind_label(body: &Body) -> &'static str {
     match body {
         Body::Card { .. } => tx::KIND_CARD,
         Body::Cloze { .. } => tx::KIND_CLOZE,

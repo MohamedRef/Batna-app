@@ -692,6 +692,28 @@ is still due; the whole curriculum ends it. Tests: `store/backend/reset_tests.rs
 (sync with an offline tablet, restore, exact undo, answer undo, untouched
 tables, export/import) and `reset/tests.rs` (the card by taps).
 
+### Full-text search (#1350)
+
+- `batna_core::search`: one `Index` of every lesson step's shown text
+  (`Step::shown_text` plus a figure's `alt`), each lesson's title, hook,
+  goals and recap, and every non-rejected item's text (`item_text`: front,
+  back, cloze answers without markup, stem, options, why, points, outline,
+  table cells, guideline update). Folding as the calculator search, plus
+  dashes read as spaces («Child–Pugh» = «child pugh»). Every word must be in
+  one step (else anywhere in the lesson; it then opens at the step with the
+  most). Page quotes are not searched.
+- App `search/`: the index is built off the UI thread at launch (`warm`,
+  ~0.1 s on CI; the web builds it on the first search). Queries under 3
+  letters search titles only. The Lessons screen lists, under its title
+  matches, «في شرح N درس» and «في الكروت والأسئلة» with the text around the
+  word marked, a chip per course (the course in view first), 20 rows a page.
+  A lesson opens at the step (`learn::open_at`) and `mark.js` marks the words
+  with the CSS Custom Highlight API (no DOM change). An item opens where it
+  plays (study session of one item, tutor MCQ, case or calc item) and
+  «افتح الدرس اللي بيشرحها» opens its lesson at the word.
+- Tests: the issue's 12 terms each find at least the lessons and cards
+  measured in #1350 (`search/tests.rs`).
+
 ### Content-check file (✓ ✎ ✗ export, #1352)
 
 - Settings › Your data › «صدّر مراجعاتك للمحتوى» (`verify/export.rs`) writes
@@ -734,8 +756,9 @@ tables, export/import) and `reset/tests.rs` (the card by taps).
 - **⌘K / Ctrl+K palette** (#743, #744): offline, searches screens, lectures,
   lessons and calculators (Arabic-aware: the calculator search's `fold` for
   hamza, ة/ه, ى/ي, tashkeel and Arabic digits; text in `i18n/palette.rs`), opens Settings sections, and
-  `questions <lecture>` starts lecture-filtered practice. Max 12 results; no
-  per-question deep links.
+  `questions <lecture>` starts lecture-filtered practice. Max 12 results:
+  title hits first, then up to 3 lessons and 2 cards whose text holds the
+  words (§ 10 Full-text search) and a «كل النتايج» row to the Lessons screen.
 
 ### Phone layout (S24 Ultra, ~384dp)
 
@@ -826,6 +849,7 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-16: Today says when a content update fixed items he marked ✗ (#1352 point 4): one note, «راجعهم دلوقتي» opens them in a session, «تمام» hides it (synced `verify.fixed_seen`; § 10 Content-check file).
+- 2026-11-16: full-text search (#1350): the Lessons screen and ⌘K find words inside lesson steps, cards and questions, open the lesson at the step with the word marked, and the item where it plays (§ 10 Full-text search).
 - 2026-11-16: verdicts read key (#1352 point 3): Settings › Sync makes a key that reads only his ✓ ✎ ✗ marks (`GET /v1/verdicts`); `batna-tools verdicts --cloud` builds the fix list from Batna Cloud with `BATNA_VERDICTS_KEY` (§ 10 Content-check file, docs/CLOUD.md § 4.2).
 - 2026-11-16: Updates: a channel with no feed (404, beta and stable today) is "nothing published here yet", not a network failure; picking one is refused with a note, and a device already on one gets one tap back to alpha (#1351).
 - 2026-11-16: longest-option cue for every question with options (#1349): `batna-tools cue` counts case steps (52.8%), lesson checks (47.3%) and lesson mini-case steps (54.2%) beside MCQs (24.3%), with a ceiling per kind (25 / 53 / 47.5 / 54.5%) and `--kind` / `--list`; rewrites follow, worst lectures first (content rule 15).

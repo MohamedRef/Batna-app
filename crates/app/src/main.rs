@@ -54,6 +54,7 @@ mod prefs;
 mod recap;
 mod reminders;
 mod reset;
+mod search;
 mod settings;
 mod sheet;
 mod shortcuts;
@@ -191,6 +192,7 @@ fn App() -> Element {
     // Restore a validated, device-local Study queue before Today first renders.
     study::use_restore();
     cloud::use_provide_cloud();
+    use_hook(search::warm);
     #[cfg(target_arch = "wasm32")]
     platform::web::use_saver();
     reminders::use_local_reminders();

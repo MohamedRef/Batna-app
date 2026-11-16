@@ -20,6 +20,7 @@ pub mod replay;
 pub mod reset;
 pub mod response;
 pub mod review;
+pub mod search;
 pub mod session;
 pub mod srs;
 pub mod stats;

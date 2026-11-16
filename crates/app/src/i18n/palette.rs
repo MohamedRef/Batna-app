@@ -38,3 +38,25 @@ pub fn practice(context: &str) -> String {
 pub fn page(cite: &str, course: &str) -> String {
     format!("{cite} · {course}")
 }
+
+/// "درس · كبد › Liver Cirrhosis · …serum ferritin above…": a lesson that
+/// teaches the searched words, with its text around them.
+pub fn in_lesson(context: &str, quote: &str) -> String {
+    if quote.is_empty() {
+        format!("في الشرح · {context}")
+    } else {
+        format!("في الشرح · {context} · {quote}")
+    }
+}
+
+/// "كارت أو سؤال · كبد › Liver Cirrhosis".
+pub fn item(context: &str) -> String {
+    format!("كارت أو سؤال · {context}")
+}
+
+pub const KIND_ALL_RESULTS: &str = "كل اللي فيه الكلمة في الدروس";
+
+/// "كل النتايج: 19 درس و 43 كارت وسؤال".
+pub fn all_results(lessons: usize, items: usize) -> String {
+    format!("كل النتايج: {lessons} درس و{items} كارت وسؤال")
+}

@@ -98,6 +98,19 @@ fn a_text_fix_downloads_the_text_and_keeps_the_pictures() {
     assert_eq!(fs::read(data.path().join("updates").join(PACK_FILE)).unwrap(), full, "kept as the full pack");
     assert!(u.apply_content());
 
+    // What happens between two content updates on a real device (#1367):
+    // checks that find the app up to date, and an app download starting.
+    // Both clear the folder; the kept pictures part must outlast them.
+    u.clear_downloads(None);
+    u.clear_downloads(Some("batna.apk"));
+    let kept: Vec<String> = fs::read_dir(data.path().join("updates"))
+        .unwrap()
+        .flatten()
+        .map(|e| e.file_name().to_string_lossy().into_owned())
+        .filter(|n| n.starts_with(parts::PREFIX))
+        .collect();
+    assert_eq!(kept.len(), 1, "the pictures part is still here: {kept:?}");
+
     // A one-word fix: new text, the same pictures.
     let second = pack("Second title");
     let (text2, pictures2) = second.split();
@@ -133,6 +146,6 @@ fn parts_that_do_not_join_into_the_signed_pack_fall_back_to_it() {
         fs::read_dir(data.path().join("updates"))
             .unwrap()
             .flatten()
-            .all(|e| !e.file_name().to_string_lossy().starts_with("pictures-"))
+            .all(|e| !e.file_name().to_string_lossy().starts_with(parts::PREFIX))
     );
 }

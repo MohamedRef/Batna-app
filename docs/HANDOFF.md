@@ -865,6 +865,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: kept pictures part survives the clean-up (#1367): it was `pictures-<sha>.pack`, which `clear_downloads` removed on every up-to-date check, app download, install and channel switch, so pictures were fetched again each time; now `content.pictures-<sha>.pack`. The parts test runs those clean-ups between two content updates.
 - 2026-11-16: Today says when a content update fixed items he marked ✗ (#1352 point 4): one note, «راجعهم دلوقتي» opens them in a session, «تمام» hides it (synced `verify.fixed_seen`; § 10 Content-check file).
 - 2026-11-16: content pack in parts (#1354): `packs build` writes `batna-content-text.pack` and `batna-content-pictures.pack`; feeds list them as `content-text` / `content-pictures`; devices fetch the text and keep unchanged pictures, joined bytes checked against the signed full pack.
 - 2026-11-16: § 11 Current state refreshed (#1355): release v2026.11.13, 1,059 lessons / 15,557 items / 936 pictures, review rounds since 11-13, open work; it now says where the release and content numbers come from.

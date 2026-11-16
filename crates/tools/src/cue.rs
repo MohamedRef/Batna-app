@@ -71,9 +71,9 @@ impl Kind {
     pub fn ceiling(self) -> f64 {
         match self {
             Kind::Mcq => 25.0,
-            Kind::Case => 53.0,
-            Kind::Check => 47.5,
-            Kind::LessonCase => 54.5,
+            Kind::Case => 14.0,
+            Kind::Check => 19.5,
+            Kind::LessonCase => 13.5,
         }
     }
 }

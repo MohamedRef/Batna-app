@@ -824,7 +824,7 @@ come from `batna-tools packs build --check` (its last line).
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
 | Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
 | Critic / review rounds | Restarted at Mohamed's ask on 2026-11-13: strength reviews #820 (11-13) and #1356 (11-16), with rounds on 11-14 and 11-15 too. Each round files issues; owners fix and merge |
-| Open PRs / issues | On 2026-11-16: the #1356 round (#1349–#1355); #1350 merged (#1362), #1349 in PR #1360, #1353 and #1355 in this PR, #1354 next |
+| Open PRs / issues | On 2026-11-16: the #1356 round (#1349–#1355); #1350 merged (#1362), #1349 merged (#1360), #1353 and #1355 in this PR, #1354 next |
 | Coverage | 95.05% when last measured (2026-11-04); floor 94 |
 
 ### Open work and known gaps
@@ -857,6 +857,7 @@ state; details live in the PR and in § 10.
 
 - 2026-11-16: § 11 Current state refreshed (#1355): release v2026.11.13, 1,059 lessons / 15,557 items / 936 pictures, review rounds since 11-13, open work; it now says where the release and content numbers come from.
 - 2026-11-16: #1353: Settings › بياناتك shows the last backup on this device and a quiet line when it is old; lesson marks and places after a reset are stamped after the marker, so a lesson finished right after «ابدأ من الأول» reads as done even when the marker's time is ahead of this clock.
+- 2026-11-16: longest-option cue rewrites in all 9 courses (#1349), worst lectures first: about 1,260 wrong options given the key's shape and length (4 keys trimmed), every lecture at or under a third per kind; case steps 52.8% → 13.9%, lesson checks 47.3% → 19.3%, lesson mini-case steps 54.2% → 13.2%; ceilings 14 / 19.5 / 13.5%. All `status: unverified`.
 - 2026-11-16: full-text search (#1350): the Lessons screen and ⌘K find words inside lesson steps, cards and questions, open the lesson at the step with the word marked, and the item where it plays (§ 10 Full-text search).
 - 2026-11-16: verdicts read key (#1352 point 3): Settings › Sync makes a key that reads only his ✓ ✎ ✗ marks (`GET /v1/verdicts`); `batna-tools verdicts --cloud` builds the fix list from Batna Cloud with `BATNA_VERDICTS_KEY` (§ 10 Content-check file, docs/CLOUD.md § 4.2).
 - 2026-11-16: Updates: a channel with no feed (404, beta and stable today) is "nothing published here yet", not a network failure; picking one is refused with a note, and a device already on one gets one tap back to alpha (#1351).

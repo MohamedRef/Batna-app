@@ -843,6 +843,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: longest-option cue rewrites in all 9 courses (#1349), worst lectures first: about 1,260 wrong options given the key's shape and length (4 keys trimmed), every lecture at or under a third per kind; case steps 52.8% → 13.9%, lesson checks 47.3% → 19.3%, lesson mini-case steps 54.2% → 13.2%; ceilings 14 / 19.5 / 13.5%. All `status: unverified`.
 - 2026-11-16: full-text search (#1350): the Lessons screen and ⌘K find words inside lesson steps, cards and questions, open the lesson at the step with the word marked, and the item where it plays (§ 10 Full-text search).
 - 2026-11-16: verdicts read key (#1352 point 3): Settings › Sync makes a key that reads only his ✓ ✎ ✗ marks (`GET /v1/verdicts`); `batna-tools verdicts --cloud` builds the fix list from Batna Cloud with `BATNA_VERDICTS_KEY` (§ 10 Content-check file, docs/CLOUD.md § 4.2).
 - 2026-11-16: Updates: a channel with no feed (404, beta and stable today) is "nothing published here yet", not a network failure; picking one is refused with a note, and a device already on one gets one tap back to alpha (#1351).

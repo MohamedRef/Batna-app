@@ -7,7 +7,7 @@ use batna_protocol::cloud::{DeviceSummary, Platform};
 use dioxus::prelude::*;
 use tokio::sync::mpsc::UnboundedSender;
 
-use super::{CloudStatus, Command, Event, LoginStatus, Problem, SyncState};
+use super::{CloudStatus, Command, Event, LoginStatus, Problem, ReadKeyStatus, SyncState};
 use crate::i18n::cloud as tx;
 
 /// Batna Cloud state for the UI, shared through context.
@@ -17,6 +17,7 @@ pub struct Cloud {
     pub devices: Signal<Option<Result<Vec<DeviceSummary>, Problem>>>,
     pub signing_in: Signal<bool>,
     pub login: Signal<LoginStatus>,
+    pub read_key: Signal<ReadKeyStatus>,
     commands: Signal<Option<UnboundedSender<Command>>>,
 }
 
@@ -38,6 +39,7 @@ pub fn use_provide_cloud() {
         devices: Signal::new(None),
         signing_in: Signal::new(false),
         login: Signal::new(LoginStatus::default()),
+        read_key: Signal::new(ReadKeyStatus::default()),
         commands: Signal::new(None),
     });
     let review = use_context::<crate::store::Review>();
@@ -113,8 +115,26 @@ pub fn use_unconfigured_cloud() {
         devices: Signal::new(None),
         signing_in: Signal::new(false),
         login: Signal::new(LoginStatus::default()),
+        read_key: Signal::new(ReadKeyStatus::default()),
         commands: Signal::new(None),
     });
+}
+
+/// Tests of one Sync card: a [`Cloud`] whose commands go to `sent`.
+#[cfg(test)]
+pub(super) fn test_cloud(
+    status: CloudStatus,
+    read_key: ReadKeyStatus,
+    sent: tokio::sync::mpsc::UnboundedSender<Command>,
+) -> Cloud {
+    Cloud {
+        status: Signal::new(status),
+        devices: Signal::new(None),
+        signing_in: Signal::new(false),
+        login: Signal::new(LoginStatus::default()),
+        read_key: Signal::new(read_key),
+        commands: Signal::new(Some(sent)),
+    }
 }
 
 /// Shows one engine event. True when another device changed stored data,
@@ -131,12 +151,20 @@ fn mirror(event: Event, cloud: Cloud) -> bool {
         Event::Devices(d) => devices.set(Some(d)),
         Event::SigningIn(on) => signing_in.set(on),
         Event::Login(l) => login.set(l),
+        Event::ReadKey(mut k) => {
+            let mut signal = cloud.read_key;
+            // A failed call keeps what was known about the key.
+            if k.created_ms.is_none() {
+                k.created_ms = signal.peek().created_ms;
+            }
+            signal.set(k);
+        }
         Event::Changed(_) => return true,
     }
     false
 }
 
-fn problem_text(p: Problem) -> &'static str {
+pub(super) fn problem_text(p: Problem) -> &'static str {
     match p {
         Problem::NotConfigured => tx::P_NOT_CONFIGURED,
         Problem::NotAllowed => tx::P_NOT_ALLOWED,
@@ -239,6 +267,7 @@ pub fn SyncSection() -> Element {
         }
         if signed_in {
             LoginCard {}
+            super::read_key::ReadKeyCard {}
             DevicesCard {}
         }
     }
@@ -626,6 +655,7 @@ mod tests {
             devices: Signal::new(case.devices),
             signing_in: Signal::new(case.signing_in),
             login: Signal::new(case.login),
+            read_key: Signal::new(ReadKeyStatus::default()),
             commands: Signal::new(case.sent),
         });
         CLOUD.with(|c| *c.borrow_mut() = Some(cloud));
@@ -731,6 +761,7 @@ mod tests {
                 devices: Signal::new(None),
                 signing_in: Signal::new(false),
                 login: Signal::new(LoginStatus::default()),
+                read_key: Signal::new(ReadKeyStatus::default()),
                 commands: Signal::new(None),
             };
             assert!(!mirror(Event::SigningIn(true), cloud));

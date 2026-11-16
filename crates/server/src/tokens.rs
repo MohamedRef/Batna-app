@@ -37,7 +37,7 @@ pub fn valid_device_id(id: &str) -> bool {
         && id != SERVER_DEVICE_ID
 }
 
-fn valid_account_id(id: &str) -> bool {
+pub(crate) fn valid_account_id(id: &str) -> bool {
     id.len() == 25 && id.starts_with('g') && id[1..].bytes().all(|b| b.is_ascii_hexdigit())
 }
 

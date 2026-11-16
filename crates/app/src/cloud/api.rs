@@ -3,9 +3,10 @@
 //! the browser it is a `fetch` (docs/WEB.md).
 // adapted from kabar-app main: crates/app/src/cloud/api.rs (no AI, TTS or usage)
 
+use super::KeyOp;
 use batna_protocol::cloud::{
-    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest,
-    RemovePassword, Session, SetPassword,
+    ApiError, DeviceList, ErrorCode, GoogleSignIn, NewReadKey, PasswordLogin, PasswordSignIn, ReadKeyState,
+    RefreshRequest, RemovePassword, Session, SetPassword,
 };
 use serde::Serialize;
 use serde::de::DeserializeOwned;
@@ -118,6 +119,29 @@ impl Api {
 
     pub async fn revoke(&self, access: &str, device: &str) -> Result<(), CloudError> {
         self.call(Verb::Delete, &format!("/v1/devices/{device}"), Some(access), None).await.map(drop)
+    }
+
+    /// The verdicts read key (#1352): see, make or remove it. `Make`
+    /// answers with the new key, shown once.
+    pub async fn read_key(
+        &self,
+        access: &str,
+        op: KeyOp,
+    ) -> Result<(Option<u64>, Option<String>), CloudError> {
+        const PATH: &str = "/v1/verdicts/key";
+        Ok(match op {
+            KeyOp::Load => {
+                (read::<ReadKeyState>(self.call(Verb::Get, PATH, Some(access), None).await)?.created_ms, None)
+            }
+            KeyOp::Remove => (
+                read::<ReadKeyState>(self.call(Verb::Delete, PATH, Some(access), None).await)?.created_ms,
+                None,
+            ),
+            KeyOp::Make => {
+                let new: NewReadKey = read(self.call(Verb::Post, PATH, Some(access), None).await)?;
+                (Some(new.created_ms), Some(new.key))
+            }
+        })
     }
 
     /// One request; a 2xx answer's body, or the error it means.

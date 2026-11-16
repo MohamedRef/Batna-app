@@ -115,3 +115,25 @@ pub const HELD_FORGET: &str = "سيبهم";
 pub const HELD_FORGET_SURE: &str = "هيفضلوا على الجهاز ده بس، ومش هيوصلوا لأجهزتك التانية. متأكد؟";
 pub const HELD_FORGET_YES: &str = "أيوه، سيبهم";
 pub const HELD_FORGET_NO: &str = "لأ";
+
+/// The verdicts read key (`cloud/read_key.rs`, #1352).
+pub const KEY_TITLE: &str = "مفتاح قراءة علامات المحتوى";
+pub const KEY_ABOUT: &str = "بيخلّي أداة تصليح المحتوى تقرا علامات ✓ ✎ ✗ بتاعتك من باطنة كلاود على طول، من غير ما تبعت ملف. مايقدرش يغيّر حاجة، ولا يقرا أي حاجة تانية.";
+pub const KEY_NONE: &str = "مافيش مفتاح دلوقتي.";
+/// "عندك مفتاح من 16 نوفمبر."
+pub fn key_since(day: u32, month: &str) -> String {
+    format!("عندك مفتاح من {day} {month}.")
+}
+pub const KEY_MAKE: &str = "اعمل مفتاح";
+pub const KEY_REMAKE: &str = "اعمل مفتاح جديد";
+pub const KEY_REMOVE: &str = "شيل المفتاح";
+pub const KEY_REMOVE_SURE: &str = "الأداة مش هتقدر تقرا علاماتك لحد ما تعمل مفتاح جديد. متأكد؟";
+pub const KEY_REMOVE_YES: &str = "أيوه، شيله";
+pub const KEY_REMOVE_NO: &str = "لأ";
+pub const KEY_REMAKE_NOTE: &str = "المفتاح الجديد بيلغي القديم.";
+pub const KEY_NEW: &str =
+    "ده المفتاح. انسخه دلوقتي وحطه كسرّ عند أداة المحتوى (BATNA_VERDICTS_KEY)، مش هيظهر تاني:";
+pub const KEY_COPY: &str = "انسخ";
+pub const KEY_COPIED: &str = "اتنسخ ✓";
+pub const KEY_BUSY: &str = "لحظة…";
+pub const KEY_LOADING: &str = "بشوف لو فيه مفتاح…";

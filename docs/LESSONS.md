@@ -147,7 +147,7 @@ Every step may have `page:` and `quote:`.
 | `mnemonic` | `word`, `parts: [{key, text}]`, `hook?` | Letter tiles that open one by one. The keys must spell the word. |
 | `aside` | `tone` (tip, exam, trap, analogy, joke), `text` | A coloured box. |
 | `update` | `text`, `ref` | Guideline note; says the book wins in the exam. |
-| `check` | `question`, `options` (3–5), `answer` (0-based), `why` (one per option) | Single best answer; options are shuffled. |
+| `check` | `question`, `options` (3–5), `answer` (0-based), `why` (one per option) | Single best answer; options are shuffled, so the key must not stand out as the longest option either (content rule 15 in `docs/HANDOFF.md`, #1349; `batna-tools cue --kind check`). The same goes for the steps of a lesson `case`. |
 | `order` | `prompt`, `steps` (3–8, correct order), `why?` | Tap the steps in order. |
 | `match` | `prompt`, `pairs` (3–6 `[left, right]`), `why?` | Tap left then right. Right sides must differ. |
 | `sort` | `prompt`, `bins` (2–4), `cards` (3–10 `{text, bin}`), `why?` | Drop cards into bins. |

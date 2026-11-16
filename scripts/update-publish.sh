@@ -53,6 +53,7 @@ for channel in $channels; do
     --commit "$(git rev-parse --short HEAD)" \
     --notes-en "$notes_en" --notes-ar-eg "$notes_ar_eg" --previous "$previous" --changes \
     --asset "android-arm64=$apk" --asset "$mac=dist/mac/Batna.app.zip" --asset "content=$pack" \
+    --asset "content-text=dist/packs/batna-content-text.pack" --asset "content-pictures=dist/packs/batna-content-pictures.pack" \
     --out "$out"
   BATNA_UPDATE_SECRET="$secret" $tools update sign "$out"
   $tools update verify "$out"

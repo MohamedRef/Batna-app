@@ -264,6 +264,28 @@ fn a_renewed_preview_key_lists_the_steps_to_reinstall() {
 }
 
 #[test]
+fn a_channel_with_nothing_published_says_so_and_offers_alpha() {
+    // A device already on an empty channel: not a network failure, and one
+    // tap back to alpha.
+    let s = status(Phase::Failed { offer: None, why: Failure::NotPublished(Channel::Stable) }, Mode::Auto);
+    let page = html(Which::Section, Some(s));
+    assert!(has(&page, tx::NOT_PUBLISHED) && has(&page, tx::FOLLOW_ALPHA), "{page}");
+    assert!(!has(&page, tx::FAILED_NETWORK), "{page}");
+    // Alpha itself missing has nowhere to send him.
+    let alpha = super::stage::stage(
+        &Phase::Failed { offer: None, why: Failure::NotPublished(Channel::Alpha) },
+        false,
+    );
+    assert!(alpha.unwrap().acts.is_empty());
+    // The refused pick: the picker says why it didn't move.
+    let s = Status { unpublished: Some(Channel::Beta), ..status(Phase::UpToDate, Mode::Auto) };
+    let page = html(Which::Section, Some(s));
+    assert!(has(&page, &format!("«{}»: {}", tx::BETA, tx::NOTHING_PUBLISHED_YET)), "{page}");
+    let page = html(Which::Section, Some(status(Phase::UpToDate, Mode::Auto)));
+    assert!(!has(&page, tx::NOTHING_PUBLISHED_YET));
+}
+
+#[test]
 fn the_content_half_reports_its_own_check() {
     let mut s = status(Phase::UpToDate, Mode::Auto);
     let page = html(Which::Section, Some(s.clone()));

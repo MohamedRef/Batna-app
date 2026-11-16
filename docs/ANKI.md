@@ -40,7 +40,7 @@ cargo run -q -p batna-tools -- anki --verdicts export.yaml
 cargo run -q -p batna-tools -- anki --own batna-export-2026-10-28.json
 ```
 - `--own FILE` reads a full backup from the app (Settings › نسخة احتياطية من كل حاجة) and adds your own cards as one more subdeck, `Batna::My own cards`. They are tagged `own` (plus their lecture, e.g. `hb.L09`), never `unverified`, because you wrote them. Deleted cards are left out. Your notes on items in that backup fill each note's `Notes` field.
-- `--verdicts FILE` reads the app's ✓/✎/✗ export (`batna.verdicts/v1`). It leaves out items marked ✗, uses the edited text for ✎ items, and tags ✓ items `approved`.
+- `--verdicts FILE` reads the app's ✓/✎/✗ export (`batna.verdicts/v1`), or the one `batna-tools verdicts --cloud --save FILE` writes from Batna Cloud. It leaves out items marked ✗, uses the edited text for ✎ items, and tags ✓ items `approved`.
 - A lecture that isn't merged yet comes from the project's shared folder (`content-wip/hb/LNN.yaml`, then `drafts/LNN.yaml` or `LNN.draft.yaml` under `/mnt/project-files/medstudy`, or `--drafts DIR`), so the file never shrinks; those notes are tagged `draft`. `--merged-only` uses only `content/`.
 - `content/approved.txt` also marks items `approved`. Items with `status: rejected` are always left out.
 - The deck itself is built by the `batna-anki` crate, shared with the app's export button.

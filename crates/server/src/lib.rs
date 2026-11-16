@@ -14,6 +14,7 @@ pub mod google;
 pub mod hub;
 pub mod internal;
 pub mod login;
+pub mod read_key;
 pub mod sql;
 pub mod tokens;
 

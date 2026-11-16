@@ -4,6 +4,7 @@
 mod account;
 mod do_sql;
 mod login;
+mod read_key;
 
 use std::cell::{Cell, RefCell};
 
@@ -505,6 +506,8 @@ async fn route(req: Request, env: &Env, cfg: &Config, method: Method, path: &str
         (Method::Post, "/v1/auth/google") => sign_in_google(req, env, cfg).await,
         (Method::Post, "/v1/auth/refresh") => refresh_session(req, env, cfg).await,
         (Method::Post, "/v1/auth/password") => sign_in_password(req, env, cfg).await,
+        // The read key is its own credential, not an access token.
+        (Method::Get, "/v1/verdicts") => read_key::verdicts(&req, env).await,
         _ => {
             let Some(key) = cfg.token_key.clone() else {
                 return api_error(ErrorCode::Internal, "server not set up: TOKEN_SIGNING_KEY is not set");
@@ -540,6 +543,9 @@ async fn route(req: Request, env: &Env, cfg: &Config, method: Method, path: &str
                 }
                 (m @ (Method::Get | Method::Post | Method::Delete), "/v1/login") => {
                     manage_login(req, env, &claims, m).await
+                }
+                (m @ (Method::Get | Method::Post | Method::Delete), "/v1/verdicts/key") => {
+                    read_key::manage(env, &claims, m).await
                 }
                 (Method::Post, "/v1/auth/signout") => {
                     let revoke = Revoke { device: claims.dev.clone() };

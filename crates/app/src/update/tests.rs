@@ -41,6 +41,7 @@ pub(super) fn status(phase: Phase, mode: Mode) -> Status {
         content_build: 0,
         content_at: None,
         content_check: None,
+        unpublished: None,
         history: Vec::new(),
     }
 }
@@ -1117,8 +1118,10 @@ fn only_a_feed_answer_counts_and_a_huge_feed_is_refused() {
     let dir = tempfile::tempdir().unwrap();
     fs::write(dir.path().join("big.json"), vec![b' '; (MAX_FEED_BYTES + 10) as usize]).unwrap();
     let url = serve(dir.path().to_path_buf());
-    assert_eq!(get_small(&format!("{url}/big.json")), Err(Failure::Verify("feed too large".into())));
-    assert_eq!(get_small(&format!("{url}/absent.json")), Err(Failure::Network));
+    let get = |name: &str| get_small(&format!("{url}/{name}"), Channel::Beta);
+    assert_eq!(get("big.json"), Err(Failure::Verify("feed too large".into())));
+    // A missing feed file is a channel with nothing published, not a dead network.
+    assert_eq!(get("absent.json"), Err(Failure::NotPublished(Channel::Beta)));
     assert_eq!(update_failure(UpdateError::TooNew), Failure::TooNew);
 }
 
@@ -1244,4 +1247,37 @@ fn a_download_queued_for_wifi_runs_on_the_next_unmetered_step() {
     u.step(Duration::from_secs(3600), false);
     assert!(matches!(u.status().phase, Phase::Ready(_)), "{:?}", u.status().phase);
     assert_eq!(u.status().prefs.wifi_download, None, "done: the wish is cleared");
+}
+
+#[test]
+fn a_channel_with_nothing_published_is_not_a_network_failure() {
+    // An empty feed folder answers 404, like GitHub for a release never made.
+    let empty = tempfile::tempdir().unwrap();
+    let url = serve(empty.path().to_path_buf());
+    let (u, data) = updater(&url, build("0.1.0", 0, false));
+    u.check(false);
+    assert_eq!(
+        u.status().phase,
+        Phase::Failed { offer: None, why: Failure::NotPublished(Channel::Alpha) },
+        "a 404 is not 'no connection'"
+    );
+    // Picking a channel with nothing on it is refused: the device keeps
+    // following the one it had, and the picker says why (#1351).
+    u.set_channel(Channel::Stable);
+    assert_eq!(u.status().channel, Channel::Alpha);
+    assert_eq!(u.status().unpublished, Some(Channel::Stable));
+    assert_eq!(load_prefs(&data.path().join("updates")).channel, None, "nothing saved");
+    // Tapping the channel already followed clears the note.
+    u.set_channel(Channel::Alpha);
+    assert_eq!(u.status().unpublished, None);
+}
+
+#[test]
+fn a_missing_signature_is_a_feed_mid_upload_not_an_empty_channel() {
+    let feed = fixture_feed();
+    fs::remove_file(feed.path().join(SIGNATURE_FILE)).unwrap();
+    let url = serve(feed.path().to_path_buf());
+    let (u, _data) = updater(&url, build("0.1.0", 0, false));
+    u.check(false);
+    assert_eq!(u.status().phase, Phase::Failed { offer: None, why: Failure::Network });
 }

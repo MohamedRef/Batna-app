@@ -72,6 +72,9 @@ fn three_devices(url: &str, id_token: impl Fn() -> String) {
     eventually("tablet has all three", || tablet.store.reviews().unwrap().len() == 3);
     assert_eq!(laptop.store.setting::<u32>("daily_new"), Some(30), "and it caught up");
 
+    // The verdicts read key reads the synced marks (#1352).
+    super::read_key::round_trip(&url, &mut phone);
+
     // The Devices card, then a remote sign-out of the tablet.
     let list = phone.devices().unwrap();
     assert_eq!(list.len(), 3);

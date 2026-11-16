@@ -249,6 +249,9 @@ pub enum Failure {
     /// Preview only: CI's update or APK signing key was renewed; install
     /// the newest preview by hand once.
     KeyChanged,
+    /// The channel's feed doesn't exist (404): nothing has been published
+    /// on it yet. Not a network problem; another channel has builds.
+    NotPublished(Channel),
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Phase {
@@ -312,6 +315,9 @@ pub struct Status {
     /// What the last check found for the lessons and questions, apart from
     /// the app's own `phase` (Settings shows both).
     pub content_check: Option<ContentCheck>,
+    /// The channel last picked whose feed isn't published yet: the pick
+    /// was refused, and the picker says why (#1351).
+    pub unpublished: Option<Channel>,
     /// Every build's changes seen so far, newest first (changelog.rs).
     pub history: Vec<BuildChanges>,
 }

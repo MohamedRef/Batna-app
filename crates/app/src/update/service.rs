@@ -75,6 +75,7 @@ impl Updater {
             content_build,
             content_at,
             content_check: None,
+            unpublished: None,
             history,
         };
         let (tx, _) = watch::channel(status);
@@ -98,13 +99,26 @@ impl Updater {
     /// The feed folder: the local override in development, else the
     /// channel's GitHub release.
     pub(super) fn feed_url(&self) -> String {
+        self.feed_url_for(self.installed().channel)
+    }
+
+    /// [`Self::feed_url`] of any channel.
+    pub(super) fn feed_url_for(&self, channel: Channel) -> String {
         match &self.feed_override {
             Some(url) => url.trim_end_matches('/').to_owned(),
             None => {
-                let url = self.installed().channel.feed_url();
+                let url = channel.feed_url();
                 url.trim_end_matches(MANIFEST_FILE).trim_end_matches('/').to_owned()
             }
         }
+    }
+
+    /// Is `channel`'s feed missing (a 404, so nothing was ever published
+    /// there)? No answer at all counts as published: offline, his pick
+    /// stands as before.
+    pub(super) fn unpublished(&self, channel: Channel) -> bool {
+        let url = format!("{}/{MANIFEST_FILE}", self.feed_url_for(channel));
+        matches!(get_small(&url, channel), Err(Failure::NotPublished(_)))
     }
 
     pub fn subscribe(&self) -> watch::Receiver<Status> {
@@ -273,10 +287,15 @@ impl Updater {
     /// The channel's `update.json`, signature checked.
     pub(super) fn fetch_manifest(&self) -> Result<UpdateManifest, Failure> {
         let key = self.info.key.ok_or(Failure::Verify("no key".into()))?;
-        let base = self.feed_url();
+        let channel = self.installed().channel;
+        let base = self.feed_url_for(channel);
         let fetch = || -> Result<_, Failure> {
-            let json = get_small(&format!("{base}/{MANIFEST_FILE}"))?;
-            let sig = get_small(&format!("{base}/{SIGNATURE_FILE}"))?;
+            let json = get_small(&format!("{base}/{MANIFEST_FILE}"), channel)?;
+            // A manifest without its signature is a feed mid-upload.
+            let sig = get_small(&format!("{base}/{SIGNATURE_FILE}"), channel).map_err(|e| match e {
+                Failure::NotPublished(_) => Failure::Network,
+                other => other,
+            })?;
             let sig = String::from_utf8(sig).map_err(|_| Failure::Verify("signature".into()))?;
             Ok(verify_manifest(&json, &sig, &key))
         };
@@ -359,7 +378,7 @@ impl Updater {
                 None => {
                     self.tx.send_modify(|s| s.content_check = Some(ContentCheck::Fetching));
                     let url = format!("{}/{}", self.feed_url(), asset.file);
-                    let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60))
+                    let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60), Failure::Network)
                         .map_err(|f| (false, format!("{f:?}")))?;
                     check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes))
                         .map_err(|e| (false, e.to_string()))?;
@@ -684,11 +703,20 @@ impl Updater {
         crate::platform::update_notice::schedule(self.background_checks());
     }
 
-    /// Switches channel (preview, alpha, beta, stable) and looks again.
+    /// Switches channel (preview, alpha, beta, stable) and looks again. A
+    /// channel with nothing published on it yet is refused
+    /// (`Status::unpublished` says so): following it would stop every app
+    /// and content update (#1351).
     pub fn set_channel(&'static self, channel: Channel) {
         if self.status().channel == channel {
+            self.tx.send_if_modified(|s| s.unpublished.take().is_some());
             return;
         }
+        if self.unpublished(channel) {
+            self.tx.send_modify(|s| s.unpublished = Some(channel));
+            return;
+        }
+        self.tx.send_modify(|s| s.unpublished = None);
         self.update_prefs(|p| p.channel = Some(channel));
         self.clear_downloads(None);
         self.set_phase(Phase::Idle);

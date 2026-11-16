@@ -176,6 +176,13 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   `docs/RELEASE.md` §1.
 - Channels: `batna-preview` (CI, every 4 h), `batna-alpha`, `batna-beta`,
   `batna-stable` (feed tags: never rename, installed apps read them).
+- **Beta and stable are not published yet** (no `batna-beta` or
+  `batna-stable` release; starting them waits on Mohamed). A 404 feed is
+  `Failure::NotPublished`, not a network failure: picking a channel probes
+  its `update.json` first and a 404 refuses the pick (`Status::unpublished`,
+  a note under the picker); a device already on an empty channel sees
+  `NOT_PUBLISHED` with «ارجع لألفا» (`Act::FollowAlpha`). Offline, the pick
+  goes through as before. Issue #1351.
 - **Alpha only when Mohamed says so** («طلّع ألفا»). Steps: Actions ›
   Release › Run workflow (channel alpha); no bump PR.
   It builds the content pack, release APK (Linux), Batna.app (macOS), signs
@@ -226,6 +233,7 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 | Mac Keychain | `batna-update`, `batna-android`, `batna-codesign` | originals, made by `scripts/release-secrets.sh` (also `~/.batna/`) |
 | Mac `.env` | `BATNA_CLOUD_URL`, `BATNA_GOOGLE_CLIENT_ID`, `BATNA_GOOGLE_CLIENT_SECRET` | local builds |
 | Worker | `ALLOWED_EMAILS`, `TOKEN_SIGNING_KEY` | set by the deploy workflow |
+| Content environment | `BATNA_VERDICTS_KEY` | verdicts read key from Settings › Sync, for `batna-tools verdicts --cloud` (reads his ✓ ✎ ✗ marks only) |
 
 Public (not secret): Google client ids in `crates/server/wrangler.toml`
 (`GOOGLE_CLIENT_IDS`, Desktop + "Batna web"), `WEB_ORIGINS`.
@@ -346,15 +354,19 @@ quote cap there is outdated), course briefs in [courses/](courses/).
     counts the pages a lesson's steps cite, not its `pages` span; research
     lessons count slides, up to 16. A lesson wide on purpose is listed with
     its reason in `content/lesson-wide.yaml` (#828).
-15. **The key is not the longest option** (Mohamed, 2026-11-13, #816).
-    Test-wise learners pick the longest option, so in authored MCQs make a
-    distractor as long as the key (or trim the key) without making it less
-    wrong. `batna-tools cue` lists the share per lecture; `validate` prints
-    the bank share and the five highest lectures; the test
-    `the_bank_stays_under_the_ceiling` (`crates/tools/src/cue.rs`) fails above
-    `CEILING_PERCENT`, which each rewrite PR lowers, never raises. Options
-    printed in a source (`book-question`, `slide-question`, `past-paper`,
-    `lecture-quiz`) stay as printed and are not counted.
+15. **The key is not the longest option** (Mohamed, 2026-11-13, #816; every
+    question with options since #1349). Test-wise learners pick the longest
+    option, so in authored MCQs, case steps, lesson checks and lesson
+    mini-case steps give the wrong options the key's shape and length (a dose
+    and interval on every drug, a reason on every action) or trim the key,
+    without making them less wrong. `batna-tools cue` lists the share per kind
+    and lecture (`--kind mcq|case|check|lesson-case`, `--list <lecture>` names
+    each cued question); `validate` prints each kind's share and its five
+    highest lectures; the test `every_kind_stays_under_its_ceiling`
+    (`crates/tools/src/cue.rs`) fails above `Kind::ceiling`, which each
+    rewrite PR lowers, never raises. Options printed in a source
+    (`book-question`, `slide-question`, `past-paper`, `lecture-quiz`) stay as
+    printed and are not counted.
 
 ## 8. Sources outside git (important)
 
@@ -702,6 +714,32 @@ tables, export/import) and `reset/tests.rs` (the card by taps).
 - Tests: the issue's 12 terms each find at least the lessons and cards
   measured in #1350 (`search/tests.rs`).
 
+### Content-check file (✓ ✎ ✗ export, #1352)
+
+- Settings › Your data › «صدّر مراجعاتك للمحتوى» (`verify/export.rs`) writes
+  `batna-verdicts-<date>.yaml` and remembers the last file in the synced
+  setting `verify.exported` (`{at_ms, verdicts}`), so a file made on the Mac
+  counts on the phone too. The card says when the last file was made and how
+  many marks it held, and lists marks given since («لسه مش في ملف: ✗ 7 · ✎ 3»;
+  `batna_core::review::verify::Unsent`).
+- «ابعت الملف» (Android and Mac) writes the file and opens the system share
+  menu with it attached: `platform/share.rs`; Android `ShareFile.kt` copies it
+  to `cache/share/` and serves it read-only through `ShareFileProvider`
+  (authority `<package>.share`, one-off URI grant); Mac `NSSharingServicePicker`
+  on the key window. «احفظه بس» keeps the old save (Android "Save to"). The
+  web has no share button: its one button downloads the file.
+- Making the file counts as sent (the share menu does not say where it went).
+- Today shows one quiet line («N علامة علّمت عليها ✗ لسه ما اتبعتتش للتصليح»,
+  opens Settings › Your data) once the oldest unsent ✗ is 3 days old
+  (`verify::export::WAIT_MS`).
+- Read key (Mohamed chose it 2026-11-16): Settings › Sync «مفتاح قراءة علامات
+  المحتوى» (`cloud/read_key.rs`) makes a key that reads only his marks from
+  Batna Cloud (`GET /v1/verdicts`, `batna_server::read_key`, docs/CLOUD.md
+  § 4.2). `batna-tools verdicts --cloud [--save FILE] [--approve]` reads with
+  `BATNA_VERDICTS_KEY` (environment secret, never in git) and prints the same
+  fix list as for a file; `--save` writes the export for `anki --verdicts`.
+- Not built yet: telling him when a content update fixed items he marked ✗.
+
 ### Desktop (Mac) layout
 
 - Full-window canvas, wider labelled sidebar, 1280×820 default window (#739).
@@ -806,6 +844,10 @@ Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
 - 2026-11-16: full-text search (#1350): the Lessons screen and ⌘K find words inside lesson steps, cards and questions, open the lesson at the step with the word marked, and the item where it plays (§ 10 Full-text search).
+- 2026-11-16: verdicts read key (#1352 point 3): Settings › Sync makes a key that reads only his ✓ ✎ ✗ marks (`GET /v1/verdicts`); `batna-tools verdicts --cloud` builds the fix list from Batna Cloud with `BATNA_VERDICTS_KEY` (§ 10 Content-check file, docs/CLOUD.md § 4.2).
+- 2026-11-16: Updates: a channel with no feed (404, beta and stable today) is "nothing published here yet", not a network failure; picking one is refused with a note, and a device already on one gets one tap back to alpha (#1351).
+- 2026-11-16: longest-option cue for every question with options (#1349): `batna-tools cue` counts case steps (52.8%), lesson checks (47.3%) and lesson mini-case steps (54.2%) beside MCQs (24.3%), with a ceiling per kind (25 / 53 / 47.5 / 54.5%) and `--kind` / `--list`; rewrites follow, worst lectures first (content rule 15).
+- 2026-11-16: content-check export remembers the last file (synced `verify.exported`), shows marks not in it yet, sends it through the Android/Mac share menu in one tap, and Today mentions unsent ✗ after 3 days (#1352; § 10 Content-check file).
 - 2026-11-16: res.L09 slide 62 (blank in the deck PDF) read from the lecture video at about 37:35: the «Essential» diagram of 8 informed-consent elements; new enumerate card res.L09.123 and a lesson4 step, both checked by hand (`quote-ok`) in the res verdicts.
 - 2026-11-15: Settings › Sync «زامن دلوقتي» forces a sync now; the sync engine bounds connect/send waits, replaces silent sockets, caps its backoff at 1 minute and retries at once when the app comes back or the network returns (§ 10 Sync never stalls).
 - 2026-11-15: What's new finishes #1340: a digest line per release (changes, courses, the busiest course), a box of lessons you had finished that the release changed (each opens), and changelog search with course and kind filters across every kept build.

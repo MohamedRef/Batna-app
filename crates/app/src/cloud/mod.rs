@@ -18,6 +18,7 @@ pub mod oauth;
 #[path = "oauth_web.rs"]
 pub mod oauth;
 pub mod password;
+mod read_key;
 pub mod session;
 mod socket;
 mod ui;
@@ -128,6 +129,8 @@ pub enum Command {
     RemoveLogin {
         current: Option<String>,
     },
+    /// The verdicts read key (`Event::ReadKey`).
+    ReadKey(KeyOp),
     SignOut,
     LoadDevices,
     RevokeDevice(String),
@@ -157,6 +160,39 @@ pub enum Event {
     /// The browser is open for Google sign-in, or a password is being checked.
     SigningIn(bool),
     Login(LoginStatus),
+    ReadKey(ReadKeyStatus),
+}
+
+/// What to do with the verdicts read key (#1352).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum KeyOp {
+    Load,
+    /// A new key; it replaces the old one.
+    Make,
+    Remove,
+}
+
+/// The verdicts read key, as Settings › Sync shows it.
+#[derive(Clone, Default, PartialEq)]
+pub struct ReadKeyStatus {
+    /// When the key was made; `Some(None)`: no key; `None` until Batna Cloud answers.
+    pub created_ms: Option<Option<u64>>,
+    /// A key just made, shown once; Batna Cloud keeps only its hash.
+    pub new_key: Option<String>,
+    pub busy: bool,
+    pub problem: Option<Problem>,
+}
+
+/// The key stays out of logs.
+impl std::fmt::Debug for ReadKeyStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("ReadKeyStatus")
+            .field("created_ms", &self.created_ms)
+            .field("new_key", &self.new_key.as_ref().map(|_| "…"))
+            .field("busy", &self.busy)
+            .field("problem", &self.problem)
+            .finish()
+    }
 }
 
 /// The account's username and password, as Settings › Sync shows them.
@@ -185,6 +221,7 @@ impl std::fmt::Debug for Command {
             Self::LoadLogin => write!(f, "LoadLogin"),
             Self::SetLogin { username, .. } => write!(f, "SetLogin {{ username: {username:?} }}"),
             Self::RemoveLogin { .. } => write!(f, "RemoveLogin"),
+            Self::ReadKey(op) => write!(f, "ReadKey({op:?})"),
             Self::SignOut => write!(f, "SignOut"),
             Self::LoadDevices => write!(f, "LoadDevices"),
             Self::RevokeDevice(d) => write!(f, "RevokeDevice({d:?})"),

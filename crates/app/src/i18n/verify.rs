@@ -35,3 +35,27 @@ pub const EXPORT_BUTTON: &str = "صدّر الملف";
 pub const EXPORT_SAVED: &str = "اتحفظ في:";
 pub const EXPORT_SHOW: &str = "اعرض النص (تقدر تنسخه)";
 pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ الملف:";
+pub const EXPORT_SHARE: &str = "ابعت الملف";
+pub const EXPORT_SAVE_ONLY: &str = "احفظه بس";
+pub const EXPORT_SHARED: &str = "اتفتحت قايمة المشاركة. اختار هتبعته فين. الملف كمان اتحفظ في:";
+pub const EXPORT_SHARE_FAILED: &str = "ما عرفتش أفتح قايمة المشاركة، بس الملف اتحفظ في:";
+pub const EXPORT_NEVER: &str = "لسه ما عملتش ملف قبل كده.";
+pub const EXPORT_ALL_IN: &str = "كل علاماتك في آخر ملف.";
+pub const EXPORT_SUBJECT: &str = "Batna content checks";
+/// "آخر ملف: 12 نوفمبر، فيه 40 علامة".
+pub fn last_export(day: u32, month: &str, verdicts: usize) -> String {
+    format!("آخر ملف: {day} {month}، فيه {}", super::count::count(verdicts, &super::count::MARK))
+}
+/// "جديد من ساعتها: ✗ 7 · ✎ 3 · ✓ 20" (only the kinds there are).
+pub fn unsent(approved: usize, edited: usize, wrong: usize) -> String {
+    let parts: Vec<String> = [("✗", wrong), ("✎", edited), ("✓", approved)]
+        .into_iter()
+        .filter(|(_, n)| *n > 0)
+        .map(|(sign, n)| format!("{sign} {n}"))
+        .collect();
+    format!("لسه مش في ملف: {}", parts.join(" · "))
+}
+/// Today, once an unsent ✗ has waited a few days: a quiet line, no pressure.
+pub fn today_waiting(wrong: usize) -> String {
+    format!("{} علّمت عليها ✗ لسه ما اتبعتتش للتصليح", super::count::count(wrong, &super::count::MARK))
+}

@@ -78,7 +78,9 @@ apple-native-keyring-store = { version = "1", features = ["keychain"] }
 # Study reminders as native notifications (bundled Batna.app only).
 block2 = "0.6"
 objc2 = "0.6"
-objc2-foundation = { version = "0.3", default-features = false, features = ["std", "NSBundle", "NSCalendar", "NSError", "NSString"] }
+objc2-foundation = { version = "0.3", default-features = false, features = ["std", "NSArray", "NSBundle", "NSCalendar", "NSError", "NSGeometry", "NSString", "NSURL"] }
+# Settings › Your data: the Mac share menu for the content-checks file (platform/share.rs).
+objc2-app-kit = { version = "0.3", default-features = false, features = ["std", "NSApplication", "NSResponder", "NSSharingService", "NSView", "NSWindow"] }
 objc2-user-notifications = { version = "0.3", default-features = false, features = ["std", "block2", "UNNotification", "UNNotificationContent", "UNNotificationRequest", "UNNotificationSettings", "UNNotificationSound", "UNNotificationTrigger", "UNUserNotificationCenter"] }
 
 [dev-dependencies]

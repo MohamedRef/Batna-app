@@ -30,6 +30,9 @@ pub const TOPIC: Noun =
 pub const ITEM: Noun = Noun {
     one: "سؤال واحد", two: "سؤالين", few: "أسئلة وكروت", many: "سؤال وكارت"
 };
+/// A ✓ / ✎ / ✗ content check.
+pub const MARK: Noun =
+    Noun { one: "علامة واحدة", two: "علامتين", few: "علامات", many: "علامة" };
 pub const NOTE: Noun = Noun {
     one: "ملاحظة واحدة", two: "ملاحظتين", few: "ملاحظات", many: "ملاحظة"
 };

@@ -44,6 +44,7 @@ pub fn Today() -> Element {
     let minutes = crate::onboarding::session_minutes();
     // Everything today, reviews and the new items' first looks.
     let all_minutes = o.due_minutes + (new_today as u32 * NEW_ITEM_SECS).div_ceil(60);
+    let waiting_wrong = crate::verify::waiting_wrong(&review, store::now_ms());
 
     rsx! {
         style { {CSS.text()} }
@@ -160,6 +161,17 @@ pub fn Today() -> Element {
                     }
                 }
                 crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
+                // ✗ items wait outside review until the fix list has them
+                // (#1352): one quiet line once the oldest has waited 3 days.
+                if waiting_wrong > 0 {
+                    button {
+                        class: "btn-link td-verdicts-waiting",
+                        title: tx::CHECKED_HINT,
+                        onclick: move |_| settings.show(Some(crate::settings::Section::Data)),
+                        span { {crate::i18n::verify::today_waiting(waiting_wrong)} }
+                        span { class: "chev", aria_hidden: "true" }
+                    }
+                }
                 // Extra shortcuts remain available without competing with today's work.
                 details { class: "td-extras",
                     summary { class: "section-head td-extras-toggle",

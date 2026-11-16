@@ -420,6 +420,11 @@ impl ReviewBackend {
         Verdicts::from_judgements(self.judgements.iter().map(|(id, j)| (id.as_str(), j)), now_ms)
     }
 
+    /// Verdicts given after `since_ms` (the last export), by kind.
+    pub fn unsent_verdicts(&self, since_ms: Option<i64>) -> batna_core::review::verify::Unsent {
+        batna_core::review::verify::Unsent::from_judgements(self.judgements.values(), since_ms)
+    }
+
     pub fn verdict_counts(&self) -> HashMap<Verdict, usize> {
         let mut out = HashMap::new();
         for j in self.judgements.values() {

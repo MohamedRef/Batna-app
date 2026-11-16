@@ -458,3 +458,38 @@ fn resume_button_returns_to_existing_study_without_queuing_a_new_start() {
     assert_eq!(screen(&t), Screen::Study);
     assert!(t.with(|| crate::study::START.peek().is_none()), "resume must not create a new session request");
 }
+
+#[test]
+fn an_unsent_wrong_mark_gets_one_quiet_line_after_three_days() {
+    use crate::tap_dom::TestDom;
+    use batna_core::review::verify::{Judgement, Verdict};
+    let store = crate::store::use_thread_store();
+    let id = Library::get().lectures.values().next().unwrap().items[0].id.clone();
+    let mark = |days: i64| Judgement {
+        verdict: Verdict::Wrong,
+        edit: Default::default(),
+        note: None,
+        fingerprint: "old".into(),
+        at_ms: crate::store::now_ms() - days * 86_400_000,
+    };
+    let app = || {
+        shell(rsx! {
+            Spy {}
+            Today {}
+        })
+    };
+    // A fresh ✗ is not mentioned yet.
+    store.set_judgement(&id, Some(&mark(1))).unwrap();
+    let line = crate::i18n::verify::today_waiting(1);
+    assert!(!TestDom::of(app).html().contains(&line));
+    // Waiting 4 days: one line, and it opens Settings › Data.
+    store.set_judgement(&id, Some(&mark(4))).unwrap();
+    let mut t = TestDom::of(app);
+    assert!(t.html().contains(&line), "{}", t.html());
+    t.click(&line);
+    assert!(t.with(|| *NAV.get().unwrap().open.peek()), "the line opens Settings › Data");
+    // In a file made since: nothing left to say.
+    let sent = crate::verify::export::LastExport { at_ms: crate::store::now_ms(), verdicts: 1 };
+    store.put_setting(crate::verify::export::EXPORTED_KEY, &sent).unwrap();
+    assert!(!TestDom::of(app).html().contains(&line));
+}

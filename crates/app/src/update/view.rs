@@ -314,6 +314,11 @@ pub(super) fn UpdatesView(status: Signal<Option<Status>>) -> Element {
                         }
                     }
                 }
+                if let Some(c) = s.unpublished {
+                    p { class: "muted small", role: "status",
+                        "«{channel_label(c)}»: {tx::NOTHING_PUBLISHED_YET}"
+                    }
+                }
                 if s.channel == Channel::Preview {
                     p { class: "muted small", {tx::PREVIEW_CHANNEL_NOTE} }
                 }

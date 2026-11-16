@@ -508,8 +508,10 @@ fn hash_file(path: &Path) -> std::io::Result<(u64, String)> {
     Ok((size, hex(&hash.finalize())))
 }
 
-fn get_small(url: &str) -> Result<Vec<u8>, Failure> {
-    let bytes = get_limited(url, MAX_FEED_BYTES, Duration::from_secs(30))?;
+/// A small feed file of `channel`.
+fn get_small(url: &str, channel: Channel) -> Result<Vec<u8>, Failure> {
+    // GitHub answers 404 for a release (channel) never published.
+    let bytes = get_limited(url, MAX_FEED_BYTES, Duration::from_secs(30), Failure::NotPublished(channel))?;
     if bytes.len() as u64 > MAX_FEED_BYTES {
         return Err(Failure::Verify("feed too large".into()));
     }
@@ -517,11 +519,14 @@ fn get_small(url: &str) -> Result<Vec<u8>, Failure> {
 }
 
 /// The body, cut one byte past `limit` (so a caller can tell it was longer).
+/// A 404 answers `missing`; any other status but 200 is a network failure.
 #[cfg(not(target_arch = "wasm32"))]
-fn get_limited(url: &str, limit: u64, timeout: Duration) -> Result<Vec<u8>, Failure> {
+fn get_limited(url: &str, limit: u64, timeout: Duration, missing: Failure) -> Result<Vec<u8>, Failure> {
     let mut res = agent(url, timeout).get(url).call().map_err(|_| Failure::Network)?;
-    if res.status().as_u16() != 200 {
-        return Err(Failure::Network);
+    match res.status().as_u16() {
+        200 => {}
+        404 => return Err(missing),
+        _ => return Err(Failure::Network),
     }
     let mut bytes = Vec::new();
     res.body_mut().as_reader().take(limit + 1).read_to_end(&mut bytes).map_err(|_| Failure::Network)?;
@@ -530,7 +535,7 @@ fn get_limited(url: &str, limit: u64, timeout: Duration) -> Result<Vec<u8>, Fail
 
 /// The web build never updates itself: each deploy is the newest build.
 #[cfg(target_arch = "wasm32")]
-fn get_limited(_url: &str, _limit: u64, _timeout: Duration) -> Result<Vec<u8>, Failure> {
+fn get_limited(_url: &str, _limit: u64, _timeout: Duration, _missing: Failure) -> Result<Vec<u8>, Failure> {
     Err(Failure::Network)
 }
 

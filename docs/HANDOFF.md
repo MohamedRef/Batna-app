@@ -216,6 +216,11 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   metered network a manual download asks first (`stage::MeteredConfirm`,
   mounted once in the shell); «استنى الواي فاي» sets `prefs.wifi_download`
   and the next unmetered `step` downloads it, in any mode.
+- The content pack also ships in two parts (#1354, RELEASE.md § Content
+  packs): text (~7 MB) and pictures (~16 MB). A device downloads the text,
+  reuses its kept pictures part when the hash is the same, and takes the
+  joined result only if it hashes to the signed full pack; otherwise it
+  downloads the full pack. Older apps fetch the full pack as before.
 - The content pack has its own lock (`Updater::content_job`), apart from the
   check/download/install lock (`job`): a tap on «نزّلها» or «ثبّتها» waits
   for a running job instead of being dropped, and never waits for the pack.
@@ -855,6 +860,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-16: content pack in parts (#1354): `packs build` writes `batna-content-text.pack` and `batna-content-pictures.pack`; feeds list them as `content-text` / `content-pictures`; devices fetch the text and keep unchanged pictures, joined bytes checked against the signed full pack.
 - 2026-11-16: § 11 Current state refreshed (#1355): release v2026.11.13, 1,059 lessons / 15,557 items / 936 pictures, review rounds since 11-13, open work; it now says where the release and content numbers come from.
 - 2026-11-16: #1353: Settings › بياناتك shows the last backup on this device and a quiet line when it is old; lesson marks and places after a reset are stamped after the marker, so a lesson finished right after «ابدأ من الأول» reads as done even when the marker's time is ahead of this clock.
 - 2026-11-16: longest-option cue rewrites in all 9 courses (#1349), worst lectures first: about 1,260 wrong options given the key's shape and length (4 keys trimmed), every lecture at or under a third per kind; case steps 52.8% → 13.9%, lesson checks 47.3% → 19.3%, lesson mini-case steps 54.2% → 13.2%; ceilings 14 / 19.5 / 13.5%. All `status: unverified`.

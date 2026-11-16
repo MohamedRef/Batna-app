@@ -66,13 +66,39 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         pack.look.len(),
         bytes.len() as f64 / 1024.0
     );
+    let (text, pictures) = parts(&pack, &bytes).map_err(|e| vec![e])?;
+    let summary = format!(
+        "{summary} (text {:.1} KB + pictures {:.1} KB)",
+        text.len() as f64 / 1024.0,
+        pictures.len() as f64 / 1024.0
+    );
     if check {
         return Ok(format!("pack OK: {summary}"));
     }
     let path = out.join("batna-content.pack");
     std::fs::create_dir_all(&out).map_err(|e| vec![format!("{}: {e}", out.display())])?;
-    std::fs::write(&path, &bytes).map_err(|e| vec![format!("{}: {e}", path.display())])?;
+    for (name, data) in [(PACK, &bytes), (TEXT, &text), (PICTURES, &pictures)] {
+        let at = out.join(name);
+        std::fs::write(&at, data).map_err(|e| vec![format!("{}: {e}", at.display())])?;
+    }
     Ok(format!("{}: {summary}", path.display()))
+}
+
+/// The full pack, and its two parts (#1354), in `dist/packs/`.
+pub const PACK: &str = "batna-content.pack";
+pub const TEXT: &str = "batna-content-text.pack";
+pub const PICTURES: &str = "batna-content-pictures.pack";
+
+/// The text and pictures parts of `pack` (whose bytes are `full`), checked
+/// the way a device uses them: joined and encoded again they must give the
+/// full pack's exact bytes, or a device would always fall back to it.
+pub fn parts(pack: &Pack, full: &[u8]) -> Result<(Vec<u8>, Vec<u8>), String> {
+    let (text, pictures) = pack.split();
+    let (text, pictures) = (text.encode(), pictures.encode());
+    if batna_core::pack::join_parts(&text, &pictures)? != full {
+        return Err("the text and pictures parts don't join back into the same pack".into());
+    }
+    Ok((text, pictures))
 }
 
 /// Every stylesheet of the app, by path under `crates/app`, so the pack can
@@ -126,14 +152,21 @@ mod tests {
         write(root, "crates/app/src/learn/mod.rs", "// not a stylesheet\n");
         let report = run(root, &strings(&["build"])).unwrap();
         let path = root.join("dist/packs/batna-content.pack");
+        let kb =
+            |name: &str| std::fs::metadata(root.join("dist/packs").join(name)).unwrap().len() as f64 / 1024.0;
         assert_eq!(
             report,
             format!(
-                "{}: 1 lecture(s), 2 items, 1 lesson(s), 2 stylesheet(s), {:.1} KB packed",
+                "{}: 1 lecture(s), 2 items, 1 lesson(s), 2 stylesheet(s), {:.1} KB packed (text {:.1} KB + pictures {:.1} KB)",
                 path.display(),
-                std::fs::metadata(&path).unwrap().len() as f64 / 1024.0
+                kb(PACK),
+                kb(TEXT),
+                kb(PICTURES)
             )
         );
+        // The parts join back into the full pack's bytes (#1354).
+        let read = |name: &str| std::fs::read(root.join("dist/packs").join(name)).unwrap();
+        assert_eq!(batna_core::pack::join_parts(&read(TEXT), &read(PICTURES)).unwrap(), read(PACK));
         let pack = Pack::decode(&std::fs::read(&path).unwrap()).unwrap();
         assert_eq!(pack.look.keys().collect::<Vec<_>>(), ["assets/main.css", "src/learn/learn.css"]);
         assert_eq!(pack.lessons[0].lessons[0].id, "hb.L01.lesson1");

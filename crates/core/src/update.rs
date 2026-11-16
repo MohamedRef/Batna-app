@@ -117,10 +117,29 @@ pub enum UpdatePlatform {
     MacosX86_64,
     /// `batna_core::pack` bytes: the lectures, for any platform.
     Content,
+    /// The content pack without its lesson pictures (`Pack::split`, #1354).
+    /// A device joins it with [`Self::ContentPictures`] and takes the result
+    /// only when it hashes to [`Self::Content`]'s signed SHA-256. Older apps
+    /// skip both and fetch the full pack.
+    ContentText,
+    /// The content pack's lesson pictures (`batna_core::pack::Pictures`).
+    ContentPictures,
 }
 
 impl UpdatePlatform {
-    pub const ALL: [Self; 4] = [Self::AndroidArm64, Self::MacosArm64, Self::MacosX86_64, Self::Content];
+    pub const ALL: [Self; 6] = [
+        Self::AndroidArm64,
+        Self::MacosArm64,
+        Self::MacosX86_64,
+        Self::Content,
+        Self::ContentText,
+        Self::ContentPictures,
+    ];
+
+    /// The content pack or one of its parts: not an app build.
+    pub fn is_content(self) -> bool {
+        matches!(self, Self::Content | Self::ContentText | Self::ContentPictures)
+    }
 
     pub fn as_str(self) -> &'static str {
         match self {
@@ -128,6 +147,8 @@ impl UpdatePlatform {
             Self::MacosArm64 => "macos-arm64",
             Self::MacosX86_64 => "macos-x86_64",
             Self::Content => "content",
+            Self::ContentText => "content-text",
+            Self::ContentPictures => "content-pictures",
         }
     }
 
@@ -140,7 +161,7 @@ impl UpdatePlatform {
         match self {
             Self::AndroidArm64 => "apk",
             Self::MacosArm64 | Self::MacosX86_64 => "app.zip",
-            Self::Content => "pack",
+            Self::Content | Self::ContentText | Self::ContentPictures => "pack",
         }
     }
 }

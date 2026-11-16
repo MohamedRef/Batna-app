@@ -296,6 +296,9 @@ jobs:
           apk=dist/in/batna-release-apk/batna.apk
           zip=dist/in/batna-release-mac/Batna.app.zip
           pack=dist/in/batna-release-pack/batna-content.pack
+          # Its two parts (#1354): devices fetch the text and keep pictures that didn't change.
+          text=dist/in/batna-release-pack/batna-content-text.pack
+          pictures=dist/in/batna-release-pack/batna-content-pictures.pack
           for channel in $CHANNELS; do
             out="dist/update/$channel"
             curl -fsSL --retry 3 -o /tmp/previous.json \
@@ -304,7 +307,8 @@ jobs:
             cargo run -q -p batna-tools -- update manifest --channel "$channel" --version "$V" \
               --build "$BATNA_BUILD" --commit "${GITHUB_SHA::7}" \
               --notes-en "$NOTES_EN" --notes-ar-eg "$NOTES_AR_EG" --previous /tmp/previous.json --changes \
-              --asset "android-arm64=$apk" --asset "macos-arm64=$zip" --asset "content=$pack" --out "$out"
+              --asset "android-arm64=$apk" --asset "macos-arm64=$zip" --asset "content=$pack" \
+              --asset "content-text=$text" --asset "content-pictures=$pictures" --out "$out"
             cargo run -q -p batna-tools -- update sign "$out"
             # The app's own checks, against the key built into release builds.
             cargo run -q -p batna-tools -- update verify "$out"

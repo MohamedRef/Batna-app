@@ -166,7 +166,7 @@ A build download that stops (the line drops, Batna is closed) keeps its
 asks only for the rest with an HTTP `Range` request (GitHub's release CDN
 serves ranges). The whole file is still hashed at the end, and a resumed
 file that doesn't match is fetched once more from the start. Content packs
-are a few MB and download whole.
+download whole, in two parts when the feed has them (§ Content packs).
 
 ### Content packs
 
@@ -187,6 +187,21 @@ pack with problems, and a pack already on disk or a last-good backup with
 problems is dropped at start in favour of the built-in content. Authoring
 rules that need the YAML (approvals) stay in `batna-tools
 validate`.
+
+**Parts (#1354).** `batna-tools packs build` also writes the pack's two
+parts: `batna-content-text.pack` (the pack with the lesson pictures' data
+taken out, about 7 MB) and `batna-content-pictures.pack` (every picture by
+file name, about 16 MB; `batna_core::pack::Pictures`). Feeds list them as
+`content-text` and `content-pictures` beside the full `content` pack, and
+`update verify` checks both are there and join into the full pack's exact
+bytes (`pack::join_parts`; the build refuses parts that don't). A device
+deciding to take a new pack downloads the text part, takes the pictures
+from its own copy (`updates/pictures-<sha256>.pack`, `update/parts.rs`)
+when the feed's has the same hash, else downloads them, joins, and keeps
+the result only when it hashes to the full pack's signed SHA-256. Anything
+else (no parts, a cut download, another encoder) falls back to downloading
+the full pack. Older apps skip the unknown platforms and fetch the full
+pack as before. So a text-only change costs about 7 MB instead of 25 MB.
 
 A pack also carries the app's stylesheets (`Pack::look`, every `.css` file
 under `crates/app`), so a change to the look needs no install either. The
@@ -280,7 +295,9 @@ By hand, the same steps are:
 cargo run -q -p batna-tools -- update manifest --channel alpha \
   --asset android-arm64=dist/android/batna.apk \
   --asset macos-arm64=dist/mac/Batna.app.zip \
-  --asset content=dist/packs/batna-content.pack --out dist/update/alpha
+  --asset content=dist/packs/batna-content.pack \
+  --asset content-text=dist/packs/batna-content-text.pack \
+  --asset content-pictures=dist/packs/batna-content-pictures.pack --out dist/update/alpha
 BATNA_UPDATE_SECRET="$(security find-generic-password -s batna-update -w)" \
   cargo run -q -p batna-tools -- update sign dist/update/alpha
 cargo run -q -p batna-tools -- update verify dist/update/alpha

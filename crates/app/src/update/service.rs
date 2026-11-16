@@ -377,12 +377,15 @@ impl Updater {
                 Some(bytes) => bytes,
                 None => {
                     self.tx.send_modify(|s| s.content_check = Some(ContentCheck::Fetching));
-                    let url = format!("{}/{}", self.feed_url(), asset.file);
-                    let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60), Failure::Network)
-                        .map_err(|f| (false, format!("{f:?}")))?;
-                    check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes))
-                        .map_err(|e| (false, e.to_string()))?;
-                    bytes
+                    match self.joined_parts(m, &asset) {
+                        Some(bytes) => bytes,
+                        None => {
+                            let bytes = self.fetch(&asset).map_err(|e| (false, e))?;
+                            check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes))
+                                .map_err(|e| (false, e.to_string()))?;
+                            bytes
+                        }
+                    }
                 }
             };
             let pack = Pack::decode(&bytes).map_err(|e| (true, e.to_string()))?;
@@ -426,6 +429,46 @@ impl Updater {
                 ContentCheck::Failed
             }
         }
+    }
+
+    /// One feed file, up to its signed size.
+    fn fetch(&self, asset: &UpdateAsset) -> Result<Vec<u8>, String> {
+        let url = format!("{}/{}", self.feed_url(), asset.file);
+        get_limited(&url, asset.size, Duration::from_secs(10 * 60), Failure::Network)
+            .map_err(|f| format!("{f:?}"))
+    }
+
+    /// The full pack from the feed's two parts (#1354): the text part, and
+    /// the pictures part from this device's copy when the feed's has the
+    /// same hash, so a text fix downloads about a quarter of the pack.
+    /// Taken only when the joined bytes hash to the full pack's signed
+    /// SHA-256; `None` (logged) falls back to the full download.
+    fn joined_parts(&self, m: &UpdateManifest, full: &UpdateAsset) -> Option<Vec<u8>> {
+        let text = m.asset(UpdatePlatform::ContentText)?;
+        let pictures = m.asset(UpdatePlatform::ContentPictures)?;
+        if text.size.saturating_add(pictures.size) > 2 * MAX_PACK_BYTES {
+            return None;
+        }
+        let get = |a: &UpdateAsset| -> Result<Vec<u8>, String> {
+            let bytes = self.fetch(a)?;
+            check_download(a, bytes.len() as u64, &sha256_hex(&bytes)).map_err(|e| e.to_string())?;
+            Ok(bytes)
+        };
+        let result = (|| -> Result<Vec<u8>, String> {
+            let kept = parts::kept_pictures(&self.dir, pictures);
+            let pictures_bytes = match &kept {
+                Some(bytes) => bytes.clone(),
+                None => get(pictures)?,
+            };
+            let joined = batna_core::pack::join_parts(&get(text)?, &pictures_bytes)?;
+            check_download(full, joined.len() as u64, &sha256_hex(&joined))
+                .map_err(|_| "the parts don't join into the signed pack".to_string())?;
+            if kept.is_none() {
+                parts::keep_pictures(&self.dir, &pictures.sha256, &pictures_bytes);
+            }
+            Ok(joined)
+        })();
+        result.map_err(|e| report!("content parts not used, fetching the whole pack: {e}")).ok()
     }
 
     /// The feed's pack when this device already keeps exactly those bytes

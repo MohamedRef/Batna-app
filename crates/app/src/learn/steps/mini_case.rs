@@ -12,12 +12,12 @@ pub(super) fn MiniCase(
     on_answer: EventHandler<bool>,
 ) -> Element {
     let n = steps.len();
-    // Each question's options in a stable shuffled order, like a check step.
+    // Each question's options in a stable order, like a check step.
     let orders = use_hook(|| {
         steps
             .iter()
             .enumerate()
-            .map(|(si, s)| shuffled(s.options.len(), &format!("{seed}.{si}")))
+            .map(|(si, s)| option_order(&s.options, &format!("{seed}.{si}")))
             .collect::<Vec<_>>()
     });
     let (saved, put) = use_draft();

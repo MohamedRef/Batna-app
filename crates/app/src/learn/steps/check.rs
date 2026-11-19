@@ -13,7 +13,7 @@ pub(super) fn Check(
     seed: String,
     on_answer: EventHandler<bool>,
 ) -> Element {
-    let order = use_hook(|| shuffled(options.len(), &seed));
+    let order = use_hook(|| option_order(&options, &seed));
     let (saved, put) = use_draft();
     let (pick0, checked0) = match saved {
         Draft::Check { pick, checked } => (pick, checked && pick.is_some()),

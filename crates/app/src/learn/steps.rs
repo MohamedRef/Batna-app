@@ -21,6 +21,9 @@ use order::*;
 mod check;
 use check::*;
 
+mod choices;
+use choices::*;
+
 mod presentation;
 pub(crate) use presentation::Figure;
 use presentation::*;

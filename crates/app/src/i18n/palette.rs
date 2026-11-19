@@ -56,7 +56,9 @@ pub fn item(context: &str) -> String {
 
 pub const KIND_ALL_RESULTS: &str = "كل اللي فيه الكلمة في الدروس";
 
-/// "كل النتايج: 19 درس و 43 كارت وسؤال".
+/// "كل النتايج: 19 درس و43 سؤال وكارت", with Arabic number agreement
+/// ("درسين و3 أسئلة وكروت").
 pub fn all_results(lessons: usize, items: usize) -> String {
-    format!("كل النتايج: {lessons} درس و{items} كارت وسؤال")
+    use super::count::{ITEM, LESSON, count};
+    format!("كل النتايج: {} و{}", count(lessons, &LESSON), count(items, &ITEM))
 }

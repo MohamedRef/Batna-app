@@ -124,7 +124,9 @@ pub fn hint(calc: &str, field: &str) -> Option<&'static str> {
         ("sle_acr_1997", "renal") => "بروتين في البول أكتر من 0.5 جم/يوم، أو خلايا أو casts.",
         ("sle_acr_1997", "neurological") => "تشنجات أو ذهان.",
         ("sle_acr_1997", "haematological") => "أنيميا انحلالية، أو نقص كرات بيضا أو ليمفاوية أو صفايح.",
-        ("sle_acr_1997", "immunological") => "Anti-dsDNA أو anti-Sm أو anticardiolipin.",
+        ("sle_acr_1997", "immunological") => {
+            "\u{2066}Anti-\u{2060}dsDNA\u{2069} أو \u{2066}anti-\u{2060}Sm\u{2069} أو anticardiolipin."
+        }
         ("sle_eular_acr_2019", "ana_1_80") => "شرط الدخول.",
         ("sle_eular_acr_2019", "antiphospholipid") => {
             "Anticardiolipin IgG أكتر من 40، أو anti-β2GP1 IgG أكتر من 40، أو lupus anticoagulant."
@@ -232,7 +234,7 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
         "fena" => "الـ AKI قبل الكلى (prerenal) ولا من الكلى نفسها (ATN)",
         "feurea" => "زي الـ FENa، بس بينفع والعيان على مدرّات",
         "bun_creatinine" => "نسبة الـ BUN للكرياتينين: prerenal ولا ATN؟",
-        "ckd_epi_2021" => "الـ eGFR بمعادلة CKD-EPI 2021 من الكرياتينين والسن",
+        "ckd_epi_2021" => "الـ eGFR بمعادلة \u{2066}CKD-\u{2060}EPI\u{2069} 2021 من الكرياتينين والسن",
         "kdigo_ckd" => "مرحلة الـ CKD بالـ G والـ A ولون الخطر والمتابعة",
         "aa_gradient" => "نقص الأكسجين من الرئة نفسها ولا من قلة التهوية؟",
         "free_water_deficit" => "نقص الميه في الـ hypernatraemia وحجم المحلول المطلوب",
@@ -249,7 +251,9 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
         "abi" => "ضغط الكاحل على ضغط الدراع: فيه PAD؟",
         "acr_eular_2010_ra" => "تشخيص الـ rheumatoid arthritis: 6 من 10 أو أكتر",
         "caspar" => "تشخيص الـ psoriatic arthritis: 3 نقط أو أكتر",
-        "asas_axial_spa" => "الـ axial SpA بالأشعة أو بالـ HLA-B27، حتى قبل ما تبان في الأشعة",
+        "asas_axial_spa" => {
+            "الـ axial SpA بالأشعة أو بالـ \u{2066}HLA-\u{2060}B27\u{2069}، حتى قبل ما تبان في الأشعة"
+        }
         "asas_peripheral_spa" => "الـ SpA في المفاصل الطرفية: arthritis أو enthesitis أو dactylitis",
         "modified_new_york" => "تشخيص الـ ankylosing spondylitis بالأشعة والكشف",
         "sle_acr_1997" => "تشخيص الذئبة الحمراء: 4 من 11 أو أكتر",
@@ -266,7 +270,7 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
         "rai_cll" => "مرحلة الـ CLL (من 0 لـ IV) بالغدد والطحال والهيموجلوبين والصفايح",
         "binet_cll" => "مرحلة الـ CLL (A وB وC) بعدد المناطق والهيموجلوبين والصفايح",
         "ann_arbor" => "مرحلة الليمفوما من I لـ IV، وA أو B حسب الأعراض",
-        "ipi_nhl" => "التوقّع في الـ non-Hodgkin lymphoma من 0 لـ 5",
+        "ipi_nhl" => "التوقّع في الـ \u{2066}non-\u{2060}Hodgkin\u{2069} lymphoma من 0 لـ 5",
         "who_pv" => "تشخيص الـ polycythaemia vera بمعايير الـ WHO",
         "who_et" => "تشخيص الـ essential thrombocythaemia بمعايير الـ WHO",
         "who_pmf" => "تشخيص الـ primary myelofibrosis بمعايير الـ WHO",
@@ -280,7 +284,7 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
         "imr" => "وفيات الأطفال تحت سنة لكل 1000 مولود حي",
         "nmr" => "وفيات أول 28 يوم لكل 1000 مولود حي",
         "relative_risk" => "الخطر في المعرّضين قصاد غير المعرّضين (cohort)",
-        "odds_ratio" => "قوة العلاقة في دراسة الـ case-control",
+        "odds_ratio" => "قوة العلاقة في دراسة الـ \u{2066}case-\u{2060}control\u{2069}",
         "attributable_risk" => "الزيادة في الخطر اللي سببها التعرّض",
         "nnt" => "تعالج كام واحد عشان واحد يستفيد (أو يتأذى)",
         "diagnostic_accuracy" => "الحساسية والنوعية والـ PPV والـ NPV من جدول 2×2",
@@ -294,7 +298,9 @@ pub fn blurb(calc: &str) -> Option<&'static str> {
             "محتاج كام case و control (أو exposed و unexposed) بالـ power اللي عايزه"
         }
         "predictive_values" => "الـ PPV والـ NPV لنفس الـ test في population بـ prevalence تانية",
-        "post_test_probability" => "الاحتمال بعد النتيجة من الـ pre-test probability والـ likelihood ratio",
+        "post_test_probability" => {
+            "الاحتمال بعد النتيجة من الـ \u{2066}pre-\u{2060}test\u{2069} probability والـ likelihood ratio"
+        }
         "chi_square" => "فيه علاقة بين متغيرين نوعيين في جدول 2×2 ولا صدفة؟",
         "t_test" => "الفرق بين المتوسطات حقيقي ولا صدفة؟ (عينة واحدة، paired، أو مجموعتين)",
         _ => return None,

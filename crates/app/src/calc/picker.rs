@@ -107,6 +107,9 @@ pub(crate) fn fold(s: &str) -> String {
             'ى' | 'ئ' => Some('ي'),
             'ؤ' => Some('و'),
             '٠'..='٩' => char::from_digit(c as u32 - '٠' as u32, 10),
+            // Isolates and word joiners that keep a term like case-control
+            // whole in an Arabic line (i18n::calc) are not part of a word.
+            '\u{2060}' | '\u{2066}'..='\u{2069}' => None,
             _ => Some(c),
         })
         .flat_map(char::to_lowercase)

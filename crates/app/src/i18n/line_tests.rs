@@ -168,3 +168,51 @@ fn high_yield_stays_one_unbroken_run_in_arabic_lines() {
         assert_eq!(line.matches("high-").count(), 1, "no bare high-yield left: {line}");
     }
 }
+
+/// A Latin term with a hyphen inside an Arabic line («case-control») can
+/// break at the hyphen at a line end, and the hyphen then flips to the
+/// other side («-case / control»). Such terms are one left-to-right isolate
+/// with a word joiner after the hyphen, like «high-yield» (#1388).
+fn bare_hyphens(line: &str) -> Vec<String> {
+    if !line.chars().any(|c| ('\u{0600}'..='\u{06FF}').contains(&c)) {
+        return Vec::new();
+    }
+    let chars: Vec<char> = line.chars().collect();
+    (1..chars.len().saturating_sub(1))
+        .filter(|&i| {
+            chars[i] == '-' && chars[i - 1].is_ascii_alphanumeric() && chars[i + 1].is_ascii_alphanumeric()
+        })
+        .map(|i| chars[i.saturating_sub(8)..(i + 8).min(chars.len())].iter().collect())
+        .collect()
+}
+
+#[test]
+fn hyphenated_latin_terms_stay_whole_in_arabic_lines() {
+    let mut lines: Vec<(String, String)> = Vec::new();
+    for spec in batna_core::calc::all() {
+        lines.extend(calc::blurb(spec.id).map(|b| (spec.id.to_string(), b.to_string())));
+        for f in spec.fields {
+            lines.extend(
+                calc::hint(spec.id, f.key).map(|h| (format!("{}.{}", spec.id, f.key), h.to_string())),
+            );
+        }
+    }
+    for (name, line) in
+        [("IMPORT_COPY_FAILED", data::IMPORT_COPY_FAILED), ("IMPORT_TOO_BIG", data::IMPORT_TOO_BIG)]
+    {
+        lines.push((name.to_string(), line.to_string()));
+    }
+    let bare: Vec<_> = lines
+        .iter()
+        .flat_map(|(n, l)| bare_hyphens(l).into_iter().map(move |h| format!("{n}: …{h}…")))
+        .collect();
+    assert!(bare.is_empty(), "{bare:#?}");
+    assert!(calc::blurb("odds_ratio").unwrap().contains("\u{2066}case-\u{2060}control\u{2069}"));
+}
+
+#[test]
+fn the_palette_counts_lessons_and_items_in_arabic() {
+    assert_eq!(palette::all_results(19, 43), "كل النتايج: 19 درس و43 سؤال وكارت");
+    assert_eq!(palette::all_results(2, 1), "كل النتايج: درسين وسؤال واحد");
+    assert_eq!(palette::all_results(3, 5), "كل النتايج: 3 دروس و5 أسئلة وكروت");
+}

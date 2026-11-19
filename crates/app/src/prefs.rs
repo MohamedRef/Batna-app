@@ -30,6 +30,13 @@ pub fn data_dir() -> Option<PathBuf> {
     if let Some(dir) = std::env::var_os("BATNA_DATA_DIR") {
         return Some(PathBuf::from(dir));
     }
+    // A test never touches the real profile, even without BATNA_DATA_DIR: on
+    // a Mac with Batna installed it is his own app's folder, and a plain
+    // `cargo test` rewrote its device prefs and opened, rejected and removed
+    // content packs in it, which also failed six tests there (#1378).
+    if cfg!(test) {
+        return Some(test_profile());
+    }
     if cfg!(target_arch = "wasm32") {
         // The browser has no folders: the database is in IndexedDB and the
         // device prefs in localStorage (`platform::web`).
@@ -48,6 +55,19 @@ pub fn data_dir() -> Option<PathBuf> {
         .map(PathBuf::from)
         .or_else(|| home.map(|h| h.join(".local/share")))
         .map(|d| d.join("batna"))
+}
+
+/// A test process's data folder: a scratch folder of its own, so no test
+/// reads the packs or prefs Batna or an earlier run left behind.
+fn test_profile() -> PathBuf {
+    static DIR: std::sync::OnceLock<PathBuf> = std::sync::OnceLock::new();
+    DIR.get_or_init(|| {
+        let dir = std::env::temp_dir().join(format!("batna-test-{}", std::process::id()));
+        // What an earlier run with the same process id left.
+        let _ = std::fs::remove_dir_all(&dir);
+        dir
+    })
+    .clone()
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -475,5 +495,22 @@ mod tests {
         let p = DevicePrefs { text_size: TextSize::Smaller, ..DevicePrefs::default() };
         assert_eq!(DevicePrefs::parse(&p.render()), p);
         assert!(p.css().ends_with("html{font-size:82%;}"));
+    }
+
+    #[test]
+    fn tests_keep_out_of_the_real_profile() {
+        if std::env::var_os("BATNA_DATA_DIR").is_some() {
+            return; // pointed somewhere on purpose
+        }
+        let dir = data_dir().expect("a data folder");
+        assert!(dir.starts_with(std::env::temp_dir()), "{}", dir.display());
+        if let Some(home) = std::env::var_os("HOME") {
+            for real in ["Library/Application Support/app.batna", ".local/share/batna"] {
+                assert!(!dir.starts_with(PathBuf::from(&home).join(real)), "{}", dir.display());
+            }
+        }
+        // Saving a choice lands in the scratch folder.
+        DevicePrefs::default().save();
+        assert!(dir.join(FILE).exists());
     }
 }

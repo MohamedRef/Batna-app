@@ -371,15 +371,18 @@ quote cap there is outdated), course briefs in [courses/](courses/).
     (`crates/tools/src/cue.rs`) fails above `Kind::ceiling`, which each
     rewrite PR lowers, never raises. Options printed in a source
     (`book-question`, `slide-question`, `past-paper`, `lecture-quiz`) stay as
-    printed and are not counted.
+    printed and are not counted. Nor is a lesson check or mini-case step
+    that asks one of its lecture's printed questions (#1402): it keeps the
+    item's options (all of them, or all but one; order, case, spacing and a
+    final full stop aside), and `cue` leaves it out like the item.
     A second count, the long pair (#1366): two options that both stand out
     by length with the key one of them. Lengthening one wrong option per
     question passes the first count and keeps the cue, so rewrite every
     wrong option of a question. `batna-tools cue` prints it per kind;
     `the_long_pair_stays_under_its_ceiling` fails above `Kind::pair_ceiling`
-    (2026-11-16: MCQs 1.1%, case steps 0.0%, lesson checks 1.4%, lesson
-    mini-cases 0.2%). All four kinds are done for the nine courses (#1366).
-    What is left (25 MCQs, 23 lesson checks, one mini-case) repeats a
+    (2026-11-19: MCQs 1.1%, case steps 0.0%, lesson checks 1.3%, lesson
+    mini-cases 0.0%). All four kinds are done for the nine courses (#1366).
+    What is left (25 MCQs, 20 lesson checks) repeats a
     question, a list or example titles the book prints, so it stays as
     printed. A weaker, separate signal is still open: where one option alone
     stands out as the longest, it is the key in 32% of MCQs and 29% of
@@ -912,6 +915,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-19: lesson copies of printed questions keep the printed options (#1402): 12 lesson checks and mini-case steps that ask a book or slide question (dm.L13, geri.L03, geri.L07, res.L06 ×2, res.L19, rheum.L09, L13, L14 ×3, L19) had them reworded by the 2026-11-16 rewrite, and rheum.L04.020, L09.048 and L09.051 had lost them before; all are back to the printed options. `batna-tools cue` leaves out a lesson question whose options are a printed item's of its lecture (62 such steps): lesson checks 1.3% long pair (20 of 1539), mini-cases 0.0%.
 - 2026-11-19: glossary spell-outs in hepatology (#1383): 11 first-mention expansions that took the glossary's first sense now say what the lecture means (CPP cerebral perfusion pressure ×3, SBP systolic, APA antiphospholipid, CLD cholestatic liver dysfunction, 5'-nucleotidase, the BIC and ABCDE, «A HAT» and «BAD VAPS» mnemonics); `course: hb` senses for CPP, HAT and BAD fix their hover peek.
 - 2026-11-19: review fixes in hem and dm: hem.L04.031/033 and the hem.L04.lesson2 acquired table quoted the Chediak-Higashi paragraph (now the book's p65 lines), a thalassaemia mini-case option that the step's own reason made right, a leukemoid check above the book's 50,000 line, and a dm.L01.126 reason left from an older option.
 - 2026-11-19: hyphenated English terms in Arabic lines stay whole (#1400): calculator blurbs and hints (CKD-EPI, HLA-B27, non-Hodgkin, case-control, pre-test, Anti-dsDNA, anti-Sm) and the import errors' batna-export are one LTR isolate with a word joiner after the hyphen, like «high-yield» (#1388); the calculator search drops those marks; the palette's all-results line counts with `i18n::count`.

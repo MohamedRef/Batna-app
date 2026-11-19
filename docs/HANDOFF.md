@@ -786,6 +786,18 @@ has answered something since, one quiet line suggesting a new one (#1353).
   «تمام». Seen ones are kept in the synced setting `verify.fixed_seen`
   (id → fingerprint of the fixed text), so a later fix is new again.
 
+### Study reminders (#1384)
+
+- `reminders/plan.rs` words and times the next reminders; Android
+  (`Reminders.kt` `wallClock`) and the Mac (`UNCalendarNotificationTrigger`)
+  arm each from its `date` and `time` in the device's zone, so 19:00 stays
+  19:00 across Egypt's summer-time change. `at` is only their fallback and
+  now uses the offset in force at that moment (`Zone::utc_from_local`).
+- A reminder belongs to the study day its time falls in (from 4 am, like an
+  answer): armed after midnight, the calendar day is already the next study
+  day, so "target met" and `due[0]` stay with the evening before, and that
+  day's reminder still rings with its own count.
+
 ### Desktop (Mac) layout
 
 - Full-window canvas, wider labelled sidebar, 1280×820 default window (#739).

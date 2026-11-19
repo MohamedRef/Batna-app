@@ -8,7 +8,7 @@ use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::platform::reminders as native;
-use crate::store::{now_ms, shared, use_review, utc_offset_minutes};
+use crate::store::{now_ms, shared, use_review};
 
 /// At most this many reminder times a day.
 pub const MAX_TIMES: usize = 3;
@@ -136,10 +136,10 @@ fn armed(
         times: &times,
         weekdays,
         due,
-        // He studied today and nothing is left due: today's done.
+        // He studied this study day and nothing is left due: it's done.
         target_met: answered > 0 && due.first().is_none_or(|&d| d == 0),
         now_ms: now.max(0) as u64,
-        utc_offset_min: utc_offset_minutes(),
+        zone: crate::store::zone(),
     };
     // The fallback first, so a reminder firing in between finds it.
     let repeat = plan::repeat(&inputs).and_then(|r| serde_json::to_string(&r).ok());

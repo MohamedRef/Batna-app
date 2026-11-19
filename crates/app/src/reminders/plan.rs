@@ -3,8 +3,15 @@
 //! Rust words and times them, and the platform arms each one from its
 //! wall-clock `date` and `time` in the device's own zone, so Egypt's
 //! daylight-saving switch keeps 19:00 at 19:00.
+//!
+//! A reminder belongs to the study day its time falls in (from 4 am, like
+//! an answer): after midnight, today's calendar date is already the next
+//! study day, so "today's target is met" and today's due count stay with
+//! the evening before (#1384).
 
 use batna_core::plan::Day;
+use batna_core::srs::ROLLOVER_HOUR;
+use batna_core::zone::Zone;
 use serde::{Deserialize, Serialize};
 
 /// Reminders armed ahead: a week or more even at three a day. After the
@@ -17,7 +24,8 @@ const HORIZON: i32 = 14;
 const DAY_MS: i64 = 86_400_000;
 
 /// One notification, as `ReminderBridge.schedule` reads it. `at` is the same
-/// moment by the stored UTC offset, the fallback when the zone is unknown.
+/// moment in UTC, by the offset in force then; the platforms arm from `date`
+/// and `time` and read `at` only when those don't parse.
 #[derive(Clone, Debug, PartialEq, Eq, Serialize)]
 pub struct Scheduled {
     pub at: u64,
@@ -95,12 +103,14 @@ pub struct Inputs<'a> {
     pub times: &'a [u16],
     /// Study days, Saturday first (`PlanSettings::weekdays`).
     pub weekdays: [bool; 7],
-    /// Reviews due per day, today first (overdue counted today).
+    /// Reviews due per study day, today's study day first (overdue counted
+    /// today), as `due_forecast` counts them.
     pub due: &'a [u32],
-    /// Today's target is already met, so today stays quiet.
+    /// Today's study day's target is already met, so it stays quiet.
     pub target_met: bool,
     pub now_ms: u64,
-    pub utc_offset_min: i32,
+    /// The device's time zone (`store::zone`), with its summer-time changes.
+    pub zone: Zone,
 }
 
 /// What to arm now, soonest first. Empty on a quiet device or with no times.
@@ -111,24 +121,29 @@ pub fn schedule(i: &Inputs) -> Vec<Scheduled> {
     let mut times = i.times.to_vec();
     times.sort_unstable();
     times.dedup();
-    let offset_ms = i64::from(i.utc_offset_min) * 60_000;
-    let local_now = i.now_ms as i64 + offset_ms;
-    let today = Day::from_unix_ms(i.now_ms as i64, i.utc_offset_min, 0);
+    let now = i.now_ms as i64;
+    let local_now = i.zone.local_ms(now);
+    let today = i.zone.calendar_day(now);
+    let study_today = i.zone.study_day(now);
+    let rollover = u16::from(ROLLOVER_HOUR) * 60;
     let midnight = local_now - local_now.rem_euclid(DAY_MS);
     let mut out = Vec::new();
     for d in 0..HORIZON {
         let day = today.plus(d);
-        if !i.weekdays[day.weekday()] || (d == 0 && i.target_met) {
-            continue;
-        }
-        let due = i.due.get(d as usize).copied();
         for &t in &times {
+            // Before 4 am the reminder still belongs to the evening before.
+            let study = if t < rollover { day.plus(-1) } else { day };
+            let ahead = study_today.until(study);
+            if !i.weekdays[study.weekday()] || (ahead == 0 && i.target_met) {
+                continue;
+            }
             let local = midnight + i64::from(d) * DAY_MS + i64::from(t) * 60_000;
             if local <= local_now {
                 continue;
             }
+            let due = usize::try_from(ahead).ok().and_then(|s| i.due.get(s)).copied();
             out.push(Scheduled {
-                at: (local - offset_ms).max(0) as u64,
+                at: i.zone.utc_from_local(local).max(0) as u64,
                 date: day.iso(),
                 time: format!("{:02}:{:02}", t / 60, t % 60),
                 title: crate::i18n::remind::TITLE.into(),
@@ -159,7 +174,7 @@ mod tests {
             due,
             target_met: false,
             now_ms: NOW,
-            utc_offset_min: CAIRO,
+            zone: Zone::fixed(CAIRO),
         }
     }
 
@@ -196,6 +211,53 @@ mod tests {
     fn today_stays_quiet_once_the_target_is_met() {
         let items = schedule(&Inputs { target_met: true, ..inputs(&[19 * 60], &[5]) });
         assert_eq!(items[0].date, "2026-10-28");
+    }
+
+    #[test]
+    fn after_the_clocks_go_back_19_00_is_still_19_00() {
+        // Egypt leaves summer time at 24:00 on 2026-10-29 (21:00 UTC).
+        static CHANGES: [(i64, i32); 1] = [(1_793_307_600_000, 120)];
+        let zone = Zone { base: CAIRO, changes: &CHANGES };
+        let items = schedule(&Inputs { zone, ..inputs(&[19 * 60], &[]) });
+        let at = |date: &str| items.iter().find(|s| s.date == date).map(|s| s.at).unwrap();
+        // 19:00 is 16:00 UTC in summer time and 17:00 UTC after the change (#1384).
+        assert_eq!(at("2026-10-29"), 1_793_289_600_000);
+        assert_eq!(at("2026-10-30"), 1_793_289_600_000 + 25 * 3_600_000);
+        assert_eq!(at("2026-11-02"), 1_793_289_600_000 + (4 * 24 + 1) * 3_600_000);
+        assert!(items.iter().all(|s| s.time == "19:00"));
+    }
+
+    /// Friday 2026-11-06 01:00 Cairo (UTC+2): Thursday's study day runs to 4 am.
+    const FRIDAY_1_AM: u64 = 1_793_919_600_000;
+
+    #[test]
+    fn after_midnight_the_new_study_day_still_rings() {
+        // Thursday evening's target is met; Friday's study day has 7 due.
+        let i = Inputs {
+            now_ms: FRIDAY_1_AM,
+            zone: Zone::fixed(120),
+            target_met: true,
+            ..inputs(&[19 * 60], &[0, 7])
+        };
+        let items = schedule(&i);
+        assert_eq!((items[0].date.as_str(), items[0].time.as_str()), ("2026-11-06", "19:00"), "Friday rings");
+        assert!(items[0].text.contains('7'), "Friday's own count: {}", items[0].text);
+    }
+
+    #[test]
+    fn a_reminder_before_4_am_belongs_to_the_evening_before() {
+        let i = Inputs {
+            now_ms: FRIDAY_1_AM,
+            zone: Zone::fixed(120),
+            target_met: true,
+            ..inputs(&[3 * 60, 19 * 60], &[0, 7, 9])
+        };
+        let when: Vec<_> = schedule(&i).into_iter().take(3).map(|s| (s.date, s.time, s.text)).collect();
+        // Friday 03:00 is still Thursday's study day, which is done: it stays quiet.
+        assert_eq!((when[0].0.as_str(), when[0].1.as_str()), ("2026-11-06", "19:00"));
+        // Saturday 03:00 is Friday's study day, with Friday's count.
+        assert_eq!((when[1].0.as_str(), when[1].1.as_str()), ("2026-11-07", "03:00"));
+        assert!(when[1].2.contains('7') && when[2].2.contains('9'), "{when:?}");
     }
 
     #[test]

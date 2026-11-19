@@ -47,8 +47,14 @@ impl Zone {
 
     /// UTC ms at which day `day` starts (at `rollover_hour` local time).
     pub fn day_start_from(&self, day: i64, rollover_hour: u8) -> i64 {
-        let local = day * DAY_MS + i64::from(rollover_hour) * 3_600_000;
-        // The offset at the start may differ from a guess a few hours off; two rounds settle it.
+        self.utc_from_local(day * DAY_MS + i64::from(rollover_hour) * 3_600_000)
+    }
+
+    /// UTC ms of a local wall-clock reading (`local_ms`'s inverse), with the
+    /// offset in force at that moment: 19:00 after the clocks go back is an
+    /// hour later in UTC than 19:00 the day before (#1384).
+    pub fn utc_from_local(&self, local: i64) -> i64 {
+        // The offset then may differ from a guess a few hours off; two rounds settle it.
         let mut at = local - i64::from(self.base) * 60_000;
         for _ in 0..2 {
             at = local - i64::from(self.offset_at(at)) * 60_000;
@@ -108,6 +114,18 @@ mod tests {
             let start = ZONE.day_start_from(day, 4);
             assert!(start <= ms && ZONE.day_from(start, 4) == day && ZONE.day_from(start - 1, 4) == day - 1);
         }
+    }
+
+    #[test]
+    fn a_wall_clock_reading_maps_back_with_the_offset_then() {
+        let hour = 3_600_000;
+        // 19:00 on 2026-10-29 (summer, +3) and on 2026-10-30 (winter, +2).
+        let thursday = END_OF_SUMMER - 5 * hour;
+        let friday = END_OF_SUMMER + 20 * hour;
+        assert_eq!(ZONE.utc_from_local(ZONE.local_ms(thursday)), thursday);
+        assert_eq!(ZONE.utc_from_local(ZONE.local_ms(friday)), friday);
+        assert_eq!(friday - thursday, 25 * hour, "the same wall time a day later, one hour more in UTC");
+        assert_eq!(Zone::fixed(120).utc_from_local(1_000 * hour), 998 * hour);
     }
 
     #[test]

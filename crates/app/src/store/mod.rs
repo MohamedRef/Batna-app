@@ -870,12 +870,6 @@ pub fn now_ms() -> i64 {
         .unwrap_or(0)
 }
 
-/// Minutes east of UTC right now (Cairo: 120, or 180 in summer time).
-pub fn utc_offset_minutes() -> i32 {
-    use chrono::Offset;
-    chrono::Local::now().offset().fix().local_minus_utc() / 60
-}
-
 /// This device's time zone as a table of UTC offsets, 2020–2040, so every
 /// moment uses the offset in force then (a change to or from summer time
 /// never moves past answers to another day, #40). Built once: an hourly scan
@@ -996,7 +990,9 @@ mod tests {
 
     #[test]
     fn zone_matches_the_system_offset_now() {
-        assert_eq!(zone().offset_at(now_ms()), utc_offset_minutes());
+        use chrono::Offset;
+        let now = chrono::Local::now().offset().fix().local_minus_utc() / 60;
+        assert_eq!(zone().offset_at(now_ms()), now);
         assert!(zone().changes.windows(2).all(|w| w[0].0 < w[1].0));
     }
 

@@ -786,6 +786,18 @@ has answered something since, one quiet line suggesting a new one (#1353).
   «تمام». Seen ones are kept in the synced setting `verify.fixed_seen`
   (id → fingerprint of the fixed text), so a later fix is new again.
 
+### Study reminders (#1384)
+
+- `reminders/plan.rs` words and times the next reminders; Android
+  (`Reminders.kt` `wallClock`) and the Mac (`UNCalendarNotificationTrigger`)
+  arm each from its `date` and `time` in the device's zone, so 19:00 stays
+  19:00 across Egypt's summer-time change. `at` is only their fallback and
+  now uses the offset in force at that moment (`Zone::utc_from_local`).
+- A reminder belongs to the study day its time falls in (from 4 am, like an
+  answer): armed after midnight, the calendar day is already the next study
+  day, so "target met" and `due[0]` stay with the evening before, and that
+  day's reminder still rings with its own count.
+
 ### Desktop (Mac) layout
 
 - Full-window canvas, wider labelled sidebar, 1280×820 default window (#739).
@@ -897,6 +909,7 @@ state; details live in the PR and in § 10.
 - 2026-11-19: glossary spell-outs in hepatology (#1383): 11 first-mention expansions that took the glossary's first sense now say what the lecture means (CPP cerebral perfusion pressure ×3, SBP systolic, APA antiphospholipid, CLD cholestatic liver dysfunction, 5'-nucleotidase, the BIC and ABCDE, «A HAT» and «BAD VAPS» mnemonics); `course: hb` senses for CPP, HAT and BAD fix their hover peek.
 - 2026-11-19: review fixes in hem and dm: hem.L04.031/033 and the hem.L04.lesson2 acquired table quoted the Chediak-Higashi paragraph (now the book's p65 lines), a thalassaemia mini-case option that the step's own reason made right, a leukemoid check above the book's 50,000 line, and a dm.L01.126 reason left from an older option.
 - 2026-11-19: NNT rounds up a whole patient without float dust (CER 33.3 / EER 13.3 gave 6, now 5; 1.2 / 0.4 gave 126, now 125), as `sample_size::up` already did (#1385).
+- 2026-11-19: reminders follow the study day (#1384): armed after midnight once the evening's study was done, the next day's reminders no longer stay quiet and show that day's own count; a time before 4 am counts for the evening before; the fallback `at` uses the offset in force at that moment (`Zone::utc_from_local`). Android and the Mac already armed from `date` and `time` in the device's zone (§ 10 Study reminders).
 - 2026-11-19: mixed sessions and the exam plan take new items from the courses he takes now, in book order (#1380): Today's session started with Diabetes (id order) and the plan spread all nine courses over the exam days.
 - 2026-11-19: `batna-core` `update::tests::a_linux_build_has_no_app_updates` runs on Linux only and a Mac build checks its own platform, so `cargo test --workspace` passes on the Mac (#1385).
 - 2026-11-19: tests keep out of the real profile (#1378): `prefs::data_dir()` is a scratch folder per test process, so `just check` on the Mac no longer rewrites the installed app's device prefs or opens its content packs (six tests failed there on the old pack); RUN.md's Mac folder is `app.batna`.

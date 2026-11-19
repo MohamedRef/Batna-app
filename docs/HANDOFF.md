@@ -894,6 +894,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-19: review fixes in hem and dm: hem.L04.031/033 and the hem.L04.lesson2 acquired table quoted the Chediak-Higashi paragraph (now the book's p65 lines), a thalassaemia mini-case option that the step's own reason made right, a leukemoid check above the book's 50,000 line, and a dm.L01.126 reason left from an older option.
 - 2026-11-19: NNT rounds up a whole patient without float dust (CER 33.3 / EER 13.3 gave 6, now 5; 1.2 / 0.4 gave 126, now 125), as `sample_size::up` already did (#1385).
 - 2026-11-19: mixed sessions and the exam plan take new items from the courses he takes now, in book order (#1380): Today's session started with Diabetes (id order) and the plan spread all nine courses over the exam days.
 - 2026-11-19: tests keep out of the real profile (#1378): `prefs::data_dir()` is a scratch folder per test process, so `just check` on the Mac no longer rewrites the installed app's device prefs or opens its content packs (six tests failed there on the old pack); RUN.md's Mac folder is `app.batna`.

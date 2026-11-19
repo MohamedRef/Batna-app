@@ -1125,9 +1125,18 @@ mod tests {
         assert_eq!(published_secs("2026-10-27T08:00:60Z"), Some(1_793_088_060), "a leap second reads");
     }
 
+    // `just check` runs on CI's Linux and on the Mac, so each build checks
+    // its own answer (this failed on every Mac).
     #[test]
+    #[cfg(not(any(target_os = "macos", target_os = "android")))]
     fn a_linux_build_has_no_app_updates() {
         assert_eq!(this_platform(), None, "only Android arm64 and the Mac get app files");
+    }
+
+    #[test]
+    #[cfg(target_os = "macos")]
+    fn a_mac_build_gets_the_mac_app_files() {
+        assert!(matches!(this_platform(), Some(UpdatePlatform::MacosArm64 | UpdatePlatform::MacosX86_64)));
     }
 
     #[test]

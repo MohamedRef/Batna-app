@@ -61,7 +61,10 @@ pub fn tight_days(days: u32) -> String {
 pub fn tight_cap(cap: u32) -> String {
     format!("لو علّيت حد المراجعات اليومي لـ {cap}، الخطة تلحق كلها. تقدر تعدّله من تقدّمي ← خطة الامتحان.")
 }
-pub const TIGHT_HIGH_YIELD: &str = "الوقت مش مكفّي كل الجديد قبل آخر الأيام. ركّز على high-yield الأول.";
+/// «high-yield» kept as one left-to-right run that never breaks at its
+/// hyphen (at a line end it read «-high / yield», #1385).
+pub const TIGHT_HIGH_YIELD: &str =
+    "الوقت مش مكفّي كل الجديد قبل آخر الأيام. ركّز على \u{2066}high-\u{2060}yield\u{2069} الأول.";
 
 // The 2026-10-29 redesign: a greeting, the session length, one start.
 pub const EYEBROW: &str = "جلسة صغيرة، وفهم ثابت";

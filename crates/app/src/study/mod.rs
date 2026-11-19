@@ -95,15 +95,31 @@ fn find(id: &str) -> Option<(&'static Lecture, &'static Item)> {
     items().get(id).copied().or_else(|| crate::own::find(id))
 }
 
-/// Lectures that have at least one item this player can show, then his own
-/// cards' deck when he has any.
+/// Lectures that have at least one item this player can show, in book
+/// order (the index), then his own cards' deck when he has any. The
+/// composer takes new items in this order; the map's id order put
+/// Diabetes first.
 fn ready_lectures() -> Vec<&'static Lecture> {
-    Library::get()
+    let lib = Library::get();
+    lib.index
         .lectures
-        .values()
+        .iter()
+        .filter_map(|e| lib.lectures.get(&e.id))
         .filter(|l| l.items.iter().any(|i| PLAYABLE.contains(&i.body.kind())))
         .chain(crate::own::lecture())
         .collect()
+}
+
+/// The lectures a session over `lectures` starts new items in: those of the
+/// courses he takes now (`courses::takes_new`). `None` (no narrowing) when
+/// none of them is, so picking only a later course still teaches it.
+fn new_in_mixed(lectures: &[&Lecture]) -> Option<HashSet<String>> {
+    let taking: HashSet<String> = lectures
+        .iter()
+        .filter(|l| crate::courses::takes_new(&l.lecture))
+        .map(|l| l.lecture.clone())
+        .collect();
+    (!taking.is_empty()).then_some(taking)
 }
 
 /// A lecture the setup offers: one of the course in view, or his own deck.
@@ -227,8 +243,11 @@ pub fn Study() -> Element {
 
     let mut begin = {
         let store = store.clone();
-        move |lectures: Vec<&'static Lecture>, topics: HashSet<String>, mins: u32| {
-            let planned = plan(&store, &lectures, &topics, mins);
+        move |lectures: Vec<&'static Lecture>,
+              topics: HashSet<String>,
+              mins: u32,
+              new_in: Option<HashSet<String>>| {
+            let planned = plan(&store, &lectures, &topics, mins, new_in.as_ref());
             let empty = planned.is_empty();
             undo_note.set(None);
             session.set(Session::new(planned));
@@ -265,9 +284,12 @@ pub fn Study() -> Element {
                 .into_iter()
                 .filter(|l| req.lectures.as_ref().is_none_or(|ids| ids.contains(&l.lecture)))
                 .collect();
+            // Lectures he named start their new items; a mixed session
+            // (Today's) starts them only in the courses he takes now.
+            let new_in = if req.lectures.is_none() { new_in_mixed(&picked) } else { None };
             minutes.set(req.minutes);
             let mut begin = begin.clone();
-            begin(picked, HashSet::new(), req.minutes);
+            begin(picked, HashSet::new(), req.minutes, new_in);
         }
     };
     let mut pending = PENDING.signal();
@@ -333,7 +355,10 @@ pub fn Study() -> Element {
         Phase::Setup => {
             let picked: Vec<&Lecture> =
                 ready.iter().copied().filter(|l| chosen.read().contains(&l.lecture)).collect();
-            let preview = plan(&store, &picked, &topics.read(), minutes());
+            // As on Today: new items from the courses he takes now among
+            // the picked lectures (all of them when he picked none of those).
+            let new_in = new_in_mixed(&picked);
+            let preview = plan(&store, &picked, &topics.read(), minutes(), new_in.as_ref());
             let mut begin_own = begin.clone();
             rsx! {
                 Setup {
@@ -345,10 +370,10 @@ pub fn Study() -> Element {
                     preview_new: preview.iter().filter(|p| p.fresh).count(),
                     preview_mins: preview.iter().map(|p| p.est_secs).sum::<u32>().div_ceil(60),
                     elsewhere: due_elsewhere(&store),
-                    on_start: move |_| begin(picked.clone(), topics.read().clone(), minutes()),
+                    on_start: move |_| begin(picked.clone(), topics.read().clone(), minutes(), new_in.clone()),
                 }
                 crate::own::OwnCardsCard {
-                    on_study: move |_| begin_own(crate::own::lecture().into_iter().collect(), HashSet::new(), minutes()),
+                    on_study: move |_| begin_own(crate::own::lecture().into_iter().collect(), HashSet::new(), minutes(), None),
                 }
             }
         }

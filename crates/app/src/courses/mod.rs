@@ -56,6 +56,25 @@ pub fn status(course: &Course) -> CourseStatus {
     STATUSES.read().get(&course.id).copied().unwrap_or(course.status)
 }
 
+/// Whether a mixed session and the exam plan start new items of `id`'s
+/// course (a lecture, item or lesson id): only a course he takes now
+/// (`Active`, by his choice or the program's), as `CourseStatus` says.
+/// Every course does when none with lectures is active. Due reviews are
+/// not narrowed, and his own cards always count.
+pub fn takes_new(id: &str) -> bool {
+    let lib = Library::get();
+    // Outside a running app (plain tests) only the program's status is known.
+    let running = dioxus::core::Runtime::try_current().is_some();
+    let active = |c: &Course| (if running { status(c) } else { c.status }) == CourseStatus::Active;
+    match lib.program.course_for(id) {
+        None => true,
+        Some(course) if active(course) => true,
+        Some(_) => !lib.program.courses.iter().any(|c| {
+            active(c) && lib.index.lectures.iter().any(|e| batna_core::program::course_of(&e.id) == c.id)
+        }),
+    }
+}
+
 pub fn set_status(id: &str, status: CourseStatus) {
     if crate::store::save_setting(&format!("{KEY}{id}"), &status.key()) {
         STATUSES.write().insert(id.to_string(), status);

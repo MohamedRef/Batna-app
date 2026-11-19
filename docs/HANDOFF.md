@@ -542,6 +542,15 @@ Add a bullet here when a PR adds something a later agent must know.
 
 ### Study sessions
 
+- **New items come from the courses he takes now** (#1380): a mixed
+  session (Today's start, Study's setup, Today's «جديد متاح» tile) takes new
+  items in book order (the index: hb, res, git, hem…) and only from courses
+  whose status is Active (`courses::takes_new`: his choice on the map, else
+  `program.yaml`'s default res, hem, hb), through `session::Inputs::new_in`;
+  due reviews still come from every course. `plan::plan_for` spreads only
+  those courses' items. A pick with no active course still teaches it, and
+  with no active course nothing narrows. Before, the id order put Diabetes
+  first and the plan counted all nine courses (150 a day, "tight").
 - **Keyboard** (#740, Anki-style, `crates/app/src/shortcuts/`): Space reveals,
   1–4 grade, Space/Enter = Good after reveal, `Z` = Undo, RTL arrows in
   lessons (Right = back, Left = next when allowed), A–E, Cmd/Ctrl+1–7,
@@ -878,6 +887,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-19: mixed sessions and the exam plan take new items from the courses he takes now, in book order (#1380): Today's session started with Diabetes (id order) and the plan spread all nine courses over the exam days.
 - 2026-11-16: long-pair cue, authored MCQs (#1366): 1,214 wrong options in 452 MCQs across the nine courses rewritten the full way; MCQs 21.1% → 1.1%, ceiling 1.5%. The 25 left stay as printed: 10 with the options in the book quote, 2 whose options are the terms of a book table, and, to be safe, 6 tagged `revision` and 7 research items that read as printed exam questions. This closes #1366: case steps 33.8% → 0.0%, lesson mini-cases 40.7% → 0.2%, lesson checks 32.1% → 1.4%, MCQs 21.1% → 1.1%.
 - 2026-11-16: long-pair cue, lesson checks (#1366): 1,009 wrong options in 489 lesson checks across the nine courses rewritten the full way; lesson checks 32.1% → 1.4%, ceiling 1.5%. The 23 left repeat what the book prints (21 printed questions, the research steps list in `res.L01.lesson2`, the example titles in `res.L03.lesson9`). Where one option clearly stands out as the longest it is now the key in 29% of checks (was 34%; chance 25%).
 - 2026-11-16: long-pair cue, lesson mini-cases (#1366): 459 wrong options in 254 mini-case questions across the nine courses rewritten the full way; lesson mini-cases 40.7% → 0.2%, ceiling 0.5%. The one left is the book's printed question in `res.L06.lesson4`. Where one option clearly stands out as the longest, it is the key in 24% of mini-cases and 23% of case steps (chance 25–26%), so no reverse cue was created.

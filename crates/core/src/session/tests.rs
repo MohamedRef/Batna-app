@@ -20,6 +20,7 @@ fn compose_with(lecture: &Lecture, due: &[&str], seen: &[&str], budget: u32) -> 
         seen: &seen,
         hidden: &empty,
         max_new: usize::MAX,
+        new_in: None,
         budget_secs: budget,
     })
 }
@@ -33,6 +34,35 @@ fn new_items_follow_book_order_and_only_playable_kinds() {
     let plan = compose_with(&sample(), &[], &[], 600);
     assert_eq!(ids(&plan), ["hb.L01.001", "hb.L01.002", "hb.L01.004", "hb.L01.005"]);
     assert!(plan.iter().all(|p| p.fresh));
+}
+
+#[test]
+fn new_items_start_only_in_the_given_lectures_while_reviews_come_from_all() {
+    let lecture = sample();
+    let mut other = sample();
+    other.lecture = "dm.L01".into();
+    for item in &mut other.items {
+        item.id = item.id.replace("hb.L01", "dm.L01");
+    }
+    let lectures = [&other, &lecture];
+    let due = vec!["dm.L01.004".to_string()];
+    let seen: HashSet<String> = due.iter().cloned().collect();
+    let taking: HashSet<String> = ["hb.L01".to_string()].into();
+    let empty = HashSet::new();
+    let plan = compose(&Inputs {
+        lectures: &lectures,
+        topics: &empty,
+        kinds: STUDY,
+        due: &due,
+        seen: &seen,
+        hidden: &empty,
+        max_new: usize::MAX,
+        new_in: Some(&taking),
+        budget_secs: 600,
+    });
+    assert_eq!(plan[0].item_id, "dm.L01.004", "a due review of any course still comes");
+    assert!(plan[1..].iter().all(|p| p.fresh && p.lecture == "hb.L01"), "{:?}", ids(&plan));
+    assert!(plan.len() > 1);
 }
 
 #[test]
@@ -93,6 +123,7 @@ fn daily_new_cap_holds_back_new_items_not_reviews() {
         seen: &seen,
         hidden: &empty,
         max_new: 1,
+        new_in: None,
         budget_secs: 600,
     });
     assert_eq!(ids(&plan), ["hb.L01.004", "hb.L01.001"]);
@@ -114,6 +145,7 @@ fn rejected_hidden_and_filtered_topics_stay_out() {
         seen: &empty,
         hidden: &hidden,
         max_new: usize::MAX,
+        new_in: None,
         budget_secs: 600,
     });
     assert_eq!(ids(&plan), ["hb.L01.002"]);

@@ -44,10 +44,12 @@ pub(crate) fn save(settings: &PlanSettings) {
 
 /// The plan from the start of today's study day: progress as it stood this
 /// morning, plus the reviews FSRS has due from now on. Today's share stays
-/// put while he works through it.
+/// put while he works through it. Only the courses he takes now have their
+/// new items spread (`courses::takes_new`), as sessions start them.
 pub fn plan_for(data: &StudyData, settings: &PlanSettings) -> Plan {
     let today = data.clock.today();
-    let progress = stats::progress_at_day_start(&data.lectures, &data.events, &data.marks, data.clock);
+    let mut progress = stats::progress_at_day_start(&data.lectures, &data.events, &data.marks, data.clock);
+    progress.retain(|l| crate::courses::takes_new(&l.id));
     let span = settings.exam.map_or(0, |e| today.until(e).max(0) as usize);
     let forecast = data.due_forecast(span);
     plan::plan(settings, PlanInput { today, lectures: &progress, review_forecast: &forecast })

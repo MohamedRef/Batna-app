@@ -9,7 +9,10 @@
 //! ceiling that the rewrites lower and nothing raises.
 //!
 //! Questions whose options are printed in a source (book, slide, past paper,
-//! lecture quiz) keep their wording and are left out of the count.
+//! lecture quiz) keep their wording and are left out of the count. So does a
+//! lesson check or mini-case step that asks one of its lecture's printed
+//! questions (#1402): its options are that question's printed options, all of
+//! them or all but one, whatever their order, case, spacing or final full stop.
 //!
 //! A second measure, the long pair (#1366): two options that both stand out
 //! by length, with the key one of them. Making one wrong option a little
@@ -23,7 +26,7 @@
 //! batna-tools cue --list LECTURE [--kind K] every cued question in a lecture, key and options' lengths
 //! ```
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 
 use batna_core::content::{Body, CaseStep, Index, Lecture};
@@ -160,10 +163,23 @@ pub struct Tally {
     pub counts: BTreeMap<(Kind, String), Count>,
     pub pairs: BTreeMap<Kind, Pair>,
     pub cued: Vec<(String, Cued)>,
+    /// Per lecture, the options of its printed questions (`option_set`).
+    printed: BTreeMap<String, Vec<BTreeSet<String>>>,
 }
 
 fn len(s: &str) -> usize {
     s.chars().count()
+}
+
+/// A question's options as a set: lower case, single spaces, no final full
+/// stop, so a lesson's copy of a printed question matches it.
+fn option_set(options: &[String]) -> BTreeSet<String> {
+    options
+        .iter()
+        .map(|o| {
+            o.trim().trim_end_matches('.').split_whitespace().collect::<Vec<_>>().join(" ").to_lowercase()
+        })
+        .collect()
 }
 
 /// Is the key strictly the longest option (counted in characters)?
@@ -235,6 +251,9 @@ impl Tally {
 
     fn case_steps(&mut self, kind: Kind, lecture: &str, at: &str, steps: &[CaseStep]) {
         for (k, s) in steps.iter().enumerate() {
+            if kind == Kind::LessonCase && self.is_printed_copy(lecture, &s.options) {
+                continue;
+            }
             if let Some(a) = s.answer {
                 self.one(kind, lecture, format!("{at} step {}", k + 1), &s.question, &s.options, a);
             }
@@ -247,6 +266,7 @@ impl Tally {
         self.counts.entry((Kind::Mcq, lec.lecture.clone())).or_default();
         for item in &lec.items {
             if item.tags.iter().any(|t| PRINTED.contains(&t.as_str())) {
+                self.remember_printed(&lec.lecture, &item.body);
                 continue;
             }
             match &item.body {
@@ -259,6 +279,30 @@ impl Tally {
         }
     }
 
+    /// Keeps a printed question's options, so its lesson copies are left out too.
+    fn remember_printed(&mut self, lecture: &str, body: &Body) {
+        let sets = self.printed.entry(lecture.to_string()).or_default();
+        match body {
+            Body::Mcq { options, .. } => sets.push(option_set(options)),
+            Body::Case { steps, .. } => {
+                sets.extend(steps.iter().filter(|s| s.options.len() >= 2).map(|s| option_set(&s.options)))
+            }
+            _ => {}
+        }
+    }
+
+    /// Does a lesson question ask one of its lecture's printed questions: all
+    /// its options printed ones of that question, with at most one left out?
+    /// Lessons are added after their lectures (`tally`).
+    fn is_printed_copy(&self, lecture: &str, options: &[String]) -> bool {
+        let copy = option_set(options);
+        copy.len() >= 2
+            && self
+                .printed
+                .get(lecture)
+                .is_some_and(|sets| sets.iter().any(|p| copy.is_subset(p) && copy.len() + 1 >= p.len()))
+    }
+
     /// A lesson file's checks and mini-case steps.
     pub fn add_lessons(&mut self, file: &LessonFile) {
         for l in &file.lessons {
@@ -266,7 +310,9 @@ impl Tally {
                 let at = format!("{} step {}", l.id, k + 1);
                 match &step.body {
                     StepBody::Check { question, options, answer, .. } => {
-                        self.one(Kind::Check, &file.lecture, at, question, options, *answer)
+                        if !self.is_printed_copy(&file.lecture, options) {
+                            self.one(Kind::Check, &file.lecture, at, question, options, *answer)
+                        }
                     }
                     StepBody::Case { steps, .. } => {
                         self.case_steps(Kind::LessonCase, &file.lecture, &at, steps)
@@ -490,6 +536,43 @@ lessons:
         assert_eq!(t.pairs[&Kind::Case].total, 2);
         let at: Vec<&str> = t.cued.iter().map(|(_, c)| c.at.as_str()).collect();
         assert_eq!(at, ["zz.L01.001", "zz.L01.003 step 1", "zz.L01.lesson1 step 2 step 1"]);
+    }
+
+    #[test]
+    fn a_lesson_copy_of_a_printed_question_is_left_out() {
+        let lec: Lecture = serde_yaml_ng::from_str(LECTURE).expect("lecture");
+        // zz.L01.002 is printed: the check asks it with its options in another
+        // order, case and spacing, and so does the mini-case step.
+        let copy = LESSONS
+            .replace("options: [k, other], answer: 0", "options: [B, \"A  long key.\"], answer: 1")
+            .replace("options: [the key is long, b]", "options: [a long key, b]");
+        let lessons: LessonFile = serde_yaml_ng::from_str(&copy).expect("lessons");
+        let mut t = Tally::default();
+        t.add(&lec);
+        t.add_lessons(&lessons);
+        assert_eq!(t.overall(Kind::Check).total, 0);
+        assert_eq!(t.overall(Kind::LessonCase).total, 0);
+        // Another lecture has no printed question with those options.
+        let other = copy.replace("lecture: zz.L01", "lecture: zz.L02");
+        t.add_lessons(&serde_yaml_ng::from_str(&other).expect("lessons"));
+        assert_eq!(t.overall(Kind::Check).total, 1);
+        assert_eq!(t.overall(Kind::LessonCase).total, 1);
+    }
+
+    #[test]
+    fn a_copy_may_leave_out_one_printed_option_but_not_two() {
+        let mut t = Tally::default();
+        t.printed
+            .entry("zz.L01".into())
+            .or_default()
+            .push(option_set(&s(&["one", "two", "three", "four", "five"])));
+        assert!(t.is_printed_copy("zz.L01", &s(&["Two", "one", "four.", "five"])));
+        assert!(!t.is_printed_copy("zz.L01", &s(&["one", "two", "three"])), "two left out");
+        assert!(
+            !t.is_printed_copy("zz.L01", &s(&["one", "two", "three", "four", "six"])),
+            "an option of its own"
+        );
+        assert!(!t.is_printed_copy("zz.L02", &s(&["one", "two", "three", "four"])), "another lecture");
     }
 
     #[test]

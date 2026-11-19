@@ -490,7 +490,9 @@ pub const NNT: CalcSpec = CalcSpec {
                 reason: "same rate in both groups: no NNT",
             });
         }
-        let n = (100.0 / arr.abs()).ceil();
+        // Up to a whole patient, ignoring float dust: 33.3 − 13.3 is
+        // 19.999999999999996, and 100 / that must stay 5, not 6.
+        let n = (100.0 / arr.abs() - 1e-9).ceil();
         let mut notes = vec![format!("ARR = CER − EER = {}%", show2(arr))];
         if cer > 0.0 {
             notes.push(format!("RRR = ARR / CER = {}%", show2(arr / cer * 100.0)));
@@ -1110,6 +1112,12 @@ mod tests {
         assert_eq!((o.score, o.band), (Some(20.0), "nnt.benefit"));
         let o = run(&NNT, Inputs::new().num("control_event_rate", 10.0).num("experimental_event_rate", 13.0));
         assert_eq!((o.score, o.band), (Some(34.0), "nnt.harm"));
+        // A whole NNT stays whole when the rates have decimals.
+        for (cer, eer, nnt) in [(33.3, 13.3, 5.0), (1.2, 0.4, 125.0), (0.3, 0.1, 500.0), (1.0, 0.9, 1000.0)] {
+            let o =
+                run(&NNT, Inputs::new().num("control_event_rate", cer).num("experimental_event_rate", eer));
+            assert_eq!(o.score, Some(nnt), "CER {cer}, EER {eer}");
+        }
     }
 
     #[test]

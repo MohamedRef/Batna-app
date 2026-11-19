@@ -867,7 +867,7 @@ further; don't change FSRS or Undo speculatively.
   `apt-mirrors.txt`) to the chosen mirror and time-boxes each try (on
   2026-11-11 both ubuntu.com names failed DNS and jobs hung for an hour).
 
-## 11. Current state (2026-11-16)
+## 11. Current state (2026-11-19)
 
 Refresh this table (and its date) in any PR that changes one of its rows.
 Releases are not in git: `gh release list -R MohamedRef/Batna-app` (or the
@@ -878,13 +878,13 @@ come from `batna-tools packs build --check` (its last line).
 |---|---|
 | App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings and book figures), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, full-text search, start over per course, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync (with «زامن دلوقتي»), password login, OTA app + content updates (what's new by course), web |
 | Releases | `v2026.11.13` (2026-11-16, alpha, = main `ba56f9d`); `v2026.11.12` (2026-11-15, `5b4d024`). Alpha only when Mohamed says so; previews every 4 h. Beta and stable feeds are not published (the app reads their 404 as "nothing here yet") |
-| Content | 9 courses, 141 lectures, 1,059 lessons in 141 lesson files, 15,557 items, 936 lesson pictures (18 MB, book figures and open-licence images; 2026-11-16). 2026-11-13 to 11-15: lesson depth passes, book figures placed in lessons at their pages (#983) and on cards/MCQs/cases (#1154). `res` L01–L20 written and checked against the enriched lecture copies. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) |
+| Content | 9 courses, 141 lectures, 1,059 lessons in 141 lesson files, 15,557 items, 936 lesson pictures (18 MB, book figures and open-licence images; 2026-11-16). 2026-11-13 to 11-15: lesson depth passes, book figures placed in lessons at their pages (#983) and on cards/MCQs/cases (#1154). `res` L01–L20 written and checked against the enriched lecture copies. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) 2026-11-19 review round (#1385): first-mention spell-outs fixed in every course (#1383), every question the 11-16 option rewrite changed read against its page (no key turned wrong), and the lesson text of hb, hem and res checked against the book; printed lesson copies keep the printed options (#1402) |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
 | Brand | B0 since 2026-11-08: petrol icon with the redrawn liver; the same mark beside the name in the top bar and sidebar (`brand.rs`) |
 | Critic / review rounds | Restarted at Mohamed's ask on 2026-11-13: strength reviews #820 (11-13) and #1356 (11-16), with rounds on 11-14 and 11-15 too. Each round files issues; owners fix and merge |
-| Open PRs / issues | On 2026-11-16: the #1356 round (#1349–#1355); #1350 merged (#1362), #1349 merged (#1360), #1353 and #1355 merged (#1363), #1354 in this PR |
+| Open PRs / issues | On 2026-11-19: the #1385 round (tracker #1385) merged; left open there: two quote fixes that need `refs --write` where the book text is (hb.L17.lesson3 step 1, hem.L04.lesson3 step 7) |
 | Coverage | 95.05% when last measured (2026-11-04); floor 94 |
 
 ### Open work and known gaps
@@ -915,6 +915,9 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-19: lesson teaching text checked against the book (#1385): every step of hb L02–L10 and L12–L20 (#1410), hem L01–L12 (#1412) and res L01–L20 (this PR) read against its quote and page, book figures against captions and alt text. No check or case key was wrong; about 200 fixes: captions and alt text describing what a picture does not show, numbers and lists back to the book, wrong lesson cross-references, claims credited to the book or lecturer without a source, SVG marks (hem.L10 P50, res.L05 pyramid). Two quote fixes wait for `refs --write` where the book text is: hb.L17.lesson3 step 1 and hem.L04.lesson3 step 7.
+- 2026-11-19: review of the 2026-11-16 option rewrite (#1385): every changed question of the nine courses read against its page and quote; no key turned wrong by the rewrite. About 90 fixes in #1403 (dm), #1405 (hb), #1406 (res), #1407 (endo, geri), #1408 (git), #1409 (neph), #1411 (rheum): wrong options the stem rules out, wrong options made partly right, wrong facts in wrong options, whys still explaining the old option, pronouns; two older key wordings (dm.L16.044's reason, git.L08.086's duodenal aspirate).
+- 2026-11-19: glossary spell-outs in the other eight courses (#1383; #1389–#1394, #1396, #1399): the first-sense slips found in hb (wrong sense, a mnemonic read as an abbreviation or split at its bold letters, doubled glosses, a shorthand expanded to its molecule, an expansion with no bracketed abbreviation) fixed in dm, endo, geri, git, hem, neph, res and rheum; course senses for APS and TBG (geri) and PO (rheum).
 - 2026-11-19: lesson copies of printed questions keep the printed options (#1402): 12 lesson checks and mini-case steps that ask a book or slide question (dm.L13, geri.L03, geri.L07, res.L06 ×2, res.L19, rheum.L09, L13, L14 ×3, L19) had them reworded by the 2026-11-16 rewrite, and rheum.L04.020, L09.048 and L09.051 had lost them before; all are back to the printed options. `batna-tools cue` leaves out a lesson question whose options are a printed item's of its lecture (62 such steps): lesson checks 1.3% long pair (20 of 1539), mini-cases 0.0%.
 - 2026-11-19: glossary spell-outs in hepatology (#1383): 11 first-mention expansions that took the glossary's first sense now say what the lecture means (CPP cerebral perfusion pressure ×3, SBP systolic, APA antiphospholipid, CLD cholestatic liver dysfunction, 5'-nucleotidase, the BIC and ABCDE, «A HAT» and «BAD VAPS» mnemonics); `course: hb` senses for CPP, HAT and BAD fix their hover peek.
 - 2026-11-19: review fixes in hem and dm: hem.L04.031/033 and the hem.L04.lesson2 acquired table quoted the Chediak-Higashi paragraph (now the book's p65 lines), a thalassaemia mini-case option that the step's own reason made right, a leukemoid check above the book's 50,000 line, and a dm.L01.126 reason left from an older option.

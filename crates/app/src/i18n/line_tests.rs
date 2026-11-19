@@ -159,3 +159,12 @@ fn reminders_onboarding_and_recap_lines() {
     assert_eq!(recap::exam_in(0), "الامتحان النهارده. بالتوفيق.");
     assert_eq!(recap::exam_in(12), "فاضل على الامتحان 12 يوم.");
 }
+
+#[test]
+fn high_yield_stays_one_unbroken_run_in_arabic_lines() {
+    let run = "\u{2066}high-\u{2060}yield\u{2069}";
+    for line in [today::TIGHT_HIGH_YIELD, plan::TIGHT_HIGH_YIELD, plan::TIGHT_FINAL] {
+        assert!(line.contains(run), "{line}");
+        assert_eq!(line.matches("high-").count(), 1, "no bare high-yield left: {line}");
+    }
+}

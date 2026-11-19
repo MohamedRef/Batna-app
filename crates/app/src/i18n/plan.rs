@@ -55,9 +55,11 @@ pub const TIGHT_ADD: &str = "لو زوّدت أيام مذاكرة في الأس
 pub fn tight_cap(cap: u32) -> String {
     format!("لو علّيت حد المراجعات اليومي لـ {cap} هتلحق كلها.")
 }
-pub const TIGHT_HIGH_YIELD: &str = "حتى بأيام أكتر وحد مراجعات أعلى مش هتلحق كلها، فركّز على high-yield الأول.";
-pub const TIGHT_FINAL: &str =
-    "إنت في آخر الأيام، فالوقت للامتحانات التجريبية والمواضيع الضعيفة. في الجديد، ركّز على high-yield بس.";
+/// «high-yield» kept as one left-to-right run that never breaks at its
+/// hyphen (at a line end it read «-high / yield», #1385).
+pub const TIGHT_HIGH_YIELD: &str =
+    "حتى بأيام أكتر وحد مراجعات أعلى مش هتلحق كلها، فركّز على \u{2066}high-\u{2060}yield\u{2069} الأول.";
+pub const TIGHT_FINAL: &str = "إنت في آخر الأيام، فالوقت للامتحانات التجريبية والمواضيع الضعيفة. في الجديد، ركّز على \u{2066}high-\u{2060}yield\u{2069} بس.";
 pub const PICK_DAY_FAR: &str = "اختار يوم في خلال 3 سنين من النهارده.";
 pub const FINAL_WINDOW: &str = "إنت في آخر الأيام: امتحانات تجريبية ومراجعة المواضيع الضعيفة. مفيش جديد.";
 pub const EXAM_DONE: &str = "الامتحان عدّى. ربنا يوفقك! لو عندك امتحان تاني، حط ميعاده.";

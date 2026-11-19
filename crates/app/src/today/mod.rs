@@ -472,7 +472,7 @@ fn WeakStart() -> Element {
 
 /// The next `n` unseen items the player can show: lectures already started
 /// first, then book order (today's new items, or "get ahead" once today's
-/// plan is done).
+/// plan is done), in the courses he takes now (`courses::takes_new`).
 fn unseen(store: &dyn StudyStore, o: &Overview, n: usize) -> Vec<String> {
     let lib = Library::get();
     let mut order: Vec<&str> = o.lectures.iter().map(|l| l.id.as_str()).collect();
@@ -483,6 +483,7 @@ fn unseen(store: &dyn StudyStore, o: &Overview, n: usize) -> Vec<String> {
     }
     order
         .into_iter()
+        .filter(|id| crate::courses::takes_new(id))
         .filter_map(|id| lib.lectures.get(id))
         .flat_map(|l| &l.items)
         .filter(|i| crate::study::PLAYABLE.contains(&i.body.kind()))

@@ -8,11 +8,13 @@ use batna_core::session::{Inputs, Planned, compose};
 
 use super::{PLAYABLE, StudyStoreHandle, find, now_ms};
 
+/// `new_in`: the lectures whose new items may start (`None`: all of them).
 pub(super) fn plan(
     store: &StudyStoreHandle,
     lectures: &[&Lecture],
     topics: &HashSet<String>,
     minutes: u32,
+    new_in: Option<&HashSet<String>>,
 ) -> Vec<Planned> {
     let now = now_ms();
     let s = store.0.borrow();
@@ -40,6 +42,7 @@ pub(super) fn plan(
         seen: &seen,
         hidden: &hidden,
         max_new,
+        new_in,
         budget_secs: minutes * 60,
     })
 }

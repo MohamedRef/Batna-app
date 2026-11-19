@@ -38,6 +38,10 @@ pub struct Inputs<'a> {
     pub hidden: &'a HashSet<String>,
     /// How many new items may still start today.
     pub max_new: usize,
+    /// The lectures whose new items may start; `None`: every lecture above.
+    /// A mixed session starts new items only in the courses he takes now,
+    /// while due reviews come from every lecture.
+    pub new_in: Option<&'a HashSet<String>>,
     /// Time budget in seconds.
     pub budget_secs: u32,
 }
@@ -90,8 +94,12 @@ pub fn compose(input: &Inputs<'_>) -> Vec<Planned> {
         .map(|(_, p)| Planned { fresh: false, ..p.clone() })
         .collect();
 
-    let mut fresh: Vec<(usize, Planned)> =
-        pool.values().filter(|(_, p)| p.fresh && !taken.contains(&p.item_id)).cloned().collect();
+    let may_start = |p: &Planned| input.new_in.is_none_or(|lectures| lectures.contains(&p.lecture));
+    let mut fresh: Vec<(usize, Planned)> = pool
+        .values()
+        .filter(|(_, p)| p.fresh && !taken.contains(&p.item_id) && may_start(p))
+        .cloned()
+        .collect();
     fresh.sort_by_key(|(pos, _)| *pos);
     let fresh = block_by_topic(fresh.into_iter().map(|(_, p)| p).collect());
     let mut new_left = input.max_new;

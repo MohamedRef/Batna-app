@@ -546,6 +546,12 @@ Add a bullet here when a PR adds something a later agent must know.
   and `lesson::validate` (file is a lesson figure of the lecture).
   `pack::SCHEMA` = 5. Browser fixture `study-item-card-picture` appears once
   a picture card exists. How to write them: [CONTENT.md](CONTENT.md).
+- Lesson checks and mini-case parts order their options like the bank
+  (`learn/steps/choices.rs` → `exam::option_order`: uniform, numeric
+  options smallest first, "None of the above" and the like in the book's
+  order). Order, match and sort steps keep the order-puzzle shuffle
+  (`order::grade::shuffled`), which keeps items off their own place; on
+  options it put a key written first at A one time in nine (#1397).
 
 ### Study sessions
 
@@ -899,6 +905,7 @@ state; details live in the PR and in § 10.
 - 2026-11-19: NNT rounds up a whole patient without float dust (CER 33.3 / EER 13.3 gave 6, now 5; 1.2 / 0.4 gave 126, now 125), as `sample_size::up` already did (#1385).
 - 2026-11-19: mixed sessions and the exam plan take new items from the courses he takes now, in book order (#1380): Today's session started with Diabetes (id order) and the plan spread all nine courses over the exam days.
 - 2026-11-19: `batna-core` `update::tests::a_linux_build_has_no_app_updates` runs on Linux only and a Mac build checks its own platform, so `cargo test --workspace` passes on the Mac (#1385).
+- 2026-11-19: lesson checks and mini-case parts order their options like the bank (#1397): the order-puzzle shuffle they used put a key written first (97% of lesson checks) at A in 12% of 4-option steps and never in 2-option ones, and shuffled "None of the above"; now uniform, with the bank's rules for numeric and pointing options.
 - 2026-11-19: tests keep out of the real profile (#1378): `prefs::data_dir()` is a scratch folder per test process, so `just check` on the Mac no longer rewrites the installed app's device prefs or opens its content packs (six tests failed there on the old pack); RUN.md's Mac folder is `app.batna`.
 - 2026-11-19: «high-yield» in the tight-plan lines (Today, planner) is one LTR isolate with a word joiner after the hyphen, so RTL no longer breaks it as «-high / yield» at a line end (#1385).
 - 2026-11-16: long-pair cue, authored MCQs (#1366): 1,214 wrong options in 452 MCQs across the nine courses rewritten the full way; MCQs 21.1% → 1.1%, ceiling 1.5%. The 25 left stay as printed: 10 with the options in the book quote, 2 whose options are the terms of a book table, and, to be safe, 6 tagged `revision` and 7 research items that read as printed exam questions. This closes #1366: case steps 33.8% → 0.0%, lesson mini-cases 40.7% → 0.2%, lesson checks 32.1% → 1.4%, MCQs 21.1% → 1.1%.

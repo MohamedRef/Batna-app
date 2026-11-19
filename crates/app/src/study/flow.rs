@@ -591,3 +591,29 @@ fn profile_study_card_transitions() {
         max
     );
 }
+
+#[test]
+fn mixed_sessions_take_new_items_in_book_order_from_the_courses_he_takes_now() {
+    let lib = Library::get();
+    let ready = ready_lectures();
+    // Book order, as the index lists the lectures, not the id order that
+    // put Diabetes (`dm.L01`) first.
+    let book: Vec<&str> = lib
+        .index
+        .lectures
+        .iter()
+        .map(|e| e.id.as_str())
+        .filter(|id| ready.iter().any(|l| l.lecture == *id))
+        .collect();
+    let got: Vec<&str> =
+        ready.iter().map(|l| l.lecture.as_str()).filter(|id| *id != batna_core::own::LECTURE).collect();
+    assert_eq!(got, book);
+    // The program's semester-1 courses start new items; a later one does not.
+    let taking = new_in_mixed(&ready).expect("some course is taken now");
+    assert!(taking.contains("hb.L01") && taking.contains("res.L01") && taking.contains("hem.L01"));
+    assert!(taking.iter().all(|id| ["hb.", "res.", "hem."].iter().any(|c| id.starts_with(c))), "{taking:?}");
+    // Picking only a later course still teaches it.
+    let later: Vec<&Lecture> = ready.iter().copied().filter(|l| l.lecture.starts_with("dm.")).collect();
+    assert!(!later.is_empty());
+    assert_eq!(new_in_mixed(&later), None);
+}

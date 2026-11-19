@@ -308,3 +308,18 @@ fn the_plans_buttons_start_a_session_or_open_what_they_show() {
     assert!(t.with(crate::lecture::is_open), "a day opens its first lecture");
     t.with(crate::lecture::close_all);
 }
+
+#[test]
+fn the_plan_spreads_new_items_of_the_courses_he_takes_now_only() {
+    let lib = crate::content::Library::get();
+    let hb = lib.lectures.get("hb.L01").cloned().expect("hb.L01");
+    let dm = lib.lectures.get("dm.L01").cloned().expect("dm.L01");
+    let data = StudyData { lectures: vec![hb.clone(), dm.clone()], ..data(1) };
+    let p = plan_for(&data, &exam_in(200));
+    // Hepatology is a semester-1 course; Diabetes waits for its own semester.
+    assert_eq!(
+        p.total,
+        hb.items.iter().filter(|i| i.status != batna_core::content::Status::Rejected).count() as u32
+    );
+    assert!(p.days.iter().flat_map(|d| &d.new_lectures).all(|l| l == "hb.L01"));
+}

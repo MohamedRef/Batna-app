@@ -129,6 +129,7 @@ fn marks_start_hidden_before_a_question_about_the_picture() {
         page: None,
         quote: None,
         remind: vec![],
+        lecturer: vec![],
     };
     let question = || Step {
         body: StepBody::Check { question: "q".into(), options: vec![], answer: 0, why: vec![] },

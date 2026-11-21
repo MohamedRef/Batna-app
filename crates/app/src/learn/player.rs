@@ -416,6 +416,15 @@ fn Stage(
             if !try_done && !step.remind.is_empty() {
                 super::remind::Reminders { remind: step.remind.clone(), here: seed.split('#').next().unwrap_or_default().to_string() }
             }
+            // What a lecturer adds (Dr. Allam): under a question only once
+            // it is answered, so it never gives the answer away.
+            if lecturer_shown(&step, before.is_some() || checked) {
+                div { class: "ls-lecturer",
+                    for (n , note) in step.lecturer.iter().enumerate() {
+                        super::steps::Aside { key: "{n}", tone: note.tone, text: note.text.clone() }
+                    }
+                }
+            }
             if can_retry && !try_done {
                 button {
                     class: "icon-button ls-retry",
@@ -449,6 +458,12 @@ fn Stage(
             }
         }
     }
+}
+
+/// Whether a step's lecturer notes show: always under reading, and under a
+/// question once it is answered (`done`), so they never give it away.
+pub(super) fn lecturer_shown(step: &Step, done: bool) -> bool {
+    !step.lecturer.is_empty() && (!step.body.is_question() || done)
 }
 
 /// A completed lesson always offers exactly one primary next action.

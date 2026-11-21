@@ -88,6 +88,26 @@ pub struct Step {
     /// as `<lesson id>:<WORD>` (`hb.L01.lesson2:SHIBS`). See [`Reminder`].
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub remind: Vec<String>,
+    /// What a lecturer adds to this step (Dr. Allam's explanation, Mohamed
+    /// 2026-11-21): shown under it as an aside, under a question once it is
+    /// answered. Part of the step, so adding one moves no step number that
+    /// his notes, marks and book references point at.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub lecturer: Vec<LecturerNote>,
+}
+
+/// One lecturer note under a step: a tone, as an aside's, and the text.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct LecturerNote {
+    pub tone: Tone,
+    /// Egyptian Arabic, starting with whose explanation it is («من شرح د. علام:»).
+    pub text: String,
+}
+
+impl LecturerNote {
+    /// The most notes one step carries.
+    pub const MAX_PER_STEP: usize = 3;
 }
 
 /// One entry of a step's `remind` list.
@@ -327,6 +347,7 @@ impl Step {
             }
             StepBody::Try { .. } => {}
         }
+        self.lecturer.iter().for_each(|n| add(&n.text));
         out
     }
 }
@@ -371,7 +392,7 @@ pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
     })
 }
 
-pub const SHARED_STEP_KEYS: &[&str] = &["kind", "page", "quote", "remind"];
+pub const SHARED_STEP_KEYS: &[&str] = &["kind", "page", "quote", "remind", "lecturer"];
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

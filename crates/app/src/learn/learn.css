@@ -227,9 +227,10 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
    name is smaller and muted so the eye lands on the step first. */
 .ls-context-title { margin: 0; font-size: var(--fs-md); font-weight: 600; color: var(--muted); line-height: 1.5; overflow-wrap: anywhere; }
 .ls-context-lecture { margin: 0; overflow-wrap: anywhere; }
-/* Video links: wrap onto a new line rather than push the page sideways. */
+/* Video links: wrap onto a new line rather than push the page sideways, and
+   beat `button.tap-chip`'s 1.75rem floor so every chip keeps the 48dp target. */
 .ls-videos { display: flex; flex-wrap: wrap; gap: var(--sp-1); }
-.ls-video { display: inline-flex; align-items: center; gap: var(--sp-1); min-block-size: var(--target); max-inline-size: 100%; cursor: pointer; }
+button.tap-chip.ls-video { display: inline-flex; align-items: center; gap: var(--sp-1); min-block-size: var(--target); max-inline-size: 100%; cursor: pointer; }
 .ls-video-play { color: var(--accent); }
 .ls-video-label { overflow-wrap: anywhere; }
 .ls-stage {

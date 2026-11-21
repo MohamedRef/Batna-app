@@ -85,6 +85,11 @@ fn screen_fixtures_render_every_step_kind() {
     );
     let remind = std::fs::read_to_string(dir.join("lesson-mixed-hb.L01.lesson8-8-steps.html")).unwrap();
     assert!(remind.contains("ls-remind") && remind.contains("SHIBS") && remind.contains("ls-remind-from"));
+    // The link's words are one span, not one flex item per text run, or a
+    // long lesson title breaks a word or a letter per line (2026-11-21).
+    let link = &remind[remind.find("class=\"st-link ls-remind-from\"").expect("the from link")..];
+    let inside = &link[link.find('>').unwrap() + 1..];
+    assert!(inside.starts_with("<span class=\"st-link-text\">"), "{}", &inside[..inside.len().min(120)]);
     assert!(dir.join("abbr-dictionary.html").exists() && dir.join("app.css").exists());
 }
 

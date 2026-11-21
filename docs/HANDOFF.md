@@ -949,6 +949,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: the «📖 من درس» link under a reminder and the «اشرحهولي» link put their words in one `span.st-link-text`: inside the flex `.st-link` button each text run had been its own column, so a long lesson title broke a word or letter per line on the phone (Mohamed's screenshot, hb.L01.lesson2 step 9).
 - 2026-11-21: first beta, `v2026.11.19` (main `d9a757f`), at Mohamed's ask: the `batna-beta` feed exists now and the same release updated `batna-alpha`; both `update.json` verified with `batna-tools update verify` against the five files.
 - 2026-11-21: the 86 per-lesson notes on Dr. Allam's course (where he differs from the book, with pages; his parts outside the syllabus) sealed with the transcripts in `content/allam/notes/` (275 sealed files now).
 - 2026-11-21: Dr. Allam's course, the rest: geriatrics (58 lecturer notes from his cardiology, chest and neurology lessons; 84 proposed: 40 kept, 18 edited, 26 dropped), round 2 for the other seven courses (62 notes from his later lessons, checked against the book and the round-1 notes), every video link refreshed (771 on 432 lessons; the 6 kept by hand where more fit), and lecturer notes under a reveal or a hidden table now wait like the book quote. Glossary: HOCM, aVF, aVL; HDH plain.

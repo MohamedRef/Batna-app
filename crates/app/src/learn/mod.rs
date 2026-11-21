@@ -936,8 +936,11 @@ pub fn ExplainLink(item_id: String) -> Element {
                 Some(k) => open_at(ui, &id, k),
                 None => open(ui, &id),
             },
-            "📖 {tx::EXPLAIN} · "
-            text::Line { text: l.title.clone() }
+            // One span, so a long title wraps as text (see `.st-link-text`).
+            span { class: "st-link-text",
+                "📖 {tx::EXPLAIN} · "
+                text::Line { text: l.title.clone() }
+            }
         }
     }
 }

@@ -92,8 +92,12 @@ pub fn Reminders(remind: Vec<String>, here: String) -> Element {
                             class: "st-link ls-remind-from",
                             title: tx::REMIND_FROM_HINT,
                             onclick: move |_| super::open(ui, &id),
-                            "📖 {tx::REMIND_FROM}:\u{a0}"
-                            Line { text: title }
+                            // One span: a flex button would lay each text run out
+                            // as its own narrow column (2026-11-21 screenshot).
+                            span { class: "st-link-text",
+                                "📖 {tx::REMIND_FROM}:\u{a0}"
+                                Line { text: title }
+                            }
                         }
                     }
                 }

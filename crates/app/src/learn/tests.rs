@@ -962,6 +962,8 @@ fn a_study_item_links_to_the_lesson_that_teaches_it() {
     let mut d = Dom::with_props(card_root, Card { prefer: vec![], item: Some(item) });
     let link = d.find(is("ls-explain")).remove(0);
     assert!(link.text.contains(tx::EXPLAIN));
+    // Its words are one span, so a long title wraps as text (browser.rs).
+    assert!(d.html().contains("<span class=\"st-link-text\">"));
     assert!(norm(&link.text).contains(&norm(&taught.title)));
     d.click(is("ls-explain"));
     assert_eq!(d.read(|| OPEN.peek().clone()), Some(taught.id.clone()));

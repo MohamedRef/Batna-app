@@ -112,6 +112,10 @@
   color: var(--accent); text-align: start; cursor: pointer; -webkit-tap-highlight-color: transparent;
 }
 @media (hover: hover) and (pointer: fine) { .st-link:hover { text-decoration: underline; } }
+/* The link's words sit in one span: as separate flex items each text run
+   (the label, every Arabic or English run of a lesson title) became its own
+   column and a long title broke a word or letter per line. */
+.st-link-text { min-inline-size: 0; }
 .st-item-foot button.tap-chip { display: inline-flex; align-items: center; min-block-size: var(--target); }
 .st-quote summary, .st-mine summary { cursor: pointer; }
 .st-quote q { font-family: var(--font-latin); font-style: italic; }

@@ -470,6 +470,13 @@ Add a bullet here when a PR adds something a later agent must know.
   `cloud::open_url`. The links point into Dr. Allam's revision course,
   mapped by hand from his sealed transcripts (docs/ALLAM.md). Rules:
   [LESSONS.md](LESSONS.md) § Videos.
+- **Lecturer notes** (2026-11-21): a step's optional `lecturer:` list
+  (`LecturerNote`: tone + text) shows under the step as asides
+  (`.ls-lecturer`), under a question only once it is answered
+  (`player::lecturer_shown`). Dr. Allam's explanation goes in this way, not as
+  new steps, because his notes and weak-fact marks (`<lesson>#<k>`) and the
+  book-ref locks (`<lesson>#N`) are keyed by step position. Pack schema 6
+  (videos and lecturer notes).
 - **Focus layout** (#767, replaces #739's two-pane grid): from 840px up the
   player is one centred column (40rem; 44rem with 1.125rem text from
   1200px, ≈ 60–75 characters a line), its top at the same height on every
@@ -938,6 +945,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: lecturer notes on lesson steps (`lecturer:`, LESSONS.md § Videos): Dr. Allam's explanation rides on the step it adds to, so step positions that notes, marks and book-ref locks use never move; shown under a question only once answered. Pack schema 6, which also covers #1419's `videos` (older apps keep their content until they update).
 - 2026-11-21: lesson video links (LESSONS.md § Videos): `videos:` on a lesson, validated (YouTube id shape, start, label, at most 6, no repeats), shown as «▶ label · clock» buttons in the player header that open YouTube at that second; the first links into Dr. Allam's revision course (the lessons of his that were mapped first), with the rest and his asides to follow per course.
 - 2026-11-21: Dr. Allam's revision course sealed in git (docs/ALLAM.md): `batna-tools allam keygen | seal | open`, XChaCha20-Poly1305 over DEFLATE (adapted from Steps' VQ), 189 files in `content/allam/`; `validate` checks their shape, and opens them when `BATNA_ALLAM_KEY` is set.
 - 2026-11-20: CI: APK builds retry Maven (`scripts/android-bundle.sh`), and `dx` comes from the Actions cache on Linux and macOS (`.github/actions/dx`, adapted from Steps-app #837).

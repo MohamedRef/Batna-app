@@ -13,6 +13,7 @@ fn shown_text_covers_what_the_step_shows_and_svg_words_only() {
         page: Some(3),
         quote: Some("not shown".into()),
         remind: vec![],
+        lecturer: vec![],
     };
     let t = step.shown_text();
     assert_eq!(t[0], "Portal pressure");

@@ -193,7 +193,7 @@ pub(super) fn Mnemonic(word: String, parts: Vec<MnemonicPart>, hook: Option<Stri
     }
 }
 #[component]
-pub(super) fn Aside(tone: Tone, text: String) -> Element {
+pub(crate) fn Aside(tone: Tone, text: String) -> Element {
     let (name, label, glyph) = match tone {
         Tone::Tip => ("tip", tx::TIP, "💡"),
         Tone::Exam => ("exam", tx::EXAM, "🎯"),

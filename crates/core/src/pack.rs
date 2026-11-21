@@ -32,8 +32,10 @@ pub const MAGIC: &[u8; 8] = b"BATNAPK1";
 /// (`program::Source`). 3: lesson steps can `remind` of a تحشيشة taught
 /// elsewhere (`lesson::Reminder`). 4: an image figure can carry numbered
 /// `marks` on its picture (`lesson::FigureMark`, #984). 5: a card, mcq or
-/// case can carry a book `image` (`content::Item::image`, #1154).
-pub const SCHEMA: u32 = 5;
+/// case can carry a book `image` (`content::Item::image`, #1154). 6: a
+/// lesson can link `videos` at their second (`lesson::Video`) and a step can
+/// carry `lecturer` notes (`lesson::LecturerNote`), Dr. Allam's course.
+pub const SCHEMA: u32 = 6;
 
 /// Highest miniz level: slower to pack (only when content changes), not to unpack.
 const LEVEL: u8 = 10;

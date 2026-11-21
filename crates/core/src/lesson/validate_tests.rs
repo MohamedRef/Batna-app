@@ -144,6 +144,7 @@ fn step_keys_pages_and_quotes() {
         page: None,
         quote: None,
         remind: vec![],
+        lecturer: vec![],
     };
     assert_eq!(
         broken(|f| f.lessons[0].steps.push(figure(true))),
@@ -299,6 +300,7 @@ fn embedding_reads_each_picture_once_and_flags_big_or_missing_files() {
         page: Some(1),
         quote: None,
         remind: vec![],
+        lecturer: vec![],
     };
     f.lessons[0].steps.extend([figure("hb/small.png"), figure("hb/big.webp"), figure("hb/gone.webp")]);
     let mut files = vec![f];
@@ -335,6 +337,7 @@ fn remind_lists_parse_stay_unique_and_skip_question_steps() {
         page: None,
         quote: None,
         remind: remind.into_iter().map(String::from).collect(),
+        lecturer: vec![],
     };
     assert!(remind_problems(&explain(vec!["hb.L01.033", "hb.L01.lesson2:SHIBS"])).is_empty());
     let twice = remind_problems(&explain(vec!["hb.L01.033", "hb.L01.033"]));
@@ -373,6 +376,7 @@ fn an_item_picture_is_one_of_the_lecture_lesson_figures() {
         page: Some(1),
         quote: None,
         remind: vec![],
+        lecturer: vec![],
     });
     assert!(!msgs(&f, &lec).iter().any(|m| m.starts_with("hb.L01.001")), "{:?}", msgs(&f, &lec));
     assert_eq!(item_picture_files(&f).into_iter().collect::<Vec<_>>(), ["hb/a.webp"]);
@@ -381,4 +385,28 @@ fn an_item_picture_is_one_of_the_lecture_lesson_figures() {
     embed_images(std::slice::from_mut(&mut f), |_| Some(vec![1, 2, 3]));
     assert_eq!(picture_data(&f, "hb/a.webp"), Some("data:image/webp;base64,AQID"));
     assert_eq!(picture_data(&f, "hb/b.webp"), None);
+}
+
+#[test]
+fn lecturer_notes_ride_on_their_step_and_are_checked() {
+    // Dr. Allam's explanation under a step (2026-11-21): read from YAML,
+    // part of the step's shown text, at most 3, each with text, closed
+    // markup and at most one key term.
+    let yaml = "kind: explain\ntext: \"x\"\nlecturer:\n  - tone: tip\n    text: \"من شرح د. علام: **SAAG** ==1.1==\"\n";
+    let step: Step = serde_yaml_ng::from_str(yaml).unwrap();
+    assert_eq!(step.lecturer.len(), 1);
+    assert_eq!(step.lecturer[0].tone, Tone::Tip);
+    assert!(step.shown_text().iter().any(|t| t.contains("SAAG")));
+    assert!(lecturer_problems(&step.lecturer).is_empty());
+    let note = |t: &str| LecturerNote { tone: Tone::Exam, text: t.into() };
+    let bad = lecturer_problems(&[note(" "), note("==a== ==b=="), note("**open"), note("x")]);
+    let all = bad.join("\n");
+    assert!(all.contains("4 lecturer notes: keep at most 3"), "{all}");
+    assert!(all.contains("lecturer 1: text is empty"), "{all}");
+    assert!(all.contains("lecturer 2: more than one key term"), "{all}");
+    assert!(all.contains("lecturer 3: `**` is not closed"), "{all}");
+    assert!(
+        serde_yaml_ng::from_str::<Step>(&format!("{yaml}    by: x\n")).is_err(),
+        "unknown note keys are refused"
+    );
 }

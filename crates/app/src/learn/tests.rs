@@ -228,6 +228,22 @@ fn the_header_links_each_video_at_its_second() {
 }
 
 #[test]
+fn lecturer_notes_show_under_reading_and_under_a_question_once_answered() {
+    use batna_core::lesson::{LecturerNote, Step, Tone};
+    let note = LecturerNote { tone: Tone::Tip, text: "من شرح د. علام: x".into() };
+    let step = |yaml: &str, notes: Vec<LecturerNote>| Step {
+        lecturer: notes,
+        ..serde_yaml_ng::from_str::<Step>(yaml).unwrap()
+    };
+    let read = step("kind: explain\ntext: x\n", vec![note.clone()]);
+    let q = step("kind: check\nquestion: q\noptions: [a, b]\nanswer: 0\nwhy: [x, y]\n", vec![note]);
+    assert!(super::player::lecturer_shown(&read, false));
+    assert!(!super::player::lecturer_shown(&q, false), "never before the answer");
+    assert!(super::player::lecturer_shown(&q, true));
+    assert!(!super::player::lecturer_shown(&step("kind: explain\ntext: x\n", vec![]), true));
+}
+
+#[test]
 fn a_finish_the_store_refuses_stays_on_the_last_step_until_it_saves() {
     let (l, at) = claim(|l, k, _| k + 1 == l.steps.len() && !l.practice.is_empty());
     // Its own store: a read-only shared store would refuse every other

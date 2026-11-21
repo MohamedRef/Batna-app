@@ -25,8 +25,8 @@ mod choices;
 use choices::*;
 
 mod presentation;
-pub(crate) use presentation::Figure;
 use presentation::*;
+pub(crate) use presentation::{Aside, Figure};
 
 mod marks;
 pub use marks::MarksStart;

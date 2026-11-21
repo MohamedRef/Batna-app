@@ -153,15 +153,35 @@ browser or the YouTube app, and the app never plays or fetches a video itself.
 - Link only a real explanation of the lesson's subject, never a passing
   mention. At most 6 per lesson, each place once. The validator checks the
   id's shape, the second, the label and duplicates.
-- His explanation can also teach inside a lesson. An `aside` starting «من شرح
-  د. علام:» adds a simpler way to see a step, a useful fact or an exam point
-  the lesson lacks. A fact that isn't in the book ends with «(مش في الكتاب)».
-  Where he differs from the book, the book wins: that difference never goes in
-  an aside. Asides paraphrase him and never quote long stretches.
+- His explanation can also teach inside a lesson, as a **lecturer note** on
+  the step it adds to:
+
+  ```yaml
+  - kind: explain
+    text: |
+      ...
+    lecturer:
+      - tone: tip          # tip, exam, trap, analogy or joke, as an aside
+        text: |
+          من شرح د. علام: ...
+  ```
+
+  The note shows under its step as an aside. Under a question it shows only
+  once the question is answered, so it never gives the answer away. It is part
+  of the step, not a step of its own, so adding one moves no step number that
+  his notes, weak-fact marks and the book-reference locks
+  (`content/book-refs/`) point at. A step carries at most 3 notes, each with
+  at most one `==key term==`.
+- A note adds a simpler way to see the step, a useful fact or an exam point the
+  lesson lacks, and starts «من شرح د. علام:». A fact that isn't in the book ends
+  with «(مش في الكتاب)». Where he differs from the book, the book wins and that
+  difference never goes in a note. Notes paraphrase him and never quote long
+  stretches. An independent check reads every proposed note against the book
+  before it goes in.
 
 ## Step kinds
 
-Every step may have `page:` and `quote:`.
+Every step may have `page:` and `quote:` (and `remind:` and `lecturer:` notes, see § Videos).
 
 | kind | fields | what he sees |
 |---|---|---|

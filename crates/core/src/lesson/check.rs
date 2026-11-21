@@ -205,6 +205,9 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
             for m in remind_problems(step) {
                 bad(&sat, m);
             }
+            for m in lecturer_problems(&step.lecturer) {
+                bad(&sat, m);
+            }
         }
     }
     // An item's picture is one of these lessons' figures (#1154): the same
@@ -301,24 +304,52 @@ pub(super) fn markup_problems(body: &StepBody) -> Vec<String> {
     strings(&v, "", &mut texts);
     let mut keys = 0;
     for (field, text) in texts {
-        for line in text.lines() {
-            if line.contains("===") {
-                out.push(format!("{field}: `===` (write `==term==` with no extra =)"));
-            }
-            if line.matches("**").count() % 2 == 1 {
-                out.push(format!("{field}: `**` is not closed on its line"));
-            }
-            let marks = line.matches("==").count();
-            if marks % 2 == 1 {
-                out.push(format!("{field}: `==` is not closed on its line"));
-            }
-            keys += marks / 2;
-        }
+        keys += line_markup(&field, text, &mut out);
     }
     if keys > MAX_KEY_TERMS {
         out.push(format!(
             "{keys} key terms (`==`): keep the marker for the {MAX_KEY_TERMS} that matter most"
         ));
+    }
+    out
+}
+
+/// `**` and `==` closed on each line of `text`, no `===`; returns how many
+/// key terms (`==term==`) it marks.
+fn line_markup(field: &str, text: &str, out: &mut Vec<String>) -> usize {
+    let mut keys = 0;
+    for line in text.lines() {
+        if line.contains("===") {
+            out.push(format!("{field}: `===` (write `==term==` with no extra =)"));
+        }
+        if line.matches("**").count() % 2 == 1 {
+            out.push(format!("{field}: `**` is not closed on its line"));
+        }
+        let marks = line.matches("==").count();
+        if marks % 2 == 1 {
+            out.push(format!("{field}: `==` is not closed on its line"));
+        }
+        keys += marks / 2;
+    }
+    keys
+}
+
+/// A step's lecturer notes (docs/LESSONS.md § Videos): at most
+/// [`LecturerNote::MAX_PER_STEP`], each with text, closed markup and at most
+/// one key term.
+pub fn lecturer_problems(notes: &[LecturerNote]) -> Vec<String> {
+    let mut out = Vec::new();
+    if notes.len() > LecturerNote::MAX_PER_STEP {
+        out.push(format!("{} lecturer notes: keep at most {}", notes.len(), LecturerNote::MAX_PER_STEP));
+    }
+    for (i, n) in notes.iter().enumerate() {
+        let field = format!("lecturer {}", i + 1);
+        if n.text.trim().is_empty() {
+            out.push(format!("{field}: text is empty"));
+        }
+        if line_markup(&field, &n.text, &mut out) > 1 {
+            out.push(format!("{field}: more than one key term (`==`)"));
+        }
     }
     out
 }

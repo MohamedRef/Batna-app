@@ -482,6 +482,7 @@ mod tests {
             pages: [1, 2],
             topics: vec![],
             goals: vec![],
+            videos: vec![],
             steps: bodies.into_iter().map(step).collect(),
             recap: vec![],
             practice: vec![],

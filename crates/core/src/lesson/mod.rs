@@ -49,6 +49,9 @@ pub struct Lesson {
     /// "After this lesson you can…", in Arabic.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub goals: Vec<String>,
+    /// Where a lecturer's video explains this lesson (see [`Video`]).
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub videos: Vec<Video>,
     pub steps: Vec<Step>,
     /// The take-aways shown at the end.
     pub recap: Vec<String>,
@@ -409,6 +412,9 @@ pub use marks::*;
 
 mod check;
 pub use check::*;
+
+mod video;
+pub use video::*;
 
 #[cfg(test)]
 mod tests;

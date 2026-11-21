@@ -454,6 +454,13 @@ Add a bullet here when a PR adds something a later agent must know.
 
 ### Lessons
 
+- **Video links** (2026-11-21): a lesson's optional `videos:` list
+  (`batna_core::lesson::Video`: YouTube id, start second, label, who) shows
+  as buttons in the player header (`learn/player.rs` `VideoLink`, class
+  `ls-video`). Each opens `https://youtu.be/<id>?t=<at>` through
+  `cloud::open_url`. The links point into Dr. Allam's revision course,
+  mapped by hand from his sealed transcripts (docs/ALLAM.md). Rules:
+  [LESSONS.md](LESSONS.md) § Videos.
 - **Focus layout** (#767, replaces #739's two-pane grid): from 840px up the
   player is one centred column (40rem; 44rem with 1.125rem text from
   1200px, ≈ 60–75 characters a line), its top at the same height on every
@@ -922,6 +929,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: lesson video links (LESSONS.md § Videos): `videos:` on a lesson, validated (YouTube id shape, start, label, at most 6, no repeats), shown as «▶ label · clock» buttons in the player header that open YouTube at that second; the first links into Dr. Allam's revision course (the lessons of his that were mapped first), with the rest and his asides to follow per course.
 - 2026-11-20: CI: APK builds retry Maven (`scripts/android-bundle.sh`), and `dx` comes from the Actions cache on Linux and macOS (`.github/actions/dx`, adapted from Steps-app #837).
 - 2026-11-19: lesson teaching text checked against the book (#1385): every step of hb L02–L10 and L12–L20 (#1410), hem L01–L12 (#1412) and res L01–L20 (this PR) read against its quote and page, book figures against captions and alt text. No check or case key was wrong; about 200 fixes: captions and alt text describing what a picture does not show, numbers and lists back to the book, wrong lesson cross-references, claims credited to the book or lecturer without a source, SVG marks (hem.L10 P50, res.L05 pyramid). Two quote fixes wait for `refs --write` where the book text is: hb.L17.lesson3 step 1 and hem.L04.lesson3 step 7.
 - 2026-11-19: review of the 2026-11-16 option rewrite (#1385): every changed question of the nine courses read against its page and quote; no key turned wrong by the rewrite. About 90 fixes in #1403 (dm), #1405 (hb), #1406 (res), #1407 (endo, geri), #1408 (git), #1409 (neph), #1411 (rheum): wrong options the stem rules out, wrong options made partly right, wrong facts in wrong options, whys still explaining the old option, pronouns; two older key wordings (dm.L16.044's reason, git.L08.086's duodenal aspirate).

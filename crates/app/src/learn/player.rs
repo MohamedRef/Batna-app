@@ -4,7 +4,7 @@
 //! hands its practice items to a study session. The layout follows Kabar's
 //! lesson player (adapted from kabar-app main: crates/app/src/lesson.rs).
 
-use batna_core::lesson::{Lesson, Step, StepBody};
+use batna_core::lesson::{Lesson, Step, StepBody, Video};
 use dioxus::prelude::*;
 
 use batna_core::response::{Attempt, Draft, StepState, sig};
@@ -226,6 +226,13 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     bdi { dir: "ltr", lang: "en", "{lecture_title}" }
                     " · "
                     super::BookPages { id: lesson.id.clone(), pages: lesson.pages }
+                }
+                if !lesson.videos.is_empty() {
+                    div { class: "ls-videos", role: "group", aria_label: tx::VIDEOS,
+                        for (k , v) in lesson.videos.iter().enumerate() {
+                            VideoLink { key: "{k}", video: v.clone() }
+                        }
+                    }
                 }
             }
             for (k , st) in lesson.steps.iter().enumerate().filter(|(k, _)| seen.read()[*k]) {
@@ -616,6 +623,29 @@ mod ux_tests {
         // No 36/40/44px tap sizes left in the lesson player.
         for small in ["min-height: 36px", "min-height: 44px", "min-block-size: 44px", "block-size: 44px"] {
             assert!(!css.contains(small), "{small}");
+        }
+    }
+}
+
+/// A button that opens a lecturer's video at the second where this lesson
+/// is explained (Mohamed 2026-11-21): ▶ the label · the clock.
+#[component]
+fn VideoLink(video: Video) -> Element {
+    let url = video.url();
+    let clock = video.clock();
+    rsx! {
+        button {
+            class: "chip tap-chip ls-video",
+            "data-video": "{video.youtube}",
+            title: "{tx::VIDEO_HINT} ({video.by})",
+            onclick: move |_| {
+                if let Err(e) = crate::cloud::open_url(&url) {
+                    crate::diag::report!("{e}");
+                }
+            },
+            span { class: "ls-video-play", aria_hidden: "true", "▶" }
+            span { class: "ls-video-label", Line { text: video.label.clone() } }
+            bdi { dir: "ltr", class: "num-ltr muted", "{clock}" }
         }
     }
 }

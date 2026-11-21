@@ -211,6 +211,23 @@ fn finishing_a_lesson_marks_it_done_and_shows_the_recap() {
 }
 
 #[test]
+fn the_header_links_each_video_at_its_second() {
+    // Dr. Allam's links (Mohamed 2026-11-21): one button per place, each
+    // naming what he explains there and the clock it starts at.
+    let (l, _) = claim(|l, k, _| k == 0 && !l.videos.is_empty());
+    let d = open(l, 0);
+    let buttons = d.find(|e| e.tag == "button" && e.has_class("ls-video"));
+    assert_eq!(buttons.len(), l.videos.len(), "{}", d.html());
+    for (b, v) in buttons.iter().zip(&l.videos) {
+        assert_eq!(b.attr("data-video"), Some(v.youtube.as_str()));
+        assert!(b.text.contains(&v.clock()), "{}", b.text);
+        let word = v.label.split_whitespace().last().unwrap_or("");
+        assert!(norm(&b.text).contains(&norm(word)), "{} has {word}", b.text);
+        assert!(b.attr("title").is_some_and(|t| t.contains(&v.by)));
+    }
+}
+
+#[test]
 fn a_finish_the_store_refuses_stays_on_the_last_step_until_it_saves() {
     let (l, at) = claim(|l, k, _| k + 1 == l.steps.len() && !l.practice.is_empty());
     // Its own store: a read-only shared store would refuse every other

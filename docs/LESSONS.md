@@ -130,10 +130,34 @@ lessons:
     topics: [definition, causes] # the lecture's topic ids
     goals: ["...", "..."]        # optional, Arabic
     status: unverified
+    videos:                      # optional: where a video explains it (§ Videos)
+      - { youtube: LNt6ZsRUojc, at: 217, label: "تعريف الـ dysphagia", by: "د. محمود علام" }
     steps: [...]
     recap: ["...", "..."]        # take-aways on the end screen
     practice: [hb.L01.001, ...]  # items of this lecture
 ```
+
+## Videos
+
+A lesson's `videos:` list points to the second in a lecturer's YouTube video
+where its subject is explained. Today that means Dr. Mahmoud Allam's 24-day
+revision course (Mohamed, 2026-11-21; his transcripts are sealed in
+`content/allam/`, see [ALLAM.md](ALLAM.md)). The lesson header shows one button
+per link: «▶ label · 3:39». It opens `https://youtu.be/<id>?t=<at>` in the
+browser or the YouTube app, and the app never plays or fetches a video itself.
+
+- `youtube`: the 11-character video id. `at`: the second where he **starts**
+  explaining this lesson's subject, taken from the start of a subtitle cue,
+  never the start of a 5-minute window. `label`: 2–6 words of Egyptian Arabic
+  with the English terms (60 characters at most). `by`: who explains it.
+- Link only a real explanation of the lesson's subject, never a passing
+  mention. At most 6 per lesson, each place once. The validator checks the
+  id's shape, the second, the label and duplicates.
+- His explanation can also teach inside a lesson. An `aside` starting «من شرح
+  د. علام:» adds a simpler way to see a step, a useful fact or an exam point
+  the lesson lacks. A fact that isn't in the book ends with «(مش في الكتاب)».
+  Where he differs from the book, the book wins: that difference never goes in
+  an aside. Asides paraphrase him and never quote long stretches.
 
 ## Step kinds
 

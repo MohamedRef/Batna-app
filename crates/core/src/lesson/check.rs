@@ -152,6 +152,9 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
                 bad(at, format!("topic `{t}` is not one of the lecture's topics"));
             }
         }
+        for m in video_problems(&lesson.videos) {
+            bad(at, m);
+        }
         if lesson.recap.is_empty() {
             bad(at, "recap is empty: end with the take-aways".into());
         }

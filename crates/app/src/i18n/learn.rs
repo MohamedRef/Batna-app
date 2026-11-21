@@ -10,6 +10,9 @@ pub const NEW: &str = "جديد";
 pub const EXPLAIN: &str = "اشرحهولي";
 pub const EXPLAIN_HINT: &str = "افتح الدرس اللي بيشرح السؤال ده";
 pub const OPEN_LECTURE: &str = "افتح المحاضرة";
+/// The lesson header's video links (a lecturer's YouTube explanation).
+pub const VIDEOS: &str = "شرح الدرس فيديو";
+pub const VIDEO_HINT: &str = "افتح الفيديو عند أول شرح الدرس ده";
 
 pub const CLOSE: &str = "اقفل الدرس";
 pub const PROGRESS_LABEL: &str = "موضعك في الدرس";

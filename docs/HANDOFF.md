@@ -949,6 +949,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: Updates parity with Kabar (#732): a failed feed check preserves Ready/Installing/NeedsPermission/Installed and `download_locked` reuses an already-verified build; full builds' content packs wait for their APK before advancing `shown_build` or `last_run`; `set_channel` serializes under `job`, poisoned update locks recover, notification downloads ask `MeteredConfirm`, What's new deduplicates preview/release lines and preserves unseen baselines, and Arabic counts handle 0 and 100+.
 - 2026-11-21: beta `v2026.11.20` (main `153f16a`, build 1169), at Mohamed's ask after the reminder link fix (#1431); the `batna-beta` and `batna-alpha` `update.json` verified with `batna-tools update verify` against the five files.
 - 2026-11-21: the «📖 من درس» link under a reminder and the «اشرحهولي» link put their words in one `span.st-link-text`: inside the flex `.st-link` button each text run had been its own column, so a long lesson title broke a word or letter per line on the phone (Mohamed's screenshot, hb.L01.lesson2 step 9).
 - 2026-11-21: first beta, `v2026.11.19` (main `d9a757f`), at Mohamed's ask: the `batna-beta` feed exists now and the same release updated `batna-alpha`; both `update.json` verified with `batna-tools update verify` against the five files.

@@ -27,7 +27,7 @@ pub fn finished_changed(n: usize) -> String {
     match n {
         1 => "درس خلصته اتغيّر".to_owned(),
         2 => "درسين خلصتهم اتغيّروا".to_owned(),
-        3..=10 => format!("{n} دروس خلصتها اتغيّرت"),
+        _ if (3..=10).contains(&(n % 100)) => format!("{n} دروس خلصتها اتغيّرت"),
         _ => format!("{n} درس خلصتهم اتغيّروا"),
     }
 }
@@ -44,7 +44,7 @@ pub fn found(changes: usize, builds: usize) -> String {
     let b = match builds {
         1 => "نسخة واحدة".to_owned(),
         2 => "نسختين".to_owned(),
-        3..=10 => format!("{builds} نسخ"),
+        _ if (3..=10).contains(&(builds % 100)) => format!("{builds} نسخ"),
         _ => format!("{builds} نسخة"),
     };
     format!("{} في {b}", super::count::count(changes, &CHANGE))

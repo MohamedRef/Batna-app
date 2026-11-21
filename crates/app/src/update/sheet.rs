@@ -52,6 +52,12 @@ impl UpdateSheetNav {
     }
 
     pub fn open(mut self, mode: SheetMode) {
+        if *self.0.peek() == Some(SheetMode::Updated)
+            && mode != SheetMode::Updated
+            && let Some(u) = super::get()
+        {
+            u.close_whats_new();
+        }
         self.0.set(Some(mode));
     }
 

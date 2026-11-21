@@ -176,15 +176,18 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
   `docs/RELEASE.md` §1.
 - Channels: `batna-preview` (CI, every 4 h), `batna-alpha`, `batna-beta`,
   `batna-stable` (feed tags: never rename, installed apps read them).
-- **Beta and stable are not published yet** (no `batna-beta` or
-  `batna-stable` release; starting them waits on Mohamed). A 404 feed is
+- **Beta is published since 2026-11-21** (`v2026.11.19`, Mohamed: «طلع
+  بيتا»); a beta release also updates the alpha feed. **Stable is not
+  published yet** (no `batna-stable` release; starting it waits on
+  Mohamed). A 404 feed is
   `Failure::NotPublished`, not a network failure: picking a channel probes
   its `update.json` first and a 404 refuses the pick (`Status::unpublished`,
   a note under the picker); a device already on an empty channel sees
   `NOT_PUBLISHED` with «ارجع لألفا» (`Act::FollowAlpha`). Offline, the pick
   goes through as before. Issue #1351.
-- **Alpha only when Mohamed says so** («طلّع ألفا»). Steps: Actions ›
-  Release › Run workflow (channel alpha); no bump PR.
+- **Alpha or beta only when Mohamed says so** («طلّع ألفا» / «طلّع بيتا»).
+  Steps: Actions › Release › Run workflow (channel alpha or beta); no bump
+  PR.
   It builds the content pack, release APK (Linux), Batna.app (macOS), signs
   the feed and publishes. Then verify `update.json` with
   `batna-tools update verify` against `crates/app/update-key.pub`.
@@ -908,7 +911,7 @@ come from `batna-tools packs build --check` (its last line).
 | Area | State |
 |---|---|
 | App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings and book figures), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, full-text search, start over per course, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync (with «زامن دلوقتي»), password login, OTA app + content updates (what's new by course), web |
-| Releases | `v2026.11.13` (2026-11-16, alpha, = main `ba56f9d`); `v2026.11.12` (2026-11-15, `5b4d024`). Alpha only when Mohamed says so; previews every 4 h. Beta and stable feeds are not published (the app reads their 404 as "nothing here yet") |
+| Releases | `v2026.11.19` (2026-11-21, **beta**, the first; it also updated alpha; = main `d9a757f`: Dr. Allam's course); `v2026.11.18` (2026-11-19, alpha). Alpha or beta only when Mohamed says so; previews every 4 h. The stable feed is not published (the app reads its 404 as "nothing here yet") |
 | Content | 9 courses, 141 lectures, 1,059 lessons in 141 lesson files, 15,557 items, 936 lesson pictures (18 MB, book figures and open-licence images; 2026-11-16). 2026-11-13 to 11-15: lesson depth passes, book figures placed in lessons at their pages (#983) and on cards/MCQs/cases (#1154). `res` L01–L20 written and checked against the enriched lecture copies. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) 2026-11-19 review round (#1385): first-mention spell-outs fixed in every course (#1383), every question the 11-16 option rewrite changed read against its page (no key turned wrong), and the lesson text of hb, hem and res checked against the book; printed lesson copies keep the printed options (#1402). 2026-11-21: Dr. Allam's revision course (docs/ALLAM.md) gives 771 video links on 432 lessons and 412 lecturer notes on 263 lessons in eight courses (all but res), every note checked against the book by a separate agent |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
@@ -946,6 +949,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: first beta, `v2026.11.19` (main `d9a757f`), at Mohamed's ask: the `batna-beta` feed exists now and the same release updated `batna-alpha`; both `update.json` verified with `batna-tools update verify` against the five files.
 - 2026-11-21: the 86 per-lesson notes on Dr. Allam's course (where he differs from the book, with pages; his parts outside the syllabus) sealed with the transcripts in `content/allam/notes/` (275 sealed files now).
 - 2026-11-21: Dr. Allam's course, the rest: geriatrics (58 lecturer notes from his cardiology, chest and neurology lessons; 84 proposed: 40 kept, 18 edited, 26 dropped), round 2 for the other seven courses (62 notes from his later lessons, checked against the book and the round-1 notes), every video link refreshed (771 on 432 lessons; the 6 kept by hand where more fit), and lecturer notes under a reveal or a hidden table now wait like the book quote. Glossary: HOCM, aVF, aVL; HDH plain.
 - 2026-11-21: Dr. Allam's explanation in rheumatology: 43 lecturer notes on 31 lessons (his lessons RHEUM-L01 to L06, HEME-L08, GIT-L02, CVS-L04 and others), each checked by a separate agent against the book (49 proposed: 25 kept, 18 edited, 6 dropped), and the links from his lessons mapped since #1419; "HeberDen" (his letter trick) is a plain word.

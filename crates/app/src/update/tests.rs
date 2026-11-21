@@ -1319,5 +1319,5 @@ fn unseen_whats_new_baseline_survives_back_to_back_updates_and_hundreds_agree() 
 
     assert_eq!(tx::builds_count(103), "103 نسخ جديدة");
     assert_eq!(tx::content_updates_count(105), "105 تحديثات محتوى");
-    assert!(ch::found(104).contains("تغييرات"));
+    assert_eq!(ch::found(104, 103), "104 تغييرات في 103 نسخ");
 }

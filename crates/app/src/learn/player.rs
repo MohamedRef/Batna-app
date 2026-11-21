@@ -622,7 +622,7 @@ mod ux_tests {
             let at = css.find(&format!("\n{sel} {{")).unwrap_or_else(|| panic!("no rule for {sel}"));
             css[at..].split('}').next().unwrap().to_string()
         };
-        for sel in [".ls-tile", ".ls-bin-head", ".ls-cell-hidden"] {
+        for sel in [".ls-tile", ".ls-bin-head", ".ls-cell-hidden", "button.tap-chip.ls-video"] {
             assert!(rule(sel).contains("min-block-size: var(--target);"), "{sel}");
         }
         assert!(css.contains(".ls-chiplet { cursor: pointer; min-block-size: var(--target); }"));

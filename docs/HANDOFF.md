@@ -945,6 +945,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: Dr. Allam's explanation in rheumatology: 43 lecturer notes on 31 lessons (his lessons RHEUM-L01 to L06, HEME-L08, GIT-L02, CVS-L04 and others), each checked by a separate agent against the book (49 proposed: 25 kept, 18 edited, 6 dropped), and the links from his lessons mapped since #1419; "HeberDen" (his letter trick) is a plain word.
 - 2026-11-21: Dr. Allam's explanation in endocrinology: 27 lecturer notes on 21 lessons (his lessons ENDO-L01 to L05, HEP-L03 and others), each checked by a separate agent against the book (28 proposed: 16 kept, 11 edited, 1 dropped), and the links from his lessons mapped since #1419.
 - 2026-11-21: Dr. Allam's explanation in haematology: 60 lecturer notes on 33 lessons (his lessons HEME-L01 to L10, HEP-L01, L04 and L08 and others), each checked by a separate agent against the book (68 proposed: 38 kept, 22 edited, 8 dropped), and the links from his lessons mapped since #1419; TIBC in the glossary.
 - 2026-11-21: Dr. Allam's explanation in gastroenterology: 38 lecturer notes on 28 lessons (his lessons GIT-L01 to L05, HEME-L01 and L02, HEP-L05 and others), each checked by a separate agent against the book (40 proposed: 16 kept, 22 edited, 2 dropped), and the links from his lessons mapped since #1419.

@@ -10,6 +10,7 @@
 //! batna-tools cue [--all] [--kind K] [--list LECTURE]   how often the key is the longest option, per kind and lecture (cue.rs)
 //! batna-tools lessons --summary | --report <course> | --warnings [<course>]   lesson coverage (coverage.rs)
 //! batna-tools figures   the book's figures in the lessons: progress table for #983 (figures.rs)
+//! batna-tools allam <keygen | seal DIR | open DIR>   Dr. Allam's course, sealed in git (docs/ALLAM.md)
 //! ```
 
 use std::collections::BTreeSet;
@@ -19,6 +20,7 @@ use std::process::ExitCode;
 use batna_core::content::{Index, Lecture, SCHEMA};
 use batna_core::validate::{self, Context};
 
+mod allam;
 mod anki;
 mod changes;
 mod cloud_verdicts;
@@ -67,6 +69,7 @@ fn cli(args: &[String]) -> (ExitCode, Option<String>, Vec<String>) {
                 (ExitCode::FAILURE, None, problems)
             }
         },
+        Some("allam") => report(allam::run(&root, &args[1..])),
         Some("anki") => report(anki::run(&root, &args[1..])),
         Some("packs") => report(packs::run(&root, &args[1..])),
         Some("verdicts") => report(verdicts::run(&root, &args[1..])),
@@ -94,7 +97,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 }
 
 fn usage() -> (ExitCode, Option<String>, Vec<String>) {
-    let text = "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | lessons --summary | cue | figures | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)";
+    let text = "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs | lessons --summary | cue | figures | ids <list | check --base REF> | content <next-id | new-item | diff | preflight> | allam <keygen | seal DIR | open DIR>> [--root DIR] (see the top of crates/tools/src/main.rs)";
     (ExitCode::from(2), None, vec![text.to_owned()])
 }
 
@@ -231,9 +234,12 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(content::unfinished(root));
     // Page references checked against the book (refs.rs).
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
+    // Dr. Allam's course, sealed (allam.rs).
+    let (allam_problems, allam_line) = allam::check(root);
+    problems.extend(allam_problems);
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms; lesson coverage: {coverage_warnings} warning(s), see `batna-tools lessons --warnings`; book figures: {figures_pending} lecture(s) not inventoried yet, {figures_restated} warning(s) (diagram, algorithm or chart skipped as restated in words), see `batna-tools figures`{}",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms; lesson coverage: {coverage_warnings} warning(s), see `batna-tools lessons --warnings`; book figures: {figures_pending} lecture(s) not inventoried yet, {figures_restated} warning(s) (diagram, algorithm or chart skipped as restated in words), see `batna-tools figures`{}{allam_line}",
             index.lectures.len(),
             cue.line()
         ))

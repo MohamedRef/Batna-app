@@ -416,9 +416,10 @@ fn Stage(
             if !try_done && !step.remind.is_empty() {
                 super::remind::Reminders { remind: step.remind.clone(), here: seed.split('#').next().unwrap_or_default().to_string() }
             }
-            // What a lecturer adds (Dr. Allam): under a question only once
-            // it is answered, so it never gives the answer away.
-            if lecturer_shown(&step, before.is_some() || checked) {
+            // What a lecturer adds (Dr. Allam): held like the book quote
+            // until a question, reveal or hidden table is answered, so it
+            // never gives the answer away.
+            if lecturer_shown(&step, quote_held) {
                 div { class: "ls-lecturer",
                     for (n , note) in step.lecturer.iter().enumerate() {
                         super::steps::Aside { key: "{n}", tone: note.tone, text: note.text.clone() }
@@ -460,10 +461,11 @@ fn Stage(
     }
 }
 
-/// Whether a step's lecturer notes show: always under reading, and under a
-/// question once it is answered (`done`), so they never give it away.
-pub(super) fn lecturer_shown(step: &Step, done: bool) -> bool {
-    !step.lecturer.is_empty() && (!step.body.is_question() || done)
+/// Whether a step's lecturer notes show: whenever the step's book quote does
+/// (`held` is [`batna_core::response::quote_held`]), so under a question, a
+/// reveal or a table with hidden cells only once he has answered or opened it.
+pub(super) fn lecturer_shown(step: &Step, held: bool) -> bool {
+    !step.lecturer.is_empty() && !held
 }
 
 /// A completed lesson always offers exactly one primary next action.

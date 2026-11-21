@@ -151,7 +151,8 @@ browser or the YouTube app, and the app never plays or fetches a video itself.
   never the start of a 5-minute window. `label`: 2–6 words of Egyptian Arabic
   with the English terms (60 characters at most). `by`: who explains it.
 - Link only a real explanation of the lesson's subject, never a passing
-  mention. At most 6 per lesson, each place once. The validator checks the
+  mention. At most 6 per lesson, each place once; where his course explains a
+  lesson in more places, the 6 kept are picked by hand. The validator checks the
   id's shape, the second, the label and duplicates.
 - His explanation can also teach inside a lesson, as a **lecturer note** on
   the step it adds to:
@@ -166,8 +167,9 @@ browser or the YouTube app, and the app never plays or fetches a video itself.
           من شرح د. علام: ...
   ```
 
-  The note shows under its step as an aside. Under a question it shows only
-  once the question is answered, so it never gives the answer away. It is part
+  The note shows under its step as an aside. It waits like the step's book
+  quote: under a question, a reveal or a table with hidden cells it shows only
+  once he has answered or opened it, so it never gives the answer away. It is part
   of the step, not a step of its own, so adding one moves no step number that
   his notes, weak-fact marks and the book-reference locks
   (`content/book-refs/`) point at. A step carries at most 3 notes, each with

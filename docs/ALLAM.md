@@ -9,6 +9,13 @@ Batna uses the course in two ways, both written by hand from the opened transcri
 - **Video links.** A lesson's `videos:` list points to the second in a video where its subject is explained. The lesson header shows them (docs/LESSONS.md § Videos).
 - **Lesson asides.** An aside starting «من شرح د. علام:» adds his explanation where it helps: a simpler way to see it, a useful fact, or an exam point. Only the syllabus's subjects go in, and the book stays the exam answer.
 
+## What came of it (2026-11-21)
+
+- An agent read each of his 86 lessons (the transcript and the subtitle timings), the app's lessons and the book. It proposed links to the second where he explains an app lesson, and notes where his explanation adds something. Places where he contradicts the book were left out and recorded in that agent's notes.
+- A separate agent then read every proposed note against the book. It kept the note, edited it, or dropped it, and kept at most 3 notes per lesson.
+- The result: **771 links on 432 lessons** and **412 lecturer notes on 263 lessons**, in hb, git, hem, neph, endo, dm, rheum and geri. His infectious-disease lessons and most of his cardiology, chest and neurology fall outside the syllabus and add little.
+- The working files (per-lesson notes of where he differs from the book, and the verdicts) stayed outside the repo.
+
 ## The key
 
 - 32 random bytes, written as 52 letters and digits in groups of four (`ABCD-EFGH-…`). Spaces, dashes and case don't matter when you type it.

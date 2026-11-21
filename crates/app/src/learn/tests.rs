@@ -228,19 +228,34 @@ fn the_header_links_each_video_at_its_second() {
 }
 
 #[test]
-fn lecturer_notes_show_under_reading_and_under_a_question_once_answered() {
+fn lecturer_notes_show_under_reading_and_under_a_question_or_reveal_once_answered() {
     use batna_core::lesson::{LecturerNote, Step, Tone};
+    use batna_core::response::{StepState, quote_held};
     let note = LecturerNote { tone: Tone::Tip, text: "من شرح د. علام: x".into() };
     let step = |yaml: &str, notes: Vec<LecturerNote>| Step {
         lecturer: notes,
         ..serde_yaml_ng::from_str::<Step>(yaml).unwrap()
     };
+    let shown =
+        |s: &Step, state: StepState| super::player::lecturer_shown(s, quote_held(&s.body, state, None));
     let read = step("kind: explain\ntext: x\n", vec![note.clone()]);
-    let q = step("kind: check\nquestion: q\noptions: [a, b]\nanswer: 0\nwhy: [x, y]\n", vec![note]);
-    assert!(super::player::lecturer_shown(&read, false));
-    assert!(!super::player::lecturer_shown(&q, false), "never before the answer");
-    assert!(super::player::lecturer_shown(&q, true));
-    assert!(!super::player::lecturer_shown(&step("kind: explain\ntext: x\n", vec![]), true));
+    let q = step("kind: check\nquestion: q\noptions: [a, b]\nanswer: 0\nwhy: [x, y]\n", vec![note.clone()]);
+    let reveal = step("kind: reveal\nprompt: why?\nanswer: because\n", vec![note]);
+    assert!(shown(&read, StepState::Done));
+    for s in [&q, &reveal] {
+        assert!(!shown(s, StepState::Open), "never before the answer: {:?}", s.body.kind());
+        assert!(shown(s, StepState::Done));
+    }
+    assert!(!shown(&step("kind: explain\ntext: x\n", vec![]), StepState::Done));
+}
+
+#[test]
+fn a_reading_step_shows_its_lecturer_notes_under_it() {
+    let (l, at) = claim(|l, k, b| reading(b) && !l.steps[k].lecturer.is_empty());
+    let d = open(l, at);
+    let notes = d.find(is("ls-lecturer"));
+    assert_eq!(notes.len(), 1, "{}", d.html());
+    assert!(notes[0].text.contains("من شرح د. علام"), "{}", notes[0].text);
 }
 
 #[test]

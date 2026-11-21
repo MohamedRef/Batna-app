@@ -239,6 +239,7 @@ Gotcha: `cloud-deploy.yml` finishes **green but skipped** when
 | Mac `.env` | `BATNA_CLOUD_URL`, `BATNA_GOOGLE_CLIENT_ID`, `BATNA_GOOGLE_CLIENT_SECRET` | local builds |
 | Worker | `ALLOWED_EMAILS`, `TOKEN_SIGNING_KEY` | set by the deploy workflow |
 | Content environment | `BATNA_VERDICTS_KEY` | verdicts read key from Settings › Sync, for `batna-tools verdicts --cloud` (reads his ✓ ✎ ✗ marks only) |
+| | `BATNA_ALLAM_KEY` | opens Dr. Allam's sealed course in `content/allam/` (key id `148444bd`); Mohamed keeps it, not in CI (docs/ALLAM.md) |
 
 Public (not secret): Google client ids in `crates/server/wrangler.toml`
 (`GOOGLE_CLIENT_IDS`, Desktop + "Batna web"), `WEB_ORIGINS`.
@@ -419,6 +420,14 @@ into the format above, `pdftoppm -r 200 -jpeg` for images, `tesseract` for
 image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 (default `/mnt/project-files/medstudy`): see
 [scripts/content-tools/README.md](../scripts/content-tools/README.md).
+
+**Dr. Mahmoud Allam's revision course** (24 days, 101 YouTube videos, Egyptian
+Arabic; Mohamed's transcripts, 2026-11-21) is the one source kept **inside**
+Batna-app, sealed: `content/allam/` holds the 86 lessons, the 101 subtitle files
+and the index, encrypted with Mohamed's key, as Steps keeps its VQ bank.
+`batna-tools allam open DIR` with `BATNA_ALLAM_KEY` opens them outside the repo
+([docs/ALLAM.md](ALLAM.md)). Lessons link to the second where he explains them and
+quote none of his words.
 
 ## 9. Testing
 
@@ -922,6 +931,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: Dr. Allam's revision course sealed in git (docs/ALLAM.md): `batna-tools allam keygen | seal | open`, XChaCha20-Poly1305 over DEFLATE (adapted from Steps' VQ), 189 files in `content/allam/`; `validate` checks their shape, and opens them when `BATNA_ALLAM_KEY` is set.
 - 2026-11-20: CI: APK builds retry Maven (`scripts/android-bundle.sh`), and `dx` comes from the Actions cache on Linux and macOS (`.github/actions/dx`, adapted from Steps-app #837).
 - 2026-11-19: lesson teaching text checked against the book (#1385): every step of hb L02–L10 and L12–L20 (#1410), hem L01–L12 (#1412) and res L01–L20 (this PR) read against its quote and page, book figures against captions and alt text. No check or case key was wrong; about 200 fixes: captions and alt text describing what a picture does not show, numbers and lists back to the book, wrong lesson cross-references, claims credited to the book or lecturer without a source, SVG marks (hem.L10 P50, res.L05 pyramid). Two quote fixes wait for `refs --write` where the book text is: hb.L17.lesson3 step 1 and hem.L04.lesson3 step 7.
 - 2026-11-19: review of the 2026-11-16 option rewrite (#1385): every changed question of the nine courses read against its page and quote; no key turned wrong by the rewrite. About 90 fixes in #1403 (dm), #1405 (hb), #1406 (res), #1407 (endo, geri), #1408 (git), #1409 (neph), #1411 (rheum): wrong options the stem rules out, wrong options made partly right, wrong facts in wrong options, whys still explaining the old option, pronouns; two older key wordings (dm.L16.044's reason, git.L08.086's duodenal aspirate).

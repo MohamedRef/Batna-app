@@ -14,7 +14,7 @@ Batna uses the course in two ways, both written by hand from the opened transcri
 - An agent read each of his 86 lessons (the transcript and the subtitle timings), the app's lessons and the book. It proposed links to the second where he explains an app lesson, and notes where his explanation adds something. Places where he contradicts the book were left out and recorded in that agent's notes.
 - A separate agent then read every proposed note against the book. It kept the note, edited it, or dropped it, and kept at most 3 notes per lesson.
 - The result: **771 links on 432 lessons** and **412 lecturer notes on 263 lessons**, in hb, git, hem, neph, endo, dm, rheum and geri. His infectious-disease lessons and most of his cardiology, chest and neurology fall outside the syllabus and add little.
-- The working files (per-lesson notes of where he differs from the book, and the verdicts) stayed outside the repo.
+- The per-lesson notes of where he differs from the book are sealed with the transcripts (`notes/`); the checkers' verdicts stayed outside the repo.
 
 ## The key
 
@@ -39,7 +39,7 @@ key: "148444bd"  # key id: which key sealed it (never the key)
 sealed: <base64url>
 ```
 
-The opened folder holds 189 files:
+The opened folder holds 275 files:
 
 | Path | What |
 |---|---|
@@ -47,6 +47,7 @@ The opened folder holds 189 files:
 | `subtitles/BL-NNN.vtt` | One WebVTT file per video (`BL-001` … `BL-101`), with a cue every 10–30 seconds. Exact seconds for links come from here. |
 | `index/lessons.json` | Every lesson's metadata and deep links. |
 | `index/timestamps.md` | The master index of lessons and timestamps. |
+| `notes/<ID>.notes.md` | For each of his 86 lessons, what the reading agent found (2026-11-21): the app lessons it checked, his parts outside the syllabus, and every place he differs from the book, with the book page. Links and notes were never taken from those places. |
 
 Crypto, adapted from steps-app main (crates/core/src/sealed.rs), in `crates/tools/src/allam.rs`:
 

@@ -29,7 +29,21 @@ fn order_of(b: &BuildChanges) -> Option<(Version, u64)> {
 }
 
 pub(super) fn load(dir: &Path) -> Vec<BuildChanges> {
-    fs::read(dir.join(FILE)).ok().and_then(|b| serde_json::from_slice(&b).ok()).unwrap_or_default()
+    let mut all: Vec<BuildChanges> =
+        fs::read(dir.join(FILE)).ok().and_then(|b| serde_json::from_slice(&b).ok()).unwrap_or_default();
+    dedup_older(&mut all);
+    all
+}
+
+/// Drops lines from older builds that a newer build (for example an alpha
+/// release rolling up preview changes) already lists.
+pub(super) fn dedup_older(builds: &mut Vec<BuildChanges>) {
+    let mut seen = std::collections::HashSet::new();
+    builds.retain_mut(|b| {
+        let had_changes = !b.changes.is_empty();
+        b.changes.retain(|c| seen.insert((c.kind, line(c).0)));
+        !had_changes || !b.changes.is_empty()
+    });
 }
 
 /// `fresh` (a verified feed's history) over `known`, newest first. Returns
@@ -42,6 +56,7 @@ pub(super) fn merge(known: &[BuildChanges], fresh: &[BuildChanges]) -> Option<Ve
         }
     }
     all.sort_by_key(|a| std::cmp::Reverse(order_of(a)));
+    dedup_older(&mut all);
     all.truncate(KEEP);
     (all != known).then_some(all)
 }
@@ -184,5 +199,30 @@ mod tests {
         assert_eq!(d - day_of("2026-10-26T23:59:00Z").unwrap(), 2);
         assert_eq!(civil(d), (2026, 10, 28));
         assert_eq!(day_of("soon"), None);
+    }
+
+    #[test]
+    fn older_duplicate_lines_drop_after_a_release_rollup() {
+        use ChangeKind::*;
+        let rollup = BuildChanges {
+            version: "2026.11.2".into(),
+            build: 12,
+            published_at: "2026-11-08T10:00:00Z".into(),
+            changes: vec![
+                Change::new(Fixed, UpdateNotes { en: "a".into(), ar_eg: "تصليح أول".into() }),
+                Change::new(New, UpdateNotes { en: "b".into(), ar_eg: "إضافة تانية".into() }),
+            ],
+            content_only: false,
+        };
+        let preview = BuildChanges {
+            version: "2026.11.1".into(),
+            build: 11,
+            published_at: "2026-11-07T10:00:00Z".into(),
+            changes: vec![Change::new(Fixed, UpdateNotes { en: "a".into(), ar_eg: "تصليح أول".into() })],
+            content_only: false,
+        };
+        let merged = merge(&[preview], &[rollup]).unwrap();
+        assert_eq!(merged.len(), 1, "older build whose only line is in the rollup goes");
+        assert_eq!(merged[0].build, 12);
     }
 }

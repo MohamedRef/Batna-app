@@ -605,7 +605,7 @@ pub fn use_update_notice_taps(nav: SettingsNav) {
             }
             match tap_asks(&tap) {
                 Some(Asked::Download) => Act::Download.run(),
-                Some(Asked::Install) => work(Updater::install),
+                Some(Asked::Install) => Act::Install.run(),
                 None => {}
             }
         }

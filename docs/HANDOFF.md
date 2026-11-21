@@ -945,6 +945,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: Dr. Allam's explanation in gastroenterology: 38 lecturer notes on 28 lessons (his lessons GIT-L01 to L05, HEME-L01 and L02, HEP-L05 and others), each checked by a separate agent against the book (40 proposed: 16 kept, 22 edited, 2 dropped), and the links from his lessons mapped since #1419.
 - 2026-11-21: lecturer notes on lesson steps (`lecturer:`, LESSONS.md § Videos): Dr. Allam's explanation rides on the step it adds to, so step positions that notes, marks and book-ref locks use never move; shown under a question only once answered. Pack schema 6, which also covers #1419's `videos` (older apps keep their content until they update).
 - 2026-11-21: lesson video links (LESSONS.md § Videos): `videos:` on a lesson, validated (YouTube id shape, start, label, at most 6, no repeats), shown as «▶ label · clock» buttons in the player header that open YouTube at that second; the first links into Dr. Allam's revision course (the lessons of his that were mapped first), with the rest and his asides to follow per course.
 - 2026-11-21: Dr. Allam's revision course sealed in git (docs/ALLAM.md): `batna-tools allam keygen | seal | open`, XChaCha20-Poly1305 over DEFLATE (adapted from Steps' VQ), 189 files in `content/allam/`; `validate` checks their shape, and opens them when `BATNA_ALLAM_KEY` is set.

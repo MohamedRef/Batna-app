@@ -423,8 +423,8 @@ image-only pages. Content scripts take the folder from `BATNA_SOURCES`
 
 **Dr. Mahmoud Allam's revision course** (24 days, 101 YouTube videos, Egyptian
 Arabic; Mohamed's transcripts, 2026-11-21) is the one source kept **inside**
-Batna-app, sealed: `content/allam/` holds the 86 lessons, the 101 subtitle files
-and the index, encrypted with Mohamed's key, as Steps keeps its VQ bank.
+Batna-app, sealed: `content/allam/` holds the 86 lessons, the 101 subtitle files,
+the index and the per-lesson notes on where he differs from the book, encrypted with Mohamed's key, as Steps keeps its VQ bank.
 `batna-tools allam open DIR` with `BATNA_ALLAM_KEY` opens them outside the repo
 ([docs/ALLAM.md](ALLAM.md)). Lessons link to the second where he explains them and
 quote none of his words.
@@ -946,6 +946,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: the 86 per-lesson notes on Dr. Allam's course (where he differs from the book, with pages; his parts outside the syllabus) sealed with the transcripts in `content/allam/notes/` (275 sealed files now).
 - 2026-11-21: Dr. Allam's course, the rest: geriatrics (58 lecturer notes from his cardiology, chest and neurology lessons; 84 proposed: 40 kept, 18 edited, 26 dropped), round 2 for the other seven courses (62 notes from his later lessons, checked against the book and the round-1 notes), every video link refreshed (771 on 432 lessons; the 6 kept by hand where more fit), and lecturer notes under a reveal or a hidden table now wait like the book quote. Glossary: HOCM, aVF, aVL; HDH plain.
 - 2026-11-21: Dr. Allam's explanation in rheumatology: 43 lecturer notes on 31 lessons (his lessons RHEUM-L01 to L06, HEME-L08, GIT-L02, CVS-L04 and others), each checked by a separate agent against the book (49 proposed: 25 kept, 18 edited, 6 dropped), and the links from his lessons mapped since #1419; "HeberDen" (his letter trick) is a plain word.
 - 2026-11-21: Dr. Allam's explanation in diabetes and metabolism: 20 lecturer notes on 17 lessons (his lessons ENDO-L03, L06 and L07, CVS-L01 and others), each checked by a separate agent against the book (21 proposed: 3 kept, 17 edited, 1 dropped), and the links from his lessons mapped since #1419.

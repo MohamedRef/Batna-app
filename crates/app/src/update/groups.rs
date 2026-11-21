@@ -156,6 +156,11 @@ fn follow(t: &Target) {
             false
         }
         Target::Screen(s) => {
+            if mode == SheetMode::Updated
+                && let Some(u) = super::get()
+            {
+                u.close_whats_new();
+            }
             let mut ui = ui;
             match s {
                 Screen::Settings => {
@@ -199,6 +204,10 @@ pub(super) fn use_return(mut mode: Signal<Option<SheetMode>>) {
                 s.show(Some(crate::settings::Section::Updates));
             }
             mode.set(Some(p.mode));
+        } else if p.mode == SheetMode::Updated
+            && let Some(u) = super::get()
+        {
+            u.close_whats_new();
         }
     });
 }

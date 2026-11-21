@@ -373,11 +373,15 @@ impl Status {
                 .filter(|b| b.content_only == content)
                 .collect()
         };
-        let mut all = part(self.prefs.whats_new_from.as_ref(), self.build, false);
-        all.extend(part(self.prefs.content_from.as_ref(), self.content_build, true));
+        let mut all: Vec<BuildChanges> = part(self.prefs.whats_new_from.as_ref(), self.build, false)
+            .into_iter()
+            .chain(part(self.prefs.content_from.as_ref(), self.content_build, true))
+            .cloned()
+            .collect();
         all.sort_by_key(|b| std::cmp::Reverse(changelog::order(&b.version, b.build)));
         all.dedup_by_key(|b| b.key());
-        all.into_iter().cloned().collect()
+        changelog::dedup_older(&mut all);
+        all
     }
 
     /// Whether "What's new" has anything waiting to be seen.

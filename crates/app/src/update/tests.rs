@@ -1281,3 +1281,43 @@ fn a_missing_signature_is_a_feed_mid_upload_not_an_empty_channel() {
     u.check(false);
     assert_eq!(u.status().phase, Phase::Failed { offer: None, why: Failure::Network });
 }
+
+#[test]
+fn a_failed_check_keeps_a_verified_ready_download_without_refetching() {
+    let feed = fixture_feed();
+    let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
+    let (u, _data) = updater(&url, build("0.1.0", 41, true));
+    u.check(true);
+    let Phase::Ready(ready) = u.status().phase else { panic!("{:?}", u.status().phase) };
+    let fetched_before = seen.lock().unwrap().iter().filter(|(p, _)| p.ends_with(".apk")).count();
+    assert_eq!(fetched_before, 1);
+
+    // The feed temporarily breaks (missing signature) during a later check:
+    // the verified download stays Ready instead of disappearing.
+    fs::remove_file(feed.path().join(SIGNATURE_FILE)).unwrap();
+    u.check(false);
+    assert_eq!(u.status().phase, Phase::Ready(ready.clone()));
+
+    // Even if phase dropped to Available, download_locked reuses the verified file.
+    u.set_phase(Phase::Available(ready.clone()));
+    u.download();
+    assert_eq!(u.status().phase, Phase::Ready(ready));
+    let fetched_after = seen.lock().unwrap().iter().filter(|(p, _)| p.ends_with(".apk")).count();
+    assert_eq!(fetched_after, 1, "the verified APK on disk was reused");
+}
+
+#[test]
+fn unseen_whats_new_baseline_survives_back_to_back_updates_and_hundreds_agree() {
+    use crate::i18n::{changelog as ch, update as tx};
+    let feed = fixture_feed();
+    let url = serve(feed.path().to_path_buf());
+    let data = tempfile::tempdir().unwrap();
+    let _ = updater_in(data.path(), &url, build("0.1.0", 39, true));
+    let _ = updater_in(data.path(), &url, build("0.1.0", 41, true));
+    let u = updater_in(data.path(), &url, build("0.1.0", 42, true));
+    assert_eq!(u.status().prefs.whats_new_from.as_deref(), Some("0.1.0+39"));
+
+    assert_eq!(tx::builds_count(103), "103 نسخ جديدة");
+    assert_eq!(tx::content_updates_count(105), "105 تحديثات محتوى");
+    assert_eq!(ch::found(104, 103), "104 تغييرات في 103 نسخ");
+}

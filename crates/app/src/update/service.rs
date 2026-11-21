@@ -11,6 +11,49 @@ pub(super) fn built_in(builtin: Option<&str>, pack_in_use: bool, sha: &str) -> b
     !pack_in_use && builtin.is_some_and(|b| b.trim().eq_ignore_ascii_case(sha))
 }
 
+fn try_lock_unpoisoned(mutex: &Mutex<()>) -> Option<std::sync::MutexGuard<'_, ()>> {
+    match mutex.try_lock() {
+        Ok(guard) => Some(guard),
+        Err(std::sync::TryLockError::Poisoned(e)) => Some(e.into_inner()),
+        Err(std::sync::TryLockError::WouldBlock) => None,
+    }
+}
+
+#[derive(Clone)]
+enum Kept {
+    Ready(Offer),
+    Installing(Offer),
+    NeedsPermission(Offer),
+    Installed(Offer),
+}
+
+impl Kept {
+    fn from_phase(phase: &Phase) -> Option<Self> {
+        match phase {
+            Phase::Ready(o) => Some(Self::Ready(o.clone())),
+            Phase::Installing(o) => Some(Self::Installing(o.clone())),
+            Phase::NeedsPermission(o) => Some(Self::NeedsPermission(o.clone())),
+            Phase::Installed(o) => Some(Self::Installed(o.clone())),
+            _ => None,
+        }
+    }
+
+    fn offer(&self) -> &Offer {
+        match self {
+            Self::Ready(o) | Self::Installing(o) | Self::NeedsPermission(o) | Self::Installed(o) => o,
+        }
+    }
+
+    fn into_phase(self, fresh: Option<&Offer>) -> Phase {
+        match self {
+            Self::Ready(o) => Phase::Ready(fresh.cloned().unwrap_or(o)),
+            Self::Installing(o) => Phase::Installing(fresh.cloned().unwrap_or(o)),
+            Self::NeedsPermission(o) => Phase::NeedsPermission(fresh.cloned().unwrap_or(o)),
+            Self::Installed(o) => Phase::Installed(fresh.cloned().unwrap_or(o)),
+        }
+    }
+}
+
 impl Updater {
     pub(super) fn new(
         dir: PathBuf,
@@ -35,16 +78,18 @@ impl Updater {
         if off.is_none()
             && (prefs.last_run.as_deref() != Some(this.as_str()) || prefs.last_content != content)
         {
-            // Updated (not a first install): say what's new once.
+            // Updated (not a first install): say what's new once. Keep an
+            // earlier unseen baseline across back-to-back updates.
             if prefs.last_run.as_deref() != Some(this.as_str())
                 && let Some(prev) = prefs.last_run.replace(this.clone())
+                && prefs.whats_new_from.is_none()
             {
                 prefs.whats_new_from = Some(prev);
             }
             // A content-only update taken while Batna was closed: its notes
             // count from the content seen before, else from the app build.
             if prefs.last_content != content {
-                if content.is_some() {
+                if content.is_some() && prefs.content_from.is_none() {
                     prefs.content_from = prefs.last_content.clone().or(Some(this.clone()));
                 }
                 prefs.last_content = content;
@@ -170,7 +215,7 @@ impl Updater {
             self.check_with(auto, wifi);
         } else if auto && let Phase::Available(_) = s.phase {
             // Not behind a job already running: the next step comes soon.
-            if let Ok(_job) = self.job.try_lock() {
+            if let Some(_job) = try_lock_unpoisoned(&self.job) {
                 self.download_now();
             }
         }
@@ -227,16 +272,18 @@ impl Updater {
     }
 
     pub(super) fn check_with(&self, download: bool, content: bool) {
-        let Ok(job) = self.job.try_lock() else { return };
+        let Some(job) = try_lock_unpoisoned(&self.job) else { return };
+        self.check_locked(job, download, content);
+    }
+
+    fn check_locked<'a>(&'a self, job: std::sync::MutexGuard<'a, ()>, download: bool, content: bool) {
         if self.status().off.is_some() {
             return;
         }
-        let keep = match self.status().phase {
-            // A finished download for the same offer stays; it's re-checked anyway.
-            Phase::Ready(o) | Phase::Installed(o) | Phase::NeedsPermission(o) => Some(o),
-            _ => None,
-        };
-        self.set_phase(Phase::Checking);
+        let keep = Kept::from_phase(&self.status().phase);
+        if !matches!(keep, Some(Kept::Installing(_))) {
+            self.set_phase(Phase::Checking);
+        }
         let manifest = self.fetch_manifest();
         self.update_prefs(|p| p.last_check_ms = Some(now_ms()));
         let m = match manifest {
@@ -245,18 +292,33 @@ impl Updater {
                 if content {
                     self.tx.send_modify(|s| s.content_check = Some(ContentCheck::Failed));
                 }
-                return self.set_phase(Phase::Failed { offer: None, why });
+                if let Some(k) = keep {
+                    self.tx.send_modify(|s| {
+                        if matches!(s.phase, Phase::Checking) {
+                            s.phase = k.into_phase(None);
+                        }
+                    });
+                } else {
+                    self.set_phase(Phase::Failed { offer: None, why });
+                }
+                return;
             }
         };
         self.remember_history(&m.history);
         // The app's answer shows as soon as the feed is read; the content
         // pack (megabytes) and the build download come after it.
         let to_download = match self.offer(&m) {
-            Ok(Some(offer)) => match keep.filter(|k| k.asset == offer.asset) {
+            Ok(Some(offer)) => match keep.filter(|k| k.offer().asset == offer.asset) {
                 Some(k) => {
-                    self.set_phase(match self.status().phase {
-                        Phase::Checking => Phase::Ready(k),
-                        other => other,
+                    if matches!(k, Kept::Ready(_))
+                        && let Err(e) = save_staged(&self.dir, &offer)
+                    {
+                        report!("update staged.json: {e}");
+                    }
+                    self.tx.send_modify(|s| {
+                        if matches!(s.phase, Phase::Checking | Phase::Installing(_)) {
+                            s.phase = k.into_phase(Some(&offer));
+                        }
                     });
                     None
                 }
@@ -267,14 +329,22 @@ impl Updater {
             },
             Ok(None) => None,
             Err(why) => {
-                self.set_phase(Phase::Failed { offer: None, why });
+                if let Some(k) = keep {
+                    self.tx.send_modify(|s| {
+                        if matches!(s.phase, Phase::Checking) {
+                            s.phase = k.into_phase(None);
+                        }
+                    });
+                } else {
+                    self.set_phase(Phase::Failed { offer: None, why });
+                }
                 None
             }
         };
         // The feed is read: the app's answer stands, and a tap on "download"
         // may start now instead of waiting for the content pack below.
         drop(job);
-        if content && let Ok(_content) = self.content_job.try_lock() {
+        if content && let Some(_content) = try_lock_unpoisoned(&self.content_job) {
             let found = self.refresh_content(&m);
             self.tx.send_modify(|s| s.content_check = Some(found));
         }
@@ -564,6 +634,16 @@ impl Updater {
         let base = self.feed_url();
         let _ = fs::create_dir_all(&self.dir);
         self.clear_downloads(Some(&offer.asset.file));
+        if self.verified_staged(&offer).is_ok() {
+            if let Err(e) = save_staged(&self.dir, &offer) {
+                report!("update staged.json: {e}");
+            }
+            if self.status().prefs.wifi_download.is_some() {
+                self.update_prefs(|p| p.wifi_download = None);
+            }
+            self.set_phase(Phase::Ready(offer));
+            return;
+        }
         let path = self.dir.join(&offer.asset.file);
         self.set_phase(Phase::Downloading { offer: offer.clone(), done: 0 });
         match self.fetch_build(&format!("{base}/{}", offer.asset.file), &offer, &path) {
@@ -759,12 +839,26 @@ impl Updater {
             self.tx.send_modify(|s| s.unpublished = Some(channel));
             return;
         }
-        self.tx.send_modify(|s| s.unpublished = None);
-        self.update_prefs(|p| p.channel = Some(channel));
+        let job = self.job.lock().unwrap_or_else(PoisonError::into_inner);
+        let content_job = self.content_job.lock().unwrap_or_else(PoisonError::into_inner);
+        if self.status().channel == channel {
+            self.tx.send_if_modified(|s| s.unpublished.take().is_some());
+            return;
+        }
+        self.tx.send_modify(|s| {
+            s.unpublished = None;
+            s.content_waiting = false;
+            s.content_check = None;
+        });
+        self.update_prefs(|p| {
+            p.channel = Some(channel);
+            p.wifi_download = None;
+        });
         self.clear_downloads(None);
         self.set_phase(Phase::Idle);
+        drop(content_job);
         let auto = self.status().prefs.mode == Mode::Auto;
-        std::thread::spawn(move || self.check(auto));
+        self.check_locked(job, auto, true);
     }
 
     pub fn dismiss(&self) {

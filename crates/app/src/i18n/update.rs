@@ -183,7 +183,7 @@ pub fn builds_count(n: usize) -> String {
     match n {
         1 => "نسخة جديدة".to_owned(),
         2 => "نسختين جداد".to_owned(),
-        3..=10 => format!("{n} نسخ جديدة"),
+        _ if (3..=10).contains(&(n % 100)) => format!("{n} نسخ جديدة"),
         _ => format!("{n} نسخة جديدة"),
     }
 }
@@ -193,7 +193,7 @@ pub fn content_updates_count(n: usize) -> String {
     match n {
         1 => "تحديث محتوى".to_owned(),
         2 => "تحديثين محتوى".to_owned(),
-        3..=10 => format!("{n} تحديثات محتوى"),
+        _ if (3..=10).contains(&(n % 100)) => format!("{n} تحديثات محتوى"),
         _ => format!("{n} تحديث محتوى"),
     }
 }

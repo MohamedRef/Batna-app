@@ -472,7 +472,8 @@ Add a bullet here when a PR adds something a later agent must know.
   [LESSONS.md](LESSONS.md) § Videos.
 - **Lecturer notes** (2026-11-21): a step's optional `lecturer:` list
   (`LecturerNote`: tone + text) shows under the step as asides
-  (`.ls-lecturer`), under a question only once it is answered
+  (`.ls-lecturer`), held like the book quote: under a question, a reveal or
+  a table with hidden cells only once answered or opened
   (`player::lecturer_shown`). Dr. Allam's explanation goes in this way, not as
   new steps, because his notes and weak-fact marks (`<lesson>#<k>`) and the
   book-ref locks (`<lesson>#N`) are keyed by step position. Pack schema 6
@@ -897,7 +898,7 @@ further; don't change FSRS or Undo speculatively.
   `apt-mirrors.txt`) to the chosen mirror and time-boxes each try (on
   2026-11-11 both ubuntu.com names failed DNS and jobs hung for an hour).
 
-## 11. Current state (2026-11-19)
+## 11. Current state (2026-11-21)
 
 Refresh this table (and its date) in any PR that changes one of its rows.
 Releases are not in git: `gh release list -R MohamedRef/Batna-app` (or the
@@ -908,7 +909,7 @@ come from `batna-tools packs build --check` (its last line).
 |---|---|
 | App | Feature-complete for alpha: Today (with a catch-up plan), study (confidence and miss reasons), bank, cases, oral, lessons (with «Aa» reading settings and book figures), 102 calculators, stats/planner, own cards + Share, own lesson highlights, own notes, weak-fact marks, go to page, full-text search, start over per course, Anki export, abbreviations, lab chips, themes (Paper, Night, Night shift, true black, Study, Study dim, three System themes), sync (with «زامن دلوقتي»), password login, OTA app + content updates (what's new by course), web |
 | Releases | `v2026.11.13` (2026-11-16, alpha, = main `ba56f9d`); `v2026.11.12` (2026-11-15, `5b4d024`). Alpha only when Mohamed says so; previews every 4 h. Beta and stable feeds are not published (the app reads their 404 as "nothing here yet") |
-| Content | 9 courses, 141 lectures, 1,059 lessons in 141 lesson files, 15,557 items, 936 lesson pictures (18 MB, book figures and open-licence images; 2026-11-16). 2026-11-13 to 11-15: lesson depth passes, book figures placed in lessons at their pages (#983) and on cards/MCQs/cases (#1154). `res` L01–L20 written and checked against the enriched lecture copies. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) 2026-11-19 review round (#1385): first-mention spell-outs fixed in every course (#1383), every question the 11-16 option rewrite changed read against its page (no key turned wrong), and the lesson text of hb, hem and res checked against the book; printed lesson copies keep the printed options (#1402) |
+| Content | 9 courses, 141 lectures, 1,059 lessons in 141 lesson files, 15,557 items, 936 lesson pictures (18 MB, book figures and open-licence images; 2026-11-16). 2026-11-13 to 11-15: lesson depth passes, book figures placed in lessons at their pages (#983) and on cards/MCQs/cases (#1154). `res` L01–L20 written and checked against the enriched lecture copies. Approved by Mohamed: none yet (`content/approved.txt` holds no ids) 2026-11-19 review round (#1385): first-mention spell-outs fixed in every course (#1383), every question the 11-16 option rewrite changed read against its page (no key turned wrong), and the lesson text of hb, hem and res checked against the book; printed lesson copies keep the printed options (#1402). 2026-11-21: Dr. Allam's revision course (docs/ALLAM.md) gives 771 video links on 432 lessons and 412 lecturer notes on 263 lessons in eight courses (all but res), every note checked against the book by a separate agent |
 | Desktop / phone UX | Mac batch #739–#745 and phone batch #746–#751, #758 merged (§ 10); native Mac and S24 Ultra QA is with Mohamed |
 | Study resume | Same-process resume, Today Continue and durable checkpoint merged (§ 10); process death not yet tested on a device |
 | Info sheet | Bottom sheet on phones; on tablet and Mac a floating card by the tapped chip, movable and resizable (§ 10 Info sheet) |
@@ -945,6 +946,7 @@ Mohamed can paste this into any new chat or account to continue:
 Newest first. One line per PR (or batch) that changes behaviour, process or
 state; details live in the PR and in § 10.
 
+- 2026-11-21: Dr. Allam's course, the rest: geriatrics (58 lecturer notes from his cardiology, chest and neurology lessons; 84 proposed: 40 kept, 18 edited, 26 dropped), round 2 for the other seven courses (62 notes from his later lessons, checked against the book and the round-1 notes), every video link refreshed (771 on 432 lessons; the 6 kept by hand where more fit), and lecturer notes under a reveal or a hidden table now wait like the book quote. Glossary: HOCM, aVF, aVL; HDH plain.
 - 2026-11-21: Dr. Allam's explanation in rheumatology: 43 lecturer notes on 31 lessons (his lessons RHEUM-L01 to L06, HEME-L08, GIT-L02, CVS-L04 and others), each checked by a separate agent against the book (49 proposed: 25 kept, 18 edited, 6 dropped), and the links from his lessons mapped since #1419; "HeberDen" (his letter trick) is a plain word.
 - 2026-11-21: Dr. Allam's explanation in diabetes and metabolism: 20 lecturer notes on 17 lessons (his lessons ENDO-L03, L06 and L07, CVS-L01 and others), each checked by a separate agent against the book (21 proposed: 3 kept, 17 edited, 1 dropped), and the links from his lessons mapped since #1419.
 - 2026-11-21: Dr. Allam's explanation in nephrology: 43 lecturer notes on 30 lessons (his lessons NEPHRO-L01 to L06, ENDO-L04 and L05 and others), each checked by a separate agent against the book (44 proposed: 24 kept, 19 edited, 1 dropped), and the links from his lessons mapped since #1419.

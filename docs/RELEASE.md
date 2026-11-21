@@ -140,7 +140,8 @@ public release needs no token and costs nothing.
 |---|---|---|
 | Preview | `batna-preview` | `main`, every 4 hours when it changed, or by hand. Signed with the release keys since 2026-11-02, so any build can pick it in Settings › Updates and go back to alpha later. |
 | Alpha | `batna-alpha` | Release builds, from the first alpha on. |
-| Beta / Stable | `batna-beta`, `batna-stable` | Later. A beta also reaches alpha followers; a release reaches everyone. |
+| Beta | `batna-beta` | Since 2026-11-21 (`v2026.11.19`). A beta also reaches alpha followers. |
+| Stable | `batna-stable` | Later. A stable release reaches everyone. |
 
 A feed holds `update.json`, `update.json.sig` (Ed25519 over the exact bytes),
 and the files the manifest names: the APK, the zipped Batna.app, and
